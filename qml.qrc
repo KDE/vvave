@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>view_models/BabeAlbum.qml</file>
+        <file>view_models/BabeGrid.qml</file>
+        <file>view_models/BabeTable.qml</file>
+        <file>utils/Icon.qml</file>
+        <file>widgets/BabeBar.qml</file>
+        <file>utils/Icons.js</file>
+        <file>utils/materialdesignicons-webfont.ttf</file>
+        <file>widgets/TracksView.qml</file>
+        <file>widgets/PlaylistsView.qml</file>
+        <file>widgets/InfoView.qml</file>
+        <file>widgets/ArtistsView.qml</file>
+        <file>widgets/AlbumsView.qml</file>
+        <file>view_models/TableDelegate.qml</file>
+        <file>assets/cover.png</file>
+        <file>data_models/db_model.qml</file>
+    </qresource>
+</RCC>
