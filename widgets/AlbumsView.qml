@@ -21,57 +21,63 @@ BabeGrid
         edge: Qt.BottomEdge
         interactive: false
 
-        ColumnLayout
+        Column
         {
-            width: parent.width
-            height: parent.height
-            Row
+            anchors.fill: parent
+
+            Rectangle
             {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.margins: 20
+                id: titleBar
+                width: parent.width
+                height: 48
+                z: 1
 
-                Label
+                Row
                 {
-                    id: albumTitle
-                    width: parent.width - closeBtn
-                    text: ""
-                    elide: Text.ElideRight
-                    font.pointSize: 12
-                    font.bold: true
-                    lineHeight: 0.7
-                }
+                    anchors.fill: parent
 
-
-                ToolButton
-                {
-                    id: closeBtn
-                    width: 64
-                    height: 16
-                    Icon
+                    Label
                     {
-                        text: MdiFont.Icon.close
+                        id: albumTitle
+                        width: parent.width - closeBtn.width
+                        height: parent.height
+                        elide: Text.ElideRight
+                        font.pointSize: 12
+                        font.bold: true
+                        lineHeight: 0.7
+
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment:  Text.AlignVCenter
                     }
 
-                    onClicked:
+
+                    ToolButton
                     {
-                        drawer.close()
-                        console.log("close drawer")
+                        id: closeBtn
+                        width: parent.height
+                        height: parent.height
+
+                        Icon
+                        {
+                            text: MdiFont.Icon.close
+                        }
+
+                        onClicked:
+                        {
+                            drawer.close()
+                            console.log("close drawer")
+                        }
                     }
-
                 }
-
             }
-            Row
+
+            BabeTable
             {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                BabeTable
-                {
-                    id: drawerList
-                    width: parent.width
-                }
+                id: drawerList
+                width: parent.width
+                height: parent.height - titleBar.height
             }
+
         }
 
     }

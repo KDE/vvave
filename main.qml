@@ -26,45 +26,89 @@ ApplicationWindow
         onInfoViewClicked: swipeView.currentIndex = 0
     }
 
-    SwipeView
+    Column
     {
-        id: swipeView
+        id: mainView
         anchors.fill: parent
-        currentIndex: 1
 
-        Pane
+        SwipeView
         {
-            width: swipeView.width
-            height: swipeView.height
+            id: swipeView
+            width:parent.width
+            height: parent.height - searchInput.height
 
-            Column
+            currentIndex: 1
+
+            Pane
             {
-                spacing: 40
-                width: parent.width
+                width: swipeView.width
+                height: swipeView.height
 
-                Label
+                Column
                 {
+                    spacing: 40
                     width: parent.width
-                    wrapMode: Label.Wrap
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: "info view"
+
+                    Label
+                    {
+                        width: parent.width
+                        wrapMode: Label.Wrap
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: "info view"
+                    }
                 }
+            }
+
+            TracksView
+            {
+
+            }
+
+            AlbumsView
+            {
+
+            }
+
+            ArtistsView
+            {
+
             }
         }
 
-        TracksView
+        Rectangle
         {
+            width: parent.width
+            height: 32
+            color: "white"
 
+            TextInput
+            {
+                id: searchInput
+                anchors.fill: parent
+                anchors.centerIn: parent
+
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment:  Text.AlignVCenter
+
+                property string placeholderText: "Search..."
+
+                Label
+                {
+                    anchors.fill: parent
+                    text: searchInput.placeholderText
+                    visible: !searchInput.focus || !searchInput.text
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment:  Text.AlignVCenter
+                    font.bold: true
+
+
+                }
+
+            }
         }
 
-        AlbumsView
-        {
 
-        }
-
-        ArtistsView
-        {
-
-        }
     }
+
+
 }

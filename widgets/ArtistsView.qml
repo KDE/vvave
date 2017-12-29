@@ -1,7 +1,10 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+
 import "../view_models"
+import "../utils/Icons.js" as MdiFont
+import "../utils"
 
 BabeGrid
 {
@@ -19,40 +22,65 @@ BabeGrid
         edge: Qt.BottomEdge
         interactive: false
 
-        ColumnLayout
+        Column
         {
-            width: parent.width
-            height: parent.height
-            Row
+            anchors.fill: parent
+
+            Rectangle
             {
+                id: titleBar
+                width: parent.width
+                height: 48
+                z: 1
 
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.margins: 20
-
-                Label
+                Row
                 {
-                    id: artistTitle
-                    width: parent.width
-                    text: ""
-                    elide: Text.ElideRight
-                    font.pointSize: 12
-                    font.bold: true
-                    lineHeight: 0.7
-                }
+                    anchors.fill: parent
 
+                    Label
+                    {
+                        id: artistTitle
+                        width: parent.width - closeBtn.width
+                        height: parent.height
+                        elide: Text.ElideRight
+                        font.pointSize: 12
+                        font.bold: true
+                        lineHeight: 0.7
+
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment:  Text.AlignVCenter
+                    }
+
+
+                    ToolButton
+                    {
+                        id: closeBtn
+                        width: parent.height
+                        height: parent.height
+
+                        Icon
+                        {
+                            text: MdiFont.Icon.close
+                        }
+
+                        onClicked:
+                        {
+                            drawer.close()
+                            console.log("close drawer")
+                        }
+                    }
+                }
             }
-            Row
+
+            BabeTable
             {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                BabeTable
-                {
-                    id: drawerList
-                    width: parent.width
-                }
+                id: drawerList
+                width: parent.width
+                height: parent.height - titleBar.height
             }
+
         }
+
     }
 
     onAlbumCoverClicked:
