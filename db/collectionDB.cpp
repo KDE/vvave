@@ -39,6 +39,12 @@ CollectionDB::~CollectionDB()
     this->m_db.close();
 }
 
+void CollectionDB::test()
+{
+    qDebug()<<"call form qml";
+    emit qmlSignal("lalala");
+}
+
 void CollectionDB::closeConnection()
 {
     qDebug()<<"CLOSING COLLECTIONDB";
@@ -48,7 +54,7 @@ void CollectionDB::prepareCollectionDB() const
 {
     QSqlQuery query(this->m_db);
 
-    QFile file(":/Data/src/db/script.sql");
+    QFile file(":/db/script.sql");
 
     if (!file.exists())
     {

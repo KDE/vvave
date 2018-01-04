@@ -24,6 +24,12 @@ Kirigami.ApplicationWindow
     pageStack.defaultColumnWidth: columnWidth
     pageStack.initialPage: [playlist, views]
 
+    Connections
+    {
+        target: con
+        onQmlSignal: console.log("lalaland")
+    }
+
     header: BabeBar
     {
         id: mainToolbar
@@ -36,7 +42,10 @@ Kirigami.ApplicationWindow
         onArtistsViewClicked: currentView = 2
         onPlaylistsViewClicked: currentView = 3
         onInfoViewClicked: currentView = 4
-        onPlaylistClicked: currentIndex = -1
+        onPlaylistClicked: {
+            con.test()
+            console.log(BAE.SettingPath)
+        }
     }
 
 
@@ -108,7 +117,7 @@ Kirigami.ApplicationWindow
                             ToolButton
                             {
                                 id: previousBtn
-                                Icon{text: MdiFont.Icon.skipPrevious}
+                                Icon {text: MdiFont.Icon.skipPrevious}
                             }
 
                             ToolButton
@@ -156,7 +165,6 @@ Kirigami.ApplicationWindow
 
         Page
         {
-
             width: parent.width /2
             height: parent.height
             clip: true
@@ -183,6 +191,10 @@ Kirigami.ApplicationWindow
                     }
 
                     ArtistsView
+                    {
+                    }
+
+                    SettingsView
                     {
                     }
 

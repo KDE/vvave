@@ -28,6 +28,7 @@ public:
     explicit CollectionDB(QObject *parent = nullptr);
     ~CollectionDB() override;
 
+
     bool execQuery(QSqlQuery &query) const;
     bool execQuery(const QString &queryTxt);
 
@@ -115,7 +116,7 @@ private:
 
 public slots:
     void closeConnection();
-    /*useful*/
+    void test();
 
 signals:
     void trackInserted();
@@ -123,6 +124,8 @@ signals:
     void DBactionFinished();
     void albumsCleaned(const int &amount);
     void artistsCleaned(const int &amount);
+
+    void qmlSignal(QString str);
 };
 
 #endif // COLLECTION_H

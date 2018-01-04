@@ -16,6 +16,8 @@ using namespace std;
 
 namespace BAE
 {
+    Q_NAMESPACE
+
     enum SearchT
     {
         LIKE,

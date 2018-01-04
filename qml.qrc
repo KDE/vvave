@@ -19,5 +19,7 @@
         <file>data_models/db_model.qml</file>
         <file>widgets/MainPlaylist.qml</file>
         <file>assets/test.jpg</file>
+        <file>db/script.sql</file>
+        <file>widgets/SettingsView.qml</file>
     </qresource>
 </RCC>

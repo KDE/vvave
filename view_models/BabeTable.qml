@@ -17,6 +17,7 @@ ListView
     flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem
+
     Menu
     {
         id: contextMenu
