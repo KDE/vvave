@@ -1,11 +1,10 @@
 import QtQuick.Controls 2.2
 import QtQuick 2.9
 
-Rectangle
+Pane
 {
-    property int albumSize : 120
+    property int albumSize : 150
     property int albumSpacing: 20
-    property int gridMargin: 50
     property int borderRadius : 4
 
     signal albumCoverClicked(string album, string artist)
@@ -20,7 +19,7 @@ Rectangle
         ListElement { album: "Channel Orange"; artist: "Frank Ocean"; icon: "qrc:/assets/cover.png" }
         ListElement { album: "Coloring Book"; artist: "Chance the Rapper"; icon: "qrc:/assets/cover.png" }
         ListElement { album: "The Lonely Hour"; artist: "Sam Smith"; icon: "qrc:/assets/cover.png" }
-        ListElement { album: "Messaging"; artist: "Sam Smith"; icon: "qrc:/assets/cover.png" }
+        ListElement { artist: "Sam Smith"; icon: "qrc:/assets/cover.png" }
         ListElement { album: "Lil Empire"; artist: "Petite Meller"; icon: "qrc:/assets/cover.png" }
         ListElement { album: "Lost Generation"; artist: "Unkown";icon: "qrc:/assets/cover.png" }
     }
@@ -28,16 +27,18 @@ Rectangle
     GridView
     {
         id: grid
-        anchors.fill: parent
-        anchors.centerIn: parent
-        anchors.leftMargin: gridMargin
+
+        //        anchors.leftMargin: gridMargin
+        width: Math.min(model.count, Math.floor(parent.width/cellWidth))*cellWidth
+        height: parent.height
+
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 20
 
         cellWidth: albumSize+albumSpacing
         cellHeight:  parseInt(albumSize+(albumSize*0.6))
         focus: true
         model: appModel
-
         highlight: Rectangle
         {
             id: highlight
@@ -56,7 +57,7 @@ Rectangle
             size = size > albumSize+albumSpacing ? size : albumSize+albumSpacing
 
             grid.cellWidth = size
-//            grid.cellHeight = size
+            //            grid.cellHeight = size
 
             console.log(parseInt(size,10))
         }
@@ -66,6 +67,7 @@ Rectangle
             id: delegate
             albumSize: albumSize
             borderRadius: borderRadius
+
             Connections
             {
                 target: delegate

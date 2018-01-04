@@ -17,5 +17,7 @@
         <file>view_models/TableDelegate.qml</file>
         <file>assets/cover.png</file>
         <file>data_models/db_model.qml</file>
+        <file>widgets/MainPlaylist.qml</file>
+        <file>assets/test.jpg</file>
     </qresource>
 </RCC>

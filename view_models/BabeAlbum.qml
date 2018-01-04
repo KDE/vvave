@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.3
 Item
 {
     signal albumClicked(int index)
-    property int albumSize : 120
+    property int albumSize : 150
     property int borderRadius : 4
     property string fillColor: "#31363b"
 
@@ -23,7 +23,6 @@ Item
 
     ColumnLayout
     {
-
         Row
         {
             Layout.fillWidth: true
@@ -33,7 +32,6 @@ Item
                 id: img
                 width: albumSize
                 height: albumSize
-
 
                 fillMode: Image.PreserveAspectFit
 
@@ -50,6 +48,7 @@ Item
                             anchors.centerIn: parent
                             width: img.adapt ? img.width : Math.min(img.width, img.height)
                             height: img.adapt ? img.height : width
+                            radius: borderRadius
                             //                    radius: Math.min(width, height)
                         }
                     }
@@ -60,7 +59,6 @@ Item
 
         Row
         {
-
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.leftMargin: 5
@@ -68,7 +66,8 @@ Item
             Label
             {
                 width: parent.width
-                text: album
+                text: album || artist
+                visible: true
                 elide: Text.ElideRight
                 font.pointSize: 10
                 font.bold: true
@@ -90,12 +89,12 @@ Item
             {
                 width: parent.width
                 text: artist
+                visible: album && artist ? true : false
                 elide: Text.ElideRight
                 font.pointSize: 9
                 color: "white"
 
             }
-
         }
     }
 

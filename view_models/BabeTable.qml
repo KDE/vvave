@@ -141,6 +141,12 @@ ListView
             title: "Gravity"
             artist: "Jhon Mayer"
         }
+        ListElement
+        {
+            trackNumber: "4"
+            title: "America"
+            artist: "Petite Miller"
+        }
     }
 
     model: listModel

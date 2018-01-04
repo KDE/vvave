@@ -34,8 +34,6 @@ ItemDelegate
             font.pointSize: 9
 
         }
-
-
     }
 
 

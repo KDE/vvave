@@ -2,113 +2,227 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtLocation 5.9
 import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
+import org.kde.kirigami 2.0 as Kirigami
+
+import "utils/Icons.js" as MdiFont
+import "utils"
 import "view_models"
 import "widgets"
 
-ApplicationWindow
+Kirigami.ApplicationWindow
 {
+    id: root
     visible: true
     width: 400
     height: 500
     title: qsTr("Babe")
+
+    property int defaultColumnWidth: Kirigami.Units.gridUnit * 13
+    property int columnWidth: defaultColumnWidth
+    property int currentView : 0
+    pageStack.defaultColumnWidth: columnWidth
+    pageStack.initialPage: [playlist, views]
 
     header: BabeBar
     {
         id: mainToolbar
         visible: true
 
-        currentIndex: swipeView.currentIndex
+        currentIndex: currentView
 
-        onTracksViewClicked: swipeView.currentIndex = 1
-        onAlbumsViewClicked: swipeView.currentIndex = 2
-        onArtistsViewClicked: swipeView.currentIndex = 3
-        onPlaylistsViewClicked: swipeView.currentIndex = 4
-        onInfoViewClicked: swipeView.currentIndex = 0
+        onTracksViewClicked: currentView = 0
+        onAlbumsViewClicked: currentView = 1
+        onArtistsViewClicked: currentView = 2
+        onPlaylistsViewClicked: currentView = 3
+        onInfoViewClicked: currentView = 4
+        onPlaylistClicked: currentIndex = -1
     }
 
-    Column
+
+    Component
     {
-        id: mainView
-        anchors.fill: parent
+        id: playlist
 
-        SwipeView
+        Page
         {
-            id: swipeView
-            width:parent.width
-            height: parent.height - searchInput.height
+            id: playlistPage
+            width: parent.width
+            height: parent.height
 
-            currentIndex: 1
-
-            Pane
+            ColumnLayout
             {
-                width: swipeView.width
-                height: swipeView.height
+                width: parent.width
+                height: parent.height
 
-                Column
+                Rectangle
                 {
-                    spacing: 40
+                    id: coverPlay
                     width: parent.width
+                    height: parent.width < columnWidth ? parent.width : columnWidth
 
-                    Label
+                    FastBlur
+                    {
+                        anchors.fill: coverPlay
+                        source: artwork
+                        radius: 100
+                    }
+
+                    Image
+                    {
+                        id: artwork
+                        width: parent.width < columnWidth ? parent.width : columnWidth
+                        height:parent.height
+                        anchors.centerIn: parent
+                        source: "qrc:/assets/test.jpg"
+                    }
+                }
+
+                ProgressBar
+                {
+                    id: progressBar
+                    width: parent.width
+                    Layout.fillWidth: true
+                    anchors.top: coverPlay.bottom
+                    height: 16
+                    value: 0.5
+                }
+
+                Rectangle
+                {
+                    id: playbackControls
+                    anchors.top: progressBar.bottom
+                    Layout.fillWidth: true
+                    width: parent.width
+                    height: 48
+                    z: 1
+
+                    RowLayout
                     {
                         width: parent.width
-                        wrapMode: Label.Wrap
-                        horizontalAlignment: Qt.AlignHCenter
-                        text: "info view"
+                        height: parent.height
+                        anchors.fill: parent
+                        Row
+                        {
+                            anchors.centerIn: parent
+                            ToolButton
+                            {
+                                id: previousBtn
+                                Icon{text: MdiFont.Icon.skipPrevious}
+                            }
+
+                            ToolButton
+                            {
+                                id: playBtn
+                                Icon{text: MdiFont.Icon.play}
+                            }
+
+                            ToolButton
+                            {
+                                id: pauseBtn
+                                Icon{text: MdiFont.Icon.pause}
+                            }
+
+                            ToolButton
+                            {
+                                id: nextBtn
+                                Icon{text: MdiFont.Icon.skipNext}
+                            }
+                        }
+                    }
+                }
+
+
+                Rectangle
+                {
+                    width: parent.width
+                    height: parent.height-coverPlay.height - playbackControls.height
+                    anchors.top: playbackControls.bottom
+                    BabeTable
+                    {
+                        id: mainPlaylist
+                        width: parent.width
+                        height: parent.height
+
+                    }
+                }
+            }
+        }
+    }
+
+    Component
+    {
+        id: views
+
+        Page
+        {
+
+            width: parent.width /2
+            height: parent.height
+            clip: true
+
+            Column
+            {
+                width: parent.width
+                height: parent.height
+
+                SwipeView
+                {
+                    id: swipeView
+                    width: parent.width
+                    height: parent.height - searchBox.height
+
+                    currentIndex: currentView
+
+                    TracksView
+                    {
+                    }
+
+                    AlbumsView
+                    {
+                    }
+
+                    ArtistsView
+                    {
+                    }
+
+                    onCurrentIndexChanged:
+                    {
+                        currentView = currentIndex
+                    }
+                }
+
+                Rectangle
+                {
+                    id: searchBox
+                    width: parent.width
+                    height: 32
+                    color: "white"
+                    TextInput
+                    {
+                        id: searchInput
+                        anchors.fill: parent
+                        anchors.centerIn: parent
+
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment:  Text.AlignVCenter
+
+                        property string placeholderText: "Search..."
+
+                        Label
+                        {
+                            anchors.fill: parent
+                            text: searchInput.placeholderText
+                            visible: !(searchInput.focus || searchInput.text)
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment:  Text.AlignVCenter
+                            font.bold: true
+                        }
+
                     }
                 }
             }
 
-            TracksView
-            {
-
-            }
-
-            AlbumsView
-            {
-
-            }
-
-            ArtistsView
-            {
-
-            }
         }
-
-        Rectangle
-        {
-            width: parent.width
-            height: 32
-            color: "white"
-
-            TextInput
-            {
-                id: searchInput
-                anchors.fill: parent
-                anchors.centerIn: parent
-
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:  Text.AlignVCenter
-
-                property string placeholderText: "Search..."
-
-                Label
-                {
-                    anchors.fill: parent
-                    text: searchInput.placeholderText
-                    visible: !searchInput.focus || !searchInput.text
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment:  Text.AlignVCenter
-                    font.bold: true
-
-
-                }
-
-            }
-        }
-
-
     }
-
-
 }

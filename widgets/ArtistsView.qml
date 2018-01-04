@@ -10,9 +10,8 @@ BabeGrid
 {
     id:artistsView
     visible: true
-    albumSize: 120
+    albumSize: 150
     borderRadius: 20
-
 
     Drawer
     {

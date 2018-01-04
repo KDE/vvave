@@ -39,7 +39,7 @@ ToolBar
             Icon
             {
                 text: MdiFont.Icon.playCircle
-                color: currentIndex === 0? accentColor : textColor
+                color: currentIndex === -1? accentColor : textColor
             }
 
             ToolTip { text: "Playlist" }
@@ -58,7 +58,7 @@ ToolBar
                 {
                     id: tracksIcon
                     text: MdiFont.Icon.musicNote
-                    color: currentIndex === 1? accentColor : textColor
+                    color: currentIndex === 0? accentColor : textColor
                 }
 
                 onClicked: tracksViewClicked()
@@ -77,7 +77,7 @@ ToolBar
                 {
                     id: albumsIcon
                     text: MdiFont.Icon.album
-                    color: currentIndex === 2? accentColor : textColor
+                    color: currentIndex === 1? accentColor : textColor
                 }
 
                 onClicked: albumsViewClicked()
@@ -97,7 +97,7 @@ ToolBar
                 {
                     id: artistsIcon
                     text: MdiFont.Icon.face
-                    color: currentIndex === 3? accentColor : textColor
+                    color: currentIndex === 2? accentColor : textColor
                 }
 
                 onClicked: artistsViewClicked()
@@ -116,7 +116,7 @@ ToolBar
                 {
                     id: playlistsIcon
                     text: MdiFont.Icon.libraryMusic
-                    color: currentIndex === 4? accentColor : textColor
+                    color: currentIndex === 3? accentColor : textColor
                 }
 
                 onClicked: playlistsViewClicked()
