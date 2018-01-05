@@ -64,7 +64,8 @@ public:
     bool trackPlaylist(const QString &url, const QString &playlist);
 
     BAE::DB_LIST getDBData(const QStringList &urls);
-    BAE::DB_LIST getDBData(const QString &queryTxt);
+    Q_INVOKABLE QVariantList get(const QString &queryTxt);
+    Q_INVOKABLE BAE::DB_LIST getDBData(const QString &queryTxt);
 
     BAE::DB_LIST getAlbumTracks(const QString &album, const QString &artist, const BAE::KEY &orderBy = BAE::KEY::TRACK, const BAE::W &order = BAE::W::ASC);
     BAE::DB_LIST getArtistTracks(const QString &artist, const BAE::KEY &orderBy = BAE::KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
@@ -84,10 +85,10 @@ public:
     int getTrackBabe(const QString &path);
     QString getArtistArt(const QString &artist);
     QString getArtistWiki(const QString &artist);
-//    QStringList getArtistTags(const QString &artist);
+    //    QStringList getArtistTags(const QString &artist);
     QString getAlbumArt(const QString &album, const QString &artist);
     QString getAlbumWiki(const QString &album, const QString &artist);
-//    QStringList getAlbumTags(const QString &album, const QString &artist);
+    //    QStringList getAlbumTags(const QString &album, const QString &artist);
     QStringList getArtistAlbums(const QString &artist);
 
     QStringList getPlaylists();

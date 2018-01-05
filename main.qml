@@ -3,6 +3,8 @@ import QtQuick.Controls 2.2
 import QtLocation 5.9
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
+import QtMultimedia 5.8
+
 import org.kde.kirigami 2.0 as Kirigami
 
 import "utils/Icons.js" as MdiFont
@@ -18,18 +20,28 @@ Kirigami.ApplicationWindow
     height: 500
     title: qsTr("Babe")
 
+
     property int defaultColumnWidth: Kirigami.Units.gridUnit * 13
     property int columnWidth: defaultColumnWidth
     property int currentView : 0
     property int iconSize
 
+    signal appendTrack(var track)
+
     pageStack.defaultColumnWidth: columnWidth
-    pageStack.initialPage: [playlist, views]
+    pageStack.initialPage: [playlistPage, views]
 
     Connections
     {
         target: con
         onQmlSignal: console.log("lalaland")
+    }
+
+    MediaPlayer
+    {
+        id: player
+        volume: 1
+
     }
 
     header: BabeBar
@@ -48,199 +60,215 @@ Kirigami.ApplicationWindow
         onPlaylistClicked:
         {
             con.test()
-            console.log(BAE.SettingPath)
         }
     }
 
-
-    Component
+    onAppendTrack:
     {
-        id: playlist
+        mainPlaylistTable.model.append(track)
+    }
 
-        Page
+
+
+    Page
+    {
+        id: playlistPage
+        width: parent.width
+        height: parent.height
+
+
+        ColumnLayout
         {
-            id: playlistPage
+            id: playlistLayout
             width: parent.width
             height: parent.height
 
-            ColumnLayout
+
+            Rectangle
             {
+                id: coverPlay
                 width: parent.width
-                height: parent.height
+                height: parent.width < columnWidth ? parent.width : columnWidth
 
-                Rectangle
+                FastBlur
                 {
-                    id: coverPlay
+                    anchors.fill: coverPlay
+                    source: artwork
+                    radius: 100
+                }
+
+                Image
+                {
+                    id: artwork
+                    width: parent.width < columnWidth ? parent.width : columnWidth
+                    height:parent.height
+                    anchors.centerIn: parent
+                    source: "qrc:/assets/test.jpg"
+                }
+            }
+
+            ProgressBar
+            {
+                id: progressBar
+                width: parent.width
+                Layout.fillWidth: true
+                anchors.top: coverPlay.bottom
+                height: 16
+                value: 0.5
+            }
+
+            Rectangle
+            {
+                id: playbackControls
+                anchors.top: progressBar.bottom
+                Layout.fillWidth: true
+                width: parent.width
+                height: 48
+                z: 1
+
+                RowLayout
+                {
                     width: parent.width
-                    height: parent.width < columnWidth ? parent.width : columnWidth
-
-                    FastBlur
+                    height: parent.height
+                    anchors.fill: parent
+                    Row
                     {
-                        anchors.fill: coverPlay
-                        source: artwork
-                        radius: 100
-                    }
-
-                    Image
-                    {
-                        id: artwork
-                        width: parent.width < columnWidth ? parent.width : columnWidth
-                        height:parent.height
                         anchors.centerIn: parent
-                        source: "qrc:/assets/test.jpg"
-                    }
-                }
-
-                ProgressBar
-                {
-                    id: progressBar
-                    width: parent.width
-                    Layout.fillWidth: true
-                    anchors.top: coverPlay.bottom
-                    height: 16
-                    value: 0.5
-                }
-
-                Rectangle
-                {
-                    id: playbackControls
-                    anchors.top: progressBar.bottom
-                    Layout.fillWidth: true
-                    width: parent.width
-                    height: 48
-                    z: 1
-
-                    RowLayout
-                    {
-                        width: parent.width
-                        height: parent.height
-                        anchors.fill: parent
-                        Row
+                        ToolButton
                         {
-                            anchors.centerIn: parent
-                            ToolButton
-                            {
-                                id: previousBtn
-                                Icon {text: MdiFont.Icon.skipPrevious}
-                            }
+                            id: previousBtn
+                            Icon {text: MdiFont.Icon.skipPrevious}
+                        }
 
-                            ToolButton
-                            {
-                                id: playBtn
-                                Icon{text: MdiFont.Icon.play}
-                            }
+                        ToolButton
+                        {
+                            id: playBtn
+                            Icon{text: MdiFont.Icon.play}
+                        }
 
-                            ToolButton
-                            {
-                                id: pauseBtn
-                                Icon{text: MdiFont.Icon.pause}
-                            }
+                        ToolButton
+                        {
+                            id: pauseBtn
+                            Icon{text: MdiFont.Icon.pause}
+                        }
 
-                            ToolButton
-                            {
-                                id: nextBtn
-                                Icon{text: MdiFont.Icon.skipNext}
-                            }
+                        ToolButton
+                        {
+                            id: nextBtn
+                            Icon{text: MdiFont.Icon.skipNext}
                         }
                     }
                 }
+            }
 
+            Rectangle
+            {
+                id: mainPlaylist
+                width: parent.width
+                height: parent.height-coverPlay.height - playbackControls.height
+                anchors.top: playbackControls.bottom
 
-                Rectangle
+                BabeTable
                 {
+                    id: mainPlaylistTable
                     width: parent.width
-                    height: parent.height-coverPlay.height - playbackControls.height
-                    anchors.top: playbackControls.bottom
-                    BabeTable
-                    {
-                        id: mainPlaylist
-                        width: parent.width
-                        height: parent.height
+                    height: parent.height
 
+                    onRowClicked:
+                    {
+                        console.log(model.get(index).url)
+                        player.source = model.get(index).url;
+                        player.play();
+                        console.log(player.playbackState)
                     }
+
                 }
             }
         }
     }
 
-    Component
+
+    Page
     {
         id: views
+        width: parent.width /2
+        height: parent.height
+        clip: true
 
-        Page
+        Column
         {
-            width: parent.width /2
+            width: parent.width
             height: parent.height
-            clip: true
 
-            Column
+            SwipeView
             {
+                id: swipeView
                 width: parent.width
-                height: parent.height
+                height: parent.height - searchBox.height
 
-                SwipeView
+                currentIndex: currentView
+
+                TracksView
                 {
-                    id: swipeView
-                    width: parent.width
-                    height: parent.height - searchBox.height
-
-                    currentIndex: currentView
-
-                    TracksView {}
-
-                    AlbumsView {}
-
-                    ArtistsView {}
-
-                    PlaylistsView {}
-
-                    SettingsView
+                    onRowClicked:
                     {
-                        onIconSizeChanged:
-                        {
-
-                            iconSize = size
-                            console.log(size)
-                        }
-                    }
-
-                    onCurrentIndexChanged:
-                    {
-                        currentView = currentIndex
+                        appendTrack(model.get(index))
                     }
                 }
 
-                Rectangle
+                AlbumsView {}
+
+                ArtistsView {}
+
+                PlaylistsView {}
+
+                SettingsView
                 {
-                    id: searchBox
-                    width: parent.width
-                    height: 32
-                    color: "white"
-                    TextInput
+                    onIconSizeChanged:
                     {
-                        id: searchInput
-                        anchors.fill: parent
-                        anchors.centerIn: parent
 
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment:  Text.AlignVCenter
-
-                        property string placeholderText: "Search..."
-
-                        Label
-                        {
-                            anchors.fill: parent
-                            text: searchInput.placeholderText
-                            visible: !(searchInput.focus || searchInput.text)
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment:  Text.AlignVCenter
-                            font.bold: true
-                        }
-
+                        iconSize = size
+                        console.log(size)
                     }
+                }
+
+                onCurrentIndexChanged:
+                {
+                    currentView = currentIndex
                 }
             }
 
+            Rectangle
+            {
+                id: searchBox
+                width: parent.width
+                height: 32
+                color: "white"
+                TextInput
+                {
+                    id: searchInput
+                    anchors.fill: parent
+                    anchors.centerIn: parent
+
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment:  Text.AlignVCenter
+
+                    property string placeholderText: "Search..."
+
+                    Label
+                    {
+                        anchors.fill: parent
+                        text: searchInput.placeholderText
+                        visible: !(searchInput.focus || searchInput.text)
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment:  Text.AlignVCenter
+                        font.bold: true
+                    }
+
+                }
+            }
         }
+
+
     }
 }

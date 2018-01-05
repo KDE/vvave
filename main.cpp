@@ -22,10 +22,6 @@ int main(int argc, char *argv[])
     context->setContextProperty("con", &con);
     context->setContextProperty("set", &settings);
 
-    qmlRegisterUncreatableMetaObject(BAE::staticMetaObject,
-                                     "com.babe.bae", 1, 0, "BAE",
-                                     "Cannot create namespace WarningLevel in QML");
-
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

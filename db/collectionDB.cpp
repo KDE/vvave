@@ -537,6 +537,21 @@ DB_LIST CollectionDB::getDBData(const QStringList &urls)
     return mapList;
 }
 
+
+QVariantList CollectionDB::get(const QString &queryTxt)
+{
+    QVariantList res;
+    for(auto data : this->getDBData(queryTxt))
+    {
+        QVariantMap map;
+        for(auto key : data.keys())
+            map[BAE::KEYMAP[key]] = data[key];
+
+        res<<map;
+    }
+    return res;
+}
+
 DB_LIST CollectionDB::getDBData(const QString &queryTxt)
 {
     DB_LIST mapList;

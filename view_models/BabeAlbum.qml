@@ -35,7 +35,7 @@ Item
 
                 fillMode: Image.PreserveAspectFit
 
-                source: icon
+                source: artwork || "qrc:/assets/cover.png"
                 layer.enabled: true
                 layer.effect: OpacityMask
                 {

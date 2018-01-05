@@ -66,89 +66,7 @@ ListView
         }
     }
 
-    ListModel
-    {
-        id: listModel
-
-        ListElement
-        {
-            trackNumber: "2"
-            title: "Slow Dancing In A Burning Room"
-            artist: "Jhon Mayer"
-            album: "Continium"
-            date: "555 3264"
-            genre: "555 3264"
-            rate: "555 3264"
-            babe: "555 3264"
-        }
-
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"          
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "3"
-            title: "Gravity"
-            artist: "Jhon Mayer"
-        }
-        ListElement
-        {
-            trackNumber: "4"
-            title: "America"
-            artist: "Petite Miller"
-        }
-    }
+    ListModel { id: listModel }
 
     model: listModel
 
@@ -168,7 +86,6 @@ ListView
             }
             onClicked:
             {
-                console.log(list.model.get(index).title)
                 list.rowClicked(index)
             }
         }

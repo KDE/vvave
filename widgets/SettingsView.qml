@@ -21,7 +21,7 @@ Pane
         folder: StandardPaths.standardLocations(StandardPaths.MusicLocation)[0]
         onAccepted:
         {
-            listModel.append({source: folder.toString()})
+            listModel.append({url: folder.toString()})
             set.collectionPathChanged(folder.toString())
         }
     }
@@ -69,7 +69,7 @@ Pane
                     {
                         id: sourceUrl
                         width: parent.width
-                        text: source
+                        text: url
                         elide: Text.ElideRight
                         Layout.fillWidth: true
                         font.pointSize: 10
@@ -78,6 +78,14 @@ Pane
             }
 
 
+            Component.onCompleted:
+            {
+                var map = con.get("select url from sources")
+                for(var i in map)
+                {
+                    model.append(map[i])
+                }
+            }
         }
 
         Row
