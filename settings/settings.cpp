@@ -66,14 +66,14 @@ settings::settings(QObject *parent) : QObject(parent)
         }
     });
 
-//    connect(this->fileLoader, &FileLoader::trackReady, [this]()
-//    {
-//        this->ui->progressBar->setValue(this->ui->progressBar->value()+1);
-//    });
+    //    connect(this->fileLoader, &FileLoader::trackReady, [this]()
+    //    {
+    //        this->ui->progressBar->setValue(this->ui->progressBar->value()+1);
+    //    });
 
-    connect(this->fileLoader,&FileLoader::finished,[this]()
+    connect(this->fileLoader, &FileLoader::finished,[this]()
     {
-         this->collectionWatcher();
+        this->collectionWatcher();
         emit refreshTables({{TABLE::TRACKS, true},{TABLE::ALBUMS, false},{TABLE::ARTISTS, false},{TABLE::PLAYLISTS, true}});
     });
 
@@ -109,9 +109,9 @@ void settings::refreshCollectionPaths()
 {
     auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::SOURCES]);
 
-//    for (auto track : this->connection->getDBData(queryTxt))
-//    {
-//    }
+    //    for (auto track : this->connection->getDBData(queryTxt))
+    //    {
+    //    }
 }
 
 void settings::addToWatcher(QStringList paths)
@@ -172,12 +172,18 @@ void settings::checkCollection()
 {   
 
     this->refreshCollectionPaths();
-    this->collectionWatcher();   
+    this->collectionWatcher();
 }
 
 void settings::populateDB(const QString &path)
 {
     qDebug() << "Function Name: " << Q_FUNC_INFO
              << "new path for database action: " << path;
-    fileLoader->requestPath(path);
+    auto newPath = path;
+
+    if(path.startsWith("file://"))
+    {
+        newPath = newPath.replace("file://", "");
+        fileLoader->requestPath(newPath);
+    }
 }

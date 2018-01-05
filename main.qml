@@ -21,6 +21,8 @@ Kirigami.ApplicationWindow
     property int defaultColumnWidth: Kirigami.Units.gridUnit * 13
     property int columnWidth: defaultColumnWidth
     property int currentView : 0
+    property int iconSize
+
     pageStack.defaultColumnWidth: columnWidth
     pageStack.initialPage: [playlist, views]
 
@@ -34,15 +36,17 @@ Kirigami.ApplicationWindow
     {
         id: mainToolbar
         visible: true
-
+        size: iconSize
         currentIndex: currentView
 
         onTracksViewClicked: currentView = 0
         onAlbumsViewClicked: currentView = 1
         onArtistsViewClicked: currentView = 2
         onPlaylistsViewClicked: currentView = 3
-        onInfoViewClicked: currentView = 4
-        onPlaylistClicked: {
+        onSettingsViewClicked: currentView = 4
+
+        onPlaylistClicked:
+        {
             con.test()
             console.log(BAE.SettingPath)
         }
@@ -182,20 +186,22 @@ Kirigami.ApplicationWindow
 
                     currentIndex: currentView
 
-                    TracksView
-                    {
-                    }
+                    TracksView {}
 
-                    AlbumsView
-                    {
-                    }
+                    AlbumsView {}
 
-                    ArtistsView
-                    {
-                    }
+                    ArtistsView {}
+
+                    PlaylistsView {}
 
                     SettingsView
                     {
+                        onIconSizeChanged:
+                        {
+
+                            iconSize = size
+                            console.log(size)
+                        }
                     }
 
                     onCurrentIndexChanged:

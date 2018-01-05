@@ -10,14 +10,16 @@ ToolBar
     property alias babeBar : babeBar
     property string accentColor : "#fa5a77"
     property string textColor : "#ffffff"
-    property string backgroundColor : "#31363b"
+    property string backgroundColor : "#31363b"    
+    property int size
+
     property int currentIndex : 0
 
     signal tracksViewClicked()
     signal albumsViewClicked()
     signal artistsViewClicked()
     signal playlistsViewClicked()
-    signal infoViewClicked()
+    signal settingsViewClicked()
     signal playlistClicked()
 
 
@@ -40,6 +42,7 @@ ToolBar
             {
                 text: MdiFont.Icon.playCircle
                 color: currentIndex === -1? accentColor : textColor
+                iconSize: size
             }
 
             ToolTip { text: "Playlist" }
@@ -59,6 +62,8 @@ ToolBar
                     id: tracksIcon
                     text: MdiFont.Icon.musicNote
                     color: currentIndex === 0? accentColor : textColor
+                    iconSize: size
+
                 }
 
                 onClicked: tracksViewClicked()
@@ -78,6 +83,8 @@ ToolBar
                     id: albumsIcon
                     text: MdiFont.Icon.album
                     color: currentIndex === 1? accentColor : textColor
+                    iconSize: size
+
                 }
 
                 onClicked: albumsViewClicked()
@@ -98,6 +105,8 @@ ToolBar
                     id: artistsIcon
                     text: MdiFont.Icon.face
                     color: currentIndex === 2? accentColor : textColor
+                    iconSize: size
+
                 }
 
                 onClicked: artistsViewClicked()
@@ -117,6 +126,8 @@ ToolBar
                     id: playlistsIcon
                     text: MdiFont.Icon.libraryMusic
                     color: currentIndex === 3? accentColor : textColor
+                    iconSize: size
+
                 }
 
                 onClicked: playlistsViewClicked()
@@ -130,22 +141,24 @@ ToolBar
 
             ToolButton
             {
-                id: infoView
+                id: settingsView
 
                 Icon
                 {
-                    id: infoIcon
-                    text: MdiFont.Icon.information
+                    id: settingsIcon
+                    text: MdiFont.Icon.settings
                     color: currentIndex === 4? accentColor : textColor
+                    iconSize: size
+
                 }
 
-                onClicked: infoViewClicked()
+                onClicked: settingsViewClicked()
 
                 hoverEnabled: true
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
                 ToolTip.visible: hovered
-                ToolTip.text: qsTr("Info")
+                ToolTip.text: qsTr("Settings")
             }
         }
     }

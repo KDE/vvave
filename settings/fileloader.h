@@ -33,6 +33,7 @@ public:
 
     void requestPath(QString path)
     {
+        qDebug()<<"FROM file loader"<< path;
         this->queue << path;
         for(auto url : this->queue)
         {
