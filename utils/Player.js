@@ -3,11 +3,17 @@ function playTrack(track)
     currentTrack = track
     player.source(currentTrack.url);
     player.play()
+
 }
 
 function pauseTrack()
 {
     player.pause()
+}
+
+function resumeTrack()
+{
+    player.play()
 }
 
 function nextTrack()

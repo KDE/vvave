@@ -158,10 +158,18 @@ Kirigami.ApplicationWindow
                         ToolButton
                         {
                             id: playBtn
-                            Icon{text: MdiFont.Icon.pause}
+                            Icon {id: playIcon; text: MdiFont.Icon.play }
                             onClicked:
                             {
-                                Player.pauseTrack()
+                                if(player.isPaused())
+                                {
+                                    Player.resumeTrack()
+                                    playIcon.text= MdiFont.Icon.pause
+                                }else
+                                {
+                                    Player.pauseTrack()
+                                    playIcon.text= MdiFont.Icon.play
+                                }
                             }
                         }
 
@@ -192,6 +200,8 @@ Kirigami.ApplicationWindow
                     onRowClicked:
                     {
                         Player.playTrack(model.get(index))
+                        playIcon.text = MdiFont.Icon.pause
+
                     }
                 }
             }

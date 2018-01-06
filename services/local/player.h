@@ -17,6 +17,7 @@ public:
     Q_INVOKABLE void stop();
     Q_INVOKABLE void seek(const int &pos);
     Q_INVOKABLE int duration();
+    Q_INVOKABLE bool isPaused();
 
 private:
     QMediaPlayer *player;

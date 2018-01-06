@@ -50,6 +50,11 @@ int Player::duration()
     return static_cast<int>(this->player->duration());
 }
 
+bool Player::isPaused()
+{
+    return !(this->player->state() == QMediaPlayer::PlayingState);
+}
+
 void Player::update()
 {
     emit this->pos(static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000));
