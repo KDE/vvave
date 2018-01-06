@@ -3,6 +3,7 @@ function playTrack(track)
     currentTrack = track
     player.source(currentTrack.url);
     player.play()
+    root.title = currentTrack.title + " - " +currentTrack.artist
 
 }
 

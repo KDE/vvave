@@ -36,11 +36,7 @@ Kirigami.ApplicationWindow
     Connections
     {
         target: player
-        onPos:
-        {
-            progressBar.value = pos
-        }
-
+        onPos: progressBar.value = pos
         onFinished: Player.nextTrack()
     }
 
@@ -75,7 +71,6 @@ Kirigami.ApplicationWindow
                 root.width = columnWidth
             else
                 root.width = columnWidth*3
-
         }
 
         ColumnLayout
@@ -83,7 +78,6 @@ Kirigami.ApplicationWindow
             id: playlistLayout
             width: parent.width
             height: parent.height
-
 
             Rectangle
             {

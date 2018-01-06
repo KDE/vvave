@@ -37,10 +37,8 @@ ListView
     {
         id:placeHolder
 
-        width: parent.width
-        height: parent.height
-
-
+        anchors.fill: parent
+        anchors.centerIn: parent
         visible: list.count===0
 
         ColumnLayout
