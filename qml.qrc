@@ -22,5 +22,6 @@
         <file>db/script.sql</file>
         <file>widgets/SettingsView.qml</file>
         <file>utils/Player.js</file>
+        <file>assets/face.png</file>
     </qresource>
 </RCC>

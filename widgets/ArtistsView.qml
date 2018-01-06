@@ -13,6 +13,8 @@ BabeGrid
     albumSize: 150
     borderRadius: 20
 
+    signal rowClicked(var track)
+
     Drawer
     {
         id: drawer
@@ -76,6 +78,12 @@ BabeGrid
                 id: drawerList
                 width: parent.width
                 height: parent.height - titleBar.height
+
+                onRowClicked:
+                {
+                    artistsView.rowClicked(model.get(index))
+                }
+
             }
 
         }
@@ -86,7 +94,9 @@ BabeGrid
     {
         artistTitle.text = artist
         drawer.open()
-        console.log("haha: ", album, artist)
+        drawerList.clearTable()
+
+
         var query = "select * from tracks where artist = \""+artist+"\""
         var map = con.get(query)
 

@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
 
 ListView
 {
@@ -12,6 +13,8 @@ ListView
 
     width: 320
     height: 480
+
+    clip: true
 
     highlight: highlight
     highlightFollowsCurrentItem: false
@@ -29,6 +32,59 @@ ListView
         listModel.clear()
     }
 
+
+    Rectangle
+    {
+        id:placeHolder
+
+        width: parent.width
+        height: parent.height
+
+
+        visible: list.count===0
+
+        ColumnLayout
+        {
+            width: parent.width
+            height: parent.height
+            Layout.fillHeight: true
+
+            Image
+            {
+                id: imageHolder
+                width: 48
+                height: 48
+                Layout.fillWidth: true
+                source: "qrc:/assets/face.png"
+                horizontalAlignment: Qt.AlignHCenter
+
+                fillMode: Image.PreserveAspectFit
+
+            }
+            HueSaturation
+            {
+                anchors.fill: imageHolder
+                source: imageHolder
+                saturation: -1
+                lightness: 0.3
+            }
+
+            Label
+            {
+                id: textHolder
+                width: parent.width
+                Layout.fillWidth: true
+                opacity: 0.3
+
+                anchors.top: imageHolder.bottom
+                text: qsTr("Nothing here...")
+                padding: 10
+                font.bold: true
+                horizontalAlignment: Qt.AlignHCenter
+                elide: Text.ElideRight
+            }
+        }
+    }
 
     Component
     {

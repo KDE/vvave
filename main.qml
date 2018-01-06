@@ -41,12 +41,7 @@ Kirigami.ApplicationWindow
             progressBar.value = pos
         }
 
-        onFinished:
-        {
-            mainPlaylistTable.currentIndex =  mainPlaylistTable.currentIndex+1 || 0
-            var track = mainPlaylistTable.model.get(mainPlaylistTable.currentIndex);
-            Player.playTrack(track)
-        }
+        onFinished: Player.nextTrack()
     }
 
     header: BabeBar
@@ -196,7 +191,6 @@ Kirigami.ApplicationWindow
                     id: mainPlaylistTable
                     width: parent.width
                     height: parent.height
-                    clip: true
                     onRowClicked:
                     {
                         Player.playTrack(model.get(index))
@@ -245,7 +239,13 @@ Kirigami.ApplicationWindow
                     }
                 }
 
-                ArtistsView {}
+                ArtistsView
+                {
+                    onRowClicked:
+                    {
+                        appendTrack(track)
+                    }
+                }
 
                 PlaylistsView {}
 

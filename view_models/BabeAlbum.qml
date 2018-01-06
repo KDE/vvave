@@ -66,7 +66,7 @@ Item
             Label
             {
                 width: parent.width
-                text: album || artist
+                text:  typeof album === 'undefined'  ? artist : album
                 visible: true
                 elide: Text.ElideRight
                 font.pointSize: 10
@@ -88,8 +88,8 @@ Item
             Label
             {
                 width: parent.width
-                text: artist
-                visible: album && artist ? true : false
+                text: typeof album === 'undefined' ? "" : artist
+                visible: typeof album === 'undefined'? false : true
                 elide: Text.ElideRight
                 font.pointSize: 9
                 color: "white"

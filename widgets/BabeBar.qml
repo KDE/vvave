@@ -8,7 +8,7 @@ import "../utils"
 ToolBar
 {
     property alias babeBar : babeBar
-    property string accentColor : "#fa5a77"
+    property string accentColor : "#E91E63"
     property string textColor : "#ffffff"
     property string backgroundColor : "#31363b"    
     property int size
