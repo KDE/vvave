@@ -87,6 +87,21 @@ BabeGrid
         artistTitle.text = artist
         drawer.open()
         console.log("haha: ", album, artist)
+        var query = "select * from tracks where artist = \""+artist+"\""
+        var map = con.get(query)
+
+        for(var i in map)
+            drawerList.model.append(map[i])
+
+    }
+
+    Component.onCompleted:
+    {
+        var map = con.get("select * from artists")
+        for(var i in map)
+        {
+            gridModel.append(map[i])
+        }
     }
 
 }

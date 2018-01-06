@@ -13,8 +13,7 @@ BabeGrid
     albumSize: 150
     borderRadius: 20
 
-    property string drawerAlbum
-    property string drawerArtist
+    signal rowClicked(var track)
 
     Drawer
     {
@@ -44,7 +43,6 @@ BabeGrid
                         id: albumTitle
                         width: parent.width - closeBtn.width
                         height: parent.height
-                        text: drawerAlbum
                         elide: Text.ElideRight
                         font.pointSize: 12
                         font.bold: true
@@ -80,7 +78,10 @@ BabeGrid
                 id: drawerList
                 width: parent.width
                 height: parent.height - titleBar.height
-
+                onRowClicked:
+                {
+                    albumsView.rowClicked(model.get(index))
+                }
             }
 
         }
@@ -88,19 +89,17 @@ BabeGrid
 
     onAlbumCoverClicked:
     {
-        drawerAlbum = album
-        drawerArtist = artist
+        albumTitle.text = album
         drawer.open()
-        console.log("haha: ", album, artist)
-        var query = "select * from tracks where album = \""+albumsView.drawerAlbum+"\" and artist = \""+albumsView.drawerArtist+"\""
+        drawerList.clearTable()
+
+        var query = "select * from tracks where album = \""+album+"\" and artist = \""+artist+"\""
         console.log(query)
         var map = con.get(query)
 
         for(var i in map)
-        {
             drawerList.model.append(map[i])
-            console.log(map[i].title)
-        }
+
     }
 
 

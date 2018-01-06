@@ -43,16 +43,16 @@ Pane
 
         onWidthChanged:
         {
-            var amount = parseInt(grid.width/(albumSize+albumSpacing),10)
-            var leftSpace = parseInt(grid.width-(amount*albumSize), 10)
-            var size = parseInt(albumSize+(parseInt(leftSpace/amount, 10)), 10)
+//            var amount = parseInt(grid.width/(albumSize+albumSpacing),10)
+//            var leftSpace = parseInt(grid.width-(amount*albumSize), 10)
+//            var size = parseInt(albumSize+(parseInt(leftSpace/amount, 10)), 10)
 
-            size = size > albumSize+albumSpacing ? size : albumSize+albumSpacing
+//            size = size > albumSize+albumSpacing ? size : albumSize+albumSpacing
 
-            grid.cellWidth = size
-            //            grid.cellHeight = size
+//            grid.cellWidth = size
+//            //            grid.cellHeight = size
 
-            console.log(parseInt(size,10))
+//            console.log(parseInt(size,10))
         }
 
         delegate: BabeAlbum

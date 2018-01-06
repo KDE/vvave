@@ -3,11 +3,12 @@ import QtQuick.Controls 2.2
 import QtLocation 5.9
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
-import QtMultimedia 5.8
+
 
 import org.kde.kirigami 2.0 as Kirigami
 
 import "utils/Icons.js" as MdiFont
+import "utils/Player.js" as Player
 import "utils"
 import "view_models"
 import "widgets"
@@ -20,11 +21,12 @@ Kirigami.ApplicationWindow
     height: 500
     title: qsTr("Babe")
 
-
-    property int defaultColumnWidth: Kirigami.Units.gridUnit * 13
-    property int columnWidth: defaultColumnWidth
+    property int columnWidth: Kirigami.Units.gridUnit * 13
     property int currentView : 0
     property int iconSize
+
+    property var currentTrack
+
 
     signal appendTrack(var track)
 
@@ -33,15 +35,18 @@ Kirigami.ApplicationWindow
 
     Connections
     {
-        target: con
-        onQmlSignal: console.log("lalaland")
-    }
+        target: player
+        onPos:
+        {
+            progressBar.value = pos
+        }
 
-    MediaPlayer
-    {
-        id: player
-        volume: 1
-
+        onFinished:
+        {
+            mainPlaylistTable.currentIndex =  mainPlaylistTable.currentIndex+1 || 0
+            var track = mainPlaylistTable.model.get(mainPlaylistTable.currentIndex);
+            Player.playTrack(track)
+        }
     }
 
     header: BabeBar
@@ -56,11 +61,6 @@ Kirigami.ApplicationWindow
         onArtistsViewClicked: currentView = 2
         onPlaylistsViewClicked: currentView = 3
         onSettingsViewClicked: currentView = 4
-
-        onPlaylistClicked:
-        {
-            con.test()
-        }
     }
 
     onAppendTrack:
@@ -68,14 +68,20 @@ Kirigami.ApplicationWindow
         mainPlaylistTable.model.append(track)
     }
 
-
-
     Page
     {
         id: playlistPage
         width: parent.width
         height: parent.height
 
+        Component.onCompleted:
+        {
+            if(mainPlaylistTable.count>0)
+                root.width = columnWidth
+            else
+                root.width = columnWidth*3
+
+        }
 
         ColumnLayout
         {
@@ -114,7 +120,9 @@ Kirigami.ApplicationWindow
                 Layout.fillWidth: true
                 anchors.top: coverPlay.bottom
                 height: 16
-                value: 0.5
+                from: 0
+                to: 1000
+                value: 0
             }
 
             Rectangle
@@ -138,24 +146,31 @@ Kirigami.ApplicationWindow
                         {
                             id: previousBtn
                             Icon {text: MdiFont.Icon.skipPrevious}
+                            onClicked: Player.previousTrack()
+                        }
+
+                        ToolButton
+                        {
+                            id: babeBtn
+                            Icon{text: MdiFont.Icon.heartOutline}
                         }
 
                         ToolButton
                         {
                             id: playBtn
-                            Icon{text: MdiFont.Icon.play}
-                        }
-
-                        ToolButton
-                        {
-                            id: pauseBtn
                             Icon{text: MdiFont.Icon.pause}
+                            onClicked:
+                            {
+                                Player.pauseTrack()
+                            }
                         }
 
                         ToolButton
                         {
                             id: nextBtn
                             Icon{text: MdiFont.Icon.skipNext}
+                            onClicked: Player.nextTrack()
+
                         }
                     }
                 }
@@ -173,15 +188,11 @@ Kirigami.ApplicationWindow
                     id: mainPlaylistTable
                     width: parent.width
                     height: parent.height
-
+                    clip: true
                     onRowClicked:
                     {
-                        console.log(model.get(index).url)
-                        player.source = model.get(index).url;
-                        player.play();
-                        console.log(player.playbackState)
+                        Player.playTrack(model.get(index))
                     }
-
                 }
             }
         }
@@ -216,7 +227,13 @@ Kirigami.ApplicationWindow
                     }
                 }
 
-                AlbumsView {}
+                AlbumsView
+                {
+                    onRowClicked:
+                    {
+                        appendTrack(track)
+                    }
+                }
 
                 ArtistsView {}
 

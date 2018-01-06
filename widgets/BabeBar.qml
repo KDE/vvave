@@ -20,7 +20,6 @@ ToolBar
     signal artistsViewClicked()
     signal playlistsViewClicked()
     signal settingsViewClicked()
-    signal playlistClicked()
 
 
     id: babeBar
@@ -35,20 +34,6 @@ ToolBar
     RowLayout
     {
         anchors.fill: parent
-        ToolButton
-        {
-            id: playlistView
-            Icon
-            {
-                text: MdiFont.Icon.playCircle
-                color: currentIndex === -1? accentColor : textColor
-                iconSize: size
-            }
-
-            ToolTip { text: "Playlist" }
-
-            onClicked: playlistClicked()
-        }
 
         Row
         {

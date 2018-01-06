@@ -1,14 +1,20 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+
 ListView
 {
+    SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
+
     property int currentRow : -1
     signal rowClicked(int index)
     signal rowPressed(int index)
 
     width: 320
     height: 480
+
+    highlight: highlight
+    highlightFollowsCurrentItem: false
 
     focus: true
     boundsBehavior: Flickable.StopAtBounds
@@ -17,6 +23,34 @@ ListView
     flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem
+
+    function clearTable()
+    {
+        listModel.clear()
+    }
+
+
+    Component
+    {
+        id: highlight
+        Rectangle
+        {
+            width: list.width
+            height: list.currentItem.height
+
+            color: myPalette.highlight
+            opacity: 0.2
+            y: list.currentItem.y
+            Behavior on y
+            {
+                SpringAnimation
+                {
+                    spring: 3
+                    damping: 0.2
+                }
+            }
+        }
+    }
 
     Menu
     {
@@ -87,6 +121,7 @@ ListView
             onClicked:
             {
                 list.rowClicked(index)
+                currentIndex = index
             }
         }
     }

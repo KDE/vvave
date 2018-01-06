@@ -20,7 +20,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     db/collectionDB.cpp \
     settings/settings.cpp \
-    services/local/taginfo.cpp
+    services/local/taginfo.cpp \
+    services/local/player.cpp
 
 RESOURCES += qml.qrc
 
@@ -43,5 +44,6 @@ HEADERS += \
     utils/bae.h \
     settings/settings.h \
     settings/fileloader.h \
-    services/local/taginfo.h
+    services/local/taginfo.h \
+    services/local/player.h
 
