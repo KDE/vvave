@@ -32,14 +32,14 @@ Pane
         focus: true
         model: gridModel
 
-        highlight: Rectangle
-        {
-            id: highlight
-            width: albumSize
-            height: albumSize
-            color: "lightsteelblue"
-            radius: borderRadius
-        }
+//        highlight: Rectangle
+//        {
+//            id: highlight
+//            width: albumSize
+//            height: albumSize
+//            color: "lightsteelblue"
+//            radius: borderRadius
+//        }
 
         //        onWidthChanged:
         //        {

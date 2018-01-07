@@ -164,9 +164,14 @@ Kirigami.ApplicationWindow
                             onClicked:
                             {
                                 if(player.isPaused())
+                                {
                                     Player.resumeTrack()
-                                else Player.pauseTrack()
-
+                                    playIcon.text= MdiFont.Icon.pause
+                                }else
+                                {
+                                    Player.pauseTrack()
+                                    playIcon.text= MdiFont.Icon.play
+                                }
                             }
                         }
 
@@ -239,6 +244,12 @@ Kirigami.ApplicationWindow
                         for(var i in tracks)
                             appendTrack(tracks[i])
                         Player.playTrack(mainPlaylistTable.model.get(0))
+                        playIcon.text= MdiFont.Icon.pause
+                    }
+                    onAppendAlbum:
+                    {
+                        for(var i in tracks)
+                            appendTrack(tracks[i])
                     }
 
                 }
@@ -252,6 +263,7 @@ Kirigami.ApplicationWindow
                         for(var i in tracks)
                             appendTrack(tracks[i])
                         Player.playTrack(mainPlaylistTable.model.get(0))
+                        playIcon.text= MdiFont.Icon.pause
                     }
                 }
 

@@ -48,7 +48,7 @@ Item
 
                 fillMode: Image.PreserveAspectFit
 
-                source: (artwork && artwork !== "none")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                source: (artwork.length>0 && artwork !== "none")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
                 layer.enabled: true
                 layer.effect: OpacityMask
                 {

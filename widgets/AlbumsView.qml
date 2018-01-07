@@ -15,6 +15,7 @@ BabeGrid
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
+    signal appendAlbum(var tracks)
 
     Drawer
     {
@@ -41,10 +42,11 @@ BabeGrid
 
                     ToolButton
                     {
+                        id: playAllBtn
+
                         width: parent.height
                         height: parent.height
 
-                        id: playAllBtn
                         Icon {text: MdiFont.Icon.playBoxOutline}
 
                         onClicked:
@@ -58,10 +60,30 @@ BabeGrid
                         }
                     }
 
+                    ToolButton
+                    {
+                        id: appendBtn
+
+                        width: parent.height
+                        height: parent.height
+
+                        Icon {text: MdiFont.Icon.playlistPlus}
+
+                        onClicked:
+                        {
+                            var data = albumsView.gridModel.get(albumsView.grid.currentIndex)
+                            var query = "select * from tracks where album = \""+data.album+"\" and artist = \""+data.artist+"\""
+                            var tracks = con.get(query)
+                            appendAlbum(tracks)
+                            drawer.close()
+
+                        }
+                    }
+
                     Label
                     {
                         id: albumTitle
-                        width: parent.width - closeBtn.width - playAllBtn.width
+                        width: parent.width - closeBtn.width - playAllBtn.width - appendBtn.width
                         height: parent.height
                         elide: Text.ElideRight
                         font.pointSize: 12
