@@ -5,12 +5,15 @@ function playTrack(track)
     player.play()
     root.title = currentTrack.title + " - " +currentTrack.artist
     currentArtwork = con.getAlbumArt(currentTrack.album, currentTrack.artist) || con.getArtistArt(currentTrack.artist)
+    playIcon.text= MdiFont.Icon.pause
 
 }
 
 function pauseTrack()
 {
     player.pause()
+    playIcon.text= MdiFont.Icon.play
+
 }
 
 function resumeTrack()

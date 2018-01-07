@@ -14,6 +14,7 @@ BabeGrid
     borderRadius: 20
 
     signal rowClicked(var track)
+    signal playAlbum(var tracks)
 
     Drawer
     {
@@ -38,10 +39,29 @@ BabeGrid
                 {
                     anchors.fill: parent
 
+                    ToolButton
+                    {
+                        width: parent.height
+                        height: parent.height
+
+                        id: playAllBtn
+                        Icon {text: MdiFont.Icon.playBoxOutline}
+
+                        onClicked:
+                        {
+                            var data = artistsView.gridModel.get(artistsView.grid.currentIndex)
+
+                            var query = "select * from tracks where artist = \""+data.artist+"\""
+                            var tracks = con.get(query)
+                            playAlbum(tracks)
+                            drawer.close()
+                        }
+                    }
+
                     Label
                     {
                         id: artistTitle
-                        width: parent.width - closeBtn.width
+                        width: parent.width - closeBtn.width - playAllBtn.width
                         height: parent.height
                         elide: Text.ElideRight
                         font.pointSize: 12
@@ -107,7 +127,7 @@ BabeGrid
 
     Component.onCompleted:
     {
-        var map = con.get("select * from artists")
+        var map = con.get("select * from artists order by artist asc")
         for(var i in map)
         {
             gridModel.append(map[i])

@@ -1,22 +1,21 @@
 import QtQuick.Controls 2.2
 import QtQuick 2.9
 
-Page
+Pane
 {
     property int albumSize : 150
     property int albumSpacing: 20
     property int borderRadius : 4
     property alias gridModel: gridModel
+    property alias grid: grid
     signal albumCoverClicked(string album, string artist)
 
     width: 500
     height: 400
 
     id: gridPage
-    ListModel
-    {
-        id: gridModel
-    }
+
+    ListModel {id: gridModel}
 
     GridView
     {
@@ -26,7 +25,6 @@ Page
         height: parent.height
 
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 20
 
         cellWidth: albumSize + albumSpacing
         cellHeight:  parseInt(albumSize+(albumSize*0.6))
@@ -67,16 +65,13 @@ Page
                     var album = grid.model.get(index).album
                     var artist = grid.model.get(index).artist
                     albumCoverClicked(album, artist)
+                    grid.currentIndex = index
+                    console.log("current index is: ", grid.currentIndex)
                 }
-
             }
         }
 
-        ScrollBar.vertical: ScrollBar
-        {
-        }
-
-
+        ScrollBar.vertical: ScrollBar{}
     }
 
 }

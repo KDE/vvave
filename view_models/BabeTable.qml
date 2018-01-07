@@ -33,32 +33,37 @@ ListView
     }
 
 
-    Rectangle
+    GridLayout
     {
         id:placeHolder
 
         anchors.fill: parent
-        anchors.centerIn: parent
-        visible: list.count===0
 
-        ColumnLayout
+        columns: 1
+        rows: 2
+
+        visible: list.count === 0
+
+        Rectangle
         {
-            width: parent.width
+
+            width:parent.width
             height: parent.height
-            Layout.fillHeight: true
+            Layout.row: 1
 
             Image
             {
                 id: imageHolder
+
+                anchors.centerIn: parent
                 width: 48
                 height: 48
-                Layout.fillWidth: true
                 source: "qrc:/assets/face.png"
                 horizontalAlignment: Qt.AlignHCenter
 
                 fillMode: Image.PreserveAspectFit
-
             }
+
             HueSaturation
             {
                 anchors.fill: imageHolder
@@ -66,15 +71,12 @@ ListView
                 saturation: -1
                 lightness: 0.3
             }
-
             Label
             {
                 id: textHolder
                 width: parent.width
-                Layout.fillWidth: true
-                opacity: 0.3
-
                 anchors.top: imageHolder.bottom
+                opacity: 0.3
                 text: qsTr("Nothing here...")
                 padding: 10
                 font.bold: true
@@ -82,6 +84,9 @@ ListView
                 elide: Text.ElideRight
             }
         }
+
+
+
     }
 
     Component

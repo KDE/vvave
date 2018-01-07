@@ -74,17 +74,23 @@ Kirigami.ApplicationWindow
                 root.width = columnWidth*3
         }
 
-        ColumnLayout
+        GridLayout
         {
             id: playlistLayout
             width: parent.width
             height: parent.height
+            columns: 1
+            rows: 4
+            rowSpacing: 0
 
             Rectangle
             {
                 id: coverPlay
-                width: parent.width
+                Layout.fillWidth: true
+                Layout.row: 1
                 height: parent.width < columnWidth ? parent.width : columnWidth
+
+                visible: mainPlaylistTable.count>0
 
                 FastBlur
                 {
@@ -107,28 +113,28 @@ Kirigami.ApplicationWindow
             Slider
             {
                 id: progressBar
-                width: parent.width
                 Layout.fillWidth: true
-                anchors.top: coverPlay.bottom
+                Layout.row: 3
                 height: 16
                 from: 0
                 to: 1000
                 value: 0
+                visible: mainPlaylistTable.count>0
+                spacing: 0
 
                 onMoved:
                 {
-                   player.seek(player.duration() / 1000 * value);
+                    player.seek(player.duration() / 1000 * value);
                 }
             }
 
             Rectangle
             {
                 id: playbackControls
-                anchors.top: progressBar.bottom
                 Layout.fillWidth: true
-                width: parent.width
+                Layout.row: 2
                 height: 48
-                z: 1
+                visible: mainPlaylistTable.count>0
 
                 RowLayout
                 {
@@ -158,14 +164,9 @@ Kirigami.ApplicationWindow
                             onClicked:
                             {
                                 if(player.isPaused())
-                                {
                                     Player.resumeTrack()
-                                    playIcon.text= MdiFont.Icon.pause
-                                }else
-                                {
-                                    Player.pauseTrack()
-                                    playIcon.text= MdiFont.Icon.play
-                                }
+                                else Player.pauseTrack()
+
                             }
                         }
 
@@ -183,9 +184,10 @@ Kirigami.ApplicationWindow
             Rectangle
             {
                 id: mainPlaylist
-                width: parent.width
-                height: parent.height-coverPlay.height - playbackControls.height
-                anchors.top: playbackControls.bottom
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Layout.row: 4
 
                 BabeTable
                 {
@@ -225,25 +227,31 @@ Kirigami.ApplicationWindow
 
                 TracksView
                 {
-                    onRowClicked:
-                    {
-                        appendTrack(model.get(index))
-                    }
+                    onRowClicked: appendTrack(model.get(index))
                 }
 
                 AlbumsView
-                {                  
-                    onRowClicked:
+                {
+                    onRowClicked: appendTrack(track)
+                    onPlayAlbum:
                     {
-                        appendTrack(track)
+                        mainPlaylistTable.clearTable()
+                        for(var i in tracks)
+                            appendTrack(tracks[i])
+                        Player.playTrack(mainPlaylistTable.model.get(0))
                     }
+
                 }
 
                 ArtistsView
                 {
-                    onRowClicked:
+                    onRowClicked: appendTrack(track)
+                    onPlayAlbum:
                     {
-                        appendTrack(track)
+                        mainPlaylistTable.clearTable()
+                        for(var i in tracks)
+                            appendTrack(tracks[i])
+                        Player.playTrack(mainPlaylistTable.model.get(0))
                     }
                 }
 

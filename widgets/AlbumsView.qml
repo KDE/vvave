@@ -14,6 +14,7 @@ BabeGrid
     borderRadius: 20
 
     signal rowClicked(var track)
+    signal playAlbum(var tracks)
 
     Drawer
     {
@@ -38,10 +39,29 @@ BabeGrid
                 {
                     anchors.fill: parent
 
+                    ToolButton
+                    {
+                        width: parent.height
+                        height: parent.height
+
+                        id: playAllBtn
+                        Icon {text: MdiFont.Icon.playBoxOutline}
+
+                        onClicked:
+                        {
+                            var data = albumsView.gridModel.get(albumsView.grid.currentIndex)
+                            var query = "select * from tracks where album = \""+data.album+"\" and artist = \""+data.artist+"\""
+                            var tracks = con.get(query)
+                            playAlbum(tracks)
+                            drawer.close()
+
+                        }
+                    }
+
                     Label
                     {
                         id: albumTitle
-                        width: parent.width - closeBtn.width
+                        width: parent.width - closeBtn.width - playAllBtn.width
                         height: parent.height
                         elide: Text.ElideRight
                         font.pointSize: 12
@@ -59,11 +79,7 @@ BabeGrid
                         width: parent.height
                         height: parent.height
 
-                        Icon
-                        {
-                            text: MdiFont.Icon.close
-                        }
-
+                        Icon { text: MdiFont.Icon.close }
                         onClicked:
                         {
                             drawer.close()
@@ -103,10 +119,9 @@ BabeGrid
 
     }
 
-
     Component.onCompleted:
     {
-        var map = con.get("select * from albums")
+        var map = con.get("select * from albums order by album asc")
         for(var i in map)
         {
             gridModel.append(map[i])

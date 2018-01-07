@@ -12,8 +12,22 @@ Item
 
     width: albumSize
     height: parseInt(albumSize+(albumSize*0.4))
+
+    DropShadow
+    {
+           anchors.fill: card
+           horizontalOffset: 3
+           verticalOffset: 3
+           radius: 8.0
+           samples: 17
+           color: "#80000000"
+           source: card
+       }
+
+
     Rectangle
     {
+        id: card
         anchors.fill: parent
         color: fillColor
         radius: borderRadius
@@ -98,11 +112,11 @@ Item
         }
     }
 
-
-
-    MouseArea {
+    MouseArea
+    {
         anchors.fill: parent
-        onClicked: {
+        onClicked:
+        {
             parent.GridView.view.currentIndex = index
             console.log(index)
             albumClicked(index)
