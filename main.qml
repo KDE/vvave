@@ -103,9 +103,10 @@ Kirigami.ApplicationWindow
                 {
                     id: artwork
                     width: parent.width < columnWidth ? parent.width : columnWidth
-                    height:parent.height
+                    height: parent.height
                     anchors.centerIn: parent
                     source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
+                    fillMode: Image.PreserveAspectFit
 
                 }
             }
@@ -265,18 +266,18 @@ Kirigami.ApplicationWindow
                         Player.playTrack(mainPlaylistTable.model.get(0))
                         playIcon.text= MdiFont.Icon.pause
                     }
+                    onAppendAlbum:
+                    {
+                        for(var i in tracks)
+                            appendTrack(tracks[i])
+                    }
                 }
 
                 PlaylistsView {}
 
                 SettingsView
                 {
-                    onIconSizeChanged:
-                    {
-
-                        iconSize = size
-                        console.log(size)
-                    }
+                    onIconSizeChanged: iconSize = size
                 }
 
                 onCurrentIndexChanged:

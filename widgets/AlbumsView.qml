@@ -116,6 +116,7 @@ BabeGrid
                 id: drawerList
                 width: parent.width
                 height: parent.height - titleBar.height
+                trackNumberVisible: true
                 onRowClicked:
                 {
                     albumsView.rowClicked(model.get(index))
@@ -132,7 +133,7 @@ BabeGrid
         drawer.open()
         drawerList.clearTable()
 
-        var query = "select * from tracks where album = \""+album+"\" and artist = \""+artist+"\""
+        var query = "select * from tracks where album = \""+album+"\" and artist = \""+artist+"\" order by track"
         console.log(query)
         var map = con.get(query)
 

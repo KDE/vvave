@@ -5,6 +5,7 @@ import "../view_models"
 BabeTable
 {
     id: tracksView
+    trackNumberVisible: false
    Component.onCompleted:
    {
        var map = con.get("select * from tracks")

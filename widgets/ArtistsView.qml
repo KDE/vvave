@@ -69,8 +69,8 @@ BabeGrid
 
                         onClicked:
                         {
-                            var data = albumsView.gridModel.get(albumsView.grid.currentIndex)
-                            var query = "select * from tracks where album = \""+data.album+"\" and artist = \""+data.artist+"\""
+                            var data = artistsView.gridModel.get(artistsView.grid.currentIndex)
+                            var query = "select * from tracks where artist = \""+data.artist+"\""
                             var tracks = con.get(query)
                             appendAlbum(tracks)
                             drawer.close()
@@ -117,10 +117,11 @@ BabeGrid
                 id: drawerList
                 width: parent.width
                 height: parent.height - titleBar.height
-
+                trackNumberVisible: true
                 onRowClicked:
                 {
                     artistsView.rowClicked(model.get(index))
+                    drawer.close()
                 }
 
             }
@@ -136,7 +137,7 @@ BabeGrid
         drawerList.clearTable()
 
 
-        var query = "select * from tracks where artist = \""+artist+"\""
+        var query = "select * from tracks where artist = \""+artist+"\" order by album, track"
         var map = con.get(query)
 
         for(var i in map)

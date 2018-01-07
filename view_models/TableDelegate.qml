@@ -7,19 +7,48 @@ ItemDelegate
     id: delegate
     signal rowSelected(int index)
 
+    property bool numberVisible : false
     checkable: true
 
-    contentItem: ColumnLayout
+    contentItem: GridLayout
     {
-        spacing: 2
+        id: gridLayout
+        rows:2
+        columns:3
+
+        Label
+        {
+            id: trackNumber
+            visible: numberVisible
+            width: 16
+            Layout.fillHeight: true
+            Layout.row: 1
+            Layout.column: 1
+            Layout.rowSpan: 2
+            Layout.alignment: Qt.AlignLeft
+
+            text: track
+            font.bold: true
+            elide: Text.ElideRight
+
+            font.pointSize: 10
+
+        }
+
 
         Label
         {
             id: trackTitle
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.row: 1
+            Layout.column: 2
+
             text: title
             font.bold: true
             elide: Text.ElideRight
-            Layout.fillWidth: true
+
             font.pointSize: 10
 
         }
@@ -27,81 +56,17 @@ ItemDelegate
         Label
         {
             id: trackInfo
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.row: 2
+            Layout.column: 2
+
             text: artist + " | " + album
             font.bold: false
             elide: Text.ElideRight
-            Layout.fillWidth: true
             font.pointSize: 9
 
         }
     }
-
-
-
-    //        GridLayout
-    //        {
-    //            id: grid
-    //            visible: false
-
-    //            columns: 2
-    //            rowSpacing: 10
-    //            columnSpacing: 10
-
-    //            Label
-    //            {
-    //                text: qsTr("Address:")
-    //                Layout.leftMargin: 60
-    //            }
-
-    //            Label
-    //            {
-    //                text: address
-    //                font.bold: true
-    //                elide: Text.ElideRight
-    //                Layout.fillWidth: true
-    //            }
-
-    //            Label
-    //            {
-    //                text: qsTr("City:")
-    //                Layout.leftMargin: 60
-    //            }
-
-    //            Label
-    //            {
-    //                text: city
-    //                font.bold: true
-    //                elide: Text.ElideRight
-    //                Layout.fillWidth: true
-    //            }
-
-    //            Label
-    //            {
-    //                text: qsTr("Number:")
-    //                Layout.leftMargin: 60
-    //            }
-
-    //            Label
-    //            {
-    //                text: number
-    //                font.bold: true
-    //                elide: Text.ElideRight
-    //                Layout.fillWidth: true
-    //            }
-    //        }
-    //    }
-
-    //    states: [
-    //        State
-    //        {
-    //            name: "expanded"
-    //            when: delegate.checked
-
-    //            PropertyChanges
-    //            {
-    //                target: grid
-    //                visible: true
-    //            }
-    //        }
-    //    ]
 }

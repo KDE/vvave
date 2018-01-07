@@ -8,6 +8,8 @@ ListView
     SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
 
     property int currentRow : -1
+    property bool trackNumberVisible
+
     signal rowClicked(int index)
     signal rowPressed(int index)
 
@@ -167,7 +169,7 @@ ListView
     {
         id: delegate
         width: list.width
-
+        numberVisible : trackNumberVisible ? true : false
         Connections
         {
             target: delegate
