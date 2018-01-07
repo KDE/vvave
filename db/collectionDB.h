@@ -83,10 +83,10 @@ public:
     QStringList getTrackTags(const QString &path);
     int getTrackStars(const QString &path);
     int getTrackBabe(const QString &path);
-    QString getArtistArt(const QString &artist);
+    Q_INVOKABLE QString getArtistArt(const QString &artist);
     QString getArtistWiki(const QString &artist);
     //    QStringList getArtistTags(const QString &artist);
-    QString getAlbumArt(const QString &album, const QString &artist);
+    Q_INVOKABLE QString getAlbumArt(const QString &album, const QString &artist);
     QString getAlbumWiki(const QString &album, const QString &artist);
     //    QStringList getAlbumTags(const QString &album, const QString &artist);
     QStringList getArtistAlbums(const QString &artist);

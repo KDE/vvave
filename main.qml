@@ -26,6 +26,7 @@ Kirigami.ApplicationWindow
     property int iconSize
 
     property var currentTrack
+    property string currentArtwork
 
 
     signal appendTrack(var track)
@@ -98,11 +99,12 @@ Kirigami.ApplicationWindow
                     width: parent.width < columnWidth ? parent.width : columnWidth
                     height:parent.height
                     anchors.centerIn: parent
-                    source: "qrc:/assets/test.jpg"
+                    source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
+
                 }
             }
 
-            ProgressBar
+            Slider
             {
                 id: progressBar
                 width: parent.width
@@ -112,6 +114,11 @@ Kirigami.ApplicationWindow
                 from: 0
                 to: 1000
                 value: 0
+
+                onMoved:
+                {
+                   player.seek(player.duration() / 1000 * value);
+                }
             }
 
             Rectangle
@@ -189,7 +196,6 @@ Kirigami.ApplicationWindow
                     {
                         Player.playTrack(model.get(index))
                         playIcon.text = MdiFont.Icon.pause
-
                     }
                 }
             }
@@ -200,7 +206,7 @@ Kirigami.ApplicationWindow
     Page
     {
         id: views
-        width: parent.width /2
+        width: parent.width
         height: parent.height
         clip: true
 
@@ -226,7 +232,7 @@ Kirigami.ApplicationWindow
                 }
 
                 AlbumsView
-                {
+                {                  
                     onRowClicked:
                     {
                         appendTrack(track)

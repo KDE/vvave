@@ -1,7 +1,7 @@
 import QtQuick.Controls 2.2
 import QtQuick 2.9
 
-Pane
+Page
 {
     property int albumSize : 150
     property int albumSpacing: 20
@@ -12,6 +12,7 @@ Pane
     width: 500
     height: 400
 
+    id: gridPage
     ListModel
     {
         id: gridModel
@@ -21,45 +22,42 @@ Pane
     {
         id: grid
 
-        //        anchors.leftMargin: gridMargin
         width: Math.min(model.count, Math.floor(parent.width/cellWidth))*cellWidth
         height: parent.height
 
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 20
 
-        cellWidth: albumSize+albumSpacing
+        cellWidth: albumSize + albumSpacing
         cellHeight:  parseInt(albumSize+(albumSize*0.6))
+
         focus: true
         model: gridModel
+
         highlight: Rectangle
         {
             id: highlight
-            width: albumSize;
-            height: albumSize;
+            width: albumSize
+            height: albumSize
             color: "lightsteelblue"
             radius: borderRadius
         }
 
-        onWidthChanged:
-        {
-//            var amount = parseInt(grid.width/(albumSize+albumSpacing),10)
-//            var leftSpace = parseInt(grid.width-(amount*albumSize), 10)
-//            var size = parseInt(albumSize+(parseInt(leftSpace/amount, 10)), 10)
+        //        onWidthChanged:
+        //        {
+        //            var amount = parseInt(grid.width/(albumSize+albumSpacing),10)
+        //            var leftSpace = parseInt(grid.width-(amount*albumSize), 10)
+        //            var size = parseInt(albumSize+(parseInt(leftSpace/amount, 10)), 10)
 
-//            size = size > albumSize+albumSpacing ? size : albumSize+albumSpacing
+        //            size = size > albumSize+albumSpacing ? size : albumSize+albumSpacing
 
-//            grid.cellWidth = size
-//            //            grid.cellHeight = size
-
-//            console.log(parseInt(size,10))
-        }
+        //            grid.cellWidth = size
+        //            //            grid.cellHeight = size
+        //        }
 
         delegate: BabeAlbum
         {
             id: delegate
-            albumSize: albumSize
-            borderRadius: borderRadius
 
             Connections
             {
@@ -74,5 +72,11 @@ Pane
             }
         }
 
+        ScrollBar.vertical: ScrollBar
+        {
+        }
+
+
     }
+
 }

@@ -81,6 +81,7 @@ BabeGrid
                 onRowClicked:
                 {
                     albumsView.rowClicked(model.get(index))
+                    drawer.close()
                 }
             }
 

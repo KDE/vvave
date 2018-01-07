@@ -12,7 +12,6 @@ Item
 
     width: albumSize
     height: parseInt(albumSize+(albumSize*0.4))
-
     Rectangle
     {
         anchors.fill: parent
@@ -35,7 +34,7 @@ Item
 
                 fillMode: Image.PreserveAspectFit
 
-                source: artwork || "qrc:/assets/cover.png"
+                source: (artwork && artwork !== "none")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
                 layer.enabled: true
                 layer.effect: OpacityMask
                 {
@@ -62,6 +61,7 @@ Item
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.leftMargin: 5
+            Layout.topMargin: 5
 
             Label
             {

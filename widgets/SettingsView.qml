@@ -48,7 +48,7 @@ Pane
             anchors.fill: parent
             width: parent.width
             height: parent.height
-
+            clip: true
             ListModel
             {
                 id: listModel
