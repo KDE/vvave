@@ -71,7 +71,7 @@ Pane
             }
         }
 
-        ScrollBar.vertical: ScrollBar{}
+//        ScrollBar.vertical: ScrollBar{}
     }
 
 }

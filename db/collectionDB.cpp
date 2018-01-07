@@ -759,7 +759,7 @@ int CollectionDB::getTrackStars(const QString &path)
     return stars;
 }
 
-int CollectionDB::getTrackBabe(const QString &path)
+bool CollectionDB::getTrackBabe(const QString &path)
 {
     int babe = 0;
     auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::BABE],
@@ -769,7 +769,7 @@ int CollectionDB::getTrackBabe(const QString &path)
     for(auto track : query)
         babe = track[KEY::BABE].toInt();
 
-    return babe;
+    return babe == 0 ? false : true ;
 }
 
 QString CollectionDB::getArtistArt(const QString &artist)

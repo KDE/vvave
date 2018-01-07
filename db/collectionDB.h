@@ -43,7 +43,7 @@ public:
     void addTrack(const BAE::DB &track);
     bool updateTrack(const BAE::DB &track);
     bool rateTrack(const QString &path, const int &value);
-    bool babeTrack(const QString &path, const bool &value);
+    Q_INVOKABLE bool babeTrack(const QString &path, const bool &value);
     bool moodTrack(const QString &path, const QString &value);
     bool artTrack(const QString &path, const QString &value);
     bool lyricsTrack(const BAE::DB &track, const QString &value);
@@ -82,7 +82,7 @@ public:
     QString getTrackArt(const QString &path);
     QStringList getTrackTags(const QString &path);
     int getTrackStars(const QString &path);
-    int getTrackBabe(const QString &path);
+    Q_INVOKABLE bool getTrackBabe(const QString &path);
     Q_INVOKABLE QString getArtistArt(const QString &artist);
     QString getArtistWiki(const QString &artist);
     //    QStringList getArtistTags(const QString &artist);

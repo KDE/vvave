@@ -21,6 +21,10 @@ Kirigami.ApplicationWindow
     height: 500
     title: qsTr("Babe")
 
+
+    SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
+
+
     property int columnWidth: Kirigami.Units.gridUnit * 13
     property int currentView : 0
     property int iconSize
@@ -28,11 +32,52 @@ Kirigami.ApplicationWindow
     property var currentTrack
     property string currentArtwork
 
-
-    signal appendTrack(var track)
+//    minimumWidth: columnWidth
 
     pageStack.defaultColumnWidth: columnWidth
     pageStack.initialPage: [playlistPage, views]
+
+    function play(track)
+    {
+        Player.playTrack(track)
+        playIcon.text = MdiFont.Icon.pause
+
+        if(con.getTrackBabe(currentTrack.url))
+        {
+            babeBtnIcon.text = MdiFont.Icon.heartOutline
+            babeBtnIcon.color = "#E91E63"
+
+        }else
+        {
+            babeBtnIcon.text = MdiFont.Icon.heartOutline
+            babeBtnIcon.color = myPalette.dark
+        }
+
+    }
+
+    function pause()
+    {
+        Player.pauseTrack()
+        playIcon.text= MdiFont.Icon.play
+    }
+
+    function resume()
+    {
+        Player.resumeTrack()
+        playIcon.text= MdiFont.Icon.pause
+    }
+
+    function appendTrack(track)
+    {
+        var empty = mainPlaylistTable.count
+        mainPlaylistTable.model.append(track)
+        mainPlaylistTable.positionViewAtEnd()
+
+        if(empty === 0 && mainPlaylistTable.count>0)
+        {
+            play(mainPlaylistTable.model.get(0))
+        }
+    }
 
     Connections
     {
@@ -55,10 +100,7 @@ Kirigami.ApplicationWindow
         onSettingsViewClicked: currentView = 4
     }
 
-    onAppendTrack:
-    {
-        mainPlaylistTable.model.append(track)
-    }
+
 
     Page
     {
@@ -107,7 +149,6 @@ Kirigami.ApplicationWindow
                     anchors.centerIn: parent
                     source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
                     fillMode: Image.PreserveAspectFit
-
                 }
             }
 
@@ -145,6 +186,33 @@ Kirigami.ApplicationWindow
                     Row
                     {
                         anchors.centerIn: parent
+
+                        ToolButton
+                        {
+                            Icon
+                            {
+                                id: babeBtnIcon
+                                text: MdiFont.Icon.heartOutline
+                                color: myPalette.dark
+                            }
+
+                            onClicked:
+                            {
+                                if(con.getTrackBabe(currentTrack.url))
+                                {
+                                    con.babeTrack(currentTrack.url, false)
+                                    babeBtnIcon.text = MdiFont.Icon.heartOutline
+                                    babeBtnIcon.color = myPalette.dark
+
+                                }else
+                                {
+                                    con.babeTrack(currentTrack.url, true)
+                                    babeBtnIcon.text = MdiFont.Icon.heartOutline
+                                    babeBtnIcon.color = "#E91E63"
+                                }
+                            }
+                        }
+
                         ToolButton
                         {
                             id: previousBtn
@@ -154,25 +222,12 @@ Kirigami.ApplicationWindow
 
                         ToolButton
                         {
-                            id: babeBtn
-                            Icon{text: MdiFont.Icon.heartOutline}
-                        }
-
-                        ToolButton
-                        {
                             id: playBtn
                             Icon {id: playIcon; text: MdiFont.Icon.play }
                             onClicked:
                             {
-                                if(player.isPaused())
-                                {
-                                    Player.resumeTrack()
-                                    playIcon.text= MdiFont.Icon.pause
-                                }else
-                                {
-                                    Player.pauseTrack()
-                                    playIcon.text= MdiFont.Icon.play
-                                }
+                                if(player.isPaused()) resume()
+                                else pause()
                             }
                         }
 
@@ -182,6 +237,12 @@ Kirigami.ApplicationWindow
                             Icon{text: MdiFont.Icon.skipNext}
                             onClicked: Player.nextTrack()
 
+                        }
+
+                        ToolButton
+                        {
+                            id: shuffleBtn
+                            Icon{text: MdiFont.Icon.shuffle}
                         }
                     }
                 }
@@ -202,8 +263,8 @@ Kirigami.ApplicationWindow
                     height: parent.height
                     onRowClicked:
                     {
-                        Player.playTrack(model.get(index))
-                        playIcon.text = MdiFont.Icon.pause
+                        play(model.get(index))
+
                     }
                 }
             }
@@ -244,8 +305,7 @@ Kirigami.ApplicationWindow
                         mainPlaylistTable.clearTable()
                         for(var i in tracks)
                             appendTrack(tracks[i])
-                        Player.playTrack(mainPlaylistTable.model.get(0))
-                        playIcon.text= MdiFont.Icon.pause
+                        play(mainPlaylistTable.model.get(0))
                     }
                     onAppendAlbum:
                     {
@@ -263,8 +323,7 @@ Kirigami.ApplicationWindow
                         mainPlaylistTable.clearTable()
                         for(var i in tracks)
                             appendTrack(tracks[i])
-                        Player.playTrack(mainPlaylistTable.model.get(0))
-                        playIcon.text= MdiFont.Icon.pause
+                        play(mainPlaylistTable.model.get(0))
                     }
                     onAppendAlbum:
                     {
