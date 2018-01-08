@@ -18,6 +18,9 @@
 #include "../utils/bae.h"
 class FileLoader;
 class CollectionDB;
+class YouTube;
+class Socket;
+class Brain;
 
 using namespace BAE;
 
@@ -36,11 +39,16 @@ private slots:
     void on_remove_clicked();
 
 public slots:
+    void startBrainz();
     void populateDB(const QString &path);
 
 private:
     FileLoader *fileLoader;
     CollectionDB *connection;
+    Brain *brainDeamon;
+    YouTube *ytFetch;
+    Socket *babeSocket;
+    
     const QString notifyDir = BAE::NotifyDir;
 
     QString pathToRemove;
@@ -53,8 +61,9 @@ private:
 
 signals:
     void collectionPathChanged(QString newPath);
-    void refreshTables(const QMap<BAE::TABLE,bool> &reset);
+    void refreshTables(QVariantMap tables);
     void albumArtReady(const DB &album);
+    void brainFinished();
 
 };
 

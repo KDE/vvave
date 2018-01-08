@@ -20,6 +20,7 @@ ToolBar
     signal artistsViewClicked()
     signal playlistsViewClicked()
     signal settingsViewClicked()
+    signal playlistViewClicked()
 
 
     id: babeBar
@@ -35,6 +36,26 @@ ToolBar
     {
         anchors.fill: parent
 
+        ToolButton
+        {
+            id: playlistView
+            Icon
+            {
+                text: MdiFont.Icon.play
+                color: currentIndex === 0? accentColor : textColor
+                iconSize: size
+
+            }
+
+            onClicked: playlistViewClicked()
+
+            hoverEnabled: true
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered
+            ToolTip.text: qsTr("Playlist")
+        }
+
         Row
         {
             anchors.centerIn: parent
@@ -46,7 +67,7 @@ ToolBar
                 {
                     id: tracksIcon
                     text: MdiFont.Icon.musicNote
-                    color: currentIndex === 0? accentColor : textColor
+                    color: currentIndex === 1? accentColor : textColor
                     iconSize: size
 
                 }
@@ -67,7 +88,7 @@ ToolBar
                 {
                     id: albumsIcon
                     text: MdiFont.Icon.album
-                    color: currentIndex === 1? accentColor : textColor
+                    color: currentIndex === 2? accentColor : textColor
                     iconSize: size
 
                 }
@@ -89,7 +110,7 @@ ToolBar
                 {
                     id: artistsIcon
                     text: MdiFont.Icon.face
-                    color: currentIndex === 2? accentColor : textColor
+                    color: currentIndex === 3? accentColor : textColor
                     iconSize: size
 
                 }
@@ -110,7 +131,7 @@ ToolBar
                 {
                     id: playlistsIcon
                     text: MdiFont.Icon.libraryMusic
-                    color: currentIndex === 3? accentColor : textColor
+                    color: currentIndex === 4? accentColor : textColor
                     iconSize: size
 
                 }
@@ -132,7 +153,7 @@ ToolBar
                 {
                     id: settingsIcon
                     text: MdiFont.Icon.settings
-                    color: currentIndex === 4? accentColor : textColor
+                    color: currentIndex === 5? accentColor : textColor
                     iconSize: size
 
                 }

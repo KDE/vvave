@@ -1,23 +1,19 @@
 #ifndef TAGINFO_H
 #define TAGINFO_H
-#include <taglib/taglib.h>
 #include <taglib/tag.h>
 #include <taglib/fileref.h>
-#include <taglib/mp4properties.h>
-#include <taglib/mp4tag.h>
-#include <taglib/mp4file.h>
-#include <taglib/mp4coverart.h>
-#include <taglib/id3v2tag.h>
-
 #include <QString>
 #include <QByteArray>
+#include <QObject>
 
-class TagInfo
+class TagInfo : public QObject
 {
 
+    Q_OBJECT
 public:
-    TagInfo(const QString &url);
+    TagInfo(QObject *parent = nullptr);
     ~TagInfo();
+    void feed(const QString &url);
     QString getAlbum() const;
     QString getTitle() const;
     QString getArtist() const;

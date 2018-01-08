@@ -8,7 +8,7 @@ import "../utils"
 
 BabeGrid
 {
-    id:artistsView
+    id:artistsViewGrid
     visible: true
     albumSize: 150
     borderRadius: 20
@@ -50,7 +50,7 @@ BabeGrid
 
                         onClicked:
                         {
-                            var data = artistsView.gridModel.get(artistsView.grid.currentIndex)
+                            var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
 
                             var query = "select * from tracks where artist = \""+data.artist+"\""
                             var tracks = con.get(query)
@@ -69,7 +69,7 @@ BabeGrid
 
                         onClicked:
                         {
-                            var data = artistsView.gridModel.get(artistsView.grid.currentIndex)
+                            var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
                             var query = "select * from tracks where artist = \""+data.artist+"\""
                             var tracks = con.get(query)
                             appendAlbum(tracks)
@@ -120,14 +120,11 @@ BabeGrid
                 trackNumberVisible: true
                 onRowClicked:
                 {
-                    artistsView.rowClicked(model.get(index))
+                    artistsViewGrid.rowClicked(model.get(index))
                     drawer.close()
                 }
-
             }
-
         }
-
     }
 
     onAlbumCoverClicked:
@@ -135,7 +132,6 @@ BabeGrid
         artistTitle.text = artist
         drawer.open()
         drawerList.clearTable()
-
 
         var query = "select * from tracks where artist = \""+artist+"\" order by album, track"
         var map = con.get(query)
@@ -145,13 +141,13 @@ BabeGrid
 
     }
 
-    Component.onCompleted:
+    function populate()
     {
         var map = con.get("select * from artists order by artist asc")
         for(var i in map)
-        {
             gridModel.append(map[i])
-        }
     }
+
+    Component.onCompleted: populate()
 
 }

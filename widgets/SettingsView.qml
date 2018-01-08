@@ -6,7 +6,6 @@ import Qt.labs.platform 1.0
 import "../utils/Icons.js" as MdiFont
 import "../utils"
 
-
 Pane
 {
     id: settingsView
@@ -153,8 +152,8 @@ Pane
                     ListElement { size: 24 }
                     ListElement { size: 32 }
                 }
-                currentIndex:  1
 
+                currentIndex:  1
                 onCurrentIndexChanged: iconSizeChanged(sizes.get(currentIndex).size )
             }
         }

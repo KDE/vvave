@@ -20,13 +20,18 @@
 
 using namespace BAE;
 
-TagInfo::TagInfo(const QString &url)
+TagInfo::TagInfo(QObject *parent) : QObject(parent)
+{}
+
+
+TagInfo::~TagInfo(){};
+
+void TagInfo::feed(const QString &url)
 {
     this->file = TagLib::FileRef(url.toUtf8());
     this->path = url;
+    qDebug()<<"FF<<"<<path;
 }
-
-TagInfo::~TagInfo(){}
 
 QString TagInfo::getAlbum() const
 {
@@ -72,7 +77,8 @@ uint TagInfo::getYear() const
 
 int TagInfo::getDuration() const
 {
-    return file.audioProperties()->lengthInSeconds();
+    return 0;
+    /*file.audioProperties()->lengthInSeconds();*/
 }
 
 QString TagInfo::getComment() const

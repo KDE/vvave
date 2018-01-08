@@ -126,7 +126,7 @@ signals:
     void albumsCleaned(const int &amount);
     void artistsCleaned(const int &amount);
 
-    void qmlSignal(QString str);
+    void initDB(QString musicPath);
 };
 
 #endif // COLLECTION_H

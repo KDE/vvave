@@ -18,8 +18,6 @@
 
 #include "youtube.h"
 #include "../../pulpo/pulpo.h"
-#include "../../kde/notify.h"
-#include "../../views/babewindow.h"
 #include "../../db/collectionDB.h"
 
 using namespace BAE;
@@ -72,7 +70,7 @@ void YouTube::fetch(const QString &json)
             process->deleteLater();
         });
 
-        BabeWindow::nof->notify("Song received!", infoMap[KEY::TITLE]+ " - "+ infoMap[KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
+//        BabeWindow::nof->notify("Song received!", infoMap[KEY::TITLE]+ " - "+ infoMap[KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
         auto command = ydl;
 
         command = command.replace("$$$",infoMap[KEY::URL])+" "+infoMap[KEY::ID];
@@ -83,6 +81,7 @@ void YouTube::fetch(const QString &json)
 
 void YouTube::processFinished_totally(const int &state,const DB &info,const QProcess::ExitStatus &exitStatus)
 {
+
     auto track = info;
 
     auto doneId = track[KEY::ID];
@@ -94,12 +93,13 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
     qDebug()<<track[KEY::ID]<<track[KEY::TITLE]<<track[KEY::ARTIST]<<track[KEY::PLAYLIST]<<track[KEY::URL];
 
     /*here get metadata*/
-
+ TagInfo tag;
     if(exitStatus == QProcess::NormalExit)
     {
+
         if(BAE::fileExists(file))
         {
-            TagInfo tag(file);
+            tag.feed(file);
             tag.setArtist(track[KEY::ARTIST]);
             tag.setTitle(track[KEY::TITLE]);
             tag.setAlbum(track[KEY::ALBUM]);
@@ -128,7 +128,8 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
                     qDebug()<<res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toString();
 
                     qDebug()<<track[KEY::URL];
-                    TagInfo tag(track[KEY::URL]);
+                    TagInfo tag;
+                    tag.feed(track[KEY::URL]);
 
                     if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString().isEmpty())
                         tag.setAlbum(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString());
@@ -155,15 +156,15 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
     }
 
 
-    TagInfo data(file);
-    auto album = BAE::fixString(data.getAlbum());
-    auto trackNum = data.getTrack();
-    auto title = BAE::fixString(data.getTitle()); /* to fix*/
-    auto artist = BAE::fixString(data.getArtist());
-    auto genre = data.getGenre();
+    tag.feed(file);
+    auto album = BAE::fixString(tag.getAlbum());
+    auto trackNum = tag.getTrack();
+    auto title = BAE::fixString(tag.getTitle()); /* to fix*/
+    auto artist = BAE::fixString(tag.getArtist());
+    auto genre = tag.getGenre();
     auto sourceUrl = QFileInfo(file).dir().path();
-    auto duration = data.getDuration();
-    auto year = data.getYear();
+    auto duration = tag.getDuration();
+    auto year = tag.getYear();
 
     qDebug()<<"FILE LOADER:"<< title << album << artist <<file;
 

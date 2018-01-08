@@ -76,7 +76,7 @@ public slots:
                 {
                     if(!con->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL],url))
                     {
-                        TagInfo info(url);
+                        info.feed(url);
                         auto album = BAE::fixString(info.getAlbum());
                         auto track= info.getTrack();
                         auto title = BAE::fixString(info.getTitle()); /* to fix*/
@@ -123,6 +123,7 @@ signals:
 
 private:
     QThread t;
+    TagInfo info;
     bool go = false;
     bool wait = true;
     QStringList queue;

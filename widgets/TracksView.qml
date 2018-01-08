@@ -4,16 +4,17 @@ import "../view_models"
 
 BabeTable
 {
-    id: tracksView
+    id: tracksViewTable
     trackNumberVisible: false
-   Component.onCompleted:
-   {
-       var map = con.get("select * from tracks")
-       for(var i in map)
-       {
-           tracksView.model.append(map[i])
-       }
-   }
+
+    function populate()
+    {
+        var map = con.get("select * from tracks")
+        for(var i in map)
+            tracksViewTable.model.append(map[i])
+    }
+
+    Component.onCompleted: populate()
 }
 
 

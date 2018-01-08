@@ -1,4 +1,5 @@
 #include "player.h"
+#include <QMediaMetaData>
 
 Player::Player(QObject *parent) : QObject(parent)
 {
@@ -13,8 +14,6 @@ void Player::source(const QString &url)
 {
     this->sourceurl = url;
     this->player->setMedia(QUrl::fromLocalFile(this->sourceurl));
-
-    qDebug()<<this->player->metaData("Title").toString();
 }
 
 void Player::play()

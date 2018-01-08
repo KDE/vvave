@@ -15,6 +15,17 @@ Pane
 
     id: gridPage
 
+    function clearGrid()
+    {
+        gridModel.clear()
+    }
+
+    BabeHolder
+    {
+        visible: grid.count === 0
+        message: "No albums..."
+    }
+
     ListModel {id: gridModel}
 
     GridView

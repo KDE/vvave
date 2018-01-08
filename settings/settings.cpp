@@ -17,16 +17,23 @@
 
 
 #include "settings.h"
-#include "ui_settings.h"
 #include "../db/collectionDB.h"
 #include "fileloader.h"
+#include "../utils/brain.h"
+#include "../services/local/socket.h"
+#include "../services/web/youtube.h"
 
 settings::settings(QObject *parent) : QObject(parent)
 {
 
     this->connection = new CollectionDB(this);
     this->fileLoader = new FileLoader;
-    /*LOAD SAVED SETTINGS*/
+    this->brainDeamon = new Brain;
+    
+    //    connect(connection, &CollectionDB::initDB, [this] ()
+    //    {
+    //        this->populateDB(BAE::MusicPath);
+    //    });
 
     qDebug() << "Getting collectionDB info from: " << BAE::CollectionDBPath;
     qDebug() << "Getting settings info from: " << BAE::SettingPath;
@@ -52,6 +59,19 @@ settings::settings(QObject *parent) : QObject(parent)
     if (!youtubeCache_dir.exists())
         youtubeCache_dir.mkpath(".");
 
+    if(!connection->check_existance(TABLEMAP[TABLE::SOURCES], KEYMAP[KEY::URL], BAE::MusicPath))
+        this->populateDB(BAE::MusicPath);
+
+    connect(this->brainDeamon, &Brain::finished, [this]()
+    {
+        emit this->brainFinished();
+    });
+
+    connect(this->brainDeamon, &Brain::done, [this](const TABLE type)
+    {
+        emit this->refreshTables({{BAE::TABLEMAP[type], true}});
+    });
+
 
     connect(this->fileLoader, &FileLoader::collectionSize, [this](int size)
     {
@@ -74,7 +94,11 @@ settings::settings(QObject *parent) : QObject(parent)
     connect(this->fileLoader, &FileLoader::finished,[this]()
     {
         this->collectionWatcher();
-        emit refreshTables({{TABLE::TRACKS, true},{TABLE::ALBUMS, false},{TABLE::ARTISTS, false},{TABLE::PLAYLISTS, true}});
+        emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
+                            {BAE::TABLEMAP[TABLE::ALBUMS], true},
+                            {BAE::TABLEMAP[TABLE::ARTISTS], true},
+                            {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
+        this->startBrainz();
     });
 
     connect(this, &settings::collectionPathChanged, this, &settings::populateDB);
@@ -87,6 +111,7 @@ settings::~settings()
 {
     qDebug()<<"DELETING SETTINGS";
     delete fileLoader;
+    delete brainDeamon;
 }
 
 void settings::on_remove_clicked()
@@ -100,7 +125,10 @@ void settings::on_remove_clicked()
             this->dirs.clear();
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
-            emit refreshTables({{TABLE::TRACKS, true},{TABLE::ALBUMS, true},{TABLE::ARTISTS, true},{TABLE::PLAYLISTS, true}});
+            emit refreshTables({{TABLEMAP[TABLE::TRACKS], true},
+                                {TABLEMAP[TABLE::ALBUMS], true},
+                                {TABLEMAP[TABLE::ARTISTS], true},
+                                {TABLEMAP[TABLE::PLAYLISTS], true}});
         }
     }
 }
@@ -169,10 +197,15 @@ void settings::handleDirectoryChanged(const QString &dir)
 }
 
 void settings::checkCollection()
-{   
-
+{
     this->refreshCollectionPaths();
     this->collectionWatcher();
+    this->startBrainz();
+}
+
+void settings::startBrainz()
+{
+    this->brainDeamon->start();
 }
 
 void settings::populateDB(const QString &path)
@@ -182,8 +215,6 @@ void settings::populateDB(const QString &path)
     auto newPath = path;
 
     if(path.startsWith("file://"))
-    {
         newPath = newPath.replace("file://", "");
-        fileLoader->requestPath(newPath);
-    }
+    fileLoader->requestPath(newPath);
 }

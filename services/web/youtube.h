@@ -12,7 +12,6 @@
 #include <iostream>
 
 #include "../../utils/bae.h"
-#include "../../kde/notify.h"
 #include "../local/taginfo.h"
 
 
