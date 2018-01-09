@@ -10,7 +10,7 @@ ToolBar
     property alias babeBar : babeBar
     property string accentColor : "#E91E63"
     property string textColor : "#ffffff"
-    property string backgroundColor : "#31363b"    
+    property string backgroundColor : "#31363b"
     property int size
 
     property int currentIndex : 0
@@ -44,7 +44,6 @@ ToolBar
                 text: MdiFont.Icon.play
                 color: currentIndex === 0? accentColor : textColor
                 iconSize: size
-
             }
 
             onClicked: playlistViewClicked()
@@ -59,7 +58,6 @@ ToolBar
         Row
         {
             anchors.centerIn: parent
-
             ToolButton
             {
                 id: tracksView

@@ -49,6 +49,8 @@ private:
     YouTube *ytFetch;
     Socket *babeSocket;
     
+    bool brainzOn = false;
+
     const QString notifyDir = BAE::NotifyDir;
 
     QString pathToRemove;

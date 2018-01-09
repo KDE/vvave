@@ -34,10 +34,12 @@ ApplicationWindow
     property var currentTrack
     property string currentArtwork
 
+
     //    minimumWidth: columnWidth
 
     //    pageStack.defaultColumnWidth: columnWidth
     //    pageStack.initialPage: [playlistPage, views]
+
 
     function play(track)
     {
@@ -54,7 +56,6 @@ ApplicationWindow
             babeBtnIcon.text = MdiFont.Icon.heartOutline
             babeBtnIcon.color = myPalette.dark
         }
-
     }
 
     function pause()
@@ -77,12 +78,16 @@ ApplicationWindow
 
         if(empty === 0 && mainPlaylistTable.count>0)
         {
+            mainPlaylistTable.currentIndex = 0
             play(mainPlaylistTable.model.get(0))
         }
     }
 
-    onClosing: Player.savePlaylist()
-
+    onClosing:
+    {
+        Player.savePlaylist()
+        Player.savePlaylistPos()
+    }
 
     Connections
     {
@@ -96,12 +101,8 @@ ApplicationWindow
         target: set
         onRefreshTables:
         {
-            console.log(JSON.stringify(tables))
-
             tracksView.clearTable()
-
             albumsView.clearGrid()
-
             artistsView.clearGrid()
 
             tracksView.populate()
@@ -125,14 +126,12 @@ ApplicationWindow
         onSettingsViewClicked: currentView = 5
     }
 
-
-
     Page
     {
         id: views
         width: parent.width
         height: parent.height
-        //        clip: true
+        clip: true
 
         Column
         {
@@ -208,10 +207,7 @@ ApplicationWindow
                             visible: mainPlaylistTable.count>0
                             spacing: 0
 
-                            onMoved:
-                            {
-                                player.seek(player.duration() / 1000 * value);
-                            }
+                            onMoved: player.seek(player.duration() / 1000 * value);
                         }
 
                         Rectangle
@@ -305,27 +301,27 @@ ApplicationWindow
                                 id: mainPlaylistTable
                                 width: parent.width
                                 height: parent.height
-                                onRowClicked:
-                                {
-                                    play(model.get(index))
-                                }
-
+                                onRowClicked: play(model.get(index))
+                                holder.message: "Empty playlist..."
                                 Component.onCompleted:
                                 {
                                     var list = util.lastPlaylist()
-                                    for(var i in list)
+                                    var n = list.length
+                                    for(var i = 0; i < n; i++)
                                     {
                                         var track = con.get("select * from tracks where url = \""+list[i]+"\"")
                                         appendTrack(track[0])
                                     }
 
+//                                    var pos = util.lastPlaylistPos()
+//                                    console.log("POSSS:", pos)
+//                                    mainPlaylistTable.currentIndex = pos
+//                                    play(mainPlaylistTable.model.get(pos))
                                 }
                             }
                         }
                     }
                 }
-
-
 
                 TracksView
                 {
@@ -342,8 +338,13 @@ ApplicationWindow
                         mainPlaylistTable.clearTable()
                         for(var i in tracks)
                             appendTrack(tracks[i])
+
+                        mainPlaylistTable.currentIndex = 0
                         play(mainPlaylistTable.model.get(0))
+
+                        currentView = 0
                     }
+
                     onAppendAlbum:
                     {
                         for(var i in tracks)
@@ -361,8 +362,13 @@ ApplicationWindow
                         mainPlaylistTable.clearTable()
                         for(var i in tracks)
                             appendTrack(tracks[i])
+
+                        mainPlaylistTable.currentIndex = 0
                         play(mainPlaylistTable.model.get(0))
+
+                        currentView = 0
                     }
+
                     onAppendAlbum:
                     {
                         for(var i in tracks)
@@ -413,7 +419,5 @@ ApplicationWindow
                 }
             }
         }
-
-
     }
 }

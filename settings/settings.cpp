@@ -76,10 +76,10 @@ settings::settings(QObject *parent) : QObject(parent)
     connect(this->fileLoader, &FileLoader::collectionSize, [this](int size)
     {
         if(size>0)
+            this->brainzOn = true;
+        else
         {
-
-        }else
-        {
+            this->brainzOn = false;
             this->dirs.clear();
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
@@ -205,7 +205,8 @@ void settings::checkCollection()
 
 void settings::startBrainz()
 {
-    this->brainDeamon->start();
+    if(this->brainzOn)
+        this->brainDeamon->start();
 }
 
 void settings::populateDB(const QString &path)

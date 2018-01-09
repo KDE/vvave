@@ -664,7 +664,6 @@ MP4::Tag::title() const
 String
 MP4::Tag::artist() const
 {
-   debug("trying to get artist name");
   if(d->items.contains("\251ART"))
     return d->items["\251ART"].toStringList().toString(", ");
   return String::null;

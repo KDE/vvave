@@ -14,5 +14,16 @@ void Utils::savePlaylist(const QStringList &list)
 QStringList Utils::lastPlaylist()
 {
     return BAE::loadSettings("PLAYLIST","MAINWINDOW",{}).toStringList();
-
 }
+
+void Utils::savePlaylistPos(const int &pos)
+{
+    BAE::saveSettings("PLAYLIST_POS", pos, "MAINWINDOW");
+}
+
+int Utils::lastPlaylistPos()
+{
+    return BAE::loadSettings("PLAYLIST_POS","MAINWINDOW",QVariant(0)).toInt();
+}
+
+

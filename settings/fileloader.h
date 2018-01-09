@@ -66,10 +66,10 @@ public slots:
 
         } else if (QFileInfo(path).isFile()) urls<<path;
 
-        emit collectionSize(urls.size());
 
         if(urls.size()>0)
         {
+            int newTracks = 0;
             for(auto url : urls)
             {
                 if(go)
@@ -101,14 +101,15 @@ public slots:
                         };
 
                         this->con->addTrack(trackMap);
-
+                        newTracks++;
                         //                        emit trackReady(trackMap);
                         //                            while(this->wait){t.msleep(100);}
                         //                            this->wait=!this->wait;
                     }
-
                 }else break;
             }
+
+            emit collectionSize(newTracks);
         }
 
         this->t.msleep(100);

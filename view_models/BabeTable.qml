@@ -8,7 +8,7 @@ ListView
 
     property int currentRow : -1
     property bool trackNumberVisible
-
+    property alias holder : holder
     signal rowClicked(int index)
     signal rowPressed(int index)
 
@@ -33,11 +33,11 @@ ListView
         listModel.clear()
     }
 
-
-   BabeHolder
-   {
-       visible: list.count === 0
-   }
+    BabeHolder
+    {
+        id: holder
+        visible: list.count === 0
+    }
 
     Component
     {
@@ -50,14 +50,14 @@ ListView
             color: myPalette.highlight
             opacity: 0.2
             y: list.currentItem.y
-            Behavior on y
-            {
-                SpringAnimation
-                {
-                    spring: 3
-                    damping: 0.2
-                }
-            }
+//            Behavior on y
+//            {
+//                SpringAnimation
+//                {
+//                    spring: 3
+//                    damping: 0.2
+//                }
+//            }
         }
     }
 

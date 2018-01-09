@@ -29,18 +29,7 @@ TagInfo::~TagInfo(){};
 void TagInfo::feed(const QString &url)
 {
     this->path = url;
-    this->file = TagLib::FileRef(path.toUtf8());
-
-    qDebug()<<"READABLE"<<QFileInfo(path).isReadable();
-    qDebug()<<"IS FILE"<<QFileInfo(path).isFile();
-    qDebug()<<"WRITABLE"<<QFileInfo(path).isWritable();
-    qDebug()<<"BASENAME"<<QFileInfo(path).baseName();
-    qDebug()<<"READLINK"<<QFileInfo(path).readLink();
-    qDebug()<<"SUFIX"<<QFileInfo(path).suffix();
-    qDebug()<<"GROUP"<<QFileInfo(path).group();
-    qDebug()<<"TAG"<<QString::fromStdWString(file.tag()->artist().toWString());
-
-    qDebug()<<"FF<<"<<path;
+    this->file = TagLib::FileRef(path.toUtf8());   
 }
 
 QString TagInfo::getAlbum() const
