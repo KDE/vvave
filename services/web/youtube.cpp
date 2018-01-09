@@ -70,7 +70,7 @@ void YouTube::fetch(const QString &json)
             process->deleteLater();
         });
 
-//        BabeWindow::nof->notify("Song received!", infoMap[KEY::TITLE]+ " - "+ infoMap[KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
+        //        BabeWindow::nof->notify("Song received!", infoMap[KEY::TITLE]+ " - "+ infoMap[KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
         auto command = ydl;
 
         command = command.replace("$$$",infoMap[KEY::URL])+" "+infoMap[KEY::ID];
@@ -93,7 +93,7 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
     qDebug()<<track[KEY::ID]<<track[KEY::TITLE]<<track[KEY::ARTIST]<<track[KEY::PLAYLIST]<<track[KEY::URL];
 
     /*here get metadata*/
- TagInfo tag;
+    TagInfo tag;
     if(exitStatus == QProcess::NormalExit)
     {
 

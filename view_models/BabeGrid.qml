@@ -42,14 +42,15 @@ Pane
 
         focus: true
         model: gridModel
+        SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
 
 //        highlight: Rectangle
 //        {
 //            id: highlight
 //            width: albumSize
 //            height: albumSize
-//            color: "lightsteelblue"
-//            radius: borderRadius
+//            color: myPalette.highlight
+//            radius: 4
 //        }
 
         //        onWidthChanged:

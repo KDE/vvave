@@ -10,8 +10,10 @@ Item
     property int borderRadius : 4
     property string fillColor: "#31363b"
 
+    id: root
+
     width: albumSize
-    height: parseInt(albumSize+(albumSize*0.4))
+    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
 
     DropShadow
     {
@@ -49,23 +51,23 @@ Item
                 fillMode: Image.PreserveAspectFit
 
                 source: (artwork.length>0 && artwork !== "none")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
-                layer.enabled: true
-                layer.effect: OpacityMask
-                {
-                    maskSource: Item
-                    {
-                        width: img.width
-                        height: img.height
-                        Rectangle
-                        {
-                            anchors.centerIn: parent
-                            width: img.adapt ? img.width : Math.min(img.width, img.height)
-                            height: img.adapt ? img.height : width
-                            radius: borderRadius
-                            //                    radius: Math.min(width, height)
-                        }
-                    }
-                }
+//                layer.enabled: true
+//                layer.effect: OpacityMask
+//                {
+//                    maskSource: Item
+//                    {
+//                        width: img.width
+//                        height: img.height
+//                        Rectangle
+//                        {
+//                            anchors.centerIn: parent
+//                            width: img.adapt ? img.width : Math.min(img.width, img.height)
+//                            height: img.adapt ? img.height : width
+//                            radius: borderRadius
+//                            //                    radius: Math.min(width, height)
+//                        }
+//                    }
+//                }
             }
         }
 
@@ -124,4 +126,3 @@ Item
 
     }
 }
-

@@ -59,8 +59,8 @@ settings::settings(QObject *parent) : QObject(parent)
     if (!youtubeCache_dir.exists())
         youtubeCache_dir.mkpath(".");
 
-    if(!connection->check_existance(TABLEMAP[TABLE::SOURCES], KEYMAP[KEY::URL], BAE::MusicPath))
-        this->populateDB(BAE::MusicPath);
+    //    if(!connection->check_existance(TABLEMAP[TABLE::SOURCES], KEYMAP[KEY::URL], BAE::MusicPath))
+    this->populateDB(BAE::MusicPath);
 
     connect(this->brainDeamon, &Brain::finished, [this]()
     {

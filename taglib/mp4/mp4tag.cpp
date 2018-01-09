@@ -655,6 +655,7 @@ MP4::Tag::saveExisting(ByteVector &data, AtomList &path)
 String
 MP4::Tag::title() const
 {
+
   if(d->items.contains("\251nam"))
     return d->items["\251nam"].toStringList().toString(", ");
   return String::null;
@@ -663,6 +664,7 @@ MP4::Tag::title() const
 String
 MP4::Tag::artist() const
 {
+   debug("trying to get artist name");
   if(d->items.contains("\251ART"))
     return d->items["\251ART"].toStringList().toString(", ");
   return String::null;
