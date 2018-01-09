@@ -25,7 +25,7 @@ ApplicationWindow
     SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
 
 
-//    property int columnWidth: Kirigami.Units.gridUnit * 13
+    //    property int columnWidth: Kirigami.Units.gridUnit * 13
     property int columnWidth: 200
 
     property int currentView : 0
@@ -36,8 +36,8 @@ ApplicationWindow
 
     //    minimumWidth: columnWidth
 
-//    pageStack.defaultColumnWidth: columnWidth
-//    pageStack.initialPage: [playlistPage, views]
+    //    pageStack.defaultColumnWidth: columnWidth
+    //    pageStack.initialPage: [playlistPage, views]
 
     function play(track)
     {
@@ -80,6 +80,9 @@ ApplicationWindow
             play(mainPlaylistTable.model.get(0))
         }
     }
+
+    onClosing: Player.savePlaylist()
+
 
     Connections
     {
@@ -129,7 +132,7 @@ ApplicationWindow
         id: views
         width: parent.width
         height: parent.height
-//        clip: true
+        //        clip: true
 
         Column
         {
@@ -148,13 +151,13 @@ ApplicationWindow
                 {
                     id: playlistPage
 
-//                    Component.onCompleted:
-//                    {
-//                        if(mainPlaylistTable.count>0)
-//                            root.width = columnWidth
-//                        else
-//                            root.width = columnWidth*3
-//                    }
+                    //                    Component.onCompleted:
+                    //                    {
+                    //                        if(mainPlaylistTable.count>0)
+                    //                            root.width = columnWidth
+                    //                        else
+                    //                            root.width = columnWidth*3
+                    //                    }
 
                     GridLayout
                     {
@@ -305,6 +308,16 @@ ApplicationWindow
                                 onRowClicked:
                                 {
                                     play(model.get(index))
+                                }
+
+                                Component.onCompleted:
+                                {
+                                    var list = util.lastPlaylist()
+                                    for(var i in list)
+                                    {
+                                        var track = con.get("select * from tracks where url = \""+list[i]+"\"")
+                                        appendTrack(track[0])
+                                    }
 
                                 }
                             }

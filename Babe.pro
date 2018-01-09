@@ -195,6 +195,7 @@ SOURCES += main.cpp \
         taglib/fileref.cpp \
         taglib/tag.cpp \
         taglib/tagunion.cpp \
+    utils/utils.cpp
 
 RESOURCES += qml.qrc
 
@@ -336,7 +337,8 @@ HEADERS += \
         taglib/taglib_export.h \
         taglib/tagunion.h \
         taglib/config.h \
-        taglib/taglib_config.h
+        taglib/taglib_config.h \
+    utils/utils.h
 
 #unix:!macx: LIBS += -L$$PWD/3rdparty/taglib/taglib/ -ltag
 

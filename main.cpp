@@ -4,6 +4,7 @@
 #include <QApplication>
 #include "db/collectionDB.h"
 #include "utils/bae.h"
+#include "utils/utils.h"
 #include "settings/settings.h"
 #include "services/local/player.h"
 #include <QLibrary>
@@ -25,10 +26,12 @@ int main(int argc, char *argv[])
     CollectionDB con;
     settings settings;
     Player player;
+    Utils util;
 
     context->setContextProperty("con", &con);
     context->setContextProperty("set", &settings);
     context->setContextProperty("player", &player);
+    context->setContextProperty("util", &util);
 
 //#ifdef Q_OS_ANDROID
 //    KirigamiPlugin::getInstance().registerTypes();

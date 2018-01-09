@@ -31,3 +31,15 @@ function previousTrack()
     mainPlaylistTable.currentIndex = previous
     playTrack(mainPlaylistTable.model.get(previous))
 }
+
+function savePlaylist()
+{
+    var list = []
+    var n =  mainPlaylistTable.count
+    for(var i=0 ; i<n; i++)
+     {
+        var url = mainPlaylistTable.model.get(i).url
+        list.push(url)
+    }
+    util.savePlaylist(list)
+}
