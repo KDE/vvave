@@ -11,7 +11,7 @@ ToolBar
     property string accentColor : "#E91E63"
     property string textColor : "#ffffff"
     property string backgroundColor : "#31363b"
-    property int size
+    property int size //icon size
 
     property int currentIndex : 0
 
@@ -88,7 +88,6 @@ ToolBar
                     text: MdiFont.Icon.album
                     color: currentIndex === 2? accentColor : textColor
                     iconSize: size
-
                 }
 
                 onClicked: albumsViewClicked()

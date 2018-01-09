@@ -34,6 +34,7 @@ ApplicationWindow
     property var currentTrack
     property string currentArtwork
 
+    property bool shuffle : false
 
     //    minimumWidth: columnWidth
 
@@ -282,7 +283,9 @@ ApplicationWindow
                                     ToolButton
                                     {
                                         id: shuffleBtn
-                                        Icon{text: MdiFont.Icon.shuffle}
+                                        Icon{text: shuffle ? MdiFont.Icon.shuffle : MdiFont.Icon.shuffleDisabled}
+
+                                        onClicked: shuffle = shuffle ? false : true
                                     }
                                 }
                             }
