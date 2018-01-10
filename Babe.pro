@@ -9,8 +9,6 @@ QT       += xml
 CONFIG += c++11
 
 include(android-openssl.pri)
-
-
 #android: {
 #    include(3rdparty/kirigami/kirigami.pri)
 #}
@@ -67,10 +65,6 @@ INCLUDEPATH += taglib/toolkit
 INCLUDEPATH += taglib/trueaudio
 INCLUDEPATH += taglib/wavpack
 INCLUDEPATH += taglib/xm
-
-#unix:!macx: LIBS += -L$$PWD/3rdparty/taglib-1.11.1/taglib/ -ltag
-#INCLUDEPATH += $$PWD/3rdparty/taglib-1.11.1/taglib/Headers
-#DEPENDPATH += $$PWD/3rdparty/taglib-1.11.1/taglib/Headers
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -210,9 +204,11 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 n
+
 DISTFILES += \
     db/script.sql \
-    android-openssl.pri
+    android-openssl.pri \
+#    3rdparty/kirigami/kirigami.pri
 
 
 HEADERS += \

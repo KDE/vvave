@@ -9,10 +9,9 @@ ToolBar
 {
     property alias babeBar : babeBar
     property string accentColor : "#E91E63"
-    property string textColor : "#ffffff"
-    property string backgroundColor : "#31363b"
+    property string textColor : util.foregroundColor()
+    property string backgroundColor : util.backgroundColor()
     property int size //icon size
-
     property int currentIndex : 0
 
     signal tracksViewClicked()

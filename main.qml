@@ -55,7 +55,7 @@ ApplicationWindow
         }else
         {
             babeBtnIcon.text = MdiFont.Icon.heartOutline
-            babeBtnIcon.color = myPalette.dark
+            babeBtnIcon.color = babeBtnIcon.defaultColor
         }
     }
 
@@ -234,7 +234,7 @@ ApplicationWindow
                                         {
                                             id: babeBtnIcon
                                             text: MdiFont.Icon.heartOutline
-                                            color: myPalette.dark
+                                            color: defaultColor
                                         }
 
                                         onClicked:
@@ -243,7 +243,7 @@ ApplicationWindow
                                             {
                                                 con.babeTrack(currentTrack.url, false)
                                                 babeBtnIcon.text = MdiFont.Icon.heartOutline
-                                                babeBtnIcon.color = myPalette.dark
+                                                babeBtnIcon.color = babeBtnIcon.defaultColor
 
                                             }else
                                             {
@@ -285,7 +285,7 @@ ApplicationWindow
                                         id: shuffleBtn
                                         Icon{text: shuffle ? MdiFont.Icon.shuffle : MdiFont.Icon.shuffleDisabled}
 
-                                        onClicked: shuffle = shuffle ? false : true
+                                        onClicked: shuffle = !shuffle
                                     }
                                 }
                             }

@@ -47,7 +47,7 @@ ListView
             width: list.width
             height: list.currentItem.height
 
-            color: myPalette.highlight
+            color: util.hightlightColor() || myPalette.highlight
             opacity: 0.2
             y: list.currentItem.y
 //            Behavior on y

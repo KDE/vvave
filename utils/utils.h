@@ -14,6 +14,11 @@ public:
     Q_INVOKABLE static void savePlaylistPos(const int &pos);
     Q_INVOKABLE static int lastPlaylistPos();
 
+    Q_INVOKABLE static QString backgroundColor();
+    Q_INVOKABLE static QString foregroundColor();
+    Q_INVOKABLE static QString hightlightColor();
+
+
 
 };
 

@@ -21,8 +21,8 @@ function resumeTrack()
 function nextTrack()
 {
     var next
-
-    if(shuffle)
+    console.log("shuffle<<", root.shuffle)
+    if(root.shuffle)
         next = shuffle()
     else
         next = mainPlaylistTable.currentIndex+1 >= mainPlaylistTable.count? 0 : mainPlaylistTable.currentIndex+1
