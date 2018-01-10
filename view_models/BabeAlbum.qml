@@ -7,9 +7,10 @@ Item
 {
     signal albumClicked(int index)
     property int albumSize : 150
-    property int borderRadius : 4
-    property string fillColor: "#31363b"
-
+    property int borderRadius : 2
+    property string fillColor: util.midColor()
+    property string textColor: util.foregroundColor()
+    property int fontSize :Qt.platform.os === "android"? 12 : 10
     id: root
 
     width: albumSize
@@ -17,14 +18,14 @@ Item
 
     DropShadow
     {
-           anchors.fill: card
-           horizontalOffset: 3
-           verticalOffset: 3
-           radius: 8.0
-           samples: 17
-           color: "#80000000"
-           source: card
-       }
+        anchors.fill: card
+        horizontalOffset: 3
+        verticalOffset: 3
+        radius: 8.0
+        samples: 17
+        color: "#80000000"
+        source: card
+    }
 
 
     Rectangle
@@ -33,7 +34,6 @@ Item
         anchors.fill: parent
         color: fillColor
         radius: borderRadius
-        border.color: "#222"
     }
 
     ColumnLayout
@@ -51,23 +51,23 @@ Item
                 fillMode: Image.PreserveAspectFit
 
                 source: (artwork.length>0 && artwork !== "none")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
-//                layer.enabled: true
-//                layer.effect: OpacityMask
-//                {
-//                    maskSource: Item
-//                    {
-//                        width: img.width
-//                        height: img.height
-//                        Rectangle
-//                        {
-//                            anchors.centerIn: parent
-//                            width: img.adapt ? img.width : Math.min(img.width, img.height)
-//                            height: img.adapt ? img.height : width
-//                            radius: borderRadius
-//                            //                    radius: Math.min(width, height)
-//                        }
-//                    }
-//                }
+                //                layer.enabled: true
+                //                layer.effect: OpacityMask
+                //                {
+                //                    maskSource: Item
+                //                    {
+                //                        width: img.width
+                //                        height: img.height
+                //                        Rectangle
+                //                        {
+                //                            anchors.centerIn: parent
+                //                            width: img.adapt ? img.width : Math.min(img.width, img.height)
+                //                            height: img.adapt ? img.height : width
+                //                            radius: borderRadius
+                //                            //                    radius: Math.min(width, height)
+                //                        }
+                //                    }
+                //                }
             }
         }
 
@@ -85,9 +85,9 @@ Item
                 text:  typeof album === 'undefined'  ? artist : album
                 visible: true
                 elide: Text.ElideRight
-                font.pointSize: 10
+                font.pointSize: fontSize
                 font.bold: true
-                color: "white"
+                color: textColor
                 lineHeight: 0.7
             }
 
@@ -106,9 +106,10 @@ Item
                 width: parent.width
                 text: typeof album === 'undefined' ? "" : artist
                 visible: typeof album === 'undefined'? false : true
+                horizontalAlignment : typeof album === 'undefined'? Qt.AlignHCenter : Qt.AlignLeft
                 elide: Text.ElideRight
-                font.pointSize: 9
-                color: "white"
+                font.pointSize: fontSize-1
+                color: textColor
 
             }
         }
@@ -120,7 +121,6 @@ Item
         onClicked:
         {
             parent.GridView.view.currentIndex = index
-            console.log(index)
             albumClicked(index)
         }
 

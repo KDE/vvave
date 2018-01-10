@@ -35,6 +35,7 @@ BabeGrid
                 width: parent.width
                 height: 48
                 z: 1
+                color: util.midColor()
 
                 Row
                 {
@@ -86,7 +87,7 @@ BabeGrid
                         font.pointSize: 12
                         font.bold: true
                         lineHeight: 0.7
-
+                        color: util.foregroundColor()
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment:  Text.AlignVCenter
                     }

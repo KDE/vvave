@@ -6,7 +6,7 @@ ItemDelegate
 {
     id: delegate
     signal rowSelected(int index)
-
+property string textColor: util.foregroundColor()
     property bool numberVisible : false
     checkable: true
 
@@ -32,6 +32,7 @@ ItemDelegate
             elide: Text.ElideRight
 
             font.pointSize: 10
+            color: textColor
 
         }
 
@@ -50,6 +51,7 @@ ItemDelegate
             elide: Text.ElideRight
 
             font.pointSize: 10
+            color: textColor
 
         }
 
@@ -66,6 +68,7 @@ ItemDelegate
             font.bold: false
             elide: Text.ElideRight
             font.pointSize: 9
+            color: textColor
 
         }
     }

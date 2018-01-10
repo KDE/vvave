@@ -3,9 +3,9 @@ import QtQuick 2.3
 Text
 {
     id: text
-    property string iconColor
+    property string iconColor: util.foregroundColor()
     property int iconSize
-    readonly property string defaultColor : "#333"
+    readonly property string defaultColor : iconColor
 
     font.family: "Material Design Icons"
     font.pixelSize: iconSize || 24

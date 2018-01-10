@@ -17,6 +17,8 @@ public:
     Q_INVOKABLE static QString backgroundColor();
     Q_INVOKABLE static QString foregroundColor();
     Q_INVOKABLE static QString hightlightColor();
+    Q_INVOKABLE static QString midColor();
+    Q_INVOKABLE static QString altColor();
 
 
 

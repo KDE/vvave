@@ -39,6 +39,13 @@ ListView
         visible: list.count === 0
     }
 
+    Rectangle
+    {
+        anchors.fill: parent
+        color: util.altColor()
+        z: -999
+    }
+
     Component
     {
         id: highlight

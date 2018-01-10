@@ -22,7 +22,7 @@ GridLayout
         width:parent.width
         height: parent.height
         Layout.row: 1
-
+        color: util.altColor()
         Image
         {
             id: imageHolder
@@ -54,6 +54,7 @@ GridLayout
             font.bold: true
             horizontalAlignment: Qt.AlignHCenter
             elide: Text.ElideRight
+            color: util.foregroundColor()
         }
     }
 

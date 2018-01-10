@@ -144,13 +144,25 @@ ApplicationWindow
                 id: swipeView
                 width: parent.width
                 height: parent.height - searchBox.height
-
+                Component.onCompleted:
+                {
+                    if(Qt.platform.os === "linux")
+                        contentItem.interactive = false
+                    else if(Qt.platform.os === "android")
+                        contentItem.interactive = true
+                }
                 currentIndex: currentView
 
                 Item
                 {
                     id: playlistPage
 
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: util.altColor()
+                        z: -999
+                    }
                     //                    Component.onCompleted:
                     //                    {
                     //                        if(mainPlaylistTable.count>0)
@@ -200,6 +212,8 @@ ApplicationWindow
                         {
                             id: progressBar
                             Layout.fillWidth: true
+                            Layout.fillHeight: true
+
                             Layout.row: 3
                             height: 16
                             from: 0
@@ -209,6 +223,13 @@ ApplicationWindow
                             spacing: 0
 
                             onMoved: player.seek(player.duration() / 1000 * value);
+
+                            Rectangle
+                            {
+                                anchors.fill: parent
+                                color: util.midColor()
+                                z: -999
+                            }
                         }
 
                         Rectangle
@@ -218,6 +239,30 @@ ApplicationWindow
                             Layout.row: 2
                             height: 48
                             visible: mainPlaylistTable.count>0
+                            color: util.midColor()
+
+                            onYChanged:
+                            {
+                                if(playbackControls.y<columnWidth/4)
+                                {
+                                    coverPlay.visible= false
+                                    playbackControls.y = 0
+                                }else
+                                {
+                                    coverPlay.visible= true
+                                    playbackControls.y = columnWidth
+                                }
+                            }
+
+                            MouseArea
+                            {
+                                anchors.fill: parent
+                                drag.target: playbackControls
+                                drag.axis: Drag.YAxis
+                                drag.minimumY: 0
+                                drag.maximumY: columnWidth
+
+                            }
 
                             RowLayout
                             {
@@ -296,9 +341,8 @@ ApplicationWindow
                             id: mainPlaylist
                             Layout.fillWidth: true
                             Layout.fillHeight: true
-
                             Layout.row: 4
-
+                            color: "transparent"
                             BabeTable
                             {
                                 id: mainPlaylistTable
@@ -316,10 +360,10 @@ ApplicationWindow
                                         appendTrack(track[0])
                                     }
 
-//                                    var pos = util.lastPlaylistPos()
-//                                    console.log("POSSS:", pos)
-//                                    mainPlaylistTable.currentIndex = pos
-//                                    play(mainPlaylistTable.model.get(pos))
+                                    //                                    var pos = util.lastPlaylistPos()
+                                    //                                    console.log("POSSS:", pos)
+                                    //                                    mainPlaylistTable.currentIndex = pos
+                                    //                                    play(mainPlaylistTable.model.get(pos))
                                 }
                             }
                         }
@@ -397,7 +441,8 @@ ApplicationWindow
                 id: searchBox
                 width: parent.width
                 height: 32
-                color: "white"
+                color: util.midColor()
+
                 TextInput
                 {
                     id: searchInput
@@ -417,6 +462,7 @@ ApplicationWindow
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment:  Text.AlignVCenter
                         font.bold: true
+                        color: util.foregroundColor()
                     }
 
                 }

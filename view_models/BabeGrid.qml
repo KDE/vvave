@@ -15,6 +15,13 @@ Pane
 
     id: gridPage
 
+    background: Rectangle
+    {
+        anchors.fill: parent
+        color: util.altColor()
+        z: -999
+    }
+
     function clearGrid()
     {
         gridModel.clear()
