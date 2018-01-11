@@ -35,28 +35,34 @@ ToolBar
     {
         anchors.fill: parent
 
-        ToolButton
+        Row
         {
-            id: playlistView
-            Icon
+            Layout.alignment: Qt.AlignLeft
+
+            ToolButton
             {
-                text: MdiFont.Icon.play
-                color: currentIndex === 0? accentColor : textColor
-                iconSize: size
+                id: playlistView
+                Icon
+                {
+                    text: MdiFont.Icon.headphones
+                    color: currentIndex === 0? accentColor : textColor
+                    iconSize: size
+                }
+
+                onClicked: playlistViewClicked()
+
+                hoverEnabled: true
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered
+                ToolTip.text: qsTr("Playlist")
             }
-
-            onClicked: playlistViewClicked()
-
-            hoverEnabled: true
-            ToolTip.delay: 1000
-            ToolTip.timeout: 5000
-            ToolTip.visible: hovered
-            ToolTip.text: qsTr("Playlist")
         }
 
         Row
         {
-            anchors.centerIn: parent
+            Layout.alignment: Qt.AlignCenter
+
             ToolButton
             {
                 id: tracksView
@@ -140,6 +146,13 @@ ToolBar
                 ToolTip.visible: hovered
                 ToolTip.text: qsTr("Playlists")
             }
+
+
+        }
+
+        Row
+        {
+            Layout.alignment: Qt.AlignRight
 
             ToolButton
             {

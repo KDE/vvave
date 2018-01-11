@@ -26,7 +26,7 @@ ApplicationWindow
 
 
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
-    property int columnWidth: 200
+    property int columnWidth: 250
 
     property int currentView : 0
     property int iconSize
