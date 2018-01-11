@@ -59,6 +59,13 @@ ApplicationWindow
         }
     }
 
+    function stop()
+    {
+        mainPlaylistTable.clearTable()
+        Player.stop()
+        playIcon.text= MdiFont.Icon.play
+    }
+
     function pause()
     {
         Player.pauseTrack()
@@ -254,6 +261,13 @@ ApplicationWindow
                                 }
                             }
 
+                            PlaylistMenu
+                            {
+                               id: playlistMenu
+                               onClearOut: stop()
+                               onHideCover: coverPlay.visible = !coverPlay.visible
+                            }
+
                             MouseArea
                             {
                                 anchors.fill: parent
@@ -269,10 +283,15 @@ ApplicationWindow
                                 width: parent.width
                                 height: parent.height
                                 anchors.fill: parent
+                                ToolButton
+                                {
+                                    id: menuBtn
+                                    Icon {text: MdiFont.Icon.dotsVertical}
+                                    onClicked: playlistMenu.open()
+                                }
                                 Row
                                 {
                                     anchors.centerIn: parent
-
                                     ToolButton
                                     {
                                         Icon
@@ -332,7 +351,12 @@ ApplicationWindow
 
                                         onClicked: shuffle = !shuffle
                                     }
+
+
                                 }
+
+
+
                             }
                         }
 

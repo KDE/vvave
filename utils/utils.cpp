@@ -30,7 +30,6 @@ int Utils::lastPlaylistPos()
 
 QString Utils::backgroundColor()
 {
-
 #if defined(Q_OS_ANDROID)
 return "#31363b";
 #elif defined(Q_OS_LINUX)
@@ -39,12 +38,10 @@ return "#31363b";
 #elif defined(Q_OS_WIN32)
 return "#31363b";
 #endif
-
 }
 
 QString Utils::foregroundColor()
 {
-
 #if defined(Q_OS_ANDROID)
 return "#FFF";
 #elif defined(Q_OS_LINUX)
@@ -53,12 +50,10 @@ return "#FFF";
 #elif defined(Q_OS_WIN32)
 return "#FFF";
 #endif
-
 }
 
 QString Utils::hightlightColor()
 {
-
 #if defined(Q_OS_ANDROID)
 return "";
 #elif defined(Q_OS_LINUX)
@@ -84,12 +79,12 @@ return "#31363b";
 QString Utils::altColor()
 {
 #if defined(Q_OS_ANDROID)
-return "#31363b";
+return "#232629";
 #elif defined(Q_OS_LINUX)
     QWidget widget;
     return widget.palette().color(QPalette::Base).name();
 #elif defined(Q_OS_WIN32)
-return "#31363b";
+return "#232629";
 #endif
 }
 

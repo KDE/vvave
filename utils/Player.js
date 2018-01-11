@@ -1,11 +1,19 @@
 function playTrack(track)
 {
-    currentTrack = track
+    root.currentTrack = track
     player.source(currentTrack.url);
     player.play()
     root.title = currentTrack.title + " - " +currentTrack.artist
     currentArtwork = con.getAlbumArt(currentTrack.album, currentTrack.artist) || con.getArtistArt(currentTrack.artist)
 
+}
+
+function stop()
+{
+    player.stop()
+    progressBar.value = 0
+    coverPlay.visible = false
+    root.title = "Babe..."
 }
 
 function pauseTrack()

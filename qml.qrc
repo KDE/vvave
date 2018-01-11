@@ -25,5 +25,6 @@
         <file>assets/face.png</file>
         <file>view_models/BabeHolder.qml</file>
         <file>view_models/BabeDialog.qml</file>
+        <file>widgets/PlaylistMenu.qml</file>
     </qresource>
 </RCC>
