@@ -67,6 +67,14 @@ function shuffle()
     return pos
 }
 
+function playAt(index)
+{
+    if(index < root.mainPlaylist.list.count)
+    {
+        root.mainPlaylist.list.currentIndex = index
+        playTrack(root.mainPlaylist.list.model.get(index))
+    }
+}
 
 function appendTrack(track)
 {

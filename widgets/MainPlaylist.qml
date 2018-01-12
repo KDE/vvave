@@ -210,6 +210,7 @@ Item
                 id: list
                 width: parent.width
                 height: parent.height
+                quickBtnsVisible: false
                 onRowClicked: Player.playTrack(model.get(index))
                 holder.message: "Empty playlist..."
                 Component.onCompleted:

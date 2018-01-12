@@ -15,6 +15,8 @@ BabeGrid
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
+    signal playTrack(var track)
+    signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
     Drawer
@@ -119,9 +121,23 @@ BabeGrid
                 width: parent.width
                 height: parent.height - titleBar.height
                 trackNumberVisible: true
+                quickBtnsVisible: true
+
                 onRowClicked:
                 {
                     artistsViewGrid.rowClicked(model.get(index))
+                    drawer.close()
+                }
+
+                onPlayTrack:
+                {
+                    artistsViewGrid.playTrack(model.get(index))
+                    drawer.close()
+                }
+
+                onQueueTrack:
+                {
+                    artistsViewGrid.queueTrack(model.get(index))
                     drawer.close()
                 }
             }

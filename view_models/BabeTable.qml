@@ -8,9 +8,12 @@ ListView
 
     property int currentRow : -1
     property bool trackNumberVisible
+    property bool quickBtnsVisible : true
     property alias holder : holder
     signal rowClicked(int index)
     signal rowPressed(int index)
+    signal playTrack(int index)
+    signal queueTrack(int index)
 
     width: 320
     height: 480
@@ -124,21 +127,31 @@ ListView
     {
         id: delegate
         width: list.width
-        numberVisible : trackNumberVisible ? true : false
+        number : trackNumberVisible ? true : false
+        quickBtns : quickBtnsVisible
+
         Connections
         {
             target: delegate
             onPressAndHold:
             {
-                currentRow = index
-                contextMenu.open()
-                list.rowPressed(index)
+
             }
             onClicked:
             {
                 list.rowClicked(index)
                 currentIndex = index
             }
+
+            onPlayTrack: list.playTrack(index)
+            onQueueTrack: list.queueTrack(index)
+            onMenuClicked:
+            {
+                currentRow = index
+                contextMenu.open()
+                list.rowPressed(index)
+            }
+
         }
     }
 

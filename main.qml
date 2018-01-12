@@ -162,6 +162,12 @@ ApplicationWindow
                 {
                     id: tracksView
                     onRowClicked: Player.appendTrack(model.get(index))
+                    onPlayTrack:
+                    {
+                        Player.appendTrack(model.get(index))
+                        Player.playAt(mainPlaylist.list.count-1)
+                        currentView = 0
+                    }
                 }
 
                 AlbumsView
@@ -170,6 +176,12 @@ ApplicationWindow
                     onRowClicked: Player.appendTrack(track)
                     onPlayAlbum: Player.playAlbum(tracks)
                     onAppendAlbum: Player.appendAlbum(tracks)
+                    onPlayTrack:
+                    {
+                        Player.appendTrack(track)
+                        Player.playAt(mainPlaylist.list.count-1)
+                        currentView = 0
+                    }
                 }
 
                 ArtistsView
@@ -178,6 +190,12 @@ ApplicationWindow
                     onRowClicked: Player.appendTrack(track)
                     onPlayAlbum: Player.playAlbum(tracks)
                     onAppendAlbum: Player.appendAlbum(tracks)
+                    onPlayTrack:
+                    {
+                        Player.appendTrack(track)
+                        Player.playAt(mainPlaylist.list.count-1)
+                        currentView = 0
+                    }
                 }
 
                 PlaylistsView {}

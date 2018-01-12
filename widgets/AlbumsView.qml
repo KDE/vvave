@@ -15,6 +15,8 @@ BabeGrid
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
+    signal playTrack(var track)
+    signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
     Drawer
@@ -129,6 +131,18 @@ BabeGrid
                 onRowClicked:
                 {
                     albumsViewGrid.rowClicked(model.get(index))
+                    drawer.close()
+                }
+
+                onPlayTrack:
+                {
+                    albumsViewGrid.playTrack(model.get(index))
+                    drawer.close()
+                }
+
+                onQueueTrack:
+                {
+                    albumsViewGrid.queueTrack(model.get(index))
                     drawer.close()
                 }
             }

@@ -14,6 +14,7 @@ BabeTable
             tracksViewTable.model.append(map[i])
     }
 
+
     Component.onCompleted: populate()
 }
 
