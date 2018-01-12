@@ -273,7 +273,11 @@ ApplicationWindow
                                 drag.axis: Drag.YAxis
                                 drag.minimumY: 0
                                 drag.maximumY: columnWidth
-
+                                onClicked:
+                                {
+                                    if(Qt.platform.os === "linux")
+                                        coverPlay.visible = !coverPlay.visible
+                                }
                             }
 
                             RowLayout
