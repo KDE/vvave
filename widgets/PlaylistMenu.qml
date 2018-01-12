@@ -26,7 +26,7 @@ Menu
     }
     MenuItem
     {
-        text: qsTr("Hide cover...")
+        text: cover.visible ? qsTr("Hide cover...") : qsTr("Show cover...")
         onTriggered: hideCover()
     }
     MenuItem

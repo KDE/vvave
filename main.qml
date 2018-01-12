@@ -26,41 +26,29 @@ ApplicationWindow
 
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
     property int columnWidth: 250
-
     property int currentView : 0
     property int iconSize
-
-    property var currentTrack
-    property string currentArtwork
-
-    property bool shuffle : false
+    property alias mainPlaylist : mainPlaylist
 
     //    minimumWidth: columnWidth
 
     //    pageStack.defaultColumnWidth: columnWidth
     //    pageStack.initialPage: [playlistPage, views]
-    onWidthChanged:
-    {
-        if(Qt.platform.os === "android")
-        {
-            if(root.width>root.height)
-            {
-                coverPlay.visible = false
+    onWidthChanged: if(Qt.platform.os === "android")
+                    {
+                        if(root.width>root.height)
+                            mainPlaylist.cover.visible = false
+                        else  mainPlaylist.cover.visible = true
+                    }
 
-            }else  coverPlay.visible = true
-        }
-    }
 
-    onClosing:
-    {
-        Player.savePlaylist()
-        Player.savePlaylistPos()
-    }
+    onClosing: Player.savePlaylist()
+
 
     Connections
     {
         target: player
-        onPos: progressBar.value = pos
+        onPos: mainPlaylist.progressBar.value = pos
         onFinished: Player.nextTrack()
     }
 
@@ -163,219 +151,12 @@ ApplicationWindow
 
                 currentIndex: currentView
 
-                Item
+
+                MainPlaylist
                 {
-                    id: playlistPage
-
-                    //                    Component.onCompleted:
-                    //                    {
-                    //                        if(mainPlaylistTable.count>0)
-                    //                            root.width = columnWidth
-                    //                        else
-                    //                            root.width = columnWidth*3
-                    //                    }
-
-                    GridLayout
-                    {
-                        id: playlistLayout
-                        width: parent.width
-                        height: parent.height
-                        columns: 1
-                        rows: 4
-                        rowSpacing: 0
-
-                        Rectangle
-                        {
-                            id: coverPlay
-                            Layout.row: 1
-                            height: columnWidth
-                            width: parent.width
-                            Layout.fillWidth: true
-
-                            visible: mainPlaylistTable.count>0
-
-                            FastBlur
-                            {
-                                anchors.fill: coverPlay
-                                source: artwork
-                                radius: 100
-                            }
-
-                            Image
-                            {
-                                id: artwork
-                                width: parent.width < columnWidth ? parent.width : columnWidth
-                                height: parent.height
-                                anchors.centerIn: parent
-                                source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
-                                fillMode: Image.PreserveAspectFit
-                            }
-                        }
-
-                        Slider
-                        {
-                            id: progressBar
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-
-                            Layout.row: 3
-                            height: 16
-                            from: 0
-                            to: 1000
-                            value: 0
-                            visible: mainPlaylistTable.count>0
-                            spacing: 0
-
-                            onMoved: player.seek(player.duration() / 1000 * value);
-
-                            Rectangle
-                            {
-                                anchors.fill: parent
-                                color: util.midColor()
-                                z: -999
-                            }
-                        }
-
-                        Rectangle
-                        {
-                            id: playbackControls
-                            Layout.fillWidth: true
-                            Layout.row: 2
-                            height: 48
-                            visible: mainPlaylistTable.count>0
-                            color: util.midColor()
-
-                            onYChanged:
-                            {
-                                if(playbackControls.y<columnWidth/4)
-                                {
-                                    coverPlay.visible= false
-                                    playbackControls.y = 0
-                                }else
-                                {
-                                    coverPlay.visible= true
-                                    playbackControls.y = columnWidth
-                                }
-                            }
-
-                            PlaylistMenu
-                            {
-                                id: playlistMenu
-                                onClearOut: Player.clearOutPlaylist()
-                                onHideCover: coverPlay.visible = !coverPlay.visible
-                                onClean: Player.cleanPlaylist()
-                            }
-
-                            MouseArea
-                            {
-                                anchors.fill: parent
-                                drag.target: playbackControls
-                                drag.axis: Drag.YAxis
-                                drag.minimumY: 0
-                                drag.maximumY: columnWidth
-                                onClicked:
-                                {
-                                    if(Qt.platform.os === "linux")
-                                        coverPlay.visible = !coverPlay.visible
-                                }
-                            }
-
-                            RowLayout
-                            {
-                                width: parent.width
-                                height: parent.height
-                                anchors.fill: parent
-                                ToolButton
-                                {
-                                    id: menuBtn
-                                    Icon {text: MdiFont.Icon.dotsVertical}
-                                    onClicked: playlistMenu.open()
-                                }
-                                Row
-                                {
-                                    anchors.centerIn: parent
-                                    ToolButton
-                                    {
-                                        Icon
-                                        {
-                                            id: babeBtnIcon
-                                            text: MdiFont.Icon.heartOutline
-                                            color: defaultColor
-                                        }
-
-                                        onClicked: Player.babeTrack()
-                                    }
-
-                                    ToolButton
-                                    {
-                                        id: previousBtn
-                                        Icon {text: MdiFont.Icon.skipPrevious}
-                                        onClicked: Player.previousTrack()
-                                    }
-
-                                    ToolButton
-                                    {
-                                        id: playBtn
-                                        Icon {id: playIcon; text: MdiFont.Icon.play }
-                                        onClicked:
-                                        {
-                                            if(player.isPaused()) Player.resumeTrack()
-                                            else Player.pauseTrack()
-                                        }
-                                    }
-
-                                    ToolButton
-                                    {
-                                        id: nextBtn
-                                        Icon{text: MdiFont.Icon.skipNext}
-                                        onClicked: Player.nextTrack()
-
-                                    }
-
-                                    ToolButton
-                                    {
-                                        id: shuffleBtn
-                                        Icon { text: shuffle ? MdiFont.Icon.shuffle : MdiFont.Icon.shuffleDisabled}
-
-                                        onClicked: shuffle = !shuffle
-                                    }
-                                }
-                            }
-                        }
-
-                        Rectangle
-                        {
-                            id: mainPlaylist
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            Layout.row: 4
-                            color: "transparent"
-                            BabeTable
-                            {
-                                id: mainPlaylistTable
-                                width: parent.width
-                                height: parent.height
-                                onRowClicked: Player.playTrack(model.get(index))
-                                holder.message: "Empty playlist..."
-                                Component.onCompleted:
-                                {
-                                    var list = util.lastPlaylist()
-                                    var n = list.length
-                                    for(var i = 0; i < n; i++)
-                                    {
-                                        var track = con.get("select * from tracks where url = \""+list[i]+"\"")
-                                        Player.appendTrack(track[0])
-                                    }
-
-                                    //                                    var pos = util.lastPlaylistPos()
-                                    //                                    console.log("POSSS:", pos)
-                                    //                                    mainPlaylistTable.currentIndex = pos
-                                    //                                    play(mainPlaylistTable.model.get(pos))
-                                }
-                            }
-                        }
-                    }
+                    id: mainPlaylist
                 }
+
 
                 TracksView
                 {

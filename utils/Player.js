@@ -3,83 +3,82 @@ Qt.include("Icons.js")
 
 function playTrack(track)
 {
-    root.currentTrack = track
-    player.source(currentTrack.url);
+    root.mainPlaylist.currentTrack = track
+    player.source(root.mainPlaylist.currentTrack.url);
     player.play()
-    root.title = currentTrack.title + " - " +currentTrack.artist
-    currentArtwork = con.getAlbumArt(currentTrack.album, currentTrack.artist) || con.getArtistArt(currentTrack.artist)
+    root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
+    root.mainPlaylist.currentArtwork = con.getAlbumArt(root.mainPlaylist.currentTrack.album,
+                                                       root.mainPlaylist.currentTrack.artist)
+            || con.getArtistArt(root.mainPlaylist.currentTrack.artist)
 
-    playIcon.text = Icon.pause
+    root.mainPlaylist.playIcon.text = Icon.pause
 
-    if(con.getTrackBabe(currentTrack.url))
-        babeBtnIcon.color = "#E91E63"
+    if(con.getTrackBabe(root.mainPlaylist.currentTrack.url))
+        root.mainPlaylist.babeBtnIcon.color = "#E91E63"
     else
-        babeBtnIcon.color = babeBtnIcon.defaultColor
+        root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
 
 }
 
 function stop()
 {
     player.stop()
-    progressBar.value = 0
-    coverPlay.visible = false
+    root.mainPlaylist.progressBar.value = 0
+    root.mainPlaylist.cover.visible = false
     root.title = "Babe..."
-    playIcon.text = Icon.play
+    root.mainPlaylist.playIcon.text = Icon.play
 }
 
 function pauseTrack()
 {
     player.pause()
-    playIcon.text = Icon.play
+    root.mainPlaylist.playIcon.text = Icon.play
 }
 
 function resumeTrack()
 {
     player.play()
-    playIcon.text = Icon.pause
+    root.mainPlaylist.playIcon.text = Icon.pause
 }
 
 function nextTrack()
 {
-    var next
-    console.log("shuffle<<", root.shuffle)
-    if(root.shuffle)
+    var next = 0
+    if(root.mainPlaylist.shuffle)
         next = shuffle()
     else
-        next = mainPlaylistTable.currentIndex+1 >= mainPlaylistTable.count? 0 : mainPlaylistTable.currentIndex+1
+        next = root.mainPlaylist.list.currentIndex+1 >= root.mainPlaylist.list.count? 0 : root.mainPlaylist.list.currentIndex+1
 
-    mainPlaylistTable.currentIndex = next
-    playTrack(mainPlaylistTable.model.get(next))
+    root.mainPlaylist.list.currentIndex = next
+    playTrack(root.mainPlaylist.list.model.get(next))
 }
 
 function previousTrack()
 {
-    var previous = mainPlaylistTable.currentIndex-1 >= 0 ? mainPlaylistTable.currentIndex-1 : mainPlaylistTable.count-1
-    mainPlaylistTable.currentIndex = previous
-    playTrack(mainPlaylistTable.model.get(previous))
+    var previous = root.mainPlaylist.list.currentIndex-1 >= 0 ? root.mainPlaylist.list.currentIndex-1 : root.mainPlaylist.list.count-1
+    root.mainPlaylist.list.currentIndex = previous
+    playTrack(root.mainPlaylist.list.model.get(previous))
 }
 
 
 function shuffle()
 {
-    var pos =  Math.floor(Math.random() * mainPlaylistTable.count)
+    var pos =  Math.floor(Math.random() * root.mainPlaylist.list.count)
     return pos
 }
 
 
 function appendTrack(track)
 {
+    var empty = root.mainPlaylist.list.count
+    root.mainPlaylist.list.model.append(track)
+    root.mainPlaylist.list.positionViewAtEnd()
 
-    var empty = mainPlaylistTable.count
-    mainPlaylistTable.model.append(track)
-    mainPlaylistTable.positionViewAtEnd()
-
-    if(empty === 0 && mainPlaylistTable.count>0)
+    if(empty === 0 && root.mainPlaylist.list.count>0)
     {
-        mainPlaylistTable.currentIndex = 0
-        playTrack(mainPlaylistTable.model.get(0))
+        root.mainPlaylist.list.currentIndex = 0
+        playTrack(root.mainPlaylist.list.model.get(0))
     }
-
 }
 
 function appendAlbum(tracks)
@@ -91,24 +90,19 @@ function appendAlbum(tracks)
 function savePlaylist()
 {
     var list = []
-    var n =  mainPlaylistTable.count
+    var n =  root.mainPlaylist.list.count
     for(var i=0 ; i<n; i++)
     {
-        var url = mainPlaylistTable.model.get(i).url
+        var url = root.mainPlaylist.list.model.get(i).url
         list.push(url)
     }
     util.savePlaylist(list)
+    util.savePlaylistPos(root.mainPlaylist.list.currentIndex)
 }
-
-function savePlaylistPos()
-{
-    util.savePlaylistPos(mainPlaylistTable.currentIndex)
-}
-
 
 function clearOutPlaylist()
 {
-    mainPlaylistTable.clearTable()
+    root.mainPlaylist.list.clearTable()
     stop()
 }
 
@@ -116,40 +110,40 @@ function cleanPlaylist()
 {
     var urls = []
 
-    for(var i = 0; i < mainPlaylistTable.count; i++)
+    for(var i = 0; i < root.mainPlaylist.list.count; i++)
     {
-        var url = mainPlaylistTable.model.get(i).url
+        var url = root.mainPlaylist.list.model.get(i).url
 
         if(urls.indexOf(url)<0)
             urls.push(url)
-        else mainPlaylistTable.model.remove(i)
+        else root.mainPlaylist.list.model.remove(i)
     }
 }
 
 function playAlbum(tracks)
 {
-    mainPlaylistTable.clearTable()
+    root.mainPlaylist.list.clearTable()
     for(var i in tracks)
         appendTrack(tracks[i])
 
-    mainPlaylistTable.currentIndex = 0
-    playTrack(mainPlaylistTable.model.get(0))
+    root.mainPlaylist.list.currentIndex = 0
+    playTrack(root.mainPlaylist.list.model.get(0))
 
     root.currentView = 0
 }
 
 function babeTrack()
 {
-    if(con.getTrackBabe(root.currentTrack.url))
+    if(con.getTrackBabe(root.mainPlaylist.currentTrack.url))
     {
-        con.babeTrack(root.currentTrack.url, false)
-        babeBtnIcon.text = Icon.heartOutline
-        babeBtnIcon.color = babeBtnIcon.defaultColor
+        con.babeTrack(root.mainPlaylist.currentTrack.url, false)
+        root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
+        root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
 
     }else
     {
-        con.babeTrack(root.currentTrack.url, true)
-        babeBtnIcon.text = Icon.heartOutline
-        babeBtnIcon.color = "#E91E63"
+        con.babeTrack(root.mainPlaylist.currentTrack.url, true)
+        root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
+        root.mainPlaylist.babeBtnIcon.color = "#E91E63"
     }
 }
