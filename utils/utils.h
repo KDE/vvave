@@ -21,7 +21,6 @@ public:
     Q_INVOKABLE static QString altColor();
 
 
-
 };
 
 #endif // UTILS_H

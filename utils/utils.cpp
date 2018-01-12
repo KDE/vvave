@@ -6,7 +6,10 @@
 
 using namespace BAE;
 Utils::Utils(QObject *parent) : QObject(parent)
-{ }
+{
+
+
+}
 
 void Utils::savePlaylist(const QStringList &list)
 {
@@ -87,5 +90,6 @@ return "#232629";
 return "#232629";
 #endif
 }
+
 
 

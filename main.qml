@@ -3,7 +3,6 @@ import QtQuick.Controls 2.2
 import QtLocation 5.9
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
-
 //import org.kde.kirigami 2.0 as Kirigami
 
 import "utils/Icons.js" as MdiFont
@@ -40,54 +39,15 @@ ApplicationWindow
 
     //    pageStack.defaultColumnWidth: columnWidth
     //    pageStack.initialPage: [playlistPage, views]
-
-
-    function play(track)
+    onWidthChanged:
     {
-        Player.playTrack(track)
-        playIcon.text = MdiFont.Icon.pause
-
-        if(con.getTrackBabe(currentTrack.url))
+        if(Qt.platform.os === "android")
         {
-            babeBtnIcon.text = MdiFont.Icon.heartOutline
-            babeBtnIcon.color = "#E91E63"
+            if(root.width>root.height)
+            {
+                coverPlay.visible = false
 
-        }else
-        {
-            babeBtnIcon.text = MdiFont.Icon.heartOutline
-            babeBtnIcon.color = babeBtnIcon.defaultColor
-        }
-    }
-
-    function stop()
-    {
-        mainPlaylistTable.clearTable()
-        Player.stop()
-        playIcon.text= MdiFont.Icon.play
-    }
-
-    function pause()
-    {
-        Player.pauseTrack()
-        playIcon.text= MdiFont.Icon.play
-    }
-
-    function resume()
-    {
-        Player.resumeTrack()
-        playIcon.text= MdiFont.Icon.pause
-    }
-
-    function appendTrack(track)
-    {
-        var empty = mainPlaylistTable.count
-        mainPlaylistTable.model.append(track)
-        mainPlaylistTable.positionViewAtEnd()
-
-        if(empty === 0 && mainPlaylistTable.count>0)
-        {
-            mainPlaylistTable.currentIndex = 0
-            play(mainPlaylistTable.model.get(0))
+            }else  coverPlay.visible = true
         }
     }
 
@@ -134,6 +94,45 @@ ApplicationWindow
         onSettingsViewClicked: currentView = 5
     }
 
+    footer: Rectangle
+    {
+        id: searchBox
+        width: parent.width
+        height: 32
+        color: util.midColor()
+
+        TextInput
+        {
+            id: searchInput
+            anchors.fill: parent
+            anchors.centerIn: parent
+            color: util.foregroundColor()
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment:  Text.AlignVCenter
+
+            property string placeholderText: "Search..."
+
+            Label
+            {
+                anchors.fill: parent
+                text: searchInput.placeholderText
+                visible: !(searchInput.focus || searchInput.text)
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment:  Text.AlignVCenter
+                font.bold: true
+                color: util.foregroundColor()
+            }
+
+        }
+    }
+
+    Rectangle
+    {
+        anchors.fill: parent
+        color: util.altColor()
+        z: -999
+    }
+
     Page
     {
         id: views
@@ -150,7 +149,10 @@ ApplicationWindow
             {
                 id: swipeView
                 width: parent.width
-                height: parent.height - searchBox.height
+                height: parent.height
+
+                onCurrentIndexChanged: currentView = currentIndex
+
                 Component.onCompleted:
                 {
                     if(Qt.platform.os === "linux")
@@ -158,18 +160,13 @@ ApplicationWindow
                     else if(Qt.platform.os === "android")
                         contentItem.interactive = true
                 }
+
                 currentIndex: currentView
 
                 Item
                 {
                     id: playlistPage
 
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: util.altColor()
-                        z: -999
-                    }
                     //                    Component.onCompleted:
                     //                    {
                     //                        if(mainPlaylistTable.count>0)
@@ -263,9 +260,10 @@ ApplicationWindow
 
                             PlaylistMenu
                             {
-                               id: playlistMenu
-                               onClearOut: stop()
-                               onHideCover: coverPlay.visible = !coverPlay.visible
+                                id: playlistMenu
+                                onClearOut: Player.clearOutPlaylist()
+                                onHideCover: coverPlay.visible = !coverPlay.visible
+                                onClean: Player.cleanPlaylist()
                             }
 
                             MouseArea
@@ -301,21 +299,7 @@ ApplicationWindow
                                             color: defaultColor
                                         }
 
-                                        onClicked:
-                                        {
-                                            if(con.getTrackBabe(currentTrack.url))
-                                            {
-                                                con.babeTrack(currentTrack.url, false)
-                                                babeBtnIcon.text = MdiFont.Icon.heartOutline
-                                                babeBtnIcon.color = babeBtnIcon.defaultColor
-
-                                            }else
-                                            {
-                                                con.babeTrack(currentTrack.url, true)
-                                                babeBtnIcon.text = MdiFont.Icon.heartOutline
-                                                babeBtnIcon.color = "#E91E63"
-                                            }
-                                        }
+                                        onClicked: Player.babeTrack()
                                     }
 
                                     ToolButton
@@ -331,8 +315,8 @@ ApplicationWindow
                                         Icon {id: playIcon; text: MdiFont.Icon.play }
                                         onClicked:
                                         {
-                                            if(player.isPaused()) resume()
-                                            else pause()
+                                            if(player.isPaused()) Player.resumeTrack()
+                                            else Player.pauseTrack()
                                         }
                                     }
 
@@ -347,16 +331,11 @@ ApplicationWindow
                                     ToolButton
                                     {
                                         id: shuffleBtn
-                                        Icon{text: shuffle ? MdiFont.Icon.shuffle : MdiFont.Icon.shuffleDisabled}
+                                        Icon { text: shuffle ? MdiFont.Icon.shuffle : MdiFont.Icon.shuffleDisabled}
 
                                         onClicked: shuffle = !shuffle
                                     }
-
-
                                 }
-
-
-
                             }
                         }
 
@@ -372,7 +351,7 @@ ApplicationWindow
                                 id: mainPlaylistTable
                                 width: parent.width
                                 height: parent.height
-                                onRowClicked: play(model.get(index))
+                                onRowClicked: Player.playTrack(model.get(index))
                                 holder.message: "Empty playlist..."
                                 Component.onCompleted:
                                 {
@@ -381,7 +360,7 @@ ApplicationWindow
                                     for(var i = 0; i < n; i++)
                                     {
                                         var track = con.get("select * from tracks where url = \""+list[i]+"\"")
-                                        appendTrack(track[0])
+                                        Player.appendTrack(track[0])
                                     }
 
                                     //                                    var pos = util.lastPlaylistPos()
@@ -397,54 +376,23 @@ ApplicationWindow
                 TracksView
                 {
                     id: tracksView
-                    onRowClicked: appendTrack(model.get(index))
+                    onRowClicked: Player.appendTrack(model.get(index))
                 }
 
                 AlbumsView
                 {
                     id: albumsView
-                    onRowClicked: appendTrack(track)
-                    onPlayAlbum:
-                    {
-                        mainPlaylistTable.clearTable()
-                        for(var i in tracks)
-                            appendTrack(tracks[i])
-
-                        mainPlaylistTable.currentIndex = 0
-                        play(mainPlaylistTable.model.get(0))
-
-                        currentView = 0
-                    }
-
-                    onAppendAlbum:
-                    {
-                        for(var i in tracks)
-                            appendTrack(tracks[i])
-                    }
-
+                    onRowClicked: Player.appendTrack(track)
+                    onPlayAlbum: Player.playAlbum(tracks)
+                    onAppendAlbum: Player.appendAlbum(tracks)
                 }
 
                 ArtistsView
                 {
                     id: artistsView
-                    onRowClicked: appendTrack(track)
-                    onPlayAlbum:
-                    {
-                        mainPlaylistTable.clearTable()
-                        for(var i in tracks)
-                            appendTrack(tracks[i])
-
-                        mainPlaylistTable.currentIndex = 0
-                        play(mainPlaylistTable.model.get(0))
-
-                        currentView = 0
-                    }
-
-                    onAppendAlbum:
-                    {
-                        for(var i in tracks)
-                            appendTrack(tracks[i])
-                    }
+                    onRowClicked: Player.appendTrack(track)
+                    onPlayAlbum: Player.playAlbum(tracks)
+                    onAppendAlbum: Player.appendAlbum(tracks)
                 }
 
                 PlaylistsView {}
@@ -454,42 +402,6 @@ ApplicationWindow
                     onIconSizeChanged: iconSize = size
                 }
 
-                onCurrentIndexChanged:
-                {
-                    currentView = currentIndex
-                }
-            }
-
-            Rectangle
-            {
-                id: searchBox
-                width: parent.width
-                height: 32
-                color: util.midColor()
-
-                TextInput
-                {
-                    id: searchInput
-                    anchors.fill: parent
-                    anchors.centerIn: parent
-
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment:  Text.AlignVCenter
-
-                    property string placeholderText: "Search..."
-
-                    Label
-                    {
-                        anchors.fill: parent
-                        text: searchInput.placeholderText
-                        visible: !(searchInput.focus || searchInput.text)
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment:  Text.AlignVCenter
-                        font.bold: true
-                        color: util.foregroundColor()
-                    }
-
-                }
             }
         }
     }

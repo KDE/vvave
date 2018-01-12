@@ -25,6 +25,13 @@ BabeGrid
         edge: Qt.BottomEdge
         interactive: false
 
+        Rectangle
+        {
+            anchors.fill: parent
+            z: -999
+            color: util.altColor()
+        }
+
         Column
         {
             anchors.fill: parent
