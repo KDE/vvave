@@ -31,25 +31,19 @@ QVariantList Babe::get(const QString &queryTxt)
         for(auto key : data.keys())
             map[BAE::KEYMAP[key]] = data[key];
 
-        res<<map;
+        res << map;
     }
 
     return res;
 }
 
-QString Babe::trackLyrics(const QString &url)
+void Babe::trackLyrics(const QString &url)
 {
     auto track = this->con->getDBData(QString("SELECT * FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
-            KEYMAP[KEY::URL], url));
+                                      KEYMAP[KEY::URL], url));
 
-    if(track.isEmpty()) return "ERROR";
-
-    auto lyrics = track.first()[KEY::LYRICS];
-
-    if(!lyrics.isEmpty())
-        return lyrics;
-
-    return  this->fetchTrackLyrics(track.first());
+    if(track.isEmpty()) return;
+    this->fetchTrackLyrics(track.first());
 }
 
 bool Babe::trackBabe(const QString &path)
@@ -104,20 +98,12 @@ QString Babe::albumArt(const QString &album, const QString &artist)
     return "";
 }
 
-QString Babe::fetchTrackLyrics(DB &song)
+void Babe::fetchTrackLyrics(DB &song)
 {
     Pulpo pulpo;
     pulpo.registerServices({SERVICES::LyricWikia, SERVICES::Genius});
     pulpo.setOntology(PULPO::ONTOLOGY::TRACK);
     pulpo.setInfo(PULPO::INFO::LYRICS);
-
-    QEventLoop loop;
-
-    QTimer timer;
-    timer.setSingleShot(true);
-    timer.setInterval(1000);
-
-    connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
 
     connect(&pulpo, &Pulpo::infoReady, [&](const BAE::DB &track, const PULPO::RESPONSE  &res)
     {
@@ -126,18 +112,13 @@ QString Babe::fetchTrackLyrics(DB &song)
             auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
             this->con->lyricsTrack(track, lyrics);
             song.insert(KEY::LYRICS, lyrics);
+            emit this->trackLyricsReady(song[KEY::LYRICS], song[KEY::URL]);
         }
-
-        loop.quit();
     });
 
     pulpo.feed(song, PULPO::RECURSIVE::OFF);
 
-    timer.start();
-    loop.exec();
-    timer.stop();
 
-    return song[KEY::LYRICS];
 }
 
 QString Babe::albumWiki(const QString &album, const QString &artist)

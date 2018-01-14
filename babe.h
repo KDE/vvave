@@ -22,7 +22,7 @@ public:
     /* DATABASE INTERFACES */
 
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
-    Q_INVOKABLE QString trackLyrics(const QString &url);
+    Q_INVOKABLE void trackLyrics(const QString &url);
     Q_INVOKABLE bool trackBabe(const QString &path);
     Q_INVOKABLE QString artistArt(const QString &artist);
     Q_INVOKABLE QString albumArt(const QString &album, const QString &artist);
@@ -64,10 +64,11 @@ private:
     QString fetchCoverArt(DB &song);
 
 
-    QString fetchTrackLyrics(DB &song);
+    void fetchTrackLyrics(DB &song);
 
 signals:
     void refreshTables(QVariantMap tables);
+    void trackLyricsReady(QString lyrics, QString url);
 
 public slots:
 };

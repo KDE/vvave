@@ -65,6 +65,12 @@ ApplicationWindow
             albumsView.populate()
             artistsView.populate()
         }
+
+        onTrackLyricsReady:
+        {
+            if(url === root.mainPlaylist.currentTrack.url)
+                root.mainPlaylist.infoView.lyrics = lyrics
+        }
     }
 
     header: BabeBar
@@ -161,26 +167,40 @@ ApplicationWindow
                 TracksView
                 {
                     id: tracksView
-                    onRowClicked: Player.appendTrack(model.get(index))
-                    onQuickPlayTrack: Player.quickPlay(model.get(index))
+                    Connections
+                    {
+                        target: tracksView
+                        onRowClicked: Player.addTrack(tracksView.model.get(index))
+                        onQuickPlayTrack: Player.quickPlay(tracksView.model.get(index))
+                    }
+
                 }
 
                 AlbumsView
                 {
                     id: albumsView
-                    onRowClicked: Player.appendTrack(track)
-                    onPlayAlbum: Player.playAlbum(tracks)
-                    onAppendAlbum: Player.appendAlbum(tracks)
-                    onPlayTrack: Player.quickPlay(track)
+                    Connections
+                    {
+                        target: albumsView
+                        onRowClicked: Player.addTrack(track)
+                        onPlayAlbum: Player.playAlbum(tracks)
+                        onAppendAlbum: Player.appendAlbum(tracks)
+                        onPlayTrack: Player.quickPlay(track)
+                    }
                 }
 
                 ArtistsView
                 {
                     id: artistsView
-                    onRowClicked: Player.appendTrack(track)
-                    onPlayAlbum: Player.playAlbum(tracks)
-                    onAppendAlbum: Player.appendAlbum(tracks)
-                    onPlayTrack: Player.quickPlay(track)
+
+                    Connections
+                    {
+                        target: artistsView
+                        onRowClicked: Player.addTrack(track)
+                        onPlayAlbum: Player.playAlbum(tracks)
+                        onAppendAlbum: Player.appendAlbum(tracks)
+                        onPlayTrack: Player.quickPlay(track)
+                    }
                 }
 
                 PlaylistsView {}

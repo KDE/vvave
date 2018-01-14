@@ -95,12 +95,11 @@ Pane
                     var artist = grid.model.get(index).artist
                     albumCoverClicked(album, artist)
                     grid.currentIndex = index
-                    console.log("current index is: ", grid.currentIndex)
                 }
             }
         }
 
-        ScrollBar.vertical: ScrollBar{ visible: !(Qt.platform.os === android)}
+        ScrollBar.vertical: ScrollBar{ visible: !(Qt.platform.os === "android")}
     }
 
 }

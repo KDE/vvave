@@ -12,20 +12,21 @@ function playTrack(track)
     root.mainPlaylist.playIcon.text = Icon.pause
 
     if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
-        root.mainPlaylist.babeBtnIcon.color = "#E91E63"
+        root.mainPlaylist.babeBtnIcon.color = bae.babeColor()
     else
         root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
 
-    root.mainPlaylist.infoView.lyrics =  ""
-    root.mainPlaylist.infoView.wikiAlbum = ""
-    root.mainPlaylist.infoView.wikiArtist = ""
-
-    root.mainPlaylist.infoView.lyrics =  bae.trackLyrics(root.mainPlaylist.currentTrack.url)
-    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
-    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
-//    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
+    var lyrics = root.mainPlaylist.currentTrack.lyrics
+    if(!lyrics)
+        bae.trackLyrics(root.mainPlaylist.currentTrack.url)
+    else
+        root.mainPlaylist.infoView.lyrics =  lyrics
+    //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
+    //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
+    //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
 
 }
+
 
 function stop()
 {
@@ -88,13 +89,14 @@ function quickPlay(track)
     root.currentView = 0
     appendTrack(track)
     playAt(root.mainPlaylist.list.count-1)
+    root.mainPlaylist.list.positionViewAtEnd()
+
 }
 
 function appendTrack(track)
 {
     var empty = root.mainPlaylist.list.count
     root.mainPlaylist.list.model.append(track)
-    root.mainPlaylist.list.positionViewAtEnd()
 
     if(empty === 0 && root.mainPlaylist.list.count>0)
     {
@@ -103,10 +105,17 @@ function appendTrack(track)
     }
 }
 
+function addTrack(track)
+{
+    appendTrack(track)
+    root.mainPlaylist.list.positionViewAtEnd()
+}
+
 function appendAlbum(tracks)
 {
     for(var i in tracks)
         appendTrack(tracks[i])
+    root.mainPlaylist.list.positionViewAtEnd()
 }
 
 function savePlaylist()
@@ -148,12 +157,13 @@ function playAlbum(tracks)
     root.mainPlaylist.list.clearTable()
     root.currentView = 0
 
-    for(var i in tracks)
+    for(var i = 0; i< tracks.length; i++)
         appendTrack(tracks[i])
 
-    root.mainPlaylist.list.currentIndex = 0
-    playTrack(root.mainPlaylist.list.model.get(0))
+//    root.mainPlaylist.list.currentIndex = 0
+//    playTrack(root.mainPlaylist.list.model.get(0))
 
+    root.mainPlaylist.list.positionViewAtBeginning()
 
 }
 
