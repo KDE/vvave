@@ -126,9 +126,7 @@ void settings::on_remove_clicked()
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
             emit refreshTables({{TABLEMAP[TABLE::TRACKS], true},
-                                {TABLEMAP[TABLE::ALBUMS], true},
-                                {TABLEMAP[TABLE::ARTISTS], true},
-                                {TABLEMAP[TABLE::PLAYLISTS], true}});
+                               {TABLEMAP[TABLE::PLAYLISTS], true}});
         }
     }
 }

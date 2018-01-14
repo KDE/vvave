@@ -54,7 +54,7 @@ ApplicationWindow
 
     Connections
     {
-        target: set
+        target: bae
         onRefreshTables:
         {
             tracksView.clearTable()
@@ -87,14 +87,14 @@ ApplicationWindow
         id: searchBox
         width: parent.width
         height: 32
-        color: util.midColor()
+        color: bae.midColor()
 
         TextInput
         {
             id: searchInput
             anchors.fill: parent
             anchors.centerIn: parent
-            color: util.foregroundColor()
+            color: bae.foregroundColor()
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:  Text.AlignVCenter
 
@@ -108,7 +108,7 @@ ApplicationWindow
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment:  Text.AlignVCenter
                 font.bold: true
-                color: util.foregroundColor()
+                color: bae.foregroundColor()
             }
 
         }
@@ -117,7 +117,7 @@ ApplicationWindow
     Rectangle
     {
         anchors.fill: parent
-        color: util.altColor()
+        color: bae.altColor()
         z: -999
     }
 
@@ -176,12 +176,7 @@ ApplicationWindow
                     onRowClicked: Player.appendTrack(track)
                     onPlayAlbum: Player.playAlbum(tracks)
                     onAppendAlbum: Player.appendAlbum(tracks)
-                    onPlayTrack:
-                    {
-                        Player.appendTrack(track)
-                        Player.playAt(mainPlaylist.list.count-1)
-                        currentView = 0
-                    }
+                    onPlayTrack: Player.quickPlay(track)
                 }
 
                 ArtistsView
@@ -190,12 +185,7 @@ ApplicationWindow
                     onRowClicked: Player.appendTrack(track)
                     onPlayAlbum: Player.playAlbum(tracks)
                     onAppendAlbum: Player.appendAlbum(tracks)
-                    onPlayTrack:
-                    {
-                        Player.appendTrack(track)
-                        Player.playAt(mainPlaylist.list.count-1)
-                        currentView = 0
-                    }
+                    onPlayTrack: Player.quickPlay(track)
                 }
 
                 PlaylistsView {}

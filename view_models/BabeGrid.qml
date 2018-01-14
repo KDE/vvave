@@ -18,7 +18,7 @@ Pane
     background: Rectangle
     {
         anchors.fill: parent
-        color: util.altColor()
+        color: bae.altColor()
         z: -999
     }
 

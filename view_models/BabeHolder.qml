@@ -3,61 +3,68 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
-GridLayout
+Rectangle
 {
-    id:placeHolder
     property string emoji
     property string message
 
-    anchors.fill: parent
 
-    columns: 1
-    rows: 2
+    clip: true
 
-    visible: list.count === 0
+      anchors.fill: parent
+        color: bae.backgroundColor()
 
-    Rectangle
+
+    GridLayout
     {
+        id:placeHolder
 
-        width:parent.width
+        width: parent.width
         height: parent.height
-        Layout.row: 1
-        color: util.altColor()
-        Image
-        {
-            id: imageHolder
+        columns: 1
+        rows: 2
 
-            anchors.centerIn: parent
-            width: 48
-            height: 48
-            source: emoji? emoji : "qrc:/assets/face.png"
-            horizontalAlignment: Qt.AlignHCenter
-
-            fillMode: Image.PreserveAspectFit
-        }
-
-        HueSaturation
+        Rectangle
         {
-            anchors.fill: imageHolder
-            source: imageHolder
-            saturation: -1
-            lightness: 0.3
-        }
-        Label
-        {
-            id: textHolder
-            width: parent.width
-            anchors.top: imageHolder.bottom
-            opacity: 0.3
-            text: message ? qsTr(message) : qsTr("Nothing here...")
-            padding: 10
-            font.bold: true
-            horizontalAlignment: Qt.AlignHCenter
-            elide: Text.ElideRight
-            color: util.foregroundColor()
+
+            width:parent.width
+            height: parent.height
+            Layout.row: 1
+            color: bae.backgroundColor()
+
+            Image
+            {
+                id: imageHolder
+
+                anchors.centerIn: parent
+                width: 48
+                height: 48
+                source: emoji? emoji : "qrc:/assets/face.png"
+                horizontalAlignment: Qt.AlignHCenter
+
+                fillMode: Image.PreserveAspectFit
+            }
+
+            HueSaturation
+            {
+                anchors.fill: imageHolder
+                source: imageHolder
+                saturation: -1
+                lightness: 0.3
+            }
+            Label
+            {
+                id: textHolder
+                width: parent.width
+                anchors.top: imageHolder.bottom
+                opacity: 0.3
+                text: message ? qsTr(message) : qsTr("Nothing here...")
+                padding: 10
+                font.bold: true
+                horizontalAlignment: Qt.AlignHCenter
+                elide: Text.ElideRight
+                color: bae.foregroundColor()
+            }
         }
     }
-
-
-
 }

@@ -25,9 +25,13 @@ class CollectionDB : public QObject
     Q_OBJECT
 
 public:
-    explicit CollectionDB(QObject *parent = nullptr);
+    explicit CollectionDB( QObject *parent = nullptr);
     ~CollectionDB() override;
 
+    bool insert(const QString &tableName, const QVariantMap &insertData);
+    bool update(const QString &tableName, const BAE::DB &updateData, const QVariantMap &where);
+    bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
+    bool remove();
 
     bool execQuery(QSqlQuery &query) const;
     bool execQuery(const QString &queryTxt);
@@ -43,7 +47,6 @@ public:
     void addTrack(const BAE::DB &track);
     bool updateTrack(const BAE::DB &track);
     bool rateTrack(const QString &path, const int &value);
-    Q_INVOKABLE bool babeTrack(const QString &path, const bool &value);
     bool moodTrack(const QString &path, const QString &value);
     bool artTrack(const QString &path, const QString &value);
     bool lyricsTrack(const BAE::DB &track, const QString &value);
@@ -64,8 +67,7 @@ public:
     bool trackPlaylist(const QString &url, const QString &playlist);
 
     BAE::DB_LIST getDBData(const QStringList &urls);
-    Q_INVOKABLE QVariantList get(const QString &queryTxt);
-    Q_INVOKABLE BAE::DB_LIST getDBData(const QString &queryTxt);
+    BAE::DB_LIST getDBData(const QString &queryTxt);
 
     BAE::DB_LIST getAlbumTracks(const QString &album, const QString &artist, const BAE::KEY &orderBy = BAE::KEY::TRACK, const BAE::W &order = BAE::W::ASC);
     BAE::DB_LIST getArtistTracks(const QString &artist, const BAE::KEY &orderBy = BAE::KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
@@ -78,17 +80,11 @@ public:
     BAE::DB_LIST getOnlineTracks(const BAE::KEY &orderBy = BAE::KEY::ADD_DATE, const BAE::W &order = BAE::W::DESC);
 
 
-    QString getTrackLyrics(const QString &url);
     QString getTrackArt(const QString &path);
     QStringList getTrackTags(const QString &path);
     int getTrackStars(const QString &path);
-    Q_INVOKABLE bool getTrackBabe(const QString &path);
-    Q_INVOKABLE QString getArtistArt(const QString &artist);
-    QString getArtistWiki(const QString &artist);
-    //    QStringList getArtistTags(const QString &artist);
-    Q_INVOKABLE QString getAlbumArt(const QString &album, const QString &artist);
-    QString getAlbumWiki(const QString &album, const QString &artist);
-    //    QStringList getAlbumTags(const QString &album, const QString &artist);
+   //    QStringList getArtistTags(const QString &artist);
+  //    QStringList getAlbumTags(const QString &album, const QString &artist);
     QStringList getArtistAlbums(const QString &artist);
 
     QStringList getPlaylists();
@@ -110,10 +106,7 @@ private:
     QString name;
     QSqlDatabase m_db;
     /*basic actions*/
-    bool insert(const QString &tableName, const QVariantMap &insertData);
-    bool update(const QString &tableName, const BAE::DB &updateData, const QVariantMap &where);
-    bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
-    bool remove();
+
 
 public slots:
     void closeConnection();
@@ -126,7 +119,6 @@ signals:
     void albumsCleaned(const int &amount);
     void artistsCleaned(const int &amount);
 
-    void initDB(QString musicPath);
 };
 
 #endif // COLLECTION_H

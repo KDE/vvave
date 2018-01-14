@@ -8,12 +8,12 @@ ItemDelegate
 {
     id: delegate
     signal playTrack()
-    signal queueTrack()
     signal menuClicked()
 
-    property string textColor: util.foregroundColor()
+    property string textColor: bae.foregroundColor()
     property bool number : false
     property bool quickBtns : false
+    property bool quickPlay : true
     checkable: true
 
     MouseArea
@@ -23,7 +23,7 @@ ItemDelegate
         onClicked:
         {
             if(Qt.platform.os === "linux")
-                if (mouse.button == Qt.RightButton)
+                if (mouse.button === Qt.RightButton)
                     menuClicked()
         }
     }
@@ -34,7 +34,19 @@ ItemDelegate
         width: parent.width
 
         rows:2
-        columns:3
+        columns:4
+
+        ToolButton
+        {
+            id: playBtn
+            Layout.fillHeight: true
+            Layout.row: 1
+            Layout.column: 1
+            Layout.rowSpan: 2
+            visible: quickPlay
+            Icon { text: MdiFont.Icon.playCircle }
+            onClicked: playTrack()
+        }
 
         Label
         {
@@ -43,8 +55,9 @@ ItemDelegate
             width: 16
             Layout.fillHeight: true
             Layout.row: 1
-            Layout.column: 1
+            Layout.column: 2
             Layout.rowSpan: 2
+
             Layout.alignment: Qt.AlignCenter
 
             text: track
@@ -63,7 +76,7 @@ ItemDelegate
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.row: 1
-            Layout.column: 2
+            Layout.column: 3
 
             text: title
             font.bold: true
@@ -81,7 +94,7 @@ ItemDelegate
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.row: 2
-            Layout.column: 2
+            Layout.column: 3
 
             text: artist + " | " + album
             font.bold: false
@@ -93,27 +106,11 @@ ItemDelegate
 
         Row
         {
-            Layout.column: 3
+            Layout.column: 4
             Layout.row: 1
             Layout.rowSpan: 2
             Layout.alignment: Qt.AlignRight
-            visible: quickBtns || menuBtn.visible
-
-            ToolButton
-            {
-                id: queueBtn
-                visible: Qt.platform.os === "android"
-                Icon { text: MdiFont.Icon.clock }
-                onClicked: queueTrack()
-            }
-
-            ToolButton
-            {
-
-                id: playBtn
-                Icon { text: MdiFont.Icon.playCircle }
-                onClicked: playTrack()
-            }
+            visible: quickBtns || menuBtn.visible          
 
             ToolButton
             {

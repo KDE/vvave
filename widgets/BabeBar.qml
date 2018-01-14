@@ -8,9 +8,9 @@ import "../utils"
 ToolBar
 {
     property alias babeBar : babeBar
-    property string accentColor : "#E91E63"
-    property string textColor : util.foregroundColor()
-    property string backgroundColor : util.backgroundColor()
+    property string accentColor : bae.babeColor()
+    property string textColor : bae.foregroundColor()
+    property string backgroundColor : bae.backgroundColor()
     property int size //icon size
     property int currentIndex : 0
 

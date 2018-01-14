@@ -7,16 +7,23 @@ function playTrack(track)
     player.source(root.mainPlaylist.currentTrack.url);
     player.play()
     root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
-    root.mainPlaylist.currentArtwork = con.getAlbumArt(root.mainPlaylist.currentTrack.album,
-                                                       root.mainPlaylist.currentTrack.artist)
-            || con.getArtistArt(root.mainPlaylist.currentTrack.artist)
+    root.mainPlaylist.currentArtwork = bae.loadCover(root.mainPlaylist.currentTrack.url)
 
     root.mainPlaylist.playIcon.text = Icon.pause
 
-    if(con.getTrackBabe(root.mainPlaylist.currentTrack.url))
+    if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
         root.mainPlaylist.babeBtnIcon.color = "#E91E63"
     else
         root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
+
+    root.mainPlaylist.infoView.lyrics =  ""
+    root.mainPlaylist.infoView.wikiAlbum = ""
+    root.mainPlaylist.infoView.wikiArtist = ""
+
+    root.mainPlaylist.infoView.lyrics =  bae.trackLyrics(root.mainPlaylist.currentTrack.url)
+    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
+    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
+//    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
 
 }
 
@@ -76,6 +83,13 @@ function playAt(index)
     }
 }
 
+function quickPlay(track)
+{
+    root.currentView = 0
+    appendTrack(track)
+    playAt(root.mainPlaylist.list.count-1)
+}
+
 function appendTrack(track)
 {
     var empty = root.mainPlaylist.list.count
@@ -104,8 +118,8 @@ function savePlaylist()
         var url = root.mainPlaylist.list.model.get(i).url
         list.push(url)
     }
-    util.savePlaylist(list)
-    util.savePlaylistPos(root.mainPlaylist.list.currentIndex)
+    bae.savePlaylist(list)
+    bae.savePlaylistPos(root.mainPlaylist.list.currentIndex)
 }
 
 function clearOutPlaylist()
@@ -130,27 +144,30 @@ function cleanPlaylist()
 
 function playAlbum(tracks)
 {
+
     root.mainPlaylist.list.clearTable()
+    root.currentView = 0
+
     for(var i in tracks)
         appendTrack(tracks[i])
 
     root.mainPlaylist.list.currentIndex = 0
     playTrack(root.mainPlaylist.list.model.get(0))
 
-    root.currentView = 0
+
 }
 
 function babeTrack()
 {
-    if(con.getTrackBabe(root.mainPlaylist.currentTrack.url))
+    if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
     {
-        con.babeTrack(root.mainPlaylist.currentTrack.url, false)
+        bae.babeTrack(root.mainPlaylist.currentTrack.url, false)
         root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
         root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
 
     }else
     {
-        con.babeTrack(root.mainPlaylist.currentTrack.url, true)
+        bae.babeTrack(root.mainPlaylist.currentTrack.url, true)
         root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
         root.mainPlaylist.babeBtnIcon.color = "#E91E63"
     }

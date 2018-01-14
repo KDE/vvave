@@ -3,7 +3,7 @@ import QtQuick 2.3
 Text
 {
     id: text
-    property string iconColor: util.foregroundColor()
+    property string iconColor: bae.foregroundColor()
     property int iconSize
     readonly property string defaultColor : iconColor
 

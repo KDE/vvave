@@ -21,7 +21,7 @@ Pane
         onAccepted:
         {
             listModel.append({url: folder.toString()})
-            set.collectionPathChanged(folder.toString())
+            babe.scanDir(folder.toString())
         }
     }
 
@@ -79,7 +79,7 @@ Pane
 
             Component.onCompleted:
             {
-                var map = con.get("select url from sources")
+                var map = bae.get("select url from sources")
                 for(var i in map)
                 {
                     model.append(map[i])

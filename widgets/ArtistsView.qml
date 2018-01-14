@@ -37,7 +37,7 @@ BabeGrid
                 width: parent.width
                 height: 48
                 z: 1
-                color: util.midColor()
+                color: bae.midColor()
 
                 Row
                 {
@@ -56,7 +56,7 @@ BabeGrid
                             var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
 
                             var query = "select * from tracks where artist = \""+data.artist+"\""
-                            var tracks = con.get(query)
+                            var tracks = bae.get(query)
                             playAlbum(tracks)
                             drawer.close()
                         }
@@ -74,7 +74,7 @@ BabeGrid
                         {
                             var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
                             var query = "select * from tracks where artist = \""+data.artist+"\""
-                            var tracks = con.get(query)
+                            var tracks = bae.get(query)
                             appendAlbum(tracks)
                             drawer.close()
 
@@ -89,7 +89,7 @@ BabeGrid
                         font.pointSize: 12
                         font.bold: true
                         lineHeight: 0.7
-                        color: util.foregroundColor()
+                        color: bae.foregroundColor()
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment:  Text.AlignVCenter
                     }
@@ -151,7 +151,7 @@ BabeGrid
         drawerList.clearTable()
 
         var query = "select * from tracks where artist = \""+artist+"\" order by album, track"
-        var map = con.get(query)
+        var map = bae.get(query)
 
         for(var i in map)
             drawerList.model.append(map[i])
@@ -160,7 +160,7 @@ BabeGrid
 
     function populate()
     {
-        var map = con.get("select * from artists order by artist asc")
+        var map = bae.get("select * from artists order by artist asc")
         for(var i in map)
             gridModel.append(map[i])
     }

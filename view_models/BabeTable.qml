@@ -9,6 +9,7 @@ ListView
     property int currentRow : -1
     property bool trackNumberVisible
     property bool quickBtnsVisible : true
+    property bool quickPlayVisible : true
     property alias holder : holder
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -45,7 +46,7 @@ ListView
     Rectangle
     {
         anchors.fill: parent
-        color: util.altColor()
+        color: bae.altColor()
         z: -999
     }
 
@@ -57,17 +58,17 @@ ListView
             width: list.width
             height: list.currentItem.height
 
-            color: util.hightlightColor() || myPalette.highlight
+            color: bae.hightlightColor() || myPalette.highlight
             opacity: 0.2
             y: list.currentItem.y
-//            Behavior on y
-//            {
-//                SpringAnimation
-//                {
-//                    spring: 3
-//                    damping: 0.2
-//                }
-//            }
+            //            Behavior on y
+            //            {
+            //                SpringAnimation
+            //                {
+            //                    spring: 3
+            //                    damping: 0.2
+            //                }
+            //            }
         }
     }
 
@@ -89,13 +90,17 @@ ListView
         }
         MenuItem
         {
-            text: qsTr("Edit...")
+            text: qsTr("Babe it")
             onTriggered: ;
         }
         MenuItem
         {
-            text: qsTr("Remove")
-            onTriggered: ;
+            text: qsTr("Queue")
+            onTriggered:
+            {
+                console.log(currentRow)
+                list.queueTrack(currentRow)
+            }
         }
         MenuItem
         {
@@ -129,14 +134,16 @@ ListView
         width: list.width
         number : trackNumberVisible ? true : false
         quickBtns : quickBtnsVisible
-
+        quickPlay: quickPlayVisible
         Connections
         {
             target: delegate
             onPressAndHold:
             {
-
+                if(Qt.platform.os === "linux")
+                    playTrack(currentIndex)
             }
+
             onClicked:
             {
                 list.rowClicked(index)
@@ -144,7 +151,6 @@ ListView
             }
 
             onPlayTrack: list.playTrack(index)
-            onQueueTrack: list.queueTrack(index)
             onMenuClicked:
             {
                 currentRow = index

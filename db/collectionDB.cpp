@@ -31,7 +31,6 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
         this->openDB(this->name);
         qDebug()<<"Collection doesn't exists, trying to create it" << BAE::CollectionDBPath + BAE::DBName;
         this->prepareCollectionDB();
-        emit this->initDB(BAE::MusicPath);
     }else this->openDB(this->name);
 }
 
@@ -315,15 +314,6 @@ bool CollectionDB::rateTrack(const QString &path, const int &value)
     return false;
 }
 
-bool CollectionDB::babeTrack(const QString &path, const bool &value)
-{
-    if(update(TABLEMAP[TABLE::TRACKS],
-              KEYMAP[KEY::BABE],
-              value?1:0,
-              KEYMAP[KEY::URL],
-              path)) return true;
-    return false;
-}
 
 bool CollectionDB::moodTrack(const QString &path, const QString &value)
 {
@@ -537,21 +527,6 @@ DB_LIST CollectionDB::getDBData(const QStringList &urls)
     return mapList;
 }
 
-
-QVariantList CollectionDB::get(const QString &queryTxt)
-{
-    QVariantList res;
-    for(auto data : this->getDBData(queryTxt))
-    {
-        QVariantMap map;
-        for(auto key : data.keys())
-            map[BAE::KEYMAP[key]] = data[key];
-
-        res<<map;
-    }
-    return res;
-}
-
 DB_LIST CollectionDB::getDBData(const QString &queryTxt)
 {
     DB_LIST mapList;
@@ -713,19 +688,6 @@ DB_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const int &lim
     return this->getDBData(queryTxt);
 }
 
-QString CollectionDB::getTrackLyrics(const QString &url)
-{
-    QString lyrics;
-    auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::LYRICS],
-                                 TABLEMAP[TABLE::TRACKS],
-            KEYMAP[KEY::URL],url));
-
-    for(auto track : query)
-        lyrics = track[KEY::LYRICS];
-
-    return lyrics;
-}
-
 
 QString CollectionDB::getTrackArt(const QString &path)
 {
@@ -759,47 +721,6 @@ int CollectionDB::getTrackStars(const QString &path)
     return stars;
 }
 
-bool CollectionDB::getTrackBabe(const QString &path)
-{
-    int babe = 0;
-    auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::BABE],
-                                 TABLEMAP[TABLE::TRACKS],
-            KEYMAP[KEY::URL],path));
-
-    for(auto track : query)
-        babe = track[KEY::BABE].toInt();
-
-    return babe == 0 ? false : true ;
-}
-
-QString CollectionDB::getArtistArt(const QString &artist)
-{
-    QString artistHead;
-
-    auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::ARTWORK],
-                                 TABLEMAP[TABLE::ARTISTS],
-            KEYMAP[KEY::ARTIST],artist));
-
-    for(auto track : query)
-        if(!track[KEY::ARTWORK].isEmpty() && track[KEY::ARTWORK] != SLANG[W::NONE])
-            artistHead = track[KEY::ARTWORK];
-
-    return artistHead;
-}
-
-QString CollectionDB::getArtistWiki(const QString &artist)
-{
-    QString wiki;
-    auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::WIKI],
-                                 TABLEMAP[TABLE::ARTISTS],
-            KEYMAP[KEY::ARTIST],artist));
-
-    for(auto track : query)
-        wiki = track[KEY::WIKI];
-
-    return wiki;
-}
-
 //QStringList CollectionDB::getArtistTags(const QString &artist)
 //{
 //    QStringList tags;
@@ -820,36 +741,6 @@ QString CollectionDB::getArtistWiki(const QString &artist)
 //    return tags;
 //}
 
-QString CollectionDB::getAlbumArt(const QString &album, const QString &artist)
-{
-    QString albumCover;
-    auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\" AND %5 = \"%6\"").arg(KEYMAP[KEY::ARTWORK],
-            TABLEMAP[TABLE::ALBUMS],
-            KEYMAP[KEY::ALBUM],album,
-            KEYMAP[KEY::ARTIST],artist);
-    auto query = this->getDBData(queryStr);
-
-    for(auto track : query)
-        if(!track[KEY::ARTWORK].isEmpty() && track[KEY::ARTWORK] != SLANG[W::NONE])
-            albumCover = track[KEY::ARTWORK];
-
-    return albumCover;
-}
-
-QString CollectionDB::getAlbumWiki(const QString &album, const QString &artist)
-{
-    QString wiki;
-    auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\" AND %5 = \"%6\"").arg(KEYMAP[KEY::WIKI],
-            TABLEMAP[TABLE::ALBUMS],
-            KEYMAP[KEY::ALBUM],album,
-            KEYMAP[KEY::ARTIST],artist);
-    auto query = this->getDBData(queryStr);
-
-    for(auto track : query)
-        wiki = track[KEY::WIKI];
-
-    return wiki;
-}
 
 //QStringList CollectionDB::getAlbumTags(const QString &album, const QString &artist)
 //{
@@ -898,7 +789,7 @@ bool CollectionDB::removeTrack(const QString &path)
 }
 
 QSqlQuery CollectionDB::getQuery(const QString &queryTxt)
-{
+{    
     QSqlQuery query(queryTxt, this->m_db);
     return query;
 }

@@ -2,10 +2,8 @@
 #include <QFontDatabase>
 #include <QQmlContext>
 #include <QApplication>
-#include "db/collectionDB.h"
-#include "utils/bae.h"
-#include "utils/utils.h"
-#include "settings/settings.h"
+
+#include "babe.h"
 #include "services/local/player.h"
 #include <QLibrary>
 //#ifdef Q_OS_ANDROID
@@ -20,22 +18,20 @@ int main(int argc, char *argv[])
 
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
 
-   QQmlApplicationEngine engine;
+    QQmlApplicationEngine engine;
 
     auto context = engine.rootContext();
-    CollectionDB con;
-    settings settings;
+
+    Babe bae;
     Player player;
-    Utils util;
 
-    context->setContextProperty("con", &con);
-    context->setContextProperty("set", &settings);
+    context->setContextProperty("bae", &bae);
+
     context->setContextProperty("player", &player);
-    context->setContextProperty("util", &util);
 
-//#ifdef Q_OS_ANDROID
-//    KirigamiPlugin::getInstance().registerTypes();
-//#endif
+    //#ifdef Q_OS_ANDROID
+    //    KirigamiPlugin::getInstance().registerTypes();
+    //#endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

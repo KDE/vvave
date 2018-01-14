@@ -8,8 +8,8 @@ Item
     signal albumClicked(int index)
     property int albumSize : 150
     property int borderRadius : 2
-    property string fillColor: util.midColor()
-    property string textColor: util.foregroundColor()
+    property string fillColor: bae.midColor()
+    property string textColor: bae.foregroundColor()
     property int fontSize :Qt.platform.os === "android"? 12 : 10
     id: root
 

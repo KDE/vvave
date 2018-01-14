@@ -31,7 +31,7 @@ BabeGrid
         {
             anchors.fill: parent
             z: -999
-            color: util.altColor()
+            color: bae.altColor()
         }
 
         Column
@@ -44,7 +44,7 @@ BabeGrid
                 width: parent.width
                 height: 48
                 z: 1
-                color: util.midColor()
+                color: bae.midColor()
                 Row
                 {
                     anchors.fill: parent
@@ -62,7 +62,7 @@ BabeGrid
                         {
                             var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
                             var query = "select * from tracks where album = \""+data.album+"\" and artist = \""+data.artist+"\" order by track asc"
-                            var tracks = con.get(query)
+                            var tracks = bae.get(query)
 
                             playAlbum(tracks)
                             drawer.close()
@@ -83,7 +83,7 @@ BabeGrid
                         {
                             var data = albumsView.gridModel.get(albumsViewGrid.grid.currentIndex)
                             var query = "select * from tracks where album = \""+data.album+"\" and artist = \""+data.artist+"\""
-                            var tracks = con.get(query)
+                            var tracks = bae.get(query)
                             appendAlbum(tracks)
                             drawer.close()
 
@@ -99,7 +99,7 @@ BabeGrid
                         font.pointSize: 12
                         font.bold: true
                         lineHeight: 0.7
-                        color: util.foregroundColor()
+                        color: bae.foregroundColor()
 
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment:  Text.AlignVCenter
@@ -113,11 +113,8 @@ BabeGrid
                         height: parent.height
 
                         Icon { text: MdiFont.Icon.close }
-                        onClicked:
-                        {
-                            drawer.close()
-                            console.log("close drawer")
-                        }
+                        onClicked: drawer.close()
+
                     }
                 }
             }
@@ -130,14 +127,14 @@ BabeGrid
                 trackNumberVisible: true
                 onRowClicked:
                 {
-                    albumsViewGrid.rowClicked(model.get(index))
                     drawer.close()
+                    albumsViewGrid.rowClicked(model.get(index))
                 }
 
                 onPlayTrack:
                 {
-                    albumsViewGrid.playTrack(model.get(index))
                     drawer.close()
+                    albumsViewGrid.playTrack(model.get(index))                    
                 }
 
                 onQueueTrack:
@@ -158,7 +155,7 @@ BabeGrid
 
         var query = "select * from tracks where album = \""+album+"\" and artist = \""+artist+"\" order by track"
         console.log(query)
-        var map = con.get(query)
+        var map = bae.get(query)
 
         for(var i in map)
             drawerList.model.append(map[i])
@@ -168,7 +165,7 @@ BabeGrid
 
     function populate()
     {
-        var map = con.get("select * from albums order by album asc")
+        var map = bae.get("select * from albums order by album asc")
         for(var i in map)
             gridModel.append(map[i])
     }

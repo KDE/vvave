@@ -22,6 +22,7 @@ Item
     property alias list : list
     property alias playIcon : playIcon
     property alias babeBtnIcon: babeBtnIcon
+    property alias infoView : infoView
     //                    Component.onCompleted:
     //                    {
     //                        if(list.count>0)
@@ -64,15 +65,36 @@ Item
                 anchors.centerIn: parent
                 source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
                 fillMode: Image.PreserveAspectFit
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onDoubleClicked:
+                    {
+
+                    }
+
+                    onClicked:
+                    {
+                        if(stackView.currentItem !== list)
+                            stackView.pop(list)
+                        else
+                        {
+                            stackView.push(infoView)
+                            infoView.currentView = 1
+                        }
+                    }
+
+                }
             }
+
+
         }
 
         Slider
         {
             id: progressBar
             Layout.fillWidth: true
-            Layout.fillHeight: true
-
             Layout.row: 3
             height: 16
             from: 0
@@ -83,10 +105,11 @@ Item
 
             onMoved: player.seek(player.duration() / 1000 * value);
 
+
             Rectangle
             {
                 anchors.fill: parent
-                color: util.midColor()
+                color: bae.midColor()
                 z: -999
             }
         }
@@ -98,17 +121,19 @@ Item
             Layout.row: 2
             height: 48
             visible: list.count>0
-            color: util.midColor()
+            color: bae.midColor()
 
             onYChanged:
             {
+
                 if(playbackControls.y<columnWidth/4)
                 {
-                    cover.visible= false
+                    cover.visible = false
                     playbackControls.y = 0
+
                 }else
                 {
-                    cover.visible= true
+                    cover.visible = true
                     playbackControls.y = columnWidth
                 }
             }
@@ -140,15 +165,39 @@ Item
                 width: parent.width
                 height: parent.height
                 anchors.fill: parent
-                ToolButton
-                {
-                    id: menuBtn
-                    Icon {text: MdiFont.Icon.dotsVertical}
-                    onClicked: playlistMenu.open()
-                }
+
                 Row
                 {
-                    anchors.centerIn: parent
+                    Layout.alignment: Qt.AlignLeft
+
+                    ToolButton
+                    {
+                        id: infoBtn
+                        Icon
+                        {
+                            text: stackView.currentItem === list ? MdiFont.Icon.informationOutline : MdiFont.Icon.arrowLeft
+                        }
+                        onClicked:
+                        {
+                            if(stackView.currentItem !== list)
+                           {
+                                stackView.pop(list)
+                                cover.visible = true
+
+                            }
+                            else
+                            {
+                                cover.visible = false
+                                stackView.push(infoView)
+                            }
+                        }
+                    }
+
+                }
+
+                Row
+                {
+                    Layout.alignment: Qt.AlignCenter
                     ToolButton
                     {
                         Icon
@@ -195,6 +244,18 @@ Item
                         onClicked: shuffle = !shuffle
                     }
                 }
+
+                Row
+                {
+                    Layout.alignment: Qt.AlignRight
+
+                    ToolButton
+                    {
+                        id: menuBtn
+                        Icon {text: MdiFont.Icon.dotsVertical}
+                        onClicked: playlistMenu.open()
+                    }
+                }
             }
         }
 
@@ -205,29 +266,47 @@ Item
             Layout.fillHeight: true
             Layout.row: 4
             color: "transparent"
-            BabeTable
-            {
-                id: list
-                width: parent.width
-                height: parent.height
-                quickBtnsVisible: false
-                onRowClicked: Player.playTrack(model.get(index))
-                holder.message: "Empty playlist..."
-                Component.onCompleted:
-                {
-                    var list = util.lastPlaylist()
-                    var n = list.length
-                    for(var i = 0; i < n; i++)
-                    {
-                        var track = con.get("select * from tracks where url = \""+list[i]+"\"")
-                        Player.appendTrack(track[0])
-                    }
 
-                    //                                    var pos = util.lastPlaylistPos()
-                    //                                    console.log("POSSS:", pos)
-                    //                                    list.currentIndex = pos
-                    //                                    play(list.model.get(pos))
+            StackView
+            {
+                id: stackView
+                anchors.fill: parent
+                focus: true
+
+                initialItem: BabeTable
+                {
+                    id: list
+                    width: parent.width
+                    height: parent.height
+                    quickBtnsVisible: false
+                    quickPlayVisible: false
+
+                    onRowClicked: Player.playTrack(model.get(index))
+                    holder.message: "Empty playlist..."
+                    Component.onCompleted:
+                    {
+                        var list = bae.lastPlaylist()
+                        var n = list.length
+                        for(var i = 0; i < n; i++)
+                        {
+                            var track = bae.get("select * from tracks where url = \""+list[i]+"\"")
+                            Player.appendTrack(track[0])
+                        }
+
+                        //                                    var pos = bae.lastPlaylistPos()
+                        //                                    console.log("POSSS:", pos)
+                        //                                    list.currentIndex = pos
+                        //                                    play(list.model.get(pos))
+                    }
                 }
+
+                InfoView
+                {
+                    id: infoView
+                    width: parent.width
+                    height: parent.height
+                }
+
             }
         }
     }
