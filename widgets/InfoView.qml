@@ -37,6 +37,7 @@ Page
             BabeHolder
             {
                 id: lyricsHolder
+                anchors.fill: parent
                 visible: lyrics ? false : true
                 message: "Couldn't find the lyrics!"
             }

@@ -47,18 +47,28 @@ Pane
         cellWidth: albumSize + albumSpacing
         cellHeight:  parseInt(albumSize+(albumSize*0.6))
 
+        highlightFollowsCurrentItem: false
+
         focus: true
+        boundsBehavior: Flickable.StopAtBounds
+
+        flickableDirection: Flickable.AutoFlickDirection
+
+        snapMode: GridView.SnapToRow
+        //        flow: GridView.FlowTopToBottom
+//        maximumFlickVelocity: albumSize*8
+
         model: gridModel
         SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
 
-//        highlight: Rectangle
-//        {
-//            id: highlight
-//            width: albumSize
-//            height: albumSize
-//            color: myPalette.highlight
-//            radius: 4
-//        }
+        //        highlight: Rectangle
+        //        {
+        //            id: highlight
+        //            width: albumSize
+        //            height: albumSize
+        //            color: myPalette.highlight
+        //            radius: 4
+        //        }
 
         //        onWidthChanged:
         //        {
@@ -90,7 +100,7 @@ Pane
             }
         }
 
-//        ScrollBar.vertical: ScrollBar{}
+        ScrollBar.vertical: ScrollBar{ visible: !(Qt.platform.os === android)}
     }
 
 }

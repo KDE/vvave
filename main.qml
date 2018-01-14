@@ -162,12 +162,7 @@ ApplicationWindow
                 {
                     id: tracksView
                     onRowClicked: Player.appendTrack(model.get(index))
-                    onPlayTrack:
-                    {
-                        Player.appendTrack(model.get(index))
-                        Player.playAt(mainPlaylist.list.count-1)
-                        currentView = 0
-                    }
+                    onQuickPlayTrack: Player.quickPlay(model.get(index))
                 }
 
                 AlbumsView

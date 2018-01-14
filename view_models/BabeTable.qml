@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.3
 ListView
 {
     SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
+    id: list
 
     property int currentRow : -1
     property bool trackNumberVisible
@@ -13,7 +14,7 @@ ListView
     property alias holder : holder
     signal rowClicked(int index)
     signal rowPressed(int index)
-    signal playTrack(int index)
+    signal quickPlayTrack(int index)
     signal queueTrack(int index)
 
     width: 320
@@ -27,7 +28,6 @@ ListView
     focus: true
     boundsBehavior: Flickable.StopAtBounds
 
-    id: list
     flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem
@@ -141,7 +141,7 @@ ListView
             onPressAndHold:
             {
                 if(Qt.platform.os === "linux")
-                    playTrack(currentIndex)
+                    list.quickPlayTrack(currentIndex)
             }
 
             onClicked:
@@ -150,7 +150,7 @@ ListView
                 currentIndex = index
             }
 
-            onPlayTrack: list.playTrack(index)
+            onPlay: list.quickPlayTrack(index)
             onMenuClicked:
             {
                 currentRow = index

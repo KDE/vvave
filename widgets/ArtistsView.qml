@@ -53,12 +53,13 @@ BabeGrid
 
                         onClicked:
                         {
+                            drawer.close()
                             var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
 
                             var query = "select * from tracks where artist = \""+data.artist+"\""
                             var tracks = bae.get(query)
                             playAlbum(tracks)
-                            drawer.close()
+
                         }
                     }
                     ToolButton
@@ -125,20 +126,20 @@ BabeGrid
 
                 onRowClicked:
                 {
-                    artistsViewGrid.rowClicked(model.get(index))
                     drawer.close()
+                    artistsViewGrid.rowClicked(model.get(index))
                 }
 
-                onPlayTrack:
+                onQuickPlayTrack:
                 {
-                    artistsViewGrid.playTrack(model.get(index))
                     drawer.close()
+                    artistsViewGrid.playTrack(model.get(index))
                 }
 
                 onQueueTrack:
                 {
-                    artistsViewGrid.queueTrack(model.get(index))
                     drawer.close()
+                    artistsViewGrid.queueTrack(model.get(index))
                 }
             }
         }

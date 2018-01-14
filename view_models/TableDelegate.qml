@@ -7,7 +7,7 @@ import "../utils"
 ItemDelegate
 {
     id: delegate
-    signal playTrack()
+    signal play()
     signal menuClicked()
 
     property string textColor: bae.foregroundColor()
@@ -45,7 +45,7 @@ ItemDelegate
             Layout.rowSpan: 2
             visible: quickPlay
             Icon { text: MdiFont.Icon.playCircle }
-            onClicked: playTrack()
+            onClicked: delegate.play()
         }
 
         Label

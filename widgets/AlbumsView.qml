@@ -60,13 +60,13 @@ BabeGrid
 
                         onClicked:
                         {
+                            drawer.close()
+
                             var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
                             var query = "select * from tracks where album = \""+data.album+"\" and artist = \""+data.artist+"\" order by track asc"
                             var tracks = bae.get(query)
 
-                            playAlbum(tracks)
-                            drawer.close()
-
+                            albumsViewGrid.playAlbum(tracks)
                         }
                     }
 
@@ -84,7 +84,7 @@ BabeGrid
                             var data = albumsView.gridModel.get(albumsViewGrid.grid.currentIndex)
                             var query = "select * from tracks where album = \""+data.album+"\" and artist = \""+data.artist+"\""
                             var tracks = bae.get(query)
-                            appendAlbum(tracks)
+                            albumsViewGrid.appendAlbum(tracks)
                             drawer.close()
 
                         }
@@ -131,7 +131,7 @@ BabeGrid
                     albumsViewGrid.rowClicked(model.get(index))
                 }
 
-                onPlayTrack:
+                onQuickPlayTrack:
                 {
                     drawer.close()
                     albumsViewGrid.playTrack(model.get(index))                    
