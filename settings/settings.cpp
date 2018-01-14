@@ -63,7 +63,8 @@ settings::settings(QObject *parent) : QObject(parent)
 
     if(BAE::isMobile())
         this->populateDB({BAE::MusicPath, BAE::DownloadsPath});
-
+    else
+        checkCollection();
 
     connect(this->brainDeamon, &Brain::finished, [this]()
     {
@@ -138,7 +139,7 @@ void settings::on_remove_clicked()
 
 void settings::refreshCollectionPaths()
 {
-    auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::SOURCES]);
+//    auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::SOURCES]);
 
     //    for (auto track : this->connection->getDBData(queryTxt))
     //    {
@@ -201,8 +202,8 @@ void settings::handleDirectoryChanged(const QString &dir)
 
 void settings::checkCollection()
 {
-    this->refreshCollectionPaths();
-    this->collectionWatcher();
+//    this->refreshCollectionPaths();
+//    this->collectionWatcher();
     this->brainzOn = true;
     this->startBrainz(1500);
 }

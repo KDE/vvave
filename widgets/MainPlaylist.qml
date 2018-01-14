@@ -288,6 +288,39 @@ Item
                 anchors.fill: parent
                 focus: true
 
+                pushEnter: Transition {
+                        PropertyAnimation {
+                            property: "opacity"
+                            from: 0
+                            to:1
+                            duration: 200
+                        }
+                    }
+                    pushExit: Transition {
+                        PropertyAnimation {
+                            property: "opacity"
+                            from: 1
+                            to:0
+                            duration: 200
+                        }
+                    }
+                    popEnter: Transition {
+                        PropertyAnimation {
+                            property: "opacity"
+                            from: 0
+                            to:1
+                            duration: 200
+                        }
+                    }
+                    popExit: Transition {
+                        PropertyAnimation {
+                            property: "opacity"
+                            from: 1
+                            to:0
+                            duration: 200
+                        }
+                    }
+
                 initialItem: BabeTable
                 {
                     id: list

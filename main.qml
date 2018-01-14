@@ -92,7 +92,7 @@ ApplicationWindow
     {
         id: searchBox
         width: parent.width
-        height: 40
+        height: 48
         color: bae.midColor()
 
         TextInput
@@ -236,6 +236,12 @@ ApplicationWindow
                 SearchTable
                 {
                     id: searchView
+                    Connections
+                    {
+                        target: searchView
+                        onRowClicked: Player.addTrack(searchView.model.get(index))
+                        onQuickPlayTrack: Player.quickPlay(searchView.model.get(index))
+                    }
                 }
 
             }

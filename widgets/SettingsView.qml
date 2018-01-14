@@ -29,7 +29,7 @@ Pane
     Rectangle
     {
         anchors.centerIn: parent
-
+        visible : !bae.isMobile()
         width: parent.width /2
         height: parent.height/2
         border.color: "#dedede"
