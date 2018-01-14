@@ -60,7 +60,10 @@ settings::settings(QObject *parent) : QObject(parent)
         youtubeCache_dir.mkpath(".");
 
     //    if(!connection->check_existance(TABLEMAP[TABLE::SOURCES], KEYMAP[KEY::URL], BAE::MusicPath))
-    this->populateDB(BAE::MusicPath);
+
+    if(BAE::isMobile())
+        this->populateDB({BAE::MusicPath, BAE::DownloadsPath});
+
 
     connect(this->brainDeamon, &Brain::finished, [this]()
     {
@@ -73,32 +76,34 @@ settings::settings(QObject *parent) : QObject(parent)
     });
 
 
-    connect(this->fileLoader, &FileLoader::collectionSize, [this](int size)
-    {
-        if(size>0)
-            this->brainzOn = true;
-        else
-        {
-            this->brainzOn = false;
-            this->dirs.clear();
-            this->collectionWatcher();
-            this->watcher->removePaths(watcher->directories());
-        }
-    });
-
     //    connect(this->fileLoader, &FileLoader::trackReady, [this]()
     //    {
     //        this->ui->progressBar->setValue(this->ui->progressBar->value()+1);
     //    });
 
-    connect(this->fileLoader, &FileLoader::finished,[this]()
+    connect(this->fileLoader, &FileLoader::finished,[this](int size)
     {
-        this->collectionWatcher();
-        emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
-                            {BAE::TABLEMAP[TABLE::ALBUMS], true},
-                            {BAE::TABLEMAP[TABLE::ARTISTS], true},
-                            {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
-        this->startBrainz();
+        this->brainzOn = true;
+
+        if(size>0)
+        {
+            this->collectionWatcher();
+            emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
+                                {BAE::TABLEMAP[TABLE::ALBUMS], true},
+                                {BAE::TABLEMAP[TABLE::ARTISTS], true},
+                                {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
+
+
+            this->startBrainz(500);
+        }else
+        {
+            this->dirs.clear();
+            this->collectionWatcher();
+            this->watcher->removePaths(watcher->directories());
+            this->startBrainz(1500);
+        }
+
+
     });
 
     connect(this, &settings::collectionPathChanged, this, &settings::populateDB);
@@ -126,7 +131,7 @@ void settings::on_remove_clicked()
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
             emit refreshTables({{TABLEMAP[TABLE::TRACKS], true},
-                               {TABLEMAP[TABLE::PLAYLISTS], true}});
+                                {TABLEMAP[TABLE::PLAYLISTS], true}});
         }
     }
 }
@@ -186,7 +191,7 @@ void settings::handleDirectoryChanged(const QString &dir)
 
     connect(wait, &QTimer::timeout,[=]()
     {
-        emit collectionPathChanged(dir);
+        emit collectionPathChanged({dir});
         wait->deleteLater();
     });
 
@@ -198,22 +203,27 @@ void settings::checkCollection()
 {
     this->refreshCollectionPaths();
     this->collectionWatcher();
-    this->startBrainz();
+    this->brainzOn = true;
+    this->startBrainz(1500);
 }
 
-void settings::startBrainz()
+void settings::startBrainz(const int &speed)
 {
     if(this->brainzOn)
+    {
+        this->brainDeamon->setInterval(speed);
         this->brainDeamon->start();
+    }
+
 }
 
-void settings::populateDB(const QString &path)
+void settings::populateDB(const QStringList &paths)
 {
     qDebug() << "Function Name: " << Q_FUNC_INFO
-             << "new path for database action: " << path;
-    auto newPath = path;
-
-    if(path.startsWith("file://"))
-        newPath = newPath.replace("file://", "");
-    fileLoader->requestPath(newPath);
+             << "new path for database action: " << paths;
+    auto newPaths = paths;
+    for(auto path : newPaths)
+        if(path.startsWith("file://"))
+            path.replace("file://", "");
+    fileLoader->requestPaths(newPaths);
 }

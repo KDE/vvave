@@ -39,8 +39,8 @@ private slots:
     void on_remove_clicked();
 
 public slots:
-    void startBrainz();
-    void populateDB(const QString &path);
+    void startBrainz(const int &speed);
+    void populateDB(const QStringList &paths);
 
 private:
     FileLoader *fileLoader;
@@ -62,7 +62,7 @@ private:
     void addToWatcher(QStringList paths);
 
 signals:
-    void collectionPathChanged(QString newPath);
+    void collectionPathChanged(QStringList newPaths);
     void refreshTables(QVariantMap tables);
     void albumArtReady(const DB &album);
     void brainFinished();

@@ -20,6 +20,7 @@ Babe::Babe(QObject *parent) : QObject(parent)
     {
         emit this->refreshTables(tables);
     });
+
 }
 
 QVariantList Babe::get(const QString &queryTxt)
@@ -148,12 +149,12 @@ bool Babe::rateTrack(const QString &path, const int &value)
 
 int Babe::trackRate(const QString &path)
 {
-   return this->con->getTrackStars(path);
+    return this->con->getTrackStars(path);
 }
 
 void Babe::scanDir(const QString &url)
 {
-    emit this->set->collectionPathChanged(url);
+    emit this->set->collectionPathChanged({url});
 }
 
 void Babe::savePlaylist(const QStringList &list)
@@ -243,21 +244,7 @@ QString Babe::babeColor()
 
 bool Babe::isMobile()
 {
-#if defined(Q_OS_ANDROID)
-    return true;
-#elif defined(Q_OS_LINUX)
-   return false;
-#elif defined(Q_OS_WIN32)
-    return false;
-#elif defined(Q_OS_WIN64)
-    return false;
-#elif defined(Q_OS_MACOS)
-    return false;
-#elif defined(Q_OS_IOS)
-    return true;
-#elif defined(Q_OS_HAIKU)
-    return false;
-#endif
+    return BAE::isMobile();
 }
 
 QString Babe::loadCover(const QString &url)
@@ -281,6 +268,71 @@ QString Babe::loadCover(const QString &url)
         return artistImg;
     else
         return this->fetchCoverArt(track);
+}
+
+QVariantList Babe::searchFor(const QStringList &queries)
+{
+    BAE::DB_LIST mapList;
+    bool hasKey=false;
+
+    for(auto searchQuery : queries)
+    {
+        if(searchQuery.contains(BAE::SearchTMap[BAE::SearchT::LIKE]+":") || searchQuery.startsWith("#"))
+        {
+            if(searchQuery.startsWith("#"))
+                searchQuery=searchQuery.replace("#","").trimmed();
+            else
+                searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::LIKE]+":","").trimmed();
+
+
+            searchQuery=searchQuery.trimmed();
+            if(!searchQuery.isEmpty())
+            {
+                mapList += this->con->getSearchedTracks(BAE::KEY::WIKI, searchQuery);
+                mapList += this->con->getSearchedTracks(BAE::KEY::TAG, searchQuery);
+                mapList += this->con->getSearchedTracks(BAE::KEY::LYRICS, searchQuery);
+            }
+
+        }else if(searchQuery.contains((BAE::SearchTMap[BAE::SearchT::SIMILAR]+":")))
+        {
+            searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::SIMILAR]+":","").trimmed();
+            searchQuery=searchQuery.trimmed();
+            if(!searchQuery.isEmpty())
+                mapList += this->con->getSearchedTracks(BAE::KEY::TAG,searchQuery);
+
+        }else
+        {
+            BAE::KEY key;
+
+            QMapIterator<BAE::KEY, QString> k(BAE::KEYMAP);
+            while (k.hasNext())
+            {
+                k.next();
+                if(searchQuery.contains(QString(k.value()+":")))
+                {
+                    hasKey=true;
+                    key=k.key();
+                    searchQuery=searchQuery.replace(k.value()+":","").trimmed();
+                }
+            }
+
+            searchQuery = searchQuery.trimmed();
+            qDebug()<<"Searching for: "<<searchQuery;
+
+            if(!searchQuery.isEmpty())
+            {
+                if(hasKey)
+                    mapList += this->con->getSearchedTracks(key, searchQuery);
+                else
+                {
+                    auto queryTxt = QString("SELECT * FROM tracks WHERE title LIKE \"%"+searchQuery+"%\" OR artist LIKE \"%"+searchQuery+"%\" OR album LIKE \"%"+searchQuery+"%\"OR genre LIKE \"%"+searchQuery+"%\"OR url LIKE \"%"+searchQuery+"%\" LIMIT 1000");
+                    mapList += this->con->getDBData(queryTxt);
+                }
+            }
+        }
+    }
+
+    return  this->transformData(mapList);
 }
 
 QString Babe::fetchCoverArt(DB &song)

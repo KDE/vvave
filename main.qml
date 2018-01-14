@@ -92,7 +92,7 @@ ApplicationWindow
     {
         id: searchBox
         width: parent.width
-        height: 32
+        height: 40
         color: bae.midColor()
 
         TextInput
@@ -103,7 +103,11 @@ ApplicationWindow
             color: bae.foregroundColor()
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:  Text.AlignVCenter
-
+            selectByMouse: !bae.isMobile()
+            //            selectByMouseChanged: !bae.isMobile()
+            //            canPaste: true
+            //            canUndo: true
+            //            canRedo: true
             property string placeholderText: "Search..."
 
             Label
@@ -116,6 +120,25 @@ ApplicationWindow
                 font.bold: true
                 color: bae.foregroundColor()
             }
+
+//            onTextChanged:
+//            {
+//                if(searchInput.text.length===0)
+//                    albumsView.populate()
+//            }
+
+            onAccepted:
+            {
+                var query = searchInput.text
+                var queries = query.split(",")
+                var res = bae.searchFor(queries)
+
+                searchView.populate(res)
+//                albumsView.filter(res)
+                currentView = 6
+            }
+
+
 
         }
     }
@@ -208,6 +231,11 @@ ApplicationWindow
                 SettingsView
                 {
                     onIconSizeChanged: iconSize = size
+                }
+
+                SearchTable
+                {
+                    id: searchView
                 }
 
             }

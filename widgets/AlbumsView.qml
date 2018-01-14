@@ -20,6 +20,7 @@ BabeGrid
     signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
+
     Drawer
     {
         id: drawer
@@ -137,7 +138,7 @@ BabeGrid
                 onQuickPlayTrack:
                 {
                     drawer.close()
-                    albumsViewGrid.playTrack(model.get(index))                    
+                    albumsViewGrid.playTrack(model.get(index))
                 }
 
                 onQueueTrack:
@@ -171,6 +172,32 @@ BabeGrid
         var map = bae.get(Q.Query.allAlbumsAsc)
         for(var i in map)
             gridModel.append(map[i])
+    }
+
+    function filter(tracks)
+    {
+        var matches = []
+        for(var i = 0; i<tracks.length; i++)
+            matches.push(find(tracks[i].album))
+
+         for(var j = 0 ; j < albumsViewGrid.gridModel.count; j++)
+             albumsViewGrid.gridModel.remove(j,1)
+
+
+//        for(var match in matches)
+//        {
+//            albumsViewGrid.gridModel.get(match).hide = true
+//            console.log(match)
+//        }
+    }
+
+    function find(query)
+    {
+        var indexes = []
+        for(var i = 0 ; i < albumsViewGrid.gridModel.count; i++)
+            if(albumsViewGrid.gridModel.get(i).album.includes(query))
+                indexes.push(i)
+
     }
 
     Component.onCompleted: populate()

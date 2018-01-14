@@ -11,10 +11,13 @@ Item
     property string fillColor: bae.midColor()
     property string textColor: bae.foregroundColor()
     property int fontSize : bae.isMobile()? 12 : 10
+    property bool hide : false
     id: root
 
     width: albumSize
     height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
+
+    visible: !hide
 
     DropShadow
     {

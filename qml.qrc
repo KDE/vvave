@@ -29,5 +29,6 @@
         <file>widgets/LyricsView.qml</file>
         <file>db/Queries.js</file>
         <file>view_models/TableMenu.qml</file>
+        <file>widgets/SearchTable.qml</file>
     </qresource>
 </RCC>

@@ -60,7 +60,7 @@ public:
     /*USEFUL*/
 
     Q_INVOKABLE QString loadCover(const QString &url);
-
+Q_INVOKABLE QVariantList searchFor(const QStringList &queries);
 
 private:
     CollectionDB *con;

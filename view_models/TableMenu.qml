@@ -119,35 +119,35 @@ Menu
                 onClicked: rateIt(3)
             }
 
-            ToolButton
-            {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-                Icon
-                {
-                    text: starIcon
-                    color: rate >= 4 ? starColor :starReg
-                    iconSize: starSize
-                }
+//            ToolButton
+//            {
+//                Layout.fillHeight: true
+//                Layout.fillWidth: true
+//                Layout.alignment: Qt.AlignCenter
+//                Icon
+//                {
+//                    text: starIcon
+//                    color: rate >= 4 ? starColor :starReg
+//                    iconSize: starSize
+//                }
 
-                onClicked: rateIt(4)
-            }
+//                onClicked: rateIt(4)
+//            }
 
-            ToolButton
-            {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-                Icon
-                {
-                    text: starIcon
-                    color: rate >= 5 ? starColor :starReg
-                    iconSize: starSize
-                }
+//            ToolButton
+//            {
+//                Layout.fillHeight: true
+//                Layout.fillWidth: true
+//                Layout.alignment: Qt.AlignCenter
+//                Icon
+//                {
+//                    text: starIcon
+//                    color: rate >= 5 ? starColor :starReg
+//                    iconSize: starSize
+//                }
 
-                onClicked: rateIt(5)
-            }
+//                onClicked: rateIt(5)
+//            }
 
 
 

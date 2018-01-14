@@ -31,19 +31,16 @@ public:
         this->t.wait();
     }
 
-    void requestPath(QString path)
+    void requestPaths(QStringList paths)
     {
-        qDebug()<<"FROM file loader"<< path;
-        this->queue << path;
-        for(auto url : this->queue)
+        qDebug()<<"FROM file loader"<< &paths;
+
+        if(!go)
         {
-            if(!go)
-            {
-                this->go = true;
-                QMetaObject::invokeMethod(this, "getTracks", Q_ARG(QString, url));
-                this->queue.removeOne(url);
-            }
+            this->go = true;
+            QMetaObject::invokeMethod(this, "getTracks", Q_ARG(QStringList, paths));
         }
+
     }
 
     void nextTrack()
@@ -53,23 +50,28 @@ public:
 
 public slots:
 
-    void getTracks(QString path)
+    void getTracks(QStringList paths)
     {
         qDebug()<<"GETTING TRACKS FROM SETTINGS";
 
         QStringList urls;
 
-        if (QFileInfo(path).isDir())
+        for(auto path : paths)
         {
-            QDirIterator it(path, BAE::formats, QDir::Files, QDirIterator::Subdirectories);
-            while (it.hasNext()) urls<<it.next();
+            if (QFileInfo(path).isDir())
+            {
+                QDirIterator it(path, BAE::formats, QDir::Files, QDirIterator::Subdirectories);
+                while (it.hasNext()) urls<<it.next();
 
-        } else if (QFileInfo(path).isFile()) urls<<path;
+            } else if (QFileInfo(path).isFile()) urls<<path;
 
+        }
 
+        qDebug()<<"URLS SIZEW FOR:"<<paths<< urls.size();
+        int newTracks = 0;
         if(urls.size()>0)
         {
-            int newTracks = 0;
+
             for(auto url : urls)
             {
                 if(go)
@@ -108,18 +110,16 @@ public slots:
                     }
                 }else break;
             }
-
-            emit collectionSize(newTracks);
         }
 
         this->t.msleep(100);
-        emit this->finished();
+        emit this->finished(newTracks);
         this->go = false;
     }
 
 signals:
     void trackReady(BAE::DB track);
-    void finished();
+    void finished(int size);
     void collectionSize(int size);
 
 private:
