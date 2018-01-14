@@ -72,57 +72,10 @@ ListView
         }
     }
 
-    Menu
-    {
-        id: contextMenu
-        x: parent.width / 2 - width / 2
-        y: parent.height / 2 - height / 2
-        modal: true
-
-        Label
-        {
-            padding: 10
-            font.bold: true
-            width: parent.width
-            horizontalAlignment: Qt.AlignHCenter
-            elide: Text.ElideRight
-            text: currentRow >= 0 ? list.model.get(currentRow).title : ""
-        }
-        MenuItem
-        {
-            text: qsTr("Babe it")
-            onTriggered: ;
-        }
-        MenuItem
-        {
-            text: qsTr("Queue")
-            onTriggered:
-            {
-                console.log(currentRow)
-                list.queueTrack(currentRow)
-            }
-        }
-        MenuItem
-        {
-            text: qsTr("Edit...")
-            onTriggered: ;
-        }
-        MenuItem
-        {
-            text: qsTr("Remove")
-            onTriggered: ;
-        }
-        MenuItem
-        {
-            text: qsTr("Edit...")
-            onTriggered: ;
-        }
-        MenuItem
-        {
-            text: qsTr("Remove")
-            onTriggered: ;
-        }
-    }
+   TableMenu
+   {
+       id: contextMenu
+   }
 
     ListModel { id: listModel }
 
@@ -140,7 +93,7 @@ ListView
             target: delegate
             onPressAndHold:
             {
-                if(Qt.platform.os === "linux")
+                if(!bae.isMobile())
                     list.quickPlayTrack(currentIndex)
             }
 
@@ -154,6 +107,7 @@ ListView
             onMenuClicked:
             {
                 currentRow = index
+                contextMenu.rate = bae.trackRate(list.model.get(currentRow).url)
                 contextMenu.open()
                 list.rowPressed(index)
             }

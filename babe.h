@@ -22,6 +22,7 @@ public:
     /* DATABASE INTERFACES */
 
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
+    Q_INVOKABLE QVariantList getList(const QStringList &urls);
     Q_INVOKABLE void trackLyrics(const QString &url);
     Q_INVOKABLE bool trackBabe(const QString &path);
     Q_INVOKABLE QString artistArt(const QString &artist);
@@ -30,6 +31,8 @@ public:
     Q_INVOKABLE QString albumWiki(const QString &album, const QString &artist);
 
     Q_INVOKABLE bool babeTrack(const QString &path, const bool &value);
+    Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
+    Q_INVOKABLE int trackRate(const QString &path);
 
 
     /* SETTINGS */
@@ -52,6 +55,8 @@ public:
     Q_INVOKABLE static QString altColor();
     Q_INVOKABLE static QString babeColor();
 
+    Q_INVOKABLE static bool isMobile();
+
     /*USEFUL*/
 
     Q_INVOKABLE QString loadCover(const QString &url);
@@ -62,7 +67,7 @@ private:
     settings *set;
 
     QString fetchCoverArt(DB &song);
-
+    static QVariantList transformData(const DB_LIST &dbList);
 
     void fetchTrackLyrics(DB &song);
 

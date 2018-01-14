@@ -34,7 +34,7 @@ ApplicationWindow
 
     //    pageStack.defaultColumnWidth: columnWidth
     //    pageStack.initialPage: [playlistPage, views]
-    onWidthChanged: if(Qt.platform.os === "android")
+    onWidthChanged: if(bae.isMobile())
                     {
                         if(root.width>root.height)
                             mainPlaylist.cover.visible = false
@@ -147,13 +147,7 @@ ApplicationWindow
 
                 onCurrentIndexChanged: currentView = currentIndex
 
-                Component.onCompleted:
-                {
-                    if(Qt.platform.os === "linux")
-                        contentItem.interactive = false
-                    else if(Qt.platform.os === "android")
-                        contentItem.interactive = true
-                }
+                Component.onCompleted: contentItem.interactive = bae.isMobile()
 
                 currentIndex: currentView
 
@@ -161,6 +155,12 @@ ApplicationWindow
                 MainPlaylist
                 {
                     id: mainPlaylist
+                    Connections
+                    {
+                        target: mainPlaylist
+                        onCoverPressed: Player.appendAlbum(tracks)
+                        onCoverDoubleClicked: Player.playAlbum(tracks)
+                    }
                 }
 
 

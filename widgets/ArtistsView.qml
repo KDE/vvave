@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.3
 import "../view_models"
 import "../utils/Icons.js" as MdiFont
 import "../utils"
+import "../db/Queries.js" as Q
 
 BabeGrid
 {
@@ -56,9 +57,9 @@ BabeGrid
                             drawer.close()
                             var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
 
-                            var query = "select * from tracks where artist = \""+data.artist+"\""
+                            var query = Q.Query.artistTracks_.arg(data.artist)
                             var tracks = bae.get(query)
-                            playAlbum(tracks)
+                            artistsViewGrid.playAlbum(tracks)
 
                         }
                     }
@@ -74,9 +75,9 @@ BabeGrid
                         onClicked:
                         {
                             var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
-                            var query = "select * from tracks where artist = \""+data.artist+"\""
+                            var query = Q.Query.artistTracks_.arg(data.artist)
                             var tracks = bae.get(query)
-                            appendAlbum(tracks)
+                            artistsViewGrid.appendAlbum(tracks)
                             drawer.close()
 
                         }
@@ -150,8 +151,7 @@ BabeGrid
         artistTitle.text = artist
         drawer.open()
         drawerList.clearTable()
-
-        var query = "select * from tracks where artist = \""+artist+"\" order by album, track"
+        var query = Q.Query.artistTracks_.arg(artist)
         var map = bae.get(query)
 
         for(var i in map)
@@ -161,7 +161,7 @@ BabeGrid
 
     function populate()
     {
-        var map = bae.get("select * from artists order by artist asc")
+        var map = bae.get(Q.Query.allArtistsAsc)
         for(var i in map)
             gridModel.append(map[i])
     }

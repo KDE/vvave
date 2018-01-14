@@ -33,5 +33,12 @@ Menu
     {
         text: qsTr("Callibrate")
         onTriggered: callibrate()
+    }    
+    MenuItem
+    {
+        text: qsTr("Save as playlist...")
+        onTriggered: {}
     }
+
+
 }

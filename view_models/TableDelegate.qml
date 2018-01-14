@@ -22,7 +22,7 @@ ItemDelegate
         acceptedButtons: Qt.RightButton
         onClicked:
         {
-            if(Qt.platform.os === "linux")
+            if(!bae.isMobile())
                 if (mouse.button === Qt.RightButton)
                     menuClicked()
         }
@@ -115,7 +115,7 @@ ItemDelegate
             ToolButton
             {
                 id: menuBtn
-                visible: Qt.platform.os === "android"
+                visible: bae.isMobile()
                 Icon { text: MdiFont.Icon.dotsVertical }
                 onClicked: menuClicked()
             }

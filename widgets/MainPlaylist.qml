@@ -6,6 +6,7 @@ import QtGraphicalEffects 1.0
 
 import "../utils/Icons.js" as MdiFont
 import "../utils/Player.js" as Player
+import "../db/Queries.js" as Q
 import "../utils"
 import "../view_models"
 import "../widgets"
@@ -23,6 +24,8 @@ Item
     property alias playIcon : playIcon
     property alias babeBtnIcon: babeBtnIcon
     property alias infoView : infoView
+    signal coverDoubleClicked(var tracks)
+    signal coverPressed(var tracks)
     //                    Component.onCompleted:
     //                    {
     //                        if(list.count>0)
@@ -71,19 +74,31 @@ Item
                     anchors.fill: parent
                     onDoubleClicked:
                     {
+                        var query = Q.Query.albumTracks_.arg(currentTrack.album)
+                        query = query.arg(currentTrack.artist)
 
+                        var tracks = bae.get(query)
+                        coverDoubleClicked(tracks)
                     }
 
-                    onClicked:
+                    onPressAndHold:
                     {
-                        if(stackView.currentItem !== list)
-                            stackView.pop(list)
-                        else
-                        {
-                            stackView.push(infoView)
-                            infoView.currentView = 1
-                        }
+                        var query = Q.Query.albumTracks_.arg(currentTrack.album)
+                        query = query.arg(currentTrack.artist)
+                        var tracks = bae.get(query)
+                        coverPressed(tracks)
                     }
+
+                    //                    onClicked:
+                    //                    {
+                    //                        if(stackView.currentItem !== list)
+                    //                            stackView.pop(list)
+                    //                        else
+                    //                        {
+                    //                            stackView.push(infoView)
+                    //                            infoView.currentView = 1
+                    //                        }
+                    //                    }
 
                 }
             }
@@ -155,7 +170,7 @@ Item
                 drag.maximumY: columnWidth
                 onClicked:
                 {
-                    if(Qt.platform.os === "linux")
+                    if(!bae.isMobile())
                         cover.visible = !cover.visible
                 }
             }
@@ -180,7 +195,7 @@ Item
                         onClicked:
                         {
                             if(stackView.currentItem !== list)
-                           {
+                            {
                                 stackView.pop(list)
                                 cover.visible = true
 
@@ -287,10 +302,25 @@ Item
                     {
                         var list = bae.lastPlaylist()
                         var n = list.length
-                        for(var i = 0; i < n; i++)
+
+                        if(n>0)
                         {
-                            var track = bae.get("select * from tracks where url = \""+list[i]+"\"")
-                            Player.appendTrack(track[0])
+                            for(var i = 0; i < n; i++)
+                            {
+                                var where = "url = \""+list[i]+"\""
+                                var query = Q.Query.tracksWhere_.arg(where)
+                                var track = bae.get(query)
+                                Player.appendTrack(track[0])
+                            }
+                        }else
+                        {
+                            var where = "babe = 1"
+                            var query = Q.Query.tracksWhere_.arg(where)
+                            var tracks = bae.get(query)
+
+                            for(var pos=0; pos< tracks.length; pos++)
+                                Player.appendTrack(tracks[pos])
+
                         }
 
                         //                                    var pos = bae.lastPlaylistPos()

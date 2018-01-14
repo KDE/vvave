@@ -99,7 +99,7 @@ Pane
             }
         }
 
-        ScrollBar.vertical: ScrollBar{ visible: !(Qt.platform.os === "android")}
+        ScrollBar.vertical: ScrollBar{ visible: !bae.isMobile()}
     }
 
 }

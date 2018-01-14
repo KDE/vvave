@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import "../view_models"
-
+import "../db/Queries.js" as Q
 
 BabeTable
 {
@@ -8,7 +8,7 @@ BabeTable
     trackNumberVisible: false
     function populate()
     {
-        var map = bae.get("select * from tracks")
+        var map = bae.get(Q.Query.allTracks)
         for(var i in map)
             tracksViewTable.model.append(map[i])
     }

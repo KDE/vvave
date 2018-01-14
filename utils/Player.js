@@ -7,7 +7,7 @@ function playTrack(track)
     player.source(root.mainPlaylist.currentTrack.url);
     player.play()
     root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
-    root.mainPlaylist.currentArtwork = bae.loadCover(root.mainPlaylist.currentTrack.url)
+    root.mainPlaylist.currentArtwork = root.mainPlaylist.currentTrack.artwork || bae.loadCover(root.mainPlaylist.currentTrack.url)
 
     root.mainPlaylist.playIcon.text = Icon.pause
 
@@ -17,13 +17,15 @@ function playTrack(track)
         root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
 
     var lyrics = root.mainPlaylist.currentTrack.lyrics
+
     if(!lyrics)
         bae.trackLyrics(root.mainPlaylist.currentTrack.url)
     else
         root.mainPlaylist.infoView.lyrics =  lyrics
-    //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
-    //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
-    //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
+
+    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
+    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
+    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
 
 }
 
@@ -153,15 +155,14 @@ function cleanPlaylist()
 
 function playAlbum(tracks)
 {
-
     root.mainPlaylist.list.clearTable()
     root.currentView = 0
 
     for(var i = 0; i< tracks.length; i++)
         appendTrack(tracks[i])
 
-//    root.mainPlaylist.list.currentIndex = 0
-//    playTrack(root.mainPlaylist.list.model.get(0))
+    //    root.mainPlaylist.list.currentIndex = 0
+    //    playTrack(root.mainPlaylist.list.model.get(0))
 
     root.mainPlaylist.list.positionViewAtBeginning()
 

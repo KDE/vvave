@@ -27,5 +27,7 @@
         <file>view_models/BabeDialog.qml</file>
         <file>widgets/PlaylistMenu.qml</file>
         <file>widgets/LyricsView.qml</file>
+        <file>db/Queries.js</file>
+        <file>view_models/TableMenu.qml</file>
     </qresource>
 </RCC>

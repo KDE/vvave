@@ -10,7 +10,7 @@ Item
     property int borderRadius : 2
     property string fillColor: bae.midColor()
     property string textColor: bae.foregroundColor()
-    property int fontSize :Qt.platform.os === "android"? 12 : 10
+    property int fontSize : bae.isMobile()? 12 : 10
     id: root
 
     width: albumSize

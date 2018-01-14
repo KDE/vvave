@@ -24,17 +24,12 @@ Babe::Babe(QObject *parent) : QObject(parent)
 
 QVariantList Babe::get(const QString &queryTxt)
 {
-    QVariantList res;
-    for(auto data : this->con->getDBData(queryTxt))
-    {
-        QVariantMap map;
-        for(auto key : data.keys())
-            map[BAE::KEYMAP[key]] = data[key];
+    return Babe::transformData(this->con->getDBData(queryTxt));
+}
 
-        res << map;
-    }
-
-    return res;
+QVariantList Babe::getList(const QStringList &urls)
+{
+    return Babe::transformData(this->con->getDBData(urls));
 }
 
 void Babe::trackLyrics(const QString &url)
@@ -146,6 +141,16 @@ bool Babe::babeTrack(const QString &path, const bool &value)
     return false;
 }
 
+bool Babe::rateTrack(const QString &path, const int &value)
+{
+    return this->con->rateTrack(path, value);
+}
+
+int Babe::trackRate(const QString &path)
+{
+   return this->con->getTrackStars(path);
+}
+
 void Babe::scanDir(const QString &url)
 {
     emit this->set->collectionPathChanged(url);
@@ -236,6 +241,25 @@ QString Babe::babeColor()
     return "#E91E63";
 }
 
+bool Babe::isMobile()
+{
+#if defined(Q_OS_ANDROID)
+    return true;
+#elif defined(Q_OS_LINUX)
+   return false;
+#elif defined(Q_OS_WIN32)
+    return false;
+#elif defined(Q_OS_WIN64)
+    return false;
+#elif defined(Q_OS_MACOS)
+    return false;
+#elif defined(Q_OS_IOS)
+    return true;
+#elif defined(Q_OS_HAIKU)
+    return false;
+#endif
+}
+
 QString Babe::loadCover(const QString &url)
 {
     auto map = this->con->getDBData(QStringList() << url);
@@ -295,5 +319,21 @@ QString Babe::fetchCoverArt(DB &song)
     timer.stop();
 
     return  song[KEY::ARTWORK];
+}
+
+QVariantList Babe::transformData(const DB_LIST &dbList)
+{
+    QVariantList res;
+
+    for(auto data : dbList)
+    {
+        QVariantMap map;
+        for(auto key : data.keys())
+            map[BAE::KEYMAP[key]] = data[key];
+
+        res << map;
+    }
+
+    return res;
 }
 
