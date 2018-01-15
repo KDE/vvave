@@ -29,7 +29,7 @@ BabeGrid
         edge: Qt.BottomEdge
         interactive: false
 
-        Rectangle
+        background: Rectangle
         {
             anchors.fill: parent
             z: -999

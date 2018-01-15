@@ -9,6 +9,9 @@ function playTrack(track)
     root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
     root.mainPlaylist.currentArtwork = root.mainPlaylist.currentTrack.artwork || bae.loadCover(root.mainPlaylist.currentTrack.url)
 
+    if(!root.active)
+        bae.notifySong(root.mainPlaylist.currentTrack.url)
+
     root.mainPlaylist.playIcon.text = Icon.pause
 
     if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
@@ -176,13 +179,13 @@ function babeTrack()
         root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
         root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
 
-          }else
+    }else
     {
         bae.babeTrack(root.mainPlaylist.currentTrack.url, true)
         root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
         root.mainPlaylist.babeBtnIcon.color = bae.babeColor()
-
         bae.notify("Track Babe'd",root.mainPlaylist.currentTrack.title +" by "+ root.mainPlaylist.currentTrack.artist )
 
     }
 }
+

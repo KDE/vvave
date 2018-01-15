@@ -127,6 +127,34 @@ Item
                 color: bae.midColor()
                 z: -999
             }
+
+            background: Rectangle
+            {
+                    x: progressBar.leftPadding
+                    y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                    implicitWidth: 200
+                    implicitHeight: 2
+                    width: progressBar.availableWidth
+                    height: implicitHeight
+                    color: bae.foregroundColor()
+
+                    Rectangle
+                    {
+                        width: progressBar.visualPosition * parent.width
+                        height: parent.height
+                        color: bae.babeColor()
+                    }
+                }
+
+                handle: Rectangle
+                {
+                    x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
+                    y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                    implicitWidth: 16
+                    implicitHeight: 16
+                    radius: 13
+                    color: bae.babeColor()
+                }
         }
 
         Rectangle

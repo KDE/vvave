@@ -35,7 +35,7 @@ void Notify::notify(const QString &title, const QString &body)
     notification->sendEvent();
 }
 
-void Notify::notifySong(const BAE::DB &trackMap,  const QPixmap &pix)
+void Notify::notifySong(const BAE::DB &trackMap)
 {
     this->track = trackMap;
     // notification->setComponentName(QStringLiteral("Babe"));
@@ -44,7 +44,9 @@ void Notify::notifySong(const BAE::DB &trackMap,  const QPixmap &pix)
 
     notification->setTitle(QStringLiteral("%1").arg(track[BAE::KEY::TITLE]));
     notification->setText(QStringLiteral("%1\n%2").arg(track[BAE::KEY::ARTIST],track[BAE::KEY::ALBUM]));
-    if(!pix.isNull()) notification->setPixmap(pix);
+    QPixmap pixmap;
+    pixmap.load(trackMap[BAE::KEY::ARTWORK]);
+    if(!pixmap.isNull()) notification->setPixmap(pixmap);
     QStringList actions;
 
     if(track[BAE::KEY::BABE].toInt()==1) actions<<i18n("Un-Babe it  \xe2\x99\xa1");

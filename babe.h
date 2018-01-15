@@ -39,7 +39,8 @@ public:
     Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
     Q_INVOKABLE int trackRate(const QString &path);
 
-    Q_INVOKABLE static void notify(const QString &title, const QString &body);
+    Q_INVOKABLE  void notify(const QString &title, const QString &body);
+    Q_INVOKABLE  void notifySong(const QString &url);
     /* SETTINGS */
 
     Q_INVOKABLE void scanDir(const QString &url);
@@ -61,6 +62,8 @@ public:
     Q_INVOKABLE static QString babeColor();
 
     Q_INVOKABLE static bool isMobile();
+    Q_INVOKABLE static int screenGeometry(QString &side);
+    Q_INVOKABLE static int cursorPos(QString &axis);
 
     /*USEFUL*/
 
@@ -71,7 +74,7 @@ private:
     CollectionDB *con;
     settings *set;
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-    static Notify *nof;
+    Notify *nof;
 #endif
 
     QString fetchCoverArt(DB &song);
@@ -82,7 +85,8 @@ private:
 signals:
     void refreshTables(QVariantMap tables);
     void trackLyricsReady(QString lyrics, QString url);
-
+    void skipTrack();
+    void babeIt();
 public slots:
 };
 

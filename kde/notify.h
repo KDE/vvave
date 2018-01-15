@@ -21,7 +21,7 @@ class Notify : public QObject
 public:
     explicit Notify(QObject *parent = nullptr);
     ~Notify();
-    void notifySong(const BAE::DB &, const QPixmap &pix);
+    void notifySong(const BAE::DB &);
     void notify(const QString &title, const QString &body);
 
 private:

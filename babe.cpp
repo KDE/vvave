@@ -7,11 +7,11 @@
 #include "db/collectionDB.h"
 #include "settings/settings.h"
 #include "pulpo/pulpo.h"
-
+#include <QApplication>
+#include <QDesktopWidget>
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
-Notify *Babe::nof = new Notify;
 #endif
 
 using namespace BAE;
@@ -27,13 +27,26 @@ Babe::Babe(QObject *parent) : QObject(parent)
         emit this->refreshTables(tables);
     });
 
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    this->nof = new Notify(this);
+    connect(this->nof,&Notify::babeSong,[this](const BAE::DB &track)
+    {
+        qDebug()<<"BABETRACKKKK";
+        Q_UNUSED(track);
+        emit this->babeIt();
+    });
+
+    connect(this->nof,&Notify::skipSong,[this]()
+    {
+        emit this->skipTrack();
+    });
+#endif
+
 }
 
 Babe::~Babe()
 {
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-    delete Babe::nof;
-#endif
+
 }
 
 QVariantList Babe::get(const QString &queryTxt)
@@ -177,6 +190,18 @@ void Babe::notify(const QString &title, const QString &body)
 
 }
 
+void Babe::notifySong(const QString &url)
+{
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    auto query = QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where url = \"%1\"").arg(url);
+    auto track = this->con->getDBData(query);
+    Babe::nof->notifySong(track.first());
+#else
+    Q_UNUSED(title);
+    Q_UNUSED(body);
+#endif
+}
+
 void Babe::scanDir(const QString &url)
 {
     emit this->set->collectionPathChanged({url});
@@ -270,6 +295,29 @@ QString Babe::babeColor()
 bool Babe::isMobile()
 {
     return BAE::isMobile();
+}
+
+int Babe::screenGeometry(QString &side)
+{
+    side = side.toLower();
+    auto geo = QApplication::desktop()->screenGeometry();
+
+    if(side == "width")
+        return geo.width();
+    else if(side == "height")
+        return geo.height();
+    else return 0;
+}
+
+int Babe::cursorPos(QString &axis)
+{
+    axis = axis.toLower();
+    auto pos = QCursor::pos();
+    if(axis == "x")
+        return pos.x();
+    else if(axis == "y")
+        return pos.y();
+    else return 0;
 }
 
 QString Babe::loadCover(const QString &url)

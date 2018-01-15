@@ -29,11 +29,12 @@ ApplicationWindow
     property int currentView : 0
     property int iconSize
     property alias mainPlaylist : mainPlaylist
-
     //    minimumWidth: columnWidth
 
     //    pageStack.defaultColumnWidth: columnWidth
     //    pageStack.initialPage: [playlistPage, views]
+
+
     onWidthChanged: if(bae.isMobile())
                     {
                         if(root.width>root.height)
@@ -63,6 +64,7 @@ ApplicationWindow
         target: player
         onPos: mainPlaylist.progressBar.value = pos
         onFinished: Player.nextTrack()
+
     }
 
     Connections
@@ -84,6 +86,9 @@ ApplicationWindow
             if(url === root.mainPlaylist.currentTrack.url)
                 root.mainPlaylist.infoView.lyrics = lyrics
         }
+
+        onSkipTrack: Player.nextTrack()
+        onBabeIt: Player.babeTrack()
     }
 
     header: BabeBar
@@ -153,7 +158,7 @@ ApplicationWindow
 
     }
 
-    Rectangle
+    background: Rectangle
     {
         anchors.fill: parent
         color: bae.altColor()
