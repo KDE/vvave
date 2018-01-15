@@ -30,5 +30,7 @@
         <file>db/Queries.js</file>
         <file>view_models/TableMenu.qml</file>
         <file>widgets/SearchTable.qml</file>
+        <file>utils/Help.js</file>
+        <file>assets/Babe.notifyrc</file>
     </qresource>
 </RCC>

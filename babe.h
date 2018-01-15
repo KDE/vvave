@@ -5,6 +5,11 @@
 #include <QVariantList>
 #include "utils/bae.h"
 
+
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+class Notify;
+#endif
+
 class CollectionDB;
 class Pulpo;
 class settings;
@@ -17,7 +22,7 @@ class Babe : public QObject
     Q_OBJECT
 public:
     explicit Babe(QObject *parent = nullptr);
-
+    ~Babe();
 
     /* DATABASE INTERFACES */
 
@@ -34,7 +39,7 @@ public:
     Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
     Q_INVOKABLE int trackRate(const QString &path);
 
-
+    Q_INVOKABLE static void notify(const QString &title, const QString &body);
     /* SETTINGS */
 
     Q_INVOKABLE void scanDir(const QString &url);
@@ -60,11 +65,14 @@ public:
     /*USEFUL*/
 
     Q_INVOKABLE QString loadCover(const QString &url);
-Q_INVOKABLE QVariantList searchFor(const QStringList &queries);
+    Q_INVOKABLE QVariantList searchFor(const QStringList &queries);
 
 private:
     CollectionDB *con;
     settings *set;
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    static Notify *nof;
+#endif
 
     QString fetchCoverArt(DB &song);
     static QVariantList transformData(const DB_LIST &dbList);

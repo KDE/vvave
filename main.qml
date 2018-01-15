@@ -44,6 +44,19 @@ ApplicationWindow
 
     onClosing: Player.savePlaylist()
 
+    function runSearch()
+    {
+        if(searchInput.text)
+        {
+            var query = searchInput.text
+            var queries = query.split(",")
+            var res = bae.searchFor(queries)
+
+            searchView.populate(res)
+            //                albumsView.filter(res)
+            currentView = 6
+        }
+    }
 
     Connections
     {
@@ -104,43 +117,40 @@ ApplicationWindow
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:  Text.AlignVCenter
             selectByMouse: !bae.isMobile()
-            //            selectByMouseChanged: !bae.isMobile()
-            //            canPaste: true
-            //            canUndo: true
-            //            canRedo: true
+            selectionColor: bae.hightlightColor()
+            selectedTextColor: bae.foregroundColor()
             property string placeholderText: "Search..."
 
-            Label
+            //            Label
+            //            {
+            //                text: searchInput.placeholderText
+            //                visible: !(searchInput.focus || searchInput.text)
+            //                horizontalAlignment: Text.AlignHCenter
+            //                verticalAlignment:  Text.AlignVCenter
+            //                font.bold: true
+            //                color: bae.foregroundColor()
+            //            }
+
+            Icon
             {
-                anchors.fill: parent
-                text: searchInput.placeholderText
+                anchors.centerIn: parent
                 visible: !(searchInput.focus || searchInput.text)
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:  Text.AlignVCenter
-                font.bold: true
+                id: searchBtn
+                text: MdiFont.Icon.magnify
                 color: bae.foregroundColor()
             }
 
-//            onTextChanged:
-//            {
-//                if(searchInput.text.length===0)
-//                    albumsView.populate()
-//            }
 
-            onAccepted:
-            {
-                var query = searchInput.text
-                var queries = query.split(",")
-                var res = bae.searchFor(queries)
+            //            onTextChanged:
+            //            {
+            //                if(searchInput.text.length===0)
+            //                    albumsView.populate()
+            //            }
 
-                searchView.populate(res)
-//                albumsView.filter(res)
-                currentView = 6
-            }
-
-
-
+            onAccepted: runSearch()
         }
+
+
     }
 
     Rectangle

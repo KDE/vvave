@@ -176,10 +176,13 @@ function babeTrack()
         root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
         root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
 
-    }else
+          }else
     {
         bae.babeTrack(root.mainPlaylist.currentTrack.url, true)
         root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
-        root.mainPlaylist.babeBtnIcon.color = "#E91E63"
+        root.mainPlaylist.babeBtnIcon.color = bae.babeColor()
+
+        bae.notify("Track Babe'd",root.mainPlaylist.currentTrack.title +" by "+ root.mainPlaylist.currentTrack.artist )
+
     }
 }

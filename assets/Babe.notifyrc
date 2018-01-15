@@ -1,0 +1,10 @@
+[Global]
+IconName=preferences-system-bluetooth
+Comment=Tiny Music Player
+Name=Babe
+
+[Event/Notify]
+Name=Babe...
+Comment=Connection to device failed
+Icon=babe-qt
+Action=Popup

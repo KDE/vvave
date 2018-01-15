@@ -6,6 +6,12 @@ QT       += websockets
 QT       += network
 QT       += xml
 
+unix:!android:
+{
+include(kde/kde.pri)
+}
+
+
 CONFIG += c++11
 
 include(android-openssl.pri)
@@ -189,7 +195,10 @@ SOURCES += main.cpp \
         taglib/fileref.cpp \
         taglib/tag.cpp \
         taglib/tagunion.cpp \
-    babe.cpp
+    babe.cpp \
+
+
+
 
 RESOURCES += qml.qrc
 
@@ -209,6 +218,7 @@ DISTFILES += \
     db/script.sql \
     android-openssl.pri \
 #    3rdparty/kirigami/kirigami.pri
+    kde/kde.pri
 
 
 HEADERS += \
@@ -334,7 +344,11 @@ HEADERS += \
         taglib/tagunion.h \
         taglib/config.h \
         taglib/taglib_config.h \
-    babe.h
+    babe.h \
+
+
+
+
 
 #unix:!macx: LIBS += -L$$PWD/3rdparty/taglib/taglib/ -ltag
 

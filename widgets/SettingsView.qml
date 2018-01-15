@@ -29,7 +29,6 @@ Pane
     Rectangle
     {
         anchors.centerIn: parent
-        visible : !bae.isMobile()
         width: parent.width /2
         height: parent.height/2
         border.color: "#dedede"
@@ -48,6 +47,10 @@ Pane
             width: parent.width
             height: parent.height
             clip: true
+
+            visible : !bae.isMobile()
+
+
             ListModel
             {
                 id: listModel
@@ -92,6 +95,7 @@ Pane
             id: sourceActions
             anchors.top: sources.bottom
             width: parent.width
+            visible : !bae.isMobile()
 
             ToolButton
             {

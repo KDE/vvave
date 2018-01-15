@@ -39,14 +39,18 @@ settings::settings(QObject *parent) : QObject(parent)
     qDebug() << "Getting settings info from: " << BAE::SettingPath;
     qDebug() << "Getting artwork files from: " << BAE::CachePath;
 
+#if defined(Q_OS_LINUX)
+    const auto notifyDir = BAE::NotifyDir;
+
     if(!BAE::fileExists(notifyDir+"/Babe.notifyrc"))
     {
         qDebug()<<"The Knotify file does not exists, going to create it";
-        QFile knotify(":Data/data/Babe.notifyrc");
+        QFile knotify(":/assets/Babe.notifyrc");
 
         if(knotify.copy(notifyDir+"/Babe.notifyrc"))
             qDebug()<<"the knotify file got copied";
     }
+#endif
 
     QDir collectionDBPath_dir(BAE::CollectionDBPath);
     QDir cachePath_dir(BAE::CachePath);
@@ -139,7 +143,7 @@ void settings::on_remove_clicked()
 
 void settings::refreshCollectionPaths()
 {
-//    auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::SOURCES]);
+    //    auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::SOURCES]);
 
     //    for (auto track : this->connection->getDBData(queryTxt))
     //    {
@@ -202,8 +206,8 @@ void settings::handleDirectoryChanged(const QString &dir)
 
 void settings::checkCollection()
 {
-//    this->refreshCollectionPaths();
-//    this->collectionWatcher();
+    //    this->refreshCollectionPaths();
+    //    this->collectionWatcher();
     this->brainzOn = true;
     this->startBrainz(1500);
 }

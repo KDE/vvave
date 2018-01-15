@@ -51,7 +51,6 @@ private:
     
     bool brainzOn = false;
 
-    const QString notifyDir = BAE::NotifyDir;
 
     QString pathToRemove;
 

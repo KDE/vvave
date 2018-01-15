@@ -8,6 +8,12 @@
 #include "settings/settings.h"
 #include "pulpo/pulpo.h"
 
+
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+#include "kde/notify.h"
+Notify *Babe::nof = new Notify;
+#endif
+
 using namespace BAE;
 
 Babe::Babe(QObject *parent) : QObject(parent)
@@ -21,6 +27,13 @@ Babe::Babe(QObject *parent) : QObject(parent)
         emit this->refreshTables(tables);
     });
 
+}
+
+Babe::~Babe()
+{
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    delete Babe::nof;
+#endif
 }
 
 QVariantList Babe::get(const QString &queryTxt)
@@ -150,6 +163,18 @@ bool Babe::rateTrack(const QString &path, const int &value)
 int Babe::trackRate(const QString &path)
 {
     return this->con->getTrackStars(path);
+}
+
+void Babe::notify(const QString &title, const QString &body)
+{
+
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    Babe::nof->notify(title, body);
+#else
+    Q_UNUSED(title);
+    Q_UNUSED(body);
+#endif
+
 }
 
 void Babe::scanDir(const QString &url)
