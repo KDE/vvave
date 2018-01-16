@@ -33,6 +33,12 @@ Item
     //                        else
     //                            root.width = columnWidth*3
     //                    }
+    Rectangle
+    {
+        anchors.fill: parent
+        color: bae.altColor()
+        z: -999
+    }
 
     GridLayout
     {
@@ -356,6 +362,13 @@ Item
                     height: parent.height
                     quickBtnsVisible: false
                     quickPlayVisible: false
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: bae.altColor()
+                        z: -999
+                    }
 
                     onRowClicked: Player.playTrack(model.get(index))
                     holder.message: "Empty playlist..."

@@ -9,6 +9,7 @@
 #include "pulpo/pulpo.h"
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QDirIterator>
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
@@ -317,6 +318,36 @@ int Babe::cursorPos(QString &axis)
     else if(axis == "y")
         return pos.y();
     else return 0;
+}
+
+QVariantList Babe::getDirs(const QString &pathUrl)
+{
+    auto path = pathUrl;
+    if(path.startsWith("file://"))
+        path.replace("file://", "");
+    qDebug()<<"DIRECTRORY"<<path;
+    QVariantList paths;
+
+    if (QFileInfo(path).isDir())
+    {
+        QDirIterator it(path, QDir::Dirs, QDirIterator::NoIteratorFlags);
+        while (it.hasNext())
+        {
+            auto url = it.next();
+            auto name = QDir(url).dirName();
+            qDebug()<<name<<url;
+            QVariantMap map = { {"url", url }, {"name", name} };
+            paths << map;
+        }
+
+    }
+
+    return paths;
+}
+
+QVariantMap Babe::getParentDir(const QString &path)
+{
+    return {{"url",QFileInfo(path).dir().absolutePath()}, {"name", QFileInfo(path).dir().dirName()}};
 }
 
 QString Babe::loadCover(const QString &url)

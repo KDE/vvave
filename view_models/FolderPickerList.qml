@@ -8,14 +8,11 @@ ListView
     id: list
 
     property int currentRow : -1
-    property bool trackNumberVisible
-    property bool quickBtnsVisible : true
-    property bool quickPlayVisible : true
-    property alias holder : holder
+    property string currentUrl
+    property string currentName
+
     signal rowClicked(int index)
     signal rowPressed(int index)
-    signal quickPlayTrack(int index)
-    signal queueTrack(int index)
 
     width: 320
     height: 480
@@ -31,8 +28,6 @@ ListView
     flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem
-
-
 
     function clearTable()
     {
@@ -63,61 +58,35 @@ ListView
             color: bae.hightlightColor() || myPalette.highlight
             opacity: 0.2
             y: list.currentItem.y
-            //            Behavior on y
-            //            {
-            //                SpringAnimation
-            //                {
-            //                    spring: 3
-            //                    damping: 0.2
-            //                }
-            //            }
         }
     }
-
-   TableMenu
-   {
-       id: contextMenu
-   }
 
     ListModel { id: listModel }
 
     model: listModel
 
-    delegate: TableDelegate
+    delegate: FolderPickerDelegate
     {
         id: delegate
         width: list.width
-        number : trackNumberVisible ? true : false
-        quickBtns : quickBtnsVisible
-        quickPlay: quickPlayVisible
+
         Connections
         {
             target: delegate
             onPressAndHold:
             {
-                if(!bae.isMobile())
-                    list.quickPlayTrack(currentIndex)
+
             }
 
             onClicked:
             {
                 list.rowClicked(index)
                 currentIndex = index
-            }
-
-            onPlay: list.quickPlayTrack(index)
-            onMenuClicked:
-            {
-                currentRow = index
-                contextMenu.rate = bae.trackRate(list.model.get(currentRow).url)
-                contextMenu.open()
-                list.rowPressed(index)
+//                currentUrl = model.get(currentIndex).url
             }
 
         }
     }
 
     ScrollBar.vertical: ScrollBar { }
-
-
 }

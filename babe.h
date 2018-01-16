@@ -14,7 +14,6 @@ class CollectionDB;
 class Pulpo;
 class settings;
 
-
 using namespace BAE;
 
 class Babe : public QObject
@@ -64,6 +63,11 @@ public:
     Q_INVOKABLE static bool isMobile();
     Q_INVOKABLE static int screenGeometry(QString &side);
     Q_INVOKABLE static int cursorPos(QString &axis);
+
+
+    Q_INVOKABLE static QVariantList getDirs(const QString &pathUrl);
+    Q_INVOKABLE static QVariantMap getParentDir(const QString &path);
+
 
     /*USEFUL*/
 

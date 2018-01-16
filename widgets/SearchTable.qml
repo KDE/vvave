@@ -12,6 +12,12 @@ BabeTable
         for(var i in tracks)
             searchTable.model.append(tracks[i])
     }
+    Rectangle
+    {
+        anchors.fill: parent
+        color: bae.altColor()
+        z: -999
+    }
 
     Component.onCompleted: populate()
 }

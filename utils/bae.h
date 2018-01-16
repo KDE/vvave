@@ -220,6 +220,7 @@ namespace BAE
     const QString MusicPath = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
     const QString HomePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
     const QString SettingPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/babe/";
+    const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/babe/artwork/";
     const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/babe/";
     const QString CachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/";
     const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/youtube/";

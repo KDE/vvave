@@ -28,7 +28,8 @@ BabeGrid
         width: parent.width
         edge: Qt.BottomEdge
         interactive: false
-
+        focus: true
+        modal:true
         background: Rectangle
         {
             anchors.fill: parent
@@ -180,15 +181,15 @@ BabeGrid
         for(var i = 0; i<tracks.length; i++)
             matches.push(find(tracks[i].album))
 
-         for(var j = 0 ; j < albumsViewGrid.gridModel.count; j++)
-             albumsViewGrid.gridModel.remove(j,1)
+        for(var j = 0 ; j < albumsViewGrid.gridModel.count; j++)
+            albumsViewGrid.gridModel.remove(j,1)
 
 
-//        for(var match in matches)
-//        {
-//            albumsViewGrid.gridModel.get(match).hide = true
-//            console.log(match)
-//        }
+        //        for(var match in matches)
+        //        {
+        //            albumsViewGrid.gridModel.get(match).hide = true
+        //            console.log(match)
+        //        }
     }
 
     function find(query)

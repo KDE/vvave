@@ -13,6 +13,13 @@ BabeTable
             tracksViewTable.model.append(map[i])
     }
 
+    Rectangle
+    {
+        anchors.fill: parent
+        color: bae.altColor()
+        z: -999
+    }
+
     Component.onCompleted: populate()
 }
 

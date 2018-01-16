@@ -32,5 +32,8 @@
         <file>widgets/SearchTable.qml</file>
         <file>utils/Help.js</file>
         <file>assets/Babe.notifyrc</file>
+        <file>widgets/FolderPicker.qml</file>
+        <file>view_models/FolderPickerList.qml</file>
+        <file>view_models/FolderPickerDelegate.qml</file>
     </qresource>
 </RCC>

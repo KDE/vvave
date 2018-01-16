@@ -6,12 +6,33 @@ import Qt.labs.platform 1.0
 import "../utils/Icons.js" as MdiFont
 import "../utils"
 
-Pane
+Page
 {
     id: settingsView
 
     signal iconSizeChanged(int size)
 
+    function load(folderUrl)
+    {
+        folderPicker.dirList.clearTable()
+        var dirs = bae.getDirs(folderUrl)
+        for(var path in dirs)
+        {
+            folderPicker.dirList.model.append(dirs[path])
+        }
+    }
+
+    function scanDir(folderUrl)
+    {
+        bae.scanDir(folderUrl)
+    }
+
+    background: Rectangle
+    {
+        anchors.fill: parent
+        color: bae.backgroundColor()
+        z: -999
+    }
 
     FolderDialog
     {
@@ -21,7 +42,27 @@ Pane
         onAccepted:
         {
             listModel.append({url: folder.toString()})
-            babe.scanDir(folder.toString())
+            scanDir(folder.toString())
+        }
+    }
+    FolderPicker
+    {
+
+        id: folderPicker
+        Connections
+        {
+            target: folderPicker
+            onPathClicked:
+            {
+                load(path)
+            }
+            onAccepted:
+            {
+                listModel.append({url: path})
+                scanDir(path)
+            }
+            onGoBack: load(path)
+
         }
     }
 
@@ -31,13 +72,17 @@ Pane
         anchors.centerIn: parent
         width: parent.width /2
         height: parent.height/2
-        border.color: "#dedede"
         radius: 4
+color: bae.altColor()
+
 
         Label
         {
             anchors.bottom: sources.top
             text: "Sources"
+            font.bold: true
+            padding: 10
+            color: bae.foregroundColor()
         }
 
         ListView
@@ -75,6 +120,7 @@ Pane
                         elide: Text.ElideRight
                         Layout.fillWidth: true
                         font.pointSize: 10
+                        color: bae.foregroundColor()
                     }
                 }
             }
@@ -108,7 +154,13 @@ Pane
 
                 onClicked:
                 {
-                    folderDialog.open()
+                    if(bae.isMobile())
+                    {
+                        folderPicker.open()
+                        load(StandardPaths.standardLocations(StandardPaths.HomeLocation)[0])
+                    }else
+                        folderDialog.open()
+
                 }
             }
 
@@ -143,6 +195,8 @@ Pane
                 text: "Toolbar icon size"
                 elide: Text.ElideRight
                 verticalAlignment: Text.AlignVCenter
+
+                color: bae.foregroundColor()
             }
 
             ComboBox
