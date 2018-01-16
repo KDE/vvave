@@ -197,8 +197,7 @@ void Babe::notifySong(const QString &url)
     auto track = this->con->getDBData(query);
     Babe::nof->notifySong(track.first());
 #else
-    Q_UNUSED(title);
-    Q_UNUSED(body);
+    Q_UNUSED(url);
 #endif
 }
 
