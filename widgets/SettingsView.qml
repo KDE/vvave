@@ -93,9 +93,6 @@ color: bae.altColor()
             height: parent.height
             clip: true
 
-            visible : !bae.isMobile()
-
-
             ListModel
             {
                 id: listModel
@@ -141,7 +138,6 @@ color: bae.altColor()
             id: sourceActions
             anchors.top: sources.bottom
             width: parent.width
-            visible : !bae.isMobile()
 
             ToolButton
             {

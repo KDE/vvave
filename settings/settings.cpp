@@ -214,11 +214,11 @@ void settings::checkCollection()
 
 void settings::startBrainz(const int &speed)
 {
-//    if(this->brainzOn)
-//    {
-//        this->brainDeamon->setInterval(speed);
-//        this->brainDeamon->start();
-//    }
+    if(this->brainzOn)
+    {
+        this->brainDeamon->setInterval(speed);
+        this->brainDeamon->start();
+    }
 
 }
 
