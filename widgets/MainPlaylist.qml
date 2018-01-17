@@ -36,27 +36,24 @@ Item
     Rectangle
     {
         anchors.fill: parent
-        color: bae.altColor()
+        color: bae.midColor()
         z: -999
     }
 
-    GridLayout
+    ColumnLayout
     {
         id: playlistLayout
-        width: parent.width
-        height: parent.height
-        columns: 1
-        rows: 4
-        rowSpacing: 0
+        anchors.fill: parent
+
 
         Rectangle
         {
             id: cover
-            Layout.row: 1
-            height: columnWidth
-            width: parent.width
+            Layout.preferredHeight: columnWidth
+            Layout.minimumHeight: columnWidth
+            Layout.maximumHeight: columnWidth
             Layout.fillWidth: true
-
+            color: bae.altColor()
             visible: list.count>0
 
             FastBlur
@@ -112,69 +109,19 @@ Item
 
         }
 
-        Slider
-        {
-            id: progressBar
-            Layout.fillWidth: true
-            Layout.row: 3
-            height: 16
-            from: 0
-            to: 1000
-            value: 0
-            visible: list.count>0
-            spacing: 0
-
-            onMoved: player.seek(player.duration() / 1000 * value);
-
-
-            Rectangle
-            {
-                anchors.fill: parent
-                color: bae.midColor()
-                z: -999
-            }
-
-            background: Rectangle
-            {
-                    x: progressBar.leftPadding
-                    y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
-                    implicitWidth: 200
-                    implicitHeight: 2
-                    width: progressBar.availableWidth
-                    height: implicitHeight
-                    color: bae.foregroundColor()
-
-                    Rectangle
-                    {
-                        width: progressBar.visualPosition * parent.width
-                        height: parent.height
-                        color: bae.babeColor()
-                    }
-                }
-
-                handle: Rectangle
-                {
-                    x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
-                    y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 13
-                    color: bae.babeColor()
-                }
-        }
-
         Rectangle
         {
             id: playbackControls
             Layout.fillWidth: true
-            Layout.row: 2
-            height: 48
+            Layout.preferredHeight: 48
+            Layout.minimumHeight: 48
+            Layout.maximumHeight: 48
+
             visible: list.count>0
             color: bae.midColor()
 
             onYChanged:
             {
-
                 if(playbackControls.y<columnWidth/4)
                 {
                     cover.visible = false
@@ -310,11 +257,62 @@ Item
 
         Rectangle
         {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 22
+            Layout.minimumHeight: 22
+            Layout.maximumHeight: 22
+            color: "transparent"
+            Slider
+            {
+                id: progressBar
+                anchors.fill: parent
+                from: 0
+                to: 1000
+                value: 0
+                visible: list.count>0
+                spacing: 0
+
+                onMoved: player.seek(player.duration() / 1000 * value);
+
+
+                background: Rectangle
+                {
+                    x: progressBar.leftPadding
+                    y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                    implicitWidth: 200
+                    implicitHeight: 2
+                    width: progressBar.availableWidth
+                    height: implicitHeight
+                    color: bae.foregroundColor()
+
+                    Rectangle
+                    {
+                        width: progressBar.visualPosition * parent.width
+                        height: parent.height
+                        color: bae.babeColor()
+                    }
+                }
+
+                handle: Rectangle
+                {
+                    x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
+                    y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                    implicitWidth: 16
+                    implicitHeight: 16
+                    radius: 13
+                    color: bae.babeColor()
+                }
+            }
+
+        }
+
+
+        Rectangle
+        {
             id: mainPlaylist
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.row: 4
-            color: "transparent"
+            color: bae.altColor()
 
             StackView
             {
@@ -323,37 +321,37 @@ Item
                 focus: true
 
                 pushEnter: Transition {
-                        PropertyAnimation {
-                            property: "opacity"
-                            from: 0
-                            to:1
-                            duration: 200
-                        }
+                    PropertyAnimation {
+                        property: "opacity"
+                        from: 0
+                        to:1
+                        duration: 200
                     }
-                    pushExit: Transition {
-                        PropertyAnimation {
-                            property: "opacity"
-                            from: 1
-                            to:0
-                            duration: 200
-                        }
+                }
+                pushExit: Transition {
+                    PropertyAnimation {
+                        property: "opacity"
+                        from: 1
+                        to:0
+                        duration: 200
                     }
-                    popEnter: Transition {
-                        PropertyAnimation {
-                            property: "opacity"
-                            from: 0
-                            to:1
-                            duration: 200
-                        }
+                }
+                popEnter: Transition {
+                    PropertyAnimation {
+                        property: "opacity"
+                        from: 0
+                        to:1
+                        duration: 200
                     }
-                    popExit: Transition {
-                        PropertyAnimation {
-                            property: "opacity"
-                            from: 1
-                            to:0
-                            duration: 200
-                        }
+                }
+                popExit: Transition {
+                    PropertyAnimation {
+                        property: "opacity"
+                        from: 1
+                        to:0
+                        duration: 200
                     }
+                }
 
                 initialItem: BabeTable
                 {

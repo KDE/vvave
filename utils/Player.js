@@ -7,7 +7,10 @@ function playTrack(track)
     player.source(root.mainPlaylist.currentTrack.url);
     player.play()
     root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
-    root.mainPlaylist.currentArtwork = root.mainPlaylist.currentTrack.artwork || bae.loadCover(root.mainPlaylist.currentTrack.url)
+
+    var artwork = root.mainPlaylist.currentTrack.artwork
+
+    root.mainPlaylist.currentArtwork = artwork ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
 
     if(!root.active)
         bae.notifySong(root.mainPlaylist.currentTrack.url)

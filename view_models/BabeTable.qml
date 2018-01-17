@@ -101,8 +101,8 @@ ListView
 
             onClicked:
             {
-                list.rowClicked(index)
                 currentIndex = index
+                list.rowClicked(index)                
             }
 
             onPlay: list.quickPlayTrack(index)

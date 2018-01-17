@@ -8,6 +8,7 @@ import "../utils"
 ToolBar
 {
     property alias babeBar : babeBar
+    property alias settingsIcon : settingsIcon
     property string accentColor : bae.babeColor()
     property string textColor : bae.foregroundColor()
     property string backgroundColor : bae.backgroundColor()
@@ -162,7 +163,7 @@ ToolBar
                 {
                     id: settingsIcon
                     text: MdiFont.Icon.settings
-                    color: currentIndex === 5? accentColor : textColor
+                    color: textColor
                     iconSize: size
 
                 }

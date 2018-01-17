@@ -7,13 +7,10 @@ Rectangle
 {
     property string emoji
     property string message
-
-
     clip: true
 
-      anchors.fill: parent
-        color: bae.backgroundColor()
-
+    anchors.fill: parent
+    color: "transparent"
 
     GridLayout
     {

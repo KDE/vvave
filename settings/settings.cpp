@@ -99,13 +99,13 @@ settings::settings(QObject *parent) : QObject(parent)
                                 {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
 
 
-            this->startBrainz(500);
+            this->startBrainz(1000);
         }else
         {
             this->dirs.clear();
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
-            this->startBrainz(1500);
+            this->startBrainz(2000);
         }
 
 
@@ -209,7 +209,7 @@ void settings::checkCollection()
     //    this->refreshCollectionPaths();
     //    this->collectionWatcher();
     this->brainzOn = true;
-    this->startBrainz(1500);
+    this->startBrainz(2000);
 }
 
 void settings::startBrainz(const int &speed)
@@ -219,7 +219,6 @@ void settings::startBrainz(const int &speed)
         this->brainDeamon->setInterval(speed);
         this->brainDeamon->start();
     }
-
 }
 
 void settings::populateDB(const QStringList &paths)

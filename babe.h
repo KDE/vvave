@@ -23,6 +23,14 @@ public:
     explicit Babe(QObject *parent = nullptr);
     ~Babe();
 
+    enum class HINT : uint
+    {
+        BIG_ALBUM = 200,
+        MEDIUM_ALBUM = 120,
+        SMALL_ALBUM = 80
+    };
+    Q_ENUM(HINT)
+
     /* DATABASE INTERFACES */
 
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
@@ -64,11 +72,12 @@ public:
     Q_INVOKABLE static int screenGeometry(QString &side);
     Q_INVOKABLE static int cursorPos(QString &axis);
 
+    Q_INVOKABLE static QString homeDir();
 
     Q_INVOKABLE static QVariantList getDirs(const QString &pathUrl);
     Q_INVOKABLE static QVariantMap getParentDir(const QString &path);
-
-
+    static void registerTypes();
+    Q_INVOKABLE static uint sizeHint(const uint &hint);
     /*USEFUL*/
 
     Q_INVOKABLE QString loadCover(const QString &url);

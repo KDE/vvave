@@ -3,6 +3,9 @@ import QtQuick 2.9
 
 Pane
 {
+
+    id: gridPage
+
     property int albumSize : 150
     property int albumSpacing: 20
     property int borderRadius : 4
@@ -13,7 +16,7 @@ Pane
     width: 500
     height: 400
 
-    id: gridPage
+
 
     background: Rectangle
     {
@@ -86,6 +89,7 @@ Pane
         {
             id: delegate
 
+            albumSize : gridPage.albumSize
             Connections
             {
                 target: delegate

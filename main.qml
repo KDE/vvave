@@ -25,7 +25,7 @@ ApplicationWindow
 
 
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
-    property int columnWidth: 250
+    property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
     property int iconSize
     property alias mainPlaylist : mainPlaylist
@@ -103,7 +103,21 @@ ApplicationWindow
         onAlbumsViewClicked: currentView = 2
         onArtistsViewClicked: currentView = 3
         onPlaylistsViewClicked: currentView = 4
-        onSettingsViewClicked: currentView = 5
+        onSettingsViewClicked:
+        {
+
+            if(settingsDrawer.visible )
+             {
+                settingsDrawer.close()
+                settingsIcon.color = textColor
+            }
+            else
+               {
+                settingsDrawer.open()
+                settingsIcon.color = accentColor
+
+            }
+        }
     }
 
     footer: Rectangle
@@ -165,12 +179,25 @@ ApplicationWindow
         z: -999
     }
 
+        SettingsView
+        {
+            id: settingsDrawer
+            onIconSizeChanged: iconSize = size
+
+
+        }
+
+
     Page
     {
         id: views
         width: parent.width
         height: parent.height
         clip: true
+
+        transform: Translate {
+                   x: (settingsDrawer.position * views.width * 0.33)*-1
+               }
 
         Column
         {
@@ -243,10 +270,6 @@ ApplicationWindow
 
                 PlaylistsView {}
 
-                SettingsView
-                {
-                    onIconSizeChanged: iconSize = size
-                }
 
                 SearchTable
                 {

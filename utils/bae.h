@@ -10,7 +10,8 @@
 #include <QTime>
 #include <QSettings>
 #include <QDirIterator>
-
+#include <QApplication>
+#include <QScreen>
 #include <cmath>
 using namespace std;
 
@@ -178,14 +179,7 @@ namespace BAE
         {KEY::ART, KEYMAP[KEY::ART]}
     };
 
-    enum class AlbumSizeHint : uint
-    {
-        BIG_ALBUM = 200,
-        MEDIUM_ALBUM = 120,
-        SMALL_ALBUM = 80
-    };
-
-    inline QString transformTime(const qint64 &value)
+      inline QString transformTime(const qint64 &value)
     {
         QString tStr;
         if (value)
@@ -412,6 +406,46 @@ namespace BAE
 #elif defined(Q_OS_HAIKU)
         return false;
 #endif
+    }
+
+
+    enum class AlbumSizeHint : uint
+    {
+        BIG_ALBUM = 200,
+        MEDIUM_ALBUM = 120,
+        SMALL_ALBUM = 80
+    };
+
+    static const uint MAX_BIG_ALBUM_SIZE = 300;
+    static const uint MAX_MID_ALBUM_SIZE = 200;
+    static const uint MAX_MIN_ALBUM_SIZE = 100;
+
+    typedef double ALBUM_FACTOR;
+
+    static const ALBUM_FACTOR BIG_ALBUM_FACTOR = 0.039;
+    static const ALBUM_FACTOR BIG_ALBUM_FACTOR_SUBWIDGET = 0.27;
+
+    static const ALBUM_FACTOR MEDIUM_ALBUM_FACTOR = 0.013;
+    static const ALBUM_FACTOR MEDIUM_ALBUM_FACTOR_SUBWIDGET = 0.4;
+
+    static const ALBUM_FACTOR SMALL_ALBUM_FACTOR = 0.006;
+    static const ALBUM_FACTOR SMALL_ALBUM_FACTOR_SUBWIDGET = 0.5;
+
+    inline uint getWidgetSizeHint(const AlbumSizeHint &deafultValue)
+    {
+        QScreen *screenSize = QApplication::screens().at(0);
+
+        auto screen =  static_cast<uint>(sqrt((screenSize->availableSize().height()*screenSize->availableSize().width())));
+
+        switch(deafultValue)
+        {
+            case AlbumSizeHint::BIG_ALBUM:
+                return screen * 0.3 ;
+            case AlbumSizeHint::MEDIUM_ALBUM:
+                return screen * 0.1 ;
+            case AlbumSizeHint::SMALL_ALBUM:
+                return screen * 0.05 ;
+        }
     }
 }
 

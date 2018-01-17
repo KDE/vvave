@@ -10,7 +10,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QDirIterator>
-
+#include <QtQml>
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
 #endif
@@ -19,6 +19,7 @@ using namespace BAE;
 
 Babe::Babe(QObject *parent) : QObject(parent)
 {    
+    qDebug()<<"CONSTRUCTING ABE INTERFACE";
     this->con = new CollectionDB(this);
 
     this->set = new settings(this);
@@ -52,7 +53,7 @@ Babe::~Babe()
 
 QVariantList Babe::get(const QString &queryTxt)
 {
-    return Babe::transformData(this->con->getDBData(queryTxt));
+    return this->con->getDBDataQML(queryTxt);
 }
 
 QVariantList Babe::getList(const QStringList &urls)
@@ -320,6 +321,11 @@ int Babe::cursorPos(QString &axis)
     else return 0;
 }
 
+QString Babe::homeDir()
+{
+    return BAE::MusicPath;
+}
+
 QVariantList Babe::getDirs(const QString &pathUrl)
 {
     auto path = pathUrl;
@@ -339,7 +345,6 @@ QVariantList Babe::getDirs(const QString &pathUrl)
             QVariantMap map = { {"url", url }, {"name", name} };
             paths << map;
         }
-
     }
 
     return paths;
@@ -347,7 +352,31 @@ QVariantList Babe::getDirs(const QString &pathUrl)
 
 QVariantMap Babe::getParentDir(const QString &path)
 {
-    return {{"url",QFileInfo(path).dir().absolutePath()}, {"name", QFileInfo(path).dir().dirName()}};
+    auto dirUrl = QFileInfo(path).dir().absolutePath();
+    auto dir = QDir(dirUrl);
+
+    if(dir.exists() && dir.isReadable() && !dir.isRoot())
+        return {{"url", dirUrl}, {"name", QFileInfo(path).dir().dirName()}};
+    else
+        return {{"url", path}, {"name", QDir(path).dirName()}};
+
+}
+
+void Babe::registerTypes()
+{
+    qmlRegisterUncreatableType<Babe>("Babe", 1, 0, "Babe", "ERROR ABE");
+}
+
+
+uint Babe::sizeHint(const uint &hint)
+{
+    if(hint>=BAE::BIG_ALBUM_FACTOR)
+        return BAE::getWidgetSizeHint(BAE::AlbumSizeHint::BIG_ALBUM);
+    else if(hint>=BAE::MEDIUM_ALBUM_FACTOR)
+        return BAE::getWidgetSizeHint(BAE::AlbumSizeHint::MEDIUM_ALBUM);
+    else if(hint>=BAE::SMALL_ALBUM_FACTOR)
+        return BAE::getWidgetSizeHint(BAE::AlbumSizeHint::SMALL_ALBUM);
+    else return hint;
 }
 
 QString Babe::loadCover(const QString &url)
@@ -364,10 +393,9 @@ QString Babe::loadCover(const QString &url)
     auto artistImg = this->artistArt(artist);
     auto albumImg = this->albumArt(album, artist);
 
-    if(!albumImg.isEmpty())
+    if(!albumImg.isEmpty() && albumImg != BAE::SLANG[W::NONE])
         return albumImg;
-    else if (!artistImg.isEmpty())
-
+    else if (!artistImg.isEmpty() && artistImg != BAE::SLANG[W::NONE])
         return artistImg;
     else
         return this->fetchCoverArt(track);
@@ -375,8 +403,8 @@ QString Babe::loadCover(const QString &url)
 
 QVariantList Babe::searchFor(const QStringList &queries)
 {
-    BAE::DB_LIST mapList;
-    bool hasKey=false;
+    QVariantList mapList;
+    bool hasKey = false;
 
     for(auto searchQuery : queries)
     {
@@ -388,7 +416,7 @@ QVariantList Babe::searchFor(const QStringList &queries)
                 searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::LIKE]+":","").trimmed();
 
 
-            searchQuery=searchQuery.trimmed();
+            searchQuery = searchQuery.trimmed();
             if(!searchQuery.isEmpty())
             {
                 mapList += this->con->getSearchedTracks(BAE::KEY::WIKI, searchQuery);
@@ -401,7 +429,7 @@ QVariantList Babe::searchFor(const QStringList &queries)
             searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::SIMILAR]+":","").trimmed();
             searchQuery=searchQuery.trimmed();
             if(!searchQuery.isEmpty())
-                mapList += this->con->getSearchedTracks(BAE::KEY::TAG,searchQuery);
+                mapList += this->con->getSearchedTracks(BAE::KEY::TAG, searchQuery);
 
         }else
         {
@@ -415,7 +443,7 @@ QVariantList Babe::searchFor(const QStringList &queries)
                 {
                     hasKey=true;
                     key=k.key();
-                    searchQuery=searchQuery.replace(k.value()+":","").trimmed();
+                    searchQuery = searchQuery.replace(k.value()+":","").trimmed();
                 }
             }
 
@@ -429,13 +457,13 @@ QVariantList Babe::searchFor(const QStringList &queries)
                 else
                 {
                     auto queryTxt = QString("SELECT * FROM tracks WHERE title LIKE \"%"+searchQuery+"%\" OR artist LIKE \"%"+searchQuery+"%\" OR album LIKE \"%"+searchQuery+"%\"OR genre LIKE \"%"+searchQuery+"%\"OR url LIKE \"%"+searchQuery+"%\" LIMIT 1000");
-                    mapList += this->con->getDBData(queryTxt);
+                    mapList += this->con->getDBDataQML(queryTxt);
                 }
             }
         }
     }
 
-    return  this->transformData(mapList);
+    return  mapList;
 }
 
 QString Babe::fetchCoverArt(DB &song)

@@ -550,6 +550,29 @@ DB_LIST CollectionDB::getDBData(const QString &queryTxt)
     return mapList;
 }
 
+QVariantList CollectionDB::getDBDataQML(const QString &queryTxt)
+{
+    QVariantList mapList;
+
+    auto query = this->getQuery(queryTxt);
+
+    if(query.exec())
+    {
+        while(query.next())
+        {
+            QVariantMap data;
+            for(auto key : KEYMAP.keys())
+                if(query.record().indexOf(KEYMAP[key])>-1)
+                    data[BAE::KEYMAP[key]] = query.value(KEYMAP[key]).toString();
+
+            mapList<< data;
+        }
+
+    }else qDebug()<< query.lastError()<< query.lastQuery();
+
+    return mapList;
+}
+
 
 DB_LIST CollectionDB::getAlbumTracks(const QString &album, const QString &artist, const KEY &orderBy, const BAE::W &order)
 {
@@ -589,7 +612,7 @@ DB_LIST CollectionDB::getBabedTracks(const KEY &orderBy, const BAE::W &order)
     return this->getDBData(queryTxt);
 }
 
-DB_LIST CollectionDB::getSearchedTracks(const KEY &where, const QString &search)
+QVariantList CollectionDB::getSearchedTracks(const KEY &where, const QString &search)
 {
     QString queryTxt;
 
@@ -640,7 +663,7 @@ DB_LIST CollectionDB::getSearchedTracks(const KEY &where, const QString &search)
 
     qDebug()<<"SEARCH QUERY:"<<queryTxt;
 
-    return this->getDBData(queryTxt);
+    return this->getDBDataQML(queryTxt);
 
 }
 

@@ -6,9 +6,16 @@ import Qt.labs.platform 1.0
 import "../utils/Icons.js" as MdiFont
 import "../utils"
 
-Page
+Drawer
 {
     id: settingsView
+    y: header.height
+    height: parent.height - header.height
+    width: parent.width* 0.5
+    edge: Qt.RightEdge
+    interactive: true
+    focus: true
+    modal:true
 
     signal iconSizeChanged(int size)
 
@@ -38,7 +45,7 @@ Page
     {
         id: folderDialog
 
-        folder: StandardPaths.standardLocations(StandardPaths.MusicLocation)[0]
+        folder: bae.homeDir()
         onAccepted:
         {
             listModel.append({url: folder.toString()})
@@ -66,150 +73,145 @@ Page
         }
     }
 
-
     Rectangle
     {
-        anchors.centerIn: parent
-        width: parent.width /2
-        height: parent.height/2
-        radius: 4
-color: bae.altColor()
-
-
-        Label
+        id: content
+        anchors.fill: parent
+        color: bae.midColor()
+        ColumnLayout
         {
-            anchors.bottom: sources.top
-            text: "Sources"
-            font.bold: true
-            padding: 10
-            color: bae.foregroundColor()
-        }
+            width: settingsView.width
+            height: settingsView.height
 
-        ListView
-        {
-            id: sources
-            anchors.fill: parent
-            width: parent.width
-            height: parent.height
-            clip: true
 
-            ListModel
+            ListView
             {
-                id: listModel
-            }
+                id: sources
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                clip: true
 
-            model: listModel
-
-            delegate: ItemDelegate
-            {
-                width: parent.width
-
-                contentItem: ColumnLayout
+                Rectangle
                 {
-                    spacing: 2
+                    anchors.fill: parent
+                    z: -999
+                    color: bae.altColor()
+                }
+
+                ListModel
+                {
+                    id: listModel
+                }
+
+                model: listModel
+
+                delegate: ItemDelegate
+                {
                     width: parent.width
 
-                    Label
+                    contentItem: ColumnLayout
                     {
-                        id: sourceUrl
+                        spacing: 2
                         width: parent.width
-                        text: url
-                        elide: Text.ElideRight
-                        Layout.fillWidth: true
-                        font.pointSize: 10
-                        color: bae.foregroundColor()
+
+                        Label
+                        {
+                            id: sourceUrl
+                            width: parent.width
+                            text: url
+                            elide: Text.ElideRight
+                            Layout.fillWidth: true
+                            font.pointSize: 10
+                            color: bae.foregroundColor()
+                        }
+                    }
+                }
+
+                Component.onCompleted:
+                {
+                    var map = bae.get("select url from sources")
+                    for(var i in map)
+                    {
+                        model.append(map[i])
                     }
                 }
             }
 
-
-            Component.onCompleted:
+            Row
             {
-                var map = bae.get("select url from sources")
-                for(var i in map)
+                id: sourceActions
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignRight
+                height: 48
+
+                ToolButton
                 {
-                    model.append(map[i])
-                }
-            }
-        }
+                    id: addSource
 
-        Row
-        {
-            id: sourceActions
-            anchors.top: sources.bottom
-            width: parent.width
+                    Icon{text: MdiFont.Icon.plus}
 
-            ToolButton
-            {
-                id: addSource
-
-                Icon
-                {
-                    text: MdiFont.Icon.plus
-                }
-
-                onClicked:
-                {
-                    if(bae.isMobile())
+                    onClicked:
                     {
-                        folderPicker.open()
-                        load(StandardPaths.standardLocations(StandardPaths.HomeLocation)[0])
-                    }else
-                        folderDialog.open()
+                        if(bae.isMobile())
+                        {
+                            folderPicker.open()
+                            load(bae.homeDir())
+                        }else
+                            folderDialog.open()
+                    }
+                }
+
+                ToolButton
+                {
+                    id: removeSource
+                    Icon
+                    {
+                        id: albumsIcon
+                        text: MdiFont.Icon.minus
+                    }
+
+                    onClicked:
+                    {
+
+                    }
 
                 }
             }
 
-            ToolButton
+            Row
             {
-                id: removeSource
-                Icon
+                Layout.fillWidth: true
+                height: 48
+                Label
                 {
-                    id: albumsIcon
-                    text: MdiFont.Icon.minus
+                    padding: 20
+                    text: "Toolbar icon size"
+                    elide: Text.ElideRight
+                    verticalAlignment: Text.AlignVCenter
+
+                    color: bae.foregroundColor()
                 }
 
-                onClicked:
+                ComboBox
                 {
+                    id: iconSize
 
+                    model: ListModel
+                    {
+                        id: sizes
+                        ListElement { size: 16 }
+                        ListElement { size: 24 }
+                        ListElement { size: 32 }
+                    }
+
+                    currentIndex:  1
+                    onCurrentIndexChanged: iconSizeChanged(sizes.get(currentIndex).size )
                 }
-
             }
+
+
         }
 
-        Row
-        {
-            anchors.top: sourceActions.bottom
-            width: parent.width
-            height: iconSize.height
 
-            Label
-            {
-                width: parent.width - iconSize.width
-                height: parent.height
-
-                text: "Toolbar icon size"
-                elide: Text.ElideRight
-                verticalAlignment: Text.AlignVCenter
-
-                color: bae.foregroundColor()
-            }
-
-            ComboBox
-            {
-                id: iconSize
-                width: 100
-                model: ListModel
-                {
-                    id: sizes
-                    ListElement { size: 16 }
-                    ListElement { size: 24 }
-                    ListElement { size: 32 }
-                }
-
-                currentIndex:  1
-                onCurrentIndexChanged: iconSizeChanged(sizes.get(currentIndex).size )
-            }
-        }
     }
 }

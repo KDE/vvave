@@ -68,11 +68,12 @@ public:
 
     BAE::DB_LIST getDBData(const QStringList &urls);
     BAE::DB_LIST getDBData(const QString &queryTxt);
+    QVariantList getDBDataQML(const QString &queryTxt);
 
     BAE::DB_LIST getAlbumTracks(const QString &album, const QString &artist, const BAE::KEY &orderBy = BAE::KEY::TRACK, const BAE::W &order = BAE::W::ASC);
     BAE::DB_LIST getArtistTracks(const QString &artist, const BAE::KEY &orderBy = BAE::KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
     BAE::DB_LIST getBabedTracks(const BAE::KEY &orderBy = BAE::KEY::PLAYED, const BAE::W &order = BAE::W::DESC);
-    BAE::DB_LIST getSearchedTracks(const BAE::KEY &where, const QString &search);
+    QVariantList getSearchedTracks(const BAE::KEY &where, const QString &search);
     BAE::DB_LIST getPlaylistTracks(const QString &playlist, const BAE::KEY &orderBy = BAE::KEY::ADD_DATE, const BAE::W &order = BAE::W::DESC);
     BAE::DB_LIST getMostPlayedTracks(const int &greaterThan = 1,const int &limit = 50, const BAE::KEY &orderBy = BAE::KEY::PLAYED, const BAE::W &order = BAE::W::DESC);
     BAE::DB_LIST getFavTracks(const int &stars = 1,const int &limit = 50, const BAE::KEY &orderBy = BAE::KEY::STARS, const BAE::W &order = BAE::W::DESC);

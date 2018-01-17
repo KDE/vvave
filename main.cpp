@@ -6,13 +6,14 @@
 #include "babe.h"
 #include "services/local/player.h"
 #include <QLibrary>
+
 //#ifdef Q_OS_ANDROID
 //#include "./3rdparty/kirigami/src/kirigamiplugin.h"
 //#endif
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication app(argc, argv);
 
@@ -24,9 +25,9 @@ int main(int argc, char *argv[])
 
     Babe bae;
     Player player;
+//    bae.registerTypes();
 
     context->setContextProperty("bae", &bae);
-
     context->setContextProperty("player", &player);
 
     //#ifdef Q_OS_ANDROID

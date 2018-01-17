@@ -11,7 +11,7 @@ BabeGrid
 {
     id:artistsViewGrid
     visible: true
-    albumSize: 150
+    albumSize:Math.sqrt(root.width*root.height)*0.25
     borderRadius: 20
 
     signal rowClicked(var track)
