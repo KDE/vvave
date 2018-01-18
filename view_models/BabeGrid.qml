@@ -17,7 +17,6 @@ Pane
     height: 400
 
 
-
     background: Rectangle
     {
         anchors.fill: parent

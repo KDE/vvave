@@ -39,7 +39,7 @@ private slots:
     void on_remove_clicked();
 
 public slots:
-    void startBrainz(const int &speed);
+    void startBrainz(const uint &speed);
     void populateDB(const QStringList &paths);
 
 private:

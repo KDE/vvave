@@ -3,14 +3,13 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
-Rectangle
+Item
 {
     property string emoji
     property string message
     clip: true
 
     anchors.fill: parent
-    color: "transparent"
 
     GridLayout
     {
@@ -27,7 +26,7 @@ Rectangle
             width:parent.width
             height: parent.height
             Layout.row: 1
-            color: bae.backgroundColor()
+            color: "transparent"
 
             Image
             {

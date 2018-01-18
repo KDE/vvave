@@ -20,6 +20,11 @@ BabeGrid
     signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
+    transform: Translate
+    {
+        y: (drawer.position * artistsViewGrid.height * 0.33)*-1
+    }
+
     Drawer
     {
         id: drawer

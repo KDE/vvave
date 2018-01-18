@@ -11,7 +11,7 @@ BabeGrid
 {
     id: albumsViewGrid
     visible: true
-    albumSize:Math.sqrt(root.width*root.height)*0.25
+    albumSize: Math.sqrt(root.width*root.height)*0.25
     borderRadius: 20
 
     signal rowClicked(var track)
@@ -20,6 +20,10 @@ BabeGrid
     signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
+    transform: Translate
+    {
+        y: (drawer.position * albumsViewGrid.height * 0.33)*-1
+    }
 
     Drawer
     {

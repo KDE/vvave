@@ -11,7 +11,7 @@ Drawer
     id: settingsView
     y: header.height
     height: parent.height - header.height
-    width: parent.width* 0.5
+    width: bae.isMobile() ? parent.width* 0.7 : parent.width* 0.5
     edge: Qt.RightEdge
     interactive: true
     focus: true
@@ -48,8 +48,10 @@ Drawer
         folder: bae.homeDir()
         onAccepted:
         {
-            listModel.append({url: folder.toString()})
-            scanDir(folder.toString())
+            var path = folder.toString().replace("file://","")
+
+            listModel.append({url: path})
+            scanDir(path)
         }
     }
     FolderPicker
@@ -59,10 +61,8 @@ Drawer
         Connections
         {
             target: folderPicker
-            onPathClicked:
-            {
-                load(path)
-            }
+            onPathClicked: load(path)
+
             onAccepted:
             {
                 listModel.append({url: path})
@@ -129,11 +129,10 @@ Drawer
 
                 Component.onCompleted:
                 {
-                    var map = bae.get("select url from sources")
+                    var map = bae.get("select url from folders order by addDate desc")
                     for(var i in map)
-                    {
                         model.append(map[i])
-                    }
+
                 }
             }
 

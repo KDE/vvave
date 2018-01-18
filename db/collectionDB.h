@@ -66,6 +66,8 @@ public:
     bool addPlaylist(const QString &title);
     bool trackPlaylist(const QString &url, const QString &playlist);
 
+    bool addFolder(const QString &url);
+
     BAE::DB_LIST getDBData(const QStringList &urls);
     BAE::DB_LIST getDBData(const QString &queryTxt);
     QVariantList getDBDataQML(const QString &queryTxt);

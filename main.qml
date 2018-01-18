@@ -55,7 +55,7 @@ ApplicationWindow
 
             searchView.populate(res)
             //                albumsView.filter(res)
-            currentView = 6
+            currentView = 5
         }
     }
 
@@ -103,21 +103,7 @@ ApplicationWindow
         onAlbumsViewClicked: currentView = 2
         onArtistsViewClicked: currentView = 3
         onPlaylistsViewClicked: currentView = 4
-        onSettingsViewClicked:
-        {
-
-            if(settingsDrawer.visible )
-             {
-                settingsDrawer.close()
-                settingsIcon.color = textColor
-            }
-            else
-               {
-                settingsDrawer.open()
-                settingsIcon.color = accentColor
-
-            }
-        }
+        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
     }
 
     footer: Rectangle
@@ -179,13 +165,11 @@ ApplicationWindow
         z: -999
     }
 
-        SettingsView
-        {
-            id: settingsDrawer
-            onIconSizeChanged: iconSize = size
-
-
-        }
+    SettingsView
+    {
+        id: settingsDrawer
+        onIconSizeChanged: iconSize = size
+    }
 
 
     Page
@@ -196,8 +180,8 @@ ApplicationWindow
         clip: true
 
         transform: Translate {
-                   x: (settingsDrawer.position * views.width * 0.33)*-1
-               }
+            x: (settingsDrawer.position * views.width * 0.33)*-1
+        }
 
         Column
         {

@@ -29,7 +29,7 @@ ToolBar
     Rectangle
     {
         anchors.fill: parent
-        color: backgroundColor
+        color: backgroundColor      
     }
 
     RowLayout
@@ -163,7 +163,7 @@ ToolBar
                 {
                     id: settingsIcon
                     text: MdiFont.Icon.settings
-                    color: textColor
+                    color: settingsDrawer.visible ? accentColor : textColor
                     iconSize: size
 
                 }

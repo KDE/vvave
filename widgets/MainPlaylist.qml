@@ -14,6 +14,7 @@ import "../widgets"
 Item
 {
 
+    id: mainPlaylistRoot
     property var currentTrack
     property string currentArtwork
     property bool shuffle : false
@@ -40,33 +41,45 @@ Item
         z: -999
     }
 
-    ColumnLayout
+    GridLayout
     {
         id: playlistLayout
         anchors.fill: parent
+        rowSpacing: 0
+        rows: 4
+        columns: 1
 
-
-        Rectangle
+        Item
         {
             id: cover
-            Layout.preferredHeight: columnWidth
-            Layout.minimumHeight: columnWidth
-            Layout.maximumHeight: columnWidth
+            Layout.row: 1
+            Layout.column: 1
             Layout.fillWidth: true
-            color: bae.altColor()
+            Layout.preferredHeight: columnWidth
+            Layout.maximumHeight: 250
             visible: list.count>0
+
+            Rectangle
+            {
+                anchors.fill: parent
+                color: bae.midColor()
+                z: -999
+            }
 
             FastBlur
             {
-                anchors.fill: cover
+                width: mainPlaylistRoot.width
+                height: mainPlaylist.y
                 source: artwork
                 radius: 100
+                transparentBorder: true
+                cached: true
             }
 
             Image
             {
                 id: artwork
-                width: parent.width < columnWidth ? parent.width : columnWidth
+                width: parent.height < 250 ? parent.height : 250
                 height: parent.height
                 anchors.centerIn: parent
                 source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
@@ -109,30 +122,36 @@ Item
 
         }
 
-        Rectangle
+        Item
         {
             id: playbackControls
+            Layout.row: 2
+            Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: 48
-            Layout.minimumHeight: 48
-            Layout.maximumHeight: 48
+            height: 48
 
             visible: list.count>0
-            color: bae.midColor()
 
-            onYChanged:
+            Rectangle
             {
-                if(playbackControls.y<columnWidth/4)
-                {
-                    cover.visible = false
-                    playbackControls.y = 0
-
-                }else
-                {
-                    cover.visible = true
-                    playbackControls.y = columnWidth
-                }
+                anchors.fill: parent
+                color: bae.midColor()
+                opacity: 0.8
+                z: -999
             }
+            //            onYChanged:
+            //            {
+            //                if(playbackControls.y<columnWidth/4)
+            //                {
+            //                    cover.visible = false
+            //                    playbackControls.y = 0
+
+            //                }else
+            //                {
+            //                    cover.visible = true
+            //                    playbackControls.y = columnWidth
+            //                }
+            //            }
 
             PlaylistMenu
             {
@@ -255,17 +274,25 @@ Item
             }
         }
 
-        Rectangle
+        Item
         {
+            id: slideBar
+            Layout.row: 3
+            Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: 22
-            Layout.minimumHeight: 22
-            Layout.maximumHeight: 22
-            color: "transparent"
+            height: 48
+            Rectangle
+            {
+                anchors.fill: parent
+                color: bae.midColor()
+                opacity: 0.8
+                z: -999
+            }
             Slider
             {
                 id: progressBar
-                anchors.fill: parent
+                width: parent.width
+                height: parent.height
                 from: 0
                 to: 1000
                 value: 0
@@ -307,12 +334,13 @@ Item
         }
 
 
-        Rectangle
+        Item
         {
             id: mainPlaylist
+            Layout.row: 4
+            Layout.column: 1
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: bae.altColor()
 
             StackView
             {

@@ -60,6 +60,7 @@ public slots:
         {
             if (QFileInfo(path).isDir())
             {
+                this->con->addFolder(path);
                 QDirIterator it(path, BAE::formats, QDir::Files, QDirIterator::Subdirectories);
                 while (it.hasNext()) urls<<it.next();
 

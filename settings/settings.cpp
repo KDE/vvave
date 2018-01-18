@@ -99,13 +99,13 @@ settings::settings(QObject *parent) : QObject(parent)
                                 {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
 
 
-            this->startBrainz(1000);
+            this->startBrainz(1500);
         }else
         {
             this->dirs.clear();
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
-            this->startBrainz(2000);
+            this->startBrainz(3000);
         }
 
 
@@ -192,7 +192,7 @@ void settings::handleDirectoryChanged(const QString &dir)
 
     auto wait = new QTimer(this);
     wait->setSingleShot(true);
-    wait->setInterval(1000);
+    wait->setInterval(1500);
 
     connect(wait, &QTimer::timeout,[=]()
     {
@@ -209,10 +209,10 @@ void settings::checkCollection()
     //    this->refreshCollectionPaths();
     //    this->collectionWatcher();
     this->brainzOn = true;
-    this->startBrainz(2000);
+    this->startBrainz(3000);
 }
 
-void settings::startBrainz(const int &speed)
+void settings::startBrainz(const uint &speed)
 {
     if(this->brainzOn)
     {

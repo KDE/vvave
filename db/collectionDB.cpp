@@ -511,6 +511,17 @@ bool CollectionDB::trackPlaylist(const QString &url, const QString &playlist)
     return false;
 }
 
+bool CollectionDB::addFolder(const QString &url)
+{
+    QVariantMap map {{KEYMAP[KEY::URL],url},
+                     {KEYMAP[KEY::ADD_DATE],QDate::currentDate()}};
+
+    if(insert(TABLEMAP[TABLE::FOLDERS],map))
+        return true;
+
+    return false;
+}
+
 
 DB_LIST CollectionDB::getDBData(const QStringList &urls)
 {

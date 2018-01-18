@@ -75,6 +75,7 @@ namespace BAE
         ARTISTS_TAGS,
         TRACKS_TAGS,
         LOGS,
+        FOLDERS,
         ALL,
         NONE
     };
@@ -94,7 +95,8 @@ namespace BAE
         {TABLE::ALBUMS_TAGS,"albums_tags"},
         {TABLE::ARTISTS_TAGS,"artists_tags"},
         {TABLE::TRACKS_TAGS,"tracks_tags"},
-        {TABLE::LOGS,"logs"}
+        {TABLE::LOGS,"logs"},
+        {TABLE::FOLDERS,"folders"}
 
     };
 

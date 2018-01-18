@@ -57,11 +57,13 @@ void Brain::setInfo(DB_LIST dataList, ONTOLOGY ontology, QList<SERVICES> service
 
     for(auto data : dataList)
     {
+        if(!go) return;
+
         if (cb != nullptr) cb(data);
         this->pulpo.feed(data, recursive);
 
         this->t.msleep(this->interval);
-        if(!go) return;
+
     }
 }
 
@@ -81,6 +83,7 @@ void Brain::synapse()
 void Brain::connectionParser(DB track, RESPONSE response)
 {
     for(auto res : response.keys())
+    {
         switch(res)
         {
             case ONTOLOGY::ALBUM: this->parseAlbumInfo(track, response[res]); break;
@@ -88,6 +91,8 @@ void Brain::connectionParser(DB track, RESPONSE response)
             case ONTOLOGY::TRACK:  this->parseTrackInfo(track, response[res]); break;
             default: return;
         }
+        this->t.msleep(this->interval);
+    }
 }
 
 void Brain::parseAlbumInfo(DB &track, const INFO_K &response)
