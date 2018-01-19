@@ -5,6 +5,8 @@ import QtQuick.Layouts 1.3
 
 Item
 {
+    id: babeAlbumRoot
+
     signal albumClicked(int index)
     property int albumSize : 150
     property int borderRadius : 2
@@ -12,7 +14,6 @@ Item
     property string textColor: bae.foregroundColor()
     property int fontSize : bae.isMobile()? 12 : 10
     property bool hide : false
-    id: root
 
     width: albumSize
     height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
@@ -29,7 +30,6 @@ Item
         color: "#80000000"
         source: card
     }
-
 
     Rectangle
     {
@@ -48,12 +48,14 @@ Item
             Image
             {
                 id: img
-                width: albumSize
-                height: albumSize
+                width: babeAlbumRoot.width
+                height: babeAlbumRoot.width
 
                 fillMode: Image.PreserveAspectFit
+                cache: false
+                antialiasing: true
 
-                source: (artwork.length>0 && artwork !== "none")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                source: (artwork.length>0 && artwork !== "none" && artwork)? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
                 //                layer.enabled: true
                 //                layer.effect: OpacityMask
                 //                {

@@ -19,6 +19,26 @@ namespace BAE
 {
     Q_NAMESPACE
 
+    inline bool isMobile()
+    {
+#if defined(Q_OS_ANDROID)
+        return true;
+#elif defined(Q_OS_LINUX)
+        return false;
+#elif defined(Q_OS_WIN32)
+        return false;
+#elif defined(Q_OS_WIN64)
+        return false;
+#elif defined(Q_OS_MACOS)
+        return false;
+#elif defined(Q_OS_IOS)
+        return true;
+#elif defined(Q_OS_HAIKU)
+        return false;
+#endif
+    }
+
+
     enum SearchT
     {
         LIKE,
@@ -216,9 +236,9 @@ namespace BAE
     const QString MusicPath = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
     const QString HomePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
     const QString SettingPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/babe/";
-    const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/babe/artwork/";
+    const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/babe/artwork/";
     const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/babe/";
-    const QString CachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/";
+    const QString CachePath = BAE::isMobile() ? BAE::ArtworkPath : QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/";
     const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/youtube/";
     const QString DownloadsPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
     const QString NotifyDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
@@ -391,26 +411,6 @@ namespace BAE
         return false;
     }
 
-    inline bool isMobile()
-    {
-#if defined(Q_OS_ANDROID)
-        return true;
-#elif defined(Q_OS_LINUX)
-        return false;
-#elif defined(Q_OS_WIN32)
-        return false;
-#elif defined(Q_OS_WIN64)
-        return false;
-#elif defined(Q_OS_MACOS)
-        return false;
-#elif defined(Q_OS_IOS)
-        return true;
-#elif defined(Q_OS_HAIKU)
-        return false;
-#endif
-    }
-
-
     enum class AlbumSizeHint : uint
     {
         BIG_ALBUM = 200,
@@ -433,13 +433,13 @@ namespace BAE
     static const ALBUM_FACTOR SMALL_ALBUM_FACTOR = 0.006;
     static const ALBUM_FACTOR SMALL_ALBUM_FACTOR_SUBWIDGET = 0.5;
 
-    inline uint getWidgetSizeHint(const AlbumSizeHint &deafultValue)
+    inline uint getWidgetSizeHint(const AlbumSizeHint &defaultValue)
     {
         QScreen *screenSize = QApplication::screens().at(0);
 
         auto screen =  static_cast<uint>(sqrt((screenSize->availableSize().height()*screenSize->availableSize().width())));
 
-        switch(deafultValue)
+        switch(defaultValue)
         {
             case AlbumSizeHint::BIG_ALBUM:
                 return screen * 0.3 ;
@@ -448,6 +448,8 @@ namespace BAE
             case AlbumSizeHint::SMALL_ALBUM:
                 return screen * 0.05 ;
         }
+
+        return static_cast<uint>(defaultValue);
     }
 }
 

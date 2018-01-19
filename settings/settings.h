@@ -54,6 +54,7 @@ private:
 
     QString pathToRemove;
 
+
     QStringList dirs;
     QFileSystemWatcher *watcher;
 

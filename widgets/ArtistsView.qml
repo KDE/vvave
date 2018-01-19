@@ -11,8 +11,17 @@ BabeGrid
 {
     id:artistsViewGrid
     visible: true
-    albumSize:Math.sqrt(root.width*root.height)*0.25
-    borderRadius: 20
+    property int hintSize : Math.sqrt(root.width*root.height)*0.25
+    albumSize:
+    {
+        if(hintSize>200)
+            200
+        else if (hintSize<150)
+            bae.isMobile() && hintSize < 120 ? 120 : 150
+        else
+            hintSize
+
+    }
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)

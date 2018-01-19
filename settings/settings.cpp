@@ -53,7 +53,7 @@ settings::settings(QObject *parent) : QObject(parent)
 #endif
 
     QDir collectionDBPath_dir(BAE::CollectionDBPath);
-    QDir cachePath_dir(BAE::isMobile() ? BAE::ArtworkPath :  BAE::CachePath);
+    QDir cachePath_dir(BAE::CachePath);
     QDir youtubeCache_dir(BAE::YoutubeCachePath);
 
     if (!collectionDBPath_dir.exists())

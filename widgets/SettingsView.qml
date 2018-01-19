@@ -10,7 +10,7 @@ Drawer
 {
     id: settingsView
     y: header.height
-    height: parent.height - header.height
+    height: parent.height - header.height - footer.height
     width: bae.isMobile() ? parent.width* 0.7 : parent.width* 0.5
     edge: Qt.RightEdge
     interactive: true

@@ -352,14 +352,14 @@ QVariantList Babe::getDirs(const QString &pathUrl)
 
 QVariantMap Babe::getParentDir(const QString &path)
 {
-    auto dirUrl = QFileInfo(path).dir().absolutePath();
-    auto dir = QDir(dirUrl);
+    auto dir = QDir(path);
+    dir.cdUp();
+    auto dirPath = dir.absolutePath();
 
-    if(dir.exists() && dir.isReadable() && !dir.isRoot())
-        return {{"url", dirUrl}, {"name", QFileInfo(path).dir().dirName()}};
+    if(dir.isReadable() && !dir.isRoot() && dir.exists())
+        return {{"url", dirPath}, {"name", dir.dirName()}};
     else
-        return {{"url", path}, {"name", QDir(path).dirName()}};
-
+        return {{"url", path}, {"name", QFileInfo(path).dir().dirName()}};
 }
 
 void Babe::registerTypes()
