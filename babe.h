@@ -78,6 +78,7 @@ public:
     Q_INVOKABLE static QVariantMap getParentDir(const QString &path);
     static void registerTypes();
     Q_INVOKABLE static uint sizeHint(const uint &hint);
+    Q_INVOKABLE static QString icon(const QString &icon, const int &size);
     /*USEFUL*/
 
     Q_INVOKABLE QString loadCover(const QString &url);

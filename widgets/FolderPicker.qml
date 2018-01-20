@@ -43,7 +43,7 @@ Popup
             {
                 Layout.alignment: Qt.AlignLeft
                 id: goBackBtn
-                Icon
+                BabeIcon
                 {
                     text: MdiFont.Icon.arrowLeft
                 }

@@ -136,7 +136,7 @@ ApplicationWindow
             //                color: bae.foregroundColor()
             //            }
 
-            Icon
+            BabeIcon
             {
                 anchors.centerIn: parent
                 visible: !(searchInput.focus || searchInput.text)

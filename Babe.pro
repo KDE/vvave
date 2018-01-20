@@ -218,7 +218,7 @@ DISTFILES += \
     db/script.sql \
     android-openssl.pri \
 #    3rdparty/kirigami/kirigami.pri
-    kde/kde.pri
+    kde/kde.pri \
 
 
 HEADERS += \
@@ -346,13 +346,3 @@ HEADERS += \
         taglib/taglib_config.h \
     babe.h \
 
-
-
-
-
-#unix:!macx: LIBS += -L$$PWD/3rdparty/taglib/taglib/ -ltag
-
-#INCLUDEPATH += $$PWD/3rdparty/taglib/taglib
-#DEPENDPATH += $$PWD/3rdparty/taglib/taglib
-
-#unix:!macx: PRE_TARGETDEPS += $$PWD/3rdparty/taglib/taglib/libtag.a

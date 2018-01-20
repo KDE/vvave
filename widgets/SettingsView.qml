@@ -147,7 +147,7 @@ Drawer
                 {
                     id: addSource
 
-                    Icon{text: MdiFont.Icon.plus}
+                    BabeIcon{text: MdiFont.Icon.plus}
 
                     onClicked:
                     {
@@ -163,7 +163,7 @@ Drawer
                 ToolButton
                 {
                     id: removeSource
-                    Icon
+                    BabeIcon
                     {
                         id: albumsIcon
                         text: MdiFont.Icon.minus

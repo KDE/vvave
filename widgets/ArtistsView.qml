@@ -71,7 +71,7 @@ BabeGrid
                         height: parent.height
 
                         id: playAllBtn
-                        Icon {text: MdiFont.Icon.playBoxOutline}
+                        BabeIcon {text: MdiFont.Icon.playBoxOutline}
 
                         onClicked:
                         {
@@ -91,7 +91,7 @@ BabeGrid
                         width: parent.height
                         height: parent.height
 
-                        Icon {text: MdiFont.Icon.playlistPlus}
+                        BabeIcon {text: MdiFont.Icon.playlistPlus}
 
                         onClicked:
                         {
@@ -124,7 +124,7 @@ BabeGrid
                         width: parent.height
                         height: parent.height
 
-                        Icon
+                        BabeIcon
                         {
                             text: MdiFont.Icon.close
                         }

@@ -69,7 +69,7 @@ bool Pulpo::initServices()
     if(this->track.isEmpty()) return false;
 
     for(auto service : this->registeredServices)
-
+    {
         switch (service)
         {
             case SERVICES::LastFm:
@@ -83,8 +83,10 @@ bool Pulpo::initServices()
 
                 }else qDebug()<<"error settingUp lastfm service";
 
+
                 break;
             }
+
             case SERVICES::Spotify:
             {
                 spotify spotify(this->track);
@@ -171,8 +173,12 @@ bool Pulpo::initServices()
             {
                 break;
             }
-
         }
+
+        qDebug()<<"PULPO::ERROR HAPPENED!";
+        emit infoReady(this->track, this->packResponse(this->ontology, this->info, {{}}));
+
+    }
     return false;
 }
 
@@ -219,15 +225,24 @@ QByteArray Pulpo::startConnection(const QString &url, const QMap<QString,QString
 
         QNetworkReply *reply =  manager.get(request);
         QEventLoop loop;
-        connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+        connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+
         connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), &loop,
                 SLOT(quit()));
 
         loop.exec();
 
-        reply->deleteLater();
-        if(reply->error()) qDebug()<<reply->error();
-        return reply->readAll();
+        if(reply->error())
+        {
+            qDebug() << reply->error();
+            return QByteArray();
+        }
+
+        if(reply->bytesAvailable())
+        {
+            reply->deleteLater();
+            return reply->readAll();
+        }
     }
 
     return QByteArray();

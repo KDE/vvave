@@ -44,7 +44,7 @@ ItemDelegate
             Layout.column: 1
             Layout.rowSpan: 2
             visible: quickPlay
-            Icon { text: MdiFont.Icon.playCircle }
+            BabeIcon { text: MdiFont.Icon.playCircle }
             onClicked: delegate.play()
         }
 
@@ -116,7 +116,7 @@ ItemDelegate
             {
                 id: menuBtn
                 visible: bae.isMobile()
-                Icon { text: MdiFont.Icon.dotsVertical }
+                BabeIcon { text: MdiFont.Icon.dotsVertical }
                 onClicked: menuClicked()
             }
         }

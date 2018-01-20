@@ -82,7 +82,7 @@ Menu
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
-                Icon
+                BabeIcon
                 {
                     text: starIcon
                     color: rate >= 1 ? starColor :starReg
@@ -96,7 +96,7 @@ Menu
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
-                Icon
+                BabeIcon
                 {
                     text: starIcon
                     color: rate >= 2 ? starColor :starReg
@@ -110,7 +110,7 @@ Menu
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
-                Icon
+                BabeIcon
                 {
                     text: starIcon
                     color: rate >= 3 ? starColor :starReg
@@ -125,7 +125,7 @@ Menu
 //                Layout.fillHeight: true
 //                Layout.fillWidth: true
 //                Layout.alignment: Qt.AlignCenter
-//                Icon
+//                BabeIcon
 //                {
 //                    text: starIcon
 //                    color: rate >= 4 ? starColor :starReg
@@ -140,7 +140,7 @@ Menu
 //                Layout.fillHeight: true
 //                Layout.fillWidth: true
 //                Layout.alignment: Qt.AlignCenter
-//                Icon
+//                BabeIcon
 //                {
 //                    text: starIcon
 //                    color: rate >= 5 ? starColor :starReg

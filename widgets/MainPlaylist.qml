@@ -56,7 +56,7 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             Layout.preferredHeight: columnWidth
-            Layout.maximumHeight: 250
+            Layout.maximumHeight: 300
             visible: list.count>0
 
             Rectangle
@@ -79,7 +79,7 @@ Item
             Image
             {
                 id: artwork
-                width: parent.height < 250 ? parent.height : 250
+                width: parent.height < 300 ? parent.height : 300
                 height: parent.height
                 anchors.centerIn: parent
                 source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
@@ -188,7 +188,7 @@ Item
                     ToolButton
                     {
                         id: infoBtn
-                        Icon
+                        BabeIcon
                         {
                             text: stackView.currentItem === list ? MdiFont.Icon.informationOutline : MdiFont.Icon.arrowLeft
                         }
@@ -215,7 +215,7 @@ Item
                     Layout.alignment: Qt.AlignCenter
                     ToolButton
                     {
-                        Icon
+                        BabeIcon
                         {
                             id: babeBtnIcon
                             text: MdiFont.Icon.heartOutline
@@ -228,14 +228,14 @@ Item
                     ToolButton
                     {
                         id: previousBtn
-                        Icon {text: MdiFont.Icon.skipPrevious}
+                        BabeIcon {text: MdiFont.Icon.skipPrevious}
                         onClicked: Player.previousTrack()
                     }
 
                     ToolButton
                     {
                         id: playBtn
-                        Icon {id: playIcon; text: MdiFont.Icon.play }
+                        BabeIcon {id: playIcon; text: MdiFont.Icon.play }
                         onClicked:
                         {
                             if(player.isPaused()) Player.resumeTrack()
@@ -246,7 +246,7 @@ Item
                     ToolButton
                     {
                         id: nextBtn
-                        Icon{text: MdiFont.Icon.skipNext}
+                        BabeIcon{text: MdiFont.Icon.skipNext}
                         onClicked: Player.nextTrack()
 
                     }
@@ -254,7 +254,7 @@ Item
                     ToolButton
                     {
                         id: shuffleBtn
-                        Icon { text: shuffle ? MdiFont.Icon.shuffle : MdiFont.Icon.shuffleDisabled}
+                        BabeIcon { text: shuffle ? MdiFont.Icon.shuffle : MdiFont.Icon.shuffleDisabled}
 
                         onClicked: shuffle = !shuffle
                     }
@@ -267,7 +267,7 @@ Item
                     ToolButton
                     {
                         id: menuBtn
-                        Icon {text: MdiFont.Icon.dotsVertical}
+                        BabeIcon {text: MdiFont.Icon.dotsVertical}
                         onClicked: playlistMenu.open()
                     }
                 }

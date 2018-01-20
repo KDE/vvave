@@ -72,7 +72,7 @@ BabeGrid
                         width: parent.height
                         height: parent.height
 
-                        Icon {text: MdiFont.Icon.playBoxOutline}
+                        BabeIcon {text: MdiFont.Icon.playBoxOutline}
 
                         onClicked:
                         {
@@ -94,7 +94,7 @@ BabeGrid
                         width: parent.height
                         height: parent.height
 
-                        Icon {text: MdiFont.Icon.playlistPlus}
+                        BabeIcon {text: MdiFont.Icon.playlistPlus}
 
                         onClicked:
                         {
@@ -130,7 +130,7 @@ BabeGrid
                         width: parent.height
                         height: parent.height
 
-                        Icon { text: MdiFont.Icon.close }
+                        BabeIcon { text: MdiFont.Icon.close }
                         onClicked: drawer.close()
 
                     }

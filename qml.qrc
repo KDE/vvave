@@ -5,7 +5,6 @@
         <file>view_models/BabeAlbum.qml</file>
         <file>view_models/BabeGrid.qml</file>
         <file>view_models/BabeTable.qml</file>
-        <file>utils/Icon.qml</file>
         <file>widgets/BabeBar.qml</file>
         <file>utils/Icons.js</file>
         <file>utils/materialdesignicons-webfont.ttf</file>
@@ -35,5 +34,6 @@
         <file>widgets/FolderPicker.qml</file>
         <file>view_models/FolderPickerList.qml</file>
         <file>view_models/FolderPickerDelegate.qml</file>
+        <file>utils/BabeIcon.qml</file>
     </qresource>
 </RCC>

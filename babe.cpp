@@ -3,7 +3,7 @@
 #include <QPalette>
 #include <QWidget>
 #include <QColor>
-
+#include <QIcon>
 #include "db/collectionDB.h"
 #include "settings/settings.h"
 #include "pulpo/pulpo.h"
@@ -377,6 +377,13 @@ uint Babe::sizeHint(const uint &hint)
     else if(hint>=BAE::SMALL_ALBUM_FACTOR)
         return BAE::getWidgetSizeHint(BAE::AlbumSizeHint::SMALL_ALBUM);
     else return hint;
+}
+
+QString Babe::icon(const QString &icon, const int &size)
+{
+   auto pix = QIcon::fromTheme(icon).pixmap(QSize(size, size), QIcon::Mode::Normal, QIcon::State::On);
+
+   return "";
 }
 
 QString Babe::loadCover(const QString &url)

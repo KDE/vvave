@@ -12,7 +12,11 @@
 #include <QDirIterator>
 #include <QApplication>
 #include <QScreen>
+#include <QtNetwork>
+#include <QEventLoop>
+
 #include <cmath>
+
 using namespace std;
 
 namespace BAE
@@ -201,7 +205,7 @@ namespace BAE
         {KEY::ART, KEYMAP[KEY::ART]}
     };
 
-      inline QString transformTime(const qint64 &value)
+    inline QString transformTime(const qint64 &value)
     {
         QString tStr;
         if (value)
@@ -450,6 +454,21 @@ namespace BAE
         }
 
         return static_cast<uint>(defaultValue);
+    }
+
+    inline bool internetConnection()
+    {
+        QNetworkAccessManager nam;
+        QNetworkRequest req(QUrl("http://google.com"));
+        QNetworkReply *reply = nam.get(req);
+        QEventLoop loop;
+        QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+        loop.exec();
+
+        if(reply->bytesAvailable())
+            return true;
+        else
+            return false;
     }
 }
 
