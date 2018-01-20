@@ -129,8 +129,8 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             height: 48
-
-            visible: list.count>0
+//            anchors.top: cover.bottom
+            visible: list.count > 0
 
             Rectangle
             {
@@ -168,10 +168,27 @@ Item
                 drag.axis: Drag.YAxis
                 drag.minimumY: 0
                 drag.maximumY: columnWidth
-                onClicked:
+//                onClicked:
+//                {
+//                    if(!bae.isMobile())
+//                        cover.visible = !cover.visible
+//                }
+
+
+                onMouseYChanged:
                 {
-                    if(!bae.isMobile())
-                        cover.visible = !cover.visible
+                    cover.height = playbackControls.y
+
+                    if(playbackControls.y < columnWidth*0.8)
+                    {
+                        cover.visible = false
+                        playbackControls.y = 0
+
+                    }else
+                    {
+                        cover.visible = true
+                        //                        playbackControls.y = columnWidth
+                    }
                 }
             }
 
@@ -268,7 +285,7 @@ Item
                     {
                         id: menuBtn
                         BabeIcon {text: MdiFont.Icon.dotsVertical}
-                        onClicked: playlistMenu.open()
+                        onClicked: bae.isMobile() ? playlistMenu.open() : playlistMenu.popup()
                     }
                 }
             }
@@ -281,6 +298,7 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             height: 48
+            anchors.top: playbackControls.bottom
             Rectangle
             {
                 anchors.fill: parent
@@ -341,7 +359,8 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             Layout.fillHeight: true
-
+            anchors.top: slideBar.bottom
+//            anchors.bottom: mainPlaylistRoot.searchBox
             StackView
             {
                 id: stackView

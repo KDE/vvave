@@ -7,7 +7,7 @@ Menu
     id: root
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
-    modal: true
+    modal: bae.isMobile()
 
     signal clearOut()
     signal clean()

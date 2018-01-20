@@ -34,6 +34,9 @@ BabeGrid
         y: (drawer.position * albumsViewGrid.height * 0.33)*-1
     }
 
+    onBgClicked: if(drawer.visible) drawer.close()
+    onFocusChanged:  drawer.close()
+
     Drawer
     {
         id: drawer
@@ -42,13 +45,17 @@ BabeGrid
         edge: Qt.BottomEdge
         interactive: false
         focus: true
-        modal:true
+        modal: bae.isMobile()
+        dragMargin: 0
+
         background: Rectangle
         {
             anchors.fill: parent
             z: -999
             color: bae.altColor()
+
         }
+
 
         Column
         {

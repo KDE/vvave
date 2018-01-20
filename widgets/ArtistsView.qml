@@ -34,6 +34,9 @@ BabeGrid
         y: (drawer.position * artistsViewGrid.height * 0.33)*-1
     }
 
+    onBgClicked: if(drawer.visible) drawer.close()
+        onFocusChanged:  drawer.close()
+
     Drawer
     {
         id: drawer
@@ -41,6 +44,12 @@ BabeGrid
         width: parent.width
         edge: Qt.BottomEdge
         interactive: false
+        focus: true
+        modal: bae.isMobile()
+        dragMargin: 0
+        clip: true
+
+
 
         background: Rectangle
         {

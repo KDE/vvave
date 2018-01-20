@@ -12,7 +12,7 @@ Pane
     property alias gridModel: gridModel
     property alias grid: grid
     signal albumCoverClicked(string album, string artist)
-
+    signal bgClicked()
     width: 500
     height: 400
 
@@ -29,6 +29,12 @@ Pane
         gridModel.clear()
     }
 
+    MouseArea
+    {
+        anchors.fill: parent
+        onClicked: bgClicked()
+    }
+
     BabeHolder
     {
         visible: grid.count === 0
@@ -40,6 +46,12 @@ Pane
     GridView
     {
         id: grid
+        MouseArea
+        {
+            anchors.fill: parent
+            onClicked: bgClicked()
+            z: -999
+        }
 
         width: Math.min(model.count, Math.floor(parent.width/cellWidth))*cellWidth
         height: parent.height
@@ -58,10 +70,11 @@ Pane
 
         snapMode: GridView.SnapToRow
         //        flow: GridView.FlowTopToBottom
-//        maximumFlickVelocity: albumSize*8
+        //        maximumFlickVelocity: albumSize*8
 
         model: gridModel
         SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
+
 
         //        highlight: Rectangle
         //        {

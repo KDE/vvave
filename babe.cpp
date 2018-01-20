@@ -246,6 +246,18 @@ QString Babe::foregroundColor()
     return "#FFF";
 #elif defined(Q_OS_LINUX)
     QWidget widget;
+    return widget.palette().color(QPalette::Foreground).name();
+#elif defined(Q_OS_WIN32)
+    return "#FFF";
+#endif
+}
+
+QString Babe::textColor()
+{
+#if defined(Q_OS_ANDROID)
+    return "#FFF";
+#elif defined(Q_OS_LINUX)
+    QWidget widget;
     return widget.palette().color(QPalette::Text).name();
 #elif defined(Q_OS_WIN32)
     return "#FFF";
@@ -267,12 +279,12 @@ QString Babe::hightlightColor()
 QString Babe::midColor()
 {
 #if defined(Q_OS_ANDROID)
-    return "#31363b";
+    return "#3e444b";
 #elif defined(Q_OS_LINUX)
     QWidget widget;
     return widget.palette().color(QPalette::Midlight).name();
 #elif defined(Q_OS_WIN32)
-    return "#31363b";
+    return "#3e444b";
 #endif
 }
 
@@ -319,6 +331,13 @@ int Babe::cursorPos(QString &axis)
     else if(axis == "y")
         return pos.y();
     else return 0;
+}
+
+QString Babe::moodColor(const int &pos)
+{
+    if(pos < BAE::MoodColors.size())
+        return BAE::MoodColors.at(pos);
+    else return "";
 }
 
 QString Babe::homeDir()

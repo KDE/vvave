@@ -24,7 +24,10 @@ ItemDelegate
         {
             if(!bae.isMobile())
                 if (mouse.button === Qt.RightButton)
+                {
                     menuClicked()
+
+                }
         }
     }
 
@@ -35,6 +38,7 @@ ItemDelegate
 
         rows:2
         columns:4
+
 
         ToolButton
         {

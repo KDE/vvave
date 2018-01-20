@@ -63,6 +63,7 @@ public:
 
     Q_INVOKABLE static QString backgroundColor();
     Q_INVOKABLE static QString foregroundColor();
+    Q_INVOKABLE static QString textColor();
     Q_INVOKABLE static QString hightlightColor();
     Q_INVOKABLE static QString midColor();
     Q_INVOKABLE static QString altColor();
@@ -71,6 +72,8 @@ public:
     Q_INVOKABLE static bool isMobile();
     Q_INVOKABLE static int screenGeometry(QString &side);
     Q_INVOKABLE static int cursorPos(QString &axis);
+
+    Q_INVOKABLE static QString moodColor(const int &pos);
 
     Q_INVOKABLE static QString homeDir();
 

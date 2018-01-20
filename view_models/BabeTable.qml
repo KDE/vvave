@@ -74,10 +74,10 @@ ListView
         }
     }
 
-   TableMenu
-   {
-       id: contextMenu
-   }
+    TableMenu
+    {
+        id: contextMenu
+    }
 
     ListModel { id: listModel }
 
@@ -102,7 +102,7 @@ ListView
             onClicked:
             {
                 currentIndex = index
-                list.rowClicked(index)                
+                list.rowClicked(index)
             }
 
             onPlay: list.quickPlayTrack(index)
@@ -110,7 +110,9 @@ ListView
             {
                 currentRow = index
                 contextMenu.rate = bae.trackRate(list.model.get(currentRow).url)
-                contextMenu.open()
+                if(bae.isMobile()) contextMenu.open()
+                else
+                    contextMenu.popup()
                 list.rowPressed(index)
             }
 
