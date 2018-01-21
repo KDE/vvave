@@ -104,13 +104,17 @@ function appendTrack(track)
 {
     if(track)
     {
-        var empty = root.mainPlaylist.list.count
-        root.mainPlaylist.list.model.append(track)
 
-        if(empty === 0 && root.mainPlaylist.list.count>0)
+        var empty = root.mainPlaylist.list.count
+        if((empty > 0 && track.url !== root.mainPlaylist.list.model.get(root.mainPlaylist.list.count-1).url) || empty === 0)
         {
-            root.mainPlaylist.list.currentIndex = 0
-            playTrack(root.mainPlaylist.list.model.get(0))
+            root.mainPlaylist.list.model.append(track)
+
+            if(empty === 0 && root.mainPlaylist.list.count>0)
+            {
+                root.mainPlaylist.list.currentIndex = 0
+                playTrack(root.mainPlaylist.list.model.get(0))
+            }
         }
     }
 }

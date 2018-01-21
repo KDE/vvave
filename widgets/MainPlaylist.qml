@@ -61,7 +61,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: columnWidth
             Layout.maximumHeight: 300
-            visible: list.count>0
+            visible: list.count > 0
 
             Rectangle
             {

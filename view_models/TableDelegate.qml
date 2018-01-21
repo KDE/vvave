@@ -72,11 +72,9 @@ ItemDelegate
             Layout.fillHeight: true
             Layout.row: 1
             Layout.column: 2
-            Layout.rowSpan: 2
 
             Layout.alignment: Qt.AlignCenter
             verticalAlignment:  Qt.AlignVCenter
-
 
             text: track
             font.bold: true
