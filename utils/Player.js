@@ -7,7 +7,6 @@ function playTrack(track)
     player.source(root.mainPlaylist.currentTrack.url);
     player.play()
     root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
-
     var artwork = root.mainPlaylist.currentTrack.artwork
 
     root.mainPlaylist.currentArtwork = artwork ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
@@ -103,13 +102,16 @@ function quickPlay(track)
 
 function appendTrack(track)
 {
-    var empty = root.mainPlaylist.list.count
-    root.mainPlaylist.list.model.append(track)
-
-    if(empty === 0 && root.mainPlaylist.list.count>0)
+    if(track)
     {
-        root.mainPlaylist.list.currentIndex = 0
-        playTrack(root.mainPlaylist.list.model.get(0))
+        var empty = root.mainPlaylist.list.count
+        root.mainPlaylist.list.model.append(track)
+
+        if(empty === 0 && root.mainPlaylist.list.count>0)
+        {
+            root.mainPlaylist.list.currentIndex = 0
+            playTrack(root.mainPlaylist.list.model.get(0))
+        }
     }
 }
 

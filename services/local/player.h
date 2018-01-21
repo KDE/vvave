@@ -18,6 +18,7 @@ public:
     Q_INVOKABLE void seek(const int &pos);
     Q_INVOKABLE int duration();
     Q_INVOKABLE bool isPaused();
+    Q_INVOKABLE QString transformTime(const int &pos);
 
 private:
     QMediaPlayer *player;
@@ -29,6 +30,8 @@ private:
 signals:
     void pos(int pos);
     void finished();
+    void timing(QString time);
+    void durationChanged(QString time);
 
 public slots:
 };

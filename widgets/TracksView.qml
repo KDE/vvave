@@ -6,6 +6,9 @@ BabeTable
 {
     id: tracksViewTable
     trackNumberVisible: false
+    trackDuration: true
+    trackRating: true
+
     function populate()
     {
         var map = bae.get(Q.Query.allTracks)

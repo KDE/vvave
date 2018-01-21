@@ -76,8 +76,8 @@ uint TagInfo::getYear() const
 
 int TagInfo::getDuration() const
 {
-    return 0;
-    /*file.audioProperties()->lengthInSeconds();*/
+
+    return file.audioProperties()->length();
 }
 
 QString TagInfo::getComment() const

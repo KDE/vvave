@@ -25,6 +25,10 @@ Item
     property alias playIcon : playIcon
     property alias babeBtnIcon: babeBtnIcon
     property alias infoView : infoView
+
+    property alias durationTime : durationTime
+    property alias progressTime : progressTime
+
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
     //                    Component.onCompleted:
@@ -129,7 +133,7 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             height: 48
-//            anchors.top: cover.bottom
+            //            anchors.top: cover.bottom
             visible: list.count > 0
 
             Rectangle
@@ -168,11 +172,11 @@ Item
                 drag.axis: Drag.YAxis
                 drag.minimumY: 0
                 drag.maximumY: columnWidth
-//                onClicked:
-//                {
-//                    if(!bae.isMobile())
-//                        cover.visible = !cover.visible
-//                }
+                //                onClicked:
+                //                {
+                //                    if(!bae.isMobile())
+                //                        cover.visible = !cover.visible
+                //                }
 
 
                 onMouseYChanged:
@@ -299,6 +303,8 @@ Item
             Layout.fillWidth: true
             height: 48
             anchors.top: playbackControls.bottom
+            visible: list.count > 0
+
             Rectangle
             {
                 anchors.fill: parent
@@ -306,48 +312,91 @@ Item
                 opacity: 0.8
                 z: -999
             }
-            Slider
+
+            GridLayout
             {
-                id: progressBar
-                width: parent.width
-                height: parent.height
-                from: 0
-                to: 1000
-                value: 0
-                visible: list.count>0
-                spacing: 0
+                anchors.fill: parent
+                columns:3
+                rows:2
 
-                onMoved: player.seek(player.duration() / 1000 * value);
-
-
-                background: Rectangle
+                Label
                 {
-                    x: progressBar.leftPadding
-                    y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
-                    implicitWidth: 200
-                    implicitHeight: 2
-                    width: progressBar.availableWidth
-                    height: implicitHeight
+                    id: progressTime
+                    Layout.row: 1
+                    Layout.column: 1
+                    Layout.fillWidth:true
+                    Layout.alignment: Qt.AlignCenter
+                    horizontalAlignment: Qt.AlignHCenter
+                    text: "00:00"
                     color: bae.foregroundColor()
+                    font.pointSize: 8
 
-                    Rectangle
+                }
+
+
+                Label
+                {
+                    id: durationTime
+                    Layout.row: 1
+                    Layout.column: 3
+                    Layout.fillWidth:true
+                    Layout.alignment: Qt.AlignCenter
+                    horizontalAlignment: Qt.AlignHCenter
+                    text: "00:00"
+                    color: bae.foregroundColor()
+                    font.pointSize: 8
+                }
+
+                Slider
+                {
+                    id: progressBar
+
+                    Layout.row: 2
+                    Layout.column: 1
+                    Layout.columnSpan: 3
+                    Layout.fillWidth:true
+                    Layout.fillHeight: true
+
+                    from: 0
+                    to: 1000
+                    value: 0
+
+                    spacing: 0
+
+                    onMoved: player.seek(player.duration() / 1000 * value);
+
+
+                    background: Rectangle
                     {
-                        width: progressBar.visualPosition * parent.width
-                        height: parent.height
+                        x: progressBar.leftPadding
+                        y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                        implicitWidth: 200
+                        implicitHeight: 2
+                        width: progressBar.availableWidth
+                        height: implicitHeight
+                        color: bae.foregroundColor()
+
+                        Rectangle
+                        {
+                            width: progressBar.visualPosition * parent.width
+                            height: parent.height
+                            color: bae.babeColor()
+                        }
+                    }
+
+                    handle: Rectangle
+                    {
+                        x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
+                        y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                        implicitWidth: 16
+                        implicitHeight: 16
+                        radius: 13
                         color: bae.babeColor()
                     }
                 }
 
-                handle: Rectangle
-                {
-                    x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
-                    y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
-                    implicitWidth: 16
-                    implicitHeight: 16
-                    radius: 13
-                    color: bae.babeColor()
-                }
             }
+
 
         }
 
@@ -360,7 +409,7 @@ Item
             Layout.fillWidth: true
             Layout.fillHeight: true
             anchors.top: slideBar.bottom
-//            anchors.bottom: mainPlaylistRoot.searchBox
+            //            anchors.bottom: mainPlaylistRoot.searchBox
             StackView
             {
                 id: stackView

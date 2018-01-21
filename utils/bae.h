@@ -217,7 +217,7 @@ namespace BAE
             tStr = time.toString(format);
         }
 
-        return tStr.isEmpty()?"00:00":tStr;
+        return tStr.isEmpty() ? "00:00" : tStr;
     }
 
     inline QString getNameFromLocation(const QString &str)

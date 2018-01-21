@@ -11,7 +11,7 @@ Menu
     id: rootMenu
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
-    modal: bae.isMobile()
+    modal: true
     focus: true
 
 
@@ -22,9 +22,6 @@ Menu
     property int assetsize : menuItemHeight/2
     property int menuItemHeight : bae.isMobile() ? 48 : 32;
 
-    signal rated(int value)
-
-
 
     enter: Transition {
         NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
@@ -33,7 +30,26 @@ Menu
     function rateIt(rank)
     {
         rate = rank
-        bae.rateTrack(list.model.get(currentRow).url, rate)
+        if(bae.rateTrack(list.model.get(currentRow).url, rate))
+        {
+            list.currentItem.trackRating.text = rate
+            list.model.get(currentRow).stars = rate
+        }
+        if(!bae.isMobile())
+            dismiss()
+        else close()
+    }
+
+    function moodIt(color)
+    {
+        if(bae.moodTrack(list.model.get(currentRow).url, color))
+        {
+            list.currentItem.trackMood = color
+            list.model.get(currentRow).art = color
+        }
+        if(!bae.isMobile())
+            dismiss()
+        else close()
     }
 
 
@@ -41,7 +57,7 @@ Menu
     {
         implicitWidth: 200
         implicitHeight: 40
-        color: bae.backgroundColor()
+        color: bae.altColor()
         border.color: bae.midColor()
         border.width: 1
         radius: 4
@@ -74,7 +90,7 @@ Menu
     {
         height: menuItemHeight
         txt: "Queue"
-        onTriggered: list.queueTrack(currentRow)
+        onTriggered: list.queueTrack(currentIndex)
     }
 
     TableMenuItem
@@ -187,9 +203,6 @@ Menu
 
                 onClicked: rateIt(5)
             }
-
-
-
         }
 
     }
@@ -219,7 +232,7 @@ Menu
                     border.width: 1
                 }
 
-                onClicked: {}
+                onClicked: moodIt(bae.moodColor(0))
             }
             ToolButton
             {
@@ -238,7 +251,7 @@ Menu
                     border.width: 1
                 }
 
-                onClicked: {}
+                onClicked: moodIt(bae.moodColor(1))
             }
             ToolButton
             {
@@ -257,7 +270,7 @@ Menu
                     border.width: 1
                 }
 
-                onClicked: {}
+                onClicked: moodIt(bae.moodColor(2))
             }
             ToolButton
             {
@@ -276,7 +289,7 @@ Menu
                     border.width: 1
                 }
 
-                onClicked: {}
+                onClicked: moodIt(bae.moodColor(3))
             }
 
             ToolButton
@@ -296,12 +309,8 @@ Menu
                     border.width: 1
                 }
 
-                onClicked: {}
+                onClicked: moodIt(bae.moodColor(4))
             }
-
-
-
         }
-
     }
 }

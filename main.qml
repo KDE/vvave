@@ -63,8 +63,9 @@ ApplicationWindow
     {
         target: player
         onPos: mainPlaylist.progressBar.value = pos
+        onTiming: mainPlaylist.progressTime.text = time
+        onDurationChanged: mainPlaylist.durationTime.text = time
         onFinished: Player.nextTrack()
-
     }
 
     Connections

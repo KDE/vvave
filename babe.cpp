@@ -180,6 +180,12 @@ int Babe::trackRate(const QString &path)
     return this->con->getTrackStars(path);
 }
 
+bool Babe::moodTrack(const QString &path, const QString &color)
+{
+    qDebug()<<path<<color;
+    return this->con->artTrack(path, color);
+}
+
 void Babe::notify(const QString &title, const QString &body)
 {
 

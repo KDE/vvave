@@ -11,6 +11,10 @@ ListView
     property bool trackNumberVisible
     property bool quickBtnsVisible : true
     property bool quickPlayVisible : true
+
+    property bool trackDuration
+    property bool trackRating
+
     property alias holder : holder
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -31,8 +35,6 @@ ListView
     flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem
-
-
 
     function clearTable()
     {
@@ -90,6 +92,10 @@ ListView
         number : trackNumberVisible ? true : false
         quickBtns : quickBtnsVisible
         quickPlay: quickPlayVisible
+
+        trackDurationVisible : list.trackDuration
+        trackRatingVisible : list.trackRating
+
         Connections
         {
             target: delegate
@@ -102,13 +108,21 @@ ListView
             onClicked:
             {
                 currentIndex = index
-                list.rowClicked(index)
+                if(bae.isMobile())
+                    list.rowClicked(index)
+            }
+
+            onDoubleClicked:
+            {
+                if(!bae.isMobile())
+                    list.rowClicked(index)
             }
 
             onPlay: list.quickPlayTrack(index)
             onMenuClicked:
             {
                 currentRow = index
+                currentIndex = index
                 contextMenu.rate = bae.trackRate(list.model.get(currentRow).url)
                 if(bae.isMobile()) contextMenu.open()
                 else
