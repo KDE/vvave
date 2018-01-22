@@ -234,6 +234,30 @@ int Babe::lastPlaylistPos()
     return BAE::loadSettings("PLAYLIST_POS","MAINWINDOW",QVariant(0)).toInt();
 }
 
+QString Babe::baseColor()
+{
+#if defined(Q_OS_ANDROID)
+    return "#24282c";
+#elif defined(Q_OS_LINUX)
+    QWidget widget;
+    return widget.palette().color(QPalette::Base).name();
+#elif defined(Q_OS_WIN32)
+    return "#24282c";
+#endif
+}
+
+QString Babe::darkColor()
+{
+#if defined(Q_OS_ANDROID)
+    return "#24282c";
+#elif defined(Q_OS_LINUX)
+    QWidget widget;
+    return widget.palette().color(QPalette::Dark).name();
+#elif defined(Q_OS_WIN32)
+    return "#24282c";
+#endif
+}
+
 QString Babe::backgroundColor()
 {
 #if defined(Q_OS_ANDROID)
@@ -288,7 +312,31 @@ QString Babe::midColor()
     return "#3e444b";
 #elif defined(Q_OS_LINUX)
     QWidget widget;
+    return widget.palette().color(QPalette::Mid).name();
+#elif defined(Q_OS_WIN32)
+    return "#3e444b";
+#endif
+}
+
+QString Babe::midLightColor()
+{
+#if defined(Q_OS_ANDROID)
+    return "#3e444b";
+#elif defined(Q_OS_LINUX)
+    QWidget widget;
     return widget.palette().color(QPalette::Midlight).name();
+#elif defined(Q_OS_WIN32)
+    return "#3e444b";
+#endif
+}
+
+QString Babe::shadowColor()
+{
+#if defined(Q_OS_ANDROID)
+    return "#3e444b";
+#elif defined(Q_OS_LINUX)
+    QWidget widget;
+    return widget.palette().color(QPalette::Shadow).name();
 #elif defined(Q_OS_WIN32)
     return "#3e444b";
 #endif

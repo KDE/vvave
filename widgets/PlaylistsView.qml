@@ -5,4 +5,5 @@ import "../view_models"
 BabeTable
 {
     id: playlistsView
+    headerBar: true
 }

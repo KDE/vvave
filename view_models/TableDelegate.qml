@@ -25,10 +25,16 @@ ItemDelegate
 
     background: Rectangle
     {
-        color: Qt.lighter(trackMood, 1.5) || "transparent"
-        opacity: 0.4
-    }
+        color:
+        {
+            if(trackMood.length>0)
+                Qt.lighter(trackMood)
+            else
+                index % 2 === 0 ? bae.midColor() : "transparent"
+        }
 
+        opacity: 0.3
+    }
     MouseArea
     {
         anchors.fill: parent

@@ -58,9 +58,9 @@ Menu
         implicitWidth: 200
         implicitHeight: 40
         color: bae.altColor()
-        border.color: bae.midColor()
+        border.color: bae.midLightColor()
         border.width: 1
-        radius: 4
+        radius: 3
 
     }
 

@@ -56,8 +56,8 @@ Drawer
     }
     FolderPicker
     {
-
         id: folderPicker
+
         Connections
         {
             target: folderPicker
@@ -77,7 +77,7 @@ Drawer
     {
         id: content
         anchors.fill: parent
-        color: bae.midColor()
+        color: bae.midLightColor()
         ColumnLayout
         {
             width: settingsView.width
@@ -208,7 +208,27 @@ Drawer
                 }
             }
 
+            Row
+            {
+                Layout.fillWidth: true
+                height: 48
+                Label
+                {
+                    padding: 20
+                    text: "Brainz"
+                    elide: Text.ElideRight
+                    verticalAlignment: Text.AlignVCenter
 
+                    color: bae.foregroundColor()
+                }
+
+                CheckBox
+                {
+                    id: brainzCheck
+
+
+                }
+            }
         }
 
 

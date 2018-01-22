@@ -8,6 +8,7 @@ BabeTable
     trackNumberVisible: false
     trackDuration: true
     trackRating: true
+    headerBar: true
 
     function populate()
     {

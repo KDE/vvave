@@ -20,7 +20,7 @@ Page
     {
         anchors.fill: parent
         z: -999
-        color: bae.midColor()
+        color: bae.midLightColor()
     }
 
 

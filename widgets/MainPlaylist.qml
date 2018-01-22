@@ -41,7 +41,7 @@ Item
     Rectangle
     {
         anchors.fill: parent
-        color: bae.midColor()
+        color: bae.midLightColor()
         z: -999
     }
 
@@ -66,7 +66,7 @@ Item
             Rectangle
             {
                 anchors.fill: parent
-                color: bae.midColor()
+                color: bae.midLightColor()
                 z: -999
             }
 
@@ -139,7 +139,7 @@ Item
             Rectangle
             {
                 anchors.fill: parent
-                color: bae.midColor()
+                color: bae.midLightColor()
                 opacity: 0.8
                 z: -999
             }
@@ -308,7 +308,7 @@ Item
             Rectangle
             {
                 anchors.fill: parent
-                color: bae.midColor()
+                color: bae.midLightColor()
                 opacity: 0.8
                 z: -999
             }

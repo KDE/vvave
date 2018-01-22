@@ -10,7 +10,7 @@ Item
     signal albumClicked(int index)
     property int albumSize : 150
     property int borderRadius : 2
-    property string fillColor: bae.midColor()
+    property string fillColor: bae.midLightColor()
     property string textColor: bae.foregroundColor()
     property int fontSize : bae.isMobile()? 12 : 10
     property bool hide : false

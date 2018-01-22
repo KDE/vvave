@@ -5,7 +5,11 @@ import "../db/Queries.js" as Q
 BabeTable
 {
     id: searchTable
+    property var searchRes
     trackNumberVisible: false
+    headerBar: true
+    headerClose: true
+
     function populate(tracks)
     {
         searchTable.clearTable()

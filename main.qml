@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 //import org.kde.kirigami 2.0 as Kirigami
 
+import "db/Queries.js" as Q
 import "utils/Icons.js" as MdiFont
 import "utils/Player.js" as Player
 import "utils"
@@ -25,6 +26,7 @@ ApplicationWindow
 
 
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
+
     property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
     property int iconSize
@@ -33,7 +35,15 @@ ApplicationWindow
 
     //    pageStack.defaultColumnWidth: columnWidth
     //    pageStack.initialPage: [playlistPage, views]
+//    overlay.modal: Rectangle
+//    {
+//        color: "transparent"
+//    }
 
+//    overlay.modeless: Rectangle
+//    {
+//        color: "transparent"
+//    }
 
     onWidthChanged: if(bae.isMobile())
                     {
@@ -50,13 +60,22 @@ ApplicationWindow
         if(searchInput.text)
         {
             var query = searchInput.text
+            searchView.headerTitle = query
             var queries = query.split(",")
-            var res = bae.searchFor(queries)
+            searchView.searchRes = bae.searchFor(queries)
 
-            searchView.populate(res)
+            searchView.populate(searchView.searchRes)
             //                albumsView.filter(res)
             currentView = 5
         }
+    }
+
+    function clearSearch()
+    {
+        searchInput.clear()
+        searchView.clearTable()
+        searchView.searchRes = []
+        currentView = 0
     }
 
     Connections
@@ -112,7 +131,7 @@ ApplicationWindow
         id: searchBox
         width: parent.width
         height: 48
-        color: bae.midColor()
+        color: bae.midLightColor()
 
         TextInput
         {
@@ -145,6 +164,24 @@ ApplicationWindow
                 text: MdiFont.Icon.magnify
                 color: bae.foregroundColor()
             }
+
+
+            ToolButton
+            {
+                   anchors.right: parent.right
+                BabeIcon
+                {
+                    visible: searchInput.text
+                    text: MdiFont.Icon.eraser
+                    color: bae.foregroundColor()
+                }
+
+                onClicked: clearSearch()
+            }
+
+
+
+
 
 
             //            onTextChanged:
@@ -208,8 +245,8 @@ ApplicationWindow
                     Connections
                     {
                         target: mainPlaylist
-                        onCoverPressed: Player.appendAlbum(tracks)
-                        onCoverDoubleClicked: Player.playAlbum(tracks)
+                        onCoverPressed: Player.appendAll(tracks)
+                        onCoverDoubleClicked: Player.playAll(tracks)
                     }
                 }
 
@@ -222,6 +259,8 @@ ApplicationWindow
                         target: tracksView
                         onRowClicked: Player.addTrack(tracksView.model.get(index))
                         onQuickPlayTrack: Player.quickPlay(tracksView.model.get(index))
+                        onPlayAll: Player.playAll(bae.get(Q.Query.allTracks))
+                        onAppendAll: Player.appendAll(bae.get(Q.Query.allTracks))
                     }
 
                 }
@@ -233,8 +272,8 @@ ApplicationWindow
                     {
                         target: albumsView
                         onRowClicked: Player.addTrack(track)
-                        onPlayAlbum: Player.playAlbum(tracks)
-                        onAppendAlbum: Player.appendAlbum(tracks)
+                        onPlayAlbum: Player.playAll(tracks)
+                        onAppendAlbum: Player.appendAll(tracks)
                         onPlayTrack: Player.quickPlay(track)
                     }
                 }
@@ -247,8 +286,8 @@ ApplicationWindow
                     {
                         target: artistsView
                         onRowClicked: Player.addTrack(track)
-                        onPlayAlbum: Player.playAlbum(tracks)
-                        onAppendAlbum: Player.appendAlbum(tracks)
+                        onPlayAlbum: Player.playAll(tracks)
+                        onAppendAlbum: Player.appendAll(tracks)
                         onPlayTrack: Player.quickPlay(track)
                     }
                 }
@@ -264,6 +303,9 @@ ApplicationWindow
                         target: searchView
                         onRowClicked: Player.addTrack(searchView.model.get(index))
                         onQuickPlayTrack: Player.quickPlay(searchView.model.get(index))
+                        onPlayAll: Player.playAll(searchView.searchRes)
+                        onAppendAll: Player.appendAll(searchView.searchRes)
+                        onHeaderClosed: clearSearch()
                     }
                 }
 

@@ -40,6 +40,7 @@ BabeGrid
     Drawer
     {
         id: drawer
+
         height: parent.height * 0.4
         width: parent.width
         edge: Qt.BottomEdge
@@ -53,103 +54,22 @@ BabeGrid
             anchors.fill: parent
             z: -999
             color: bae.altColor()
-
         }
-
 
         Column
         {
             anchors.fill: parent
 
-            Rectangle
-            {
-                id: titleBar
-                width: parent.width
-                height: 48
-                z: 1
-                color: bae.midColor()
-                Row
-                {
-                    anchors.fill: parent
-
-                    ToolButton
-                    {
-                        id: playAllBtn
-
-                        width: parent.height
-                        height: parent.height
-
-                        BabeIcon {text: MdiFont.Icon.playBoxOutline}
-
-                        onClicked:
-                        {
-                            drawer.close()
-
-                            var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
-                            var query = Q.Query.albumTracks_.arg(data.album)
-                            query = query.arg(data.artist)
-                            var tracks = bae.get(query)
-
-                            albumsViewGrid.playAlbum(tracks)
-                        }
-                    }
-
-                    ToolButton
-                    {
-                        id: appendBtn
-
-                        width: parent.height
-                        height: parent.height
-
-                        BabeIcon {text: MdiFont.Icon.playlistPlus}
-
-                        onClicked:
-                        {
-                            var data = albumsView.gridModel.get(albumsViewGrid.grid.currentIndex)
-                            var query = Q.Query.albumTracks_.arg(data.album)
-                            query = query.arg(data.artist)
-                            var tracks = bae.get(query)
-                            albumsViewGrid.appendAlbum(tracks)
-                            drawer.close()
-
-                        }
-                    }
-
-                    Label
-                    {
-                        id: albumTitle
-                        width: parent.width - closeBtn.width - playAllBtn.width - appendBtn.width
-                        height: parent.height
-                        elide: Text.ElideRight
-                        font.pointSize: 12
-                        font.bold: true
-                        lineHeight: 0.7
-                        color: bae.foregroundColor()
-
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment:  Text.AlignVCenter
-                    }
-
-
-                    ToolButton
-                    {
-                        id: closeBtn
-                        width: parent.height
-                        height: parent.height
-
-                        BabeIcon { text: MdiFont.Icon.close }
-                        onClicked: drawer.close()
-
-                    }
-                }
-            }
-
             BabeTable
             {
                 id: drawerList
                 width: parent.width
-                height: parent.height - titleBar.height
+                height: parent.height
                 trackNumberVisible: true
+                headerBar: true
+                headerClose: true
+
+
                 onRowClicked:
                 {
                     drawer.close()
@@ -167,6 +87,30 @@ BabeGrid
                     albumsViewGrid.queueTrack(model.get(index))
                     drawer.close()
                 }
+
+                onPlayAll:
+                {
+                    drawer.close()
+
+                    var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
+                    var query = Q.Query.albumTracks_.arg(data.album)
+                    query = query.arg(data.artist)
+                    var tracks = bae.get(query)
+
+                    albumsViewGrid.playAlbum(tracks)
+                }
+
+                onAppendAll:
+                {
+                    var data = albumsView.gridModel.get(albumsViewGrid.grid.currentIndex)
+                    var query = Q.Query.albumTracks_.arg(data.album)
+                    query = query.arg(data.artist)
+                    var tracks = bae.get(query)
+                    albumsViewGrid.appendAlbum(tracks)
+                    drawer.close()
+                }
+
+                onHeaderClosed: drawer.close()
             }
 
         }
@@ -174,7 +118,7 @@ BabeGrid
 
     onAlbumCoverClicked:
     {
-        albumTitle.text = album
+        drawerList.headerTitle = album
         drawer.open()
         drawerList.clearTable()
 

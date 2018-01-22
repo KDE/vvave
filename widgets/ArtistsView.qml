@@ -35,7 +35,7 @@ BabeGrid
     }
 
     onBgClicked: if(drawer.visible) drawer.close()
-        onFocusChanged:  drawer.close()
+    onFocusChanged:  drawer.close()
 
     Drawer
     {
@@ -49,8 +49,6 @@ BabeGrid
         dragMargin: 0
         clip: true
 
-
-
         background: Rectangle
         {
             anchors.fill: parent
@@ -62,99 +60,14 @@ BabeGrid
         {
             anchors.fill: parent
 
-            Rectangle
-            {
-                id: titleBar
-                width: parent.width
-                height: 48
-                z: 1
-                color: bae.midColor()
-
-                Row
-                {
-                    anchors.fill: parent
-
-                    ToolButton
-                    {
-                        width: parent.height
-                        height: parent.height
-
-                        id: playAllBtn
-                        BabeIcon {text: MdiFont.Icon.playBoxOutline}
-
-                        onClicked:
-                        {
-                            drawer.close()
-                            var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
-
-                            var query = Q.Query.artistTracks_.arg(data.artist)
-                            var tracks = bae.get(query)
-                            artistsViewGrid.playAlbum(tracks)
-
-                        }
-                    }
-                    ToolButton
-                    {
-                        id: appendBtn
-
-                        width: parent.height
-                        height: parent.height
-
-                        BabeIcon {text: MdiFont.Icon.playlistPlus}
-
-                        onClicked:
-                        {
-                            var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
-                            var query = Q.Query.artistTracks_.arg(data.artist)
-                            var tracks = bae.get(query)
-                            artistsViewGrid.appendAlbum(tracks)
-                            drawer.close()
-
-                        }
-                    }
-                    Label
-                    {
-                        id: artistTitle
-                        width: parent.width - closeBtn.width - playAllBtn.width - appendBtn.width
-                        height: parent.height
-                        elide: Text.ElideRight
-                        font.pointSize: 12
-                        font.bold: true
-                        lineHeight: 0.7
-                        color: bae.foregroundColor()
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment:  Text.AlignVCenter
-                    }
-
-
-                    ToolButton
-                    {
-                        id: closeBtn
-                        width: parent.height
-                        height: parent.height
-
-                        BabeIcon
-                        {
-                            text: MdiFont.Icon.close
-                        }
-
-                        onClicked:
-                        {
-                            drawer.close()
-                            console.log("close drawer")
-                        }
-                    }
-                }
-            }
-
             BabeTable
             {
                 id: drawerList
                 width: parent.width
-                height: parent.height - titleBar.height
+                height: parent.height
                 trackNumberVisible: true
                 quickBtnsVisible: true
-
+                headerBar: true
                 onRowClicked:
                 {
                     drawer.close()
@@ -172,13 +85,32 @@ BabeGrid
                     drawer.close()
                     artistsViewGrid.queueTrack(model.get(index))
                 }
+
+                onPlayAll:
+                {
+                    drawer.close()
+                    var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
+
+                    var query = Q.Query.artistTracks_.arg(data.artist)
+                    var tracks = bae.get(query)
+                    artistsViewGrid.playAlbum(tracks)
+                }
+
+                onAppendAll:
+                {
+                    var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
+                    var query = Q.Query.artistTracks_.arg(data.artist)
+                    var tracks = bae.get(query)
+                    artistsViewGrid.appendAlbum(tracks)
+                    drawer.close()
+                }
             }
         }
     }
 
     onAlbumCoverClicked:
     {
-        artistTitle.text = artist
+        drawerList.headerTitle = artist
         drawer.open()
         drawerList.clearTable()
         var query = Q.Query.artistTracks_.arg(artist)

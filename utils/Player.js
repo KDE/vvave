@@ -125,7 +125,7 @@ function addTrack(track)
     root.mainPlaylist.list.positionViewAtEnd()
 }
 
-function appendAlbum(tracks)
+function appendAll(tracks)
 {
     for(var i in tracks)
         appendTrack(tracks[i])
@@ -136,7 +136,8 @@ function savePlaylist()
 {
     var list = []
     var n =  root.mainPlaylist.list.count
-    for(var i=0 ; i<n; i++)
+    n = n > 15 ? 15 : n
+    for(var i=0 ; i < n; i++)
     {
         var url = root.mainPlaylist.list.model.get(i).url
         list.push(url)
@@ -165,7 +166,7 @@ function cleanPlaylist()
     }
 }
 
-function playAlbum(tracks)
+function playAll(tracks)
 {
     root.mainPlaylist.list.clearTable()
     root.currentView = 0

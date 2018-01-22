@@ -115,7 +115,28 @@ Pane
             }
         }
 
-        ScrollBar.vertical: ScrollBar{ visible: !bae.isMobile()}
+        ScrollBar.vertical: ScrollBar
+        {
+            id: scrollBar
+            visible: !bae.isMobile()
+            size: 0.3
+            position: 0.2
+            active: true
+
+            background : Rectangle
+            {
+                radius: 12
+                color: bae.backgroundColor()
+            }
+
+            contentItem: Rectangle
+            {
+                implicitWidth: 6
+                implicitHeight: 100
+                radius: width / 2
+                color: scrollBar.pressed ? bae.hightlightColor() : bae.darkColor()
+            }
+        }
     }
 
 }
