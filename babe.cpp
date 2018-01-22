@@ -31,10 +31,8 @@ Babe::Babe(QObject *parent) : QObject(parent)
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     this->nof = new Notify(this);
-    connect(this->nof,&Notify::babeSong,[this](const BAE::DB &track)
+    connect(this->nof,&Notify::babeSong,[this]()
     {
-        qDebug()<<"BABETRACKKKK";
-        Q_UNUSED(track);
         emit this->babeIt();
     });
 
@@ -221,9 +219,7 @@ void Babe::brainz(const bool &on)
 
 QVariant Babe::loadSetting(const QString &key, const QString &group, const QVariant &defaultValue)
 {
-    auto res = BAE::loadSettings(key, group, defaultValue);
-    qDebug()<<res<<"LOADSET RES";
-    return res;
+    return BAE::loadSettings(key, group, defaultValue);
 }
 
 void Babe::saveSetting(const QString &key, const QVariant &value, const QString &group)
@@ -546,7 +542,6 @@ QVariantList Babe::searchFor(const QStringList &queries)
             }
 
             searchQuery = searchQuery.trimmed();
-            qDebug()<<"Searching for: "<<searchQuery;
 
             if(!searchQuery.isEmpty())
             {
@@ -554,7 +549,7 @@ QVariantList Babe::searchFor(const QStringList &queries)
                     mapList += this->con->getSearchedTracks(key, searchQuery);
                 else
                 {
-                    auto queryTxt = QString("SELECT * FROM tracks WHERE title LIKE \"%"+searchQuery+"%\" OR artist LIKE \"%"+searchQuery+"%\" OR album LIKE \"%"+searchQuery+"%\"OR genre LIKE \"%"+searchQuery+"%\"OR url LIKE \"%"+searchQuery+"%\" LIMIT 1000");
+                    auto queryTxt = QString("SELECT t.*, al.artwork FROM tracks t INNER JOIN albums al ON t.album = al.album AND t.artist = al.artist WHERE t.title LIKE \"%"+searchQuery+"%\" OR t.artist LIKE \"%"+searchQuery+"%\" OR t.album LIKE \"%"+searchQuery+"%\"OR t.genre LIKE \"%"+searchQuery+"%\"OR t.url LIKE \"%"+searchQuery+"%\" LIMIT 1000");
                     mapList += this->con->getDBDataQML(queryTxt);
                 }
             }

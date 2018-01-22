@@ -6,10 +6,7 @@ Player::Player(QObject *parent) : QObject(parent)
 {
     this->player = new QMediaPlayer(this);
     connect(player, &QMediaPlayer::durationChanged, this, [&](qint64 dur) {
-        qDebug()<<"DUARTION READY<<"<<dur;
-        auto duration = BAE::transformTime(dur/1000);
-        qDebug()<<duration;
-        emit this->durationChanged(duration);
+        emit this->durationChanged(BAE::transformTime(dur/1000));
     });
 
 

@@ -30,6 +30,7 @@ ListView
     signal quickPlayTrack(int index)
     signal queueTrack(int index)
     signal headerClosed()
+    signal artworkDoubleClicked(int index)
 
     signal playAll()
     signal appendAll()
@@ -210,6 +211,8 @@ ListView
             }
 
             onPlay: list.quickPlayTrack(index)
+
+            onArtworkCoverDoubleClicked: list.artworkDoubleClicked(index)
         }
     }
 

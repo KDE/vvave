@@ -28,7 +28,7 @@ private:
   BAE::DB track;
 
 signals:
-    void babeSong(const BAE::DB &track);
+    void babeSong();
     void skipSong();
 
 public slots:

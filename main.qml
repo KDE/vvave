@@ -34,15 +34,15 @@ ApplicationWindow
 
     //    pageStack.defaultColumnWidth: columnWidth
     //    pageStack.initialPage: [playlistPage, views]
-//    overlay.modal: Rectangle
-//    {
-//        color: "transparent"
-//    }
+    //    overlay.modal: Rectangle
+    //    {
+    //        color: "transparent"
+    //    }
 
-//    overlay.modeless: Rectangle
-//    {
-//        color: "transparent"
-//    }
+    //    overlay.modeless: Rectangle
+    //    {
+    //        color: "transparent"
+    //    }
 
     onWidthChanged: if(bae.isMobile())
                     {
@@ -58,12 +58,15 @@ ApplicationWindow
     {
         if(searchInput.text)
         {
-            var query = searchInput.text
-            searchView.headerTitle = query
-            var queries = query.split(",")
-            searchView.searchRes = bae.searchFor(queries)
+            if(searchInput !== searchView.headerTitle)
+            {
+                var query = searchInput.text
+                searchView.headerTitle = query
+                var queries = query.split(",")
+                searchView.searchRes = bae.searchFor(queries)
 
-            searchView.populate(searchView.searchRes)
+                searchView.populate(searchView.searchRes)
+            }
             //                albumsView.filter(res)
             currentView = 5
         }
@@ -168,7 +171,7 @@ ApplicationWindow
 
             ToolButton
             {
-                   anchors.right: parent.right
+                anchors.right: parent.right
                 BabeIcon
                 {
                     visible: searchInput.text
@@ -261,6 +264,7 @@ ApplicationWindow
                         onQuickPlayTrack: Player.quickPlay(tracksView.model.get(index))
                         onPlayAll: Player.playAll(bae.get(Q.Query.allTracks))
                         onAppendAll: Player.appendAll(bae.get(Q.Query.allTracks))
+
                     }
 
                 }
@@ -306,6 +310,14 @@ ApplicationWindow
                         onPlayAll: Player.playAll(searchView.searchRes)
                         onAppendAll: Player.appendAll(searchView.searchRes)
                         onHeaderClosed: clearSearch()
+                        onArtworkDoubleClicked:
+                        {
+                            var query = Q.Query.albumTracks_.arg(searchView.model.get(index).album)
+                            query = query.arg(searchView.model.get(index).artist)
+
+                            Player.playAll(bae.get(query))
+
+                        }
                     }
                 }
 

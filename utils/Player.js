@@ -8,7 +8,7 @@ function playTrack(track)
     player.play()
     root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
     var artwork = root.mainPlaylist.currentTrack.artwork
-//    root.mainPlaylist.list.currentItem.playingIndicator = true
+    //    root.mainPlaylist.list.currentItem.playingIndicator = true
     root.mainPlaylist.currentArtwork = artwork ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
 
     if(!root.active)
@@ -100,11 +100,22 @@ function quickPlay(track)
 
 }
 
+function appendTracksAt(tracks, at)
+{
+    if(tracks)
+        for(var i in tracks)
+        {
+            if(tracks[i].url !== root.mainPlaylist.list.model.get(at).url)
+                root.mainPlaylist.list.model.insert(parseInt(at)+parseInt(i), tracks[i])
+
+        }
+
+}
+
 function appendTrack(track)
 {
     if(track)
     {
-
         var empty = root.mainPlaylist.list.count
         if((empty > 0 && track.url !== root.mainPlaylist.list.model.get(root.mainPlaylist.list.count-1).url) || empty === 0)
         {

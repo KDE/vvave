@@ -339,7 +339,7 @@ Item
                     Layout.fillWidth:true
                     Layout.alignment: Qt.AlignCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist
+                    text: currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : ""
                     color: bae.foregroundColor()
                     font.pointSize: 8
                 }
@@ -474,6 +474,15 @@ Item
                     }
 
                     onRowClicked: Player.playTrack(model.get(index))
+                    onArtworkDoubleClicked:
+                    {
+                        var query = Q.Query.albumTracks_.arg(model.get(index).album)
+                        query = query.arg(model.get(index).artist)
+
+                        Player.playAll(bae.get(query))
+//                        Player.appendTracksAt(bae.get(query),index)
+
+                    }
                     holder.message: "Empty playlist..."
                     Component.onCompleted:
                     {

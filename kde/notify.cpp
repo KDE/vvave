@@ -64,7 +64,7 @@ void Notify::actions(uint id)
 {
     switch(id)
     {
-        case 1: emit this->babeSong(this->track); break;
+        case 1: emit this->babeSong(); break;
         case 2: emit this->skipSong(); break;
         default: break;
     }

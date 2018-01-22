@@ -13,6 +13,8 @@ ItemDelegate
 
     signal play()
     signal rightClicked()
+    signal artworkCoverDoubleClicked()
+    signal artworkCoverClicked()
 
     property string textColor: bae.foregroundColor()
     property bool number : false
@@ -95,6 +97,9 @@ ItemDelegate
                     cache: false
                     antialiasing: true
                 }
+
+                onDoubleClicked: artworkCoverDoubleClicked()
+                onClicked: artworkCoverClicked()
 
             }
         }
