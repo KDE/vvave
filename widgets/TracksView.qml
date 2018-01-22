@@ -10,6 +10,8 @@ BabeTable
     trackRating: true
     headerBar: true
     headerTitle: count + " tracks"
+    coverArtVisible: false
+
     function populate()
     {
         var map = bae.get(Q.Query.allTracks)

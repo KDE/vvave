@@ -9,6 +9,7 @@ ListView
     SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
     id: list
 
+    //    cacheBuffer : 300
     property int currentRow : -1
 
     property bool headerBar: false
@@ -42,14 +43,16 @@ ListView
 
     highlight: highlight
     highlightFollowsCurrentItem: false
-
+    keyNavigationWraps: bae.isMobile()
     focus: true
-    boundsBehavior: Flickable.StopAtBounds
+    //    boundsBehavior: Flickable.StopAtBounds
 
-    flickableDirection: Flickable.AutoFlickDirection
+    //    flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem
-
+    addDisplaced: Transition {
+        NumberAnimation { properties: "x,y"; duration: 1000 }
+    }
     function clearTable()
     {
         listModel.clear()
@@ -154,10 +157,10 @@ ListView
         {
             width: list.width
             height: list.currentItem.height
-
             color: bae.hightlightColor() || myPalette.highlight
-            opacity: 0.2
+                        opacity: 0.7
             y: list.currentItem.y
+
             //            Behavior on y
             //            {
             //                SpringAnimation

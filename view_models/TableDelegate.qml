@@ -16,6 +16,15 @@ ItemDelegate
     signal artworkCoverDoubleClicked()
     signal artworkCoverClicked()
 
+    readonly property bool sameAlbum :
+    {
+        if(listModel.get(index-1))
+        {
+            if(listModel.get(index-1).album === album) true
+            else false
+        }else false
+    }
+
     property string textColor: bae.foregroundColor()
     property bool number : false
     property bool quickPlay : true
@@ -38,9 +47,9 @@ ItemDelegate
             else
                 index % 2 === 0 ? bae.midColor() : "transparent"
         }
-
         opacity: 0.3
     }
+
     MouseArea
     {
         anchors.fill: parent
@@ -65,9 +74,8 @@ ItemDelegate
             {
                 if(coverArt)
                 {
-                    if(listModel.get(index-1))
-                        if(listModel.get(index-1).album === album)
-                            artworkCover.source = ""
+                    if(sameAlbum)
+                        artworkCover.source = ""
                     true
 
                 }else false
@@ -90,7 +98,7 @@ ItemDelegate
                     source:
                     {
                         if(artwork)
-                            (artwork.length>0 && artwork !== "none")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                            (artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
                         else "qrc:/assets/cover.png"
                     }
                     fillMode: Image.PreserveAspectFit
@@ -180,11 +188,12 @@ ItemDelegate
                 Label
                 {
                     id: trackInfo
-
+                    visible: coverArt ? !sameAlbum : true
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.row: 2
                     Layout.column: 2
+                    Layout.rowSpan: sameAlbum && coverArt ? 2 : 1
                     verticalAlignment:  Qt.AlignVCenter
                     text: artist + " | " + album
                     font.bold: false

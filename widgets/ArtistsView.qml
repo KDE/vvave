@@ -68,7 +68,7 @@ BabeGrid
                 trackNumberVisible: true
                 headerBar: true
                 headerClose: true
-
+                coverArtVisible: true
                 onRowClicked:
                 {
                     drawer.close()

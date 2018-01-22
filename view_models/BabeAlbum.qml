@@ -55,7 +55,12 @@ Item
                 cache: false
                 antialiasing: true
 
-                source: (artwork.length>0 && artwork !== "none" && artwork)? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                source:
+                {
+                    if(artwork)
+                        (artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                    else "qrc:/assets/cover.png"
+                }
                 //                layer.enabled: true
                 //                layer.effect: OpacityMask
                 //                {
