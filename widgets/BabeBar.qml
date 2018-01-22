@@ -3,7 +3,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import "../utils/Icons.js" as MdiFont
 import "../utils"
-import QtLocation 5.3
 
 ToolBar
 {

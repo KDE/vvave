@@ -59,7 +59,18 @@ ItemDelegate
 
         Item
         {
-            visible: coverArt
+            visible:
+            {
+                if(coverArt)
+                {
+                    if(listModel.get(index-1))
+                        if(listModel.get(index-1).album === album)
+                            artworkCover.source = ""
+                    true
+
+                }else false
+            }
+
             Layout.fillHeight: true
             //            Layout.fillWidth: true
             //            height: parent.height
