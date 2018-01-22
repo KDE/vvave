@@ -176,7 +176,7 @@ bool Pulpo::initServices()
         }
 
         qDebug()<<"PULPO::ERROR HAPPENED!";
-        emit infoReady(this->track, this->packResponse(this->ontology, this->info, {{}}));
+//        emit infoReady(this->track, this->packResponse(this->ontology, this->info, {{}}));
 
     }
     return false;

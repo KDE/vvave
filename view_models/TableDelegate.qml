@@ -100,6 +100,7 @@ ItemDelegate
 
                 onDoubleClicked: artworkCoverDoubleClicked()
                 onClicked: artworkCoverClicked()
+                onPressAndHold: if(bae.isMobile()) artworkCoverDoubleClicked()
 
             }
         }

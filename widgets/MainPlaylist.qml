@@ -329,6 +329,8 @@ Item
                     text: "00:00"
                     color: bae.foregroundColor()
                     font.pointSize: 8
+                    elide: Text.ElideRight
+
                 }
 
                 Label
@@ -342,6 +344,7 @@ Item
                     text: currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : ""
                     color: bae.foregroundColor()
                     font.pointSize: 8
+                    elide: Text.ElideRight
                 }
 
                 Label
@@ -355,6 +358,8 @@ Item
                     text: "00:00"
                     color: bae.foregroundColor()
                     font.pointSize: 8
+                    elide: Text.ElideRight
+
                 }
 
                 Slider

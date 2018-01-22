@@ -134,6 +134,7 @@ void Babe::fetchTrackLyrics(DB &song)
             auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
             this->con->lyricsTrack(track, lyrics);
             song.insert(KEY::LYRICS, lyrics);
+            qDebug()<<"GOT LYRICS"<<lyrics;
             emit this->trackLyricsReady(song[KEY::LYRICS], song[KEY::URL]);
         }
     });

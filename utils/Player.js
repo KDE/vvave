@@ -23,7 +23,7 @@ function playTrack(track)
 
     var lyrics = root.mainPlaylist.currentTrack.lyrics
 
-    if(!lyrics)
+    if(!lyrics || lyrics.length === 0 || lyrics === "NONE" )
         bae.trackLyrics(root.mainPlaylist.currentTrack.url)
     else
         root.mainPlaylist.infoView.lyrics =  lyrics
