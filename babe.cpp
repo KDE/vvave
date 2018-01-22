@@ -214,6 +214,24 @@ void Babe::scanDir(const QString &url)
     emit this->set->collectionPathChanged({url});
 }
 
+void Babe::brainz(const bool &on)
+{
+    this->set->checkCollectionBrainz(on);
+}
+
+QVariant Babe::loadSetting(const QString &key, const QString &group, const QVariant &defaultValue)
+{
+    auto res = BAE::loadSettings(key, group, defaultValue);
+    qDebug()<<res<<"LOADSET RES";
+    return res;
+}
+
+void Babe::saveSetting(const QString &key, const QVariant &value, const QString &group)
+{
+    qDebug()<<key<<value<<group;
+    BAE::saveSettings(key, value, group);
+}
+
 void Babe::savePlaylist(const QStringList &list)
 {
     BAE::saveSettings("PLAYLIST", list, "MAINWINDOW");

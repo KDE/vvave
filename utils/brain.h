@@ -24,6 +24,7 @@ public:
     ~Brain();
     void start();
     void stop();
+    void pause();
     bool isRunning() const;
     void setInterval(const uint &value);
 

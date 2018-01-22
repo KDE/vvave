@@ -339,7 +339,7 @@ Item
                     Layout.fillWidth:true
                     Layout.alignment: Qt.AlignCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: currentTrack.title + " - " + currentTrack.artist
+                    text: currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist
                     color: bae.foregroundColor()
                     font.pointSize: 8
                 }

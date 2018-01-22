@@ -68,7 +68,7 @@ settings::settings(QObject *parent) : QObject(parent)
     if(BAE::isMobile())
         this->populateDB({BAE::MusicPath, BAE::DownloadsPath});
     else
-        checkCollection();
+        checkCollectionBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool());
 
     connect(this->brainDeamon, &Brain::finished, [this]()
     {
@@ -88,9 +88,7 @@ settings::settings(QObject *parent) : QObject(parent)
 
     connect(this->fileLoader, &FileLoader::finished,[this](int size)
     {
-        this->brainzOn = true;
-
-        if(size>0)
+        if(size > 0)
         {
             this->collectionWatcher();
             emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
@@ -99,13 +97,13 @@ settings::settings(QObject *parent) : QObject(parent)
                                 {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
 
 
-            this->startBrainz(1500);
+            this->startBrainz(true, 1500);
         }else
         {
             this->dirs.clear();
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
-            this->startBrainz(3000);
+            this->startBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool(), 3000);
         }
 
 
@@ -204,21 +202,21 @@ void settings::handleDirectoryChanged(const QString &dir)
 
 }
 
-void settings::checkCollection()
+void settings::checkCollectionBrainz(const bool &state)
 {
     //    this->refreshCollectionPaths();
     //    this->collectionWatcher();
-    this->brainzOn = true;
-    this->startBrainz(3000);
+    this->startBrainz(state, 3000);
 }
 
-void settings::startBrainz(const uint &speed)
+void settings::startBrainz(const bool &on, const uint &speed)
 {
-    if(this->brainzOn)
-    {
-        this->brainDeamon->setInterval(speed);
+    this->brainDeamon->setInterval(speed);
+    if(on)
         this->brainDeamon->start();
-    }
+    else
+        this->brainDeamon->pause();
+
 }
 
 void settings::populateDB(const QStringList &paths)

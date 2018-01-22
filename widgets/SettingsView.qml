@@ -225,8 +225,14 @@ Drawer
                 CheckBox
                 {
                     id: brainzCheck
+                    checkState: bae.loadSetting("BRAINZ", "BABE", false) === "true" ? Qt.Checked : Qt.Unchecked
+                    onCheckStateChanged:
+                    {
+                        bae.saveSetting("BRAINZ",brainzCheck.checkState === Qt.Checked ? true : false, "BABE")
 
+                        bae.brainz(brainzCheck.checkState === Qt.Checked ? true : false)
 
+                    }
                 }
             }
         }

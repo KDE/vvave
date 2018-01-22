@@ -85,7 +85,12 @@ ItemDelegate
                 {
                     id: artworkCover
                     anchors.fill: parent
-                    source: (artwork.length>0 && artwork !== "none" && artwork)? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                    source:
+                    {
+                        if(artwork)
+                            (artwork.length>0 && artwork !== "none")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                        else "qrc:/assets/cover.png"
+                    }
                     fillMode: Image.PreserveAspectFit
                     cache: false
                     antialiasing: true

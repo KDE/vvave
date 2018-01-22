@@ -54,9 +54,12 @@ public:
     /* SETTINGS */
 
     Q_INVOKABLE void scanDir(const QString &url);
-
+    Q_INVOKABLE void brainz(const bool &on);
 
     /* STATIC METHODS */
+
+    Q_INVOKABLE static void saveSetting(const QString &key, const QVariant &value, const QString &group);
+    Q_INVOKABLE static QVariant loadSetting(const QString &key, const QString &group, const QVariant &defaultValue);
 
     Q_INVOKABLE static void savePlaylist(const QStringList &list);
     Q_INVOKABLE static QStringList lastPlaylist();

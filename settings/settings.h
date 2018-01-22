@@ -31,15 +31,15 @@ class settings : public QObject
 public:
     explicit settings(QObject *parent = nullptr);
     ~settings();
-    void checkCollection();
-    void collectionWatcher();
+    void checkCollectionBrainz(const bool &state);
+    void collectionWatcher();  
 
 private slots:
     void handleDirectoryChanged(const QString &dir);
     void on_remove_clicked();
 
 public slots:
-    void startBrainz(const uint &speed);
+    void startBrainz(const bool &on, const uint &speed);
     void populateDB(const QStringList &paths);
 
 private:
@@ -48,8 +48,6 @@ private:
     Brain *brainDeamon;
     YouTube *ytFetch;
     Socket *babeSocket;
-    
-    bool brainzOn = false;
 
 
     QString pathToRemove;

@@ -90,7 +90,7 @@ Menu
     {
         height: menuItemHeight
         txt: "Queue"
-        onTriggered: list.queueTrack(currentIndex)
+        onTriggered: list.queueTrack(list.currentIndex)
     }
 
     TableMenuItem
@@ -104,7 +104,7 @@ Menu
     {
         height: menuItemHeight
         txt: "Remove"
-        onTriggered: {}
+        onTriggered: listModel.remove(list.currentIndex)
     }
 
     TableMenuItem

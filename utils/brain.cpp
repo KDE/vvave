@@ -36,6 +36,12 @@ void Brain::stop()
     this->t.wait();
 }
 
+void Brain::pause()
+{
+    this->go = false;
+}
+
+
 bool Brain::isRunning() const
 {
     return this->go;
@@ -86,10 +92,10 @@ void Brain::connectionParser(DB track, RESPONSE response)
     {
         switch(res)
         {
-            case ONTOLOGY::ALBUM: this->parseAlbumInfo(track, response[res]); break;
-            case ONTOLOGY::ARTIST: this->parseArtistInfo(track, response[res]); break;
-            case ONTOLOGY::TRACK:  this->parseTrackInfo(track, response[res]); break;
-            default: return;
+        case ONTOLOGY::ALBUM: this->parseAlbumInfo(track, response[res]); break;
+        case ONTOLOGY::ARTIST: this->parseArtistInfo(track, response[res]); break;
+        case ONTOLOGY::TRACK:  this->parseTrackInfo(track, response[res]); break;
+        default: return;
         }
         this->t.msleep(this->interval);
     }
@@ -101,50 +107,50 @@ void Brain::parseAlbumInfo(DB &track, const INFO_K &response)
     for(auto info : response.keys())
         switch(info)
         {
-            case PULPO::INFO::TAGS:
-            {
-                for(auto context : response[info].keys())
+        case PULPO::INFO::TAGS:
+        {
+            for(auto context : response[info].keys())
 
-                    if(!response[info][context].toMap().isEmpty())
-                    {
-                        for(auto tag : response[info][context].toMap().keys() )
-                            con->tagsAlbum(track, tag, CONTEXT_MAP[context]);
+                if(!response[info][context].toMap().isEmpty())
+                {
+                    for(auto tag : response[info][context].toMap().keys() )
+                        con->tagsAlbum(track, tag, CONTEXT_MAP[context]);
 
-                    }else if (!response[info][context].toStringList().isEmpty())
-                    {
-                        for(auto tag : response[info][context].toStringList() )
-                            con->tagsAlbum(track, tag, CONTEXT_MAP[context]);
+                }else if (!response[info][context].toStringList().isEmpty())
+                {
+                    for(auto tag : response[info][context].toStringList() )
+                        con->tagsAlbum(track, tag, CONTEXT_MAP[context]);
 
-                    } else if (!response[info][context].toString().isEmpty())
-                    {
-                        con->tagsAlbum(track, response[info][context].toString(), CONTEXT_MAP[context]);
-                    }
-                break;
-            }
+                } else if (!response[info][context].toString().isEmpty())
+                {
+                    con->tagsAlbum(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                }
+            break;
+        }
 
-            case PULPO::INFO::ARTWORK:
-            {
-                if(!response[info].isEmpty())
+        case PULPO::INFO::ARTWORK:
+        {
+            if(!response[info].isEmpty())
 
-                    if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
-                    {
-                        qDebug()<<"SAVING ARTWORK FOR: " << track[KEY::ALBUM];
-                        BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
-                        con->insertArtwork(track);
-                    }
+                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
+                {
+                    qDebug()<<"SAVING ARTWORK FOR: " << track[KEY::ALBUM];
+                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
+                    con->insertArtwork(track);
+                }
 
-                break;
-            }
+            break;
+        }
 
-            case PULPO::INFO::WIKI:
-            {
-                if(!response[info].isEmpty())
-                    for (auto context : response[info].keys())
-                        con->wikiAlbum(track, response[info][context].toString());
-                break;
-            }
+        case PULPO::INFO::WIKI:
+        {
+            if(!response[info].isEmpty())
+                for (auto context : response[info].keys())
+                    con->wikiAlbum(track, response[info][context].toString());
+            break;
+        }
 
-            default: continue;
+        default: continue;
         }
 }
 
@@ -154,57 +160,57 @@ void Brain::parseArtistInfo(DB &track, const INFO_K &response)
     {
         switch(info)
         {
-            case PULPO::INFO::TAGS:
+        case PULPO::INFO::TAGS:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
+                for(auto context : response[info].keys())
                 {
-                    for(auto context : response[info].keys())
+                    if(!response[info][context].toMap().isEmpty())
                     {
-                        if(!response[info][context].toMap().isEmpty())
-                        {
-                            for(auto tag : response[info][context].toMap().keys() )
-                                con->tagsArtist(track, tag, CONTEXT_MAP[context]);
+                        for(auto tag : response[info][context].toMap().keys() )
+                            con->tagsArtist(track, tag, CONTEXT_MAP[context]);
 
-                        }else if(!response[info][context].toStringList().isEmpty())
-                        {
-                            for(auto tag : response[info][context].toStringList() )
-                                con->tagsArtist(track, tag, CONTEXT_MAP[context]);
-
-                        }else if(!response[info][context].toString().isEmpty())
-                        {
-                            con->tagsArtist(track, response[info][context].toString(), CONTEXT_MAP[context]);
-                        }
-                    }
-
-                } break;
-            }
-
-            case PULPO::INFO::ARTWORK:
-            {
-                if(!response[info].isEmpty())
-                {
-                    if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
+                    }else if(!response[info][context].toStringList().isEmpty())
                     {
-                        BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
-                        con->insertArtwork(track);
+                        for(auto tag : response[info][context].toStringList() )
+                            con->tagsArtist(track, tag, CONTEXT_MAP[context]);
+
+                    }else if(!response[info][context].toString().isEmpty())
+                    {
+                        con->tagsArtist(track, response[info][context].toString(), CONTEXT_MAP[context]);
                     }
                 }
 
-                break;
-            }
+            } break;
+        }
 
-            case PULPO::INFO::WIKI:
+        case PULPO::INFO::ARTWORK:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
+                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                 {
-                    for (auto context : response[info].keys())
-                        con->wikiArtist(track, response[info][context].toString());
+                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
+                    con->insertArtwork(track);
                 }
-
-                break;
             }
 
-            default: continue;
+            break;
+        }
+
+        case PULPO::INFO::WIKI:
+        {
+            if(!response[info].isEmpty())
+            {
+                for (auto context : response[info].keys())
+                    con->wikiArtist(track, response[info][context].toString());
+            }
+
+            break;
+        }
+
+        default: continue;
         }
     }
 }
@@ -214,97 +220,97 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
     for(auto info : response.keys())
         switch(info)
         {
-            case PULPO::INFO::TAGS:
+        case PULPO::INFO::TAGS:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
+                for(auto context : response[info].keys())
                 {
-                    for(auto context : response[info].keys())
+                    if (!response[info][context].toStringList().isEmpty())
                     {
-                        if (!response[info][context].toStringList().isEmpty())
-                        {
-                            for(auto tag : response[info][context].toStringList() )
-                                con->tagsTrack(track, tag, CONTEXT_MAP[context]);
-                        }
-
-                        if (!response[info][context].toString().isEmpty())
-                            con->tagsTrack(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                        for(auto tag : response[info][context].toStringList() )
+                            con->tagsTrack(track, tag, CONTEXT_MAP[context]);
                     }
-                }
 
-                break;
+                    if (!response[info][context].toString().isEmpty())
+                        con->tagsTrack(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                }
             }
 
-            case PULPO::INFO::WIKI:
+            break;
+        }
+
+        case PULPO::INFO::WIKI:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
-                {
-                    if (!response[info][CONTEXT::WIKI].toString().isEmpty())
-                        con->wikiTrack(track, response[info][CONTEXT::WIKI].toString());
+                if (!response[info][CONTEXT::WIKI].toString().isEmpty())
+                    con->wikiTrack(track, response[info][CONTEXT::WIKI].toString());
 
-                }
-
-                break;
             }
 
-            case PULPO::INFO::ARTWORK:
+            break;
+        }
+
+        case PULPO::INFO::ARTWORK:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
+                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                 {
-                    if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
+                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(),CachePath);
+                    con->insertArtwork(track);
+                }
+            }
+
+            break;
+        }
+
+        case PULPO::INFO::METADATA:
+        {
+            TagInfo tag;
+            for(auto context :response[info].keys())
+            {
+                switch(context)
+                {
+                case CONTEXT::ALBUM_TITLE:
+                {
+                    qDebug()<<"SETTING TRACK MISSING METADATA";
+
+                    tag.feed(track[KEY::URL]);
+                    if(!response[info][context].toString().isEmpty())
                     {
-                        BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(),CachePath);
-                        con->insertArtwork(track);
+                        tag.setAlbum(response[info][context].toString());
+                        con->albumTrack(track, response[info][context].toString());
                     }
+
+                    break;
                 }
 
-                break;
-            }
-
-            case PULPO::INFO::METADATA:
-            {
-                TagInfo tag;
-                for(auto context :response[info].keys())
+                case CONTEXT::TRACK_NUMBER:
                 {
-                    switch(context)
-                    {
-                        case CONTEXT::ALBUM_TITLE:
-                        {
-                            qDebug()<<"SETTING TRACK MISSING METADATA";
+                    tag.feed(track[KEY::URL]);
+                    if(!response[info][context].toString().isEmpty())
+                        tag.setTrack(response[info][context].toInt());
 
-                            tag.feed(track[KEY::URL]);
-                            if(!response[info][context].toString().isEmpty())
-                            {
-                                tag.setAlbum(response[info][context].toString());
-                                con->albumTrack(track, response[info][context].toString());
-                            }
-
-                            break;
-                        }
-
-                        case CONTEXT::TRACK_NUMBER:
-                        {
-                            tag.feed(track[KEY::URL]);
-                            if(!response[info][context].toString().isEmpty())
-                                tag.setTrack(response[info][context].toInt());
-
-                            break;
-                        }
-
-                        default: continue;
-                    }
+                    break;
                 }
 
-                break;
+                default: continue;
+                }
             }
 
-            case PULPO::INFO::LYRICS:
-            {
-                if(!response[info][CONTEXT::LYRIC].toString().isEmpty())
-                    con->lyricsTrack(track, response[info][CONTEXT::LYRIC].toString());
-                break;
-            }
+            break;
+        }
 
-            default: continue;
+        case PULPO::INFO::LYRICS:
+        {
+            if(!response[info][CONTEXT::LYRIC].toString().isEmpty())
+                con->lyricsTrack(track, response[info][CONTEXT::LYRIC].toString());
+            break;
+        }
+
+        default: continue;
         }
 }
 
@@ -409,6 +415,9 @@ void Brain::albumInfo()
     artworks = con->getDBData(queryTxt);
     this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
 
+    if(!artworks.isEmpty())
+        emit this->done(TABLE::ALBUMS);
+
     //select album, artist from albums where  album  not in (select album from albums_tags) and artist  not in (select  artist from albums_tags)
     qDebug()<<"getting missing album tags";
     queryTxt =  QString("SELECT %1, %2 FROM %3 WHERE %1 NOT IN ( SELECT %1 FROM %4 ) AND %2 NOT IN ( SELECT %2 FROM %4 )").arg(KEYMAP[KEY::ALBUM],
@@ -428,7 +437,6 @@ void Brain::albumInfo()
         conn.wikiAlbum(track, SLANG[W::NONE]);
     });
 
-    emit this->done(TABLE::ALBUMS);
 }
 
 void Brain::artistInfo()
@@ -443,6 +451,9 @@ void Brain::artistInfo()
             TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTWORK]);
     auto artworks = con->getDBData(queryTxt);
+
+    if(!artworks.isEmpty())
+        emit this->done(TABLE::ARTISTS);
 
     /* BEFORE FETCHING ONLINE LOOK UP IN THE CACHE FOR THE IMAGE */
     for(auto artist : artworks)
@@ -470,6 +481,5 @@ void Brain::artistInfo()
         conn.wikiArtist(track, SLANG[W::NONE]);
     });
 
-    emit this->done(TABLE::ARTISTS);
 }
 
