@@ -9,6 +9,7 @@ BabeTable
     trackNumberVisible: false
     headerBar: true
     headerClose: true
+    holder.message: "No search results!"
 
     function populate(tracks)
     {

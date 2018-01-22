@@ -17,8 +17,6 @@ Player::Player(QObject *parent) : QObject(parent)
 
     this->updater = new QTimer(this);
     connect(this->updater, &QTimer::timeout, this, &Player::update);
-
-
 }
 
 void Player::source(const QString &url)

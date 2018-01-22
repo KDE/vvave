@@ -8,7 +8,7 @@ function playTrack(track)
     player.play()
     root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
     var artwork = root.mainPlaylist.currentTrack.artwork
-
+//    root.mainPlaylist.list.currentItem.playingIndicator = true
     root.mainPlaylist.currentArtwork = artwork ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
 
     if(!root.active)

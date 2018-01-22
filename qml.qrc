@@ -36,5 +36,7 @@
         <file>view_models/FolderPickerDelegate.qml</file>
         <file>utils/BabeIcon.qml</file>
         <file>view_models/TableMenuItem.qml</file>
+        <file>view_models/BabeScrollBar.qml</file>
+        <file>assets/bars.gif</file>
     </qresource>
 </RCC>

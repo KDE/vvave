@@ -1,6 +1,5 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import QtLocation 5.9
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 //import org.kde.kirigami 2.0 as Kirigami
@@ -74,6 +73,7 @@ ApplicationWindow
     {
         searchInput.clear()
         searchView.clearTable()
+        searchView.headerTitle = ""
         searchView.searchRes = []
         currentView = 0
     }

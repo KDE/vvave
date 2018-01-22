@@ -330,9 +330,20 @@ Item
                     text: "00:00"
                     color: bae.foregroundColor()
                     font.pointSize: 8
-
                 }
 
+                Label
+                {
+                    id: currentTrackInfo
+                    Layout.row: 1
+                    Layout.column: 2
+                    Layout.fillWidth:true
+                    Layout.alignment: Qt.AlignCenter
+                    horizontalAlignment: Qt.AlignHCenter
+                    text: currentTrack.title + " - " + currentTrack.artist
+                    color: bae.foregroundColor()
+                    font.pointSize: 8
+                }
 
                 Label
                 {
@@ -454,9 +465,8 @@ Item
                     id: list
                     width: parent.width
                     height: parent.height
-                    quickBtnsVisible: false
                     quickPlayVisible: false
-
+                    coverArtVisible: true
                     Rectangle
                     {
                         anchors.fill: parent

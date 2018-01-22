@@ -7,17 +7,21 @@ import "../utils"
 ItemDelegate
 {
     id: delegate
+
+    width: parent.width
+    height: 64
+
     signal play()
-    signal menuClicked()
+    signal rightClicked()
 
     property string textColor: bae.foregroundColor()
     property bool number : false
-    property bool quickBtns : false
     property bool quickPlay : true
+    property bool coverArt : false
 
     property bool trackDurationVisible : false
     property bool trackRatingVisible: false
-
+    //    property bool playingIndicator: false
     property string trackMood : art
     property alias trackRating : trackRating
 
@@ -41,143 +45,193 @@ ItemDelegate
         acceptedButtons: Qt.RightButton
         onClicked:
         {
-            if(!bae.isMobile())
-                if (mouse.button === Qt.RightButton)
-                {
-                    menuClicked()
-
-                }
+            if(!bae.isMobile() && mouse.button === Qt.RightButton)
+                rightClicked()
         }
     }
 
-    contentItem: GridLayout
+    contentItem: RowLayout
     {
         id: gridLayout
-        width: parent.width
+        height: delegate.height
+        width: delegate.width
+        spacing: 20
 
-        rows:2
-        columns:4
-
-        ToolButton
+        Item
         {
-            id: playBtn
+            visible: coverArt
             Layout.fillHeight: true
-            Layout.row: 1
-            Layout.column: 1
-            Layout.rowSpan: 2
-            visible: quickPlay
-            BabeIcon { text: MdiFont.Icon.playCircle }
-            onClicked: delegate.play()
-        }
-
-        Label
-        {
-            id: trackNumber
-            visible: number
-            width: 16
-            Layout.fillHeight: true
-            Layout.row: 1
-            Layout.column: 2
-
-            Layout.alignment: Qt.AlignCenter
-            verticalAlignment:  Qt.AlignVCenter
-
-            text: track
-            font.bold: true
-            elide: Text.ElideRight
-
-            font.pointSize: 10
-            color: textColor
-        }
-
-
-        Label
-        {
-            id: trackTitle
-
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.row: 1
-            Layout.column: 3
-            verticalAlignment:  Qt.AlignVCenter
-            text: title
-            font.bold: true
-            elide: Text.ElideRight
-
-            font.pointSize: 10
-            color: textColor
-
-        }
-
-        Label
-        {
-            id: trackInfo
-
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.row: 2
-            Layout.column: 3
-            verticalAlignment:  Qt.AlignVCenter
-            text: artist + " | " + album
-            font.bold: false
-            elide: Text.ElideRight
-            font.pointSize: 9
-            color: textColor
-
-        }
-
-        Label
-        {
-            id: trackDuration
-            visible: trackDurationVisible
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.row: 1
-            Layout.column: 4
-            horizontalAlignment: Qt.AlignRight
-            verticalAlignment:  Qt.AlignVCenter
-            text: player.transformTime(duration)
-            font.bold: false
-            elide: Text.ElideRight
-            font.pointSize: 8
-            color: textColor
-        }
-
-        Label
-        {
-            id: trackRating
-            visible: trackRatingVisible
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.row: 2
-            Layout.column: 4
-            horizontalAlignment: Qt.AlignRight
-            verticalAlignment:  Qt.AlignVCenter
-            text: stars
-            font.bold: false
-            elide: Text.ElideRight
-            font.pointSize: 8
-            color: textColor
-        }
-
-        Row
-        {
-            Layout.column: 5
-            Layout.row: 1
-            Layout.rowSpan: 2
-            Layout.alignment: Qt.AlignRight
-            visible: quickBtns || menuBtn.visible
-
+            //            Layout.fillWidth: true
+            //            height: parent.height
+            width: parent.height
             ToolButton
             {
-                id: menuBtn
-                visible: bae.isMobile()
-                BabeIcon { text: MdiFont.Icon.dotsVertical }
-                onClicked: menuClicked()
+                height: delegate.height
+                width: delegate.height
+                anchors.verticalCenter: parent.verticalCenter
+
+                Image
+                {
+                    id: artworkCover
+                    anchors.fill: parent
+                    source: (artwork.length>0 && artwork !== "none" && artwork)? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                    fillMode: Image.PreserveAspectFit
+                    cache: false
+                    antialiasing: true
+                }
+
+            }
+        }
+
+        Item
+        {
+            visible: quickPlay
+            Layout.fillHeight: true
+            //            Layout.fillWidth: true
+            //            height: parent.height
+            width: parent.height
+            ToolButton
+            {
+                id: playBtn
+                anchors.centerIn: parent
+
+                BabeIcon { text: MdiFont.Icon.playCircle }
+                onClicked: delegate.play()
             }
         }
 
 
+        Item
+        {
+            height: delegate.height
+
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+            Layout.alignment: Qt.AlignVCenter
+
+            GridLayout
+            {
+                anchors.fill: parent
+                rows:2
+                columns:3
+
+                Label
+                {
+                    id: trackNumber
+                    visible: number
+                    width: 16
+                    Layout.fillHeight: true
+                    Layout.row: 1
+                    Layout.column: 1
+
+                    Layout.alignment: Qt.AlignCenter
+                    verticalAlignment:  Qt.AlignVCenter
+
+                    text: track
+                    font.bold: true
+                    elide: Text.ElideRight
+
+                    font.pointSize: 10
+                    color: textColor
+                }
+
+
+                Label
+                {
+                    id: trackTitle
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.row: 1
+                    Layout.column: 2
+                    verticalAlignment:  Qt.AlignVCenter
+                    text: title
+                    font.bold: true
+                    elide: Text.ElideRight
+
+                    font.pointSize: 10
+                    color: textColor
+
+                }
+
+                Label
+                {
+                    id: trackInfo
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.row: 2
+                    Layout.column: 2
+                    verticalAlignment:  Qt.AlignVCenter
+                    text: artist + " | " + album
+                    font.bold: false
+                    elide: Text.ElideRight
+                    font.pointSize: 9
+                    color: textColor
+
+                }
+
+
+                //        Item
+                //        {
+                //            Layout.row: 1
+                //            Layout.rowSpan: 2
+                //            Layout.column: 4
+                //            height: 48
+                //            width: height
+                //            Layout.fillWidth: true
+                //            Layout.fillHeight: true
+                //            Layout.alignment: Qt.AlignCenter
+
+                //            AnimatedImage
+                //            {
+                //                id: animation
+                //                cache: true
+                //                visible: playingIndicator
+                //                height: 22
+                //                width: 22
+                //                horizontalAlignment: Qt.AlignLeft
+                //                verticalAlignment:  Qt.AlignVCenter
+                //                source: "qrc:/assets/bars.gif"
+                //            }
+                //        }
+
+                Label
+                {
+                    id: trackDuration
+                    visible: trackDurationVisible
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.row: 1
+                    Layout.column: 3
+                    horizontalAlignment: Qt.AlignRight
+                    verticalAlignment:  Qt.AlignVCenter
+                    text: player.transformTime(duration)
+                    font.bold: false
+                    elide: Text.ElideRight
+                    font.pointSize: 8
+                    color: textColor
+                }
+
+                Label
+                {
+                    id: trackRating
+                    visible: trackRatingVisible
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.row: 2
+                    Layout.column: 3
+                    horizontalAlignment: Qt.AlignRight
+                    verticalAlignment:  Qt.AlignVCenter
+                    text: stars
+                    font.bold: false
+                    elide: Text.ElideRight
+                    font.pointSize: 8
+                    color: textColor
+                }
+            }
+        }
     }
 
     function setStars(stars)

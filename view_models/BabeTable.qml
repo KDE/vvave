@@ -13,8 +13,8 @@ ListView
 
     property bool headerBar: false
     property bool trackNumberVisible
-    property bool quickBtnsVisible : true
     property bool quickPlayVisible : true
+    property bool coverArtVisible : false
 
     property bool trackDuration
     property bool trackRating
@@ -60,6 +60,7 @@ ListView
         visible: list.count === 0
     }
 
+
     Rectangle
     {
         anchors.fill: parent
@@ -76,6 +77,7 @@ ListView
         color: bae.midLightColor()
         visible: headerBar
         z: 999
+
         RowLayout
         {
             anchors.fill: parent
@@ -86,9 +88,19 @@ ListView
                 visible: headerClose
                 width: parent.height
                 height: parent.height
-
                 BabeIcon { text: MdiFont.Icon.close }
                 onClicked: headerClosed()
+            }
+
+            ToolButton
+            {
+                id: playAllBtn
+                Layout.fillHeight: true
+                width: parent.height
+                height: parent.height
+
+                BabeIcon {text: MdiFont.Icon.playBoxOutline}
+                onClicked: playAll()
             }
 
             Label
@@ -121,14 +133,13 @@ ListView
 
             ToolButton
             {
-                id: playAllBtn
+                id: menuBtn
                 Layout.fillHeight: true
                 width: parent.height
                 height: parent.height
 
-                BabeIcon {text: MdiFont.Icon.playBoxOutline}
-
-                onClicked: playAll()
+                BabeIcon {text: MdiFont.Icon.dotsVertical}
+                onClicked: {}
             }
 
         }
@@ -171,70 +182,47 @@ ListView
         id: delegate
         width: list.width
         number : trackNumberVisible ? true : false
-        quickBtns : quickBtnsVisible
         quickPlay: quickPlayVisible
-
+        coverArt : coverArtVisible
         trackDurationVisible : list.trackDuration
         trackRatingVisible : list.trackRating
 
         Connections
         {
             target: delegate
-            onPressAndHold:
-            {
-                if(!bae.isMobile())
-                    list.quickPlayTrack(currentIndex)
-            }
+
+            onPressAndHold: if(bae.isMobile()) openItemMenu(index)
+            onRightClicked: openItemMenu(index)
 
             onClicked:
             {
                 currentIndex = index
                 if(bae.isMobile())
                     list.rowClicked(index)
+
             }
 
             onDoubleClicked:
             {
                 if(!bae.isMobile())
                     list.rowClicked(index)
+
             }
 
             onPlay: list.quickPlayTrack(index)
-            onMenuClicked:
-            {
-                currentRow = index
-                currentIndex = index
-                contextMenu.rate = bae.trackRate(list.model.get(currentRow).url)
-                if(bae.isMobile()) contextMenu.open()
-                else
-                    contextMenu.popup()
-                list.rowPressed(index)
-            }
-
         }
     }
 
-    ScrollBar.vertical: ScrollBar
+    ScrollBar.vertical:BabeScrollBar {}
+
+    function openItemMenu(index)
     {
-        id: scrollBar
-        size: 0.3
-        position: 0.2
-        active: true
-
-        background : Rectangle
-        {
-            radius: 12
-            color: bae.backgroundColor()
-        }
-
-        contentItem: Rectangle
-        {
-            implicitWidth: 6
-            implicitHeight: 100
-            radius: width / 2
-            color: scrollBar.pressed ? bae.hightlightColor() : bae.darkColor()
-        }
+        currentRow = index
+        currentIndex = index
+        contextMenu.rate = bae.trackRate(list.model.get(currentRow).url)
+        if(bae.isMobile()) contextMenu.open()
+        else
+            contextMenu.popup()
+        list.rowPressed(index)
     }
-
-
 }

@@ -66,8 +66,9 @@ BabeGrid
                 width: parent.width
                 height: parent.height
                 trackNumberVisible: true
-                quickBtnsVisible: true
                 headerBar: true
+                headerClose: true
+
                 onRowClicked:
                 {
                     drawer.close()
@@ -104,6 +105,8 @@ BabeGrid
                     artistsViewGrid.appendAlbum(tracks)
                     drawer.close()
                 }
+
+                onHeaderClosed: drawer.close()
             }
         }
     }
