@@ -38,5 +38,7 @@
         <file>view_models/BabeTable/BabeTable.qml</file>
         <file>view_models/BabeTable/TableMenu.qml</file>
         <file>view_models/BabeTable/TableMenuItem.qml</file>
+        <file>widgets/PlaylistViewDelegate.qml</file>
+        <file>view_models/ColorTagsBar.qml</file>
     </qresource>
 </RCC>

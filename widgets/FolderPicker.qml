@@ -2,7 +2,6 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import "../view_models/FolderPicker"
-import "../utils/Icons.js" as MdiFont
 import "../utils"
 Popup
 {
@@ -45,7 +44,7 @@ Popup
                 id: goBackBtn
                 BabeIcon
                 {
-                    text: MdiFont.Icon.arrowLeft
+                    icon: "arrowLeft"
                 }
 
                 onClicked:

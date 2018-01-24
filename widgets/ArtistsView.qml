@@ -5,8 +5,6 @@ import QtQuick.Layouts 1.3
 import "../view_models/BabeGrid"
 import "../view_models/BabeTable"
 
-import "../utils/Icons.js" as MdiFont
-import "../utils"
 import "../db/Queries.js" as Q
 
 BabeGrid

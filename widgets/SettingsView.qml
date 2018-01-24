@@ -3,7 +3,6 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import Qt.labs.platform 1.0
 
-import "../utils/Icons.js" as MdiFont
 import "../utils"
 
 Drawer
@@ -147,7 +146,7 @@ Drawer
                 {
                     id: addSource
 
-                    BabeIcon{text: MdiFont.Icon.plus}
+                    BabeIcon{icon: "plus"}
 
                     onClicked:
                     {
@@ -166,7 +165,7 @@ Drawer
                     BabeIcon
                     {
                         id: albumsIcon
-                        text: MdiFont.Icon.minus
+                        icon: "minus"
                     }
 
                     onClicked:

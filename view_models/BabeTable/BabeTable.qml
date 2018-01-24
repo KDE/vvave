@@ -1,7 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "../../utils/Icons.js" as MdiFont
 import "../../utils"
 import ".."
 
@@ -110,7 +109,7 @@ ListView
                 visible: headerClose
                 width: parent.height
                 height: parent.height
-                BabeIcon { text: MdiFont.Icon.close }
+                BabeIcon { icon: "close" }
                 onClicked: headerClosed()
             }
 
@@ -121,7 +120,7 @@ ListView
                 width: parent.height
                 height: parent.height
 
-                BabeIcon {text: MdiFont.Icon.playBoxOutline}
+                BabeIcon {icon: "playBoxOutline"}
                 onClicked: playAll()
             }
 
@@ -148,7 +147,7 @@ ListView
                 width: parent.height
                 height: parent.height
 
-                BabeIcon {text: MdiFont.Icon.playlistPlus}
+                BabeIcon {icon: "playlistPlus"}
 
                 onClicked: appendAll()
             }
@@ -160,7 +159,7 @@ ListView
                 width: parent.height
                 height: parent.height
 
-                BabeIcon {text: MdiFont.Icon.dotsVertical}
+                BabeIcon {icon: "dotsVertical"}
                 onClicked: {}
             }
 
@@ -177,7 +176,7 @@ ListView
 
     model: listModel
 
-    delegate:  TableDelegate
+    delegate: TableDelegate
     {
         id: delegate
         width: list.width

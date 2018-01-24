@@ -2,7 +2,6 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
-import "../utils/Icons.js" as MdiFont
 import "../utils"
 
 ToolBar
@@ -45,7 +44,7 @@ ToolBar
                 id: playlistView
                 BabeIcon
                 {
-                    text: MdiFont.Icon.headphones
+                    icon: "headphones"
                     color: currentIndex === 0? accentColor : textColor
                     iconSize: size
                 }
@@ -70,7 +69,7 @@ ToolBar
                 BabeIcon
                 {
                     id: tracksIcon
-                    text: MdiFont.Icon.musicNote
+                    icon: "musicNote"
                     color: currentIndex === 1? accentColor : textColor
                     iconSize: size
 
@@ -91,7 +90,7 @@ ToolBar
                 BabeIcon
                 {
                     id: albumsIcon
-                    text: MdiFont.Icon.album
+                    icon: "album"
                     color: currentIndex === 2? accentColor : textColor
                     iconSize: size
                 }
@@ -112,7 +111,7 @@ ToolBar
                 BabeIcon
                 {
                     id: artistsIcon
-                    text: MdiFont.Icon.face
+                    icon: "face"
                     color: currentIndex === 3? accentColor : textColor
                     iconSize: size
 
@@ -133,7 +132,7 @@ ToolBar
                 BabeIcon
                 {
                     id: playlistsIcon
-                    text: MdiFont.Icon.libraryMusic
+                    icon: "libraryMusic"
                     color: currentIndex === 4? accentColor : textColor
                     iconSize: size
 
@@ -162,7 +161,7 @@ ToolBar
                 BabeIcon
                 {
                     id: settingsIcon
-                    text: MdiFont.Icon.settings
+                    icon: "settings"
                     color: settingsDrawer.visible ? accentColor : textColor
                     iconSize: size
 

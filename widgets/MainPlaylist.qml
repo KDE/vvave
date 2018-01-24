@@ -3,7 +3,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
-import "../utils/Icons.js" as MdiFont
 import "../utils/Player.js" as Player
 import "../db/Queries.js" as Q
 import "../utils"
@@ -210,7 +209,7 @@ Item
                         id: infoBtn
                         BabeIcon
                         {
-                            text: stackView.currentItem === list ? MdiFont.Icon.informationOutline : MdiFont.Icon.arrowLeft
+                            icon: stackView.currentItem === list ? "informationOutline" : "arrowLeft"
                         }
                         onClicked:
                         {
@@ -238,7 +237,7 @@ Item
                         BabeIcon
                         {
                             id: babeBtnIcon
-                            text: MdiFont.Icon.heartOutline
+                            icon: "heartOutline"
                             color: defaultColor
                         }
 
@@ -248,14 +247,14 @@ Item
                     ToolButton
                     {
                         id: previousBtn
-                        BabeIcon {text: MdiFont.Icon.skipPrevious}
+                        BabeIcon {icon: "skipPrevious"}
                         onClicked: Player.previousTrack()
                     }
 
                     ToolButton
                     {
                         id: playBtn
-                        BabeIcon {id: playIcon; text: MdiFont.Icon.play }
+                        BabeIcon {id: playIcon; icon: "play" }
                         onClicked:
                         {
                             if(player.isPaused()) Player.resumeTrack()
@@ -266,7 +265,7 @@ Item
                     ToolButton
                     {
                         id: nextBtn
-                        BabeIcon{text: MdiFont.Icon.skipNext}
+                        BabeIcon{ icon: "skipNext"}
                         onClicked: Player.nextTrack()
 
                     }
@@ -274,7 +273,7 @@ Item
                     ToolButton
                     {
                         id: shuffleBtn
-                        BabeIcon { text: shuffle ? MdiFont.Icon.shuffle : MdiFont.Icon.shuffleDisabled}
+                        BabeIcon { icon: shuffle ? "shuffle" : "shuffleDisabled"}
 
                         onClicked: shuffle = !shuffle
                     }
@@ -287,7 +286,7 @@ Item
                     ToolButton
                     {
                         id: menuBtn
-                        BabeIcon {text: MdiFont.Icon.dotsVertical}
+                        BabeIcon {icon: "dotsVertical"}
                         onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
                     }
                 }

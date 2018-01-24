@@ -5,7 +5,6 @@ import QtGraphicalEffects 1.0
 //import org.kde.kirigami 2.0 as Kirigami
 
 import "db/Queries.js" as Q
-import "utils/Icons.js" as MdiFont
 import "utils/Player.js" as Player
 import "utils"
 import "widgets"
@@ -166,7 +165,7 @@ ApplicationWindow
                 anchors.centerIn: parent
                 visible: !(searchInput.focus || searchInput.text)
                 id: searchBtn
-                text: MdiFont.Icon.magnify
+                icon: "magnify"
                 color: bae.foregroundColor()
             }
 
@@ -177,7 +176,7 @@ ApplicationWindow
                 BabeIcon
                 {
                     visible: searchInput.text
-                    text: MdiFont.Icon.eraser
+                   icon: "eraser"
                     color: bae.foregroundColor()
                 }
 

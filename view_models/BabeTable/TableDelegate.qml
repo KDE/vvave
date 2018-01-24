@@ -1,7 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import "../../utils/Icons.js" as MdiFont
 import "../../utils"
 
 ItemDelegate
@@ -41,11 +40,11 @@ ItemDelegate
     property string trackMood : art
     property alias trackRating : trackRating
 
-    NumberAnimation on x
-    {
-        running: ListView.isCurrentItem
-        from: 0; to: 100
-    }
+//    NumberAnimation on x
+//    {
+//        running: ListView.isCurrentItem
+//        from: 0; to: 100
+//    }
 
     Rectangle
     {
@@ -124,7 +123,7 @@ ItemDelegate
                 id: playBtn
                 anchors.centerIn: parent
 
-                BabeIcon { text: MdiFont.Icon.playCircle; color: textColor }
+                BabeIcon { icon: "playCircle"; color: textColor }
                 onClicked: play()
             }
         }

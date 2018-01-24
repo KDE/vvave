@@ -2,9 +2,9 @@ import QtQuick 2.0
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "../../utils/Icons.js" as MdiFont
 import "../../utils/Help.js" as H
 import "../../utils"
+import ".."
 
 Menu
 {
@@ -18,7 +18,7 @@ Menu
     property int rate : 0
     property string starColor : "#FFC107"
     property string starReg : bae.foregroundColor()
-    property string starIcon: MdiFont.Icon.star
+    property string starIcon: "star"
     property int assetsize : menuItemHeight/2
     property int menuItemHeight : root.isMobile ? 48 : 32;
 
@@ -138,7 +138,7 @@ Menu
                 Layout.alignment: Qt.AlignCenter
                 BabeIcon
                 {
-                    text: starIcon
+                    icon: starIcon
                     color: rate >= 1 ? starColor :starReg
                     iconSize: assetsize
                 }
@@ -152,7 +152,7 @@ Menu
                 Layout.alignment: Qt.AlignCenter
                 BabeIcon
                 {
-                    text: starIcon
+                    icon: starIcon
                     color: rate >= 2 ? starColor :starReg
                     iconSize: assetsize
                 }
@@ -166,7 +166,7 @@ Menu
                 Layout.alignment: Qt.AlignCenter
                 BabeIcon
                 {
-                    text: starIcon
+                    icon: starIcon
                     color: rate >= 3 ? starColor :starReg
                     iconSize: assetsize
                 }
@@ -181,7 +181,7 @@ Menu
                 Layout.alignment: Qt.AlignCenter
                 BabeIcon
                 {
-                    text: starIcon
+                    icon: starIcon
                     color: rate >= 4 ? starColor :starReg
                     iconSize: assetsize
                 }
@@ -196,7 +196,7 @@ Menu
                 Layout.alignment: Qt.AlignCenter
                 BabeIcon
                 {
-                    text: starIcon
+                    icon: starIcon
                     color: rate >= 5 ? starColor :starReg
                     iconSize: assetsize
                 }
@@ -212,105 +212,11 @@ Menu
         height: menuItemHeight
         hoverEnabled: true
         padding: 10
-        RowLayout
+        ColorTagsBar
         {
             anchors.fill: parent
-            ToolButton
-            {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-
-                Rectangle
-                {
-                    anchors.centerIn: parent
-                    width: assetsize
-                    height: assetsize
-                    color: bae.moodColor(0)
-                    radius: 2
-                    border.color: bae.altColor()
-                    border.width: 1
-                }
-
-                onClicked: moodIt(bae.moodColor(0))
-            }
-            ToolButton
-            {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-
-                Rectangle
-                {
-                    anchors.centerIn: parent
-                    width: assetsize
-                    height: assetsize
-                    color: bae.moodColor(1)
-                    radius: 2
-                    border.color: bae.altColor()
-                    border.width: 1
-                }
-
-                onClicked: moodIt(bae.moodColor(1))
-            }
-            ToolButton
-            {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-
-                Rectangle
-                {
-                    anchors.centerIn: parent
-                    width: assetsize
-                    height: assetsize
-                    color: bae.moodColor(2)
-                    radius: 2
-                    border.color: bae.altColor()
-                    border.width: 1
-                }
-
-                onClicked: moodIt(bae.moodColor(2))
-            }
-            ToolButton
-            {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-
-                Rectangle
-                {
-                    anchors.centerIn: parent
-                    width: assetsize
-                    height: assetsize
-                    color: bae.moodColor(3)
-                    radius: 2
-                    border.color: bae.altColor()
-                    border.width: 1
-                }
-
-                onClicked: moodIt(bae.moodColor(3))
-            }
-
-            ToolButton
-            {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-
-                Rectangle
-                {
-                    anchors.centerIn: parent
-                    width: assetsize
-                    height: assetsize
-                    color: bae.moodColor(4)
-                    radius: 2
-                    border.color: bae.altColor()
-                    border.width: 1
-                }
-
-                onClicked: moodIt(bae.moodColor(4))
-            }
+            recSize: assetsize
+            onColorClicked: moodIt(color)
         }
     }
 }
