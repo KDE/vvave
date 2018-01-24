@@ -1,8 +1,9 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "../utils/Icons.js" as MdiFont
-import "../utils"
+import "../../utils/Icons.js" as MdiFont
+import "../../utils"
+import ".."
 
 ListView
 {
@@ -38,6 +39,8 @@ ListView
     height: 480
 
     clip: true
+
+
 
     highlight: Rectangle
     {
@@ -212,7 +215,9 @@ ListView
         }
     }
 
-    ScrollBar.vertical:BabeScrollBar {}
+    ScrollBar.vertical:BabeScrollBar { }
+
+
 
     function openItemMenu(index)
     {

@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import "../view_models"
+import "../view_models/BabeTable"
 import "../db/Queries.js" as Q
 
 BabeTable

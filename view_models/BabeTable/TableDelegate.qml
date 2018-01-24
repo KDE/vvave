@@ -1,15 +1,15 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import "../utils/Icons.js" as MdiFont
-import "../utils"
+import "../../utils/Icons.js" as MdiFont
+import "../../utils"
 
 ItemDelegate
 {
     id: delegateRoot
 
     width: parent.width
-    height: sameAlbum && coverArt ? 48 : 64
+    height: sameAlbum ? 48 : 64
     clip: true
     signal play()
     signal rightClicked()
@@ -20,10 +20,13 @@ ItemDelegate
 
     readonly property bool sameAlbum :
     {
-        if(listModel.get(index-1))
+        if(coverArt)
         {
-            if(listModel.get(index-1).album === album) true
-            else false
+            if(listModel.get(index-1))
+            {
+                if(listModel.get(index-1).album === album) true
+                else false
+            }else false
         }else false
     }
 
@@ -38,6 +41,11 @@ ItemDelegate
     property string trackMood : art
     property alias trackRating : trackRating
 
+    NumberAnimation on x
+    {
+        running: ListView.isCurrentItem
+        from: 0; to: 100
+    }
 
     Rectangle
     {
@@ -74,7 +82,7 @@ ItemDelegate
             visible: coverArt
 
             Layout.fillHeight: true
-            width: sameAlbum && coverArt ? 64 : parent.height
+            width: sameAlbum ? 64 : parent.height
 
             ToolButton
             {
@@ -109,7 +117,7 @@ ItemDelegate
         {
             visible: quickPlay
             Layout.fillHeight: true
-            width: parent.height
+            width: sameAlbum ? 64 : parent.height
 
             ToolButton
             {

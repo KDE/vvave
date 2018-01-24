@@ -633,7 +633,7 @@ QVariantList CollectionDB::getSearchedTracks(const KEY &where, const QString &se
                 search);
     else if(where == KEY::WIKI)
 
-        queryTxt = QString("SELECT DISTINCT t.* FROM %1 t INNER JOIN %2 al ON t.%3 = al.%3 INNER JOIN %4 ar ON t.%5 = ar.%5 WHERE al.%6 LIKE \"%%7%\" OR ar.%6 LIKE \"%%7%\" COLLATE NOCASE").arg(TABLEMAP[TABLE::TRACKS],
+        queryTxt = QString("SELECT DISTINCT t.*, al.artwork FROM %1 t INNER JOIN %2 al ON t.%3 = al.%3 INNER JOIN %4 ar ON t.%5 = ar.%5 WHERE al.%6 LIKE \"%%7%\" OR ar.%6 LIKE \"%%7%\" COLLATE NOCASE").arg(TABLEMAP[TABLE::TRACKS],
                 TABLEMAP[TABLE::ALBUMS],KEYMAP[KEY::ALBUM],
                 TABLEMAP[TABLE::ARTISTS],KEYMAP[KEY::ARTIST],
                 KEYMAP[where],

@@ -7,7 +7,7 @@ import "../utils/Icons.js" as MdiFont
 import "../utils/Player.js" as Player
 import "../db/Queries.js" as Q
 import "../utils"
-import "../view_models"
+import "../view_models/BabeTable"
 import "../widgets"
 
 Item
@@ -471,65 +471,77 @@ Item
                     height: parent.height
                     quickPlayVisible: false
                     coverArtVisible: true
+//                    onMovementStarted:
+//                    {
+//                        if(contentY > list.height)
+//                        {
+//                            cover.visible = false
+//                        }
+//                        else
+//                        {
+//                            cover.visible = true
+//                        }
+//                    }
 
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: bae.altColor()
-                        z: -999
-                    }
 
-                    onRowClicked: Player.playTrack(model.get(index))
-                    onArtworkDoubleClicked:
-                    {
-                        var query = Q.Query.albumTracks_.arg(model.get(index).album)
-                        query = query.arg(model.get(index).artist)
-
-                        Player.playAll(bae.get(query))
-                        //                        Player.appendTracksAt(bae.get(query),index)
-
-                    }
-                    holder.message: "Empty playlist..."
-                    Component.onCompleted:
-                    {
-                        var list = bae.lastPlaylist()
-                        var n = list.length
-
-                        if(n>0)
+                            Rectangle
                         {
-                            for(var i = 0; i < n; i++)
-                            {
-                                var where = "url = \""+list[i]+"\""
-                                var query = Q.Query.tracksWhere_.arg(where)
-                                var track = bae.get(query)
-                                Player.appendTrack(track[0])
+                                anchors.fill: parent
+                                color: bae.altColor()
+                                z: -999
                             }
-                        }else
-                        {
-                            var where = "babe = 1"
-                            var query = Q.Query.tracksWhere_.arg(where)
-                            var tracks = bae.get(query)
 
-                            for(var pos=0; pos< tracks.length; pos++)
-                                Player.appendTrack(tracks[pos])
+                        onRowClicked: Player.playTrack(model.get(index))
+                        onArtworkDoubleClicked:
+                        {
+                            var query = Q.Query.albumTracks_.arg(model.get(index).album)
+                            query = query.arg(model.get(index).artist)
+
+                            Player.playAll(bae.get(query))
+                            //                        Player.appendTracksAt(bae.get(query),index)
 
                         }
+                        holder.message: "Empty playlist..."
+                        Component.onCompleted:
+                        {
+                            var list = bae.lastPlaylist()
+                            var n = list.length
 
-                        //                                    var pos = bae.lastPlaylistPos()
-                        //                                    console.log("POSSS:", pos)
-                        //                                    list.currentIndex = pos
-                        //                                    play(list.model.get(pos))
+                            if(n>0)
+                            {
+                                for(var i = 0; i < n; i++)
+                                {
+                                    var where = "url = \""+list[i]+"\""
+                                    var query = Q.Query.tracksWhere_.arg(where)
+                                    var track = bae.get(query)
+                                    Player.appendTrack(track[0])
+                                }
+                            }else
+                            {
+                                var where = "babe = 1"
+                                var query = Q.Query.tracksWhere_.arg(where)
+                                var tracks = bae.get(query)
+
+                                for(var pos=0; pos< tracks.length; pos++)
+                                Player.appendTrack(tracks[pos])
+
+                            }
+
+                            //                                    var pos = bae.lastPlaylistPos()
+                            //                                    console.log("POSSS:", pos)
+                            //                                    list.currentIndex = pos
+                            //                                    play(list.model.get(pos))
+                        }
                     }
-                }
 
-                InfoView
-                {
-                    id: infoView
-                    width: parent.width
-                    height: parent.height
-                }
+                    InfoView
+                    {
+                        id: infoView
+                        width: parent.width
+                        height: parent.height
+                    }
 
+                }
             }
         }
     }
-}

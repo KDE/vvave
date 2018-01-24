@@ -8,7 +8,6 @@ import "db/Queries.js" as Q
 import "utils/Icons.js" as MdiFont
 import "utils/Player.js" as Player
 import "utils"
-import "view_models"
 import "widgets"
 
 //Kirigami.ApplicationWindow

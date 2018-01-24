@@ -2,9 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>view_models/BabeAlbum.qml</file>
-        <file>view_models/BabeGrid.qml</file>
-        <file>view_models/BabeTable.qml</file>
         <file>widgets/BabeBar.qml</file>
         <file>utils/Icons.js</file>
         <file>utils/materialdesignicons-webfont.ttf</file>
@@ -13,7 +10,6 @@
         <file>widgets/InfoView.qml</file>
         <file>widgets/ArtistsView.qml</file>
         <file>widgets/AlbumsView.qml</file>
-        <file>view_models/TableDelegate.qml</file>
         <file>assets/cover.png</file>
         <file>data_models/db_model.qml</file>
         <file>widgets/MainPlaylist.qml</file>
@@ -27,16 +23,20 @@
         <file>widgets/PlaylistMenu.qml</file>
         <file>widgets/LyricsView.qml</file>
         <file>db/Queries.js</file>
-        <file>view_models/TableMenu.qml</file>
         <file>widgets/SearchTable.qml</file>
         <file>utils/Help.js</file>
         <file>assets/Babe.notifyrc</file>
         <file>widgets/FolderPicker.qml</file>
-        <file>view_models/FolderPickerList.qml</file>
-        <file>view_models/FolderPickerDelegate.qml</file>
         <file>utils/BabeIcon.qml</file>
-        <file>view_models/TableMenuItem.qml</file>
         <file>view_models/BabeScrollBar.qml</file>
         <file>assets/bars.gif</file>
+        <file>view_models/FolderPicker/FolderPickerList.qml</file>
+        <file>view_models/FolderPicker/FolderPickerDelegate.qml</file>
+        <file>view_models/BabeGrid/BabeAlbum.qml</file>
+        <file>view_models/BabeGrid/BabeGrid.qml</file>
+        <file>view_models/BabeTable/TableDelegate.qml</file>
+        <file>view_models/BabeTable/BabeTable.qml</file>
+        <file>view_models/BabeTable/TableMenu.qml</file>
+        <file>view_models/BabeTable/TableMenuItem.qml</file>
     </qresource>
 </RCC>
