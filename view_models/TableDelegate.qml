@@ -6,15 +6,17 @@ import "../utils"
 
 ItemDelegate
 {
-    id: delegate
+    id: delegateRoot
 
     width: parent.width
-    height: sameAlbum ? 48 : 64
-
+    height: sameAlbum && coverArt ? 48 : 64
+    clip: true
     signal play()
     signal rightClicked()
-    signal artworkCoverDoubleClicked()
+    signal leftClicked()
+
     signal artworkCoverClicked()
+    signal artworkCoverDoubleClicked()
 
     readonly property bool sameAlbum :
     {
@@ -25,7 +27,7 @@ ItemDelegate
         }else false
     }
 
-    property string textColor: bae.foregroundColor()
+    property string textColor: ListView.isCurrentItem ? bae.hightlightTextColor() : bae.foregroundColor()
     property bool number : false
     property bool quickPlay : true
     property bool coverArt : false
@@ -36,10 +38,10 @@ ItemDelegate
     property string trackMood : art
     property alias trackRating : trackRating
 
-    checkable: true
 
-    background: Rectangle
+    Rectangle
     {
+        anchors.fill: parent
         color:
         {
             if(trackMood.length>0)
@@ -53,7 +55,7 @@ ItemDelegate
     MouseArea
     {
         anchors.fill: parent
-        acceptedButtons: Qt.RightButton
+        acceptedButtons:  Qt.RightButton
         onClicked:
         {
             if(!root.isMobile && mouse.button === Qt.RightButton)
@@ -61,34 +63,24 @@ ItemDelegate
         }
     }
 
-    contentItem: RowLayout
+    RowLayout
     {
         id: gridLayout
-        height: sameAlbum ? 64 : delegate.height
-        width: delegate.width
+        anchors.fill: parent
         spacing: 20
 
         Item
         {
-            visible:
-            {
-                if(coverArt)
-                {
-                    if(sameAlbum)
-                        artworkCover.source = ""
-                    true
-
-                }else false
-            }
+            visible: coverArt
 
             Layout.fillHeight: true
-            //            Layout.fillWidth: true
-            //            height: parent.height
-            width: parent.height
+            width: sameAlbum && coverArt ? 64 : parent.height
+
             ToolButton
             {
-                height: delegate.height
-                width: delegate.height
+                visible: !sameAlbum
+                height: parent.height
+                width: parent.height
                 anchors.verticalCenter: parent.verticalCenter
 
                 Image
@@ -117,34 +109,36 @@ ItemDelegate
         {
             visible: quickPlay
             Layout.fillHeight: true
-            //            Layout.fillWidth: true
-            //            height: parent.height
             width: parent.height
+
             ToolButton
             {
                 id: playBtn
                 anchors.centerIn: parent
 
-                BabeIcon { text: MdiFont.Icon.playCircle }
-                onClicked: delegate.play()
+                BabeIcon { text: MdiFont.Icon.playCircle; color: textColor }
+                onClicked: play()
             }
         }
 
 
         Item
         {
-            height: delegate.height
 
             Layout.fillHeight: true
             Layout.fillWidth: true
-
             Layout.alignment: Qt.AlignVCenter
+            Layout.margins: 15
+            anchors.verticalCenter: parent.verticalCenter
+
 
             GridLayout
             {
                 anchors.fill: parent
                 rows:2
                 columns:3
+                //                rowSpacing: 0
+                //                columnSpacing: 20
 
                 Label
                 {

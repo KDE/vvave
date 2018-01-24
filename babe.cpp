@@ -321,6 +321,18 @@ QString Babe::hightlightColor()
 #endif
 }
 
+QString Babe::hightlightTextColor()
+{
+#if defined(Q_OS_ANDROID)
+    return "#FFF";
+#elif defined(Q_OS_LINUX)
+    QWidget widget;
+    return widget.palette().color(QPalette::HighlightedText).name();
+#elif defined(Q_OS_WIN32)
+    return "#FFF";
+#endif
+}
+
 QString Babe::midColor()
 {
 #if defined(Q_OS_ANDROID)

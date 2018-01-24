@@ -10,7 +10,6 @@ ListView
     id: list
 
     //    cacheBuffer : 300
-    property int currentRow : -1
 
     property bool headerBar: false
     property bool trackNumberVisible
@@ -41,10 +40,36 @@ ListView
 
     clip: true
 
-    highlight: highlight
-    highlightFollowsCurrentItem: false
-    keyNavigationWraps: root.isMobile
+    highlight:  Rectangle
+    {
+        width: list.width
+        height: list.currentItem.height
+        color: bae.hightlightColor() || myPalette.highlight
+        //                    opacity: 0.7
+        y: list.currentItem.y
+
+        //            Behavior on y
+        //            {
+        //                SpringAnimation
+        //                {
+        //                    spring: 3
+        //                    damping: 0.2
+        //                }
+        //            }
+    }
+
     focus: true
+    interactive: true
+    highlightFollowsCurrentItem: false
+    keyNavigationWraps: !isMobile
+    keyNavigationEnabled : !isMobile
+
+    Keys.onPressed: forceActiveFocus();
+    Keys.onUpPressed: decrementCurrentIndex()
+    Keys.onDownPressed: incrementCurrentIndex()
+    Keys.onReturnPressed: rowClicked(currentIndex)
+
+
 
     //    boundsBehavior: Flickable.StopAtBounds
     //    flickableDirection: Flickable.AutoFlickDirection
@@ -153,28 +178,6 @@ ListView
     }
 
 
-    Component
-    {
-        id: highlight
-        Rectangle
-        {
-            width: list.width
-            height: list.currentItem.height
-            color: bae.hightlightColor() || myPalette.highlight
-                        opacity: 0.7
-            y: list.currentItem.y
-
-            //            Behavior on y
-            //            {
-            //                SpringAnimation
-            //                {
-            //                    spring: 3
-            //                    damping: 0.2
-            //                }
-            //            }
-        }
-    }
-
     TableMenu
     {
         id: contextMenu
@@ -184,7 +187,7 @@ ListView
 
     model: listModel
 
-    delegate: TableDelegate
+    delegate:  TableDelegate
     {
         id: delegate
         width: list.width
@@ -226,12 +229,13 @@ ListView
 
     function openItemMenu(index)
     {
-        currentRow = index
         currentIndex = index
-        contextMenu.rate = bae.trackRate(list.model.get(currentRow).url)
+        contextMenu.rate = bae.trackRate(list.model.get(list.currentIndex).url)
         if(root.isMobile) contextMenu.open()
         else
             contextMenu.popup()
         list.rowPressed(index)
     }
+
+    Component.onCompleted: forceActiveFocus()
 }

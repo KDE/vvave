@@ -30,10 +30,10 @@ Menu
     function rateIt(rank)
     {
         rate = rank
-        if(bae.rateTrack(list.model.get(currentRow).url, rate))
+        if(bae.rateTrack(list.model.get(list.currentIndex).url, rate))
         {
             list.currentItem.trackRating.text = rate
-            list.model.get(currentRow).stars = rate
+            list.model.get(list.currentIndex).stars = rate
         }
         if(!root.isMobile)
             dismiss()
@@ -42,10 +42,10 @@ Menu
 
     function moodIt(color)
     {
-        if(bae.moodTrack(list.model.get(currentRow).url, color))
+        if(bae.moodTrack(list.model.get(list.currentIndex).url, color))
         {
             list.currentItem.trackMood = color
-            list.model.get(currentRow).art = color
+            list.model.get(list.currentIndex).art = color
         }
         if(!root.isMobile)
             dismiss()
@@ -75,7 +75,7 @@ Menu
     //        height: root.isMobile ? menuItemHeight : 0
     //        horizontalAlignment: Qt.AlignHCenter
     //        elide: Text.ElideRight
-    //        text: currentRow >= 0 ? list.model.get(currentRow).title : ""
+    //        text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
     //        color: bae.foregroundColor()
     //    }
 

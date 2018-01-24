@@ -268,7 +268,7 @@ ApplicationWindow
                         onPlayAll: Player.playAll(bae.get(Q.Query.allTracks))
                         onAppendAll: Player.appendAll(bae.get(Q.Query.allTracks))
 
-                    }
+                    }                    
 
                 }
 
