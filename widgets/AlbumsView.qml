@@ -49,6 +49,8 @@ BabeGrid
         modal: root.isMobile
         dragMargin: 0
 
+        Component.onCompleted: drawerList.forceActiveFocus()
+
         background: Rectangle
         {
             anchors.fill: parent

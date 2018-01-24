@@ -471,7 +471,6 @@ Item
                     height: parent.height
                     quickPlayVisible: false
                     coverArtVisible: true
-                    cacheBuffer: 64*30
 
                     Rectangle
                     {
@@ -487,7 +486,7 @@ Item
                         query = query.arg(model.get(index).artist)
 
                         Player.playAll(bae.get(query))
-//                        Player.appendTracksAt(bae.get(query),index)
+                        //                        Player.appendTracksAt(bae.get(query),index)
 
                     }
                     holder.message: "Empty playlist..."

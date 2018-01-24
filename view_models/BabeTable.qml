@@ -40,7 +40,7 @@ ListView
 
     clip: true
 
-    highlight:  Rectangle
+    highlight: Rectangle
     {
         width: list.width
         height: list.currentItem.height
@@ -64,12 +64,11 @@ ListView
     keyNavigationWraps: !isMobile
     keyNavigationEnabled : !isMobile
 
-    Keys.onPressed: forceActiveFocus();
+    //    Keys.onPressed: forceActiveFocus();
     Keys.onUpPressed: decrementCurrentIndex()
     Keys.onDownPressed: incrementCurrentIndex()
     Keys.onReturnPressed: rowClicked(currentIndex)
-
-
+    Keys.onEnterPressed: quickPlayTrack(currentIndex)
 
     //    boundsBehavior: Flickable.StopAtBounds
     //    flickableDirection: Flickable.AutoFlickDirection
@@ -237,5 +236,5 @@ ListView
         list.rowPressed(index)
     }
 
-    Component.onCompleted: forceActiveFocus()
+    //    Component.onCompleted: forceActiveFocus()
 }

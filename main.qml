@@ -238,12 +238,22 @@ ApplicationWindow
                 width: parent.width
                 height: parent.height
 
-                onCurrentIndexChanged: currentView = currentIndex
-
                 Component.onCompleted: contentItem.interactive = root.isMobile
 
                 currentIndex: currentView
 
+                onCurrentItemChanged:
+                {
+                    currentItem.forceActiveFocus();
+                }
+
+                onCurrentIndexChanged:
+                {
+                    currentView = currentIndex
+                    if(currentView === 0) mainPlaylist.list.forceActiveFocus()
+                    else if(currentView === 1) tracksView.forceActiveFocus()
+
+                }
 
                 MainPlaylist
                 {
@@ -254,6 +264,7 @@ ApplicationWindow
                         onCoverPressed: Player.appendAll(tracks)
                         onCoverDoubleClicked: Player.playAll(tracks)
                     }
+
                 }
 
 
@@ -268,7 +279,7 @@ ApplicationWindow
                         onPlayAll: Player.playAll(bae.get(Q.Query.allTracks))
                         onAppendAll: Player.appendAll(bae.get(Q.Query.allTracks))
 
-                    }                    
+                    }
 
                 }
 
