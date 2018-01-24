@@ -21,7 +21,6 @@ ListView
 
     property string headerTitle
     property bool headerClose : false
-    //    default property alias customItem : customItem.children
 
     property alias holder : holder
 
@@ -45,17 +44,7 @@ ListView
         width: list.width
         height: list.currentItem.height
         color: bae.hightlightColor() || myPalette.highlight
-        //                    opacity: 0.7
         y: list.currentItem.y
-
-        //            Behavior on y
-        //            {
-        //                SpringAnimation
-        //                {
-        //                    spring: 3
-        //                    damping: 0.2
-        //                }
-        //            }
     }
 
     focus: true
@@ -64,14 +53,13 @@ ListView
     keyNavigationWraps: !isMobile
     keyNavigationEnabled : !isMobile
 
-    //    Keys.onPressed: forceActiveFocus();
     Keys.onUpPressed: decrementCurrentIndex()
     Keys.onDownPressed: incrementCurrentIndex()
     Keys.onReturnPressed: rowClicked(currentIndex)
     Keys.onEnterPressed: quickPlayTrack(currentIndex)
 
-    //    boundsBehavior: Flickable.StopAtBounds
-    //    flickableDirection: Flickable.AutoFlickDirection
+    boundsBehavior: isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
+    flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem
 
