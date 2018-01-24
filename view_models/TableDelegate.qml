@@ -9,7 +9,7 @@ ItemDelegate
     id: delegate
 
     width: parent.width
-    height: 64
+    height: sameAlbum ? 48 : 64
 
     signal play()
     signal rightClicked()
@@ -56,7 +56,7 @@ ItemDelegate
         acceptedButtons: Qt.RightButton
         onClicked:
         {
-            if(!bae.isMobile() && mouse.button === Qt.RightButton)
+            if(!root.isMobile && mouse.button === Qt.RightButton)
                 rightClicked()
         }
     }
@@ -64,7 +64,7 @@ ItemDelegate
     contentItem: RowLayout
     {
         id: gridLayout
-        height: delegate.height
+        height: sameAlbum ? 64 : delegate.height
         width: delegate.width
         spacing: 20
 
@@ -101,14 +101,14 @@ ItemDelegate
                             (artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
                         else "qrc:/assets/cover.png"
                     }
-                    fillMode: Image.PreserveAspectFit
+                    fillMode:  Image.PreserveAspectFit
                     cache: false
                     antialiasing: true
                 }
 
                 onDoubleClicked: artworkCoverDoubleClicked()
                 onClicked: artworkCoverClicked()
-                onPressAndHold: if(bae.isMobile()) artworkCoverDoubleClicked()
+                onPressAndHold: if(root.isMobile) artworkCoverDoubleClicked()
 
             }
         }

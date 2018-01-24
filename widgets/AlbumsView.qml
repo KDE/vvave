@@ -18,7 +18,7 @@ BabeGrid
         if(hintSize>200)
             200
         else if (hintSize < 150)
-            bae.isMobile() && hintSize < 120 ? 120 : 150
+            root.isMobile && hintSize < 120 ? 120 : 150
         else
             hintSize
     }
@@ -46,7 +46,7 @@ BabeGrid
         edge: Qt.BottomEdge
         interactive: false
         focus: true
-        modal: bae.isMobile()
+        modal: root.isMobile
         dragMargin: 0
 
         background: Rectangle

@@ -173,7 +173,7 @@ Item
                 drag.maximumY: columnWidth
                 //                onClicked:
                 //                {
-                //                    if(!bae.isMobile())
+                //                    if(!root.isMobile)
                 //                        cover.visible = !cover.visible
                 //                }
 
@@ -288,7 +288,7 @@ Item
                     {
                         id: menuBtn
                         BabeIcon {text: MdiFont.Icon.dotsVertical}
-                        onClicked: bae.isMobile() ? playlistMenu.open() : playlistMenu.popup()
+                        onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
                     }
                 }
             }
@@ -471,6 +471,8 @@ Item
                     height: parent.height
                     quickPlayVisible: false
                     coverArtVisible: true
+                    cacheBuffer: 64*30
+
                     Rectangle
                     {
                         anchors.fill: parent

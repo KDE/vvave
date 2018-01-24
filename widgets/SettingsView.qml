@@ -11,7 +11,7 @@ Drawer
     id: settingsView
     y: header.height
     height: parent.height - header.height - footer.height
-    width: bae.isMobile() ? parent.width* 0.7 : parent.width* 0.5
+    width: root.isMobile ? parent.width* 0.7 : parent.width* 0.5
     edge: Qt.RightEdge
     interactive: true
     focus: true
@@ -151,7 +151,7 @@ Drawer
 
                     onClicked:
                     {
-                        if(bae.isMobile())
+                        if(root.isMobile)
                         {
                             folderPicker.open()
                             load(bae.homeDir())

@@ -26,6 +26,9 @@ ApplicationWindow
 
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
 
+    readonly property bool isMobile: bae.isMobile()
+
+
     property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
     property int iconSize
@@ -44,7 +47,7 @@ ApplicationWindow
     //        color: "transparent"
     //    }
 
-    onWidthChanged: if(bae.isMobile())
+    onWidthChanged: if(root.isMobile)
                     {
                         if(root.width>root.height)
                             mainPlaylist.cover.visible = false
@@ -144,7 +147,7 @@ ApplicationWindow
             color: bae.foregroundColor()
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:  Text.AlignVCenter
-            selectByMouse: !bae.isMobile()
+            selectByMouse: !root.isMobile
             selectionColor: bae.hightlightColor()
             selectedTextColor: bae.foregroundColor()
             property string placeholderText: "Search..."
@@ -237,7 +240,7 @@ ApplicationWindow
 
                 onCurrentIndexChanged: currentView = currentIndex
 
-                Component.onCompleted: contentItem.interactive = bae.isMobile()
+                Component.onCompleted: contentItem.interactive = root.isMobile
 
                 currentIndex: currentView
 

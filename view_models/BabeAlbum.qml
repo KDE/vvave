@@ -12,7 +12,7 @@ Item
     property int borderRadius : 2
     property string fillColor: bae.midLightColor()
     property string textColor: bae.foregroundColor()
-    property int fontSize : bae.isMobile()? 12 : 10
+    property int fontSize : root.isMobile? 12 : 10
     property bool hide : false
 
     width: albumSize

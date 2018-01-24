@@ -11,7 +11,7 @@ Menu
     id: rootMenu
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
-    modal: bae.isMobile()
+    modal: root.isMobile
     focus: true
 
 
@@ -20,7 +20,7 @@ Menu
     property string starReg : bae.foregroundColor()
     property string starIcon: MdiFont.Icon.star
     property int assetsize : menuItemHeight/2
-    property int menuItemHeight : bae.isMobile() ? 48 : 32;
+    property int menuItemHeight : root.isMobile ? 48 : 32;
 
 
     enter: Transition {
@@ -35,7 +35,7 @@ Menu
             list.currentItem.trackRating.text = rate
             list.model.get(currentRow).stars = rate
         }
-        if(!bae.isMobile())
+        if(!root.isMobile)
             dismiss()
         else close()
     }
@@ -47,7 +47,7 @@ Menu
             list.currentItem.trackMood = color
             list.model.get(currentRow).art = color
         }
-        if(!bae.isMobile())
+        if(!root.isMobile)
             dismiss()
         else close()
     }
@@ -68,11 +68,11 @@ Menu
     //    Label
     //    {
     //        id: titleLabel
-    //        visible: bae.isMobile()
-    //        padding: bae.isMobile() ? 10 : 0
+    //        visible: root.isMobile
+    //        padding: root.isMobile ? 10 : 0
     //        font.bold: true
     //        width: parent.width
-    //        height: bae.isMobile() ? menuItemHeight : 0
+    //        height: root.isMobile ? menuItemHeight : 0
     //        horizontalAlignment: Qt.AlignHCenter
     //        elide: Text.ElideRight
     //        text: currentRow >= 0 ? list.model.get(currentRow).title : ""

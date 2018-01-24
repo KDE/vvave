@@ -43,16 +43,19 @@ ListView
 
     highlight: highlight
     highlightFollowsCurrentItem: false
-    keyNavigationWraps: bae.isMobile()
+    keyNavigationWraps: root.isMobile
     focus: true
-    //    boundsBehavior: Flickable.StopAtBounds
 
+    //    boundsBehavior: Flickable.StopAtBounds
     //    flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem
-    addDisplaced: Transition {
+
+    addDisplaced: Transition
+    {
         NumberAnimation { properties: "x,y"; duration: 1000 }
     }
+
     function clearTable()
     {
         listModel.clear()
@@ -63,7 +66,6 @@ ListView
         id: holder
         visible: list.count === 0
     }
-
 
     Rectangle
     {
@@ -79,12 +81,13 @@ ListView
         width: parent.width
         height:  headerBar ? 48 : 0
         color: bae.midLightColor()
-        visible: headerBar
+        visible: headerBar && count > 0
         z: 999
 
         RowLayout
         {
             anchors.fill: parent
+
 
             ToolButton
             {
@@ -195,20 +198,20 @@ ListView
         {
             target: delegate
 
-            onPressAndHold: if(bae.isMobile()) openItemMenu(index)
+            onPressAndHold: if(root.isMobile) openItemMenu(index)
             onRightClicked: openItemMenu(index)
 
             onClicked:
             {
                 currentIndex = index
-                if(bae.isMobile())
+                if(root.isMobile)
                     list.rowClicked(index)
 
             }
 
             onDoubleClicked:
             {
-                if(!bae.isMobile())
+                if(!root.isMobile)
                     list.rowClicked(index)
 
             }
@@ -226,7 +229,7 @@ ListView
         currentRow = index
         currentIndex = index
         contextMenu.rate = bae.trackRate(list.model.get(currentRow).url)
-        if(bae.isMobile()) contextMenu.open()
+        if(root.isMobile) contextMenu.open()
         else
             contextMenu.popup()
         list.rowPressed(index)

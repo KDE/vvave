@@ -4,10 +4,10 @@ import "../utils/Help.js" as H
 
 Menu
 {
-    id: root
+    id: rootPlaylistMenu
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
-    modal: bae.isMobile()
+    modal: root.isMobile
 
     signal clearOut()
     signal clean()
