@@ -8,6 +8,9 @@ import "db/Queries.js" as Q
 import "utils/Player.js" as Player
 import "utils"
 import "widgets"
+import "widgets/PlaylistsView"
+import "widgets/MainPlaylist"
+import "view_models"
 
 //Kirigami.ApplicationWindow
 ApplicationWindow
@@ -18,10 +21,6 @@ ApplicationWindow
     height: 500
     title: qsTr("Babe")
 
-
-    SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
-
-
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
 
     readonly property bool isMobile: bae.isMobile()
@@ -29,7 +28,7 @@ ApplicationWindow
 
     property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
-    property int iconSize
+    property int toolBarIconSize: isMobile ?  24 : 22
     property alias mainPlaylist : mainPlaylist
     //    minimumWidth: columnWidth
 
@@ -119,7 +118,7 @@ ApplicationWindow
     {
         id: mainToolbar
         visible: true
-        size: iconSize
+        size: toolBarIconSize
         currentIndex: currentView
 
         onPlaylistViewClicked: currentView = 0
@@ -160,25 +159,20 @@ ApplicationWindow
             //                color: bae.foregroundColor()
             //            }
 
-            BabeIcon
+            BabeButton
             {
                 anchors.centerIn: parent
                 visible: !(searchInput.focus || searchInput.text)
                 id: searchBtn
-                icon: "magnify"
-                color: bae.foregroundColor()
+                iconName: "edit-find" //"search"
             }
 
 
-            ToolButton
+            BabeButton
             {
                 anchors.right: parent.right
-                BabeIcon
-                {
-                    visible: searchInput.text
-                   icon: "eraser"
-                    color: bae.foregroundColor()
-                }
+                visible: searchInput.text
+                iconName: "edit-clear"
 
                 onClicked: clearSearch()
             }
@@ -210,7 +204,7 @@ ApplicationWindow
     SettingsView
     {
         id: settingsDrawer
-        onIconSizeChanged: iconSize = size
+        onIconSizeChanged: toolBarIconSize = size
     }
 
 
@@ -308,7 +302,18 @@ ApplicationWindow
                     }
                 }
 
-                PlaylistsView {}
+                PlaylistsView
+                {
+                    id: playlistsView
+                    Connections
+                    {
+                        target: playlistsView
+                        onRowClicked: Player.addTrack(track)
+                        onQuickPlayTrack: Player.quickPlay(track)
+                        //                        onPlayAll: Player.playAll(bae.get(Q.Query.allTracks))
+                        //                        onAppendAll: Player.appendAll(bae.get(Q.Query.allTracks))
+                    }
+                }
 
 
                 SearchTable

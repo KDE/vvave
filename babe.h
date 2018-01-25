@@ -46,6 +46,8 @@ public:
     Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
     Q_INVOKABLE int trackRate(const QString &path);
     Q_INVOKABLE bool moodTrack(const QString &path, const QString &color);
+    Q_INVOKABLE bool addPlaylist(const QString &playlist);
+    Q_INVOKABLE QStringList getPlaylists();
 
 
 

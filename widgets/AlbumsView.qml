@@ -129,16 +129,19 @@ BabeGrid
 
         var map = bae.get(query)
 
-        for(var i in map)
-            drawerList.model.append(map[i])
+        if(map.length > 0)
+            for(var i in map)
+                drawerList.model.append(map[i])
     }
 
 
     function populate()
     {
         var map = bae.get(Q.Query.allAlbumsAsc)
-        for(var i in map)
-            gridModel.append(map[i])
+
+        if(map.length > 0)
+            for(var i in map)
+                gridModel.append(map[i])
     }
 
     function filter(tracks)

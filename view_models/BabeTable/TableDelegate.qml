@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import "../../utils"
+import "../../view_models"
 
 ItemDelegate
 {
@@ -40,11 +40,11 @@ ItemDelegate
     property string trackMood : art
     property alias trackRating : trackRating
 
-//    NumberAnimation on x
-//    {
-//        running: ListView.isCurrentItem
-//        from: 0; to: 100
-//    }
+    //    NumberAnimation on x
+    //    {
+    //        running: ListView.isCurrentItem
+    //        from: 0; to: 100
+    //    }
 
     Rectangle
     {
@@ -118,13 +118,14 @@ ItemDelegate
             Layout.fillHeight: true
             width: sameAlbum ? 64 : parent.height
 
-            ToolButton
+            BabeButton
             {
                 id: playBtn
                 anchors.centerIn: parent
-
-                BabeIcon { icon: "playCircle"; color: textColor }
+                iconName: "media-playback-start"
+                iconColor: textColor
                 onClicked: play()
+                iconSize: isMobile ?  24 : 22
             }
         }
 

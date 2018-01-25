@@ -20,6 +20,6 @@ ScrollBar
         implicitWidth: 6
         implicitHeight: 100
         radius: width / 2
-        color: scrollBar.pressed ? bae.hightlightColor() : bae.darkColor()
+        color: scrollBar.pressed ? bae.hightlightColor(): bae.darkColor()
     }
 }

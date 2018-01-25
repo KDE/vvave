@@ -6,13 +6,10 @@
         <file>utils/Icons.js</file>
         <file>utils/materialdesignicons-webfont.ttf</file>
         <file>widgets/TracksView.qml</file>
-        <file>widgets/PlaylistsView.qml</file>
-        <file>widgets/InfoView.qml</file>
         <file>widgets/ArtistsView.qml</file>
         <file>widgets/AlbumsView.qml</file>
         <file>assets/cover.png</file>
         <file>data_models/db_model.qml</file>
-        <file>widgets/MainPlaylist.qml</file>
         <file>assets/test.jpg</file>
         <file>db/script.sql</file>
         <file>widgets/SettingsView.qml</file>
@@ -20,13 +17,10 @@
         <file>assets/face.png</file>
         <file>view_models/BabeHolder.qml</file>
         <file>view_models/BabeDialog.qml</file>
-        <file>widgets/PlaylistMenu.qml</file>
-        <file>widgets/LyricsView.qml</file>
         <file>db/Queries.js</file>
         <file>widgets/SearchTable.qml</file>
         <file>utils/Help.js</file>
         <file>assets/Babe.notifyrc</file>
-        <file>widgets/FolderPicker.qml</file>
         <file>utils/BabeIcon.qml</file>
         <file>view_models/BabeScrollBar.qml</file>
         <file>assets/bars.gif</file>
@@ -38,7 +32,17 @@
         <file>view_models/BabeTable/BabeTable.qml</file>
         <file>view_models/BabeTable/TableMenu.qml</file>
         <file>view_models/BabeTable/TableMenuItem.qml</file>
-        <file>widgets/PlaylistViewDelegate.qml</file>
         <file>view_models/ColorTagsBar.qml</file>
+        <file>view_models/FolderPicker/FolderPicker.qml</file>
+        <file>widgets/MainPlaylist/MainPlaylist.qml</file>
+        <file>widgets/MainPlaylist/PlaylistMenu.qml</file>
+        <file>widgets/PlaylistsView/PlaylistsView.qml</file>
+        <file>widgets/PlaylistsView/PlaylistViewDelegate.qml</file>
+        <file>widgets/InfoView/InfoView.qml</file>
+        <file>widgets/InfoView/LyricsView.qml</file>
+        <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
+        <file>widgets/PlaylistsView/AddPlaylistDialog.qml</file>
+        <file>view_models/Props.qml</file>
+        <file>view_models/BabeButton.qml</file>
     </qresource>
 </RCC>

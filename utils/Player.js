@@ -14,12 +14,12 @@ function playTrack(track)
     if(!root.active)
         bae.notifySong(root.mainPlaylist.currentTrack.url)
 
-    root.mainPlaylist.playIcon.text = Icon.pause
+    root.mainPlaylist.playIcon.iconName = "media-playback-pause"
 
     if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
-        root.mainPlaylist.babeBtnIcon.color = bae.babeColor()
+        root.mainPlaylist.babeBtnIcon.iconColor = bae.babeColor()
     else
-        root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
+        root.mainPlaylist.babeBtnIcon.iconColor = root.mainPlaylist.babeBtnIcon.defaultColor
 
     var lyrics = root.mainPlaylist.currentTrack.lyrics
 
@@ -41,19 +41,19 @@ function stop()
     root.mainPlaylist.progressBar.value = 0
     root.mainPlaylist.cover.visible = false
     root.title = "Babe..."
-    root.mainPlaylist.playIcon.text = Icon.play
+    root.mainPlaylist.playIcon.iconName = "media-playback-start"
 }
 
 function pauseTrack()
 {
     player.pause()
-    root.mainPlaylist.playIcon.text = Icon.play
+    root.mainPlaylist.playIcon.iconName = "media-playback-start"
 }
 
 function resumeTrack()
 {
     player.play()
-    root.mainPlaylist.playIcon.text = Icon.pause
+    root.mainPlaylist.playIcon.iconName = "media-playback-pause"
 }
 
 function nextTrack()
@@ -197,14 +197,12 @@ function babeTrack()
     if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
     {
         bae.babeTrack(root.mainPlaylist.currentTrack.url, false)
-        root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
-        root.mainPlaylist.babeBtnIcon.color = root.mainPlaylist.babeBtnIcon.defaultColor
+        root.mainPlaylist.babeBtnIcon.iconColor = root.mainPlaylist.babeBtnIcon.defaultColor
 
     }else
     {
         bae.babeTrack(root.mainPlaylist.currentTrack.url, true)
-        root.mainPlaylist.babeBtnIcon.text = Icon.heartOutline
-        root.mainPlaylist.babeBtnIcon.color = bae.babeColor()
+        root.mainPlaylist.babeBtnIcon.iconColor = bae.babeColor()
         bae.notify("Track Babe'd",root.mainPlaylist.currentTrack.title +" by "+ root.mainPlaylist.currentTrack.artist )
 
     }

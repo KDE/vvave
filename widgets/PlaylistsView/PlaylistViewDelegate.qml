@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import "../utils"
+import "../../view_models"
 
 
 ItemDelegate
@@ -37,20 +37,20 @@ ItemDelegate
 
     RowLayout
     {
-        id: gridLayout
         anchors.fill: parent
-        spacing: 20
 
         Item
         {
             Layout.fillHeight: true
             width: parent.height
 
-            ToolButton
+            BabeButton
             {
                 id: playBtn
                 anchors.centerIn: parent
-                BabeIcon { icon: playlistIcon; color: textColor }
+                iconName: playlistIcon ? playlistIcon : ""
+                iconColor: textColor
+
             }
         }
 
@@ -60,17 +60,12 @@ ItemDelegate
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            Layout.margins: 15
-            anchors.verticalCenter: parent.verticalCenter
 
             Label
             {
                 id: trackTitle
-
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.row: 1
-                Layout.column: 2
+                height: parent.height
+                width: parent.width
                 verticalAlignment:  Qt.AlignVCenter
                 text: playlist
                 font.bold: true

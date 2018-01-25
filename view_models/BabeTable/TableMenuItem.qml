@@ -11,7 +11,7 @@ MenuItem
 
 //    background: Rectangle
 //    {
-//        color: tableMenuItemRoot.hovered ? bae.hightlightColor() : bae.backgroundColor()
+//        color: tableMenuItemRoot.hovered ? palette.highlight : palette.background
 //    }
 
     hoverEnabled: true

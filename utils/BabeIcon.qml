@@ -3,17 +3,18 @@ import "../utils/Icons.js" as MdiFont
 
 Text
 {
+    id: babeIcon
     property string iconColor: bae.foregroundColor()
     property int iconSize
-    readonly property string defaultColor : iconColor
     property string icon
+    readonly property string defaultColor : iconColor
 
-    text: MdiFont.Icon[icon]
+    text: MdiFont.Babe[babeIcon.icon] || MdiFont.Icon[babeIcon.icon]
     font.family: "Material Design Icons"
-    font.pixelSize: iconSize || 24
+    font.pixelSize: babeIcon.iconSize
     anchors.centerIn: parent
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment:  Text.AlignVCenter
-    color: iconColor || defaultColor
+    color: babeIcon.iconColor
 
 }

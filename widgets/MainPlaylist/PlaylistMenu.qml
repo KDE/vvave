@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import "../utils/Help.js" as H
+import "../../utils/Help.js" as H
 
 Menu
 {
@@ -40,6 +40,5 @@ Menu
         text: qsTr("Save as playlist...")
         onTriggered: {}
     }
-
 
 }

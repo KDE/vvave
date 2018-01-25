@@ -3,15 +3,15 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
 import "../utils"
+import "../view_models"
 
 ToolBar
 {
     property alias babeBar : babeBar
-    property alias settingsIcon : settingsIcon
     property string accentColor : bae.babeColor()
     property string textColor : bae.foregroundColor()
     property string backgroundColor : bae.backgroundColor()
-    property int size //icon size
+    property int size : 24
     property int currentIndex : 0
 
     signal tracksViewClicked()
@@ -28,7 +28,7 @@ ToolBar
     Rectangle
     {
         anchors.fill: parent
-        color: backgroundColor      
+        color: backgroundColor
     }
 
     RowLayout
@@ -39,19 +39,16 @@ ToolBar
         {
             Layout.alignment: Qt.AlignLeft
 
-            ToolButton
+            BabeButton
             {
                 id: playlistView
-                BabeIcon
-                {
-                    icon: "headphones"
-                    color: currentIndex === 0? accentColor : textColor
-                    iconSize: size
-                }
+                iconName: "headphones" //"media-optical-audio"
+                iconColor: currentIndex === 0? accentColor : textColor
+                iconSize: size
 
                 onClicked: playlistViewClicked()
 
-                hoverEnabled: true
+                hoverEnabled: !isMobile
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
                 ToolTip.visible: hovered
@@ -63,18 +60,12 @@ ToolBar
         {
             Layout.alignment: Qt.AlignCenter
 
-            ToolButton
+            BabeButton
             {
                 id: tracksView
-                BabeIcon
-                {
-                    id: tracksIcon
-                    icon: "musicNote"
-                    color: currentIndex === 1? accentColor : textColor
-                    iconSize: size
-
-                }
-
+                iconName: "musicnote" //"filename-filetype-amarok"
+                iconColor: currentIndex === 1? accentColor : textColor
+                iconSize: size
                 onClicked: tracksViewClicked()
 
                 hoverEnabled: true
@@ -84,17 +75,12 @@ ToolBar
                 ToolTip.text: qsTr("Tracks")
             }
 
-            ToolButton
+            BabeButton
             {
                 id: albumsView
-                BabeIcon
-                {
-                    id: albumsIcon
-                    icon: "album"
-                    color: currentIndex === 2? accentColor : textColor
-                    iconSize: size
-                }
-
+                iconName: "album" //"media-album-cover"
+                iconColor: currentIndex === 2? accentColor : textColor
+                iconSize: size
                 onClicked: albumsViewClicked()
 
                 hoverEnabled: true
@@ -104,18 +90,13 @@ ToolBar
                 ToolTip.text: qsTr("Albums")
             }
 
-            ToolButton
+            BabeButton
             {
                 id: artistsView
 
-                BabeIcon
-                {
-                    id: artistsIcon
-                    icon: "face"
-                    color: currentIndex === 3? accentColor : textColor
-                    iconSize: size
-
-                }
+                iconName: "artist" //"view-media-artist"
+                iconColor: currentIndex === 3? accentColor : textColor
+                iconSize: size
 
                 onClicked: artistsViewClicked()
                 hoverEnabled: true
@@ -125,22 +106,17 @@ ToolBar
                 ToolTip.text: qsTr("Artists")
             }
 
-            ToolButton
+            BabeButton
             {
                 id: playlistsView
 
-                BabeIcon
-                {
-                    id: playlistsIcon
-                    icon: "libraryMusic"
-                    color: currentIndex === 4? accentColor : textColor
-                    iconSize: size
-
-                }
+                iconName: "library-music" //"view-media-playlist"
+                iconColor: currentIndex === 4? accentColor : textColor
+                iconSize: size
 
                 onClicked: playlistsViewClicked()
 
-                hoverEnabled: true
+                hoverEnabled: !isMobile
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
                 ToolTip.visible: hovered
@@ -154,22 +130,17 @@ ToolBar
         {
             Layout.alignment: Qt.AlignRight
 
-            ToolButton
+            BabeButton
             {
-                id: settingsView
+                id: settingsIcon
 
-                BabeIcon
-                {
-                    id: settingsIcon
-                    icon: "settings"
-                    color: settingsDrawer.visible ? accentColor : textColor
-                    iconSize: size
-
-                }
+                iconName: "application-menu"//"games-config-options"
+                iconColor: settingsDrawer.visible ? accentColor : textColor
+                iconSize: size
 
                 onClicked: settingsViewClicked()
 
-                hoverEnabled: true
+                hoverEnabled: !isMobile
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
                 ToolTip.visible: hovered

@@ -3,11 +3,14 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
-import "../utils/Player.js" as Player
-import "../db/Queries.js" as Q
-import "../utils"
-import "../view_models/BabeTable"
-import "../widgets"
+import "../InfoView"
+
+import "../../utils/Player.js" as Player
+import "../../db/Queries.js" as Q
+import "../../utils"
+import "../../widgets"
+import "../../view_models"
+import "../../view_models/BabeTable"
 
 Item
 {
@@ -204,13 +207,12 @@ Item
                 {
                     Layout.alignment: Qt.AlignLeft
 
-                    ToolButton
+                    BabeButton
                     {
                         id: infoBtn
-                        BabeIcon
-                        {
-                            icon: stackView.currentItem === list ? "informationOutline" : "arrowLeft"
-                        }
+
+                        iconName: stackView.currentItem === list ? "info-help" : "arrow-left"
+
                         onClicked:
                         {
                             if(stackView.currentItem !== list)
@@ -232,29 +234,26 @@ Item
                 Row
                 {
                     Layout.alignment: Qt.AlignCenter
-                    ToolButton
+                    BabeButton
                     {
-                        BabeIcon
-                        {
-                            id: babeBtnIcon
-                            icon: "heartOutline"
-                            color: defaultColor
-                        }
+                        id: babeBtnIcon
+                        iconName: "love" //"love-amarok"
+                        iconColor: defaultColor
 
                         onClicked: Player.babeTrack()
                     }
 
-                    ToolButton
+                    BabeButton
                     {
                         id: previousBtn
-                        BabeIcon {icon: "skipPrevious"}
+                        iconName: "media-skip-backward"
                         onClicked: Player.previousTrack()
                     }
 
-                    ToolButton
+                    BabeButton
                     {
-                        id: playBtn
-                        BabeIcon {id: playIcon; icon: "play" }
+                        id: playIcon
+                        iconName: "media-playback-start"
                         onClicked:
                         {
                             if(player.isPaused()) Player.resumeTrack()
@@ -262,18 +261,18 @@ Item
                         }
                     }
 
-                    ToolButton
+                    BabeButton
                     {
                         id: nextBtn
-                        BabeIcon{ icon: "skipNext"}
+                        iconName: "media-skip-forward"
                         onClicked: Player.nextTrack()
 
                     }
 
-                    ToolButton
+                    BabeButton
                     {
                         id: shuffleBtn
-                        BabeIcon { icon: shuffle ? "shuffle" : "shuffleDisabled"}
+                        iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
 
                         onClicked: shuffle = !shuffle
                     }
@@ -283,10 +282,10 @@ Item
                 {
                     Layout.alignment: Qt.AlignRight
 
-                    ToolButton
+                    BabeButton
                     {
                         id: menuBtn
-                        BabeIcon {icon: "dotsVertical"}
+                        iconName: "application-menu"//"overflow-menu"
                         onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
                     }
                 }
@@ -470,77 +469,77 @@ Item
                     height: parent.height
                     quickPlayVisible: false
                     coverArtVisible: true
-//                    onMovementStarted:
-//                    {
-//                        if(contentY > list.height)
-//                        {
-//                            cover.visible = false
-//                        }
-//                        else
-//                        {
-//                            cover.visible = true
-//                        }
-//                    }
+                    //                    onMovementStarted:
+                    //                    {
+                    //                        if(contentY > list.height)
+                    //                        {
+                    //                            cover.visible = false
+                    //                        }
+                    //                        else
+                    //                        {
+                    //                            cover.visible = true
+                    //                        }
+                    //                    }
 
 
-                            Rectangle
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: bae.altColor()
+                        z: -999
+                    }
+
+                    onRowClicked: Player.playTrack(model.get(index))
+                    onArtworkDoubleClicked:
+                    {
+                        var query = Q.Query.albumTracks_.arg(model.get(index).album)
+                        query = query.arg(model.get(index).artist)
+
+                        Player.playAll(bae.get(query))
+                        //                        Player.appendTracksAt(bae.get(query),index)
+
+                    }
+                    holder.message: "Empty playlist..."
+                    Component.onCompleted:
+                    {
+                        var list = bae.lastPlaylist()
+                        var n = list.length
+
+                        if(n>0)
                         {
-                                anchors.fill: parent
-                                color: bae.altColor()
-                                z: -999
-                            }
-
-                        onRowClicked: Player.playTrack(model.get(index))
-                        onArtworkDoubleClicked:
-                        {
-                            var query = Q.Query.albumTracks_.arg(model.get(index).album)
-                            query = query.arg(model.get(index).artist)
-
-                            Player.playAll(bae.get(query))
-                            //                        Player.appendTracksAt(bae.get(query),index)
-
-                        }
-                        holder.message: "Empty playlist..."
-                        Component.onCompleted:
-                        {
-                            var list = bae.lastPlaylist()
-                            var n = list.length
-
-                            if(n>0)
+                            for(var i = 0; i < n; i++)
                             {
-                                for(var i = 0; i < n; i++)
-                                {
-                                    var where = "url = \""+list[i]+"\""
-                                    var query = Q.Query.tracksWhere_.arg(where)
-                                    var track = bae.get(query)
-                                    Player.appendTrack(track[0])
-                                }
-                            }else
-                            {
-                                var where = "babe = 1"
+                                var where = "url = \""+list[i]+"\""
                                 var query = Q.Query.tracksWhere_.arg(where)
-                                var tracks = bae.get(query)
+                                var track = bae.get(query)
+                                Player.appendTrack(track[0])
+                            }
+                        }else
+                        {
+                            var where = "babe = 1"
+                            var query = Q.Query.tracksWhere_.arg(where)
+                            var tracks = bae.get(query)
 
-                                for(var pos=0; pos< tracks.length; pos++)
+                            for(var pos=0; pos< tracks.length; pos++)
                                 Player.appendTrack(tracks[pos])
 
-                            }
-
-                            //                                    var pos = bae.lastPlaylistPos()
-                            //                                    console.log("POSSS:", pos)
-                            //                                    list.currentIndex = pos
-                            //                                    play(list.model.get(pos))
                         }
-                    }
 
-                    InfoView
-                    {
-                        id: infoView
-                        width: parent.width
-                        height: parent.height
+                        //                                    var pos = bae.lastPlaylistPos()
+                        //                                    console.log("POSSS:", pos)
+                        //                                    list.currentIndex = pos
+                        //                                    play(list.model.get(pos))
                     }
-
                 }
+
+                InfoView
+                {
+                    id: infoView
+                    width: parent.width
+                    height: parent.height
+                }
+
             }
         }
     }
+}

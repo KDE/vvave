@@ -3,7 +3,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import Qt.labs.platform 1.0
 
-import "../utils"
+import "../view_models"
+import "../view_models/FolderPicker"
 
 Drawer
 {
@@ -142,11 +143,11 @@ Drawer
                 Layout.alignment: Qt.AlignRight
                 height: 48
 
-                ToolButton
+                BabeButton
                 {
                     id: addSource
 
-                    BabeIcon{icon: "plus"}
+                    iconName: "list-add"
 
                     onClicked:
                     {
@@ -159,15 +160,10 @@ Drawer
                     }
                 }
 
-                ToolButton
+                BabeButton
                 {
                     id: removeSource
-                    BabeIcon
-                    {
-                        id: albumsIcon
-                        icon: "minus"
-                    }
-
+                    iconName: "list-remove"
                     onClicked:
                     {
 

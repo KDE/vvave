@@ -185,6 +185,17 @@ bool Babe::moodTrack(const QString &path, const QString &color)
     return this->con->artTrack(path, color);
 }
 
+bool Babe::addPlaylist(const QString &playlist)
+{
+    qDebug()<<playlist;
+    return this->con->addPlaylist(playlist);
+}
+
+QStringList Babe::getPlaylists()
+{
+    return this->con->getPlaylists();
+}
+
 void Babe::notify(const QString &title, const QString &body)
 {
 

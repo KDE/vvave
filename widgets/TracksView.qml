@@ -15,8 +15,10 @@ BabeTable
     function populate()
     {
         var map = bae.get(Q.Query.allTracks)
-        for(var i in map)
-            tracksViewTable.model.append(map[i])
+
+        if(map.length > 0)
+            for(var i in map)
+                tracksViewTable.model.append(map[i])
     }
 
     Rectangle

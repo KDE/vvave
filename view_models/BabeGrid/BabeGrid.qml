@@ -74,7 +74,6 @@ Pane
         //        maximumFlickVelocity: albumSize*8
 
         model: gridModel
-        SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
 
 
         //        highlight: Rectangle

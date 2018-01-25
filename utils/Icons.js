@@ -1,3 +1,5 @@
+
+
 var Icon = {
     "accessPoint": "\uf002",
     "accessPointNetwork": "\uf003",
@@ -809,7 +811,7 @@ var Icon = {
     "heartBox": "\uf2D2",
     "heartBoxOutline": "\uf2D3",
     "heartBroken": "\uf2D4",
-    "heartOutline": "\uf2D5",
+     "heartOutline": "\uf2D5",
     "heartPulse": "\uf5F6",
     "help": "\uf2D6",
     "helpCircle": "\uf2D7",
@@ -1649,4 +1651,56 @@ var Icon = {
     "yelp": "\uf5C2",
     "youtubePlay": "\uf5C3",
     "zipBox": "\uf5C4"
+}
+
+
+var Babe = {
+    "musicnote": Icon.musicNote,
+    "audio-headphones": Icon.headphones,
+    "headphones": Icon.headphones,
+    "album" : Icon.album,
+    "media-album-cover": Icon.album,
+    "artist": Icon.face,
+    "view-media-artist": Icon.artist,
+    "library-music": Icon.libraryMusic,
+    "application-menu": "\uf493",
+    "media-playback-start" : Icon.play,
+    "media-playback-pause" : Icon.pause,
+    "media-skip-backward": "\uf4AE",
+    "media-skip-forward": "\uf4AD",
+    "love-amarok": Icon.heartOutline,
+    "love": Icon.heartOutline,
+    "media-playlist-shuffle": "\uf49D",
+    "media-playlist-repeat": "\uf49E",
+    "help-about" : Icon.informationOutline,
+    "info-help" : Icon.informationOutline,
+    "arrow-left":"\uf04D",
+    "overflow-menu": Icon.dotsVertical,
+    "application-menu" : Icon.dotsVertical,
+    "player-time": "\uf40C",
+    "search" : Icon.magnify,
+    "edit-find" : Icon.magnify,
+    "edit-clear" : Icon.eraser,
+
+    /*playlists icons*/
+    "list-add": Icon.playlistPlus,
+    "list-remove": Icon.minus,
+    "entry-delete":Icon.playlistRemove,
+    "amarok_playcount": Icon.trendingUp,
+    "draw-star": Icon.starCircle,
+    "filename-year-amarok": Icon.clock,
+    "internet-amarok": Icon.youtubePlay,
+    "tag" : Icon.tagMultiple,
+    "similarartists-amarok": Icon.tagFaces,
+    "office-chart-line" : Icon.fire,
+    "filename-track-amarok" : Icon.attachment,
+
+
+    /*headers*/
+    "dialog-close" : Icon.close,
+    "window-close" : Icon.close,
+    "player-time" : Icon.playBoxOutline,
+    "media-repeat-track-amarok": Icon.playlistPlay,
+    "archive-insert": Icon.playlistPlay,
+    "amarok_clock" : Icon.playlistPlay
 }

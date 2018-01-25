@@ -5,7 +5,6 @@ import ".."
 
 ListView
 {
-    SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
     id: list
 
     property int currentRow : -1
@@ -56,7 +55,7 @@ ListView
             width: list.width
             height: list.currentItem.height
 
-            color: bae.hightlightColor() || myPalette.highlight
+            color: bae.hightlightColor()
             opacity: 0.2
             y: list.currentItem.y
         }

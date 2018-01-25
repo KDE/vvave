@@ -18,7 +18,7 @@ Menu
     property int rate : 0
     property string starColor : "#FFC107"
     property string starReg : bae.foregroundColor()
-    property string starIcon: "star"
+    property string starIcon: "draw-star"
     property int assetsize : menuItemHeight/2
     property int menuItemHeight : root.isMobile ? 48 : 32;
 
@@ -76,7 +76,7 @@ Menu
     //        horizontalAlignment: Qt.AlignHCenter
     //        elide: Text.ElideRight
     //        text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
-    //        color: bae.foregroundColor()
+    //        color: root.palette["foreground"]
     //    }
 
     TableMenuItem
@@ -131,75 +131,60 @@ Menu
         RowLayout
         {
             anchors.fill: parent
-            ToolButton
+            BabeButton
             {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
-                BabeIcon
-                {
-                    icon: starIcon
-                    color: rate >= 1 ? starColor :starReg
-                    iconSize: assetsize
-                }
+
+                iconName: starIcon
+                iconColor: rate >= 1 ? starColor :starReg
+                iconSize: assetsize
 
                 onClicked: rateIt(1)
             }
-            ToolButton
+            BabeButton
             {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
-                BabeIcon
-                {
-                    icon: starIcon
-                    color: rate >= 2 ? starColor :starReg
-                    iconSize: assetsize
-                }
-
+                iconName: starIcon
+                iconColor: rate >= 2 ? starColor :starReg
+                iconSize: assetsize
                 onClicked: rateIt(2)
             }
-            ToolButton
+            BabeButton
             {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
-                BabeIcon
-                {
-                    icon: starIcon
-                    color: rate >= 3 ? starColor :starReg
-                    iconSize: assetsize
-                }
+                iconName: starIcon
+                iconColor: rate >= 3 ? starColor :starReg
+                iconSize: assetsize
 
                 onClicked: rateIt(3)
             }
 
-            ToolButton
+            BabeButton
             {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
-                BabeIcon
-                {
-                    icon: starIcon
-                    color: rate >= 4 ? starColor :starReg
-                    iconSize: assetsize
-                }
+                iconName: starIcon
+                iconColor: rate >= 4 ? starColor :starReg
+                iconSize: assetsize
 
                 onClicked: rateIt(4)
             }
 
-            ToolButton
+            BabeButton
             {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
-                BabeIcon
-                {
-                    icon: starIcon
-                    color: rate >= 5 ? starColor :starReg
-                    iconSize: assetsize
-                }
+                iconName: starIcon
+                iconColor: rate >= 5 ? starColor :starReg
+                iconSize: assetsize
 
                 onClicked: rateIt(5)
             }

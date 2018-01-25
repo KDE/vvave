@@ -1,8 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "../view_models/FolderPicker"
-import "../utils"
+import "../../view_models"
+
 Popup
 {
     //    width: parent.width *0.7
@@ -38,15 +38,11 @@ Popup
         {
             width:parent.width
 
-            ToolButton
+            BabeButton
             {
                 Layout.alignment: Qt.AlignLeft
                 id: goBackBtn
-                BabeIcon
-                {
-                    icon: "arrowLeft"
-                }
-
+                iconName: "arrow-left"
                 onClicked:
                 {
                     var dir = bae.getParentDir(dirList.currentUrl)

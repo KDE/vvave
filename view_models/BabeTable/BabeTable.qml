@@ -1,12 +1,12 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import "../../view_models/FolderPicker"
 import "../../utils"
 import ".."
 
 ListView
 {
-    SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
     id: list
 
     //    cacheBuffer : 300
@@ -45,7 +45,7 @@ ListView
     {
         width: list.width
         height: list.currentItem.height
-        color: bae.hightlightColor() || myPalette.highlight
+        color: bae.hightlightColor()
         y: list.currentItem.y
     }
 
@@ -103,24 +103,24 @@ ListView
             anchors.fill: parent
 
 
-            ToolButton
+            BabeButton
             {
                 id: closeBtn
                 visible: headerClose
                 width: parent.height
                 height: parent.height
-                BabeIcon { icon: "close" }
+                iconName: "window-close" //"dialog-close"
                 onClicked: headerClosed()
             }
 
-            ToolButton
+            BabeButton
             {
                 id: playAllBtn
                 Layout.fillHeight: true
                 width: parent.height
                 height: parent.height
 
-                BabeIcon {icon: "playBoxOutline"}
+                iconName: "amarok_clock"///"player-time"
                 onClicked: playAll()
             }
 
@@ -140,26 +140,26 @@ ListView
                 verticalAlignment:  Text.AlignVCenter
             }
 
-            ToolButton
+            BabeButton
             {
                 id: appendBtn
                 Layout.fillHeight: true
                 width: parent.height
                 height: parent.height
 
-                BabeIcon {icon: "playlistPlus"}
+                iconName : "archive-insert"//"media-repeat-track-amarok"
 
                 onClicked: appendAll()
             }
 
-            ToolButton
+            BabeButton
             {
                 id: menuBtn
                 Layout.fillHeight: true
                 width: parent.height
                 height: parent.height
 
-                BabeIcon {icon: "dotsVertical"}
+                iconName: "application-menu" //"overflow-menu"
                 onClicked: {}
             }
 
