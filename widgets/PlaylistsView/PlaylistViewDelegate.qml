@@ -7,9 +7,10 @@ import "../../view_models"
 ItemDelegate
 {
     id: delegate
+    readonly property int rowHeight: isMobile ? 48 : 32
 
     width: parent.width
-    height: 48
+    height: rowHeight
     clip: true
 
     property string textColor: ListView.isCurrentItem ? bae.hightlightTextColor() : bae.foregroundColor()
@@ -68,7 +69,7 @@ ItemDelegate
                 width: parent.width
                 verticalAlignment:  Qt.AlignVCenter
                 text: playlist
-                font.bold: true
+                font.bold: playlistIcon ? true : false
                 elide: Text.ElideRight
 
                 font.pointSize: 10

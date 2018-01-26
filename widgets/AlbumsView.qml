@@ -41,14 +41,14 @@ BabeGrid
     {
         id: drawer
 
-        height: parent.height * 0.4
+        height:  parent.height * 0.4
+//        x: albumsViewGrid.width/2
         width: parent.width
         edge: Qt.BottomEdge
         interactive: false
         focus: true
         modal: root.isMobile
         dragMargin: 0
-
         Component.onCompleted: drawerList.forceActiveFocus()
 
         background: Rectangle

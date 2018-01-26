@@ -93,7 +93,8 @@ function playAt(index)
 
 function quickPlay(track)
 {
-    root.currentView = 0
+    root.pageStack.currentIndex = 1
+
     appendTrack(track)
     playAt(root.mainPlaylist.list.count-1)
     root.mainPlaylist.list.positionViewAtEnd()
@@ -180,7 +181,7 @@ function cleanPlaylist()
 function playAll(tracks)
 {
     root.mainPlaylist.list.clearTable()
-    root.currentView = 0
+    root.pageStack.currentIndex = 1
 
     for(var i = 0; i< tracks.length; i++)
         appendTrack(tracks[i])

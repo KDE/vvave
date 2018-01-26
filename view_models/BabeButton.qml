@@ -6,19 +6,19 @@ ToolButton
 {
     id: babeButton
     property string iconName
-    property int iconSize : !isMobile ?  24 : 22
+    property int iconSize : isMobile ?  24 : 22
     property string iconColor: bae.foregroundColor()
-    readonly property string defaultColor : iconColor
+    readonly property string defaultColor :  bae.foregroundColor()
 
-    icon.name: !isMobile ? "" : babeButton.iconName
-    icon.width: !isMobile ? 0 : babeButton.iconSize
+    icon.name: isMobile ? "" : babeButton.iconName
+    icon.width: isMobile ? 0 : babeButton.iconSize
 //    icon.height: isMobile ? 0 : babeButton.iconSize
-    icon.color: !isMobile ? "transparent" : (iconColor || defaultColor)
+    icon.color: isMobile ? "transparent" : (iconColor || defaultColor)
 
     BabeIcon
     {
         id: babeIcon
-        visible: !isMobile
+        visible: isMobile
         icon: babeButton.iconName
         iconColor: babeButton.iconColor || babeButton.defaultColor
         iconSize: babeButton.iconSize

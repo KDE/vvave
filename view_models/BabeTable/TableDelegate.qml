@@ -7,8 +7,11 @@ ItemDelegate
 {
     id: delegateRoot
 
+    readonly property int rowHeight: isMobile ? 64 : 52
+    readonly property int rowHeightAlt: isMobile ? 48 : 32
+
     width: parent.width
-    height: sameAlbum ? 48 : 64
+    height: sameAlbum ? rowHeightAlt : rowHeight
     clip: true
     signal play()
     signal rightClicked()
@@ -81,7 +84,7 @@ ItemDelegate
             visible: coverArt
 
             Layout.fillHeight: true
-            width: sameAlbum ? 64 : parent.height
+            width: sameAlbum ? rowHeight : parent.height
 
             ToolButton
             {
@@ -116,7 +119,7 @@ ItemDelegate
         {
             visible: quickPlay
             Layout.fillHeight: true
-            width: sameAlbum ? 64 : parent.height
+            width: sameAlbum ? rowHeight : parent.height
 
             BabeButton
             {
@@ -145,8 +148,6 @@ ItemDelegate
                 anchors.fill: parent
                 rows:2
                 columns:3
-                //                rowSpacing: 0
-                //                columnSpacing: 20
 
                 Label
                 {
@@ -160,7 +161,7 @@ ItemDelegate
                     Layout.alignment: Qt.AlignCenter
                     verticalAlignment:  Qt.AlignVCenter
 
-                    text: track
+                    text: track + ". "
                     font.bold: true
                     elide: Text.ElideRight
 
@@ -179,7 +180,7 @@ ItemDelegate
                     Layout.column: 2
                     verticalAlignment:  Qt.AlignVCenter
                     text: title
-                    font.bold: true
+                    font.bold: !sameAlbum
                     elide: Text.ElideRight
 
                     font.pointSize: 10

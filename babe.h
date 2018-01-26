@@ -12,7 +12,7 @@ class Notify;
 
 class CollectionDB;
 class Pulpo;
-class settings;
+class BabeSettings;
 
 using namespace BAE;
 
@@ -103,7 +103,7 @@ public:
 
 private:
     CollectionDB *con;
-    settings *set;
+    BabeSettings *set;
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     Notify *nof;
 #endif

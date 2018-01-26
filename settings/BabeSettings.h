@@ -24,13 +24,13 @@ class Brain;
 
 using namespace BAE;
 
-class settings : public QObject
+class BabeSettings : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit settings(QObject *parent = nullptr);
-    ~settings();
+    explicit BabeSettings(QObject *parent = nullptr);
+    ~BabeSettings();
     void checkCollectionBrainz(const bool &state);
     void collectionWatcher();  
 

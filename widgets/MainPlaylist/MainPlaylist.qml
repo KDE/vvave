@@ -19,6 +19,7 @@ Item
     property var currentTrack
     property string currentArtwork
     property bool shuffle : false
+    property int playbackIconSize: isMobile ? 24 : 22
 
     property alias progressBar : progressBar
     property alias cover : cover
@@ -35,9 +36,9 @@ Item
     //                    Component.onCompleted:
     //                    {
     //                        if(list.count>0)
-    //                            root.width = columnWidth
+    //                            root.width = coverSize
     //                        else
-    //                            root.width = columnWidth*3
+    //                            root.width = coverSize*3
     //                    }
     Rectangle
     {
@@ -60,7 +61,7 @@ Item
             Layout.row: 1
             Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: columnWidth
+            Layout.preferredHeight: coverSize
             Layout.maximumHeight: 300
             visible: list.count > 0
 
@@ -146,7 +147,7 @@ Item
             }
             //            onYChanged:
             //            {
-            //                if(playbackControls.y<columnWidth/4)
+            //                if(playbackControls.y<coverSize/4)
             //                {
             //                    cover.visible = false
             //                    playbackControls.y = 0
@@ -154,7 +155,7 @@ Item
             //                }else
             //                {
             //                    cover.visible = true
-            //                    playbackControls.y = columnWidth
+            //                    playbackControls.y = coverSize
             //                }
             //            }
 
@@ -172,7 +173,7 @@ Item
                 drag.target: playbackControls
                 drag.axis: Drag.YAxis
                 drag.minimumY: 0
-                drag.maximumY: columnWidth
+                drag.maximumY: coverSize
                 //                onClicked:
                 //                {
                 //                    if(!root.isMobile)
@@ -184,7 +185,7 @@ Item
                 {
                     cover.height = playbackControls.y
 
-                    if(playbackControls.y < columnWidth*0.8)
+                    if(playbackControls.y < coverSize*0.8)
                     {
                         cover.visible = false
                         playbackControls.y = 0
@@ -192,7 +193,7 @@ Item
                     }else
                     {
                         cover.visible = true
-                        //                        playbackControls.y = columnWidth
+                        //                        playbackControls.y = coverSize
                     }
                 }
             }
@@ -211,8 +212,8 @@ Item
                     {
                         id: infoBtn
 
-                        iconName: stackView.currentItem === list ? "info-help" : "arrow-left"
-
+                        iconName: stackView.currentItem === list ? "documentinfo" : "arrow-left"
+                        iconSize: playbackIconSize
                         onClicked:
                         {
                             if(stackView.currentItem !== list)
@@ -239,6 +240,7 @@ Item
                         id: babeBtnIcon
                         iconName: "love" //"love-amarok"
                         iconColor: defaultColor
+                        iconSize: playbackIconSize
 
                         onClicked: Player.babeTrack()
                     }
@@ -247,6 +249,8 @@ Item
                     {
                         id: previousBtn
                         iconName: "media-skip-backward"
+                        iconSize: playbackIconSize
+
                         onClicked: Player.previousTrack()
                     }
 
@@ -254,6 +258,8 @@ Item
                     {
                         id: playIcon
                         iconName: "media-playback-start"
+                        iconSize: playbackIconSize
+
                         onClicked:
                         {
                             if(player.isPaused()) Player.resumeTrack()
@@ -265,6 +271,8 @@ Item
                     {
                         id: nextBtn
                         iconName: "media-skip-forward"
+                        iconSize: playbackIconSize
+
                         onClicked: Player.nextTrack()
 
                     }
@@ -273,6 +281,7 @@ Item
                     {
                         id: shuffleBtn
                         iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+                        iconSize: playbackIconSize
 
                         onClicked: shuffle = !shuffle
                     }
@@ -285,7 +294,9 @@ Item
                     BabeButton
                     {
                         id: menuBtn
-                        iconName: "application-menu"//"overflow-menu"
+                        iconName: /*"application-menu"*/ "overflow-menu"
+                        iconSize: playbackIconSize
+
                         onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
                     }
                 }

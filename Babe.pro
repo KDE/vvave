@@ -15,9 +15,9 @@ include(kde/kde.pri)
 CONFIG += c++11
 
 include(android-openssl.pri)
-#android: {
-#    include(3rdparty/kirigami/kirigami.pri)
-#}
+android: {
+    include(3rdparty/kirigami/kirigami.pri)
+}
 
 DEPENDPATH += taglib
 DEPENDPATH += taglib/ape
@@ -85,7 +85,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     db/collectionDB.cpp \
-    settings/settings.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
     utils/brain.cpp \
@@ -196,6 +195,7 @@ SOURCES += main.cpp \
         taglib/tag.cpp \
         taglib/tagunion.cpp \
     babe.cpp \
+    settings/BabeSettings.cpp
 
 
 
@@ -224,7 +224,6 @@ DISTFILES += \
 HEADERS += \
     db/collectionDB.h \
     utils/bae.h \
-    settings/settings.h \
     settings/fileloader.h \
     services/local/taginfo.h \
     services/local/player.h \
@@ -345,4 +344,5 @@ HEADERS += \
         taglib/config.h \
         taglib/taglib_config.h \
     babe.h \
+    settings/BabeSettings.h
 

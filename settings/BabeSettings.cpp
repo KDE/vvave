@@ -16,14 +16,14 @@
    */
 
 
-#include "settings.h"
+#include "BabeSettings.h"
 #include "../db/collectionDB.h"
 #include "fileloader.h"
 #include "../utils/brain.h"
 #include "../services/local/socket.h"
 #include "../services/web/youtube.h"
 
-settings::settings(QObject *parent) : QObject(parent)
+BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 {
 
     this->connection = new CollectionDB(this);
@@ -109,20 +109,20 @@ settings::settings(QObject *parent) : QObject(parent)
 
     });
 
-    connect(this, &settings::collectionPathChanged, this, &settings::populateDB);
+    connect(this, &BabeSettings::collectionPathChanged, this, &BabeSettings::populateDB);
 
     this->watcher = new QFileSystemWatcher(this);
-    connect(this->watcher, &QFileSystemWatcher::directoryChanged, this, &settings::handleDirectoryChanged);
+    connect(this->watcher, &QFileSystemWatcher::directoryChanged, this, &BabeSettings::handleDirectoryChanged);
 }
 
-settings::~settings()
+BabeSettings::~BabeSettings()
 {
     qDebug()<<"DELETING SETTINGS";
     delete fileLoader;
     delete brainDeamon;
 }
 
-void settings::on_remove_clicked()
+void BabeSettings::on_remove_clicked()
 {
     qDebug() << this->pathToRemove;
     if (!this->pathToRemove.isEmpty())
@@ -139,7 +139,7 @@ void settings::on_remove_clicked()
     }
 }
 
-void settings::refreshCollectionPaths()
+void BabeSettings::refreshCollectionPaths()
 {
     //    auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::SOURCES]);
 
@@ -148,14 +148,14 @@ void settings::refreshCollectionPaths()
     //    }
 }
 
-void settings::addToWatcher(QStringList paths)
+void BabeSettings::addToWatcher(QStringList paths)
 {
     qDebug()<<"duplicated paths in watcher removd: "<<paths.removeDuplicates();
 
     if(!paths.isEmpty()) watcher->addPaths(paths);
 }
 
-void settings::collectionWatcher()
+void BabeSettings::collectionWatcher()
 {
     auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::TRACKS]);
 
@@ -184,7 +184,7 @@ void settings::collectionWatcher()
     this->addToWatcher(this->dirs);
 }
 
-void settings::handleDirectoryChanged(const QString &dir)
+void BabeSettings::handleDirectoryChanged(const QString &dir)
 {
     qDebug()<<"directory changed:"<<dir;
 
@@ -202,14 +202,14 @@ void settings::handleDirectoryChanged(const QString &dir)
 
 }
 
-void settings::checkCollectionBrainz(const bool &state)
+void BabeSettings::checkCollectionBrainz(const bool &state)
 {
     //    this->refreshCollectionPaths();
     //    this->collectionWatcher();
     this->startBrainz(state, 3000);
 }
 
-void settings::startBrainz(const bool &on, const uint &speed)
+void BabeSettings::startBrainz(const bool &on, const uint &speed)
 {
     this->brainDeamon->setInterval(speed);
     if(on)
@@ -219,7 +219,7 @@ void settings::startBrainz(const bool &on, const uint &speed)
 
 }
 
-void settings::populateDB(const QStringList &paths)
+void BabeSettings::populateDB(const QStringList &paths)
 {
     qDebug() << "Function Name: " << Q_FUNC_INFO
              << "new path for database action: " << paths;

@@ -5,7 +5,7 @@
 #include <QColor>
 #include <QIcon>
 #include "db/collectionDB.h"
-#include "settings/settings.h"
+#include "settings/BabeSettings.h"
 #include "pulpo/pulpo.h"
 #include <QApplication>
 #include <QDesktopWidget>
@@ -22,9 +22,9 @@ Babe::Babe(QObject *parent) : QObject(parent)
     qDebug()<<"CONSTRUCTING ABE INTERFACE";
     this->con = new CollectionDB(this);
 
-    this->set = new settings(this);
+    this->set = new BabeSettings(this);
 
-    connect(set, &settings::refreshTables, [this](QVariantMap tables)
+    connect(set, &BabeSettings::refreshTables, [this](QVariantMap tables)
     {
         emit this->refreshTables(tables);
     });
@@ -323,12 +323,12 @@ QString Babe::textColor()
 QString Babe::hightlightColor()
 {
 #if defined(Q_OS_ANDROID)
-    return "";
+    return "#58bcff";
 #elif defined(Q_OS_LINUX)
     QWidget widget;
     return widget.palette().color(QPalette::Highlight).name();
 #elif defined(Q_OS_WIN32)
-    return "";
+    return "#58bcff";
 #endif
 }
 

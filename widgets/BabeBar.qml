@@ -42,8 +42,8 @@ ToolBar
             BabeButton
             {
                 id: playlistView
-                iconName: "headphones" //"media-optical-audio"
-                iconColor: currentIndex === 0? accentColor : textColor
+                iconName: /*"headphones"*/ "media-optical-audio"
+                iconColor: pageStack.currentItem === mainPlaylist ? accentColor : textColor
                 iconSize: size
 
                 onClicked: playlistViewClicked()
@@ -63,8 +63,8 @@ ToolBar
             BabeButton
             {
                 id: tracksView
-                iconName: "musicnote" //"filename-filetype-amarok"
-                iconColor: currentIndex === 1? accentColor : textColor
+                iconName: /*"musicnote"*/ "filename-filetype-amarok"
+                iconColor: currentIndex === 0? accentColor : textColor
                 iconSize: size
                 onClicked: tracksViewClicked()
 
@@ -78,8 +78,8 @@ ToolBar
             BabeButton
             {
                 id: albumsView
-                iconName: "album" //"media-album-cover"
-                iconColor: currentIndex === 2? accentColor : textColor
+                iconName: /*"album" */ "media-album-cover"
+                iconColor: currentIndex === 1? accentColor : textColor
                 iconSize: size
                 onClicked: albumsViewClicked()
 
@@ -94,8 +94,8 @@ ToolBar
             {
                 id: artistsView
 
-                iconName: "artist" //"view-media-artist"
-                iconColor: currentIndex === 3? accentColor : textColor
+                iconName: /*"artist" */  "view-media-artist"
+                iconColor: currentIndex === 2? accentColor : textColor
                 iconSize: size
 
                 onClicked: artistsViewClicked()
@@ -110,8 +110,8 @@ ToolBar
             {
                 id: playlistsView
 
-                iconName: "library-music" //"view-media-playlist"
-                iconColor: currentIndex === 4? accentColor : textColor
+                iconName: /*"library-music"*/ "view-media-playlist"
+                iconColor: currentIndex === 3? accentColor : textColor
                 iconSize: size
 
                 onClicked: playlistsViewClicked()
@@ -122,8 +122,6 @@ ToolBar
                 ToolTip.visible: hovered
                 ToolTip.text: qsTr("Playlists")
             }
-
-
         }
 
         Row
@@ -134,7 +132,7 @@ ToolBar
             {
                 id: settingsIcon
 
-                iconName: "application-menu"//"games-config-options"
+                iconName: /*"application-menu"*/"games-config-options"
                 iconColor: settingsDrawer.visible ? accentColor : textColor
                 iconSize: size
 

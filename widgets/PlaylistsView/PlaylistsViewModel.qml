@@ -101,7 +101,7 @@ ListView
                 width: parent.height
                 height: parent.height
 
-                iconName: "entry-delete"
+                iconName: "list-remove"
 
                 onClicked: appendAll()
             }
@@ -113,7 +113,7 @@ ListView
                 width: parent.height
                 height: parent.height
 
-                iconName: "application-menu" //"overflow-menu"
+                iconName: /*"application-menu" */"overflow-menu"
                 onClicked: {}
             }
 
@@ -135,8 +135,8 @@ ListView
         ListElement { playlist: qsTr("Most Played"); playlistIcon: "amarok_playcount"; /*query: Q.Query.mostPlayedTracks*/ }
         ListElement { playlist: qsTr("Favorites"); playlistIcon: "draw-star"}
         ListElement { playlist: qsTr("Recent"); playlistIcon: "filename-year-amarok"}
-        ListElement { playlist: qsTr("Babes"); playlistIcon: "love-amarok"}
-        ListElement { playlist: qsTr("Online"); playlistIcon: "internet-amarok"}
+        ListElement { playlist: qsTr("Babes"); playlistIcon: "love"}
+        ListElement { playlist: qsTr("Online"); playlistIcon: "internet-services"}
         ListElement { playlist: qsTr("Tags"); playlistIcon: "tag"}
         ListElement { playlist: qsTr("Relationships"); playlistIcon: "similarartists-amarok"}
         ListElement { playlist: qsTr("Popular"); playlistIcon: "office-chart-line"}

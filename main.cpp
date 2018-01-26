@@ -7,9 +7,9 @@
 #include "services/local/player.h"
 #include <QLibrary>
 
-//#ifdef Q_OS_ANDROID
-//#include "./3rdparty/kirigami/src/kirigamiplugin.h"
-//#endif
+#ifdef Q_OS_ANDROID
+#include "./3rdparty/kirigami/src/kirigamiplugin.h"
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -23,16 +23,17 @@ int main(int argc, char *argv[])
 
     auto context = engine.rootContext();
 
+#ifdef Q_OS_ANDROID
+    KirigamiPlugin::getInstance().registerTypes();
+#endif
+
     Babe bae;
     Player player;
-//    bae.registerTypes();
 
     context->setContextProperty("bae", &bae);
     context->setContextProperty("player", &player);
 
-    //#ifdef Q_OS_ANDROID
-    //    KirigamiPlugin::getInstance().registerTypes();
-    //#endif
+
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

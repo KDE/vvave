@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
-//import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.2 as Kirigami
 
 import "db/Queries.js" as Q
 import "utils/Player.js" as Player
@@ -12,8 +12,7 @@ import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "view_models"
 
-//Kirigami.ApplicationWindow
-ApplicationWindow
+Kirigami.ApplicationWindow
 {
     id: root
     visible: true
@@ -25,15 +24,16 @@ ApplicationWindow
 
     readonly property bool isMobile: bae.isMobile()
 
-
-    property int columnWidth: Math.sqrt(root.width*root.height)*0.4
+    property int columnWidth: Kirigami.Units.gridUnit * 22
+    property int coverSize: columnWidth*0.6
+    //    property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
     property int toolBarIconSize: isMobile ?  24 : 22
     property alias mainPlaylist : mainPlaylist
     //    minimumWidth: columnWidth
 
-    //    pageStack.defaultColumnWidth: columnWidth
-    //    pageStack.initialPage: [playlistPage, views]
+    pageStack.defaultColumnWidth: columnWidth
+    pageStack.initialPage: [mainPlaylist, views]
     //    overlay.modal: Rectangle
     //    {
     //        color: "transparent"
@@ -121,11 +121,31 @@ ApplicationWindow
         size: toolBarIconSize
         currentIndex: currentView
 
-        onPlaylistViewClicked: currentView = 0
-        onTracksViewClicked: currentView = 1
-        onAlbumsViewClicked: currentView = 2
-        onArtistsViewClicked: currentView = 3
-        onPlaylistsViewClicked: currentView = 4
+        onPlaylistViewClicked:
+        {
+            pageStack.currentIndex = 0
+
+        }
+        onTracksViewClicked:
+        {
+            pageStack.currentIndex = 1
+            currentView = 0
+        }
+        onAlbumsViewClicked:
+        {
+            pageStack.currentIndex = 1
+            currentView = 1
+        }
+        onArtistsViewClicked:
+        {
+            pageStack.currentIndex = 1
+            currentView = 2
+        }
+        onPlaylistsViewClicked:
+        {
+            pageStack.currentIndex = 1
+            currentView = 3
+        }
         onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
     }
 
@@ -201,12 +221,32 @@ ApplicationWindow
         z: -999
     }
 
+    Component.onCompleted:
+    {
+        if(!isMobile)
+            root.width = columnWidth*3
+    }
+
+
     SettingsView
     {
         id: settingsDrawer
-        onIconSizeChanged: toolBarIconSize = size
+        onIconSizeChanged: toolBarIconSize = (size === 24 && isMobile) ? 24 : 22
     }
 
+
+
+    MainPlaylist
+    {
+        id: mainPlaylist
+        Connections
+        {
+            target: mainPlaylist
+            onCoverPressed: Player.appendAll(tracks)
+            onCoverDoubleClicked: Player.playAll(tracks)
+        }
+
+    }
 
     Page
     {
@@ -215,9 +255,9 @@ ApplicationWindow
         height: parent.height
         clip: true
 
-        transform: Translate {
-            x: (settingsDrawer.position * views.width * 0.33)*-1
-        }
+        //        transform: Translate {
+        //            x: (settingsDrawer.position * views.width * 0.33)*-1
+        //        }
 
         Column
         {
@@ -246,19 +286,6 @@ ApplicationWindow
                     else if(currentView === 1) tracksView.forceActiveFocus()
 
                 }
-
-                MainPlaylist
-                {
-                    id: mainPlaylist
-                    Connections
-                    {
-                        target: mainPlaylist
-                        onCoverPressed: Player.appendAll(tracks)
-                        onCoverDoubleClicked: Player.playAll(tracks)
-                    }
-
-                }
-
 
                 TracksView
                 {

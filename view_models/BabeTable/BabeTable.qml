@@ -39,8 +39,6 @@ ListView
 
     clip: true
 
-
-
     highlight: Rectangle
     {
         width: list.width
@@ -120,7 +118,7 @@ ListView
                 width: parent.height
                 height: parent.height
 
-                iconName: "amarok_clock"///"player-time"
+                iconName: /*"amarok_clock"*/ "player-time"
                 onClicked: playAll()
             }
 
@@ -159,7 +157,7 @@ ListView
                 width: parent.height
                 height: parent.height
 
-                iconName: "application-menu" //"overflow-menu"
+                iconName: /*"application-menu"*/ "overflow-menu"
                 onClicked: {}
             }
 
