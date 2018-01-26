@@ -19,12 +19,13 @@ Kirigami.ApplicationWindow
     width: 400
     height: 500
     title: qsTr("Babe")
+    wideScreen: root.width > coverSize
 
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
 
     readonly property bool isMobile: bae.isMobile()
 
-    property int columnWidth: Kirigami.Units.gridUnit * 22
+    property int columnWidth: Kirigami.Units.gridUnit * 20
     property int coverSize: columnWidth*0.6
     //    property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
@@ -34,6 +35,8 @@ Kirigami.ApplicationWindow
 
     pageStack.defaultColumnWidth: columnWidth
     pageStack.initialPage: [mainPlaylist, views]
+    pageStack.interactive: isMobile
+    pageStack.separatorVisible: pageStack.wideMode
     //    overlay.modal: Rectangle
     //    {
     //        color: "transparent"
@@ -68,7 +71,8 @@ Kirigami.ApplicationWindow
                 searchView.populate(searchView.searchRes)
             }
             //                albumsView.filter(res)
-            currentView = 5
+            currentView = 4
+            pageStack.currentIndex = 1
         }
     }
 
@@ -154,7 +158,22 @@ Kirigami.ApplicationWindow
         id: searchBox
         width: parent.width
         height: 48
-        color: bae.midLightColor()
+        color: searchInput.activeFocus ? bae.midColor() : bae.midLightColor()
+        Kirigami.Separator
+        {
+            Rectangle
+            {
+                anchors.fill: parent
+                color: Kirigami.Theme.viewFocusColor
+            }
+
+            anchors
+            {
+                left: parent.left
+                right: parent.right
+                top: parent.top
+            }
+        }
 
         TextInput
         {
@@ -181,10 +200,16 @@ Kirigami.ApplicationWindow
 
             BabeButton
             {
+                id: searchBtn
                 anchors.centerIn: parent
                 visible: !(searchInput.focus || searchInput.text)
-                id: searchBtn
+
                 iconName: "edit-find" //"search"
+                onClicked:
+                {
+                    searchInput.forceActiveFocus()
+
+                }
             }
 
 
@@ -221,14 +246,7 @@ Kirigami.ApplicationWindow
         z: -999
     }
 
-    Component.onCompleted:
-    {
-        if(!isMobile)
-            root.width = columnWidth*3
-    }
-
-
-    SettingsView
+     SettingsView
     {
         id: settingsDrawer
         onIconSizeChanged: toolBarIconSize = (size === 24 && isMobile) ? 24 : 22
@@ -248,11 +266,10 @@ Kirigami.ApplicationWindow
 
     }
 
-    Page
+   Page
     {
         id: views
-        width: parent.width
-        height: parent.height
+       anchors.fill: parent
         clip: true
 
         //        transform: Translate {
@@ -366,6 +383,51 @@ Kirigami.ApplicationWindow
                 }
 
             }
+        }
+    }
+     /*animations*/
+
+    pageStack.layers.popEnter: Transition {
+        PauseAnimation {
+            duration: Kirigami.Units.longDuration
+        }
+    }
+    pageStack.layers.popExit: Transition {
+        YAnimator {
+            from: 0
+            to: pageStack.layers.height
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.OutCubic
+        }
+    }
+
+    pageStack.layers.pushEnter: Transition {
+        YAnimator {
+            from: pageStack.layers.height
+            to: 0
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.OutCubic
+        }
+    }
+
+    pageStack.layers.pushExit: Transition {
+        PauseAnimation {
+            duration: Kirigami.Units.longDuration
+        }
+    }
+
+    pageStack.layers.replaceEnter: Transition {
+        YAnimator {
+            from: pageStack.layers.width
+            to: 0
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.OutCubic
+        }
+    }
+
+    pageStack.layers.replaceExit: Transition {
+        PauseAnimation {
+            duration: Kirigami.Units.longDuration
         }
     }
 }

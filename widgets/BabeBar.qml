@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.2 as Kirigami
 
 import "../utils"
 import "../view_models"
@@ -29,6 +30,22 @@ ToolBar
     {
         anchors.fill: parent
         color: backgroundColor
+
+        Kirigami.Separator
+        {
+            Rectangle
+            {
+                anchors.fill: parent
+                color: Kirigami.Theme.viewFocusColor
+            }
+
+            anchors
+            {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+        }
     }
 
     RowLayout
@@ -43,7 +60,7 @@ ToolBar
             {
                 id: playlistView
                 iconName: /*"headphones"*/ "media-optical-audio"
-                iconColor: pageStack.currentItem === mainPlaylist ? accentColor : textColor
+                iconColor: pageStack.currentIndex === 0 ? accentColor : textColor
                 iconSize: size
 
                 onClicked: playlistViewClicked()
@@ -64,7 +81,7 @@ ToolBar
             {
                 id: tracksView
                 iconName: /*"musicnote"*/ "filename-filetype-amarok"
-                iconColor: currentIndex === 0? accentColor : textColor
+                iconColor:  currentIndex === 0? accentColor : textColor
                 iconSize: size
                 onClicked: tracksViewClicked()
 
@@ -79,7 +96,7 @@ ToolBar
             {
                 id: albumsView
                 iconName: /*"album" */ "media-album-cover"
-                iconColor: currentIndex === 1? accentColor : textColor
+                iconColor:  currentIndex === 1? accentColor : textColor
                 iconSize: size
                 onClicked: albumsViewClicked()
 
@@ -95,7 +112,7 @@ ToolBar
                 id: artistsView
 
                 iconName: /*"artist" */  "view-media-artist"
-                iconColor: currentIndex === 2? accentColor : textColor
+                iconColor:  currentIndex === 2? accentColor : textColor
                 iconSize: size
 
                 onClicked: artistsViewClicked()
@@ -111,7 +128,7 @@ ToolBar
                 id: playlistsView
 
                 iconName: /*"library-music"*/ "view-media-playlist"
-                iconColor: currentIndex === 3? accentColor : textColor
+                iconColor:  currentIndex === 3? accentColor : textColor
                 iconSize: size
 
                 onClicked: playlistsViewClicked()

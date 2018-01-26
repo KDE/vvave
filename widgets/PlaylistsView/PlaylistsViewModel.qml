@@ -172,8 +172,8 @@ ListView
                 default: break
                 }
 
-                playlistViewDrawer.open()
-
+                if(!playlistViewRoot.wideMode)
+                    playlistViewRoot.currentIndex = 1
 
             }
         }

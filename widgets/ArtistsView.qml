@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.2 as Kirigami
 
 import "../view_models/BabeGrid"
 import "../view_models/BabeTable"
@@ -11,17 +12,7 @@ BabeGrid
 {
     id:artistsViewGrid
     visible: true
-    property int hintSize : Math.sqrt(root.width*root.height)*0.25
-    albumSize:
-    {
-        if(hintSize>200)
-            200
-        else if (hintSize<150)
-            root.isMobile && hintSize < 120 ? 120 : 150
-        else
-            hintSize
 
-    }
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
@@ -29,10 +20,10 @@ BabeGrid
     signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
-    transform: Translate
-    {
-        y: (drawer.position * artistsViewGrid.height * 0.33)*-1
-    }
+    //    transform: Translate
+    //    {
+    //        y: (drawer.position * artistsViewGrid.height * 0.33)*-1
+    //    }
 
     onBgClicked: if(drawer.visible) drawer.close()
     onFocusChanged:  drawer.close()
@@ -54,6 +45,21 @@ BabeGrid
             anchors.fill: parent
             z: -999
             color: bae.altColor()
+            Kirigami.Separator
+            {
+                Rectangle
+                {
+                    anchors.fill: parent
+                    color: Kirigami.Theme.viewFocusColor
+                }
+
+                anchors
+                {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+            }
         }
 
         Column

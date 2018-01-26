@@ -42,7 +42,7 @@
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
         <file>widgets/PlaylistsView/AddPlaylistDialog.qml</file>
-        <file>view_models/Props.qml</file>
         <file>view_models/BabeButton.qml</file>
+        <file>utils/Props.js</file>
     </qresource>
 </RCC>

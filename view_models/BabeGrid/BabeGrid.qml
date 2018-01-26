@@ -4,10 +4,18 @@ import ".."
 
 Pane
 {
-
     id: gridPage
-
-    property int albumSize : 150
+    padding: 20
+    property int hintSize : Math.sqrt(root.width*root.height)*0.25
+    property int albumSize:
+    {
+        if(hintSize > 150)
+            150
+        else if (hintSize < 100)
+            100
+        else
+            hintSize
+    }
     property int albumSpacing: 20
     property int borderRadius : 4
     property alias gridModel: gridModel
@@ -47,6 +55,7 @@ Pane
     GridView
     {
         id: grid
+
         MouseArea
         {
             anchors.fill: parent
@@ -58,7 +67,6 @@ Pane
         height: parent.height
 
         anchors.horizontalCenter: parent.horizontalCenter
-
         cellWidth: albumSize + albumSpacing
         cellHeight:  parseInt(albumSize+(albumSize*0.6))
 

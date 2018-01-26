@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
+import org.kde.kirigami 2.2 as Kirigami
 
 import "../InfoView"
 
@@ -143,7 +144,7 @@ Item
                 anchors.fill: parent
                 color: bae.midLightColor()
                 opacity: 0.8
-                z: -999
+                z: -999                
             }
             //            onYChanged:
             //            {
@@ -433,6 +434,8 @@ Item
             Layout.fillWidth: true
             Layout.fillHeight: true
             anchors.top: slideBar.bottom
+
+
             //            anchors.bottom: mainPlaylistRoot.searchBox
             StackView
             {
@@ -498,6 +501,7 @@ Item
                         anchors.fill: parent
                         color: bae.altColor()
                         z: -999
+
                     }
 
                     onRowClicked: Player.playTrack(model.get(index))

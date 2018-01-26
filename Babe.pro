@@ -98,19 +98,19 @@ SOURCES += main.cpp \
     pulpo/services/musicbrainzService.cpp \
     pulpo/services/geniusService.cpp \
     pulpo/services/lyricwikiaService.cpp \
-        taglib/ape/apefile.cpp \
-        taglib/ape/apefooter.cpp \
-        taglib/ape/apeitem.cpp \
-        taglib/ape/apeproperties.cpp \
-        taglib/ape/apetag.cpp \
-        taglib/asf/asfattribute.cpp \
-        taglib/asf/asffile.cpp \
-        taglib/asf/asfpicture.cpp \
-        taglib/asf/asfproperties.cpp \
-        taglib/asf/asftag.cpp \
-        taglib/flac/flacfile.cpp \
-        taglib/flac/flacmetadatablock.cpp \
-        taglib/flac/flacpicture.cpp \
+    taglib/ape/apefile.cpp \
+    taglib/ape/apefooter.cpp \
+    taglib/ape/apeitem.cpp \
+    taglib/ape/apeproperties.cpp \
+    taglib/ape/apetag.cpp \
+    taglib/asf/asfattribute.cpp \
+    taglib/asf/asffile.cpp \
+    taglib/asf/asfpicture.cpp \
+    taglib/asf/asfproperties.cpp \
+    taglib/asf/asftag.cpp \
+    taglib/flac/flacfile.cpp \
+    taglib/flac/flacmetadatablock.cpp \
+    taglib/flac/flacpicture.cpp \
         taglib/flac/flacproperties.cpp \
         taglib/flac/flacunknownmetadatablock.cpp \
         taglib/it/itfile.cpp \
@@ -200,7 +200,7 @@ SOURCES += main.cpp \
 
 
 
-RESOURCES += qml.qrc \
+RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

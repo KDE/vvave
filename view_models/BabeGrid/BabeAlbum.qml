@@ -44,7 +44,7 @@ Item
         Row
         {
             Layout.fillWidth: true
-
+            Layout.alignment: Qt.AlignHCenter
             Image
             {
                 id: img
