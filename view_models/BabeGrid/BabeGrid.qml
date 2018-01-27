@@ -17,7 +17,8 @@ Pane
             hintSize
     }
     property int albumSpacing: 20
-    property int borderRadius : 4
+    property int albumRadius : 0
+    property bool albumCardVisible : true
     property alias gridModel: gridModel
     property alias grid: grid
     signal albumCoverClicked(string album, string artist)
@@ -110,6 +111,8 @@ Pane
             id: delegate
 
             albumSize : gridPage.albumSize
+            albumRadius: gridPage.albumRadius
+            albumCard: albumCardVisible
             Connections
             {
                 target: delegate

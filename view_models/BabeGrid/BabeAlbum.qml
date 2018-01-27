@@ -10,6 +10,8 @@ Item
     signal albumClicked(int index)
     property int albumSize : 150
     property int borderRadius : 2
+    property int albumRadius : 0
+    property bool albumCard : true
     property string fillColor: bae.midLightColor()
     property string textColor: bae.foregroundColor()
     property int fontSize : root.isMobile? 12 : 10
@@ -23,6 +25,7 @@ Item
     DropShadow
     {
         anchors.fill: card
+        visible: card.visible
         horizontalOffset: 0
         verticalOffset: 3
         radius: 8.0
@@ -34,6 +37,7 @@ Item
     Rectangle
     {
         id: card
+        visible: albumCard
         anchors.fill: parent
         color: fillColor
         radius: borderRadius
@@ -61,23 +65,23 @@ Item
                         (artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
                     else "qrc:/assets/cover.png"
                 }
-                //                layer.enabled: true
-                //                layer.effect: OpacityMask
-                //                {
-                //                    maskSource: Item
-                //                    {
-                //                        width: img.width
-                //                        height: img.height
-                //                        Rectangle
-                //                        {
-                //                            anchors.centerIn: parent
-                //                            width: img.adapt ? img.width : Math.min(img.width, img.height)
-                //                            height: img.adapt ? img.height : width
-                //                            radius: borderRadius
-                //                            //                    radius: Math.min(width, height)
-                //                        }
-                //                    }
-                //                }
+                layer.enabled: albumRadius > 0
+                layer.effect: OpacityMask
+                {
+                    maskSource: Item
+                    {
+                        width: img.width
+                        height: img.height
+                        Rectangle
+                        {
+                            anchors.centerIn: parent
+                            width: img.adapt ? img.width : Math.min(img.width, img.height)
+                            height: img.adapt ? img.height : width
+                            radius: albumRadius
+                            //                    radius: Math.min(width, height)
+                        }
+                    }
+                }
             }
         }
 
@@ -86,14 +90,14 @@ Item
         {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.leftMargin: 5
-            Layout.topMargin: 5
+            Layout.margins: 5
 
             Label
             {
                 width: parent.width
                 text:  typeof album === 'undefined'  ? artist : album
                 visible: true
+                horizontalAlignment: Qt.AlignHCenter
                 elide: Text.ElideRight
                 font.pointSize: fontSize
                 font.bold: true
@@ -116,7 +120,7 @@ Item
                 width: parent.width
                 text: typeof album === 'undefined' ? "" : artist
                 visible: typeof album === 'undefined'? false : true
-                horizontalAlignment : typeof album === 'undefined'? Qt.AlignHCenter : Qt.AlignLeft
+                horizontalAlignment: Qt.AlignHCenter
                 elide: Text.ElideRight
                 font.pointSize: fontSize-1
                 color: textColor

@@ -10,9 +10,10 @@ import "../db/Queries.js" as Q
 
 BabeGrid
 {
-    id:artistsViewGrid
+    id: artistsViewGrid
     visible: true
-
+//    albumCardVisible: false
+//    albumRadius: Math.min(albumSize, albumSize)
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
@@ -32,7 +33,8 @@ BabeGrid
     {
         id: drawer
         height: parent.height * 0.4
-        width: parent.width
+        x: pageStack.wideMode ? columnWidth+1 : 0
+        width: pageStack.wideMode ? artistsViewGrid.width-1 : artistsViewGrid.width
         edge: Qt.BottomEdge
         interactive: false
         focus: true
