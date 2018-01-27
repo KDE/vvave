@@ -55,7 +55,7 @@ ItemDelegate
         color:
         {
             if(trackMood.length > 0)
-                trackMood
+                Qt.lighter(trackMood)
             else
                 index % 2 === 0 ? bae.midColor() : "transparent"
         }
@@ -77,7 +77,7 @@ ItemDelegate
     {
         id: gridLayout
         anchors.fill: parent
-        spacing: 20
+        spacing: 0
 
         Item
         {
@@ -137,7 +137,7 @@ ItemDelegate
 
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignVCenter
+            Layout.alignment: Qt.AlignLeft
             Layout.margins: 15
             anchors.verticalCenter: parent.verticalCenter
 
@@ -256,7 +256,7 @@ ItemDelegate
                     Layout.column: 3
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter
-                     font.family: "Material Design Icons"
+                    font.family: "Material Design Icons"
                     text: setStars(stars)
                     font.bold: false
                     elide: Text.ElideRight

@@ -16,7 +16,9 @@ Kirigami.ApplicationWindow
 {
     id: root
     visible: true
-    width: isMobile ? 800 : 400
+    width: !isMobile ? bae.screenGeometry("width")*0.45 : 400
+    minimumWidth: !isMobile ? columnWidth : 0
+    minimumHeight:  !isMobile ? columnWidth : 0
     height: 500
     title: qsTr("Babe")
     wideScreen: root.width > coverSize
@@ -24,9 +26,11 @@ Kirigami.ApplicationWindow
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
 
     readonly property bool isMobile: bae.isMobile()
+    readonly property int maxW : root.maximumWidth
+    readonly property int maxH : root.maximumHeight
 
     property int columnWidth: Kirigami.Units.gridUnit * 20
-    property int coverSize: columnWidth*0.6
+    property int coverSize: columnWidth*0.65
     //    property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
     property int toolBarIconSize: isMobile ?  24 : 22

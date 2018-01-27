@@ -23,7 +23,7 @@ Item
     DropShadow
     {
         anchors.fill: card
-        horizontalOffset: 3
+        horizontalOffset: 0
         verticalOffset: 3
         radius: 8.0
         samples: 17

@@ -78,7 +78,7 @@ Item
             FastBlur
             {
                 width: mainPlaylistRoot.width
-                height: mainPlaylist.y
+                height: mainPlaylistItem.y
                 source: artwork
                 radius: 100
                 transparentBorder: true
@@ -99,11 +99,43 @@ Item
                     anchors.fill: parent
                     onDoubleClicked:
                     {
-                        var query = Q.GET.albumTracks_.arg(currentTrack.album)
-                        query = query.arg(currentTrack.artist)
+                        //                        var query = Q.GET.albumTracks_.arg(currentTrack.album)
+                        //                        query = query.arg(currentTrack.artist)
 
-                        var tracks = bae.get(query)
-                        coverDoubleClicked(tracks)
+                        //                        var tracks = bae.get(query)
+                        //                        coverDoubleClicked(tracks)
+
+                        if(!isMobile)
+                        {
+                            if(root.header.visible)
+                            {
+                                root.maximumWidth = columnWidth
+                                root.minimumWidth = artwork.width
+                                root.maximumHeight = mainPlaylistItem.y
+                                root.minimumHeight = mainPlaylistItem.y
+                                root.header.visible = false
+                                root.footer.visible = false
+                                infoBtn.visible = false
+                                menuBtn.visible = false
+
+                            }else
+                            {
+                                cover.y = 0
+                                root.maximumWidth = bae.screenGeometry("width")
+                                root.minimumWidth = columnWidth
+                                root.maximumHeight = bae.screenGeometry("height")
+                                root.minimumHeight = columnWidth
+
+
+
+                                root.width = columnWidth
+                                root.height = 700
+                                root.header.visible = true
+                                root.footer.visible = true
+                                infoBtn.visible = true
+                                menuBtn.visible = true
+                            }
+                        }
                     }
 
                     onPressAndHold:
@@ -192,48 +224,38 @@ Item
                     {
                         cover.visible = false
                         playbackControls.y = 0
+                    }else cover.visible = true
 
-                    }else
-                    {
-                        cover.visible = true
-                        //                        playbackControls.y = coverSize
-                    }
                 }
             }
 
             RowLayout
             {
-                width: parent.width
-                height: parent.height
                 anchors.fill: parent
 
-                Row
+                BabeButton
                 {
+                    id: infoBtn
                     Layout.alignment: Qt.AlignLeft
 
-                    BabeButton
+                    iconName: stackView.currentItem === list ? "documentinfo" : "arrow-left"
+                    iconSize: playbackIconSize
+                    onClicked:
                     {
-                        id: infoBtn
-
-                        iconName: stackView.currentItem === list ? "documentinfo" : "arrow-left"
-                        iconSize: playbackIconSize
-                        onClicked:
+                        if(stackView.currentItem !== list)
                         {
-                            if(stackView.currentItem !== list)
-                            {
-                                stackView.pop(list)
-                                cover.visible = true
-
-                            }
-                            else
-                            {
-                                cover.visible = false
-                                stackView.push(infoView)
-                            }
+                            stackView.pop(list)
+                            cover.visible = true
+                        }
+                        else
+                        {
+                            cover.visible = false
+                            stackView.push(infoView)
                         }
                     }
-
                 }
+
+
 
                 Row
                 {
@@ -292,19 +314,19 @@ Item
                     }
                 }
 
-                Row
+
+
+                BabeButton
                 {
+                    id: menuBtn
                     Layout.alignment: Qt.AlignRight
 
-                    BabeButton
-                    {
-                        id: menuBtn
-                        iconName: /*"application-menu"*/ "overflow-menu"
-                        iconSize: playbackIconSize
+                    iconName: /*"application-menu"*/ "overflow-menu"
+                    iconSize: playbackIconSize
 
-                        onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
-                    }
+                    onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
                 }
+
             }
         }
 
@@ -432,7 +454,7 @@ Item
 
         Item
         {
-            id: mainPlaylist
+            id: mainPlaylistItem
             Layout.row: 4
             Layout.column: 1
             Layout.fillWidth: true

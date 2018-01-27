@@ -59,7 +59,7 @@ ListView
     Keys.onReturnPressed: rowClicked(currentIndex)
     Keys.onEnterPressed: quickPlayTrack(currentIndex)
 
-    boundsBehavior: isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
+    boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
     flickableDirection: Flickable.AutoFlickDirection
 
     snapMode: ListView.SnapToItem

@@ -402,7 +402,7 @@ bool Babe::isMobile()
     return BAE::isMobile();
 }
 
-int Babe::screenGeometry(QString &side)
+int Babe::screenGeometry(QString side)
 {
     side = side.toLower();
     auto geo = QApplication::desktop()->screenGeometry();
@@ -414,7 +414,7 @@ int Babe::screenGeometry(QString &side)
     else return 0;
 }
 
-int Babe::cursorPos(QString &axis)
+int Babe::cursorPos(QString axis)
 {
     axis = axis.toLower();
     auto pos = QCursor::pos();
