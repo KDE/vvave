@@ -248,7 +248,7 @@ namespace BAE
     const QString NotifyDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
     const QString BabePort = "8483";
     const QString App = "Babe";
-    const QString version = "1.0";
+    const QString Version = "1.0";
     const QString DBName = "collection.db";
 
 

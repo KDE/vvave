@@ -36,7 +36,7 @@ ItemDelegate
     property bool number : false
     property bool quickPlay : true
     property bool coverArt : false
-
+    property bool menuItem : false
     property bool trackDurationVisible : false
     property bool trackRatingVisible: false
     //    property bool playingIndicator: false
@@ -54,8 +54,8 @@ ItemDelegate
         anchors.fill: parent
         color:
         {
-            if(trackMood.length>0)
-                Qt.lighter(trackMood)
+            if(trackMood.length > 0)
+                trackMood
             else
                 index % 2 === 0 ? bae.midColor() : "transparent"
         }
@@ -128,7 +128,6 @@ ItemDelegate
                 iconName: "media-playback-start"
                 iconColor: textColor
                 onClicked: play()
-                iconSize: isMobile ?  24 : 22
             }
         }
 
@@ -177,12 +176,13 @@ ItemDelegate
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.row: 1
+                    //                     Layout.rowSpan: sameAlbum ? 2 : 1
                     Layout.column: 2
                     verticalAlignment:  Qt.AlignVCenter
                     text: title
                     font.bold: !sameAlbum
                     elide: Text.ElideRight
-
+                    visible: true
                     font.pointSize: 10
                     color: textColor
 
@@ -196,7 +196,6 @@ ItemDelegate
                     Layout.fillHeight: true
                     Layout.row: 2
                     Layout.column: 2
-                    Layout.rowSpan: sameAlbum && coverArt ? 2 : 1
                     verticalAlignment:  Qt.AlignVCenter
                     text: artist + " | " + album
                     font.bold: false
@@ -264,6 +263,22 @@ ItemDelegate
                     font.pointSize: 8
                     color: textColor
                 }
+            }
+        }
+
+        Item
+        {
+            visible: menuItem
+            Layout.fillHeight: true
+            width: sameAlbum ? rowHeight : parent.height
+
+            BabeButton
+            {
+                id: menuBtn
+                anchors.centerIn: parent
+                iconName: "overflow-menu"
+                iconColor: textColor
+                onClicked: rightClicked()
             }
         }
     }

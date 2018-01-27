@@ -127,7 +127,10 @@ Kirigami.ApplicationWindow
 
         onPlaylistViewClicked:
         {
-            pageStack.currentIndex = 0
+            if(pageStack.wideMode)
+                root.width = columnWidth
+            else
+                pageStack.currentIndex = 0
 
         }
         onTracksViewClicked:
@@ -188,15 +191,7 @@ Kirigami.ApplicationWindow
             selectedTextColor: bae.foregroundColor()
             property string placeholderText: "Search..."
 
-            //            Label
-            //            {
-            //                text: searchInput.placeholderText
-            //                visible: !(searchInput.focus || searchInput.text)
-            //                horizontalAlignment: Text.AlignHCenter
-            //                verticalAlignment:  Text.AlignVCenter
-            //                font.bold: true
-            //                color: bae.foregroundColor()
-            //            }
+            onAccepted: runSearch()
 
             BabeButton
             {
@@ -216,24 +211,12 @@ Kirigami.ApplicationWindow
             BabeButton
             {
                 anchors.right: parent.right
-                visible: searchInput.text
+                visible: searchInput.activeFocus
                 iconName: "edit-clear"
-
                 onClicked: clearSearch()
             }
 
 
-
-
-
-
-            //            onTextChanged:
-            //            {
-            //                if(searchInput.text.length===0)
-            //                    albumsView.populate()
-            //            }
-
-            onAccepted: runSearch()
         }
 
 
@@ -246,7 +229,7 @@ Kirigami.ApplicationWindow
         z: -999
     }
 
-     SettingsView
+    SettingsView
     {
         id: settingsDrawer
         onIconSizeChanged: toolBarIconSize = (size === 24 && isMobile) ? 24 : 22
@@ -266,10 +249,10 @@ Kirigami.ApplicationWindow
 
     }
 
-   Page
+    Page
     {
         id: views
-       anchors.fill: parent
+        anchors.fill: parent
         clip: true
 
         //        transform: Translate {
@@ -312,8 +295,8 @@ Kirigami.ApplicationWindow
                         target: tracksView
                         onRowClicked: Player.addTrack(tracksView.model.get(index))
                         onQuickPlayTrack: Player.quickPlay(tracksView.model.get(index))
-                        onPlayAll: Player.playAll(bae.get(Q.Query.allTracks))
-                        onAppendAll: Player.appendAll(bae.get(Q.Query.allTracks))
+                        onPlayAll: Player.playAll(bae.get(Q.GET.allTracks))
+                        onAppendAll: Player.appendAll(bae.get(Q.GET.allTracks))
 
                     }
 
@@ -354,8 +337,8 @@ Kirigami.ApplicationWindow
                         target: playlistsView
                         onRowClicked: Player.addTrack(track)
                         onQuickPlayTrack: Player.quickPlay(track)
-                        //                        onPlayAll: Player.playAll(bae.get(Q.Query.allTracks))
-                        //                        onAppendAll: Player.appendAll(bae.get(Q.Query.allTracks))
+                        onPlayAll: Player.playAll(tracks)
+                        onAppendAll: Player.appendAll(tracks)
                     }
                 }
 
@@ -373,7 +356,7 @@ Kirigami.ApplicationWindow
                         onHeaderClosed: clearSearch()
                         onArtworkDoubleClicked:
                         {
-                            var query = Q.Query.albumTracks_.arg(searchView.model.get(index).album)
+                            var query = Q.GET.albumTracks_.arg(searchView.model.get(index).album)
                             query = query.arg(searchView.model.get(index).artist)
 
                             Player.playAll(bae.get(query))
@@ -385,7 +368,7 @@ Kirigami.ApplicationWindow
             }
         }
     }
-     /*animations*/
+    /*animations*/
 
     pageStack.layers.popEnter: Transition {
         PauseAnimation {

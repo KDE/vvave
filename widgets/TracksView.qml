@@ -14,7 +14,7 @@ BabeTable
 
     function populate()
     {
-        var map = bae.get(Q.Query.allTracks)
+        var map = bae.get(Q.GET.allTracks)
 
         if(map.length > 0)
             for(var i in map)

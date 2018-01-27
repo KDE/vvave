@@ -48,6 +48,7 @@ Item
                 saturation: -1
                 lightness: 0.3
             }
+
             Label
             {
                 id: textHolder

@@ -14,6 +14,7 @@ ToolBar
     property string backgroundColor : bae.backgroundColor()
     property int size : 24
     property int currentIndex : 0
+    property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
 
     signal tracksViewClicked()
     signal albumsViewClicked()
@@ -60,7 +61,7 @@ ToolBar
             {
                 id: playlistView
                 iconName: /*"headphones"*/ "media-optical-audio"
-                iconColor: pageStack.currentIndex === 0 ? accentColor : textColor
+                iconColor: pageStack.wideMode || pageStack.currentIndex === 0 ? accentColor : textColor
                 iconSize: size
 
                 onClicked: playlistViewClicked()
@@ -81,7 +82,7 @@ ToolBar
             {
                 id: tracksView
                 iconName: /*"musicnote"*/ "filename-filetype-amarok"
-                iconColor:  currentIndex === 0? accentColor : textColor
+                iconColor:  accent && currentIndex === 0? accentColor : textColor
                 iconSize: size
                 onClicked: tracksViewClicked()
 
@@ -96,7 +97,7 @@ ToolBar
             {
                 id: albumsView
                 iconName: /*"album" */ "media-album-cover"
-                iconColor:  currentIndex === 1? accentColor : textColor
+                iconColor:  accent && currentIndex === 1 ? accentColor : textColor
                 iconSize: size
                 onClicked: albumsViewClicked()
 
@@ -112,7 +113,7 @@ ToolBar
                 id: artistsView
 
                 iconName: /*"artist" */  "view-media-artist"
-                iconColor:  currentIndex === 2? accentColor : textColor
+                iconColor:  accent && currentIndex === 2? accentColor : textColor
                 iconSize: size
 
                 onClicked: artistsViewClicked()
@@ -128,7 +129,7 @@ ToolBar
                 id: playlistsView
 
                 iconName: /*"library-music"*/ "view-media-playlist"
-                iconColor:  currentIndex === 3? accentColor : textColor
+                iconColor:  accent && currentIndex === 3? accentColor : textColor
                 iconSize: size
 
                 onClicked: playlistsViewClicked()

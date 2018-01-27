@@ -7,7 +7,6 @@ Item
     property int recSize : 16
     signal colorClicked(string color)
 
-
     RowLayout
     {
         anchors.fill: parent

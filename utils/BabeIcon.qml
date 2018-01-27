@@ -8,7 +8,6 @@ Text
     property int iconSize
     property string icon
     readonly property string defaultColor : iconColor
-
     text: MdiFont.Babe[babeIcon.icon] || MdiFont.Icon[babeIcon.icon]
     font.family: "Material Design Icons"
     font.pixelSize: babeIcon.iconSize

@@ -11,6 +11,7 @@ ListView
 
     clip: true
 
+
     focus: true
     interactive: true
     highlightFollowsCurrentItem: false
@@ -78,32 +79,24 @@ ListView
                 onClicked: newPlaylistDialog.open()
             }
 
-            Label
-            {
-                text: "Playlists"
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-                elide: Text.ElideRight
-                font.pointSize: 12
-                font.bold: true
-                lineHeight: 0.7
-                color: bae.foregroundColor()
-
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:  Text.AlignVCenter
-            }
 
             BabeButton
             {
                 id: removePlaylist
                 Layout.fillHeight: true
+
                 width: parent.height
                 height: parent.height
 
                 iconName: "list-remove"
 
                 onClicked: appendAll()
+            }
+
+            Item
+            {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
             }
 
             BabeButton
@@ -120,12 +113,11 @@ ListView
         }
     }
 
-
-
     BabeHolder
     {
         id: holder
         visible: playlistListRoot.count === 0
+        message: "Select a playlist or create a new one"
     }
 
     ListModel
@@ -160,15 +152,15 @@ ListView
 
                 switch(playlist)
                 {
-                case "Most Played": playlistViewRoot.populate(Q.Query.mostPlayedTracks); break;
-                case "Favorites": playlistViewRoot.populate(Q.Query.favoriteTracks); break;
-                case "Recent": playlistViewRoot.populate(Q.Query.recentTracks); break;
-                case "Babes": playlistViewRoot.populate(Q.Query.babedTracks); break;
-                case "Online": playlistViewRoot.populate(Q.Query.favoriteTracks); break;
-                case "Tags": playlistViewRoot.populate(Q.Query.favoriteTracks); break;
-                case "Relationships": playlistViewRoot.populate(Q.Query.favoriteTracks); break;
-                case "Popular": playlistViewRoot.populate(Q.Query.favoriteTracks); break;
-                case "Genre": playlistViewRoot.populate(Q.Query.favoriteTracks); break;
+                case "Most Played": playlistViewRoot.populate(Q.GET.mostPlayedTracks); break;
+                case "Favorites": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
+                case "Recent": playlistViewRoot.populate(Q.GET.recentTracks); break;
+                case "Babes": playlistViewRoot.populate(Q.GET.babedTracks); break;
+                case "Online": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
+                case "Tags": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
+                case "Relationships": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
+                case "Popular": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
+                case "Genre": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
                 default: break
                 }
 

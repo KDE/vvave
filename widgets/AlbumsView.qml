@@ -87,6 +87,7 @@ BabeGrid
                 headerBar: true
                 headerClose: true
                 coverArtVisible: true
+                quickPlayVisible: true
 
                 onRowClicked:
                 {
@@ -111,7 +112,7 @@ BabeGrid
                     drawer.close()
 
                     var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
-                    var query = Q.Query.albumTracks_.arg(data.album)
+                    var query = Q.GET.albumTracks_.arg(data.album)
                     query = query.arg(data.artist)
                     var tracks = bae.get(query)
 
@@ -121,7 +122,7 @@ BabeGrid
                 onAppendAll:
                 {
                     var data = albumsView.gridModel.get(albumsViewGrid.grid.currentIndex)
-                    var query = Q.Query.albumTracks_.arg(data.album)
+                    var query = Q.GET.albumTracks_.arg(data.album)
                     query = query.arg(data.artist)
                     var tracks = bae.get(query)
                     albumsViewGrid.appendAlbum(tracks)
@@ -140,7 +141,7 @@ BabeGrid
         drawer.open()
         drawerList.clearTable()
 
-        var query = Q.Query.albumTracks_.arg(album)
+        var query = Q.GET.albumTracks_.arg(album)
         query = query.arg(artist)
 
         var map = bae.get(query)
@@ -153,7 +154,7 @@ BabeGrid
 
     function populate()
     {
-        var map = bae.get(Q.Query.allAlbumsAsc)
+        var map = bae.get(Q.GET.allAlbumsAsc)
 
         if(map.length > 0)
             for(var i in map)

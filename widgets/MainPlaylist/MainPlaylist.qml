@@ -97,7 +97,7 @@ Item
                     anchors.fill: parent
                     onDoubleClicked:
                     {
-                        var query = Q.Query.albumTracks_.arg(currentTrack.album)
+                        var query = Q.GET.albumTracks_.arg(currentTrack.album)
                         query = query.arg(currentTrack.artist)
 
                         var tracks = bae.get(query)
@@ -106,7 +106,7 @@ Item
 
                     onPressAndHold:
                     {
-                        var query = Q.Query.albumTracks_.arg(currentTrack.album)
+                        var query = Q.GET.albumTracks_.arg(currentTrack.album)
                         query = query.arg(currentTrack.artist)
                         var tracks = bae.get(query)
                         coverPressed(tracks)
@@ -507,7 +507,7 @@ Item
                     onRowClicked: Player.playTrack(model.get(index))
                     onArtworkDoubleClicked:
                     {
-                        var query = Q.Query.albumTracks_.arg(model.get(index).album)
+                        var query = Q.GET.albumTracks_.arg(model.get(index).album)
                         query = query.arg(model.get(index).artist)
 
                         Player.playAll(bae.get(query))
@@ -515,6 +515,8 @@ Item
 
                     }
                     holder.message: "Empty playlist..."
+                    holder.emoji: "qrc:/assets/face-sleeping.png"
+
                     Component.onCompleted:
                     {
                         var list = bae.lastPlaylist()
@@ -525,14 +527,14 @@ Item
                             for(var i = 0; i < n; i++)
                             {
                                 var where = "url = \""+list[i]+"\""
-                                var query = Q.Query.tracksWhere_.arg(where)
+                                var query = Q.GET.tracksWhere_.arg(where)
                                 var track = bae.get(query)
                                 Player.appendTrack(track[0])
                             }
                         }else
                         {
                             var where = "babe = 1"
-                            var query = Q.Query.tracksWhere_.arg(where)
+                            var query = Q.GET.tracksWhere_.arg(where)
                             var tracks = bae.get(query)
 
                             for(var pos=0; pos< tracks.length; pos++)

@@ -2,7 +2,7 @@
 #include <QFontDatabase>
 #include <QQmlContext>
 #include <QApplication>
-
+#include <QIcon>
 #include "babe.h"
 #include "services/local/player.h"
 #include <QLibrary>
@@ -16,7 +16,9 @@ int main(int argc, char *argv[])
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QApplication app(argc, argv);
-
+    app.setApplicationName(BAE::App);
+    app.setApplicationVersion(BAE::Version);
+    app.setWindowIcon(QIcon("qrc:/assets/babe.png"));
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
 
     QQmlApplicationEngine engine;

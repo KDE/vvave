@@ -98,7 +98,7 @@ BabeGrid
                     drawer.close()
                     var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
 
-                    var query = Q.Query.artistTracks_.arg(data.artist)
+                    var query = Q.GET.artistTracks_.arg(data.artist)
                     var tracks = bae.get(query)
                     artistsViewGrid.playAlbum(tracks)
                 }
@@ -106,7 +106,7 @@ BabeGrid
                 onAppendAll:
                 {
                     var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
-                    var query = Q.Query.artistTracks_.arg(data.artist)
+                    var query = Q.GET.artistTracks_.arg(data.artist)
                     var tracks = bae.get(query)
                     artistsViewGrid.appendAlbum(tracks)
                     drawer.close()
@@ -122,7 +122,7 @@ BabeGrid
         drawerList.headerTitle = artist
         drawer.open()
         drawerList.clearTable()
-        var query = Q.Query.artistTracks_.arg(artist)
+        var query = Q.GET.artistTracks_.arg(artist)
         var map = bae.get(query)
 
         if(map.length > 0)
@@ -133,7 +133,7 @@ BabeGrid
 
     function populate()
     {
-        var map = bae.get(Q.Query.allArtistsAsc)
+        var map = bae.get(Q.GET.allArtistsAsc)
 
         if(map.length > 0)
             for(var i in map)

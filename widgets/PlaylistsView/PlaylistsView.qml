@@ -5,7 +5,7 @@ import org.kde.kirigami 2.2 as Kirigami
 
 import "../../view_models/BabeTable"
 import "../../view_models"
-
+import "../../db/Queries.js" as Q
 
 
 //    transform: Translate
@@ -16,15 +16,19 @@ import "../../view_models"
 Kirigami.PageRow
 {
     id: playlistViewRoot
+    property string playlistQuery
 
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
+    signal playAll(var tracks)
+    signal appendAll(var tracks)
 
+    clip: true
     separatorVisible: wideMode
     initialPage:[playlistList, playlistViewDrawer]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
-
-        Page
+interactive: false
+    Page
     {
         id: playlistList
         ColumnLayout
@@ -53,7 +57,12 @@ Kirigami.PageRow
                     z: -999
                     color:bae.midColor()
                 }
-                //        onColorClicked: moodIt(color)
+                onColorClicked:
+                {
+                    populate(Q.GET.colorTracks_.arg(color))
+                    if(!playlistViewRoot.wideMode)
+                        playlistViewRoot.currentIndex = 1
+                }
             }
 
 
@@ -88,15 +97,16 @@ Kirigami.PageRow
             height: parent.height
             quickPlayVisible: true
             coverArtVisible: true
-            trackRating: true
-            trackDuration: true
+            //            trackRating: true
+            //            trackDuration: true
             headerBar: true
             headerClose: !playlistViewRoot.wideMode
-            headerTitle: playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
-
+            headerTitle: playlistViewRoot.wideMode ? "" : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
             onHeaderClosed: if(!playlistViewRoot.wideMode)
                                 playlistViewRoot.currentIndex = 0
 
+            holder.message:  "Select a playlist or create a new one"
+            holder.emoji: "qrc:/assets/face-hug.png"
 
             Connections
             {
@@ -104,11 +114,10 @@ Kirigami.PageRow
                 onRowClicked: playlistViewRoot.rowClicked(filterList.model.get(index))
                 onQuickPlayTrack:
                 {
-                    //                        playlistViewDrawer.close()
                     playlistViewRoot.quickPlayTrack(filterList.model.get(index))
                 }
-                //                        onPlayAll: Player.playAll(bae.get(Q.Query.allTracks))
-                //                        onAppendAll: Player.appendAll(bae.get(Q.Query.allTracks))
+                onPlayAll: playAll(bae.get(playlistQuery))
+                onAppendAll: appendAll(bae.get(playlistQuery))
             }
         }
 
@@ -118,6 +127,7 @@ Kirigami.PageRow
 
     function populate(query)
     {
+        playlistQuery = query
         filterList.clearTable()
 
         var tracks = bae.get(query)

@@ -15,6 +15,7 @@ ListView
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
+    property bool menuItemVisible : isMobile
 
     property bool trackDuration
     property bool trackRating
@@ -91,7 +92,7 @@ ListView
     {
         id: tableHeader
         width: parent.width
-        height:  headerBar ? 48 : 0
+        height:  headerBar ?  48 : 0
         color: bae.midLightColor()
         visible: headerBar && count > 0
         z: 999
@@ -99,14 +100,13 @@ ListView
         RowLayout
         {
             anchors.fill: parent
-
+            anchors.centerIn: parent
 
             BabeButton
             {
                 id: closeBtn
                 visible: headerClose
-                width: parent.height
-                height: parent.height
+
                 iconName: "window-close" //"dialog-close"
                 onClicked: headerClosed()
             }
@@ -115,10 +115,8 @@ ListView
             {
                 id: playAllBtn
                 Layout.fillHeight: true
-                width: parent.height
-                height: parent.height
 
-                iconName: /*"amarok_clock"*/ "player-time"
+                iconName: /*"amarok_clock"*/ "media-playback-start"
                 onClicked: playAll()
             }
 
@@ -128,10 +126,10 @@ ListView
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
+
                 elide: Text.ElideRight
                 font.pointSize: 12
-                font.bold: true
-                lineHeight: 0.7
+                font.bold: isMobile
                 color: bae.foregroundColor()
 
                 horizontalAlignment: Text.AlignHCenter
@@ -142,11 +140,8 @@ ListView
             {
                 id: appendBtn
                 Layout.fillHeight: true
-                width: parent.height
-                height: parent.height
 
                 iconName : "archive-insert"//"media-repeat-track-amarok"
-
                 onClicked: appendAll()
             }
 
@@ -154,9 +149,6 @@ ListView
             {
                 id: menuBtn
                 Layout.fillHeight: true
-                width: parent.height
-                height: parent.height
-
                 iconName: /*"application-menu"*/ "overflow-menu"
                 onClicked: {}
             }
@@ -183,12 +175,13 @@ ListView
         coverArt : coverArtVisible
         trackDurationVisible : list.trackDuration
         trackRatingVisible : list.trackRating
+        menuItem: menuItemVisible
 
         Connections
         {
             target: delegate
 
-            onPressAndHold: if(root.isMobile) openItemMenu(index)
+//            onPressAndHold: if(root.isMobile) openItemMenu(index)
             onRightClicked: openItemMenu(index)
 
             onClicked:

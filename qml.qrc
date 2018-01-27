@@ -10,7 +10,6 @@
         <file>widgets/AlbumsView.qml</file>
         <file>assets/cover.png</file>
         <file>data_models/db_model.qml</file>
-        <file>assets/test.jpg</file>
         <file>db/script.sql</file>
         <file>widgets/SettingsView.qml</file>
         <file>utils/Player.js</file>
@@ -44,5 +43,12 @@
         <file>widgets/PlaylistsView/AddPlaylistDialog.qml</file>
         <file>view_models/BabeButton.qml</file>
         <file>utils/Props.js</file>
+        <file>assets/babe.png</file>
+        <file>assets/face-sleeping.svg</file>
+        <file>assets/face-laughing.svg</file>
+        <file>assets/face-hug-left.svg</file>
+        <file>assets/face-crying.svg</file>
+        <file>assets/face-sleeping.png</file>
+        <file>assets/face-hug.png</file>
     </qresource>
 </RCC>

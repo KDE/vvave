@@ -69,7 +69,7 @@ ItemDelegate
                 width: parent.width
                 verticalAlignment:  Qt.AlignVCenter
                 text: playlist
-                font.bold: playlistIcon ? true : false
+                font.bold: false
                 elide: Text.ElideRight
 
                 font.pointSize: 10

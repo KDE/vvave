@@ -1675,7 +1675,7 @@ var Babe = {
     "view-media-playlist" : Icon.libraryMusic,
 
     "application-menu": Icon.dotsVertical,
-    "games-config-options" : Icon.dotsVertical,
+    "games-config-options" : Icon.settings,
 
     /*playback bar*/
 
