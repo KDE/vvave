@@ -64,20 +64,19 @@ function nextTrack()
     else
         next = root.mainPlaylist.list.currentIndex+1 >= root.mainPlaylist.list.count? 0 : root.mainPlaylist.list.currentIndex+1
 
-    root.mainPlaylist.list.currentIndex = next
-    playTrack(root.mainPlaylist.list.model.get(next))
+    root.mainPlaylist.prevTrackIndex = root.mainPlaylist.list.currentIndex
+    playAt(next)
 }
 
 function previousTrack()
 {
-    var previous = root.mainPlaylist.list.currentIndex-1 >= 0 ? root.mainPlaylist.list.currentIndex-1 : root.mainPlaylist.list.count-1
-    root.mainPlaylist.list.currentIndex = previous
-    playTrack(root.mainPlaylist.list.model.get(previous))
+    var previous = previous = root.mainPlaylist.list.currentIndex-1 >= 0 ? root.mainPlaylist.list.currentIndex-1 : root.mainPlaylist.list.count-1
+    root.mainPlaylist.prevTrackIndex = root.mainPlaylist.list.currentIndex
+    playAt(previous)
 }
 
-
 function shuffle()
-{
+{    
     var pos =  Math.floor(Math.random() * root.mainPlaylist.list.count)
     return pos
 }
@@ -123,10 +122,7 @@ function appendTrack(track)
             root.mainPlaylist.list.model.append(track)
 
             if(empty === 0 && root.mainPlaylist.list.count>0)
-            {
-                root.mainPlaylist.list.currentIndex = 0
-                playTrack(root.mainPlaylist.list.model.get(0))
-            }
+                playAt(0)
         }
     }
 }

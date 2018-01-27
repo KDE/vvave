@@ -18,6 +18,8 @@ Item
 
     id: mainPlaylistRoot
     property var currentTrack
+    property int currentTrackIndex : 0
+    property int prevTrackIndex : 0
     property string currentArtwork
     property bool shuffle : false
     property int playbackIconSize: isMobile ? 24 : 22
@@ -144,7 +146,7 @@ Item
                 anchors.fill: parent
                 color: bae.midLightColor()
                 opacity: 0.8
-                z: -999                
+                z: -999
             }
             //            onYChanged:
             //            {
@@ -253,6 +255,8 @@ Item
                         iconSize: playbackIconSize
 
                         onClicked: Player.previousTrack()
+                        onPressAndHold: Player.playAt(prevTrackIndex)
+
                     }
 
                     BabeButton
@@ -275,7 +279,7 @@ Item
                         iconSize: playbackIconSize
 
                         onClicked: Player.nextTrack()
-
+                        onPressAndHold: Player.playAt(Player.shuffle())
                     }
 
                     BabeButton
@@ -504,7 +508,13 @@ Item
 
                     }
 
-                    onRowClicked: Player.playTrack(model.get(index))
+                    onRowClicked:
+                    {
+                        prevTrackIndex = currentTrackIndex
+                        currentTrackIndex = currentIndex
+
+                        Player.playAt(index)
+                    }
                     onArtworkDoubleClicked:
                     {
                         var query = Q.GET.albumTracks_.arg(model.get(index).album)

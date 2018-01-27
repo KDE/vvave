@@ -16,7 +16,7 @@ Kirigami.ApplicationWindow
 {
     id: root
     visible: true
-    width: 400
+    width: isMobile ? 800 : 400
     height: 500
     title: qsTr("Babe")
     wideScreen: root.width > coverSize
@@ -127,10 +127,10 @@ Kirigami.ApplicationWindow
 
         onPlaylistViewClicked:
         {
-            if(pageStack.wideMode)
+            if(pageStack.wideMode && !isMobile)
                 root.width = columnWidth
-            else
-                pageStack.currentIndex = 0
+
+            pageStack.currentIndex = 0
 
         }
         onTracksViewClicked:
@@ -278,13 +278,11 @@ Kirigami.ApplicationWindow
                 {
                     currentItem.forceActiveFocus();
                 }
-
                 onCurrentIndexChanged:
                 {
                     currentView = currentIndex
                     if(currentView === 0) mainPlaylist.list.forceActiveFocus()
                     else if(currentView === 1) tracksView.forceActiveFocus()
-
                 }
 
                 TracksView

@@ -16,7 +16,7 @@ ListView
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
     property bool menuItemVisible : isMobile
-
+    property int prevIndex
     property bool trackDuration
     property bool trackRating
 
@@ -181,7 +181,7 @@ ListView
         {
             target: delegate
 
-//            onPressAndHold: if(root.isMobile) openItemMenu(index)
+            //            onPressAndHold: if(root.isMobile) openItemMenu(index)
             onRightClicked: openItemMenu(index)
 
             onClicked:
