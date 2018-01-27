@@ -32,7 +32,7 @@ Menu
         rate = rank
         if(bae.rateTrack(list.model.get(list.currentIndex).url, rate))
         {
-            list.currentItem.trackRating.text = rate
+            list.currentItem.trackRating.text = list.currentItem.setStars(rate)
             list.model.get(list.currentIndex).stars = rate
         }
         if(!root.isMobile)

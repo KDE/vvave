@@ -628,7 +628,7 @@ QVariantList CollectionDB::getSearchedTracks(const KEY &where, const QString &se
     QString queryTxt;
 
     if(where == KEY::PLAYED || where == KEY::STARS || where == KEY::BABE)
-        queryTxt = QString("SELECT * FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
+        queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
                 KEYMAP[where],
                 search);
     else if(where == KEY::WIKI)
@@ -668,7 +668,7 @@ QVariantList CollectionDB::getSearchedTracks(const KEY &where, const QString &se
                 TABLEMAP[TABLE::ARTISTS_TAGS]);
 
     else
-        queryTxt = QString("SELECT * FROM %1 WHERE %2 LIKE \"%%3%\"").arg(TABLEMAP[TABLE::TRACKS],
+        queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 LIKE \"%%3%\"").arg(TABLEMAP[TABLE::TRACKS],
                 KEYMAP[where],
                 search);
 

@@ -27,7 +27,7 @@ Kirigami.PageRow
     separatorVisible: wideMode
     initialPage:[playlistList, playlistViewDrawer]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
-interactive: false
+    interactive: false
     Page
     {
         id: playlistList
@@ -97,8 +97,8 @@ interactive: false
             height: parent.height
             quickPlayVisible: true
             coverArtVisible: true
-            //            trackRating: true
-            //            trackDuration: true
+            trackRating: true
+            trackDuration: false
             headerBar: true
             headerClose: !playlistViewRoot.wideMode
             headerTitle: playlistViewRoot.wideMode ? "" : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist

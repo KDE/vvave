@@ -11,6 +11,8 @@ BabeTable
     headerClose: true
     holder.message: "No search results!"
     coverArtVisible: true
+    trackDuration: true
+    trackRating: true
     function populate(tracks)
     {
         searchTable.clearTable()

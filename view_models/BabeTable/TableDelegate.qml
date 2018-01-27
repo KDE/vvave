@@ -146,7 +146,7 @@ ItemDelegate
             {
                 anchors.fill: parent
                 rows:2
-                columns:3
+                columns: sameAlbum ? 4 : 3
 
                 Label
                 {
@@ -182,7 +182,6 @@ ItemDelegate
                     text: title
                     font.bold: !sameAlbum
                     elide: Text.ElideRight
-                    visible: true
                     font.pointSize: 10
                     color: textColor
 
@@ -237,7 +236,7 @@ ItemDelegate
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.row: 1
-                    Layout.column: 3
+                    Layout.column: trackDurationVisible && sameAlbum ? 4 : 3
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter
                     text: player.transformTime(duration)
@@ -253,11 +252,12 @@ ItemDelegate
                     visible: trackRatingVisible
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    Layout.row: 2
+                    Layout.row: trackRatingVisible && sameAlbum ? 1 : 2
                     Layout.column: 3
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter
-                    text: stars
+                     font.family: "Material Design Icons"
+                    text: setStars(stars)
                     font.bold: false
                     elide: Text.ElideRight
                     font.pointSize: 8
@@ -285,26 +285,31 @@ ItemDelegate
 
     function setStars(stars)
     {
-
-        switch (parseInt(stars))
+        switch (stars)
         {
+        case "0":
         case 0:
             return  " ";
 
+        case "1":
         case 1:
-            return  "\xe2\x98\x86 ";
+            return  "\uf4CE";
 
+        case "2":
         case 2:
-            return "\xe2\x98\x86 \xe2\x98\x86 ";
+            return "\uf4CE \uf4CE";
 
+        case "3":
         case 3:
-            return  "\xe2\x98\x86 \xe2\x98\x86 \xe2\x98\x86 ";
+            return  "\uf4CE \uf4CE \uf4CE";
 
+        case "4":
         case 4:
-            return  "\xe2\x98\x86 \xe2\x98\x86 \xe2\x98\x86 \xe2\x98\x86 ";
+            return  "\uf4CE \uf4CE \uf4CE \uf4CE";
 
+        case "5":
         case 5:
-            return "\xe2\x98\x86 \xe2\x98\x86 \xe2\x98\x86 \xe2\x98\x86 \xe2\x98\x86 ";
+            return "\uf4CE \uf4CE \uf4CE \uf4CE \uf4CE";
 
         default: return "error";
         }
