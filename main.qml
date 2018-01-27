@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.2 as Kirigami
+import QtQuick.Controls.Material 2.1
 
 import "db/Queries.js" as Q
 import "utils/Player.js" as Player
@@ -22,6 +23,12 @@ Kirigami.ApplicationWindow
     height: 500
     title: qsTr("Babe")
     wideScreen: root.width > coverSize
+
+    Material.theme: isMobile ? Material.Dark : Material.Light
+    Material.accent: bae.babeColor()
+    Material.background: bae.backgroundColor()
+    Material.primary: bae.backgroundColor()
+    Material.foreground: bae.foregroundColor()
 
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
 

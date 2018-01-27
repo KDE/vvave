@@ -42,7 +42,7 @@ BabeGrid
     {
         id: drawer
 
-        height:  parent.height * 0.4
+        height: parent.height * 0.4
         x: pageStack.wideMode ? columnWidth+1 : 0
         width: pageStack.wideMode ? albumsViewGrid.width-1 : albumsViewGrid.width
         edge: Qt.BottomEdge

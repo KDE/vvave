@@ -16,7 +16,7 @@ Drawer
     interactive: true
     focus: true
     modal:true
-
+    dragMargin :0
     signal iconSizeChanged(int size)
 
     function load(folderUrl)
