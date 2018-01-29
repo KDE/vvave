@@ -11,6 +11,8 @@ unix:linux:!android:
 include(kde/kde.pri)
 }
 
+TARGET = babe
+TEMPLATE = app
 
 CONFIG += c++11
 

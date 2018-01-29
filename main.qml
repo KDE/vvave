@@ -17,14 +17,14 @@ Kirigami.ApplicationWindow
 {
     id: root
     visible: true
-    width: !isMobile ? bae.screenGeometry("width")*0.45 : 400
+    width: !isMobile ? wideSize : 400
     minimumWidth: !isMobile ? columnWidth : 0
-    minimumHeight:  !isMobile ? columnWidth : 0
+    minimumHeight:  !isMobile ? columnWidth+64 : 0
     height: 500
     title: qsTr("Babe")
     wideScreen: root.width > coverSize
 
-    Material.theme: isMobile ? Material.Dark : Material.Light
+    Material.theme: Material.Light
     Material.accent: bae.babeColor()
     Material.background: bae.backgroundColor()
     Material.primary: bae.backgroundColor()
@@ -35,7 +35,7 @@ Kirigami.ApplicationWindow
     readonly property bool isMobile: bae.isMobile()
     readonly property int maxW : root.maximumWidth
     readonly property int maxH : root.maximumHeight
-
+    readonly property int wideSize : bae.screenGeometry("width")*0.45
     property int columnWidth: Kirigami.Units.gridUnit * 20
     property int coverSize: columnWidth*0.65
     //    property int columnWidth: Math.sqrt(root.width*root.height)*0.4
@@ -138,29 +138,43 @@ Kirigami.ApplicationWindow
 
         onPlaylistViewClicked:
         {
-            if(pageStack.wideMode && !isMobile)
+            if(!isMobile && pageStack.wideMode)
                 root.width = columnWidth
+            else root.width = wideSize
+
 
             pageStack.currentIndex = 0
 
         }
         onTracksViewClicked:
         {
+            if(!isMobile && !pageStack.wideMode)
+                root.width = wideSize
+
             pageStack.currentIndex = 1
             currentView = 0
         }
         onAlbumsViewClicked:
         {
+            if(!isMobile && !pageStack.wideMode)
+                root.width = wideSize
+
             pageStack.currentIndex = 1
             currentView = 1
         }
         onArtistsViewClicked:
         {
+            if(!isMobile && !pageStack.wideMode)
+                root.width = wideSize
+
             pageStack.currentIndex = 1
             currentView = 2
         }
         onPlaylistsViewClicked:
         {
+            if(!isMobile && !pageStack.wideMode)
+                root.width = wideSize
+
             pageStack.currentIndex = 1
             currentView = 3
         }

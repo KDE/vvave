@@ -50,5 +50,6 @@
         <file>assets/face-crying.svg</file>
         <file>assets/face-sleeping.png</file>
         <file>assets/face-hug.png</file>
+        <file>org.kde.babe.desktop</file>
     </qresource>
 </RCC>
