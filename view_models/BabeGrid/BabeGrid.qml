@@ -6,13 +6,12 @@ Pane
 {
     id: gridPage
     padding: 20
-    property int hintSize : Math.sqrt(root.width*root.height)*0.25
     property int albumSize:
     {
+        var hintSize = Math.sqrt(root.width*root.height)*0.25
+
         if(hintSize > 150)
             150
-        else if (hintSize < 100)
-            100
         else
             hintSize
     }
@@ -23,6 +22,7 @@ Pane
     property alias grid: grid
     signal albumCoverClicked(string album, string artist)
     signal bgClicked()
+
     width: 500
     height: 400
 
@@ -68,9 +68,8 @@ Pane
         height: parent.height
 
         anchors.horizontalCenter: parent.horizontalCenter
-        cellWidth: albumSize + albumSpacing
-        cellHeight:  parseInt(albumSize+(albumSize*0.6))
-
+        cellWidth: albumSize +(albumSize*0.2)
+        cellHeight:  albumSize+(albumSize*0.8)
         highlightFollowsCurrentItem: false
 
         focus: true
@@ -108,14 +107,14 @@ Pane
 
         delegate: BabeAlbum
         {
-            id: delegate
+            id: albumDelegate
 
             albumSize : gridPage.albumSize
             albumRadius: gridPage.albumRadius
             albumCard: albumCardVisible
             Connections
             {
-                target: delegate
+                target: albumDelegate
                 onAlbumClicked:
                 {
                     var album = grid.model.get(index).album

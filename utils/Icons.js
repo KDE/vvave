@@ -1722,5 +1722,9 @@ var Babe = {
     "player-time" : Icon.playBoxOutline,
     "media-repeat-track-amarok": Icon.playlistPlay,
     "archive-insert": Icon.playlistPlus,
-    "amarok_clock" : Icon.playlistPlay
+    "amarok_clock" : Icon.playlistPlay,
+
+    /*others*/
+
+    "gohome" : Icon.home
 }

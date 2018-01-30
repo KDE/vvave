@@ -30,10 +30,10 @@ BabeGrid
     signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
-//    transform: Translate
-//    {
-//        y: (drawer.position * albumsViewGrid.height * 0.33)*-1
-//    }
+    transform: Translate
+    {
+        y: (drawer.position * albumsViewGrid.height * 0.33)*-1
+    }
 
     onBgClicked: if(drawer.visible) drawer.close()
     onFocusChanged:  drawer.close()

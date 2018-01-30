@@ -66,9 +66,10 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     //    if(!connection->check_existance(TABLEMAP[TABLE::SOURCES], KEYMAP[KEY::URL], BAE::MusicPath))
 
     if(BAE::isMobile())
-        this->populateDB({BAE::MusicPath, BAE::DownloadsPath});
+        this->populateDB(QStringList()<<BAE::MusicPath<<BAE::DownloadsPath<<BAE::MusicPaths<<BAE::DownloadsPaths);
     else
-        checkCollectionBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool());
+        this->populateDB({BAE::MusicPath});
+//        checkCollectionBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool());
 
     connect(this->brainDeamon, &Brain::finished, [this]()
     {
@@ -212,6 +213,7 @@ void BabeSettings::checkCollectionBrainz(const bool &state)
 void BabeSettings::startBrainz(const bool &on, const uint &speed)
 {
     this->brainDeamon->setInterval(speed);
+
     if(on)
         this->brainDeamon->start();
     else
@@ -224,6 +226,7 @@ void BabeSettings::populateDB(const QStringList &paths)
     qDebug() << "Function Name: " << Q_FUNC_INFO
              << "new path for database action: " << paths;
     auto newPaths = paths;
+
     for(auto path : newPaths)
         if(path.startsWith("file://"))
             path.replace("file://", "");

@@ -19,15 +19,7 @@ Drawer
     dragMargin :0
     signal iconSizeChanged(int size)
 
-    function load(folderUrl)
-    {
-        folderPicker.dirList.clearTable()
-        var dirs = bae.getDirs(folderUrl)
-        for(var path in dirs)
-        {
-            folderPicker.dirList.model.append(dirs[path])
-        }
-    }
+
 
     function scanDir(folderUrl)
     {
@@ -61,14 +53,14 @@ Drawer
         Connections
         {
             target: folderPicker
-            onPathClicked: load(path)
+            onPathClicked: folderPicker.load(path)
 
             onAccepted:
             {
                 listModel.append({url: path})
                 scanDir(path)
             }
-            onGoBack: load(path)
+            onGoBack: folderPicker.load(path)
 
         }
     }
@@ -151,12 +143,14 @@ Drawer
 
                     onClicked:
                     {
-                        if(root.isMobile)
+
+                        if(bae.isMobile())
                         {
                             folderPicker.open()
-                            load(bae.homeDir())
+                            folderPicker.load(bae.homeDir())
                         }else
                             folderDialog.open()
+
                     }
                 }
 

@@ -169,6 +169,7 @@ Item
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
+            width: parent.width
             height: 48
             //            anchors.top: cover.bottom
             visible: list.count > 0
@@ -372,6 +373,7 @@ Item
                 Label
                 {
                     id: currentTrackInfo
+                    Layout.maximumWidth: parent.width*0.7
                     Layout.row: 1
                     Layout.column: 2
                     Layout.fillWidth:true

@@ -6,34 +6,42 @@ ItemDelegate
 {
     id: delegate
     property string textColor: bae.foregroundColor()
+    width: parent.width
+    height: 32
+    //    checkable: true
 
-//    checkable: true
-
-    contentItem: GridLayout
+    RowLayout
     {
-        id: gridLayout
-        width: parent.width
+        id: rowLayout
+        anchors.fill: parent
+        spacing:0
 
-        rows:1
-        columns:1
-
-        Label
+        Item
         {
-            id: folderTitle
-
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.row: 1
-            Layout.column: 1
+            Layout.alignment: Qt.AlignLeft
+            Layout.margins: 15
+            anchors.verticalCenter: parent.verticalCenter
 
-            text: name
-            font.bold: true
-            elide: Text.ElideRight
 
-            font.pointSize: 10
-            color: textColor
+            Label
+            {
+                id: folderTitle
+                width: parent.width
+                height: parent.height
+                verticalAlignment:  Qt.AlignVCenter
 
+                text: name
+                font.bold: true
+                elide: Text.ElideRight
+
+                font.pointSize: 10
+                color: textColor
+
+            }
         }
+
 
     }
 }

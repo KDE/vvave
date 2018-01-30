@@ -6,6 +6,7 @@ QT       += websockets
 QT       += network
 QT       += xml
 
+android: QT += androidextras
 unix:linux:!android:
 {
 include(kde/kde.pri)

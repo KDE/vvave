@@ -6,15 +6,21 @@ function playTrack(track)
     root.mainPlaylist.currentTrack = track
     player.source(root.mainPlaylist.currentTrack.url);
     player.play()
-    root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
+    root.mainPlaylist.playIcon.iconName = "media-playback-pause"
+
+
     var artwork = root.mainPlaylist.currentTrack.artwork
     //    root.mainPlaylist.list.currentItem.playingIndicator = true
-    root.mainPlaylist.currentArtwork = artwork ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
+    root.mainPlaylist.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
 
-    if(!root.active)
-        bae.notifySong(root.mainPlaylist.currentTrack.url)
+    if(!root.isMobile)
+    {
+        root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
 
-    root.mainPlaylist.playIcon.iconName = "media-playback-pause"
+        if(!root.active)
+            bae.notifySong(root.mainPlaylist.currentTrack.url)
+    }
+
 
     if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
         root.mainPlaylist.babeBtnIcon.iconColor = bae.babeColor()
@@ -28,9 +34,9 @@ function playTrack(track)
     else
         root.mainPlaylist.infoView.lyrics =  lyrics
 
-    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
-    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
-    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
+    //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
+    //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
+    //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
 
 }
 
@@ -76,7 +82,7 @@ function previousTrack()
 }
 
 function shuffle()
-{    
+{
     var pos =  Math.floor(Math.random() * root.mainPlaylist.list.count)
     return pos
 }
@@ -115,29 +121,39 @@ function appendTracksAt(tracks, at)
 function appendTrack(track)
 {
     if(track)
-    {
-        var empty = root.mainPlaylist.list.count
-        if((empty > 0 && track.url !== root.mainPlaylist.list.model.get(root.mainPlaylist.list.count-1).url) || empty === 0)
-        {
-            root.mainPlaylist.list.model.append(track)
+        root.mainPlaylist.list.model.append(track)
 
-            if(empty === 0 && root.mainPlaylist.list.count>0)
-                playAt(0)
-        }
-    }
+    //    if(track)
+    //    {
+    //        var empty = root.mainPlaylist.list.count
+    //        if((empty > 0 && track.url !== root.mainPlaylist.list.model.get(root.mainPlaylist.list.count-1).url) || empty === 0)
+    //        {
+    //            root.mainPlaylist.list.model.append(track)
+
+    //            if(empty === 0 && root.mainPlaylist.list.count>0)
+    //                playAt(0)
+    //        }
+    //    }
 }
 
 function addTrack(track)
 {
-    appendTrack(track)
-    root.mainPlaylist.list.positionViewAtEnd()
+    if(track)
+    {
+        appendTrack(track)
+        root.mainPlaylist.list.positionViewAtEnd()
+    }
 }
 
 function appendAll(tracks)
 {
-    for(var i in tracks)
-        appendTrack(tracks[i])
-    root.mainPlaylist.list.positionViewAtEnd()
+    if(tracks)
+    {
+        for(var i in tracks)
+            appendTrack(tracks[i])
+
+        root.mainPlaylist.list.positionViewAtEnd()
+    }
 }
 
 function savePlaylist()
@@ -176,16 +192,21 @@ function cleanPlaylist()
 
 function playAll(tracks)
 {
-    root.mainPlaylist.list.clearTable()
-    root.pageStack.currentIndex = 0
+    if(tracks)
+    {
+        root.mainPlaylist.list.clearTable()
+        root.pageStack.currentIndex = 0
 
-    for(var i = 0; i< tracks.length; i++)
-        appendTrack(tracks[i])
+        for(var i in tracks)
+            appendTrack(tracks[i])
 
-    //    root.mainPlaylist.list.currentIndex = 0
-    //    playTrack(root.mainPlaylist.list.model.get(0))
+        //    root.mainPlaylist.list.currentIndex = 0
+        //    playTrack(root.mainPlaylist.list.model.get(0))
 
-    root.mainPlaylist.list.positionViewAtBeginning()
+        root.mainPlaylist.list.positionViewAtBeginning()
+        playAt(0)
+    }
+
 
 }
 

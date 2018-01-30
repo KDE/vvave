@@ -238,6 +238,7 @@ namespace BAE
         return ret;
     }
     const QString MusicPath = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
+    const QStringList MusicPaths = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
     const QString HomePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
     const QString SettingPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/babe/";
     const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/babe/artwork/";
@@ -245,6 +246,7 @@ namespace BAE
     const QString CachePath = BAE::isMobile() ? BAE::ArtworkPath : QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/";
     const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/youtube/";
     const QString DownloadsPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+    const QStringList DownloadsPaths = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
     const QString NotifyDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
     const QString BabePort = "8483";
     const QString App = "Babe";

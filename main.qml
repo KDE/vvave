@@ -33,14 +33,14 @@ Kirigami.ApplicationWindow
     //    property int columnWidth: Kirigami.Units.gridUnit * 13
 
     readonly property bool isMobile: bae.isMobile()
-    readonly property int maxW : root.maximumWidth
-    readonly property int maxH : root.maximumHeight
     readonly property int wideSize : bae.screenGeometry("width")*0.45
+
     property int columnWidth: Kirigami.Units.gridUnit * 20
-    property int coverSize: columnWidth*0.65
+    property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
+
     //    property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
-    property int toolBarIconSize: isMobile ?  24 : 22
+    readonly property int toolBarIconSize: isMobile ?  24 : 22
     property alias mainPlaylist : mainPlaylist
     //    minimumWidth: columnWidth
 
@@ -140,7 +140,8 @@ Kirigami.ApplicationWindow
         {
             if(!isMobile && pageStack.wideMode)
                 root.width = columnWidth
-            else root.width = wideSize
+            else if(!isMobile && !pageStack.wideMode)
+                root.width = wideSize
 
 
             pageStack.currentIndex = 0

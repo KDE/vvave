@@ -11,6 +11,11 @@
 #include <QDesktopWidget>
 #include <QDirIterator>
 #include <QtQml>
+
+#ifdef Q_OS_ANDROID
+#include <QAndroidJniObject>
+#endif
+
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
 #endif
@@ -65,6 +70,7 @@ void Babe::trackLyrics(const QString &url)
                                       KEYMAP[KEY::URL], url));
 
     if(track.isEmpty()) return;
+
     this->fetchTrackLyrics(track.first());
 }
 
@@ -434,7 +440,34 @@ QString Babe::moodColor(const int &pos)
 
 QString Babe::homeDir()
 {
+#ifdef Q_OS_ANDROID
+    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
+    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
+    return mediaPath.toString();
+
+//    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android.content.Context", "getExternalFilesDir", "()Ljava/io/File;");
+//    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
+//    return mediaPath.toString();
+#else
+    return BAE::HomePath;
+#endif
+}
+
+QString Babe::musicDir()
+{
     return BAE::MusicPath;
+}
+
+QString Babe::sdDir()
+{
+#ifdef Q_OS_ANDROID
+    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
+    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
+    return mediaPath.toString();
+#else
+    return homeDir();
+#endif
+
 }
 
 QVariantList Babe::getDirs(const QString &pathUrl)
@@ -492,9 +525,9 @@ uint Babe::sizeHint(const uint &hint)
 
 QString Babe::icon(const QString &icon, const int &size)
 {
-   auto pix = QIcon::fromTheme(icon).pixmap(QSize(size, size), QIcon::Mode::Normal, QIcon::State::On);
+    auto pix = QIcon::fromTheme(icon).pixmap(QSize(size, size), QIcon::Mode::Normal, QIcon::State::On);
 
-   return "";
+    return "";
 }
 
 QString Babe::loadCover(const QString &url)

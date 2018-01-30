@@ -90,6 +90,8 @@ public:
     Q_INVOKABLE static QString moodColor(const int &pos);
 
     Q_INVOKABLE static QString homeDir();
+    Q_INVOKABLE static QString musicDir();
+    Q_INVOKABLE static QString sdDir();
 
     Q_INVOKABLE static QVariantList getDirs(const QString &pathUrl);
     Q_INVOKABLE static QVariantMap getParentDir(const QString &path);

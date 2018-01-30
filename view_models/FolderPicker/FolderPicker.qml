@@ -7,7 +7,7 @@ Popup
 {
     //    width: parent.width *0.7
     //    height: parent.height *0.7
-
+    id: folderPickerRoot
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
     modal: true
@@ -22,6 +22,7 @@ Popup
     signal pathClicked(var path)
     signal accepted(var path)
     signal goBack(var path)
+
     background: Rectangle
     {
         anchors.fill: parent
@@ -41,26 +42,17 @@ Popup
             BabeButton
             {
                 Layout.alignment: Qt.AlignLeft
-                id: goBackBtn
-                iconName: "arrow-left"
+                id: homeBtn
+                iconName: "gohome"
                 onClicked:
                 {
-                    var dir = bae.getParentDir(dirList.currentUrl)
-                    dirList.currentUrl = dir.url
-                    dirList.currentName = dir.name
-                    goBack(dirList.currentUrl)
+//                    var dir = bae.getParentDir(dirList.currentUrl)
+//                    dirList.currentUrl = dir.url
+//                    dirList.currentName = dir.name
+//                    goBack(dirList.currentUrl)
+                    load(bae.homeDir())
                 }
 
-            }
-
-            Label
-            {
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-                color: bae.foregroundColor()
-                text:  dirList.currentName
-                elide: Text.ElideRight
-                horizontalAlignment: Qt.AlignHCenter
             }
 
             Button
@@ -94,8 +86,15 @@ Popup
                     pathClicked(dirList.currentUrl)
                 }
             }
-
         }
+    }
+    function load(folderUrl)
+    {
+        dirList.clearTable()
+        var dirs = bae.getDirs(folderUrl)
+        for(var path in dirs)
+            dirList.model.append(dirs[path])
+
     }
 
 }
