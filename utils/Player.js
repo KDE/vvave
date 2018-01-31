@@ -3,41 +3,47 @@ Qt.include("Icons.js")
 
 function playTrack(track)
 {
-    root.mainPlaylist.currentTrack = track
-    player.source(root.mainPlaylist.currentTrack.url);
-    player.play()
-    root.mainPlaylist.playIcon.iconName = "media-playback-pause"
-
-
-    var artwork = root.mainPlaylist.currentTrack.artwork
-    //    root.mainPlaylist.list.currentItem.playingIndicator = true
-    root.mainPlaylist.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
-
-    if(!root.isMobile)
+    if(track)
     {
-        root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
+        root.mainPlaylist.currentTrack = track
 
-        if(!root.active)
-            bae.notifySong(root.mainPlaylist.currentTrack.url)
+        if(bae.fileExists(root.mainPlaylist.currentTrack.url))
+        {
+            player.source(root.mainPlaylist.currentTrack.url);
+            player.play()
+            root.mainPlaylist.playIcon.iconName = "media-playback-pause"
+
+
+            var artwork = root.mainPlaylist.currentTrack.artwork
+            //    root.mainPlaylist.list.currentItem.playingIndicator = true
+            root.mainPlaylist.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
+
+            if(!root.isMobile)
+            {
+                root.title = root.mainPlaylist.currentTrack.title + " - " +root.mainPlaylist.currentTrack.artist
+
+                if(!root.active)
+                    bae.notifySong(root.mainPlaylist.currentTrack.url)
+            }
+
+
+            if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
+                root.mainPlaylist.babeBtnIcon.iconColor = bae.babeColor()
+            else
+                root.mainPlaylist.babeBtnIcon.iconColor = root.mainPlaylist.babeBtnIcon.defaultColor
+
+            var lyrics = root.mainPlaylist.currentTrack.lyrics
+
+            //    if(!lyrics || lyrics.length === 0 || lyrics === "NONE" )
+            //        bae.trackLyrics(root.mainPlaylist.currentTrack.url)
+            //    else
+            root.mainPlaylist.infoView.lyrics =  lyrics
+
+            //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
+            //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
+            //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
+        }else root.missingAlert(root.mainPlaylist.currentTrack)
     }
-
-
-    if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
-        root.mainPlaylist.babeBtnIcon.iconColor = bae.babeColor()
-    else
-        root.mainPlaylist.babeBtnIcon.iconColor = root.mainPlaylist.babeBtnIcon.defaultColor
-
-    var lyrics = root.mainPlaylist.currentTrack.lyrics
-
-    if(!lyrics || lyrics.length === 0 || lyrics === "NONE" )
-        bae.trackLyrics(root.mainPlaylist.currentTrack.url)
-    else
-        root.mainPlaylist.infoView.lyrics =  lyrics
-
-    //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
-    //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
-    //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
-
 }
 
 
@@ -64,21 +70,27 @@ function resumeTrack()
 
 function nextTrack()
 {
-    var next = 0
-    if(root.mainPlaylist.shuffle)
-        next = shuffle()
-    else
-        next = root.mainPlaylist.list.currentIndex+1 >= root.mainPlaylist.list.count? 0 : root.mainPlaylist.list.currentIndex+1
+    if(root.mainPlaylist.list.count>0)
+    {
+        var next = 0
+        if(root.mainPlaylist.shuffle)
+            next = shuffle()
+        else
+            next = root.mainPlaylist.list.currentIndex+1 >= root.mainPlaylist.list.count? 0 : root.mainPlaylist.list.currentIndex+1
 
-    root.mainPlaylist.prevTrackIndex = root.mainPlaylist.list.currentIndex
-    playAt(next)
+        root.mainPlaylist.prevTrackIndex = root.mainPlaylist.list.currentIndex
+        playAt(next)
+    }
 }
 
 function previousTrack()
 {
-    var previous = previous = root.mainPlaylist.list.currentIndex-1 >= 0 ? root.mainPlaylist.list.currentIndex-1 : root.mainPlaylist.list.count-1
-    root.mainPlaylist.prevTrackIndex = root.mainPlaylist.list.currentIndex
-    playAt(previous)
+    if(root.mainPlaylist.list.count>0)
+    {
+        var previous = previous = root.mainPlaylist.list.currentIndex-1 >= 0 ? root.mainPlaylist.list.currentIndex-1 : root.mainPlaylist.list.count-1
+        root.mainPlaylist.prevTrackIndex = root.mainPlaylist.list.currentIndex
+        playAt(previous)
+    }
 }
 
 function shuffle()

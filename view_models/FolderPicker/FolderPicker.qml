@@ -5,13 +5,12 @@ import "../../view_models"
 
 Popup
 {
-    //    width: parent.width *0.7
-    //    height: parent.height *0.7
-    id: folderPickerRoot
-    x: parent.width / 2 - width / 2
-    y: parent.height / 2 - height / 2
+    width: parent.width
+    height: parent.height
+    id: folderPickerRoot   
     modal: true
     focus: true
+    clip: true
     enter: Transition {
         NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
     }
@@ -28,7 +27,6 @@ Popup
         anchors.fill: parent
         color: bae.altColor()
         z: -999
-        radius: 4
     }
 
     Column
@@ -42,17 +40,23 @@ Popup
             BabeButton
             {
                 Layout.alignment: Qt.AlignLeft
+                id: closeBtn
+                iconName: "window-close"
+                onClicked: close()
+            }
+
+            BabeButton
+            {  
                 id: homeBtn
                 iconName: "gohome"
-                onClicked:
-                {
-//                    var dir = bae.getParentDir(dirList.currentUrl)
-//                    dirList.currentUrl = dir.url
-//                    dirList.currentName = dir.name
-//                    goBack(dirList.currentUrl)
-                    load(bae.homeDir())
-                }
+                onClicked: load(bae.homeDir())
+            }
 
+            BabeButton
+            {
+                id: sdBtn
+                iconName: "disks"
+                onClicked: load(bae.sdDir())
             }
 
             Button
@@ -70,6 +74,7 @@ Popup
                     radius: 2
                 }
             }
+
         }
 
         FolderPickerList
@@ -89,7 +94,7 @@ Popup
         }
     }
     function load(folderUrl)
-    {
+    {        
         dirList.clearTable()
         var dirs = bae.getDirs(folderUrl)
         for(var path in dirs)

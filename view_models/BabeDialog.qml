@@ -5,13 +5,14 @@ Dialog
 {
     id: dialog
     property string message
-
+    property string messageBody
+    width: parent.width
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
     parent: ApplicationWindow.overlay
 
+
     modal: true
-    title: "Confirmation"
     standardButtons: Dialog.Yes | Dialog.No
 
     Column
@@ -21,9 +22,18 @@ Dialog
         Label
         {
             text: message ? message : ""
+            width: parent.width
+            elide: Text.ElideRight
+            color: bae.foregroundColor()
+        }
+
+        Label
+        {
+            text: messageBody ? messageBody : ""
+            width: parent.width
+            elide: Text.ElideRight
+            color: bae.foregroundColor()
         }
     }
-
-    onAccepted: console.log("accepted join medos")
 
 }

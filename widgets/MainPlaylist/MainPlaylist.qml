@@ -88,6 +88,7 @@ Item
             Image
             {
                 id: artwork
+                visible: cover.visible
                 width: parent.height < 300 ? parent.height : 300
                 height: parent.height
                 anchors.centerIn: parent
@@ -170,7 +171,9 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             width: parent.width
-            height: 48
+            Layout.preferredHeight: 48
+
+            //            height: 48
             //            anchors.top: cover.bottom
             visible: list.count > 0
 
@@ -240,20 +243,20 @@ Item
                     Layout.alignment: Qt.AlignLeft
 
                     iconName: stackView.currentItem === list ? "documentinfo" : "arrow-left"
-                    iconSize: playbackIconSize
                     onClicked:
                     {
-                        if(stackView.currentItem !== list)
+
+                        if( stackView.currentItem !== list)
                         {
-                            stackView.pop(list)
-                            cover.visible = true
-                        }
-                        else
-                        {
-                            cover.visible = false
+                            cover.visible  = true
+                            stackView.pop(list) }
+                        else {
+                            cover.visible  = false
                             stackView.push(infoView)
                         }
+
                     }
+
                 }
 
 
@@ -266,8 +269,6 @@ Item
                         id: babeBtnIcon
                         iconName: "love" //"love-amarok"
                         iconColor: defaultColor
-                        iconSize: playbackIconSize
-
                         onClicked: Player.babeTrack()
                     }
 
@@ -275,8 +276,6 @@ Item
                     {
                         id: previousBtn
                         iconName: "media-skip-backward"
-                        iconSize: playbackIconSize
-
                         onClicked: Player.previousTrack()
                         onPressAndHold: Player.playAt(prevTrackIndex)
 
@@ -286,8 +285,6 @@ Item
                     {
                         id: playIcon
                         iconName: "media-playback-start"
-                        iconSize: playbackIconSize
-
                         onClicked:
                         {
                             if(player.isPaused()) Player.resumeTrack()
@@ -299,8 +296,6 @@ Item
                     {
                         id: nextBtn
                         iconName: "media-skip-forward"
-                        iconSize: playbackIconSize
-
                         onClicked: Player.nextTrack()
                         onPressAndHold: Player.playAt(Player.shuffle())
                     }
@@ -309,8 +304,6 @@ Item
                     {
                         id: shuffleBtn
                         iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                        iconSize: playbackIconSize
-
                         onClicked: shuffle = !shuffle
                     }
                 }
@@ -323,8 +316,6 @@ Item
                     Layout.alignment: Qt.AlignRight
 
                     iconName: /*"application-menu"*/ "overflow-menu"
-                    iconSize: playbackIconSize
-
                     onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
                 }
 
@@ -337,7 +328,9 @@ Item
             Layout.row: 3
             Layout.column: 1
             Layout.fillWidth: true
-            height: 48
+            Layout.preferredHeight: 48
+
+            //            height: 48
             anchors.top: playbackControls.bottom
             visible: list.count > 0
 

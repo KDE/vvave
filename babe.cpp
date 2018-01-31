@@ -14,6 +14,7 @@
 
 #ifdef Q_OS_ANDROID
 #include <QAndroidJniObject>
+#include <QAndroidJniEnvironment>
 #endif
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
@@ -202,6 +203,11 @@ QStringList Babe::getPlaylists()
     return this->con->getPlaylists();
 }
 
+bool Babe::removeTrack(const QString &url)
+{
+    return this->con->removeTrack(url);
+}
+
 void Babe::notify(const QString &title, const QString &body)
 {
 
@@ -264,6 +270,11 @@ void Babe::savePlaylistPos(const int &pos)
 int Babe::lastPlaylistPos()
 {
     return BAE::loadSettings("PLAYLIST_POS","MAINWINDOW",QVariant(0)).toInt();
+}
+
+bool Babe::fileExists(const QString &url)
+{
+    return BAE::fileExists(url);
 }
 
 QString Babe::baseColor()
@@ -440,14 +451,20 @@ QString Babe::moodColor(const int &pos)
 
 QString Babe::homeDir()
 {
-#ifdef Q_OS_ANDROID
+#if defined(Q_OS_ANDROID)
     QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
     QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-    return mediaPath.toString();
+    qDebug()<<"HOMEDIR FROM ADNROID"<< mediaPath.toString();
 
-//    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android.content.Context", "getExternalFilesDir", "()Ljava/io/File;");
-//    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-//    return mediaPath.toString();
+
+    if(BAE::fileExists("/mnt/extSdCard"))
+        return "/mnt/sdcard";
+    else
+       return mediaPath.toString();
+
+    //    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android.content.Context", "getExternalFilesDir", "()Ljava/io/File;");
+    //    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
+    //    return mediaPath.toString();
 #else
     return BAE::HomePath;
 #endif
@@ -460,10 +477,21 @@ QString Babe::musicDir()
 
 QString Babe::sdDir()
 {
-#ifdef Q_OS_ANDROID
-    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
-    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-    return mediaPath.toString();
+#if defined(Q_OS_ANDROID)
+    //    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
+    //    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
+    //    QString dataAbsPath = mediaPath.toString()+"/Download/";
+    //    QAndroidJniEnvironment env;
+    //    if (env->ExceptionCheck()) {
+    //            // Handle exception here.
+    //            env->ExceptionClear();
+    //    }
+
+    //    qDebug()<<"TESTED SDPATH"<<QProcessEnvironment::systemEnvironment().value("EXTERNAL_SDCARD_STORAGE",dataAbsPath);
+    if(BAE::fileExists("/mnt/extSdCard"))
+        return "/mnt/extSdCard";
+    else
+        return "/mnt/";
 #else
     return homeDir();
 #endif

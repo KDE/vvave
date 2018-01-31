@@ -1726,5 +1726,7 @@ var Babe = {
 
     /*others*/
 
-    "gohome" : Icon.home
+    "gohome" : Icon.home,
+    "sd" : Icon.sd,
+    "disks": Icon.disk
 }

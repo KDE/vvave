@@ -49,6 +49,9 @@ public:
     Q_INVOKABLE bool addPlaylist(const QString &playlist);
     Q_INVOKABLE QStringList getPlaylists();
 
+    Q_INVOKABLE bool removeTrack(const QString &url);
+
+
 
 
     Q_INVOKABLE  void notify(const QString &title, const QString &body);
@@ -68,6 +71,8 @@ public:
 
     Q_INVOKABLE static void savePlaylistPos(const int &pos);
     Q_INVOKABLE static int lastPlaylistPos();
+
+    Q_INVOKABLE static bool fileExists(const QString &url);
 
     /*COLORS*/
     Q_INVOKABLE static QString baseColor();

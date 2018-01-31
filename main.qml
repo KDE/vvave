@@ -30,19 +30,16 @@ Kirigami.ApplicationWindow
     Material.primary: bae.backgroundColor()
     Material.foreground: bae.foregroundColor()
 
-    //    property int columnWidth: Kirigami.Units.gridUnit * 13
-
+    signal missingAlert(var track)
     readonly property bool isMobile: bae.isMobile()
     readonly property int wideSize : bae.screenGeometry("width")*0.45
+    readonly property int toolBarIconSize: isMobile ?  24 : 22
 
     property int columnWidth: Kirigami.Units.gridUnit * 20
     property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
-
-    //    property int columnWidth: Math.sqrt(root.width*root.height)*0.4
     property int currentView : 0
-    readonly property int toolBarIconSize: isMobile ?  24 : 22
+
     property alias mainPlaylist : mainPlaylist
-    //    minimumWidth: columnWidth
 
     pageStack.defaultColumnWidth: columnWidth
     pageStack.initialPage: [mainPlaylist, views]
@@ -67,6 +64,27 @@ Kirigami.ApplicationWindow
 
 
     onClosing: Player.savePlaylist()
+
+    BabeDialog
+    {
+        id: missingDialog
+        title: "Missing file"
+        onAccepted:
+        {
+            bae.removeTrack(mainPlaylist.currentTrack.url)
+            mainPlaylist.list.model.remove(mainPlaylist.list.currentIndex)
+
+        }
+
+    }
+
+    onMissingAlert:
+    {
+        missingDialog.message = track.title +" by "+track.artist+" is missing"
+        missingDialog.messageBody = "Do you want to remove it from your collection?"
+        missingDialog.open()
+    }
+
 
     function runSearch()
     {
@@ -145,8 +163,8 @@ Kirigami.ApplicationWindow
 
 
             pageStack.currentIndex = 0
-
         }
+
         onTracksViewClicked:
         {
             if(!isMobile && !pageStack.wideMode)
@@ -155,6 +173,7 @@ Kirigami.ApplicationWindow
             pageStack.currentIndex = 1
             currentView = 0
         }
+
         onAlbumsViewClicked:
         {
             if(!isMobile && !pageStack.wideMode)
@@ -163,6 +182,7 @@ Kirigami.ApplicationWindow
             pageStack.currentIndex = 1
             currentView = 1
         }
+
         onArtistsViewClicked:
         {
             if(!isMobile && !pageStack.wideMode)
@@ -171,6 +191,7 @@ Kirigami.ApplicationWindow
             pageStack.currentIndex = 1
             currentView = 2
         }
+
         onPlaylistsViewClicked:
         {
             if(!isMobile && !pageStack.wideMode)
@@ -179,6 +200,7 @@ Kirigami.ApplicationWindow
             pageStack.currentIndex = 1
             currentView = 3
         }
+
         onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
     }
 
@@ -233,7 +255,6 @@ Kirigami.ApplicationWindow
                 }
             }
 
-
             BabeButton
             {
                 anchors.right: parent.right
@@ -241,11 +262,7 @@ Kirigami.ApplicationWindow
                 iconName: "edit-clear"
                 onClicked: clearSearch()
             }
-
-
         }
-
-
     }
 
     background: Rectangle
@@ -266,6 +283,8 @@ Kirigami.ApplicationWindow
     MainPlaylist
     {
         id: mainPlaylist
+        anchors.fill: parent
+        clip: true
         Connections
         {
             target: mainPlaylist
@@ -281,14 +300,9 @@ Kirigami.ApplicationWindow
         anchors.fill: parent
         clip: true
 
-        //        transform: Translate {
-        //            x: (settingsDrawer.position * views.width * 0.33)*-1
-        //        }
-
         Column
         {
-            width: parent.width
-            height: parent.height
+            anchors.fill: parent
 
             SwipeView
             {
