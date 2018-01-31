@@ -55,7 +55,7 @@ Popup
             BabeButton
             {
                 id: sdBtn
-                iconName: "disks"
+                iconName: "sd"
                 onClicked: load(bae.sdDir())
             }
 

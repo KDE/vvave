@@ -87,6 +87,7 @@ public:
     Q_INVOKABLE static QString shadowColor();
     Q_INVOKABLE static QString altColor();
     Q_INVOKABLE static QString babeColor();
+    Q_INVOKABLE static void androidStatusBarColor();
 
     Q_INVOKABLE static bool isMobile();
     Q_INVOKABLE static int screenGeometry(QString side);

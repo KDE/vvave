@@ -223,6 +223,13 @@ DISTFILES += \
     android-openssl.pri \
 #    3rdparty/kirigami/kirigami.pri
     kde/kde.pri \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
 
 
 HEADERS += \
@@ -349,4 +356,6 @@ HEADERS += \
         taglib/taglib_config.h \
     babe.h \
     settings/BabeSettings.h
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

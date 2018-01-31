@@ -94,7 +94,7 @@ ListView
         width: parent.width
         height:  headerBar ?  48 : 0
         color: bae.midLightColor()
-        visible: headerBar && count > 0
+        visible: headerBar
         z: 999
 
         RowLayout
@@ -115,6 +115,7 @@ ListView
             {
                 id: playAllBtn
                 Layout.fillHeight: true
+                visible: headerBar && count > 0
 
                 iconName: /*"amarok_clock"*/ "media-playback-start"
                 onClicked: playAll()
@@ -140,6 +141,7 @@ ListView
             {
                 id: appendBtn
                 Layout.fillHeight: true
+                visible: headerBar && count > 0
 
                 iconName : "archive-insert"//"media-repeat-track-amarok"
                 onClicked: appendAll()

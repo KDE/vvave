@@ -568,6 +568,7 @@ Item
                                 Player.appendTrack(tracks[pos])
 
                         }
+                        Player.playAt(0)
 
                         //                                    var pos = bae.lastPlaylistPos()
                         //                                    console.log("POSSS:", pos)

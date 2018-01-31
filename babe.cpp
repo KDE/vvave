@@ -15,6 +15,7 @@
 #ifdef Q_OS_ANDROID
 #include <QAndroidJniObject>
 #include <QAndroidJniEnvironment>
+#include <QtAndroid>
 #endif
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
@@ -414,6 +415,19 @@ QString Babe::babeColor()
     return "#E91E63";
 }
 
+void Babe::androidStatusBarColor()
+{
+#if defined(Q_OS_ANDROID)
+
+    QtAndroid::runOnAndroidThread([=]() {
+        QAndroidJniObject window = QtAndroid::androidActivity().callObjectMethod("getWindow", "()Landroid/view/Window;");
+        window.callMethod<void>("addFlags", "(I)V", 0x80000000);
+        window.callMethod<void>("clearFlags", "(I)V", 0x04000000);
+        window.callMethod<void>("setStatusBarColor", "(I)V", QColor(Babe::backgroundColor()).rgba());
+    });
+#endif
+}
+
 bool Babe::isMobile()
 {
     return BAE::isMobile();
@@ -460,7 +474,7 @@ QString Babe::homeDir()
     if(BAE::fileExists("/mnt/extSdCard"))
         return "/mnt/sdcard";
     else
-       return mediaPath.toString();
+        return mediaPath.toString();
 
     //    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android.content.Context", "getExternalFilesDir", "()Ljava/io/File;");
     //    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
@@ -490,6 +504,8 @@ QString Babe::sdDir()
     //    qDebug()<<"TESTED SDPATH"<<QProcessEnvironment::systemEnvironment().value("EXTERNAL_SDCARD_STORAGE",dataAbsPath);
     if(BAE::fileExists("/mnt/extSdCard"))
         return "/mnt/extSdCard";
+    else if(BAE::fileExists("/mnt/ext_sdcard"))
+        return "/mnt/ext_sdcard";
     else
         return "/mnt/";
 #else
