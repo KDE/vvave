@@ -55,6 +55,8 @@ void Brain::setInterval(const uint &value)
 
 void Brain::setInfo(DB_LIST dataList, ONTOLOGY ontology, QList<SERVICES> services, INFO info, RECURSIVE recursive, void (*cb)(DB))
 {
+    if(!go) return;
+
     this->pulpo.registerServices(services);
     this->pulpo.setOntology(ontology);
     this->pulpo.setInfo(info);
@@ -63,13 +65,12 @@ void Brain::setInfo(DB_LIST dataList, ONTOLOGY ontology, QList<SERVICES> service
 
     for(auto data : dataList)
     {
-        if(!go) return;
-
-        if (cb != nullptr) cb(data);
-        this->pulpo.feed(data, recursive);
-
-        this->t.msleep(this->interval);
-
+        if(this->go)
+        {
+            if (cb != nullptr) cb(data);
+            this->pulpo.feed(data, recursive);
+            this->t.msleep(this->interval);
+        }
     }
 }
 

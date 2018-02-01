@@ -9,8 +9,10 @@ import "db/Queries.js" as Q
 import "utils/Player.js" as Player
 import "utils"
 import "widgets"
+import "widgets/MyBeatView"
 import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
+import "widgets/SettingsView"
 import "view_models"
 
 Kirigami.ApplicationWindow
@@ -171,15 +173,12 @@ Kirigami.ApplicationWindow
         size: toolBarIconSize
         currentIndex: currentView
         backgroundColor: pageStack.currentIndex === 0 && !pageStack.wideMode ? bae.babeColor() : bae.backgroundColor()
-
+        textColor: pageStack.currentIndex === 0 && !pageStack.wideMode ? "#FFF" : bae.foregroundColor()
 
         onPlaylistViewClicked:
         {
             if(!isMobile && pageStack.wideMode)
                 root.width = columnWidth
-            else if(!isMobile && !pageStack.wideMode)
-                root.width = wideSize
-
 
             pageStack.currentIndex = 0
         }
@@ -252,42 +251,71 @@ Kirigami.ApplicationWindow
             }
         }
 
-        TextInput
+        RowLayout
         {
-            id: searchInput
             anchors.fill: parent
-            anchors.centerIn: parent
-            color: bae.foregroundColor()
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment:  Text.AlignVCenter
-            selectByMouse: !root.isMobile
-            selectionColor: bae.hightlightColor()
-            selectedTextColor: bae.foregroundColor()
-            property string placeholderText: "Search..."
-
-            onAccepted: runSearch()
 
             BabeButton
             {
                 id: searchBtn
-                anchors.centerIn: parent
-                visible: !(searchInput.focus || searchInput.text)
-
+                Layout.fillHeight: true
+                iconColor: currentView === 5 ? bae.babeColor() : bae.foregroundColor()
+                //                visible: !(searchInput.focus || searchInput.text)
                 iconName: "edit-find" //"search"
                 onClicked:
                 {
-                    searchInput.forceActiveFocus()
+                    if(searchView.count>0)
+                    {
+                        currentView = 5
+                        pageStack.currentIndex = 1
 
+                    }else
+                        searchInput.forceActiveFocus()
+
+                }
+            }
+
+
+            Item
+            {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+
+                TextInput
+                {
+                    id: searchInput
+                    color: bae.foregroundColor()
+                    anchors.fill: parent
+                    anchors.centerIn: parent
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment:  Text.AlignVCenter
+                    selectByMouse: !root.isMobile
+                    selectionColor: bae.hightlightColor()
+                    selectedTextColor: bae.foregroundColor()
+                    property string placeholderText: "Search..."
+
+                    onAccepted: runSearch()
+
+                    BabeButton
+                    {
+                        anchors.right: parent.right
+                        visible: searchInput.activeFocus
+                        iconName: "edit-clear"
+                        onClicked: clearSearch()
+                    }
                 }
             }
 
             BabeButton
             {
-                anchors.right: parent.right
-                visible: searchInput.activeFocus
-                iconName: "edit-clear"
-                onClicked: clearSearch()
+                id: settingsIcon
+                Layout.fillHeight: true
+
+                iconName: "games-config-options"
+                iconColor: settingsDrawer.visible  ? bae.babeColor() : bae.foregroundColor()
+                onClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
             }
+
         }
     }
 
@@ -408,7 +436,7 @@ Kirigami.ApplicationWindow
                     }
                 }
 
-                Item
+                LogginForm
                 {
                     id: babeView
                 }

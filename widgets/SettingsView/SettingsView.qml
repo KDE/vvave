@@ -4,25 +4,25 @@ import QtQuick.Controls 2.2
 import Qt.labs.platform 1.0
 import org.kde.kirigami 2.2 as Kirigami
 
-import "../view_models"
-import "../view_models/FolderPicker"
+import "../../view_models"
+import "../../view_models/FolderPicker"
 
 Kirigami.GlobalDrawer
 {
     id: settingsView
-    handleVisible: true
+    handleVisible: false
     signal iconSizeChanged(int size)
 
     readonly property bool activeBrainz : bae.brainzState()
 
     y: header.height
     height: parent.height - header.height - footer.height
-//    width: root.pageStack.wideMode ? views.width -1: root.width
+    //    width: root.pageStack.wideMode ? views.width -1: root.width
     edge: Qt.RightEdge
-//    //    interactive: true
-//    focus: true
-//    modal:true
-//    dragMargin :0
+    //    //    interactive: true
+    //    focus: true
+    //    modal:true
+    //    dragMargin :0
 
     topPadding: 0
     bottomPadding: 0
@@ -30,7 +30,7 @@ Kirigami.GlobalDrawer
     rightPadding: 0
 
     Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+//    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
 
     function scanDir(folderUrl)
@@ -38,12 +38,12 @@ Kirigami.GlobalDrawer
         bae.scanDir(folderUrl)
     }
 
-//    background: Rectangle
-//    {
-//        anchors.fill: parent
-//        color: bae.backgroundColor()
-//        z: -999
-//    }
+        background: Rectangle
+        {
+            anchors.fill: parent
+            color: bae.backgroundColor()
+            z: -999
+        }
 
     //    contentItem: Text
     //    {
@@ -84,7 +84,7 @@ Kirigami.GlobalDrawer
     }
 
 
-    topContent: ColumnLayout
+    topContent:    ColumnLayout
     {
         width: settingsView.width
         height: settingsView.height * 0.5
@@ -180,14 +180,8 @@ Kirigami.GlobalDrawer
             }
         }
 
-        Kirigami.Separator
-        {
-            Layout.fillWidth: true
-            Layout.maximumHeight: 1//implicitHeight
-        }
 
     }
-
 
     actions: [
         Kirigami.Action
@@ -210,21 +204,41 @@ Kirigami.GlobalDrawer
         },
         Kirigami.Action
         {
-            text: "Toolbar icon size"
+            text: "Appearance"
+
             Kirigami.Action
             {
-                text: "16"
-                onTriggered : iconSizeChanged(text)
+                text: "Toolbar icon size"
+                Kirigami.Action
+                {
+                    text: "16"
+                    onTriggered : iconSizeChanged(text)
+                }
+                Kirigami.Action
+                {
+                    text: isMobile ? "24" : "22"
+                    onTriggered : iconSizeChanged(text)
+                }
+                Kirigami.Action
+                {
+                    text: "32"
+                    onTriggered : iconSizeChanged(text)
+                }
             }
+
             Kirigami.Action
             {
-                text: "24"
-                onTriggered : iconSizeChanged(text)
-            }
-            Kirigami.Action
-            {
-                text: "32"
-                onTriggered : iconSizeChanged(text)
+                text: "Theme"
+                Kirigami.Action
+                {
+                    text: "Light"
+                    onTriggered : iconSizeChanged(text)
+                }
+                Kirigami.Action
+                {
+                    text: "Dark"
+                    onTriggered : iconSizeChanged(text)
+                }
             }
         }
     ]

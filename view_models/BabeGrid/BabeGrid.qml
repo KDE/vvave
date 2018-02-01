@@ -12,7 +12,7 @@ Pane
     {
         if(!isMobile)
         {
-            Math.sqrt(screenSize)*0.15
+            Math.sqrt(screenSize)*0.15 > 150 ? 150 : Math.sqrt(screenSize)*0.15
         }else
         {
 

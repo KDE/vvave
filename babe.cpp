@@ -370,24 +370,24 @@ QString Babe::hightlightTextColor()
 QString Babe::midColor()
 {
 #if defined(Q_OS_ANDROID)
-    return "#3e444b";
+    return "#1f2226";
 #elif defined(Q_OS_LINUX)
     QWidget widget;
     return widget.palette().color(QPalette::Mid).name();
 #elif defined(Q_OS_WIN32)
-    return "#3e444b";
+    return "#1f2226";
 #endif
 }
 
 QString Babe::midLightColor()
 {
 #if defined(Q_OS_ANDROID)
-    return "#3e444b";
+    return "#434951";
 #elif defined(Q_OS_LINUX)
     QWidget widget;
     return widget.palette().color(QPalette::Midlight).name();
 #elif defined(Q_OS_WIN32)
-    return "#3e444b";
+    return "#434951";
 #endif
 }
 
