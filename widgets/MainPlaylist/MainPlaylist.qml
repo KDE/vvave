@@ -98,46 +98,16 @@ Item
                 MouseArea
                 {
                     anchors.fill: parent
-                    onDoubleClicked:
-                    {
-                        //                        var query = Q.GET.albumTracks_.arg(currentTrack.album)
-                        //                        query = query.arg(currentTrack.artist)
+                    onDoubleClicked: gomini()
+//                    {
+//                                                var query = Q.GET.albumTracks_.arg(currentTrack.album)
+//                                                query = query.arg(currentTrack.artist)
 
-                        //                        var tracks = bae.get(query)
-                        //                        coverDoubleClicked(tracks)
-
-                        if(!isMobile)
-                        {
-                            if(root.header.visible)
-                            {
-                                root.maximumWidth = columnWidth
-                                root.minimumWidth = artwork.width
-                                root.maximumHeight = mainPlaylistItem.y
-                                root.minimumHeight = mainPlaylistItem.y
-                                root.header.visible = false
-                                root.footer.visible = false
-                                infoBtn.visible = false
-                                menuBtn.visible = false
-
-                            }else
-                            {
-                                cover.y = 0
-                                root.maximumWidth = bae.screenGeometry("width")
-                                root.minimumWidth = columnWidth
-                                root.maximumHeight = bae.screenGeometry("height")
-                                root.minimumHeight = columnWidth
+//                                                var tracks = bae.get(query)
+//                                                coverDoubleClicked(tracks)
 
 
-
-                                root.width = columnWidth
-                                root.height = 700
-                                root.header.visible = true
-                                root.footer.visible = true
-                                infoBtn.visible = true
-                                menuBtn.visible = true
-                            }
-                        }
-                    }
+//                    }
 
                     onPressAndHold:
                     {
@@ -584,6 +554,39 @@ Item
                     height: parent.height
                 }
 
+            }
+        }
+    }
+
+    function gomini()
+    {
+        if(!isMobile)
+        {
+            if(root.header.visible)
+            {
+                root.maximumWidth = columnWidth
+                root.minimumWidth = columnWidth
+                root.maximumHeight = mainPlaylistItem.y
+                root.minimumHeight = mainPlaylistItem.y
+                root.header.visible = false
+                root.footer.visible = false
+                infoBtn.visible = false
+                menuBtn.visible = false
+
+            }else
+            {
+                cover.y = 0
+                root.maximumWidth = bae.screenGeometry("width")
+                root.minimumWidth = columnWidth
+                root.maximumHeight = bae.screenGeometry("height")
+                root.minimumHeight = columnWidth
+
+                root.width = columnWidth
+                root.height = 700
+                root.header.visible = true
+                root.footer.visible = true
+                infoBtn.visible = true
+                menuBtn.visible = true
             }
         }
     }

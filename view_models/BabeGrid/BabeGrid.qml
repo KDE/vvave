@@ -6,14 +6,23 @@ Pane
 {
     id: gridPage
     padding: 20
+    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
+
     property int albumSize:
     {
-        var hintSize = Math.sqrt(root.width*root.height)*0.25
+        if(!isMobile)
+        {
+            Math.sqrt(screenSize)*0.15
+        }else
+        {
 
-        if(hintSize > 150)
-            150
-        else
-            hintSize
+            var hintSize = Math.sqrt(root.width*root.height)*0.25
+
+            if(hintSize > 150)
+                150
+            else
+                hintSize
+        }
     }
     property int albumSpacing: 20
     property int albumRadius : 0
@@ -66,7 +75,6 @@ Pane
 
         width: Math.min(model.count, Math.floor(parent.width/cellWidth))*cellWidth
         height: parent.height
-
         anchors.horizontalCenter: parent.horizontalCenter
         cellWidth: albumSize +(albumSize*0.2)
         cellHeight:  albumSize+(albumSize*0.8)
@@ -125,7 +133,7 @@ Pane
             }
         }
 
-        ScrollBar.vertical:BabeScrollBar {}
+        ScrollBar.vertical:BabeScrollBar { visible: true }
     }
 
 }

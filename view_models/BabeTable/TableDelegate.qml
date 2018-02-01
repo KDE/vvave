@@ -5,10 +5,7 @@ import "../../view_models"
 
 ItemDelegate
 {
-    id: delegateRoot
-
-    readonly property int rowHeight: isMobile ? 64 : 52
-    readonly property int rowHeightAlt: isMobile ? 48 : 32
+    id: delegateRoot  
 
     width: parent.width
     height: sameAlbum ? rowHeightAlt : rowHeight

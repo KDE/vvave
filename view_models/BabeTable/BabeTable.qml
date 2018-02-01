@@ -154,7 +154,6 @@ ListView
                 iconName: /*"application-menu"*/ "overflow-menu"
                 onClicked: {}
             }
-
         }
     }
 

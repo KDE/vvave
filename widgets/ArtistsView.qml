@@ -12,8 +12,8 @@ BabeGrid
 {
     id: artistsViewGrid
     visible: true
-//    albumCardVisible: false
-//    albumRadius: Math.min(albumSize, albumSize)
+    //    albumCardVisible: false
+    //    albumRadius: Math.min(albumSize, albumSize)
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
@@ -21,10 +21,10 @@ BabeGrid
     signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
-    //    transform: Translate
-    //    {
-    //        y: (drawer.position * artistsViewGrid.height * 0.33)*-1
-    //    }
+    //        transform: Translate
+    //        {
+    //            y: (drawer.position * artistsViewGrid.height)*-1
+    //        }
 
     onBgClicked: if(drawer.visible) drawer.close()
     onFocusChanged:  drawer.close()
@@ -32,7 +32,20 @@ BabeGrid
     Drawer
     {
         id: drawer
-        height: parent.height * 0.4
+        height:
+        {
+            var customHeight = (drawerList.count*rowHeight)+48
+            if(customHeight > parent.height)
+                parent.height-root.header.height
+            else
+            {
+                if(customHeight < parent.height*0.4)
+                    parent.height*0.4
+                else
+                    customHeight
+            }
+
+        }
         x: pageStack.wideMode ? columnWidth+1 : 0
         width: pageStack.wideMode ? artistsViewGrid.width-1 : artistsViewGrid.width
         edge: Qt.BottomEdge

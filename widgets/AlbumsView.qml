@@ -13,16 +13,16 @@ BabeGrid
     id: albumsViewGrid
     visible: true
 
-//    property int hintSize : Math.sqrt(root.width*root.height)*0.25
-//    albumSize:
-//    {
-//        if(hintSize > 150)
-//            150
-//        else if (hintSize < 100)
-//            root.isMobile && hintSize < 100 ? 100 : 130
-//        else
-//            hintSize
-//    }
+    //    property int hintSize : Math.sqrt(root.width*root.height)*0.25
+    //    albumSize:
+    //    {
+    //        if(hintSize > 150)
+    //            150
+    //        else if (hintSize < 100)
+    //            root.isMobile && hintSize < 100 ? 100 : 130
+    //        else
+    //            hintSize
+    //    }
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
@@ -30,10 +30,10 @@ BabeGrid
     signal queueTrack(var track)
     signal appendAlbum(var tracks)
 
-    transform: Translate
-    {
-        y: (drawer.position * albumsViewGrid.height * 0.33)*-1
-    }
+    //    transform: Translate
+    //    {
+    //        y: (drawer.height)*-1
+    //    }
 
     onBgClicked: if(drawer.visible) drawer.close()
     onFocusChanged:  drawer.close()
@@ -42,7 +42,20 @@ BabeGrid
     {
         id: drawer
 
-        height: parent.height * 0.4
+        height:
+        {
+            var customHeight = (drawerList.count*rowHeight)+48
+            if(customHeight > parent.height)
+                parent.height-root.header.height
+            else
+            {
+                if(customHeight < parent.height*0.4)
+                    parent.height*0.4
+                else
+                    customHeight
+            }
+
+        }
         x: pageStack.wideMode ? columnWidth+1 : 0
         width: pageStack.wideMode ? albumsViewGrid.width-1 : albumsViewGrid.width
         edge: Qt.BottomEdge

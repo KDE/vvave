@@ -11,7 +11,7 @@ Drawer
     id: settingsView
     y: header.height
     height: parent.height - header.height - footer.height
-    width: root.pageStack.wideMode ? parent.width* 0.7 : parent.width
+    width: root.pageStack.wideMode ? views.width -1: root.width
     edge: Qt.RightEdge
     interactive: true
     focus: true

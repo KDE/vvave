@@ -32,8 +32,10 @@ Kirigami.ApplicationWindow
 
     signal missingAlert(var track)
     readonly property bool isMobile: bae.isMobile()
-    readonly property int wideSize : bae.screenGeometry("width")*0.45
+    readonly property int wideSize : bae.screenGeometry("width")*0.5
     readonly property int toolBarIconSize: isMobile ?  24 : 22
+    readonly property int rowHeight: isMobile ? 64 : 52
+    readonly property int rowHeightAlt: isMobile ? 48 : 32
 
     property int columnWidth: Kirigami.Units.gridUnit * 20
     property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
