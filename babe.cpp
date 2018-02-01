@@ -242,6 +242,11 @@ void Babe::brainz(const bool &on)
     this->set->checkCollectionBrainz(on);
 }
 
+bool Babe::brainzState()
+{
+    return loadSetting("BRAINZ", "BABE", false).toBool();
+}
+
 QVariant Babe::loadSetting(const QString &key, const QString &group, const QVariant &defaultValue)
 {
     return BAE::loadSettings(key, group, defaultValue);
@@ -412,10 +417,11 @@ QString Babe::altColor()
 
 QString Babe::babeColor()
 {
-    return "#E91E63";
+    return "#f84172";
+//    return "#E91E63";
 }
 
-void Babe::androidStatusBarColor()
+void Babe::androidStatusBarColor(const QString &color)
 {
 #if defined(Q_OS_ANDROID)
 
@@ -423,7 +429,7 @@ void Babe::androidStatusBarColor()
         QAndroidJniObject window = QtAndroid::androidActivity().callObjectMethod("getWindow", "()Landroid/view/Window;");
         window.callMethod<void>("addFlags", "(I)V", 0x80000000);
         window.callMethod<void>("clearFlags", "(I)V", 0x04000000);
-        window.callMethod<void>("setStatusBarColor", "(I)V", QColor(Babe::backgroundColor()).rgba());
+        window.callMethod<void>("setStatusBarColor", "(I)V", QColor(color).rgba());
     });
 #endif
 }

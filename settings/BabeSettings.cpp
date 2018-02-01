@@ -205,8 +205,7 @@ void BabeSettings::handleDirectoryChanged(const QString &dir)
 
 void BabeSettings::checkCollectionBrainz(const bool &state)
 {
-    //    this->refreshCollectionPaths();
-    //    this->collectionWatcher();
+    qDebug()<<"BRAINZ STATE<<"<<state;
     this->startBrainz(state, 3000);
 }
 

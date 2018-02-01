@@ -13,7 +13,7 @@ ToolButton
     icon.name: isMobile ? "" : babeButton.iconName
     icon.width: isMobile ? 0 : babeButton.iconSize
 //    icon.height: isMobile ? 0 : babeButton.iconSize
-    icon.color: isMobile ? "transparent" : (iconColor || defaultColor)
+    icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
 
     BabeIcon
     {

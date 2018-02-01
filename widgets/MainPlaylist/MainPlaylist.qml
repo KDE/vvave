@@ -71,7 +71,7 @@ Item
             Rectangle
             {
                 anchors.fill: parent
-                color: bae.midLightColor()
+                color: bae.midColor()
                 z: -999
             }
 
@@ -81,7 +81,8 @@ Item
                 height: mainPlaylistItem.y
                 source: artwork
                 radius: 100
-                transparentBorder: true
+                transparentBorder: false
+//                opacity: 0.8
                 cached: true
             }
 

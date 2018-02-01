@@ -20,7 +20,7 @@ ToolBar
     signal albumsViewClicked()
     signal artistsViewClicked()
     signal playlistsViewClicked()
-    signal settingsViewClicked()
+    signal babeViewClicked()
     signal playlistViewClicked()
 
 
@@ -61,7 +61,7 @@ ToolBar
             {
                 id: playlistView
                 iconName: /*"headphones"*/ "media-optical-audio"
-                iconColor: pageStack.wideMode || pageStack.currentIndex === 0 ? accentColor : textColor
+                iconColor: textColor
                 iconSize: size
 
                 onClicked: playlistViewClicked()
@@ -69,7 +69,7 @@ ToolBar
                 hoverEnabled: !isMobile
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
-                ToolTip.visible: hovered
+                ToolTip.visible: hovered && !isMobile
                 ToolTip.text: qsTr("Playlist")
             }
         }
@@ -89,7 +89,7 @@ ToolBar
                 hoverEnabled: true
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
-                ToolTip.visible: hovered
+                ToolTip.visible: hovered && !isMobile
                 ToolTip.text: qsTr("Tracks")
             }
 
@@ -104,7 +104,7 @@ ToolBar
                 hoverEnabled: true
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
-                ToolTip.visible: hovered
+                ToolTip.visible: hovered && !isMobile
                 ToolTip.text: qsTr("Albums")
             }
 
@@ -120,7 +120,7 @@ ToolBar
                 hoverEnabled: true
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
-                ToolTip.visible: hovered
+                ToolTip.visible: hovered && !isMobile
                 ToolTip.text: qsTr("Artists")
             }
 
@@ -137,7 +137,7 @@ ToolBar
                 hoverEnabled: !isMobile
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
-                ToolTip.visible: hovered
+                ToolTip.visible: hovered && !isMobile
                 ToolTip.text: qsTr("Playlists")
             }
         }
@@ -148,19 +148,17 @@ ToolBar
 
             BabeButton
             {
-                id: settingsIcon
-
-                iconName: /*"application-menu"*/"games-config-options"
-                iconColor: settingsDrawer.visible ? accentColor : textColor
+                iconName: "love"
+                iconColor: accent && currentIndex === 4? accentColor : textColor
                 iconSize: size
 
-                onClicked: settingsViewClicked()
+                onClicked: babeViewClicked()
 
                 hoverEnabled: !isMobile
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
-                ToolTip.visible: hovered
-                ToolTip.text: qsTr("Settings")
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Babe")
             }
         }
     }

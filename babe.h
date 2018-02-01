@@ -60,6 +60,7 @@ public:
 
     Q_INVOKABLE void scanDir(const QString &url);
     Q_INVOKABLE void brainz(const bool &on);
+    Q_INVOKABLE bool brainzState();
 
     /* STATIC METHODS */
 
@@ -87,7 +88,7 @@ public:
     Q_INVOKABLE static QString shadowColor();
     Q_INVOKABLE static QString altColor();
     Q_INVOKABLE static QString babeColor();
-    Q_INVOKABLE static void androidStatusBarColor();
+    Q_INVOKABLE static void androidStatusBarColor(const QString &color);
 
     Q_INVOKABLE static bool isMobile();
     Q_INVOKABLE static int screenGeometry(QString side);
@@ -126,7 +127,9 @@ signals:
     void trackLyricsReady(QString lyrics, QString url);
     void skipTrack();
     void babeIt();
-public slots:
+
+friend class CollectionDB;
+
 };
 
 #endif // BABE_H

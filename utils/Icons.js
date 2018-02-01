@@ -1691,6 +1691,7 @@ var Babe = {
     "love": Icon.heartOutline,
     "media-playlist-shuffle": "\uf49D",
     "media-playlist-repeat": "\uf49E",
+    "babe" : Icon.heart,
 
     "arrow-left":"\uf04D",
 

@@ -2,23 +2,35 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import Qt.labs.platform 1.0
+import org.kde.kirigami 2.2 as Kirigami
 
 import "../view_models"
 import "../view_models/FolderPicker"
 
-Drawer
+Kirigami.GlobalDrawer
 {
     id: settingsView
-    y: header.height
-    height: parent.height - header.height - footer.height
-    width: root.pageStack.wideMode ? views.width -1: root.width
-    edge: Qt.RightEdge
-    interactive: true
-    focus: true
-    modal:true
-    dragMargin :0
+    handleVisible: true
     signal iconSizeChanged(int size)
 
+    readonly property bool activeBrainz : bae.brainzState()
+
+    y: header.height
+    height: parent.height - header.height - footer.height
+//    width: root.pageStack.wideMode ? views.width -1: root.width
+    edge: Qt.RightEdge
+//    //    interactive: true
+//    focus: true
+//    modal:true
+//    dragMargin :0
+
+    topPadding: 0
+    bottomPadding: 0
+    leftPadding: 0
+    rightPadding: 0
+
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
 
     function scanDir(folderUrl)
@@ -26,12 +38,18 @@ Drawer
         bae.scanDir(folderUrl)
     }
 
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: bae.backgroundColor()
-        z: -999
-    }
+//    background: Rectangle
+//    {
+//        anchors.fill: parent
+//        color: bae.backgroundColor()
+//        z: -999
+//    }
+
+    //    contentItem: Text
+    //    {
+    //        color: bae.foregroundColor()
+    //    }
+
 
     FolderDialog
     {
@@ -65,167 +83,149 @@ Drawer
         }
     }
 
-    Rectangle
+
+    topContent: ColumnLayout
     {
-        id: content
-        anchors.fill: parent
-        color: bae.midLightColor()
-        ColumnLayout
+        width: settingsView.width
+        height: settingsView.height * 0.5
+
+
+        ListView
         {
-            width: settingsView.width
-            height: settingsView.height
+            id: sources
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            clip: true
 
-
-            ListView
+            Rectangle
             {
-                id: sources
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                clip: true
+                anchors.fill: parent
+                z: -999
+                color: bae.altColor()
+            }
 
-                Rectangle
+            ListModel
+            {
+                id: listModel
+            }
+
+            model: listModel
+
+            delegate: ItemDelegate
+            {
+                width: parent.width
+
+                contentItem: ColumnLayout
                 {
-                    anchors.fill: parent
-                    z: -999
-                    color: bae.altColor()
-                }
-
-                ListModel
-                {
-                    id: listModel
-                }
-
-                model: listModel
-
-                delegate: ItemDelegate
-                {
+                    spacing: 2
                     width: parent.width
 
-                    contentItem: ColumnLayout
+                    Label
                     {
-                        spacing: 2
+                        id: sourceUrl
                         width: parent.width
-
-                        Label
-                        {
-                            id: sourceUrl
-                            width: parent.width
-                            text: url
-                            elide: Text.ElideRight
-                            Layout.fillWidth: true
-                            font.pointSize: 10
-                            color: bae.foregroundColor()
-                        }
+                        text: url
+                        elide: Text.ElideRight
+                        Layout.fillWidth: true
+                        font.pointSize: 10
+                        color: bae.foregroundColor()
                     }
-                }
-
-                Component.onCompleted:
-                {
-                    var map = bae.get("select url from folders order by addDate desc")
-                    for(var i in map)
-                        model.append(map[i])
-
                 }
             }
 
-            Row
+            Component.onCompleted:
             {
-                id: sourceActions
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignRight
-                height: 48
+                var map = bae.get("select url from folders order by addDate desc")
+                for(var i in map)
+                    model.append(map[i])
 
-                BabeButton
-                {
-                    id: addSource
-
-                    iconName: "list-add"
-
-                    onClicked:
-                    {
-
-                        if(bae.isMobile())
-                        {
-                            folderPicker.open()
-                            folderPicker.load(bae.homeDir())
-                        }else
-                            folderDialog.open()
-
-                    }
-                }
-
-                BabeButton
-                {
-                    id: removeSource
-                    iconName: "list-remove"
-                    onClicked:
-                    {
-
-                    }
-
-                }
-            }
-
-            Row
-            {
-                Layout.fillWidth: true
-                height: 48
-                Label
-                {
-                    padding: 20
-                    text: "Toolbar icon size"
-                    elide: Text.ElideRight
-                    verticalAlignment: Text.AlignVCenter
-
-                    color: bae.foregroundColor()
-                }
-
-                ComboBox
-                {
-                    id: iconSize
-
-                    model: ListModel
-                    {
-                        id: sizes
-                        ListElement { size: 16 }
-                        ListElement { size: 24 }
-                        ListElement { size: 32 }
-                    }
-
-                    currentIndex:  1
-                    onCurrentIndexChanged: iconSizeChanged(sizes.get(currentIndex).size )
-                }
-            }
-
-            Row
-            {
-                Layout.fillWidth: true
-                height: 48
-                Label
-                {
-                    padding: 20
-                    text: "Brainz"
-                    elide: Text.ElideRight
-                    verticalAlignment: Text.AlignVCenter
-
-                    color: bae.foregroundColor()
-                }
-
-                CheckBox
-                {
-                    id: brainzCheck
-                    checkState: bae.loadSetting("BRAINZ", "BABE", false) === "true" ? Qt.Checked : Qt.Unchecked
-                    onCheckStateChanged:
-                    {
-                        bae.saveSetting("BRAINZ",brainzCheck.checkState === Qt.Checked ? true : false, "BABE")
-
-                        bae.brainz(brainzCheck.checkState === Qt.Checked ? true : false)
-
-                    }
-                }
             }
         }
 
+        Row
+        {
+            id: sourceActions
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignRight
+            height: 48
+
+            BabeButton
+            {
+                id: addSource
+
+                iconName: "list-add"
+
+                onClicked:
+                {
+
+                    if(bae.isMobile())
+                    {
+                        folderPicker.open()
+                        folderPicker.load(bae.homeDir())
+                    }else
+                        folderDialog.open()
+
+                }
+            }
+
+            BabeButton
+            {
+                id: removeSource
+                iconName: "list-remove"
+                onClicked:
+                {
+
+                }
+
+            }
+        }
+
+        Kirigami.Separator
+        {
+            Layout.fillWidth: true
+            Layout.maximumHeight: 1//implicitHeight
+        }
 
     }
+
+
+    actions: [
+        Kirigami.Action
+        {
+            text: "Brainz"
+
+            Kirigami.Action
+            {
+                id: brainzToggle
+                text: checked ? "ON" : "OFF"
+                iconName: "configure"
+                checked: activeBrainz
+                checkable: true
+                onToggled:
+                {
+                    bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
+                    bae.brainz(checked === true ? true : false)
+                }
+            }
+        },
+        Kirigami.Action
+        {
+            text: "Toolbar icon size"
+            Kirigami.Action
+            {
+                text: "16"
+                onTriggered : iconSizeChanged(text)
+            }
+            Kirigami.Action
+            {
+                text: "24"
+                onTriggered : iconSizeChanged(text)
+            }
+            Kirigami.Action
+            {
+                text: "32"
+                onTriggered : iconSizeChanged(text)
+            }
+        }
+    ]
 }

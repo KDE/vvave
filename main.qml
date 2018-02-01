@@ -24,6 +24,7 @@ Kirigami.ApplicationWindow
     title: qsTr("Babe")
     wideScreen: root.width > coverSize
 
+
     Material.theme: Material.Light
     Material.accent: bae.babeColor()
     Material.background: bae.backgroundColor()
@@ -33,7 +34,7 @@ Kirigami.ApplicationWindow
     signal missingAlert(var track)
     readonly property bool isMobile: bae.isMobile()
     readonly property int wideSize : bae.screenGeometry("width")*0.5
-    readonly property int toolBarIconSize: isMobile ?  24 : 22
+    property int toolBarIconSize: isMobile ?  24 : 22
     readonly property int rowHeight: isMobile ? 64 : 52
     readonly property int rowHeightAlt: isMobile ? 48 : 32
 
@@ -66,6 +67,20 @@ Kirigami.ApplicationWindow
 
 
     onClosing: Player.savePlaylist()
+    pageStack.onCurrentIndexChanged:
+    {
+        if(pageStack.currentIndex === 0 && isMobile && !pageStack.wideMode)
+        {
+            bae.androidStatusBarColor(bae.babeColor())
+            Material.background = bae.babeColor()
+        }else
+        {
+            bae.androidStatusBarColor(bae.backgroundColor())
+            Material.background = bae.backgroundColor()
+        }
+
+    }
+
 
     BabeDialog
     {
@@ -102,7 +117,7 @@ Kirigami.ApplicationWindow
                 searchView.populate(searchView.searchRes)
             }
             //                albumsView.filter(res)
-            currentView = 4
+            currentView = 5
             pageStack.currentIndex = 1
         }
     }
@@ -155,6 +170,8 @@ Kirigami.ApplicationWindow
         visible: true
         size: toolBarIconSize
         currentIndex: currentView
+        backgroundColor: pageStack.currentIndex === 0 && !pageStack.wideMode ? bae.babeColor() : bae.backgroundColor()
+
 
         onPlaylistViewClicked:
         {
@@ -203,7 +220,14 @@ Kirigami.ApplicationWindow
             currentView = 3
         }
 
-        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
+        onBabeViewClicked:
+        {
+            if(!isMobile && !pageStack.wideMode)
+                root.width = wideSize
+
+            pageStack.currentIndex = 1
+            currentView = 4
+        }
     }
 
     footer: Rectangle
@@ -274,10 +298,11 @@ Kirigami.ApplicationWindow
         z: -999
     }
 
-    SettingsView
+    globalDrawer: SettingsView
     {
         id: settingsDrawer
-        onIconSizeChanged: toolBarIconSize = (size === 24 && isMobile) ? 24 : 22
+        contentItem.implicitWidth: columnWidth
+        onIconSizeChanged: toolBarIconSize = size
     }
 
 
@@ -325,6 +350,7 @@ Kirigami.ApplicationWindow
                     currentView = currentIndex
                     if(currentView === 0) mainPlaylist.list.forceActiveFocus()
                     else if(currentView === 1) tracksView.forceActiveFocus()
+
                 }
 
                 TracksView
@@ -380,6 +406,11 @@ Kirigami.ApplicationWindow
                         onPlayAll: Player.playAll(tracks)
                         onAppendAll: Player.appendAll(tracks)
                     }
+                }
+
+                Item
+                {
+                    id: babeView
                 }
 
 
