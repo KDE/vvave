@@ -164,6 +164,15 @@ BabeGrid
                 drawerList.model.append(map[i])
     }
 
+    onAlbumCoverPressed:
+    {
+        var query = Q.GET.albumTracks_.arg(album)
+        query = query.arg(artist)
+
+        var map = bae.get(query)
+        playAlbum(map)
+    }
+
 
     function populate()
     {

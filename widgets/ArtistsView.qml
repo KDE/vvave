@@ -146,6 +146,13 @@ BabeGrid
 
     }
 
+    onAlbumCoverPressed:
+    {
+        var query = Q.GET.artistTracks_.arg(artist)
+        var map = bae.get(query)
+        playAlbum(map)
+    }
+
     function populate()
     {
         var map = bae.get(Q.GET.allArtistsAsc)

@@ -30,6 +30,7 @@ Pane
     property alias gridModel: gridModel
     property alias grid: grid
     signal albumCoverClicked(string album, string artist)
+    signal albumCoverPressed(string album, string artist)
     signal bgClicked()
 
     width: 500
@@ -129,6 +130,13 @@ Pane
                     var artist = grid.model.get(index).artist
                     albumCoverClicked(album, artist)
                     grid.currentIndex = index
+                }
+
+                onAlbumPressed:
+                {
+                    var album = grid.model.get(index).album
+                    var artist = grid.model.get(index).artist
+                    albumCoverPressed(album, artist)
                 }
             }
         }

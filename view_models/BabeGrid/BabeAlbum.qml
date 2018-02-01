@@ -9,6 +9,7 @@ ColumnLayout
     id: babeAlbumRoot
 
     signal albumClicked(int index)
+    signal albumPressed(int index)
     property int albumSize : 150
     property int borderRadius : 2
     property int albumRadius : 0
@@ -125,11 +126,9 @@ ColumnLayout
     MouseArea
     {
         anchors.fill: parent
-        onClicked:
-        {
-            parent.GridView.view.currentIndex = index
-            albumClicked(index)
-        }
+        onClicked: albumClicked(index)
+
+        onPressAndHold: albumPressed(index)
 
     }
 }
