@@ -5,8 +5,12 @@ QT       += widgets
 QT       += websockets
 QT       += network
 QT       += xml
+QT       += qml
+QT       += quickcontrols2
+
 
 android: QT += androidextras
+
 unix:linux:!android:
 {
 include(kde/kde.pri)
@@ -203,8 +207,8 @@ SOURCES += main.cpp \
 
 
 
-RESOURCES += qml.qrc \
-#    kirigami-icons.qrc
+RESOURCES += qml.qrc
+android: RESOURCES += android.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -229,7 +233,7 @@ DISTFILES += \
     android/res/values/libs.xml \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat
+    android/gradlew.bat \
 
 
 HEADERS += \

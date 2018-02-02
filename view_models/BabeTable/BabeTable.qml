@@ -89,7 +89,7 @@ ListView
     {
         id: tableHeader
         width: parent.width
-        height:  headerBar ?  48 : 0
+        height:  visible ?  toolBarHeight : 0
         color: midLightColor
         visible: headerBar
         z: 999
@@ -111,7 +111,6 @@ ListView
             BabeButton
             {
                 id: playAllBtn
-                Layout.fillHeight: true
                 visible: headerBar && count > 0
 
                 iconName: /*"amarok_clock"*/ "media-playback-start"
@@ -137,7 +136,6 @@ ListView
             BabeButton
             {
                 id: appendBtn
-                Layout.fillHeight: true
                 visible: headerBar && count > 0
 
                 iconName : "archive-insert"//"media-repeat-track-amarok"
@@ -147,7 +145,6 @@ ListView
             BabeButton
             {
                 id: menuBtn
-                Layout.fillHeight: true
                 iconName: /*"application-menu"*/ "overflow-menu"
                 onClicked: {}
             }

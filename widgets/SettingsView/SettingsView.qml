@@ -1,24 +1,21 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import Qt.labs.platform 1.0
 import org.kde.kirigami 2.2 as Kirigami
 
-import "../../view_models"
-import "../../view_models/FolderPicker"
+
 
 Kirigami.GlobalDrawer
 {
     id: settingsView
-    handleVisible: false
+    handleVisible: true
     signal iconSizeChanged(int size)
-
     readonly property bool activeBrainz : bae.brainzState()
 
-    y: header.height
-    height: parent.height - header.height - footer.height
-    //    width: root.pageStack.wideMode ? views.width -1: root.width
-    edge: Qt.RightEdge
+//    y: header.height
+//    height: parent.height - header.height - footer.height
+    //    //    width: root.pageStack.wideMode ? views.width -1: root.width
+    //    edge: Qt.RightEdge
     //    interactive: true
     //    focus: true
     //    modal:true
@@ -29,153 +26,26 @@ Kirigami.GlobalDrawer
     leftPadding: 0
     rightPadding: 0
 
-    Kirigami.Theme.inherit: false
-    //    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-
-
     function scanDir(folderUrl)
     {
         bae.scanDir(folderUrl)
     }
 
-    background: Rectangle
+    SourcesDialog
     {
-        anchors.fill: parent
-        color: backgroundColor
-        z: -999
+        id: sourcesDialog
     }
 
-    //    contentItem: Text
-    //    {
-    //        color: foregroundColor
-    //    }
-
-
-    FolderDialog
-    {
-        id: folderDialog
-        folder: bae.homeDir()
-        onAccepted:
-        {
-            var path = folder.toString().replace("file://","")
-
-            listModel.append({url: path})
-            scanDir(path)
-        }
-    }
-
-    FolderPicker
-    {
-        id: folderPicker
-
-        Connections
-        {
-            target: folderPicker
-            onPathClicked: folderPicker.load(path)
-
-            onAccepted:
-            {
-                listModel.append({url: path})
-                scanDir(path)
-            }
-
-            onGoBack: folderPicker.load(path)
-        }
-    }
-
-
-    topContent: ColumnLayout
-    {
-        id: sourcesRoot
-        width: settingsView.width
-        height: settingsView.height * 0.5
-
-        ListView
-        {
-            id: sources
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            clip: true
-
-            Rectangle
-            {
-                anchors.fill: parent
-                z: -999
-                color: altColor
-            }
-
-            ListModel { id: listModel }
-
-            model: listModel
-
-            delegate: ItemDelegate
-            {
-                width: parent.width
-
-                contentItem: ColumnLayout
-                {
-                    spacing: 2
-                    width: parent.width
-
-                    Label
-                    {
-                        id: sourceUrl
-                        width: parent.width
-                        text: url
-                        elide: Text.ElideRight
-                        Layout.fillWidth: true
-                        font.pointSize: 10
-                        color: foregroundColor
-                    }
-                }
-            }
-
-            Component.onCompleted:
-            {
-                var map = bae.get("select url from folders order by addDate desc")
-                for(var i in map)
-                    model.append(map[i])
-            }
-        }
-
-        Row
-        {
-            id: sourceActions
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignRight
-            height: 48
-
-            BabeButton
-            {
-                id: addSource
-
-                iconName: "list-add"
-
-                onClicked:
-                {
-
-                    if(bae.isMobile())
-                    {
-                        folderPicker.open()
-                        folderPicker.load(bae.homeDir())
-                    }else
-                        folderDialog.open()
-
-                }
-            }
-
-            BabeButton
-            {
-                id: removeSource
-                iconName: "list-remove"
-                onClicked:{}
-            }
-        }
-
-
-    }
+    bannerImageSource: "qrc:/assets/banner.svg"
 
     actions: [
+
+        Kirigami.Action
+        {
+            text: "Sources"
+            onTriggered: sourcesDialog.open()
+        },
+
         Kirigami.Action
         {
             text: "Brainz"
@@ -184,7 +54,6 @@ Kirigami.GlobalDrawer
             {
                 id: brainzToggle
                 text: checked ? "ON" : "OFF"
-                iconName: "configure"
                 checked: activeBrainz
                 checkable: true
                 onToggled:
@@ -249,6 +118,16 @@ Kirigami.GlobalDrawer
                     onTriggered : switchColorScheme("Dark")
                 }
             }
+        },
+
+        Kirigami.Action
+        {
+            text: "About Babe"
+        },
+
+        Kirigami.Action
+        {
+            text: "About Beats"
         }
     ]
 

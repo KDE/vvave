@@ -58,7 +58,7 @@ ListView
 
     header: Rectangle
     {
-        height: 48
+        height: toolBarHeight
         width: parent.width
         color: midLightColor
         z: 999
@@ -71,9 +71,6 @@ ListView
             BabeButton
             {
                 id: createPlaylistBtn
-                Layout.fillHeight: true
-                width: parent.height
-                height: parent.height
 
                 iconName: "list-add"
                 onClicked: newPlaylistDialog.open()
@@ -83,11 +80,6 @@ ListView
             BabeButton
             {
                 id: removePlaylist
-                Layout.fillHeight: true
-
-                width: parent.height
-                height: parent.height
-
                 iconName: "list-remove"
 
                 onClicked: appendAll()
@@ -102,10 +94,6 @@ ListView
             BabeButton
             {
                 id: menuBtn
-                Layout.fillHeight: true
-                width: parent.height
-                height: parent.height
-
                 iconName: /*"application-menu" */"overflow-menu"
                 onClicked: {}
             }

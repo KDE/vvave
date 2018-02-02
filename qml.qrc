@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>qtquickcontrols2.conf</file>
         <file>widgets/BabeBar.qml</file>
         <file>utils/Icons.js</file>
         <file>utils/materialdesignicons-webfont.ttf</file>
@@ -61,5 +60,9 @@
         <file>view_models/BabeMenu/BabeMenu.qml</file>
         <file>view_models/BabeDialog/BabeMessage.qml</file>
         <file>view_models/BabeDialog/BabeDialog.qml</file>
+        <file>widgets/SettingsView/SourcesDialog.qml</file>
+        <file>view_models/BabePopup.qml</file>
+        <file>assets/banner.png</file>
+        <file>assets/banner.svg</file>
     </qresource>
 </RCC>

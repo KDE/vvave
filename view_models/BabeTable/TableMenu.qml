@@ -95,66 +95,52 @@ BabeMenu
     BabeMenuItem
     {
         id: starsRow
-        hoverEnabled: true
-        padding: 10
-
+        width: parent.width
         RowLayout
         {
             anchors.fill: parent
+            width: parent.width
             BabeButton
             {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-
                 iconName: starIcon
                 iconColor: rate >= 1 ? starColor :starReg
-                iconSize: starsRow.assetsize
-
                 onClicked: rateIt(1)
             }
             BabeButton
             {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
+
                 iconName: starIcon
                 iconColor: rate >= 2 ? starColor :starReg
-                iconSize: starsRow.assetsize
                 onClicked: rateIt(2)
             }
             BabeButton
             {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
+
                 iconName: starIcon
                 iconColor: rate >= 3 ? starColor :starReg
-                iconSize: starsRow.assetsize
 
                 onClicked: rateIt(3)
             }
 
             BabeButton
             {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
+
                 iconName: starIcon
                 iconColor: rate >= 4 ? starColor :starReg
-                iconSize: starsRow.assetsize
 
                 onClicked: rateIt(4)
             }
 
             BabeButton
             {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
+
                 iconName: starIcon
                 iconColor: rate >= 5 ? starColor :starReg
-                iconSize: starsRow.assetsize
 
                 onClicked: rateIt(5)
             }
@@ -165,12 +151,11 @@ BabeMenu
     BabeMenuItem
     {
         id: colorsRow
-        hoverEnabled: true
-        padding: 10
+        width: parent.width
+
         ColorTagsBar
         {
             anchors.fill: parent
-            recSize: colorsRow.assetsize
             onColorClicked: moodIt(color)
         }
     }

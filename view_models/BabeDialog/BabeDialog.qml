@@ -10,17 +10,12 @@ Dialog
     parent: ApplicationWindow.overlay
 
     modal: true
+
+    padding: 10
+
     Material.accent: babeColor
     Material.background: backgroundColor
     Material.primary: backgroundColor
     Material.foreground: foregroundColor
-
-    background: Rectangle
-    {
-        color: backgroundColor
-        border.color: midLightColor
-        border.width: 1
-        radius: 3
-    }
 
 }

@@ -1,19 +1,24 @@
-import QtQuick 2.0
 import QtQuick 2.9
-import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.1
 
-Menu
+Popup
 {
+    width: parent.width *0.8
+    height: parent.height *0.8
+
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
+
+    parent: ApplicationWindow.overlay
+    z: 999
+
     modal: true
     focus: true
-    parent: ApplicationWindow.overlay
+    clip: true
 
-    enter: Transition
-    {
+    enter: Transition {
         NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
     }
 
@@ -21,4 +26,5 @@ Menu
     Material.background: backgroundColor
     Material.primary: backgroundColor
     Material.foreground: foregroundColor
+
 }

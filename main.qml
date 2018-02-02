@@ -30,7 +30,7 @@ Kirigami.ApplicationWindow
     /*THEMING*/
 
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", isMobile ?  24 : 22)
-
+    property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
     property string babeColor : bae.babeColor()
     property string babeAltColor : bae.babeAltColor()
     property string backgroundColor : bae.backgroundColor()
@@ -211,8 +211,8 @@ Kirigami.ApplicationWindow
         id: mainToolbar
         visible: true
         currentIndex: currentView
-        bgColor: pageStack.currentIndex === 0 && !pageStack.wideMode ? babeColor : babeAltColor
-        textColor: pageStack.currentIndex === 0 && !pageStack.wideMode ? "#FFF" : bae.foregroundColor()
+        bgColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? babeColor : babeAltColor
+        textColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? "#FFF" : bae.foregroundColor()
 
         onPlaylistViewClicked:
         {
@@ -271,8 +271,7 @@ Kirigami.ApplicationWindow
     footer: Rectangle
     {
         id: searchBox
-        width: parent.width
-        height: 48
+        height: toolBarHeight
         color: searchInput.activeFocus ? midColor : midLightColor
         Kirigami.Separator
         {
@@ -294,31 +293,11 @@ Kirigami.ApplicationWindow
         {
             anchors.fill: parent
 
-            BabeButton
-            {
-                id: searchBtn
-                Layout.fillHeight: true
-                iconColor: currentView === 5 ? babeColor : foregroundColor
-                //                visible: !(searchInput.focus || searchInput.text)
-                iconName: "edit-find" //"search"
-                onClicked:
-                {
-                    if(searchView.count>0)
-                    {
-                        currentView = 5
-                        pageStack.currentIndex = 1
-
-                    }else
-                        searchInput.forceActiveFocus()
-
-                }
-            }
-
 
             Item
             {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
+                Layout.fillHeight: true
 
                 TextInput
                 {
@@ -347,12 +326,21 @@ Kirigami.ApplicationWindow
 
             BabeButton
             {
-                id: settingsIcon
-                Layout.fillHeight: true
+                id: searchBtn
+                iconColor: currentView === 5 ? babeColor : foregroundColor
+                //                visible: !(searchInput.focus || searchInput.text)
+                iconName: "edit-find" //"search"
+                onClicked:
+                {
+                    if(searchView.count>0)
+                    {
+                        currentView = 5
+                        pageStack.currentIndex = 1
 
-                iconName: "games-config-options"
-                iconColor: settingsDrawer.visible  ? babeColor : foregroundColor
-                onClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
+                    }else
+                        searchInput.forceActiveFocus()
+
+                }
             }
 
         }

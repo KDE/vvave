@@ -22,7 +22,6 @@ Item
     property int prevTrackIndex : 0
     property string currentArtwork
     property bool shuffle : false
-    property int playbackIconSize: isMobile ? 24 : 22
 
     property alias progressBar : progressBar
     property alias cover : cover
@@ -144,10 +143,8 @@ Item
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: 48
-
-            //            height: 48
-            //            anchors.top: cover.bottom
+            Layout.preferredHeight: toolBarHeight
+//            anchors.top: cover.bottom
             visible: list.count > 0
 
             Rectangle
@@ -157,19 +154,6 @@ Item
                 opacity: 0.8
                 z: -999
             }
-            //            onYChanged:
-            //            {
-            //                if(playbackControls.y<coverSize/4)
-            //                {
-            //                    cover.visible = false
-            //                    playbackControls.y = 0
-
-            //                }else
-            //                {
-            //                    cover.visible = true
-            //                    playbackControls.y = coverSize
-            //                }
-            //            }
 
             PlaylistMenu
             {
@@ -186,12 +170,6 @@ Item
                 drag.axis: Drag.YAxis
                 drag.minimumY: 0
                 drag.maximumY: coverSize
-                //                onClicked:
-                //                {
-                //                    if(!root.isMobile)
-                //                        cover.visible = !cover.visible
-                //                }
-
 
                 onMouseYChanged:
                 {
@@ -210,25 +188,30 @@ Item
             {
                 anchors.fill: parent
                 anchors.centerIn: parent
-                spacing: 0
-                Layout.margins: 0
+//                spacing: 0
+//                Layout.margins: 0
 
-                BabeButton
+                Item
                 {
-
-                    id: infoBtn
-                    Layout.fillHeight: true
                     Layout.fillWidth: true
-                    iconName: stackView.currentItem === list ? "documentinfo" : "arrow-left"
-                    onClicked:
+
+                    BabeButton
                     {
-                        if( stackView.currentItem !== list)
+
+                        id: infoBtn
+                        anchors.centerIn: parent
+
+                        iconName: stackView.currentItem === list ? "documentinfo" : "arrow-left"
+                        onClicked:
                         {
-                            cover.visible  = true
-                            stackView.pop(list) }
-                        else {
-                            cover.visible  = false
-                            stackView.push(infoView)
+                            if( stackView.currentItem !== list)
+                            {
+                                cover.visible  = true
+                                stackView.pop(list) }
+                            else {
+                                cover.visible  = false
+                                stackView.push(infoView)
+                            }
                         }
                     }
                 }
@@ -236,8 +219,6 @@ Item
 
                 BabeButton
                 {
-                    Layout.fillHeight: true
-
                     id: babeBtnIcon
                     iconName: "love" //"love-amarok"
                     iconColor: defaultColor
@@ -246,19 +227,14 @@ Item
 
                 BabeButton
                 {
-                    Layout.fillHeight: true
-
                     id: previousBtn
                     iconName: "media-skip-backward"
                     onClicked: Player.previousTrack()
                     onPressAndHold: Player.playAt(prevTrackIndex)
-
                 }
 
                 BabeButton
                 {
-                    Layout.fillHeight: true
-
                     id: playIcon
                     iconName: "media-playback-start"
                     onClicked:
@@ -270,8 +246,6 @@ Item
 
                 BabeButton
                 {
-                    Layout.fillHeight: true
-
                     id: nextBtn
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
@@ -280,22 +254,23 @@ Item
 
                 BabeButton
                 {
-                    Layout.fillHeight: true
-
                     id: shuffleBtn
                     iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
                     onClicked: shuffle = !shuffle
 
                 }
 
-
-                BabeButton
+                Item
                 {
-                    id: menuBtn
-                    Layout.fillHeight: true
                     Layout.fillWidth: true
-                    iconName: /*"application-menu"*/ "overflow-menu"
-                    onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
+                    BabeButton
+                    {
+                        id: menuBtn
+                        anchors.centerIn: parent
+                        Layout.fillWidth: true
+                        iconName: /*"application-menu"*/ "overflow-menu"
+                        onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
+                    }
                 }
 
             }

@@ -9,6 +9,7 @@ Item
 
     RowLayout
     {
+        width: parent.width
         anchors.fill: parent
         anchors.centerIn: parent
         ToolButton

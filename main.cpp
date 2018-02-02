@@ -6,6 +6,7 @@
 #include "babe.h"
 #include "services/local/player.h"
 #include <QLibrary>
+#include <QQuickStyle>
 
 #ifdef Q_OS_ANDROID
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
     app.setApplicationVersion(BAE::Version);
     app.setWindowIcon(QIcon("qrc:/assets/babe.png"));
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
+//    QQuickStyle::setStyle("org.kde.desktop");
 
     QQmlApplicationEngine engine;
 
@@ -34,8 +36,6 @@ int main(int argc, char *argv[])
 
     context->setContextProperty("bae", &bae);
     context->setContextProperty("player", &player);
-
-
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

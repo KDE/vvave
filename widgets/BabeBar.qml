@@ -51,16 +51,22 @@ ToolBar
     RowLayout
     {
         anchors.fill: parent
+        anchors.centerIn: parent
+//        spacing: 0
+//        Layout.margins: 0
 
-        Row
+        Item
         {
-            Layout.alignment: Qt.AlignLeft
+            Layout.fillWidth: true
 
             BabeButton
             {
                 id: playlistView
+
+                anchors.centerIn: parent
+
                 iconName: /*"headphones"*/ "media-optical-audio"
-                iconColor: textColor
+                iconColor: (pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor
                 onClicked: playlistViewClicked()
 
                 hoverEnabled: !isMobile
@@ -71,9 +77,6 @@ ToolBar
             }
         }
 
-        Row
-        {
-            Layout.alignment: Qt.AlignCenter
 
             BabeButton
             {
@@ -133,14 +136,18 @@ ToolBar
                 ToolTip.visible: hovered && !isMobile
                 ToolTip.text: qsTr("Playlists")
             }
-        }
 
-        Row
+
+        Item
         {
-            Layout.alignment: Qt.AlignRight
+            Layout.fillWidth: true
+
 
             BabeButton
             {
+                Layout.alignment: Qt.AlignRight
+
+                anchors.centerIn: parent
                 iconName: "love"
                 iconColor: accent && currentIndex === 4? accentColor : textColor
 
