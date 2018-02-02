@@ -19,7 +19,7 @@ Kirigami.GlobalDrawer
     height: parent.height - header.height - footer.height
     //    width: root.pageStack.wideMode ? views.width -1: root.width
     edge: Qt.RightEdge
-    //    //    interactive: true
+    //    interactive: true
     //    focus: true
     //    modal:true
     //    dragMargin :0
@@ -54,7 +54,6 @@ Kirigami.GlobalDrawer
     FolderDialog
     {
         id: folderDialog
-
         folder: bae.homeDir()
         onAccepted:
         {
@@ -64,6 +63,7 @@ Kirigami.GlobalDrawer
             scanDir(path)
         }
     }
+
     FolderPicker
     {
         id: folderPicker
@@ -78,8 +78,8 @@ Kirigami.GlobalDrawer
                 listModel.append({url: path})
                 scanDir(path)
             }
-            onGoBack: folderPicker.load(path)
 
+            onGoBack: folderPicker.load(path)
         }
     }
 
@@ -104,10 +104,7 @@ Kirigami.GlobalDrawer
                 color: altColor
             }
 
-            ListModel
-            {
-                id: listModel
-            }
+            ListModel { id: listModel }
 
             model: listModel
 
@@ -138,7 +135,6 @@ Kirigami.GlobalDrawer
                 var map = bae.get("select url from folders order by addDate desc")
                 for(var i in map)
                     model.append(map[i])
-
             }
         }
 
@@ -172,11 +168,7 @@ Kirigami.GlobalDrawer
             {
                 id: removeSource
                 iconName: "list-remove"
-                onClicked:
-                {
-
-                }
-
+                onClicked:{}
             }
         }
 
@@ -202,6 +194,7 @@ Kirigami.GlobalDrawer
                 }
             }
         },
+
         Kirigami.Action
         {
             text: "Appearance"
@@ -218,6 +211,7 @@ Kirigami.GlobalDrawer
                         iconSizeChanged(text)
                     }
                 }
+
                 Kirigami.Action
                 {
                     text: isMobile ? "24" : "22"
@@ -227,6 +221,7 @@ Kirigami.GlobalDrawer
                         iconSizeChanged(text)
                     }
                 }
+
                 Kirigami.Action
                 {
                     text: "32"
@@ -247,6 +242,7 @@ Kirigami.GlobalDrawer
                     text: "Light"
                     onTriggered : switchColorScheme("Light")
                 }
+
                 Kirigami.Action
                 {
                     text: "Dark"
