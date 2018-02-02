@@ -7,8 +7,8 @@ ToolButton
     id: babeButton
     property string iconName
     property int iconSize : toolBarIconSize
-    property string iconColor: bae.foregroundColor()
-    readonly property string defaultColor :  bae.foregroundColor()
+    property string iconColor: foregroundColor
+    readonly property string defaultColor :  foregroundColor
 
     icon.name: isMobile ? "" : babeButton.iconName
     icon.width: isMobile ? 0 : babeButton.iconSize

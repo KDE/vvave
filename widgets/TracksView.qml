@@ -24,7 +24,7 @@ BabeTable
     Rectangle
     {
         anchors.fill: parent
-        color: bae.altColor()
+        color: altColor
         z: -999
     }
 

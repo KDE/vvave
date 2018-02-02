@@ -14,9 +14,6 @@ ListView
     signal rowClicked(int index)
     signal rowPressed(int index)
 
-    width: 320
-    height: 480
-
     clip: true
 
     highlight: highlight
@@ -55,7 +52,7 @@ ListView
             width: list.width
             height: list.currentItem.height
 
-            color: bae.hightlightColor()
+            color: babeHighlightColor
             opacity: 0.2
             y: list.currentItem.y
         }

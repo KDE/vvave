@@ -37,14 +37,14 @@ ListView
     {
         width: playlistListRoot.width
         height: playlistListRoot.currentItem.height
-        color: bae.hightlightColor()
+        color: babeHighlightColor
         y: playlistListRoot.currentItem.y
     }
 
     Rectangle
     {
         anchors.fill: parent
-        color: bae.altColor()
+        color: altColor
         z: -999
     }
 
@@ -60,7 +60,7 @@ ListView
     {
         height: 48
         width: parent.width
-        color: bae.midLightColor()
+        color: midLightColor
         z: 999
 
         RowLayout
@@ -170,4 +170,6 @@ ListView
             }
         }
     }
+
+    ScrollBar.vertical:BabeScrollBar {}
 }

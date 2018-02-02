@@ -5,9 +5,9 @@ import QtQuick.Controls 2.2
 ItemDelegate
 {
     id: delegate
-    property string textColor: bae.foregroundColor()
+    property string textColor: foregroundColor
     width: parent.width
-    height: 32
+    height: rowHeightAlt
     //    checkable: true
 
     RowLayout

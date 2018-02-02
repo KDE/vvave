@@ -49,13 +49,13 @@ Kirigami.PageRow
             ColorTagsBar
             {
                 Layout.fillWidth: true
-                height: 32
-                recSize: 22
+                height: rowHeightAlt
+                recSize: toolBarIconSize
                 Rectangle
                 {
                     anchors.fill: parent
                     z: -999
-                    color:bae.midColor()
+                    color:midColor
                 }
                 onColorClicked:
                 {
@@ -87,7 +87,7 @@ Kirigami.PageRow
 
         background: Rectangle
         {
-            color: bae.altColor()
+            color: altColor
         }
 
         BabeTable

@@ -9,10 +9,9 @@ import "../view_models"
 ToolBar
 {
     property alias babeBar : babeBar
-    property string accentColor : bae.babeColor()
-    property string textColor : bae.foregroundColor()
-    property string backgroundColor : bae.backgroundColor()
-    property int size : 24
+    property string accentColor : babeColor
+    property string textColor : foregroundColor
+    property string bgColor : babeAltColor
     property int currentIndex : 0
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
 
@@ -30,7 +29,7 @@ ToolBar
     Rectangle
     {
         anchors.fill: parent
-        color: backgroundColor
+        color: bgColor
 
         Kirigami.Separator
         {
@@ -62,8 +61,6 @@ ToolBar
                 id: playlistView
                 iconName: /*"headphones"*/ "media-optical-audio"
                 iconColor: textColor
-                iconSize: size
-
                 onClicked: playlistViewClicked()
 
                 hoverEnabled: !isMobile
@@ -83,7 +80,6 @@ ToolBar
                 id: tracksView
                 iconName: /*"musicnote"*/ "filename-filetype-amarok"
                 iconColor:  accent && currentIndex === 0? accentColor : textColor
-                iconSize: size
                 onClicked: tracksViewClicked()
 
                 hoverEnabled: true
@@ -98,7 +94,6 @@ ToolBar
                 id: albumsView
                 iconName: /*"album" */ "media-album-cover"
                 iconColor:  accent && currentIndex === 1 ? accentColor : textColor
-                iconSize: size
                 onClicked: albumsViewClicked()
 
                 hoverEnabled: true
@@ -114,7 +109,6 @@ ToolBar
 
                 iconName: /*"artist" */  "view-media-artist"
                 iconColor:  accent && currentIndex === 2? accentColor : textColor
-                iconSize: size
 
                 onClicked: artistsViewClicked()
                 hoverEnabled: true
@@ -130,7 +124,6 @@ ToolBar
 
                 iconName: /*"library-music"*/ "view-media-playlist"
                 iconColor:  accent && currentIndex === 3? accentColor : textColor
-                iconSize: size
 
                 onClicked: playlistsViewClicked()
 
@@ -150,7 +143,6 @@ ToolBar
             {
                 iconName: "love"
                 iconColor: accent && currentIndex === 4? accentColor : textColor
-                iconSize: size
 
                 onClicked: babeViewClicked()
 

@@ -20,7 +20,7 @@ Page
     {
         anchors.fill: parent
         z: -999
-        color: bae.midLightColor()
+        color: midLightColor
     }
 
 
@@ -58,7 +58,7 @@ Page
 
                     padding: 20
                     text: lyrics
-                    color: bae.foregroundColor()
+                    color: foregroundColor
                     font.pointSize: 12
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
@@ -115,7 +115,7 @@ Page
 //                                    width: img.adapt ? img.width : Math.min(img.width, img.height)
 //                                    height: img.adapt ? img.height : width
 //                                    radius: Math.min(width, height)
-//                                    border.color: bae.foregroundColor()
+//                                    border.color: foregroundColor
 //                                    border.width: 4
 //                                }
 //                            }
@@ -143,7 +143,7 @@ Page
                         padding: 20
                         text: wikiAlbum
                         visible: wikiAlbum === "NONE" || wikiAlbum.length===0 ? false : true
-                        color: bae.foregroundColor()
+                        color: foregroundColor
                         font.pointSize: 12
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.RichText
@@ -170,7 +170,7 @@ Page
                         text: wikiArtist
                         visible: wikiArtist === "NONE" || wikiArtist.length===0 ? false : true
 
-                        color: bae.foregroundColor()
+                        color: foregroundColor
                         font.pointSize: 12
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.StyledText

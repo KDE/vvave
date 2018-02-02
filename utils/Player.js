@@ -28,7 +28,7 @@ function playTrack(track)
 
 
             if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
-                root.mainPlaylist.babeBtnIcon.iconColor = bae.babeColor()
+                root.mainPlaylist.babeBtnIcon.iconColor = babeColor
             else
                 root.mainPlaylist.babeBtnIcon.iconColor = root.mainPlaylist.babeBtnIcon.defaultColor
 
@@ -232,7 +232,7 @@ function babeTrack()
     }else
     {
         bae.babeTrack(root.mainPlaylist.currentTrack.url, true)
-        root.mainPlaylist.babeBtnIcon.iconColor = bae.babeColor()
+        root.mainPlaylist.babeBtnIcon.iconColor = babeColor
         bae.notify("Track Babe'd",root.mainPlaylist.currentTrack.title +" by "+ root.mainPlaylist.currentTrack.artist )
 
     }

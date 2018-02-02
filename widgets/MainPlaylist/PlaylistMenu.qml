@@ -1,41 +1,40 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import "../../utils/Help.js" as H
+import "../../view_models/BabeMenu"
 
-Menu
-{
-    id: rootPlaylistMenu
-    x: parent.width / 2 - width / 2
-    y: parent.height / 2 - height / 2
-    modal: root.isMobile
 
+BabeMenu
+{    
     signal clearOut()
     signal clean()
     signal callibrate()
     signal hideCover()
 
-    MenuItem
+    BabeMenuItem
     {
         text: qsTr("Clear out...")
         onTriggered: clearOut()
     }
 
-    MenuItem
+    BabeMenuItem
     {
         text: qsTr("Clean...")
         onTriggered: clean()
     }
-    MenuItem
+
+    BabeMenuItem
     {
         text: cover.visible ? qsTr("Hide cover...") : qsTr("Show cover...")
         onTriggered: hideCover()
     }
-    MenuItem
+
+    BabeMenuItem
     {
         text: qsTr("Callibrate")
         onTriggered: callibrate()
-    }    
-    MenuItem
+    }
+
+    BabeMenuItem
     {
         text: qsTr("Save as playlist...")
         onTriggered: {}

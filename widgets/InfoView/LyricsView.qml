@@ -13,13 +13,13 @@ Item
     {
         anchors.fill: parent
         z: -999
-        color: bae.backgroundColor()
+        color: backgroundColor
     }
 
     Text
     {
         text: lyrics || "Nothing here"
-        color: bae.foregroundColor()
+        color: foregroundColor
         font.pointSize: 14
         horizontalAlignment: Qt.AlignHCenter
         textFormat: Text.StyledText

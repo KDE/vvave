@@ -14,8 +14,8 @@ ColumnLayout
     property int borderRadius : 2
     property int albumRadius : 0
     property bool albumCard : true
-    property string fillColor: bae.midLightColor()
-    property string textColor: bae.foregroundColor()
+    property string fillColor: midLightColor
+    property string textColor: foregroundColor
     property int fontSize : root.isMobile? 12 : 10
     property bool hide : false
 

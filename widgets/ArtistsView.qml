@@ -13,7 +13,7 @@ BabeGrid
     id: artistsViewGrid
     visible: true
     //    albumCardVisible: false
-    //    albumRadius: Math.min(albumSize, albumSize)
+    //    albumCoverRadius: Math.min(albumCoverSize, albumCoverSize)
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
@@ -59,7 +59,7 @@ BabeGrid
         {
             anchors.fill: parent
             z: -999
-            color: bae.altColor()
+            color: altColor
             Kirigami.Separator
             {
                 Rectangle

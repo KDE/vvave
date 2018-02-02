@@ -46,7 +46,7 @@ Item
     Rectangle
     {
         anchors.fill: parent
-        color: bae.midLightColor()
+        color: midLightColor
         z: -999
     }
 
@@ -54,6 +54,7 @@ Item
     {
         id: playlistLayout
         anchors.fill: parent
+        width: parent.width
         rowSpacing: 0
         rows: 4
         columns: 1
@@ -71,7 +72,7 @@ Item
             Rectangle
             {
                 anchors.fill: parent
-                color: bae.midColor()
+                color: midColor
                 z: -999
             }
 
@@ -82,7 +83,7 @@ Item
                 source: artwork
                 radius: 100
                 transparentBorder: false
-//                opacity: 0.8
+                //                opacity: 0.8
                 cached: true
             }
 
@@ -100,15 +101,15 @@ Item
                 {
                     anchors.fill: parent
                     onDoubleClicked: gomini()
-//                    {
-//                                                var query = Q.GET.albumTracks_.arg(currentTrack.album)
-//                                                query = query.arg(currentTrack.artist)
+                    //                    {
+                    //                                                var query = Q.GET.albumTracks_.arg(currentTrack.album)
+                    //                                                query = query.arg(currentTrack.artist)
 
-//                                                var tracks = bae.get(query)
-//                                                coverDoubleClicked(tracks)
+                    //                                                var tracks = bae.get(query)
+                    //                                                coverDoubleClicked(tracks)
 
 
-//                    }
+                    //                    }
 
                     onPressAndHold:
                     {
@@ -138,10 +139,11 @@ Item
         Item
         {
             id: playbackControls
+            width: parent.width
+            anchors.horizontalCenter: parent.horizontalCenter
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
-            width: parent.width
             Layout.preferredHeight: 48
 
             //            height: 48
@@ -151,7 +153,7 @@ Item
             Rectangle
             {
                 anchors.fill: parent
-                color: bae.midLightColor()
+                color: midLightColor
                 opacity: 0.8
                 z: -999
             }
@@ -207,16 +209,19 @@ Item
             RowLayout
             {
                 anchors.fill: parent
+                anchors.centerIn: parent
+                spacing: 0
+                Layout.margins: 0
 
                 BabeButton
                 {
-                    id: infoBtn
-                    Layout.alignment: Qt.AlignLeft
 
+                    id: infoBtn
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     iconName: stackView.currentItem === list ? "documentinfo" : "arrow-left"
                     onClicked:
                     {
-
                         if( stackView.currentItem !== list)
                         {
                             cover.visible  = true
@@ -225,67 +230,70 @@ Item
                             cover.visible  = false
                             stackView.push(infoView)
                         }
-
                     }
-
                 }
 
 
-
-                Row
+                BabeButton
                 {
-                    Layout.alignment: Qt.AlignCenter
-                    BabeButton
-                    {
-                        id: babeBtnIcon
-                        iconName: "love" //"love-amarok"
-                        iconColor: defaultColor
-                        onClicked: Player.babeTrack()
-                    }
+                    Layout.fillHeight: true
 
-                    BabeButton
-                    {
-                        id: previousBtn
-                        iconName: "media-skip-backward"
-                        onClicked: Player.previousTrack()
-                        onPressAndHold: Player.playAt(prevTrackIndex)
+                    id: babeBtnIcon
+                    iconName: "love" //"love-amarok"
+                    iconColor: defaultColor
+                    onClicked: Player.babeTrack()
+                }
 
-                    }
+                BabeButton
+                {
+                    Layout.fillHeight: true
 
-                    BabeButton
-                    {
-                        id: playIcon
-                        iconName: "media-playback-start"
-                        onClicked:
-                        {
-                            if(player.isPaused()) Player.resumeTrack()
-                            else Player.pauseTrack()
-                        }
-                    }
+                    id: previousBtn
+                    iconName: "media-skip-backward"
+                    onClicked: Player.previousTrack()
+                    onPressAndHold: Player.playAt(prevTrackIndex)
 
-                    BabeButton
-                    {
-                        id: nextBtn
-                        iconName: "media-skip-forward"
-                        onClicked: Player.nextTrack()
-                        onPressAndHold: Player.playAt(Player.shuffle())
-                    }
+                }
 
-                    BabeButton
+                BabeButton
+                {
+                    Layout.fillHeight: true
+
+                    id: playIcon
+                    iconName: "media-playback-start"
+                    onClicked:
                     {
-                        id: shuffleBtn
-                        iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                        onClicked: shuffle = !shuffle
+                        if(player.isPaused()) Player.resumeTrack()
+                        else Player.pauseTrack()
                     }
                 }
 
+                BabeButton
+                {
+                    Layout.fillHeight: true
+
+                    id: nextBtn
+                    iconName: "media-skip-forward"
+                    onClicked: Player.nextTrack()
+                    onPressAndHold: Player.playAt(Player.shuffle())
+                }
+
+                BabeButton
+                {
+                    Layout.fillHeight: true
+
+                    id: shuffleBtn
+                    iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+                    onClicked: shuffle = !shuffle
+
+                }
 
 
                 BabeButton
                 {
                     id: menuBtn
-                    Layout.alignment: Qt.AlignRight
-
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     iconName: /*"application-menu"*/ "overflow-menu"
                     onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
                 }
@@ -308,7 +316,7 @@ Item
             Rectangle
             {
                 anchors.fill: parent
-                color: bae.midLightColor()
+                color: midLightColor
                 opacity: 0.8
                 z: -999
             }
@@ -328,7 +336,7 @@ Item
                     Layout.alignment: Qt.AlignCenter
                     horizontalAlignment: Qt.AlignHCenter
                     text: "00:00"
-                    color: bae.foregroundColor()
+                    color: foregroundColor
                     font.pointSize: 8
                     elide: Text.ElideRight
 
@@ -344,7 +352,7 @@ Item
                     Layout.alignment: Qt.AlignCenter
                     horizontalAlignment: Qt.AlignHCenter
                     text: currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : ""
-                    color: bae.foregroundColor()
+                    color: foregroundColor
                     font.pointSize: 8
                     elide: Text.ElideRight
                 }
@@ -358,7 +366,7 @@ Item
                     Layout.alignment: Qt.AlignCenter
                     horizontalAlignment: Qt.AlignHCenter
                     text: "00:00"
-                    color: bae.foregroundColor()
+                    color: foregroundColor
                     font.pointSize: 8
                     elide: Text.ElideRight
 
@@ -391,13 +399,13 @@ Item
                         implicitHeight: 2
                         width: progressBar.availableWidth
                         height: implicitHeight
-                        color: bae.foregroundColor()
+                        color: foregroundColor
 
                         Rectangle
                         {
                             width: progressBar.visualPosition * parent.width
                             height: parent.height
-                            color: bae.babeColor()
+                            color: babeColor
                         }
                     }
 
@@ -408,7 +416,7 @@ Item
                         implicitWidth: 16
                         implicitHeight: 16
                         radius: 13
-                        color: bae.babeColor()
+                        color: babeColor
                     }
                 }
 
@@ -475,6 +483,7 @@ Item
                     height: parent.height
                     quickPlayVisible: false
                     coverArtVisible: true
+                    trackRating: true
                     //                    onMovementStarted:
                     //                    {
                     //                        if(contentY > list.height)
@@ -491,7 +500,7 @@ Item
                     Rectangle
                     {
                         anchors.fill: parent
-                        color: bae.altColor()
+                        color: altColor
                         z: -999
 
                     }

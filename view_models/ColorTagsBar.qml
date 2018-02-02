@@ -24,7 +24,7 @@ Item
                 height: recSize
                 color: bae.moodColor(0)
                 radius: 2
-                border.color: bae.altColor()
+                border.color: altColor
                 border.width: 1
             }
 
@@ -43,7 +43,7 @@ Item
                 height: recSize
                 color: bae.moodColor(1)
                 radius: 2
-                border.color: bae.altColor()
+                border.color: altColor
                 border.width: 1
             }
 
@@ -62,7 +62,7 @@ Item
                 height: recSize
                 color: bae.moodColor(2)
                 radius: 2
-                border.color: bae.altColor()
+                border.color: altColor
                 border.width: 1
             }
 
@@ -81,7 +81,7 @@ Item
                 height: recSize
                 color: bae.moodColor(3)
                 radius: 2
-                border.color: bae.altColor()
+                border.color: altColor
                 border.width: 1
             }
 
@@ -101,7 +101,7 @@ Item
                 height: recSize
                 color: bae.moodColor(4)
                 radius: 2
-                border.color: bae.altColor()
+                border.color: altColor
                 border.width: 1
             }
 

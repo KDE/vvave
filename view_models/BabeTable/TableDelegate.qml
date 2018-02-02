@@ -29,7 +29,7 @@ ItemDelegate
         }else false
     }
 
-    property string textColor: ListView.isCurrentItem ? bae.hightlightTextColor() : bae.foregroundColor()
+    property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
     property bool number : false
     property bool quickPlay : true
     property bool coverArt : false
@@ -54,7 +54,7 @@ ItemDelegate
             if(trackMood.length > 0)
                 Qt.lighter(trackMood)
             else
-                index % 2 === 0 ? bae.midColor() : "transparent"
+                index % 2 === 0 ? midColor : "transparent"
         }
         opacity: 0.3
     }

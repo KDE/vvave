@@ -1,25 +1,26 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import "../../view_models/BabeDialog"
 
-Dialog
+BabeDialog
 {
     id: newPlaylistDialogRoot
-    x: (parent.width - width) / 2
-    y: (parent.height - height) / 2
-    parent: ApplicationWindow.overlay
-
-    modal: true
     title: "New Playlist"
-    standardButtons: Dialog.Yes | Dialog.No
+    standardButtons: Dialog.Save | Dialog.Cancel
+    width: isMobile ? parent.width*0.7 : parent.width*0.4
 
     Column
     {
         spacing: 20
         anchors.fill: parent
+        anchors.centerIn: parent
+        width: parent.width
+
         TextField
         {
             id: newPlaylistField
-
+            width: parent.width
+            color: foregroundColor
             onAccepted:
             {
                 addPlaylist()

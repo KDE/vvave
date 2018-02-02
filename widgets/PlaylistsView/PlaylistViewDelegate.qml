@@ -7,19 +7,18 @@ import "../../view_models"
 ItemDelegate
 {
     id: delegate
-    readonly property int rowHeight: isMobile ? 48 : 32
 
     width: parent.width
-    height: rowHeight
+    height: rowHeightAlt
     clip: true
 
-    property string textColor: ListView.isCurrentItem ? bae.hightlightTextColor() : bae.foregroundColor()
+    property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
 
 
     Rectangle
     {
         anchors.fill: parent
-        color: index % 2 === 0 ? bae.midColor() : "transparent"
+        color: index % 2 === 0 ? midColor : "transparent"
         opacity: 0.3
     }
 
@@ -29,11 +28,11 @@ ItemDelegate
     {
         anchors.fill: parent
         acceptedButtons:  Qt.RightButton
-        onClicked:
-        {
-            if(!root.isMobile && mouse.button === Qt.RightButton)
-                rightClicked()
-        }
+//        onClicked:
+//        {
+//            if(!root.isMobile && mouse.button === Qt.RightButton)
+//                rightClicked()
+//        }
     }
 
     RowLayout

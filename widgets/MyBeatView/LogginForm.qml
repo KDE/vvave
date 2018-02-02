@@ -10,7 +10,7 @@ Item
     {
         anchors.fill: parent
         z: -999
-        color: bae.midLightColor()
+        color: midLightColor
 
         //        Image
         //        {
@@ -33,42 +33,26 @@ Item
     {
         anchors.fill: parent
 
-        Item
-        {
-            id: banner
-            Layout.fillWidth: true
-            anchors.top: parent.top
-            height: 64
-            width: parent.width
+        //        Item
+        //        {
+        //            id: banner
+        //            Layout.fillWidth: true
+        //            anchors.top: parent.top
+        //            height: 64
+        //            width: parent.width
 
-            Rectangle
-            {
-                anchors.fill: parent
-                z: -999
-                color: "#dedede"
-                opacity: 0.5
-            }
-
-            Item
-            {
-                anchors.centerIn: parent
-                width: parent.width * 0.3
-                height: parent.height *0.5
-                Image
-                {
-                    anchors.centerIn: parent
-                    sourceSize.width: parent.width
-                    sourceSize.height: parent.height
-                    fillMode: Image.Pad
-                    smooth: true
-                    mipmap: true
-                    source: "qrc:/assets/beat2.png"
-                    horizontalAlignment: Qt.AlignHCenter
-                }
-            }
+        ////            Rectangle
+        ////            {
+        ////                anchors.fill: parent
+        ////                z: -999
+        ////                color: "#dedede"
+        ////                opacity: 0.5
+        ////            }
 
 
-        }
+
+
+        //        }
 
 
         Item
@@ -85,6 +69,30 @@ Item
 
                 Item
                 {
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignCenter
+                    Layout.margins: 20
+                    width: parent.width
+                    Image
+                    {
+                        anchors.centerIn: parent
+                        id: beatsImg
+                        fillMode: Image.PreserveAspectFit
+                        mipmap: true
+                        source: "qrc:/assets/beat.svg"
+                        horizontalAlignment: Qt.AlignHCenter
+                    }
+
+                    ColorOverlay
+                    {
+                        anchors.fill: beatsImg
+                        source: beatsImg
+                        color: foregroundColor
+                    }
+                }
+
+                Item
+                {
                     width: parent.width
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignCenter
@@ -96,7 +104,9 @@ Item
                         anchors.fill: parent
                         anchors.centerIn: parent
                         placeholderText: "nick or email"
-                        color: bae.foregroundColor()
+                        color: foregroundColor
+                        horizontalAlignment: Text.AlignHCenter
+
 
                     }
                 }
@@ -115,9 +125,8 @@ Item
                         anchors.fill: parent
                         anchors.centerIn: parent
                         placeholderText: "password"
-                        color: bae.foregroundColor()
-
-
+                        color: foregroundColor
+                        horizontalAlignment: Text.AlignHCenter
                     }
                 }
 
@@ -132,7 +141,7 @@ Item
 
                     background: Rectangle
                     {
-                        color: bae.babeColor()
+                        color: babeColor
                         radius: 3
                     }
 
@@ -141,12 +150,14 @@ Item
                         text: "Login"
                         horizontalAlignment: Qt.AlignHCenter
                         verticalAlignment: Qt.AlignVCenter
-                        color: bae.hightlightTextColor()
+                        color: highlightTextColor
                         font.bold: true
                         font.pointSize: 11
                     }
 
                 }
+
+
             }
 
         }

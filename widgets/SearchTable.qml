@@ -8,7 +8,7 @@ BabeTable
     property var searchRes
     trackNumberVisible: false
     headerBar: true
-    headerClose: true
+//    headerClose: true
     holder.message: "No search results!"
     coverArtVisible: true
     trackDuration: true
@@ -22,7 +22,7 @@ BabeTable
     Rectangle
     {
         anchors.fill: parent
-        color: bae.altColor()
+        color: altColor
         z: -999
     }
 

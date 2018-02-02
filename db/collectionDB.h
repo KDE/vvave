@@ -46,9 +46,10 @@ public:
 
     void addTrack(const BAE::DB &track);
     bool updateTrack(const BAE::DB &track);
-    bool rateTrack(const QString &path, const int &value);
-    bool moodTrack(const QString &path, const QString &value);
-    bool artTrack(const QString &path, const QString &value);
+    Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
+    Q_INVOKABLE bool colorTagTrack(const QString &path, const QString &value);
+    Q_INVOKABLE QString trackColorTag(const QString &path);
+
     bool lyricsTrack(const BAE::DB &track, const QString &value);
     bool playedTrack(const QString &url, const int &increment = 1);
 
@@ -63,7 +64,7 @@ public:
     bool wikiAlbum(const BAE::DB &track, QString value);
     bool tagsAlbum(const BAE::DB &track, const QString &value, const QString &context = "");
 
-    bool addPlaylist(const QString &title);
+    Q_INVOKABLE bool addPlaylist(const QString &title);
     bool trackPlaylist(const QString &url, const QString &playlist);
 
     bool addFolder(const QString &url);
@@ -83,9 +84,8 @@ public:
     BAE::DB_LIST getOnlineTracks(const BAE::KEY &orderBy = BAE::KEY::ADD_DATE, const BAE::W &order = BAE::W::DESC);
 
 
-    QString getTrackArt(const QString &path);
     QStringList getTrackTags(const QString &path);
-    int getTrackStars(const QString &path);
+    Q_INVOKABLE int getTrackStars(const QString &path);
    //    QStringList getArtistTags(const QString &artist);
   //    QStringList getAlbumTags(const QString &album, const QString &artist);
     QStringList getArtistAlbums(const QString &artist);
@@ -99,7 +99,7 @@ public:
     bool removeAlbum(const QString &album, const QString &artist);
     bool cleanAlbums();
     bool removeSource(const QString &path);
-    bool removeTrack(const QString &path);
+    Q_INVOKABLE bool removeTrack(const QString &path);
     QSqlQuery getQuery(const QString &queryTxt);
     /*useful tools*/
     sourceTypes sourceType(const QString &url);

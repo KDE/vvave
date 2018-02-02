@@ -24,10 +24,9 @@
 
 using namespace BAE;
 
-Babe::Babe(QObject *parent) : QObject(parent)
+Babe::Babe(QObject *parent) : CollectionDB(parent)
 {    
     qDebug()<<"CONSTRUCTING ABE INTERFACE";
-    this->con = new CollectionDB(this);
 
     this->set = new BabeSettings(this);
 
@@ -58,17 +57,17 @@ Babe::~Babe()
 
 QVariantList Babe::get(const QString &queryTxt)
 {
-    return this->con->getDBDataQML(queryTxt);
+    return getDBDataQML(queryTxt);
 }
 
 QVariantList Babe::getList(const QStringList &urls)
 {
-    return Babe::transformData(this->con->getDBData(urls));
+    return Babe::transformData(getDBData(urls));
 }
 
 void Babe::trackLyrics(const QString &url)
 {
-    auto track = this->con->getDBData(QString("SELECT * FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
+    auto track = getDBData(QString("SELECT * FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
                                       KEYMAP[KEY::URL], url));
 
     if(track.isEmpty()) return;
@@ -78,7 +77,7 @@ void Babe::trackLyrics(const QString &url)
 
 bool Babe::trackBabe(const QString &path)
 {
-    auto babe = this->con->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::BABE],
+    auto babe = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::BABE],
                                      TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::URL],path));
 
@@ -90,7 +89,7 @@ bool Babe::trackBabe(const QString &path)
 
 QString Babe::artistArt(const QString &artist)
 {
-    auto artwork = this->con->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::ARTWORK],
+    auto artwork = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::ARTWORK],
                                         TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTIST],artist));
 
@@ -103,7 +102,7 @@ QString Babe::artistArt(const QString &artist)
 
 QString Babe::artistWiki(const QString &artist)
 {
-    auto wiki = this->con->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::WIKI],
+    auto wiki = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::WIKI],
                                      TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTIST],artist));
 
@@ -119,7 +118,7 @@ QString Babe::albumArt(const QString &album, const QString &artist)
             TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::ALBUM],album,
             KEYMAP[KEY::ARTIST],artist);
-    auto albumCover = this->con->getDBData(queryStr);
+    auto albumCover = getDBData(queryStr);
 
     if(!albumCover.isEmpty())
         if(!albumCover.first()[KEY::ARTWORK].isEmpty() && albumCover.first()[KEY::ARTWORK] != SLANG[W::NONE])
@@ -140,7 +139,7 @@ void Babe::fetchTrackLyrics(DB &song)
         if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS].isEmpty())
         {
             auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
-            this->con->lyricsTrack(track, lyrics);
+            lyricsTrack(track, lyrics);
             song.insert(KEY::LYRICS, lyrics);
             qDebug()<<"GOT LYRICS"<<lyrics;
             emit this->trackLyricsReady(song[KEY::LYRICS], song[KEY::URL]);
@@ -158,7 +157,7 @@ QString Babe::albumWiki(const QString &album, const QString &artist)
             TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::ALBUM],album,
             KEYMAP[KEY::ARTIST],artist);
-    auto wiki = this->con->getDBData(queryStr);
+    auto wiki = getDBData(queryStr);
 
     if(!wiki.isEmpty())
         return wiki.first()[KEY::WIKI];
@@ -168,45 +167,13 @@ QString Babe::albumWiki(const QString &album, const QString &artist)
 
 bool Babe::babeTrack(const QString &path, const bool &value)
 {
-    if(this->con->update(TABLEMAP[TABLE::TRACKS],
+    if(update(TABLEMAP[TABLE::TRACKS],
                          KEYMAP[KEY::BABE],
                          value ? 1 : 0,
                          KEYMAP[KEY::URL],
                          path)) return true;
 
     return false;
-}
-
-bool Babe::rateTrack(const QString &path, const int &value)
-{
-    return this->con->rateTrack(path, value);
-}
-
-int Babe::trackRate(const QString &path)
-{
-    return this->con->getTrackStars(path);
-}
-
-bool Babe::moodTrack(const QString &path, const QString &color)
-{
-    qDebug()<<path<<color;
-    return this->con->artTrack(path, color);
-}
-
-bool Babe::addPlaylist(const QString &playlist)
-{
-    qDebug()<<playlist;
-    return this->con->addPlaylist(playlist);
-}
-
-QStringList Babe::getPlaylists()
-{
-    return this->con->getPlaylists();
-}
-
-bool Babe::removeTrack(const QString &url)
-{
-    return this->con->removeTrack(url);
 }
 
 void Babe::notify(const QString &title, const QString &body)
@@ -225,7 +192,7 @@ void Babe::notifySong(const QString &url)
 {
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     auto query = QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where url = \"%1\"").arg(url);
-    auto track = this->con->getDBData(query);
+    auto track = getDBData(query);
     Babe::nof->notifySong(track.first());
 #else
     Q_UNUSED(url);
@@ -343,7 +310,7 @@ QString Babe::textColor()
 #endif
 }
 
-QString Babe::hightlightColor()
+QString Babe::highlightColor()
 {
 #if defined(Q_OS_ANDROID)
     return "#58bcff";
@@ -355,7 +322,7 @@ QString Babe::hightlightColor()
 #endif
 }
 
-QString Babe::hightlightTextColor()
+QString Babe::highlightTextColor()
 {
 #if defined(Q_OS_ANDROID)
     return "#FFF";
@@ -418,7 +385,19 @@ QString Babe::altColor()
 QString Babe::babeColor()
 {
     return "#f84172";
-//    return "#E91E63";
+    //    return "#E91E63";
+}
+
+QString Babe::babeAltColor()
+{
+#if defined(Q_OS_ANDROID)
+    return "#31363b";
+#elif defined(Q_OS_LINUX)
+    QWidget widget;
+    return widget.palette().color(QPalette::Background).name();
+#elif defined(Q_OS_WIN32)
+    return "#31363b";
+#endif
 }
 
 void Babe::androidStatusBarColor(const QString &color)
@@ -573,16 +552,10 @@ uint Babe::sizeHint(const uint &hint)
     else return hint;
 }
 
-QString Babe::icon(const QString &icon, const int &size)
-{
-    auto pix = QIcon::fromTheme(icon).pixmap(QSize(size, size), QIcon::Mode::Normal, QIcon::State::On);
-
-    return "";
-}
 
 QString Babe::loadCover(const QString &url)
 {
-    auto map = this->con->getDBData(QStringList() << url);
+    auto map = getDBData(QStringList() << url);
 
     if(map.isEmpty()) return "";
 
@@ -620,9 +593,9 @@ QVariantList Babe::searchFor(const QStringList &queries)
             searchQuery = searchQuery.trimmed();
             if(!searchQuery.isEmpty())
             {
-                mapList += this->con->getSearchedTracks(BAE::KEY::WIKI, searchQuery);
-                mapList += this->con->getSearchedTracks(BAE::KEY::TAG, searchQuery);
-                mapList += this->con->getSearchedTracks(BAE::KEY::LYRICS, searchQuery);
+                mapList += getSearchedTracks(BAE::KEY::WIKI, searchQuery);
+                mapList += getSearchedTracks(BAE::KEY::TAG, searchQuery);
+                mapList += getSearchedTracks(BAE::KEY::LYRICS, searchQuery);
             }
 
         }else if(searchQuery.contains((BAE::SearchTMap[BAE::SearchT::SIMILAR]+":")))
@@ -630,7 +603,7 @@ QVariantList Babe::searchFor(const QStringList &queries)
             searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::SIMILAR]+":","").trimmed();
             searchQuery=searchQuery.trimmed();
             if(!searchQuery.isEmpty())
-                mapList += this->con->getSearchedTracks(BAE::KEY::TAG, searchQuery);
+                mapList += getSearchedTracks(BAE::KEY::TAG, searchQuery);
 
         }else
         {
@@ -653,11 +626,11 @@ QVariantList Babe::searchFor(const QStringList &queries)
             if(!searchQuery.isEmpty())
             {
                 if(hasKey)
-                    mapList += this->con->getSearchedTracks(key, searchQuery);
+                    mapList += getSearchedTracks(key, searchQuery);
                 else
                 {
                     auto queryTxt = QString("SELECT t.*, al.artwork FROM tracks t INNER JOIN albums al ON t.album = al.album AND t.artist = al.artist WHERE t.title LIKE \"%"+searchQuery+"%\" OR t.artist LIKE \"%"+searchQuery+"%\" OR t.album LIKE \"%"+searchQuery+"%\"OR t.genre LIKE \"%"+searchQuery+"%\"OR t.url LIKE \"%"+searchQuery+"%\" LIMIT 1000");
-                    mapList += this->con->getDBDataQML(queryTxt);
+                    mapList += getDBDataQML(queryTxt);
                 }
             }
         }

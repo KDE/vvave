@@ -14,6 +14,7 @@ import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
 import "view_models"
+import "view_models/BabeDialog"
 
 Kirigami.ApplicationWindow
 {
@@ -26,19 +27,54 @@ Kirigami.ApplicationWindow
     title: qsTr("Babe")
     wideScreen: root.width > coverSize
 
+    /*THEMING*/
+
+    property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", isMobile ?  24 : 22)
+
+    property string babeColor : bae.babeColor()
+    property string babeAltColor : bae.babeAltColor()
+    property string backgroundColor : bae.backgroundColor()
+    property string foregroundColor : bae.foregroundColor()
+    property string textColor : bae.textColor()
+    property string babeHighlightColor : bae.highlightColor()
+    property string highlightTextColor : bae.highlightTextColor()
+    property string midColor : bae.midColor()
+    property string midLightColor : bae.midLightColor()
+    property string darkColor : bae.darkColor()
+    property string baseColor : bae.baseColor()
+    property string altColor : bae.altColor()
+    property string shadowColor : bae.shadowColor()
+
+    readonly property string lightBackgroundColor : "#eff0f1"
+    readonly property string lightForegroundColor : "#31363b"
+    readonly property string lightTextColor : "#31363b"
+    readonly property string lightBabeHighlightColor : "#3daee9"
+    readonly property string lightHighlightTextColor : "#eff0f1"
+    readonly property string lightMidColor : "#cacaca"
+    readonly property string lightMidLightColor : "#dfdfdf"
+    readonly property string lightDarkColor : "#7f8c8d"
+    readonly property string lightBaseColor : "#fcfcfc"
+    readonly property string lightAltColor : "#eeeeee"
+    readonly property string lightShadowColor : "#868686"
 
     Material.theme: Material.Light
-    Material.accent: bae.babeColor()
-    Material.background: bae.backgroundColor()
-    Material.primary: bae.backgroundColor()
-    Material.foreground: bae.foregroundColor()
+    Material.accent: babeColor
+    Material.background: backgroundColor
+    Material.primary: backgroundColor
+    Material.foreground: foregroundColor
+
+    /*SIGNALS*/
 
     signal missingAlert(var track)
+
+    /*READONLY PROPS*/
+
     readonly property bool isMobile: bae.isMobile()
     readonly property int wideSize : bae.screenGeometry("width")*0.5
-    property int toolBarIconSize: isMobile ?  24 : 22
     readonly property int rowHeight: isMobile ? 64 : 52
     readonly property int rowHeightAlt: isMobile ? 48 : 32
+
+    /*PROPS*/
 
     property int columnWidth: Kirigami.Units.gridUnit * 20
     property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
@@ -73,20 +109,24 @@ Kirigami.ApplicationWindow
     {
         if(pageStack.currentIndex === 0 && isMobile && !pageStack.wideMode)
         {
-            bae.androidStatusBarColor(bae.babeColor())
-            Material.background = bae.babeColor()
+            bae.androidStatusBarColor(babeColor)
+            Material.background = babeColor
         }else
         {
-            bae.androidStatusBarColor(bae.backgroundColor())
-            Material.background = bae.backgroundColor()
+            bae.androidStatusBarColor(babeAltColor)
+            Material.background = babeAltColor
         }
-
     }
 
+    Component.onCompleted:
+    {
+        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
+    }
 
-    BabeDialog
+    BabeMessage
     {
         id: missingDialog
+        width: isMobile ? parent.width *0.9 : parent.width*0.4
         title: "Missing file"
         onAccepted:
         {
@@ -130,7 +170,7 @@ Kirigami.ApplicationWindow
         searchView.clearTable()
         searchView.headerTitle = ""
         searchView.searchRes = []
-        currentView = 0
+        //        currentView = 0
     }
 
     Connections
@@ -170,9 +210,8 @@ Kirigami.ApplicationWindow
     {
         id: mainToolbar
         visible: true
-        size: toolBarIconSize
         currentIndex: currentView
-        backgroundColor: pageStack.currentIndex === 0 && !pageStack.wideMode ? bae.babeColor() : bae.backgroundColor()
+        bgColor: pageStack.currentIndex === 0 && !pageStack.wideMode ? babeColor : babeAltColor
         textColor: pageStack.currentIndex === 0 && !pageStack.wideMode ? "#FFF" : bae.foregroundColor()
 
         onPlaylistViewClicked:
@@ -185,8 +224,8 @@ Kirigami.ApplicationWindow
 
         onTracksViewClicked:
         {
-            if(!isMobile && !pageStack.wideMode)
-                root.width = wideSize
+            //            if(!isMobile && !pageStack.wideMode)
+            //                root.width = wideSize
 
             pageStack.currentIndex = 1
             currentView = 0
@@ -194,8 +233,8 @@ Kirigami.ApplicationWindow
 
         onAlbumsViewClicked:
         {
-            if(!isMobile && !pageStack.wideMode)
-                root.width = wideSize
+            //            if(!isMobile && !pageStack.wideMode)
+            //                root.width = wideSize
 
             pageStack.currentIndex = 1
             currentView = 1
@@ -203,8 +242,8 @@ Kirigami.ApplicationWindow
 
         onArtistsViewClicked:
         {
-            if(!isMobile && !pageStack.wideMode)
-                root.width = wideSize
+            //            if(!isMobile && !pageStack.wideMode)
+            //                root.width = wideSize
 
             pageStack.currentIndex = 1
             currentView = 2
@@ -212,8 +251,8 @@ Kirigami.ApplicationWindow
 
         onPlaylistsViewClicked:
         {
-            if(!isMobile && !pageStack.wideMode)
-                root.width = wideSize
+            //            if(!isMobile && !pageStack.wideMode)
+            //                root.width = wideSize
 
             pageStack.currentIndex = 1
             currentView = 3
@@ -221,8 +260,8 @@ Kirigami.ApplicationWindow
 
         onBabeViewClicked:
         {
-            if(!isMobile && !pageStack.wideMode)
-                root.width = wideSize
+            //            if(!isMobile && !pageStack.wideMode)
+            //                root.width = wideSize
 
             pageStack.currentIndex = 1
             currentView = 4
@@ -234,7 +273,7 @@ Kirigami.ApplicationWindow
         id: searchBox
         width: parent.width
         height: 48
-        color: searchInput.activeFocus ? bae.midColor() : bae.midLightColor()
+        color: searchInput.activeFocus ? midColor : midLightColor
         Kirigami.Separator
         {
             Rectangle
@@ -259,7 +298,7 @@ Kirigami.ApplicationWindow
             {
                 id: searchBtn
                 Layout.fillHeight: true
-                iconColor: currentView === 5 ? bae.babeColor() : bae.foregroundColor()
+                iconColor: currentView === 5 ? babeColor : foregroundColor
                 //                visible: !(searchInput.focus || searchInput.text)
                 iconName: "edit-find" //"search"
                 onClicked:
@@ -284,14 +323,14 @@ Kirigami.ApplicationWindow
                 TextInput
                 {
                     id: searchInput
-                    color: bae.foregroundColor()
+                    color: foregroundColor
                     anchors.fill: parent
                     anchors.centerIn: parent
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment:  Text.AlignVCenter
                     selectByMouse: !root.isMobile
-                    selectionColor: bae.hightlightColor()
-                    selectedTextColor: bae.foregroundColor()
+                    selectionColor: babeHighlightColor
+                    selectedTextColor: foregroundColor
                     property string placeholderText: "Search..."
 
                     onAccepted: runSearch()
@@ -312,7 +351,7 @@ Kirigami.ApplicationWindow
                 Layout.fillHeight: true
 
                 iconName: "games-config-options"
-                iconColor: settingsDrawer.visible  ? bae.babeColor() : bae.foregroundColor()
+                iconColor: settingsDrawer.visible  ? babeColor : foregroundColor
                 onClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
             }
 
@@ -322,7 +361,7 @@ Kirigami.ApplicationWindow
     background: Rectangle
     {
         anchors.fill: parent
-        color: bae.altColor()
+        color: altColor
         z: -999
     }
 
@@ -452,7 +491,7 @@ Kirigami.ApplicationWindow
                         onQuickPlayTrack: Player.quickPlay(searchView.model.get(index))
                         onPlayAll: Player.playAll(searchView.searchRes)
                         onAppendAll: Player.appendAll(searchView.searchRes)
-                        onHeaderClosed: clearSearch()
+                        //                        onHeaderClosed: clearSearch()
                         onArtworkDoubleClicked:
                         {
                             var query = Q.GET.albumTracks_.arg(searchView.model.get(index).album)

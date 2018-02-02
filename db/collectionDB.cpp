@@ -315,14 +315,7 @@ bool CollectionDB::rateTrack(const QString &path, const int &value)
 }
 
 
-bool CollectionDB::moodTrack(const QString &path, const QString &value)
-{
-    Q_UNUSED(path);
-    Q_UNUSED(value);
-    return false;
-}
-
-bool CollectionDB::artTrack(const QString &path, const QString &value)
+bool CollectionDB::colorTagTrack(const QString &path, const QString &value)
 {
     if(update(TABLEMAP[TABLE::TRACKS],
               KEYMAP[KEY::ART],
@@ -723,7 +716,7 @@ DB_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const int &lim
 }
 
 
-QString CollectionDB::getTrackArt(const QString &path)
+QString CollectionDB::trackColorTag(const QString &path)
 {
     QString color;
     auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::ART],
@@ -866,35 +859,35 @@ void CollectionDB::insertArtwork(const DB &track)
 
     switch(albumType(track))
     {
-        case TABLE::ALBUMS :
-        {
-            auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(TABLEMAP[TABLE::ALBUMS],
-                    KEYMAP[KEY::ARTWORK],
-                    path.isEmpty() ? SLANG[W::NONE] : path,
-                                                      KEYMAP[KEY::ALBUM],
-                                                      album,
-                                                      KEYMAP[KEY::ARTIST],
-                                                      artist);
+    case TABLE::ALBUMS :
+    {
+        auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(TABLEMAP[TABLE::ALBUMS],
+                KEYMAP[KEY::ARTWORK],
+                path.isEmpty() ? SLANG[W::NONE] : path,
+                                                  KEYMAP[KEY::ALBUM],
+                                                  album,
+                                                  KEYMAP[KEY::ARTIST],
+                                                  artist);
 
-            auto query = this->getQuery(queryStr);
-            if(!query.exec())qDebug()<<"COULDNT Artwork[cover] inerted into DB"<<artist<<album;
-            break;
+        auto query = this->getQuery(queryStr);
+        if(!query.exec())qDebug()<<"COULDNT Artwork[cover] inerted into DB"<<artist<<album;
+        break;
 
-        }
-        case TABLE::ARTISTS:
-        {
-            auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::ARTISTS],
-                    KEYMAP[KEY::ARTWORK],
-                    path.isEmpty() ? SLANG[W::NONE] : path,
-                                                      KEYMAP[KEY::ARTIST],
-                                                      artist);
-            auto query = this->getQuery(queryStr);
-            if(!query.exec())qDebug()<<"COULDNT Artwork[head] inerted into DB"<<artist;
+    }
+    case TABLE::ARTISTS:
+    {
+        auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::ARTISTS],
+                KEYMAP[KEY::ARTWORK],
+                path.isEmpty() ? SLANG[W::NONE] : path,
+                                                  KEYMAP[KEY::ARTIST],
+                                                  artist);
+        auto query = this->getQuery(queryStr);
+        if(!query.exec())qDebug()<<"COULDNT Artwork[head] inerted into DB"<<artist;
 
-            break;
+        break;
 
-        }
-        default: return;
+    }
+    default: return;
     }
 
     emit artworkInserted(track);

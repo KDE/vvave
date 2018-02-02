@@ -6,26 +6,26 @@ Pane
 {
     id: gridPage
     padding: 20
-    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
 
-    property int albumSize:
-    {
-        if(!isMobile)
-        {
-            Math.sqrt(screenSize)*0.15 > 150 ? 150 : Math.sqrt(screenSize)*0.15
-        }else
-        {
+//    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
+    property int hintSize : Math.sqrt(root.width*root.height)*0.25
+    property int albumCoverSize: hintSize > 150 ? 150 : hintSize
 
-            var hintSize = Math.sqrt(root.width*root.height)*0.25
+//    property int albumSize:
+//    {
+//                if(!isMobile)
+//                {
+//                    Math.sqrt(screenSize)*0.15 > 150 ? 150 : Math.sqrt(screenSize)*0.15
+//                }else
+//                {
+//        if(hintSize > 150)
+//            150
+//        else
+//            hintSize
+//                }
+//    }
 
-            if(hintSize > 150)
-                150
-            else
-                hintSize
-        }
-    }
-    property int albumSpacing: 20
-    property int albumRadius : 0
+    property int albumCoverRadius : 0
     property bool albumCardVisible : true
     property alias gridModel: gridModel
     property alias grid: grid
@@ -33,14 +33,13 @@ Pane
     signal albumCoverPressed(string album, string artist)
     signal bgClicked()
 
-    width: 500
-    height: 400
 
+    onWidthChanged: grid.forceLayout()
 
     background: Rectangle
     {
         anchors.fill: parent
-        color: bae.altColor()
+        color: altColor
         z: -999
     }
 
@@ -76,9 +75,12 @@ Pane
 
         width: Math.min(model.count, Math.floor(parent.width/cellWidth))*cellWidth
         height: parent.height
+
         anchors.horizontalCenter: parent.horizontalCenter
-        cellWidth: albumSize +(albumSize*0.2)
-        cellHeight:  albumSize+(albumSize*0.8)
+
+        cellWidth: albumCoverSize +(albumCoverSize*0.2)
+        cellHeight:  albumCoverSize+(albumCoverSize*0.8)
+
         highlightFollowsCurrentItem: false
 
         focus: true
@@ -102,6 +104,7 @@ Pane
         //            radius: 4
         //        }
 
+
         //        onWidthChanged:
         //        {
         //            var amount = parseInt(grid.width/(albumSize+albumSpacing),10)
@@ -118,9 +121,10 @@ Pane
         {
             id: albumDelegate
 
-            albumSize : gridPage.albumSize
-            albumRadius: gridPage.albumRadius
+            albumSize : albumCoverSize
+            albumRadius: albumCoverRadius
             albumCard: albumCardVisible
+
             Connections
             {
                 target: albumDelegate

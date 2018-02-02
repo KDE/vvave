@@ -35,16 +35,13 @@ ListView
     signal playAll()
     signal appendAll()
 
-    width: 320
-    height: 480
-
     clip: true
 
     highlight: Rectangle
     {
         width: list.width
         height: list.currentItem.height
-        color: bae.hightlightColor()
+        color: babeHighlightColor
         y: list.currentItem.y
     }
 
@@ -93,7 +90,7 @@ ListView
         id: tableHeader
         width: parent.width
         height:  headerBar ?  48 : 0
-        color: bae.midLightColor()
+        color: midLightColor
         visible: headerBar
         z: 999
 
@@ -131,7 +128,7 @@ ListView
                 elide: Text.ElideRight
                 font.pointSize: 12
                 font.bold: isMobile
-                color: bae.foregroundColor()
+                color: foregroundColor
 
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment:  Text.AlignVCenter
@@ -213,7 +210,7 @@ ListView
     function openItemMenu(index)
     {
         currentIndex = index
-        contextMenu.rate = bae.trackRate(list.model.get(list.currentIndex).url)
+        contextMenu.rate = bae.getTrackStars(list.model.get(list.currentIndex).url)
         if(root.isMobile) contextMenu.open()
         else
             contextMenu.popup()

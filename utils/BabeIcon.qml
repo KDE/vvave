@@ -4,7 +4,7 @@ import "../utils/Icons.js" as MdiFont
 Text
 {
     id: babeIcon
-    property string iconColor: bae.foregroundColor()
+    property string iconColor: foregroundColor
     property int iconSize
     property string icon
     readonly property string defaultColor : iconColor

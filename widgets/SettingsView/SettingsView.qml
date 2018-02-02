@@ -30,7 +30,7 @@ Kirigami.GlobalDrawer
     rightPadding: 0
 
     Kirigami.Theme.inherit: false
-//    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+    //    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
 
     function scanDir(folderUrl)
@@ -38,16 +38,16 @@ Kirigami.GlobalDrawer
         bae.scanDir(folderUrl)
     }
 
-        background: Rectangle
-        {
-            anchors.fill: parent
-            color: bae.backgroundColor()
-            z: -999
-        }
+    background: Rectangle
+    {
+        anchors.fill: parent
+        color: backgroundColor
+        z: -999
+    }
 
     //    contentItem: Text
     //    {
-    //        color: bae.foregroundColor()
+    //        color: foregroundColor
     //    }
 
 
@@ -84,11 +84,11 @@ Kirigami.GlobalDrawer
     }
 
 
-    topContent:    ColumnLayout
+    topContent: ColumnLayout
     {
+        id: sourcesRoot
         width: settingsView.width
         height: settingsView.height * 0.5
-
 
         ListView
         {
@@ -101,7 +101,7 @@ Kirigami.GlobalDrawer
             {
                 anchors.fill: parent
                 z: -999
-                color: bae.altColor()
+                color: altColor
             }
 
             ListModel
@@ -128,7 +128,7 @@ Kirigami.GlobalDrawer
                         elide: Text.ElideRight
                         Layout.fillWidth: true
                         font.pointSize: 10
-                        color: bae.foregroundColor()
+                        color: foregroundColor
                     }
                 }
             }
@@ -208,38 +208,85 @@ Kirigami.GlobalDrawer
 
             Kirigami.Action
             {
-                text: "Toolbar icon size"
+                text: "Icon size"
                 Kirigami.Action
                 {
                     text: "16"
-                    onTriggered : iconSizeChanged(text)
+                    onTriggered :
+                    {
+                        bae.saveSetting("ICON_SIZE", text, "BABE")
+                        iconSizeChanged(text)
+                    }
                 }
                 Kirigami.Action
                 {
                     text: isMobile ? "24" : "22"
-                    onTriggered : iconSizeChanged(text)
+                    onTriggered :
+                    {
+                        bae.saveSetting("ICON_SIZE", text, "BABE")
+                        iconSizeChanged(text)
+                    }
                 }
                 Kirigami.Action
                 {
                     text: "32"
-                    onTriggered : iconSizeChanged(text)
+                    onTriggered :
+                    {
+                        bae.saveSetting("ICON_SIZE", text, "BABE")
+                        iconSizeChanged(text)
+                    }
                 }
             }
 
             Kirigami.Action
             {
                 text: "Theme"
+                visible: isMobile
                 Kirigami.Action
                 {
                     text: "Light"
-                    onTriggered : iconSizeChanged(text)
+                    onTriggered : switchColorScheme("Light")
                 }
                 Kirigami.Action
                 {
                     text: "Dark"
-                    onTriggered : iconSizeChanged(text)
+                    onTriggered : switchColorScheme("Dark")
                 }
             }
         }
     ]
+
+    function switchColorScheme(variant)
+    {
+        bae.saveSetting("THEME", variant, "BABE")
+
+        if(variant === "Light")
+        {
+            backgroundColor = lightBackgroundColor
+            foregroundColor = lightForegroundColor
+            textColor = lightTextColor
+            babeHighlightColor = lightBabeHighlightColor
+            highlightTextColor = lightHighlightTextColor
+            midColor = lightMidColor
+            midLightColor = lightMidLightColor
+            darkColor = lightDarkColor
+            baseColor = lightBaseColor
+            altColor = lightAltColor
+            shadowColor = lightShadowColor
+
+        }else if(variant === "Dark")
+        {
+            backgroundColor = bae.backgroundColor()
+            foregroundColor = bae.foregroundColor()
+            textColor = bae.textColor()
+            babeHighlightColor = bae.highlightColor()
+            highlightTextColor = bae.highlightTextColor()
+            midColor = bae.midColor()
+            midLightColor = bae.midLightColor()
+            darkColor = bae.darkColor()
+            baseColor = bae.baseColor()
+            altColor = bae.altColor()
+            shadowColor = bae.shadowColor()
+        }
+    }
 }

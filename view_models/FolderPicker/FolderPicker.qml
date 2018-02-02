@@ -5,12 +5,19 @@ import "../../view_models"
 
 Popup
 {
-    width: parent.width
-    height: parent.height
-    id: folderPickerRoot   
+    width: parent.width *0.8
+    height: parent.height *0.8
+
+    x: parent.width / 2 - width / 2
+    y: parent.height / 2 - height / 2
+
+    parent: ApplicationWindow.overlay
+    z: 999
+
     modal: true
     focus: true
     clip: true
+
     enter: Transition {
         NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
     }
@@ -25,16 +32,18 @@ Popup
     background: Rectangle
     {
         anchors.fill: parent
-        color: bae.altColor()
+        color: altColor
         z: -999
+        radius: 3
     }
 
-    Column
+    ColumnLayout
     {
         anchors.fill: parent
 
         RowLayout
         {
+            Layout.fillWidth: true
             width:parent.width
 
             BabeButton
@@ -46,7 +55,7 @@ Popup
             }
 
             BabeButton
-            {  
+            {
                 id: homeBtn
                 iconName: "gohome"
                 onClicked: load(bae.homeDir())
@@ -65,12 +74,12 @@ Popup
                 onClicked: {accepted(dirList.currentUrl); close()}
                 contentItem: Text
                 {
-                    color: bae.foregroundColor()
+                    color: foregroundColor
                     text: "Accept"
                 }
                 background: Rectangle
                 {
-                    color: bae.babeColor()
+                    color: babeColor
                     radius: 2
                 }
             }
@@ -80,7 +89,8 @@ Popup
         FolderPickerList
         {
             id: dirList
-
+            Layout.fillWidth:true
+            Layout.fillHeight: true
             Connections
             {
                 target: dirList
@@ -94,7 +104,7 @@ Popup
         }
     }
     function load(folderUrl)
-    {        
+    {
         dirList.clearTable()
         var dirs = bae.getDirs(folderUrl)
         for(var path in dirs)

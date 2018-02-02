@@ -60,7 +60,7 @@ Item
                 font.bold: true
                 horizontalAlignment: Qt.AlignHCenter
                 elide: Text.ElideRight
-                color: bae.foregroundColor()
+                color: foregroundColor
             }
         }
     }

@@ -13,17 +13,6 @@ BabeGrid
     id: albumsViewGrid
     visible: true
 
-    //    property int hintSize : Math.sqrt(root.width*root.height)*0.25
-    //    albumSize:
-    //    {
-    //        if(hintSize > 150)
-    //            150
-    //        else if (hintSize < 100)
-    //            root.isMobile && hintSize < 100 ? 100 : 130
-    //        else
-    //            hintSize
-    //    }
-
     signal rowClicked(var track)
     signal playAlbum(var tracks)
     signal playTrack(var track)
@@ -69,7 +58,7 @@ BabeGrid
         {
             anchors.fill: parent
             z: -999
-            color: bae.altColor()
+            color: altColor
             Kirigami.Separator
             {
                 Rectangle
