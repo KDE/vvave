@@ -83,35 +83,28 @@ BabePopup
 
 
 
-        ListView
+        BabeList
         {
             id: sources
             Layout.fillWidth: true
             Layout.fillHeight: true
-            clip: true
 
             ListModel { id: listModel }
 
             model: listModel
 
-            delegate: ItemDelegate
+            delegate: BabeDelegate
             {
-                width: parent.width
+                id: delegate
+                label: url
 
-                contentItem: ColumnLayout
+                Connections
                 {
-                    spacing: 2
-                    width: parent.width
-
-                    Label
+                    target: delegate
+                    onClicked:
                     {
-                        id: sourceUrl
-                        width: parent.width
-                        text: url
-                        elide: Text.ElideRight
-                        Layout.fillWidth: true
-                        font.pointSize: 10
-                        color: foregroundColor
+                        sources.currentIndex = index
+                        list.rowClicked(index)
                     }
                 }
             }

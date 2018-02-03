@@ -5,41 +5,17 @@ import "../../utils"
 
 import "../../view_models"
 import "../../db/Queries.js" as Q
-ListView
+
+BabeList
 {
     id: playlistListRoot
 
-    clip: true
-
-
-    focus: true
-    interactive: true
-    highlightFollowsCurrentItem: false
-    keyNavigationWraps: !isMobile
-    keyNavigationEnabled : !isMobile
-
-    Keys.onUpPressed: decrementCurrentIndex()
-    Keys.onDownPressed: incrementCurrentIndex()
-    Keys.onReturnPressed: rowClicked(currentIndex)
-
-    boundsBehavior: isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
-    flickableDirection: Flickable.AutoFlickDirection
-
-    snapMode: ListView.SnapToItem
-
-    addDisplaced: Transition
+    AddPlaylistDialog
     {
-        NumberAnimation { properties: "x,y"; duration: 1000 }
+        id:newPlaylistDialog
     }
 
-
-    highlight: Rectangle
-    {
-        width: playlistListRoot.width
-        height: playlistListRoot.currentItem.height
-        color: babeHighlightColor
-        y: playlistListRoot.currentItem.y
-    }
+    headerPositioning: ListView.OverlayHeader
 
     Rectangle
     {
@@ -48,13 +24,6 @@ ListView
         z: -999
     }
 
-
-    AddPlaylistDialog
-    {
-        id:newPlaylistDialog
-    }
-
-    headerPositioning: ListView.OverlayHeader
 
     header: Rectangle
     {
@@ -66,7 +35,6 @@ ListView
         RowLayout
         {
             anchors.fill: parent
-
 
             BabeButton
             {
@@ -87,7 +55,6 @@ ListView
 
             Item
             {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
             }
 
@@ -99,13 +66,6 @@ ListView
             }
 
         }
-    }
-
-    BabeHolder
-    {
-        id: holder
-        visible: playlistListRoot.count === 0
-        message: "Select a playlist or create a new one"
     }
 
     ListModel
@@ -124,6 +84,7 @@ ListView
     }
 
     model: playlistListModel
+
     delegate : PlaylistViewDelegate
     {
         id: delegate
@@ -149,7 +110,8 @@ ListView
                 case "Relationships": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
                 case "Popular": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
                 case "Genre": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
-                default: break
+                default: playlistViewRoot.populate(Q.GET.playlistTracks_.arg(playlist)); break;
+
                 }
 
                 if(!playlistViewRoot.wideMode)

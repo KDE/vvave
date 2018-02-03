@@ -58,6 +58,7 @@ Item
                 text: message ? qsTr(message) : qsTr("Nothing here...")
                 padding: 10
                 font.bold: true
+                textFormat: Text.RichText
                 horizontalAlignment: Qt.AlignHCenter
                 elide: Text.ElideRight
                 color: foregroundColor

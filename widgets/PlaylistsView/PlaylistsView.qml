@@ -27,7 +27,8 @@ Kirigami.PageRow
     separatorVisible: wideMode
     initialPage:[playlistList, playlistViewDrawer]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
-    interactive: false
+    interactive: false      
+
     Page
     {
         id: playlistList
@@ -105,7 +106,7 @@ Kirigami.PageRow
             onHeaderClosed: if(!playlistViewRoot.wideMode)
                                 playlistViewRoot.currentIndex = 0
 
-            holder.message:  "Select a playlist or create a new one"
+            holder.message:  "<h2>"+playlistViewModel.model.get(playlistViewModel.currentIndex).playlist+"</h2><p>Your playlist is empty, start adding new music to it</p>"
             holder.emoji: "qrc:/assets/face-hug.png"
 
             Connections

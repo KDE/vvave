@@ -11,7 +11,7 @@ Dialog
 
     modal: true
 
-    padding: 10
+    padding: 0
 
     Material.accent: babeColor
     Material.background: backgroundColor

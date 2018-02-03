@@ -273,6 +273,7 @@ Kirigami.ApplicationWindow
         id: searchBox
         height: toolBarHeight
         color: searchInput.activeFocus ? midColor : midLightColor
+
         Kirigami.Separator
         {
             Rectangle
@@ -292,7 +293,7 @@ Kirigami.ApplicationWindow
         RowLayout
         {
             anchors.fill: parent
-
+            height: parent.height
 
             Item
             {
@@ -317,6 +318,7 @@ Kirigami.ApplicationWindow
                     BabeButton
                     {
                         anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
                         visible: searchInput.activeFocus
                         iconName: "edit-clear"
                         onClicked: clearSearch()
@@ -356,7 +358,7 @@ Kirigami.ApplicationWindow
     globalDrawer: SettingsView
     {
         id: settingsDrawer
-        contentItem.implicitWidth: columnWidth
+        //        contentItem.implicitWidth: columnWidth
         onIconSizeChanged: toolBarIconSize = size
     }
 

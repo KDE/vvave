@@ -9,7 +9,7 @@ ToolButton
 
     property string iconName
     property int iconSize : toolBarIconSize
-    property string iconColor: foregroundColor
+    property color iconColor: foregroundColor
     readonly property string defaultColor :  foregroundColor
 
     //    icon.name: isMobile ? "" : babeButton.iconName
@@ -27,7 +27,7 @@ ToolButton
         source: isMobile  ? "" : iconName
         isMask: true
         smooth: true
-        color: isMobile  ?  "transparent" : (iconColor || defaultColor)
+        color: iconColor || defaultColor
 
     }
 

@@ -65,7 +65,7 @@ public:
     bool tagsAlbum(const BAE::DB &track, const QString &value, const QString &context = "");
 
     Q_INVOKABLE bool addPlaylist(const QString &title);
-    bool trackPlaylist(const QString &url, const QString &playlist);
+    Q_INVOKABLE bool trackPlaylist(const QString &url, const QString &playlist);
 
     bool addFolder(const QString &url);
 
@@ -90,7 +90,7 @@ public:
   //    QStringList getAlbumTags(const QString &album, const QString &artist);
     QStringList getArtistAlbums(const QString &artist);
 
-    QStringList getPlaylists();
+    Q_INVOKABLE QStringList getPlaylists();
 
     bool removePlaylistTrack(const QString &url, const QString &playlist);
     bool removePlaylist(const QString &playlist);

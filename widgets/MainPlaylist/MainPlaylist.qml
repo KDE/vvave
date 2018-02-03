@@ -64,7 +64,7 @@ Item
             Layout.row: 1
             Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: coverSize
+            Layout.preferredHeight: visible ? coverSize : 0
             Layout.maximumHeight: 300
             visible: list.count > 0
 
@@ -143,7 +143,7 @@ Item
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: toolBarHeight
+            Layout.preferredHeight: visible ? 48 : 0
 //            anchors.top: cover.bottom
             visible: list.count > 0
 
@@ -282,7 +282,7 @@ Item
             Layout.row: 3
             Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: 48
+            Layout.preferredHeight: visible ? 48 : 0
 
             //            height: 48
             anchors.top: playbackControls.bottom
@@ -394,10 +394,7 @@ Item
                         color: babeColor
                     }
                 }
-
             }
-
-
         }
 
 
@@ -454,23 +451,12 @@ Item
                 initialItem: BabeTable
                 {
                     id: list
-                    width: parent.width
-                    height: parent.height
+                    anchors.fill: parent
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true
-                    //                    onMovementStarted:
-                    //                    {
-                    //                        if(contentY > list.height)
-                    //                        {
-                    //                            cover.visible = false
-                    //                        }
-                    //                        else
-                    //                        {
-                    //                            cover.visible = true
-                    //                        }
-                    //                    }
-
+                    holder.message : "<h2>Meh!</h2><p>Start putting together your playlist!</p>"
+                    holder.emoji: "qrc:/assets/face-sleeping.png"
 
                     Rectangle
                     {
@@ -496,8 +482,6 @@ Item
                         //                        Player.appendTracksAt(bae.get(query),index)
 
                     }
-                    holder.message: "Empty playlist..."
-                    holder.emoji: "qrc:/assets/face-sleeping.png"
 
                     Component.onCompleted:
                     {

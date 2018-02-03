@@ -21,10 +21,8 @@ ToolBar
     signal playlistsViewClicked()
     signal babeViewClicked()
     signal playlistViewClicked()
-
-
+    width: parent.width
     id: babeBar
-    visible: false
 
     Rectangle
     {
@@ -33,6 +31,7 @@ ToolBar
 
         Kirigami.Separator
         {
+
             Rectangle
             {
                 anchors.fill: parent
@@ -51,115 +50,109 @@ ToolBar
     RowLayout
     {
         anchors.fill: parent
-        anchors.centerIn: parent
-//        spacing: 0
-//        Layout.margins: 0
+        BabeButton
+        {
+            id: playlistView
+
+            iconName: /*"headphones"*/ "media-optical-audio"
+            iconColor: (pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor
+            onClicked: playlistViewClicked()
+
+            hoverEnabled: !isMobile
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered && !isMobile
+            ToolTip.text: qsTr("Playlist")
+        }
 
         Item
         {
             Layout.fillWidth: true
-
-            BabeButton
-            {
-                id: playlistView
-
-                anchors.centerIn: parent
-
-                iconName: /*"headphones"*/ "media-optical-audio"
-                iconColor: (pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor
-                onClicked: playlistViewClicked()
-
-                hoverEnabled: !isMobile
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Playlist")
-            }
         }
 
+        BabeButton
+        {
+            id: tracksView
 
-            BabeButton
-            {
-                id: tracksView
-                iconName: /*"musicnote"*/ "filename-filetype-amarok"
-                iconColor:  accent && currentIndex === 0? accentColor : textColor
-                onClicked: tracksViewClicked()
+            iconName: /*"musicnote"*/ "filename-filetype-amarok"
+            iconColor:  accent && currentIndex === 0? accentColor : textColor
+            onClicked: tracksViewClicked()
 
-                hoverEnabled: true
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Tracks")
-            }
+            hoverEnabled: true
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered && !isMobile
+            ToolTip.text: qsTr("Tracks")
+        }
 
-            BabeButton
-            {
-                id: albumsView
-                iconName: /*"album" */ "media-album-cover"
-                iconColor:  accent && currentIndex === 1 ? accentColor : textColor
-                onClicked: albumsViewClicked()
+        BabeButton
+        {
+            id: albumsView
 
-                hoverEnabled: true
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Albums")
-            }
+            iconName: /*"album" */ "media-album-cover"
+            iconColor:  accent && currentIndex === 1 ? accentColor : textColor
+            onClicked: albumsViewClicked()
 
-            BabeButton
-            {
-                id: artistsView
+            hoverEnabled: true
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered && !isMobile
+            ToolTip.text: qsTr("Albums")
+        }
 
-                iconName: /*"artist" */  "view-media-artist"
-                iconColor:  accent && currentIndex === 2? accentColor : textColor
+        BabeButton
+        {
+            id: artistsView
 
-                onClicked: artistsViewClicked()
-                hoverEnabled: true
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Artists")
-            }
+            iconName: /*"artist" */  "view-media-artist"
+            iconColor:  accent && currentIndex === 2? accentColor : textColor
 
-            BabeButton
-            {
-                id: playlistsView
+            onClicked: artistsViewClicked()
+            hoverEnabled: true
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered && !isMobile
+            ToolTip.text: qsTr("Artists")
+        }
 
-                iconName: /*"library-music"*/ "view-media-playlist"
-                iconColor:  accent && currentIndex === 3? accentColor : textColor
+        BabeButton
+        {
+            id: playlistsView
 
-                onClicked: playlistsViewClicked()
+            iconName: /*"library-music"*/ "view-media-playlist"
+            iconColor:  accent && currentIndex === 3? accentColor : textColor
 
-                hoverEnabled: !isMobile
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Playlists")
-            }
+            onClicked: playlistsViewClicked()
+
+            hoverEnabled: !isMobile
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered && !isMobile
+            ToolTip.text: qsTr("Playlists")
+        }
 
 
         Item
         {
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignRight
 
-
-            BabeButton
-            {
-                Layout.alignment: Qt.AlignRight
-
-                anchors.centerIn: parent
-                iconName: "love"
-                iconColor: accent && currentIndex === 4? accentColor : textColor
-
-                onClicked: babeViewClicked()
-
-                hoverEnabled: !isMobile
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Babe")
-            }
         }
+
+        BabeButton
+        {
+            iconName: "love"
+            iconColor: accent && currentIndex === 4? accentColor : textColor
+
+            onClicked: babeViewClicked()
+
+            hoverEnabled: !isMobile
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered && !isMobile
+            ToolTip.text: qsTr("Babe")
+        }
+
     }
 }
 

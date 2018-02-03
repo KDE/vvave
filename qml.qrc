@@ -21,7 +21,6 @@
         <file>view_models/BabeScrollBar.qml</file>
         <file>assets/bars.gif</file>
         <file>view_models/FolderPicker/FolderPickerList.qml</file>
-        <file>view_models/FolderPicker/FolderPickerDelegate.qml</file>
         <file>view_models/BabeGrid/BabeAlbum.qml</file>
         <file>view_models/BabeGrid/BabeGrid.qml</file>
         <file>view_models/BabeTable/TableDelegate.qml</file>
@@ -64,5 +63,9 @@
         <file>view_models/BabePopup.qml</file>
         <file>assets/banner.png</file>
         <file>assets/banner.svg</file>
+        <file>view_models/BabeTable/PlaylistDialog.qml</file>
+        <file>view_models/BabeDelegate.qml</file>
+        <file>view_models/BabeList.qml</file>
+        <file>view_models/BabeTable/HeaderMenu.qml</file>
     </qresource>
 </RCC>

@@ -39,21 +39,19 @@ BabeMenu
         else close()
     }
 
-
-
-    //    Label
-    //    {
-    //        id: titleLabel
-    //        visible: root.isMobile
-    //        padding: root.isMobile ? 10 : 0
-    //        font.bold: true
-    //        width: parent.width
-    //        height: root.isMobile ? menuItemHeight : 0
-    //        horizontalAlignment: Qt.AlignHCenter
-    //        elide: Text.ElideRight
-    //        text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
-    //        color: root.palette["foreground"]
-    //    }
+        Label
+        {
+            id: titleLabel
+            visible: root.isMobile
+            padding: root.isMobile ? 10 : 0
+            font.bold: true
+            width: parent.width
+            height: root.isMobile ? rowHeightAlt : 0
+            horizontalAlignment: Qt.AlignHCenter
+            elide: Text.ElideRight
+            text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
+            color: foregroundColor
+        }
 
     BabeMenuItem
     {
@@ -69,19 +67,17 @@ BabeMenu
 
     BabeMenuItem
     {
+        text: "Save to..."
+        onTriggered:
+        {
+            playlistDialog.tracks = [list.model.get(list.currentIndex).url]
+            playlistDialog.open()
+        }
+    }
+
+    BabeMenuItem
+    {
         text: "Edit..."
-        onTriggered: {}
-    }
-
-    BabeMenuItem
-    {
-        text: "Remove"
-        onTriggered: listModel.remove(list.currentIndex)
-    }
-
-    BabeMenuItem
-    {
-        text: "Save..."
         onTriggered: {}
     }
 
@@ -91,6 +87,11 @@ BabeMenu
         onTriggered: {}
     }
 
+    BabeMenuItem
+    {
+        text: "Remove"
+        onTriggered: listModel.remove(list.currentIndex)
+    }
 
     BabeMenuItem
     {

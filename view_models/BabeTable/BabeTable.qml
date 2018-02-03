@@ -1,14 +1,12 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "../../view_models/FolderPicker"
-import "../../utils"
 import ".."
 
-ListView
+BabeList
 {
     id: list
-
+    holder.message: "<h2>This list is empty</h2><p>You can sdd new music sources from the settings</p>"
     //    cacheBuffer : 300
 
     property bool headerBar: false
@@ -23,7 +21,7 @@ ListView
     property string headerTitle
     property bool headerClose : false
 
-    property alias holder : holder
+    property alias holder : list.holder
 
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -34,55 +32,6 @@ ListView
 
     signal playAll()
     signal appendAll()
-
-    clip: true
-
-    highlight: Rectangle
-    {
-        width: list.width
-        height: list.currentItem.height
-        color: babeHighlightColor
-        y: list.currentItem.y
-    }
-
-    focus: true
-    interactive: true
-    highlightFollowsCurrentItem: false
-    keyNavigationWraps: !isMobile
-    keyNavigationEnabled : !isMobile
-
-    Keys.onUpPressed: decrementCurrentIndex()
-    Keys.onDownPressed: incrementCurrentIndex()
-    Keys.onReturnPressed: rowClicked(currentIndex)
-    Keys.onEnterPressed: quickPlayTrack(currentIndex)
-
-    boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
-    flickableDirection: Flickable.AutoFlickDirection
-
-    snapMode: ListView.SnapToItem
-
-    addDisplaced: Transition
-    {
-        NumberAnimation { properties: "x,y"; duration: 1000 }
-    }
-
-    function clearTable()
-    {
-        listModel.clear()
-    }
-
-    BabeHolder
-    {
-        id: holder
-        visible: list.count === 0
-    }
-
-    Rectangle
-    {
-        anchors.fill: parent
-        color: "transparent"
-        z: -999
-    }
 
     headerPositioning: ListView.OverlayHeader
     header: Rectangle
@@ -146,11 +95,37 @@ ListView
             {
                 id: menuBtn
                 iconName: /*"application-menu"*/ "overflow-menu"
-                onClicked: {}
+                onClicked: headerMenu.open()
             }
         }
     }
 
+    PlaylistDialog
+    {
+        id: playlistDialog
+    }
+
+    HeaderMenu
+    {
+        id: headerMenu
+
+        onSaveListClicked:
+        {
+            console.log(list.count)
+
+
+            if (count > 0)
+                for(var i in count)
+                {
+                    var url = listModel.get(i).url
+                    console.log(url)
+                    playlistDialog.tracks.push(url)
+                }
+
+
+            playlistDialog.open()
+        }
+    }
 
     TableMenu
     {
@@ -201,8 +176,6 @@ ListView
     }
 
     ScrollBar.vertical:BabeScrollBar { }
-
-
 
     function openItemMenu(index)
     {

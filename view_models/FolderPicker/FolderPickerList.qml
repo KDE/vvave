@@ -3,7 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import ".."
 
-ListView
+BabeList
 {
     id: list
 
@@ -14,74 +14,24 @@ ListView
     signal rowClicked(int index)
     signal rowPressed(int index)
 
-    clip: true
-
-    highlight: highlight
-    highlightFollowsCurrentItem: false
-
-    focus: true
-    boundsBehavior: Flickable.StopAtBounds
-
-    flickableDirection: Flickable.AutoFlickDirection
-
-    snapMode: ListView.SnapToItem
-
-    function clearTable()
-    {
-        listModel.clear()
-    }
-
-    BabeHolder
-    {
-        id: holder
-        visible: list.count === 0
-    }
-
-    Rectangle
-    {
-        anchors.fill: parent
-        color: "transparent"
-        z: -999
-    }
-
-    Component
-    {
-        id: highlight
-        Rectangle
-        {
-            width: list.width
-            height: list.currentItem.height
-
-            color: babeHighlightColor
-            opacity: 0.2
-            y: list.currentItem.y
-        }
-    }
 
     ListModel { id: listModel }
 
     model: listModel
 
-    delegate: FolderPickerDelegate
+    delegate: BabeDelegate
     {
         id: delegate
-        width: list.width
+        label : name
 
         Connections
         {
             target: delegate
-            onPressAndHold:
-            {
-
-            }
-
             onClicked:
             {
-                list.rowClicked(index)
                 currentIndex = index
-//                currentUrl = model.get(currentIndex).url
+                list.rowClicked(index)
             }
-
         }
     }
 

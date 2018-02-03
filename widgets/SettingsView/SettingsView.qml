@@ -18,7 +18,7 @@ Kirigami.GlobalDrawer
     //    edge: Qt.RightEdge
     //    interactive: true
     //    focus: true
-    //    modal:true
+        modal:true
     //    dragMargin :0
 
     topPadding: 0
