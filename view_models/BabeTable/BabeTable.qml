@@ -109,22 +109,7 @@ BabeList
     {
         id: headerMenu
 
-        onSaveListClicked:
-        {
-            console.log(list.count)
-
-
-            if (count > 0)
-                for(var i in count)
-                {
-                    var url = listModel.get(i).url
-                    console.log(url)
-                    playlistDialog.tracks.push(url)
-                }
-
-
-            playlistDialog.open()
-        }
+        onSaveListClicked: saveList()
     }
 
     TableMenu
@@ -185,6 +170,19 @@ BabeList
         else
             contextMenu.popup()
         list.rowPressed(index)
+    }
+
+    function saveList()
+    {
+        var trackList = []
+        for(var i = 0; i < list.model.count; ++i)
+        {
+            trackList.push(list.model.get(i).url);
+        }
+
+        console.log(trackList)
+        playlistDialog.tracks = trackList
+        playlistDialog.open()
     }
 
     //    Component.onCompleted: forceActiveFocus()
