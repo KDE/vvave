@@ -48,11 +48,12 @@ BabePopup
         anchors.centerIn: parent
         Row
         {
+            Layout.margins: contentMargins
+
             id: sourceActions
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignRight
-            height: 48
-
+            height: toolBarHeight
 
             BabeButton
             {
@@ -81,8 +82,6 @@ BabePopup
             }
         }
 
-
-
         BabeList
         {
             id: sources
@@ -101,11 +100,8 @@ BabePopup
                 Connections
                 {
                     target: delegate
-                    onClicked:
-                    {
-                        sources.currentIndex = index
-                        list.rowClicked(index)
-                    }
+                    onClicked: sources.currentIndex = index
+
                 }
             }
 

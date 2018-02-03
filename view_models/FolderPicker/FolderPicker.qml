@@ -24,6 +24,7 @@ BabePopup
 
         RowLayout
         {
+            Layout.margins: contentMargins
             Layout.fillWidth: true
             width:parent.width
 

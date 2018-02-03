@@ -155,12 +155,16 @@ Item
                 z: -999
             }
 
+
+
             PlaylistMenu
             {
                 id: playlistMenu
                 onClearOut: Player.clearOutPlaylist()
                 onHideCover: cover.visible = !cover.visible
                 onClean: Player.cleanPlaylist()
+
+                onSaveToClicked: list.saveList()
             }
 
             MouseArea

@@ -14,7 +14,6 @@ BabeList
     signal rowClicked(int index)
     signal rowPressed(int index)
 
-
     ListModel { id: listModel }
 
     model: listModel
@@ -34,6 +33,4 @@ BabeList
             }
         }
     }
-
-    ScrollBar.vertical: ScrollBar { }
 }

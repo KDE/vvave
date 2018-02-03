@@ -94,7 +94,7 @@ ColumnLayout
         id: albumInfoRow
         Layout.fillWidth: true
         Layout.fillHeight: true
-        Layout.margins: 15
+        Layout.margins: contentMargins
         spacing: 5
 
 

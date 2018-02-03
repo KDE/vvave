@@ -22,8 +22,10 @@ BabeDialog
         BabeList
         {
             id: playlistsList
+
             width: parent.width
             height: parent.height
+
             holder.message: "<h2>There's not playlists</h2><br><p>Create a new one and start adding tracks to it<p/>"
             ListModel { id: listModel }
             model: listModel
@@ -31,7 +33,6 @@ BabeDialog
             delegate: BabeDelegate
             {
                 id: delegate
-
                 label: playlist
 
                 Connections

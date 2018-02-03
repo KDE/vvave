@@ -31,6 +31,8 @@ Kirigami.ApplicationWindow
 
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", isMobile ?  24 : 22)
     property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
+    property int contentMargins : 15
+
     property string babeColor : bae.babeColor()
     property string babeAltColor : bae.babeAltColor()
     property string backgroundColor : bae.backgroundColor()

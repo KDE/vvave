@@ -9,7 +9,7 @@ BabeMenu
     signal clean()
     signal callibrate()
     signal hideCover()
-
+    signal saveToClicked()
     BabeMenuItem
     {
         text: qsTr("Clear out...")
@@ -36,8 +36,8 @@ BabeMenu
 
     BabeMenuItem
     {
-        text: qsTr("Save as playlist...")
-        onTriggered: {}
+        text: qsTr("Save list to...")
+        onTriggered: saveToClicked()
     }
 
 }

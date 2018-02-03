@@ -160,8 +160,6 @@ BabeList
         }
     }
 
-    ScrollBar.vertical:BabeScrollBar { }
-
     function openItemMenu(index)
     {
         currentIndex = index
@@ -176,11 +174,8 @@ BabeList
     {
         var trackList = []
         for(var i = 0; i < list.model.count; ++i)
-        {
-            trackList.push(list.model.get(i).url);
-        }
+            trackList.push(list.model.get(i).url)
 
-        console.log(trackList)
         playlistDialog.tracks = trackList
         playlistDialog.open()
     }

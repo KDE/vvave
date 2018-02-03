@@ -120,6 +120,4 @@ BabeList
             }
         }
     }
-
-    ScrollBar.vertical:BabeScrollBar {}
 }

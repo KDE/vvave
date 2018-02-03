@@ -8,7 +8,7 @@ ScrollBar
     position: 0.2
     active: true
     focus: true
-    visible: !root.isMobile
+//    visible: !root.isMobile
     background : Rectangle
     {
         radius: 12

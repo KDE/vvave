@@ -135,7 +135,7 @@ ItemDelegate
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
-            Layout.margins: 15
+            Layout.margins: contentMargins
             anchors.verticalCenter: parent.verticalCenter
 
 

@@ -10,18 +10,17 @@ ItemDelegate
     height: rowHeightAlt
 
     property alias label: labelTxt.text
+    property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
 
     ColumnLayout
     {
         anchors.fill: parent
-        Layout.margins: 10
 
         Label
         {
             id: labelTxt
-            Layout.margins: 20
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            Layout.margins: contentMargins
+            anchors.verticalCenter: parent.verticalCenter
 
             width: parent.width
             height: parent.height
@@ -31,7 +30,7 @@ ItemDelegate
 
             text: labelTxt.text
             elide: Text.ElideRight
-            color: foregroundColor
+            color: textColor
         }
     }
 }

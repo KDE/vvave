@@ -56,4 +56,6 @@ ListView
         z: -999
     }
 
+    ScrollBar.vertical:BabeScrollBar { }
+
 }

@@ -8,6 +8,8 @@ Popup
     width: parent.width *0.8
     height: parent.height *0.8
 
+    padding: 0
+
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
 

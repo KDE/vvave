@@ -71,7 +71,7 @@ Item
                 {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignCenter
-                    Layout.margins: 20
+                    Layout.margins: contentMargins
                     width: parent.width
                     Image
                     {
