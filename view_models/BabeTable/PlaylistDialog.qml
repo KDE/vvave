@@ -1,30 +1,31 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
+import QtQuick.Layouts 1.3
 
 import "../../view_models/BabeDialog"
 import "../../view_models"
+import "../../utils/Player.js" as Player
+import "../../db/Queries.js" as Q
 
 BabeDialog
 {
     title: "Add "+ tracks.length +" tracks to..."
     standardButtons: Dialog.Save | Dialog.Cancel
-    width: isMobile ? parent.width*0.7 : parent.width*0.4
-    height: parent.height*0.5
 
     property var tracks : []
 
-    Column
+    ColumnLayout
     {
+        spacing: 20
         anchors.fill: parent
 
         BabeList
         {
             id: playlistsList
 
-            width: parent.width
-            height: parent.height
+            Layout.fillHeight: true
+            Layout.fillWidth: true
 
             holder.message: "<h2>There's not playlists</h2><br><p>Create a new one and start adding tracks to it<p/>"
             ListModel { id: listModel }
@@ -38,30 +39,72 @@ BabeDialog
                 Connections
                 {
                     target: delegate
-                    onClicked:
+                    onClicked: playlistsList.currentIndex = index
+                    onPressAndHold:
                     {
                         playlistsList.currentIndex = index
+                        Player.addToPlaylist(tracks, playlistsList.model.get(playlistsList.currentIndex).playlist)
+                        close()
                     }
                 }
             }
+        }
 
-            Component.onCompleted:
+        RowLayout
+        {
+            Layout.fillWidth: true
+            Layout.margins: contentMargins
+
+            TextField
             {
-                var playlists = bae.get("select * from playlists order by addDate desc")
-                if(playlists.length > 0)
-                    for(var i in playlists)
-                        playlistsList.model.append(playlists[i])
+                Layout.fillWidth: true
+                id: newPlaylistField
+                color: foregroundColor
+                placeholderText: qsTr("New playlist")
+                onAccepted:
+                {                    
+                    addPlaylist()
+                    clear()
+                    close()
+                }
             }
 
+            BabeButton
+            {
+                iconName: "checkbox"
+                iconColor: textColor
+                onClicked: addPlaylist()
+            }
+        }
+
+    }
+
+    onOpened:
+    {
+        newPlaylistField.clear()
+        playlistsList.clearTable()
+        var playlists = bae.get(Q.GET.playlists)
+        if(playlists.length > 0)
+            for(var i in playlists)
+                playlistsList.model.append(playlists[i])
+    }
+
+    onAccepted: Player.addToPlaylist(tracks, playlistsList.model.get(playlistsList.currentIndex).playlist)
+
+    function addPlaylist()
+    {
+        if (newPlaylistField.text)
+        {
+            var title = newPlaylistField.text.trim()
+            if(bae.addPlaylist(title))
+            {
+                playlistsList.model.append({playlist: title})
+                playlistsView.playlistViewModel.model.append({playlist: title})
+                playlistsList.positionViewAtEnd()
+            }
+
+            Player.addToPlaylist(tracks, title)
         }
     }
 
-    onAccepted: addToPlaylist(tracks)
-
-    function addToPlaylist(tracks)
-    {
-        if(tracks.length > 0)
-            for(var i in tracks)
-                bae.trackPlaylist(tracks[i], playlistsList.model.get(playlistsList.currentIndex).playlist)
-    }
 }

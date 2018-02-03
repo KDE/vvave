@@ -17,6 +17,9 @@ Item
 {
 
     id: mainPlaylistRoot
+
+    readonly property real opacityLevel : 0.7
+
     property var currentTrack
     property int currentTrackIndex : 0
     property int prevTrackIndex : 0
@@ -144,14 +147,14 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? 48 : 0
-//            anchors.top: cover.bottom
+            //            anchors.top: cover.bottom
             visible: list.count > 0
 
             Rectangle
             {
                 anchors.fill: parent
                 color: midLightColor
-                opacity: 0.8
+                opacity: opacityLevel
                 z: -999
             }
 
@@ -192,8 +195,8 @@ Item
             {
                 anchors.fill: parent
                 anchors.centerIn: parent
-//                spacing: 0
-//                Layout.margins: 0
+                //                spacing: 0
+                //                Layout.margins: 0
 
                 Item
                 {
@@ -296,7 +299,7 @@ Item
             {
                 anchors.fill: parent
                 color: midLightColor
-                opacity: 0.8
+                opacity: opacityLevel
                 z: -999
             }
 

@@ -133,7 +133,15 @@ function appendTracksAt(tracks, at)
 function appendTrack(track)
 {
     if(track)
+    {
         root.mainPlaylist.list.model.append(track)
+
+        if(root.sync === true)
+         {
+            console.log("SYNC TRACK")
+            addToPlaylist([track.url], root.syncPlaylist)
+        }
+    }
 
     //    if(track)
     //    {
@@ -206,6 +214,9 @@ function playAll(tracks)
 {
     if(tracks)
     {
+        root.sync = false
+        root.syncPlaylist = ""
+
         root.mainPlaylist.list.clearTable()
         root.pageStack.currentIndex = 0
 
@@ -235,6 +246,18 @@ function babeTrack()
         root.mainPlaylist.babeBtnIcon.iconColor = babeColor
         bae.notify("Track Babe'd",root.mainPlaylist.currentTrack.title +" by "+ root.mainPlaylist.currentTrack.artist )
 
+    }
+}
+
+function addToPlaylist(urls, playlist)
+{
+    if(urls.length > 0)
+    {
+        for(var i in urls)
+            bae.trackPlaylist(urls[i], playlist)
+
+        if(!isMobile)
+            bae.notify(playlist, urls.length + " tracks added to the playlist:\n"+urls.join("\n"))
     }
 }
 

@@ -13,7 +13,7 @@ ItemDelegate
     clip: true
 
     property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
-
+    signal playSync(int index)
 
     Rectangle
     {
@@ -22,17 +22,15 @@ ItemDelegate
         opacity: 0.3
     }
 
-
-
     MouseArea
     {
         anchors.fill: parent
         acceptedButtons:  Qt.RightButton
-//        onClicked:
-//        {
-//            if(!root.isMobile && mouse.button === Qt.RightButton)
-//                rightClicked()
-//        }
+        //        onClicked:
+        //        {
+        //            if(!root.isMobile && mouse.button === Qt.RightButton)
+        //                rightClicked()
+        //        }
     }
 
     RowLayout
@@ -54,7 +52,6 @@ ItemDelegate
             }
         }
 
-
         Item
         {
             Layout.fillHeight: true
@@ -75,6 +72,22 @@ ItemDelegate
                 color: textColor
             }
 
+        }
+
+        Item
+        {
+            visible: !playlistIcon
+            Layout.fillHeight: true
+            width: parent.height
+
+            BabeButton
+            {
+                id: syncBtn
+                anchors.centerIn: parent
+                iconName: "amarok_playlist_refresh" //"playlist-generator"
+                iconColor: textColor
+                onClicked: playSync(index)
+            }
         }
     }
 

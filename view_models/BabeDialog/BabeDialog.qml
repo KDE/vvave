@@ -4,7 +4,9 @@ import QtQuick.Controls.Material 2.1
 
 Dialog
 {
-    width: parent.width / 2
+    width: columnWidth * 0.9
+    height: isMobile ? parent.height*0.8 : parent.height*0.5
+
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
     parent: ApplicationWindow.overlay

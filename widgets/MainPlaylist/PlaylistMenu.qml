@@ -40,4 +40,11 @@ BabeMenu
         onTriggered: saveToClicked()
     }
 
+    BabeMenuItem
+    {
+        enabled: syncPlaylist.length > 0
+        text: syncPlaylist.length > 0 && sync ? qsTr("Pause syncing") : qsTr("Continue syncing")
+        onTriggered: sync = !sync
+    }
+
 }

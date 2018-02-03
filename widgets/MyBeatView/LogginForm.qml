@@ -139,21 +139,7 @@ Item
 
                     id: loginBtn
 
-                    background: Rectangle
-                    {
-                        color: babeColor
-                        radius: 3
-                    }
-
-                    contentItem: Text
-                    {
-                        text: "Login"
-                        horizontalAlignment: Qt.AlignHCenter
-                        verticalAlignment: Qt.AlignVCenter
-                        color: highlightTextColor
-                        font.bold: true
-                        font.pointSize: 11
-                    }
+                    text: "Login"
 
                 }
 

@@ -18,16 +18,19 @@ Kirigami.PageRow
     id: playlistViewRoot
     property string playlistQuery
 
+    property alias playlistViewModel : playlistViewModel
+
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
     signal playAll(var tracks)
+    signal playSync(var playlist)
     signal appendAll(var tracks)
 
     clip: true
     separatorVisible: wideMode
     initialPage:[playlistList, playlistViewDrawer]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
-    interactive: false      
+    interactive: false
 
     Page
     {
@@ -44,6 +47,12 @@ Kirigami.PageRow
 
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+
+                onPlaySync:
+                {
+                    if(!playlistViewModel.model.get(index).playlistIcon)
+                        playlistViewRoot.playSync(playlistViewModel.model.get(index).playlist)
+                }
 
             }
 
@@ -75,16 +84,6 @@ Kirigami.PageRow
     {
         id: playlistViewDrawer
         anchors.fill: parent
-        //        y: root.header.height
-        //        height: parent.height - root.header.height - root.footer.height
-        //        width: root.isMobile ? parent.width : parent.width* 0.7
-        //        edge: Qt.RightEdge
-        //        interactive: true
-        //        focus: true
-        //        modal: isMobile
-
-        //        modal: !root.wideScreen
-        //        onModalChanged: drawerOpen = !modal
 
         background: Rectangle
         {
@@ -106,8 +105,10 @@ Kirigami.PageRow
             onHeaderClosed: if(!playlistViewRoot.wideMode)
                                 playlistViewRoot.currentIndex = 0
 
-            holder.message:  "<h2>"+playlistViewModel.model.get(playlistViewModel.currentIndex).playlist+"</h2><p>Your playlist is empty, start adding new music to it</p>"
+            holder.message:  "<h2>"+playlistViewModel.model.get(playlistViewModel.currentIndex).playlist+"</h2><p>Your playlist is empty,<br>start adding new music to it</p>"
             holder.emoji: "qrc:/assets/face-hug.png"
+
+
 
             Connections
             {
@@ -119,12 +120,11 @@ Kirigami.PageRow
                 }
                 onPlayAll: playAll(bae.get(playlistQuery))
                 onAppendAll: appendAll(bae.get(playlistQuery))
+                onPulled: populate(playlistQuery)
             }
         }
 
     }
-
-
 
     function populate(query)
     {
@@ -139,11 +139,22 @@ Kirigami.PageRow
 
     }
 
-    Component.onCompleted:
+    function refresh()
     {
-        var playlists = bae.get("select * from playlists order by addDate desc")
+        var i = 9
+        for(i; i < playlistViewModel.count; i++)
+            playlistViewModel.remove(i)
+
+        setPlaylists()
+    }
+
+    function setPlaylists()
+    {
+        var playlists = bae.get(Q.GET.playlists)
         if(playlists.length > 0)
             for(var i in playlists)
                 playlistViewModel.model.append(playlists[i])
     }
+
+    Component.onCompleted: setPlaylists()
 }

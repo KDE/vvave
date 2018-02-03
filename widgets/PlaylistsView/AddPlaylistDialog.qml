@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.3
 import "../../view_models/BabeDialog"
 
 BabeDialog
@@ -7,17 +8,16 @@ BabeDialog
     id: newPlaylistDialogRoot
     title: "New Playlist"
     standardButtons: Dialog.Save | Dialog.Cancel
-    width: isMobile ? parent.width*0.7 : parent.width*0.4
-
-    Column
+    height: parent.height * 0.3
+    ColumnLayout
     {
         spacing: 20
         anchors.fill: parent
-        anchors.centerIn: parent
-        width: parent.width
 
         TextField
         {
+            Layout.fillWidth: true
+            Layout.margins: contentMargins
             id: newPlaylistField
             width: parent.width
             color: foregroundColor
@@ -36,5 +36,6 @@ BabeDialog
         var title = newPlaylistField.text.trim()
         if(bae.addPlaylist(title))
             model.append({playlist: title})
+        positionViewAtEnd()
     }
 }

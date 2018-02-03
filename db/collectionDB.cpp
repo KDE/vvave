@@ -483,7 +483,7 @@ bool CollectionDB::addPlaylist(const QString &title)
     if(!title.isEmpty())
     {
         QVariantMap playlist {{KEYMAP[KEY::PLAYLIST],title},
-                              {KEYMAP[KEY::ADD_DATE],QDate::currentDate()}};
+                              {KEYMAP[KEY::ADD_DATE],QDateTime::currentDateTime()}};
 
         if(insert(TABLEMAP[TABLE::PLAYLISTS],playlist))
             return true;
@@ -496,7 +496,7 @@ bool CollectionDB::trackPlaylist(const QString &url, const QString &playlist)
 {
     QVariantMap map {{KEYMAP[KEY::PLAYLIST],playlist},
                      {KEYMAP[KEY::URL],url},
-                     {KEYMAP[KEY::ADD_DATE],QDate::currentDate()}};
+                     {KEYMAP[KEY::ADD_DATE],QDateTime::currentDateTime()}};
 
     if(insert(TABLEMAP[TABLE::TRACKS_PLAYLISTS],map))
         return true;
@@ -507,7 +507,7 @@ bool CollectionDB::trackPlaylist(const QString &url, const QString &playlist)
 bool CollectionDB::addFolder(const QString &url)
 {
     QVariantMap map {{KEYMAP[KEY::URL],url},
-                     {KEYMAP[KEY::ADD_DATE],QDate::currentDate()}};
+                     {KEYMAP[KEY::ADD_DATE],QDateTime::currentDateTime()}};
 
     if(insert(TABLEMAP[TABLE::FOLDERS],map))
         return true;

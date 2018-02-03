@@ -7,6 +7,7 @@ ListView
     id: babeList
 
     property alias holder : holder
+    signal pulled()
     clip: true
 
     highlight: Rectangle
@@ -57,5 +58,12 @@ ListView
     }
 
     ScrollBar.vertical:BabeScrollBar { }
+
+
+    onContentYChanged:
+    {
+       if(contentY < -120)
+           pulled()
+    }
 
 }

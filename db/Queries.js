@@ -15,10 +15,10 @@ var GET = {
 
     mostPlayedTracks : "select t.*, al.artwork from tracks t inner join albums al on t.album = al.album  and t.artist = al.artist WHERE al.played > 0 ORDER BY played desc LIMIT 100",
     favoriteTracks : "select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where stars > 0 order by stars desc limit 100",
-    recentTracks: "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist order by strftime(\"%s\", addDate) desc LIMIT 100",
+    recentTracks: "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist order by strftime(\"%s\", t.addDate) desc LIMIT 100",
     babedTracks: "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where t.babe = 1",
     playlistTracks_ : "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist inner join tracks_playlists pl on pl.url = t.url where pl.playlist = \"%1\" order by strftime(\"%s\", pl.addDate) desc",
-
+    playlists: "select * from playlists order by strftime(\"%s\", addDate) desc",
 
 
     colorTracks_: "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.art = \"%1\""

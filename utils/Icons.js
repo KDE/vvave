@@ -1718,6 +1718,7 @@ var Babe = {
 
 
     /*headers*/
+
     "dialog-close" : Icon.close,
     "window-close" : Icon.close,
     "player-time" : Icon.playBoxOutline,
@@ -1729,5 +1730,8 @@ var Babe = {
 
     "gohome" : Icon.home,
     "sd" : Icon.sd,
-    "disks": Icon.disk
+    "disks": Icon.disk,
+    "playlist-generator": Icon.refresh,
+    "amarok_playlist_refresh" : Icon.refresh,
+    "checkbox" : Icon.check
 }

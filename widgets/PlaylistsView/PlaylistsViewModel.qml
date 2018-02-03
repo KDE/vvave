@@ -16,6 +16,7 @@ BabeList
     }
 
     headerPositioning: ListView.OverlayHeader
+    signal playSync(int index)
 
     Rectangle
     {
@@ -118,6 +119,9 @@ BabeList
                     playlistViewRoot.currentIndex = 1
 
             }
+
+            onPlaySync: playlistListRoot.playSync(index)
+
         }
     }
 }

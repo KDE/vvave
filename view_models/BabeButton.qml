@@ -12,10 +12,10 @@ ToolButton
     property color iconColor: foregroundColor
     readonly property string defaultColor :  foregroundColor
 
-    //    icon.name: isMobile ? "" : babeButton.iconName
-    //    icon.width: isMobile ? 0 : babeButton.iconSize
-    ////    icon.height: isMobile ? 0 : babeButton.iconSize
-    //    icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
+//        icon.name: isMobile ? "" : babeButton.iconName
+//        icon.width: isMobile ? 0 : babeButton.iconSize
+//    //    icon.height: isMobile ? 0 : babeButton.iconSize
+//        icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
 
     Kirigami.Icon
     {
@@ -25,8 +25,6 @@ ToolButton
         height: iconSize
         visible: !isMobile
         source: isMobile  ? "" : iconName
-        isMask: true
-        smooth: true
         color: iconColor || defaultColor
 
     }

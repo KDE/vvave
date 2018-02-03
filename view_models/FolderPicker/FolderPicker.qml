@@ -54,16 +54,8 @@ BabePopup
             {
                 Layout.alignment: Qt.AlignRight
                 onClicked: {accepted(dirList.currentUrl); close()}
-                contentItem: Text
-                {
-                    color: foregroundColor
-                    text: "Accept"
-                }
-                background: Rectangle
-                {
-                    color: babeColor
-                    radius: 2
-                }
+                text: "Accept"
+
             }
 
         }

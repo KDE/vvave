@@ -95,7 +95,7 @@ BabeList
             {
                 id: menuBtn
                 iconName: /*"application-menu"*/ "overflow-menu"
-                onClicked: headerMenu.open()
+                onClicked: headerMenu.popup()
             }
         }
     }

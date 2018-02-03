@@ -84,19 +84,25 @@ Kirigami.ApplicationWindow
 
     property alias mainPlaylist : mainPlaylist
 
+    /*USEFUL PROPS*/
+    property string syncPlaylist : ""
+    property bool sync : false
+
     pageStack.defaultColumnWidth: columnWidth
     pageStack.initialPage: [mainPlaylist, views]
     pageStack.interactive: isMobile
     pageStack.separatorVisible: pageStack.wideMode
-    //    overlay.modal: Rectangle
-    //    {
-    //        color: "transparent"
-    //    }
 
-    //    overlay.modeless: Rectangle
-    //    {
-    //        color: "transparent"
-    //    }
+
+    overlay.modal: Rectangle
+    {
+        color: isMobile ? "#8f28282a" : "transparent"
+    }
+
+    overlay.modeless: Rectangle
+    {
+        color: "transparent"
+    }
 
     onWidthChanged: if(root.isMobile)
                     {
@@ -464,6 +470,14 @@ Kirigami.ApplicationWindow
                         onQuickPlayTrack: Player.quickPlay(track)
                         onPlayAll: Player.playAll(tracks)
                         onAppendAll: Player.appendAll(tracks)
+                        onPlaySync:
+                        {
+                            var tracks = bae.get(Q.GET.playlistTracks_.arg(playlist))
+                            Player.playAll(tracks)
+                            root.sync = true
+                            root.syncPlaylist = playlist
+                            console.log("ALLOW PLAYLIOST SYNC FOR: " ,root.syncPlaylist = playlist)
+                        }
                     }
                 }
 
