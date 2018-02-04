@@ -45,20 +45,31 @@ BabePopup
     {
         id: sourcesRoot
         anchors.fill: parent
-        anchors.centerIn: parent
-        Row
+        RowLayout
         {
             Layout.margins: contentMargins
 
             id: sourceActions
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignRight
+           width: parent.width
             height: toolBarHeight
 
             BabeButton
             {
+                Layout.alignment: Qt.AlignLeft
                 iconName: "window-close"
                 onClicked: close()
+            }
+
+            Item
+            {
+                Layout.fillWidth: true
+
+            }
+
+            BabeButton
+            {
+                iconName: "list-remove"
+                onClicked:{}
             }
 
             BabeButton
@@ -75,11 +86,7 @@ BabePopup
                 }
             }
 
-            BabeButton
-            {
-                iconName: "list-remove"
-                onClicked:{}
-            }
+
         }
 
         BabeList

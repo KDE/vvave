@@ -33,6 +33,8 @@ Kirigami.ApplicationWindow
     property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
     property int contentMargins : 15
 
+    property string infoMsg : ""
+
     property string babeColor : bae.babeColor()
     property string babeAltColor : bae.babeAltColor()
     property string backgroundColor : bae.backgroundColor()
@@ -70,7 +72,7 @@ Kirigami.ApplicationWindow
     signal missingAlert(var track)
 
     /*READONLY PROPS*/
-
+    readonly property real opacityLevel : 0.7
     readonly property bool isMobile: bae.isMobile()
     readonly property int wideSize : bae.screenGeometry("width")*0.5
     readonly property int rowHeight: isMobile ? 64 : 52
@@ -131,6 +133,11 @@ Kirigami.ApplicationWindow
         if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
     }
 
+    BabeNotify
+    {
+        id: babeNotify
+    }
+
     BabeMessage
     {
         id: missingDialog
@@ -142,7 +149,6 @@ Kirigami.ApplicationWindow
             mainPlaylist.list.model.remove(mainPlaylist.list.currentIndex)
 
         }
-
     }
 
     onMissingAlert:
@@ -179,6 +185,12 @@ Kirigami.ApplicationWindow
         searchView.headerTitle = ""
         searchView.searchRes = []
         //        currentView = 0
+    }
+
+    function infoMsgAnim()
+    {
+        animBg.running = true
+        animTxt.running = true
     }
 
     Connections
@@ -370,7 +382,83 @@ Kirigami.ApplicationWindow
         onIconSizeChanged: toolBarIconSize = size
     }
 
+    Item
+    {
+        id: message
+        visible: infoMsg.length > 0
+        anchors.bottom: parent.bottom
+        width: pageStack.wideMode ? columnWidth : parent.width
+        height: toolBarIconSize
+        z:999
 
+        Rectangle
+        {
+            id: infoBg
+
+            anchors.fill: parent
+            z: -999
+            color: altColor
+            opacity: opacityLevel
+
+            SequentialAnimation
+            {
+                id: animBg
+                PropertyAnimation
+                {
+                    target: infoBg
+                    property: "color"
+                    easing.type: Easing.InOutQuad
+                    to: babeColor
+                    duration: 250
+                }
+
+                PropertyAnimation
+                {
+                    target: infoBg
+                    property: "color"
+                    easing.type: Easing.InOutQuad
+                    to: altColor
+                    duration: 500
+                }
+            }
+        }
+
+        Label
+        {
+            id: infoTxt
+            anchors.centerIn: parent
+            anchors.fill: parent
+            height: parent.height
+            width: parent.width
+            font.pointSize: 9
+            text: infoMsg
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            color: foregroundColor
+
+            SequentialAnimation
+            {
+                id: animTxt
+                PropertyAnimation
+                {
+                    target: infoTxt
+                    property: "color"
+                    easing.type: Easing.InOutQuad
+                    to: "white"
+                    duration: 250
+                }
+
+                PropertyAnimation
+                {
+                    target: infoTxt
+                    property: "color"
+                    easing.type: Easing.InOutQuad
+                    to: foregroundColor
+                    duration: 500
+                }
+            }
+        }
+    }
 
     MainPlaylist
     {
@@ -383,7 +471,6 @@ Kirigami.ApplicationWindow
             onCoverPressed: Player.appendAll(tracks)
             onCoverDoubleClicked: Player.playAll(tracks)
         }
-
     }
 
     Page
@@ -476,6 +563,7 @@ Kirigami.ApplicationWindow
                             Player.playAll(tracks)
                             root.sync = true
                             root.syncPlaylist = playlist
+                            root.infoMsg = "Syncing to "+ playlist
                             console.log("ALLOW PLAYLIOST SYNC FOR: " ,root.syncPlaylist = playlist)
                         }
                     }

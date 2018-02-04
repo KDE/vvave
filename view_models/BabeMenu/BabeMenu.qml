@@ -12,10 +12,10 @@ Menu
     focus: true
     parent: ApplicationWindow.overlay
 
-    enter: Transition
-    {
-        NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
-    }
+//    enter: Transition
+//    {
+//        NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
+//    }
 
     Material.accent: babeColor
     Material.background: backgroundColor

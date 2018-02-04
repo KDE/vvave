@@ -138,9 +138,10 @@ function appendTrack(track)
 
         if(root.sync === true)
          {
-            console.log("SYNC TRACK")
+            root.infoMsgAnim()
             addToPlaylist([track.url], root.syncPlaylist)
         }
+
     }
 
     //    if(track)
@@ -216,6 +217,7 @@ function playAll(tracks)
     {
         root.sync = false
         root.syncPlaylist = ""
+        root.infoMsg = ""
 
         root.mainPlaylist.list.clearTable()
         root.pageStack.currentIndex = 0
@@ -258,6 +260,9 @@ function addToPlaylist(urls, playlist)
 
         if(!isMobile)
             bae.notify(playlist, urls.length + " tracks added to the playlist:\n"+urls.join("\n"))
+//        else
+//            babeNotify.notify(urls.length + " tracks added to " +playlist)
+
     }
 }
 

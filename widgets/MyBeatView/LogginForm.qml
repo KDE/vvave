@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
+import QtQuick.Controls.Material 2.1
 
 Item
 {
@@ -136,10 +137,14 @@ Item
 
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignCenter
-
                     id: loginBtn
 
                     text: "Login"
+
+                    Material.accent: babeColor
+                    Material.background: backgroundColor
+                    Material.primary: backgroundColor
+                    Material.foreground: foregroundColor
 
                 }
 

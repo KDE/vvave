@@ -67,5 +67,6 @@
         <file>view_models/BabeDelegate.qml</file>
         <file>view_models/BabeList.qml</file>
         <file>view_models/BabeTable/HeaderMenu.qml</file>
+        <file>view_models/BabeNotify.qml</file>
     </qresource>
 </RCC>

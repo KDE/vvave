@@ -5,7 +5,7 @@ import QtQuick.Controls.Material 2.1
 
 Popup
 {
-    width: parent.width *0.8
+    width: parent.width * 0.8
     height: parent.height *0.8
 
     padding: 0

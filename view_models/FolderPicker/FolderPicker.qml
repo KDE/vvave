@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import "../../view_models"
+import QtQuick.Controls.Material 2.1
 
 BabePopup
 {
@@ -25,8 +26,8 @@ BabePopup
         RowLayout
         {
             Layout.margins: contentMargins
-            Layout.fillWidth: true
             width:parent.width
+            height: toolBarHeight
 
             BabeButton
             {
@@ -34,6 +35,12 @@ BabePopup
                 id: closeBtn
                 iconName: "window-close"
                 onClicked: close()
+            }
+
+            Item
+            {
+                Layout.fillWidth: true
+
             }
 
             BabeButton
@@ -55,6 +62,11 @@ BabePopup
                 Layout.alignment: Qt.AlignRight
                 onClicked: {accepted(dirList.currentUrl); close()}
                 text: "Accept"
+
+                Material.accent: babeColor
+                Material.background: backgroundColor
+                Material.primary: backgroundColor
+                Material.foreground: foregroundColor
 
             }
 

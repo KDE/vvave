@@ -8,11 +8,10 @@ import ".."
 
 BabeMenu
 {
-
-
     signal saveListClicked();
 
     property alias menuItem: babeMenu.children
+
 
     Column
     {

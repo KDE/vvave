@@ -9,20 +9,20 @@ QT       += qml
 QT       += quickcontrols2
 
 
-android: QT += androidextras
+TARGET = babe
+TEMPLATE = app
+
+CONFIG += c++11
 
 unix:linux:!android:
 {
 include(kde/kde.pri)
 }
 
-TARGET = babe
-TEMPLATE = app
-
-CONFIG += c++11
-
-include(android-openssl.pri)
-android: {
+android:
+{
+    QT += androidextras
+    include(android-openssl.pri)
     include(3rdparty/kirigami/kirigami.pri)
 }
 
@@ -202,7 +202,8 @@ SOURCES += main.cpp \
         taglib/tag.cpp \
         taglib/tagunion.cpp \
     babe.cpp \
-    settings/BabeSettings.cpp
+    settings/BabeSettings.cpp \
+    java/notificationclient.cpp
 
 
 
@@ -225,7 +226,6 @@ n
 DISTFILES += \
     db/script.sql \
     android-openssl.pri \
-#    3rdparty/kirigami/kirigami.pri
     kde/kde.pri \
     android/AndroidManifest.xml \
     android/gradle/wrapper/gradle-wrapper.jar \
@@ -234,6 +234,7 @@ DISTFILES += \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
+    android/src/org/qtproject/babe/NotificationClient.java
 
 
 HEADERS += \
@@ -359,7 +360,7 @@ HEADERS += \
         taglib/config.h \
         taglib/taglib_config.h \
     babe.h \
-    settings/BabeSettings.h
+    settings/BabeSettings.h \
+    java/notificationclient.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-

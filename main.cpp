@@ -10,6 +10,7 @@
 
 #ifdef Q_OS_ANDROID
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
+//#include "java/notificationclient.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -21,13 +22,15 @@ int main(int argc, char *argv[])
     app.setApplicationVersion(BAE::Version);
     app.setWindowIcon(QIcon("qrc:/assets/babe.png"));
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
-//    QQuickStyle::setStyle("org.kde.desktop");
+    //    QQuickStyle::setStyle("org.kde.desktop");
 
     QQmlApplicationEngine engine;
 
     auto context = engine.rootContext();
 
 #ifdef Q_OS_ANDROID
+//    NotificationClient *notificationClient = new NotificationClient(&engine);
+//    context->setContextProperty(QLatin1String("notificationClient"), notificationClient);
     KirigamiPlugin::getInstance().registerTypes();
 #endif
 

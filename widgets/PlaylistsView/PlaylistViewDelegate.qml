@@ -74,21 +74,21 @@ ItemDelegate
 
         }
 
-        Item
-        {
-            visible: !playlistIcon
-            Layout.fillHeight: true
-            width: parent.height
+//        Item
+//        {
+//            visible: !playlistIcon
+//            Layout.fillHeight: true
+//            width: parent.height
 
-            BabeButton
-            {
-                id: syncBtn
-                anchors.centerIn: parent
-                iconName: "amarok_playlist_refresh" //"playlist-generator"
-                iconColor: textColor
-                onClicked: playSync(index)
-            }
-        }
+//            BabeButton
+//            {
+//                id: syncBtn
+//                anchors.centerIn: parent
+//                iconName: "amarok_playlist_refresh" //"playlist-generator"
+//                iconColor: textColor
+//                onClicked: playSync(index)
+//            }
+//        }
     }
 
 

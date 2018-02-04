@@ -18,12 +18,11 @@ Item
 
     id: mainPlaylistRoot
 
-    readonly property real opacityLevel : 0.7
-
     property var currentTrack
     property int currentTrackIndex : 0
     property int prevTrackIndex : 0
     property string currentArtwork
+
     property bool shuffle : false
 
     property alias progressBar : progressBar
@@ -70,6 +69,7 @@ Item
             Layout.preferredHeight: visible ? coverSize : 0
             Layout.maximumHeight: 300
             visible: list.count > 0
+
 
             Rectangle
             {
@@ -157,8 +157,6 @@ Item
                 opacity: opacityLevel
                 z: -999
             }
-
-
 
             PlaylistMenu
             {

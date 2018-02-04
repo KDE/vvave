@@ -72,7 +72,6 @@ Kirigami.PageRow
                 }
             }
 
-
         }
     }
 
@@ -105,22 +104,24 @@ Kirigami.PageRow
             holder.message:  "<h2>"+playlistViewModel.model.get(playlistViewModel.currentIndex).playlist+"</h2><p>Your playlist is empty,<br>start adding new music to it</p>"
             holder.emoji: "qrc:/assets/face-hug.png"
 
-
             headerMenu.menuItem:  [
                 BabeMenuItem
                 {
+                    enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
                     text: "Sync tags"
                     onTriggered: {}
                 },
                 BabeMenuItem
                 {
+                    enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
                     text: "Play-n-Sync"
-                    onTriggered: syncAndPlay(playlistViewModel.currentIndex)
+                    onTriggered:
+                    {
+                        filterList.headerMenu.close()
+                        syncAndPlay(playlistViewModel.currentIndex)
+                    }
                 }
             ]
-
-
-
 
             Connections
             {
