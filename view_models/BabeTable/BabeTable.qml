@@ -22,6 +22,7 @@ BabeList
     property bool headerClose : false
 
     property alias holder : list.holder
+    property alias headerMenu: headerMenu
 
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -108,7 +109,6 @@ BabeList
     HeaderMenu
     {
         id: headerMenu
-
         onSaveListClicked: saveList()
     }
 

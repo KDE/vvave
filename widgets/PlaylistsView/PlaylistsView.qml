@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
 
 import "../../view_models/BabeTable"
+import "../../view_models/BabeMenu"
 import "../../view_models"
 import "../../db/Queries.js" as Q
 
@@ -48,11 +49,7 @@ Kirigami.PageRow
                 Layout.fillHeight: true
                 Layout.fillWidth: true
 
-                onPlaySync:
-                {
-                    if(!playlistViewModel.model.get(index).playlistIcon)
-                        playlistViewRoot.playSync(playlistViewModel.model.get(index).playlist)
-                }
+                onPlaySync: syncAndPlay(index)
 
             }
 
@@ -109,6 +106,21 @@ Kirigami.PageRow
             holder.emoji: "qrc:/assets/face-hug.png"
 
 
+            headerMenu.menuItem:  [
+                BabeMenuItem
+                {
+                    text: "Sync tags"
+                    onTriggered: {}
+                },
+                BabeMenuItem
+                {
+                    text: "Play-n-Sync"
+                    onTriggered: syncAndPlay(playlistViewModel.currentIndex)
+                }
+            ]
+
+
+
 
             Connections
             {
@@ -154,6 +166,12 @@ Kirigami.PageRow
         if(playlists.length > 0)
             for(var i in playlists)
                 playlistViewModel.model.append(playlists[i])
+    }
+
+    function syncAndPlay(index)
+    {
+        if(!playlistViewModel.model.get(index).playlistIcon)
+            playlistViewRoot.playSync(playlistViewModel.model.get(index).playlist)
     }
 
     Component.onCompleted: setPlaylists()

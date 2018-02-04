@@ -8,22 +8,31 @@ import ".."
 
 BabeMenu
 {
+
+
     signal saveListClicked();
-    BabeMenuItem
-    {
-        text: "Queue list"
-        onTriggered: {}
-    }
 
-    BabeMenuItem
-    {
-        text: "Save list to..."
-        onTriggered: saveListClicked()
-    }
+    property alias menuItem: babeMenu.children
 
-    BabeMenuItem
+    Column
     {
-        text: "Send list to..."
-        onTriggered: {}
+        id: babeMenu
+        BabeMenuItem
+        {
+            text: "Queue list"
+            onTriggered: {}
+        }
+
+        BabeMenuItem
+        {
+            text: "Save list to..."
+            onTriggered: saveListClicked()
+        }
+
+        BabeMenuItem
+        {
+            text: "Send list to..."
+            onTriggered: {}
+        }
     }
 }
