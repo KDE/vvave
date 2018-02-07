@@ -12,14 +12,14 @@ Kirigami.GlobalDrawer
     signal iconSizeChanged(int size)
     readonly property bool activeBrainz : bae.brainzState()
 
-//    y: header.height
-//    height: parent.height - header.height - footer.height
+       y: header.height
+        height: parent.height - header.height - footer.height
     //    //    width: root.pageStack.wideMode ? views.width -1: root.width
     //    edge: Qt.RightEdge
     //    interactive: true
     //    focus: true
-        modal:true
-        dragMargin :0
+    modal:true
+    dragMargin :0
 
     topPadding: 0
     bottomPadding: 0
@@ -27,7 +27,10 @@ Kirigami.GlobalDrawer
     rightPadding: 0
 
     handle.anchors.verticalCenter: parent.verticalCenter
-
+//    handle.anchors.top: parent.bottom
+//    handle.focus: false
+    //    handle.y : coverSize
+    //handle.parent: ApplicationWindow.overlay
     function scanDir(folderUrl)
     {
         bae.scanDir(folderUrl)
@@ -130,6 +133,28 @@ Kirigami.GlobalDrawer
 
         Kirigami.Action
         {
+            text: "Player"
+
+            Kirigami.Action
+            {
+                text: "Time labels"
+
+                Kirigami.Action
+                {
+                    text: checked ? "ON" : "OFF"
+                    checked: timeLabels
+                    checkable: true
+                    onToggled:
+                    {
+                        //                    bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
+                        timeLabels = checked
+                    }
+                }
+            }
+        },
+
+        Kirigami.Action
+        {
             text: "About Babe"
         },
 
@@ -137,6 +162,8 @@ Kirigami.GlobalDrawer
         {
             text: "About Beats"
         }
+
+
     ]
 
     function switchColorScheme(variant)

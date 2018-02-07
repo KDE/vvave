@@ -42,11 +42,13 @@ BabeMenu
 
     function babeIt(index)
     {
-        var url = list.model.get(index).url
-        var value = list.model.get(index).babe == "1" ? false : true
+        var url = listModel.get(index).url
+        var value = listModel.get(index).babe == "1" ? false : true
 
         if(bae.babeTrack(url, value))
             list.model.get(index).babe = value ? "1" : "0"
+
+        return value
     }
 
     Label

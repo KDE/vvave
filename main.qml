@@ -27,16 +27,18 @@ Kirigami.ApplicationWindow
     title: qsTr("Babe")
     wideScreen: root.width > coverSize
 
+
+    /*PLAYBACK*/
+
     property bool shuffle : false
+    property var currentTrack : ({babe:0, stars: 0})
+    property int currentTrackIndex : 0
+    property int prevTrackIndex : 0
+    property string currentArtwork
 
-
+    property bool timeLabels : false
 
     /*THEMING*/
-
-    property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", isMobile ?  24 : 22)
-    property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
-    property int contentMargins : 15
-
     property string infoMsg : ""
 
     property string babeColor : bae.babeColor()
@@ -88,13 +90,18 @@ Kirigami.ApplicationWindow
     signal missingAlert(var track)
 
     /*READONLY PROPS*/
-    readonly property real opacityLevel : 0.7
+    readonly property real opacityLevel : 0.8
     readonly property bool isMobile: bae.isMobile()
     readonly property int wideSize : bae.screenGeometry("width")*0.5
     readonly property int rowHeight: isMobile ? 64 : 52
     readonly property int rowHeightAlt: isMobile ? 48 : 32
+    readonly property int headerHeight: rowHeight
+    readonly property int contentMargins : 15
 
     /*PROPS*/
+    property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", isMobile ?  24 : 22)
+    property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
+
 
     property int columnWidth: Kirigami.Units.gridUnit * 20
     property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
@@ -161,7 +168,7 @@ Kirigami.ApplicationWindow
         title: "Missing file"
         onAccepted:
         {
-            bae.removeTrack(mainPlaylist.currentTrack.url)
+            bae.removeTrack(currentTrack.url)
             mainPlaylist.list.model.remove(mainPlaylist.list.currentIndex)
 
         }
@@ -185,8 +192,8 @@ Kirigami.ApplicationWindow
     {
         target: player
         onPos: progressBar.value = pos
-        onTiming: progressTime.text = time
-        onDurationChanged: durationTime.text = time
+        onTiming: progressTimeLabel = time
+        onDurationChanged: durationTimeLabel = time
         onFinished: Player.nextTrack()
     }
 
@@ -206,7 +213,7 @@ Kirigami.ApplicationWindow
 
         onTrackLyricsReady:
         {
-            if(url === root.mainPlaylist.currentTrack.url)
+            if(url === currentTrack.url)
                 root.mainPlaylist.infoView.lyrics = lyrics
         }
 
@@ -217,6 +224,7 @@ Kirigami.ApplicationWindow
     header: BabeBar
     {
         id: mainToolbar
+        height: headerHeight
         visible: true
         currentIndex: currentView
         bgColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? babeColor : babeAltColor
@@ -274,22 +282,27 @@ Kirigami.ApplicationWindow
             pageStack.currentIndex = 1
             currentView = 4
         }
+
+        onSearchViewClicked:
+        {
+            pageStack.currentIndex = 1
+            currentView = 5
+        }
     }
 
     property alias playIcon: playIcon
     property alias babeBtnIcon: babeBtnIcon
     property alias progressBar : progressBar
-    property alias durationTime : durationTime
-    property alias progressTime : progressTime
+    property string durationTimeLabel : "00:00"
+    property string progressTimeLabel : "00:00"
 
     footer: Item
     {
         id: playbackControls
         width: parent.width
         anchors.horizontalCenter: parent.horizontalCenter
-        height: visible ? 48 : 0
-        //            anchors.top: cover.bottom
-        visible: mainPlaylist.list.count > 0
+        height: visible ? headerHeight : 0
+        visible: true
 
 
 
@@ -313,41 +326,37 @@ Kirigami.ApplicationWindow
             z: -999
         }
 
-
         Slider
         {
             id: progressBar
 
             width: parent.width
-
+            z: 999
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-
-
+            padding: 0
             from: 0
             to: 1000
             value: 0
-
             spacing: 0
 
             onMoved: player.seek(player.duration() / 1000 * value);
-
 
             background: Rectangle
             {
                 x: progressBar.leftPadding
                 y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
                 implicitWidth: 200
-                implicitHeight: 2
+                implicitHeight: 1
                 width: progressBar.availableWidth
                 height: implicitHeight
-                color: foregroundColor
+                color: Kirigami.Theme.viewFocusColor
 
                 Rectangle
                 {
                     width: progressBar.visualPosition * parent.width
-                    height: parent.height
+                    height: 2
                     color: babeColor
                 }
             }
@@ -361,49 +370,65 @@ Kirigami.ApplicationWindow
                 radius: progressBar.pressed ? 16 : 0
                 color: babeColor
             }
+
+            Label
+            {
+                id: progressTime
+                anchors.top: parent.bottom
+                anchors.right: parent.right
+                visible: timeLabels
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                text: progressTimeLabel +" / "+durationTimeLabel
+                color: foregroundColor
+                font.pointSize: 6.5
+                padding: 2
+                elide: Text.ElideRight
+            }
         }
 
         RowLayout
         {
             anchors.fill: parent
-            anchors.centerIn: parent
+            width: parent.width
+            height: parent.height
 
-
-            BabeButton
+            Item
             {
-                id: shuffleBtn
-                iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                onClicked: shuffle = !shuffle
+                Layout.fillHeight: true
+                Image
+                {
+                    visible: (!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible
+                    height: parent.height
+                    width: parent.height
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    source:
+                    {
+                        if(currentArtwork)
+                            (currentArtwork.length > 0 && currentArtwork !== "NONE")? "file://"+encodeURIComponent(currentArtwork) : "qrc:/assets/cover.png"
+                        else "qrc:/assets/cover.png"
+                    }
+                    fillMode:  Image.PreserveAspectFit
+                    cache: false
+                    antialiasing: true
+                }
             }
-
             Item
             {
                 Layout.fillWidth: true
             }
-
-            Label
-            {
-                id: progressTime
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                text: "00:00"
-                color: foregroundColor
-                font.pointSize: 8
-                elide: Text.ElideRight
-            }
-
-
-            Item
-            {
-                Layout.fillWidth: true
-            }
-
             BabeButton
             {
                 id: babeBtnIcon
                 iconName: "love" //"love-amarok"
-                iconColor: mainPlaylist.currentTrack.babe == "0" ? defaultColor : babeColor
-                onClicked: mainPlaylist.list.contextMenu.babeIt(mainPlaylist.currentTrackIndex)
+                iconColor: currentTrack.babe == "1" ? babeColor : defaultColor
+                onClicked:
+                {
+                    var value = mainPlaylist.list.contextMenu.babeIt(currentTrackIndex)
+                    //                    iconColor = value ? babeColor : foregroundColor
+                    currentTrack["babe"] =  value ? "1" : "0"
+                }
             }
 
             BabeButton
@@ -433,49 +458,21 @@ Kirigami.ApplicationWindow
                 onPressAndHold: Player.playAt(Player.shuffle())
             }
 
-
-            Item
-            {
-                Layout.fillWidth: true
-            }
-
-            Label
-            {
-                id: durationTime
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                text: "00:00"
-                color: foregroundColor
-                font.pointSize: 8
-                elide: Text.ElideRight
-
-            }
-
-            Item
-            {
-                Layout.fillWidth: true
-            }
-
             BabeButton
             {
-                id: searchBtn
-                iconColor: currentView === 5 ? babeColor : foregroundColor
-                //                visible: !(searchInput.focus || searchInput.text)
-                iconName: "edit-find" //"search"
-                onClicked:
-                {
-                        currentView = 5
-                        pageStack.currentIndex = 1
-                        searchView.searchInput.forceActiveFocus()
-                }
+                id: shuffleBtn
+                iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+                onClicked: shuffle = !shuffle
             }
+
+            Item
+            {
+                Layout.fillWidth: true
+            }
+
 
         }
     }
-
-
-
-
 
     background: Rectangle
     {

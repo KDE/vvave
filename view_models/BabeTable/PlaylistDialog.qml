@@ -62,7 +62,7 @@ BabeDialog
                 color: foregroundColor
                 placeholderText: qsTr("New playlist")
                 onAccepted:
-                {                    
+                {
                     addPlaylist()
                     clear()
                     close()
@@ -74,6 +74,7 @@ BabeDialog
                 iconName: "checkbox"
                 iconColor: textColor
                 onClicked: addPlaylist()
+
             }
         }
 
@@ -89,7 +90,17 @@ BabeDialog
                 playlistsList.model.append(playlists[i])
     }
 
-    onAccepted: Player.addToPlaylist(tracks, playlistsList.model.get(playlistsList.currentIndex).playlist)
+    onAccepted:
+    {
+        if(newPlaylistField.text && newPlaylistField.text.length > 0)
+        {
+            addPlaylist()
+            Player.addToPlaylist(tracks,newPlaylistField.text.trim())
+        }
+        else
+            Player.addToPlaylist(tracks, playlistsList.model.get(playlistsList.currentIndex).playlist)
+
+    }
 
     function addPlaylist()
     {
@@ -98,12 +109,12 @@ BabeDialog
             var title = newPlaylistField.text.trim()
             if(bae.addPlaylist(title))
             {
-                playlistsList.model.append({playlist: title})
-                playlistsView.playlistViewModel.model.append({playlist: title})
-                playlistsList.positionViewAtEnd()
+                playlistsList.model.insert(0, {playlist: title})
+                playlistsView.playlistViewModel.model.insert(9, {playlist: title})
+                playlistsList.positionViewAtBeginning()
             }
 
-            Player.addToPlaylist(tracks, title)
+            newPlaylistField.clear()
         }
     }
 

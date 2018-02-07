@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.2 as Kirigami
+
 import ".."
 
 BabeList
@@ -45,6 +47,22 @@ BabeList
         visible: headerBar
         z: 999
 
+        Kirigami.Separator
+        {
+            Rectangle
+            {
+                anchors.fill: parent
+                color: Kirigami.Theme.viewFocusColor
+            }
+
+            anchors
+            {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+        }
+
         RowLayout
         {
             anchors.fill: parent
@@ -71,13 +89,13 @@ BabeList
 
             Label
             {
-                text: headerTitle || ""
+                text: headerTitle || count +" tracks"
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
 
                 elide: Text.ElideRight
-                font.pointSize: 8
+                //                font.pointSize: 8
                 font.bold: false
                 color: foregroundColor
 
@@ -124,7 +142,7 @@ BabeList
     model: listModel
 
 
-//    property alias animBabe: delegate.animBabe
+    //    property alias animBabe: delegate.animBabe
     delegate: TableDelegate
     {
         id: delegate
@@ -136,11 +154,12 @@ BabeList
         trackRatingVisible : list.trackRating
         menuItem: menuItemVisible
 
+
         Connections
         {
             target: delegate
 
-            //            onPressAndHold: if(root.isMobile) openItemMenu(index)
+            onPressAndHold: if(root.isMobile) openItemMenu(index)
             onRightClicked: openItemMenu(index)
 
             onClicked:

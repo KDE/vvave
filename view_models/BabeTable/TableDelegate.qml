@@ -10,6 +10,8 @@ ItemDelegate
     width: parent.width
     height: sameAlbum ? rowHeightAlt : rowHeight
     clip: true
+
+
     signal play()
     signal rightClicked()
     signal leftClicked()
@@ -39,7 +41,6 @@ ItemDelegate
     //    property bool playingIndicator: false
     property string trackMood : art
     property alias trackRating : trackRating
-    property alias animBabe : animBabe
 
     //    NumberAnimation on x
     //    {
@@ -64,11 +65,16 @@ ItemDelegate
     {
         anchors.fill: parent
         acceptedButtons:  Qt.RightButton
+        pressAndHoldInterval: 3000
         onClicked:
         {
             if(!root.isMobile && mouse.button === Qt.RightButton)
                 rightClicked()
         }
+//        onPressAndHold:
+//        {
+//            pressAndHold(mouse)
+//        }
     }
 
     RowLayout
@@ -103,7 +109,8 @@ ItemDelegate
                     }
                     fillMode:  Image.PreserveAspectFit
                     cache: false
-                    antialiasing: true
+                    antialiasing: false
+                    smooth: true
                 }
 
                 onDoubleClicked: artworkCoverDoubleClicked()
@@ -267,29 +274,29 @@ ItemDelegate
                     font.pointSize: 8
                     color: textColor
 
-                    onTextChanged: animBabe.start()
+//                    onTextChanged: animBabe.start()
 
-                    SequentialAnimation
-                    {
-                        id: animBabe
-                        PropertyAnimation
-                        {
-                            target: trackBabe
-                            property: "color"
-                            easing.type: Easing.InOutQuad
-                            to: babeColor
-                            duration: 250
-                        }
+//                    SequentialAnimation
+//                    {
+//                        id: animBabe
+//                        PropertyAnimation
+//                        {
+//                            target: trackBabe
+//                            property: "color"
+//                            easing.type: Easing.InOutQuad
+//                            to: babeColor
+//                            duration: 250
+//                        }
 
-                        PropertyAnimation
-                        {
-                            target: trackBabe
-                            property: "color"
-                            easing.type: Easing.InOutQuad
-                            to: textColor
-                            duration: 500
-                        }
-                    }
+//                        PropertyAnimation
+//                        {
+//                            target: trackBabe
+//                            property: "color"
+//                            easing.type: Easing.InOutQuad
+//                            to: textColor
+//                            duration: 500
+//                        }
+//                    }
 
 
                 }
@@ -318,21 +325,21 @@ ItemDelegate
             }
         }
 
-        Item
-        {
-            visible: menuItem
-            Layout.fillHeight: true
-            width: sameAlbum ? rowHeight : parent.height
+//        Item
+//        {
+//            visible: menuItem
+//            Layout.fillHeight: true
+//            width: sameAlbum ? rowHeight : parent.height
 
-            BabeButton
-            {
-                id: menuBtn
-                anchors.centerIn: parent
-                iconName: "overflow-menu"
-                iconColor: textColor
-                onClicked: rightClicked()
-            }
-        }
+//            BabeButton
+//            {
+//                id: menuBtn
+//                anchors.centerIn: parent
+//                iconName: "overflow-menu"
+//                iconColor: textColor
+//                onClicked: rightClicked()
+//            }
+//        }
     }
 
     function setStars(stars)

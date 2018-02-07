@@ -18,10 +18,7 @@ Item
 
     id: mainPlaylistRoot
 
-    property var currentTrack
-    property int currentTrackIndex : 0
-    property int prevTrackIndex : 0
-    property string currentArtwork
+
     property alias artwork : artwork
     property alias cover : cover
     property alias list : list
@@ -38,6 +35,17 @@ Item
     //                        else
     //                            root.width = coverSize*3
     //                    }
+
+
+    PlaylistMenu
+    {
+        id: playlistMenu
+        onClearOut: Player.clearOutPlaylist()
+        onHideCover: cover.visible = !cover.visible
+        onClean: Player.cleanPlaylist()
+        onSaveToClicked: list.saveList()
+    }
+
     Rectangle
     {
         anchors.fill: parent
@@ -97,15 +105,23 @@ Item
                 {
                     anchors.fill: parent
                     onDoubleClicked: gomini()
-                    //                    {
-                    //                                                var query = Q.GET.albumTracks_.arg(currentTrack.album)
-                    //                                                query = query.arg(currentTrack.artist)
 
-                    //                                                var tracks = bae.get(query)
-                    //                                                coverDoubleClicked(tracks)
+//                    drag.target: artwork
+//                    drag.axis: Drag.YAxis
+//                    drag.minimumY: 0
+//                    drag.maximumY: coverSize
 
+//                    onMouseYChanged:
+//                    {
 
-                    //                    }
+//                        cover.height = mouseY < 0 ? 0 : mouseY
+
+////                        if(mouseY < coverSize*0.8)
+////                        {
+////                            cover.visible = false
+
+////                        }else cover.visible = true
+//                    }
 
                     onPressAndHold:
                     {
@@ -140,8 +156,8 @@ Item
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: visible ? 48 : 0
-            //            anchors.top: cover.bottom
+            Layout.preferredHeight: visible ? toolBarHeight : 0
+//                        anchors.top: cover.bottom
             visible: list.count > 0
 
             Rectangle
@@ -187,7 +203,6 @@ Item
                         cover.visible = false
                         mainlistContext.y = 0
                     }else cover.visible = true
-
                 }
             }
 
@@ -261,8 +276,6 @@ Item
             Layout.fillWidth: true
             Layout.fillHeight: true
             anchors.top: mainlistContext.bottom
-
-
             //            anchors.bottom: mainPlaylistRoot.searchBox
             StackView
             {
@@ -306,7 +319,7 @@ Item
                 initialItem: BabeTable
                 {
                     id: list
-                    anchors.fill: parent
+//                    anchors.fill: parent
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true
@@ -331,10 +344,10 @@ Item
                     onArtworkDoubleClicked:
                     {
                         contextMenu.babeIt(index)
-//                        var query = Q.GET.albumTracks_.arg(model.get(index).album)
-//                        query = query.arg(model.get(index).artist)
+                        //                        var query = Q.GET.albumTracks_.arg(model.get(index).album)
+                        //                        query = query.arg(model.get(index).artist)
 
-//                        Player.playAll(bae.get(query))
+                        //                        Player.playAll(bae.get(query))
                         //                        Player.appendTracksAt(bae.get(query),index)
 
                     }
@@ -375,8 +388,6 @@ Item
                 InfoView
                 {
                     id: infoView
-                    width: parent.width
-                    height: parent.height
                 }
 
             }
@@ -391,12 +402,12 @@ Item
             {
                 root.maximumWidth = columnWidth
                 root.minimumWidth = columnWidth
-                root.maximumHeight = mainPlaylistItem.y
-                root.minimumHeight = mainPlaylistItem.y
+                root.maximumHeight = mainPlaylistItem.y + footer.height
+                root.minimumHeight = mainPlaylistItem.y + footer.height
                 root.header.visible = false
-                root.footer.visible = false
                 infoBtn.visible = false
-                menuBtn.visible = false
+                //                root.footer.visible = false
+//                mainlistContext.visible = false
 
             }else
             {
@@ -409,9 +420,9 @@ Item
                 root.width = columnWidth
                 root.height = 700
                 root.header.visible = true
-                root.footer.visible = true
                 infoBtn.visible = true
-                menuBtn.visible = true
+                //                root.footer.visible = true
+//                mainlistContext.visible = true
             }
         }
     }

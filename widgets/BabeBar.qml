@@ -21,6 +21,8 @@ ToolBar
     signal playlistsViewClicked()
     signal babeViewClicked()
     signal playlistViewClicked()
+    signal searchViewClicked()
+
     width: parent.width
     id: babeBar
 
@@ -50,10 +52,12 @@ ToolBar
     RowLayout
     {
         anchors.fill: parent
+
+
+
         BabeButton
         {
             id: playlistView
-
             iconName: /*"headphones"*/ "media-optical-audio"
             iconColor: (pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor
             onClicked: playlistViewClicked()
@@ -131,27 +135,41 @@ ToolBar
             ToolTip.text: qsTr("Playlists")
         }
 
-
         Item
         {
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignRight
-
         }
-
         BabeButton
         {
-            iconName: "love"
-            iconColor: accent && currentIndex === 4? accentColor : textColor
-
-            onClicked: babeViewClicked()
-
+            id: searchView
+            iconColor: accent && currentIndex === 5? accentColor : textColor
+            //                visible: !(searchInput.focus || searchInput.text)
+            iconName: "edit-find" //"search"
+            onClicked: searchViewClicked()
             hoverEnabled: !isMobile
             ToolTip.delay: 1000
             ToolTip.timeout: 5000
             ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Babe")
+            ToolTip.text: qsTr("Search")
         }
+
+
+        //        BabeButton
+        //        {
+        //            iconName: "love"
+        //            iconColor: accent && currentIndex === 4? accentColor : textColor
+
+        //            onClicked: babeViewClicked()
+
+        //            hoverEnabled: !isMobile
+        //            ToolTip.delay: 1000
+        //            ToolTip.timeout: 5000
+        //            ToolTip.visible: hovered && !isMobile
+        //            ToolTip.text: qsTr("Babe")
+        //        }
+
+
+
 
     }
 }

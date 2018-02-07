@@ -1,6 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import org.kde.kirigami 2.2 as Kirigami
+
 import "../../utils"
 
 import "../../view_models"
@@ -32,6 +34,23 @@ BabeList
         width: parent.width
         color: midLightColor
         z: 999
+
+
+        Kirigami.Separator
+        {
+            Rectangle
+            {
+                anchors.fill: parent
+                color: Kirigami.Theme.viewFocusColor
+            }
+
+            anchors
+            {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+        }
 
         RowLayout
         {
