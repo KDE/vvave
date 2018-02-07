@@ -10,6 +10,7 @@ BabeMenu
 {
 
     property int rate : 0
+    property bool babe : false
     property string starColor : "#FFC107"
     property string starReg : foregroundColor
     property string starIcon: "draw-star"
@@ -39,24 +40,33 @@ BabeMenu
         else close()
     }
 
-        Label
-        {
-            id: titleLabel
-            visible: root.isMobile
-            padding: root.isMobile ? 10 : 0
-            font.bold: true
-            width: parent.width
-            height: root.isMobile ? rowHeightAlt : 0
-            horizontalAlignment: Qt.AlignHCenter
-            elide: Text.ElideRight
-            text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
-            color: foregroundColor
-        }
+    function babeIt(index)
+    {
+        var url = list.model.get(index).url
+        var value = list.model.get(index).babe == "1" ? false : true
+
+        if(bae.babeTrack(url, value))
+            list.model.get(index).babe = value ? "1" : "0"
+    }
+
+    Label
+    {
+        id: titleLabel
+        visible: root.isMobile
+        padding: root.isMobile ? 10 : 0
+        font.bold: true
+        width: parent.width
+        height: root.isMobile ? rowHeightAlt : 0
+        horizontalAlignment: Qt.AlignHCenter
+        elide: Text.ElideRight
+        text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
+        color: foregroundColor
+    }
 
     BabeMenuItem
     {
-        text: "Babe it"
-        onTriggered: {}
+        text: babe == false ? "Babe it" : "UnBabe it"
+        onTriggered: babeIt(list.currentIndex)
     }
 
     BabeMenuItem

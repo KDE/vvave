@@ -12,6 +12,14 @@ ItemDelegate
     property alias label: labelTxt.text
     property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
 
+    Rectangle
+    {
+        anchors.fill: parent
+        color: index % 2 === 0 ? midColor : "transparent"
+        opacity: 0.3
+    }
+
+
     ColumnLayout
     {
         anchors.fill: parent

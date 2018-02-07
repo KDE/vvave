@@ -77,6 +77,7 @@ BabePopup
             id: dirList
             Layout.fillWidth:true
             Layout.fillHeight: true
+            width: parent.width
             Connections
             {
                 target: dirList

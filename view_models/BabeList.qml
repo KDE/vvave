@@ -8,6 +8,10 @@ ListView
 
     property alias holder : holder
     signal pulled()
+
+        property bool wasPulled : false
+
+
     clip: true
 
     highlight: Rectangle
@@ -57,13 +61,17 @@ ListView
         z: -999
     }
 
+
     ScrollBar.vertical:BabeScrollBar { }
 
 
     onContentYChanged:
     {
        if(contentY < -120)
-           pulled()
+           wasPulled = true
+
+       if(contentY == toolBarHeight*-1 && wasPulled)
+        { pulled(); wasPulled = false}
     }
 
 }

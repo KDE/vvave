@@ -23,6 +23,7 @@ BabeList
 
     property alias holder : list.holder
     property alias headerMenu: headerMenu
+    property alias contextMenu : contextMenu
 
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -52,6 +53,7 @@ BabeList
             BabeButton
             {
                 id: closeBtn
+                width: rowHeight
                 visible: headerClose
 
                 iconName: "window-close" //"dialog-close"
@@ -75,8 +77,8 @@ BabeList
                 Layout.alignment: Qt.AlignCenter
 
                 elide: Text.ElideRight
-                font.pointSize: 12
-                font.bold: isMobile
+                font.pointSize: 8
+                font.bold: false
                 color: foregroundColor
 
                 horizontalAlignment: Text.AlignHCenter
@@ -121,6 +123,8 @@ BabeList
 
     model: listModel
 
+
+//    property alias animBabe: delegate.animBabe
     delegate: TableDelegate
     {
         id: delegate
@@ -151,12 +155,12 @@ BabeList
             {
                 if(!root.isMobile)
                     list.rowClicked(index)
-
             }
 
             onPlay: list.quickPlayTrack(index)
 
             onArtworkCoverDoubleClicked: list.artworkDoubleClicked(index)
+
         }
     }
 
@@ -164,6 +168,7 @@ BabeList
     {
         currentIndex = index
         contextMenu.rate = bae.getTrackStars(list.model.get(list.currentIndex).url)
+        contextMenu.babe = list.model.get(list.currentIndex).babe == "1" ? true : false
         if(root.isMobile) contextMenu.open()
         else
             contextMenu.popup()

@@ -5,7 +5,7 @@ import "../../view_models"
 
 ItemDelegate
 {
-    id: delegateRoot  
+    id: delegateRoot
 
     width: parent.width
     height: sameAlbum ? rowHeightAlt : rowHeight
@@ -39,6 +39,7 @@ ItemDelegate
     //    property bool playingIndicator: false
     property string trackMood : art
     property alias trackRating : trackRating
+    property alias animBabe : animBabe
 
     //    NumberAnimation on x
     //    {
@@ -143,7 +144,7 @@ ItemDelegate
             {
                 anchors.fill: parent
                 rows:2
-                columns: sameAlbum ? 4 : 3
+                columns: sameAlbum ? 5 : 4
 
                 Label
                 {
@@ -226,34 +227,88 @@ ItemDelegate
                 //            }
                 //        }
 
+//                Label
+//                {
+//                    id: trackDuration
+//                    visible: trackDurationVisible
+//                    Layout.alignment: Qt.AlignRight
+
+//                    Layout.fillWidth: true
+//                    Layout.fillHeight: true
+//                    Layout.row: 1
+//                    Layout.column: 3
+//                    horizontalAlignment: Qt.AlignRight
+//                    verticalAlignment:  Qt.AlignVCenter
+//                    text: player.transformTime(duration)
+//                    font.bold: false
+//                    elide: Text.ElideRight
+//                    font.pointSize: 8
+//                    color: textColor
+//                }
+
+
                 Label
                 {
-                    id: trackDuration
-                    visible: trackDurationVisible
+                    id: trackBabe
+
+                    font.family: "Material Design Icons"
+                    visible: babe == "1"
+                    Layout.alignment: Qt.AlignRight
+
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.row: 1
-                    Layout.column: trackDurationVisible && sameAlbum ? 4 : 3
+                    Layout.column: trackDurationVisible && sameAlbum ? 5 : 4
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter
-                    text: player.transformTime(duration)
+                    text: babe == "1" ? "\uf2D1" : ""
                     font.bold: false
                     elide: Text.ElideRight
                     font.pointSize: 8
                     color: textColor
+
+                    onTextChanged: animBabe.start()
+
+                    SequentialAnimation
+                    {
+                        id: animBabe
+                        PropertyAnimation
+                        {
+                            target: trackBabe
+                            property: "color"
+                            easing.type: Easing.InOutQuad
+                            to: babeColor
+                            duration: 250
+                        }
+
+                        PropertyAnimation
+                        {
+                            target: trackBabe
+                            property: "color"
+                            easing.type: Easing.InOutQuad
+                            to: textColor
+                            duration: 500
+                        }
+                    }
+
+
                 }
+
 
                 Label
                 {
+                    font.family: "Material Design Icons"
+
                     id: trackRating
                     visible: trackRatingVisible
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Layout.alignment: Qt.AlignRight
                     Layout.row: trackRatingVisible && sameAlbum ? 1 : 2
-                    Layout.column: 3
+                    Layout.column: 4
+//                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter
-                    font.family: "Material Design Icons"
                     text: setStars(stars)
                     font.bold: false
                     elide: Text.ElideRight

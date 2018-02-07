@@ -12,7 +12,6 @@ BabeMenu
 
     property alias menuItem: babeMenu.children
 
-
     Column
     {
         id: babeMenu

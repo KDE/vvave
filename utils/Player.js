@@ -11,7 +11,7 @@ function playTrack(track)
         {
             player.source(root.mainPlaylist.currentTrack.url);
             player.play()
-            root.mainPlaylist.playIcon.iconName = "media-playback-pause"
+            root.playIcon.iconName = "media-playback-pause"
 
 
             var artwork = root.mainPlaylist.currentTrack.artwork
@@ -28,9 +28,9 @@ function playTrack(track)
 
 
             if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
-                root.mainPlaylist.babeBtnIcon.iconColor = babeColor
+                root.babeBtnIcon.iconColor = babeColor
             else
-                root.mainPlaylist.babeBtnIcon.iconColor = root.mainPlaylist.babeBtnIcon.defaultColor
+                root.babeBtnIcon.iconColor = root.babeBtnIcon.defaultColor
 
             var lyrics = root.mainPlaylist.currentTrack.lyrics
 
@@ -53,19 +53,19 @@ function stop()
     root.mainPlaylist.progressBar.value = 0
     root.mainPlaylist.cover.visible = false
     root.title = "Babe..."
-    root.mainPlaylist.playIcon.iconName = "media-playback-start"
+    root.playIcon.iconName = "media-playback-start"
 }
 
 function pauseTrack()
 {
     player.pause()
-    root.mainPlaylist.playIcon.iconName = "media-playback-start"
+    root.playIcon.iconName = "media-playback-start"
 }
 
 function resumeTrack()
 {
     player.play()
-    root.mainPlaylist.playIcon.iconName = "media-playback-pause"
+    root.playIcon.iconName = "media-playback-pause"
 }
 
 function nextTrack()
@@ -236,19 +236,8 @@ function playAll(tracks)
 }
 
 function babeTrack()
-{
-    if(bae.trackBabe(root.mainPlaylist.currentTrack.url))
-    {
-        bae.babeTrack(root.mainPlaylist.currentTrack.url, false)
-        root.mainPlaylist.babeBtnIcon.iconColor = root.mainPlaylist.babeBtnIcon.defaultColor
+{           
 
-    }else
-    {
-        bae.babeTrack(root.mainPlaylist.currentTrack.url, true)
-        root.mainPlaylist.babeBtnIcon.iconColor = babeColor
-        bae.notify("Track Babe'd",root.mainPlaylist.currentTrack.title +" by "+ root.mainPlaylist.currentTrack.artist )
-
-    }
 }
 
 function addToPlaylist(urls, playlist)

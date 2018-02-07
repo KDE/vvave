@@ -8,7 +8,7 @@ QT       += xml
 QT       += qml
 QT       += quickcontrols2
 
-
+android: QT += androidextras
 TARGET = babe
 TEMPLATE = app
 
@@ -21,7 +21,7 @@ include(kde/kde.pri)
 
 android:
 {
-    QT += androidextras
+
     include(android-openssl.pri)
     include(3rdparty/kirigami/kirigami.pri)
 }

@@ -50,7 +50,7 @@ BabePopup
             Layout.margins: contentMargins
 
             id: sourceActions
-           width: parent.width
+            width: parent.width
             height: toolBarHeight
 
             BabeButton
@@ -94,7 +94,7 @@ BabePopup
             id: sources
             Layout.fillWidth: true
             Layout.fillHeight: true
-
+            width: parent.width
             ListModel { id: listModel }
 
             model: listModel
@@ -108,7 +108,6 @@ BabePopup
                 {
                     target: delegate
                     onClicked: sources.currentIndex = index
-
                 }
             }
 

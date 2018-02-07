@@ -19,12 +19,14 @@ Kirigami.GlobalDrawer
     //    interactive: true
     //    focus: true
         modal:true
-    //    dragMargin :0
+        dragMargin :0
 
     topPadding: 0
     bottomPadding: 0
     leftPadding: 0
     rightPadding: 0
+
+    handle.anchors.verticalCenter: parent.verticalCenter
 
     function scanDir(folderUrl)
     {
@@ -117,6 +119,12 @@ Kirigami.GlobalDrawer
                     text: "Dark"
                     onTriggered : switchColorScheme("Dark")
                 }
+
+                Kirigami.Action
+                {
+                    text: "Breeze"
+                    onTriggered : switchColorScheme("Breeze")
+                }
             }
         },
 
@@ -150,6 +158,20 @@ Kirigami.GlobalDrawer
             shadowColor = lightShadowColor
 
         }else if(variant === "Dark")
+        {
+            backgroundColor = darkBackgroundColor
+            foregroundColor = darkForegroundColor
+            textColor = darkTextColor
+            babeHighlightColor = darkBabeHighlightColor
+            highlightTextColor = darkHighlightTextColor
+            midColor = darkMidColor
+            midLightColor = darkMidLightColor
+            darkColor = darkDarkColor
+            baseColor = darkBaseColor
+            altColor = darkAltColor
+            shadowColor = darkShadowColor
+
+        }else if (variant === "Breeze")
         {
             backgroundColor = bae.backgroundColor()
             foregroundColor = bae.foregroundColor()

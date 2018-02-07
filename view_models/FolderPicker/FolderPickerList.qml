@@ -7,6 +7,7 @@ BabeList
 {
     id: list
 
+    width: parent.width
     property int currentRow : -1
     property string currentUrl
     property string currentName

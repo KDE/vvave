@@ -36,6 +36,14 @@ Kirigami.PageRow
     Page
     {
         id: playlistList
+
+        Rectangle
+        {
+            anchors.fill: parent
+            color: altColor
+            z: -999
+        }
+
         ColumnLayout
         {
             anchors.fill: parent
@@ -50,7 +58,6 @@ Kirigami.PageRow
                 Layout.fillWidth: true
 
                 onPlaySync: syncAndPlay(index)
-
             }
 
             ColorTagsBar
@@ -63,6 +70,8 @@ Kirigami.PageRow
                     anchors.fill: parent
                     z: -999
                     color:midColor
+                    opacity: 0.3
+
                 }
                 onColorClicked:
                 {

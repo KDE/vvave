@@ -22,18 +22,12 @@ Item
     property int currentTrackIndex : 0
     property int prevTrackIndex : 0
     property string currentArtwork
-
-    property bool shuffle : false
-
-    property alias progressBar : progressBar
+    property alias artwork : artwork
     property alias cover : cover
     property alias list : list
-    property alias playIcon : playIcon
-    property alias babeBtnIcon: babeBtnIcon
     property alias infoView : infoView
 
-    property alias durationTime : durationTime
-    property alias progressTime : progressTime
+
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
@@ -140,7 +134,7 @@ Item
 
         Item
         {
-            id: playbackControls
+            id: mainlistContext
             width: parent.width
             anchors.horizontalCenter: parent.horizontalCenter
             Layout.row: 2
@@ -156,34 +150,42 @@ Item
                 color: midLightColor
                 opacity: opacityLevel
                 z: -999
+
+                Kirigami.Separator
+                {
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: Kirigami.Theme.viewFocusColor
+                    }
+
+                    anchors
+                    {
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
+                    }
+                }
             }
 
-            PlaylistMenu
-            {
-                id: playlistMenu
-                onClearOut: Player.clearOutPlaylist()
-                onHideCover: cover.visible = !cover.visible
-                onClean: Player.cleanPlaylist()
 
-                onSaveToClicked: list.saveList()
-            }
 
             MouseArea
             {
                 anchors.fill: parent
-                drag.target: playbackControls
+                drag.target: mainlistContext
                 drag.axis: Drag.YAxis
                 drag.minimumY: 0
                 drag.maximumY: coverSize
 
                 onMouseYChanged:
                 {
-                    cover.height = playbackControls.y
+                    cover.height = mainlistContext.y
 
-                    if(playbackControls.y < coverSize*0.8)
+                    if(mainlistContext.y < coverSize*0.8)
                     {
                         cover.visible = false
-                        playbackControls.y = 0
+                        mainlistContext.y = 0
                     }else cover.visible = true
 
                 }
@@ -221,48 +223,18 @@ Item
                     }
                 }
 
-
-                BabeButton
+                Label
                 {
-                    id: babeBtnIcon
-                    iconName: "love" //"love-amarok"
-                    iconColor: defaultColor
-                    onClicked: Player.babeTrack()
-                }
-
-                BabeButton
-                {
-                    id: previousBtn
-                    iconName: "media-skip-backward"
-                    onClicked: Player.previousTrack()
-                    onPressAndHold: Player.playAt(prevTrackIndex)
-                }
-
-                BabeButton
-                {
-                    id: playIcon
-                    iconName: "media-playback-start"
-                    onClicked:
-                    {
-                        if(player.isPaused()) Player.resumeTrack()
-                        else Player.pauseTrack()
-                    }
-                }
-
-                BabeButton
-                {
-                    id: nextBtn
-                    iconName: "media-skip-forward"
-                    onClicked: Player.nextTrack()
-                    onPressAndHold: Player.playAt(Player.shuffle())
-                }
-
-                BabeButton
-                {
-                    id: shuffleBtn
-                    iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                    onClicked: shuffle = !shuffle
-
+                    id: currentTrackInfo
+                    Layout.maximumWidth: parent.width*0.7
+                    Layout.fillWidth:true
+                    Layout.alignment: Qt.AlignCenter
+                    horizontalAlignment: Qt.AlignHCenter
+                    verticalAlignment: Qt.AlignVCenter
+                    text: currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : ""
+                    color: foregroundColor
+                    font.pointSize: 8
+                    elide: Text.ElideRight
                 }
 
                 Item
@@ -283,134 +255,12 @@ Item
 
         Item
         {
-            id: slideBar
-            Layout.row: 3
-            Layout.column: 1
-            Layout.fillWidth: true
-            Layout.preferredHeight: visible ? 48 : 0
-
-            //            height: 48
-            anchors.top: playbackControls.bottom
-            visible: list.count > 0
-
-            Rectangle
-            {
-                anchors.fill: parent
-                color: midLightColor
-                opacity: opacityLevel
-                z: -999
-            }
-
-            GridLayout
-            {
-                anchors.fill: parent
-                columns:3
-                rows:2
-
-                Label
-                {
-                    id: progressTime
-                    Layout.row: 1
-                    Layout.column: 1
-                    Layout.fillWidth:true
-                    Layout.alignment: Qt.AlignCenter
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: "00:00"
-                    color: foregroundColor
-                    font.pointSize: 8
-                    elide: Text.ElideRight
-
-                }
-
-                Label
-                {
-                    id: currentTrackInfo
-                    Layout.maximumWidth: parent.width*0.7
-                    Layout.row: 1
-                    Layout.column: 2
-                    Layout.fillWidth:true
-                    Layout.alignment: Qt.AlignCenter
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : ""
-                    color: foregroundColor
-                    font.pointSize: 8
-                    elide: Text.ElideRight
-                }
-
-                Label
-                {
-                    id: durationTime
-                    Layout.row: 1
-                    Layout.column: 3
-                    Layout.fillWidth:true
-                    Layout.alignment: Qt.AlignCenter
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: "00:00"
-                    color: foregroundColor
-                    font.pointSize: 8
-                    elide: Text.ElideRight
-
-                }
-
-                Slider
-                {
-                    id: progressBar
-
-                    Layout.row: 2
-                    Layout.column: 1
-                    Layout.columnSpan: 3
-                    Layout.fillWidth:true
-                    Layout.fillHeight: true
-
-                    from: 0
-                    to: 1000
-                    value: 0
-
-                    spacing: 0
-
-                    onMoved: player.seek(player.duration() / 1000 * value);
-
-
-                    background: Rectangle
-                    {
-                        x: progressBar.leftPadding
-                        y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
-                        implicitWidth: 200
-                        implicitHeight: 2
-                        width: progressBar.availableWidth
-                        height: implicitHeight
-                        color: foregroundColor
-
-                        Rectangle
-                        {
-                            width: progressBar.visualPosition * parent.width
-                            height: parent.height
-                            color: babeColor
-                        }
-                    }
-
-                    handle: Rectangle
-                    {
-                        x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
-                        y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
-                        implicitWidth: 16
-                        implicitHeight: 16
-                        radius: 13
-                        color: babeColor
-                    }
-                }
-            }
-        }
-
-
-        Item
-        {
             id: mainPlaylistItem
             Layout.row: 4
             Layout.column: 1
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.top: slideBar.bottom
+            anchors.top: mainlistContext.bottom
 
 
             //            anchors.bottom: mainPlaylistRoot.searchBox
@@ -480,10 +330,11 @@ Item
                     }
                     onArtworkDoubleClicked:
                     {
-                        var query = Q.GET.albumTracks_.arg(model.get(index).album)
-                        query = query.arg(model.get(index).artist)
+                        contextMenu.babeIt(index)
+//                        var query = Q.GET.albumTracks_.arg(model.get(index).album)
+//                        query = query.arg(model.get(index).artist)
 
-                        Player.playAll(bae.get(query))
+//                        Player.playAll(bae.get(query))
                         //                        Player.appendTracksAt(bae.get(query),index)
 
                     }

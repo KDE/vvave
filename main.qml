@@ -27,6 +27,10 @@ Kirigami.ApplicationWindow
     title: qsTr("Babe")
     wideScreen: root.width > coverSize
 
+    property bool shuffle : false
+
+
+
     /*THEMING*/
 
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", isMobile ?  24 : 22)
@@ -60,6 +64,18 @@ Kirigami.ApplicationWindow
     readonly property string lightBaseColor : "#fcfcfc"
     readonly property string lightAltColor : "#eeeeee"
     readonly property string lightShadowColor : "#868686"
+
+    readonly property string darkBackgroundColor : "#333"
+    readonly property string darkForegroundColor : "#FAFAFA"
+    readonly property string darkTextColor : darkForegroundColor
+    readonly property string darkBabeHighlightColor : "#29B6F6"
+    readonly property string darkHighlightTextColor : darkForegroundColor
+    readonly property string darkMidColor : "#424242"
+    readonly property string darkMidLightColor : "#616161"
+    readonly property string darkDarkColor : "#212121"
+    readonly property string darkBaseColor : "#212121"
+    readonly property string darkAltColor : "#424242"
+    readonly property string darkShadowColor : "#424242"
 
     Material.theme: Material.Light
     Material.accent: babeColor
@@ -159,34 +175,6 @@ Kirigami.ApplicationWindow
     }
 
 
-    function runSearch()
-    {
-        if(searchInput.text)
-        {
-            if(searchInput !== searchView.headerTitle)
-            {
-                var query = searchInput.text
-                searchView.headerTitle = query
-                var queries = query.split(",")
-                searchView.searchRes = bae.searchFor(queries)
-
-                searchView.populate(searchView.searchRes)
-            }
-            //                albumsView.filter(res)
-            currentView = 5
-            pageStack.currentIndex = 1
-        }
-    }
-
-    function clearSearch()
-    {
-        searchInput.clear()
-        searchView.clearTable()
-        searchView.headerTitle = ""
-        searchView.searchRes = []
-        //        currentView = 0
-    }
-
     function infoMsgAnim()
     {
         animBg.running = true
@@ -196,9 +184,9 @@ Kirigami.ApplicationWindow
     Connections
     {
         target: player
-        onPos: mainPlaylist.progressBar.value = pos
-        onTiming: mainPlaylist.progressTime.text = time
-        onDurationChanged: mainPlaylist.durationTime.text = time
+        onPos: progressBar.value = pos
+        onTiming: progressTime.text = time
+        onDurationChanged: durationTime.text = time
         onFinished: Player.nextTrack()
     }
 
@@ -288,62 +276,184 @@ Kirigami.ApplicationWindow
         }
     }
 
-    footer: Rectangle
-    {
-        id: searchBox
-        height: toolBarHeight
-        color: searchInput.activeFocus ? midColor : midLightColor
+    property alias playIcon: playIcon
+    property alias babeBtnIcon: babeBtnIcon
+    property alias progressBar : progressBar
+    property alias durationTime : durationTime
+    property alias progressTime : progressTime
 
-        Kirigami.Separator
+    footer: Item
+    {
+        id: playbackControls
+        width: parent.width
+        anchors.horizontalCenter: parent.horizontalCenter
+        height: visible ? 48 : 0
+        //            anchors.top: cover.bottom
+        visible: mainPlaylist.list.count > 0
+
+
+
+        FastBlur
         {
-            Rectangle
+            width: parent.width
+            height: parent.height
+            source: mainPlaylist.artwork
+            radius: 100
+            transparentBorder: false
+            //                opacity: 0.8
+            cached: true
+            z: -999
+        }
+
+        Rectangle
+        {
+            anchors.fill: parent
+            color: midLightColor
+            opacity: opacityLevel
+            z: -999
+        }
+
+
+        Slider
+        {
+            id: progressBar
+
+            width: parent.width
+
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+
+
+            from: 0
+            to: 1000
+            value: 0
+
+            spacing: 0
+
+            onMoved: player.seek(player.duration() / 1000 * value);
+
+
+            background: Rectangle
             {
-                anchors.fill: parent
-                color: Kirigami.Theme.viewFocusColor
+                x: progressBar.leftPadding
+                y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                implicitWidth: 200
+                implicitHeight: 2
+                width: progressBar.availableWidth
+                height: implicitHeight
+                color: foregroundColor
+
+                Rectangle
+                {
+                    width: progressBar.visualPosition * parent.width
+                    height: parent.height
+                    color: babeColor
+                }
             }
 
-            anchors
+            handle: Rectangle
             {
-                left: parent.left
-                right: parent.right
-                top: parent.top
+                x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
+                y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                implicitWidth: progressBar.pressed ? 16 : 0
+                implicitHeight: progressBar.pressed ? 16 : 0
+                radius: progressBar.pressed ? 16 : 0
+                color: babeColor
             }
         }
 
         RowLayout
         {
             anchors.fill: parent
-            height: parent.height
+            anchors.centerIn: parent
+
+
+            BabeButton
+            {
+                id: shuffleBtn
+                iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+                onClicked: shuffle = !shuffle
+            }
 
             Item
             {
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+            }
 
-                TextInput
+            Label
+            {
+                id: progressTime
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                text: "00:00"
+                color: foregroundColor
+                font.pointSize: 8
+                elide: Text.ElideRight
+            }
+
+
+            Item
+            {
+                Layout.fillWidth: true
+            }
+
+            BabeButton
+            {
+                id: babeBtnIcon
+                iconName: "love" //"love-amarok"
+                iconColor: mainPlaylist.currentTrack.babe == "0" ? defaultColor : babeColor
+                onClicked: mainPlaylist.list.contextMenu.babeIt(mainPlaylist.currentTrackIndex)
+            }
+
+            BabeButton
+            {
+                id: previousBtn
+                iconName: "media-skip-backward"
+                onClicked: Player.previousTrack()
+                onPressAndHold: Player.playAt(prevTrackIndex)
+            }
+
+            BabeButton
+            {
+                id: playIcon
+                iconName: "media-playback-start"
+                onClicked:
                 {
-                    id: searchInput
-                    color: foregroundColor
-                    anchors.fill: parent
-                    anchors.centerIn: parent
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment:  Text.AlignVCenter
-                    selectByMouse: !root.isMobile
-                    selectionColor: babeHighlightColor
-                    selectedTextColor: foregroundColor
-                    property string placeholderText: "Search..."
-
-                    onAccepted: runSearch()
-
-                    BabeButton
-                    {
-                        anchors.right: parent.right
-                        anchors.verticalCenter: parent.verticalCenter
-                        visible: searchInput.activeFocus
-                        iconName: "edit-clear"
-                        onClicked: clearSearch()
-                    }
+                    if(player.isPaused()) Player.resumeTrack()
+                    else Player.pauseTrack()
                 }
+            }
+
+            BabeButton
+            {
+                id: nextBtn
+                iconName: "media-skip-forward"
+                onClicked: Player.nextTrack()
+                onPressAndHold: Player.playAt(Player.shuffle())
+            }
+
+
+            Item
+            {
+                Layout.fillWidth: true
+            }
+
+            Label
+            {
+                id: durationTime
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                text: "00:00"
+                color: foregroundColor
+                font.pointSize: 8
+                elide: Text.ElideRight
+
+            }
+
+            Item
+            {
+                Layout.fillWidth: true
             }
 
             BabeButton
@@ -354,19 +464,18 @@ Kirigami.ApplicationWindow
                 iconName: "edit-find" //"search"
                 onClicked:
                 {
-                    if(searchView.count>0)
-                    {
                         currentView = 5
                         pageStack.currentIndex = 1
-
-                    }else
-                        searchInput.forceActiveFocus()
-
+                        searchView.searchInput.forceActiveFocus()
                 }
             }
 
         }
     }
+
+
+
+
 
     background: Rectangle
     {
@@ -580,16 +689,16 @@ Kirigami.ApplicationWindow
                     id: searchView
                     Connections
                     {
-                        target: searchView
-                        onRowClicked: Player.addTrack(searchView.model.get(index))
-                        onQuickPlayTrack: Player.quickPlay(searchView.model.get(index))
+                        target: searchView.searchTable
+                        onRowClicked: Player.addTrack(searchView.searchTable.model.get(index))
+                        onQuickPlayTrack: Player.quickPlay(searchView.searchTable.model.get(index))
                         onPlayAll: Player.playAll(searchView.searchRes)
                         onAppendAll: Player.appendAll(searchView.searchRes)
                         //                        onHeaderClosed: clearSearch()
                         onArtworkDoubleClicked:
                         {
-                            var query = Q.GET.albumTracks_.arg(searchView.model.get(index).album)
-                            query = query.arg(searchView.model.get(index).artist)
+                            var query = Q.GET.albumTracks_.arg(searchView.searchTable.model.get(index).album)
+                            query = query.arg(searchView.searchTable.model.get(index).artist)
 
                             Player.playAll(bae.get(query))
 
