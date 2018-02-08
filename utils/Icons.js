@@ -1674,7 +1674,7 @@ var Babe = {
     "library-music": Icon.libraryMusic,
     "view-media-playlist" : Icon.libraryMusic,
 
-    "application-menu": Icon.dotsVertical,
+    "application-menu": Icon.menu,
     "games-config-options" : Icon.settings,
 
     /*playback bar*/
@@ -1696,7 +1696,6 @@ var Babe = {
     "arrow-left":"\uf04D",
 
     "overflow-menu": Icon.dotsVertical,
-    "application-menu" : Icon.dotsVertical,
     "player-time": "\uf40C",
     "search" : Icon.magnify,
     "edit-find" : Icon.magnify,

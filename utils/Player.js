@@ -67,7 +67,7 @@ function nextTrack()
     if(root.mainPlaylist.list.count>0)
     {
         var next = 0
-        if(root.mainPlaylist.shuffle)
+        if(root.shuffle)
             next = shuffle()
         else
             next = root.mainPlaylist.list.currentIndex+1 >= root.mainPlaylist.list.count? 0 : root.mainPlaylist.list.currentIndex+1
@@ -104,8 +104,7 @@ function playAt(index)
 
 function quickPlay(track)
 {
-    root.pageStack.currentIndex = 0
-
+//    root.pageStack.currentIndex = 0
     appendTrack(track)
     playAt(root.mainPlaylist.list.count-1)
     root.mainPlaylist.list.positionViewAtEnd()

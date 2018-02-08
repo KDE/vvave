@@ -8,7 +8,7 @@ import org.kde.kirigami 2.2 as Kirigami
 Kirigami.GlobalDrawer
 {
     id: settingsView
-    handleVisible: true
+    handleVisible: false
     signal iconSizeChanged(int size)
     readonly property bool activeBrainz : bae.brainzState()
 
@@ -19,14 +19,15 @@ Kirigami.GlobalDrawer
     //    interactive: true
     //    focus: true
     modal:true
-    dragMargin :0
+//    dragMargin :0
 
     topPadding: 0
     bottomPadding: 0
     leftPadding: 0
     rightPadding: 0
 
-    handle.anchors.verticalCenter: parent.verticalCenter
+//    handle.y : 64
+//    handle.anchors.verticalCenter: parent.verticalCenter
 //    handle.anchors.top: parent.bottom
 //    handle.focus: false
     //    handle.y : coverSize

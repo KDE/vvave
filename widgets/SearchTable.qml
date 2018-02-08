@@ -31,7 +31,7 @@ Item
     function clearSearch()
     {
         searchInput.clear()
-        clearTable()
+        searchTable.clearTable()
         searchTable.headerTitle = ""
         searchRes = []
     }
@@ -70,6 +70,7 @@ Item
         {
             id: searchBox
             Layout.fillWidth: true
+            width: parent.width
             height: toolBarHeight
             color: searchInput.activeFocus ? midColor : midLightColor
 
@@ -89,25 +90,27 @@ Item
                 }
             }
 
-
-            TextInput
+            RowLayout
             {
-                id: searchInput
-                color: foregroundColor
                 anchors.fill: parent
-                anchors.centerIn: parent
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:  Text.AlignVCenter
-                selectByMouse: !root.isMobile
-                selectionColor: babeHighlightColor
-                selectedTextColor: foregroundColor
+                TextInput
+                {
+                    id: searchInput
+                    color: foregroundColor
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment:  Text.AlignVCenter
+                    selectByMouse: !root.isMobile
+                    selectionColor: babeHighlightColor
+                    selectedTextColor: foregroundColor
 
-                onAccepted: runSearch()
+                    onAccepted: runSearch()
+                }
 
                 BabeButton
                 {
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
+                    Layout.fillHeight: true
                     visible: searchInput.activeFocus
                     iconName: "edit-clear"
                     onClicked: clearSearch()

@@ -20,8 +20,9 @@ ToolBar
     signal artistsViewClicked()
     signal playlistsViewClicked()
     signal babeViewClicked()
-    signal playlistViewClicked()
+//    signal playlistViewClicked()
     signal searchViewClicked()
+    signal settingsViewClicked()
 
     width: parent.width
     id: babeBar
@@ -53,20 +54,18 @@ ToolBar
     {
         anchors.fill: parent
 
-
-
         BabeButton
         {
-            id: playlistView
-            iconName: /*"headphones"*/ "media-optical-audio"
-            iconColor: (pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor
-            onClicked: playlistViewClicked()
+            id: settingsView
+            iconName: /*"headphones"*/ /*"media-optical-audio"*/ "application-menu"
+            iconColor: settingsDrawer.visible ? babeColor : textColor/*(pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor*/
+            onClicked: settingsViewClicked()/*playlistViewClicked()*/
 
             hoverEnabled: !isMobile
             ToolTip.delay: 1000
             ToolTip.timeout: 5000
             ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Playlist")
+            ToolTip.text: qsTr("Settings")
         }
 
         Item

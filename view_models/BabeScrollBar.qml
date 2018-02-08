@@ -9,17 +9,17 @@ ScrollBar
     active: true
     focus: true
 //    visible: !root.isMobile
-    background : Rectangle
-    {
-        radius: 12
-        color: backgroundColor
-    }
+//    background : Rectangle
+//    {
+//        radius: 12
+//        color: backgroundColor
+//    }
 
-    contentItem: Rectangle
-    {
-        implicitWidth: 6
-        implicitHeight: 100
-        radius: width / 2
-        color: scrollBar.pressed ? babeHighlightColor: darkColor
-    }
+//    contentItem: Rectangle
+//    {
+//        implicitWidth: 6
+//        implicitHeight: 100
+//        radius: width / 2
+//        color: scrollBar.pressed ? babeHighlightColor: darkColor
+//    }
 }

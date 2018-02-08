@@ -146,12 +146,11 @@ ItemDelegate
             Layout.margins: contentMargins
             anchors.verticalCenter: parent.verticalCenter
 
-
             GridLayout
             {
                 anchors.fill: parent
                 rows:2
-                columns: sameAlbum ? 5 : 4
+                columns: sameAlbum ? 4 : 3
 
                 Label
                 {
@@ -264,8 +263,9 @@ ItemDelegate
 
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+
                     Layout.row: 1
-                    Layout.column: trackDurationVisible && sameAlbum ? 5 : 4
+                    Layout.column: trackDurationVisible && sameAlbum ? 4 : 3
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter
                     text: babe == "1" ? "\uf2D1" : ""
@@ -312,7 +312,7 @@ ItemDelegate
                     Layout.fillHeight: true
                     Layout.alignment: Qt.AlignRight
                     Layout.row: trackRatingVisible && sameAlbum ? 1 : 2
-                    Layout.column: 4
+                    Layout.column: 3
 //                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter

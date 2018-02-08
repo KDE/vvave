@@ -31,10 +31,11 @@ Kirigami.ApplicationWindow
     /*PLAYBACK*/
 
     property bool shuffle : false
-    property var currentTrack : ({babe:0, stars: 0})
+    property var currentTrack : ({babe: "0", stars: "0"})
     property int currentTrackIndex : 0
     property int prevTrackIndex : 0
     property string currentArtwork
+    property bool currentBabe : currentTrack.babe == "0" ? false : true
 
     property bool timeLabels : false
 
@@ -156,10 +157,7 @@ Kirigami.ApplicationWindow
         if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
     }
 
-    BabeNotify
-    {
-        id: babeNotify
-    }
+    BabeNotify { id: babeNotify }
 
     BabeMessage
     {
@@ -230,13 +228,15 @@ Kirigami.ApplicationWindow
         bgColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? babeColor : babeAltColor
         textColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? "#FFF" : bae.foregroundColor()
 
-        onPlaylistViewClicked:
-        {
-            if(!isMobile && pageStack.wideMode)
-                root.width = columnWidth
+        //        onPlaylistViewClicked:
+        //        {
+        //            if(!isMobile && pageStack.wideMode)
+        //                root.width = columnWidth
 
-            pageStack.currentIndex = 0
-        }
+        //            pageStack.currentIndex = 0
+        //        }
+
+        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() :settingsDrawer.open()
 
         onTracksViewClicked:
         {
@@ -304,8 +304,6 @@ Kirigami.ApplicationWindow
         height: visible ? headerHeight : 0
         visible: true
 
-
-
         FastBlur
         {
             width: parent.width
@@ -324,6 +322,23 @@ Kirigami.ApplicationWindow
             color: midLightColor
             opacity: opacityLevel
             z: -999
+
+            Kirigami.Separator
+            {
+
+                Rectangle
+                {
+                    anchors.fill: parent
+                    color: Kirigami.Theme.viewFocusColor
+                }
+
+                anchors
+                {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+            }
         }
 
         Slider
@@ -346,17 +361,17 @@ Kirigami.ApplicationWindow
             background: Rectangle
             {
                 x: progressBar.leftPadding
-                y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
+                y: progressBar.y
                 implicitWidth: 200
-                implicitHeight: 1
+                implicitHeight: 4
                 width: progressBar.availableWidth
                 height: implicitHeight
-                color: Kirigami.Theme.viewFocusColor
+                color: "transparent"
 
                 Rectangle
                 {
                     width: progressBar.visualPosition * parent.width
-                    height: 2
+                    height: 4
                     color: babeColor
                 }
             }
@@ -364,17 +379,17 @@ Kirigami.ApplicationWindow
             handle: Rectangle
             {
                 x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
-                y: progressBar.topPadding + progressBar.availableHeight / 2 - height / 2
-                implicitWidth: progressBar.pressed ? 16 : 0
-                implicitHeight: progressBar.pressed ? 16 : 0
-                radius: progressBar.pressed ? 16 : 0
+                y: progressBar.y-(height/2)
+                implicitWidth: 16
+                implicitHeight: 16
+                radius:  16
                 color: babeColor
             }
 
             Label
             {
                 id: progressTime
-                anchors.top: parent.bottom
+                anchors.top: parent.top
                 anchors.right: parent.right
                 visible: timeLabels
                 horizontalAlignment: Qt.AlignHCenter
@@ -382,7 +397,7 @@ Kirigami.ApplicationWindow
                 text: progressTimeLabel +" / "+durationTimeLabel
                 color: foregroundColor
                 font.pointSize: 6.5
-                padding: 2
+                padding: 0
                 elide: Text.ElideRight
             }
         }
@@ -392,17 +407,20 @@ Kirigami.ApplicationWindow
             anchors.fill: parent
             width: parent.width
             height: parent.height
-
-            Item
+            Rectangle
             {
-                Layout.fillHeight: true
+                visible: (!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible
+
+                height: headerHeight
+                width: headerHeight
+
                 Image
                 {
-                    visible: (!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible
-                    height: parent.height
-                    width: parent.height
-                    anchors.verticalCenter: parent.verticalCenter
+
+                    height: headerHeight
+                    width: headerHeight
                     anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
                     source:
                     {
                         if(currentArtwork)
@@ -412,22 +430,36 @@ Kirigami.ApplicationWindow
                     fillMode:  Image.PreserveAspectFit
                     cache: false
                     antialiasing: true
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked:
+                        {
+                            if(!isMobile && pageStack.wideMode)
+                                root.width = columnWidth
+                            pageStack.currentIndex = 0
+                        }
+                    }
                 }
             }
+
             Item
             {
                 Layout.fillWidth: true
             }
+
             BabeButton
             {
                 id: babeBtnIcon
                 iconName: "love" //"love-amarok"
-                iconColor: currentTrack.babe == "1" ? babeColor : defaultColor
+                iconColor: currentBabe ? babeColor : defaultColor
                 onClicked:
                 {
                     var value = mainPlaylist.list.contextMenu.babeIt(currentTrackIndex)
                     //                    iconColor = value ? babeColor : foregroundColor
-                    currentTrack["babe"] =  value ? "1" : "0"
+                    currentTrack.babe =  value ? "1" : "0"
+                    currentBabe = value
                 }
             }
 
@@ -469,8 +501,6 @@ Kirigami.ApplicationWindow
             {
                 Layout.fillWidth: true
             }
-
-
         }
     }
 

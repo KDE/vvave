@@ -25,6 +25,7 @@ ToolButton
         height: iconSize
         visible: !isMobile
         source: isMobile  ? "" : iconName
+        isMask: false
         color: iconColor || defaultColor
 
     }

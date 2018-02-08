@@ -19,12 +19,12 @@ ListView
         width: babeList.width
         height: babeList.currentItem.height
         color: babeHighlightColor
-        y: babeList.currentItem.y
+//        y: babeList.currentItem.y
     }
 
     focus: true
     interactive: true
-    highlightFollowsCurrentItem: false
+    highlightFollowsCurrentItem: true
     keyNavigationWraps: !isMobile
     keyNavigationEnabled : !isMobile
 
