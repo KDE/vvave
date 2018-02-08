@@ -20,7 +20,7 @@ ToolBar
     signal artistsViewClicked()
     signal playlistsViewClicked()
     signal babeViewClicked()
-//    signal playlistViewClicked()
+    //    signal playlistViewClicked()
     signal searchViewClicked()
     signal settingsViewClicked()
 
@@ -56,16 +56,16 @@ ToolBar
 
         BabeButton
         {
-            id: settingsView
-            iconName: /*"headphones"*/ /*"media-optical-audio"*/ "application-menu"
-            iconColor: settingsDrawer.visible ? babeColor : textColor/*(pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor*/
-            onClicked: settingsViewClicked()/*playlistViewClicked()*/
+            iconName: "love"
+            iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
+
+            onClicked: babeViewClicked()
 
             hoverEnabled: !isMobile
             ToolTip.delay: 1000
             ToolTip.timeout: 5000
             ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Settings")
+            ToolTip.text: qsTr("Babe")
         }
 
         Item
@@ -78,7 +78,7 @@ ToolBar
             id: tracksView
 
             iconName: /*"musicnote"*/ "filename-filetype-amarok"
-            iconColor:  accent && currentIndex === 0? accentColor : textColor
+            iconColor:  accent && currentIndex === viewsIndex.tracks ? accentColor : textColor
             onClicked: tracksViewClicked()
 
             hoverEnabled: true
@@ -93,7 +93,7 @@ ToolBar
             id: albumsView
 
             iconName: /*"album" */ "media-album-cover"
-            iconColor:  accent && currentIndex === 1 ? accentColor : textColor
+            iconColor:  accent && currentIndex === viewsIndex.albums ? accentColor : textColor
             onClicked: albumsViewClicked()
 
             hoverEnabled: true
@@ -108,7 +108,7 @@ ToolBar
             id: artistsView
 
             iconName: /*"artist" */  "view-media-artist"
-            iconColor:  accent && currentIndex === 2? accentColor : textColor
+            iconColor:  accent && currentIndex === viewsIndex.artists ? accentColor : textColor
 
             onClicked: artistsViewClicked()
             hoverEnabled: true
@@ -123,7 +123,7 @@ ToolBar
             id: playlistsView
 
             iconName: /*"library-music"*/ "view-media-playlist"
-            iconColor:  accent && currentIndex === 3? accentColor : textColor
+            iconColor:  accent && currentIndex === viewsIndex.playlists ? accentColor : textColor
 
             onClicked: playlistsViewClicked()
 
@@ -141,8 +141,8 @@ ToolBar
         BabeButton
         {
             id: searchView
-            iconColor: accent && currentIndex === 5? accentColor : textColor
             //                visible: !(searchInput.focus || searchInput.text)
+            iconColor: accent && currentIndex === viewsIndex.search ? accentColor : textColor
             iconName: "edit-find" //"search"
             onClicked: searchViewClicked()
             hoverEnabled: !isMobile
@@ -151,24 +151,6 @@ ToolBar
             ToolTip.visible: hovered && !isMobile
             ToolTip.text: qsTr("Search")
         }
-
-
-        //        BabeButton
-        //        {
-        //            iconName: "love"
-        //            iconColor: accent && currentIndex === 4? accentColor : textColor
-
-        //            onClicked: babeViewClicked()
-
-        //            hoverEnabled: !isMobile
-        //            ToolTip.delay: 1000
-        //            ToolTip.timeout: 5000
-        //            ToolTip.visible: hovered && !isMobile
-        //            ToolTip.text: qsTr("Babe")
-        //        }
-
-
-
 
     }
 }

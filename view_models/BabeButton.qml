@@ -11,11 +11,13 @@ ToolButton
     property int iconSize : toolBarIconSize
     property color iconColor: foregroundColor
     readonly property string defaultColor :  foregroundColor
+    property bool anim : false
+    //        icon.name: isMobile ? "" : babeButton.iconName
+    //        icon.width: isMobile ? 0 : babeButton.iconSize
+    //    //    icon.height: isMobile ? 0 : babeButton.iconSize
+    //        icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
+    onClicked: if(anim) animIcon.running = true
 
-//        icon.name: isMobile ? "" : babeButton.iconName
-//        icon.width: isMobile ? 0 : babeButton.iconSize
-//    //    icon.height: isMobile ? 0 : babeButton.iconSize
-//        icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
 
     Kirigami.Icon
     {
@@ -39,6 +41,19 @@ ToolButton
         iconSize: babeButton.iconSize
     }
 
+    SequentialAnimation
+    {
+        id: animIcon
+        PropertyAnimation
+        {
+            target: babeIcon
+            property: "color"
+            easing.type: Easing.InOutQuad
+            from: babeColor
+            to: iconColor
+            duration: 500
+        }
+    }
 }
 
 

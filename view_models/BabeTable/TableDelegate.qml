@@ -133,6 +133,7 @@ ItemDelegate
                 iconName: "media-playback-start"
                 iconColor: textColor
                 onClicked: play()
+                anim: true
             }
         }
 

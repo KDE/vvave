@@ -99,6 +99,15 @@ Kirigami.ApplicationWindow
     readonly property int headerHeight: rowHeight
     readonly property int contentMargins : 15
 
+    readonly property var viewsIndex : ({
+                                            "babeit": 0,
+                                            "tracks" : 1,
+                                            "albums" : 2,
+                                            "artists" : 3,
+                                            "playlists" : 4,
+                                            "search" : 5
+                                        })
+
     /*PROPS*/
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", isMobile ?  24 : 22)
     property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
@@ -106,7 +115,7 @@ Kirigami.ApplicationWindow
 
     property int columnWidth: Kirigami.Units.gridUnit * 20
     property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
-    property int currentView : 0
+    property int currentView : viewsIndex.tracks
 
     property alias mainPlaylist : mainPlaylist
 
@@ -244,7 +253,7 @@ Kirigami.ApplicationWindow
             //                root.width = wideSize
 
             pageStack.currentIndex = 1
-            currentView = 0
+            currentView = viewsIndex.tracks
         }
 
         onAlbumsViewClicked:
@@ -253,7 +262,7 @@ Kirigami.ApplicationWindow
             //                root.width = wideSize
 
             pageStack.currentIndex = 1
-            currentView = 1
+            currentView = viewsIndex.albums
         }
 
         onArtistsViewClicked:
@@ -262,7 +271,7 @@ Kirigami.ApplicationWindow
             //                root.width = wideSize
 
             pageStack.currentIndex = 1
-            currentView = 2
+            currentView = viewsIndex.artists
         }
 
         onPlaylistsViewClicked:
@@ -271,7 +280,7 @@ Kirigami.ApplicationWindow
             //                root.width = wideSize
 
             pageStack.currentIndex = 1
-            currentView = 3
+            currentView = viewsIndex.playlists
         }
 
         onBabeViewClicked:
@@ -280,19 +289,21 @@ Kirigami.ApplicationWindow
             //                root.width = wideSize
 
             pageStack.currentIndex = 1
-            currentView = 4
+            currentView = viewsIndex.babeit
         }
 
         onSearchViewClicked:
         {
             pageStack.currentIndex = 1
-            currentView = 5
+            currentView = viewsIndex.search
         }
     }
 
     property alias playIcon: playIcon
     property alias babeBtnIcon: babeBtnIcon
     property alias progressBar : progressBar
+    property alias animFooter : animFooter
+
     property string durationTimeLabel : "00:00"
     property string progressTimeLabel : "00:00"
 
@@ -318,6 +329,7 @@ Kirigami.ApplicationWindow
 
         Rectangle
         {
+            id: footerBg
             anchors.fill: parent
             color: midLightColor
             opacity: opacityLevel
@@ -337,6 +349,20 @@ Kirigami.ApplicationWindow
                     left: parent.left
                     right: parent.right
                     top: parent.top
+                }
+            }
+
+            SequentialAnimation
+            {
+                id: animFooter
+                PropertyAnimation
+                {
+                    target: footerBg
+                    property: "color"
+                    easing.type: Easing.InOutQuad
+                    from: darkColor
+                    to: midLightColor
+                    duration: 500
                 }
             }
         }
@@ -629,16 +655,20 @@ Kirigami.ApplicationWindow
 
                 currentIndex: currentView
 
-                onCurrentItemChanged:
-                {
-                    currentItem.forceActiveFocus();
-                }
+                onCurrentItemChanged: currentItem.forceActiveFocus()
+
                 onCurrentIndexChanged:
                 {
                     currentView = currentIndex
-                    if(currentView === 0) mainPlaylist.list.forceActiveFocus()
-                    else if(currentView === 1) tracksView.forceActiveFocus()
+                    if(pageStack.currentIndex === 0) mainPlaylist.list.forceActiveFocus()
+                    else if(currentView === viewsIndex.tracks) tracksView.forceActiveFocus()
+                    else if(currentView === viewsIndex.search) searchView.forceActiveFocus()
 
+                }
+
+                LogginForm
+                {
+                    id: babeView
                 }
 
                 TracksView
@@ -653,7 +683,6 @@ Kirigami.ApplicationWindow
                         onAppendAll: Player.appendAll(bae.get(Q.GET.allTracks))
 
                     }
-
                 }
 
                 AlbumsView
@@ -704,12 +733,6 @@ Kirigami.ApplicationWindow
                         }
                     }
                 }
-
-                LogginForm
-                {
-                    id: babeView
-                }
-
 
                 SearchTable
                 {

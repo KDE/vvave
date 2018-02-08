@@ -8,7 +8,7 @@ import org.kde.kirigami 2.2 as Kirigami
 Kirigami.GlobalDrawer
 {
     id: settingsView
-    handleVisible: false
+    handleVisible: true
     signal iconSizeChanged(int size)
     readonly property bool activeBrainz : bae.brainzState()
 

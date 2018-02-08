@@ -73,41 +73,41 @@ BabeList
                 id: closeBtn
                 width: rowHeight
                 visible: headerClose
-
-                iconName: "window-close" //"dialog-close"
-                onClicked: headerClosed()
+                anim : true
+                iconName : "window-close" //"dialog-close"
+                onClicked : headerClosed()
             }
 
             BabeButton
             {
-                id: playAllBtn
-                visible: headerBar && count > 0
-
-                iconName: /*"amarok_clock"*/ "media-playback-start"
-                onClicked: playAll()
+                id : playAllBtn
+                visible : headerBar && count > 0
+                anim : true
+                iconName : /*"amarok_clock"*/ "media-playback-start"
+                onClicked : playAll()
             }
 
             Label
             {
-                text: headerTitle || count +" tracks"
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
+                text : headerTitle || count +" tracks"
+                Layout.fillHeight : true
+                Layout.fillWidth : true
+                Layout.alignment : Qt.AlignCenter
 
-                elide: Text.ElideRight
+                elide : Text.ElideRight
                 //                font.pointSize: 8
-                font.bold: false
-                color: foregroundColor
+                font.bold : false
+                color : foregroundColor
 
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:  Text.AlignVCenter
+                horizontalAlignment : Text.AlignHCenter
+                verticalAlignment :  Text.AlignVCenter
             }
 
             BabeButton
             {
                 id: appendBtn
                 visible: headerBar && count > 0
-
+                anim : true
                 iconName : "archive-insert"//"media-repeat-track-amarok"
                 onClicked: appendAll()
             }

@@ -58,10 +58,10 @@ BabeList
 
             BabeButton
             {
-                id: createPlaylistBtn
-
-                iconName: "list-add"
-                onClicked: newPlaylistDialog.open()
+                id : createPlaylistBtn
+                anim : true
+                iconName : "list-add"
+                onClicked : newPlaylistDialog.open()
             }
 
 

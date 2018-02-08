@@ -24,7 +24,7 @@ function playTrack(track)
 
                 if(!root.active)
                     bae.notifySong(root.currentTrack.url)
-            }           
+            }
 
             var lyrics = root.currentTrack.lyrics
 
@@ -104,7 +104,7 @@ function playAt(index)
 
 function quickPlay(track)
 {
-//    root.pageStack.currentIndex = 0
+    //    root.pageStack.currentIndex = 0
     appendTrack(track)
     playAt(root.mainPlaylist.list.count-1)
     root.mainPlaylist.list.positionViewAtEnd()
@@ -120,7 +120,6 @@ function appendTracksAt(tracks, at)
                 root.mainPlaylist.list.model.insert(parseInt(at)+parseInt(i), tracks[i])
 
         }
-
 }
 
 function appendTrack(track)
@@ -128,13 +127,12 @@ function appendTrack(track)
     if(track)
     {
         root.mainPlaylist.list.model.append(track)
-
+        root.animFooter.running = true
         if(root.sync === true)
-         {
+        {
             root.infoMsgAnim()
             addToPlaylist([track.url], root.syncPlaylist)
         }
-
     }
 
     //    if(track)
@@ -242,8 +240,8 @@ function addToPlaylist(urls, playlist)
 
         if(!isMobile)
             bae.notify(playlist, urls.length + " tracks added to the playlist:\n"+urls.join("\n"))
-//        else
-//            babeNotify.notify(urls.length + " tracks added to " +playlist)
+        //        else
+        //            babeNotify.notify(urls.length + " tracks added to " +playlist)
 
     }
 }

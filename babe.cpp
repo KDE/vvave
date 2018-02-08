@@ -265,7 +265,7 @@ QString Babe::baseColor()
 QString Babe::darkColor()
 {
 #if defined(Q_OS_ANDROID)
-    return "#24282c";
+    return "#111";
 #elif defined(Q_OS_LINUX)
     QWidget widget;
     return widget.palette().color(QPalette::Dark).name();
