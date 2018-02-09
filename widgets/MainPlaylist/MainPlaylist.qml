@@ -106,22 +106,22 @@ Item
                     anchors.fill: parent
                     onDoubleClicked: gomini()
 
-//                    drag.target: artwork
-//                    drag.axis: Drag.YAxis
-//                    drag.minimumY: 0
-//                    drag.maximumY: coverSize
+                    //                    drag.target: artwork
+                    //                    drag.axis: Drag.YAxis
+                    //                    drag.minimumY: 0
+                    //                    drag.maximumY: coverSize
 
-//                    onMouseYChanged:
-//                    {
+                    //                    onMouseYChanged:
+                    //                    {
 
-//                        cover.height = mouseY < 0 ? 0 : mouseY
+                    //                        cover.height = mouseY < 0 ? 0 : mouseY
 
-////                        if(mouseY < coverSize*0.8)
-////                        {
-////                            cover.visible = false
+                    ////                        if(mouseY < coverSize*0.8)
+                    ////                        {
+                    ////                            cover.visible = false
 
-////                        }else cover.visible = true
-//                    }
+                    ////                        }else cover.visible = true
+                    //                    }
 
                     onPressAndHold:
                     {
@@ -157,7 +157,7 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? toolBarHeight : 0
-//                        anchors.top: cover.bottom
+            //                        anchors.top: cover.bottom
             visible: list.count > 0
 
             Rectangle
@@ -319,7 +319,7 @@ Item
                 initialItem: BabeTable
                 {
                     id: list
-//                    anchors.fill: parent
+                    //                    anchors.fill: parent
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true
@@ -338,9 +338,9 @@ Item
                     {
                         prevTrackIndex = currentTrackIndex
                         currentTrackIndex = currentIndex
-
                         Player.playAt(index)
                     }
+
                     onArtworkDoubleClicked:
                     {
                         contextMenu.babeIt(index)
@@ -407,7 +407,7 @@ Item
                 root.header.visible = false
                 infoBtn.visible = false
                 //                root.footer.visible = false
-//                mainlistContext.visible = false
+                //                mainlistContext.visible = false
 
             }else
             {
@@ -422,7 +422,7 @@ Item
                 root.header.visible = true
                 infoBtn.visible = true
                 //                root.footer.visible = true
-//                mainlistContext.visible = true
+                //                mainlistContext.visible = true
             }
         }
     }

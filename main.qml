@@ -335,23 +335,6 @@ Kirigami.ApplicationWindow
             opacity: opacityLevel
             z: -999
 
-            Kirigami.Separator
-            {
-
-                Rectangle
-                {
-                    anchors.fill: parent
-                    color: Kirigami.Theme.viewFocusColor
-                }
-
-                anchors
-                {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
-                }
-            }
-
             SequentialAnimation
             {
                 id: animFooter
@@ -394,6 +377,23 @@ Kirigami.ApplicationWindow
                 height: implicitHeight
                 color: "transparent"
 
+                Kirigami.Separator
+                {
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: Kirigami.Theme.viewFocusColor
+                    }
+
+                    anchors
+                    {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
+                    }
+                }
+
                 Rectangle
                 {
                     width: progressBar.visualPosition * parent.width
@@ -406,9 +406,9 @@ Kirigami.ApplicationWindow
             {
                 x: progressBar.leftPadding + progressBar.visualPosition * (progressBar.availableWidth - width)
                 y: progressBar.y-(height/2)
-                implicitWidth: 16
-                implicitHeight: 16
-                radius:  16
+                implicitWidth: progressBar.pressed ? 16 : 0
+                implicitHeight: progressBar.pressed ? 16 : 0
+                radius:  progressBar.pressed ? 16 : 0
                 color: babeColor
             }
 

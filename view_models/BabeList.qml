@@ -9,7 +9,7 @@ ListView
     property alias holder : holder
     signal pulled()
 
-        property bool wasPulled : false
+    property bool wasPulled : false
 
 
     clip: true
@@ -20,11 +20,20 @@ ListView
         height: babeList.currentItem.height
         color: babeHighlightColor
 //        y: babeList.currentItem.y
+//        Behavior on y
+//        {
+//            SpringAnimation
+//            {
+//                spring: 3
+//                damping: 0.2
+//            }
+//        }
     }
 
     focus: true
     interactive: true
     highlightFollowsCurrentItem: true
+    highlightMoveDuration: 0
     keyNavigationWraps: !isMobile
     keyNavigationEnabled : !isMobile
 
@@ -67,10 +76,10 @@ ListView
 
     onContentYChanged:
     {
-       if(contentY < -120)
-           wasPulled = true
+        if(contentY < -120)
+            wasPulled = true
 
-       if(contentY == toolBarHeight*-1 && wasPulled)
+        if(contentY == toolBarHeight*-1 && wasPulled)
         { pulled(); wasPulled = false}
     }
 
