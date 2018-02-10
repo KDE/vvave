@@ -81,7 +81,6 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
         emit this->refreshTables({{BAE::TABLEMAP[type], true}});
     });
 
-
     //    connect(this->fileLoader, &FileLoader::trackReady, [this]()
     //    {
     //        this->ui->progressBar->setValue(this->ui->progressBar->value()+1);
@@ -91,14 +90,16 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     {
         if(size > 0)
         {
-            this->collectionWatcher();
-            emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
-                                {BAE::TABLEMAP[TABLE::ALBUMS], true},
-                                {BAE::TABLEMAP[TABLE::ARTISTS], true},
-                                {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
+//            this->collectionWatcher();
+//            emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
+//                                {BAE::TABLEMAP[TABLE::ALBUMS], true},
+//                                {BAE::TABLEMAP[TABLE::ARTISTS], true},
+//                                {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
 
 
-            this->startBrainz(true, 1500);
+//            this->startBrainz(true, 1500);
+
+            qDebug()<<"Finished inserting into DB";
         }else
         {
             this->dirs.clear();

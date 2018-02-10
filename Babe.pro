@@ -203,7 +203,8 @@ SOURCES += main.cpp \
         taglib/tagunion.cpp \
     babe.cpp \
     settings/BabeSettings.cpp \
-    java/notificationclient.cpp
+    java/notificationclient.cpp \
+    db/conthread.cpp
 
 
 
@@ -361,6 +362,7 @@ HEADERS += \
         taglib/taglib_config.h \
     babe.h \
     settings/BabeSettings.h \
-    java/notificationclient.h
+    java/notificationclient.h \
+    db/conthread.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

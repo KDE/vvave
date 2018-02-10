@@ -49,7 +49,7 @@ ListView
 
     addDisplaced: Transition
     {
-        NumberAnimation { properties: "x,y"; duration: 1000 }
+        NumberAnimation { properties: "x,y"; duration: 100 }
     }
 
     function clearTable()

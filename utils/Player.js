@@ -235,8 +235,10 @@ function addToPlaylist(urls, playlist)
 {
     if(urls.length > 0)
     {
-        for(var i in urls)
-            bae.trackPlaylist(urls[i], playlist)
+        bae.trackPlaylist(urls, playlist)
+//        for(var i in urls)
+//            bae.trackPlaylist(urls[i], playlist)
+
 
         if(!isMobile)
             bae.notify(playlist, urls.length + " tracks added to the playlist:\n"+urls.join("\n"))

@@ -41,7 +41,6 @@ void Brain::pause()
     this->go = false;
 }
 
-
 bool Brain::isRunning() const
 {
     return this->go;

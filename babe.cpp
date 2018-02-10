@@ -5,6 +5,7 @@
 #include <QColor>
 #include <QIcon>
 #include "db/collectionDB.h"
+#include "db/conthread.h"
 #include "settings/BabeSettings.h"
 #include "pulpo/pulpo.h"
 #include <QApplication>
@@ -28,9 +29,10 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
 {    
     qDebug()<<"CONSTRUCTING ABE INTERFACE";
 
-    this->set = new BabeSettings(this);
+    this->settings = new BabeSettings(this);
+    this->thread = new ConThread;
 
-    connect(set, &BabeSettings::refreshTables, [this](QVariantMap tables)
+    connect(settings, &BabeSettings::refreshTables, [this](QVariantMap tables)
     {
         emit this->refreshTables(tables);
     });
@@ -52,7 +54,7 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
 
 Babe::~Babe()
 {
-
+    delete this->thread;
 }
 
 QVariantList Babe::get(const QString &queryTxt)
@@ -65,10 +67,32 @@ QVariantList Babe::getList(const QStringList &urls)
     return Babe::transformData(getDBData(urls));
 }
 
+void Babe::set(const QString &table, const QVariantList &wheres)
+{
+    this->thread->start(table, wheres);
+}
+
+
+void Babe::trackPlaylist(const QStringList &urls, const QString &playlist)
+{
+    QVariantList data;
+    for(auto url : urls)
+    {
+        QVariantMap map {{KEYMAP[KEY::PLAYLIST],playlist},
+                         {KEYMAP[KEY::URL],url},
+                         {KEYMAP[KEY::ADD_DATE],QDateTime::currentDateTime()}};
+
+        data << map;
+    }
+
+    qDebug()<<"now to send data to thread";
+    this->thread->start(BAE::TABLEMAP[TABLE::TRACKS_PLAYLISTS], data);
+}
+
 void Babe::trackLyrics(const QString &url)
 {
     auto track = getDBData(QString("SELECT * FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
-                                      KEYMAP[KEY::URL], url));
+                           KEYMAP[KEY::URL], url));
 
     if(track.isEmpty()) return;
 
@@ -78,7 +102,7 @@ void Babe::trackLyrics(const QString &url)
 bool Babe::trackBabe(const QString &path)
 {
     auto babe = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::BABE],
-                                     TABLEMAP[TABLE::TRACKS],
+                          TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::URL],path));
 
     if(!babe.isEmpty())
@@ -90,7 +114,7 @@ bool Babe::trackBabe(const QString &path)
 QString Babe::artistArt(const QString &artist)
 {
     auto artwork = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::ARTWORK],
-                                        TABLEMAP[TABLE::ARTISTS],
+                             TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTIST],artist));
 
     if(!artwork.isEmpty())
@@ -103,7 +127,7 @@ QString Babe::artistArt(const QString &artist)
 QString Babe::artistWiki(const QString &artist)
 {
     auto wiki = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::WIKI],
-                                     TABLEMAP[TABLE::ARTISTS],
+                          TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTIST],artist));
 
     if(!wiki.isEmpty())
@@ -168,10 +192,10 @@ QString Babe::albumWiki(const QString &album, const QString &artist)
 bool Babe::babeTrack(const QString &path, const bool &value)
 {
     if(update(TABLEMAP[TABLE::TRACKS],
-                         KEYMAP[KEY::BABE],
-                         value ? 1 : 0,
-                         KEYMAP[KEY::URL],
-                         path)) return true;
+              KEYMAP[KEY::BABE],
+              value ? 1 : 0,
+              KEYMAP[KEY::URL],
+              path)) return true;
 
     return false;
 }
@@ -201,12 +225,12 @@ void Babe::notifySong(const QString &url)
 
 void Babe::scanDir(const QString &url)
 {
-    emit this->set->collectionPathChanged({url});
+    emit this->settings->collectionPathChanged({url});
 }
 
 void Babe::brainz(const bool &on)
 {
-    this->set->checkCollectionBrainz(on);
+    this->settings->checkCollectionBrainz(on);
 }
 
 bool Babe::brainzState()

@@ -65,7 +65,6 @@ public:
     bool tagsAlbum(const BAE::DB &track, const QString &value, const QString &context = "");
 
     Q_INVOKABLE bool addPlaylist(const QString &title);
-    Q_INVOKABLE bool trackPlaylist(const QString &url, const QString &playlist);
 
     bool addFolder(const QString &url);
 
@@ -108,6 +107,8 @@ public:
 private:
     QString name;
     QSqlDatabase m_db;
+
+
     /*basic actions*/
 
 

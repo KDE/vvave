@@ -13,7 +13,7 @@ class Notify;
 class CollectionDB;
 class Pulpo;
 class BabeSettings;
-
+class ConThread;
 using namespace BAE;
 
 class Babe : public CollectionDB
@@ -36,6 +36,9 @@ public:
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
     Q_INVOKABLE QVariantList getList(const QStringList &urls);
 
+    Q_INVOKABLE void set(const QString &table, const QVariantList &wheres);
+
+    Q_INVOKABLE void trackPlaylist(const QStringList &urls, const QString &playlist);
     Q_INVOKABLE void trackLyrics(const QString &url);
     Q_INVOKABLE bool trackBabe(const QString &path);
     Q_INVOKABLE QString artistArt(const QString &artist);
@@ -105,7 +108,9 @@ public:
     Q_INVOKABLE QVariantList searchFor(const QStringList &queries);
 
 private:
-    BabeSettings *set;
+    BabeSettings *settings;
+    ConThread *thread;
+
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     Notify *nof;
 #endif
@@ -121,7 +126,7 @@ signals:
     void skipTrack();
     void babeIt();
 
-friend class CollectionDB;
+    friend class CollectionDB;
 
 };
 

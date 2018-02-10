@@ -25,6 +25,8 @@ var GET = {
 
 }
 
-var POST = {}
+var INSERT = {
+    trackPlaylist_ : "insert into tracks_playlists () ",
+}
 
 var UPDATE = {}

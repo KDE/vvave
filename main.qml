@@ -231,7 +231,7 @@ Kirigami.ApplicationWindow
     header: BabeBar
     {
         id: mainToolbar
-        height: headerHeight
+        height: toolBarHeight
         visible: true
         currentIndex: currentView
         bgColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? babeColor : babeAltColor
@@ -433,15 +433,15 @@ Kirigami.ApplicationWindow
             anchors.fill: parent
             width: parent.width
             height: parent.height
-            Rectangle
-            {
-                visible: (!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible
 
+            Item
+            {
+                Layout.fillHeight: true
                 height: headerHeight
                 width: headerHeight
-
                 Image
                 {
+                    visible: (!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible
 
                     height: headerHeight
                     width: headerHeight
@@ -470,63 +470,87 @@ Kirigami.ApplicationWindow
                 }
             }
 
-            Item
-            {
-                Layout.fillWidth: true
-            }
-
-            BabeButton
-            {
-                id: babeBtnIcon
-                iconName: "love" //"love-amarok"
-                iconColor: currentBabe ? babeColor : defaultColor
-                onClicked:
-                {
-                    var value = mainPlaylist.list.contextMenu.babeIt(currentTrackIndex)
-                    //                    iconColor = value ? babeColor : foregroundColor
-                    currentTrack.babe =  value ? "1" : "0"
-                    currentBabe = value
-                }
-            }
-
-            BabeButton
-            {
-                id: previousBtn
-                iconName: "media-skip-backward"
-                onClicked: Player.previousTrack()
-                onPressAndHold: Player.playAt(prevTrackIndex)
-            }
-
-            BabeButton
-            {
-                id: playIcon
-                iconName: "media-playback-start"
-                onClicked:
-                {
-                    if(player.isPaused()) Player.resumeTrack()
-                    else Player.pauseTrack()
-                }
-            }
-
-            BabeButton
-            {
-                id: nextBtn
-                iconName: "media-skip-forward"
-                onClicked: Player.nextTrack()
-                onPressAndHold: Player.playAt(Player.shuffle())
-            }
-
-            BabeButton
-            {
-                id: shuffleBtn
-                iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                onClicked: shuffle = !shuffle
-            }
 
             Item
             {
+                Layout.fillHeight: true
                 Layout.fillWidth: true
+                Layout.alignment: Qt.AlignCenter
+
+                RowLayout
+                {
+                    anchors.centerIn: parent
+                    anchors.fill: parent
+
+                    Item
+                    {
+                        Layout.fillWidth: true
+                    }
+
+                    BabeButton
+                    {
+                        id: babeBtnIcon
+                        iconName: "love" //"love-amarok"
+                        iconColor: currentBabe ? babeColor : defaultColor
+                        onClicked:
+                        {
+                            var value = mainPlaylist.list.contextMenu.babeIt(currentTrackIndex)
+                            //                    iconColor = value ? babeColor : foregroundColor
+                            currentTrack.babe =  value ? "1" : "0"
+                            currentBabe = value
+                        }
+                    }
+
+                    BabeButton
+                    {
+                        id: previousBtn
+                        iconName: "media-skip-backward"
+                        onClicked: Player.previousTrack()
+                        onPressAndHold: Player.playAt(prevTrackIndex)
+                    }
+
+                    BabeButton
+                    {
+                        id: playIcon
+                        iconName: "media-playback-start"
+                        onClicked:
+                        {
+                            if(player.isPaused()) Player.resumeTrack()
+                            else Player.pauseTrack()
+                        }
+                    }
+
+                    BabeButton
+                    {
+                        id: nextBtn
+                        iconName: "media-skip-forward"
+                        onClicked: Player.nextTrack()
+                        onPressAndHold: Player.playAt(Player.shuffle())
+                    }
+
+                    BabeButton
+                    {
+                        id: shuffleBtn
+                        iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+                        onClicked: shuffle = !shuffle
+                    }
+
+
+                    Item
+                    {
+                        Layout.fillWidth: true
+                    }
+                }
+
             }
+
+            Item
+            {
+                Layout.fillHeight: true
+                height: headerHeight
+                width: headerHeight
+            }
+
         }
     }
 
