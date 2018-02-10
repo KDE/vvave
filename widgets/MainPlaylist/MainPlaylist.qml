@@ -72,9 +72,9 @@ Item
             Layout.maximumHeight: 300
             visible: list.count > 0
 
-
             Rectangle
             {
+                visible: cover.visible
                 anchors.fill: parent
                 color: midColor
                 z: -999
@@ -82,12 +82,12 @@ Item
 
             FastBlur
             {
+                visible: cover.visible
                 width: mainPlaylistRoot.width
                 height: mainPlaylistItem.y
                 source: artwork
                 radius: 100
                 transparentBorder: false
-                //                opacity: 0.8
                 cached: true
             }
 
@@ -106,23 +106,6 @@ Item
                     anchors.fill: parent
                     onDoubleClicked: gomini()
 
-                    //                    drag.target: artwork
-                    //                    drag.axis: Drag.YAxis
-                    //                    drag.minimumY: 0
-                    //                    drag.maximumY: coverSize
-
-                    //                    onMouseYChanged:
-                    //                    {
-
-                    //                        cover.height = mouseY < 0 ? 0 : mouseY
-
-                    ////                        if(mouseY < coverSize*0.8)
-                    ////                        {
-                    ////                            cover.visible = false
-
-                    ////                        }else cover.visible = true
-                    //                    }
-
                     onPressAndHold:
                     {
                         var query = Q.GET.albumTracks_.arg(currentTrack.album)
@@ -130,22 +113,8 @@ Item
                         var tracks = bae.get(query)
                         coverPressed(tracks)
                     }
-
-                    //                    onClicked:
-                    //                    {
-                    //                        if(stackView.currentItem !== list)
-                    //                            stackView.pop(list)
-                    //                        else
-                    //                        {
-                    //                            stackView.push(infoView)
-                    //                            infoView.currentView = 1
-                    //                        }
-                    //                    }
-
                 }
             }
-
-
         }
 
         Item
@@ -158,7 +127,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? toolBarHeight : 0
             //                        anchors.top: cover.bottom
-            visible: list.count > 0
+            visible: cover.visible
 
             Rectangle
             {
@@ -183,9 +152,6 @@ Item
                     }
                 }
             }
-
-
-
             MouseArea
             {
                 anchors.fill: parent
@@ -319,7 +285,6 @@ Item
                 initialItem: BabeTable
                 {
                     id: list
-                    //                    anchors.fill: parent
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true

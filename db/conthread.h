@@ -21,7 +21,7 @@ public:
 
 private:
     QThread t;
-    uint interval = 500;
+    uint interval = 0;
     bool go = false;
     QList<QMap<QString, QVariant>> queue;
 

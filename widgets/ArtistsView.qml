@@ -77,59 +77,55 @@ BabeGrid
             }
         }
 
-        Column
+
+        BabeTable
         {
+            id: drawerList
             anchors.fill: parent
-
-            BabeTable
+            trackNumberVisible: true
+            headerBar: true
+            headerClose: true
+            coverArtVisible: true
+            onRowClicked:
             {
-                id: drawerList
-                width: parent.width
-                height: parent.height
-                trackNumberVisible: true
-                headerBar: true
-                headerClose: true
-                coverArtVisible: true
-                onRowClicked:
-                {
-                    drawer.close()
-                    artistsViewGrid.rowClicked(model.get(index))
-                }
-
-                onQuickPlayTrack:
-                {
-                    drawer.close()
-                    artistsViewGrid.playTrack(model.get(index))
-                }
-
-                onQueueTrack:
-                {
-                    drawer.close()
-                    artistsViewGrid.queueTrack(model.get(index))
-                }
-
-                onPlayAll:
-                {
-                    drawer.close()
-                    var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
-
-                    var query = Q.GET.artistTracks_.arg(data.artist)
-                    var tracks = bae.get(query)
-                    artistsViewGrid.playAlbum(tracks)
-                }
-
-                onAppendAll:
-                {
-                    var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
-                    var query = Q.GET.artistTracks_.arg(data.artist)
-                    var tracks = bae.get(query)
-                    artistsViewGrid.appendAlbum(tracks)
-                    drawer.close()
-                }
-
-                onHeaderClosed: drawer.close()
+                drawer.close()
+                artistsViewGrid.rowClicked(model.get(index))
             }
+
+            onQuickPlayTrack:
+            {
+                drawer.close()
+                artistsViewGrid.playTrack(model.get(index))
+            }
+
+            onQueueTrack:
+            {
+                drawer.close()
+                artistsViewGrid.queueTrack(model.get(index))
+            }
+
+            onPlayAll:
+            {
+                drawer.close()
+                var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
+
+                var query = Q.GET.artistTracks_.arg(data.artist)
+                var tracks = bae.get(query)
+                artistsViewGrid.playAlbum(tracks)
+            }
+
+            onAppendAll:
+            {
+                var data = artistsViewGrid.gridModel.get(artistsViewGrid.grid.currentIndex)
+                var query = Q.GET.artistTracks_.arg(data.artist)
+                var tracks = bae.get(query)
+                artistsViewGrid.appendAlbum(tracks)
+                drawer.close()
+            }
+
+            onHeaderClosed: drawer.close()
         }
+
     }
 
     onAlbumCoverClicked:

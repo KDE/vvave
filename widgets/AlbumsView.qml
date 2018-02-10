@@ -30,7 +30,6 @@ BabeGrid
     Drawer
     {
         id: drawer
-
         height:
         {
             var customHeight = (drawerList.count*rowHeight)+48
@@ -76,65 +75,60 @@ BabeGrid
             }
         }
 
-        Column
+
+        BabeTable
         {
+            id: drawerList
             anchors.fill: parent
+            trackNumberVisible: true
+            headerBar: true
+            headerClose: true
+            coverArtVisible: true
+            quickPlayVisible: true
 
-            BabeTable
+            onRowClicked:
             {
-                id: drawerList
-                width: parent.width
-                height: parent.height
-                trackNumberVisible: true
-                headerBar: true
-                headerClose: true
-                coverArtVisible: true
-                quickPlayVisible: true
-
-                onRowClicked:
-                {
-                    drawer.close()
-                    albumsViewGrid.rowClicked(model.get(index))
-                }
-
-                onQuickPlayTrack:
-                {
-                    drawer.close()
-                    albumsViewGrid.playTrack(model.get(index))
-                }
-
-                onQueueTrack:
-                {
-                    albumsViewGrid.queueTrack(model.get(index))
-                    drawer.close()
-                }
-
-                onPlayAll:
-                {
-                    drawer.close()
-
-                    var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
-                    var query = Q.GET.albumTracks_.arg(data.album)
-                    query = query.arg(data.artist)
-                    var tracks = bae.get(query)
-
-                    albumsViewGrid.playAlbum(tracks)
-                }
-
-                onAppendAll:
-                {
-                    var data = albumsView.gridModel.get(albumsViewGrid.grid.currentIndex)
-                    var query = Q.GET.albumTracks_.arg(data.album)
-                    query = query.arg(data.artist)
-                    var tracks = bae.get(query)
-                    albumsViewGrid.appendAlbum(tracks)
-                    drawer.close()
-                }
-
-                onHeaderClosed: drawer.close()
+                drawer.close()
+                albumsViewGrid.rowClicked(model.get(index))
             }
 
+            onQuickPlayTrack:
+            {
+                drawer.close()
+                albumsViewGrid.playTrack(model.get(index))
+            }
+
+            onQueueTrack:
+            {
+                albumsViewGrid.queueTrack(model.get(index))
+                drawer.close()
+            }
+
+            onPlayAll:
+            {
+                drawer.close()
+
+                var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
+                var query = Q.GET.albumTracks_.arg(data.album)
+                query = query.arg(data.artist)
+                var tracks = bae.get(query)
+
+                albumsViewGrid.playAlbum(tracks)
+            }
+
+            onAppendAll:
+            {
+                var data = albumsView.gridModel.get(albumsViewGrid.grid.currentIndex)
+                var query = Q.GET.albumTracks_.arg(data.album)
+                query = query.arg(data.artist)
+                var tracks = bae.get(query)
+                albumsViewGrid.appendAlbum(tracks)
+                drawer.close()
+            }
+
+            onHeaderClosed: drawer.close()
         }
+
     }
 
     onAlbumCoverClicked:

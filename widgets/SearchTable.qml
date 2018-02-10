@@ -92,7 +92,14 @@ Item
 
             RowLayout
             {
-                anchors.fill: parent
+                anchors.fill: parent                
+                BabeButton
+                {
+                    visible: true
+                    iconName: "edit-find"
+                    onClicked: {}
+                }
+
                 TextInput
                 {
                     id: searchInput
@@ -110,8 +117,7 @@ Item
 
                 BabeButton
                 {
-                    Layout.fillHeight: true
-                    visible: searchInput.activeFocus
+                    visible: searchInput.text.length > 0
                     iconName: "edit-clear"
                     onClicked: clearSearch()
                 }

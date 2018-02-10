@@ -19,7 +19,6 @@ ItemDelegate
         opacity: 0.3
     }
 
-
     ColumnLayout
     {
         anchors.fill: parent

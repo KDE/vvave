@@ -19,24 +19,14 @@ void ConThread::start(QString table, QVariantList wheres)
 
     this->queue.append({{QString ("TABLE"), table}, {QString ("WHERES"), wheres}});
 
-    qDebug()<<"NOW ON THREAD<<"<< queue;
-
     if(this->queue.size() > 1) return;
 
-    while(!this->queue.isEmpty())
+    if(this->go)
     {
-        if(this->go)
-        {
-            qDebug()<<"RUNNIGN QUERY ON CONTHREAD"<<this->queue.first()["TABLE"].toString();
-            QMetaObject::invokeMethod(this, "set", Q_ARG(QString, this->queue.first()["TABLE"].toString()), Q_ARG(QVariantList, this->queue.first()["WHERES"].toList()));
-            qDebug()<<"FINISHED SET ON QUEUE CONTHREAD"<< this->queue.first()["TABLE"].toString();
-            this->queue.removeFirst();
-            qDebug()<<this->queue.size();
-        }else return;
-    }
+        qDebug()<<"RUNNIGN QUERY ON CONTHREAD"<<this->queue.first()["TABLE"].toString();
+        QMetaObject::invokeMethod(this, "set", Q_ARG(QString, this->queue.first()["TABLE"].toString()), Q_ARG(QVariantList, this->queue.first()["WHERES"].toList()));
 
-    qDebug()<<"FINISHED SET ON CONTHREAD TOTALLY";
-
+    }else return;
 }
 
 void ConThread::stop()
@@ -74,6 +64,15 @@ void ConThread::set(QString tableName, QVariantList wheres)
         this->insert(tableName, QVariantMap(variant.toMap()));
         this->t.msleep(this->interval);
     }
+
+    qDebug()<<"FINISHED SET ON QUEUE CONTHREAD"<< this->queue.first()["TABLE"].toString();
+    this->queue.removeFirst();
+    qDebug()<<"QUERYS ON QUEUE THREAD"<<this->queue.size();
+
+    if(!this->queue.isEmpty())
+        this->set(this->queue.first()["TABLE"].toString(), this->queue.first()["WHERES"].toList());
+    else  qDebug()<<"FINISHED SET ON CONTHREAD TOTALLY";
+
 }
 
 

@@ -60,11 +60,14 @@ Kirigami.PageRow
                 onPlaySync: syncAndPlay(index)
             }
 
+            Kirigami.Separator{ Layout.fillWidth: true; width: parent.width; height: 1}
+
             ColorTagsBar
             {
                 Layout.fillWidth: true
                 height: rowHeightAlt
-                recSize: toolBarIconSize
+                recSize: isMobile ? toolBarIconSize : 16
+
                 Rectangle
                 {
                     anchors.fill: parent
@@ -98,8 +101,7 @@ Kirigami.PageRow
         BabeTable
         {
             id: filterList
-            width: parent.width
-            height: parent.height
+            anchors.fill: parent
             quickPlayVisible: true
             coverArtVisible: true
             trackRating: true

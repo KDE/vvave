@@ -207,12 +207,14 @@ void CollectionDB::openDB(const QString &name)
     }
 
     if (!this->m_db.isOpen())
-    {
+    {        
         if(!this->m_db.open())
             qDebug()<<"ERROR OPENING DB"<<this->m_db.lastError().text()<<m_db.connectionName();
-    }else
-    {
-        this->execQuery("PRAGMA journal_mode=WAL");
+        else
+        {
+            qDebug()<<"Setting pragma WAL";
+            this->execQuery("PRAGMA journal_mode=WAL");
+        }
     }
 }
 

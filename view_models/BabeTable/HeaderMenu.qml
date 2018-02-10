@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.2 as Kirigami
+
 import "../../view_models/BabeMenu"
 import "../../utils"
 import ".."
@@ -30,7 +32,19 @@ BabeMenu
         BabeMenuItem
         {
             text: "Send list to..."
+
+        }
+
+        Kirigami.Separator{ width: parent.width; height: 1}
+
+        BabeMenuItem
+        {
+            text: "Visible info..."
             onTriggered: {}
         }
+
+        Kirigami.Separator{ width: parent.width; height: 1}
+
+
     }
 }

@@ -16,7 +16,7 @@ function playTrack(track)
 
             var artwork = root.currentTrack.artwork
             //    root.mainPlaylist.list.currentItem.playingIndicator = true
-            root.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(root.mainPlaylist.currentTrack.url)
+            root.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(root.currentTrack.url)
 
             if(!root.isMobile)
             {
