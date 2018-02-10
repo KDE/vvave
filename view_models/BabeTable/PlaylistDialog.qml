@@ -88,6 +88,8 @@ BabeDialog
         if(playlists.length > 0)
             for(var i in playlists)
                 playlistsList.model.append(playlists[i])
+
+        newPlaylistField.forceActiveFocus()
     }
 
     onAccepted:

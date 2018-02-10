@@ -13,6 +13,8 @@ BabeGrid
     id: albumsViewGrid
     visible: true
 
+    property alias list : drawerList.list
+
     signal rowClicked(var track)
     signal playAlbum(var tracks)
     signal playTrack(var track)
@@ -81,8 +83,8 @@ BabeGrid
             id: drawerList
             anchors.fill: parent
             trackNumberVisible: true
-            headerBar: true
-            headerClose: true
+            headerBarVisible: true
+            headerBarExit: true
             coverArtVisible: true
             quickPlayVisible: true
 
@@ -126,16 +128,16 @@ BabeGrid
                 drawer.close()
             }
 
-            onHeaderClosed: drawer.close()
+            onExit: drawer.close()
         }
 
     }
 
     onAlbumCoverClicked:
     {
-        drawerList.headerTitle = album
+        drawerList.headerBarTitle = album
         drawer.open()
-        drawerList.clearTable()
+        list.clearTable()
 
         var query = Q.GET.albumTracks_.arg(album)
         query = query.arg(artist)

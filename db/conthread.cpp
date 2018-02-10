@@ -46,9 +46,9 @@ bool ConThread::isRunning()
     return this->go;
 }
 
-void ConThread::setInterval()
+void ConThread::setInterval(const uint &interval)
 {
-
+    this->interval = interval;
 }
 
 void ConThread::get(QString query)
@@ -65,13 +65,11 @@ void ConThread::set(QString tableName, QVariantList wheres)
         this->t.msleep(this->interval);
     }
 
-    qDebug()<<"FINISHED SET ON QUEUE CONTHREAD"<< this->queue.first()["TABLE"].toString();
     this->queue.removeFirst();
-    qDebug()<<"QUERYS ON QUEUE THREAD"<<this->queue.size();
+    emit this->finished();
 
     if(!this->queue.isEmpty())
         this->set(this->queue.first()["TABLE"].toString(), this->queue.first()["WHERES"].toList());
-    else  qDebug()<<"FINISHED SET ON CONTHREAD TOTALLY";
 
 }
 

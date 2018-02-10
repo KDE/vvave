@@ -16,9 +16,10 @@ BabeDialog
 
         TextField
         {
+            id: newPlaylistField
+
             Layout.fillWidth: true
             Layout.margins: contentMargins
-            id: newPlaylistField
             width: parent.width
             color: foregroundColor
             onAccepted:
@@ -29,6 +30,7 @@ BabeDialog
         }
     }
 
+    onOpened: newPlaylistField.forceActiveFocus()
     onAccepted: addPlaylist()
 
     function addPlaylist()

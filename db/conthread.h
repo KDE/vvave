@@ -15,7 +15,7 @@ public:
     void stop();
     void pause();
     bool isRunning();
-    void setInterval();
+    void setInterval(const uint &interval);
 
     void get(QString query);
 

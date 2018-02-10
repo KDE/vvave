@@ -106,10 +106,11 @@ Kirigami.PageRow
             coverArtVisible: true
             trackRating: true
             trackDuration: false
-            headerBar: true
-            headerClose: !playlistViewRoot.wideMode
-            headerTitle: playlistViewRoot.wideMode ? "" : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
-            onHeaderClosed: if(!playlistViewRoot.wideMode)
+            headerBarVisible: true
+            headerBarExitIcon: "arrow-left"
+            headerBarExit: !playlistViewRoot.wideMode
+            headerBarTitle: playlistViewRoot.wideMode ? "" : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
+            onExit: if(!playlistViewRoot.wideMode)
                                 playlistViewRoot.currentIndex = 0
 
             holder.message:  "<h2>"+playlistViewModel.model.get(playlistViewModel.currentIndex).playlist+"</h2><p>Your playlist is empty,<br>start adding new music to it</p>"
@@ -153,7 +154,7 @@ Kirigami.PageRow
     function populate(query)
     {
         playlistQuery = query
-        filterList.clearTable()
+        filterList.list.clearTable()
 
         var tracks = bae.get(query)
 

@@ -1693,7 +1693,7 @@ var Babe = {
     "media-playlist-repeat": "\uf49E",
     "babe" : Icon.heart,
 
-    "arrow-left":"\uf04D",
+    "arrow-left": Icon.arrowLeft,
 
     "overflow-menu": Icon.dotsVertical,
     "player-time": "\uf40C",

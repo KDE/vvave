@@ -21,7 +21,7 @@ Item
 
     property alias artwork : artwork
     property alias cover : cover
-    property alias list : list
+    property alias list : list.list
     property alias infoView : infoView
 
 
@@ -127,7 +127,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? toolBarHeight : 0
             //                        anchors.top: cover.bottom
-            visible: cover.visible
+            visible: list.count > 0
 
             Rectangle
             {
@@ -285,6 +285,7 @@ Item
                 initialItem: BabeTable
                 {
                     id: list
+                    headerBarVisible: false
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true

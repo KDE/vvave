@@ -17,10 +17,10 @@ Item
     {
         if(searchInput.text)
         {
-            if(searchInput !== searchView.headerTitle)
+            if(searchInput !== searchTable.headerBarTitle)
             {
                 var query = searchInput.text
-                searchTable.headerTitle = query
+                searchTable.headerBarTitle = query
                 var queries = query.split(",")
                 searchRes = bae.searchFor(queries)
                 populate(searchView.searchRes)
@@ -31,14 +31,14 @@ Item
     function clearSearch()
     {
         searchInput.clear()
-        searchTable.clearTable()
-        searchTable.headerTitle = ""
+        searchTable.list.clearTable()
+        searchTable.headerBarTitle = ""
         searchRes = []
     }
 
     function populate(tracks)
     {
-        searchTable.clearTable()
+        searchTable.list.clearTable()
         for(var i in tracks)
             searchTable.model.append(tracks[i])
     }
@@ -57,8 +57,9 @@ Item
             Layout.fillHeight: true
             Layout.fillWidth: true
             trackNumberVisible: false
-            headerBar: true
-            //    headerClose: true
+            headerBarVisible: true
+            headerBarExit: true
+            headerBarExitIcon: "arrow-left"
             holder.message: "No search results!"
             coverArtVisible: true
             trackDuration: true
@@ -92,7 +93,7 @@ Item
 
             RowLayout
             {
-                anchors.fill: parent                
+                anchors.fill: parent
                 BabeButton
                 {
                     visible: true

@@ -31,6 +31,7 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
         this->openDB(this->name);
         qDebug()<<"Collection doesn't exists, trying to create it" << BAE::CollectionDBPath + BAE::DBName;
         this->prepareCollectionDB();
+
     }else this->openDB(this->name);
 }
 

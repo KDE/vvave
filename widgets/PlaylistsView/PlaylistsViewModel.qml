@@ -12,12 +12,15 @@ BabeList
 {
     id: playlistListRoot
 
+    headerBarColor: midLightColor
+    headerBarExit: false
+    headerBarTitle: "Playlists"
+
     AddPlaylistDialog
     {
         id:newPlaylistDialog
     }
 
-    headerPositioning: ListView.OverlayHeader
     signal playSync(int index)
 
     Rectangle
@@ -27,65 +30,20 @@ BabeList
         z: -999
     }
 
-
-    header: Rectangle
+    headerBarRight: BabeButton
     {
-        height: toolBarHeight
-        width: parent.width
-        color: midLightColor
-        z: 999
+        id : createPlaylistBtn
+        anim : true
+        iconName : "list-add"
+        onClicked : newPlaylistDialog.open()
+    }
 
+    headerBarLeft: BabeButton
+    {
+        id: removePlaylist
+        iconName: "list-remove"
 
-        Kirigami.Separator
-        {
-            Rectangle
-            {
-                anchors.fill: parent
-                color: Kirigami.Theme.viewFocusColor
-            }
-
-            anchors
-            {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-        }
-
-        RowLayout
-        {
-            anchors.fill: parent
-
-            BabeButton
-            {
-                id : createPlaylistBtn
-                anim : true
-                iconName : "list-add"
-                onClicked : newPlaylistDialog.open()
-            }
-
-
-            BabeButton
-            {
-                id: removePlaylist
-                iconName: "list-remove"
-
-                onClicked: appendAll()
-            }
-
-            Item
-            {
-                Layout.fillWidth: true
-            }
-
-            BabeButton
-            {
-                id: menuBtn
-                iconName: /*"application-menu" */"overflow-menu"
-                onClicked: {}
-            }
-
-        }
+        onClicked: {}
     }
 
     ListModel

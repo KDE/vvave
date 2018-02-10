@@ -7,11 +7,11 @@ import ".."
 
 BabeList
 {
-    id: list
+//    id: list
     holder.message: "<h2>This list is empty</h2><p>You can sdd new music sources from the settings</p>"
     //    cacheBuffer : 300
+    headerBarColor: midLightColor
 
-    property bool headerBar: false
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
@@ -20,10 +20,6 @@ BabeList
     property bool trackDuration
     property bool trackRating
 
-    property string headerTitle
-    property bool headerClose : false
-
-    property alias holder : list.holder
     property alias headerMenu: headerMenu
     property alias contextMenu : contextMenu
 
@@ -31,96 +27,38 @@ BabeList
     signal rowPressed(int index)
     signal quickPlayTrack(int index)
     signal queueTrack(int index)
-    signal headerClosed()
+
     signal artworkDoubleClicked(int index)
 
     signal playAll()
     signal appendAll()
 
-    headerPositioning: ListView.OverlayHeader
-    header: Rectangle
+    headerBarLeft:  BabeButton
     {
-        id: tableHeader
-        width: parent.width
-        height:  visible ?  toolBarHeight : 0
-        color: midLightColor
-        visible: headerBar
-        z: 999
-
-        Kirigami.Separator
-        {
-            Rectangle
-            {
-                anchors.fill: parent
-                color: Kirigami.Theme.viewFocusColor
-            }
-
-            anchors
-            {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-        }
-
-        RowLayout
-        {
-            anchors.fill: parent
-            anchors.centerIn: parent
-
-            BabeButton
-            {
-                id: closeBtn
-                width: rowHeight
-                visible: headerClose
-                anim : true
-                iconName : "window-close" //"dialog-close"
-                onClicked : headerClosed()
-            }
-
-            BabeButton
-            {
-                id : playAllBtn
-                visible : headerBar && count > 0
-                anim : true
-                iconName : /*"amarok_clock"*/ "media-playback-start"
-                onClicked : playAll()
-            }
-
-            Label
-            {
-                text : headerTitle || count +" tracks"
-                Layout.fillHeight : true
-                Layout.fillWidth : true
-                Layout.alignment : Qt.AlignCenter
-
-                elide : Text.ElideRight
-                //                font.pointSize: 8
-                font.bold : false
-                color : foregroundColor
-
-                horizontalAlignment : Text.AlignHCenter
-                verticalAlignment :  Text.AlignVCenter
-            }
-
-            BabeButton
-            {
-                id: appendBtn
-                visible: headerBar && count > 0
-                anim : true
-                iconName : "archive-insert"//"media-repeat-track-amarok"
-                onClicked: appendAll()
-            }
-
-            BabeButton
-            {
-                id: menuBtn
-                iconName: /*"application-menu"*/ "overflow-menu"
-                onClicked: headerMenu.popup()
-            }
-        }
+        id : playAllBtn
+        visible : headerBarVisible && count > 0
+        anim : true
+        iconName : /*"amarok_clock"*/ "media-playback-start"
+        onClicked : playAll()
     }
 
+    headerBarRight: [
+        BabeButton
+        {
+            id: appendBtn
+            visible: headerBarVisible && count > 0
+            anim : true
+            iconName : "archive-insert"//"media-repeat-track-amarok"
+            onClicked: appendAll()
+        },
+
+        BabeButton
+        {
+            id: menuBtn
+            iconName: /*"application-menu"*/ "overflow-menu"
+            onClicked: headerMenu.popup()
+        }
+    ]
 
     PlaylistDialog
     {
@@ -151,8 +89,8 @@ BabeList
         number : trackNumberVisible ? true : false
         quickPlay: quickPlayVisible
         coverArt : coverArtVisible
-        trackDurationVisible : list.trackDuration
-        trackRatingVisible : list.trackRating
+        trackDurationVisible : trackDuration
+        trackRatingVisible : trackRating
         menuItem: menuItemVisible
 
 
@@ -167,19 +105,19 @@ BabeList
             {
                 currentIndex = index
                 if(root.isMobile)
-                    list.rowClicked(index)
+                    rowClicked(index)
 
             }
 
             onDoubleClicked:
             {
                 if(!root.isMobile)
-                    list.rowClicked(index)
+                    rowClicked(index)
             }
 
-            onPlay: list.quickPlayTrack(index)
+            onPlay: quickPlayTrack(index)
 
-            onArtworkCoverDoubleClicked: list.artworkDoubleClicked(index)
+            onArtworkCoverDoubleClicked: artworkDoubleClicked(index)
 
         }
     }
@@ -187,19 +125,19 @@ BabeList
     function openItemMenu(index)
     {
         currentIndex = index
-        contextMenu.rate = bae.getTrackStars(list.model.get(list.currentIndex).url)
-        contextMenu.babe = list.model.get(list.currentIndex).babe == "1" ? true : false
+        contextMenu.rate = bae.getTrackStars(model.get(currentIndex).url)
+        contextMenu.babe = model.get(currentIndex).babe == "1" ? true : false
         if(root.isMobile) contextMenu.open()
         else
             contextMenu.popup()
-        list.rowPressed(index)
+        rowPressed(index)
     }
 
     function saveList()
     {
         var trackList = []
-        for(var i = 0; i < list.model.count; ++i)
-            trackList.push(list.model.get(i).url)
+        for(var i = 0; i < model.count; ++i)
+            trackList.push(model.get(i).url)
 
         playlistDialog.tracks = trackList
         playlistDialog.open()

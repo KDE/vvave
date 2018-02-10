@@ -209,9 +209,9 @@ Kirigami.ApplicationWindow
         target: bae
         onRefreshTables:
         {
-            tracksView.clearTable()
-            albumsView.clearGrid()
-            artistsView.clearGrid()
+            tracksView.list.clearTable()
+            albumsView.list.clearGrid()
+            artistsView.list.clearGrid()
 
             tracksView.populate()
             albumsView.populate()
@@ -768,7 +768,6 @@ Kirigami.ApplicationWindow
                         onQuickPlayTrack: Player.quickPlay(searchView.searchTable.model.get(index))
                         onPlayAll: Player.playAll(searchView.searchRes)
                         onAppendAll: Player.appendAll(searchView.searchRes)
-                        //                        onHeaderClosed: clearSearch()
                         onArtworkDoubleClicked:
                         {
                             var query = Q.GET.albumTracks_.arg(searchView.searchTable.model.get(index).album)

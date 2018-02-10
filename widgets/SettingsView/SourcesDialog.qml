@@ -41,36 +41,44 @@ BabePopup
         }
     }
 
-    ColumnLayout
+    BabeList
     {
-        id: sourcesRoot
-        anchors.fill: parent
-        RowLayout
+        id: sources
+        headerBarVisible: true
+        headerBarExit: true
+        headerBarTitle: qsTr("Sources")
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        width: parent.width
+
+        onExit: close()
+
+        ListModel { id: listModel
+
+        ListElement {url: "hahahaha"}
+        }
+
+        model: listModel
+
+        delegate: BabeDelegate
         {
-            Layout.margins: contentMargins
+            id: delegate
+            label: url
 
-            id: sourceActions
-            width: parent.width
-            height: toolBarHeight
-
-            BabeButton
+            Connections
             {
-                Layout.alignment: Qt.AlignLeft
-                iconName: "window-close"
-                onClicked: close()
+                target: delegate
+                onClicked: sources.list.currentIndex = index
             }
+        }
 
-            Item
-            {
-                Layout.fillWidth: true
-
-            }
+        headerBarRight: [
 
             BabeButton
             {
                 iconName: "list-remove"
                 onClicked:{}
-            }
+            },
 
             BabeButton
             {
@@ -85,41 +93,16 @@ BabePopup
                         folderDialog.open()
                 }
             }
+        ]
 
-
-        }
-
-        BabeList
+        Component.onCompleted:
         {
-            id: sources
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            width: parent.width
-            ListModel { id: listModel }
-
-            model: listModel
-
-            delegate: BabeDelegate
-            {
-                id: delegate
-                label: url
-
-                Connections
-                {
-                    target: delegate
-                    onClicked: sources.currentIndex = index
-                }
-            }
-
-            Component.onCompleted:
-            {
-                var map = bae.get("select url from folders order by addDate desc")
-                for(var i in map)
-                    model.append(map[i])
-            }
+            var map = bae.get("select url from folders order by addDate desc")
+            for(var i in map)
+                listModel.append(map[i])
         }
-
     }
+
 
 
 

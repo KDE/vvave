@@ -14,6 +14,7 @@ BabeGrid
     visible: true
     //    albumCardVisible: false
     //    albumCoverRadius: Math.min(albumCoverSize, albumCoverSize)
+    property alias list : drawerList.list
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
@@ -83,8 +84,8 @@ BabeGrid
             id: drawerList
             anchors.fill: parent
             trackNumberVisible: true
-            headerBar: true
-            headerClose: true
+            headerBarVisible: true
+            headerBarExit: true
             coverArtVisible: true
             onRowClicked:
             {
@@ -123,16 +124,16 @@ BabeGrid
                 drawer.close()
             }
 
-            onHeaderClosed: drawer.close()
+            onExit: drawer.close()
         }
 
     }
 
     onAlbumCoverClicked:
     {
-        drawerList.headerTitle = artist
+        drawerList.headerBarTitle = artist
         drawer.open()
-        drawerList.clearTable()
+        list.clearTable()
         var query = Q.GET.artistTracks_.arg(artist)
         var map = bae.get(query)
 

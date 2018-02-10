@@ -11,6 +11,9 @@ BabePopup
     signal accepted(var path)
     signal goBack(var path)
 
+    property string currentUrl
+    property string currentName
+
     background: Rectangle
     {
         anchors.fill: parent
@@ -19,36 +22,31 @@ BabePopup
         radius: 3
     }
 
-    ColumnLayout
+    BabeList
     {
+        id: dirList
         anchors.fill: parent
+        property int currentRow : -1
+        property string currentUrl
+        property string currentName
 
-        RowLayout
-        {
-            Layout.margins: contentMargins
-            width:parent.width
-            height: toolBarHeight
+        signal rowClicked(int index)
+        signal rowPressed(int index)
 
-            BabeButton
-            {
-                Layout.alignment: Qt.AlignLeft
-                id: closeBtn
-                iconName: "window-close"
-                onClicked: close()
-            }
+        onExit: close()
 
-            Item
-            {
-                Layout.fillWidth: true
+        headerBarExit: true
+        headerBarVisible: true
+        headerBarTitle: ""
 
-            }
+        headerBarLeft: [
 
             BabeButton
             {
                 id: homeBtn
                 iconName: "gohome"
                 onClicked: load(bae.homeDir())
-            }
+            },
 
             BabeButton
             {
@@ -56,47 +54,51 @@ BabePopup
                 iconName: "sd"
                 onClicked: load(bae.sdDir())
             }
+        ]
 
-            Button
-            {
-                Layout.alignment: Qt.AlignRight
-                onClicked: {accepted(dirList.currentUrl); close()}
-                text: "Accept"
+        headerBarRight:  Button
+        {
+            Layout.alignment: Qt.AlignRight
+            onClicked: {accepted(dirList.currentUrl); close()}
+            text: "Accept"
 
-                Material.accent: babeColor
-                Material.background: backgroundColor
-                Material.primary: backgroundColor
-                Material.foreground: foregroundColor
-
-            }
+            Material.accent: babeColor
+            Material.background: backgroundColor
+            Material.primary: backgroundColor
+            Material.foreground: foregroundColor
 
         }
 
-        FolderPickerList
+        ListModel { id: listModel }
+
+        model: listModel
+
+        delegate: BabeDelegate
         {
-            id: dirList
-            Layout.fillWidth:true
-            Layout.fillHeight: true
-            width: parent.width
+            id: delegate
+            label : name
+
             Connections
             {
-                target: dirList
-                onRowClicked:
+                target: delegate
+                onClicked:
                 {
-                    dirList.currentUrl = dirList.model.get(index).url
-                    dirList.currentName = dirList.model.get(index).name
-                    pathClicked(dirList.currentUrl)
+                    currentIndex = index
+                    currentUrl = dirList.model.get(index).url
+                    currentName = dirList.model.get(index).name
+                    pathClicked(currentUrl)
                 }
             }
         }
     }
+
+
     function load(folderUrl)
     {
-        dirList.clearTable()
+        dirList.list.clearTable()
         var dirs = bae.getDirs(folderUrl)
         for(var path in dirs)
             dirList.model.append(dirs[path])
-
     }
 
 }

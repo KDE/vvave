@@ -8,8 +8,9 @@ BabeTable
     trackNumberVisible: false
     trackDuration: true
     trackRating: true
-    headerBar: true
-    headerTitle: count + " tracks"
+    headerBarVisible: true
+    headerBarTitle: count + " tracks"
+    headerBarExit: false
     coverArtVisible: false
 
     function populate()
