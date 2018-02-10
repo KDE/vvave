@@ -13,10 +13,11 @@ function playTrack(track)
             player.play()
             root.playIcon.iconName = "media-playback-pause"
 
-
             var artwork = root.currentTrack.artwork
             //    root.mainPlaylist.list.currentItem.playingIndicator = true
             root.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(root.currentTrack.url)
+
+            root.currentBabe = bae.trackBabe(root.currentTrack.url)
 
             if(!root.isMobile)
             {

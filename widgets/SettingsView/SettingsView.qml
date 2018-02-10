@@ -77,7 +77,7 @@ Kirigami.GlobalDrawer
                 text: "Icon size"
                 Kirigami.Action
                 {
-                    text: "16"
+                    text: iconSizes.small
                     onTriggered :
                     {
                         bae.saveSetting("ICON_SIZE", text, "BABE")
@@ -87,7 +87,7 @@ Kirigami.GlobalDrawer
 
                 Kirigami.Action
                 {
-                    text: isMobile ? "24" : "22"
+                    text: iconSizes.medium
                     onTriggered :
                     {
                         bae.saveSetting("ICON_SIZE", text, "BABE")
@@ -97,7 +97,7 @@ Kirigami.GlobalDrawer
 
                 Kirigami.Action
                 {
-                    text: "32"
+                    text: iconSizes.big
                     onTriggered :
                     {
                         bae.saveSetting("ICON_SIZE", text, "BABE")

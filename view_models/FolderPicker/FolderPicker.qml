@@ -37,7 +37,7 @@ BabePopup
 
         headerBarExit: true
         headerBarVisible: true
-        headerBarTitle: ""
+        headerBarTitle: "Select"
 
         headerBarLeft: [
 
@@ -83,7 +83,7 @@ BabePopup
                 target: delegate
                 onClicked:
                 {
-                    currentIndex = index
+                    dirList.currentIndex = index
                     currentUrl = dirList.model.get(index).url
                     currentName = dirList.model.get(index).name
                     pathClicked(currentUrl)

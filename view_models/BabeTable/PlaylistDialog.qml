@@ -83,7 +83,7 @@ BabeDialog
     onOpened:
     {
         newPlaylistField.clear()
-        playlistsList.clearTable()
+        playlistsList.list.clearTable()
         var playlists = bae.get(Q.GET.playlists)
         if(playlists.length > 0)
             for(var i in playlists)

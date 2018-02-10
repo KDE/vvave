@@ -20,7 +20,6 @@
         <file>utils/BabeIcon.qml</file>
         <file>view_models/BabeScrollBar.qml</file>
         <file>assets/bars.gif</file>
-        <file>view_models/FolderPicker/FolderPickerList.qml</file>
         <file>view_models/BabeGrid/BabeAlbum.qml</file>
         <file>view_models/BabeGrid/BabeGrid.qml</file>
         <file>view_models/BabeTable/TableDelegate.qml</file>

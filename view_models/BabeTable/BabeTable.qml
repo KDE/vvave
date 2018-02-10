@@ -126,7 +126,7 @@ BabeList
     {
         currentIndex = index
         contextMenu.rate = bae.getTrackStars(model.get(currentIndex).url)
-        contextMenu.babe = model.get(currentIndex).babe == "1" ? true : false
+        contextMenu.babe = bae.trackBabe(model.get(currentIndex).url)
         if(root.isMobile) contextMenu.open()
         else
             contextMenu.popup()

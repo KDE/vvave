@@ -30,7 +30,7 @@ BabeList
         z: -999
     }
 
-    headerBarRight: BabeButton
+    headerBarLeft: BabeButton
     {
         id : createPlaylistBtn
         anim : true
@@ -38,7 +38,7 @@ BabeList
         onClicked : newPlaylistDialog.open()
     }
 
-    headerBarLeft: BabeButton
+    headerBarRight: BabeButton
     {
         id: removePlaylist
         iconName: "list-remove"

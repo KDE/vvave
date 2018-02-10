@@ -90,11 +90,11 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     {
         if(size > 0)
         {
-//            this->collectionWatcher();
-//            emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
-//                                {BAE::TABLEMAP[TABLE::ALBUMS], true},
-//                                {BAE::TABLEMAP[TABLE::ARTISTS], true},
-//                                {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
+            this->collectionWatcher();
+            emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
+                                {BAE::TABLEMAP[TABLE::ALBUMS], true},
+                                {BAE::TABLEMAP[TABLE::ARTISTS], true},
+                                {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
 
 
 //            this->startBrainz(true, 1500);

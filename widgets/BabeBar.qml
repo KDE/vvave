@@ -34,7 +34,6 @@ ToolBar
 
         Kirigami.Separator
         {
-
             Rectangle
             {
                 anchors.fill: parent
@@ -56,9 +55,9 @@ ToolBar
         BabeButton
         {
             id: settingsView
-            iconName: /*"headphones"*/ /*"media-optical-audio"*/ "application-menu"
+            iconName: "application-menu"
             iconColor: settingsDrawer.visible ? babeColor : textColor/*(pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor*/
-            onClicked: settingsViewClicked()/*playlistViewClicked()*/
+            onClicked: settingsViewClicked()
 
             hoverEnabled: !isMobile
             ToolTip.delay: 1000
@@ -150,6 +149,7 @@ ToolBar
         {
             Layout.fillWidth: true
         }
+
         BabeButton
         {
             id: searchView

@@ -53,10 +53,7 @@ BabePopup
 
         onExit: close()
 
-        ListModel { id: listModel
-
-        ListElement {url: "hahahaha"}
-        }
+        ListModel { id: listModel }
 
         model: listModel
 
@@ -68,7 +65,7 @@ BabePopup
             Connections
             {
                 target: delegate
-                onClicked: sources.list.currentIndex = index
+                onClicked: sources.currentIndex = index
             }
         }
 
@@ -97,9 +94,9 @@ BabePopup
 
         Component.onCompleted:
         {
-            var map = bae.get("select url from folders order by addDate desc")
+            var map = bae.get("select url from folders order by strftime(\"%s\", addDate) desc")
             for(var i in map)
-                listModel.append(map[i])
+                model.append(map[i])
         }
     }
 

@@ -10,7 +10,7 @@ Item
     property alias delegate : babeList.delegate
     property alias count : babeList.count
     property alias currentIndex : babeList.currentIndex
-
+    property alias currentItem : babeList.currentItem
     property alias holder : holder
 
     property alias headerBarRight : headerBarActionsRight.children
@@ -70,7 +70,7 @@ Item
                 BabeButton
                 {
                     Layout.alignment : Qt.AlignLeft
-                    Layout.leftMargin: contentMargins-6
+                    Layout.leftMargin: contentMargins
                     width: rowHeight
                     visible: headerBarExit
                     anim : true
@@ -82,7 +82,7 @@ Item
                 {
                     id: headerBarActionsLeft
                     Layout.alignment : Qt.AlignLeft
-                    Layout.leftMargin: headerBarExit ? 0 : contentMargins-6
+                    Layout.leftMargin: headerBarExit ? 0 : contentMargins
 
                 }
 
@@ -105,7 +105,7 @@ Item
                 {
                     id: headerBarActionsRight
                     Layout.alignment : Qt.AlignRight
-                    Layout.rightMargin: contentMargins-6
+                    Layout.rightMargin: contentMargins
                 }
 
             }

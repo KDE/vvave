@@ -18,24 +18,17 @@ Item
 
     id: mainPlaylistRoot
 
-
     property alias artwork : artwork
     property alias cover : cover
-    property alias list : list.list
+    property alias list : table.list
+    property alias table: table
     property alias infoView : infoView
-
-
+    property alias contextMenu : table.contextMenu
+    property alias headerMenu : table.headerMenu
+    property alias stack : stackView
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
-    //                    Component.onCompleted:
-    //                    {
-    //                        if(list.count>0)
-    //                            root.width = coverSize
-    //                        else
-    //                            root.width = coverSize*3
-    //                    }
-
 
     PlaylistMenu
     {
@@ -43,7 +36,7 @@ Item
         onClearOut: Player.clearOutPlaylist()
         onHideCover: cover.visible = !cover.visible
         onClean: Player.cleanPlaylist()
-        onSaveToClicked: list.saveList()
+        onSaveToClicked: table.saveList()
     }
 
     Rectangle
@@ -185,17 +178,16 @@ Item
 
                     BabeButton
                     {
-
                         id: infoBtn
                         anchors.centerIn: parent
 
-                        iconName: stackView.currentItem === list ? "documentinfo" : "arrow-left"
+                        iconName: stackView.currentItem === table ? "documentinfo" : "arrow-left"
                         onClicked:
                         {
-                            if( stackView.currentItem !== list)
+                            if( stackView.currentItem !== table)
                             {
                                 cover.visible  = true
-                                stackView.pop(list) }
+                                stackView.pop(table) }
                             else {
                                 cover.visible  = false
                                 stackView.push(infoView)
@@ -204,19 +196,7 @@ Item
                     }
                 }
 
-                Label
-                {
-                    id: currentTrackInfo
-                    Layout.maximumWidth: parent.width*0.7
-                    Layout.fillWidth:true
-                    Layout.alignment: Qt.AlignCenter
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    text: currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : ""
-                    color: foregroundColor
-                    font.pointSize: 8
-                    elide: Text.ElideRight
-                }
+
 
                 Item
                 {
@@ -284,7 +264,7 @@ Item
 
                 initialItem: BabeTable
                 {
-                    id: list
+                    id: table
                     headerBarVisible: false
                     quickPlayVisible: false
                     coverArtVisible: true

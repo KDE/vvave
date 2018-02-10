@@ -38,6 +38,6 @@ BabeDialog
         var title = newPlaylistField.text.trim()
         if(bae.addPlaylist(title))
             model.append({playlist: title})
-        positionViewAtEnd()
+        list.positionViewAtEnd()
     }
 }

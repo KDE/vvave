@@ -2,19 +2,23 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
-import org.kde.kirigami 2.2 as Kirigami
 import QtQuick.Controls.Material 2.1
 
-import "db/Queries.js" as Q
-import "utils/Player.js" as Player
+import org.kde.kirigami 2.2 as Kirigami
+
 import "utils"
+
 import "widgets"
 import "widgets/MyBeatView"
 import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
+
 import "view_models"
 import "view_models/BabeDialog"
+
+import "db/Queries.js" as Q
+import "utils/Player.js" as Player
 
 Kirigami.ApplicationWindow
 {
@@ -25,23 +29,26 @@ Kirigami.ApplicationWindow
     minimumHeight:  !isMobile ? columnWidth+64 : 0
     height: 500
     title: qsTr("Babe")
-    wideScreen: root.width > coverSize
+    //    wideScreen: root.width > coverSize
 
+    /*ALIASES*/
+    property alias playIcon: playIcon
+    property alias babeBtnIcon: babeBtnIcon
+    property alias progressBar : progressBar
+    property alias animFooter : animFooter
+    property alias mainPlaylist : mainPlaylist
 
     /*PLAYBACK*/
-
     property bool shuffle : false
     property var currentTrack : ({babe: "0", stars: "0"})
     property int currentTrackIndex : 0
     property int prevTrackIndex : 0
     property string currentArtwork
     property bool currentBabe : currentTrack.babe == "0" ? false : true
-
-    property bool timeLabels : false
+    property string durationTimeLabel : "00:00"
+    property string progressTimeLabel : "00:00"
 
     /*THEMING*/
-    property string infoMsg : ""
-
     property string babeColor : bae.babeColor()
     property string babeAltColor : bae.babeAltColor()
     property string backgroundColor : bae.backgroundColor()
@@ -86,11 +93,8 @@ Kirigami.ApplicationWindow
     Material.primary: backgroundColor
     Material.foreground: foregroundColor
 
-    /*SIGNALS*/
-
-    signal missingAlert(var track)
-
     /*READONLY PROPS*/
+    readonly property var iconSizes : ({ "small" : 16, "medium" : isMobile ? 24 : 22, "big" : 32, "large" : 48 })
     readonly property real opacityLevel : 0.8
     readonly property bool isMobile: bae.isMobile()
     readonly property int wideSize : bae.screenGeometry("width")*0.5
@@ -98,7 +102,6 @@ Kirigami.ApplicationWindow
     readonly property int rowHeightAlt: isMobile ? 48 : 32
     readonly property int headerHeight: rowHeight
     readonly property int contentMargins : 15
-
     readonly property var viewsIndex : ({
                                             "babeit": 0,
                                             "tracks" : 1,
@@ -109,25 +112,27 @@ Kirigami.ApplicationWindow
                                         })
 
     /*PROPS*/
-    property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", isMobile ?  24 : 22)
+    property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
     property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
 
-
-    property int columnWidth: Kirigami.Units.gridUnit * 20
+    property int columnWidth: Kirigami.Units.gridUnit * 18
     property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
     property int currentView : viewsIndex.tracks
-
-    property alias mainPlaylist : mainPlaylist
 
     /*USEFUL PROPS*/
     property string syncPlaylist : ""
     property bool sync : false
+    property string infoMsg : ""
+    property bool timeLabels : false
 
+    /*SIGNALS*/
+    signal missingAlert(var track)
+
+    /*CONF*/
     pageStack.defaultColumnWidth: columnWidth
     pageStack.initialPage: [mainPlaylist, views]
     pageStack.interactive: isMobile
     pageStack.separatorVisible: pageStack.wideMode
-
 
     overlay.modal: Rectangle
     {
@@ -139,15 +144,16 @@ Kirigami.ApplicationWindow
         color: "transparent"
     }
 
-    onWidthChanged: if(root.isMobile)
+    /*HANDLE EVENTS*/
+    onWidthChanged: if(isMobile)
                     {
-                        if(root.width>root.height)
+                        if(width > height)
                             mainPlaylist.cover.visible = false
                         else  mainPlaylist.cover.visible = true
                     }
 
-
     onClosing: Player.savePlaylist()
+
     pageStack.onCurrentIndexChanged:
     {
         if(pageStack.currentIndex === 0 && isMobile && !pageStack.wideMode)
@@ -161,11 +167,20 @@ Kirigami.ApplicationWindow
         }
     }
 
+    onMissingAlert:
+    {
+        missingDialog.message = track.title +" by "+track.artist+" is missing"
+        missingDialog.messageBody = "Do you want to remove it from your collection?"
+        missingDialog.open()
+    }
+
     Component.onCompleted:
     {
         if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
     }
 
+
+    /*COMPONENTS*/
     BabeNotify { id: babeNotify }
 
     BabeMessage
@@ -176,25 +191,12 @@ Kirigami.ApplicationWindow
         onAccepted:
         {
             bae.removeTrack(currentTrack.url)
-            mainPlaylist.list.model.remove(mainPlaylist.list.currentIndex)
+            mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
 
         }
     }
 
-    onMissingAlert:
-    {
-        missingDialog.message = track.title +" by "+track.artist+" is missing"
-        missingDialog.messageBody = "Do you want to remove it from your collection?"
-        missingDialog.open()
-    }
-
-
-    function infoMsgAnim()
-    {
-        animBg.running = true
-        animTxt.running = true
-    }
-
+    /*CONNECTIONS*/
     Connections
     {
         target: player
@@ -228,66 +230,44 @@ Kirigami.ApplicationWindow
         onBabeIt: Player.babeTrack()
     }
 
+
+    /* UI */
     header: BabeBar
     {
-        id: mainToolbar
         height: toolBarHeight
         visible: true
         currentIndex: currentView
         bgColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? babeColor : babeAltColor
         textColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? "#FFF" : bae.foregroundColor()
 
-        //        onPlaylistViewClicked:
-        //        {
-        //            if(!isMobile && pageStack.wideMode)
-        //                root.width = columnWidth
-
-        //            pageStack.currentIndex = 0
-        //        }
-
-        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() :settingsDrawer.open()
+        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
 
         onTracksViewClicked:
         {
-            //            if(!isMobile && !pageStack.wideMode)
-            //                root.width = wideSize
-
             pageStack.currentIndex = 1
             currentView = viewsIndex.tracks
         }
 
         onAlbumsViewClicked:
         {
-            //            if(!isMobile && !pageStack.wideMode)
-            //                root.width = wideSize
-
             pageStack.currentIndex = 1
             currentView = viewsIndex.albums
         }
 
         onArtistsViewClicked:
         {
-            //            if(!isMobile && !pageStack.wideMode)
-            //                root.width = wideSize
-
             pageStack.currentIndex = 1
             currentView = viewsIndex.artists
         }
 
         onPlaylistsViewClicked:
         {
-            //            if(!isMobile && !pageStack.wideMode)
-            //                root.width = wideSize
-
             pageStack.currentIndex = 1
             currentView = viewsIndex.playlists
         }
 
         onBabeViewClicked:
         {
-            //            if(!isMobile && !pageStack.wideMode)
-            //                root.width = wideSize
-
             pageStack.currentIndex = 1
             currentView = viewsIndex.babeit
         }
@@ -299,30 +279,20 @@ Kirigami.ApplicationWindow
         }
     }
 
-    property alias playIcon: playIcon
-    property alias babeBtnIcon: babeBtnIcon
-    property alias progressBar : progressBar
-    property alias animFooter : animFooter
-
-    property string durationTimeLabel : "00:00"
-    property string progressTimeLabel : "00:00"
-
     footer: Item
     {
         id: playbackControls
-        width: parent.width
         anchors.horizontalCenter: parent.horizontalCenter
         height: visible ? headerHeight : 0
+        width: root.width
         visible: true
 
         FastBlur
         {
-            width: parent.width
-            height: parent.height
+            anchors.fill: parent
             source: mainPlaylist.artwork
             radius: 100
             transparentBorder: false
-            //                opacity: 0.8
             cached: true
             z: -999
         }
@@ -353,7 +323,6 @@ Kirigami.ApplicationWindow
         Slider
         {
             id: progressBar
-
             width: parent.width
             z: 999
             anchors.left: parent.left
@@ -431,14 +400,17 @@ Kirigami.ApplicationWindow
         RowLayout
         {
             anchors.fill: parent
-            width: parent.width
             height: parent.height
+            width: parent.width
 
             Item
             {
                 Layout.fillHeight: true
+                Layout.alignment: Qt.AlignLeft
+
                 height: headerHeight
                 width: headerHeight
+
                 Image
                 {
                     visible: (!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible
@@ -470,85 +442,115 @@ Kirigami.ApplicationWindow
                 }
             }
 
+            Item { Layout.fillWidth: true }
 
-            Item
+
+
+            GridLayout
             {
                 Layout.fillHeight: true
-                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignCenter
+                Layout.fillWidth: true
+//                rowSpacing: 0
+//                columnSpacing: 0
 
-                RowLayout
+                rows: 2
+                columns: 5
+
+                Label
                 {
-                    anchors.centerIn: parent
-                    anchors.fill: parent
+                    anchors.top: playIcon.bottom
+                    Layout.alignment: Qt.AlignCenter
+                    Layout.fillWidth: true
 
-                    Item
+                    Layout.row: 2
+                    Layout.column: 1
+                    Layout.columnSpan: 5
+                    horizontalAlignment: Qt.AlignHCenter
+                    verticalAlignment: Qt.AlignVCenter
+
+                    text: currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : ""
+                    color: foregroundColor
+                    font.pointSize: 6
+                    elide: Text.ElideRight
+                }
+
+                BabeButton
+                {
+                    id: babeBtnIcon
+                    Layout.row: 1
+                    Layout.column: 1
+
+                    iconName: "love"
+                    iconColor: currentBabe ? babeColor : defaultColor
+                    onClicked:
                     {
-                        Layout.fillWidth: true
-                    }
-
-                    BabeButton
-                    {
-                        id: babeBtnIcon
-                        iconName: "love" //"love-amarok"
-                        iconColor: currentBabe ? babeColor : defaultColor
-                        onClicked:
-                        {
-                            var value = mainPlaylist.list.contextMenu.babeIt(currentTrackIndex)
-                            //                    iconColor = value ? babeColor : foregroundColor
-                            currentTrack.babe =  value ? "1" : "0"
-                            currentBabe = value
-                        }
-                    }
-
-                    BabeButton
-                    {
-                        id: previousBtn
-                        iconName: "media-skip-backward"
-                        onClicked: Player.previousTrack()
-                        onPressAndHold: Player.playAt(prevTrackIndex)
-                    }
-
-                    BabeButton
-                    {
-                        id: playIcon
-                        iconName: "media-playback-start"
-                        onClicked:
-                        {
-                            if(player.isPaused()) Player.resumeTrack()
-                            else Player.pauseTrack()
-                        }
-                    }
-
-                    BabeButton
-                    {
-                        id: nextBtn
-                        iconName: "media-skip-forward"
-                        onClicked: Player.nextTrack()
-                        onPressAndHold: Player.playAt(Player.shuffle())
-                    }
-
-                    BabeButton
-                    {
-                        id: shuffleBtn
-                        iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                        onClicked: shuffle = !shuffle
-                    }
-
-
-                    Item
-                    {
-                        Layout.fillWidth: true
+                        var value = mainPlaylist.contextMenu.babeIt(currentTrackIndex)
+                        currentTrack.babe = value ? "1" : "0"
+                        currentBabe = value
                     }
                 }
 
+                BabeButton
+                {
+                    id: previousBtn
+                    Layout.row: 1
+                    Layout.column: 2
+
+                    iconName: "media-skip-backward"
+                    onClicked: Player.previousTrack()
+                    onPressAndHold: Player.playAt(prevTrackIndex)
+                }
+
+                BabeButton
+                {
+                    id: playIcon
+                    Layout.row: 1
+                    Layout.column: 3
+
+                    iconName: "media-playback-start"
+                    onClicked:
+                    {
+                        if(player.isPaused()) Player.resumeTrack()
+                        else Player.pauseTrack()
+                    }
+                }
+
+                BabeButton
+                {
+                    id: nextBtn
+                    Layout.row: 1
+                    Layout.column: 4
+
+                    iconName: "media-skip-forward"
+                    onClicked: Player.nextTrack()
+                    onPressAndHold: Player.playAt(Player.shuffle())
+                }
+
+                BabeButton
+                {
+                    id: shuffleBtn
+                    Layout.row: 1
+                    Layout.column: 5
+
+                    iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+                    onClicked: shuffle = !shuffle
+                }
+
+
             }
+
+
+
+            Item { Layout.fillWidth: true }
 
             Item
             {
                 Layout.fillHeight: true
+                Layout.alignment: Qt.AlignRight
                 height: headerHeight
                 width: headerHeight
+
             }
 
         }
@@ -827,4 +829,12 @@ Kirigami.ApplicationWindow
             duration: Kirigami.Units.longDuration
         }
     }
+
+    /*FUNCTIONS*/
+    function infoMsgAnim()
+    {
+        animBg.running = true
+        animTxt.running = true
+    }
+
 }
