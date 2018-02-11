@@ -37,7 +37,7 @@ BabePopup
 
         headerBarExit: true
         headerBarVisible: true
-        headerBarTitle: "Select"
+        headerBarTitle: "Select8"
 
         headerBarLeft: [
 

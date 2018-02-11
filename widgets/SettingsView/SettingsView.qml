@@ -136,7 +136,7 @@ Kirigami.GlobalDrawer
 
             Kirigami.Action
             {
-                text: "Time labels"
+                text: "Info label"
 
                 Kirigami.Action
                 {
@@ -146,7 +146,7 @@ Kirigami.GlobalDrawer
                     onToggled:
                     {
                         //                    bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
-                        timeLabels = checked
+                        infoLabels = checked
                     }
                 }
             }

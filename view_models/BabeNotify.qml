@@ -49,7 +49,7 @@ Popup
             height: parent.height
             width: parent.width
             text: message
-            font.pointSize: 9
+            font.pointSize: fontSizes.medium
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             color: foregroundColor

@@ -59,7 +59,7 @@ Page
                     padding: 20
                     text: lyrics
                     color: foregroundColor
-                    font.pointSize: 12
+                    font.pointSize: fontSizes.big
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
                     textFormat: Text.RichText
@@ -144,7 +144,7 @@ Page
                         text: wikiAlbum
                         visible: wikiAlbum === "NONE" || wikiAlbum.length===0 ? false : true
                         color: foregroundColor
-                        font.pointSize: 12
+                        font.pointSize: fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.RichText
                         wrapMode: Text.Wrap
@@ -171,7 +171,7 @@ Page
                         visible: wikiArtist === "NONE" || wikiArtist.length===0 ? false : true
 
                         color: foregroundColor
-                        font.pointSize: 12
+                        font.pointSize: fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.StyledText
                         wrapMode: Text.Wrap

@@ -63,7 +63,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? coverSize : 0
             Layout.maximumHeight: 300
-            visible: list.count > 0
+            visible: mainlistEmpty
 
             Rectangle
             {
@@ -120,7 +120,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? toolBarHeight : 0
             //                        anchors.top: cover.bottom
-            visible: list.count > 0
+            visible: mainlistEmpty
 
             Rectangle
             {
@@ -195,8 +195,6 @@ Item
                         }
                     }
                 }
-
-
 
                 Item
                 {

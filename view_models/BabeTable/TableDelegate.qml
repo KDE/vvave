@@ -11,7 +11,6 @@ ItemDelegate
     height: sameAlbum ? rowHeightAlt : rowHeight
     clip: true
 
-
     signal play()
     signal rightClicked()
     signal leftClicked()
@@ -71,10 +70,10 @@ ItemDelegate
             if(!root.isMobile && mouse.button === Qt.RightButton)
                 rightClicked()
         }
-//        onPressAndHold:
-//        {
-//            pressAndHold(mouse)
-//        }
+        //        onPressAndHold:
+        //        {
+        //            pressAndHold(mouse)
+        //        }
     }
 
     RowLayout
@@ -86,8 +85,8 @@ ItemDelegate
         Item
         {
             visible: coverArt
-
             Layout.fillHeight: true
+            Layout.alignment: Qt.AlignLeft
             width: sameAlbum ? rowHeight : parent.height
 
             ToolButton
@@ -116,7 +115,6 @@ ItemDelegate
                 onDoubleClicked: artworkCoverDoubleClicked()
                 onClicked: artworkCoverClicked()
                 onPressAndHold: if(root.isMobile) artworkCoverDoubleClicked()
-
             }
         }
 
@@ -125,6 +123,7 @@ ItemDelegate
             visible: quickPlay
             Layout.fillHeight: true
             width: sameAlbum ? rowHeight : parent.height
+            Layout.margins: 0
 
             BabeButton
             {
@@ -137,21 +136,21 @@ ItemDelegate
             }
         }
 
-
         Item
         {
-
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
             Layout.margins: contentMargins
+            Layout.leftMargin: coverArt ? contentMargins : 0
             anchors.verticalCenter: parent.verticalCenter
 
             GridLayout
             {
                 anchors.fill: parent
-                rows:2
-                columns: sameAlbum ? 4 : 3
+                rows: 2
+                columns: 4
+                rowSpacing: 0
 
                 Label
                 {
@@ -169,25 +168,23 @@ ItemDelegate
                     font.bold: true
                     elide: Text.ElideRight
 
-                    font.pointSize: 10
+                    font.pointSize: fontSizes.medium
                     color: textColor
                 }
-
 
                 Label
                 {
                     id: trackTitle
-
+                    Layout.maximumWidth: gridLayout.width *0.5
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.row: 1
-                    //                     Layout.rowSpan: sameAlbum ? 2 : 1
                     Layout.column: 2
                     verticalAlignment:  Qt.AlignVCenter
                     text: title
                     font.bold: !sameAlbum
                     elide: Text.ElideRight
-                    font.pointSize: 10
+                    font.pointSize: fontSizes.medium
                     color: textColor
 
                 }
@@ -198,13 +195,14 @@ ItemDelegate
                     visible: coverArt ? !sameAlbum : true
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    Layout.maximumWidth: gridLayout.width*0.5
                     Layout.row: 2
                     Layout.column: 2
                     verticalAlignment:  Qt.AlignVCenter
                     text: artist + " | " + album
                     font.bold: false
                     elide: Text.ElideRight
-                    font.pointSize: 9
+                    font.pointSize: fontSizes.small
                     color: textColor
 
                 }
@@ -234,24 +232,24 @@ ItemDelegate
                 //            }
                 //        }
 
-//                Label
-//                {
-//                    id: trackDuration
-//                    visible: trackDurationVisible
-//                    Layout.alignment: Qt.AlignRight
+                //                Label
+                //                {
+                //                    id: trackDuration
+                //                    visible: trackDurationVisible
+                //                    Layout.alignment: Qt.AlignRight
 
-//                    Layout.fillWidth: true
-//                    Layout.fillHeight: true
-//                    Layout.row: 1
-//                    Layout.column: 3
-//                    horizontalAlignment: Qt.AlignRight
-//                    verticalAlignment:  Qt.AlignVCenter
-//                    text: player.transformTime(duration)
-//                    font.bold: false
-//                    elide: Text.ElideRight
-//                    font.pointSize: 8
-//                    color: textColor
-//                }
+                //                    Layout.fillWidth: true
+                //                    Layout.fillHeight: true
+                //                    Layout.row: 1
+                //                    Layout.column: 3
+                //                    horizontalAlignment: Qt.AlignRight
+                //                    verticalAlignment:  Qt.AlignVCenter
+                //                    text: player.transformTime(duration)
+                //                    font.bold: false
+                //                    elide: Text.ElideRight
+                //                    font.pointSize: 8
+                //                    color: textColor
+                //                }
 
 
                 Label
@@ -266,38 +264,38 @@ ItemDelegate
                     Layout.fillHeight: true
 
                     Layout.row: 1
-                    Layout.column: trackDurationVisible && sameAlbum ? 4 : 3
+                    Layout.column: /*trackDurationVisible &&*/ sameAlbum ? 4 : 3
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter
                     text: babe == "1" ? "\uf2D1" : ""
                     font.bold: false
                     elide: Text.ElideRight
-                    font.pointSize: 8
+                    font.pointSize: fontSizes.small
                     color: textColor
 
-//                    onTextChanged: animBabe.start()
+                    //                    onTextChanged: animBabe.start()
 
-//                    SequentialAnimation
-//                    {
-//                        id: animBabe
-//                        PropertyAnimation
-//                        {
-//                            target: trackBabe
-//                            property: "color"
-//                            easing.type: Easing.InOutQuad
-//                            to: babeColor
-//                            duration: 250
-//                        }
+                    //                    SequentialAnimation
+                    //                    {
+                    //                        id: animBabe
+                    //                        PropertyAnimation
+                    //                        {
+                    //                            target: trackBabe
+                    //                            property: "color"
+                    //                            easing.type: Easing.InOutQuad
+                    //                            to: babeColor
+                    //                            duration: 250
+                    //                        }
 
-//                        PropertyAnimation
-//                        {
-//                            target: trackBabe
-//                            property: "color"
-//                            easing.type: Easing.InOutQuad
-//                            to: textColor
-//                            duration: 500
-//                        }
-//                    }
+                    //                        PropertyAnimation
+                    //                        {
+                    //                            target: trackBabe
+                    //                            property: "color"
+                    //                            easing.type: Easing.InOutQuad
+                    //                            to: textColor
+                    //                            duration: 500
+                    //                        }
+                    //                    }
 
 
                 }
@@ -312,35 +310,35 @@ ItemDelegate
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.alignment: Qt.AlignRight
-                    Layout.row: trackRatingVisible && sameAlbum ? 1 : 2
+                    Layout.row: /*trackRatingVisible && */sameAlbum ? 1 : 2
                     Layout.column: 3
-//                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
+                    //                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment:  Qt.AlignVCenter
                     text: setStars(stars)
                     font.bold: false
                     elide: Text.ElideRight
-                    font.pointSize: 8
+                    font.pointSize: fontSizes.small
                     color: textColor
                 }
             }
         }
 
-//        Item
-//        {
-//            visible: menuItem
-//            Layout.fillHeight: true
-//            width: sameAlbum ? rowHeight : parent.height
+        //        Item
+        //        {
+        //            visible: menuItem
+        //            Layout.fillHeight: true
+        //            width: sameAlbum ? rowHeight : parent.height
 
-//            BabeButton
-//            {
-//                id: menuBtn
-//                anchors.centerIn: parent
-//                iconName: "overflow-menu"
-//                iconColor: textColor
-//                onClicked: rightClicked()
-//            }
-//        }
+        //            BabeButton
+        //            {
+        //                id: menuBtn
+        //                anchors.centerIn: parent
+        //                iconName: "overflow-menu"
+        //                iconColor: textColor
+        //                onClicked: rightClicked()
+        //            }
+        //        }
     }
 
     function setStars(stars)

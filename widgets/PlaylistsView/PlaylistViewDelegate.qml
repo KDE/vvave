@@ -68,10 +68,9 @@ ItemDelegate
                 font.bold: false
                 elide: Text.ElideRight
 
-                font.pointSize: 10
+                font.pointSize: fontSizes.medium
                 color: textColor
             }
-
         }
 
 //        Item

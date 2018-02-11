@@ -15,6 +15,7 @@ BabeGrid
     //    albumCardVisible: false
     //    albumCoverRadius: Math.min(albumCoverSize, albumCoverSize)
     property alias list : drawerList.list
+    property alias table : drawerList
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)

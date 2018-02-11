@@ -95,13 +95,14 @@ Kirigami.ApplicationWindow
 
     /*READONLY PROPS*/
     readonly property var iconSizes : ({ "small" : 16, "medium" : isMobile ? 24 : 22, "big" : 32, "large" : 48 })
+    readonly property var fontSizes : ({"tiny": isMobile ? 6.5 : 7, "small" : isMobile ? 8.5 : 8, "medium" : isMobile ? 9 : 9.5, "big" : isMobile ? 10 : 10.5, "large" : isMobile ? 11 : 11.5})
     readonly property real opacityLevel : 0.8
     readonly property bool isMobile: bae.isMobile()
     readonly property int wideSize : bae.screenGeometry("width")*0.5
     readonly property int rowHeight: isMobile ? 64 : 52
     readonly property int rowHeightAlt: isMobile ? 48 : 32
     readonly property int headerHeight: rowHeight
-    readonly property int contentMargins : 15
+    readonly property int contentMargins : 12
     readonly property var viewsIndex : ({
                                             "babeit": 0,
                                             "tracks" : 1,
@@ -110,6 +111,7 @@ Kirigami.ApplicationWindow
                                             "playlists" : 4,
                                             "search" : 5
                                         })
+    readonly property bool mainlistEmpty : mainPlaylist.table.count > 0
 
     /*PROPS*/
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
@@ -123,7 +125,7 @@ Kirigami.ApplicationWindow
     property string syncPlaylist : ""
     property bool sync : false
     property string infoMsg : ""
-    property bool timeLabels : false
+    property bool infoLabels : true
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -211,9 +213,10 @@ Kirigami.ApplicationWindow
         target: bae
         onRefreshTables:
         {
+            console.log("Clearing tables")
             tracksView.list.clearTable()
-            albumsView.list.clearGrid()
-            artistsView.list.clearGrid()
+            albumsView.clearGrid()
+            artistsView.clearGrid()
 
             tracksView.populate()
             albumsView.populate()
@@ -381,20 +384,6 @@ Kirigami.ApplicationWindow
                 color: babeColor
             }
 
-            Label
-            {
-                id: progressTime
-                anchors.top: parent.top
-                anchors.right: parent.right
-                visible: timeLabels
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                text: progressTimeLabel +" / "+durationTimeLabel
-                color: foregroundColor
-                font.pointSize: 6.5
-                padding: 0
-                elide: Text.ElideRight
-            }
         }
 
         RowLayout
@@ -407,13 +396,15 @@ Kirigami.ApplicationWindow
             {
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignLeft
+                Layout.fillWidth: true
 
                 height: headerHeight
-                width: headerHeight
+                width:  miniArtwork.visible ? headerHeight : 0
 
                 Image
                 {
-                    visible: (!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible
+                    id: miniArtwork
+                    visible: ((!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible) && mainlistEmpty
 
                     height: headerHeight
                     width: headerHeight
@@ -442,44 +433,56 @@ Kirigami.ApplicationWindow
                 }
             }
 
-            Item { Layout.fillWidth: true }
-
-
 
             GridLayout
             {
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignCenter
                 Layout.fillWidth: true
-//                rowSpacing: 0
-//                columnSpacing: 0
-
+                anchors.horizontalCenter: parent.horizontalCenter
                 rows: 2
-                columns: 5
+                columns: 7
+
 
                 Label
                 {
+                    id: playbackInfo
+                    visible: mainlistEmpty && infoLabels
                     anchors.top: playIcon.bottom
+                    anchors.horizontalCenter: playIcon.horizontalCenter
                     Layout.alignment: Qt.AlignCenter
                     Layout.fillWidth: true
-
                     Layout.row: 2
                     Layout.column: 1
-                    Layout.columnSpan: 5
+                    Layout.columnSpan: 7
+                    Layout.maximumWidth: root.width * 0.5
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
-
-                    text: currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : ""
+                    text: progressTimeLabel  + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : "") + "  /  " + durationTimeLabel
                     color: foregroundColor
-                    font.pointSize: 6
+                    font.pointSize: fontSizes.small
                     elide: Text.ElideRight
+                }
+
+                Item
+                {
+                    Layout.fillWidth: true
+                    Layout.row: 1
+                    Layout.column: 1
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: "blue"
+                        z: -999
+                    }
                 }
 
                 BabeButton
                 {
                     id: babeBtnIcon
                     Layout.row: 1
-                    Layout.column: 1
+                    Layout.column: 2
 
                     iconName: "love"
                     iconColor: currentBabe ? babeColor : defaultColor
@@ -495,7 +498,7 @@ Kirigami.ApplicationWindow
                 {
                     id: previousBtn
                     Layout.row: 1
-                    Layout.column: 2
+                    Layout.column: 3
 
                     iconName: "media-skip-backward"
                     onClicked: Player.previousTrack()
@@ -506,7 +509,7 @@ Kirigami.ApplicationWindow
                 {
                     id: playIcon
                     Layout.row: 1
-                    Layout.column: 3
+                    Layout.column: 4
 
                     iconName: "media-playback-start"
                     onClicked:
@@ -520,7 +523,7 @@ Kirigami.ApplicationWindow
                 {
                     id: nextBtn
                     Layout.row: 1
-                    Layout.column: 4
+                    Layout.column: 5
 
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
@@ -531,26 +534,35 @@ Kirigami.ApplicationWindow
                 {
                     id: shuffleBtn
                     Layout.row: 1
-                    Layout.column: 5
+                    Layout.column: 6
 
                     iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
                     onClicked: shuffle = !shuffle
                 }
 
+                Item
+                {
+                    Layout.fillWidth: true
+                    Layout.row: 1
+                    Layout.column: 7
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: "blue"
+                        z: -999
+                    }
+                }
 
             }
-
-
-
-            Item { Layout.fillWidth: true }
 
             Item
             {
                 Layout.fillHeight: true
+                Layout.fillWidth: true
+
                 Layout.alignment: Qt.AlignRight
                 height: headerHeight
-                width: headerHeight
-
+                width:  miniArtwork.visible ? headerHeight : 0
             }
 
         }
@@ -618,7 +630,7 @@ Kirigami.ApplicationWindow
             anchors.fill: parent
             height: parent.height
             width: parent.width
-            font.pointSize: 9
+            font.pointSize: fontSizes.medium
             text: infoMsg
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter

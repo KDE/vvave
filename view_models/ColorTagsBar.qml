@@ -5,6 +5,7 @@ import QtQuick.Controls 2.2
 Item
 {
     property int recSize : 16
+    readonly property int recRadius : 4
     signal colorClicked(string color)
 
     RowLayout
@@ -24,7 +25,7 @@ Item
                 width: recSize
                 height: recSize
                 color: bae.moodColor(0)
-                radius: 2
+                radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
@@ -43,7 +44,7 @@ Item
                 width: recSize
                 height: recSize
                 color: bae.moodColor(1)
-                radius: 2
+                radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
@@ -62,7 +63,7 @@ Item
                 width: recSize
                 height: recSize
                 color: bae.moodColor(2)
-                radius: 2
+                radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
@@ -81,7 +82,7 @@ Item
                 width: recSize
                 height: recSize
                 color: bae.moodColor(3)
-                radius: 2
+                radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
@@ -101,7 +102,7 @@ Item
                 width: recSize
                 height: recSize
                 color: bae.moodColor(4)
-                radius: 2
+                radius: recRadius
                 border.color: altColor
                 border.width: 1
             }

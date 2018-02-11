@@ -20,7 +20,7 @@ Item
     {
         text: lyrics || "Nothing here"
         color: foregroundColor
-        font.pointSize: 14
+        font.pointSize: fontSizes.big
         horizontalAlignment: Qt.AlignHCenter
         textFormat: Text.StyledText
     }

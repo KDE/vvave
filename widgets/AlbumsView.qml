@@ -14,6 +14,7 @@ BabeGrid
     visible: true
 
     property alias list : drawerList.list
+    property alias table : drawerList
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)

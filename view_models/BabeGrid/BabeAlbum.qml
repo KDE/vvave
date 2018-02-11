@@ -16,7 +16,7 @@ ColumnLayout
     property bool albumCard : true
     property string fillColor: midLightColor
     property string textColor: foregroundColor
-    property int fontSize : root.isMobile? 12 : 10
+    property int fontSize : fontSizes.big
     property bool hide : false
 
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
@@ -105,7 +105,7 @@ ColumnLayout
             visible: true
             horizontalAlignment: Qt.AlignHCenter
             elide: Text.ElideRight
-            font.pointSize: fontSize
+            font.pointSize: fontSizes.medium
             font.bold: true
             color: textColor
         }
@@ -117,7 +117,7 @@ ColumnLayout
             visible: typeof album === 'undefined'? false : true
             horizontalAlignment: Qt.AlignHCenter
             elide: Text.ElideRight
-            font.pointSize: fontSize-1
+            font.pointSize: fontSizes.small
             color: textColor
         }
 
