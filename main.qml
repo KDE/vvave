@@ -329,6 +329,8 @@ Kirigami.ApplicationWindow
         Slider
         {
             id: progressBar
+
+            //            height: 10
             width: parent.width
             z: 999
             anchors.left: parent.left
@@ -389,20 +391,33 @@ Kirigami.ApplicationWindow
 
         }
 
-        RowLayout
+
+        GridLayout
         {
             anchors.fill: parent
             height: parent.height
             width: parent.width
 
+            rowSpacing: 0
+            columnSpacing: 0
+            rows: 2
+            columns: 3
+
+
             Item
             {
-                Layout.fillHeight: true
                 Layout.alignment: Qt.AlignLeft
-                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.maximumWidth: miniArtwork.visible ? headerHeight : 0
+                Layout.minimumWidth: miniArtwork.visible ? headerHeight : 0
+                Layout.minimumHeight: miniArtwork.visible ? headerHeight : 0
+                Layout.maximumHeight: miniArtwork.visible ? headerHeight : 0
+                Layout.row: 1
+                Layout.rowSpan: 2
+                Layout.column: 1
 
-                height: headerHeight
-                width:  miniArtwork.visible ? headerHeight : 0
+                //                height: headerHeight
+                //                width:  miniArtwork.visible ? headerHeight : 0
 
                 Image
                 {
@@ -436,29 +451,23 @@ Kirigami.ApplicationWindow
                 }
             }
 
-
-            GridLayout
+            Item
             {
-                Layout.fillHeight: true
                 Layout.alignment: Qt.AlignCenter
                 Layout.fillWidth: true
-                anchors.horizontalCenter: parent.horizontalCenter
-                rows: 2
-                columns: 7
-
-
+                Layout.fillHeight: true
+                Layout.row: 2
+                Layout.column: 2
+                Layout.maximumHeight: playbackInfo.visible ? playbackInfo.font.pointSize*2 : 0
                 Label
                 {
                     id: playbackInfo
+
                     visible: mainlistEmpty && infoLabels
-                    anchors.top: playIcon.bottom
-                    anchors.horizontalCenter: playIcon.horizontalCenter
-                    Layout.alignment: Qt.AlignCenter
-                    Layout.fillWidth: true
-                    Layout.row: 2
-                    Layout.column: 1
-                    Layout.columnSpan: 7
-                    Layout.maximumWidth: root.width * 0.5
+                    //                anchors.top: playIcon.bottom
+                    //                anchors.horizontalCenter: playIcon.horizontalCenter
+                    width: parent.width
+                    height: parent.height
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
                     text: progressTimeLabel  + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : "") + "  /  " + durationTimeLabel
@@ -466,26 +475,19 @@ Kirigami.ApplicationWindow
                     font.pointSize: fontSizes.tiny
                     elide: Text.ElideRight
                 }
+            }
 
-                Item
-                {
-                    Layout.fillWidth: true
-                    Layout.row: 1
-                    Layout.column: 1
-
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: "blue"
-                        z: -999
-                    }
-                }
+            RowLayout
+            {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignCenter
+                Layout.row: 1
+                Layout.column: 2
 
                 BabeButton
                 {
                     id: babeBtnIcon
-                    Layout.row: 1
-                    Layout.column: 2
 
                     iconName: "love"
                     iconColor: currentBabe ? babeColor : defaultColor
@@ -500,8 +502,6 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: previousBtn
-                    Layout.row: 1
-                    Layout.column: 3
 
                     iconName: "media-skip-backward"
                     onClicked: Player.previousTrack()
@@ -511,8 +511,6 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: playIcon
-                    Layout.row: 1
-                    Layout.column: 4
 
                     iconName:  isPlaying ? "media-playback-pause" :  "media-playback-start"
                     onClicked:
@@ -525,8 +523,6 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: nextBtn
-                    Layout.row: 1
-                    Layout.column: 5
 
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
@@ -536,36 +532,23 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: shuffleBtn
-                    Layout.row: 1
-                    Layout.column: 6
-
                     iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
                     onClicked: shuffle = !shuffle
-                }
-
-                Item
-                {
-                    Layout.fillWidth: true
-                    Layout.row: 1
-                    Layout.column: 7
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: "blue"
-                        z: -999
-                    }
                 }
 
             }
 
             Item
             {
+                Layout.alignment: Qt.AlignLeft
                 Layout.fillHeight: true
-                Layout.fillWidth: true
-
-                Layout.alignment: Qt.AlignRight
-                height: headerHeight
-                width:  miniArtwork.visible ? headerHeight : 0
+                Layout.maximumWidth: miniArtwork.visible ? headerHeight : 0
+                Layout.minimumWidth: miniArtwork.visible ? headerHeight : 0
+                Layout.minimumHeight: miniArtwork.visible ? headerHeight : 0
+                Layout.maximumHeight: miniArtwork.visible ? headerHeight : 0
+                Layout.row: 1
+                Layout.rowSpan: 2
+                Layout.column: 3
             }
 
         }

@@ -6,7 +6,6 @@ import QtQuick.Controls.Material 2.1
 
 BabePopup
 {
-    property alias dirList : dirList
     signal pathClicked(var path)
     signal accepted(var path)
     signal goBack(var path)
@@ -59,7 +58,7 @@ BabePopup
         headerBarRight:  Button
         {
             Layout.alignment: Qt.AlignRight
-            onClicked: {accepted(dirList.currentUrl); close()}
+            onClicked: {accepted(currentUrl); close()}
             text: "Accept"
 
             Material.accent: babeColor

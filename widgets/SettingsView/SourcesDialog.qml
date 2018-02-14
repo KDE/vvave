@@ -44,6 +44,7 @@ BabePopup
     BabeList
     {
         id: sources
+         anchors.fill: parent
         headerBarVisible: true
         headerBarExit: true
         headerBarTitle: qsTr("Sources")
@@ -91,16 +92,17 @@ BabePopup
                 }
             }
         ]
-
-        Component.onCompleted:
-        {
-            var map = bae.get("select url from folders order by strftime(\"%s\", addDate) desc")
-            for(var i in map)
-                model.append(map[i])
-        }
     }
 
-
+    onOpened:
+    {
+        var map = bae.get("select * from folders order by strftime(\"%s\", addDate) desc")
+        for(var i in map)
+        {
+            console.log(map[i].url)
+            sources.model.append(map[i])
+        }
+    }
 
 
 

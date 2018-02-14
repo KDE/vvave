@@ -27,6 +27,7 @@ BabeDialog
             Layout.fillHeight: true
             Layout.fillWidth: true
 
+            headerBarVisible: false
             holder.message: "<h2>There's not playlists</h2><br><p>Create a new one and start adding tracks to it<p/>"
             ListModel { id: listModel }
             model: listModel
