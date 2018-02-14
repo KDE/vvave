@@ -112,7 +112,7 @@ Kirigami.ApplicationWindow
                                             "playlists" : 4,
                                             "search" : 5
                                         })
-    property bool mainlistEmpty : mainPlaylist.table.count > 0 ? true : false
+    property bool mainlistEmpty : !mainPlaylist.table.count > 0
 
     /*PROPS*/
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
@@ -126,7 +126,7 @@ Kirigami.ApplicationWindow
     property string syncPlaylist : ""
     property bool sync : false
     property string infoMsg : ""
-    property bool infoLabels : true
+    property bool infoLabels : bae.loadSetting("PLAYBACKINFO", "BABE", false) == "true" ? true : false
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -330,7 +330,7 @@ Kirigami.ApplicationWindow
         {
             id: progressBar
 
-            //            height: 10
+                        height: 10
             width: parent.width
             z: 999
             anchors.left: parent.left
@@ -349,7 +349,7 @@ Kirigami.ApplicationWindow
                 x: progressBar.leftPadding
                 y: progressBar.y
                 implicitWidth: 200
-                implicitHeight: 4
+                implicitHeight: 10
                 width: progressBar.availableWidth
                 height: implicitHeight
                 color: "transparent"
@@ -401,7 +401,7 @@ Kirigami.ApplicationWindow
             rowSpacing: 0
             columnSpacing: 0
             rows: 2
-            columns: 3
+            columns: 2
 
 
             Item
@@ -422,7 +422,7 @@ Kirigami.ApplicationWindow
                 Image
                 {
                     id: miniArtwork
-                    visible: ((!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible) && mainlistEmpty
+                    visible: ((!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible) && !mainlistEmpty
 
                     height: headerHeight
                     width: headerHeight
@@ -463,7 +463,7 @@ Kirigami.ApplicationWindow
                 {
                     id: playbackInfo
 
-                    visible: mainlistEmpty && infoLabels
+                    visible: !mainlistEmpty && infoLabels
                     //                anchors.top: playIcon.bottom
                     //                anchors.horizontalCenter: playIcon.horizontalCenter
                     width: parent.width
@@ -538,18 +538,7 @@ Kirigami.ApplicationWindow
 
             }
 
-            Item
-            {
-                Layout.alignment: Qt.AlignLeft
-                Layout.fillHeight: true
-                Layout.maximumWidth: miniArtwork.visible ? headerHeight : 0
-                Layout.minimumWidth: miniArtwork.visible ? headerHeight : 0
-                Layout.minimumHeight: miniArtwork.visible ? headerHeight : 0
-                Layout.maximumHeight: miniArtwork.visible ? headerHeight : 0
-                Layout.row: 1
-                Layout.rowSpan: 2
-                Layout.column: 3
-            }
+
 
         }
     }

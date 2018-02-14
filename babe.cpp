@@ -245,7 +245,6 @@ QVariant Babe::loadSetting(const QString &key, const QString &group, const QVari
 
 void Babe::saveSetting(const QString &key, const QVariant &value, const QString &group)
 {
-    qDebug()<<key<<value<<group;
     BAE::saveSettings(key, value, group);
 }
 

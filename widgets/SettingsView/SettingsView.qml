@@ -146,8 +146,9 @@ Kirigami.GlobalDrawer
                     checkable: true
                     onToggled:
                     {
-                        //                    bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
                         infoLabels = checked
+                        bae.saveSetting("PLAYBACKINFO", infoLabels ? true : false, "BABE")
+
                     }
                 }
             }

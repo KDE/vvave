@@ -64,7 +64,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? coverSize : 0
             Layout.maximumHeight: 300
-            visible:  root.mainlistEmpty
+            visible:  !root.mainlistEmpty
             Rectangle
             {
                 visible: cover.visible

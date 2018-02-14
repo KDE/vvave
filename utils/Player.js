@@ -46,7 +46,7 @@ function stop()
 {
     player.stop()
     root.progressBar.value = 0
-    root.mainlistEmpty = false
+    root.mainlistEmpty = true
 
     root.title = "Babe..."
 //    root.playIcon.iconName = "media-playback-start"
