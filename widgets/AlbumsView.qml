@@ -45,10 +45,11 @@ BabeGrid
                 else
                     customHeight
             }
-
         }
+
         x: pageStack.wideMode ? columnWidth+1 : 0
         width: pageStack.wideMode ? albumsViewGrid.width-1 : albumsViewGrid.width
+
         edge: Qt.BottomEdge
         interactive: false
         focus: true
@@ -77,7 +78,6 @@ BabeGrid
                 }
             }
         }
-
 
         BabeTable
         {

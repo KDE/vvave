@@ -58,8 +58,7 @@ Item
             Layout.fillWidth: true
             trackNumberVisible: false
             headerBarVisible: true
-            headerBarExit: true
-            headerBarExitIcon: "arrow-left"
+            headerBarExit: false
             holder.message: "No search results!"
             coverArtVisible: true
             trackDuration: true
@@ -74,7 +73,6 @@ Item
             width: parent.width
             height: toolBarHeight
             color: searchInput.activeFocus ? midColor : midLightColor
-
             Kirigami.Separator
             {
                 Rectangle
@@ -94,10 +92,12 @@ Item
             RowLayout
             {
                 anchors.fill: parent
+
                 BabeButton
                 {
+                    Layout.leftMargin: contentMargins
                     visible: true
-                    iconName: "edit-find"
+                    iconName: "view-filter"
                     onClicked: {}
                 }
 
@@ -118,6 +118,7 @@ Item
 
                 BabeButton
                 {
+                    Layout.rightMargin: contentMargins
                     visible: searchInput.text.length > 0
                     iconName: "edit-clear"
                     onClicked: clearSearch()

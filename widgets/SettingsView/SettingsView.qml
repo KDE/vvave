@@ -10,6 +10,7 @@ Kirigami.GlobalDrawer
     signal iconSizeChanged(int size)
     readonly property bool activeBrainz : bae.brainzState()
     visible: false
+
     y: header.height
     height: parent.height - header.height - footer.height
     //    //    width: root.pageStack.wideMode ? views.width -1: root.width
@@ -141,7 +142,7 @@ Kirigami.GlobalDrawer
                 Kirigami.Action
                 {
                     text: checked ? "ON" : "OFF"
-                    checked: timeLabels
+                    checked: infoLabels
                     checkable: true
                     onToggled:
                     {

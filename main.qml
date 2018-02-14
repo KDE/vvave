@@ -47,6 +47,7 @@ Kirigami.ApplicationWindow
     property bool currentBabe : currentTrack.babe == "0" ? false : true
     property string durationTimeLabel : "00:00"
     property string progressTimeLabel : "00:00"
+    property bool isPlaying : false
 
     /*THEMING*/
     property string babeColor : bae.babeColor()
@@ -95,14 +96,14 @@ Kirigami.ApplicationWindow
 
     /*READONLY PROPS*/
     readonly property var iconSizes : ({ "small" : 16, "medium" : isMobile ? 24 : 22, "big" : 32, "large" : 48 })
-    readonly property var fontSizes : ({"tiny": isMobile ? 6.5 : 7, "small" : isMobile ? 8.5 : 8, "medium" : isMobile ? 9 : 9.5, "big" : isMobile ? 10 : 10.5, "large" : isMobile ? 11 : 11.5})
+    readonly property var fontSizes : ({"tiny": isMobile ? 7.5 : 7, "small" : isMobile ? 9.5 : 8.5, "medium" : isMobile ? 11 :  10, "big" : isMobile ? 11.5 : 10.5, "large" : isMobile ? 12 : 11.5})
     readonly property real opacityLevel : 0.8
     readonly property bool isMobile: bae.isMobile()
     readonly property int wideSize : bae.screenGeometry("width")*0.5
-    readonly property int rowHeight: isMobile ? 64 : 52
+    readonly property int rowHeight: isMobile ? 60 : 52
     readonly property int rowHeightAlt: isMobile ? 48 : 32
     readonly property int headerHeight: rowHeight
-    readonly property int contentMargins : 12
+    readonly property int contentMargins : isMobile ? 8 : 10
     readonly property var viewsIndex : ({
                                             "babeit": 0,
                                             "tracks" : 1,
@@ -111,7 +112,7 @@ Kirigami.ApplicationWindow
                                             "playlists" : 4,
                                             "search" : 5
                                         })
-    readonly property bool mainlistEmpty : mainPlaylist.table.count > 0
+    property bool mainlistEmpty : mainPlaylist.table.count > 0 ? true : false
 
     /*PROPS*/
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
@@ -179,6 +180,7 @@ Kirigami.ApplicationWindow
     Component.onCompleted:
     {
         if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
+        settingsDrawer.visible = false
     }
 
 
@@ -206,6 +208,7 @@ Kirigami.ApplicationWindow
         onTiming: progressTimeLabel = time
         onDurationChanged: durationTimeLabel = time
         onFinished: Player.nextTrack()
+        onIsPlaying:  isPlaying = playing
     }
 
     Connections
@@ -460,7 +463,7 @@ Kirigami.ApplicationWindow
                     verticalAlignment: Qt.AlignVCenter
                     text: progressTimeLabel  + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : "") + "  /  " + durationTimeLabel
                     color: foregroundColor
-                    font.pointSize: fontSizes.small
+                    font.pointSize: fontSizes.tiny
                     elide: Text.ElideRight
                 }
 
@@ -511,7 +514,7 @@ Kirigami.ApplicationWindow
                     Layout.row: 1
                     Layout.column: 4
 
-                    iconName: "media-playback-start"
+                    iconName:  isPlaying ? "media-playback-pause" :  "media-playback-start"
                     onClicked:
                     {
                         if(player.isPaused()) Player.resumeTrack()

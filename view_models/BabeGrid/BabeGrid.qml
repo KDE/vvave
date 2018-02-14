@@ -25,6 +25,7 @@ Pane
 //                }
 //    }
 
+    readonly property int albumSpacing: contentMargins*2
     property int albumCoverRadius : 0
     property bool albumCardVisible : true
     property alias gridModel: gridModel
@@ -78,8 +79,8 @@ Pane
 
         anchors.horizontalCenter: parent.horizontalCenter
 
-        cellWidth: albumCoverSize +(albumCoverSize*0.2)
-        cellHeight:  albumCoverSize+(albumCoverSize*0.8)
+        cellWidth: albumCoverSize + albumSpacing
+        cellHeight:  albumCoverSize+rowHeight+albumSpacing
 
         highlightFollowsCurrentItem: false
 

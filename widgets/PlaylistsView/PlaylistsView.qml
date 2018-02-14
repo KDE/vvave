@@ -83,7 +83,6 @@ Kirigami.PageRow
                         playlistViewRoot.currentIndex = 1
                 }
             }
-
         }
     }
 

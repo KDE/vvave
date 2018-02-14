@@ -96,7 +96,7 @@ Item
                     elide : Text.ElideRight
                     font.bold : false
                     color : foregroundColor
-
+                    font.pointSize: fontSizes.big
                     horizontalAlignment : Text.AlignHCenter
                     verticalAlignment :  Text.AlignVCenter
                 }

@@ -27,7 +27,7 @@ void Player::play()
     if(sourceurl.isEmpty()) return;
 
     if(!updater->isActive())
-        this->updater->start(1000);
+        this->updater->start(250);
 
     this->player->play();
 }
@@ -72,6 +72,7 @@ void Player::update()
 {
     emit this->pos(static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000));
     emit this->timing(BAE::transformTime(player->position()/1000));
+    emit this->isPlaying(this->player->state() == QMediaPlayer::PlayingState ? true : false);
     if(this->player->state() == QMediaPlayer::StoppedState)
         emit this->finished();
 }

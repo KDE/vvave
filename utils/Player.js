@@ -11,7 +11,7 @@ function playTrack(track)
         {
             player.source(root.currentTrack.url);
             player.play()
-            root.playIcon.iconName = "media-playback-pause"
+//            root.playIcon.iconName = "media-playback-pause"
 
             var artwork = root.currentTrack.artwork
             //    root.mainPlaylist.list.currentItem.playingIndicator = true
@@ -45,22 +45,23 @@ function playTrack(track)
 function stop()
 {
     player.stop()
-    root.mainPlaylist.progressBar.value = 0
-    root.mainPlaylist.cover.visible = false
+    root.progressBar.value = 0
+    root.mainlistEmpty = false
+
     root.title = "Babe..."
-    root.playIcon.iconName = "media-playback-start"
+//    root.playIcon.iconName = "media-playback-start"
 }
 
 function pauseTrack()
 {
     player.pause()
-    root.playIcon.iconName = "media-playback-start"
+//    root.playIcon.iconName = "media-playback-start"
 }
 
 function resumeTrack()
 {
     player.play()
-    root.playIcon.iconName = "media-playback-pause"
+//    root.playIcon.iconName = "media-playback-pause"
 }
 
 function nextTrack()

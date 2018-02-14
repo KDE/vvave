@@ -55,6 +55,9 @@ ToolBar
         BabeButton
         {
             id: settingsView
+            Layout.leftMargin: isMobile ? 0 : contentMargins
+            Layout.alignment: Qt.AlignLeft
+
             iconName: "application-menu"
             iconColor: settingsDrawer.visible ? babeColor : textColor/*(pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor*/
             onClicked: settingsViewClicked()
@@ -153,6 +156,8 @@ ToolBar
         BabeButton
         {
             id: searchView
+            Layout.rightMargin: isMobile ? 0 : contentMargins
+            Layout.alignment: Qt.AlignRight
             //                visible: !(searchInput.focus || searchInput.text)
             iconColor: accent && currentIndex === viewsIndex.search ? accentColor : textColor
             iconName: "edit-find" //"search"

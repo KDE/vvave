@@ -16,7 +16,6 @@ ColumnLayout
     property bool albumCard : true
     property string fillColor: midLightColor
     property string textColor: foregroundColor
-    property int fontSize : fontSizes.big
     property bool hide : false
 
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
@@ -92,6 +91,7 @@ ColumnLayout
     Column
     {
         id: albumInfoRow
+        Layout.maximumHeight: rowHeight
         Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.margins: contentMargins
@@ -120,7 +120,6 @@ ColumnLayout
             font.pointSize: fontSizes.small
             color: textColor
         }
-
     }
 
     MouseArea

@@ -32,6 +32,7 @@ signals:
     void finished();
     void timing(QString time);
     void durationChanged(QString time);
+    void isPlaying(bool playing);
 
 public slots:
 };

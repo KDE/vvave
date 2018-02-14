@@ -45,6 +45,11 @@ BabeMenu
 
         Kirigami.Separator{ width: parent.width; height: 1}
 
+        BabeMenuItem
+        {
+            text: "Sort..."
+            onTriggered: {}
+        }
 
     }
 }

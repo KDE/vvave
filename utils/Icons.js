@@ -1657,7 +1657,6 @@ var Icon = {
 var Babe = {
 
     /*toolbar*/
-
     "media-optical-audio": Icon.headphones,
     "audio-headphones": Icon.headphones,
     "headphones": Icon.headphones,
@@ -1676,6 +1675,9 @@ var Babe = {
 
     "application-menu": Icon.menu,
     "games-config-options" : Icon.settings,
+
+    "edit-comment" : Icon.comment,
+    "view-filter" : Icon.filter,
 
     /*playback bar*/
 

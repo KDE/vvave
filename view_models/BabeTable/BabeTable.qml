@@ -11,7 +11,6 @@ BabeList
     holder.message: "<h2>This list is empty</h2><p>You can sdd new music sources from the settings</p>"
     //    cacheBuffer : 300
     headerBarColor: midLightColor
-
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false

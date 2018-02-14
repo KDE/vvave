@@ -24,6 +24,7 @@ Item
     property alias table: table
     property alias infoView : infoView
     property alias contextMenu : table.contextMenu
+    property alias mainlistContext : mainlistContext
     property alias headerMenu : table.headerMenu
     property alias stack : stackView
 
@@ -63,8 +64,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? coverSize : 0
             Layout.maximumHeight: 300
-            visible: mainlistEmpty
-
+            visible:  root.mainlistEmpty
             Rectangle
             {
                 visible: cover.visible
@@ -114,13 +114,13 @@ Item
         {
             id: mainlistContext
             width: parent.width
+
             anchors.horizontalCenter: parent.horizontalCenter
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? toolBarHeight : 0
             //                        anchors.top: cover.bottom
-            visible: mainlistEmpty
 
             Rectangle
             {
@@ -193,6 +193,18 @@ Item
                                 stackView.push(infoView)
                             }
                         }
+                    }
+                }
+
+                Item
+                {
+                    Layout.fillWidth: true
+                    BabeButton
+                    {
+                        id: commentBtn
+                        anchors.centerIn: parent
+                        Layout.fillWidth: true
+                        iconName: "edit-comment"
                     }
                 }
 
