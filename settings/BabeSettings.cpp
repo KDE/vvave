@@ -29,11 +29,9 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     this->connection = new CollectionDB(this);
     this->fileLoader = new FileLoader;
     this->brainDeamon = new Brain;
-    
-    //    connect(connection, &CollectionDB::initDB, [this] ()
-    //    {
-    //        this->populateDB(BAE::MusicPath);
-    //    });
+    this->ytFetch = new YouTube(this);
+    this->babeSocket = new Socket(static_cast<quint16>(BAE::BabePort.toInt()),this);
+
 
     qDebug() << "Getting collectionDB info from: " << BAE::CollectionDBPath;
     qDebug() << "Getting settings info from: " << BAE::SettingPath;
@@ -68,8 +66,22 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     if(BAE::isMobile())
         this->populateDB(QStringList()<<BAE::MusicPath<<BAE::DownloadsPath<<BAE::MusicPaths<<BAE::DownloadsPaths);
     else
-        this->populateDB({BAE::MusicPath});
-//        checkCollectionBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool());
+        this->populateDB({BAE::MusicPath, BAE::YoutubeCachePath});
+    //        checkCollectionBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool());
+
+
+    connect(this->ytFetch, &YouTube::done, [this]()
+    {
+        this->populateDB({BAE::YoutubeCachePath});
+    });
+
+    connect(this->babeSocket, &Socket::message, this->ytFetch, &YouTube::fetch);
+    connect(this->babeSocket, &Socket::connected, [this](const int &index)
+    {
+        auto playlists = this->connection->getPlaylists();
+        qDebug()<<"Sending playlists to socket"<<playlists;
+        this->babeSocket->sendMessageTo(index, playlists.join(","));
+    });
 
     connect(this->brainDeamon, &Brain::finished, [this]()
     {
@@ -97,16 +109,16 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
                                 {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
 
 
-//            this->startBrainz(true, 1500);
+            //            this->startBrainz(true, 1500);
 
             qDebug()<<"Finished inserting into DB";
-        }else
+        }/*else
         {
             this->dirs.clear();
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
             this->startBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool(), 3000);
-        }
+        }*/
 
 
     });
@@ -222,9 +234,7 @@ void BabeSettings::startBrainz(const bool &on, const uint &speed)
 }
 
 void BabeSettings::populateDB(const QStringList &paths)
-{
-    qDebug() << "Function Name: " << Q_FUNC_INFO
-             << "new path for database action: " << paths;
+{   
     auto newPaths = paths;
 
     for(auto path : newPaths)

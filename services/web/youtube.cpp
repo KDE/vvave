@@ -20,9 +20,18 @@
 #include "../../pulpo/pulpo.h"
 #include "../../db/collectionDB.h"
 
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+#include "kde/notify.h"
+#endif
+
 using namespace BAE;
 
-YouTube::YouTube(QObject *parent) : QObject(parent) {}
+YouTube::YouTube(QObject *parent) : QObject(parent)
+{
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    this->nof = new Notify(this);
+#endif
+}
 
 YouTube::~YouTube(){}
 
@@ -70,10 +79,12 @@ void YouTube::fetch(const QString &json)
             process->deleteLater();
         });
 
-        //        BabeWindow::nof->notify("Song received!", infoMap[KEY::TITLE]+ " - "+ infoMap[KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+        this->nof->notify("Song received!", infoMap[KEY::TITLE]+ " - "+ infoMap[KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
+#endif
         auto command = ydl;
 
-        command = command.replace("$$$",infoMap[KEY::URL])+" "+infoMap[KEY::ID];
+        command = command.replace("$$$",infoMap[KEY::ID])+" "+infoMap[KEY::ID];
         qDebug()<<command;
         process->start(command);
     }
@@ -81,11 +92,12 @@ void YouTube::fetch(const QString &json)
 
 void YouTube::processFinished_totally(const int &state,const DB &info,const QProcess::ExitStatus &exitStatus)
 {
-
     auto track = info;
 
     auto doneId = track[KEY::ID];
-    auto file = YoutubeCachePath+track[KEY::URL]+".m4a";
+    auto file = YoutubeCachePath+track[KEY::ID]+".m4a";
+
+    if(!BAE::fileExists(file)) return;
 
     ids.removeAll(doneId);
     track.insert(KEY::URL,file);
@@ -184,9 +196,10 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
 
     CollectionDB con(nullptr);
     con.addTrack(trackMap);
-//    con.trackPlaylist(file, track[KEY::PLAYLIST]);
+    //    con.trackPlaylist(file, track[KEY::PLAYLIST]);
 
     if(this->ids.isEmpty()) emit this->done();
+
 }
 
 

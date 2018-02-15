@@ -14,7 +14,9 @@
 #include "../../utils/bae.h"
 #include "../local/taginfo.h"
 
-
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+class Notify;
+#endif
 class YouTube : public QObject
 {
     Q_OBJECT
@@ -31,6 +33,9 @@ private slots:
 
 private:
     const QString ydl="youtube-dl -f m4a --youtube-skip-dash-manifest -o \"$$$.%(ext)s\"";
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    Notify *nof;
+#endif
 
 signals:
     void done();

@@ -204,7 +204,7 @@ void Babe::notify(const QString &title, const QString &body)
 {
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-    Babe::nof->notify(title, body);
+    this->nof->notify(title, body);
 #else
     Q_UNUSED(title);
     Q_UNUSED(body);
@@ -217,7 +217,7 @@ void Babe::notifySong(const QString &url)
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     auto query = QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where url = \"%1\"").arg(url);
     auto track = getDBData(query);
-    Babe::nof->notifySong(track.first());
+    this->nof->notifySong(track.first());
 #else
     Q_UNUSED(url);
 #endif
