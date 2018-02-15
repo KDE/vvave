@@ -8,6 +8,7 @@ ColumnLayout
 {
     id: babeAlbumRoot
 
+
     signal albumClicked(int index)
     signal albumPressed(int index)
     property int albumSize : 150
@@ -96,7 +97,6 @@ ColumnLayout
         Layout.fillHeight: true
         Layout.margins: contentMargins
         spacing: 5
-
 
         Label
         {

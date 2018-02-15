@@ -23,10 +23,9 @@ Brain::~Brain()
 
 void Brain::start()
 {
-    if(this->isRunning()) this->go = false;
-    this->go = true;
+    if(!this->isRunning())
+        this->go = true;
     QMetaObject::invokeMethod(this, "synapse");
-
 }
 
 void Brain::stop()
@@ -69,7 +68,7 @@ void Brain::setInfo(DB_LIST dataList, ONTOLOGY ontology, QList<SERVICES> service
             if (cb != nullptr) cb(data);
             this->pulpo.feed(data, recursive);
             this->t.msleep(this->interval);
-        }
+        }else return;
     }
 }
 

@@ -34,51 +34,53 @@ BabeGrid
     Drawer
     {
         id: drawer
+
+        y: parent.height-height-root.footer.height
+
+        width: pageStack.wideMode ? artistsViewGrid.width-1 : artistsViewGrid.width
+
         height:
         {
-            var customHeight = (drawerList.count*rowHeight)+48
+            var customHeight = (drawerList.count*rowHeight)+toolBarHeight
+
             if(customHeight > parent.height)
-                parent.height-root.header.height
+                parent.height - root.header.height - root.footer.height
             else
             {
                 if(customHeight < parent.height*0.4)
-                    parent.height*0.4
+                    (parent.height*0.4) - root.footer.height
                 else
-                    customHeight
+                    customHeight - root.footer.height
             }
-
         }
-        x: pageStack.wideMode ? columnWidth+1 : 0
-        width: pageStack.wideMode ? artistsViewGrid.width-1 : artistsViewGrid.width
-        edge: Qt.BottomEdge
+
+        edge: Qt.RightEdge
         interactive: false
         focus: true
         modal: root.isMobile
         dragMargin: 0
-        clip: true
+        margins: 0
+        spacing: 0
+
+        onOpened: drawerList.forceActiveFocus()
+
+        enter: Transition
+        {
+            NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
+        }
+
+        exit: Transition
+        {
+            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
+        }
 
         background: Rectangle
         {
             anchors.fill: parent
             z: -999
             color: altColor
-            Kirigami.Separator
-            {
-                Rectangle
-                {
-                    anchors.fill: parent
-                    color: Kirigami.Theme.viewFocusColor
-                }
 
-                anchors
-                {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
-                }
-            }
         }
-
 
         BabeTable
         {
@@ -126,6 +128,22 @@ BabeGrid
             }
 
             onExit: drawer.close()
+
+            Kirigami.Separator
+            {
+                Rectangle
+                {
+                    anchors.fill: parent
+                    color: Kirigami.Theme.viewFocusColor
+                }
+
+                anchors
+                {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+            }
         }
 
     }
@@ -160,6 +178,8 @@ BabeGrid
                 gridModel.append(map[i])
     }
 
+
     Component.onCompleted: populate()
+
 
 }

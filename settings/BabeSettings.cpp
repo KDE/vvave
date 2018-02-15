@@ -72,7 +72,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
     connect(this->ytFetch, &YouTube::done, [this]()
     {
-        this->populateDB({BAE::YoutubeCachePath});
+        this->startBrainz(true, BAE::SEG::THREE);
     });
 
     connect(this->babeSocket, &Socket::message, this->ytFetch, &YouTube::fetch);
@@ -109,18 +109,16 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
                                 {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
 
 
-            //            this->startBrainz(true, 1500);
+            //            this->startBrainz(true, BAE::SEG::ONEHALF);
 
             qDebug()<<"Finished inserting into DB";
-        }/*else
+        }else
         {
             this->dirs.clear();
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
-            this->startBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool(), 3000);
-        }*/
-
-
+            this->startBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool(), BAE::SEG::THREE);
+        }
     });
 
     connect(this, &BabeSettings::collectionPathChanged, this, &BabeSettings::populateDB);
@@ -219,7 +217,7 @@ void BabeSettings::handleDirectoryChanged(const QString &dir)
 void BabeSettings::checkCollectionBrainz(const bool &state)
 {
     qDebug()<<"BRAINZ STATE<<"<<state;
-    this->startBrainz(state, 3000);
+    this->startBrainz(state, BAE::SEG::THREE);
 }
 
 void BabeSettings::startBrainz(const bool &on, const uint &speed)
