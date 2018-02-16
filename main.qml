@@ -139,7 +139,10 @@ Kirigami.ApplicationWindow
 
     overlay.modal: Rectangle
     {
-        color: isMobile ? "#8f28282a" : "transparent"
+        color: isMobile ? darkColor : "transparent"
+        opacity: 0.5
+        height: root.height - playbackControls.height - toolbar.height
+        y: toolbar.height
     }
 
     overlay.modeless: Rectangle
@@ -228,8 +231,9 @@ Kirigami.ApplicationWindow
 
         onTrackLyricsReady:
         {
-            if(url === currentTrack.url)
-                root.mainPlaylist.infoView.lyrics = lyrics
+                        console.log("TRACKS READY SIGNAL2")
+            //            if(url === currentTrack.url)
+                            Player.setLyrics(lyrics)
         }
 
         onSkipTrack: Player.nextTrack()
@@ -240,6 +244,7 @@ Kirigami.ApplicationWindow
     /* UI */
     header: BabeBar
     {
+        id: toolbar
         height: toolBarHeight
         visible: true
         currentIndex: currentView
@@ -307,7 +312,7 @@ Kirigami.ApplicationWindow
         {
             id: footerBg
             anchors.fill: parent
-            color: midLightColor
+            color: darkDarkColor
             opacity: opacityLevel
             z: -999
 
@@ -319,8 +324,8 @@ Kirigami.ApplicationWindow
                     target: footerBg
                     property: "color"
                     easing.type: Easing.InOutQuad
-                    from: darkColor
-                    to: midLightColor
+                    from: darkMidColor
+                    to: darkDarkColor
                     duration: 500
                 }
             }
@@ -330,7 +335,7 @@ Kirigami.ApplicationWindow
         {
             id: progressBar
 
-                        height: 10
+            height: 10
             width: parent.width
             z: 999
             anchors.left: parent.left
@@ -459,6 +464,7 @@ Kirigami.ApplicationWindow
                 Layout.row: 2
                 Layout.column: 2
                 Layout.maximumHeight: playbackInfo.visible ? playbackInfo.font.pointSize*2 : 0
+
                 Label
                 {
                     id: playbackInfo
@@ -471,7 +477,7 @@ Kirigami.ApplicationWindow
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
                     text: progressTimeLabel  + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - "+currentTrack.artist) : "") + "  /  " + durationTimeLabel
-                    color: foregroundColor
+                    color: darkForegroundColor
                     font.pointSize: fontSizes.tiny
                     elide: Text.ElideRight
                 }
@@ -488,21 +494,22 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: babeBtnIcon
-
                     iconName: "love"
-                    iconColor: currentBabe ? babeColor : defaultColor
+                    iconColor: currentBabe ? babeColor : darkForegroundColor
                     onClicked:
                     {
                         var value = mainPlaylist.contextMenu.babeIt(currentTrackIndex)
                         currentTrack.babe = value ? "1" : "0"
                         currentBabe = value
+
+                        //                        bae.runPy();
                     }
                 }
 
                 BabeButton
                 {
                     id: previousBtn
-
+                    iconColor: darkForegroundColor
                     iconName: "media-skip-backward"
                     onClicked: Player.previousTrack()
                     onPressAndHold: Player.playAt(prevTrackIndex)
@@ -511,6 +518,7 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: playIcon
+                    iconColor: darkForegroundColor
 
                     iconName:  isPlaying ? "media-playback-pause" :  "media-playback-start"
                     onClicked:
@@ -523,6 +531,7 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: nextBtn
+                    iconColor: darkForegroundColor
 
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
@@ -532,6 +541,8 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: shuffleBtn
+                    iconColor: darkForegroundColor
+
                     iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
                     onClicked: shuffle = !shuffle
                 }
@@ -640,6 +651,9 @@ Kirigami.ApplicationWindow
         id: mainPlaylist
         anchors.fill: parent
         clip: true
+
+
+
         Connections
         {
             target: mainPlaylist
@@ -653,6 +667,8 @@ Kirigami.ApplicationWindow
         id: views
         anchors.fill: parent
         clip: true
+        //        focusPolicy: Qt.WheelFocus
+        //        visualFocus: true
 
         Column
         {
@@ -677,11 +693,13 @@ Kirigami.ApplicationWindow
                     else if(currentView === viewsIndex.tracks) tracksView.forceActiveFocus()
                     else if(currentView === viewsIndex.search) searchView.forceActiveFocus()
 
+                    if(!babeitView.isConnected && currentIndex === viewsIndex.babeit)
+                        babeitView.logginDialog.open()
                 }
 
-                LogginForm
+                BabeitView
                 {
-                    id: babeView
+                    id: babeitView
                 }
 
                 TracksView

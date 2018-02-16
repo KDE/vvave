@@ -7,10 +7,12 @@ import ".."
 
 BabeList
 {
-//    id: list
+    id: babeTableRoot
     holder.message: "<h2>This list is empty</h2><p>You can sdd new music sources from the settings</p>"
     //    cacheBuffer : 300
     headerBarColor: midLightColor
+    textColor: foregroundColor
+
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
@@ -42,6 +44,7 @@ BabeList
     }
 
     headerBarRight: [
+
         BabeButton
         {
             id: appendBtn
@@ -49,6 +52,7 @@ BabeList
             anim : true
             iconName : "archive-insert"//"media-repeat-track-amarok"
             onClicked: appendAll()
+            iconColor: textColor
         },
 
         BabeButton
@@ -56,6 +60,7 @@ BabeList
             id: menuBtn
             iconName: /*"application-menu"*/ "overflow-menu"
             onClicked: headerMenu.popup()
+            iconColor: textColor
         }
     ]
 
@@ -91,7 +96,8 @@ BabeList
         trackDurationVisible : trackDuration
         trackRatingVisible : trackRating
         menuItem: menuItemVisible
-
+        color: babeTableRoot.textColor
+        bgColor: headerBarColor
 
         Connections
         {

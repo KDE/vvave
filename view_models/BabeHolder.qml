@@ -8,6 +8,7 @@ Item
     property string emoji
     property string message
     clip: true
+    property color color : foregroundColor
 
     anchors.fill: parent
 
@@ -61,7 +62,7 @@ Item
                 textFormat: Text.RichText
                 horizontalAlignment: Qt.AlignHCenter
                 elide: Text.ElideRight
-                color: foregroundColor
+                color: textColor
             }
         }
     }

@@ -42,6 +42,7 @@ BabeMenu
 
     function babeIt(index)
     {
+        console.log(index);
         var url = listModel.get(index).url
         var value = listModel.get(index).babe == "1" ? false : true
 
@@ -55,10 +56,10 @@ BabeMenu
     {
         id: titleLabel
         visible: root.isMobile
-        padding: root.isMobile ? 10 : 0
+        padding: root.isMobile ? contentMargins : 0
         font.bold: true
         width: parent.width
-        height: root.isMobile ? rowHeightAlt : 0
+        height: root.isMobile ? iconSizes.medium : 0
         horizontalAlignment: Qt.AlignHCenter
         elide: Text.ElideRight
         text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""

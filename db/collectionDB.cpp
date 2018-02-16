@@ -333,6 +333,7 @@ bool CollectionDB::colorTagTrack(const QString &path, const QString &value)
 
 bool CollectionDB::lyricsTrack(const DB &track, const QString &value)
 {
+
     if(update(TABLEMAP[TABLE::TRACKS],
               KEYMAP[KEY::LYRICS],
               value,

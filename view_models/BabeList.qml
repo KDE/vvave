@@ -5,6 +5,7 @@ import org.kde.kirigami 2.2 as Kirigami
 
 Item
 {
+    id: babeListRoot
     property alias list : babeList
     property alias model : babeList.model
     property alias delegate : babeList.delegate
@@ -20,13 +21,17 @@ Item
     property string headerBarTitle
     property bool headerBarExit : true
     property string headerBarExitIcon : "window-close"
+
     property color headerBarColor : "transparent"
+    property color textColor : foregroundColor
 
     property bool wasPulled : false
+
 
     signal pulled()
     signal exit()
 
+    focus: true
 
     ColumnLayout
     {
@@ -76,6 +81,7 @@ Item
                     anim : true
                     iconName : headerBarExitIcon //"dialog-close"
                     onClicked : exit()
+                    iconColor: textColor
                 }
 
                 Row
@@ -83,7 +89,6 @@ Item
                     id: headerBarActionsLeft
                     Layout.alignment : Qt.AlignLeft
                     Layout.leftMargin: headerBarExit ? 0 : contentMargins
-
                 }
 
                 Label
@@ -95,7 +100,7 @@ Item
 
                     elide : Text.ElideRight
                     font.bold : false
-                    color : foregroundColor
+                    color : textColor
                     font.pointSize: fontSizes.big
                     horizontalAlignment : Text.AlignHCenter
                     verticalAlignment :  Text.AlignVCenter
@@ -166,6 +171,7 @@ Item
             {
                 id: holder
                 visible: babeList.count === 0
+                color : textColor
             }
 
             Rectangle
@@ -174,7 +180,6 @@ Item
                 color: "transparent"
                 z: -999
             }
-
 
             ScrollBar.vertical:BabeScrollBar { }
 

@@ -4,153 +4,223 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.1
 
-Item
+import "../../view_models"
+
+BabePopup
 {
+    id: loginPopup
+    padding: contentMargins
+    maxHeight: loginLayout.implicitHeight+64
+    maxWidth: loginLayout.implicitWidth+64
+    //    closePolicy: Popup.NoAutoClose
 
-    Rectangle
+
+    ScrollView
     {
         anchors.fill: parent
-        z: -999
-        color: midLightColor
+        anchors.centerIn: parent
+        clip: true
 
-        //        Image
-        //        {
-        //            id: musicBg
-        //            source: "qrc:/assets/music_img.jpg"
-        //            smooth: true
-        //            visible: false
-        //            anchors.fill: parent
-        //        }
+        contentWidth: parent.width
+        contentHeight: loginLayout.implicitHeight
 
-        //        FastBlur
-        //        {
-        //            anchors.fill: musicBg
-        //            source: musicBg
-        //            radius: 64
-        //        }
-    }
-
-    ColumnLayout
-    {
-        anchors.fill: parent
-
-        //        Item
-        //        {
-        //            id: banner
-        //            Layout.fillWidth: true
-        //            anchors.top: parent.top
-        //            height: 64
-        //            width: parent.width
-
-        ////            Rectangle
-        ////            {
-        ////                anchors.fill: parent
-        ////                z: -999
-        ////                color: "#dedede"
-        ////                opacity: 0.5
-        ////            }
-
-
-
-
-        //        }
-
-
-        Item
+        ColumnLayout
         {
+            id: loginLayout
+            anchors.fill: parent
+            anchors.centerIn: parent
 
-            Layout.fillWidth: true
-            Layout.fillHeight: true
 
-            ColumnLayout
+            Item
             {
-                width: parent.width *0.4
-                height: parent.height *0.4
-                anchors.centerIn: parent
+                Layout.fillHeight: true
+            }
 
-                Item
+//            Item
+//            {
+//                Layout.fillWidth: true
+//                Layout.fillHeight: true
+
+//                Layout.alignment: Qt.AlignCenter
+//                Layout.margins: contentMargins*2
+//                width: parent.width
+//                Image
+//                {
+
+//                    anchors.centerIn: parent
+//                    id: beatsImg
+//                    fillMode: Image.PreserveAspectFit
+//                    mipmap: true
+//                    source: "qrc:/assets/beat.svg"
+//                    horizontalAlignment: Qt.AlignHCenter
+//                }
+
+//                ColorOverlay
+//                {
+//                    anchors.fill: beatsImg
+//                    source: beatsImg
+//                    color: foregroundColor
+//                }
+//            }
+
+            TextField
+            {
+                id: email
+                visible : false
+                width: parent.width
+
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Layout.alignment: Qt.AlignCenter
+
+                placeholderText: "email *"
+                color: foregroundColor
+                horizontalAlignment: Text.AlignHCenter
+                Material.accent: babeColor
+                Material.background: backgroundColor
+                Material.primary: backgroundColor
+                Material.foreground: foregroundColor
+            }
+
+            TextField
+            {
+                id: nickId
+                width: parent.width
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Layout.alignment: Qt.AlignCenter
+                placeholderText: email.visible ? "nick *" : "nick or email"
+                color: foregroundColor
+                horizontalAlignment: Text.AlignHCenter
+                Material.accent: babeColor
+                Material.background: backgroundColor
+                Material.primary: backgroundColor
+                Material.foreground: foregroundColor
+            }
+
+            TextField
+            {
+                id: password
+
+                width: parent.width
+
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Layout.alignment: Qt.AlignCenter
+
+                placeholderText: "password *"
+                color: foregroundColor
+                horizontalAlignment: Text.AlignHCenter
+                Material.accent: babeColor
+                Material.background: backgroundColor
+                Material.primary: backgroundColor
+                Material.foreground: foregroundColor
+            }
+
+            RowLayout
+            {
+                id: nameInfo
+                visible: false
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Layout.alignment: Qt.AlignCenter
+                TextField
                 {
+                    id: name
                     Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignCenter
-                    Layout.margins: contentMargins
-                    width: parent.width
-                    Image
-                    {
-                        anchors.centerIn: parent
-                        id: beatsImg
-                        fillMode: Image.PreserveAspectFit
-                        mipmap: true
-                        source: "qrc:/assets/beat.svg"
-                        horizontalAlignment: Qt.AlignHCenter
-                    }
-
-                    ColorOverlay
-                    {
-                        anchors.fill: beatsImg
-                        source: beatsImg
-                        color: foregroundColor
-                    }
-                }
-
-                Item
-                {
-                    width: parent.width
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignCenter
-                    height: 48
-                    TextField
-                    {
-                        id: nickId
-
-                        anchors.fill: parent
-                        anchors.centerIn: parent
-                        placeholderText: "nick or email"
-                        color: foregroundColor
-                        horizontalAlignment: Text.AlignHCenter
-
-
-                    }
-                }
-                Item
-                {
-                    width: parent.width
-
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignCenter
-
-                    height: 48
-
-                    TextField
-                    {
-                        id: password
-                        anchors.fill: parent
-                        anchors.centerIn: parent
-                        placeholderText: "password"
-                        color: foregroundColor
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-                }
-
-                Button
-                {
-                    width: parent.width
-
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignCenter
-                    id: loginBtn
-
-                    text: "Login"
-
+                    Layout.rightMargin: contentMargins/2
+                    placeholderText: "name"
+                    color: foregroundColor
+                    horizontalAlignment: Text.AlignHCenter
                     Material.accent: babeColor
                     Material.background: backgroundColor
                     Material.primary: backgroundColor
                     Material.foreground: foregroundColor
-
                 }
 
+                TextField
+                {
+                    id: lastname
+                    Layout.fillWidth: true
+                    Layout.leftMargin: contentMargins/2
+
+                    placeholderText: "lastname"
+                    color: foregroundColor
+                    horizontalAlignment: Text.AlignHCenter
+                    Material.accent: babeColor
+                    Material.background: backgroundColor
+                    Material.primary: backgroundColor
+                    Material.foreground: foregroundColor
+                }
+
+            }
+
+
+            Button
+            {
+                width: parent.width
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Layout.alignment: Qt.AlignCenter
+                Layout.topMargin:  contentMargins
+
+                id: loginBtn
+
+                text: "Login"
+
+                Material.accent: babeColor
+                Material.background: backgroundColor
+                Material.primary: backgroundColor
+                Material.foreground: foregroundColor
+            }
+
+            Button
+            {
+                width: parent.width
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                Layout.alignment: Qt.AlignCenter
+                Layout.topMargin:  contentMargins
+
+                id: signUp
+
+                text: "Singup"
+
+                Material.accent: babeColor
+                Material.background: babeColor
+                Material.primary: babeColor
+                Material.foreground: darkForegroundColor
+
+                onClicked: fullForm(true)
+            }
+
+            Item
+            {
+                Layout.fillHeight: true
 
             }
 
         }
     }
+
+    function fullForm(state)
+    {
+        if(state)
+        {
+            email.visible = true
+            nameInfo.visible = true
+        }else
+        {
+            email.visible = false
+            nameInfo.visible = false
+        }
+    }
+
 }
+

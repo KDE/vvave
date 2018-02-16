@@ -26,6 +26,7 @@ android:
     include(3rdparty/kirigami/kirigami.pri)
 }
 
+
 DEPENDPATH += taglib
 DEPENDPATH += taglib/ape
 DEPENDPATH += taglib/asf
@@ -204,7 +205,8 @@ SOURCES += main.cpp \
     babe.cpp \
     settings/BabeSettings.cpp \
     java/notificationclient.cpp \
-    db/conthread.cpp
+    db/conthread.cpp \
+    services/web/babeit.cpp
 
 
 
@@ -363,6 +365,31 @@ HEADERS += \
     babe.h \
     settings/BabeSettings.h \
     java/notificationclient.h \
-    db/conthread.h
+    db/conthread.h \
+    services/web/babeit.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+#INCLUDEPATH += /usr/include/python3.6m
+
+#LIBS += -lpython3.6m
+#defineReplace(copyToDir) {
+#    files = $$1
+#    DIR = $$2
+#    LINK =
+
+#    for(FILE, files) {
+#        LINK += $$QMAKE_COPY $$shell_path($$FILE) $$shell_path($$DIR) $$escape_expand(\\n\\t)
+#    }
+#    return($$LINK)
+#}
+
+#defineReplace(copyToBuilddir) {
+#    return($$copyToDir($$1, $$OUT_PWD))
+#}
+
+## Copy the binary files dependent on the system architecture
+#unix:!macx {
+#    message("Linux")
+#    QMAKE_POST_LINK += $$copyToBuilddir($$PWD/library/cat)
+#}

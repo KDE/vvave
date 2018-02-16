@@ -7,61 +7,60 @@ function playTrack(track)
     {
         root.currentTrack = track
 
-        if(bae.fileExists(root.currentTrack.url))
+        if(bae.fileExists(currentTrack.url))
         {
-            player.source(root.currentTrack.url);
+            player.source(currentTrack.url);
             player.play()
-//            root.playIcon.iconName = "media-playback-pause"
+            //            root.playIcon.iconName = "media-playback-pause"
 
-            var artwork = root.currentTrack.artwork
+            var artwork = currentTrack.artwork
             //    root.mainPlaylist.list.currentItem.playingIndicator = true
-            root.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(root.currentTrack.url)
+            root.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(currentTrack.url)
 
-            root.currentBabe = bae.trackBabe(root.currentTrack.url)
+            root.currentBabe = bae.trackBabe(currentTrack.url)
+
+            root.progressBar.enabled = true
+
 
             if(!root.isMobile)
             {
-                root.title = root.currentTrack.title + " - " +root.currentTrack.artist
+                root.title = currentTrack.title + " - " +currentTrack.artist
 
                 if(!root.active)
-                    bae.notifySong(root.currentTrack.url)
+                    bae.notifySong(currentTrack.url)
             }
 
-            var lyrics = root.currentTrack.lyrics
-
-            //    if(!lyrics || lyrics.length === 0 || lyrics === "NONE" )
-            //        bae.trackLyrics(root.mainPlaylist.currentTrack.url)
-            //    else
-            root.mainPlaylist.infoView.lyrics =  lyrics
+            bae.trackLyrics(currentTrack.url)
 
             //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
             //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
             //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
-        }else root.missingAlert(root.currentTrack)
+        }else root.missingAlert(currentTrack)
     }
 }
 
+function setLyrics(lyrics)
+{
+    currentTrack.lyrics = lyrics
+    root.mainPlaylist.infoView.lyricsText.text = lyrics
+}
 
 function stop()
 {
     player.stop()
     root.progressBar.value = 0
-    root.mainlistEmpty = true
-
+    root.progressBar.enabled = false
     root.title = "Babe..."
-//    root.playIcon.iconName = "media-playback-start"
 }
 
 function pauseTrack()
 {
-    player.pause()
-//    root.playIcon.iconName = "media-playback-start"
+    player.pause()    
 }
 
 function resumeTrack()
 {
     player.play()
-//    root.playIcon.iconName = "media-playback-pause"
 }
 
 function nextTrack()
@@ -228,9 +227,9 @@ function playAll(tracks)
 
 }
 
-function babeTrack()
+function babeTrack(url, value)
 {           
-
+    bae.babeTrack(url, value)
 }
 
 function addToPlaylist(urls, playlist)
@@ -238,8 +237,8 @@ function addToPlaylist(urls, playlist)
     if(urls.length > 0)
     {
         bae.trackPlaylist(urls, playlist)
-//        for(var i in urls)
-//            bae.trackPlaylist(urls[i], playlist)
+        //        for(var i in urls)
+        //            bae.trackPlaylist(urls[i], playlist)
 
 
         if(!isMobile)

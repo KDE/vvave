@@ -114,7 +114,7 @@ BabeDialog
             {
                 playlistsList.model.insert(0, {playlist: title})
                 playlistsView.playlistViewModel.model.insert(9, {playlist: title})
-                playlistsList.positionViewAtBeginning()
+                playlistsList.list.positionViewAtBeginning()
             }
 
             newPlaylistField.clear()

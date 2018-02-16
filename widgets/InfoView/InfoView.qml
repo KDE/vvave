@@ -8,7 +8,7 @@ import "../../view_models"
 Page
 {
     id: infoRoot
-    property string lyrics
+    property alias lyricsText :lyricsText
     property string wikiArtist
     property string wikiAlbum
     property string artistHead
@@ -20,9 +20,8 @@ Page
     {
         anchors.fill: parent
         z: -999
-        color: midLightColor
+        color: darkDarkColor
     }
-
 
     SwipeView
     {
@@ -34,11 +33,13 @@ Page
         Rectangle
         {
             color: "transparent"
+
             BabeHolder
             {
                 id: lyricsHolder
+                color: darkForegroundColor
                 anchors.fill: parent
-                visible: lyrics ? false : true
+                visible: lyricsText.text.length > 0 ? false : true
                 message: "Couldn't find the lyrics!"
             }
 
@@ -57,8 +58,8 @@ Page
                     width: infoRoot.width      // ensure correct width
 
                     padding: 20
-                    text: lyrics
-                    color: foregroundColor
+                    text: ""
+                    color: darkForegroundColor
                     font.pointSize: fontSizes.big
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
@@ -86,43 +87,43 @@ Page
                 width:parent.width
                 height:parent.height
 
-//                Rectangle
-//                {
+                //                Rectangle
+                //                {
 
-//                    width: children.width
-//                    height: children.height
+                //                    width: children.width
+                //                    height: children.height
 
-//                    anchors.horizontalCenter: parent
-//                    Image
-//                    {
-//                        id: img
-//                        width: 100
-//                        height: 100
+                //                    anchors.horizontalCenter: parent
+                //                    Image
+                //                    {
+                //                        id: img
+                //                        width: 100
+                //                        height: 100
 
-//                        fillMode: Image.PreserveAspectFit
+                //                        fillMode: Image.PreserveAspectFit
 
-//                        source: (artistHead.length>0 && artistHead !== "NONE")? "file://"+encodeURIComponent(artistHead) : "qrc:/assets/cover.png"
-//                        layer.enabled: true
-//                        layer.effect: OpacityMask
-//                        {
-//                            maskSource: Item
-//                            {
-//                                width: img.width
-//                                height: img.height
-//                                Rectangle
-//                                {
-//                                    anchors.centerIn: parent
-//                                    width: img.adapt ? img.width : Math.min(img.width, img.height)
-//                                    height: img.adapt ? img.height : width
-//                                    radius: Math.min(width, height)
-//                                    border.color: foregroundColor
-//                                    border.width: 4
-//                                }
-//                            }
-//                        }
-//                    }
+                //                        source: (artistHead.length>0 && artistHead !== "NONE")? "file://"+encodeURIComponent(artistHead) : "qrc:/assets/cover.png"
+                //                        layer.enabled: true
+                //                        layer.effect: OpacityMask
+                //                        {
+                //                            maskSource: Item
+                //                            {
+                //                                width: img.width
+                //                                height: img.height
+                //                                Rectangle
+                //                                {
+                //                                    anchors.centerIn: parent
+                //                                    width: img.adapt ? img.width : Math.min(img.width, img.height)
+                //                                    height: img.adapt ? img.height : width
+                //                                    radius: Math.min(width, height)
+                //                                    border.color: foregroundColor
+                //                                    border.width: 4
+                //                                }
+                //                            }
+                //                        }
+                //                    }
 
-//                }
+                //                }
 
 
                 ScrollView
@@ -143,7 +144,7 @@ Page
                         padding: 20
                         text: wikiAlbum
                         visible: wikiAlbum === "NONE" || wikiAlbum.length===0 ? false : true
-                        color: foregroundColor
+                        color: darkForegroundColor
                         font.pointSize: fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.RichText
@@ -170,7 +171,7 @@ Page
                         text: wikiArtist
                         visible: wikiArtist === "NONE" || wikiArtist.length===0 ? false : true
 
-                        color: foregroundColor
+                        color: darkForegroundColor
                         font.pointSize: fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.StyledText

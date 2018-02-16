@@ -19,6 +19,8 @@
 #include <QtAndroid>
 #endif
 
+//#include "Python.h"
+
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
 #endif
@@ -56,6 +58,25 @@ Babe::~Babe()
 {
     delete this->thread;
 }
+
+
+//void Babe::runPy()
+//{
+
+//    QFile cat (BAE::CollectionDBPath+"cat");
+//    qDebug()<<cat.exists()<<cat.permissions();
+//    if(!cat.setPermissions(QFile::ExeGroup | QFile::ExeOther | QFile::ExeOther | QFile::ExeUser))
+//        qDebug()<<"Faile dot give cat permissionsa";
+//    qDebug()<<cat.exists()<<cat.permissions();
+
+//    QProcess process;
+//    process.setWorkingDirectory(BAE::CollectionDBPath);
+//    process.start("./cat", QStringList());
+
+//    bool finished = process.waitForFinished(-1);
+//    QString p_stdout = process.readAll();
+//    qDebug()<<p_stdout<<finished<<process.workingDirectory()<<process.errorString();
+//}
 
 QVariantList Babe::get(const QString &queryTxt)
 {
@@ -96,7 +117,10 @@ void Babe::trackLyrics(const QString &url)
 
     if(track.isEmpty()) return;
 
-    this->fetchTrackLyrics(track.first());
+    if(!track.first()[KEY::LYRICS].isEmpty() && track.first()[KEY::LYRICS] != SLANG[W::NONE])
+        emit this->trackLyricsReady(track.first()[KEY::LYRICS], url);
+    else
+        this->fetchTrackLyrics(track.first());
 }
 
 bool Babe::trackBabe(const QString &path)

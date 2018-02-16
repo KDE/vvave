@@ -13,13 +13,7 @@ BabePopup
     property string currentUrl
     property string currentName
 
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: altColor
-        z: -999
-        radius: 3
-    }
+
 
     BabeList
     {

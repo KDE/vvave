@@ -68,24 +68,27 @@ ToolBar
             ToolTip.visible: hovered && !isMobile
             ToolTip.text: qsTr("Settings")
         }
-        //        BabeButton
-        //        {
-        //            iconName: "love"
-        //            iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
-
-        //            onClicked: babeViewClicked()
-
-        //            hoverEnabled: !isMobile
-        //            ToolTip.delay: 1000
-        //            ToolTip.timeout: 5000
-        //            ToolTip.visible: hovered && !isMobile
-        //            ToolTip.text: qsTr("Babe")
-        //        }
 
         Item
         {
             Layout.fillWidth: true
         }
+
+
+        BabeButton
+        {
+            iconName: "love"
+            iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
+
+            onClicked: babeViewClicked()
+
+            hoverEnabled: !isMobile
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered && !isMobile
+            ToolTip.text: qsTr("Babe")
+        }
+
 
         BabeButton
         {

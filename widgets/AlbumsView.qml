@@ -43,7 +43,7 @@ BabeGrid
             var customHeight = (drawerList.count*rowHeight)+toolBarHeight
 
             if(customHeight > parent.height)
-                parent.height - root.header.height - root.footer.height
+                (parent.height*0.9) - root.header.height - root.footer.height
             else
             {
                 if(customHeight < parent.height*0.4)

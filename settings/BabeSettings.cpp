@@ -37,7 +37,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     qDebug() << "Getting settings info from: " << BAE::SettingPath;
     qDebug() << "Getting artwork files from: " << BAE::CachePath;
 
-#if defined(Q_OS_LINUX)
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     const auto notifyDir = BAE::NotifyDir;
 
     if(!BAE::fileExists(notifyDir+"/Babe.notifyrc"))
@@ -48,7 +48,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
         if(knotify.copy(notifyDir+"/Babe.notifyrc"))
             qDebug()<<"the knotify file got copied";
     }
-#endif
+#endif    
 
     QDir collectionDBPath_dir(BAE::CollectionDBPath);
     QDir cachePath_dir(BAE::CachePath);

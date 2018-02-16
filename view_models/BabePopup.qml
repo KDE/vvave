@@ -5,10 +5,22 @@ import QtQuick.Controls.Material 2.1
 
 Popup
 {
-    width: parent.width * 0.8
-    height: parent.height *0.8
+    property int maxWidth : ApplicationWindow.overlay.width
+    property int maxHeight : ApplicationWindow.overlay.height
+
+    width: parent ===  ApplicationWindow.overlay ? (root.pageStack.wideMode ?  parent.width * 0.4 :
+                                                                              (isMobile ? parent.width * 0.8 :
+                                                                                          parent.width * 0.7)) :
+                                                   parent.width * 0.7 > maxWidth ? maxWidth :
+                                                                                   parent.width * 0.7
+    height: parent ===  ApplicationWindow.overlay ? (root.pageStack.wideMode ?  parent.height * 0.5 :
+                                                                               (isMobile ? parent.height * 0.8 :
+                                                                                           parent.height * 0.7)) :
+                                                    parent.height * 0.7 > maxHeight ? maxHeight :
+                                                                                      parent.height * 0.7
 
     padding: 0
+    margins: 0
 
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
@@ -20,8 +32,14 @@ Popup
     focus: true
     clip: true
 
-    enter: Transition {
+    enter: Transition
+    {
         NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
+    }
+
+    exit: Transition
+    {
+        NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
     }
 
     Material.accent: babeColor

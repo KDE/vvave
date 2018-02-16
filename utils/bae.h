@@ -17,6 +17,15 @@
 
 #include <cmath>
 
+
+#define BABE_MAJOR_VERSION 0
+#define BABE_MINOR_VERSION 1
+#define BABE_PATCH_VERSION 0
+
+#define BABE_VERSION_STR "@BABE_MAJOR_VERSION@.@BABE_MINOR_VERSION@.@BABE_PATCH_VERSION@"
+
+#define BABE_VERSION KDE_MAKE_VERSION(@BABE_MAJOR_VERSION@,@BABE_MINOR_VERSION@,@BABE_PATCH_VERSION@)
+
 using namespace std;
 
 namespace BAE
@@ -258,7 +267,7 @@ const QStringList DownloadsPaths = QStandardPaths::standardLocations(QStandardPa
 const QString NotifyDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 const QString BabePort = "8483";
 const QString App = "Babe";
-const QString Version = "1.0";
+const QString Version = BABE_VERSION_STR;
 const QString DBName = "collection.db";
 
 const QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};

@@ -23,6 +23,7 @@ Item
     property alias list : table.list
     property alias table: table
     property alias infoView : infoView
+
     property alias contextMenu : table.contextMenu
     property alias mainlistContext : mainlistContext
     property alias headerMenu : table.headerMenu
@@ -30,6 +31,7 @@ Item
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
+
 
     PlaylistMenu
     {
@@ -69,7 +71,7 @@ Item
             {
                 visible: cover.visible
                 anchors.fill: parent
-                color: midColor
+                color: darkDarkColor
                 z: -999
             }
 
@@ -125,12 +127,13 @@ Item
             Rectangle
             {
                 anchors.fill: parent
-                color: midLightColor
+                color: darkDarkColor
                 opacity: opacityLevel
                 z: -999
 
                 Kirigami.Separator
                 {
+                    visible: !stackView.currentItem === table
                     Rectangle
                     {
                         anchors.fill: parent
@@ -151,17 +154,20 @@ Item
                 drag.target: mainlistContext
                 drag.axis: Drag.YAxis
                 drag.minimumY: 0
-                drag.maximumY: coverSize
+                drag.maximumY:stackView.currentItem === table ?  coverSize : 0
 
                 onMouseYChanged:
                 {
-                    cover.height = mainlistContext.y
-
-                    if(mainlistContext.y < coverSize*0.8)
+                    if(stackView.currentItem === table )
                     {
-                        cover.visible = false
-                        mainlistContext.y = 0
-                    }else cover.visible = true
+                        cover.height = mainlistContext.y
+
+                        if(mainlistContext.y < coverSize*0.8)
+                        {
+                            cover.visible = false
+                            mainlistContext.y = 0
+                        }else cover.visible = true
+                    }
                 }
             }
 
@@ -180,7 +186,7 @@ Item
                     {
                         id: infoBtn
                         anchors.centerIn: parent
-
+                        iconColor: darkForegroundColor
                         iconName: stackView.currentItem === table ? "documentinfo" : "arrow-left"
                         onClicked:
                         {
@@ -205,6 +211,7 @@ Item
                         anchors.centerIn: parent
                         Layout.fillWidth: true
                         iconName: "edit-comment"
+                        iconColor: darkForegroundColor
                     }
                 }
 
@@ -218,9 +225,10 @@ Item
                         Layout.fillWidth: true
                         iconName: /*"application-menu"*/ "overflow-menu"
                         onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
+                        iconColor: darkForegroundColor
+
                     }
                 }
-
             }
         }
 
@@ -239,23 +247,30 @@ Item
                 anchors.fill: parent
                 focus: true
 
-                pushEnter: Transition {
-                    PropertyAnimation {
+                pushEnter: Transition
+                {
+                    PropertyAnimation
+                    {
                         property: "opacity"
                         from: 0
                         to:1
                         duration: 200
                     }
                 }
-                pushExit: Transition {
-                    PropertyAnimation {
+
+                pushExit: Transition
+                {
+                    PropertyAnimation
+                    {
                         property: "opacity"
                         from: 1
                         to:0
                         duration: 200
                     }
                 }
-                popEnter: Transition {
+
+                popEnter: Transition
+                {
                     PropertyAnimation {
                         property: "opacity"
                         from: 0
@@ -263,8 +278,11 @@ Item
                         duration: 200
                     }
                 }
-                popExit: Transition {
-                    PropertyAnimation {
+
+                popExit: Transition
+                {
+                    PropertyAnimation
+                    {
                         property: "opacity"
                         from: 1
                         to:0
@@ -279,15 +297,17 @@ Item
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true
+                    headerBarColor : darkMidColor
                     holder.message : "<h2>Meh!</h2><p>Start putting together your playlist!</p>"
                     holder.emoji: "qrc:/assets/face-sleeping.png"
+
+                    textColor: darkForegroundColor
 
                     Rectangle
                     {
                         anchors.fill: parent
-                        color: altColor
+                        color: darkDarkColor
                         z: -999
-
                     }
 
                     onRowClicked:
@@ -324,8 +344,8 @@ Item
                             }
                         }else
                         {
-                            var where = "babe = 1"
-                            var query = Q.GET.tracksWhere_.arg(where)
+                            where = "babe = 1"
+                            query = Q.GET.tracksWhere_.arg(where)
                             var tracks = bae.get(query)
 
                             for(var pos=0; pos< tracks.length; pos++)

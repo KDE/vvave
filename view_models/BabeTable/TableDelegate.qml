@@ -30,7 +30,10 @@ ItemDelegate
         }else false
     }
 
-    property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
+    property color bgColor : midColor
+    property color color : foregroundColor
+    property color highlightColor : highlightTextColor
+    property string textColor: ListView.isCurrentItem ? highlightColor : color
     property bool number : false
     property bool quickPlay : true
     property bool coverArt : false
@@ -40,6 +43,7 @@ ItemDelegate
     //    property bool playingIndicator: false
     property string trackMood : art
     property alias trackRating : trackRating
+
 
     //    NumberAnimation on x
     //    {
@@ -55,8 +59,9 @@ ItemDelegate
             if(trackMood.length > 0)
                 Qt.lighter(trackMood)
             else
-                index % 2 === 0 ? midColor : "transparent"
+                index % 2 === 0 ? bgColor : "transparent"
         }
+
         opacity: 0.3
     }
 

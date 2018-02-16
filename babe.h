@@ -31,6 +31,8 @@ public:
     };
     Q_ENUM(HINT)
 
+//    Q_INVOKABLE void runPy();
+
     /* DATABASE INTERFACES */
 
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
