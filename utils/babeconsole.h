@@ -2,15 +2,14 @@
 #define BABECONSOLE_H
 
 #include <QObject>
-#include <iostream>
+#include "singleton.h"
 
-using namespace std;
 class BabeConsole : public QObject
 {
     Q_OBJECT
 public:
     explicit BabeConsole(QObject *parent = nullptr);
-    void msg(const QString &msg);
+    static void msg(const QString &msg);
 
 signals:
     void debug(QString msg);
@@ -18,6 +17,6 @@ signals:
 public slots:
 };
 
-
+typedef Singleton<BabeConsole> bDebug;
 
 #endif // BABECONSOLE_H

@@ -17,7 +17,7 @@ Page
 
     Rectangle
     {
-        visible: logginDialog.visible
+        visible: logginDialog.visible && !isMobile
         anchors.fill: parent
         z: -999
         color: darkColor

@@ -10,7 +10,6 @@
 class Notify;
 #endif
 
-class BabeConsole;
 class CollectionDB;
 class Pulpo;
 class BabeSettings;
@@ -110,6 +109,7 @@ public:
     Q_INVOKABLE QString loadCover(const QString &url);
     Q_INVOKABLE QVariantList searchFor(const QStringList &queries);
 
+public slots:
     void debug(const QString &msg);
 
 private:
@@ -132,5 +132,6 @@ signals:
     void babeIt();
     void message(QString msg);
 };
+
 
 #endif // BABE_H

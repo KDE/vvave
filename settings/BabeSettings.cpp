@@ -22,6 +22,7 @@
 #include "../utils/brain.h"
 #include "../services/local/socket.h"
 #include "../services/web/youtube.h"
+#include "../utils/babeconsole.h"
 
 BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 {
@@ -42,11 +43,11 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
     if(!BAE::fileExists(notifyDir+"/Babe.notifyrc"))
     {
-        qDebug()<<"The Knotify file does not exists, going to create it";
+        bDebug::Instance()->msg("The Knotify file does not exists, going to create it");
         QFile knotify(":/assets/Babe.notifyrc");
 
         if(knotify.copy(notifyDir+"/Babe.notifyrc"))
-            qDebug()<<"the knotify file got copied";
+            bDebug::Instance()->msg("the knotify file got copied");
     }
 #endif    
 
@@ -79,7 +80,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     connect(this->babeSocket, &Socket::connected, [this](const int &index)
     {
         auto playlists = this->connection->getPlaylists();
-        qDebug()<<"Sending playlists to socket"<<playlists;
+        bDebug::Instance()->msg("Sending playlists to socket: "+playlists.join(", "));
         this->babeSocket->sendMessageTo(index, playlists.join(","));
     });
 
@@ -111,7 +112,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
             //            this->startBrainz(true, BAE::SEG::ONEHALF);
 
-            qDebug()<<"Finished inserting into DB";
+            bDebug::Instance()->msg("Finished inserting into DB");
         }else
         {
             this->dirs.clear();
@@ -162,7 +163,7 @@ void BabeSettings::refreshCollectionPaths()
 
 void BabeSettings::addToWatcher(QStringList paths)
 {
-    qDebug()<<"duplicated paths in watcher removd: "<<paths.removeDuplicates();
+    bDebug::Instance()->msg("Removed duplicated paths in watcher: "+paths.removeDuplicates());
 
     if(!paths.isEmpty()) watcher->addPaths(paths);
 }
@@ -198,7 +199,7 @@ void BabeSettings::collectionWatcher()
 
 void BabeSettings::handleDirectoryChanged(const QString &dir)
 {
-    qDebug()<<"directory changed:"<<dir;
+    bDebug::Instance()->msg("directory changed:"+dir);
 
     auto wait = new QTimer(this);
     wait->setSingleShot(true);
@@ -216,7 +217,7 @@ void BabeSettings::handleDirectoryChanged(const QString &dir)
 
 void BabeSettings::checkCollectionBrainz(const bool &state)
 {
-    qDebug()<<"BRAINZ STATE<<"<<state;
+    bDebug::Instance()->msg("BRAINZ STATE<<"+state);
     this->startBrainz(state, BAE::SEG::THREE);
 }
 

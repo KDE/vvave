@@ -18,6 +18,12 @@ BabePopup
         onMessage: consoletext.append(">> "+msg+"\n");
     }
 
+    background: Rectangle
+    {
+         color: darkDarkColor
+         border.color: "#111"
+    }
+
 
     ColumnLayout
     {

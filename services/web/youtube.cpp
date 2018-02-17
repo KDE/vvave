@@ -19,7 +19,7 @@
 #include "youtube.h"
 #include "../../pulpo/pulpo.h"
 #include "../../db/collectionDB.h"
-
+#include "../../utils/babeconsole.h"
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
 #endif
@@ -53,7 +53,7 @@ void YouTube::fetch(const QString &json)
     auto playlist = data.value("playlist").toString().trimmed();
     auto page = data.value("page").toString().replace('"',"").trimmed();
 
-    qDebug()<< id << title << artist;
+    bDebug::Instance()->msg("Fetching from Youtube: "+id+" "+title+" "+artist);
 
     DB infoMap;
     infoMap.insert(KEY::TITLE, title);
@@ -85,7 +85,7 @@ void YouTube::fetch(const QString &json)
         auto command = ydl;
 
         command = command.replace("$$$",infoMap[KEY::ID])+" "+infoMap[KEY::ID];
-        qDebug()<<command;
+        bDebug::Instance()->msg(command);
         process->start(command);
     }
 }
@@ -101,8 +101,9 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
 
     ids.removeAll(doneId);
     track.insert(KEY::URL,file);
+    bDebug::Instance()->msg("Finished collection track with youtube-dl");
 
-    qDebug()<<track[KEY::ID]<<track[KEY::TITLE]<<track[KEY::ARTIST]<<track[KEY::PLAYLIST]<<track[KEY::URL];
+    //    qDebug()<<track[KEY::ID]<<track[KEY::TITLE]<<track[KEY::ARTIST]<<track[KEY::PLAYLIST]<<track[KEY::URL];
 
     /*here get metadata*/
     TagInfo tag;
@@ -117,7 +118,7 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
             tag.setAlbum(track[KEY::ALBUM]);
             tag.setComment(track[KEY::URL]);
 
-            qDebug()<<"trying tocollect metadata of downloaded track";
+            bDebug::Instance()->msg("Trying to collect metadata of downloaded track");
             Pulpo pulpo;
             pulpo.registerServices({PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify});
             pulpo.setOntology(PULPO::ONTOLOGY::TRACK);
@@ -126,20 +127,19 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
             QEventLoop loop;
 
             QTimer timer;
-            connect(&timer, &QTimer::timeout,&loop,&QEventLoop::quit);
+            connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
 
             timer.setSingleShot(true);
             timer.setInterval(1000);
 
             connect(&pulpo, &Pulpo::infoReady, [&loop](const BAE::DB &track, const PULPO::RESPONSE &res)
             {
-                qDebug()<<"SETTING YOUTUBE DOWNLOAD TRACK METADATA";
+                bDebug::Instance()->msg("Setting collected track metadata");
                 if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA].isEmpty())
                 {
-                    qDebug()<<res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString();
-                    qDebug()<<res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toString();
+                    bDebug::Instance()->msg(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString());
+                    bDebug::Instance()->msg(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toString());
 
-                    qDebug()<<track[KEY::URL];
                     TagInfo tag;
                     tag.feed(track[KEY::URL]);
 
@@ -160,10 +160,10 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
             loop.exec();
             timer.stop();
 
-            qDebug()<<"process finished totally for"<< state << doneId << exitStatus;
+            bDebug::Instance()->msg("Process finished totally for "+QString(state)+" "+doneId+" "+QString(exitStatus));
 
-            qDebug()<<"need to delete the id=" << doneId;
-            qDebug()<<"ids left to process: " << this->ids;
+            bDebug::Instance()->msg("Need to delete the id "+ doneId);
+            bDebug::Instance()->msg("Ids left to process: " + this->ids.join(","));
         }
     }
 
@@ -177,8 +177,6 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
     auto sourceUrl = QFileInfo(file).dir().path();
     auto duration = tag.getDuration();
     auto year = tag.getYear();
-
-    qDebug()<<"FILE LOADER:"<< title << album << artist <<file;
 
     BAE::DB trackMap =
     {

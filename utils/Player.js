@@ -5,7 +5,7 @@ function playTrack(track)
 {
     if(track)
     {
-        root.currentTrack = track
+        currentTrack = track
 
         if(bae.fileExists(currentTrack.url))
         {
@@ -15,16 +15,15 @@ function playTrack(track)
 
             var artwork = currentTrack.artwork
             //    root.mainPlaylist.list.currentItem.playingIndicator = true
-            root.currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(currentTrack.url)
+            currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(currentTrack.url)
 
-            root.currentBabe = bae.trackBabe(currentTrack.url)
+            currentBabe = bae.trackBabe(currentTrack.url)
 
-            root.progressBar.enabled = true
+            progressBar.enabled = true
 
-
-            if(!root.isMobile)
+            if(!isMobile)
             {
-                root.title = currentTrack.title + " - " +currentTrack.artist
+                title = currentTrack.title + " - " +currentTrack.artist
 
                 if(!root.active)
                     bae.notifySong(currentTrack.url)

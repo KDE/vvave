@@ -368,7 +368,8 @@ HEADERS += \
     java/notificationclient.h \
     db/conthread.h \
     services/web/babeit.h \
-    utils/babeconsole.h
+    utils/babeconsole.h \
+    utils/singleton.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

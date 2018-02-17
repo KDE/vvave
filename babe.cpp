@@ -4,6 +4,7 @@
 #include "db/conthread.h"
 #include "settings/BabeSettings.h"
 #include "pulpo/pulpo.h"
+#include "../utils/babeconsole.h"
 
 #include <QPalette>
 #include <QWidget>
@@ -30,10 +31,12 @@ using namespace BAE;
 
 Babe::Babe(QObject *parent) : CollectionDB(parent)
 {    
-    Babe::debug("CONSTRUCTING ABE INTERFACE");
+    bDebug::Instance()->msg("CONSTRUCTING ABE INTERFACE");
 
     this->settings = new BabeSettings(this);
     this->thread = new ConThread;
+
+    connect(bDebug::Instance(), SIGNAL(debug(QString)), this, SLOT(debug(QString)));
 
     connect(settings, &BabeSettings::refreshTables, [this](QVariantMap tables)
     {
@@ -107,7 +110,7 @@ void Babe::trackPlaylist(const QStringList &urls, const QString &playlist)
         data << map;
     }
 
-    debug("Adding "+QString::number(urls.size())+" tracks to playlist : "+playlist);
+    bDebug::Instance()->msg("Adding "+QString::number(urls.size())+" tracks to playlist : "+playlist);
     this->thread->start(BAE::TABLEMAP[TABLE::TRACKS_PLAYLISTS], data);
 }
 
@@ -179,7 +182,7 @@ QString Babe::albumArt(const QString &album, const QString &artist)
 void Babe::fetchTrackLyrics(DB &song)
 {
     Pulpo pulpo;
-    pulpo.registerServices({SERVICES::LyricWikia, SERVICES::Genius});
+    pulpo.registerServices({SERVICES::LyricWikia});
     pulpo.setOntology(PULPO::ONTOLOGY::TRACK);
     pulpo.setInfo(PULPO::INFO::LYRICS);
 
@@ -190,7 +193,7 @@ void Babe::fetchTrackLyrics(DB &song)
             auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
 
             lyricsTrack(track, lyrics);
-            debug("Downloaded the lyrics for "+song[KEY::TITLE]+" "+song[KEY::ARTIST]);
+            bDebug::Instance()->msg("Downloaded the lyrics for "+song[KEY::TITLE]+" "+song[KEY::ARTIST]);
             emit this->trackLyricsReady(lyrics, song[KEY::URL]);
         }
     });
@@ -499,8 +502,7 @@ QString Babe::homeDir()
 #if defined(Q_OS_ANDROID)
     QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
     QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-//    debug("HOMEDIR FROM ADNROID"+ mediaPath.toString());
-
+//    bDebug::Instance()->msg("HOMEDIR FROM ADNROID"+ mediaPath.toString());
 
     if(BAE::fileExists("/mnt/extSdCard"))
         return "/mnt/sdcard";
@@ -532,7 +534,7 @@ QString Babe::sdDir()
     //            env->ExceptionClear();
     //    }
 
-    //    qDebug()<<"TESTED SDPATH"<<QProcessEnvironment::systemEnvironment().value("EXTERNAL_SDCARD_STORAGE",dataAbsPath);
+    //    qbDebug::Instance()->msg()<<"TESTED SDPATH"<<QProcessEnvironment::systemEnvironment().value("EXTERNAL_SDCARD_STORAGE",dataAbsPath);
     if(BAE::fileExists("/mnt/extSdCard"))
         return "/mnt/extSdCard";
     else if(BAE::fileExists("/mnt/ext_sdcard"))
@@ -551,7 +553,7 @@ QVariantList Babe::getDirs(const QString &pathUrl)
     if(path.startsWith("file://"))
         path.replace("file://", "");
 
-    //debug("Get directories for path: "+path);
+    bDebug::Instance()->msg("Get directories for path: "+path);
     QVariantList paths;
 
     if (QFileInfo(path).isDir())
@@ -688,7 +690,6 @@ QVariantList Babe::searchFor(const QStringList &queries)
 void Babe::debug(const QString &msg)
 {
     emit this->message(msg);
-    qDebug()<<msg;
 }
 
 
