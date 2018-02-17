@@ -29,18 +29,26 @@ void Player::play()
     if(!updater->isActive())
         this->updater->start(250);
 
-    this->player->play();
+    if(this->player->isAvailable())
+        this->player->play();
 }
 
 void Player::pause()
 {
-    this->player->pause();
+    if(this->player->isAvailable())
+        this->player->pause();
 }
 
 void Player::stop()
 {
-    this->player->stop();
-    this->updater->stop();
+    if(this->player->isAvailable())
+    {
+        this->player->stop();
+        this->sourceurl = QString();
+        this->player->setMedia(QMediaContent());
+    }
+
+    //    this->updater->stop();
 }
 
 void Player::seek(const int &pos)
@@ -66,12 +74,14 @@ QString Player::transformTime(const int &pos)
     return time;
 }
 
-
-
 void Player::update()
 {
-    emit this->pos(static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000));
-    emit this->timing(BAE::transformTime(player->position()/1000));
+    if(this->player->isAvailable())
+    {
+        emit this->pos(static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000));
+        emit this->timing(BAE::transformTime(player->position()/1000));
+    }
+
     emit this->isPlaying(this->player->state() == QMediaPlayer::PlayingState ? true : false);
     if(this->player->state() == QMediaPlayer::StoppedState)
         emit this->finished();

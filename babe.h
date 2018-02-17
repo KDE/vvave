@@ -10,6 +10,7 @@
 class Notify;
 #endif
 
+class BabeConsole;
 class CollectionDB;
 class Pulpo;
 class BabeSettings;
@@ -109,6 +110,8 @@ public:
     Q_INVOKABLE QString loadCover(const QString &url);
     Q_INVOKABLE QVariantList searchFor(const QStringList &queries);
 
+    void debug(const QString &msg);
+
 private:
     BabeSettings *settings;
     ConThread *thread;
@@ -127,9 +130,7 @@ signals:
     void trackLyricsReady(QString lyrics, QString url);
     void skipTrack();
     void babeIt();
-
-    friend class CollectionDB;
-
+    void message(QString msg);
 };
 
 #endif // BABE_H

@@ -52,124 +52,189 @@ ToolBar
     RowLayout
     {
         anchors.fill: parent
-        BabeButton
+
+        Item
         {
-            id: settingsView
-            Layout.leftMargin: isMobile ? 0 : contentMargins
             Layout.alignment: Qt.AlignLeft
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
 
-            iconName: "application-menu"
-            iconColor: settingsDrawer.visible ? babeColor : textColor/*(pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor*/
-            onClicked: settingsViewClicked()
+            BabeButton
+            {
+                id: settingsView
 
-            hoverEnabled: !isMobile
-            ToolTip.delay: 1000
-            ToolTip.timeout: 5000
-            ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Settings")
+                anchors.centerIn: parent
+                anchors.left: parent.left
+                iconName: "application-menu"
+                iconColor: settingsDrawer.visible ? babeColor : textColor/*(pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor*/
+                onClicked: settingsViewClicked()
+
+                hoverEnabled: !isMobile
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Settings")
+            }
         }
 
         Item
         {
             Layout.fillWidth: true
+            Layout.fillHeight: true
         }
 
 
-        BabeButton
+        Item
         {
-            iconName: "love"
-            iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
 
-            onClicked: babeViewClicked()
+            BabeButton
+            {
+                anchors.centerIn: parent
 
-            hoverEnabled: !isMobile
-            ToolTip.delay: 1000
-            ToolTip.timeout: 5000
-            ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Babe")
+                iconName: "love"
+                iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
+
+                onClicked: babeViewClicked()
+
+                hoverEnabled: !isMobile
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Babe")
+            }
         }
 
-
-        BabeButton
+        Item
         {
-            id: tracksView
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
 
-            iconName: /*"musicnote"*/ "filename-filetype-amarok"
-            iconColor:  accent && currentIndex === viewsIndex.tracks ? accentColor : textColor
-            onClicked: tracksViewClicked()
+            BabeButton
+            {
+                id: tracksView
+                anchors.centerIn: parent
 
-            hoverEnabled: true
-            ToolTip.delay: 1000
-            ToolTip.timeout: 5000
-            ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Tracks")
+                iconName: /*"musicnote"*/ "filename-filetype-amarok"
+                iconColor:  accent && currentIndex === viewsIndex.tracks ? accentColor : textColor
+                onClicked: tracksViewClicked()
+
+                hoverEnabled: true
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Tracks")
+            }
         }
 
-        BabeButton
+        Item
         {
-            id: albumsView
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
 
-            iconName: /*"album" */ "media-album-cover"
-            iconColor:  accent && currentIndex === viewsIndex.albums ? accentColor : textColor
-            onClicked: albumsViewClicked()
+            BabeButton
+            {
+                id: albumsView
+                anchors.centerIn: parent
 
-            hoverEnabled: true
-            ToolTip.delay: 1000
-            ToolTip.timeout: 5000
-            ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Albums")
+                iconName: /*"album" */ "media-album-cover"
+                iconColor:  accent && currentIndex === viewsIndex.albums ? accentColor : textColor
+                onClicked: albumsViewClicked()
+
+                hoverEnabled: true
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Albums")
+            }
         }
 
-        BabeButton
+        Item
         {
-            id: artistsView
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
 
-            iconName: /*"artist" */  "view-media-artist"
-            iconColor:  accent && currentIndex === viewsIndex.artists ? accentColor : textColor
+            BabeButton
+            {
+                id: artistsView
+                anchors.centerIn: parent
 
-            onClicked: artistsViewClicked()
-            hoverEnabled: true
-            ToolTip.delay: 1000
-            ToolTip.timeout: 5000
-            ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Artists")
+                iconName: /*"artist" */  "view-media-artist"
+                iconColor:  accent && currentIndex === viewsIndex.artists ? accentColor : textColor
+
+                onClicked: artistsViewClicked()
+                hoverEnabled: true
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Artists")
+            }
         }
 
-        BabeButton
+        Item
         {
-            id: playlistsView
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
 
-            iconName: /*"library-music"*/ "view-media-playlist"
-            iconColor:  accent && currentIndex === viewsIndex.playlists ? accentColor : textColor
+            BabeButton
+            {
+                id: playlistsView
+                anchors.centerIn: parent
 
-            onClicked: playlistsViewClicked()
+                iconName: /*"library-music"*/ "view-media-playlist"
+                iconColor:  accent && currentIndex === viewsIndex.playlists ? accentColor : textColor
 
-            hoverEnabled: !isMobile
-            ToolTip.delay: 1000
-            ToolTip.timeout: 5000
-            ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Playlists")
+                onClicked: playlistsViewClicked()
+
+                hoverEnabled: !isMobile
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Playlists")
+            }
         }
 
         Item
         {
             Layout.fillWidth: true
+            Layout.fillHeight: true
         }
 
-        BabeButton
+        Item
         {
-            id: searchView
-            Layout.rightMargin: isMobile ? 0 : contentMargins
             Layout.alignment: Qt.AlignRight
-            //                visible: !(searchInput.focus || searchInput.text)
-            iconColor: accent && currentIndex === viewsIndex.search ? accentColor : textColor
-            iconName: "edit-find" //"search"
-            onClicked: searchViewClicked()
-            hoverEnabled: !isMobile
-            ToolTip.delay: 1000
-            ToolTip.timeout: 5000
-            ToolTip.visible: hovered && !isMobile
-            ToolTip.text: qsTr("Search")
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
+
+            BabeButton
+            {
+                id: searchView
+                anchors.centerIn: parent
+                //                visible: !(searchInput.focus || searchInput.text)
+                iconColor: accent && currentIndex === viewsIndex.search ? accentColor : textColor
+                iconName: "edit-find" //"search"
+                onClicked: searchViewClicked()
+                hoverEnabled: !isMobile
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Search")
+            }
         }
 
     }

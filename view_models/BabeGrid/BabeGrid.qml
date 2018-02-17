@@ -8,7 +8,7 @@ Pane
     padding: 20
 
 //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
-    property int hintSize : Math.sqrt(root.width*root.height)*0.25
+    property int hintSize : Math.sqrt(root.width*root.height)*0.3
     property int albumCoverSize: hintSize > 150 ? 150 : hintSize
 
 //    property int albumSize:

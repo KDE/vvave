@@ -66,7 +66,8 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? coverSize : 0
             Layout.maximumHeight: 300
-            visible:  !root.mainlistEmpty
+            visible:  !mainlistEmpty
+
             Rectangle
             {
                 visible: cover.visible
@@ -381,7 +382,6 @@ Item
                 root.maximumHeight = mainPlaylistItem.y + footer.height
                 root.minimumHeight = mainPlaylistItem.y + footer.height
                 root.header.visible = false
-                infoBtn.visible = false
                 //                root.footer.visible = false
                 //                mainlistContext.visible = false
 
@@ -396,7 +396,6 @@ Item
                 root.width = columnWidth
                 root.height = 700
                 root.header.visible = true
-                infoBtn.visible = true
                 //                root.footer.visible = true
                 //                mainlistContext.visible = true
             }

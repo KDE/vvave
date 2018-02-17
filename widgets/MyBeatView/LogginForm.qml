@@ -9,7 +9,7 @@ import "../../view_models"
 BabePopup
 {
     id: loginPopup
-    padding: contentMargins
+    padding: contentMargins*3
     maxHeight: loginLayout.implicitHeight+64
     maxWidth: loginLayout.implicitWidth+64
     //    closePolicy: Popup.NoAutoClose

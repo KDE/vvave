@@ -69,5 +69,7 @@
         <file>view_models/BabeNotify.qml</file>
         <file>widgets/MyBeatView/BabeitView.qml</file>
         <file>widgets/PlaybackBar.qml</file>
+        <file>assets/banner-yellow.png</file>
+        <file>widgets/SettingsView/BabeConsole.qml</file>
     </qresource>
 </RCC>

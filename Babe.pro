@@ -206,7 +206,8 @@ SOURCES += main.cpp \
     settings/BabeSettings.cpp \
     java/notificationclient.cpp \
     db/conthread.cpp \
-    services/web/babeit.cpp
+    services/web/babeit.cpp \
+    utils/babeconsole.cpp
 
 
 
@@ -366,7 +367,8 @@ HEADERS += \
     settings/BabeSettings.h \
     java/notificationclient.h \
     db/conthread.h \
-    services/web/babeit.h
+    services/web/babeit.h \
+    utils/babeconsole.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

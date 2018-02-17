@@ -145,7 +145,6 @@ BabeGrid
                 }
             }
         }
-
     }
 
     onAlbumCoverClicked:

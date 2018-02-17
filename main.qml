@@ -76,17 +76,17 @@ Kirigami.ApplicationWindow
     readonly property string lightAltColor : "#eeeeee"
     readonly property string lightShadowColor : "#868686"
 
-    readonly property string darkBackgroundColor : "#333"
+    readonly property string darkBackgroundColor : "#303030"
     readonly property string darkForegroundColor : "#FAFAFA"
     readonly property string darkTextColor : darkForegroundColor
     readonly property string darkBabeHighlightColor : "#29B6F6"
     readonly property string darkHighlightTextColor : darkForegroundColor
-    readonly property string darkMidColor : "#424242"
-    readonly property string darkMidLightColor : "#616161"
-    readonly property string darkDarkColor : "#212121"
+    readonly property string darkMidColor : "#1d1d1d"
+    readonly property string darkMidLightColor : "#282828"
+    readonly property string darkDarkColor : "#191919"
     readonly property string darkBaseColor : "#212121"
-    readonly property string darkAltColor : "#424242"
-    readonly property string darkShadowColor : "#424242"
+    readonly property string darkAltColor : darkDarkColor
+    readonly property string darkShadowColor : darkAltColor
 
     Material.theme: Material.Light
     Material.accent: babeColor
@@ -571,7 +571,7 @@ Kirigami.ApplicationWindow
     Item
     {
         id: message
-        visible: infoMsg.length > 0
+        visible: infoMsg.length > 0 && sync
         anchors.bottom: parent.bottom
         width: pageStack.wideMode ? columnWidth : parent.width
         height: toolBarIconSize
@@ -651,8 +651,6 @@ Kirigami.ApplicationWindow
         id: mainPlaylist
         anchors.fill: parent
         clip: true
-
-
 
         Connections
         {

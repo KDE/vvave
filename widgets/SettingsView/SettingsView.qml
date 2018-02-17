@@ -41,6 +41,11 @@ Kirigami.GlobalDrawer
         id: sourcesDialog
     }
 
+    BabeConsole
+    {
+        id: babeConsole
+    }
+
     bannerImageSource: "qrc:/assets/banner.svg"
 
     actions: [
@@ -58,7 +63,7 @@ Kirigami.GlobalDrawer
             Kirigami.Action
             {
                 id: brainzToggle
-                text: checked ? "ON" : "OFF"
+                text: checked ? "Turn OFF" : "Turn ON"
                 checked: activeBrainz
                 checkable: true
                 onToggled:
@@ -151,6 +156,22 @@ Kirigami.GlobalDrawer
 
                     }
                 }
+            }
+        },
+
+        Kirigami.Action
+        {
+            text: "Developer"
+
+            Kirigami.Action
+            {
+                text: "Wiki"
+            }
+
+            Kirigami.Action
+            {
+                text: "Console log"
+                onTriggered: babeConsole.open()
             }
         },
 
