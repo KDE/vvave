@@ -271,6 +271,7 @@ QVariant Babe::loadSetting(const QString &key, const QString &group, const QVari
 
 void Babe::saveSetting(const QString &key, const QVariant &value, const QString &group)
 {
+    bDebug::Instance()->msg("Setting saved: "+ key+" "+value.toString()+" "+group);
     BAE::saveSettings(key, value, group);
 }
 
@@ -627,9 +628,10 @@ QVariantList Babe::searchFor(const QStringList &queries)
 {
     QVariantList mapList;
     bool hasKey = false;
-
     for(auto searchQuery : queries)
     {
+        searchQuery = searchQuery.toLower();
+
         if(searchQuery.contains(BAE::SearchTMap[BAE::SearchT::LIKE]+":") || searchQuery.startsWith("#"))
         {
             if(searchQuery.startsWith("#"))
@@ -677,7 +679,7 @@ QVariantList Babe::searchFor(const QStringList &queries)
                     mapList += getSearchedTracks(key, searchQuery);
                 else
                 {
-                    auto queryTxt = QString("SELECT t.*, al.artwork FROM tracks t INNER JOIN albums al ON t.album = al.album AND t.artist = al.artist WHERE t.title LIKE \"%"+searchQuery+"%\" OR t.artist LIKE \"%"+searchQuery+"%\" OR t.album LIKE \"%"+searchQuery+"%\"OR t.genre LIKE \"%"+searchQuery+"%\"OR t.url LIKE \"%"+searchQuery+"%\" LIMIT 1000");
+                    auto queryTxt = QString("SELECT t.*, al.artwork FROM tracks t INNER JOIN albums al ON t.album = al.album AND t.artist = al.artist WHERE t.title LIKE \"%"+searchQuery+"%\" OR t.artist LIKE \"%"+searchQuery+"%\" OR t.album LIKE \"%"+searchQuery+"%\"OR t.genre LIKE \"%"+searchQuery+"%\"OR t.url LIKE \"%"+searchQuery+"%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000");
                     mapList += getDBDataQML(queryTxt);
                 }
             }

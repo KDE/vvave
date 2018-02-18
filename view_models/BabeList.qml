@@ -33,6 +33,12 @@ Item
 
     focus: true
 
+    function clearTable()
+    {
+        list.model.clear()
+    }
+
+
     ColumnLayout
     {
         anchors.fill: parent
@@ -160,11 +166,6 @@ Item
             addDisplaced: Transition
             {
                 NumberAnimation { properties: "x,y"; duration: 100 }
-            }
-
-            function clearTable()
-            {
-                listModel.clear()
             }
 
             BabeHolder

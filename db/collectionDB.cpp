@@ -20,6 +20,7 @@
 #include <QUuid>
 #include <QString>
 #include <QStringList>
+#include "../../utils/babeconsole.h"
 
 using namespace BAE;
 
@@ -208,7 +209,7 @@ void CollectionDB::openDB(const QString &name)
     }
 
     if (!this->m_db.isOpen())
-    {        
+    {
         if(!this->m_db.open())
             qDebug()<<"ERROR OPENING DB"<<this->m_db.lastError().text()<<m_db.connectionName();
         else
@@ -567,7 +568,7 @@ QVariantList CollectionDB::getDBDataQML(const QString &queryTxt)
             mapList<< data;
         }
 
-    }else qDebug()<< query.lastError()<< query.lastQuery();
+    }else bDebug::Instance()->msg(query.lastError().text()+" "+query.lastQuery());
 
     return mapList;
 }
@@ -655,12 +656,14 @@ QVariantList CollectionDB::getSearchedTracks(const KEY &where, const QString &se
                 KEYMAP[KEY::ARTIST],
                 TABLEMAP[TABLE::ARTISTS_TAGS]);
 
+    else if(where == KEY::SQL)
+        queryTxt = search;
     else
-        queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 LIKE \"%%3%\"").arg(TABLEMAP[TABLE::TRACKS],
+        queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 LIKE \"%%3%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000").arg(TABLEMAP[TABLE::TRACKS],
                 KEYMAP[where],
                 search);
 
-    qDebug()<<"SEARCH QUERY:"<<queryTxt;
+    bDebug::Instance()->msg("SEARCH QUERY: " + queryTxt);
 
     return this->getDBDataQML(queryTxt);
 

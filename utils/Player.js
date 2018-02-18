@@ -184,7 +184,7 @@ function savePlaylist()
 
 function clearOutPlaylist()
 {
-    root.mainPlaylist.list.clearTable()
+    mainPlaylist.tabe.clearTable()
     stop()
 }
 
@@ -206,11 +206,11 @@ function playAll(tracks)
 {
     if(tracks)
     {
-        root.sync = false
-        root.syncPlaylist = ""
-        root.infoMsg = ""
+        sync = false
+        syncPlaylist = ""
+        infoMsg = ""
 
-        root.mainPlaylist.list.clearTable()
+        mainPlaylist.table.clearTable()
         root.pageStack.currentIndex = 0
 
         for(var i in tracks)
@@ -219,7 +219,7 @@ function playAll(tracks)
         //    root.mainPlaylist.list.currentIndex = 0
         //    playTrack(root.mainPlaylist.list.model.get(0))
 
-        root.mainPlaylist.list.positionViewAtBeginning()
+        mainPlaylist.list.positionViewAtBeginning()
         playAt(0)
     }
 

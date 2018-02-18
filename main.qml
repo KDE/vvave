@@ -13,6 +13,7 @@ import "widgets/MyBeatView"
 import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
+import "widgets/SearchView"
 
 import "view_models"
 import "view_models/BabeDialog"
@@ -220,7 +221,7 @@ Kirigami.ApplicationWindow
         onRefreshTables:
         {
             console.log("Clearing tables")
-            tracksView.list.clearTable()
+            tracksView.clearTable()
             albumsView.clearGrid()
             artistsView.clearGrid()
 
@@ -231,9 +232,8 @@ Kirigami.ApplicationWindow
 
         onTrackLyricsReady:
         {
-                        console.log("TRACKS READY SIGNAL2")
-            //            if(url === currentTrack.url)
-                            Player.setLyrics(lyrics)
+            if(url === currentTrack.url)
+                Player.setLyrics(lyrics)
         }
 
         onSkipTrack: Player.nextTrack()
@@ -535,6 +535,7 @@ Kirigami.ApplicationWindow
 
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
+
                     onPressAndHold: Player.playAt(Player.shuffle())
                 }
 

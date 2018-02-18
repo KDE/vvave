@@ -153,7 +153,7 @@ Kirigami.PageRow
     function populate(query)
     {
         playlistQuery = query
-        filterList.list.clearTable()
+        filterList.clearTable()
 
         var tracks = bae.get(query)
 

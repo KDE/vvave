@@ -14,7 +14,6 @@
         <file>assets/face.png</file>
         <file>view_models/BabeHolder.qml</file>
         <file>db/Queries.js</file>
-        <file>widgets/SearchTable.qml</file>
         <file>utils/Help.js</file>
         <file>assets/Babe.notifyrc</file>
         <file>utils/BabeIcon.qml</file>
@@ -71,5 +70,7 @@
         <file>widgets/PlaybackBar.qml</file>
         <file>assets/banner-yellow.png</file>
         <file>widgets/SettingsView/BabeConsole.qml</file>
+        <file>widgets/SearchView/SearchTable.qml</file>
+        <file>widgets/SearchView/SearchSuggestions.qml</file>
     </qresource>
 </RCC>

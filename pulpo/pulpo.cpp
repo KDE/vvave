@@ -83,7 +83,6 @@ bool Pulpo::initServices()
 
                 }else qDebug()<<"error settingUp lastfm service";
 
-
                 break;
             }
 

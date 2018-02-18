@@ -156,7 +156,7 @@ BabeGrid
     {
         drawerList.headerBarTitle = album
         drawer.open()
-        list.clearTable()
+        table.clearTable()
 
         var query = Q.GET.albumTracks_.arg(album)
         query = query.arg(artist)

@@ -168,7 +168,8 @@ enum class KEY :uint8_t
     RETRIEVAL_DATE = 22,
     COMMENT = 23,
     ID = 24,
-    NONE = 25
+    SQL = 25,
+    NONE = 26
 };
 
 typedef QMap<BAE::KEY, QString> DB;
@@ -200,7 +201,8 @@ static const DB KEYMAP =
     {KEY::CONTEXT, "context"},
     {KEY::RETRIEVAL_DATE, "retrieval_date"},
     {KEY::ID, "id"},
-    {KEY::COMMENT, "comment"}
+    {KEY::COMMENT, "comment"},
+    {KEY::SQL, "sql"}
 };
 
 static const DB TracksColsMap =

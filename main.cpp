@@ -7,7 +7,7 @@
 #include "services/local/player.h"
 #include <QLibrary>
 #include <QQuickStyle>
-
+#include <QStyleHints>
 #ifdef Q_OS_ANDROID
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
 //#include "java/notificationclient.h"
@@ -26,6 +26,12 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon("qrc:/assets/babe.png"));
     app.setDesktopFileName(BAE::App);
 
+    /*needed for mobile*/
+    if(BAE::isMobile())
+    {
+        int pressAndHoldInterval = 1000; // in [ms]
+        QGuiApplication::styleHints()->setMousePressAndHoldInterval(pressAndHoldInterval);
+    }
 
     QCommandLineParser parser;
     parser.setApplicationDescription("Babe music player");

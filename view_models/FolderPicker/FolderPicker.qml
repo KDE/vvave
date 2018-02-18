@@ -88,7 +88,7 @@ BabePopup
 
     function load(folderUrl)
     {
-        dirList.list.clearTable()
+        dirList.clearTable()
         var dirs = bae.getDirs(folderUrl)
         for(var path in dirs)
             dirList.model.append(dirs[path])

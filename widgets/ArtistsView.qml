@@ -151,7 +151,7 @@ BabeGrid
     {
         drawerList.headerBarTitle = artist
         drawer.open()
-        list.clearTable()
+        table.clearTable()
         var query = Q.GET.artistTracks_.arg(artist)
         var map = bae.get(query)
 

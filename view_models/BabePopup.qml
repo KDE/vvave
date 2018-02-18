@@ -34,12 +34,12 @@ Popup
 
     enter: Transition
     {
-        NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
+        NumberAnimation { property: "opacity"; from: 0.0; to: 1.0;  duration: 150 }
     }
 
     exit: Transition
     {
-        NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
+        NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 150 }
     }
 
     Material.accent: babeColor
