@@ -659,7 +659,7 @@ QVariantList CollectionDB::getSearchedTracks(const KEY &where, const QString &se
     else if(where == KEY::SQL)
         queryTxt = search;
     else
-        queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 LIKE \"%%3%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000").arg(TABLEMAP[TABLE::TRACKS],
+        queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE t.%2 LIKE \"%%3%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000").arg(TABLEMAP[TABLE::TRACKS],
                 KEYMAP[where],
                 search);
 

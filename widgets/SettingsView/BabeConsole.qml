@@ -9,6 +9,7 @@ import "../../view_models"
 BabePopup
 {
 
+    id: babeConsoleRoot
     closePolicy: Popup.NoAutoClose
     modal: false
 
@@ -20,42 +21,57 @@ BabePopup
 
     background: Rectangle
     {
-         color: darkDarkColor
-         border.color: "#111"
+        color: darkDarkColor
+        border.color: "#111"
     }
 
 
     ColumnLayout
     {
+        id: consoleLayout
         anchors.fill: parent
         spacing: 0
 
         BabeButton
         {
             Layout.alignment: Qt.AlignLeft
-            Layout.margins: contentMargins
-
+            Layout.leftMargin:  contentMargins
+            iconColor: darkForegroundColor
             anim : true
             iconName : "dialog-close"
             onClicked : close()
         }
 
-        TextArea
+        ScrollView
         {
-            id: consoletext
-            Layout.fillHeight: true
             Layout.fillWidth: true
-            readOnly: true
-            font.pointSize: fontSizes.small
-            background: Rectangle
+            Layout.fillHeight: true
+            Layout.margins: contentMargins
+
+            clip: true
+            contentWidth: babeConsoleRoot.width
+            contentHeight: consoletext.height
+
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
+            TextArea
             {
-                color: darkDarkColor
-                implicitWidth: 200
-                implicitHeight: 40
+                id: consoletext
+                width: babeConsoleRoot.width
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                readOnly: true
+                font.pointSize: fontSizes.small
+                wrapMode: TextEdit.WordWrap
+                background: Rectangle
+                {
+                    color: darkDarkColor
+                    implicitWidth: 200
+                    implicitHeight: 40
+                }
+
+                color: darkForegroundColor
             }
-
-            color: darkForegroundColor
-
         }
     }
 

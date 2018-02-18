@@ -17,13 +17,12 @@ Page
 
     Rectangle
     {
-        visible: logginDialog.visible && !isMobile
-        anchors.fill: parent
-        z: -999
+        visible: logginDialog.visible
+        width: parent.width
+        height: parent.height
+        z: 999
         color: darkColor
         opacity: 0.5
-        height: root.height - playbackControls.height - toolbar.height
-        y: toolbar.height
     }
 
     ColumnLayout

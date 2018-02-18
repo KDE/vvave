@@ -50,7 +50,7 @@ Item
             height:  visible ?  toolBarHeight : 0
             Layout.fillWidth: true
             visible: headerBarVisible
-
+            focus: true
             Rectangle
             {
                 anchors.fill: parent
@@ -127,7 +127,6 @@ Item
             id: babeList
             Layout.fillHeight: true
             Layout.fillWidth: true
-
             clip: true
 
             highlight: Rectangle
@@ -173,6 +172,7 @@ Item
                 id: holder
                 visible: babeList.count === 0
                 color : textColor
+                focus: true
             }
 
             Rectangle

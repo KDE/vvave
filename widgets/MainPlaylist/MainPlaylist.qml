@@ -31,7 +31,7 @@ Item
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
-
+    focus: true
 
     PlaylistMenu
     {
@@ -241,6 +241,7 @@ Item
             Layout.fillWidth: true
             Layout.fillHeight: true
             anchors.top: mainlistContext.bottom
+            focus: true
             //            anchors.bottom: mainPlaylistRoot.searchBox
             StackView
             {
@@ -353,7 +354,9 @@ Item
                                 Player.appendTrack(tracks[pos])
 
                         }
-                        Player.playAt(0)
+
+                        if(autoplay)
+                            Player.playAt(0)
 
                         //                                    var pos = bae.lastPlaylistPos()
                         //                                    console.log("POSSS:", pos)

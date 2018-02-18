@@ -630,8 +630,6 @@ QVariantList Babe::searchFor(const QStringList &queries)
     bool hasKey = false;
     for(auto searchQuery : queries)
     {
-        searchQuery = searchQuery.toLower();
-
         if(searchQuery.contains(BAE::SearchTMap[BAE::SearchT::LIKE]+":") || searchQuery.startsWith("#"))
         {
             if(searchQuery.startsWith("#"))

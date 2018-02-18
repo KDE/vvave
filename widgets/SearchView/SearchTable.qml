@@ -15,24 +15,24 @@ Item
     property var searchRes : []
     property var savedQueries : []
 
-    function runSearch()
+    function runSearch(searchTxt)
     {
-        if(searchInput.text)
-            if(searchInput.text !== searchTable.headerBarTitle)
+        if(searchTxt)
+            if(searchTxt !== searchTable.headerBarTitle)
             {
-                suggestionsPopup.close()
-                if(savedQueries.indexOf(searchInput.text) < 0)
+                if(savedQueries.indexOf(searchTxt) < 0)
                 {
-                    savedQueries.unshift(searchInput.text)
-//                    suggestionsPopup.model.insert(0, {suggestion: searchInput.text})
+                    savedQueries.unshift(searchTxt)
+                    //                    suggestionsPopup.model.insert(0, {suggestion: searchInput.text})
                     bae.saveSetting("QUERIES", savedQueries.join(","), "BABE")
                 }
 
-                var query = searchInput.text
-                searchTable.headerBarTitle = '"'+query+"'"
-                var queries = query.split(",")
+                searchTable.headerBarTitle = searchTxt
+                var queries = searchTxt.split(",")
                 searchRes = bae.searchFor(queries)
                 populate(searchView.searchRes)
+                searchTable.forceActiveFocus()
+                suggestionsPopup.close()
             }
     }
 
@@ -66,6 +66,17 @@ Item
 
     Rectangle
     {
+        visible: suggestionsPopup.visible
+        width: parent.width
+        height: parent.height-searchBox.height
+
+        color: darkDarkColor
+        z: 999
+        opacity: 0.5
+    }
+
+    Rectangle
+    {
         anchors.fill: parent
         color: altColor
         z: -999
@@ -81,12 +92,13 @@ Item
             Layout.fillWidth: true
             trackNumberVisible: false
             headerBarVisible: true
-            headerBarExit: false
+            headerBarExit: true
+            headerBarExitIcon: "edit-clear"
             holder.message: "No search results!"
             coverArtVisible: true
             trackDuration: true
             trackRating: true
-
+            onExit: clearSearch()
         }
 
         Rectangle
@@ -121,7 +133,7 @@ Item
                     Layout.leftMargin: contentMargins
                     visible: true
                     iconName: "view-filter"
-                    onClicked: {}
+                    onClicked: suggestionsPopup.visible ? suggestionsPopup.close() : suggestionsPopup.open()
                 }
 
                 TextInput
@@ -135,18 +147,20 @@ Item
                     selectByMouse: !root.isMobile
                     selectionColor: babeHighlightColor
                     selectedTextColor: foregroundColor
-                    //focus: true
+                    focus: true
+                    text: ""
+                    wrapMode: TextEdit.Wrap
                     //activeFocusOnPress: true
-                    onAccepted: runSearch()
-
-                    onTextChanged:  if(searchInput.text.length>0) suggestionsPopup.open()
+                    onAccepted: runSearch(searchInput.text)
+//                    onActiveFocusChanged: activeFocus ? suggestionsPopup.open() : suggestionsPopup.close()
+                    onTextEdited: if(suggestionsPopup.visible) suggestionsPopup.updateSuggestions()
                 }
 
                 BabeButton
                 {
                     Layout.rightMargin: contentMargins
                     iconName: "edit-clear"
-                    onClicked: clearSearch()
+                    onClicked: searchInput.clear()
                 }
             }
         }

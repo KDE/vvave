@@ -44,11 +44,12 @@ Kirigami.ApplicationWindow
     property var currentTrack : ({babe: "0", stars: "0"})
     property int currentTrackIndex : 0
     property int prevTrackIndex : 0
-    property string currentArtwork
+    property string currentArtwork : mainPlaylist.table.count > 0 ? mainPlaylist.list.model.get(0).artwork : ""
     property bool currentBabe : currentTrack.babe == "0" ? false : true
     property string durationTimeLabel : "00:00"
     property string progressTimeLabel : "00:00"
     property bool isPlaying : false
+    property bool autoplay : bae.loadSetting("AUTOPLAY", "BABE", false) === "true" ? true : false
 
     /*THEMING*/
     property string babeColor : bae.babeColor()
@@ -324,7 +325,7 @@ Kirigami.ApplicationWindow
                     target: footerBg
                     property: "color"
                     easing.type: Easing.InOutQuad
-                    from: darkMidColor
+                    from: darkBaseColor
                     to: darkDarkColor
                     duration: 500
                 }

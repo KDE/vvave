@@ -8,6 +8,8 @@ Popup
     property int maxWidth : ApplicationWindow.overlay.width
     property int maxHeight : ApplicationWindow.overlay.height
 
+    parent: ApplicationWindow.overlay
+
     width: parent ===  ApplicationWindow.overlay ? (root.pageStack.wideMode ?  parent.width * 0.4 :
                                                                               (isMobile ? parent.width * 0.8 :
                                                                                           parent.width * 0.7)) :
@@ -19,18 +21,17 @@ Popup
                                                     parent.height * 0.7 > maxHeight ? maxHeight :
                                                                                       parent.height * 0.7
 
-    padding: 0
-    margins: 0
 
     x: parent.width / 2 - width / 2
     y: parent.height / 2 - height / 2
-
-    parent: ApplicationWindow.overlay
     z: 999
 
     modal: true
     focus: true
     clip: true
+
+    padding: 0
+    margins: 0
 
     enter: Transition
     {

@@ -12,7 +12,7 @@ BabePopup
     padding: contentMargins*3
     maxHeight: loginLayout.implicitHeight+64
     maxWidth: loginLayout.implicitWidth+64
-//    modal: false
+    modal: false
 //    closePolicy: Popup.NoAutoClose
 
     ScrollView

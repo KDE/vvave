@@ -157,6 +157,19 @@ Kirigami.GlobalDrawer
                     }
                 }
             }
+
+            Kirigami.Action
+            {
+                text: "Autoplay"
+                checked: autoplay
+                checkable: true
+                onToggled:
+                {
+                    autoplay = checked
+                    bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
+                }
+
+            }
         },
 
         Kirigami.Action

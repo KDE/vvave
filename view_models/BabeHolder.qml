@@ -9,7 +9,7 @@ Item
     property string message
     clip: true
     property color color : foregroundColor
-
+    focus: true
     anchors.fill: parent
 
     GridLayout
