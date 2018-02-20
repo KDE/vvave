@@ -15,6 +15,8 @@ Item
     property var searchRes : []
     property var savedQueries : []
 
+    property bool autoSuggestions : true
+
     function runSearch(searchTxt)
     {
         if(searchTxt)
@@ -65,7 +67,7 @@ Item
     }
 
     Rectangle
-    {
+    {        
         visible: suggestionsPopup.visible
         width: parent.width
         height: parent.height-searchBox.height
@@ -85,6 +87,9 @@ Item
     ColumnLayout
     {
         anchors.fill: parent
+        width: parent.width
+        height: parent.height
+
         BabeTable
         {
             id: searchTable
@@ -133,7 +138,13 @@ Item
                     Layout.leftMargin: contentMargins
                     visible: true
                     iconName: "view-filter"
-                    onClicked: suggestionsPopup.visible ? suggestionsPopup.close() : suggestionsPopup.open()
+                    iconColor: autoSuggestions ? babeColor : foregroundColor
+                    onClicked:
+                    {
+                        autoSuggestions = !autoSuggestions
+                        if(!autoSuggestions)
+                            suggestionsPopup.close()
+                    }
                 }
 
                 TextInput
@@ -152,7 +163,7 @@ Item
                     wrapMode: TextEdit.Wrap
                     //activeFocusOnPress: true
                     onAccepted: runSearch(searchInput.text)
-//                    onActiveFocusChanged: activeFocus ? suggestionsPopup.open() : suggestionsPopup.close()
+                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
                     onTextEdited: if(suggestionsPopup.visible) suggestionsPopup.updateSuggestions()
                 }
 

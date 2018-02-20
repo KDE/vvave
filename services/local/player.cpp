@@ -9,7 +9,6 @@ Player::Player(QObject *parent) : QObject(parent)
         emit this->durationChanged(BAE::transformTime(dur/1000));
     });
 
-
     this->player->setVolume(100);
 
     this->updater = new QTimer(this);
@@ -22,15 +21,18 @@ void Player::source(const QString &url)
     this->player->setMedia(QUrl::fromLocalFile(this->sourceurl));
 }
 
-void Player::play()
+bool Player::play()
 {
-    if(sourceurl.isEmpty()) return;
+    if(sourceurl.isEmpty()) return false;
 
     if(!updater->isActive())
         this->updater->start(250);
 
     if(this->player->isAvailable())
         this->player->play();
+    else return false;
+
+    return true;
 }
 
 void Player::pause()

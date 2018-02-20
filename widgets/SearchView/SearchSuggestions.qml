@@ -52,9 +52,9 @@ BabePopup
         {
             //            var similar = bae.get('select distinct * from tracks where title LIKE "%'+searchInput.text+'%" or artist LIKE "%'+searchInput.text+'%" or album LIKE "%'+searchInput.text+'%" limit 5')
 
-            var similarArtist = bae.get('select distinct * from tracks where artist LIKE "%'+searchInput.text+'%" limit 3')
-            var similarAlbum= bae.get('select distinct * from tracks where album LIKE "%'+searchInput.text+'%" limit 3')
-            var similarTracks = bae.get('select distinct * from tracks where title LIKE "%'+searchInput.text+'%" limit 3')
+            var similarArtist = bae.get('select distinct * from tracks where artist LIKE "%'+searchInput.text+'%" limit 5')
+            var similarAlbum= bae.get('select distinct * from tracks where album LIKE "%'+searchInput.text+'%" limit 5')
+            var similarTracks = bae.get('select distinct * from tracks where title LIKE "%'+searchInput.text+'%" limit 5')
 
             var checkList = []
 

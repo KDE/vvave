@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import "../../view_models"
+import QtGraphicalEffects 1.0
 
 ItemDelegate
 {
@@ -44,12 +45,12 @@ ItemDelegate
     property string trackMood : art
     property alias trackRating : trackRating
 
-
     //    NumberAnimation on x
     //    {
     //        running: ListView.isCurrentItem
     //        from: 0; to: 100
     //    }
+
 
     Rectangle
     {
@@ -113,7 +114,7 @@ ItemDelegate
                     fillMode:  Image.PreserveAspectFit
                     cache: false
                     antialiasing: false
-                    smooth: true
+                    smooth: true                    
                 }
 
                 onDoubleClicked: artworkCoverDoubleClicked()

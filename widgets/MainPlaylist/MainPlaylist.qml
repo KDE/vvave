@@ -315,7 +315,6 @@ Item
                     onRowClicked:
                     {
                         prevTrackIndex = currentTrackIndex
-                        currentTrackIndex = currentIndex
                         Player.playAt(index)
                     }
 

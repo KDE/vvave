@@ -422,6 +422,25 @@ Kirigami.ApplicationWindow
                 Layout.rowSpan: 2
                 Layout.column: 1
 
+                Rectangle
+                {
+                    visible: miniArtwork.visible
+                    anchors.centerIn: parent
+                    height: 44
+                    width: 44
+                    color: darkForegroundColor
+                    z: -999
+                    radius: Math.min(width, height)
+                }
+
+                RotationAnimator on rotation
+                {
+                    from: 0;
+                    to: 360;
+                    duration: 5000
+                    loops: Animation.Infinite
+                    running: isPlaying
+                }
                 //                height: headerHeight
                 //                width:  miniArtwork.visible ? headerHeight : 0
 
@@ -430,10 +449,10 @@ Kirigami.ApplicationWindow
                     id: miniArtwork
                     visible: ((!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible) && !mainlistEmpty
 
-                    height: headerHeight
-                    width: headerHeight
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
+                    height: 40
+                    width: 40
+                    //                    anchors.left: parent.left
+                    anchors.centerIn: parent
                     source:
                     {
                         if(currentArtwork)
@@ -452,6 +471,26 @@ Kirigami.ApplicationWindow
                             if(!isMobile && pageStack.wideMode)
                                 root.width = columnWidth
                             pageStack.currentIndex = 0
+                        }
+                    }
+
+
+
+                    layer.enabled: true
+                    layer.effect: OpacityMask
+                    {
+                        maskSource: Item
+                        {
+                            width: miniArtwork.width
+                            height: miniArtwork.height
+                            Rectangle
+                            {
+                                anchors.centerIn: parent
+                                width: miniArtwork.adapt ? miniArtwork.width : Math.min(miniArtwork.width, miniArtwork.height)
+                                height: miniArtwork.adapt ? miniArtwork.height : width
+                                radius: Math.min(width, height)
+
+                            }
                         }
                     }
                 }
@@ -502,7 +541,6 @@ Kirigami.ApplicationWindow
                         var value = mainPlaylist.contextMenu.babeIt(currentTrackIndex)
                         currentTrack.babe = value ? "1" : "0"
                         currentBabe = value
-
                         //                        bae.runPy();
                     }
                 }
@@ -521,11 +559,11 @@ Kirigami.ApplicationWindow
                     id: playIcon
                     iconColor: darkForegroundColor
 
-                    iconName:  isPlaying ? "media-playback-pause" :  "media-playback-start"
+                    iconName: isPlaying ? "media-playback-pause" :  "media-playback-start"
                     onClicked:
                     {
-                        if(player.isPaused()) Player.resumeTrack()
-                        else Player.pauseTrack()
+                        if(isPlaying) Player.pauseTrack()
+                        else Player.resumeTrack()
                     }
                 }
 

@@ -16,6 +16,7 @@ BabeGrid
     //    albumCoverRadius: Math.min(albumCoverSize, albumCoverSize)
     property alias list : drawerList.list
     property alias table : drawerList
+    property int customHeight : (drawerList.count*rowHeight)+toolBarHeight
 
     signal rowClicked(var track)
     signal playAlbum(var tracks)
@@ -41,8 +42,6 @@ BabeGrid
 
         height:
         {
-            var customHeight = (drawerList.count*rowHeight)+toolBarHeight
-
             if(customHeight > parent.height)
                  (parent.height*0.9) - root.header.height - root.footer.height
             else

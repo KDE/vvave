@@ -12,7 +12,7 @@ public:
     explicit Player(QObject *parent = nullptr);
 
     Q_INVOKABLE void source(const QString &url);
-    Q_INVOKABLE void play();
+    Q_INVOKABLE bool play();
     Q_INVOKABLE void pause();
     Q_INVOKABLE void stop();
     Q_INVOKABLE void seek(const int &pos);

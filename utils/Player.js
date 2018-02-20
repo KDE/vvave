@@ -11,6 +11,7 @@ function playTrack(track)
         {
             player.source(currentTrack.url);
             player.play()
+
             //            root.playIcon.iconName = "media-playback-pause"
 
             var artwork = currentTrack.artwork
@@ -58,8 +59,10 @@ function pauseTrack()
 }
 
 function resumeTrack()
-{
-    player.play()
+{    
+   if(!player.play() && !mainlistEmpty)
+       playAt(0)
+
 }
 
 function nextTrack()
@@ -97,8 +100,9 @@ function playAt(index)
 {
     if(index < root.mainPlaylist.list.count)
     {
-        root.mainPlaylist.list.currentIndex = index
-        playTrack(root.mainPlaylist.list.model.get(index))
+        currentTrackIndex = index
+        mainPlaylist.list.currentIndex = index
+        playTrack(mainPlaylist.list.model.get(index))
     }
 }
 
