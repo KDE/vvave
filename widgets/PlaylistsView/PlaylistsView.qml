@@ -110,7 +110,7 @@ Kirigami.PageRow
             headerBarExit: !playlistViewRoot.wideMode
             headerBarTitle: playlistViewRoot.wideMode ? "" : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
             onExit: if(!playlistViewRoot.wideMode)
-                                playlistViewRoot.currentIndex = 0
+                        playlistViewRoot.currentIndex = 0
 
             holder.message:  "<h2>"+playlistViewModel.model.get(playlistViewModel.currentIndex).playlist+"</h2><p>Your playlist is empty,<br>start adding new music to it</p>"
             holder.emoji: "qrc:/assets/face-hug.png"
@@ -130,6 +130,25 @@ Kirigami.PageRow
                     {
                         filterList.headerMenu.close()
                         syncAndPlay(playlistViewModel.currentIndex)
+                    }
+                },
+                BabeMenuItem
+                {
+                    enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
+                    text: "Remove playlist"
+                    onTriggered: removePlaylist()
+                }
+            ]
+
+            contextMenu.menuItem: [
+
+                BabeMenuItem
+                {
+                    text: qsTr("Remove from playlist")
+                    onTriggered:
+                    {
+                        bae.removePlaylistTrack(filterList.model.get(filterList.currentIndex).url, playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
+                        populate(playlistQuery)
                     }
                 }
             ]
@@ -165,9 +184,8 @@ Kirigami.PageRow
 
     function refresh()
     {
-        var i = 9
-        for(i; i < playlistViewModel.count; i++)
-            playlistViewModel.remove(i)
+        for(var i=9; i < playlistViewModel.count; i++)
+            playlistViewModel.model.remove(i)
 
         setPlaylists()
     }
@@ -184,6 +202,16 @@ Kirigami.PageRow
     {
         if(!playlistViewModel.model.get(index).playlistIcon)
             playlistViewRoot.playSync(playlistViewModel.model.get(index).playlist)
+    }
+
+    function removePlaylist()
+    {
+
+        bae.removePlaylist(playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
+
+        filterList.clearTable()
+        refresh()
+
     }
 
     Component.onCompleted: setPlaylists()

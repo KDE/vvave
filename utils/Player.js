@@ -39,6 +39,21 @@ function playTrack(track)
     }
 }
 
+function queueTracks(tracks)
+{
+    if(tracks)
+    {
+        if(tracks.length > 0)
+        {
+            onQueue++
+            console.log(onQueue)
+            appendTracksAt(tracks, currentTrackIndex+1)
+            if(!isMobile)
+                bae.notify("Queue", tracks.length + " tracks added put on queue")
+        }
+    }
+}
+
 function setLyrics(lyrics)
 {
     currentTrack.lyrics = lyrics
@@ -55,28 +70,33 @@ function stop()
 
 function pauseTrack()
 {
-    player.pause()    
+    player.pause()
 }
 
 function resumeTrack()
 {    
-   if(!player.play() && !mainlistEmpty)
-       playAt(0)
-
+    if(!player.play() && !mainlistEmpty)
+        playAt(0)
 }
 
 function nextTrack()
 {
-    if(root.mainPlaylist.list.count>0)
+    if(!mainlistEmpty)
     {
         var next = 0
-        if(root.shuffle)
+        if(root.shuffle && onQueue === 0)
             next = shuffle()
         else
-            next = root.mainPlaylist.list.currentIndex+1 >= root.mainPlaylist.list.count? 0 : root.mainPlaylist.list.currentIndex+1
+            next = currentTrackIndex+1 >= mainPlaylist.list.count? 0 : currentTrackIndex+1
 
-        root.prevTrackIndex = root.mainPlaylist.list.currentIndex
+        prevTrackIndex = mainPlaylist.list.currentIndex
         playAt(next)
+
+        if(onQueue > 0)
+        {
+            onQueue--
+            console.log(onQueue)
+        }
     }
 }
 
@@ -84,8 +104,8 @@ function previousTrack()
 {
     if(root.mainPlaylist.list.count>0)
     {
-        var previous = previous = root.mainPlaylist.list.currentIndex-1 >= 0 ? root.mainPlaylist.list.currentIndex-1 : root.mainPlaylist.list.count-1
-        root.prevTrackIndex = root.mainPlaylist.list.currentIndex
+        var previous = previous = currentTrackIndex-1 >= 0 ? mainPlaylist.list.currentIndex-1 : currentTrackIndex-1
+        prevTrackIndex = mainPlaylist.list.currentIndex
         playAt(previous)
     }
 }
@@ -120,8 +140,8 @@ function appendTracksAt(tracks, at)
     if(tracks)
         for(var i in tracks)
         {
-            if(tracks[i].url !== root.mainPlaylist.list.model.get(at).url)
-                root.mainPlaylist.list.model.insert(parseInt(at)+parseInt(i), tracks[i])
+            if(tracks[i].url !== mainPlaylist.list.model.get(at).url)
+                mainPlaylist.list.model.insert(parseInt(at)+parseInt(i), tracks[i])
 
         }
 }
@@ -226,8 +246,6 @@ function playAll(tracks)
         mainPlaylist.list.positionViewAtBeginning()
         playAt(0)
     }
-
-
 }
 
 function babeTrack(url, value)

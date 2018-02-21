@@ -1661,11 +1661,14 @@ var Babe = {
     "audio-headphones": Icon.headphones,
     "headphones": Icon.headphones,
 
+    "view-media-track" : Icon.musicNote,
     "filename-filetype-amarok": Icon.musicNote,
     "musicnote": Icon.musicNote,
 
+
     "album" : Icon.album,
     "media-album-cover": Icon.album,
+    "view-media-album-cover": Icon.album,
 
     "artist": Icon.face,
     "view-media-artist": Icon.face,
@@ -1674,6 +1677,7 @@ var Babe = {
     "view-media-playlist" : Icon.libraryMusic,
 
     "application-menu": Icon.menu,
+    "view-media-config" : Icon.menu,
     "games-config-options" : Icon.settings,
 
     "edit-comment" : Icon.comment,
@@ -1708,13 +1712,23 @@ var Babe = {
     "list-remove": Icon.minus,
     "entry-delete":Icon.playlistRemove,
     "amarok_playcount": Icon.trendingUp,
+    "view-media-playcount": Icon.trendingUp,
+
+    "view-media-favorite": Icon.starCircle,
     "draw-star": Icon.starCircle,
+
     "filename-year-amarok": Icon.clock,
+    "view-media-recent": Icon.clock,
+
     "internet-services": Icon.youtubePlay,
     "internet-amarok": Icon.youtubePlay,
     "tag" : Icon.tagMultiple,
+
+    "view-media-similarartists":  Icon.tagFaces,
     "similarartists-amarok": Icon.tagFaces,
     "office-chart-line" : Icon.fire,
+    "view-media-chart": Icon.fire,
+    "view-media-genre": Icon.attachment,
     "filename-track-amarok" : Icon.attachment,
 
 
@@ -1725,7 +1739,9 @@ var Babe = {
     "player-time" : Icon.playBoxOutline,
     "media-repeat-track-amarok": Icon.playlistPlay,
     "archive-insert": Icon.playlistPlus,
+    "media-playlist-append": Icon.playlistPlus,
     "amarok_clock" : Icon.playlistPlay,
+    "media-playlist-play" : Icon.playBoxOutline,
 
     /*others*/
 

@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
+import "../../utils/Player.js" as Player
 
 import ".."
 
@@ -17,12 +18,12 @@ BabeList
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
     property bool menuItemVisible : isMobile
-    property int prevIndex
     property bool trackDuration
     property bool trackRating
 
     property alias headerMenu: headerMenu
     property alias contextMenu : contextMenu
+
 
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -39,7 +40,7 @@ BabeList
         id : playAllBtn
         visible : headerBarVisible && count > 0
         anim : true
-        iconName : /*"amarok_clock"*/ "media-playback-start"
+        iconName : "media-playlist-play"
         onClicked : playAll()
     }
 
@@ -50,7 +51,7 @@ BabeList
             id: appendBtn
             visible: headerBarVisible && count > 0
             anim : true
-            iconName : "archive-insert"//"media-repeat-track-amarok"
+            iconName : "media-playlist-append"//"media-repeat-track-amarok"
             onClicked: appendAll()
             iconColor: textColor
         },
@@ -73,6 +74,7 @@ BabeList
     {
         id: headerMenu
         onSaveListClicked: saveList()
+        onQueueListClicked: queueList()
     }
 
     TableMenu
@@ -141,11 +143,27 @@ BabeList
     function saveList()
     {
         var trackList = []
-        for(var i = 0; i < model.count; ++i)
-            trackList.push(model.get(i).url)
+        if(model.count > 0)
+        {
+            for(var i = 0; i < model.count; ++i)
+                trackList.push(model.get(i).url)
 
-        playlistDialog.tracks = trackList
-        playlistDialog.open()
+            playlistDialog.tracks = trackList
+            playlistDialog.open()
+        }
+    }
+
+    function queueList()
+    {
+        var trackList = []
+
+        if(model.count > 0)
+        {
+            for(var i = 0; i < model.count; ++i)
+                trackList.push(model.get(i))
+
+            Player.queueTracks(trackList)
+        }
     }
 
     //    Component.onCompleted: forceActiveFocus()

@@ -91,8 +91,8 @@ public:
 
     Q_INVOKABLE QStringList getPlaylists();
 
-    bool removePlaylistTrack(const QString &url, const QString &playlist);
-    bool removePlaylist(const QString &playlist);
+    Q_INVOKABLE bool removePlaylistTrack(const QString &url, const QString &playlist);
+    Q_INVOKABLE bool removePlaylist(const QString &playlist);
     bool removeArtist(const QString &artist);
     bool cleanArtists();
     bool removeAlbum(const QString &album, const QString &artist);

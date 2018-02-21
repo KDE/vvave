@@ -44,12 +44,14 @@ Kirigami.ApplicationWindow
     property var currentTrack : ({babe: "0", stars: "0"})
     property int currentTrackIndex : 0
     property int prevTrackIndex : 0
-    property string currentArtwork : mainPlaylist.table.count > 0 ? mainPlaylist.list.model.get(0).artwork : ""
+    property string currentArtwork : !mainlistEmpty ? mainPlaylist.list.model.get(0).artwork : ""
     property bool currentBabe : currentTrack.babe == "0" ? false : true
     property string durationTimeLabel : "00:00"
     property string progressTimeLabel : "00:00"
     property bool isPlaying : false
     property bool autoplay : bae.loadSetting("AUTOPLAY", "BABE", false) === "true" ? true : false
+    property int onQueue : 0
+
 
     /*THEMING*/
     property string babeColor : bae.babeColor()
@@ -107,18 +109,20 @@ Kirigami.ApplicationWindow
     readonly property int headerHeight: rowHeight
     readonly property int contentMargins : isMobile ? 8 : 10
     readonly property var viewsIndex : ({
-                                            "babeit": 0,
-                                            "tracks" : 1,
-                                            "albums" : 2,
-                                            "artists" : 3,
-                                            "playlists" : 4,
-                                            "search" : 5
+                                            "tracks" : 0,
+                                            "albums" : 1,
+                                            "artists" : 2,
+                                            "playlists" : 3,
+                                            "search" : 4,
+                                            "babeit": 5,
+
                                         })
     property bool mainlistEmpty : !mainPlaylist.table.count > 0
 
     /*PROPS*/
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
     property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
+    property int miniArtSize : isMobile ? 40 : 34
 
     property int columnWidth: Kirigami.Units.gridUnit * 18
     property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
@@ -185,7 +189,7 @@ Kirigami.ApplicationWindow
     Component.onCompleted:
     {
         if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
-        settingsDrawer.visible = false
+        settingsDrawer.close()
     }
 
 
@@ -426,8 +430,9 @@ Kirigami.ApplicationWindow
                 {
                     visible: miniArtwork.visible
                     anchors.centerIn: parent
-                    height: 44
-                    width: 44
+                    height: miniArtSize+4
+                    width: miniArtSize+4
+
                     color: darkForegroundColor
                     z: -999
                     radius: Math.min(width, height)
@@ -439,7 +444,7 @@ Kirigami.ApplicationWindow
                     to: 360;
                     duration: 5000
                     loops: Animation.Infinite
-                    running: isPlaying
+                    running: miniArtwork.visible && isPlaying
                 }
                 //                height: headerHeight
                 //                width:  miniArtwork.visible ? headerHeight : 0
@@ -449,8 +454,8 @@ Kirigami.ApplicationWindow
                     id: miniArtwork
                     visible: ((!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible) && !mainlistEmpty
 
-                    height: 40
-                    width: 40
+                    height: miniArtSize
+                    width: miniArtSize
                     //                    anchors.left: parent.left
                     anchors.centerIn: parent
                     source:
@@ -539,9 +544,7 @@ Kirigami.ApplicationWindow
                     onClicked:
                     {
                         var value = mainPlaylist.contextMenu.babeIt(currentTrackIndex)
-                        currentTrack.babe = value ? "1" : "0"
                         currentBabe = value
-                        //                        bae.runPy();
                     }
                 }
 
@@ -559,7 +562,7 @@ Kirigami.ApplicationWindow
                     id: playIcon
                     iconColor: darkForegroundColor
 
-                    iconName: isPlaying ? "media-playback-pause" :  "media-playback-start"
+                    iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onClicked:
                     {
                         if(isPlaying) Player.pauseTrack()
@@ -575,7 +578,7 @@ Kirigami.ApplicationWindow
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
 
-                    onPressAndHold: Player.playAt(Player.shuffle())
+//                    onPressAndHold: Player.playAt(Player.shuffle())
                 }
 
                 BabeButton
@@ -735,10 +738,6 @@ Kirigami.ApplicationWindow
                         babeitView.logginDialog.open()
                 }
 
-                BabeitView
-                {
-                    id: babeitView
-                }
 
                 TracksView
                 {
@@ -750,6 +749,7 @@ Kirigami.ApplicationWindow
                         onQuickPlayTrack: Player.quickPlay(tracksView.model.get(index))
                         onPlayAll: Player.playAll(bae.get(Q.GET.allTracks))
                         onAppendAll: Player.appendAll(bae.get(Q.GET.allTracks))
+                        onQueueTrack: Player.queueTracks([tracksView.model.get(index)])
 
                     }
                 }
@@ -822,6 +822,11 @@ Kirigami.ApplicationWindow
 
                         }
                     }
+                }
+
+                BabeitView
+                {
+                    id: babeitView
                 }
 
             }

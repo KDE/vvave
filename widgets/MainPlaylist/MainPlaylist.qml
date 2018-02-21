@@ -201,20 +201,7 @@ Item
                             }
                         }
                     }
-                }
-
-                Item
-                {
-                    Layout.fillWidth: true
-                    BabeButton
-                    {
-                        id: commentBtn
-                        anchors.centerIn: parent
-                        Layout.fillWidth: true
-                        iconName: "edit-comment"
-                        iconColor: darkForegroundColor
-                    }
-                }
+                }               
 
                 Item
                 {
@@ -224,7 +211,7 @@ Item
                         id: menuBtn
                         anchors.centerIn: parent
                         Layout.fillWidth: true
-                        iconName: /*"application-menu"*/ "overflow-menu"
+                        iconName: "overflow-menu"
                         onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
                         iconColor: darkForegroundColor
 

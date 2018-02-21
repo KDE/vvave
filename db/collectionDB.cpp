@@ -238,7 +238,7 @@ void CollectionDB::addTrack(const DB &track)
 
         auto artwork = track[KEY::ARTWORK].isEmpty()? "" : track[KEY::ARTWORK];
 
-        qDebug()<< "writting to db: "<<title<<artist;
+        bDebug::Instance()->msg("Writting to db: "+title+" "+artist);
         /* first needs to insert album and artist*/
         QVariantMap sourceMap {{KEYMAP[KEY::URL],sourceUrl},
                                {KEYMAP[KEY::SOURCE_TYPE], sourceType(url)}};

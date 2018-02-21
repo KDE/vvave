@@ -19,4 +19,10 @@ linux:unix:!android {
 
 }
 
+HEADERS += \
+    $$PWD/kdeconnect.h
+
+SOURCES += \
+    $$PWD/kdeconnect.cpp
+
 

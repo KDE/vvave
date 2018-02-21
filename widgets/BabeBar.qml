@@ -67,7 +67,7 @@ ToolBar
 
                 anchors.centerIn: parent
                 anchors.left: parent.left
-                iconName: "application-menu"
+                iconName: "view-media-config"
                 iconColor: settingsDrawer.visible ? babeColor : textColor/*(pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor*/
                 onClicked: settingsViewClicked()
 
@@ -83,32 +83,7 @@ ToolBar
         {
             Layout.fillWidth: true
             Layout.fillHeight: true
-        }
-
-
-        Item
-        {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.maximumWidth: toolBarIconSize*2
-            Layout.maximumHeight: toolBarIconSize
-
-            BabeButton
-            {
-                anchors.centerIn: parent
-
-                iconName: "love"
-                iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
-
-                onClicked: babeViewClicked()
-
-                hoverEnabled: !isMobile
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Babe")
-            }
-        }
+        }       
 
         Item
         {
@@ -122,7 +97,7 @@ ToolBar
                 id: tracksView
                 anchors.centerIn: parent
 
-                iconName: /*"musicnote"*/ "filename-filetype-amarok"
+                iconName: "view-media-track"
                 iconColor:  accent && currentIndex === viewsIndex.tracks ? accentColor : textColor
                 onClicked: tracksViewClicked()
 
@@ -146,7 +121,7 @@ ToolBar
                 id: albumsView
                 anchors.centerIn: parent
 
-                iconName: /*"album" */ "media-album-cover"
+                iconName: /*"album"*/ "view-media-album-cover"
                 iconColor:  accent && currentIndex === viewsIndex.albums ? accentColor : textColor
                 onClicked: albumsViewClicked()
 
@@ -170,7 +145,7 @@ ToolBar
                 id: artistsView
                 anchors.centerIn: parent
 
-                iconName: /*"artist" */  "view-media-artist"
+                iconName: "view-media-artist"
                 iconColor:  accent && currentIndex === viewsIndex.artists ? accentColor : textColor
 
                 onClicked: artistsViewClicked()
@@ -194,7 +169,7 @@ ToolBar
                 id: playlistsView
                 anchors.centerIn: parent
 
-                iconName: /*"library-music"*/ "view-media-playlist"
+                iconName: "view-media-playlist"
                 iconColor:  accent && currentIndex === viewsIndex.playlists ? accentColor : textColor
 
                 onClicked: playlistsViewClicked()

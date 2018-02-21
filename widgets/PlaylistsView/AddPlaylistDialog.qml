@@ -37,7 +37,7 @@ BabeDialog
     {
         var title = newPlaylistField.text.trim()
         if(bae.addPlaylist(title))
-            model.append({playlist: title})
+            model.insert(9, {playlist: title})
         list.positionViewAtEnd()
     }
 }

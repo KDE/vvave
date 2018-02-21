@@ -10,7 +10,8 @@ import ".."
 
 BabeMenu
 {
-    signal saveListClicked();
+    signal saveListClicked()
+    signal queueListClicked()
 
     property alias menuItem: babeMenu.children
 
@@ -20,7 +21,7 @@ BabeMenu
         BabeMenuItem
         {
             text: "Queue list"
-            onTriggered: {}
+            onTriggered: queueListClicked()
         }
 
         BabeMenuItem

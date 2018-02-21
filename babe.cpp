@@ -25,6 +25,7 @@
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
+#include "kde/kdeconnect.h"
 #endif
 
 using namespace BAE;
@@ -503,7 +504,7 @@ QString Babe::homeDir()
 #if defined(Q_OS_ANDROID)
     QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
     QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-//    bDebug::Instance()->msg("HOMEDIR FROM ADNROID"+ mediaPath.toString());
+    //    bDebug::Instance()->msg("HOMEDIR FROM ADNROID"+ mediaPath.toString());
 
     if(BAE::fileExists("/mnt/extSdCard"))
         return "/mnt/sdcard";
@@ -685,6 +686,20 @@ QVariantList Babe::searchFor(const QStringList &queries)
     }
 
     return  mapList;
+}
+
+QVariantList Babe::getDevices()
+{
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    return  KdeConnect::getDevices();
+#endif
+}
+
+bool Babe::sendToDevice(const QString &name, const QString &id, const QString &url)
+{
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+    return KdeConnect::sendToDevice(name, id, url) ? true : false;
+#endif
 }
 
 void Babe::debug(const QString &msg)

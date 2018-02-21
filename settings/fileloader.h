@@ -72,6 +72,7 @@ public slots:
         int newTracks = 0;
         if(urls.size()>0)
         {
+            TagInfo info;
 
             for(auto url : urls)
             {
@@ -79,6 +80,7 @@ public slots:
                 {
                     if(!con->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL],url))
                     {
+
                         info.feed(url);
                         auto album = BAE::fixString(info.getAlbum());
                         auto track= info.getTrack();
@@ -124,8 +126,7 @@ signals:
     void collectionSize(int size);
 
 private:
-    QThread t;
-    TagInfo info;
+    QThread t;    
     bool go = false;
     bool wait = true;
     QStringList queue;

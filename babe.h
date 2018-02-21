@@ -50,8 +50,7 @@ public:
 
     Q_INVOKABLE bool babeTrack(const QString &path, const bool &value);
 
-    Q_INVOKABLE  void notify(const QString &title, const QString &body);
-    Q_INVOKABLE  void notifySong(const QString &url);
+
     /* SETTINGS */
 
     Q_INVOKABLE void scanDir(const QString &url);
@@ -109,6 +108,12 @@ public:
     Q_INVOKABLE QString loadCover(const QString &url);
     Q_INVOKABLE QVariantList searchFor(const QStringList &queries);
 
+    /*KDE*/
+    Q_INVOKABLE static QVariantList getDevices();
+    Q_INVOKABLE static bool sendToDevice(const QString &name, const QString &id, const QString &url);
+
+    Q_INVOKABLE void notify(const QString &title, const QString &body);
+    Q_INVOKABLE void notifySong(const QString &url);
 public slots:
     void debug(const QString &msg);
 

@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.3
 import "../../view_models/BabeMenu"
 import "../../utils"
 import ".."
+import "../../utils/Player.js" as Player
 
 BabeMenu
 {
@@ -14,6 +15,13 @@ BabeMenu
     property string starColor : "#FFC107"
     property string starReg : foregroundColor
     property string starIcon: "draw-star"
+
+    property alias menuItem : customItems.children
+
+    function queueIt(index)
+    {
+        Player.queueTracks([list.model.get(index)])
+    }
 
     function rateIt(rank)
     {
@@ -52,6 +60,58 @@ BabeMenu
         return value
     }
 
+    BabePopup
+    {
+        id: sendToPopup
+        parent: babeTableRoot
+                leftPadding: 1
+        rightPadding: 1
+        topPadding: contentMargins
+        bottomPadding: contentMargins
+
+        BabeList
+        {
+            id: sentToList
+            headerBarVisible: false
+            anchors.fill: parent
+            holder.message: qsTr("There's not avalible devices")
+            model:  ListModel
+            {
+                id: model
+            }
+
+            delegate: BabeDelegate
+            {
+                id: delegate
+                label : name
+
+                Connections
+                {
+                    target: delegate
+
+                    onClicked:
+                    {
+                        sentToList.currentIndex = index
+                        console.log(sentToList.model.get(index).name,sentToList.model.get(index).key)
+                        bae.sendToDevice(sentToList.model.get(index).name,
+                                         sentToList.model.get(index).key,
+                                         babeTableRoot.model.get(babeTableRoot.currentIndex).url)
+                    }
+                }
+            }
+        }
+
+        onOpened:
+        {
+            sentToList.clearTable()
+            var devices = bae.getDevices()
+            for( var i in devices)
+                sentToList.model.append({name: devices[i].name, key: devices[i].key })
+        }
+
+    }
+
+
     Label
     {
         id: titleLabel
@@ -75,7 +135,7 @@ BabeMenu
     BabeMenuItem
     {
         text: "Queue"
-        onTriggered: list.queueTrack(list.currentIndex)
+        onTriggered: queueIt(list.currentIndex)
     }
 
     BabeMenuItem
@@ -97,13 +157,18 @@ BabeMenu
     BabeMenuItem
     {
         text: "Send to..."
-        onTriggered: {}
+        onTriggered: sendToPopup.open()
     }
 
     BabeMenuItem
     {
         text: "Remove"
         onTriggered: listModel.remove(list.currentIndex)
+    }
+
+    Column
+    {
+        id: customItems
     }
 
     BabeMenuItem

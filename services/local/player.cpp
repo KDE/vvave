@@ -26,7 +26,7 @@ bool Player::play()
     if(sourceurl.isEmpty()) return false;
 
     if(!updater->isActive())
-        this->updater->start(250);
+        this->updater->start(150);
 
     if(this->player->isAvailable())
         this->player->play();

@@ -40,25 +40,23 @@ BabeList
 
     headerBarRight: BabeButton
     {
-        id: removePlaylist
         iconName: "list-remove"
-
-        onClicked: {}
+        onClicked: removePlaylist()
     }
 
     ListModel
     {
         id: playlistListModel
 
-        ListElement { playlist: qsTr("Most Played"); playlistIcon: "amarok_playcount"; /*query: Q.Query.mostPlayedTracks*/ }
-        ListElement { playlist: qsTr("Favorites"); playlistIcon: "draw-star"}
-        ListElement { playlist: qsTr("Recent"); playlistIcon: "filename-year-amarok"}
+        ListElement { playlist: qsTr("Most Played"); playlistIcon: "view-media-playcount"; /*query: Q.Query.mostPlayedTracks*/ }
+        ListElement { playlist: qsTr("Favorites"); playlistIcon: "view-media-favorite"}
+        ListElement { playlist: qsTr("Recent"); playlistIcon: "view-media-recent"}
         ListElement { playlist: qsTr("Babes"); playlistIcon: "love"}
         ListElement { playlist: qsTr("Online"); playlistIcon: "internet-services"}
         ListElement { playlist: qsTr("Tags"); playlistIcon: "tag"}
-        ListElement { playlist: qsTr("Relationships"); playlistIcon: "similarartists-amarok"}
-        ListElement { playlist: qsTr("Popular"); playlistIcon: "office-chart-line"}
-        ListElement { playlist: qsTr("Genres"); playlistIcon: "filename-track-amarok"}
+        ListElement { playlist: qsTr("Relationships"); playlistIcon: "view-media-similarartists"}
+        ListElement { playlist: qsTr("Popular"); playlistIcon: "view-media-chart"}
+        ListElement { playlist: qsTr("Genres"); playlistIcon: "view-media-genre"}
     }
 
     model: playlistListModel
