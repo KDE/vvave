@@ -142,7 +142,7 @@ void BabeSettings::on_remove_clicked()
     {
         if(this->connection->removeSource(this->pathToRemove))
         {
-            this->refreshCollectionPaths();
+            this->refreshCollection();
             this->dirs.clear();
             this->collectionWatcher();
             this->watcher->removePaths(watcher->directories());
@@ -152,13 +152,9 @@ void BabeSettings::on_remove_clicked()
     }
 }
 
-void BabeSettings::refreshCollectionPaths()
+void BabeSettings::refreshCollection()
 {
-    //    auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::SOURCES]);
-
-    //    for (auto track : this->connection->getDBData(queryTxt))
-    //    {
-    //    }
+   this->populateDB(this->connection->getSourcesFolders());
 }
 
 void BabeSettings::addToWatcher(QStringList paths)

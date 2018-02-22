@@ -573,6 +573,15 @@ QVariantList CollectionDB::getDBDataQML(const QString &queryTxt)
     return mapList;
 }
 
+QStringList CollectionDB::dataToList(const DB_LIST &list, const KEY &key)
+{
+    QStringList response;
+    for(auto track : list)
+        response << track[key];
+
+    return response;
+}
+
 
 DB_LIST CollectionDB::getAlbumTracks(const QString &album, const QString &artist, const KEY &orderBy, const BAE::W &order)
 {
@@ -702,6 +711,12 @@ DB_LIST CollectionDB::getOnlineTracks(const KEY &orderBy, const BAE::W &order)
             KEYMAP[KEY::URL],YoutubeCachePath,KEYMAP[orderBy],SLANG[order]);
 
     return this->getDBData(queryTxt);
+}
+
+QStringList CollectionDB::getSourcesFolders()
+{
+    auto data = this->getDBData("select * from folders order by strftime(\"%s\", addDate) desc");
+    return this->dataToList(data, BAE::KEY::URL);
 }
 
 DB_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const int &limit, const KEY &orderBy, const BAE::W &order)

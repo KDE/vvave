@@ -83,7 +83,7 @@ ToolBar
         {
             Layout.fillWidth: true
             Layout.fillHeight: true
-        }       
+        }
 
         Item
         {
@@ -181,6 +181,31 @@ ToolBar
                 ToolTip.text: qsTr("Playlists")
             }
         }
+
+        Item
+        {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
+
+            BabeButton
+            {
+                anchors.centerIn: parent
+
+                iconName: "love"
+                iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
+
+                onClicked: babeViewClicked()
+
+                hoverEnabled: !isMobile
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Babe")
+            }
+        }
+
 
         Item
         {

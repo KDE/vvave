@@ -33,6 +33,7 @@ public:
     ~BabeSettings();
     void checkCollectionBrainz(const bool &state);
     void collectionWatcher();  
+    void refreshCollection();
 
 private slots:
     void handleDirectoryChanged(const QString &dir);
@@ -41,6 +42,7 @@ private slots:
 public slots:
     void startBrainz(const bool &on, const uint &speed = BAE::SEG::THREE);
     void populateDB(const QStringList &paths);
+
 
 private:
     FileLoader *fileLoader;
@@ -56,7 +58,6 @@ private:
     QStringList dirs;
     QFileSystemWatcher *watcher;
 
-    void refreshCollectionPaths();
     void addToWatcher(QStringList paths);
 
 signals:

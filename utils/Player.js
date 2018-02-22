@@ -48,8 +48,7 @@ function queueTracks(tracks)
             onQueue++
             console.log(onQueue)
             appendTracksAt(tracks, currentTrackIndex+1)
-            if(!isMobile)
-                bae.notify("Queue", tracks.length + " tracks added put on queue")
+            bae.notify("Queue", tracks.length + " tracks added put on queue")
         }
     }
 }
@@ -262,10 +261,7 @@ function addToPlaylist(urls, playlist)
         //            bae.trackPlaylist(urls[i], playlist)
 
 
-        if(!isMobile)
-            bae.notify(playlist, urls.length + " tracks added to the playlist:\n"+urls.join("\n"))
-        //        else
-        //            babeNotify.notify(urls.length + " tracks added to " +playlist)
+        bae.notify(playlist, urls.length + " tracks added to the playlist:\n"+urls.join("\n"))
 
     }
 }

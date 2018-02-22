@@ -52,8 +52,19 @@ Kirigami.GlobalDrawer
 
         Kirigami.Action
         {
-            text: "Sources"
-            onTriggered: sourcesDialog.open()
+            text: qsTr("Collection"
+                       )
+            Kirigami.Action
+            {
+                text: qsTr("Refresh")
+                onTriggered: bae.refreshCollection();
+            }
+
+            Kirigami.Action
+            {
+                text: "Sources"
+                onTriggered: sourcesDialog.open()
+            }
         },
 
         Kirigami.Action

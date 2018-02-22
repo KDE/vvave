@@ -52,11 +52,12 @@ Page
 
                 ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
-                Text
+                TextEdit
                 {
                     id: lyricsText
                     width: infoRoot.width      // ensure correct width
-
+                    height: implicitHeight
+                    readOnly: true
                     padding: 20
                     text: ""
                     color: darkForegroundColor
@@ -65,6 +66,10 @@ Page
                     verticalAlignment: Qt.AlignVCenter
                     textFormat: Text.RichText
                     wrapMode: Text.Wrap
+                    activeFocusOnPress : true
+                    selectByMouse : true
+                    cursorPosition :0
+                    cursorVisible: true
                 }
             }
 

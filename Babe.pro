@@ -21,7 +21,8 @@ include(kde/kde.pri)
 
 android:
 {
-
+    message(Building for helpers for Android)
+    include(android/android.pri)
     include(android-openssl.pri)
     include(3rdparty/kirigami/kirigami.pri)
 }
@@ -204,7 +205,6 @@ SOURCES += main.cpp \
         taglib/tagunion.cpp \
     babe.cpp \
     settings/BabeSettings.cpp \
-    java/notificationclient.cpp \
     db/conthread.cpp \
     services/web/babeit.cpp \
     utils/babeconsole.cpp
@@ -238,7 +238,7 @@ DISTFILES += \
     android/build.gradle \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
-    android/src/org/qtproject/babe/NotificationClient.java
+    android/android.pri
 
 
 HEADERS += \
@@ -365,7 +365,6 @@ HEADERS += \
         taglib/taglib_config.h \
     babe.h \
     settings/BabeSettings.h \
-    java/notificationclient.h \
     db/conthread.h \
     services/web/babeit.h \
     utils/babeconsole.h \

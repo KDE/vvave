@@ -14,18 +14,31 @@
 #include <QDesktopWidget>
 #include <QDirIterator>
 #include <QtQml>
-
-#ifdef Q_OS_ANDROID
-#include <QAndroidJniObject>
-#include <QAndroidJniEnvironment>
-#include <QtAndroid>
-#endif
+#include <QDesktopServices>
 
 //#include "Python.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
 #include "kde/kdeconnect.h"
+#endif
+
+#if defined(Q_OS_ANDROID)
+#include "../android/notificationclient.h"
+#include <QAndroidJniObject>
+#include <QAndroidJniEnvironment>
+#include <QtAndroid>
+#include <QException>
+
+class InterfaceConnFailedException : public QException
+{
+public:
+    void raise() const { throw *this; }
+    InterfaceConnFailedException *clone() const { return new InterfaceConnFailedException(*this); }
+};
+#elif defined(Q_OS_WINDOWS)
+#elif defined(Q_OS_DARWIN)
+#else
 #endif
 
 using namespace BAE;
@@ -55,6 +68,8 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
     {
         emit this->skipTrack();
     });
+//#elif defined (Q_OS_ANDROID)
+//    this->nof = new NotificationClient(this);
 #endif
 
 }
@@ -187,15 +202,15 @@ void Babe::fetchTrackLyrics(DB &song)
     pulpo.setOntology(PULPO::ONTOLOGY::TRACK);
     pulpo.setInfo(PULPO::INFO::LYRICS);
 
-    connect(&pulpo, &Pulpo::infoReady, [&](const BAE::DB &track, const PULPO::RESPONSE  &res)
+    connect(&pulpo, &Pulpo::infoReady, [this](const BAE::DB &track, const PULPO::RESPONSE  &res)
     {
         if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS].isEmpty())
         {
             auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
 
             lyricsTrack(track, lyrics);
-            bDebug::Instance()->msg("Downloaded the lyrics for "+song[KEY::TITLE]+" "+song[KEY::ARTIST]);
-            emit this->trackLyricsReady(lyrics, song[KEY::URL]);
+            bDebug::Instance()->msg("Downloaded the lyrics for "+track[KEY::TITLE]+" "+track[KEY::ARTIST]);
+            emit this->trackLyricsReady(lyrics, track[KEY::URL]);
         }
     });
 
@@ -232,9 +247,8 @@ void Babe::notify(const QString &title, const QString &body)
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     this->nof->notify(title, body);
-#else
-    Q_UNUSED(title);
-    Q_UNUSED(body);
+#elif defined (Q_OS_ANDROID)
+    this->nof->notify(title+" "+body);
 #endif
 
 }
@@ -250,6 +264,62 @@ void Babe::notifySong(const QString &url)
 #endif
 }
 
+void Babe::sendText(const QString &text)
+{
+
+#if defined(Q_OS_ANDROID)
+    QAndroidJniEnvironment _env;
+    QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");   //activity is valid
+    if (_env->ExceptionCheck()) {
+        _env->ExceptionClear();
+        throw InterfaceConnFailedException();
+    }
+
+    if ( activity.isValid() )
+    {
+        QAndroidJniObject::callStaticMethod<void>("com/example/android/tools/SendIntent",
+                                                  "sendText",
+                                                  "(Landroid/app/Activity;Ljava/lang/String;)V",
+                                                  activity.object<jobject>(),
+                                                  QAndroidJniObject::fromString(text).object<jstring>());
+        if (_env->ExceptionCheck())
+        {
+            _env->ExceptionClear();
+            throw InterfaceConnFailedException();
+        }
+    }else
+        throw InterfaceConnFailedException();
+#endif
+
+}
+
+void Babe::sendTrack(const QString &url)
+{
+#if defined(Q_OS_ANDROID)
+    bDebug::Instance()->msg("Sharing track "+ url);
+    QAndroidJniEnvironment _env;
+    QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");   //activity is valid
+    if (_env->ExceptionCheck()) {
+        _env->ExceptionClear();
+        throw InterfaceConnFailedException();
+    }
+    if ( activity.isValid() )
+    {
+        QAndroidJniObject::callStaticMethod<void>("com/example/android/tools/SendIntent",
+                                                  "sendTrack",
+                                                  "(Landroid/app/Activity;Ljava/lang/String;)V",
+                                                  activity.object<jobject>(),
+                                                  QAndroidJniObject::fromString(url).object<jstring>());
+        if (_env->ExceptionCheck()) {
+            _env->ExceptionClear();
+            throw InterfaceConnFailedException();
+        }
+    }else
+        throw InterfaceConnFailedException();
+#endif
+
+}
+
 void Babe::scanDir(const QString &url)
 {
     emit this->settings->collectionPathChanged({url});
@@ -263,6 +333,11 @@ void Babe::brainz(const bool &on)
 bool Babe::brainzState()
 {
     return loadSetting("BRAINZ", "BABE", false).toBool();
+}
+
+void Babe::refreshCollection()
+{
+    this->settings->refreshCollection();
 }
 
 QVariant Babe::loadSetting(const QString &key, const QString &group, const QVariant &defaultValue)
@@ -299,6 +374,12 @@ int Babe::lastPlaylistPos()
 bool Babe::fileExists(const QString &url)
 {
     return BAE::fileExists(url);
+}
+
+void Babe::showFolder(const QString &url)
+{
+    QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(url).dir().absolutePath()));
+
 }
 
 QString Babe::baseColor()

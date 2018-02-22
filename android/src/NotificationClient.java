@@ -1,4 +1,4 @@
-package org.qtproject.babe;
+package org.qtproject.example.notification;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -20,7 +20,6 @@ public class NotificationClient extends org.qtproject.qt5.android.bindings.QtAct
         if (m_notificationManager == null) {
             m_notificationManager = (NotificationManager)m_instance.getSystemService(Context.NOTIFICATION_SERVICE);
             m_builder = new Notification.Builder(m_instance);
-//            m_builder.setSmallIcon(R.drawable.icon);
             m_builder.setContentTitle("A message from Qt!");
         }
 

@@ -11,12 +11,6 @@ linux:unix:!android {
 
     SOURCES += kde/notify.cpp \
         kde/mpris2.cpp
-} else:android {
-    message(Building for Android)
-
-} else {
-  message("Unknown configuration")
-
 }
 
 HEADERS += \

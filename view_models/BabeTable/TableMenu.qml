@@ -64,7 +64,7 @@ BabeMenu
     {
         id: sendToPopup
         parent: babeTableRoot
-                leftPadding: 1
+        leftPadding: 1
         rightPadding: 1
         topPadding: contentMargins
         bottomPadding: contentMargins
@@ -150,6 +150,13 @@ BabeMenu
 
     BabeMenuItem
     {
+        text: qsTr("Show in folder...")
+        visible: !isMobile
+        onTriggered: bae.showFolder(list.model.get(list.currentIndex).url)
+    }
+
+    BabeMenuItem
+    {
         text: "Edit..."
         onTriggered: {}
     }
@@ -157,7 +164,7 @@ BabeMenu
     BabeMenuItem
     {
         text: "Send to..."
-        onTriggered: sendToPopup.open()
+        onTriggered: isMobile ? bae.sendTrack(list.model.get(list.currentIndex).url) : sendToPopup.open()
     }
 
     BabeMenuItem

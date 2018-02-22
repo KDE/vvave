@@ -8,6 +8,8 @@
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 class Notify;
+#elif defined (Q_OS_ANDROID)
+class NotificationClient;
 #endif
 
 class CollectionDB;
@@ -31,7 +33,7 @@ public:
     };
     Q_ENUM(HINT)
 
-//    Q_INVOKABLE void runPy();
+    //    Q_INVOKABLE void runPy();
 
     /* DATABASE INTERFACES */
 
@@ -56,6 +58,7 @@ public:
     Q_INVOKABLE void scanDir(const QString &url);
     Q_INVOKABLE void brainz(const bool &on);
     Q_INVOKABLE bool brainzState();
+    Q_INVOKABLE void refreshCollection();
 
     /* STATIC METHODS */
 
@@ -69,6 +72,7 @@ public:
     Q_INVOKABLE static int lastPlaylistPos();
 
     Q_INVOKABLE static bool fileExists(const QString &url);
+    Q_INVOKABLE static void showFolder(const QString &url);
 
     /*COLORS*/
     Q_INVOKABLE static QString baseColor();
@@ -84,7 +88,6 @@ public:
     Q_INVOKABLE static QString altColor();
     Q_INVOKABLE static QString babeColor();
     Q_INVOKABLE static QString babeAltColor();
-    Q_INVOKABLE static void androidStatusBarColor(const QString &color);
 
 
     /*UTILS*/
@@ -114,6 +117,13 @@ public:
 
     Q_INVOKABLE void notify(const QString &title, const QString &body);
     Q_INVOKABLE void notifySong(const QString &url);
+
+    /*ANDROID*/
+    Q_INVOKABLE static void sendText(const QString &text);
+    Q_INVOKABLE static void sendTrack(const QString &url);
+    Q_INVOKABLE static void androidStatusBarColor(const QString &color);
+
+
 public slots:
     void debug(const QString &msg);
 
@@ -123,6 +133,8 @@ private:
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     Notify *nof;
+#elif defined (Q_OS_ANDROID)
+    NotificationClient *nof;
 #endif
 
     QString fetchCoverArt(DB &song);

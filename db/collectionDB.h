@@ -71,6 +71,7 @@ public:
     BAE::DB_LIST getDBData(const QStringList &urls);
     BAE::DB_LIST getDBData(const QString &queryTxt);
     QVariantList getDBDataQML(const QString &queryTxt);
+    QStringList dataToList(const BAE::DB_LIST &list, const BAE::KEY &key);
 
     BAE::DB_LIST getAlbumTracks(const QString &album, const QString &artist, const BAE::KEY &orderBy = BAE::KEY::TRACK, const BAE::W &order = BAE::W::ASC);
     BAE::DB_LIST getArtistTracks(const QString &artist, const BAE::KEY &orderBy = BAE::KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
@@ -82,6 +83,7 @@ public:
     BAE::DB_LIST getRecentTracks(const int &limit = 50, const BAE::KEY &orderBy = BAE::KEY::ADD_DATE, const BAE::W &order = BAE::W::DESC);
     BAE::DB_LIST getOnlineTracks(const BAE::KEY &orderBy = BAE::KEY::ADD_DATE, const BAE::W &order = BAE::W::DESC);
 
+    Q_INVOKABLE QStringList getSourcesFolders();
 
     QStringList getTrackTags(const QString &path);
     Q_INVOKABLE int getTrackStars(const QString &path);

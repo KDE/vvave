@@ -96,12 +96,10 @@ BabePopup
 
     onOpened:
     {
-        var map = bae.get("select * from folders order by strftime(\"%s\", addDate) desc")
-        for(var i in map)
-        {
-            console.log(map[i].url)
-            sources.model.append(map[i])
-        }
+        var folders = bae.getSourcesFolders()
+        for(var i in folders)
+            sources.model.append({url : folders[i]})
+
     }
 
 
