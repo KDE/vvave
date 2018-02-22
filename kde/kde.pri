@@ -1,5 +1,6 @@
 
-linux:unix:!android {
+linux:unix:!android
+{
     message(Building for Linux)
     QT       += dbus
     QT       += KConfigCore
@@ -7,16 +8,10 @@ linux:unix:!android {
     QT       += KI18n
 
     HEADERS += \ kde/notify.h \
-        kde/mpris2.h
+        kde/mpris2.h \
+        kde/kdeconnect.h
 
     SOURCES += kde/notify.cpp \
-        kde/mpris2.cpp
+        kde/mpris2.cpp \
+        kde/kdeconnect.cpp
 }
-
-HEADERS += \
-    $$PWD/kdeconnect.h
-
-SOURCES += \
-    $$PWD/kdeconnect.cpp
-
-

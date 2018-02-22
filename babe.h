@@ -121,6 +121,7 @@ public:
     /*ANDROID*/
     Q_INVOKABLE static void sendText(const QString &text);
     Q_INVOKABLE static void sendTrack(const QString &url);
+    Q_INVOKABLE static void openFile(const QString &url);
     Q_INVOKABLE static void androidStatusBarColor(const QString &color);
 
 

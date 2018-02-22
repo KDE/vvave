@@ -13,7 +13,7 @@ Item
     property alias currentIndex : babeList.currentIndex
     property alias currentItem : babeList.currentItem
     property alias holder : holder
-
+    property alias section : babeList.section
     property alias headerBarRight : headerBarActionsRight.children
     property alias headerBarLeft : headerBarActionsLeft.children
 
@@ -58,6 +58,8 @@ Item
 
                 Kirigami.Separator
                 {
+                    visible: !isMobile
+
                     Rectangle
                     {
                         anchors.fill: parent

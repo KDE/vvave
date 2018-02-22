@@ -400,7 +400,7 @@ bool CollectionDB::albumTrack(const DB &track, const QString &value)
 bool CollectionDB::playedTrack(const QString &url, const int &increment)
 {
     auto queryTxt = QString("UPDATE %1 SET %2 = %2 + %3 WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::TRACKS],
-            KEYMAP[KEY::PLAYED], QString::number(increment), KEYMAP[KEY::URL],url);
+            KEYMAP[KEY::PLAYED], QString::number(increment), KEYMAP[KEY::URL], url);
 
     auto query = this->getQuery(queryTxt);
 
@@ -830,8 +830,7 @@ bool CollectionDB::removeTrack(const QString &path)
 
 QSqlQuery CollectionDB::getQuery(const QString &queryTxt)
 {    
-    QSqlQuery query(queryTxt, this->m_db);
-    return query;
+   return QSqlQuery(queryTxt, this->m_db);
 }
 
 bool CollectionDB::removeSource(const QString &path)

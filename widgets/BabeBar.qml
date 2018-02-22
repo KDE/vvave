@@ -34,6 +34,8 @@ ToolBar
 
         Kirigami.Separator
         {
+            visible: !isMobile
+
             Rectangle
             {
                 anchors.fill: parent

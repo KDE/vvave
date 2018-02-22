@@ -56,7 +56,7 @@ BabeGrid
         edge: Qt.RightEdge
         interactive: false
         focus: true
-        modal: root.isMobile
+        modal: isMobile
         dragMargin: 0
         margins: 0
         spacing: 0
@@ -130,6 +130,7 @@ BabeGrid
 
             Kirigami.Separator
             {
+                visible: !isMobile
                 Rectangle
                 {
                     anchors.fill: parent

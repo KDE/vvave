@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import "../view_models/BabeTable"
+import "../view_models"
 import "../db/Queries.js" as Q
 
 BabeTable
@@ -12,6 +13,16 @@ BabeTable
     headerBarTitle: count + " tracks"
     headerBarExit: false
     coverArtVisible: false
+
+
+    section.property : "album"
+    section.criteria: ViewSection.FullString
+    section.delegate: BabeDelegate
+    {
+        label: section
+        isSection: true
+        boldLabel: true
+    }
 
     function populate()
     {

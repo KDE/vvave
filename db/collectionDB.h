@@ -51,7 +51,7 @@ public:
     Q_INVOKABLE QString trackColorTag(const QString &path);
 
     bool lyricsTrack(const BAE::DB &track, const QString &value);
-    bool playedTrack(const QString &url, const int &increment = 1);
+    Q_INVOKABLE bool playedTrack(const QString &url, const int &increment = 1);
 
     bool wikiTrack(const BAE::DB &track, const QString &value);
     bool tagsTrack(const BAE::DB &track, const QString &value, const QString &context);
@@ -87,8 +87,8 @@ public:
 
     QStringList getTrackTags(const QString &path);
     Q_INVOKABLE int getTrackStars(const QString &path);
-   //    QStringList getArtistTags(const QString &artist);
-  //    QStringList getAlbumTags(const QString &album, const QString &artist);
+    //    QStringList getArtistTags(const QString &artist);
+    //    QStringList getAlbumTags(const QString &album, const QString &artist);
     QStringList getArtistAlbums(const QString &artist);
 
     Q_INVOKABLE QStringList getPlaylists();

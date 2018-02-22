@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.2
 
 import "../../view_models"
 import "../../db/Queries.js" as Q
@@ -19,6 +20,14 @@ BabePopup
         anchors.fill: parent
         headerBarVisible: false
         model: ListModel {id: suggestionsModel}
+
+        section.property : "type"
+        section.delegate: BabeDelegate
+        {
+            label: section
+            isSection: true
+            boldLabel: true
+        }
 
         delegate: BabeDelegate
         {
@@ -43,6 +52,8 @@ BabePopup
 
     function updateSuggestions()
     {
+        if(!visible) open()
+
         suggestionsList.clearTable()
 
         var qq = bae.loadSetting("QUERIES", "BABE", {})
@@ -63,28 +74,28 @@ BabePopup
                 if(checkList.indexOf("artist: "+similarArtist[i].artist) < 0)
                 {
                     checkList.push("artist: "+similarArtist[i].artist)
-                    suggestionsList.model.append({suggestion: "artist: "+similarArtist[i].artist})
+                    suggestionsList.model.append({suggestion: "artist: "+similarArtist[i].artist, type: "Artists"})
                 }
 
             for(i in similarAlbum)
                 if(checkList.indexOf("album: "+similarAlbum[i].album) < 0)
                 {
                     checkList.push("album: "+similarAlbum[i].album)
-                    suggestionsList.model.append({suggestion: "album: "+similarAlbum[i].album})
+                    suggestionsList.model.append({suggestion: "album: "+similarAlbum[i].album, type: "Albums"})
                 }
 
             for(i in similarTracks)
                 if(checkList.indexOf("title: "+similarTracks[i].title) < 0)
                 {
                     checkList.push("title: "+similarTracks[i].title)
-                    suggestionsList.model.append({suggestion: "title: "+similarTracks[i].title})
+                    suggestionsList.model.append({suggestion: "title: "+similarTracks[i].title, type: "Tracks"})
                 }
         }
 
         if(savedQueries.length>0)
             for(i=0; i < 3; i++)
                 if(i < savedQueries.length )
-                    suggestionsList.model.append({suggestion: savedQueries[i]})
+                    suggestionsList.model.append({suggestion: savedQueries[i], type: "Recent"})
 
     }
 }

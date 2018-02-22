@@ -6,6 +6,7 @@ import "../../view_models/BabeMenu"
 import "../../utils"
 import ".."
 import "../../utils/Player.js" as Player
+import "../../utils/Help.js" as H
 
 BabeMenu
 {
@@ -28,12 +29,11 @@ BabeMenu
         rate = rank
         if(bae.rateTrack(list.model.get(list.currentIndex).url, rate))
         {
-            list.currentItem.trackRating.text = list.currentItem.setStars(rate)
+            list.currentItem.trackRating.text = H.setStars(rate)
             list.model.get(list.currentIndex).stars = rate
         }
-        if(!root.isMobile)
-            dismiss()
-        else close()
+
+        close()
     }
 
     function moodIt(color)
@@ -43,9 +43,8 @@ BabeMenu
             list.currentItem.trackMood = color
             list.model.get(list.currentIndex).art = color
         }
-        if(!root.isMobile)
-            dismiss()
-        else close()
+
+        close()
     }
 
     function babeIt(index)
@@ -129,13 +128,21 @@ BabeMenu
     BabeMenuItem
     {
         text: babe == false ? "Babe it" : "UnBabe it"
-        onTriggered: babeIt(list.currentIndex)
+        onTriggered:
+        {
+            babeIt(list.currentIndex)
+            close()
+        }
     }
 
     BabeMenuItem
     {
         text: "Queue"
-        onTriggered: queueIt(list.currentIndex)
+        onTriggered:
+        {
+            queueIt(list.currentIndex)
+            close()
+        }
     }
 
     BabeMenuItem
@@ -145,32 +152,49 @@ BabeMenu
         {
             playlistDialog.tracks = [list.model.get(list.currentIndex).url]
             playlistDialog.open()
+            close()
         }
     }
 
     BabeMenuItem
     {
-        text: qsTr("Show in folder...")
-        visible: !isMobile
-        onTriggered: bae.showFolder(list.model.get(list.currentIndex).url)
+        text: isMobile ? qsTr("Open with...") : qsTr("Show in folder...")
+
+        onTriggered:
+        {
+            isMobile ?
+                        bae.showFolder(list.model.get(list.currentIndex).url) :
+                        bae.openFile(list.model.get(list.currentIndex).url)
+            close()
+        }
     }
 
     BabeMenuItem
     {
         text: "Edit..."
-        onTriggered: {}
+        onTriggered: {close()}
     }
 
     BabeMenuItem
     {
         text: "Send to..."
-        onTriggered: isMobile ? bae.sendTrack(list.model.get(list.currentIndex).url) : sendToPopup.open()
+        onTriggered:
+        {
+            isMobile ?
+                        bae.sendTrack(list.model.get(list.currentIndex).url) :
+                        sendToPopup.open()
+            close()
+        }
     }
 
     BabeMenuItem
     {
         text: "Remove"
-        onTriggered: listModel.remove(list.currentIndex)
+        onTriggered:
+        {
+            listModel.remove(list.currentIndex)
+            close()
+        }
     }
 
     Column

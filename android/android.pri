@@ -1,3 +1,5 @@
+android {
+
 QT += androidextras
 
 HEADERS += \
@@ -11,7 +13,10 @@ SOURCES += \
 
 DISTFILES += \
     $$PWD/src/SendIntent.java \
-    $$PWD/src/NotificationClient.java
+    $$PWD/src/NotificationClient.java \
+    $$PWD/src/MyService.java
 
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/src
+
+}

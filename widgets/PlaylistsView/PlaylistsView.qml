@@ -7,6 +7,7 @@ import "../../view_models/BabeTable"
 import "../../view_models/BabeMenu"
 import "../../view_models"
 import "../../db/Queries.js" as Q
+import "../../utils/Help.js" as H
 
 
 //    transform: Translate
@@ -152,6 +153,17 @@ Kirigami.PageRow
                     }
                 }
             ]
+
+
+            section.criteria: ViewSection.FullString
+            section.delegate: BabeDelegate
+            {
+                label: filterList.section.property === qsTr("stars") ? H.setStars(section) : section
+                isSection: true
+                boldLabel: true
+                fontFamily: "Material Design Icons"
+
+            }
 
             Connections
             {

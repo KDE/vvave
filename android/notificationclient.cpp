@@ -43,11 +43,27 @@ void NotificationClient::updateAndroidNotification()
 {
 
 #if defined(Q_OS_ANDROID)
-    QAndroidJniObject javaNotification = QAndroidJniObject::fromString(m_notification);
-       QAndroidJniObject::callStaticMethod<void>("org/qtproject/example/notification/NotificationClient",
-                                          "notify",
-                                          "(Ljava/lang/String;)V",
-                                          javaNotification.object<jstring>());
+    QAndroidJniEnvironment _env;
+    QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");   //activity is valid
+    if (_env->ExceptionCheck()) {
+        _env->ExceptionClear();
+        throw InterfaceConnFailedException();
+    }
+    if ( activity.isValid() )
+    {
+        QAndroidJniObject::callStaticMethod<void>("com/example/android/tools/NotificationClient",
+                                                  "notify",
+                                                  "(Landroid/content/Context;Ljava/lang/String;)V",
+                                                  QtAndroid::androidContext().object(),
+                                                  QAndroidJniObject::fromString(m_notification).object<jstring>());
+        if (_env->ExceptionCheck()) {
+            _env->ExceptionClear();
+            throw InterfaceConnFailedException();
+        }
+    }else
+        throw InterfaceConnFailedException();
+
+
 #endif
 
 }

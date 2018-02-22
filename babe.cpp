@@ -68,8 +68,8 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
     {
         emit this->skipTrack();
     });
-//#elif defined (Q_OS_ANDROID)
-//    this->nof = new NotificationClient(this);
+#elif defined (Q_OS_ANDROID)
+    this->nof = new NotificationClient(this);
 #endif
 
 }
@@ -307,6 +307,33 @@ void Babe::sendTrack(const QString &url)
     {
         QAndroidJniObject::callStaticMethod<void>("com/example/android/tools/SendIntent",
                                                   "sendTrack",
+                                                  "(Landroid/app/Activity;Ljava/lang/String;)V",
+                                                  activity.object<jobject>(),
+                                                  QAndroidJniObject::fromString(url).object<jstring>());
+        if (_env->ExceptionCheck()) {
+            _env->ExceptionClear();
+            throw InterfaceConnFailedException();
+        }
+    }else
+        throw InterfaceConnFailedException();
+#endif
+
+}
+
+void Babe::openFile(const QString &url)
+{
+#if defined(Q_OS_ANDROID)
+    bDebug::Instance()->msg("Opening track "+ url);
+    QAndroidJniEnvironment _env;
+    QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");   //activity is valid
+    if (_env->ExceptionCheck()) {
+        _env->ExceptionClear();
+        throw InterfaceConnFailedException();
+    }
+    if ( activity.isValid() )
+    {
+        QAndroidJniObject::callStaticMethod<void>("com/example/android/tools/SendIntent",
+                                                  "openFile",
                                                   "(Landroid/app/Activity;Ljava/lang/String;)V",
                                                   activity.object<jobject>(),
                                                   QAndroidJniObject::fromString(url).object<jstring>());

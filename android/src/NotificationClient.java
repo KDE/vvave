@@ -1,29 +1,38 @@
-package org.qtproject.example.notification;
+package com.example.android.tools;
 
-import android.app.Notification;
-import android.app.NotificationManager;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.app.PendingIntent ;
+
 import android.content.Context;
 
-public class NotificationClient extends org.qtproject.qt5.android.bindings.QtActivity
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.NotificationCompat;
+import org.qtproject.qt5.android.QtNative;
+
+public class NotificationClient
 {
-    private static NotificationManager m_notificationManager;
-    private static Notification.Builder m_builder;
-    private static NotificationClient m_instance;
-
-    public NotificationClient()
+    public static void notify(Context context, String s)
     {
-        m_instance = this;
-    }
+        Intent intent = new Intent(context, NotificationClient.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
-    public static void notify(String s)
-    {
-        if (m_notificationManager == null) {
-            m_notificationManager = (NotificationManager)m_instance.getSystemService(Context.NOTIFICATION_SERVICE);
-            m_builder = new Notification.Builder(m_instance);
-            m_builder.setContentTitle("A message from Qt!");
-        }
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                .setContentTitle("My notification")
+                .setContentText("Hello World!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
 
-        m_builder.setContentText(s);
-        m_notificationManager.notify(1, m_builder.build());
+        // Add as notification
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+
+        // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(100, mBuilder.build());
+
     }
 }

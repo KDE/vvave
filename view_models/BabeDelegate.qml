@@ -6,16 +6,20 @@ ItemDelegate
 {
     id: listItem
 
+
     width: parent.width
     height: rowHeightAlt
 
+    property bool isSection : false
+    property bool boldLabel : false
     property alias label: labelTxt.text
+    property alias fontFamily: labelTxt.font.family
     property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
 
     Rectangle
     {
         anchors.fill: parent
-        color: index % 2 === 0 ? midColor : "transparent"
+        color:  isSection ? midLightColor : (index % 2 === 0 ? midColor : "transparent")
         opacity: 0.3
     }
 
@@ -38,6 +42,8 @@ ItemDelegate
             text: labelTxt.text
             elide: Text.ElideRight
             color: textColor
+            font.bold: boldLabel
+            font.weight : boldLabel ? Font.Bold : Font.Normal
         }
     }
 }

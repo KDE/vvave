@@ -15,7 +15,7 @@ Item
     property var searchRes : []
     property var savedQueries : []
 
-    property bool autoSuggestions : true
+    property bool autoSuggestions : bae.loadSetting("AUTOSUGGESTIONS", "BABE", false) === "true" ? true : false
 
     function runSearch(searchTxt)
     {
@@ -142,6 +142,7 @@ Item
                     onClicked:
                     {
                         autoSuggestions = !autoSuggestions
+                        bae.saveSetting("AUTOSUGGESTIONS", autoSuggestions, "BABE")
                         if(!autoSuggestions)
                             suggestionsPopup.close()
                     }
@@ -163,8 +164,8 @@ Item
                     wrapMode: TextEdit.Wrap
                     //activeFocusOnPress: true
                     onAccepted: runSearch(searchInput.text)
-                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
-                    onTextEdited: if(suggestionsPopup.visible) suggestionsPopup.updateSuggestions()
+//                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
+                    onTextEdited: if(autoSuggestions) suggestionsPopup.updateSuggestions()
                 }
 
                 BabeButton

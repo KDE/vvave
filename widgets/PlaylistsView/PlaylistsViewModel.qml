@@ -74,19 +74,61 @@ BabeList
             {
                 currentIndex = index
                 var playlist = playlistListModel.get(index).playlist
+                filterList.section.property = ""
 
                 switch(playlist)
                 {
-                case "Most Played": playlistViewRoot.populate(Q.GET.mostPlayedTracks); break;
-                case "Favorites": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
-                case "Recent": playlistViewRoot.populate(Q.GET.recentTracks); break;
-                case "Babes": playlistViewRoot.populate(Q.GET.babedTracks); break;
-                case "Online": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
-                case "Tags": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
-                case "Relationships": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
-                case "Popular": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
-                case "Genre": playlistViewRoot.populate(Q.GET.favoriteTracks); break;
-                default: playlistViewRoot.populate(Q.GET.playlistTracks_.arg(playlist)); break;
+                case "Most Played":
+
+                    playlistViewRoot.populate(Q.GET.mostPlayedTracks);
+                    break;
+
+                case "Favorites":
+
+                    filterList.section.property = "stars"
+                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    break;
+
+                case "Recent":
+
+                    playlistViewRoot.populate(Q.GET.recentTracks);
+                    break;
+
+                case "Babes":
+
+                    playlistViewRoot.populate(Q.GET.babedTracks);
+                    break;
+
+                case "Online":
+
+                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    break;
+
+                case "Tags":
+
+                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    break;
+
+                case "Relationships":
+
+                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    break;
+
+                case "Popular":
+
+                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    break;
+
+                case "Genre":
+
+                    filterList.section.property = "genre"
+                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    break;
+
+                default:
+
+                    playlistViewRoot.populate(Q.GET.playlistTracks_.arg(playlist));
+                    break;
 
                 }
 

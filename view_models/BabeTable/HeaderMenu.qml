@@ -21,19 +21,26 @@ BabeMenu
         BabeMenuItem
         {
             text: "Queue list"
-            onTriggered: queueListClicked()
+            onTriggered:
+            {
+                queueListClicked()
+                close()
+            }
         }
 
         BabeMenuItem
         {
             text: "Save list to..."
-            onTriggered: saveListClicked()
+            onTriggered:
+            {
+                saveListClicked()
+                close()
+            }
         }
 
         BabeMenuItem
         {
             text: "Send list to..."
-
         }
 
         Kirigami.Separator{ width: parent.width; height: 1}
@@ -41,7 +48,7 @@ BabeMenu
         BabeMenuItem
         {
             text: "Visible info..."
-            onTriggered: {}
+            onTriggered: {close()}
         }
 
         Kirigami.Separator{ width: parent.width; height: 1}
@@ -49,7 +56,7 @@ BabeMenu
         BabeMenuItem
         {
             text: "Sort..."
-            onTriggered: {}
+            onTriggered: {close()}
         }
 
     }

@@ -216,8 +216,13 @@ Kirigami.ApplicationWindow
         onPos: progressBar.value = pos
         onTiming: progressTimeLabel = time
         onDurationChanged: durationTimeLabel = time
-        onFinished: Player.nextTrack()
-        onIsPlaying:  isPlaying = playing
+        onFinished:
+        {
+            bae.playedTrack(currentTrack.url)
+            Player.nextTrack()
+        }
+
+        onIsPlaying: isPlaying = playing
     }
 
     Connections
@@ -302,7 +307,7 @@ Kirigami.ApplicationWindow
         height: visible ? headerHeight : 0
         width: root.width
         visible: true
-
+        focus: true
         FastBlur
         {
             anchors.fill: parent
@@ -351,6 +356,7 @@ Kirigami.ApplicationWindow
             to: 1000
             value: 0
             spacing: 0
+            focus: true
 
             onMoved: player.seek(player.duration() / 1000 * value);
 
@@ -366,7 +372,7 @@ Kirigami.ApplicationWindow
 
                 Kirigami.Separator
                 {
-
+                    visible: !isMobile
                     Rectangle
                     {
                         anchors.fill: parent
@@ -446,14 +452,12 @@ Kirigami.ApplicationWindow
                     loops: Animation.Infinite
                     running: miniArtwork.visible && isPlaying
                 }
-                //                height: headerHeight
-                //                width:  miniArtwork.visible ? headerHeight : 0
 
                 Image
                 {
                     id: miniArtwork
                     visible: ((!pageStack.wideMode && pageStack.currentIndex !== 0) || !mainPlaylist.cover.visible) && !mainlistEmpty
-
+                    focus: true
                     height: miniArtSize
                     width: miniArtSize
                     //                    anchors.left: parent.left
@@ -478,8 +482,6 @@ Kirigami.ApplicationWindow
                             pageStack.currentIndex = 0
                         }
                     }
-
-
 
                     layer.enabled: true
                     layer.effect: OpacityMask
@@ -578,7 +580,7 @@ Kirigami.ApplicationWindow
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
 
-//                    onPressAndHold: Player.playAt(Player.shuffle())
+                    onPressAndHold: Player.playAt(Player.shuffle())
                 }
 
                 BabeButton

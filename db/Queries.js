@@ -13,7 +13,7 @@ var GET = {
     tracksWhere_ : "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where %1",
 
 
-    mostPlayedTracks : "select t.*, al.artwork from tracks t inner join albums al on t.album = al.album  and t.artist = al.artist WHERE al.played > 0 ORDER BY played desc LIMIT 100",
+    mostPlayedTracks : "select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist WHERE t.played > 0 ORDER BY played desc LIMIT 100",
     favoriteTracks : "select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where stars > 0 order by stars desc limit 100",
     recentTracks: "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist order by strftime(\"%s\", t.addDate) desc LIMIT 100",
     babedTracks: "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where t.babe = 1",

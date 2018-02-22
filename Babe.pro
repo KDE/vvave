@@ -9,22 +9,24 @@ QT       += qml
 QT       += quickcontrols2
 
 android: QT += androidextras
+
 TARGET = babe
 TEMPLATE = app
 
 CONFIG += c++11
 
-unix:linux:!android:
-{
-include(kde/kde.pri)
-}
+linux:unix:!android {
+    include(kde/kde.pri)
 
-android:
-{
-    message(Building for helpers for Android)
+} else:android {
+
+    message(Building helpers for Android)
     include(android/android.pri)
     include(android-openssl.pri)
     include(3rdparty/kirigami/kirigami.pri)
+
+} else {
+    message("Unknown configuration")
 }
 
 

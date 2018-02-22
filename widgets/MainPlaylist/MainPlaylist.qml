@@ -45,7 +45,7 @@ Item
     Rectangle
     {
         anchors.fill: parent
-        color: midLightColor
+        color: darkDarkColor
         z: -999
     }
 
@@ -130,25 +130,9 @@ Item
                 anchors.fill: parent
                 color: darkDarkColor
                 opacity: opacityLevel
-                z: -999
-
-                Kirigami.Separator
-                {
-                    visible: !stackView.currentItem === table
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: Kirigami.Theme.viewFocusColor
-                    }
-
-                    anchors
-                    {
-                        left: parent.left
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
-                }
+                z: -999                
             }
+
             MouseArea
             {
                 anchors.fill: parent
@@ -291,13 +275,6 @@ Item
                     holder.emoji: "qrc:/assets/face-sleeping.png"
 
                     textColor: darkForegroundColor
-
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: darkDarkColor
-                        z: -999
-                    }
 
                     onRowClicked:
                     {

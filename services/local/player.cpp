@@ -85,6 +85,7 @@ void Player::update()
     }
 
     emit this->isPlaying(this->player->state() == QMediaPlayer::PlayingState ? true : false);
-    if(this->player->state() == QMediaPlayer::StoppedState)
+    if(this->player->state() == QMediaPlayer::StoppedState)    
         emit this->finished();
+
 }
