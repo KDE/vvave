@@ -85,6 +85,7 @@ ToolBar
         {
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.minimumWidth: 0
         }
 
         Item
@@ -213,6 +214,8 @@ ToolBar
         {
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.minimumWidth: 0
+
         }
 
         Item

@@ -113,10 +113,10 @@ Kirigami.ApplicationWindow
                                             "albums" : 1,
                                             "artists" : 2,
                                             "playlists" : 3,
-                                            "search" : 4,
-                                            "babeit": 5,
-
+                                            "babeit": 4,
+                                            "search" : 5,
                                         })
+
     property bool mainlistEmpty : !mainPlaylist.table.count > 0
 
     /*PROPS*/
@@ -805,6 +805,11 @@ Kirigami.ApplicationWindow
                     }
                 }
 
+                BabeitView
+                {
+                    id: babeitView
+                }
+
                 SearchTable
                 {
                     id: searchView
@@ -824,11 +829,6 @@ Kirigami.ApplicationWindow
 
                         }
                     }
-                }
-
-                BabeitView
-                {
-                    id: babeitView
                 }
 
             }

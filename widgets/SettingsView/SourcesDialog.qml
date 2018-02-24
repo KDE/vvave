@@ -44,7 +44,7 @@ BabePopup
     BabeList
     {
         id: sources
-         anchors.fill: parent
+        anchors.fill: parent
         headerBarVisible: true
         headerBarExit: true
         headerBarTitle: qsTr("Sources")
@@ -75,7 +75,13 @@ BabePopup
             BabeButton
             {
                 iconName: "list-remove"
-                onClicked:{}
+                onClicked:
+                {
+                    var index = sources.currentIndex
+                    if(bae.removeSource(sources.list.model.get(index).url))
+                        sources.model.remove(index)
+
+                }
             },
 
             BabeButton
@@ -101,7 +107,4 @@ BabePopup
             sources.model.append({url : folders[i]})
 
     }
-
-
-
 }

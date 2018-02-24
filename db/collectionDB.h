@@ -99,7 +99,7 @@ public:
     bool cleanArtists();
     bool removeAlbum(const QString &album, const QString &artist);
     bool cleanAlbums();
-    bool removeSource(const QString &path);
+    Q_INVOKABLE bool removeSource(const QString &path);
     Q_INVOKABLE bool removeTrack(const QString &path);
     QSqlQuery getQuery(const QString &queryTxt);
     /*useful tools*/

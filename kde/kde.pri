@@ -1,7 +1,6 @@
 
 linux:unix:!android
 {
-    message(Building for Linux)
     QT       += dbus
     QT       += KConfigCore
     QT       += KNotifications

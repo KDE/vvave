@@ -1,6 +1,6 @@
 #include "player.h"
 #include <QMediaMetaData>
-#include "../utils/bae.h"
+#include "../../utils/bae.h"
 
 Player::Player(QObject *parent) : QObject(parent)
 {

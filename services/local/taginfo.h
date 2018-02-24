@@ -1,10 +1,15 @@
 #ifndef TAGINFO_H
 #define TAGINFO_H
-#include <taglib/tag.h>
-#include <taglib/fileref.h>
+
+
+
 #include <QString>
 #include <QByteArray>
 #include <QObject>
+
+namespace TagLib {
+class FileRef;
+}
 
 class TagInfo : public QObject
 {
@@ -35,7 +40,7 @@ public:
 
 
 private:
-    TagLib::FileRef file;
+    TagLib::FileRef *file;
     QString path;
 };
 

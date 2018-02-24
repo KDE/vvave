@@ -20,7 +20,7 @@
 #include <QUuid>
 #include <QString>
 #include <QStringList>
-#include "../../utils/babeconsole.h"
+#include "../utils/babeconsole.h"
 
 using namespace BAE;
 

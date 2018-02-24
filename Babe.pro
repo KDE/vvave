@@ -8,14 +8,14 @@ QT       += xml
 QT       += qml
 QT       += quickcontrols2
 
-android: QT += androidextras
-
 TARGET = babe
 TEMPLATE = app
 
 CONFIG += c++11
 
 linux:unix:!android {
+
+    message(Building for Linux KDE)
     include(kde/kde.pri)
 
 } else:android {
@@ -30,58 +30,6 @@ linux:unix:!android {
 }
 
 
-DEPENDPATH += taglib
-DEPENDPATH += taglib/ape
-DEPENDPATH += taglib/asf
-DEPENDPATH += taglib/flac
-DEPENDPATH += taglib/it
-DEPENDPATH += taglib/mod
-DEPENDPATH += taglib/mp4
-DEPENDPATH += taglib/mpc
-DEPENDPATH += taglib/mpeg
-DEPENDPATH += taglib/mpeg/id3v1
-DEPENDPATH += taglib/mpeg/id3v2
-DEPENDPATH += taglib/mpeg/id3v2/frames
-DEPENDPATH += taglib/ogg
-DEPENDPATH += taglib/ogg/flac
-DEPENDPATH += taglib/ogg/opus
-DEPENDPATH += taglib/ogg/speex
-DEPENDPATH += taglib/ogg/vorbis
-DEPENDPATH += taglib/riff
-DEPENDPATH += taglib/riff/aiff
-DEPENDPATH += taglib/riff/wav
-DEPENDPATH += taglib/s3m
-DEPENDPATH += taglib/toolkit
-DEPENDPATH += taglib/trueaudio
-DEPENDPATH += taglib/wavpack
-DEPENDPATH += taglib/xm
-
-
-INCLUDEPATH += taglib
-INCLUDEPATH += taglib/ape
-INCLUDEPATH += taglib/asf
-INCLUDEPATH += taglib/flac
-INCLUDEPATH += taglib/it
-INCLUDEPATH += taglib/mod
-INCLUDEPATH += taglib/mp4
-INCLUDEPATH += taglib/mpc
-INCLUDEPATH += taglib/mpeg
-INCLUDEPATH += taglib/mpeg/id3v1
-INCLUDEPATH += taglib/mpeg/id3v2
-INCLUDEPATH += taglib/mpeg/id3v2/frames
-INCLUDEPATH += taglib/ogg
-INCLUDEPATH += taglib/ogg/flac
-INCLUDEPATH += taglib/ogg/opus
-INCLUDEPATH += taglib/ogg/speex
-INCLUDEPATH += taglib/ogg/vorbis
-INCLUDEPATH += taglib/riff
-INCLUDEPATH += taglib/riff/aiff
-INCLUDEPATH += taglib/riff/wav
-INCLUDEPATH += taglib/s3m
-INCLUDEPATH += taglib/toolkit
-INCLUDEPATH += taglib/trueaudio
-INCLUDEPATH += taglib/wavpack
-INCLUDEPATH += taglib/xm
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -108,103 +56,7 @@ SOURCES += main.cpp \
     pulpo/services/spotifyService.cpp \
     pulpo/services/musicbrainzService.cpp \
     pulpo/services/geniusService.cpp \
-    pulpo/services/lyricwikiaService.cpp \
-    taglib/ape/apefile.cpp \
-    taglib/ape/apefooter.cpp \
-    taglib/ape/apeitem.cpp \
-    taglib/ape/apeproperties.cpp \
-    taglib/ape/apetag.cpp \
-    taglib/asf/asfattribute.cpp \
-    taglib/asf/asffile.cpp \
-    taglib/asf/asfpicture.cpp \
-    taglib/asf/asfproperties.cpp \
-    taglib/asf/asftag.cpp \
-    taglib/flac/flacfile.cpp \
-    taglib/flac/flacmetadatablock.cpp \
-    taglib/flac/flacpicture.cpp \
-        taglib/flac/flacproperties.cpp \
-        taglib/flac/flacunknownmetadatablock.cpp \
-        taglib/it/itfile.cpp \
-        taglib/it/itproperties.cpp \
-        taglib/mod/modfile.cpp \
-        taglib/mod/modfilebase.cpp \
-        taglib/mod/modproperties.cpp \
-        taglib/mod/modtag.cpp \
-        taglib/mp4/mp4atom.cpp \
-        taglib/mp4/mp4coverart.cpp \
-        taglib/mp4/mp4file.cpp \
-        taglib/mp4/mp4item.cpp \
-        taglib/mp4/mp4properties.cpp \
-        taglib/mp4/mp4tag.cpp \
-        taglib/mpc/mpcfile.cpp \
-        taglib/mpc/mpcproperties.cpp \
-        taglib/mpeg/id3v1/id3v1genres.cpp \
-        taglib/mpeg/id3v1/id3v1tag.cpp \
-        taglib/mpeg/id3v2/frames/attachedpictureframe.cpp \
-        taglib/mpeg/id3v2/frames/commentsframe.cpp \
-        taglib/mpeg/id3v2/frames/generalencapsulatedobjectframe.cpp \
-        taglib/mpeg/id3v2/frames/ownershipframe.cpp \
-        taglib/mpeg/id3v2/frames/popularimeterframe.cpp \
-        taglib/mpeg/id3v2/frames/privateframe.cpp \
-        taglib/mpeg/id3v2/frames/relativevolumeframe.cpp \
-        taglib/mpeg/id3v2/frames/textidentificationframe.cpp \
-        taglib/mpeg/id3v2/frames/uniquefileidentifierframe.cpp \
-        taglib/mpeg/id3v2/frames/unknownframe.cpp \
-        taglib/mpeg/id3v2/frames/unsynchronizedlyricsframe.cpp \
-        taglib/mpeg/id3v2/frames/urllinkframe.cpp \
-        taglib/mpeg/id3v2/id3v2extendedheader.cpp \
-        taglib/mpeg/id3v2/id3v2footer.cpp \
-        taglib/mpeg/id3v2/id3v2frame.cpp \
-        taglib/mpeg/id3v2/id3v2framefactory.cpp \
-        taglib/mpeg/id3v2/id3v2header.cpp \
-        taglib/mpeg/id3v2/id3v2synchdata.cpp \
-        taglib/mpeg/id3v2/id3v2tag.cpp \
-        taglib/mpeg/mpegfile.cpp \
-        taglib/mpeg/mpegheader.cpp \
-        taglib/mpeg/mpegproperties.cpp \
-        taglib/mpeg/xingheader.cpp \
-        taglib/ogg/flac/oggflacfile.cpp \
-        taglib/ogg/opus/opusfile.cpp \
-        taglib/ogg/opus/opusproperties.cpp \
-        taglib/ogg/speex/speexfile.cpp \
-        taglib/ogg/speex/speexproperties.cpp \
-        taglib/ogg/vorbis/vorbisfile.cpp \
-        taglib/ogg/vorbis/vorbisproperties.cpp \
-        taglib/ogg/oggfile.cpp \
-        taglib/ogg/oggpage.cpp \
-        taglib/ogg/oggpageheader.cpp \
-        taglib/ogg/xiphcomment.cpp \
-        taglib/riff/aiff/aifffile.cpp \
-        taglib/riff/aiff/aiffproperties.cpp \
-        taglib/riff/wav/infotag.cpp \
-        taglib/riff/wav/wavfile.cpp \
-        taglib/riff/wav/wavproperties.cpp \
-        taglib/riff/rifffile.cpp \
-        taglib/s3m/s3mfile.cpp \
-        taglib/s3m/s3mproperties.cpp \
-        taglib/toolkit/tbytevector.cpp \
-        taglib/toolkit/tbytevectorlist.cpp \
-        taglib/toolkit/tbytevectorstream.cpp \
-        taglib/toolkit/tdebug.cpp \
-        taglib/toolkit/tdebuglistener.cpp \
-        taglib/toolkit/tfile.cpp \
-        taglib/toolkit/tfilestream.cpp \
-        taglib/toolkit/tiostream.cpp \
-        taglib/toolkit/tpropertymap.cpp \
-        taglib/toolkit/trefcounter.cpp \
-        taglib/toolkit/tstring.cpp \
-        taglib/toolkit/tstringlist.cpp \
-        taglib/toolkit/unicode.cpp \
-        taglib/trueaudio/trueaudiofile.cpp \
-        taglib/trueaudio/trueaudioproperties.cpp \
-        taglib/wavpack/wavpackfile.cpp \
-        taglib/wavpack/wavpackproperties.cpp \
-        taglib/xm/xmfile.cpp \
-        taglib/xm/xmproperties.cpp \
-        taglib/audioproperties.cpp \
-        taglib/fileref.cpp \
-        taglib/tag.cpp \
-        taglib/tagunion.cpp \
+    pulpo/services/lyricwikiaService.cpp \ 
     babe.cpp \
     settings/BabeSettings.cpp \
     db/conthread.cpp \
@@ -212,10 +64,7 @@ SOURCES += main.cpp \
     utils/babeconsole.cpp
 
 
-
-
 RESOURCES += qml.qrc
-android: RESOURCES += android.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -227,7 +76,7 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-n
+
 
 DISTFILES += \
     db/script.sql \
@@ -260,111 +109,7 @@ HEADERS += \
     pulpo/services/musicbrainzService.h \
     pulpo/services/deezerService.h \
     pulpo/services/lyricwikiaService.h \
-    pulpo/services/lastfmService.h \
-        taglib/ape/apefile.h \
-        taglib/ape/apefooter.h \
-        taglib/ape/apeitem.h \
-        taglib/ape/apeproperties.h \
-        taglib/ape/apetag.h \
-        taglib/asf/asfattribute.h \
-        taglib/asf/asffile.h \
-        taglib/asf/asfpicture.h \
-        taglib/asf/asfproperties.h \
-        taglib/asf/asftag.h \
-        taglib/flac/flacfile.h \
-        taglib/flac/flacmetadatablock.h \
-        taglib/flac/flacpicture.h \
-        taglib/flac/flacproperties.h \
-        taglib/flac/flacunknownmetadatablock.h \
-        taglib/it/itfile.h \
-        taglib/it/itproperties.h \
-        taglib/mod/modfile.h \
-        taglib/mod/modfilebase.h \
-        taglib/mod/modfileprivate.h \
-        taglib/mod/modproperties.h \
-        taglib/mod/modtag.h \
-        taglib/mp4/mp4atom.h \
-        taglib/mp4/mp4coverart.h \
-        taglib/mp4/mp4file.h \
-        taglib/mp4/mp4item.h \
-        taglib/mp4/mp4properties.h \
-        taglib/mp4/mp4tag.h \
-        taglib/mpc/mpcfile.h \
-        taglib/mpc/mpcproperties.h \
-        taglib/mpeg/id3v1/id3v1genres.h \
-        taglib/mpeg/id3v1/id3v1tag.h \
-        taglib/mpeg/id3v2/frames/attachedpictureframe.h \
-        taglib/mpeg/id3v2/frames/commentsframe.h \
-        taglib/mpeg/id3v2/frames/generalencapsulatedobjectframe.h \
-        taglib/mpeg/id3v2/frames/ownershipframe.h \
-        taglib/mpeg/id3v2/frames/popularimeterframe.h \
-        taglib/mpeg/id3v2/frames/privateframe.h \
-        taglib/mpeg/id3v2/frames/relativevolumeframe.h \
-        taglib/mpeg/id3v2/frames/textidentificationframe.h \
-        taglib/mpeg/id3v2/frames/uniquefileidentifierframe.h \
-        taglib/mpeg/id3v2/frames/unknownframe.h \
-        taglib/mpeg/id3v2/frames/unsynchronizedlyricsframe.h \
-        taglib/mpeg/id3v2/frames/urllinkframe.h \
-        taglib/mpeg/id3v2/id3v2extendedheader.h \
-        taglib/mpeg/id3v2/id3v2footer.h \
-        taglib/mpeg/id3v2/id3v2frame.h \
-        taglib/mpeg/id3v2/id3v2framefactory.h \
-        taglib/mpeg/id3v2/id3v2header.h \
-        taglib/mpeg/id3v2/id3v2synchdata.h \
-        taglib/mpeg/id3v2/id3v2tag.h \
-        taglib/mpeg/mpegfile.h \
-        taglib/mpeg/mpegheader.h \
-        taglib/mpeg/mpegproperties.h \
-        taglib/mpeg/xingheader.h \
-        taglib/ogg/flac/oggflacfile.h \
-        taglib/ogg/opus/opusfile.h \
-        taglib/ogg/opus/opusproperties.h \
-        taglib/ogg/speex/speexfile.h \
-        taglib/ogg/speex/speexproperties.h \
-        taglib/ogg/vorbis/vorbisfile.h \
-        taglib/ogg/vorbis/vorbisproperties.h \
-        taglib/ogg/oggfile.h \
-        taglib/ogg/oggpage.h \
-        taglib/ogg/oggpageheader.h \
-        taglib/ogg/xiphcomment.h \
-        taglib/riff/aiff/aifffile.h \
-        taglib/riff/aiff/aiffproperties.h \
-        taglib/riff/wav/infotag.h \
-        taglib/riff/wav/wavfile.h \
-        taglib/riff/wav/wavproperties.h \
-        taglib/riff/rifffile.h \
-        taglib/s3m/s3mfile.h \
-        taglib/s3m/s3mproperties.h \
-        taglib/toolkit/taglib.h \
-        taglib/toolkit/tbytevector.h \
-        taglib/toolkit/tbytevectorlist.h \
-        taglib/toolkit/tbytevectorstream.h \
-        taglib/toolkit/tdebug.h \
-        taglib/toolkit/tdebuglistener.h \
-        taglib/toolkit/tfile.h \
-        taglib/toolkit/tfilestream.h \
-        taglib/toolkit/tiostream.h \
-        taglib/toolkit/tlist.h \
-        taglib/toolkit/tmap.h \
-        taglib/toolkit/tpropertymap.h \
-        taglib/toolkit/trefcounter.h \
-        taglib/toolkit/tstring.h \
-        taglib/toolkit/tstringlist.h \
-        taglib/toolkit/tutils.h \
-        taglib/toolkit/unicode.h \
-        taglib/trueaudio/trueaudiofile.h \
-        taglib/trueaudio/trueaudioproperties.h \
-        taglib/wavpack/wavpackfile.h \
-        taglib/wavpack/wavpackproperties.h \
-        taglib/xm/xmfile.h \
-        taglib/xm/xmproperties.h \
-        taglib/audioproperties.h \
-        taglib/fileref.h \
-        taglib/tag.h \
-        taglib/taglib_export.h \
-        taglib/tagunion.h \
-        taglib/config.h \
-        taglib/taglib_config.h \
+    pulpo/services/lastfmService.h \       
     babe.h \
     settings/BabeSettings.h \
     db/conthread.h \
@@ -372,7 +117,275 @@ HEADERS += \
     utils/babeconsole.h \
     utils/singleton.h
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+#TAGLIB
+linux:unix:!android {
+    message(Searching local TagLib lib)
+
+    LIBS += -ltag
+
+} else:android {
+    message(Building TagLib for Android)
+
+    DEPENDPATH += 3rdparty/taglib
+    DEPENDPATH += 3rdparty/taglib/ape
+    DEPENDPATH += 3rdparty/taglib/asf
+    DEPENDPATH += 3rdparty/taglib/flac
+    DEPENDPATH += 3rdparty/taglib/it
+    DEPENDPATH += 3rdparty/taglib/mod
+    DEPENDPATH += 3rdparty/taglib/mp4
+    DEPENDPATH += 3rdparty/taglib/mpc
+    DEPENDPATH += 3rdparty/taglib/mpeg
+    DEPENDPATH += 3rdparty/taglib/mpeg/id3v1
+    DEPENDPATH += 3rdparty/taglib/mpeg/id3v2
+    DEPENDPATH += 3rdparty/taglib/mpeg/id3v2/frames
+    DEPENDPATH += 3rdparty/taglib/ogg
+    DEPENDPATH += 3rdparty/taglib/ogg/flac
+    DEPENDPATH += 3rdparty/taglib/ogg/opus
+    DEPENDPATH += 3rdparty/taglib/ogg/speex
+    DEPENDPATH += 3rdparty/taglib/ogg/vorbis
+    DEPENDPATH += 3rdparty/taglib/riff
+    DEPENDPATH += 3rdparty/taglib/riff/aiff
+    DEPENDPATH += 3rdparty/taglib/riff/wav
+    DEPENDPATH += 3rdparty/taglib/s3m
+    DEPENDPATH += 3rdparty/taglib/toolkit
+    DEPENDPATH += 3rdparty/taglib/trueaudio
+    DEPENDPATH += 3rdparty/taglib/wavpack
+    DEPENDPATH += 3rdparty/taglib/xm
+
+
+    INCLUDEPATH += 3rdparty/taglib
+    INCLUDEPATH += 3rdparty/taglib/ape
+    INCLUDEPATH += 3rdparty/taglib/asf
+    INCLUDEPATH += 3rdparty/taglib/flac
+    INCLUDEPATH += 3rdparty/taglib/it
+    INCLUDEPATH += 3rdparty/taglib/mod
+    INCLUDEPATH += 3rdparty/taglib/mp4
+    INCLUDEPATH += 3rdparty/taglib/mpc
+    INCLUDEPATH += 3rdparty/taglib/mpeg
+    INCLUDEPATH += 3rdparty/taglib/mpeg/id3v1
+    INCLUDEPATH += 3rdparty/taglib/mpeg/id3v2
+    INCLUDEPATH += 3rdparty/taglib/mpeg/id3v2/frames
+    INCLUDEPATH += 3rdparty/taglib/ogg
+    INCLUDEPATH += 3rdparty/taglib/ogg/flac
+    INCLUDEPATH += 3rdparty/taglib/ogg/opus
+    INCLUDEPATH += 3rdparty/taglib/ogg/speex
+    INCLUDEPATH += 3rdparty/taglib/ogg/vorbis
+    INCLUDEPATH += 3rdparty/taglib/riff
+    INCLUDEPATH += 3rdparty/taglib/riff/aiff
+    INCLUDEPATH += 3rdparty/taglib/riff/wav
+    INCLUDEPATH += 3rdparty/taglib/s3m
+    INCLUDEPATH += 3rdparty/taglib/toolkit
+    INCLUDEPATH += 3rdparty/taglib/trueaudio
+    INCLUDEPATH += 3rdparty/taglib/wavpack
+    INCLUDEPATH += 3rdparty/taglib/xm
+
+SOURCES +=    \
+    3rdparty/taglib/ape/apefile.cpp \
+    3rdparty/taglib/ape/apefooter.cpp \
+    3rdparty/taglib/ape/apeitem.cpp \
+    3rdparty/taglib/ape/apeproperties.cpp \
+    3rdparty/taglib/ape/apetag.cpp \
+    3rdparty/taglib/asf/asfattribute.cpp \
+    3rdparty/taglib/asf/asffile.cpp \
+    3rdparty/taglib/asf/asfpicture.cpp \
+    3rdparty/taglib/asf/asfproperties.cpp \
+    3rdparty/taglib/asf/asftag.cpp \
+    3rdparty/taglib/flac/flacfile.cpp \
+    3rdparty/taglib/flac/flacmetadatablock.cpp \
+    3rdparty/taglib/flac/flacpicture.cpp \
+    3rdparty/taglib/flac/flacproperties.cpp \
+    3rdparty/taglib/flac/flacunknownmetadatablock.cpp \
+    3rdparty/taglib/it/itfile.cpp \
+    3rdparty/taglib/it/itproperties.cpp \
+    3rdparty/taglib/mod/modfile.cpp \
+    3rdparty/taglib/mod/modfilebase.cpp \
+    3rdparty/taglib/mod/modproperties.cpp \
+    3rdparty/taglib/mod/modtag.cpp \
+    3rdparty/taglib/mp4/mp4atom.cpp \
+    3rdparty/taglib/mp4/mp4coverart.cpp \
+    3rdparty/taglib/mp4/mp4file.cpp \
+    3rdparty/taglib/mp4/mp4item.cpp \
+    3rdparty/taglib/mp4/mp4properties.cpp \
+    3rdparty/taglib/mp4/mp4tag.cpp \
+    3rdparty/taglib/mpc/mpcfile.cpp \
+    3rdparty/taglib/mpc/mpcproperties.cpp \
+    3rdparty/taglib/mpeg/id3v1/id3v1genres.cpp \
+    3rdparty/taglib/mpeg/id3v1/id3v1tag.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/attachedpictureframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/commentsframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/generalencapsulatedobjectframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/ownershipframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/popularimeterframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/privateframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/relativevolumeframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/textidentificationframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/uniquefileidentifierframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/unknownframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/unsynchronizedlyricsframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/frames/urllinkframe.cpp \
+    3rdparty/taglib/mpeg/id3v2/id3v2extendedheader.cpp \
+    3rdparty/taglib/mpeg/id3v2/id3v2footer.cpp \
+    3rdparty/taglib/mpeg/id3v2/id3v2frame.cpp \
+    3rdparty/taglib/mpeg/id3v2/id3v2framefactory.cpp \
+    3rdparty/taglib/mpeg/id3v2/id3v2header.cpp \
+    3rdparty/taglib/mpeg/id3v2/id3v2synchdata.cpp \
+    3rdparty/taglib/mpeg/id3v2/id3v2tag.cpp \
+    3rdparty/taglib/mpeg/mpegfile.cpp \
+    3rdparty/taglib/mpeg/mpegheader.cpp \
+    3rdparty/taglib/mpeg/mpegproperties.cpp \
+    3rdparty/taglib/mpeg/xingheader.cpp \
+    3rdparty/taglib/ogg/flac/oggflacfile.cpp \
+    3rdparty/taglib/ogg/opus/opusfile.cpp \
+    3rdparty/taglib/ogg/opus/opusproperties.cpp \
+    3rdparty/taglib/ogg/speex/speexfile.cpp \
+    3rdparty/taglib/ogg/speex/speexproperties.cpp \
+    3rdparty/taglib/ogg/vorbis/vorbisfile.cpp \
+    3rdparty/taglib/ogg/vorbis/vorbisproperties.cpp \
+    3rdparty/taglib/ogg/oggfile.cpp \
+    3rdparty/taglib/ogg/oggpage.cpp \
+    3rdparty/taglib/ogg/oggpageheader.cpp \
+    3rdparty/taglib/ogg/xiphcomment.cpp \
+    3rdparty/taglib/riff/aiff/aifffile.cpp \
+    3rdparty/taglib/riff/aiff/aiffproperties.cpp \
+    3rdparty/taglib/riff/wav/infotag.cpp \
+    3rdparty/taglib/riff/wav/wavfile.cpp \
+    3rdparty/taglib/riff/wav/wavproperties.cpp \
+    3rdparty/taglib/riff/rifffile.cpp \
+    3rdparty/taglib/s3m/s3mfile.cpp \
+    3rdparty/taglib/s3m/s3mproperties.cpp \
+    3rdparty/taglib/toolkit/tbytevector.cpp \
+    3rdparty/taglib/toolkit/tbytevectorlist.cpp \
+    3rdparty/taglib/toolkit/tbytevectorstream.cpp \
+    3rdparty/taglib/toolkit/tdebug.cpp \
+    3rdparty/taglib/toolkit/tdebuglistener.cpp \
+    3rdparty/taglib/toolkit/tfile.cpp \
+    3rdparty/taglib/toolkit/tfilestream.cpp \
+    3rdparty/taglib/toolkit/tiostream.cpp \
+    3rdparty/taglib/toolkit/tpropertymap.cpp \
+    3rdparty/taglib/toolkit/trefcounter.cpp \
+    3rdparty/taglib/toolkit/tstring.cpp \
+    3rdparty/taglib/toolkit/tstringlist.cpp \
+    3rdparty/taglib/toolkit/unicode.cpp \
+    3rdparty/taglib/trueaudio/trueaudiofile.cpp \
+    3rdparty/taglib/trueaudio/trueaudioproperties.cpp \
+    3rdparty/taglib/wavpack/wavpackfile.cpp \
+    3rdparty/taglib/wavpack/wavpackproperties.cpp \
+    3rdparty/taglib/xm/xmfile.cpp \
+    3rdparty/taglib/xm/xmproperties.cpp \
+    3rdparty/taglib/audioproperties.cpp \
+    3rdparty/taglib/fileref.cpp \
+    3rdparty/taglib/tag.cpp \
+    3rdparty/taglib/tagunion.cpp \
+
+HEADERS += \
+    3rdparty/taglib/ape/apefile.h \
+    3rdparty/taglib/ape/apefooter.h \
+    3rdparty/taglib/ape/apeitem.h \
+    3rdparty/taglib/ape/apeproperties.h \
+    3rdparty/taglib/ape/apetag.h \
+    3rdparty/taglib/asf/asfattribute.h \
+    3rdparty/taglib/asf/asffile.h \
+    3rdparty/taglib/asf/asfpicture.h \
+    3rdparty/taglib/asf/asfproperties.h \
+    3rdparty/taglib/asf/asftag.h \
+    3rdparty/taglib/flac/flacfile.h \
+    3rdparty/taglib/flac/flacmetadatablock.h \
+    3rdparty/taglib/flac/flacpicture.h \
+    3rdparty/taglib/flac/flacproperties.h \
+    3rdparty/taglib/flac/flacunknownmetadatablock.h \
+    3rdparty/taglib/it/itfile.h \
+    3rdparty/taglib/it/itproperties.h \
+    3rdparty/taglib/mod/modfile.h \
+    3rdparty/taglib/mod/modfilebase.h \
+    3rdparty/taglib/mod/modfileprivate.h \
+    3rdparty/taglib/mod/modproperties.h \
+    3rdparty/taglib/mod/modtag.h \
+    3rdparty/taglib/mp4/mp4atom.h \
+    3rdparty/taglib/mp4/mp4coverart.h \
+    3rdparty/taglib/mp4/mp4file.h \
+    3rdparty/taglib/mp4/mp4item.h \
+    3rdparty/taglib/mp4/mp4properties.h \
+    3rdparty/taglib/mp4/mp4tag.h \
+    3rdparty/taglib/mpc/mpcfile.h \
+    3rdparty/taglib/mpc/mpcproperties.h \
+    3rdparty/taglib/mpeg/id3v1/id3v1genres.h \
+    3rdparty/taglib/mpeg/id3v1/id3v1tag.h \
+    3rdparty/taglib/mpeg/id3v2/frames/attachedpictureframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/commentsframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/generalencapsulatedobjectframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/ownershipframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/popularimeterframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/privateframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/relativevolumeframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/textidentificationframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/uniquefileidentifierframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/unknownframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/unsynchronizedlyricsframe.h \
+    3rdparty/taglib/mpeg/id3v2/frames/urllinkframe.h \
+    3rdparty/taglib/mpeg/id3v2/id3v2extendedheader.h \
+    3rdparty/taglib/mpeg/id3v2/id3v2footer.h \
+    3rdparty/taglib/mpeg/id3v2/id3v2frame.h \
+    3rdparty/taglib/mpeg/id3v2/id3v2framefactory.h \
+    3rdparty/taglib/mpeg/id3v2/id3v2header.h \
+    3rdparty/taglib/mpeg/id3v2/id3v2synchdata.h \
+    3rdparty/taglib/mpeg/id3v2/id3v2tag.h \
+    3rdparty/taglib/mpeg/mpegfile.h \
+    3rdparty/taglib/mpeg/mpegheader.h \
+    3rdparty/taglib/mpeg/mpegproperties.h \
+    3rdparty/taglib/mpeg/xingheader.h \
+    3rdparty/taglib/ogg/flac/oggflacfile.h \
+    3rdparty/taglib/ogg/opus/opusfile.h \
+    3rdparty/taglib/ogg/opus/opusproperties.h \
+    3rdparty/taglib/ogg/speex/speexfile.h \
+    3rdparty/taglib/ogg/speex/speexproperties.h \
+    3rdparty/taglib/ogg/vorbis/vorbisfile.h \
+    3rdparty/taglib/ogg/vorbis/vorbisproperties.h \
+    3rdparty/taglib/ogg/oggfile.h \
+    3rdparty/taglib/ogg/oggpage.h \
+    3rdparty/taglib/ogg/oggpageheader.h \
+    3rdparty/taglib/ogg/xiphcomment.h \
+    3rdparty/taglib/riff/aiff/aifffile.h \
+    3rdparty/taglib/riff/aiff/aiffproperties.h \
+    3rdparty/taglib/riff/wav/infotag.h \
+    3rdparty/taglib/riff/wav/wavfile.h \
+    3rdparty/taglib/riff/wav/wavproperties.h \
+    3rdparty/taglib/riff/rifffile.h \
+    3rdparty/taglib/s3m/s3mfile.h \
+    3rdparty/taglib/s3m/s3mproperties.h \
+    3rdparty/taglib/toolkit/taglib.h \
+    3rdparty/taglib/toolkit/tbytevector.h \
+    3rdparty/taglib/toolkit/tbytevectorlist.h \
+    3rdparty/taglib/toolkit/tbytevectorstream.h \
+    3rdparty/taglib/toolkit/tdebug.h \
+    3rdparty/taglib/toolkit/tdebuglistener.h \
+    3rdparty/taglib/toolkit/tfile.h \
+    3rdparty/taglib/toolkit/tfilestream.h \
+    3rdparty/taglib/toolkit/tiostream.h \
+    3rdparty/taglib/toolkit/tlist.h \
+    3rdparty/taglib/toolkit/tmap.h \
+    3rdparty/taglib/toolkit/tpropertymap.h \
+    3rdparty/taglib/toolkit/trefcounter.h \
+    3rdparty/taglib/toolkit/tstring.h \
+    3rdparty/taglib/toolkit/tstringlist.h \
+    3rdparty/taglib/toolkit/tutils.h \
+    3rdparty/taglib/toolkit/unicode.h \
+    3rdparty/taglib/trueaudio/trueaudiofile.h \
+    3rdparty/taglib/trueaudio/trueaudioproperties.h \
+    3rdparty/taglib/wavpack/wavpackfile.h \
+    3rdparty/taglib/wavpack/wavpackproperties.h \
+    3rdparty/taglib/xm/xmfile.h \
+    3rdparty/taglib/xm/xmproperties.h \
+    3rdparty/taglib/audioproperties.h \
+    3rdparty/taglib/fileref.h \
+    3rdparty/taglib/tag.h \
+    3rdparty/taglib/taglib_export.h \
+    3rdparty/taglib/tagunion.h \
+    3rdparty/taglib/config.h \
+    3rdparty/taglib/taglib_config.h \
+
+}
+
 
 #INCLUDEPATH += /usr/include/python3.6m
 

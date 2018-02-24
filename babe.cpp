@@ -4,7 +4,7 @@
 #include "db/conthread.h"
 #include "settings/BabeSettings.h"
 #include "pulpo/pulpo.h"
-#include "../utils/babeconsole.h"
+#include "utils/babeconsole.h"
 
 #include <QPalette>
 #include <QWidget>
@@ -24,7 +24,7 @@
 #endif
 
 #if defined(Q_OS_ANDROID)
-#include "../android/notificationclient.h"
+#include "android/notificationclient.h"
 #include <QAndroidJniObject>
 #include <QAndroidJniEnvironment>
 #include <QtAndroid>
