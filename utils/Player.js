@@ -9,15 +9,13 @@ function playTrack(track)
 
         if(bae.fileExists(currentTrack.url))
         {
-            console.log("PLAY: "+currentTrack.url)
             player.source(currentTrack.url);
             player.play()
 
-            //            root.playIcon.iconName = "media-playback-pause"
-
             var artwork = currentTrack.artwork
-            //    root.mainPlaylist.list.currentItem.playingIndicator = true
-            currentArtwork = artwork && artwork.length>0 && artwork !== "NONE" ? artwork : bae.loadCover(currentTrack.url)
+            currentArtwork = artwork && artwork.length>0 && artwork !== "NONE"? artwork : bae.loadCover(currentTrack.url)
+
+            currentTrack.artwork = currentArtwork
 
             currentBabe = bae.trackBabe(currentTrack.url)
 

@@ -4,27 +4,34 @@ import QtQuick.Layouts 1.3
 
 BabeDialog
 {
+    id: babeMessageRoot
     property string message
     property string messageBody
     standardButtons: Dialog.Yes | Dialog.No
+
     ColumnLayout
     {
         anchors.fill: parent
+        width: parent.width
+        height: parent.height
         Label
         {
             Layout.margins: contentMargins
             text: message ? message : ""
-            width: parent.width
+            width: babeMessageRoot.width
             elide: Text.ElideRight
             color: foregroundColor
         }
 
-        Label
+        TextArea
         {
             Layout.margins: contentMargins
+            Layout.maximumWidth: parent.width
+
             text: messageBody ? messageBody : ""
             width: parent.width
-            elide: Text.ElideRight
+            wrapMode: TextEdit.WrapAnywhere
+            readOnly: true
             color: foregroundColor
         }
     }

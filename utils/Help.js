@@ -45,13 +45,26 @@ function refreshCollection(size)
     if(!isMobile && size>0) bae.notify("Collection updated", size+" new tracks added...")
 
     console.log("Clearing tables")
+    refreshTracks()
+    refreshAlbums()
+    refreshArtists()
+}
+
+function refreshTracks()
+{
     tracksView.clearTable()
     tracksView.populate()
+}
 
+function refreshAlbums()
+{
     albumsView.clearGrid()
     albumsView.populate()
 
+}
+
+function refreshArtists()
+{
     artistsView.clearGrid()
     artistsView.populate()
-
 }

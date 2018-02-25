@@ -839,7 +839,6 @@ Kirigami.ApplicationWindow
         animTxt.running = true
     }
 
-
     Component.onCompleted:
     {
         if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
@@ -865,7 +864,12 @@ Kirigami.ApplicationWindow
     Connections
     {
         target: bae
+
         onRefreshTables: H.refreshCollection(size)
+
+        onRefreshTracks: H.refreshTracks()
+        onRefreshAlbums: H.refreshAlbums()
+        onRefreshArtists: H.refreshArtists()
 
         onTrackLyricsReady:
         {

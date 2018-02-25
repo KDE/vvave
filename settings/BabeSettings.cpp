@@ -33,7 +33,6 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     this->ytFetch = new YouTube(this);
     this->babeSocket = new Socket(static_cast<quint16>(BAE::BabePort.toInt()),this);
 
-
     qDebug() << "Getting collectionDB info from: " << BAE::CollectionDBPath;
     qDebug() << "Getting settings info from: " << BAE::SettingPath;
     qDebug() << "Getting artwork files from: " << BAE::CachePath;
@@ -82,16 +81,17 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
     connect(this->brainDeamon, &Brain::done, [this](const TABLE type)
     {
-        emit this->refreshTables(0);
+        emit this->refreshATable(type);
     });
 
     connect(this->fileLoader, &FileLoader::finished,[this](int size)
     {
         if(size > 0)
         {
-            this->startBrainz(true, BAE::SEG::ONEHALF);
             bDebug::Instance()->msg("Finished inserting into DB "+QString::number(size)+" tracks");
             bDebug::Instance()->msg("Starting Brainz with interval: " + QString::number(BAE::SEG::ONEHALF));
+            this->startBrainz(true, BAE::SEG::ONEHALF);
+
         }else
             this->startBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool(), BAE::SEG::THREE);
 

@@ -10,12 +10,12 @@
 
 #include "bae.h"
 #include "../pulpo/pulpo.h"
+#include "../db/collectionDB.h"
 
-class CollectionDB;
 using namespace BAE;
 using namespace PULPO;
 
-class Brain : public QObject
+class Brain : public CollectionDB
 {
     Q_OBJECT
 
@@ -42,7 +42,6 @@ public slots:
 
 private:
     QThread t;
-    CollectionDB *con;
     Pulpo pulpo;
     uint interval = 1500;
     bool go = false;

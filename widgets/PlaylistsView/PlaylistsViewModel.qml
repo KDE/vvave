@@ -105,8 +105,7 @@ BabeList
                     break;
 
                 case "Tags":
-
-                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    populateExtra(Q.GET.tags, "Tags")
                     break;
 
                 case "Relationships":
@@ -119,10 +118,9 @@ BabeList
                     playlistViewRoot.populate(Q.GET.favoriteTracks);
                     break;
 
-                case "Genre":
+                case "Genres":
 
-                    filterList.section.property = "genre"
-                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    populateExtra(Q.GET.genres, "Genres")
                     break;
 
                 default:

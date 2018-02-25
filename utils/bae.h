@@ -433,7 +433,6 @@ inline bool artworkCache(DB &track, const KEY &type = KEY::NONE)
         default: break;
         }
     }
-
     return false;
 }
 

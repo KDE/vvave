@@ -20,6 +20,12 @@ var GET = {
     playlistTracks_ : "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist inner join tracks_playlists pl on pl.url = t.url where pl.playlist = \"%1\" order by strftime(\"%s\", pl.addDate) desc",
     playlists: "select * from playlists order by strftime(\"%s\", addDate) desc",
 
+    genres: "select genre as tag from tracks",
+
+    tags : "select distinct tag from tags where context = 'tag' limit 1000",
+    trackTags : "select distinct tag from tracks_tags where context = 'tag' and tag collate nocase not in (select artist from artists) and tag in (select tag from tracks_tags group by tag having count(url) > 1) order by tag collate nocase limit 1000",
+
+
 
     colorTracks_: "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.art = \"%1\""
 

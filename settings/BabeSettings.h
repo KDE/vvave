@@ -47,6 +47,7 @@ private:
 
 signals:
     void collectionPathChanged(QStringList newPaths);
+    void refreshATable(BAE::TABLE table);
     void refreshTables(int size);
     void albumArtReady(const DB &album);
     void brainFinished();

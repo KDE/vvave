@@ -51,14 +51,42 @@ Kirigami.PageRow
             spacing: 0
             Layout.margins: 0
 
-            PlaylistsViewModel
+
+            SwipeView
             {
-                id: playlistViewModel
+                id: playlistSwipe
 
                 Layout.fillHeight: true
                 Layout.fillWidth: true
 
-                onPlaySync: syncAndPlay(index)
+                PlaylistsViewModel
+                {
+                    id: playlistViewModel
+                    onPlaySync: syncAndPlay(index)
+                }
+
+                BabeList
+                {
+                    id: playlistViewModelFilter
+
+                    headerBarExitIcon: "arrow-left"
+
+                    model : ListModel {}
+                    delegate: BabeDelegate
+                    {
+                        id: delegate
+                        label : tag
+                        Connections
+                        {
+                            target: delegate
+
+                            onClicked: {}
+                        }
+                    }
+
+                    onExit: playlistSwipe.currentIndex = 0
+                }
+
             }
 
             Kirigami.Separator{ Layout.fillWidth: true; width: parent.width; height: 1}
@@ -179,6 +207,18 @@ Kirigami.PageRow
             }
         }
 
+    }
+
+    function populateExtra(query, title)
+    {
+        playlistSwipe.currentIndex = 1
+
+        var res = bae.get(query)
+        playlistViewModelFilter.clearTable()
+        playlistViewModelFilter.headerBarTitle = title
+        if(res.length>0)
+            for(var i in res)
+                playlistViewModelFilter.model.append(res[i])
     }
 
     function populate(query)

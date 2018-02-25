@@ -15,7 +15,6 @@
 
    */
 
-
 #include "pulpo.h"
 #include "services/lastfmService.h"
 #include "services/spotifyService.h"
@@ -31,11 +30,17 @@ Pulpo::Pulpo(QObject *parent): QObject(parent) {}
 
 Pulpo::~Pulpo() {}
 
-void Pulpo::feed(const BAE::DB &song, const RECURSIVE &recursive)
+bool Pulpo::feed(const BAE::DB &song, const RECURSIVE &recursive)
 {
     this->track = song;
     this->recursive = recursive;
+
+    if(this->registeredServices.isEmpty()) return false;
+    if(this->track.isEmpty()) return false;
+
     this->initServices();
+
+    return true;
 }
 
 void Pulpo::registerServices(const QList<PULPO::SERVICES> &services)
@@ -63,13 +68,10 @@ void Pulpo::setRecursive(const RECURSIVE &state)
     this->recursive=state;
 }
 
-bool Pulpo::initServices()
+void Pulpo::initServices()
 {
-    if(this->registeredServices.isEmpty()) return false;
-    if(this->track.isEmpty()) return false;
-
     for(auto service : this->registeredServices)
-    {
+
         switch (service)
         {
             case SERVICES::LastFm:
@@ -77,11 +79,11 @@ bool Pulpo::initServices()
                 lastfm lastfm(this->track);
                 connect(&lastfm, &lastfm::infoReady, this, &Pulpo::passSignal);
 
-                if(lastfm.setUpService(this->ontology,this->info))
+                if(lastfm.setUpService(this->ontology, this->info))
                 {
-                    if(recursive== RECURSIVE::OFF) return true;
+                    if(recursive == RECURSIVE::OFF) return;
 
-                }else qDebug()<<"error settingUp lastfm service";
+                }else qDebug()<<"Error settingUp lastfm service";
 
                 break;
             }
@@ -93,9 +95,9 @@ bool Pulpo::initServices()
 
                 if(spotify.setUpService(this->ontology,this->info))
                 {
-                    if(recursive== RECURSIVE::OFF) return true;
+                    if(recursive== RECURSIVE::OFF) return;
 
-                }else qDebug()<<"error settingUp spotify service";
+                }else qDebug()<<"Error settingUp spotify service";
 
                 break;
             }
@@ -106,9 +108,9 @@ bool Pulpo::initServices()
 
                 if(genius.setUpService(this->ontology,this->info))
                 {
-                    if(recursive== RECURSIVE::OFF) return true;
+                    if(recursive== RECURSIVE::OFF) return;
 
-                }else qDebug()<<"error settingUp spotify service";
+                }else qDebug()<<"Error settingUp spotify service";
 
                 break;
             }
@@ -119,9 +121,9 @@ bool Pulpo::initServices()
 
                 if(musicbrainz.setUpService(this->ontology,this->info))
                 {
-                    if(recursive== RECURSIVE::OFF) return true;
+                    if(recursive== RECURSIVE::OFF) return;
 
-                }else qDebug()<<"error settingUp musicBrainz service";
+                }else qDebug()<<"Error settingUp musicBrainz service";
 
                 break;
             }
@@ -140,9 +142,9 @@ bool Pulpo::initServices()
 
                 if(lyricwikia.setUpService(this->ontology,this->info))
                 {
-                    if(recursive== RECURSIVE::OFF) return true;
+                    if(recursive== RECURSIVE::OFF) return;
 
-                }else qDebug()<<"error settingUp lyricwikia service";
+                }else qDebug()<<"Error settingUp lyricwikia service";
 
                 break;
             }
@@ -158,9 +160,9 @@ bool Pulpo::initServices()
 
                 if(deezer.setUpService(this->ontology, this->info))
                 {
-                    if(recursive== RECURSIVE::OFF) return true;
+                    if(recursive== RECURSIVE::OFF) return;
 
-                }else qDebug()<<"error settingUp deezer service";
+                }else qDebug()<<"Error settingUp deezer service";
 
                 break;
             }
@@ -173,12 +175,6 @@ bool Pulpo::initServices()
                 break;
             }
         }
-
-        qDebug()<<"PULPO::ERROR HAPPENED!";
-//        emit infoReady(this->track, this->packResponse(this->ontology, this->info, {{}}));
-
-    }
-    return false;
 }
 
 void Pulpo::passSignal(const BAE::DB &track, const PULPO::RESPONSE &response)

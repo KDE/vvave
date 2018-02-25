@@ -57,6 +57,18 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
         emit this->refreshTables(size);
     });
 
+    connect(settings, &BabeSettings::refreshATable, [this](BAE::TABLE table)
+    {
+        switch(table)
+        {
+        case BAE::TABLE::TRACKS: emit this->refreshTracks(); break;
+        case BAE::TABLE::ALBUMS: emit this->refreshAlbums(); break;
+        case BAE::TABLE::ARTISTS: emit this->refreshArtists(); break;
+        }
+
+    });
+
+
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     this->nof = new Notify(this);
     connect(this->nof,&Notify::babeSong,[this]()

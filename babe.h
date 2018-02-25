@@ -146,6 +146,9 @@ private:
 
 signals:
     void refreshTables(int size);
+    void refreshTracks();
+    void refreshAlbums();
+    void refreshArtists();
     void trackLyricsReady(QString lyrics, QString url);
     void skipTrack();
     void babeIt();

@@ -32,7 +32,7 @@ public:
     explicit Pulpo(QObject *parent = nullptr);
     ~Pulpo();
 
-    void feed(const BAE::DB &song, const PULPO::RECURSIVE &recursive = PULPO::RECURSIVE::ON );
+    bool feed(const BAE::DB &song, const PULPO::RECURSIVE &recursive = PULPO::RECURSIVE::ON );
     void registerServices(const QList<PULPO::SERVICES> &services);
     void setInfo(const PULPO::INFO &info);
     void setOntology(const PULPO::ONTOLOGY &ontology);
@@ -40,9 +40,9 @@ public:
     void setRecursive(const PULPO::RECURSIVE &state);
 
 private:
-    bool initServices();
+    void initServices();
     PULPO::RECURSIVE recursive = PULPO::RECURSIVE::ON;
-    QList<SERVICES> registeredServices = {SERVICES::ALL};
+    QList<SERVICES> registeredServices = {};
 
     void passSignal(const BAE::DB &track, const PULPO::RESPONSE &response);
 
