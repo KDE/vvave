@@ -1,11 +1,19 @@
 #ifndef TAGINFO_H
 #define TAGINFO_H
 
-
-
 #include <QString>
 #include <QByteArray>
 #include <QObject>
+
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+#include <taglib/tag.h>
+#include <taglib/fileref.h>
+#endif
+
+#if defined(Q_OS_ANDROID)
+#include <./3rdparty/taglib/tag.h>
+#include <./3rdparty/taglib/fileref.h>
+#endif
 
 namespace TagLib {
 class FileRef;
@@ -18,7 +26,7 @@ class TagInfo : public QObject
 public:
     TagInfo(QObject *parent = nullptr);
     ~TagInfo();
-    void feed(const QString &url);
+    bool feed(const QString &url);
     QString getAlbum() const;
     QString getTitle() const;
     QString getArtist() const;
@@ -38,9 +46,8 @@ public:
     void setComment(const QString &comment);
     void setCover(const QByteArray &array);
 
-
 private:
-    TagLib::FileRef *file;
+    TagLib::FileRef file;
     QString path;
 };
 

@@ -52,9 +52,9 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
 
     connect(bDebug::Instance(), SIGNAL(debug(QString)), this, SLOT(debug(QString)));
 
-    connect(settings, &BabeSettings::refreshTables, [this](QVariantMap tables)
+    connect(settings, &BabeSettings::refreshTables, [this](int size)
     {
-        emit this->refreshTables(tables);
+        emit this->refreshTables(size);
     });
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
@@ -112,7 +112,6 @@ void Babe::set(const QString &table, const QVariantList &wheres)
 {
     this->thread->start(table, wheres);
 }
-
 
 void Babe::trackPlaylist(const QStringList &urls, const QString &playlist)
 {
@@ -693,23 +692,15 @@ QVariantMap Babe::getParentDir(const QString &path)
         return {{"url", path}, {"name", QFileInfo(path).dir().dirName()}};
 }
 
+QStringList Babe::defaultSources()
+{
+    return BAE::defaultSources;
+}
+
 void Babe::registerTypes()
 {
     qmlRegisterUncreatableType<Babe>("Babe", 1, 0, "Babe", "ERROR ABE");
 }
-
-
-uint Babe::sizeHint(const uint &hint)
-{
-    if(hint>=BAE::BIG_ALBUM_FACTOR)
-        return BAE::getWidgetSizeHint(BAE::AlbumSizeHint::BIG_ALBUM);
-    else if(hint>=BAE::MEDIUM_ALBUM_FACTOR)
-        return BAE::getWidgetSizeHint(BAE::AlbumSizeHint::MEDIUM_ALBUM);
-    else if(hint>=BAE::SMALL_ALBUM_FACTOR)
-        return BAE::getWidgetSizeHint(BAE::AlbumSizeHint::SMALL_ALBUM);
-    else return hint;
-}
-
 
 QString Babe::loadCover(const QString &url)
 {

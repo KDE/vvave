@@ -67,6 +67,7 @@ public:
     Q_INVOKABLE bool addPlaylist(const QString &title);
 
     bool addFolder(const QString &url);
+    bool removeFolder(const QString &url);
 
     BAE::DB_LIST getDBData(const QStringList &urls);
     BAE::DB_LIST getDBData(const QString &queryTxt);
@@ -95,11 +96,12 @@ public:
 
     Q_INVOKABLE bool removePlaylistTrack(const QString &url, const QString &playlist);
     Q_INVOKABLE bool removePlaylist(const QString &playlist);
+    Q_INVOKABLE void removeMissingTracks();
     bool removeArtist(const QString &artist);
     bool cleanArtists();
     bool removeAlbum(const QString &album, const QString &artist);
     bool cleanAlbums();
-    Q_INVOKABLE bool removeSource(const QString &path);
+    Q_INVOKABLE bool removeSource(const QString &url);
     Q_INVOKABLE bool removeTrack(const QString &path);
     QSqlQuery getQuery(const QString &queryTxt);
     /*useful tools*/

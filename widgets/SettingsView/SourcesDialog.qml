@@ -5,9 +5,19 @@ import Qt.labs.platform 1.0
 
 import "../../view_models"
 import "../../view_models/FolderPicker"
+import "../../view_models/BabeDialog"
 
 BabePopup
 {
+
+    property string pathToRemove : ""
+
+    function scanDir(folderUrl)
+    {
+        bae.scanDir(folderUrl)
+        close()
+    }
+
 
     FolderDialog
     {
@@ -40,6 +50,19 @@ BabePopup
             onGoBack: folderPicker.load(path)
         }
     }
+
+    BabeMessage
+    {
+        id: confirmationDialog
+        onAccepted:
+        {
+            if(pathToRemove.length>0)
+                if(bae.removeSource(pathToRemove))
+                    bae.refreshCollection()
+
+        }
+    }
+
 
     BabeList
     {
@@ -77,10 +100,24 @@ BabePopup
                 iconName: "list-remove"
                 onClicked:
                 {
+                    close()
                     var index = sources.currentIndex
-                    if(bae.removeSource(sources.list.model.get(index).url))
-                        sources.model.remove(index)
+                    var url = sources.list.model.get(index).url
 
+                    confirmationDialog.title = "Remove source"
+
+                    if(bae.defaultSources().indexOf(url)<0)
+                    {
+                        pathToRemove = url
+                        confirmationDialog.message = "Are you sure you want to remove the source: \n "+url
+                    }
+                    else
+                    {
+                        pathToRemove = ""
+                        confirmationDialog.message = url+"\nis a default source and cannot be removed"
+                    }
+
+                    confirmationDialog.open()
                 }
             },
 
@@ -100,11 +137,13 @@ BabePopup
         ]
     }
 
-    onOpened:
+    onOpened: getSources()
+
+    function getSources()
     {
+        sources.clearTable()
         var folders = bae.getSourcesFolders()
         for(var i in folders)
             sources.model.append({url : folders[i]})
-
     }
 }

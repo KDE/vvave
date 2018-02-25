@@ -8,18 +8,16 @@
 #include "../services/local/taginfo.h"
 #include "../db/collectionDB.h"
 
-class FileLoader : public QObject
+class FileLoader : public CollectionDB
 {
     Q_OBJECT
 
 public:
-    FileLoader() : QObject()
+    FileLoader() : CollectionDB(nullptr)
     {
         qRegisterMetaType<BAE::DB>("BAE::DB");
         qRegisterMetaType<BAE::TABLE>("BAE::TABLE");
         qRegisterMetaType<QMap<BAE::TABLE, bool>>("QMap<BAE::TABLE,bool>");
-
-        this->con = new CollectionDB(this);
         this->moveToThread(&t);
         t.start();
     }
@@ -60,7 +58,7 @@ public slots:
         {
             if (QFileInfo(path).isDir())
             {
-                this->con->addFolder(path);
+                this->addFolder(path);
                 QDirIterator it(path, BAE::formats, QDir::Files, QDirIterator::Subdirectories);
                 while (it.hasNext()) urls<<it.next();
 
@@ -72,45 +70,42 @@ public slots:
         int newTracks = 0;
         if(urls.size()>0)
         {
-            TagInfo info;
-
             for(auto url : urls)
             {
                 if(go)
                 {
-                    if(!con->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL],url))
+                    if(!check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL],url))
                     {
-
-                        info.feed(url);
-                        auto album = BAE::fixString(info.getAlbum());
-                        auto track= info.getTrack();
-                        auto title = BAE::fixString(info.getTitle()); /* to fix*/
-                        auto artist = BAE::fixString(info.getArtist());
-                        auto genre = info.getGenre();
-                        auto sourceUrl = QFileInfo(url).dir().path();
-                        auto duration = info.getDuration();
-                        auto year = info.getYear();
-
-                        BAE::DB trackMap =
+                        if(info.feed(url))
                         {
-                            {BAE::KEY::URL,url},
-                            {BAE::KEY::TRACK,QString::number(track)},
-                            {BAE::KEY::TITLE,title},
-                            {BAE::KEY::ARTIST,artist},
-                            {BAE::KEY::ALBUM,album},
-                            {BAE::KEY::DURATION,QString::number(duration)},
-                            {BAE::KEY::GENRE,genre},
-                            {BAE::KEY::SOURCES_URL,sourceUrl},
-                            {BAE::KEY::BABE, url.startsWith(BAE::YoutubeCachePath)?"1":"0"},
-                            {BAE::KEY::RELEASE_DATE,QString::number(year)}
-                        };
+                            auto album = BAE::fixString(info.getAlbum());
+                            auto track= info.getTrack();
+                            auto title = BAE::fixString(info.getTitle()); /* to fix*/
+                            auto artist = BAE::fixString(info.getArtist());
+                            auto genre = info.getGenre();
+                            auto sourceUrl = QFileInfo(url).dir().path();
+                            auto duration = info.getDuration();
+                            auto year = info.getYear();
 
-                        this->con->addTrack(trackMap);
-                        newTracks++;
-                        //                        emit trackReady(trackMap);
-                        //                            while(this->wait){t.msleep(100);}
-                        //                            this->wait=!this->wait;
+                            BAE::DB trackMap =
+                            {
+                                {BAE::KEY::URL,url},
+                                {BAE::KEY::TRACK,QString::number(track)},
+                                {BAE::KEY::TITLE,title},
+                                {BAE::KEY::ARTIST,artist},
+                                {BAE::KEY::ALBUM,album},
+                                {BAE::KEY::DURATION,QString::number(duration)},
+                                {BAE::KEY::GENRE,genre},
+                                {BAE::KEY::SOURCES_URL,sourceUrl},
+                                {BAE::KEY::BABE, url.startsWith(BAE::YoutubeCachePath)?"1":"0"},
+                                {BAE::KEY::RELEASE_DATE,QString::number(year)}
+                            };
+
+                            this->addTrack(trackMap);
+                            newTracks++;
+                        }
                     }
+
                 }else break;
             }
         }
@@ -126,11 +121,11 @@ signals:
     void collectionSize(int size);
 
 private:
-    QThread t;    
+    QThread t;
     bool go = false;
     bool wait = true;
     QStringList queue;
-    CollectionDB *con;
+    TagInfo info;
 };
 
 

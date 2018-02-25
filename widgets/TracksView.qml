@@ -39,10 +39,6 @@ BabeTable
         color: altColor
         z: -999
     }
-
-    onQueueTrack: console.log(index, "qqqq")
-
-    Component.onCompleted: populate()
 }
 
 

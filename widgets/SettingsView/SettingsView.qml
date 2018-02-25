@@ -31,15 +31,12 @@ Kirigami.GlobalDrawer
     //    handle.focus: false
     //    handle.y : coverSize
     //handle.parent: ApplicationWindow.overlay
-    function scanDir(folderUrl)
-    {
-        bae.scanDir(folderUrl)
-    }
 
     SourcesDialog
     {
         id: sourcesDialog
     }
+
 
     BabeConsole
     {
@@ -53,7 +50,14 @@ Kirigami.GlobalDrawer
         Kirigami.Action
         {
             text: qsTr("Collection"
-                       )
+                       )           
+
+            Kirigami.Action
+            {
+                text: "Sources..."
+                onTriggered: sourcesDialog.open()
+            }
+
             Kirigami.Action
             {
                 text: qsTr("Refresh")
@@ -62,8 +66,8 @@ Kirigami.GlobalDrawer
 
             Kirigami.Action
             {
-                text: "Sources"
-                onTriggered: sourcesDialog.open()
+                text: qsTr("Clean")
+                onTriggered: bae.removeMissingTracks();
             }
         },
 

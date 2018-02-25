@@ -215,6 +215,5 @@ BabeGrid
 
     }
 
-    Component.onCompleted: populate()
 
 }

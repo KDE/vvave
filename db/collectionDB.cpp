@@ -833,23 +833,27 @@ QSqlQuery CollectionDB::getQuery(const QString &queryTxt)
    return QSqlQuery(queryTxt, this->m_db);
 }
 
-bool CollectionDB::removeSource(const QString &path)
+bool CollectionDB::removeSource(const QString &url)
 {
+    auto path = url.endsWith("/") ? url.chopped(1) : url;
+
     auto queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::SOURCES_URL],path);
     qDebug() << queryTxt;
     auto query = this->getQuery(queryTxt);
     if(query.exec())
-    {
+    {        
         queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::SOURCES],
                 KEYMAP[KEY::URL],path);
         query.prepare(queryTxt);
         if(query.exec())
         {
+            this->removeFolder(path);
             if(cleanAlbums()) cleanArtists();
             return true;
         }
     }
+
     return false;
 }
 
@@ -930,6 +934,16 @@ bool CollectionDB::removePlaylist(const QString &playlist)
     return query.exec();
 }
 
+void CollectionDB::removeMissingTracks()
+{
+    auto tracks = this->getDBData("select url from tracks");
+
+    for(auto track : tracks)
+        if(!BAE::fileExists(track[BAE::KEY::URL]))
+            this->removeTrack(track[BAE::KEY::URL]);
+
+}
+
 bool CollectionDB::removeArtist(const QString &artist)
 {
     auto queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\" ").arg(TABLEMAP[TABLE::ARTISTS],
@@ -951,6 +965,18 @@ bool CollectionDB::cleanArtists()
 
     auto query = this->getQuery(queryTxt);
     emit this->artistsCleaned(query.numRowsAffected());
+    return query.exec();
+}
+
+bool CollectionDB::removeFolder(const QString &url)
+{
+    auto queryTxt=QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(
+                TABLEMAP[TABLE::FOLDERS],
+            KEYMAP[KEY::URL], url);
+
+    qDebug()<<queryTxt;
+
+    auto query = this->getQuery(queryTxt);
     return query.exec();
 }
 

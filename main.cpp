@@ -48,24 +48,27 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    Player player;
+    Babe bae;
+
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
-    //    QQuickStyle::setStyle("org.kde.desktop");
+    QQuickStyle::setStyle("Material");
 
     QQmlApplicationEngine engine;
 
-    auto context = engine.rootContext();
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, [&]()
+    {
+        qDebug()<<"FINISHED LOADING QML APP";
+        bae.refreshCollection();
+    });
 
-#ifdef Q_OS_ANDROID
-    //    NotificationClient *notificationClient = new NotificationClient(&engine);
-    //    context->setContextProperty(QLatin1String("notificationClient"), notificationClient);
+    auto context = engine.rootContext();
+    context->setContextProperty("player", &player);
+    context->setContextProperty("bae", &bae);
+
+#ifdef Q_OS_ANDROID 
     KirigamiPlugin::getInstance().registerTypes();
 #endif
-
-    Babe bae;
-    Player player;
-
-    context->setContextProperty("bae", &bae);
-    context->setContextProperty("player", &player);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

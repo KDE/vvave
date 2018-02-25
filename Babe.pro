@@ -119,9 +119,8 @@ HEADERS += \
 
 
 #TAGLIB
-linux:unix:!android {
+linux:unix:!macx:!android {
     message(Searching local TagLib lib)
-
     LIBS += -ltag
 
 } else:android {

@@ -273,8 +273,10 @@ const QString Version = BABE_VERSION_STR;
 const QString DBName = "collection.db";
 
 const QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};
-
 const QStringList formats {"*.mp4","*.mp3","*.wav","*.flac","*.ogg","*.m4a"};
+const QStringList defaultSources = isMobile() ?
+            QStringList()<<BAE::MusicPath<<BAE::DownloadsPath<<BAE::MusicPaths<<BAE::DownloadsPaths :
+                           QStringList()<< BAE::MusicPath<<BAE::YoutubeCachePath;
 
 inline QString fixTitle(const QString &title,const QString &s,const QString &e)
 {
@@ -433,47 +435,6 @@ inline bool artworkCache(DB &track, const KEY &type = KEY::NONE)
     }
 
     return false;
-}
-
-enum class AlbumSizeHint : uint
-{
-    BIG_ALBUM = 200,
-    MEDIUM_ALBUM = 120,
-    SMALL_ALBUM = 80
-};
-
-static const uint MAX_BIG_ALBUM_SIZE = 300;
-static const uint MAX_MID_ALBUM_SIZE = 200;
-static const uint MAX_MIN_ALBUM_SIZE = 100;
-
-typedef double ALBUM_FACTOR;
-
-static const ALBUM_FACTOR BIG_ALBUM_FACTOR = 0.039;
-static const ALBUM_FACTOR BIG_ALBUM_FACTOR_SUBWIDGET = 0.27;
-
-static const ALBUM_FACTOR MEDIUM_ALBUM_FACTOR = 0.013;
-static const ALBUM_FACTOR MEDIUM_ALBUM_FACTOR_SUBWIDGET = 0.4;
-
-static const ALBUM_FACTOR SMALL_ALBUM_FACTOR = 0.006;
-static const ALBUM_FACTOR SMALL_ALBUM_FACTOR_SUBWIDGET = 0.5;
-
-inline uint getWidgetSizeHint(const AlbumSizeHint &defaultValue)
-{
-    QScreen *screenSize = QApplication::screens().at(0);
-
-    auto screen =  static_cast<uint>(sqrt((screenSize->availableSize().height()*screenSize->availableSize().width())));
-
-    switch(defaultValue)
-    {
-    case AlbumSizeHint::BIG_ALBUM:
-        return screen * 0.3 ;
-    case AlbumSizeHint::MEDIUM_ALBUM:
-        return screen * 0.1 ;
-    case AlbumSizeHint::SMALL_ALBUM:
-        return screen * 0.05 ;
-    }
-
-    return static_cast<uint>(defaultValue);
 }
 
 inline bool internetConnection()

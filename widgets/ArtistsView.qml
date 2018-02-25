@@ -43,7 +43,7 @@ BabeGrid
         height:
         {
             if(customHeight > parent.height)
-                 (parent.height*0.9) - root.header.height - root.footer.height
+                (parent.height*0.9) - root.header.height - root.footer.height
             else
             {
                 if(customHeight < parent.height*0.4)
@@ -176,9 +176,5 @@ BabeGrid
             for(var i in map)
                 gridModel.append(map[i])
     }
-
-
-    Component.onCompleted: populate()
-
 
 }

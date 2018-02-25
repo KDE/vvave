@@ -20,6 +20,7 @@ import "view_models/BabeDialog"
 
 import "db/Queries.js" as Q
 import "utils/Player.js" as Player
+import "utils/Help.js" as H
 
 Kirigami.ApplicationWindow
 {
@@ -186,13 +187,6 @@ Kirigami.ApplicationWindow
         missingDialog.open()
     }
 
-    Component.onCompleted:
-    {
-        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
-        settingsDrawer.close()
-    }
-
-
     /*COMPONENTS*/
     BabeNotify { id: babeNotify }
 
@@ -207,49 +201,7 @@ Kirigami.ApplicationWindow
             mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
 
         }
-    }
-
-    /*CONNECTIONS*/
-    Connections
-    {
-        target: player
-        onPos: progressBar.value = pos
-        onTiming: progressTimeLabel = time
-        onDurationChanged: durationTimeLabel = time
-        onFinished:
-        {
-            bae.playedTrack(currentTrack.url)
-            Player.nextTrack()
-        }
-
-        onIsPlaying: isPlaying = playing
-    }
-
-    Connections
-    {
-        target: bae
-        onRefreshTables:
-        {
-            console.log("Clearing tables")
-            tracksView.clearTable()
-            albumsView.clearGrid()
-            artistsView.clearGrid()
-
-            tracksView.populate()
-            albumsView.populate()
-            artistsView.populate()
-        }
-
-        onTrackLyricsReady:
-        {
-            if(url === currentTrack.url)
-                Player.setLyrics(lyrics)
-        }
-
-        onSkipTrack: Player.nextTrack()
-        onBabeIt: Player.babeTrack()
-    }
-
+    }    
 
     /* UI */
     header: BabeBar
@@ -723,7 +675,7 @@ Kirigami.ApplicationWindow
                 width: parent.width
                 height: parent.height
 
-                Component.onCompleted: contentItem.interactive = root.isMobile
+                Component.onCompleted: contentItem.interactive = isMobile
 
                 currentIndex: currentView
 
@@ -887,4 +839,41 @@ Kirigami.ApplicationWindow
         animTxt.running = true
     }
 
+
+    Component.onCompleted:
+    {
+        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
+    }
+
+    /*CONNECTIONS*/
+    Connections
+    {
+        target: player
+        onPos: progressBar.value = pos
+        onTiming: progressTimeLabel = time
+        onDurationChanged: durationTimeLabel = time
+        onFinished:
+        {
+            bae.playedTrack(currentTrack.url)
+            Player.nextTrack()
+        }
+
+        onIsPlaying: isPlaying = playing
+    }
+
+
+    Connections
+    {
+        target: bae
+        onRefreshTables: H.refreshCollection(size)
+
+        onTrackLyricsReady:
+        {
+            if(url === currentTrack.url)
+                Player.setLyrics(lyrics)
+        }
+
+        onSkipTrack: Player.nextTrack()
+        onBabeIt: Player.babeTrack()
+    }
 }

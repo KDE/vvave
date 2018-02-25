@@ -12,25 +12,25 @@ ToolButton
     property color iconColor: foregroundColor
     readonly property string defaultColor :  foregroundColor
     property bool anim : false
-    //        icon.name: isMobile ? "" : babeButton.iconName
-    //        icon.width: isMobile ? 0 : babeButton.iconSize
-    //    //    icon.height: isMobile ? 0 : babeButton.iconSize
-    //        icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
+    icon.name: isMobile ? "" : babeButton.iconName
+    icon.width: isMobile ? 0 : babeButton.iconSize
+    //    icon.height: isMobile ? 0 : babeButton.iconSize
+    icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
     onClicked: if(anim) animIcon.running = true
 
 
-    Kirigami.Icon
-    {
-        id: kirigamIcon
-        anchors.centerIn: parent
-        width: iconSize
-        height: iconSize
-        visible: !isMobile
-        source: isMobile  ? "" : iconName
-        isMask: false
-        color: iconColor || defaultColor
+    //    Kirigami.Icon
+    //    {
+    //        id: kirigamIcon
+    //        anchors.centerIn: parent
+    //        width: iconSize
+    //        height: iconSize
+    //        visible: !isMobile
+    //        source: isMobile  ? "" : iconName
+    //        isMask: false
+    //        color: iconColor || defaultColor
 
-    }
+    //    }
 
     BabeIcon
     {

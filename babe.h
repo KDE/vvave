@@ -104,8 +104,9 @@ public:
     Q_INVOKABLE static QVariantList getDirs(const QString &pathUrl);
     Q_INVOKABLE static QVariantMap getParentDir(const QString &path);
 
+    Q_INVOKABLE static QStringList defaultSources();
+
     static void registerTypes();
-    Q_INVOKABLE static uint sizeHint(const uint &hint);
 
     /*USEFUL*/
     Q_INVOKABLE QString loadCover(const QString &url);
@@ -144,7 +145,7 @@ private:
     void fetchTrackLyrics(DB &song);
 
 signals:
-    void refreshTables(QVariantMap tables);
+    void refreshTables(int size);
     void trackLyricsReady(QString lyrics, QString url);
     void skipTrack();
     void babeIt();

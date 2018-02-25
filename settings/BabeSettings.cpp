@@ -62,15 +62,6 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     if (!youtubeCache_dir.exists())
         youtubeCache_dir.mkpath(".");
 
-    //    if(!connection->check_existance(TABLEMAP[TABLE::SOURCES], KEYMAP[KEY::URL], BAE::MusicPath))
-
-    if(BAE::isMobile())
-        this->populateDB(QStringList()<<BAE::MusicPath<<BAE::DownloadsPath<<BAE::MusicPaths<<BAE::DownloadsPaths);
-    else
-        this->populateDB({BAE::MusicPath, BAE::YoutubeCachePath});
-    //        checkCollectionBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool());
-
-
     connect(this->ytFetch, &YouTube::done, [this]()
     {
         this->startBrainz(true, BAE::SEG::THREE);
@@ -91,41 +82,23 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
     connect(this->brainDeamon, &Brain::done, [this](const TABLE type)
     {
-        emit this->refreshTables({{BAE::TABLEMAP[type], true}});
+        emit this->refreshTables(0);
     });
-
-    //    connect(this->fileLoader, &FileLoader::trackReady, [this]()
-    //    {
-    //        this->ui->progressBar->setValue(this->ui->progressBar->value()+1);
-    //    });
 
     connect(this->fileLoader, &FileLoader::finished,[this](int size)
     {
         if(size > 0)
         {
-            this->collectionWatcher();
-            emit refreshTables({{BAE::TABLEMAP[TABLE::TRACKS], true},
-                                {BAE::TABLEMAP[TABLE::ALBUMS], true},
-                                {BAE::TABLEMAP[TABLE::ARTISTS], true},
-                                {BAE::TABLEMAP[TABLE::PLAYLISTS], true}});
-
-
-            //            this->startBrainz(true, BAE::SEG::ONEHALF);
-
-            bDebug::Instance()->msg("Finished inserting into DB");
+            this->startBrainz(true, BAE::SEG::ONEHALF);
+            bDebug::Instance()->msg("Finished inserting into DB "+QString::number(size)+" tracks");
+            bDebug::Instance()->msg("Starting Brainz with interval: " + QString::number(BAE::SEG::ONEHALF));
         }else
-        {
-            this->dirs.clear();
-            this->collectionWatcher();
-            this->watcher->removePaths(watcher->directories());
             this->startBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool(), BAE::SEG::THREE);
-        }
+
+        emit refreshTables(size);
     });
 
     connect(this, &BabeSettings::collectionPathChanged, this, &BabeSettings::populateDB);
-
-    this->watcher = new QFileSystemWatcher(this);
-    connect(this->watcher, &QFileSystemWatcher::directoryChanged, this, &BabeSettings::handleDirectoryChanged);
 }
 
 BabeSettings::~BabeSettings()
@@ -135,80 +108,12 @@ BabeSettings::~BabeSettings()
     delete brainDeamon;
 }
 
-void BabeSettings::on_remove_clicked()
-{
-    qDebug() << this->pathToRemove;
-    if (!this->pathToRemove.isEmpty())
-    {
-        if(this->connection->removeSource(this->pathToRemove))
-        {
-            this->refreshCollection();
-            this->dirs.clear();
-            this->collectionWatcher();
-            this->watcher->removePaths(watcher->directories());
-            emit refreshTables({{TABLEMAP[TABLE::TRACKS], true},
-                                {TABLEMAP[TABLE::PLAYLISTS], true}});
-        }
-    }
-}
-
 void BabeSettings::refreshCollection()
-{
-   this->populateDB(this->connection->getSourcesFolders());
-}
-
-void BabeSettings::addToWatcher(QStringList paths)
-{
-    bDebug::Instance()->msg("Removed duplicated paths in watcher: "+paths.removeDuplicates());
-
-    if(!paths.isEmpty()) watcher->addPaths(paths);
-}
-
-void BabeSettings::collectionWatcher()
-{
-    auto queryTxt = QString("SELECT %1 FROM %2").arg(BAE::KEYMAP[BAE::KEY::URL], BAE::TABLEMAP[BAE::TABLE::TRACKS]);
-
-    for (auto track : this->connection->getDBData(queryTxt))
-    {
-        auto location = track[BAE::KEY::URL];
-        if(!location.startsWith(BAE::YoutubeCachePath,Qt::CaseInsensitive)) //exclude the youtube cache folder
-        {
-            if (!this->dirs.contains(QFileInfo(location).dir().path()) && BAE::fileExists(location)) //check if parent dir isn't already in list and it exists
-            {
-                QString dir = QFileInfo(location).dir().path();
-                this->dirs << dir;
-
-                QDirIterator it(dir, QDir::Dirs | QDir::NoDotAndDotDot, QDirIterator::Subdirectories); // get all the subdirectories to watch
-                while (it.hasNext())
-                {
-                    QString subDir = QFileInfo(it.next()).path();
-
-                    if(QFileInfo(subDir).isDir() && !this->dirs.contains(subDir) && BAE::fileExists(subDir))
-                        this->dirs <<subDir;
-                }
-
-            }
-        }
-    }
-    this->addToWatcher(this->dirs);
-}
-
-void BabeSettings::handleDirectoryChanged(const QString &dir)
-{
-    bDebug::Instance()->msg("directory changed:"+dir);
-
-    auto wait = new QTimer(this);
-    wait->setSingleShot(true);
-    wait->setInterval(1500);
-
-    connect(wait, &QTimer::timeout,[=]()
-    {
-        emit collectionPathChanged({dir});
-        wait->deleteLater();
-    });
-
-    wait->start();
-
+{    
+    if(this->connection->getSourcesFolders().isEmpty())
+        this->populateDB(BAE::defaultSources);
+    else
+        this->populateDB(this->connection->getSourcesFolders());
 }
 
 void BabeSettings::checkCollectionBrainz(const bool &state)

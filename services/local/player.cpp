@@ -1,11 +1,13 @@
 #include "player.h"
-#include <QMediaMetaData>
 #include "../../utils/bae.h"
+
 
 Player::Player(QObject *parent) : QObject(parent)
 {
     this->player = new QMediaPlayer(this);
-    connect(player, &QMediaPlayer::durationChanged, this, [&](qint64 dur) {
+
+    connect(player, &QMediaPlayer::durationChanged, this, [&](qint64 dur)
+    {
         emit this->durationChanged(BAE::transformTime(dur/1000));
     });
 
@@ -18,7 +20,12 @@ Player::Player(QObject *parent) : QObject(parent)
 void Player::source(const QString &url)
 {
     this->sourceurl = url;
-    this->player->setMedia(QUrl::fromLocalFile(this->sourceurl));
+    auto media = QMediaContent(QUrl::fromLocalFile(this->sourceurl));
+    qDebug()<<this->player->mediaStatus();
+
+    this->player->setMedia(media);
+    qDebug()<<this->player->mediaStatus();
+
 }
 
 bool Player::play()
@@ -85,7 +92,7 @@ void Player::update()
     }
 
     emit this->isPlaying(this->player->state() == QMediaPlayer::PlayingState ? true : false);
-    if(this->player->state() == QMediaPlayer::StoppedState)    
+    if(this->player->state() == QMediaPlayer::StoppedState)
         emit this->finished();
 
 }

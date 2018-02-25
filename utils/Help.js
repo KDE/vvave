@@ -39,3 +39,19 @@ function setStars(stars)
     default: return "error";
     }
 }
+
+function refreshCollection(size)
+{
+    if(!isMobile && size>0) bae.notify("Collection updated", size+" new tracks added...")
+
+    console.log("Clearing tables")
+    tracksView.clearTable()
+    tracksView.populate()
+
+    albumsView.clearGrid()
+    albumsView.populate()
+
+    artistsView.clearGrid()
+    artistsView.populate()
+
+}

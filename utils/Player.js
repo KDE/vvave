@@ -9,6 +9,7 @@ function playTrack(track)
 
         if(bae.fileExists(currentTrack.url))
         {
+            console.log("PLAY: "+currentTrack.url)
             player.source(currentTrack.url);
             player.play()
 
