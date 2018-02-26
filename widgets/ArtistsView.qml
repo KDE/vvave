@@ -56,7 +56,7 @@ BabeGrid
         edge: Qt.RightEdge
         interactive: false
         focus: true
-        modal: isMobile
+        modal: false
         dragMargin: 0
         margins: 0
         spacing: 0

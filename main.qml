@@ -125,8 +125,8 @@ Kirigami.ApplicationWindow
     property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
     property int miniArtSize : isMobile ? 40 : 34
 
-    property int columnWidth: Kirigami.Units.gridUnit * 18
-    property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.65
+    property int columnWidth: Kirigami.Units.gridUnit * 15
+    property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.8
     property int currentView : viewsIndex.tracks
 
     /*USEFUL PROPS*/

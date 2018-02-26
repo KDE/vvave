@@ -137,23 +137,19 @@ function appendTracksAt(tracks, at)
 {
     if(tracks)
         for(var i in tracks)
-        {
-            if(tracks[i].url !== mainPlaylist.list.model.get(at).url)
-                mainPlaylist.list.model.insert(parseInt(at)+parseInt(i), tracks[i])
-
-        }
+            mainPlaylist.list.model.insert(parseInt(at)+parseInt(i), tracks[i])
 }
 
 function appendTrack(track)
 {
     if(track)
     {
-        root.mainPlaylist.list.model.append(track)
-        root.animFooter.running = true
+        mainPlaylist.list.model.append(track)
+        animFooter.running = true
         if(root.sync === true)
         {
-            root.infoMsgAnim()
-            addToPlaylist([track.url], root.syncPlaylist)
+            infoMsgAnim()
+            addToPlaylist([track.url], syncPlaylist)
         }
     }
 
@@ -175,7 +171,7 @@ function addTrack(track)
     if(track)
     {
         appendTrack(track)
-        root.mainPlaylist.list.positionViewAtEnd()
+        mainPlaylist.list.positionViewAtEnd()
     }
 }
 
@@ -186,7 +182,7 @@ function appendAll(tracks)
         for(var i in tracks)
             appendTrack(tracks[i])
 
-        root.mainPlaylist.list.positionViewAtEnd()
+        mainPlaylist.list.positionViewAtEnd()
     }
 }
 
@@ -214,13 +210,13 @@ function cleanPlaylist()
 {
     var urls = []
 
-    for(var i = 0; i < root.mainPlaylist.list.count; i++)
+    for(var i = 0; i < mainPlaylist.list.count; i++)
     {
-        var url = root.mainPlaylist.list.model.get(i).url
+        var url = mainPlaylist.list.model.get(i).url
 
         if(urls.indexOf(url)<0)
             urls.push(url)
-        else root.mainPlaylist.list.model.remove(i)
+        else mainPlaylist.list.model.remove(i)
     }
 }
 
@@ -233,7 +229,7 @@ function playAll(tracks)
         infoMsg = ""
 
         mainPlaylist.table.clearTable()
-        root.pageStack.currentIndex = 0
+        pageStack.currentIndex = 0
 
         for(var i in tracks)
             appendTrack(tracks[i])
@@ -256,12 +252,7 @@ function addToPlaylist(urls, playlist)
     if(urls.length > 0)
     {
         bae.trackPlaylist(urls, playlist)
-        //        for(var i in urls)
-        //            bae.trackPlaylist(urls[i], playlist)
-
-
         bae.notify(playlist, urls.length + " tracks added to the playlist:\n"+urls.join("\n"))
-
     }
 }
 

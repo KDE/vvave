@@ -30,7 +30,7 @@ Kirigami.PageRow
 
     clip: true
     separatorVisible: wideMode
-    initialPage:[playlistList, playlistViewDrawer]
+    initialPage: [playlistList, playlistViewDrawer]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
     interactive: false
 
@@ -223,6 +223,10 @@ Kirigami.PageRow
 
     function populate(query)
     {
+
+        if(!playlistViewRoot.wideMode)
+            playlistViewRoot.currentIndex = 1
+
         playlistQuery = query
         filterList.clearTable()
 

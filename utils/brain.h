@@ -40,6 +40,24 @@ public slots:
     void artistInfo();
     void albumInfo();
 
+    void artworks();
+    void tags();
+    void wikis();
+
+    void albumArtworks();
+    void albumTags();
+    void albumWikis();
+
+    void artistArtworks();
+    void artistTags();
+    void artistWikis();
+
+    void trackArtworks();
+    void trackLyrics();
+    void trackTags();
+    void trackWikis();
+
+
 private:
     QThread t;
     Pulpo pulpo;

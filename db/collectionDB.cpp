@@ -397,6 +397,7 @@ bool CollectionDB::albumTrack(const DB &track, const QString &value)
     return true;
 }
 
+
 bool CollectionDB::playedTrack(const QString &url, const int &increment)
 {
     auto queryTxt = QString("UPDATE %1 SET %2 = %2 + %3 WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::TRACKS],
@@ -458,7 +459,7 @@ bool CollectionDB::wikiAlbum(const DB &track,  QString value)
     auto album = track[KEY::ALBUM];
 
     auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(
-                TABLEMAP[TABLE::ALBUMS],
+                        TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::WIKI], value.replace("\"","\"\""),
             KEYMAP[KEY::ALBUM],
             album,KEYMAP[KEY::ARTIST], artist);
@@ -655,7 +656,7 @@ QVariantList CollectionDB::getSearchedTracks(const KEY &where, const QString &se
                            "SELECT t.* FROM %1 t INNER JOIN %9 art ON t.%8 = art.%8 WHERE art.%4 LIKE \"%%5%\" COLLATE NOCASE "
                            "UNION "
                            "SELECT DISTINCT t.* FROM %1 t INNER JOIN %9 at ON t.%8 = at.%4 WHERE at.%8 LIKE \"%%5%\" COLLATE NOCASE").arg(
-                    TABLEMAP[TABLE::TRACKS],
+                       TABLEMAP[TABLE::TRACKS],
                 TABLEMAP[TABLE::TRACKS_TAGS],
                 KEYMAP[KEY::URL],
                 KEYMAP[where],
@@ -830,7 +831,7 @@ bool CollectionDB::removeTrack(const QString &path)
 
 QSqlQuery CollectionDB::getQuery(const QString &queryTxt)
 {    
-   return QSqlQuery(queryTxt, this->m_db);
+    return QSqlQuery(queryTxt, this->m_db);
 }
 
 bool CollectionDB::removeSource(const QString &url)
@@ -842,7 +843,7 @@ bool CollectionDB::removeSource(const QString &url)
     qDebug() << queryTxt;
     auto query = this->getQuery(queryTxt);
     if(query.exec())
-    {        
+    {
         queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::SOURCES],
                 KEYMAP[KEY::URL],path);
         query.prepare(queryTxt);
@@ -875,35 +876,35 @@ void CollectionDB::insertArtwork(const DB &track)
 
     switch(albumType(track))
     {
-    case TABLE::ALBUMS :
-    {
-        auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(TABLEMAP[TABLE::ALBUMS],
-                KEYMAP[KEY::ARTWORK],
-                path.isEmpty() ? SLANG[W::NONE] : path,
-                                                  KEYMAP[KEY::ALBUM],
-                                                  album,
-                                                  KEYMAP[KEY::ARTIST],
-                                                  artist);
+        case TABLE::ALBUMS :
+        {
+            auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(TABLEMAP[TABLE::ALBUMS],
+                    KEYMAP[KEY::ARTWORK],
+                    path.isEmpty() ? SLANG[W::NONE] : path,
+                                                      KEYMAP[KEY::ALBUM],
+                                                      album,
+                                                      KEYMAP[KEY::ARTIST],
+                                                      artist);
 
-        auto query = this->getQuery(queryStr);
-        if(!query.exec())qDebug()<<"COULDNT Artwork[cover] inerted into DB"<<artist<<album;
-        break;
+            auto query = this->getQuery(queryStr);
+            if(!query.exec())qDebug()<<"COULDNT Artwork[cover] inerted into DB"<<artist<<album;
+            break;
 
-    }
-    case TABLE::ARTISTS:
-    {
-        auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::ARTISTS],
-                KEYMAP[KEY::ARTWORK],
-                path.isEmpty() ? SLANG[W::NONE] : path,
-                                                  KEYMAP[KEY::ARTIST],
-                                                  artist);
-        auto query = this->getQuery(queryStr);
-        if(!query.exec())qDebug()<<"COULDNT Artwork[head] inerted into DB"<<artist;
+        }
+        case TABLE::ARTISTS:
+        {
+            auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::ARTISTS],
+                    KEYMAP[KEY::ARTWORK],
+                    path.isEmpty() ? SLANG[W::NONE] : path,
+                                                      KEYMAP[KEY::ARTIST],
+                                                      artist);
+            auto query = this->getQuery(queryStr);
+            if(!query.exec())qDebug()<<"COULDNT Artwork[head] inerted into DB"<<artist;
 
-        break;
+            break;
 
-    }
-    default: return;
+        }
+        default: return;
     }
 
     emit artworkInserted(track);
@@ -957,7 +958,7 @@ bool CollectionDB::cleanArtists()
 {
     //    delete from artists where artist in (select artist from artists except select distinct artist from tracks);
     auto queryTxt=QString("DELETE FROM %1 WHERE %2 IN (SELECT %2 FROM %1 EXCEPT SELECT DISTINCT %2 FROM %3)").arg(
-                TABLEMAP[TABLE::ARTISTS],
+                      TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::TRACKS]
             );
@@ -971,7 +972,7 @@ bool CollectionDB::cleanArtists()
 bool CollectionDB::removeFolder(const QString &url)
 {
     auto queryTxt=QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(
-                TABLEMAP[TABLE::FOLDERS],
+                      TABLEMAP[TABLE::FOLDERS],
             KEYMAP[KEY::URL], url);
 
     qDebug()<<queryTxt;
@@ -992,7 +993,7 @@ bool CollectionDB::cleanAlbums()
 {
     //    delete from albums where (album, artist) in (select a.album, a.artist from albums a except select distinct album, artist from tracks);
     auto queryTxt=QString("DELETE FROM %1 WHERE (%2, %3) IN (SELECT %2, %3 FROM %1 EXCEPT SELECT DISTINCT %2, %3  FROM %4)").arg(
-                TABLEMAP[TABLE::ALBUMS],
+                      TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::ALBUM],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::TRACKS]

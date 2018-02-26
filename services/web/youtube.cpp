@@ -109,7 +109,6 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
     TagInfo tag;
     if(exitStatus == QProcess::NormalExit)
     {
-
         if(BAE::fileExists(file))
         {
             tag.feed(file);
@@ -143,7 +142,9 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
                     TagInfo tag;
                     tag.feed(track[KEY::URL]);
 
-                    if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString().isEmpty())
+                    auto albumRes = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString();
+
+                    if(!albumRes.isEmpty() && albumRes != BAE::SLANG[W::UNKNOWN])
                         tag.setAlbum(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString());
                     else tag.setAlbum(track[KEY::TITLE]);
 
@@ -194,7 +195,7 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
 
     CollectionDB con(nullptr);
     con.addTrack(trackMap);
-    //    con.trackPlaylist(file, track[KEY::PLAYLIST]);
+//    con.trackPlaylist({file}, track[KEY::PLAYLIST]);
 
     if(this->ids.isEmpty()) emit this->done();
 

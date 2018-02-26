@@ -75,9 +75,10 @@ void Brain::synapse()
 {
     if(this->go)
     {
-        this->albumInfo();
-        this->artistInfo();
-        //        this->trackInfo();
+        this->artworks();
+        this->trackLyrics();
+        this->tags();
+        this->wikis();
     }
 
     emit this->finished();
@@ -314,69 +315,6 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
 
 void Brain::trackInfo()
 {
-    if(!this->go) return;
-
-    auto ontology = PULPO::ONTOLOGY::TRACK;
-    auto services = {PULPO::SERVICES::LyricWikia, PULPO::SERVICES::Genius};
-
-    qDebug()<<"getting missing track lyrics";
-    auto queryTxt = QString("SELECT %1, %2, %3 FROM %4 WHERE %5 = ''").arg(KEYMAP[KEY::URL],
-            KEYMAP[KEY::TITLE],
-            KEYMAP[KEY::ARTIST],
-            TABLEMAP[TABLE::TRACKS],
-            KEYMAP[KEY::LYRICS]);
-
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::LYRICS, PULPO::RECURSIVE::OFF, [](DB track)
-    {
-        CollectionDB conn(nullptr);
-        conn.lyricsTrack(track, SLANG[W::NONE]);
-    });
-
-    services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
-
-    qDebug()<<"getting missing track artwork";
-    //select url, title, album, artist from tracks t inner join albums a on a.album=t.album and a.artist=t.artist where a.artwork = ''
-    queryTxt =  QString("SELECT DISTINCT t.%1, t.%2, t.%3, t.%4 FROM %5 t INNER JOIN %6 a ON a.%3 = t.%3 AND a.%4 = t.%4  WHERE a.%7 = '' GROUP BY a.%3, a.%4 ").arg(KEYMAP[KEY::URL],
-            KEYMAP[KEY::TITLE],
-            KEYMAP[KEY::ARTIST],
-            KEYMAP[KEY::ALBUM],
-            TABLEMAP[TABLE::TRACKS],
-            TABLEMAP[TABLE::ALBUMS],
-            KEYMAP[KEY::ARTWORK]);
-
-    auto artworks = this->getDBData(queryTxt);
-    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, [](DB track)
-    {
-        CollectionDB conn(nullptr);
-        conn.insertArtwork(track);
-    });
-
-    if(!artworks.isEmpty())
-        emit this->done(TABLE::ALBUMS);
-
-    qDebug()<<"getting missing track tags";
-    // select title, artist, album from tracks t where url not in (select url from tracks_tags)
-    queryTxt = QString("SELECT %1, %2, %3, %4 FROM %5 WHERE %1 NOT IN ( SELECT %1 FROM %6 )").arg(KEYMAP[KEY::URL],
-            KEYMAP[KEY::TITLE],
-            KEYMAP[KEY::ARTIST],
-            KEYMAP[KEY::ALBUM],
-            TABLEMAP[TABLE::TRACKS],
-            TABLEMAP[TABLE::TRACKS_TAGS]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, RECURSIVE::ON, nullptr);
-
-    qDebug()<<"getting missing track wikis";
-    queryTxt = QString("SELECT %1, %2, %3, %4 FROM %5 WHERE %6 = ''").arg(KEYMAP[KEY::URL],
-            KEYMAP[KEY::TITLE],
-            KEYMAP[KEY::ARTIST],
-            KEYMAP[KEY::ALBUM],
-            TABLEMAP[TABLE::TRACKS],
-            KEYMAP[KEY::WIKI]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, RECURSIVE::OFF, [](DB track)
-    {
-        CollectionDB conn(nullptr);
-        conn.wikiTrack(track, SLANG[W::NONE]);
-    });
-
     //        auto queryTxt =  QString("SELECT %1, %2, %3 FROM %4 WHERE %3 = 'UNKNOWN' GROUP BY %2, a.%3 ").arg(KEYMAP[KEY::TITLE],
     //                KEYMAP[KEY::ARTIST],KEYMAP[KEY::ALBUM],TABLEMAP[TABLE::TRACKS]);
     //        QSqlQuery query (queryTxt);
@@ -390,22 +328,63 @@ void Brain::trackInfo()
 
     // emit this->done(TABLE::TRACKS);
 
-
+    this->trackArtworks();
+    this->trackLyrics();
+    this->trackTags();
+    this->trackWikis();
 }
 
 void Brain::albumInfo()
 {
+    if(!go) return;
+
+    this->albumArtworks();
+    this->albumTags();
+    this->albumWikis();
+}
+
+void Brain::artistInfo()
+{
+    if(!go) return;
+
+    this->artistArtworks();
+    this->artistTags();
+    this->artistWikis();
+}
+
+void Brain::artworks()
+{
+    if(!go) return;
+
+    this->albumArtworks();
+    this->artistArtworks();
+    this->trackArtworks();
+}
+
+void Brain::tags()
+{
+    if(!go) return;
+
+    this->albumTags();
+    this->artistTags();
+    this->trackTags();
+}
+
+void Brain::wikis()
+{
+    if(!go) return;
+
+    this->albumWikis();
+    this->artistWikis();
+    this->trackWikis();
+}
+
+void Brain::albumArtworks()
+{
     if(!this->go) return;
 
-    /*Set what services will be used*/
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz};
-
-    /*Set the ontology of type info to retrieve*/
     auto ontology = PULPO::ONTOLOGY::ALBUM;
-
-    /*******************************************/
-    /******************ARTWORK******************/
-    /*******************************************/
 
     bDebug::Instance()->msg("Getting missing albums artworks");
 
@@ -423,45 +402,47 @@ void Brain::albumInfo()
     this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
 
     emit this->done(TABLE::ALBUMS);
+}
 
+void Brain::albumTags()
+{
+    if(!this->go) return;
 
-    /*******************************************/
-    /******************TAGS*********************/
-    /*******************************************/
+    auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz};
+    auto ontology = PULPO::ONTOLOGY::ALBUM;
 
     //select album, artist from albums where  album  not in (select album from albums_tags) and artist  not in (select  artist from albums_tags)
     bDebug::Instance()->msg("Getting missing albums tags");
-    queryTxt =  QString("SELECT %1, %2 FROM %3 WHERE %1 NOT IN ( SELECT %1 FROM %4 ) AND %2 NOT IN ( SELECT %2 FROM %4 )").arg(KEYMAP[KEY::ALBUM],
+    auto queryTxt =  QString("SELECT %1, %2 FROM %3 WHERE %1 NOT IN ( SELECT %1 FROM %4 ) AND %2 NOT IN ( SELECT %2 FROM %4 )").arg(KEYMAP[KEY::ALBUM],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ALBUMS],
             TABLEMAP[TABLE::ALBUMS_TAGS]);
     this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
 
+}
 
-    /*******************************************/
-    /******************WIKIS********************/
-    /*******************************************/
+void Brain::albumWikis()
+{
+    if(!this->go) return;
+
+    auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz};
+    auto ontology = PULPO::ONTOLOGY::ALBUM;
 
     bDebug::Instance()->msg("Getting missing albums wikis");
-    queryTxt =  QString("SELECT %1, %2 FROM %3 WHERE %4 = '' ").arg(KEYMAP[KEY::ALBUM],
+    auto queryTxt =  QString("SELECT %1, %2 FROM %3 WHERE %4 = '' ").arg(KEYMAP[KEY::ALBUM],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::WIKI]);
     this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
-
 }
 
-void Brain::artistInfo()
+void Brain::artistArtworks()
 {
     if(!this->go) return;
 
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
     auto ontology = PULPO::ONTOLOGY::ARTIST;
 
-
-    /*******************************************/
-    /******************ARTWORK******************/
-    /*******************************************/
     bDebug::Instance()->msg("Getting missing artists artworks");
     auto queryTxt = QString("SELECT %1 FROM %2 WHERE %3 = ''").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
@@ -478,27 +459,127 @@ void Brain::artistInfo()
     this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
 
     emit this->done(TABLE::ARTISTS);
+}
 
-    /*******************************************/
-    /******************TAGS*********************/
-    /*******************************************/
+void Brain::artistTags()
+{
+    if(!this->go) return;
+
+    auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
+    auto ontology = PULPO::ONTOLOGY::ARTIST;
 
     //select artist from artists where  artist  not in (select album from albums_tags)
     bDebug::Instance()->msg("Getting missing artists tags");
-    queryTxt =  QString("SELECT %1 FROM %2 WHERE %1 NOT IN ( SELECT %1 FROM %3 ) ").arg(KEYMAP[KEY::ARTIST],
+    auto queryTxt =  QString("SELECT %1 FROM %2 WHERE %1 NOT IN ( SELECT %1 FROM %3 ) ").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             TABLEMAP[TABLE::ARTISTS_TAGS]);
     this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
 
-    /*******************************************/
-    /******************WIKIS********************/
-    /*******************************************/
+}
+
+void Brain::artistWikis()
+{
+    if(!this->go) return;
+
+    auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
+    auto ontology = PULPO::ONTOLOGY::ARTIST;
 
     bDebug::Instance()->msg("Getting missing artists wikis");
-    queryTxt =  QString("SELECT %1 FROM %2 WHERE %3 = '' ").arg(KEYMAP[KEY::ARTIST],
+    auto queryTxt =  QString("SELECT %1 FROM %2 WHERE %3 = '' ").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::WIKI]);
     this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
+}
+
+void Brain::trackArtworks()
+{
+    if(!this->go) return;
+
+    auto ontology = PULPO::ONTOLOGY::TRACK;
+    auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
+
+    bDebug::Instance()->msg("Getting missing track artwork");
+    //select url, title, album, artist from tracks t inner join albums a on a.album=t.album and a.artist=t.artist where a.artwork = ''
+    auto queryTxt =  QString("SELECT DISTINCT t.%1, t.%2, t.%3, t.%4 FROM %5 t INNER JOIN %6 a ON a.%3 = t.%3 AND a.%4 = t.%4  WHERE a.%7 = '' GROUP BY a.%3, a.%4 ").arg(KEYMAP[KEY::URL],
+            KEYMAP[KEY::TITLE],
+            KEYMAP[KEY::ARTIST],
+            KEYMAP[KEY::ALBUM],
+            TABLEMAP[TABLE::TRACKS],
+            TABLEMAP[TABLE::ALBUMS],
+            KEYMAP[KEY::ARTWORK]);
+
+    auto artworks = this->getDBData(queryTxt);
+    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, [](DB track)
+    {
+        CollectionDB conn(nullptr);
+        conn.insertArtwork(track);
+    });
+
+    emit this->done(TABLE::ALBUMS);
 
 }
+
+void Brain::trackLyrics()
+{
+    if(!this->go) return;
+
+    auto ontology = PULPO::ONTOLOGY::TRACK;
+    auto services = {PULPO::SERVICES::LyricWikia, PULPO::SERVICES::Genius};
+
+    bDebug::Instance()->msg("Getting missing track lyrics");
+    auto queryTxt = QString("SELECT %1, %2, %3 FROM %4 WHERE %5 = ''").arg(KEYMAP[KEY::URL],
+            KEYMAP[KEY::TITLE],
+            KEYMAP[KEY::ARTIST],
+            TABLEMAP[TABLE::TRACKS],
+            KEYMAP[KEY::LYRICS]);
+
+    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::LYRICS, PULPO::RECURSIVE::OFF, [](DB track)
+    {
+        CollectionDB conn(nullptr);
+        conn.lyricsTrack(track, SLANG[W::NONE]);
+    });
+
+}
+
+void Brain::trackTags()
+{
+    if(!this->go) return;
+
+    auto ontology = PULPO::ONTOLOGY::TRACK;
+    auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
+
+    bDebug::Instance()->msg("Getting missing track tags");
+    // select title, artist, album from tracks t where url not in (select url from tracks_tags)
+    auto queryTxt = QString("SELECT %1, %2, %3, %4 FROM %5 WHERE %1 NOT IN ( SELECT %1 FROM %6 )").arg(KEYMAP[KEY::URL],
+            KEYMAP[KEY::TITLE],
+            KEYMAP[KEY::ARTIST],
+            KEYMAP[KEY::ALBUM],
+            TABLEMAP[TABLE::TRACKS],
+            TABLEMAP[TABLE::TRACKS_TAGS]);
+    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, RECURSIVE::ON, nullptr);
+}
+
+void Brain::trackWikis()
+{
+    if(!this->go) return;
+
+    auto ontology = PULPO::ONTOLOGY::TRACK;
+    auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
+
+    bDebug::Instance()->msg("Getting missing track wikis");
+    auto queryTxt = QString("SELECT %1, %2, %3, %4 FROM %5 WHERE %6 = ''").arg(KEYMAP[KEY::URL],
+            KEYMAP[KEY::TITLE],
+            KEYMAP[KEY::ARTIST],
+            KEYMAP[KEY::ALBUM],
+            TABLEMAP[TABLE::TRACKS],
+            KEYMAP[KEY::WIKI]);
+    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, RECURSIVE::OFF, [](DB track)
+    {
+        CollectionDB conn(nullptr);
+        conn.wikiTrack(track, SLANG[W::NONE]);
+    });
+
+}
+
+
 

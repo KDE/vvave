@@ -128,10 +128,7 @@ BabeList
                     playlistViewRoot.populate(Q.GET.playlistTracks_.arg(playlist));
                     break;
 
-                }
-
-                if(!playlistViewRoot.wideMode)
-                    playlistViewRoot.currentIndex = 1
+                }              
 
             }
 
