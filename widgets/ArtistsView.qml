@@ -38,7 +38,7 @@ BabeGrid
 
         y: parent.height-height-root.footer.height
 
-        width: pageStack.wideMode ? artistsViewGrid.width-1 : artistsViewGrid.width
+        width:  artistsViewGrid.width
 
         height:
         {
@@ -81,6 +81,21 @@ BabeGrid
             headerBarVisible: true
             headerBarExit: true
             coverArtVisible: true
+
+            Kirigami.Separator
+            {
+                visible: !isMobile
+                width: parent.width
+                height: 1
+
+                anchors
+                {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+            }
+
             onRowClicked:
             {
                 drawer.close()

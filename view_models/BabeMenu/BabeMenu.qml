@@ -12,6 +12,9 @@ Menu
     focus: true
     parent: ApplicationWindow.overlay
 
+    margins: 1
+    padding: 2
+
 //    enter: Transition
 //    {
 //        NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }

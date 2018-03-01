@@ -34,7 +34,7 @@ function playTrack(track)
             //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
             //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
             //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
-        }else root.missingAlert(currentTrack)
+        }else missingAlert(currentTrack)
     }
 }
 
@@ -55,14 +55,14 @@ function queueTracks(tracks)
 function setLyrics(lyrics)
 {
     currentTrack.lyrics = lyrics
-    root.mainPlaylist.infoView.lyricsText.text = lyrics
+    mainPlaylist.infoView.lyricsText.text = lyrics
 }
 
 function stop()
 {
     player.stop()
-    root.progressBar.value = 0
-    root.progressBar.enabled = false
+    progressBar.value = 0
+    progressBar.enabled = false
     root.title = "Babe..."
 }
 
@@ -82,7 +82,7 @@ function nextTrack()
     if(!mainlistEmpty)
     {
         var next = 0
-        if(root.shuffle && onQueue === 0)
+        if(shuffle && onQueue === 0)
             next = shuffle()
         else
             next = currentTrackIndex+1 >= mainPlaylist.list.count? 0 : currentTrackIndex+1
@@ -100,7 +100,7 @@ function nextTrack()
 
 function previousTrack()
 {
-    if(root.mainPlaylist.list.count>0)
+    if(!mainlistEmpty>0)
     {
         var previous = previous = currentTrackIndex-1 >= 0 ? mainPlaylist.list.currentIndex-1 : currentTrackIndex-1
         prevTrackIndex = mainPlaylist.list.currentIndex
@@ -110,13 +110,13 @@ function previousTrack()
 
 function shuffle()
 {
-    var pos =  Math.floor(Math.random() * root.mainPlaylist.list.count)
+    var pos =  Math.floor(Math.random() * mainPlaylist.list.count)
     return pos
 }
 
 function playAt(index)
 {
-    if(index < root.mainPlaylist.list.count)
+    if(index < mainPlaylist.list.count)
     {
         currentTrackIndex = index
         mainPlaylist.list.currentIndex = index
@@ -129,7 +129,7 @@ function quickPlay(track)
     //    root.pageStack.currentIndex = 0
     appendTrack(track)
     playAt(root.mainPlaylist.list.count-1)
-    root.mainPlaylist.list.positionViewAtEnd()
+    mainPlaylist.list.positionViewAtEnd()
 
 }
 
@@ -146,7 +146,7 @@ function appendTrack(track)
     {
         mainPlaylist.list.model.append(track)
         animFooter.running = true
-        if(root.sync === true)
+        if(sync === true)
         {
             infoMsgAnim()
             addToPlaylist([track.url], syncPlaylist)
@@ -189,15 +189,15 @@ function appendAll(tracks)
 function savePlaylist()
 {
     var list = []
-    var n =  root.mainPlaylist.list.count
+    var n =  mainPlaylist.list.count
     n = n > 15 ? 15 : n
     for(var i=0 ; i < n; i++)
     {
-        var url = root.mainPlaylist.list.model.get(i).url
+        var url = mainPlaylist.list.model.get(i).url
         list.push(url)
     }
     bae.savePlaylist(list)
-    bae.savePlaylistPos(root.mainPlaylist.list.currentIndex)
+    bae.savePlaylistPos(mainPlaylist.list.currentIndex)
 }
 
 function clearOutPlaylist()

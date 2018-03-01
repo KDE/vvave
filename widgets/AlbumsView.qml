@@ -36,7 +36,7 @@ BabeGrid
 
         y: parent.height-height-root.footer.height
 
-        width: pageStack.wideMode ? albumsViewGrid.width-1 : albumsViewGrid.width
+        width: albumsViewGrid.width
 
         height:
         {
@@ -85,6 +85,20 @@ BabeGrid
             coverArtVisible: true
             quickPlayVisible: true
             focus: true
+
+            Kirigami.Separator
+            {
+                visible: !isMobile
+                width: parent.width
+                height: 1
+
+                anchors
+                {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+            }
 
             onRowClicked:
             {

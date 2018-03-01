@@ -39,24 +39,48 @@ Page
         list.model.clear()
     }
 
+    BabeHolder
+    {
+        id: holder
+        visible: babeList.count === 0
+        color : textColor
+        focus: true
+    }
+
     ColumnLayout
     {
         anchors.fill: parent
         spacing: 0
 
-        ToolBar
+        Rectangle
         {
             id: headerRoot
             width: parent.width
             height:  visible ?  toolBarHeight : 0
             Layout.fillWidth: true
             visible: headerBarVisible
-            focus: true            
+            focus: true
+            color: backgroundColor
+
+            Kirigami.Separator
+            {
+                visible: !isMobile
+                width: parent.width
+                height: 1
+
+                anchors
+                {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+            }
 
             RowLayout
             {
                 id: headerBar
                 anchors.fill: parent
+
                 BabeButton
                 {
                     Layout.alignment : Qt.AlignLeft
@@ -136,23 +160,14 @@ Page
                 NumberAnimation { properties: "x,y"; duration: 100 }
             }
 
-            BabeHolder
-            {
-                id: holder
-                visible: babeList.count === 0
-                color : textColor
-                focus: true
-            }
-
             ScrollBar.vertical:BabeScrollBar { }
-
 
             onContentYChanged:
             {
                 if(contentY < -120)
                     wasPulled = true
 
-                if(contentY == toolBarHeight*-1 && wasPulled)
+                if(contentY == 0 && wasPulled)
                 { pulled(); wasPulled = false}
             }
         }

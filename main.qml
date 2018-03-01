@@ -59,7 +59,7 @@ Kirigami.ApplicationWindow
     property string babeColor : bae.babeColor()
     property string babeAltColor : bae.babeAltColor()
     property string backgroundColor : isMobile ? bae.backgroundColor() : Kirigami.Theme.backgroundColor
-    property string viewBackgroundColor : isMobile ? bae.backgroundColor() : Kirigami.Theme.viewBackgroundColor
+    property string viewBackgroundColor : isMobile ? bae.altColor() : Kirigami.Theme.viewBackgroundColor
     property string foregroundColor : isMobile ? bae.foregroundColor() : Kirigami.Theme.textColor
     property string textColor : isMobile ? bae.textColor() : Kirigami.Theme.textColor
     property string babeHighlightColor : isMobile ? bae.highlightColor() : Kirigami.Theme.highlightColor
@@ -68,8 +68,8 @@ Kirigami.ApplicationWindow
     property string midLightColor : isMobile? bae.midLightColor() : Kirigami.Theme.buttonBackgroundColor
     property string darkColor : bae.darkColor()
     property string baseColor : bae.baseColor()
-    property string altColor : bae.altColor()
-    property string shadowColor : bae.shadowColor()    
+    property string altColor : isMobile ? bae.altColor() : Kirigami.Theme.viewBackgroundColor
+    property string shadowColor : bae.shadowColor()
 
     readonly property string darkBackgroundColor : "#303030"
     readonly property string darkForegroundColor : "#FAFAFA"
@@ -157,18 +157,18 @@ Kirigami.ApplicationWindow
 
     onClosing: Player.savePlaylist()
 
-//    pageStack.onCurrentIndexChanged:
-//    {
-//        if(pageStack.currentIndex === 0 && isMobile && !pageStack.wideMode)
-//        {
-//            bae.androidStatusBarColor(babeColor)
-//            Material.background = babeColor
-//        }else
-//        {
-//            bae.androidStatusBarColor(babeAltColor)
-//            Material.background = babeAltColor
-//        }
-//    }
+    //    pageStack.onCurrentIndexChanged:
+    //    {
+    //        if(pageStack.currentIndex === 0 && isMobile && !pageStack.wideMode)
+    //        {
+    //            bae.androidStatusBarColor(babeColor)
+    //            Material.background = babeColor
+    //        }else
+    //        {
+    //            bae.androidStatusBarColor(babeAltColor)
+    //            Material.background = babeAltColor
+    //        }
+    //    }
 
     onMissingAlert:
     {
@@ -191,13 +191,13 @@ Kirigami.ApplicationWindow
             mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
 
         }
-    }    
+    }
 
     /* UI */
     header: BabeBar
     {
         id: toolbar
-//        height: toolBarHeight
+        //        height: toolBarHeight
         visible: true
         currentIndex: currentView
         onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
@@ -308,7 +308,7 @@ Kirigami.ApplicationWindow
                 implicitHeight: 10
                 width: progressBar.availableWidth
                 height: implicitHeight
-                color: "transparent"               
+                color: "transparent"
 
                 Rectangle
                 {
@@ -466,11 +466,12 @@ Kirigami.ApplicationWindow
                     id: babeBtnIcon
                     iconName: "love"
                     iconColor: currentBabe ? babeColor : darkForegroundColor
-                    onClicked:
-                    {
-                        var value = mainPlaylist.contextMenu.babeIt(currentTrackIndex)
-                        currentBabe = value
-                    }
+                    onClicked: if(!mainlistEmpty)
+                               {
+                                   var value = mainPlaylist.contextMenu.babeIt(currentTrackIndex)
+                                   currentBabe = value
+                               }
+
                 }
 
                 BabeButton
@@ -812,8 +813,8 @@ Kirigami.ApplicationWindow
 
     Component.onCompleted:
     {
-//        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
-//        console.log(Imagine.url, Imagine.path)
+        //        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
+        //        console.log(Imagine.url, Imagine.path)
         bae.androidStatusBarColor(backgroundColor)
     }
 
@@ -824,11 +825,13 @@ Kirigami.ApplicationWindow
         onPos: progressBar.value = pos
         onTiming: progressTimeLabel = time
         onDurationChanged: durationTimeLabel = time
-        onFinished:
-        {
-            bae.playedTrack(currentTrack.url)
-            Player.nextTrack()
-        }
+
+        onFinished: if(!mainlistEmpty)
+                    {
+                        bae.playedTrack(currentTrack.url)
+                        Player.nextTrack()
+                    }
+
 
         onIsPlaying: isPlaying = playing
     }

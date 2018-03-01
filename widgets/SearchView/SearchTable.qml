@@ -102,6 +102,14 @@ Page
             onExit: clearSearch()
         }
 
+        Kirigami.Separator
+        {
+            visible: !isMobile
+            Layout.fillWidth: true
+            width: parent.width
+            height: 1
+        }
+
         ToolBar
         {
             id: searchBox

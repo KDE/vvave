@@ -49,14 +49,17 @@ BabeMenu
 
     function babeIt(index)
     {
-        console.log(index);
-        var url = listModel.get(index).url
-        var value = listModel.get(index).babe == "1" ? false : true
+        if(list.count>0)
+        {
+            console.log(index);
+            var url = listModel.get(index).url
+            var value = listModel.get(index).babe == "1" ? false : true
 
-        if(bae.babeTrack(url, value))
-            list.model.get(index).babe = value ? "1" : "0"
+            if(bae.babeTrack(url, value))
+                list.model.get(index).babe = value ? "1" : "0"
 
-        return value
+            return value
+        }
     }
 
     BabePopup

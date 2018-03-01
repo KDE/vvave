@@ -203,7 +203,7 @@ ItemDelegate
                     visible: coverArt ? !sameAlbum : true
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    Layout.maximumWidth: gridLayout.width*0.5
+                    Layout.maximumWidth: gridLayout.width*0.4
                     Layout.row: 2
                     Layout.column: 2
                     verticalAlignment:  Qt.AlignVCenter

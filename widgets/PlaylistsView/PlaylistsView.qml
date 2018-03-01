@@ -10,11 +10,6 @@ import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
 
 
-//    transform: Translate
-//    {
-//        x: (playlistViewDrawer.position * playlistViewRoot.width * 0.33)*-1
-//    }
-
 Kirigami.PageRow
 {
     id: playlistViewRoot
