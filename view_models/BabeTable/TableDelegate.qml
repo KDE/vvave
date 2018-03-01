@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import "../../view_models"
 import QtGraphicalEffects 1.0
 import "../../utils/Help.js" as H
+import org.kde.kirigami 2.2 as Kirigami
 
 ItemDelegate
 {
@@ -12,6 +13,7 @@ ItemDelegate
     width: parent.width
     height: sameAlbum ? rowHeightAlt : rowHeight
     clip: true
+    autoExclusive:  true
 
     signal play()
     signal rightClicked()
@@ -32,7 +34,7 @@ ItemDelegate
         }else false
     }
 
-    property color bgColor : midColor
+    property color bgColor : backgroundColor
     property color color : foregroundColor
     property color highlightColor : highlightTextColor
     property string textColor: ListView.isCurrentItem ? highlightColor : color
@@ -61,10 +63,10 @@ ItemDelegate
             if(trackMood.length > 0)
                 Qt.lighter(trackMood)
             else
-                index % 2 === 0 ? bgColor : "transparent"
+                index % 2 === 0 ? Qt.darker(bgColor) : "transparent"
         }
 
-        opacity: 0.3
+        opacity: 0.1
     }
 
     MouseArea

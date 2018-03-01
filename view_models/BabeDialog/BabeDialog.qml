@@ -5,7 +5,7 @@ import QtQuick.Controls.Material 2.1
 Dialog
 {
     width: columnWidth * 0.9
-    height: isMobile ? parent.height*0.8 : parent.height*0.5
+    height: parent.height*0.5
 
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
@@ -13,7 +13,9 @@ Dialog
 
     modal: true
 
-    padding: 0
+    margins: 1
+    padding: 2
+
 
     Material.accent: babeColor
     Material.background: backgroundColor

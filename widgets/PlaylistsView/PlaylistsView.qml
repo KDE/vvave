@@ -34,16 +34,11 @@ Kirigami.PageRow
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
     interactive: false
 
+
     Page
     {
         id: playlistList
-
-        Rectangle
-        {
-            anchors.fill: parent
-            color: altColor
-            z: -999
-        }
+        clip: true
 
         ColumnLayout
         {
@@ -58,6 +53,9 @@ Kirigami.PageRow
 
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+
+                interactive: false
+                clip: true
 
                 PlaylistsViewModel
                 {
@@ -89,22 +87,12 @@ Kirigami.PageRow
 
             }
 
-            Kirigami.Separator{ Layout.fillWidth: true; width: parent.width; height: 1}
-
             ColorTagsBar
             {
                 Layout.fillWidth: true
                 height: rowHeightAlt
                 recSize: isMobile ? toolBarIconSize : 16
 
-                Rectangle
-                {
-                    anchors.fill: parent
-                    z: -999
-                    color:midColor
-                    opacity: 0.3
-
-                }
                 onColorClicked:
                 {
                     populate(Q.GET.colorTracks_.arg(color))
@@ -120,11 +108,7 @@ Kirigami.PageRow
     {
         id: playlistViewDrawer
         anchors.fill: parent
-
-        background: Rectangle
-        {
-            color: altColor
-        }
+        clip: true
 
         BabeTable
         {

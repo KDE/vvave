@@ -5,8 +5,8 @@ import QtQuick.Controls.Material 2.1
 
 Popup
 {
-    property int maxWidth : ApplicationWindow.overlay.width
-    property int maxHeight : ApplicationWindow.overlay.height
+    property int maxWidth : 200
+    property int maxHeight : 200
 
     parent: ApplicationWindow.overlay
 
@@ -30,8 +30,9 @@ Popup
     focus: true
     clip: true
 
-    padding: 0
-    margins: 0
+
+    margins: 1
+    padding: 2
 
     enter: Transition
     {

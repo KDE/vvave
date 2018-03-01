@@ -5,6 +5,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.1
 
 import org.kde.kirigami 2.2 as Kirigami
+//import QtQuick.Controls.Imagine 2.3
 
 import "utils"
 
@@ -57,29 +58,18 @@ Kirigami.ApplicationWindow
     /*THEMING*/
     property string babeColor : bae.babeColor()
     property string babeAltColor : bae.babeAltColor()
-    property string backgroundColor : bae.backgroundColor()
-    property string foregroundColor : bae.foregroundColor()
-    property string textColor : bae.textColor()
-    property string babeHighlightColor : bae.highlightColor()
-    property string highlightTextColor : bae.highlightTextColor()
+    property string backgroundColor : isMobile ? bae.backgroundColor() : Kirigami.Theme.backgroundColor
+    property string viewBackgroundColor : isMobile ? bae.backgroundColor() : Kirigami.Theme.viewBackgroundColor
+    property string foregroundColor : isMobile ? bae.foregroundColor() : Kirigami.Theme.textColor
+    property string textColor : isMobile ? bae.textColor() : Kirigami.Theme.textColor
+    property string babeHighlightColor : isMobile ? bae.highlightColor() : Kirigami.Theme.highlightColor
+    property string highlightTextColor : isMobile ? bae.highlightTextColor() : Kirigami.Theme.highlightedTextColor
     property string midColor : bae.midColor()
-    property string midLightColor : bae.midLightColor()
+    property string midLightColor : isMobile? bae.midLightColor() : Kirigami.Theme.buttonBackgroundColor
     property string darkColor : bae.darkColor()
     property string baseColor : bae.baseColor()
     property string altColor : bae.altColor()
-    property string shadowColor : bae.shadowColor()
-
-    readonly property string lightBackgroundColor : "#eff0f1"
-    readonly property string lightForegroundColor : "#31363b"
-    readonly property string lightTextColor : "#31363b"
-    readonly property string lightBabeHighlightColor : "#3daee9"
-    readonly property string lightHighlightTextColor : "#eff0f1"
-    readonly property string lightMidColor : "#cacaca"
-    readonly property string lightMidLightColor : "#dfdfdf"
-    readonly property string lightDarkColor : "#7f8c8d"
-    readonly property string lightBaseColor : "#fcfcfc"
-    readonly property string lightAltColor : "#eeeeee"
-    readonly property string lightShadowColor : "#868686"
+    property string shadowColor : bae.shadowColor()    
 
     readonly property string darkBackgroundColor : "#303030"
     readonly property string darkForegroundColor : "#FAFAFA"
@@ -95,7 +85,7 @@ Kirigami.ApplicationWindow
 
     Material.theme: Material.Light
     Material.accent: babeColor
-    Material.background: backgroundColor
+    Material.background: viewBackgroundColor
     Material.primary: backgroundColor
     Material.foreground: foregroundColor
 
@@ -167,18 +157,18 @@ Kirigami.ApplicationWindow
 
     onClosing: Player.savePlaylist()
 
-    pageStack.onCurrentIndexChanged:
-    {
-        if(pageStack.currentIndex === 0 && isMobile && !pageStack.wideMode)
-        {
-            bae.androidStatusBarColor(babeColor)
-            Material.background = babeColor
-        }else
-        {
-            bae.androidStatusBarColor(babeAltColor)
-            Material.background = babeAltColor
-        }
-    }
+//    pageStack.onCurrentIndexChanged:
+//    {
+//        if(pageStack.currentIndex === 0 && isMobile && !pageStack.wideMode)
+//        {
+//            bae.androidStatusBarColor(babeColor)
+//            Material.background = babeColor
+//        }else
+//        {
+//            bae.androidStatusBarColor(babeAltColor)
+//            Material.background = babeAltColor
+//        }
+//    }
 
     onMissingAlert:
     {
@@ -207,12 +197,9 @@ Kirigami.ApplicationWindow
     header: BabeBar
     {
         id: toolbar
-        height: toolBarHeight
+//        height: toolBarHeight
         visible: true
         currentIndex: currentView
-        bgColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? babeColor : babeAltColor
-        textColor: isMobile && pageStack.currentIndex === 0 && !pageStack.wideMode ? "#FFF" : bae.foregroundColor()
-
         onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
 
         onTracksViewClicked:
@@ -252,14 +239,15 @@ Kirigami.ApplicationWindow
         }
     }
 
-    footer: Item
+    footer: ToolBar
     {
         id: playbackControls
-        anchors.horizontalCenter: parent.horizontalCenter
         height: visible ? headerHeight : 0
         width: root.width
         visible: true
         focus: true
+        position: ToolBar.Footer
+
         FastBlur
         {
             anchors.fill: parent
@@ -320,24 +308,7 @@ Kirigami.ApplicationWindow
                 implicitHeight: 10
                 width: progressBar.availableWidth
                 height: implicitHeight
-                color: "transparent"
-
-                Kirigami.Separator
-                {
-                    visible: !isMobile
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: Kirigami.Theme.viewFocusColor
-                    }
-
-                    anchors
-                    {
-                        left: parent.left
-                        right: parent.right
-                        top: parent.top
-                    }
-                }
+                color: "transparent"               
 
                 Rectangle
                 {
@@ -841,7 +812,9 @@ Kirigami.ApplicationWindow
 
     Component.onCompleted:
     {
-        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
+//        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
+//        console.log(Imagine.url, Imagine.path)
+        bae.androidStatusBarColor(backgroundColor)
     }
 
     /*CONNECTIONS*/

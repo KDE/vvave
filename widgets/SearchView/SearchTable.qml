@@ -8,7 +8,7 @@ import QtGraphicalEffects 1.0
 import "../../view_models/BabeTable"
 import "../../db/Queries.js" as Q
 
-Item
+Page
 {
     property alias searchInput : searchInput
     property alias searchTable : searchTable
@@ -67,7 +67,7 @@ Item
     }
 
     Rectangle
-    {        
+    {
         visible: suggestionsPopup.visible
         width: parent.width
         height: parent.height-searchBox.height
@@ -77,18 +77,14 @@ Item
         opacity: 0.5
     }
 
-    Rectangle
-    {
-        anchors.fill: parent
-        color: altColor
-        z: -999
-    }
-
     ColumnLayout
     {
         anchors.fill: parent
         width: parent.width
         height: parent.height
+
+        Layout.margins: 0
+        spacing: 0
 
         BabeTable
         {
@@ -106,28 +102,21 @@ Item
             onExit: clearSearch()
         }
 
-        Rectangle
+        ToolBar
         {
             id: searchBox
             Layout.fillWidth: true
             width: parent.width
             height: toolBarHeight
-            color: searchInput.activeFocus ? midColor : midLightColor
-            Kirigami.Separator
-            {
-                Rectangle
-                {
-                    anchors.fill: parent
-                    color: Kirigami.Theme.viewFocusColor
-                }
+            position: ToolBar.Footer
 
-                anchors
-                {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
-                }
+            Rectangle
+            {
+                anchors.fill: parent
+                z: -999
+                color: backgroundColor
             }
+
 
             RowLayout
             {
@@ -164,7 +153,7 @@ Item
                     wrapMode: TextEdit.Wrap
                     //activeFocusOnPress: true
                     onAccepted: runSearch(searchInput.text)
-//                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
+                    //                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
                     onTextEdited: if(autoSuggestions) suggestionsPopup.updateSuggestions()
                 }
 

@@ -7,12 +7,7 @@ import "../../db/Queries.js" as Q
 BabePopup
 {
     id: searchSuggestionsRoot
-    property alias model : suggestionsList.model
-
-    leftPadding: 1
-    rightPadding: 1
-    topPadding: contentMargins
-    bottomPadding: contentMargins
+    property alias model : suggestionsList.model   
 
     BabeList
     {

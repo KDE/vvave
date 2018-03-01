@@ -2,7 +2,7 @@ import QtQuick.Controls 2.2
 import QtQuick 2.9
 import ".."
 
-Pane
+Page
 {
     id: gridPage
     padding: 20
@@ -36,13 +36,6 @@ Pane
 
 
     onWidthChanged: grid.forceLayout()
-
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: altColor
-        z: -999
-    }
 
     function clearGrid()
     {

@@ -71,7 +71,6 @@ void Pulpo::setRecursive(const RECURSIVE &state)
 void Pulpo::initServices()
 {
     for(auto service : this->registeredServices)
-
         switch (service)
         {
             case SERVICES::LastFm:

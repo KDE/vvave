@@ -32,13 +32,6 @@ BabeTable
             for(var i in map)
                 tracksViewTable.model.append(map[i])
     }
-
-    Rectangle
-    {
-        anchors.fill: parent
-        color: altColor
-        z: -999
-    }
 }
 
 

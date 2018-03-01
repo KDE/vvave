@@ -16,12 +16,7 @@ Page
     property int currentView : 0
 
     clip: true
-    Rectangle
-    {
-        anchors.fill: parent
-        z: -999
-        color: darkDarkColor
-    }
+
 
     SwipeView
     {
@@ -29,6 +24,10 @@ Page
         anchors.fill: parent
 
         currentIndex: currentView
+        background: Rectangle
+        {
+            color: darkDarkColor
+        }
 
         Rectangle
         {
@@ -66,10 +65,10 @@ Page
                     verticalAlignment: Qt.AlignVCenter
                     textFormat: Text.RichText
                     wrapMode: Text.Wrap
-                    activeFocusOnPress : true
-                    selectByMouse : true
-                    cursorPosition :0
-                    cursorVisible: true
+//                    activeFocusOnPress : true
+//                    selectByMouse : true
+//                    cursorPosition :0
+//                    cursorVisible: true
                 }
             }
 

@@ -130,7 +130,7 @@ Item
                 anchors.fill: parent
                 color: darkDarkColor
                 opacity: opacityLevel
-                z: -999                
+                z: -999
             }
 
             MouseArea
@@ -276,6 +276,13 @@ Item
 
                     textColor: darkForegroundColor
 
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        z: -999
+                        color: darkDarkColor
+                    }
+
                     onRowClicked:
                     {
                         prevTrackIndex = currentTrackIndex
@@ -293,39 +300,39 @@ Item
 
                     }
 
-//                    Component.onCompleted:
-//                    {
-//                        var list = bae.lastPlaylist()
-//                        var n = list.length
+                    Component.onCompleted:
+                    {
+                        var list = bae.lastPlaylist()
+                        var n = list.length
 
-//                        if(n>0)
-//                        {
-//                            for(var i = 0; i < n; i++)
-//                            {
-//                                var where = "url = \""+list[i]+"\""
-//                                var query = Q.GET.tracksWhere_.arg(where)
-//                                var track = bae.get(query)
-//                                Player.appendTrack(track[0])
-//                            }
-//                        }else
-//                        {
-//                            where = "babe = 1"
-//                            query = Q.GET.tracksWhere_.arg(where)
-//                            var tracks = bae.get(query)
+                        if(n>0)
+                        {
+                            for(var i = 0; i < n; i++)
+                            {
+                                var where = "url = \""+list[i]+"\""
+                                var query = Q.GET.tracksWhere_.arg(where)
+                                var track = bae.get(query)
+                                Player.appendTrack(track[0])
+                            }
+                        }else
+                        {
+                            where = "babe = 1"
+                            query = Q.GET.tracksWhere_.arg(where)
+                            var tracks = bae.get(query)
 
-//                            for(var pos=0; pos< tracks.length; pos++)
-//                                Player.appendTrack(tracks[pos])
+                            for(var pos=0; pos< tracks.length; pos++)
+                                Player.appendTrack(tracks[pos])
 
-//                        }
+                        }
 
-//                        if(autoplay)
-//                            Player.playAt(0)
+                        if(autoplay)
+                            Player.playAt(0)
 
-//                        //                                    var pos = bae.lastPlaylistPos()
-//                        //                                    console.log("POSSS:", pos)
-//                        //                                    list.currentIndex = pos
-//                        //                                    play(list.model.get(pos))
-//                    }
+                        //                                    var pos = bae.lastPlaylistPos()
+                        //                                    console.log("POSSS:", pos)
+                        //                                    list.currentIndex = pos
+                        //                                    play(list.model.get(pos))
+                    }
                 }
 
                 InfoView

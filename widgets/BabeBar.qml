@@ -27,28 +27,13 @@ ToolBar
     width: parent.width
     id: babeBar
 
+
+    smooth: true
     Rectangle
     {
-        anchors.fill: parent
+        anchors.fill: isMobile ? parent : undefined
         color: bgColor
-
-        Kirigami.Separator
-        {
-            visible: !isMobile
-
-            Rectangle
-            {
-                anchors.fill: parent
-                color: Kirigami.Theme.viewFocusColor
-            }
-
-            anchors
-            {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-        }
+        visible: !isMobile
     }
 
     RowLayout

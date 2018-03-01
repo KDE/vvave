@@ -74,12 +74,6 @@ BabeGrid
             NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
         }
 
-        background: Rectangle
-        {
-            anchors.fill: parent
-            z: -999
-            color: altColor
-        }
 
         BabeTable
         {
@@ -132,24 +126,7 @@ BabeGrid
                 drawer.close()
             }
 
-            onExit: drawer.close()
-
-            Kirigami.Separator
-            {
-                visible: !isMobile
-                Rectangle
-                {
-                    anchors.fill: parent
-                    color: Kirigami.Theme.viewFocusColor
-                }
-
-                anchors
-                {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
-                }
-            }
+            onExit: drawer.close()            
         }
 
     }

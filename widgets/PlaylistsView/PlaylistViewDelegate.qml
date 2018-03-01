@@ -18,8 +18,8 @@ ItemDelegate
     Rectangle
     {
         anchors.fill: parent
-        color: index % 2 === 0 ? midColor : "transparent"
-        opacity: 0.3
+        color: index % 2 === 0 ? Qt.darker(backgroundColor) : "transparent"
+        opacity: 0.1
     }
 
     MouseArea
@@ -64,6 +64,8 @@ ItemDelegate
                 height: parent.height
                 width: parent.width
                 verticalAlignment:  Qt.AlignVCenter
+                horizontalAlignment: Qt.AlignLeft
+
                 text: playlist
                 font.bold: false
                 elide: Text.ElideRight

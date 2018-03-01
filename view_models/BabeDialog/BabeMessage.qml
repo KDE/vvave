@@ -5,6 +5,9 @@ import QtQuick.Layouts 1.3
 BabeDialog
 {
     id: babeMessageRoot
+    width: columnWidth * 0.9
+    height: parent.height*0.5
+
     property string message
     property string messageBody
     standardButtons: Dialog.Yes | Dialog.No

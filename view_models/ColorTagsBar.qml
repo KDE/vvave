@@ -18,7 +18,7 @@ Item
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignCenter
-
+            flat: true
             Rectangle
             {
                 anchors.centerIn: parent
@@ -38,6 +38,7 @@ Item
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignCenter
 
+            flat: true
             Rectangle
             {
                 anchors.centerIn: parent
@@ -56,7 +57,7 @@ Item
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignCenter
-
+            flat: true
             Rectangle
             {
                 anchors.centerIn: parent
@@ -75,7 +76,7 @@ Item
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignCenter
-
+            flat: true
             Rectangle
             {
                 anchors.centerIn: parent
@@ -95,7 +96,7 @@ Item
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignCenter
-
+            flat: true
             Rectangle
             {
                 anchors.centerIn: parent

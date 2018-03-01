@@ -12,7 +12,6 @@ BabeList
 {
     id: playlistListRoot
 
-    headerBarColor: midLightColor
     headerBarExit: false
     headerBarTitle: "Playlists"
 
@@ -21,14 +20,7 @@ BabeList
         id:newPlaylistDialog
     }
 
-    signal playSync(int index)
-
-    Rectangle
-    {
-        anchors.fill: parent
-        color: altColor
-        z: -999
-    }
+    signal playSync(int index)   
 
     headerBarLeft: BabeButton
     {

@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
+import "../../utils/Help.js" as H
 
 Kirigami.GlobalDrawer
 {
@@ -60,8 +61,37 @@ Kirigami.GlobalDrawer
 
             Kirigami.Action
             {
-                text: qsTr("Refresh")
+                text: qsTr("Re-Scan")
                 onTriggered: bae.refreshCollection();
+            }
+
+            Kirigami.Action
+            {
+                text: qsTr("Refresh...")
+
+                Kirigami.Action
+                {
+                    text: qsTr("Tracks")
+                    onTriggered: H.refreshTracks();
+                }
+
+                Kirigami.Action
+                {
+                    text: qsTr("Albums")
+                    onTriggered: H.refreshAlbums();
+                }
+
+                Kirigami.Action
+                {
+                    text: qsTr("Artists")
+                    onTriggered: H.refreshArtists();
+                }
+
+                Kirigami.Action
+                {
+                    text: qsTr("All")
+                    onTriggered: H.refreshCollection();
+                }
             }
 
             Kirigami.Action
@@ -127,28 +157,28 @@ Kirigami.GlobalDrawer
                 }
             }
 
-            Kirigami.Action
-            {
-                text: "Theme"
-                visible: isMobile
-                Kirigami.Action
-                {
-                    text: "Light"
-                    onTriggered : switchColorScheme("Light")
-                }
+//            Kirigami.Action
+//            {
+//                text: "Theme"
+//                visible: isMobile
+//                Kirigami.Action
+//                {
+//                    text: "Light"
+//                    onTriggered : switchColorScheme("Light")
+//                }
 
-                Kirigami.Action
-                {
-                    text: "Dark"
-                    onTriggered : switchColorScheme("Dark")
-                }
+//                Kirigami.Action
+//                {
+//                    text: "Dark"
+//                    onTriggered : switchColorScheme("Dark")
+//                }
 
-                Kirigami.Action
-                {
-                    text: "Breeze"
-                    onTriggered : switchColorScheme("Breeze")
-                }
-            }
+//                Kirigami.Action
+//                {
+//                    text: "Breeze"
+//                    onTriggered : switchColorScheme("Breeze")
+//                }
+//            }
         },
 
         Kirigami.Action
@@ -212,8 +242,6 @@ Kirigami.GlobalDrawer
         {
             text: "About Beats"
         }
-
-
     ]
 
     function switchColorScheme(variant)

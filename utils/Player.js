@@ -29,7 +29,7 @@ function playTrack(track)
                     bae.notifySong(currentTrack.url)
             }
 
-            bae.trackLyrics(currentTrack.url)
+//            bae.trackLyrics(currentTrack.url)
 
             //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
             //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
@@ -202,7 +202,7 @@ function savePlaylist()
 
 function clearOutPlaylist()
 {
-    mainPlaylist.tabe.clearTable()
+    mainPlaylist.table.clearTable()
     stop()
 }
 

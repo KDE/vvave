@@ -52,7 +52,8 @@ int main(int argc, char *argv[])
     Babe bae;
 
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
-    QQuickStyle::setStyle("Material");
+
+    qDebug()<<QQuickStyle::availableStyles();
 
     QQmlApplicationEngine engine;
 
@@ -68,6 +69,8 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_ANDROID 
     KirigamiPlugin::getInstance().registerTypes();
+#else
+    QQuickStyle::setStyle("nomad");
 #endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

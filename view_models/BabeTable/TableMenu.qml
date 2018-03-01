@@ -162,7 +162,7 @@ BabeMenu
 
         onTriggered:
         {
-            isMobile ?
+            !isMobile ?
                         bae.showFolder(list.model.get(list.currentIndex).url) :
                         bae.openFile(list.model.get(list.currentIndex).url)
             close()

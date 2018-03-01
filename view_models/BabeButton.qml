@@ -18,7 +18,8 @@ ToolButton
     icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
     onClicked: if(anim) animIcon.running = true
 
-
+    flat: true
+    highlighted: false
     //    Kirigami.Icon
     //    {
     //        id: kirigamIcon

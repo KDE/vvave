@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import org.kde.kirigami 2.2 as Kirigami
 
 ItemDelegate
 {
@@ -19,8 +20,8 @@ ItemDelegate
     Rectangle
     {
         anchors.fill: parent
-        color:  isSection ? midLightColor : (index % 2 === 0 ? midColor : "transparent")
-        opacity: 0.3
+        color:  isSection ? viewBackgroundColor : (index % 2 === 0 ? Qt.darker(backgroundColor) : "transparent")
+        opacity: 0.1
     }
 
     ColumnLayout
@@ -42,6 +43,8 @@ ItemDelegate
             text: labelTxt.text
             elide: Text.ElideRight
             color: textColor
+            font.pointSize: fontSizes.medium
+
             font.bold: boldLabel
             font.weight : boldLabel ? Font.Bold : Font.Normal
         }

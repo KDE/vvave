@@ -2,8 +2,9 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
+import QtQuick.Controls.Material 2.1
 
-Item
+Page
 {
     id: babeListRoot
     property alias list : babeList
@@ -22,7 +23,7 @@ Item
     property bool headerBarExit : true
     property string headerBarExitIcon : "window-close"
 
-    property color headerBarColor : "transparent"
+    property color headerBarColor : backgroundColor
     property color textColor : foregroundColor
 
     property bool wasPulled : false
@@ -38,43 +39,19 @@ Item
         list.model.clear()
     }
 
-
     ColumnLayout
     {
         anchors.fill: parent
         spacing: 0
-        Item
+
+        ToolBar
         {
             id: headerRoot
             width: parent.width
             height:  visible ?  toolBarHeight : 0
             Layout.fillWidth: true
             visible: headerBarVisible
-            focus: true
-            Rectangle
-            {
-                anchors.fill: parent
-                color: headerBarColor
-
-                Kirigami.Separator
-                {
-                    visible: !isMobile
-
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: Kirigami.Theme.viewFocusColor
-                    }
-
-                    anchors
-                    {
-                        left: parent.left
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
-                }
-
-            }
+            focus: true            
 
             RowLayout
             {
@@ -89,7 +66,6 @@ Item
                     anim : true
                     iconName : headerBarExitIcon //"dialog-close"
                     onClicked : exit()
-                    iconColor: textColor
                 }
 
                 Row
@@ -136,15 +112,6 @@ Item
                 width: babeList.width
                 height: babeList.currentItem.height
                 color: babeHighlightColor
-                //        y: babeList.currentItem.y
-                //        Behavior on y
-                //        {
-                //            SpringAnimation
-                //            {
-                //                spring: 3
-                //                damping: 0.2
-                //            }
-                //        }
             }
 
             focus: true
@@ -175,13 +142,6 @@ Item
                 visible: babeList.count === 0
                 color : textColor
                 focus: true
-            }
-
-            Rectangle
-            {
-                anchors.fill: parent
-                color: "transparent"
-                z: -999
             }
 
             ScrollBar.vertical:BabeScrollBar { }
