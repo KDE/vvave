@@ -82,7 +82,7 @@ function nextTrack()
     if(!mainlistEmpty)
     {
         var next = 0
-        if(shuffle && onQueue === 0)
+        if(isShuffle && onQueue === 0)
             next = shuffle()
         else
             next = currentTrackIndex+1 >= mainPlaylist.list.count? 0 : currentTrackIndex+1

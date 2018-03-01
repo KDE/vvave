@@ -57,7 +57,9 @@ void Player::stop()
         this->player->setMedia(QMediaContent());
     }
 
-    //    this->updater->stop();
+    emit this->isPlaying(false);
+
+        this->updater->stop();
 }
 
 void Player::seek(const int &pos)
@@ -92,7 +94,7 @@ void Player::update()
     }
 
     emit this->isPlaying(this->player->state() == QMediaPlayer::PlayingState ? true : false);
-    if(this->player->state() == QMediaPlayer::StoppedState)
+    if(this->player->state() == QMediaPlayer::StoppedState && this->updater->isActive())
         emit this->finished();
 
 }

@@ -42,7 +42,7 @@ Kirigami.ApplicationWindow
     property alias mainPlaylist : mainPlaylist
 
     /*PLAYBACK*/
-    property bool shuffle : false
+    property bool isShuffle : false
     property var currentTrack : ({babe: "0", stars: "0"})
     property int currentTrackIndex : 0
     property int prevTrackIndex : 0
@@ -113,7 +113,7 @@ Kirigami.ApplicationWindow
     /*PROPS*/
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
     property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
-    property int miniArtSize : isMobile ? 40 : 34
+    property int miniArtSize : isMobile ? 36 : 30
 
     property int columnWidth: Kirigami.Units.gridUnit * 15
     property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.8
@@ -512,8 +512,8 @@ Kirigami.ApplicationWindow
                     id: shuffleBtn
                     iconColor: darkForegroundColor
 
-                    iconName: shuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                    onClicked: shuffle = !shuffle
+                    iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+                    onClicked: isShuffle = !isShuffle
                 }
 
             }
@@ -828,7 +828,9 @@ Kirigami.ApplicationWindow
 
         onFinished: if(!mainlistEmpty)
                     {
-                        bae.playedTrack(currentTrack.url)
+                        if(currentTrack.url)
+                            bae.playedTrack(currentTrack.url)
+
                         Player.nextTrack()
                     }
 
