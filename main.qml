@@ -236,17 +236,17 @@ Kirigami.ApplicationWindow
         {
             pageStack.currentIndex = 1
             currentView = viewsIndex.search
+            searchView.searchInput.forceActiveFocus()
         }
     }
 
-    footer: ToolBar
+    footer: Item
     {
         id: playbackControls
         height: visible ? headerHeight : 0
         width: root.width
         visible: true
         focus: true
-        position: ToolBar.Footer
 
         FastBlur
         {
@@ -737,6 +737,7 @@ Kirigami.ApplicationWindow
                 SearchTable
                 {
                     id: searchView
+
                     Connections
                     {
                         target: searchView.searchTable

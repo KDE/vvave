@@ -64,7 +64,7 @@ class CollectionDB : public QObject
         bool tagsAlbum(const BAE::DB &track, const QString &value, const QString &context = "");
 
         Q_INVOKABLE bool addPlaylist(const QString &title);
-
+        bool trackPlaylist(const QString &url, const QString &playlist);
         bool addFolder(const QString &url);
         bool removeFolder(const QString &url);
 

@@ -195,7 +195,7 @@ void YouTube::processFinished_totally(const int &state,const DB &info,const QPro
 
     CollectionDB con(nullptr);
     con.addTrack(trackMap);
-//    con.trackPlaylist({file}, track[KEY::PLAYLIST]);
+    con.trackPlaylist({file}, track[KEY::PLAYLIST]);
 
     if(this->ids.isEmpty()) emit this->done();
 
