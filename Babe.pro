@@ -7,6 +7,7 @@ QT       += network
 QT       += xml
 QT       += qml
 QT       += quickcontrols2
+QT       += webkit
 
 TARGET = babe
 TEMPLATE = app
@@ -61,7 +62,8 @@ SOURCES += main.cpp \
     settings/BabeSettings.cpp \
     db/conthread.cpp \
     services/web/babeit.cpp \
-    utils/babeconsole.cpp
+    utils/babeconsole.cpp \
+    services/local/youtubedl.cpp
 
 
 RESOURCES += qml.qrc
@@ -115,7 +117,8 @@ HEADERS += \
     db/conthread.h \
     services/web/babeit.h \
     utils/babeconsole.h \
-    utils/singleton.h
+    utils/singleton.h \
+    services/local/youtubedl.h
 
 
 #TAGLIB

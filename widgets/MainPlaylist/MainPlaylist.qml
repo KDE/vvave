@@ -185,7 +185,26 @@ Item
                             }
                         }
                     }
-                }               
+                }
+
+                Item
+                {
+                    Layout.fillWidth: true
+
+                    BabeButton
+                    {
+                        anchors.centerIn: parent
+                        iconColor: darkForegroundColor
+                        iconName: "videoclip-amarok"
+                        onClicked:
+                        {
+                            if(youtube.getQuery(currentTrack.title+" "+currentTrack.artist))
+                                swipeView.currentIndex = viewsIndex.youtube
+                        }
+
+
+                    }
+                }
 
                 Item
                 {

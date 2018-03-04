@@ -18,7 +18,7 @@
 #include "../utils/bae.h"
 class FileLoader;
 class CollectionDB;
-class YouTube;
+class youtubedl;
 class Socket;
 class Brain;
 
@@ -42,7 +42,7 @@ private:
     FileLoader *fileLoader;
     CollectionDB *connection;
     Brain *brainDeamon;
-    YouTube *ytFetch;
+    youtubedl *ytFetch;
     Socket *babeSocket;
 
 signals:

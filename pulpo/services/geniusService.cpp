@@ -52,7 +52,7 @@ bool genius::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
     qDebug()<< "[genius service]: "<< newUrl;
 
-    this->array = this->startConnection( newUrl,{{"Authorization", this->KEY}} );
+    this->array = this->startConnection(newUrl,{{"Authorization", this->KEY}} );
     if(this->array.isEmpty()) return false;
 
     return this->parseArray();

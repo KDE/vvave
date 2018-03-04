@@ -2,43 +2,41 @@
 #define YOUTUBE_H
 #include <QObject>
 #include <QWidget>
-#include <QProcess>
-#include <QByteArray>
-#include <QMovie>
-#include <QDebug>
-#include <QDirIterator>
+#include <QMap>
 
-#include <fstream>
-#include <iostream>
-
+#include "../../pulpo/pulpo.h"
 #include "../../utils/bae.h"
-#include "../local/taginfo.h"
 
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-class Notify;
-#endif
+
 class YouTube : public QObject
 {
-    Q_OBJECT
+        Q_OBJECT
 
-public:
-    explicit YouTube(QObject *parent = nullptr);
-    ~YouTube();
-    void fetch(const QString &json);
-    QStringList ids;
+        enum class METHOD : uint8_t
+            {
+            SEARCH
+            };
 
-private slots:
-    void processFinished();
-    void processFinished_totally(const int &state, const BAE::DB &info, const QProcess::ExitStatus &exitStatus);
 
-private:
-    const QString ydl="youtube-dl -f m4a --youtube-skip-dash-manifest -o \"$$$.%(ext)s\"";
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-    Notify *nof;
-#endif
+    public:
+        explicit YouTube(QObject *parent = nullptr);
+        ~YouTube();
+        Q_INVOKABLE bool getQuery(const QString &query);
+        bool packQueryResults(const QByteArray &array);
+        void getId(const QString &results);
+        void getUrl(const QString &id);
+        QByteArray startConnection(const QString &url, const QMap<QString, QString> &headers = {});
 
-signals:
-    void done();
+        Q_INVOKABLE static QUrl fromUserInput(const QString &userInput);
+    private:
+        const QString KEY = "AIzaSyDMLmTSEN7i6psE2tHdaG6hy3ljWKXIYBk";
+        const QMap<METHOD, QString> API =
+        {
+            {METHOD::SEARCH, "https://www.googleapis.com/youtube/v3/search?"}
+        };
+
+    signals:
+        void queryResultsReady(QVariantList res);
 };
 
 #endif // YOUTUBE_H

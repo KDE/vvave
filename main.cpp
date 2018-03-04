@@ -15,6 +15,7 @@
 
 #include "utils/bae.h"
 #include <QCommandLineParser>
+#include "services/web/youtube.h"
 
 int main(int argc, char *argv[])
 {
@@ -51,6 +52,9 @@ int main(int argc, char *argv[])
     Player player;
     Babe bae;
 
+    /* Services */
+    YouTube youtube;
+
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
 
     qDebug()<<QQuickStyle::availableStyles();
@@ -66,6 +70,7 @@ int main(int argc, char *argv[])
     auto context = engine.rootContext();
     context->setContextProperty("player", &player);
     context->setContextProperty("bae", &bae);
+    context->setContextProperty("youtube", &youtube);
 
 #ifdef Q_OS_ANDROID 
     KirigamiPlugin::getInstance().registerTypes();

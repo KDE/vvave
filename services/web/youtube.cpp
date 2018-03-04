@@ -17,196 +17,136 @@
 
 
 #include "youtube.h"
-#include "../../pulpo/pulpo.h"
-#include "../../db/collectionDB.h"
 #include "../../utils/babeconsole.h"
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-#include "kde/notify.h"
-#endif
+
+#include <QtNetwork>
+#include <QUrl>
+#include <QNetworkAccessManager>
+#include <QDomDocument>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QJsonDocument>
+#include <QVariantMap>
 
 using namespace BAE;
 
 YouTube::YouTube(QObject *parent) : QObject(parent)
 {
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-    this->nof = new Notify(this);
-#endif
+
 }
 
 YouTube::~YouTube(){}
 
-void YouTube::fetch(const QString &json)
+bool YouTube::getQuery(const QString &query)
+{
+    QUrl encodedQuery(query);
+    encodedQuery.toEncoded(QUrl::FullyEncoded);
+
+    auto url = this->API[METHOD::SEARCH];
+
+    url.append("q="+encodedQuery.toString());
+    url.append("&maxResults=5&part=snippet");
+    url.append("&key="+this->KEY);
+
+    qDebug()<< url;
+    auto array = this->startConnection(url);
+
+    if(array.isEmpty()) return false;
+
+    return this->packQueryResults(array);
+}
+
+bool YouTube::packQueryResults(const QByteArray &array)
 {
     QJsonParseError jsonParseError;
-    auto jsonResponse = QJsonDocument::fromJson(json.toUtf8(), &jsonParseError);
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(static_cast<QString>(array).toUtf8(), &jsonParseError);
 
-    if (jsonParseError.error != QJsonParseError::NoError) return;
-    if (!jsonResponse.isObject()) return;
+    if (jsonParseError.error != QJsonParseError::NoError)
+        return false;
+
+    if (!jsonResponse.isObject())
+        return false;
 
     QJsonObject mainJsonObject(jsonResponse.object());
     auto data = mainJsonObject.toVariantMap();
+    auto items = data.value("items").toList();
 
-    auto id = data.value("id").toString().trimmed();
-    auto title = data.value("title").toString().trimmed();
-    auto artist = data.value("artist").toString().trimmed();
-    auto album = data.value("album").toString().trimmed();
-    auto playlist = data.value("playlist").toString().trimmed();
-    auto page = data.value("page").toString().replace('"',"").trimmed();
+    if(items.isEmpty()) return false;
 
-    bDebug::Instance()->msg("Fetching from Youtube: "+id+" "+title+" "+artist);
+    QVariantList res;
 
-    DB infoMap;
-    infoMap.insert(KEY::TITLE, title);
-    infoMap.insert(KEY::ARTIST, artist);
-    infoMap.insert(KEY::ALBUM, album);
-    infoMap.insert(KEY::URL, page);
-    infoMap.insert(KEY::ID, id);
-    infoMap.insert(KEY::PLAYLIST, playlist);
-
-    if(!this->ids.contains(infoMap[KEY::ID]))
+    for(auto item : items)
     {
-        this->ids << infoMap[KEY::ID];
+        auto itemMap = item.toMap().value("id").toMap();
+        auto id = itemMap.value("videoId").toString();
+        auto url = "https://www.youtube.com/embed/"+id;
 
-        auto process = new QProcess(this);
-        process->setWorkingDirectory(YoutubeCachePath);
-        //connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(processFinished()));
-        //connect(process, SIGNAL(finished(int)), this, SLOT(processFinished_totally(int)));
-        connect(process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-                [=](int exitCode, QProcess::ExitStatus exitStatus)
+        if(!url.isEmpty())
         {
-            //                qDebug()<<"processFinished_totally"<<exitCode<<exitStatus;
-            processFinished_totally(exitCode, infoMap, exitStatus);
-            process->deleteLater();
-        });
-
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-        this->nof->notify("Song received!", infoMap[KEY::TITLE]+ " - "+ infoMap[KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
-#endif
-        auto command = ydl;
-
-        command = command.replace("$$$",infoMap[KEY::ID])+" "+infoMap[KEY::ID];
-        bDebug::Instance()->msg(command);
-        process->start(command);
-    }
-}
-
-void YouTube::processFinished_totally(const int &state,const DB &info,const QProcess::ExitStatus &exitStatus)
-{
-    auto track = info;
-
-    auto doneId = track[KEY::ID];
-    auto file = YoutubeCachePath+track[KEY::ID]+".m4a";
-
-    if(!BAE::fileExists(file)) return;
-
-    ids.removeAll(doneId);
-    track.insert(KEY::URL,file);
-    bDebug::Instance()->msg("Finished collection track with youtube-dl");
-
-    //    qDebug()<<track[KEY::ID]<<track[KEY::TITLE]<<track[KEY::ARTIST]<<track[KEY::PLAYLIST]<<track[KEY::URL];
-
-    /*here get metadata*/
-    TagInfo tag;
-    if(exitStatus == QProcess::NormalExit)
-    {
-        if(BAE::fileExists(file))
-        {
-            tag.feed(file);
-            tag.setArtist(track[KEY::ARTIST]);
-            tag.setTitle(track[KEY::TITLE]);
-            tag.setAlbum(track[KEY::ALBUM]);
-            tag.setComment(track[KEY::URL]);
-
-            bDebug::Instance()->msg("Trying to collect metadata of downloaded track");
-            Pulpo pulpo;
-            pulpo.registerServices({PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify});
-            pulpo.setOntology(PULPO::ONTOLOGY::TRACK);
-            pulpo.setInfo(PULPO::INFO::METADATA);
-
-            QEventLoop loop;
-
-            QTimer timer;
-            connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-
-            timer.setSingleShot(true);
-            timer.setInterval(1000);
-
-            connect(&pulpo, &Pulpo::infoReady, [&loop](const BAE::DB &track, const PULPO::RESPONSE &res)
-            {
-                bDebug::Instance()->msg("Setting collected track metadata");
-                if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA].isEmpty())
-                {
-                    bDebug::Instance()->msg(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString());
-                    bDebug::Instance()->msg(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toString());
-
-                    TagInfo tag;
-                    tag.feed(track[KEY::URL]);
-
-                    auto albumRes = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString();
-
-                    if(!albumRes.isEmpty() && albumRes != BAE::SLANG[W::UNKNOWN])
-                        tag.setAlbum(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString());
-                    else tag.setAlbum(track[KEY::TITLE]);
-
-                    if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toString().isEmpty())
-                        tag.setTrack(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toInt());
-                }
-
-                loop.quit();
-            });
-
-            pulpo.feed(track, PULPO::RECURSIVE::OFF);
-
-            timer.start();
-            loop.exec();
-            timer.stop();
-
-            bDebug::Instance()->msg("Process finished totally for "+QString(state)+" "+doneId+" "+QString(exitStatus));
-
-            bDebug::Instance()->msg("Need to delete the id "+ doneId);
-            bDebug::Instance()->msg("Ids left to process: " + this->ids.join(","));
+            qDebug()<<url;
+            QVariantMap map = { {BAE::KEYMAP[BAE::KEY::ID], id}, {BAE::KEYMAP[BAE::KEY::URL], url}  };
+            res << map;
         }
     }
 
-
-    tag.feed(file);
-    auto album = BAE::fixString(tag.getAlbum());
-    auto trackNum = tag.getTrack();
-    auto title = BAE::fixString(tag.getTitle()); /* to fix*/
-    auto artist = BAE::fixString(tag.getArtist());
-    auto genre = tag.getGenre();
-    auto sourceUrl = QFileInfo(file).dir().path();
-    auto duration = tag.getDuration();
-    auto year = tag.getYear();
-
-    BAE::DB trackMap =
-    {
-        {BAE::KEY::URL,file},
-        {BAE::KEY::TRACK,QString::number(trackNum)},
-        {BAE::KEY::TITLE,title},
-        {BAE::KEY::ARTIST,artist},
-        {BAE::KEY::ALBUM,album},
-        {BAE::KEY::DURATION,QString::number(duration)},
-        {BAE::KEY::GENRE,genre},
-        {BAE::KEY::SOURCES_URL,sourceUrl},
-        {BAE::KEY::BABE, file.startsWith(BAE::YoutubeCachePath)?"1":"0"},
-        {BAE::KEY::RELEASE_DATE,QString::number(year)}
-    };
-
-    CollectionDB con(nullptr);
-    con.addTrack(trackMap);
-    con.trackPlaylist({file}, track[KEY::PLAYLIST]);
-
-    if(this->ids.isEmpty()) emit this->done();
-
+    emit this->queryResultsReady(res);
+    return true;
 }
 
-
-void YouTube::processFinished()
+void YouTube::getId(const QString &results)
 {
-    /* QByteArray processOutput;
-    processOutput = process->readAllStandardOutput();
 
-    if (!QString(processOutput).isEmpty())
-        qDebug() << "Output: " << QString(processOutput);*/
 }
+
+void YouTube::getUrl(const QString &id)
+{
+
+}
+
+QByteArray YouTube::startConnection(const QString &url, const QMap<QString, QString> &headers)
+{
+    if(!url.isEmpty())
+    {
+        QUrl mURL(url);
+        QNetworkAccessManager manager;
+        QNetworkRequest request (mURL);
+
+        if(!headers.isEmpty())
+            for(auto key: headers.keys())
+                request.setRawHeader(key.toLocal8Bit(), headers[key].toLocal8Bit());
+
+        QNetworkReply *reply =  manager.get(request);
+        QEventLoop loop;
+        connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+
+        connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), &loop,
+                SLOT(quit()));
+
+        loop.exec();
+
+        if(reply->error())
+        {
+            qDebug() << reply->error();
+            return QByteArray();
+        }
+
+        if(reply->bytesAvailable())
+        {
+            auto data = reply->readAll();
+            reply->deleteLater();
+
+            return data;
+        }
+    }
+
+    return QByteArray();
+}
+
+QUrl YouTube::fromUserInput(const QString &userInput)
+{
+    if (userInput.isEmpty())
+        return QUrl::fromUserInput("about:blank");
+    const QUrl result = QUrl::fromUserInput(userInput);
+    return result.isValid() ? result : QUrl::fromUserInput("about:blank");
+}
+

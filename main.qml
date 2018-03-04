@@ -18,6 +18,7 @@ import "widgets/SearchView"
 
 import "view_models"
 import "view_models/BabeDialog"
+import "services/web"
 
 import "db/Queries.js" as Q
 import "utils/Player.js" as Player
@@ -106,6 +107,7 @@ Kirigami.ApplicationWindow
                                             "playlists" : 3,
                                             "babeit": 4,
                                             "search" : 5,
+                                            "youtube" : 6
                                         })
 
     property bool mainlistEmpty : !mainPlaylist.table.count > 0
@@ -756,6 +758,11 @@ Kirigami.ApplicationWindow
                     }
                 }
 
+                YouTube
+                {
+                    id: youtubeView
+                }
+
             }
         }
     }
@@ -820,6 +827,17 @@ Kirigami.ApplicationWindow
     }
 
     /*CONNECTIONS*/
+
+    Connections
+    {
+        target: youtube
+        onQueryResultsReady:
+        {
+            if(res.length > 0)
+                youtubeView.web.url= res[0].url
+        }
+    }
+
     Connections
     {
         target: player

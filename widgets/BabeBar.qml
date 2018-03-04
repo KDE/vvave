@@ -23,6 +23,7 @@ ToolBar
     //    signal playlistViewClicked()
     signal searchViewClicked()
     signal settingsViewClicked()
+    signal youtubeViewClicked()
 
     width: parent.width
     id: babeBar

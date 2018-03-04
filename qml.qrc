@@ -72,5 +72,6 @@
         <file>widgets/SettingsView/BabeConsole.qml</file>
         <file>widgets/SearchView/SearchTable.qml</file>
         <file>widgets/SearchView/SearchSuggestions.qml</file>
+        <file>services/web/YouTube.qml</file>
     </qresource>
 </RCC>

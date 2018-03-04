@@ -21,7 +21,7 @@
 #include "fileloader.h"
 #include "../utils/brain.h"
 #include "../services/local/socket.h"
-#include "../services/web/youtube.h"
+#include "../services/local/youtubedl.h"
 #include "../utils/babeconsole.h"
 
 BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
@@ -30,7 +30,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     this->connection = new CollectionDB(this);
     this->fileLoader = new FileLoader;
     this->brainDeamon = new Brain;
-    this->ytFetch = new YouTube(this);
+    this->ytFetch = new youtubedl(this);
     this->babeSocket = new Socket(static_cast<quint16>(BAE::BabePort.toInt()),this);
 
     qDebug() << "Getting collectionDB info from: " << BAE::CollectionDBPath;
@@ -61,12 +61,12 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     if (!youtubeCache_dir.exists())
         youtubeCache_dir.mkpath(".");
 
-    connect(this->ytFetch, &YouTube::done, [this]()
+    connect(this->ytFetch, &youtubedl::done, [this]()
     {
         this->startBrainz(true, BAE::SEG::THREE);
     });
 
-    connect(this->babeSocket, &Socket::message, this->ytFetch, &YouTube::fetch);
+    connect(this->babeSocket, &Socket::message, this->ytFetch, &youtubedl::fetch);
     connect(this->babeSocket, &Socket::connected, [this](const int &index)
     {
         auto playlists = this->connection->getPlaylists();

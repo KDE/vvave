@@ -1750,5 +1750,6 @@ var Babe = {
     "disks": Icon.disk,
     "playlist-generator": Icon.refresh,
     "amarok_playlist_refresh" : Icon.refresh,
-    "checkbox" : Icon.check
+    "checkbox" : Icon.check,
+    "videoclip-amarok" : Icon.video
 }

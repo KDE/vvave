@@ -234,8 +234,10 @@ QByteArray Pulpo::startConnection(const QString &url, const QMap<QString,QString
 
         if(reply->bytesAvailable())
         {
+            auto data = reply->readAll();
             reply->deleteLater();
-            return reply->readAll();
+
+            return data;
         }
     }
 
