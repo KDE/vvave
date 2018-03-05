@@ -1,5 +1,4 @@
 import QtQuick 2.9
-import QtWebKit 3.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import "../../view_models"
@@ -10,7 +9,6 @@ import org.kde.kirigami 2.2 as Kirigami
 Page
 {
     id: youtubeViewRoot
-    property alias web : webView
     property var searchRes : []
     clip: true
     Connections
@@ -24,18 +22,12 @@ Page
         }
     }
 
-    BabePopup
+
+    Loader
     {
-        id: videoPlayback
-        WebView
-        {
-            id: webView
-            anchors.fill: parent
-            onLoadingChanged: {
-                if (loadRequest.errorString)
-                    console.error(loadRequest.errorString);
-            }
-        }
+        id: youtubeViewer
+        source: isMobile ? "qrc:/services/web/YoutubeViewer_A.qml" : "qrc:/services/web/YoutubeViewer.qml"
+
     }
 
 
@@ -70,6 +62,7 @@ Page
                 Layout.column: 1
                 Layout.row: 2
                 Layout.fillWidth: true
+
             }
 
             TextField
@@ -77,6 +70,7 @@ Page
                 Layout.column: 1
                 Layout.row: 3
                 Layout.fillWidth: true
+                text: bae.loadSetting("YOUTUBEKEY", "BABE",  youtube.getKey())
             }
 
             Label
@@ -98,6 +92,12 @@ Page
                 Layout.fillWidth: true
                 from: 1
                 to: 50
+                value: bae.loadSetting("YOUTUBELIMIT", "BABE", 25)
+                editable: true
+                onValueChanged:
+                {
+                    bae.saveSetting("YOUTUBELIMIT", value, "BABE")
+                }
             }
 
             Item
@@ -117,7 +117,7 @@ Page
             if(searchTxt !== youtubeTable.headerBarTitle)
             {
                 youtubeTable.headerBarTitle = searchTxt
-                youtube.getQuery(searchTxt)
+                youtube.getQuery(searchTxt, bae.loadSetting("YOUTUBELIMIT", "BABE", 25))
             }
 
     }
@@ -176,8 +176,8 @@ Page
 
             onRowClicked:
             {
-                videoPlayback.open()
-                webView.url= youtubeTable.model.get(index).url
+                youtubeViewer.item.open()
+                youtubeViewer.item.webView.url= youtubeTable.model.get(index).url
             }
 
             onQuickPlayTrack:

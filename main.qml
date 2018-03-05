@@ -764,12 +764,9 @@ Kirigami.ApplicationWindow
                     }
                 }
 
-                Loader
+                YouTube
                 {
                     id: youtubeView
-                    source: isMobile ? "qrc:/services/web/YouTube-A.qml" : "qrc:/services/web/YouTube.qml"
-
-
                 }
 
 
@@ -834,7 +831,7 @@ Kirigami.ApplicationWindow
     {
         //        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
         //        console.log(Imagine.url, Imagine.path)
-        bae.androidStatusBarColor(backgroundColor)
+        bae.androidStatusBarColor(viewBackgroundColor)
     }
 
     /*CONNECTIONS*/

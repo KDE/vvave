@@ -21,10 +21,12 @@ class YouTube : public QObject
     public:
         explicit YouTube(QObject *parent = nullptr);
         ~YouTube();
-        Q_INVOKABLE bool getQuery(const QString &query);
+        Q_INVOKABLE bool getQuery(const QString &query, const int &limit = 5);
         bool packQueryResults(const QByteArray &array);
         void getId(const QString &results);
         void getUrl(const QString &id);
+
+        Q_INVOKABLE QString getKey() const;
         QByteArray startConnection(const QString &url, const QMap<QString, QString> &headers = {});
 
         Q_INVOKABLE static QUrl fromUserInput(const QString &userInput);

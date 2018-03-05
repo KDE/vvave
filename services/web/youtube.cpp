@@ -37,7 +37,7 @@ YouTube::YouTube(QObject *parent) : QObject(parent)
 
 YouTube::~YouTube(){}
 
-bool YouTube::getQuery(const QString &query)
+bool YouTube::getQuery(const QString &query, const int &limit)
 {
     QUrl encodedQuery(query);
     encodedQuery.toEncoded(QUrl::FullyEncoded);
@@ -45,8 +45,8 @@ bool YouTube::getQuery(const QString &query)
     auto url = this->API[METHOD::SEARCH];
 
     url.append("q="+encodedQuery.toString());
-    url.append("&maxResults=25&part=snippet");
-    url.append("&key="+this->KEY);
+    url.append(QString("&maxResults=%1&part=snippet").arg(QString::number(limit)));
+    url.append("&key="+ BAE::loadSettings("YOUTUBEKEY", "BABE", this->KEY).toString());
 
     qDebug()<< url;
     auto array = this->startConnection(url);
@@ -135,6 +135,12 @@ void YouTube::getUrl(const QString &id)
 {
 
 }
+
+QString YouTube::getKey() const
+{
+    return this->KEY;
+}
+
 
 QByteArray YouTube::startConnection(const QString &url, const QMap<QString, QString> &headers)
 {
