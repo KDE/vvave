@@ -10,6 +10,7 @@
 #include <QStyleHints>
 #ifdef Q_OS_ANDROID
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
+#include <QtWebView/QtWebView>
 //#include "java/notificationclient.h"
 #endif
 
@@ -74,6 +75,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_ANDROID 
     KirigamiPlugin::getInstance().registerTypes();
+    QtWebView::initialize();
 #else
     QQuickStyle::setStyle("nomad");
 #endif

@@ -7,7 +7,7 @@ QT       += network
 QT       += xml
 QT       += qml
 QT       += quickcontrols2
-QT       += webkit
+
 
 TARGET = babe
 TEMPLATE = app
@@ -16,6 +16,7 @@ CONFIG += c++11
 
 linux:unix:!android {
 
+    QT       += webkit
     message(Building for Linux KDE)
     include(kde/kde.pri)
 

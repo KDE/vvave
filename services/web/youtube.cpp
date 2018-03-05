@@ -45,7 +45,7 @@ bool YouTube::getQuery(const QString &query)
     auto url = this->API[METHOD::SEARCH];
 
     url.append("q="+encodedQuery.toString());
-    url.append("&maxResults=5&part=snippet");
+    url.append("&maxResults=25&part=snippet");
     url.append("&key="+this->KEY);
 
     qDebug()<< url;
@@ -81,10 +81,43 @@ bool YouTube::packQueryResults(const QByteArray &array)
         auto id = itemMap.value("videoId").toString();
         auto url = "https://www.youtube.com/embed/"+id;
 
-        if(!url.isEmpty())
+        auto snippet = item.toMap().value("snippet").toMap();
+
+        auto comment = snippet.value("description").toString();
+        auto title = snippet.value("title").toString();
+        auto artwork = snippet.value("thumbnails").toMap().value("high").toMap().value("url").toString();
+        auto artist = BAE::SLANG[W::UNKNOWN];
+        auto album = BAE::SLANG[W::UNKNOWN];
+
+        if(title.contains("-"))
         {
-            qDebug()<<url;
-            QVariantMap map = { {BAE::KEYMAP[BAE::KEY::ID], id}, {BAE::KEYMAP[BAE::KEY::URL], url}  };
+            auto data = title.split("-");
+            if(data.size() > 1)
+            {
+                artist = data[0].trimmed();
+                title = data[1].trimmed();
+            }
+
+        }
+
+        if(!id.isEmpty())
+        {
+            qDebug()<<url<<artwork;
+
+            QVariantMap map = {
+                {BAE::KEYMAP[BAE::KEY::ID], id},
+                {BAE::KEYMAP[BAE::KEY::URL], url},
+                {BAE::KEYMAP[BAE::KEY::TITLE], title},
+                {BAE::KEYMAP[BAE::KEY::ALBUM], album},
+                {BAE::KEYMAP[BAE::KEY::ARTIST], artist},
+                {BAE::KEYMAP[BAE::KEY::ARTWORK], artwork},
+                {BAE::KEYMAP[BAE::KEY::COMMENT], comment},
+                {BAE::KEYMAP[BAE::KEY::BABE], "0"},
+                {BAE::KEYMAP[BAE::KEY::STARS], "0"},
+                {BAE::KEYMAP[BAE::KEY::ART], ""},
+                {BAE::KEYMAP[BAE::KEY::TRACK], "0"}
+            };
+
             res << map;
         }
     }

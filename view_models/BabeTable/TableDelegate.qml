@@ -48,6 +48,7 @@ ItemDelegate
     property string trackMood : art
     property alias trackRating : trackRating
 
+    property bool remoteArtwork: false
     //    NumberAnimation on x
     //    {
     //        running: ListView.isCurrentItem
@@ -110,14 +111,15 @@ ItemDelegate
                     id: artworkCover
                     anchors.fill: parent
                     source: typeof artwork === 'undefined' ?
-                                 "qrc:/assets/cover.png" :
-                                 (artwork && artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                                "qrc:/assets/cover.png" :
+                                remoteArtwork ? artwork :
+                                                ((artwork && artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png")
 
 
                     fillMode:  Image.PreserveAspectFit
                     cache: false
                     antialiasing: false
-                    smooth: true                    
+                    smooth: true
                 }
 
                 onDoubleClicked: artworkCoverDoubleClicked()
@@ -347,5 +349,5 @@ ItemDelegate
         //                onClicked: rightClicked()
         //            }
         //        }
-    }   
+    }
 }

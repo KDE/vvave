@@ -23,7 +23,11 @@ BabeList
 
     property alias headerMenu: headerMenu
     property alias contextMenu : contextMenu
+    property bool isArtworkRemote : false
 
+    property alias playAllBtn : playAllBtn
+    property alias appendBtn : appendBtn
+    property alias menuBtn : menuBtn
 
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -98,7 +102,7 @@ BabeList
         menuItem: menuItemVisible
         color: babeTableRoot.textColor
         bgColor: headerBarColor
-
+        remoteArtwork: isArtworkRemote
         Connections
         {
             target: delegate

@@ -33,6 +33,7 @@ public:
     ~BabeSettings();
     void checkCollectionBrainz(const bool &state);
     void refreshCollection();
+    void fetchYoutubeTrack(const QString &message);
 
 public slots:
     void startBrainz(const bool &on, const uint &speed = BAE::SEG::THREE);

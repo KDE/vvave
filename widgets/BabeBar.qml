@@ -195,6 +195,30 @@ ToolBar
             }
         }
 
+        Item
+        {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
+
+            BabeButton
+            {
+                anchors.centerIn: parent
+
+                iconName: "im-youtube"
+                iconColor: accent && currentIndex === viewsIndex.youtube ? accentColor : textColor
+
+                onClicked: youtubeViewClicked()
+
+                hoverEnabled: !isMobile
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("YouTube")
+            }
+        }
+
 
         Item
         {

@@ -378,6 +378,11 @@ void Babe::refreshCollection()
     this->settings->refreshCollection();
 }
 
+void Babe::getYoutubeTrack(const QString &message)
+{
+    this->settings->fetchYoutubeTrack(message);
+}
+
 QVariant Babe::loadSetting(const QString &key, const QString &group, const QVariant &defaultValue)
 {
     return BAE::loadSettings(key, group, defaultValue);

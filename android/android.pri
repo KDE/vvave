@@ -1,6 +1,6 @@
 android {
 
-QT += androidextras
+QT += androidextras webview
 
 HEADERS += \
     $$PWD/android.h \

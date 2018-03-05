@@ -240,6 +240,12 @@ Kirigami.ApplicationWindow
             currentView = viewsIndex.search
             searchView.searchInput.forceActiveFocus()
         }
+
+        onYoutubeViewClicked:
+        {
+            pageStack.currentIndex = 1
+            currentView = viewsIndex.youtube
+        }
     }
 
     footer: Item
@@ -758,10 +764,15 @@ Kirigami.ApplicationWindow
                     }
                 }
 
-                YouTube
+                Loader
                 {
                     id: youtubeView
+                    source: isMobile ? "qrc:/services/web/YouTube-A.qml" : "qrc:/services/web/YouTube.qml"
+
+
                 }
+
+
 
             }
         }
@@ -828,15 +839,7 @@ Kirigami.ApplicationWindow
 
     /*CONNECTIONS*/
 
-    Connections
-    {
-        target: youtube
-        onQueryResultsReady:
-        {
-            if(res.length > 0)
-                youtubeView.web.url= res[0].url
-        }
-    }
+
 
     Connections
     {

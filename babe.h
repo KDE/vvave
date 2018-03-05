@@ -59,6 +59,7 @@ public:
     Q_INVOKABLE void brainz(const bool &on);
     Q_INVOKABLE bool brainzState();
     Q_INVOKABLE void refreshCollection();
+    Q_INVOKABLE void getYoutubeTrack(const QString &message);
 
     /* STATIC METHODS */
 

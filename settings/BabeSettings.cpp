@@ -66,7 +66,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
         this->startBrainz(true, BAE::SEG::THREE);
     });
 
-    connect(this->babeSocket, &Socket::message, this->ytFetch, &youtubedl::fetch);
+    connect(this->babeSocket, &Socket::message, this, &BabeSettings::fetchYoutubeTrack);
     connect(this->babeSocket, &Socket::connected, [this](const int &index)
     {
         auto playlists = this->connection->getPlaylists();
@@ -114,6 +114,11 @@ void BabeSettings::refreshCollection()
         this->populateDB(BAE::defaultSources);
     else
         this->populateDB(this->connection->getSourcesFolders());
+}
+
+void BabeSettings::fetchYoutubeTrack(const QString &message)
+{
+    this->ytFetch->fetch(message);
 }
 
 void BabeSettings::checkCollectionBrainz(const bool &state)
