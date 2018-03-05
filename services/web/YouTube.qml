@@ -38,6 +38,79 @@ Page
         }
     }
 
+
+    BabePopup
+    {
+        id: configPopup
+        parent: parent
+        margins: contentMargins
+
+        GridLayout
+        {
+            anchors.centerIn: parent
+            width: parent.width*0.8
+            height: parent.height*0.9
+            columns: 1
+            rows: 6
+
+            Item
+            {
+                Layout.column: 1
+                Layout.row: 1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            Label
+            {
+                text: qsTr("Custom API Key")
+                verticalAlignment:  Qt.AlignVCenter
+                elide: Text.ElideRight
+                font.pointSize: fontSizes.medium
+                Layout.column: 1
+                Layout.row: 2
+                Layout.fillWidth: true
+            }
+
+            TextField
+            {
+                Layout.column: 1
+                Layout.row: 3
+                Layout.fillWidth: true
+            }
+
+            Label
+            {
+                text: qsTr("Search results")
+                verticalAlignment:  Qt.AlignVCenter
+                elide: Text.ElideRight
+                font.pointSize: fontSizes.medium
+                Layout.column: 1
+                Layout.row: 4
+                Layout.fillWidth: true
+            }
+
+            SpinBox
+            {
+                Layout.alignment: Qt.AlignRight
+                Layout.column: 1
+                Layout.row: 5
+                Layout.fillWidth: true
+                from: 1
+                to: 50
+            }
+
+            Item
+            {
+                Layout.column: 1
+                Layout.row: 6
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+        }
+    }
+
     function runSearch(searchTxt)
     {
         if(searchTxt)
@@ -98,6 +171,7 @@ Page
             {
                 id: menuBtn
                 iconName: "application-menu"
+                onClicked: configPopup.open()
             }
 
             onRowClicked:
