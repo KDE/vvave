@@ -73,7 +73,6 @@
         <file>widgets/SearchView/SearchTable.qml</file>
         <file>widgets/SearchView/SearchSuggestions.qml</file>
         <file>services/web/YouTube.qml</file>
-        <file>services/web/YouTube-A.qml</file>
         <file>services/web/YoutubeViewer.qml</file>
         <file>services/web/YoutubeViewer_A.qml</file>
     </qresource>

@@ -232,6 +232,7 @@ Page
                     text: ""
                     wrapMode: TextEdit.Wrap
                     onAccepted: runSearch(searchInput.text)
+
                 }
 
                 BabeButton
@@ -240,6 +241,7 @@ Page
                     iconName: "edit-clear"
                     onClicked: searchInput.clear()
                 }
+
             }
         }
     }

@@ -17,6 +17,8 @@ BabeMenu
     property string starReg : foregroundColor
     property string starIcon: "draw-star"
 
+    signal trackRemoved(string url)
+
     property alias menuItem : customItems.children
 
     function queueIt(index)
@@ -195,7 +197,8 @@ BabeMenu
         text: "Remove"
         onTriggered:
         {
-            listModel.remove(list.currentIndex)
+            trackRemoved(list.model.get(list.currentIndex).url)
+            listModel.remove(list.currentIndex)            
             close()
         }
     }

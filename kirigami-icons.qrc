@@ -12,5 +12,7 @@
         <file alias="org/kde/kirigami/icons/view-list-icons.svg">3rdparty/breeze-icons/icons/actions/32/view-list-icons.svg</file>
         <file alias="org/kde/kirigami/icons/applications-graphics.svg">3rdparty/breeze-icons/icons/categories/32/applications-graphics.svg</file>
         <file alias="org/kde/kirigami/icons/media-record-symbolic.svg">3rdparty/breeze-icons/icons/actions/symbolic/media-record-symbolic.svg</file>
+        <file>3rdparty/breeze-icons/icons/actions/22/folder-new.svg</file>
+        <file>3rdparty/breeze-icons/icons/places/22/folder.svg</file>
     </qresource>
 </RCC>

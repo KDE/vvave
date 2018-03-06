@@ -148,18 +148,19 @@ Kirigami.PageRow
                 }
             ]
 
-            contextMenu.menuItem: [
 
-                BabeMenuItem
-                {
-                    text: qsTr("Remove from playlist")
-                    onTriggered:
-                    {
-                        bae.removePlaylistTrack(filterList.model.get(filterList.currentIndex).url, playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
-                        populate(playlistQuery)
-                    }
-                }
-            ]
+//            contextMenu.menuItem: [
+
+//                BabeMenuItem
+//                {
+//                    text: qsTr("Remove from playlist")
+//                    onTriggered:
+//                    {
+//                        bae.removePlaylistTrack(filterList.model.get(filterList.currentIndex).url, playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
+//                        populate(playlistQuery)
+//                    }
+//                }
+//            ]
 
 
             section.criteria: ViewSection.FullString
@@ -183,6 +184,17 @@ Kirigami.PageRow
                 onPlayAll: playAll(bae.get(playlistQuery))
                 onAppendAll: appendAll(bae.get(playlistQuery))
                 onPulled: populate(playlistQuery)
+            }
+
+            Connections
+            {
+                target: filterList.contextMenu
+
+                onTrackRemoved:
+                {
+                    bae.removePlaylistTrack(url, playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
+                    populate(playlistQuery)
+                }
             }
         }
 

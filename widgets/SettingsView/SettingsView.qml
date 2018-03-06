@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
 import "../../utils/Help.js" as H
+import "../../view_models"
 
 Kirigami.GlobalDrawer
 {
@@ -50,13 +51,32 @@ Kirigami.GlobalDrawer
 
         Kirigami.Action
         {
-            text: qsTr("Collection"
-                       )           
+            text: qsTr("YouTube")
+            iconName: "im-youtube"
+            onTriggered:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.youtube
+            }
+        },
+
+        Kirigami.Action
+        {
+            text: qsTr("Folders")
+            iconName: "folder"
+        },
+
+
+        Kirigami.Action
+        {
+            text: qsTr("Collection")
+            iconName: "database-index"
 
             Kirigami.Action
             {
-                text: "Sources..."
+                text: qsTr("Sources...")
                 onTriggered: sourcesDialog.open()
+                iconName: "folder-new"
             }
 
             Kirigami.Action
@@ -68,6 +88,7 @@ Kirigami.GlobalDrawer
             Kirigami.Action
             {
                 text: qsTr("Refresh...")
+                iconName: "view-refresh"
 
                 Kirigami.Action
                 {
@@ -98,128 +119,136 @@ Kirigami.GlobalDrawer
             {
                 text: qsTr("Clean")
                 onTriggered: bae.removeMissingTracks();
+                iconName: "edit-clear"
             }
         },
 
         Kirigami.Action
         {
-            text: "Brainz"
-
+            text: qsTr("Settings...")
+            iconName: "view-media-config"
             Kirigami.Action
             {
-                id: brainzToggle
-                text: checked ? "Turn OFF" : "Turn ON"
-                checked: activeBrainz
-                checkable: true
-                onToggled:
-                {
-                    bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
-                    bae.brainz(checked === true ? true : false)
-                }
-            }
-        },
-
-        Kirigami.Action
-        {
-            text: "Appearance"
-
-            Kirigami.Action
-            {
-                text: "Icon size"
-                Kirigami.Action
-                {
-                    text: iconSizes.small
-                    onTriggered :
-                    {
-                        bae.saveSetting("ICON_SIZE", text, "BABE")
-                        iconSizeChanged(text)
-                    }
-                }
+                text: "Brainz"
 
                 Kirigami.Action
                 {
-                    text: iconSizes.medium
-                    onTriggered :
-                    {
-                        bae.saveSetting("ICON_SIZE", text, "BABE")
-                        iconSizeChanged(text)
-                    }
-                }
-
-                Kirigami.Action
-                {
-                    text: iconSizes.big
-                    onTriggered :
-                    {
-                        bae.saveSetting("ICON_SIZE", text, "BABE")
-                        iconSizeChanged(text)
-                    }
-                }
-            }
-
-//            Kirigami.Action
-//            {
-//                text: "Theme"
-//                visible: isMobile
-//                Kirigami.Action
-//                {
-//                    text: "Light"
-//                    onTriggered : switchColorScheme("Light")
-//                }
-
-//                Kirigami.Action
-//                {
-//                    text: "Dark"
-//                    onTriggered : switchColorScheme("Dark")
-//                }
-
-//                Kirigami.Action
-//                {
-//                    text: "Breeze"
-//                    onTriggered : switchColorScheme("Breeze")
-//                }
-//            }
-        },
-
-        Kirigami.Action
-        {
-            text: "Player"
-
-            Kirigami.Action
-            {
-                text: "Info label"
-
-                Kirigami.Action
-                {
-                    text: checked ? "ON" : "OFF"
-                    checked: infoLabels
+                    id: brainzToggle
+                    text: checked ? "Turn OFF" : "Turn ON"
+                    checked: activeBrainz
                     checkable: true
                     onToggled:
                     {
-                        infoLabels = checked
-                        bae.saveSetting("PLAYBACKINFO", infoLabels ? true : false, "BABE")
-
+                        bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
+                        bae.brainz(checked === true ? true : false)
                     }
                 }
             }
 
             Kirigami.Action
             {
-                text: "Autoplay"
-                checked: autoplay
-                checkable: true
-                onToggled:
+                text: "Appearance"
+
+                Kirigami.Action
                 {
-                    autoplay = checked
-                    bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
+                    text: "Icon size"
+                    Kirigami.Action
+                    {
+                        text: iconSizes.small
+                        onTriggered :
+                        {
+                            bae.saveSetting("ICON_SIZE", text, "BABE")
+                            iconSizeChanged(text)
+                        }
+                    }
+
+                    Kirigami.Action
+                    {
+                        text: iconSizes.medium
+                        onTriggered :
+                        {
+                            bae.saveSetting("ICON_SIZE", text, "BABE")
+                            iconSizeChanged(text)
+                        }
+                    }
+
+                    Kirigami.Action
+                    {
+                        text: iconSizes.big
+                        onTriggered :
+                        {
+                            bae.saveSetting("ICON_SIZE", text, "BABE")
+                            iconSizeChanged(text)
+                        }
+                    }
                 }
 
+                //            Kirigami.Action
+                //            {
+                //                text: "Theme"
+                //                visible: isMobile
+                //                Kirigami.Action
+                //                {
+                //                    text: "Light"
+                //                    onTriggered : switchColorScheme("Light")
+                //                }
+
+                //                Kirigami.Action
+                //                {
+                //                    text: "Dark"
+                //                    onTriggered : switchColorScheme("Dark")
+                //                }
+
+                //                Kirigami.Action
+                //                {
+                //                    text: "Breeze"
+                //                    onTriggered : switchColorScheme("Breeze")
+                //                }
+                //            }
+            }
+
+            Kirigami.Action
+            {
+                text: "Player"
+
+                Kirigami.Action
+                {
+                    text: "Info label"
+
+                    Kirigami.Action
+                    {
+                        text: checked ? "ON" : "OFF"
+                        checked: infoLabels
+                        checkable: true
+                        onToggled:
+                        {
+                            infoLabels = checked
+                            bae.saveSetting("PLAYBACKINFO", infoLabels ? true : false, "BABE")
+
+                        }
+                    }
+                }
+
+                Kirigami.Action
+                {
+                    text: "Autoplay"
+                    checked: autoplay
+                    checkable: true
+                    onToggled:
+                    {
+                        autoplay = checked
+                        bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
+                    }
+
+                }
             }
         },
+
 
         Kirigami.Action
         {
             text: "Developer"
+            iconName: "code-context"
 
             Kirigami.Action
             {
@@ -235,13 +264,31 @@ Kirigami.GlobalDrawer
 
         Kirigami.Action
         {
-            text: "About Babe"
-        },
+            text: "About..."
+            iconName: "help-about"
 
-        Kirigami.Action
-        {
-            text: "About Beats"
+            Kirigami.Action
+            {
+                text: "Beats"
+            }
+
+            Kirigami.Action
+            {
+                text: "Babe"
+            }
+
+            Kirigami.Action
+            {
+                text: "Pulpo"
+            }
+
+            Kirigami.Action
+            {
+                text: "Kirigami"
+            }
         }
+
+
     ]
 
     function switchColorScheme(variant)

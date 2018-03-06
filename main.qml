@@ -117,8 +117,8 @@ Kirigami.ApplicationWindow
     property int toolBarHeight : isMobile ? 48 : toolBarIconSize *2
     property int miniArtSize : isMobile ? 36 : 30
 
-    property int columnWidth: Kirigami.Units.gridUnit * 15
-    property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.8
+    property int columnWidth: Kirigami.Units.gridUnit * 19
+    property int coverSize: isMobile ? Math.sqrt(root.width*root.height)*0.4 : columnWidth * 0.6
     property int currentView : viewsIndex.tracks
 
     /*USEFUL PROPS*/
@@ -239,12 +239,6 @@ Kirigami.ApplicationWindow
             pageStack.currentIndex = 1
             currentView = viewsIndex.search
             searchView.searchInput.forceActiveFocus()
-        }
-
-        onYoutubeViewClicked:
-        {
-            pageStack.currentIndex = 1
-            currentView = viewsIndex.youtube
         }
     }
 

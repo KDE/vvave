@@ -8,7 +8,7 @@ BabePopup
 {
     id: videoPlayback
     property alias webView: webView
-
+    maxHeight: 200
 
     WebView
     {

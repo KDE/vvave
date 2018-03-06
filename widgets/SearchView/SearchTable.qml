@@ -163,6 +163,7 @@ Page
                     onAccepted: runSearch(searchInput.text)
                     //                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
                     onTextEdited: if(autoSuggestions) suggestionsPopup.updateSuggestions()
+
                 }
 
                 BabeButton

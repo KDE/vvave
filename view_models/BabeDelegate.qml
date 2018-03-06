@@ -17,6 +17,7 @@ ItemDelegate
     property alias fontFamily: labelTxt.font.family
     property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
 
+
     Rectangle
     {
         anchors.fill: parent
@@ -26,7 +27,7 @@ ItemDelegate
 
     ColumnLayout
     {
-        anchors.fill: parent
+        anchors.fill: parent      
 
         Label
         {

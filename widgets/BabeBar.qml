@@ -23,7 +23,6 @@ ToolBar
     //    signal playlistViewClicked()
     signal searchViewClicked()
     signal settingsViewClicked()
-    signal youtubeViewClicked()
 
     width: parent.width
     id: babeBar
@@ -55,7 +54,7 @@ ToolBar
 
                 anchors.centerIn: parent
                 anchors.left: parent.left
-                iconName: "view-media-config"
+                iconName: "application-menu"
                 iconColor: settingsDrawer.visible ? babeColor : textColor/*(pageStack.wideMode || pageStack.currentIndex === 0 ) && !isMobile ? accentColor : textColor*/
                 onClicked: settingsViewClicked()
 
@@ -192,30 +191,6 @@ ToolBar
                 ToolTip.timeout: 5000
                 ToolTip.visible: hovered && !isMobile
                 ToolTip.text: qsTr("Babe")
-            }
-        }
-
-        Item
-        {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.maximumWidth: toolBarIconSize*2
-            Layout.maximumHeight: toolBarIconSize
-
-            BabeButton
-            {
-                anchors.centerIn: parent
-
-                iconName: "im-youtube"
-                iconColor: accent && currentIndex === viewsIndex.youtube ? accentColor : textColor
-
-                onClicked: youtubeViewClicked()
-
-                hoverEnabled: !isMobile
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("YouTube")
             }
         }
 
