@@ -200,6 +200,7 @@ Kirigami.ApplicationWindow
     {
         id: toolbar
         //        height: toolBarHeight
+
         visible: true
         currentIndex: currentView
         onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()

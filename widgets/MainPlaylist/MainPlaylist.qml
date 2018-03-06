@@ -199,7 +199,10 @@ Item
                         onClicked:
                         {
                             if(youtube.getQuery(currentTrack.title+" "+currentTrack.artist))
-                                swipeView.currentIndex = viewsIndex.youtube
+                            {
+                                pageStack.currentIndex = 1
+                                currentView = viewsIndex.youtube
+                            }
                         }
 
 

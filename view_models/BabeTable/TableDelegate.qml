@@ -28,7 +28,7 @@ ItemDelegate
         {
             if(listModel.get(index-1))
             {
-                if(listModel.get(index-1).album === album) true
+                if(listModel.get(index-1).album === album && listModel.get(index-1).artist === artist) true
                 else false
             }else false
         }else false

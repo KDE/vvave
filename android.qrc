@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
         <file>qtquickcontrols2.conf</file>
-        <file>library/cat</file>
     </qresource>
 </RCC>
