@@ -18,7 +18,6 @@
 
 #include "BabeSettings.h"
 #include "../db/collectionDB.h"
-#include "fileloader.h"
 #include "../utils/brain.h"
 #include "../services/local/socket.h"
 #include "../services/local/youtubedl.h"
@@ -27,8 +26,7 @@
 BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 {
 
-    this->connection = new CollectionDB(this);
-    this->fileLoader = new FileLoader;
+    this->connection = new CollectionDB(this); 
     this->brainDeamon = new Brain;
     this->ytFetch = new youtubedl(this);
     this->babeSocket = new Socket(static_cast<quint16>(BAE::BabePort.toInt()),this);
@@ -84,7 +82,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
         emit this->refreshATable(type);
     });
 
-    connect(this->fileLoader, &FileLoader::finished,[this](int size)
+    connect(&this->fileLoader, &FileLoader::finished,[this](int size)
     {
         if(size > 0)
         {
@@ -104,7 +102,6 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 BabeSettings::~BabeSettings()
 {
     qDebug()<<"DELETING SETTINGS";
-    delete fileLoader;
     delete brainDeamon;
 }
 
@@ -145,5 +142,5 @@ void BabeSettings::populateDB(const QStringList &paths)
     for(auto path : newPaths)
         if(path.startsWith("file://"))
             path.replace("file://", "");
-    fileLoader->requestPaths(newPaths);
+    fileLoader.requestPaths(newPaths);
 }

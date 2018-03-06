@@ -203,7 +203,7 @@ Kirigami.ApplicationWindow
 
         visible: true
         currentIndex: currentView
-        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
+//        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() : settingsDrawer.open()
 
         onTracksViewClicked:
         {
@@ -533,12 +533,12 @@ Kirigami.ApplicationWindow
         z: -999
     }
 
-    globalDrawer: SettingsView
-    {
-        id: settingsDrawer
-        //        contentItem.implicitWidth: columnWidth
-        onIconSizeChanged: toolBarIconSize = size
-    }
+//    globalDrawer: SettingsView
+//    {
+//        id: settingsDrawer
+//        //        contentItem.implicitWidth: columnWidth
+//        onIconSizeChanged: toolBarIconSize = size
+//    }
 
     Item
     {

@@ -50,8 +50,8 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    Player player;
     Babe bae;
+    Player player;    
 
     /* Services */
     YouTube youtube;
@@ -76,8 +76,8 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID 
     KirigamiPlugin::getInstance().registerTypes();
     QtWebView::initialize();
-#else
-    QQuickStyle::setStyle("nomad");
+//#else
+//    QQuickStyle::setStyle("Universal");
 #endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

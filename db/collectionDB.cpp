@@ -27,6 +27,7 @@ using namespace BAE;
 CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 {
     this->name = QUuid::createUuid().toString();
+
     if(!BAE::fileExists(BAE::CollectionDBPath + BAE::DBName))
     {
         this->openDB(this->name);
@@ -589,6 +590,8 @@ QVariantList CollectionDB::getDBDataQML(const QString &queryTxt)
 
 QStringList CollectionDB::dataToList(const DB_LIST &list, const KEY &key)
 {
+    if(list.isEmpty()) return QStringList();
+
     QStringList response;
     for(auto track : list)
         response << track[key];

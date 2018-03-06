@@ -14,9 +14,9 @@
 #include <QMovie>
 #include <QFileSystemWatcher>
 #include <QTimer>
+#include "fileloader.h"
 
 #include "../utils/bae.h"
-class FileLoader;
 class CollectionDB;
 class youtubedl;
 class Socket;
@@ -40,7 +40,7 @@ public slots:
     void populateDB(const QStringList &paths);
 
 private:
-    FileLoader *fileLoader;
+    FileLoader fileLoader;
     CollectionDB *connection;
     Brain *brainDeamon;
     youtubedl *ytFetch;
