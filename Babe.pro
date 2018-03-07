@@ -16,7 +16,7 @@ CONFIG += c++11
 
 linux:unix:!android {
 
-    QT       += webkit
+    QT       += webengine
     message(Building for Linux KDE)
     include(kde/kde.pri)
 

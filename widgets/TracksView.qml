@@ -19,6 +19,7 @@ BabeTable
     section.criteria: ViewSection.FullString
     section.delegate: BabeDelegate
     {
+        id: delegate
         label: section
         isSection: true
         boldLabel: true
