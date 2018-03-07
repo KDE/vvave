@@ -24,7 +24,7 @@
 
 #define BABE_VERSION_STR "0.1.0"
 
-#define BABE_VERSION KDE_MAKE_VERSION(@BABE_MAJOR_VERSION@,@BABE_MINOR_VERSION@,@BABE_PATCH_VERSION@)
+#define BABE_VERSION KDE_MAKE_VERSION(0,1,0)
 
 using namespace std;
 
@@ -54,6 +54,7 @@ inline bool isMobile()
 
 enum SEG
 {
+    HALF = 500,
     ONE = 1000,
     ONEHALF = 1500,
     TWO = 2000,

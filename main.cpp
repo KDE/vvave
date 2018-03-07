@@ -76,8 +76,8 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID 
     KirigamiPlugin::getInstance().registerTypes();
     QtWebView::initialize();
-//#else
-//    QQuickStyle::setStyle("Universal");
+#else
+    QQuickStyle::setStyle("material");
 #endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

@@ -88,7 +88,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
         {
             bDebug::Instance()->msg("Finished inserting into DB "+QString::number(size)+" tracks");
             bDebug::Instance()->msg("Starting Brainz with interval: " + QString::number(BAE::SEG::ONEHALF));
-            this->startBrainz(true, BAE::SEG::ONEHALF);
+            this->startBrainz(true, BAE::SEG::HALF);
 
         }else
             this->startBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool(), BAE::SEG::THREE);

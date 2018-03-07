@@ -733,6 +733,9 @@ DB_LIST CollectionDB::getOnlineTracks(const KEY &orderBy, const BAE::W &order)
 QStringList CollectionDB::getSourcesFolders()
 {
     auto data = this->getDBData("select * from folders order by strftime(\"%s\", addDate) desc");
+
+    if(data.isEmpty()) return QStringList();
+
     return this->dataToList(data, BAE::KEY::URL);
 }
 
