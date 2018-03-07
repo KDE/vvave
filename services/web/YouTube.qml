@@ -11,6 +11,10 @@ Page
     id: youtubeViewRoot
     property var searchRes : []
     clip: true
+
+    property alias viewer : youtubeViewer
+    property int openVideo : 0
+
     Connections
     {
         target: youtube
@@ -19,17 +23,72 @@ Page
             searchRes = res;
             populate(searchRes)
             youtubeTable.forceActiveFocus()
+
+            if(openVideo > 0)
+            {
+                console.log("trying to open video")
+                watchVideo(youtubeTable.model.get(openVideo-1))
+                openVideo = 0
+            }
         }
     }
 
+    function watchVideo(track)
+    {
+        if(track && track.url)
+        {
+            var url = track.url
+            if(url && url.length > 0)
+            {
+                youtubeViewer.currentYt = track
+                youtubeViewer.webView.url = url+"?autoplay=1?"
+                stackView.push(youtubeViewer)
+
+            }
+        }
+    }
+
+    function playTrack(url)
+    {
+        if(url && url.length > 0)
+        {
+            var newURL = url.replace("embed/", "watch?v=")
+            console.log(newURL)
+            youtubePlayer.item.url = newURL+"?autoplay=1+&vq=tiny"
+            youtubePlayer.item.runJavaScript("document.title", function(result) { console.log(result); });
+        }
+    }
+
+    function runSearch(searchTxt)
+    {
+        if(searchTxt)
+            if(searchTxt !== youtubeTable.headerBarTitle)
+            {
+                youtubeTable.headerBarTitle = searchTxt
+                youtube.getQuery(searchTxt, bae.loadSetting("YOUTUBELIMIT", "BABE", 25))
+            }
+    }
+
+    function clearSearch()
+    {
+        searchInput.clear()
+        youtubeTable.clearTable()
+        youtubeTable.headerBarTitle = ""
+        searchRes = []
+    }
+
+    function populate(tracks)
+    {
+        youtubeTable.clearTable()
+        for(var i in tracks)
+            youtubeTable.model.append(tracks[i])
+    }
 
     Loader
     {
-        id: youtubeViewer
-        source: isMobile ? "qrc:/services/web/YoutubeViewer_A.qml" : "qrc:/services/web/YoutubeViewer.qml"
-
+        id: youtubePlayer
+        source: isMobile ? "qrc:/services/web/YoutubePlayer_A.qml" : "qrc:/services/web/YoutubePlayer.qml"
     }
-
 
     BabePopup
     {
@@ -62,7 +121,6 @@ Page
                 Layout.column: 1
                 Layout.row: 2
                 Layout.fillWidth: true
-
             }
 
             TextField
@@ -111,138 +169,169 @@ Page
         }
     }
 
-    function runSearch(searchTxt)
+
+    StackView
     {
-        if(searchTxt)
-            if(searchTxt !== youtubeTable.headerBarTitle)
-            {
-                youtubeTable.headerBarTitle = searchTxt
-                youtube.getQuery(searchTxt, bae.loadSetting("YOUTUBELIMIT", "BABE", 25))
-            }
-
-    }
-
-    function clearSearch()
-    {
-        searchInput.clear()
-        youtubeTable.clearTable()
-        youtubeTable.headerBarTitle = ""
-        searchRes = []
-    }
-
-    function populate(tracks)
-    {
-        youtubeTable.clearTable()
-        for(var i in tracks)
-            youtubeTable.model.append(tracks[i])
-    }
-
-
-    ColumnLayout
-    {
+        id: stackView
         anchors.fill: parent
-        width: parent.width
-        height: parent.height
+        focus: true
 
-        Layout.margins: 0
-        spacing: 0
-
-        BabeTable
+        pushEnter: Transition
         {
-            id: youtubeTable
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            trackNumberVisible: false
-            headerBarVisible: true
-            headerBarExit: true
-            headerBarExitIcon: "edit-clear"
-            holder.message: "No YouTube results!"
-            coverArtVisible: true
-            trackDuration: true
-            trackRating: true
-            onExit: clearSearch()
-            isArtworkRemote: true
-
-            appendBtn.visible: false
-            playAllBtn.visible: false
-            menuBtn.visible: false
-
-            headerBarRight: BabeButton
+            PropertyAnimation
             {
-                id: menuBtn
-                iconName: "application-menu"
-                onClicked: configPopup.open()
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 200
             }
-
-            onRowClicked:
-            {
-                youtubeViewer.item.open()
-                youtubeViewer.item.webView.url= youtubeTable.model.get(index).url
-            }
-
-            onQuickPlayTrack:
-            {
-                bae.getYoutubeTrack(JSON.stringify(youtubeTable.model.get(index)))
-            }
-
-
         }
 
-        Kirigami.Separator
+        pushExit: Transition
         {
-            visible: !isMobile
-            Layout.fillWidth: true
-            width: parent.width
-            height: 1
+            PropertyAnimation
+            {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 200
+            }
         }
 
-        ToolBar
+        popEnter: Transition
         {
-            id: searchBox
-            Layout.fillWidth: true
-            width: parent.width
-            height: toolBarHeight
-            position: ToolBar.Footer
-
-            Rectangle
-            {
-                anchors.fill: parent
-                z: -999
-                color: backgroundColor
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 200
             }
+        }
+
+        popExit: Transition
+        {
+            PropertyAnimation
+            {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 200
+            }
+        }
 
 
-            RowLayout
+        initialItem: Item
+        {
+            id: youtubeList
+            ColumnLayout
             {
                 anchors.fill: parent
+                width: parent.width
+                height: parent.height
 
+                Layout.margins: 0
+                spacing: 0
 
-                TextInput
+                BabeTable
                 {
-                    id: searchInput
-                    color: foregroundColor
-                    Layout.fillWidth: true
+                    id: youtubeTable
                     Layout.fillHeight: true
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment:  Text.AlignVCenter
-                    selectByMouse: !root.isMobile
-                    selectionColor: babeHighlightColor
-                    selectedTextColor: foregroundColor
-                    focus: true
-                    text: ""
-                    wrapMode: TextEdit.Wrap
-                    onAccepted: runSearch(searchInput.text)
+                    Layout.fillWidth: true
+                    trackNumberVisible: false
+                    headerBarVisible: true
+                    headerBarExit: true
+                    headerBarExitIcon: "edit-clear"
+                    holder.message: "No YouTube results!"
+                    coverArtVisible: true
+                    trackDuration: true
+                    trackRating: true
+                    onExit: clearSearch()
+                    isArtworkRemote: true
 
+                    appendBtn.visible: false
+                    playAllBtn.visible: false
+                    menuBtn.visible: false
+
+                    headerBarRight: BabeButton
+                    {
+                        id: menuBtn
+                        iconName: "application-menu"
+                        onClicked: configPopup.open()
+                    }
+
+                    onRowClicked:
+                    {
+                        watchVideo(youtubeTable.model.get(index))
+                    }
+
+                    onQuickPlayTrack:
+                    {
+                        playTrack(youtubeTable.model.get(index).url)
+                    }
                 }
 
-                BabeButton
+                Kirigami.Separator
                 {
-                    Layout.rightMargin: contentMargins
-                    iconName: "edit-clear"
-                    onClicked: searchInput.clear()
+                    visible: !isMobile
+                    Layout.fillWidth: true
+                    width: parent.width
+                    height: 1
                 }
 
+                ToolBar
+                {
+                    id: searchBox
+                    Layout.fillWidth: true
+                    width: parent.width
+                    height: toolBarHeight
+                    position: ToolBar.Footer
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        z: -999
+                        color: backgroundColor
+                    }
+
+
+                    RowLayout
+                    {
+                        anchors.fill: parent
+
+
+                        TextInput
+                        {
+                            id: searchInput
+                            color: foregroundColor
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment:  Text.AlignVCenter
+                            selectByMouse: !root.isMobile
+                            selectionColor: babeHighlightColor
+                            selectedTextColor: foregroundColor
+                            focus: true
+                            text: ""
+                            wrapMode: TextEdit.Wrap
+                            onAccepted: runSearch(searchInput.text)
+
+                        }
+
+                        BabeButton
+                        {
+                            Layout.rightMargin: contentMargins
+                            iconName: "edit-clear"
+                            onClicked: searchInput.clear()
+                        }
+
+                    }
+                }
             }
+        }
+
+        YoutubeViewer
+        {
+            id: youtubeViewer
         }
     }
 }
