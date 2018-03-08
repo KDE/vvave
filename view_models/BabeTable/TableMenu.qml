@@ -198,7 +198,7 @@ BabeMenu
         onTriggered:
         {
             trackRemoved(list.model.get(list.currentIndex).url)
-            listModel.remove(list.currentIndex)            
+            listModel.remove(list.currentIndex)
             close()
         }
     }
@@ -212,28 +212,35 @@ BabeMenu
     {
         id: starsRow
         width: parent.width
+        height: toolBarIconSize
+
         RowLayout
         {
             anchors.fill: parent
-            width: parent.width
+
             BabeButton
             {
                 Layout.fillWidth: true
+                Layout.fillHeight: true
                 iconName: starIcon
                 iconColor: rate >= 1 ? starColor :starReg
                 onClicked: rateIt(1)
             }
+
             BabeButton
             {
                 Layout.fillWidth: true
+                Layout.fillHeight: true
 
                 iconName: starIcon
                 iconColor: rate >= 2 ? starColor :starReg
                 onClicked: rateIt(2)
             }
+
             BabeButton
             {
                 Layout.fillWidth: true
+                Layout.fillHeight: true
 
                 iconName: starIcon
                 iconColor: rate >= 3 ? starColor :starReg
@@ -244,6 +251,7 @@ BabeMenu
             BabeButton
             {
                 Layout.fillWidth: true
+                Layout.fillHeight: true
 
                 iconName: starIcon
                 iconColor: rate >= 4 ? starColor :starReg
@@ -254,6 +262,7 @@ BabeMenu
             BabeButton
             {
                 Layout.fillWidth: true
+                Layout.fillHeight: true
 
                 iconName: starIcon
                 iconColor: rate >= 5 ? starColor :starReg
