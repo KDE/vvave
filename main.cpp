@@ -52,14 +52,12 @@ int main(int argc, char *argv[])
     }
 
     Babe bae;
-    Player player;    
+    Player player;
 
     /* Services */
     YouTube youtube;
 
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
-
-    qDebug()<<QQuickStyle::availableStyles();
 
     QQmlApplicationEngine engine;
 
@@ -78,7 +76,8 @@ int main(int argc, char *argv[])
     KirigamiPlugin::getInstance().registerTypes();
     QtWebView::initialize();
 #else
-    QQuickStyle::setStyle("nomad");
+    if(QQuickStyle::availableStyles().contains("nomad"))
+        QQuickStyle::setStyle("nomad");
     QtWebEngine::initialize();
 #endif
 
