@@ -6,6 +6,7 @@ WebView
 {
     id: webView
 
+    clip: true
     onLoadingChanged:
     {
         if (loadRequest.errorString)

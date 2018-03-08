@@ -103,6 +103,7 @@ Page
         Loader
         {
             id: webViewer
+            clip: true
             Layout.fillHeight: true
             Layout.fillWidth: true
             source: isMobile ? "qrc:/services/web/WebView_A.qml" : "qrc:/services/web/WebView.qml"
