@@ -41,7 +41,7 @@ Page
             if(url && url.length > 0)
             {
                 youtubeViewer.currentYt = track
-                youtubeViewer.webView.url = url+"?autoplay=1?"
+                youtubeViewer.webView.url = url+"?autoplay=1"
                 stackView.push(youtubeViewer)
 
             }

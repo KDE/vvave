@@ -76,7 +76,7 @@ Page
                     width: rowHeight
                     iconName : "link"
                     iconColor: darkForegroundColor
-                    onClicked: bae.openFile(webView.url)
+                    onClicked: webView.url = currentYt.url.replace("embed/", "watch?v=")
                 }
 
                 BabeButton
@@ -96,11 +96,7 @@ Page
                     width: rowHeight
                     iconName : "overflow-menu"
                     iconColor: darkForegroundColor
-
                 }
-
-
-
             }
         }
 
@@ -110,6 +106,13 @@ Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             source: isMobile ? "qrc:/services/web/WebView_A.qml" : "qrc:/services/web/WebView.qml"
+            onVisibleChanged:
+            {
+                if(!visible) webView.url = "about:blank"
+
+                console.log(webView.url, visible)
+            }
+
         }
 
     }
