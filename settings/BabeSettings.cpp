@@ -48,12 +48,9 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     }
 #endif    
 
-    QDir collectionDBPath_dir(BAE::CollectionDBPath);
     QDir cachePath_dir(BAE::CachePath);
     QDir youtubeCache_dir(BAE::YoutubeCachePath);
 
-    if (!collectionDBPath_dir.exists())
-        collectionDBPath_dir.mkpath(".");
     if (!cachePath_dir.exists())
         cachePath_dir.mkpath(".");
     if (!youtubeCache_dir.exists())
