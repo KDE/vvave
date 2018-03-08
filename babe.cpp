@@ -365,7 +365,7 @@ void Babe::scanDir(const QString &url)
 
 void Babe::brainz(const bool &on)
 {
-    this->settings->checkCollectionBrainz(on);
+//    this->settings->checkCollectionBrainz(on);
 }
 
 bool Babe::brainzState()

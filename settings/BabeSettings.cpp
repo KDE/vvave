@@ -84,7 +84,6 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
         if(size > 0)
         {
             bDebug::Instance()->msg("Finished inserting into DB "+QString::number(size)+" tracks");
-            bDebug::Instance()->msg("Starting Brainz with interval: " + QString::number(BAE::SEG::ONEHALF));
             this->startBrainz(true, BAE::SEG::HALF);
 
         }else
@@ -123,6 +122,8 @@ void BabeSettings::checkCollectionBrainz(const bool &state)
 
 void BabeSettings::startBrainz(const bool &on, const uint &speed)
 {
+    bDebug::Instance()->msg("Starting Brainz with interval: " + QString::number(BAE::SEG::ONEHALF));
+
     this->brainDeamon->setInterval(speed);
 
     if(on)

@@ -10,7 +10,7 @@ Kirigami.GlobalDrawer
     id: settingsView
     handleVisible: false
     signal iconSizeChanged(int size)
-    readonly property bool activeBrainz : bae.brainzState()
+    readonly property bool activeBrainz : false
     visible: false
 
     y: header.height
@@ -127,23 +127,7 @@ Kirigami.GlobalDrawer
         {
             text: qsTr("Settings...")
             iconName: "view-media-config"
-            Kirigami.Action
-            {
-                text: "Brainz"
 
-                Kirigami.Action
-                {
-                    id: brainzToggle
-                    text: checked ? "Turn OFF" : "Turn ON"
-                    checked: activeBrainz
-                    checkable: true
-                    onToggled:
-                    {
-                        bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
-                        bae.brainz(checked === true ? true : false)
-                    }
-                }
-            }
 
             Kirigami.Action
             {

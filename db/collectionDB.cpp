@@ -227,9 +227,7 @@ void CollectionDB::openDB(const QString &name)
 
 void CollectionDB::addTrack(const DB &track)
 {
-    auto query = this->getQuery("PRAGMA synchronous=OFF");
-    if(query.exec())
-    {
+
         auto url = track[KEY::URL];
         auto title = track[KEY::TITLE];
         auto artist = track[KEY::ARTIST];
@@ -243,7 +241,6 @@ void CollectionDB::addTrack(const DB &track)
 
         auto artwork = track[KEY::ARTWORK].isEmpty()? "" : track[KEY::ARTWORK];
 
-        bDebug::Instance()->msg("Writting to db: "+title+" "+artist);
         /* first needs to insert album and artist*/
         QVariantMap sourceMap {{KEYMAP[KEY::URL],sourceUrl},
                                {KEYMAP[KEY::SOURCE_TYPE], sourceType(url)}};
@@ -281,12 +278,6 @@ void CollectionDB::addTrack(const DB &track)
                               {KEYMAP[KEY::COMMENT], ""}};
 
         insert(TABLEMAP[TABLE::TRACKS],trackMap);
-    }else
-    {
-        qDebug()<< "Failed to insert async";
-    }
-
-    emit trackInserted();
 }
 
 bool CollectionDB::updateTrack(const DB &track)
@@ -853,7 +844,7 @@ bool CollectionDB::removeTrack(const QString &path)
 }
 
 QSqlQuery CollectionDB::getQuery(const QString &queryTxt)
-{    
+{
     return QSqlQuery(queryTxt, this->m_db);
 }
 

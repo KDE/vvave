@@ -31,13 +31,12 @@ public:
 
     void requestPaths(QStringList paths)
     {
-        qDebug()<<"FROM file loader"<< &paths;
+        qDebug()<<"FROM file loader"<< paths;
 
-        if(!go)
-        {
+
             this->go = true;
             QMetaObject::invokeMethod(this, "getTracks", Q_ARG(QStringList, paths));
-        }
+
 
     }
 
@@ -63,13 +62,14 @@ public slots:
                 while (it.hasNext()) urls<<it.next();
 
             } else if (QFileInfo(path).isFile()) urls<<path;
-
         }
 
         qDebug()<<"URLS SIZEW FOR:"<<paths<< urls.size();
         int newTracks = 0;
-        if(urls.size()>0)
+        if(!urls.isEmpty())
         {
+           this->execQuery("PRAGMA synchronous=OFF");
+
             for(auto url : urls)
             {
                 if(go)
@@ -89,18 +89,19 @@ public slots:
 
                             BAE::DB trackMap =
                             {
-                                {BAE::KEY::URL,url},
-                                {BAE::KEY::TRACK,QString::number(track)},
-                                {BAE::KEY::TITLE,title},
-                                {BAE::KEY::ARTIST,artist},
-                                {BAE::KEY::ALBUM,album},
+                                {BAE::KEY::URL, url},
+                                {BAE::KEY::TRACK, QString::number(track)},
+                                {BAE::KEY::TITLE, title},
+                                {BAE::KEY::ARTIST, artist},
+                                {BAE::KEY::ALBUM, album},
                                 {BAE::KEY::DURATION,QString::number(duration)},
-                                {BAE::KEY::GENRE,genre},
-                                {BAE::KEY::SOURCES_URL,sourceUrl},
-                                {BAE::KEY::BABE, url.startsWith(BAE::YoutubeCachePath)?"1":"0"},
-                                {BAE::KEY::RELEASE_DATE,QString::number(year)}
+                                {BAE::KEY::GENRE, genre},
+                                {BAE::KEY::SOURCES_URL, sourceUrl},
+                                {BAE::KEY::BABE, url.startsWith(BAE::YoutubeCachePath) ? "1": "0"},
+                                {BAE::KEY::RELEASE_DATE, QString::number(year)}
                             };
 
+                            qDebug()<<url;
                             this->addTrack(trackMap);
                             newTracks++;
                         }
