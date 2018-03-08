@@ -74,6 +74,10 @@
         <file>widgets/SearchView/SearchSuggestions.qml</file>
         <file>services/web/YouTube.qml</file>
         <file>services/web/YoutubeViewer.qml</file>
-        <file>services/web/YoutubeViewer_A.qml</file>
+        <file>services/web/YoutubePlayer.qml</file>
+        <file>services/web/YoutubeHelper.js</file>
+        <file>services/web/YoutubePlayer_A.qml</file>
+        <file>services/web/WebView.qml</file>
+        <file>services/web/WebView_A.qml</file>
     </qresource>
 </RCC>

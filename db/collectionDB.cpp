@@ -30,6 +30,10 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 
     if(!BAE::fileExists(BAE::CollectionDBPath + BAE::DBName))
     {
+        QDir collectionDBPath_dir(BAE::CollectionDBPath);
+        if (!collectionDBPath_dir.exists())
+            collectionDBPath_dir.mkpath(".");
+
         this->openDB(this->name);
         qDebug()<<"Collection doesn't exists, trying to create it" << BAE::CollectionDBPath + BAE::DBName;
         this->prepareCollectionDB();
@@ -733,6 +737,9 @@ DB_LIST CollectionDB::getOnlineTracks(const KEY &orderBy, const BAE::W &order)
 QStringList CollectionDB::getSourcesFolders()
 {
     auto data = this->getDBData("select * from folders order by strftime(\"%s\", addDate) desc");
+
+    if(data.isEmpty()) return QStringList();
+
     return this->dataToList(data, BAE::KEY::URL);
 }
 

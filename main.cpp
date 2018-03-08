@@ -11,7 +11,8 @@
 #ifdef Q_OS_ANDROID
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
 #include <QtWebView/QtWebView>
-//#include "java/notificationclient.h"
+#else
+#include <QtWebEngine>
 #endif
 
 #include "utils/bae.h"
@@ -76,8 +77,9 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID 
     KirigamiPlugin::getInstance().registerTypes();
     QtWebView::initialize();
-//#else
-//    QQuickStyle::setStyle("Universal");
+#else
+    QQuickStyle::setStyle("nomad");
+    QtWebEngine::initialize();
 #endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

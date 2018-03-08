@@ -198,14 +198,11 @@ Item
                         iconName: "videoclip-amarok"
                         onClicked:
                         {
-                            if(youtube.getQuery(currentTrack.title+" "+currentTrack.artist))
-                            {
-                                pageStack.currentIndex = 1
-                                currentView = viewsIndex.youtube
-                            }
+                            youtubeView.openVideo = 1
+                            youtube.getQuery(currentTrack.title+" "+currentTrack.artist)
+                            pageStack.currentIndex = 1
+                            currentView = viewsIndex.youtube
                         }
-
-
                     }
                 }
 
