@@ -15,17 +15,16 @@ Item
     GridLayout
     {
         id:placeHolder
+        anchors.fill: parent
 
-        width: parent.width
-        height: parent.height
         columns: 1
         rows: 2
 
         Rectangle
         {
 
-            width:parent.width
-            height: parent.height
+            anchors.fill: parent
+
             Layout.row: 1
             color: "transparent"
 
@@ -34,8 +33,8 @@ Item
                 id: imageHolder
 
                 anchors.centerIn: parent
-                width: 48
-                height: 48
+                width: 40
+                height: 40
                 source: emoji? emoji : "qrc:/assets/face.png"
                 horizontalAlignment: Qt.AlignHCenter
 
@@ -57,6 +56,8 @@ Item
                 anchors.top: imageHolder.bottom
                 opacity: 0.3
                 text: message ? qsTr(message) : qsTr("Nothing here...")
+                font.pointSize: fontSizes.medium
+
                 padding: 10
                 font.bold: true
                 textFormat: Text.RichText

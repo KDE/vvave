@@ -7,6 +7,7 @@ import QtQuick.Controls.Material 2.1
 Page
 {
     id: babeListRoot
+
     property alias list : babeList
     property alias model : babeList.model
     property alias delegate : babeList.delegate
@@ -42,6 +43,7 @@ Page
     BabeHolder
     {
         id: holder
+        anchors.fill: parent
         visible: babeList.count === 0
         color : textColor
         focus: true
