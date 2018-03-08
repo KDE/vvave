@@ -30,6 +30,10 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 
     if(!BAE::fileExists(BAE::CollectionDBPath + BAE::DBName))
     {
+        QDir collectionDBPath_dir(BAE::CollectionDBPath);
+        if (!collectionDBPath_dir.exists())
+            collectionDBPath_dir.mkpath(".");
+
         this->openDB(this->name);
         qDebug()<<"Collection doesn't exists, trying to create it" << BAE::CollectionDBPath + BAE::DBName;
         this->prepareCollectionDB();

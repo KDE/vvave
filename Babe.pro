@@ -124,12 +124,6 @@ HEADERS += \
 
 
 #TAGLIB
-linux:unix:!macx:!android {
-    message(Searching local TagLib lib)
-    LIBS += -ltag
-
-} else:android {
-    message(Building TagLib for Android)
 
     DEPENDPATH += 3rdparty/taglib
     DEPENDPATH += 3rdparty/taglib/ape
@@ -387,9 +381,6 @@ HEADERS += \
     3rdparty/taglib/tagunion.h \
     3rdparty/taglib/config.h \
     3rdparty/taglib/taglib_config.h \
-
-}
-
 
 #INCLUDEPATH += /usr/include/python3.6m
 
