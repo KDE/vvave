@@ -6,14 +6,12 @@
 
 QT_USE_NAMESPACE
 
-Socket::Socket(quint16 port, QObject *parent) :
-    QObject(parent),
+Socket::Socket(quint16 port, QObject *parent) : QObject(parent),
     m_pWebSocketServer(new QWebSocketServer(QStringLiteral("Babe Server"),
                                             QWebSocketServer::NonSecureMode, this))
 {
     if (this->m_pWebSocketServer->listen(QHostAddress::Any, port))
     {
-
         qDebug() << "Babe listening on port" << port;
         connect(this->m_pWebSocketServer, &QWebSocketServer::newConnection,
                 this, &Socket::onNewConnection);

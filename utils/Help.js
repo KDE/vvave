@@ -68,3 +68,11 @@ function refreshArtists()
     artistsView.clearGrid()
     artistsView.populate()
 }
+
+function notify(title, body)
+{
+    if(isMobile)
+        babeNotify(title+"\n"+body)
+    else
+        bae.notify(title, body)
+}

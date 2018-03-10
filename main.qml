@@ -872,4 +872,11 @@ Kirigami.ApplicationWindow
         onSkipTrack: Player.nextTrack()
         onBabeIt: Player.babeTrack()
     }
+
+    Connections
+    {
+        target: link
+        onServerConReady: H.notify(deviceName, "You're now linked!")
+        onClientConError: H.notify("Error connecting to server")
+    }
 }

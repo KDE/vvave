@@ -8,6 +8,7 @@
 #include <QLibrary>
 #include <QQuickStyle>
 #include <QStyleHints>
+#include "services/local/linking.h"
 #ifdef Q_OS_ANDROID
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
 #include <QtWebView/QtWebView>
@@ -53,7 +54,6 @@ int main(int argc, char *argv[])
 
     Babe bae;
     Player player;
-
     /* Services */
     YouTube youtube;
 
@@ -71,6 +71,15 @@ int main(int argc, char *argv[])
     context->setContextProperty("player", &player);
     context->setContextProperty("bae", &bae);
     context->setContextProperty("youtube", &youtube);
+    context->setContextProperty("link", &bae.link);
+
+    qmlRegisterUncreatableMetaObject(
+      LINK::staticMetaObject, // static meta object
+      "Link.Codes",                // import statement (can be any string)
+      1, 0,                          // major and minor version of the import
+      "LINK",                 // name in QML (does not have to match C++ name)
+      "Error: only enums"            // error in case someone tries to create a MyNamespace object
+    );
 
 #ifdef Q_OS_ANDROID 
     KirigamiPlugin::getInstance().registerTypes();

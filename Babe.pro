@@ -64,7 +64,8 @@ SOURCES += main.cpp \
     db/conthread.cpp \
     services/web/babeit.cpp \
     utils/babeconsole.cpp \
-    services/local/youtubedl.cpp
+    services/local/youtubedl.cpp \
+    services/local/linking.cpp
 
 
 RESOURCES += qml.qrc \
@@ -120,7 +121,8 @@ HEADERS += \
     services/web/babeit.h \
     utils/babeconsole.h \
     utils/singleton.h \
-    services/local/youtubedl.h
+    services/local/youtubedl.h \
+    services/local/linking.h
 
 
 #TAGLIB

@@ -26,10 +26,11 @@
 BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 {
 
-    this->connection = new CollectionDB(this); 
+    this->connection = new CollectionDB(this);
     this->brainDeamon = new Brain;
     this->ytFetch = new youtubedl(this);
-    this->babeSocket = new Socket(static_cast<quint16>(BAE::BabePort.toInt()),this);
+    this->babeSocket = new Socket(static_cast<quint16>(BAE::BabePort.toInt()), this);
+
 
     qDebug() << "Getting collectionDB info from: " << BAE::CollectionDBPath;
     qDebug() << "Getting settings info from: " << BAE::SettingPath;

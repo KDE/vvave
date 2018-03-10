@@ -79,5 +79,6 @@
         <file>services/web/YoutubePlayer_A.qml</file>
         <file>services/web/WebView.qml</file>
         <file>services/web/WebView_A.qml</file>
+        <file>services/local/LinkingDialog.qml</file>
     </qresource>
 </RCC>

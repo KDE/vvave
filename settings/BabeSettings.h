@@ -26,32 +26,33 @@ using namespace BAE;
 
 class BabeSettings : public QObject
 {
-    Q_OBJECT
+        Q_OBJECT
 
-public:
-    explicit BabeSettings(QObject *parent = nullptr);
-    ~BabeSettings();
-    void checkCollectionBrainz(const bool &state);
-    void refreshCollection();
-    void fetchYoutubeTrack(const QString &message);
+    public:
+        explicit BabeSettings(QObject *parent = nullptr);
+        ~BabeSettings();
 
-public slots:
-    void startBrainz(const bool &on, const uint &speed = BAE::SEG::THREE);
-    void populateDB(const QStringList &paths);
+        void checkCollectionBrainz(const bool &state);
+        void refreshCollection();
+        void fetchYoutubeTrack(const QString &message);
 
-private:
-    FileLoader fileLoader;
-    CollectionDB *connection;
-    Brain *brainDeamon;
-    youtubedl *ytFetch;
-    Socket *babeSocket;
+    public slots:
+        void startBrainz(const bool &on, const uint &speed = BAE::SEG::THREE);
+        void populateDB(const QStringList &paths);
 
-signals:
-    void collectionPathChanged(QStringList newPaths);
-    void refreshATable(BAE::TABLE table);
-    void refreshTables(int size);
-    void albumArtReady(const DB &album);
-    void brainFinished();
+    private:
+        FileLoader fileLoader;
+        CollectionDB *connection;
+        Brain *brainDeamon;
+        youtubedl *ytFetch;
+        Socket *babeSocket;
+
+    signals:
+        void collectionPathChanged(QStringList newPaths);
+        void refreshATable(BAE::TABLE table);
+        void refreshTables(int size);
+        void albumArtReady(const DB &album);
+        void brainFinished();
 
 };
 

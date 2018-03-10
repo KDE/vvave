@@ -85,7 +85,9 @@ enum class W : uint_fast8_t
     UNKNOWN,
     DONE,
     DESC,
-    ASC
+    ASC,
+    CODE,
+    MSG
 };
 
 static const QMap<W,QString> SLANG =
@@ -97,8 +99,10 @@ static const QMap<W,QString> SLANG =
     {W::UNKNOWN, "UNKNOWN"},
     {W::DONE, "DONE"},
     {W::DESC, "DESC"},
-    {W::ASC,"ASC"},
-    {W::TAG,"TAG"}
+    {W::ASC, "ASC"},
+    {W::TAG, "TAG"},
+    {W::MSG, "MSG"},
+    {W::CODE, "CODE"}
 };
 
 enum class TABLE : uint8_t
@@ -269,6 +273,8 @@ const QString DownloadsPath = QStandardPaths::writableLocation(QStandardPaths::D
 const QStringList DownloadsPaths = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
 const QString NotifyDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 const QString BabePort = "8483";
+const QString LinkPort = "3333";
+
 const QString App = "Babe";
 const QString Version = BABE_VERSION_STR;
 const QString DBName = "collection.db";

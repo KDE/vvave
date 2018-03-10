@@ -4,6 +4,7 @@ import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
 import "../../utils/Help.js" as H
 import "../../view_models"
+import"../../services/local"
 
 Kirigami.GlobalDrawer
 {
@@ -39,6 +40,10 @@ Kirigami.GlobalDrawer
         id: sourcesDialog
     }
 
+    LinkingDialog
+    {
+        id: linkingDialog
+    }
 
     BabeConsole
     {
@@ -66,6 +71,13 @@ Kirigami.GlobalDrawer
             iconName: "folder"
         },
 
+
+        Kirigami.Action
+        {
+            text: qsTr("Linking")
+            iconName: isMobile ? "computer-laptop" : "phone"
+            onTriggered: linkingDialog.open()
+        },
 
         Kirigami.Action
         {
