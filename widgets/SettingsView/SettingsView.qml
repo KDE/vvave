@@ -40,11 +40,6 @@ Kirigami.GlobalDrawer
         id: sourcesDialog
     }
 
-    LinkingDialog
-    {
-        id: linkingDialog
-    }
-
     BabeConsole
     {
         id: babeConsole
@@ -76,7 +71,12 @@ Kirigami.GlobalDrawer
         {
             text: qsTr("Linking")
             iconName: isMobile ? "computer-laptop" : "phone"
-            onTriggered: linkingDialog.open()
+            onTriggered:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.linking
+                if(!isLinked) linkingView.linkingConf.open()
+            }
         },
 
         Kirigami.Action

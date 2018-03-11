@@ -36,7 +36,6 @@ void Socket::sendMessageTo(const int &client, const QString &message)
 
 void Socket::onNewConnection()
 {
-    qDebug()<<"trying new connection";
     QWebSocket *pSocket = m_pWebSocketServer->nextPendingConnection();
 
     connect(pSocket, &QWebSocket::textMessageReceived, this, &Socket::processTextMessage);
@@ -51,13 +50,12 @@ void Socket::onNewConnection()
 void Socket::processTextMessage(const QString &message)
 {
     emit this->message(message);
-    QWebSocket *pClient = qobject_cast<QWebSocket *>(sender());
+//    QWebSocket *pClient = qobject_cast<QWebSocket *>(sender());
 
-    qDebug() << "Message received:" << message;
-    if (pClient)
-    {
-        pClient->sendTextMessage(message);
-    }
+//    if (pClient)
+//    {
+//        pClient->sendTextMessage(message);
+//    }
 }
 
 void Socket::processBinaryMessage(QByteArray message)

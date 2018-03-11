@@ -13,8 +13,8 @@ import "../../utils/Help.js" as H
 Kirigami.PageRow
 {
     id: playlistViewRoot
-    property string playlistQuery
 
+    property string playlistQuery
     property alias playlistViewModel : playlistViewModel
 
     signal rowClicked(var track)
@@ -207,6 +207,11 @@ Kirigami.PageRow
         var res = bae.get(query)
         playlistViewModelFilter.clearTable()
         playlistViewModelFilter.headerBarTitle = title
+        appendToExtraList(res)
+    }
+
+    function appendToExtraList(res)
+    {
         if(res.length>0)
             for(var i in res)
                 playlistViewModelFilter.model.append(res[i])

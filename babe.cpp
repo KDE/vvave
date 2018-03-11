@@ -32,9 +32,9 @@
 
 class InterfaceConnFailedException : public QException
 {
-public:
-    void raise() const { throw *this; }
-    InterfaceConnFailedException *clone() const { return new InterfaceConnFailedException(*this); }
+    public:
+        void raise() const { throw *this; }
+        InterfaceConnFailedException *clone() const { return new InterfaceConnFailedException(*this); }
 };
 #elif defined(Q_OS_WINDOWS)
 #elif defined(Q_OS_DARWIN)
@@ -61,9 +61,9 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
     {
         switch(table)
         {
-        case BAE::TABLE::TRACKS: emit this->refreshTracks(); break;
-        case BAE::TABLE::ALBUMS: emit this->refreshAlbums(); break;
-        case BAE::TABLE::ARTISTS: emit this->refreshArtists(); break;
+            case BAE::TABLE::TRACKS: emit this->refreshTracks(); break;
+            case BAE::TABLE::ALBUMS: emit this->refreshAlbums(); break;
+            case BAE::TABLE::ARTISTS: emit this->refreshArtists(); break;
         }
 
     });
@@ -234,28 +234,19 @@ void Babe::linkDecoder(QString json)
 
     qDebug()<<"DECODING LINKER MSG"<<json;
     auto ask = link.decode(json);
+
     auto code = ask[BAE::SLANG[BAE::W::CODE]].toInt();
     auto msg = ask[BAE::SLANG[BAE::W::MSG]].toString();
 
-    switch(code)
+    if(code == LINK::CODE::CONNECTED)
     {
-        case LINK::CODE::CONNECTED:
-        {
-            this->link.deviceName = msg;
-            emit this->link.serverConReady(msg);
-            break;
-        }
-          case LINK::CODE::PLAYLISTS:
-        {
-            auto playlists = this->getPlaylists();
-            QVariantMap map;
-            map.insert(LINK::DECODE[LINK::CODE::PLAYLISTS], playlists);
-            link.sendToClient(map);
-            break;
-        }
-
-
-        default: break;
+        this->link.deviceName = msg;
+        emit this->link.serverConReady(msg);
+    }
+    else
+    {
+        auto res = this->getDBDataQML(msg);
+        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
     }
 }
 

@@ -19,9 +19,8 @@ namespace LINK
         DISCONNECTED = 3,
         SEARCHFOR = 4,
         PLAYLISTS = 5,
-        GETQUERY = 6,
+        FILTER = 6
         };
-
     Q_ENUM_NS(CODE);
 
     static QMap<CODE, QString> DECODE =
@@ -31,8 +30,7 @@ namespace LINK
         {CODE::DISCONNECTED, "DISCONNECTED"},
         {CODE::SEARCHFOR, "SEARCHFOR"},
         {CODE::PLAYLISTS, "PLAYLISTS"},
-        {CODE::GETQUERY, "GETQUERY"}
-
+        {CODE::FILTER, "FILTER"},
     };
 }
 
@@ -52,6 +50,7 @@ class Linking : public QObject
         explicit Linking(QObject *parent = nullptr);
         QString deviceName;
 
+        QVariantMap packResponse(const LINK::CODE &code, const QVariant &content);
         void init(const int &index);
         Q_INVOKABLE void setIp(const QString &ip);
         Q_INVOKABLE QString getIp();
@@ -74,7 +73,7 @@ class Linking : public QObject
         void clientConError(QString message);
         void parseAsk(QString json);
 
-        void responseReady(QVariantMap map);
+        void responseReady(QVariantMap res);
     public slots:
         void handleError(QAbstractSocket::SocketError error);
 

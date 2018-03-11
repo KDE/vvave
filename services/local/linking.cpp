@@ -9,12 +9,10 @@
 QString Linking::stringify(const QVariantMap &map)
 {
     if(map.isEmpty()) return "{}";
+    auto jsonResponse = QJsonDocument::fromVariant(map);
+    QString JSON(jsonResponse.toJson(QJsonDocument::Compact));
 
-    auto JSON = QString("{ \"%1\" : \"%2\", \"%3\" : \"%4\" }").arg(BAE::SLANG[BAE::W::CODE],
-            QString::number(map[BAE::SLANG[BAE::W::CODE]].toInt()),
-            BAE::SLANG[BAE::W::MSG],
-            map[BAE::SLANG[BAE::W::MSG]].toString());
-
+    qDebug()<<"strigified json"<<JSON;
     return JSON;
 }
 
@@ -34,9 +32,19 @@ Linking::Linking(QObject *parent) : QObject(parent)
     connect(&client, &QWebSocket::disconnected, this, &Linking::clientConDisconnected);
     connect(&client, &QWebSocket::textMessageReceived, [this](QString msg)
     {
-
-        emit this->responseReady(decode(msg));
+        auto decoded = decode(msg);
+        qDebug()<<"client recived message"<<msg;
+        emit this->responseReady(decoded);
     });
+}
+
+QVariantMap Linking::packResponse(const LINK::CODE &code, const QVariant &content)
+{
+    QVariantMap map;
+    map.insert(BAE::SLANG[BAE::W::CODE], code);
+    map.insert(BAE::SLANG[BAE::W::MSG], content);
+
+    return map;
 }
 
 void Linking::init(const int &index)
@@ -75,25 +83,18 @@ QString Linking::getDeviceName()
 
 void Linking::ask(int code, QString msg)
 {
-    auto JSON = QString("{ \"%1\" : \"%2\", \"%3\" : \"%4\" }").arg(BAE::SLANG[BAE::W::CODE],
-            QString::number(code),
-            BAE::SLANG[BAE::W::MSG],
-            msg);
-
-    client.sendTextMessage(JSON);
-    qDebug()<<"msg sent as json to server";
+    bDebug::Instance()->msg("Sending msg to server: "+QString::number(code)+" :: "+ msg);
+    client.sendTextMessage(stringify(packResponse(static_cast<LINK::CODE>(code), msg)));
 }
 
 QVariantMap Linking::decode(const QString &json)
 {
-    qDebug()<<"trying to decode msg";
+    bDebug::Instance()->msg("Decoding client msg");
     QJsonParseError jsonParseError;
     auto jsonResponse = QJsonDocument::fromJson(json.toUtf8(), &jsonParseError);
 
     if (jsonParseError.error != QJsonParseError::NoError) return QVariantMap ();
     if (!jsonResponse.isObject()) return QVariantMap ();
-
-    qDebug()<<"trying to decode msg2";
 
     QJsonObject mainJsonObject(jsonResponse.object());
     auto data = mainJsonObject.toVariantMap();
@@ -138,10 +139,13 @@ void Linking::sendToClient(QVariantMap map)
 {
     auto json = stringify(map);
 
+    qDebug()<<"Seing message to client:" <<json;
+    qDebug()<<map;
     server->sendMessageTo(0, json);
 }
 
 void Linking::handleError(QAbstractSocket::SocketError error)
 {
+    qDebug()<<error;
     emit this->clientConError("An error happened connecting to server");
 }

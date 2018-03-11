@@ -1751,5 +1751,6 @@ var Babe = {
     "playlist-generator": Icon.refresh,
     "amarok_playlist_refresh" : Icon.refresh,
     "checkbox" : Icon.check,
-    "videoclip-amarok" : Icon.video
+    "videoclip-amarok" : Icon.video,
+    "view-refresh": Icon.refresh
 }

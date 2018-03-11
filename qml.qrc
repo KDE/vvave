@@ -80,5 +80,7 @@
         <file>services/web/WebView.qml</file>
         <file>services/web/WebView_A.qml</file>
         <file>services/local/LinkingDialog.qml</file>
+        <file>services/local/LinkingView.qml</file>
+        <file>services/local/LinkingListModel.qml</file>
     </qresource>
 </RCC>

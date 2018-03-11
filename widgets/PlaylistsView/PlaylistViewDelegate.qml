@@ -13,7 +13,6 @@ ItemDelegate
     clip: true
 
     property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
-    signal playSync(int index)
 
     Rectangle
     {

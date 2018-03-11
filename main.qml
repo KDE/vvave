@@ -3,8 +3,11 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.1
+import "services/local"
 
 import org.kde.kirigami 2.2 as Kirigami
+import Link.Codes 1.0
+
 //import QtQuick.Controls.Imagine 2.3
 
 import "utils"
@@ -107,7 +110,8 @@ Kirigami.ApplicationWindow
                                             "playlists" : 3,
                                             "babeit": 4,
                                             "search" : 5,
-                                            "youtube" : 6
+                                            "youtube" : 6,
+                                            "linking" :7
                                         })
 
     property bool mainlistEmpty : !mainPlaylist.table.count > 0
@@ -767,6 +771,11 @@ Kirigami.ApplicationWindow
                     id: youtubeView
                 }
 
+                LinkingView
+                {
+                    id: linkingView
+                }
+
 
 
             }
@@ -876,40 +885,4 @@ Kirigami.ApplicationWindow
         onBabeIt: Player.babeTrack()
     }
 
-    Connections
-    {
-        target: link
-        onServerConReady:
-        {
-            isServing = true
-            H.notify(deviceName, "You're now linked!")
-        }
-
-        onClientConError:
-        {
-            isLinked = false
-            H.notify("Linking error", "error connecting to server")
-        }
-
-        onDevicesLinked:
-        {
-            isLinked = true
-            H.notify("Linked!", "The link is ready")
-            H.addPlaylist({ playlist: "Linked", playlistIcon: "link"})
-
-        }
-
-        onClientConDisconnected:
-        {
-            isLinked = false;
-            H.notify("Unlinked!", "The client is disconnected")
-
-        }
-
-        onServerConDisconnected:
-        {
-            isServing = false;
-            H.notify("Unlinked!", "The server is disconnected")
-        }
-    }
 }

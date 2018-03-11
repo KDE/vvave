@@ -7,7 +7,6 @@ import "../../utils/Help.js" as H
 BabeDialog
 {
     id: linkingDialogRoot
-    title: "Add "+ tracks.length +" tracks to..."
     standardButtons: Dialog.Save | Dialog.Cancel
 
     margins: contentMargins

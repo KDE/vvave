@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
 
 import "../../utils"
-
+import "../../widgets/PlaylistsView"
 import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
@@ -12,37 +12,32 @@ import Link.Codes 1.0
 
 BabeList
 {
-    id: playlistListRoot
+    id: linkingListRoot
 
     headerBarExit: false
-    headerBarTitle: "Playlists"
-
-    AddPlaylistDialog
-    {
-        id:newPlaylistDialog
-    }
-
-    signal playSync(int index)   
+    headerBarTitle: isLinked ?link.getIp() : qsTr("Disconnected")
 
     headerBarLeft: BabeButton
     {
-        id : createPlaylistBtn
         anim : true
-        iconName : "list-add"
-        onClicked : newPlaylistDialog.open()
+        iconName : "view-refresh"
+        onClicked : refreshPlaylists()
     }
 
     headerBarRight: BabeButton
     {
-        iconName: "list-remove"
-        onClicked: removePlaylist()
+        id: menuBtn
+        iconName: "application-menu"
+        onClicked: linkingConf.open()
     }
 
     ListModel
     {
-        id: playlistListModel
+        id: linkingListModel
 
-        ListElement { playlist: qsTr("Most Played"); playlistIcon: "view-media-playcount"; /*query: Q.Query.mostPlayedTracks*/ }
+        ListElement { playlist: qsTr("Albums"); playlistIcon: "view-media-album-cover"}
+        ListElement { playlist: qsTr("Artists"); playlistIcon: "view-media-artist"}
+        ListElement { playlist: qsTr("Most Played"); playlistIcon: "view-media-playcount" /*query: Q.Query.mostPlayedTracks*/ }
         ListElement { playlist: qsTr("Favorites"); playlistIcon: "view-media-favorite"}
         ListElement { playlist: qsTr("Recent"); playlistIcon: "view-media-recent"}
         ListElement { playlist: qsTr("Babes"); playlistIcon: "love"}
@@ -53,12 +48,12 @@ BabeList
         ListElement { playlist: qsTr("Genres"); playlistIcon: "view-media-genre"}
     }
 
-    model: playlistListModel
+    model: linkingListModel
 
     delegate : PlaylistViewDelegate
     {
         id: delegate
-        width: playlistListRoot.width
+        width: linkingListRoot.width
 
         Connections
         {
@@ -67,11 +62,19 @@ BabeList
             onClicked :
             {
                 currentIndex = index
-                var playlist = playlistListModel.get(index).playlist
-                filterList.section.property = ""
+                var playlist = linkingListModel.get(index).playlist
 
                 switch(playlist)
                 {
+                case "Artists":
+                    populateExtra(LINK.FILTER, "select artist as tag from artists", playlist)
+                    break
+
+                case "Albums":
+                    populateExtra(LINK.FILTER, "select album as tag, artist from albums", playlist)
+
+                    break
+
                 case "Most Played":
 
                     playlistViewRoot.populate(Q.GET.mostPlayedTracks);
@@ -99,7 +102,7 @@ BabeList
                     break;
 
                 case "Tags":
-                    populateExtra(Q.GET.tags, "Tags")
+                    populateExtra(LINK.FILTER, Q.GET.tags, playlist)
                     break;
 
                 case "Relationships":
@@ -114,7 +117,7 @@ BabeList
 
                 case "Genres":
 
-                    populateExtra(Q.GET.genres, "Genres")
+                    populateExtra(LINK.FILTER, Q.GET.genres, playlist)
                     break;
 
                 default:
