@@ -72,7 +72,13 @@ function refreshArtists()
 function notify(title, body)
 {
     if(isMobile)
-        babeNotify(title+"\n"+body)
+        babeNotify.notify(title+"\n"+body)
     else
         bae.notify(title, body)
+}
+
+
+function addPlaylist(playlist)
+{
+    playlistsView.playlistViewModel.model.insert(0, playlist)
 }

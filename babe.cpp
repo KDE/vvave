@@ -68,6 +68,7 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
 
     });
 
+    connect(&link, &Linking::parseAsk, this, &Babe::linkDecoder);
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     this->nof = new Notify(this);
@@ -226,6 +227,36 @@ void Babe::fetchTrackLyrics(DB &song)
     });
 
     pulpo.feed(song, PULPO::RECURSIVE::OFF);
+}
+
+void Babe::linkDecoder(QString json)
+{
+
+    qDebug()<<"DECODING LINKER MSG"<<json;
+    auto ask = link.decode(json);
+    auto code = ask[BAE::SLANG[BAE::W::CODE]].toInt();
+    auto msg = ask[BAE::SLANG[BAE::W::MSG]].toString();
+
+    switch(code)
+    {
+        case LINK::CODE::CONNECTED:
+        {
+            this->link.deviceName = msg;
+            emit this->link.serverConReady(msg);
+            break;
+        }
+          case LINK::CODE::PLAYLISTS:
+        {
+            auto playlists = this->getPlaylists();
+            QVariantMap map;
+            map.insert(LINK::DECODE[LINK::CODE::PLAYLISTS], playlists);
+            link.sendToClient(map);
+            break;
+        }
+
+
+        default: break;
+    }
 }
 
 QString Babe::albumWiki(const QString &album, const QString &artist)

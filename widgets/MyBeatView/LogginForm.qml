@@ -22,7 +22,7 @@ BabePopup
         clip: true
 
         contentWidth: parent.width
-        contentHeight: loginLayout.implicitHeight
+        contentHeight: loginLayout.implicitHeight+contentMargins
 
         ColumnLayout
         {

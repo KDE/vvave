@@ -7,6 +7,8 @@ import "../../utils"
 
 import "../../view_models"
 import "../../db/Queries.js" as Q
+import "../../utils/Help.js" as H
+import Link.Codes 1.0
 
 BabeList
 {
@@ -115,13 +117,16 @@ BabeList
                     populateExtra(Q.GET.genres, "Genres")
                     break;
 
+                case "Linked":
+                    link.ask(5, "")
+                    break;
+
                 default:
 
                     playlistViewRoot.populate(Q.GET.playlistTracks_.arg(playlist));
                     break;
 
-                }              
-
+                }
             }
 
             onPlaySync: playlistListRoot.playSync(index)

@@ -142,6 +142,7 @@ class Babe : public CollectionDB
         static QVariantList transformData(const DB_LIST &dbList);
 
         void fetchTrackLyrics(DB &song);
+        void linkDecoder(QString json);
 
     signals:
         void refreshTables(int size);

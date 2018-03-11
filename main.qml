@@ -127,6 +127,9 @@ Kirigami.ApplicationWindow
     property string infoMsg : ""
     property bool infoLabels : bae.loadSetting("PLAYBACKINFO", "BABE", false) == "true" ? true : false
 
+    property bool isLinked : false
+    property bool isServing : false
+
     /*SIGNALS*/
     signal missingAlert(var track)
 
@@ -876,7 +879,37 @@ Kirigami.ApplicationWindow
     Connections
     {
         target: link
-        onServerConReady: H.notify(deviceName, "You're now linked!")
-        onClientConError: H.notify("Error connecting to server")
+        onServerConReady:
+        {
+            isServing = true
+            H.notify(deviceName, "You're now linked!")
+        }
+
+        onClientConError:
+        {
+            isLinked = false
+            H.notify("Linking error", "error connecting to server")
+        }
+
+        onDevicesLinked:
+        {
+            isLinked = true
+            H.notify("Linked!", "The link is ready")
+            H.addPlaylist({ playlist: "Linked", playlistIcon: "link"})
+
+        }
+
+        onClientConDisconnected:
+        {
+            isLinked = false;
+            H.notify("Unlinked!", "The client is disconnected")
+
+        }
+
+        onServerConDisconnected:
+        {
+            isServing = false;
+            H.notify("Unlinked!", "The server is disconnected")
+        }
     }
 }
