@@ -69,6 +69,11 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
     });
 
     connect(&link, &Linking::parseAsk, this, &Babe::linkDecoder);
+    connect(&link, &Linking::arrayReady, [this](QByteArray array)
+    {
+        qDebug()<<"trying to play the array";
+        this->player.playBuffer(array);
+    });
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     this->nof = new Notify(this);
@@ -243,10 +248,22 @@ void Babe::linkDecoder(QString json)
         this->link.deviceName = msg;
         emit this->link.serverConReady(msg);
     }
-    else
+    else if(code == LINK::CODE::QUERY || code == LINK::CODE::FILTER)
     {
         auto res = this->getDBDataQML(msg);
         link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
+    }
+    else if(code == LINK::CODE::SEARCHFOR)
+    {
+        auto res = this->searchFor(msg.split(","));
+        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
+    }else if(code == LINK::CODE::PLAY)
+    {
+        QFile file(msg);    // sound dir
+        file.open(QIODevice::ReadOnly);
+        QByteArray arr = file.readAll();
+        qDebug()<<"Preparing track array"<<msg<<arr.size();
+        link.sendArrayToClient(arr);
     }
 }
 

@@ -5,6 +5,7 @@
 Player::Player(QObject *parent) : QObject(parent)
 {
     this->player = new QMediaPlayer(this);
+    this->buffer = new QBuffer(this->player);
 
     connect(player, &QMediaPlayer::durationChanged, this, [&](qint64 dur)
     {
@@ -35,9 +36,7 @@ bool Player::play()
     if(!updater->isActive())
         this->updater->start(150);
 
-    if(this->player->isAvailable())
         this->player->play();
-    else return false;
 
     return true;
 }
@@ -59,7 +58,7 @@ void Player::stop()
 
     emit this->isPlaying(false);
 
-        this->updater->stop();
+    this->updater->stop();
 }
 
 void Player::seek(const int &pos)
@@ -83,6 +82,15 @@ QString Player::transformTime(const int &pos)
 {
     auto time =  BAE::transformTime(pos);
     return time;
+}
+
+void Player::playBuffer(QByteArray &array)
+{
+    buffer->setData(array);
+    buffer->open(QIODevice::ReadOnly);
+    player->setMedia(QMediaContent(),buffer);
+    this->sourceurl = "buffer";
+    this->play();
 }
 
 void Player::update()

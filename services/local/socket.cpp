@@ -34,6 +34,16 @@ void Socket::sendMessageTo(const int &client, const QString &message)
     s_client->sendTextMessage(message);
 }
 
+void Socket::sendArray(const int &client, const QByteArray &array)
+{
+    if(this->m_clients.isEmpty() && this->m_clients.size()>=client)
+        return;
+
+    auto s_client = this->m_clients.at(client);
+    s_client->sendBinaryMessage(array);
+    qDebug()<<"Array sent to client";
+}
+
 void Socket::onNewConnection()
 {
     QWebSocket *pSocket = m_pWebSocketServer->nextPendingConnection();

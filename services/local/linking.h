@@ -19,7 +19,9 @@ namespace LINK
         DISCONNECTED = 3,
         SEARCHFOR = 4,
         PLAYLISTS = 5,
-        FILTER = 6
+        FILTER = 6,
+        QUERY = 7,
+        PLAY = 8,
         };
     Q_ENUM_NS(CODE);
 
@@ -31,6 +33,8 @@ namespace LINK
         {CODE::SEARCHFOR, "SEARCHFOR"},
         {CODE::PLAYLISTS, "PLAYLISTS"},
         {CODE::FILTER, "FILTER"},
+        {CODE::QUERY, "QUERY"},
+        {CODE::PLAY, "PLAY"}
     };
 }
 
@@ -43,8 +47,10 @@ class Linking : public QObject
         Socket *server;
         QWebSocket client;
         QString IP;
-
         QString stringify(const QVariantMap &map);
+        QByteArray trackArray;
+        int arraySize =0;
+
 
     public:
         explicit Linking(QObject *parent = nullptr);
@@ -58,11 +64,13 @@ class Linking : public QObject
         Q_INVOKABLE QString getPort();
         Q_INVOKABLE QString getDeviceName();
         Q_INVOKABLE void ask(int code, QString msg);
+        Q_INVOKABLE void collectTrack(QString url);
         QVariantMap decode(const QString &json);
         void onConnected();
         QStringList checkAddresses();
         Q_INVOKABLE void connectTo(QString ip, QString port);
         Q_INVOKABLE void sendToClient(QVariantMap map);
+        void sendArrayToClient(const QByteArray &array);
 
     signals:
         void devicesLinked();
@@ -74,6 +82,7 @@ class Linking : public QObject
         void parseAsk(QString json);
 
         void responseReady(QVariantMap res);
+        void arrayReady(QByteArray array);
     public slots:
         void handleError(QAbstractSocket::SocketError error);
 

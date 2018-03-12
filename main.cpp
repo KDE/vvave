@@ -53,7 +53,6 @@ int main(int argc, char *argv[])
     }
 
     Babe bae;
-    Player player;
     /* Services */
     YouTube youtube;
 
@@ -68,7 +67,7 @@ int main(int argc, char *argv[])
     });
 
     auto context = engine.rootContext();
-    context->setContextProperty("player", &player);
+    context->setContextProperty("player", &bae.player);
     context->setContextProperty("bae", &bae);
     context->setContextProperty("youtube", &youtube);
     context->setContextProperty("link", &bae.link);

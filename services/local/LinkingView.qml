@@ -14,7 +14,6 @@ ColumnLayout
 {
     id: linkingViewRoot
     property alias linkingConf : linkingConf
-
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
     signal playAll(var tracks)
@@ -128,6 +127,7 @@ ColumnLayout
                     onRowClicked: {}
                     onQuickPlayTrack:
                     {
+                        link.collectTrack(filterList.model.get(index).url)
                     }
                     onPlayAll: {}
                     onPulled: {}
@@ -273,6 +273,7 @@ ColumnLayout
         case LINK.FILTER:
             appendToExtraList(res.MSG)
             break
+        case LINK.QUERY:
         case LINK.SEARCHFOR:
             populate(res.MSG)
             break
@@ -290,19 +291,19 @@ ColumnLayout
         case "Albums":
             var artist = linkingFilter.model.get(index).artist
             var query = Q.GET.albumTracks_.arg(tag)
-            link.ask(LINK.SEARCHFOR, query.arg(artist))
+            link.ask(LINK.QUERY, query.arg(artist))
             break
         case "Artists":
             query = Q.GET.artistTracks_.arg(tag)
-            link.ask(LINK.SEARCHFOR, query.arg(tag))
+            link.ask(LINK.QUERY, query.arg(tag))
             break
         case "Genres":
             query = Q.GET.genreTracks_.arg(tag)
-            link.ask(LINK.SEARCHFOR, query.arg(tag))
+            link.ask(LINK.QUERY, query.arg(tag))
             break
         case "Tags":
             query = Q.GET.tagTracks_.arg(tag)
-            link.ask(LINK.SEARCHFOR, query.arg(tag))
+            link.ask(LINK.QUERY, query.arg(tag))
             break
         default: break
         }

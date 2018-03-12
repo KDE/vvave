@@ -36,6 +36,30 @@ Linking::Linking(QObject *parent) : QObject(parent)
         qDebug()<<"client recived message"<<msg;
         emit this->responseReady(decoded);
     });
+
+    //    connect(&client, &QWebSocket::binaryMessageReceived, [this] (QByteArray array)
+    //    {
+    //        qDebug()<<"array recived"<<array;
+
+    //    });
+
+    trackArray.reserve(8*1024*1024);
+
+    connect(&client, &QWebSocket::binaryFrameReceived, [this] (const QByteArray &frame, bool isLastFrame)
+    {
+        qDebug()<<"binary frame recived"<<frame;
+        qDebug()<<"BYTEARRAY SO FAR:"<<arraySize<<trackArray;
+
+        arraySize += frame.size();
+        trackArray.append(frame);
+
+        if(isLastFrame)
+        {
+            arraySize=0;
+            trackArray = QByteArray();
+            emit this->arrayReady(trackArray);
+        }
+    });
 }
 
 QVariantMap Linking::packResponse(const LINK::CODE &code, const QVariant &content)
@@ -85,6 +109,12 @@ void Linking::ask(int code, QString msg)
 {
     bDebug::Instance()->msg("Sending msg to server: "+QString::number(code)+" :: "+ msg);
     client.sendTextMessage(stringify(packResponse(static_cast<LINK::CODE>(code), msg)));
+}
+
+void Linking::collectTrack(QString url)
+{
+    qDebug()<<"Trying to collec track"<<url;
+    this->ask(LINK::CODE::PLAY, url);
 }
 
 QVariantMap Linking::decode(const QString &json)
@@ -142,6 +172,12 @@ void Linking::sendToClient(QVariantMap map)
     qDebug()<<"Seing message to client:" <<json;
     qDebug()<<map;
     server->sendMessageTo(0, json);
+}
+
+void Linking::sendArrayToClient(const QByteArray &array)
+{
+    qDebug()<<"Sending array to client";
+    this->server->sendArray(0, array);
 }
 
 void Linking::handleError(QAbstractSocket::SocketError error)

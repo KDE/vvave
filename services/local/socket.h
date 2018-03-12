@@ -16,6 +16,7 @@ public:
     explicit Socket(quint16 port, QObject *parent = Q_NULLPTR);
     ~Socket();
     void sendMessageTo(const int &client, const QString &message);
+    void sendArray(const int &client, const QByteArray &array);
 
 Q_SIGNALS:
     void closed();
