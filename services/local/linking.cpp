@@ -47,16 +47,10 @@ Linking::Linking(QObject *parent) : QObject(parent)
 
     connect(&client, &QWebSocket::binaryFrameReceived, [this] (const QByteArray &frame, bool isLastFrame)
     {
-        qDebug()<<"binary frame recived"<<frame;
-        qDebug()<<"BYTEARRAY SO FAR:"<<arraySize<<trackArray;
-
-        arraySize += frame.size();
-        trackArray.append(frame);
+        emit this->bytesFrame(frame);
 
         if(isLastFrame)
         {
-            arraySize=0;
-            trackArray = QByteArray();
             emit this->arrayReady(trackArray);
         }
     });
@@ -114,7 +108,7 @@ void Linking::ask(int code, QString msg)
 void Linking::collectTrack(QString url)
 {
     qDebug()<<"Trying to collec track"<<url;
-    this->ask(LINK::CODE::PLAY, url);
+    this->ask(LINK::CODE::COLLECT, url);
 }
 
 QVariantMap Linking::decode(const QString &json)

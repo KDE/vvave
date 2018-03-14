@@ -97,6 +97,7 @@ ColumnLayout
                 coverArtVisible: false
                 trackRating: true
                 trackDuration: false
+                allowMenu: false
                 headerBarVisible: true
                 headerBarExitIcon: "arrow-left"
                 headerBarExit: !linkingPage.wideMode
@@ -127,7 +128,11 @@ ColumnLayout
                     onRowClicked: {}
                     onQuickPlayTrack:
                     {
-                        link.collectTrack(filterList.model.get(index).url)
+
+//                        link.collectTrack(filterList.model.get(index).url)
+//                        player.playRemote("ftp://"+link.getIp()+filterList.model.get(index).url)
+
+
                     }
                     onPlayAll: {}
                     onPulled: {}
@@ -237,7 +242,7 @@ ColumnLayout
             linkingModel.model.remove(i)
 
         if(isLinked)
-            link.ask(LINK.PLAYLISTS,Q.GET.playlists)
+            link.ask(LINK.PLAYLISTS, Q.GET.playlists)
     }
 
     function appendPlaylists(res)

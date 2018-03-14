@@ -22,6 +22,7 @@ namespace LINK
         FILTER = 6,
         QUERY = 7,
         PLAY = 8,
+        COLLECT = 9
         };
     Q_ENUM_NS(CODE);
 
@@ -34,7 +35,8 @@ namespace LINK
         {CODE::PLAYLISTS, "PLAYLISTS"},
         {CODE::FILTER, "FILTER"},
         {CODE::QUERY, "QUERY"},
-        {CODE::PLAY, "PLAY"}
+        {CODE::PLAY, "PLAY"},
+        {CODE::COLLECT, "COLLECT"}
     };
 }
 
@@ -44,7 +46,6 @@ class Linking : public QObject
         Q_OBJECT
 
     private:
-        Socket *server;
         QWebSocket client;
         QString IP;
         QString stringify(const QVariantMap &map);
@@ -53,6 +54,8 @@ class Linking : public QObject
 
 
     public:
+        Socket *server;
+
         explicit Linking(QObject *parent = nullptr);
         QString deviceName;
 
@@ -83,6 +86,8 @@ class Linking : public QObject
 
         void responseReady(QVariantMap res);
         void arrayReady(QByteArray array);
+        void bytesFrame(QByteArray array);
+
     public slots:
         void handleError(QAbstractSocket::SocketError error);
 

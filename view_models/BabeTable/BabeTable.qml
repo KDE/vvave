@@ -20,10 +20,11 @@ BabeList
     property bool menuItemVisible : isMobile
     property bool trackDuration
     property bool trackRating
+    property bool allowMenu: true
+    property bool isArtworkRemote : false
 
     property alias headerMenu: headerMenu
     property alias contextMenu : contextMenu
-    property bool isArtworkRemote : false
 
     property alias playAllBtn : playAllBtn
     property alias appendBtn : appendBtn
@@ -107,8 +108,8 @@ BabeList
         {
             target: delegate
 
-            onPressAndHold: if(root.isMobile) openItemMenu(index)
-            onRightClicked: openItemMenu(index)
+            onPressAndHold: if(isMobile && allowMenu) openItemMenu(index)
+            onRightClicked: if(allowMenu) openItemMenu(index)
 
             onClicked:
             {

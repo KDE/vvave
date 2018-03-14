@@ -30,6 +30,9 @@
 #include <QtAndroid>
 #include <QException>
 
+#include <QAudioOutput>
+#include <QAudioInput>
+
 class InterfaceConnFailedException : public QException
 {
     public:
@@ -69,10 +72,15 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
     });
 
     connect(&link, &Linking::parseAsk, this, &Babe::linkDecoder);
+    connect(&link, &Linking::bytesFrame, [this](QByteArray array)
+    {
+        this->player.appendBuffe(array);
+
+    });
     connect(&link, &Linking::arrayReady, [this](QByteArray array)
     {
         qDebug()<<"trying to play the array";
-        this->player.playBuffer(array);
+        this->player.playBuffer();
     });
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
@@ -243,27 +251,49 @@ void Babe::linkDecoder(QString json)
     auto code = ask[BAE::SLANG[BAE::W::CODE]].toInt();
     auto msg = ask[BAE::SLANG[BAE::W::MSG]].toString();
 
-    if(code == LINK::CODE::CONNECTED)
+    switch(static_cast<LINK::CODE>(code))
     {
-        this->link.deviceName = msg;
-        emit this->link.serverConReady(msg);
-    }
-    else if(code == LINK::CODE::QUERY || code == LINK::CODE::FILTER)
-    {
-        auto res = this->getDBDataQML(msg);
-        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
-    }
-    else if(code == LINK::CODE::SEARCHFOR)
-    {
-        auto res = this->searchFor(msg.split(","));
-        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
-    }else if(code == LINK::CODE::PLAY)
-    {
-        QFile file(msg);    // sound dir
-        file.open(QIODevice::ReadOnly);
-        QByteArray arr = file.readAll();
-        qDebug()<<"Preparing track array"<<msg<<arr.size();
-        link.sendArrayToClient(arr);
+        case LINK::CODE::CONNECTED :
+        {
+            this->link.deviceName = msg;
+            emit this->link.serverConReady(msg);
+            break;
+        }
+        case LINK::CODE::QUERY :
+        case LINK::CODE::FILTER :
+        case LINK::CODE::PLAYLISTS :
+        {
+            auto res = this->getDBDataQML(msg);
+            link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
+            break;
+        }
+        case LINK::CODE::SEARCHFOR :
+        {
+            auto res = this->searchFor(msg.split(","));
+            link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
+            break;
+        }
+        case LINK::CODE::PLAY :
+        {
+            QFile file(msg);    // sound dir
+            file.open(QIODevice::ReadOnly);
+            QByteArray arr = file.readAll();
+            qDebug()<<"Preparing track array"<<msg<<arr.size();
+            link.sendArrayToClient(arr);
+            break;
+        }
+        case LINK::CODE::COLLECT :
+        {
+            auto devices = getDevices();
+            qDebug()<<"DEVICES:"<< devices;
+            if(!devices.isEmpty())
+                sendToDevice(devices.first().toMap().value("name").toString(),
+                             devices.first().toMap().value("id").toString(), msg);
+            break;
+
+        }
+        default: break;
+
     }
 }
 

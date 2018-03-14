@@ -83,11 +83,29 @@ QString Player::transformTime(const int &pos)
     auto time =  BAE::transformTime(pos);
     return time;
 }
+void Player::appendBuffe(QByteArray &array)
+{
+    qDebug()<<"APENDING TO BUFFER"<< array << this->array;
+    this->array.append(array, array.length());
+    amountBuffers++;
 
-void Player::playBuffer(QByteArray &array)
+    if(amountBuffers == 1)
+        playBuffer();
+}
+
+void Player::playRemote(const QString &url)
+{
+    qDebug()<<"Trying to play remote"<<url;
+    this->sourceurl = url;
+    this->player->setMedia(QUrl::fromUserInput(url));
+    this->play();
+}
+
+void Player::playBuffer()
 {
     buffer->setData(array);
     buffer->open(QIODevice::ReadOnly);
+    if(!buffer->isReadable()) qDebug()<<"Cannot read buffer";
     player->setMedia(QMediaContent(),buffer);
     this->sourceurl = "buffer";
     this->play();

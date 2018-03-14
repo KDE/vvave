@@ -247,6 +247,7 @@ Page
                     trackRating: true
                     onExit: clearSearch()
                     isArtworkRemote: true
+                    allowMenu: false
 
                     appendBtn.visible: false
                     playAllBtn.visible: false

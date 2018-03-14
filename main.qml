@@ -5,11 +5,6 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.1
 import "services/local"
 
-import org.kde.kirigami 2.2 as Kirigami
-import Link.Codes 1.0
-
-//import QtQuick.Controls.Imagine 2.3
-
 import "utils"
 
 import "widgets"
@@ -26,6 +21,10 @@ import "services/web"
 import "db/Queries.js" as Q
 import "utils/Player.js" as Player
 import "utils/Help.js" as H
+
+
+import org.kde.kirigami 2.2 as Kirigami
+import Link.Codes 1.0
 
 Kirigami.ApplicationWindow
 {

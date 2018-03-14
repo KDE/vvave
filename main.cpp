@@ -84,8 +84,8 @@ int main(int argc, char *argv[])
     KirigamiPlugin::getInstance().registerTypes();
     QtWebView::initialize();
 #else
-    if(QQuickStyle::availableStyles().contains("nomad"))
-        QQuickStyle::setStyle("nomad");
+//    if(QQuickStyle::availableStyles().contains("nomad"))
+//        QQuickStyle::setStyle("nomad");
     QtWebEngine::initialize();
 #endif
 
