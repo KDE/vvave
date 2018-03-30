@@ -86,6 +86,7 @@ int main(int argc, char *argv[])
 #else
 //    if(QQuickStyle::availableStyles().contains("nomad"))
 //        QQuickStyle::setStyle("nomad");
+
     QtWebEngine::initialize();
 #endif
 

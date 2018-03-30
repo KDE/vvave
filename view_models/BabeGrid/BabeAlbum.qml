@@ -56,11 +56,14 @@ ColumnLayout
         Image
         {
             id: img
-            width: babeAlbumRoot.width
-            height: babeAlbumRoot.width
+            width: albumSize
+            height: albumSize
+
+            sourceSize.width: albumSize
+            sourceSize.height: albumSize
 
             fillMode: Image.PreserveAspectFit
-            cache: false
+            cache: true
             antialiasing: true
 
             source:

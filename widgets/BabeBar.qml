@@ -8,6 +8,8 @@ import "../view_models"
 
 ToolBar
 {
+    position: ToolBar.Header
+
     property alias babeBar : babeBar
     property string accentColor : babeColor
     property string textColor : foregroundColor
@@ -27,14 +29,12 @@ ToolBar
     width: parent.width
     id: babeBar
 
-
-    smooth: true
-    Rectangle
-    {
-        anchors.fill: isMobile ? parent : undefined
-        color: bgColor
-        visible: !isMobile
-    }
+//    Rectangle
+//    {
+//        anchors.fill: isMobile ? parent : undefined
+//        color: bgColor
+//        visible: !isMobile
+//    }
 
     RowLayout
     {
@@ -226,7 +226,6 @@ ToolBar
                 ToolTip.text: qsTr("Search")
             }
         }
-
     }
 }
 
