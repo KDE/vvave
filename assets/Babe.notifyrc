@@ -1,18 +1,34 @@
 [Global]
 IconName=preferences-system-bluetooth
 Comment=Tiny Music Player
+Comment[ca]=Reproductor de música petit
+Comment[en_GB]=Tiny Music Player
+Comment[nl]=Kleine muziekspeler
+Comment[sv]=Mycket liten musikspelare
 Comment[uk]=Маленький музичний програвач
 Comment[x-test]=xxTiny Music Playerxx
 Name=Babe
+Name[ca]=Babe
+Name[en_GB]=Babe
+Name[nl]=Babe
+Name[sv]=Babe
 Name[uk]=Babe
 Name[x-test]=xxBabexx
 
 [Event/Notify]
 Name=Babe...
+Name[ca]=Babe...
+Name[en_GB]=Babe...
+Name[nl]=Babe...
+Name[sv]=Babe...
 Name[uk]=Babe…
 Name[x-test]=xxBabe...xx
 Comment=Connection to device failed
+Comment[ca]=Ha fallat la connexió amb el dispositiu
+Comment[en_GB]=Connection to device failed
+Comment[nl]=Verbinding met het apparaat is mislukt
 Comment[pt]=A ligação ao dispositivo foi mal-sucedida
+Comment[sv]=Anslutning till enhet misslyckades
 Comment[uk]=Не вдалося встановити з’єднання із пристроєм
 Comment[x-test]=xxConnection to device failedxx
 Icon=babe-qt
