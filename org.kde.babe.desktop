@@ -27,6 +27,7 @@ MimeType=application/ogg;application/x-ogg;application/sdp;application/smil;appl
 GenericName=Audio Player
 GenericName[ca]=Reproductor d'àudio
 GenericName[en_GB]=Audio Player
+GenericName[es]=Reproductor de sonido
 GenericName[nl]=Audiospeler
 GenericName[pt]=Leitor de Áudio
 GenericName[sk]=Audio prehrávač

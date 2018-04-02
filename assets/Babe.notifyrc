@@ -29,6 +29,7 @@ Name[x-test]=xxBabe...xx
 Comment=Connection to device failed
 Comment[ca]=Ha fallat la connexió amb el dispositiu
 Comment[en_GB]=Connection to device failed
+Comment[es]=La conexión con el dispositivo ha fallado
 Comment[nl]=Verbinding met het apparaat is mislukt
 Comment[pt]=A ligação ao dispositivo foi mal-sucedida
 Comment[sk]=Pripojenie k zariadeniu zlyhalo
