@@ -1,16 +1,20 @@
 [Desktop Entry]
 Name=Babe
 Name[ca]=Babe
+Name[ca@valencia]=Babe
 Name[en_GB]=Babe
 Name[nl]=Babe
+Name[pt]=Babe
 Name[sk]=Babe
 Name[sv]=Babe
 Name[uk]=Babe
 Name[x-test]=xxBabexx
 Comment=Play your music collection
 Comment[ca]=Reprodueix la vostra col·lecció de música
+Comment[ca@valencia]=Reprodueix la vostra col·lecció de música
 Comment[en_GB]=Play your music collection
 Comment[nl]=Uw muziekcollectie afspelen
+Comment[pt]=Tocar a sua colecção de música
 Comment[sk]=Prehrať vašu hudobnú kolekciu
 Comment[sv]=Spela din musiksamling
 Comment[uk]=Відтворення вашої музичної збірки
@@ -26,6 +30,7 @@ MimeType=application/ogg;application/x-ogg;application/sdp;application/smil;appl
 # Generic name with translations
 GenericName=Audio Player
 GenericName[ca]=Reproductor d'àudio
+GenericName[ca@valencia]=Reproductor d'àudio
 GenericName[en_GB]=Audio Player
 GenericName[es]=Reproductor de sonido
 GenericName[nl]=Audiospeler
