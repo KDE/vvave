@@ -43,5 +43,6 @@ Comment[sk]=Pripojenie k zariadeniu zlyhalo
 Comment[sv]=Anslutning till enhet misslyckades
 Comment[uk]=Не вдалося встановити з’єднання із пристроєм
 Comment[x-test]=xxConnection to device failedxx
+Comment[zh_CN]=连接设备失败
 Icon=babe-qt
 Action=Popup
