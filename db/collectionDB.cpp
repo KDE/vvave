@@ -833,7 +833,7 @@ QStringList CollectionDB::getPlaylists()
 bool CollectionDB::removeTrack(const QString &path)
 {
     auto queryTxt = QString("DELETE FROM %1 WHERE %2 =  \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
-            KEYMAP[KEY::URL],path);
+            KEYMAP[KEY::URL], path);
     auto query = this->getQuery(queryTxt);
     if(query.exec())
     {
