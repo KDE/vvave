@@ -110,6 +110,10 @@ ItemDelegate
                 {
                     id: artworkCover
                     anchors.fill: parent
+
+                    sourceSize.width: parent.height
+                    sourceSize.height: parent.height
+
                     source: typeof artwork === 'undefined' ?
                                 "qrc:/assets/cover.png" :
                                 remoteArtwork ? artwork :
@@ -117,7 +121,7 @@ ItemDelegate
 
 
                     fillMode:  Image.PreserveAspectFit
-                    cache: false
+                    cache: true
                     antialiasing: false
                     smooth: true
                 }

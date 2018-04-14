@@ -281,12 +281,12 @@ Kirigami.GlobalDrawer
 
             Kirigami.Action
             {
-                text: "Beats"
+                text: "VVAVEIt"
             }
 
             Kirigami.Action
             {
-                text: "Babe"
+                text: "VVAVE"
             }
 
             Kirigami.Action

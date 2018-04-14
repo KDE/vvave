@@ -16,7 +16,7 @@ DISTFILES += \
     $$PWD/src/NotificationClient.java \
     $$PWD/src/MyService.java
 
-RESOURCES += android.qrc
+RESOURCES += android.qrc/
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/
 }

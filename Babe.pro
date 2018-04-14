@@ -27,6 +27,8 @@ linux:unix:!android {
     include(android-openssl.pri)
     include(3rdparty/kirigami/kirigami.pri)
 
+    RESOURCES += kirigami-icons.qrc
+
 } else {
     message("Unknown configuration")
 }
@@ -69,7 +71,6 @@ SOURCES += main.cpp \
 
 
 RESOURCES += qml.qrc \
-    kirigami-icons.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

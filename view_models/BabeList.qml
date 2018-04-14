@@ -54,29 +54,14 @@ Page
         anchors.fill: parent
         spacing: 0
 
-        Rectangle
+        ToolBar
         {
             id: headerRoot
             width: parent.width
-            height:  visible ?  toolBarHeight : 0
+            height:  visible ?  headerRoot.implicitHeight : 0
             Layout.fillWidth: true
             visible: headerBarVisible
-            focus: true
-            color: backgroundColor
-
-            Kirigami.Separator
-            {
-                visible: !isMobile
-                width: parent.width
-                height: 1
-
-                anchors
-                {
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
-                }
-            }
+            focus: true          
 
             RowLayout
             {

@@ -153,7 +153,7 @@ Page
                     Layout.fillHeight: true
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment:  Text.AlignVCenter
-                    selectByMouse: !root.isMobile
+                    selectByMouse: !isMobile
                     selectionColor: babeHighlightColor
                     selectedTextColor: foregroundColor
                     focus: true
