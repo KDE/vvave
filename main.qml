@@ -226,10 +226,10 @@ Kirigami.ApplicationWindow {
     }
 
     /* UI */
-    header: BabeBar {
+    header: BabeBar
+    {
         id: toolbar
 
-        height: toolBarHeight
         visible: true
         currentIndex: currentView
         onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close(
