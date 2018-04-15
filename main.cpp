@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setApplicationName(BAE::App);
     app.setApplicationVersion(BAE::Version);
-    app.setWindowIcon(QIcon("qrc:/assets/babe.png"));
+    app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
     app.setDesktopFileName(BAE::App);
 
     /*needed for mobile*/
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     }
 
     QCommandLineParser parser;
-    parser.setApplicationDescription("Babe music player");
+    parser.setApplicationDescription("vvave music player");
     const QCommandLineOption versionOption = parser.addVersionOption();
     parser.process(app);
 

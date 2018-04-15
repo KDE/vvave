@@ -39,12 +39,12 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     const auto notifyDir = BAE::NotifyDir;
 
-    if(!BAE::fileExists(notifyDir+"/Babe.notifyrc"))
+    if(!BAE::fileExists(notifyDir+"/vvave.notifyrc"))
     {
         bDebug::Instance()->msg("The Knotify file does not exists, going to create it");
-        QFile knotify(":/assets/Babe.notifyrc");
+        QFile knotify(":/assets/vvave.notifyrc");
 
-        if(knotify.copy(notifyDir+"/Babe.notifyrc"))
+        if(knotify.copy(notifyDir+"/vvave.notifyrc"))
             bDebug::Instance()->msg("the knotify file got copied");
     }
 #endif    

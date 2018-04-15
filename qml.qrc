@@ -15,7 +15,6 @@
         <file>view_models/BabeHolder.qml</file>
         <file>db/Queries.js</file>
         <file>utils/Help.js</file>
-        <file>assets/Babe.notifyrc</file>
         <file>utils/BabeIcon.qml</file>
         <file>view_models/BabeScrollBar.qml</file>
         <file>assets/bars.gif</file>
@@ -36,14 +35,12 @@
         <file>widgets/PlaylistsView/AddPlaylistDialog.qml</file>
         <file>view_models/BabeButton.qml</file>
         <file>utils/Props.js</file>
-        <file>assets/babe.png</file>
         <file>assets/face-sleeping.svg</file>
         <file>assets/face-laughing.svg</file>
         <file>assets/face-hug-left.svg</file>
         <file>assets/face-crying.svg</file>
         <file>assets/face-sleeping.png</file>
         <file>assets/face-hug.png</file>
-        <file>org.kde.babe.desktop</file>
         <file>widgets/SettingsView/SettingsView.qml</file>
         <file>widgets/MyBeatView/LogginForm.qml</file>
         <file>assets/music_img.jpg</file>
@@ -67,7 +64,6 @@
         <file>view_models/BabeTable/HeaderMenu.qml</file>
         <file>view_models/BabeNotify.qml</file>
         <file>widgets/MyBeatView/BabeitView.qml</file>
-        <file>widgets/PlaybackBar.qml</file>
         <file>assets/banner-yellow.png</file>
         <file>widgets/SettingsView/BabeConsole.qml</file>
         <file>widgets/SearchView/SearchTable.qml</file>
@@ -82,5 +78,7 @@
         <file>services/local/LinkingDialog.qml</file>
         <file>services/local/LinkingView.qml</file>
         <file>services/local/LinkingListModel.qml</file>
+        <file>assets/vvave.notifyrc</file>
+        <file>assets/vvave.png</file>
     </qresource>
 </RCC>

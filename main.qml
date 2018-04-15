@@ -144,9 +144,9 @@ Kirigami.ApplicationWindow {
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE",
                                                   iconSizes.medium)
     property int toolBarHeight: isMobile ? 48 : toolBarIconSize * 2
-    property int miniArtSize: isMobile ? 36 : 30
+    property int miniArtSize: 40
 
-    property int columnWidth: Kirigami.Units.gridUnit * 19
+    property int columnWidth: Kirigami.Units.gridUnit * 17
     property int coverSize: isMobile ? Math.sqrt(
                                            root.width * root.height) * 0.4 : columnWidth * 0.6
     property int currentView: viewsIndex.tracks
@@ -308,8 +308,7 @@ Kirigami.ApplicationWindow {
 
             height: 10
             width: parent.width
-            z: 999
-            anchors.left: parent.left
+            anchors.left:  parent.left
             anchors.right: parent.right
             anchors.top: parent.top
             padding: 0
@@ -349,11 +348,10 @@ Kirigami.ApplicationWindow {
         }
 
         GridLayout {
+            id: playbackControlsLayout
             anchors.fill: parent
             height: parent.height
             width: parent.width
-
-            rowSpacing: 0
             columnSpacing: 0
             rows: 2
             columns: 2
@@ -369,13 +367,18 @@ Kirigami.ApplicationWindow {
                 Layout.rowSpan: 2
                 Layout.column: 1
 
+                anchors.verticalCenter: parent.top
+                z: progressBar.z+1
+
                 Rectangle {
                     visible: miniArtwork.visible
                     anchors.centerIn: parent
                     height: miniArtSize + 4
                     width: miniArtSize + 4
 
-                    color: darkForegroundColor
+                    color: darkDarkColor
+                    opacity: opacityLevel
+
                     z: -999
                     radius: Math.min(width, height)
                 }

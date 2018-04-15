@@ -264,18 +264,18 @@ inline QString getNameFromLocation(const QString &str)
 const QString MusicPath = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
 const QStringList MusicPaths = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
 const QString HomePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-const QString SettingPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/babe/";
-const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/babe/artwork/";
-const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/babe/";
-const QString CachePath = BAE::isMobile() ? BAE::ArtworkPath : QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/";
-const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/babe/youtube/";
+const QString SettingPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/";
+const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/artwork/";
+const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/";
+const QString CachePath = BAE::isMobile() ? BAE::ArtworkPath : QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/";
+const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/";
 const QString DownloadsPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
 const QStringList DownloadsPaths = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
 const QString NotifyDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 const QString BabePort = "8483";
 const QString LinkPort = "3333";
 
-const QString App = "Babe";
+const QString App = "vvave";
 const QString Version = BABE_VERSION_STR;
 const QString DBName = "collection.db";
 
@@ -396,7 +396,7 @@ inline void saveArt(DB &track, const QByteArray &array, const QString &path)
 
 inline void saveSettings(const QString &key, const QVariant &value, const QString &group)
 {
-    QSettings setting("Babe","babe");
+    QSettings setting("vvave","vvave");
     setting.beginGroup(group);
     setting.setValue(key,value);
     setting.endGroup();
@@ -405,7 +405,7 @@ inline void saveSettings(const QString &key, const QVariant &value, const QStrin
 inline QVariant loadSettings(const QString &key, const QString &group, const QVariant &defaultValue)
 {
     QVariant variant;
-    QSettings setting("Babe","babe");
+    QSettings setting("vvave","vvave");
     setting.beginGroup(group);
     variant = setting.value(key,defaultValue);
     setting.endGroup();
