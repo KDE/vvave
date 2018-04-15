@@ -6,6 +6,7 @@ QT       += network
 QT       += xml
 QT       += qml
 QT       += quickcontrols2
+QT       += widgets
 
 
 TARGET = vvave

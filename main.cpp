@@ -9,6 +9,7 @@
 #include <QQuickStyle>
 #include <QStyleHints>
 #include "services/local/linking.h"
+
 #ifdef Q_OS_ANDROID
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
 #include <QtWebView/QtWebView>

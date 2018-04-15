@@ -267,15 +267,22 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    footer: Item {
+    footer: ToolBar {
+
         id: playbackControls
+        position: ToolBar.Footer
         height: visible ? headerHeight : 0
         width: root.width
         visible: true
         focus: true
+        leftPadding: 0
+        rightPadding: 0
 
         FastBlur {
-            anchors.fill: parent
+
+            width: parent.width
+            height: parent.height-1
+            y:1
             source: mainPlaylist.artwork
             radius: 100
             transparentBorder: false
@@ -286,7 +293,7 @@ Kirigami.ApplicationWindow {
         Rectangle {
             id: footerBg
             anchors.fill: parent
-            color: darkDarkColor
+            color: darkBaseColor
             opacity: opacityLevel
             z: -999
 
@@ -296,8 +303,8 @@ Kirigami.ApplicationWindow {
                     target: footerBg
                     property: "color"
                     easing.type: Easing.InOutQuad
-                    from: darkBaseColor
-                    to: darkDarkColor
+                    from: "black"
+                    to: darkBaseColor
                     duration: 500
                 }
             }
@@ -376,7 +383,7 @@ Kirigami.ApplicationWindow {
                     height: miniArtSize + 4
                     width: miniArtSize + 4
 
-                    color: darkDarkColor
+                    color: darkForegroundColor
                     opacity: opacityLevel
 
                     z: -999
