@@ -12,6 +12,7 @@
 class Notify;
 #elif defined (Q_OS_ANDROID)
 class NotificationClient;
+class Android;
 #endif
 
 class CollectionDB;
@@ -124,6 +125,7 @@ class Babe : public CollectionDB
         Q_INVOKABLE static void sendText(const QString &text);
         Q_INVOKABLE static void sendTrack(const QString &url);
         Q_INVOKABLE static void openFile(const QString &url);
+        Q_INVOKABLE void fileChooser();
         Q_INVOKABLE static void androidStatusBarColor(const QString &color);
 
 
@@ -138,6 +140,7 @@ class Babe : public CollectionDB
         Notify *nof;
 #elif defined (Q_OS_ANDROID)
         NotificationClient *nof;
+        Android *android;
 #endif
 
         QString fetchCoverArt(DB &song);

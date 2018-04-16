@@ -25,6 +25,7 @@
 
 #if defined(Q_OS_ANDROID)
 #include "android/notificationclient.h"
+#include "android/android.h"
 #include <QAndroidJniObject>
 #include <QAndroidJniEnvironment>
 #include <QtAndroid>
@@ -96,6 +97,12 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
     });
 #elif defined (Q_OS_ANDROID)
     this->nof = new NotificationClient(this);
+    this->android = new Android(this);
+
+    connect(android, &Android::folderPicked, [this](const QString &url)
+    {
+       qDebug()<< "Folder picked"<< url;
+    });
 #endif
 
 }
@@ -423,6 +430,14 @@ void Babe::openFile(const QString &url)
         }
     }else
         throw InterfaceConnFailedException();
+#endif
+
+}
+
+void Babe::fileChooser()
+{
+#if defined(Q_OS_ANDROID)
+    this->android->fileChooser();
 #endif
 
 }

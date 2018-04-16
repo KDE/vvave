@@ -32,7 +32,7 @@ Kirigami.ApplicationWindow {
     minimumWidth: !isMobile ? columnWidth : 0
     minimumHeight: !isMobile ? columnWidth + 64 : 0
     height: 500
-    title: qsTr("Babe")
+    title: qsTr("vvave")
     //    wideScreen: root.width > coverSize
 
     /*ALIASES*/

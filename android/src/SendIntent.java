@@ -10,6 +10,8 @@ import java.io.File;
 
 public class SendIntent
 {
+    private static final int READ_REQUEST_CODE = 42;
+
     public static void sendText(Activity context,String text)
     {
         Intent sendIntent = new Intent();
@@ -53,12 +55,14 @@ public class SendIntent
         intent.setDataAndType(uri, mime);
         context.startActivity(Intent.createChooser(intent, "Open folder"));
 
-
-//        Intent sendIntent = new Intent();
-//        sendIntent.setAction(Intent.ACTION_VIEW);
-//        sendIntent.setDataAndType(uri, mime);
-//        sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        context.startActivity(sendIntent);
     }
+
+     public static void fileChooser(Activity context)
+     {
+             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+             intent.addCategory(Intent.CATEGORY_OPENABLE);
+             intent.setType("audio/*");
+             context.startActivityForResult(intent, READ_REQUEST_CODE);
+      }
 
 }

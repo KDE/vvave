@@ -126,10 +126,11 @@ BabePopup
                 iconName: "list-add"
                 onClicked:
                 {
-                    if(bae.isMobile())
+                    if(isMobile)
                     {
-                        folderPicker.open()
-                        folderPicker.load(bae.homeDir())
+                        bae.fileChooser()
+//                        folderPicker.open()
+//                        folderPicker.load(bae.homeDir())
                     }else
                         folderDialog.open()
                 }
