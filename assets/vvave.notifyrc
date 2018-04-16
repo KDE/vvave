@@ -1,10 +1,31 @@
 [Global]
 IconName=preferences-system-bluetooth
 Comment=Tiny Music Player
+Comment[ca]=Reproductor de música petit
+Comment[ca@valencia]=Reproductor de música petit
+Comment[en_GB]=Tiny Music Player
+Comment[nl]=Kleine muziekspeler
+Comment[pt]=Pequeno Leitor Multimédia
+Comment[sk]=Malý hudobný prehrávač
+Comment[sv]=Mycket liten musikspelare
+Comment[uk]=Маленький музичний програвач
+Comment[x-test]=xxTiny Music Playerxx
 Name=vvave
 
 [Event/Notify]
 Name=vvave...
 Comment=Connection to device failed
+Comment[ca]=Ha fallat la connexió amb el dispositiu
+Comment[ca@valencia]=Ha fallat la connexió amb el dispositiu
+Comment[en_GB]=Connection to device failed
+Comment[es]=La conexión con el dispositivo ha fallado
+Comment[fr]=La connexion au périphérique a échoué
+Comment[nl]=Verbinding met het apparaat is mislukt
+Comment[pt]=A ligação ao dispositivo foi mal-sucedida
+Comment[sk]=Pripojenie k zariadeniu zlyhalo
+Comment[sv]=Anslutning till enhet misslyckades
+Comment[uk]=Не вдалося встановити з’єднання із пристроєм
+Comment[x-test]=xxConnection to device failedxx
+Comment[zh_CN]=连接设备失败
 Icon=vvave
 Action=Popup
