@@ -1,5 +1,3 @@
-android {
-
 QT += androidextras webview
 
 HEADERS += \
@@ -18,7 +16,7 @@ DISTFILES += \
 
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/
-}
+
 
 RESOURCES += \
     $$PWD/android.qrc
