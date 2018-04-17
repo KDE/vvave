@@ -5,8 +5,8 @@
 #include <QByteArray>
 #include <QObject>
 
-#include <./3rdparty/taglib/tag.h>
-#include <./3rdparty/taglib/fileref.h>
+#include <taglib/tag.h>
+#include <taglib/fileref.h>
 
 namespace TagLib
 {

@@ -5,7 +5,6 @@ QT       += websockets
 QT       += network
 QT       += xml
 QT       += qml
-QT       += quickcontrols2
 QT       += widgets
 
 
@@ -65,7 +64,8 @@ SOURCES += main.cpp \
     services/web/babeit.cpp \
     utils/babeconsole.cpp \
     services/local/youtubedl.cpp \
-    services/local/linking.cpp
+    services/local/linking.cpp \
+    settings/fileloader.cpp
 
 
 RESOURCES += qml.qrc \

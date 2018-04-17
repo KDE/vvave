@@ -8,7 +8,6 @@
 #include <QtCore>
 #include <QtNetwork>
 #include <QUrl>
-#include <QWidget>
 #include <QObject>
 #include <QNetworkAccessManager>
 #include <QDomDocument>

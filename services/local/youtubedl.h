@@ -8,9 +8,6 @@
 #include <QDebug>
 #include <QDirIterator>
 
-#include <fstream>
-#include <iostream>
-
 #include "../../utils/bae.h"
 #include "../local/taginfo.h"
 

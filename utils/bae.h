@@ -10,7 +10,6 @@
 #include <QTime>
 #include <QSettings>
 #include <QDirIterator>
-#include <QApplication>
 #include <QScreen>
 #include <QtNetwork>
 #include <QEventLoop>

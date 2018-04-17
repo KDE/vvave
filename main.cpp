@@ -6,12 +6,11 @@
 #include "babe.h"
 #include "services/local/player.h"
 #include <QLibrary>
-#include <QQuickStyle>
+// #include <QQuickStyle>
 #include <QStyleHints>
 #include "services/local/linking.h"
 
 #ifdef Q_OS_ANDROID
-#include "./3rdparty/kirigami/src/kirigamiplugin.h"
 #include <QtWebView/QtWebView>
 #else
 #include <QtWebEngine>
@@ -21,6 +20,9 @@
 #include <QCommandLineParser>
 #include "services/web/youtube.h"
 
+#ifdef Q_OS_ANDROID
+Q_DECL_EXPORT
+#endif
 int main(int argc, char *argv[])
 {
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -82,7 +84,6 @@ int main(int argc, char *argv[])
     );
 
 #ifdef Q_OS_ANDROID 
-    KirigamiPlugin::getInstance().registerTypes();
     QtWebView::initialize();
 #else
 //    if(QQuickStyle::availableStyles().contains("nomad"))

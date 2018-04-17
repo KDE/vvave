@@ -1,17 +1,13 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <QWidget>
 #include <QString>
 #include <QStringList>
 #include <QDebug>
 #include <QDir>
 #include <QDirIterator>
 #include <QFile>
-#include <QFileDialog>
 #include <QFileSystemWatcher>
-#include <QLabel>
-#include <QMovie>
 #include <QFileSystemWatcher>
 #include <QTimer>
 #include "fileloader.h"

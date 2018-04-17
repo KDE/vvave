@@ -7,18 +7,18 @@
 #include "utils/babeconsole.h"
 
 #include <QPalette>
-#include <QWidget>
 #include <QColor>
 #include <QIcon>
-#include <QApplication>
-#include <QDesktopWidget>
+#include <QGuiApplication>
 #include <QDirIterator>
 #include <QtQml>
 #include <QDesktopServices>
+#include <QCursor>
 
 //#include "Python.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+#include <QWidget>
 #include "kde/notify.h"
 #include "kde/kdeconnect.h"
 #endif
@@ -680,7 +680,7 @@ bool Babe::isMobile()
 int Babe::screenGeometry(QString side)
 {
     side = side.toLower();
-    auto geo = QApplication::desktop()->screenGeometry();
+    auto geo = QGuiApplication::primaryScreen()->geometry();
 
     if(side == "width")
         return geo.width();
@@ -892,6 +892,8 @@ QVariantList Babe::getDevices()
 {
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     return  KdeConnect::getDevices();
+#else
+    return {};
 #endif
 }
 
@@ -899,6 +901,8 @@ bool Babe::sendToDevice(const QString &name, const QString &id, const QString &u
 {
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     return KdeConnect::sendToDevice(name, id, url) ? true : false;
+#else
+    return {};
 #endif
 }
 
