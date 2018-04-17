@@ -11,9 +11,21 @@ Comment[sv]=Mycket liten musikspelare
 Comment[uk]=Маленький музичний програвач
 Comment[x-test]=xxTiny Music Playerxx
 Name=vvave
+Name[ca]=vvave
+Name[ca@valencia]=vvave
+Name[nl]=vvave
+Name[pt]=vvave
+Name[uk]=vvave
+Name[x-test]=xxvvavexx
 
 [Event/Notify]
 Name=vvave...
+Name[ca]=vvave...
+Name[ca@valencia]=vvave...
+Name[nl]=vvave...
+Name[pt]=vvave...
+Name[uk]=vvave…
+Name[x-test]=xxvvave...xx
 Comment=Connection to device failed
 Comment[ca]=Ha fallat la connexió amb el dispositiu
 Comment[ca@valencia]=Ha fallat la connexió amb el dispositiu
