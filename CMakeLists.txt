@@ -51,7 +51,7 @@ if (ANDROID)
         CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
     )
     set(TAGLIB_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include ${CMAKE_INSTALL_PREFIX}/include/taglib)
-    find_library(TAGLIB_LIBRARIES tag PATHS ${LIB_INSTALL_DIR})
+    set(TAGLIB_LIBRARIES ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_DIR}/libtag.a)
 
     target_sources(vvave PRIVATE
         android/android.cpp
@@ -59,6 +59,7 @@ if (ANDROID)
         android.qrc
     )
     target_link_libraries(vvave Qt5::AndroidExtras Qt5::WebView)
+    add_dependencies(vvave taglib)
     kde_source_files_enable_exceptions(vvave android/android.cpp android/notificationclient.cpp babe.cpp)
 else()
     find_package(Taglib REQUIRED)
