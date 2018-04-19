@@ -44,7 +44,7 @@ ItemDelegate
             text: labelTxt.text
             elide: Text.ElideRight
             color: labelColor
-            font.pointSize: fontSizes.medium
+            font.pointSize: fontSizes.default
 
             font.bold: boldLabel
             font.weight : boldLabel ? Font.Bold : Font.Normal

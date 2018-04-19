@@ -92,8 +92,8 @@ Kirigami.ApplicationWindow {
     property int miniArtSize: iconSizes.large
 
     property int columnWidth: Kirigami.Units.gridUnit * 17
-    property int coverSize: isMobile ? Math.sqrt(
-                                           root.width * root.height) * 0.4 : columnWidth * 0.6
+    property int coverSize: isAndroid ? Math.sqrt(root.width * root.height) * 0.4 :
+                                        columnWidth * (isMobile ? 0.5 : 0.6)
 
 
     /***************************************************/
@@ -146,11 +146,21 @@ Kirigami.ApplicationWindow {
     readonly property int defaultFontSize: Kirigami.Theme.defaultFont.pointSize
     readonly property var fontSizes: ({
                                           tiny: defaultFontSize * 0.4,
-                                          small: defaultFontSize * 0.6,
-                                          medium: defaultFontSize * 0.8,
-                                          default: defaultFontSize,
-                                          big: defaultFontSize * 1.2,
-                                          large: defaultFontSize * 1.4
+
+                                          small: (isMobile ? defaultFontSize * 0.4 :
+                                                            defaultFontSize * 0.6),
+
+                                          medium: (isMobile ? defaultFontSize * 0.6 :
+                                                             defaultFontSize * 0.8),
+
+                                          default: (isMobile ? defaultFontSize * 0.8 :
+                                                              defaultFontSize),
+
+                                          big: (isMobile ? defaultFontSize :
+                                                          defaultFontSize * 1.2),
+
+                                          large: (isMobile ? defaultFontSize * 1.2 :
+                                                            defaultFontSize * 1.4)
                                       })
 
     readonly property var space : ({
@@ -232,7 +242,7 @@ Kirigami.ApplicationWindow {
     pageStack.separatorVisible: pageStack.wideMode
 
     overlay.modal: Rectangle {
-        color: isMobile ? darkColor : "transparent"
+        color: isAndroid ? darkColor : "transparent"
         opacity: 0.5
         height: root.height - playbackControls.height - toolbar.height
         y: toolbar.height
@@ -374,7 +384,7 @@ Kirigami.ApplicationWindow {
         Slider {
             id: progressBar
 
-            height: 10
+            height: iconSizes.small
             width: parent.width
             anchors.left:  parent.left
             anchors.right: parent.right
@@ -392,14 +402,14 @@ Kirigami.ApplicationWindow {
                 x: progressBar.leftPadding
                 y: progressBar.y
                 implicitWidth: 200
-                implicitHeight: 10
+                implicitHeight: iconSizes.tiny*0.1
                 width: progressBar.availableWidth
                 height: implicitHeight
                 color: "transparent"
 
                 Rectangle {
                     width: progressBar.visualPosition * parent.width
-                    height: 4
+                    height: iconSizes.tiny*0.1
                     color: babeColor
                 }
             }
@@ -408,9 +418,9 @@ Kirigami.ApplicationWindow {
                 x: progressBar.leftPadding + progressBar.visualPosition
                    * (progressBar.availableWidth - width)
                 y: progressBar.y - (height / 2)
-                implicitWidth: progressBar.pressed ? 16 : 0
-                implicitHeight: progressBar.pressed ? 16 : 0
-                radius: progressBar.pressed ? 16 : 0
+                implicitWidth: progressBar.pressed ? iconSizes.medium : 0
+                implicitHeight: progressBar.pressed ? iconSizes.medium : 0
+                radius: progressBar.pressed ? iconSizes.medium : 0
                 color: babeColor
             }
         }
@@ -441,8 +451,8 @@ Kirigami.ApplicationWindow {
                 Rectangle {
                     visible: miniArtwork.visible
                     anchors.centerIn: parent
-                    height: miniArtSize + 4
-                    width: miniArtSize + 4
+                    height: miniArtSize + miniArtSize*0.05
+                    width: miniArtSize + miniArtSize*0.05
 
                     color: darktextColor
                     opacity: opacityLevel

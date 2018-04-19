@@ -18,27 +18,12 @@ Page
 
         spacing: 0
 
-        Rectangle
+        ToolBar
         {
             id: headerRoot
-            width: parent.width
-            height:  visible ?  toolBarHeight : 0
+            width: parent.width        
             Layout.fillWidth: true
             focus: true
-            color: darkDarkColor
-
-            Kirigami.Separator
-            {
-                visible: !isMobile
-                width: parent.width
-                height: 1
-                anchors
-                {
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
-                }
-            }
 
             RowLayout
             {
@@ -50,8 +35,7 @@ Page
                     Layout.alignment : Qt.AlignLeft
                     Layout.leftMargin: contentMargins
                     width: rowHeight
-                    iconName : "arrow-left"
-                    iconColor: darktextColor
+                    iconName : "go-previous"
                     onClicked: stackView.pop(youtubeList)
                 }
 
@@ -64,7 +48,6 @@ Page
 
                     elide : Text.ElideRight
                     font.bold : false
-                    color : darktextColor
                     font.pointSize: fontSizes.big
                     horizontalAlignment : Text.AlignHCenter
                     verticalAlignment :  Text.AlignVCenter
@@ -75,7 +58,6 @@ Page
                     Layout.alignment : Qt.AlignLeft
                     width: rowHeight
                     iconName : "link"
-                    iconColor: darktextColor
                     onClicked: webView.url = currentYt.url.replace("embed/", "watch?v=")
                 }
 
@@ -84,7 +66,6 @@ Page
                     Layout.alignment : Qt.AlignLeft
                     width: rowHeight
                     iconName : "download"
-                    iconColor: darktextColor
                     onClicked: bae.getYoutubeTrack(JSON.stringify(currentYt))
 
                 }
@@ -95,7 +76,6 @@ Page
                     Layout.rightMargin: contentMargins
                     width: rowHeight
                     iconName : "overflow-menu"
-                    iconColor: darktextColor
                 }
             }
         }
@@ -106,7 +86,7 @@ Page
             clip: true
             Layout.fillHeight: true
             Layout.fillWidth: true
-            source: isMobile ? "qrc:/services/web/WebView_A.qml" : "qrc:/services/web/WebView.qml"
+            source: isAndroid ? "qrc:/services/web/WebView_A.qml" : "qrc:/services/web/WebView.qml"
             onVisibleChanged:
             {
                 if(!visible) webView.url = "about:blank"

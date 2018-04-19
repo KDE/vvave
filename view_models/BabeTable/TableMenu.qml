@@ -185,8 +185,7 @@ BabeMenu
         text: "Send to..."
         onTriggered:
         {
-            isMobile ?
-                        bae.sendTrack(list.model.get(list.currentIndex).url) :
+            isAndroid ? bae.sendTrack(list.model.get(list.currentIndex).url) :
                         sendToPopup.open()
             close()
         }

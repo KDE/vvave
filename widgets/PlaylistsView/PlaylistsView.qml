@@ -62,7 +62,7 @@ Kirigami.PageRow
                 {
                     id: playlistViewModelFilter
 
-                    headerBarExitIcon: "arrow-left"
+                    headerBarExitIcon: "go-previous"
 
                     model : ListModel {}
                     delegate: BabeDelegate
@@ -114,7 +114,7 @@ Kirigami.PageRow
             trackRating: true
             trackDuration: false
             headerBarVisible: true
-            headerBarExitIcon: "arrow-left"
+            headerBarExitIcon: "go-previous"
             headerBarExit: !playlistViewRoot.wideMode
             headerBarTitle: playlistViewRoot.wideMode ? "" : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
             onExit: if(!playlistViewRoot.wideMode)

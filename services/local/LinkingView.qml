@@ -63,7 +63,7 @@ ColumnLayout
                 {
                     id: linkingFilter
 
-                    headerBarExitIcon: "arrow-left"
+                    headerBarExitIcon: "go-previous"
 
                     model : ListModel {}
                     delegate: BabeDelegate
@@ -99,7 +99,7 @@ ColumnLayout
                 trackDuration: false
                 allowMenu: false
                 headerBarVisible: true
-                headerBarExitIcon: "arrow-left"
+                headerBarExitIcon: "go-previous"
                 headerBarExit: !linkingPage.wideMode
                 headerBarTitle: linkingPage.wideMode ? "" : linkingModel.model.get(linkingModel.currentIndex).playlist
                 onExit: if(!linkingPage.wideMode)

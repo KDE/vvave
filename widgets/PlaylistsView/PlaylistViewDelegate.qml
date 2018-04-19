@@ -69,7 +69,7 @@ ItemDelegate
                 font.bold: false
                 elide: Text.ElideRight
 
-                font.pointSize: fontSizes.medium
+                font.pointSize: fontSizes.default
                 color: labelColor
             }
         }

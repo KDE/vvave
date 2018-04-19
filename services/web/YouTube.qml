@@ -87,7 +87,7 @@ Page
     Loader
     {
         id: youtubePlayer
-        source: isMobile ? "qrc:/services/web/YoutubePlayer_A.qml" : "qrc:/services/web/YoutubePlayer.qml"
+        source: isAndroid ? "qrc:/services/web/YoutubePlayer_A.qml" : "qrc:/services/web/YoutubePlayer.qml"
     }
 
     BabePopup
@@ -117,7 +117,7 @@ Page
                 text: qsTr("Custom API Key")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.medium
+                font.pointSize: fontSizes.default
                 Layout.column: 1
                 Layout.row: 2
                 Layout.fillWidth: true
@@ -136,7 +136,7 @@ Page
                 text: qsTr("Search results")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.medium
+                font.pointSize: fontSizes.default
                 Layout.column: 1
                 Layout.row: 4
                 Layout.fillWidth: true
@@ -283,22 +283,11 @@ Page
                 {
                     id: searchBox
                     Layout.fillWidth: true
-//                    width: parent.width
-//                    height: toolBarHeight
-                    position: ToolBar.Footer
-
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        z: -999
-                        color: backgroundColor
-                    }
-
+                    position: ToolBar.Footer       
 
                     RowLayout
                     {
                         anchors.fill: parent
-
 
                         TextInput
                         {

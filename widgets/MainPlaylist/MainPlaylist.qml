@@ -65,7 +65,7 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? coverSize : 0
-            Layout.maximumHeight: 300
+            Layout.maximumHeight: coverSize
             visible:  !mainlistEmpty
 
             Rectangle
@@ -91,8 +91,12 @@ Item
             {
                 id: artwork
                 visible: cover.visible
-                width: parent.height < 300 ? parent.height : 300
+                width: parent.height < coverSize ? parent.height : coverSize
                 height: parent.height
+
+                sourceSize.height: coverSize
+                sourceSize.width: coverSize
+
                 anchors.centerIn: parent
                 source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
                 fillMode: Image.PreserveAspectFit
@@ -174,7 +178,7 @@ Item
                         id: infoBtn
                         anchors.centerIn: parent
                         iconColor: darktextColor
-                        iconName: stackView.currentItem === table ? "documentinfo" : "arrow-left"
+                        iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
                         onClicked:
                         {
                             if( stackView.currentItem !== table)

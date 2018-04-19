@@ -11,7 +11,7 @@ ItemDelegate
     id: delegateRoot
 
     width: parent.width
-    height: sameAlbum ?  rowHeight : rowHeight
+    height: sameAlbum ?  rowHeight : rowHeight*1.2
     clip: true
     autoExclusive:  true
 

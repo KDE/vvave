@@ -4,25 +4,30 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
 
-ColumnLayout
+ItemDelegate
 {
     id: babeAlbumRoot
 
-
     signal albumClicked(int index)
     signal albumPressed(int index)
-    property int albumSize : 150
-    property int borderRadius : 2
+    property int albumSize : iconSizes.huge
+    property int borderRadius : albumSize*0.05
     property int albumRadius : 0
     property bool albumCard : true
     property string fillColor: backgroundColor
-    property string labelColor: textColor
     property bool hide : false
 
+    property color labelColor : GridView.isCurrentItem  || hovered ? highlightColor : textColor
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
 
     visible: !hide
-    spacing: 0
+    hoverEnabled: !isMobile
+    //    spacing: 0
+
+    background: Rectangle
+    {
+        color: "transparent"
+    }
 
     DropShadow
     {
@@ -40,88 +45,125 @@ ColumnLayout
     {
         id: card
         visible: albumCard
-        anchors.fill: parent
+        width: albumSize
+        height:albumSize
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+
         color: fillColor
         radius: borderRadius
     }
 
-    Item
+
+    ColumnLayout
     {
-        height: albumSize
-        width: albumSize
+        anchors.fill: parent
+        anchors.centerIn: parent
 
-        Layout.fillWidth: true
-        Layout.alignment: Qt.AlignHCenter
-
-        Image
+        Item
         {
-            id: img
-            width: albumSize
-            height: albumSize
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+            Layout.maximumHeight: albumSize
+            Layout.minimumHeight: albumSize
 
-            sourceSize.width: albumSize
-            sourceSize.height: albumSize
-
-            fillMode: Image.PreserveAspectFit
-            cache: true
-            antialiasing: true
-
-            source:
+            Image
             {
-                if(artwork)
-                    (artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
-                else "qrc:/assets/cover.png"
-            }
-            layer.enabled: albumRadius > 0
-            layer.effect: OpacityMask
-            {
-                maskSource: Item
+                id: img
+                width: albumSize
+                height: albumSize
+
+                anchors.centerIn: parent
+
+                sourceSize.width: albumSize
+                sourceSize.height: albumSize
+
+                fillMode: Image.PreserveAspectFit
+                cache: true
+//                antialiasing: true
+
+                source:
                 {
-                    width: img.width
-                    height: img.height
-                    Rectangle
+                    if(artwork)
+                        (artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                    else "qrc:/assets/cover.png"
+                }
+                layer.enabled: albumRadius > 0
+                layer.effect: OpacityMask
+                {
+                    maskSource: Item
                     {
-                        anchors.centerIn: parent
-                        width: img.adapt ? img.width : Math.min(img.width, img.height)
-                        height: img.adapt ? img.height : width
-                        radius: albumRadius
-                        //                    radius: Math.min(width, height)
+                        width: img.width
+                        height: img.height
+                        Rectangle
+                        {
+                            anchors.centerIn: parent
+                            width: img.adapt ? img.width : Math.min(img.width, img.height)
+                            height: img.adapt ? img.height : width
+                            radius: albumRadius
+                            //                    radius: Math.min(width, height)
+                        }
                     }
                 }
             }
         }
-    }
 
-    Column
-    {
-        id: albumInfoRow
-        Layout.maximumHeight: rowHeight
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.margins: contentMargins
-        spacing: 5
-
-        Label
+        Item
         {
-            width: parent.width
-            text:  typeof album === 'undefined'  ? artist : album
-            visible: true
-            horizontalAlignment: Qt.AlignHCenter
-            elide: Text.ElideRight
-            font.pointSize: fontSizes.medium
-            font.bold: true
-            color: labelColor
-        }
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignHCenter
+            Layout.margins: 0
 
-        Label
-        {
-            width: parent.width
-            text: typeof album === 'undefined' ? "" : artist
-            visible: typeof album === 'undefined'? false : true
-            horizontalAlignment: Qt.AlignHCenter
-            elide: Text.ElideRight
-            font.pointSize: fontSizes.small
-            color: labelColor
+            ColumnLayout
+            {
+                anchors.fill: parent
+                spacing: space.tiny
+
+                Item
+                {
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignHCenter
+                    //            Layout.margins: space.medium
+
+                    Label
+                    {
+                        width: parent.width * 0.8
+                        anchors.centerIn: parent
+                        text:  typeof album === 'undefined'  ? artist : album
+                        visible: true
+                        horizontalAlignment: Qt.AlignHCenter
+                        elide: Text.ElideRight
+                        font.pointSize: fontSizes.default
+                        font.bold: true
+                        font.weight: Font.Bold
+                        color: labelColor
+                    }
+                }
+
+                Item
+                {
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignTop
+                    //            Layout.margins: space.medium
+
+
+                    Label
+                    {
+                        width: parent.width*0.8
+                        anchors.centerIn: parent
+
+                        text: typeof album === 'undefined' ? "" : artist
+                        visible: typeof album === 'undefined'? false : true
+                        horizontalAlignment: Qt.AlignHCenter
+                        elide: Text.ElideRight
+                        font.pointSize: fontSizes.medium
+                        color: labelColor
+                    }
+                }
+            }
+
         }
     }
 
@@ -129,7 +171,6 @@ ColumnLayout
     {
         anchors.fill: parent
         onClicked: albumClicked(index)
-
         onPressAndHold: albumPressed(index)
 
     }

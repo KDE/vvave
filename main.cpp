@@ -11,6 +11,7 @@
 #include "services/local/linking.h"
 
 #ifdef Q_OS_ANDROID
+#include "./3rdparty/kirigami/src/kirigamiplugin.h"
 #include <QtWebView/QtWebView>
 #else
 #include <QtWebEngine>
@@ -84,6 +85,7 @@ int main(int argc, char *argv[])
     );
 
 #ifdef Q_OS_ANDROID 
+    KirigamiPlugin::getInstance().registerTypes();
     QtWebView::initialize();
 #else
 //    if(QQuickStyle::availableStyles().contains("nomad"))

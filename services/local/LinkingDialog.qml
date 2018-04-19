@@ -52,7 +52,7 @@ BabeDialog
                 text:qsTr("Linking allows to connect two devices on the same network. Just provide the device IP address to which you want to connect")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.medium
+                font.pointSize: fontSizes.default
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
             }
@@ -69,7 +69,7 @@ BabeDialog
                 text: qsTr("IP Address")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.medium
+                font.pointSize: fontSizes.default
 
                 Layout.fillWidth: true
             }
