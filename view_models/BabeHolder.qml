@@ -8,7 +8,7 @@ Item
     property string emoji
     property string message
     clip: true
-    property color color : foregroundColor
+    property color color : textColor
     focus: true
     anchors.fill: parent
 

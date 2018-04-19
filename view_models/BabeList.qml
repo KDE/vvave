@@ -25,7 +25,7 @@ Page
     property string headerBarExitIcon : "window-close"
 
     property color headerBarColor : backgroundColor
-    property color textColor : foregroundColor
+    property color labelColor : textColor
 
     property bool wasPulled : false
 
@@ -45,7 +45,7 @@ Page
         id: holder
         anchors.fill: parent
         visible: babeList.count === 0
-        color : textColor
+        color : labelColor
         focus: true
     }
 
@@ -71,7 +71,7 @@ Page
                 BabeButton
                 {
                     Layout.alignment : Qt.AlignLeft
-                    Layout.leftMargin: contentMargins
+//                    Layout.leftMargin: contentMargins
                     width: rowHeight
                     visible: headerBarExit
                     anim : true
@@ -83,7 +83,7 @@ Page
                 {
                     id: headerBarActionsLeft
                     Layout.alignment : Qt.AlignLeft
-                    Layout.leftMargin: headerBarExit ? 0 : contentMargins
+//                    Layout.leftMargin: headerBarExit ? 0 : contentMargins
                 }
 
                 Label
@@ -95,7 +95,7 @@ Page
 
                     elide : Text.ElideRight
                     font.bold : false
-                    color : textColor
+                    color : labelColor
                     font.pointSize: fontSizes.big
                     horizontalAlignment : Text.AlignHCenter
                     verticalAlignment :  Text.AlignVCenter
@@ -105,7 +105,7 @@ Page
                 {
                     id: headerBarActionsRight
                     Layout.alignment : Qt.AlignRight
-                    Layout.rightMargin: contentMargins
+//                    Layout.rightMargin: contentMargins
                 }
 
             }
@@ -122,7 +122,7 @@ Page
             {
                 width: babeList.width
                 height: babeList.currentItem.height
-                color: babeHighlightColor
+                color: highlightColor
             }
 
             focus: true

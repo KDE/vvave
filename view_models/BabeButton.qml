@@ -9,15 +9,15 @@ ToolButton
 
     property string iconName
     property int iconSize : toolBarIconSize
-    property color iconColor: foregroundColor
-    readonly property string defaultColor :  foregroundColor
+    property color iconColor: textColor
+    readonly property string defaultColor :  textColor
     property bool anim : false
 
 
-    //    icon.name: isMobile ? "" : babeButton.iconName
-    //    icon.width: isMobile ? 0 : babeButton.iconSize
-    //    icon.height: isMobile ? 0 : babeButton.iconSize
-    //    icon.color: isMobile  ?  "transparent" : (iconColor || defaultColor)
+    //    icon.name: isAndroid ? "" : babeButton.iconName
+    //    icon.width: isAndroid ? 0 : babeButton.iconSize
+    //    icon.height: isAndroid ? 0 : babeButton.iconSize
+    //    icon.color: isAndroid  ?  "transparent" : (iconColor || defaultColor)
 
     onClicked: if(anim) animIcon.running = true
 
@@ -29,8 +29,8 @@ ToolButton
         anchors.centerIn: parent
         width: iconSize
         height: iconSize
-        visible: !isMobile
-        source: isMobile  ? "" : iconName
+        visible: !isAndroid
+        source: isAndroid  ? "" : iconName
         isMask: false
         color: iconColor || defaultColor
 
@@ -39,7 +39,7 @@ ToolButton
     BabeIcon
     {
         id: babeIcon
-        visible: isMobile
+        visible: isAndroid
         icon: babeButton.iconName
         iconColor: babeButton.iconColor || babeButton.defaultColor
         iconSize: babeButton.iconSize

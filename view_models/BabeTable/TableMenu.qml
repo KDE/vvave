@@ -14,7 +14,7 @@ BabeMenu
     property int rate : 0
     property bool babe : false
     property string starColor : "#FFC107"
-    property string starReg : foregroundColor
+    property string starReg : textColor
     property string starIcon: "draw-star"
 
     signal trackRemoved(string url)
@@ -127,7 +127,7 @@ BabeMenu
         horizontalAlignment: Qt.AlignHCenter
         elide: Text.ElideRight
         text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
-        color: foregroundColor
+        color: textColor
     }
 
     BabeMenuItem

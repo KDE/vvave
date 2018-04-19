@@ -12,7 +12,7 @@ ItemDelegate
     height: rowHeightAlt
     clip: true
 
-    property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
+    property string labelColor: ListView.isCurrentItem ? highlightedTextColor : textColor
 
     Rectangle
     {
@@ -46,7 +46,7 @@ ItemDelegate
                 id: playBtn
                 anchors.centerIn: parent
                 iconName: playlistIcon ? playlistIcon : ""
-                iconColor: textColor
+                iconColor: labelColor
 
             }
         }
@@ -70,7 +70,7 @@ ItemDelegate
                 elide: Text.ElideRight
 
                 font.pointSize: fontSizes.medium
-                color: textColor
+                color: labelColor
             }
         }
 

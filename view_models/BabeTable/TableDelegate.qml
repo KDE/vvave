@@ -11,7 +11,7 @@ ItemDelegate
     id: delegateRoot
 
     width: parent.width
-    height: sameAlbum ? rowHeightAlt : rowHeight
+    height: sameAlbum ?  rowHeight : rowHeight
     clip: true
     autoExclusive:  true
 
@@ -36,7 +36,7 @@ ItemDelegate
 
     property color bgColor : backgroundColor
     property color color : foregroundColor
-    property color highlightColor : highlightTextColor
+    property color highlightColor : highlightedTextColor
     property string textColor: ListView.isCurrentItem ? highlightColor : color
     property bool number : false
     property bool quickPlay : true
@@ -155,7 +155,7 @@ ItemDelegate
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
-            Layout.margins: contentMargins
+            Layout.margins: space.tiny
             Layout.leftMargin: coverArt ? contentMargins : 0
             anchors.verticalCenter: parent.verticalCenter
 
@@ -182,7 +182,7 @@ ItemDelegate
                     font.bold: true
                     elide: Text.ElideRight
 
-                    font.pointSize: fontSizes.medium
+                    font.pointSize: fontSizes.default
                     color: textColor
                 }
 
@@ -198,7 +198,7 @@ ItemDelegate
                     text: title
                     font.bold: !sameAlbum
                     elide: Text.ElideRight
-                    font.pointSize: fontSizes.medium
+                    font.pointSize: fontSizes.default
                     color: textColor
 
                 }
@@ -216,7 +216,7 @@ ItemDelegate
                     text: artist + " | " + album
                     font.bold: false
                     elide: Text.ElideRight
-                    font.pointSize: fontSizes.small
+                    font.pointSize: fontSizes.medium
                     color: textColor
 
                 }

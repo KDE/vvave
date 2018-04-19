@@ -15,8 +15,8 @@ ColumnLayout
     property int borderRadius : 2
     property int albumRadius : 0
     property bool albumCard : true
-    property string fillColor: midLightColor
-    property string textColor: foregroundColor
+    property string fillColor: backgroundColor
+    property string labelColor: textColor
     property bool hide : false
 
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
@@ -110,7 +110,7 @@ ColumnLayout
             elide: Text.ElideRight
             font.pointSize: fontSizes.medium
             font.bold: true
-            color: textColor
+            color: labelColor
         }
 
         Label
@@ -121,7 +121,7 @@ ColumnLayout
             horizontalAlignment: Qt.AlignHCenter
             elide: Text.ElideRight
             font.pointSize: fontSizes.small
-            color: textColor
+            color: labelColor
         }
     }
 

@@ -21,7 +21,7 @@ Page
         width: parent.width
         height: parent.height
         z: 999
-        color: darkColor
+        color: altColor
         opacity: 0.5
     }
 

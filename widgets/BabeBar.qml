@@ -12,8 +12,7 @@ ToolBar
 
     property alias babeBar : babeBar
     property string accentColor : babeColor
-    property string textColor : foregroundColor
-    property string bgColor : babeAltColor
+    property string textColor : textColor
     property int currentIndex : 0
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
 

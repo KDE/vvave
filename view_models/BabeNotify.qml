@@ -8,7 +8,7 @@ Popup
     property string message : ""
     id: notify
     width: columnWidth
-    height: toolBarHeight
+    height: rowHeight
 
     padding: 0
 
@@ -38,7 +38,7 @@ Popup
     Material.accent: babeColor
     Material.background: backgroundColor
     Material.primary: backgroundColor
-    Material.foreground: foregroundColor
+    Material.foreground: textColor
 
     Column
     {
@@ -52,7 +52,7 @@ Popup
             font.pointSize: fontSizes.medium
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
-            color: foregroundColor
+            color: textColor
         }
     }
 

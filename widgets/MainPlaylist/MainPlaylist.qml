@@ -113,17 +113,19 @@ Item
             }
         }
 
-        Item
+        ToolBar
         {
             id: mainlistContext
             width: parent.width
 
-            anchors.horizontalCenter: parent.horizontalCenter
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
-            Layout.preferredHeight: visible ? toolBarHeight : 0
+            height: Kirigami.Units.iconSizes.smallMedium  + Kirigami.Units.smallSpacing*2
+
             //                        anchors.top: cover.bottom
+            leftPadding: 0
+            rightPadding: 0
 
             Rectangle
             {
@@ -171,7 +173,7 @@ Item
                     {
                         id: infoBtn
                         anchors.centerIn: parent
-                        iconColor: darkForegroundColor
+                        iconColor: darktextColor
                         iconName: stackView.currentItem === table ? "documentinfo" : "arrow-left"
                         onClicked:
                         {
@@ -194,7 +196,7 @@ Item
                     BabeButton
                     {
                         anchors.centerIn: parent
-                        iconColor: darkForegroundColor
+                        iconColor: darktextColor
                         iconName: "videoclip-amarok"
                         onClicked:
                         {
@@ -215,8 +217,8 @@ Item
                         anchors.centerIn: parent
                         Layout.fillWidth: true
                         iconName: "overflow-menu"
-                        onClicked: root.isMobile ? playlistMenu.open() : playlistMenu.popup()
-                        iconColor: darkForegroundColor
+                        onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
+                        iconColor: darktextColor
 
                     }
                 }
@@ -293,7 +295,7 @@ Item
                     holder.message : "<h2>Meh!</h2><p>Start putting together your playlist!</p>"
                     holder.emoji: "qrc:/assets/face-sleeping.png"
 
-                    textColor: darkForegroundColor
+                    labelColor: darktextColor
 
                     Rectangle
                     {

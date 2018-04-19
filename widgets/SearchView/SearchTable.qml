@@ -114,8 +114,8 @@ Page
         {
             id: searchBox
             Layout.fillWidth: true
-            width: parent.width
-            height: toolBarHeight
+//            width: parent.width
+//            height: toolBarHeight
             position: ToolBar.Footer
 
             Rectangle
@@ -135,7 +135,7 @@ Page
                     Layout.leftMargin: contentMargins
                     visible: true
                     iconName: "view-filter"
-                    iconColor: autoSuggestions ? babeColor : foregroundColor
+                    iconColor: autoSuggestions ? babeColor : textColor
                     onClicked:
                     {
                         autoSuggestions = !autoSuggestions
@@ -148,14 +148,14 @@ Page
                 TextInput
                 {
                     id: searchInput
-                    color: foregroundColor
+                    color: textColor
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment:  Text.AlignVCenter
-                    selectByMouse: !root.isMobile
-                    selectionColor: babeHighlightColor
-                    selectedTextColor: foregroundColor
+                    selectByMouse: !isMobile
+                    selectionColor: highlightColor
+                    selectedTextColor: highlightedTextColor
                     focus: true
                     text: ""
                     wrapMode: TextEdit.Wrap

@@ -15,7 +15,7 @@ ItemDelegate
     property bool boldLabel : false
     property alias label: labelTxt.text
     property alias fontFamily: labelTxt.font.family
-    property string textColor: ListView.isCurrentItem ? highlightTextColor : foregroundColor
+    property string labelColor: ListView.isCurrentItem ? highlightedTextColor : textColor
 
 
     Rectangle
@@ -43,7 +43,7 @@ ItemDelegate
 
             text: labelTxt.text
             elide: Text.ElideRight
-            color: textColor
+            color: labelColor
             font.pointSize: fontSizes.medium
 
             font.bold: boldLabel

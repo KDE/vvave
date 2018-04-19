@@ -12,7 +12,7 @@ BabeList
     holder.message: "<h2>This list is empty</h2><p>You can sdd new music sources from the settings</p>"
     //    cacheBuffer : 300
     headerBarColor: backgroundColor
-    textColor: foregroundColor
+    labelColor: textColor
 
     property bool trackNumberVisible
     property bool quickPlayVisible : true
@@ -101,7 +101,7 @@ BabeList
         trackDurationVisible : trackDuration
         trackRatingVisible : trackRating
         menuItem: menuItemVisible
-        color: babeTableRoot.textColor
+        color: babeTableRoot.labelColor
         bgColor: headerBarColor
         remoteArtwork: isArtworkRemote
         Connections

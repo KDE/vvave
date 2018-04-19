@@ -51,7 +51,7 @@ Page
                     Layout.leftMargin: contentMargins
                     width: rowHeight
                     iconName : "arrow-left"
-                    iconColor: darkForegroundColor
+                    iconColor: darktextColor
                     onClicked: stackView.pop(youtubeList)
                 }
 
@@ -64,7 +64,7 @@ Page
 
                     elide : Text.ElideRight
                     font.bold : false
-                    color : darkForegroundColor
+                    color : darktextColor
                     font.pointSize: fontSizes.big
                     horizontalAlignment : Text.AlignHCenter
                     verticalAlignment :  Text.AlignVCenter
@@ -75,7 +75,7 @@ Page
                     Layout.alignment : Qt.AlignLeft
                     width: rowHeight
                     iconName : "link"
-                    iconColor: darkForegroundColor
+                    iconColor: darktextColor
                     onClicked: webView.url = currentYt.url.replace("embed/", "watch?v=")
                 }
 
@@ -84,7 +84,7 @@ Page
                     Layout.alignment : Qt.AlignLeft
                     width: rowHeight
                     iconName : "download"
-                    iconColor: darkForegroundColor
+                    iconColor: darktextColor
                     onClicked: bae.getYoutubeTrack(JSON.stringify(currentYt))
 
                 }
@@ -95,7 +95,7 @@ Page
                     Layout.rightMargin: contentMargins
                     width: rowHeight
                     iconName : "overflow-menu"
-                    iconColor: darkForegroundColor
+                    iconColor: darktextColor
                 }
             }
         }

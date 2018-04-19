@@ -60,7 +60,7 @@ BabeDialog
             {
                 Layout.fillWidth: true
                 id: newPlaylistField
-                color: foregroundColor
+                color: textColor
                 placeholderText: qsTr("New playlist")
                 onAccepted:
                 {

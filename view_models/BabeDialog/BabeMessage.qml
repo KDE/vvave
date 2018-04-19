@@ -23,7 +23,7 @@ BabeDialog
             text: message ? message : ""
             width: babeMessageRoot.width
             elide: Text.ElideRight
-            color: foregroundColor
+            color: textColor
         }
 
         TextArea
@@ -35,7 +35,7 @@ BabeDialog
             width: parent.width
             wrapMode: TextEdit.WrapAnywhere
             readOnly: true
-            color: foregroundColor
+            color: textColor
         }
     }
 }

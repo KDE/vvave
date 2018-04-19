@@ -21,7 +21,7 @@ BabeDialog
             Layout.fillWidth: true
             Layout.margins: contentMargins
             width: parent.width
-            color: foregroundColor
+            color: textColor
             onAccepted:
             {
                 addPlaylist()

@@ -94,6 +94,7 @@ class Babe : public CollectionDB
 
         /*UTILS*/
         Q_INVOKABLE static bool isMobile();
+        Q_INVOKABLE static bool isAndroid();
         Q_INVOKABLE static int screenGeometry(QString side);
         Q_INVOKABLE static int cursorPos(QString axis);
 

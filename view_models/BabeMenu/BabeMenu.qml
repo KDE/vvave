@@ -23,5 +23,5 @@ Menu
     Material.accent: babeColor
     Material.background: backgroundColor
     Material.primary: backgroundColor
-    Material.foreground: foregroundColor
+    Material.foreground: textColor
 }

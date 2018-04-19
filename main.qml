@@ -3,6 +3,9 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.1
+
+import QtQuick.Window 2.0
+
 import "services/local"
 
 import "utils"
@@ -28,10 +31,10 @@ import Link.Codes 1.0
 Kirigami.ApplicationWindow {
     id: root
     visible: true
-    width: !isMobile ? wideSize : 400
+    width: Screen.width * (isMobile ? 1 : 0.4)
     minimumWidth: !isMobile ? columnWidth : 0
     minimumHeight: !isMobile ? columnWidth + 64 : 0
-    height: 500
+    height: Screen.height * (isMobile ? 1 : 0.4)
     title: qsTr("vvave")
     //    wideScreen: root.width > coverSize
 
@@ -42,7 +45,14 @@ Kirigami.ApplicationWindow {
     property alias animFooter: animFooter
     property alias mainPlaylist: mainPlaylist
 
-    /*PLAYBACK*/
+
+    readonly property bool isMobile : Kirigami.Settings.isMobile
+    readonly property bool isAndroid: bae.isAndroid()
+
+    /***************************************************/
+    /******************** PLAYBACK ********************/
+    /*************************************************/
+
     property bool isShuffle: false
     property var currentTrack: ({
                                     babe: "0",
@@ -61,72 +71,37 @@ Kirigami.ApplicationWindow {
                                             false) === "true" ? true : false
     property int onQueue: 0
 
-    /*THEMING*/
-    property string babeColor: bae.babeColor()
-    property string babeAltColor: bae.babeAltColor()
-    property string backgroundColor: isMobile ? bae.backgroundColor(
-                                                    ) : Kirigami.Theme.backgroundColor
-    property string viewBackgroundColor: isMobile ? bae.altColor(
-                                                        ) : Kirigami.Theme.viewBackgroundColor
-    property string foregroundColor: isMobile ? bae.foregroundColor(
-                                                    ) : Kirigami.Theme.textColor
-    property string textColor: isMobile ? bae.textColor(
-                                              ) : Kirigami.Theme.textColor
-    property string babeHighlightColor: isMobile ? bae.highlightColor(
-                                                       ) : Kirigami.Theme.highlightColor
-    property string highlightTextColor: isMobile ? bae.highlightTextColor(
-                                                       ) : Kirigami.Theme.highlightedTextColor
-    property string midColor: bae.midColor()
-    property string midLightColor: isMobile ? bae.midLightColor(
-                                                  ) : Kirigami.Theme.buttonBackgroundColor
-    property string darkColor: bae.darkColor()
-    property string baseColor: bae.baseColor()
-    property string altColor: isMobile ? bae.altColor(
-                                             ) : Kirigami.Theme.viewBackgroundColor
-    property string shadowColor: bae.shadowColor()
+    property bool mainlistEmpty: !mainPlaylist.table.count > 0
 
-    readonly property string darkBackgroundColor: "#303030"
-    readonly property string darkForegroundColor: "#FAFAFA"
-    readonly property string darkTextColor: darkForegroundColor
-    readonly property string darkBabeHighlightColor: "#29B6F6"
-    readonly property string darkHighlightTextColor: darkForegroundColor
-    readonly property string darkMidColor: "#1d1d1d"
-    readonly property string darkMidLightColor: "#282828"
-    readonly property string darkDarkColor: "#191919"
-    readonly property string darkBaseColor: "#212121"
-    readonly property string darkAltColor: darkDarkColor
-    readonly property string darkShadowColor: darkAltColor
-
-    Material.theme: Material.Light
-    Material.accent: babeColor
-    Material.background: viewBackgroundColor
-    Material.primary: backgroundColor
-    Material.foreground: foregroundColor
-
-    /*READONLY PROPS*/
-    readonly property var iconSizes: ({
-                                          small: 16,
-                                          medium: (isMobile ? 24 : 22),
-                                          big: 32,
-                                          large: 48
-                                      })
-
-    readonly property int defaultFontSize: Kirigami.Theme.defaultFont.pointSize
-    readonly property var fontSizes: ({
-                                          tiny: defaultFontSize - 2,
-                                          small: defaultFontSize -1,
-                                          medium: defaultFontSize,
-                                          big: defaultFontSize + 1,
-                                          large: defaultFontSize + 2
-                                      })
+    /***************************************************/
+    /******************** UI PROPS ********************/
+    /*************************************************/
 
     readonly property real opacityLevel: 0.8
-    readonly property bool isMobile: bae.isMobile()
-    readonly property int wideSize: bae.screenGeometry("width") * 0.5
-    readonly property int rowHeight: isMobile ? 60 : 52
-    readonly property int rowHeightAlt: isMobile ? 48 : 32
+
+    readonly property int wideSize: Screen.width * 0.5
+
+    readonly property int rowHeight: (defaultFontSize*2) + space.big
+    readonly property int rowHeightAlt: (defaultFontSize*2) + space.big
+
     readonly property int headerHeight: rowHeight
-    readonly property int contentMargins: isMobile ? 8 : 10
+
+    property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE",
+                                                  iconSizes.medium)
+    property int toolBarHeight: isMobile ? 48 : Kirigami.Units.iconSizes.smallMedium  + Kirigami.Units.smallSpacing*2
+    property int miniArtSize: iconSizes.large
+
+    property int columnWidth: Kirigami.Units.gridUnit * 17
+    property int coverSize: isMobile ? Math.sqrt(
+                                           root.width * root.height) * 0.4 : columnWidth * 0.6
+
+
+    /***************************************************/
+    /******************** HANDLERS ********************/
+    /*************************************************/
+
+    property int currentView: viewsIndex.tracks
+
     readonly property var viewsIndex: ({
                                            tracks: 0,
                                            albums: 1,
@@ -138,20 +113,6 @@ Kirigami.ApplicationWindow {
                                            linking: 7
                                        })
 
-    property bool mainlistEmpty: !mainPlaylist.table.count > 0
-
-    /*PROPS*/
-    property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE",
-                                                  iconSizes.medium)
-    property int toolBarHeight: isMobile ? 48 : toolBarIconSize * 2
-    property int miniArtSize: 40
-
-    property int columnWidth: Kirigami.Units.gridUnit * 17
-    property int coverSize: isMobile ? Math.sqrt(
-                                           root.width * root.height) * 0.4 : columnWidth * 0.6
-    property int currentView: viewsIndex.tracks
-
-    /*USEFUL PROPS*/
     property string syncPlaylist: ""
     property bool sync: false
     property string infoMsg: ""
@@ -160,6 +121,106 @@ Kirigami.ApplicationWindow {
 
     property bool isLinked: false
     property bool isServing: false
+
+
+
+    /* ANDROID THEMING*/
+
+    Material.theme: Material.Light
+    Material.accent: babeColor
+    Material.background: viewBackgroundColor
+    Material.primary: backgroundColor
+    Material.foreground: textColor
+
+
+    /***************************************************/
+    /******************** UI UNITS ********************/
+    /*************************************************/
+
+    property int iconSize : iconSizes.medium
+
+
+    readonly property real factor : Kirigami.Units.gridUnit * (isMobile ? 0.2 : 0.2)
+
+    readonly property int contentMargins: space.medium
+    readonly property int defaultFontSize: Kirigami.Theme.defaultFont.pointSize
+    readonly property var fontSizes: ({
+                                          tiny: defaultFontSize * 0.4,
+                                          small: defaultFontSize * 0.6,
+                                          medium: defaultFontSize * 0.8,
+                                          default: defaultFontSize,
+                                          big: defaultFontSize * 1.2,
+                                          large: defaultFontSize * 1.4
+                                      })
+
+    readonly property var space : ({
+                                       tiny: Kirigami.Units.smallSpacing,
+                                       small: Kirigami.Units.smallSpacing*2,
+                                       medium: Kirigami.Units.largeSpacing,
+                                       big: Kirigami.Units.largeSpacing*2,
+                                       large: Kirigami.Units.largeSpacing*3,
+                                       huge: Kirigami.Units.largeSpacing*4,
+                                       enormus: Kirigami.Units.largeSpacing*5
+                                   })
+
+    readonly property var iconSizes : ({
+                                           tiny : Kirigami.Units.iconSizes.small*0.5,
+
+                                           small :  (isMobile ? Kirigami.Units.iconSizes.small*0.5:
+                                                                Kirigami.Units.iconSizes.small),
+
+                                           medium : (isMobile ? (isAndroid ? 22 : Kirigami.Units.iconSizes.small) :
+                                                                Kirigami.Units.iconSizes.smallMedium),
+
+                                           big:  (isMobile ? Kirigami.Units.iconSizes.smallMedium :
+                                                             Kirigami.Units.iconSizes.medium),
+
+                                           large: (isMobile ? Kirigami.Units.iconSizes.medium :
+                                                              Kirigami.Units.iconSizes.large),
+
+                                           huge: (isMobile ? Kirigami.Units.iconSizes.large :
+                                                              Kirigami.Units.iconSizes.huge),
+
+                                           enormous: (isMobile ? Kirigami.Units.iconSizes.huge :
+                                                              Kirigami.Units.iconSizes.enormous)
+
+                                       })
+
+    /***************************************************/
+    /**************************************************/
+    /*************************************************/
+
+
+
+    /***************************************************/
+    /******************** UI COLORS *******************/
+    /*************************************************/
+
+    property string backgroundColor: Kirigami.Theme.backgroundColor
+    property string textColor: Kirigami.Theme.textColor
+    property string highlightColor: Kirigami.Theme.highlightColor
+    property string highlightedTextColor: Kirigami.Theme.highlightedTextColor
+    property string buttonBackgroundColor: Kirigami.Theme.buttonBackgroundColor
+    property string viewBackgroundColor: Kirigami.Theme.viewBackgroundColor
+    property string altColor: Kirigami.Theme.complementaryBackgroundColor
+    property string babeColor: bae.babeColor()
+
+    readonly property string darkBackgroundColor: "#303030"
+    readonly property string darktextColor: "#FAFAFA"
+    readonly property string darkBabeHighlightColor: "#29B6F6"
+    readonly property string darkHighlightTextColor: darktextColor
+    readonly property string darkMidColor: "#1d1d1d"
+    readonly property string darkMidLightColor: "#282828"
+    readonly property string darkDarkColor: "#191919"
+    readonly property string darkBaseColor: "#212121"
+    readonly property string darkAltColor: darkDarkColor
+    readonly property string darkShadowColor: darkAltColor
+
+
+    /***************************************************/
+    /**************************************************/
+    /*************************************************/
+
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -383,7 +444,7 @@ Kirigami.ApplicationWindow {
                     height: miniArtSize + 4
                     width: miniArtSize + 4
 
-                    color: darkForegroundColor
+                    color: darktextColor
                     opacity: opacityLevel
 
                     z: -999
@@ -466,7 +527,7 @@ Kirigami.ApplicationWindow {
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
                     text: progressTimeLabel + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - " + currentTrack.artist) : "") + "  /  " + durationTimeLabel
-                    color: darkForegroundColor
+                    color: darktextColor
                     font.pointSize: fontSizes.tiny
                     elide: Text.ElideRight
                 }
@@ -482,7 +543,7 @@ Kirigami.ApplicationWindow {
                 BabeButton {
                     id: babeBtnIcon
                     iconName: "love"
-                    iconColor: currentBabe ? babeColor : darkForegroundColor
+                    iconColor: currentBabe ? babeColor : darktextColor
                     onClicked: if (!mainlistEmpty) {
                                    var value = mainPlaylist.contextMenu.babeIt(
                                                currentTrackIndex)
@@ -492,7 +553,7 @@ Kirigami.ApplicationWindow {
 
                 BabeButton {
                     id: previousBtn
-                    iconColor: darkForegroundColor
+                    iconColor: darktextColor
                     iconName: "media-skip-backward"
                     onClicked: Player.previousTrack()
                     onPressAndHold: Player.playAt(prevTrackIndex)
@@ -500,7 +561,7 @@ Kirigami.ApplicationWindow {
 
                 BabeButton {
                     id: playIcon
-                    iconColor: darkForegroundColor
+                    iconColor: darktextColor
 
                     iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onClicked: {
@@ -513,7 +574,7 @@ Kirigami.ApplicationWindow {
 
                 BabeButton {
                     id: nextBtn
-                    iconColor: darkForegroundColor
+                    iconColor: darktextColor
 
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
@@ -523,7 +584,7 @@ Kirigami.ApplicationWindow {
 
                 BabeButton {
                     id: shuffleBtn
-                    iconColor: darkForegroundColor
+                    iconColor: darktextColor
 
                     iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
                     onClicked: isShuffle = !isShuffle
@@ -590,7 +651,7 @@ Kirigami.ApplicationWindow {
             text: infoMsg
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
-            color: foregroundColor
+            color: textColor
 
             SequentialAnimation {
                 id: animTxt
@@ -606,7 +667,7 @@ Kirigami.ApplicationWindow {
                     target: infoTxt
                     property: "color"
                     easing.type: Easing.InOutQuad
-                    to: foregroundColor
+                    to: textColor
                     duration: 500
                 }
             }

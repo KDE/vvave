@@ -677,6 +677,11 @@ bool Babe::isMobile()
     return BAE::isMobile();
 }
 
+bool Babe::isAndroid()
+{
+    return BAE::isAndroid();
+}
+
 int Babe::screenGeometry(QString side)
 {
     side = side.toLower();

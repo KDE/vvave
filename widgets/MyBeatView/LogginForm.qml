@@ -59,7 +59,7 @@ BabePopup
 //                {
 //                    anchors.fill: beatsImg
 //                    source: beatsImg
-//                    color: foregroundColor
+//                    color: textColor
 //                }
 //            }
 
@@ -75,12 +75,12 @@ BabePopup
                 Layout.alignment: Qt.AlignCenter
 
                 placeholderText: "email *"
-                color: foregroundColor
+                color: textColor
                 horizontalAlignment: Text.AlignHCenter
                 Material.accent: babeColor
                 Material.background: backgroundColor
                 Material.primary: backgroundColor
-                Material.foreground: foregroundColor
+                Material.foreground: textColor
             }
 
             TextField
@@ -92,12 +92,12 @@ BabePopup
 
                 Layout.alignment: Qt.AlignCenter
                 placeholderText: email.visible ? "nick *" : "nick or email"
-                color: foregroundColor
+                color: textColor
                 horizontalAlignment: Text.AlignHCenter
                 Material.accent: babeColor
                 Material.background: backgroundColor
                 Material.primary: backgroundColor
-                Material.foreground: foregroundColor
+                Material.foreground: textColor
             }
 
             TextField
@@ -112,12 +112,12 @@ BabePopup
                 Layout.alignment: Qt.AlignCenter
 
                 placeholderText: "password *"
-                color: foregroundColor
+                color: textColor
                 horizontalAlignment: Text.AlignHCenter
                 Material.accent: babeColor
                 Material.background: backgroundColor
                 Material.primary: backgroundColor
-                Material.foreground: foregroundColor
+                Material.foreground: textColor
             }
 
             RowLayout
@@ -134,12 +134,12 @@ BabePopup
                     Layout.fillWidth: true
                     Layout.rightMargin: contentMargins/2
                     placeholderText: "name"
-                    color: foregroundColor
+                    color: textColor
                     horizontalAlignment: Text.AlignHCenter
                     Material.accent: babeColor
                     Material.background: backgroundColor
                     Material.primary: backgroundColor
-                    Material.foreground: foregroundColor
+                    Material.foreground: textColor
                 }
 
                 TextField
@@ -149,12 +149,12 @@ BabePopup
                     Layout.leftMargin: contentMargins/2
 
                     placeholderText: "lastname"
-                    color: foregroundColor
+                    color: textColor
                     horizontalAlignment: Text.AlignHCenter
                     Material.accent: babeColor
                     Material.background: backgroundColor
                     Material.primary: backgroundColor
-                    Material.foreground: foregroundColor
+                    Material.foreground: textColor
                 }
 
             }
@@ -176,7 +176,7 @@ BabePopup
                 Material.accent: babeColor
                 Material.background: backgroundColor
                 Material.primary: backgroundColor
-                Material.foreground: foregroundColor
+                Material.foreground: textColor
             }
 
             Button
@@ -195,7 +195,7 @@ BabePopup
                 Material.accent: babeColor
                 Material.background: babeColor
                 Material.primary: babeColor
-                Material.foreground: darkForegroundColor
+                Material.foreground: darktextColor
 
                 onClicked: fullForm(true)
             }
