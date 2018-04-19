@@ -11,7 +11,11 @@ QT       += widgets
 TARGET = vvave
 TEMPLATE = app
 
+CONFIG += ordered
 CONFIG += c++11
+
+DESTDIR = $$OUT_PWD/../
+
 
 linux:unix:!android {
     QT       += webengine
