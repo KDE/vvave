@@ -10,8 +10,11 @@
 #include <QStyleHints>
 #include "services/local/linking.h"
 
-#ifdef Q_OS_ANDROID
+#ifdef STATIC_KIRIGAMI
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
+#endif
+
+#ifdef Q_OS_ANDROID
 #include <QtWebView/QtWebView>
 #else
 #include <QtWebEngine>
@@ -83,9 +86,11 @@ int main(int argc, char *argv[])
       "LINK",                 // name in QML (does not have to match C++ name)
       "Error: only enums"            // error in case someone tries to create a MyNamespace object
     );
-
-#ifdef Q_OS_ANDROID 
+#ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();
+#endif
+
+#ifdef Q_OS_ANDROID
     QtWebView::initialize();
 #else
 //    if(QQuickStyle::availableStyles().contains("nomad"))
