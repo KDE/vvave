@@ -10,8 +10,10 @@ ItemDelegate
 {
     id: delegateRoot
 
+    readonly property int altHeight : rowHeight * 1.2
+
     width: parent.width
-    height: sameAlbum ?  rowHeight : rowHeight*1.2
+    height: sameAlbum ? rowHeight : altHeight
     clip: true
     autoExclusive:  true
 
@@ -77,7 +79,7 @@ ItemDelegate
         pressAndHoldInterval: 3000
         onClicked:
         {
-            if(!root.isMobile && mouse.button === Qt.RightButton)
+            if(!isMobile && mouse.button === Qt.RightButton)
                 rightClicked()
         }
         //        onPressAndHold:
@@ -97,14 +99,13 @@ ItemDelegate
             visible: coverArt
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignLeft
-            width: sameAlbum ? rowHeight : parent.height
+            width: altHeight
+            height: parent.height
 
             ToolButton
             {
                 visible: !sameAlbum
-                height: parent.height
-                width: parent.height
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.fill: parent
 
                 Image
                 {
@@ -128,7 +129,7 @@ ItemDelegate
 
                 onDoubleClicked: artworkCoverDoubleClicked()
                 onClicked: artworkCoverClicked()
-                onPressAndHold: if(root.isMobile) artworkCoverDoubleClicked()
+                onPressAndHold: if(isMobile) artworkCoverDoubleClicked()
             }
         }
 
@@ -136,8 +137,9 @@ ItemDelegate
         {
             visible: quickPlay
             Layout.fillHeight: true
-            width: sameAlbum ? rowHeight : parent.height
-            Layout.margins: 0
+            width:  rowHeight
+            height: parent.height
+            Layout.leftMargin: space.small
 
             BabeButton
             {
@@ -156,7 +158,7 @@ ItemDelegate
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
             Layout.margins: space.tiny
-            Layout.leftMargin: coverArt ? contentMargins : 0
+            Layout.leftMargin: space.small
             anchors.verticalCenter: parent.verticalCenter
 
             GridLayout

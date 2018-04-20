@@ -88,12 +88,12 @@ Kirigami.ApplicationWindow {
 
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE",
                                                   iconSizes.medium)
-    property int toolBarHeight: isMobile ? 48 : Kirigami.Units.iconSizes.smallMedium  + Kirigami.Units.smallSpacing*2
+    property int toolBarHeight: Kirigami.Units.iconSizes.medium + (Kirigami.Settings.isMobile ?  Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing)
     property int miniArtSize: iconSizes.large
 
     property int columnWidth: Kirigami.Units.gridUnit * 17
     property int coverSize: isAndroid ? Math.sqrt(root.width * root.height) * 0.4 :
-                                        columnWidth * (isMobile ? 0.5 : 0.6)
+                                        columnWidth * (isMobile ? 0.7 : 0.6)
 
 
     /***************************************************/
@@ -301,6 +301,9 @@ Kirigami.ApplicationWindow {
     {
         id: toolbar
 
+        width: root.width
+        height: toolBarHeight
+
         visible: true
         currentIndex: currentView
         onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close(
@@ -342,8 +345,10 @@ Kirigami.ApplicationWindow {
 
         id: playbackControls
         position: ToolBar.Footer
-        height: visible ? headerHeight : 0
+
         width: root.width
+        height: toolBarHeight
+
         visible: true
         focus: true
         leftPadding: 0
@@ -437,10 +442,10 @@ Kirigami.ApplicationWindow {
             Item {
                 Layout.alignment: Qt.AlignLeft
                 Layout.fillHeight: true
-                Layout.maximumWidth: miniArtwork.visible ? headerHeight : 0
-                Layout.minimumWidth: miniArtwork.visible ? headerHeight : 0
-                Layout.minimumHeight: miniArtwork.visible ? headerHeight : 0
-                Layout.maximumHeight: miniArtwork.visible ? headerHeight : 0
+                Layout.maximumWidth: miniArtwork.visible ? toolBarHeight : 0
+                Layout.minimumWidth: miniArtwork.visible ? toolBarHeight : 0
+                Layout.minimumHeight: miniArtwork.visible ? toolBarHeight : 0
+                Layout.maximumHeight: miniArtwork.visible ? toolBarHeight : 0
                 Layout.row: 1
                 Layout.rowSpan: 2
                 Layout.column: 1
@@ -538,7 +543,7 @@ Kirigami.ApplicationWindow {
                     verticalAlignment: Qt.AlignVCenter
                     text: progressTimeLabel + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - " + currentTrack.artist) : "") + "  /  " + durationTimeLabel
                     color: darktextColor
-                    font.pointSize: fontSizes.tiny
+                    font.pointSize: fontSizes.small
                     elide: Text.ElideRight
                 }
             }

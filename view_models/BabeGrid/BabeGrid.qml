@@ -5,13 +5,13 @@ import ".."
 Pane
 {
     id: gridPage
-    padding: 20
+    padding: space.big
 
     //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
-    property int hintSize : Math.sqrt(root.width*root.height)*0.3
+//    property int hintSize : Math.sqrt(root.width*root.height)*0.3
 
-    property int albumCoverSize: isMobile ? iconSizes.huge : iconSizes.enormous
-    readonly property int albumSpacing: albumCoverSize*0.5 + space.big
+    property int albumCoverSize: isMobile ? iconSizes.enormous : iconSizes.enormous
+    readonly property int albumSpacing: albumCoverSize*0.5 + (isMobile ? space.small : space.big)
 
     property int albumCoverRadius : albumCoverSize*0.05
     property bool albumCardVisible : true
@@ -116,5 +116,4 @@ Pane
             //            grid.cellHeight = size
         }
     }
-
 }

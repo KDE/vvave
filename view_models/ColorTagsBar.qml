@@ -4,8 +4,8 @@ import QtQuick.Controls 2.2
 
 Item
 {
-    property int recSize : 16
-    readonly property int recRadius : 4
+    property int recSize : iconSizes.small
+    readonly property int recRadius : recSize*0.05
     signal colorClicked(string color)
 
     RowLayout

@@ -13,8 +13,8 @@ Dialog
 
     modal: true
 
-    margins: 1
-    padding: 2
+    margins: 0
+    padding: space.tiny
 
 
     Material.accent: babeColor

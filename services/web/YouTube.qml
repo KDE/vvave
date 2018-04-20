@@ -271,19 +271,11 @@ Page
                     }
                 }
 
-                Kirigami.Separator
-                {
-                    visible: !isMobile
-                    Layout.fillWidth: true
-                    width: parent.width
-                    height: 1
-                }
-
                 ToolBar
                 {
                     id: searchBox
                     Layout.fillWidth: true
-                    position: ToolBar.Footer       
+                    position: ToolBar.Footer
 
                     RowLayout
                     {

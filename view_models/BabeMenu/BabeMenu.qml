@@ -12,8 +12,8 @@ Menu
     focus: true
     parent: ApplicationWindow.overlay
 
-    margins: 1
-    padding: 2
+    margins: space.tiny
+    padding: space.tiny
 
 //    enter: Transition
 //    {

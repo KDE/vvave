@@ -14,27 +14,27 @@ ToolButton
     property bool anim : false
 
 
-    //    icon.name: isAndroid ? "" : babeButton.iconName
-    //    icon.width: isAndroid ? 0 : babeButton.iconSize
-    //    icon.height: isAndroid ? 0 : babeButton.iconSize
-    //    icon.color: isAndroid  ?  "transparent" : (iconColor || defaultColor)
+        icon.name: isAndroid ? "" : babeButton.iconName
+        icon.width: isAndroid ? 0 : babeButton.iconSize
+        icon.height: isAndroid ? 0 : babeButton.iconSize
+        icon.color: isAndroid  ?  "transparent" : (down ? babeColor : (iconColor || defaultColor))
 
     onClicked: if(anim) animIcon.running = true
 
     flat: true
     highlighted: false
-    Kirigami.Icon
-    {
-        id: kirigamIcon
-        anchors.centerIn: parent
-        width: iconSize
-        height: iconSize
-        visible: !isAndroid
-        source: isAndroid  ? "" : iconName
-        isMask: false
-        color: iconColor || defaultColor
+//    Kirigami.Icon
+//    {
+//        id: kirigamIcon
+//        anchors.centerIn: parent
+//        width: iconSize
+//        height: iconSize
+//        visible: !isAndroid
+//        source: isAndroid  ? "" : iconName
+//        isMask: false
+//        color: iconColor || defaultColor
 
-    }
+//    }
 
     BabeIcon
     {
@@ -59,5 +59,3 @@ ToolButton
         }
     }
 }
-
-

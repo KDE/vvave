@@ -17,7 +17,7 @@ BabeDialog
 
     ColumnLayout
     {
-        spacing: 20
+        spacing: space.small
         anchors.fill: parent
 
         BabeList
@@ -54,11 +54,12 @@ BabeDialog
         RowLayout
         {
             Layout.fillWidth: true
-            Layout.margins: contentMargins
+            Layout.margins: space.small
 
             TextField
             {
                 Layout.fillWidth: true
+                width: parent.width
                 id: newPlaylistField
                 color: textColor
                 placeholderText: qsTr("New playlist")

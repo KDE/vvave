@@ -25,7 +25,7 @@ ToolBar
     signal searchViewClicked()
     signal settingsViewClicked()
 
-    width: parent.width
+
     id: babeBar
 
 //    Rectangle

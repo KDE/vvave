@@ -119,11 +119,11 @@ BabeMenu
     Label
     {
         id: titleLabel
-        visible: root.isMobile
-        padding: root.isMobile ? contentMargins : 0
+        visible: isAndroid
+        padding: isAndroid ? space.small : 0
         font.bold: true
         width: parent.width
-        height: root.isMobile ? iconSizes.medium : 0
+        height: isAndroid ? iconSizes.medium : 0
         horizontalAlignment: Qt.AlignHCenter
         elide: Text.ElideRight
         text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
@@ -163,11 +163,11 @@ BabeMenu
 
     BabeMenuItem
     {
-        text: isMobile ? qsTr("Open with...") : qsTr("Show in folder...")
+        text: isAndroid ? qsTr("Open with...") : qsTr("Show in folder...")
 
         onTriggered:
         {
-            !isMobile ?
+            !isAndroid ?
                         bae.showFolder(list.model.get(list.currentIndex).url) :
                         bae.openFile(list.model.get(list.currentIndex).url)
             close()
@@ -211,7 +211,7 @@ BabeMenu
     {
         id: starsRow
         width: parent.width
-        height: toolBarIconSize
+        height: iconSizes.small
 
         RowLayout
         {
@@ -222,6 +222,7 @@ BabeMenu
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 iconName: starIcon
+                iconSize: iconSizes.small
                 iconColor: rate >= 1 ? starColor :starReg
                 onClicked: rateIt(1)
             }
@@ -230,7 +231,7 @@ BabeMenu
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-
+                iconSize: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 2 ? starColor :starReg
                 onClicked: rateIt(2)
@@ -240,7 +241,7 @@ BabeMenu
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-
+                iconSize: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 3 ? starColor :starReg
 
@@ -251,7 +252,7 @@ BabeMenu
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-
+                iconSize: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 4 ? starColor :starReg
 
@@ -262,7 +263,7 @@ BabeMenu
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-
+                iconSize: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 5 ? starColor :starReg
 
@@ -276,6 +277,7 @@ BabeMenu
     {
         id: colorsRow
         width: parent.width
+        height:  iconSizes.small
 
         ColorTagsBar
         {

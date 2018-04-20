@@ -95,36 +95,18 @@ Page
             headerBarVisible: true
             headerBarExit: true
             headerBarExitIcon: "edit-clear"
-            holder.message: "No search results!"
+            holder.message: "<h2>No search results!</h2><p>Try with another query</p>"
             coverArtVisible: true
             trackDuration: true
             trackRating: true
             onExit: clearSearch()
         }
 
-        Kirigami.Separator
-        {
-            visible: !isMobile
-            Layout.fillWidth: true
-            width: parent.width
-            height: 1
-        }
-
         ToolBar
         {
             id: searchBox
             Layout.fillWidth: true
-//            width: parent.width
-//            height: toolBarHeight
             position: ToolBar.Footer
-
-            Rectangle
-            {
-                anchors.fill: parent
-                z: -999
-                color: backgroundColor
-            }
-
 
             RowLayout
             {
@@ -132,7 +114,6 @@ Page
 
                 BabeButton
                 {
-                    Layout.leftMargin: contentMargins
                     visible: true
                     iconName: "view-filter"
                     iconColor: autoSuggestions ? babeColor : textColor
@@ -168,7 +149,6 @@ Page
 
                 BabeButton
                 {
-                    Layout.rightMargin: contentMargins
                     iconName: "edit-clear"
                     onClicked: searchInput.clear()
                 }
