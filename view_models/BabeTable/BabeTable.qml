@@ -64,7 +64,7 @@ BabeList
         {
             id: menuBtn
             iconName: /*"application-menu"*/ "overflow-menu"
-            onClicked: headerMenu.popup()
+            onClicked: isMobile ? headerMenu.open() : headerMenu.popup()
         }
     ]
 
