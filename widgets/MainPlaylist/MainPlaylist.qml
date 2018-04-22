@@ -177,7 +177,7 @@ Item
                     {
                         id: infoBtn
                         anchors.centerIn: parent
-                        iconColor: darktextColor
+                        iconColor: darkTextColor
                         iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
                         onClicked:
                         {
@@ -200,7 +200,7 @@ Item
                     BabeButton
                     {
                         anchors.centerIn: parent
-                        iconColor: darktextColor
+                        iconColor: darkTextColor
                         iconName: "videoclip-amarok"
                         onClicked:
                         {
@@ -222,7 +222,7 @@ Item
                         Layout.fillWidth: true
                         iconName: "overflow-menu"
                         onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
-                        iconColor: darktextColor
+                        iconColor: darkTextColor
 
                     }
                 }
@@ -295,11 +295,11 @@ Item
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true
-                    headerBarColor : darkMidColor
+                    headerBarColor : darkButtonBackgroundColor
                     holder.message : "<h2>Meh!</h2><p>Start putting together your playlist!</p>"
                     holder.emoji: "qrc:/assets/face-sleeping.png"
 
-                    labelColor: darktextColor
+                    labelColor: darkTextColor
 
                     Rectangle
                     {

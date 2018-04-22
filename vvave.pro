@@ -28,8 +28,7 @@ linux:unix:!android {
     include(android-openssl.pri)
     include(3rdparty/kirigami/kirigami.pri)
 
-    RESOURCES += kirigami-icons.qrc
-    DEFINES += STATIC_KIRIGAMI
+    DEFINES += STATIC_KIRIGAMI        
 
 } else {
     message("Unknown configuration")
@@ -89,16 +88,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     db/script.sql \
-    android-openssl.pri \
-    kde/kde.pri \
-    android/AndroidManifest.xml \
-    android/gradle/wrapper/gradle-wrapper.jar \
-    android/gradlew \
-    android/res/values/libs.xml \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat \
-    android/android.pri
 
 
 HEADERS += \

@@ -195,7 +195,7 @@ BabePopup
                 Material.accent: babeColor
                 Material.background: babeColor
                 Material.primary: babeColor
-                Material.foreground: darktextColor
+                Material.foreground: darkTextColor
 
                 onClicked: fullForm(true)
             }

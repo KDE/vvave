@@ -77,26 +77,12 @@ class Babe : public CollectionDB
         Q_INVOKABLE static void showFolder(const QString &url);
 
         /*COLORS*/
-        Q_INVOKABLE static QString baseColor();
-        Q_INVOKABLE static QString darkColor();
-        Q_INVOKABLE static QString backgroundColor();
-        Q_INVOKABLE static QString foregroundColor();
-        Q_INVOKABLE static QString textColor();
-        Q_INVOKABLE static QString highlightColor();
-        Q_INVOKABLE static QString highlightTextColor();
-        Q_INVOKABLE static QString midColor();
-        Q_INVOKABLE static QString midLightColor();
-        Q_INVOKABLE static QString shadowColor();
-        Q_INVOKABLE static QString altColor();
         Q_INVOKABLE static QString babeColor();
-        Q_INVOKABLE static QString babeAltColor();
 
 
         /*UTILS*/
         Q_INVOKABLE static bool isMobile();
         Q_INVOKABLE static bool isAndroid();
-        Q_INVOKABLE static int screenGeometry(QString side);
-        Q_INVOKABLE static int cursorPos(QString axis);
 
         Q_INVOKABLE static QString moodColor(const int &pos);
 
@@ -127,7 +113,7 @@ class Babe : public CollectionDB
         Q_INVOKABLE static void sendTrack(const QString &url);
         Q_INVOKABLE static void openFile(const QString &url);
         Q_INVOKABLE void fileChooser();
-        Q_INVOKABLE static void androidStatusBarColor(const QString &color);
+        Q_INVOKABLE static void androidStatusBarColor(const QString &color, const bool &contrast);
 
 
     public slots:

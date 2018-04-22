@@ -8,8 +8,6 @@ ItemDelegate
 {
     id: babeAlbumRoot
 
-    signal albumClicked(int index)
-    signal albumPressed(int index)
     property int albumSize : iconSizes.huge
     property int borderRadius : albumSize*0.05
     property int albumRadius : 0
@@ -17,7 +15,7 @@ ItemDelegate
     property string fillColor: backgroundColor
     property bool hide : false
 
-    property color labelColor : GridView.isCurrentItem  || hovered ? highlightColor : textColor
+    property color labelColor : GridView.isCurrentItem  || hovered || down ? highlightColor : textColor
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
 
     visible: !hide
@@ -165,15 +163,7 @@ ItemDelegate
             }
 
         }
-    }
-
-    MouseArea
-    {
-        anchors.fill: parent
-        onClicked: albumClicked(index)
-        onPressAndHold: albumPressed(index)
-
-    }
+    } 
 }
 
 

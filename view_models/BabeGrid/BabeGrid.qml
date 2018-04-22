@@ -85,7 +85,7 @@ Pane
             Connections
             {
                 target: albumDelegate
-                onAlbumClicked:
+                onClicked:
                 {
                     var album = grid.model.get(index).album
                     var artist = grid.model.get(index).artist
@@ -93,12 +93,12 @@ Pane
                     grid.currentIndex = index
                 }
 
-                onAlbumPressed:
+                onPressAndHold:
                 {
                     var album = grid.model.get(index).album
                     var artist = grid.model.get(index).artist
                     albumCoverPressed(album, artist)
-                }
+                }                
             }
         }
 

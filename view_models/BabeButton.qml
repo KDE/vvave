@@ -13,13 +13,14 @@ ToolButton
     property color iconColor: textColor
     readonly property string defaultColor :  textColor
     property bool anim : false
+
     spacing: space.small
     display: pageStack.wideMode ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
 
-    icon.name: isAndroid ? "" : babeButton.iconName
-    icon.width: isAndroid ? 0 : babeButton.iconSize
-    icon.height: isAndroid ? 0 : babeButton.iconSize
-    icon.color: isAndroid  ?  "transparent" : (down ? babeColor : (iconColor || defaultColor))
+    icon.name: babeButton.iconName
+    icon.width: babeButton.iconSize
+    icon.height: babeButton.iconSize
+    icon.color:  down ? babeColor : (iconColor || defaultColor)
 
     onClicked: if(anim) animIcon.running = true
 
@@ -38,22 +39,13 @@ ToolButton
         color: iconColor
     }
 
-    BabeIcon
-    {
-        id: babeIcon
-        visible: isAndroid
-        icon: babeButton.iconName
-        iconColor: babeButton.iconColor || babeButton.defaultColor
-        iconSize: babeButton.iconSize
-    }
-
     SequentialAnimation
     {
         id: animIcon
         PropertyAnimation
         {
-            target: babeIcon
-            property: "color"
+            target: babeButton
+            property: "icon.color"
             easing.type: Easing.InOutQuad
             from: babeColor
             to: iconColor

@@ -509,157 +509,13 @@ void Babe::showFolder(const QString &url)
 
 }
 
-QString Babe::baseColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#24282c";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Base).name();
-#elif defined(Q_OS_WIN32)
-    return "#24282c";
-#endif
-}
-
-QString Babe::darkColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#111";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Dark).name();
-#elif defined(Q_OS_WIN32)
-    return "#24282c";
-#endif
-}
-
-QString Babe::backgroundColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#31363b";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Background).name();
-#elif defined(Q_OS_WIN32)
-    return "#31363b";
-#endif
-}
-
-QString Babe::foregroundColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#FFF";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Foreground).name();
-#elif defined(Q_OS_WIN32)
-    return "#FFF";
-#endif
-}
-
-QString Babe::textColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#FFF";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Text).name();
-#elif defined(Q_OS_WIN32)
-    return "#FFF";
-#endif
-}
-
-QString Babe::highlightColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#58bcff";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Highlight).name();
-#elif defined(Q_OS_WIN32)
-    return "#58bcff";
-#endif
-}
-
-QString Babe::highlightTextColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#FFF";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::HighlightedText).name();
-#elif defined(Q_OS_WIN32)
-    return "#FFF";
-#endif
-}
-
-QString Babe::midColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#1f2226";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Mid).name();
-#elif defined(Q_OS_WIN32)
-    return "#1f2226";
-#endif
-}
-
-QString Babe::midLightColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#434951";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Midlight).name();
-#elif defined(Q_OS_WIN32)
-    return "#434951";
-#endif
-}
-
-QString Babe::shadowColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#3e444b";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Shadow).name();
-#elif defined(Q_OS_WIN32)
-    return "#3e444b";
-#endif
-}
-
-QString Babe::altColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#232629";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Base).name();
-#elif defined(Q_OS_WIN32)
-    return "#232629";
-#endif
-}
-
 QString Babe::babeColor()
 {
     return "#f84172";
-    //    return "#E91E63";
 }
 
-QString Babe::babeAltColor()
-{
-#if defined(Q_OS_ANDROID)
-    return "#31363b";
-#elif defined(Q_OS_LINUX)
-    QWidget widget;
-    return widget.palette().color(QPalette::Background).name();
-#elif defined(Q_OS_WIN32)
-    return "#31363b";
-#endif
-}
 
-void Babe::androidStatusBarColor(const QString &color)
+void Babe::androidStatusBarColor(const QString &color, const bool &contrast)
 {
 #if defined(Q_OS_ANDROID)
 
@@ -668,6 +524,13 @@ void Babe::androidStatusBarColor(const QString &color)
         window.callMethod<void>("addFlags", "(I)V", 0x80000000);
         window.callMethod<void>("clearFlags", "(I)V", 0x04000000);
         window.callMethod<void>("setStatusBarColor", "(I)V", QColor(color).rgba());
+
+        if(contrast)
+        {
+            QAndroidJniObject decorView = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
+               decorView.callMethod<void>("setSystemUiVisibility", "(I)V", 0x00002000);
+        }
+
     });
 #endif
 }
@@ -680,29 +543,6 @@ bool Babe::isMobile()
 bool Babe::isAndroid()
 {
     return BAE::isAndroid();
-}
-
-int Babe::screenGeometry(QString side)
-{
-    side = side.toLower();
-    auto geo = QGuiApplication::primaryScreen()->geometry();
-
-    if(side == "width")
-        return geo.width();
-    else if(side == "height")
-        return geo.height();
-    else return 0;
-}
-
-int Babe::cursorPos(QString axis)
-{
-    axis = axis.toLower();
-    auto pos = QCursor::pos();
-    if(axis == "x")
-        return pos.x();
-    else if(axis == "y")
-        return pos.y();
-    else return 0;
 }
 
 QString Babe::moodColor(const int &pos)

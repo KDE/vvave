@@ -15,5 +15,4 @@ Text
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment:  Text.AlignVCenter
     color: babeIcon.iconColor
-
 }

@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
-import Qt.labs.handlers 1.0
+//import Qt.labs.handlers 1.0
 
 import "../utils"
 import "../view_models"
@@ -13,7 +13,6 @@ ToolBar
 
     property alias babeBar : babeBar
     property string accentColor : babeColor
-    property string textColor : textColor
     property int currentIndex : 0
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
 
@@ -21,7 +20,6 @@ ToolBar
     signal albumsViewClicked()
     signal artistsViewClicked()
     signal playlistsViewClicked()
-    signal babeViewClicked()
     //    signal playlistViewClicked()
     signal searchViewClicked()
     signal settingsViewClicked()
@@ -29,24 +27,24 @@ ToolBar
 
     id: babeBar
 
-    TapHandler
-    {
-        onTapped: if (tapCount === 2) toggleMaximized()
-        gesturePolicy: TapHandler.DragThreshold
-    }
+//    TapHandler
+//    {
+//        onTapped: if (tapCount === 2) toggleMaximized()
+//        gesturePolicy: TapHandler.DragThreshold
+//    }
 
-    DragHandler
-    {
-        grabPermissions: TapHandler.CanTakeOverFromAnything
-        onGrabChanged:
-        {
-            if (active)
-            {
-                var position = parent.mapToItem(root.contentItem, point.position.x, point.position.y)
-                root.startSystemMove(position);
-            }
-        }
-    }
+//    DragHandler
+//    {
+//        grabPermissions: TapHandler.CanTakeOverFromAnything
+//        onGrabChanged:
+//        {
+//            if (active)
+//            {
+//                var position = parent.mapToItem(root.contentItem, point.position.x, point.position.y)
+//                root.startSystemMove(position);
+//            }
+//        }
+//    }
 
 
     RowLayout
@@ -183,31 +181,6 @@ ToolBar
             }
         }
 
-        //        Item
-        //        {
-        //            Layout.fillHeight: true
-        //            Layout.fillWidth: true
-        //            Layout.maximumWidth: toolBarIconSize*2
-        //            Layout.maximumHeight: toolBarIconSize
-
-        //            BabeButton
-        //            {
-        //                anchors.centerIn: parent
-
-        //                iconName: "love"
-        //                iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
-
-        //                onClicked: babeViewClicked()
-
-        //                hoverEnabled: !isMobile
-        //                ToolTip.delay: 1000
-        //                ToolTip.timeout: 5000
-        //                ToolTip.visible: hovered && !isMobile
-        //                ToolTip.text: qsTr("Babe")
-        //            }
-        //        }
-
-
         Item
         {
             Layout.fillWidth: true
@@ -241,29 +214,29 @@ ToolBar
         }
 
 
-        Item
-        {
-            Layout.alignment: Qt.AlignRight
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.maximumWidth: toolBarIconSize*2
-            Layout.maximumHeight: toolBarIconSize
+//        Item
+//        {
+//            Layout.alignment: Qt.AlignRight
+//            Layout.fillHeight: true
+//            Layout.fillWidth: true
+//            Layout.maximumWidth: toolBarIconSize*2
+//            Layout.maximumHeight: toolBarIconSize
 
-            BabeButton
-            {
-                id: closeBtn
-                anchors.centerIn: parent
-                //                visible: !(searchInput.focus || searchInput.text)
-                iconColor: down ? accentColor : textColor
-                iconName: "window-close" //"search"
-                onClicked: root.close()
-                hoverEnabled: !isMobile
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Close")
-            }
-        }
+//            BabeButton
+//            {
+//                id: closeBtn
+//                anchors.centerIn: parent
+//                //                visible: !(searchInput.focus || searchInput.text)
+//                iconColor: down ? accentColor : textColor
+//                iconName: "window-close" //"search"
+//                onClicked: root.close()
+//                hoverEnabled: !isMobile
+//                ToolTip.delay: 1000
+//                ToolTip.timeout: 5000
+//                ToolTip.visible: hovered && !isMobile
+//                ToolTip.text: qsTr("Close")
+//            }
+//        }
     }
 
 }

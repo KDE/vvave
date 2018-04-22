@@ -88,7 +88,7 @@ BabeGrid
 
             Kirigami.Separator
             {
-//                visible: !isMobile
+                visible: !isAndroid
                 width: parent.width
                 height: 1
                 z: 999

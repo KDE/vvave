@@ -37,7 +37,7 @@ Kirigami.ApplicationWindow
     minimumWidth: !isMobile ? columnWidth : 0
     minimumHeight: !isMobile ? columnWidth + 64 : 0
     height: Screen.height * (isMobile ? 1 : 0.4)
-    flags: Qt.FramelessWindowHint
+    //    flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
 
     //    wideScreen: root.width > coverSize
@@ -111,8 +111,8 @@ Kirigami.ApplicationWindow
                                            albums: 1,
                                            artists: 2,
                                            playlists: 3,
-                                           babeit: 4,
-                                           search: 5,
+                                           search: 4,
+                                           vvave: 5,
                                            youtube: 6,
                                            linking: 7
                                        })
@@ -149,22 +149,22 @@ Kirigami.ApplicationWindow
     readonly property int contentMargins: space.medium
     readonly property int defaultFontSize: Kirigami.Theme.defaultFont.pointSize
     readonly property var fontSizes: ({
-                                          tiny: defaultFontSize * 0.4,
+                                          tiny: defaultFontSize * 0.7,
 
-                                          small: (isMobile ? defaultFontSize * 0.4 :
-                                                             defaultFontSize * 0.6),
+                                          small: (isMobile ? defaultFontSize * 0.7 :
+                                                             defaultFontSize * 0.8),
 
-                                          medium: (isMobile ? defaultFontSize * 0.6 :
-                                                              defaultFontSize * 0.8),
+                                          medium: (isMobile ? defaultFontSize * 0.8 :
+                                                              defaultFontSize * 0.9),
 
-                                          default: (isMobile ? defaultFontSize * 0.8 :
+                                          default: (isMobile ? defaultFontSize * 0.9 :
                                                                defaultFontSize),
 
                                           big: (isMobile ? defaultFontSize :
-                                                           defaultFontSize * 1.2),
+                                                           defaultFontSize * 1.1),
 
-                                          large: (isMobile ? defaultFontSize * 1.2 :
-                                                             defaultFontSize * 1.4)
+                                          large: (isMobile ? defaultFontSize * 1.1 :
+                                                             defaultFontSize * 1.2)
                                       })
 
     readonly property var space : ({
@@ -220,15 +220,12 @@ Kirigami.ApplicationWindow
     property string babeColor: bae.babeColor()
 
     readonly property string darkBackgroundColor: "#303030"
-    readonly property string darktextColor: "#FAFAFA"
-    readonly property string darkBabeHighlightColor: "#29B6F6"
-    readonly property string darkHighlightTextColor: darktextColor
-    readonly property string darkMidColor: "#1d1d1d"
-    readonly property string darkMidLightColor: "#282828"
+    readonly property string darkTextColor: "#FAFAFA"
+    readonly property string darkHighlightColor: "#29B6F6"
+    readonly property string darkHighlightedTextColor: darkTextColor
+    readonly property string darkViewBackgroundColor: "#212121"
     readonly property string darkDarkColor: "#191919"
-    readonly property string darkBaseColor: "#212121"
-    readonly property string darkAltColor: darkDarkColor
-    readonly property string darkShadowColor: darkAltColor
+    readonly property string darkButtonBackgroundColor :  "#191919"
 
 
     /***************************************************/
@@ -343,12 +340,6 @@ Kirigami.ApplicationWindow
             currentView = viewsIndex.playlists
         }
 
-        onBabeViewClicked:
-        {
-            pageStack.currentIndex = 1
-            currentView = viewsIndex.babeit
-        }
-
         onSearchViewClicked:
         {
             pageStack.currentIndex = 1
@@ -358,8 +349,8 @@ Kirigami.ApplicationWindow
     }
 
 
-    footer: ToolBar {
-
+    footer: ToolBar
+    {
         id: playbackControls
         position: ToolBar.Footer
 
@@ -388,7 +379,7 @@ Kirigami.ApplicationWindow
         {
             id: footerBg
             anchors.fill: parent
-            color: darkBaseColor
+            color: darkViewBackgroundColor
             opacity: opacityLevel
             z: -999
 
@@ -401,7 +392,7 @@ Kirigami.ApplicationWindow
                     property: "color"
                     easing.type: Easing.InOutQuad
                     from: "black"
-                    to: darkBaseColor
+                    to: darkViewBackgroundColor
                     duration: 500
                 }
             }
@@ -411,7 +402,7 @@ Kirigami.ApplicationWindow
         {
             id: progressBar
 
-            height: iconSizes.small
+            height: iconSizes.big
             width: parent.width
             anchors.left:  parent.left
             anchors.right: parent.right
@@ -487,7 +478,7 @@ Kirigami.ApplicationWindow
                     height: miniArtSize + miniArtSize*0.05
                     width: miniArtSize + miniArtSize*0.05
 
-                    color: darktextColor
+                    color: darkTextColor
                     opacity: opacityLevel
 
                     z: -999
@@ -580,7 +571,7 @@ Kirigami.ApplicationWindow
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
                     text: progressTimeLabel + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - " + currentTrack.artist) : "") + "  /  " + durationTimeLabel
-                    color: darktextColor
+                    color: darkTextColor
                     font.pointSize: fontSizes.small
                     elide: Text.ElideRight
                 }
@@ -598,7 +589,7 @@ Kirigami.ApplicationWindow
                 {
                     id: babeBtnIcon
                     iconName: "love"
-                    iconColor: currentBabe ? babeColor : darktextColor
+                    iconColor: currentBabe ? babeColor : darkTextColor
                     onClicked: if (!mainlistEmpty)
                                {
                                    var value = mainPlaylist.contextMenu.babeIt(
@@ -610,7 +601,7 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: previousBtn
-                    iconColor: darktextColor
+                    iconColor: darkTextColor
                     iconName: "media-skip-backward"
                     onClicked: Player.previousTrack()
                     onPressAndHold: Player.playAt(prevTrackIndex)
@@ -619,7 +610,7 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: playIcon
-                    iconColor: darktextColor
+                    iconColor: darkTextColor
 
                     iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onClicked:
@@ -634,7 +625,7 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: nextBtn
-                    iconColor: darktextColor
+                    iconColor: darkTextColor
 
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
@@ -645,7 +636,7 @@ Kirigami.ApplicationWindow
                 BabeButton
                 {
                     id: shuffleBtn
-                    iconColor: darktextColor
+                    iconColor: darkTextColor
 
                     iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
                     onClicked: isShuffle = !isShuffle
@@ -794,7 +785,7 @@ Kirigami.ApplicationWindow
                         searchView.forceActiveFocus()
 
                     if (!babeitView.isConnected
-                            && currentIndex === viewsIndex.babeit)
+                            && currentIndex === viewsIndex.vvave)
                         babeitView.logginDialog.open()
                 }
 
@@ -864,10 +855,6 @@ Kirigami.ApplicationWindow
                     }
                 }
 
-                BabeitView
-                {
-                    id: babeitView
-                }
 
                 SearchTable
                 {
@@ -894,6 +881,11 @@ Kirigami.ApplicationWindow
                             Player.playAll(bae.get(query))
                         }
                     }
+                }
+
+                BabeitView
+                {
+                    id: babeitView
                 }
 
                 YouTube
@@ -985,9 +977,9 @@ Kirigami.ApplicationWindow
 
     Component.onCompleted:
     {
-        //        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
-        //        console.log(Imagine.url, Imagine.path)
-        bae.androidStatusBarColor(viewBackgroundColor)
+        var style = bae.loadSetting("THEME", "BABE", "Dark")
+        if(isMobile) settingsDrawer.switchColorScheme(style)
+        if(isAndroid) bae.androidStatusBarColor(viewBackgroundColor, style !== "Dark")
     }
 
 

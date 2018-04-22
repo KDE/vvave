@@ -51,6 +51,17 @@ Kirigami.GlobalDrawer
 
         Kirigami.Action
         {
+            text: "Vvave Stream"
+            iconName: "love"
+            onTriggered:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.vvave
+            }
+        },
+
+        Kirigami.Action
+        {
             text: qsTr("YouTube")
             iconName: "im-youtube"
             onTriggered:
@@ -59,13 +70,6 @@ Kirigami.GlobalDrawer
                 currentView = viewsIndex.youtube
             }
         },
-
-        Kirigami.Action
-        {
-            text: qsTr("Folders")
-            iconName: "folder"
-        },
-
 
         Kirigami.Action
         {
@@ -78,6 +82,7 @@ Kirigami.GlobalDrawer
                 if(!isLinked) linkingView.linkingConf.open()
             }
         },
+
 
         Kirigami.Action
         {
@@ -309,45 +314,25 @@ Kirigami.GlobalDrawer
 
         if(variant === "Light")
         {
-            backgroundColor = lightBackgroundColor
-            foregroundColor = lightForegroundColor
-            textColor = lightTextColor
-            babeHighlightColor = lightBabeHighlightColor
-            highlightTextColor = lightHighlightTextColor
-            midColor = lightMidColor
-            midLightColor = lightMidLightColor
-            darkColor = lightDarkColor
-            baseColor = lightBaseColor
-            altColor = lightAltColor
-            shadowColor = lightShadowColor
+
+            backgroundColor = Kirigami.Theme.backgroundColor
+            textColor = Kirigami.Theme.textColor
+            highlightColor = Kirigami.Theme.highlightColor
+            highlightedTextColor = Kirigami.Theme.highlightedTextColor
+            buttonBackgroundColor = Kirigami.Theme.buttonBackgroundColor
+            viewBackgroundColor = Kirigami.Theme.viewBackgroundColor
+            altColor = Kirigami.Theme.complementaryBackgroundColor
+            babeColor = bae.babeColor()
 
         }else if(variant === "Dark")
         {
             backgroundColor = darkBackgroundColor
-            foregroundColor = darkForegroundColor
             textColor = darkTextColor
-            babeHighlightColor = darkBabeHighlightColor
-            highlightTextColor = darkHighlightTextColor
-            midColor = darkMidColor
-            midLightColor = darkMidLightColor
-            darkColor = darkDarkColor
-            baseColor = darkBaseColor
-            altColor = darkAltColor
-            shadowColor = darkShadowColor
-
-        }else if (variant === "Breeze")
-        {
-            backgroundColor = bae.backgroundColor()
-            foregroundColor = bae.foregroundColor()
-            textColor = bae.textColor()
-            babeHighlightColor = bae.highlightColor()
-            highlightTextColor = bae.highlightTextColor()
-            midColor = bae.midColor()
-            midLightColor = bae.midLightColor()
-            darkColor = bae.darkColor()
-            baseColor = bae.baseColor()
-            altColor = bae.altColor()
-            shadowColor = bae.shadowColor()
+            highlightColor = darkHighlightColor
+            highlightedTextColor = darkHighlightedTextColor
+            buttonBackgroundColor = darkButtonBackgroundColor
+            viewBackgroundColor = darkViewBackgroundColor
+            altColor = darkDarkColor
         }
     }
 }

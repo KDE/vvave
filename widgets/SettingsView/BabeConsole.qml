@@ -36,7 +36,7 @@ BabePopup
         {
             Layout.alignment: Qt.AlignLeft
             Layout.leftMargin:  contentMargins
-            iconColor: darktextColor
+            iconColor: darkTextColor
             anim : true
             iconName : "dialog-close"
             onClicked : close()
@@ -70,7 +70,7 @@ BabePopup
                     implicitHeight: 40
                 }
 
-                color: darktextColor
+                color: darkTextColor
             }
         }
     }

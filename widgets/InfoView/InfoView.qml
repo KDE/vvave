@@ -36,7 +36,7 @@ Page
             BabeHolder
             {
                 id: lyricsHolder
-                color: darktextColor
+                color: darkTextColor
                 anchors.fill: parent
                 visible: lyricsText.text.length > 0 ? false : true
                 message: "Couldn't find the lyrics!"
@@ -59,7 +59,7 @@ Page
                     readOnly: true
                     padding: 20
                     text: ""
-                    color: darktextColor
+                    color: darkTextColor
                     font.pointSize: fontSizes.big
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
@@ -148,7 +148,7 @@ Page
                         padding: 20
                         text: wikiAlbum
                         visible: wikiAlbum === "NONE" || wikiAlbum.length===0 ? false : true
-                        color: darktextColor
+                        color: darkTextColor
                         font.pointSize: fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.RichText
@@ -175,7 +175,7 @@ Page
                         text: wikiArtist
                         visible: wikiArtist === "NONE" || wikiArtist.length===0 ? false : true
 
-                        color: darktextColor
+                        color: darkTextColor
                         font.pointSize: fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.StyledText

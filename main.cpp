@@ -8,6 +8,8 @@
 #include <QLibrary>
 // #include <QQuickStyle>
 #include <QStyleHints>
+#include <QCommandLineParser>
+
 #include "services/local/linking.h"
 
 #ifdef STATIC_KIRIGAMI
@@ -16,22 +18,30 @@
 
 #ifdef Q_OS_ANDROID
 #include <QtWebView/QtWebView>
+#include <QGuiApplication>
+#include <QIcon>
 #else
+#include <QApplication>
 #include <QtWebEngine>
 #endif
 
 #include "utils/bae.h"
-#include <QCommandLineParser>
 #include "services/web/youtube.h"
 
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
 #endif
+
 int main(int argc, char *argv[])
 {
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+#ifdef Q_OS_ANDROID
+    QGuiApplication app(argc, argv);
+#else
     QApplication app(argc, argv);
+#endif
+
     app.setApplicationName(BAE::App);
     app.setApplicationVersion(BAE::Version);
     app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
@@ -91,6 +101,7 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef Q_OS_ANDROID
+    QIcon::setThemeName("Luv");
     QtWebView::initialize();
 #else
 //    if(QQuickStyle::availableStyles().contains("nomad"))
