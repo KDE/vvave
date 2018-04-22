@@ -29,6 +29,7 @@ linux:unix:!android {
     include(3rdparty/kirigami/kirigami.pri)
 
     RESOURCES += kirigami-icons.qrc
+    DEFINES += STATIC_KIRIGAMI
 
 } else {
     message("Unknown configuration")
