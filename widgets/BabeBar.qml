@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
+import Qt.labs.handlers 1.0
 
 import "../utils"
 import "../view_models"
@@ -28,12 +29,25 @@ ToolBar
 
     id: babeBar
 
-//    Rectangle
-//    {
-//        anchors.fill: isMobile ? parent : undefined
-//        color: bgColor
-//        visible: !isMobile
-//    }
+    TapHandler
+    {
+        onTapped: if (tapCount === 2) toggleMaximized()
+        gesturePolicy: TapHandler.DragThreshold
+    }
+
+    DragHandler
+    {
+        grabPermissions: TapHandler.CanTakeOverFromAnything
+        onGrabChanged:
+        {
+            if (active)
+            {
+                var position = parent.mapToItem(root.contentItem, point.position.x, point.position.y)
+                root.startSystemMove(position);
+            }
+        }
+    }
+
 
     RowLayout
     {
@@ -76,7 +90,7 @@ ToolBar
         {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumWidth: tracksView.implicitWidth * 1.3
             Layout.maximumHeight: toolBarIconSize
 
             BabeButton
@@ -87,7 +101,7 @@ ToolBar
                 iconName: "view-media-track"
                 iconColor:  accent && currentIndex === viewsIndex.tracks ? accentColor : textColor
                 onClicked: tracksViewClicked()
-
+                text: qsTr("Tracks")
                 hoverEnabled: true
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
@@ -100,14 +114,14 @@ ToolBar
         {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumWidth: albumsView.implicitWidth * 1.3
             Layout.maximumHeight: toolBarIconSize
 
             BabeButton
             {
                 id: albumsView
                 anchors.centerIn: parent
-
+                text: qsTr("Albums")
                 iconName: /*"album"*/ "view-media-album-cover"
                 iconColor:  accent && currentIndex === viewsIndex.albums ? accentColor : textColor
                 onClicked: albumsViewClicked()
@@ -124,14 +138,14 @@ ToolBar
         {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumWidth: artistsView.implicitWidth * 1.3
             Layout.maximumHeight: toolBarIconSize
 
             BabeButton
             {
                 id: artistsView
                 anchors.centerIn: parent
-
+                text: qsTr("Artists")
                 iconName: "view-media-artist"
                 iconColor:  accent && currentIndex === viewsIndex.artists ? accentColor : textColor
 
@@ -148,14 +162,14 @@ ToolBar
         {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumWidth: playlistsView.implicitWidth * 1.3
             Layout.maximumHeight: toolBarIconSize
 
             BabeButton
             {
                 id: playlistsView
                 anchors.centerIn: parent
-
+                text: qsTr("Playlists")
                 iconName: "view-media-playlist"
                 iconColor:  accent && currentIndex === viewsIndex.playlists ? accentColor : textColor
 
@@ -169,29 +183,29 @@ ToolBar
             }
         }
 
-        Item
-        {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.maximumWidth: toolBarIconSize*2
-            Layout.maximumHeight: toolBarIconSize
+        //        Item
+        //        {
+        //            Layout.fillHeight: true
+        //            Layout.fillWidth: true
+        //            Layout.maximumWidth: toolBarIconSize*2
+        //            Layout.maximumHeight: toolBarIconSize
 
-            BabeButton
-            {
-                anchors.centerIn: parent
+        //            BabeButton
+        //            {
+        //                anchors.centerIn: parent
 
-                iconName: "love"
-                iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
+        //                iconName: "love"
+        //                iconColor: accent && currentIndex === viewsIndex.babeit ? accentColor : textColor
 
-                onClicked: babeViewClicked()
+        //                onClicked: babeViewClicked()
 
-                hoverEnabled: !isMobile
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Babe")
-            }
-        }
+        //                hoverEnabled: !isMobile
+        //                ToolTip.delay: 1000
+        //                ToolTip.timeout: 5000
+        //                ToolTip.visible: hovered && !isMobile
+        //                ToolTip.text: qsTr("Babe")
+        //            }
+        //        }
 
 
         Item
@@ -225,6 +239,32 @@ ToolBar
                 ToolTip.text: qsTr("Search")
             }
         }
+
+
+        Item
+        {
+            Layout.alignment: Qt.AlignRight
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.maximumWidth: toolBarIconSize*2
+            Layout.maximumHeight: toolBarIconSize
+
+            BabeButton
+            {
+                id: closeBtn
+                anchors.centerIn: parent
+                //                visible: !(searchInput.focus || searchInput.text)
+                iconColor: down ? accentColor : textColor
+                iconName: "window-close" //"search"
+                onClicked: root.close()
+                hoverEnabled: !isMobile
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered && !isMobile
+                ToolTip.text: qsTr("Close")
+            }
+        }
     }
+
 }
 

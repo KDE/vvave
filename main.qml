@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.1
 
-import QtQuick.Window 2.0
+import QtQuick.Window 2.3
 
 import "services/local"
 
@@ -28,14 +28,18 @@ import "utils/Help.js" as H
 import org.kde.kirigami 2.2 as Kirigami
 import Link.Codes 1.0
 
-Kirigami.ApplicationWindow {
+Kirigami.ApplicationWindow
+{
+
     id: root
     visible: true
     width: Screen.width * (isMobile ? 1 : 0.4)
     minimumWidth: !isMobile ? columnWidth : 0
     minimumHeight: !isMobile ? columnWidth + 64 : 0
     height: Screen.height * (isMobile ? 1 : 0.4)
+    flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
+
     //    wideScreen: root.width > coverSize
 
     /*ALIASES*/
@@ -148,19 +152,19 @@ Kirigami.ApplicationWindow {
                                           tiny: defaultFontSize * 0.4,
 
                                           small: (isMobile ? defaultFontSize * 0.4 :
-                                                            defaultFontSize * 0.6),
+                                                             defaultFontSize * 0.6),
 
                                           medium: (isMobile ? defaultFontSize * 0.6 :
-                                                             defaultFontSize * 0.8),
+                                                              defaultFontSize * 0.8),
 
                                           default: (isMobile ? defaultFontSize * 0.8 :
-                                                              defaultFontSize),
+                                                               defaultFontSize),
 
                                           big: (isMobile ? defaultFontSize :
-                                                          defaultFontSize * 1.2),
+                                                           defaultFontSize * 1.2),
 
                                           large: (isMobile ? defaultFontSize * 1.2 :
-                                                            defaultFontSize * 1.4)
+                                                             defaultFontSize * 1.4)
                                       })
 
     readonly property var space : ({
@@ -189,10 +193,10 @@ Kirigami.ApplicationWindow {
                                                               Kirigami.Units.iconSizes.large),
 
                                            huge: (isMobile ? Kirigami.Units.iconSizes.large :
-                                                              Kirigami.Units.iconSizes.huge),
+                                                             Kirigami.Units.iconSizes.huge),
 
                                            enormous: (isMobile ? Kirigami.Units.iconSizes.huge :
-                                                              Kirigami.Units.iconSizes.enormous)
+                                                                 Kirigami.Units.iconSizes.enormous)
 
                                        })
 
@@ -241,14 +245,16 @@ Kirigami.ApplicationWindow {
     pageStack.interactive: isMobile
     pageStack.separatorVisible: pageStack.wideMode
 
-    overlay.modal: Rectangle {
+    overlay.modal: Rectangle
+    {
         color: isAndroid ? darkColor : "transparent"
         opacity: 0.5
         height: root.height - playbackControls.height - toolbar.height
         y: toolbar.height
     }
 
-    overlay.modeless: Rectangle {
+    overlay.modeless: Rectangle
+    {
         color: "transparent"
     }
 
@@ -275,18 +281,21 @@ Kirigami.ApplicationWindow {
     //            Material.background = babeAltColor
     //        }
     //    }
-    onMissingAlert: {
+    onMissingAlert:
+    {
         missingDialog.message = track.title + " by " + track.artist + " is missing"
         missingDialog.messageBody = "Do you want to remove it from your collection?"
         missingDialog.open()
     }
 
     /*COMPONENTS*/
-    BabeNotify {
+    BabeNotify
+    {
         id: babeNotify
     }
 
-    BabeMessage {
+    BabeMessage
+    {
         id: missingDialog
         width: isMobile ? parent.width * 0.9 : parent.width * 0.4
         title: "Missing file"
@@ -306,40 +315,48 @@ Kirigami.ApplicationWindow {
 
         visible: true
         currentIndex: currentView
-        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close(
-                                                            ) : settingsDrawer.open()
+        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() :
+                                                        settingsDrawer.open()
 
-        onTracksViewClicked: {
+
+        onTracksViewClicked:
+        {
             pageStack.currentIndex = 1
             currentView = viewsIndex.tracks
         }
 
-        onAlbumsViewClicked: {
+        onAlbumsViewClicked:
+        {
             pageStack.currentIndex = 1
             currentView = viewsIndex.albums
         }
 
-        onArtistsViewClicked: {
+        onArtistsViewClicked:
+        {
             pageStack.currentIndex = 1
             currentView = viewsIndex.artists
         }
 
-        onPlaylistsViewClicked: {
+        onPlaylistsViewClicked:
+        {
             pageStack.currentIndex = 1
             currentView = viewsIndex.playlists
         }
 
-        onBabeViewClicked: {
+        onBabeViewClicked:
+        {
             pageStack.currentIndex = 1
             currentView = viewsIndex.babeit
         }
 
-        onSearchViewClicked: {
+        onSearchViewClicked:
+        {
             pageStack.currentIndex = 1
             currentView = viewsIndex.search
             searchView.searchInput.forceActiveFocus()
         }
     }
+
 
     footer: ToolBar {
 
@@ -354,7 +371,8 @@ Kirigami.ApplicationWindow {
         leftPadding: 0
         rightPadding: 0
 
-        FastBlur {
+        FastBlur
+        {
 
             width: parent.width
             height: parent.height-1
@@ -366,16 +384,19 @@ Kirigami.ApplicationWindow {
             z: -999
         }
 
-        Rectangle {
+        Rectangle
+        {
             id: footerBg
             anchors.fill: parent
             color: darkBaseColor
             opacity: opacityLevel
             z: -999
 
-            SequentialAnimation {
+            SequentialAnimation
+            {
                 id: animFooter
-                PropertyAnimation {
+                PropertyAnimation
+                {
                     target: footerBg
                     property: "color"
                     easing.type: Easing.InOutQuad
@@ -386,7 +407,8 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        Slider {
+        Slider
+        {
             id: progressBar
 
             height: iconSizes.small
@@ -403,7 +425,8 @@ Kirigami.ApplicationWindow {
 
             onMoved: player.seek(player.duration() / 1000 * value)
 
-            background: Rectangle {
+            background: Rectangle
+            {
                 x: progressBar.leftPadding
                 y: progressBar.y
                 implicitWidth: 200
@@ -412,14 +435,16 @@ Kirigami.ApplicationWindow {
                 height: implicitHeight
                 color: "transparent"
 
-                Rectangle {
+                Rectangle
+                {
                     width: progressBar.visualPosition * parent.width
                     height: iconSizes.tiny*0.1
                     color: babeColor
                 }
             }
 
-            handle: Rectangle {
+            handle: Rectangle
+            {
                 x: progressBar.leftPadding + progressBar.visualPosition
                    * (progressBar.availableWidth - width)
                 y: progressBar.y - (height / 2)
@@ -430,7 +455,8 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        GridLayout {
+        GridLayout
+        {
             id: playbackControlsLayout
             anchors.fill: parent
             height: parent.height
@@ -439,7 +465,8 @@ Kirigami.ApplicationWindow {
             rows: 2
             columns: 2
 
-            Item {
+            Item
+            {
                 Layout.alignment: Qt.AlignLeft
                 Layout.fillHeight: true
                 Layout.maximumWidth: miniArtwork.visible ? toolBarHeight : 0
@@ -453,7 +480,8 @@ Kirigami.ApplicationWindow {
                 anchors.verticalCenter: parent.top
                 z: progressBar.z+1
 
-                Rectangle {
+                Rectangle
+                {
                     visible: miniArtwork.visible
                     anchors.centerIn: parent
                     height: miniArtSize + miniArtSize*0.05
@@ -466,7 +494,8 @@ Kirigami.ApplicationWindow {
                     radius: Math.min(width, height)
                 }
 
-                RotationAnimator on rotation {
+                RotationAnimator on rotation
+                {
                     from: 0
                     to: 360
                     duration: 5000
@@ -474,7 +503,8 @@ Kirigami.ApplicationWindow {
                     running: miniArtwork.visible && isPlaying
                 }
 
-                Image {
+                Image
+                {
                     id: miniArtwork
                     visible: ((!pageStack.wideMode
                                && pageStack.currentIndex !== 0)
@@ -484,7 +514,8 @@ Kirigami.ApplicationWindow {
                     width: miniArtSize
                     //                    anchors.left: parent.left
                     anchors.centerIn: parent
-                    source: {
+                    source:
+                    {
                         if (currentArtwork)
                             (currentArtwork.length > 0 && currentArtwork
                              !== "NONE") ? "file://" + encodeURIComponent(
@@ -492,13 +523,16 @@ Kirigami.ApplicationWindow {
                         else
                             "qrc:/assets/cover.png"
                     }
+
                     fillMode: Image.PreserveAspectFit
                     cache: false
                     antialiasing: true
 
-                    MouseArea {
+                    MouseArea
+                    {
                         anchors.fill: parent
-                        onClicked: {
+                        onClicked:
+                        {
                             if (!isMobile && pageStack.wideMode)
                                 root.width = columnWidth
                             pageStack.currentIndex = 0
@@ -506,8 +540,10 @@ Kirigami.ApplicationWindow {
                     }
 
                     layer.enabled: true
-                    layer.effect: OpacityMask {
-                        maskSource: Item {
+                    layer.effect: OpacityMask
+                    {
+                        maskSource: Item
+                        {
                             width: miniArtwork.width
                             height: miniArtwork.height
                             Rectangle {
@@ -523,7 +559,8 @@ Kirigami.ApplicationWindow {
                 }
             }
 
-            Item {
+            Item
+            {
                 Layout.alignment: Qt.AlignCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -531,7 +568,8 @@ Kirigami.ApplicationWindow {
                 Layout.column: 2
                 Layout.maximumHeight: playbackInfo.visible ? playbackInfo.font.pointSize * 2 : 0
 
-                Label {
+                Label
+                {
                     id: playbackInfo
 
                     visible: !mainlistEmpty && infoLabels
@@ -548,25 +586,29 @@ Kirigami.ApplicationWindow {
                 }
             }
 
-            RowLayout {
+            RowLayout
+            {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignCenter
                 Layout.row: 1
                 Layout.column: 2
 
-                BabeButton {
+                BabeButton
+                {
                     id: babeBtnIcon
                     iconName: "love"
                     iconColor: currentBabe ? babeColor : darktextColor
-                    onClicked: if (!mainlistEmpty) {
+                    onClicked: if (!mainlistEmpty)
+                               {
                                    var value = mainPlaylist.contextMenu.babeIt(
                                                currentTrackIndex)
                                    currentBabe = value
                                }
                 }
 
-                BabeButton {
+                BabeButton
+                {
                     id: previousBtn
                     iconColor: darktextColor
                     iconName: "media-skip-backward"
@@ -574,12 +616,14 @@ Kirigami.ApplicationWindow {
                     onPressAndHold: Player.playAt(prevTrackIndex)
                 }
 
-                BabeButton {
+                BabeButton
+                {
                     id: playIcon
                     iconColor: darktextColor
 
                     iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
-                    onClicked: {
+                    onClicked:
+                    {
                         if (isPlaying)
                             Player.pauseTrack()
                         else
@@ -587,7 +631,8 @@ Kirigami.ApplicationWindow {
                     }
                 }
 
-                BabeButton {
+                BabeButton
+                {
                     id: nextBtn
                     iconColor: darktextColor
 
@@ -597,7 +642,8 @@ Kirigami.ApplicationWindow {
                     onPressAndHold: Player.playAt(Player.shuffle())
                 }
 
-                BabeButton {
+                BabeButton
+                {
                     id: shuffleBtn
                     iconColor: darktextColor
 
@@ -608,19 +654,22 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    background: Rectangle {
+    background: Rectangle
+    {
         anchors.fill: parent
         color: altColor
         z: -999
     }
 
-    globalDrawer: SettingsView {
+    globalDrawer: SettingsView
+    {
         id: settingsDrawer
         //        contentItem.implicitWidth: columnWidth
         onIconSizeChanged: toolBarIconSize = size
     }
 
-    Item {
+    Item
+    {
         id: message
         visible: infoMsg.length > 0 && sync
         anchors.bottom: parent.bottom
@@ -628,7 +677,8 @@ Kirigami.ApplicationWindow {
         height: toolBarIconSize
         z: 999
 
-        Rectangle {
+        Rectangle
+        {
             id: infoBg
 
             anchors.fill: parent
@@ -636,9 +686,11 @@ Kirigami.ApplicationWindow {
             color: altColor
             opacity: opacityLevel
 
-            SequentialAnimation {
+            SequentialAnimation
+            {
                 id: animBg
-                PropertyAnimation {
+                PropertyAnimation
+                {
                     target: infoBg
                     property: "color"
                     easing.type: Easing.InOutQuad
@@ -646,7 +698,8 @@ Kirigami.ApplicationWindow {
                     duration: 250
                 }
 
-                PropertyAnimation {
+                PropertyAnimation
+                {
                     target: infoBg
                     property: "color"
                     easing.type: Easing.InOutQuad
@@ -656,7 +709,8 @@ Kirigami.ApplicationWindow {
             }
         }
 
-        Label {
+        Label
+        {
             id: infoTxt
             anchors.centerIn: parent
             anchors.fill: parent
@@ -668,9 +722,11 @@ Kirigami.ApplicationWindow {
             verticalAlignment: Qt.AlignVCenter
             color: textColor
 
-            SequentialAnimation {
+            SequentialAnimation
+            {
                 id: animTxt
-                PropertyAnimation {
+                PropertyAnimation
+                {
                     target: infoTxt
                     property: "color"
                     easing.type: Easing.InOutQuad
@@ -678,7 +734,8 @@ Kirigami.ApplicationWindow {
                     duration: 250
                 }
 
-                PropertyAnimation {
+                PropertyAnimation
+                {
                     target: infoTxt
                     property: "color"
                     easing.type: Easing.InOutQuad
@@ -689,29 +746,34 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    MainPlaylist {
+    MainPlaylist
+    {
         id: mainPlaylist
         anchors.fill: parent
         clip: true
 
-        Connections {
+        Connections
+        {
             target: mainPlaylist
             onCoverPressed: Player.appendAll(tracks)
             onCoverDoubleClicked: Player.playAll(tracks)
         }
     }
 
-    Page {
+    Page
+    {
         id: views
         anchors.fill: parent
         clip: true
 
         //        focusPolicy: Qt.WheelFocus
         //        visualFocus: true
-        Column {
+        Column
+        {
             anchors.fill: parent
 
-            SwipeView {
+            SwipeView
+            {
                 id: swipeView
                 width: parent.width
                 height: parent.height
@@ -736,9 +798,11 @@ Kirigami.ApplicationWindow {
                         babeitView.logginDialog.open()
                 }
 
-                TracksView {
+                TracksView
+                {
                     id: tracksView
-                    Connections {
+                    Connections
+                    {
                         target: tracksView
                         onRowClicked: Player.addTrack(
                                           tracksView.model.get(index))
@@ -751,9 +815,11 @@ Kirigami.ApplicationWindow {
                     }
                 }
 
-                AlbumsView {
+                AlbumsView
+                {
                     id: albumsView
-                    Connections {
+                    Connections
+                    {
                         target: albumsView
                         onRowClicked: Player.addTrack(track)
                         onPlayAlbum: Player.playAll(tracks)
@@ -762,10 +828,12 @@ Kirigami.ApplicationWindow {
                     }
                 }
 
-                ArtistsView {
+                ArtistsView
+                {
                     id: artistsView
 
-                    Connections {
+                    Connections
+                    {
                         target: artistsView
                         onRowClicked: Player.addTrack(track)
                         onPlayAlbum: Player.playAll(tracks)
@@ -774,7 +842,8 @@ Kirigami.ApplicationWindow {
                     }
                 }
 
-                PlaylistsView {
+                PlaylistsView
+                {
                     id: playlistsView
                     Connections {
                         target: playlistsView
@@ -795,14 +864,17 @@ Kirigami.ApplicationWindow {
                     }
                 }
 
-                BabeitView {
+                BabeitView
+                {
                     id: babeitView
                 }
 
-                SearchTable {
+                SearchTable
+                {
                     id: searchView
 
-                    Connections {
+                    Connections
+                    {
                         target: searchView.searchTable
                         onRowClicked: Player.addTrack(
                                           searchView.searchTable.model.get(
@@ -824,11 +896,13 @@ Kirigami.ApplicationWindow {
                     }
                 }
 
-                YouTube {
+                YouTube
+                {
                     id: youtubeView
                 }
 
-                LinkingView {
+                LinkingView
+                {
                     id: linkingView
                 }
             }
@@ -836,13 +910,17 @@ Kirigami.ApplicationWindow {
     }
 
     /*animations*/
-    pageStack.layers.popEnter: Transition {
-        PauseAnimation {
+    pageStack.layers.popEnter: Transition
+    {
+        PauseAnimation
+        {
             duration: Kirigami.Units.longDuration
         }
     }
-    pageStack.layers.popExit: Transition {
-        YAnimator {
+    pageStack.layers.popExit: Transition
+    {
+        YAnimator
+        {
             from: 0
             to: pageStack.layers.height
             duration: Kirigami.Units.longDuration
@@ -850,8 +928,10 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    pageStack.layers.pushEnter: Transition {
-        YAnimator {
+    pageStack.layers.pushEnter: Transition
+    {
+        YAnimator
+        {
             from: pageStack.layers.height
             to: 0
             duration: Kirigami.Units.longDuration
@@ -859,14 +939,18 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    pageStack.layers.pushExit: Transition {
-        PauseAnimation {
+    pageStack.layers.pushExit: Transition
+    {
+        PauseAnimation
+        {
             duration: Kirigami.Units.longDuration
         }
     }
 
-    pageStack.layers.replaceEnter: Transition {
-        YAnimator {
+    pageStack.layers.replaceEnter: Transition
+    {
+        YAnimator
+        {
             from: pageStack.layers.width
             to: 0
             duration: Kirigami.Units.longDuration
@@ -874,19 +958,33 @@ Kirigami.ApplicationWindow {
         }
     }
 
-    pageStack.layers.replaceExit: Transition {
-        PauseAnimation {
+    pageStack.layers.replaceExit: Transition
+    {
+        PauseAnimation
+        {
             duration: Kirigami.Units.longDuration
         }
     }
 
     /*FUNCTIONS*/
-    function infoMsgAnim() {
+    function infoMsgAnim()
+    {
         animBg.running = true
         animTxt.running = true
     }
 
-    Component.onCompleted: {
+
+    function toggleMaximized()
+    {
+        if (root.visibility === Window.Maximized) {
+            root.showNormal();
+        } else {
+            root.showMaximized();
+        }
+    }
+
+    Component.onCompleted:
+    {
         //        if(isMobile) settingsDrawer.switchColorScheme(bae.loadSetting("THEME", "BABE", "Dark"))
         //        console.log(Imagine.url, Imagine.path)
         bae.androidStatusBarColor(viewBackgroundColor)
@@ -894,13 +992,15 @@ Kirigami.ApplicationWindow {
 
 
     /*CONNECTIONS*/
-    Connections {
+    Connections
+    {
         target: player
         onPos: progressBar.value = pos
         onTiming: progressTimeLabel = time
         onDurationChanged: durationTimeLabel = time
 
-        onFinished: if (!mainlistEmpty) {
+        onFinished: if (!mainlistEmpty)
+                    {
                         if (currentTrack.url)
                             bae.playedTrack(currentTrack.url)
 
@@ -910,7 +1010,8 @@ Kirigami.ApplicationWindow {
         onIsPlaying: isPlaying = playing
     }
 
-    Connections {
+    Connections
+    {
         target: bae
 
         onRefreshTables: H.refreshCollection(size)
@@ -919,7 +1020,8 @@ Kirigami.ApplicationWindow {
         onRefreshAlbums: H.refreshAlbums()
         onRefreshArtists: H.refreshArtists()
 
-        onTrackLyricsReady: {
+        onTrackLyricsReady:
+        {
             if (url === currentTrack.url)
                 Player.setLyrics(lyrics)
         }
