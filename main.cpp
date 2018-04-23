@@ -90,12 +90,12 @@ int main(int argc, char *argv[])
     context->setContextProperty("link", &bae.link);
 
     qmlRegisterUncreatableMetaObject(
-      LINK::staticMetaObject, // static meta object
-      "Link.Codes",                // import statement (can be any string)
-      1, 0,                          // major and minor version of the import
-      "LINK",                 // name in QML (does not have to match C++ name)
-      "Error: only enums"            // error in case someone tries to create a MyNamespace object
-    );
+                LINK::staticMetaObject, // static meta object
+                "Link.Codes",                // import statement (can be any string)
+                1, 0,                          // major and minor version of the import
+                "LINK",                 // name in QML (does not have to match C++ name)
+                "Error: only enums"            // error in case someone tries to create a MyNamespace object
+                );
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();
 #endif
@@ -104,10 +104,11 @@ int main(int argc, char *argv[])
     QIcon::setThemeName("Luv");
     QtWebView::initialize();
 #else
-//    if(QQuickStyle::availableStyles().contains("nomad"))
-//        QQuickStyle::setStyle("nomad");
+    //    if(QQuickStyle::availableStyles().contains("nomad"))
+    //        QQuickStyle::setStyle("nomad");
 
-    QtWebEngine::initialize();
+    if(!BAE::isMobile())
+        QtWebEngine::initialize();
 #endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

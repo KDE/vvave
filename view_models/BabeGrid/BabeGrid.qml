@@ -1,6 +1,7 @@
 import QtQuick.Controls 2.2
 import QtQuick 2.9
 import ".."
+import org.kde.kirigami 2.0 as Kirigami
 
 Pane
 {
@@ -13,7 +14,7 @@ Pane
     property int albumCoverSize: iconSizes.enormous
     readonly property int albumSpacing: albumCoverSize * 0.3 + space.small
 
-    property int albumCoverRadius : albumCoverSize*0.05
+    property int albumCoverRadius :  Kirigami.Units.devicePixelRatio * 6
     property bool albumCardVisible : true
     property alias gridModel: gridModel
     property alias grid: grid
@@ -59,7 +60,7 @@ Pane
         height: parent.height
 
         cellWidth: albumCoverSize + albumSpacing
-        cellHeight:  albumCoverSize + albumSpacing
+        cellHeight:  albumCoverSize + albumSpacing*2
 
         focus: true
         boundsBehavior: Flickable.StopAtBounds

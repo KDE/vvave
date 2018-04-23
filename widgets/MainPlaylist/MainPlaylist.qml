@@ -19,6 +19,7 @@ Item
     id: mainPlaylistRoot
 
     property alias artwork : artwork
+    property alias albumsRoll : albumsRoll
     property alias cover : cover
     property alias list : table.list
     property alias table: table
@@ -74,32 +75,30 @@ Item
                 anchors.fill: parent
                 color: darkDarkColor
                 z: -999
-            }
 
-            FastBlur
-            {
-                visible: cover.visible
-                width: mainPlaylistRoot.width
-                height: mainPlaylistItem.y
-                source: artwork
-                radius: 100
-                transparentBorder: false
-                cached: true
-            }
+                Image
+                {
+                    id: artwork
+                    visible: cover.visible
+                    anchors.fill: parent
 
-            Image
-            {
-                id: artwork
-                visible: cover.visible
-                width: parent.height < coverSize ? parent.height : coverSize
-                height: parent.height
+                    ////                    sourceSize.height: coverSize
+                    ////                    sourceSize.width: coverSize
 
-                sourceSize.height: coverSize
-                sourceSize.width: coverSize
+                    //                    anchors.centerIn: parent
+                    source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
+                    fillMode: Image.PreserveAspectCrop
+                }
 
-                anchors.centerIn: parent
-                source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
-                fillMode: Image.PreserveAspectFit
+                FastBlur
+                {
+                    visible: cover.visible
+                    anchors.fill: parent
+                    source: artwork
+                    radius: 100
+                    transparentBorder: false
+                    cached: true
+                }
 
                 MouseArea
                 {
@@ -115,12 +114,27 @@ Item
                     }
                 }
             }
+
+            Item
+            {
+                anchors.fill: parent
+                anchors.verticalCenter: parent.verticalCenter
+
+                AlbumsRoll
+                {
+                    id: albumsRoll
+                    height: parent.height
+                    width: parent.width
+                    anchors.verticalCenter: parent.vertical
+                }
+            }
         }
 
         ToolBar
         {
             id: mainlistContext
             width: parent.width
+            visible : !focusMode
 
             Layout.row: 2
             Layout.column: 1
@@ -232,6 +246,8 @@ Item
         Item
         {
             id: mainPlaylistItem
+            visible : !focusMode
+
             Layout.row: 4
             Layout.column: 1
             Layout.fillWidth: true
@@ -308,22 +324,9 @@ Item
                         color: darkDarkColor
                     }
 
-                    onRowClicked:
-                    {
-                        prevTrackIndex = currentTrackIndex
-                        Player.playAt(index)
-                    }
+                    onRowClicked: play(index)
 
-                    onArtworkDoubleClicked:
-                    {
-                        contextMenu.babeIt(index)
-                        //                        var query = Q.GET.albumTracks_.arg(model.get(index).album)
-                        //                        query = query.arg(model.get(index).artist)
-
-                        //                        Player.playAll(bae.get(query))
-                        //                        Player.appendTracksAt(bae.get(query),index)
-
-                    }
+                    onArtworkDoubleClicked: contextMenu.babeIt(index)
 
                     Component.onCompleted:
                     {
@@ -369,34 +372,52 @@ Item
         }
     }
 
-    function gomini()
+    function goFocusMode()
     {
-        if(!isMobile)
-        {
-            if(root.header.visible)
-            {
-                root.maximumWidth = columnWidth
-                root.minimumWidth = columnWidth
-                root.maximumHeight = mainPlaylistItem.y + footer.height
-                root.minimumHeight = mainPlaylistItem.y + footer.height
-                root.header.visible = false
-                //                root.footer.visible = false
-                //                mainlistContext.visible = false
 
+        if(focusMode)
+        {
+            if(isMobile)
+            {
+                root.width = screenWidth
+                root.height= screenHeight
             }else
             {
                 cover.y = 0
-                root.maximumWidth = bae.screenGeometry("width")
+                root.maximumWidth = screenWidth
                 root.minimumWidth = columnWidth
-                root.maximumHeight = bae.screenGeometry("height")
+                root.maximumHeight = screenHeight
                 root.minimumHeight = columnWidth
 
                 root.width = columnWidth
                 root.height = 700
-                root.header.visible = true
-                //                root.footer.visible = true
-                //                mainlistContext.visible = true
+            }
+
+        }else
+        {
+            if(isMobile)
+            {
+
+            }else
+            {
+                root.maximumWidth = columnWidth
+                root.minimumWidth = columnWidth
+                root.maximumHeight = columnWidth
+                root.minimumHeight = columnWidth
+                //                root.footer.visible = false
+                //                mainlistContext.visible = false
+
+
             }
         }
+
+        focusMode = !focusMode
+    }
+
+    function play(index)
+    {
+        prevTrackIndex = currentTrackIndex
+        Player.playAt(index)
+
     }
 }

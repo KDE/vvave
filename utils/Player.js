@@ -29,7 +29,7 @@ function playTrack(track)
                     bae.notifySong(currentTrack.url)
             }
 
-            bae.trackLyrics(currentTrack.url)
+//            bae.trackLyrics(currentTrack.url)
 
             //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
             //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
@@ -120,6 +120,7 @@ function playAt(index)
     {
         currentTrackIndex = index
         mainPlaylist.list.currentIndex = index
+        mainPlaylist.albumsRoll.positionAlbum(currentTrackIndex)
         playTrack(mainPlaylist.list.model.get(index))
     }
 }
@@ -130,6 +131,7 @@ function quickPlay(track)
     appendTrack(track)
     playAt(root.mainPlaylist.list.count-1)
     mainPlaylist.list.positionViewAtEnd()
+    mainPlaylist.albumsRoll.positionViewAtEnd()
 
 }
 
@@ -137,7 +139,10 @@ function appendTracksAt(tracks, at)
 {
     if(tracks)
         for(var i in tracks)
+        {
+            mainPlaylist.albumsRoll.model.insert(parseInt(at)+parseInt(i)+1, tracks[i])
             mainPlaylist.list.model.insert(parseInt(at)+parseInt(i), tracks[i])
+        }
 }
 
 function appendTrack(track)
@@ -145,6 +150,7 @@ function appendTrack(track)
     if(track)
     {
         mainPlaylist.list.model.append(track)
+        mainPlaylist.albumsRoll.append(track)
         animFooter.running = true
         if(sync === true)
         {
@@ -229,6 +235,7 @@ function playAll(tracks)
         infoMsg = ""
 
         mainPlaylist.table.clearTable()
+        mainPlaylist.albumsRoll.model.clear()
         pageStack.currentIndex = 0
 
         for(var i in tracks)

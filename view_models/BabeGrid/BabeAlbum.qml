@@ -9,11 +9,13 @@ ItemDelegate
     id: babeAlbumRoot
 
     property int albumSize : iconSizes.huge
-    property int borderRadius : albumSize*0.05
     property int albumRadius : 0
     property bool albumCard : true
-    property string fillColor: backgroundColor
+    property string fillColor : "#80000000"
     property bool hide : false
+    property bool showLabels : true
+    property bool showIndicator :  false
+    property bool isCurrentListItem : ListView.isCurrentItem
 
     property color labelColor : GridView.isCurrentItem  || hovered || down ? highlightColor : textColor
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
@@ -26,32 +28,6 @@ ItemDelegate
     {
         color: "transparent"
     }
-
-    DropShadow
-    {
-        anchors.fill: card
-        visible: card.visible
-        horizontalOffset: 0
-        verticalOffset: 3
-        radius: 8.0
-        samples: 17
-        color: "#80000000"
-        source: card
-    }
-
-    Rectangle
-    {
-        id: card
-        visible: albumCard
-        width: albumSize
-        height:albumSize
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        color: fillColor
-        radius: borderRadius
-    }
-
 
     ColumnLayout
     {
@@ -66,6 +42,31 @@ ItemDelegate
             Layout.maximumHeight: albumSize
             Layout.minimumHeight: albumSize
 
+            DropShadow
+            {
+                anchors.fill: card
+                visible: card.visible
+                horizontalOffset: 0
+                verticalOffset: 3
+                radius: 8.0
+                samples: 17
+                color: "#80000000"
+                source: card
+            }
+
+            Rectangle
+            {
+                id: card
+                z: -999
+                visible: albumCard
+                anchors.centerIn: img
+                anchors.fill: img
+
+                color: fillColor
+                opacity: 0.5
+                radius: albumRadius
+            }
+
             Image
             {
                 id: img
@@ -79,7 +80,9 @@ ItemDelegate
 
                 fillMode: Image.PreserveAspectFit
                 cache: true
-//                antialiasing: true
+                antialiasing: true
+                smooth: true
+                asynchronous: true
 
                 source:
                 {
@@ -105,10 +108,35 @@ ItemDelegate
                     }
                 }
             }
+
+            Rectangle
+            {
+                visible : showIndicator && isCurrentListItem
+
+                height: parent.height * 0.1
+                width: parent.width * 0.1
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: space.big
+                anchors.horizontalCenter:parent.horizontalCenter
+                radius: Math.min(width, height)
+                color: "#f84172"
+
+                AnimatedImage
+                {
+                    source: "qrc:/assets/heart_indicator_white.gif"
+                    anchors.centerIn: parent
+                    height: parent.height * 0.6
+                    width: parent.width * 0.6
+                    playing: parent.visible
+                }
+            }
+
+
         }
 
         Item
         {
+            visible: showLabels
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignHCenter
@@ -163,7 +191,7 @@ ItemDelegate
             }
 
         }
-    } 
+    }
 }
 
 

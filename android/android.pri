@@ -12,7 +12,17 @@ SOURCES += \
 DISTFILES += \
     $$PWD/src/SendIntent.java \
     $$PWD/src/NotificationClient.java \
-    $$PWD/src/MyService.java
+    $$PWD/src/MyService.java \
+    $$PWD/AndroidManifest.xml \
+    $$PWD/gradlew \
+    $$PWD/build.gradle \
+    $$PWD/gradlew.bat \
+    $$PWD/gradle.properties \
+    $$PWD/local.properties \
+    $$PWD/gradle/wrapper/gradle-wrapper.jar \
+    $$PWD/gradlew \
+    $$PWD/res/values/libs.xml \
+    $$PWD/gradle/wrapper/gradle-wrapper.properties
 
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/

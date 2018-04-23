@@ -66,7 +66,7 @@ Kirigami.ApplicationWindow
     property int currentTrackIndex: 0
     property int prevTrackIndex: 0
     property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.model.get(
-                                                        0).artwork : ""
+                                                         0).artwork : ""
     property bool currentBabe: currentTrack.babe == "0" ? false : true
     property string durationTimeLabel: "00:00"
     property string progressTimeLabel: "00:00"
@@ -91,13 +91,14 @@ Kirigami.ApplicationWindow
     readonly property int headerHeight: rowHeight
 
     property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE",
-                                                iconSizes.medium)
+                                                  iconSizes.medium)
     property int toolBarHeight: Kirigami.Units.iconSizes.medium + (Kirigami.Settings.isMobile ?  Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing)
     property int miniArtSize: iconSizes.large
 
     property int columnWidth: Kirigami.Units.gridUnit * 17
-    property int coverSize: isAndroid ? Math.sqrt(root.width * root.height) * 0.4 :
-                                        columnWidth * (isMobile ? 0.7 : 0.6)
+    property int coverSize: focusMode ? columnWidth :
+                                        (isAndroid ? Math.sqrt(root.width * root.height) * 0.4 :
+                                        columnWidth * (isMobile ? 0.7 : 0.6))
 
 
     /***************************************************/
@@ -107,21 +108,21 @@ Kirigami.ApplicationWindow
     property int currentView: viewsIndex.tracks
 
     readonly property var viewsIndex: ({
-                                        tracks: 0,
-                                        albums: 1,
-                                        artists: 2,
-                                        playlists: 3,
-                                        search: 4,
-                                        vvave: 5,
-                                        youtube: 6,
-                                        linking: 7
-                                    })
+                                           tracks: 0,
+                                           albums: 1,
+                                           artists: 2,
+                                           playlists: 3,
+                                           search: 4,
+                                           vvave: 5,
+                                           youtube: 6,
+                                           linking: 7
+                                       })
 
     property string syncPlaylist: ""
     property bool sync: false
     property string infoMsg: ""
     property bool infoLabels: bae.loadSetting("PLAYBACKINFO", "BABE",
-                                            false) == "true" ? true : false
+                                              false) == "true" ? true : false
 
     property bool isLinked: false
     property bool isServing: false
@@ -149,62 +150,65 @@ Kirigami.ApplicationWindow
     readonly property int contentMargins: space.medium
     readonly property int defaultFontSize: Kirigami.Theme.defaultFont.pointSize
     readonly property var fontSizes: ({
-                                        tiny: defaultFontSize * 0.7,
+                                          tiny: defaultFontSize * 0.7,
 
-                                        small: (isMobile ? defaultFontSize * 0.7 :
-                                                            defaultFontSize * 0.8),
+                                          small: (isMobile ? defaultFontSize * 0.7 :
+                                                             defaultFontSize * 0.8),
 
-                                        medium: (isMobile ? defaultFontSize * 0.8 :
-                                                            defaultFontSize * 0.9),
+                                          medium: (isMobile ? defaultFontSize * 0.8 :
+                                                              defaultFontSize * 0.9),
 
-                                        default: (isMobile ? defaultFontSize * 0.9 :
-                                                            defaultFontSize),
+                                          default: (isMobile ? defaultFontSize * 0.9 :
+                                                               defaultFontSize),
 
-                                        big: (isMobile ? defaultFontSize :
-                                                        defaultFontSize * 1.1),
+                                          big: (isMobile ? defaultFontSize :
+                                                           defaultFontSize * 1.1),
 
-                                        large: (isMobile ? defaultFontSize * 1.1 :
-                                                            defaultFontSize * 1.2)
-                                    })
+                                          large: (isMobile ? defaultFontSize * 1.1 :
+                                                             defaultFontSize * 1.2)
+                                      })
 
     readonly property var space : ({
-                                    tiny: Kirigami.Units.smallSpacing,
-                                    small: Kirigami.Units.smallSpacing*2,
-                                    medium: Kirigami.Units.largeSpacing,
-                                    big: Kirigami.Units.largeSpacing*2,
-                                    large: Kirigami.Units.largeSpacing*3,
-                                    huge: Kirigami.Units.largeSpacing*4,
-                                    enormus: Kirigami.Units.largeSpacing*5
-                                })
+                                       tiny: Kirigami.Units.smallSpacing,
+                                       small: Kirigami.Units.smallSpacing*2,
+                                       medium: Kirigami.Units.largeSpacing,
+                                       big: Kirigami.Units.largeSpacing*2,
+                                       large: Kirigami.Units.largeSpacing*3,
+                                       huge: Kirigami.Units.largeSpacing*4,
+                                       enormus: Kirigami.Units.largeSpacing*5
+                                   })
 
     readonly property var iconSizes : ({
-                                        tiny : Kirigami.Units.iconSizes.small*0.5,
+                                           tiny : Kirigami.Units.iconSizes.small*0.5,
 
-                                        small :  (isMobile ? Kirigami.Units.iconSizes.small*0.5:
+                                           small :  (isMobile ? Kirigami.Units.iconSizes.small*0.5:
                                                                 Kirigami.Units.iconSizes.small),
 
-                                        medium : (isMobile ? (isAndroid ? 22 : Kirigami.Units.iconSizes.small) :
+                                           medium : (isMobile ? (isAndroid ? 22 : Kirigami.Units.iconSizes.small) :
                                                                 Kirigami.Units.iconSizes.smallMedium),
 
-                                        big:  (isMobile ? Kirigami.Units.iconSizes.smallMedium :
-                                                            Kirigami.Units.iconSizes.medium),
+                                           big:  (isMobile ? Kirigami.Units.iconSizes.smallMedium :
+                                                             Kirigami.Units.iconSizes.medium),
 
-                                        large: (isMobile ? Kirigami.Units.iconSizes.medium :
-                                                            Kirigami.Units.iconSizes.large),
+                                           large: (isMobile ? Kirigami.Units.iconSizes.medium :
+                                                              Kirigami.Units.iconSizes.large),
 
-                                        huge: (isMobile ? Kirigami.Units.iconSizes.large :
-                                                            Kirigami.Units.iconSizes.huge),
+                                           huge: (isMobile ? Kirigami.Units.iconSizes.large :
+                                                             Kirigami.Units.iconSizes.huge),
 
-                                        enormous: (isMobile ? Kirigami.Units.iconSizes.huge :
-                                                                Kirigami.Units.iconSizes.enormous)
+                                           enormous: (isMobile ? Kirigami.Units.iconSizes.huge :
+                                                                 Kirigami.Units.iconSizes.enormous)
 
-                                    })
+                                       })
 
     /***************************************************/
     /**************************************************/
     /*************************************************/
 
+    readonly property real screenWidth : Screen.width
+    readonly property real screenHeight : Screen.height
 
+    property bool focusMode : false
 
     /***************************************************/
     /******************** UI COLORS *******************/
@@ -310,7 +314,7 @@ Kirigami.ApplicationWindow
         width: root.width
         height: toolBarHeight
 
-        visible: true
+        visible: !focusMode
         currentIndex: currentView
         onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() :
                                                         settingsDrawer.open()
@@ -364,7 +368,6 @@ Kirigami.ApplicationWindow
 
         FastBlur
         {
-
             width: parent.width
             height: parent.height-1
             y:1
@@ -380,7 +383,7 @@ Kirigami.ApplicationWindow
             id: footerBg
             anchors.fill: parent
             color: darkViewBackgroundColor
-            opacity: opacityLevel
+            opacity: focusMode ? 0.2 : opacityLevel
             z: -999
 
             SequentialAnimation
@@ -421,7 +424,7 @@ Kirigami.ApplicationWindow
                 x: progressBar.leftPadding
                 y: progressBar.y
                 implicitWidth: 200
-                implicitHeight: iconSizes.tiny*0.1
+                implicitHeight: Kirigami.Units.devicePixelRatio * 3
                 width: progressBar.availableWidth
                 height: implicitHeight
                 color: "transparent"
@@ -429,7 +432,7 @@ Kirigami.ApplicationWindow
                 Rectangle
                 {
                     width: progressBar.visualPosition * parent.width
-                    height: iconSizes.tiny*0.1
+                    height: Kirigami.Units.devicePixelRatio * 3
                     color: babeColor
                 }
             }
@@ -437,7 +440,7 @@ Kirigami.ApplicationWindow
             handle: Rectangle
             {
                 x: progressBar.leftPadding + progressBar.visualPosition
-                * (progressBar.availableWidth - width)
+                   * (progressBar.availableWidth - width)
                 y: progressBar.y - (height / 2)
                 implicitWidth: progressBar.pressed ? iconSizes.medium : 0
                 implicitHeight: progressBar.pressed ? iconSizes.medium : 0
@@ -498,8 +501,8 @@ Kirigami.ApplicationWindow
                 {
                     id: miniArtwork
                     visible: ((!pageStack.wideMode
-                            && pageStack.currentIndex !== 0)
-                            || !mainPlaylist.cover.visible) && !mainlistEmpty
+                               && pageStack.currentIndex !== 0)
+                              || !mainPlaylist.cover.visible) && !mainlistEmpty
                     focus: true
                     height: miniArtSize
                     width: miniArtSize
@@ -509,8 +512,8 @@ Kirigami.ApplicationWindow
                     {
                         if (currentArtwork)
                             (currentArtwork.length > 0 && currentArtwork
-                            !== "NONE") ? "file://" + encodeURIComponent(
-                                            currentArtwork) : "qrc:/assets/cover.png"
+                             !== "NONE") ? "file://" + encodeURIComponent(
+                                               currentArtwork) : "qrc:/assets/cover.png"
                         else
                             "qrc:/assets/cover.png"
                     }
@@ -540,8 +543,8 @@ Kirigami.ApplicationWindow
                             Rectangle {
                                 anchors.centerIn: parent
                                 width: miniArtwork.adapt ? miniArtwork.width : Math.min(
-                                                            miniArtwork.width,
-                                                            miniArtwork.height)
+                                                               miniArtwork.width,
+                                                               miniArtwork.height)
                                 height: miniArtwork.adapt ? miniArtwork.height : width
                                 radius: Math.min(width, height)
                             }
@@ -591,11 +594,11 @@ Kirigami.ApplicationWindow
                     iconName: "love"
                     iconColor: currentBabe ? babeColor : darkTextColor
                     onClicked: if (!mainlistEmpty)
-                            {
-                                var value = mainPlaylist.contextMenu.babeIt(
-                                            currentTrackIndex)
-                                currentBabe = value
-                            }
+                               {
+                                   var value = mainPlaylist.contextMenu.babeIt(
+                                               currentTrackIndex)
+                                   currentBabe = value
+                               }
                 }
 
                 BabeButton
@@ -795,14 +798,11 @@ Kirigami.ApplicationWindow
                     Connections
                     {
                         target: tracksView
-                        onRowClicked: Player.addTrack(
-                                        tracksView.model.get(index))
-                        onQuickPlayTrack: Player.quickPlay(
-                                            tracksView.model.get(index))
+                        onRowClicked: Player.addTrack(tracksView.model.get(index))
+                        onQuickPlayTrack: Player.quickPlay(tracksView.model.get(index))
                         onPlayAll: Player.playAll(bae.get(Q.GET.allTracks))
                         onAppendAll: Player.appendAll(bae.get(Q.GET.allTracks))
-                        onQueueTrack: Player.queueTracks(
-                                        [tracksView.model.get(index)])
+                        onQueueTrack: Player.queueTracks([tracksView.model.get(index)], index)
                     }
                 }
 
@@ -843,14 +843,11 @@ Kirigami.ApplicationWindow
                         onPlayAll: Player.playAll(tracks)
                         onAppendAll: Player.appendAll(tracks)
                         onPlaySync: {
-                            var tracks = bae.get(Q.GET.playlistTracks_.arg(
-                                                    playlist))
+                            var tracks = bae.get(Q.GET.playlistTracks_.arg(playlist))
                             Player.playAll(tracks)
                             root.sync = true
                             root.syncPlaylist = playlist
                             root.infoMsg = "Syncing to " + playlist
-                            console.log("ALLOW PLAYLIOST SYNC FOR: ",
-                                        root.syncPlaylist = playlist)
                         }
                     }
                 }
@@ -864,11 +861,11 @@ Kirigami.ApplicationWindow
                     {
                         target: searchView.searchTable
                         onRowClicked: Player.addTrack(
-                                        searchView.searchTable.model.get(
-                                            index))
+                                          searchView.searchTable.model.get(
+                                              index))
                         onQuickPlayTrack: Player.quickPlay(
-                                            searchView.searchTable.model.get(
-                                                index))
+                                              searchView.searchTable.model.get(
+                                                  index))
                         onPlayAll: Player.playAll(searchView.searchRes)
                         onAppendAll: Player.appendAll(searchView.searchRes)
                         onArtworkDoubleClicked: {
@@ -876,7 +873,7 @@ Kirigami.ApplicationWindow
                                         searchView.searchTable.model.get(
                                             index).album)
                             query = query.arg(searchView.searchTable.model.get(
-                                                index).artist)
+                                                  index).artist)
 
                             Player.playAll(bae.get(query))
                         }
@@ -981,7 +978,7 @@ Kirigami.ApplicationWindow
         if(isAndroid)
         {
             settingsDrawer.switchColorScheme(style)
-        bae.androidStatusBarColor(viewBackgroundColor, style !== "Dark")
+            bae.androidStatusBarColor(viewBackgroundColor, style !== "Dark")
         }
     }
 

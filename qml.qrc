@@ -80,5 +80,8 @@
         <file>services/local/LinkingListModel.qml</file>
         <file>assets/vvave.notifyrc</file>
         <file>assets/vvave.png</file>
+        <file>widgets/MainPlaylist/AlbumsRoll.qml</file>
+        <file>assets/heart_indicator.gif</file>
+        <file>assets/heart_indicator_white.gif</file>
     </qresource>
 </RCC>
