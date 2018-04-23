@@ -63,7 +63,6 @@ ItemDelegate
                 anchors.fill: img
 
                 color: fillColor
-                opacity: 0.5
                 radius: albumRadius
             }
 
