@@ -8,6 +8,8 @@ ItemDelegate
 {
     id: babeAlbumRoot
 
+    property int itemWidth : albumSize
+    property int itemHeight: albumSize
     property int albumSize : iconSizes.huge
     property int albumRadius : 0
     property bool albumCard : true
@@ -16,11 +18,29 @@ ItemDelegate
     property bool showLabels : true
     property bool showIndicator :  false
     property bool isCurrentListItem : ListView.isCurrentItem
+    property bool hideRepeated : false
 
     property color labelColor : GridView.isCurrentItem  || hovered || down ? highlightColor : textColor
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
 
-    visible: !hide
+    readonly property bool sameAlbum :
+    {
+        if(hideRepeated)
+        {
+            if(albumsRollRoot.model.get(index-1))
+            {
+                if(albumsRollRoot.model.get(index-1).album === album && albumsRollRoot.model.get(index-1).artist === artist)
+                    true
+                else
+                    false
+            }else false
+        }else false
+    }
+
+    height: visible ? itemHeight : 0
+    width : visible ? itemWidth : 0
+
+    visible: !sameAlbum
     hoverEnabled: !isMobile
     //    spacing: 0
 
@@ -110,10 +130,10 @@ ItemDelegate
 
             Rectangle
             {
-                visible : showIndicator && isCurrentListItem
+                visible : showIndicator && currentTrackIndex === index
 
-                height: parent.height * 0.1
-                width: parent.width * 0.1
+                height: img.height * 0.1
+                width: img.width * 0.1
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: space.big
                 anchors.horizontalCenter:parent.horizontalCenter
@@ -129,8 +149,6 @@ ItemDelegate
                     playing: parent.visible
                 }
             }
-
-
         }
 
         Item
@@ -192,6 +210,3 @@ ItemDelegate
         }
     }
 }
-
-
-

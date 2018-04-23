@@ -311,7 +311,8 @@ Item
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true
-                    headerBarColor : darkButtonBackgroundColor
+                    showIndicator : true
+
                     holder.message : "<h2>Meh!</h2><p>Start putting together your playlist!</p>"
                     holder.emoji: "qrc:/assets/face-sleeping.png"
 
