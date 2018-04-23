@@ -48,6 +48,7 @@ ListView
 
     function positionAlbum(index)
     {
+        albumsRollRoot.currentIndex = index
         positionViewAtIndex(index, ListView.Center)
     }
 }
