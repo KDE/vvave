@@ -22,6 +22,7 @@ BabeList
     property bool trackRating
     property bool allowMenu: true
     property bool isArtworkRemote : false
+    property bool showIndicator : false
 
     property alias headerMenu: headerMenu
     property alias contextMenu : contextMenu
@@ -94,7 +95,9 @@ BabeList
     delegate: TableDelegate
     {
         id: delegate
+
         width: list.width
+
         number : trackNumberVisible ? true : false
         quickPlay: quickPlayVisible
         coverArt : coverArtVisible
@@ -104,6 +107,8 @@ BabeList
         color: babeTableRoot.labelColor
         bgColor: headerBarColor
         remoteArtwork: isArtworkRemote
+        playingIndicator: showIndicator
+
         Connections
         {
             target: delegate

@@ -1,21 +1,23 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import "../../view_models"
 import QtGraphicalEffects 1.0
-import "../../utils/Help.js" as H
+
 import org.kde.kirigami 2.2 as Kirigami
+
+import "../../view_models"
+import "../../utils/Help.js" as H
 
 ItemDelegate
 {
     id: delegateRoot
 
-    readonly property int altHeight : rowHeight * 1.2
-
     width: parent.width
     height: sameAlbum ? rowHeight : altHeight
     clip: true
     autoExclusive:  true
+
+    readonly property int altHeight : rowHeight * 1.2
 
     signal play()
     signal rightClicked()
@@ -46,7 +48,7 @@ ItemDelegate
     property bool menuItem : false
     property bool trackDurationVisible : false
     property bool trackRatingVisible: false
-    //    property bool playingIndicator: false
+    property bool playingIndicator: false
     property string trackMood : art
     property alias trackRating : trackRating
 
@@ -131,6 +133,28 @@ ItemDelegate
                 onClicked: artworkCoverClicked()
                 onPressAndHold: if(isMobile) artworkCoverDoubleClicked()
             }
+
+            Rectangle
+            {
+                visible : playingIndicator && (currentTrackIndex === index)
+
+                height: parent.height * 0.4
+                width: height
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: space.big
+                anchors.horizontalCenter:parent.horizontalCenter
+                radius: Math.min(width, height)
+                color: "white"
+
+                AnimatedImage
+                {
+                    source: "qrc:/assets/heart_indicator.gif"
+                    anchors.centerIn: parent
+                    height: parent.height * 0.6
+                    width: parent.width * 0.6
+                    playing: parent.visible
+                }
+            }
         }
 
         Item
@@ -158,7 +182,7 @@ ItemDelegate
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
             Layout.margins: space.tiny
-            Layout.leftMargin: space.small
+            Layout.leftMargin: space.small * (quickPlay ? 1 : 2)
             anchors.verticalCenter: parent.verticalCenter
 
             GridLayout

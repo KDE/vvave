@@ -9,7 +9,6 @@ ListView
     id: albumsRollRoot
     orientation: ListView.Horizontal
     clip: true
-    spacing: space.huge
     focus: true
     interactive: true
     currentIndex: currentTrackIndex
@@ -22,12 +21,13 @@ ListView
     delegate: BabeAlbum
     {
         id: delegate
-        height: coverSize
-        width: coverSize
+        itemHeight: coverSize
+        itemWidth: coverSize + space.huge
         albumSize : coverSize
         albumRadius : 0
         showLabels: false
         showIndicator: true
+        hideRepeated: true
         anchors.verticalCenter: parent.verticalCenter
 
         Connections
