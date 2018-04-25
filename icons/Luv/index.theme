@@ -4,11 +4,23 @@
 #   Name of the theme #
 #######################
 Name=Lüv
+Name[ca]=Lüv
+Name[gl]=Lüv
+Name[nl]=Lüv
+Name[pt]=Lüv
+Name[uk]=Lüv
+Name[x-test]=xxLüvxx
 
 #################
 #   Description #
 #################
 Comment=Lüv is an icon theme for freedesktop environments.
+Comment[ca]=Lüv és un tema d'icones per als entorns «freedesktop».
+Comment[gl]=Lüv é un tema de iconas para ambientes de freedesktop.
+Comment[nl]=Lüv is een pictogramthema voor freedesktop-omgevingen.
+Comment[pt]=O Lüv é um tema de ícones para os ambientes do 'freedesktop'.
+Comment[uk]=Lüv — тема піктограм для середовищ freedesktop.
+Comment[x-test]=xxLüv is an icon theme for freedesktop environments.xx
 
 #####################
 #   Plasma settings #
