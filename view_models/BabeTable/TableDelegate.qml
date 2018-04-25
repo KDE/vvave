@@ -140,9 +140,7 @@ ItemDelegate
 
                 height: parent.height * 0.4
                 width: height
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: space.big
-                anchors.horizontalCenter:parent.horizontalCenter
+                anchors.centerIn: parent
                 radius: Math.min(width, height)
                 color: "white"
 

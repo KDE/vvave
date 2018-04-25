@@ -2,11 +2,12 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.1
+import org.kde.kirigami 2.2 as Kirigami
 
 Popup
 {
-    property int maxWidth : 200
-    property int maxHeight : 200
+    property int maxWidth : Kirigami.Units.devicePixelRatio * 200
+    property int maxHeight : maxWidth
 
     parent: ApplicationWindow.overlay
 
@@ -31,8 +32,8 @@ Popup
     clip: true
 
 
-    margins: 1
-    padding: 2
+    margins: 0
+    padding: space.small
 
     enter: Transition
     {

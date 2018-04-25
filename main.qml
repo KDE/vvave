@@ -6,8 +6,6 @@ import QtQuick.Controls.Material 2.1
 
 import QtQuick.Window 2.3
 
-import "services/local"
-
 import "utils"
 
 import "widgets"
@@ -19,7 +17,10 @@ import "widgets/SearchView"
 
 import "view_models"
 import "view_models/BabeDialog"
+
+import "services/local"
 import "services/web"
+import "services/web/Spotify"
 
 import "db/Queries.js" as Q
 import "utils/Player.js" as Player
@@ -114,8 +115,10 @@ Kirigami.ApplicationWindow
                                            playlists: 3,
                                            search: 4,
                                            vvave: 5,
-                                           youtube: 6,
-                                           linking: 7
+                                           linking: 6,
+                                           youtube: 7,
+                                           spotify: 8
+
                                        })
 
     property string syncPlaylist: ""
@@ -778,7 +781,8 @@ Kirigami.ApplicationWindow
 
                 onCurrentItemChanged: currentItem.forceActiveFocus()
 
-                onCurrentIndexChanged: {
+                onCurrentIndexChanged:
+                {
                     currentView = currentIndex
                     if (pageStack.currentIndex === 0)
                         mainPlaylist.list.forceActiveFocus()
@@ -842,7 +846,8 @@ Kirigami.ApplicationWindow
                         onQuickPlayTrack: Player.quickPlay(track)
                         onPlayAll: Player.playAll(tracks)
                         onAppendAll: Player.appendAll(tracks)
-                        onPlaySync: {
+                        onPlaySync:
+                        {
                             var tracks = bae.get(Q.GET.playlistTracks_.arg(playlist))
                             Player.playAll(tracks)
                             root.sync = true
@@ -860,15 +865,12 @@ Kirigami.ApplicationWindow
                     Connections
                     {
                         target: searchView.searchTable
-                        onRowClicked: Player.addTrack(
-                                          searchView.searchTable.model.get(
-                                              index))
-                        onQuickPlayTrack: Player.quickPlay(
-                                              searchView.searchTable.model.get(
-                                                  index))
+                        onRowClicked: Player.addTrack(searchView.searchTable.model.get(index))
+                        onQuickPlayTrack: Player.quickPlay(searchView.searchTable.model.get(index))
                         onPlayAll: Player.playAll(searchView.searchRes)
                         onAppendAll: Player.appendAll(searchView.searchRes)
-                        onArtworkDoubleClicked: {
+                        onArtworkDoubleClicked:
+                        {
                             var query = Q.GET.albumTracks_.arg(
                                         searchView.searchTable.model.get(
                                             index).album)
@@ -885,14 +887,19 @@ Kirigami.ApplicationWindow
                     id: babeitView
                 }
 
+                LinkingView
+                {
+                    id: linkingView
+                }
+
                 YouTube
                 {
                     id: youtubeView
                 }
 
-                LinkingView
+                Spotify
                 {
-                    id: linkingView
+                    id: spotifyView
                 }
             }
         }

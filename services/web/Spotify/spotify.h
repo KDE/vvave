@@ -2,15 +2,20 @@
 #define SPOTIFY_H
 
 #include <QObject>
+#include <QWidget>
+#include <QMap>
 
-class spotify : public QObject
+#include "../../../pulpo/pulpo.h"
+#include "../../../utils/bae.h"
+
+
+class Spotify : public QObject
 {
     Q_OBJECT
 public:
-    explicit spotify(QObject *parent = nullptr);
+    explicit Spotify(QObject *parent = nullptr);
 
 signals:
-
 public slots:
 };
 

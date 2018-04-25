@@ -62,6 +62,18 @@ Kirigami.GlobalDrawer
 
         Kirigami.Action
         {
+            text: qsTr("Linking")
+            iconName: isMobile ? "computer-laptop" : "phone"
+            onTriggered:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.linking
+                if(!isLinked) linkingView.linkingConf.open()
+            }
+        },
+
+        Kirigami.Action
+        {
             text: qsTr("YouTube")
             iconName: "im-youtube"
             onTriggered:
@@ -73,16 +85,13 @@ Kirigami.GlobalDrawer
 
         Kirigami.Action
         {
-            text: qsTr("Linking")
-            iconName: isMobile ? "computer-laptop" : "phone"
+            text: qsTr("Spotify")
             onTriggered:
             {
                 pageStack.currentIndex = 1
-                currentView = viewsIndex.linking
-                if(!isLinked) linkingView.linkingConf.open()
+                currentView = viewsIndex.spotify
             }
         },
-
 
         Kirigami.Action
         {

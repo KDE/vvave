@@ -67,7 +67,8 @@ SOURCES += main.cpp \
     utils/babeconsole.cpp \
     services/local/youtubedl.cpp \
     services/local/linking.cpp \
-    settings/fileloader.cpp
+    settings/fileloader.cpp \
+    services/web/Spotify/spotify.cpp
 
 
 RESOURCES += qml.qrc \
@@ -113,7 +114,8 @@ HEADERS += \
     utils/babeconsole.h \
     utils/singleton.h \
     services/local/youtubedl.h \
-    services/local/linking.h
+    services/local/linking.h \
+    services/web/Spotify/spotify.h
 
 
 #TAGLIB
