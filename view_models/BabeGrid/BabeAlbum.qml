@@ -19,6 +19,7 @@ ItemDelegate
     property bool showIndicator :  false
     property bool isCurrentListItem : ListView.isCurrentItem
     property bool hideRepeated : false
+    property bool increaseCurrentItem : false
 
     property color labelColor : GridView.isCurrentItem  || hovered || down ? highlightColor : textColor
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
@@ -89,13 +90,13 @@ ItemDelegate
             Image
             {
                 id: img
-                width: albumSize
-                height: albumSize
+                width: increaseCurrentItem ? albumSize * (isCurrentListItem ? 1 : 0.85) : albumSize
+                height: width
 
                 anchors.centerIn: parent
 
-                sourceSize.width: albumSize
-                sourceSize.height: albumSize
+                sourceSize.width: width
+                sourceSize.height: height
 
                 fillMode: Image.PreserveAspectFit
                 cache: true

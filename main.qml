@@ -784,13 +784,6 @@ Kirigami.ApplicationWindow
                 onCurrentIndexChanged:
                 {
                     currentView = currentIndex
-                    if (pageStack.currentIndex === 0)
-                        mainPlaylist.list.forceActiveFocus()
-                    else if (currentView === viewsIndex.tracks)
-                        tracksView.forceActiveFocus()
-                    else if (currentView === viewsIndex.search)
-                        searchView.forceActiveFocus()
-
                     if (!babeitView.isConnected
                             && currentIndex === viewsIndex.vvave)
                         babeitView.logginDialog.open()

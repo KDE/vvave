@@ -14,7 +14,6 @@ BabeTable
     headerBarExit: false
     coverArtVisible: false
 
-
     section.property : "album"
     section.criteria: ViewSection.FullString
     section.delegate: BabeDelegate

@@ -15,6 +15,12 @@ class Spotify : public QObject
 public:
     explicit Spotify(QObject *parent = nullptr);
 
+    Q_INVOKABLE void setCode(const QString &code = "");
+    Q_INVOKABLE QString getCode();
+
+
+private:
+    QString code;
 signals:
 public slots:
 };

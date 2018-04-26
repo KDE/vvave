@@ -43,12 +43,12 @@ Item
         onSaveToClicked: table.saveList()
     }
 
-    Rectangle
-    {
-        anchors.fill: parent
-        color: darkDarkColor
-        z: -999
-    }
+//    Rectangle
+//    {
+//        anchors.fill: parent
+//        color: darkDarkColor
+//        z: -999
+//    }
 
     GridLayout
     {
@@ -73,46 +73,29 @@ Item
             {
                 visible: cover.visible
                 anchors.fill: parent
-                color: darkDarkColor
+                color: "transparent"
                 z: -999
 
                 Image
                 {
                     id: artwork
-                    visible: cover.visible
+                    visible: false
                     anchors.fill: parent
-
-                    ////                    sourceSize.height: coverSize
-                    ////                    sourceSize.width: coverSize
-
-                    //                    anchors.centerIn: parent
+                    sourceSize.height: coverSize * 0.2
+                    sourceSize.width: coverSize * 0.2
                     source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
                     fillMode: Image.PreserveAspectCrop
                 }
 
                 FastBlur
                 {
-                    visible: cover.visible
+                    visible: artwork.visible
                     anchors.fill: parent
                     source: artwork
                     radius: 100
                     transparentBorder: false
                     cached: true
-                }
-
-                MouseArea
-                {
-                    anchors.fill: parent
-                    onDoubleClicked: gomini()
-
-                    onPressAndHold:
-                    {
-                        var query = Q.GET.albumTracks_.arg(currentTrack.album)
-                        query = query.arg(currentTrack.artist)
-                        var tracks = bae.get(query)
-                        coverPressed(tracks)
-                    }
-                }
+                }                
             }
 
             Item
@@ -127,6 +110,7 @@ Item
                     width: parent.width
                     anchors.verticalCenter: parent.vertical
                 }
+
             }
         }
 
@@ -145,13 +129,13 @@ Item
             leftPadding: 0
             rightPadding: 0
 
-            Rectangle
-            {
-                anchors.fill: parent
-                color: darkDarkColor
-                opacity: opacityLevel
-                z: -999
-            }
+//            Rectangle
+//            {
+//                anchors.fill: parent
+//                color: darkDarkColor
+//                opacity: opacityLevel
+//                z: -999
+//            }
 
             MouseArea
             {
@@ -191,7 +175,7 @@ Item
                     {
                         id: infoBtn
                         anchors.centerIn: parent
-                        iconColor: darkTextColor
+//                        iconColor: darkTextColor
                         iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
                         onClicked:
                         {
@@ -214,7 +198,20 @@ Item
                     BabeButton
                     {
                         anchors.centerIn: parent
-                        iconColor: darkTextColor
+//                        iconColor: darkTextColor
+                        iconName: "headphones"
+                        onClicked: goFocusMode()
+                    }
+                }
+
+                Item
+                {
+                    Layout.fillWidth: true
+
+                    BabeButton
+                    {
+                        anchors.centerIn: parent
+//                        iconColor: darkTextColor
                         iconName: "videoclip-amarok"
                         onClicked:
                         {
@@ -236,7 +233,7 @@ Item
                         Layout.fillWidth: true
                         iconName: "overflow-menu"
                         onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
-                        iconColor: darkTextColor
+//                        iconColor: darkTextColor
 
                     }
                 }
@@ -316,14 +313,14 @@ Item
                     holder.message : "<h2>Meh!</h2><p>Start putting together your playlist!</p>"
                     holder.emoji: "qrc:/assets/face-sleeping.png"
 
-                    labelColor: darkTextColor
+//                    labelColor: darkTextColor
 
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        z: -999
-                        color: darkDarkColor
-                    }
+//                    Rectangle
+//                    {
+//                        anchors.fill: parent
+//                        z: -999
+//                        color: darkDarkColor
+//                    }
 
                     onRowClicked: play(index)
 

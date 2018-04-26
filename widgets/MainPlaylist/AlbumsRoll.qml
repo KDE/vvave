@@ -14,22 +14,22 @@ ListView
     currentIndex: currentTrackIndex
     highlightFollowsCurrentItem: true
     highlightMoveDuration: 0
-    //    snapMode: ListView.SnapToItem
-
+    //        snapMode: ListView.SnapOneItem
+    cacheBuffer: width
     model : ListModel{}
 
     delegate: BabeAlbum
     {
         id: delegate
         itemHeight: coverSize
-        itemWidth: coverSize + space.huge
+        itemWidth: coverSize + space.big
         albumSize : coverSize
         albumRadius : 0
         showLabels: false
         showIndicator: true
         hideRepeated: true
         anchors.verticalCenter: parent.verticalCenter
-
+        increaseCurrentItem : true
         Connections
         {
             target: delegate

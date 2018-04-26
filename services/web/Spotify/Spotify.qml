@@ -14,16 +14,6 @@ Page
         id: loginLoader
     }
 
-    Component
-    {
-        id: loginForm
-
-        LoginForm
-        {
-            parent:  spotifyView
-        }
-    }
-
     ColumnLayout
     {
         anchors.fill: parent
@@ -39,9 +29,10 @@ Page
             headerBarLeft: BabeButton
             {
                 iconName: "internet-services"
-                onClicked:
+                onClicked:if(!isAndroid)
                 {
-                    loginLoader.sourceComponent = loginForm
+
+                    loginLoader.source = "LoginForm.qml"
 
                     loginLoader.item.open()
 

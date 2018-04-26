@@ -14,6 +14,8 @@ BabeList
     headerBarColor: backgroundColor
     labelColor: textColor
 
+    focus: true
+
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false

@@ -13,11 +13,25 @@ BabePopup
     WebEngineView
     {
         anchors.fill: parent
-        url: "https://accounts.spotify.com/en/authorize?response_type=code&client_id=a49552c9276745f5b4752250c2d84367&scope=streaming&redirect_uri=vvave:%2F%2Fcallback"
+        url: "https://accounts.spotify.com/en/authorize?response_type=token&client_id=a49552c9276745f5b4752250c2d84367&scope=streaming user-read-private user-read-birthdate user-read-email&redirect_uri=vvave:%2F%2Fcallback"
         onLoadingChanged:
         {
+            var myUrl = url.toString()
+            if(myUrl.startsWith("vvave://callback/#access_token="))
+            {
+                var code = myUrl.slice(("vvave://callback/#access_token=").length, myUrl.length)
+                spotify.setCode(code);
+                url = "qrc:/services/web/Spotify/spotify.html"
+
+            }
+
             if(loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus)
                 console.log("page loaded sucessfully")
+        }
+
+        onNewViewRequested:
+        {
+            console.log("new view requested")
         }
 
     }

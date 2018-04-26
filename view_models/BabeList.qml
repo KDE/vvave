@@ -129,8 +129,8 @@ Page
             interactive: true
             highlightFollowsCurrentItem: true
             highlightMoveDuration: 0
-            keyNavigationWraps: !isMobile
-            keyNavigationEnabled : !isMobile
+            keyNavigationWraps: true
+            keyNavigationEnabled : true
 
             Keys.onUpPressed: decrementCurrentIndex()
             Keys.onDownPressed: incrementCurrentIndex()

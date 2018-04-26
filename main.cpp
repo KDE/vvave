@@ -27,6 +27,7 @@
 
 #include "utils/bae.h"
 #include "services/web/youtube.h"
+#include "services/web/Spotify/spotify.h"
 
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
@@ -70,8 +71,10 @@ int main(int argc, char *argv[])
     }
 
     Babe bae;
+
     /* Services */
     YouTube youtube;
+    Spotify spotify;
 
     QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
 
@@ -87,6 +90,7 @@ int main(int argc, char *argv[])
     context->setContextProperty("player", &bae.player);
     context->setContextProperty("bae", &bae);
     context->setContextProperty("youtube", &youtube);
+    context->setContextProperty("spotify", &spotify);
     context->setContextProperty("link", &bae.link);
 
     qmlRegisterUncreatableMetaObject(

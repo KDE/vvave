@@ -17,3 +17,19 @@ Spotify::Spotify(QObject *parent) : QObject(parent)
 {
 
 }
+
+void Spotify::setCode(const QString &code)
+{
+    if(code.isEmpty())
+        this->code = BAE::loadSettings("SPOTIFY_CODE", "VVAVE", "").toString();
+    else
+    {
+        this->code = code;
+        BAE::saveSettings("SPOTIFY_CODE", code, "VVAVE");
+    }
+}
+
+QString Spotify::getCode()
+{
+    return BAE::loadSettings("SPOTIFY_CODE", "VVAVE", "").toString();
+}

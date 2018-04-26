@@ -85,5 +85,6 @@
         <file>assets/heart_indicator_white.gif</file>
         <file>services/web/Spotify/Spotify.qml</file>
         <file>services/web/Spotify/LoginForm.qml</file>
+        <file>services/web/Spotify/spotify.html</file>
     </qresource>
 </RCC>
