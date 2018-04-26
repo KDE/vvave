@@ -18,6 +18,11 @@ Spotify::Spotify(QObject *parent) : QObject(parent)
 
 }
 
+Spotify::~Spotify()
+{
+
+}
+
 void Spotify::setCode(const QString &code)
 {
     if(code.isEmpty())
