@@ -30,6 +30,7 @@ ListView
         hideRepeated: true
         anchors.verticalCenter: parent.verticalCenter
         increaseCurrentItem : true
+
         Connections
         {
             target: delegate

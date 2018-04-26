@@ -99,7 +99,7 @@ Kirigami.ApplicationWindow
     property int columnWidth: Kirigami.Units.gridUnit * 17
     property int coverSize: focusMode ? columnWidth :
                                         (isAndroid ? Math.sqrt(root.width * root.height) * 0.4 :
-                                        columnWidth * (isMobile ? 0.7 : 0.6))
+                                                     columnWidth * (isMobile ? 0.7 : 0.6))
 
 
     /***************************************************/
@@ -806,27 +806,92 @@ Kirigami.ApplicationWindow
                 AlbumsView
                 {
                     id: albumsView
+
                     Connections
                     {
                         target: albumsView
                         onRowClicked: Player.addTrack(track)
                         onPlayAlbum: Player.playAll(tracks)
-                        onAppendAlbum: Player.appendAll(tracks)
                         onPlayTrack: Player.quickPlay(track)
+
+                        onAlbumCoverClicked:
+                        {
+                            var query = Q.GET.albumTracks_.arg(album)
+                            query = query.arg(artist)
+                            albumsView.table.headerBarTitle = album
+                            albumsView.populateTable(query)
+                        }
+
+                        onAlbumCoverPressedAndHold:
+                        {
+                            var query = Q.GET.albumTracks_.arg(album)
+                            query = query.arg(artist)
+
+                            var map = bae.get(query)
+                            albumsView.playAlbum(map)
+                        }
+
+                        onPlayAll:
+                        {
+                            var query = Q.GET.albumTracks_.arg(album)
+                            query = query.arg(artist)
+
+                            query = query.arg(data.artist)
+                            var tracks = bae.get(query)
+                            Player.playAll(tracks)
+                        }
+
+                        onAppendAll:
+                        {
+                            var query = Q.GET.albumTracks_.arg(album)
+                            query = query.arg(artist)
+                            var tracks = bae.get(query)
+                            Player.appendAll(tracks)
+                        }
                     }
                 }
 
-                ArtistsView
+                AlbumsView
                 {
                     id: artistsView
+
 
                     Connections
                     {
                         target: artistsView
                         onRowClicked: Player.addTrack(track)
-                        onPlayAlbum: Player.playAll(tracks)
                         onAppendAlbum: Player.appendAll(tracks)
                         onPlayTrack: Player.quickPlay(track)
+                        onAlbumCoverClicked:
+                        {
+                            var query = Q.GET.artistTracks_.arg(artist)
+                            artistsView.table.headerBarTitle = artist
+                            artistsView.populateTable(query)
+                        }
+
+                        onAlbumCoverPressedAndHold:
+                        {
+                            var query = Q.GET.artistTracks_.arg(artist)
+
+                            var map = bae.get(query)
+                            artistsView.playAlbum(map)
+                        }
+
+                        onPlayAll:
+                        {
+
+                            var query = Q.GET.artistTracks_.arg(artist)
+                            query = query.arg(data.artist)
+                            var tracks = bae.get(query)
+                            Player.playAll(tracks)
+                        }
+
+                        onAppendAll:
+                        {
+                            var query = Q.GET.artistTracks_.arg(artist)
+                            var tracks = bae.get(query)
+                            Player.appendAll(tracks)
+                        }
                     }
                 }
 

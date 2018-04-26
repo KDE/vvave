@@ -1,3 +1,6 @@
+.import "../db/Queries.js" as Q
+
+
 function rootWidth()
 {
     return root.width;
@@ -58,15 +61,15 @@ function refreshTracks()
 
 function refreshAlbums()
 {
-    albumsView.clearGrid()
-    albumsView.populate()
+    albumsView.grid.clearGrid()
+    albumsView.populate(Q.GET.allAlbumsAsc)
 
 }
 
 function refreshArtists()
 {
-    artistsView.clearGrid()
-    artistsView.populate()
+    artistsView.grid.clearGrid()
+    artistsView.populate(Q.GET.allArtistsAsc)
 }
 
 function notify(title, body)

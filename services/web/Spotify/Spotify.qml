@@ -33,7 +33,7 @@ Page
                 {
 
                     loginLoader.source = "LoginForm.qml"
-
+                    loginLoader.item.parent = spotifyView
                     loginLoader.item.open()
 
                 }

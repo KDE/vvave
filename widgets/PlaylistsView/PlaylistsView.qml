@@ -27,7 +27,7 @@ Kirigami.PageRow
     separatorVisible: wideMode
     initialPage: [playlistList, playlistViewDrawer]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
-    interactive: false
+    interactive: currentIndex === 1 && !wideMode
 
 
     Page

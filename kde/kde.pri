@@ -16,3 +16,4 @@ SOURCES += \
 
 LIBS += -ltag
 
+WEBENGINE_CONFIG+=proprietary_codecs

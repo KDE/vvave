@@ -13,7 +13,8 @@ BabePopup
     WebEngineView
     {
         anchors.fill: parent
-        url: "https://accounts.spotify.com/en/authorize?response_type=token&client_id=a49552c9276745f5b4752250c2d84367&scope=streaming user-read-private user-read-birthdate user-read-email&redirect_uri=vvave:%2F%2Fcallback"
+
+        url: "https://accounts.spotify.com/en/authorize?response_type=token&client_id=a49552c9276745f5b4752250c2d84367&scope=streaming user-read-private user-read-email&redirect_uri=vvave:%2F%2Fcallback"
         onLoadingChanged:
         {
             var myUrl = url.toString()

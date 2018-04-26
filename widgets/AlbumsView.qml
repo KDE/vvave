@@ -8,177 +8,101 @@ import "../view_models/BabeTable"
 import "../db/Queries.js" as Q
 import org.kde.kirigami 2.2 as Kirigami
 
-BabeGrid
-{
-    id: albumsViewGrid
-    visible: true
 
-    property alias list : drawerList.list
-    property alias table : drawerList
+Kirigami.PageRow
+{
+    id: albumsPageRoot
+    clip: true
+    separatorVisible: wideMode
+    initialPage: [albumsViewGrid, albumsViewTable]
+    defaultColumnWidth: albumsViewGrid.albumCoverSize * 4
+    interactive: currentIndex  === 1
+
+    property alias grid : albumsViewGrid
+    property alias table : albumsViewTable
 
     signal rowClicked(var track)
-    signal playAlbum(var tracks)
     signal playTrack(var track)
     signal queueTrack(var track)
-    signal appendAlbum(var tracks)
 
-    //    transform: Translate
-    //    {
-    //        y: (drawer.height)*-1
-    //    }
+    signal appendAll(string album, string artist)
+    signal playAll(string album, string artist)
+    signal albumCoverClicked(string album, string artist)
+    signal albumCoverPressedAndHold(string album, string artist)
 
-    onBgClicked: if(drawer.visible) drawer.close()
-    onFocusChanged:  drawer.close()
-
-    Drawer
+    BabeGrid
     {
-        id: drawer
-
-        y: parent.height-height-root.footer.height
-
-        width: albumsViewGrid.width
-
-        height:
-        {
-            var customHeight = (drawerList.count*rowHeight)+toolBarHeight
-
-            if(customHeight > parent.height)
-                (parent.height*0.9) - root.header.height - root.footer.height
-            else
-            {
-                if(customHeight < parent.height*0.4)
-                    (parent.height*0.4) - root.footer.height
-                else
-                    customHeight - root.footer.height
-            }
-        }
-
-        edge: Qt.RightEdge
-        interactive: false
-        focus: true
-        modal: false
-        dragMargin: 0
-        margins: 0
-        spacing: 0
-        closePolicy: Popup.CloseOnPressOutsideParent
-
-        onOpened: drawerList.forceActiveFocus()
-
-        enter: Transition
-        {
-            NumberAnimation { property: "opacity"; from: 0.0; to: 1.0 }
-        }
-
-        exit: Transition
-        {
-            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0 }
-        }
-
-
-        BabeTable
-        {
-            id: drawerList
-            anchors.fill: parent
-            trackNumberVisible: true
-            headerBarVisible: true
-            headerBarExit: true
-            coverArtVisible: true
-            quickPlayVisible: true
-            focus: true
-
-            Kirigami.Separator
-            {
-                visible: !isAndroid
-                width: parent.width
-                height: 1
-                z: 999
-
-                anchors
-                {
-                    left: parent.left
-                    right: parent.right
-                    top: parent.top
-                }
-            }
-
-            onRowClicked:
-            {
-                drawer.close()
-                albumsViewGrid.rowClicked(model.get(index))
-            }
-
-            onQuickPlayTrack:
-            {
-                drawer.close()
-                albumsViewGrid.playTrack(model.get(index))
-            }
-
-            onQueueTrack:
-            {
-                albumsViewGrid.queueTrack(model.get(index))
-                drawer.close()
-            }
-
-            onPlayAll:
-            {
-                drawer.close()
-
-                var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
-                var query = Q.GET.albumTracks_.arg(data.album)
-                query = query.arg(data.artist)
-                var tracks = bae.get(query)
-
-                albumsViewGrid.playAlbum(tracks)
-            }
-
-            onAppendAll:
-            {
-                var data = albumsView.gridModel.get(albumsViewGrid.grid.currentIndex)
-                var query = Q.GET.albumTracks_.arg(data.album)
-                query = query.arg(data.artist)
-                var tracks = bae.get(query)
-                albumsViewGrid.appendAlbum(tracks)
-                drawer.close()
-            }
-
-            onExit: drawer.close()            
-        }
+        id: albumsViewGrid
+        visible: true
+        onAlbumCoverClicked: albumsPageRoot.albumCoverClicked(album, artist)
+        onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
 
     }
 
-    onAlbumCoverClicked:
+    BabeTable
     {
-        drawerList.headerBarTitle = album
-        drawer.open()
+        id: albumsViewTable
+        anchors.fill: parent
+        trackNumberVisible: true
+        headerBarVisible: true
+        headerBarExit:  !albumsPageRoot.wideMode
+        headerBarExitIcon: "go-previous"
+        coverArtVisible: true
+        quickPlayVisible: true
+        focus: true
+
+        onRowClicked:
+        {
+            albumsPageRoot.rowClicked(model.get(index))
+        }
+
+        onQuickPlayTrack:
+        {
+            albumsPageRoot.playTrack(model.get(index))
+        }
+
+        onQueueTrack:
+        {
+            albumsPageRoot.queueTrack(model.get(index))
+        }
+
+        onPlayAll:
+        {
+            albumsPageRoot.currentIndex = 0
+            var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
+            albumsPageRoot.playAll(data.album, data.artist)
+        }
+
+        onAppendAll:
+        {
+            albumsPageRoot.currentIndex = 0
+            var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
+            albumsPageRoot.appendAll(data.album, data.artist)
+        }
+
+        onExit: albumsPageRoot.currentIndex = 0
+    }
+
+    function populate(query)
+    {
+        var map = bae.get(query)
+
+        if(map.length > 0)
+            for(var i in map)
+                grid.gridModel.append(map[i])
+    }
+
+    function populateTable(query)
+    {
         table.clearTable()
 
-        var query = Q.GET.albumTracks_.arg(album)
-        query = query.arg(artist)
+        albumsPageRoot.currentIndex = 1
 
         var map = bae.get(query)
 
         if(map.length > 0)
             for(var i in map)
-                drawerList.model.append(map[i])
-    }
-
-    onAlbumCoverPressed:
-    {
-        var query = Q.GET.albumTracks_.arg(album)
-        query = query.arg(artist)
-
-        var map = bae.get(query)
-        playAlbum(map)
-    }
-
-
-    function populate()
-    {
-        var map = bae.get(Q.GET.allAlbumsAsc)
-
-        if(map.length > 0)
-            for(var i in map)
-                gridModel.append(map[i])
+                albumsViewTable.model.append(map[i])
     }
 
     function filter(tracks)
@@ -206,6 +130,5 @@ BabeGrid
                 indexes.push(i)
 
     }
-
-
 }
+
