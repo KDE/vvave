@@ -95,8 +95,8 @@ ItemDelegate
 
                 anchors.centerIn: parent
 
-                sourceSize.width: width
-                sourceSize.height: height
+                sourceSize.width: parent.width
+                sourceSize.height: parent.height
 
                 fillMode: Image.PreserveAspectFit
                 cache: true

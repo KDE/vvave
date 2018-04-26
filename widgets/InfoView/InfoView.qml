@@ -54,11 +54,11 @@ Page
                 TextEdit
                 {
                     id: lyricsText
+                    text: currentTrack.lyrics
                     width: infoRoot.width      // ensure correct width
                     height: implicitHeight
                     readOnly: true
                     padding: 20
-                    text: ""
                     color: darkTextColor
                     font.pointSize: fontSizes.big
                     horizontalAlignment: Qt.AlignHCenter

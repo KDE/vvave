@@ -14,22 +14,29 @@ ListView
     currentIndex: currentTrackIndex
     highlightFollowsCurrentItem: true
     highlightMoveDuration: 0
-    //        snapMode: ListView.SnapOneItem
+    snapMode: ListView.SnapOneItem
     cacheBuffer: width
     model : ListModel{}
+
+    onMovementEnded:
+    {
+        var index = indexAt(contentX, contentY)
+        if(index !== currentTrackIndex)
+            Player.playAt(index)
+    }
 
     delegate: BabeAlbum
     {
         id: delegate
         itemHeight: coverSize
-        itemWidth: coverSize + space.big
+        itemWidth: albumsRollRoot.width
         albumSize : coverSize
         albumRadius : 0
         showLabels: false
         showIndicator: true
         hideRepeated: true
         anchors.verticalCenter: parent.verticalCenter
-        increaseCurrentItem : true
+        //        increaseCurrentItem : true
 
         Connections
         {

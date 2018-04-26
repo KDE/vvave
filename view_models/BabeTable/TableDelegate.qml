@@ -108,13 +108,16 @@ ItemDelegate
             {
                 visible: !sameAlbum
                 anchors.fill: parent
+                flat: true
 
                 Image
                 {
                     id: artworkCover
-                    anchors.fill: parent
+                    anchors.centerIn: parent
+                    height: parent.height * 0.8
+                    width: height
 
-                    sourceSize.width: parent.height
+                    sourceSize.width: parent.width
                     sourceSize.height: parent.height
 
                     source: typeof artwork === 'undefined' ?
@@ -125,8 +128,27 @@ ItemDelegate
 
                     fillMode:  Image.PreserveAspectFit
                     cache: true
-                    antialiasing: false
-                    smooth: true
+//                    antialiasing: true
+//                    smooth: true
+
+                    layer.enabled: coverArt
+                    layer.effect: OpacityMask
+                    {
+                        maskSource: Item
+                        {
+                            width: artworkCover.width
+                            height: artworkCover.height
+                            Rectangle
+                            {
+                                anchors.centerIn: parent
+                                width: artworkCover.adapt ? artworkCover.width : Math.min(artworkCover.width, artworkCover.height)
+                                height: artworkCover.adapt ? artworkCover.height : width
+                                radius: Kirigami.Units.devicePixelRatio *3
+                                border.color: altColor
+                                border.width: Kirigami.Units.devicePixelRatio *3
+                            }
+                        }
+                    }
                 }
 
                 onDoubleClicked: artworkCoverDoubleClicked()

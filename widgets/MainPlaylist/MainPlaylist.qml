@@ -73,13 +73,13 @@ Item
             {
                 visible: cover.visible
                 anchors.fill: parent
-                color: "transparent"
+                color: viewBackgroundColor
                 z: -999
 
                 Image
                 {
                     id: artwork
-                    visible: false
+                    visible: true
                     anchors.fill: parent
                     sourceSize.height: coverSize * 0.2
                     sourceSize.width: coverSize * 0.2

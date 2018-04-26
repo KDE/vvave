@@ -309,6 +309,12 @@ Kirigami.ApplicationWindow
         }
     }
 
+    FloatingDisk
+    {
+        id: floatingDisk
+    }
+
+
     /* UI */
     header: BabeBar
     {
@@ -332,12 +338,14 @@ Kirigami.ApplicationWindow
         onAlbumsViewClicked:
         {
             pageStack.currentIndex = 1
+            albumsView.currentIndex = 0
             currentView = viewsIndex.albums
         }
 
         onArtistsViewClicked:
         {
             pageStack.currentIndex = 1
+            artistsView.currentIndex = 0
             currentView = viewsIndex.artists
         }
 
@@ -360,9 +368,8 @@ Kirigami.ApplicationWindow
     {
         id: playbackControls
         position: ToolBar.Footer
-
-        width: root.width
         height: toolBarHeight
+        width: root.width
 
         visible: true
         focus: true
@@ -452,148 +459,56 @@ Kirigami.ApplicationWindow
             }
         }
 
-        GridLayout
+//        Item
+//        {
+//            Layout.alignment: Qt.AlignCenter
+//            Layout.fillWidth: true
+//            Layout.fillHeight: true
+//            Layout.row: 2
+//            Layout.column: 2
+//            Layout.maximumHeight: playbackInfo.visible ? playbackInfo.font.pointSize * 2 : 0
+
+//            Label
+//            {
+//                id: playbackInfo
+
+//                visible: !mainlistEmpty && infoLabels
+//                //                anchors.top: playIcon.bottom
+//                //                anchors.horizontalCenter: playIcon.horizontalCenter
+//                width: parent.width
+//                height: parent.height
+//                horizontalAlignment: Qt.AlignHCenter
+//                verticalAlignment: Qt.AlignVCenter
+//                text: progressTimeLabel + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - " + currentTrack.artist) : "") + "  /  " + durationTimeLabel
+//                color: darkTextColor
+//                font.pointSize: fontSizes.small
+//                elide: Text.ElideRight
+//            }
+//        }
+
+        RowLayout
         {
-            id: playbackControlsLayout
             anchors.fill: parent
-            height: parent.height
-            width: parent.width
-            columnSpacing: 0
-            rows: 2
-            columns: 2
 
             Item
             {
-                Layout.alignment: Qt.AlignLeft
+                Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.maximumWidth: miniArtwork.visible ? toolBarHeight : 0
-                Layout.minimumWidth: miniArtwork.visible ? toolBarHeight : 0
-                Layout.minimumHeight: miniArtwork.visible ? toolBarHeight : 0
-                Layout.maximumHeight: miniArtwork.visible ? toolBarHeight : 0
-                Layout.row: 1
-                Layout.rowSpan: 2
-                Layout.column: 1
-
-                anchors.verticalCenter: parent.top
-                z: progressBar.z+1
-
-                Rectangle
-                {
-                    visible: miniArtwork.visible
-                    anchors.centerIn: parent
-                    height: miniArtSize + miniArtSize*0.05
-                    width: miniArtSize + miniArtSize*0.05
-
-                    color: darkTextColor
-                    opacity: opacityLevel
-
-                    z: -999
-                    radius: Math.min(width, height)
-                }
-
-                RotationAnimator on rotation
-                {
-                    from: 0
-                    to: 360
-                    duration: 5000
-                    loops: Animation.Infinite
-                    running: miniArtwork.visible && isPlaying
-                }
-
-                Image
-                {
-                    id: miniArtwork
-                    visible: ((!pageStack.wideMode
-                               && pageStack.currentIndex !== 0)
-                              || !mainPlaylist.cover.visible) && !mainlistEmpty
-                    focus: true
-                    height: miniArtSize
-                    width: miniArtSize
-                    //                    anchors.left: parent.left
-                    anchors.centerIn: parent
-                    source:
-                    {
-                        if (currentArtwork)
-                            (currentArtwork.length > 0 && currentArtwork
-                             !== "NONE") ? "file://" + encodeURIComponent(
-                                               currentArtwork) : "qrc:/assets/cover.png"
-                        else
-                            "qrc:/assets/cover.png"
-                    }
-
-                    fillMode: Image.PreserveAspectFit
-                    cache: false
-                    antialiasing: true
-
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked:
-                        {
-                            if (!isMobile && pageStack.wideMode)
-                                root.width = columnWidth
-                            pageStack.currentIndex = 0
-                        }
-                    }
-
-                    layer.enabled: true
-                    layer.effect: OpacityMask
-                    {
-                        maskSource: Item
-                        {
-                            width: miniArtwork.width
-                            height: miniArtwork.height
-                            Rectangle {
-                                anchors.centerIn: parent
-                                width: miniArtwork.adapt ? miniArtwork.width : Math.min(
-                                                               miniArtwork.width,
-                                                               miniArtwork.height)
-                                height: miniArtwork.adapt ? miniArtwork.height : width
-                                radius: Math.min(width, height)
-                            }
-                        }
-                    }
-                }
+                Layout.minimumWidth: 0
             }
 
             Item
             {
-                Layout.alignment: Qt.AlignCenter
-                Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.row: 2
-                Layout.column: 2
-                Layout.maximumHeight: playbackInfo.visible ? playbackInfo.font.pointSize * 2 : 0
-
-                Label
-                {
-                    id: playbackInfo
-
-                    visible: !mainlistEmpty && infoLabels
-                    //                anchors.top: playIcon.bottom
-                    //                anchors.horizontalCenter: playIcon.horizontalCenter
-                    width: parent.width
-                    height: parent.height
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    text: progressTimeLabel + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - " + currentTrack.artist) : "") + "  /  " + durationTimeLabel
-                    color: darkTextColor
-                    font.pointSize: fontSizes.small
-                    elide: Text.ElideRight
-                }
-            }
-
-            RowLayout
-            {
                 Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignCenter
-                Layout.row: 1
-                Layout.column: 2
+                Layout.maximumWidth: babeBtnIcon.implicitWidth * 1.3
+                Layout.maximumHeight: toolBarIconSize
 
                 BabeButton
                 {
                     id: babeBtnIcon
+                    anchors.centerIn: parent
+
                     iconName: "love"
                     iconColor: currentBabe ? babeColor : darkTextColor
                     onClicked: if (!mainlistEmpty)
@@ -603,21 +518,40 @@ Kirigami.ApplicationWindow
                                    currentBabe = value
                                }
                 }
+            }
+
+            Item
+            {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.maximumWidth: previousBtn.implicitWidth * 1.3
+                Layout.maximumHeight: toolBarIconSize
 
                 BabeButton
                 {
                     id: previousBtn
+                    anchors.centerIn: parent
+
                     iconColor: darkTextColor
                     iconName: "media-skip-backward"
                     onClicked: Player.previousTrack()
                     onPressAndHold: Player.playAt(prevTrackIndex)
                 }
+            }
+
+            Item
+            {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.maximumWidth: playIcon.implicitWidth * 1.3
+                Layout.maximumHeight: toolBarIconSize
 
                 BabeButton
                 {
                     id: playIcon
-                    iconColor: darkTextColor
+                    anchors.centerIn: parent
 
+                    iconColor: darkTextColor
                     iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onClicked:
                     {
@@ -627,36 +561,61 @@ Kirigami.ApplicationWindow
                             Player.resumeTrack()
                     }
                 }
+            }
+
+            Item
+            {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.maximumWidth: nextBtn.implicitWidth * 1.3
+                Layout.maximumHeight: toolBarIconSize
 
                 BabeButton
                 {
                     id: nextBtn
-                    iconColor: darkTextColor
+                    anchors.centerIn: parent
 
+                    iconColor: darkTextColor
                     iconName: "media-skip-forward"
                     onClicked: Player.nextTrack()
-
                     onPressAndHold: Player.playAt(Player.shuffle())
                 }
+            }
+
+            Item
+            {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.maximumWidth: shuffleBtn.implicitWidth * 1.3
+                Layout.maximumHeight: toolBarIconSize
 
                 BabeButton
                 {
                     id: shuffleBtn
-                    iconColor: darkTextColor
+                    anchors.centerIn: parent
 
+                    iconColor: darkTextColor
                     iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
                     onClicked: isShuffle = !isShuffle
                 }
             }
+
+            Item
+            {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: 0
+            }
+
         }
     }
 
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: altColor
-        z: -999
-    }
+//    background: Rectangle
+//    {
+//        anchors.fill: parent
+//        color: altColor
+//        z: -999
+//    }
 
     globalDrawer: SettingsView
     {
