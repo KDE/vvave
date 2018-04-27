@@ -1,5 +1,5 @@
-#ifndef SPOTIFY_H
-#define SPOTIFY_H
+#ifndef SPOTIFYSERVICE_H
+#define SPOTIFYSERVICE_H
 
 #include <QObject>
 #include "../pulpo.h"
