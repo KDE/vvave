@@ -241,6 +241,7 @@ Page
                     headerBarVisible: true
                     headerBarExit: true
                     headerBarExitIcon: "edit-clear"
+                    headerBarTitle: "YouTube"
                     holder.message: "No YouTube results!"
                     coverArtVisible: true
                     trackDuration: true

@@ -120,7 +120,7 @@ Item
         }
 
 
-        hoverEnabled: !isMobile
+        hoverEnabled: true
         onEntered: isHovered = true
         onExited: isHovered = false
     }

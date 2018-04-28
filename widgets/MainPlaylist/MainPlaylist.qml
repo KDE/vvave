@@ -43,12 +43,12 @@ Item
         onSaveToClicked: table.saveList()
     }
 
-//    Rectangle
-//    {
-//        anchors.fill: parent
-//        color: darkDarkColor
-//        z: -999
-//    }
+    //    Rectangle
+    //    {
+    //        anchors.fill: parent
+    //        color: darkDarkColor
+    //        z: -999
+    //    }
 
     GridLayout
     {
@@ -95,7 +95,7 @@ Item
                     radius: 100
                     transparentBorder: false
                     cached: true
-                }                
+                }
             }
 
             Item
@@ -129,13 +129,13 @@ Item
             leftPadding: 0
             rightPadding: 0
 
-//            Rectangle
-//            {
-//                anchors.fill: parent
-//                color: darkDarkColor
-//                opacity: opacityLevel
-//                z: -999
-//            }
+            //            Rectangle
+            //            {
+            //                anchors.fill: parent
+            //                color: darkDarkColor
+            //                opacity: opacityLevel
+            //                z: -999
+            //            }
 
             MouseArea
             {
@@ -175,7 +175,7 @@ Item
                     {
                         id: infoBtn
                         anchors.centerIn: parent
-//                        iconColor: darkTextColor
+                        //                        iconColor: darkTextColor
                         iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
                         onClicked:
                         {
@@ -191,6 +191,19 @@ Item
                     }
                 }
 
+                //                Item
+                //                {
+                //                    Layout.fillWidth: true
+
+                //                    BabeButton
+                //                    {
+                //                        anchors.centerIn: parent
+                ////                        iconColor: darkTextColor
+                //                        iconName: "headphones"
+                //                        onClicked: goFocusMode()
+                //                    }
+                //                }
+
                 Item
                 {
                     Layout.fillWidth: true
@@ -198,20 +211,7 @@ Item
                     BabeButton
                     {
                         anchors.centerIn: parent
-//                        iconColor: darkTextColor
-                        iconName: "headphones"
-                        onClicked: goFocusMode()
-                    }
-                }
-
-                Item
-                {
-                    Layout.fillWidth: true
-
-                    BabeButton
-                    {
-                        anchors.centerIn: parent
-//                        iconColor: darkTextColor
+                        //                        iconColor: darkTextColor
                         iconName: "videoclip-amarok"
                         onClicked:
                         {
@@ -233,7 +233,7 @@ Item
                         Layout.fillWidth: true
                         iconName: "overflow-menu"
                         onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
-//                        iconColor: darkTextColor
+                        //                        iconColor: darkTextColor
 
                     }
                 }
@@ -309,18 +309,9 @@ Item
                     coverArtVisible: true
                     trackRating: true
                     showIndicator : true
-
+                    menuItemVisible: false
                     holder.message : "<h2>Meh!</h2><p>Start putting together your playlist!</p>"
                     holder.emoji: "qrc:/assets/face-sleeping.png"
-
-//                    labelColor: darkTextColor
-
-//                    Rectangle
-//                    {
-//                        anchors.fill: parent
-//                        z: -999
-//                        color: darkDarkColor
-//                    }
 
                     onRowClicked: play(index)
 

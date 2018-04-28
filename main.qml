@@ -368,7 +368,7 @@ Kirigami.ApplicationWindow
     {
         id: playbackControls
         position: ToolBar.Footer
-        height: toolBarHeight
+        height: toolBarHeight + space.medium
         width: root.width
 
         visible: true
@@ -414,7 +414,6 @@ Kirigami.ApplicationWindow
         Slider
         {
             id: progressBar
-
             height: iconSizes.big
             width: parent.width
             anchors.left:  parent.left

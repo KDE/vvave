@@ -1,5 +1,5 @@
-#ifndef LASTFM_H
-#define LASTFM_H
+#ifndef LASTFMSERVICE_H
+#define LASTFMSERVICE_H
 
 #include <QObject>
 #include "../pulpo.h"

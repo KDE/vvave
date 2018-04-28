@@ -19,7 +19,7 @@ BabeList
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
-    property bool menuItemVisible : isMobile
+    property bool menuItemVisible : true
     property bool trackDuration
     property bool trackRating
     property bool allowMenu: true
@@ -88,6 +88,13 @@ BabeList
         id: contextMenu
     }
 
+    list.highlightFollowsCurrentItem: false
+    list.highlightMoveDuration: 0
+    list.highlight: Rectangle
+    {
+
+    }
+
     ListModel { id: listModel }
 
     model: listModel
@@ -106,38 +113,33 @@ BabeList
         trackDurationVisible : trackDuration
         trackRatingVisible : trackRating
         menuItem: menuItemVisible
-        color: babeTableRoot.labelColor
         bgColor: headerBarColor
         remoteArtwork: isArtworkRemote
         playingIndicator: showIndicator
 
-        Connections
+        onPressAndHold: if(isMobile && allowMenu) openItemMenu(index)
+        onRightClicked: if(allowMenu) openItemMenu(index)
+
+        onClicked:
         {
-            target: delegate
-
-            onPressAndHold: if(isMobile && allowMenu) openItemMenu(index)
-            onRightClicked: if(allowMenu) openItemMenu(index)
-
-            onClicked:
-            {
-                currentIndex = index
-                if(root.isMobile)
-                    rowClicked(index)
-
-            }
-
-            onDoubleClicked:
-            {
-                if(!root.isMobile)
-                    rowClicked(index)
-            }
-
-            onPlay: quickPlayTrack(index)
-
-            onArtworkCoverDoubleClicked: artworkDoubleClicked(index)
+            currentIndex = index
+            if(root.isMobile)
+                rowClicked(index)
 
         }
+
+        onDoubleClicked:
+        {
+            if(!root.isMobile)
+                rowClicked(index)
+        }
+
+        onPlay: quickPlayTrack(index)
+
+        onArtworkCoverDoubleClicked: artworkDoubleClicked(index)
+
     }
+
 
     function openItemMenu(index)
     {

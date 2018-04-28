@@ -21,7 +21,7 @@ Page
         ToolBar
         {
             id: headerRoot
-            width: parent.width        
+            width: parent.width
             Layout.fillWidth: true
             focus: true
 
@@ -45,7 +45,7 @@ Page
                     Layout.fillHeight : true
                     Layout.fillWidth : true
                     Layout.alignment : Qt.AlignCenter
-
+                    color: textColor
                     elide : Text.ElideRight
                     font.bold : false
                     font.pointSize: fontSizes.big

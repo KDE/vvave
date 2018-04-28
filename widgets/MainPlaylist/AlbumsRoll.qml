@@ -15,7 +15,6 @@ ListView
     highlightFollowsCurrentItem: true
     highlightMoveDuration: 0
     snapMode: ListView.SnapOneItem
-    cacheBuffer: width
     model : ListModel{}
 
     onMovementEnded:
@@ -34,7 +33,7 @@ ListView
         albumRadius : 0
         showLabels: false
         showIndicator: true
-        hideRepeated: true
+        hideRepeated: false
         anchors.verticalCenter: parent.verticalCenter
         //        increaseCurrentItem : true
 
