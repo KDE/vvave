@@ -11,24 +11,7 @@ import "../../utils/Player.js" as PLAYER
 
 SwipeDelegate
 {
-    id: delegateRoot
-
-    width: parent.width
-    height: sameAlbum ? rowHeight : altHeight
-    padding: 0
-    clip: true
-    autoExclusive: true
-    swipe.enabled: menuItem
-    focus: true
-    focusPolicy: Qt.StrongFocus
-    hoverEnabled: true
-
-    signal play()
-    signal rightClicked()
-    signal leftClicked()
-
-    signal artworkCoverClicked()
-    signal artworkCoverDoubleClicked()
+    id: delegateRoot  
 
     readonly property int altHeight : rowHeight * 1.2
     readonly property bool sameAlbum :
@@ -56,6 +39,24 @@ SwipeDelegate
     property string trackMood : art
 
     property bool remoteArtwork: false
+
+    width: parent.width
+    height: sameAlbum ? rowHeight * 0.7 : altHeight
+    padding: 0
+    clip: true
+    autoExclusive: true
+    swipe.enabled: menuItem
+    focus: true
+    focusPolicy: Qt.StrongFocus
+    hoverEnabled: true
+
+    signal play()
+    signal rightClicked()
+    signal leftClicked()
+
+    signal artworkCoverClicked()
+    signal artworkCoverDoubleClicked()
+
 
     background: Rectangle
     {
@@ -202,22 +203,20 @@ SwipeDelegate
                     onPressAndHold: if(isMobile) artworkCoverDoubleClicked()
                 }
 
-                Rectangle
+                Item
                 {
-                    visible : playingIndicator && (currentTrackIndex === index)
+                    visible : playingIndicator && (currentTrackIndex === index) && isPlaying
 
-                    height: parent.height * 0.4
+                    height: parent.height * 0.5
                     width: height
                     anchors.centerIn: parent
-                    radius: Math.min(width, height)
-                    color: "white"
 
                     AnimatedImage
                     {
-                        source: "qrc:/assets/heart_indicator.gif"
+                        source: "qrc:/assets/bars.gif"
                         anchors.centerIn: parent
-                        height: parent.height * 0.6
-                        width: parent.width * 0.6
+                        height: parent.height
+                        width: parent.width
                         playing: parent.visible
                     }
                 }
