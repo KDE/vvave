@@ -20,7 +20,6 @@
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include <QWidget>
 #include "kde/notify.h"
-#include "kde/kdeconnect.h"
 #endif
 
 #if defined(Q_OS_ANDROID)
@@ -291,11 +290,11 @@ void Babe::linkDecoder(QString json)
         }
         case LINK::CODE::COLLECT :
         {
-            auto devices = getDevices();
-            qDebug()<<"DEVICES:"<< devices;
-            if(!devices.isEmpty())
-                sendToDevice(devices.first().toMap().value("name").toString(),
-                             devices.first().toMap().value("id").toString(), msg);
+//            auto devices = getDevices();
+//            qDebug()<<"DEVICES:"<< devices;
+//            if(!devices.isEmpty())
+//                sendToDevice(devices.first().toMap().value("name").toString(),
+//                             devices.first().toMap().value("id").toString(), msg);
             break;
 
         }
@@ -731,24 +730,6 @@ QVariantList Babe::searchFor(const QStringList &queries)
     }
 
     return  mapList;
-}
-
-QVariantList Babe::getDevices()
-{
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-    return  KdeConnect::getDevices();
-#else
-    return {};
-#endif
-}
-
-bool Babe::sendToDevice(const QString &name, const QString &id, const QString &url)
-{
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-    return KdeConnect::sendToDevice(name, id, url) ? true : false;
-#else
-    return {};
-#endif
 }
 
 void Babe::debug(const QString &msg)

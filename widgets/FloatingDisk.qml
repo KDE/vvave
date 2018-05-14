@@ -9,9 +9,7 @@ Item
     width: height
 
     x: contentMargins
-    y: parent.height - (playbackControls.height*0.5)
-
-    z: progressBar.z + 1
+    y: parent.height - (root.footBar.height*0.5)
 
     property bool isHovered : false
 
@@ -90,7 +88,8 @@ Item
             {
                 width: miniArtwork.width
                 height: miniArtwork.height
-                Rectangle {
+                Rectangle
+                {
                     anchors.centerIn: parent
                     width: miniArtwork.adapt ? miniArtwork.width : Math.min(
                                                    miniArtwork.width,
@@ -100,6 +99,8 @@ Item
                 }
             }
         }
+
+
     }
 
     MouseArea
@@ -108,10 +109,10 @@ Item
         drag.target: parent
         drag.axis: Drag.XAndYAxis
         drag.minimumX: 0
-        drag.maximumX: playbackControls.width - parent.width
+        drag.maximumX: root.footBar.width - parent.width
 
         drag.minimumY: 0
-        drag.maximumY: playbackControls.y
+        drag.maximumY: pageStack.height
         onClicked:
         {
             if (!isMobile && pageStack.wideMode)

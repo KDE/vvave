@@ -10,7 +10,6 @@
 #include <QStyleHints>
 #include <QCommandLineParser>
 
-#include "services/local/linking.h"
 
 #ifdef STATIC_KIRIGAMI
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
@@ -28,6 +27,8 @@
 #include "utils/bae.h"
 #include "services/web/youtube.h"
 #include "services/web/Spotify/spotify.h"
+#include "services/local/linking.h"
+#include "mauikit/src/mauikit.h"
 
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
@@ -100,6 +101,7 @@ int main(int argc, char *argv[])
                 "LINK",                 // name in QML (does not have to match C++ name)
                 "Error: only enums"            // error in case someone tries to create a MyNamespace object
                 );
+
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();
 #endif
@@ -113,6 +115,10 @@ int main(int argc, char *argv[])
 
     if(!BAE::isMobile())
         QtWebEngine::initialize();
+#endif
+
+#ifdef MAUI_APP
+    MauiKit::getInstance().registerTypes();
 #endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

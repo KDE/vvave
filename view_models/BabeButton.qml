@@ -9,13 +9,12 @@ ToolButton
     id: babeButton
 
     property string iconName
-    property int iconSize : toolBarIconSize
+    property int iconSize : 22
     property color iconColor: textColor
     readonly property string defaultColor :  textColor
     property bool anim : false
 
     spacing: space.small
-    display: pageStack.wideMode ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
 
     icon.name: babeButton.iconName
     icon.width: babeButton.iconSize

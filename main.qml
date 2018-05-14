@@ -22,14 +22,17 @@ import "services/local"
 import "services/web"
 import "services/web/Spotify"
 
+import "view_models/BabeGrid"
+
 import "db/Queries.js" as Q
 import "utils/Player.js" as Player
 import "utils/Help.js" as H
 
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 import Link.Codes 1.0
 
-Kirigami.ApplicationWindow
+Maui.ApplicationWindow
 {
 
     id: root
@@ -47,7 +50,7 @@ Kirigami.ApplicationWindow
     property alias playIcon: playIcon
     property alias babeBtnIcon: babeBtnIcon
     property alias progressBar: progressBar
-    property alias animFooter: animFooter
+    //    property alias animFooter: animFooter
     property alias mainPlaylist: mainPlaylist
 
 
@@ -84,16 +87,8 @@ Kirigami.ApplicationWindow
 
     readonly property real opacityLevel: 0.8
 
-    readonly property int wideSize: Screen.width * 0.5
+    iconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
 
-    readonly property int rowHeight: (defaultFontSize * 2) + space.large
-    readonly property int rowHeightAlt: (defaultFontSize*2) + space.big
-
-    readonly property int headerHeight: rowHeight
-
-    property int toolBarIconSize: bae.loadSetting("ICON_SIZE", "BABE",
-                                                  iconSizes.medium)
-    property int toolBarHeight: Kirigami.Units.iconSizes.medium + (Kirigami.Settings.isMobile ?  Kirigami.Units.smallSpacing : Kirigami.Units.largeSpacing)
     property int miniArtSize: iconSizes.large
 
     property int columnWidth: Kirigami.Units.gridUnit * 17
@@ -124,13 +119,10 @@ Kirigami.ApplicationWindow
     property string syncPlaylist: ""
     property bool sync: false
     property string infoMsg: ""
-    property bool infoLabels: bae.loadSetting("PLAYBACKINFO", "BABE",
-                                              false) == "true" ? true : false
+    property bool infoLabels: bae.loadSetting("PLAYBACKINFO", "BABE", false) == "true" ? true : false
 
     property bool isLinked: false
     property bool isServing: false
-
-
 
     /* ANDROID THEMING*/
 
@@ -145,69 +137,6 @@ Kirigami.ApplicationWindow
     /******************** UI UNITS ********************/
     /*************************************************/
 
-    property int iconSize : iconSizes.medium
-
-
-    readonly property real factor : Kirigami.Units.gridUnit * (isMobile ? 0.2 : 0.2)
-
-    readonly property int contentMargins: space.medium
-    readonly property int defaultFontSize: Kirigami.Theme.defaultFont.pointSize
-    readonly property var fontSizes: ({
-                                          tiny: defaultFontSize * 0.7,
-
-                                          small: (isMobile ? defaultFontSize * 0.7 :
-                                                             defaultFontSize * 0.8),
-
-                                          medium: (isMobile ? defaultFontSize * 0.8 :
-                                                              defaultFontSize * 0.9),
-
-                                          default: (isMobile ? defaultFontSize * 0.9 :
-                                                               defaultFontSize),
-
-                                          big: (isMobile ? defaultFontSize :
-                                                           defaultFontSize * 1.1),
-
-                                          large: (isMobile ? defaultFontSize * 1.1 :
-                                                             defaultFontSize * 1.2)
-                                      })
-
-    readonly property var space : ({
-                                       tiny: Kirigami.Units.smallSpacing,
-                                       small: Kirigami.Units.smallSpacing*2,
-                                       medium: Kirigami.Units.largeSpacing,
-                                       big: Kirigami.Units.largeSpacing*2,
-                                       large: Kirigami.Units.largeSpacing*3,
-                                       huge: Kirigami.Units.largeSpacing*4,
-                                       enormus: Kirigami.Units.largeSpacing*5
-                                   })
-
-    readonly property var iconSizes : ({
-                                           tiny : Kirigami.Units.iconSizes.small*0.5,
-
-                                           small :  (isMobile ? Kirigami.Units.iconSizes.small*0.5:
-                                                                Kirigami.Units.iconSizes.small),
-
-                                           medium : (isMobile ? (isAndroid ? 22 : Kirigami.Units.iconSizes.small) :
-                                                                Kirigami.Units.iconSizes.smallMedium),
-
-                                           big:  (isMobile ? Kirigami.Units.iconSizes.smallMedium :
-                                                             Kirigami.Units.iconSizes.medium),
-
-                                           large: (isMobile ? Kirigami.Units.iconSizes.medium :
-                                                              Kirigami.Units.iconSizes.large),
-
-                                           huge: (isMobile ? Kirigami.Units.iconSizes.large :
-                                                             Kirigami.Units.iconSizes.huge),
-
-                                           enormous: (isMobile ? Kirigami.Units.iconSizes.huge :
-                                                                 Kirigami.Units.iconSizes.enormous)
-
-                                       })
-
-    /***************************************************/
-    /**************************************************/
-    /*************************************************/
-
     readonly property real screenWidth : Screen.width
     readonly property real screenHeight : Screen.height
 
@@ -216,14 +145,6 @@ Kirigami.ApplicationWindow
     /***************************************************/
     /******************** UI COLORS *******************/
     /*************************************************/
-
-    property string backgroundColor: Kirigami.Theme.backgroundColor
-    property string textColor: Kirigami.Theme.textColor
-    property string highlightColor: Kirigami.Theme.highlightColor
-    property string highlightedTextColor: Kirigami.Theme.highlightedTextColor
-    property string buttonBackgroundColor: Kirigami.Theme.buttonBackgroundColor
-    property string viewBackgroundColor: Kirigami.Theme.viewBackgroundColor
-    property string altColor: Kirigami.Theme.complementaryBackgroundColor
     property string babeColor: bae.babeColor()
 
     readonly property string darkBackgroundColor: "#303030"
@@ -253,8 +174,7 @@ Kirigami.ApplicationWindow
     {
         color: isAndroid ? darkColor : "transparent"
         opacity: 0.5
-        height: root.height - playbackControls.height - toolbar.height
-        y: toolbar.height
+        height: root.height - footBar.height - headBar.height
     }
 
     overlay.modeless: Rectangle
@@ -309,72 +229,186 @@ Kirigami.ApplicationWindow
         }
     }
 
-    FloatingDisk
-    {
-        id: floatingDisk
-    }
-
 
     /* UI */
-    header: BabeBar
+    property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
+
+    headBar.middleContent : Row
     {
-        id: toolbar
+        spacing: space.medium
 
-        width: root.width
-        height: toolBarHeight
-
-        visible: !focusMode
-        currentIndex: currentView
-        onSettingsViewClicked: settingsDrawer.visible ? settingsDrawer.close() :
-                                                        settingsDrawer.open()
-
-
-        onTracksViewClicked:
+        Maui.ToolButton
         {
-            pageStack.currentIndex = 1
-            currentView = viewsIndex.tracks
+            iconName: "view-media-track"
+            iconColor:  accent && currentView === viewsIndex.tracks ? babeColor : textColor
+            display: pageStack.wideMode ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
+
+            onClicked:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.tracks
+            }
+
+            text: qsTr("Tracks")
         }
 
-        onAlbumsViewClicked:
+        Maui.ToolButton
         {
-            pageStack.currentIndex = 1
-            albumsView.currentIndex = 0
-            currentView = viewsIndex.albums
+            text: qsTr("Albums")
+            iconName: /*"album"*/ "view-media-album-cover"
+            iconColor:  accent && currentView === viewsIndex.albums ? babeColor : textColor
+            display: pageStack.wideMode ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
+
+            onClicked:
+            {
+                pageStack.currentIndex = 1
+                albumsView.currentIndex = 0
+                currentView = viewsIndex.albums
+            }
         }
 
-        onArtistsViewClicked:
+        Maui.ToolButton
         {
-            pageStack.currentIndex = 1
-            artistsView.currentIndex = 0
-            currentView = viewsIndex.artists
+            text: qsTr("Artists")
+            iconName: "view-media-artist"
+            iconColor:  accent && currentView === viewsIndex.artists ? babeColor : textColor
+            display: pageStack.wideMode ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
+
+            onClicked:
+            {
+                pageStack.currentIndex = 1
+                artistsView.currentIndex = 0
+                currentView = viewsIndex.artists
+            }
         }
 
-        onPlaylistsViewClicked:
+        Maui.ToolButton
         {
-            pageStack.currentIndex = 1
-            currentView = viewsIndex.playlists
-        }
+            text: qsTr("Playlists")
+            iconName: "view-media-playlist"
+            iconColor:  accent && currentView === viewsIndex.playlists ? babeColor : textColor
+            display: pageStack.wideMode ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
 
-        onSearchViewClicked:
-        {
-            pageStack.currentIndex = 1
-            currentView = viewsIndex.search
-            searchView.searchInput.forceActiveFocus()
+            onClicked:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.playlists
+            }
         }
     }
 
 
-    footer: ToolBar
+    onSearchButtonClicked:
     {
-        id: playbackControls
-        position: ToolBar.Footer
-        height: toolBarHeight + space.medium
-        width: root.width
+        pageStack.currentIndex = 1
+        currentView = viewsIndex.search
+        searchView.searchInput.forceActiveFocus()
+    }
 
-        visible: true
-        focus: true
-        leftPadding: 0
-        rightPadding: 0
+    footBar.z : 0
+    pageStack.z: 0
+
+    footBar.middleContent: Row
+    {
+        spacing: space.medium
+
+        Maui.ToolButton
+        {
+            id: babeBtnIcon
+            iconName: "love"
+
+            iconColor: currentBabe ? babeColor : darkTextColor
+            onClicked: if (!mainlistEmpty)
+                       {
+                           var value = mainPlaylist.contextMenu.babeIt(
+                                       currentTrackIndex)
+                           currentBabe = value
+                       }
+        }
+
+        Maui.ToolButton
+        {
+            iconName: "media-skip-backward"
+            iconColor: darkTextColor
+            onClicked: Player.previousTrack()
+            onPressAndHold: Player.playAt(prevTrackIndex)
+        }
+
+        Maui.ToolButton
+        {
+            id: playIcon
+            iconColor: darkTextColor
+            iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
+            onClicked:
+            {
+                if (isPlaying)
+                    Player.pauseTrack()
+                else
+                    Player.resumeTrack()
+            }
+        }
+
+        Maui.ToolButton
+        {
+            id: nextBtn
+            iconColor: darkTextColor
+            iconName: "media-skip-forward"
+            onClicked: Player.nextTrack()
+            onPressAndHold: Player.playAt(Player.shuffle())
+        }
+
+        Maui.PieButton
+        {
+            id: shuffleBtn
+            iconColor: darkTextColor
+            iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+            delegateSize: iconSizes.large + space.big
+            //            onClicked: isShuffle = !isShuffle
+            model: mainPlaylist.list.model
+            delegate: BabeAlbum
+            {
+                id: delegate
+                itemWidth: iconSizes.large + space.big
+
+                itemHeight: itemWidth
+                albumSize: iconSizes.large
+                showIndicator: false
+                showLabels: false
+                albumRadius: itemWidth
+                Connections
+                {
+                    target: delegate
+                    onClicked:
+                    {
+                        shuffleBtn.close()
+                        Player.playAt(index)
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
+    footBar.background: Rectangle
+    {
+        id: footerBg
+        color: darkViewBackgroundColor
+        opacity: focusMode ? 0.2 : opacityLevel
+        SequentialAnimation
+        {
+            id: animFooter
+            PropertyAnimation
+            {
+                target: footerBg
+                property: "color"
+                easing.type: Easing.InOutQuad
+                from: "black"
+                to: darkViewBackgroundColor
+                duration: 500
+            }
+        }
 
         FastBlur
         {
@@ -386,29 +420,6 @@ Kirigami.ApplicationWindow
             transparentBorder: false
             cached: true
             z: -999
-        }
-
-        Rectangle
-        {
-            id: footerBg
-            anchors.fill: parent
-            color: darkViewBackgroundColor
-            opacity: focusMode ? 0.2 : opacityLevel
-            z: -999
-
-            SequentialAnimation
-            {
-                id: animFooter
-                PropertyAnimation
-                {
-                    target: footerBg
-                    property: "color"
-                    easing.type: Easing.InOutQuad
-                    from: "black"
-                    to: darkViewBackgroundColor
-                    duration: 500
-                }
-            }
         }
 
         Slider
@@ -425,7 +436,6 @@ Kirigami.ApplicationWindow
             value: 0
             spacing: 0
             focus: true
-
             onMoved: player.seek(player.duration() / 1000 * value)
 
             background: Rectangle
@@ -457,171 +467,307 @@ Kirigami.ApplicationWindow
                 color: babeColor
             }
         }
+    }
 
-//        Item
-//        {
-//            Layout.alignment: Qt.AlignCenter
-//            Layout.fillWidth: true
-//            Layout.fillHeight: true
-//            Layout.row: 2
-//            Layout.column: 2
-//            Layout.maximumHeight: playbackInfo.visible ? playbackInfo.font.pointSize * 2 : 0
+    FloatingDisk
+    {
+        id: floatingDisk
+        z: pageStack.z +1
+    }
 
-//            Label
-//            {
-//                id: playbackInfo
+    //        Item
+    //        {
+    //            Layout.alignment: Qt.AlignCenter
+    //            Layout.fillWidth: true
+    //            Layout.fillHeight: true
+    //            Layout.row: 2
+    //            Layout.column: 2
+    //            Layout.maximumHeight: playbackInfo.visible ? playbackInfo.font.pointSize * 2 : 0
 
-//                visible: !mainlistEmpty && infoLabels
-//                //                anchors.top: playIcon.bottom
-//                //                anchors.horizontalCenter: playIcon.horizontalCenter
-//                width: parent.width
-//                height: parent.height
-//                horizontalAlignment: Qt.AlignHCenter
-//                verticalAlignment: Qt.AlignVCenter
-//                text: progressTimeLabel + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - " + currentTrack.artist) : "") + "  /  " + durationTimeLabel
-//                color: darkTextColor
-//                font.pointSize: fontSizes.small
-//                elide: Text.ElideRight
-//            }
-//        }
+    //            Label
+    //            {
+    //                id: playbackInfo
 
-        RowLayout
+    //                visible: !mainlistEmpty && infoLabels
+    //                //                anchors.top: playIcon.bottom
+    //                //                anchors.horizontalCenter: playIcon.horizontalCenter
+    //                width: parent.width
+    //                height: parent.height
+    //                horizontalAlignment: Qt.AlignHCenter
+    //                verticalAlignment: Qt.AlignVCenter
+    //                text: progressTimeLabel + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - " + currentTrack.artist) : "") + "  /  " + durationTimeLabel
+    //                color: darkTextColor
+    //                font.pointSize: fontSizes.small
+    //                elide: Text.ElideRight
+    //            }
+    //        }
+
+
+
+    //    background: Rectangle
+    //    {
+    //        anchors.fill: parent
+    //        color: altColor
+    //        z: -999
+    //    }
+
+    SourcesDialog
+    {
+        id: sourcesDialog
+    }
+
+    BabeConsole
+    {
+        id: babeConsole
+    }
+
+    menuDrawer.bannerImageSource: "qrc:/assets/banner.svg"
+
+    menuDrawer.actions: [
+
+        Kirigami.Action
         {
-            anchors.fill: parent
-
-            Item
+            text: "Vvave Stream"
+            iconName: "love"
+            onTriggered:
             {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.minimumWidth: 0
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.vvave
+            }
+        },
+
+        Kirigami.Action
+        {
+            text: qsTr("Linking")
+            iconName: isMobile ? "computer-laptop" : "phone"
+            onTriggered:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.linking
+                if(!isLinked) linkingView.linkingConf.open()
+            }
+        },
+
+        Kirigami.Action
+        {
+            text: qsTr("YouTube")
+            iconName: "im-youtube"
+            onTriggered:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.youtube
+            }
+        },
+
+        Kirigami.Action
+        {
+            text: qsTr("Spotify")
+            onTriggered:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.spotify
+            }
+        },
+
+        Kirigami.Action
+        {
+            text: qsTr("Collection")
+            iconName: "database-index"
+
+            Kirigami.Action
+            {
+                text: qsTr("Sources...")
+                onTriggered: sourcesDialog.open()
+                iconName: "folder-new"
             }
 
-            Item
+            Kirigami.Action
             {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.maximumWidth: babeBtnIcon.implicitWidth * 1.3
-                Layout.maximumHeight: toolBarIconSize
+                text: qsTr("Re-Scan")
+                onTriggered: bae.refreshCollection();
+            }
 
-                BabeButton
+            Kirigami.Action
+            {
+                text: qsTr("Refresh...")
+                iconName: "view-refresh"
+
+                Kirigami.Action
                 {
-                    id: babeBtnIcon
-                    anchors.centerIn: parent
+                    text: qsTr("Tracks")
+                    onTriggered: H.refreshTracks();
+                }
 
-                    iconName: "love"
-                    iconColor: currentBabe ? babeColor : darkTextColor
-                    onClicked: if (!mainlistEmpty)
-                               {
-                                   var value = mainPlaylist.contextMenu.babeIt(
-                                               currentTrackIndex)
-                                   currentBabe = value
-                               }
+                Kirigami.Action
+                {
+                    text: qsTr("Albums")
+                    onTriggered: H.refreshAlbums();
+                }
+
+                Kirigami.Action
+                {
+                    text: qsTr("Artists")
+                    onTriggered: H.refreshArtists();
+                }
+
+                Kirigami.Action
+                {
+                    text: qsTr("All")
+                    onTriggered: H.refreshCollection();
                 }
             }
 
-            Item
+            Kirigami.Action
             {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.maximumWidth: previousBtn.implicitWidth * 1.3
-                Layout.maximumHeight: toolBarIconSize
-
-                BabeButton
-                {
-                    id: previousBtn
-                    anchors.centerIn: parent
-
-                    iconColor: darkTextColor
-                    iconName: "media-skip-backward"
-                    onClicked: Player.previousTrack()
-                    onPressAndHold: Player.playAt(prevTrackIndex)
-                }
+                text: qsTr("Clean")
+                onTriggered: bae.removeMissingTracks();
+                iconName: "edit-clear"
             }
+        },
 
-            Item
+        Kirigami.Action
+        {
+            text: qsTr("Settings...")
+            iconName: "view-media-config"
+            Kirigami.Action
             {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.maximumWidth: playIcon.implicitWidth * 1.3
-                Layout.maximumHeight: toolBarIconSize
+                text: "Brainz"
 
-                BabeButton
+                Kirigami.Action
                 {
-                    id: playIcon
-                    anchors.centerIn: parent
-
-                    iconColor: darkTextColor
-                    iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
-                    onClicked:
+                    id: brainzToggle
+                    text: checked ? "Turn OFF" : "Turn ON"
+                    checked: activeBrainz
+                    checkable: true
+                    onToggled:
                     {
-                        if (isPlaying)
-                            Player.pauseTrack()
-                        else
-                            Player.resumeTrack()
+                        bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
+                        bae.brainz(checked === true ? true : false)
                     }
                 }
             }
 
-            Item
+            Kirigami.Action
             {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.maximumWidth: nextBtn.implicitWidth * 1.3
-                Layout.maximumHeight: toolBarIconSize
+                text: "Appearance"
 
-                BabeButton
+                Kirigami.Action
                 {
-                    id: nextBtn
-                    anchors.centerIn: parent
+                    text: "Icon size"
+                    Kirigami.Action
+                    {
+                        text: iconSizes.small
+                        onTriggered :
+                        {
+                            bae.saveSetting("ICON_SIZE", text, "BABE")
+                            toolBarIconSize = text
+                        }
+                    }
 
-                    iconColor: darkTextColor
-                    iconName: "media-skip-forward"
-                    onClicked: Player.nextTrack()
-                    onPressAndHold: Player.playAt(Player.shuffle())
+                    Kirigami.Action
+                    {
+                        text: iconSizes.medium
+                        onTriggered :
+                        {
+                            bae.saveSetting("ICON_SIZE", text, "BABE")
+                            iconSizeChanged(text)
+                        }
+                    }
+
+                    Kirigami.Action
+                    {
+                        text: iconSizes.big
+                        onTriggered :
+                        {
+                            bae.saveSetting("ICON_SIZE", text, "BABE")
+                            iconSizeChanged(text)
+                        }
+                    }
                 }
             }
 
-            Item
+            Kirigami.Action
             {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.maximumWidth: shuffleBtn.implicitWidth * 1.3
-                Layout.maximumHeight: toolBarIconSize
+                text: "Player"
 
-                BabeButton
+                Kirigami.Action
                 {
-                    id: shuffleBtn
-                    anchors.centerIn: parent
+                    text: "Info label"
 
-                    iconColor: darkTextColor
-                    iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                    onClicked: isShuffle = !isShuffle
+                    Kirigami.Action
+                    {
+                        text: checked ? "ON" : "OFF"
+                        checked: infoLabels
+                        checkable: true
+                        onToggled:
+                        {
+                            infoLabels = checked
+                            bae.saveSetting("PLAYBACKINFO", infoLabels ? true : false, "BABE")
+
+                        }
+                    }
+                }
+
+                Kirigami.Action
+                {
+                    text: "Autoplay"
+                    checked: autoplay
+                    checkable: true
+                    onToggled:
+                    {
+                        autoplay = checked
+                        bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
+                    }
+
                 }
             }
+        },
 
-            Item
+        Kirigami.Action
+        {
+            text: "Developer"
+            iconName: "code-context"
+
+            Kirigami.Action
             {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.minimumWidth: 0
+                text: "Wiki"
             }
 
+            Kirigami.Action
+            {
+                text: "Console log"
+                onTriggered: babeConsole.open()
+            }
+        },
+
+        Kirigami.Action
+        {
+            text: "About..."
+            iconName: "help-about"
+
+            Kirigami.Action
+            {
+                text: "VVAVEIt"
+            }
+
+            Kirigami.Action
+            {
+                text: "VVAVE"
+            }
+
+            Kirigami.Action
+            {
+                text: "Pulpo"
+            }
+
+            Kirigami.Action
+            {
+                text: "Kirigami"
+            }
         }
-    }
+    ]
 
-//    background: Rectangle
-//    {
-//        anchors.fill: parent
-//        color: altColor
-//        z: -999
-//    }
 
-    globalDrawer: SettingsView
-    {
-        id: settingsDrawer
-        //        contentItem.implicitWidth: columnWidth
-        onIconSizeChanged: toolBarIconSize = size
-    }
 
     Item
     {
@@ -629,7 +775,7 @@ Kirigami.ApplicationWindow
         visible: infoMsg.length > 0 && sync
         anchors.bottom: parent.bottom
         width: pageStack.wideMode ? columnWidth : parent.width
-        height: toolBarIconSize
+        height: iconSize
         z: 999
 
         Rectangle
@@ -706,7 +852,6 @@ Kirigami.ApplicationWindow
         id: mainPlaylist
         anchors.fill: parent
         clip: true
-
         Connections
         {
             target: mainPlaylist
@@ -769,7 +914,6 @@ Kirigami.ApplicationWindow
                     {
                         target: albumsView
                         onRowClicked: Player.addTrack(track)
-                        onPlayAlbum: Player.playAll(tracks)
                         onPlayTrack: Player.quickPlay(track)
 
                         onAlbumCoverClicked:
@@ -813,12 +957,10 @@ Kirigami.ApplicationWindow
                 {
                     id: artistsView
 
-
                     Connections
                     {
                         target: artistsView
                         onRowClicked: Player.addTrack(track)
-                        onAppendAlbum: Player.appendAll(tracks)
                         onPlayTrack: Player.quickPlay(track)
                         onAlbumCoverClicked:
                         {
@@ -921,62 +1063,9 @@ Kirigami.ApplicationWindow
         }
     }
 
+
     /*animations*/
-    pageStack.layers.popEnter: Transition
-    {
-        PauseAnimation
-        {
-            duration: Kirigami.Units.longDuration
-        }
-    }
-    pageStack.layers.popExit: Transition
-    {
-        YAnimator
-        {
-            from: 0
-            to: pageStack.layers.height
-            duration: Kirigami.Units.longDuration
-            easing.type: Easing.OutCubic
-        }
-    }
 
-    pageStack.layers.pushEnter: Transition
-    {
-        YAnimator
-        {
-            from: pageStack.layers.height
-            to: 0
-            duration: Kirigami.Units.longDuration
-            easing.type: Easing.OutCubic
-        }
-    }
-
-    pageStack.layers.pushExit: Transition
-    {
-        PauseAnimation
-        {
-            duration: Kirigami.Units.longDuration
-        }
-    }
-
-    pageStack.layers.replaceEnter: Transition
-    {
-        YAnimator
-        {
-            from: pageStack.layers.width
-            to: 0
-            duration: Kirigami.Units.longDuration
-            easing.type: Easing.OutCubic
-        }
-    }
-
-    pageStack.layers.replaceExit: Transition
-    {
-        PauseAnimation
-        {
-            duration: Kirigami.Units.longDuration
-        }
-    }
 
     /*FUNCTIONS*/
     function infoMsgAnim()
@@ -995,13 +1084,41 @@ Kirigami.ApplicationWindow
         }
     }
 
+    function switchColorScheme(variant)
+    {
+        bae.saveSetting("THEME", variant, "BABE")
+
+        if(variant === "Light")
+        {
+
+            backgroundColor = Kirigami.Theme.backgroundColor
+            textColor = Kirigami.Theme.textColor
+            highlightColor = Kirigami.Theme.highlightColor
+            highlightedTextColor = Kirigami.Theme.highlightedTextColor
+            buttonBackgroundColor = Kirigami.Theme.buttonBackgroundColor
+            viewBackgroundColor = Kirigami.Theme.viewBackgroundColor
+            altColor = Kirigami.Theme.complementaryBackgroundColor
+            babeColor = bae.babeColor()
+
+        }else if(variant === "Dark")
+        {
+            backgroundColor = darkBackgroundColor
+            textColor = darkTextColor
+            highlightColor = darkHighlightColor
+            highlightedTextColor = darkHighlightedTextColor
+            buttonBackgroundColor = darkButtonBackgroundColor
+            viewBackgroundColor = darkViewBackgroundColor
+            altColor = darkDarkColor
+        }
+    }
+
     Component.onCompleted:
     {
         var style = bae.loadSetting("THEME", "BABE", "Dark")
         if(isAndroid)
         {
-            settingsDrawer.switchColorScheme(style)
-            bae.androidStatusBarColor(viewBackgroundColor, style !== "Dark")
+            switchColorScheme(style)
+            Maui.Android.statusbarColor(viewBackgroundColor, false)
         }
     }
 

@@ -15,7 +15,7 @@ ListView
     highlightFollowsCurrentItem: true
     highlightMoveDuration: 0
     snapMode: ListView.SnapOneItem
-    model : ListModel{}
+    model:  mainPlaylist.list.model
 
     onMovementEnded:
     {
@@ -46,11 +46,6 @@ ListView
                 play(index)
             }
         }
-    }
-
-    function append(album)
-    {
-        model.insert(count, album)
     }
 
     function positionAlbum(index)

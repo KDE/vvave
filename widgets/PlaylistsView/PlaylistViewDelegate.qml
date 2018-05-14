@@ -9,7 +9,7 @@ ItemDelegate
     id: delegate
 
     width: parent.width
-    height: rowHeightAlt
+    height: rowHeight
     clip: true
 
     property string labelColor: ListView.isCurrentItem ? highlightedTextColor : textColor

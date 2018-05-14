@@ -7,12 +7,10 @@ QT       += webengine
 HEADERS += \
     $$PWD/notify.h \
     $$PWD/mpris2.h \
-    $$PWD/kdeconnect.h
 
 SOURCES += \
     $$PWD/notify.cpp \
     $$PWD/mpris2.cpp \
-    $$PWD/kdeconnect.cpp
 
 LIBS += -ltag
 

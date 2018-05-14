@@ -14,7 +14,6 @@ ToolBar
     property alias babeBar : babeBar
     property string accentColor : babeColor
     property int currentIndex : 0
-    property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
 
     signal tracksViewClicked()
     signal albumsViewClicked()
@@ -91,21 +90,7 @@ ToolBar
             Layout.maximumWidth: tracksView.implicitWidth * 1.3
             Layout.maximumHeight: toolBarIconSize
 
-            BabeButton
-            {
-                id: tracksView
-                anchors.centerIn: parent
 
-                iconName: "view-media-track"
-                iconColor:  accent && currentIndex === viewsIndex.tracks ? accentColor : textColor
-                onClicked: tracksViewClicked()
-                text: qsTr("Tracks")
-                hoverEnabled: true
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered && !isMobile
-                ToolTip.text: qsTr("Tracks")
-            }
         }
 
         Item
@@ -119,10 +104,6 @@ ToolBar
             {
                 id: albumsView
                 anchors.centerIn: parent
-                text: qsTr("Albums")
-                iconName: /*"album"*/ "view-media-album-cover"
-                iconColor:  accent && currentIndex === viewsIndex.albums ? accentColor : textColor
-                onClicked: albumsViewClicked()
 
                 hoverEnabled: true
                 ToolTip.delay: 1000
@@ -143,9 +124,6 @@ ToolBar
             {
                 id: artistsView
                 anchors.centerIn: parent
-                text: qsTr("Artists")
-                iconName: "view-media-artist"
-                iconColor:  accent && currentIndex === viewsIndex.artists ? accentColor : textColor
 
                 onClicked: artistsViewClicked()
                 hoverEnabled: true

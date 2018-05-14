@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 
 import "../InfoView"
 
@@ -114,7 +115,7 @@ Item
             }
         }
 
-        ToolBar
+        Maui.ToolBar
         {
             id: mainlistContext
             width: parent.width
@@ -124,10 +125,6 @@ Item
             Layout.column: 1
             Layout.fillWidth: true
             height: Kirigami.Units.iconSizes.smallMedium  + Kirigami.Units.smallSpacing*2
-
-            //                        anchors.top: cover.bottom
-            leftPadding: 0
-            rightPadding: 0
 
             //            Rectangle
             //            {
@@ -144,7 +141,7 @@ Item
                 drag.axis: Drag.YAxis
                 drag.minimumY: 0
                 drag.maximumY:stackView.currentItem === table ?  coverSize : 0
-
+                z: -1
                 onMouseYChanged:
                 {
                     if(stackView.currentItem === table )
@@ -160,85 +157,80 @@ Item
                 }
             }
 
-            RowLayout
+            leftContent: Maui.ToolButton
             {
-                anchors.fill: parent
-                anchors.centerIn: parent
-                //                spacing: 0
-                //                Layout.margins: 0
-
-                Item
+                id: infoBtn
+                iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
+                onClicked:
                 {
-                    Layout.fillWidth: true
-
-                    BabeButton
+                    if( stackView.currentItem !== table)
                     {
-                        id: infoBtn
-                        anchors.centerIn: parent
-                        //                        iconColor: darkTextColor
-                        iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
-                        onClicked:
-                        {
-                            if( stackView.currentItem !== table)
-                            {
-                                cover.visible  = true
-                                stackView.pop(table) }
-                            else {
-                                cover.visible  = false
-                                stackView.push(infoView)
-                            }
-                        }
-                    }
-                }
-
-                //                Item
-                //                {
-                //                    Layout.fillWidth: true
-
-                //                    BabeButton
-                //                    {
-                //                        anchors.centerIn: parent
-                ////                        iconColor: darkTextColor
-                //                        iconName: "headphones"
-                //                        onClicked: goFocusMode()
-                //                    }
-                //                }
-
-                Item
-                {
-                    Layout.fillWidth: true
-
-                    BabeButton
-                    {
-                        anchors.centerIn: parent
-                        //                        iconColor: darkTextColor
-                        iconName: "videoclip-amarok"
-                        onClicked:
-                        {
-                            youtubeView.openVideo = 1
-                            youtube.getQuery(currentTrack.title+" "+currentTrack.artist)
-                            pageStack.currentIndex = 1
-                            currentView = viewsIndex.youtube
-                        }
-                    }
-                }
-
-                Item
-                {
-                    Layout.fillWidth: true
-                    BabeButton
-                    {
-                        id: menuBtn
-                        anchors.centerIn: parent
-                        Layout.fillWidth: true
-                        iconName: "overflow-menu"
-                        onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
-                        //                        iconColor: darkTextColor
-
+                        cover.visible  = true
+                        stackView.pop(table) }
+                    else {
+                        cover.visible  = false
+                        stackView.push(infoView)
                     }
                 }
             }
+
+
+            //                Item
+            //                {
+            //                    Layout.fillWidth: true
+
+            //                    BabeButton
+            //                    {
+            //                        anchors.centerIn: parent
+            ////                        iconColor: darkTextColor
+            //                        iconName: "headphones"
+            //                        onClicked: goFocusMode()
+            //                    }
+            //                }
+
+            middleContent: Maui.PieButton
+            {
+                iconName: "list-add"
+
+                model: ListModel
+                {
+                    ListElement{iconName: "amarok-video" ; btn: "video"}
+                    ListElement{iconName: "documentinfo" ; btn: "info"}
+                    ListElement{iconName: "artists" ; btn: "similar"}
+                }
+
+                onItemClicked:
+                {
+                    if(item.btn === "video")
+                    {
+                        youtubeView.openVideo = 1
+                        youtube.getQuery(currentTrack.title+" "+currentTrack.artist)
+                        pageStack.currentIndex = 1
+                        currentView = viewsIndex.youtube
+                    }
+
+                    if(item.btn === "info")
+                    {
+                        if( stackView.currentItem !== table)
+                        {
+                            cover.visible  = true
+                            stackView.pop(table) }
+                        else {
+                            cover.visible  = false
+                            stackView.push(infoView)
+                        }
+                    }
+                }
+            }
+
+            rightContent : Maui.ToolButton
+            {
+                id: menuBtn
+                iconName: "overflow-menu"
+                onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
+            }
         }
+
 
         Item
         {

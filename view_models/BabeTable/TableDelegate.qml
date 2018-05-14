@@ -4,6 +4,7 @@ import QtQuick.Controls 2.3
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 
 import "../../view_models"
 import "../../utils/Help.js" as H
@@ -41,7 +42,7 @@ SwipeDelegate
     property bool remoteArtwork: false
 
     width: parent.width
-    height: sameAlbum ? rowHeight * 0.7 : altHeight
+    height: sameAlbum ? rowHeight : altHeight
     padding: 0
     clip: true
     autoExclusive: true
@@ -73,18 +74,18 @@ SwipeDelegate
         anchors.right: parent.right
         spacing: space.big
 
-        BabeButton
+        Maui.ToolButton
         {
             iconName: "documentinfo"
-            onClicked:
-            {
-                swipe.close()
-            }
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: swipe.close()
         }
 
-        BabeButton
+        Maui.ToolButton
         {
             iconName: "love"
+            anchors.verticalCenter: parent.verticalCenter
+
             iconColor: babe === "1" ? babeColor : textColor
             onClicked:
             {
@@ -95,9 +96,11 @@ SwipeDelegate
             }
         }
 
-        BabeButton
+        Maui.ToolButton
         {
             iconName: "view-media-recent"
+            anchors.verticalCenter: parent.verticalCenter
+
             onClicked:
             {
                 swipe.close()
@@ -105,9 +108,11 @@ SwipeDelegate
             }
         }
 
-        BabeButton
+        Maui.ToolButton
         {
             iconName: "media-playback-start"
+            anchors.verticalCenter: parent.verticalCenter
+
             onClicked:
             {
                 swipe.close()
