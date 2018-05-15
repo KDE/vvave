@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import "../../view_models"
 import "../../view_models/BabeTable"
 import org.kde.kirigami 2.2 as Kirigami
-
+import org.kde.maui 1.0 as Maui
 
 Page
 {
@@ -62,9 +62,9 @@ Page
     function runSearch(searchTxt)
     {
         if(searchTxt)
-            if(searchTxt !== youtubeTable.headerBarTitle)
+            if(searchTxt !== youtubeTable.headBarTitle)
             {
-                youtubeTable.headerBarTitle = searchTxt
+                youtubeTable.headBarTitle = searchTxt
                 youtube.getQuery(searchTxt, bae.loadSetting("YOUTUBELIMIT", "BABE", 25))
             }
     }
@@ -73,7 +73,7 @@ Page
     {
         searchInput.clear()
         youtubeTable.clearTable()
-        youtubeTable.headerBarTitle = ""
+        youtubeTable.headBarTitle = ""
         searchRes = []
     }
 
@@ -238,10 +238,10 @@ Page
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     trackNumberVisible: false
-                    headerBarVisible: true
-                    headerBarExit: true
-                    headerBarExitIcon: "edit-clear"
-                    headerBarTitle: "YouTube"
+                    headBarVisible: true
+                    headBarExit: true
+                    headBarExitIcon: "edit-clear"
+                    headBarTitle: "YouTube"
                     holder.message: "No YouTube results!"
                     coverArtVisible: true
                     trackDuration: true
@@ -254,7 +254,7 @@ Page
                     playAllBtn.visible: false
                     menuBtn.visible: false
 
-                    headerBarRight: BabeButton
+                    headBar.rightContent: Maui.ToolButton
                     {
                         id: menuBtn
                         iconName: "application-menu"
@@ -300,7 +300,7 @@ Page
 
                         }
 
-                        BabeButton
+                        Maui.ToolButton
                         {
                             Layout.rightMargin: contentMargins
                             iconName: "edit-clear"

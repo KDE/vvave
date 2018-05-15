@@ -4,11 +4,10 @@ import QtQuick.Layouts 1.3
 import "../../../view_models"
 import "../../../view_models/BabeTable"
 import org.kde.kirigami 2.2 as Kirigami
-
+import org.kde.maui 1.0 as Maui
 
 Page
 {
-
     Loader
     {
         id: loginLoader
@@ -25,8 +24,8 @@ Page
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            headerBarExit: false
-            headerBarLeft: BabeButton
+            headBarExit: false
+            headBar.leftContent: Maui.ToolButton
             {
                 iconName: "internet-services"
                 onClicked:if(!isAndroid)
@@ -68,7 +67,7 @@ Page
 
                 }
 
-                BabeButton
+                Maui.ToolButton
                 {
                     Layout.rightMargin: contentMargins
                     iconName: "edit-clear"

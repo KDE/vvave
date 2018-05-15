@@ -13,7 +13,7 @@ BabePopup
     {
         id: suggestionsList
         anchors.fill: parent
-        headerBarVisible: false
+        headBarVisible: false
         model: ListModel {id: suggestionsModel}
 
         section.property : "type"

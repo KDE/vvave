@@ -8,6 +8,8 @@ import ".."
 import "../../utils/Player.js" as Player
 import "../../utils/Help.js" as H
 
+import org.kde.maui 1.0 as Maui
+
 BabeMenu
 {
 
@@ -63,58 +65,6 @@ BabeMenu
             return value
         }
     }
-
-    BabePopup
-    {
-        id: sendToPopup
-        parent: babeTableRoot
-        leftPadding: 1
-        rightPadding: 1
-        topPadding: contentMargins
-        bottomPadding: contentMargins
-
-        BabeList
-        {
-            id: sentToList
-            headerBarVisible: false
-            anchors.fill: parent
-            holder.message: qsTr("There's not avalible devices")
-            model:  ListModel
-            {
-                id: model
-            }
-
-            delegate: BabeDelegate
-            {
-                id: delegate
-                label : name
-
-                Connections
-                {
-                    target: delegate
-
-                    onClicked:
-                    {
-                        sentToList.currentIndex = index
-                        console.log(sentToList.model.get(index).name,sentToList.model.get(index).key)
-                        bae.sendToDevice(sentToList.model.get(index).name,
-                                         sentToList.model.get(index).key,
-                                         babeTableRoot.model.get(babeTableRoot.currentIndex).url)
-                    }
-                }
-            }
-        }
-
-        onOpened:
-        {
-            sentToList.clearTable()
-            var devices = bae.getDevices()
-            for( var i in devices)
-                sentToList.model.append({name: devices[i].name, key: devices[i].key })
-        }
-
-    }
-
 
     Label
     {
@@ -182,11 +132,11 @@ BabeMenu
 
     BabeMenuItem
     {
-        text: "Send to..."
+        text: "Share..."
         onTriggered:
         {
-            isAndroid ? bae.sendTrack(list.model.get(list.currentIndex).url) :
-                        sendToPopup.open()
+            isAndroid ? Maui.Android.shareDialog(list.model.get(list.currentIndex).url) :
+                        shareDialog.show(list.model.get(list.currentIndex).url)
             close()
         }
     }
@@ -217,53 +167,53 @@ BabeMenu
         {
             anchors.fill: parent
 
-            BabeButton
+            Maui.ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 iconName: starIcon
-                iconSize: iconSizes.small
+                size: iconSizes.small
                 iconColor: rate >= 1 ? starColor :starReg
                 onClicked: rateIt(1)
             }
 
-            BabeButton
+            Maui.ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                iconSize: iconSizes.small
+                size: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 2 ? starColor :starReg
                 onClicked: rateIt(2)
             }
 
-            BabeButton
+            Maui.ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                iconSize: iconSizes.small
+                size: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 3 ? starColor :starReg
 
                 onClicked: rateIt(3)
             }
 
-            BabeButton
+            Maui.ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                iconSize: iconSizes.small
+                size: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 4 ? starColor :starReg
 
                 onClicked: rateIt(4)
             }
 
-            BabeButton
+            Maui.ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                iconSize: iconSizes.small
+                size: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 5 ? starColor :starReg
 

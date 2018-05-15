@@ -3,8 +3,9 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
 import QtQuick.Controls.Material 2.1
+import org.kde.maui 1.0 as Maui
 
-Page
+Maui.Page
 {
     id: babeListRoot
 
@@ -16,147 +17,70 @@ Page
     property alias currentItem : babeList.currentItem
     property alias holder : holder
     property alias section : babeList.section
-    property alias headerBarRight : headerBarActionsRight.children
-    property alias headerBarLeft : headerBarActionsLeft.children
-
-    property bool headerBarVisible: true
-    property string headerBarTitle
-    property bool headerBarExit : true
-    property string headerBarExitIcon : "window-close"
-
-    property color headerBarColor : backgroundColor
-    property color labelColor : textColor
 
     property bool wasPulled : false
 
-
     signal pulled()
-    signal exit()
 
     focus: true
+    margins: 0
 
     function clearTable()
     {
         list.model.clear()
     }
 
-    BabeHolder
+    Maui.Holder
     {
         id: holder
-        anchors.fill: parent
         visible: babeList.count === 0
-        color : labelColor
         focus: true
     }
 
-    ColumnLayout
+    ListView
     {
+        id: babeList
         anchors.fill: parent
-        spacing: 0
+        clip: true
 
-        ToolBar
+        highlight: Rectangle
         {
-            id: headerRoot
-            width: parent.width
-            height:  visible ?  headerRoot.implicitHeight : 0
-            Layout.fillWidth: true
-            visible: headerBarVisible
-            focus: true          
-
-            RowLayout
-            {
-                id: headerBar
-                anchors.fill: parent
-
-                BabeButton
-                {
-                    Layout.alignment : Qt.AlignLeft
-//                    Layout.leftMargin: contentMargins
-                    width: rowHeight
-                    visible: headerBarExit
-                    anim : true
-                    iconName : headerBarExitIcon //"dialog-close"
-                    onClicked : exit()
-                }
-
-                Row
-                {
-                    id: headerBarActionsLeft
-                    Layout.alignment : Qt.AlignLeft
-//                    Layout.leftMargin: headerBarExit ? 0 : contentMargins
-                }
-
-                Label
-                {
-                    text : headerBarTitle || babeList.count +" tracks"
-                    Layout.fillHeight : true
-                    Layout.fillWidth : true
-                    Layout.alignment : Qt.AlignCenter
-
-                    elide : Text.ElideRight
-                    font.bold : false
-                    color : labelColor
-                    font.pointSize: fontSizes.big
-                    horizontalAlignment : Text.AlignHCenter
-                    verticalAlignment :  Text.AlignVCenter
-                }
-
-                Row
-                {
-                    id: headerBarActionsRight
-                    Layout.alignment : Qt.AlignRight
-//                    Layout.rightMargin: contentMargins
-                }
-
-            }
+            width: babeList.width
+            height: babeList.currentItem.height
+            color: highlightColor
         }
 
-        ListView
+        focus: true
+        interactive: true
+        highlightFollowsCurrentItem: true
+        highlightMoveDuration: 0
+        keyNavigationWraps: true
+        keyNavigationEnabled : true
+
+        Keys.onUpPressed: decrementCurrentIndex()
+        Keys.onDownPressed: incrementCurrentIndex()
+        Keys.onReturnPressed: rowClicked(currentIndex)
+        Keys.onEnterPressed: quickPlayTrack(currentIndex)
+
+        boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
+        flickableDirection: Flickable.AutoFlickDirection
+
+        snapMode: ListView.SnapToItem
+
+        addDisplaced: Transition
         {
-            id: babeList
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            clip: true
+            NumberAnimation { properties: "x,y"; duration: 100 }
+        }
 
-            highlight: Rectangle
-            {
-                width: babeList.width
-                height: babeList.currentItem.height
-                color: highlightColor
-            }
+        ScrollBar.vertical:BabeScrollBar { }
 
-            focus: true
-            interactive: true
-            highlightFollowsCurrentItem: true
-            highlightMoveDuration: 0
-            keyNavigationWraps: true
-            keyNavigationEnabled : true
+        onContentYChanged:
+        {
+            if(contentY < -120)
+                wasPulled = true
 
-            Keys.onUpPressed: decrementCurrentIndex()
-            Keys.onDownPressed: incrementCurrentIndex()
-            Keys.onReturnPressed: rowClicked(currentIndex)
-            Keys.onEnterPressed: quickPlayTrack(currentIndex)
-
-            boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
-            flickableDirection: Flickable.AutoFlickDirection
-
-            snapMode: ListView.SnapToItem
-
-            addDisplaced: Transition
-            {
-                NumberAnimation { properties: "x,y"; duration: 100 }
-            }
-
-            ScrollBar.vertical:BabeScrollBar { }
-
-            onContentYChanged:
-            {
-                if(contentY < -120)
-                    wasPulled = true
-
-                if(contentY == 0 && wasPulled)
-                { pulled(); wasPulled = false}
-            }
+            if(contentY == 0 && wasPulled)
+            { pulled(); wasPulled = false}
         }
     }
 }

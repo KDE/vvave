@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import Qt.labs.platform 1.0
-
+import org.kde.maui 1.0 as Maui
 import "../../view_models"
 import "../../view_models/FolderPicker"
 import "../../view_models/BabeDialog"
@@ -68,9 +68,9 @@ BabePopup
     {
         id: sources
         anchors.fill: parent
-        headerBarVisible: true
-        headerBarExit: true
-        headerBarTitle: qsTr("Sources")
+        headBarVisible: true
+        headBarExit: true
+        headBarTitle: qsTr("Sources")
         Layout.fillWidth: true
         Layout.fillHeight: true
         width: parent.width
@@ -93,9 +93,9 @@ BabePopup
             }
         }
 
-        headerBarRight: [
+        headBar.rightContent: [
 
-            BabeButton
+            Maui.ToolButton
             {
                 iconName: "list-remove"
                 onClicked:
@@ -121,7 +121,7 @@ BabePopup
                 }
             },
 
-            BabeButton
+            Maui.ToolButton
             {
                 iconName: "list-add"
                 onClicked:

@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import "../../view_models"
-
+import org.kde.maui 1.0 as Maui
 
 ItemDelegate
 {
@@ -41,7 +41,7 @@ ItemDelegate
             Layout.fillHeight: true
             width: parent.height
 
-            BabeButton
+            Maui.ToolButton
             {
                 id: playBtn
                 anchors.centerIn: parent
@@ -80,7 +80,7 @@ ItemDelegate
 //            Layout.fillHeight: true
 //            width: parent.height
 
-//            BabeButton
+//            Maui.ToolButton
 //            {
 //                id: syncBtn
 //                anchors.centerIn: parent

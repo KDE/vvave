@@ -44,9 +44,9 @@ Kirigami.PageRow
         id: albumsViewTable
         anchors.fill: parent
         trackNumberVisible: true
-        headerBarVisible: true
-        headerBarExit:  !albumsPageRoot.wideMode
-        headerBarExitIcon: "go-previous"
+        headBarVisible: true
+        headBarExit:  !albumsPageRoot.wideMode
+        headBarExitIcon: "go-previous"
         coverArtVisible: true
         quickPlayVisible: true
         focus: true

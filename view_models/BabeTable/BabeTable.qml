@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 import "../../utils/Player.js" as Player
 
 import ".."
@@ -11,8 +12,6 @@ BabeList
     id: babeTableRoot
     holder.message: "<h2>This list is empty</h2><p>You can sdd new music sources from the settings</p>"
     //    cacheBuffer : 300
-    headerBarColor: backgroundColor
-    labelColor: textColor
 
     focus: true
 
@@ -43,27 +42,27 @@ BabeList
     signal playAll()
     signal appendAll()
 
-    headerBarLeft:  BabeButton
+    headBar.leftContent:  Maui.ToolButton
     {
         id : playAllBtn
-        visible : headerBarVisible && count > 0
+        visible : headBarVisible && count > 0
         anim : true
         iconName : "media-playlist-play"
         onClicked : playAll()
     }
 
-    headerBarRight: [
+    headBar.rightContent: [
 
-        BabeButton
+        Maui.ToolButton
         {
             id: appendBtn
-            visible: headerBarVisible && count > 0
+            visible: headBarVisible && count > 0
             anim : true
             iconName : "media-playlist-append"//"media-repeat-track-amarok"
             onClicked: appendAll()
         },
 
-        BabeButton
+        Maui.ToolButton
         {
             id: menuBtn
             iconName: /*"application-menu"*/ "overflow-menu"
@@ -113,7 +112,6 @@ BabeList
         trackDurationVisible : trackDuration
         trackRatingVisible : trackRating
         menuItem: menuItemVisible
-        bgColor: headerBarColor
         remoteArtwork: isArtworkRemote
         playingIndicator: showIndicator
 

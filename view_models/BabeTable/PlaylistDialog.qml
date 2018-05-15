@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 import QtQuick.Layouts 1.3
 
 import "../../view_models/BabeDialog"
@@ -27,7 +28,7 @@ BabeDialog
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            headerBarVisible: false
+            headBarVisible: false
             holder.message: "<h2>There's not playlists</h2><br><p>Create a new one and start adding tracks to it<p/>"
             ListModel { id: listModel }
             model: listModel
@@ -71,7 +72,7 @@ BabeDialog
                 }
             }
 
-            BabeButton
+            Maui.ToolButton
             {
                 iconName: "checkbox"
                 iconColor: textColor

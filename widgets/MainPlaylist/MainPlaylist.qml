@@ -16,7 +16,6 @@ import "../../view_models/BabeTable"
 
 Item
 {
-
     id: mainPlaylistRoot
 
     property alias artwork : artwork
@@ -119,20 +118,12 @@ Item
         {
             id: mainlistContext
             width: parent.width
+            implicitHeight: toolBarHeightAlt
             visible : !focusMode
 
             Layout.row: 2
             Layout.column: 1
             Layout.fillWidth: true
-            height: Kirigami.Units.iconSizes.smallMedium  + Kirigami.Units.smallSpacing*2
-
-            //            Rectangle
-            //            {
-            //                anchors.fill: parent
-            //                color: darkDarkColor
-            //                opacity: opacityLevel
-            //                z: -999
-            //            }
 
             MouseArea
             {
@@ -296,7 +287,7 @@ Item
                 initialItem: BabeTable
                 {
                     id: table
-                    headerBarVisible: false
+                    headBarVisible: false
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true

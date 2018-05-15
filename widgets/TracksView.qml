@@ -9,9 +9,9 @@ BabeTable
     trackNumberVisible: false
     trackDuration: true
     trackRating: true
-    headerBarVisible: true
-    headerBarTitle: count + " tracks"
-    headerBarExit: false
+    headBarVisible: true
+    headBarTitle: count + " tracks"
+    headBarExit: false
     coverArtVisible: false
 
     section.property : "album"

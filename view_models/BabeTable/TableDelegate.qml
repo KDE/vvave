@@ -235,7 +235,7 @@ SwipeDelegate
                 height: parent.height
                 Layout.leftMargin: space.small
 
-                BabeButton
+                Maui.ToolButton
                 {
                     id: playBtn
                     anchors.centerIn: parent
@@ -457,7 +457,7 @@ SwipeDelegate
 
                     onPositionChanged: swipe.position = Math.min(0, Math.max(-delegateRoot.width + height, delegateRoot.background.x - (startMouseX - mouse.x)));
 
-                    BabeButton
+                    Maui.ToolButton
                     {
                         id: menuBtn
                         visible: handle.pressed || swipe.position < 0

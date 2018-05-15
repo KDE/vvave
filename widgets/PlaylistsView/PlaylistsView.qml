@@ -62,7 +62,7 @@ Kirigami.PageRow
                 {
                     id: playlistViewModelFilter
 
-                    headerBarExitIcon: "go-previous"
+                    headBarExitIcon: "go-previous"
 
                     model : ListModel {}
                     delegate: BabeDelegate
@@ -113,10 +113,10 @@ Kirigami.PageRow
             coverArtVisible: true
             trackRating: true
             trackDuration: false
-            headerBarVisible: true
-            headerBarExitIcon: "go-previous"
-            headerBarExit: !playlistViewRoot.wideMode
-            headerBarTitle: playlistViewRoot.wideMode ? "" : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
+            headBarVisible: true
+            headBarExitIcon: "go-previous"
+            headBarExit: !playlistViewRoot.wideMode
+            headBarTitle: playlistViewRoot.wideMode ? "" : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
             onExit: if(!playlistViewRoot.wideMode)
                         playlistViewRoot.currentIndex = 0
 
@@ -206,7 +206,7 @@ Kirigami.PageRow
 
         var res = bae.get(query)
         playlistViewModelFilter.clearTable()
-        playlistViewModelFilter.headerBarTitle = title
+        playlistViewModelFilter.headBarTitle = title
         appendToExtraList(res)
     }
 

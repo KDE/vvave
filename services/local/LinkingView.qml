@@ -9,6 +9,7 @@ import "../../db/Queries.js" as Q
 import Link.Codes 1.0
 
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 
 ColumnLayout
 {
@@ -33,7 +34,6 @@ ColumnLayout
         initialPage: [playlistList, linkingResults]
         defaultColumnWidth: Kirigami.Units.gridUnit * 15
         interactive: false
-
 
         LinkingDialog
         {
@@ -63,7 +63,7 @@ ColumnLayout
                 {
                     id: linkingFilter
 
-                    headerBarExitIcon: "go-previous"
+                    headBarExitIcon: "go-previous"
 
                     model : ListModel {}
                     delegate: BabeDelegate
@@ -73,7 +73,7 @@ ColumnLayout
                         Connections
                         {
                             target: delegate
-                            onClicked: populateFromFilter(index, linkingFilter.headerBarTitle)
+                            onClicked: populateFromFilter(index, linkingFilter.headBarTitle)
                         }
                     }
 
@@ -98,10 +98,10 @@ ColumnLayout
                 trackRating: true
                 trackDuration: false
                 allowMenu: false
-                headerBarVisible: true
-                headerBarExitIcon: "go-previous"
-                headerBarExit: !linkingPage.wideMode
-                headerBarTitle: linkingPage.wideMode ? "" : linkingModel.model.get(linkingModel.currentIndex).playlist
+                headBarVisible: true
+                headBarExitIcon: "go-previous"
+                headBarExit: !linkingPage.wideMode
+                headBarTitle: linkingPage.wideMode ? "" : linkingModel.model.get(linkingModel.currentIndex).playlist
                 onExit: if(!linkingPage.wideMode)
                             linkingPage.currentIndex = 0
 
@@ -188,7 +188,7 @@ ColumnLayout
 
             }
 
-            BabeButton
+            Maui.ToolButton
             {
                 Layout.rightMargin: contentMargins
                 iconName: "edit-clear"
@@ -265,7 +265,7 @@ ColumnLayout
 
         link.ask(code, query)
         linkingFilter.clearTable()
-        linkingFilter.headerBarTitle = title
+        linkingFilter.headBarTitle = title
     }
 
     function parseResponse(res)
@@ -330,9 +330,9 @@ ColumnLayout
     function runSearch(searchTxt)
     {
         if(searchTxt)
-            if(searchTxt !== filterList.headerBarTitle)
+            if(searchTxt !== filterList.headBarTitle)
             {
-                filterList.headerBarTitle = searchTxt
+                filterList.headBarTitle = searchTxt
                 link.ask(LINK.SEARCHFOR, searchTxt)
             }
     }
@@ -341,7 +341,7 @@ ColumnLayout
     {
         searchInput.clear()
         youtubeTable.clearTable()
-        youtubeTable.headerBarTitle = ""
+        youtubeTable.headBarTitle = ""
         searchRes = []
     }
 

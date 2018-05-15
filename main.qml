@@ -475,6 +475,11 @@ Maui.ApplicationWindow
         z: pageStack.z +1
     }
 
+    Maui.ShareDialog
+    {
+        id: shareDialog
+    }
+
     //        Item
     //        {
     //            Layout.alignment: Qt.AlignCenter
@@ -920,7 +925,7 @@ Maui.ApplicationWindow
                         {
                             var query = Q.GET.albumTracks_.arg(album)
                             query = query.arg(artist)
-                            albumsView.table.headerBarTitle = album
+                            albumsView.table.headBarTitle = album
                             albumsView.populateTable(query)
                         }
 
@@ -965,7 +970,7 @@ Maui.ApplicationWindow
                         onAlbumCoverClicked:
                         {
                             var query = Q.GET.artistTracks_.arg(artist)
-                            artistsView.table.headerBarTitle = artist
+                            artistsView.table.headBarTitle = artist
                             artistsView.populateTable(query)
                         }
 

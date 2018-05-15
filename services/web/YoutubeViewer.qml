@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import "../../view_models"
 
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 
 Page
 {
@@ -30,7 +31,7 @@ Page
                 id: headerBar
                 anchors.fill: parent
 
-                BabeButton
+                Maui.ToolButton
                 {
                     Layout.alignment : Qt.AlignLeft
                     Layout.leftMargin: contentMargins
@@ -53,7 +54,7 @@ Page
                     verticalAlignment :  Text.AlignVCenter
                 }
 
-                BabeButton
+                Maui.ToolButton
                 {
                     Layout.alignment : Qt.AlignLeft
                     width: rowHeight
@@ -61,7 +62,7 @@ Page
                     onClicked: webView.url = currentYt.url.replace("embed/", "watch?v=")
                 }
 
-                BabeButton
+                Maui.ToolButton
                 {
                     Layout.alignment : Qt.AlignLeft
                     width: rowHeight
@@ -70,7 +71,7 @@ Page
 
                 }
 
-                BabeButton
+                Maui.ToolButton
                 {
                     Layout.alignment : Qt.AlignLeft
                     Layout.rightMargin: contentMargins

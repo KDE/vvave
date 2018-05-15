@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 
 import "../../utils"
 
@@ -14,8 +15,8 @@ BabeList
 {
     id: playlistListRoot
 
-    headerBarExit: false
-    headerBarTitle: "Playlists"
+    headBarExit: false
+    headBarTitle: "Playlists"
 
     AddPlaylistDialog
     {
@@ -24,7 +25,7 @@ BabeList
 
     signal playSync(int index)   
 
-    headerBarLeft: BabeButton
+    headBar.leftContent: Maui.ToolButton
     {
         id : createPlaylistBtn
         anim : true
@@ -32,7 +33,7 @@ BabeList
         onClicked : newPlaylistDialog.open()
     }
 
-    headerBarRight: BabeButton
+    headBar.rightContent: Maui.ToolButton
     {
         iconName: "list-remove"
         onClicked: removePlaylist()

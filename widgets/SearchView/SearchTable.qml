@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 import QtQuick.Layouts 1.3
 import "../../view_models"
 import QtGraphicalEffects 1.0
@@ -20,7 +21,7 @@ Page
     function runSearch(searchTxt)
     {
         if(searchTxt)
-            if(searchTxt !== searchTable.headerBarTitle)
+            if(searchTxt !== searchTable.headBarTitle)
             {
                 if(savedQueries.indexOf(searchTxt) < 0)
                 {
@@ -29,7 +30,7 @@ Page
                     bae.saveSetting("QUERIES", savedQueries.join(","), "BABE")
                 }
 
-                searchTable.headerBarTitle = searchTxt
+                searchTable.headBarTitle = searchTxt
                 var queries = searchTxt.split(",")
                 searchRes = bae.searchFor(queries)
                 populate(searchView.searchRes)
@@ -42,7 +43,7 @@ Page
     {
         searchInput.clear()
         searchTable.clearTable()
-        searchTable.headerBarTitle = ""
+        searchTable.headBarTitle = ""
         searchRes = []
         suggestionsPopup.close()
     }
@@ -92,9 +93,9 @@ Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             trackNumberVisible: false
-            headerBarVisible: true
-            headerBarExit: true
-            headerBarExitIcon: "edit-clear"
+            headBarVisible: true
+            headBarExit: true
+            headBarExitIcon: "edit-clear"
             holder.message: "<h2>No search results!</h2><p>Try with another query</p>"
             coverArtVisible: true
             trackDuration: true
@@ -112,7 +113,7 @@ Page
             {
                 anchors.fill: parent
 
-                BabeButton
+                Maui.ToolButton
                 {
                     visible: true
                     iconName: "view-filter"
@@ -147,7 +148,7 @@ Page
 
                 }
 
-                BabeButton
+                Maui.ToolButton
                 {
                     iconName: "edit-clear"
                     onClicked: searchInput.clear()

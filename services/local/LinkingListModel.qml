@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
-
+import org.kde.maui 1.0 as Maui
 import "../../utils"
 import "../../widgets/PlaylistsView"
 import "../../view_models"
@@ -14,17 +14,17 @@ BabeList
 {
     id: linkingListRoot
 
-    headerBarExit: false
-    headerBarTitle: isLinked ?link.getIp() : qsTr("Disconnected")
+    headBarExit: false
+    headBarTitle: isLinked ?link.getIp() : qsTr("Disconnected")
 
-    headerBarLeft: BabeButton
+    headBar.leftContent: Maui.ToolButton
     {
         anim : true
         iconName : "view-refresh"
         onClicked : refreshPlaylists()
     }
 
-    headerBarRight: BabeButton
+    headBar.rightContent: Maui.ToolButton
     {
         id: menuBtn
         iconName: "application-menu"

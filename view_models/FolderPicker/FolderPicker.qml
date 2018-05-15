@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import "../../view_models"
 import QtQuick.Controls.Material 2.1
+import org.kde.maui 1.0 as Maui
 
 BabePopup
 {
@@ -28,20 +29,20 @@ BabePopup
 
         onExit: close()
 
-        headerBarExit: true
-        headerBarVisible: true
-        headerBarTitle: "Select8"
+        headBarExit: true
+        headBarVisible: true
+        headBarTitle: "Select8"
 
-        headerBarLeft: [
+        headBar.leftContent: [
 
-            BabeButton
+            Maui.ToolButton
             {
                 id: homeBtn
                 iconName: "gohome"
                 onClicked: load(bae.homeDir())
             },
 
-            BabeButton
+            Maui.ToolButton
             {
                 id: sdBtn
                 iconName: "sd"
@@ -49,7 +50,7 @@ BabePopup
             }
         ]
 
-        headerBarRight:  Button
+        headBar.rightContent:  Button
         {
             Layout.alignment: Qt.AlignRight
             onClicked: {accepted(currentUrl); close()}

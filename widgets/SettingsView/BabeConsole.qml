@@ -3,7 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.1
 import org.kde.kirigami 2.2 as Kirigami
-
+import org.kde.maui 1.0 as Maui
 import "../../view_models"
 
 BabePopup
@@ -32,7 +32,7 @@ BabePopup
         anchors.fill: parent
         spacing: 0
 
-        BabeButton
+        Maui.ToolButton
         {
             Layout.alignment: Qt.AlignLeft
             Layout.leftMargin:  contentMargins
