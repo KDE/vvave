@@ -1,4 +1,4 @@
-project(kalgebra)
+project(vvave)
 cmake_minimum_required(VERSION 3.0)
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)

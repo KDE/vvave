@@ -43,6 +43,7 @@ Maui.ApplicationWindow
     height: Screen.height * (isMobile ? 1 : 0.4)
     //    flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
+    altToolBars: true
 
     //    wideScreen: root.width > coverSize
 
@@ -52,10 +53,6 @@ Maui.ApplicationWindow
     property alias progressBar: progressBar
     //    property alias animFooter: animFooter
     property alias mainPlaylist: mainPlaylist
-
-
-    readonly property bool isMobile : Kirigami.Settings.isMobile
-    readonly property bool isAndroid: bae.isAndroid()
 
     /***************************************************/
     /******************** PLAYBACK ********************/
@@ -384,7 +381,6 @@ Maui.ApplicationWindow
                         Player.playAt(index)
                     }
                 }
-
             }
         }
     }
@@ -395,7 +391,7 @@ Maui.ApplicationWindow
     {
         id: footerBg
         color: darkViewBackgroundColor
-        opacity: focusMode ? 0.2 : opacityLevel
+
         SequentialAnimation
         {
             id: animFooter

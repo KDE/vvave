@@ -14,7 +14,7 @@ SwipeDelegate
 {
     id: delegateRoot  
 
-    readonly property int altHeight : rowHeight * 1.2
+    readonly property int altHeight : rowHeight * 1
     readonly property bool sameAlbum :
     {
         if(coverArt)
@@ -144,8 +144,6 @@ SwipeDelegate
             width: parent.width
 
             anchors.verticalCenter: parent.verticalCenter
-
-
             spacing: 0
 
             Item
@@ -231,9 +229,9 @@ SwipeDelegate
             {
                 visible: quickPlay
                 Layout.fillHeight: true
-                width:  rowHeight
+                width:  height * 0.5
                 height: parent.height
-                Layout.leftMargin: space.small
+//                Layout.leftMargin: space.small
 
                 Maui.ToolButton
                 {
@@ -438,7 +436,7 @@ SwipeDelegate
             {
                 visible: menuItem
                 Layout.fillHeight: true
-                width: parent.height
+                width: parent.height * 0.5
 
                 MouseArea
                 {
