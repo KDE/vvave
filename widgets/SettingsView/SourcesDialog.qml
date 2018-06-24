@@ -15,41 +15,8 @@ BabePopup
     function scanDir(folderUrl)
     {
         bae.scanDir(folderUrl)
-        close()
     }
 
-
-    FolderDialog
-    {
-        id: folderDialog
-        folder: bae.homeDir()
-        onAccepted:
-        {
-            var path = folder.toString().replace("file://","")
-
-            listModel.append({url: path})
-            scanDir(path)
-        }
-    }
-
-    FolderPicker
-    {
-        id: folderPicker
-
-        Connections
-        {
-            target: folderPicker
-            onPathClicked: folderPicker.load(path)
-
-            onAccepted:
-            {
-                listModel.append({url: path})
-                scanDir(path)
-            }
-
-            onGoBack: folderPicker.load(path)
-        }
-    }
 
     BabeMessage
     {
@@ -126,13 +93,18 @@ BabePopup
                 iconName: "list-add"
                 onClicked:
                 {
-                    if(isMobile)
+                    close()
+                    fmDialog.onlyDirs = true
+                    fmDialog.show(function(paths)
                     {
-                        bae.fileChooser()
-//                        folderPicker.open()
-//                        folderPicker.load(bae.homeDir())
-                    }else
-                        folderDialog.open()
+                        for(var i in paths)
+                        {
+                            listModel.append({url: paths[i]})
+                            scanDir(paths[i])
+                        }
+                        close()
+
+                    })
                 }
             }
         ]

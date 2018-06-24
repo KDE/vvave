@@ -22,7 +22,6 @@
         <file>view_models/BabeTable/BabeTable.qml</file>
         <file>view_models/BabeTable/TableMenu.qml</file>
         <file>view_models/ColorTagsBar.qml</file>
-        <file>view_models/FolderPicker/FolderPicker.qml</file>
         <file>widgets/MainPlaylist/MainPlaylist.qml</file>
         <file>widgets/MainPlaylist/PlaylistMenu.qml</file>
         <file>widgets/PlaylistsView/PlaylistsView.qml</file>

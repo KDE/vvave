@@ -43,7 +43,6 @@ Maui.ApplicationWindow
     height: Screen.height * (isMobile ? 1 : 0.4)
     //    flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
-    altToolBars: true
 
     //    wideScreen: root.width > coverSize
 
@@ -474,6 +473,11 @@ Maui.ApplicationWindow
     Maui.ShareDialog
     {
         id: shareDialog
+    }
+
+    Maui.FileDialog
+    {
+        id: fmDialog
     }
 
     //        Item
