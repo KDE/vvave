@@ -168,7 +168,7 @@ Maui.ApplicationWindow
 
     overlay.modal: Rectangle
     {
-        color: isAndroid ? darkColor : "transparent"
+        color: isAndroid ? altColor : "transparent"
         opacity: 0.5
         height: root.height - footBar.height - headBar.height
     }

@@ -4,7 +4,6 @@ import QtQuick.Controls 2.2
 import Qt.labs.platform 1.0
 import org.kde.maui 1.0 as Maui
 import "../../view_models"
-import "../../view_models/FolderPicker"
 import "../../view_models/BabeDialog"
 
 BabePopup

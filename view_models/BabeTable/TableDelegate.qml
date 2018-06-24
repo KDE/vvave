@@ -231,7 +231,7 @@ SwipeDelegate
                 Layout.fillHeight: true
                 width:  height * 0.5
                 height: parent.height
-                Layout.leftMargin: space.small
+                Layout.leftMargin: sameAlbum ? 0 : space.small
 
                 Maui.ToolButton
                 {

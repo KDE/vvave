@@ -576,67 +576,6 @@ QString Babe::musicDir()
     return BAE::MusicPath;
 }
 
-QString Babe::sdDir()
-{
-#if defined(Q_OS_ANDROID)
-    //    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
-    //    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-    //    QString dataAbsPath = mediaPath.toString()+"/Download/";
-    //    QAndroidJniEnvironment env;
-    //    if (env->ExceptionCheck()) {
-    //            // Handle exception here.
-    //            env->ExceptionClear();
-    //    }
-
-    //    qbDebug::Instance()->msg()<<"TESTED SDPATH"<<QProcessEnvironment::systemEnvironment().value("EXTERNAL_SDCARD_STORAGE",dataAbsPath);
-    if(BAE::fileExists("/mnt/extSdCard"))
-        return "/mnt/extSdCard";
-    else if(BAE::fileExists("/mnt/ext_sdcard"))
-        return "/mnt/ext_sdcard";
-    else
-        return "/mnt/";
-#else
-    return homeDir();
-#endif
-
-}
-
-QVariantList Babe::getDirs(const QString &pathUrl)
-{
-    auto path = pathUrl;
-    if(path.startsWith("file://"))
-        path.replace("file://", "");
-
-    bDebug::Instance()->msg("Get directories for path: "+path);
-    QVariantList paths;
-
-    if (QFileInfo(path).isDir())
-    {
-        QDirIterator it(path, QDir::Dirs, QDirIterator::NoIteratorFlags);
-        while (it.hasNext())
-        {
-            auto url = it.next();
-            auto name = QDir(url).dirName();
-            QVariantMap map = { {"url", url }, {"name", name} };
-            paths << map;
-        }
-    }
-
-    return paths;
-}
-
-QVariantMap Babe::getParentDir(const QString &path)
-{
-    auto dir = QDir(path);
-    dir.cdUp();
-    auto dirPath = dir.absolutePath();
-
-    if(dir.isReadable() && !dir.isRoot() && dir.exists())
-        return {{"url", dirPath}, {"name", dir.dirName()}};
-    else
-        return {{"url", path}, {"name", QFileInfo(path).dir().dirName()}};
-}
-
 QStringList Babe::defaultSources()
 {
     return BAE::defaultSources;
