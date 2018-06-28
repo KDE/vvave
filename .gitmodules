@@ -1,0 +1,12 @@
+[submodule "mauikit"]
+	path = mauikit
+	url = https://github.com/maui-project/mauikit.git
+[submodule "3rdparty/breeze-icons"]
+	path = 3rdparty/breeze-icons
+	url = git://anongit.kde.org/breeze-icons.git
+[submodule "3rdparty/kirigami"]
+	path = 3rdparty/kirigami
+	url = git://anongit.kde.org/kirigami.git
+[submodule "3rdparty/luv"]
+	path = 3rdparty/luv
+	url = https://github.com/Nitrux/luv-icon-theme.git

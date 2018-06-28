@@ -46,3 +46,6 @@ target_wrapper.*
 # QtCreator CMake
 CMakeLists.txt.user*
 
+# build folders and output
+build/
+vvave
