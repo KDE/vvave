@@ -8,7 +8,6 @@ import org.kde.maui 1.0 as Maui
 
 import "../../view_models"
 import "../../utils/Help.js" as H
-import "../../utils/Player.js" as PLAYER
 
 SwipeDelegate
 {
@@ -90,7 +89,7 @@ SwipeDelegate
             onClicked:
             {
                 babe = babe === "1" ? "0" : "1"
-                PLAYER.babeTrack(url, babe)
+                bae.babeTrack(url, babe)
                 swipe.close()
 
             }
@@ -174,6 +173,7 @@ SwipeDelegate
 
                         fillMode:  Image.PreserveAspectFit
                         cache: true
+                        asynchronous: true
                         //                    antialiasing: true
                         //                    smooth: true
 

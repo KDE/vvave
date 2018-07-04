@@ -64,7 +64,7 @@ Maui.Page
         boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.OvershootBounds
         flickableDirection: Flickable.AutoFlickDirection
 
-//        snapMode: ListView.SnapToItem
+//        snapMode: isMobile? ListView.SnapToItem : ListView.NoSnap
 
         addDisplaced: Transition
         {
@@ -80,6 +80,15 @@ Maui.Page
 
             if(contentY == 0 && wasPulled)
             { pulled(); wasPulled = false}
+        }
+
+        // Scroll is too fast on desktop, see QTBUG-56075
+        // https://bugreports.qt.io/browse/QTBUG-56075
+        ScrollHelper {
+            enabled: !isMobile
+            id: scrollHelper
+            flickable: babeList
+            anchors.fill: babeList
         }
     }
 }

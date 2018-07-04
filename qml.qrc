@@ -37,6 +37,7 @@
         <file>assets/banner.svg</file>
         <file>view_models/BabeTable/PlaylistDialog.qml</file>
         <file>view_models/BabeList.qml</file>
+        <file>view_models/ScrollHelper.qml</file>
         <file>view_models/BabeTable/HeaderMenu.qml</file>
         <file>view_models/BabeNotify.qml</file>
         <file>widgets/MyBeatView/BabeitView.qml</file>
