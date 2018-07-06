@@ -33,6 +33,7 @@ linux:unix:!android {
 }
 
 include(mauikit/mauikit.pri)
+include(pulpo/pulpo.pri)
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -50,16 +51,8 @@ SOURCES += main.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
     utils/brain.cpp \
-    services/local/socket.cpp \
-    pulpo/pulpo.cpp \
-    pulpo/htmlparser.cpp \
-    services/web/youtube.cpp \
-    pulpo/services/deezerService.cpp \
-    pulpo/services/lastfmService.cpp \
-    pulpo/services/spotifyService.cpp \
-    pulpo/services/musicbrainzService.cpp \
-    pulpo/services/geniusService.cpp \
-    pulpo/services/lyricwikiaService.cpp \ 
+    services/local/socket.cpp \   
+    services/web/youtube.cpp \   
     babe.cpp \
     settings/BabeSettings.cpp \
     db/conthread.cpp \
@@ -96,17 +89,8 @@ HEADERS += \
     services/local/taginfo.h \
     services/local/player.h \
     utils/brain.h \
-    services/local/socket.h \
-    pulpo/enums.h \
-    pulpo/pulpo.h \
-    pulpo/htmlparser.h \
-    services/web/youtube.h \
-    pulpo/services/spotifyService.h \
-    pulpo/services/geniusService.h \
-    pulpo/services/musicbrainzService.h \
-    pulpo/services/deezerService.h \
-    pulpo/services/lyricwikiaService.h \
-    pulpo/services/lastfmService.h \       
+    services/local/socket.h \ 
+    services/web/youtube.h \   
     babe.h \
     settings/BabeSettings.h \
     db/conthread.h \
