@@ -37,10 +37,8 @@ Maui.ApplicationWindow
 
     id: root
     visible: true
-    width: Screen.width * (isMobile ? 1 : 0.4)
     minimumWidth: !isMobile ? columnWidth : 0
     minimumHeight: !isMobile ? columnWidth + 64 : 0
-    height: Screen.height * (isMobile ? 1 : 0.4)
     //    flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
 
@@ -83,7 +81,7 @@ Maui.ApplicationWindow
 
     readonly property real opacityLevel: 0.8
 
-    iconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
+//    iconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
 
     property int miniArtSize: iconSizes.large
 
