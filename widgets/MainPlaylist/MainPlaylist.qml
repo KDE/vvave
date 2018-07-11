@@ -117,6 +117,7 @@ Item
         Maui.ToolBar
         {
             id: mainlistContext
+            clip: false
             width: parent.width
             implicitHeight: toolBarHeightAlt
             visible : !focusMode

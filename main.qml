@@ -48,7 +48,7 @@ Maui.ApplicationWindow
     property alias playIcon: playIcon
     property alias babeBtnIcon: babeBtnIcon
     property alias progressBar: progressBar
-    //    property alias animFooter: animFooter
+    property alias animFooter: animFooter
     property alias mainPlaylist: mainPlaylist
 
     /***************************************************/
@@ -80,9 +80,6 @@ Maui.ApplicationWindow
     /*************************************************/
 
     readonly property real opacityLevel: 0.8
-
-//    iconSize: bae.loadSetting("ICON_SIZE", "BABE", iconSizes.medium)
-
     property int miniArtSize: iconSizes.large
 
     property int columnWidth: Kirigami.Units.gridUnit * 17
@@ -388,6 +385,19 @@ Maui.ApplicationWindow
     {
         id: footerBg
         color: darkViewBackgroundColor
+        radius: altToolBars ? Math.max(footBar.width, footBar.height) : 0
+        border.color: altToolBars ? Qt.lighter(borderColor, 1.2) : "transparent"
+        layer.enabled: altToolBars
+        layer.effect: DropShadow
+        {
+            anchors.fill: footerBg
+            horizontalOffset: 0
+            verticalOffset: 3
+            radius: 8.0
+            samples: 17
+            color: "#80000000"
+            source: footerBg
+        }
 
         SequentialAnimation
         {
@@ -403,17 +413,46 @@ Maui.ApplicationWindow
             }
         }
 
-        FastBlur
+        Rectangle
         {
-            width: parent.width
-            height: parent.height-1
-            y:1
-            source: mainPlaylist.artwork
-            radius: 100
-            transparentBorder: false
-            cached: true
-            z: -999
+            anchors.fill: parent
+            color: babeColor
+              radius: altToolBars ? Math.max(footBar.width, footBar.height) : 0
+            opacity: 0.3
+            clip: true
+            FastBlur
+            {
+                id: fastBlur
+                width: parent.width
+                height: parent.height-1
+                y:1
+                source: mainPlaylist.artwork
+                radius: 100
+                transparentBorder: false
+                cached: true
+                z:1
+                clip: true
+
+                layer.enabled: altToolBars
+                layer.effect: OpacityMask
+                {
+                    maskSource: Item
+                    {
+                        width: footBar.width
+                        height: footBar.height
+                        Rectangle
+                        {
+                            anchors.centerIn: parent
+                            width: footBar.width
+                            height: footBar.height
+                            radius: Math.max(footBar.width, footBar.height)
+                        }
+                    }
+                }
+            }
+
         }
+
 
         Slider
         {

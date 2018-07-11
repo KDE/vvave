@@ -86,7 +86,7 @@ Kirigami.PageRow
             {
                 Layout.fillWidth: true
                 height: rowHeightAlt
-                recSize: isMobile ? toolBarIconSize : 16
+                recSize: isMobile ? iconSize : 16
 
                 onColorClicked:
                 {

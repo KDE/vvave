@@ -42,7 +42,7 @@ BabeList
     signal playAll()
     signal appendAll()
 
-    headBar.leftContent:  Maui.ToolButton
+    headBar.leftContent: Maui.ToolButton
     {
         id : playAllBtn
         visible : headBarVisible && count > 0
