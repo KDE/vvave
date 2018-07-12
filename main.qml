@@ -417,7 +417,7 @@ Maui.ApplicationWindow
         {
             anchors.fill: parent
             color: babeColor
-              radius: altToolBars ? Math.max(footBar.width, footBar.height) : 0
+            radius: altToolBars ? Math.max(footBar.width, footBar.height) : 0
             opacity: 0.3
             clip: true
             FastBlur
@@ -450,7 +450,6 @@ Maui.ApplicationWindow
                     }
                 }
             }
-
         }
 
 
