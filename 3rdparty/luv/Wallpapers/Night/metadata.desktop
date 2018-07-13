@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Night
+Name[ca]=Nit
+Name[ca@valencia]=Nit
+Name[nl]=Nacht
+Name[pt]=Noite
+Name[sv]=Natt
+Name[uk]=Ніч
+Name[x-test]=xxNightxx
 
 
 X-KDE-PluginInfo-Name=Night

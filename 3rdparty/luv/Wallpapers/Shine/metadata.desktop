@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Shine
+Name[ca]=Brillant
+Name[ca@valencia]=Brillant
+Name[nl]=Licht geven
+Name[pt]=Brilho
+Name[sv]=Glans
+Name[uk]=Сяйво
+Name[x-test]=xxShinexx
 
 
 X-KDE-PluginInfo-Name=Shine

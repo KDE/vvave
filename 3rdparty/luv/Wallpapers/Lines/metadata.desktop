@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Lines
+Name[ca]=Línies
+Name[ca@valencia]=Línies
+Name[nl]=Lijnen
+Name[pt]=Linhas
+Name[sv]=Linjer
+Name[uk]=Лінії
+Name[x-test]=xxLinesxx
 
 
 X-KDE-PluginInfo-Name=Lines

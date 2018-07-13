@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Fifth
+Name[ca]=Cinquena
+Name[ca@valencia]=Cinquena
+Name[nl]=Vijfde
+Name[pt]=Quinto
+Name[sv]=Femte
+Name[uk]=П'ятий
+Name[x-test]=xxFifthxx
 
 
 X-KDE-PluginInfo-Name=Fifth
