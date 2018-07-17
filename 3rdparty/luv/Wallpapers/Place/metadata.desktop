@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Place
-Name[es]=Lugar
+Name[ca]=Lloc
+Name[ca@valencia]=Lloc
+Name[cs]=Místo
+Name[fr]=Lieu
+Name[nl]=Plaats
+Name[pt]=Local
+Name[sv]=Plats
+Name[uk]=Місце
+Name[x-test]=xxPlacexx
 
 
 X-KDE-PluginInfo-Name=Place

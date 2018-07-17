@@ -1,6 +1,14 @@
 [Desktop Entry]
 Name=Parallel
-Name[es]=Paralelo
+Name[ca]=Paral·lela
+Name[ca@valencia]=Paral·lela
+Name[cs]=Paralelní
+Name[fr]=Parallèle
+Name[nl]=Parallel
+Name[pt]=Paralelo
+Name[sv]=Parallell
+Name[uk]=Паралельність
+Name[x-test]=xxParallelxx
 
 
 X-KDE-PluginInfo-Name=Parallel
