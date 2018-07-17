@@ -6,6 +6,7 @@ import "../view_models/BabeGrid"
 import "../view_models/BabeTable"
 
 import "../db/Queries.js" as Q
+import "../utils/Help.js" as H
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.maui 1.0 as Maui
 
@@ -21,6 +22,7 @@ Kirigami.PageRow
 
     property alias grid : albumsViewGrid
     property alias table : albumsViewTable
+    property alias tagBar : tagBar
 
     signal rowClicked(var track)
     signal playTrack(var track)
@@ -91,10 +93,13 @@ Kirigami.PageRow
             onExit: albumsPageRoot.currentIndex = 0
 
         }
+
         Maui.TagsBar
         {
+            id: tagBar
             Layout.fillWidth: true
             allowEditMode: true
+            onTagClicked: H.searchFor("tag:"+tag)
         }
     }
 

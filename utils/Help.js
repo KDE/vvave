@@ -85,3 +85,11 @@ function addPlaylist(playlist)
 {
     playlistsView.playlistViewModel.model.insert(0, playlist)
 }
+
+function searchFor(query)
+{
+    if(currentView !== viewsIndex.search)
+        currentView = viewsIndex.search
+
+    searchView.runSearch(query)
+}

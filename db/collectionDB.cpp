@@ -578,7 +578,7 @@ QVariantList CollectionDB::getDBDataQML(const QString &queryTxt)
             mapList<< data;
         }
 
-    }else bDebug::Instance()->msg(query.lastError().text()+" "+query.lastQuery());
+    }else qDebug()<< (query.lastError().text()+" "+query.lastQuery());
 
     return mapList;
 }
