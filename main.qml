@@ -36,9 +36,8 @@ Maui.ApplicationWindow
 {
 
     id: root
-    visible: true
-    minimumWidth: !isMobile ? columnWidth : 0
-    minimumHeight: !isMobile ? columnWidth + 64 : 0
+//    minimumWidth: !isMobile ? columnWidth : 0
+//    minimumHeight: !isMobile ? columnWidth + 64 : 0
     //    flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
 
@@ -384,6 +383,8 @@ Maui.ApplicationWindow
     footBar.background: Rectangle
     {
         id: footerBg
+        implicitHeight: isMobile ? toolBarHeight * 0.8 : toolBarHeight
+        height: implicitHeight
         color: darkViewBackgroundColor
         radius: altToolBars ? Math.max(footBar.width, footBar.height) : 0
         border.color: altToolBars ? Qt.lighter(borderColor, 1.2) : "transparent"
@@ -392,7 +393,7 @@ Maui.ApplicationWindow
         {
             anchors.fill: footerBg
             horizontalOffset: 0
-            verticalOffset: 3
+            verticalOffset: 4
             radius: 8.0
             samples: 17
             color: "#80000000"
@@ -416,7 +417,7 @@ Maui.ApplicationWindow
         Rectangle
         {
             anchors.fill: parent
-            color: babeColor
+            color: "transparent"
             radius: altToolBars ? Math.max(footBar.width, footBar.height) : 0
             opacity: 0.3
             clip: true
@@ -678,7 +679,7 @@ Maui.ApplicationWindow
                 {
                     id: brainzToggle
                     text: checked ? "Turn OFF" : "Turn ON"
-                    checked: activeBrainz
+                    checked: false
                     checkable: true
                     onToggled:
                     {
@@ -891,8 +892,6 @@ Maui.ApplicationWindow
     MainPlaylist
     {
         id: mainPlaylist
-        anchors.fill: parent
-        clip: true
         Connections
         {
             target: mainPlaylist
@@ -901,11 +900,11 @@ Maui.ApplicationWindow
         }
     }
 
-    Page
+    Maui.Page
     {
         id: views
-        anchors.fill: parent
-        clip: true
+        headBarVisible: false
+        margins: 0
 
         //        focusPolicy: Qt.WheelFocus
         //        visualFocus: true
@@ -1131,7 +1130,6 @@ Maui.ApplicationWindow
 
         if(variant === "Light")
         {
-
             backgroundColor = Kirigami.Theme.backgroundColor
             textColor = Kirigami.Theme.textColor
             highlightColor = Kirigami.Theme.highlightColor

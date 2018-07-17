@@ -3,12 +3,12 @@
 #include <QQmlContext>
 #include <QApplication>
 #include <QIcon>
-#include "babe.h"
-#include "services/local/player.h"
 #include <QLibrary>
-// #include <QQuickStyle>
 #include <QStyleHints>
 #include <QCommandLineParser>
+#include "babe.h"
+#include "services/local/player.h"
+
 
 
 #ifdef STATIC_KIRIGAMI

@@ -84,10 +84,12 @@ Page
             youtubeTable.model.append(tracks[i])
     }
 
+    /*this is for playing the track sin the background without showing the actual video*/
     Loader
     {
         id: youtubePlayer
-        source: isAndroid ? "qrc:/services/web/YoutubePlayer_A.qml" : "qrc:/services/web/YoutubePlayer.qml"
+        source: isAndroid ? "qrc:/services/web/YoutubePlayer_A.qml" :
+                            "qrc:/services/web/YoutubePlayer.qml"
     }
 
     BabePopup
