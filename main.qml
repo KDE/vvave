@@ -966,6 +966,10 @@ Maui.ApplicationWindow
                             var query = Q.GET.artistTracks_.arg(artist)
                             artistsView.table.headBarTitle = artist
                             artistsView.populateTable(query)
+
+                            var tagq = Q.GET.artistTags_.arg(artist)
+
+                            artistsView.tagBar.populate(bae.get(tagq))
                         }
 
                         onAlbumCoverPressedAndHold:

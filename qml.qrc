@@ -27,7 +27,6 @@
         <file>widgets/InfoView/InfoView.qml</file>
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
-        <file>widgets/PlaylistsView/AddPlaylistDialog.qml</file>
         <file>utils/Props.js</file>
         <file>assets/face-sleeping.svg</file>
         <file>assets/face-laughing.svg</file>

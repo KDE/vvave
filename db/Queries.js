@@ -25,6 +25,7 @@ var GET = {
     tags : "select distinct tag from tags where context = 'tag' limit 1000",
     trackTags : "select distinct tag from tracks_tags where context = 'tag' and tag collate nocase not in (select artist from artists) and tag in (select tag from tracks_tags group by tag having count(url) > 1) order by tag collate nocase limit 1000",
     albumTags_: "select distinct tag from albums_tags where context = 'tag' and album = \"%1\" and artist = \"%2\"",
+    artistTags_: "select distinct tag from artists_tags where context = 'tag' and artist = \"%1\"",
 
 
     colorTracks_: "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.art = \"%1\""

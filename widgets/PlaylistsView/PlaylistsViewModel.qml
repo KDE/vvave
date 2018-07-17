@@ -17,9 +17,11 @@ BabeList
     headBarExit: false
     headBarTitle: "Playlists"
 
-    AddPlaylistDialog
+    Maui.NewDialog
     {
-        id:newPlaylistDialog
+        id: newPlaylistDialog
+        title: qsTr("New Plasylist...")
+        onFinished: addPlaylist(text)
     }
 
     signal playSync(int index)   
@@ -125,5 +127,13 @@ BabeList
                 }
             }
         }
+    }
+
+    function addPlaylist(text)
+    {
+        var title = text.trim()
+        if(bae.addPlaylist(title))
+            model.insert(9, {playlist: title})
+        list.positionViewAtEnd()
     }
 }
