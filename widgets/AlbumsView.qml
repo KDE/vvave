@@ -98,7 +98,7 @@ Kirigami.PageRow
         {
             id: tagBar
             Layout.fillWidth: true
-            allowEditMode: true
+            allowEditMode: false
             onTagClicked: H.searchFor("tag:"+tag)
         }
     }
