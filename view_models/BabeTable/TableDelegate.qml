@@ -12,7 +12,7 @@ import "../../utils/Player.js" as PLAYER
 
 SwipeDelegate
 {
-    id: delegateRoot  
+    id: delegateRoot
 
     readonly property int altHeight : rowHeight * 1.2
     readonly property bool sameAlbum :
@@ -248,10 +248,9 @@ SwipeDelegate
             {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 Layout.margins: space.tiny
                 Layout.leftMargin: space.small * (quickPlay ? 1 : 2)
-                anchors.verticalCenter: parent.verticalCenter
 
                 GridLayout
                 {

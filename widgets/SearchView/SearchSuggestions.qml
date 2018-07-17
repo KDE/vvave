@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import org.kde.maui 1.0 as Maui
 
 import "../../view_models"
 import "../../db/Queries.js" as Q
@@ -17,14 +18,14 @@ BabePopup
         model: ListModel {id: suggestionsModel}
 
         section.property : "type"
-        section.delegate: BabeDelegate
+        section.delegate: Maui.LabelDelegate
         {
             label: section
             isSection: true
             boldLabel: true
         }
 
-        delegate: BabeDelegate
+        delegate: Maui.LabelDelegate
         {
             id: delegate
             label: suggestion

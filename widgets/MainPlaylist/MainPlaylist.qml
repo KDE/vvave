@@ -50,20 +50,17 @@ Item
     //        z: -999
     //    }
 
-    GridLayout
+    ColumnLayout
     {
         id: playlistLayout
         anchors.fill: parent
         width: parent.width
-        rowSpacing: 0
-        rows: 4
-        columns: 1
+        spacing: 0
 
         Item
         {
             id: cover
-            Layout.row: 1
-            Layout.column: 1
+
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? coverSize : 0
             Layout.maximumHeight: coverSize
@@ -122,8 +119,6 @@ Item
             implicitHeight: toolBarHeightAlt
             visible : !focusMode
 
-            Layout.row: 2
-            Layout.column: 1
             Layout.fillWidth: true
 
             MouseArea
@@ -229,11 +224,10 @@ Item
             id: mainPlaylistItem
             visible : !focusMode
 
-            Layout.row: 4
-            Layout.column: 1
             Layout.fillWidth: true
             Layout.fillHeight: true
             anchors.top: mainlistContext.bottom
+            anchors.bottom: parent.bottom
             focus: true
             //            anchors.bottom: mainPlaylistRoot.searchBox
             StackView

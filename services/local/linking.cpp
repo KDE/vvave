@@ -32,7 +32,7 @@ Linking::Linking(QObject *parent) : QObject(parent)
     connect(&client, &QWebSocket::disconnected, this, &Linking::clientConDisconnected);
     connect(&client, &QWebSocket::textMessageReceived, [this](QString msg)
     {
-        auto decoded = decode(msg);
+        auto decoded = this->decode(msg);
         qDebug()<<"client recived message"<<msg;
         emit this->responseReady(decoded);
     });
@@ -113,7 +113,6 @@ void Linking::collectTrack(QString url)
 
 QVariantMap Linking::decode(const QString &json)
 {
-    bDebug::Instance()->msg("Decoding client msg");
     QJsonParseError jsonParseError;
     auto jsonResponse = QJsonDocument::fromJson(json.toUtf8(), &jsonParseError);
 

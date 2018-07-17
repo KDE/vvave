@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import org.kde.maui 1.0 as Maui
 import "../view_models/BabeTable"
 import "../view_models"
 import "../db/Queries.js" as Q
@@ -16,7 +17,7 @@ BabeTable
 
     section.property : "album"
     section.criteria: ViewSection.FullString
-    section.delegate: BabeDelegate
+    section.delegate: Maui.LabelDelegate
     {
         id: delegate
         label: section

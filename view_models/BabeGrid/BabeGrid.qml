@@ -2,6 +2,7 @@ import QtQuick.Controls 2.2
 import QtQuick 2.9
 import ".."
 import org.kde.kirigami 2.0 as Kirigami
+import org.kde.maui 1.0 as Maui
 
 Pane
 {
@@ -37,7 +38,7 @@ Pane
         onClicked: bgClicked()
     }
 
-    BabeHolder
+    Maui.Holder
     {
         visible: grid.count === 0
         message: "No albums..."

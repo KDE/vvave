@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 
 import "../../view_models/BabeTable"
 import "../../view_models/BabeMenu"
@@ -65,7 +66,7 @@ Kirigami.PageRow
                     headBarExitIcon: "go-previous"
 
                     model : ListModel {}
-                    delegate: BabeDelegate
+                    delegate: Maui.LabelDelegate
                     {
                         id: delegate
                         label : tag
@@ -164,12 +165,12 @@ Kirigami.PageRow
 
 
             section.criteria: ViewSection.FullString
-            section.delegate: BabeDelegate
+            section.delegate: Maui.LabelDelegate
             {
                 label: filterList.section.property === qsTr("stars") ? H.setStars(section) : section
                 isSection: true
                 boldLabel: true
-                fontFamily: "Material Design Icons"
+                labelTxt.font.family: "Material Design Icons"
 
             }
 

@@ -47,7 +47,7 @@ BabePopup
 
         model: listModel
 
-        delegate: BabeDelegate
+        delegate: Maui.LabelDelegate
         {
             id: delegate
             label: url

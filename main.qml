@@ -25,23 +25,20 @@ import "services/web/Spotify"
 import "view_models/BabeGrid"
 
 import "db/Queries.js" as Q
-import "utils/Player.js" as Player
 import "utils/Help.js" as H
+import "utils/Player.js" as Player
 
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.maui 1.0 as Maui
-import Link.Codes 1.0
 
 Maui.ApplicationWindow
 {
 
     id: root
-//    minimumWidth: !isMobile ? columnWidth : 0
-//    minimumHeight: !isMobile ? columnWidth + 64 : 0
-    //    flags: Qt.FramelessWindowHint
+    //    minimumWidth: !isMobile ? columnWidth : 0
+    //    minimumHeight: !isMobile ? columnWidth + 64 : 0
+    //        flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
-
-    //    wideScreen: root.width > coverSize
 
     /*ALIASES*/
     property alias playIcon: playIcon
@@ -62,8 +59,7 @@ Maui.ApplicationWindow
 
     property int currentTrackIndex: 0
     property int prevTrackIndex: 0
-    property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.model.get(
-                                                         0).artwork : ""
+    property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.model.get(0).artwork : ""
     property bool currentBabe: currentTrack.babe == "0" ? false : true
     property string durationTimeLabel: "00:00"
     property string progressTimeLabel: "00:00"
@@ -905,9 +901,9 @@ Maui.ApplicationWindow
         id: views
         headBarVisible: false
         margins: 0
-
         //        focusPolicy: Qt.WheelFocus
         //        visualFocus: true
+
         Column
         {
             anchors.fill: parent

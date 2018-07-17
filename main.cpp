@@ -9,8 +9,6 @@
 #include "babe.h"
 #include "services/local/player.h"
 
-
-
 #ifdef STATIC_KIRIGAMI
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
 #endif
@@ -51,17 +49,13 @@ int main(int argc, char *argv[])
 
     /*needed for mobile*/
     if(BAE::isMobile())
-    {
-        int pressAndHoldInterval = 1000; // in [ms]
-        QGuiApplication::styleHints()->setMousePressAndHoldInterval(pressAndHoldInterval);
-    }
+        QGuiApplication::styleHints()->setMousePressAndHoldInterval(1000); // in [ms]
+
 
     QCommandLineParser parser;
     parser.setApplicationDescription("vvave music player");
     const QCommandLineOption versionOption = parser.addVersionOption();
     parser.process(app);
-
-    const QStringList args = parser.positionalArguments();
     bool version = parser.isSet(versionOption);
 
     if(version)

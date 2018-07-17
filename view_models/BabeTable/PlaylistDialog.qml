@@ -33,7 +33,7 @@ BabeDialog
             ListModel { id: listModel }
             model: listModel
 
-            delegate: BabeDelegate
+            delegate: Maui.LabelDelegate
             {
                 id: delegate
                 label: playlist

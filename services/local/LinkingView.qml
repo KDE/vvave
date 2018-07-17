@@ -66,7 +66,7 @@ ColumnLayout
                     headBarExitIcon: "go-previous"
 
                     model : ListModel {}
-                    delegate: BabeDelegate
+                    delegate: Maui.LabelDelegate
                     {
                         id: delegate
                         label : tag
@@ -113,12 +113,12 @@ ColumnLayout
                 menuBtn.visible: false
 
                 section.criteria: ViewSection.FullString
-                section.delegate: BabeDelegate
+                section.delegate: Maui.LabelDelegate
                 {
                     label: filterList.section.property === qsTr("stars") ? H.setStars(section) : section
                     isSection: true
                     boldLabel: true
-                    fontFamily: "Material Design Icons"
+                    labelTxt.font.family: "Material Design Icons"
 
                 }
 

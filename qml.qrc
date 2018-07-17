@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>widgets/BabeBar.qml</file>
         <file>utils/Icons.js</file>
         <file>utils/materialdesignicons-webfont.ttf</file>
         <file>widgets/TracksView.qml</file>
@@ -11,7 +10,6 @@
         <file>db/script.sql</file>
         <file>utils/Player.js</file>
         <file>assets/face.png</file>
-        <file>view_models/BabeHolder.qml</file>
         <file>db/Queries.js</file>
         <file>utils/Help.js</file>
         <file>view_models/BabeScrollBar.qml</file>
@@ -55,7 +53,6 @@
         <file>assets/banner.png</file>
         <file>assets/banner.svg</file>
         <file>view_models/BabeTable/PlaylistDialog.qml</file>
-        <file>view_models/BabeDelegate.qml</file>
         <file>view_models/BabeList.qml</file>
         <file>view_models/BabeTable/HeaderMenu.qml</file>
         <file>view_models/BabeNotify.qml</file>
