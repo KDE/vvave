@@ -44,7 +44,6 @@
         <file>assets/beat-banner.png</file>
         <file>assets/beat2.png</file>
         <file>assets/beat.svg</file>
-        <file>view_models/BabeMenu/BabeMenuItem.qml</file>
         <file>view_models/BabeMenu/BabeMenu.qml</file>
         <file>view_models/BabeDialog/BabeMessage.qml</file>
         <file>view_models/BabeDialog/BabeDialog.qml</file>
@@ -80,5 +79,6 @@
         <file>widgets/FloatingDisk.qml</file>
         <file>services/web/WebView.qml</file>
         <file>services/web/WebView_A.qml</file>
+        <file>view_models/BabeTable/GroupDialog.qml</file>
     </qresource>
 </RCC>

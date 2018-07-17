@@ -80,7 +80,7 @@ BabeMenu
         color: textColor
     }
 
-    BabeMenuItem
+    MenuItem
     {
         text: babe == false ? "Babe it" : "UnBabe it"
         onTriggered:
@@ -90,7 +90,7 @@ BabeMenu
         }
     }
 
-    BabeMenuItem
+    MenuItem
     {
         text: "Queue"
         onTriggered:
@@ -100,7 +100,7 @@ BabeMenu
         }
     }
 
-    BabeMenuItem
+    MenuItem
     {
         text: "Save to..."
         onTriggered:
@@ -111,7 +111,7 @@ BabeMenu
         }
     }
 
-    BabeMenuItem
+    MenuItem
     {
         text: isAndroid ? qsTr("Open with...") : qsTr("Show in folder...")
 
@@ -124,13 +124,13 @@ BabeMenu
         }
     }
 
-    BabeMenuItem
+    MenuItem
     {
         text: "Edit..."
         onTriggered: {close()}
     }
 
-    BabeMenuItem
+    MenuItem
     {
         text: "Share..."
         onTriggered:
@@ -141,7 +141,7 @@ BabeMenu
         }
     }
 
-    BabeMenuItem
+    MenuItem
     {
         text: "Remove"
         onTriggered:
@@ -157,7 +157,7 @@ BabeMenu
         id: customItems
     }
 
-    BabeMenuItem
+    MenuItem
     {
         id: starsRow
         width: parent.width
@@ -223,7 +223,7 @@ BabeMenu
 
     }
 
-    BabeMenuItem
+    MenuItem
     {
         id: colorsRow
         width: parent.width

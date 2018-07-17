@@ -29,7 +29,6 @@ BabePopup
         }
     }
 
-
     BabeList
     {
         id: sources

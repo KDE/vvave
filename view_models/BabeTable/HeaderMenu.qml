@@ -12,14 +12,14 @@ BabeMenu
 {
     signal saveListClicked()
     signal queueListClicked()
+    signal sortClicked()
 
     property alias menuItem: babeMenu.children
-
 
     Column
     {
         id: babeMenu
-        BabeMenuItem
+        MenuItem
         {
             text: "Queue list"
             onTriggered:
@@ -29,7 +29,7 @@ BabeMenu
             }
         }
 
-        BabeMenuItem
+        MenuItem
         {
             text: "Save list to..."
             onTriggered:
@@ -39,14 +39,14 @@ BabeMenu
             }
         }
 
-        BabeMenuItem
+        MenuItem
         {
             text: "Send list to..."
         }
 
         Kirigami.Separator{ width: parent.width; height: 1}
 
-        BabeMenuItem
+        MenuItem
         {
             text: "Visible info..."
             onTriggered: {close()}
@@ -54,10 +54,14 @@ BabeMenu
 
         Kirigami.Separator{ width: parent.width; height: 1}
 
-        BabeMenuItem
+        MenuItem
         {
             text: "Sort..."
-            onTriggered: {close()}
+            onTriggered:
+            {
+                sortClicked()
+                close()
+            }
         }
 
     }

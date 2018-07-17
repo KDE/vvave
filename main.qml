@@ -40,7 +40,9 @@ Maui.ApplicationWindow
     //        flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
 
-    /*ALIASES*/
+    /***************************************************/
+    /******************** ALIASES ********************/
+    /*************************************************/
     property alias playIcon: playIcon
     property alias babeBtnIcon: babeBtnIcon
     property alias progressBar: progressBar
@@ -51,7 +53,7 @@ Maui.ApplicationWindow
     /******************** PLAYBACK ********************/
     /*************************************************/
 
-    property bool isShuffle: false
+    property bool isShuffle: bae.loadSetting("SHUFFLE","PLAYBACK", false) == "true" ? true : false
     property var currentTrack: ({
                                     babe: "0",
                                     stars: "0"
@@ -105,7 +107,7 @@ Maui.ApplicationWindow
     property string syncPlaylist: ""
     property bool sync: false
     property string infoMsg: ""
-    property bool infoLabels: bae.loadSetting("PLAYBACKINFO", "BABE", false) == "true" ? true : false
+    property bool infoLabels: bae.loadSetting("LABELS", "PLAYBACK", false) == "true" ? true : false
 
     property bool isLinked: false
     property bool isServing: false
@@ -219,9 +221,7 @@ Maui.ApplicationWindow
     /* UI */
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
 
-    headBar.middleContent : Row
-    {
-        spacing: space.medium
+    headBar.middleContent : [
 
         Maui.ToolButton
         {
@@ -236,7 +236,7 @@ Maui.ApplicationWindow
             }
 
             text: qsTr("Tracks")
-        }
+        },
 
         Maui.ToolButton
         {
@@ -251,7 +251,7 @@ Maui.ApplicationWindow
                 albumsView.currentIndex = 0
                 currentView = viewsIndex.albums
             }
-        }
+        },
 
         Maui.ToolButton
         {
@@ -266,7 +266,7 @@ Maui.ApplicationWindow
                 artistsView.currentIndex = 0
                 currentView = viewsIndex.artists
             }
-        }
+        },
 
         Maui.ToolButton
         {
@@ -281,7 +281,7 @@ Maui.ApplicationWindow
                 currentView = viewsIndex.playlists
             }
         }
-    }
+    ]
 
 
     onSearchButtonClicked:
@@ -294,9 +294,21 @@ Maui.ApplicationWindow
     footBar.z : 0
     pageStack.z: 0
 
-    footBar.middleContent: Row
+    footBar.leftContent: Label
     {
-        spacing: space.medium
+        visible: !mainlistEmpty && infoLabels
+        text: progressTimeLabel
+        color: darkTextColor
+    }
+
+    footBar.rightContent: Label
+    {
+        visible: !mainlistEmpty && infoLabels
+        text: durationTimeLabel
+        color: darkTextColor
+    }
+
+    footBar.middleContent: [
 
         Maui.ToolButton
         {
@@ -305,12 +317,12 @@ Maui.ApplicationWindow
 
             iconColor: currentBabe ? babeColor : darkTextColor
             onClicked: if (!mainlistEmpty)
-                       {
-                           var value = mainPlaylist.contextMenu.babeIt(
-                                       currentTrackIndex)
-                           currentBabe = value
-                       }
-        }
+            {
+                var value = mainPlaylist.contextMenu.babeIt(
+                    currentTrackIndex)
+                currentBabe = value
+            }
+        },
 
         Maui.ToolButton
         {
@@ -318,7 +330,7 @@ Maui.ApplicationWindow
             iconColor: darkTextColor
             onClicked: Player.previousTrack()
             onPressAndHold: Player.playAt(prevTrackIndex)
-        }
+        },
 
         Maui.ToolButton
         {
@@ -328,11 +340,11 @@ Maui.ApplicationWindow
             onClicked:
             {
                 if (isPlaying)
-                    Player.pauseTrack()
+                Player.pauseTrack()
                 else
-                    Player.resumeTrack()
+                Player.resumeTrack()
             }
-        }
+        },
 
         Maui.ToolButton
         {
@@ -341,38 +353,20 @@ Maui.ApplicationWindow
             iconName: "media-skip-forward"
             onClicked: Player.nextTrack()
             onPressAndHold: Player.playAt(Player.shuffle())
-        }
+        },
 
-        Maui.PieButton
+        Maui.ToolButton
         {
             id: shuffleBtn
             iconColor: darkTextColor
             iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-            delegateSize: iconSizes.large + space.big
-            //            onClicked: isShuffle = !isShuffle
-            model: mainPlaylist.list.model
-            delegate: BabeAlbum
+            onClicked:
             {
-                id: delegate
-                itemWidth: iconSizes.large + space.big
-
-                itemHeight: itemWidth
-                albumSize: iconSizes.large
-                showIndicator: false
-                showLabels: false
-                albumRadius: itemWidth
-                Connections
-                {
-                    target: delegate
-                    onClicked:
-                    {
-                        shuffleBtn.close()
-                        Player.playAt(index)
-                    }
-                }
+                isShuffle = !isShuffle
+                bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
             }
         }
-    }
+    ]
 
 
 
@@ -512,42 +506,6 @@ Maui.ApplicationWindow
     {
         id: fmDialog
     }
-
-    //        Item
-    //        {
-    //            Layout.alignment: Qt.AlignCenter
-    //            Layout.fillWidth: true
-    //            Layout.fillHeight: true
-    //            Layout.row: 2
-    //            Layout.column: 2
-    //            Layout.maximumHeight: playbackInfo.visible ? playbackInfo.font.pointSize * 2 : 0
-
-    //            Label
-    //            {
-    //                id: playbackInfo
-
-    //                visible: !mainlistEmpty && infoLabels
-    //                //                anchors.top: playIcon.bottom
-    //                //                anchors.horizontalCenter: playIcon.horizontalCenter
-    //                width: parent.width
-    //                height: parent.height
-    //                horizontalAlignment: Qt.AlignHCenter
-    //                verticalAlignment: Qt.AlignVCenter
-    //                text: progressTimeLabel + "  /  " + (currentTrack ? (currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : "--- - " + currentTrack.artist) : "") + "  /  " + durationTimeLabel
-    //                color: darkTextColor
-    //                font.pointSize: fontSizes.small
-    //                elide: Text.ElideRight
-    //            }
-    //        }
-
-
-
-    //    background: Rectangle
-    //    {
-    //        anchors.fill: parent
-    //        color: altColor
-    //        z: -999
-    //    }
 
     SourcesDialog
     {
@@ -740,7 +698,7 @@ Maui.ApplicationWindow
                         onToggled:
                         {
                             infoLabels = checked
-                            bae.saveSetting("PLAYBACKINFO", infoLabels ? true : false, "BABE")
+                            bae.saveSetting("LABELS", infoLabels ? true : false, "PLAYBACK")
 
                         }
                     }

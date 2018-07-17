@@ -14,16 +14,7 @@ BabeTable
     headBarTitle: count + " tracks"
     headBarExit: false
     coverArtVisible: false
-
-    section.property : "album"
-    section.criteria: ViewSection.FullString
-    section.delegate: Maui.LabelDelegate
-    {
-        id: delegate
-        label: section
-        isSection: true
-        boldLabel: true
-    }
+    sortBy: "album"
 
     function populate()
     {

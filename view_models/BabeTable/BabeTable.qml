@@ -25,6 +25,8 @@ BabeList
     property bool isArtworkRemote : false
     property bool showIndicator : false
 
+    property string sortBy: "undefined"
+
     property alias headerMenu: headerMenu
     property alias contextMenu : contextMenu
 
@@ -80,6 +82,14 @@ BabeList
         id: headerMenu
         onSaveListClicked: saveList()
         onQueueListClicked: queueList()
+        onSortClicked: groupDialog.popup()
+    }
+
+    GroupDialog
+    {
+        id: groupDialog
+        onSortBy: sortBy = babeTableRoot.sortBy = text
+
     }
 
     TableMenu
@@ -89,15 +99,20 @@ BabeList
 
     list.highlightFollowsCurrentItem: false
     list.highlightMoveDuration: 0
-    list.highlight: Rectangle
-    {
-
-    }
+    list.highlight: Rectangle { }
 
     ListModel { id: listModel }
 
     model: listModel
 
+    section.property : sortBy
+    section.criteria: ViewSection.FullString
+    section.delegate: Maui.LabelDelegate
+    {
+        label: section
+        isSection: true
+        boldLabel: true
+    }
 
     //    property alias animBabe: delegate.animBabe
     delegate: TableDelegate

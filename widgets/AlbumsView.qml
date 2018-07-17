@@ -7,6 +7,7 @@ import "../view_models/BabeTable"
 
 import "../db/Queries.js" as Q
 import org.kde.kirigami 2.2 as Kirigami
+import org.kde.maui 1.0 as Maui
 
 
 Kirigami.PageRow
@@ -14,7 +15,7 @@ Kirigami.PageRow
     id: albumsPageRoot
     clip: true
     separatorVisible: wideMode
-    initialPage: [albumsViewGrid, albumsViewTable]
+    initialPage: [albumsViewGrid, albumFilter]
     defaultColumnWidth: albumsViewGrid.albumCoverSize * 4
     interactive: currentIndex  === 1
 
@@ -39,48 +40,62 @@ Kirigami.PageRow
 
     }
 
-    BabeTable
+    ColumnLayout
     {
-        id: albumsViewTable
+        id: albumFilter
         anchors.fill: parent
-        trackNumberVisible: true
-        headBarVisible: true
-        headBarExit:  !albumsPageRoot.wideMode
-        headBarExitIcon: "go-previous"
-        coverArtVisible: true
-        quickPlayVisible: true
-        focus: true
+        spacing: 0
 
-        onRowClicked:
+        BabeTable
         {
-            albumsPageRoot.rowClicked(model.get(index))
-        }
+            id: albumsViewTable
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            trackNumberVisible: true
+            headBarVisible: true
+            headBarExit:  !albumsPageRoot.wideMode
+            headBarExitIcon: "go-previous"
+            coverArtVisible: true
+            quickPlayVisible: true
+            focus: true
 
-        onQuickPlayTrack:
+            onRowClicked:
+            {
+                albumsPageRoot.rowClicked(model.get(index))
+            }
+
+            onQuickPlayTrack:
+            {
+                albumsPageRoot.playTrack(model.get(index))
+            }
+
+            onQueueTrack:
+            {
+                albumsPageRoot.queueTrack(model.get(index))
+            }
+
+            onPlayAll:
+            {
+                albumsPageRoot.currentIndex = 0
+                var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
+                albumsPageRoot.playAll(data.album, data.artist)
+            }
+
+            onAppendAll:
+            {
+                albumsPageRoot.currentIndex = 0
+                var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
+                albumsPageRoot.appendAll(data.album, data.artist)
+            }
+
+            onExit: albumsPageRoot.currentIndex = 0
+
+        }
+        Maui.TagsBar
         {
-            albumsPageRoot.playTrack(model.get(index))
+            Layout.fillWidth: true
+            allowEditMode: true
         }
-
-        onQueueTrack:
-        {
-            albumsPageRoot.queueTrack(model.get(index))
-        }
-
-        onPlayAll:
-        {
-            albumsPageRoot.currentIndex = 0
-            var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
-            albumsPageRoot.playAll(data.album, data.artist)
-        }
-
-        onAppendAll:
-        {
-            albumsPageRoot.currentIndex = 0
-            var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
-            albumsPageRoot.appendAll(data.album, data.artist)
-        }
-
-        onExit: albumsPageRoot.currentIndex = 0
     }
 
     function populate(query)

@@ -125,13 +125,13 @@ Kirigami.PageRow
             holder.emoji: "qrc:/assets/face-hug.png"
 
             headerMenu.menuItem:  [
-                BabeMenuItem
+                MenuItem
                 {
                     enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
                     text: "Sync tags"
                     onTriggered: {}
                 },
-                BabeMenuItem
+                MenuItem
                 {
                     enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
                     text: "Play-n-Sync"
@@ -141,7 +141,7 @@ Kirigami.PageRow
                         syncAndPlay(playlistViewModel.currentIndex)
                     }
                 },
-                BabeMenuItem
+                MenuItem
                 {
                     enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
                     text: "Remove playlist"
@@ -152,7 +152,7 @@ Kirigami.PageRow
 
 //            contextMenu.menuItem: [
 
-//                BabeMenuItem
+//                MenuItem
 //                {
 //                    text: qsTr("Remove from playlist")
 //                    onTriggered:
