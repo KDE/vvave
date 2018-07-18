@@ -43,13 +43,6 @@ Item
         onSaveToClicked: table.saveList()
     }
 
-    //    Rectangle
-    //    {
-    //        anchors.fill: parent
-    //        color: darkDarkColor
-    //        z: -999
-    //    }
-
     ColumnLayout
     {
         id: playlistLayout
@@ -162,29 +155,15 @@ Item
                 }
             }
 
-
-            //                Item
-            //                {
-            //                    Layout.fillWidth: true
-
-            //                    BabeButton
-            //                    {
-            //                        anchors.centerIn: parent
-            ////                        iconColor: darkTextColor
-            //                        iconName: "headphones"
-            //                        onClicked: goFocusMode()
-            //                    }
-            //                }
-
             middleContent: Maui.PieButton
             {
                 iconName: "list-add"
 
                 model: ListModel
                 {
-                    ListElement{iconName: "amarok-video" ; btn: "video"}
+                    ListElement{iconName: "videoclip-amarok" ; btn: "video"}
                     ListElement{iconName: "documentinfo" ; btn: "info"}
-                    ListElement{iconName: "artists" ; btn: "similar"}
+                    ListElement{iconName: "headphones" ; btn: "similar"}
                 }
 
                 onItemClicked:
