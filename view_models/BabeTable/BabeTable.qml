@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.maui 1.0 as Maui
 import "../../utils/Player.js" as Player
+import "../../utils/Help.js" as H
 
 import ".."
 
@@ -18,7 +19,7 @@ BabeList
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
-    property bool menuItemVisible : true
+    property bool menuItemVisible : isMobile
     property bool trackDuration
     property bool trackRating
     property bool allowMenu: true

@@ -8,9 +8,9 @@ Item
     height:  miniArtSize * 1.1
     width: height
 
-    x: contentMargins
-    y: parent.height - (root.footBar.height*0.5)
-
+//    x: contentMargins
+//    y: parent.height - (root.footBar.height*0.5)
+    parent: ApplicationWindow.overlay
     property bool isHovered : false
 
     ToolTip.delay: 1000
@@ -109,7 +109,7 @@ Item
         drag.target: parent
         drag.axis: Drag.XAndYAxis
         drag.minimumX: 0
-        drag.maximumX: root.footBar.width - parent.width
+        drag.maximumX: root.width
 
         drag.minimumY: 0
         drag.maximumY: pageStack.height

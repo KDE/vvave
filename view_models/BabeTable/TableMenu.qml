@@ -33,9 +33,10 @@ BabeMenu
         rate = rank
         if(bae.rateTrack(list.model.get(list.currentIndex).url, rate))
         {
-            list.currentItem.trackRating.text = H.setStars(rate)
-            list.model.get(list.currentIndex).stars = rate
+            babeTableRoot.list.currentItem.rate(H.setStars(rate))
+            babeTableRoot.ist.model.get(list.currentIndex).stars = rate
         }
+
 
         close()
     }

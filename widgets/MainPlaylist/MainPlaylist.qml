@@ -60,7 +60,7 @@ Item
         Item
         {
             id: cover
-
+            Layout.alignment: Qt.AlignBottom | Qt.AlignTop
             Layout.fillWidth: true
             Layout.preferredHeight: visible ? coverSize : 0
             Layout.maximumHeight: coverSize
@@ -118,6 +118,7 @@ Item
             width: parent.width
             implicitHeight: toolBarHeightAlt
             visible : !focusMode
+            Layout.alignment: Qt.AlignBottom | Qt.AlignTop
 
             Layout.fillWidth: true
 
@@ -226,8 +227,7 @@ Item
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            anchors.top: mainlistContext.bottom
-            anchors.bottom: parent.bottom
+            Layout.alignment: Qt.AlignBottom | Qt.AlignTop
             focus: true
             //            anchors.bottom: mainPlaylistRoot.searchBox
             StackView

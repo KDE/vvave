@@ -40,6 +40,7 @@ Maui.ApplicationWindow
     //        flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
 
+    floatingBar: true
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -158,17 +159,6 @@ Maui.ApplicationWindow
     pageStack.interactive: isMobile
     pageStack.separatorVisible: pageStack.wideMode
 
-    overlay.modal: Rectangle
-    {
-        color: isAndroid ? altColor : "transparent"
-        opacity: 0.5
-        height: root.height - footBar.height - headBar.height
-    }
-
-    overlay.modeless: Rectangle
-    {
-        color: "transparent"
-    }
 
     /*HANDLE EVENTS*/
     onWidthChanged: if (isMobile) {
@@ -291,14 +281,13 @@ Maui.ApplicationWindow
         searchView.searchInput.forceActiveFocus()
     }
 
-    footBar.z : 0
-    pageStack.z: 0
 
     footBar.leftContent: Label
     {
         visible: !mainlistEmpty && infoLabels
         text: progressTimeLabel
         color: darkTextColor
+        clip: true
     }
 
     footBar.rightContent: Label
@@ -306,6 +295,7 @@ Maui.ApplicationWindow
         visible: !mainlistEmpty && infoLabels
         text: durationTimeLabel
         color: darkTextColor
+        clip: true
     }
 
     footBar.middleContent: [
@@ -368,17 +358,16 @@ Maui.ApplicationWindow
         }
     ]
 
-
-
     footBar.background: Rectangle
     {
         id: footerBg
-        implicitHeight: isMobile ? toolBarHeight * 0.8 : toolBarHeight
+        clip : true
+        implicitHeight: floatingBar ? toolBarHeight * 0.8 : toolBarHeight
         height: implicitHeight
         color: darkViewBackgroundColor
-        radius: altToolBars ? Math.max(footBar.width, footBar.height) : 0
-        border.color: altToolBars ? Qt.lighter(borderColor, 1.2) : "transparent"
-        layer.enabled: altToolBars
+        radius: floatingBar ? Math.max(footBar.width, footBar.height) : 0
+        border.color: floatingBar ? Qt.lighter(borderColor, 1.2) : "transparent"
+        layer.enabled: floatingBar
         layer.effect: DropShadow
         {
             anchors.fill: footerBg
@@ -408,9 +397,10 @@ Maui.ApplicationWindow
         {
             anchors.fill: parent
             color: "transparent"
-            radius: altToolBars ? Math.max(footBar.width, footBar.height) : 0
+            radius: floatingBar ? Math.max(footBar.width, footBar.height) : 0
             opacity: 0.3
             clip: true
+
             FastBlur
             {
                 id: fastBlur
@@ -424,7 +414,7 @@ Maui.ApplicationWindow
                 z:1
                 clip: true
 
-                layer.enabled: altToolBars
+                layer.enabled: floatingBar
                 layer.effect: OpacityMask
                 {
                     maskSource: Item
@@ -442,7 +432,6 @@ Maui.ApplicationWindow
                 }
             }
         }
-
 
         Slider
         {
@@ -494,7 +483,8 @@ Maui.ApplicationWindow
     FloatingDisk
     {
         id: floatingDisk
-        z: pageStack.z +1
+        anchors.centerIn: footerBg
+        z: 999
     }
 
     Maui.ShareDialog

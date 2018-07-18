@@ -46,7 +46,7 @@ SwipeDelegate
     padding: 0
     clip: true
     autoExclusive: true
-    swipe.enabled: menuItem
+    swipe.enabled: false
     focus: true
     focusPolicy: Qt.StrongFocus
     hoverEnabled: true
@@ -62,17 +62,17 @@ SwipeDelegate
     background: Rectangle
     {
         height: delegateRoot.height
-        color: isCurrentListItem ? highlightColor :  (trackMood.length > 0 ? Qt.lighter(trackMood, 1.5) :
-                                                                             index % 2 === 0 ? Qt.lighter(bgColor) : bgColor)
+        color: isCurrentListItem ? highlightColor : (trackMood.length > 0 ? Qt.lighter(trackMood, 1.5) :
+                                                                            index % 2 === 0 ? Qt.lighter(bgColor) : bgColor)
 
     }
 
     swipe.right: Row
     {
-        padding: 12
+        padding: space.medium
         height: delegateRoot.height
         anchors.right: parent.right
-        spacing: space.big
+        spacing: space.medium
 
         Maui.ToolButton
         {
@@ -131,8 +131,8 @@ SwipeDelegate
             anchors.fill: parent
             acceptedButtons:  Qt.RightButton
             pressAndHoldInterval: 3000
-            onClicked:  if(!isMobile && mouse.button === Qt.RightButton)
-                            rightClicked()
+            onClicked: if(!isMobile && mouse.button === Qt.RightButton)
+                           rightClicked()
 
         }
 
@@ -150,9 +150,10 @@ SwipeDelegate
             {
                 visible: coverArt
                 Layout.fillHeight: true
-                Layout.alignment: Qt.AlignLeft
+                Layout.alignment: Qt.AlignCenter
                 width: altHeight
                 height: parent.height
+
 
                 ToolButton
                 {
@@ -229,9 +230,9 @@ SwipeDelegate
             {
                 visible: quickPlay
                 Layout.fillHeight: true
-                width:  height * 0.5
+                width:  iconSize
                 height: parent.height
-                Layout.leftMargin: sameAlbum ? 0 : space.small
+                Layout.leftMargin: space.small
 
                 Maui.ToolButton
                 {
@@ -282,14 +283,15 @@ SwipeDelegate
                     Label
                     {
                         id: trackTitle
-                        Layout.maximumWidth: gridLayout.width *0.5
+//                        Layout.maximumWidth: gridLayout.width *0.5
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.row: 1
                         Layout.column: 2
                         verticalAlignment:  Qt.AlignVCenter
-                        text: title
+                        text: model.title
                         font.bold: !sameAlbum
+                        font.weight: Font.Bold
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.default
                         color: labelColor
@@ -302,11 +304,11 @@ SwipeDelegate
                         visible: coverArt ? !sameAlbum : true
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        Layout.maximumWidth: gridLayout.width*0.4
+//                        Layout.maximumWidth: gridLayout.width*0.4
                         Layout.row: 2
                         Layout.column: 2
                         verticalAlignment:  Qt.AlignVCenter
-                        text: artist + " | " + album
+                        text: model.artist + " | " + model.album
                         font.bold: false
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.medium
@@ -314,57 +316,12 @@ SwipeDelegate
 
                     }
 
-
-                    //        Item
-                    //        {
-                    //            Layout.row: 1
-                    //            Layout.rowSpan: 2
-                    //            Layout.column: 4
-                    //            height: 48
-                    //            width: height
-                    //            Layout.fillWidth: true
-                    //            Layout.fillHeight: true
-                    //            Layout.alignment: Qt.AlignCenter
-
-                    //            AnimatedImage
-                    //            {
-                    //                id: animation
-                    //                cache: true
-                    //                visible: playingIndicator
-                    //                height: 22
-                    //                width: 22
-                    //                horizontalAlignment: Qt.AlignLeft
-                    //                verticalAlignment:  Qt.AlignVCenter
-                    //                source: "qrc:/assets/bars.gif"
-                    //            }
-                    //        }
-
-                    //                Label
-                    //                {
-                    //                    id: trackDuration
-                    //                    visible: trackDurationVisible
-                    //                    Layout.alignment: Qt.AlignRight
-
-                    //                    Layout.fillWidth: true
-                    //                    Layout.fillHeight: true
-                    //                    Layout.row: 1
-                    //                    Layout.column: 3
-                    //                    horizontalAlignment: Qt.AlignRight
-                    //                    verticalAlignment:  Qt.AlignVCenter
-                    //                    text: player.transformTime(duration)
-                    //                    font.bold: false
-                    //                    elide: Text.ElideRight
-                    //                    font.pointSize: 8
-                    //                    color: labelColor
-                    //                }
-
-
                     Label
                     {
                         id: trackBabe
 
                         font.family: "Material Design Icons"
-                        visible: babe == "1"
+                        visible: model.babe == "1"
                         Layout.alignment: Qt.AlignRight
 
                         Layout.fillWidth: true
@@ -374,37 +331,11 @@ SwipeDelegate
                         Layout.column: /*trackDurationVisible &&*/ sameAlbum ? 4 : 3
                         horizontalAlignment: Qt.AlignRight
                         verticalAlignment:  Qt.AlignVCenter
-                        text: babe == "1" ? "\uf2D1" : ""
+                        text: model.babe == "1" ? "\uf2D1" : ""
                         font.bold: false
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.small
                         color: labelColor
-
-                        //                    onTextChanged: animBabe.start()
-
-                        //                    SequentialAnimation
-                        //                    {
-                        //                        id: animBabe
-                        //                        PropertyAnimation
-                        //                        {
-                        //                            target: trackBabe
-                        //                            property: "color"
-                        //                            easing.type: Easing.InOutQuad
-                        //                            to: babeColor
-                        //                            duration: 250
-                        //                        }
-
-                        //                        PropertyAnimation
-                        //                        {
-                        //                            target: trackBabe
-                        //                            property: "color"
-                        //                            easing.type: Easing.InOutQuad
-                        //                            to: labelColor
-                        //                            duration: 500
-                        //                        }
-                        //                    }
-
-
                     }
 
 
@@ -422,7 +353,7 @@ SwipeDelegate
                         //                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
                         horizontalAlignment: Qt.AlignRight
                         verticalAlignment:  Qt.AlignVCenter
-                        text: H.setStars(stars)
+                        text: H.setStars(model.stars)
                         font.bold: false
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.small
@@ -435,7 +366,7 @@ SwipeDelegate
             {
                 visible: menuItem
                 Layout.fillHeight: true
-                width: parent.height * 0.5
+                width: space.enormus
 
                 MouseArea
                 {
@@ -443,6 +374,7 @@ SwipeDelegate
                     property var downTimestamp;
                     property int startX
                     property int startMouseX
+                    z: delegateRoot.z +1
 
                     anchors.fill: parent
                     preventStealing: true
@@ -457,7 +389,7 @@ SwipeDelegate
                     Maui.ToolButton
                     {
                         id: menuBtn
-                        visible: handle.pressed || swipe.position < 0
+                        visible: true
                         anchors.centerIn: parent
                         iconName: "overflow-menu"
                         iconColor:  labelColor
@@ -467,5 +399,10 @@ SwipeDelegate
                 }
             }
         }
+    }
+
+    function rate(stars)
+    {
+        trackRating.text = stars
     }
 }
