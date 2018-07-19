@@ -3,6 +3,7 @@ import org.kde.maui 1.0 as Maui
 import "../view_models/BabeTable"
 import "../view_models"
 import "../db/Queries.js" as Q
+import "../utils/Help.js" as H
 
 BabeTable
 {
@@ -10,11 +11,17 @@ BabeTable
     trackNumberVisible: false
     trackDuration: true
     trackRating: true
-    headBarVisible: true
+    headBarVisible: !holder.visible
     headBarTitle: count + " tracks"
     headBarExit: false
     coverArtVisible: false
     sortBy: "album"
+
+    holder.emoji: "qrc:/assets/MusicCloud.png"
+    holder.isMask: false
+    holder.title : "No Tracks!"
+    holder.body: "Add new music sources"
+    holder.emojiSize: iconSizes.huge
 
     function populate()
     {

@@ -16,7 +16,6 @@ BabePopup
         bae.scanDir(folderUrl)
     }
 
-
     BabeMessage
     {
         id: confirmationDialog

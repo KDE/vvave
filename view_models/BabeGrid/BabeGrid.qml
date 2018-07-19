@@ -4,13 +4,12 @@ import ".."
 import org.kde.kirigami 2.0 as Kirigami
 import org.kde.maui 1.0 as Maui
 
-Pane
+Maui.Page
 {
     id: gridPage
-    padding: space.big
-
+    headBarVisible: false
     //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
-//    property int hintSize : Math.sqrt(root.width*root.height)*0.3
+    //    property int hintSize : Math.sqrt(root.width*root.height)*0.3
 
     property int albumCoverSize: iconSizes.enormous
     readonly property int albumSpacing: albumCoverSize * 0.3 + space.small
@@ -19,6 +18,7 @@ Pane
     property bool albumCardVisible : true
     property alias gridModel: gridModel
     property alias grid: grid
+    property alias holder: holder
 
     signal albumCoverClicked(string album, string artist)
     signal albumCoverPressed(string album, string artist)
@@ -40,8 +40,8 @@ Pane
 
     Maui.Holder
     {
+        id: holder
         visible: grid.count === 0
-        message: "No albums..."
     }
 
     ListModel {id: gridModel}
@@ -100,7 +100,7 @@ Pane
                     var album = grid.model.get(index).album
                     var artist = grid.model.get(index).artist
                     albumCoverPressed(album, artist)
-                }                
+                }
             }
         }
 

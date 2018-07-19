@@ -244,7 +244,11 @@ Page
                     headBarExit: true
                     headBarExitIcon: "edit-clear"
                     headBarTitle: "YouTube"
-                    holder.message: "No YouTube results!"
+                    holder.emoji: "qrc:/assets/Astronaut.png"
+                    holder.isMask: false
+                    holder.title : "No Results!"
+                    holder.body: "Try with another query"
+                    holder.emojiSize: iconSizes.huge
                     coverArtVisible: true
                     trackDuration: true
                     trackRating: true

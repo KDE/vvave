@@ -96,7 +96,11 @@ Page
             headBarVisible: true
             headBarExit: true
             headBarExitIcon: "edit-clear"
-            holder.message: "<h2>No search results!</h2><p>Try with another query</p>"
+            holder.emoji: "qrc:/assets/BugSearch.png"
+            holder.isMask: false
+            holder.title : "No search results!"
+            holder.body: "Try with another query"
+            holder.emojiSize: iconSizes.huge
             coverArtVisible: true
             trackDuration: true
             trackRating: true

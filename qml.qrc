@@ -9,7 +9,6 @@
         <file>data_models/db_model.qml</file>
         <file>db/script.sql</file>
         <file>utils/Player.js</file>
-        <file>assets/face.png</file>
         <file>db/Queries.js</file>
         <file>utils/Help.js</file>
         <file>view_models/BabeScrollBar.qml</file>
@@ -28,21 +27,8 @@
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
         <file>utils/Props.js</file>
-        <file>assets/face-sleeping.svg</file>
-        <file>assets/face-laughing.svg</file>
-        <file>assets/face-hug-left.svg</file>
-        <file>assets/face-crying.svg</file>
-        <file>assets/face-sleeping.png</file>
-        <file>assets/face-hug.png</file>
         <file>widgets/SettingsView/SettingsView.qml</file>
         <file>widgets/MyBeatView/LogginForm.qml</file>
-        <file>assets/music_img.jpg</file>
-        <file>assets/beat.png</file>
-        <file>assets/beat-banner3.png</file>
-        <file>assets/beat-banner2.png</file>
-        <file>assets/beat-banner.png</file>
-        <file>assets/beat2.png</file>
-        <file>assets/beat.svg</file>
         <file>view_models/BabeMenu/BabeMenu.qml</file>
         <file>view_models/BabeDialog/BabeMessage.qml</file>
         <file>view_models/BabeDialog/BabeDialog.qml</file>
@@ -79,5 +65,15 @@
         <file>services/web/WebView.qml</file>
         <file>services/web/WebView_A.qml</file>
         <file>view_models/BabeTable/GroupDialog.qml</file>
+        <file>assets/Bread.png</file>
+        <file>assets/ElectricPlug.png</file>
+        <file>assets/Electricity.png</file>
+        <file>assets/USB.png</file>
+        <file>assets/Radio.png</file>
+        <file>assets/MusicBox.png</file>
+        <file>assets/Video tutorial.png</file>
+        <file>assets/BugSearch.png</file>
+        <file>assets/Astronaut.png</file>
+        <file>assets/MusicCloud.png</file>
     </qresource>
 </RCC>

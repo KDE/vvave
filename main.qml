@@ -273,7 +273,6 @@ Maui.ApplicationWindow
         }
     ]
 
-
     onSearchButtonClicked:
     {
         pageStack.currentIndex = 1
@@ -281,6 +280,7 @@ Maui.ApplicationWindow
         searchView.searchInput.forceActiveFocus()
     }
 
+    footBar.visible: !mainlistEmpty
 
     footBar.leftContent: Label
     {
@@ -362,7 +362,7 @@ Maui.ApplicationWindow
     {
         id: footerBg
         clip : true
-        implicitHeight: floatingBar ? toolBarHeight * 0.8 : toolBarHeight
+        implicitHeight: floatingBar ? toolBarHeight * 0.7 : toolBarHeight
         height: implicitHeight
         color: darkViewBackgroundColor
         radius: floatingBar ? Math.max(footBar.width, footBar.height) : 0
@@ -894,6 +894,12 @@ Maui.ApplicationWindow
                 {
                     id: albumsView
 
+                    grid.holder.emoji: "qrc:/assets/MusicBox.png"
+                    grid.holder.isMask: false
+                    grid.holder.title : "No Albums!"
+                    grid.holder.body: "Add new music sources"
+                    grid.holder.emojiSize: iconSizes.huge
+
                     Connections
                     {
                         target: albumsView
@@ -945,6 +951,12 @@ Maui.ApplicationWindow
                 AlbumsView
                 {
                     id: artistsView
+
+                    grid.holder.emoji: "qrc:/assets/MusicBox.png"
+                    grid.holder.isMask: false
+                    grid.holder.title : "No Artists!"
+                    grid.holder.body: "Add new music sources"
+                    grid.holder.emojiSize: iconSizes.huge
 
                     Connections
                     {

@@ -55,13 +55,13 @@ Item
             id: cover
             Layout.alignment: Qt.AlignBottom | Qt.AlignTop
             Layout.fillWidth: true
-            Layout.preferredHeight: visible ? coverSize : 0
+            Layout.preferredHeight: !mainlistEmpty ? coverSize : 0
             Layout.maximumHeight: coverSize
-            visible:  !mainlistEmpty
+            visible: !mainlistEmpty
 
             Rectangle
             {
-                visible: cover.visible
+                visible: !mainlistEmpty
                 anchors.fill: parent
                 color: viewBackgroundColor
                 z: -999
@@ -69,7 +69,7 @@ Item
                 Image
                 {
                     id: artwork
-                    visible: true
+                    visible: !mainlistEmpty
                     anchors.fill: parent
                     sourceSize.height: coverSize * 0.2
                     sourceSize.width: coverSize * 0.2
@@ -110,7 +110,7 @@ Item
             clip: false
             width: parent.width
             implicitHeight: toolBarHeightAlt
-            visible : !focusMode
+            visible : !focusMode &&  !mainlistEmpty
             Layout.alignment: Qt.AlignBottom | Qt.AlignTop
 
             Layout.fillWidth: true
@@ -267,9 +267,11 @@ Item
                     trackRating: true
                     showIndicator : true
                     menuItemVisible: false
-                    holder.message : "<h2>Meh!</h2><p>Start putting together your playlist!</p>"
-                    holder.emoji: "qrc:/assets/face-sleeping.png"
-
+                    holder.emoji: "qrc:/assets/Radio.png"
+                    holder.isMask: false
+                    holder.title : "Meh!"
+                    holder.body: "Start putting together your playlist!"
+                    holder.emojiSize: iconSizes.huge
                     onRowClicked: play(index)
 
                     onArtworkDoubleClicked: contextMenu.babeIt(index)

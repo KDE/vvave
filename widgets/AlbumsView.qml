@@ -61,6 +61,12 @@ Kirigami.PageRow
             quickPlayVisible: true
             focus: true
 
+            holder.emoji: "qrc:/assets/ElectricPlug.png"
+            holder.isMask: false
+            holder.title : "Oops!"
+            holder.body: "This list is empty"
+            holder.emojiSize: iconSizes.huge
+
             onRowClicked:
             {
                 albumsPageRoot.rowClicked(model.get(index))

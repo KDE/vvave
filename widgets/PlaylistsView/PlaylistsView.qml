@@ -121,8 +121,11 @@ Kirigami.PageRow
             onExit: if(!playlistViewRoot.wideMode)
                         playlistViewRoot.currentIndex = 0
 
-            holder.message:  "<h2>"+playlistViewModel.model.get(playlistViewModel.currentIndex).playlist+"</h2><p>Your playlist is empty,<br>start adding new music to it</p>"
-            holder.emoji: "qrc:/assets/face-hug.png"
+            holder.emoji: "qrc:/assets/Electricity.png"
+            holder.isMask: false
+            holder.title : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
+            holder.body: "Your playlist is empty,<br>start adding new music to it"
+            holder.emojiSize: iconSizes.huge
 
             headerMenu.menuItem:  [
                 MenuItem

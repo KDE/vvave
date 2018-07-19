@@ -47,7 +47,6 @@ function refreshCollection(size)
 {
     if(!isMobile && size>0) bae.notify("Collection updated", size+" new tracks added...")
 
-    console.log("Clearing tables")
     refreshTracks()
     refreshAlbums()
     refreshArtists()
@@ -92,4 +91,9 @@ function searchFor(query)
         currentView = viewsIndex.search
 
     searchView.runSearch(query)
+}
+
+function addSource()
+{
+    sourcesDialog.open()
 }

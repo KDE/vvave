@@ -31,7 +31,7 @@ ColumnLayout
 
         clip: true
         separatorVisible: wideMode
-        initialPage: [playlistList, linkingResults]
+        initialPage: [playlistList, filterList]
         defaultColumnWidth: Kirigami.Units.gridUnit * 15
         interactive: false
 
@@ -83,16 +83,14 @@ ColumnLayout
             }
         }
 
-        Page
-        {
-            id: linkingResults
-            anchors.fill: parent
-            clip: true
+
 
             BabeTable
             {
                 id: filterList
                 anchors.fill: parent
+                clip: true
+
                 quickPlayVisible: true
                 coverArtVisible: false
                 trackRating: true
@@ -105,8 +103,13 @@ ColumnLayout
                 onExit: if(!linkingPage.wideMode)
                             linkingPage.currentIndex = 0
 
-                holder.message:  "<h2>"+link.getDeviceName()+"</h2><p>Your linked playlist is empty</p>"
-                holder.emoji: "qrc:/assets/face-hug.png"
+
+                holder.emoji: "qrc:/assets/USB.png"
+                holder.isMask: false
+                holder.title : link.getDeviceName() ? link.getDeviceName() :
+                                                      "Disconnected!"
+                holder.body: "Your linked playlist is empty"
+                holder.emojiSize: iconSizes.huge
 
                 appendBtn.visible: false
                 playAllBtn.visible: false
@@ -138,7 +141,7 @@ ColumnLayout
                     onPulled: {}
                 }
             }
-        }
+
 
     }
 
