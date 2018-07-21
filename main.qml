@@ -40,7 +40,6 @@ Maui.ApplicationWindow
     //        flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
 
-    floatingBar: true
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -365,7 +364,7 @@ Maui.ApplicationWindow
         implicitHeight: floatingBar ? toolBarHeight * 0.7 : toolBarHeight
         height: implicitHeight
         color: darkViewBackgroundColor
-        radius: floatingBar ? Math.max(footBar.width, footBar.height) : 0
+        radius: floatingBar ? unit * 6 : 0
         border.color: floatingBar ? Qt.lighter(borderColor, 1.2) : "transparent"
         layer.enabled: floatingBar
         layer.effect: DropShadow
@@ -397,7 +396,7 @@ Maui.ApplicationWindow
         {
             anchors.fill: parent
             color: "transparent"
-            radius: floatingBar ? Math.max(footBar.width, footBar.height) : 0
+            radius: footerBg.radius
             opacity: 0.3
             clip: true
 
@@ -426,7 +425,7 @@ Maui.ApplicationWindow
                             anchors.centerIn: parent
                             width: footBar.width
                             height: footBar.height
-                            radius: Math.max(footBar.width, footBar.height)
+                            radius: footerBg.radius
                         }
                     }
                 }
@@ -1122,7 +1121,7 @@ Maui.ApplicationWindow
         if(isAndroid)
         {
             switchColorScheme(style)
-            Maui.Android.statusbarColor(viewBackgroundColor, false)
+            Maui.Android.statusbarColor(backgroundColor, false)
         }
     }
 

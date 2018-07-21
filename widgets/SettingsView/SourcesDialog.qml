@@ -1,7 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import Qt.labs.platform 1.0
 import org.kde.maui 1.0 as Maui
 import "../../view_models"
 import "../../view_models/BabeDialog"
