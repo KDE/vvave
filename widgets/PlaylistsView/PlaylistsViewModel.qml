@@ -44,23 +44,24 @@ BabeList
     {
         id: playlistListModel
 
-        ListElement { playlist: qsTr("Most Played"); playlistIcon: "view-media-playcount"; /*query: Q.Query.mostPlayedTracks*/ }
-        ListElement { playlist: qsTr("Favorites"); playlistIcon: "view-media-favorite"}
-        ListElement { playlist: qsTr("Recent"); playlistIcon: "view-media-recent"}
-        ListElement { playlist: qsTr("Babes"); playlistIcon: "love"}
-        ListElement { playlist: qsTr("Online"); playlistIcon: "internet-services"}
-        ListElement { playlist: qsTr("Tags"); playlistIcon: "tag"}
-        ListElement { playlist: qsTr("Relationships"); playlistIcon: "view-media-similarartists"}
-        ListElement { playlist: qsTr("Popular"); playlistIcon: "view-media-chart"}
-        ListElement { playlist: qsTr("Genres"); playlistIcon: "view-media-genre"}
+        ListElement { playlist: qsTr("Most Played"); icon: "view-media-playcount"; /*query: Q.Query.mostPlayedTracks*/ }
+        ListElement { playlist: qsTr("Favorites"); icon: "view-media-favorite"}
+        ListElement { playlist: qsTr("Recent"); icon: "view-media-recent"}
+        ListElement { playlist: qsTr("Babes"); icon: "love"}
+        ListElement { playlist: qsTr("Online"); icon: "internet-services"}
+        ListElement { playlist: qsTr("Tags"); icon: "tag"}
+        ListElement { playlist: qsTr("Relationships"); icon: "view-media-similarartists"}
+        ListElement { playlist: qsTr("Popular"); icon: "view-media-chart"}
+        ListElement { playlist: qsTr("Genres"); icon: "view-media-genre"}
     }
 
     model: playlistListModel
 
-    delegate : PlaylistViewDelegate
+    delegate : Maui.ListDelegate
     {
         id: delegate
         width: playlistListRoot.width
+        label: model.playlist
 
         Connections
         {

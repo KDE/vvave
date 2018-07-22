@@ -22,7 +22,6 @@
         <file>widgets/MainPlaylist/MainPlaylist.qml</file>
         <file>widgets/MainPlaylist/PlaylistMenu.qml</file>
         <file>widgets/PlaylistsView/PlaylistsView.qml</file>
-        <file>widgets/PlaylistsView/PlaylistViewDelegate.qml</file>
         <file>widgets/InfoView/InfoView.qml</file>
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
