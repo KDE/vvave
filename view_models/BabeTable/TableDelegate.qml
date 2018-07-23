@@ -14,7 +14,7 @@ SwipeDelegate
 {
     id: delegateRoot
 
-    readonly property int altHeight : rowHeight * 1.2
+    readonly property int altHeight : rowHeight * 1.3
     readonly property bool sameAlbum :
     {
         if(coverArt)
@@ -230,7 +230,7 @@ SwipeDelegate
             {
                 visible: quickPlay
                 Layout.fillHeight: true
-                width:  iconSize
+                width:  iconSize * 1.5
                 height: parent.height
                 Layout.leftMargin: space.small
 

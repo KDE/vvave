@@ -57,7 +57,7 @@ if (ANDROID)
     target_sources(vvave PRIVATE
         android/android.cpp
         android/notificationclient.cpp
-        android.qrc
+        android/android.qrc
     )
     target_link_libraries(vvave Qt5::AndroidExtras Qt5::WebView)
     add_dependencies(vvave taglib)
