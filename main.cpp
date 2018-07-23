@@ -26,7 +26,7 @@
 #include "services/web/youtube.h"
 #include "services/web/Spotify/spotify.h"
 #include "services/local/linking.h"
-#include "mauikit/src/mauikit.h"
+#include "./mauikit/src/mauikit.h"
 
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
@@ -111,9 +111,7 @@ int main(int argc, char *argv[])
         QtWebEngine::initialize();
 #endif
 
-#ifdef MAUI_APP
     MauiKit::getInstance().registerTypes();
-#endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
