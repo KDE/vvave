@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.0)
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
 
+
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Network WebSockets Sql QuickControls2 Xml Multimedia Widgets DBus)
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
@@ -12,9 +13,12 @@ include(ECMInstallIcons)
 include(FeatureSummary)
 include(ECMAddAppIcon)
 add_subdirectory(mauikit)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTORCC ON)
 
 add_executable(vvave
+    mauikit
     qml.qrc
     main.cpp
     babe.cpp
@@ -67,14 +71,13 @@ else()
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)
     find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config)
     target_sources(vvave PRIVATE
-        kde/kdeconnect.cpp
         kde/mpris2.cpp
         kde/notify.cpp
     )
     target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::I18n Qt5::DBus)
 endif()
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
-target_link_libraries(vvave Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets ${TAGLIB_LIBRARIES})
+target_link_libraries(vvave MAUIKIT TAGGING Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets ${TAGLIB_LIBRARIES})
 
 install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 # install(FILES org.kde.vvave.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
