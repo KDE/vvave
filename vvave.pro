@@ -79,7 +79,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 DISTFILES += \
-    db/script.sql
+    db/script.sql \
+    CMakeLists.txt
 
 
 HEADERS += \

@@ -11,7 +11,7 @@ include(KDECMakeSettings)
 include(ECMInstallIcons)
 include(FeatureSummary)
 include(ECMAddAppIcon)
-
+add_subdirectory(mauikit)
 set(CMAKE_AUTORCC ON)
 
 add_executable(vvave
