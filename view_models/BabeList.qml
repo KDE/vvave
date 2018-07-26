@@ -7,8 +7,7 @@ import org.kde.maui 1.0 as Maui
 
 Maui.Page
 {
-    id: babeListRoot
-
+    id: control
     property alias list : babeList
     property alias model : babeList.model
     property alias delegate : babeList.delegate
@@ -62,7 +61,7 @@ Maui.Page
         Keys.onReturnPressed: rowClicked(currentIndex)
         Keys.onEnterPressed: quickPlayTrack(currentIndex)
 
-        boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.DragAndOvershootBounds
+        boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.OvershootBounds
         flickableDirection: Flickable.AutoFlickDirection
 
         snapMode: ListView.SnapToItem
