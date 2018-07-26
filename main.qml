@@ -432,51 +432,52 @@ Maui.ApplicationWindow
                 }
             }
         }
-
-        Slider
+    }
+    Slider
+    {
+        id: progressBar
+        height: unit * 8
+        width: parent.width
+        anchors
         {
-            id: progressBar
-            height: iconSizes.big
-            width: parent.width
-            anchors.left:  parent.left
-            anchors.right: parent.right
-            anchors.top: parent.top
-            padding: 0
-            from: 0
-            to: 1000
-            value: 0
-            spacing: 0
-            focus: true
-            onMoved: player.seek(player.duration() / 1000 * value)
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
 
-            background: Rectangle
+        padding: 0
+        from: 0
+        to: 1000
+        value: 0
+        spacing: 0
+        focus: true
+        onMoved: player.seek(player.duration() / 1000 * value)
+
+        background: Rectangle
+        {
+            implicitWidth: progressBar.width
+            implicitHeight: progressBar.height
+            width: progressBar.availableWidth
+            height: implicitHeight
+            color: "transparent"
+
+            Rectangle
             {
-                x: progressBar.leftPadding
-                y: progressBar.y
-                implicitWidth: 200
-                implicitHeight: Kirigami.Units.devicePixelRatio * 3
-                width: progressBar.availableWidth
-                height: implicitHeight
-                color: "transparent"
-
-                Rectangle
-                {
-                    width: progressBar.visualPosition * parent.width
-                    height: Kirigami.Units.devicePixelRatio * 3
-                    color: babeColor
-                }
-            }
-
-            handle: Rectangle
-            {
-                x: progressBar.leftPadding + progressBar.visualPosition
-                   * (progressBar.availableWidth - width)
-                y: progressBar.y - (height / 2)
-                implicitWidth: progressBar.pressed ? iconSizes.medium : 0
-                implicitHeight: progressBar.pressed ? iconSizes.medium : 0
-                radius: progressBar.pressed ? iconSizes.medium : 0
+                width: progressBar.visualPosition * parent.width
+                height: progressBar.height
                 color: babeColor
             }
+        }
+
+        handle: Rectangle
+        {
+            x: progressBar.leftPadding + progressBar.visualPosition
+               * (progressBar.availableWidth - width)
+            y: -(progressBar.height * 0.7)
+            implicitWidth: progressBar.pressed ? iconSizes.medium : 0
+            implicitHeight: progressBar.pressed ? iconSizes.medium : 0
+            radius: progressBar.pressed ? iconSizes.medium : 0
+            color: babeColor
         }
     }
 
