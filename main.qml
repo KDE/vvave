@@ -436,7 +436,7 @@ Maui.ApplicationWindow
     Slider
     {
         id: progressBar
-        height: unit * 8
+        height: unit * (isMobile ?  6 : 8)
         width: parent.width
         anchors
         {
