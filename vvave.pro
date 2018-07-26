@@ -13,8 +13,6 @@ TEMPLATE = app
 CONFIG += ordered
 CONFIG += c++11
 
-DESTDIR = $$OUT_PWD/../
-
 linux:unix:!android {
     message(Building for Linux KDE)
     include(kde/kde.pri)

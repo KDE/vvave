@@ -39,7 +39,8 @@ Maui.ApplicationWindow
     //    minimumHeight: !isMobile ? columnWidth + 64 : 0
     //        flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
-
+    floatingBar: true
+    footBarOverlap: true
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -476,7 +477,7 @@ Maui.ApplicationWindow
                 radius: progressBar.pressed ? iconSizes.medium : 0
                 color: babeColor
             }
-        }   
+        }
     }
 
     FloatingDisk
