@@ -476,13 +476,13 @@ Maui.ApplicationWindow
                 radius: progressBar.pressed ? iconSizes.medium : 0
                 color: babeColor
             }
-        }
+        }   
     }
 
     FloatingDisk
     {
         id: floatingDisk
-        anchors.centerIn: footerBg
+        anchors.centerIn: footBar
         z: 999
     }
 
