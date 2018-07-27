@@ -278,6 +278,7 @@ Maui.ApplicationWindow
         pageStack.currentIndex = 1
         currentView = viewsIndex.search
         searchView.searchInput.forceActiveFocus()
+        riseContent()
     }
 
     footBar.visible: !mainlistEmpty
@@ -872,9 +873,11 @@ Maui.ApplicationWindow
                 onCurrentIndexChanged:
                 {
                     currentView = currentIndex
-                    if (!babeitView.isConnected
-                            && currentIndex === viewsIndex.vvave)
+                    if (!babeitView.isConnected && currentIndex === viewsIndex.vvave)
                         babeitView.logginDialog.open()
+
+                    if(currentView === viewsIndex.search)
+                        riseContent()
                 }
 
                 TracksView
