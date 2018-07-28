@@ -49,6 +49,7 @@ Maui.ApplicationWindow
     property alias progressBar: progressBar
     property alias animFooter: animFooter
     property alias mainPlaylist: mainPlaylist
+    property alias selectionBar: selectionBar
 
     /***************************************************/
     /******************** PLAYBACK ********************/
@@ -854,16 +855,15 @@ Maui.ApplicationWindow
         //        focusPolicy: Qt.WheelFocus
         //        visualFocus: true
 
-        Column
+        ColumnLayout
         {
             anchors.fill: parent
 
             SwipeView
             {
                 id: swipeView
-                width: parent.width
-                height: parent.height
-
+                Layout.fillHeight: true
+                Layout.fillWidth: true
                 Component.onCompleted: contentItem.interactive = isMobile
 
                 currentIndex: currentView
@@ -1068,6 +1068,15 @@ Maui.ApplicationWindow
                 {
                     id: spotifyView
                 }
+            }
+            Maui.SelectionBar
+            {
+                id: selectionBar
+                Layout.fillWidth: true
+                Layout.margins: space.huge
+                Layout.topMargin: space.small
+//                onIconClicked: itemMenu.showMultiple(selectedPaths)
+                onExitClicked: clear()
             }
         }
     }

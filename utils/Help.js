@@ -97,3 +97,15 @@ function addSource()
 {
     sourcesDialog.open()
 }
+
+function addToSelection(item)
+{
+    selectionBar.append({
+                            thumbnail: item.artwork,
+                            label: item.title,
+                            mime: "image",
+                            tooltip: item.url,
+                            path: item.url
+
+                        })
+}

@@ -93,7 +93,7 @@ BabeMenu
 
     MenuItem
     {
-        text: "Queue"
+        text: qsTr("Queue")
         onTriggered:
         {
             queueIt(list.currentIndex)
@@ -103,7 +103,7 @@ BabeMenu
 
     MenuItem
     {
-        text: "Save to..."
+        text: qsTr("Save to...")
         onTriggered:
         {
             playlistDialog.tracks = [list.model.get(list.currentIndex).url]
@@ -127,24 +127,24 @@ BabeMenu
 
     MenuItem
     {
-        text: "Edit..."
+        text: qsTr("Edit...")
         onTriggered: {close()}
     }
 
     MenuItem
     {
-        text: "Share..."
+        text: qsTr("Share...")
         onTriggered:
         {
-            isAndroid ? Maui.Android.shareDialog(list.model.get(list.currentIndex).url) :
-                        shareDialog.show(list.model.get(list.currentIndex).url)
+            isAndroid ? Maui.Android.shareDialog([list.model.get(list.currentIndex).url]) :
+                        shareDialog.show([list.model.get(list.currentIndex).url])
             close()
         }
     }
 
     MenuItem
     {
-        text: "Remove"
+        text: qsTr("Remove")
         onTriggered:
         {
             trackRemoved(list.model.get(list.currentIndex).url)
@@ -153,6 +153,15 @@ BabeMenu
         }
     }
 
+    MenuItem
+    {
+        text: qsTr("Select...")
+        onTriggered:
+        {
+            H.addToSelection(list.model.get(list.currentIndex))
+            close()
+        }
+    }
     Column
     {
         id: customItems
