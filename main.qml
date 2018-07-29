@@ -17,6 +17,7 @@ import "widgets/SearchView"
 
 import "view_models"
 import "view_models/BabeDialog"
+import "view_models/BabeTable"
 
 import "services/local"
 import "services/web"
@@ -310,9 +311,9 @@ Maui.ApplicationWindow
             iconColor: currentBabe ? babeColor : darkTextColor
             onClicked: if (!mainlistEmpty)
             {
-                var value = mainPlaylist.contextMenu.babeIt(
-                    currentTrackIndex)
+                var value = H.faveIt([mainPlaylist.list.model.get(currentTrackIndex).url])
                 currentBabe = value
+                mainPlaylist.list.model.get(currentTrackIndex).babe = value ? "1" : "0"
             }
         },
 
@@ -836,6 +837,11 @@ Maui.ApplicationWindow
         }
     }
 
+    PlaylistDialog
+    {
+        id: playlistDialog
+    }
+
     MainPlaylist
     {
         id: mainPlaylist
@@ -1069,14 +1075,40 @@ Maui.ApplicationWindow
                     id: spotifyView
                 }
             }
+
             Maui.SelectionBar
             {
                 id: selectionBar
                 Layout.fillWidth: true
                 Layout.margins: space.huge
                 Layout.topMargin: space.small
-//                onIconClicked: itemMenu.showMultiple(selectedPaths)
+                onIconClicked: contextMenu.show(selectedPaths)
                 onExitClicked: clear()
+
+                TableMenu
+                {
+                    id: contextMenu
+
+                    onFavClicked: H.faveIt(paths)
+
+                    onQueueClicked: H.queueIt(paths)
+                    onSaveToClicked:
+                    {
+                        playlistDialog.tracks = paths
+                        playlistDialog.open()
+                    }
+                    onOpenWithClicked: bae.showFolder(paths)
+
+                    onRemoveClicked:
+                    {
+
+                    }
+                    onRateClicked: H.rateIt(paths, rate)
+
+                    onColorClicked: H.moodIt(paths, color)
+
+
+                }
             }
         }
     }

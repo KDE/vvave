@@ -5,13 +5,13 @@ import QtQuick.Layouts 1.3
 import "../../view_models/BabeMenu"
 import "../../utils"
 import ".."
-import "../../utils/Player.js" as Player
-import "../../utils/Help.js" as H
 
 import org.kde.maui 1.0 as Maui
 
 BabeMenu
 {
+    id: control
+    property var paths : []
 
     property int rate : 0
     property bool babe : false
@@ -19,74 +19,25 @@ BabeMenu
     property string starReg : textColor
     property string starIcon: "draw-star"
 
-    signal trackRemoved(string url)
+    signal removeClicked(var paths)
+    signal favClicked(var paths)
+    signal queueClicked(var paths)
+    signal saveToClicked(var paths)
+    signal openWithClicked(var paths)
+    signal editClicked(var paths)
+    signal shareClicked(var paths)
+    signal selectClicked(var paths)
+    signal rateClicked(var paths, int rate)
+    signal colorClicked(var paths, string color)
 
     property alias menuItem : customItems.children
 
-    function queueIt(index)
-    {
-        Player.queueTracks([list.model.get(index)])
-    }
-
-    function rateIt(rank)
-    {
-        rate = rank
-        if(bae.rateTrack(list.model.get(list.currentIndex).url, rate))
-        {
-            babeTableRoot.list.currentItem.rate(H.setStars(rate))
-            babeTableRoot.ist.model.get(list.currentIndex).stars = rate
-        }
-
-
-        close()
-    }
-
-    function moodIt(color)
-    {
-        if(bae.colorTagTrack(list.model.get(list.currentIndex).url, color))
-        {
-            list.currentItem.trackMood = color
-            list.model.get(list.currentIndex).art = color
-        }
-
-        close()
-    }
-
-    function babeIt(index)
-    {
-        if(list.count>0)
-        {
-            console.log(index);
-            var url = listModel.get(index).url
-            var value = listModel.get(index).babe == "1" ? false : true
-
-            if(bae.babeTrack(url, value))
-                list.model.get(index).babe = value ? "1" : "0"
-
-            return value
-        }
-    }
-
-    Label
-    {
-        id: titleLabel
-        visible: isAndroid
-        padding: isAndroid ? space.small : 0
-        font.bold: true
-        width: parent.width
-        height: isAndroid ? iconSizes.medium : 0
-        horizontalAlignment: Qt.AlignHCenter
-        elide: Text.ElideRight
-        text: list.currentIndex >= 0 ? list.model.get(list.currentIndex).title : ""
-        color: textColor
-    }
-
     MenuItem
     {
-        text: babe == false ? "Babe it" : "UnBabe it"
+        text: babe == false ? qsTr("Fav it"): qsTr("UnFav it")
         onTriggered:
         {
-            babeIt(list.currentIndex)
+            favClicked(paths)
             close()
         }
     }
@@ -96,7 +47,7 @@ BabeMenu
         text: qsTr("Queue")
         onTriggered:
         {
-            queueIt(list.currentIndex)
+            queueClicked(paths)
             close()
         }
     }
@@ -106,8 +57,7 @@ BabeMenu
         text: qsTr("Save to...")
         onTriggered:
         {
-            playlistDialog.tracks = [list.model.get(list.currentIndex).url]
-            playlistDialog.open()
+            saveToClicked(paths)
             close()
         }
     }
@@ -118,9 +68,7 @@ BabeMenu
 
         onTriggered:
         {
-            !isAndroid ?
-                        bae.showFolder(list.model.get(list.currentIndex).url) :
-                        bae.openFile(list.model.get(list.currentIndex).url)
+            openWithClicked(paths)
             close()
         }
     }
@@ -128,7 +76,11 @@ BabeMenu
     MenuItem
     {
         text: qsTr("Edit...")
-        onTriggered: {close()}
+        onTriggered:
+        {
+            editClicked(paths)
+            close()
+        }
     }
 
     MenuItem
@@ -136,8 +88,9 @@ BabeMenu
         text: qsTr("Share...")
         onTriggered:
         {
-            isAndroid ? Maui.Android.shareDialog([list.model.get(list.currentIndex).url]) :
-                        shareDialog.show([list.model.get(list.currentIndex).url])
+            shareClicked(paths)
+            isAndroid ? Maui.Android.shareDialog(paths) :
+                        shareDialog.show(paths)
             close()
         }
     }
@@ -147,21 +100,12 @@ BabeMenu
         text: qsTr("Remove")
         onTriggered:
         {
-            trackRemoved(list.model.get(list.currentIndex).url)
-            listModel.remove(list.currentIndex)
+            removeClicked(paths)
+            //            listModel.remove(list.currentIndex)
             close()
         }
     }
 
-    MenuItem
-    {
-        text: qsTr("Select...")
-        onTriggered:
-        {
-            H.addToSelection(list.model.get(list.currentIndex))
-            close()
-        }
-    }
     Column
     {
         id: customItems
@@ -184,7 +128,12 @@ BabeMenu
                 iconName: starIcon
                 size: iconSizes.small
                 iconColor: rate >= 1 ? starColor :starReg
-                onClicked: rateIt(1)
+                onClicked:
+                {
+                    rate = 1
+                    rateClicked(paths, rate)
+                    close()
+                }
             }
 
             Maui.ToolButton
@@ -194,7 +143,12 @@ BabeMenu
                 size: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 2 ? starColor :starReg
-                onClicked: rateIt(2)
+                onClicked:
+                {
+                    rate = 2
+                    rateClicked(paths, rate)
+                    close()
+                }
             }
 
             Maui.ToolButton
@@ -204,8 +158,12 @@ BabeMenu
                 size: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 3 ? starColor :starReg
-
-                onClicked: rateIt(3)
+                onClicked:
+                {
+                    rate = 3
+                    rateClicked(paths, rate)
+                    close()
+                }
             }
 
             Maui.ToolButton
@@ -215,8 +173,12 @@ BabeMenu
                 size: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 4 ? starColor :starReg
-
-                onClicked: rateIt(4)
+                onClicked:
+                {
+                    rate = 4
+                    rateClicked(paths, rate)
+                    close()
+                }
             }
 
             Maui.ToolButton
@@ -226,8 +188,12 @@ BabeMenu
                 size: iconSizes.small
                 iconName: starIcon
                 iconColor: rate >= 5 ? starColor :starReg
-
-                onClicked: rateIt(5)
+                onClicked:
+                {
+                    rate = 5
+                    rateClicked(paths, rate)
+                    close()
+                }
             }
         }
 
@@ -242,7 +208,16 @@ BabeMenu
         ColorTagsBar
         {
             anchors.fill: parent
-            onColorClicked: moodIt(color)
+            onColorClicked: control.colorClicked(paths, color)
         }
+    }
+
+    function show(urls)
+    {
+        paths = urls
+        if(root.isMobile)
+            contextMenu.open()
+        else
+            contextMenu.popup()
     }
 }

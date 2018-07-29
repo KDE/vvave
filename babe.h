@@ -74,7 +74,7 @@ public:
     Q_INVOKABLE static int lastPlaylistPos();
 
     Q_INVOKABLE static bool fileExists(const QString &url);
-    Q_INVOKABLE static void showFolder(const QString &url);
+    Q_INVOKABLE static void showFolder(const QStringList &urls);
 
     /*COLORS*/
     Q_INVOKABLE static QString babeColor();

@@ -1,5 +1,5 @@
 .import "../db/Queries.js" as Q
-
+.import "../utils/Player.js" as Player
 
 function rootWidth()
 {
@@ -108,4 +108,54 @@ function addToSelection(item)
                             path: item.url
 
                         })
+}
+
+
+function queueIt(paths)
+{
+    var data = bae.getList(paths)
+    Player.queueTracks(data)
+}
+
+function rateIt(paths, rate)
+{
+    for(var i in paths)
+    {
+        var url = paths[i]
+        if(bae.rateTrack(url, rate))
+            if(paths.length === 1)
+                return rate
+    }
+}
+
+function moodIt(paths, color)
+{
+    if(paths.length > 0)
+        for(var i in paths)
+            bae.colorTagTrack(paths[i], color)
+}
+
+function isFav(url)
+{
+    var data = bae.get(Q.GET.tracksWhere_.arg("t.url =  %1").arg(url))
+    if(data.lenght > 0)
+        return data[0].babe === 1 ? true : false
+}
+
+function faveIt(paths)
+{
+    if(paths.length > 0)
+    {
+        for(var i in paths)
+        {
+            var url = paths[i]
+            var value = bae.trackBabe(url) ? false : true
+
+            if(bae.babeTrack(url, value))
+                if(paths.length === 1)
+                    return value
+
+
+        }
+    }
 }

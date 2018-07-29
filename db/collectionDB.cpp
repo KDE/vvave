@@ -528,8 +528,8 @@ DB_LIST CollectionDB::getDBData(const QStringList &urls)
 
     for(auto url : urls)
     {
-        auto queryTxt = QString("SELECT * FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
-                KEYMAP[KEY::URL],url);
+        auto queryTxt = QString("SELECT * FROM %1 t INNER JOIN albums a on a.album = t.album and a.artist = t.artist WHERE t.%2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
+                KEYMAP[KEY::URL], url);
 
         mapList << this->getDBData(queryTxt);
     }

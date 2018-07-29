@@ -35,9 +35,9 @@
 
 class InterfaceConnFailedException : public QException
 {
-    public:
-        void raise() const { throw *this; }
-        InterfaceConnFailedException *clone() const { return new InterfaceConnFailedException(*this); }
+public:
+    void raise() const { throw *this; }
+    InterfaceConnFailedException *clone() const { return new InterfaceConnFailedException(*this); }
 };
 #elif defined(Q_OS_WINDOWS)
 #elif defined(Q_OS_DARWIN)
@@ -64,9 +64,9 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
     {
         switch(table)
         {
-            case BAE::TABLE::TRACKS: emit this->refreshTracks(); break;
-            case BAE::TABLE::ALBUMS: emit this->refreshAlbums(); break;
-            case BAE::TABLE::ARTISTS: emit this->refreshArtists(); break;
+        case BAE::TABLE::TRACKS: emit this->refreshTracks(); break;
+        case BAE::TABLE::ALBUMS: emit this->refreshAlbums(); break;
+        case BAE::TABLE::ARTISTS: emit this->refreshArtists(); break;
         }
 
     });
@@ -100,7 +100,7 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
 
     connect(android, &Android::folderPicked, [this](const QString &url)
     {
-       qDebug()<< "Folder picked"<< url;
+        qDebug()<< "Folder picked"<< url;
     });
 #endif
 
@@ -259,46 +259,46 @@ void Babe::linkDecoder(QString json)
 
     switch(static_cast<LINK::CODE>(code))
     {
-        case LINK::CODE::CONNECTED :
-        {
-            this->link.deviceName = msg;
-            emit this->link.serverConReady(msg);
-            break;
-        }
-        case LINK::CODE::QUERY :
-        case LINK::CODE::FILTER :
-        case LINK::CODE::PLAYLISTS :
-        {
-            auto res = this->getDBDataQML(msg);
-            link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
-            break;
-        }
-        case LINK::CODE::SEARCHFOR :
-        {
-            auto res = this->searchFor(msg.split(","));
-            link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
-            break;
-        }
-        case LINK::CODE::PLAY :
-        {
-            QFile file(msg);    // sound dir
-            file.open(QIODevice::ReadOnly);
-            QByteArray arr = file.readAll();
-            qDebug()<<"Preparing track array"<<msg<<arr.size();
-            link.sendArrayToClient(arr);
-            break;
-        }
-        case LINK::CODE::COLLECT :
-        {
-//            auto devices = getDevices();
-//            qDebug()<<"DEVICES:"<< devices;
-//            if(!devices.isEmpty())
-//                sendToDevice(devices.first().toMap().value("name").toString(),
-//                             devices.first().toMap().value("id").toString(), msg);
-            break;
+    case LINK::CODE::CONNECTED :
+    {
+        this->link.deviceName = msg;
+        emit this->link.serverConReady(msg);
+        break;
+    }
+    case LINK::CODE::QUERY :
+    case LINK::CODE::FILTER :
+    case LINK::CODE::PLAYLISTS :
+    {
+        auto res = this->getDBDataQML(msg);
+        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
+        break;
+    }
+    case LINK::CODE::SEARCHFOR :
+    {
+        auto res = this->searchFor(msg.split(","));
+        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
+        break;
+    }
+    case LINK::CODE::PLAY :
+    {
+        QFile file(msg);    // sound dir
+        file.open(QIODevice::ReadOnly);
+        QByteArray arr = file.readAll();
+        qDebug()<<"Preparing track array"<<msg<<arr.size();
+        link.sendArrayToClient(arr);
+        break;
+    }
+    case LINK::CODE::COLLECT :
+    {
+        //            auto devices = getDevices();
+        //            qDebug()<<"DEVICES:"<< devices;
+        //            if(!devices.isEmpty())
+        //                sendToDevice(devices.first().toMap().value("name").toString(),
+        //                             devices.first().toMap().value("id").toString(), msg);
+        break;
 
-        }
-        default: break;
+    }
+    default: break;
 
     }
 }
@@ -502,10 +502,10 @@ bool Babe::fileExists(const QString &url)
     return BAE::fileExists(url);
 }
 
-void Babe::showFolder(const QString &url)
+void Babe::showFolder(const QStringList &urls)
 {
-    QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(url).dir().absolutePath()));
-
+    for(auto url : urls)
+        QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(url).dir().absolutePath()));
 }
 
 QString Babe::babeColor()
@@ -527,7 +527,7 @@ void Babe::androidStatusBarColor(const QString &color, const bool &contrast)
         if(contrast)
         {
             QAndroidJniObject decorView = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
-               decorView.callMethod<void>("setSystemUiVisibility", "(I)V", 0x00002000);
+            decorView.callMethod<void>("setSystemUiVisibility", "(I)V", 0x00002000);
         }
 
     });

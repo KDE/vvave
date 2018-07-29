@@ -72,11 +72,6 @@ BabeList
         }
     ]
 
-    PlaylistDialog
-    {
-        id: playlistDialog
-    }
-
     HeaderMenu
     {
         id: headerMenu
@@ -95,6 +90,51 @@ BabeList
     TableMenu
     {
         id: contextMenu
+
+        menuItem: MenuItem
+        {
+            text: qsTr("Select...")
+            onTriggered:
+            {
+                H.addToSelection(list.model.get(list.currentIndex))
+                contextMenu.close()
+            }
+        }
+
+        onFavClicked:
+        {
+            var value = H.faveIt(paths)
+            model.get(list.currentIndex).babe = value ? "1" : "0"
+        }
+
+        onQueueClicked: H.queueIt(paths)
+        onSaveToClicked:
+        {
+            playlistDialog.tracks = paths
+            playlistDialog.open()
+        }
+        onOpenWithClicked: bae.showFolder(paths)
+
+        onRemoveClicked:
+        {
+           listModel.remove(list.currentIndex)
+        }
+
+        onRateClicked:
+        {
+            var value = H.rateIt(paths, rate)
+            list.currentItem.rate(H.setStars(value))
+            ist.model.get(list.currentIndex).stars = value
+        }
+        onColorClicked:
+        {
+            H.moodIt(paths, color)
+
+            list.currentItem.trackMood = color
+            list.model.get(list.currentIndex).art = color
+        }
+
+
     }
 
     list.highlightFollowsCurrentItem: false
@@ -159,9 +199,8 @@ BabeList
         currentIndex = index
         contextMenu.rate = bae.getTrackStars(model.get(currentIndex).url)
         contextMenu.babe = bae.trackBabe(model.get(currentIndex).url)
-        if(root.isMobile) contextMenu.open()
-        else
-            contextMenu.popup()
+        contextMenu.show([model.get(currentIndex).url])
+
         rowPressed(index)
     }
 
