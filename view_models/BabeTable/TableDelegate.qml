@@ -139,11 +139,7 @@ SwipeDelegate
         RowLayout
         {
             id: gridLayout
-
-            height: parent.height
-            width: parent.width
-
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.fill: parent
             spacing: 0
 
             Item
@@ -283,7 +279,7 @@ SwipeDelegate
                     Label
                     {
                         id: trackTitle
-//                        Layout.maximumWidth: gridLayout.width *0.5
+                        //                        Layout.maximumWidth: gridLayout.width *0.5
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.row: 1
@@ -304,7 +300,7 @@ SwipeDelegate
                         visible: coverArt ? !sameAlbum : true
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-//                        Layout.maximumWidth: gridLayout.width*0.4
+                        //                        Layout.maximumWidth: gridLayout.width*0.4
                         Layout.row: 2
                         Layout.column: 2
                         verticalAlignment:  Qt.AlignVCenter
@@ -366,7 +362,8 @@ SwipeDelegate
             {
                 visible: menuItem
                 Layout.fillHeight: true
-                width: space.enormus
+//                Layout.fillWidth: true
+                width: space.enormous
 
                 MouseArea
                 {

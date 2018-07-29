@@ -71,7 +71,7 @@ Maui.Page
             NumberAnimation { properties: "x,y"; duration: 100 }
         }
 
-        ScrollBar.vertical:BabeScrollBar { }
+        ScrollBar.vertical:BabeScrollBar { visible: !isMobile}
 
         onContentYChanged:
         {
