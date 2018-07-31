@@ -975,8 +975,11 @@ Maui.ApplicationWindow
                         onTriggered:
                         {
                             var data = bae.getList(selectionBar.selectedPaths)
-                            Player.playAll(data)
                             contextMenu.close()
+                            selectionMode = false
+                            selectionBar.clear()
+                            Player.playAll(data)
+
                         }
                     }
 

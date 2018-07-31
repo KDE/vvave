@@ -14,64 +14,62 @@ BabeMenu
     signal queueListClicked()
     signal sortClicked()
 
-    property alias menuItem: babeMenu.children
+    property alias menuItem : customItems.children
+
+    MenuItem
+    {
+        text: "Queue list"
+        onTriggered:
+        {
+            queueListClicked()
+            close()
+        }
+    }
+
+    MenuItem
+    {
+        text: "Save list to..."
+        onTriggered:
+        {
+            saveListClicked()
+            close()
+        }
+    }
+
+    MenuItem
+    {
+        text: "Send list to..."
+    }
+
+    MenuSeparator {}
+
+    MenuItem
+    {
+        text: "Visible info..."
+        onTriggered: {close()}
+    }
+
+    MenuSeparator {}
+
+    MenuItem
+    {
+        text: "Sort..."
+        onTriggered:
+        {
+            sortClicked()
+            close()
+        }
+    }
+
+    MenuItem
+    {
+        text: qsTr("Selection "+ (selectionMode ? "OFF" : "ON"))
+        onTriggered: selectionMode = !selectionMode
+    }
 
     Column
     {
-        id: babeMenu
-        width: parent.width
-        height: parent.height
-
-        MenuItem
-        {
-            text: "Queue list"
-            onTriggered:
-            {
-                queueListClicked()
-                close()
-            }
-        }
-
-        MenuItem
-        {
-            text: "Save list to..."
-            onTriggered:
-            {
-                saveListClicked()
-                close()
-            }
-        }
-
-        MenuItem
-        {
-            text: "Send list to..."
-        }
-
-        MenuSeparator {}
-
-        MenuItem
-        {
-            text: "Visible info..."
-            onTriggered: {close()}
-        }
-
-        MenuSeparator {}
-
-        MenuItem
-        {
-            text: "Sort..."
-            onTriggered:
-            {
-                sortClicked()
-                close()
-            }
-        }
-
-        MenuItem
-        {
-            text: qsTr("Selection "+ (selectionMode ? "OFF" : "ON"))
-            onTriggered: selectionMode = !selectionMode
-        }
-
+        id: customItems
     }
+
 }

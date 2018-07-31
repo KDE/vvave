@@ -150,7 +150,6 @@ SwipeDelegate
                 width: altHeight
                 height: parent.height
 
-
                 ToolButton
                 {
                     visible: !sameAlbum

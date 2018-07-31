@@ -133,8 +133,6 @@ BabeList
             list.currentItem.trackMood = color
             list.model.get(list.currentIndex).art = color
         }
-
-
     }
 
     list.highlightFollowsCurrentItem: false
