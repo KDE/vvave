@@ -19,6 +19,9 @@ BabeMenu
     Column
     {
         id: babeMenu
+        width: parent.width
+        height: parent.height
+
         MenuItem
         {
             text: "Queue list"
@@ -44,7 +47,7 @@ BabeMenu
             text: "Send list to..."
         }
 
-        Kirigami.Separator{ width: parent.width; height: 1}
+        MenuSeparator {}
 
         MenuItem
         {
@@ -52,7 +55,7 @@ BabeMenu
             onTriggered: {close()}
         }
 
-        Kirigami.Separator{ width: parent.width; height: 1}
+        MenuSeparator {}
 
         MenuItem
         {
@@ -62,6 +65,12 @@ BabeMenu
                 sortClicked()
                 close()
             }
+        }
+
+        MenuItem
+        {
+            text: qsTr("Selection "+ (selectionMode ? "OFF" : "ON"))
+            onTriggered: selectionMode = !selectionMode
         }
 
     }

@@ -14,7 +14,7 @@ import "../../widgets"
 import "../../view_models"
 import "../../view_models/BabeTable"
 
-Item
+Maui.Page
 {
     id: mainPlaylistRoot
 
@@ -33,6 +33,9 @@ Item
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
     focus: true
+
+    headBarVisible: false
+    margins: 0
 
     PlaylistMenu
     {

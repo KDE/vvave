@@ -64,7 +64,7 @@ Maui.Page
         boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.OvershootBounds
         flickableDirection: Flickable.AutoFlickDirection
 
-        snapMode: ListView.SnapToItem
+//        snapMode: ListView.SnapToItem
 
         addDisplaced: Transition
         {

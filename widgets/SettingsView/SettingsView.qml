@@ -11,7 +11,7 @@ Kirigami.GlobalDrawer
     id: settingsView
     handleVisible: false
     signal iconSizeChanged(int size)
-    readonly property bool activeBrainz : bae.brainzState()
+    readonly property bool activeBrainz : false /*bae.brainzState()*/
     visible: false
 
     y: header.height

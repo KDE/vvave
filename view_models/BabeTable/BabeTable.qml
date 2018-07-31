@@ -176,14 +176,20 @@ BabeList
         onClicked:
         {
             currentIndex = index
-            if(root.isMobile)
+            if(selectionMode)
+            {
+                H.addToSelection(list.model.get(list.currentIndex))
+                return
+            }
+
+            if(isMobile)
                 rowClicked(index)
 
         }
 
         onDoubleClicked:
         {
-            if(!root.isMobile)
+            if(!isMobile)
                 rowClicked(index)
         }
 

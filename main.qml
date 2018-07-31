@@ -4,8 +4,6 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.1
 
-import QtQuick.Window 2.3
-
 import "utils"
 
 import "widgets"
@@ -40,8 +38,6 @@ Maui.ApplicationWindow
     //    minimumHeight: !isMobile ? columnWidth + 64 : 0
     //        flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
-    floatingBar: true
-    footBarOverlap: true
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -128,8 +124,6 @@ Maui.ApplicationWindow
     /******************** UI UNITS ********************/
     /*************************************************/
 
-    readonly property real screenWidth : Screen.width
-    readonly property real screenHeight : Screen.height
 
     property bool focusMode : false
 
@@ -150,6 +144,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /**************************************************/
     /*************************************************/
+    property bool selectionMode : false
 
 
     /*SIGNALS*/
@@ -283,159 +278,7 @@ Maui.ApplicationWindow
         riseContent()
     }
 
-    footBar.visible: !mainlistEmpty
 
-    footBar.leftContent: Label
-    {
-        visible: !mainlistEmpty && infoLabels
-        text: progressTimeLabel
-        color: darkTextColor
-        clip: true
-    }
-
-    footBar.rightContent: Label
-    {
-        visible: !mainlistEmpty && infoLabels
-        text: durationTimeLabel
-        color: darkTextColor
-        clip: true
-    }
-
-    footBar.middleContent: [
-
-        Maui.ToolButton
-        {
-            id: babeBtnIcon
-            iconName: "love"
-
-            iconColor: currentBabe ? babeColor : darkTextColor
-            onClicked: if (!mainlistEmpty)
-            {
-                var value = H.faveIt([mainPlaylist.list.model.get(currentTrackIndex).url])
-                currentBabe = value
-                mainPlaylist.list.model.get(currentTrackIndex).babe = value ? "1" : "0"
-            }
-        },
-
-        Maui.ToolButton
-        {
-            iconName: "media-skip-backward"
-            iconColor: darkTextColor
-            onClicked: Player.previousTrack()
-            onPressAndHold: Player.playAt(prevTrackIndex)
-        },
-
-        Maui.ToolButton
-        {
-            id: playIcon
-            iconColor: darkTextColor
-            iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
-            onClicked:
-            {
-                if (isPlaying)
-                Player.pauseTrack()
-                else
-                Player.resumeTrack()
-            }
-        },
-
-        Maui.ToolButton
-        {
-            id: nextBtn
-            iconColor: darkTextColor
-            iconName: "media-skip-forward"
-            onClicked: Player.nextTrack()
-            onPressAndHold: Player.playAt(Player.shuffle())
-        },
-
-        Maui.ToolButton
-        {
-            id: shuffleBtn
-            iconColor: darkTextColor
-            iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-            onClicked:
-            {
-                isShuffle = !isShuffle
-                bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
-            }
-        }
-    ]
-
-    footBar.background: Rectangle
-    {
-        id: footerBg
-        clip : true
-        implicitHeight: floatingBar ? toolBarHeight * 0.7 : toolBarHeight
-        height: implicitHeight
-        color: darkViewBackgroundColor
-        radius: floatingBar ? unit * 6 : 0
-        border.color: floatingBar ? Qt.lighter(borderColor, 1.2) : "transparent"
-        layer.enabled: floatingBar
-        layer.effect: DropShadow
-        {
-            anchors.fill: footerBg
-            horizontalOffset: 0
-            verticalOffset: 4
-            radius: 8.0
-            samples: 17
-            color: "#80000000"
-            source: footerBg
-        }
-
-        SequentialAnimation
-        {
-            id: animFooter
-            PropertyAnimation
-            {
-                target: footerBg
-                property: "color"
-                easing.type: Easing.InOutQuad
-                from: "black"
-                to: darkViewBackgroundColor
-                duration: 500
-            }
-        }
-
-        Rectangle
-        {
-            anchors.fill: parent
-            color: "transparent"
-            radius: footerBg.radius
-            opacity: 0.3
-            clip: true
-
-            FastBlur
-            {
-                id: fastBlur
-                width: parent.width
-                height: parent.height-1
-                y:1
-                source: mainPlaylist.artwork
-                radius: 100
-                transparentBorder: false
-                cached: true
-                z:1
-                clip: true
-
-                layer.enabled: floatingBar
-                layer.effect: OpacityMask
-                {
-                    maskSource: Item
-                    {
-                        width: footBar.width
-                        height: footBar.height
-                        Rectangle
-                        {
-                            anchors.centerIn: parent
-                            width: footBar.width
-                            height: footBar.height
-                            radius: footerBg.radius
-                        }
-                    }
-                }
-            }
-        }
-    }
     Slider
     {
         id: progressBar
@@ -487,7 +330,13 @@ Maui.ApplicationWindow
     FloatingDisk
     {
         id: floatingDisk
-        anchors.centerIn: footBar
+        anchors
+        {
+            left: parent.left
+            bottom: parent.bottom
+            bottomMargin: space.big
+        }
+
         z: 999
     }
 
@@ -851,6 +700,164 @@ Maui.ApplicationWindow
             onCoverPressed: Player.appendAll(tracks)
             onCoverDoubleClicked: Player.playAll(tracks)
         }
+
+        floatingBar: true
+        footBarOverlap: true
+
+
+        footBar.visible: !mainlistEmpty
+
+        footBar.leftContent: Label
+        {
+            visible: !mainlistEmpty && infoLabels
+            text: progressTimeLabel
+            color: darkTextColor
+            clip: true
+        }
+
+        footBar.rightContent: Label
+        {
+            visible: !mainlistEmpty && infoLabels
+            text: durationTimeLabel
+            color: darkTextColor
+            clip: true
+        }
+
+        footBar.middleContent: [
+
+            Maui.ToolButton
+            {
+                id: babeBtnIcon
+                iconName: "love"
+
+                iconColor: currentBabe ? babeColor : darkTextColor
+                onClicked: if (!mainlistEmpty)
+                {
+                    var value = H.faveIt([mainPlaylist.list.model.get(currentTrackIndex).url])
+                    currentBabe = value
+                    mainPlaylist.list.model.get(currentTrackIndex).babe = value ? "1" : "0"
+                }
+            },
+
+            Maui.ToolButton
+            {
+                iconName: "media-skip-backward"
+                iconColor: darkTextColor
+                onClicked: Player.previousTrack()
+                onPressAndHold: Player.playAt(prevTrackIndex)
+            },
+
+            Maui.ToolButton
+            {
+                id: playIcon
+                iconColor: darkTextColor
+                iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
+                onClicked:
+                {
+                    if (isPlaying)
+                    Player.pauseTrack()
+                    else
+                    Player.resumeTrack()
+                }
+            },
+
+            Maui.ToolButton
+            {
+                id: nextBtn
+                iconColor: darkTextColor
+                iconName: "media-skip-forward"
+                onClicked: Player.nextTrack()
+                onPressAndHold: Player.playAt(Player.shuffle())
+            },
+
+            Maui.ToolButton
+            {
+                id: shuffleBtn
+                iconColor: darkTextColor
+                iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+                onClicked:
+                {
+                    isShuffle = !isShuffle
+                    bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
+                }
+            }
+        ]
+
+        footBar.background: Rectangle
+        {
+            id: footerBg
+            clip : true
+            implicitHeight: mainPlaylist.floatingBar ? toolBarHeight * 0.7 : toolBarHeight
+            height: implicitHeight
+            color: darkViewBackgroundColor
+            radius: mainPlaylist.floatingBar ? unit * 6 : 0
+            border.color: mainPlaylist.floatingBar ? Qt.lighter(borderColor, 1.2) : "transparent"
+            layer.enabled: mainPlaylist.floatingBar
+            layer.effect: DropShadow
+            {
+                anchors.fill: footerBg
+                horizontalOffset: 0
+                verticalOffset: 4
+                radius: 8.0
+                samples: 17
+                color: "#80000000"
+                source: footerBg
+            }
+
+            SequentialAnimation
+            {
+                id: animFooter
+                PropertyAnimation
+                {
+                    target: footerBg
+                    property: "color"
+                    easing.type: Easing.InOutQuad
+                    from: "black"
+                    to: darkViewBackgroundColor
+                    duration: 500
+                }
+            }
+
+            Rectangle
+            {
+                anchors.fill: parent
+                color: "transparent"
+                radius: footerBg.radius
+                opacity: 0.3
+                clip: true
+
+                FastBlur
+                {
+                    id: fastBlur
+                    width: parent.width
+                    height: parent.height-1
+                    y:1
+                    source: mainPlaylist.artwork
+                    radius: 100
+                    transparentBorder: false
+                    cached: true
+                    z:1
+                    clip: true
+
+                    layer.enabled: mainPlaylist.floatingBar
+                    layer.effect: OpacityMask
+                    {
+                        maskSource: Item
+                        {
+                            width: footBar.width
+                            height: footBar.height
+                            Rectangle
+                            {
+                                anchors.centerIn: parent
+                                width: footBar.width
+                                height: footBar.height
+                                radius: footerBg.radius
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     Maui.Page
@@ -1082,12 +1089,23 @@ Maui.ApplicationWindow
                 Layout.fillWidth: true
                 Layout.margins: space.huge
                 Layout.topMargin: space.small
+                Layout.bottomMargin: space.big
                 onIconClicked: contextMenu.show(selectedPaths)
                 onExitClicked: clear()
 
                 TableMenu
                 {
                     id: contextMenu
+                    menuItem: MenuItem
+                    {
+                        text: qsTr("Play all")
+                        onTriggered:
+                        {
+                            var data = bae.getList(selectionBar.selectedPaths)
+                            Player.playAll(data)
+                            contextMenu.close()
+                        }
+                    }
 
                     onFavClicked: H.faveIt(paths)
 
