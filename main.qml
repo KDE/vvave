@@ -43,8 +43,8 @@ Maui.ApplicationWindow
     /*************************************************/
     property alias playIcon: playIcon
     property alias babeBtnIcon: babeBtnIcon
-    property alias progressBar: progressBar
-    property alias animFooter: animFooter
+    property alias progressBar: mainPlaylist.progressBar
+    property alias animFooter: mainPlaylist.animFooter
     property alias mainPlaylist: mainPlaylist
     property alias selectionBar: selectionBar
 
@@ -196,7 +196,7 @@ Maui.ApplicationWindow
     BabeMessage
     {
         id: missingDialog
-        width: isMobile ? parent.width * 0.9 : parent.width * 0.4
+        width: parent.width * (isMobile ? 0.9 : 0.4)
         title: "Missing file"
         onAccepted: {
             bae.removeTrack(currentTrack.url)
@@ -276,55 +276,6 @@ Maui.ApplicationWindow
         currentView = viewsIndex.search
         searchView.searchInput.forceActiveFocus()
         riseContent()
-    }
-
-
-    Slider
-    {
-        id: progressBar
-        height: unit * (isMobile ?  6 : 8)
-        width: parent.width
-        anchors
-        {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-
-        padding: 0
-        from: 0
-        to: 1000
-        value: 0
-        spacing: 0
-        focus: true
-        onMoved: player.seek(player.duration() / 1000 * value)
-
-        background: Rectangle
-        {
-            implicitWidth: progressBar.width
-            implicitHeight: progressBar.height
-            width: progressBar.availableWidth
-            height: implicitHeight
-            color: "transparent"
-
-            Rectangle
-            {
-                width: progressBar.visualPosition * parent.width
-                height: progressBar.height
-                color: babeColor
-            }
-        }
-
-        handle: Rectangle
-        {
-            x: progressBar.leftPadding + progressBar.visualPosition
-               * (progressBar.availableWidth - width)
-            y: -(progressBar.height * 0.7)
-            implicitWidth: progressBar.pressed ? iconSizes.medium : 0
-            implicitHeight: progressBar.pressed ? iconSizes.medium : 0
-            radius: progressBar.pressed ? iconSizes.medium : 0
-            color: babeColor
-        }
     }
 
     FloatingDisk
@@ -606,8 +557,6 @@ Maui.ApplicationWindow
         }
     ]
 
-
-
     Item
     {
         id: message
@@ -694,6 +643,7 @@ Maui.ApplicationWindow
     MainPlaylist
     {
         id: mainPlaylist
+
         Connections
         {
             target: mainPlaylist
@@ -703,7 +653,6 @@ Maui.ApplicationWindow
 
         floatingBar: true
         footBarOverlap: true
-
 
         footBar.visible: !mainlistEmpty
 
@@ -781,83 +730,7 @@ Maui.ApplicationWindow
                     bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
                 }
             }
-        ]
-
-        footBar.background: Rectangle
-        {
-            id: footerBg
-            clip : true
-            implicitHeight: mainPlaylist.floatingBar ? toolBarHeight * 0.7 : toolBarHeight
-            height: implicitHeight
-            color: darkViewBackgroundColor
-            radius: mainPlaylist.floatingBar ? unit * 6 : 0
-            border.color: mainPlaylist.floatingBar ? Qt.lighter(borderColor, 1.2) : "transparent"
-            layer.enabled: mainPlaylist.floatingBar
-            layer.effect: DropShadow
-            {
-                anchors.fill: footerBg
-                horizontalOffset: 0
-                verticalOffset: 4
-                radius: 8.0
-                samples: 17
-                color: "#80000000"
-                source: footerBg
-            }
-
-            SequentialAnimation
-            {
-                id: animFooter
-                PropertyAnimation
-                {
-                    target: footerBg
-                    property: "color"
-                    easing.type: Easing.InOutQuad
-                    from: "black"
-                    to: darkViewBackgroundColor
-                    duration: 500
-                }
-            }
-
-            Rectangle
-            {
-                anchors.fill: parent
-                color: "transparent"
-                radius: footerBg.radius
-                opacity: 0.3
-                clip: true
-
-                FastBlur
-                {
-                    id: fastBlur
-                    width: parent.width
-                    height: parent.height-1
-                    y:1
-                    source: mainPlaylist.artwork
-                    radius: 100
-                    transparentBorder: false
-                    cached: true
-                    z:1
-                    clip: true
-
-                    layer.enabled: mainPlaylist.floatingBar
-                    layer.effect: OpacityMask
-                    {
-                        maskSource: Item
-                        {
-                            width: footBar.width
-                            height: footBar.height
-                            Rectangle
-                            {
-                                anchors.centerIn: parent
-                                width: footBar.width
-                                height: footBar.height
-                                radius: footerBg.radius
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        ]        
     }
 
     Maui.Page

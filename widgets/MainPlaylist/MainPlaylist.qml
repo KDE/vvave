@@ -24,11 +24,13 @@ Maui.Page
     property alias list : table.list
     property alias table: table
     property alias infoView : infoView
+    property alias progressBar: progressBar
+    property alias animFooter : animFooter
 
-    property alias contextMenu : table.contextMenu
-    property alias mainlistContext : mainlistContext
-    property alias headerMenu : table.headerMenu
-    property alias stack : stackView
+    property alias contextMenu: table.contextMenu
+    property alias mainlistContext: mainlistContext
+    property alias headerMenu: table.headerMenu
+    property alias stack: stackView
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
@@ -36,6 +38,82 @@ Maui.Page
 
     headBarVisible: false
     margins: 0
+
+    footBar.background: Rectangle
+    {
+        id: footerBg
+        clip : true
+        implicitHeight: mainPlaylist.floatingBar ? toolBarHeight * 0.7 : toolBarHeight
+        height: implicitHeight
+        color: darkViewBackgroundColor
+        radius: mainPlaylist.floatingBar ? unit * 6 : 0
+        border.color: mainPlaylist.floatingBar ? Qt.lighter(borderColor, 1.2) : "transparent"
+        layer.enabled: mainPlaylist.floatingBar
+        layer.effect: DropShadow
+        {
+            anchors.fill: footerBg
+            horizontalOffset: 0
+            verticalOffset: 4
+            radius: 8.0
+            samples: 17
+            color: "#80000000"
+            source: footerBg
+        }
+
+        SequentialAnimation
+        {
+            id: animFooter
+            PropertyAnimation
+            {
+                target: footerBg
+                property: "color"
+                easing.type: Easing.InOutQuad
+                from: "black"
+                to: darkViewBackgroundColor
+                duration: 500
+            }
+        }
+
+        Rectangle
+        {
+            anchors.fill: parent
+            color: "transparent"
+            radius: footerBg.radius
+            opacity: 0.3
+            clip: true
+
+            FastBlur
+            {
+                id: fastBlur
+                width: parent.width
+                height: parent.height-1
+                y:1
+                source: mainPlaylist.cover
+                radius: 100
+                transparentBorder: false
+                cached: true
+                z:1
+                clip: true
+
+                layer.enabled: mainPlaylist.floatingBar
+                layer.effect: OpacityMask
+                {
+                    maskSource: Item
+                    {
+                        width: footBar.width
+                        height: footBar.height
+                        Rectangle
+                        {
+                            anchors.centerIn: parent
+                            width: footBar.width
+                            height: footBar.height
+                            radius: footerBg.radius
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     PlaylistMenu
     {
@@ -106,7 +184,6 @@ Maui.Page
 
             }
         }
-
 
         Maui.ToolBar
         {
@@ -322,6 +399,50 @@ Maui.Page
 
             }
         }
+
+        Slider
+        {
+            id: progressBar
+            height: unit * (isMobile ?  6 : 8)
+            width: parent.width
+            Layout.fillWidth: true
+
+            padding: 0
+            from: 0
+            to: 1000
+            value: 0
+            spacing: 0
+            focus: true
+            onMoved: player.seek(player.duration() / 1000 * value)
+
+            background: Rectangle
+            {
+                implicitWidth: progressBar.width
+                implicitHeight: progressBar.height
+                width: progressBar.availableWidth
+                height: implicitHeight
+                color: "transparent"
+
+                Rectangle
+                {
+                    width: progressBar.visualPosition * parent.width
+                    height: progressBar.height
+                    color: babeColor
+                }
+            }
+
+            handle: Rectangle
+            {
+                x: progressBar.leftPadding + progressBar.visualPosition
+                   * (progressBar.availableWidth - width)
+                y: -(progressBar.height * 0.7)
+                implicitWidth: progressBar.pressed ? iconSizes.medium : 0
+                implicitHeight: progressBar.pressed ? iconSizes.medium : 0
+                radius: progressBar.pressed ? iconSizes.medium : 0
+                color: babeColor
+            }
+        }
+
     }
 
     function goFocusMode()
