@@ -44,6 +44,8 @@ BabeList
     signal playAll()
     signal appendAll()
 
+//    altToolBars: isMobile
+
     headBar.leftContent: Maui.ToolButton
     {
         id : playAllBtn

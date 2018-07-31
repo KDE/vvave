@@ -194,7 +194,7 @@ Kirigami.PageRow
             {
                 target: filterList.contextMenu
 
-                onTrackRemoved:
+                onRemovedClicked:
                 {
                     bae.removePlaylistTrack(url, playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
                     populate(playlistQuery)

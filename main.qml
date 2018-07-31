@@ -281,12 +281,8 @@ Maui.ApplicationWindow
     FloatingDisk
     {
         id: floatingDisk
-        anchors
-        {
-            left: parent.left
-            bottom: parent.bottom
-            bottomMargin: space.big
-        }
+        x: space.big
+        y: pageStack.height - height
 
         z: 999
     }
