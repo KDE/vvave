@@ -403,7 +403,7 @@ Maui.Page
         Slider
         {
             id: progressBar
-            height: unit * (isMobile ?  6 : 8)
+            height: unit * (isMobile ?  4 : 8)
             width: parent.width
             Layout.fillWidth: true
 
