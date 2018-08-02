@@ -45,7 +45,7 @@ add_executable(vvave
     settings/fileloader.cpp
     utils/brain.cpp
     utils/babeconsole.cpp
-)
+    )
 
 if (ANDROID)
     find_package(Qt5 REQUIRED COMPONENTS AndroidExtras WebView)
@@ -54,7 +54,7 @@ if (ANDROID)
     externalproject_add(taglib
         URL http://taglib.org/releases/taglib-1.11.1.tar.gz
         CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-    )
+        )
     set(TAGLIB_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include ${CMAKE_INSTALL_PREFIX}/include/taglib)
     set(TAGLIB_LIBRARIES ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_DIR}/libtag.a)
 
@@ -62,7 +62,7 @@ if (ANDROID)
         android/android.cpp
         android/notificationclient.cpp
         android/android.qrc
-    )
+        )
     target_link_libraries(vvave Qt5::AndroidExtras Qt5::WebView)
     add_dependencies(vvave taglib)
     kde_source_files_enable_exceptions(vvave android/android.cpp android/notificationclient.cpp babe.cpp)
@@ -73,14 +73,15 @@ else()
     target_sources(vvave PRIVATE
         kde/mpris2.cpp
         kde/notify.cpp
-    )
+        )
     target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::I18n Qt5::DBus)
 endif()
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
 target_link_libraries(vvave MAUIKIT TAGGING Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets ${TAGLIB_LIBRARIES})
 
 install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install (FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES assets/vvave.png DESTINATION /usr/share/icons/hicolor/scalable/apps)
 # install(FILES org.kde.vvave.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
