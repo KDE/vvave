@@ -80,6 +80,7 @@ target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
 target_link_libraries(vvave MAUIKIT TAGGING Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets ${TAGLIB_LIBRARIES})
 
 install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install (FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 # install(FILES org.kde.vvave.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
