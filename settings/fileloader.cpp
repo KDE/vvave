@@ -1,8 +1,7 @@
 #include "fileloader.h"
 
 
-FileLoader::FileLoader()
- : CollectionDB(nullptr)
+FileLoader::FileLoader() : CollectionDB(nullptr)
 {
     qRegisterMetaType<BAE::DB>("BAE::DB");
     qRegisterMetaType<BAE::TABLE>("BAE::TABLE");
@@ -27,12 +26,10 @@ void FileLoader::requestPaths(const QStringList& paths)
     QMetaObject::invokeMethod(this, "getTracks", Q_ARG(QStringList, paths));
 }
 
-
 void FileLoader::nextTrack()
 {
     this->wait = !this->wait;
 }
-
 
 void FileLoader::getTracks(const QStringList& paths)
 {
@@ -52,7 +49,9 @@ void FileLoader::getTracks(const QStringList& paths)
     }
 
     qDebug()<<"URLS SIZEW FOR:"<<paths<< urls.size();
+
     int newTracks = 0;
+
     if(!urls.isEmpty())
     {
         this->execQuery("PRAGMA synchronous=OFF");
@@ -93,7 +92,6 @@ void FileLoader::getTracks(const QStringList& paths)
                         newTracks++;
                     }
                 }
-
             }else break;
         }
     }

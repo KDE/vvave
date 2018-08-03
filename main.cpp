@@ -65,6 +65,13 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    const QStringList args = parser.positionalArguments();
+
+    QStringList urls;
+
+    if(!args.isEmpty())
+        urls = args;
+
     Babe bae;
 
     /* Services */
@@ -79,6 +86,8 @@ int main(int argc, char *argv[])
     {
         qDebug()<<"FINISHED LOADING QML APP";
         bae.refreshCollection();
+        if(!urls.isEmpty())
+            bae.openUrls(urls);
     });
 
     auto context = engine.rootContext();

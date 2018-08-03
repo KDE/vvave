@@ -59,7 +59,6 @@ if (ANDROID)
     set(TAGLIB_LIBRARIES ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_DIR}/libtag.a)
 
     target_sources(vvave PRIVATE
-        android/android.cpp
         android/notificationclient.cpp
         android/android.qrc
         )

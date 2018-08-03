@@ -1086,7 +1086,6 @@ Maui.ApplicationWindow
         target: bae
 
         onRefreshTables: H.refreshCollection(size)
-
         onRefreshTracks: H.refreshTracks()
         onRefreshAlbums: H.refreshAlbums()
         onRefreshArtists: H.refreshArtists()
@@ -1099,5 +1098,7 @@ Maui.ApplicationWindow
 
         onSkipTrack: Player.nextTrack()
         onBabeIt: Player.babeTrack()
+
+        onOpenFiles: Player.playAll(tracks)
     }
 }

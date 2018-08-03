@@ -11,8 +11,7 @@
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 class Notify;
 #elif defined (Q_OS_ANDROID)
-class NotificationClient;
-class Android;
+//class NotificationClient;
 #endif
 
 class CollectionDB;
@@ -37,7 +36,6 @@ public:
     //    Q_INVOKABLE void runPy();
 
     /* DATABASE INTERFACES */
-
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
     Q_INVOKABLE QVariantList getList(const QStringList &urls);
 
@@ -46,6 +44,7 @@ public:
     Q_INVOKABLE void trackPlaylist(const QStringList &urls, const QString &playlist);
     Q_INVOKABLE void trackLyrics(const QString &url);
     Q_INVOKABLE bool trackBabe(const QString &path);
+
     Q_INVOKABLE QString artistArt(const QString &artist);
     Q_INVOKABLE QString albumArt(const QString &album, const QString &artist);
     Q_INVOKABLE QString artistWiki(const QString &artist);
@@ -53,9 +52,7 @@ public:
 
     Q_INVOKABLE bool babeTrack(const QString &path, const bool &value);
 
-
     /* SETTINGS */
-
     Q_INVOKABLE void scanDir(const QString &url);
     Q_INVOKABLE void brainz(const bool &on);
     Q_INVOKABLE bool brainzState();
@@ -63,7 +60,6 @@ public:
     Q_INVOKABLE void getYoutubeTrack(const QString &message);
 
     /* STATIC METHODS */
-
     Q_INVOKABLE static void saveSetting(const QString &key, const QVariant &value, const QString &group);
     Q_INVOKABLE static QVariant loadSetting(const QString &key, const QString &group, const QVariant &defaultValue);
 
@@ -79,10 +75,8 @@ public:
     /*COLORS*/
     Q_INVOKABLE static QString babeColor();
 
-
     /*UTILS*/
-    Q_INVOKABLE static bool isMobile();
-    Q_INVOKABLE static bool isAndroid();
+    Q_INVOKABLE void openUrls(const QStringList &urls);
 
     Q_INVOKABLE static QString moodColor(const int &pos);
 
@@ -90,8 +84,6 @@ public:
     Q_INVOKABLE static QString musicDir();
 
     Q_INVOKABLE static QStringList defaultSources();
-
-    static void registerTypes();
 
     /*USEFUL*/
     Q_INVOKABLE QString loadCover(const QString &url);
@@ -101,16 +93,7 @@ public:
     Q_INVOKABLE void notify(const QString &title, const QString &body);
     Q_INVOKABLE void notifySong(const QString &url);
 
-    /*ANDROID*/
-    Q_INVOKABLE static void sendText(const QString &text);
-    Q_INVOKABLE static void sendTrack(const QString &url);
-    Q_INVOKABLE static void openFile(const QString &url);
-    Q_INVOKABLE void fileChooser();
-    Q_INVOKABLE static void androidStatusBarColor(const QString &color, const bool &contrast);
-
-
 public slots:
-    void debug(const QString &msg);
 
 private:
 
@@ -119,10 +102,8 @@ private:
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     Notify *nof;
 #elif defined (Q_OS_ANDROID)
-    NotificationClient *nof;
-    Android *android;
+//    NotificationClient *nof;
 #endif
-
     QString fetchCoverArt(DB &song);
     static QVariantList transformData(const DB_LIST &dbList);
 
@@ -138,6 +119,7 @@ signals:
     void skipTrack();
     void babeIt();
     void message(QString msg);
+    void openFiles(QVariantList tracks);
 };
 
 

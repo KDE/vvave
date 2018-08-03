@@ -1,11 +1,13 @@
 Qt.include("Icons.js")
 
 
-function playTrack(track)
+function playTrack(index)
 {
-    if(track)
+    if((index < mainPlaylist.list.count) && (mainPlaylist.list.count > 0) && (index > -1))
     {
-        currentTrack = track
+        currentTrack = mainPlaylist.list.model.get(index)
+
+        if(typeof(currentTrack) === "undefined") return
 
         if(bae.fileExists(currentTrack.url))
         {
@@ -23,7 +25,7 @@ function playTrack(track)
 
             if(!isMobile)
             {
-                title = currentTrack.title + " - " +currentTrack.artist
+                root.title = currentTrack.title + " - " +currentTrack.artist
 
                 if(!root.active)
                     bae.notifySong(currentTrack.url)
@@ -116,12 +118,12 @@ function shuffle()
 
 function playAt(index)
 {
-    if(index < mainPlaylist.list.count)
+    if((index < mainPlaylist.list.count) && (mainPlaylist.list.count > 0) && (index > -1))
     {
         currentTrackIndex = index
-        mainPlaylist.list.currentIndex = index
+        mainPlaylist.list.currentIndex = currentTrackIndex
         mainPlaylist.albumsRoll.positionAlbum(currentTrackIndex)
-        playTrack(mainPlaylist.list.model.get(index))
+        playTrack(currentTrackIndex)
     }
 }
 
@@ -129,7 +131,7 @@ function quickPlay(track)
 {
     //    root.pageStack.currentIndex = 0
     appendTrack(track)
-    playAt(root.mainPlaylist.list.count-1)
+    playAt(mainPlaylist.list.count-1)
     mainPlaylist.list.positionViewAtEnd()
     mainPlaylist.albumsRoll.positionViewAtEnd()
 
@@ -224,7 +226,7 @@ function cleanPlaylist()
 
 function playAll(tracks)
 {
-    if(tracks)
+    if(tracks.length > 0)
     {
         sync = false
         syncPlaylist = ""

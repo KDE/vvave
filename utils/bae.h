@@ -13,6 +13,7 @@
 #include <QScreen>
 #include <QtNetwork>
 #include <QEventLoop>
+#include "fmh.h"
 
 #include <cmath>
 
@@ -279,17 +280,21 @@ inline QString getNameFromLocation(const QString &str)
 
     return ret;
 }
-const QString MusicPath = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
-const QStringList MusicPaths = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
-const QString HomePath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+
 const QString SettingPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/";
 const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/artwork/";
 const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/";
 const QString CachePath = BAE::isMobile() ? BAE::ArtworkPath : QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/";
 const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/";
-const QString DownloadsPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
-const QStringList DownloadsPaths = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
 const QString NotifyDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+
+const QStringList MusicPaths = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
+const QStringList DownloadsPaths = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
+
+const QString MusicPath = FMH::MusicPath;
+const QString HomePath = FMH::HomePath;
+const QString DownloadsPath = FMH::DownloadsPath;
+
 const QString BabePort = "8483";
 const QString LinkPort = "3333";
 
@@ -299,9 +304,11 @@ const QString DBName = "collection.db";
 
 const QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};
 const QStringList formats {"*.mp4","*.mp3","*.wav","*.flac","*.ogg","*.m4a"};
-const QStringList defaultSources = isMobile() ?
-            QStringList()<<BAE::MusicPath<<BAE::DownloadsPath<<BAE::MusicPaths<<BAE::DownloadsPaths :
-                           QStringList()<< BAE::MusicPath<<BAE::YoutubeCachePath;
+const QStringList defaultSources = QStringList() << BAE::MusicPath
+                                                 << BAE::DownloadsPath
+                                                 << BAE::MusicPaths
+                                                 << BAE::DownloadsPaths
+                                                 << BAE::YoutubeCachePath;
 
 inline QString fixTitle(const QString &title,const QString &s,const QString &e)
 {

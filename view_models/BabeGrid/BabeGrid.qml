@@ -62,7 +62,7 @@ Maui.Page
 
         cellWidth: albumCoverSize + albumSpacing
         cellHeight:  albumCoverSize + albumSpacing*2
-
+//        interactive: isMobile
         focus: true
         boundsBehavior: Flickable.StopAtBounds
 

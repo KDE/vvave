@@ -4,7 +4,6 @@
 #include "db/conthread.h"
 #include "settings/BabeSettings.h"
 #include "pulpo/pulpo.h"
-#include "utils/babeconsole.h"
 
 #include <QPalette>
 #include <QColor>
@@ -14,7 +13,7 @@
 #include <QtQml>
 #include <QDesktopServices>
 #include <QCursor>
-
+#include "services/local/taginfo.h"
 //#include "Python.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
@@ -22,38 +21,12 @@
 #include "kde/notify.h"
 #endif
 
-#if defined(Q_OS_ANDROID)
-#include "android/notificationclient.h"
-#include "android/android.h"
-#include <QAndroidJniObject>
-#include <QAndroidJniEnvironment>
-#include <QtAndroid>
-#include <QException>
-
-#include <QAudioOutput>
-#include <QAudioInput>
-
-class InterfaceConnFailedException : public QException
-{
-public:
-    void raise() const { throw *this; }
-    InterfaceConnFailedException *clone() const { return new InterfaceConnFailedException(*this); }
-};
-#elif defined(Q_OS_WINDOWS)
-#elif defined(Q_OS_DARWIN)
-#else
-#endif
-
 using namespace BAE;
 
 Babe::Babe(QObject *parent) : CollectionDB(parent)
 {    
-    bDebug::Instance()->msg("CONSTRUCTING ABE INTERFACE");
-
     this->settings = new BabeSettings(this);
     this->thread = new ConThread;
-
-    connect(bDebug::Instance(), SIGNAL(debug(QString)), this, SLOT(debug(QString)));
 
     connect(settings, &BabeSettings::refreshTables, [this](int size)
     {
@@ -67,6 +40,7 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
         case BAE::TABLE::TRACKS: emit this->refreshTracks(); break;
         case BAE::TABLE::ALBUMS: emit this->refreshAlbums(); break;
         case BAE::TABLE::ARTISTS: emit this->refreshArtists(); break;
+        default: break;
         }
 
     });
@@ -95,13 +69,7 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
         emit this->skipTrack();
     });
 #elif defined (Q_OS_ANDROID)
-    this->nof = new NotificationClient(this);
-    this->android = new Android(this);
 
-    connect(android, &Android::folderPicked, [this](const QString &url)
-    {
-        qDebug()<< "Folder picked"<< url;
-    });
 #endif
 
 }
@@ -157,7 +125,6 @@ void Babe::trackPlaylist(const QStringList &urls, const QString &playlist)
         data << map;
     }
 
-    bDebug::Instance()->msg("Adding "+QString::number(urls.size())+" tracks to playlist : "+playlist);
     this->thread->start(BAE::TABLEMAP[TABLE::TRACKS_PLAYLISTS], data);
 }
 
@@ -240,7 +207,6 @@ void Babe::fetchTrackLyrics(DB &song)
             auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
 
             lyricsTrack(track, lyrics);
-            bDebug::Instance()->msg("Downloaded the lyrics for "+track[KEY::TITLE]+" "+track[KEY::ARTIST]);
             emit this->trackLyricsReady(lyrics, track[KEY::URL]);
         }
     });
@@ -330,115 +296,28 @@ bool Babe::babeTrack(const QString &path, const bool &value)
 
 void Babe::notify(const QString &title, const QString &body)
 {
-
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     this->nof->notify(title, body);
 #elif defined (Q_OS_ANDROID)
-    this->nof->notify(title+" "+body);
+    Q_UNUSED(title);
+    Q_UNUSED(body);
 #endif
 
 }
 
 void Babe::notifySong(const QString &url)
 {
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))    
+    if(!check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL], url))
+        return;
+
     auto query = QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where url = \"%1\"").arg(url);
     auto track = getDBData(query);
     this->nof->notifySong(track.first());
+
 #else
     Q_UNUSED(url);
 #endif
-}
-
-void Babe::sendText(const QString &text)
-{
-
-#if defined(Q_OS_ANDROID)
-    QAndroidJniEnvironment _env;
-    QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");   //activity is valid
-    if (_env->ExceptionCheck()) {
-        _env->ExceptionClear();
-        throw InterfaceConnFailedException();
-    }
-
-    if ( activity.isValid() )
-    {
-        QAndroidJniObject::callStaticMethod<void>("com/example/android/tools/SendIntent",
-                                                  "sendText",
-                                                  "(Landroid/app/Activity;Ljava/lang/String;)V",
-                                                  activity.object<jobject>(),
-                                                  QAndroidJniObject::fromString(text).object<jstring>());
-        if (_env->ExceptionCheck())
-        {
-            _env->ExceptionClear();
-            throw InterfaceConnFailedException();
-        }
-    }else
-        throw InterfaceConnFailedException();
-#endif
-
-}
-
-void Babe::sendTrack(const QString &url)
-{
-#if defined(Q_OS_ANDROID)
-    bDebug::Instance()->msg("Sharing track "+ url);
-    QAndroidJniEnvironment _env;
-    QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");   //activity is valid
-    if (_env->ExceptionCheck()) {
-        _env->ExceptionClear();
-        throw InterfaceConnFailedException();
-    }
-    if ( activity.isValid() )
-    {
-        QAndroidJniObject::callStaticMethod<void>("com/example/android/tools/SendIntent",
-                                                  "sendTrack",
-                                                  "(Landroid/app/Activity;Ljava/lang/String;)V",
-                                                  activity.object<jobject>(),
-                                                  QAndroidJniObject::fromString(url).object<jstring>());
-        if (_env->ExceptionCheck()) {
-            _env->ExceptionClear();
-            throw InterfaceConnFailedException();
-        }
-    }else
-        throw InterfaceConnFailedException();
-#endif
-
-}
-
-void Babe::openFile(const QString &url)
-{
-#if defined(Q_OS_ANDROID)
-    bDebug::Instance()->msg("Opening track "+ url);
-    QAndroidJniEnvironment _env;
-    QAndroidJniObject activity = QAndroidJniObject::callStaticObjectMethod("org/qtproject/qt5/android/QtNative", "activity", "()Landroid/app/Activity;");   //activity is valid
-    if (_env->ExceptionCheck()) {
-        _env->ExceptionClear();
-        throw InterfaceConnFailedException();
-    }
-    if ( activity.isValid() )
-    {
-        QAndroidJniObject::callStaticMethod<void>("com/example/android/tools/SendIntent",
-                                                  "openFile",
-                                                  "(Landroid/app/Activity;Ljava/lang/String;)V",
-                                                  activity.object<jobject>(),
-                                                  QAndroidJniObject::fromString(url).object<jstring>());
-        if (_env->ExceptionCheck()) {
-            _env->ExceptionClear();
-            throw InterfaceConnFailedException();
-        }
-    }else
-        throw InterfaceConnFailedException();
-#endif
-
-}
-
-void Babe::fileChooser()
-{
-#if defined(Q_OS_ANDROID)
-    this->android->fileChooser();
-#endif
-
 }
 
 void Babe::scanDir(const QString &url)
@@ -473,7 +352,6 @@ QVariant Babe::loadSetting(const QString &key, const QString &group, const QVari
 
 void Babe::saveSetting(const QString &key, const QVariant &value, const QString &group)
 {
-    bDebug::Instance()->msg("Setting saved: "+ key+" "+value.toString()+" "+group);
     BAE::saveSettings(key, value, group);
 }
 
@@ -513,35 +391,47 @@ QString Babe::babeColor()
     return "#f84172";
 }
 
-
-void Babe::androidStatusBarColor(const QString &color, const bool &contrast)
+void Babe::openUrls(const QStringList &urls)
 {
-#if defined(Q_OS_ANDROID)
+    if(urls.isEmpty()) return;
 
-    QtAndroid::runOnAndroidThread([=]() {
-        QAndroidJniObject window = QtAndroid::androidActivity().callObjectMethod("getWindow", "()Landroid/view/Window;");
-        window.callMethod<void>("addFlags", "(I)V", 0x80000000);
-        window.callMethod<void>("clearFlags", "(I)V", 0x04000000);
-        window.callMethod<void>("setStatusBarColor", "(I)V", QColor(color).rgba());
+    QVariantList data;
+    TagInfo info;
 
-        if(contrast)
+    for(auto url : urls)
+        if(check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL], url))
+            data << this->getList({url}).first().toMap();
+        else
         {
-            QAndroidJniObject decorView = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
-            decorView.callMethod<void>("setSystemUiVisibility", "(I)V", 0x00002000);
+            if(info.feed(url))
+            {
+                auto album = BAE::fixString(info.getAlbum());
+                auto track= info.getTrack();
+                auto title = BAE::fixString(info.getTitle()); /* to fix*/
+                auto artist = BAE::fixString(info.getArtist());
+                auto genre = info.getGenre();
+                auto sourceUrl = QFileInfo(url).dir().path();
+                auto duration = info.getDuration();
+                auto year = info.getYear();
+
+                data << QVariantMap({
+                                        {BAE::KEYMAP[BAE::KEY::URL], url},
+                                        {BAE::KEYMAP[BAE::KEY::TRACK], QString::number(track)},
+                                        {BAE::KEYMAP[BAE::KEY::TITLE], title},
+                                        {BAE::KEYMAP[BAE::KEY::ARTIST], artist},
+                                        {BAE::KEYMAP[BAE::KEY::ALBUM], album},
+                                        {BAE::KEYMAP[BAE::KEY::DURATION],QString::number(duration)},
+                                        {BAE::KEYMAP[BAE::KEY::GENRE], genre},
+                                        {BAE::KEYMAP[BAE::KEY::SOURCES_URL], sourceUrl},
+                                        {BAE::KEYMAP[BAE::KEY::BABE],"0"},
+                                        {BAE::KEYMAP[BAE::KEY::RELEASE_DATE], QString::number(year)}
+                                    });
+            }
         }
 
-    });
-#endif
-}
+    qDebug()<< data;
 
-bool Babe::isMobile()
-{
-    return BAE::isMobile();
-}
-
-bool Babe::isAndroid()
-{
-    return BAE::isAndroid();
+    emit this->openFiles(data);
 }
 
 QString Babe::moodColor(const int &pos)
@@ -553,22 +443,7 @@ QString Babe::moodColor(const int &pos)
 
 QString Babe::homeDir()
 {
-#if defined(Q_OS_ANDROID)
-    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android/os/Environment", "getExternalStorageDirectory", "()Ljava/io/File;");
-    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-    //    bDebug::Instance()->msg("HOMEDIR FROM ADNROID"+ mediaPath.toString());
-
-    if(BAE::fileExists("/mnt/extSdCard"))
-        return "/mnt/sdcard";
-    else
-        return mediaPath.toString();
-
-    //    QAndroidJniObject mediaDir = QAndroidJniObject::callStaticObjectMethod("android.content.Context", "getExternalFilesDir", "()Ljava/io/File;");
-    //    QAndroidJniObject mediaPath = mediaDir.callObjectMethod( "getAbsolutePath", "()Ljava/lang/String;" );
-    //    return mediaPath.toString();
-#else
-    return BAE::HomePath;
-#endif
+return BAE::HomePath;
 }
 
 QString Babe::musicDir()
@@ -579,11 +454,6 @@ QString Babe::musicDir()
 QStringList Babe::defaultSources()
 {
     return BAE::defaultSources;
-}
-
-void Babe::registerTypes()
-{
-    qmlRegisterUncreatableType<Babe>("Babe", 1, 0, "Babe", "ERROR ABE");
 }
 
 QString Babe::loadCover(const QString &url)
@@ -670,12 +540,6 @@ QVariantList Babe::searchFor(const QStringList &queries)
 
     return  mapList;
 }
-
-void Babe::debug(const QString &msg)
-{
-    emit this->message(msg);
-}
-
 
 QString Babe::fetchCoverArt(DB &song)
 {

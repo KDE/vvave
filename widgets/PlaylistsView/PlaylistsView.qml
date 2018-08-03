@@ -194,14 +194,13 @@ Kirigami.PageRow
             {
                 target: filterList.contextMenu
 
-                onRemovedClicked:
+                onRemoveClicked:
                 {
                     bae.removePlaylistTrack(url, playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
                     populate(playlistQuery)
                 }
             }
         }
-
     }
 
     function populateExtra(query, title)
