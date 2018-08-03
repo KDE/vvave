@@ -13,7 +13,7 @@
 #include <QScreen>
 #include <QtNetwork>
 #include <QEventLoop>
-#include "fmh.h"
+#include "../mauikit/src/fm/fmh.h"
 
 #include <cmath>
 
