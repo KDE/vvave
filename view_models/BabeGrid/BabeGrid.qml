@@ -24,6 +24,7 @@ Maui.Page
     signal albumCoverPressed(string album, string artist)
     signal bgClicked()
 
+    margins: space.huge
 
     onWidthChanged: grid.forceLayout()
 

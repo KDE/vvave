@@ -13,7 +13,7 @@ SwipeDelegate
 {
     id: delegateRoot
 
-    readonly property int altHeight : rowHeight * 1.3
+    readonly property int altHeight : rowHeight * 1.4
     readonly property bool sameAlbum :
     {
         if(coverArt)
@@ -61,7 +61,10 @@ SwipeDelegate
     background: Rectangle
     {
         height: delegateRoot.height
-        color: isCurrentListItem ? highlightColor : (trackMood.length > 0 ? Qt.lighter(trackMood, 1.5) :
+        color: isCurrentListItem ? highlightColor : (trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r,
+                                                                                                     Qt.lighter(trackMood, 1.3).g,
+                                                                                                     Qt.lighter(trackMood, 1.3).b,
+                                                                                                     0.5 ) ):
                                                                             index % 2 === 0 ? Qt.lighter(bgColor) : bgColor)
 
     }
@@ -250,10 +253,11 @@ SwipeDelegate
 
                 GridLayout
                 {
-                    anchors.fill: parent
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width
                     rows: 2
                     columns: 4
-                    rowSpacing: 0
+                    rowSpacing: space.tiny
 
                     Label
                     {
@@ -283,6 +287,7 @@ SwipeDelegate
                         Layout.fillHeight: true
                         Layout.row: 1
                         Layout.column: 2
+                        Layout.alignment: Qt.AlignLeft || Qt.AlignBottom
                         verticalAlignment:  Qt.AlignVCenter
                         text: model.title
                         font.bold: !sameAlbum
@@ -299,7 +304,7 @@ SwipeDelegate
                         visible: coverArt ? !sameAlbum : true
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        //                        Layout.maximumWidth: gridLayout.width*0.4
+                        Layout.alignment: Qt.AlignLeft || Qt.AlignTop
                         Layout.row: 2
                         Layout.column: 2
                         verticalAlignment:  Qt.AlignVCenter

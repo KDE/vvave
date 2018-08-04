@@ -9,6 +9,7 @@ BabePopup
 {
     id: searchSuggestionsRoot
     property alias model : suggestionsList.model   
+    maxHeight: isMobile ? parent.height * 0.4 : unit * 300
 
     BabeList
     {

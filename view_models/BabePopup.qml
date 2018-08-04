@@ -6,7 +6,7 @@ import org.kde.kirigami 2.2 as Kirigami
 
 Popup
 {
-    property int maxWidth : Kirigami.Units.devicePixelRatio * 200
+    property int maxWidth : unit * 200
     property int maxHeight : maxWidth
 
     parent: ApplicationWindow.overlay
