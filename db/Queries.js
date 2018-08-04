@@ -11,7 +11,7 @@ var GET = {
     albumTracksSimple_ : "select * from tracks where album = \"%1\" and artist = \"%2\"",
     artistTracksSimple_ : "select * from tracks where artist = \"%1\"",
     tracksWhere_ : "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where %1",
-
+//    sourceTracks_: "select * from tracks where sources_url = \"%1\"",
 
     mostPlayedTracks : "select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist WHERE t.played > 0 ORDER BY played desc LIMIT 100",
     favoriteTracks : "select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where stars > 0 order by stars desc limit 100",

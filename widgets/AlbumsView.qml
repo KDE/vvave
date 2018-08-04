@@ -20,6 +20,8 @@ Kirigami.PageRow
     defaultColumnWidth: albumsViewGrid.albumCoverSize * 4
     interactive: currentIndex  === 1
 
+    property var tracks: []
+
     property alias grid : albumsViewGrid
     property alias table : albumsViewTable
     property alias tagBar : tagBar
@@ -124,11 +126,11 @@ Kirigami.PageRow
 
         albumsPageRoot.currentIndex = 1
 
-        var map = bae.get(query)
+        tracks = bae.get(query)
 
-        if(map.length > 0)
-            for(var i in map)
-                albumsViewTable.model.append(map[i])
+        if(tracks.length > 0)
+            for(var i in tracks)
+                albumsViewTable.model.append(tracks[i])
     }
 
     function filter(tracks)

@@ -283,6 +283,19 @@ QString Babe::albumWiki(const QString &album, const QString &artist)
     return "";
 }
 
+QVariantList Babe::getFolders()
+{
+    auto sources = this->getDBData("select * from sources");
+
+    QVariantList res;
+
+    for(auto item : sources)
+        res << FMH::getDirInfo(item[BAE::KEY::URL]);
+
+    qDebug()<<"FOLDERS:"<< res;
+    return res;
+}
+
 bool Babe::babeTrack(const QString &path, const bool &value)
 {
     if(update(TABLEMAP[TABLE::TRACKS],
@@ -443,7 +456,7 @@ QString Babe::moodColor(const int &pos)
 
 QString Babe::homeDir()
 {
-return BAE::HomePath;
+    return BAE::HomePath;
 }
 
 QString Babe::musicDir()

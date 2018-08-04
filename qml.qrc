@@ -75,5 +75,6 @@
         <file>assets/BugSearch.png</file>
         <file>assets/Astronaut.png</file>
         <file>assets/MusicCloud.png</file>
+        <file>widgets/FoldersView.qml</file>
     </qresource>
 </RCC>

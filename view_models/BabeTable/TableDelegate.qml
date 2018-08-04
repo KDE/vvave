@@ -64,7 +64,7 @@ SwipeDelegate
         color: isCurrentListItem ? highlightColor : (trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r,
                                                                                                      Qt.lighter(trackMood, 1.3).g,
                                                                                                      Qt.lighter(trackMood, 1.3).b,
-                                                                                                     0.5 ) ):
+                                                                                                     0.3 ) ):
                                                                             index % 2 === 0 ? Qt.lighter(bgColor) : bgColor)
 
     }

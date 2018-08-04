@@ -96,10 +96,11 @@ Maui.ApplicationWindow
                                            artists: 2,
                                            playlists: 3,
                                            search: 4,
-                                           vvave: 5,
-                                           linking: 6,
-                                           youtube: 7,
-                                           spotify: 8
+                                           folders: 5,
+                                           vvave: 6,
+                                           linking: 7,
+                                           youtube: 8,
+                                           spotify: 9
 
                                        })
 
@@ -319,6 +320,17 @@ Maui.ApplicationWindow
             {
                 pageStack.currentIndex = 1
                 currentView = viewsIndex.vvave
+            }
+        },
+
+        Kirigami.Action
+        {
+            text: qsTr("Folders")
+            iconName: "folder"
+            onTriggered:
+            {
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.folders
             }
         },
 
@@ -726,7 +738,7 @@ Maui.ApplicationWindow
                     bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
                 }
             }
-        ]        
+        ]
     }
 
     Maui.Page
@@ -796,6 +808,7 @@ Maui.ApplicationWindow
                         {
                             var query = Q.GET.albumTracks_.arg(album)
                             query = query.arg(artist)
+
                             albumsView.table.headBarTitle = album
                             albumsView.populateTable(query)
 
@@ -928,6 +941,22 @@ Maui.ApplicationWindow
 
                             Player.playAll(bae.get(query))
                         }
+                    }
+                }
+
+                FoldersView
+                {
+                    id: foldersView
+
+                    Connections
+                    {
+                        target: foldersView.list
+
+                        onRowClicked: Player.addTrack(foldersView.list.model.get(index))
+                        onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
+                        onPlayAll: Player.playAll(foldersView.getTracks())
+                        onAppendAll: Player.appendAll(foldersView.getTracks())
+                        onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
                     }
                 }
 
