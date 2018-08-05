@@ -112,15 +112,6 @@ Maui.ApplicationWindow
     property bool isLinked: false
     property bool isServing: false
 
-    /* ANDROID THEMING*/
-
-    Material.theme: Material.Light
-    Material.accent: babeColor
-    Material.background: viewBackgroundColor
-    Material.primary: backgroundColor
-    Material.foreground: textColor
-
-
     /***************************************************/
     /******************** UI UNITS ********************/
     /*************************************************/
@@ -132,15 +123,6 @@ Maui.ApplicationWindow
     /******************** UI COLORS *******************/
     /*************************************************/
     property string babeColor: bae.babeColor()
-
-    readonly property string darkBackgroundColor: "#303030"
-    readonly property string darkTextColor: "#FAFAFA"
-    readonly property string darkHighlightColor: "#29B6F6"
-    readonly property string darkHighlightedTextColor: darkTextColor
-    readonly property string darkViewBackgroundColor: "#212121"
-    readonly property string darkDarkColor: "#191919"
-    readonly property string darkButtonBackgroundColor :  "#191919"
-
 
     /***************************************************/
     /**************************************************/
@@ -1028,43 +1010,12 @@ Maui.ApplicationWindow
         } else {
             root.showMaximized();
         }
-    }
-
-    function switchColorScheme(variant)
-    {
-        bae.saveSetting("THEME", variant, "BABE")
-
-        if(variant === "Light")
-        {
-            backgroundColor = Kirigami.Theme.backgroundColor
-            textColor = Kirigami.Theme.textColor
-            highlightColor = Kirigami.Theme.highlightColor
-            highlightedTextColor = Kirigami.Theme.highlightedTextColor
-            buttonBackgroundColor = Kirigami.Theme.buttonBackgroundColor
-            viewBackgroundColor = Kirigami.Theme.viewBackgroundColor
-            altColor = Kirigami.Theme.complementaryBackgroundColor
-            babeColor = bae.babeColor()
-
-        }else if(variant === "Dark")
-        {
-            backgroundColor = darkBackgroundColor
-            textColor = darkTextColor
-            highlightColor = darkHighlightColor
-            highlightedTextColor = darkHighlightedTextColor
-            buttonBackgroundColor = darkButtonBackgroundColor
-            viewBackgroundColor = darkViewBackgroundColor
-            altColor = darkDarkColor
-        }
-    }
+    }   
 
     Component.onCompleted:
     {
-        var style = bae.loadSetting("THEME", "BABE", "Dark")
         if(isAndroid)
-        {
-//            switchColorScheme(style)
-//            Maui.Android.statusbarColor(backgroundColor, false)
-        }
+           switchColorScheme(colorScheme.Dark)
     }
 
 

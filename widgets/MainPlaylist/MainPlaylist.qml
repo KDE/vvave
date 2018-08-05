@@ -247,6 +247,7 @@ Maui.Page
         Kirigami.Separator
         {
             Layout.fillWidth: true
+            color: borderColor
         }
 
         Item
