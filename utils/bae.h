@@ -299,6 +299,7 @@ const QString BabePort = "8483";
 const QString LinkPort = "3333";
 
 const QString App = "vvave";
+const QString Description = "vvave music player";
 const QString Version = BABE_VERSION_STR;
 const QString DBName = "collection.db";
 

@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
+    QGuiApplication::styleHints()->setMousePressAndHoldInterval(1000); // in [ms]
 #else
     QApplication app(argc, argv);
 #endif
@@ -47,23 +48,19 @@ int main(int argc, char *argv[])
     app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
     app.setDesktopFileName(BAE::App);
 
-    /*needed for mobile*/
-    if(BAE::isMobile())
-        QGuiApplication::styleHints()->setMousePressAndHoldInterval(1000); // in [ms]
-
-
     QCommandLineParser parser;
-    parser.setApplicationDescription("vvave music player");
+    parser.setApplicationDescription(BAE::Description);
+
     const QCommandLineOption versionOption = parser.addVersionOption();
     parser.process(app);
-    bool version = parser.isSet(versionOption);
+//    bool version = parser.isSet(versionOption);
 
-    if(version)
-    {
-        printf("%s %s\n", qPrintable(QCoreApplication::applicationName()),
-               qPrintable(QCoreApplication::applicationVersion()));
-        return 0;
-    }
+//    if(version)
+//    {
+//        printf("%s %s\n", qPrintable(QCoreApplication::applicationName()),
+//               qPrintable(QCoreApplication::applicationVersion()));
+//        return 0;
+//    }
 
     const QStringList args = parser.positionalArguments();
 

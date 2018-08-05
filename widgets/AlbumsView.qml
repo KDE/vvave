@@ -20,6 +20,9 @@ Kirigami.PageRow
     defaultColumnWidth: albumsViewGrid.albumCoverSize * 4
     interactive: currentIndex  === 1
 
+    property string currentAlbum: ""
+    property string currentArtist: ""
+
     property var tracks: []
 
     property alias grid : albumsViewGrid
@@ -87,15 +90,13 @@ Kirigami.PageRow
             onPlayAll:
             {
                 albumsPageRoot.currentIndex = 0
-                var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
-                albumsPageRoot.playAll(data.album, data.artist)
+                albumsPageRoot.playAll(currentAlbum, currentArtist)
             }
 
             onAppendAll:
             {
                 albumsPageRoot.currentIndex = 0
-                var data = albumsViewGrid.gridModel.get(albumsViewGrid.grid.currentIndex)
-                albumsPageRoot.appendAll(data.album, data.artist)
+                albumsPageRoot.appendAll(currentAlbum, currentArtist)
             }
 
             onExit: albumsPageRoot.currentIndex = 0
@@ -120,17 +121,42 @@ Kirigami.PageRow
                 grid.gridModel.append(map[i])
     }
 
-    function populateTable(query)
+    function populateTable(album, artist)
     {
         table.clearTable()
 
         albumsPageRoot.currentIndex = 1
+        var query = ""
+        var tagq = ""
+
+        currentAlbum = album === undefined ? "" : album
+        currentArtist= artist
+
+        if(album && artist)
+        {
+            query = Q.GET.albumTracks_.arg(album)
+            query = query.arg(artist)
+            albumsView.table.headBarTitle = album
+            tagq = Q.GET.albumTags_.arg(album)
+
+        }else if(artist && album === undefined)
+        {
+            query = Q.GET.artistTracks_.arg(artist)
+            artistsView.table.headBarTitle = artist
+            tagq = Q.GET.artistTags_.arg(artist)
+        }
 
         tracks = bae.get(query)
 
         if(tracks.length > 0)
+        {
             for(var i in tracks)
                 albumsViewTable.model.append(tracks[i])
+
+            tagq = tagq.arg(artist)
+
+            tagBar.populate(bae.get(tagq))
+        }
     }
 
     function filter(tracks)

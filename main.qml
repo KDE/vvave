@@ -804,19 +804,7 @@ Maui.ApplicationWindow
                         onRowClicked: Player.addTrack(track)
                         onPlayTrack: Player.quickPlay(track)
 
-                        onAlbumCoverClicked:
-                        {
-                            var query = Q.GET.albumTracks_.arg(album)
-                            query = query.arg(artist)
-
-                            albumsView.table.headBarTitle = album
-                            albumsView.populateTable(query)
-
-                            var tagq = Q.GET.albumTags_.arg(album)
-                            tagq = tagq.arg(artist)
-
-                            albumsView.tagBar.populate(bae.get(tagq))
-                        }
+                        onAlbumCoverClicked: albumsView.populateTable(album, artist)
 
                         onAlbumCoverPressedAndHold:
                         {
@@ -862,16 +850,7 @@ Maui.ApplicationWindow
                         target: artistsView
                         onRowClicked: Player.addTrack(track)
                         onPlayTrack: Player.quickPlay(track)
-                        onAlbumCoverClicked:
-                        {
-                            var query = Q.GET.artistTracks_.arg(artist)
-                            artistsView.table.headBarTitle = artist
-                            artistsView.populateTable(query)
-
-                            var tagq = Q.GET.artistTags_.arg(artist)
-
-                            artistsView.tagBar.populate(bae.get(tagq))
-                        }
+                        onAlbumCoverClicked: artistsView.populateTable(undefined, artist)
 
                         onAlbumCoverPressedAndHold:
                         {
@@ -1025,8 +1004,6 @@ Maui.ApplicationWindow
                     onRateClicked: H.rateIt(paths, rate)
 
                     onColorClicked: H.moodIt(paths, color)
-
-
                 }
             }
         }
@@ -1085,8 +1062,8 @@ Maui.ApplicationWindow
         var style = bae.loadSetting("THEME", "BABE", "Dark")
         if(isAndroid)
         {
-            switchColorScheme(style)
-            Maui.Android.statusbarColor(backgroundColor, false)
+//            switchColorScheme(style)
+//            Maui.Android.statusbarColor(backgroundColor, false)
         }
     }
 

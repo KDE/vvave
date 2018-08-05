@@ -109,6 +109,7 @@ BabeMenu
     Column
     {
         id: customItems
+        width: parent.implicitWidth
     }
 
     MenuItem
@@ -198,6 +199,7 @@ BabeMenu
         }
 
     }
+
 
     MenuItem
     {

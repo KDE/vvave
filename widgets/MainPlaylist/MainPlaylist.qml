@@ -28,7 +28,6 @@ Maui.Page
     property alias animFooter : animFooter
 
     property alias contextMenu: table.contextMenu
-    property alias mainlistContext: mainlistContext
     property alias headerMenu: table.headerMenu
     property alias stack: stackView
 
@@ -36,8 +35,68 @@ Maui.Page
     signal coverPressed(var tracks)
     focus: true
 
-    headBarVisible: false
+    headBarExit: false
     margins: 0
+
+
+    headBar.leftContent: Maui.ToolButton
+    {
+        id: infoBtn
+        iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
+        onClicked:
+        {
+            if( stackView.currentItem !== table)
+            {
+                        cover.visible  = true
+                stackView.pop(table) }
+            else {
+                        cover.visible  = false
+                stackView.push(infoView)
+            }
+        }
+    }
+
+    headBar.middleContent: Maui.PieButton
+    {
+        iconName: "list-add"
+
+        model: ListModel
+        {
+            ListElement{iconName: "videoclip-amarok" ; btn: "video"}
+            ListElement{iconName: "documentinfo" ; btn: "info"}
+            ListElement{iconName: "headphones" ; btn: "similar"}
+        }
+
+        onItemClicked:
+        {
+            if(item.btn === "video")
+            {
+                youtubeView.openVideo = 1
+                youtube.getQuery(currentTrack.title+" "+currentTrack.artist)
+                pageStack.currentIndex = 1
+                currentView = viewsIndex.youtube
+            }
+
+            if(item.btn === "info")
+            {
+                if( stackView.currentItem !== table)
+                {
+                    cover.visible  = true
+                    stackView.pop(table) }
+                else {
+                    cover.visible  = false
+                    stackView.push(infoView)
+                }
+            }
+        }
+    }
+
+    headBar.rightContent : Maui.ToolButton
+    {
+        id: menuBtn
+        iconName: "overflow-menu"
+        onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
+    }
 
     footBar.background: Rectangle
     {
@@ -138,41 +197,12 @@ Maui.Page
             Layout.fillWidth: true
             Layout.preferredHeight: !mainlistEmpty ? coverSize : 0
             Layout.maximumHeight: coverSize
+
             visible: !mainlistEmpty
-
-            Rectangle
-            {
-                visible: !mainlistEmpty
-                anchors.fill: parent
-                color: viewBackgroundColor
-                z: -999
-
-                Image
-                {
-                    id: artwork
-                    visible: !mainlistEmpty
-                    anchors.fill: parent
-                    sourceSize.height: coverSize * 0.2
-                    sourceSize.width: coverSize * 0.2
-                    source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
-                    fillMode: Image.PreserveAspectCrop
-                }
-
-                FastBlur
-                {
-                    visible: artwork.visible
-                    anchors.fill: parent
-                    source: artwork
-                    radius: 100
-                    transparentBorder: false
-                    cached: true
-                }
-            }
 
             Item
             {
                 anchors.fill: parent
-                anchors.verticalCenter: parent.verticalCenter
 
                 AlbumsRoll
                 {
@@ -182,103 +212,42 @@ Maui.Page
                     anchors.verticalCenter: parent.vertical
                 }
 
+                Rectangle
+                {
+                    visible: !mainlistEmpty
+                    height: parent.height
+                    width: parent.width
+                    color: viewBackgroundColor
+                    z: -1
+
+                    Image
+                    {
+                        id: artwork
+                        visible: !mainlistEmpty
+                        anchors.fill: parent
+                        sourceSize.height: coverSize * 0.2
+                        sourceSize.width: coverSize * 0.2
+                        source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
+                        fillMode: Image.PreserveAspectCrop
+                    }
+
+                    FastBlur
+                    {
+                        visible: artwork.visible
+                        anchors.fill: parent
+                        source: artwork
+                        radius: 100
+                        transparentBorder: false
+                        cached: true
+                    }
+                }
             }
         }
 
-        Maui.ToolBar
+        Kirigami.Separator
         {
-            id: mainlistContext
-            clip: false
-            width: parent.width
-            implicitHeight: toolBarHeightAlt
-            visible : !focusMode &&  !mainlistEmpty
-            Layout.alignment: Qt.AlignBottom | Qt.AlignTop
-
             Layout.fillWidth: true
-
-            MouseArea
-            {
-                anchors.fill: parent
-                drag.target: mainlistContext
-                drag.axis: Drag.YAxis
-                drag.minimumY: 0
-                drag.maximumY:stackView.currentItem === table ?  coverSize : 0
-                z: -1
-                onMouseYChanged:
-                {
-                    if(stackView.currentItem === table )
-                    {
-                        cover.height = mainlistContext.y
-
-                        if(mainlistContext.y < coverSize*0.8)
-                        {
-                            cover.visible = false
-                            mainlistContext.y = 0
-                        }else cover.visible = true
-                    }
-                }
-            }
-
-            leftContent: Maui.ToolButton
-            {
-                id: infoBtn
-                iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
-                onClicked:
-                {
-                    if( stackView.currentItem !== table)
-                    {
-                        cover.visible  = true
-                        stackView.pop(table) }
-                    else {
-                        cover.visible  = false
-                        stackView.push(infoView)
-                    }
-                }
-            }
-
-            middleContent: Maui.PieButton
-            {
-                iconName: "list-add"
-
-                model: ListModel
-                {
-                    ListElement{iconName: "videoclip-amarok" ; btn: "video"}
-                    ListElement{iconName: "documentinfo" ; btn: "info"}
-                    ListElement{iconName: "headphones" ; btn: "similar"}
-                }
-
-                onItemClicked:
-                {
-                    if(item.btn === "video")
-                    {
-                        youtubeView.openVideo = 1
-                        youtube.getQuery(currentTrack.title+" "+currentTrack.artist)
-                        pageStack.currentIndex = 1
-                        currentView = viewsIndex.youtube
-                    }
-
-                    if(item.btn === "info")
-                    {
-                        if( stackView.currentItem !== table)
-                        {
-                            cover.visible  = true
-                            stackView.pop(table) }
-                        else {
-                            cover.visible  = false
-                            stackView.push(infoView)
-                        }
-                    }
-                }
-            }
-
-            rightContent : Maui.ToolButton
-            {
-                id: menuBtn
-                iconName: "overflow-menu"
-                onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
-            }
         }
-
 
         Item
         {

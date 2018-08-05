@@ -250,6 +250,7 @@ SwipeDelegate
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 Layout.margins: space.tiny
                 Layout.leftMargin: space.small * (quickPlay ? 1 : 2)
+                Layout.rightMargin: space.big
 
                 GridLayout
                 {

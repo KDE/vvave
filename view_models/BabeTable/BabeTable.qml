@@ -5,6 +5,7 @@ import org.kde.kirigami 2.2 as Kirigami
 import org.kde.maui 1.0 as Maui
 import "../../utils/Player.js" as Player
 import "../../utils/Help.js" as H
+import "../../db/Queries.js" as Q
 
 import ".."
 
@@ -44,7 +45,7 @@ BabeList
     signal playAll()
     signal appendAll()
 
-//    altToolBars: true
+    //    altToolBars: true
 
     headBar.leftContent: Maui.ToolButton
     {
@@ -93,15 +94,29 @@ BabeList
     {
         id: contextMenu
 
-        menuItem: MenuItem
-        {
-            text: qsTr("Select...")
-            onTriggered:
+        menuItem: [
+            MenuItem
             {
-                H.addToSelection(list.model.get(list.currentIndex))
-                contextMenu.close()
+                text: qsTr("Select...")
+                onTriggered:
+                {
+                    H.addToSelection(list.model.get(list.currentIndex))
+                    contextMenu.close()
+                }
+            },
+            MenuSeparator {},
+            MenuItem
+            {
+                text: qsTr("Go to Artist")
+                onTriggered: goToArtist()
+
+            },
+            MenuItem
+            {
+                text: qsTr("Go to Album")
+                onTriggered: goToAlbum()
             }
-        }
+        ]
 
         onFavClicked:
         {
@@ -119,7 +134,7 @@ BabeList
 
         onRemoveClicked:
         {
-           listModel.remove(list.currentIndex)
+            listModel.remove(list.currentIndex)
         }
 
         onRateClicked:
@@ -189,13 +204,22 @@ BabeList
 
         onDoubleClicked:
         {
+            currentIndex = index
             if(!isMobile)
                 rowClicked(index)
         }
 
-        onPlay: quickPlayTrack(index)
+        onPlay:
+        {
+            currentIndex = index
+            quickPlayTrack(index)
+        }
 
-        onArtworkCoverDoubleClicked: artworkDoubleClicked(index)
+        onArtworkCoverClicked:
+        {
+            currentIndex = index
+            goToAlbum()
+        }
 
     }
 
@@ -234,6 +258,24 @@ BabeList
 
             Player.queueTracks(trackList)
         }
+    }
+
+    function goToAlbum()
+    {
+        root.pageStack.currentIndex = 1
+        root.currentView = viewsIndex.albums
+        var item = list.model.get(list.currentIndex)
+        albumsView.populateTable(item.album, item.artist)
+        contextMenu.close()
+    }
+
+    function goToArtist()
+    {
+        root.pageStack.currentIndex = 1
+        root.currentView = viewsIndex.artists
+        var item = list.model.get(list.currentIndex)
+        artistsView.populateTable(undefined, item.artist)
+        contextMenu.close()
     }
 
     //    Component.onCompleted: forceActiveFocus()

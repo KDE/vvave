@@ -21,9 +21,9 @@ Brain::~Brain()
 
 void Brain::start()
 {
-//    if(!this->isRunning())
-//        this->go = true;
-//    QMetaObject::invokeMethod(this, "synapse");
+    if(!this->isRunning())
+        this->go = true;
+    QMetaObject::invokeMethod(this, "synapse");
 }
 
 void Brain::stop()
