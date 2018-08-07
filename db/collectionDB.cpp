@@ -119,10 +119,14 @@ bool CollectionDB::check_existance(const QString &tableName, const QString &sear
     auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(searchId, tableName, searchId, search);
     auto query = this->getQuery(queryStr);
 
-    if (query.exec())
+    if (!query.exec())
     {
-        if (query.next()) return true;
-    }else qDebug()<<query.lastError().text();
+        qDebug()<<query.lastError().text();
+        return false;
+    }
+
+    if (query.next())
+        return true;
 
     return false;
 }
@@ -131,12 +135,12 @@ bool CollectionDB::insert(const QString &tableName, const QVariantMap &insertDat
 {
     if (tableName.isEmpty())
     {
-        qDebug()<<QStringLiteral("Fatal error on insert! The table name is empty!");
+        qDebug() << QStringLiteral("Fatal error on insert! The table name is empty!");
         return false;
 
     } else if (insertData.isEmpty())
     {
-        qDebug()<<QStringLiteral("Fatal error on insert! The insertData is empty!");
+        qDebug() << QStringLiteral("Fatal error on insert! The insertData is empty!");
         return false;
     }
 
@@ -225,59 +229,63 @@ void CollectionDB::openDB(const QString &name)
     }
 }
 
-void CollectionDB::addTrack(const DB &track)
+bool CollectionDB::addTrack(const DB &track)
 {
+    auto url = track[BAE::KEY::URL];
+    auto title = track[BAE::KEY::TITLE];
+    auto artist = track[BAE::KEY::ARTIST];
+    auto album = track[BAE::KEY::ALBUM];
+    auto genre = track[BAE::KEY::GENRE];
+    auto year = track[BAE::KEY::RELEASE_DATE];
+    auto sourceUrl = track[BAE::KEY::SOURCES_URL];
+    auto duration = track[BAE::KEY::DURATION];
+    auto babe = track[BAE::KEY::BABE];
+    auto trackNumber = track[BAE::KEY::TRACK];
 
-        auto url = track[KEY::URL];
-        auto title = track[KEY::TITLE];
-        auto artist = track[KEY::ARTIST];
-        auto album = track[KEY::ALBUM];
-        auto genre = track[KEY::GENRE];
-        auto year = track[KEY::RELEASE_DATE];
-        auto sourceUrl = track[KEY::SOURCES_URL];
-        auto duration = track[KEY::DURATION];
-        auto babe = track[KEY::BABE];
-        auto trackNumber = track[KEY::TRACK];
+    auto artwork = track[BAE::KEY::ARTWORK].isEmpty() ? "" : track[BAE::KEY::ARTWORK];
 
-        auto artwork = track[KEY::ARTWORK].isEmpty()? "" : track[KEY::ARTWORK];
+    auto artistTrack = track;
+    BAE::artworkCache(artistTrack, BAE::KEY::ALBUM);
+    auto artistArtwork = artistTrack[BAE::KEY::ARTWORK];
 
-        /* first needs to insert album and artist*/
-        QVariantMap sourceMap {{KEYMAP[KEY::URL],sourceUrl},
-                               {KEYMAP[KEY::SOURCE_TYPE], sourceType(url)}};
+    /* first needs to insert the source, album and artist*/
+    QVariantMap sourceMap {{BAE::KEYMAP[BAE::KEY::URL], sourceUrl},
+                           {BAE::KEYMAP[BAE::KEY::SOURCE_TYPE], sourceType(url)}};
 
-        insert(TABLEMAP[TABLE::SOURCES],sourceMap);
+    insert(TABLEMAP[BAE::TABLE::SOURCES], sourceMap);
 
-        QVariantMap artistMap {{KEYMAP[KEY::ARTIST], artist},
-                               {KEYMAP[KEY::ARTWORK], ""},
-                               {KEYMAP[KEY::WIKI],""}};
+    QVariantMap artistMap {{BAE::KEYMAP[KEY::ARTIST], artist},
+                           {BAE::KEYMAP[KEY::ARTWORK], artistArtwork},
+                           {BAE::KEYMAP[KEY::WIKI], ""}};
 
-        insert(TABLEMAP[TABLE::ARTISTS],artistMap);
+    insert(TABLEMAP[TABLE::ARTISTS],artistMap);
 
-        QVariantMap albumMap {{KEYMAP[KEY::ALBUM], album},
-                              {KEYMAP[KEY::ARTIST], artist},
-                              {KEYMAP[KEY::ARTWORK], artwork},
-                              {KEYMAP[KEY::WIKI],""}};
-        insert(TABLEMAP[TABLE::ALBUMS],albumMap);
+    QVariantMap albumMap {{BAE::KEYMAP[KEY::ALBUM], album},
+                          {BAE::KEYMAP[KEY::ARTIST], artist},
+                          {BAE::KEYMAP[KEY::ARTWORK], artwork},
+                          {BAE::KEYMAP[KEY::WIKI],""}};
 
-        QVariantMap trackMap {{KEYMAP[KEY::URL], url},
-                              {KEYMAP[KEY::SOURCES_URL], sourceUrl},
-                              {KEYMAP[KEY::TRACK], trackNumber},
-                              {KEYMAP[KEY::TITLE], title},
-                              {KEYMAP[KEY::ARTIST], artist},
-                              {KEYMAP[KEY::ALBUM], album},
-                              {KEYMAP[KEY::DURATION], duration},
-                              {KEYMAP[KEY::PLAYED], 0},
-                              {KEYMAP[KEY::BABE], babe},
-                              {KEYMAP[KEY::STARS], 0},
-                              {KEYMAP[KEY::RELEASE_DATE], year},
-                              {KEYMAP[KEY::ADD_DATE], QDateTime::currentDateTime()},
-                              {KEYMAP[KEY::LYRICS],""},
-                              {KEYMAP[KEY::GENRE], genre},
-                              {KEYMAP[KEY::ART], ""},
-                              {KEYMAP[KEY::WIKI], ""},
-                              {KEYMAP[KEY::COMMENT], ""}};
+    insert(TABLEMAP[TABLE::ALBUMS],albumMap);
 
-        insert(TABLEMAP[TABLE::TRACKS],trackMap);
+    QVariantMap trackMap {{BAE::KEYMAP[BAE::KEY::URL], url},
+                          {BAE::KEYMAP[BAE::KEY::SOURCES_URL], sourceUrl},
+                          {BAE::KEYMAP[BAE::KEY::TRACK], trackNumber},
+                          {BAE::KEYMAP[BAE::KEY::TITLE], title},
+                          {BAE::KEYMAP[BAE::KEY::ARTIST], artist},
+                          {BAE::KEYMAP[BAE::KEY::ALBUM], album},
+                          {BAE::KEYMAP[BAE::KEY::DURATION], duration},
+                          {BAE::KEYMAP[BAE::KEY::PLAYED], 0},
+                          {BAE::KEYMAP[BAE::KEY::BABE], babe},
+                          {BAE::KEYMAP[BAE::KEY::STARS], 0},
+                          {BAE::KEYMAP[BAE::KEY::RELEASE_DATE], year},
+                          {BAE::KEYMAP[BAE::KEY::ADD_DATE], QDateTime::currentDateTime()},
+                          {BAE::KEYMAP[BAE::KEY::LYRICS],""},
+                          {BAE::KEYMAP[BAE::KEY::GENRE], genre},
+                          {BAE::KEYMAP[BAE::KEY::ART], ""},
+                          {BAE::KEYMAP[BAE::KEY::WIKI], ""},
+                          {BAE::KEYMAP[BAE::KEY::COMMENT], ""}};
+
+    return this->insert(BAE::TABLEMAP[BAE::TABLE::TRACKS], trackMap);
 }
 
 bool CollectionDB::updateTrack(const DB &track)
@@ -455,7 +463,7 @@ bool CollectionDB::wikiAlbum(const DB &track,  QString value)
     auto album = track[KEY::ALBUM];
 
     auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(
-                        TABLEMAP[TABLE::ALBUMS],
+                TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::WIKI], value.replace("\"","\"\""),
             KEYMAP[KEY::ALBUM],
             album,KEYMAP[KEY::ARTIST], artist);
@@ -667,7 +675,7 @@ QVariantList CollectionDB::getSearchedTracks(const KEY &where, const QString &se
                            "SELECT t.* FROM %1 t INNER JOIN %9 art ON t.%8 = art.%8 WHERE art.%4 LIKE \"%%5%\" COLLATE NOCASE "
                            "UNION "
                            "SELECT DISTINCT t.* FROM %1 t INNER JOIN %9 at ON t.%8 = at.%4 WHERE at.%8 LIKE \"%%5%\" COLLATE NOCASE").arg(
-                       TABLEMAP[TABLE::TRACKS],
+                    TABLEMAP[TABLE::TRACKS],
                 TABLEMAP[TABLE::TRACKS_TAGS],
                 KEYMAP[KEY::URL],
                 KEYMAP[where],
@@ -890,35 +898,35 @@ void CollectionDB::insertArtwork(const DB &track)
 
     switch(albumType(track))
     {
-        case TABLE::ALBUMS :
-        {
-            auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(TABLEMAP[TABLE::ALBUMS],
-                    KEYMAP[KEY::ARTWORK],
-                    path.isEmpty() ? SLANG[W::NONE] : path,
-                                                      KEYMAP[KEY::ALBUM],
-                                                      album,
-                                                      KEYMAP[KEY::ARTIST],
-                                                      artist);
+    case TABLE::ALBUMS :
+    {
+        auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(TABLEMAP[TABLE::ALBUMS],
+                KEYMAP[KEY::ARTWORK],
+                path.isEmpty() ? SLANG[W::NONE] : path,
+                                                  KEYMAP[KEY::ALBUM],
+                                                  album,
+                                                  KEYMAP[KEY::ARTIST],
+                                                  artist);
 
-            auto query = this->getQuery(queryStr);
-            if(!query.exec())qDebug()<<"COULDNT Artwork[cover] inerted into DB"<<artist<<album;
-            break;
+        auto query = this->getQuery(queryStr);
+        if(!query.exec())qDebug()<<"COULDNT Artwork[cover] inerted into DB"<<artist<<album;
+        break;
 
-        }
-        case TABLE::ARTISTS:
-        {
-            auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::ARTISTS],
-                    KEYMAP[KEY::ARTWORK],
-                    path.isEmpty() ? SLANG[W::NONE] : path,
-                                                      KEYMAP[KEY::ARTIST],
-                                                      artist);
-            auto query = this->getQuery(queryStr);
-            if(!query.exec())qDebug()<<"COULDNT Artwork[head] inerted into DB"<<artist;
+    }
+    case TABLE::ARTISTS:
+    {
+        auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::ARTISTS],
+                KEYMAP[KEY::ARTWORK],
+                path.isEmpty() ? SLANG[W::NONE] : path,
+                                                  KEYMAP[KEY::ARTIST],
+                                                  artist);
+        auto query = this->getQuery(queryStr);
+        if(!query.exec())qDebug()<<"COULDNT Artwork[head] inerted into DB"<<artist;
 
-            break;
+        break;
 
-        }
-        default: return;
+    }
+    default: return;
     }
 
     emit artworkInserted(track);
@@ -972,7 +980,7 @@ bool CollectionDB::cleanArtists()
 {
     //    delete from artists where artist in (select artist from artists except select distinct artist from tracks);
     auto queryTxt=QString("DELETE FROM %1 WHERE %2 IN (SELECT %2 FROM %1 EXCEPT SELECT DISTINCT %2 FROM %3)").arg(
-                      TABLEMAP[TABLE::ARTISTS],
+                TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::TRACKS]
             );
@@ -986,7 +994,7 @@ bool CollectionDB::cleanArtists()
 bool CollectionDB::removeFolder(const QString &url)
 {
     auto queryTxt=QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(
-                      TABLEMAP[TABLE::FOLDERS],
+                TABLEMAP[TABLE::FOLDERS],
             KEYMAP[KEY::URL], url);
 
     qDebug()<<queryTxt;
@@ -1007,7 +1015,7 @@ bool CollectionDB::cleanAlbums()
 {
     //    delete from albums where (album, artist) in (select a.album, a.artist from albums a except select distinct album, artist from tracks);
     auto queryTxt=QString("DELETE FROM %1 WHERE (%2, %3) IN (SELECT %2, %3 FROM %1 EXCEPT SELECT DISTINCT %2, %3  FROM %4)").arg(
-                      TABLEMAP[TABLE::ALBUMS],
+                TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::ALBUM],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::TRACKS]

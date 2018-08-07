@@ -184,7 +184,8 @@ QString Babe::albumArt(const QString &album, const QString &artist)
             TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::ALBUM],album,
             KEYMAP[KEY::ARTIST],artist);
-    auto albumCover = getDBData(queryStr);
+
+    auto albumCover = this->getDBData(queryStr);
 
     if(!albumCover.isEmpty())
         if(!albumCover.first()[KEY::ARTWORK].isEmpty() && albumCover.first()[KEY::ARTWORK] != SLANG[W::NONE])
@@ -471,7 +472,7 @@ QStringList Babe::defaultSources()
 
 QString Babe::loadCover(const QString &url)
 {
-    auto map = getDBData(QStringList() << url);
+    auto map = this->getDBData(QStringList() << url);
 
     if(map.isEmpty()) return "";
 

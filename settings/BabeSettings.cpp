@@ -82,12 +82,11 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
     connect(&this->fileLoader, &FileLoader::finished,[this](int size)
     {
-        if(size > 0)
-        {
-            bDebug::Instance()->msg("Finished inserting into DB "+QString::number(size)+" tracks");
-            this->startBrainz(true, BAE::SEG::HALF);
+        bDebug::Instance()->msg("Finished inserting into DB "+QString::number(size)+" tracks");
 
-        }else
+        if(size > 0)
+            this->startBrainz(true, BAE::SEG::HALF);
+        else
             this->startBrainz(BAE::loadSettings("BRAINZ", "BABE", false).toBool(), BAE::SEG::TWO);
 
         emit refreshTables(size);
@@ -117,7 +116,7 @@ void BabeSettings::fetchYoutubeTrack(const QString &message)
 
 void BabeSettings::checkCollectionBrainz(const bool &state)
 {
-    bDebug::Instance()->msg("BRAINZ STATE<<"+state);
+    bDebug::Instance()->msg("BRAINZ STATE<<" + QString(state ? "true" : "false"));
     this->startBrainz(state, BAE::SEG::THREE);
 }
 
@@ -141,5 +140,6 @@ void BabeSettings::populateDB(const QStringList &paths)
     for(auto path : newPaths)
         if(path.startsWith("file://"))
             path.replace("file://", "");
+
     fileLoader.requestPaths(newPaths);
 }

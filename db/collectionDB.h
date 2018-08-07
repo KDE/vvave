@@ -44,7 +44,7 @@ class CollectionDB : public QObject
 
         void insertArtwork(const BAE::DB &track);
 
-        void addTrack(const BAE::DB &track);
+        bool addTrack(const BAE::DB &track);
         bool updateTrack(const BAE::DB &track);
         Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
         Q_INVOKABLE bool colorTagTrack(const QString &path, const QString &value);

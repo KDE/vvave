@@ -5,7 +5,6 @@
 #include <QObject>
 #include <QDirIterator>
 
-#include "../services/local/taginfo.h"
 #include "../db/collectionDB.h"
 
 class FileLoader : public CollectionDB
@@ -35,7 +34,6 @@ private:
     bool go = false;
     bool wait = true;
     QStringList queue;
-    TagInfo info;
 };
 
 

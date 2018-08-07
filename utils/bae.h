@@ -330,8 +330,10 @@ inline QString removeSubstring(const QString &newTitle, const QString &subString
 {
     const int indexFt = newTitle.indexOf(subString, 0, Qt::CaseInsensitive);
 
-    if (indexFt != -1) return newTitle.left(indexFt).simplified();
-    else  return newTitle;
+    if (indexFt != -1)
+        return newTitle.left(indexFt).simplified();
+    else
+        return newTitle;
 }
 
 inline QString ucfirst(const QString &str)/*uppercase first letter*/
@@ -368,12 +370,12 @@ inline QString fixString (const QString &str)
     title = title.contains("(") && title.contains(")") ? fixTitle(title, "(",")") : title;
     title = title.contains("[") && title.contains("]") ? fixTitle(title, "[","]") : title;
     title = title.contains("{") && title.contains("}") ? fixTitle(title, "{","}") : title;
-    title = title.contains("ft") ? removeSubstring(title, "ft") : title;
-    title = title.contains("ft.") ? removeSubstring(title, "ft.") : title;
-    title = title.contains("featuring") ? removeSubstring(title, "featuring"):title;
-    title = title.contains("feat") ? removeSubstring(title, "feat") : title;
-    title = title.contains("official video")?removeSubstring(title, "official video"):title;
-    title = title.contains("live") ? removeSubstring(title, "live") : title;
+    title = title.contains("ft", Qt::CaseInsensitive) ? removeSubstring(title, "ft") : title;
+    title = title.contains("ft.", Qt::CaseInsensitive) ? removeSubstring(title, "ft.") : title;
+    title = title.contains("featuring", Qt::CaseInsensitive) ? removeSubstring(title, "featuring"):title;
+    title = title.contains("feat", Qt::CaseInsensitive) ? removeSubstring(title, "feat") : title;
+    title = title.contains("official video", Qt::CaseInsensitive) ? removeSubstring(title, "official video"):title;
+    title = title.contains("live", Qt::CaseInsensitive) ? removeSubstring(title, "live") : title;
     title = title.contains("...") ? title.replace("..." ,"") : title;
     title = title.contains("|") ? title.replace("|", "") : title;
     title = title.contains("|") ? removeSubstring(title, "|") : title;
@@ -387,9 +389,7 @@ inline QString fixString (const QString &str)
 
 inline bool fileExists(const QString &url)
 {
-    QFileInfo path(url);
-    if (path.exists()) return true;
-    else return false;
+    return FMH::fileExists(url);
 }
 
 inline BAE::TABLE albumType(const BAE::DB &albumMap)
