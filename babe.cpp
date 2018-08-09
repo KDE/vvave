@@ -569,12 +569,14 @@ QVariantList Babe::searchFor(const QStringList &queries)
 
 QString Babe::fetchCoverArt(DB &song)
 {
+    Pulpo pulpo;
+
     if(BAE::artworkCache(song, KEY::ALBUM)) return song[KEY::ARTWORK];
     if(BAE::artworkCache(song, KEY::ARTIST)) return song[KEY::ARTWORK];
 
-    pulpo->registerServices({SERVICES::LastFm, SERVICES::Spotify});
-    pulpo->setOntology(PULPO::ONTOLOGY::ALBUM);
-    pulpo->setInfo(PULPO::INFO::ARTWORK);
+    pulpo.registerServices({SERVICES::LastFm, SERVICES::Spotify});
+    pulpo.setOntology(PULPO::ONTOLOGY::ALBUM);
+    pulpo.setInfo(PULPO::INFO::ARTWORK);
 
     QEventLoop loop;
 
@@ -584,7 +586,7 @@ QString Babe::fetchCoverArt(DB &song)
 
     connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
 
-    connect(pulpo, &Pulpo::infoReady, [&](const BAE::DB &track,const PULPO::RESPONSE  &res)
+    connect(&pulpo, &Pulpo::infoReady, [&](const BAE::DB &track,const PULPO::RESPONSE  &res)
     {
         Q_UNUSED(track);
         if(!res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK].isEmpty())
@@ -595,7 +597,7 @@ QString Babe::fetchCoverArt(DB &song)
         loop.quit();
     });
 
-    pulpo->feed(song, PULPO::RECURSIVE::OFF);
+    pulpo.feed(song, PULPO::RECURSIVE::OFF);
 
     timer.start();
     loop.exec();
