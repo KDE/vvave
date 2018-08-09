@@ -51,7 +51,6 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
-
     property bool isShuffle: bae.loadSetting("SHUFFLE","PLAYBACK", false) == "true" ? true : false
     property var currentTrack: ({
                                     babe: "0",
@@ -112,23 +111,13 @@ Maui.ApplicationWindow
     property bool isLinked: false
     property bool isServing: false
 
-    /***************************************************/
-    /******************** UI UNITS ********************/
-    /*************************************************/
-
-
     property bool focusMode : false
+    property bool selectionMode : false
 
     /***************************************************/
     /******************** UI COLORS *******************/
     /*************************************************/
     property string babeColor: bae.babeColor()
-
-    /***************************************************/
-    /**************************************************/
-    /*************************************************/
-    property bool selectionMode : false
-
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -409,23 +398,24 @@ Maui.ApplicationWindow
         {
             text: qsTr("Settings...")
             iconName: "view-media-config"
-            Kirigami.Action
-            {
-                text: "Brainz"
+            //            Kirigami.Action
+            //            {
+            //                text: "Brainz"
 
-                Kirigami.Action
-                {
-                    id: brainzToggle
-                    text: checked ? "Turn OFF" : "Turn ON"
-                    checked: false
-                    checkable: true
-                    onToggled:
-                    {
-                        bae.saveSetting("BRAINZ", checked === true ? true : false, "BABE")
-                        bae.brainz(checked === true ? true : false)
-                    }
-                }
-            }
+            //                Kirigami.Action
+            //                {
+            //                    id: brainzToggle
+            //                    text: checked ? "Turn OFF" : "Turn ON"
+            //                    checked: bae.brainzState()
+            //                    checkable: true
+            //                    onToggled:
+            //                    {
+            //                        checked = !checked
+            //                        bae.saveSetting("AUTO", checked, "BRAINZ")
+            ////                        bae.brainz(checked)
+            //                    }
+            //                }
+            //            }
 
             Kirigami.Action
             {
@@ -644,7 +634,8 @@ Maui.ApplicationWindow
         floatingBar: true
         footBarOverlap: true
 
-        footBar.visible: !mainlistEmpty
+        footBarVisible: !mainlistEmpty
+        headBarVisible: !mainlistEmpty
 
         footBar.leftContent: Label
         {
@@ -740,7 +731,27 @@ Maui.ApplicationWindow
                 id: swipeView
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                Component.onCompleted: contentItem.interactive = isMobile
+                interactive: isMobile
+                //                contentItem: ListView
+                //                {
+                //                    model: swipeView.contentModel
+                //                    interactive: swipeView.interactive
+                //                    currentIndex: swipeView.currentIndex
+
+                //                    spacing: swipeView.spacing
+                //                    orientation: swipeView.orientation
+                //                    snapMode: ListView.SnapOneItem
+                //                    boundsBehavior: Flickable.StopAtBounds
+
+                //                    highlightRangeMode: ListView.StrictlyEnforceRange
+                //                    preferredHighlightBegin: 0
+                //                    preferredHighlightEnd: 0
+                //                    highlightMoveDuration: 250
+                //                    //                    min:10
+
+                //                    maximumFlickVelocity: 10 * (swipeView.orientation ===
+                //                                               Qt.Horizontal ? width : height)
+                //                }
 
                 currentIndex: currentView
 
@@ -1010,12 +1021,12 @@ Maui.ApplicationWindow
         } else {
             root.showMaximized();
         }
-    }   
+    }
 
     Component.onCompleted:
     {
-        if(isAndroid)
-           switchColorScheme(colorScheme.Dark)
+        //        if(isAndroid)
+        //            switchColorScheme(colorScheme.Dark)
     }
 
 

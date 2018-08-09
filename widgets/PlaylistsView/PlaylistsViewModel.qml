@@ -16,7 +16,6 @@ BabeList
 
     headBarExit: false
     headBarTitle: "Playlists"
-
     Maui.NewDialog
     {
         id: newPlaylistDialog

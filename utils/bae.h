@@ -433,7 +433,7 @@ inline QVariant loadSettings(const QString &key, const QString &group, const QVa
     QVariant variant;
     QSettings setting("vvave","vvave");
     setting.beginGroup(group);
-    variant = setting.value(key,defaultValue);
+    variant = setting.value(key, defaultValue);
     setting.endGroup();
 
     return variant;

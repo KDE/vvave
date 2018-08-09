@@ -23,6 +23,9 @@
 #include "services/musicbrainzService.h"
 #include "services/deezerService.h"
 
+//#include "qgumbodocument.h"
+//#include "qgumbonode.h"
+
 Pulpo::Pulpo(const BAE::DB &song,QObject *parent)
     : QObject(parent), track(song) {}
 
@@ -68,111 +71,136 @@ void Pulpo::setRecursive(const RECURSIVE &state)
     this->recursive=state;
 }
 
+QStringList Pulpo::queryHtml(const QByteArray &array, const QString &className)
+{
+    QStringList res;
+
+//    auto doc = QGumboDocument::parse(array);
+//    auto root = doc.rootNode();
+
+//    auto nodes = root.getElementsByTagName(HtmlTag::TITLE);
+//    Q_ASSERT(nodes.size() == 1);
+
+//    auto title = nodes.front();
+//    qDebug() << "title is: " << title.innerText();
+
+//    auto container = root.getElementsByClassName(className);
+//    //    if(container.size() == 1)
+//    //        return res;
+
+//    auto children = container.front().children();
+//    for(const auto &i : children)
+//        res << i.innerText();
+
+
+    return res;
+}
+
 void Pulpo::initServices()
 {
     for(auto service : this->registeredServices)
         switch (service)
         {
-            case SERVICES::LastFm:
+        case SERVICES::LastFm:
+        {
+            lastfm lastfm(this->track);
+            connect(&lastfm, &lastfm::infoReady, this, &Pulpo::passSignal);
+
+            if(lastfm.setUpService(this->ontology, this->info))
             {
-                lastfm lastfm(this->track);
-                connect(&lastfm, &lastfm::infoReady, this, &Pulpo::passSignal);
+                if(recursive == RECURSIVE::OFF) return;
 
-                if(lastfm.setUpService(this->ontology, this->info))
-                {
-                    if(recursive == RECURSIVE::OFF) return;
+            }else qDebug()<<"Error settingUp lastfm service";
 
-                }else qDebug()<<"Error settingUp lastfm service";
+            break;
+        }
 
-                break;
-            }
+        case SERVICES::Spotify:
+        {
+            spotify spotify(this->track);
+            connect(&spotify, &spotify::infoReady, this, &Pulpo::passSignal);
 
-            case SERVICES::Spotify:
+            if(spotify.setUpService(this->ontology,this->info))
             {
-                spotify spotify(this->track);
-                connect(&spotify, &spotify::infoReady, this, &Pulpo::passSignal);
+                if(recursive== RECURSIVE::OFF) return;
 
-                if(spotify.setUpService(this->ontology,this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
+            }else qDebug()<<"Error settingUp spotify service";
 
-                }else qDebug()<<"Error settingUp spotify service";
+            break;
+        }
+        case SERVICES::Genius:
+        {
+            genius genius(this->track);
+            connect(&genius, &genius::infoReady, this, &Pulpo::passSignal);
 
-                break;
-            }
-            case SERVICES::Genius:
+            if(genius.setUpService(this->ontology,this->info))
             {
-                genius genius(this->track);
-                connect(&genius, &genius::infoReady, this, &Pulpo::passSignal);
+                if(recursive== RECURSIVE::OFF) return;
 
-                if(genius.setUpService(this->ontology,this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
+            }else qDebug()<<"Error settingUp genius service";
 
-                }else qDebug()<<"Error settingUp spotify service";
+            break;
+        }
+        case SERVICES::MusicBrainz:
+        {
+            musicBrainz musicbrainz(this->track);
+            connect(&musicbrainz, &musicBrainz::infoReady, this, &Pulpo::passSignal);
 
-                break;
-            }
-            case SERVICES::MusicBrainz:
+            if(musicbrainz.setUpService(this->ontology,this->info))
             {
-                musicBrainz musicbrainz(this->track);
-                connect(&musicbrainz, &musicBrainz::infoReady, this, &Pulpo::passSignal);
+                if(recursive== RECURSIVE::OFF) return;
 
-                if(musicbrainz.setUpService(this->ontology,this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
+            }else qDebug()<<"Error settingUp musicBrainz service";
 
-                }else qDebug()<<"Error settingUp musicBrainz service";
+            break;
+        }
+        case SERVICES::iTunes:
+        {
+            break;
+        }
+        case SERVICES::WikiLyrics:
+        {
+            break;
+        }
+        case SERVICES::LyricWikia:
+        {
+            lyricWikia lyricwikia(this->track);
+            connect(&lyricwikia, &lyricWikia::infoReady, this, &Pulpo::passSignal);
 
-                break;
-            }
-            case SERVICES::iTunes:
+            if(lyricwikia.setUpService(this->ontology,this->info))
             {
-                break;
-            }
-            case SERVICES::WikiLyrics:
+                if(recursive== RECURSIVE::OFF) return;
+
+            }else qDebug()<<"Error settingUp lyricwikia service";
+
+            break;
+        }
+        case SERVICES::Wikipedia:
+        {
+            break;
+        }
+
+        case SERVICES::Deezer:
+        {
+            deezer deezer(this->track);
+            connect(&deezer, &deezer::infoReady, this, &Pulpo::passSignal);
+
+            if(deezer.setUpService(this->ontology, this->info))
             {
-                break;
-            }
-            case SERVICES::LyricWikia:
-            {
-                lyricWikia lyricwikia(this->track);
-                connect(&lyricwikia, &lyricWikia::infoReady, this, &Pulpo::passSignal);
+                if(recursive== RECURSIVE::OFF) return;
 
-                if(lyricwikia.setUpService(this->ontology,this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
+            }else qDebug()<<"Error settingUp deezer service";
 
-                }else qDebug()<<"Error settingUp lyricwikia service";
-
-                break;
-            }
-            case SERVICES::Wikipedia:
-            {
-                break;
-            }
-
-            case SERVICES::Deezer:
-            {
-                deezer deezer(this->track);
-                connect(&deezer, &deezer::infoReady, this, &Pulpo::passSignal);
-
-                if(deezer.setUpService(this->ontology, this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
-
-                }else qDebug()<<"Error settingUp deezer service";
-
-                break;
-            }
-            case SERVICES::ALL:
-            {
-                break;
-            }
-            case SERVICES::NONE:
-            {
-                break;
-            }
+            break;
+        }
+        case SERVICES::ALL:
+        {
+            break;
+        }
+        case SERVICES::NONE:
+        {
+            break;
+        }
         }
 }
 
@@ -183,7 +211,7 @@ void Pulpo::passSignal(const BAE::DB &track, const PULPO::RESPONSE &response)
 
 PULPO::RESPONSE Pulpo::packResponse(const PULPO::ONTOLOGY ontology, const PULPO::INFO &infoKey, const PULPO::CONTEXT &context, const QVariant &value)
 {
-    return { { ontology ,{{ infoKey, {{ context, value }} }} } };
+    return {{ ontology, {{ infoKey, {{ context, value }} }} }};
 }
 
 PULPO::RESPONSE Pulpo::packResponse(const ONTOLOGY ontology, const PULPO::INFO &infoKey, const PULPO::VALUE &map)
@@ -193,14 +221,16 @@ PULPO::RESPONSE Pulpo::packResponse(const ONTOLOGY ontology, const PULPO::INFO &
 
 bool Pulpo::parseArray()
 {
-    if(this->ontology != PULPO::ONTOLOGY::NONE)
-        switch(this->ontology)
-        {
-            case PULPO::ONTOLOGY::ALBUM: return this->parseAlbum();
-            case PULPO::ONTOLOGY::ARTIST: return this->parseArtist();
-            case PULPO::ONTOLOGY::TRACK: return this->parseTrack();
-            default: return false;
-        }
+    if(this->ontology == PULPO::ONTOLOGY::NONE)
+        return false;
+
+    switch(this->ontology)
+    {
+    case PULPO::ONTOLOGY::ALBUM: return this->parseAlbum();
+    case PULPO::ONTOLOGY::ARTIST: return this->parseArtist();
+    case PULPO::ONTOLOGY::TRACK: return this->parseTrack();
+    default: return false;
+    }
 
     return false;
 }

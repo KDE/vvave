@@ -15,7 +15,7 @@ function playTrack(index)
             player.play()
 
             var artwork = currentTrack.artwork
-            currentArtwork = artwork && artwork.length>0 && artwork !== "NONE"? artwork : bae.loadCover(currentTrack.url)
+            currentArtwork = artwork && artwork.length > 0 && artwork !== "NONE"? artwork : bae.loadCover(currentTrack.url)
 
             currentTrack.artwork = currentArtwork
 
@@ -31,7 +31,8 @@ function playTrack(index)
                     bae.notifySong(currentTrack.url)
             }
 
-            //            bae.trackLyrics(currentTrack.url)
+            if(currentTrack.lyrics.length < 1)
+                bae.trackLyrics(currentTrack.url)
 
             //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
             //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)

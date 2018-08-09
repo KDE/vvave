@@ -24,7 +24,7 @@ Maui.Page
     signal albumCoverPressed(string album, string artist)
     signal bgClicked()
 
-    margins: space.huge
+    margins: space.medium
 
     onWidthChanged: grid.forceLayout()
 
@@ -69,7 +69,7 @@ Maui.Page
 
         flickableDirection: Flickable.AutoFlickDirection
 
-        snapMode: GridView.SnapToRow
+        snapMode: GridView.NoSnap
         //        flow: GridView.FlowTopToBottom
         //        maximumFlickVelocity: albumSize*8
 

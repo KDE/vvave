@@ -21,9 +21,10 @@ Brain::~Brain()
 
 void Brain::start()
 {
-//    if(!this->isRunning())
-//        this->go = true;
-//    QMetaObject::invokeMethod(this, "synapse");
+    if(this->isRunning()) return;
+
+    this->go = true;
+    QMetaObject::invokeMethod(this, "synapse");
 }
 
 void Brain::stop()
@@ -91,10 +92,10 @@ void Brain::connectionParser(DB track, RESPONSE response)
     {
         switch(res)
         {
-            case ONTOLOGY::ALBUM: this->parseAlbumInfo(track, response[res]); break;
-            case ONTOLOGY::ARTIST: this->parseArtistInfo(track, response[res]); break;
-            case ONTOLOGY::TRACK:  this->parseTrackInfo(track, response[res]); break;
-            default: return;
+        case ONTOLOGY::ALBUM: this->parseAlbumInfo(track, response[res]); break;
+        case ONTOLOGY::ARTIST: this->parseArtistInfo(track, response[res]); break;
+        case ONTOLOGY::TRACK:  this->parseTrackInfo(track, response[res]); break;
+        default: return;
         }
         this->t.msleep(this->interval);
     }
@@ -106,50 +107,50 @@ void Brain::parseAlbumInfo(DB &track, const INFO_K &response)
     for(auto info : response.keys())
         switch(info)
         {
-            case PULPO::INFO::TAGS:
-            {
-                for(auto context : response[info].keys())
+        case PULPO::INFO::TAGS:
+        {
+            for(auto context : response[info].keys())
 
-                    if(!response[info][context].toMap().isEmpty())
-                    {
-                        for(auto tag : response[info][context].toMap().keys() )
-                            this->tagsAlbum(track, tag, CONTEXT_MAP[context]);
+                if(!response[info][context].toMap().isEmpty())
+                {
+                    for(auto tag : response[info][context].toMap().keys() )
+                        this->tagsAlbum(track, tag, CONTEXT_MAP[context]);
 
-                    }else if (!response[info][context].toStringList().isEmpty())
-                    {
-                        for(auto tag : response[info][context].toStringList() )
-                            this->tagsAlbum(track, tag, CONTEXT_MAP[context]);
+                }else if (!response[info][context].toStringList().isEmpty())
+                {
+                    for(auto tag : response[info][context].toStringList() )
+                        this->tagsAlbum(track, tag, CONTEXT_MAP[context]);
 
-                    } else if (!response[info][context].toString().isEmpty())
-                    {
-                        this->tagsAlbum(track, response[info][context].toString(), CONTEXT_MAP[context]);
-                    }
-                break;
-            }
+                } else if (!response[info][context].toString().isEmpty())
+                {
+                    this->tagsAlbum(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                }
+            break;
+        }
 
-            case PULPO::INFO::ARTWORK:
-            {
-                if(!response[info].isEmpty())
+        case PULPO::INFO::ARTWORK:
+        {
+            if(!response[info].isEmpty())
 
-                    if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
-                    {
-                        qDebug()<<"SAVING ARTWORK FOR: " << track[KEY::ALBUM];
-                        BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
-                        this->insertArtwork(track);
-                    }
+                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
+                {
+                    qDebug()<<"SAVING ARTWORK FOR: " << track[KEY::ALBUM];
+                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
+                    this->insertArtwork(track);
+                }
 
-                break;
-            }
+            break;
+        }
 
-            case PULPO::INFO::WIKI:
-            {
-                if(!response[info].isEmpty())
-                    for (auto context : response[info].keys())
-                        this->wikiAlbum(track, response[info][context].toString());
-                break;
-            }
+        case PULPO::INFO::WIKI:
+        {
+            if(!response[info].isEmpty())
+                for (auto context : response[info].keys())
+                    this->wikiAlbum(track, response[info][context].toString());
+            break;
+        }
 
-            default: continue;
+        default: continue;
         }
 }
 
@@ -159,57 +160,57 @@ void Brain::parseArtistInfo(DB &track, const INFO_K &response)
     {
         switch(info)
         {
-            case PULPO::INFO::TAGS:
+        case PULPO::INFO::TAGS:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
+                for(auto context : response[info].keys())
                 {
-                    for(auto context : response[info].keys())
+                    if(!response[info][context].toMap().isEmpty())
                     {
-                        if(!response[info][context].toMap().isEmpty())
-                        {
-                            for(auto tag : response[info][context].toMap().keys() )
-                                this->tagsArtist(track, tag, CONTEXT_MAP[context]);
+                        for(auto tag : response[info][context].toMap().keys() )
+                            this->tagsArtist(track, tag, CONTEXT_MAP[context]);
 
-                        }else if(!response[info][context].toStringList().isEmpty())
-                        {
-                            for(auto tag : response[info][context].toStringList() )
-                                this->tagsArtist(track, tag, CONTEXT_MAP[context]);
-
-                        }else if(!response[info][context].toString().isEmpty())
-                        {
-                            this->tagsArtist(track, response[info][context].toString(), CONTEXT_MAP[context]);
-                        }
-                    }
-
-                } break;
-            }
-
-            case PULPO::INFO::ARTWORK:
-            {
-                if(!response[info].isEmpty())
-                {
-                    if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
+                    }else if(!response[info][context].toStringList().isEmpty())
                     {
-                        BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
-                        this->insertArtwork(track);
+                        for(auto tag : response[info][context].toStringList() )
+                            this->tagsArtist(track, tag, CONTEXT_MAP[context]);
+
+                    }else if(!response[info][context].toString().isEmpty())
+                    {
+                        this->tagsArtist(track, response[info][context].toString(), CONTEXT_MAP[context]);
                     }
                 }
 
-                break;
-            }
+            } break;
+        }
 
-            case PULPO::INFO::WIKI:
+        case PULPO::INFO::ARTWORK:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
+                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                 {
-                    for (auto context : response[info].keys())
-                        this->wikiArtist(track, response[info][context].toString());
+                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
+                    this->insertArtwork(track);
                 }
-
-                break;
             }
 
-            default: continue;
+            break;
+        }
+
+        case PULPO::INFO::WIKI:
+        {
+            if(!response[info].isEmpty())
+            {
+                for (auto context : response[info].keys())
+                    this->wikiArtist(track, response[info][context].toString());
+            }
+
+            break;
+        }
+
+        default: continue;
         }
     }
 }
@@ -219,97 +220,97 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
     for(auto info : response.keys())
         switch(info)
         {
-            case PULPO::INFO::TAGS:
+        case PULPO::INFO::TAGS:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
+                for(auto context : response[info].keys())
                 {
-                    for(auto context : response[info].keys())
+                    if (!response[info][context].toStringList().isEmpty())
                     {
-                        if (!response[info][context].toStringList().isEmpty())
-                        {
-                            for(auto tag : response[info][context].toStringList() )
-                                this->tagsTrack(track, tag, CONTEXT_MAP[context]);
-                        }
-
-                        if (!response[info][context].toString().isEmpty())
-                            this->tagsTrack(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                        for(auto tag : response[info][context].toStringList() )
+                            this->tagsTrack(track, tag, CONTEXT_MAP[context]);
                     }
-                }
 
-                break;
+                    if (!response[info][context].toString().isEmpty())
+                        this->tagsTrack(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                }
             }
 
-            case PULPO::INFO::WIKI:
+            break;
+        }
+
+        case PULPO::INFO::WIKI:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
-                {
-                    if (!response[info][CONTEXT::WIKI].toString().isEmpty())
-                        this->wikiTrack(track, response[info][CONTEXT::WIKI].toString());
+                if (!response[info][CONTEXT::WIKI].toString().isEmpty())
+                    this->wikiTrack(track, response[info][CONTEXT::WIKI].toString());
 
-                }
-
-                break;
             }
 
-            case PULPO::INFO::ARTWORK:
+            break;
+        }
+
+        case PULPO::INFO::ARTWORK:
+        {
+            if(!response[info].isEmpty())
             {
-                if(!response[info].isEmpty())
+                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                 {
-                    if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
+                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(),CachePath);
+                    this->insertArtwork(track);
+                }
+            }
+
+            break;
+        }
+
+        case PULPO::INFO::METADATA:
+        {
+            TagInfo tag;
+            for(auto context :response[info].keys())
+            {
+                switch(context)
+                {
+                case CONTEXT::ALBUM_TITLE:
+                {
+                    qDebug()<<"SETTING TRACK MISSING METADATA";
+
+                    tag.feed(track[KEY::URL]);
+                    if(!response[info][context].toString().isEmpty())
                     {
-                        BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(),CachePath);
-                        this->insertArtwork(track);
+                        tag.setAlbum(response[info][context].toString());
+                        this->albumTrack(track, response[info][context].toString());
                     }
+
+                    break;
                 }
 
-                break;
-            }
-
-            case PULPO::INFO::METADATA:
-            {
-                TagInfo tag;
-                for(auto context :response[info].keys())
+                case CONTEXT::TRACK_NUMBER:
                 {
-                    switch(context)
-                    {
-                        case CONTEXT::ALBUM_TITLE:
-                        {
-                            qDebug()<<"SETTING TRACK MISSING METADATA";
+                    tag.feed(track[KEY::URL]);
+                    if(!response[info][context].toString().isEmpty())
+                        tag.setTrack(response[info][context].toInt());
 
-                            tag.feed(track[KEY::URL]);
-                            if(!response[info][context].toString().isEmpty())
-                            {
-                                tag.setAlbum(response[info][context].toString());
-                                this->albumTrack(track, response[info][context].toString());
-                            }
-
-                            break;
-                        }
-
-                        case CONTEXT::TRACK_NUMBER:
-                        {
-                            tag.feed(track[KEY::URL]);
-                            if(!response[info][context].toString().isEmpty())
-                                tag.setTrack(response[info][context].toInt());
-
-                            break;
-                        }
-
-                        default: continue;
-                    }
+                    break;
                 }
 
-                break;
+                default: continue;
+                }
             }
 
-            case PULPO::INFO::LYRICS:
-            {
-                if(!response[info][CONTEXT::LYRIC].toString().isEmpty())
-                    this->lyricsTrack(track, response[info][CONTEXT::LYRIC].toString());
-                break;
-            }
+            break;
+        }
 
-            default: continue;
+        case PULPO::INFO::LYRICS:
+        {
+            if(!response[info][CONTEXT::LYRIC].toString().isEmpty())
+                this->lyricsTrack(track, response[info][CONTEXT::LYRIC].toString());
+            break;
+        }
+
+        default: continue;
         }
 }
 
@@ -386,11 +387,8 @@ void Brain::albumArtworks()
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz};
     auto ontology = PULPO::ONTOLOGY::ALBUM;
 
-    bDebug::Instance()->msg("Getting missing albums artworks");
-
     auto queryTxt = QString("SELECT %1, %2 FROM %3 WHERE %4 = ''").arg(KEYMAP[KEY::ALBUM],
             KEYMAP[KEY::ARTIST], TABLEMAP[TABLE::ALBUMS], KEYMAP[KEY::ARTWORK]);
-
 
     /* BEFORE FETCHING ONLINE LOOK UP IN THE CACHE FOR THE IMAGES*/
     auto artworks = this->getDBData(queryTxt);
@@ -399,6 +397,8 @@ void Brain::albumArtworks()
             this->insertArtwork(album);
 
     artworks = this->getDBData(queryTxt);
+    qDebug() << "Getting missing albums artworks"<< artworks.length();
+
     this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
 
     emit this->done(TABLE::ALBUMS);
@@ -412,7 +412,7 @@ void Brain::albumTags()
     auto ontology = PULPO::ONTOLOGY::ALBUM;
 
     //select album, artist from albums where  album  not in (select album from albums_tags) and artist  not in (select  artist from albums_tags)
-    bDebug::Instance()->msg("Getting missing albums tags");
+    qDebug() << ("Getting missing albums tags");
     auto queryTxt =  QString("SELECT %1, %2 FROM %3 WHERE %1 NOT IN ( SELECT %1 FROM %4 ) AND %2 NOT IN ( SELECT %2 FROM %4 )").arg(KEYMAP[KEY::ALBUM],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ALBUMS],
@@ -428,7 +428,7 @@ void Brain::albumWikis()
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz};
     auto ontology = PULPO::ONTOLOGY::ALBUM;
 
-    bDebug::Instance()->msg("Getting missing albums wikis");
+    qDebug() << ("Getting missing albums wikis");
     auto queryTxt =  QString("SELECT %1, %2 FROM %3 WHERE %4 = '' ").arg(KEYMAP[KEY::ALBUM],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ALBUMS],
@@ -443,7 +443,7 @@ void Brain::artistArtworks()
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
     auto ontology = PULPO::ONTOLOGY::ARTIST;
 
-    bDebug::Instance()->msg("Getting missing artists artworks");
+    qDebug() << ("Getting missing artists artworks");
     auto queryTxt = QString("SELECT %1 FROM %2 WHERE %3 = ''").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTWORK]);
@@ -469,7 +469,7 @@ void Brain::artistTags()
     auto ontology = PULPO::ONTOLOGY::ARTIST;
 
     //select artist from artists where  artist  not in (select album from albums_tags)
-    bDebug::Instance()->msg("Getting missing artists tags");
+    qDebug() << ("Getting missing artists tags");
     auto queryTxt =  QString("SELECT %1 FROM %2 WHERE %1 NOT IN ( SELECT %1 FROM %3 ) ").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             TABLEMAP[TABLE::ARTISTS_TAGS]);
@@ -484,7 +484,7 @@ void Brain::artistWikis()
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
     auto ontology = PULPO::ONTOLOGY::ARTIST;
 
-    bDebug::Instance()->msg("Getting missing artists wikis");
+    qDebug() << ("Getting missing artists wikis");
     auto queryTxt =  QString("SELECT %1 FROM %2 WHERE %3 = '' ").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::WIKI]);
@@ -498,7 +498,7 @@ void Brain::trackArtworks()
     auto ontology = PULPO::ONTOLOGY::TRACK;
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
 
-    bDebug::Instance()->msg("Getting missing track artwork");
+    qDebug() << ("Getting missing track artwork");
     //select url, title, album, artist from tracks t inner join albums a on a.album=t.album and a.artist=t.artist where a.artwork = ''
     auto queryTxt =  QString("SELECT DISTINCT t.%1, t.%2, t.%3, t.%4 FROM %5 t INNER JOIN %6 a ON a.%3 = t.%3 AND a.%4 = t.%4  WHERE a.%7 = '' GROUP BY a.%3, a.%4 ").arg(KEYMAP[KEY::URL],
             KEYMAP[KEY::TITLE],
@@ -509,11 +509,7 @@ void Brain::trackArtworks()
             KEYMAP[KEY::ARTWORK]);
 
     auto artworks = this->getDBData(queryTxt);
-    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, [](DB track)
-    {
-        CollectionDB conn(nullptr);
-        conn.insertArtwork(track);
-    });
+    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF);
 
     emit this->done(TABLE::ALBUMS);
 
@@ -526,18 +522,14 @@ void Brain::trackLyrics()
     auto ontology = PULPO::ONTOLOGY::TRACK;
     auto services = {PULPO::SERVICES::LyricWikia, PULPO::SERVICES::Genius};
 
-    bDebug::Instance()->msg("Getting missing track lyrics");
+    qDebug() << ("Getting missing track lyrics");
     auto queryTxt = QString("SELECT %1, %2, %3 FROM %4 WHERE %5 = ''").arg(KEYMAP[KEY::URL],
             KEYMAP[KEY::TITLE],
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::LYRICS]);
 
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::LYRICS, PULPO::RECURSIVE::OFF, [](DB track)
-    {
-        CollectionDB conn(nullptr);
-        conn.lyricsTrack(track, SLANG[W::NONE]);
-    });
+    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::LYRICS, PULPO::RECURSIVE::OFF);
 
 }
 
@@ -548,7 +540,7 @@ void Brain::trackTags()
     auto ontology = PULPO::ONTOLOGY::TRACK;
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
 
-    bDebug::Instance()->msg("Getting missing track tags");
+    qDebug() << ("Getting missing track tags");
     // select title, artist, album from tracks t where url not in (select url from tracks_tags)
     auto queryTxt = QString("SELECT %1, %2, %3, %4 FROM %5 WHERE %1 NOT IN ( SELECT %1 FROM %6 )").arg(KEYMAP[KEY::URL],
             KEYMAP[KEY::TITLE],
@@ -566,18 +558,14 @@ void Brain::trackWikis()
     auto ontology = PULPO::ONTOLOGY::TRACK;
     auto services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz, PULPO::SERVICES::Genius};
 
-    bDebug::Instance()->msg("Getting missing track wikis");
+    qDebug() << ("Getting missing track wikis");
     auto queryTxt = QString("SELECT %1, %2, %3, %4 FROM %5 WHERE %6 = ''").arg(KEYMAP[KEY::URL],
             KEYMAP[KEY::TITLE],
             KEYMAP[KEY::ARTIST],
             KEYMAP[KEY::ALBUM],
             TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::WIKI]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, RECURSIVE::OFF, [](DB track)
-    {
-        CollectionDB conn(nullptr);
-        conn.wikiTrack(track, SLANG[W::NONE]);
-    });
+    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, RECURSIVE::OFF);
 
 }
 

@@ -34,7 +34,6 @@ Maui.Page
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
     focus: true
-
     headBarExit: false
     margins: 0
 
@@ -47,10 +46,12 @@ Maui.Page
         {
             if( stackView.currentItem !== table)
             {
-                        cover.visible  = true
-                stackView.pop(table) }
-            else {
-                        cover.visible  = false
+                cover.visible  = true
+                stackView.pop(table)
+                albumsRoll.positionAlbum(currentTrackIndex)
+            }else
+            {
+                cover.visible  = false
                 stackView.push(infoView)
             }
         }
@@ -373,7 +374,7 @@ Maui.Page
         Slider
         {
             id: progressBar
-            height: unit * (isMobile ?  4 : 8)
+            height: unit * (isMobile ?  6 : 8)
             width: parent.width
             Layout.fillWidth: true
 

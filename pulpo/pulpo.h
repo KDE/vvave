@@ -37,6 +37,8 @@ class Pulpo : public QObject
         PULPO::ONTOLOGY getOntology();
         void setRecursive(const PULPO::RECURSIVE &state);
 
+        QStringList queryHtml(const QByteArray &array, const QString &className =  QString());
+
     private:
         void initServices();
         PULPO::RECURSIVE recursive = PULPO::RECURSIVE::ON;

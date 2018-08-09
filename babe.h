@@ -97,7 +97,7 @@ public:
 public slots:
 
 private:
-
+    Pulpo *pulpo;
     ConThread *thread;
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))

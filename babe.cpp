@@ -26,7 +26,24 @@ using namespace BAE;
 Babe::Babe(QObject *parent) : CollectionDB(parent)
 {    
     this->settings = new BabeSettings(this);
+
+    /*use another thread for the db to perfom heavy dutty actions*/
     this->thread = new ConThread;
+    this->pulpo = new Pulpo;
+
+    connect(pulpo, &Pulpo::infoReady, [&](const BAE::DB &track, const PULPO::RESPONSE  &res)
+    {
+        qDebug()<<"GOT THE LYRICS";
+
+        if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS].isEmpty())
+        {
+            auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
+
+            lyricsTrack(track, lyrics);
+            emit this->trackLyricsReady(lyrics, track[KEY::URL]);
+        }
+    });
+
 
     connect(settings, &BabeSettings::refreshTables, [this](int size)
     {
@@ -45,6 +62,7 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
 
     });
 
+    /*The local streaming connection still unfinished*/
     connect(&link, &Linking::parseAsk, this, &Babe::linkDecoder);
     connect(&link, &Linking::bytesFrame, [this](QByteArray array)
     {
@@ -54,6 +72,7 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
     connect(&link, &Linking::arrayReady, [this](QByteArray array)
     {
         qDebug()<<"trying to play the array";
+        Q_UNUSED(array);
         this->player.playBuffer();
     });
 
@@ -135,6 +154,7 @@ void Babe::trackLyrics(const QString &url)
 
     if(track.isEmpty()) return;
 
+    qDebug()<< "Getting lyrics for track"<< track.first()[KEY::TITLE];
     if(!track.first()[KEY::LYRICS].isEmpty() && track.first()[KEY::LYRICS] != SLANG[W::NONE])
         emit this->trackLyricsReady(track.first()[KEY::LYRICS], url);
     else
@@ -196,23 +216,14 @@ QString Babe::albumArt(const QString &album, const QString &artist)
 
 void Babe::fetchTrackLyrics(DB &song)
 {
-    Pulpo pulpo;
-    pulpo.registerServices({SERVICES::LyricWikia});
-    pulpo.setOntology(PULPO::ONTOLOGY::TRACK);
-    pulpo.setInfo(PULPO::INFO::LYRICS);
+    pulpo->registerServices({SERVICES::LyricWikia, SERVICES::Genius});
+    pulpo->setOntology(PULPO::ONTOLOGY::TRACK);
+    pulpo->setInfo(PULPO::INFO::LYRICS);
 
-    connect(&pulpo, &Pulpo::infoReady, [this](const BAE::DB &track, const PULPO::RESPONSE  &res)
-    {
-        if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS].isEmpty())
-        {
-            auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
+     qDebug()<<"STARTED FETCHING LYRICS";
+    pulpo->feed(song, PULPO::RECURSIVE::OFF);
 
-            lyricsTrack(track, lyrics);
-            emit this->trackLyricsReady(lyrics, track[KEY::URL]);
-        }
-    });
-
-    pulpo.feed(song, PULPO::RECURSIVE::OFF);
+    qDebug()<<"DONE FETCHING LYRICS";
 }
 
 void Babe::linkDecoder(QString json)
@@ -340,13 +351,14 @@ void Babe::scanDir(const QString &url)
 }
 
 void Babe::brainz(const bool &on)
-{
-    this->settings->checkCollectionBrainz(on);
+{    
+    qDebug()<< "Changed vvae brainz state"<< on;
+    this->settings->startBrainz(on);
 }
 
 bool Babe::brainzState()
 {
-    return loadSetting("BRAINZ", "BABE", false).toBool();
+    return loadSetting("AUTO", "BRAINZ", false).toBool();
 }
 
 void Babe::refreshCollection()
@@ -560,10 +572,9 @@ QString Babe::fetchCoverArt(DB &song)
     if(BAE::artworkCache(song, KEY::ALBUM)) return song[KEY::ARTWORK];
     if(BAE::artworkCache(song, KEY::ARTIST)) return song[KEY::ARTWORK];
 
-    Pulpo pulpo;
-    pulpo.registerServices({SERVICES::LastFm, SERVICES::Spotify});
-    pulpo.setOntology(PULPO::ONTOLOGY::ALBUM);
-    pulpo.setInfo(PULPO::INFO::ARTWORK);
+    pulpo->registerServices({SERVICES::LastFm, SERVICES::Spotify});
+    pulpo->setOntology(PULPO::ONTOLOGY::ALBUM);
+    pulpo->setInfo(PULPO::INFO::ARTWORK);
 
     QEventLoop loop;
 
@@ -573,7 +584,7 @@ QString Babe::fetchCoverArt(DB &song)
 
     connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
 
-    connect(&pulpo, &Pulpo::infoReady, [&](const BAE::DB &track,const PULPO::RESPONSE  &res)
+    connect(pulpo, &Pulpo::infoReady, [&](const BAE::DB &track,const PULPO::RESPONSE  &res)
     {
         Q_UNUSED(track);
         if(!res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK].isEmpty())
@@ -584,13 +595,13 @@ QString Babe::fetchCoverArt(DB &song)
         loop.quit();
     });
 
-    pulpo.feed(song, PULPO::RECURSIVE::OFF);
+    pulpo->feed(song, PULPO::RECURSIVE::OFF);
 
     timer.start();
     loop.exec();
     timer.stop();
 
-    return  song[KEY::ARTWORK];
+    return song[KEY::ARTWORK];
 }
 
 QVariantList Babe::transformData(const DB_LIST &dbList)

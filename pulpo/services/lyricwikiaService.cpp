@@ -58,7 +58,7 @@ bool lyricWikia::parseTrack()
     QUrl temp_u (temp);
     temp_u.toEncoded(QUrl::FullyEncoded);
 
-    temp =temp_u.toString();
+    temp = temp_u.toString();
 
     temp.replace("http://lyrics.wikia.com/","http://lyrics.wikia.com/index.php?title=");
     temp.append("&action=edit");
@@ -95,10 +95,15 @@ bool lyricWikia::extractLyrics(const QByteArray &array)
     content.replace("&lt;", "<");
     QRegExp lyrics_regexp("<lyrics>(.*)</lyrics>");
     lyrics_regexp.indexIn(content);
-    QString text;
     QString lyrics = lyrics_regexp.cap(1);
+
+    if(lyrics.isEmpty()) return false;
+
     lyrics = lyrics.trimmed();
     lyrics.replace("\n", "<br>");
+
+    QString text;
+
     if(!lyrics.contains("PUT LYRICS HERE")&&!lyrics.isEmpty())
     {
         text = "<h2 align='center' >" + this->track[BAE::KEY::TITLE] + "</h2>";
@@ -106,8 +111,6 @@ bool lyricWikia::extractLyrics(const QByteArray &array)
 
         text= "<div align='center'>"+text+"</div>";
     }
-
-    if(text.isEmpty()) return false;
 
     emit this->infoReady(this->track, this->packResponse(ONTOLOGY::TRACK, INFO::LYRICS,CONTEXT::LYRIC,text));
     return true;

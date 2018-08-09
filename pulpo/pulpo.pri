@@ -1,6 +1,9 @@
 QT       += network
 QT       += xml
 
+CONFIG += ordered
+
+
 SOURCES += \
     $$PWD/services/deezerService.cpp \
     $$PWD/services/lastfmService.cpp \
@@ -30,3 +33,5 @@ DEPENDPATH += \
 INCLUDEPATH += \
     $$PWD \
     $$PWD/services \
+
+#include($$PWD/QGumboParser/QGumboParser.pri)

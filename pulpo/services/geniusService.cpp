@@ -52,7 +52,7 @@ bool genius::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
     qDebug()<< "[genius service]: "<< newUrl;
 
-    this->array = this->startConnection(newUrl,{{"Authorization", this->KEY}} );
+    this->array = this->startConnection(newUrl, {{"Authorization", this->KEY}} );
     if(this->array.isEmpty()) return false;
 
     return this->parseArray();
@@ -216,7 +216,7 @@ bool genius::parseTrack()
         if(this->info == INFO::TAGS) return true;
     }
 
-    if(this->info == INFO::WIKI || this->info == INFO::WIKI)
+    if(this->info == INFO::WIKI || this->info == INFO::ALL)
     {
         QString wikiData;
         for(auto wiki : itemMap.value("description").toMap().value("dom").toMap().value("children").toList())
@@ -226,7 +226,8 @@ bool genius::parseTrack()
 
         emit this->infoReady(this->track,this->packResponse(ONTOLOGY::TRACK, INFO::WIKI, CONTEXT::WIKI, wikiData));
 
-        if(wikiData.isEmpty() && this->info == INFO::WIKI) return false;
+        if(!wikiData.isEmpty() && this->info == INFO::WIKI) return true;
+        else return false;
     }
 
     if(this->info == INFO::ARTWORK || this->info == INFO::ALL)
@@ -235,7 +236,8 @@ bool genius::parseTrack()
 
         emit this->infoReady(this->track, this->packResponse(ONTOLOGY::TRACK, INFO::ARTWORK, CONTEXT::IMAGE,this->startConnection(image)));
 
-        if(image.isEmpty() && this->info == INFO::ARTWORK) return false;
+        if(!image.isEmpty() && this->info == INFO::ARTWORK) return true;
+        else return false;
     }
 
     if(this->info == INFO::LYRICS || this->info == INFO::ALL)
@@ -251,7 +253,8 @@ bool genius::parseTrack()
         if(!lyricsArray.isEmpty())
             lyrics = this->extractLyrics(lyricsArray);
 
-        if(!lyrics && this->info == INFO::LYRICS) return false;
+        if(lyrics && this->info == INFO::LYRICS) return true;
+        else return false;
     }
 
     return false;
@@ -316,15 +319,22 @@ bool genius::extractLyrics(const QByteArray &array)
     parser.setHtml(array);
 
     auto lyricsList = parser.parseTag("div", "class=\"lyrics\"");
+    //    auto lyricsList = this->queryHtml(array, "lyrics");
 
     if(!lyricsList.isEmpty())
-        lyrics=lyricsList.first();
+        lyrics = lyricsList.first();
+    else
+        return false;
+
+    qDebug()<< "THE LYRICS:"<< lyricsList;
+
     QString text;
+
     if(!lyrics.isEmpty())
     {
         text = "<h2 align='center' >" + this->track[BAE::KEY::TITLE] + "</h2>";
         text += lyrics;
-
+        text.replace("\n", "<br>");
         text= "<div align='center'>"+text+"</div>";
     }
 

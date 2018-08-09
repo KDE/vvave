@@ -28,7 +28,6 @@ class BabeSettings : public QObject
         explicit BabeSettings(QObject *parent = nullptr);
         ~BabeSettings();
 
-        void checkCollectionBrainz(const bool &state);
         void refreshCollection();
         void fetchYoutubeTrack(const QString &message);
 
