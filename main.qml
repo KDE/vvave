@@ -279,7 +279,7 @@ Maui.ApplicationWindow
         id: babeConsole
     }
 
-    menuDrawer.bannerImageSource: "qrc:/assets/banner.svg"
+//    menuDrawer.bannerImageSource: "qrc:/assets/banner.svg"
 
     menuDrawer.actions: [
 

@@ -123,6 +123,8 @@ Kirigami.PageRow
 
     function populateTable(album, artist)
     {
+        console.log("PAPULATE ALBUMS VIEW")
+
         table.clearTable()
 
         albumsPageRoot.currentIndex = 1
@@ -154,8 +156,9 @@ Kirigami.PageRow
                 albumsViewTable.model.append(tracks[i])
 
             tagq = tagq.arg(artist)
-
-            tagBar.populate(bae.get(tagq))
+            var tags = bae.get(tagq)
+            console.log(tagq, "TAGS", tags)
+            tagBar.populate(tags)
         }
     }
 

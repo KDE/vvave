@@ -6,6 +6,7 @@ QT       += network
 QT       += xml
 QT       += qml
 QT       += widgets
+QT       += quickcontrols2
 
 TARGET = vvave
 TEMPLATE = app
@@ -19,13 +20,12 @@ linux:unix:!android {
 
 } else:android {
     message(Building helpers for Android)
-    include(android/android.pri)
-    include(3rdparty/taglib.pri)
-    include(android-openssl.pri)
-    include(3rdparty/kirigami/kirigami.pri)
+    include($$PWD/3rdparty/kirigami/kirigami.pri)
+    include($$PWD/android/android.pri)
+    include($$PWD/3rdparty/taglib.pri)
+    include($$PWD/android-openssl.pri)
 
-    DEFINES += STATIC_KIRIGAMI        
-
+    DEFINES += STATIC_KIRIGAMI
 } else {
     message("Unknown configuration")
 }
@@ -49,8 +49,8 @@ SOURCES += main.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
     utils/brain.cpp \
-    services/local/socket.cpp \   
-    services/web/youtube.cpp \   
+    services/local/socket.cpp \
+    services/web/youtube.cpp \
     babe.cpp \
     settings/BabeSettings.cpp \
     db/conthread.cpp \
@@ -88,8 +88,8 @@ HEADERS += \
     services/local/taginfo.h \
     services/local/player.h \
     utils/brain.h \
-    services/local/socket.h \ 
-    services/web/youtube.h \   
+    services/local/socket.h \
+    services/web/youtube.h \
     babe.h \
     settings/BabeSettings.h \
     db/conthread.h \

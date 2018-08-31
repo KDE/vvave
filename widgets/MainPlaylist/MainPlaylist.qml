@@ -37,7 +37,6 @@ Maui.Page
     headBarExit: false
     margins: 0
 
-
     headBar.leftContent: Maui.ToolButton
     {
         id: infoBtn
