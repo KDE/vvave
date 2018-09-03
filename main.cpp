@@ -27,8 +27,6 @@
 #include "services/web/youtube.h"
 #include "services/web/Spotify/spotify.h"
 #include "services/local/linking.h"
-#include "MauiKit/tagging.h"
-
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
 #endif
@@ -102,7 +100,6 @@ int main(int argc, char *argv[])
                 "LINK",                 // name in QML (does not have to match C++ name)
                 "Error: only enums"            // error in case someone tries to create a MyNamespace object
                 );
-    auto tag = Tagging::getInstance(BAE::App, BAE::Version, "org.kde.vvave");
 
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();
