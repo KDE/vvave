@@ -3,7 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
 import QtQuick.Controls.Material 2.1
-import org.kde.maui 1.0 as Maui
+import org.kde.mauikit 1.0 as Maui
 
 Maui.Page
 {

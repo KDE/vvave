@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import org.kde.maui 1.0 as Maui
+import org.kde.mauikit 1.0 as Maui
 import "../view_models/BabeTable"
 import "../view_models"
 import "../db/Queries.js" as Q

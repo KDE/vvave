@@ -13,10 +13,9 @@
 #include <QScreen>
 #include <QtNetwork>
 #include <QEventLoop>
-#include "../mauikit/src/fm/fmh.h"
-
+//#include "../mauikit/src/fm/fmh.h"
+#include "MauiKit/fmh.h"
 #include <cmath>
-
 
 #define BABE_MAJOR_VERSION 0
 #define BABE_MINOR_VERSION 1

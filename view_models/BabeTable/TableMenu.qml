@@ -6,7 +6,7 @@ import "../../view_models/BabeMenu"
 import "../../utils"
 import ".."
 
-import org.kde.maui 1.0 as Maui
+import org.kde.mauikit 1.0 as Maui
 
 BabeMenu
 {

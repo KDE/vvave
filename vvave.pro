@@ -21,16 +21,17 @@ linux:unix:!android {
 } else:android {
     message(Building helpers for Android)
     include($$PWD/3rdparty/kirigami/kirigami.pri)
+    include($$PWD/mauikit/mauikit.pri)
     include($$PWD/android/android.pri)
     include($$PWD/3rdparty/taglib.pri)
     include($$PWD/android-openssl.pri)
 
     DEFINES += STATIC_KIRIGAMI
+
 } else {
     message("Unknown configuration")
 }
 
-include(mauikit/mauikit.pri)
 include(pulpo/pulpo.pri)
 
 # The following define makes your compiler emit warnings if you use
@@ -127,3 +128,6 @@ HEADERS += \
 #    message("Linux")
 #    QMAKE_POST_LINK += $$copyToBuilddir($$PWD/library/cat)
 #}
+
+
+unix:!macx: LIBS += -lMauiKit

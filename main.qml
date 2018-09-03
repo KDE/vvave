@@ -28,7 +28,7 @@ import "utils/Help.js" as H
 import "utils/Player.js" as Player
 
 import org.kde.kirigami 2.2 as Kirigami
-import org.kde.maui 1.0 as Maui
+import org.kde.mauikit 1.0 as Maui
 
 Maui.ApplicationWindow
 {

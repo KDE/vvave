@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import "../../view_models"
 import "../../view_models/BabeTable"
 import org.kde.kirigami 2.2 as Kirigami
-import org.kde.maui 1.0 as Maui
+import org.kde.mauikit 1.0 as Maui
 
 Page
 {
