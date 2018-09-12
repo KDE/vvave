@@ -180,11 +180,11 @@ Maui.ApplicationWindow
     /* UI */
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
     accentColor: "#212121"
-    headBarColor: currentView === viewsIndex.vvave ? "#7e57c2" : accentColor
+    headBarFGColor: altColorText
+    headBarBGColor: currentView === viewsIndex.vvave ? "#7e57c2" : accentColor
     colorSchemeName: "vvave"
     altColorText: darkTextColor   
-    leftIcon.iconColor: altColorText
-    rightIcon.iconColor: altColorText
+
     headBar.middleContent : [
 
         Maui.ToolButton
