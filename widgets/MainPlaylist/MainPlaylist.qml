@@ -36,7 +36,7 @@ Maui.Page
     focus: true
     headBarExit: false
     margins: 0
-
+    headBarTitle: currentTrack.title + " - " + currentTrack.artist
     headBar.leftContent: Maui.ToolButton
     {
         id: infoBtn
@@ -56,40 +56,40 @@ Maui.Page
         }
     }
 
-    headBar.middleContent: Maui.PieButton
-    {
-        iconName: "list-add"
+    //    headBar.middleContent: Maui.PieButton
+    //    {
+    //        iconName: "list-add"
 
-        model: ListModel
-        {
-            ListElement{iconName: "videoclip-amarok" ; btn: "video"}
-            ListElement{iconName: "documentinfo" ; btn: "info"}
-            ListElement{iconName: "headphones" ; btn: "similar"}
-        }
+    //        model: ListModel
+    //        {
+    //            ListElement{iconName: "videoclip-amarok" ; btn: "video"}
+    //            ListElement{iconName: "documentinfo" ; btn: "info"}
+    //            ListElement{iconName: "headphones" ; btn: "similar"}
+    //        }
 
-        onItemClicked:
-        {
-            if(item.btn === "video")
-            {
-                youtubeView.openVideo = 1
-                youtube.getQuery(currentTrack.title+" "+currentTrack.artist)
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.youtube
-            }
+    //        onItemClicked:
+    //        {
+    //            if(item.btn === "video")
+    //            {
+    //                youtubeView.openVideo = 1
+    //                youtube.getQuery(currentTrack.title+" "+currentTrack.artist)
+    //                pageStack.currentIndex = 1
+    //                currentView = viewsIndex.youtube
+    //            }
 
-            if(item.btn === "info")
-            {
-                if( stackView.currentItem !== table)
-                {
-                    cover.visible  = true
-                    stackView.pop(table) }
-                else {
-                    cover.visible  = false
-                    stackView.push(infoView)
-                }
-            }
-        }
-    }
+    //            if(item.btn === "info")
+    //            {
+    //                if( stackView.currentItem !== table)
+    //                {
+    //                    cover.visible  = true
+    //                    stackView.pop(table) }
+    //                else {
+    //                    cover.visible  = false
+    //                    stackView.push(infoView)
+    //                }
+    //            }
+    //        }
+    //    }
 
     headBar.rightContent : Maui.ToolButton
     {

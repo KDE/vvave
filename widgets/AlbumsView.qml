@@ -17,7 +17,7 @@ Kirigami.PageRow
     clip: true
     separatorVisible: wideMode
     initialPage: [albumsViewGrid, albumFilter]
-    defaultColumnWidth: albumsViewGrid.albumCoverSize * 4
+    defaultColumnWidth: width
     interactive: currentIndex  === 1
 
     property string currentAlbum: ""
@@ -42,6 +42,7 @@ Kirigami.PageRow
     {
         id: albumsViewGrid
         visible: true
+        topPadding: space.large
         onAlbumCoverClicked: albumsPageRoot.albumCoverClicked(album, artist)
         onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
 

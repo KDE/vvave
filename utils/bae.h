@@ -285,7 +285,7 @@ const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::Gen
 const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/";
 const QString CachePath = BAE::isMobile() ? BAE::ArtworkPath : QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/";
 const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/";
-const QString NotifyDir = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+const QString NotifyDir = SettingPath;
 
 const QStringList MusicPaths = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
 const QStringList DownloadsPaths = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
