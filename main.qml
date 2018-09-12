@@ -179,6 +179,7 @@ Maui.ApplicationWindow
 
     /* UI */
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
+    altToolBars: false
     accentColor: "#212121"
     headBarFGColor: altColorText
     headBarBGColor: currentView === viewsIndex.vvave ? "#7e57c2" : accentColor

@@ -13,8 +13,13 @@
 #include <QScreen>
 #include <QtNetwork>
 #include <QEventLoop>
-//#include "../mauikit/src/fm/fmh.h"
+
+#ifdef STATIC_MAUIKIT
+#include "../mauikit/src/fm/fmh.h"
+#else
 #include <MauiKit/fmh.h>
+#endif
+
 #include <cmath>
 
 #define BABE_MAJOR_VERSION 0

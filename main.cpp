@@ -11,6 +11,9 @@
 
 #ifdef STATIC_KIRIGAMI
 #include "./3rdparty/kirigami/src/kirigamiplugin.h"
+#endif
+
+#ifdef STATIC_MAUIKIT
 #include "./mauikit/src/mauikit.h"
 #endif
 
@@ -52,14 +55,14 @@ int main(int argc, char *argv[])
 
     const QCommandLineOption versionOption = parser.addVersionOption();
     parser.process(app);
-//    bool version = parser.isSet(versionOption);
+    //    bool version = parser.isSet(versionOption);
 
-//    if(version)
-//    {
-//        printf("%s %s\n", qPrintable(QCoreApplication::applicationName()),
-//               qPrintable(QCoreApplication::applicationVersion()));
-//        return 0;
-//    }
+    //    if(version)
+    //    {
+    //        printf("%s %s\n", qPrintable(QCoreApplication::applicationName()),
+    //               qPrintable(QCoreApplication::applicationVersion()));
+    //        return 0;
+    //    }
 
     const QStringList args = parser.positionalArguments();
 
@@ -103,6 +106,9 @@ int main(int argc, char *argv[])
 
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();
+#endif
+
+#ifdef STATIC_MAUIKIT
     MauiKit::getInstance().registerTypes();
 #endif
 
