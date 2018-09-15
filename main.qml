@@ -190,6 +190,17 @@ Maui.ApplicationWindow
 
         Maui.ToolButton
         {
+            iconName: "headphones"
+            iconColor: !accent ? babeColor : altColorText
+            display: pageStack.wideMode ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly
+
+            onClicked: pageStack.currentIndex = 0
+
+            text: qsTr("Now")
+        },
+
+        Maui.ToolButton
+        {
             iconName: "view-media-track"
             iconColor:  accent && currentView === viewsIndex.tracks ? babeColor : altColorText
             display: pageStack.wideMode ? AbstractButton.TextBesideIcon : AbstractButton.IconOnly

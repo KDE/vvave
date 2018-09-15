@@ -102,7 +102,7 @@ Maui.Page
     {
         id: footerBg
         clip : true
-        implicitHeight: mainPlaylist.floatingBar ? toolBarHeight * 0.7 : toolBarHeight
+        implicitHeight: mainPlaylist.floatingBar ? toolBarHeight * 0.8 : toolBarHeight
         height: implicitHeight
         color: darkViewBackgroundColor
         radius: mainPlaylist.floatingBar ? unit * 6 : 0
@@ -405,7 +405,7 @@ Maui.Page
             {
                 x: progressBar.leftPadding + progressBar.visualPosition
                    * (progressBar.availableWidth - width)
-                y: -(progressBar.height * 0.7)
+                y: -(progressBar.height * 0.8)
                 implicitWidth: progressBar.pressed ? iconSizes.medium : 0
                 implicitHeight: progressBar.pressed ? iconSizes.medium : 0
                 radius: progressBar.pressed ? iconSizes.medium : 0
