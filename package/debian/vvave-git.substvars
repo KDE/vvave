@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.14), libkf5configcore5, libkf5i18n5, libkf5kiocore5, libkf5kiowidgets5, libkf5notifications5, libkf5service5, libqt5core5a (>= 5.11.1+dfsg), libqt5dbus5 (>= 5.11.1+dfsg), libqt5gui5 (>= 5.11.1+dfsg), libqt5multimedia5, libqt5network5 (>= 5.11.1+dfsg), libqt5qml5 (>= 5.11.1), libqt5sql5 (>= 5.11.1+dfsg), libqt5webengine5, libqt5websockets5, libqt5widgets5 (>= 5.11.1+dfsg), libqt5xml5 (>= 5.11.1+dfsg), libstdc++6 (>= 5.2), libtag1v5-vanilla
+misc:Depends=
+misc:Pre-Depends=

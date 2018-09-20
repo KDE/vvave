@@ -102,8 +102,7 @@ Maui.Page
     {
         id: footerBg
         clip : true
-        implicitHeight: mainPlaylist.floatingBar ? toolBarHeight * 0.8 : toolBarHeight
-        height: implicitHeight
+        height: footBar.implicitHeight
         color: darkViewBackgroundColor
         radius: mainPlaylist.floatingBar ? unit * 6 : 0
         border.color: mainPlaylist.floatingBar ? Qt.lighter(borderColor, 1.2) : "transparent"

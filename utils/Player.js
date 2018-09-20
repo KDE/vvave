@@ -31,8 +31,8 @@ function playTrack(index)
                     bae.notifySong(currentTrack.url)
             }
 
-            if(currentTrack.lyrics.length < 1)
-                bae.trackLyrics(currentTrack.url)
+//            if(currentTrack.lyrics.length < 1)
+//                bae.trackLyrics(currentTrack.url)
 
             //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
             //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)

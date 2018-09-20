@@ -17,7 +17,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTORCC ON)
 
 add_executable(vvave
-    mauikit
     qml.qrc
     main.cpp
     babe.cpp
@@ -67,19 +66,19 @@ if (ANDROID)
 else()
     find_package(Taglib REQUIRED)
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)
-    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config)
+    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO)
     target_sources(vvave PRIVATE
         kde/mpris2.cpp
         kde/notify.cpp
         )
-    target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::I18n Qt5::DBus)
+    target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus)
 endif()
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
 target_link_libraries(vvave Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets ${TAGLIB_LIBRARIES})
 
 install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES assets/vvave.png DESTINATION /usr/share/icons/hicolor/scalable/apps)
-# install(FILES org.kde.vvave.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(FILES assets/vvave.svg DESTINATION /usr/share/icons/hicolor/scalable/apps)
+install(FILES org.kde.vvave.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)

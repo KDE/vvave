@@ -7,7 +7,6 @@ import org.kde.mauikit 1.0 as Maui
 Maui.Page
 {
     id: gridPage
-    headBarVisible: false
     //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
     //    property int hintSize : Math.sqrt(root.width*root.height)*0.3
 

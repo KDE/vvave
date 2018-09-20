@@ -42,9 +42,38 @@ Kirigami.PageRow
     {
         id: albumsViewGrid
         visible: true
-        topPadding: space.large
+//        topPadding: space.large
         onAlbumCoverClicked: albumsPageRoot.albumCoverClicked(album, artist)
         onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
+        headBarVisible: true
+        headBarExit: false
+        headBar.leftContent: Maui.ToolButton
+        {
+            id : playAllBtn
+            visible : headBarVisible && count > 0
+            anim : true
+            iconName : "media-playlist-play"
+            onClicked : playAll()
+        }
+
+        headBar.rightContent: [
+
+            Maui.ToolButton
+            {
+                id: appendBtn
+                visible: headBarVisible && count > 0
+                anim : true
+                iconName : "media-playlist-append"//"media-repeat-track-amarok"
+                onClicked: appendAll()
+            },
+
+            Maui.ToolButton
+            {
+                id: menuBtn
+                iconName: /*"application-menu"*/ "overflow-menu"
+//                onClicked: isMobile ? headerMenu.open() : headerMenu.popup()
+            }
+        ]
 
     }
 

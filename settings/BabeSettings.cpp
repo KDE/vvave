@@ -77,8 +77,8 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
         if(size > 0)
             this->startBrainz(true, BAE::SEG::HALF);
-        else
-            this->startBrainz(BAE::loadSettings("AUTO", "BRAINZ", true).toBool(), BAE::SEG::TWO);
+//        else
+//            this->startBrainz(BAE::loadSettings("AUTO", "BRAINZ", true).toBool(), BAE::SEG::TWO);
 
         emit refreshTables(size);
     });

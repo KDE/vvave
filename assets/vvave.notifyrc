@@ -15,6 +15,7 @@ Comment[sk]=Malý hudobný prehrávač
 Comment[sv]=Mycket liten musikspelare
 Comment[uk]=Маленький музичний програвач
 Comment[x-test]=xxTiny Music Playerxx
+Comment[zh_CN]=简洁的音乐播放器
 Name=vvave
 Name[ca]=vvave
 Name[ca@valencia]=vvave
@@ -28,6 +29,7 @@ Name[pt]=vvave
 Name[sv]=vvave
 Name[uk]=vvave
 Name[x-test]=xxvvavexx
+Name[zh_CN]=vvave
 
 [Event/Notify]
 Name=vvave...
@@ -43,6 +45,7 @@ Name[pt]=vvave...
 Name[sv]=vvave...
 Name[uk]=vvave…
 Name[x-test]=xxvvave...xx
+Name[zh_CN]=vvave...
 Comment=Connection to device failed
 Comment[ast]=Falló la conexón col preséu
 Comment[ca]=Ha fallat la connexió amb el dispositiu
