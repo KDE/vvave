@@ -47,6 +47,7 @@ add_executable(vvave
 
 if (ANDROID)
     find_package(Qt5 REQUIRED COMPONENTS AndroidExtras WebView Xml)
+    find_package(OpenSSL REQUIRED)
 
     include(ExternalProject)
     externalproject_add(taglib
@@ -56,7 +57,7 @@ if (ANDROID)
     set(TAGLIB_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include ${CMAKE_INSTALL_PREFIX}/include/taglib)
     set(TAGLIB_LIBRARIES ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_DIR}/libtag.a)
 
-    target_link_libraries(vvave Qt5::AndroidExtras Qt5::WebView Qt5::Xml)
+    target_link_libraries(vvave Qt5::AndroidExtras Qt5::WebView Qt5::Xml OpenSSL::SSL)
     add_dependencies(vvave taglib)
     kde_source_files_enable_exceptions(vvave babe.cpp)
 else()
