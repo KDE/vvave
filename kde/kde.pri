@@ -3,6 +3,7 @@ QT       += KConfigCore
 QT       += KNotifications
 QT       += KI18n
 QT       += webengine
+QT       += KIOCore KIOFileWidgets KIOWidgets KNTLM
 
 HEADERS += \
     $$PWD/notify.h \

@@ -16,7 +16,7 @@ CONFIG += c++11
 
 linux:unix:!android {
     message(Building for Linux KDE)
-    include(kde/kde.pri)
+    include($$PWD/kde/kde.pri)
     LIBS += -lMauiKit
 
 } else:android {
