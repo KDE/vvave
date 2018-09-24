@@ -46,7 +46,7 @@ add_executable(vvave
     )
 
 if (ANDROID)
-    find_package(Qt5 REQUIRED COMPONENTS AndroidExtras WebView)
+    find_package(Qt5 REQUIRED COMPONENTS AndroidExtras WebView Xml)
 
     include(ExternalProject)
     externalproject_add(taglib
@@ -56,13 +56,9 @@ if (ANDROID)
     set(TAGLIB_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include ${CMAKE_INSTALL_PREFIX}/include/taglib)
     set(TAGLIB_LIBRARIES ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_DIR}/libtag.a)
 
-    target_sources(vvave PRIVATE
-        android/notificationclient.cpp
-        android/android.qrc
-        )
-    target_link_libraries(vvave Qt5::AndroidExtras Qt5::WebView)
+    target_link_libraries(vvave Qt5::AndroidExtras Qt5::WebView Qt5::Xml)
     add_dependencies(vvave taglib)
-    kde_source_files_enable_exceptions(vvave android/android.cpp android/notificationclient.cpp babe.cpp)
+    kde_source_files_enable_exceptions(vvave babe.cpp)
 else()
     find_package(Taglib REQUIRED)
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)
