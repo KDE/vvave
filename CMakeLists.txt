@@ -78,7 +78,9 @@ target_link_libraries(vvave Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::
 
 install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES assets/vvave.svg DESTINATION /usr/share/icons/hicolor/scalable/apps)
+
+#TODO: port to ecm_install_icons()
+install(FILES assets/vvave.svg DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)
 install(FILES org.kde.vvave.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)

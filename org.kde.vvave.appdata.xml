@@ -4,55 +4,33 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-3.0</project_license>
   <name>Vvave</name>
-  <name xml:lang="ast">Vvave</name>
   <name xml:lang="ca">Vvave</name>
-  <name xml:lang="ca@valencia">Vvave</name>
-  <name xml:lang="cs">Vvave</name>
-  <name xml:lang="de">Vvave</name>
-  <name xml:lang="en_GB">Vvave</name>
-  <name xml:lang="fr">Vvave</name>
-  <name xml:lang="gl">Vvave</name>
+  <name xml:lang="ca-valencia">Vvave</name>
   <name xml:lang="nl">Vvave</name>
   <name xml:lang="pt">Vvave</name>
   <name xml:lang="sk">Vvave</name>
   <name xml:lang="sv">Vvave</name>
   <name xml:lang="uk">Vvave</name>
   <name xml:lang="x-test">xxVvavexx</name>
-  <name xml:lang="zh-CN">Vvave</name>
   <summary>Play your music collection</summary>
-  <summary xml:lang="ast">Reproduz la to coleición de música</summary>
   <summary xml:lang="ca">Reprodueix la vostra col·lecció de música</summary>
-  <summary xml:lang="ca@valencia">Reprodueix la vostra col·lecció de música</summary>
-  <summary xml:lang="cs">Přehrávejte svou hudební sbírku</summary>
-  <summary xml:lang="de">Wiedergabe Ihrer Musik-Sammlung</summary>
-  <summary xml:lang="en_GB">Play your music collection</summary>
-  <summary xml:lang="fr">Jouez votre collection musicale</summary>
-  <summary xml:lang="gl">Reproduza a súa colección de música.</summary>
+  <summary xml:lang="ca-valencia">Reprodueix la vostra col·lecció de música</summary>
   <summary xml:lang="nl">Uw muziekcollectie afspelen</summary>
   <summary xml:lang="pt">Tocar a sua colecção de música</summary>
   <summary xml:lang="sk">Prehrať vašu hudobnú kolekciu</summary>
   <summary xml:lang="sv">Spela din musiksamling</summary>
-  <summary xml:lang="uk">Відтворення вашої музичної збірки</summary>
+  <summary xml:lang="uk">Відтворіть вашу музичну збірку</summary>
   <summary xml:lang="x-test">xxPlay your music collectionxx</summary>
-  <summary xml:lang="zh-CN">简洁的音乐播放器</summary>
   <description>
     <p> Tiny Qt Music Player to keep your favorite songs at hand. </p>
-    <p xml:lang="ast">Un reproductor cenciellu de música que debería ser fácil d'usar. Nun rique configuración dala enantes que puea usase.</p>
-    <p xml:lang="ca">Un reproductor de música senzill que hauria de ser fàcil d'utilitzar. No requereix cap configuració abans de poder utilitzar-lo.</p>
-    <p xml:lang="ca-valencia">Un reproductor de música senzill que hauria de ser fàcil d'utilitzar. No requereix cap configuració abans de poder utilitzar-lo.</p>
-    <p xml:lang="cs">Jednoduchý snadno použitelný přehrávač hudby, Před použitím nevyžaduje jakékoliv nastavovaní.</p>
-    <p xml:lang="de">Ein einfacher Medienspieler, der leicht zu benutzen sein sollte. Er kann ganz ohne vorherige Konfiguration verwendet werden.</p>
-    <p xml:lang="en-GB">A simple music player that should be easy to use. It does not require any configuration before one can use it.</p>
-    <p xml:lang="fr">Un lecteur de musique simple qui se veut facile à utiliser. Il ne requiert aucune configuration pour pouvoir être utilisé.</p>
-    <p xml:lang="gl">Un reprodutor de música simple e fácil de usar. Non require ningún tipo de configuración inicial.</p>
-    <p xml:lang="nl">Eenvoudige muziekspeler die gemakkelijk te gebruiken is. Het vereist geen enkele configuratie om te gebruiken.</p>
-    <p xml:lang="pt">Um leitor de música simples que deveria ser simples de usar. Não necessita de nenhuma configuração antes de poder ser usado.</p>
-    <p xml:lang="pt-BR">Um reprodutor de músicas simples que deve ser fácil de usar. Não requer qualquer configuração antes de usá-lo.</p>
-    <p xml:lang="sk">Jednoduchý hudobný prehliadač, ktorý by malo byť jednoduché používať. Nevyžaduje žiadne nastavenie pred použitím.</p>
-    <p xml:lang="sv">En enkel musikspelare som ska vara lättanvänd. Den kräver inga inställningar innan man kan använda den.</p>
-    <p xml:lang="uk">Простий у користуванні музичний програвач. Не потребує налаштовування перед користуванням.</p>
-    <p xml:lang="x-test">xxA simple music player that should be easy to use. It does not require any configuration before one can use it.xx</p>
-    <p xml:lang="zh-CN">一个让你随时享受喜爱的音乐的简洁音乐播放器。</p>
+    <p xml:lang="ca">Reproductor musical en Qt per tenir les cançons preferides a mà.</p>
+    <p xml:lang="ca-valencia">Reproductor musical en Qt per tindre les cançons preferides a mà.</p>
+    <p xml:lang="nl">Kleine Qt Music speler om uw favoriete songs bij de hand te houden.</p>
+    <p xml:lang="pt">Leitor de Música Minúsculo em Qt para manter as suas músicas favoritas à mão.</p>
+    <p xml:lang="sk">Malý Qt hudobný prehrávač na uchovanie vašich obľúbených skladieb poruke.</p>
+    <p xml:lang="sv">Mycket liten Qt musikspelare för att ha dina favoritlåtar till hands.</p>
+    <p xml:lang="uk">Малесенький програвач музики на Qt, призначенням якого є зручний доступ до ваших улюблених композицій.</p>
+    <p xml:lang="x-test">xxTiny Qt Music Player to keep your favorite songs at hand.xx</p>
   </description>
   <url type="homepage">https://vvave.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=vvave</url>
@@ -61,22 +39,14 @@
   <screenshots>
     <screenshot type="default">
       <caption>The Vvave music player</caption>
-      <caption xml:lang="ast">Reproductor d'audiu</caption>
-      <caption xml:lang="ca">Reproductor d'àudio Vvave</caption>
-      <caption xml:lang="ca@valencia">Reproductor d'àudio Vvave</caption>
-      <caption xml:lang="cs">Zvukový přehrávač</caption>
-      <caption xml:lang="de">Vvave-Audio-Wiedergabe</caption>
-      <caption xml:lang="en_GB">The Vvave Audio Player</caption>
-      <caption xml:lang="es">Reproductor de sonido Vvave</caption>
-      <caption xml:lang="fr">Lecteur audio Vvave</caption>
-      <caption xml:lang="gl">Reprodutor de son Vvave</caption>
-      <caption xml:lang="nl">Audiospeler Vvave</caption>
-      <caption xml:lang="pt">Leitor de Áudio Vvave</caption>
-      <caption xml:lang="sk">Audio prehrávač</caption>
-      <caption xml:lang="sv">Vvave Ljudspelare</caption>
-      <caption xml:lang="uk">Аудіопрогравач Vvave</caption>
-      <caption xml:lang="x-test">xxAudio Playerxx</caption>
-      <caption xml:lang="zh-CN">Vvave 音乐播放器</caption>
+      <caption xml:lang="ca">El reproductor de música Vvave</caption>
+      <caption xml:lang="ca-valencia">El reproductor de música Vvave</caption>
+      <caption xml:lang="nl">De Vvave muziekspeler</caption>
+      <caption xml:lang="pt">O leitor de música Vvave</caption>
+      <caption xml:lang="sk">Prehrávač hudby Vvave</caption>
+      <caption xml:lang="sv">Vvave musikspelaren</caption>
+      <caption xml:lang="uk">Музичний програвач Vvave</caption>
+      <caption xml:lang="x-test">xxThe Vvave music playerxx</caption>
       <image type="source" width="1366" height="744">
         https://github.com/KDE/vvave/blob/master/screenshots/exm.png
       </image>
