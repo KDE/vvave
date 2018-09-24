@@ -53,7 +53,7 @@
     </screenshot>
   </screenshots>
   <provides>
-    <binary>elisa</binary>
+    <binary>vvave</binary>
   </provides>
   <project_group>KDE</project_group>
   <releases>
