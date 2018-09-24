@@ -6,7 +6,7 @@ import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import "../../view_models"
 
-BabePopup
+Maui.Popup
 {
 
     id: babeConsoleRoot

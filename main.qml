@@ -14,7 +14,6 @@ import "widgets/SettingsView"
 import "widgets/SearchView"
 
 import "view_models"
-import "view_models/BabeDialog"
 import "view_models/BabeTable"
 
 import "services/local"
@@ -48,6 +47,8 @@ Maui.ApplicationWindow
     property alias mainPlaylist: mainPlaylist
     property alias selectionBar: selectionBar
 
+    about.appIcon: "qrc:/assets/vvave.svg"
+    about.appDescription: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
@@ -165,10 +166,9 @@ Maui.ApplicationWindow
         id: babeNotify
     }
 
-    BabeMessage
+    Maui.Dialog
     {
         id: missingDialog
-        width: parent.width * (isMobile ? 0.9 : 0.4)
         title: "Missing file"
         onAccepted: {
             bae.removeTrack(currentTrack.url)

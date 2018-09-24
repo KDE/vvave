@@ -1,17 +1,14 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "../../view_models/BabeDialog"
 import "../../utils/Help.js" as H
+import org.kde.mauikit 1.0 as Maui
 
-BabeDialog
+Maui.Dialog
 {
     id: linkingDialogRoot
-    standardButtons: Dialog.Save | Dialog.Cancel
 
-    margins: contentMargins
-
-
+    maxHeight: unit *400
     onAccepted:
     {
 
@@ -28,24 +25,15 @@ BabeDialog
     ScrollView
     {
         anchors.fill: parent
-        anchors.centerIn: parent
         clip: true
 
-        contentWidth: parent.width
+        contentWidth: linkingDialogRoot.width
         contentHeight: contentLayout.implicitHeight
 
         ColumnLayout
         {
             id: contentLayout
-            anchors.centerIn: parent
-            width: linkingDialogRoot.width*0.8
-            height: linkingDialogRoot.height*0.9
-
-            Item
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
+            width: linkingDialogRoot.width
 
             Label
             {
@@ -55,13 +43,6 @@ BabeDialog
                 font.pointSize: fontSizes.default
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
-            }
-
-
-            Item
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
             }
 
             Label
@@ -74,7 +55,7 @@ BabeDialog
                 Layout.fillWidth: true
             }
 
-            TextField
+            Maui.TextField
             {
                 id: ipField
                 Layout.fillWidth: true
@@ -119,16 +100,7 @@ BabeDialog
 
                 Layout.fillWidth: true
             }
-
-            Item
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-
-
-
         }
     }
-    }
+}
 

@@ -5,11 +5,14 @@ import org.kde.mauikit 1.0 as Maui
 import "../../view_models"
 import "../../db/Queries.js" as Q
 
-BabePopup
+Maui.Popup
 {
     id: searchSuggestionsRoot
     property alias model : suggestionsList.model   
-    maxHeight: isMobile ? parent.height * 0.4 : unit * 300
+    maxHeight: unit * 700
+    heightHint: 0.5
+
+    verticalAlignment: Qt.AlignBottom
 
     BabeList
     {

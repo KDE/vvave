@@ -4,21 +4,19 @@ import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import QtQuick.Layouts 1.3
 
-import "../../view_models/BabeDialog"
 import "../../view_models"
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
 
-BabeDialog
+Maui.Dialog
 {
     title: "Add "+ tracks.length +" tracks to..."
-    standardButtons: Dialog.Save | Dialog.Cancel
 
     property var tracks : []
+    maxHeight: 400 * unit
 
     ColumnLayout
     {
-        spacing: space.small
         anchors.fill: parent
 
         BabeList
@@ -55,12 +53,10 @@ BabeDialog
         RowLayout
         {
             Layout.fillWidth: true
-            Layout.margins: space.small
 
-            TextField
+            Maui.TextField
             {
                 Layout.fillWidth: true
-                width: parent.width
                 id: newPlaylistField
                 color: textColor
                 placeholderText: qsTr("New playlist")
@@ -77,7 +73,6 @@ BabeDialog
                 iconName: "checkbox"
                 iconColor: textColor
                 onClicked: addPlaylist()
-
             }
         }
 

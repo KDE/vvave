@@ -3,19 +3,20 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import org.kde.mauikit 1.0 as Maui
 import "../../view_models"
-import "../../view_models/BabeDialog"
 
-BabePopup
+Maui.Popup
 {
-
     property string pathToRemove : ""
+
+    maxWidth: unit * 600
+    maxHeight: unit * 500
 
     function scanDir(folderUrl)
     {
         bae.scanDir(folderUrl)
     }
 
-    BabeMessage
+    Maui.Dialog
     {
         id: confirmationDialog
         onAccepted:

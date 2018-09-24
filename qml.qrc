@@ -29,10 +29,7 @@
         <file>widgets/SettingsView/SettingsView.qml</file>
         <file>widgets/MyBeatView/LogginForm.qml</file>
         <file>view_models/BabeMenu/BabeMenu.qml</file>
-        <file>view_models/BabeDialog/BabeMessage.qml</file>
-        <file>view_models/BabeDialog/BabeDialog.qml</file>
         <file>widgets/SettingsView/SourcesDialog.qml</file>
-        <file>view_models/BabePopup.qml</file>
         <file>assets/banner.png</file>
         <file>assets/banner.svg</file>
         <file>view_models/BabeTable/PlaylistDialog.qml</file>
@@ -76,5 +73,6 @@
         <file>assets/Astronaut.png</file>
         <file>assets/MusicCloud.png</file>
         <file>widgets/FoldersView.qml</file>
+        <file>assets/vvave.svg</file>
     </qresource>
 </RCC>

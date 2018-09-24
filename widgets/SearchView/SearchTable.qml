@@ -9,14 +9,89 @@ import QtGraphicalEffects 1.0
 import "../../view_models/BabeTable"
 import "../../db/Queries.js" as Q
 
-Page
+
+BabeTable
 {
+    id: searchTable
+
     property alias searchInput : searchInput
     property alias searchTable : searchTable
     property var searchRes : []
     property var savedQueries : []
 
     property bool autoSuggestions : bae.loadSetting("AUTOSUGGESTIONS", "BABE", false) === "true" ? true : false
+
+
+    Layout.fillHeight: true
+    Layout.fillWidth: true
+    trackNumberVisible: false
+    headBarVisible: true
+    headBarExit: true
+    headBarExitIcon: "edit-clear"
+    holder.emoji: "qrc:/assets/BugSearch.png"
+    holder.isMask: false
+    holder.title : "No search results!"
+    holder.body: "Try with another query"
+    holder.emojiSize: iconSizes.huge
+    coverArtVisible: true
+    trackDuration: true
+    trackRating: true
+    onExit: clearSearch()
+
+    footBar.middleContent:  Maui.TextField
+    {
+        id: searchInput
+        placeholderText: qsTr("Search...")
+        width: footBar.middleLayout.width * 0.9
+
+        onAccepted: runSearch(searchInput.text)
+        //                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
+        onTextEdited: if(autoSuggestions) suggestionsPopup.updateSuggestions()
+
+    }
+
+
+    footBar.leftContent:    Maui.ToolButton
+    {
+        visible: true
+        iconName: "view-filter"
+        iconColor: autoSuggestions ? babeColor : textColor
+        onClicked:
+        {
+            autoSuggestions = !autoSuggestions
+            bae.saveSetting("AUTOSUGGESTIONS", autoSuggestions, "BABE")
+            if(!autoSuggestions)
+                suggestionsPopup.close()
+        }
+    }
+
+    footBar.rightContent:  Maui.ToolButton
+    {
+        iconName: "edit-clear"
+        onClicked: searchInput.clear()
+    }
+
+
+    SearchSuggestions
+    {
+        id: suggestionsPopup
+//        focus: false
+        parent: parent
+//        modal: false
+//        closePolicy: Popup.CloseOnPressOutsideParent
+    }
+
+    Rectangle
+    {
+        visible: suggestionsPopup.visible
+        width: parent.width
+        height: parent.height-searchBox.height
+
+        color: darkDarkColor
+        z: 999
+        opacity: 0.5
+    }
+
 
     function runSearch(searchTxt)
     {
@@ -55,109 +130,5 @@ Page
             searchTable.model.append(tracks[i])
     }
 
-    SearchSuggestions
-    {
-        id: suggestionsPopup
-        focus: false
-        parent: searchBox
-        width: parent.width*0.9
-        height: 200
-        modal: false
-        closePolicy: Popup.CloseOnPressOutsideParent
-        y: -(height+contentMargins*2)
-    }
-
-    Rectangle
-    {
-        visible: suggestionsPopup.visible
-        width: parent.width
-        height: parent.height-searchBox.height
-
-        color: darkDarkColor
-        z: 999
-        opacity: 0.5
-    }
-
-    ColumnLayout
-    {
-        anchors.fill: parent
-        width: parent.width
-        height: parent.height
-
-        Layout.margins: 0
-        spacing: 0
-
-        BabeTable
-        {
-            id: searchTable
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            trackNumberVisible: false
-            headBarVisible: true
-            headBarExit: true
-            headBarExitIcon: "edit-clear"
-            holder.emoji: "qrc:/assets/BugSearch.png"
-            holder.isMask: false
-            holder.title : "No search results!"
-            holder.body: "Try with another query"
-            holder.emojiSize: iconSizes.huge
-            coverArtVisible: true
-            trackDuration: true
-            trackRating: true
-            onExit: clearSearch()
-        }
-
-        ToolBar
-        {
-            id: searchBox
-            Layout.fillWidth: true
-            position: ToolBar.Footer
-
-            RowLayout
-            {
-                anchors.fill: parent
-
-                Maui.ToolButton
-                {
-                    visible: true
-                    iconName: "view-filter"
-                    iconColor: autoSuggestions ? babeColor : textColor
-                    onClicked:
-                    {
-                        autoSuggestions = !autoSuggestions
-                        bae.saveSetting("AUTOSUGGESTIONS", autoSuggestions, "BABE")
-                        if(!autoSuggestions)
-                            suggestionsPopup.close()
-                    }
-                }
-
-                TextInput
-                {
-                    id: searchInput
-                    color: textColor
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment:  Text.AlignVCenter
-                    selectByMouse: !isMobile
-                    selectionColor: highlightColor
-                    selectedTextColor: highlightedTextColor
-                    focus: true
-                    text: ""
-                    wrapMode: TextEdit.Wrap
-                    //activeFocusOnPress: true
-                    onAccepted: runSearch(searchInput.text)
-                    //                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
-                    onTextEdited: if(autoSuggestions) suggestionsPopup.updateSuggestions()
-
-                }
-
-                Maui.ToolButton
-                {
-                    iconName: "edit-clear"
-                    onClicked: searchInput.clear()
-                }
-            }
-        }
-    }
 }
+

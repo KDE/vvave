@@ -92,7 +92,7 @@ Page
                             "qrc:/services/web/YoutubePlayer.qml"
     }
 
-    BabePopup
+    Maui.Popup
     {
         id: configPopup
         parent: parent
