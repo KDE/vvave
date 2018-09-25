@@ -24,6 +24,7 @@ Maui.Page
     signal bgClicked()
 
     margins: space.medium
+    topMargin: space.big
 
     onWidthChanged: grid.forceLayout()
 
@@ -46,31 +47,19 @@ Maui.Page
 
     ListModel {id: gridModel}
 
-    GridView
+    Maui.GridView
     {
         id: grid
-        clip: true
-        MouseArea
-        {
-            anchors.fill: parent
-            onClicked: bgClicked()
-            z: -999
-        }
-
+        onAreaClicked: bgClicked()
+        adaptContent: true
         width: parent.width
         height: parent.height
 
-        cellWidth: albumCoverSize + albumSpacing
-        cellHeight:  albumCoverSize + albumSpacing*2
-//        interactive: isMobile
-        focus: true
-        boundsBehavior: Flickable.StopAtBounds
+        itemSize: albumCoverSize
+        spacing: albumSpacing
 
-        flickableDirection: Flickable.AutoFlickDirection
-
-        snapMode: GridView.NoSnap
-        //        flow: GridView.FlowTopToBottom
-        //        maximumFlickVelocity: albumSize*8
+        cellWidth: albumCoverSize + spacing
+        cellHeight:  albumCoverSize + spacing*2
 
         model: gridModel
         delegate: BabeAlbum
@@ -102,20 +91,6 @@ Maui.Page
                     albumCoverPressed(album, artist)
                 }
             }
-        }
-
-        ScrollBar.vertical:BabeScrollBar { visible: true }
-
-        onWidthChanged:
-        {
-            var amount = parseInt(width/(albumCoverSize + albumSpacing),10)
-            var leftSpace = parseInt(width-(amount*(albumCoverSize + albumSpacing)), 10)
-            var size = parseInt((albumCoverSize + albumSpacing)+(parseInt(leftSpace/amount, 10)), 10)
-
-            size = size > albumCoverSize + albumSpacing? size : albumCoverSize + albumSpacing
-
-            cellWidth = size
-            //            grid.cellHeight = size
         }
     }
 }
