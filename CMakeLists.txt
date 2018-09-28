@@ -70,6 +70,11 @@ else()
         )
     target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus)
 endif()
+
+if (TARGET create-apk-vvave)
+    set_target_properties(create-apk-vvave PROPERTIES ANDROID_APK_DIR "${MAUIKIT_ANDROID_DIR}")
+endif()
+
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
 target_link_libraries(vvave Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets ${TAGLIB_LIBRARIES})
 
