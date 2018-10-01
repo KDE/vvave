@@ -1,5 +1,8 @@
-vvave-git (0-1) unstable; urgency=medium
+vvave (1.0) nxos; urgency=medium
 
-  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+  [ Camilo ]
+  * Initial release
 
- -- kaimam <kaisfm@sohu.com>  Tue, 04 Sep 2018 17:59:28 +0800
+  [ Ubuntu ]
+
+ -- Camilo <camilo@gmail.com>  Wed, 15 Mar 2017 00:54:53 +0000

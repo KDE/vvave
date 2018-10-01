@@ -1,35 +1,13 @@
-Source: vvave-git
-Section: sound
+Source: vvave 
+Section: main
 Priority: optional
-Build-Depends: cmake (>= 3.5),
-               debhelper (>= 9),
-               extra-cmake-modules,
-               qtbase5-dev,
-               qtdeclarative5-dev,
-               libqt5websockets5-dev,
-               libqt5svg5-dev,
-               libkf5i18n-dev,
-               libkf5notifications-dev,
-               libkf5config-dev,
-               libkf5service-dev,
-               libkf5kio-dev,
-               qttools5-dev,
-               qtwebengine5-dev,
-               libtag1-dev,
-               qtquickcontrols2-5-dev
-Maintainer: kaimam <kaisfm@sohu.com>
+Maintainer: Camilo <camilo@gmail.com>
+Build-Depends: debhelper (>=9)
 Standards-Version: 3.9.6
-Homepage: https://vvave.kde.org/
-#Vcs-Git: https://anongit.neon.kde.org/extras/vvave
-#Vcs-Browser: https://packaging.neon.kde.org/extras/vvave.git
+#Homepage: <insert the upstream URL, if relevant>
+Vcs-Git: https://github.com/mauikit/vvave.git
 
-Package: vvave-git
+Package: vvave
 Architecture: any
-Depends: libkf5i18n5,
-         libkf5notifications5,
-         qml-module-qtquick2,
-         libqt5websockets5,
-         libqt5webengine5,
-         ${misc:Depends},
-         ${shlibs:Depends}
-Description: Tiny Qt Music Player to keep your favorite songs at hand
+Depends: ${shlibs:Depends}, ${misc:Depends}, grub-common
+Description: Music Player
