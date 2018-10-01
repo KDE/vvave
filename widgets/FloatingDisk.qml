@@ -18,18 +18,6 @@ Item
     ToolTip.visible: isHovered && !isMobile
     ToolTip.text: currentTrack.title + " - " + currentTrack.artist
 
-    DropShadow
-    {
-        anchors.fill: diskBg
-        visible: diskBg.visible
-        horizontalOffset: 3
-        verticalOffset: 5
-        radius: 8.0
-        samples: 17
-        color: "#80000000"
-        source: diskBg
-    }
-
     Rectangle
     {
         id: diskBg
@@ -37,6 +25,7 @@ Item
         anchors.centerIn: parent
         height: parent.height
         width: height
+        border.color: borderColor
 
         color: darkTextColor
         opacity: opacityLevel
@@ -45,16 +34,14 @@ Item
         radius: Math.min(width, height)
     }
 
-
-
-    RotationAnimator on rotation
-    {
-        from: 0
-        to: 360
-        duration: 5000
-        loops: Animation.Infinite
-        running: miniArtwork.visible && isPlaying
-    }
+//    RotationAnimator on rotation
+//    {
+//        from: 0
+//        to: 360
+//        duration: 5000
+//        loops: Animation.Infinite
+//        running: miniArtwork.visible && isPlaying
+//    }
 
     Image
     {
