@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>utils/Icons.js</file>
-        <file>utils/materialdesignicons-webfont.ttf</file>
+        <file>main.qml</file>    
         <file>widgets/TracksView.qml</file>
         <file>widgets/AlbumsView.qml</file>
         <file>assets/cover.png</file>
