@@ -4,7 +4,6 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LGPL-3.0</project_license>
   <name>Vvave</name>
-  <name xml:lang="ast">Vvave</name>
   <name xml:lang="ca">Vvave</name>
   <name xml:lang="ca-valencia">Vvave</name>
   <name xml:lang="cs">Vvave</name>
@@ -16,7 +15,6 @@
   <name xml:lang="uk">Vvave</name>
   <name xml:lang="x-test">xxVvavexx</name>
   <summary>Play your music collection</summary>
-  <summary xml:lang="ast">Reproduz la to coleición de música</summary>
   <summary xml:lang="ca">Reprodueix la vostra col·lecció de música</summary>
   <summary xml:lang="ca-valencia">Reprodueix la vostra col·lecció de música</summary>
   <summary xml:lang="cs">Přehrávejte svou hudební sbírku</summary>
