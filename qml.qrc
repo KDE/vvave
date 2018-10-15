@@ -26,7 +26,6 @@
         <file>utils/Props.js</file>
         <file>widgets/SettingsView/SettingsView.qml</file>
         <file>widgets/MyBeatView/LogginForm.qml</file>
-        <file>view_models/BabeMenu/BabeMenu.qml</file>
         <file>widgets/SettingsView/SourcesDialog.qml</file>
         <file>assets/banner.png</file>
         <file>assets/banner.svg</file>

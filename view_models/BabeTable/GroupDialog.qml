@@ -4,12 +4,11 @@ import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import QtQuick.Layouts 1.3
 
-import "../../view_models/BabeMenu"
 import "../../view_models"
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
 
-BabeMenu
+Maui.Menu
 {
     signal sortBy(string text)
     MenuItem

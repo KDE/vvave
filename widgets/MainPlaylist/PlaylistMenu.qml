@@ -1,9 +1,8 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
-import "../../view_models/BabeMenu"
+import org.kde.mauikit 1.0 as Maui
 
-
-BabeMenu
+Maui.Menu
 {    
     signal clearOut()
     signal clean()

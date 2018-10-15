@@ -66,14 +66,14 @@ function refreshTracks()
 
 function refreshAlbums()
 {
-    albumsView.grid.clearGrid()
+    albumsView.clearGrid()
     albumsView.populate(Q.GET.allAlbumsAsc)
 
 }
 
 function refreshArtists()
 {
-    artistsView.grid.clearGrid()
+    artistsView.clearGrid()
     artistsView.populate(Q.GET.allArtistsAsc)
 }
 

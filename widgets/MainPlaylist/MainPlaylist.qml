@@ -36,7 +36,7 @@ Maui.Page
     focus: true
     headBarExit: false
     margins: 0
-    headBarTitle: currentTrack.title + " - " + currentTrack.artist
+    headBarTitle: currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : ""
     headBar.leftContent: Maui.ToolButton
     {
         id: infoBtn

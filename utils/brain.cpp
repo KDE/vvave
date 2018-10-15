@@ -451,9 +451,9 @@ void Brain::artistArtworks()
 
 
     /* BEFORE FETCHING ONLINE LOOK UP IN THE CACHE FOR THE IMAGE */
-    for(auto artist : artworks)
-        if(BAE::artworkCache(artist, KEY::ARTIST))
-            this->insertArtwork(artist);
+//    for(auto artist : artworks)
+//        if(BAE::artworkCache(artist, KEY::ARTIST))
+//            this->insertArtwork(artist);
 
     artworks = this->getDBData(queryTxt);
     this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);

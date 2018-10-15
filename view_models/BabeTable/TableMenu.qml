@@ -2,13 +2,12 @@ import QtQuick 2.0
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "../../view_models/BabeMenu"
 import "../../utils"
 import ".."
 
 import org.kde.mauikit 1.0 as Maui
 
-BabeMenu
+Maui.Menu
 {
     id: control
     property var paths : []
@@ -32,7 +31,7 @@ BabeMenu
 
     property alias menuItem : customItems.children
 
-    MenuItem
+    Maui.MenuItem
     {
         text: babe == false ? qsTr("Fav it"): qsTr("UnFav it")
         onTriggered:
@@ -42,7 +41,7 @@ BabeMenu
         }
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Queue")
         onTriggered:
@@ -52,7 +51,7 @@ BabeMenu
         }
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Save to...")
         onTriggered:
@@ -62,7 +61,7 @@ BabeMenu
         }
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: isAndroid ? qsTr("Open with...") : qsTr("Show in folder...")
 
@@ -73,7 +72,7 @@ BabeMenu
         }
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Edit...")
         onTriggered:
@@ -83,7 +82,7 @@ BabeMenu
         }
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Share...")
         onTriggered:
@@ -95,7 +94,7 @@ BabeMenu
         }
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Remove")
         onTriggered:
@@ -112,11 +111,11 @@ BabeMenu
         width: parent.implicitWidth
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         id: starsRow
         width: parent.width
-        height: iconSizes.small
+        height: iconSizes.medium + space.small
 
         RowLayout
         {
@@ -127,7 +126,7 @@ BabeMenu
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 iconName: starIcon
-                size: iconSizes.small
+                size: iconSizes.medium
                 iconColor: rate >= 1 ? starColor :starReg
                 onClicked:
                 {
@@ -141,7 +140,7 @@ BabeMenu
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                size: iconSizes.small
+                size: iconSizes.medium
                 iconName: starIcon
                 iconColor: rate >= 2 ? starColor :starReg
                 onClicked:
@@ -156,7 +155,7 @@ BabeMenu
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                size: iconSizes.small
+                size: iconSizes.medium
                 iconName: starIcon
                 iconColor: rate >= 3 ? starColor :starReg
                 onClicked:
@@ -171,7 +170,7 @@ BabeMenu
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                size: iconSizes.small
+                size: iconSizes.medium
                 iconName: starIcon
                 iconColor: rate >= 4 ? starColor :starReg
                 onClicked:
@@ -186,7 +185,7 @@ BabeMenu
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                size: iconSizes.small
+                size: iconSizes.medium
                 iconName: starIcon
                 iconColor: rate >= 5 ? starColor :starReg
                 onClicked:
@@ -201,11 +200,11 @@ BabeMenu
     }
 
 
-    MenuItem
+    Maui.MenuItem
     {
         id: colorsRow
         width: parent.width
-        height:  iconSizes.small
+        height:  iconSizes.medium + space.small
 
         ColorTagsBar
         {
@@ -217,9 +216,6 @@ BabeMenu
     function show(urls)
     {
         paths = urls
-        if(root.isMobile)
-            contextMenu.open()
-        else
-            contextMenu.popup()
+        contextMenu.popup()
     }
 }

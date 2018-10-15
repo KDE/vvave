@@ -5,7 +5,6 @@ import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import "../../view_models/BabeTable"
-import "../../view_models/BabeMenu"
 import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
@@ -38,7 +37,6 @@ Kirigami.PageRow
         anchors.fill: parent
         spacing: 0
         Layout.margins: 0
-
 
         SwipeView
         {

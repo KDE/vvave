@@ -245,7 +245,7 @@ bool CollectionDB::addTrack(const DB &track)
     auto artwork = track[BAE::KEY::ARTWORK].isEmpty() ? "" : track[BAE::KEY::ARTWORK];
 
     auto artistTrack = track;
-    BAE::artworkCache(artistTrack, BAE::KEY::ALBUM);
+    BAE::artworkCache(artistTrack, BAE::KEY::ARTIST);
     auto artistArtwork = artistTrack[BAE::KEY::ARTWORK];
 
     /* first needs to insert the source, album and artist*/

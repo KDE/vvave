@@ -71,7 +71,7 @@ BabeList
         {
             id: menuBtn
             iconName: /*"application-menu"*/ "overflow-menu"
-            onClicked: isMobile ? headerMenu.open() : headerMenu.popup()
+            onClicked: headerMenu.popup()
         }
     ]
 
@@ -95,7 +95,7 @@ BabeList
         id: contextMenu
 
         menuItem: [
-            MenuItem
+            Maui.MenuItem
             {
                 text: qsTr("Select...")
                 onTriggered:
@@ -105,13 +105,13 @@ BabeList
                 }
             },
             MenuSeparator {},
-            MenuItem
+            Maui.MenuItem
             {
                 text: qsTr("Go to Artist")
                 onTriggered: goToArtist()
 
             },
-            MenuItem
+            Maui.MenuItem
             {
                 text: qsTr("Go to Album")
                 onTriggered: goToAlbum()
@@ -141,7 +141,7 @@ BabeList
         {
             var value = H.rateIt(paths, rate)
             list.currentItem.rate(H.setStars(value))
-            ist.model.get(list.currentIndex).stars = value
+            list.model.get(list.currentIndex).stars = value
         }
         onColorClicked:
         {
@@ -220,9 +220,7 @@ BabeList
             currentIndex = index
             goToAlbum()
         }
-
     }
-
 
     function openItemMenu(index)
     {

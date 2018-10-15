@@ -13,7 +13,7 @@ StackView
 
     initialItem: Maui.Page
     {
-        anchors.fill: parent
+
         headBarTitle: qsTr("Source folders")
         headBarExit: false
         margins: space.large

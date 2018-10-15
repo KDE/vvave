@@ -11,21 +11,15 @@ import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 
-Kirigami.PageRow
+BabeGrid
 {
-    id: albumsPageRoot
-    clip: true
-    separatorVisible: wideMode
-    initialPage: [albumsViewGrid, albumFilter]
-    defaultColumnWidth: width
-    interactive: currentIndex  === 1
+    id: albumsViewGrid
 
     property string currentAlbum: ""
     property string currentArtist: ""
 
     property var tracks: []
 
-    property alias grid : albumsViewGrid
     property alias table : albumsViewTable
     property alias tagBar : tagBar
 
@@ -35,111 +29,117 @@ Kirigami.PageRow
 
     signal appendAll(string album, string artist)
     signal playAll(string album, string artist)
-    signal albumCoverClicked(string album, string artist)
+    //    signal albumCoverClicked(string album, string artist)
     signal albumCoverPressedAndHold(string album, string artist)
 
-    BabeGrid
+    visible: true
+    //        topPadding: space.large
+    onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
+    headBarVisible: true
+    headBarExit: false
+    headBar.leftContent: Maui.ToolButton
     {
-        id: albumsViewGrid
-        visible: true
-//        topPadding: space.large
-        onAlbumCoverClicked: albumsPageRoot.albumCoverClicked(album, artist)
-        onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
-        headBarVisible: true
-        headBarExit: false
-        headBar.leftContent: Maui.ToolButton
-        {
-            id : playAllBtn
-            visible : headBarVisible && count > 0
-            anim : true
-            iconName : "media-playlist-play"
-            onClicked : playAll()
-        }
-
-        headBar.rightContent: [
-
-            Maui.ToolButton
-            {
-                id: appendBtn
-                visible: headBarVisible && count > 0
-                anim : true
-                iconName : "media-playlist-append"//"media-repeat-track-amarok"
-                onClicked: appendAll()
-            },
-
-            Maui.ToolButton
-            {
-                id: menuBtn
-                iconName: /*"application-menu"*/ "overflow-menu"
-//                onClicked: isMobile ? headerMenu.open() : headerMenu.popup()
-            }
-        ]
-
+        id : playAllBtn
+        visible : headBarVisible && albumsViewGrid.count > 0
+        anim : true
+        iconName : "media-playlist-play"
+        onClicked : playAll()
     }
 
-    ColumnLayout
+    headBar.rightContent: [
+
+        Maui.ToolButton
+        {
+            id: appendBtn
+            visible: headBarVisible && albumsViewGrid.count > 0
+            anim : true
+            iconName : "media-playlist-append"//"media-repeat-track-amarok"
+            onClicked: appendAll()
+        },
+
+        Maui.ToolButton
+        {
+            id: menuBtn
+            iconName: /*"application-menu"*/ "overflow-menu"
+            //                onClicked: isMobile ? headerMenu.open() : headerMenu.popup()
+        }
+    ]
+
+    Maui.Dialog
     {
-        id: albumFilter
-        anchors.fill: parent
-        spacing: 0
+        id: albumDialog
+        parent: parent
+        maxHeight: maxWidth
+        maxWidth: unit * 600
+        defaultButtons: false
+        page.margins: 0
 
-        BabeTable
+//        verticalAlignment: Qt.AlignBottom
+
+        ColumnLayout
         {
-            id: albumsViewTable
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            trackNumberVisible: true
-            headBarVisible: true
-            headBarExit:  !albumsPageRoot.wideMode
-            headBarExitIcon: "go-previous"
-            coverArtVisible: true
-            quickPlayVisible: true
-            focus: true
+            id: albumFilter
+            anchors.fill: parent
+            spacing: 0
 
-            holder.emoji: "qrc:/assets/ElectricPlug.png"
-            holder.isMask: false
-            holder.title : "Oops!"
-            holder.body: "This list is empty"
-            holder.emojiSize: iconSizes.huge
-
-            onRowClicked:
+            BabeTable
             {
-                albumsPageRoot.rowClicked(model.get(index))
+                id: albumsViewTable
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                trackNumberVisible: true
+                headBarVisible: true
+                headBarExit: false
+                coverArtVisible: true
+                quickPlayVisible: true
+                focus: true
+
+                holder.emoji: "qrc:/assets/ElectricPlug.png"
+                holder.isMask: false
+                holder.title : "Oops!"
+                holder.body: "This list is empty"
+                holder.emojiSize: iconSizes.huge
+
+                onRowClicked:
+                {
+                    albumsViewGrid.rowClicked(model.get(index))
+                }
+
+                onQuickPlayTrack:
+                {
+                    albumsViewGrid.playTrack(model.get(index))
+                }
+
+                onQueueTrack:
+                {
+                    albumsViewGrid.queueTrack(model.get(index))
+                }
+
+                onPlayAll:
+                {
+                    albumDialog.close()
+                    albumsViewGrid.playAll(currentAlbum, currentArtist)
+                }
+
+                onAppendAll:
+                {
+                    albumDialog.close()
+                    albumsViewGrid.appendAll(currentAlbum, currentArtist)
+                }
+
+
             }
 
-            onQuickPlayTrack:
+            Maui.TagsBar
             {
-                albumsPageRoot.playTrack(model.get(index))
+                id: tagBar
+                Layout.fillWidth: true
+                allowEditMode: false
+                onTagClicked: H.searchFor("tag:"+tag)
             }
-
-            onQueueTrack:
-            {
-                albumsPageRoot.queueTrack(model.get(index))
-            }
-
-            onPlayAll:
-            {
-                albumsPageRoot.currentIndex = 0
-                albumsPageRoot.playAll(currentAlbum, currentArtist)
-            }
-
-            onAppendAll:
-            {
-                albumsPageRoot.currentIndex = 0
-                albumsPageRoot.appendAll(currentAlbum, currentArtist)
-            }
-
-            onExit: albumsPageRoot.currentIndex = 0
-
         }
 
-        Maui.TagsBar
-        {
-            id: tagBar
-            Layout.fillWidth: true
-            allowEditMode: false
-            onTagClicked: H.searchFor("tag:"+tag)
-        }
+
     }
 
     function populate(query)
@@ -148,16 +148,15 @@ Kirigami.PageRow
 
         if(map.length > 0)
             for(var i in map)
-                grid.gridModel.append(map[i])
+                gridModel.append(map[i])
     }
 
     function populateTable(album, artist)
     {
         console.log("PAPULATE ALBUMS VIEW")
-
+        albumDialog.open()
         table.clearTable()
 
-        albumsPageRoot.currentIndex = 1
         var query = ""
         var tagq = ""
 

@@ -455,7 +455,7 @@ inline bool artworkCache(DB &track, const KEY &type = KEY::NONE)
         case KEY::ALBUM:
             if(fileName == track[KEY::ARTIST]+"_"+track[KEY::ALBUM]+".jpg")
             {
-                track.insert(KEY::ARTWORK,file);
+                track.insert(KEY::ARTWORK, file);
                 return true;
             }
             break;
@@ -463,7 +463,7 @@ inline bool artworkCache(DB &track, const KEY &type = KEY::NONE)
         case KEY::ARTIST:
             if(fileName == track[KEY::ARTIST]+".jpg")
             {
-                track.insert(KEY::ARTWORK,file);
+                track.insert(KEY::ARTWORK, file);
                 return true;
             }
             break;

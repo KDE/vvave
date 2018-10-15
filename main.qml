@@ -1,5 +1,5 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.1
@@ -179,7 +179,7 @@ Maui.ApplicationWindow
 
     /* UI */
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
-//    altToolBars: false
+    //    altToolBars: false
     accentColor: bae.babeColor()
     headBarFGColor: altColorText
     headBarBGColor: currentView === viewsIndex.vvave ? "#7e57c2" : "#212121"
@@ -219,7 +219,6 @@ Maui.ApplicationWindow
             onClicked:
             {
                 pageStack.currentIndex = 1
-                albumsView.currentIndex = 0
                 currentView = viewsIndex.albums
             }
             tooltipText: pageStack.wideMode ? "" : text
@@ -233,7 +232,6 @@ Maui.ApplicationWindow
             onClicked:
             {
                 pageStack.currentIndex = 1
-                artistsView.currentIndex = 0
                 currentView = viewsIndex.artists
             }
             tooltipText: pageStack.wideMode ? "" : text
@@ -290,14 +288,13 @@ Maui.ApplicationWindow
         id: babeConsole
     }
 
-//    menuDrawer.bannerImageSource: "qrc:/assets/banner.svg"
+    //    menuDrawer.bannerImageSource: "qrc:/assets/banner.svg"
 
-    menuDrawer.actions: [
+    mainMenu: [
 
-        Kirigami.Action
+        Maui.MenuItem
         {
             text: "Vvave Stream"
-            iconName: "love"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -305,10 +302,9 @@ Maui.ApplicationWindow
             }
         },
 
-        Kirigami.Action
+        Maui.MenuItem
         {
             text: qsTr("Folders")
-            iconName: "folder"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -316,10 +312,9 @@ Maui.ApplicationWindow
             }
         },
 
-        Kirigami.Action
+        Maui.MenuItem
         {
             text: qsTr("Linking")
-            iconName: isMobile ? "computer-laptop" : "phone"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -328,10 +323,9 @@ Maui.ApplicationWindow
             }
         },
 
-        Kirigami.Action
+        Maui.MenuItem
         {
             text: qsTr("YouTube")
-            iconName: "im-youtube"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -339,7 +333,7 @@ Maui.ApplicationWindow
             }
         },
 
-        Kirigami.Action
+        Maui.MenuItem
         {
             text: qsTr("Spotify")
             onTriggered:
@@ -349,66 +343,40 @@ Maui.ApplicationWindow
             }
         },
 
-        Kirigami.Action
-        {
-            text: qsTr("Collection")
-            iconName: "database-index"
+        MenuSeparator{},
 
-            Kirigami.Action
+        Maui.Menu
+        {
+            title: qsTr("Collection")
+
+
+            Maui.MenuItem
             {
                 text: qsTr("Sources...")
-                onTriggered: sourcesDialog.open()
-                iconName: "folder-new"
             }
 
-            Kirigami.Action
+            Maui.MenuItem
             {
                 text: qsTr("Re-Scan")
                 onTriggered: bae.refreshCollection();
             }
 
-            Kirigami.Action
-            {
+            Maui.MenuItem
+             {
                 text: qsTr("Refresh...")
-                iconName: "view-refresh"
-
-                Kirigami.Action
-                {
-                    text: qsTr("Tracks")
-                    onTriggered: H.refreshTracks();
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Albums")
-                    onTriggered: H.refreshAlbums();
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Artists")
-                    onTriggered: H.refreshArtists();
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("All")
-                    onTriggered: H.refreshCollection();
-                }
+                onTriggered: H.refreshCollection();
             }
 
-            Kirigami.Action
+            Maui.MenuItem
             {
                 text: qsTr("Clean")
                 onTriggered: bae.removeMissingTracks();
-                iconName: "edit-clear"
             }
         },
 
-        Kirigami.Action
+        Maui.Menu
         {
-            text: qsTr("Settings...")
-            iconName: "view-media-config"
+            title: qsTr("Settings...")
             //            Kirigami.Action
             //            {
             //                text: "Brainz"
@@ -428,122 +396,31 @@ Maui.ApplicationWindow
             //                }
             //            }
 
-            Kirigami.Action
+
+
+            Maui.MenuItem
             {
-                text: "Appearance"
-
-                Kirigami.Action
+                text: "Info label" + checked ? "ON" : "OFF"
+                checked: infoLabels
+                checkable: true
+                onToggled:
                 {
-                    text: "Icon size"
-                    Kirigami.Action
-                    {
-                        text: iconSizes.small
-                        onTriggered :
-                        {
-                            bae.saveSetting("ICON_SIZE", text, "BABE")
-                            toolBarIconSize = text
-                        }
-                    }
+                    infoLabels = checked
+                    bae.saveSetting("LABELS", infoLabels ? true : false, "PLAYBACK")
 
-                    Kirigami.Action
-                    {
-                        text: iconSizes.medium
-                        onTriggered :
-                        {
-                            bae.saveSetting("ICON_SIZE", text, "BABE")
-                            iconSizeChanged(text)
-                        }
-                    }
-
-                    Kirigami.Action
-                    {
-                        text: iconSizes.big
-                        onTriggered :
-                        {
-                            bae.saveSetting("ICON_SIZE", text, "BABE")
-                            iconSizeChanged(text)
-                        }
-                    }
                 }
             }
 
-            Kirigami.Action
+            Maui.MenuItem
             {
-                text: "Player"
-
-                Kirigami.Action
+                text: "Autoplay"
+                checked: autoplay
+                checkable: true
+                onToggled:
                 {
-                    text: "Info label"
-
-                    Kirigami.Action
-                    {
-                        text: checked ? "ON" : "OFF"
-                        checked: infoLabels
-                        checkable: true
-                        onToggled:
-                        {
-                            infoLabels = checked
-                            bae.saveSetting("LABELS", infoLabels ? true : false, "PLAYBACK")
-
-                        }
-                    }
+                    autoplay = checked
+                    bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
                 }
-
-                Kirigami.Action
-                {
-                    text: "Autoplay"
-                    checked: autoplay
-                    checkable: true
-                    onToggled:
-                    {
-                        autoplay = checked
-                        bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
-                    }
-
-                }
-            }
-        },
-
-        Kirigami.Action
-        {
-            text: "Developer"
-            iconName: "code-context"
-
-            Kirigami.Action
-            {
-                text: "Wiki"
-            }
-
-            Kirigami.Action
-            {
-                text: "Console log"
-                onTriggered: babeConsole.open()
-            }
-        },
-
-        Kirigami.Action
-        {
-            text: "About..."
-            iconName: "help-about"
-
-            Kirigami.Action
-            {
-                text: "VVAVEIt"
-            }
-
-            Kirigami.Action
-            {
-                text: "VVAVE"
-            }
-
-            Kirigami.Action
-            {
-                text: "Pulpo"
-            }
-
-            Kirigami.Action
-            {
-                text: "Kirigami"
             }
         }
     ]
@@ -794,12 +671,12 @@ Maui.ApplicationWindow
                 {
                     id: albumsView
 
-                    grid.holder.emoji: "qrc:/assets/MusicBox.png"
-                    grid.holder.isMask: false
-                    grid.holder.title : "No Albums!"
-                    grid.holder.body: "Add new music sources"
-                    grid.holder.emojiSize: iconSizes.huge
-                    grid.headBarTitle: grid.grid.count + qsTr(" abums")
+                    holder.emoji: "qrc:/assets/MusicBox.png"
+                    holder.isMask: false
+                    holder.title : "No Albums!"
+                    holder.body: "Add new music sources"
+                    holder.emojiSize: iconSizes.huge
+                    headBarTitle: count + qsTr(" abums")
 
                     Connections
                     {
@@ -842,12 +719,12 @@ Maui.ApplicationWindow
                 {
                     id: artistsView
 
-                    grid.holder.emoji: "qrc:/assets/MusicBox.png"
-                    grid.holder.isMask: false
-                    grid.holder.title : "No Artists!"
-                    grid.holder.body: "Add new music sources"
-                    grid.holder.emojiSize: iconSizes.huge
-                    grid.headBarTitle: grid.grid.count + qsTr(" artists")
+                    holder.emoji: "qrc:/assets/MusicBox.png"
+                    holder.isMask: false
+                    holder.title : "No Artists!"
+                    holder.body: "Add new music sources"
+                    holder.emojiSize: iconSizes.huge
+                    headBarTitle: count + qsTr(" artists")
 
                     Connections
                     {
@@ -976,7 +853,7 @@ Maui.ApplicationWindow
                 TableMenu
                 {
                     id: contextMenu
-                    menuItem: MenuItem
+                    menuItem: Maui.MenuItem
                     {
                         text: qsTr("Play all")
                         onTriggered:

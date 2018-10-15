@@ -51,7 +51,7 @@ BabeTable
     }
 
 
-    footBar.leftContent:    Maui.ToolButton
+    footBar.leftContent: Maui.ToolButton
     {
         visible: true
         iconName: "view-filter"
@@ -64,13 +64,6 @@ BabeTable
                 suggestionsPopup.close()
         }
     }
-
-    footBar.rightContent:  Maui.ToolButton
-    {
-        iconName: "edit-clear"
-        onClicked: searchInput.clear()
-    }
-
 
     SearchSuggestions
     {
@@ -85,7 +78,7 @@ BabeTable
     {
         visible: suggestionsPopup.visible
         width: parent.width
-        height: parent.height-searchBox.height
+        height: parent.height - searchInput.height
 
         color: darkDarkColor
         z: 999
