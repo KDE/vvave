@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>    
+        <file>main.qml</file>
         <file>widgets/TracksView.qml</file>
         <file>widgets/AlbumsView.qml</file>
         <file>assets/cover.png</file>
@@ -71,5 +71,6 @@
         <file>assets/MusicCloud.png</file>
         <file>widgets/FoldersView.qml</file>
         <file>assets/vvave.svg</file>
+        <file>assets/materialdesignicons-webfont.ttf</file>
     </qresource>
 </RCC>

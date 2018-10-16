@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
     YouTube youtube;
     Spotify spotify;
 
-    QFontDatabase::addApplicationFont(":/utils/materialdesignicons-webfont.ttf");
+    QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
 
     QQmlApplicationEngine engine;
 
