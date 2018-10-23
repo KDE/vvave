@@ -110,20 +110,21 @@ ItemDelegate
                         (artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
                     else "qrc:/assets/cover.png"
                 }
-                layer.enabled: albumRadius > 0
+                layer.enabled: albumRadius
                 layer.effect: OpacityMask
                 {
                     maskSource: Item
                     {
                         width: img.width
                         height: img.height
+
                         Rectangle
                         {
                             anchors.centerIn: parent
                             width: img.adapt ? img.width : Math.min(img.width, img.height)
                             height: img.adapt ? img.height : width
                             radius: albumRadius
-                            //                    radius: Math.min(width, height)
+                            border.color: borderColor
                         }
                     }
                 }
