@@ -17,7 +17,6 @@ Page
 
     clip: true
 
-
     SwipeView
     {
         id: infoSwipeView
@@ -181,10 +180,7 @@ Page
                         wrapMode: Text.Wrap
                     }
                 }
-
             }
         }
-
     }
-
 }

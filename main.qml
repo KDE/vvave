@@ -28,6 +28,7 @@ import "utils/Player.js" as Player
 
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import FMList 1.0
 
 Maui.ApplicationWindow
 {
@@ -276,6 +277,10 @@ Maui.ApplicationWindow
     Maui.FileDialog
     {
         id: fmDialog
+        onlyDirs: false
+        filterType: FMList.AUDIO
+        sortBy: FMList.MODIFIED
+        mode: modes.OPEN
     }
 
     SourcesDialog
@@ -345,15 +350,17 @@ Maui.ApplicationWindow
 
         MenuSeparator{},
 
+        Maui.MenuItem
+        {
+            text: qsTr("Sources...")
+            onTriggered: sourcesDialog.open()
+        },
+
         Maui.Menu
         {
             title: qsTr("Collection")
 
 
-            Maui.MenuItem
-            {
-                text: qsTr("Sources...")
-            }
 
             Maui.MenuItem
             {

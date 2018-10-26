@@ -24,7 +24,6 @@
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
         <file>utils/Props.js</file>
-        <file>widgets/SettingsView/SettingsView.qml</file>
         <file>widgets/MyBeatView/LogginForm.qml</file>
         <file>widgets/SettingsView/SourcesDialog.qml</file>
         <file>assets/banner.png</file>
