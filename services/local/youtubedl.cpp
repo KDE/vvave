@@ -125,7 +125,6 @@ void youtubedl::processFinished_totally(const int &state,const DB &info,const QP
             pulpo.setInfo(PULPO::INFO::METADATA);
 
             QEventLoop loop;
-
             QTimer timer;
             connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
 

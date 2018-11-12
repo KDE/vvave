@@ -96,7 +96,7 @@ ColumnLayout
                 trackRating: true
                 trackDuration: false
                 allowMenu: false
-                headBarVisible: true
+                headBar.visible: true
                 headBarExitIcon: "go-previous"
                 headBarExit: !linkingPage.wideMode
                 headBarTitle: linkingPage.wideMode ? "" : linkingModel.model.get(linkingModel.currentIndex).playlist

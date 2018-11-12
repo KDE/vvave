@@ -240,7 +240,7 @@ Page
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     trackNumberVisible: false
-                    headBarVisible: true
+                    headBar.visible: true
                     headBarExit: true
                     headBarExitIcon: "edit-clear"
                     headBarTitle: "YouTube"

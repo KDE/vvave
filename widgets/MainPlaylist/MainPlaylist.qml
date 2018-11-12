@@ -311,7 +311,7 @@ Maui.Page
                 initialItem: BabeTable
                 {
                     id: table
-                    headBarVisible: false
+                    headBar.visible: false
                     quickPlayVisible: false
                     coverArtVisible: true
                     trackRating: true

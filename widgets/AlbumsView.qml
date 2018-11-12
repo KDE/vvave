@@ -35,12 +35,12 @@ BabeGrid
     visible: true
     //        topPadding: space.large
     onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
-    headBarVisible: true
+    headBar.visible: true
     headBarExit: false
     headBar.leftContent: Maui.ToolButton
     {
         id : playAllBtn
-        visible : headBarVisible && albumsViewGrid.count > 0
+        visible : headBar.visible && albumsViewGrid.count > 0
         anim : true
         iconName : "media-playlist-play"
         onClicked : playAll()
@@ -51,7 +51,7 @@ BabeGrid
         Maui.ToolButton
         {
             id: appendBtn
-            visible: headBarVisible && albumsViewGrid.count > 0
+            visible: headBar.visible && albumsViewGrid.count > 0
             anim : true
             iconName : "media-playlist-append"//"media-repeat-track-amarok"
             onClicked: appendAll()
@@ -88,7 +88,7 @@ BabeGrid
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 trackNumberVisible: true
-                headBarVisible: true
+                headBar.visible: true
                 headBarExit: false
                 coverArtVisible: true
                 quickPlayVisible: true

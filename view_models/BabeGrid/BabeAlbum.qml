@@ -191,8 +191,6 @@ ItemDelegate
                 {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
-                    //            Layout.margins: space.medium
-
 
                     Label
                     {

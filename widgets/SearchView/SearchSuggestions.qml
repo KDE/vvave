@@ -18,7 +18,7 @@ Maui.Popup
     {
         id: suggestionsList
         anchors.fill: parent
-        headBarVisible: false
+        headBar.visible: false
         model: ListModel {id: suggestionsModel}
 
         section.property : "type"

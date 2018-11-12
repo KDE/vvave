@@ -32,7 +32,7 @@ Maui.Popup
     {
         id: sources
         anchors.fill: parent
-        headBarVisible: true
+        headBar.visible: true
         headBarExit: true
         headBarTitle: qsTr("Sources")
         Layout.fillWidth: true

@@ -102,7 +102,7 @@ Kirigami.PageRow
         coverArtVisible: true
         trackRating: true
         trackDuration: false
-        headBarVisible: !holder.visible
+        headBar.visible: !holder.visible
         headBarExitIcon: "go-previous"
         headBarExit: !playlistViewRoot.wideMode
         headBarTitle: playlistViewModel.model.get(playlistViewModel.currentIndex).playlist

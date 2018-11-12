@@ -50,7 +50,7 @@ BabeList
     headBar.leftContent: Maui.ToolButton
     {
         id : playAllBtn
-        visible : headBarVisible && count > 0
+        visible : headBar.visible && count > 0
         anim : true
         iconName : "media-playlist-play"
         onClicked : playAll()
@@ -61,7 +61,7 @@ BabeList
         Maui.ToolButton
         {
             id: appendBtn
-            visible: headBarVisible && count > 0
+            visible: headBar.visible && count > 0
             anim : true
             iconName : "media-playlist-append"//"media-repeat-track-amarok"
             onClicked: appendAll()

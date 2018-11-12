@@ -530,8 +530,8 @@ Maui.ApplicationWindow
         footBarOverlap: true
         altToolBars: true
 
-        footBarVisible: !mainlistEmpty
-        headBarVisible: !mainlistEmpty
+        footBar.visible: !mainlistEmpty
+        headBar.visible: !mainlistEmpty
 
         footBar.leftContent: Label
         {
@@ -613,7 +613,7 @@ Maui.ApplicationWindow
     Maui.Page
     {
         id: views
-        headBarVisible: false
+        headBar.visible: false
         margins: 0
         //        focusPolicy: Qt.WheelFocus
         //        visualFocus: true
