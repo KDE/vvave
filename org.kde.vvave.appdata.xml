@@ -7,6 +7,7 @@
   <name xml:lang="ca">Vvave</name>
   <name xml:lang="ca-valencia">Vvave</name>
   <name xml:lang="cs">Vvave</name>
+  <name xml:lang="de">Vvave</name>
   <name xml:lang="es">Vvave</name>
   <name xml:lang="fr">Vvave</name>
   <name xml:lang="gl">Vvave</name>
@@ -20,6 +21,7 @@
   <summary xml:lang="ca">Reprodueix la vostra col·lecció de música</summary>
   <summary xml:lang="ca-valencia">Reprodueix la vostra col·lecció de música</summary>
   <summary xml:lang="cs">Přehrávejte svou hudební sbírku</summary>
+  <summary xml:lang="de">Wiedergabe Ihrer Musik-Sammlung</summary>
   <summary xml:lang="es">Reproducir su colección de música</summary>
   <summary xml:lang="fr">Jouez votre collection musicale</summary>
   <summary xml:lang="gl">Reproduza a súa colección de música.</summary>
@@ -54,6 +56,7 @@
       <caption xml:lang="ca">El reproductor de música Vvave</caption>
       <caption xml:lang="ca-valencia">El reproductor de música Vvave</caption>
       <caption xml:lang="cs">Přehrávač hudby Vvave</caption>
+      <caption xml:lang="de">Vvave-Musikwiedergabe</caption>
       <caption xml:lang="es">El reproductor de música Vvave</caption>
       <caption xml:lang="fr">Lecteur de musique Vvave</caption>
       <caption xml:lang="gl">O reprodutor de música Vvave</caption>
