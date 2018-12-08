@@ -1,7 +1,0 @@
-cd ..
-# Make some build dirs
-mkdir build
-cd build
-# Build
-qmake -o Makefile ../vvave.pro
-make

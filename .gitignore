@@ -5,8 +5,8 @@ mauikit/
 .directory
 
 *.*~
-~*.*
-~.*
+#~*.*
+#~.*
 
 # C++ objects and libs
 *.slo
