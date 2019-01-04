@@ -11,6 +11,7 @@
   <name xml:lang="es">Vvave</name>
   <name xml:lang="fr">Vvave</name>
   <name xml:lang="gl">Vvave</name>
+  <name xml:lang="id">Vvave</name>
   <name xml:lang="it">Vvave</name>
   <name xml:lang="nl">Vvave</name>
   <name xml:lang="pt">Vvave</name>
@@ -26,6 +27,7 @@
   <summary xml:lang="es">Reproducir su colección de música</summary>
   <summary xml:lang="fr">Jouez votre collection musicale</summary>
   <summary xml:lang="gl">Reproduza a súa colección de música</summary>
+  <summary xml:lang="id">Play koleksi musikmu</summary>
   <summary xml:lang="it">Riproduce la tua collezione musicale</summary>
   <summary xml:lang="nl">Uw muziekcollectie afspelen</summary>
   <summary xml:lang="pt">Tocar a sua colecção de música</summary>
@@ -42,6 +44,7 @@
     <p xml:lang="es">Pequeño reproductor de música en Qt para tener a mano sus canciones favoritas.</p>
     <p xml:lang="fr">Lecteur de musique Qt minimaliste pour garder toutes vos chansons préférées à portée de main.</p>
     <p xml:lang="gl">Pequeno reprodutor de música desenvolvido con Qt para ter a man as túas cancións favoritas.</p>
+    <p xml:lang="id">Player Musik Qt yang mungil menjaga lagu favoritmu tertangani.</p>
     <p xml:lang="it">Piccolo lettore musicale basato su Qt per tenere le tue canzoni preferite a portata di mano.</p>
     <p xml:lang="nl">Kleine Qt Music speler om uw favoriete songs bij de hand te houden.</p>
     <p xml:lang="pt">Leitor de Música Minúsculo em Qt para manter as suas músicas favoritas à mão.</p>
@@ -64,6 +67,7 @@
       <caption xml:lang="es">El reproductor de música Vvave</caption>
       <caption xml:lang="fr">Lecteur de musique Vvave</caption>
       <caption xml:lang="gl">O reprodutor de música Vvave</caption>
+      <caption xml:lang="id">Player musik Vvave</caption>
       <caption xml:lang="it">Il lettore musicale Vvave</caption>
       <caption xml:lang="nl">De Vvave muziekspeler</caption>
       <caption xml:lang="pt">O leitor de música Vvave</caption>
