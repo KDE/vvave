@@ -35,21 +35,21 @@ void Notify::notify(const QString &title, const QString &body)
     notification->sendEvent();
 }
 
-void Notify::notifySong(const BAE::DB &trackMap)
+void Notify::notifySong(const FMH::MODEL &trackMap)
 {
     this->track = trackMap;
     // notification->setComponentName(QStringLiteral("Babe"));
     auto notification = new KNotification(QStringLiteral("Notify"),KNotification::CloseOnTimeout, this);
     connect(notification, &KNotification::closed, notification, &KNotification::deleteLater);
 
-    notification->setTitle(QStringLiteral("%1").arg(track[BAE::KEY::TITLE]));
-    notification->setText(QStringLiteral("%1\n%2").arg(track[BAE::KEY::ARTIST],track[BAE::KEY::ALBUM]));
+    notification->setTitle(QStringLiteral("%1").arg(track[FMH::MODEL_KEY::TITLE]));
+    notification->setText(QStringLiteral("%1\n%2").arg(track[FMH::MODEL_KEY::ARTIST],track[FMH::MODEL_KEY::ALBUM]));
     QPixmap pixmap;
-    pixmap.load(trackMap[BAE::KEY::ARTWORK]);
+    pixmap.load(trackMap[FMH::MODEL_KEY::ARTWORK]);
     if(!pixmap.isNull()) notification->setPixmap(pixmap);
     QStringList actions;
 
-    if(track[BAE::KEY::BABE].toInt()==1) actions<<i18n("Un-Babe it  \xe2\x99\xa1");
+    if(track[FMH::MODEL_KEY::FAV].toInt()==1) actions<<i18n("Un-Babe it  \xe2\x99\xa1");
     else actions<<i18n("Babe it  \xe2\x99\xa1");
 
     actions<<i18n("Skip");

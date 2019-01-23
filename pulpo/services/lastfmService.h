@@ -16,7 +16,7 @@ private:
     bool parseSimilar();
 
 public:
-    explicit lastfm(const BAE::DB &song);
+    explicit lastfm(const FMH::MODEL &song);
     virtual bool setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info);
 
 protected:

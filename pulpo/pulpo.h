@@ -26,11 +26,11 @@ class Pulpo : public QObject
         Q_OBJECT
 
     public:
-        explicit Pulpo(const BAE::DB &song, QObject *parent = nullptr);
+        explicit Pulpo(const FMH::MODEL &song, QObject *parent = nullptr);
         explicit Pulpo(QObject *parent = nullptr);
         ~Pulpo();
 
-        bool feed(const BAE::DB &song, const PULPO::RECURSIVE &recursive = PULPO::RECURSIVE::ON );
+        bool feed(const FMH::MODEL &song, const PULPO::RECURSIVE &recursive = PULPO::RECURSIVE::ON );
         void registerServices(const QList<PULPO::SERVICES> &services);
         void setInfo(const PULPO::INFO &info);
         void setOntology(const PULPO::ONTOLOGY &ontology);
@@ -44,11 +44,11 @@ class Pulpo : public QObject
         PULPO::RECURSIVE recursive = PULPO::RECURSIVE::ON;
         QList<SERVICES> registeredServices = {};
 
-        void passSignal(const BAE::DB &track, const PULPO::RESPONSE &response);
+        void passSignal(const FMH::MODEL &track, const PULPO::RESPONSE &response);
 
     protected:
         QByteArray array;
-        BAE::DB track;
+        FMH::MODEL track;
         PULPO::INFO info = INFO::NONE;
         PULPO::ONTOLOGY ontology = ONTOLOGY::NONE;
         PULPO::AVAILABLE availableInfo;
@@ -66,7 +66,7 @@ class Pulpo : public QObject
         virtual bool parseTrack() {return false;}
 
     signals:
-        void infoReady(BAE::DB track, PULPO::RESPONSE response);
+        void infoReady(FMH::MODEL track, PULPO::RESPONSE response);
         void serviceFail(const QString &message);
 };
 

@@ -26,7 +26,7 @@ public:
 
 private slots:
     void processFinished();
-    void processFinished_totally(const int &state, const BAE::DB &info, const QProcess::ExitStatus &exitStatus);
+    void processFinished_totally(const int &state, const FMH::MODEL &info, const QProcess::ExitStatus &exitStatus);
 
 private:
     const QString ydl="youtube-dl -f m4a --youtube-skip-dash-manifest -o \"$$$.%(ext)s\"";

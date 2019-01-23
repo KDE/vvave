@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QThread>
-#include "collectionDB.h"
 
-class ConThread : public CollectionDB
+class CollectionDB;
+class ConThread : public QObject
 {
     Q_OBJECT
 public:
@@ -21,6 +21,7 @@ public:
 
 private:
     QThread t;
+    CollectionDB *db;
     uint interval = 0;
     bool go = false;
     QList<QMap<QString, QVariant>> queue;

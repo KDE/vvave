@@ -56,17 +56,17 @@ void youtubedl::fetch(const QString &json)
 
     bDebug::Instance()->msg("Fetching from Youtube: "+id+" "+title+" "+artist);
 
-    DB infoMap;
-    infoMap.insert(KEY::TITLE, title);
-    infoMap.insert(KEY::ARTIST, artist);
-    infoMap.insert(KEY::ALBUM, album);
-    infoMap.insert(KEY::URL, page);
-    infoMap.insert(KEY::ID, id);
-    infoMap.insert(KEY::PLAYLIST, playlist);
+    FMH::MODEL infoMap;
+    infoMap.insert(FMH::MODEL_KEY::TITLE, title);
+    infoMap.insert(FMH::MODEL_KEY::ARTIST, artist);
+    infoMap.insert(FMH::MODEL_KEY::ALBUM, album);
+    infoMap.insert(FMH::MODEL_KEY::URL, page);
+    infoMap.insert(FMH::MODEL_KEY::ID, id);
+    infoMap.insert(FMH::MODEL_KEY::PLAYLIST, playlist);
 
-    if(!this->ids.contains(infoMap[KEY::ID]))
+    if(!this->ids.contains(infoMap[FMH::MODEL_KEY::ID]))
     {
-        this->ids << infoMap[KEY::ID];
+        this->ids << infoMap[FMH::MODEL_KEY::ID];
 
         auto process = new QProcess(this);
         process->setWorkingDirectory(YoutubeCachePath);
@@ -81,27 +81,27 @@ void youtubedl::fetch(const QString &json)
         });
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-        this->nof->notify("Song received!", infoMap[KEY::TITLE]+ " - "+ infoMap[KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
+        this->nof->notify("Song received!", infoMap[FMH::MODEL_KEY::TITLE]+ " - "+ infoMap[FMH::MODEL_KEY::ARTIST]+".\nWait a sec while the track is added to your collection :)");
 #endif
         auto command = ydl;
 
-        command = command.replace("$$$",infoMap[KEY::ID])+" "+infoMap[KEY::ID];
+        command = command.replace("$$$",infoMap[FMH::MODEL_KEY::ID])+" "+infoMap[FMH::MODEL_KEY::ID];
         bDebug::Instance()->msg(command);
         process->start(command);
     }
 }
 
-void youtubedl::processFinished_totally(const int &state,const DB &info,const QProcess::ExitStatus &exitStatus)
+void youtubedl::processFinished_totally(const int &state,const FMH::MODEL &info,const QProcess::ExitStatus &exitStatus)
 {
     auto track = info;
 
-    auto doneId = track[KEY::ID];
-    auto file = YoutubeCachePath+track[KEY::ID]+".m4a";
+    auto doneId = track[FMH::MODEL_KEY::ID];
+    auto file = YoutubeCachePath+doneId+".m4a";
 
     if(!BAE::fileExists(file)) return;
 
     ids.removeAll(doneId);
-    track.insert(KEY::URL,file);
+    track.insert(FMH::MODEL_KEY::URL,file);
     bDebug::Instance()->msg("Finished collection track with youtube-dl");
 
     //    qDebug()<<track[KEY::ID]<<track[KEY::TITLE]<<track[KEY::ARTIST]<<track[KEY::PLAYLIST]<<track[KEY::URL];
@@ -113,10 +113,10 @@ void youtubedl::processFinished_totally(const int &state,const DB &info,const QP
         if(BAE::fileExists(file))
         {
             tag.feed(file);
-            tag.setArtist(track[KEY::ARTIST]);
-            tag.setTitle(track[KEY::TITLE]);
-            tag.setAlbum(track[KEY::ALBUM]);
-            tag.setComment(track[KEY::URL]);
+            tag.setArtist(track[FMH::MODEL_KEY::ARTIST]);
+            tag.setTitle(track[FMH::MODEL_KEY::TITLE]);
+            tag.setAlbum(track[FMH::MODEL_KEY::ALBUM]);
+            tag.setComment(track[FMH::MODEL_KEY::URL]);
 
             bDebug::Instance()->msg("Trying to collect metadata of downloaded track");
             Pulpo pulpo;
@@ -131,7 +131,7 @@ void youtubedl::processFinished_totally(const int &state,const DB &info,const QP
             timer.setSingleShot(true);
             timer.setInterval(1000);
 
-            connect(&pulpo, &Pulpo::infoReady, [&loop](const BAE::DB &track, const PULPO::RESPONSE &res)
+            connect(&pulpo, &Pulpo::infoReady, [&loop](const FMH::MODEL &track, const PULPO::RESPONSE &res)
             {
                 bDebug::Instance()->msg("Setting collected track metadata");
                 if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA].isEmpty())
@@ -140,13 +140,13 @@ void youtubedl::processFinished_totally(const int &state,const DB &info,const QP
                     bDebug::Instance()->msg(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toString());
 
                     TagInfo tag;
-                    tag.feed(track[KEY::URL]);
+                    tag.feed(track[FMH::MODEL_KEY::URL]);
 
                     auto albumRes = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString();
 
                     if(!albumRes.isEmpty() && albumRes != BAE::SLANG[W::UNKNOWN])
                         tag.setAlbum(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::ALBUM_TITLE].toString());
-                    else tag.setAlbum(track[KEY::TITLE]);
+                    else tag.setAlbum(track[FMH::MODEL_KEY::TITLE]);
 
                     if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toString().isEmpty())
                         tag.setTrack(res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::METADATA][PULPO::CONTEXT::TRACK_NUMBER].toInt());
@@ -179,25 +179,27 @@ void youtubedl::processFinished_totally(const int &state,const DB &info,const QP
     auto duration = tag.getDuration();
     auto year = tag.getYear();
 
-    BAE::DB trackMap =
+    FMH::MODEL trackMap =
     {
-        {BAE::KEY::URL,file},
-        {BAE::KEY::TRACK,QString::number(trackNum)},
-        {BAE::KEY::TITLE,title},
-        {BAE::KEY::ARTIST,artist},
-        {BAE::KEY::ALBUM,album},
-        {BAE::KEY::DURATION,QString::number(duration)},
-        {BAE::KEY::GENRE,genre},
-        {BAE::KEY::SOURCES_URL,sourceUrl},
-        {BAE::KEY::BABE, file.startsWith(BAE::YoutubeCachePath)?"1":"0"},
-        {BAE::KEY::RELEASE_DATE,QString::number(year)}
+        {FMH::MODEL_KEY::URL,file},
+        {FMH::MODEL_KEY::TRACK,QString::number(trackNum)},
+        {FMH::MODEL_KEY::TITLE,title},
+        {FMH::MODEL_KEY::ARTIST,artist},
+        {FMH::MODEL_KEY::ALBUM,album},
+        {FMH::MODEL_KEY::DURATION,QString::number(duration)},
+        {FMH::MODEL_KEY::GENRE,genre},
+        {FMH::MODEL_KEY::SOURCE,sourceUrl},
+        {FMH::MODEL_KEY::FAV, file.startsWith(BAE::YoutubeCachePath)?"1":"0"},
+        {FMH::MODEL_KEY::RELEASEDATE,QString::number(year)}
     };
 
-    CollectionDB con(nullptr);
-    con.addTrack(trackMap);
-    con.trackPlaylist({file}, track[KEY::PLAYLIST]);
+    auto con = CollectionDB::getInstance();
+    con->addTrack(trackMap);
+    con->trackPlaylist({file}, track[FMH::MODEL_KEY::PLAYLIST]);
 
     if(this->ids.isEmpty()) emit this->done();
+
+    con->deleteLater();
 
 }
 

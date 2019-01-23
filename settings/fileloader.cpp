@@ -1,8 +1,10 @@
 #include "fileloader.h"
 #include "../services/local/taginfo.h"
+#include "../db/collectionDB.h"
 
-FileLoader::FileLoader() : CollectionDB(nullptr)
+FileLoader::FileLoader() : QObject(nullptr)
 {
+    this->db = CollectionDB::getInstance();
     qRegisterMetaType<BAE::DB>("BAE::DB");
     qRegisterMetaType<BAE::TABLE>("BAE::TABLE");
     qRegisterMetaType<QMap<BAE::TABLE, bool>>("QMap<BAE::TABLE,bool>");
@@ -37,8 +39,8 @@ void FileLoader::getTracks(const QStringList& paths)
     {
         if (QFileInfo(path).isDir())
         {
-            this->addFolder(path);
-            QDirIterator it(path, BAE::formats, QDir::Files, QDirIterator::Subdirectories);
+            this->db->addFolder(path);
+            QDirIterator it(path, FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO], QDir::Files, QDirIterator::Subdirectories);
 
             while (it.hasNext())
                 urls << it.next();
@@ -51,21 +53,19 @@ void FileLoader::getTracks(const QStringList& paths)
 
     if(urls.isEmpty()) return;
 
-    //    this->execQuery("PRAGMA synchronous=OFF");
     TagInfo info;
-
     for(auto url : urls)
     {
-        if(!go)
+        if(!this->go)
             break;
 
-        if(check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL], url))
+        if(this->db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url))
             continue;
 
         if(!info.feed(url))
             continue;
 
-        auto track= info.getTrack();
+        auto track = info.getTrack();
         auto genre = info.getGenre();
         auto album = BAE::fixString(info.getAlbum());
         auto title = BAE::fixString(info.getTitle()); /* to fix*/
@@ -74,24 +74,24 @@ void FileLoader::getTracks(const QStringList& paths)
         auto duration = info.getDuration();
         auto year = info.getYear();
 
-        BAE::DB trackMap =
+        FMH::MODEL trackMap =
         {
-            {BAE::KEY::URL, url},
-            {BAE::KEY::TRACK, QString::number(track)},
-            {BAE::KEY::TITLE, title},
-            {BAE::KEY::ARTIST, artist},
-            {BAE::KEY::ALBUM, album},
-            {BAE::KEY::DURATION,QString::number(duration)},
-            {BAE::KEY::GENRE, genre},
-            {BAE::KEY::SOURCES_URL, sourceUrl},
-            {BAE::KEY::BABE, url.startsWith(BAE::YoutubeCachePath) ? "1": "0"},
-            {BAE::KEY::RELEASE_DATE, QString::number(year)}
+            {FMH::MODEL_KEY::URL, url},
+            {FMH::MODEL_KEY::TRACK, QString::number(track)},
+            {FMH::MODEL_KEY::TITLE, title},
+            {FMH::MODEL_KEY::ARTIST, artist},
+            {FMH::MODEL_KEY::ALBUM, album},
+            {FMH::MODEL_KEY::DURATION,QString::number(duration)},
+            {FMH::MODEL_KEY::GENRE, genre},
+            {FMH::MODEL_KEY::SOURCE, sourceUrl},
+            {FMH::MODEL_KEY::FAV, url.startsWith(BAE::YoutubeCachePath) ? "1": "0"},
+            {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}
         };
 
         qDebug() << url;
-        BAE::artworkCache(trackMap, BAE::KEY::ALBUM);
+        BAE::artworkCache(trackMap, FMH::MODEL_KEY::ALBUM);
 
-        if(this->addTrack(trackMap))
+        if(this->db->addTrack(trackMap))
             newTracks++;
     }
 

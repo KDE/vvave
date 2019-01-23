@@ -25,7 +25,7 @@
 
 BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 {
-    this->connection = new CollectionDB(this);
+    this->connection = CollectionDB::getInstance();
     this->brainDeamon = new Brain;
     this->ytFetch = new youtubedl(this);
     this->babeSocket = new Socket(static_cast<quint16>(BAE::BabePort.toInt()), this);

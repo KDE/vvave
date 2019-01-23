@@ -13,7 +13,7 @@ private:
     bool extractLyrics(const QByteArray &array);
 
 public:
-    explicit lyricWikia(const BAE::DB &song);
+    explicit lyricWikia(const FMH::MODEL &song);
     virtual bool setUpService(const ONTOLOGY &ontology, const INFO &info);
 
 protected:

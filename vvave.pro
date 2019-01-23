@@ -63,7 +63,8 @@ SOURCES += main.cpp \
     services/local/youtubedl.cpp \
     services/local/linking.cpp \
     settings/fileloader.cpp \
-    services/web/Spotify/spotify.cpp
+    services/web/Spotify/spotify.cpp \
+    models/tracks/tracksmodel.cpp
 
 
 RESOURCES += qml.qrc \
@@ -98,7 +99,8 @@ HEADERS += \
     utils/singleton.h \
     services/local/youtubedl.h \
     services/local/linking.h \
-    services/web/Spotify/spotify.h
+    services/web/Spotify/spotify.h \
+    models/tracks/tracksmodel.h
 
 include(install.pri)
 

@@ -1,9 +1,11 @@
 #include "conthread.h"
 #include <QMap>
 #include <QList>
+#include "collectionDB.h"
 
-ConThread::ConThread() : CollectionDB(nullptr)
+ConThread::ConThread() : QObject(nullptr)
 {
+    this->db = CollectionDB::getInstance();
     this->moveToThread(&t);
     this->t.start();
 }
@@ -53,7 +55,7 @@ void ConThread::setInterval(const uint &interval)
 
 void ConThread::get(QString query)
 {
-    auto data = getDBDataQML(query);
+    auto data = this->db->getDBDataQML(query);
     emit this->dataReady(data);
 }
 
@@ -61,7 +63,7 @@ void ConThread::set(QString tableName, QVariantList wheres)
 {
     for(auto variant : wheres)
     {
-        this->insert(tableName, QVariantMap(variant.toMap()));
+        this->db->insert(tableName, QVariantMap(variant.toMap()));
         this->t.msleep(this->interval);
     }
 

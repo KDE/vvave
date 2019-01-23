@@ -17,7 +17,7 @@ private:
     bool extractLyrics(const QByteArray &array);
 
 public:
-    explicit genius(const BAE::DB &song);
+    explicit genius(const FMH::MODEL &song);
     virtual bool setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info);
 
 

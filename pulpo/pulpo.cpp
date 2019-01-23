@@ -26,14 +26,14 @@
 //#include "qgumbodocument.h"
 //#include "qgumbonode.h"
 
-Pulpo::Pulpo(const BAE::DB &song,QObject *parent)
+Pulpo::Pulpo(const FMH::MODEL &song,QObject *parent)
     : QObject(parent), track(song) {}
 
 Pulpo::Pulpo(QObject *parent): QObject(parent) {}
 
 Pulpo::~Pulpo() {}
 
-bool Pulpo::feed(const BAE::DB &song, const RECURSIVE &recursive)
+bool Pulpo::feed(const FMH::MODEL &song, const RECURSIVE &recursive)
 {
     this->track = song;
     this->recursive = recursive;
@@ -204,7 +204,7 @@ void Pulpo::initServices()
         }
 }
 
-void Pulpo::passSignal(const BAE::DB &track, const PULPO::RESPONSE &response)
+void Pulpo::passSignal(const FMH::MODEL &track, const PULPO::RESPONSE &response)
 {
     emit this->infoReady(track, response);
 }

@@ -10,12 +10,12 @@
 
 #include "bae.h"
 #include "../pulpo/pulpo.h"
-#include "../db/collectionDB.h"
 
 using namespace BAE;
 using namespace PULPO;
 
-class Brain : public CollectionDB
+class CollectionDB;
+class Brain : public QObject
 {
     Q_OBJECT
 
@@ -28,14 +28,14 @@ public:
     bool isRunning() const;
     void setInterval(const uint &value);
 
-    void setInfo(DB_LIST dataList, PULPO::ONTOLOGY ontology, QList<PULPO::SERVICES> services, PULPO::INFO info, PULPO::RECURSIVE recursive = PULPO::RECURSIVE::ON, void (*cb)(DB) = nullptr);
+    void setInfo(FMH::MODEL_LIST dataList, PULPO::ONTOLOGY ontology, QList<PULPO::SERVICES> services, PULPO::INFO info, PULPO::RECURSIVE recursive = PULPO::RECURSIVE::ON, void (*cb)(FMH::MODEL) = nullptr);
 
 public slots:
     void synapse();
-    void connectionParser(BAE::DB track, PULPO::RESPONSE response);
-    void parseAlbumInfo(DB &track, const PULPO::INFO_K &response);
-    void parseArtistInfo(DB &track, const PULPO::INFO_K &response);
-    void parseTrackInfo(DB &track, const PULPO::INFO_K &response);
+    void connectionParser(FMH::MODEL track, PULPO::RESPONSE response);
+    void parseAlbumInfo(FMH::MODEL &track, const PULPO::INFO_K &response);
+    void parseArtistInfo(FMH::MODEL &track, const PULPO::INFO_K &response);
+    void parseTrackInfo(FMH::MODEL &track, const PULPO::INFO_K &response);
     void trackInfo();
     void artistInfo();
     void albumInfo();
@@ -60,6 +60,7 @@ public slots:
 
 private:
     QThread t;
+    CollectionDB *db;
     Pulpo pulpo;
     uint interval = 1500;
     bool go = false;

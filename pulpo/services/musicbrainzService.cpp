@@ -5,7 +5,7 @@
  * http://google.com/complete/search?output=toolbar&q=lana
  * */
 
-musicBrainz::musicBrainz(const DB &song)
+musicBrainz::musicBrainz(const FMH::MODEL &song)
 {
     this->availableInfo.insert(ONTOLOGY::ALBUM, {INFO::TAGS});
     this->availableInfo.insert(ONTOLOGY::ARTIST, {INFO::TAGS});
@@ -23,7 +23,7 @@ bool musicBrainz::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INF
         return false;
 
     auto url = this->API;
-    QUrl encodedArtist(this->track[BAE::KEY::ARTIST]);
+    QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
     encodedArtist.toEncoded(QUrl::FullyEncoded);
 
     switch(this->ontology)
@@ -38,7 +38,7 @@ bool musicBrainz::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INF
 
     case PULPO::ONTOLOGY::ALBUM:
     {
-        QUrl encodedAlbum(this->track[BAE::KEY::ALBUM]);
+        QUrl encodedAlbum(this->track[FMH::MODEL_KEY::ALBUM]);
         encodedAlbum.toEncoded(QUrl::FullyEncoded);
 
         url.append(QString("release/?query=release:\"" + encodedAlbum.toString()+ "\"")) ;
@@ -49,7 +49,7 @@ bool musicBrainz::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INF
 
     case PULPO::ONTOLOGY::TRACK:
     {
-        QUrl encodedTrack(this->track[BAE::KEY::TITLE]);
+        QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
         encodedTrack.toEncoded(QUrl::FullyEncoded);
         url.append(QString("recording/?query=artist:\"" + encodedArtist.toString() + "\""));
         url.append(QString("+recording:\"" + encodedTrack.toString()+ "\""));

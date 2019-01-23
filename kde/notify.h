@@ -21,11 +21,11 @@ class Notify : public QObject
 public:
     explicit Notify(QObject *parent = nullptr);
     ~Notify();
-    void notifySong(const BAE::DB &);
+    void notifySong(const FMH::MODEL &);
     void notify(const QString &title, const QString &body);
 
 private:
-  BAE::DB track;
+  FMH::MODEL track;
 
 signals:
     void babeSong();

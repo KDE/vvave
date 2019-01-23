@@ -1,10 +1,12 @@
 #include "brain.h"
 #include "../services/local/taginfo.h"
 #include "../utils/babeconsole.h"
+#include "../db/collectionDB.h"
 
-Brain::Brain() : CollectionDB (nullptr)
+Brain::Brain() : QObject (nullptr)
 {
-    qRegisterMetaType<DB>("DB");
+    this->db = CollectionDB::getInstance();
+    qRegisterMetaType<FMH::MODEL>("FMH::MODEL");
     qRegisterMetaType<TABLE>("TABLE");
     qRegisterMetaType<PULPO::RESPONSE>("PULPO::RESPONSE");
     connect(&this->pulpo, &Pulpo::infoReady, this, &Brain::connectionParser);
@@ -50,7 +52,7 @@ void Brain::setInterval(const uint &value)
     this->interval = value;
 }
 
-void Brain::setInfo(DB_LIST dataList, ONTOLOGY ontology, QList<SERVICES> services, INFO info, RECURSIVE recursive, void (*cb)(DB))
+void Brain::setInfo(FMH::MODEL_LIST dataList, ONTOLOGY ontology, QList<SERVICES> services, INFO info, RECURSIVE recursive, void (*cb)(FMH::MODEL))
 {
     if(!go) return;
 
@@ -86,7 +88,7 @@ void Brain::synapse()
     this->go = false;
 }
 
-void Brain::connectionParser(DB track, RESPONSE response)
+void Brain::connectionParser(FMH::MODEL track, RESPONSE response)
 {
     for(auto res : response.keys())
     {
@@ -101,7 +103,7 @@ void Brain::connectionParser(DB track, RESPONSE response)
     }
 }
 
-void Brain::parseAlbumInfo(DB &track, const INFO_K &response)
+void Brain::parseAlbumInfo(FMH::MODEL &track, const INFO_K &response)
 {
 
     for(auto info : response.keys())
@@ -114,16 +116,16 @@ void Brain::parseAlbumInfo(DB &track, const INFO_K &response)
                 if(!response[info][context].toMap().isEmpty())
                 {
                     for(auto tag : response[info][context].toMap().keys() )
-                        this->tagsAlbum(track, tag, CONTEXT_MAP[context]);
+                        this->db->tagsAlbum(track, tag, CONTEXT_MAP[context]);
 
                 }else if (!response[info][context].toStringList().isEmpty())
                 {
                     for(auto tag : response[info][context].toStringList() )
-                        this->tagsAlbum(track, tag, CONTEXT_MAP[context]);
+                        this->db->tagsAlbum(track, tag, CONTEXT_MAP[context]);
 
                 } else if (!response[info][context].toString().isEmpty())
                 {
-                    this->tagsAlbum(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                    this->db->tagsAlbum(track, response[info][context].toString(), CONTEXT_MAP[context]);
                 }
             break;
         }
@@ -134,9 +136,9 @@ void Brain::parseAlbumInfo(DB &track, const INFO_K &response)
 
                 if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                 {
-                    qDebug()<<"SAVING ARTWORK FOR: " << track[KEY::ALBUM];
+                    qDebug()<<"SAVING ARTWORK FOR: " << track[FMH::MODEL_KEY::ALBUM];
                     BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
-                    this->insertArtwork(track);
+                    this->db->insertArtwork(track);
                 }
 
             break;
@@ -146,7 +148,7 @@ void Brain::parseAlbumInfo(DB &track, const INFO_K &response)
         {
             if(!response[info].isEmpty())
                 for (auto context : response[info].keys())
-                    this->wikiAlbum(track, response[info][context].toString());
+                    this->db->wikiAlbum(track, response[info][context].toString());
             break;
         }
 
@@ -154,7 +156,7 @@ void Brain::parseAlbumInfo(DB &track, const INFO_K &response)
         }
 }
 
-void Brain::parseArtistInfo(DB &track, const INFO_K &response)
+void Brain::parseArtistInfo(FMH::MODEL &track, const INFO_K &response)
 {
     for(auto info : response.keys())
     {
@@ -169,16 +171,16 @@ void Brain::parseArtistInfo(DB &track, const INFO_K &response)
                     if(!response[info][context].toMap().isEmpty())
                     {
                         for(auto tag : response[info][context].toMap().keys() )
-                            this->tagsArtist(track, tag, CONTEXT_MAP[context]);
+                            this->db->tagsArtist(track, tag, CONTEXT_MAP[context]);
 
                     }else if(!response[info][context].toStringList().isEmpty())
                     {
                         for(auto tag : response[info][context].toStringList() )
-                            this->tagsArtist(track, tag, CONTEXT_MAP[context]);
+                            this->db->tagsArtist(track, tag, CONTEXT_MAP[context]);
 
                     }else if(!response[info][context].toString().isEmpty())
                     {
-                        this->tagsArtist(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                        this->db->tagsArtist(track, response[info][context].toString(), CONTEXT_MAP[context]);
                     }
                 }
 
@@ -192,7 +194,7 @@ void Brain::parseArtistInfo(DB &track, const INFO_K &response)
                 if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                 {
                     BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
-                    this->insertArtwork(track);
+                    this->db->insertArtwork(track);
                 }
             }
 
@@ -204,7 +206,7 @@ void Brain::parseArtistInfo(DB &track, const INFO_K &response)
             if(!response[info].isEmpty())
             {
                 for (auto context : response[info].keys())
-                    this->wikiArtist(track, response[info][context].toString());
+                   this->db->wikiArtist(track, response[info][context].toString());
             }
 
             break;
@@ -215,7 +217,7 @@ void Brain::parseArtistInfo(DB &track, const INFO_K &response)
     }
 }
 
-void Brain::parseTrackInfo(DB &track, const INFO_K &response)
+void Brain::parseTrackInfo(FMH::MODEL &track, const INFO_K &response)
 {
     for(auto info : response.keys())
         switch(info)
@@ -229,11 +231,11 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
                     if (!response[info][context].toStringList().isEmpty())
                     {
                         for(auto tag : response[info][context].toStringList() )
-                            this->tagsTrack(track, tag, CONTEXT_MAP[context]);
+                            this->db->tagsTrack(track, tag, CONTEXT_MAP[context]);
                     }
 
                     if (!response[info][context].toString().isEmpty())
-                        this->tagsTrack(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                        this->db->tagsTrack(track, response[info][context].toString(), CONTEXT_MAP[context]);
                 }
             }
 
@@ -245,7 +247,7 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
             if(!response[info].isEmpty())
             {
                 if (!response[info][CONTEXT::WIKI].toString().isEmpty())
-                    this->wikiTrack(track, response[info][CONTEXT::WIKI].toString());
+                    this->db->wikiTrack(track, response[info][CONTEXT::WIKI].toString());
 
             }
 
@@ -259,7 +261,7 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
                 if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                 {
                     BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(),CachePath);
-                    this->insertArtwork(track);
+                    this->db->insertArtwork(track);
                 }
             }
 
@@ -277,11 +279,11 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
                 {
                     qDebug()<<"SETTING TRACK MISSING METADATA";
 
-                    tag.feed(track[KEY::URL]);
+                    tag.feed(track[FMH::MODEL_KEY::URL]);
                     if(!response[info][context].toString().isEmpty())
                     {
                         tag.setAlbum(response[info][context].toString());
-                        this->albumTrack(track, response[info][context].toString());
+                        this->db->albumTrack(track, response[info][context].toString());
                     }
 
                     break;
@@ -289,7 +291,7 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
 
                 case CONTEXT::TRACK_NUMBER:
                 {
-                    tag.feed(track[KEY::URL]);
+                    tag.feed(track[FMH::MODEL_KEY::URL]);
                     if(!response[info][context].toString().isEmpty())
                         tag.setTrack(response[info][context].toInt());
 
@@ -306,7 +308,7 @@ void Brain::parseTrackInfo(DB &track, const INFO_K &response)
         case PULPO::INFO::LYRICS:
         {
             if(!response[info][CONTEXT::LYRIC].toString().isEmpty())
-                this->lyricsTrack(track, response[info][CONTEXT::LYRIC].toString());
+                this->db->lyricsTrack(track, response[info][CONTEXT::LYRIC].toString());
             break;
         }
 
@@ -391,12 +393,12 @@ void Brain::albumArtworks()
             KEYMAP[KEY::ARTIST], TABLEMAP[TABLE::ALBUMS], KEYMAP[KEY::ARTWORK]);
 
     /* BEFORE FETCHING ONLINE LOOK UP IN THE CACHE FOR THE IMAGES*/
-    auto artworks = this->getDBData(queryTxt);
+    auto artworks = this->db->getDBData(queryTxt);
     for(auto album : artworks)
-        if(BAE::artworkCache(album, KEY::ALBUM))
-            this->insertArtwork(album);
+        if(BAE::artworkCache(album, FMH::MODEL_KEY::ALBUM))
+            this->db->insertArtwork(album);
 
-    artworks = this->getDBData(queryTxt);
+    artworks = this->db->getDBData(queryTxt);
     qDebug() << "Getting missing albums artworks"<< artworks.length();
 
     this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
@@ -417,7 +419,7 @@ void Brain::albumTags()
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ALBUMS],
             TABLEMAP[TABLE::ALBUMS_TAGS]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
+    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
 
 }
 
@@ -433,7 +435,7 @@ void Brain::albumWikis()
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::WIKI]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
+    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
 }
 
 void Brain::artistArtworks()
@@ -447,7 +449,7 @@ void Brain::artistArtworks()
     auto queryTxt = QString("SELECT %1 FROM %2 WHERE %3 = ''").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::ARTWORK]);
-    auto artworks = this->getDBData(queryTxt);
+    auto artworks = this->db->getDBData(queryTxt);
 
 
     /* BEFORE FETCHING ONLINE LOOK UP IN THE CACHE FOR THE IMAGE */
@@ -455,7 +457,7 @@ void Brain::artistArtworks()
 //        if(BAE::artworkCache(artist, KEY::ARTIST))
 //            this->insertArtwork(artist);
 
-    artworks = this->getDBData(queryTxt);
+    artworks = this->db->getDBData(queryTxt);
     this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
 
     emit this->done(TABLE::ARTISTS);
@@ -473,7 +475,7 @@ void Brain::artistTags()
     auto queryTxt =  QString("SELECT %1 FROM %2 WHERE %1 NOT IN ( SELECT %1 FROM %3 ) ").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             TABLEMAP[TABLE::ARTISTS_TAGS]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
+    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
 
 }
 
@@ -488,7 +490,7 @@ void Brain::artistWikis()
     auto queryTxt =  QString("SELECT %1 FROM %2 WHERE %3 = '' ").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::WIKI]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
+    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
 }
 
 void Brain::trackArtworks()
@@ -508,7 +510,7 @@ void Brain::trackArtworks()
             TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::ARTWORK]);
 
-    auto artworks = this->getDBData(queryTxt);
+    auto artworks = this->db->getDBData(queryTxt);
     this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF);
 
     emit this->done(TABLE::ALBUMS);
@@ -529,7 +531,7 @@ void Brain::trackLyrics()
             TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::LYRICS]);
 
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::LYRICS, PULPO::RECURSIVE::OFF);
+    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::LYRICS, PULPO::RECURSIVE::OFF);
 
 }
 
@@ -548,7 +550,7 @@ void Brain::trackTags()
             KEYMAP[KEY::ALBUM],
             TABLEMAP[TABLE::TRACKS],
             TABLEMAP[TABLE::TRACKS_TAGS]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, RECURSIVE::ON, nullptr);
+    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, RECURSIVE::ON, nullptr);
 }
 
 void Brain::trackWikis()
@@ -565,9 +567,6 @@ void Brain::trackWikis()
             KEYMAP[KEY::ALBUM],
             TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::WIKI]);
-    this->setInfo(this->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, RECURSIVE::OFF);
+    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, RECURSIVE::OFF);
 
 }
-
-
-

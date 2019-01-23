@@ -21,7 +21,7 @@ class ConThread;
 
 using namespace BAE;
 
-class Babe : public CollectionDB
+class Babe : public QObject
 {
     Q_OBJECT
 
@@ -99,16 +99,17 @@ public slots:
 private:
     Pulpo *pulpo;
     ConThread *thread;
+    CollectionDB *db;
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     Notify *nof;
 #elif defined (Q_OS_ANDROID)
 //    NotificationClient *nof;
 #endif
-    QString fetchCoverArt(DB &song);
-    static QVariantList transformData(const DB_LIST &dbList);
+    QString fetchCoverArt(FMH::MODEL &song);
+    static QVariantList transformData(const FMH::MODEL_LIST &dbList);
 
-    void fetchTrackLyrics(DB &song);
+    void fetchTrackLyrics(FMH::MODEL &song);
     void linkDecoder(QString json);
 
 signals:

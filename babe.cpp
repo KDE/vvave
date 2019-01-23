@@ -15,6 +15,7 @@
 #include <QCursor>
 #include "services/local/taginfo.h"
 //#include "Python.h"
+#include <MauiKit/fm.h>
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include <QWidget>
@@ -23,15 +24,16 @@
 
 using namespace BAE;
 
-Babe::Babe(QObject *parent) : CollectionDB(parent)
+Babe::Babe(QObject *parent) : QObject(parent)
 {    
     this->settings = new BabeSettings(this);
 
     /*use another thread for the db to perfom heavy dutty actions*/
     this->thread = new ConThread;
     this->pulpo = new Pulpo;
+    this->db = CollectionDB::getInstance();
 
-    connect(pulpo, &Pulpo::infoReady, [&](const BAE::DB &track, const PULPO::RESPONSE  &res)
+    connect(pulpo, &Pulpo::infoReady, [&](const FMH::MODEL &track, const PULPO::RESPONSE  &res)
     {
         qDebug()<<"GOT THE LYRICS";
 
@@ -39,8 +41,8 @@ Babe::Babe(QObject *parent) : CollectionDB(parent)
         {
             auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
 
-            lyricsTrack(track, lyrics);
-            emit this->trackLyricsReady(lyrics, track[KEY::URL]);
+            this->db->lyricsTrack(track, lyrics);
+            emit this->trackLyricsReady(lyrics, track[FMH::MODEL_KEY::URL]);
         }
     });
 
@@ -119,12 +121,12 @@ Babe::~Babe()
 
 QVariantList Babe::get(const QString &queryTxt)
 {
-    return getDBDataQML(queryTxt);
+    return this->db->getDBDataQML(queryTxt);
 }
 
 QVariantList Babe::getList(const QStringList &urls)
 {
-    return Babe::transformData(getDBData(urls));
+    return Babe::transformData(this->db->getDBData(urls));
 }
 
 void Babe::set(const QString &table, const QVariantList &wheres)
@@ -137,9 +139,9 @@ void Babe::trackPlaylist(const QStringList &urls, const QString &playlist)
     QVariantList data;
     for(auto url : urls)
     {
-        QVariantMap map {{KEYMAP[KEY::PLAYLIST],playlist},
-                         {KEYMAP[KEY::URL],url},
-                         {KEYMAP[KEY::ADD_DATE],QDateTime::currentDateTime()}};
+        QVariantMap map {{FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist},
+                         {FMH::MODEL_NAME[FMH::MODEL_KEY::URL],url},
+                         {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],QDateTime::currentDateTime()}};
 
         data << map;
     }
@@ -149,78 +151,78 @@ void Babe::trackPlaylist(const QStringList &urls, const QString &playlist)
 
 void Babe::trackLyrics(const QString &url)
 {
-    auto track = getDBData(QString("SELECT * FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
-                           KEYMAP[KEY::URL], url));
+    auto track = this->db->getDBData(QString("SELECT * FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
+                                     FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url));
 
     if(track.isEmpty()) return;
 
-    qDebug()<< "Getting lyrics for track"<< track.first()[KEY::TITLE];
-    if(!track.first()[KEY::LYRICS].isEmpty() && track.first()[KEY::LYRICS] != SLANG[W::NONE])
-        emit this->trackLyricsReady(track.first()[KEY::LYRICS], url);
+    qDebug()<< "Getting lyrics for track"<< track.first()[FMH::MODEL_KEY::TITLE];
+    if(!track.first()[FMH::MODEL_KEY::LYRICS].isEmpty() && track.first()[FMH::MODEL_KEY::LYRICS] != SLANG[W::NONE])
+        emit this->trackLyricsReady(track.first()[FMH::MODEL_KEY::LYRICS], url);
     else
         this->fetchTrackLyrics(track.first());
 }
 
 bool Babe::trackBabe(const QString &path)
 {
-    auto babe = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::BABE],
-                          TABLEMAP[TABLE::TRACKS],
-            KEYMAP[KEY::URL],path));
+    auto babe = this->db->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
+                                    TABLEMAP[TABLE::TRACKS],
+            FMH::MODEL_NAME[FMH::MODEL_KEY::URL],path));
 
     if(!babe.isEmpty())
-        return babe.first()[KEY::BABE].toInt();
+        return babe.first()[FMH::MODEL_KEY::FAV].toInt();
 
     return false;
 }
 
 QString Babe::artistArt(const QString &artist)
 {
-    auto artwork = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::ARTWORK],
-                             TABLEMAP[TABLE::ARTISTS],
-            KEYMAP[KEY::ARTIST],artist));
+    auto artwork = this->db->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK],
+                                       TABLEMAP[TABLE::ARTISTS],
+            FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],artist));
 
     if(!artwork.isEmpty())
-        if(!artwork.first()[KEY::ARTWORK].isEmpty() && artwork.first()[KEY::ARTWORK] != SLANG[W::NONE])
-            return artwork.first()[KEY::ARTWORK];
+        if(!artwork.first()[FMH::MODEL_KEY::ARTWORK].isEmpty() && artwork.first()[FMH::MODEL_KEY::ARTWORK] != SLANG[W::NONE])
+            return artwork.first()[FMH::MODEL_KEY::ARTWORK];
 
     return "";
 }
 
 QString Babe::artistWiki(const QString &artist)
 {
-    auto wiki = getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(KEYMAP[KEY::WIKI],
-                          TABLEMAP[TABLE::ARTISTS],
-            KEYMAP[KEY::ARTIST],artist));
+    auto wiki = this->db->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI],
+                                    TABLEMAP[TABLE::ARTISTS],
+            FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],artist));
 
     if(!wiki.isEmpty())
-        return wiki.first()[KEY::WIKI];
+        return wiki.first()[FMH::MODEL_KEY::WIKI];
 
     return "";
 }
 
 QString Babe::albumArt(const QString &album, const QString &artist)
 {
-    auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\" AND %5 = \"%6\"").arg(KEYMAP[KEY::ARTWORK],
+    auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\" AND %5 = \"%6\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK],
             TABLEMAP[TABLE::ALBUMS],
-            KEYMAP[KEY::ALBUM],album,
-            KEYMAP[KEY::ARTIST],artist);
+            FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album,
+            FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist);
 
-    auto albumCover = this->getDBData(queryStr);
+    auto albumCover = this->db->getDBData(queryStr);
 
     if(!albumCover.isEmpty())
-        if(!albumCover.first()[KEY::ARTWORK].isEmpty() && albumCover.first()[KEY::ARTWORK] != SLANG[W::NONE])
-            return albumCover.first()[KEY::ARTWORK];
+        if(!albumCover.first()[FMH::MODEL_KEY::ARTWORK].isEmpty() && albumCover.first()[FMH::MODEL_KEY::ARTWORK] != SLANG[W::NONE])
+            return albumCover.first()[FMH::MODEL_KEY::ARTWORK];
 
     return "";
 }
 
-void Babe::fetchTrackLyrics(DB &song)
+void Babe::fetchTrackLyrics(FMH::MODEL &song)
 {
     pulpo->registerServices({SERVICES::LyricWikia, SERVICES::Genius});
     pulpo->setOntology(PULPO::ONTOLOGY::TRACK);
     pulpo->setInfo(PULPO::INFO::LYRICS);
 
-     qDebug()<<"STARTED FETCHING LYRICS";
+    qDebug()<<"STARTED FETCHING LYRICS";
     pulpo->feed(song, PULPO::RECURSIVE::OFF);
 
     qDebug()<<"DONE FETCHING LYRICS";
@@ -247,7 +249,7 @@ void Babe::linkDecoder(QString json)
     case LINK::CODE::FILTER :
     case LINK::CODE::PLAYLISTS :
     {
-        auto res = this->getDBDataQML(msg);
+        auto res = this->db->getDBDataQML(msg);
         link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
         break;
     }
@@ -283,26 +285,26 @@ void Babe::linkDecoder(QString json)
 
 QString Babe::albumWiki(const QString &album, const QString &artist)
 {
-    auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\" AND %5 = \"%6\"").arg(KEYMAP[KEY::WIKI],
+    auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\" AND %5 = \"%6\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI],
             TABLEMAP[TABLE::ALBUMS],
-            KEYMAP[KEY::ALBUM],album,
-            KEYMAP[KEY::ARTIST],artist);
-    auto wiki = getDBData(queryStr);
+            FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM],album,
+            FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],artist);
+    auto wiki = this->db->getDBData(queryStr);
 
     if(!wiki.isEmpty())
-        return wiki.first()[KEY::WIKI];
+        return wiki.first()[FMH::MODEL_KEY::WIKI];
 
     return "";
 }
 
 QVariantList Babe::getFolders()
 {
-    auto sources = this->getDBData("select * from sources");
+    auto sources = this->db->getDBData("select * from sources");
 
     QVariantList res;
 
     for(auto item : sources)
-        res << FMH::getDirInfo(item[BAE::KEY::URL]);
+        res << FMH::getDirInfo(item[FMH::MODEL_KEY::URL]);
 
     qDebug()<<"FOLDERS:"<< res;
     return res;
@@ -310,11 +312,11 @@ QVariantList Babe::getFolders()
 
 bool Babe::babeTrack(const QString &path, const bool &value)
 {
-    if(update(TABLEMAP[TABLE::TRACKS],
-              KEYMAP[KEY::BABE],
-              value ? 1 : 0,
-              KEYMAP[KEY::URL],
-              path)) return true;
+    if(this->db->update(TABLEMAP[TABLE::TRACKS],
+                        FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
+                        value ? 1 : 0,
+                        FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
+                        path)) return true;
 
     return false;
 }
@@ -333,11 +335,11 @@ void Babe::notify(const QString &title, const QString &body)
 void Babe::notifySong(const QString &url)
 {
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))    
-    if(!check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL], url))
+    if(!this->db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url))
         return;
 
     auto query = QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where url = \"%1\"").arg(url);
-    auto track = getDBData(query);
+    auto track = this->db->getDBData(query);
     this->nof->notifySong(track.first());
 
 #else
@@ -425,7 +427,7 @@ void Babe::openUrls(const QStringList &urls)
     TagInfo info;
 
     for(auto url : urls)
-        if(check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS],BAE::KEYMAP[BAE::KEY::URL], url))
+        if(this->db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url))
             data << this->getList({url}).first().toMap();
         else
         {
@@ -441,16 +443,16 @@ void Babe::openUrls(const QStringList &urls)
                 auto year = info.getYear();
 
                 data << QVariantMap({
-                                        {BAE::KEYMAP[BAE::KEY::URL], url},
-                                        {BAE::KEYMAP[BAE::KEY::TRACK], QString::number(track)},
-                                        {BAE::KEYMAP[BAE::KEY::TITLE], title},
-                                        {BAE::KEYMAP[BAE::KEY::ARTIST], artist},
-                                        {BAE::KEYMAP[BAE::KEY::ALBUM], album},
-                                        {BAE::KEYMAP[BAE::KEY::DURATION],QString::number(duration)},
-                                        {BAE::KEYMAP[BAE::KEY::GENRE], genre},
-                                        {BAE::KEYMAP[BAE::KEY::SOURCES_URL], sourceUrl},
-                                        {BAE::KEYMAP[BAE::KEY::BABE],"0"},
-                                        {BAE::KEYMAP[BAE::KEY::RELEASE_DATE], QString::number(year)}
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::TRACK], QString::number(track)},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::DURATION],QString::number(duration)},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::GENRE], genre},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCE], sourceUrl},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],"0"},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::RELEASEDATE], QString::number(year)}
                                     });
             }
         }
@@ -484,14 +486,14 @@ QStringList Babe::defaultSources()
 
 QString Babe::loadCover(const QString &url)
 {
-    auto map = this->getDBData(QStringList() << url);
+    auto map = this->db->getDBData(QStringList() << url);
 
     if(map.isEmpty()) return "";
 
     auto track = map.first();
-    auto artist = track[KEY::ARTIST];
-    auto album = track[KEY::ALBUM];
-    auto title = track[KEY::TITLE];
+    auto artist = track[FMH::MODEL_KEY::ARTIST];
+    auto album = track[FMH::MODEL_KEY::ALBUM];
+    auto title = track[FMH::MODEL_KEY::TITLE];
 
     auto artistImg = this->artistArt(artist);
     auto albumImg = this->albumArt(album, artist);
@@ -521,9 +523,9 @@ QVariantList Babe::searchFor(const QStringList &queries)
             searchQuery = searchQuery.trimmed();
             if(!searchQuery.isEmpty())
             {
-                mapList += getSearchedTracks(BAE::KEY::WIKI, searchQuery);
-                mapList += getSearchedTracks(BAE::KEY::TAG, searchQuery);
-                mapList += getSearchedTracks(BAE::KEY::LYRICS, searchQuery);
+                mapList += this->db->getSearchedTracks(FMH::MODEL_KEY::WIKI, searchQuery);
+                mapList += this->db->getSearchedTracks(FMH::MODEL_KEY::TAG, searchQuery);
+                mapList += this->db->getSearchedTracks(FMH::MODEL_KEY::LYRICS, searchQuery);
             }
 
         }else if(searchQuery.contains((BAE::SearchTMap[BAE::SearchT::SIMILAR]+":")))
@@ -531,13 +533,13 @@ QVariantList Babe::searchFor(const QStringList &queries)
             searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::SIMILAR]+":","").trimmed();
             searchQuery=searchQuery.trimmed();
             if(!searchQuery.isEmpty())
-                mapList += getSearchedTracks(BAE::KEY::TAG, searchQuery);
+                mapList += this->db->getSearchedTracks(FMH::MODEL_KEY::TAG, searchQuery);
 
         }else
         {
-            BAE::KEY key;
+            FMH::MODEL_KEY key;
 
-            QMapIterator<BAE::KEY, QString> k(BAE::KEYMAP);
+            QHashIterator<FMH::MODEL_KEY, QString> k(FMH::MODEL_NAME);
             while (k.hasNext())
             {
                 k.next();
@@ -554,11 +556,11 @@ QVariantList Babe::searchFor(const QStringList &queries)
             if(!searchQuery.isEmpty())
             {
                 if(hasKey)
-                    mapList += getSearchedTracks(key, searchQuery);
+                    mapList += this->db->getSearchedTracks(key, searchQuery);
                 else
                 {
                     auto queryTxt = QString("SELECT t.*, al.artwork FROM tracks t INNER JOIN albums al ON t.album = al.album AND t.artist = al.artist WHERE t.title LIKE \"%"+searchQuery+"%\" OR t.artist LIKE \"%"+searchQuery+"%\" OR t.album LIKE \"%"+searchQuery+"%\"OR t.genre LIKE \"%"+searchQuery+"%\"OR t.url LIKE \"%"+searchQuery+"%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000");
-                    mapList += getDBDataQML(queryTxt);
+                    mapList += this->db->getDBDataQML(queryTxt);
                 }
             }
         }
@@ -567,12 +569,12 @@ QVariantList Babe::searchFor(const QStringList &queries)
     return  mapList;
 }
 
-QString Babe::fetchCoverArt(DB &song)
+QString Babe::fetchCoverArt(FMH::MODEL &song)
 {
     Pulpo pulpo;
 
-    if(BAE::artworkCache(song, KEY::ALBUM)) return song[KEY::ARTWORK];
-    if(BAE::artworkCache(song, KEY::ARTIST)) return song[KEY::ARTWORK];
+    if(BAE::artworkCache(song, FMH::MODEL_KEY::ALBUM)) return song[FMH::MODEL_KEY::ARTWORK];
+    if(BAE::artworkCache(song, FMH::MODEL_KEY::ARTIST)) return song[FMH::MODEL_KEY::ARTWORK];
 
     pulpo.registerServices({SERVICES::LastFm, SERVICES::Spotify});
     pulpo.setOntology(PULPO::ONTOLOGY::ALBUM);
@@ -586,7 +588,7 @@ QString Babe::fetchCoverArt(DB &song)
 
     connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
 
-    connect(&pulpo, &Pulpo::infoReady, [&](const BAE::DB &track,const PULPO::RESPONSE  &res)
+    connect(&pulpo, &Pulpo::infoReady, [&](const FMH::MODEL &track,const PULPO::RESPONSE  &res)
     {
         Q_UNUSED(track);
         if(!res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK].isEmpty())
@@ -603,21 +605,15 @@ QString Babe::fetchCoverArt(DB &song)
     loop.exec();
     timer.stop();
 
-    return song[KEY::ARTWORK];
+    return song[FMH::MODEL_KEY::ARTWORK];
 }
 
-QVariantList Babe::transformData(const DB_LIST &dbList)
+QVariantList Babe::transformData(const FMH::MODEL_LIST &dbList)
 {
     QVariantList res;
 
-    for(auto data : dbList)
-    {
-        QVariantMap map;
-        for(auto key : data.keys())
-            map[BAE::KEYMAP[key]] = data[key];
-
-        res << map;
-    }
+//    for(auto data : dbList)
+//        res << FM::toMap(data);
 
     return res;
 }

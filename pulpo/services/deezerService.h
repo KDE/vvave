@@ -16,7 +16,7 @@ private:
     bool extractLyrics(const QByteArray &array);
 
 public:
-    explicit deezer(const BAE::DB &song);
+    explicit deezer(const FMH::MODEL &song);
     virtual bool setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info);
 
 protected:

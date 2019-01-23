@@ -1,6 +1,6 @@
 #include "deezerService.h"
 
-deezer::deezer(const BAE::DB &song)
+deezer::deezer(const FMH::MODEL &song)
 {
     this->availableInfo.insert(ONTOLOGY::ARTIST, {INFO::ARTWORK});
     this->availableInfo.insert(ONTOLOGY::ALBUM, {INFO::ARTWORK});
@@ -21,13 +21,13 @@ bool deezer::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
     auto url = this->API;
 
-    QUrl encodedArtist(this->track[BAE::KEY::ARTIST]);
+    QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
     encodedArtist.toEncoded(QUrl::FullyEncoded);
 
-    QUrl encodedTrack(this->track[BAE::KEY::TITLE]);
+    QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
     encodedTrack.toEncoded(QUrl::FullyEncoded);
 
-    QUrl encodedAlbum(this->track[BAE::KEY::ALBUM]);
+    QUrl encodedAlbum(this->track[FMH::MODEL_KEY::ALBUM]);
     encodedAlbum.toEncoded(QUrl::FullyEncoded);
 
     switch(this->ontology)
@@ -99,7 +99,7 @@ bool deezer::parseArtist()
 
         if(this->info == INFO::ARTWORK || this->info == INFO::ALL)
         {
-            if(artistMap.value("name").toString() == this->track[BAE::KEY::ARTIST])
+            if(artistMap.value("name").toString() == this->track[FMH::MODEL_KEY::ARTIST])
             {
                 auto artwork = artistMap.value("picture_big").toString();
                 emit this->infoReady(this->track,this->packResponse(ONTOLOGY::ARTIST, INFO::ARTWORK, CONTEXT::IMAGE, this->startConnection(artwork)));
@@ -132,8 +132,8 @@ bool deezer::parseTrack()
 
     for(auto item : itemList)
     {
-        if(item.toMap().value("artist").toMap().value("name").toString() == this->track[BAE::KEY::ARTIST]
-                && item.toMap().value("title").toString() == this->track[BAE::KEY::TITLE])
+        if(item.toMap().value("artist").toMap().value("name").toString() == this->track[FMH::MODEL_KEY::ARTIST]
+                && item.toMap().value("title").toString() == this->track[FMH::MODEL_KEY::TITLE])
         {
             auto albumMap = item.toMap().value("album").toMap();
 
@@ -196,7 +196,7 @@ bool deezer::parseAlbum()
             auto album = albumMap.value("title").toString();
             auto artist = artistMap.value("name").toString();
 
-            if(album == this->track[BAE::KEY::ALBUM] && artist == this->track[BAE::KEY::ARTIST])
+            if(album == this->track[FMH::MODEL_KEY::ALBUM] && artist == this->track[FMH::MODEL_KEY::ARTIST])
             {
                 auto albumArt = albumMap.value("cover_big").toString();
                 emit this->infoReady(this->track, this->packResponse(ONTOLOGY::ALBUM, INFO::ARTWORK,CONTEXT::IMAGE, startConnection(albumArt)));

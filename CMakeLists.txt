@@ -43,6 +43,9 @@ add_executable(vvave
     settings/fileloader.cpp
     utils/brain.cpp
     utils/babeconsole.cpp
+    models/tracks/tracksmodel.cpp
+    models/basemodel.cpp
+    models/baselist.cpp
     )
 
 if (ANDROID)

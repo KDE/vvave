@@ -4,10 +4,10 @@
 #include <QThread>
 #include <QObject>
 #include <QDirIterator>
+#include "utils/bae.h"
 
-#include "../db/collectionDB.h"
-
-class FileLoader : public CollectionDB
+class CollectionDB;
+class FileLoader : public QObject
 {
     Q_OBJECT
 
@@ -31,6 +31,7 @@ signals:
 
 private:
     QThread t;
+    CollectionDB *db;
     bool go = false;
     bool wait = true;
     QStringList queue;

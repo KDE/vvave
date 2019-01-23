@@ -33,7 +33,7 @@ mood TEXT PRIMARY KEY
 CREATE TABLE PLAYLISTS
 (
 playlist       TEXT PRIMARY KEY ,
-addDate DATE NOT NULL
+adddate DATE NOT NULL
 ) ;
 
 CREATE TABLE SOURCES_TYPES
@@ -45,37 +45,37 @@ name TEXT NOT NULL
 CREATE TABLE FOLDERS
 (
 url  TEXT PRIMARY KEY,
-addDate DATE NOT NULL
+adddate DATE NOT NULL
 ) ;
 
 CREATE TABLE SOURCES
 (
 url TEXT PRIMARY KEY ,
-SOURCE_TYPES_id INTEGER NOT NULL,
-FOREIGN KEY(SOURCE_TYPES_id) REFERENCES SOURCES_TYPES(id)
+sourcetype INTEGER NOT NULL,
+FOREIGN KEY(sourcetype) REFERENCES SOURCES_TYPES(id)
 ) ;
 
 CREATE TABLE TRACKS
 (
 url TEXT ,
-sources_url TEXT  ,
+source TEXT  ,
 track   INTEGER ,
 title   TEXT NOT NULL,
 artist  TEXT NOT NULL,
 album    TEXT NOT NULL,
 duration    INTEGER  ,
 comment     TEXT,
-played      INTEGER  ,
-babe    INTEGER NOT NULL,
-stars       INTEGER NOT NULL,
-releaseDate DATE ,
-addDate     DATE NOT NULL,
+count      INTEGER  ,
+fav    INTEGER NOT NULL,
+rate       INTEGER NOT NULL,
+releasedate DATE ,
+adddate     DATE NOT NULL,
 lyrics     TEXT NOT NULL,
 genre      TEXT,
-art        TEXT,
+artwork        TEXT,
 wiki    TEXT NOT NULL,
 PRIMARY KEY (url),
-FOREIGN KEY(sources_url) REFERENCES SOURCES(url),
+FOREIGN KEY(source) REFERENCES SOURCES(url),
 FOREIGN KEY(album, artist) REFERENCES albums(album, artist)
 ) ;
 
@@ -136,7 +136,7 @@ CREATE TABLE TRACKS_PLAYLISTS
 (
 playlist TEXT NOT NULL ,
 url      TEXT NOT NULL ,
-addDate DATE NOT NULL,
+adddate DATE NOT NULL,
 PRIMARY KEY (playlist, url),
 FOREIGN KEY(playlist) REFERENCES PLAYLISTS(playlist),
 FOREIGN KEY(url) REFERENCES TRACKS(url)
@@ -146,7 +146,7 @@ FOREIGN KEY(url) REFERENCES TRACKS(url)
 CREATE TABLE LOG
 (
 id INTEGER NOT NULL,
-retrieval_date DATE NOT NULL,
+adddate DATE NOT NULL,
 
 PRIMARY KEY(id)
 );

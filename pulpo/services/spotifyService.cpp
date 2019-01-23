@@ -1,7 +1,7 @@
 #include "spotifyService.h"
 
 
-spotify::spotify(const BAE::DB &song)
+spotify::spotify(const FMH::MODEL &song)
 {
     this->track = song;
     this->availableInfo.insert(ONTOLOGY::ALBUM, {INFO::ARTWORK});
@@ -19,7 +19,7 @@ bool spotify::setUpService(const ONTOLOGY &ontology, const PULPO::INFO &info)
 
     auto url = this->API;
 
-    QUrl encodedArtist(this->track[BAE::KEY::ARTIST]);
+    QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
     encodedArtist.toEncoded(QUrl::FullyEncoded);
 
     switch(this->ontology)
@@ -34,7 +34,7 @@ bool spotify::setUpService(const ONTOLOGY &ontology, const PULPO::INFO &info)
 
     case ONTOLOGY::ALBUM:
     {
-        QUrl encodedAlbum(this->track[BAE::KEY::ALBUM]);
+        QUrl encodedAlbum(this->track[FMH::MODEL_KEY::ALBUM]);
         encodedAlbum.toEncoded(QUrl::FullyEncoded);
 
         url.append("album:");
@@ -47,7 +47,7 @@ bool spotify::setUpService(const ONTOLOGY &ontology, const PULPO::INFO &info)
 
     case ONTOLOGY::TRACK:
     {
-        QUrl encodedTrack(this->track[BAE::KEY::TITLE]);
+        QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
         encodedTrack.toEncoded(QUrl::FullyEncoded);
 
         url.append("track:");
@@ -203,7 +203,7 @@ bool spotify::parseTrack()
         auto album = item.toMap().value("album").toMap();
         auto trackArtist =  album.value("artists").toList().first().toMap().value("name").toString();
 
-        if(trackArtist.contains(this->track[BAE::KEY::ARTIST]))
+        if(trackArtist.contains(this->track[FMH::MODEL_KEY::ARTIST]))
         {
             if(this->info == INFO::TAGS || this->info == INFO::ALL)
             {

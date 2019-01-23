@@ -1,6 +1,6 @@
 #include "lastfmService.h"
 
-lastfm::lastfm(const BAE::DB &song)
+lastfm::lastfm(const FMH::MODEL &song)
 {    
     this->availableInfo.insert(ONTOLOGY::ALBUM, {INFO::ARTWORK, INFO::WIKI, INFO::TAGS});
     this->availableInfo.insert(ONTOLOGY::ARTIST, {INFO::ARTWORK, INFO::WIKI, INFO::TAGS});
@@ -19,7 +19,7 @@ bool lastfm::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
     auto url = this->API;
 
-    QUrl encodedArtist(this->track[BAE::KEY::ARTIST]);
+    QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
     encodedArtist.toEncoded(QUrl::FullyEncoded);
 
     switch(this->ontology)
@@ -34,7 +34,7 @@ bool lastfm::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
     case PULPO::ONTOLOGY::ALBUM:
     {
-        QUrl encodedAlbum(this->track[BAE::KEY::ALBUM]);
+        QUrl encodedAlbum(this->track[FMH::MODEL_KEY::ALBUM]);
         encodedAlbum.toEncoded(QUrl::FullyEncoded);
 
         url.append("?method=album.getinfo");
@@ -46,7 +46,7 @@ bool lastfm::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
     case PULPO::ONTOLOGY::TRACK:
     {
-        QUrl encodedTrack(this->track[BAE::KEY::TITLE]);
+        QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
         encodedTrack.toEncoded(QUrl::FullyEncoded);
 
         url.append("?method=track.getinfo");
@@ -189,9 +189,9 @@ bool lastfm::parseArtist()
     if(this->info == INFO::TAGS || this->info == INFO::ALL)
     {
         auto url = this->API;
-        QUrl encodedTrack(this->track[BAE::KEY::TITLE]);
+        QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
         encodedTrack.toEncoded(QUrl::FullyEncoded);
-        QUrl encodedArtist(this->track[BAE::KEY::ARTIST]);
+        QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
         encodedArtist.toEncoded(QUrl::FullyEncoded);
         url.append("?method=artist.getSimilar");
         url.append(KEY);

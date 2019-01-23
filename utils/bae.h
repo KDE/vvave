@@ -308,7 +308,6 @@ const QString Version = BABE_VERSION_STR;
 const QString DBName = "collection.db";
 
 const QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};
-const QStringList formats {"*.mp4","*.mp3","*.wav","*.flac","*.ogg","*.m4a"};
 const QStringList defaultSources = QStringList() << BAE::MusicPath
                                                  << BAE::DownloadsPath
                                                  << BAE::MusicPaths
@@ -396,17 +395,17 @@ inline bool fileExists(const QString &url)
     return FMH::fileExists(url);
 }
 
-inline BAE::TABLE albumType(const BAE::DB &albumMap)
+inline BAE::TABLE albumType(const FMH::MODEL &albumMap)
 {
-    if(albumMap[BAE::KEY::ALBUM].isEmpty() && !albumMap[BAE::KEY::ARTIST].isEmpty())
+    if(albumMap[FMH::MODEL_KEY::ALBUM].isEmpty() && !albumMap[FMH::MODEL_KEY::ARTIST].isEmpty())
         return BAE::TABLE::ARTISTS;
-    else if(!albumMap[BAE::KEY::ALBUM].isEmpty() && !albumMap[BAE::KEY::ARTIST].isEmpty())
+    else if(!albumMap[FMH::MODEL_KEY::ALBUM].isEmpty() && !albumMap[FMH::MODEL_KEY::ARTIST].isEmpty())
         return BAE::TABLE::ALBUMS;
 
     return BAE::TABLE::NONE;
 }
 
-inline void saveArt(DB &track, const QByteArray &array, const QString &path)
+inline void saveArt(FMH::MODEL &track, const QByteArray &array, const QString &path)
 {
     if(!array.isNull()&&!array.isEmpty())
     {
@@ -414,12 +413,12 @@ inline void saveArt(DB &track, const QByteArray &array, const QString &path)
 
         QImage img;
         img.loadFromData(array);
-        QString name = !track[BAE::KEY::ALBUM].isEmpty() ? track[BAE::KEY::ARTIST] + "_" + track[BAE::KEY::ALBUM] : track[BAE::KEY::ARTIST];
+        QString name = !track[FMH::MODEL_KEY::ALBUM].isEmpty() ? track[FMH::MODEL_KEY::ARTIST] + "_" + track[FMH::MODEL_KEY::ALBUM] : track[FMH::MODEL_KEY::ARTIST];
         name.replace("/", "-");
         name.replace("&", "-");
         QString format = "JPEG";
         if (img.save(path + name + ".jpg", format.toLatin1(), 100))
-            track.insert(BAE::KEY::ARTWORK,path + name + ".jpg");
+            track.insert(FMH::MODEL_KEY::ARTWORK,path + name + ".jpg");
         else  qDebug() << "couldn't save artwork";
     }else qDebug()<<"array is empty";
 }
@@ -443,7 +442,7 @@ inline QVariant loadSettings(const QString &key, const QString &group, const QVa
     return variant;
 }
 
-inline bool artworkCache(DB &track, const KEY &type = KEY::NONE)
+inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MODEL_KEY::ID)
 {
     QDirIterator it(CachePath, QDir::Files, QDirIterator::NoIteratorFlags);
     while (it.hasNext())
@@ -452,18 +451,18 @@ inline bool artworkCache(DB &track, const KEY &type = KEY::NONE)
         auto fileName = QFileInfo(file).fileName();
         switch(type)
         {
-        case KEY::ALBUM:
-            if(fileName == track[KEY::ARTIST]+"_"+track[KEY::ALBUM]+".jpg")
+        case FMH::MODEL_KEY::ALBUM:
+            if(fileName == track[FMH::MODEL_KEY::ARTIST]+"_"+track[FMH::MODEL_KEY::ALBUM]+".jpg")
             {
-                track.insert(KEY::ARTWORK, file);
+                track.insert(FMH::MODEL_KEY::ARTWORK, file);
                 return true;
             }
             break;
 
-        case KEY::ARTIST:
-            if(fileName == track[KEY::ARTIST]+".jpg")
+        case FMH::MODEL_KEY::ARTIST:
+            if(fileName == track[FMH::MODEL_KEY::ARTIST]+".jpg")
             {
-                track.insert(KEY::ARTWORK, file);
+                track.insert(FMH::MODEL_KEY::ARTWORK, file);
                 return true;
             }
             break;

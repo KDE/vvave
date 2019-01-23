@@ -25,11 +25,11 @@ class CollectionDB : public QObject
         Q_OBJECT
 
     public:
-        explicit CollectionDB( QObject *parent = nullptr);
-        ~CollectionDB() override;
+     static CollectionDB *getInstance();
+
 
         bool insert(const QString &tableName, const QVariantMap &insertData);
-        bool update(const QString &tableName, const BAE::DB &updateData, const QVariantMap &where);
+        bool update(const QString &tableName, const FMH::MODEL &updateData, const QVariantMap &where);
         bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
         bool remove();
 
@@ -42,46 +42,46 @@ class CollectionDB : public QObject
 
         /* usefull actions */
 
-        void insertArtwork(const BAE::DB &track);
+        void insertArtwork(const FMH::MODEL &track);
 
-        bool addTrack(const BAE::DB &track);
-        bool updateTrack(const BAE::DB &track);
+        bool addTrack(const FMH::MODEL &track);
+        bool updateTrack(const FMH::MODEL &track);
         Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
         Q_INVOKABLE bool colorTagTrack(const QString &path, const QString &value);
         Q_INVOKABLE QString trackColorTag(const QString &path);
 
-        bool lyricsTrack(const BAE::DB &track, const QString &value);
+        bool lyricsTrack(const FMH::MODEL &track, const QString &value);
         Q_INVOKABLE bool playedTrack(const QString &url, const int &increment = 1);
 
-        bool wikiTrack(const BAE::DB &track, const QString &value);
-        bool tagsTrack(const BAE::DB &track, const QString &value, const QString &context);
-        bool albumTrack(const BAE::DB &track, const QString &value);
-        bool trackTrack(const BAE::DB &track, const QString &value);
-        bool wikiArtist(const BAE::DB &track, const QString &value);
-        bool tagsArtist(const BAE::DB &track, const QString &value, const QString &context = "");
+        bool wikiTrack(const FMH::MODEL &track, const QString &value);
+        bool tagsTrack(const FMH::MODEL &track, const QString &value, const QString &context);
+        bool albumTrack(const FMH::MODEL &track, const QString &value);
+        bool trackTrack(const FMH::MODEL &track, const QString &value);
+        bool wikiArtist(const FMH::MODEL &track, const QString &value);
+        bool tagsArtist(const FMH::MODEL &track, const QString &value, const QString &context = "");
 
-        bool wikiAlbum(const BAE::DB &track, QString value);
-        bool tagsAlbum(const BAE::DB &track, const QString &value, const QString &context = "");
+        bool wikiAlbum(const FMH::MODEL &track, QString value);
+        bool tagsAlbum(const FMH::MODEL &track, const QString &value, const QString &context = "");
 
         Q_INVOKABLE bool addPlaylist(const QString &title);
         bool trackPlaylist(const QString &url, const QString &playlist);
         bool addFolder(const QString &url);
         bool removeFolder(const QString &url);
 
-        BAE::DB_LIST getDBData(const QStringList &urls);
-        BAE::DB_LIST getDBData(const QString &queryTxt);
+        FMH::MODEL_LIST getDBData(const QStringList &urls);
+        FMH::MODEL_LIST getDBData(const QString &queryTxt);
         QVariantList getDBDataQML(const QString &queryTxt);
-        QStringList dataToList(const BAE::DB_LIST &list, const BAE::KEY &key);
+        QStringList dataToList(const FMH::MODEL_LIST &list, const FMH::MODEL_KEY &key);
 
-        BAE::DB_LIST getAlbumTracks(const QString &album, const QString &artist, const BAE::KEY &orderBy = BAE::KEY::TRACK, const BAE::W &order = BAE::W::ASC);
-        BAE::DB_LIST getArtistTracks(const QString &artist, const BAE::KEY &orderBy = BAE::KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
-        BAE::DB_LIST getBabedTracks(const BAE::KEY &orderBy = BAE::KEY::PLAYED, const BAE::W &order = BAE::W::DESC);
-        QVariantList getSearchedTracks(const BAE::KEY &where, const QString &search);
-        BAE::DB_LIST getPlaylistTracks(const QString &playlist, const BAE::KEY &orderBy = BAE::KEY::ADD_DATE, const BAE::W &order = BAE::W::DESC);
-        BAE::DB_LIST getMostPlayedTracks(const int &greaterThan = 1,const int &limit = 50, const BAE::KEY &orderBy = BAE::KEY::PLAYED, const BAE::W &order = BAE::W::DESC);
-        BAE::DB_LIST getFavTracks(const int &stars = 1,const int &limit = 50, const BAE::KEY &orderBy = BAE::KEY::STARS, const BAE::W &order = BAE::W::DESC);
-        BAE::DB_LIST getRecentTracks(const int &limit = 50, const BAE::KEY &orderBy = BAE::KEY::ADD_DATE, const BAE::W &order = BAE::W::DESC);
-        BAE::DB_LIST getOnlineTracks(const BAE::KEY &orderBy = BAE::KEY::ADD_DATE, const BAE::W &order = BAE::W::DESC);
+        FMH::MODEL_LIST getAlbumTracks(const QString &album, const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::TRACK, const BAE::W &order = BAE::W::ASC);
+        FMH::MODEL_LIST getArtistTracks(const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
+        FMH::MODEL_LIST getBabedTracks(const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
+        QVariantList getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search);
+        FMH::MODEL_LIST getPlaylistTracks(const QString &playlist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
+        FMH::MODEL_LIST getMostPlayedTracks(const int &greaterThan = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
+        FMH::MODEL_LIST getFavTracks(const int &stars = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::RATE, const BAE::W &order = BAE::W::DESC);
+        FMH::MODEL_LIST getRecentTracks(const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
+        FMH::MODEL_LIST getOnlineTracks(const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
 
         Q_INVOKABLE QStringList getSourcesFolders();
 
@@ -108,20 +108,19 @@ class CollectionDB : public QObject
         void openDB(const QString &name);
 
     private:
+        static CollectionDB* instance;
+
         QString name;
         QSqlDatabase m_db;
-
-
-        /*basic actions*/
-
+        explicit CollectionDB( QObject *parent = nullptr);
+        ~CollectionDB() override;
+        void init();
 
     public slots:
-        void closeConnection();
-        void test();
 
     signals:
         void trackInserted();
-        void artworkInserted(const BAE::DB &albumMap);
+        void artworkInserted(const FMH::MODEL &albumMap);
         void DBactionFinished();
         void albumsCleaned(const int &amount);
         void artistsCleaned(const int &amount);

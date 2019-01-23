@@ -1,6 +1,6 @@
 #include "lyricwikiaService.h"
 
-lyricWikia::lyricWikia(const BAE::DB &song)
+lyricWikia::lyricWikia(const FMH::MODEL &song)
 {
     this->availableInfo.insert(ONTOLOGY::TRACK, {INFO::LYRICS});
     this->track = song;
@@ -20,10 +20,10 @@ bool lyricWikia::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO
     {
     case PULPO::ONTOLOGY::TRACK:
     {
-        QUrl encodedArtist(this->track[BAE::KEY::ARTIST]);
+        QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
         encodedArtist.toEncoded(QUrl::FullyEncoded);
 
-        QUrl encodedTrack(this->track[BAE::KEY::TITLE]);
+        QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
         encodedTrack.toEncoded(QUrl::FullyEncoded);
 
         url.append("&artist=" + encodedArtist.toString());
@@ -106,7 +106,7 @@ bool lyricWikia::extractLyrics(const QByteArray &array)
 
     if(!lyrics.contains("PUT LYRICS HERE")&&!lyrics.isEmpty())
     {
-        text = "<h2 align='center' >" + this->track[BAE::KEY::TITLE] + "</h2>";
+        text = "<h2 align='center' >" + this->track[FMH::MODEL_KEY::TITLE] + "</h2>";
         text += lyrics;
 
         text= "<div align='center'>"+text+"</div>";
