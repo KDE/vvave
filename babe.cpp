@@ -612,8 +612,11 @@ QVariantList Babe::transformData(const FMH::MODEL_LIST &dbList)
 {
     QVariantList res;
 
-//    for(auto data : dbList)
-//        res << FM::toMap(data);
+//    for(FMH::MODEL data : dbList)
+//    {
+//        FMH::MODEL copy = data;
+//        res << FM::toMap(copy);
+//    }
 
     return res;
 }

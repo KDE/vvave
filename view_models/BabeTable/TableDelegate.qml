@@ -36,7 +36,7 @@ SwipeDelegate
     property bool trackDurationVisible : false
     property bool trackRatingVisible: false
     property bool playingIndicator: false
-    property string trackMood : art
+    property string trackMood : model.color
 
     property bool remoteArtwork: false
 
@@ -88,13 +88,12 @@ SwipeDelegate
             iconName: "love"
             anchors.verticalCenter: parent.verticalCenter
 
-            iconColor: babe === "1" ? babeColor : textColor
+            iconColor: model.fav === "1" ? babeColor : textColor
             onClicked:
             {
-                babe = babe === "1" ? "0" : "1"
-                bae.babeTrack(url, babe)
+                model.fav = model.fav === "1" ? "0" : "1"
+                bae.babeTrack(url, model.fav)
                 swipe.close()
-
             }
         }
 
@@ -168,10 +167,10 @@ SwipeDelegate
                         sourceSize.width: parent.width
                         sourceSize.height: parent.height
 
-                        source: typeof artwork === 'undefined' ?
+                        source: typeof model.artwork === 'undefined' ?
                                     "qrc:/assets/cover.png" :
-                                    remoteArtwork ? artwork :
-                                                    ((artwork && artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png")
+                                    remoteArtwork ? model.artwork :
+                                                    ((model.artwork && model.artwork.length > 0 && model.artwork !== "NONE")? "file://"+encodeURIComponent(model.artwork) : "qrc:/assets/cover.png")
 
 
                         fillMode:  Image.PreserveAspectFit
@@ -238,6 +237,7 @@ SwipeDelegate
                     anchors.centerIn: parent
                     iconName: "media-playback-start"
                     iconColor: labelColor
+                    size: iconSizes.medium
                     onClicked: play()
                     anim: true
                 }
@@ -272,7 +272,7 @@ SwipeDelegate
                         Layout.alignment: Qt.AlignCenter
                         verticalAlignment:  Qt.AlignVCenter
 
-                        text: track + ". "
+                        text: model.track + ". "
                         font.bold: true
                         elide: Text.ElideRight
 
@@ -322,7 +322,7 @@ SwipeDelegate
                         id: trackBabe
 
                         font.family: "Material Design Icons"
-                        visible: model.babe == "1"
+                        visible: model.fav == "1"
                         Layout.alignment: Qt.AlignRight
 
                         Layout.fillWidth: true
@@ -332,7 +332,7 @@ SwipeDelegate
                         Layout.column: /*trackDurationVisible &&*/ sameAlbum ? 4 : 3
                         horizontalAlignment: Qt.AlignRight
                         verticalAlignment:  Qt.AlignVCenter
-                        text: model.babe == "1" ? "\uf2D1" : ""
+                        text: model.fav == "1" ? "\uf2D1" : ""
                         font.bold: false
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.small
@@ -354,7 +354,7 @@ SwipeDelegate
                         //                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
                         horizontalAlignment: Qt.AlignRight
                         verticalAlignment:  Qt.AlignVCenter
-                        text: H.setStars(model.stars)
+                        text: H.setStars(model.rate)
                         font.bold: false
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.small

@@ -291,7 +291,7 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
                           {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime()},
                           {FMH::MODEL_NAME[FMH::MODEL_KEY::LYRICS],""},
                           {FMH::MODEL_NAME[FMH::MODEL_KEY::GENRE], genre},
-                          {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK], ""},
+                          {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], ""},
                           {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""},
                           {FMH::MODEL_NAME[FMH::MODEL_KEY::COMMENT], ""}};
 
@@ -339,7 +339,7 @@ bool CollectionDB::rateTrack(const QString &path, const int &value)
 bool CollectionDB::colorTagTrack(const QString &path, const QString &value)
 {
     if(update(TABLEMAP[TABLE::TRACKS],
-              FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK],
+              FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR],
               value,
               FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
               path)) return true;
@@ -571,7 +571,7 @@ FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt)
         {
             FMH::MODEL data;
             for(auto key : FMH::MODEL_NAME.keys())
-                if(query.record().indexOf(FMH::MODEL_NAME[key])>-1)
+                if(query.record().indexOf(FMH::MODEL_NAME[key]) > -1)
                     data.insert(key, query.value(FMH::MODEL_NAME[key]).toString());
 
             mapList << data;
@@ -790,12 +790,12 @@ FMH::MODEL_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const 
 QString CollectionDB::trackColorTag(const QString &path)
 {
     QString color;
-    auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK],
+    auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR],
                                  TABLEMAP[TABLE::TRACKS],
             FMH::MODEL_NAME[FMH::MODEL_KEY::URL],path));
 
     for(auto track : query)
-        color = track[FMH::MODEL_KEY::MOOD];
+        color = track[FMH::MODEL_KEY::COLOR];
 
     return color;
 }

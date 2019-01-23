@@ -22,14 +22,8 @@ BabeTable
     holder.body: "Add new music sources"
     holder.emojiSize: iconSizes.huge
 
-    function populate()
-    {
-        var map = bae.get(Q.GET.allTracks)
+    list.query: Q.GET.allTracks
 
-        if(map.length > 0)
-            for(var i in map)
-                tracksViewTable.model.append(map[i])
-    }
 }
 
 

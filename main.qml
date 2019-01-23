@@ -941,10 +941,10 @@ Maui.ApplicationWindow
     {
         target: bae
 
-        onRefreshTables: H.refreshCollection(size)
-        onRefreshTracks: H.refreshTracks()
-        onRefreshAlbums: H.refreshAlbums()
-        onRefreshArtists: H.refreshArtists()
+//        onRefreshTables: H.refreshCollection(size)
+//        onRefreshTracks: H.refreshTracks()
+//        onRefreshAlbums: H.refreshAlbums()
+//        onRefreshArtists: H.refreshArtists()
 
         onTrackLyricsReady:
         {

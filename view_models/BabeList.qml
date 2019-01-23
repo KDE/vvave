@@ -8,7 +8,9 @@ import org.kde.mauikit 1.0 as Maui
 Maui.Page
 {
     id: control
-    property alias list : babeList
+
+
+    property alias listView : babeList
     property alias model : babeList.model
     property alias delegate : babeList.delegate
     property alias count : babeList.count
@@ -64,7 +66,7 @@ Maui.Page
         boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.OvershootBounds
         flickableDirection: Flickable.AutoFlickDirection
 
-//        snapMode: isMobile? ListView.SnapToItem : ListView.NoSnap
+        //        snapMode: isMobile? ListView.SnapToItem : ListView.NoSnap
 
         addDisplaced: Transition
         {

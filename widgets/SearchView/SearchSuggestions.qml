@@ -8,7 +8,7 @@ import "../../db/Queries.js" as Q
 Maui.Popup
 {
     id: searchSuggestionsRoot
-    property alias model : suggestionsList.model   
+    property alias model : suggestionsList.model
     maxHeight: unit * 700
     heightHint: 0.5
 

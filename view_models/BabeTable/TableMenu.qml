@@ -13,7 +13,7 @@ Maui.Menu
     property var paths : []
 
     property int rate : 0
-    property bool babe : false
+    property bool fav : false
     property string starColor : "#FFC107"
     property string starReg : textColor
     property string starIcon: "draw-star"
@@ -33,7 +33,7 @@ Maui.Menu
 
     Maui.MenuItem
     {
-        text: babe == false ? qsTr("Fav it"): qsTr("UnFav it")
+        text: fav == false ? qsTr("Fav it"): qsTr("UnFav it")
         onTriggered:
         {
             favClicked(paths)

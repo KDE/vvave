@@ -37,6 +37,11 @@ private:
 signals:
     void queryChanged();
     void sortByChanged();
+
+public slots:
+    QVariantMap get(const int &index) const override;
+
+    bool color(const int &index, const QString &color);
 };
 
 #endif // TRACKSMODEL_H

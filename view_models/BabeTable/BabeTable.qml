@@ -3,6 +3,10 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+
+import BaseModel 1.0
+import TracksList 1.0
+
 import "../../utils/Player.js" as Player
 import "../../utils/Help.js" as H
 import "../../db/Queries.js" as Q
@@ -15,6 +19,9 @@ BabeList
     //    cacheBuffer : 300
 
     focus: true
+
+
+    property alias list : _tracksList
 
     property bool trackNumberVisible
     property bool quickPlayVisible : true
@@ -100,7 +107,7 @@ BabeList
                 text: qsTr("Select...")
                 onTriggered:
                 {
-                    H.addToSelection(list.model.get(list.currentIndex))
+                    H.addToSelection(listView.model.get(listView.currentIndex))
                     contextMenu.close()
                 }
             },
@@ -121,7 +128,7 @@ BabeList
         onFavClicked:
         {
             var value = H.faveIt(paths)
-            model.get(list.currentIndex).babe = value ? "1" : "0"
+            model.get(listView.currentIndex).fav = value ? "1" : "0"
         }
 
         onQueueClicked: H.queueIt(paths)
@@ -134,31 +141,30 @@ BabeList
 
         onRemoveClicked:
         {
-            listModel.remove(list.currentIndex)
+            listModel.remove(listView.currentIndex)
         }
 
         onRateClicked:
         {
             var value = H.rateIt(paths, rate)
-            list.currentItem.rate(H.setStars(value))
-            list.model.get(list.currentIndex).stars = value
+            listView.currentItem.rate(H.setStars(value))
+            listView.model.get(listView.currentIndex).rate = value
         }
         onColorClicked:
         {
-            H.moodIt(paths, color)
 
-            list.currentItem.trackMood = color
-            list.model.get(list.currentIndex).art = color
+            if(paths.length > 1)
+            H.moodIt(paths, color)
+            else
+                list.color(listView.currentIndex, color);
+
+            listView.currentItem.trackMood = color
         }
     }
 
-    list.highlightFollowsCurrentItem: false
-    list.highlightMoveDuration: 0
-    list.highlight: Rectangle { }
-
-    ListModel { id: listModel }
-
-    model: listModel
+    listView.highlightFollowsCurrentItem: false
+    listView.highlightMoveDuration: 0
+    listView.highlight: Rectangle { }
 
     section.property : sortBy
     section.criteria: ViewSection.FullString
@@ -169,12 +175,26 @@ BabeList
         boldLabel: true
     }
 
+
+    BaseModel
+    {
+        id: _tracksModel
+        list: _tracksList
+    }
+
+    Tracks
+    {
+        id: _tracksList
+    }
+
+    model: _tracksModel
+
     //    property alias animBabe: delegate.animBabe
     delegate: TableDelegate
     {
         id: delegate
 
-        width: list.width
+        width: listView.width
 
         number : trackNumberVisible ? true : false
         quickPlay: quickPlayVisible
@@ -193,7 +213,7 @@ BabeList
             currentIndex = index
             if(selectionMode)
             {
-                H.addToSelection(list.model.get(list.currentIndex))
+                H.addToSelection(listView.model.get(listView.currentIndex))
                 return
             }
 
@@ -225,9 +245,9 @@ BabeList
     function openItemMenu(index)
     {
         currentIndex = index
-        contextMenu.rate = bae.getTrackStars(model.get(currentIndex).url)
-        contextMenu.babe = bae.trackBabe(model.get(currentIndex).url)
-        contextMenu.show([model.get(currentIndex).url])
+        contextMenu.rate = list.get(currentIndex).rate
+        contextMenu.fav = list.get(currentIndex).fav
+        contextMenu.show([list.get(currentIndex).url])
 
         rowPressed(index)
     }
@@ -262,7 +282,7 @@ BabeList
     {
         root.pageStack.currentIndex = 1
         root.currentView = viewsIndex.albums
-        var item = list.model.get(list.currentIndex)
+        var item = listView.model.get(listView.currentIndex)
         albumsView.populateTable(item.album, item.artist)
         contextMenu.close()
     }
@@ -271,7 +291,7 @@ BabeList
     {
         root.pageStack.currentIndex = 1
         root.currentView = viewsIndex.artists
-        var item = list.model.get(list.currentIndex)
+        var item = listView.model.get(listView.currentIndex)
         artistsView.populateTable(undefined, item.artist)
         contextMenu.close()
     }

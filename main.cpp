@@ -30,6 +30,11 @@
 #include "services/web/youtube.h"
 #include "services/web/Spotify/spotify.h"
 #include "services/local/linking.h"
+
+#include "models/tracks/tracksmodel.h"
+#include "models/baselist.h"
+#include "models/basemodel.h"
+
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
 #endif
@@ -96,6 +101,10 @@ int main(int argc, char *argv[])
     context->setContextProperty("spotify", &spotify);
     context->setContextProperty("link", &bae.link);
 
+    qmlRegisterUncreatableType<BaseList>("BaseList", 1, 0, "BaseList", QStringLiteral("BaseList should not be created in QML"));
+
+    qmlRegisterType<BaseModel>("BaseModel", 1, 0, "BaseModel");
+    qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
     qmlRegisterUncreatableMetaObject(
                 LINK::staticMetaObject, // static meta object
                 "Link.Codes",                // import statement (can be any string)
