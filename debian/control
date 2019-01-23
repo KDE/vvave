@@ -1,13 +1,46 @@
-Source: vvave 
-Section: main
+Source: vvave
+Section: sound
 Priority: optional
-Maintainer: Camilo <camilo@gmail.com>
-Build-Depends: debhelper (>=9)
-Standards-Version: 3.9.6
-#Homepage: <insert the upstream URL, if relevant>
-Vcs-Git: https://github.com/mauikit/vvave.git
+Maintainer: Debian/Kubuntu Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Build-Depends: appstream,
+               cmake (>= 2.8.12),
+               debhelper (>= 11),
+               extra-cmake-modules (>= 5.24.0~),
+               libkf5config-dev (>= 5.24.0~),
+               libkf5coreaddons-dev (>= 5.24.0~),
+               libkf5i18n-dev (>= 5.24.0~),
+               libkf5kio-dev,
+               libkf5notifications-dev (>= 5.24.0~),
+               libqt5websockets5-dev,
+               libtag1-dev,
+               mauikit-dev,
+               pkg-kde-tools,
+               qtbase5-dev (>= 5.5.0~),
+               qtmultimedia5-dev (>= 5.5.0~),
+               qtquickcontrols2-5-dev,
+               qtwebengine5-dev
+Standards-Version: 4.2.1
+Homepage: https://github.com/maui-project/vvave
+Vcs-Browser: https://gitlab.com/debian-pm/apps/vvave
+Vcs-Git: https://gitlab.com/debian-pm/apps/vvave.git
 
 Package: vvave
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, grub-common
-Description: Music Player
+Depends: qml-module-org-kde-mauikit,
+         youtube-dl,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: Tiny Qt VVave Music Player
+ VVave is a tiny Qt music player to keep your favorite songs at hand
+ .
+ VVave will handle your whole music collection, letting you create
+ custom playlists to organize your music.
+ .
+ You can also filter your music by artist, title, album, genre,
+ date and location. VVave lets you vvave-mark your favorite YouTube
+ music videos into your local collection by using the Chromium
+ extension.
+ .
+ Think of VVave as the playlist where all your favorite tracks at
+ the moment are. And when needed you also have an integrated
+ collection manager.
