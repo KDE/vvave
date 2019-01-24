@@ -11,8 +11,8 @@ function playTrack(index)
 
         if(bae.fileExists(currentTrack.url))
         {
-            player.source(currentTrack.url);
-            player.play()
+            player.url = currentTrack.url;
+            player.playing = true
 
             var artwork = currentTrack.artwork
             currentArtwork = artwork && artwork.length > 0 && artwork !== "NONE"? artwork : bae.loadCover(currentTrack.url)
@@ -71,13 +71,13 @@ function stop()
 
 function pauseTrack()
 {
-    player.pause()
+    player.playing = false
 }
 
 function resumeTrack()
 {    
-    if(!player.play() && !mainlistEmpty)
-        playAt(0)
+//    if(!player.play() && !mainlistEmpty)
+//        playAt(0)
 }
 
 function nextTrack()
@@ -149,7 +149,7 @@ function appendTrack(track)
 {
     if(track)
     {
-        mainPlaylist.list.model.append(track)
+        mainPlaylist.list.append(track)
         animFooter.running = true
         if(sync === true)
         {

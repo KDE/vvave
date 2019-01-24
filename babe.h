@@ -6,7 +6,6 @@
 #include "utils/bae.h"
 #include "db/collectionDB.h"
 #include "services/local/linking.h"
-#include "services/local/player.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 class Notify;
@@ -31,7 +30,6 @@ public:
 
     BabeSettings *settings;
     Linking link;
-    Player player;
 
     //    Q_INVOKABLE void runPy();
 

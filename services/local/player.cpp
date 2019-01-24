@@ -7,36 +7,25 @@ Player::Player(QObject *parent) : QObject(parent)
     this->player = new QMediaPlayer(this);
     this->buffer = new QBuffer(this->player);
 
-    connect(player, &QMediaPlayer::durationChanged, this, [&](qint64 dur)
+    connect(this->player, &QMediaPlayer::durationChanged, this, [&](qint64 dur)
     {
-        emit this->durationChanged(BAE::transformTime(dur/1000));
+        emit this->durationChanged(/*BAE::transformTime(dur/1000)*/);
     });
 
-    this->player->setVolume(100);
+    this->player->setVolume(this->volume);
 
     this->updater = new QTimer(this);
     connect(this->updater, &QTimer::timeout, this, &Player::update);
 }
 
-void Player::source(const QString &url)
-{
-    this->sourceurl = url;
-    auto media = QMediaContent(QUrl::fromLocalFile(this->sourceurl));
-    qDebug()<<this->player->mediaStatus();
-
-    this->player->setMedia(media);
-    qDebug()<<this->player->mediaStatus();
-
-}
-
 bool Player::play()
 {
-    if(sourceurl.isEmpty()) return false;
+    if(this->url.isEmpty()) return false;
 
     if(!updater->isActive())
         this->updater->start(150);
 
-        this->player->play();
+    this->player->play();
 
     return true;
 }
@@ -52,30 +41,34 @@ void Player::stop()
     if(this->player->isAvailable())
     {
         this->player->stop();
-        this->sourceurl = QString();
+        this->url = QString();
         this->player->setMedia(QMediaContent());
     }
 
-    emit this->isPlaying(false);
+    this->playing = false;
+    emit this->playingChanged();
 
     this->updater->stop();
+
+    this->emitState();
 }
 
-void Player::seek(const int &pos)
+void Player::emitState()
 {
-    this->player->setPosition(pos);
-}
+    switch(this->player->state())
+    {
+    case QMediaPlayer::PlayingState:
+        this->state = Player::STATE::PLAYING;
+        break;
+    case QMediaPlayer::PausedState:
+        this->state = Player::STATE::PAUSED;
+        break;
+    case QMediaPlayer::StoppedState:
+        this->state = Player::STATE::STOPED;
+        break;
+    }
 
-int Player::duration()
-{
-    if(this->sourceurl.isEmpty()) return 0;
-
-    return static_cast<int>(this->player->duration());
-}
-
-bool Player::isPaused()
-{
-    return !(this->player->state() == QMediaPlayer::PlayingState);
+    emit this->stateChanged();
 }
 
 QString Player::transformTime(const int &pos)
@@ -96,9 +89,92 @@ void Player::appendBuffe(QByteArray &array)
 void Player::playRemote(const QString &url)
 {
     qDebug()<<"Trying to play remote"<<url;
-    this->sourceurl = url;
+    this->url = url;
     this->player->setMedia(QUrl::fromUserInput(url));
     this->play();
+}
+
+void Player::setUrl(const QString &value)
+{
+    if(value == this->url)
+        return;
+
+    this->url = value;
+    emit this->urlChanged();
+
+    auto media = QMediaContent(QUrl::fromLocalFile(this->url));
+    this->player->setMedia(media);
+    this->emitState();
+}
+
+QString Player::getUrl() const
+{
+    return this->url;
+}
+
+void Player::setVolume(const int &value)
+{
+    if(value == this->volume)
+        return;
+
+    this->volume = value;
+    this->player->setVolume(volume);
+    emit this->volumeChanged();
+}
+
+int Player::getVolume() const
+{
+    return this->volume;
+}
+
+int Player::getDuration() const
+{
+    return static_cast<int>(this->player->duration());
+}
+
+void Player::setPosition(const int &value)
+{
+    if(value == this->position)
+        return;
+    this->position = value;
+    this->positionChanged();
+
+    this->player->setPosition(position);
+    this->emitState();
+}
+
+int Player::getPosition() const
+{
+    return static_cast<int>(this->player->position());
+}
+
+Player::STATE Player::getState() const
+{
+    return this->state;
+}
+
+void Player::setPlaying(const bool &value)
+{
+    if(value == this->playing)
+        return;
+
+    this->playing = value;
+
+    if(this->playing)
+        this->play();
+    else this->pause();
+
+    this->emitState();
+}
+
+bool Player::getPlaying() const
+{
+    return this->playing;
+}
+
+bool Player::getFinished()
+{
+    return this->finished;
 }
 
 void Player::playBuffer()
@@ -107,20 +183,24 @@ void Player::playBuffer()
     buffer->open(QIODevice::ReadOnly);
     if(!buffer->isReadable()) qDebug()<<"Cannot read buffer";
     player->setMedia(QMediaContent(),buffer);
-    this->sourceurl = "buffer";
+    this->url = "buffer";
     this->play();
+    this->emitState();
 }
 
 void Player::update()
 {
     if(this->player->isAvailable())
     {
-        emit this->pos(static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000));
-        emit this->timing(BAE::transformTime(player->position()/1000));
+        this->position = static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);
+        emit this->positionChanged();
     }
 
-    emit this->isPlaying(this->player->state() == QMediaPlayer::PlayingState ? true : false);
     if(this->player->state() == QMediaPlayer::StoppedState && this->updater->isActive())
-        emit this->finished();
+    {
+        this->finished = true;
+        emit this->finishedChanged();
+    }
 
+    this->emitState();
 }

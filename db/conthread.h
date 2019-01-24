@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QThread>
+#include <QVariant>
 
 class CollectionDB;
 class ConThread : public QObject

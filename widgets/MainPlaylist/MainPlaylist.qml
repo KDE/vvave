@@ -379,10 +379,13 @@ Maui.Page
             padding: 0
             from: 0
             to: 1000
-            value: 0
+            value: player.position
             spacing: 0
             focus: true
-            onMoved: player.seek(player.duration() / 1000 * value)
+            onMoved:
+            {
+                player.position = player.duration / 1000 * value
+            }
 
             background: Rectangle
             {

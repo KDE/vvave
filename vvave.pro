@@ -64,7 +64,9 @@ SOURCES += main.cpp \
     services/local/linking.cpp \
     settings/fileloader.cpp \
     services/web/Spotify/spotify.cpp \
-    models/tracks/tracksmodel.cpp
+    models/tracks/tracksmodel.cpp \
+    models/basemodel.cpp \
+    models/baselist.cpp
 
 
 RESOURCES += qml.qrc \
@@ -100,7 +102,9 @@ HEADERS += \
     services/local/youtubedl.h \
     services/local/linking.h \
     services/web/Spotify/spotify.h \
-    models/tracks/tracksmodel.h
+    models/tracks/tracksmodel.h \
+    models/basemodel.h \
+    models/baselist.h
 
 include(install.pri)
 

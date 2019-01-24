@@ -1,4 +1,4 @@
-#ifndef PLAYER_H
+﻿#ifndef PLAYER_H
 #define PLAYER_H
 
 #include <QObject>
@@ -8,40 +8,81 @@
 
 class Player : public QObject
 {
-        Q_OBJECT
-    public:
-        explicit Player(QObject *parent = nullptr);
+    Q_OBJECT
+    Q_PROPERTY(QString url READ getUrl WRITE setUrl NOTIFY urlChanged)
+    Q_PROPERTY(int volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
+    Q_PROPERTY(int position READ getPosition WRITE setPosition NOTIFY positionChanged)
+    Q_PROPERTY(Player::STATE state READ getState NOTIFY stateChanged)
+    Q_PROPERTY(int duration READ getDuration NOTIFY durationChanged)
+    Q_PROPERTY(bool playing READ getPlaying WRITE setPlaying NOTIFY playingChanged)
+    Q_PROPERTY(bool finished READ getFinished NOTIFY finishedChanged)
 
-        Q_INVOKABLE void source(const QString &url);
-        Q_INVOKABLE bool play();
-        Q_INVOKABLE void pause();
-        Q_INVOKABLE void stop();
-        Q_INVOKABLE void seek(const int &pos);
-        Q_INVOKABLE int duration();
-        Q_INVOKABLE bool isPaused();
-        Q_INVOKABLE QString transformTime(const int &pos);
-        Q_INVOKABLE void playBuffer();
-        Q_INVOKABLE void appendBuffe(QByteArray &array);
-        Q_INVOKABLE void playRemote(const QString &url);
+public:
 
-    private:
-        QMediaPlayer *player;
-        QTimer *updater;
-        int amountBuffers =0;
-        void update();
-        QBuffer *buffer;
-        QByteArray array;
+    enum STATE : uint_fast8_t
+    {
+        PLAYING,
+        PAUSED,
+        STOPED,
+        ERROR
+    };Q_ENUM(STATE)
 
-        QString sourceurl;
+    explicit Player(QObject *parent = nullptr);
 
-    signals:
-        void pos(int pos);
-        void finished();
-        void timing(QString time);
-        void durationChanged(QString time);
-        void isPlaying(bool playing);
+    void playBuffer();
+    Q_INVOKABLE void appendBuffe(QByteArray &array);
+    void setUrl(const QString &value);
+    QString getUrl() const;
 
-    public slots:
+    void setVolume(const int &value);
+    int getVolume() const;
+
+    int getDuration() const;
+
+    void setPosition(const int &value);
+    int getPosition() const;
+
+    Player::STATE getState() const;
+
+    void setPlaying(const bool &value);
+    bool getPlaying() const;
+
+    bool getFinished();
+
+private:
+    QMediaPlayer *player;
+    QTimer *updater;
+    int amountBuffers =0;
+    void update();
+    QBuffer *buffer;
+    QByteArray array;
+
+    QString url;
+    int volume = 100;
+    int position = 0;
+    Player::STATE state = STATE::STOPED;
+    bool playing = false;
+    bool finished = false;
+
+    bool play();
+    void pause();
+
+    void emitState();
+
+signals:
+    void durationChanged();
+    void urlChanged();
+    void volumeChanged();
+    void positionChanged();
+    void stateChanged();
+    void playingChanged();
+    void finishedChanged();
+
+public slots:
+    QString transformTime(const int &pos);
+    void playRemote(const QString &url);
+    void stop();
+
 };
 
 #endif // PLAYER_H

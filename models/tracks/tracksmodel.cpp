@@ -120,6 +120,22 @@ QVariantMap TracksModel::get(const int &index) const
     return res;
 }
 
+void TracksModel::append(const QVariantMap &item)
+{
+    if(item.isEmpty())
+        return;
+
+    emit this->preItemAppended();
+
+    FMH::MODEL model;
+    for(auto key : item.keys())
+        model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
+
+    this->list << model;
+
+    emit this->postItemAppended();
+}
+
 bool TracksModel::color(const int &index, const QString &color)
 {
     if(index >= this->list.size() || index < 0)

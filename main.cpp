@@ -30,6 +30,7 @@
 #include "services/web/youtube.h"
 #include "services/web/Spotify/spotify.h"
 #include "services/local/linking.h"
+#include "services/local/player.h"
 
 #include "models/tracks/tracksmodel.h"
 #include "models/baselist.h"
@@ -95,7 +96,6 @@ int main(int argc, char *argv[])
     });
 
     auto context = engine.rootContext();
-    context->setContextProperty("player", &bae.player);
     context->setContextProperty("bae", &bae);
     context->setContextProperty("youtube", &youtube);
     context->setContextProperty("spotify", &spotify);
@@ -105,6 +105,9 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<BaseModel>("BaseModel", 1, 0, "BaseModel");
     qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
+
+    qmlRegisterType<Player>("Player", 1, 0, "Player");
+
     qmlRegisterUncreatableMetaObject(
                 LINK::staticMetaObject, // static meta object
                 "Link.Codes",                // import statement (can be any string)

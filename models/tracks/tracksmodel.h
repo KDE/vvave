@@ -40,6 +40,7 @@ signals:
 
 public slots:
     QVariantMap get(const int &index) const override;
+    void append(const QVariantMap &item);
 
     bool color(const int &index, const QString &color);
 };

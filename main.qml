@@ -29,6 +29,7 @@ import "utils/Player.js" as Player
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import FMList 1.0
+import Player 1.0
 
 Maui.ApplicationWindow
 {
@@ -63,9 +64,9 @@ Maui.ApplicationWindow
     property int prevTrackIndex: 0
     property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.model.get(0).artwork : ""
     property bool currentBabe: currentTrack.babe == "0" ? false : true
-    property string durationTimeLabel: "00:00"
-    property string progressTimeLabel: "00:00"
-    property bool isPlaying: false
+    property string durationTimeLabel: player.duration
+    property string progressTimeLabel: player.transformTime(player.position/1000)
+    property bool isPlaying: player.playing
     property bool autoplay: bae.loadSetting("AUTOPLAY", "BABE",
                                             false) === "true" ? true : false
     property int onQueue: 0
@@ -162,6 +163,21 @@ Maui.ApplicationWindow
     }
 
     /*COMPONENTS*/
+
+    Player
+    {
+        id: player
+        volume: 100
+
+        onFinishedChanged: if (!mainlistEmpty)
+                    {
+                        if (currentTrack.url)
+                            bae.playedTrack(currentTrack.url)
+
+                        Player.nextTrack()
+                    }
+    }
+
     BabeNotify
     {
         id: babeNotify
@@ -369,7 +385,7 @@ Maui.ApplicationWindow
             }
 
             Maui.MenuItem
-             {
+            {
                 text: qsTr("Refresh...")
                 onTriggered: H.refreshCollection();
             }
@@ -919,32 +935,15 @@ Maui.ApplicationWindow
 
 
     /*CONNECTIONS*/
-    Connections
-    {
-        target: player
-        onPos: progressBar.value = pos
-        onTiming: progressTimeLabel = time
-        onDurationChanged: durationTimeLabel = time
-
-        onFinished: if (!mainlistEmpty)
-                    {
-                        if (currentTrack.url)
-                            bae.playedTrack(currentTrack.url)
-
-                        Player.nextTrack()
-                    }
-
-        onIsPlaying: isPlaying = playing
-    }
 
     Connections
     {
         target: bae
 
-//        onRefreshTables: H.refreshCollection(size)
-//        onRefreshTracks: H.refreshTracks()
-//        onRefreshAlbums: H.refreshAlbums()
-//        onRefreshArtists: H.refreshArtists()
+        //        onRefreshTables: H.refreshCollection(size)
+        //        onRefreshTracks: H.refreshTracks()
+        //        onRefreshAlbums: H.refreshAlbums()
+        //        onRefreshArtists: H.refreshArtists()
 
         onTrackLyricsReady:
         {

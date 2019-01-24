@@ -66,17 +66,17 @@ Babe::Babe(QObject *parent) : QObject(parent)
 
     /*The local streaming connection still unfinished*/
     connect(&link, &Linking::parseAsk, this, &Babe::linkDecoder);
-    connect(&link, &Linking::bytesFrame, [this](QByteArray array)
-    {
-        this->player.appendBuffe(array);
+//    connect(&link, &Linking::bytesFrame, [this](QByteArray array)
+//    {
+//        this->player.appendBuffe(array);
 
-    });
-    connect(&link, &Linking::arrayReady, [this](QByteArray array)
-    {
-        qDebug()<<"trying to play the array";
-        Q_UNUSED(array);
-        this->player.playBuffer();
-    });
+//    });
+//    connect(&link, &Linking::arrayReady, [this](QByteArray array)
+//    {
+//        qDebug()<<"trying to play the array";
+//        Q_UNUSED(array);
+//        this->player.playBuffer();
+//    });
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
     this->nof = new Notify(this);
