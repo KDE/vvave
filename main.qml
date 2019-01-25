@@ -62,7 +62,7 @@ Maui.ApplicationWindow
 
     property int currentTrackIndex: 0
     property int prevTrackIndex: 0
-    property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.model.get(0).artwork : ""
+    property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.get(0).artwork : ""
     property bool currentBabe: currentTrack.babe == "0" ? false : true
     property string durationTimeLabel: player.duration
     property string progressTimeLabel: player.transformTime(player.position/1000)
@@ -169,13 +169,16 @@ Maui.ApplicationWindow
         id: player
         volume: 100
 
-        onFinishedChanged: if (!mainlistEmpty)
-                    {
-                        if (currentTrack.url)
-                            bae.playedTrack(currentTrack.url)
+//        onTestChanged:  console.log("new value:", player.test)
+        onPositionChanged:  console.log("new value:", player.position)
 
-                        Player.nextTrack()
-                    }
+        //        onFinishedChanged: if (!mainlistEmpty)
+        //                    {
+        //                        if (currentTrack.url)
+        //                            bae.playedTrack(currentTrack.url)
+
+        //                        Player.nextTrack()
+        //                    }
     }
 
     BabeNotify
@@ -596,10 +599,7 @@ Maui.ApplicationWindow
                 iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
                 onClicked:
                 {
-                    if (isPlaying)
-                    Player.pauseTrack()
-                    else
-                    Player.resumeTrack()
+                    player.playing = !player.playing
                 }
             },
 

@@ -16,6 +16,7 @@ class Player : public QObject
     Q_PROPERTY(int duration READ getDuration NOTIFY durationChanged)
     Q_PROPERTY(bool playing READ getPlaying WRITE setPlaying NOTIFY playingChanged)
     Q_PROPERTY(bool finished READ getFinished NOTIFY finishedChanged)
+    Q_PROPERTY(int pos READ getPos WRITE setPos NOTIFY posChanged)
 
 public:
 
@@ -49,6 +50,9 @@ public:
 
     bool getFinished();
 
+    int getPos() const;
+    void setPos(const int &value);
+
 private:
     QMediaPlayer *player;
     QTimer *updater;
@@ -69,6 +73,8 @@ private:
 
     void emitState();
 
+    int pos = 0;
+
 signals:
     void durationChanged();
     void urlChanged();
@@ -77,6 +83,8 @@ signals:
     void stateChanged();
     void playingChanged();
     void finishedChanged();
+
+    void posChanged();
 
 public slots:
     QString transformTime(const int &pos);

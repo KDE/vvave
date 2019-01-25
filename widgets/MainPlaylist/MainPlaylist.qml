@@ -22,6 +22,8 @@ Maui.Page
     property alias albumsRoll : albumsRoll
     property alias cover : cover
     property alias list : table.list
+    property alias listModel: table.listModel
+    property alias listView : table.listView
     property alias table: table
     property alias infoView : infoView
     property alias progressBar: progressBar
@@ -379,13 +381,15 @@ Maui.Page
             padding: 0
             from: 0
             to: 1000
-            value: player.position
+            value: player.pos
             spacing: 0
             focus: true
-            onMoved:
-            {
-                player.position = player.duration / 1000 * value
-            }
+//            onMoved:
+//            {
+//                player.position = value
+//            }
+
+//            onValueChanged: console.log("new value:", value)
 
             background: Rectangle
             {

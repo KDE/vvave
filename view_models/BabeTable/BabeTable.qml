@@ -22,7 +22,8 @@ BabeList
 
 
     property alias list : _tracksList
-
+    property alias listModel : _tracksModel
+    property alias listView : babeTableRoot.listView
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
@@ -154,7 +155,7 @@ BabeList
         {
 
             if(paths.length > 1)
-            H.moodIt(paths, color)
+                H.moodIt(paths, color)
             else
                 list.color(listView.currentIndex, color);
 

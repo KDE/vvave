@@ -3,9 +3,9 @@ Qt.include("Icons.js")
 
 function playTrack(index)
 {
-    if((index < mainPlaylist.list.count) && (mainPlaylist.list.count > 0) && (index > -1))
+    if((index < mainPlaylist.listView.count) && (mainPlaylist.listView.count > 0) && (index > -1))
     {
-        currentTrack = mainPlaylist.list.model.get(index)
+        currentTrack = mainPlaylist.list.get(index)
 
         if(typeof(currentTrack) === "undefined") return
 
@@ -76,8 +76,8 @@ function pauseTrack()
 
 function resumeTrack()
 {    
-//    if(!player.play() && !mainlistEmpty)
-//        playAt(0)
+    if(!player.play() && !mainlistEmpty)
+        playAt(0)
 }
 
 function nextTrack()
@@ -88,9 +88,9 @@ function nextTrack()
         if(isShuffle && onQueue === 0)
             next = shuffle()
         else
-            next = currentTrackIndex+1 >= mainPlaylist.list.count? 0 : currentTrackIndex+1
+            next = currentTrackIndex+1 >= mainPlaylist.listView.count? 0 : currentTrackIndex+1
 
-        prevTrackIndex = mainPlaylist.list.currentIndex
+        prevTrackIndex = mainPlaylist.listView.currentIndex
         playAt(next)
 
         if(onQueue > 0)
@@ -105,8 +105,8 @@ function previousTrack()
 {
     if(!mainlistEmpty>0)
     {
-        var previous = previous = currentTrackIndex-1 >= 0 ? mainPlaylist.list.currentIndex-1 : currentTrackIndex-1
-        prevTrackIndex = mainPlaylist.list.currentIndex
+        var previous = previous = currentTrackIndex-1 >= 0 ? mainPlaylist.listView.currentIndex-1 : currentTrackIndex-1
+        prevTrackIndex = mainPlaylist.listView.currentIndex
         playAt(previous)
     }
 }
@@ -119,10 +119,10 @@ function shuffle()
 
 function playAt(index)
 {
-    if((index < mainPlaylist.list.count) && (mainPlaylist.list.count > 0) && (index > -1))
+    if((index < mainPlaylist.listView.count) && (mainPlaylist.listView.count > 0) && (index > -1))
     {
         currentTrackIndex = index
-        mainPlaylist.list.currentIndex = currentTrackIndex
+        mainPlaylist.listView.currentIndex = currentTrackIndex
         mainPlaylist.albumsRoll.positionAlbum(currentTrackIndex)
         playTrack(currentTrackIndex)
     }
@@ -133,7 +133,7 @@ function quickPlay(track)
     //    root.pageStack.currentIndex = 0
     appendTrack(track)
     playAt(mainPlaylist.list.count-1)
-    mainPlaylist.list.positionViewAtEnd()
+    mainPlaylist.listView.positionViewAtEnd()
     mainPlaylist.albumsRoll.positionViewAtEnd()
 
 }
@@ -176,7 +176,7 @@ function addTrack(track)
     if(track)
     {
         appendTrack(track)
-        mainPlaylist.list.positionViewAtEnd()
+        mainPlaylist.listView.positionViewAtEnd()
     }
 }
 
@@ -187,7 +187,7 @@ function appendAll(tracks)
         for(var i in tracks)
             appendTrack(tracks[i])
 
-        mainPlaylist.list.positionViewAtEnd()
+        mainPlaylist.listView.positionViewAtEnd()
     }
 }
 
@@ -198,11 +198,11 @@ function savePlaylist()
     n = n > 15 ? 15 : n
     for(var i=0 ; i < n; i++)
     {
-        var url = mainPlaylist.list.model.get(i).url
+        var url = mainPlaylist.list.get(i).url
         list.push(url)
     }
     bae.savePlaylist(list)
-    bae.savePlaylistPos(mainPlaylist.list.currentIndex)
+    bae.savePlaylistPos(mainPlaylist.listView.currentIndex)
 }
 
 function clearOutPlaylist()
@@ -215,13 +215,13 @@ function cleanPlaylist()
 {
     var urls = []
 
-    for(var i = 0; i < mainPlaylist.list.count; i++)
+    for(var i = 0; i < mainPlaylist.listView.count; i++)
     {
-        var url = mainPlaylist.list.model.get(i).url
+        var url = mainPlaylist.list.get(i).url
 
         if(urls.indexOf(url)<0)
             urls.push(url)
-        else mainPlaylist.list.model.remove(i)
+        else mainPlaylist.list.remove(i)
     }
 }
 
@@ -242,7 +242,7 @@ function playAll(tracks)
         //    root.mainPlaylist.list.currentIndex = 0
         //    playTrack(root.mainPlaylist.list.model.get(0))
 
-        mainPlaylist.list.positionViewAtBeginning()
+        mainPlaylist.listView.positionViewAtBeginning()
         playAt(0)
     }
 }

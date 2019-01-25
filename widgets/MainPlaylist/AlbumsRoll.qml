@@ -15,7 +15,7 @@ ListView
     highlightFollowsCurrentItem: true
     highlightMoveDuration: 0
     snapMode: ListView.SnapOneItem
-    model:  mainPlaylist.list.model
+    model:  mainPlaylist.listModel
 
     onMovementEnded:
     {

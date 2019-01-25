@@ -23,7 +23,7 @@ bool Player::play()
     if(this->url.isEmpty()) return false;
 
     if(!updater->isActive())
-        this->updater->start(150);
+        this->updater->start(500);
 
     this->player->play();
 
@@ -102,6 +102,9 @@ void Player::setUrl(const QString &value)
     this->url = value;
     emit this->urlChanged();
 
+    //    this->position = 0;
+    //    emit this->positionChanged();
+
     auto media = QMediaContent(QUrl::fromLocalFile(this->url));
     this->player->setMedia(media);
     this->emitState();
@@ -134,13 +137,11 @@ int Player::getDuration() const
 
 void Player::setPosition(const int &value)
 {
-    if(value == this->position)
-        return;
-    this->position = value;
-    this->positionChanged();
+    //    this->position = value;
+    //    this->player->setPosition( this->player->duration() / 1000 * position);
+    //    this->emitState();
+    //    this->positionChanged();
 
-    this->player->setPosition(position);
-    this->emitState();
 }
 
 int Player::getPosition() const
@@ -155,15 +156,13 @@ Player::STATE Player::getState() const
 
 void Player::setPlaying(const bool &value)
 {
-    if(value == this->playing)
-        return;
-
     this->playing = value;
 
     if(this->playing)
         this->play();
     else this->pause();
 
+    emit this->playingChanged();
     this->emitState();
 }
 
@@ -175,6 +174,19 @@ bool Player::getPlaying() const
 bool Player::getFinished()
 {
     return this->finished;
+}
+
+void Player::setPos(const int &value)
+{
+    this->position = value;
+    this->player->setPosition( this->player->duration() / 1000 * position);
+    this->emitState();
+    this->positionChanged();
+}
+
+int Player::getPos() const
+{
+    return this->pos;
 }
 
 void Player::playBuffer()
@@ -192,8 +204,12 @@ void Player::update()
 {
     if(this->player->isAvailable())
     {
-        this->position = static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);
-        emit this->positionChanged();
+
+        this->pos = static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);;
+        emit this->posChanged();
+
+        qDebug() << "Setting value:" << this->position;
+
     }
 
     if(this->player->state() == QMediaPlayer::StoppedState && this->updater->isActive())
