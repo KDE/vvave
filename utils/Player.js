@@ -132,7 +132,7 @@ function quickPlay(track)
 {
     //    root.pageStack.currentIndex = 0
     appendTrack(track)
-    playAt(mainPlaylist.list.count-1)
+    playAt(mainPlaylist.listView.count-1)
     mainPlaylist.listView.positionViewAtEnd()
     mainPlaylist.albumsRoll.positionViewAtEnd()
 

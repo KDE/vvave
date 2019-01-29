@@ -3,7 +3,6 @@
 TracksModel::TracksModel(QObject *parent) : BaseList(parent)
 {
     this->db = CollectionDB::getInstance();
-    connect(this, &TracksModel::sortByChanged, this, &TracksModel::sortList);
     connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
 }
 
@@ -28,16 +27,20 @@ QString TracksModel::getQuery() const
     return this->query;
 }
 
-void TracksModel::setSortBy(const uint &sort)
+void TracksModel::setSortBy(const SORTBY &sort)
 {
     if(this->sort == sort)
         return;
 
     this->sort = sort;
+
+    this->preListChanged();
+    this->sortList();
+    this->postListChanged();
     emit this->sortByChanged();
 }
 
-uint TracksModel::getSortBy() const
+TracksModel::SORTBY TracksModel::getSortBy() const
 {
     return this->sort;
 }
@@ -52,16 +55,16 @@ void TracksModel::sortList()
 
         switch(role)
         {
-        case FMH::MODEL_KEY::SIZE:
+        case FMH::MODEL_KEY::RELEASEDATE:
+        case FMH::MODEL_KEY::RATE:
+        case FMH::MODEL_KEY::FAV:
         {
             if(e1[role].toDouble() > e2[role].toDouble())
                 return true;
             break;
         }
 
-        case FMH::MODEL_KEY::DATE:
         case FMH::MODEL_KEY::ADDDATE:
-        case FMH::MODEL_KEY::MODIFIED:
         {
             auto currentTime = QDateTime::currentDateTime();
 
@@ -75,7 +78,8 @@ void TracksModel::sortList()
         }
 
         case FMH::MODEL_KEY::TITLE:
-        case FMH::MODEL_KEY::PLACE:
+        case FMH::MODEL_KEY::ARTIST:
+        case FMH::MODEL_KEY::ALBUM:
         case FMH::MODEL_KEY::FORMAT:
         {
             const auto str1 = QString(e1[role]).toLower();
@@ -102,7 +106,7 @@ void TracksModel::setList()
     this->list = this->db->getDBData(this->query);
 
     qDebug()<< "my LIST" ;
-//    this->sortList();
+    this->sortList();
     emit this->postListChanged();
 }
 
@@ -144,8 +148,25 @@ bool TracksModel::color(const int &index, const QString &color)
     auto item = this->list[index];
     if(this->db->colorTagTrack(item[FMH::MODEL_KEY::URL], color))
     {
-        item[FMH::MODEL_KEY::COLOR] = color;
+        list[index][FMH::MODEL_KEY::COLOR] = color;
         emit this->updateModel(index, {FMH::MODEL_KEY::COLOR});
+        return true;
+    }
+
+    return false;
+}
+
+bool TracksModel::fav(const int &index, const bool &value)
+{
+    if(index >= this->list.size() || index < 0)
+        return false;
+
+    auto item = this->list[index];
+    if(this->db->favTrack(item[FMH::MODEL_KEY::URL], value))
+    {
+        list[index].insert(FMH::MODEL_KEY::FAV, value ?  "1" : "0");
+        emit this->updateModel(index, {FMH::MODEL_KEY::FAV});
+
         return true;
     }
 

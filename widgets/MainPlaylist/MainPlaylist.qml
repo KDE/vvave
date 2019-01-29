@@ -384,12 +384,11 @@ Maui.Page
             value: player.pos
             spacing: 0
             focus: true
-//            onMoved:
-//            {
-//                player.position = value
-//            }
+            onMoved:
+            {
+                player.pos = value
+            }
 
-//            onValueChanged: console.log("new value:", value)
 
             background: Rectangle
             {

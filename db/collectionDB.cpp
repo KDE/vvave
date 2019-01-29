@@ -712,8 +712,8 @@ QVariantList CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, const 
                 FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],
                 TABLEMAP[TABLE::ARTISTS_TAGS]);
 
-//    else if(where == FMH::MODEL_KEY::SQL)
-//        queryTxt = search;
+    //    else if(where == FMH::MODEL_KEY::SQL)
+    //        queryTxt = search;
     else
         queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE t.%2 LIKE \"%%3%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000").arg(TABLEMAP[TABLE::TRACKS],
                 FMH::MODEL_NAME[where],
@@ -1042,6 +1042,16 @@ bool CollectionDB::removeFolder(const QString &url)
 
     auto query = this->getQuery(queryTxt);
     return query.exec();
+}
+
+bool CollectionDB::favTrack(const QString &path, const bool &value)
+{
+    if(this->update(TABLEMAP[TABLE::TRACKS],
+                    FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
+                    value ? 1 : 0,
+                    FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
+                    path)) return true;
+    return false;
 }
 
 bool CollectionDB::removeAlbum(const QString &album, const QString &artist)

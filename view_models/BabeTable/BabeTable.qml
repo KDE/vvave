@@ -18,9 +18,6 @@ BabeList
     id: babeTableRoot
     //    cacheBuffer : 300
 
-    focus: true
-
-
     property alias list : _tracksList
     property alias listModel : _tracksModel
     property alias listView : babeTableRoot.listView
@@ -34,7 +31,7 @@ BabeList
     property bool isArtworkRemote : false
     property bool showIndicator : false
 
-    property string sortBy: "undefined"
+    property bool group : false
 
     property alias headerMenu: headerMenu
     property alias contextMenu : contextMenu
@@ -55,14 +52,102 @@ BabeList
 
     //    altToolBars: true
 
-    headBar.leftContent: Maui.ToolButton
-    {
-        id : playAllBtn
-        visible : headBar.visible && count > 0
-        anim : true
-        iconName : "media-playlist-play"
-        onClicked : playAll()
-    }
+    onGroupChanged: groupBy()
+
+    focus: true
+
+    headBar.leftContent: [
+        Maui.ToolButton
+        {
+            id : playAllBtn
+            visible : headBar.visible && count > 0
+            anim : true
+            iconName : "media-playlist-play"
+            onClicked : playAll()
+        },
+
+        Maui.ToolButton
+        {
+            id: sortBtn
+            anim: true
+            iconName: "view-sort"
+
+            onClicked: sortMenu.popup()
+
+            Maui.Menu
+            {
+                id: sortMenu
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Title")
+                    checkable: true
+                    checked: list.sortBy === Tracks.TITLE
+                    onTriggered: list.sortBy = Tracks.TITLE
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Artist")
+                    checkable: true
+                    checked: list.sortBy === Tracks.ARTIST
+                    onTriggered: list.sortBy = Tracks.ARTIST
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Album")
+                    checkable: true
+                    checked: list.sortBy === Tracks.ALBUM
+                    onTriggered: list.sortBy = Tracks.ALBUM
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Rate")
+                    checkable: true
+                    checked: list.sortBy === Tracks.RATE
+                    onTriggered: list.sortBy = Tracks.RATE
+                }
+
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Fav")
+                    checkable: true
+                    checked: list.sortBy === Tracks.FAV
+                    onTriggered: list.sortBy = Tracks.FAV
+                }
+
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Release date")
+                    checkable: true
+                    checked: list.sortBy === Tracks.RELEASEDATE
+                    onTriggered: list.sortBy = Tracks.RELEASEDATE
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Add date")
+                    checkable: true
+                    checked: list.sortBy === Tracks.ADDDATE
+                    onTriggered: list.sortBy = Tracks.ADDDATE
+                }
+
+                MenuSeparator{}
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Group")
+                    checkable: true
+                    checked: group
+                    onTriggered: group = !group
+                }
+            }
+        }
+    ]
 
     headBar.rightContent: [
 
@@ -88,14 +173,6 @@ BabeList
         id: headerMenu
         onSaveListClicked: saveList()
         onQueueListClicked: queueList()
-        onSortClicked: groupDialog.popup()
-    }
-
-    GroupDialog
-    {
-        id: groupDialog
-        onSortBy: sortBy = babeTableRoot.sortBy = text
-
     }
 
     TableMenu
@@ -128,8 +205,7 @@ BabeList
 
         onFavClicked:
         {
-            var value = H.faveIt(paths)
-            model.get(listView.currentIndex).fav = value ? "1" : "0"
+            list.fav(listView.currentIndex, !(list.get(listView.currentIndex).fav == "1"))
         }
 
         onQueueClicked: H.queueIt(paths)
@@ -151,15 +227,10 @@ BabeList
             listView.currentItem.rate(H.setStars(value))
             listView.model.get(listView.currentIndex).rate = value
         }
+
         onColorClicked:
         {
-
-            if(paths.length > 1)
-                H.moodIt(paths, color)
-            else
                 list.color(listView.currentIndex, color);
-
-            listView.currentItem.trackMood = color
         }
     }
 
@@ -167,13 +238,20 @@ BabeList
     listView.highlightMoveDuration: 0
     listView.highlight: Rectangle { }
 
-    section.property : sortBy
     section.criteria: ViewSection.FullString
     section.delegate: Maui.LabelDelegate
     {
         label: section
         isSection: true
         boldLabel: true
+        colorScheme.backgroundColor: "#333"
+        colorScheme.textColor: "#fafafa"
+
+        background: Rectangle
+        {
+            color:  colorScheme.backgroundColor
+        }
+
     }
 
 
@@ -186,6 +264,7 @@ BabeList
     Tracks
     {
         id: _tracksList
+        onSortByChanged: if(babeTableRoot.group) babeTableRoot.groupBy()
     }
 
     model: _tracksModel
@@ -247,10 +326,12 @@ BabeList
     {
         currentIndex = index
         contextMenu.rate = list.get(currentIndex).rate
-        contextMenu.fav = list.get(currentIndex).fav
+        contextMenu.fav = list.get(currentIndex).fav == "1"
         contextMenu.show([list.get(currentIndex).url])
 
         rowPressed(index)
+
+        console.log(list.get(currentIndex).fav)
     }
 
     function saveList()
@@ -297,5 +378,36 @@ BabeList
         contextMenu.close()
     }
 
-    //    Component.onCompleted: forceActiveFocus()
+    function groupBy()
+    {
+        var prop = "undefined"
+
+        if(group)
+            switch(list.sortBy)
+            {
+            case Tracks.TITLE:
+                prop = "title"
+                break
+            case Tracks.ARTIST:
+                prop = "artist"
+                break
+            case Tracks.ALBUM:
+                prop = "album"
+                break
+            case Tracks.RATE:
+                prop = "rate"
+                break
+            case Tracks.FAV:
+                prop = "fav"
+                break
+            case Tracks.ADDDATE:
+                prop = "adddate"
+                break
+            case Tracks.RELEASEDATE:
+                prop = "releasedate"
+                break
+            }
+
+        section.property =  prop
+    }
 }

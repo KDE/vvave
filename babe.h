@@ -49,7 +49,6 @@ public:
     Q_INVOKABLE QString albumWiki(const QString &album, const QString &artist);
 
     Q_INVOKABLE QVariantList getFolders();
-    Q_INVOKABLE bool babeTrack(const QString &path, const bool &value);
 
     /* SETTINGS */
     Q_INVOKABLE void scanDir(const QString &url);

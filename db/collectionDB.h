@@ -68,6 +68,8 @@ class CollectionDB : public QObject
         bool addFolder(const QString &url);
         bool removeFolder(const QString &url);
 
+        bool favTrack(const QString &path, const bool &value);
+
         FMH::MODEL_LIST getDBData(const QStringList &urls);
         FMH::MODEL_LIST getDBData(const QString &queryTxt);
         QVariantList getDBDataQML(const QString &queryTxt);

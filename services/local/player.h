@@ -11,7 +11,6 @@ class Player : public QObject
     Q_OBJECT
     Q_PROPERTY(QString url READ getUrl WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(int volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
-    Q_PROPERTY(int position READ getPosition WRITE setPosition NOTIFY positionChanged)
     Q_PROPERTY(Player::STATE state READ getState NOTIFY stateChanged)
     Q_PROPERTY(int duration READ getDuration NOTIFY durationChanged)
     Q_PROPERTY(bool playing READ getPlaying WRITE setPlaying NOTIFY playingChanged)
@@ -40,9 +39,6 @@ public:
 
     int getDuration() const;
 
-    void setPosition(const int &value);
-    int getPosition() const;
-
     Player::STATE getState() const;
 
     void setPlaying(const bool &value);
@@ -63,7 +59,6 @@ private:
 
     QString url;
     int volume = 100;
-    int position = 0;
     Player::STATE state = STATE::STOPED;
     bool playing = false;
     bool finished = false;
@@ -79,7 +74,7 @@ signals:
     void durationChanged();
     void urlChanged();
     void volumeChanged();
-    void positionChanged();
+
     void stateChanged();
     void playingChanged();
     void finishedChanged();

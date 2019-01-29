@@ -33,7 +33,7 @@ Maui.Menu
 
     Maui.MenuItem
     {
-        text: fav == false ? qsTr("Fav it"): qsTr("UnFav it")
+        text: !fav ? qsTr("Fav it"): qsTr("UnFav it")
         onTriggered:
         {
             favClicked(paths)

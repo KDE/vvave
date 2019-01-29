@@ -102,8 +102,8 @@ void Player::setUrl(const QString &value)
     this->url = value;
     emit this->urlChanged();
 
-    //    this->position = 0;
-    //    emit this->positionChanged();
+    this->pos = 0;
+    emit this->posChanged();
 
     auto media = QMediaContent(QUrl::fromLocalFile(this->url));
     this->player->setMedia(media);
@@ -135,19 +135,6 @@ int Player::getDuration() const
     return static_cast<int>(this->player->duration());
 }
 
-void Player::setPosition(const int &value)
-{
-    //    this->position = value;
-    //    this->player->setPosition( this->player->duration() / 1000 * position);
-    //    this->emitState();
-    //    this->positionChanged();
-
-}
-
-int Player::getPosition() const
-{
-    return static_cast<int>(this->player->position());
-}
 
 Player::STATE Player::getState() const
 {
@@ -178,10 +165,10 @@ bool Player::getFinished()
 
 void Player::setPos(const int &value)
 {
-    this->position = value;
-    this->player->setPosition( this->player->duration() / 1000 * position);
+    this->pos = value;
+    this->player->setPosition( this->player->duration() / 1000 * this->pos);
     this->emitState();
-    this->positionChanged();
+    this->posChanged();
 }
 
 int Player::getPos() const
@@ -207,9 +194,6 @@ void Player::update()
 
         this->pos = static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);;
         emit this->posChanged();
-
-        qDebug() << "Setting value:" << this->position;
-
     }
 
     if(this->player->state() == QMediaPlayer::StoppedState && this->updater->isActive())

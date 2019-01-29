@@ -9,37 +9,37 @@ Maui.Menu
     signal callibrate()
     signal hideCover()
     signal saveToClicked()
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Clear out...")
         onTriggered: clearOut()
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Clean...")
         onTriggered: clean()
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: cover.visible ? qsTr("Hide cover...") : qsTr("Show cover...")
         onTriggered: hideCover()
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Callibrate")
         onTriggered: callibrate()
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         text: qsTr("Save list to...")
         onTriggered: saveToClicked()
     }
 
-    MenuItem
+    Maui.MenuItem
     {
         enabled: syncPlaylist.length > 0
         text: syncPlaylist.length > 0 && sync ? qsTr("Pause syncing") : qsTr("Continue syncing")

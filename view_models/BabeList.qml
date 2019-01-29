@@ -12,10 +12,14 @@ Maui.Page
 
     property alias listView : babeList
     property alias model : babeList.model
+
     property alias delegate : babeList.delegate
+
     property alias count : babeList.count
+
     property alias currentIndex : babeList.currentIndex
     property alias currentItem : babeList.currentItem
+
     property alias holder : holder
     property alias section : babeList.section
 
@@ -86,7 +90,8 @@ Maui.Page
 
         // Scroll is too fast on desktop, see QTBUG-56075
         // https://bugreports.qt.io/browse/QTBUG-56075
-        ScrollHelper {
+        ScrollHelper
+        {
             enabled: !isMobile
             id: scrollHelper
             flickable: babeList

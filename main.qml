@@ -169,9 +169,6 @@ Maui.ApplicationWindow
         id: player
         volume: 100
 
-//        onTestChanged:  console.log("new value:", player.test)
-        onPositionChanged:  console.log("new value:", player.position)
-
         //        onFinishedChanged: if (!mainlistEmpty)
         //                    {
         //                        if (currentTrack.url)
@@ -682,11 +679,11 @@ Maui.ApplicationWindow
                     Connections
                     {
                         target: tracksView
-                        onRowClicked: Player.addTrack(tracksView.model.get(index))
-                        onQuickPlayTrack: Player.quickPlay(tracksView.model.get(index))
+                        onRowClicked: Player.addTrack(tracksView.list.get(index))
+                        onQuickPlayTrack: Player.quickPlay(tracksView.list.get(index))
                         onPlayAll: Player.playAll(bae.get(Q.GET.allTracks))
                         onAppendAll: Player.appendAll(bae.get(Q.GET.allTracks))
-                        onQueueTrack: Player.queueTracks([tracksView.model.get(index)], index)
+                        onQueueTrack: Player.queueTracks([tracksView.list.get(index)], index)
                     }
                 }
 

@@ -310,16 +310,6 @@ QVariantList Babe::getFolders()
     return res;
 }
 
-bool Babe::babeTrack(const QString &path, const bool &value)
-{
-    if(this->db->update(TABLEMAP[TABLE::TRACKS],
-                        FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
-                        value ? 1 : 0,
-                        FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-                        path)) return true;
-
-    return false;
-}
 
 void Babe::notify(const QString &title, const QString &body)
 {

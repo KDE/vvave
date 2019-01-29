@@ -9,9 +9,22 @@ class TracksModel : public BaseList
 {
     Q_OBJECT
     Q_PROPERTY(QString query READ getQuery WRITE setQuery NOTIFY queryChanged())
-    Q_PROPERTY(uint sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
+    Q_PROPERTY(TracksModel::SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
 
 public:
+
+    enum SORTBY : uint_fast8_t
+    {
+        ADDDATE = FMH::MODEL_KEY::ADDDATE,
+        RELEASEDATE = FMH::MODEL_KEY::RELEASEDATE,
+        FORMAT = FMH::MODEL_KEY::FORMAT,
+        ARTIST = FMH::MODEL_KEY::ARTIST,
+        TITLE = FMH::MODEL_KEY::TITLE,
+        ALBUM = FMH::MODEL_KEY::ALBUM,
+        RATE = FMH::MODEL_KEY::RATE,
+        FAV = FMH::MODEL_KEY::FAV
+    }; Q_ENUM(SORTBY)
+
     explicit TracksModel(QObject *parent = nullptr);
 
     FMH::MODEL_LIST items() const override;
@@ -19,8 +32,8 @@ public:
     void setQuery(const QString &query);
     QString getQuery() const;
 
-    void setSortBy(const uint &sort);
-    uint getSortBy() const;
+    void setSortBy(const TracksModel::SORTBY &sort);
+    TracksModel::SORTBY getSortBy() const;
 
 private:
     CollectionDB *db;
@@ -29,7 +42,7 @@ private:
     void setList();
 
     QString query;
-    uint sort = FMH::MODEL_KEY::DATE;
+    TracksModel::SORTBY sort = TracksModel::SORTBY::ADDDATE;
 
     bool addDoc(const FMH::MODEL &doc);
     void refreshCollection();
@@ -43,6 +56,7 @@ public slots:
     void append(const QVariantMap &item);
 
     bool color(const int &index, const QString &color);
+    bool fav(const int &index, const bool &value);
 };
 
 #endif // TRACKSMODEL_H

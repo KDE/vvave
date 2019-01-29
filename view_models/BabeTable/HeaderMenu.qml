@@ -12,7 +12,6 @@ Maui.Menu
 {
     signal saveListClicked()
     signal queueListClicked()
-    signal sortClicked()
 
     property alias menuItem : customItems.children
 
@@ -51,15 +50,6 @@ Maui.Menu
 
     MenuSeparator {}
 
-    Maui.MenuItem
-    {
-        text: "Sort..."
-        onTriggered:
-        {
-            sortClicked()
-            close()
-        }
-    }
 
     Maui.MenuItem
     {

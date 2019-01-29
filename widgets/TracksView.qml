@@ -15,7 +15,6 @@ BabeTable
     headBarTitle: count + " tracks"
     headBarExit: false
     coverArtVisible: false
-    sortBy: "album"
     holder.emoji: "qrc:/assets/MusicCloud.png"
     holder.isMask: false
     holder.title : "No Tracks!"
