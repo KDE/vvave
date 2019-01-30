@@ -56,7 +56,7 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
     connect(this->babeSocket, &Socket::message, this, &BabeSettings::fetchYoutubeTrack);
     connect(this->babeSocket, &Socket::connected, [this](const int &index)
     {
-        auto playlists = this->connection->getPlaylists();
+        auto playlists = this->connection->getPlaylistsList();
         bDebug::Instance()->msg("Sending playlists to socket: "+playlists.join(", "));
         this->babeSocket->sendMessageTo(index, playlists.join(","));
     });

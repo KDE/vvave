@@ -78,6 +78,11 @@ void BaseModel::setList(BaseList *value)
             endInsertRows();
         });
 
+        connect(this->mList, &BaseList::preItemAppendedAt, this, [=](int index)
+        {
+            beginInsertRows(QModelIndex(), index, index);
+        });
+
         connect(this->mList, &BaseList::preItemRemoved, this, [=](int index)
         {
             beginRemoveRows(QModelIndex(), index, index);

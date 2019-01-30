@@ -142,7 +142,7 @@ function appendTracksAt(tracks, at)
 {
     if(tracks)
         for(var i in tracks)
-            mainPlaylist.list.model.insert(parseInt(at)+parseInt(i), tracks[i])
+            mainPlaylist.list.append(tracks[i], parseInt(at)+parseInt(i))
 }
 
 function appendTrack(track)

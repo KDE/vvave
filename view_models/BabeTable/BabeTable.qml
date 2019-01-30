@@ -208,7 +208,8 @@ BabeList
             list.fav(listView.currentIndex, !(list.get(listView.currentIndex).fav == "1"))
         }
 
-        onQueueClicked: H.queueIt(paths)
+        onQueueClicked: Player.queueTracks([list.get(listView.currentIndex)])
+
         onSaveToClicked:
         {
             playlistDialog.tracks = paths

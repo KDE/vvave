@@ -93,7 +93,8 @@ class CollectionDB : public QObject
         //    QStringList getAlbumTags(const QString &album, const QString &artist);
         QStringList getArtistAlbums(const QString &artist);
 
-        Q_INVOKABLE QStringList getPlaylists();
+        FMH::MODEL_LIST getPlaylists();
+        QStringList getPlaylistsList();
 
         Q_INVOKABLE bool removePlaylistTrack(const QString &url, const QString &playlist);
         Q_INVOKABLE bool removePlaylist(const QString &playlist);
@@ -109,7 +110,7 @@ class CollectionDB : public QObject
         sourceTypes sourceType(const QString &url);
         void openDB(const QString &name);
 
-    private:
+private:
         static CollectionDB* instance;
 
         QString name;

@@ -32,7 +32,7 @@ Maui.Page
 
     function clearTable()
     {
-        list.model.clear()
+        model.clear()
     }
 
     Maui.Holder

@@ -24,6 +24,9 @@ protected:
 signals:
     void preItemAppended();
     void postItemAppended();
+
+    void preItemAppendedAt(int index);
+
     void preItemRemoved(int index);
     void postItemRemoved();
     void updateModel(int index, QVector<int> roles);

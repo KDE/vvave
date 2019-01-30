@@ -1,4 +1,6 @@
 #include "tracksmodel.h"
+#include "db/collectionDB.h"
+
 
 TracksModel::TracksModel(QObject *parent) : BaseList(parent)
 {
@@ -140,6 +142,27 @@ void TracksModel::append(const QVariantMap &item)
     emit this->postItemAppended();
 }
 
+void TracksModel::append(const QVariantMap &item, const int &at)
+{
+    if(item.isEmpty())
+        return;
+
+    if(at > this->list.size() || at < 0)
+        return;
+
+    qDebug()<< "trying to append at" << at << item["title"];
+
+    emit this->preItemAppendedAt(at);
+
+    FMH::MODEL model;
+    for(auto key : item.keys())
+        model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
+
+    this->list.insert(at, model);
+
+    emit this->postItemAppended();
+}
+
 bool TracksModel::color(const int &index, const QString &color)
 {
     if(index >= this->list.size() || index < 0)
@@ -148,7 +171,7 @@ bool TracksModel::color(const int &index, const QString &color)
     auto item = this->list[index];
     if(this->db->colorTagTrack(item[FMH::MODEL_KEY::URL], color))
     {
-        list[index][FMH::MODEL_KEY::COLOR] = color;
+        this->list[index][FMH::MODEL_KEY::COLOR] = color;
         emit this->updateModel(index, {FMH::MODEL_KEY::COLOR});
         return true;
     }
@@ -164,7 +187,7 @@ bool TracksModel::fav(const int &index, const bool &value)
     auto item = this->list[index];
     if(this->db->favTrack(item[FMH::MODEL_KEY::URL], value))
     {
-        list[index].insert(FMH::MODEL_KEY::FAV, value ?  "1" : "0");
+        this->list[index][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
         emit this->updateModel(index, {FMH::MODEL_KEY::FAV});
 
         return true;

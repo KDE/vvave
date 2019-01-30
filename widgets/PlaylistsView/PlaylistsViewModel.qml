@@ -3,6 +3,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import PlaylistsList 1.0
+import BaseModel 1.0
 
 import "../../utils"
 
@@ -42,22 +44,19 @@ BabeList
         onClicked: removePlaylist()
     }
 
-    ListModel
-    {
-        id: playlistListModel
 
-        ListElement { playlist: qsTr("Most Played"); icon: "view-media-playcount"; /*query: Q.Query.mostPlayedTracks*/ }
-        ListElement { playlist: qsTr("Favorites"); icon: "view-media-favorite"}
-        ListElement { playlist: qsTr("Recent"); icon: "view-media-recent"}
-        ListElement { playlist: qsTr("Babes"); icon: "love"}
-        ListElement { playlist: qsTr("Online"); icon: "internet-services"}
-        ListElement { playlist: qsTr("Tags"); icon: "tag"}
-        ListElement { playlist: qsTr("Relationships"); icon: "view-media-similarartists"}
-        ListElement { playlist: qsTr("Popular"); icon: "view-media-chart"}
-        ListElement { playlist: qsTr("Genres"); icon: "view-media-genre"}
+    BaseModel
+    {
+        id: _playlistsModel
+        list: _playlistsList
     }
 
-    model: playlistListModel
+    Playlists
+    {
+        id: _playlistsList
+    }
+
+    model: _playlistsModel
 
     delegate : Maui.ListDelegate
     {
@@ -72,7 +71,7 @@ BabeList
             onClicked :
             {
                 currentIndex = index
-                var playlist = playlistListModel.get(index).playlist
+                var playlist = list.get(index).playlist
                 filterList.section.property = ""
 
                 switch(playlist)

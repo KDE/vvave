@@ -862,7 +862,7 @@ int CollectionDB::getTrackStars(const QString &path)
 //    return tags;
 //}
 
-QStringList CollectionDB::getPlaylists()
+QStringList CollectionDB::getPlaylistsList()
 {
     QStringList playlists;
     auto queryTxt = QString("SELECT %1, %2 FROM %3 ORDER BY %2 DESC").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
@@ -873,6 +873,16 @@ QStringList CollectionDB::getPlaylists()
         playlists << data[FMH::MODEL_KEY::PLAYLIST];
 
     return playlists;
+}
+
+FMH::MODEL_LIST CollectionDB::getPlaylists()
+{
+    auto queryTxt = QString("SELECT %1, %2 FROM %3 ORDER BY %2 DESC").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
+            FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],
+            TABLEMAP[TABLE::PLAYLISTS]);
+
+
+    return this->getDBData(queryTxt);
 }
 
 bool CollectionDB::removeTrack(const QString &path)

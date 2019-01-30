@@ -1,10 +1,10 @@
-#ifndef TRACKSMODEL_H
+﻿#ifndef TRACKSMODEL_H
 #define TRACKSMODEL_H
 
 #include <QObject>
 #include "models/baselist.h"
-#include "db/collectionDB.h"
 
+class CollectionDB;
 class TracksModel : public BaseList
 {
     Q_OBJECT
@@ -44,9 +44,6 @@ private:
     QString query;
     TracksModel::SORTBY sort = TracksModel::SORTBY::ADDDATE;
 
-    bool addDoc(const FMH::MODEL &doc);
-    void refreshCollection();
-
 signals:
     void queryChanged();
     void sortByChanged();
@@ -54,6 +51,7 @@ signals:
 public slots:
     QVariantMap get(const int &index) const override;
     void append(const QVariantMap &item);
+    void append(const QVariantMap &item, const int &at);
 
     bool color(const int &index, const QString &color);
     bool fav(const int &index, const bool &value);
