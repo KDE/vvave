@@ -696,7 +696,8 @@ Maui.ApplicationWindow
                     holder.title : "No Albums!"
                     holder.body: "Add new music sources"
                     holder.emojiSize: iconSizes.huge
-                    headBarTitle: count + qsTr(" abums")
+                    headBarTitle: count + qsTr(" albums")
+                    list.query: Q.GET.allAlbumsAsc
 
                     Connections
                     {
@@ -745,6 +746,7 @@ Maui.ApplicationWindow
                     holder.body: "Add new music sources"
                     holder.emojiSize: iconSizes.huge
                     headBarTitle: count + qsTr(" artists")
+                    list.query: Q.GET.allArtistsAsc
 
                     Connections
                     {
@@ -937,7 +939,7 @@ Maui.ApplicationWindow
     {
         target: bae
 
-        //        onRefreshTables: H.refreshCollection(size)
+                onRefreshTables: H.refreshCollection(size)
         //        onRefreshTracks: H.refreshTracks()
         //        onRefreshAlbums: H.refreshAlbums()
         //        onRefreshArtists: H.refreshArtists()

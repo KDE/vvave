@@ -88,6 +88,14 @@ BabeList
 
                 Maui.MenuItem
                 {
+                    text: qsTr("Track")
+                    checkable: true
+                    checked: list.sortBy === Tracks.TRACK
+                    onTriggered: list.sortBy = Tracks.TRACK
+                }
+
+                Maui.MenuItem
+                {
                     text: qsTr("Artist")
                     checkable: true
                     checked: list.sortBy === Tracks.ARTIST
@@ -110,7 +118,6 @@ BabeList
                     onTriggered: list.sortBy = Tracks.RATE
                 }
 
-
                 Maui.MenuItem
                 {
                     text: qsTr("Fav")
@@ -118,7 +125,6 @@ BabeList
                     checked: list.sortBy === Tracks.FAV
                     onTriggered: list.sortBy = Tracks.FAV
                 }
-
 
                 Maui.MenuItem
                 {

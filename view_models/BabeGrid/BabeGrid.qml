@@ -4,6 +4,9 @@ import ".."
 import org.kde.kirigami 2.0 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
+import BaseModel 1.0
+import AlbumsList 1.0
+
 Maui.Page
 {
     id: gridPage
@@ -15,7 +18,10 @@ Maui.Page
 
     property int albumCoverRadius :  radiusV
     property bool albumCardVisible : true
-    property alias gridModel: gridModel
+
+    property alias list: _albumsList
+    property alias listModel: _albumsModel
+
     property alias grid: grid
     property alias holder: holder
     property alias count: grid.count
@@ -26,11 +32,6 @@ Maui.Page
 
     margins: space.medium
     topMargin: space.big
-
-    function clearGrid()
-    {
-        gridModel.clear()
-    }
 
     MouseArea
     {
@@ -44,7 +45,16 @@ Maui.Page
         visible: grid.count === 0
     }
 
-    ListModel {id: gridModel}
+    Albums
+    {
+        id: _albumsList
+    }
+
+    BaseModel
+    {
+        id: _albumsModel
+        list: _albumsList
+    }
 
     Maui.GridView
     {
@@ -60,7 +70,7 @@ Maui.Page
         cellWidth: albumCoverSize + spacing
         cellHeight:  albumCoverSize + spacing*2
 
-        model: gridModel
+        model: _albumsModel
         delegate: BabeAlbum
         {
             id: albumDelegate

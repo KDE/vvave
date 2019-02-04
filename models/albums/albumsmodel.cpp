@@ -1,19 +1,19 @@
-#include "tracksmodel.h"
+#include "albumsmodel.h"
 #include "db/collectionDB.h"
 
 
-TracksModel::TracksModel(QObject *parent) : BaseList(parent)
+AlbumsModel::AlbumsModel(QObject *parent) : BaseList(parent)
 {
     this->db = CollectionDB::getInstance();
-    connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
+    connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
 
-FMH::MODEL_LIST TracksModel::items() const
+FMH::MODEL_LIST AlbumsModel::items() const
 {
     return this->list;
 }
 
-void TracksModel::setQuery(const QString &query)
+void AlbumsModel::setQuery(const QString &query)
 {
     if(this->query == query)
         return;
@@ -24,12 +24,12 @@ void TracksModel::setQuery(const QString &query)
     emit this->queryChanged();
 }
 
-QString TracksModel::getQuery() const
+QString AlbumsModel::getQuery() const
 {
     return this->query;
 }
 
-void TracksModel::setSortBy(const SORTBY &sort)
+void AlbumsModel::setSortBy(const SORTBY &sort)
 {
     if(this->sort == sort)
         return;
@@ -42,12 +42,12 @@ void TracksModel::setSortBy(const SORTBY &sort)
     emit this->sortByChanged();
 }
 
-TracksModel::SORTBY TracksModel::getSortBy() const
+AlbumsModel::SORTBY AlbumsModel::getSortBy() const
 {
     return this->sort;
 }
 
-void TracksModel::sortList()
+void AlbumsModel::sortList()
 {
     const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
     qDebug()<< "SORTING LIST BY"<< this->sort;
@@ -58,17 +58,8 @@ void TracksModel::sortList()
         switch(role)
         {
         case FMH::MODEL_KEY::RELEASEDATE:
-        case FMH::MODEL_KEY::RATE:
-        case FMH::MODEL_KEY::FAV:
         {
-            if(e1[role].toInt() > e2[role].toInt())
-                return true;
-            break;
-        }
-
-        case FMH::MODEL_KEY::TRACK:
-        {
-            if(e1[role].toInt() < e2[role].toInt())
+            if(e1[role].toDouble() > e2[role].toDouble())
                 return true;
             break;
         }
@@ -86,10 +77,8 @@ void TracksModel::sortList()
             break;
         }
 
-        case FMH::MODEL_KEY::TITLE:
         case FMH::MODEL_KEY::ARTIST:
         case FMH::MODEL_KEY::ALBUM:
-        case FMH::MODEL_KEY::FORMAT:
         {
             const auto str1 = QString(e1[role]).toLower();
             const auto str2 = QString(e2[role]).toLower();
@@ -108,7 +97,7 @@ void TracksModel::sortList()
     });
 }
 
-void TracksModel::setList()
+void AlbumsModel::setList()
 {
     emit this->preListChanged();
 
@@ -119,7 +108,7 @@ void TracksModel::setList()
     emit this->postListChanged();
 }
 
-QVariantMap TracksModel::get(const int &index) const
+QVariantMap AlbumsModel::get(const int &index) const
 {
     if(index >= this->list.size() || index < 0)
         return QVariantMap();
@@ -133,7 +122,7 @@ QVariantMap TracksModel::get(const int &index) const
     return res;
 }
 
-void TracksModel::append(const QVariantMap &item)
+void AlbumsModel::append(const QVariantMap &item)
 {
     if(item.isEmpty())
         return;
@@ -149,7 +138,7 @@ void TracksModel::append(const QVariantMap &item)
     emit this->postItemAppended();
 }
 
-void TracksModel::append(const QVariantMap &item, const int &at)
+void AlbumsModel::append(const QVariantMap &item, const int &at)
 {
     if(item.isEmpty())
         return;
@@ -170,35 +159,4 @@ void TracksModel::append(const QVariantMap &item, const int &at)
     emit this->postItemAppended();
 }
 
-bool TracksModel::color(const int &index, const QString &color)
-{
-    if(index >= this->list.size() || index < 0)
-        return false;
 
-    auto item = this->list[index];
-    if(this->db->colorTagTrack(item[FMH::MODEL_KEY::URL], color))
-    {
-        this->list[index][FMH::MODEL_KEY::COLOR] = color;
-        emit this->updateModel(index, {FMH::MODEL_KEY::COLOR});
-        return true;
-    }
-
-    return false;
-}
-
-bool TracksModel::fav(const int &index, const bool &value)
-{
-    if(index >= this->list.size() || index < 0)
-        return false;
-
-    auto item = this->list[index];
-    if(this->db->favTrack(item[FMH::MODEL_KEY::URL], value))
-    {
-        this->list[index][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
-        emit this->updateModel(index, {FMH::MODEL_KEY::FAV});
-
-        return true;
-    }
-
-    return false;
-}

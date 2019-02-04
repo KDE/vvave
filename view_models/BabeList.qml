@@ -30,12 +30,7 @@ Maui.Page
     focus: true
     margins: 0
 
-    function clearTable()
-    {
-        model.clear()
-    }
-
-    Maui.Holder
+     Maui.Holder
     {
         id: holder
         visible: babeList.count === 0

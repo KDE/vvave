@@ -22,7 +22,9 @@ public:
         TITLE = FMH::MODEL_KEY::TITLE,
         ALBUM = FMH::MODEL_KEY::ALBUM,
         RATE = FMH::MODEL_KEY::RATE,
-        FAV = FMH::MODEL_KEY::FAV
+        FAV = FMH::MODEL_KEY::FAV,
+        TRACK = FMH::MODEL_KEY::TRACK
+
     }; Q_ENUM(SORTBY)
 
     explicit TracksModel(QObject *parent = nullptr);

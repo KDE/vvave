@@ -9,7 +9,8 @@ import "../db/Queries.js" as Q
 import "../utils/Help.js" as H
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-
+import TracksList 1.0
+import AlbumsList 1.0
 
 BabeGrid
 {
@@ -37,14 +38,62 @@ BabeGrid
     onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
     headBar.visible: true
     headBarExit: false
-    headBar.leftContent: Maui.ToolButton
-    {
-        id : playAllBtn
-        visible : headBar.visible && albumsViewGrid.count > 0
-        anim : true
-        iconName : "media-playlist-play"
-        onClicked : playAll()
-    }
+    headBar.leftContent: [
+        Maui.ToolButton
+        {
+            id : playAllBtn
+            visible : headBar.visible && albumsViewGrid.count > 0
+            anim : true
+            iconName : "media-playlist-play"
+            onClicked : playAll()
+        },
+
+        Maui.ToolButton
+        {
+            id: sortBtn
+            anim: true
+            iconName: "view-sort"
+
+            onClicked: sortMenu.popup()
+
+            Maui.Menu
+            {
+                id: sortMenu
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Artist")
+                    checkable: true
+                    checked: list.sortBy === Albums.ARTIST
+                    onTriggered: list.sortBy = Albums.ARTIST
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Album")
+                    checkable: true
+                    checked: list.sortBy === Albums.ALBUM
+                    onTriggered: list.sortBy = Albums.ALBUM
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Release date")
+                    checkable: true
+                    checked: list.sortBy === Albums.RELEASEDATE
+                    onTriggered: list.sortBy = Albums.RELEASEDATE
+                }
+
+                Maui.MenuItem
+                {
+                    text: qsTr("Add date")
+                    checkable: true
+                    checked: list.sortBy === Albums.ADDDATE
+                    onTriggered: list.sortBy = Albums.ADDDATE
+                }
+            }
+        }
+    ]
 
     headBar.rightContent: [
 
@@ -74,7 +123,7 @@ BabeGrid
         defaultButtons: false
         page.margins: 0
 
-//        verticalAlignment: Qt.AlignBottom
+        //        verticalAlignment: Qt.AlignBottom
 
         ColumnLayout
         {
@@ -93,6 +142,8 @@ BabeGrid
                 coverArtVisible: true
                 quickPlayVisible: true
                 focus: true
+                list.sortBy: Tracks.TRACK
+
 
                 holder.emoji: "qrc:/assets/ElectricPlug.png"
                 holder.isMask: false
@@ -155,7 +206,6 @@ BabeGrid
     {
         console.log("PAPULATE ALBUMS VIEW")
         albumDialog.open()
-        table.clearTable()
 
         var query = ""
         var tagq = ""
@@ -177,18 +227,16 @@ BabeGrid
             tagq = Q.GET.artistTags_.arg(artist)
         }
 
-        tracks = bae.get(query)
+        albumsViewTable.list.query = query
 
-        if(tracks.length > 0)
-        {
-            for(var i in tracks)
-                albumsViewTable.model.append(tracks[i])
-
-            tagq = tagq.arg(artist)
-            var tags = bae.get(tagq)
-            console.log(tagq, "TAGS", tags)
-            tagBar.populate(tags)
-        }
+        /*dunoooo*/
+//        if(tracks.length > 0)
+//        {
+//            tagq = tagq.arg(artist)
+//            var tags = bae.get(tagq)
+//            console.log(tagq, "TAGS", tags)
+//            tagBar.populate(tags)
+//        }
     }
 
     function filter(tracks)

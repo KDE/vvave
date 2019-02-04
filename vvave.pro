@@ -67,7 +67,8 @@ SOURCES += main.cpp \
     models/tracks/tracksmodel.cpp \
     models/basemodel.cpp \
     models/baselist.cpp \
-    models/playlists/playlistsmodel.cpp
+    models/playlists/playlistsmodel.cpp \
+    models/albums/albumsmodel.cpp
 
 
 RESOURCES += qml.qrc \
@@ -106,7 +107,8 @@ HEADERS += \
     models/tracks/tracksmodel.h \
     models/basemodel.h \
     models/baselist.h \
-    models/playlists/playlistsmodel.h
+    models/playlists/playlistsmodel.h \
+    models/albums/albumsmodel.h
 
 include(install.pri)
 
