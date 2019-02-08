@@ -30,6 +30,8 @@ import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import FMList 1.0
 import Player 1.0
+import AlbumsList 1.0
+import TracksList 1.0
 
 Maui.ApplicationWindow
 {
@@ -42,8 +44,8 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
-    property alias playIcon: playIcon
-    property alias babeBtnIcon: babeBtnIcon
+    //    property alias playIcon: playIcon
+    //    property alias babeBtnIcon: babeBtnIcon
     property alias progressBar: mainPlaylist.progressBar
     property alias animFooter: mainPlaylist.animFooter
     property alias mainPlaylist: mainPlaylist
@@ -204,6 +206,23 @@ Maui.ApplicationWindow
     altColorText: darkTextColor
 
     headBar.middleContent : [
+
+//        Row
+//        {
+//            Image
+//            {
+//                height: iconSizes.medium
+//                width: height
+
+//                source:  "file://" + encodeURIComponent(
+//                             currentArtwork)
+//            }
+
+//            Label
+//            {
+//                text: "Now"
+//            }
+//        },
 
         Maui.ToolButton
         {
@@ -542,85 +561,6 @@ Maui.ApplicationWindow
             onCoverDoubleClicked: Player.playAll(tracks)
         }
 
-        floatingBar: true
-        footBarOverlap: true
-        altToolBars: true
-
-        footBar.visible: !mainlistEmpty
-        headBar.visible: !mainlistEmpty
-
-        footBar.leftContent: Label
-        {
-            visible: !mainlistEmpty && infoLabels
-            text: progressTimeLabel
-            color: darkTextColor
-            clip: true
-        }
-
-        footBar.rightContent: Label
-        {
-            visible: !mainlistEmpty && infoLabels
-            text: durationTimeLabel
-            color: darkTextColor
-            clip: true
-        }
-
-        footBar.middleContent: [
-
-            Maui.ToolButton
-            {
-                id: babeBtnIcon
-                iconName: "love"
-
-                iconColor: currentBabe ? babeColor : darkTextColor
-                onClicked: if (!mainlistEmpty)
-                {
-                    var value = H.faveIt([mainPlaylist.list.model.get(currentTrackIndex).url])
-                    currentBabe = value
-                    mainPlaylist.list.model.get(currentTrackIndex).babe = value ? "1" : "0"
-                }
-            },
-
-            Maui.ToolButton
-            {
-                iconName: "media-skip-backward"
-                iconColor: darkTextColor
-                onClicked: Player.previousTrack()
-                onPressAndHold: Player.playAt(prevTrackIndex)
-            },
-
-            Maui.ToolButton
-            {
-                id: playIcon
-                iconColor: darkTextColor
-                iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
-                onClicked:
-                {
-                    player.playing = !player.playing
-                }
-            },
-
-            Maui.ToolButton
-            {
-                id: nextBtn
-                iconColor: darkTextColor
-                iconName: "media-skip-forward"
-                onClicked: Player.nextTrack()
-                onPressAndHold: Player.playAt(Player.shuffle())
-            },
-
-            Maui.ToolButton
-            {
-                id: shuffleBtn
-                iconColor: darkTextColor
-                iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-                onClicked:
-                {
-                    isShuffle = !isShuffle
-                    bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
-                }
-            }
-        ]
     }
 
     Maui.Page
@@ -682,7 +622,12 @@ Maui.ApplicationWindow
                         onRowClicked: Player.addTrack(tracksView.list.get(index))
                         onQuickPlayTrack: Player.quickPlay(tracksView.list.get(index))
                         onPlayAll: Player.playAll(bae.get(Q.GET.allTracks))
-                        onAppendAll: Player.appendAll(bae.get(Q.GET.allTracks))
+                        onAppendAll:
+                        {
+                            mainPlaylist.list.append(Q.GET.allTracks)
+                            mainPlaylist.listView.positionViewAtEnd()
+                        }
+
                         onQueueTrack: Player.queueTracks([tracksView.list.get(index)], index)
                     }
                 }
@@ -698,6 +643,7 @@ Maui.ApplicationWindow
                     holder.emojiSize: iconSizes.huge
                     headBarTitle: count + qsTr(" albums")
                     list.query: Q.GET.allAlbumsAsc
+                    list.sortBy: Albums.ALBUM
 
                     Connections
                     {
@@ -712,8 +658,9 @@ Maui.ApplicationWindow
                             var query = Q.GET.albumTracks_.arg(album)
                             query = query.arg(artist)
 
-                            var map = bae.get(query)
-                            Player.playAll(map)
+                            mainPlaylist.list.clear()
+                            mainPlaylist.list.query = query
+                            Player.playAll()
                         }
 
                         onPlayAll:
@@ -723,15 +670,19 @@ Maui.ApplicationWindow
 
                             query = query.arg(data.artist)
                             var tracks = bae.get(query)
-                            Player.playAll(tracks)
+
+                            mainPlaylist.list.clear()
+                            mainPlaylist.list.query = query
+                            Player.playAll()
                         }
 
                         onAppendAll:
                         {
                             var query = Q.GET.albumTracks_.arg(album)
                             query = query.arg(artist)
-                            var tracks = bae.get(query)
-                            Player.appendAll(tracks)
+
+                            mainPlaylist.list.appendQuery(query)
+                            mainPlaylist.listView.positionViewAtEnd()
                         }
                     }
                 }
@@ -747,6 +698,8 @@ Maui.ApplicationWindow
                     holder.emojiSize: iconSizes.huge
                     headBarTitle: count + qsTr(" artists")
                     list.query: Q.GET.allArtistsAsc
+                    list.sortBy: Albums.ARTIST
+                    table.list.sortBy:  Tracks.NONE
 
                     Connections
                     {
@@ -774,8 +727,8 @@ Maui.ApplicationWindow
                         onAppendAll:
                         {
                             var query = Q.GET.artistTracks_.arg(artist)
-                            var tracks = bae.get(query)
-                            Player.appendAll(tracks)
+                            mainPlaylist.list.appendQuery(query)
+                            mainPlaylist.listView.positionViewAtEnd()
                         }
                     }
                 }
@@ -939,7 +892,7 @@ Maui.ApplicationWindow
     {
         target: bae
 
-                onRefreshTables: H.refreshCollection(size)
+        onRefreshTables: H.refreshCollection(size)
         //        onRefreshTracks: H.refreshTracks()
         //        onRefreshAlbums: H.refreshAlbums()
         //        onRefreshArtists: H.refreshArtists()

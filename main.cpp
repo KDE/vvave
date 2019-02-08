@@ -5,6 +5,7 @@
 #include <QIcon>
 #include <QLibrary>
 #include <QStyleHints>
+#include <QQuickStyle>
 #include <QCommandLineParser>
 #include "babe.h"
 #include "services/local/player.h"

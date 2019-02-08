@@ -23,7 +23,9 @@ Maui.Menu
 
     Maui.MenuItem
     {
-        text: cover.visible ? qsTr("Hide cover...") : qsTr("Show cover...")
+        text: qsTr("Cover list...")
+        checkable: true
+        checked: cover.visible
         onTriggered: hideCover()
     }
 
@@ -45,5 +47,13 @@ Maui.Menu
         text: syncPlaylist.length > 0 && sync ? qsTr("Pause syncing") : qsTr("Continue syncing")
         onTriggered: sync = !sync
     }
+
+//    Maui.MenuItem
+//    {
+//        text: qsTr("Playlist list...")
+//        checkable: true
+//        checked: mainPlaylistItem.visible
+//        onTriggered: mainPlaylistItem.visible = !mainPlaylistItem.visible
+//    }
 
 }

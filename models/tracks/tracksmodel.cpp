@@ -49,6 +49,9 @@ TracksModel::SORTBY TracksModel::getSortBy() const
 
 void TracksModel::sortList()
 {
+    if(this->sort == TracksModel::SORTBY::NONE)
+        return;
+
     const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
     qDebug()<< "SORTING LIST BY"<< this->sort;
     qSort(this->list.begin(), this->list.end(), [key](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
@@ -144,7 +147,10 @@ void TracksModel::append(const QVariantMap &item)
     for(auto key : item.keys())
         model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
 
+    qDebug() << "Appending item to list" << item;
     this->list << model;
+
+    qDebug()<< this->list;
 
     emit this->postItemAppended();
 }
@@ -168,6 +174,27 @@ void TracksModel::append(const QVariantMap &item, const int &at)
     this->list.insert(at, model);
 
     emit this->postItemAppended();
+}
+
+void TracksModel::appendQuery(const QString &query)
+{
+    if(this->query.isEmpty())
+        return;
+
+    emit this->preListChanged();
+
+    this->list << this->db->getDBData(query);
+
+    emit this->postListChanged();
+}
+
+void TracksModel::clear()
+{
+    emit this->preListChanged();
+
+    this->list.clear();
+
+    emit this->postListChanged();
 }
 
 bool TracksModel::color(const int &index, const QString &color)

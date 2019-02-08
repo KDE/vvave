@@ -31,8 +31,8 @@ function playTrack(index)
                     bae.notifySong(currentTrack.url)
             }
 
-//            if(currentTrack.lyrics.length < 1)
-//                bae.trackLyrics(currentTrack.url)
+            //            if(currentTrack.lyrics.length < 1)
+            //                bae.trackLyrics(currentTrack.url)
 
             //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
             //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
@@ -207,7 +207,7 @@ function savePlaylist()
 
 function clearOutPlaylist()
 {
-    mainPlaylist.table.clearTable()
+    mainPlaylist.list.clear()
     stop()
 }
 
@@ -233,7 +233,7 @@ function playAll(tracks)
         syncPlaylist = ""
         infoMsg = ""
 
-        mainPlaylist.table.clearTable()
+        mainPlaylist.list.clear()
         pageStack.currentIndex = 0
 
         for(var i in tracks)
@@ -245,6 +245,17 @@ function playAll(tracks)
         mainPlaylist.listView.positionViewAtBeginning()
         playAt(0)
     }
+}
+
+function playAll()
+{
+    sync = false
+    syncPlaylist = ""
+    infoMsg = ""
+
+    pageStack.currentIndex = 0
+    mainPlaylist.listView.positionViewAtBeginning()
+    playAt(0)
 }
 
 function babeTrack(url, value)

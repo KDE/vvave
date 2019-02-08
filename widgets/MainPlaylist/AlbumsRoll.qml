@@ -14,7 +14,7 @@ ListView
     currentIndex: currentTrackIndex
     highlightFollowsCurrentItem: true
     highlightMoveDuration: 0
-    snapMode: ListView.SnapOneItem
+    snapMode:ListView.SnapToOneItem
     model:  mainPlaylist.listModel
 
     onMovementEnded:
@@ -22,17 +22,19 @@ ListView
         var index = indexAt(contentX, contentY)
         if(index !== currentTrackIndex)
             Player.playAt(index)
+
+//         positionViewAtIndex(index, ListView.Center)
     }
 
     delegate: BabeAlbum
     {
         id: delegate
-        itemHeight: coverSize
+        itemHeight: albumsRollRoot.height
         itemWidth: albumsRollRoot.width
-        albumSize : coverSize
-        albumRadius : 0
+        albumSize : itemHeight *0.8
+        albumRadius : radiusV
         showLabels: false
-        showIndicator: true
+        showIndicator: false
         hideRepeated: false
         anchors.verticalCenter: parent.verticalCenter
         //        increaseCurrentItem : true

@@ -46,6 +46,8 @@ add_executable(vvave
     models/tracks/tracksmodel.cpp
     models/basemodel.cpp
     models/baselist.cpp
+    models/playlists/playlistsmodel.cpp
+    models/albums/albumsmodel.cpp
     )
 
 if (ANDROID)
@@ -79,7 +81,7 @@ if (TARGET create-apk-vvave)
 endif()
 
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
-target_link_libraries(vvave Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets ${TAGLIB_LIBRARIES})
+target_link_libraries(vvave Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets Qt5::QuickControls2 ${TAGLIB_LIBRARIES})
 
 install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

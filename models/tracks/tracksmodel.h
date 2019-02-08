@@ -23,7 +23,8 @@ public:
         ALBUM = FMH::MODEL_KEY::ALBUM,
         RATE = FMH::MODEL_KEY::RATE,
         FAV = FMH::MODEL_KEY::FAV,
-        TRACK = FMH::MODEL_KEY::TRACK
+        TRACK = FMH::MODEL_KEY::TRACK,
+        NONE
 
     }; Q_ENUM(SORTBY)
 
@@ -54,7 +55,8 @@ public slots:
     QVariantMap get(const int &index) const override;
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
-
+    void appendQuery(const QString &query);
+    void clear();
     bool color(const int &index, const QString &color);
     bool fav(const int &index, const bool &value);
 };

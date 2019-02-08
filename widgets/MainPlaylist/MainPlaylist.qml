@@ -36,10 +36,68 @@ Maui.Page
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
     focus: true
-    headBarExit: false
-    margins: 0
-    headBarTitle: currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : ""
-    headBar.leftContent: Maui.ToolButton
+
+ margins: 0
+headBar.visible: false
+footBar.visible: !mainlistEmpty
+    footBar.middleContent: [
+
+        Maui.ToolButton
+        {
+            id: babeBtnIcon
+            iconName: "love"
+
+            iconColor: currentBabe ? babeColor : cover.colorScheme.textColor
+            onClicked: if (!mainlistEmpty)
+            {
+                var value = H.faveIt([mainPlaylist.list.model.get(currentTrackIndex).url])
+                currentBabe = value
+                mainPlaylist.list.model.get(currentTrackIndex).babe = value ? "1" : "0"
+            }
+        },
+
+        Maui.ToolButton
+        {
+            iconName: "media-skip-backward"
+            iconColor: cover.colorScheme.textColor
+            onClicked: Player.previousTrack()
+            onPressAndHold: Player.playAt(prevTrackIndex)
+        },
+
+        Maui.ToolButton
+        {
+            id: playIcon
+            iconColor: cover.colorScheme.textColor
+            iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
+            onClicked:
+            {
+                player.playing = !player.playing
+            }
+        },
+
+        Maui.ToolButton
+        {
+            id: nextBtn
+            iconColor: cover.colorScheme.textColor
+            iconName: "media-skip-forward"
+            onClicked: Player.nextTrack()
+            onPressAndHold: Player.playAt(Player.shuffle())
+        },
+
+        Maui.ToolButton
+        {
+            id: shuffleBtn
+            iconColor: cover.colorScheme.textColor
+            iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+            onClicked:
+            {
+                isShuffle = !isShuffle
+                bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
+            }
+        }
+    ]
+
+     footBar.leftContent: Maui.ToolButton
     {
         id: infoBtn
         iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
@@ -57,6 +115,15 @@ Maui.Page
             }
         }
     }
+
+    footBar.rightContent : Maui.ToolButton
+    {
+        id: menuBtn
+        iconName: "overflow-menu"
+        onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
+    }
+
+
 
     //    headBar.middleContent: Maui.PieButton
     //    {
@@ -93,87 +160,7 @@ Maui.Page
     //        }
     //    }
 
-    headBar.rightContent : Maui.ToolButton
-    {
-        id: menuBtn
-        iconName: "overflow-menu"
-        onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
-    }
 
-    footBar.background: Rectangle
-    {
-        id: footerBg
-        clip : true
-        height: footBar.implicitHeight
-        color: darkViewBackgroundColor
-        radius: mainPlaylist.floatingBar ? unit * 6 : 0
-        border.color: mainPlaylist.floatingBar ? Qt.lighter(borderColor, 1.2) : "transparent"
-        layer.enabled: mainPlaylist.floatingBar
-        layer.effect: DropShadow
-        {
-            anchors.fill: footerBg
-            horizontalOffset: 0
-            verticalOffset: 4
-            radius: 8.0
-            samples: 17
-            color: "#80000000"
-            source: footerBg
-        }
-
-        SequentialAnimation
-        {
-            id: animFooter
-            PropertyAnimation
-            {
-                target: footerBg
-                property: "color"
-                easing.type: Easing.InOutQuad
-                from: "black"
-                to: darkViewBackgroundColor
-                duration: 500
-            }
-        }
-
-        Rectangle
-        {
-            anchors.fill: parent
-            color: "transparent"
-            radius: footerBg.radius
-            opacity: 0.3
-            clip: true
-
-            FastBlur
-            {
-                id: fastBlur
-                width: parent.width
-                height: parent.height-1
-                y:1
-                source: mainPlaylist.cover
-                radius: 100
-                transparentBorder: false
-                cached: true
-                z:1
-                clip: true
-
-                layer.enabled: mainPlaylist.floatingBar
-                layer.effect: OpacityMask
-                {
-                    maskSource: Item
-                    {
-                        width: footBar.width
-                        height: footBar.height
-                        Rectangle
-                        {
-                            anchors.centerIn: parent
-                            width: footBar.width
-                            height: footBar.height
-                            radius: footerBg.radius
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     PlaylistMenu
     {
@@ -190,66 +177,6 @@ Maui.Page
         anchors.fill: parent
         width: parent.width
         spacing: 0
-
-        Item
-        {
-            id: cover
-            Layout.alignment: Qt.AlignBottom | Qt.AlignTop
-            Layout.fillWidth: true
-            Layout.preferredHeight: !mainlistEmpty ? coverSize : 0
-            Layout.maximumHeight: coverSize
-
-            visible: !mainlistEmpty
-
-            Item
-            {
-                anchors.fill: parent
-
-                AlbumsRoll
-                {
-                    id: albumsRoll
-                    height: parent.height
-                    width: parent.width
-                    anchors.verticalCenter: parent.vertical
-                }
-
-                Rectangle
-                {
-                    visible: !mainlistEmpty
-                    height: parent.height
-                    width: parent.width
-                    color: viewBackgroundColor
-                    z: -1
-
-                    Image
-                    {
-                        id: artwork
-                        visible: !mainlistEmpty
-                        anchors.fill: parent
-                        sourceSize.height: coverSize * 0.2
-                        sourceSize.width: coverSize * 0.2
-                        source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
-                        fillMode: Image.PreserveAspectCrop
-                    }
-
-                    FastBlur
-                    {
-                        visible: artwork.visible
-                        anchors.fill: parent
-                        source: artwork
-                        radius: 100
-                        transparentBorder: false
-                        cached: true
-                    }
-                }
-            }
-        }
-
-        Kirigami.Separator
-        {
-            Layout.fillWidth: true
-            color: borderColor
-        }
 
         Item
         {
@@ -368,6 +295,119 @@ Maui.Page
                     id: infoView
                 }
 
+            }
+        }
+
+        Kirigami.Separator
+        {
+            Layout.fillWidth: true
+            color: borderColor
+        }
+
+        Maui.Page
+        {
+            id: cover
+            visible: false
+            Layout.alignment: Qt.AlignBottom | Qt.AlignTop
+            Layout.fillWidth: true
+            Layout.preferredHeight: !mainlistEmpty ? coverSize : 0
+            Layout.maximumHeight: coverSize
+            margins: 0
+            headBarExit: false
+            //            headBar.visible: true
+            //            headBar.implicitHeight: 0
+            //            floatingBar: true
+            //            footBarOverlap: true
+            altToolBars: true
+
+            //            footBar.visible: !mainlistEmpty
+
+            headBar.background: Rectangle
+            {
+                color: "transparent"
+            }
+
+            footBar.background: Rectangle
+            {
+                color: "transparent"
+            }
+
+            headBar.leftContent: Label
+            {
+                visible: !mainlistEmpty && infoLabels
+                text: progressTimeLabel
+                color: cover.colorScheme.textColor
+                clip: true
+            }
+
+            headBar.rightContent: Label
+            {
+                visible: !mainlistEmpty && infoLabels
+                text: durationTimeLabel
+                color: cover.colorScheme.textColor
+                clip: true
+            }
+            headBarTitle: currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : ""
+
+
+
+            background: Rectangle
+            {
+                visible: !mainlistEmpty
+
+                color: viewBackgroundColor
+                z: -1
+
+                Image
+                {
+                    id: artwork
+                    visible: !mainlistEmpty
+                    anchors.fill: parent
+                    sourceSize.height: coverSize * 0.2
+                    sourceSize.width: coverSize * 0.2
+                    source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
+                    fillMode: Image.PreserveAspectCrop
+                }
+
+                FastBlur
+                {
+                    visible: artwork.visible
+                    anchors.fill: parent
+                    source: artwork
+                    radius: 100
+                    transparentBorder: false
+                    cached: true
+
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        opacity: 0.8
+                        color: cover.colorScheme.viewBackgroundColor
+                    }
+                }
+
+                SequentialAnimation
+                {
+                    id: animFooter
+                    //                        PropertyAnimation
+                    //                        {
+                    //                            target: footerBg
+                    //                            property: "color"
+                    //                            easing.type: Easing.InOutQuad
+                    //                            from: "black"
+                    //                            to: darkViewBackgroundColor
+                    //                            duration: 500
+                    //                        }
+                }
+            }
+
+            content: AlbumsRoll
+            {
+                id: albumsRoll
+                height: visible ?  parent.height : 0
+                width: parent.width
+                anchors.verticalCenter: parent.vertical
             }
         }
 
