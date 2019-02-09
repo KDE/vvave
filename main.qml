@@ -693,8 +693,8 @@ Maui.ApplicationWindow
 
                     holder.emoji: "qrc:/assets/MusicBox.png"
                     holder.isMask: false
-                    holder.title : "No Artists!"
-                    holder.body: "Add new music sources"
+                    holder.title : qsTr("No Artists!")
+                    holder.body: qsTr("Add new music sources")
                     holder.emojiSize: iconSizes.huge
                     headBarTitle: count + qsTr(" artists")
                     list.query: Q.GET.allArtistsAsc
@@ -748,7 +748,7 @@ Maui.ApplicationWindow
                             Player.playAll(tracks)
                             root.sync = true
                             root.syncPlaylist = playlist
-                            root.infoMsg = "Syncing to " + playlist
+                            root.infoMsg = qsTr("Syncing to ") + playlist
                         }
                     }
                 }
