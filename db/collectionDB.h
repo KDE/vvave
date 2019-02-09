@@ -78,7 +78,7 @@ class CollectionDB : public QObject
         FMH::MODEL_LIST getAlbumTracks(const QString &album, const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::TRACK, const BAE::W &order = BAE::W::ASC);
         FMH::MODEL_LIST getArtistTracks(const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
         FMH::MODEL_LIST getBabedTracks(const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
-        QVariantList getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search);
+        FMH::MODEL_LIST getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search);
         FMH::MODEL_LIST getPlaylistTracks(const QString &playlist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
         FMH::MODEL_LIST getMostPlayedTracks(const int &greaterThan = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
         FMH::MODEL_LIST getFavTracks(const int &stars = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::RATE, const BAE::W &order = BAE::W::DESC);

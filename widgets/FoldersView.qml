@@ -50,6 +50,8 @@ StackView
         }
     }
 
+    Component.onCompleted: populate()
+
     function populate()
     {
         browser.model.clear()
@@ -61,16 +63,8 @@ StackView
 
     function filter()
     {
-        filterList.model.clear()
-        tracks = getTracks()
+        var where = "source = \""+currentFolder+"\""
+        filterList.list.query = (Q.GET.tracksWhere_.arg(where))
 
-        for(var i in tracks)
-            filterList.model.append(tracks[i])
-    }
-
-    function getTracks()
-    {
-        var where = "sources_url = \""+currentFolder+"\""
-        return bae.get(Q.GET.tracksWhere_.arg(where))
     }
 }

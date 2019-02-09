@@ -255,8 +255,8 @@ void Babe::linkDecoder(QString json)
     }
     case LINK::CODE::SEARCHFOR :
     {
-        auto res = this->searchFor(msg.split(","));
-        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
+//        auto res = this->searchFor(msg.split(","));
+//        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
         break;
     }
     case LINK::CODE::PLAY :
@@ -308,6 +308,11 @@ QVariantList Babe::getFolders()
 
     qDebug()<<"FOLDERS:"<< res;
     return res;
+}
+
+QStringList Babe::getSourceFolders()
+{
+    return this->db->getSourcesFolders();
 }
 
 
@@ -495,68 +500,6 @@ QString Babe::loadCover(const QString &url)
         return this->fetchCoverArt(track);
 }
 
-QVariantList Babe::searchFor(const QStringList &queries)
-{
-    QVariantList mapList;
-    bool hasKey = false;
-    for(auto searchQuery : queries)
-    {
-        if(searchQuery.contains(BAE::SearchTMap[BAE::SearchT::LIKE]+":") || searchQuery.startsWith("#"))
-        {
-            if(searchQuery.startsWith("#"))
-                searchQuery=searchQuery.replace("#","").trimmed();
-            else
-                searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::LIKE]+":","").trimmed();
-
-
-            searchQuery = searchQuery.trimmed();
-            if(!searchQuery.isEmpty())
-            {
-                mapList += this->db->getSearchedTracks(FMH::MODEL_KEY::WIKI, searchQuery);
-                mapList += this->db->getSearchedTracks(FMH::MODEL_KEY::TAG, searchQuery);
-                mapList += this->db->getSearchedTracks(FMH::MODEL_KEY::LYRICS, searchQuery);
-            }
-
-        }else if(searchQuery.contains((BAE::SearchTMap[BAE::SearchT::SIMILAR]+":")))
-        {
-            searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::SIMILAR]+":","").trimmed();
-            searchQuery=searchQuery.trimmed();
-            if(!searchQuery.isEmpty())
-                mapList += this->db->getSearchedTracks(FMH::MODEL_KEY::TAG, searchQuery);
-
-        }else
-        {
-            FMH::MODEL_KEY key;
-
-            QHashIterator<FMH::MODEL_KEY, QString> k(FMH::MODEL_NAME);
-            while (k.hasNext())
-            {
-                k.next();
-                if(searchQuery.contains(QString(k.value()+":")))
-                {
-                    hasKey=true;
-                    key=k.key();
-                    searchQuery = searchQuery.replace(k.value()+":","").trimmed();
-                }
-            }
-
-            searchQuery = searchQuery.trimmed();
-
-            if(!searchQuery.isEmpty())
-            {
-                if(hasKey)
-                    mapList += this->db->getSearchedTracks(key, searchQuery);
-                else
-                {
-                    auto queryTxt = QString("SELECT t.*, al.artwork FROM tracks t INNER JOIN albums al ON t.album = al.album AND t.artist = al.artist WHERE t.title LIKE \"%"+searchQuery+"%\" OR t.artist LIKE \"%"+searchQuery+"%\" OR t.album LIKE \"%"+searchQuery+"%\"OR t.genre LIKE \"%"+searchQuery+"%\"OR t.url LIKE \"%"+searchQuery+"%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000");
-                    mapList += this->db->getDBDataQML(queryTxt);
-                }
-            }
-        }
-    }
-
-    return  mapList;
-}
 
 QString Babe::fetchCoverArt(FMH::MODEL &song)
 {

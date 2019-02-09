@@ -21,6 +21,8 @@ BabeList
     property alias list : _tracksList
     property alias listModel : _tracksModel
     property alias listView : babeTableRoot.listView
+
+
     property bool trackNumberVisible
     property bool quickPlayVisible : true
     property bool coverArtVisible : false
@@ -246,6 +248,7 @@ BabeList
     section.criteria: ViewSection.FullString
     section.delegate: Maui.LabelDelegate
     {
+        id: _sectionDelegate
         label: section
         isSection: true
         boldLabel: true
@@ -256,7 +259,6 @@ BabeList
         {
             color:  colorScheme.backgroundColor
         }
-
     }
 
 

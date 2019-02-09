@@ -665,7 +665,7 @@ FMH::MODEL_LIST CollectionDB::getBabedTracks(const FMH::MODEL_KEY &orderBy, cons
     return this->getDBData(queryTxt);
 }
 
-QVariantList CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search)
+FMH::MODEL_LIST CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search)
 {
     QString queryTxt;
 
@@ -719,9 +719,7 @@ QVariantList CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, const 
                 FMH::MODEL_NAME[where],
                 search);
 
-    bDebug::Instance()->msg("SEARCH QUERY: " + queryTxt);
-
-    return this->getDBDataQML(queryTxt);
+    return this->getDBData(queryTxt);
 
 }
 

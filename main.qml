@@ -335,6 +335,7 @@ Maui.ApplicationWindow
         Maui.MenuItem
         {
             text: "Vvave Stream"
+            icon.name: "headphones"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -345,6 +346,7 @@ Maui.ApplicationWindow
         Maui.MenuItem
         {
             text: qsTr("Folders")
+            icon.name: "folder-open"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -355,6 +357,7 @@ Maui.ApplicationWindow
         Maui.MenuItem
         {
             text: qsTr("Linking")
+            icon.name: "view-links"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -366,6 +369,7 @@ Maui.ApplicationWindow
         Maui.MenuItem
         {
             text: qsTr("YouTube")
+            icon.name: "internet-services"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -376,6 +380,7 @@ Maui.ApplicationWindow
         Maui.MenuItem
         {
             text: qsTr("Spotify")
+            icon.name: "internet-services"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -388,14 +393,14 @@ Maui.ApplicationWindow
         Maui.MenuItem
         {
             text: qsTr("Sources...")
+            icon.name: "folder-add"
             onTriggered: sourcesDialog.open()
         },
 
         Maui.Menu
         {
             title: qsTr("Collection")
-
-
+//            icon.name: "settings-configure"
 
             Maui.MenuItem
             {
@@ -667,9 +672,7 @@ Maui.ApplicationWindow
                         {
                             var query = Q.GET.albumTracks_.arg(album)
                             query = query.arg(artist)
-
                             query = query.arg(data.artist)
-                            var tracks = bae.get(query)
 
                             mainPlaylist.list.clear()
                             mainPlaylist.list.query = query
@@ -717,11 +720,13 @@ Maui.ApplicationWindow
 
                         onPlayAll:
                         {
-
                             var query = Q.GET.artistTracks_.arg(artist)
                             query = query.arg(data.artist)
-                            var tracks = bae.get(query)
-                            Player.playAll(tracks)
+
+                            mainPlaylist.list.clear()
+                            mainPlaylist.list.sortBy = Tracks.NONE
+                            mainPlaylist.list.query = query
+                            Player.playAll()
                         }
 
                         onAppendAll:

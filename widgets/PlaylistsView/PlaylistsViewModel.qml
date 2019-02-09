@@ -6,6 +6,8 @@ import org.kde.mauikit 1.0 as Maui
 import PlaylistsList 1.0
 import BaseModel 1.0
 
+import TracksList 1.0
+
 import "../../utils"
 
 import "../../view_models"
@@ -71,26 +73,31 @@ BabeList
             onClicked :
             {
                 currentIndex = index
-                var playlist = list.get(index).playlist
-                filterList.section.property = ""
+                var playlist = _playlistsList.get(index).playlist
+                filterList.group = false
 
                 switch(playlist)
                 {
                 case "Most Played":
 
                     playlistViewRoot.populate(Q.GET.mostPlayedTracks);
+                    filterList.list.sortBy = Tracks.COUNT
                     break;
 
                 case "Favorites":
-                    filterList.section.property = "stars"
-                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    filterList.list.sortBy = Tracks.RATE
+                    filterList.group = true
+
+                    playlistViewRoot.populate(Q.GET.favoriteTracks);                    
                     break;
 
                 case "Recent":
                     playlistViewRoot.populate(Q.GET.recentTracks);
+                    filterList.list.sortBy = Tracks.ADDDATE
+                    filterList.group = true
                     break;
 
-                case "Babes":
+                case "Favs":
                     playlistViewRoot.populate(Q.GET.babedTracks);
                     break;
 

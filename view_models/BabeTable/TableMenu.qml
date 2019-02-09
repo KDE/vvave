@@ -29,7 +29,7 @@ Maui.Menu
     signal rateClicked(var paths, int rate)
     signal colorClicked(var paths, string color)
 
-    property alias menuItem : customItems.children
+    property alias menuItem : control.content
 
     Maui.MenuItem
     {
@@ -103,12 +103,6 @@ Maui.Menu
             //            listModel.remove(list.currentIndex)
             close()
         }
-    }
-
-    Column
-    {
-        id: customItems
-        width: parent.implicitWidth
     }
 
     Maui.MenuItem

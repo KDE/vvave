@@ -100,8 +100,7 @@ BabeTable
 
                 searchTable.headBarTitle = searchTxt
                 var queries = searchTxt.split(",")
-                searchRes = bae.searchFor(queries)
-                populate(searchView.searchRes)
+                searchTable.list.searchQueries(queries)
                 searchTable.forceActiveFocus()
                 suggestionsPopup.close()
             }

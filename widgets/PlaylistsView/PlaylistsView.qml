@@ -18,9 +18,9 @@ Kirigami.PageRow
     property string playlistQuery
     property alias playlistViewModel : playlistViewModel
 
-//    property alias list : _playlistsList
-//    property alias listModel: _playlistsModel
-//    property alias listView : playlistViewModel.listView
+    //    property alias list : _playlistsList
+    //    property alias listModel: _playlistsModel
+    //    property alias listView : playlistViewModel.listView
 
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
@@ -121,13 +121,13 @@ Kirigami.PageRow
         holder.emojiSize: iconSizes.huge
 
         headerMenu.menuItem:  [
-            MenuItem
+            Maui.MenuItem
             {
                 enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
                 text: "Sync tags"
                 onTriggered: {}
             },
-            MenuItem
+            Maui.MenuItem
             {
                 enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
                 text: "Play-n-Sync"
@@ -137,7 +137,7 @@ Kirigami.PageRow
                     syncAndPlay(playlistViewModel.currentIndex)
                 }
             },
-            MenuItem
+            Maui.MenuItem
             {
                 enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
                 text: "Remove playlist"
@@ -215,19 +215,11 @@ Kirigami.PageRow
 
     function populate(query)
     {
-
         if(!playlistViewRoot.wideMode)
             playlistViewRoot.currentIndex = 1
 
-        playlistQuery = query
-        filterList.clearTable()
-
-        var tracks = bae.get(query)
-
-        if(tracks.length>0)
-            for(var i in tracks)
-                filterList.model.append(tracks[i])
-
+        playlistViewRoot.playlistQuery = query
+        filterList.list.query = playlistViewRoot.playlistQuery
     }
 
     function refresh()

@@ -4,13 +4,14 @@ import QtQuick.Controls 2.2
 import org.kde.mauikit 1.0 as Maui
 import "../../view_models"
 
-Maui.Popup
+Maui.Dialog
 {
     property string pathToRemove : ""
 
     maxWidth: unit * 600
     maxHeight: unit * 500
-
+page.margins: 0
+defaultButtons: false
     function scanDir(folderUrl)
     {
         bae.scanDir(folderUrl)
@@ -33,7 +34,7 @@ Maui.Popup
         id: sources
         anchors.fill: parent
         headBar.visible: true
-        headBarExit: true
+        headBarExit: false
         headBarTitle: qsTr("Sources")
         Layout.fillWidth: true
         Layout.fillHeight: true
@@ -111,8 +112,8 @@ Maui.Popup
 
     function getSources()
     {
-        sources.clearTable()
-        var folders = bae.getSourcesFolders()
+        sources.model.clear()
+        var folders = bae.getSourceFolders()
         for(var i in folders)
             sources.model.append({url : folders[i]})
     }

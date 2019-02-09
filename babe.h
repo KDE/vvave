@@ -49,6 +49,7 @@ public:
     Q_INVOKABLE QString albumWiki(const QString &album, const QString &artist);
 
     Q_INVOKABLE QVariantList getFolders();
+    Q_INVOKABLE QStringList getSourceFolders();
 
     /* SETTINGS */
     Q_INVOKABLE void scanDir(const QString &url);
@@ -85,7 +86,6 @@ public:
 
     /*USEFUL*/
     Q_INVOKABLE QString loadCover(const QString &url);
-    Q_INVOKABLE QVariantList searchFor(const QStringList &queries);
 
     /*KDE*/
     Q_INVOKABLE void notify(const QString &title, const QString &body);
