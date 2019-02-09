@@ -230,14 +230,12 @@ BabeList
 
         onRateClicked:
         {
-            var value = H.rateIt(paths, rate)
-            listView.currentItem.rate(H.setStars(value))
-            listView.model.get(listView.currentIndex).rate = value
+            list.rate(listView.currentIndex, rate);
         }
 
         onColorClicked:
         {
-                list.color(listView.currentIndex, color);
+            list.color(listView.currentIndex, color);
         }
     }
 
