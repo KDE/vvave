@@ -207,22 +207,22 @@ Maui.ApplicationWindow
 
     headBar.middleContent : [
 
-//        Row
-//        {
-//            Image
-//            {
-//                height: iconSizes.medium
-//                width: height
+        //        Row
+        //        {
+        //            Image
+        //            {
+        //                height: iconSizes.medium
+        //                width: height
 
-//                source:  "file://" + encodeURIComponent(
-//                             currentArtwork)
-//            }
+        //                source:  "file://" + encodeURIComponent(
+        //                             currentArtwork)
+        //            }
 
-//            Label
-//            {
-//                text: "Now"
-//            }
-//        },
+        //            Label
+        //            {
+        //                text: "Now"
+        //            }
+        //        },
 
         Maui.ToolButton
         {
@@ -286,6 +286,92 @@ Maui.ApplicationWindow
             tooltipText: pageStack.wideMode ? "" : text
         }
     ]
+    footBar.visible: !mainlistEmpty
+    footBar.leftContent : Maui.ToolButton
+    {
+        id: menuBtn
+        iconName: "overflow-menu"
+        onClicked: mainPlaylist.menu.popup()
+    }
+    footBar.middleContent: [
+
+        Maui.ToolButton
+        {
+            id: babeBtnIcon
+            iconName: "love"
+
+            iconColor: currentBabe ? babeColor : cover.colorScheme.textColor
+            onClicked: if (!mainlistEmpty)
+            {
+                var value = H.faveIt([mainPlaylist.list.model.get(currentTrackIndex).url])
+                currentBabe = value
+                mainPlaylist.list.model.get(currentTrackIndex).babe = value ? "1" : "0"
+            }
+        },
+
+        Maui.ToolButton
+        {
+            iconName: "media-skip-backward"
+            iconColor: cover.colorScheme.textColor
+            onClicked: Player.previousTrack()
+            onPressAndHold: Player.playAt(prevTrackIndex)
+        },
+
+        Maui.ToolButton
+        {
+            id: playIcon
+            iconColor: cover.colorScheme.textColor
+            iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
+            onClicked:
+            {
+                player.playing = !player.playing
+            }
+        },
+
+        Maui.ToolButton
+        {
+            id: nextBtn
+            iconColor: cover.colorScheme.textColor
+            iconName: "media-skip-forward"
+            onClicked: Player.nextTrack()
+            onPressAndHold: Player.playAt(Player.shuffle())
+        },
+
+        Maui.ToolButton
+        {
+            id: shuffleBtn
+            iconColor: cover.colorScheme.textColor
+            iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+            onClicked:
+            {
+                isShuffle = !isShuffle
+                bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
+            }
+        }
+    ]
+
+
+
+    /*Maui.ToolButton
+    {
+        id: infoBtn
+        iconName:  "documentinfo"
+        onClicked:
+        {
+            if( stackView.currentItem !== table)
+            {
+                cover.visible  = true
+                stackView.pop(table)
+                albumsRoll.positionAlbum(currentTrackIndex)
+            }else
+            {
+                cover.visible  = false
+                stackView.push(infoView)
+            }
+        }
+    }*/
+
+
 
     onSearchButtonClicked:
     {
@@ -295,14 +381,14 @@ Maui.ApplicationWindow
         riseContent()
     }
 
-    FloatingDisk
-    {
-        id: floatingDisk
-        x: space.big
-        y: pageStack.height - height
+//    FloatingDisk
+//    {
+//        id: floatingDisk
+//        x: space.big
+//        y: pageStack.height - height
 
-        z: 999
-    }
+//        z: 999
+//    }
 
     Maui.ShareDialog
     {
@@ -400,7 +486,7 @@ Maui.ApplicationWindow
         Maui.Menu
         {
             title: qsTr("Collection")
-//            icon.name: "settings-configure"
+            //            icon.name: "settings-configure"
 
             Maui.MenuItem
             {

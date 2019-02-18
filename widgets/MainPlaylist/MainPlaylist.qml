@@ -18,16 +18,17 @@ Maui.Page
 {
     id: mainPlaylistRoot
 
-    property alias artwork : artwork
+    //    property alias artwork : artwork
     property alias albumsRoll : albumsRoll
-    property alias cover : cover
+    //    property alias cover : cover
     property alias list : table.list
     property alias listModel: table.listModel
     property alias listView : table.listView
     property alias table: table
     property alias infoView : infoView
     property alias progressBar: progressBar
-    property alias animFooter : animFooter
+        property alias animFooter : animFooter
+    property alias menu : playlistMenu
 
     property alias contextMenu: table.contextMenu
     property alias headerMenu: table.headerMenu
@@ -37,91 +38,8 @@ Maui.Page
     signal coverPressed(var tracks)
     focus: true
 
- margins: 0
-headBar.visible: false
-footBar.visible: !mainlistEmpty
-    footBar.middleContent: [
-
-        Maui.ToolButton
-        {
-            id: babeBtnIcon
-            iconName: "love"
-
-            iconColor: currentBabe ? babeColor : cover.colorScheme.textColor
-            onClicked: if (!mainlistEmpty)
-            {
-                var value = H.faveIt([mainPlaylist.list.model.get(currentTrackIndex).url])
-                currentBabe = value
-                mainPlaylist.list.model.get(currentTrackIndex).babe = value ? "1" : "0"
-            }
-        },
-
-        Maui.ToolButton
-        {
-            iconName: "media-skip-backward"
-            iconColor: cover.colorScheme.textColor
-            onClicked: Player.previousTrack()
-            onPressAndHold: Player.playAt(prevTrackIndex)
-        },
-
-        Maui.ToolButton
-        {
-            id: playIcon
-            iconColor: cover.colorScheme.textColor
-            iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
-            onClicked:
-            {
-                player.playing = !player.playing
-            }
-        },
-
-        Maui.ToolButton
-        {
-            id: nextBtn
-            iconColor: cover.colorScheme.textColor
-            iconName: "media-skip-forward"
-            onClicked: Player.nextTrack()
-            onPressAndHold: Player.playAt(Player.shuffle())
-        },
-
-        Maui.ToolButton
-        {
-            id: shuffleBtn
-            iconColor: cover.colorScheme.textColor
-            iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
-            onClicked:
-            {
-                isShuffle = !isShuffle
-                bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
-            }
-        }
-    ]
-
-     footBar.leftContent: Maui.ToolButton
-    {
-        id: infoBtn
-        iconName: stackView.currentItem === table ? "documentinfo" : "go-previous"
-        onClicked:
-        {
-            if( stackView.currentItem !== table)
-            {
-                cover.visible  = true
-                stackView.pop(table)
-                albumsRoll.positionAlbum(currentTrackIndex)
-            }else
-            {
-                cover.visible  = false
-                stackView.push(infoView)
-            }
-        }
-    }
-
-    footBar.rightContent : Maui.ToolButton
-    {
-        id: menuBtn
-        iconName: "overflow-menu"
-        onClicked: isMobile ? playlistMenu.open() : playlistMenu.popup()
-    }
+    margins: 0
+    headBar.visible: false
 
 
 
@@ -166,10 +84,84 @@ footBar.visible: !mainlistEmpty
     {
         id: playlistMenu
         onClearOut: Player.clearOutPlaylist()
-        onHideCover: cover.visible = !cover.visible
+        //        onHideCover: cover.visible = !cover.visible
         onClean: Player.cleanPlaylist()
         onSaveToClicked: table.saveList()
     }
+
+    footBar.visible: !mainlistEmpty
+    footBar.implicitHeight: toolBarHeight * 1.3
+    footBar.leftContent:  AlbumsRoll
+    {
+        id: albumsRoll
+        height: footBar.height
+        width: footBar.width *0.9
+    }
+
+    footBar.background: Rectangle
+    {
+        id: footerBg
+        clip : true
+        height: footBar.implicitHeight
+        color: "transparent"
+
+        Image
+        {
+            id: artworkBg
+            height: parent.height
+            width: parent.width
+
+            sourceSize.width: parent.width
+            sourceSize.height: parent.height
+
+            fillMode: Image.PreserveAspectCrop
+            cache: true
+            antialiasing: true
+            smooth: true
+            asynchronous: true
+
+            source: "file://"+encodeURIComponent(currentArtwork)
+        }
+
+
+        SequentialAnimation
+        {
+            id: animFooter
+            PropertyAnimation
+            {
+                target: footerBg
+                property: "color"
+                easing.type: Easing.InOutQuad
+                from: "black"
+                to: darkViewBackgroundColor
+                duration: 500
+            }
+        }
+
+        FastBlur
+        {
+            id: fastBlur
+            anchors.fill: parent
+            y:1
+            source: artworkBg
+            radius: 100
+            transparentBorder: false
+            cached: true
+            z:1
+            clip: true
+
+            Rectangle
+            {
+                anchors.fill: parent
+                color: viewBackgroundColor
+                opacity: 0.85
+
+            }
+        }
+
+
+    }
+
 
     ColumnLayout
     {
@@ -304,112 +296,8 @@ footBar.visible: !mainlistEmpty
             color: borderColor
         }
 
-        Maui.Page
-        {
-            id: cover
-            visible: false
-            Layout.alignment: Qt.AlignBottom | Qt.AlignTop
-            Layout.fillWidth: true
-            Layout.preferredHeight: !mainlistEmpty ? coverSize : 0
-            Layout.maximumHeight: coverSize
-            margins: 0
-            headBarExit: false
-            //            headBar.visible: true
-            //            headBar.implicitHeight: 0
-            //            floatingBar: true
-            //            footBarOverlap: true
-            altToolBars: true
-
-            //            footBar.visible: !mainlistEmpty
-
-            headBar.background: Rectangle
-            {
-                color: "transparent"
-            }
-
-            footBar.background: Rectangle
-            {
-                color: "transparent"
-            }
-
-            headBar.leftContent: Label
-            {
-                visible: !mainlistEmpty && infoLabels
-                text: progressTimeLabel
-                color: cover.colorScheme.textColor
-                clip: true
-            }
-
-            headBar.rightContent: Label
-            {
-                visible: !mainlistEmpty && infoLabels
-                text: durationTimeLabel
-                color: cover.colorScheme.textColor
-                clip: true
-            }
-            headBarTitle: currentTrack.title ? currentTrack.title + " - " + currentTrack.artist : ""
 
 
-
-            background: Rectangle
-            {
-                visible: !mainlistEmpty
-
-                color: viewBackgroundColor
-                z: -1
-
-                Image
-                {
-                    id: artwork
-                    visible: !mainlistEmpty
-                    anchors.fill: parent
-                    sourceSize.height: coverSize * 0.2
-                    sourceSize.width: coverSize * 0.2
-                    source: currentArtwork ? "file://"+encodeURIComponent(currentArtwork)  : "qrc:/assets/cover.png"
-                    fillMode: Image.PreserveAspectCrop
-                }
-
-                FastBlur
-                {
-                    visible: artwork.visible
-                    anchors.fill: parent
-                    source: artwork
-                    radius: 100
-                    transparentBorder: false
-                    cached: true
-
-
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        opacity: 0.8
-                        color: cover.colorScheme.viewBackgroundColor
-                    }
-                }
-
-                SequentialAnimation
-                {
-                    id: animFooter
-                    //                        PropertyAnimation
-                    //                        {
-                    //                            target: footerBg
-                    //                            property: "color"
-                    //                            easing.type: Easing.InOutQuad
-                    //                            from: "black"
-                    //                            to: darkViewBackgroundColor
-                    //                            duration: 500
-                    //                        }
-                }
-            }
-
-            content: AlbumsRoll
-            {
-                id: albumsRoll
-                height: visible ?  parent.height : 0
-                width: parent.width
-                anchors.verticalCenter: parent.vertical
-            }
-        }
 
         Slider
         {
@@ -458,49 +346,54 @@ footBar.visible: !mainlistEmpty
             }
         }
 
-    }
-
-    function goFocusMode()
-    {
-
-        if(focusMode)
+        Kirigami.Separator
         {
-            if(isMobile)
-            {
-                root.width = screenWidth
-                root.height= screenHeight
-            }else
-            {
-                cover.y = 0
-                root.maximumWidth = screenWidth
-                root.minimumWidth = columnWidth
-                root.maximumHeight = screenHeight
-                root.minimumHeight = columnWidth
-
-                root.width = columnWidth
-                root.height = 700
-            }
-
-        }else
-        {
-            if(isMobile)
-            {
-
-            }else
-            {
-                root.maximumWidth = columnWidth
-                root.minimumWidth = columnWidth
-                root.maximumHeight = columnWidth
-                root.minimumHeight = columnWidth
-                //                root.footer.visible = false
-                //                mainlistContext.visible = false
-
-
-            }
+            Layout.fillWidth: true
+            color: borderColor
         }
-
-        focusMode = !focusMode
     }
+
+    //    function goFocusMode()
+    //    {
+
+    //        if(focusMode)
+    //        {
+    //            if(isMobile)
+    //            {
+    //                root.width = screenWidth
+    //                root.height= screenHeight
+    //            }else
+    //            {
+    //                cover.y = 0
+    //                root.maximumWidth = screenWidth
+    //                root.minimumWidth = columnWidth
+    //                root.maximumHeight = screenHeight
+    //                root.minimumHeight = columnWidth
+
+    //                root.width = columnWidth
+    //                root.height = 700
+    //            }
+
+    //        }else
+    //        {
+    //            if(isMobile)
+    //            {
+
+    //            }else
+    //            {
+    //                root.maximumWidth = columnWidth
+    //                root.minimumWidth = columnWidth
+    //                root.maximumHeight = columnWidth
+    //                root.minimumHeight = columnWidth
+    //                //                root.footer.visible = false
+    //                //                mainlistContext.visible = false
+
+
+    //            }
+    //        }
+
+    //        focusMode = !focusMode
+    //    }
 
     function play(index)
     {
