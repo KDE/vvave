@@ -27,7 +27,7 @@ Maui.Page
     property alias table: table
     property alias infoView : infoView
     property alias progressBar: progressBar
-        property alias animFooter : animFooter
+    property alias animFooter : animFooter
     property alias menu : playlistMenu
 
     property alias contextMenu: table.contextMenu
@@ -91,12 +91,67 @@ Maui.Page
 
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: toolBarHeight * 1.3
-    footBar.leftContent:  AlbumsRoll
+
+    footBarItem: RowLayout
     {
-        id: albumsRoll
-        height: footBar.height
-        width: footBar.width *0.9
+        anchors.fill : parent
+        anchors.rightMargin: space.small
+        anchors.leftMargin: space.small
+
+        AlbumsRoll
+        {
+            id: albumsRoll
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
+
+        Maui.ToolButton
+        {
+            id: infoBtn
+            iconName:  "documentinfo"
+            Layout.fillHeight: true
+
+            onClicked:
+            {
+                if( stackView.currentItem !== table)
+                {
+                    stackView.pop(table)
+                    albumsRoll.positionAlbum(currentTrackIndex)
+                }else
+                {
+                    stackView.push(infoView)
+                }
+            }
+        }
+
+        Maui.ToolButton
+        {
+            id: menuBtn
+            iconName: "overflow-menu"
+            onClicked: playlistMenu.popup()
+            Layout.fillHeight: true
+        }
+
     }
+
+    //    footBar.rightContent: Maui.ToolButton
+    //    {
+    //        id: infoBtn
+    //        iconName:  "documentinfo"
+    //        onClicked:
+    //        {
+    //            if( stackView.currentItem !== table)
+    //            {
+    //                stackView.pop(table)
+    //                albumsRoll.positionAlbum(currentTrackIndex)
+    //            }else
+    //            {
+    //                stackView.push(infoView)
+    //            }
+    //        }
+    //    }
+
+
 
     footBar.background: Rectangle
     {

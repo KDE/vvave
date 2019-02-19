@@ -37,15 +37,10 @@ Maui.ApplicationWindow
 {
 
     id: root
-    //    minimumWidth: !isMobile ? columnWidth : 0
-    //    minimumHeight: !isMobile ? columnWidth + 64 : 0
-    //        flags: Qt.FramelessWindowHint
     title: qsTr("vvave")
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
-    //    property alias playIcon: playIcon
-    //    property alias babeBtnIcon: babeBtnIcon
     property alias progressBar: mainPlaylist.progressBar
     property alias animFooter: mainPlaylist.animFooter
     property alias mainPlaylist: mainPlaylist
@@ -53,6 +48,7 @@ Maui.ApplicationWindow
 
     about.appIcon: "qrc:/assets/vvave.svg"
     about.appDescription: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
+
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
@@ -64,10 +60,13 @@ Maui.ApplicationWindow
 
     property int currentTrackIndex: 0
     property int prevTrackIndex: 0
+
     property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.get(0).artwork : ""
     property bool currentBabe: currentTrack.babe == "0" ? false : true
+
     property string durationTimeLabel: player.duration
     property string progressTimeLabel: player.transformTime(player.position/1000)
+
     property bool isPlaying: player.playing
     property bool autoplay: bae.loadSetting("AUTOPLAY", "BABE",
                                             false) === "true" ? true : false
@@ -78,14 +77,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** UI PROPS ********************/
     /*************************************************/
-
-    readonly property real opacityLevel: 0.8
-    property int miniArtSize: iconSizes.large
-
     property int columnWidth: Kirigami.Units.gridUnit * 17
-    property int coverSize: focusMode ? columnWidth :
-                                        (isAndroid ? Math.sqrt(root.width * root.height) * 0.4 :
-                                                     columnWidth * (isMobile ? 0.7 : 0.6))
 
 
     /***************************************************/
@@ -198,12 +190,13 @@ Maui.ApplicationWindow
 
     /* UI */
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
-    //    altToolBars: false
+    altToolBars: false
     accentColor: bae.babeColor()
     headBarFGColor: altColorText
     headBarBGColor: currentView === viewsIndex.vvave ? "#7e57c2" : "#212121"
     colorSchemeName: "vvave"
     altColorText: darkTextColor
+    floatingBar: false
 
     headBar.middleContent : [
 
@@ -287,12 +280,6 @@ Maui.ApplicationWindow
         }
     ]
     footBar.visible: !mainlistEmpty
-    footBar.leftContent : Maui.ToolButton
-    {
-        id: menuBtn
-        iconName: "overflow-menu"
-        onClicked: mainPlaylist.menu.popup()
-    }
     footBar.middleContent: [
 
         Maui.ToolButton
@@ -300,19 +287,18 @@ Maui.ApplicationWindow
             id: babeBtnIcon
             iconName: "love"
 
-            iconColor: currentBabe ? babeColor : cover.colorScheme.textColor
+            iconColor: currentBabe ? babeColor : textColor
             onClicked: if (!mainlistEmpty)
             {
-                var value = H.faveIt([mainPlaylist.list.model.get(currentTrackIndex).url])
-                currentBabe = value
-                mainPlaylist.list.model.get(currentTrackIndex).babe = value ? "1" : "0"
+                mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
+                currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
             }
         },
 
         Maui.ToolButton
         {
             iconName: "media-skip-backward"
-            iconColor: cover.colorScheme.textColor
+            iconColor: textColor
             onClicked: Player.previousTrack()
             onPressAndHold: Player.playAt(prevTrackIndex)
         },
@@ -320,7 +306,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             id: playIcon
-            iconColor: cover.colorScheme.textColor
+            iconColor: textColor
             iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
             onClicked:
             {
@@ -331,7 +317,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             id: nextBtn
-            iconColor: cover.colorScheme.textColor
+            iconColor: textColor
             iconName: "media-skip-forward"
             onClicked: Player.nextTrack()
             onPressAndHold: Player.playAt(Player.shuffle())
@@ -340,7 +326,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             id: shuffleBtn
-            iconColor: cover.colorScheme.textColor
+            iconColor: textColor
             iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
             onClicked:
             {
@@ -351,28 +337,6 @@ Maui.ApplicationWindow
     ]
 
 
-
-    /*Maui.ToolButton
-    {
-        id: infoBtn
-        iconName:  "documentinfo"
-        onClicked:
-        {
-            if( stackView.currentItem !== table)
-            {
-                cover.visible  = true
-                stackView.pop(table)
-                albumsRoll.positionAlbum(currentTrackIndex)
-            }else
-            {
-                cover.visible  = false
-                stackView.push(infoView)
-            }
-        }
-    }*/
-
-
-
     onSearchButtonClicked:
     {
         pageStack.currentIndex = 1
@@ -381,14 +345,14 @@ Maui.ApplicationWindow
         riseContent()
     }
 
-//    FloatingDisk
-//    {
-//        id: floatingDisk
-//        x: space.big
-//        y: pageStack.height - height
+    //    FloatingDisk
+    //    {
+    //        id: floatingDisk
+    //        x: space.big
+    //        y: pageStack.height - height
 
-//        z: 999
-//    }
+    //        z: 999
+    //    }
 
     Maui.ShareDialog
     {

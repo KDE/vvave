@@ -15,7 +15,12 @@
 #include <QCursor>
 #include "services/local/taginfo.h"
 //#include "Python.h"
+
+#ifdef STATIC_MAUIKIT
+#include "fm.h"
+#else
 #include <MauiKit/fm.h>
+#endif
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include <QWidget>

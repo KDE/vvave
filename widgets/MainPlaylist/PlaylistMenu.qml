@@ -19,21 +19,7 @@ Maui.Menu
     {
         text: qsTr("Clean...")
         onTriggered: clean()
-    }
-
-    Maui.MenuItem
-    {
-        text: qsTr("Cover list...")
-        checkable: true
-        checked: cover.visible
-        onTriggered: hideCover()
-    }
-
-    Maui.MenuItem
-    {
-        text: qsTr("Callibrate")
-        onTriggered: callibrate()
-    }
+    }  
 
     Maui.MenuItem
     {

@@ -31,7 +31,7 @@ Popup
     {
         id: notifyBg
         color: altColor
-        opacity: opacityLevel
+        opacity: 0.8
 
     }
 
