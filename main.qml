@@ -12,6 +12,7 @@ import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
 import "widgets/SearchView"
+import "widgets/CloudView"
 
 import "view_models"
 import "view_models/BabeTable"
@@ -21,6 +22,8 @@ import "services/web"
 import "services/web/Spotify"
 
 import "view_models/BabeGrid"
+
+import "widgets/InfoView"
 
 import "db/Queries.js" as Q
 import "utils/Help.js" as H
@@ -58,7 +61,7 @@ Maui.ApplicationWindow
                                     stars: "0"
                                 })
 
-    property int currentTrackIndex: 0
+    property int currentTrackIndex: -1
     property int prevTrackIndex: 0
 
     property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.get(0).artwork : ""
@@ -303,6 +306,13 @@ Maui.ApplicationWindow
         searchView.searchInput.forceActiveFocus()
     }
 
+    InfoView
+    {
+        id: infoView
+        maxWidth: parent.width * 0.8
+        maxHeight: parent.height * 0.9
+    }
+
     Maui.ShareDialog
     {
         id: shareDialog
@@ -311,10 +321,6 @@ Maui.ApplicationWindow
     Maui.FileDialog
     {
         id: fmDialog
-        onlyDirs: false
-        filterType: FMList.AUDIO
-        sortBy: FMList.MODIFIED
-        mode: modes.OPEN
     }
 
     SourcesDialog
@@ -499,7 +505,7 @@ Maui.ApplicationWindow
             anchors.fill: parent
             z: -999
             color: altColor
-            opacity: opacityLevel
+            opacity: 0.8
 
             SequentialAnimation
             {
@@ -636,11 +642,18 @@ Maui.ApplicationWindow
                     {
                         target: tracksView
                         onRowClicked: Player.addTrack(tracksView.list.get(index))
-                        onQuickPlayTrack: Player.quickPlay(tracksView.list.get(index))
-                        onPlayAll: Player.playAll(bae.get(Q.GET.allTracks))
+                        onQuickPlayTrack: Player.quickPlay(tracksView.list.get(index))                        
+                        onPlayAll:
+                        {
+                            var query = Q.GET.allTracks
+
+                            mainPlaylist.list.clear()
+                            mainPlaylist.list.query = query
+                            Player.playAll()
+                        }
                         onAppendAll:
                         {
-                            mainPlaylist.list.append(Q.GET.allTracks)
+                            mainPlaylist.list.appendQuery(Q.GET.allTracks)
                             mainPlaylist.listView.positionViewAtEnd()
                         }
 
@@ -743,6 +756,7 @@ Maui.ApplicationWindow
                         onAppendAll:
                         {
                             var query = Q.GET.artistTracks_.arg(artist)
+
                             mainPlaylist.list.appendQuery(query)
                             mainPlaylist.listView.positionViewAtEnd()
                         }
@@ -752,7 +766,9 @@ Maui.ApplicationWindow
                 PlaylistsView
                 {
                     id: playlistsView
-                    Connections {
+
+                    Connections
+                    {
                         target: playlistsView
                         onRowClicked: Player.addTrack(track)
                         onQuickPlayTrack: Player.quickPlay(track)
@@ -804,10 +820,30 @@ Maui.ApplicationWindow
 
                         onRowClicked: Player.addTrack(foldersView.list.model.get(index))
                         onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
-                        onPlayAll: Player.playAll(foldersView.getTracks())
-                        onAppendAll: Player.appendAll(foldersView.getTracks())
+                        onPlayAll:
+                        {
+                            mainPlaylist.list.clear()
+                            mainPlaylist.list.sortBy = Tracks.NONE
+                            mainPlaylist.list.query = foldersView.list.list.query
+                            Player.playAll()
+                        }
+
+                        onAppendAll:
+                        {
+                            var query = foldersView.list.list.query
+                            mainPlaylist.list.appendQuery(query)
+                            mainPlaylist.listView.positionViewAtEnd()
+                        }
+
                         onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
                     }
+                }
+
+                CloudView
+                {
+                    id: cloudView
+
+                    onQuickPlayTrack: Player.quickPlay(cloudView.list.get(index))
                 }
 
                 BabeitView
@@ -915,6 +951,7 @@ Maui.ApplicationWindow
 
         onTrackLyricsReady:
         {
+            console.log(lyrics)
             if (url === currentTrack.url)
                 Player.setLyrics(lyrics)
         }

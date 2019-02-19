@@ -71,5 +71,6 @@
         <file>widgets/FoldersView.qml</file>
         <file>assets/vvave.svg</file>
         <file>assets/materialdesignicons-webfont.ttf</file>
+        <file>widgets/CloudView/CloudView.qml</file>
     </qresource>
 </RCC>

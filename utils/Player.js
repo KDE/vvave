@@ -58,7 +58,7 @@ function queueTracks(tracks)
 function setLyrics(lyrics)
 {
     currentTrack.lyrics = lyrics
-    mainPlaylist.infoView.lyricsText.text = lyrics
+    infoView.lyricsText.text = lyrics
 }
 
 function stop()

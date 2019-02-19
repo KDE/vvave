@@ -5,7 +5,6 @@ import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
-import "../InfoView"
 
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
@@ -18,21 +17,17 @@ Maui.Page
 {
     id: mainPlaylistRoot
 
-    //    property alias artwork : artwork
     property alias albumsRoll : albumsRoll
-    //    property alias cover : cover
     property alias list : table.list
     property alias listModel: table.listModel
     property alias listView : table.listView
     property alias table: table
-    property alias infoView : infoView
     property alias progressBar: progressBar
     property alias animFooter : animFooter
     property alias menu : playlistMenu
 
     property alias contextMenu: table.contextMenu
     property alias headerMenu: table.headerMenu
-    property alias stack: stackView
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
@@ -40,45 +35,6 @@ Maui.Page
 
     margins: 0
     headBar.visible: false
-
-
-
-    //    headBar.middleContent: Maui.PieButton
-    //    {
-    //        iconName: "list-add"
-
-    //        model: ListModel
-    //        {
-    //            ListElement{iconName: "videoclip-amarok" ; btn: "video"}
-    //            ListElement{iconName: "documentinfo" ; btn: "info"}
-    //            ListElement{iconName: "headphones" ; btn: "similar"}
-    //        }
-
-    //        onItemClicked:
-    //        {
-    //            if(item.btn === "video")
-    //            {
-    //                youtubeView.openVideo = 1
-    //                youtube.getQuery(currentTrack.title+" "+currentTrack.artist)
-    //                pageStack.currentIndex = 1
-    //                currentView = viewsIndex.youtube
-    //            }
-
-    //            if(item.btn === "info")
-    //            {
-    //                if( stackView.currentItem !== table)
-    //                {
-    //                    cover.visible  = true
-    //                    stackView.pop(table) }
-    //                else {
-    //                    cover.visible  = false
-    //                    stackView.push(infoView)
-    //                }
-    //            }
-    //        }
-    //    }
-
-
 
     PlaylistMenu
     {
@@ -105,32 +61,32 @@ Maui.Page
             Layout.fillWidth: true
         }
 
-        Maui.ToolButton
-        {
-            id: infoBtn
-            iconName:  "documentinfo"
-            Layout.fillHeight: true
+        //        Maui.ToolButton
+        //        {
+        //            id: infoBtn
+        //            iconName:  "documentinfo"
+        //            Layout.fillHeight: true
 
-            onClicked:
-            {
-                if( stackView.currentItem !== table)
-                {
-                    stackView.pop(table)
-                    albumsRoll.positionAlbum(currentTrackIndex)
-                }else
-                {
-                    stackView.push(infoView)
-                }
-            }
-        }
+        //            onClicked:
+        //            {
+        //                if( stackView.currentItem !== table)
+        //                {
+        //                    stackView.pop(table)
+        //                    albumsRoll.positionAlbum(currentTrackIndex)
+        //                }else
+        //                {
+        //                    stackView.push(infoView)
+        //                }
+        //            }
+        //        }
 
-        Maui.ToolButton
-        {
-            id: menuBtn
-            iconName: "overflow-menu"
-            onClicked: playlistMenu.popup()
-            Layout.fillHeight: true
-        }
+        //        Maui.ToolButton
+        //        {
+        //            id: menuBtn
+        //            iconName: "overflow-menu"
+        //            onClicked: playlistMenu.popup()
+        //            Layout.fillHeight: true
+        //        }
 
     }
 
@@ -210,11 +166,8 @@ Maui.Page
                 anchors.fill: parent
                 color: viewBackgroundColor
                 opacity: 0.85
-
             }
         }
-
-
     }
 
 
@@ -225,124 +178,63 @@ Maui.Page
         width: parent.width
         spacing: 0
 
-        Item
+        //            anchors.bottom: mainPlaylistRoot.searchBox
+        BabeTable
         {
-            id: mainPlaylistItem
-            visible : !focusMode
-
+            id: table
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignBottom | Qt.AlignTop
             focus: true
-            //            anchors.bottom: mainPlaylistRoot.searchBox
-            StackView
+            headBar.visible: false
+            quickPlayVisible: false
+            coverArtVisible: true
+            trackRating: true
+            showIndicator : true
+            menuItemVisible: false
+            holder.emoji: "qrc:/assets/Radio.png"
+            holder.isMask: false
+            holder.title : "Meh!"
+            holder.body: "Start putting together your playlist!"
+            holder.emojiSize: iconSizes.huge
+            onRowClicked: play(index)
+
+            onArtworkDoubleClicked: contextMenu.babeIt(index)
+
+            Component.onCompleted:
             {
-                id: stackView
-                anchors.fill: parent
-                focus: true
+                var list = bae.lastPlaylist()
+                var n = list.length
 
-                pushEnter: Transition
+                if(n>0)
                 {
-                    PropertyAnimation
+                    for(var i = 0; i < n; i++)
                     {
-                        property: "opacity"
-                        from: 0
-                        to:1
-                        duration: 200
+                        var where = "url = \""+list[i]+"\""
+                        var query = Q.GET.tracksWhere_.arg(where)
+                        var track = bae.get(query)
+                        Player.appendTrack(track[0])
                     }
-                }
-
-                pushExit: Transition
+                }else
                 {
-                    PropertyAnimation
-                    {
-                        property: "opacity"
-                        from: 1
-                        to:0
-                        duration: 200
-                    }
+                    where = "babe = 1"
+                    query = Q.GET.tracksWhere_.arg(where)
+                    var tracks = bae.get(query)
+
+                    for(var pos=0; pos< tracks.length; pos++)
+                        Player.appendTrack(tracks[pos])
+
                 }
 
-                popEnter: Transition
-                {
-                    PropertyAnimation {
-                        property: "opacity"
-                        from: 0
-                        to:1
-                        duration: 200
-                    }
-                }
+                if(autoplay)
+                    Player.playAt(0)
 
-                popExit: Transition
-                {
-                    PropertyAnimation
-                    {
-                        property: "opacity"
-                        from: 1
-                        to:0
-                        duration: 200
-                    }
-                }
-
-                initialItem: BabeTable
-                {
-                    id: table
-                    headBar.visible: false
-                    quickPlayVisible: false
-                    coverArtVisible: true
-                    trackRating: true
-                    showIndicator : true
-                    menuItemVisible: false
-                    holder.emoji: "qrc:/assets/Radio.png"
-                    holder.isMask: false
-                    holder.title : "Meh!"
-                    holder.body: "Start putting together your playlist!"
-                    holder.emojiSize: iconSizes.huge
-                    onRowClicked: play(index)
-
-                    onArtworkDoubleClicked: contextMenu.babeIt(index)
-
-                    Component.onCompleted:
-                    {
-                        var list = bae.lastPlaylist()
-                        var n = list.length
-
-                        if(n>0)
-                        {
-                            for(var i = 0; i < n; i++)
-                            {
-                                var where = "url = \""+list[i]+"\""
-                                var query = Q.GET.tracksWhere_.arg(where)
-                                var track = bae.get(query)
-                                Player.appendTrack(track[0])
-                            }
-                        }else
-                        {
-                            where = "babe = 1"
-                            query = Q.GET.tracksWhere_.arg(where)
-                            var tracks = bae.get(query)
-
-                            for(var pos=0; pos< tracks.length; pos++)
-                                Player.appendTrack(tracks[pos])
-
-                        }
-
-                        if(autoplay)
-                            Player.playAt(0)
-
-                        //                                    var pos = bae.lastPlaylistPos()
-                        //                                    console.log("POSSS:", pos)
-                        //                                    list.currentIndex = pos
-                        //                                    play(list.model.get(pos))
-                    }
-                }
-
-                InfoView
-                {
-                    id: infoView
-                }
-
+                //                                    var pos = bae.lastPlaylistPos()
+                //                                    console.log("POSSS:", pos)
+                //                                    list.currentIndex = pos
+                //                                    play(list.model.get(pos))
             }
+
         }
 
         Kirigami.Separator
@@ -350,9 +242,6 @@ Maui.Page
             Layout.fillWidth: true
             color: borderColor
         }
-
-
-
 
         Slider
         {

@@ -179,11 +179,12 @@ void TracksModel::append(const QVariantMap &item, const int &at)
 
 void TracksModel::appendQuery(const QString &query)
 {
-    if(this->query.isEmpty())
+    if(query.isEmpty() || query == this->query)
         return;
 
-    emit this->preListChanged();
+    this->query = query;
 
+    emit this->preListChanged();
     this->list << this->db->getDBData(query);
 
     emit this->postListChanged();

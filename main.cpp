@@ -36,6 +36,7 @@
 #include "models/tracks/tracksmodel.h"
 #include "models/albums/albumsmodel.h"
 #include "models/playlists/playlistsmodel.h"
+#include "models/cloud/cloud.h"
 #include "models/baselist.h"
 #include "models/basemodel.h"
 
@@ -110,6 +111,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
     qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
     qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
+    qmlRegisterType<Cloud>("CloudList", 1, 0, "CloudList");
 
     qmlRegisterType<Player>("Player", 1, 0, "Player");
 

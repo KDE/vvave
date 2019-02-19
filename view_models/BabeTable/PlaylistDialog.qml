@@ -27,8 +27,8 @@ Maui.Dialog
             Layout.fillWidth: true
 
             headBar.visible: false
-            holder.title: "There's not playlists"
-            holder.body: "Create a new one and start adding tracks to it"
+            holder.title: qsTr("There's not playlists")
+            holder.body: qsTr("Create a new one and start adding tracks to it")
 
             model: playlistsView.playlistModel
 

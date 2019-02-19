@@ -5,15 +5,19 @@ import QtGraphicalEffects 1.0
 import org.kde.mauikit 1.0 as Maui
 import "../../view_models"
 
-Page
+Maui.Dialog
 {
-    id: infoRoot
-    property alias lyricsText :lyricsText
+    id: control
+
+    defaultButtons: false
+    property alias lyricsText : lyricsText
     property string wikiArtist
     property string wikiAlbum
     property string artistHead
 
     property int currentView : 0
+
+    colorScheme.backgroundColor: darkDarkColor
 
     clip: true
 
@@ -23,10 +27,6 @@ Page
         anchors.fill: parent
 
         currentIndex: currentView
-        background: Rectangle
-        {
-            color: darkDarkColor
-        }
 
         Rectangle
         {
@@ -53,20 +53,20 @@ Page
                 {
                     id: lyricsText
                     text: currentTrack.lyrics
-                    width: infoRoot.width      // ensure correct width
+                    width: control.width      // ensure correct width
                     height: implicitHeight
                     readOnly: true
                     padding: 20
-                    color: darkTextColor
+                    color: "white"
                     font.pointSize: fontSizes.big
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
                     textFormat: Text.RichText
                     wrapMode: Text.Wrap
-//                    activeFocusOnPress : true
-//                    selectByMouse : true
-//                    cursorPosition :0
-//                    cursorVisible: true
+                    //                    activeFocusOnPress : true
+                    //                    selectByMouse : true
+                    //                    cursorPosition :0
+                    //                    cursorVisible: true
                 }
             }
 
@@ -141,7 +141,7 @@ Page
                     Text
                     {
                         id: wikiAlbumText
-                        width: infoRoot.width      // ensure correct width
+                        width: control.width      // ensure correct width
 
                         padding: 20
                         text: wikiAlbum
@@ -164,10 +164,11 @@ Page
                     contentHeight: wikiArtistText.height
 
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
                     Text
                     {
                         id: wikiArtistText
-                        width: infoRoot.width      // ensure correct width
+                        width: control.width      // ensure correct width
 
                         padding: 20
                         text: wikiArtist
@@ -182,5 +183,12 @@ Page
                 }
             }
         }
+    }
+
+    function show(track)
+    {
+        control.open()
+
+        bae.trackLyrics(track.url)
     }
 }

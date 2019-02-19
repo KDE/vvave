@@ -44,10 +44,8 @@ bool lyricWikia::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO
     return this->parseArray();
 }
 
-
-
 bool lyricWikia::parseTrack()
-{    
+{
     QString xmlData(this->array);
 
     QDomDocument doc;

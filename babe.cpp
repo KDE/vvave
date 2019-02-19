@@ -223,12 +223,12 @@ QString Babe::albumArt(const QString &album, const QString &artist)
 
 void Babe::fetchTrackLyrics(FMH::MODEL &song)
 {
-    pulpo->registerServices({SERVICES::LyricWikia, SERVICES::Genius});
-    pulpo->setOntology(PULPO::ONTOLOGY::TRACK);
-    pulpo->setInfo(PULPO::INFO::LYRICS);
+    this->pulpo->registerServices({SERVICES::LyricWikia, SERVICES::Genius});
+    this->pulpo->setOntology(PULPO::ONTOLOGY::TRACK);
+    this->pulpo->setInfo(PULPO::INFO::LYRICS);
 
     qDebug()<<"STARTED FETCHING LYRICS";
-    pulpo->feed(song, PULPO::RECURSIVE::OFF);
+    this->pulpo->feed(song, PULPO::RECURSIVE::OFF);
 
     qDebug()<<"DONE FETCHING LYRICS";
 }

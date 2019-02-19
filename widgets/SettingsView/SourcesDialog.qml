@@ -10,8 +10,8 @@ Maui.Dialog
 
     maxWidth: unit * 600
     maxHeight: unit * 500
-page.margins: 0
-defaultButtons: false
+    page.margins: 0
+    defaultButtons: false
     function scanDir(folderUrl)
     {
         bae.scanDir(folderUrl)

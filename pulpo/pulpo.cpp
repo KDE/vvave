@@ -75,22 +75,22 @@ QStringList Pulpo::queryHtml(const QByteArray &array, const QString &className)
 {
     QStringList res;
 
-//    auto doc = QGumboDocument::parse(array);
-//    auto root = doc.rootNode();
+    //    auto doc = QGumboDocument::parse(array);
+    //    auto root = doc.rootNode();
 
-//    auto nodes = root.getElementsByTagName(HtmlTag::TITLE);
-//    Q_ASSERT(nodes.size() == 1);
+    //    auto nodes = root.getElementsByTagName(HtmlTag::TITLE);
+    //    Q_ASSERT(nodes.size() == 1);
 
-//    auto title = nodes.front();
-//    qDebug() << "title is: " << title.innerText();
+    //    auto title = nodes.front();
+    //    qDebug() << "title is: " << title.innerText();
 
-//    auto container = root.getElementsByClassName(className);
-//    //    if(container.size() == 1)
-//    //        return res;
+    //    auto container = root.getElementsByClassName(className);
+    //    //    if(container.size() == 1)
+    //    //        return res;
 
-//    auto children = container.front().children();
-//    for(const auto &i : children)
-//        res << i.innerText();
+    //    auto children = container.front().children();
+    //    for(const auto &i : children)
+    //        res << i.innerText();
 
 
     return res;
@@ -231,8 +231,6 @@ bool Pulpo::parseArray()
     case PULPO::ONTOLOGY::TRACK: return this->parseTrack();
     default: return false;
     }
-
-    return false;
 }
 
 QByteArray Pulpo::startConnection(const QString &url, const QMap<QString,QString> &headers)
@@ -251,8 +249,7 @@ QByteArray Pulpo::startConnection(const QString &url, const QMap<QString,QString
         QEventLoop loop;
         connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
 
-        connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), &loop,
-                SLOT(quit()));
+        connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), &loop, SLOT(quit()));
 
         loop.exec();
 
@@ -273,6 +270,24 @@ QByteArray Pulpo::startConnection(const QString &url, const QMap<QString,QString
 
     return QByteArray();
 }
+
+void Pulpo::startConnectionAsync(const QString &url, const QMap<QString,QString> &headers)
+{
+    if(!url.isEmpty())
+    {
+        auto downloader = new FMH::Downloader;
+        connect(downloader, &FMH::Downloader::dataReady, [=](QByteArray array)
+        {
+            qDebug()<< "DATA READY << " << array;
+            emit this->arrayReady(array);
+//            downloader->deleteLater();
+        });
+
+        qDebug()<< "trying to get lyrics for "<< url;
+        downloader->getArray(url);
+    }
+}
+
 
 
 

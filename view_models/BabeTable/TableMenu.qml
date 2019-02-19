@@ -28,6 +28,8 @@ Maui.Menu
     signal selectClicked(var paths)
     signal rateClicked(var paths, int rate)
     signal colorClicked(var paths, string color)
+    signal infoClicked()
+    signal copyToClicked()
 
     property alias menuItem : control.content
 
@@ -53,10 +55,20 @@ Maui.Menu
 
     Maui.MenuItem
     {
-        text: qsTr("Save to...")
+        text: qsTr("Add to...")
         onTriggered:
         {
             saveToClicked(paths)
+            close()
+        }
+    }
+
+    Maui.MenuItem
+    {
+        text: qsTr("Copy to cloud")
+        onTriggered:
+        {
+            copyToClicked(paths)
             close()
         }
     }
@@ -81,6 +93,16 @@ Maui.Menu
             close()
         }
     }
+
+//    Maui.MenuItem
+//    {
+//        text: qsTr("Info...")
+//        onTriggered:
+//        {
+//            infoClicked()
+//            close()
+//        }
+//    }
 
     Maui.MenuItem
     {

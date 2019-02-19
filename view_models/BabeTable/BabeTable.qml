@@ -205,13 +205,16 @@ BabeList
                     contextMenu.close()
                 }
             },
+
             MenuSeparator {},
+
             Maui.MenuItem
             {
                 text: qsTr("Go to Artist")
                 onTriggered: goToArtist()
 
             },
+
             Maui.MenuItem
             {
                 text: qsTr("Go to Album")
@@ -246,6 +249,16 @@ BabeList
         onColorClicked:
         {
             list.color(listView.currentIndex, color);
+        }
+
+        onInfoClicked:
+        {
+            infoView.show(list.get(listView.currentIndex))
+        }
+
+        onCopyToClicked:
+        {
+            cloudView.list.upload(listView.currentIndex)
         }
     }
 
