@@ -27,14 +27,15 @@ Maui.Dialog
             Layout.fillWidth: true
 
             headBar.visible: false
-            holder.message: "<h2>There's not playlists</h2><br><p>Create a new one and start adding tracks to it<p/>"
-            ListModel { id: listModel }
-            model: listModel
+            holder.title: "There's not playlists"
+            holder.body: "Create a new one and start adding tracks to it"
+
+            model: playlistsView.playlistModel
 
             delegate: Maui.LabelDelegate
             {
                 id: delegate
-                label: playlist
+                label: model.playlist
 
                 Connections
                 {
@@ -63,6 +64,7 @@ Maui.Dialog
                 onAccepted:
                 {
                     addPlaylist()
+                    playlistsView.playlistList.addTrack(playlistsList.listView.currentIndex, tracks)
                     clear()
                     close()
                 }
@@ -78,28 +80,13 @@ Maui.Dialog
 
     }
 
-    onOpened:
-    {
-        newPlaylistField.clear()
-        playlistsList.clearTable()
-        var playlists = bae.get(Q.GET.playlists)
-        if(playlists.length > 0)
-            for(var i in playlists)
-                playlistsList.model.append(playlists[i])
-
-//        newPlaylistField.forceActiveFocus()
-    }
-
     onAccepted:
     {
-        if(newPlaylistField.text && newPlaylistField.text.length > 0)
-        {
+        if(newPlaylistField.text.length)
             addPlaylist()
-            Player.addToPlaylist(tracks,newPlaylistField.text.trim())
-        }
-        else
-            Player.addToPlaylist(tracks, playlistsList.model.get(playlistsList.currentIndex).playlist)
 
+        playlistsView.playlistList.addTrack(playlistsList.listView.currentIndex, tracks)
+        close()
     }
 
     function addPlaylist()
@@ -107,11 +94,10 @@ Maui.Dialog
         if (newPlaylistField.text)
         {
             var title = newPlaylistField.text.trim()
-            if(bae.addPlaylist(title))
+            if( playlistsView.playlistList.insertAt(title, 0))
             {
-                playlistsList.model.insert(0, {playlist: title})
-                playlistsView.playlistViewModel.model.insert(9, {playlist: title})
-                playlistsList.list.positionViewAtBeginning()
+                playlistsList.listView.currentIndex = 0
+                playlistsList.listView.positionViewAtBeginning()
             }
 
             newPlaylistField.clear()

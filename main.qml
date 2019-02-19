@@ -93,10 +93,11 @@ Maui.ApplicationWindow
                                            playlists: 3,
                                            search: 4,
                                            folders: 5,
-                                           vvave: 6,
-                                           linking: 7,
-                                           youtube: 8,
-                                           spotify: 9
+                                           cloud: 6,
+                                           vvave: 7,
+                                           linking: 8,
+                                           youtube: 9,
+                                           spotify: 10
 
                                        })
 
@@ -114,7 +115,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** UI COLORS *******************/
     /*************************************************/
-    property string babeColor: bae.babeColor() //"#140032"
+    readonly property string babeColor: bae.babeColor() //"#140032"
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -127,33 +128,17 @@ Maui.ApplicationWindow
 
 
     /*HANDLE EVENTS*/
-    onWidthChanged: if (isMobile) {
-                        if (width > height)
-                            mainPlaylist.cover.visible = false
-                        else
-                            mainPlaylist.cover.visible = true
-                    }
-
     onClosing: Player.savePlaylist()
 
-
-    //    pageStack.onCurrentIndexChanged:
-    //    {
-    //        if(pageStack.currentIndex === 0 && isMobile && !pageStack.wideMode)
-    //        {
-    //            bae.androidStatusBarColor(babeColor)
-    //            Material.background = babeColor
-    //        }else
-    //        {
-    //            bae.androidStatusBarColor(babeAltColor)
-    //            Material.background = babeAltColor
-    //        }
-    //    }
     onMissingAlert:
     {
-        missingDialog.message = track.title + " by " + track.artist + " is missing"
-        missingDialog.messageBody = "Do you want to remove it from your collection?"
-        missingDialog.open()
+        var message = track.title + " by " + track.artist + " is missing"
+        var messageBody = "Do you want to remove it from your collection?"
+        notify("alert", message, messageBody, function ()
+        {
+                bae.removeTrack(currentTrack.url) //todo
+                mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
+        })
     }
 
     /*COMPONENTS*/
@@ -162,29 +147,19 @@ Maui.ApplicationWindow
     {
         id: player
         volume: 100
+        onFinishedChanged: if (!mainlistEmpty)
+                            {
+                               console.log("track fully played")
+                                if (currentTrack.url)
+                                    mainPlaylist.list.countUp(currentTrackIndex)
 
-        //        onFinishedChanged: if (!mainlistEmpty)
-        //                    {
-        //                        if (currentTrack.url)
-        //                            bae.playedTrack(currentTrack.url)
-
-        //                        Player.nextTrack()
-        //                    }
+                                Player.nextTrack()
+                            }
     }
 
     BabeNotify
     {
-        id: babeNotify
-    }
-
-    Maui.Dialog
-    {
-        id: missingDialog
-        title: "Missing file"
-        onAccepted: {
-            bae.removeTrack(currentTrack.url)
-            mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
-        }
+        id: babeNotify //todo
     }
 
 
@@ -200,27 +175,10 @@ Maui.ApplicationWindow
 
     headBar.middleContent : [
 
-        //        Row
-        //        {
-        //            Image
-        //            {
-        //                height: iconSizes.medium
-        //                width: height
-
-        //                source:  "file://" + encodeURIComponent(
-        //                             currentArtwork)
-        //            }
-
-        //            Label
-        //            {
-        //                text: "Now"
-        //            }
-        //        },
-
         Maui.ToolButton
         {
             iconName: "headphones"
-            iconColor: !accent ? babeColor : altColorText
+            iconColor: !accent  || isPlaying  ? babeColor : altColorText
             onClicked: pageStack.currentIndex = 0
 
             text: qsTr("Now")
@@ -279,6 +237,7 @@ Maui.ApplicationWindow
             tooltipText: pageStack.wideMode ? "" : text
         }
     ]
+
     footBar.visible: !mainlistEmpty
     footBar.middleContent: [
 
@@ -342,17 +301,7 @@ Maui.ApplicationWindow
         pageStack.currentIndex = 1
         currentView = viewsIndex.search
         searchView.searchInput.forceActiveFocus()
-        riseContent()
     }
-
-    //    FloatingDisk
-    //    {
-    //        id: floatingDisk
-    //        x: space.big
-    //        y: pageStack.height - height
-
-    //        z: 999
-    //    }
 
     Maui.ShareDialog
     {
@@ -429,14 +378,26 @@ Maui.ApplicationWindow
 
         Maui.MenuItem
         {
-            text: qsTr("Spotify")
-            icon.name: "internet-services"
+            text: qsTr("Cloud")
+            icon.name: "folder-cloud"
             onTriggered:
             {
                 pageStack.currentIndex = 1
-                currentView = viewsIndex.spotify
+                currentView = viewsIndex.cloud
             }
         },
+
+
+//        Maui.MenuItem
+//        {
+//            text: qsTr("Spotify")
+//            icon.name: "internet-services"
+//            onTriggered:
+//            {
+//                pageStack.currentIndex = 1
+//                currentView = viewsIndex.spotify
+//            }
+//        },
 
         MenuSeparator{},
 
@@ -445,87 +406,87 @@ Maui.ApplicationWindow
             text: qsTr("Sources...")
             icon.name: "folder-add"
             onTriggered: sourcesDialog.open()
-        },
-
-        Maui.Menu
-        {
-            title: qsTr("Collection")
-            //            icon.name: "settings-configure"
-
-            Maui.MenuItem
-            {
-                text: qsTr("Re-Scan")
-                onTriggered: bae.refreshCollection();
-            }
-
-            Maui.MenuItem
-            {
-                text: qsTr("Refresh...")
-                onTriggered: H.refreshCollection();
-            }
-
-            Maui.MenuItem
-            {
-                text: qsTr("Clean")
-                onTriggered: bae.removeMissingTracks();
-            }
-        },
-
-        Maui.Menu
-        {
-            title: qsTr("Settings...")
-            //            Kirigami.Action
-            //            {
-            //                text: "Brainz"
-
-            //                Kirigami.Action
-            //                {
-            //                    id: brainzToggle
-            //                    text: checked ? "Turn OFF" : "Turn ON"
-            //                    checked: bae.brainzState()
-            //                    checkable: true
-            //                    onToggled:
-            //                    {
-            //                        checked = !checked
-            //                        bae.saveSetting("AUTO", checked, "BRAINZ")
-            ////                        bae.brainz(checked)
-            //                    }
-            //                }
-            //            }
-
-
-
-            Maui.MenuItem
-            {
-                text: "Info label" + checked ? "ON" : "OFF"
-                checked: infoLabels
-                checkable: true
-                onToggled:
-                {
-                    infoLabels = checked
-                    bae.saveSetting("LABELS", infoLabels ? true : false, "PLAYBACK")
-
-                }
-            }
-
-            Maui.MenuItem
-            {
-                text: "Autoplay"
-                checked: autoplay
-                checkable: true
-                onToggled:
-                {
-                    autoplay = checked
-                    bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
-                }
-            }
         }
+
+//        Maui.Menu
+//        {
+//            title: qsTr("Collection")
+//            //            icon.name: "settings-configure"
+
+//            Maui.MenuItem
+//            {
+//                text: qsTr("Re-Scan")
+//                onTriggered: bae.refreshCollection();
+//            }
+
+//            Maui.MenuItem
+//            {
+//                text: qsTr("Refresh...")
+//                onTriggered: H.refreshCollection();
+//            }
+
+//            Maui.MenuItem
+//            {
+//                text: qsTr("Clean")
+//                onTriggered: bae.removeMissingTracks();
+//            }
+//        },
+
+//        Maui.Menu
+//        {
+//            title: qsTr("Settings...")
+//            //            Kirigami.Action
+//            //            {
+//            //                text: "Brainz"
+
+//            //                Kirigami.Action
+//            //                {
+//            //                    id: brainzToggle
+//            //                    text: checked ? "Turn OFF" : "Turn ON"
+//            //                    checked: bae.brainzState()
+//            //                    checkable: true
+//            //                    onToggled:
+//            //                    {
+//            //                        checked = !checked
+//            //                        bae.saveSetting("AUTO", checked, "BRAINZ")
+//            ////                        bae.brainz(checked)
+//            //                    }
+//            //                }
+//            //            }
+
+
+
+//            Maui.MenuItem
+//            {
+//                text: "Info label" + checked ? "ON" : "OFF"
+//                checked: infoLabels
+//                checkable: true
+//                onToggled:
+//                {
+//                    infoLabels = checked
+//                    bae.saveSetting("LABELS", infoLabels ? true : false, "PLAYBACK")
+
+//                }
+//            }
+
+//            Maui.MenuItem
+//            {
+//                text: "Autoplay"
+//                checked: autoplay
+//                checkable: true
+//                onToggled:
+//                {
+//                    autoplay = checked
+//                    bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
+//                }
+//            }
+//        }
     ]
 
     Item
     {
         id: message
-        visible: infoMsg.length > 0 && sync
+        visible: infoMsg.length && sync
         anchors.bottom: parent.bottom
         width: pageStack.wideMode ? columnWidth : parent.width
         height: iconSize

@@ -30,6 +30,8 @@ private:
     void sortList();
     void setList();
 
+    FMH::MODEL packPlaylist(const QString &playlist);
+
     FMH::MODEL_LIST defaultPlaylists();
 
     PlaylistsModel::SORTBY sort = PlaylistsModel::SORTBY::ADDDATE;
@@ -41,6 +43,9 @@ public slots:
     QVariantMap get(const int &index) const override;
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
+    void insert(const QString &playlist);
+    void insertAt(const QString &playlist, const int &at);
+    void addTrack(const int &index, const QStringList &urls);
 };
 
 #endif // PLAYLISTSMODEL_H

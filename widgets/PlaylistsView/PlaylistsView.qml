@@ -16,7 +16,9 @@ Kirigami.PageRow
     id: playlistViewRoot
 
     property string playlistQuery
-    property alias playlistViewModel : playlistViewModel
+    property alias playlistModel : playlistViewModel.model
+    property alias playlistList : playlistViewModel.list
+    property alias playlistViewList : playlistViewModel
 
     //    property alias list : _playlistsList
     //    property alias listModel: _playlistsModel
@@ -30,14 +32,14 @@ Kirigami.PageRow
 
     clip: true
     separatorVisible: wideMode
-    initialPage: [playlistList, filterList]
+    initialPage: [playlistLayout, filterList]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
     interactive: currentIndex === 1 && !wideMode
 
 
     ColumnLayout
     {
-        id: playlistList
+        id: playlistLayout
         clip: true
         anchors.fill: parent
         spacing: 0
@@ -110,7 +112,7 @@ Kirigami.PageRow
         headBar.visible: !holder.visible
         headBarExitIcon: "go-previous"
         headBarExit: !playlistViewRoot.wideMode
-        headBarTitle: playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
+        headBarTitle: playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
         onExit: if(!playlistViewRoot.wideMode)
                     playlistViewRoot.currentIndex = 0
 
@@ -189,7 +191,7 @@ Kirigami.PageRow
 
             onRemoveClicked:
             {
-                bae.removePlaylistTrack(url, playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
+                bae.removePlaylistTrack(url, playlistViewModel.model.get(playlistViewList.currentIndex).playlist)
                 populate(playlistQuery)
             }
         }
@@ -223,36 +225,19 @@ Kirigami.PageRow
     }
 
     function refresh()
-    {
-        for(var i=9; i < playlistViewModel.count; i++)
-            playlistViewModel.model.remove(i)
-
-        setPlaylists()
-    }
-
-    function setPlaylists()
-    {
-        var playlists = bae.get(Q.GET.playlists)
-        if(playlists.length > 0)
-            for(var i in playlists)
-                playlistViewModel.model.append(playlists[i])
-    }
+    {       
+    } 
 
     function syncAndPlay(index)
     {
-        if(!playlistViewModel.model.get(index).playlistIcon)
-            playlistViewRoot.playSync(playlistViewModel.model.get(index).playlist)
+        if(!playlistList.get(index).playlistIcon)
+            playlistViewRoot.playSync(playlistList.get(index).playlist)
     }
 
     function removePlaylist()
     {
-
-        bae.removePlaylist(playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
+        bae.removePlaylist(playlistList.get(playlistViewList.currentIndex).playlist)
 
         filterList.clearTable()
-        refresh()
-
     }
-
-    Component.onCompleted: setPlaylists()
 }

@@ -77,11 +77,21 @@ void PlaylistsModel::setList()
     qDebug()<< "trying to set playlists list";
     emit this->preListChanged();
 
-    this->list = this->defaultPlaylists();
-//    this->list << this->db->getPlaylists();
+    this->list << this->db->getPlaylists();
+    this->list << this->defaultPlaylists();
 
-//    this->sortList();
+    //    this->sortList();
     emit this->postListChanged();
+}
+
+FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
+{
+    return FMH::MODEL
+    {
+        {FMH::MODEL_KEY::PLAYLIST, playlist},
+        {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+        //        {FMH::MODEL_KEY::ICON, "view-media-playlist"}
+    };
 }
 
 FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
@@ -108,12 +118,6 @@ FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
         {
             {FMH::MODEL_KEY::PLAYLIST, "Favs"},
             {FMH::MODEL_KEY::ICON, "love"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
-
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Online"},
-            {FMH::MODEL_KEY::ICON, "internet-services"},
             {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
         },
 
@@ -198,4 +202,42 @@ void PlaylistsModel::append(const QVariantMap &item, const int &at)
     this->list.insert(at, model);
 
     emit this->postItemAppended();
+}
+
+void PlaylistsModel::insert(const QString &playlist)
+{
+    if(playlist.isEmpty())
+        return;
+
+    emit this->preItemAppended();
+
+    this->list << this->packPlaylist(playlist);
+
+    emit this->postItemAppended();
+}
+
+void PlaylistsModel::insertAt(const QString &playlist, const int &at)
+{
+    if(playlist.isEmpty())
+        return;
+
+    if(at > this->list.size() || at < 0)
+        return;
+
+    emit this->preItemAppendedAt(at);
+
+    if(this->db->addPlaylist(playlist))
+        this->list.insert(at, this->packPlaylist(playlist));
+
+    emit this->postItemAppended();
+
+}
+
+void PlaylistsModel::addTrack(const int &index, const QStringList &urls)
+{
+    if(index >= this->list.size() || index < 0)
+        return;
+
+    for(auto url : urls)
+        this->db->trackPlaylist(url, this->list[index][FMH::MODEL_KEY::PLAYLIST]);
 }

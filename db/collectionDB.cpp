@@ -418,7 +418,9 @@ bool CollectionDB::albumTrack(const FMH::MODEL &track, const QString &value)
 bool CollectionDB::playedTrack(const QString &url, const int &increment)
 {
     auto queryTxt = QString("UPDATE %1 SET %2 = %2 + %3 WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::TRACKS],
-            FMH::MODEL_NAME[FMH::MODEL_KEY::COUNT], QString::number(increment), FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url);
+            FMH::MODEL_NAME[FMH::MODEL_KEY::COUNT],
+            QString::number(increment),
+            FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url);
 
     auto query = this->getQuery(queryTxt);
 

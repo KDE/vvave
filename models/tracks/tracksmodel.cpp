@@ -63,6 +63,7 @@ void TracksModel::sortList()
         case FMH::MODEL_KEY::RELEASEDATE:
         case FMH::MODEL_KEY::RATE:
         case FMH::MODEL_KEY::FAV:
+        case FMH::MODEL_KEY::COUNT:
         {
             if(e1[role].toInt() > e2[role].toInt())
                 return true;
@@ -305,6 +306,23 @@ bool TracksModel::rate(const int &index, const int &value)
     {
         this->list[index][FMH::MODEL_KEY::RATE] = QString::number(value);
         emit this->updateModel(index, {FMH::MODEL_KEY::RATE});
+
+        return true;
+    }
+
+    return false;
+}
+
+bool TracksModel::countUp(const int &index)
+{
+    if(index >= this->list.size() || index < 0)
+        return false;
+
+    auto item = this->list[index];
+    if(this->db->playedTrack(item[FMH::MODEL_KEY::URL]))
+    {
+        this->list[index][FMH::MODEL_KEY::COUNT] = QString::number(item[FMH::MODEL_KEY::COUNT].toInt() + 1);
+        emit this->updateModel(index, {FMH::MODEL_KEY::COUNT});
 
         return true;
     }

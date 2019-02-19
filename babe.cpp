@@ -35,7 +35,7 @@ Babe::Babe(QObject *parent) : QObject(parent)
 
     /*use another thread for the db to perfom heavy dutty actions*/
     this->thread = new ConThread;
-    this->pulpo = new Pulpo;
+    this->pulpo = new Pulpo(this);
     this->db = CollectionDB::getInstance();
 
     connect(pulpo, &Pulpo::infoReady, [&](const FMH::MODEL &track, const PULPO::RESPONSE  &res)

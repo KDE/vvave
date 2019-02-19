@@ -114,6 +114,14 @@ BabeList
 
                 Maui.MenuItem
                 {
+                    text: qsTr("Most played")
+                    checkable: true
+                    checked: list.sortBy === Tracks.COUNT
+                    onTriggered: list.sortBy = Tracks.COUNT
+                }
+
+                Maui.MenuItem
+                {
                     text: qsTr("Rate")
                     checkable: true
                     checked: list.sortBy === Tracks.RATE
@@ -412,6 +420,9 @@ BabeList
                 break
             case Tracks.RELEASEDATE:
                 prop = "releasedate"
+                break;
+            case Tracks.COUNT:
+                prop = "count"
                 break
             }
 

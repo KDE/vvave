@@ -191,12 +191,11 @@ void Player::update()
 {
     if(this->player->isAvailable())
     {
-
         this->pos = static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);;
         emit this->posChanged();
     }
 
-    if(this->player->state() == QMediaPlayer::StoppedState && this->updater->isActive())
+    if(this->player->state() == QMediaPlayer::StoppedState && this->updater->isActive() && this->player->position() == this->player->duration())
     {
         this->finished = true;
         emit this->finishedChanged();

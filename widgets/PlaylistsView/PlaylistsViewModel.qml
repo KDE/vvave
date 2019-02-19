@@ -16,7 +16,9 @@ import "../../utils/Help.js" as H
 
 BabeList
 {
-    id: playlistListRoot
+    id: control
+
+    property alias list: _playlistsList
 
     headBarExit: false
     headBarTitle: "Playlists"
@@ -30,7 +32,8 @@ BabeList
         rejectButton.visible: false
     }
 
-    signal playSync(int index)   
+    signal playSync(int index)
+    headBar.plegable: false
 
     headBar.leftContent: Maui.ToolButton
     {
@@ -45,7 +48,6 @@ BabeList
         iconName: "list-remove"
         onClicked: removePlaylist()
     }
-
 
     BaseModel
     {
@@ -63,7 +65,7 @@ BabeList
     delegate : Maui.ListDelegate
     {
         id: delegate
-        width: playlistListRoot.width
+        width: control.width
         label: model.playlist
 
         Connections
@@ -88,7 +90,7 @@ BabeList
                     filterList.list.sortBy = Tracks.RATE
                     filterList.group = true
 
-                    playlistViewRoot.populate(Q.GET.favoriteTracks);                    
+                    playlistViewRoot.populate(Q.GET.favoriteTracks);
                     break;
 
                 case "Recent":
@@ -133,8 +135,7 @@ BabeList
     function addPlaylist(text)
     {
         var title = text.trim()
-        if(bae.addPlaylist(title))
-            model.insert(9, {playlist: title})
-        list.positionViewAtEnd()
+        if(list.insertAt(title,  0))
+            control.listView.positionViewAtEnd()
     }
 }

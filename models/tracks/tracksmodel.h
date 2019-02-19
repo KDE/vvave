@@ -62,6 +62,7 @@ public slots:
     bool color(const int &index, const QString &color);
     bool fav(const int &index, const bool &value);
     bool rate(const int &index, const int &value);
+    bool countUp(const int &index);
 };
 
 #endif // TRACKSMODEL_H
