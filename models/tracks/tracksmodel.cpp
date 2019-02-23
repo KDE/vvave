@@ -137,6 +137,22 @@ QVariantMap TracksModel::get(const int &index) const
     return res;
 }
 
+QVariantList TracksModel::getAll()
+{
+    QVariantList res;
+
+    for(auto item : this->list)
+    {
+        QVariantMap map;
+        for(auto key : item.keys())
+            map.insert(FMH::MODEL_NAME[key], item[key]);
+
+        res << map;
+    }
+
+    return res;
+}
+
 void TracksModel::append(const QVariantMap &item)
 {
     if(item.isEmpty())

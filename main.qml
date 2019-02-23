@@ -183,7 +183,7 @@ Maui.ApplicationWindow
             iconName: "headphones"
             iconColor: !accent  || isPlaying  ? babeColor : altColorText
             onClicked: pageStack.currentIndex = 0
-
+            colorScheme.highlightColor: babeColor
             text: qsTr("Now")
         },
 
@@ -199,19 +199,23 @@ Maui.ApplicationWindow
 
             text: qsTr("Tracks")
             tooltipText: pageStack.wideMode ? "" : text
+            colorScheme.highlightColor: babeColor
+
         },
 
         Maui.ToolButton
         {
             text: qsTr("Albums")
             iconName: /*"album"*/ "view-media-album-cover"
-            iconColor:  accent && currentView === viewsIndex.albums ? babeColor : altColorText
+            iconColor: accent && currentView === viewsIndex.albums ? babeColor : altColorText
             onClicked:
             {
                 pageStack.currentIndex = 1
                 currentView = viewsIndex.albums
             }
             tooltipText: pageStack.wideMode ? "" : text
+            colorScheme.highlightColor: babeColor
+
         },
 
         Maui.ToolButton
@@ -225,6 +229,8 @@ Maui.ApplicationWindow
                 currentView = viewsIndex.artists
             }
             tooltipText: pageStack.wideMode ? "" : text
+            colorScheme.highlightColor: babeColor
+
         },
 
         Maui.ToolButton
@@ -238,6 +244,8 @@ Maui.ApplicationWindow
                 currentView = viewsIndex.playlists
             }
             tooltipText: pageStack.wideMode ? "" : text
+            colorScheme.highlightColor: babeColor
+
         }
     ]
 
@@ -298,7 +306,7 @@ Maui.ApplicationWindow
         }
     ]
 
-
+    leftIcon.iconColor: accent && currentView === viewsIndex.search ? babeColor : altColorText
     onSearchButtonClicked:
     {
         pageStack.currentIndex = 1
@@ -772,8 +780,26 @@ Maui.ApplicationWindow
                         target: playlistsView
                         onRowClicked: Player.addTrack(track)
                         onQuickPlayTrack: Player.quickPlay(track)
-                        onPlayAll: Player.playAll(tracks)
-                        onAppendAll: Player.appendAll(tracks)
+
+                        onPlayAll:
+                        {
+                            var query = playlistsView.playlistQuery
+
+
+                            mainPlaylist.list.clear()
+                            mainPlaylist.list.sortBy = Tracks.NONE
+                            mainPlaylist.list.query = query
+                            Player.playAll()
+                        }
+
+                        onAppendAll:
+                        {
+                            var query = playlistsView.playlistQuery
+
+                            mainPlaylist.list.appendQuery(query)
+                            mainPlaylist.listView.positionViewAtEnd()
+                        }
+
                         onPlaySync:
                         {
                             var tracks = bae.get(Q.GET.playlistTracks_.arg(playlist))
@@ -792,11 +818,19 @@ Maui.ApplicationWindow
 
                     Connections
                     {
-                        target: searchView.searchTable
-                        onRowClicked: Player.addTrack(searchView.searchTable.model.get(index))
-                        onQuickPlayTrack: Player.quickPlay(searchView.searchTable.model.get(index))
-                        onPlayAll: Player.playAll(searchView.searchRes)
-                        onAppendAll: Player.appendAll(searchView.searchRes)
+                        target: searchView
+                        onRowClicked: Player.addTrack(searchView.list.get(index))
+                        onQuickPlayTrack: Player.quickPlay(searchView.list.get(index))
+                        onPlayAll:
+                        {
+                            var tracks = searchView.list.getAll()
+                            for(var i in tracks)
+                                Player.appendTrack(tracks[i])
+
+                             Player.playAll()
+                        }
+
+                        onAppendAll: Player.appendAll(searchView.list.getAll())
                         onArtworkDoubleClicked:
                         {
                             var query = Q.GET.albumTracks_.arg(

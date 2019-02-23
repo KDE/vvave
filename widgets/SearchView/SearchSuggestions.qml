@@ -54,7 +54,7 @@ Maui.Popup
     {
         if(!visible) open()
 
-        suggestionsList.clearTable()
+//        suggestionsList.clearTable()
 
         var qq = bae.loadSetting("QUERIES", "BABE", {})
         savedQueries = qq.split(",")

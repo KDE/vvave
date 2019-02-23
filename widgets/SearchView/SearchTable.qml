@@ -15,11 +15,10 @@ BabeTable
     id: searchTable
 
     property alias searchInput : searchInput
-    property alias searchTable : searchTable
-    property var searchRes : []
     property var savedQueries : []
 
-    property bool autoSuggestions : bae.loadSetting("AUTOSUGGESTIONS", "BABE", false) === "true" ? true : false
+//    property bool autoSuggestions : bae.loadSetting("AUTOSUGGESTIONS", "BABE", false) === "true" ? true : false
+    property bool autoSuggestions : false
 
 
     Layout.fillHeight: true
@@ -111,7 +110,6 @@ BabeTable
         searchInput.clear()
         searchTable.clearTable()
         searchTable.headBarTitle = ""
-        searchRes = []
         suggestionsPopup.close()
     }
 

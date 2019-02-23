@@ -26,9 +26,9 @@ Kirigami.PageRow
 
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
-    signal playAll(var tracks)
+    signal playAll()
     signal playSync(var playlist)
-    signal appendAll(var tracks)
+    signal appendAll()
 
     clip: true
     separatorVisible: wideMode
@@ -180,8 +180,8 @@ Kirigami.PageRow
             {
                 playlistViewRoot.quickPlayTrack(filterList.model.get(index))
             }
-            onPlayAll: playAll(bae.get(playlistQuery))
-            onAppendAll: appendAll(bae.get(playlistQuery))
+            onPlayAll: playAll()
+            onAppendAll: appendAll()
             onPulled: populate(playlistQuery)
         }
 

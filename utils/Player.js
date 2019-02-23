@@ -225,28 +225,6 @@ function cleanPlaylist()
     }
 }
 
-function playAll(tracks)
-{
-    if(tracks.length > 0)
-    {
-        sync = false
-        syncPlaylist = ""
-        infoMsg = ""
-
-        mainPlaylist.list.clear()
-        pageStack.currentIndex = 0
-
-        for(var i in tracks)
-            appendTrack(tracks[i])
-
-        //    root.mainPlaylist.list.currentIndex = 0
-        //    playTrack(root.mainPlaylist.list.model.get(0))
-
-        mainPlaylist.listView.positionViewAtBeginning()
-        playAt(0)
-    }
-}
-
 function playAll()
 {
     sync = false

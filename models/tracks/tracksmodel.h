@@ -54,6 +54,7 @@ signals:
 
 public slots:
     QVariantMap get(const int &index) const override;
+    QVariantList getAll();
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
     void appendQuery(const QString &query);
