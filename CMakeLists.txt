@@ -5,7 +5,7 @@ find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
 
 find_package(MauiKit REQUIRED)
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Network WebSockets Sql QuickControls2 Xml Multimedia Widgets DBus)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Network WebSockets Sql QuickControls2 Xml Multimedia Widgets DBus Svg)
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
@@ -48,6 +48,7 @@ add_executable(vvave
     models/baselist.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
+    models/cloud/cloud.cpp
     )
 
 if (ANDROID)
@@ -68,12 +69,12 @@ if (ANDROID)
 else()
     find_package(Taglib REQUIRED)
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)
-    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO)
+    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica)
     target_sources(vvave PRIVATE
         kde/mpris2.cpp
         kde/notify.cpp
         )
-    target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus)
+    target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus KF5::Attica)
 endif()
 
 if (TARGET create-apk-vvave)
@@ -81,7 +82,7 @@ if (TARGET create-apk-vvave)
 endif()
 
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
-target_link_libraries(vvave Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets Qt5::QuickControls2 ${TAGLIB_LIBRARIES})
+target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets Qt5::QuickControls2 ${TAGLIB_LIBRARIES})
 
 install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
@@ -90,4 +91,4 @@ install(FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES assets/vvave.svg DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)
 install(FILES org.kde.vvave.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
-feature_summary(WHAT ALL   FATAL_ON_MISSING_REQUIRED_PACKAGES)
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
