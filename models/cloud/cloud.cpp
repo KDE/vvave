@@ -3,7 +3,7 @@
 
 Cloud::Cloud(QObject *parent) : BaseList (parent)
 {
-    this->fm = FM::getInstance();
+    this->fm = new FM(this);
     this->setList();
 
     connect(this->fm, &FM::cloudServerContentReady, [this](const FMH::MODEL_LIST &list, const QString &url)

@@ -55,7 +55,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
-    property bool isShuffle: bae.loadSetting("SHUFFLE","PLAYBACK", false) == "true" ? true : false
+    property bool isShuffle: /*bae.loadSetting("SHUFFLE","PLAYBACK", false) == "true" ? true :*/ false
     property var currentTrack: ({
                                     babe: "0",
                                     stars: "0"
@@ -297,7 +297,7 @@ Maui.ApplicationWindow
         {
             id: shuffleBtn
             iconColor: textColor
-            iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-repeat"
+            iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
             onClicked:
             {
                 isShuffle = !isShuffle

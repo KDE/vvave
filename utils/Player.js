@@ -103,7 +103,7 @@ function nextTrack()
 
 function previousTrack()
 {
-    if(!mainlistEmpty>0)
+    if(!mainlistEmpty)
     {
         var previous = previous = currentTrackIndex-1 >= 0 ? mainPlaylist.listView.currentIndex-1 : currentTrackIndex-1
         prevTrackIndex = mainPlaylist.listView.currentIndex
@@ -113,7 +113,7 @@ function previousTrack()
 
 function shuffle()
 {
-    var pos =  Math.floor(Math.random() * mainPlaylist.list.count)
+    var pos =  Math.floor(Math.random() * mainPlaylist.listView.count)
     return pos
 }
 
