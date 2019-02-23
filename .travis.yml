@@ -7,7 +7,7 @@ addons:
     - realpath
 install:
 - docker pull ubuntu:bionic
-- wget https://raw.githubusercontent.com/Nitrux/nxos-repository-util/master/nxos-repository-util.sh
+- wget https://raw.githubusercontent.com/Nitrux/nitrux-repository-util/master/nxos-repository-util.sh
   -O nxos-repository-util.sh
 - chmod +x nxos-repository-util.sh
 script:
