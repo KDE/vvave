@@ -1,15 +1,6 @@
-vvave (1.2+git20181114-1) UNRELEASED; urgency=medium
+vvave (0+git20190223-1) nxos; urgency=medium
 
   * New snapshot
 
- -- Jonah Brüchert <jbb@kaidan.im>  Wed, 14 Nov 2018 15:42:55 +0100
-
-vvave (1.2-0ubuntu1) unstable; urgency=medium
-
-  [ Clive Johnston ]
-  * Initial packaging for Ubuntu
-
-  [ Rik Mills ]
-  * Initial upstream release (1.2) 
-
- -- Clive Johnston <clivejo@kubuntu.org>  Fri, 24 Feb 2017 12:41:11 +0000
+ -- Uri Herrera <uri_herrera@nxos.org>  Sat, 23 Feb 2019 16:12:00 -0500
+ 
