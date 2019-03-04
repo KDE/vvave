@@ -22,7 +22,6 @@ Maui.Page
     property alias listModel: table.listModel
     property alias listView : table.listView
     property alias table: table
-    property alias progressBar: progressBar
     property alias animFooter : animFooter
     property alias menu : playlistMenu
 
@@ -48,46 +47,12 @@ Maui.Page
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: toolBarHeight * 1.3
 
-    footBarItem: RowLayout
-    {
+    footBarItem: AlbumsRoll
+   {
         anchors.fill : parent
-        anchors.rightMargin: space.small
         anchors.leftMargin: space.small
-
-        AlbumsRoll
-        {
-            id: albumsRoll
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-        }
-
-        //        Maui.ToolButton
-        //        {
-        //            id: infoBtn
-        //            iconName:  "documentinfo"
-        //            Layout.fillHeight: true
-
-        //            onClicked:
-        //            {
-        //                if( stackView.currentItem !== table)
-        //                {
-        //                    stackView.pop(table)
-        //                    albumsRoll.positionAlbum(currentTrackIndex)
-        //                }else
-        //                {
-        //                    stackView.push(infoView)
-        //                }
-        //            }
-        //        }
-
-        //        Maui.ToolButton
-        //        {
-        //            id: menuBtn
-        //            iconName: "overflow-menu"
-        //            onClicked: playlistMenu.popup()
-        //            Layout.fillHeight: true
-        //        }
-
+        anchors.rightMargin: space.small
+           id: albumsRoll
     }
 
     //    footBar.rightContent: Maui.ToolButton
@@ -233,60 +198,6 @@ Maui.Page
                 //                                    console.log("POSSS:", pos)
                 //                                    list.currentIndex = pos
                 //                                    play(list.model.get(pos))
-            }
-
-        }
-
-        Kirigami.Separator
-        {
-            Layout.fillWidth: true
-            color: borderColor
-        }
-
-        Slider
-        {
-            id: progressBar
-            height: unit * (isMobile ?  6 : 8)
-            width: parent.width
-            Layout.fillWidth: true
-
-            padding: 0
-            from: 0
-            to: 1000
-            value: player.pos
-            spacing: 0
-            focus: true
-            onMoved:
-            {
-                player.pos = value
-            }
-
-
-            background: Rectangle
-            {
-                implicitWidth: progressBar.width
-                implicitHeight: progressBar.height
-                width: progressBar.availableWidth
-                height: implicitHeight
-                color: "transparent"
-
-                Rectangle
-                {
-                    width: progressBar.visualPosition * parent.width
-                    height: progressBar.height
-                    color: babeColor
-                }
-            }
-
-            handle: Rectangle
-            {
-                x: progressBar.leftPadding + progressBar.visualPosition
-                   * (progressBar.availableWidth - width)
-                y: -(progressBar.height * 0.8)
-                implicitWidth: progressBar.pressed ? iconSizes.medium : 0
-                implicitHeight: progressBar.pressed ? iconSizes.medium : 0
-                radius: progressBar.pressed ? iconSizes.medium : 0
-                color: babeColor
             }
         }
 

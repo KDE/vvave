@@ -238,7 +238,7 @@ BabeList
 
         onRemoveClicked:
         {
-            listModel.remove(listView.currentIndex)
+            list.remove(listView.currentIndex)
         }
 
         onRateClicked:

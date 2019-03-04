@@ -16,9 +16,11 @@ ListView
     currentIndex: currentTrackIndex
     highlightFollowsCurrentItem: true
     highlightMoveDuration: 0
-    snapMode:ListView.SnapToOneItem
+    snapMode: ListView.SnapToOneItem
     model: mainPlaylist.listModel
-
+    highlightRangeMode: ListView.StrictlyEnforceRange
+    keyNavigationEnabled: true
+    keyNavigationWraps : true
     onMovementEnded:
     {
         var index = indexAt(contentX, contentY)
@@ -27,6 +29,8 @@ ListView
 
         //         positionViewAtIndex(index, ListView.Center)
     }
+
+    //    onCurrentIndexChanged: Player.playAt(currentIndex)
 
     delegate: GridLayout
     {

@@ -44,10 +44,10 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
-    property alias progressBar: mainPlaylist.progressBar
     property alias animFooter: mainPlaylist.animFooter
     property alias mainPlaylist: mainPlaylist
     property alias selectionBar: selectionBar
+    property alias progressBar: progressBar
 
     about.appIcon: "qrc:/assets/vvave.svg"
     about.appDescription: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
@@ -124,10 +124,10 @@ Maui.ApplicationWindow
     signal missingAlert(var track)
 
     /*CONF*/
-    pageStack.defaultColumnWidth: columnWidth
-    pageStack.initialPage: [mainPlaylist, views]
-    pageStack.interactive: isMobile
-    pageStack.separatorVisible: pageStack.wideMode
+    //    pageStack.defaultColumnWidth: columnWidth
+    //    pageStack.initialPage: [mainPlaylist, views]
+    //    pageStack.interactive: isMobile
+    //    pageStack.separatorVisible: pageStack.wideMode
 
 
     /*HANDLE EVENTS*/
@@ -139,8 +139,8 @@ Maui.ApplicationWindow
         var messageBody = "Do you want to remove it from your collection?"
         notify("alert", message, messageBody, function ()
         {
-                bae.removeTrack(currentTrack.url) //todo
-                mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
+            bae.removeTrack(currentTrack.url) //todo
+            mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
         })
     }
 
@@ -151,13 +151,13 @@ Maui.ApplicationWindow
         id: player
         volume: 100
         onFinishedChanged: if (!mainlistEmpty)
-                            {
+                           {
                                console.log("track fully played")
-                                if (currentTrack.url)
-                                    mainPlaylist.list.countUp(currentTrackIndex)
+                               if (currentTrack.url)
+                                   mainPlaylist.list.countUp(currentTrackIndex)
 
-                                Player.nextTrack()
-                            }
+                               Player.nextTrack()
+                           }
     }
 
     BabeNotify
@@ -249,62 +249,130 @@ Maui.ApplicationWindow
         }
     ]
 
-    footBar.visible: !mainlistEmpty
-    footBar.middleContent: [
+    footBar.implicitHeight: footBar.visible ? toolBarHeight * 1.2 : 0
+    page.footBarItem: ColumnLayout
+    {
+        id: _footerLayout
 
-        Maui.ToolButton
+        height: footBar.height
+        width: root.width
+        spacing: 0
+
+        Slider
         {
-            id: babeBtnIcon
-            iconName: "love"
+            id: progressBar
+            Layout.preferredHeight: unit * (isMobile ?  6 : 8)
+            Layout.fillWidth: true
 
-            iconColor: currentBabe ? babeColor : textColor
-            onClicked: if (!mainlistEmpty)
+            padding: 0
+            from: 0
+            to: 1000
+            value: player.pos
+            spacing: 0
+            focus: true
+            onMoved:
             {
-                mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
-                currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
+                player.pos = value
             }
-        },
 
-        Maui.ToolButton
-        {
-            iconName: "media-skip-backward"
-            iconColor: textColor
-            onClicked: Player.previousTrack()
-            onPressAndHold: Player.playAt(prevTrackIndex)
-        },
-
-        Maui.ToolButton
-        {
-            id: playIcon
-            iconColor: textColor
-            iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
-            onClicked:
+            background: Rectangle
             {
-                player.playing = !player.playing
+                implicitWidth: progressBar.width
+                implicitHeight: progressBar.height
+                width: progressBar.availableWidth
+                height: implicitHeight
+                color: "transparent"
+
+                Rectangle
+                {
+                    width: progressBar.visualPosition * parent.width
+                    height: progressBar.height
+                    color: babeColor
+                }
             }
-        },
 
-        Maui.ToolButton
-        {
-            id: nextBtn
-            iconColor: textColor
-            iconName: "media-skip-forward"
-            onClicked: Player.nextTrack()
-            onPressAndHold: Player.playAt(Player.shuffle())
-        },
-
-        Maui.ToolButton
-        {
-            id: shuffleBtn
-            iconColor: textColor
-            iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
-            onClicked:
+            handle: Rectangle
             {
-                isShuffle = !isShuffle
-                bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
+                x: progressBar.leftPadding + progressBar.visualPosition
+                   * (progressBar.availableWidth - width)
+                y: -(progressBar.height * 0.8)
+                implicitWidth: progressBar.pressed ? iconSizes.medium : 0
+                implicitHeight: progressBar.pressed ? iconSizes.medium : 0
+                radius: progressBar.pressed ? iconSizes.medium : 0
+                color: babeColor
             }
         }
-    ]
+
+        Kirigami.Separator
+        {
+            Layout.fillWidth: true
+            color: borderColor
+        }
+
+        Maui.ToolBar
+        {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+
+            middleContent: [
+
+                Maui.ToolButton
+                {
+                    id: babeBtnIcon
+                    iconName: "love"
+
+                    iconColor: currentBabe ? babeColor : textColor
+                    onClicked: if (!mainlistEmpty)
+                    {
+                        mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
+                        currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
+                    }
+                },
+
+                Maui.ToolButton
+                {
+                    iconName: "media-skip-backward"
+                    iconColor: textColor
+                    onClicked: Player.previousTrack()
+                    onPressAndHold: Player.playAt(prevTrackIndex)
+                },
+
+                Maui.ToolButton
+                {
+                    id: playIcon
+                    iconColor: textColor
+                    iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
+                    onClicked:
+                    {
+                        player.playing = !player.playing
+                    }
+                },
+
+                Maui.ToolButton
+                {
+                    id: nextBtn
+                    iconColor: textColor
+                    iconName: "media-skip-forward"
+                    onClicked: Player.nextTrack()
+                    onPressAndHold: Player.playAt(Player.shuffle())
+                },
+
+                Maui.ToolButton
+                {
+                    id: shuffleBtn
+                    iconColor: textColor
+                    iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
+                    onClicked:
+                    {
+                        isShuffle = !isShuffle
+                        bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
+                    }
+                }
+            ]
+        }
+    }
+
+    footBar.visible: !mainlistEmpty
 
     leftIcon.iconColor: accent && currentView === viewsIndex.search ? babeColor : altColorText
     onSearchButtonClicked:
@@ -402,16 +470,16 @@ Maui.ApplicationWindow
         },
 
 
-//        Maui.MenuItem
-//        {
-//            text: qsTr("Spotify")
-//            icon.name: "internet-services"
-//            onTriggered:
-//            {
-//                pageStack.currentIndex = 1
-//                currentView = viewsIndex.spotify
-//            }
-//        },
+        //        Maui.MenuItem
+        //        {
+        //            text: qsTr("Spotify")
+        //            icon.name: "internet-services"
+        //            onTriggered:
+        //            {
+        //                pageStack.currentIndex = 1
+        //                currentView = viewsIndex.spotify
+        //            }
+        //        },
 
         MenuSeparator{},
 
@@ -422,79 +490,79 @@ Maui.ApplicationWindow
             onTriggered: sourcesDialog.open()
         }
 
-//        Maui.Menu
-//        {
-//            title: qsTr("Collection")
-//            //            icon.name: "settings-configure"
+        //        Maui.Menu
+        //        {
+        //            title: qsTr("Collection")
+        //            //            icon.name: "settings-configure"
 
-//            Maui.MenuItem
-//            {
-//                text: qsTr("Re-Scan")
-//                onTriggered: bae.refreshCollection();
-//            }
+        //            Maui.MenuItem
+        //            {
+        //                text: qsTr("Re-Scan")
+        //                onTriggered: bae.refreshCollection();
+        //            }
 
-//            Maui.MenuItem
-//            {
-//                text: qsTr("Refresh...")
-//                onTriggered: H.refreshCollection();
-//            }
+        //            Maui.MenuItem
+        //            {
+        //                text: qsTr("Refresh...")
+        //                onTriggered: H.refreshCollection();
+        //            }
 
-//            Maui.MenuItem
-//            {
-//                text: qsTr("Clean")
-//                onTriggered: bae.removeMissingTracks();
-//            }
-//        },
+        //            Maui.MenuItem
+        //            {
+        //                text: qsTr("Clean")
+        //                onTriggered: bae.removeMissingTracks();
+        //            }
+        //        },
 
-//        Maui.Menu
-//        {
-//            title: qsTr("Settings...")
-//            //            Kirigami.Action
-//            //            {
-//            //                text: "Brainz"
+        //        Maui.Menu
+        //        {
+        //            title: qsTr("Settings...")
+        //            //            Kirigami.Action
+        //            //            {
+        //            //                text: "Brainz"
 
-//            //                Kirigami.Action
-//            //                {
-//            //                    id: brainzToggle
-//            //                    text: checked ? "Turn OFF" : "Turn ON"
-//            //                    checked: bae.brainzState()
-//            //                    checkable: true
-//            //                    onToggled:
-//            //                    {
-//            //                        checked = !checked
-//            //                        bae.saveSetting("AUTO", checked, "BRAINZ")
-//            ////                        bae.brainz(checked)
-//            //                    }
-//            //                }
-//            //            }
+        //            //                Kirigami.Action
+        //            //                {
+        //            //                    id: brainzToggle
+        //            //                    text: checked ? "Turn OFF" : "Turn ON"
+        //            //                    checked: bae.brainzState()
+        //            //                    checkable: true
+        //            //                    onToggled:
+        //            //                    {
+        //            //                        checked = !checked
+        //            //                        bae.saveSetting("AUTO", checked, "BRAINZ")
+        //            ////                        bae.brainz(checked)
+        //            //                    }
+        //            //                }
+        //            //            }
 
 
 
-//            Maui.MenuItem
-//            {
-//                text: "Info label" + checked ? "ON" : "OFF"
-//                checked: infoLabels
-//                checkable: true
-//                onToggled:
-//                {
-//                    infoLabels = checked
-//                    bae.saveSetting("LABELS", infoLabels ? true : false, "PLAYBACK")
+        //            Maui.MenuItem
+        //            {
+        //                text: "Info label" + checked ? "ON" : "OFF"
+        //                checked: infoLabels
+        //                checkable: true
+        //                onToggled:
+        //                {
+        //                    infoLabels = checked
+        //                    bae.saveSetting("LABELS", infoLabels ? true : false, "PLAYBACK")
 
-//                }
-//            }
+        //                }
+        //            }
 
-//            Maui.MenuItem
-//            {
-//                text: "Autoplay"
-//                checked: autoplay
-//                checkable: true
-//                onToggled:
-//                {
-//                    autoplay = checked
-//                    bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
-//                }
-//            }
-//        }
+        //            Maui.MenuItem
+        //            {
+        //                text: "Autoplay"
+        //                checked: autoplay
+        //                checkable: true
+        //                onToggled:
+        //                {
+        //                    autoplay = checked
+        //                    bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
+        //                }
+        //            }
+        //        }
     ]
 
     Item
@@ -580,372 +648,372 @@ Maui.ApplicationWindow
         id: playlistDialog
     }
 
-    MainPlaylist
+    globalDrawer: Maui.GlobalDrawer
     {
-        id: mainPlaylist
+        id: _drawer
+        width: Kirigami.Units.gridUnit * 14
 
-        Connections
+        modal: !root.isWide
+        handleVisible: modal
+
+        contentItem: MainPlaylist
         {
-            target: mainPlaylist
-            onCoverPressed: Player.appendAll(tracks)
-            onCoverDoubleClicked: Player.playAll(tracks)
+            id: mainPlaylist
+            Connections
+            {
+                target: mainPlaylist
+                onCoverPressed: Player.appendAll(tracks)
+                onCoverDoubleClicked: Player.playAll(tracks)
+            }
+
         }
 
     }
 
-    Maui.Page
+    ColumnLayout
     {
-        id: views
-        headBar.visible: false
-        margins: 0
-        //        focusPolicy: Qt.WheelFocus
-        //        visualFocus: true
+        anchors.fill: parent
 
-        ColumnLayout
+        SwipeView
         {
-            anchors.fill: parent
+            id: swipeView
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            interactive: isMobile
+            //                contentItem: ListView
+            //                {
+            //                    model: swipeView.contentModel
+            //                    interactive: swipeView.interactive
+            //                    currentIndex: swipeView.currentIndex
 
-            SwipeView
+            //                    spacing: swipeView.spacing
+            //                    orientation: swipeView.orientation
+            //                    snapMode: ListView.SnapOneItem
+            //                    boundsBehavior: Flickable.StopAtBounds
+
+            //                    highlightRangeMode: ListView.StrictlyEnforceRange
+            //                    preferredHighlightBegin: 0
+            //                    preferredHighlightEnd: 0
+            //                    highlightMoveDuration: 250
+            //                    //                    min:10
+
+            //                    maximumFlickVelocity: 10 * (swipeView.orientation ===
+            //                                               Qt.Horizontal ? width : height)
+            //                }
+
+            currentIndex: currentView
+
+            onCurrentItemChanged: currentItem.forceActiveFocus()
+
+            onCurrentIndexChanged:
             {
-                id: swipeView
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                interactive: isMobile
-                //                contentItem: ListView
-                //                {
-                //                    model: swipeView.contentModel
-                //                    interactive: swipeView.interactive
-                //                    currentIndex: swipeView.currentIndex
+                currentView = currentIndex
+                if (!babeitView.isConnected && currentIndex === viewsIndex.vvave)
+                    babeitView.logginDialog.open()
+            }
 
-                //                    spacing: swipeView.spacing
-                //                    orientation: swipeView.orientation
-                //                    snapMode: ListView.SnapOneItem
-                //                    boundsBehavior: Flickable.StopAtBounds
-
-                //                    highlightRangeMode: ListView.StrictlyEnforceRange
-                //                    preferredHighlightBegin: 0
-                //                    preferredHighlightEnd: 0
-                //                    highlightMoveDuration: 250
-                //                    //                    min:10
-
-                //                    maximumFlickVelocity: 10 * (swipeView.orientation ===
-                //                                               Qt.Horizontal ? width : height)
-                //                }
-
-                currentIndex: currentView
-
-                onCurrentItemChanged: currentItem.forceActiveFocus()
-
-                onCurrentIndexChanged:
+            TracksView
+            {
+                id: tracksView
+                Connections
                 {
-                    currentView = currentIndex
-                    if (!babeitView.isConnected && currentIndex === viewsIndex.vvave)
-                        babeitView.logginDialog.open()
-                }
-
-                TracksView
-                {
-                    id: tracksView
-                    Connections
+                    target: tracksView
+                    onRowClicked: Player.addTrack(tracksView.list.get(index))
+                    onQuickPlayTrack: Player.quickPlay(tracksView.list.get(index))
+                    onPlayAll:
                     {
-                        target: tracksView
-                        onRowClicked: Player.addTrack(tracksView.list.get(index))
-                        onQuickPlayTrack: Player.quickPlay(tracksView.list.get(index))                        
-                        onPlayAll:
-                        {
-                            var query = Q.GET.allTracks
+                        var query = Q.GET.allTracks
 
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.query = query
-                            Player.playAll()
-                        }
-                        onAppendAll:
-                        {
-                            mainPlaylist.list.appendQuery(Q.GET.allTracks)
-                            mainPlaylist.listView.positionViewAtEnd()
-                        }
-
-                        onQueueTrack: Player.queueTracks([tracksView.list.get(index)], index)
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.query = query
+                        Player.playAll()
                     }
-                }
-
-                AlbumsView
-                {
-                    id: albumsView
-
-                    holder.emoji: "qrc:/assets/MusicBox.png"
-                    holder.isMask: false
-                    holder.title : "No Albums!"
-                    holder.body: "Add new music sources"
-                    holder.emojiSize: iconSizes.huge
-                    headBarTitle: count + qsTr(" albums")
-                    list.query: Q.GET.allAlbumsAsc
-                    list.sortBy: Albums.ALBUM
-
-                    Connections
+                    onAppendAll:
                     {
-                        target: albumsView
-                        onRowClicked: Player.addTrack(track)
-                        onPlayTrack: Player.quickPlay(track)
-
-                        onAlbumCoverClicked: albumsView.populateTable(album, artist)
-
-                        onAlbumCoverPressedAndHold:
-                        {
-                            var query = Q.GET.albumTracks_.arg(album)
-                            query = query.arg(artist)
-
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.query = query
-                            Player.playAll()
-                        }
-
-                        onPlayAll:
-                        {
-                            var query = Q.GET.albumTracks_.arg(album)
-                            query = query.arg(artist)
-                            query = query.arg(data.artist)
-
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.query = query
-                            Player.playAll()
-                        }
-
-                        onAppendAll:
-                        {
-                            var query = Q.GET.albumTracks_.arg(album)
-                            query = query.arg(artist)
-
-                            mainPlaylist.list.appendQuery(query)
-                            mainPlaylist.listView.positionViewAtEnd()
-                        }
+                        mainPlaylist.list.appendQuery(Q.GET.allTracks)
+                        mainPlaylist.listView.positionViewAtEnd()
                     }
-                }
 
-                AlbumsView
-                {
-                    id: artistsView
-
-                    holder.emoji: "qrc:/assets/MusicBox.png"
-                    holder.isMask: false
-                    holder.title : qsTr("No Artists!")
-                    holder.body: qsTr("Add new music sources")
-                    holder.emojiSize: iconSizes.huge
-                    headBarTitle: count + qsTr(" artists")
-                    list.query: Q.GET.allArtistsAsc
-                    list.sortBy: Albums.ARTIST
-                    table.list.sortBy:  Tracks.NONE
-
-                    Connections
-                    {
-                        target: artistsView
-                        onRowClicked: Player.addTrack(track)
-                        onPlayTrack: Player.quickPlay(track)
-                        onAlbumCoverClicked: artistsView.populateTable(undefined, artist)
-
-                        onAlbumCoverPressedAndHold:
-                        {
-                            var query = Q.GET.artistTracks_.arg(artist)
-                            var map = bae.get(query)
-                            Player.playAll(map)
-                        }
-
-                        onPlayAll:
-                        {
-                            var query = Q.GET.artistTracks_.arg(artist)
-                            query = query.arg(data.artist)
-
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.sortBy = Tracks.NONE
-                            mainPlaylist.list.query = query
-                            Player.playAll()
-                        }
-
-                        onAppendAll:
-                        {
-                            var query = Q.GET.artistTracks_.arg(artist)
-
-                            mainPlaylist.list.appendQuery(query)
-                            mainPlaylist.listView.positionViewAtEnd()
-                        }
-                    }
-                }
-
-                PlaylistsView
-                {
-                    id: playlistsView
-
-                    Connections
-                    {
-                        target: playlistsView
-                        onRowClicked: Player.addTrack(track)
-                        onQuickPlayTrack: Player.quickPlay(track)
-
-                        onPlayAll:
-                        {
-                            var query = playlistsView.playlistQuery
-
-
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.sortBy = Tracks.NONE
-                            mainPlaylist.list.query = query
-                            Player.playAll()
-                        }
-
-                        onAppendAll:
-                        {
-                            var query = playlistsView.playlistQuery
-
-                            mainPlaylist.list.appendQuery(query)
-                            mainPlaylist.listView.positionViewAtEnd()
-                        }
-
-                        onPlaySync:
-                        {
-                            var tracks = bae.get(Q.GET.playlistTracks_.arg(playlist))
-                            Player.playAll(tracks)
-                            root.sync = true
-                            root.syncPlaylist = playlist
-                            root.infoMsg = qsTr("Syncing to ") + playlist
-                        }
-                    }
-                }
-
-
-                SearchTable
-                {
-                    id: searchView
-
-                    Connections
-                    {
-                        target: searchView
-                        onRowClicked: Player.addTrack(searchView.list.get(index))
-                        onQuickPlayTrack: Player.quickPlay(searchView.list.get(index))
-                        onPlayAll:
-                        {
-                            var tracks = searchView.list.getAll()
-                            for(var i in tracks)
-                                Player.appendTrack(tracks[i])
-
-                             Player.playAll()
-                        }
-
-                        onAppendAll: Player.appendAll(searchView.list.getAll())
-                        onArtworkDoubleClicked:
-                        {
-                            var query = Q.GET.albumTracks_.arg(
-                                        searchView.searchTable.model.get(
-                                            index).album)
-                            query = query.arg(searchView.searchTable.model.get(
-                                                  index).artist)
-
-                            Player.playAll(bae.get(query))
-                        }
-                    }
-                }
-
-                FoldersView
-                {
-                    id: foldersView
-
-                    Connections
-                    {
-                        target: foldersView.list
-
-                        onRowClicked: Player.addTrack(foldersView.list.model.get(index))
-                        onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
-                        onPlayAll:
-                        {
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.sortBy = Tracks.NONE
-                            mainPlaylist.list.query = foldersView.list.list.query
-                            Player.playAll()
-                        }
-
-                        onAppendAll:
-                        {
-                            var query = foldersView.list.list.query
-                            mainPlaylist.list.appendQuery(query)
-                            mainPlaylist.listView.positionViewAtEnd()
-                        }
-
-                        onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
-                    }
-                }
-
-                CloudView
-                {
-                    id: cloudView
-
-                    onQuickPlayTrack: Player.quickPlay(cloudView.list.get(index))
-                }
-
-                BabeitView
-                {
-                    id: babeitView
-                }
-
-                LinkingView
-                {
-                    id: linkingView
-                }
-
-                YouTube
-                {
-                    id: youtubeView
-                }
-
-                Spotify
-                {
-                    id: spotifyView
+                    onQueueTrack: Player.queueTracks([tracksView.list.get(index)], index)
                 }
             }
 
-            Maui.SelectionBar
+            AlbumsView
             {
-                id: selectionBar
-                Layout.fillWidth: true
-                Layout.margins: space.huge
-                Layout.topMargin: space.small
-                Layout.bottomMargin: space.big
-                onIconClicked: contextMenu.show(selectedPaths)
-                onExitClicked: clear()
+                id: albumsView
 
-                TableMenu
+                holder.emoji: "qrc:/assets/MusicBox.png"
+                holder.isMask: false
+                holder.title : "No Albums!"
+                holder.body: "Add new music sources"
+                holder.emojiSize: iconSizes.huge
+                headBarTitle: count + qsTr(" albums")
+                list.query: Q.GET.allAlbumsAsc
+                list.sortBy: Albums.ALBUM
+
+                Connections
                 {
-                    id: contextMenu
-                    menuItem: Maui.MenuItem
-                    {
-                        text: qsTr("Play all")
-                        onTriggered:
-                        {
-                            var data = bae.getList(selectionBar.selectedPaths)
-                            contextMenu.close()
-                            selectionMode = false
-                            selectionBar.clear()
-                            Player.playAll(data)
+                    target: albumsView
+                    onRowClicked: Player.addTrack(track)
+                    onPlayTrack: Player.quickPlay(track)
 
-                        }
+                    onAlbumCoverClicked: albumsView.populateTable(album, artist)
+
+                    onAlbumCoverPressedAndHold:
+                    {
+                        var query = Q.GET.albumTracks_.arg(album)
+                        query = query.arg(artist)
+
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.query = query
+                        Player.playAll()
                     }
 
-                    onFavClicked: H.faveIt(paths)
-
-                    onQueueClicked: H.queueIt(paths)
-                    onSaveToClicked:
+                    onPlayAll:
                     {
-                        playlistDialog.tracks = paths
-                        playlistDialog.open()
-                    }
-                    onOpenWithClicked: bae.showFolder(paths)
+                        var query = Q.GET.albumTracks_.arg(album)
+                        query = query.arg(artist)
+                        query = query.arg(data.artist)
 
-                    onRemoveClicked:
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.query = query
+                        Player.playAll()
+                    }
+
+                    onAppendAll:
                     {
+                        var query = Q.GET.albumTracks_.arg(album)
+                        query = query.arg(artist)
 
+                        mainPlaylist.list.appendQuery(query)
+                        mainPlaylist.listView.positionViewAtEnd()
                     }
-                    onRateClicked: H.rateIt(paths, rate)
-
-                    onColorClicked: H.moodIt(paths, color)
                 }
+            }
+
+            AlbumsView
+            {
+                id: artistsView
+
+                holder.emoji: "qrc:/assets/MusicBox.png"
+                holder.isMask: false
+                holder.title : qsTr("No Artists!")
+                holder.body: qsTr("Add new music sources")
+                holder.emojiSize: iconSizes.huge
+                headBarTitle: count + qsTr(" artists")
+                list.query: Q.GET.allArtistsAsc
+                list.sortBy: Albums.ARTIST
+                table.list.sortBy:  Tracks.NONE
+
+                Connections
+                {
+                    target: artistsView
+                    onRowClicked: Player.addTrack(track)
+                    onPlayTrack: Player.quickPlay(track)
+                    onAlbumCoverClicked: artistsView.populateTable(undefined, artist)
+
+                    onAlbumCoverPressedAndHold:
+                    {
+                        var query = Q.GET.artistTracks_.arg(artist)
+                        var map = bae.get(query)
+                        Player.playAll(map)
+                    }
+
+                    onPlayAll:
+                    {
+                        var query = Q.GET.artistTracks_.arg(artist)
+                        query = query.arg(data.artist)
+
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAll()
+                    }
+
+                    onAppendAll:
+                    {
+                        var query = Q.GET.artistTracks_.arg(artist)
+
+                        mainPlaylist.list.appendQuery(query)
+                        mainPlaylist.listView.positionViewAtEnd()
+                    }
+                }
+            }
+
+            PlaylistsView
+            {
+                id: playlistsView
+
+                Connections
+                {
+                    target: playlistsView
+                    onRowClicked: Player.addTrack(track)
+                    onQuickPlayTrack: Player.quickPlay(track)
+
+                    onPlayAll:
+                    {
+                        var query = playlistsView.playlistQuery
+
+
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAll()
+                    }
+
+                    onAppendAll:
+                    {
+                        var query = playlistsView.playlistQuery
+
+                        mainPlaylist.list.appendQuery(query)
+                        mainPlaylist.listView.positionViewAtEnd()
+                    }
+
+                    onPlaySync:
+                    {
+                        var tracks = bae.get(Q.GET.playlistTracks_.arg(playlist))
+                        Player.playAll(tracks)
+                        root.sync = true
+                        root.syncPlaylist = playlist
+                        root.infoMsg = qsTr("Syncing to ") + playlist
+                    }
+                }
+            }
+
+
+            SearchTable
+            {
+                id: searchView
+
+                Connections
+                {
+                    target: searchView
+                    onRowClicked: Player.addTrack(searchView.list.get(index))
+                    onQuickPlayTrack: Player.quickPlay(searchView.list.get(index))
+                    onPlayAll:
+                    {
+                        var tracks = searchView.list.getAll()
+                        for(var i in tracks)
+                            Player.appendTrack(tracks[i])
+
+                        Player.playAll()
+                    }
+
+                    onAppendAll: Player.appendAll(searchView.list.getAll())
+                    onArtworkDoubleClicked:
+                    {
+                        var query = Q.GET.albumTracks_.arg(
+                                    searchView.searchTable.model.get(
+                                        index).album)
+                        query = query.arg(searchView.searchTable.model.get(
+                                              index).artist)
+
+                        Player.playAll(bae.get(query))
+                    }
+                }
+            }
+
+            FoldersView
+            {
+                id: foldersView
+
+                Connections
+                {
+                    target: foldersView.list
+
+                    onRowClicked: Player.addTrack(foldersView.list.model.get(index))
+                    onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
+                    onPlayAll:
+                    {
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = foldersView.list.list.query
+                        Player.playAll()
+                    }
+
+                    onAppendAll:
+                    {
+                        var query = foldersView.list.list.query
+                        mainPlaylist.list.appendQuery(query)
+                        mainPlaylist.listView.positionViewAtEnd()
+                    }
+
+                    onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
+                }
+            }
+
+            CloudView
+            {
+                id: cloudView
+
+                onQuickPlayTrack: Player.quickPlay(cloudView.list.get(index))
+            }
+
+            BabeitView
+            {
+                id: babeitView
+            }
+
+            LinkingView
+            {
+                id: linkingView
+            }
+
+            YouTube
+            {
+                id: youtubeView
+            }
+
+            Spotify
+            {
+                id: spotifyView
+            }
+        }
+
+        Maui.SelectionBar
+        {
+            id: selectionBar
+            Layout.fillWidth: true
+            Layout.margins: space.huge
+            Layout.topMargin: space.small
+            Layout.bottomMargin: space.big
+            onIconClicked: contextMenu.show(selectedPaths)
+            onExitClicked: clear()
+
+            TableMenu
+            {
+                id: contextMenu
+                menuItem: Maui.MenuItem
+                {
+                    text: qsTr("Play all")
+                    onTriggered:
+                    {
+                        var data = bae.getList(selectionBar.selectedPaths)
+                        contextMenu.close()
+                        selectionMode = false
+                        selectionBar.clear()
+                        Player.playAll(data)
+
+                    }
+                }
+
+                onFavClicked: H.faveIt(paths)
+
+                onQueueClicked: H.queueIt(paths)
+                onSaveToClicked:
+                {
+                    playlistDialog.tracks = paths
+                    playlistDialog.open()
+                }
+                onOpenWithClicked: bae.showFolder(paths)
+
+                onRemoveClicked:
+                {
+
+                }
+                onRateClicked: H.rateIt(paths, rate)
+
+                onColorClicked: H.moodIt(paths, color)
             }
         }
     }

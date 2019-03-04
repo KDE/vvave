@@ -346,3 +346,15 @@ bool TracksModel::countUp(const int &index)
 
     return false;
 }
+
+bool TracksModel::remove(const int &index)
+{
+    if(index >= this->list.size() || index < 0)
+        return false;
+
+    emit this->preItemRemoved(index);
+    this->list.removeAt(index);
+    emit this->postItemRemoved();
+
+    return true;
+}
