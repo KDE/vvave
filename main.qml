@@ -609,7 +609,7 @@ Maui.ApplicationWindow
     globalDrawer: Maui.GlobalDrawer
     {
         id: _drawer
-        width: Kirigami.Units.gridUnit * 14
+        width: Kirigami.Units.gridUnit * 17
 
         modal: !root.isWide
         handleVisible: false
@@ -700,8 +700,9 @@ Maui.ApplicationWindow
                         query = query.arg(artist)
 
                         mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
                         mainPlaylist.list.query = query
-                        Player.playAll()
+                        Player.playAll()                        
                     }
 
                     onPlayAll:
@@ -750,8 +751,10 @@ Maui.ApplicationWindow
                     onAlbumCoverPressedAndHold:
                     {
                         var query = Q.GET.artistTracks_.arg(artist)
-                        var map = bae.get(query)
-                        Player.playAll(map)
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAll()
                     }
 
                     onPlayAll:
@@ -803,9 +806,11 @@ Maui.ApplicationWindow
                     }
 
                     onPlaySync:
-                    {
-                        var tracks = bae.get(Q.GET.playlistTracks_.arg(playlist))
-                        Player.playAll(tracks)
+                    {                        
+                        var query = playlistsView.playlistQuery
+                        mainPlaylist.list.appendQuery(query)
+                        Player.playAll()
+
                         root.sync = true
                         root.syncPlaylist = playlist
                         root.infoMsg = qsTr("Syncing to ") + playlist
@@ -842,7 +847,10 @@ Maui.ApplicationWindow
                         query = query.arg(searchView.searchTable.model.get(
                                               index).artist)
 
-                        Player.playAll(bae.get(query))
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAll()
                     }
                 }
             }
@@ -908,7 +916,7 @@ Maui.ApplicationWindow
             id: _selectionBar
             property alias listView: _selectionBar.selectionList
             Layout.fillWidth: true
-            Layout.margins: space.huge
+            Layout.margins: space.big
             Layout.topMargin: space.small
             Layout.bottomMargin: space.big
             onIconClicked: _contextMenu.popup()
@@ -996,7 +1004,11 @@ Maui.ApplicationWindow
         }
 
         onSkipTrack: Player.nextTrack()
-        onBabeIt: Player.babeTrack()
+        onBabeIt: if (!mainlistEmpty)
+                  {
+                      mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
+                      currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
+                  }
 
         onOpenFiles: Player.playAll(tracks)
     }

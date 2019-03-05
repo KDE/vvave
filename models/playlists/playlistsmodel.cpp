@@ -127,29 +127,29 @@ FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
             {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
         },
 
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Tags"},
-            {FMH::MODEL_KEY::ICON, "tag"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
+//        {
+//            {FMH::MODEL_KEY::PLAYLIST, "Tags"},
+//            {FMH::MODEL_KEY::ICON, "tag"},
+//            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+//        },
 
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Relationships"},
-            {FMH::MODEL_KEY::ICON, "view-media-similarartists"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
+//        {
+//            {FMH::MODEL_KEY::PLAYLIST, "Relationships"},
+//            {FMH::MODEL_KEY::ICON, "view-media-similarartists"},
+//            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+//        },
 
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Popular"},
-            {FMH::MODEL_KEY::ICON, "view-media-chart"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
+//        {
+//            {FMH::MODEL_KEY::PLAYLIST, "Popular"},
+//            {FMH::MODEL_KEY::ICON, "view-media-chart"},
+//            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+//        },
 
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Genres"},
-            {FMH::MODEL_KEY::ICON, "view-media-genre"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        }
+//        {
+//            {FMH::MODEL_KEY::PLAYLIST, "Genres"},
+//            {FMH::MODEL_KEY::ICON, "view-media-genre"},
+//            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+//        }
     };
 }
 

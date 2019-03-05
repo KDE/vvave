@@ -44,8 +44,7 @@ Maui.Dialog
                     onPressAndHold:
                     {
                         playlistsList.currentIndex = index
-                        Player.addToPlaylist(tracks, playlistsList.model.get(playlistsList.currentIndex).playlist)
-                        close()
+                        insert()
                     }
                 }
             }
@@ -66,7 +65,6 @@ Maui.Dialog
                     addPlaylist()
                     playlistsView.playlistList.addTrack(playlistsList.listView.currentIndex, tracks)
                     clear()
-                    close()
                 }
             }
 
@@ -85,6 +83,12 @@ Maui.Dialog
         if(newPlaylistField.text.length)
             addPlaylist()
 
+        insert()
+    }
+
+
+    function insert()
+    {
         playlistsView.playlistList.addTrack(playlistsList.listView.currentIndex, tracks)
         close()
     }

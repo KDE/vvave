@@ -50,19 +50,19 @@ BabeTable
     }
 
 
-    footBar.leftContent: Maui.ToolButton
-    {
-        visible: true
-        iconName: "view-filter"
-        iconColor: autoSuggestions ? babeColor : textColor
-        onClicked:
-        {
-            autoSuggestions = !autoSuggestions
-            Maui.FM.saveSettings("AUTOSUGGESTIONS", autoSuggestions, "BABE")
-            if(!autoSuggestions)
-                suggestionsPopup.close()
-        }
-    }
+//    footBar.leftContent: Maui.ToolButton
+//    {
+//        visible: true
+//        iconName: "view-filter"
+//        iconColor: autoSuggestions ? babeColor : textColor
+//        onClicked:
+//        {
+//            autoSuggestions = !autoSuggestions
+//            Maui.FM.saveSettings("AUTOSUGGESTIONS", autoSuggestions, "BABE")
+//            if(!autoSuggestions)
+//                suggestionsPopup.close()
+//        }
+//    }
 
     SearchSuggestions
     {

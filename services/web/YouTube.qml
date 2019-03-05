@@ -156,7 +156,7 @@ Page
                 editable: true
                 onValueChanged:
                 {
-                    bae.saveSetting("YOUTUBELIMIT", value, "BABE")
+                    Maui.FM.saveSettings("YOUTUBELIMIT", value, "BABE")
                 }
             }
 

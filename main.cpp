@@ -29,14 +29,14 @@
 
 #include "utils/bae.h"
 #include "services/web/youtube.h"
-#include "services/web/Spotify/spotify.h"
-#include "services/local/linking.h"
+//#include "services/web/Spotify/spotify.h"
+//#include "services/local/linking.h"
 #include "services/local/player.h"
 
 #include "models/tracks/tracksmodel.h"
 #include "models/albums/albumsmodel.h"
 #include "models/playlists/playlistsmodel.h"
-#include "models/cloud/cloud.h"
+//#include "models/cloud/cloud.h"
 #include "models/baselist.h"
 #include "models/basemodel.h"
 
@@ -65,19 +65,9 @@ int main(int argc, char *argv[])
 
     const QCommandLineOption versionOption = parser.addVersionOption();
     parser.process(app);
-    //    bool version = parser.isSet(versionOption);
-
-    //    if(version)
-    //    {
-    //        printf("%s %s\n", qPrintable(QCoreApplication::applicationName()),
-    //               qPrintable(QCoreApplication::applicationVersion()));
-    //        return 0;
-    //    }
 
     const QStringList args = parser.positionalArguments();
-
     QStringList urls;
-
     if(!args.isEmpty())
         urls = args;
 
@@ -85,7 +75,7 @@ int main(int argc, char *argv[])
 
     /* Services */
     YouTube youtube;
-    Spotify spotify;
+//    Spotify spotify;
 
     QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
 
@@ -102,8 +92,8 @@ int main(int argc, char *argv[])
     auto context = engine.rootContext();
     context->setContextProperty("bae", &bae);
     context->setContextProperty("youtube", &youtube);
-    context->setContextProperty("spotify", &spotify);
-    context->setContextProperty("link", &bae.link);
+//    context->setContextProperty("spotify", &spotify);
+//    context->setContextProperty("link", &bae.link);
 
     qmlRegisterUncreatableType<BaseList>("BaseList", 1, 0, "BaseList", QStringLiteral("BaseList should not be created in QML"));
 
@@ -111,17 +101,17 @@ int main(int argc, char *argv[])
     qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
     qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
     qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
-    qmlRegisterType<Cloud>("CloudList", 1, 0, "CloudList");
+//    qmlRegisterType<Cloud>("CloudList", 1, 0, "CloudList");
 
     qmlRegisterType<Player>("Player", 1, 0, "Player");
 
-    qmlRegisterUncreatableMetaObject(
-                LINK::staticMetaObject, // static meta object
-                "Link.Codes",                // import statement (can be any string)
-                1, 0,                          // major and minor version of the import
-                "LINK",                 // name in QML (does not have to match C++ name)
-                "Error: only enums"            // error in case someone tries to create a MyNamespace object
-                );
+//    qmlRegisterUncreatableMetaObject(
+//                LINK::staticMetaObject, // static meta object
+//                "Link.Codes",                // import statement (can be any string)
+//                1, 0,                          // major and minor version of the import
+//                "LINK",                 // name in QML (does not have to match C++ name)
+//                "Error: only enums"            // error in case someone tries to create a MyNamespace object
+//                );
 
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();

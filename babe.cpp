@@ -1,7 +1,7 @@
 #include "babe.h"
 
 #include "db/collectionDB.h"
-#include "db/conthread.h"
+//#include "db/conthread.h"
 #include "settings/BabeSettings.h"
 #include "pulpo/pulpo.h"
 
@@ -34,7 +34,7 @@ Babe::Babe(QObject *parent) : QObject(parent)
     this->settings = new BabeSettings(this);
 
     /*use another thread for the db to perfom heavy dutty actions*/
-    this->thread = new ConThread;
+//    this->thread = new ConThread;
     this->pulpo = new Pulpo(this);
     this->db = CollectionDB::getInstance();
 
@@ -70,7 +70,7 @@ Babe::Babe(QObject *parent) : QObject(parent)
     });
 
     /*The local streaming connection still unfinished*/
-    connect(&link, &Linking::parseAsk, this, &Babe::linkDecoder);
+//    connect(&link, &Linking::parseAsk, this, &Babe::linkDecoder);
 //    connect(&link, &Linking::bytesFrame, [this](QByteArray array)
 //    {
 //        this->player.appendBuffe(array);
@@ -102,7 +102,6 @@ Babe::Babe(QObject *parent) : QObject(parent)
 
 Babe::~Babe()
 {
-    delete this->thread;
 }
 
 
@@ -134,25 +133,25 @@ QVariantList Babe::getList(const QStringList &urls)
     return Babe::transformData(this->db->getDBData(urls));
 }
 
-void Babe::set(const QString &table, const QVariantList &wheres)
-{
-    this->thread->start(table, wheres);
-}
+//void Babe::set(const QString &table, const QVariantList &wheres)
+//{
+//    this->thread->start(table, wheres);
+//}
 
-void Babe::trackPlaylist(const QStringList &urls, const QString &playlist)
-{
-    QVariantList data;
-    for(auto url : urls)
-    {
-        QVariantMap map {{FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist},
-                         {FMH::MODEL_NAME[FMH::MODEL_KEY::URL],url},
-                         {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],QDateTime::currentDateTime()}};
+//void Babe::trackPlaylist(const QStringList &urls, const QString &playlist)
+//{
+//    QVariantList data;
+//    for(auto url : urls)
+//    {
+//        QVariantMap map {{FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist},
+//                         {FMH::MODEL_NAME[FMH::MODEL_KEY::URL],url},
+//                         {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],QDateTime::currentDateTime()}};
 
-        data << map;
-    }
+//        data << map;
+//    }
 
-    this->thread->start(BAE::TABLEMAP[TABLE::TRACKS_PLAYLISTS], data);
-}
+//    this->thread->start(BAE::TABLEMAP[TABLE::TRACKS_PLAYLISTS], data);
+//}
 
 void Babe::trackLyrics(const QString &url)
 {
@@ -168,17 +167,6 @@ void Babe::trackLyrics(const QString &url)
         this->fetchTrackLyrics(track.first());
 }
 
-bool Babe::trackBabe(const QString &path)
-{
-    auto babe = this->db->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
-                                    TABLEMAP[TABLE::TRACKS],
-            FMH::MODEL_NAME[FMH::MODEL_KEY::URL],path));
-
-    if(!babe.isEmpty())
-        return babe.first()[FMH::MODEL_KEY::FAV].toInt();
-
-    return false;
-}
 
 QString Babe::artistArt(const QString &artist)
 {
@@ -233,60 +221,60 @@ void Babe::fetchTrackLyrics(FMH::MODEL &song)
     qDebug()<<"DONE FETCHING LYRICS";
 }
 
-void Babe::linkDecoder(QString json)
-{
+//void Babe::linkDecoder(QString json)
+//{
 
-    qDebug()<<"DECODING LINKER MSG"<<json;
-    auto ask = link.decode(json);
+//    qDebug()<<"DECODING LINKER MSG"<<json;
+//    auto ask = link.decode(json);
 
-    auto code = ask[BAE::SLANG[BAE::W::CODE]].toInt();
-    auto msg = ask[BAE::SLANG[BAE::W::MSG]].toString();
+//    auto code = ask[BAE::SLANG[BAE::W::CODE]].toInt();
+//    auto msg = ask[BAE::SLANG[BAE::W::MSG]].toString();
 
-    switch(static_cast<LINK::CODE>(code))
-    {
-    case LINK::CODE::CONNECTED :
-    {
-        this->link.deviceName = msg;
-        emit this->link.serverConReady(msg);
-        break;
-    }
-    case LINK::CODE::QUERY :
-    case LINK::CODE::FILTER :
-    case LINK::CODE::PLAYLISTS :
-    {
-        auto res = this->db->getDBDataQML(msg);
-        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
-        break;
-    }
-    case LINK::CODE::SEARCHFOR :
-    {
-//        auto res = this->searchFor(msg.split(","));
+//    switch(static_cast<LINK::CODE>(code))
+//    {
+//    case LINK::CODE::CONNECTED :
+//    {
+//        this->link.deviceName = msg;
+//        emit this->link.serverConReady(msg);
+//        break;
+//    }
+//    case LINK::CODE::QUERY :
+//    case LINK::CODE::FILTER :
+//    case LINK::CODE::PLAYLISTS :
+//    {
+//        auto res = this->db->getDBDataQML(msg);
 //        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
-        break;
-    }
-    case LINK::CODE::PLAY :
-    {
-        QFile file(msg);    // sound dir
-        file.open(QIODevice::ReadOnly);
-        QByteArray arr = file.readAll();
-        qDebug()<<"Preparing track array"<<msg<<arr.size();
-        link.sendArrayToClient(arr);
-        break;
-    }
-    case LINK::CODE::COLLECT :
-    {
-        //            auto devices = getDevices();
-        //            qDebug()<<"DEVICES:"<< devices;
-        //            if(!devices.isEmpty())
-        //                sendToDevice(devices.first().toMap().value("name").toString(),
-        //                             devices.first().toMap().value("id").toString(), msg);
-        break;
+//        break;
+//    }
+//    case LINK::CODE::SEARCHFOR :
+//    {
+////        auto res = this->searchFor(msg.split(","));
+////        link.sendToClient(link.packResponse(static_cast<LINK::CODE>(code), res));
+//        break;
+//    }
+//    case LINK::CODE::PLAY :
+//    {
+//        QFile file(msg);    // sound dir
+//        file.open(QIODevice::ReadOnly);
+//        QByteArray arr = file.readAll();
+//        qDebug()<<"Preparing track array"<<msg<<arr.size();
+//        link.sendArrayToClient(arr);
+//        break;
+//    }
+//    case LINK::CODE::COLLECT :
+//    {
+//        //            auto devices = getDevices();
+//        //            qDebug()<<"DEVICES:"<< devices;
+//        //            if(!devices.isEmpty())
+//        //                sendToDevice(devices.first().toMap().value("name").toString(),
+//        //                             devices.first().toMap().value("id").toString(), msg);
+//        break;
 
-    }
-    default: break;
+//    }
+//    default: break;
 
-    }
-}
+//    }
+//}
 
 QString Babe::albumWiki(const QString &album, const QString &artist)
 {
@@ -359,7 +347,7 @@ void Babe::brainz(const bool &on)
 
 bool Babe::brainzState()
 {
-    return loadSetting("AUTO", "BRAINZ", false).toBool();
+    return FM::loadSettings("AUTO", "BRAINZ", false).toBool();
 }
 
 void Babe::refreshCollection()
@@ -370,16 +358,6 @@ void Babe::refreshCollection()
 void Babe::getYoutubeTrack(const QString &message)
 {
     this->settings->fetchYoutubeTrack(message);
-}
-
-QVariant Babe::loadSetting(const QString &key, const QString &group, const QVariant &defaultValue)
-{
-    return BAE::loadSettings(key, group, defaultValue);
-}
-
-void Babe::saveSetting(const QString &key, const QVariant &value, const QString &group)
-{
-    BAE::saveSettings(key, value, group);
 }
 
 void Babe::savePlaylist(const QStringList &list)
@@ -402,15 +380,10 @@ int Babe::lastPlaylistPos()
     return BAE::loadSettings("PLAYLIST_POS","MAINWINDOW",QVariant(0)).toInt();
 }
 
-bool Babe::fileExists(const QString &url)
-{
-    return BAE::fileExists(url);
-}
-
 void Babe::showFolder(const QStringList &urls)
-{
+{    
     for(auto url : urls)
-        QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(url).dir().absolutePath()));
+        FM::openUrl(QUrl::fromLocalFile(QFileInfo(url).dir().absolutePath()).toString());
 }
 
 QString Babe::babeColor()
@@ -466,16 +439,6 @@ QString Babe::moodColor(const int &pos)
     if(pos < BAE::MoodColors.size())
         return BAE::MoodColors.at(pos);
     else return "";
-}
-
-QString Babe::homeDir()
-{
-    return BAE::HomePath;
-}
-
-QString Babe::musicDir()
-{
-    return BAE::MusicPath;
 }
 
 QStringList Babe::defaultSources()
@@ -549,11 +512,11 @@ QVariantList Babe::transformData(const FMH::MODEL_LIST &dbList)
 {
     QVariantList res;
 
-//    for(FMH::MODEL data : dbList)
-//    {
-//        FMH::MODEL copy = data;
-//        res << FM::toMap(copy);
-//    }
+    for(FMH::MODEL data : dbList)
+    {
+        FMH::MODEL copy = data;
+        res << FM::toMap(copy);
+    }
 
     return res;
 }

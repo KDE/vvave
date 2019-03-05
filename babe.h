@@ -5,7 +5,7 @@
 #include <QVariantList>
 #include "utils/bae.h"
 #include "db/collectionDB.h"
-#include "services/local/linking.h"
+//#include "services/local/linking.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 class Notify;
@@ -29,7 +29,7 @@ public:
     ~Babe();
 
     BabeSettings *settings;
-    Linking link;
+//    Linking link;
 
     //    Q_INVOKABLE void runPy();
 
@@ -37,16 +37,17 @@ public:
     Q_INVOKABLE QVariantList get(const QString &queryTxt);
     Q_INVOKABLE QVariantList getList(const QStringList &urls);
 
-    Q_INVOKABLE void set(const QString &table, const QVariantList &wheres);
+//    Q_INVOKABLE void set(const QString &table, const QVariantList &wheres);
+//    Q_INVOKABLE void trackPlaylist(const QStringList &urls, const QString &playlist);
 
-    Q_INVOKABLE void trackPlaylist(const QStringList &urls, const QString &playlist);
+    /***MOVE ALL THIS TO A INFO MODEL ***/
     Q_INVOKABLE void trackLyrics(const QString &url);
-    Q_INVOKABLE bool trackBabe(const QString &path);
-
     Q_INVOKABLE QString artistArt(const QString &artist);
     Q_INVOKABLE QString albumArt(const QString &album, const QString &artist);
     Q_INVOKABLE QString artistWiki(const QString &artist);
     Q_INVOKABLE QString albumWiki(const QString &album, const QString &artist);
+    Q_INVOKABLE QString loadCover(const QString &url);
+/**************************************/
 
     Q_INVOKABLE QVariantList getFolders();
     Q_INVOKABLE QStringList getSourceFolders();
@@ -59,16 +60,12 @@ public:
     Q_INVOKABLE void getYoutubeTrack(const QString &message);
 
     /* STATIC METHODS */
-    Q_INVOKABLE static void saveSetting(const QString &key, const QVariant &value, const QString &group);
-    Q_INVOKABLE static QVariant loadSetting(const QString &key, const QString &group, const QVariant &defaultValue);
-
     Q_INVOKABLE static void savePlaylist(const QStringList &list);
     Q_INVOKABLE static QStringList lastPlaylist();
 
     Q_INVOKABLE static void savePlaylistPos(const int &pos);
     Q_INVOKABLE static int lastPlaylistPos();
 
-    Q_INVOKABLE static bool fileExists(const QString &url);
     Q_INVOKABLE static void showFolder(const QStringList &urls);
 
     /*COLORS*/
@@ -78,14 +75,7 @@ public:
     Q_INVOKABLE void openUrls(const QStringList &urls);
 
     Q_INVOKABLE static QString moodColor(const int &pos);
-
-    Q_INVOKABLE static QString homeDir();
-    Q_INVOKABLE static QString musicDir();
-
     Q_INVOKABLE static QStringList defaultSources();
-
-    /*USEFUL*/
-    Q_INVOKABLE QString loadCover(const QString &url);
 
     /*KDE*/
     Q_INVOKABLE void notify(const QString &title, const QString &body);
@@ -95,7 +85,7 @@ public slots:
 
 private:
     Pulpo *pulpo;
-    ConThread *thread;
+//    ConThread *thread;
     CollectionDB *db;
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
@@ -107,7 +97,7 @@ private:
     static QVariantList transformData(const FMH::MODEL_LIST &dbList);
 
     void fetchTrackLyrics(FMH::MODEL &song);
-    void linkDecoder(QString json);
+//    void linkDecoder(QString json);
 
 signals:
     void refreshTables(int size);

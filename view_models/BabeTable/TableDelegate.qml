@@ -90,9 +90,8 @@ SwipeDelegate
 
             iconColor: model.fav === "1" ? babeColor : textColor
             onClicked:
-            {
-                model.fav = model.fav === "1" ? "0" : "1"
-                bae.babeTrack(url, model.fav)
+            {                
+                list.fav(index, !(list.get(index).fav == "1"))
                 swipe.close()
             }
         }

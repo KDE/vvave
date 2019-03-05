@@ -1,5 +1,4 @@
-Qt.include("Icons.js")
-
+.import org.kde.mauikit 1.0 as Maui
 
 function playTrack(index)
 {
@@ -9,7 +8,7 @@ function playTrack(index)
 
         if(typeof(currentTrack) === "undefined") return
 
-        if(bae.fileExists(currentTrack.url))
+        if(Maui.FM.fileExists(currentTrack.url))
         {
             player.url = currentTrack.url;
             player.playing = true
@@ -19,7 +18,7 @@ function playTrack(index)
 
             currentTrack.artwork = currentArtwork
 
-            currentBabe = bae.trackBabe(currentTrack.url)
+//            currentBabe = bae.trackBabe(currentTrack.url)
 
             progressBar.enabled = true
 
@@ -153,7 +152,7 @@ function appendTrack(track)
         if(sync === true)
         {
             infoMsgAnim()
-            addToPlaylist([track.url], syncPlaylist)
+//            addToPlaylist([track.url], syncPlaylist)
         }
     }
 
@@ -236,18 +235,3 @@ function playAll()
     mainPlaylist.listView.positionViewAtBeginning()
     playAt(0)
 }
-
-function babeTrack(url, value)
-{           
-    bae.babeTrack(url, value)
-}
-
-function addToPlaylist(urls, playlist)
-{
-    if(urls.length > 0)
-    {
-        bae.trackPlaylist(urls, playlist)
-        bae.notify(playlist, urls.length + " tracks added to the playlist:\n"+urls.join("\n"))
-    }
-}
-

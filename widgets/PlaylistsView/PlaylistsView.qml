@@ -200,12 +200,12 @@ Kirigami.PageRow
 
     function populateExtra(query, title)
     {
-        playlistSwipe.currentIndex = 1
+//        playlistSwipe.currentIndex = 1
 
-        var res = bae.get(query)
-        playlistViewModelFilter.clearTable()
-        playlistViewModelFilter.headBarTitle = title
-        appendToExtraList(res)
+//        var res = bae.get(query)
+//        playlistViewModelFilter.clearTable()
+//        playlistViewModelFilter.headBarTitle = title
+//        appendToExtraList(res)
     }
 
     function appendToExtraList(res)

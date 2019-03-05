@@ -136,6 +136,7 @@ BabeGrid
                 quickPlayVisible: true
                 focus: true
                 list.sortBy: Tracks.TRACK
+                headBar.plegable: false
 
 
                 holder.emoji: "qrc:/assets/ElectricPlug.png"
@@ -184,15 +185,6 @@ BabeGrid
         }
 
 
-    }
-
-    function populate(query)
-    {
-        var map = bae.get(query)
-
-        if(map.length > 0)
-            for(var i in map)
-                gridModel.append(map[i])
     }
 
     function populateTable(album, artist)
