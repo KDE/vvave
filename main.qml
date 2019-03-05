@@ -44,14 +44,13 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
-    property alias animFooter: mainPlaylist.animFooter
     property alias mainPlaylist: mainPlaylist
     property alias selectionBar: selectionBar
     property alias progressBar: progressBar
 
     about.appIcon: "qrc:/assets/vvave.svg"
     about.appDescription: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
-
+    showAccounts: false
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
@@ -65,25 +64,17 @@ Maui.ApplicationWindow
     property int prevTrackIndex: 0
 
     property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.get(0).artwork : ""
-    property bool currentBabe: currentTrack.babe == "0" ? false : true
+    property bool currentBabe: currentTrack.fav == "0" ? false : true
 
-    property string durationTimeLabel: player.duration
+    property alias durationTimeLabel: player.duration
     property string progressTimeLabel: player.transformTime(player.position/1000)
 
-    property bool isPlaying: player.playing
-    property bool autoplay: bae.loadSetting("AUTOPLAY", "BABE",
-                                            false) === "true" ? true : false
+    property alias isPlaying: player.playing
     property int onQueue: 0
 
     property bool mainlistEmpty: !mainPlaylist.table.count > 0
 
-    /***************************************************/
-    /******************** UI PROPS ********************/
-    /*************************************************/
-    property int columnWidth: Kirigami.Units.gridUnit * 17
-
-
-    /***************************************************/
+      /***************************************************/
     /******************** HANDLERS ********************/
     /*************************************************/
 
@@ -96,23 +87,24 @@ Maui.ApplicationWindow
                                            playlists: 3,
                                            search: 4,
                                            folders: 5,
-                                           cloud: 6,
-                                           vvave: 7,
-                                           linking: 8,
-                                           youtube: 9,
-                                           spotify: 10
+//                                           cloud: 6,
+//                                           vvave: 7,
+//                                           linking: 8,
+                                           youtube: 6,
+//                                           spotify: 10
 
                                        })
 
     property string syncPlaylist: ""
     property bool sync: false
+
     property string infoMsg: ""
     property bool infoLabels: bae.loadSetting("LABELS", "PLAYBACK", false) == "true" ? true : false
 
-    property bool isLinked: false
-    property bool isServing: false
+//    property bool isLinked: false
+//    property bool isServing: false
 
-    property bool focusMode : false
+//    property bool focusMode : false
     property bool selectionMode : false
 
     /***************************************************/
@@ -122,12 +114,6 @@ Maui.ApplicationWindow
 
     /*SIGNALS*/
     signal missingAlert(var track)
-
-    /*CONF*/
-    //    pageStack.defaultColumnWidth: columnWidth
-    //    pageStack.initialPage: [mainPlaylist, views]
-    //    pageStack.interactive: isMobile
-    //    pageStack.separatorVisible: pageStack.wideMode
 
 
     /*HANDLE EVENTS*/
@@ -169,7 +155,7 @@ Maui.ApplicationWindow
     /* UI */
     property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
     altToolBars: false
-    accentColor: bae.babeColor()
+    accentColor: babeColor
     headBarFGColor: altColorText
     headBarBGColor: currentView === viewsIndex.vvave ? "#7e57c2" : "#212121"
     colorSchemeName: "vvave"
@@ -413,21 +399,21 @@ Maui.ApplicationWindow
 
     mainMenu: [
 
-        Maui.MenuItem
-        {
-            text: "Vvave Stream"
-            icon.name: "headphones"
-            onTriggered:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.vvave
-            }
-        },
+//        Maui.MenuItem
+//        {
+//            text: "Vvave Stream"
+//            icon.name: "headphones"
+//            onTriggered:
+//            {
+//                pageStack.currentIndex = 1
+//                currentView = viewsIndex.vvave
+//            }
+//        },
 
         Maui.MenuItem
         {
             text: qsTr("Folders")
-            icon.name: "folder-open"
+            icon.name: "folder"
             onTriggered:
             {
                 pageStack.currentIndex = 1
@@ -435,17 +421,17 @@ Maui.ApplicationWindow
             }
         },
 
-        Maui.MenuItem
-        {
-            text: qsTr("Linking")
-            icon.name: "view-links"
-            onTriggered:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.linking
-                if(!isLinked) linkingView.linkingConf.open()
-            }
-        },
+//        Maui.MenuItem
+//        {
+//            text: qsTr("Linking")
+//            icon.name: "view-links"
+//            onTriggered:
+//            {
+//                pageStack.currentIndex = 1
+//                currentView = viewsIndex.linking
+//                if(!isLinked) linkingView.linkingConf.open()
+//            }
+//        },
 
         Maui.MenuItem
         {
@@ -458,16 +444,16 @@ Maui.ApplicationWindow
             }
         },
 
-        Maui.MenuItem
-        {
-            text: qsTr("Cloud")
-            icon.name: "folder-cloud"
-            onTriggered:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.cloud
-            }
-        },
+//        Maui.MenuItem
+//        {
+//            text: qsTr("Cloud")
+//            icon.name: "folder-cloud"
+//            onTriggered:
+//            {
+//                pageStack.currentIndex = 1
+//                currentView = viewsIndex.cloud
+//            }
+//        },
 
 
         //        Maui.MenuItem
@@ -570,7 +556,7 @@ Maui.ApplicationWindow
         id: message
         visible: infoMsg.length && sync
         anchors.bottom: parent.bottom
-        width: pageStack.wideMode ? columnWidth : parent.width
+        width: parent.width
         height: iconSize
         z: 999
 
@@ -665,9 +651,7 @@ Maui.ApplicationWindow
                 onCoverPressed: Player.appendAll(tracks)
                 onCoverDoubleClicked: Player.playAll(tracks)
             }
-
         }
-
     }
 
     ColumnLayout
@@ -680,27 +664,6 @@ Maui.ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
             interactive: isMobile
-            //                contentItem: ListView
-            //                {
-            //                    model: swipeView.contentModel
-            //                    interactive: swipeView.interactive
-            //                    currentIndex: swipeView.currentIndex
-
-            //                    spacing: swipeView.spacing
-            //                    orientation: swipeView.orientation
-            //                    snapMode: ListView.SnapOneItem
-            //                    boundsBehavior: Flickable.StopAtBounds
-
-            //                    highlightRangeMode: ListView.StrictlyEnforceRange
-            //                    preferredHighlightBegin: 0
-            //                    preferredHighlightEnd: 0
-            //                    highlightMoveDuration: 250
-            //                    //                    min:10
-
-            //                    maximumFlickVelocity: 10 * (swipeView.orientation ===
-            //                                               Qt.Horizontal ? width : height)
-            //                }
-
             currentIndex: currentView
 
             onCurrentItemChanged: currentItem.forceActiveFocus()
@@ -942,32 +905,31 @@ Maui.ApplicationWindow
                 }
             }
 
-            CloudView
-            {
-                id: cloudView
+//            CloudView
+//            {
+//                id: cloudView
+//                onQuickPlayTrack: Player.quickPlay(cloudView.list.get(index))
+//            }
 
-                onQuickPlayTrack: Player.quickPlay(cloudView.list.get(index))
-            }
+//            BabeitView
+//            {
+//                id: babeitView
+//            }
 
-            BabeitView
-            {
-                id: babeitView
-            }
-
-            LinkingView
-            {
-                id: linkingView
-            }
+//            LinkingView
+//            {
+//                id: linkingView
+//            }
 
             YouTube
             {
                 id: youtubeView
             }
 
-            Spotify
-            {
-                id: spotifyView
-            }
+//            Spotify
+//            {
+//                id: spotifyView
+//            }
         }
 
         Maui.SelectionBar

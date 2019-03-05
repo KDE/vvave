@@ -150,7 +150,6 @@ function appendTrack(track)
     if(track)
     {
         mainPlaylist.list.append(track)
-        animFooter.running = true
         if(sync === true)
         {
             infoMsgAnim()
@@ -194,13 +193,16 @@ function appendAll(tracks)
 function savePlaylist()
 {
     var list = []
-    var n =  mainPlaylist.list.count
+    var n =  mainPlaylist.listView.count
     n = n > 15 ? 15 : n
+
     for(var i=0 ; i < n; i++)
     {
         var url = mainPlaylist.list.get(i).url
         list.push(url)
     }
+
+    console.log("SAVING LIST", list)
     bae.savePlaylist(list)
     bae.savePlaylistPos(mainPlaylist.listView.currentIndex)
 }

@@ -22,7 +22,6 @@ Maui.Page
     property alias listModel: table.listModel
     property alias listView : table.listView
     property alias table: table
-    property alias animFooter : animFooter
     property alias menu : playlistMenu
 
     property alias contextMenu: table.contextMenu
@@ -48,31 +47,12 @@ Maui.Page
     footBar.implicitHeight: toolBarHeight * 1.3
 
     footBarItem: AlbumsRoll
-   {
+    {
         anchors.fill : parent
         anchors.leftMargin: space.small
         anchors.rightMargin: space.small
-           id: albumsRoll
+        id: albumsRoll
     }
-
-    //    footBar.rightContent: Maui.ToolButton
-    //    {
-    //        id: infoBtn
-    //        iconName:  "documentinfo"
-    //        onClicked:
-    //        {
-    //            if( stackView.currentItem !== table)
-    //            {
-    //                stackView.pop(table)
-    //                albumsRoll.positionAlbum(currentTrackIndex)
-    //            }else
-    //            {
-    //                stackView.push(infoView)
-    //            }
-    //        }
-    //    }
-
-
 
     footBar.background: Rectangle
     {
@@ -97,21 +77,6 @@ Maui.Page
             asynchronous: true
 
             source: "file://"+encodeURIComponent(currentArtwork)
-        }
-
-
-        SequentialAnimation
-        {
-            id: animFooter
-            PropertyAnimation
-            {
-                target: footerBg
-                property: "color"
-                easing.type: Easing.InOutQuad
-                from: "black"
-                to: darkViewBackgroundColor
-                duration: 500
-            }
         }
 
         FastBlur
@@ -173,31 +138,23 @@ Maui.Page
 
                 if(n>0)
                 {
+
+                    console.log("GETTINGS LAST PLAYED TRACKS", list)
                     for(var i = 0; i < n; i++)
                     {
                         var where = "url = \""+list[i]+"\""
                         var query = Q.GET.tracksWhere_.arg(where)
-                        var track = bae.get(query)
-                        Player.appendTrack(track[0])
+                        table.list.appendQuery(query);
                     }
                 }else
                 {
-                    where = "babe = 1"
+                    where = "fav = 1"
                     query = Q.GET.tracksWhere_.arg(where)
-                    var tracks = bae.get(query)
-
-                    for(var pos=0; pos< tracks.length; pos++)
-                        Player.appendTrack(tracks[pos])
-
+                    list.appendQuery(query);
                 }
 
                 if(autoplay)
                     Player.playAt(0)
-
-                //                                    var pos = bae.lastPlaylistPos()
-                //                                    console.log("POSSS:", pos)
-                //                                    list.currentIndex = pos
-                //                                    play(list.model.get(pos))
             }
         }
 

@@ -384,12 +384,12 @@ void Babe::saveSetting(const QString &key, const QVariant &value, const QString 
 
 void Babe::savePlaylist(const QStringList &list)
 {
-    BAE::saveSettings("PLAYLIST", list, "MAINWINDOW");
+    FM::saveSettings("LASTPLAYLIST", list, "PLAYLIST");
 }
 
 QStringList Babe::lastPlaylist()
 {
-    return BAE::loadSettings("PLAYLIST","MAINWINDOW",{}).toStringList();
+    return FM::loadSettings("LASTPLAYLIST","PLAYLIST", QStringList()).toStringList();
 }
 
 void Babe::savePlaylistPos(const int &pos)

@@ -14,7 +14,8 @@ StackView
     initialItem: Maui.Page
     {
 
-        headBarTitle: qsTr("Source folders")
+//        headBarTitle: qsTr("Source folders")
+        headBar.visible: false
         headBarExit: false
         margins: space.large
 
