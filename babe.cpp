@@ -469,27 +469,27 @@ void Babe::loadCover(const QString &url)
 
 void Babe::fetchCoverArt(FMH::MODEL &song)
 {
-//    auto pulpo = new Pulpo;
+    auto pulpo = new Pulpo;
 
-//    if(BAE::artworkCache(song, FMH::MODEL_KEY::ALBUM)) return song[FMH::MODEL_KEY::ARTWORK];
-//    if(BAE::artworkCache(song, FMH::MODEL_KEY::ARTIST)) return song[FMH::MODEL_KEY::ARTWORK];
+    if(BAE::artworkCache(song, FMH::MODEL_KEY::ALBUM)) emit this->coverReady(song[FMH::MODEL_KEY::ARTWORK]);
+    if(BAE::artworkCache(song, FMH::MODEL_KEY::ARTIST)) emit this->coverReady(song[FMH::MODEL_KEY::ARTWORK]);
 
-//    pulpo->registerServices({SERVICES::LastFm, SERVICES::Spotify});
-//    pulpo->setOntology(PULPO::ONTOLOGY::ALBUM);
-//    pulpo->setInfo(PULPO::INFO::ARTWORK);
+    pulpo->registerServices({SERVICES::LastFm, SERVICES::Spotify});
+    pulpo->setOntology(PULPO::ONTOLOGY::ALBUM);
+    pulpo->setInfo(PULPO::INFO::ARTWORK);
 
-//    connect(&pulpo, &Pulpo::infoReady, [&](const FMH::MODEL &track,const PULPO::RESPONSE  &res)
-//    {
-//        Q_UNUSED(track);
-//        if(!res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK].isEmpty())
-//        {
-//            auto artwork = res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK][PULPO::CONTEXT::IMAGE].toByteArray();
-//            BAE::saveArt(song, artwork, BAE::CachePath);
-//            emit this->coverReady(artwork);
-//        }
-//    });
+    connect(pulpo, &Pulpo::infoReady, [&](const FMH::MODEL &track,const PULPO::RESPONSE  &res)
+    {
+        Q_UNUSED(track);
+        if(!res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK].isEmpty())
+        {
+            auto artwork = res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK][PULPO::CONTEXT::IMAGE].toByteArray();
+            BAE::saveArt(song, artwork, BAE::CachePath);
+            emit this->coverReady(song[FMH::MODEL_KEY::ARTWORK]);
+        }
+    });
 
-//    pulpo->feed(song, PULPO::RECURSIVE::OFF);
+    pulpo->feed(song, PULPO::RECURSIVE::OFF);
 }
 
 QVariantList Babe::transformData(const FMH::MODEL_LIST &dbList)

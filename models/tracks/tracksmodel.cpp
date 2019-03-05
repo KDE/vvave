@@ -363,3 +363,24 @@ void TracksModel::refresh()
 {
     this->setList();
 }
+
+bool TracksModel::update(const QVariantMap &data, const int &index)
+{
+    if(index >= this->list.size() || index < 0)
+        return false;
+
+    auto newData = this->list[index];
+    QVector<int> roles;
+
+    for(auto key : data.keys())
+        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
+        {
+            newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
+            roles << FMH::MODEL_NAME_KEY[key];
+        }
+
+    this->list[index] = newData;
+    emit this->updateModel(index, roles);
+    return true;
+
+}

@@ -613,7 +613,7 @@ Maui.ApplicationWindow
 
         modal: !root.isWide
         handleVisible: false
-
+        closePolicy: Popup.NoAutoClose
         contentItem: MainPlaylist
         {
             id: mainPlaylist
@@ -996,7 +996,13 @@ Maui.ApplicationWindow
         //        onRefreshAlbums: H.refreshAlbums()
         //        onRefreshArtists: H.refreshArtists()
 
-        onCoverReady: console.log("COVER ARTWORK IS READY", path);
+        onCoverReady:
+        {
+            root.currentArtwork = path
+            currentTrack.artwork = currentArtwork
+            mainPlaylist.list.update(currentTrack, currentTrackIndex);
+        }
+
         onTrackLyricsReady:
         {
             console.log(lyrics)

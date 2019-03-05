@@ -1,4 +1,4 @@
-﻿#ifndef TRACKSMODEL_H
+#ifndef TRACKSMODEL_H
 #define TRACKSMODEL_H
 
 #include <QObject>
@@ -66,6 +66,7 @@ public slots:
     bool countUp(const int &index);
     bool remove(const int &index) override;
     void refresh();
+    bool update(const QVariantMap &data, const int &index) override;
 };
 
 #endif // TRACKSMODEL_H

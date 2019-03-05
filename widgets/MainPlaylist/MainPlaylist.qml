@@ -150,8 +150,8 @@ Maui.Page
                     list.appendQuery(query);
                 }
 
-                if(autoplay)
-                    Player.playAt(0)
+//                if(autoplay)
+//                    Player.playAt(0)
             }
         }
 
