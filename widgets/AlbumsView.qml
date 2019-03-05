@@ -36,17 +36,17 @@ BabeGrid
     visible: true
     //        topPadding: space.large
     onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
-    headBar.visible: true
+    headBar.visible: count
     headBarExit: false
     headBar.leftContent: [
-        Maui.ToolButton
-        {
-            id : playAllBtn
-            visible : headBar.visible && albumsViewGrid.count > 0
-            anim : true
-            iconName : "media-playlist-play"
-            onClicked : playAll()
-        },
+//        Maui.ToolButton
+//        {
+//            id : playAllBtn
+//            visible : headBar.visible && albumsViewGrid.count > 0
+//            anim : true
+//            iconName : "media-playlist-play"
+//            onClicked : playAll()
+//        },
 
         Maui.ToolButton
         {
@@ -95,17 +95,17 @@ BabeGrid
         }
     ]
 
-    headBar.rightContent: [
+//    headBar.rightContent: [
 
-        Maui.ToolButton
-        {
-            id: appendBtn
-            visible: headBar.visible && albumsViewGrid.count > 0
-            anim : true
-            iconName : "media-playlist-append"//"media-repeat-track-amarok"
-            onClicked: appendAll()
-        }
-    ]
+//        Maui.ToolButton
+//        {
+//            id: appendBtn
+//            visible: headBar.visible && albumsViewGrid.count > 0
+//            anim : true
+//            iconName : "media-playlist-append"//"media-repeat-track-amarok"
+//            onClicked: appendAll()
+//        }
+//    ]
 
     Maui.Dialog
     {

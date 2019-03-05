@@ -45,12 +45,12 @@ function setStars(stars)
 
 function refreshCollection(size)
 {
-//    if(!isMobile && size>0) bae.notify("Collection updated", size+" new tracks added...")
+    if(!isMobile && size>0) bae.notify("Collection updated", size+" new tracks added...")
 
-//    refreshTracks()
-//    refreshAlbums()
-//    refreshArtists()
-//    refreshFolders()
+    refreshTracks()
+    refreshAlbums()
+    refreshArtists()
+    refreshFolders()
 
 }
 function refreshFolders()
@@ -60,27 +60,23 @@ function refreshFolders()
 
 function refreshTracks()
 {
-    tracksView.clearTable()
-    tracksView.populate()
+    tracksView.list.refresh()
 }
 
 function refreshAlbums()
 {
-    albumsView.clearGrid()
-    albumsView.populate(Q.GET.allAlbumsAsc)
-
+    albumsView.list.refresh()
 }
 
 function refreshArtists()
 {
-    artistsView.clearGrid()
-    artistsView.populate(Q.GET.allArtistsAsc)
+    artistsView.list.refresh()
 }
 
 function notify(title, body)
 {
     if(isMobile)
-        babeNotify.notify(title+"\n"+body)
+        root.notify(title+"\n"+body)
     else
         bae.notify(title, body)
 }

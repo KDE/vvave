@@ -65,7 +65,7 @@ Page
             if(searchTxt !== youtubeTable.headBarTitle)
             {
                 youtubeTable.headBarTitle = searchTxt
-                youtube.getQuery(searchTxt, bae.loadSetting("YOUTUBELIMIT", "BABE", 25))
+                youtube.getQuery(searchTxt, Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25))
             }
     }
 
@@ -130,7 +130,7 @@ Page
                 Layout.column: 1
                 Layout.row: 3
                 Layout.fillWidth: true
-                text: bae.loadSetting("YOUTUBEKEY", "BABE",  youtube.getKey())
+                text: Maui.FM.loadSettings("YOUTUBEKEY", "BABE",  youtube.getKey())
             }
 
             Label
@@ -152,7 +152,7 @@ Page
                 Layout.fillWidth: true
                 from: 1
                 to: 50
-                value: bae.loadSetting("YOUTUBELIMIT", "BABE", 25)
+                value: Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25)
                 editable: true
                 onValueChanged:
                 {

@@ -57,7 +57,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
-    property bool isShuffle: Maui.FM.loadSetting("SHUFFLE","PLAYBACK", false)
+    property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
     property var currentTrack: ({
                                     babe: "0",
                                     stars: "0"
@@ -102,7 +102,7 @@ Maui.ApplicationWindow
     property bool sync: false
 
     property string infoMsg: ""
-    property bool infoLabels: bae.loadSetting("LABELS", "PLAYBACK", false) == "true" ? true : false
+    property bool infoLabels: Maui.FM.loadSettings("LABELS", "PLAYBACK", false) == "true" ? true : false
 
     //    property bool isLinked: false
     //    property bool isServing: false
@@ -147,10 +147,10 @@ Maui.ApplicationWindow
                            }
     }
 
-    BabeNotify
-    {
-        id: babeNotify //todo
-    }
+//    BabeNotify
+//    {
+//        id: babeNotify //todo
+//    }
 
 
     /* UI */
@@ -996,6 +996,7 @@ Maui.ApplicationWindow
         //        onRefreshAlbums: H.refreshAlbums()
         //        onRefreshArtists: H.refreshArtists()
 
+        onCoverReady: console.log("COVER ARTWORK IS READY", path);
         onTrackLyricsReady:
         {
             console.log(lyrics)

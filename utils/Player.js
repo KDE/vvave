@@ -13,14 +13,12 @@ function playTrack(index)
             player.url = currentTrack.url;
             player.playing = true
 
-            var artwork = currentTrack.artwork
-            currentArtwork = artwork && artwork.length > 0 && artwork !== "NONE"? artwork : bae.loadCover(currentTrack.url)
 
-            currentTrack.artwork = currentArtwork
+            if(currentTrack.artwork && currentTrack.artwork.length && currentTrack.artwork !== "NONE")
+                currentArtwork =  currentTrack.artwork
+            else bae.loadCover(currentTrack.url)
 
-//            currentBabe = bae.trackBabe(currentTrack.url)
-
-            progressBar.enabled = true
+           progressBar.enabled = true
 
             if(!isMobile)
             {
@@ -152,7 +150,7 @@ function appendTrack(track)
         if(sync === true)
         {
             infoMsgAnim()
-//            addToPlaylist([track.url], syncPlaylist)
+            //            addToPlaylist([track.url], syncPlaylist)
         }
     }
 
@@ -231,7 +229,9 @@ function playAll()
     syncPlaylist = ""
     infoMsg = ""
 
-    pageStack.currentIndex = 0
+    if(_drawer.modal && !_drawer.visible)
+        _drawer.visible = true
+
     mainPlaylist.listView.positionViewAtBeginning()
     playAt(0)
 }

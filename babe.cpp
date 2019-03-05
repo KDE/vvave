@@ -100,9 +100,7 @@ Babe::Babe(QObject *parent) : QObject(parent)
 
 }
 
-Babe::~Babe()
-{
-}
+Babe::~Babe(){}
 
 
 //void Babe::runPy()
@@ -446,11 +444,11 @@ QStringList Babe::defaultSources()
     return BAE::defaultSources;
 }
 
-QString Babe::loadCover(const QString &url)
+void Babe::loadCover(const QString &url)
 {
     auto map = this->db->getDBData(QStringList() << url);
 
-    if(map.isEmpty()) return "";
+    if(map.isEmpty()) return;
 
     auto track = map.first();
     auto artist = track[FMH::MODEL_KEY::ARTIST];
@@ -461,51 +459,37 @@ QString Babe::loadCover(const QString &url)
     auto albumImg = this->albumArt(album, artist);
 
     if(!albumImg.isEmpty() && albumImg != BAE::SLANG[W::NONE])
-        return albumImg;
+        emit this->coverReady(albumImg);
     else if (!artistImg.isEmpty() && artistImg != BAE::SLANG[W::NONE])
-        return artistImg;
+        emit this->coverReady(artistImg);
     else
-        return this->fetchCoverArt(track);
+        this->fetchCoverArt(track);
 }
 
 
-QString Babe::fetchCoverArt(FMH::MODEL &song)
+void Babe::fetchCoverArt(FMH::MODEL &song)
 {
-    Pulpo pulpo;
+//    auto pulpo = new Pulpo;
 
-    if(BAE::artworkCache(song, FMH::MODEL_KEY::ALBUM)) return song[FMH::MODEL_KEY::ARTWORK];
-    if(BAE::artworkCache(song, FMH::MODEL_KEY::ARTIST)) return song[FMH::MODEL_KEY::ARTWORK];
+//    if(BAE::artworkCache(song, FMH::MODEL_KEY::ALBUM)) return song[FMH::MODEL_KEY::ARTWORK];
+//    if(BAE::artworkCache(song, FMH::MODEL_KEY::ARTIST)) return song[FMH::MODEL_KEY::ARTWORK];
 
-    pulpo.registerServices({SERVICES::LastFm, SERVICES::Spotify});
-    pulpo.setOntology(PULPO::ONTOLOGY::ALBUM);
-    pulpo.setInfo(PULPO::INFO::ARTWORK);
+//    pulpo->registerServices({SERVICES::LastFm, SERVICES::Spotify});
+//    pulpo->setOntology(PULPO::ONTOLOGY::ALBUM);
+//    pulpo->setInfo(PULPO::INFO::ARTWORK);
 
-    QEventLoop loop;
+//    connect(&pulpo, &Pulpo::infoReady, [&](const FMH::MODEL &track,const PULPO::RESPONSE  &res)
+//    {
+//        Q_UNUSED(track);
+//        if(!res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK].isEmpty())
+//        {
+//            auto artwork = res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK][PULPO::CONTEXT::IMAGE].toByteArray();
+//            BAE::saveArt(song, artwork, BAE::CachePath);
+//            emit this->coverReady(artwork);
+//        }
+//    });
 
-    QTimer timer;
-    timer.setSingleShot(true);
-    timer.setInterval(1000);
-
-    connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-
-    connect(&pulpo, &Pulpo::infoReady, [&](const FMH::MODEL &track,const PULPO::RESPONSE  &res)
-    {
-        Q_UNUSED(track);
-        if(!res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK].isEmpty())
-        {
-            auto artwork = res[PULPO::ONTOLOGY::ALBUM][PULPO::INFO::ARTWORK][PULPO::CONTEXT::IMAGE].toByteArray();
-            BAE::saveArt(song, artwork, BAE::CachePath);
-        }
-        loop.quit();
-    });
-
-    pulpo.feed(song, PULPO::RECURSIVE::OFF);
-
-    timer.start();
-    loop.exec();
-    timer.stop();
-
-    return song[FMH::MODEL_KEY::ARTWORK];
+//    pulpo->feed(song, PULPO::RECURSIVE::OFF);
 }
 
 QVariantList Babe::transformData(const FMH::MODEL_LIST &dbList)

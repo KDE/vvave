@@ -46,7 +46,7 @@ public:
     Q_INVOKABLE QString albumArt(const QString &album, const QString &artist);
     Q_INVOKABLE QString artistWiki(const QString &artist);
     Q_INVOKABLE QString albumWiki(const QString &album, const QString &artist);
-    Q_INVOKABLE QString loadCover(const QString &url);
+    Q_INVOKABLE void loadCover(const QString &url);
 /**************************************/
 
     Q_INVOKABLE QVariantList getFolders();
@@ -93,7 +93,7 @@ private:
 #elif defined (Q_OS_ANDROID)
 //    NotificationClient *nof;
 #endif
-    QString fetchCoverArt(FMH::MODEL &song);
+    void fetchCoverArt(FMH::MODEL &song);
     static QVariantList transformData(const FMH::MODEL_LIST &dbList);
 
     void fetchTrackLyrics(FMH::MODEL &song);
@@ -109,6 +109,7 @@ signals:
     void babeIt();
     void message(QString msg);
     void openFiles(QVariantList tracks);
+    void coverReady(const QString &path);
 };
 
 

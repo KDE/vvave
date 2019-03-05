@@ -29,7 +29,9 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 
 CollectionDB::~CollectionDB()
 {
+    qDebug()<< "DELETING COLLECTIONDB SINGLETON";
     this->m_db.close();
+    delete this->instance;
 }
 
 CollectionDB *CollectionDB::instance = nullptr;

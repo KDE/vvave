@@ -159,4 +159,9 @@ void AlbumsModel::append(const QVariantMap &item, const int &at)
     emit this->postItemAppended();
 }
 
+void AlbumsModel::refresh()
+{
+    this->setList();
+}
+
 

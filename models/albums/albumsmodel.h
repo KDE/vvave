@@ -48,6 +48,7 @@ public slots:
     QVariantMap get(const int &index) const override;
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
+    void refresh();
 };
 
 #endif // ALBUMSMODEL_H

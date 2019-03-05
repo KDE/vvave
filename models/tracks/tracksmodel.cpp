@@ -358,3 +358,8 @@ bool TracksModel::remove(const int &index)
 
     return true;
 }
+
+void TracksModel::refresh()
+{
+    this->setList();
+}

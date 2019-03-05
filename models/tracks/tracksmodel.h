@@ -65,6 +65,7 @@ public slots:
     bool rate(const int &index, const int &value);
     bool countUp(const int &index);
     bool remove(const int &index) override;
+    void refresh();
 };
 
 #endif // TRACKSMODEL_H

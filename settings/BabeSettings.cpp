@@ -73,10 +73,8 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
     connect(&this->fileLoader, &FileLoader::finished, [this](int size)
     {
-        bDebug::Instance()->msg("Finished inserting into DB "+QString::number(size)+" tracks");
-
-        if(size > 0)
-            this->startBrainz(true, BAE::SEG::HALF);
+//        if(size > 0)
+//            this->startBrainz(true, BAE::SEG::HALF);
 //        else
 //            this->startBrainz(BAE::loadSettings("AUTO", "BRAINZ", true).toBool(), BAE::SEG::TWO);
 
@@ -125,5 +123,5 @@ void BabeSettings::populateDB(const QStringList &paths)
         if(path.startsWith("file://"))
             path.replace("file://", "");
 
-    fileLoader.requestPaths(newPaths);
+    this->fileLoader.requestPaths(newPaths);
 }
