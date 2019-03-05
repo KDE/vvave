@@ -306,7 +306,7 @@ bool TracksModel::fav(const int &index, const bool &value)
     {
         this->list[index][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
         emit this->updateModel(index, {FMH::MODEL_KEY::FAV});
-
+qDebug()<< "FAVVING TRACKS"<< item;
         return true;
     }
 

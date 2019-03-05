@@ -72,5 +72,6 @@
         <file>assets/vvave.svg</file>
         <file>assets/materialdesignicons-webfont.ttf</file>
         <file>widgets/CloudView/CloudView.qml</file>
+        <file>widgets/SelectionBarMenu.qml</file>
     </qresource>
 </RCC>

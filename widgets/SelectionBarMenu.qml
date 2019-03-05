@@ -2,9 +2,12 @@ import QtQuick 2.0
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import "../../utils"
+import "../utils"
 import ".."
-import "../../utils/Help.js" as H
+import "../utils/Help.js" as H
+import "../utils/Player.js" as Player
+import "../view_models"
+
 
 import org.kde.mauikit 1.0 as Maui
 
@@ -14,46 +17,32 @@ Maui.Menu
     width: unit * 200
 
     property int rate : 0
-    property bool fav : false
     property string starColor : "#FFC107"
     property string starReg : textColor
     property string starIcon: "draw-star"
 
-    signal removeClicked()
-    signal favClicked()
-    signal queueClicked()
-    signal saveToClicked()
-    signal openWithClicked()
-    signal editClicked()
-    signal shareClicked()
-    signal selectClicked()
     signal rateClicked(int rate)
-    signal colorClicked(color color)
-    signal infoClicked()
-    signal copyToClicked()
 
-    property alias menuItem : control.content
 
     Maui.MenuItem
     {
-        text: qsTr("Select...")
+        text: qsTr("Play...")
         onTriggered:
         {
-            H.addToSelection(listView.model.get(listView.currentIndex))
-            contextMenu.close()
+            mainPlaylist.list.clear()
+
+            var tracks = _selectionBarModelList.getAll()
+            for(var i in tracks)
+                Player.appendTrack(tracks[i])
+
+            Player.playAll()
         }
     }
 
-    MenuSeparator {}
-
     Maui.MenuItem
     {
-        text: !fav ? qsTr("Fav it"): qsTr("UnFav it")
-        onTriggered:
-        {
-            favClicked()
-            close()
-        }
+        text: qsTr("Append...")
+        onTriggered: Player.appendAll(_selectionBarModelList.getAll())
     }
 
     Maui.MenuItem
@@ -61,17 +50,33 @@ Maui.Menu
         text: qsTr("Queue")
         onTriggered:
         {
-            queueClicked()
+            Player.queueTracks(_selectionBarModelList.getAll())
             close()
         }
     }
+
+    MenuSeparator {}
+
+
+    Maui.MenuItem
+    {
+        text: qsTr("Fav/UnFav them")
+        onTriggered:
+        {
+            for(var i= 0; i < _selectionBar.count; i++)
+                _selectionBarModelList.fav(i, !(_selectionBarModelList.get(i).fav == "1"))
+
+        }
+    }
+
 
     Maui.MenuItem
     {
         text: qsTr("Add to...")
         onTriggered:
         {
-            saveToClicked()
+            playlistDialog.tracks = _selectionBar.selectedPaths
+            playlistDialog.open()
             close()
         }
     }
@@ -83,30 +88,8 @@ Maui.Menu
         text: qsTr("Share...")
         onTriggered:
         {
-            shareClicked()
-            close()
-        }
-    }
-
-
-    Maui.MenuItem
-    {
-        visible: root.showAccounts
-        text: qsTr("Copy to cloud")
-        onTriggered:
-        {
-            copyToClicked()
-            close()
-        }
-    }
-
-    Maui.MenuItem
-    {
-        text: isAndroid ? qsTr("Open with...") : qsTr("Show in folder...")
-
-        onTriggered:
-        {
-            openWithClicked()
+            isAndroid ? Maui.Android.shareDialog(_selectionBar.selectedPaths) :
+                        shareDialog.show(_selectionBar.selectedPaths)
             close()
         }
     }
@@ -115,34 +98,10 @@ Maui.Menu
 
     Maui.MenuItem
     {
-        visible: false
-        text: qsTr("Edit...")
-        onTriggered:
-        {
-            editClicked()
-            close()
-        }
-    }
-
-//    Maui.MenuItem
-//    {
-//        text: qsTr("Info...")
-//        onTriggered:
-//        {
-//            infoClicked()
-//            close()
-//        }
-//    }
-
-
-    Maui.MenuItem
-    {
         text: qsTr("Remove")
         colorScheme.textColor: dangerColor
         onTriggered:
         {
-            removeClicked()
-            //            listModel.remove(list.currentIndex)
             close()
         }
     }
@@ -169,8 +128,6 @@ Maui.Menu
                 onClicked:
                 {
                     rate = 1
-                    rateClicked(rate)
-                    close()
                 }
             }
 
@@ -184,8 +141,6 @@ Maui.Menu
                 onClicked:
                 {
                     rate = 2
-                    rateClicked(rate)
-                    close()
                 }
             }
 
@@ -199,8 +154,6 @@ Maui.Menu
                 onClicked:
                 {
                     rate = 3
-                    rateClicked(rate)
-                    close()
                 }
             }
 
@@ -214,8 +167,6 @@ Maui.Menu
                 onClicked:
                 {
                     rate = 4
-                    rateClicked(rate)
-                    close()
                 }
             }
 
@@ -229,13 +180,19 @@ Maui.Menu
                 onClicked:
                 {
                     rate = 5
-                    rateClicked(rate)
-                    close()
                 }
             }
         }
     }
 
+    onRateChanged:
+    {
+        close()
+        for(var i= 0; i < _selectionBar.count; i++)
+            _selectionBarModelList.rate(i, control.rate)
+
+
+    }
 
     Maui.MenuItem
     {
@@ -248,7 +205,8 @@ Maui.Menu
             anchors.fill: parent
             onColorClicked:
             {
-                control.colorClicked(color)
+                for(var i= 0; i < _selectionBar.count; i++)
+                    _selectionBarModelList.color(i, color)
                 control.close()
             }
         }

@@ -104,13 +104,6 @@ BabeGrid
             anim : true
             iconName : "media-playlist-append"//"media-repeat-track-amarok"
             onClicked: appendAll()
-        },
-
-        Maui.ToolButton
-        {
-            id: menuBtn
-            iconName: /*"application-menu"*/ "overflow-menu"
-            //                onClicked: isMobile ? headerMenu.open() : headerMenu.popup()
         }
     ]
 

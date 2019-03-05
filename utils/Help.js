@@ -106,14 +106,12 @@ function addSource()
 
 function addToSelection(item)
 {
-    selectionBar.append({
-                            thumbnail: item.artwork,
-                            label: item.title,
-                            mime: "image",
-                            tooltip: item.url,
-                            path: item.url
-
-                        })
+    item.thumbnail= item.artwork
+    item.label= item.title
+    item.mime= "image"
+    item.tooltip= item.url
+    item.path= item.url
+    selectionBar.append(item)
 }
 
 

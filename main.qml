@@ -36,6 +36,9 @@ import Player 1.0
 import AlbumsList 1.0
 import TracksList 1.0
 
+import BaseModel 1.0
+import TracksList 1.0
+
 Maui.ApplicationWindow
 {
 
@@ -45,7 +48,7 @@ Maui.ApplicationWindow
     /******************** ALIASES ********************/
     /*************************************************/
     property alias mainPlaylist: mainPlaylist
-    property alias selectionBar: selectionBar
+    property alias selectionBar: _selectionBar
     property alias progressBar: progressBar
 
     about.appIcon: "qrc:/assets/vvave.svg"
@@ -204,6 +207,7 @@ Maui.ApplicationWindow
         }
     ]
 
+    footBar.visible: !mainlistEmpty
     footBar.implicitHeight: footBar.visible ? toolBarHeight * 1.2 : 0
     page.footBarItem: ColumnLayout
     {
@@ -272,10 +276,11 @@ Maui.ApplicationWindow
             leftContent:  Maui.ToolButton
             {
                 iconName: "headphones"
+                visible: _drawer.modal
                 iconColor: _drawer.visible ? babeColor : textColor
                 onClicked: _drawer.visible = !_drawer.visible
                 colorScheme.highlightColor: babeColor
-//                text: qsTr("Now")
+                //                text: qsTr("Now")
             }
 
             middleContent: [
@@ -306,10 +311,7 @@ Maui.ApplicationWindow
                     id: playIcon
                     iconColor: textColor
                     iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
-                    onClicked:
-                    {
-                        player.playing = !player.playing
-                    }
+                    onClicked: player.playing = !player.playing
                 },
 
                 Maui.ToolButton
@@ -336,7 +338,6 @@ Maui.ApplicationWindow
         }
     }
 
-    footBar.visible: !mainlistEmpty
 
     leftIcon.iconColor: currentView === viewsIndex.search ? babeColor : altColorText
     onSearchButtonClicked:
@@ -367,13 +368,6 @@ Maui.ApplicationWindow
     {
         id: sourcesDialog
     }
-
-    BabeConsole
-    {
-        id: babeConsole
-    }
-
-    //    menuDrawer.bannerImageSource: "qrc:/assets/banner.svg"
 
     mainMenu: [
 
@@ -649,8 +643,8 @@ Maui.ApplicationWindow
             onCurrentIndexChanged:
             {
                 currentView = currentIndex
-                if (!babeitView.isConnected && currentIndex === viewsIndex.vvave)
-                    babeitView.logginDialog.open()
+                //                if (!babeitView.isConnected && currentIndex === viewsIndex.vvave)
+                //                    babeitView.logginDialog.open()
             }
 
             TracksView
@@ -794,8 +788,6 @@ Maui.ApplicationWindow
                     onPlayAll:
                     {
                         var query = playlistsView.playlistQuery
-
-
                         mainPlaylist.list.clear()
                         mainPlaylist.list.sortBy = Tracks.NONE
                         mainPlaylist.list.query = query
@@ -833,6 +825,7 @@ Maui.ApplicationWindow
                     onQuickPlayTrack: Player.quickPlay(searchView.list.get(index))
                     onPlayAll:
                     {
+                        mainPlaylist.list.clear()
                         var tracks = searchView.list.getAll()
                         for(var i in tracks)
                             Player.appendTrack(tracks[i])
@@ -912,48 +905,52 @@ Maui.ApplicationWindow
 
         Maui.SelectionBar
         {
-            id: selectionBar
+            id: _selectionBar
+            property alias listView: _selectionBar.selectionList
             Layout.fillWidth: true
             Layout.margins: space.huge
             Layout.topMargin: space.small
             Layout.bottomMargin: space.big
-            onIconClicked: contextMenu.show(selectedPaths)
+            onIconClicked: _contextMenu.popup()
             onExitClicked: clear()
-
-            TableMenu
+            model: BaseModel
             {
-                id: contextMenu
-                menuItem: Maui.MenuItem
+                list: _selectionBarModelList
+            }
+
+            Tracks
+            {
+                id: _selectionBarModelList
+            }
+
+            SelectionBarMenu
+            {
+                id: _contextMenu
+            }
+
+            function append(item)
+            {
+                if(selectedPaths.indexOf(item.path) < 0)
                 {
-                    text: qsTr("Play all")
-                    onTriggered:
-                    {
-                        var data = bae.getList(selectionBar.selectedPaths)
-                        contextMenu.close()
-                        selectionMode = false
-                        selectionBar.clear()
-                        Player.playAll(data)
+                    selectedItems.push(item)
+                    selectedPaths.push(item.path)
 
-                    }
+                    //             for(var i = 0; i < selectionList.count ; i++ )
+                    //                 if(selectionList.model.get(i).path === item.path)
+                    //                 {
+                    //                     selectionList.model.remove(i)
+                    //                     return
+                    //                 }
+
+                    selectionList.model.list.append(item)
+                    selectionList.positionViewAtEnd()
+
+                    if(position === Qt.Vertical) return
+
+                    if(typeof(riseContent) === "undefined") return
+
+                    riseContent()
                 }
-
-                onFavClicked: H.faveIt(paths)
-
-                onQueueClicked: H.queueIt(paths)
-                onSaveToClicked:
-                {
-                    playlistDialog.tracks = paths
-                    playlistDialog.open()
-                }
-                onOpenWithClicked: bae.showFolder(paths)
-
-                onRemoveClicked:
-                {
-
-                }
-                onRateClicked: H.rateIt(paths, rate)
-
-                onColorClicked: H.moodIt(paths, color)
             }
         }
     }

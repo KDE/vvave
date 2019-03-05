@@ -114,5 +114,10 @@ void BaseModel::setList(BaseList *value)
 
 QVariantMap BaseModel::get(const int &index) const
 {
-   return this->mList->get(index);
+    return this->mList->get(index);
+}
+
+void BaseModel::clear()
+{
+    this->mList->clear();
 }

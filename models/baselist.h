@@ -72,6 +72,8 @@ public slots:
         Q_UNUSED(index);
         return false;
     }
+
+    virtual void clear(){}
 };
 
 #endif // BASELIST_H

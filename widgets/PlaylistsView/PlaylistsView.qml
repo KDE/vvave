@@ -122,30 +122,30 @@ Kirigami.PageRow
         holder.body: "Your playlist is empty,<br>start adding new music to it"
         holder.emojiSize: iconSizes.huge
 
-        headerMenu.menuItem:  [
-            Maui.MenuItem
-            {
-                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-                text: "Sync tags"
-                onTriggered: {}
-            },
-            Maui.MenuItem
-            {
-                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-                text: "Play-n-Sync"
-                onTriggered:
-                {
-                    filterList.headerMenu.close()
-                    syncAndPlay(playlistViewModel.currentIndex)
-                }
-            },
-            Maui.MenuItem
-            {
-                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-                text: "Remove playlist"
-                onTriggered: removePlaylist()
-            }
-        ]
+//        headerMenu.menuItem:  [
+//            Maui.MenuItem
+//            {
+//                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
+//                text: "Sync tags"
+//                onTriggered: {}
+//            },
+//            Maui.MenuItem
+//            {
+//                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
+//                text: "Play-n-Sync"
+//                onTriggered:
+//                {
+//                    filterList.headerMenu.close()
+//                    syncAndPlay(playlistViewModel.currentIndex)
+//                }
+//            },
+//            Maui.MenuItem
+//            {
+//                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
+//                text: "Remove playlist"
+//                onTriggered: removePlaylist()
+//            }
+//        ]
 
 
         //            contextMenu.menuItem: [

@@ -35,6 +35,7 @@ signals:
 
 public slots:
     QVariantMap get(const int &index) const;
+    void clear();
 };
 
 #endif // NOTESMODEL_H

@@ -28,7 +28,7 @@ var GET = {
     artistTags_: "select distinct tag from artists_tags where context = 'tag' and artist = \"%1\"",
 
 
-    colorTracks_: "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.art = \"%1\""
+    colorTracks_: "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.color = \"%1\""
 
 }
 

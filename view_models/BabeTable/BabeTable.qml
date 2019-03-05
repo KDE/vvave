@@ -35,12 +35,10 @@ BabeList
 
     property bool group : false
 
-    property alias headerMenu: headerMenu
     property alias contextMenu : contextMenu
 
     property alias playAllBtn : playAllBtn
     property alias appendBtn : appendBtn
-    property alias menuBtn : menuBtn
 
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -178,49 +176,33 @@ BabeList
 
         Maui.ToolButton
         {
-            id: menuBtn
-            iconName: /*"application-menu"*/ "overflow-menu"
-            onClicked: headerMenu.popup()
+            iconName: "item-select"
+            onClicked: selectionMode = !selectionMode
+            checkable: true
+            checked: selectionMode
         }
     ]
-
-    HeaderMenu
-    {
-        id: headerMenu
-        onSaveListClicked: saveList()
-        onQueueListClicked: queueList()
-    }
 
     TableMenu
     {
         id: contextMenu
 
-        menuItem: [
-            Maui.MenuItem
-            {
-                text: qsTr("Select...")
-                onTriggered:
-                {
-                    H.addToSelection(listView.model.get(listView.currentIndex))
-                    contextMenu.close()
-                }
-            },
 
-            MenuSeparator {},
+        MenuSeparator {}
 
-            Maui.MenuItem
-            {
-                text: qsTr("Go to Artist")
-                onTriggered: goToArtist()
+        Maui.MenuItem
+        {
+            text: qsTr("Go to Artist")
+            onTriggered: goToArtist()
 
-            },
+        }
 
-            Maui.MenuItem
-            {
-                text: qsTr("Go to Album")
-                onTriggered: goToAlbum()
-            }
-        ]
+        Maui.MenuItem
+        {
+            text: qsTr("Go to Album")
+            onTriggered: goToAlbum()
+        }
+
 
         onFavClicked:
         {
@@ -231,10 +213,11 @@ BabeList
 
         onSaveToClicked:
         {
-            playlistDialog.tracks = paths
+            playlistDialog.tracks = [list.get(listView.currentIndex).url]
             playlistDialog.open()
         }
-        onOpenWithClicked: bae.showFolder(paths)
+
+        onOpenWithClicked: bae.showFolder([list.get(listView.currentIndex).url])
 
         onRemoveClicked:
         {
@@ -259,6 +242,12 @@ BabeList
         onCopyToClicked:
         {
             cloudView.list.upload(listView.currentIndex)
+        }
+
+        onShareClicked:
+        {
+            isAndroid ? Maui.Android.shareDialog(list.get(listView.currentIndex)) :
+                        shareDialog.show([list.get(listView.currentIndex).url])
         }
     }
 
@@ -355,7 +344,7 @@ BabeList
         currentIndex = index
         contextMenu.rate = list.get(currentIndex).rate
         contextMenu.fav = list.get(currentIndex).fav == "1"
-        contextMenu.show([list.get(currentIndex).url])
+        contextMenu.popup()
 
         rowPressed(index)
 

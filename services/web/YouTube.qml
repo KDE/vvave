@@ -79,7 +79,7 @@ Page
 
     function populate(tracks)
     {
-        youtubeTable.clearTable()
+        youtubeTable.model.clear()
         for(var i in tracks)
             youtubeTable.model.append(tracks[i])
     }
@@ -222,99 +222,56 @@ Page
         }
 
 
-        initialItem: Item
+        initialItem: BabeTable
         {
-            id: youtubeList
-            ColumnLayout
+            id: youtubeTable
+            trackNumberVisible: false
+            headBar.visible: true
+            headBarExit: true
+            headBarExitIcon: "edit-clear"
+            headBarTitle: "YouTube"
+            holder.emoji: "qrc:/assets/Astronaut.png"
+            holder.isMask: false
+            holder.title : "No Results!"
+            holder.body: "Try with another query"
+            holder.emojiSize: iconSizes.huge
+            coverArtVisible: true
+            trackDuration: true
+            trackRating: true
+            onExit: clearSearch()
+            isArtworkRemote: true
+            allowMenu: false
+
+            model: ListModel{}
+
+            appendBtn.visible: false
+            playAllBtn.visible: false
+
+            headBar.rightContent: Maui.ToolButton
             {
-                anchors.fill: parent
-                width: parent.width
-                height: parent.height
+                id: menuBtn
+                iconName: "application-menu"
+                onClicked: configPopup.open()
+            }
 
-                Layout.margins: 0
-                spacing: 0
+            onRowClicked:
+            {
+                watchVideo(youtubeTable.model.get(index))
+            }
 
-                BabeTable
-                {
-                    id: youtubeTable
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    trackNumberVisible: false
-                    headBar.visible: true
-                    headBarExit: true
-                    headBarExitIcon: "edit-clear"
-                    headBarTitle: "YouTube"
-                    holder.emoji: "qrc:/assets/Astronaut.png"
-                    holder.isMask: false
-                    holder.title : "No Results!"
-                    holder.body: "Try with another query"
-                    holder.emojiSize: iconSizes.huge
-                    coverArtVisible: true
-                    trackDuration: true
-                    trackRating: true
-                    onExit: clearSearch()
-                    isArtworkRemote: true
-                    allowMenu: false
+            onQuickPlayTrack:
+            {
+                playTrack(youtubeTable.model.get(index).url)
+            }
 
-                    appendBtn.visible: false
-                    playAllBtn.visible: false
-                    menuBtn.visible: false
+            footBar.middleContent: Maui.TextField
+            {
+                id: searchInput
+                width: youtubeTable.footBar.middleLayout.width * 0.9
 
-                    headBar.rightContent: Maui.ToolButton
-                    {
-                        id: menuBtn
-                        iconName: "application-menu"
-                        onClicked: configPopup.open()
-                    }
-
-                    onRowClicked:
-                    {
-                        watchVideo(youtubeTable.model.get(index))
-                    }
-
-                    onQuickPlayTrack:
-                    {
-                        playTrack(youtubeTable.model.get(index).url)
-                    }
-                }
-
-                ToolBar
-                {
-                    id: searchBox
-                    Layout.fillWidth: true
-                    position: ToolBar.Footer
-
-                    RowLayout
-                    {
-                        anchors.fill: parent
-
-                        TextInput
-                        {
-                            id: searchInput
-                            color: textColor
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment:  Text.AlignVCenter
-                            selectByMouse: !isMobile
-                            selectionColor: highlightColor
-                            selectedTextColor: highlightedTextColor
-                            focus: true
-                            text: ""
-                            wrapMode: TextEdit.Wrap
-                            onAccepted: runSearch(searchInput.text)
-
-                        }
-
-                        Maui.ToolButton
-                        {
-                            Layout.rightMargin: contentMargins
-                            iconName: "edit-clear"
-                            onClicked: searchInput.clear()
-                        }
-
-                    }
-                }
+                placeholderText: qsTr("Search videos...")
+                wrapMode: TextEdit.Wrap
+                onAccepted: runSearch(searchInput.text)
             }
         }
 

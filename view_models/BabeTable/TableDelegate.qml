@@ -332,7 +332,7 @@ SwipeDelegate
                         Layout.column: /*trackDurationVisible &&*/ sameAlbum ? 4 : 3
                         horizontalAlignment: Qt.AlignRight
                         verticalAlignment:  Qt.AlignVCenter
-                        text: model.fav == "1" ? "\uf2D1" : ""
+                        text: model.fav ? (model.fav == "1" ? "\uf2D1" : "") : ""
                         font.bold: false
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.small
@@ -354,7 +354,7 @@ SwipeDelegate
                         //                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
                         horizontalAlignment: Qt.AlignRight
                         verticalAlignment:  Qt.AlignVCenter
-                        text: H.setStars(model.rate)
+                        text: model.rate ? H.setStars(model.rate) : ""
                         font.bold: false
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.small

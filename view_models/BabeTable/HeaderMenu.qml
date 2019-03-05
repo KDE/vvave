@@ -51,11 +51,7 @@ Maui.Menu
     MenuSeparator {}
 
 
-    Maui.MenuItem
-    {
-        text: qsTr("Selection "+ (selectionMode ? "OFF" : "ON"))
-        onTriggered: selectionMode = !selectionMode
-    }
+
 
     Column
     {

@@ -25,7 +25,6 @@ Maui.Page
     property alias menu : playlistMenu
 
     property alias contextMenu: table.contextMenu
-    property alias headerMenu: table.headerMenu
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)

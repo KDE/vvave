@@ -84,8 +84,7 @@ QML_DESIGNER_IMPORT_PATH =
 
 DISTFILES += \
     db/script.sql \
-    CMakeLists.txt
-
+    CMakeLists.txt \
 
 HEADERS += \
     db/collectionDB.h \

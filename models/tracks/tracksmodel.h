@@ -59,7 +59,7 @@ public slots:
     void append(const QVariantMap &item, const int &at);
     void appendQuery(const QString &query);
     void searchQueries(const QStringList &queries);
-    void clear();
+    void clear() override;
     bool color(const int &index, const QString &color);
     bool fav(const int &index, const bool &value);
     bool rate(const int &index, const int &value);
