@@ -138,8 +138,6 @@ Maui.Page
 
                 if(n>0)
                 {
-
-                    console.log("GETTINGS LAST PLAYED TRACKS", list)
                     for(var i = 0; i < n; i++)
                     {
                         var where = "url = \""+list[i]+"\""

@@ -54,7 +54,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
-    property bool isShuffle: /*bae.loadSetting("SHUFFLE","PLAYBACK", false) == "true" ? true :*/ false
+    property bool isShuffle: Maui.FM.loadSetting("SHUFFLE","PLAYBACK", false)
     property var currentTrack: ({
                                     babe: "0",
                                     stars: "0"
@@ -74,7 +74,7 @@ Maui.ApplicationWindow
 
     property bool mainlistEmpty: !mainPlaylist.table.count > 0
 
-      /***************************************************/
+    /***************************************************/
     /******************** HANDLERS ********************/
     /*************************************************/
 
@@ -87,11 +87,11 @@ Maui.ApplicationWindow
                                            playlists: 3,
                                            search: 4,
                                            folders: 5,
-//                                           cloud: 6,
-//                                           vvave: 7,
-//                                           linking: 8,
+                                           //                                           cloud: 6,
+                                           //                                           vvave: 7,
+                                           //                                           linking: 8,
                                            youtube: 6,
-//                                           spotify: 10
+                                           //                                           spotify: 10
 
                                        })
 
@@ -101,16 +101,16 @@ Maui.ApplicationWindow
     property string infoMsg: ""
     property bool infoLabels: bae.loadSetting("LABELS", "PLAYBACK", false) == "true" ? true : false
 
-//    property bool isLinked: false
-//    property bool isServing: false
+    //    property bool isLinked: false
+    //    property bool isServing: false
 
-//    property bool focusMode : false
+    //    property bool focusMode : false
     property bool selectionMode : false
 
     /***************************************************/
     /******************** UI COLORS *******************/
     /*************************************************/
-    readonly property string babeColor: bae.babeColor() //"#140032"
+    readonly property color babeColor: bae.babeColor() //"#140032"
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -118,7 +118,6 @@ Maui.ApplicationWindow
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
-
     onMissingAlert:
     {
         var message = track.title + " by " + track.artist + " is missing"
@@ -138,7 +137,6 @@ Maui.ApplicationWindow
         volume: 100
         onFinishedChanged: if (!mainlistEmpty)
                            {
-                               console.log("track fully played")
                                if (currentTrack.url)
                                    mainPlaylist.list.countUp(currentTrackIndex)
 
@@ -153,36 +151,19 @@ Maui.ApplicationWindow
 
 
     /* UI */
-    property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
     altToolBars: false
     accentColor: babeColor
     headBarFGColor: altColorText
-    headBarBGColor: currentView === viewsIndex.vvave ? "#7e57c2" : "#212121"
-    colorSchemeName: "vvave"
+    headBarBGColor: /*currentView === viewsIndex.vvave ? "#7e57c2" :*/ "#212121"
     altColorText: darkTextColor
     floatingBar: false
 
     headBar.middleContent : [
-
-        Maui.ToolButton
-        {
-            iconName: "headphones"
-            iconColor: !accent  || isPlaying  ? babeColor : altColorText
-            onClicked: pageStack.currentIndex = 0
-            colorScheme.highlightColor: babeColor
-            text: qsTr("Now")
-        },
-
         Maui.ToolButton
         {
             iconName: "view-media-track"
-            iconColor:  accent && currentView === viewsIndex.tracks ? babeColor : altColorText
-            onClicked:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.tracks
-            }
-
+            iconColor: currentView === viewsIndex.tracks ? babeColor : altColorText
+            onClicked: currentView = viewsIndex.tracks
             text: qsTr("Tracks")
             tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
@@ -193,12 +174,8 @@ Maui.ApplicationWindow
         {
             text: qsTr("Albums")
             iconName: /*"album"*/ "view-media-album-cover"
-            iconColor: accent && currentView === viewsIndex.albums ? babeColor : altColorText
-            onClicked:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.albums
-            }
+            iconColor: currentView === viewsIndex.albums ? babeColor : altColorText
+            onClicked: currentView = viewsIndex.albums
             tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
 
@@ -208,12 +185,8 @@ Maui.ApplicationWindow
         {
             text: qsTr("Artists")
             iconName: "view-media-artist"
-            iconColor:  accent && currentView === viewsIndex.artists ? babeColor : altColorText
-            onClicked:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.artists
-            }
+            iconColor:  currentView === viewsIndex.artists ? babeColor : altColorText
+            onClicked: currentView = viewsIndex.artists
             tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
 
@@ -223,12 +196,8 @@ Maui.ApplicationWindow
         {
             text: qsTr("Playlists")
             iconName: "view-media-playlist"
-            iconColor:  accent && currentView === viewsIndex.playlists ? babeColor : altColorText
-            onClicked:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.playlists
-            }
+            iconColor: currentView === viewsIndex.playlists ? babeColor : altColorText
+            onClicked: currentView = viewsIndex.playlists
             tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
 
@@ -300,6 +269,15 @@ Maui.ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
+            leftContent:  Maui.ToolButton
+            {
+                iconName: "headphones"
+                iconColor: _drawer.visible ? babeColor : textColor
+                onClicked: _drawer.visible = !_drawer.visible
+                colorScheme.highlightColor: babeColor
+//                text: qsTr("Now")
+            }
+
             middleContent: [
 
                 Maui.ToolButton
@@ -346,12 +324,12 @@ Maui.ApplicationWindow
                 Maui.ToolButton
                 {
                     id: shuffleBtn
-                    iconColor: textColor
+                    iconColor: babeColor
                     iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
                     onClicked:
                     {
                         isShuffle = !isShuffle
-                        bae.saveSetting("SHUFFLE",isShuffle, "PLAYBACK")
+                        Maui.FM.saveSettings("SHUFFLE", isShuffle, "PLAYBACK")
                     }
                 }
             ]
@@ -360,7 +338,7 @@ Maui.ApplicationWindow
 
     footBar.visible: !mainlistEmpty
 
-    leftIcon.iconColor: accent && currentView === viewsIndex.search ? babeColor : altColorText
+    leftIcon.iconColor: currentView === viewsIndex.search ? babeColor : altColorText
     onSearchButtonClicked:
     {
         pageStack.currentIndex = 1
@@ -399,16 +377,16 @@ Maui.ApplicationWindow
 
     mainMenu: [
 
-//        Maui.MenuItem
-//        {
-//            text: "Vvave Stream"
-//            icon.name: "headphones"
-//            onTriggered:
-//            {
-//                pageStack.currentIndex = 1
-//                currentView = viewsIndex.vvave
-//            }
-//        },
+        //        Maui.MenuItem
+        //        {
+        //            text: "Vvave Stream"
+        //            icon.name: "headphones"
+        //            onTriggered:
+        //            {
+        //                pageStack.currentIndex = 1
+        //                currentView = viewsIndex.vvave
+        //            }
+        //        },
 
         Maui.MenuItem
         {
@@ -421,17 +399,17 @@ Maui.ApplicationWindow
             }
         },
 
-//        Maui.MenuItem
-//        {
-//            text: qsTr("Linking")
-//            icon.name: "view-links"
-//            onTriggered:
-//            {
-//                pageStack.currentIndex = 1
-//                currentView = viewsIndex.linking
-//                if(!isLinked) linkingView.linkingConf.open()
-//            }
-//        },
+        //        Maui.MenuItem
+        //        {
+        //            text: qsTr("Linking")
+        //            icon.name: "view-links"
+        //            onTriggered:
+        //            {
+        //                pageStack.currentIndex = 1
+        //                currentView = viewsIndex.linking
+        //                if(!isLinked) linkingView.linkingConf.open()
+        //            }
+        //        },
 
         Maui.MenuItem
         {
@@ -444,16 +422,16 @@ Maui.ApplicationWindow
             }
         },
 
-//        Maui.MenuItem
-//        {
-//            text: qsTr("Cloud")
-//            icon.name: "folder-cloud"
-//            onTriggered:
-//            {
-//                pageStack.currentIndex = 1
-//                currentView = viewsIndex.cloud
-//            }
-//        },
+        //        Maui.MenuItem
+        //        {
+        //            text: qsTr("Cloud")
+        //            icon.name: "folder-cloud"
+        //            onTriggered:
+        //            {
+        //                pageStack.currentIndex = 1
+        //                currentView = viewsIndex.cloud
+        //            }
+        //        },
 
 
         //        Maui.MenuItem
@@ -640,7 +618,7 @@ Maui.ApplicationWindow
         width: Kirigami.Units.gridUnit * 14
 
         modal: !root.isWide
-        handleVisible: modal
+        handleVisible: false
 
         contentItem: MainPlaylist
         {
@@ -905,31 +883,31 @@ Maui.ApplicationWindow
                 }
             }
 
-//            CloudView
-//            {
-//                id: cloudView
-//                onQuickPlayTrack: Player.quickPlay(cloudView.list.get(index))
-//            }
+            //            CloudView
+            //            {
+            //                id: cloudView
+            //                onQuickPlayTrack: Player.quickPlay(cloudView.list.get(index))
+            //            }
 
-//            BabeitView
-//            {
-//                id: babeitView
-//            }
+            //            BabeitView
+            //            {
+            //                id: babeitView
+            //            }
 
-//            LinkingView
-//            {
-//                id: linkingView
-//            }
+            //            LinkingView
+            //            {
+            //                id: linkingView
+            //            }
 
             YouTube
             {
                 id: youtubeView
             }
 
-//            Spotify
-//            {
-//                id: spotifyView
-//            }
+            //            Spotify
+            //            {
+            //                id: spotifyView
+            //            }
         }
 
         Maui.SelectionBar

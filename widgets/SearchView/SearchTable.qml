@@ -58,7 +58,7 @@ BabeTable
         onClicked:
         {
             autoSuggestions = !autoSuggestions
-            bae.saveSetting("AUTOSUGGESTIONS", autoSuggestions, "BABE")
+            Maui.FM.saveSettings("AUTOSUGGESTIONS", autoSuggestions, "BABE")
             if(!autoSuggestions)
                 suggestionsPopup.close()
         }
@@ -94,7 +94,7 @@ BabeTable
                 {
                     savedQueries.unshift(searchTxt)
                     //                    suggestionsPopup.model.insert(0, {suggestion: searchInput.text})
-                    bae.saveSetting("QUERIES", savedQueries.join(","), "BABE")
+                    Maui.FM.saveSettings("QUERIES", savedQueries.join(","), "BABE")
                 }
 
                 searchTable.headBarTitle = searchTxt

@@ -202,7 +202,6 @@ function savePlaylist()
         list.push(url)
     }
 
-    console.log("SAVING LIST", list)
     bae.savePlaylist(list)
     bae.savePlaylistPos(mainPlaylist.listView.currentIndex)
 }
