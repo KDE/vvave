@@ -23,6 +23,7 @@ StackView
         {
             anchors.fill: parent
             id: browser
+            showEmblem: false
             onItemClicked:
             {
                 stack.push(filterList)

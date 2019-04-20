@@ -72,13 +72,10 @@ bool lastfm::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
 bool lastfm::parseArtist()
 {
-
     QString xmlData(array);
     QDomDocument doc;
 
     if (!doc.setContent(xmlData)) return false;
-
-
 
     QStringList artistTags;
     QByteArray artistSimilarArt;

@@ -147,10 +147,10 @@ Maui.ApplicationWindow
                            }
     }
 
-//    BabeNotify
-//    {
-//        id: babeNotify //todo
-//    }
+    //    BabeNotify
+    //    {
+    //        id: babeNotify //todo
+    //    }
 
 
     /* UI */
@@ -159,12 +159,15 @@ Maui.ApplicationWindow
     headBarFGColor: altColorText
     headBarBGColor: /*currentView === viewsIndex.vvave ? "#7e57c2" :*/ "#212121"
     altColorText: darkTextColor
+
     floatingBar: false
 
     headBar.middleContent : [
         Maui.ToolButton
         {
             iconName: "view-media-track"
+            height: headBar.height
+            showIndicator: currentView === viewsIndex.tracks
             iconColor: currentView === viewsIndex.tracks ? babeColor : altColorText
             onClicked: currentView = viewsIndex.tracks
             text: qsTr("Tracks")
@@ -176,6 +179,8 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             text: qsTr("Albums")
+            height: headBar.height
+            showIndicator: currentView === viewsIndex.albums
             iconName: /*"album"*/ "view-media-album-cover"
             iconColor: currentView === viewsIndex.albums ? babeColor : altColorText
             onClicked: currentView = viewsIndex.albums
@@ -187,6 +192,8 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             text: qsTr("Artists")
+            height: headBar.height
+            showIndicator: currentView === viewsIndex.artists
             iconName: "view-media-artist"
             iconColor:  currentView === viewsIndex.artists ? babeColor : altColorText
             onClicked: currentView = viewsIndex.artists
@@ -198,6 +205,8 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             text: qsTr("Playlists")
+            height: headBar.height
+            showIndicator: currentView === viewsIndex.playlists
             iconName: "view-media-playlist"
             iconColor: currentView === viewsIndex.playlists ? babeColor : altColorText
             onClicked: currentView = viewsIndex.playlists
@@ -610,6 +619,7 @@ Maui.ApplicationWindow
     {
         id: _drawer
         width: Kirigami.Units.gridUnit * 17
+        height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
         modal: !root.isWide
         handleVisible: false
@@ -702,7 +712,7 @@ Maui.ApplicationWindow
                         mainPlaylist.list.clear()
                         mainPlaylist.list.sortBy = Tracks.NONE
                         mainPlaylist.list.query = query
-                        Player.playAll()                        
+                        Player.playAll()
                     }
 
                     onPlayAll:
@@ -806,7 +816,7 @@ Maui.ApplicationWindow
                     }
 
                     onPlaySync:
-                    {                        
+                    {
                         var query = playlistsView.playlistQuery
                         mainPlaylist.list.appendQuery(query)
                         Player.playAll()

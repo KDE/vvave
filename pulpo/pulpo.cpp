@@ -283,7 +283,7 @@ void Pulpo::startConnectionAsync(const QString &url, const QMap<QString,QString>
 //            downloader->deleteLater();
         });
 
-        qDebug()<< "trying to get lyrics for "<< url;
+        qDebug()<< "trying to get AYNC DOWNLOADER for "<< url;
         downloader->getArray(url);
     }
 }

@@ -132,14 +132,14 @@ Maui.Page
 
             Component.onCompleted:
             {
-                var list = bae.lastPlaylist()
-                var n = list.length
+                var lastplaylist = bae.lastPlaylist()
+                var n = lastplaylist.length
 
                 if(n>0)
                 {
                     for(var i = 0; i < n; i++)
                     {
-                        var where = "url = \""+list[i]+"\""
+                        var where = "url = \""+lastplaylist[i]+"\""
                         var query = Q.GET.tracksWhere_.arg(where)
                         table.list.appendQuery(query);
                     }
@@ -147,7 +147,7 @@ Maui.Page
                 {
                     where = "fav = 1"
                     query = Q.GET.tracksWhere_.arg(where)
-                    list.appendQuery(query);
+                    table.list.appendQuery(query);
                 }
 
 //                if(autoplay)

@@ -226,7 +226,7 @@ void TracksModel::searchQueries(const QStringList &queries)
             if(!searchQuery.isEmpty())
             {
                 this->list << this->db->getSearchedTracks(FMH::MODEL_KEY::WIKI, searchQuery);
-               this->list << this->db->getSearchedTracks(FMH::MODEL_KEY::TAG, searchQuery);
+                this->list << this->db->getSearchedTracks(FMH::MODEL_KEY::TAG, searchQuery);
                 this->list << this->db->getSearchedTracks(FMH::MODEL_KEY::LYRICS, searchQuery);
             }
 
@@ -306,7 +306,7 @@ bool TracksModel::fav(const int &index, const bool &value)
     {
         this->list[index][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
         emit this->updateModel(index, {FMH::MODEL_KEY::FAV});
-qDebug()<< "FAVVING TRACKS"<< item;
+        qDebug()<< "FAVVING TRACKS"<< item;
         return true;
     }
 

@@ -78,6 +78,7 @@ ListView
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: model.title
+            color: textColor
             font.pointSize: fontSizes.default
             verticalAlignment: Qt.AlignBottom
             clip: true
@@ -95,6 +96,8 @@ ListView
             font.pointSize: fontSizes.small
             verticalAlignment: Qt.AlignTop
             clip: true
+            color: textColor
+
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
 
 
