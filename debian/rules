@@ -1,5 +1,0 @@
-#!/usr/bin/make -f
-include /usr/share/pkg-kde-tools/qt-kde-team/3/debian-qt-kde.mk
-
-override_dh_install:
-	dh_install --list-missing

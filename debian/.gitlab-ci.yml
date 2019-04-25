@@ -1,3 +1,0 @@
-include: 'https://gitlab.com/debian-pm/tools/build/raw/master/docker/gitlab-ci-base.yml'
-
-image: jbbgameich/build
