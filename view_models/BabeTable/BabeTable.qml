@@ -56,6 +56,7 @@ BabeList
 
     focus: true
 
+    headBar.plegable: false
     headBar.leftContent: [
         Maui.ToolButton
         {

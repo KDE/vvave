@@ -29,7 +29,7 @@ import "db/Queries.js" as Q
 import "utils/Help.js" as H
 import "utils/Player.js" as Player
 
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import FMList 1.0
 import Player 1.0
@@ -155,66 +155,149 @@ Maui.ApplicationWindow
 
     /* UI */
     altToolBars: false
-    accentColor: babeColor
-    headBarFGColor: altColorText
-    headBarBGColor: /*currentView === viewsIndex.vvave ? "#7e57c2" :*/ "#212121"
-    altColorText: darkTextColor
+//    accentColor: babeColor
+//    headBarFGColor: altColorText
+//    headBarBGColor: /*currentView === viewsIndex.vvave ? "#7e57c2" :*/ "#212121"
+//    altColorText: darkTextColor
 
     floatingBar: false
+//    leftIcon.iconColor: currentView === viewsIndex.search ? babeColor : altColorText
+    onSearchButtonClicked:
+    {
+        pageStack.currentIndex = 1
+        currentView = viewsIndex.search
+        searchView.searchInput.forceActiveFocus()
+    }
+    headBar.flickable: true
+    headBar.stickyMiddleContent: true
+    headBar.middleContent: Kirigami.ActionToolBar
+    {
 
-    headBar.middleContent : [
-        Maui.ToolButton
-        {
-            iconName: "view-media-track"
-            height: headBar.height
-            showIndicator: currentView === viewsIndex.tracks
-            iconColor: currentView === viewsIndex.tracks ? babeColor : altColorText
-            onClicked: currentView = viewsIndex.tracks
-            text: qsTr("Tracks")
-            tooltipText: pageStack.wideMode ? "" : text
-            colorScheme.highlightColor: babeColor
+        Layout.minimumWidth: iconSizes.medium * 1.5
 
-        },
+        actions: [
+            Kirigami.Action
+            {
+                Kirigami.Theme.textColor: "red"
+                iconName: "view-media-track"
+                //            height: headBar.height
+                //            showIndicator: currentView === viewsIndex.tracks
+                icon.color: currentView === viewsIndex.tracks ? babeColor : textColor
+                onTriggered: currentView = viewsIndex.tracks
+                text: qsTr("Tracks")
+                //            tooltipText: pageStack.wideMode ? "" : text
+                //            colorScheme.highlightColor: babeColor
 
-        Maui.ToolButton
-        {
-            text: qsTr("Albums")
-            height: headBar.height
-            showIndicator: currentView === viewsIndex.albums
-            iconName: /*"album"*/ "view-media-album-cover"
-            iconColor: currentView === viewsIndex.albums ? babeColor : altColorText
-            onClicked: currentView = viewsIndex.albums
-            tooltipText: pageStack.wideMode ? "" : text
-            colorScheme.highlightColor: babeColor
+            },
 
-        },
+            Kirigami.Action
+            {
+                text: qsTr("Albums")
+                //            height: headBar.height
+                //            showIndicator: currentView === viewsIndex.albums
+                iconName: /*"album"*/ "view-media-album-cover"
+                icon.color: currentView === viewsIndex.albums ? babeColor : textColor
+                onTriggered: currentView = viewsIndex.albums
+                //            tooltipText: pageStack.wideMode ? "" : text
+                //            colorScheme.highlightColor: babeColor
 
-        Maui.ToolButton
-        {
-            text: qsTr("Artists")
-            height: headBar.height
-            showIndicator: currentView === viewsIndex.artists
-            iconName: "view-media-artist"
-            iconColor:  currentView === viewsIndex.artists ? babeColor : altColorText
-            onClicked: currentView = viewsIndex.artists
-            tooltipText: pageStack.wideMode ? "" : text
-            colorScheme.highlightColor: babeColor
+            },
 
-        },
+            Kirigami.Action
+            {
+                text: qsTr("Artists")
+                //            height: headBar.height
+                //            showIndicator: currentView === viewsIndex.artists
+                iconName: "view-media-artist"
+                icon.color:  currentView === viewsIndex.artists ? babeColor : textColor
+                onTriggered: currentView = viewsIndex.artists
+                //            tooltipText: pageStack.wideMode ? "" : text
+                //            colorScheme.highlightColor: babeColor
 
-        Maui.ToolButton
-        {
-            text: qsTr("Playlists")
-            height: headBar.height
-            showIndicator: currentView === viewsIndex.playlists
-            iconName: "view-media-playlist"
-            iconColor: currentView === viewsIndex.playlists ? babeColor : altColorText
-            onClicked: currentView = viewsIndex.playlists
-            tooltipText: pageStack.wideMode ? "" : text
-            colorScheme.highlightColor: babeColor
+            },
 
-        }
-    ]
+            Kirigami.Action
+            {
+                text: qsTr("Playlists")
+                //            height: headBar.height
+                //            showIndicator: currentView === viewsIndex.playlists
+                iconName: "view-media-playlist"
+                icon.color: currentView === viewsIndex.playlists ? babeColor : textColor
+                onTriggered: currentView = viewsIndex.playlists
+                //            tooltipText: pageStack.wideMode ? "" : text
+                //            colorScheme.highlightColor: babeColor
+
+
+            },
+
+            Kirigami.Action
+            {
+                text: qsTr("Folders")
+                iconName: "folder"
+                icon.color: currentView === viewsIndex.folders ? babeColor : textColor
+
+                onTriggered:
+                {
+                    pageStack.currentIndex = 1
+                    currentView = viewsIndex.folders
+                }
+            },
+
+            //        Maui.MenuItem
+            //        {
+            //            text: qsTr("Linking")
+            //            icon.name: "view-links"
+            //            onTriggered:
+            //            {
+            //                pageStack.currentIndex = 1
+            //                currentView = viewsIndex.linking
+            //                if(!isLinked) linkingView.linkingConf.open()
+            //            }
+            //        },
+
+            Kirigami.Action
+            {
+                text: qsTr("YouTube")
+                iconName: "internet-services"
+                icon.color: currentView === viewsIndex.youtube ? babeColor : textColor
+
+                onTriggered:
+                {
+                    pageStack.currentIndex = 1
+                    currentView = viewsIndex.youtube
+                }
+            }
+
+            //        Maui.MenuItem
+            //        {
+            //            text: qsTr("Cloud")
+            //            icon.name: "folder-cloud"
+            //            onTriggered:
+            //            {
+            //                pageStack.currentIndex = 1
+            //                currentView = viewsIndex.cloud
+            //            }
+            //        },
+
+
+            //        Maui.MenuItem
+            //        {
+            //            text: qsTr("Spotify")
+            //            icon.name: "internet-services"
+            //            onTriggered:
+            //            {
+            //                pageStack.currentIndex = 1
+            //                currentView = viewsIndex.spotify
+            //            }
+            //        },
+
+
+
+
+
+        ]
+
+    }
 
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: footBar.visible ? toolBarHeight * 1.2 : 0
@@ -282,15 +365,15 @@ Maui.ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            leftContent:  Maui.ToolButton
-            {
-                iconName: "headphones"
-                visible: _drawer.modal
-                iconColor: _drawer.visible ? babeColor : textColor
-                onClicked: _drawer.visible = !_drawer.visible
-                colorScheme.highlightColor: babeColor
-                //                text: qsTr("Now")
-            }
+//            leftContent:  Maui.ToolButton
+//            {
+//                iconName: "headphones"
+//                visible: _drawer.modal
+//                iconColor: _drawer.visible ? babeColor : textColor
+//                onClicked: _drawer.visible = !_drawer.visible
+//                colorScheme.highlightColor: babeColor
+//                //                text: qsTr("Now")
+//            }
 
             middleContent: [
 
@@ -347,15 +430,6 @@ Maui.ApplicationWindow
         }
     }
 
-
-    leftIcon.iconColor: currentView === viewsIndex.search ? babeColor : altColorText
-    onSearchButtonClicked:
-    {
-        pageStack.currentIndex = 1
-        currentView = viewsIndex.search
-        searchView.searchInput.forceActiveFocus()
-    }
-
     InfoView
     {
         id: infoView
@@ -380,6 +454,13 @@ Maui.ApplicationWindow
 
     mainMenu: [
 
+        Maui.MenuItem
+        {
+            text: qsTr("Sources...")
+            icon.name: "folder-add"
+            onTriggered: sourcesDialog.open()
+        }
+
         //        Maui.MenuItem
         //        {
         //            text: "Vvave Stream"
@@ -391,71 +472,7 @@ Maui.ApplicationWindow
         //            }
         //        },
 
-        Maui.MenuItem
-        {
-            text: qsTr("Folders")
-            icon.name: "folder"
-            onTriggered:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.folders
-            }
-        },
 
-        //        Maui.MenuItem
-        //        {
-        //            text: qsTr("Linking")
-        //            icon.name: "view-links"
-        //            onTriggered:
-        //            {
-        //                pageStack.currentIndex = 1
-        //                currentView = viewsIndex.linking
-        //                if(!isLinked) linkingView.linkingConf.open()
-        //            }
-        //        },
-
-        Maui.MenuItem
-        {
-            text: qsTr("YouTube")
-            icon.name: "internet-services"
-            onTriggered:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.youtube
-            }
-        },
-
-        //        Maui.MenuItem
-        //        {
-        //            text: qsTr("Cloud")
-        //            icon.name: "folder-cloud"
-        //            onTriggered:
-        //            {
-        //                pageStack.currentIndex = 1
-        //                currentView = viewsIndex.cloud
-        //            }
-        //        },
-
-
-        //        Maui.MenuItem
-        //        {
-        //            text: qsTr("Spotify")
-        //            icon.name: "internet-services"
-        //            onTriggered:
-        //            {
-        //                pageStack.currentIndex = 1
-        //                currentView = viewsIndex.spotify
-        //            }
-        //        },
-
-        MenuSeparator{},
-
-        Maui.MenuItem
-        {
-            text: qsTr("Sources...")
-            icon.name: "folder-add"
-            onTriggered: sourcesDialog.open()
-        }
 
         //        Maui.Menu
         //        {

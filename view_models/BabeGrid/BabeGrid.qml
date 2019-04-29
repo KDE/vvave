@@ -13,7 +13,7 @@ Maui.Page
     //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
     //    property int hintSize : Math.sqrt(root.width*root.height)*0.3
 
-    property int albumCoverSize: iconSizes.enormous
+    property int albumCoverSize: Math.min(iconSizes.enormous, width * 0.3)
     readonly property int albumSpacing: albumCoverSize * 0.3 + space.small
 
     property int albumCoverRadius :  radiusV
