@@ -449,11 +449,11 @@ inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MO
     while (it.hasNext())
     {
         auto file = it.next();
-        auto fileName = QFileInfo(file).fileName();
+        auto fileName = QFileInfo(file).baseName();
         switch(type)
         {
         case FMH::MODEL_KEY::ALBUM:
-            if(fileName == track[FMH::MODEL_KEY::ARTIST]+"_"+track[FMH::MODEL_KEY::ALBUM]+".jpg")
+            if(fileName.startsWith(track[FMH::MODEL_KEY::ARTIST]+"_"+track[FMH::MODEL_KEY::ALBUM]))
             {
                 track.insert(FMH::MODEL_KEY::ARTWORK, file);
                 return true;
@@ -461,7 +461,7 @@ inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MO
             break;
 
         case FMH::MODEL_KEY::ARTIST:
-            if(fileName == track[FMH::MODEL_KEY::ARTIST]+".jpg")
+            if(fileName.startsWith(track[FMH::MODEL_KEY::ARTIST]))
             {
                 track.insert(FMH::MODEL_KEY::ARTWORK, file);
                 return true;

@@ -17,289 +17,70 @@
 
 #include "pulpo.h"
 #include "services/lastfmService.h"
-#include "services/spotifyService.h"
-#include "services/lyricwikiaService.h"
-#include "services/geniusService.h"
-#include "services/musicbrainzService.h"
-#include "services/deezerService.h"
+//#include "services/spotifyService.h"
+//#include "services/lyricwikiaService.h"
+//#include "services/geniusService.h"
+//#include "services/musicbrainzService.h"
+//#include "services/deezerService.h"
 
-//#include "qgumbodocument.h"
+//#include "qgumbodocument.h"p
 //#include "qgumbonode.h"
-
-Pulpo::Pulpo(const FMH::MODEL &song, QObject *parent)
-    : QObject(parent), track(song) {}
 
 Pulpo::Pulpo(QObject *parent): QObject(parent) {}
 
 Pulpo::~Pulpo()
 {
     qDebug()<< "DELETING PULPO INSTANCE";
-    for(auto &instance : this->serviceInstances)
-        delete instance;
 }
 
-bool Pulpo::feed(const FMH::MODEL &song, const RECURSIVE &recursive)
+void Pulpo::request(const PULPO::REQUEST &request)
 {
-    if(song.isEmpty())
-        return false;
+    this->req = request;
 
-    this->track = song;
-    this->recursive = recursive;
+    if(this->req.track.isEmpty())
+    {
+        emit this->error();
+        return;
+    }
 
-    if(this->registeredServices.isEmpty()) return false;
+    if(this->req.services.isEmpty())
+    {
+        qWarning()<< "Please register at least one Pulpo Service";
+        emit this->error();
+        return;
+    }
 
-    this->initServices();
-
-    return true;
+    this->start();
 }
 
-void Pulpo::registerServices(const QList<PULPO::SERVICES> &services)
+
+void Pulpo::start()
 {
-    this->registeredServices = services;
-}
-
-void Pulpo::setInfo(const PULPO::INFO &info)
-{
-    this->info = info;
-}
-
-void Pulpo::setOntology(const PULPO::ONTOLOGY &ontology)
-{
-    this->ontology = ontology;
-}
-
-ONTOLOGY Pulpo::getOntology()
-{
-    return this->ontology;
-}
-
-void Pulpo::setRecursive(const RECURSIVE &state)
-{
-    this->recursive=state;
-}
-
-QStringList Pulpo::queryHtml(const QByteArray &array, const QString &className)
-{
-    QStringList res;
-
-    //    auto doc = QGumboDocument::parse(array);
-    //    auto root = doc.rootNode();
-
-    //    auto nodes = root.getElementsByTagName(HtmlTag::TITLE);
-    //    Q_ASSERT(nodes.size() == 1);
-
-    //    auto title = nodes.front();
-    //    qDebug() << "title is: " << title.innerText();
-
-    //    auto container = root.getElementsByClassName(className);
-    //    //    if(container.size() == 1)
-    //    //        return res;
-
-    //    auto children = container.front().children();
-    //    for(const auto &i : children)
-    //        res << i.innerText();
-
-
-    return res;
-}
-
-void Pulpo::initServices()
-{
-    for(auto service : this->registeredServices)
+    for(const auto &service : this->req.services)
         switch (service)
         {
-            case SERVICES::LastFm:
+        case SERVICES::LastFm:
+        {
+            auto lastfm  = new class lastfm();
+            connect(lastfm, &lastfm::responseReady,[=](PULPO::REQUEST request, PULPO::RESPONSES responses)
             {
-                auto lastfm  = new class lastfm(this->track);
-                this->serviceInstances.push_back(lastfm);
-                connect(lastfm, &lastfm::infoReady,[=](FMH::MODEL track, PULPO::RESPONSE response)
-                {
-                    this->passSignal(track, response);
-//                    lastfm->deleteLater();
-                });
+                this->passSignal(request, responses);
+                lastfm->deleteLater();
+            });
 
-                if(lastfm->setUpService(this->ontology, this->info))
-                {
-                    if(recursive == RECURSIVE::OFF) return;
-
-                }else qDebug()<<"Error settingUp lastfm service";
-
-                break;
-            }
-
-            case SERVICES::Spotify:
-            {
-                spotify spotify(this->track);
-                connect(&spotify, &spotify::infoReady, this, &Pulpo::passSignal);
-
-                if(spotify.setUpService(this->ontology,this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
-
-                }else qDebug()<<"Error settingUp spotify service";
-
-                break;
-            }
-            case SERVICES::Genius:
-            {
-                auto genius = new class genius(this->track);
-                connect(genius, &genius::infoReady, this, &Pulpo::passSignal);
-
-                if(genius->setUpService(this->ontology,this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
-
-                }else qDebug()<<"Error settingUp genius service";
-
-                break;
-            }
-            case SERVICES::MusicBrainz:
-            {
-                musicBrainz musicbrainz(this->track);
-                connect(&musicbrainz, &musicBrainz::infoReady, this, &Pulpo::passSignal);
-
-                if(musicbrainz.setUpService(this->ontology,this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
-
-                }else qDebug()<<"Error settingUp musicBrainz service";
-
-                break;
-            }
-            case SERVICES::iTunes:
-            {
-                break;
-            }
-            case SERVICES::WikiLyrics:
-            {
-                break;
-            }
-            case SERVICES::LyricWikia:
-            {
-                auto lyricwikia = new lyricWikia(this->track);
-                connect(lyricwikia, &lyricWikia::infoReady, this, &Pulpo::passSignal);
-
-                if(lyricwikia->setUpService(this->ontology, this->info))
-                {
-                    if(recursive == RECURSIVE::OFF) return;
-
-                }else qDebug()<<"Error settingUp lyricwikia service";
-
-                break;
-            }
-            case SERVICES::Wikipedia:
-            {
-                break;
-            }
-
-            case SERVICES::Deezer:
-            {
-                deezer deezer(this->track);
-                connect(&deezer, &deezer::infoReady, this, &Pulpo::passSignal);
-
-                if(deezer.setUpService(this->ontology, this->info))
-                {
-                    if(recursive== RECURSIVE::OFF) return;
-
-                }else qDebug()<<"Error settingUp deezer service";
-
-                break;
-            }
-            case SERVICES::ALL:
-            {
-                break;
-            }
-            case SERVICES::NONE:
-            {
-                break;
-            }
+            lastfm->set(this->req);
+            break;
+        }
         }
 }
 
-void Pulpo::passSignal(const FMH::MODEL &track, const PULPO::RESPONSE &response)
+void Pulpo::passSignal(REQUEST request, RESPONSES responses)
 {
-    emit this->infoReady(track, response);
+    if(request.callback)
+        request.callback(request, responses);
+    else
+        emit this->infoReady(request, responses);
+
+
+    emit this->finished();
 }
-
-PULPO::RESPONSE Pulpo::packResponse(const PULPO::ONTOLOGY ontology, const PULPO::INFO &infoKey, const PULPO::CONTEXT &context, const QVariant &value)
-{
-    return {{ ontology, {{ infoKey, {{ context, value }} }} }};
-}
-
-PULPO::RESPONSE Pulpo::packResponse(const ONTOLOGY ontology, const PULPO::INFO &infoKey, const PULPO::VALUE &map)
-{
-    return  {{ ontology, { {infoKey, map} }} };
-}
-
-bool Pulpo::parseArray()
-{
-    if(this->ontology == PULPO::ONTOLOGY::NONE)
-        return false;
-
-    switch(this->ontology)
-    {
-        case PULPO::ONTOLOGY::ALBUM: return this->parseAlbum();
-        case PULPO::ONTOLOGY::ARTIST: return this->parseArtist();
-        case PULPO::ONTOLOGY::TRACK: return this->parseTrack();
-        default: return false;
-    }
-}
-
-QByteArray Pulpo::startConnection(const QString &url, const QMap<QString,QString> &headers)
-{
-    if(!url.isEmpty())
-    {
-        QUrl mURL(url);
-        QNetworkAccessManager manager;
-        QNetworkRequest request (mURL);
-
-        if(!headers.isEmpty())
-            for(auto key: headers.keys())
-                request.setRawHeader(key.toLocal8Bit(), headers[key].toLocal8Bit());
-
-        QNetworkReply *reply =  manager.get(request);
-        QEventLoop loop;
-        connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-
-        connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), &loop, SLOT(quit()));
-
-        loop.exec();
-
-        if(reply->error())
-        {
-            qDebug() << reply->error();
-            return QByteArray();
-        }
-
-        if(reply->bytesAvailable())
-        {
-            auto data = reply->readAll();
-            reply->deleteLater();
-
-            return data;
-        }
-    }
-
-    return QByteArray();
-}
-
-void Pulpo::startConnectionAsync(const QString &url, const QMap<QString,QString> &headers)
-{
-    if(!url.isEmpty())
-    {
-        auto downloader = new FMH::Downloader;
-        connect(downloader, &FMH::Downloader::dataReady, [=](QByteArray array)
-        {
-//            qDebug()<< "DATA READY << " << array;
-            emit this->arrayReady(array);
-            downloader->deleteLater();
-        });
-
-//        qDebug()<< "trying to get ASYNC DOWNLOADER for "<< url;
-        downloader->getArray(url);
-    }
-}
-
-
-
-

@@ -14,35 +14,22 @@
 using namespace BAE;
 using namespace PULPO;
 
-struct REQUEST
-{
-public:
 
-    FMH::MODEL data;
-    PULPO::ONTOLOGY ontology;
-    QList<PULPO::SERVICES> services;
-    PULPO::INFO info;
-    PULPO::RECURSIVE recursive = PULPO::RECURSIVE::ON;
-    void (*cb)(FMH::MODEL) = nullptr;
-};
 
 struct QUEUE
 {
 private:
-    QList<REQUEST> requests;
+    QList<PULPO::REQUEST> requests;
     int index = -1;
 
 public:
-    REQUEST next()
+    PULPO::REQUEST next()
     {
         index++;
         if(index < 0 || index >= requests.size())
-            return REQUEST{};
+            return PULPO::REQUEST{};
 
         const auto res = requests.at(index);
-
-        qDebug() << index << requests.size() << res.data;
-
         return res;
     }
 
@@ -56,12 +43,12 @@ public:
         return requests.size();
     }
 
-    void append(const REQUEST &request)
+    void append(const PULPO::REQUEST &request)
     {
         requests << request;
     }
 
-    void operator<< (const REQUEST &request)
+    void operator<< (const PULPO::REQUEST &request)
     {
         append(request);
     }
@@ -82,11 +69,11 @@ public:
     bool isRunning() const;
     void setInterval(const uint &value);
 
-    void appendRequest(const REQUEST &request);
+    void appendRequest(const PULPO::REQUEST &request);
 
 public slots:
     void synapse();
-    void connectionParser(FMH::MODEL track, PULPO::RESPONSE response);
+    void connectionParser(PULPO::REQUEST request, PULPO::RESPONSES responses);
     void parseAlbumInfo(FMH::MODEL &track, const PULPO::INFO_K &response);
     void parseArtistInfo(FMH::MODEL &track, const PULPO::INFO_K &response);
     void parseTrackInfo(FMH::MODEL &track, const PULPO::INFO_K &response);

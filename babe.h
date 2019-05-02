@@ -84,7 +84,6 @@ public:
 public slots:
 
 private:
-    Pulpo *pulpo;
 //    ConThread *thread;
     CollectionDB *db;
 

@@ -2,9 +2,9 @@
 #define LASTFMSERVICE_H
 
 #include <QObject>
-#include "../pulpo.h"
+#include "../service.h"
 
-class lastfm : public Pulpo
+class lastfm : public Service
 {
     Q_OBJECT
 
@@ -13,17 +13,18 @@ private:
     const QString API = "http://ws.audioscrobbler.com/2.0/";
     const QString KEY = "&api_key=ba6f0bd3c887da9101c10a50cf2af133";
 
-    bool parseSimilar();
+    void parseSimilar();
 
 public:
-    explicit lastfm(const FMH::MODEL &song);
-    virtual ~lastfm();
-    virtual bool setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info);
+    explicit lastfm();
+    ~lastfm();
+
+    void set(const PULPO::REQUEST &request) override final;
 
 protected:
-    virtual bool parseArtist();
-    virtual bool parseAlbum();
-    virtual bool parseTrack();
+//    virtual void parseArtist(const QByteArray &array);
+    virtual void parseAlbum(const QByteArray &array) override final;
+//    virtual void parseTrack(const QByteArray &array);
 
 
     /*INTERNAL IMPLEMENTATION*/
