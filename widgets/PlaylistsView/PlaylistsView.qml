@@ -35,7 +35,11 @@ Kirigami.PageRow
     initialPage: [playlistLayout, filterList]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
     interactive: currentIndex === 1 && !wideMode
-
+Rectangle
+{
+ color: "pink"
+ anchors.fill: parent
+}
 
     ColumnLayout
     {

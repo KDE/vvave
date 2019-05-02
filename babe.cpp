@@ -158,10 +158,10 @@ void Babe::trackLyrics(const QString &url)
 
     if(track.isEmpty()) return;
 
-    qDebug()<< "Getting lyrics for track"<< track.first()[FMH::MODEL_KEY::TITLE];
-    if(!track.first()[FMH::MODEL_KEY::LYRICS].isEmpty() && track.first()[FMH::MODEL_KEY::LYRICS] != SLANG[W::NONE])
-        emit this->trackLyricsReady(track.first()[FMH::MODEL_KEY::LYRICS], url);
-    else
+//    qDebug()<< "Getting lyrics for track"<< track.first()[FMH::MODEL_KEY::TITLE];
+//    if(!track.first()[FMH::MODEL_KEY::LYRICS].isEmpty() && track.first()[FMH::MODEL_KEY::LYRICS] != SLANG[W::NONE])
+//        emit this->trackLyricsReady(track.first()[FMH::MODEL_KEY::LYRICS], url);
+//    else
         this->fetchTrackLyrics(track.first());
 }
 
@@ -208,15 +208,31 @@ QString Babe::albumArt(const QString &album, const QString &artist)
 }
 
 void Babe::fetchTrackLyrics(FMH::MODEL &song)
-{
-    this->pulpo->registerServices({SERVICES::LyricWikia, SERVICES::Genius});
-    this->pulpo->setOntology(PULPO::ONTOLOGY::TRACK);
-    this->pulpo->setInfo(PULPO::INFO::LYRICS);
+{/*
+    auto p = new Pulpo(this);
+
+    connect(p, &Pulpo::infoReady, [=](const FMH::MODEL &track, const PULPO::RESPONSE  &res)
+    {
+        qDebug()<<"GOT THE LYRICS";
+
+        if(!res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS].isEmpty())
+        {
+            auto lyrics = res[PULPO::ONTOLOGY::TRACK][PULPO::INFO::LYRICS][PULPO::CONTEXT::LYRIC].toString();
+
+//            this->db->lyricsTrack(track, lyrics);
+            emit this->trackLyricsReady(lyrics, track[FMH::MODEL_KEY::URL]);
+            p->deleteLater();
+        }
+    });
+
+    p->registerServices({SERVICES::Genius});
+    p->setOntology(PULPO::ONTOLOGY::TRACK);
+    p->setInfo(PULPO::INFO::LYRICS);
 
     qDebug()<<"STARTED FETCHING LYRICS";
-    this->pulpo->feed(song, PULPO::RECURSIVE::OFF);
+    p->feed(song, PULPO::RECURSIVE::OFF);
 
-    qDebug()<<"DONE FETCHING LYRICS";
+    qDebug()<<"DONE FETCHING LYRICS";*/
 }
 
 //void Babe::linkDecoder(QString json)

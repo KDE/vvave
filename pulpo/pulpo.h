@@ -48,6 +48,8 @@ private:
     QNetworkAccessManager *manager;
     QNetworkReply *reply;
 
+    QList<Pulpo *> serviceInstances;
+
 protected:
     QByteArray array;
     FMH::MODEL track;

@@ -17,6 +17,7 @@ private:
 
 public:
     explicit lastfm(const FMH::MODEL &song);
+    virtual ~lastfm();
     virtual bool setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info);
 
 protected:

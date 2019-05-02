@@ -7,6 +7,12 @@ genius::genius(const FMH::MODEL &song)
     this->availableInfo.insert(ONTOLOGY::TRACK, {INFO::TAGS, INFO::WIKI, INFO::ARTWORK, INFO::LYRICS});
 
     this->track = song;
+
+    connect(this, &genius::arrayReady, [this](QByteArray data)
+    {
+        this->array = data;
+        this->parseArray();
+    });
 }
 
 bool genius::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info)
@@ -28,22 +34,22 @@ bool genius::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
     switch(this->ontology)
     {
-    case PULPO::ONTOLOGY::ARTIST:
-    {
-        url.append("/search?q=");
-        url.append(encodedArtist.toString());
-        break;
-    }
+        case PULPO::ONTOLOGY::ARTIST:
+        {
+            url.append("/search?q=");
+            url.append(encodedArtist.toString());
+            break;
+        }
 
-    case PULPO::ONTOLOGY::TRACK:
-    {
-        url.append("/search?q=");
-        url.append(encodedTrack.toString());
-        url.append(" " + encodedArtist.toString());
-        break;
-    }
+        case PULPO::ONTOLOGY::TRACK:
+        {
+            url.append("/search?q=");
+            url.append(encodedTrack.toString());
+            url.append(" " + encodedArtist.toString());
+            break;
+        }
 
-    default: return false;
+        default: return false;
     }
 
     qDebug()<< "[genius service]: "<< url;
@@ -52,10 +58,8 @@ bool genius::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &in
 
     qDebug()<< "[genius service]: "<< newUrl;
 
-    this->array = this->startConnection(newUrl, {{"Authorization", this->KEY}} );
-    if(this->array.isEmpty()) return false;
-
-    return this->parseArray();
+    this->startConnectionAsync(newUrl, {{"Authorization", this->KEY}} );
+    return true;
 }
 
 QString genius::getID(const QString &url)
@@ -82,17 +86,17 @@ QString genius::getID(const QString &url)
     switch(this->ontology)
     {
 
-    case ONTOLOGY::ARTIST:
-    {
-        id = hits.first().toMap().value("result").toMap().value("primary_artist").toMap().value("api_path").toString();
-        break;
-    }
-    case ONTOLOGY::TRACK:
-    {
-        id = hits.first().toMap().value("result").toMap().value("api_path").toString();
-        break;
-    }
-    default: break;
+        case ONTOLOGY::ARTIST:
+        {
+            id = hits.first().toMap().value("result").toMap().value("primary_artist").toMap().value("api_path").toString();
+            break;
+        }
+        case ONTOLOGY::TRACK:
+        {
+            id = hits.first().toMap().value("result").toMap().value("api_path").toString();
+            break;
+        }
+        default: break;
     }
 
     return !id.isEmpty()? this->API+id :  id;
@@ -162,7 +166,6 @@ bool genius::parseArtist()
 
 bool genius::parseTrack()
 {
-
     QJsonParseError jsonParseError;
     QJsonDocument jsonResponse = QJsonDocument::fromJson(static_cast<QString>(this->array).toUtf8(), &jsonParseError);
 

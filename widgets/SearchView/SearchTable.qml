@@ -37,11 +37,12 @@ BabeTable
     trackRating: true
     onExit: clearSearch()
 
+    footBar.drawBorder: false
     footBar.middleContent:  Maui.TextField
     {
         id: searchInput
         placeholderText: qsTr("Search...")
-        width: footBar.middleLayout.width * 0.9
+        Layout.fillWidth: true
 
         onAccepted: runSearch(searchInput.text)
         //                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()

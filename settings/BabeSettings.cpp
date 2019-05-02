@@ -68,13 +68,14 @@ BabeSettings::BabeSettings(QObject *parent) : QObject(parent)
 
     connect(this->brainDeamon, &Brain::done, [this](const TABLE type)
     {
+        qDebug()<< "FINISHED WITH" << TABLEMAP[type];
         emit this->refreshATable(type);
     });
 
     connect(&this->fileLoader, &FileLoader::finished, [this](int size)
     {
 //        if(size > 0)
-//            this->startBrainz(true, BAE::SEG::HALF);
+            this->startBrainz(true, BAE::SEG::HALF);
 //        else
 //            this->startBrainz(BAE::loadSettings("AUTO", "BRAINZ", true).toBool(), BAE::SEG::TWO);
 

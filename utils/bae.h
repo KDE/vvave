@@ -416,9 +416,10 @@ inline void saveArt(FMH::MODEL &track, const QByteArray &array, const QString &p
         QString name = !track[FMH::MODEL_KEY::ALBUM].isEmpty() ? track[FMH::MODEL_KEY::ARTIST] + "_" + track[FMH::MODEL_KEY::ALBUM] : track[FMH::MODEL_KEY::ARTIST];
         name.replace("/", "-");
         name.replace("&", "-");
-        QString format = "JPEG";
-        if (img.save(path + name + ".jpg", format.toLatin1(), 100))
-            track.insert(FMH::MODEL_KEY::ARTWORK,path + name + ".jpg");
+        QString format = "PNG";
+        qDebug()<< "SAVER TO "<< path + name + ".png";
+        if (img.save(path + name + ".png", format.toLatin1(), 100))
+            track.insert(FMH::MODEL_KEY::ARTWORK,path + name + ".png");
         else  qDebug() << "couldn't save artwork";
     }else qDebug()<<"array is empty";
 }

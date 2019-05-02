@@ -9,7 +9,9 @@ Brain::Brain() : QObject (nullptr)
     qRegisterMetaType<FMH::MODEL>("FMH::MODEL");
     qRegisterMetaType<TABLE>("TABLE");
     qRegisterMetaType<PULPO::RESPONSE>("PULPO::RESPONSE");
-    connect(&this->pulpo, &Pulpo::infoReady, this, &Brain::connectionParser);
+    this->pulpo = new Pulpo(this);
+
+    connect(pulpo, &Pulpo::infoReady, this, &Brain::connectionParser);
 
     this->moveToThread(&t);
     this->t.start();
@@ -52,55 +54,69 @@ void Brain::setInterval(const uint &value)
     this->interval = value;
 }
 
-void Brain::setInfo(FMH::MODEL_LIST dataList, ONTOLOGY ontology, QList<SERVICES> services, INFO info, RECURSIVE recursive, void (*cb)(FMH::MODEL))
+void Brain::appendRequest(const REQUEST &request)
 {
-    if(!go) return;
-
-    this->pulpo.registerServices(services);
-    this->pulpo.setOntology(ontology);
-    this->pulpo.setInfo(info);
-
-    if(dataList.isEmpty()) return;
-
-    for(auto data : dataList)
-    {
-        if(!this->go) break;
-
-        if (cb != nullptr) cb(data);
-
-        if(!this->pulpo.feed(data, recursive)) break;
-
-        this->t.msleep(this->interval);
-    }
+    this->queue << request;
 }
+
 
 void Brain::synapse()
 {
     if(this->go)
     {
         this->artworks();
-        this->trackLyrics();
-        this->tags();
-        this->wikis();
+        //        this->trackLyrics();
+        //        this->tags();
+        //        this->wikis();
     }
 
-    emit this->finished();
+    if(this->queue.hasNext())
+    {
+        const auto request = this->queue.next();
+
+        this->pulpo->registerServices(request.services);
+        this->pulpo->setOntology(request.ontology);
+        this->pulpo->setInfo(request.info);
+        this->pulpo->feed(request.data, request.recursive);
+    }
+
     this->go = false;
 }
 
 void Brain::connectionParser(FMH::MODEL track, RESPONSE response)
 {
+
+    if(this->queue.hasNext())
+    {
+        const auto request = this->queue.next();
+
+        this->pulpo->registerServices(request.services);
+        this->pulpo->setOntology(request.ontology);
+        this->pulpo->setInfo(request.info);
+        this->t.msleep(this->interval);
+
+        this->pulpo->feed(request.data, request.recursive);
+
+    }else
+    {
+        qDebug()<< "NOTHING ELSE IN QUEUE";
+        emit this->done(TABLE::ALBUMS);
+    }
+
+
     for(auto res : response.keys())
     {
         switch(res)
         {
-        case ONTOLOGY::ALBUM: this->parseAlbumInfo(track, response[res]); break;
-        case ONTOLOGY::ARTIST: this->parseArtistInfo(track, response[res]); break;
-        case ONTOLOGY::TRACK:  this->parseTrackInfo(track, response[res]); break;
-        default: return;
+            case ONTOLOGY::ALBUM: this->parseAlbumInfo(track, response[res]); break;
+            case ONTOLOGY::ARTIST: this->parseArtistInfo(track, response[res]); break;
+            case ONTOLOGY::TRACK:  this->parseTrackInfo(track, response[res]); break;
+            default: break;
         }
-        this->t.msleep(this->interval);
     }
+
+
+
 }
 
 void Brain::parseAlbumInfo(FMH::MODEL &track, const INFO_K &response)
@@ -109,50 +125,69 @@ void Brain::parseAlbumInfo(FMH::MODEL &track, const INFO_K &response)
     for(auto info : response.keys())
         switch(info)
         {
-        case PULPO::INFO::TAGS:
-        {
-            for(auto context : response[info].keys())
+            case PULPO::INFO::TAGS:
+            {
+                for(auto context : response[info].keys())
 
-                if(!response[info][context].toMap().isEmpty())
-                {
-                    for(auto tag : response[info][context].toMap().keys() )
-                        this->db->tagsAlbum(track, tag, CONTEXT_MAP[context]);
+                    if(!response[info][context].toMap().isEmpty())
+                    {
+                        for(auto tag : response[info][context].toMap().keys() )
+                            this->db->tagsAlbum(track, tag, CONTEXT_MAP[context]);
 
-                }else if (!response[info][context].toStringList().isEmpty())
-                {
-                    for(auto tag : response[info][context].toStringList() )
-                        this->db->tagsAlbum(track, tag, CONTEXT_MAP[context]);
+                    }else if (!response[info][context].toStringList().isEmpty())
+                    {
+                        for(auto tag : response[info][context].toStringList() )
+                            this->db->tagsAlbum(track, tag, CONTEXT_MAP[context]);
 
-                } else if (!response[info][context].toString().isEmpty())
-                {
-                    this->db->tagsAlbum(track, response[info][context].toString(), CONTEXT_MAP[context]);
-                }
-            break;
-        }
+                    } else if (!response[info][context].toString().isEmpty())
+                    {
+                        this->db->tagsAlbum(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                    }
+                break;
+            }
 
-        case PULPO::INFO::ARTWORK:
-        {
-            if(!response[info].isEmpty())
+            case PULPO::INFO::ARTWORK:
+            {
+                if(!response[info].isEmpty())
 
-                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
-                {
-                    qDebug()<<"SAVING ARTWORK FOR: " << track[FMH::MODEL_KEY::ALBUM];
-                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
-                    this->db->insertArtwork(track);
-                }
+                    if(!response[info][CONTEXT::IMAGE].toString().isEmpty())
+                    {
+                        qDebug()<<"SAVING ARTWORK FOR: " << track[FMH::MODEL_KEY::ALBUM];
+                        auto downloader = new FMH::Downloader;
 
-            break;
-        }
 
-        case PULPO::INFO::WIKI:
-        {
-            if(!response[info].isEmpty())
-                for (auto context : response[info].keys())
-                    this->db->wikiAlbum(track, response[info][context].toString());
-            break;
-        }
 
-        default: continue;
+                        connect(downloader, &FMH::Downloader::fileSaved, [=](QString path)
+                        {
+                            qDebug()<< "Saving artwork file to" << path;
+                            FMH::MODEL newTrack = track;
+                            newTrack[FMH::MODEL_KEY::ARTWORK] = path;
+                            this->db->insertArtwork(newTrack);
+
+                            downloader->deleteLater();
+
+                        });
+
+                        QStringList filePathList = response[info][CONTEXT::IMAGE].toString().split('/');
+                        const auto format = "." + filePathList.at(filePathList.count() - 1).split(".").last();
+                        QString name = !track[FMH::MODEL_KEY::ALBUM].isEmpty() ? track[FMH::MODEL_KEY::ARTIST] + "_" + track[FMH::MODEL_KEY::ALBUM] : track[FMH::MODEL_KEY::ARTIST];
+                        name.replace("/", "-");
+                        name.replace("&", "-");
+                        downloader->setFile(response[info][CONTEXT::IMAGE].toString(),  BAE::CachePath + name + format);
+                    }
+
+                break;
+            }
+
+            case PULPO::INFO::WIKI:
+            {
+                if(!response[info].isEmpty())
+                    for (auto context : response[info].keys())
+                        this->db->wikiAlbum(track, response[info][context].toString());
+                break;
+            }
+
+            default: continue;
         }
 }
 
@@ -162,57 +197,57 @@ void Brain::parseArtistInfo(FMH::MODEL &track, const INFO_K &response)
     {
         switch(info)
         {
-        case PULPO::INFO::TAGS:
-        {
-            if(!response[info].isEmpty())
+            case PULPO::INFO::TAGS:
             {
-                for(auto context : response[info].keys())
+                if(!response[info].isEmpty())
                 {
-                    if(!response[info][context].toMap().isEmpty())
+                    for(auto context : response[info].keys())
                     {
-                        for(auto tag : response[info][context].toMap().keys() )
-                            this->db->tagsArtist(track, tag, CONTEXT_MAP[context]);
+                        if(!response[info][context].toMap().isEmpty())
+                        {
+                            for(auto tag : response[info][context].toMap().keys() )
+                                this->db->tagsArtist(track, tag, CONTEXT_MAP[context]);
 
-                    }else if(!response[info][context].toStringList().isEmpty())
-                    {
-                        for(auto tag : response[info][context].toStringList() )
-                            this->db->tagsArtist(track, tag, CONTEXT_MAP[context]);
+                        }else if(!response[info][context].toStringList().isEmpty())
+                        {
+                            for(auto tag : response[info][context].toStringList() )
+                                this->db->tagsArtist(track, tag, CONTEXT_MAP[context]);
 
-                    }else if(!response[info][context].toString().isEmpty())
+                        }else if(!response[info][context].toString().isEmpty())
+                        {
+                            this->db->tagsArtist(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                        }
+                    }
+
+                } break;
+            }
+
+            case PULPO::INFO::ARTWORK:
+            {
+                if(!response[info].isEmpty())
+                {
+                    if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                     {
-                        this->db->tagsArtist(track, response[info][context].toString(), CONTEXT_MAP[context]);
+                        BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
+                        this->db->insertArtwork(track);
                     }
                 }
 
-            } break;
-        }
+                break;
+            }
 
-        case PULPO::INFO::ARTWORK:
-        {
-            if(!response[info].isEmpty())
+            case PULPO::INFO::WIKI:
             {
-                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
+                if(!response[info].isEmpty())
                 {
-                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(), BAE::CachePath);
-                    this->db->insertArtwork(track);
+                    for (auto context : response[info].keys())
+                        this->db->wikiArtist(track, response[info][context].toString());
                 }
+
+                break;
             }
 
-            break;
-        }
-
-        case PULPO::INFO::WIKI:
-        {
-            if(!response[info].isEmpty())
-            {
-                for (auto context : response[info].keys())
-                   this->db->wikiArtist(track, response[info][context].toString());
-            }
-
-            break;
-        }
-
-        default: continue;
+            default: continue;
         }
     }
 }
@@ -222,97 +257,97 @@ void Brain::parseTrackInfo(FMH::MODEL &track, const INFO_K &response)
     for(auto info : response.keys())
         switch(info)
         {
-        case PULPO::INFO::TAGS:
-        {
-            if(!response[info].isEmpty())
+            case PULPO::INFO::TAGS:
             {
-                for(auto context : response[info].keys())
+                if(!response[info].isEmpty())
                 {
-                    if (!response[info][context].toStringList().isEmpty())
+                    for(auto context : response[info].keys())
                     {
-                        for(auto tag : response[info][context].toStringList() )
-                            this->db->tagsTrack(track, tag, CONTEXT_MAP[context]);
+                        if (!response[info][context].toStringList().isEmpty())
+                        {
+                            for(auto tag : response[info][context].toStringList() )
+                                this->db->tagsTrack(track, tag, CONTEXT_MAP[context]);
+                        }
+
+                        if (!response[info][context].toString().isEmpty())
+                            this->db->tagsTrack(track, response[info][context].toString(), CONTEXT_MAP[context]);
                     }
-
-                    if (!response[info][context].toString().isEmpty())
-                        this->db->tagsTrack(track, response[info][context].toString(), CONTEXT_MAP[context]);
                 }
+
+                break;
             }
 
-            break;
-        }
-
-        case PULPO::INFO::WIKI:
-        {
-            if(!response[info].isEmpty())
+            case PULPO::INFO::WIKI:
             {
-                if (!response[info][CONTEXT::WIKI].toString().isEmpty())
-                    this->db->wikiTrack(track, response[info][CONTEXT::WIKI].toString());
-
-            }
-
-            break;
-        }
-
-        case PULPO::INFO::ARTWORK:
-        {
-            if(!response[info].isEmpty())
-            {
-                if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
+                if(!response[info].isEmpty())
                 {
-                    BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(),CachePath);
-                    this->db->insertArtwork(track);
+                    if (!response[info][CONTEXT::WIKI].toString().isEmpty())
+                        this->db->wikiTrack(track, response[info][CONTEXT::WIKI].toString());
+
                 }
+
+                break;
             }
 
-            break;
-        }
-
-        case PULPO::INFO::METADATA:
-        {
-            TagInfo tag;
-            for(auto context :response[info].keys())
+            case PULPO::INFO::ARTWORK:
             {
-                switch(context)
+                if(!response[info].isEmpty())
                 {
-                case CONTEXT::ALBUM_TITLE:
-                {
-                    qDebug()<<"SETTING TRACK MISSING METADATA";
-
-                    tag.feed(track[FMH::MODEL_KEY::URL]);
-                    if(!response[info][context].toString().isEmpty())
+                    if(!response[info][CONTEXT::IMAGE].toByteArray().isEmpty())
                     {
-                        tag.setAlbum(response[info][context].toString());
-                        this->db->albumTrack(track, response[info][context].toString());
+                        BAE::saveArt(track, response[info][CONTEXT::IMAGE].toByteArray(),CachePath);
+                        this->db->insertArtwork(track);
                     }
-
-                    break;
                 }
 
-                case CONTEXT::TRACK_NUMBER:
-                {
-                    tag.feed(track[FMH::MODEL_KEY::URL]);
-                    if(!response[info][context].toString().isEmpty())
-                        tag.setTrack(response[info][context].toInt());
-
-                    break;
-                }
-
-                default: continue;
-                }
+                break;
             }
 
-            break;
-        }
+            case PULPO::INFO::METADATA:
+            {
+                TagInfo tag;
+                for(auto context :response[info].keys())
+                {
+                    switch(context)
+                    {
+                        case CONTEXT::ALBUM_TITLE:
+                        {
+                            qDebug()<<"SETTING TRACK MISSING METADATA";
 
-        case PULPO::INFO::LYRICS:
-        {
-            if(!response[info][CONTEXT::LYRIC].toString().isEmpty())
-                this->db->lyricsTrack(track, response[info][CONTEXT::LYRIC].toString());
-            break;
-        }
+                            tag.feed(track[FMH::MODEL_KEY::URL]);
+                            if(!response[info][context].toString().isEmpty())
+                            {
+                                tag.setAlbum(response[info][context].toString());
+                                this->db->albumTrack(track, response[info][context].toString());
+                            }
 
-        default: continue;
+                            break;
+                        }
+
+                        case CONTEXT::TRACK_NUMBER:
+                        {
+                            tag.feed(track[FMH::MODEL_KEY::URL]);
+                            if(!response[info][context].toString().isEmpty())
+                                tag.setTrack(response[info][context].toInt());
+
+                            break;
+                        }
+
+                        default: continue;
+                    }
+                }
+
+                break;
+            }
+
+            case PULPO::INFO::LYRICS:
+            {
+                if(!response[info][CONTEXT::LYRIC].toString().isEmpty())
+                    this->db->lyricsTrack(track, response[info][CONTEXT::LYRIC].toString());
+                break;
+            }
+
+            default: continue;
         }
 }
 
@@ -360,8 +395,8 @@ void Brain::artworks()
     if(!go) return;
 
     this->albumArtworks();
-    this->artistArtworks();
-    this->trackArtworks();
+    //    this->artistArtworks();
+    //    this->trackArtworks();
 }
 
 void Brain::tags()
@@ -401,9 +436,34 @@ void Brain::albumArtworks()
     artworks = this->db->getDBData(queryTxt);
     qDebug() << "Getting missing albums artworks"<< artworks.length();
 
-    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
+    FMH::MODEL_LIST data = {
+        {{FMH::MODEL_KEY::ARTIST, "Kali Uchis"}, {FMH::MODEL_KEY::ALBUM, "Por Vida"}},
+        {{FMH::MODEL_KEY::ARTIST, "Lorde"}, {FMH::MODEL_KEY::ALBUM, "Melodrama"}},
+        {{FMH::MODEL_KEY::ARTIST, "Chris Isaak"}, {FMH::MODEL_KEY::ALBUM, "Heart Shaped World"}},
+        {{FMH::MODEL_KEY::ARTIST, "Choker"}, {FMH::MODEL_KEY::ALBUM, "Peak"}},
+        {{FMH::MODEL_KEY::ARTIST, "John Mayer"}, {FMH::MODEL_KEY::ALBUM, "Continuum"}},
+        {{FMH::MODEL_KEY::ARTIST, "070 Shake"}, {FMH::MODEL_KEY::ALBUM, "Glitter"}},
+        {{FMH::MODEL_KEY::ARTIST, "Snoh Aalegra"}, {FMH::MODEL_KEY::ALBUM, "FEELS"}},
+        {{FMH::MODEL_KEY::ARTIST, "Sonder"}, {FMH::MODEL_KEY::ALBUM, "Into"}},
 
-    emit this->done(TABLE::ALBUMS);
+        {{FMH::MODEL_KEY::ARTIST, "The Weeknd"}, {FMH::MODEL_KEY::ALBUM, "Trilogy"}},
+        {{FMH::MODEL_KEY::ARTIST, "Lana Del Rey"}, {FMH::MODEL_KEY::ALBUM, "Honeymoon"}}
+    };
+
+
+    for(const auto &item : artworks)
+    {
+        REQUEST request;
+        request.data = item;
+        request.ontology =  ontology;
+        request.services = services;
+        request.info = PULPO::INFO::ARTWORK;
+        request.recursive = PULPO::RECURSIVE::OFF;
+        request.cb = nullptr;
+
+        this->queue << request;
+    }
+    //    emit this->done(TABLE::ALBUMS);
 }
 
 void Brain::albumTags()
@@ -419,8 +479,16 @@ void Brain::albumTags()
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ALBUMS],
             TABLEMAP[TABLE::ALBUMS_TAGS]);
-    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
 
+    //    REQUEST request;
+    //    request.data = this->db->getDBData(queryTxt);
+    //    request.ontology =  ontology;
+    //    request.services = services;
+    //    request.info = PULPO::INFO::TAGS;
+    //    request.recursive = PULPO::RECURSIVE::ON;
+    //    request.cb = nullptr;
+
+    //    this->appendRequest(request);
 }
 
 void Brain::albumWikis()
@@ -435,7 +503,9 @@ void Brain::albumWikis()
             KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ALBUMS],
             KEYMAP[KEY::WIKI]);
-    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
+
+
+    //    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
 }
 
 void Brain::artistArtworks()
@@ -453,12 +523,12 @@ void Brain::artistArtworks()
 
 
     /* BEFORE FETCHING ONLINE LOOK UP IN THE CACHE FOR THE IMAGE */
-//    for(auto artist : artworks)
-//        if(BAE::artworkCache(artist, KEY::ARTIST))
-//            this->insertArtwork(artist);
+    //    for(auto artist : artworks)
+    //        if(BAE::artworkCache(artist, KEY::ARTIST))
+    //            this->insertArtwork(artist);
 
     artworks = this->db->getDBData(queryTxt);
-    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
+    //    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF, nullptr);
 
     emit this->done(TABLE::ARTISTS);
 }
@@ -475,7 +545,7 @@ void Brain::artistTags()
     auto queryTxt =  QString("SELECT %1 FROM %2 WHERE %1 NOT IN ( SELECT %1 FROM %3 ) ").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             TABLEMAP[TABLE::ARTISTS_TAGS]);
-    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
+    //    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, PULPO::RECURSIVE::ON, nullptr);
 
 }
 
@@ -490,7 +560,7 @@ void Brain::artistWikis()
     auto queryTxt =  QString("SELECT %1 FROM %2 WHERE %3 = '' ").arg(KEYMAP[KEY::ARTIST],
             TABLEMAP[TABLE::ARTISTS],
             KEYMAP[KEY::WIKI]);
-    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
+    //    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, PULPO::RECURSIVE::OFF, nullptr);
 }
 
 void Brain::trackArtworks()
@@ -511,7 +581,7 @@ void Brain::trackArtworks()
             KEYMAP[KEY::ARTWORK]);
 
     auto artworks = this->db->getDBData(queryTxt);
-    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF);
+    //    this->setInfo(artworks, ontology, services, PULPO::INFO::ARTWORK, PULPO::RECURSIVE::OFF);
 
     emit this->done(TABLE::ALBUMS);
 
@@ -531,7 +601,7 @@ void Brain::trackLyrics()
             TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::LYRICS]);
 
-    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::LYRICS, PULPO::RECURSIVE::OFF);
+    //    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::LYRICS, PULPO::RECURSIVE::OFF);
 
 }
 
@@ -550,7 +620,7 @@ void Brain::trackTags()
             KEYMAP[KEY::ALBUM],
             TABLEMAP[TABLE::TRACKS],
             TABLEMAP[TABLE::TRACKS_TAGS]);
-    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, RECURSIVE::ON, nullptr);
+    //    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::TAGS, RECURSIVE::ON, nullptr);
 }
 
 void Brain::trackWikis()
@@ -567,6 +637,6 @@ void Brain::trackWikis()
             KEYMAP[KEY::ALBUM],
             TABLEMAP[TABLE::TRACKS],
             KEYMAP[KEY::WIKI]);
-    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, RECURSIVE::OFF);
+    //    this->setInfo(this->db->getDBData(queryTxt), ontology, services, PULPO::INFO::WIKI, RECURSIVE::OFF);
 
 }

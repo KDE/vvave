@@ -14,6 +14,60 @@
 using namespace BAE;
 using namespace PULPO;
 
+struct REQUEST
+{
+public:
+
+    FMH::MODEL data;
+    PULPO::ONTOLOGY ontology;
+    QList<PULPO::SERVICES> services;
+    PULPO::INFO info;
+    PULPO::RECURSIVE recursive = PULPO::RECURSIVE::ON;
+    void (*cb)(FMH::MODEL) = nullptr;
+};
+
+struct QUEUE
+{
+private:
+    QList<REQUEST> requests;
+    int index = -1;
+
+public:
+    REQUEST next()
+    {
+        index++;
+        if(index < 0 || index >= requests.size())
+            return REQUEST{};
+
+        const auto res = requests.at(index);
+
+        qDebug() << index << requests.size() << res.data;
+
+        return res;
+    }
+
+    bool hasNext() const
+    {
+        return index + 1 < requests.size();
+    }
+
+    int size() const
+    {
+        return requests.size();
+    }
+
+    void append(const REQUEST &request)
+    {
+        requests << request;
+    }
+
+    void operator<< (const REQUEST &request)
+    {
+        append(request);
+    }
+
+};
+
 class CollectionDB;
 class Brain : public QObject
 {
@@ -28,7 +82,7 @@ public:
     bool isRunning() const;
     void setInterval(const uint &value);
 
-    void setInfo(FMH::MODEL_LIST dataList, PULPO::ONTOLOGY ontology, QList<PULPO::SERVICES> services, PULPO::INFO info, PULPO::RECURSIVE recursive = PULPO::RECURSIVE::ON, void (*cb)(FMH::MODEL) = nullptr);
+    void appendRequest(const REQUEST &request);
 
 public slots:
     void synapse();
@@ -61,9 +115,12 @@ public slots:
 private:
     QThread t;
     CollectionDB *db;
-    Pulpo pulpo;
     uint interval = 1500;
     bool go = false;
+
+    QUEUE queue;
+
+    Pulpo *pulpo;
 
 signals:
     void finished();

@@ -26,20 +26,27 @@
 //#include "qgumbodocument.h"
 //#include "qgumbonode.h"
 
-Pulpo::Pulpo(const FMH::MODEL &song,QObject *parent)
+Pulpo::Pulpo(const FMH::MODEL &song, QObject *parent)
     : QObject(parent), track(song) {}
 
 Pulpo::Pulpo(QObject *parent): QObject(parent) {}
 
-Pulpo::~Pulpo() {}
+Pulpo::~Pulpo()
+{
+    qDebug()<< "DELETING PULPO INSTANCE";
+    for(auto &instance : this->serviceInstances)
+        delete instance;
+}
 
 bool Pulpo::feed(const FMH::MODEL &song, const RECURSIVE &recursive)
 {
+    if(song.isEmpty())
+        return false;
+
     this->track = song;
     this->recursive = recursive;
 
     if(this->registeredServices.isEmpty()) return false;
-    if(this->track.isEmpty()) return false;
 
     this->initServices();
 
@@ -101,106 +108,111 @@ void Pulpo::initServices()
     for(auto service : this->registeredServices)
         switch (service)
         {
-        case SERVICES::LastFm:
-        {
-            lastfm lastfm(this->track);
-            connect(&lastfm, &lastfm::infoReady, this, &Pulpo::passSignal);
-
-            if(lastfm.setUpService(this->ontology, this->info))
+            case SERVICES::LastFm:
             {
-                if(recursive == RECURSIVE::OFF) return;
+                auto lastfm  = new class lastfm(this->track);
+                this->serviceInstances.push_back(lastfm);
+                connect(lastfm, &lastfm::infoReady,[=](FMH::MODEL track, PULPO::RESPONSE response)
+                {
+                    this->passSignal(track, response);
+//                    lastfm->deleteLater();
+                });
 
-            }else qDebug()<<"Error settingUp lastfm service";
+                if(lastfm->setUpService(this->ontology, this->info))
+                {
+                    if(recursive == RECURSIVE::OFF) return;
 
-            break;
-        }
+                }else qDebug()<<"Error settingUp lastfm service";
 
-        case SERVICES::Spotify:
-        {
-            spotify spotify(this->track);
-            connect(&spotify, &spotify::infoReady, this, &Pulpo::passSignal);
+                break;
+            }
 
-            if(spotify.setUpService(this->ontology,this->info))
+            case SERVICES::Spotify:
             {
-                if(recursive== RECURSIVE::OFF) return;
+                spotify spotify(this->track);
+                connect(&spotify, &spotify::infoReady, this, &Pulpo::passSignal);
 
-            }else qDebug()<<"Error settingUp spotify service";
+                if(spotify.setUpService(this->ontology,this->info))
+                {
+                    if(recursive== RECURSIVE::OFF) return;
 
-            break;
-        }
-        case SERVICES::Genius:
-        {
-            genius genius(this->track);
-            connect(&genius, &genius::infoReady, this, &Pulpo::passSignal);
+                }else qDebug()<<"Error settingUp spotify service";
 
-            if(genius.setUpService(this->ontology,this->info))
+                break;
+            }
+            case SERVICES::Genius:
             {
-                if(recursive== RECURSIVE::OFF) return;
+                auto genius = new class genius(this->track);
+                connect(genius, &genius::infoReady, this, &Pulpo::passSignal);
 
-            }else qDebug()<<"Error settingUp genius service";
+                if(genius->setUpService(this->ontology,this->info))
+                {
+                    if(recursive== RECURSIVE::OFF) return;
 
-            break;
-        }
-        case SERVICES::MusicBrainz:
-        {
-            musicBrainz musicbrainz(this->track);
-            connect(&musicbrainz, &musicBrainz::infoReady, this, &Pulpo::passSignal);
+                }else qDebug()<<"Error settingUp genius service";
 
-            if(musicbrainz.setUpService(this->ontology,this->info))
+                break;
+            }
+            case SERVICES::MusicBrainz:
             {
-                if(recursive== RECURSIVE::OFF) return;
+                musicBrainz musicbrainz(this->track);
+                connect(&musicbrainz, &musicBrainz::infoReady, this, &Pulpo::passSignal);
 
-            }else qDebug()<<"Error settingUp musicBrainz service";
+                if(musicbrainz.setUpService(this->ontology,this->info))
+                {
+                    if(recursive== RECURSIVE::OFF) return;
 
-            break;
-        }
-        case SERVICES::iTunes:
-        {
-            break;
-        }
-        case SERVICES::WikiLyrics:
-        {
-            break;
-        }
-        case SERVICES::LyricWikia:
-        {
-            lyricWikia lyricwikia(this->track);
-            connect(&lyricwikia, &lyricWikia::infoReady, this, &Pulpo::passSignal);
+                }else qDebug()<<"Error settingUp musicBrainz service";
 
-            if(lyricwikia.setUpService(this->ontology,this->info))
+                break;
+            }
+            case SERVICES::iTunes:
             {
-                if(recursive== RECURSIVE::OFF) return;
-
-            }else qDebug()<<"Error settingUp lyricwikia service";
-
-            break;
-        }
-        case SERVICES::Wikipedia:
-        {
-            break;
-        }
-
-        case SERVICES::Deezer:
-        {
-            deezer deezer(this->track);
-            connect(&deezer, &deezer::infoReady, this, &Pulpo::passSignal);
-
-            if(deezer.setUpService(this->ontology, this->info))
+                break;
+            }
+            case SERVICES::WikiLyrics:
             {
-                if(recursive== RECURSIVE::OFF) return;
+                break;
+            }
+            case SERVICES::LyricWikia:
+            {
+                auto lyricwikia = new lyricWikia(this->track);
+                connect(lyricwikia, &lyricWikia::infoReady, this, &Pulpo::passSignal);
 
-            }else qDebug()<<"Error settingUp deezer service";
+                if(lyricwikia->setUpService(this->ontology, this->info))
+                {
+                    if(recursive == RECURSIVE::OFF) return;
 
-            break;
-        }
-        case SERVICES::ALL:
-        {
-            break;
-        }
-        case SERVICES::NONE:
-        {
-            break;
-        }
+                }else qDebug()<<"Error settingUp lyricwikia service";
+
+                break;
+            }
+            case SERVICES::Wikipedia:
+            {
+                break;
+            }
+
+            case SERVICES::Deezer:
+            {
+                deezer deezer(this->track);
+                connect(&deezer, &deezer::infoReady, this, &Pulpo::passSignal);
+
+                if(deezer.setUpService(this->ontology, this->info))
+                {
+                    if(recursive== RECURSIVE::OFF) return;
+
+                }else qDebug()<<"Error settingUp deezer service";
+
+                break;
+            }
+            case SERVICES::ALL:
+            {
+                break;
+            }
+            case SERVICES::NONE:
+            {
+                break;
+            }
         }
 }
 
@@ -226,10 +238,10 @@ bool Pulpo::parseArray()
 
     switch(this->ontology)
     {
-    case PULPO::ONTOLOGY::ALBUM: return this->parseAlbum();
-    case PULPO::ONTOLOGY::ARTIST: return this->parseArtist();
-    case PULPO::ONTOLOGY::TRACK: return this->parseTrack();
-    default: return false;
+        case PULPO::ONTOLOGY::ALBUM: return this->parseAlbum();
+        case PULPO::ONTOLOGY::ARTIST: return this->parseArtist();
+        case PULPO::ONTOLOGY::TRACK: return this->parseTrack();
+        default: return false;
     }
 }
 
@@ -278,12 +290,12 @@ void Pulpo::startConnectionAsync(const QString &url, const QMap<QString,QString>
         auto downloader = new FMH::Downloader;
         connect(downloader, &FMH::Downloader::dataReady, [=](QByteArray array)
         {
-            qDebug()<< "DATA READY << " << array;
+//            qDebug()<< "DATA READY << " << array;
             emit this->arrayReady(array);
-//            downloader->deleteLater();
+            downloader->deleteLater();
         });
 
-        qDebug()<< "trying to get AYNC DOWNLOADER for "<< url;
+//        qDebug()<< "trying to get ASYNC DOWNLOADER for "<< url;
         downloader->getArray(url);
     }
 }

@@ -4,6 +4,19 @@ lyricWikia::lyricWikia(const FMH::MODEL &song)
 {
     this->availableInfo.insert(ONTOLOGY::TRACK, {INFO::LYRICS});
     this->track = song;
+
+    connect(this, &lyricWikia::arrayReady, [this](QByteArray data)
+    {
+
+        qDebug()<< "GOT THE ARRAY";
+        this->array = data;
+        this->parseArray();
+    });
+}
+
+lyricWikia::~lyricWikia()
+{
+
 }
 
 bool lyricWikia::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info)
@@ -18,30 +31,29 @@ bool lyricWikia::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO
 
     switch(this->ontology)
     {
-    case PULPO::ONTOLOGY::TRACK:
-    {
-        QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
-        encodedArtist.toEncoded(QUrl::FullyEncoded);
+        case PULPO::ONTOLOGY::TRACK:
+        {
+            QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
+            encodedArtist.toEncoded(QUrl::FullyEncoded);
 
-        QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
-        encodedTrack.toEncoded(QUrl::FullyEncoded);
+            QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
+            encodedTrack.toEncoded(QUrl::FullyEncoded);
 
-        url.append("&artist=" + encodedArtist.toString());
-        url.append("&song=" + encodedTrack.toString());
-        url.append("&fmt=xml");
+            url.append("&artist=" + encodedArtist.toString());
+            url.append("&song=" + encodedTrack.toString());
+            url.append("&fmt=xml");
 
-        break;
-    }
-    default: return false;
+            break;
+        }
 
+        default: return false;
     }
 
     qDebug()<< "[lyricwikia service]: "<< url;
 
-    this->array = this->startConnection(url);
-    if(this->array.isEmpty()) return false;
+    this->startConnectionAsync(url);
 
-    return this->parseArray();
+    return true;
 }
 
 bool lyricWikia::parseTrack()
@@ -58,33 +70,28 @@ bool lyricWikia::parseTrack()
 
     temp = temp_u.toString();
 
-    temp.replace("http://lyrics.wikia.com/","http://lyrics.wikia.com/index.php?title=");
+    temp.replace("http://lyrics.fandom.com/","http://lyrics.fandom.com/index.php?title=");
     temp.append("&action=edit");
     QRegExp url_regexp("<url>(.*)</url>");
     url_regexp.setMinimal(true);
     QUrl url = QUrl::fromEncoded(temp.toLatin1());
     QString referer = url_regexp.cap(1);
 
-    QNetworkRequest request;
-    request.setUrl(url);
-    request.setRawHeader("Referer", referer.toLatin1());
-    qDebug("Receiving lyrics");
+    auto downloader = new FMH::Downloader;
+    connect(downloader, &FMH::Downloader::dataReady, [=] (QByteArray data)
+    {
+        qDebug() << "Receiving lyrics" << data;
 
-    QNetworkAccessManager m_http;
+        if(data.isEmpty())
+            return;
 
-    QNetworkReply *reply  = m_http.get(request);
+        this->extractLyrics(data);
 
-    QEventLoop loop;
-    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    QObject::connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), &loop, SLOT(quit()));
-    loop.exec();
+        downloader->deleteLater();
+    });
+    downloader->getArray(QUrl(url).toEncoded(), {{"Referer", referer.toLatin1()}});
 
-    QByteArray array(reply->readAll());
-    delete reply;
-
-    if(array.isEmpty()) return false;
-
-    return this->extractLyrics(array);
+    return true;
 }
 
 bool lyricWikia::extractLyrics(const QByteArray &array)

@@ -8,12 +8,13 @@ class lyricWikia : public Pulpo
     Q_OBJECT
 
 private:
-    const QString API = "http://lyrics.wikia.com/api.php?action=lyrics";
+    const QString API = "https://lyrics.fandom.com/api.php?action=lyrics";
 
     bool extractLyrics(const QByteArray &array);
 
 public:
     explicit lyricWikia(const FMH::MODEL &song);
+    ~lyricWikia();
     virtual bool setUpService(const ONTOLOGY &ontology, const INFO &info);
 
 protected:
