@@ -82,7 +82,12 @@ void Brain::synapse()
     }
 
     if(this->queue.hasNext())
-        this->pulpo->request(this->queue.next());
+        this->pulpo->request(this->queue.next());else
+    {
+        qDebug()<< "NOTHING ELSE IN QUEUE";
+        emit this->done(TABLE::ALBUMS);
+    }
+
 
 
     this->go = false;
@@ -496,9 +501,8 @@ void Brain::albumArtworks()
             }
         };
 
-//        this->queue << request;
+        this->queue << request;
     }
-    //    emit this->done(TABLE::ALBUMS);
 }
 
 void Brain::albumTags()
