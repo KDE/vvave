@@ -21,14 +21,15 @@ add_executable(vvave
     main.cpp
     babe.cpp
 
-    pulpo/services/geniusService.cpp
-    pulpo/services/deezerService.cpp
+#    pulpo/services/geniusService.cpp
+#    pulpo/services/deezerService.cpp
     pulpo/services/lastfmService.cpp
-    pulpo/services/lyricwikiaService.cpp
-    pulpo/services/spotifyService.cpp
-    pulpo/services/musicbrainzService.cpp
+#    pulpo/services/lyricwikiaService.cpp
+#    pulpo/services/spotifyService.cpp
+#    pulpo/services/musicbrainzService.cpp
     pulpo/pulpo.cpp
     pulpo/htmlparser.cpp
+    pulpo/service.cpp
     services/local/taginfo.cpp
     services/local/player.cpp
     services/local/youtubedl.cpp
