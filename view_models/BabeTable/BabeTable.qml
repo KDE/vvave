@@ -380,7 +380,6 @@ BabeList
 
     function goToAlbum()
     {
-        root.pageStack.currentIndex = 1
         root.currentView = viewsIndex.albums
         var item = listView.model.get(listView.currentIndex)
         albumsView.populateTable(item.album, item.artist)
@@ -389,7 +388,6 @@ BabeList
 
     function goToArtist()
     {
-        root.pageStack.currentIndex = 1
         root.currentView = viewsIndex.artists
         var item = listView.model.get(listView.currentIndex)
         artistsView.populateTable(undefined, item.artist)

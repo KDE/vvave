@@ -162,6 +162,7 @@ Maui.ApplicationWindow
 
     floatingBar: false
 
+    headBar.spacing: space.big
     headBar.middleContent : [
         Maui.ToolButton
         {
@@ -175,7 +176,6 @@ Maui.ApplicationWindow
             colorScheme.highlightColor: babeColor
 
             Layout.fillHeight: true
-            Layout.fillWidth: isMobile
 
         },
 
@@ -191,7 +191,6 @@ Maui.ApplicationWindow
             colorScheme.highlightColor: babeColor
 
             Layout.fillHeight: true
-            Layout.fillWidth: isMobile
 
         },
 
@@ -207,7 +206,6 @@ Maui.ApplicationWindow
             colorScheme.highlightColor: babeColor
 
             Layout.fillHeight: true
-            Layout.fillWidth: isMobile
 
         },
 
@@ -223,8 +221,6 @@ Maui.ApplicationWindow
             colorScheme.highlightColor: babeColor
 
             Layout.fillHeight: true
-            Layout.fillWidth: isMobile
-
         }
     ]
 
