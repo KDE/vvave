@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 
@@ -16,9 +16,9 @@ Kirigami.PageRow
     id: playlistViewRoot
 
     property string playlistQuery
-    property alias playlistModel : playlistViewModel.model
-    property alias playlistList : playlistViewModel.list
-    property alias playlistViewList : playlistViewModel
+    //    property alias playlistModel : playlistViewModel.model
+    //    property alias playlistList : playlistViewModel.list
+    //    property alias playlistViewList : playlistViewModel
 
     //    property alias list : _playlistsList
     //    property alias listModel: _playlistsModel
@@ -34,18 +34,11 @@ Kirigami.PageRow
     separatorVisible: wideMode
     initialPage: [playlistLayout, filterList]
     defaultColumnWidth: Kirigami.Units.gridUnit * 15
-    interactive: currentIndex === 1 && !wideMode
-Rectangle
-{
- color: "pink"
- anchors.fill: parent
-}
 
     ColumnLayout
     {
         id: playlistLayout
         clip: true
-        anchors.fill: parent
         spacing: 0
         Layout.margins: 0
 
@@ -108,7 +101,6 @@ Rectangle
     {
         id: filterList
         clip: true
-        anchors.fill: parent
         quickPlayVisible: true
         coverArtVisible: true
         trackRating: true
@@ -126,30 +118,30 @@ Rectangle
         holder.body: "Your playlist is empty,<br>start adding new music to it"
         holder.emojiSize: iconSizes.huge
 
-//        headerMenu.menuItem:  [
-//            Maui.MenuItem
-//            {
-//                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-//                text: "Sync tags"
-//                onTriggered: {}
-//            },
-//            Maui.MenuItem
-//            {
-//                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-//                text: "Play-n-Sync"
-//                onTriggered:
-//                {
-//                    filterList.headerMenu.close()
-//                    syncAndPlay(playlistViewModel.currentIndex)
-//                }
-//            },
-//            Maui.MenuItem
-//            {
-//                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-//                text: "Remove playlist"
-//                onTriggered: removePlaylist()
-//            }
-//        ]
+        //        headerMenu.menuItem:  [
+        //            Maui.MenuItem
+        //            {
+        //                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
+        //                text: "Sync tags"
+        //                onTriggered: {}
+        //            },
+        //            Maui.MenuItem
+        //            {
+        //                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
+        //                text: "Play-n-Sync"
+        //                onTriggered:
+        //                {
+        //                    filterList.headerMenu.close()
+        //                    syncAndPlay(playlistViewModel.currentIndex)
+        //                }
+        //            },
+        //            Maui.MenuItem
+        //            {
+        //                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
+        //                text: "Remove playlist"
+        //                onTriggered: removePlaylist()
+        //            }
+        //        ]
 
 
         //            contextMenu.menuItem: [
@@ -202,46 +194,46 @@ Rectangle
     }
 
 
-    function populateExtra(query, title)
-    {
-//        playlistSwipe.currentIndex = 1
+        function populateExtra(query, title)
+        {
+    //        playlistSwipe.currentIndex = 1
 
-//        var res = bae.get(query)
-//        playlistViewModelFilter.clearTable()
-//        playlistViewModelFilter.headBarTitle = title
-//        appendToExtraList(res)
-    }
+    //        var res = bae.get(query)
+    //        playlistViewModelFilter.clearTable()
+    //        playlistViewModelFilter.headBarTitle = title
+    //        appendToExtraList(res)
+        }
 
-    function appendToExtraList(res)
-    {
-        if(res.length>0)
-            for(var i in res)
-                playlistViewModelFilter.model.append(res[i])
-    }
+        function appendToExtraList(res)
+        {
+            if(res.length>0)
+                for(var i in res)
+                    playlistViewModelFilter.model.append(res[i])
+        }
 
-    function populate(query)
-    {
-        if(!playlistViewRoot.wideMode)
-            playlistViewRoot.currentIndex = 1
+        function populate(query)
+        {
+            if(!playlistViewRoot.wideMode)
+                playlistViewRoot.currentIndex = 1
 
-        playlistViewRoot.playlistQuery = query
-        filterList.list.query = playlistViewRoot.playlistQuery
-    }
+            playlistViewRoot.playlistQuery = query
+            filterList.list.query = playlistViewRoot.playlistQuery
+        }
 
-    function refresh()
-    {       
-    } 
+        function refresh()
+        {
+        }
 
-    function syncAndPlay(index)
-    {
-        if(!playlistList.get(index).playlistIcon)
-            playlistViewRoot.playSync(playlistList.get(index).playlist)
-    }
+        function syncAndPlay(index)
+        {
+            if(!playlistList.get(index).playlistIcon)
+                playlistViewRoot.playSync(playlistList.get(index).playlist)
+        }
 
-    function removePlaylist()
-    {
-        bae.removePlaylist(playlistList.get(playlistViewList.currentIndex).playlist)
+        function removePlaylist()
+        {
+            bae.removePlaylist(playlistList.get(playlistViewList.currentIndex).playlist)
 
-        filterList.clearTable()
-    }
+            filterList.clearTable()
+        }
 }
