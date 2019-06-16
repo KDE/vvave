@@ -174,7 +174,7 @@ Kirigami.PageRow
             onRowClicked: playlistViewRoot.rowClicked(filterList.model.get(index))
             onQuickPlayTrack:
             {
-                playlistViewRoot.quickPlayTrack(filterList.model.get(index))
+                playlistViewRoot.quickPlayTrack(filterList.model.get(filterList.currentIndex))
             }
             onPlayAll: playAll()
             onAppendAll: appendAll()

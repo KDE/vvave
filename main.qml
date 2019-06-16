@@ -166,15 +166,13 @@ Maui.ApplicationWindow
     headBar.middleContent : [
         Maui.ToolButton
         {
-            iconName: "view-media-track"
-            height: headBar.height
-            showIndicator: currentView === viewsIndex.tracks
-            iconColor: currentView === viewsIndex.tracks ? babeColor : altColorText
+            iconName: "view-media-track"            
+            active: currentView === viewsIndex.tracks
+            iconColor: active ? babeColor : altColorText
             onClicked: currentView = viewsIndex.tracks
             text: qsTr("Tracks")
             tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
-
             Layout.fillHeight: true
 
         },
@@ -182,8 +180,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             text: qsTr("Albums")
-            height: headBar.height
-            showIndicator: currentView === viewsIndex.albums
+            active: currentView === viewsIndex.albums
             iconName: /*"album"*/ "view-media-album-cover"
             iconColor: currentView === viewsIndex.albums ? babeColor : altColorText
             onClicked: currentView = viewsIndex.albums
@@ -197,8 +194,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             text: qsTr("Artists")
-            height: headBar.height
-            showIndicator: currentView === viewsIndex.artists
+            active: currentView === viewsIndex.artists
             iconName: "view-media-artist"
             iconColor:  currentView === viewsIndex.artists ? babeColor : altColorText
             onClicked: currentView = viewsIndex.artists
@@ -212,8 +208,7 @@ Maui.ApplicationWindow
         Maui.ToolButton
         {
             text: qsTr("Playlists")
-            height: headBar.height
-            showIndicator: currentView === viewsIndex.playlists
+            active: currentView === viewsIndex.playlists
             iconName: "view-media-playlist"
             iconColor: currentView === viewsIndex.playlists ? babeColor : altColorText
             onClicked: currentView = viewsIndex.playlists
@@ -359,7 +354,6 @@ Maui.ApplicationWindow
     leftIcon.iconColor: currentView === viewsIndex.search ? babeColor : altColorText
     onSearchButtonClicked:
     {
-        pageStack.currentIndex = 1
         currentView = viewsIndex.search
         searchView.searchInput.forceActiveFocus()
     }
@@ -403,11 +397,7 @@ Maui.ApplicationWindow
         {
             text: qsTr("Folders")
             icon.name: "folder"
-            onTriggered:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.folders
-            }
+            onTriggered: currentView = viewsIndex.folders
         },
 
         //        Maui.MenuItem
@@ -426,11 +416,8 @@ Maui.ApplicationWindow
         {
             text: qsTr("YouTube")
             icon.name: "internet-services"
-            onTriggered:
-            {
-                pageStack.currentIndex = 1
-                currentView = viewsIndex.youtube
-            }
+            onTriggered: currentView = viewsIndex.youtube
+
         },
 
         //        Maui.MenuItem

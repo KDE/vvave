@@ -20,6 +20,7 @@ add_executable(vvave
     qml.qrc
     main.cpp
     babe.cpp
+    vvave.cpp
 
 #    pulpo/services/geniusService.cpp
 #    pulpo/services/deezerService.cpp

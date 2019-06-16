@@ -6,14 +6,15 @@ import "../../view_models/BabeTable"
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
-Page
+Maui.Page
 {
     id: youtubeViewRoot
     property var searchRes : []
     clip: true
-
+    margins: 0
     property alias viewer : youtubeViewer
     property int openVideo : 0
+    headBar.visible: false
 
     Connections
     {
@@ -33,56 +34,6 @@ Page
         }
     }
 
-    function watchVideo(track)
-    {
-        if(track && track.url)
-        {
-            var url = track.url
-            if(url && url.length > 0)
-            {
-                youtubeViewer.currentYt = track
-                youtubeViewer.webView.url = url+"?autoplay=1"
-                stackView.push(youtubeViewer)
-
-            }
-        }
-    }
-
-    function playTrack(url)
-    {
-        if(url && url.length > 0)
-        {
-            var newURL = url.replace("embed/", "watch?v=")
-            console.log(newURL)
-            youtubePlayer.item.url = newURL+"?autoplay=1+&vq=tiny"
-            youtubePlayer.item.runJavaScript("document.title", function(result) { console.log(result); });
-        }
-    }
-
-    function runSearch(searchTxt)
-    {
-        if(searchTxt)
-            if(searchTxt !== youtubeTable.headBarTitle)
-            {
-                youtubeTable.headBarTitle = searchTxt
-                youtube.getQuery(searchTxt, Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25))
-            }
-    }
-
-    function clearSearch()
-    {
-        searchInput.clear()
-        youtubeTable.clearTable()
-        youtubeTable.headBarTitle = ""
-        searchRes = []
-    }
-
-    function populate(tracks)
-    {
-        youtubeTable.model.clear()
-        for(var i in tracks)
-            youtubeTable.model.append(tracks[i])
-    }
 
     /*this is for playing the track sin the background without showing the actual video*/
     Loader
@@ -264,20 +215,72 @@ Page
                 playTrack(youtubeTable.model.get(index).url)
             }
 
-            footBar.middleContent: Maui.TextField
-            {
-                id: searchInput
-                width: youtubeTable.footBar.middleLayout.width * 0.9
-
-                placeholderText: qsTr("Search videos...")
-                wrapMode: TextEdit.Wrap
-                onAccepted: runSearch(searchInput.text)
-            }
         }
 
         YoutubeViewer
         {
             id: youtubeViewer
         }
+    }
+
+    footBar.middleContent: Maui.TextField
+    {
+        id: searchInput
+        Layout.fillWidth: true
+
+        placeholderText: qsTr("Search videos...")
+        wrapMode: TextEdit.Wrap
+        onAccepted: runSearch(searchInput.text)
+    }
+
+    function watchVideo(track)
+    {
+        if(track && track.url)
+        {
+            var url = track.url
+            if(url && url.length > 0)
+            {
+                youtubeViewer.currentYt = track
+                youtubeViewer.webView.url = url+"?autoplay=1"
+                stackView.push(youtubeViewer)
+
+            }
+        }
+    }
+
+    function playTrack(url)
+    {
+        if(url && url.length > 0)
+        {
+            var newURL = url.replace("embed/", "watch?v=")
+            console.log(newURL)
+            youtubePlayer.item.url = newURL+"?autoplay=1+&vq=tiny"
+            youtubePlayer.item.runJavaScript("document.title", function(result) { console.log(result); });
+        }
+    }
+
+    function runSearch(searchTxt)
+    {
+        if(searchTxt)
+            if(searchTxt !== youtubeTable.headBarTitle)
+            {
+                youtubeTable.headBarTitle = searchTxt
+                youtube.getQuery(searchTxt, Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25))
+            }
+    }
+
+    function clearSearch()
+    {
+        searchInput.clear()
+        youtubeTable.clearTable()
+        youtubeTable.headBarTitle = ""
+        searchRes = []
+    }
+
+    function populate(tracks)
+    {
+        youtubeTable.model.clear()
+        for(var i in tracks)
+            youtubeTable.model.append(tracks[i])
     }
 }
