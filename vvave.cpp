@@ -79,7 +79,7 @@ void vvave::runBrain()
             emit this->refreshArtists();
         };
 
-        BRAIN::synapse(BRAIN::PACKAGES() << artistPackage);
+        BRAIN::synapse(BRAIN::PACKAGES() << albumPackage << artistPackage);
     };
 
     QFuture<void> t1 = QtConcurrent::run(func);
