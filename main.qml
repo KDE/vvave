@@ -917,6 +917,8 @@ Maui.ApplicationWindow
             Layout.bottomMargin: space.big
             onIconClicked: _contextMenu.popup()
             onExitClicked: clear()
+            colorScheme.backgroundColor: "#212121"
+
             model: BaseModel
             {
                 list: _selectionBarModelList

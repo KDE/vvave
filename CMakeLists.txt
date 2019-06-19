@@ -42,8 +42,8 @@ add_executable(vvave
     db/conthread.cpp
     db/collectionDB.cpp
 #    settings/BabeSettings.cpp
-    settings/fileloader.cpp
-    utils/brain.cpp
+#    settings/fileloader.cpp
+#    utils/brain.cpp
     utils/babeconsole.cpp
     models/tracks/tracksmodel.cpp
     models/basemodel.cpp

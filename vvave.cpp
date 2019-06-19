@@ -142,5 +142,15 @@ QString vvave::moodColor(const int &index)
     else return "";
 }
 
+void vvave::scanDir(const QString &path)
+{
+    this->checkCollection(QStringList() << path);
+}
+
+QStringList vvave::getSourceFolders()
+{
+    return this->db->getSourcesFolders();
+}
+
 
 

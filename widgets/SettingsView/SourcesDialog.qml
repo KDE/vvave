@@ -14,7 +14,7 @@ Maui.Dialog
     defaultButtons: false
     function scanDir(folderUrl)
     {
-        bae.scanDir(folderUrl)
+        vvave.scanDir(folderUrl)
     }
 
     Maui.Dialog
@@ -113,7 +113,7 @@ Maui.Dialog
     function getSources()
     {
         sources.model.clear()
-        var folders = bae.getSourceFolders()
+        var folders = vvave.getSourceFolders()
         for(var i in folders)
             sources.model.append({url : folders[i]})
     }

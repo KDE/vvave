@@ -16,13 +16,9 @@ Kirigami.PageRow
     id: playlistViewRoot
 
     property string playlistQuery
-    //    property alias playlistModel : playlistViewModel.model
-    //    property alias playlistList : playlistViewModel.list
-    //    property alias playlistViewList : playlistViewModel
-
-    //    property alias list : _playlistsList
-    //    property alias listModel: _playlistsModel
-    //    property alias listView : playlistViewModel.listView
+    property alias playlistModel : playlistViewModel.model
+    property alias playlistList : playlistViewModel.list
+    property alias playlistViewList : playlistViewModel
 
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
@@ -187,53 +183,52 @@ Kirigami.PageRow
 
             onRemoveClicked:
             {
-                bae.removePlaylistTrack(url, playlistViewModel.model.get(playlistViewList.currentIndex).playlist)
+                playlistList.removeTrack(playlistViewList.currentIndex, filterList.list.get(filterList.currentIndex).url)
                 populate(playlistQuery)
             }
         }
     }
 
 
-        function populateExtra(query, title)
-        {
-    //        playlistSwipe.currentIndex = 1
+    function populateExtra(query, title)
+    {
+        //        playlistSwipe.currentIndex = 1
 
-    //        var res = bae.get(query)
-    //        playlistViewModelFilter.clearTable()
-    //        playlistViewModelFilter.headBarTitle = title
-    //        appendToExtraList(res)
-        }
+        //        var res = bae.get(query)
+        //        playlistViewModelFilter.clearTable()
+        //        playlistViewModelFilter.headBarTitle = title
+        //        appendToExtraList(res)
+    }
 
-        function appendToExtraList(res)
-        {
-            if(res.length>0)
-                for(var i in res)
-                    playlistViewModelFilter.model.append(res[i])
-        }
+    function appendToExtraList(res)
+    {
+        if(res.length>0)
+            for(var i in res)
+                playlistViewModelFilter.model.append(res[i])
+    }
 
-        function populate(query)
-        {
-            if(!playlistViewRoot.wideMode)
-                playlistViewRoot.currentIndex = 1
+    function populate(query)
+    {
+        if(!playlistViewRoot.wideMode)
+            playlistViewRoot.currentIndex = 1
 
-            playlistViewRoot.playlistQuery = query
-            filterList.list.query = playlistViewRoot.playlistQuery
-        }
+        playlistViewRoot.playlistQuery = query
+        filterList.list.query = playlistViewRoot.playlistQuery
+    }
 
-        function refresh()
-        {
-        }
+    function refresh()
+    {
+    }
 
-        function syncAndPlay(index)
-        {
-            if(!playlistList.get(index).playlistIcon)
-                playlistViewRoot.playSync(playlistList.get(index).playlist)
-        }
+    function syncAndPlay(index)
+    {
+        if(!playlistList.get(index).playlistIcon)
+            playlistViewRoot.playSync(playlistList.get(index).playlist)
+    }
 
-        function removePlaylist()
-        {
-            bae.removePlaylist(playlistList.get(playlistViewList.currentIndex).playlist)
-
-            filterList.clearTable()
-        }
+    function removePlaylist()
+    {
+        playlistList.removePlaylist(playlistViewList.currentIndex)
+        filterList.clearTable()
+    }
 }

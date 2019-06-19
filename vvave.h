@@ -33,6 +33,12 @@ public slots:
     /// useful functions for non modeled views and actions with not direct access to a tracksmodel or its own model
     QVariantList sourceFolders() const;
     static QString moodColor(const int &index);
+    void scanDir(const QString &path);
+
+    QStringList getSourceFolders();
+
+
+
 };
 
 #endif // VVAVE_H

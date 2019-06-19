@@ -218,11 +218,11 @@ BabeList
             playlistDialog.open()
         }
 
-        onOpenWithClicked: bae.showFolder([list.get(listView.currentIndex).url])
+        onOpenWithClicked: Maui.FM.openLocation([list.get(listView.currentIndex).url])
 
         onRemoveClicked:
         {
-            list.remove(listView.currentIndex)
+//            list.remove(listView.currentIndex)
         }
 
         onRateClicked:

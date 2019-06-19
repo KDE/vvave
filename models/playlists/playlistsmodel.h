@@ -46,6 +46,8 @@ public slots:
     void insert(const QString &playlist);
     void insertAt(const QString &playlist, const int &at);
     void addTrack(const int &index, const QStringList &urls);
+    void removeTrack(const int &index, const QString &url);
+    void removePlaylist(const int &index);
 };
 
 #endif // PLAYLISTSMODEL_H

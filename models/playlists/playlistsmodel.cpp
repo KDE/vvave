@@ -241,3 +241,24 @@ void PlaylistsModel::addTrack(const int &index, const QStringList &urls)
     for(auto url : urls)
         this->db->trackPlaylist(url, this->list[index][FMH::MODEL_KEY::PLAYLIST]);
 }
+
+void PlaylistsModel::removeTrack(const int &index, const QString &url)
+{
+    if(index >= this->list.size() || index < 0)
+        return;
+
+    this->db->removePlaylistTrack(url, this->list.at(index)[FMH::MODEL_KEY::PLAYLIST]);
+}
+
+void PlaylistsModel::removePlaylist(const int &index)
+{
+    if(index >= this->list.size() || index < 0)
+        return;
+
+    if(this->db->removePlaylist(this->list.at(index)[FMH::MODEL_KEY::PLAYLIST]))
+    {
+        emit this->preItemRemoved(index);
+        this->list.removeAt(index);
+        emit this->postItemRemoved();
+    }
+}

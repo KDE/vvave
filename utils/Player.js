@@ -18,7 +18,7 @@ function playTrack(index)
                 currentArtwork =  currentTrack.artwork
             else bae.loadCover(currentTrack.url)
 
-           progressBar.enabled = true
+            progressBar.enabled = true
 
             if(!isMobile)
             {
@@ -29,7 +29,7 @@ function playTrack(index)
             }
 
             //            if(currentTrack.lyrics.length < 1)
-                            bae.trackLyrics(currentTrack.url)
+            //                            bae.trackLyrics(currentTrack.url)
 
             //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
             //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
@@ -199,9 +199,10 @@ function savePlaylist()
         list.push(url)
     }
 
-    bae.savePlaylist(list)
-    bae.savePlaylistPos(mainPlaylist.listView.currentIndex)
+    Maui.FM.saveSettings("LASTPLAYLIST", list, "PLAYLIST");
+    Maui.FM.saveSettings("PLAYLIST_POS", mainPlaylist.listView.currentIndex, "MAINWINDOW")
 }
+
 
 function clearOutPlaylist()
 {
