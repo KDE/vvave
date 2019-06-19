@@ -7,7 +7,7 @@
 #include <QStyleHints>
 #include <QQuickStyle>
 #include <QCommandLineParser>
-#include "babe.h"
+#include "vvave.h"
 #include "services/local/player.h"
 
 #ifdef STATIC_KIRIGAMI
@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     if(!args.isEmpty())
         urls = args;
 
-    Babe bae;
+    vvave vvave;
 
     /* Services */
     YouTube youtube;
@@ -84,13 +84,13 @@ int main(int argc, char *argv[])
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, [&]()
     {
         qDebug()<<"FINISHED LOADING QML APP";
-        bae.refreshCollection();
-        if(!urls.isEmpty())
-            bae.openUrls(urls);
+        vvave.postActions();
+//        if(!urls.isEmpty())
+//            bae.openUrls(urls);
     });
 
     auto context = engine.rootContext();
-    context->setContextProperty("bae", &bae);
+    context->setContextProperty("vvave", &vvave);
     context->setContextProperty("youtube", &youtube);
 //    context->setContextProperty("spotify", &spotify);
 //    context->setContextProperty("link", &bae.link);

@@ -7,19 +7,18 @@ import QtQuick.Controls.Material 2.1
 import "utils"
 
 import "widgets"
-import "widgets/MyBeatView"
 import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
 import "widgets/SearchView"
-import "widgets/CloudView"
+//import "widgets/CloudView"
 
 import "view_models"
 import "view_models/BabeTable"
 
 import "services/local"
 import "services/web"
-import "services/web/Spotify"
+//import "services/web/Spotify"
 
 import "view_models/BabeGrid"
 
@@ -59,7 +58,7 @@ Maui.ApplicationWindow
     /*************************************************/
     property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
     property var currentTrack: ({
-                                    babe: "0",
+                                    fav: "0",
                                     stars: "0"
                                 })
 
@@ -113,7 +112,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** UI COLORS *******************/
     /*************************************************/
-    readonly property color babeColor: bae.babeColor() //"#140032"
+    readonly property color babeColor: "#f84172"
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -127,7 +126,7 @@ Maui.ApplicationWindow
         var messageBody = "Do you want to remove it from your collection?"
         notify("alert", message, messageBody, function ()
         {
-            bae.removeTrack(currentTrack.url) //todo
+            //            bae.removeTrack(currentTrack.url) //todo
             mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
         })
     }
@@ -157,7 +156,7 @@ Maui.ApplicationWindow
     altToolBars: false
     accentColor: babeColor
     headBarFGColor: altColorText
-    headBarBGColor: /*currentView === viewsIndex.vvave ? "#7e57c2" :*/ "#212121"
+    headBarBGColor: "#212121"
     altColorText: darkTextColor
 
     floatingBar: false
@@ -166,14 +165,13 @@ Maui.ApplicationWindow
     headBar.middleContent : [
         Maui.ToolButton
         {
-            iconName: "view-media-track"            
+            iconName: "view-media-track"
             active: currentView === viewsIndex.tracks
+            showIndicator: true
             iconColor: active ? babeColor : altColorText
             onClicked: currentView = viewsIndex.tracks
             text: qsTr("Tracks")
-            tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
-            Layout.fillHeight: true
 
         },
 
@@ -184,11 +182,8 @@ Maui.ApplicationWindow
             iconName: /*"album"*/ "view-media-album-cover"
             iconColor: currentView === viewsIndex.albums ? babeColor : altColorText
             onClicked: currentView = viewsIndex.albums
-            tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
-
-            Layout.fillHeight: true
-
+            showIndicator: true
         },
 
         Maui.ToolButton
@@ -198,11 +193,8 @@ Maui.ApplicationWindow
             iconName: "view-media-artist"
             iconColor:  currentView === viewsIndex.artists ? babeColor : altColorText
             onClicked: currentView = viewsIndex.artists
-            tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
-
-            Layout.fillHeight: true
-
+            showIndicator: true
         },
 
         Maui.ToolButton
@@ -212,10 +204,9 @@ Maui.ApplicationWindow
             iconName: "view-media-playlist"
             iconColor: currentView === viewsIndex.playlists ? babeColor : altColorText
             onClicked: currentView = viewsIndex.playlists
-            tooltipText: pageStack.wideMode ? "" : text
             colorScheme.highlightColor: babeColor
+            showIndicator: true
 
-            Layout.fillHeight: true
         }
     ]
 
@@ -285,15 +276,15 @@ Maui.ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-//            leftContent:  Maui.ToolButton
-//            {
-//                iconName: "headphones"
-//                visible: _drawer.modal
-//                iconColor: _drawer.visible ? babeColor : textColor
-//                onClicked: _drawer.visible = !_drawer.visible
-//                colorScheme.highlightColor: babeColor
-//                //                text: qsTr("Now")
-//            }
+            //            leftContent:  Maui.ToolButton
+            //            {
+            //                iconName: "headphones"
+            //                visible: _drawer.modal
+            //                iconColor: _drawer.visible ? babeColor : textColor
+            //                onClicked: _drawer.visible = !_drawer.visible
+            //                colorScheme.highlightColor: babeColor
+            //                //                text: qsTr("Now")
+            //            }
 
             middleContent: [
 
@@ -994,12 +985,12 @@ Maui.ApplicationWindow
 
     Connections
     {
-        target: bae
+        target: vvave
 
         onRefreshTables: H.refreshCollection(size)
-        //        onRefreshTracks: H.refreshTracks()
-                onRefreshAlbums: H.refreshAlbums()
-        //        onRefreshArtists: H.refreshArtists()
+        onRefreshTracks: H.refreshTracks()
+        onRefreshAlbums: H.refreshAlbums()
+        onRefreshArtists: H.refreshArtists()
 
         onCoverReady:
         {

@@ -14,7 +14,7 @@ StackView
     initialItem: Maui.Page
     {
 
-//        headBarTitle: qsTr("Source folders")
+        //        headBarTitle: qsTr("Source folders")
         headBar.visible: false
         headBarExit: false
         margins: space.large
@@ -57,7 +57,7 @@ StackView
     function populate()
     {
         browser.model.clear()
-        var folders = bae.getFolders();
+        var folders = vvave.sourceFolders();
         if(folders.length > 0)
             for(var i in folders)
                 browser.model.append(folders[i])

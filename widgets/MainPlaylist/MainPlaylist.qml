@@ -132,7 +132,7 @@ Maui.Page
 
             Component.onCompleted:
             {
-                var lastplaylist = bae.lastPlaylist()
+                var lastplaylist = Maui.FM.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
                 var n = lastplaylist.length
 
                 if(n>0)

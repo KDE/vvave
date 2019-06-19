@@ -25,7 +25,22 @@
 using namespace BAE;
 
 CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
-{}
+{
+    this->name = QUuid::createUuid().toString();
+
+    if(!BAE::fileExists(BAE::CollectionDBPath + BAE::DBName))
+    {
+        QDir collectionDBPath_dir(BAE::CollectionDBPath);
+        if (!collectionDBPath_dir.exists())
+            collectionDBPath_dir.mkpath(".");
+
+        this->openDB(this->name);
+        qDebug()<<"Collection doesn't exists, trying to create it" << BAE::CollectionDBPath + BAE::DBName;
+        this->prepareCollectionDB();
+
+    }else this->openDB(this->name);
+
+}
 
 CollectionDB::~CollectionDB()
 {
@@ -42,7 +57,6 @@ CollectionDB *CollectionDB::getInstance()
     {
         instance = new CollectionDB();
         qDebug() << "getInstance(): First DBActions instance\n";
-        instance->init();
         return instance;
     } else
     {
@@ -51,28 +65,13 @@ CollectionDB *CollectionDB::getInstance()
     }
 }
 
-void CollectionDB::init()
-{
-    this->name = QUuid::createUuid().toString();
 
-    if(!BAE::fileExists(BAE::CollectionDBPath + BAE::DBName))
-    {
-        QDir collectionDBPath_dir(BAE::CollectionDBPath);
-        if (!collectionDBPath_dir.exists())
-            collectionDBPath_dir.mkpath(".");
-
-        this->openDB(this->name);
-        qDebug()<<"Collection doesn't exists, trying to create it" << BAE::CollectionDBPath + BAE::DBName;
-        this->prepareCollectionDB();
-
-    }else this->openDB(this->name);
-}
-
-void CollectionDB::prepareCollectionDB() const
+void CollectionDB::prepareCollectionDB()
 {
     QSqlQuery query(this->m_db);
 
     QFile file(":/db/script.sql");
+    qDebug()<< file.exists();
 
     if (!file.exists())
     {
@@ -257,6 +256,7 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
     auto artwork = track[FMH::MODEL_KEY::ARTWORK].isEmpty() ? "" : track[FMH::MODEL_KEY::ARTWORK];
 
     auto artistTrack = track;
+    artistTrack[FMH::MODEL_KEY::ARTWORK] = "";
     BAE::artworkCache(artistTrack, FMH::MODEL_KEY::ARTIST);
     auto artistArtwork = artistTrack[FMH::MODEL_KEY::ARTWORK];
 

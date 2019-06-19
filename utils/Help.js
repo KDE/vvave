@@ -45,13 +45,12 @@ function setStars(stars)
 
 function refreshCollection(size)
 {
-    if(!isMobile && size>0) bae.notify("Collection updated", size+" new tracks added...")
+    if(size>0) root.notify("emblem-info", "Collection updated", size+" new tracks added...")
 
     refreshTracks()
     refreshAlbums()
     refreshArtists()
     refreshFolders()
-
 }
 function refreshFolders()
 {

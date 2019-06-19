@@ -71,6 +71,8 @@ void Pulpo::start()
             lastfm->set(this->req);
             break;
         }
+
+            default: continue;
         }
 }
 

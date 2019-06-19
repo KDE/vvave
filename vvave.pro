@@ -7,6 +7,7 @@ QT       += xml
 QT       += qml
 QT       += widgets
 QT       += quickcontrols2
+QT       += concurrent
 
 TARGET = vvave
 TEMPLATE = app
@@ -52,17 +53,15 @@ SOURCES += main.cpp \
     db/collectionDB.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
-    utils/brain.cpp \
+#    utils/brain.cpp \
     services/local/socket.cpp \
     services/web/youtube.cpp \
-    babe.cpp \
-    settings/BabeSettings.cpp \
+    vvave.cpp \
     db/conthread.cpp \
     services/web/babeit.cpp \
     utils/babeconsole.cpp \
     services/local/youtubedl.cpp \
     services/local/linking.cpp \
-    settings/fileloader.cpp \
     services/web/Spotify/spotify.cpp \
     models/tracks/tracksmodel.cpp \
     models/basemodel.cpp \
@@ -81,11 +80,6 @@ QML_IMPORT_PATH =
 QML_DESIGNER_IMPORT_PATH =
 
 
-
-DISTFILES += \
-    db/script.sql \
-    CMakeLists.txt \
-
 HEADERS += \
     db/collectionDB.h \
     utils/bae.h \
@@ -95,8 +89,7 @@ HEADERS += \
     utils/brain.h \
     services/local/socket.h \
     services/web/youtube.h \
-    babe.h \
-    settings/BabeSettings.h \
+    vvave.h \
     db/conthread.h \
     services/web/babeit.h \
     utils/babeconsole.h \

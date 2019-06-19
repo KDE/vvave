@@ -22,7 +22,7 @@ public:
     void set(const PULPO::REQUEST &request) override final;
 
 protected:
-//    virtual void parseArtist(const QByteArray &array);
+    virtual void parseArtist(const QByteArray &array) override final;
     virtual void parseAlbum(const QByteArray &array) override final;
 //    virtual void parseTrack(const QByteArray &array);
 

@@ -19,7 +19,7 @@ set(CMAKE_AUTORCC ON)
 add_executable(vvave
     qml.qrc
     main.cpp
-    babe.cpp
+#    babe.cpp
     vvave.cpp
 
 #    pulpo/services/geniusService.cpp
@@ -41,7 +41,7 @@ add_executable(vvave
     services/web/Spotify/spotify.cpp
     db/conthread.cpp
     db/collectionDB.cpp
-    settings/BabeSettings.cpp
+#    settings/BabeSettings.cpp
     settings/fileloader.cpp
     utils/brain.cpp
     utils/babeconsole.cpp

@@ -36,7 +36,7 @@ class CollectionDB : public QObject
         bool execQuery(const QString &queryTxt);
 
         /*basic public actions*/
-        void prepareCollectionDB() const;
+        void prepareCollectionDB();
         bool check_existance(const QString &tableName, const QString &searchId, const QString &search);
 
         /* usefull actions */
@@ -116,7 +116,6 @@ private:
         QSqlDatabase m_db;
         explicit CollectionDB( QObject *parent = nullptr);
         ~CollectionDB() override;
-        void init();
 
     public slots:
 

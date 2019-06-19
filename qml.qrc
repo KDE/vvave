@@ -74,4 +74,7 @@
         <file>widgets/CloudView/CloudView.qml</file>
         <file>widgets/SelectionBarMenu.qml</file>
     </qresource>
+    <qresource prefix="/DB">
+        <file>db/script.sql</file>
+    </qresource>
 </RCC>

@@ -153,7 +153,7 @@ struct REQUEST
     QList<PULPO::INFO> info;
     QList<PULPO::SERVICES> services;
 
-    std::function<void(REQUEST request, RESPONSES responses)> callback;
+    std::function<void(REQUEST request, RESPONSES responses)> callback = nullptr;
 };
 
 

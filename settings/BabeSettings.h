@@ -36,7 +36,7 @@ class BabeSettings : public QObject
         void populateDB(const QStringList &paths);
 
     private:
-        FileLoader fileLoader;
+//        FileLoader fileLoader;
         CollectionDB *connection;
         Brain *brainDeamon;
         youtubedl *ytFetch;

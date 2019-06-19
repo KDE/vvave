@@ -24,13 +24,13 @@ Item
                 anchors.centerIn: parent
                 width: recSize
                 height: recSize
-                color: bae.moodColor(0)
+                color: vvave.moodColor(0)
                 radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
 
-            onClicked: colorClicked(bae.moodColor(0))
+            onClicked: colorClicked(vvave.moodColor(0))
         }
         ToolButton
         {
@@ -44,13 +44,13 @@ Item
                 anchors.centerIn: parent
                 width: recSize
                 height: recSize
-                color: bae.moodColor(1)
+                color: vvave.moodColor(1)
                 radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
 
-            onClicked: colorClicked(bae.moodColor(1))
+            onClicked: colorClicked(vvave.moodColor(1))
         }
         ToolButton
         {
@@ -63,13 +63,13 @@ Item
                 anchors.centerIn: parent
                 width: recSize
                 height: recSize
-                color: bae.moodColor(2)
+                color: vvave.moodColor(2)
                 radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
 
-            onClicked: colorClicked(bae.moodColor(2))
+            onClicked: colorClicked(vvave.moodColor(2))
         }
         ToolButton
         {
@@ -82,13 +82,13 @@ Item
                 anchors.centerIn: parent
                 width: recSize
                 height: recSize
-                color: bae.moodColor(3)
+                color: vvave.moodColor(3)
                 radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
 
-            onClicked: colorClicked(bae.moodColor(3))
+            onClicked: colorClicked(vvave.moodColor(3))
         }
 
         ToolButton
@@ -102,13 +102,13 @@ Item
                 anchors.centerIn: parent
                 width: recSize
                 height: recSize
-                color: bae.moodColor(4)
+                color: vvave.moodColor(4)
                 radius: recRadius
                 border.color: altColor
                 border.width: 1
             }
 
-            onClicked: colorClicked(bae.moodColor(4))
+            onClicked: colorClicked(vvave.moodColor(4))
         }
     }
 }
