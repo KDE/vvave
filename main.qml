@@ -172,6 +172,7 @@ Maui.ApplicationWindow
             onClicked: currentView = viewsIndex.tracks
             text: qsTr("Tracks")
             colorScheme.highlightColor: babeColor
+            spacing: 0
 
         },
 
@@ -276,15 +277,15 @@ Maui.ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            //            leftContent:  Maui.ToolButton
-            //            {
-            //                iconName: "headphones"
-            //                visible: _drawer.modal
-            //                iconColor: _drawer.visible ? babeColor : textColor
-            //                onClicked: _drawer.visible = !_drawer.visible
-            //                colorScheme.highlightColor: babeColor
-            //                //                text: qsTr("Now")
-            //            }
+            leftContent:  Maui.ToolButton
+            {
+                iconName: "headphones"
+                visible: _drawer.modal
+                iconColor: _drawer.visible ? babeColor : textColor
+                onClicked: _drawer.visible = !_drawer.visible
+                colorScheme.highlightColor: babeColor
+                //                text: qsTr("Now")
+            }
 
             middleContent: [
 
@@ -608,7 +609,7 @@ Maui.ApplicationWindow
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
         modal: !root.isWide
-        handleVisible: modal
+        handleVisible: false
         closePolicy: Popup.NoAutoClose
         contentItem: MainPlaylist
         {

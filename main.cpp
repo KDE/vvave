@@ -84,7 +84,9 @@ int main(int argc, char *argv[])
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, [&]()
     {
         qDebug()<<"FINISHED LOADING QML APP";
-        vvave.postActions();
+        const auto currentSources = vvave.getSourceFolders();
+        const QStringList sources = currentSources.isEmpty() ? BAE::defaultSources : currentSources;
+        vvave.scanDir(sources);
 //        if(!urls.isEmpty())
 //            bae.openUrls(urls);
     });

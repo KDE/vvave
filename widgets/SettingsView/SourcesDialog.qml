@@ -12,10 +12,6 @@ Maui.Dialog
     maxHeight: unit * 500
     page.margins: 0
     defaultButtons: false
-    function scanDir(folderUrl)
-    {
-        vvave.scanDir(folderUrl)
-    }
 
     Maui.Dialog
     {
@@ -95,11 +91,11 @@ Maui.Dialog
                     fmDialog.onlyDirs = true
                     fmDialog.show(function(paths)
                     {
-                        for(var i in paths)
-                        {
+
+                        console.log("SCAN DIR <<", paths)
+                        for(var i in paths)                        
                             listModel.append({url: paths[i]})
-                            scanDir(paths[i])
-                        }
+                        vvave.scanDir([paths])
                         close()
 
                     })
@@ -114,6 +110,7 @@ Maui.Dialog
     {
         sources.model.clear()
         var folders = vvave.getSourceFolders()
+        console.log(folders)
         for(var i in folders)
             sources.model.append({url : folders[i]})
     }

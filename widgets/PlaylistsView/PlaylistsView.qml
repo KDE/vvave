@@ -114,6 +114,13 @@ Kirigami.PageRow
         holder.body: "Your playlist is empty,<br>start adding new music to it"
         holder.emojiSize: iconSizes.huge
 
+        contextMenuItems:
+            Maui.MenuItem
+            {
+                text: qsTr("Remove from playlist")
+            }
+
+
         //        headerMenu.menuItem:  [
         //            Maui.MenuItem
         //            {

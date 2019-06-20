@@ -72,7 +72,7 @@ class CollectionDB : public QObject
         FMH::MODEL_LIST getDBData(const QStringList &urls);
         FMH::MODEL_LIST getDBData(const QString &queryTxt);
         QVariantList getDBDataQML(const QString &queryTxt);
-        QStringList dataToList(const FMH::MODEL_LIST &list, const FMH::MODEL_KEY &key);
+        static QStringList dataToList(const FMH::MODEL_LIST &list, const FMH::MODEL_KEY &key);
 
         FMH::MODEL_LIST getAlbumTracks(const QString &album, const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::TRACK, const BAE::W &order = BAE::W::ASC);
         FMH::MODEL_LIST getArtistTracks(const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ALBUM, const BAE::W &order = BAE::W::ASC);

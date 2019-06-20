@@ -19,10 +19,13 @@ inline uint getTracks(const QStringList& paths)
 
     for(const auto &path : paths)
     {
+        if(!FMH::fileExists(path))
+            continue;
+
         if (QFileInfo(path).isDir())
         {
             db->addFolder(path);
-            QDirIterator it(path, FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO], QDir::Files, QDirIterator::Subdirectories);
+            QDirIterator it(path, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO] << "*.m4a", QDir::Files, QDirIterator::Subdirectories);
 
             while (it.hasNext())
                 urls << it.next();

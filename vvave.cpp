@@ -79,21 +79,13 @@ void vvave::runBrain()
             emit this->refreshArtists();
         };
 
-        BRAIN::synapse(BRAIN::PACKAGES() << albumPackage << artistPackage);
+        BRAIN::synapse(BRAIN::PACKAGES() << albumPackage /*<< artistPackage*/);
     };
 
     QFuture<void> t1 = QtConcurrent::run(func);
     watcher->setFuture(t1);
 }
 
-void vvave::postActions()
-{
-    this->checkCollection(BAE::defaultSources, [this](uint size)
-    {
-        emit this->refreshTables(size);
-        runBrain();
-    });
-}
 
 void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> cb)
 {
@@ -125,7 +117,7 @@ void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> 
 
 //// PUBLIC SLOTS
 
-QVariantList vvave::sourceFolders() const
+QVariantList vvave::sourceFolders()
 {
     const auto sources = this->db->getDBData("select * from sources");
 
@@ -142,14 +134,20 @@ QString vvave::moodColor(const int &index)
     else return "";
 }
 
-void vvave::scanDir(const QString &path)
+void vvave::scanDir(const QStringList &paths)
 {
-    this->checkCollection(QStringList() << path);
+    this->checkCollection(paths, [this](uint size)
+    {
+        emit this->refreshTables(size);
+        runBrain();
+    });
 }
 
 QStringList vvave::getSourceFolders()
 {
-    return this->db->getSourcesFolders();
+    const auto folders = this->db->getSourcesFolders();
+    qDebug()<< folders;
+    return folders;
 }
 
 

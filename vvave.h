@@ -19,8 +19,6 @@ private:
 public:
     explicit vvave(QObject *parent = nullptr);
     ~vvave();
-    void postActions();
-
 
 signals:
     void refreshTables(uint size);
@@ -31,9 +29,9 @@ signals:
 public slots:
     ///DB Interfaces
     /// useful functions for non modeled views and actions with not direct access to a tracksmodel or its own model
-    QVariantList sourceFolders() const;
+    QVariantList sourceFolders();
     static QString moodColor(const int &index);
-    void scanDir(const QString &path);
+    void scanDir(const QStringList &paths = BAE::defaultSources);
 
     QStringList getSourceFolders();
 

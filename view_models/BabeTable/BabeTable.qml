@@ -20,8 +20,7 @@ BabeList
 
     property alias list : _tracksList
     property alias listModel : _tracksModel
-    property alias listView : babeTableRoot.listView
-
+    property alias removeDialog : _removeDialog
 
     property bool trackNumberVisible
     property bool quickPlayVisible : true
@@ -36,6 +35,7 @@ BabeList
     property bool group : false
 
     property alias contextMenu : contextMenu
+    property alias contextMenuItems : contextMenu.content
 
     property alias playAllBtn : playAllBtn
     property alias appendBtn : appendBtn
@@ -184,6 +184,30 @@ BabeList
         }
     ]
 
+    Maui.Dialog
+    {
+        id: _removeDialog
+        property int index
+        title: qsTr("Remove track")
+        message: qsTr("You can delete the file from your computer or remove it from your collection")
+        rejectButton.text: qsTr("Delete")
+        //        rejectButton.icon.name: "archive-remove"
+        acceptButton.text: qsTr("Remove")
+
+        onAccepted:
+        {
+            list.remove(listView.currentIndex)
+            close()
+        }
+
+        onRejected:
+        {
+            if(Maui.FM.removeFile(list.get(index).url))
+                list.remove(listView.currentIndex)
+            close()
+        }
+    }
+
     TableMenu
     {
         id: contextMenu
@@ -222,7 +246,8 @@ BabeList
 
         onRemoveClicked:
         {
-//            list.remove(listView.currentIndex)
+            _removeDialog.index= listView.currentIndex
+            _removeDialog.open()
         }
 
         onRateClicked:
