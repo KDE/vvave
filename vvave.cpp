@@ -59,16 +59,15 @@ vvave::~vvave() {}
 
 void vvave::runBrain()
 {
-
     QFutureWatcher<void> *watcher = new QFutureWatcher<void>;
 
     QObject::connect(watcher, &QFutureWatcher<void>::finished, watcher, &QFutureWatcher<void>::deleteLater);
 
-    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [=]()
-    {
-        if(watcher)
-            watcher->future().waitForFinished();
-    });
+//    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [=]()
+//    {
+//        if(watcher != nullptr)
+//            watcher->future().waitForFinished();
+//    });
 
     auto func = [=]()
     {
@@ -107,7 +106,7 @@ void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> 
             cb(newTracks);
         watcher->deleteLater();
     });
-    const auto func = [&paths]() -> uint
+    const auto func = [=]() -> uint
     {
             auto newPaths = paths;
 
@@ -147,7 +146,7 @@ void vvave::scanDir(const QStringList &paths)
     this->checkCollection(paths, [=](uint size)
     {
         emit this->refreshTables(size);
-//        runBrain();
+        this->runBrain();
     });
 }
 
