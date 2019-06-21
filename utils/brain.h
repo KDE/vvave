@@ -34,6 +34,11 @@ public:
         return res;
     }
 
+    int currentIndex()
+    {
+        return index;
+    }
+
     bool hasNext() const
     {
         return index + 1 < requests.size();
@@ -197,7 +202,7 @@ struct PACKAGE
 {
     PULPO::ONTOLOGY ontology;
     PULPO::INFO info;
-    std::function<void()> callback = nullptr;
+    std::function<void(int index)> callback = nullptr;
 };
 typedef QList<PACKAGE> PACKAGES;
 
@@ -210,16 +215,15 @@ inline void synapse(const BRAIN::PACKAGES &packages)
     QEventLoop loop;
     QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
 
-    auto func = [&](QUEUE &m_requests, std::function<void()> cb = nullptr)
+    auto func = [&](QUEUE &m_requests, std::function<void(int index)> cb = nullptr)
     {
         while(m_requests.hasNext())
         {
             pulpo.request(m_requests.next());
+            if(cb)
+                cb(m_requests.currentIndex());
             loop.exec();
         }
-
-        if(cb)
-            cb();
     };
 
     for(const auto &package : packages)
@@ -315,8 +319,6 @@ void albumInfo();
 
 void tags();
 void wikis();
-
-static QUEUE albumArtworks();
 void albumTags();
 void albumWikis();
 

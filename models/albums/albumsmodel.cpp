@@ -1,11 +1,16 @@
 #include "albumsmodel.h"
 #include "db/collectionDB.h"
-
+#include "utils/brain.h"
+#include <QtConcurrent>
 
 AlbumsModel::AlbumsModel(QObject *parent) : BaseList(parent)
 {
     this->db = CollectionDB::getInstance();
     connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
+    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [=]()
+    {
+        pool.waitForDone();
+    });
 }
 
 FMH::MODEL_LIST AlbumsModel::items() const
@@ -13,7 +18,7 @@ FMH::MODEL_LIST AlbumsModel::items() const
     return this->list;
 }
 
-void AlbumsModel::setQuery(const QString &query)
+void AlbumsModel::setQuery(const QUERY &query)
 {
     if(this->query == query)
         return;
@@ -24,7 +29,7 @@ void AlbumsModel::setQuery(const QString &query)
     emit this->queryChanged();
 }
 
-QString AlbumsModel::getQuery() const
+AlbumsModel::QUERY AlbumsModel::getQuery() const
 {
     return this->query;
 }
@@ -101,11 +106,112 @@ void AlbumsModel::setList()
 {
     emit this->preListChanged();
 
-    this->list = this->db->getDBData(this->query);
+    QString m_Query;
+    if(this->query == AlbumsModel::QUERY::ALBUMS)
+        m_Query = "select * from albums order by album asc";
+    else if(this->query == AlbumsModel::QUERY::ARTISTS)
+        m_Query = "select * from artists order by artist asc";
+
+    this->list = this->db->getDBData(m_Query);
+
 
     qDebug()<< "my LIST" ;
     this->sortList();
     emit this->postListChanged();
+
+    if(this->query == AlbumsModel::QUERY::ALBUMS)
+        this->runBrain();
+}
+
+void AlbumsModel::runBrain()
+{
+    QFutureWatcher<void> *watcher = new QFutureWatcher<void>;
+
+    QObject::connect(watcher, &QFutureWatcher<void>::finished, [=]()
+    {
+        watcher->deleteLater();
+    });
+
+
+
+    auto func = [=]()
+    {
+        QList<PULPO::REQUEST> requests;
+        int index = -1;
+        for(auto &album : this->list)
+        {
+            index++;
+            if(!album[FMH::MODEL_KEY::ARTWORK].isEmpty())
+                continue;
+
+            if(BAE::artworkCache(album, FMH::MODEL_KEY::ALBUM))
+            {
+                db->insertArtwork(album);
+                this->updateArtwork(index, album[FMH::MODEL_KEY::ARTWORK]);
+                continue;
+            }
+
+            PULPO::REQUEST request;
+            request.track = album;
+            request.ontology = PULPO::ONTOLOGY::ALBUM;
+            request.services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz};
+            request.info = {PULPO::INFO::ARTWORK};
+            request.callback = [=](PULPO::REQUEST request, PULPO::RESPONSES responses)
+            {
+                qDebug() << "DONE WITH " << request.track ;
+
+                for(const auto &res : responses)
+                {
+                    if(res.context == PULPO::CONTEXT::IMAGE && !res.value.toString().isEmpty())
+                    {
+                        qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM];
+                        auto downloader = new FMH::Downloader;
+                        QObject::connect(downloader, &FMH::Downloader::fileSaved, [=](QString path)
+                        {
+                            qDebug()<< "Saving artwork file to" << path;
+                            FMH::MODEL newTrack = request.track;
+                            newTrack[FMH::MODEL_KEY::ARTWORK] = path;
+                            db->insertArtwork(newTrack);
+                            this->updateArtwork(index, path);
+                            downloader->deleteLater();
+                        });
+
+                        QStringList filePathList = res.value.toString().split('/');
+                        const auto format = "." + filePathList.at(filePathList.count() - 1).split(".").last();
+                        QString name = !request.track[FMH::MODEL_KEY::ALBUM].isEmpty() ? request.track[FMH::MODEL_KEY::ARTIST] + "_" + request.track[FMH::MODEL_KEY::ALBUM] : request.track[FMH::MODEL_KEY::ARTIST];
+                        name.replace("/", "-");
+                        name.replace("&", "-");
+                        downloader->setFile(res.value.toString(),  BAE::CachePath + name + format);
+                    }
+                }
+            };
+
+            requests << request;
+        }
+
+        Pulpo pulpo;
+        QEventLoop loop;
+        QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
+
+        for(auto i = 0; i < requests.size(); i++)
+        {
+            pulpo.request(requests.at(i));
+            loop.exec();
+        }
+
+    };
+
+    QFuture<void> t1 = QtConcurrent::run(&pool, func);
+    watcher->setFuture(t1);
+}
+
+void AlbumsModel::updateArtwork(const int index, const QString &artwork)
+{
+    if(index >= this->list.size() || index < 0)
+        return;
+
+    this->list[index][FMH::MODEL_KEY::ARTWORK] = artwork;
+    emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
 }
 
 QVariantMap AlbumsModel::get(const int &index) const

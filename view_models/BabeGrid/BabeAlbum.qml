@@ -2,7 +2,7 @@ import QtQuick 2.9
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-
+import AlbumsList 1.0
 
 ItemDelegate
 {
@@ -176,7 +176,7 @@ ItemDelegate
                     {
                         width: parent.width * 0.8
                         anchors.centerIn: parent
-                        text:  typeof album === 'undefined'  ? artist : album
+                        text: list.query === Albums.ALBUMS ? model.album : model.artist
                         visible: true
                         horizontalAlignment: Qt.AlignHCenter
                         elide: Text.ElideRight
@@ -197,8 +197,8 @@ ItemDelegate
                         width: parent.width*0.8
                         anchors.centerIn: parent
 
-                        text: typeof album === 'undefined' ? "" : artist
-                        visible: typeof album === 'undefined'? false : true
+                        text: list.query === Albums.ALBUMS ? model.artist : undefined
+                        visible: text
                         horizontalAlignment: Qt.AlignHCenter
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.medium

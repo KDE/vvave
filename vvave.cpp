@@ -61,38 +61,42 @@ void vvave::runBrain()
 {
     QFutureWatcher<void> *watcher = new QFutureWatcher<void>;
 
-    QObject::connect(watcher, &QFutureWatcher<void>::finished, watcher, &QFutureWatcher<void>::deleteLater);
-
-//    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [=]()
-//    {
-//        if(watcher != nullptr)
-//            watcher->future().waitForFinished();
-//    });
-
-    auto func = [=]()
+    QObject::connect(watcher, &QFutureWatcher<void>::finished, [=]()
     {
+        watcher->deleteLater();
+        emit this->refreshAlbums();
+    });
+
+    //    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [=]()
+    //    {
+    //        if(watcher != nullptr)
+    //            watcher->future().waitForFinished();
+    //    });
+
+//    auto func = [=]()
+//    {
         // the album artworks package
-        BRAIN::PACKAGE albumPackage;
-        albumPackage.ontology = PULPO::ONTOLOGY::ALBUM;
-        albumPackage.info = PULPO::INFO::ARTWORK;
-        albumPackage.callback = [=]()
-        {
-            emit this->refreshAlbums();
-        };
+//        BRAIN::PACKAGE albumPackage;
+//        albumPackage.ontology = PULPO::ONTOLOGY::ALBUM;
+//        albumPackage.info = PULPO::INFO::ARTWORK;
+//        albumPackage.callback = [=]()
+//        {
+//            emit this->refreshAlbums();
+//        };
 
-        BRAIN::PACKAGE artistPackage;
-        artistPackage.ontology = PULPO::ONTOLOGY::ARTIST;
-        artistPackage.info = PULPO::INFO::ARTWORK;
-        artistPackage.callback = [=]()
-        {
-            emit this->refreshArtists();
-        };
+//        BRAIN::PACKAGE artistPackage;
+//        artistPackage.ontology = PULPO::ONTOLOGY::ARTIST;
+//        artistPackage.info = PULPO::INFO::ARTWORK;
+//        artistPackage.callback = [=]()
+//        {
+//            emit this->refreshArtists();
+//        };
 
-        BRAIN::synapse(BRAIN::PACKAGES() << albumPackage /*<< artistPackage*/);
-    };
+//        BRAIN::synapse(BRAIN::PACKAGES() << albumPackage /*<< artistPackage*/);
+//    };
 
-    QFuture<void> t1 = QtConcurrent::run(func);
-    watcher->setFuture(t1);
+//    QFuture<void> t1 = QtConcurrent::run(func);
+//    watcher->setFuture(t1);
 }
 
 
@@ -108,14 +112,14 @@ void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> 
     });
     const auto func = [=]() -> uint
     {
-            auto newPaths = paths;
+        auto newPaths = paths;
 
-            for(auto path : newPaths)
+        for(auto path : newPaths)
             if(path.startsWith("file://"))
-            path.replace("file://", "");
+                path.replace("file://", "");
 
-            return FLoader::getTracks(newPaths);
-};
+        return FLoader::getTracks(newPaths);
+    };
 
     QFuture<uint> t1 = QtConcurrent::run(func);
     watcher->setFuture(t1);
@@ -146,7 +150,7 @@ void vvave::scanDir(const QStringList &paths)
     this->checkCollection(paths, [=](uint size)
     {
         emit this->refreshTables(size);
-        this->runBrain();
+//        this->runBrain();
     });
 }
 

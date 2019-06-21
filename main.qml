@@ -695,7 +695,7 @@ Maui.ApplicationWindow
                 holder.body: "Add new music sources"
                 holder.emojiSize: iconSizes.huge
                 headBarTitle: count + qsTr(" albums")
-                list.query: Q.GET.allAlbumsAsc
+                list.query: Albums.ALBUMS
                 list.sortBy: Albums.ALBUM
 
                 Connections
@@ -749,7 +749,7 @@ Maui.ApplicationWindow
                 holder.body: qsTr("Add new music sources")
                 holder.emojiSize: iconSizes.huge
                 headBarTitle: count + qsTr(" artists")
-                list.query: Q.GET.allArtistsAsc
+                list.query: Albums.ARTISTS
                 list.sortBy: Albums.ARTIST
                 table.list.sortBy:  Tracks.NONE
 
