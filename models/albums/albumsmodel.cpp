@@ -7,10 +7,11 @@ AlbumsModel::AlbumsModel(QObject *parent) : BaseList(parent)
 {
     this->db = CollectionDB::getInstance();
     connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
-    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [=]()
-    {
-        pool.waitForDone();
-    });
+}
+
+AlbumsModel::~AlbumsModel()
+{
+
 }
 
 FMH::MODEL_LIST AlbumsModel::items() const
@@ -132,8 +133,6 @@ void AlbumsModel::runBrain()
         watcher->deleteLater();
     });
 
-
-
     auto func = [=]()
     {
         QList<PULPO::REQUEST> requests;
@@ -192,16 +191,28 @@ void AlbumsModel::runBrain()
         Pulpo pulpo;
         QEventLoop loop;
         QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
+        bool stop = false;
+//        QObject::connect(qApp, &QCoreApplication::aboutToQuit, [&]()
+//        {
+//            stop = true;
+//            loop.quit();
+//        });
+        QObject::connect(this, &AlbumsModel::destroyed, [&]()
+        {
+            stop = true;
+            loop.quit();
+        });
 
         for(auto i = 0; i < requests.size(); i++)
         {
             pulpo.request(requests.at(i));
             loop.exec();
+            if(stop)
+                return;
         }
-
     };
 
-    QFuture<void> t1 = QtConcurrent::run(&pool, func);
+    QFuture<void> t1 = QtConcurrent::run(func);
     watcher->setFuture(t1);
 }
 

@@ -14,7 +14,6 @@ private:
     Notify *notify;
     CollectionDB *db;
     void checkCollection(const QStringList &paths = BAE::defaultSources, std::function<void (uint)> cb = nullptr);
-    void runBrain();
 
 public:
     explicit vvave(QObject *parent = nullptr);

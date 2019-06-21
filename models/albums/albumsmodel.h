@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include "models/baselist.h"
-#include <QThreadPool>
 
 class CollectionDB;
 class AlbumsModel : public BaseList
@@ -30,6 +29,7 @@ public:
     Q_ENUM(QUERY)
 
     explicit AlbumsModel(QObject *parent = nullptr);
+    ~AlbumsModel();
 
     FMH::MODEL_LIST items() const override;
 
@@ -50,7 +50,6 @@ private:
 
     void runBrain();
     void updateArtwork(const int index, const QString &artwork);
-    QThreadPool pool;
 
 signals:
     void queryChanged();

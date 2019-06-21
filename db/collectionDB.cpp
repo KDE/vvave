@@ -26,6 +26,13 @@ using namespace BAE;
 
 CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 {
+    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [this]()
+    {
+        this->m_db.close();
+        this->instance->deleteLater();
+        this->instance = nullptr;
+    });
+
     this->name = QUuid::createUuid().toString();
 
     if(!BAE::fileExists(BAE::CollectionDBPath + BAE::DBName))
@@ -45,8 +52,6 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 CollectionDB::~CollectionDB()
 {
     qDebug()<< "DELETING COLLECTIONDB SINGLETON";
-    this->m_db.close();
-    delete this->instance;
 }
 
 CollectionDB *CollectionDB::instance = nullptr;
@@ -65,6 +70,10 @@ CollectionDB *CollectionDB::getInstance()
     }
 }
 
+void CollectionDB::deleteInstance()
+{
+    delete this;
+}
 
 void CollectionDB::prepareCollectionDB()
 {
