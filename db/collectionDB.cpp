@@ -136,7 +136,7 @@ bool CollectionDB::check_existance(const QString &tableName, const QString &sear
         return false;
     }
 
-    if (query.next())
+    if (query.first())
         return true;
 
     return false;

@@ -16,7 +16,7 @@ function playTrack(index)
 
             if(currentTrack.artwork && currentTrack.artwork.length && currentTrack.artwork !== "NONE")
                 currentArtwork =  currentTrack.artwork
-            else bae.loadCover(currentTrack.url)
+//            else bae.loadCover(currentTrack.url)
 
             progressBar.enabled = true
 
@@ -24,8 +24,8 @@ function playTrack(index)
             {
                 root.title = currentTrack.title + " - " +currentTrack.artist
 
-                if(!root.active)
-                    bae.notifySong(currentTrack.url)
+//                if(!root.active)
+//                    bae.notifySong(currentTrack.url)
             }
 
             //            if(currentTrack.lyrics.length < 1)
@@ -116,7 +116,7 @@ function shuffle()
 
 function playAt(index)
 {
-    if((index < mainPlaylist.listView.count) && (mainPlaylist.listView.count > 0) && (index > -1))
+    if((index < mainPlaylist.listView.count) && (index > -1))
     {
         currentTrackIndex = index
         mainPlaylist.listView.currentIndex = currentTrackIndex

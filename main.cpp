@@ -87,8 +87,8 @@ int main(int argc, char *argv[])
         const auto currentSources = vvave.getSourceFolders();
         const QStringList sources = currentSources.isEmpty() ? BAE::defaultSources : currentSources;
         vvave.scanDir(sources);
-//        if(!urls.isEmpty())
-//            bae.openUrls(urls);
+        if(!urls.isEmpty())
+            vvave.openUrls(urls);
     });
 
     auto context = engine.rootContext();

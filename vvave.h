@@ -25,6 +25,7 @@ signals:
     void refreshTracks();
     void refreshAlbums();
     void refreshArtists();
+    void openFiles(QVariantList tracks);
 
 public slots:
     ///DB Interfaces
@@ -34,9 +35,7 @@ public slots:
     void scanDir(const QStringList &paths = BAE::defaultSources);
 
     QStringList getSourceFolders();
-
-
-
+    void openUrls(const QStringList &urls);
 };
 
 #endif // VVAVE_H

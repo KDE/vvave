@@ -442,6 +442,21 @@ Maui.ApplicationWindow
             text: qsTr("Sources...")
             icon.name: "folder-add"
             onTriggered: sourcesDialog.open()
+        },
+
+        Maui.MenuItem
+        {
+            text: qsTr("Open...")
+            icon.name: "folder-add"
+            onTriggered:
+            {
+                fmDialog.onlyDirs = false
+                fmDialog.filterType = FMList.AUDIO
+                fmDialog.show(function(paths)
+                {
+                    vvave.openUrls(paths)
+                })
+            }
         }
 
         //        Maui.Menu
@@ -1016,6 +1031,10 @@ Maui.ApplicationWindow
                       currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
                   }
 
-        onOpenFiles: Player.playAll(tracks)
+        onOpenFiles:
+        {
+            Player.appendTracksAt(tracks, 0)
+            Player.playAt(0)
+        }
     }
 }
