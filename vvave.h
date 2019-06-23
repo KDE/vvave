@@ -30,6 +30,7 @@ public slots:
     ///DB Interfaces
     /// useful functions for non modeled views and actions with not direct access to a tracksmodel or its own model
     QVariantList sourceFolders();
+    bool removeSource(const QString &source);
     static QString moodColor(const int &index);
     void scanDir(const QStringList &paths = BAE::defaultSources);
 

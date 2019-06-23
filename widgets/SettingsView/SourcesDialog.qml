@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import org.kde.mauikit 1.0 as Maui
 import "../../view_models"
+import "../../utils/Help.js" as H
 
 Maui.Dialog
 {
@@ -11,7 +12,34 @@ Maui.Dialog
     maxWidth: unit * 600
     maxHeight: unit * 500
     page.margins: 0
-    defaultButtons: false
+    defaultButtons: true
+    acceptButton.text: qsTr("Add")
+    rejectButton.text: qsTr("Remove")
+
+    onRejected:
+    {
+        var index = sources.currentIndex
+        var url = sources.model.get(index).url
+        pathToRemove = url
+        confirmationDialog.title = "Remove source"
+        confirmationDialog.message = "Are you sure you want to remove the source: \n "+url
+        confirmationDialog.open()
+    }
+
+    onAccepted:
+    {
+        fmDialog.onlyDirs = true
+        fmDialog.show(function(paths)
+        {
+
+            console.log("SCAN DIR <<", paths)
+            for(var i in paths)
+                listModel.append({url: paths[i]})
+            vvave.scanDir([paths])
+        })
+
+        getSources()
+    }
 
     Maui.Dialog
     {
@@ -19,17 +47,30 @@ Maui.Dialog
         onAccepted:
         {
             if(pathToRemove.length>0)
-                if(bae.removeSource(pathToRemove))
-                    bae.refreshCollection()
-
+                if(vvave.removeSource(pathToRemove))
+                    H.refreshCollection()
+            getSources()
+            confirmationDialog.close()
         }
+        onRejected: confirmationDialog.close()
+    }
+
+    Maui.Holder
+    {
+        anchors.fill: parent
+        visible: !sources.count
+        emoji: "qrc:/assets/MusicCloud.png"
+        isMask: false
+        title : "No Sources!"
+        body: "Add new sources to organize and play your music collection"
+        emojiSize: iconSizes.huge
     }
 
     BabeList
     {
         id: sources
         anchors.fill: parent
-        headBar.visible: true
+        headBar.visible: false
         headBarExit: false
         headBarTitle: qsTr("Sources")
         Layout.fillWidth: true
@@ -53,55 +94,6 @@ Maui.Dialog
                 onClicked: sources.currentIndex = index
             }
         }
-
-        headBar.rightContent: [
-
-            Maui.ToolButton
-            {
-                iconName: "list-remove"
-                onClicked:
-                {
-                    close()
-                    var index = sources.currentIndex
-                    var url = sources.list.model.get(index).url
-
-                    confirmationDialog.title = "Remove source"
-
-                    if(bae.defaultSources().indexOf(url)<0)
-                    {
-                        pathToRemove = url
-                        confirmationDialog.message = "Are you sure you want to remove the source: \n "+url
-                    }
-                    else
-                    {
-                        pathToRemove = ""
-                        confirmationDialog.message = url+"\nis a default source and cannot be removed"
-                    }
-
-                    confirmationDialog.open()
-                }
-            },
-
-            Maui.ToolButton
-            {
-                iconName: "list-add"
-                onClicked:
-                {
-                    close()
-                    fmDialog.onlyDirs = true
-                    fmDialog.show(function(paths)
-                    {
-
-                        console.log("SCAN DIR <<", paths)
-                        for(var i in paths)                        
-                            listModel.append({url: paths[i]})
-                        vvave.scanDir([paths])
-                        close()
-
-                    })
-                }
-            }
-        ]
     }
 
     onOpened: getSources()

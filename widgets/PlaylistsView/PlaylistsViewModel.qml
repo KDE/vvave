@@ -82,29 +82,29 @@ BabeList
                 {
                 case "Most Played":
 
-                    playlistViewRoot.populate(Q.GET.mostPlayedTracks);
+                    populate(Q.GET.mostPlayedTracks);
                     filterList.list.sortBy = Tracks.COUNT
                     break;
 
-                case "Favorites":
+                case "Rating":
                     filterList.list.sortBy = Tracks.RATE
                     filterList.group = true
 
-                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    populate(Q.GET.favoriteTracks);
                     break;
 
                 case "Recent":
-                    playlistViewRoot.populate(Q.GET.recentTracks);
+                    populate(Q.GET.recentTracks);
                     filterList.list.sortBy = Tracks.ADDDATE
                     filterList.group = true
                     break;
 
                 case "Favs":
-                    playlistViewRoot.populate(Q.GET.babedTracks);
+                    populate(Q.GET.babedTracks);
                     break;
 
                 case "Online":
-                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    populate(Q.GET.favoriteTracks);
                     break;
 
                 case "Tags":
@@ -112,11 +112,11 @@ BabeList
                     break;
 
                 case "Relationships":
-                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    populate(Q.GET.favoriteTracks);
                     break;
 
                 case "Popular":
-                    playlistViewRoot.populate(Q.GET.favoriteTracks);
+                    populate(Q.GET.favoriteTracks);
                     break;
 
                 case "Genres":
@@ -124,10 +124,12 @@ BabeList
                     break;
 
                 default:
-                    playlistViewRoot.populate(Q.GET.playlistTracks_.arg(playlist));
+                    populate(Q.GET.playlistTracks_.arg(playlist));
                     break;
 
                 }
+
+                _filterDialog.open()
             }
         }
     }

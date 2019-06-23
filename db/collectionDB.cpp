@@ -916,22 +916,29 @@ QSqlQuery CollectionDB::getQuery(const QString &queryTxt)
 
 bool CollectionDB::removeSource(const QString &url)
 {
-    auto path = url.endsWith("/") ? url.chopped(1) : url;
-
-    auto queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::TRACKS],
-            FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCE], path);
+    const auto path = url.endsWith("/") ? url.chopped(1) : url;
+    auto queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::TRACKS_PLAYLISTS],
+            FMH::MODEL_NAME[FMH::MODEL_KEY::URL], path);
     qDebug() << queryTxt;
     auto query = this->getQuery(queryTxt);
     if(query.exec())
     {
-        queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::SOURCES],
-                FMH::MODEL_NAME[FMH::MODEL_KEY::URL],path);
+        queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::TRACKS],
+                FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCE], path);
+
         query.prepare(queryTxt);
         if(query.exec())
         {
-            this->removeFolder(path);
-            if(cleanAlbums()) cleanArtists();
-            return true;
+            queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::SOURCES],
+                    FMH::MODEL_NAME[FMH::MODEL_KEY::URL],path);
+            query.prepare(queryTxt);
+            if(query.exec())
+            {
+                this->removeFolder(path);
+                if(cleanAlbums())
+                    cleanArtists();
+                return true;
+            }
         }
     }
 

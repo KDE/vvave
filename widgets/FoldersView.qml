@@ -4,69 +4,79 @@ import org.kde.mauikit 1.0 as Maui
 import "../view_models/BabeTable"
 import "../db/Queries.js" as Q
 
-StackView
+Item
 {
-    id: stack
-    property alias list : filterList
-    property var tracks : []
-    property string currentFolder : ""
-
-    initialItem: Maui.Page
+    Maui.GridBrowser
     {
+        id: browser
 
+        property alias list : _filterList
+        property var tracks : []
+        property string currentFolder : ""
         //        headBarTitle: qsTr("Source folders")
-        headBar.visible: false
-        headBarExit: false
-        margins: space.large
+        anchors.margins: space.big
+        anchors.fill: parent
+        showEmblem: false
 
-        Maui.GridBrowser
+        onItemClicked:
+        {
+            var item = browser.model.get(index)
+            _filterList.headBarTitle= item.label
+            currentFolder = item.path
+            filter()
+            _listDialog.open()
+        }
+
+        Maui.Holder
         {
             anchors.fill: parent
-            id: browser
-            showEmblem: false
-            onItemClicked:
+            visible: !browser.count
+            emoji: "qrc:/assets/MusicCloud.png"
+            isMask: false
+            title : "No Folders!"
+            body: "Add new music to your sources to browse by folders"
+            emojiSize: iconSizes.huge
+        }
+
+        Maui.Dialog
+        {
+            id: _listDialog
+            parent: parent
+            maxHeight: maxWidth
+            maxWidth: unit * 600
+            defaultButtons: false
+            page.margins: 0
+
+            BabeTable
             {
-                stack.push(filterList)
-                var item = browser.model.get(index)
-                filterList.headBarTitle= item.label
-                currentFolder = item.path
-                filter()
+                id: _filterList
+                anchors.fill: parent
+                coverArtVisible: true
+                headBarExit: false
+                holder.emoji: "qrc:/assets/MusicCloud.png"
+                holder.isMask: false
+                holder.title : "No Tracks!"
+                holder.body: "This source folder seems to be empty!"
+                holder.emojiSize: iconSizes.huge
             }
         }
-    }
 
-    BabeTable
-    {
-        id: filterList
-        coverArtVisible: true
-        headBarExitIcon: "go-previous"
-        holder.emoji: "qrc:/assets/MusicCloud.png"
-        holder.isMask: false
-        holder.title : "No Tracks!"
-        holder.body: "This source folder seems to be empty!"
-        holder.emojiSize: iconSizes.huge
+        Component.onCompleted: populate()
 
-        onExit:
+        function populate()
         {
-            stack.pop()
+            browser.model.clear()
+            var folders = vvave.sourceFolders();
+            if(folders.length > 0)
+                for(var i in folders)
+                    browser.model.append(folders[i])
         }
-    }
 
-    Component.onCompleted: populate()
+        function filter()
+        {
+            var where = "source = \""+currentFolder+"\""
+            _filterList.list.query = (Q.GET.tracksWhere_.arg(where))
 
-    function populate()
-    {
-        browser.model.clear()
-        var folders = vvave.sourceFolders();
-        if(folders.length > 0)
-            for(var i in folders)
-                browser.model.append(folders[i])
-    }
-
-    function filter()
-    {
-        var where = "source = \""+currentFolder+"\""
-        filterList.list.query = (Q.GET.tracksWhere_.arg(where))
-
+        }
     }
 }

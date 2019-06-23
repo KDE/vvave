@@ -93,6 +93,14 @@ QVariantList vvave::sourceFolders()
     return res;
 }
 
+bool vvave::removeSource(const QString &source)
+{
+    if(!this->getSourceFolders().contains(source))
+        return false;
+
+    return this->db->removeSource(source);
+}
+
 QString vvave::moodColor(const int &index)
 {
     if(index < BAE::MoodColors.size() && index > -1)

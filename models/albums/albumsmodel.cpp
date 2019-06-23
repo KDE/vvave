@@ -125,7 +125,6 @@ void AlbumsModel::setList()
 
 void AlbumsModel::fetchInformation()
 {
-
     qDebug() << "RNUNGING BRAIN EFFORRTS";
     QFutureWatcher<void> *watcher = new QFutureWatcher<void>;
 
@@ -200,8 +199,8 @@ void AlbumsModel::fetchInformation()
 //        });
         QObject::connect(this, &AlbumsModel::destroyed, [&]()
         {
+//            loop.quit();
             stop = true;
-            loop.quit();
         });
 
         for(auto i = 0; i < requests.size(); i++)

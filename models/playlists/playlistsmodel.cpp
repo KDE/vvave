@@ -104,7 +104,7 @@ FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
         },
 
         {
-            {FMH::MODEL_KEY::PLAYLIST, "Favorites"},
+            {FMH::MODEL_KEY::PLAYLIST, "Rating"},
             {FMH::MODEL_KEY::ICON, "view-media-favorite"},
             {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
         },
