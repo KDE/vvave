@@ -128,8 +128,6 @@ BabeList
                     break;
 
                 }
-
-                _filterDialog.open()
             }
         }
     }

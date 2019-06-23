@@ -76,7 +76,7 @@ ColumnLayout
         height: rowHeightAlt
         recSize: isMobile ? iconSize : 16
 
-        onColorClicked: populate(Q.GET.colorTracks_.arg(color))
+        onColorClicked: populate(Q.GET.colorTracks_.arg(color.toLowerCase()))
 
     }
 
@@ -210,9 +210,9 @@ ColumnLayout
 
     function populate(query)
     {
-
         playlistQuery = query
         filterList.list.query = playlistQuery
+        _filterDialog.open()
     }
 
     function syncAndPlay(index)
