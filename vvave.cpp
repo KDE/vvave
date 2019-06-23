@@ -83,7 +83,6 @@ void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> 
 
 
 //// PUBLIC SLOTS
-
 QVariantList vvave::sourceFolders()
 {
     const auto sources = this->db->getDBData("select * from sources");
@@ -124,8 +123,7 @@ void vvave::openUrls(const QStringList &urls)
     for(QString url : urls)
         if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url))
         {
-            const auto value = this->db->getDBData(QStringList() << url).first();
-            data << FM::toMap(value);
+            data << FM::toMap(this->db->getDBData(QStringList() << url).first());
         }
         else
         {

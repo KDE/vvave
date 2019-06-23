@@ -110,7 +110,6 @@ Maui.Dialog
     {
         sources.model.clear()
         var folders = vvave.getSourceFolders()
-        console.log(folders)
         for(var i in folders)
             sources.model.append({url : folders[i]})
     }

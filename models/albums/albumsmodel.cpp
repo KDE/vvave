@@ -120,12 +120,13 @@ void AlbumsModel::setList()
     this->sortList();
     emit this->postListChanged();
 
-    if(this->query == AlbumsModel::QUERY::ALBUMS)
-        this->runBrain();
+
 }
 
-void AlbumsModel::runBrain()
+void AlbumsModel::fetchInformation()
 {
+
+    qDebug() << "RNUNGING BRAIN EFFORRTS";
     QFutureWatcher<void> *watcher = new QFutureWatcher<void>;
 
     QObject::connect(watcher, &QFutureWatcher<void>::finished, [=]()
@@ -152,7 +153,7 @@ void AlbumsModel::runBrain()
 
             PULPO::REQUEST request;
             request.track = album;
-            request.ontology = PULPO::ONTOLOGY::ALBUM;
+            request.ontology = this->query == AlbumsModel::QUERY::ALBUMS ? PULPO::ONTOLOGY::ALBUM : PULPO::ONTOLOGY::ARTIST;
             request.services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz};
             request.info = {PULPO::INFO::ARTWORK};
             request.callback = [=](PULPO::REQUEST request, PULPO::RESPONSES responses)

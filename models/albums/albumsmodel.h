@@ -48,7 +48,6 @@ private:
     AlbumsModel::QUERY query;
     AlbumsModel::SORTBY sort = AlbumsModel::SORTBY::ADDDATE;
 
-    void runBrain();
     void updateArtwork(const int index, const QString &artwork);
 
 signals:
@@ -60,6 +59,8 @@ public slots:
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
     void refresh();
+
+    void fetchInformation();
 };
 
 #endif // ALBUMSMODEL_H

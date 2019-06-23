@@ -85,8 +85,7 @@ int main(int argc, char *argv[])
     {
         qDebug()<<"FINISHED LOADING QML APP";
         const auto currentSources = vvave.getSourceFolders();
-        const QStringList sources = currentSources.isEmpty() ? BAE::defaultSources : currentSources;
-        vvave.scanDir(sources);
+        vvave.scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
         if(!urls.isEmpty())
             vvave.openUrls(urls);
     });

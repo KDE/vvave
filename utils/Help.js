@@ -52,6 +52,7 @@ function refreshCollection(size)
     refreshArtists()
     refreshFolders()
 }
+
 function refreshFolders()
 {
     foldersView.populate()
@@ -65,6 +66,7 @@ function refreshTracks()
 function refreshAlbums()
 {
     albumsView.list.refresh()
+    albumsView.list.fetchInformation();
 }
 
 function refreshArtists()
