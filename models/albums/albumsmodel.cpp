@@ -199,7 +199,7 @@ void AlbumsModel::fetchInformation()
 //        });
         QObject::connect(this, &AlbumsModel::destroyed, [&]()
         {
-//            loop.quit();
+
             stop = true;
         });
 
@@ -208,7 +208,10 @@ void AlbumsModel::fetchInformation()
             pulpo.request(requests.at(i));
             loop.exec();
             if(stop)
+            {
+                loop.quit();
                 return;
+            }
         }
     };
 

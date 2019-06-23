@@ -35,20 +35,21 @@ BabeList
     signal playSync(int index)
     headBar.plegable: false
 
-    headBar.leftContent: Maui.ToolButton
-    {
-        id : createPlaylistBtn
-        anim : true
-        iconName : "list-add"
-        onClicked : newPlaylistDialog.open()
-    }
 
-    headBar.rightContent: Maui.ToolButton
-    {
-        iconName: "list-remove"
-        onClicked: removePlaylist()
-    }
-
+    headBar.rightContent: [
+        Maui.ToolButton
+        {
+            iconName: "list-remove"
+            onClicked: removePlaylist()
+        },
+        Maui.ToolButton
+        {
+            id : createPlaylistBtn
+            anim : true
+            iconName : "list-add"
+            onClicked : newPlaylistDialog.open()
+        }
+    ]
     BaseModel
     {
         id: _playlistsModel
