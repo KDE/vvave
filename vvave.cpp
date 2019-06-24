@@ -31,7 +31,6 @@ vvave::vvave(QObject *parent) : QObject(parent)
     for(const auto &path : {BAE::CachePath, BAE::YoutubeCachePath})
     {
         QDir dirPath(path);
-
         if (!dirPath.exists())
             dirPath.mkpath(".");
     }
@@ -80,7 +79,6 @@ void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> 
     QFuture<uint> t1 = QtConcurrent::run(func);
     watcher->setFuture(t1);
 }
-
 
 //// PUBLIC SLOTS
 QVariantList vvave::sourceFolders()

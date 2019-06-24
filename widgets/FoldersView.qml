@@ -6,13 +6,14 @@ import "../db/Queries.js" as Q
 
 Item
 {
+    id: control
+    property alias list : _filterList
+    property var tracks : []
+    property string currentFolder : ""
+
     Maui.GridBrowser
     {
         id: browser
-
-        property alias list : _filterList
-        property var tracks : []
-        property string currentFolder : ""
         //        headBarTitle: qsTr("Source folders")
         anchors.margins: space.big
         anchors.fill: parent
@@ -60,23 +61,23 @@ Item
                 holder.emojiSize: iconSizes.huge
             }
         }
+    }
 
-        Component.onCompleted: populate()
+    Component.onCompleted: populate()
 
-        function populate()
-        {
-            browser.model.clear()
-            var folders = vvave.sourceFolders();
-            if(folders.length > 0)
-                for(var i in folders)
-                    browser.model.append(folders[i])
-        }
+    function populate()
+    {
+        browser.model.clear()
+        var folders = vvave.sourceFolders();
+        if(folders.length > 0)
+            for(var i in folders)
+                browser.model.append(folders[i])
+    }
 
-        function filter()
-        {
-            var where = "source = \""+currentFolder+"\""
-            _filterList.list.query = (Q.GET.tracksWhere_.arg(where))
+    function filter()
+    {
+        var where = "source = \""+currentFolder+"\""
+        _filterList.list.query = (Q.GET.tracksWhere_.arg(where))
 
-        }
     }
 }

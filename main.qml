@@ -1010,26 +1010,26 @@ Maui.ApplicationWindow
         onRefreshAlbums: H.refreshAlbums()
         onRefreshArtists: H.refreshArtists()
 
-        onCoverReady:
-        {
-            root.currentArtwork = path
-            currentTrack.artwork = currentArtwork
-            mainPlaylist.list.update(currentTrack, currentTrackIndex);
-        }
+//        onCoverReady:
+//        {
+//            root.currentArtwork = path
+//            currentTrack.artwork = currentArtwork
+//            mainPlaylist.list.update(currentTrack, currentTrackIndex);
+//        }
 
-        onTrackLyricsReady:
-        {
-            console.log(lyrics)
-            if (url === currentTrack.url)
-                Player.setLyrics(lyrics)
-        }
+//        onTrackLyricsReady:
+//        {
+//            console.log(lyrics)
+//            if (url === currentTrack.url)
+//                Player.setLyrics(lyrics)
+//        }
 
-        onSkipTrack: Player.nextTrack()
-        onBabeIt: if (!mainlistEmpty)
-                  {
-                      mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
-                      currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
-                  }
+//        onSkipTrack: Player.nextTrack()
+//        onBabeIt: if (!mainlistEmpty)
+//                  {
+//                      mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
+//                      currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
+//                  }
 
         onOpenFiles:
         {

@@ -192,20 +192,18 @@ void AlbumsModel::fetchInformation()
         QEventLoop loop;
         QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
         bool stop = false;
-//        QObject::connect(qApp, &QCoreApplication::aboutToQuit, [&]()
-//        {
-//            stop = true;
-//            loop.quit();
-//        });
+
         QObject::connect(this, &AlbumsModel::destroyed, [&]()
         {
-
+            qDebug()<< stop << &stop;
             stop = true;
+            qDebug()<< stop << &stop;
+
         });
 
-        for(auto i = 0; i < requests.size(); i++)
+        for(const auto &req : requests)
         {
-            pulpo.request(requests.at(i));
+            pulpo.request(req);
             loop.exec();
             if(stop)
             {
@@ -232,14 +230,7 @@ QVariantMap AlbumsModel::get(const int &index) const
 {
     if(index >= this->list.size() || index < 0)
         return QVariantMap();
-
-    QVariantMap res;
-    const auto item = this->list.at(index);
-
-    for(auto key : item.keys())
-        res.insert(FMH::MODEL_NAME[key], item[key]);
-
-    return res;
+    return FM::toMap(this->list.at(index));
 }
 
 void AlbumsModel::append(const QVariantMap &item)
@@ -283,5 +274,3 @@ void AlbumsModel::refresh()
 {
     this->setList();
 }
-
-

@@ -321,7 +321,7 @@ BabeList
 
         number : trackNumberVisible ? true : false
         quickPlay: quickPlayVisible
-        coverArt : coverArtVisible
+        coverArt : coverArtVisible ? (babeTableRoot.width > 300) : coverArtVisible
         trackDurationVisible : trackDuration
         trackRatingVisible : trackRating
         menuItem: menuItemVisible
