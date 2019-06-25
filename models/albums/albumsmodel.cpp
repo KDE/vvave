@@ -94,8 +94,6 @@ void AlbumsModel::sortList()
     });
 }
 
-
-
 void AlbumsModel::setList()
 {
     emit this->preListChanged();
@@ -106,6 +104,7 @@ void AlbumsModel::setList()
     else if(this->query == AlbumsModel::QUERY::ARTISTS)
         m_Query = "select * from artists order by artist asc";
 
+    //get albums data with modifier for missing images for artworks
     this->list = this->db->getDBData(m_Query, [=](FMH::MODEL &item)
     {
         if(!FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))

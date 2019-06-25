@@ -39,7 +39,6 @@ add_executable(vvave
     services/web/babeit.cpp
     services/web/youtube.cpp
     services/web/Spotify/spotify.cpp
-    db/conthread.cpp
     db/collectionDB.cpp
 #    settings/BabeSettings.cpp
 #    settings/fileloader.cpp

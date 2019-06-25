@@ -623,7 +623,7 @@ Maui.ApplicationWindow
         width: Kirigami.Units.gridUnit * 15
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
-        modal: root.width < _drawer.width
+        modal: root.width < _drawer.width*1.5
         handleVisible: false
         closePolicy: Popup.NoAutoClose
         contentItem: MainPlaylist
@@ -880,7 +880,7 @@ Maui.ApplicationWindow
                     onPlayAll:
                     {
                         mainPlaylist.list.clear()
-                        mainPlaylist.list.sortBy = Tracks.NONE
+//                        mainPlaylist.list.sortBy = Tracks.NONE
                         mainPlaylist.list.query = foldersView.list.list.query
                         Player.playAll()
                     }

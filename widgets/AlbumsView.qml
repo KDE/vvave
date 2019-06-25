@@ -110,7 +110,7 @@ BabeGrid
     Maui.Dialog
     {
         id: albumDialog
-        parent: parent
+//        parent: parent
         maxHeight: maxWidth
         maxWidth: unit * 600
         defaultButtons: false
