@@ -20,9 +20,6 @@ BabeTable
 //    property bool autoSuggestions : bae.loadSetting("AUTOSUGGESTIONS", "BABE", false) === "true" ? true : false
     property bool autoSuggestions : false
 
-
-    Layout.fillHeight: true
-    Layout.fillWidth: true
     trackNumberVisible: false
     headBar.visible: true
     headBarExit: true

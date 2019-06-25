@@ -201,13 +201,13 @@ void AlbumsModel::fetchInformation()
 
         for(const auto &req : requests)
         {
-            pulpo.request(req);
-            loop.exec();
             if(stop)
             {
                 loop.quit();
                 return;
             }
+            pulpo.request(req);
+            loop.exec();
         }
     };
 

@@ -10,29 +10,33 @@
 namespace FLoader
 {
 
+inline QStringList getPathContents(QStringList urls, QString path)
+{
+    if(!FMH::fileExists(path))
+        return urls;
+
+    if (QFileInfo(path).isDir())
+    {
+        QDirIterator it(path, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO] << "*.m4a", QDir::Files, QDirIterator::Subdirectories);
+
+        while (it.hasNext())
+            urls << it.next();
+
+    }else if (QFileInfo(path).isFile())
+        urls << path;
+
+    return urls;
+}
+
 // returns the number of new items added to the collection db
 inline uint getTracks(const QStringList& paths)
 {
-    QStringList urls;
-
     auto db = CollectionDB::getInstance();
+    const auto urls = std::accumulate(paths.begin(), paths.end(), QStringList(), getPathContents);
 
     for(const auto &path : paths)
-    {
-        if(!FMH::fileExists(path))
-            continue;
-
-        if (QFileInfo(path).isDir())
-        {
+        if(FMH::fileExists(path))
             db->addFolder(path);
-            QDirIterator it(path, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO] << "*.m4a", QDir::Files, QDirIterator::Subdirectories);
-
-            while (it.hasNext())
-                urls << it.next();
-
-        }else if (QFileInfo(path).isFile())
-            urls << path;
-    }
 
     uint newTracks = 0;
 
@@ -40,7 +44,7 @@ inline uint getTracks(const QStringList& paths)
         return newTracks;
 
     TagInfo info;
-    for(auto url : urls)
+    for(const auto &url : urls)
     {
         if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url))
             continue;
