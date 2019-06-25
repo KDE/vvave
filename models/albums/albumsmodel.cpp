@@ -119,8 +119,6 @@ void AlbumsModel::setList()
     qDebug()<< "my LIST" ;
     this->sortList();
     emit this->postListChanged();
-
-
 }
 
 void AlbumsModel::fetchInformation()

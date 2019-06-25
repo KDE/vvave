@@ -620,10 +620,10 @@ Maui.ApplicationWindow
     globalDrawer: Maui.GlobalDrawer
     {
         id: _drawer
-        width: Kirigami.Units.gridUnit * 17
+        width: Kirigami.Units.gridUnit * 15
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
-        modal: !root.isWide
+        modal: root.width < _drawer.width
         handleVisible: false
         closePolicy: Popup.NoAutoClose
         contentItem: MainPlaylist
