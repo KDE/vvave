@@ -108,10 +108,7 @@ QString vvave::moodColor(const int &index)
 
 void vvave::scanDir(const QStringList &paths)
 {
-    this->checkCollection(paths, [=](uint size)
-    {
-        emit this->refreshTables(size);
-    });
+    this->checkCollection(paths, [=](uint size) {emit this->refreshTables(size);});
 }
 
 QStringList vvave::getSourceFolders()

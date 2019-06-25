@@ -24,7 +24,8 @@ public:
 
     enum QUERY : uint_fast8_t
     {
-        ARTISTS, ALBUMS
+        ARTISTS = FMH::MODEL_KEY::ARTIST,
+        ALBUMS = FMH::MODEL_KEY::ALBUM
     };
     Q_ENUM(QUERY)
 

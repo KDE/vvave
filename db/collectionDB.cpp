@@ -202,7 +202,7 @@ bool CollectionDB::update(const QString &tableName, const FMH::MODEL &updateData
     for (auto key : where.keys())
         condition.append(key+" = '"+where[key].toString()+"'");
 
-    QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(",")) ;
+    const QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(",")) ;
     auto query = this->getQuery(sqlQueryString);
     qDebug()<<sqlQueryString;
     return query.exec();
@@ -210,10 +210,14 @@ bool CollectionDB::update(const QString &tableName, const FMH::MODEL &updateData
 
 bool CollectionDB::update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id)
 {
-    auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(table, column, newValue.toString().replace("\"","\"\""), op.toString(), id);
+    const auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(table, column, newValue.toString().replace("\"","\"\""), op.toString(), id);
     auto query = this->getQuery(queryStr);
     return query.exec();
 }
+
+bool CollectionDB::remove(const QString &table, const QString &column, const QVariantMap &where)
+{
+    return false;}
 
 bool CollectionDB::execQuery(QSqlQuery &query) const
 {
@@ -572,7 +576,7 @@ FMH::MODEL_LIST CollectionDB::getDBData(const QStringList &urls)
     return mapList;
 }
 
-FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt)
+FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt, std::function<void(FMH::MODEL &item)> modifier)
 {
     FMH::MODEL_LIST mapList;
 
@@ -586,7 +590,8 @@ FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt)
             for(auto key : FMH::MODEL_NAME.keys())
                 if(query.record().indexOf(FMH::MODEL_NAME[key]) > -1)
                     data.insert(key, query.value(FMH::MODEL_NAME[key]).toString());
-
+            if(modifier)
+                modifier(data);
             mapList << data;
         }
 
@@ -1036,9 +1041,14 @@ void CollectionDB::removeMissingTracks()
 
 }
 
+bool CollectionDB::removeArtwork(const QString &table, const QVariantMap &item)
+{
+    return this->update(table, {{FMH::MODEL_KEY::ARTWORK, ""}}, item);
+}
+
 bool CollectionDB::removeArtist(const QString &artist)
 {
-    auto queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\" ").arg(TABLEMAP[TABLE::ARTISTS],
+    const auto queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\" ").arg(TABLEMAP[TABLE::ARTISTS],
             FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],artist);
     auto query = this->getQuery(queryTxt);
 
@@ -1048,7 +1058,7 @@ bool CollectionDB::removeArtist(const QString &artist)
 bool CollectionDB::cleanArtists()
 {
     //    delete from artists where artist in (select artist from artists except select distinct artist from tracks);
-    auto queryTxt=QString("DELETE FROM %1 WHERE %2 IN (SELECT %2 FROM %1 EXCEPT SELECT DISTINCT %2 FROM %3)").arg(
+    const auto queryTxt=QString("DELETE FROM %1 WHERE %2 IN (SELECT %2 FROM %1 EXCEPT SELECT DISTINCT %2 FROM %3)").arg(
                 TABLEMAP[TABLE::ARTISTS],
             FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],
             TABLEMAP[TABLE::TRACKS]
@@ -1062,7 +1072,7 @@ bool CollectionDB::cleanArtists()
 
 bool CollectionDB::removeFolder(const QString &url)
 {
-    auto queryTxt=QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(
+    const auto queryTxt=QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(
                 TABLEMAP[TABLE::FOLDERS],
             FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url);
 

@@ -12,7 +12,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QVariantMap>
-
+#include <functional>
 #include "../utils/bae.h"
 
 enum sourceTypes
@@ -30,7 +30,7 @@ public:
     bool insert(const QString &tableName, const QVariantMap &insertData);
     bool update(const QString &tableName, const FMH::MODEL &updateData, const QVariantMap &where);
     bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
-    bool remove();
+    bool remove(const QString &table, const QString &column, const QVariantMap &where);
 
     bool execQuery(QSqlQuery &query) const;
     bool execQuery(const QString &queryTxt);
@@ -70,7 +70,7 @@ public:
     bool favTrack(const QString &path, const bool &value);
 
     FMH::MODEL_LIST getDBData(const QStringList &urls);
-    FMH::MODEL_LIST getDBData(const QString &queryTxt);
+    FMH::MODEL_LIST getDBData(const QString &queryTxt, std::function<void(FMH::MODEL &item)> modifier = nullptr);
     QVariantList getDBDataQML(const QString &queryTxt);
     static QStringList dataToList(const FMH::MODEL_LIST &list, const FMH::MODEL_KEY &key);
 
@@ -98,6 +98,7 @@ public:
     Q_INVOKABLE bool removePlaylistTrack(const QString &url, const QString &playlist);
     Q_INVOKABLE bool removePlaylist(const QString &playlist);
     Q_INVOKABLE void removeMissingTracks();
+    bool removeArtwork(const QString &table, const QVariantMap &item);
     bool removeArtist(const QString &artist);
     bool cleanArtists();
     bool removeAlbum(const QString &album, const QString &artist);

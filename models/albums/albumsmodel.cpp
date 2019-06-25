@@ -9,10 +9,7 @@ AlbumsModel::AlbumsModel(QObject *parent) : BaseList(parent)
     connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
 
-AlbumsModel::~AlbumsModel()
-{
-
-}
+AlbumsModel::~AlbumsModel() {}
 
 FMH::MODEL_LIST AlbumsModel::items() const
 {
@@ -25,8 +22,6 @@ void AlbumsModel::setQuery(const QUERY &query)
         return;
 
     this->query = query;
-    qDebug()<< "setting query"<< this->query;
-
     emit this->queryChanged();
 }
 
@@ -42,9 +37,9 @@ void AlbumsModel::setSortBy(const SORTBY &sort)
 
     this->sort = sort;
 
-    this->preListChanged();
+    emit this->preListChanged();
     this->sortList();
-    this->postListChanged();
+    emit this->postListChanged();
     emit this->sortByChanged();
 }
 
@@ -57,10 +52,9 @@ void AlbumsModel::sortList()
 {
     const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
     qDebug()<< "SORTING LIST BY"<< this->sort;
-    qSort(this->list.begin(), this->list.end(), [key](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
+    std::sort(this->list.begin(), this->list.end(), [key](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
     {
-        auto role = key;
-
+        const auto role = key;
         switch(role)
         {
         case FMH::MODEL_KEY::RELEASEDATE:
@@ -72,14 +66,11 @@ void AlbumsModel::sortList()
 
         case FMH::MODEL_KEY::ADDDATE:
         {
-            auto currentTime = QDateTime::currentDateTime();
+            const auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
+            const auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
 
-            auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
-            auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
-
-            if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
+            if(date1.secsTo(QDateTime::currentDateTime()) <  date2.secsTo(QDateTime::currentDateTime()))
                 return true;
-
             break;
         }
 
@@ -103,6 +94,8 @@ void AlbumsModel::sortList()
     });
 }
 
+
+
 void AlbumsModel::setList()
 {
     emit this->preListChanged();
@@ -113,10 +106,14 @@ void AlbumsModel::setList()
     else if(this->query == AlbumsModel::QUERY::ARTISTS)
         m_Query = "select * from artists order by artist asc";
 
-    this->list = this->db->getDBData(m_Query);
-
-
-    qDebug()<< "my LIST" ;
+    this->list = this->db->getDBData(m_Query, [=](FMH::MODEL &item)
+    {
+        if(!FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
+        {
+            this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FM::toMap(item));
+            item[FMH::MODEL_KEY::ARTWORK] = "";
+        }
+    });
     this->sortList();
     emit this->postListChanged();
 }
@@ -125,7 +122,6 @@ void AlbumsModel::fetchInformation()
 {
     qDebug() << "RNUNGING BRAIN EFFORRTS";
     QFutureWatcher<void> *watcher = new QFutureWatcher<void>;
-
     QObject::connect(watcher, &QFutureWatcher<void>::finished, [=]()
     {
         watcher->deleteLater();
@@ -143,8 +139,9 @@ void AlbumsModel::fetchInformation()
 
             if(BAE::artworkCache(album, FMH::MODEL_KEY::ALBUM))
             {
+                qDebug()<< "cache artwork done" << album;
                 db->insertArtwork(album);
-                this->updateArtwork(index, album[FMH::MODEL_KEY::ARTWORK]);
+                emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
                 continue;
             }
 
