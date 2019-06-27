@@ -16,7 +16,7 @@ function playTrack(index)
 
             if(currentTrack.artwork && currentTrack.artwork.length && currentTrack.artwork !== "NONE")
                 currentArtwork =  currentTrack.artwork
-//            else bae.loadCover(currentTrack.url)
+            //            else bae.loadCover(currentTrack.url)
 
             progressBar.enabled = true
 
@@ -24,8 +24,8 @@ function playTrack(index)
             {
                 root.title = currentTrack.title + " - " +currentTrack.artist
 
-//                if(!root.active)
-//                    bae.notifySong(currentTrack.url)
+                //                if(!root.active)
+                //                    bae.notifySong(currentTrack.url)
             }
 
             //            if(currentTrack.lyrics.length < 1)
@@ -39,16 +39,12 @@ function playTrack(index)
 }
 
 function queueTracks(tracks)
-{
-    if(tracks)
+{    
+    if(tracks && tracks.length > 0)
     {
-        if(tracks.length > 0)
-        {
-            onQueue++
-            console.log(onQueue)
-            appendTracksAt(tracks, currentTrackIndex+1)
-            root.notify("", "Queue", tracks.length + " tracks added put on queue")
-        }
+        appendTracksAt(tracks, currentTrackIndex+onQueue+1)
+        onQueue++
+        root.notify("", "Queue", tracks.length + " tracks added put on queue")
     }
 }
 

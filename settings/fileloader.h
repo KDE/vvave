@@ -10,7 +10,7 @@
 namespace FLoader
 {
 
-inline QStringList getPathContents(QStringList urls, QString path)
+inline QStringList getPathContents(QStringList &urls, const QString &path)
 {
     if(!FMH::fileExists(path))
         return urls;

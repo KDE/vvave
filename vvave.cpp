@@ -123,23 +123,22 @@ void vvave::openUrls(const QStringList &urls)
     QVariantList data;
     TagInfo info;
 
-    for(QString url : urls)
+    for(const auto &url : urls)
         if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url))
         {
             data << FM::toMap(this->db->getDBData(QStringList() << url).first());
-        }
-        else
+        }else
         {
             if(info.feed(url))
             {
-                auto album = BAE::fixString(info.getAlbum());
-                auto track= info.getTrack();
-                auto title = BAE::fixString(info.getTitle()); /* to fix*/
-                auto artist = BAE::fixString(info.getArtist());
-                auto genre = info.getGenre();
-                auto sourceUrl = QFileInfo(url).dir().path();
-                auto duration = info.getDuration();
-                auto year = info.getYear();
+                const auto album = BAE::fixString(info.getAlbum());
+                const auto track= info.getTrack();
+                const auto title = BAE::fixString(info.getTitle()); /* to fix*/
+                const auto artist = BAE::fixString(info.getArtist());
+                const auto genre = info.getGenre();
+                const auto sourceUrl = QFileInfo(url).dir().path();
+                const auto duration = info.getDuration();
+                const auto year = info.getYear();
 
                 data << QVariantMap({
                                         {FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url},
@@ -155,8 +154,6 @@ void vvave::openUrls(const QStringList &urls)
                                     });
             }
         }
-
-    qDebug()<<"opening urls " << urls << data;
 
     emit this->openFiles(data);
 }

@@ -82,7 +82,6 @@ function notify(title, body)
         bae.notify(title, body)
 }
 
-
 function addPlaylist(playlist)
 {
     playlistsView.playlistViewModel.model.insert(0, playlist)

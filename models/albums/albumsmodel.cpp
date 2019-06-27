@@ -121,16 +121,14 @@ void AlbumsModel::fetchInformation()
 {
     qDebug() << "RNUNGING BRAIN EFFORRTS";
     QFutureWatcher<void> *watcher = new QFutureWatcher<void>;
-    QObject::connect(watcher, &QFutureWatcher<void>::finished, [=]()
-    {
-        watcher->deleteLater();
-    });
+    QObject::connect(watcher, &QFutureWatcher<void>::finished,
+                     watcher, &QFutureWatcher<void>::deleteLater);
 
     auto func = [=]()
     {
         QList<PULPO::REQUEST> requests;
         int index = -1;
-        for(auto &album : this->list)
+        for(auto album : this->list)
         {
             index++;
             if(!album[FMH::MODEL_KEY::ARTWORK].isEmpty())
@@ -138,7 +136,6 @@ void AlbumsModel::fetchInformation()
 
             if(BAE::artworkCache(album, FMH::MODEL_KEY::ALBUM))
             {
-                qDebug()<< "cache artwork done" << album;
                 db->insertArtwork(album);
                 emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
                 continue;

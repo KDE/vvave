@@ -448,8 +448,8 @@ inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MO
     QDirIterator it(CachePath, QDir::Files, QDirIterator::NoIteratorFlags);
     while (it.hasNext())
     {
-        auto file = it.next();
-        auto fileName = QFileInfo(file).baseName();
+        const auto file = it.next();
+        const auto fileName = QFileInfo(file).baseName();
         switch(type)
         {
         case FMH::MODEL_KEY::ALBUM:

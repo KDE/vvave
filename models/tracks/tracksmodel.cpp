@@ -19,8 +19,6 @@ void TracksModel::setQuery(const QString &query)
         return;
 
     this->query = query;
-    qDebug()<< "setting query"<< this->query;
-
     emit this->queryChanged();
 }
 
@@ -36,9 +34,9 @@ void TracksModel::setSortBy(const SORTBY &sort)
 
     this->sort = sort;
 
-    this->preListChanged();
+    emit this->preListChanged();
     this->sortList();
-    this->postListChanged();
+    emit this->postListChanged();
     emit this->sortByChanged();
 }
 
@@ -53,26 +51,23 @@ void TracksModel::sortList()
         return;
 
     const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
-    qDebug()<< "SORTING LIST BY"<< this->sort;
     qSort(this->list.begin(), this->list.end(), [key](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
     {
-        auto role = key;
-
-        switch(role)
+        switch(key)
         {
         case FMH::MODEL_KEY::RELEASEDATE:
         case FMH::MODEL_KEY::RATE:
         case FMH::MODEL_KEY::FAV:
         case FMH::MODEL_KEY::COUNT:
         {
-            if(e1[role].toInt() > e2[role].toInt())
+            if(e1[key].toInt() > e2[key].toInt())
                 return true;
             break;
         }
 
         case FMH::MODEL_KEY::TRACK:
         {
-            if(e1[role].toInt() < e2[role].toInt())
+            if(e1[key].toInt() < e2[key].toInt())
                 return true;
             break;
         }
@@ -81,8 +76,8 @@ void TracksModel::sortList()
         {
             auto currentTime = QDateTime::currentDateTime();
 
-            auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
-            auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
+            auto date1 = QDateTime::fromString(e1[key], Qt::TextDate);
+            auto date2 = QDateTime::fromString(e2[key], Qt::TextDate);
 
             if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
                 return true;
@@ -95,8 +90,8 @@ void TracksModel::sortList()
         case FMH::MODEL_KEY::ALBUM:
         case FMH::MODEL_KEY::FORMAT:
         {
-            const auto str1 = QString(e1[role]).toLower();
-            const auto str2 = QString(e2[role]).toLower();
+            const auto str1 = QString(e1[key]).toLower();
+            const auto str2 = QString(e2[key]).toLower();
 
             if(str1 < str2)
                 return true;
@@ -104,7 +99,7 @@ void TracksModel::sortList()
         }
 
         default:
-            if(e1[role] < e2[role])
+            if(e1[key] < e2[key])
                 return true;
         }
 
@@ -115,10 +110,7 @@ void TracksModel::sortList()
 void TracksModel::setList()
 {
     emit this->preListChanged();
-
     this->list = this->db->getDBData(this->query);
-
-    qDebug()<< "my LIST" ;
     this->sortList();
     emit this->postListChanged();
 }
@@ -133,15 +125,8 @@ QVariantMap TracksModel::get(const int &index) const
 QVariantList TracksModel::getAll()
 {
     QVariantList res;
-
-    for(auto item : this->list)
-    {
-        QVariantMap map;
-        for(auto key : item.keys())
-            map.insert(FMH::MODEL_NAME[key], item[key]);
-
-        res << map;
-    }
+    for(const auto &item : this->list)
+        res << FM::toMap(item);
 
     return res;
 }
@@ -151,17 +136,8 @@ void TracksModel::append(const QVariantMap &item)
     if(item.isEmpty())
         return;
 
-    emit this->preItemAppended();
-
-    FMH::MODEL model;
-    for(auto key : item.keys())
-        model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
-
-    qDebug() << "Appending item to list" << item;
-    this->list << model;
-
-    qDebug()<< this->list;
-
+    emit this->preItemAppended();   
+    this->list << FM::toModel(item);
     emit this->postItemAppended();
 }
 
@@ -173,29 +149,15 @@ void TracksModel::append(const QVariantMap &item, const int &at)
     if(at > this->list.size() || at < 0)
         return;
 
-    qDebug()<< "trying to append at" << at << item["title"];
-
     emit this->preItemAppendedAt(at);
-
-    FMH::MODEL model;
-    for(auto key : item.keys())
-        model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
-
-    this->list.insert(at, model);
-
+    this->list.insert(at, FM::toModel(item));
     emit this->postItemAppended();
 }
 
 void TracksModel::appendQuery(const QString &query)
 {
-    if(query.isEmpty() || query == this->query)
-        return;
-
-    this->query = query;
-
     emit this->preListChanged();
     this->list << this->db->getDBData(query);
-
     emit this->postListChanged();
 }
 

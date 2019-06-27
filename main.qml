@@ -623,7 +623,7 @@ Maui.ApplicationWindow
         width: Kirigami.Units.gridUnit * 15
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
-        modal: root.width < _drawer.width*1.5
+        modal: !isWide
         handleVisible: false
         closePolicy: Popup.NoAutoClose
         contentItem: MainPlaylist
