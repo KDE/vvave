@@ -105,9 +105,9 @@ void AlbumsModel::setList()
         m_Query = "select * from artists order by artist asc";
 
     //get albums data with modifier for missing images for artworks
-    this->list = this->db->getDBData(m_Query, [=](FMH::MODEL &item)
+    this->list = this->db->getDBData(m_Query, [&](FMH::MODEL &item)
     {
-        if(!FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
+        if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty() && !FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
         {
             this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FM::toMap(item));
             item[FMH::MODEL_KEY::ARTWORK] = "";
@@ -146,7 +146,7 @@ void AlbumsModel::fetchInformation()
             request.ontology = this->query == AlbumsModel::QUERY::ALBUMS ? PULPO::ONTOLOGY::ALBUM : PULPO::ONTOLOGY::ARTIST;
             request.services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify, PULPO::SERVICES::MusicBrainz};
             request.info = {PULPO::INFO::ARTWORK};
-            request.callback = [=](PULPO::REQUEST request, PULPO::RESPONSES responses)
+            request.callback = [&, index](PULPO::REQUEST request, PULPO::RESPONSES responses)
             {
                 qDebug() << "DONE WITH " << request.track ;
 
@@ -156,12 +156,12 @@ void AlbumsModel::fetchInformation()
                     {
                         qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM];
                         auto downloader = new FMH::Downloader;
-                        QObject::connect(downloader, &FMH::Downloader::fileSaved, [=](QString path)
+                        QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, index, request, downloader = std::move(downloader)](QString path)
                         {
                             qDebug()<< "Saving artwork file to" << path;
                             FMH::MODEL newTrack = request.track;
                             newTrack[FMH::MODEL_KEY::ARTWORK] = path;
-                            db->insertArtwork(newTrack);
+                            this->db->insertArtwork(newTrack);
                             this->updateArtwork(index, path);
                             downloader->deleteLater();
                         });
@@ -182,25 +182,26 @@ void AlbumsModel::fetchInformation()
         Pulpo pulpo;
         QEventLoop loop;
         QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
-        bool stop = false;
+//        bool stop = false;
 
-        QObject::connect(this, &AlbumsModel::destroyed, [&]()
-        {
-            qDebug()<< stop << &stop;
-            stop = true;
-            qDebug()<< stop << &stop;
+//        QObject::connect(this, &AlbumsModel::destroyed, [&]()
+//        {
+//            qDebug()<< stop << &stop;
+//            stop = true;
+//            qDebug()<< stop << &stop;
 
-        });
+//        });
 
         for(const auto &req : requests)
         {
-            if(stop)
-            {
-                loop.quit();
-                return;
-            }
+
             pulpo.request(req);
             loop.exec();
+//            if(stop)
+//            {
+//                loop.quit();
+//                return;
+//            }
         }
     };
 
