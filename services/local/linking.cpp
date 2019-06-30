@@ -101,7 +101,7 @@ QString Linking::getDeviceName()
 
 void Linking::ask(int code, QString msg)
 {
-    bDebug::Instance()->msg("Sending msg to server: "+QString::number(code)+" :: "+ msg);
+//    bDebug::Instance()->msg("Sending msg to server: "+QString::number(code)+" :: "+ msg);
     client.sendTextMessage(stringify(packResponse(static_cast<LINK::CODE>(code), msg)));
 }
 

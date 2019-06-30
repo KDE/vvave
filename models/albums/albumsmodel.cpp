@@ -124,7 +124,7 @@ void AlbumsModel::fetchInformation()
     QObject::connect(watcher, &QFutureWatcher<void>::finished,
                      watcher, &QFutureWatcher<void>::deleteLater);
 
-    auto func = [=]()
+    auto func = [&]()
     {
         QList<PULPO::REQUEST> requests;
         int index = -1;
@@ -136,7 +136,7 @@ void AlbumsModel::fetchInformation()
 
             if(BAE::artworkCache(album, FMH::MODEL_KEY::ALBUM))
             {
-                db->insertArtwork(album);
+                this->db->insertArtwork(album);
                 emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
                 continue;
             }
@@ -182,26 +182,25 @@ void AlbumsModel::fetchInformation()
         Pulpo pulpo;
         QEventLoop loop;
         QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
-//        bool stop = false;
+        bool stop = false;
 
-//        QObject::connect(this, &AlbumsModel::destroyed, [&]()
-//        {
-//            qDebug()<< stop << &stop;
-//            stop = true;
-//            qDebug()<< stop << &stop;
+        QObject::connect(this, &AlbumsModel::destroyed, [&stop]()
+        {
+            qDebug()<< stop << &stop;
+            stop = true;
+            qDebug()<< stop << &stop;
 
-//        });
+        });
 
         for(const auto &req : requests)
         {
-
             pulpo.request(req);
             loop.exec();
-//            if(stop)
-//            {
-//                loop.quit();
-//                return;
-//            }
+            if(stop)
+            {
+                loop.quit();
+                return;
+            }
         }
     };
 

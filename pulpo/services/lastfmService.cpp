@@ -110,16 +110,14 @@ void lastfm::parseArtist(const QByteArray &array)
         if (n.isElement())
         {
             //Here retrieve the artist image
-
             if(n.nodeName() == "image" && n.hasAttributes())
             {
                 if(this->request.info.contains(INFO::ARTWORK))
                 {
-                    auto imgSize = n.attributes().namedItem("size").nodeValue();
-
+                    const auto imgSize = n.attributes().namedItem("size").nodeValue();
                     if (imgSize == "large" && n.isElement())
                     {
-                        auto artistArt_url = n.toElement().text();
+                        const auto artistArt_url = n.toElement().text();
                         this->responses << PULPO::RESPONSE {CONTEXT::IMAGE, artistArt_url};
 
                         if(this->request.info.size() == 1) break;
@@ -262,11 +260,11 @@ void lastfm::parseAlbum(const QByteArray &array)
             {
                 if(this->request.info.contains(INFO::ARTWORK))
                 {
-                    auto imgSize = n.attributes().namedItem("size").nodeValue();
+                    const auto imgSize = n.attributes().namedItem("size").nodeValue();
 
                     if (imgSize == "large" && n.isElement())
                     {
-                        auto albumArt_url = n.toElement().text();
+                        const auto albumArt_url = n.toElement().text();
                         this->responses << PULPO::RESPONSE {CONTEXT::IMAGE, albumArt_url};
 
                         if(this->request.info.size() == 1) break;
@@ -281,7 +279,7 @@ void lastfm::parseAlbum(const QByteArray &array)
             {
                 if(this->request.info.contains(INFO::WIKI))
                 {
-                    auto albumWiki = n.childNodes().item(1).toElement().text();
+                   const auto albumWiki = n.childNodes().item(1).toElement().text();
                     //qDebug()<<"Fetching AlbumWiki LastFm[]";
 
                     this->responses << PULPO::RESPONSE {CONTEXT::WIKI, albumWiki};

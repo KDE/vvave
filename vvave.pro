@@ -57,9 +57,6 @@ SOURCES += main.cpp \
     services/local/socket.cpp \
     services/web/youtube.cpp \
     vvave.cpp \
-    db/conthread.cpp \
-    services/web/babeit.cpp \
-    utils/babeconsole.cpp \
     services/local/youtubedl.cpp \
     services/local/linking.cpp \
     services/web/Spotify/spotify.cpp \
@@ -90,10 +87,6 @@ HEADERS += \
     services/local/socket.h \
     services/web/youtube.h \
     vvave.h \
-    db/conthread.h \
-    services/web/babeit.h \
-    utils/babeconsole.h \
-    utils/singleton.h \
     services/local/youtubedl.h \
     services/local/linking.h \
     services/web/Spotify/spotify.h \

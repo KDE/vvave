@@ -385,7 +385,7 @@ Maui.ApplicationWindow
         //            }
         //        },
 
-        Maui.MenuItem
+        MenuItem
         {
             text: qsTr("Folders")
             icon.name: "folder"
@@ -404,7 +404,7 @@ Maui.ApplicationWindow
         //            }
         //        },
 
-        Maui.MenuItem
+        MenuItem
         {
             text: qsTr("YouTube")
             icon.name: "internet-services"
@@ -437,14 +437,14 @@ Maui.ApplicationWindow
 
         MenuSeparator{},
 
-        Maui.MenuItem
+        MenuItem
         {
             text: qsTr("Sources...")
             icon.name: "folder-add"
             onTriggered: sourcesDialog.open()
         },
 
-        Maui.MenuItem
+        MenuItem
         {
             text: qsTr("Open...")
             icon.name: "folder-add"
@@ -457,31 +457,31 @@ Maui.ApplicationWindow
                     vvave.openUrls(paths)
                 })
             }
-        }
+        }/*,
 
-        //        Maui.Menu
-        //        {
-        //            title: qsTr("Collection")
-        //            //            icon.name: "settings-configure"
+                Menu
+                {
+                    title: qsTr("Collection")
+                    //            icon.name: "settings-configure"
 
-        //            Maui.MenuItem
-        //            {
-        //                text: qsTr("Re-Scan")
-        //                onTriggered: bae.refreshCollection();
-        //            }
+                    MenuItem
+                    {
+                        text: qsTr("Re-Scan")
+                        onTriggered: bae.refreshCollection();
+                    }
 
-        //            Maui.MenuItem
-        //            {
-        //                text: qsTr("Refresh...")
-        //                onTriggered: H.refreshCollection();
-        //            }
+                    MenuItem
+                    {
+                        text: qsTr("Refresh...")
+                        onTriggered: H.refreshCollection();
+                    }
 
-        //            Maui.MenuItem
-        //            {
-        //                text: qsTr("Clean")
-        //                onTriggered: bae.removeMissingTracks();
-        //            }
-        //        },
+                    MenuItem
+                    {
+                        text: qsTr("Clean")
+                        onTriggered: bae.removeMissingTracks();
+                    }
+                }*/
 
         //        Maui.Menu
         //        {

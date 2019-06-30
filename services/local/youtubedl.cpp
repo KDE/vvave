@@ -19,7 +19,7 @@
 #include "youtubedl.h"
 #include "../../pulpo/pulpo.h"
 #include "../../db/collectionDB.h"
-#include "../../utils/babeconsole.h"
+//#include "../../utils/babeconsole.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
@@ -54,7 +54,7 @@ void youtubedl::fetch(const QString &json)
     auto playlist = data.value("playlist").toString().trimmed();
     auto page = data.value("page").toString().replace('"',"").trimmed();
 
-    bDebug::Instance()->msg("Fetching from Youtube: "+id+" "+title+" "+artist);
+//    bDebug::Instance()->msg("Fetching from Youtube: "+id+" "+title+" "+artist);
 
     FMH::MODEL infoMap;
     infoMap.insert(FMH::MODEL_KEY::TITLE, title);
@@ -86,7 +86,7 @@ void youtubedl::fetch(const QString &json)
         auto command = ydl;
 
         command = command.replace("$$$",infoMap[FMH::MODEL_KEY::ID])+" "+infoMap[FMH::MODEL_KEY::ID];
-        bDebug::Instance()->msg(command);
+//        bDebug::Instance()->msg(command);
         process->start(command);
     }
 }
