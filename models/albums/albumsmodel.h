@@ -41,6 +41,7 @@ public:
     AlbumsModel::SORTBY getSortBy() const;
 
 private:
+    bool stopThreads = false;
     CollectionDB *db;
     FMH::MODEL_LIST list;
     void sortList();

@@ -12,7 +12,7 @@ BabeTable
     trackDuration: true
     trackRating: true
     headBar.visible: !holder.visible
-    headBarTitle: count + " tracks"
+//    headBarTitle: count + " tracks"
     headBarExit: false
     coverArtVisible: false
     holder.emoji: "qrc:/assets/MusicCloud.png"

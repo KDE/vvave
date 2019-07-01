@@ -66,7 +66,7 @@ function refreshTracks()
 function refreshAlbums()
 {
     albumsView.list.refresh()
-    albumsView.list.fetchInformation();
+//    albumsView.list.fetchInformation();
 }
 
 function refreshArtists()

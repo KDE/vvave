@@ -7,7 +7,7 @@ import "../view_models/BabeTable"
 
 import "../db/Queries.js" as Q
 import "../utils/Help.js" as H
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import TracksList 1.0
 import AlbumsList 1.0
@@ -36,64 +36,53 @@ BabeGrid
     visible: true
     //        topPadding: space.large
     onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
-    headBar.visible: count
+    headBar.visible: false
     headBarExit: false
-    headBar.leftContent: [
-//        Maui.ToolButton
+//    headBar.rightContent: Kirigami.ActionToolBar
+//    {
+//        Layout.fillWidth: true
+//        actions:   [
+//            Kirigami.Action
 //        {
-//            id : playAllBtn
-//            visible : headBar.visible && albumsViewGrid.count > 0
-//            anim : true
-//            iconName : "media-playlist-play"
-//            onClicked : playAll()
-//        },
+//            id: sortBtn
+//            icon.name: "view-sort"
+//                text: qsTr("Sort")
 
-        Maui.ToolButton
-        {
-            id: sortBtn
-            anim: true
-            iconName: "view-sort"
 
-            onClicked: sortMenu.popup()
+//                    Kirigami.Action
+//                {
+//                    text: qsTr("Artist")
+//                    checkable: true
+//                    checked: list.sortBy === Albums.ARTIST
+//                    onTriggered: list.sortBy = Albums.ARTIST
+//                }
 
-            Maui.Menu
-            {
-                id: sortMenu
+//                Kirigami.Action
+//                {
+//                    text: qsTr("Album")
+//                    checkable: true
+//                    checked: list.sortBy === Albums.ALBUM
+//                    onTriggered: list.sortBy = Albums.ALBUM
+//                }
 
-                Maui.MenuItem
-                {
-                    text: qsTr("Artist")
-                    checkable: true
-                    checked: list.sortBy === Albums.ARTIST
-                    onTriggered: list.sortBy = Albums.ARTIST
-                }
+//                Kirigami.Action
+//                {
+//                    text: qsTr("Release date")
+//                    checkable: true
+//                    checked: list.sortBy === Albums.RELEASEDATE
+//                    onTriggered: list.sortBy = Albums.RELEASEDATE
+//                }
 
-                Maui.MenuItem
-                {
-                    text: qsTr("Album")
-                    checkable: true
-                    checked: list.sortBy === Albums.ALBUM
-                    onTriggered: list.sortBy = Albums.ALBUM
-                }
-
-                Maui.MenuItem
-                {
-                    text: qsTr("Release date")
-                    checkable: true
-                    checked: list.sortBy === Albums.RELEASEDATE
-                    onTriggered: list.sortBy = Albums.RELEASEDATE
-                }
-
-                Maui.MenuItem
-                {
-                    text: qsTr("Add date")
-                    checkable: true
-                    checked: list.sortBy === Albums.ADDDATE
-                    onTriggered: list.sortBy = Albums.ADDDATE
-                }
-            }
-        }
-    ]
+//                Kirigami.Action
+//                {
+//                    text: qsTr("Add date")
+//                    checkable: true
+//                    checked: list.sortBy === Albums.ADDDATE
+//                    onTriggered: list.sortBy = Albums.ADDDATE
+//                }
+//            }
+//    ]
+//    }
 
 //    headBar.rightContent: [
 
@@ -110,7 +99,7 @@ BabeGrid
     Maui.Dialog
     {
         id: albumDialog
-//        parent: parent
+        parent: parent
         maxHeight: maxWidth
         maxWidth: unit * 600
         defaultButtons: false
@@ -179,6 +168,7 @@ BabeGrid
             Maui.TagsBar
             {
                 id: tagBar
+                visible:false
                 Layout.fillWidth: true
                 allowEditMode: false
                 onTagClicked: H.searchFor("tag:"+tag)

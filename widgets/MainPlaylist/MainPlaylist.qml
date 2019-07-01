@@ -116,6 +116,7 @@ Maui.Page
             Layout.alignment: Qt.AlignBottom | Qt.AlignTop
             focus: true
             headBar.visible: false
+            footBar.visible: false
             quickPlayVisible: false
             coverArtVisible: true
             trackRating: true

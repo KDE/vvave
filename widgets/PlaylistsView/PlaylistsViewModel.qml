@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import PlaylistsList 1.0
 import BaseModel 1.0
@@ -36,20 +36,28 @@ BabeList
     headBar.plegable: false
 
 
-    headBar.rightContent: [
-        Maui.ToolButton
-        {
-            iconName: "list-remove"
-            onClicked: removePlaylist()
-        },
-        Maui.ToolButton
-        {
-            id : createPlaylistBtn
-            anim : true
-            iconName : "list-add"
-            onClicked : newPlaylistDialog.open()
-        }
-    ]
+    headBar.rightContent: Kirigami.ActionToolBar
+    {
+        Layout.fillWidth: true
+        actions:
+            [
+            Kirigami.Action
+            {
+                text: qsTr("Remove")
+                icon.name: "list-remove"
+                onTriggered: removePlaylist()
+            },
+            Kirigami.Action
+            {
+                id : createPlaylistBtn
+                text: qsTr("Add")
+                icon.name : "list-add"
+                onTriggered : newPlaylistDialog.open()
+            }
+        ]
+    }
+
+
     BaseModel
     {
         id: _playlistsModel

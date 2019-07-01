@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import BaseModel 1.0
@@ -56,30 +56,33 @@ BabeList
 
     focus: true
 
-    headBar.plegable: false
-    headBar.leftContent: [
-        Maui.ToolButton
-        {
-            id : playAllBtn
-            visible : headBar.visible && count > 0
-            anim : true
-            iconName : "media-playlist-play"
-            onClicked : playAll()
-        },
+    //headBar.middleStrech: false
+    headBar.leftSretch: false
 
-        Maui.ToolButton
-        {
-            id: sortBtn
-            anim: true
-            iconName: "view-sort"
-
-            onClicked: sortMenu.popup()
-
-            Maui.Menu
+    headBar.rightContent: Kirigami.ActionToolBar
+    {
+        Layout.fillWidth: true
+        actions:   [
+            Kirigami.Action
             {
-                id: sortMenu
-
-                Maui.MenuItem
+                id : playAllBtn
+                text: qsTr("Play all")
+                icon.name : "media-playlist-play"
+                onTriggered: playAll()
+            },
+            Kirigami.Action
+            {
+                id: appendBtn
+                text: qsTr("Append")
+                icon.name : "media-playlist-append"//"media-repeat-track-amarok"
+                onTriggered: appendAll()
+            },
+            Kirigami.Action
+            {
+                id: sortBtn
+                text: qsTr("Sort")
+                icon.name: "view-sort"
+                Kirigami.Action
                 {
                     text: qsTr("Title")
                     checkable: true
@@ -87,7 +90,7 @@ BabeList
                     onTriggered: list.sortBy = Tracks.TITLE
                 }
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Track")
                     checkable: true
@@ -95,7 +98,7 @@ BabeList
                     onTriggered: list.sortBy = Tracks.TRACK
                 }
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Artist")
                     checkable: true
@@ -103,7 +106,7 @@ BabeList
                     onTriggered: list.sortBy = Tracks.ARTIST
                 }
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Album")
                     checkable: true
@@ -111,7 +114,7 @@ BabeList
                     onTriggered: list.sortBy = Tracks.ALBUM
                 }
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Most played")
                     checkable: true
@@ -119,7 +122,7 @@ BabeList
                     onTriggered: list.sortBy = Tracks.COUNT
                 }
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Rate")
                     checkable: true
@@ -127,7 +130,7 @@ BabeList
                     onTriggered: list.sortBy = Tracks.RATE
                 }
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Fav")
                     checkable: true
@@ -135,7 +138,7 @@ BabeList
                     onTriggered: list.sortBy = Tracks.FAV
                 }
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Release date")
                     checkable: true
@@ -143,7 +146,7 @@ BabeList
                     onTriggered: list.sortBy = Tracks.RELEASEDATE
                 }
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Add date")
                     checkable: true
@@ -151,38 +154,28 @@ BabeList
                     onTriggered: list.sortBy = Tracks.ADDDATE
                 }
 
-                MenuSeparator{}
 
-                Maui.MenuItem
+                Kirigami.Action
                 {
                     text: qsTr("Group")
                     checkable: true
                     checked: group
                     onTriggered: group = !group
                 }
+            },
+
+            Kirigami.Action
+            {
+                text: qsTr("Select")
+                icon.name: "item-select"
+                onTriggered: selectionMode = !selectionMode
+                checkable: false
+                checked: selectionMode
             }
-        }
-    ]
+        ]
+    }
 
-    headBar.rightContent: [
 
-        Maui.ToolButton
-        {
-            id: appendBtn
-            visible: headBar.visible && count > 0
-            anim : true
-            iconName : "media-playlist-append"//"media-repeat-track-amarok"
-            onClicked: appendAll()
-        },
-
-        Maui.ToolButton
-        {
-            iconName: "item-select"
-            onClicked: selectionMode = !selectionMode
-            checkable: true
-            checked: selectionMode
-        }
-    ]
 
     Maui.Dialog
     {

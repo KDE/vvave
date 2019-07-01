@@ -107,14 +107,14 @@ void AlbumsModel::setList()
     //get albums data with modifier for missing images for artworks
     this->list = this->db->getDBData(m_Query, [&](FMH::MODEL &item)
     {
-        if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty() && !FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
-        {
-            this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FM::toMap(item));
-            item[FMH::MODEL_KEY::ARTWORK] = "";
-        }
-    });
-    this->sortList();
-    emit this->postListChanged();
+            if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty() && !FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
+    {
+        this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FM::toMap(item));
+        item[FMH::MODEL_KEY::ARTWORK] = "";
+    }
+});
+this->sortList();
+emit this->postListChanged();
 }
 
 void AlbumsModel::fetchInformation()
@@ -124,8 +124,11 @@ void AlbumsModel::fetchInformation()
     QObject::connect(watcher, &QFutureWatcher<void>::finished,
                      watcher, &QFutureWatcher<void>::deleteLater);
 
-    auto func = [&]()
+    //    QObject::connect(this, &AlbumsModel::destroyed, watcher, &QFutureWatcher<void>::waitForFinished);
+
+    auto func = [&, stop = bool()]() mutable
     {
+        stop = false;
         QList<PULPO::REQUEST> requests;
         int index = -1;
         for(auto album : this->list)
@@ -182,7 +185,6 @@ void AlbumsModel::fetchInformation()
         Pulpo pulpo;
         QEventLoop loop;
         QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
-        bool stop = false;
 
         QObject::connect(this, &AlbumsModel::destroyed, [&stop]()
         {
@@ -195,11 +197,18 @@ void AlbumsModel::fetchInformation()
         for(const auto &req : requests)
         {
             pulpo.request(req);
-            loop.exec();
             if(stop)
             {
-                loop.quit();
-                return;
+                qDebug()<< "TRYING EXITING THREAD LOADINFO" << loop.isRunning();
+
+                if(loop.isRunning())
+                    loop.quit();
+
+                qDebug()<< "EXITING THREAD LOADINFO" << loop.isRunning();
+                break;
+            }else {
+                loop.exec();
+
             }
         }
     };

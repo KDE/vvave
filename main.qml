@@ -155,61 +155,92 @@ Maui.ApplicationWindow
     /* UI */
     altToolBars: false
     accentColor: babeColor
-    headBarFGColor: altColorText
-    headBarBGColor: "#212121"
-    altColorText: darkTextColor
+    //    headBarFGColor: altColorText
+    //    headBarBGColor: "#212121"
+    //    altColorText: darkTextColor
 
     floatingBar: false
 
     headBar.spacing: space.big
-    headBar.middleContent : [
-        Maui.ToolButton
-        {
-            iconName: "view-media-track"
-            active: currentView === viewsIndex.tracks
-            showIndicator: true
-            iconColor: active ? babeColor : altColorText
-            onClicked: currentView = viewsIndex.tracks
-            text: qsTr("Tracks")
-            colorScheme.highlightColor: babeColor
-            spacing: 0
+    headBar.middleContent : Kirigami.ActionToolBar
+    {
 
-        },
+        hiddenActions: [
 
-        Maui.ToolButton
-        {
-            text: qsTr("Albums")
-            active: currentView === viewsIndex.albums
-            iconName: /*"album"*/ "view-media-album-cover"
-            iconColor: currentView === viewsIndex.albums ? babeColor : altColorText
-            onClicked: currentView = viewsIndex.albums
-            colorScheme.highlightColor: babeColor
-            showIndicator: true
-        },
+            Kirigami.Action
+            {
+                text: qsTr("Folders")
+                icon.name: "folder"
+                checked: currentView === viewsIndex.folders
+                checkable: false
+                onTriggered: currentView = viewsIndex.folders
+            },
 
-        Maui.ToolButton
-        {
-            text: qsTr("Artists")
-            active: currentView === viewsIndex.artists
-            iconName: "view-media-artist"
-            iconColor:  currentView === viewsIndex.artists ? babeColor : altColorText
-            onClicked: currentView = viewsIndex.artists
-            colorScheme.highlightColor: babeColor
-            showIndicator: true
-        },
+            Kirigami.Action
+            {
+                text: qsTr("YouTube")
+                checkable: false
+                icon.name: "internet-services"
+                checked: currentView === viewsIndex.youtube
+                onTriggered: currentView = viewsIndex.youtube
 
-        Maui.ToolButton
-        {
-            text: qsTr("Playlists")
-            active: currentView === viewsIndex.playlists
-            iconName: "view-media-playlist"
-            iconColor: currentView === viewsIndex.playlists ? babeColor : altColorText
-            onClicked: currentView = viewsIndex.playlists
-            colorScheme.highlightColor: babeColor
-            showIndicator: true
+            }
 
-        }
-    ]
+        ]
+        actions: [
+            Kirigami.Action
+            {
+                icon.name: "view-media-track"
+                checked: currentView === viewsIndex.tracks
+                //            showIndicator: true
+                //            icon.color: active ? babeColor : altColorText
+                onTriggered: currentView = viewsIndex.tracks
+                text: qsTr("Tracks")
+                checkable: false
+                //            colorScheme.highlightColor: babeColor
+                //            spacing: 0
+
+            },
+
+            Kirigami.Action
+            {
+                text: qsTr("Albums")
+                checkable: false
+                checked: currentView === viewsIndex.albums
+                icon.name: /*"album"*/ "view-media-album-cover"
+                //            icon.color: currentView === viewsIndex.albums ? babeColor : altColorText
+                onTriggered: currentView = viewsIndex.albums
+                //            colorScheme.highlightColor: babeColor
+                //            showIndicator: true
+            },
+
+            Kirigami.Action
+            {
+                text: qsTr("Artists")
+                checkable: false
+                checked: currentView === viewsIndex.artists
+                icon.name: "view-media-artist"
+                Kirigami.Theme.textColor:  currentView === viewsIndex.artists ? babeColor : altColorText
+                onTriggered: currentView = viewsIndex.artists
+                //            colorScheme.highlightColor: babeColor
+                //            showIndicator: true
+            },
+
+            Kirigami.Action
+            {
+                text: qsTr("Playlists")
+                checkable: false
+                checked: currentView === viewsIndex.playlists
+                icon.name: "view-media-playlist"
+                //            icon.color: currentView === viewsIndex.playlists ? babeColor : altColorText
+                onTriggered: currentView = viewsIndex.playlists
+                //            colorScheme.highlightColor: babeColor
+                //            showIndicator: true
+
+            }
+
+        ]
+    }
 
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: footBar.visible ? toolBarHeight * 1.2 : 0
@@ -343,7 +374,7 @@ Maui.ApplicationWindow
     }
 
 
-    leftIcon.iconColor: currentView === viewsIndex.search ? babeColor : altColorText
+    //    leftIcon.iconColor: currentView === viewsIndex.search ? babeColor : altColorText
     onSearchButtonClicked:
     {
         currentView = viewsIndex.search
@@ -385,12 +416,6 @@ Maui.ApplicationWindow
         //            }
         //        },
 
-        MenuItem
-        {
-            text: qsTr("Folders")
-            icon.name: "folder"
-            onTriggered: currentView = viewsIndex.folders
-        },
 
         //        Maui.MenuItem
         //        {
@@ -404,13 +429,7 @@ Maui.ApplicationWindow
         //            }
         //        },
 
-        MenuItem
-        {
-            text: qsTr("YouTube")
-            icon.name: "internet-services"
-            onTriggered: currentView = viewsIndex.youtube
 
-        },
 
         //        Maui.MenuItem
         //        {
@@ -880,7 +899,7 @@ Maui.ApplicationWindow
                     onPlayAll:
                     {
                         mainPlaylist.list.clear()
-//                        mainPlaylist.list.sortBy = Tracks.NONE
+                        //                        mainPlaylist.list.sortBy = Tracks.NONE
                         mainPlaylist.list.query = foldersView.list.list.query
                         Player.playAll()
                     }
@@ -1010,26 +1029,26 @@ Maui.ApplicationWindow
         onRefreshAlbums: H.refreshAlbums()
         onRefreshArtists: H.refreshArtists()
 
-//        onCoverReady:
-//        {
-//            root.currentArtwork = path
-//            currentTrack.artwork = currentArtwork
-//            mainPlaylist.list.update(currentTrack, currentTrackIndex);
-//        }
+        //        onCoverReady:
+        //        {
+        //            root.currentArtwork = path
+        //            currentTrack.artwork = currentArtwork
+        //            mainPlaylist.list.update(currentTrack, currentTrackIndex);
+        //        }
 
-//        onTrackLyricsReady:
-//        {
-//            console.log(lyrics)
-//            if (url === currentTrack.url)
-//                Player.setLyrics(lyrics)
-//        }
+        //        onTrackLyricsReady:
+        //        {
+        //            console.log(lyrics)
+        //            if (url === currentTrack.url)
+        //                Player.setLyrics(lyrics)
+        //        }
 
-//        onSkipTrack: Player.nextTrack()
-//        onBabeIt: if (!mainlistEmpty)
-//                  {
-//                      mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
-//                      currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
-//                  }
+        //        onSkipTrack: Player.nextTrack()
+        //        onBabeIt: if (!mainlistEmpty)
+        //                  {
+        //                      mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
+        //                      currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
+        //                  }
 
         onOpenFiles:
         {
