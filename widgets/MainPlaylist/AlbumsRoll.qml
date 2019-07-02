@@ -83,7 +83,7 @@ ListView
             verticalAlignment: Qt.AlignBottom
             clip: true
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-
+            elide: Text.ElideRight
         }
 
         Label
@@ -97,11 +97,8 @@ ListView
             verticalAlignment: Qt.AlignTop
             clip: true
             color: textColor
-
+            elide: Text.ElideRight
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-
-
-
         }
     }
 

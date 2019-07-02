@@ -58,6 +58,7 @@ public slots:
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
     void appendQuery(const QString &query);
+//    void appendUrl(const QString &url);
     void searchQueries(const QStringList &queries);
     void clear() override;
     bool color(const int &index, const QString &color);

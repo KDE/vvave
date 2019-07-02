@@ -639,7 +639,7 @@ Maui.ApplicationWindow
     globalDrawer: Maui.GlobalDrawer
     {
         id: _drawer
-        width: Kirigami.Units.gridUnit * 15
+        width: Kirigami.Units.gridUnit * 18
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
         modal: !isWide
