@@ -1,6 +1,3 @@
-.import "../db/Queries.js" as Q
-.import "../utils/Player.js" as Player
-
 function rootWidth()
 {
     return root.width;

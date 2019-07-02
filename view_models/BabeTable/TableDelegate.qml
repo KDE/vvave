@@ -48,7 +48,7 @@ SwipeDelegate
     swipe.enabled: false
     focus: true
     focusPolicy: Qt.StrongFocus
-    hoverEnabled: true
+    hoverEnabled: !isMobile
 
     signal play()
     signal rightClicked()
@@ -61,11 +61,12 @@ SwipeDelegate
     background: Rectangle
     {
         height: delegateRoot.height
-        color: isCurrentListItem ? highlightColor : (trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r,
+        color: isCurrentListItem || hovered ? highlightColor : (trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r,
                                                                                                      Qt.lighter(trackMood, 1.3).g,
                                                                                                      Qt.lighter(trackMood, 1.3).b,
                                                                                                      0.3 ) ):
                                                                             index % 2 === 0 ? Qt.lighter(bgColor) : bgColor)
+        opacity: hovered ? 0.3 : 1
 
     }
 
@@ -290,8 +291,8 @@ SwipeDelegate
                         Layout.alignment: Qt.AlignLeft || Qt.AlignBottom
                         verticalAlignment:  Qt.AlignVCenter
                         text: model.title
-                        font.bold: !sameAlbum
-                        font.weight: Font.Bold
+//                        font.bold: !sameAlbum
+                        font.weight: Font.Regular
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.default
                         color: labelColor
@@ -313,6 +314,7 @@ SwipeDelegate
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.medium
                         color: labelColor
+                        opacity: hovered ? 0.8 : 0.6
 
                     }
 
