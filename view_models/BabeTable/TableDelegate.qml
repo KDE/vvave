@@ -314,7 +314,7 @@ SwipeDelegate
                         elide: Text.ElideRight
                         font.pointSize: fontSizes.medium
                         color: labelColor
-                        opacity: hovered ? 0.8 : 0.6
+                        opacity: isCurrentListItem || hovered ? 0.8 : 0.6
 
                     }
 
