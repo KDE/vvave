@@ -164,6 +164,7 @@ Maui.ApplicationWindow
     headBar.spacing: space.big
     headBar.middleContent : Kirigami.ActionToolBar
     {
+        display: ToolButton.TextUnderIcon
 
         hiddenActions: [
 
