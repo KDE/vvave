@@ -21,7 +21,7 @@ BabeTable
     property bool autoSuggestions : false
 
     trackNumberVisible: false
-    headBar.visible: true
+    headBar.visible: count
     headBarExit: true
     headBarExitIcon: "edit-clear"
     holder.emoji: "qrc:/assets/BugSearch.png"
@@ -106,7 +106,7 @@ BabeTable
     function clearSearch()
     {
         searchInput.clear()
-        searchTable.clearTable()
+        searchTable.list.clear()
         searchTable.headBarTitle = ""
         suggestionsPopup.close()
     }

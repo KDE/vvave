@@ -13,7 +13,7 @@ ItemDelegate
     property int albumSize : iconSizes.huge
     property int albumRadius : 0
     property bool albumCard : true
-    property string fillColor : Qt.darker(backgroundColor, 1.5)
+    property string fillColor : Qt.darker(backgroundColor, 1.1)
     property bool hide : false
     property bool showLabels : true
     property bool showIndicator :  false
