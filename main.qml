@@ -30,7 +30,6 @@ import "utils/Player.js" as Player
 
 import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-import FMList 1.0
 import Player 1.0
 import AlbumsList 1.0
 import TracksList 1.0
@@ -164,8 +163,8 @@ Maui.ApplicationWindow
     headBar.spacing: space.big
     headBar.middleContent : Kirigami.ActionToolBar
     {
-        display: ToolButton.TextUnderIcon
-
+        display: isWide ? ToolButton.TextBesideIcon : ToolButton.TextUnderIcon
+Layout.fillWidth: true
         hiddenActions: [
 
             Kirigami.Action
@@ -213,10 +212,13 @@ Maui.ApplicationWindow
                 onTriggered: currentView = viewsIndex.albums
                 //            colorScheme.highlightColor: babeColor
                 //            showIndicator: true
+
             },
 
             Kirigami.Action
             {
+                Layout.fillWidth: true
+
                 text: qsTr("Artists")
                 checkable: false
                 checked: currentView === viewsIndex.artists
@@ -229,6 +231,8 @@ Maui.ApplicationWindow
 
             Kirigami.Action
             {
+                Layout.fillWidth: true
+
                 text: qsTr("Playlists")
                 checkable: false
                 checked: currentView === viewsIndex.playlists
@@ -471,7 +475,7 @@ Maui.ApplicationWindow
             onTriggered:
             {
                 fmDialog.onlyDirs = false
-                fmDialog.filterType = FMList.AUDIO
+                fmDialog.filterType = Maui.FMList.AUDIO
                 fmDialog.show(function(paths)
                 {
                     vvave.openUrls(paths)
@@ -678,6 +682,7 @@ Maui.ApplicationWindow
                 //                if (!babeitView.isConnected && currentIndex === viewsIndex.vvave)
                 //                    babeitView.logginDialog.open()
             }
+
 
             TracksView
             {

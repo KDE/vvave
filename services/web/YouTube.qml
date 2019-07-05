@@ -195,8 +195,8 @@ Maui.Page
 
             model: ListModel{}
 
-            appendBtn.visible: false
-            playAllBtn.visible: false
+//            appendBtn.visible: false
+//            playAllBtn.visible: false
 
             headBar.rightContent: Maui.ToolButton
             {

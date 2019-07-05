@@ -22,7 +22,6 @@ BabeTable
     holder.emojiSize: iconSizes.huge
 
     list.query: Q.GET.allTracks
-
 }
 
 
