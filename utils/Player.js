@@ -149,18 +149,6 @@ function appendTrack(track)
             //            addToPlaylist([track.url], syncPlaylist)
         }
     }
-
-    //    if(track)
-    //    {
-    //        var empty = root.mainPlaylist.list.count
-    //        if((empty > 0 && track.url !== root.mainPlaylist.list.model.get(root.mainPlaylist.list.count-1).url) || empty === 0)
-    //        {
-    //            root.mainPlaylist.list.model.append(track)
-
-    //            if(empty === 0 && root.mainPlaylist.list.count>0)
-    //                playAt(0)
-    //        }
-    //    }
 }
 
 function addTrack(track)
