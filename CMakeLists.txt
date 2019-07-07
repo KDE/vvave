@@ -35,22 +35,22 @@ add_executable(vvave
     services/local/taginfo.cpp
     services/local/player.cpp
     services/local/youtubedl.cpp
-    services/local/linking.cpp
+#    services/local/linking.cpp
     services/local/socket.cpp
-    services/web/babeit.cpp
+#    services/web/babeit.cpp
     services/web/youtube.cpp
-    services/web/Spotify/spotify.cpp
+#    services/web/Spotify/spotify.cpp
     db/collectionDB.cpp
 #    settings/BabeSettings.cpp
 #    settings/fileloader.cpp
 #    utils/brain.cpp
-    utils/babeconsole.cpp
+#    utils/babeconsole.cpp
     models/tracks/tracksmodel.cpp
     models/basemodel.cpp
     models/baselist.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
-    models/cloud/cloud.cpp
+#    models/cloud/cloud.cpp
     )
 
 if (ANDROID)

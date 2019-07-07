@@ -35,7 +35,7 @@ BabeList
     property bool group : false
 
     property alias contextMenu : contextMenu
-    property alias contextMenuItems : contextMenu.content
+    property alias contextMenuItems : contextMenu.contentData
 
     property alias playAllBtn : playAllBtn
     property alias appendBtn : appendBtn
@@ -207,14 +207,14 @@ BabeList
 
         MenuSeparator {}
 
-        Maui.MenuItem
+        MenuItem
         {
             text: qsTr("Go to Artist")
             onTriggered: goToArtist()
 
         }
 
-        Maui.MenuItem
+        MenuItem
         {
             text: qsTr("Go to Album")
             onTriggered: goToAlbum()

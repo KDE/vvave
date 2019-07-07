@@ -8,10 +8,10 @@ import "../utils/Help.js" as H
 import "../utils/Player.js" as Player
 import "../view_models"
 
-
+import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
-Maui.Menu
+Menu
 {
     id: control
     width: unit * 200
@@ -24,7 +24,7 @@ Maui.Menu
     signal rateClicked(int rate)
 
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Play...")
         onTriggered:
@@ -39,13 +39,13 @@ Maui.Menu
         }
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Append...")
         onTriggered: Player.appendAll(_selectionBarModelList.getAll())
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Queue")
         onTriggered:
@@ -58,7 +58,7 @@ Maui.Menu
     MenuSeparator {}
 
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Fav/UnFav them")
         onTriggered:
@@ -70,7 +70,7 @@ Maui.Menu
     }
 
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Add to...")
         onTriggered:
@@ -83,7 +83,7 @@ Maui.Menu
 
     MenuSeparator {}
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Share...")
         onTriggered:
@@ -96,10 +96,10 @@ Maui.Menu
 
     MenuSeparator {}
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Remove")
-        colorScheme.textColor: dangerColor
+        Kirigami.Theme.textColor: dangerColor
         onTriggered:
         {
             close()
@@ -108,7 +108,7 @@ Maui.Menu
 
     MenuSeparator {}
 
-    Maui.MenuItem
+    MenuItem
     {
         id: starsRow
         width: parent.width
@@ -194,7 +194,7 @@ Maui.Menu
 
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         id: colorsRow
         width: parent.width

@@ -25,9 +25,10 @@
  * */
 
 
-vvave::vvave(QObject *parent) : QObject(parent)
+vvave::vvave(QObject *parent) : QObject(parent),
+    notify(new Notify(this)),
+    db(CollectionDB::getInstance())
 {
-    this->db = CollectionDB::getInstance();
     for(const auto &path : {BAE::CachePath, BAE::YoutubeCachePath})
     {
         QDir dirPath(path);
@@ -39,7 +40,6 @@ vvave::vvave(QObject *parent) : QObject(parent)
     if(!FMH::fileExists(BAE::NotifyDir+"/vvave.notifyrc"))
         QFile::copy(":/assets/vvave.notifyrc", BAE::NotifyDir+"/vvave.notifyrc");
 
-    this->notify = new Notify(this);
     connect(this->notify, &Notify::babeSong, [this]()
     {
         //        emit this->babeIt();

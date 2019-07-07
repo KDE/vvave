@@ -63,8 +63,8 @@ private:
     bool playing = false;
     bool finished = false;
 
-    bool play();
-    void pause();
+    bool play() const;
+    void pause() const;
 
     void emitState();
 
@@ -82,7 +82,7 @@ signals:
     void posChanged();
 
 public slots:
-    QString transformTime(const int &pos);
+    static QString transformTime(const int &pos);
     void playRemote(const QString &url);
     void stop();
 

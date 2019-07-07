@@ -7,8 +7,9 @@ import ".."
 import "../../utils/Help.js" as H
 
 import org.kde.mauikit 1.0 as Maui
+import org.kde.kirigami 2.6 as Kirigami
 
-Maui.Menu
+Menu
 {
     id: control
     width: unit * 200
@@ -32,9 +33,9 @@ Maui.Menu
     signal infoClicked()
     signal copyToClicked()
 
-    property alias menuItem : control.content
+    property alias menuItem : control.contentData
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Select...")
         onTriggered:
@@ -46,7 +47,7 @@ Maui.Menu
 
     MenuSeparator {}
 
-    Maui.MenuItem
+    MenuItem
     {
         text: !fav ? qsTr("Fav it"): qsTr("UnFav it")
         onTriggered:
@@ -56,7 +57,7 @@ Maui.Menu
         }
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Queue")
         onTriggered:
@@ -66,7 +67,7 @@ Maui.Menu
         }
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Add to...")
         onTriggered:
@@ -78,7 +79,7 @@ Maui.Menu
 
     MenuSeparator {}
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Share...")
         onTriggered:
@@ -89,7 +90,7 @@ Maui.Menu
     }
 
 
-    Maui.MenuItem
+    MenuItem
     {
         visible: root.showAccounts
         text: qsTr("Copy to cloud")
@@ -100,7 +101,7 @@ Maui.Menu
         }
     }
 
-    Maui.MenuItem
+    MenuItem
     {
         text: isAndroid ? qsTr("Open with...") : qsTr("Show in folder...")
 
@@ -113,7 +114,7 @@ Maui.Menu
 
     MenuSeparator {}
 
-    Maui.MenuItem
+    MenuItem
     {
         visible: false
         text: qsTr("Edit...")
@@ -135,10 +136,10 @@ Maui.Menu
 //    }
 
 
-    Maui.MenuItem
+    MenuItem
     {
         text: qsTr("Remove")
-        colorScheme.textColor: dangerColor
+        Kirigami.Theme.textColor: dangerColor
         onTriggered:
         {
             removeClicked()
@@ -149,7 +150,7 @@ Maui.Menu
 
     MenuSeparator {}
 
-    Maui.MenuItem
+    MenuItem
     {
         id: starsRow
         width: parent.width
@@ -237,7 +238,7 @@ Maui.Menu
     }
 
 
-    Maui.MenuItem
+    MenuItem
     {
         id: colorsRow
         width: parent.width

@@ -313,24 +313,24 @@ Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            leftContent:  Maui.ToolButton
+            leftContent:  ToolButton
             {
-                iconName: "headphones"
+                icon.name: "headphones"
                 visible: _drawer.modal
-                iconColor: _drawer.visible ? babeColor : textColor
+                icon.color: _drawer.visible ? babeColor : textColor
                 onClicked: _drawer.visible = !_drawer.visible
-                colorScheme.highlightColor: babeColor
+                Kirigami.Theme.highlightColor: babeColor
                 //                text: qsTr("Now")
             }
 
             middleContent: [
 
-                Maui.ToolButton
+                ToolButton
                 {
                     id: babeBtnIcon
-                    iconName: "love"
-
-                    iconColor: currentBabe ? babeColor : textColor
+                    icon.name: "love"
+                    enabled: currentTrackIndex >= 0
+                    icon.color: currentBabe ? babeColor : textColor
                     onClicked: if (!mainlistEmpty)
                     {
                         mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
@@ -338,36 +338,37 @@ Layout.fillWidth: true
                     }
                 },
 
-                Maui.ToolButton
+                ToolButton
                 {
-                    iconName: "media-skip-backward"
-                    iconColor: textColor
+                    icon.name: "media-skip-backward"
+                    icon.color: textColor
                     onClicked: Player.previousTrack()
                     onPressAndHold: Player.playAt(prevTrackIndex)
                 },
 
-                Maui.ToolButton
+                ToolButton
                 {
                     id: playIcon
-                    iconColor: textColor
-                    iconName: isPlaying ? "media-playback-pause" : "media-playback-start"
+                    enabled: currentTrackIndex >= 0
+                    icon.color: textColor
+                    icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onClicked: player.playing = !player.playing
                 },
 
-                Maui.ToolButton
+                ToolButton
                 {
                     id: nextBtn
-                    iconColor: textColor
-                    iconName: "media-skip-forward"
+                    icon.color: textColor
+                    icon.name: "media-skip-forward"
                     onClicked: Player.nextTrack()
                     onPressAndHold: Player.playAt(Player.shuffle())
                 },
 
-                Maui.ToolButton
+                ToolButton
                 {
                     id: shuffleBtn
-                    iconColor: babeColor
-                    iconName: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
+                    icon.color: babeColor
+                    icon.name: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
                     onClicked:
                     {
                         isShuffle = !isShuffle

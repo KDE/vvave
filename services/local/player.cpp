@@ -2,23 +2,22 @@
 #include "../../utils/bae.h"
 
 
-Player::Player(QObject *parent) : QObject(parent)
+Player::Player(QObject *parent) : QObject(parent),
+    player(new QMediaPlayer(this)),
+    updater(new QTimer(this))
 {
-    this->player = new QMediaPlayer(this);
     this->buffer = new QBuffer(this->player);
 
-    connect(this->player, &QMediaPlayer::durationChanged, this, [&](qint64 dur)
-    {
-        emit this->durationChanged(/*BAE::transformTime(dur/1000)*/);
-    });
+//    connect(this->player, &QMediaPlayer::durationChanged, this, [&](qint64 dur)
+//    {
+//        emit this->durationChanged(/*BAE::transformTime(dur/1000)*/);
+//    });
 
     this->player->setVolume(this->volume);
-
-    this->updater = new QTimer(this);
     connect(this->updater, &QTimer::timeout, this, &Player::update);
 }
 
-bool Player::play()
+bool Player::play() const
 {
     if(this->url.isEmpty()) return false;
 
@@ -30,7 +29,7 @@ bool Player::play()
     return true;
 }
 
-void Player::pause()
+void Player::pause() const
 {
     if(this->player->isAvailable())
         this->player->pause();
@@ -73,9 +72,9 @@ void Player::emitState()
 
 QString Player::transformTime(const int &pos)
 {
-    auto time =  BAE::transformTime(pos);
-    return time;
+    return BAE::transformTime(pos);
 }
+
 void Player::appendBuffe(QByteArray &array)
 {
     qDebug()<<"APENDING TO BUFFER"<< array << this->array;
@@ -105,7 +104,7 @@ void Player::setUrl(const QString &value)
     this->pos = 0;
     emit this->posChanged();
 
-    auto media = QMediaContent(QUrl::fromLocalFile(this->url));
+    const auto media = QMediaContent(QUrl::fromLocalFile(this->url));
     this->player->setMedia(media);
     this->emitState();
 }
@@ -166,7 +165,7 @@ bool Player::getFinished()
 void Player::setPos(const int &value)
 {
     this->pos = value;
-    this->player->setPosition( this->player->duration() / 1000 * this->pos);
+    this->player->setPosition(this->player->duration() / 1000 * this->pos);
     this->emitState();
     this->posChanged();
 }

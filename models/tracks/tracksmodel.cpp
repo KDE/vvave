@@ -2,9 +2,9 @@
 #include "db/collectionDB.h"
 
 
-TracksModel::TracksModel(QObject *parent) : BaseList(parent)
+TracksModel::TracksModel(QObject *parent) : BaseList(parent),
+    db(CollectionDB::getInstance())
 {
-    this->db = CollectionDB::getInstance();
     connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
 }
 

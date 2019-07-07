@@ -110,7 +110,7 @@ ColumnLayout
             holder.emojiSize: iconSizes.huge
 
             contextMenuItems:
-                Maui.MenuItem
+                MenuItem
                 {
                     text: qsTr("Remove from playlist")
                 }

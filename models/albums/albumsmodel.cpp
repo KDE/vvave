@@ -3,9 +3,9 @@
 #include "utils/brain.h"
 #include <QtConcurrent>
 
-AlbumsModel::AlbumsModel(QObject *parent) : BaseList(parent)
+AlbumsModel::AlbumsModel(QObject *parent) : BaseList(parent),
+    db(CollectionDB::getInstance())
 {
-    this->db = CollectionDB::getInstance();
     connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
 

@@ -1,9 +1,9 @@
 #include "playlistsmodel.h"
 #include "db/collectionDB.h"
 
-PlaylistsModel::PlaylistsModel(QObject *parent) : BaseList(parent)
+PlaylistsModel::PlaylistsModel(QObject *parent) : BaseList(parent),
+    db(CollectionDB::getInstance())
 {
-    this->db = CollectionDB::getInstance();
     this->setList();
 }
 
