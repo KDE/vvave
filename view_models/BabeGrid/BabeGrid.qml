@@ -75,7 +75,7 @@ Maui.Page
         {
             id: albumDelegate
 
-            albumSize : albumCoverSize
+            albumSize : grid.itemSize
             albumRadius: albumCoverRadius
             albumCard: albumCardVisible
 
