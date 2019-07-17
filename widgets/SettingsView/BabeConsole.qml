@@ -32,13 +32,13 @@ Maui.Popup
         anchors.fill: parent
         spacing: 0
 
-        Maui.ToolButton
+        ToolButton
         {
             Layout.alignment: Qt.AlignLeft
             Layout.leftMargin:  contentMargins
-            iconColor: darkTextColor
+            icon.color: darkTextColor
             anim : true
-            iconName : "dialog-close"
+            icon.name : "dialog-close"
             onClicked : close()
         }
 

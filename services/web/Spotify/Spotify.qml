@@ -25,9 +25,9 @@ Page
             Layout.fillHeight: true
 
             headBarExit: false
-            headBar.leftContent: Maui.ToolButton
+            headBar.leftContent: ToolButton
             {
-                iconName: "internet-services"
+                icon.name: "internet-services"
                 onClicked:if(!isAndroid)
                 {
 
@@ -67,10 +67,10 @@ Page
 
                 }
 
-                Maui.ToolButton
+                ToolButton
                 {
                     Layout.rightMargin: contentMargins
-                    iconName: "edit-clear"
+                    icon.name: "edit-clear"
                     onClicked: searchInput.clear()
                 }
 

@@ -48,11 +48,11 @@ BabeTable
     }
 
 
-//    footBar.leftContent: Maui.ToolButton
+//    footBar.leftContent: ToolButton
 //    {
 //        visible: true
-//        iconName: "view-filter"
-//        iconColor: autoSuggestions ? babeColor : textColor
+//        icon.name: "view-filter"
+//        icon.color: autoSuggestions ? babeColor : textColor
 //        onClicked:
 //        {
 //            autoSuggestions = !autoSuggestions

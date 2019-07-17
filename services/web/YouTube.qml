@@ -198,10 +198,10 @@ Maui.Page
 //            appendBtn.visible: false
 //            playAllBtn.visible: false
 
-            headBar.rightContent: Maui.ToolButton
+            headBar.rightContent: ToolButton
             {
                 id: menuBtn
-                iconName: "application-menu"
+                icon.name: "application-menu"
                 onClicked: configPopup.open()
             }
 

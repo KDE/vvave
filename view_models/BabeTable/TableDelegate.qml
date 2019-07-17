@@ -77,19 +77,19 @@ SwipeDelegate
         anchors.right: parent.right
         spacing: space.medium
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "documentinfo"
+            icon.name: "documentinfo"
             anchors.verticalCenter: parent.verticalCenter
             onClicked: swipe.close()
         }
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "love"
+            icon.name: "love"
             anchors.verticalCenter: parent.verticalCenter
 
-            iconColor: model.fav === "1" ? babeColor : textColor
+            icon.color: model.fav === "1" ? babeColor : textColor
             onClicked:
             {                
                 list.fav(index, !(list.get(index).fav == "1"))
@@ -97,9 +97,9 @@ SwipeDelegate
             }
         }
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "view-media-recent"
+            icon.name: "view-media-recent"
             anchors.verticalCenter: parent.verticalCenter
 
             onClicked:
@@ -109,9 +109,9 @@ SwipeDelegate
             }
         }
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName: "media-playback-start"
+            icon.name: "media-playback-start"
             anchors.verticalCenter: parent.verticalCenter
 
             onClicked:
@@ -231,15 +231,14 @@ SwipeDelegate
                 height: parent.height
                 Layout.leftMargin: space.small
 
-                Maui.ToolButton
+                ToolButton
                 {
                     id: playBtn
                     anchors.centerIn: parent
-                    iconName: "media-playback-start"
-                    iconColor: labelColor
-                    size: iconSizes.medium
+                    icon.name: "media-playback-start"
+                    icon.color: labelColor
+                    icon.width: iconSizes.medium
                     onClicked: play()
-                    anim: true
                 }
             }
 
@@ -389,13 +388,13 @@ SwipeDelegate
 
                     onPositionChanged: swipe.position = Math.min(0, Math.max(-delegateRoot.width + height, delegateRoot.background.x - (startMouseX - mouse.x)));
 
-                    Maui.ToolButton
+                    ToolButton
                     {
                         id: menuBtn
                         visible: true
                         anchors.centerIn: parent
-                        iconName: "overflow-menu"
-                        iconColor:  labelColor
+                        icon.name: "overflow-menu"
+                        icon.color:  labelColor
                         onClicked: swipe.position < 0 ? swipe.close() : swipe.open(SwipeDelegate.Right)
                     }
 

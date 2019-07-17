@@ -4,7 +4,7 @@ import QtQuick.Controls 2.2
 ScrollBar
 {
     id: scrollBar
-    size: 0.3
+    icon.width: 0.3
     position: 0.2
     active: true
     focus: true

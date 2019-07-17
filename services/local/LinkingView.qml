@@ -191,10 +191,10 @@ ColumnLayout
 
             }
 
-            Maui.ToolButton
+            ToolButton
             {
                 Layout.rightMargin: contentMargins
-                iconName: "edit-clear"
+                icon.name: "edit-clear"
                 onClicked: searchInput.clear()
             }
 

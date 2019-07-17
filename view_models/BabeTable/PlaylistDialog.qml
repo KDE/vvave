@@ -68,10 +68,10 @@ Maui.Dialog
                 }
             }
 
-            Maui.ToolButton
+            ToolButton
             {
-                iconName: "checkbox"
-                iconColor: textColor
+                icon.name: "checkbox"
+                icon.color: textColor
                 onClicked: addPlaylist()
             }
         }

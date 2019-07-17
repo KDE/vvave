@@ -380,7 +380,7 @@ Layout.fillWidth: true
     }
 
 
-    //    leftIcon.iconColor: currentView === viewsIndex.search ? babeColor : altColorText
+    //    leftIcon.icon.color: currentView === viewsIndex.search ? babeColor : altColorText
     onSearchButtonClicked:
     {
         currentView = viewsIndex.search

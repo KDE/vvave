@@ -17,17 +17,16 @@ BabeList
     headBarExit: false
     headBarTitle: isLinked ?link.getIp() : qsTr("Disconnected")
 
-    headBar.leftContent: Maui.ToolButton
+    headBar.leftContent: ToolButton
     {
-        anim : true
-        iconName : "view-refresh"
+        icon.name : "view-refresh"
         onClicked : refreshPlaylists()
     }
 
-    headBar.rightContent: Maui.ToolButton
+    headBar.rightContent: ToolButton
     {
         id: menuBtn
-        iconName: "application-menu"
+        icon.name: "application-menu"
         onClicked: linkingConf.open()
     }
 

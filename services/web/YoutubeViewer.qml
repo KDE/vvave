@@ -20,15 +20,15 @@ Maui.Page
 
     headBar.rightContent: [
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName : "link"
+            icon.name : "link"
             onClicked: webView.url = currentYt.url.replace("embed/", "watch?v=")
         },
 
-        Maui.ToolButton
+        ToolButton
         {
-            iconName : "download"
+            icon.name : "download"
             onClicked: bae.getYoutubeTrack(JSON.stringify(currentYt))
         }
     ]

@@ -86,12 +86,12 @@ BabeGrid
 
 //    headBar.rightContent: [
 
-//        Maui.ToolButton
+//        ToolButton
 //        {
 //            id: appendBtn
 //            visible: headBar.visible && albumsViewGrid.count > 0
 //            anim : true
-//            iconName : "media-playlist-append"//"media-repeat-track-amarok"
+//            icon.name : "media-playlist-append"//"media-repeat-track-amarok"
 //            onClicked: appendAll()
 //        }
 //    ]

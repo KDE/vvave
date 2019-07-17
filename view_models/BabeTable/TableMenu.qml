@@ -160,13 +160,13 @@ Menu
         {
             anchors.fill: parent
 
-            Maui.ToolButton
+            ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                iconName: starIcon
-                size: iconSizes.medium
-                iconColor: rate >= 1 ? starColor :starReg
+                icon.name: starIcon
+                icon.width: iconSizes.medium
+                icon.color: rate >= 1 ? starColor :starReg
                 onClicked:
                 {
                     rate = 1
@@ -175,13 +175,13 @@ Menu
                 }
             }
 
-            Maui.ToolButton
+            ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                size: iconSizes.medium
-                iconName: starIcon
-                iconColor: rate >= 2 ? starColor :starReg
+                icon.width: iconSizes.medium
+                icon.name: starIcon
+                icon.color: rate >= 2 ? starColor :starReg
                 onClicked:
                 {
                     rate = 2
@@ -190,13 +190,13 @@ Menu
                 }
             }
 
-            Maui.ToolButton
+            ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                size: iconSizes.medium
-                iconName: starIcon
-                iconColor: rate >= 3 ? starColor :starReg
+                icon.width: iconSizes.medium
+                icon.name: starIcon
+                icon.color: rate >= 3 ? starColor :starReg
                 onClicked:
                 {
                     rate = 3
@@ -205,13 +205,13 @@ Menu
                 }
             }
 
-            Maui.ToolButton
+            ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                size: iconSizes.medium
-                iconName: starIcon
-                iconColor: rate >= 4 ? starColor :starReg
+                icon.width: iconSizes.medium
+                icon.name: starIcon
+                icon.color: rate >= 4 ? starColor :starReg
                 onClicked:
                 {
                     rate = 4
@@ -220,13 +220,13 @@ Menu
                 }
             }
 
-            Maui.ToolButton
+            ToolButton
             {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                size: iconSizes.medium
-                iconName: starIcon
-                iconColor: rate >= 5 ? starColor :starReg
+                icon.width: iconSizes.medium
+                icon.name: starIcon
+                icon.color: rate >= 5 ? starColor :starReg
                 onClicked:
                 {
                     rate = 5
