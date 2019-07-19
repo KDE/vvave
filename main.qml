@@ -163,8 +163,9 @@ Maui.ApplicationWindow
     headBar.spacing: space.big
     headBar.middleContent : Kirigami.ActionToolBar
     {
-        display: isWide ? ToolButton.TextBesideIcon : ToolButton.TextUnderIcon
-Layout.fillWidth: true
+//        display: isWide ? ToolButton.TextBesideIcon : ToolButton.TextUnderIcon
+        position: Controls.ToolBar.Header
+        Layout.fillWidth: false
         hiddenActions: [
 
             Kirigami.Action
@@ -654,12 +655,13 @@ Layout.fillWidth: true
         contentItem: MainPlaylist
         {
             id: mainPlaylist
+            z: 999
             Connections
             {
                 target: mainPlaylist
                 onCoverPressed: Player.appendAll(tracks)
                 onCoverDoubleClicked: Player.playAll(tracks)
-            }
+            }            
         }
     }
 

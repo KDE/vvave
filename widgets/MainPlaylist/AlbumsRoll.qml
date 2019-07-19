@@ -32,6 +32,7 @@ ListView
 
     //    onCurrentIndexChanged: Player.playAt(currentIndex)
 
+
     delegate: GridLayout
     {
         height: albumsRollRoot.height
@@ -103,6 +104,23 @@ ListView
     }
 
 
+    MouseArea
+    {
+        anchors.fill : parent
+        preventStealing: true
+        parent: applicationWindow().overlay.parent
+
+        onPressed:
+        {
+            console.log("albumsroll clicked")
+            mouse.accepted = false
+        }
+
+        onReleased:
+        {
+            mouse.accepted = true
+        }
+    }
 
     function positionAlbum(index)
     {

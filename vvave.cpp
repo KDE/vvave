@@ -26,7 +26,6 @@
 
 
 vvave::vvave(QObject *parent) : QObject(parent),
-    notify(new Notify(this)),
     db(CollectionDB::getInstance())
 {
     for(const auto &path : {BAE::CachePath, BAE::YoutubeCachePath})
@@ -36,21 +35,11 @@ vvave::vvave(QObject *parent) : QObject(parent),
             dirPath.mkpath(".");
     }
 
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-    if(!FMH::fileExists(BAE::NotifyDir+"/vvave.notifyrc"))
-        QFile::copy(":/assets/vvave.notifyrc", BAE::NotifyDir+"/vvave.notifyrc");
+//#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
+//    if(!FMH::fileExists(BAE::NotifyDir+"/vvave.notifyrc"))
+//        QFile::copy(":/assets/vvave.notifyrc", BAE::NotifyDir+"/vvave.notifyrc");
 
-    connect(this->notify, &Notify::babeSong, [this]()
-    {
-        //        emit this->babeIt();
-    });
-
-    connect(this->notify, &Notify::skipSong, [this]()
-    {
-        //        emit this->skipTrack();
-    });
-
-#endif
+//#endif
 }
 
 vvave::~vvave() {}

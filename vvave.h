@@ -5,13 +5,11 @@
 #include "utils/bae.h"
 #include <functional>
 
-class Notify;
 class CollectionDB;
 class vvave : public QObject
 {
     Q_OBJECT
 private:
-    Notify *notify;
     CollectionDB *db;
     void checkCollection(const QStringList &paths = BAE::defaultSources, std::function<void (uint)> cb = nullptr);
 
