@@ -22,7 +22,7 @@ BabeGrid
     property var tracks: []
 
     property alias table : albumsViewTable
-    property alias tagBar : tagBar
+//    property alias tagBar : tagBar
 
     signal rowClicked(var track)
     signal playTrack(var track)
@@ -37,7 +37,6 @@ BabeGrid
     //        topPadding: space.large
     onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
     headBar.visible: false
-    headBarExit: false
 //    headBar.rightContent: Kirigami.ActionToolBar
 //    {
 //        Layout.fillWidth: true
@@ -103,8 +102,6 @@ BabeGrid
         maxHeight: maxWidth
         maxWidth: unit * 600
         defaultButtons: false
-        page.margins: 0
-
         //        verticalAlignment: Qt.AlignBottom
 
         ColumnLayout
@@ -121,13 +118,11 @@ BabeGrid
                 trackNumberVisible: true
                 trackRating: true
                 headBar.visible: true
-                headBarExit: false
                 coverArtVisible: true
                 quickPlayVisible: true
                 focus: true
                 list.sortBy: Tracks.TRACK
                 headBar.plegable: false
-
 
                 holder.emoji: "qrc:/assets/ElectricPlug.png"
                 holder.isMask: false
@@ -161,21 +156,17 @@ BabeGrid
                     albumDialog.close()
                     albumsViewGrid.appendAll(currentAlbum, currentArtist)
                 }
-
-
             }
 
-            Maui.TagsBar
-            {
-                id: tagBar
-                visible:false
-                Layout.fillWidth: true
-                allowEditMode: false
-                onTagClicked: H.searchFor("tag:"+tag)
-            }
+//            Maui.TagsBar
+//            {
+//                id: tagBar
+//                visible:false
+//                Layout.fillWidth: true
+//                allowEditMode: false
+//                onTagClicked: H.searchFor("tag:"+tag)
+//            }
         }
-
-
     }
 
     function populateTable(album, artist)
@@ -193,13 +184,13 @@ BabeGrid
         {
             query = Q.GET.albumTracks_.arg(album)
             query = query.arg(artist)
-            albumsView.table.headBarTitle = album
+            albumsView.table.title = album
             tagq = Q.GET.albumTags_.arg(album)
 
         }else if(artist && album === undefined)
         {
             query = Q.GET.artistTracks_.arg(artist)
-            artistsView.table.headBarTitle = artist
+            artistsView.table.title = artist
             tagq = Q.GET.artistTags_.arg(artist)
         }
 
@@ -218,6 +209,7 @@ BabeGrid
     function filter(tracks)
     {
         var matches = []
+
         for(var i = 0; i<tracks.length; i++)
             matches.push(find(tracks[i].album))
 

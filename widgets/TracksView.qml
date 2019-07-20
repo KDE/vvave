@@ -12,15 +12,12 @@ BabeTable
     trackDuration: true
     trackRating: true
     headBar.visible: !holder.visible
-//    headBarTitle: count + " tracks"
-    headBarExit: false
     coverArtVisible: false
     holder.emoji: "qrc:/assets/MusicCloud.png"
     holder.isMask: false
     holder.title : "No Tracks!"
     holder.body: "Add new music sources"
     holder.emojiSize: iconSizes.huge
-
     list.query: Q.GET.allTracks
 }
 

@@ -58,7 +58,6 @@ BabeList
 
     //headBar.middleStrech: false
     headBar.leftSretch: false
-
     headBar.rightContent: Kirigami.ActionToolBar
     {
         position: Controls.ToolBar.Header

@@ -29,8 +29,6 @@ Maui.Page
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
     focus: true
-
-    margins: 0
     headBar.visible: false
 
     PlaylistMenu
@@ -45,59 +43,59 @@ Maui.Page
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: toolBarHeight * 1.3
 
-    footBarItem: AlbumsRoll
+    footBar.middleContent: AlbumsRoll
     {
-        anchors.fill : parent
-        anchors.leftMargin: space.small
-        anchors.rightMargin: space.small
+//        height: toolBarHeight * 1.3
+        Layout.fillWidth: true
+        Layout.fillHeight: true
         id: albumsRoll
     }
 
-    footBar.background: Rectangle
-    {
-        id: footerBg
-        clip : true
-        height: footBar.implicitHeight
-        color: "transparent"
+//    footBar.background: Rectangle
+//    {
+//        id: footerBg
+//        clip : true
+//        height: footBar.implicitHeight
+//        color: "transparent"
 
-        Image
-        {
-            id: artworkBg
-            height: parent.height
-            width: parent.width
+//        Image
+//        {
+//            id: artworkBg
+//            height: parent.height
+//            width: parent.width
 
-            sourceSize.width: parent.width
-            sourceSize.height: parent.height
+//            sourceSize.width: parent.width
+//            sourceSize.height: parent.height
 
-            fillMode: Image.PreserveAspectCrop
-            cache: true
-            antialiasing: true
-            smooth: true
-            asynchronous: true
+//            fillMode: Image.PreserveAspectCrop
+//            cache: true
+//            antialiasing: true
+//            smooth: true
+//            asynchronous: true
 
-            source: "file://"+encodeURIComponent(currentArtwork)
-        }
+//            source: "file://"+encodeURIComponent(currentArtwork)
+//        }
 
-        FastBlur
-        {
-            id: fastBlur
-            anchors.fill: parent
-            y:1
-            source: artworkBg
-            radius: 100
-            transparentBorder: false
-            cached: true
-            z:1
-            clip: true
+//        FastBlur
+//        {
+//            id: fastBlur
+//            anchors.fill: parent
+//            y:1
+//            source: artworkBg
+//            radius: 100
+//            transparentBorder: false
+//            cached: true
+//            z:1
+//            clip: true
 
-            Rectangle
-            {
-                anchors.fill: parent
-                color: viewBackgroundColor
-                opacity: 0.85
-            }
-        }
-    }
+//            Rectangle
+//            {
+//                anchors.fill: parent
+//                color: viewBackgroundColor
+//                opacity: 0.85
+//            }
+//        }
+//    }
 
 
     ColumnLayout
@@ -154,13 +152,7 @@ Maui.Page
 //                if(autoplay)
 //                    Player.playAt(0)
             }
-        }
-
-        Kirigami.Separator
-        {
-            Layout.fillWidth: true
-            color: borderColor
-        }
+        }       
     }
 
     //    function goFocusMode()

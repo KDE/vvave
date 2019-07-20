@@ -19,9 +19,7 @@ BabeList
     id: control
 
     property alias list: _playlistsList
-
-    headBarExit: false
-    headBarTitle: "Playlists"
+    title: "Playlists"
 
     Maui.NewDialog
     {
@@ -33,8 +31,6 @@ BabeList
     }
 
     signal playSync(int index)
-    headBar.plegable: false
-
 
     headBar.rightContent: Kirigami.ActionToolBar
     {

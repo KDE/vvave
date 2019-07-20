@@ -11,7 +11,6 @@ Maui.Dialog
 
     maxWidth: unit * 600
     maxHeight: unit * 500
-    page.margins: 0
     defaultButtons: true
     acceptButton.text: qsTr("Add")
     rejectButton.text: qsTr("Remove")
@@ -71,13 +70,10 @@ Maui.Dialog
         id: sources
         anchors.fill: parent
         headBar.visible: false
-        headBarExit: false
-        headBarTitle: qsTr("Sources")
+        title: qsTr("Sources")
         Layout.fillWidth: true
         Layout.fillHeight: true
         width: parent.width
-
-        onExit: close()
 
         ListModel { id: listModel }
 

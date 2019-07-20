@@ -30,8 +30,8 @@ Maui.Page
     signal albumCoverPressed(string album, string artist)
     signal bgClicked()
 
-    margins: space.medium
-    topMargin: space.big
+//    margins: space.medium
+//    topMargin: space.big
 
     MouseArea
     {
@@ -61,8 +61,8 @@ Maui.Page
         id: grid
         onAreaClicked: bgClicked()
         adaptContent: true
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
+        anchors.topMargin: space.big
 
         itemSize: albumCoverSize
         spacing: albumSpacing
@@ -87,8 +87,8 @@ Maui.Page
                 target: albumDelegate
                 onClicked:
                 {
-                    var album = grid.model.get(index).album
-                    var artist = grid.model.get(index).artist
+                    var album = _albumsList.get(index).album
+                    var artist = _albumsList.get(index).artist
                     albumCoverClicked(album, artist)
                     grid.currentIndex = index
                 }

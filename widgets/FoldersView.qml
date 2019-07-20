@@ -46,14 +46,11 @@ Item
             maxHeight: maxWidth
             maxWidth: unit * 600
             defaultButtons: false
-            page.margins: 0
-
             BabeTable
             {
                 id: _filterList
                 anchors.fill: parent
                 coverArtVisible: true
-                headBarExit: false
                 holder.emoji: "qrc:/assets/MusicCloud.png"
                 holder.isMask: false
                 holder.title : "No Tracks!"

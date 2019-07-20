@@ -22,8 +22,6 @@ BabeTable
 
     trackNumberVisible: false
     headBar.visible: count
-    headBarExit: true
-    headBarExitIcon: "edit-clear"
     holder.emoji: "qrc:/assets/BugSearch.png"
     holder.isMask: false
     holder.title : "No search results!"
@@ -32,7 +30,12 @@ BabeTable
     coverArtVisible: true
     trackDuration: true
     trackRating: true
-    onExit: clearSearch()
+
+    headBar.leftContent: ToolButton
+    {
+        icon.name: "edit-clear"
+        onClicked: clearSearch()
+    }
 
     footBar.drawBorder: false
     footBar.middleContent:  Maui.TextField
