@@ -315,6 +315,7 @@ Maui.ApplicationWindow
             {
                 icon.name: "headphones"
                 visible: _drawer.modal
+                checked: _drawer.visible
                 icon.color: _drawer.visible ? babeColor : textColor
                 onClicked: _drawer.visible = !_drawer.visible
                 Kirigami.Theme.highlightColor: babeColor
@@ -643,7 +644,7 @@ Maui.ApplicationWindow
     globalDrawer: Maui.GlobalDrawer
     {
         id: _drawer
-        width: Kirigami.Units.gridUnit * 18
+        width: Math.min(Kirigami.Units.gridUnit * 18, root.width)
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
         modal: !isWide
@@ -764,162 +765,162 @@ Maui.ApplicationWindow
                 }
             }
 
-//            AlbumsView
-//            {
-//                id: artistsView
+            AlbumsView
+            {
+                id: artistsView
 
-//                holder.emoji: "qrc:/assets/MusicBox.png"
-//                holder.isMask: false
-//                holder.title : qsTr("No Artists!")
-//                holder.body: qsTr("Add new music sources")
-//                holder.emojiSize: iconSizes.huge
-//                title: count + qsTr(" artists")
-//                list.query: Albums.ARTISTS
-//                list.sortBy: Albums.ARTIST
-//                table.list.sortBy:  Tracks.NONE
+                holder.emoji: "qrc:/assets/MusicBox.png"
+                holder.isMask: false
+                holder.title : qsTr("No Artists!")
+                holder.body: qsTr("Add new music sources")
+                holder.emojiSize: iconSizes.huge
+                title: count + qsTr(" artists")
+                list.query: Albums.ARTISTS
+                list.sortBy: Albums.ARTIST
+                table.list.sortBy:  Tracks.NONE
 
-//                Connections
-//                {
-//                    target: artistsView
-//                    onRowClicked: Player.addTrack(track)
-//                    onPlayTrack: Player.quickPlay(track)
-//                    onAlbumCoverClicked: artistsView.populateTable(undefined, artist)
+                Connections
+                {
+                    target: artistsView
+                    onRowClicked: Player.addTrack(track)
+                    onPlayTrack: Player.quickPlay(track)
+                    onAlbumCoverClicked: artistsView.populateTable(undefined, artist)
 
-//                    onAlbumCoverPressedAndHold:
-//                    {
-//                        var query = Q.GET.artistTracks_.arg(artist)
-//                        mainPlaylist.list.clear()
-//                        mainPlaylist.list.sortBy = Tracks.NONE
-//                        mainPlaylist.list.query = query
-//                        Player.playAll()
-//                    }
+                    onAlbumCoverPressedAndHold:
+                    {
+                        var query = Q.GET.artistTracks_.arg(artist)
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAll()
+                    }
 
-//                    onPlayAll:
-//                    {
-//                        var query = Q.GET.artistTracks_.arg(artist)
-//                        query = query.arg(data.artist)
+                    onPlayAll:
+                    {
+                        var query = Q.GET.artistTracks_.arg(artist)
+                        query = query.arg(data.artist)
 
-//                        mainPlaylist.list.clear()
-//                        mainPlaylist.list.sortBy = Tracks.NONE
-//                        mainPlaylist.list.query = query
-//                        Player.playAll()
-//                    }
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAll()
+                    }
 
-//                    onAppendAll:
-//                    {
-//                        var query = Q.GET.artistTracks_.arg(artist)
+                    onAppendAll:
+                    {
+                        var query = Q.GET.artistTracks_.arg(artist)
 
-//                        mainPlaylist.list.appendQuery(query)
-//                        mainPlaylist.listView.positionViewAtEnd()
-//                    }
-//                }
-//            }
+                        mainPlaylist.list.appendQuery(query)
+                        mainPlaylist.listView.positionViewAtEnd()
+                    }
+                }
+            }
 
-//            PlaylistsView
-//            {
-//                id: playlistsView
+            PlaylistsView
+            {
+                id: playlistsView
 
-//                Connections
-//                {
-//                    target: playlistsView
-//                    onRowClicked: Player.addTrack(track)
-//                    onQuickPlayTrack: Player.quickPlay(track)
+                Connections
+                {
+                    target: playlistsView
+                    onRowClicked: Player.addTrack(track)
+                    onQuickPlayTrack: Player.quickPlay(track)
 
-//                    onPlayAll:
-//                    {
-//                        var query = playlistsView.playlistQuery
-//                        mainPlaylist.list.clear()
-//                        mainPlaylist.list.sortBy = Tracks.NONE
-//                        mainPlaylist.list.query = query
-//                        Player.playAll()
-//                    }
+                    onPlayAll:
+                    {
+                        var query = playlistsView.playlistQuery
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAll()
+                    }
 
-//                    onAppendAll:
-//                    {
-//                        var query = playlistsView.playlistQuery
+                    onAppendAll:
+                    {
+                        var query = playlistsView.playlistQuery
 
-//                        mainPlaylist.list.appendQuery(query)
-//                        mainPlaylist.listView.positionViewAtEnd()
-//                    }
+                        mainPlaylist.list.appendQuery(query)
+                        mainPlaylist.listView.positionViewAtEnd()
+                    }
 
-//                    onPlaySync:
-//                    {
-//                        var query = playlistsView.playlistQuery
-//                        mainPlaylist.list.appendQuery(query)
-//                        Player.playAll()
+                    onPlaySync:
+                    {
+                        var query = playlistsView.playlistQuery
+                        mainPlaylist.list.appendQuery(query)
+                        Player.playAll()
 
-//                        root.sync = true
-//                        root.syncPlaylist = playlist
-//                        root.infoMsg = qsTr("Syncing to ") + playlist
-//                    }
-//                }
-//            }
+                        root.sync = true
+                        root.syncPlaylist = playlist
+                        root.infoMsg = qsTr("Syncing to ") + playlist
+                    }
+                }
+            }
 
 
-//            SearchTable
-//            {
-//                id: searchView
+            SearchTable
+            {
+                id: searchView
 
-//                Connections
-//                {
-//                    target: searchView
-//                    onRowClicked: Player.addTrack(searchView.list.get(index))
-//                    onQuickPlayTrack: Player.quickPlay(searchView.list.get(index))
-//                    onPlayAll:
-//                    {
-//                        mainPlaylist.list.clear()
-//                        var tracks = searchView.list.getAll()
-//                        for(var i in tracks)
-//                            Player.appendTrack(tracks[i])
+                Connections
+                {
+                    target: searchView
+                    onRowClicked: Player.addTrack(searchView.list.get(index))
+                    onQuickPlayTrack: Player.quickPlay(searchView.list.get(index))
+                    onPlayAll:
+                    {
+                        mainPlaylist.list.clear()
+                        var tracks = searchView.list.getAll()
+                        for(var i in tracks)
+                            Player.appendTrack(tracks[i])
 
-//                        Player.playAll()
-//                    }
+                        Player.playAll()
+                    }
 
-//                    onAppendAll: Player.appendAll(searchView.list.getAll())
-//                    onArtworkDoubleClicked:
-//                    {
-//                        var query = Q.GET.albumTracks_.arg(
-//                                    searchView.searchTable.model.get(
-//                                        index).album)
-//                        query = query.arg(searchView.searchTable.model.get(
-//                                              index).artist)
+                    onAppendAll: Player.appendAll(searchView.list.getAll())
+                    onArtworkDoubleClicked:
+                    {
+                        var query = Q.GET.albumTracks_.arg(
+                                    searchView.searchTable.model.get(
+                                        index).album)
+                        query = query.arg(searchView.searchTable.model.get(
+                                              index).artist)
 
-//                        mainPlaylist.list.clear()
-//                        mainPlaylist.list.sortBy = Tracks.NONE
-//                        mainPlaylist.list.query = query
-//                        Player.playAll()
-//                    }
-//                }
-//            }
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAll()
+                    }
+                }
+            }
 
-//            FoldersView
-//            {
-//                id: foldersView
+            FoldersView
+            {
+                id: foldersView
 
-//                Connections
-//                {
-//                    target: foldersView.list
+                Connections
+                {
+                    target: foldersView.list
 
-//                    onRowClicked: Player.addTrack(foldersView.list.model.get(index))
-//                    onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
-//                    onPlayAll:
-//                    {
-//                        mainPlaylist.list.clear()
-//                        //                        mainPlaylist.list.sortBy = Tracks.NONE
-//                        mainPlaylist.list.query = foldersView.list.list.query
-//                        Player.playAll()
-//                    }
+                    onRowClicked: Player.addTrack(foldersView.list.model.get(index))
+                    onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
+                    onPlayAll:
+                    {
+                        mainPlaylist.list.clear()
+                        //                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = foldersView.list.list.query
+                        Player.playAll()
+                    }
 
-//                    onAppendAll:
-//                    {
-//                        var query = foldersView.list.list.query
-//                        mainPlaylist.list.appendQuery(query)
-//                        mainPlaylist.listView.positionViewAtEnd()
-//                    }
+                    onAppendAll:
+                    {
+                        var query = foldersView.list.list.query
+                        mainPlaylist.list.appendQuery(query)
+                        mainPlaylist.listView.positionViewAtEnd()
+                    }
 
-//                    onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
-//                }
-//            }
+                    onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
+                }
+            }
 
             //            CloudView
             //            {

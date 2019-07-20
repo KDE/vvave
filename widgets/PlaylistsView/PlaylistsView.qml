@@ -44,6 +44,7 @@ ColumnLayout
         BabeList
         {
             id: playlistViewModelFilter
+//            headBarExitIcon: "go-previous"
             headBar.leftContent: ToolButton
             {
                 icon.name: "go-previous"
@@ -58,6 +59,7 @@ ColumnLayout
                 Connections
                 {
                     target: delegate
+
                     onClicked: {}
                 }
             }

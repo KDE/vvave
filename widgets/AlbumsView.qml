@@ -102,6 +102,8 @@ BabeGrid
         maxHeight: maxWidth
         maxWidth: unit * 600
         defaultButtons: false
+        page.padding: 0
+
         //        verticalAlignment: Qt.AlignBottom
 
         ColumnLayout

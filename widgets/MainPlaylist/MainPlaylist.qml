@@ -51,51 +51,50 @@ Maui.Page
         id: albumsRoll
     }
 
-//    footBar.background: Rectangle
-//    {
-//        id: footerBg
-//        clip : true
-//        height: footBar.implicitHeight
-//        color: "transparent"
+    footBar.background: Item
+    {
+        id: footerBg
+        clip : true
+        height: footBar.implicitHeight
 
-//        Image
-//        {
-//            id: artworkBg
-//            height: parent.height
-//            width: parent.width
+        Image
+        {
+            id: artworkBg
+            height: parent.height
+            width: parent.width
 
-//            sourceSize.width: parent.width
-//            sourceSize.height: parent.height
+            sourceSize.width: parent.width
+            sourceSize.height: parent.height
 
-//            fillMode: Image.PreserveAspectCrop
-//            cache: true
-//            antialiasing: true
-//            smooth: true
-//            asynchronous: true
+            fillMode: Image.PreserveAspectCrop
+            cache: true
+            antialiasing: true
+            smooth: true
+            asynchronous: true
 
-//            source: "file://"+encodeURIComponent(currentArtwork)
-//        }
+            source: "file://"+encodeURIComponent(currentArtwork)
+        }
 
-//        FastBlur
-//        {
-//            id: fastBlur
-//            anchors.fill: parent
-//            y:1
-//            source: artworkBg
-//            radius: 100
-//            transparentBorder: false
-//            cached: true
-//            z:1
-//            clip: true
+        FastBlur
+        {
+            id: fastBlur
+            anchors.fill: parent
+            y:1
+            source: artworkBg
+            radius: 100
+            transparentBorder: false
+            cached: true
+            z:1
+            clip: true
 
-//            Rectangle
-//            {
-//                anchors.fill: parent
-//                color: viewBackgroundColor
-//                opacity: 0.85
-//            }
-//        }
-//    }
+            Rectangle
+            {
+                anchors.fill: parent
+                color: viewBackgroundColor
+                opacity: 0.85
+            }
+        }
+    }
 
 
     ColumnLayout
