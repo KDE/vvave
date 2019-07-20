@@ -61,6 +61,8 @@ BabeList
 
     headBar.rightContent: Kirigami.ActionToolBar
     {
+        position: Controls.ToolBar.Header
+        Layout.fillWidth: true
         actions:   [
             Kirigami.Action
             {
