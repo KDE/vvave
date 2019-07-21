@@ -81,6 +81,7 @@ ColumnLayout
         maxHeight: maxWidth
         maxWidth: unit * 600
         defaultButtons: false
+        page.padding: 0
 
         BabeTable
         {
