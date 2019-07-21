@@ -87,8 +87,8 @@ Maui.Page
                 target: albumDelegate
                 onClicked:
                 {
-                    var album = grid.model.get(index).album
-                    var artist = grid.model.get(index).artist
+                    var album = _albumsList.get(index).album
+                    var artist = _albumsList.get(index).artist
                     albumCoverClicked(album, artist)
                     grid.currentIndex = index
                 }
