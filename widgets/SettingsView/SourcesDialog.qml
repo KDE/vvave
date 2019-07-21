@@ -14,6 +14,7 @@ Maui.Dialog
     defaultButtons: true
     acceptButton.text: qsTr("Add")
     rejectButton.text: qsTr("Remove")
+    page.padding: 0
 
     onRejected:
     {

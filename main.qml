@@ -157,7 +157,7 @@ Maui.ApplicationWindow
     //    headBarBGColor: "#212121"
     //    altColorText: darkTextColor
 
-    headBar.spacing: space.big
+//    headBar.spacing: space.big
     headBar.middleContent : Kirigami.ActionToolBar
     {
 //        display: isWide ? ToolButton.TextBesideIcon : ToolButton.TextUnderIcon
@@ -659,7 +659,7 @@ Maui.ApplicationWindow
                 target: mainPlaylist
                 onCoverPressed: Player.appendAll(tracks)
                 onCoverDoubleClicked: Player.playAll(tracks)
-            }            
+            }
         }
     }
 
@@ -1031,10 +1031,10 @@ Maui.ApplicationWindow
     {
         target: vvave
 
-//        onRefreshTables: H.refreshCollection(size)
-//        onRefreshTracks: H.refreshTracks()
-//        onRefreshAlbums: H.refreshAlbums()
-//        onRefreshArtists: H.refreshArtists()
+        onRefreshTables: H.refreshCollection(size)
+        onRefreshTracks: H.refreshTracks()
+        onRefreshAlbums: H.refreshAlbums()
+        onRefreshArtists: H.refreshArtists()
 
         //        onCoverReady:
         //        {
