@@ -108,7 +108,7 @@ ListView
     {
         anchors.fill : parent
         preventStealing: true
-        parent: applicationWindow().overlay.parent
+//        parent: applicationWindow().overlay.parent
 
         onPressed:
         {

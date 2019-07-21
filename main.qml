@@ -152,13 +152,10 @@ Maui.ApplicationWindow
 
 
     /* UI */
-    altToolBars: false
     accentColor: babeColor
     //    headBarFGColor: altColorText
     //    headBarBGColor: "#212121"
     //    altColorText: darkTextColor
-
-    floatingBar: false
 
     headBar.spacing: space.big
     headBar.middleContent : Kirigami.ActionToolBar
@@ -250,7 +247,7 @@ Maui.ApplicationWindow
 
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: footBar.visible ? toolBarHeight * 1.2 : 0
-    page.footBarItem: ColumnLayout
+    page.footer: ColumnLayout
     {
         id: _footerLayout
 
@@ -318,6 +315,7 @@ Maui.ApplicationWindow
             {
                 icon.name: "headphones"
                 visible: _drawer.modal
+                checked: _drawer.visible
                 icon.color: _drawer.visible ? babeColor : textColor
                 onClicked: _drawer.visible = !_drawer.visible
                 Kirigami.Theme.highlightColor: babeColor
@@ -646,7 +644,7 @@ Maui.ApplicationWindow
     globalDrawer: Maui.GlobalDrawer
     {
         id: _drawer
-        width: Kirigami.Units.gridUnit * 18
+        width: Math.min(Kirigami.Units.gridUnit * 18, root.width)
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
         modal: !isWide
@@ -722,7 +720,7 @@ Maui.ApplicationWindow
                 holder.title : "No Albums!"
                 holder.body: "Add new music sources"
                 holder.emojiSize: iconSizes.huge
-                headBarTitle: count + qsTr(" albums")
+                title: count + qsTr(" albums")
                 list.query: Albums.ALBUMS
                 list.sortBy: Albums.ALBUM
 
@@ -776,7 +774,7 @@ Maui.ApplicationWindow
                 holder.title : qsTr("No Artists!")
                 holder.body: qsTr("Add new music sources")
                 holder.emojiSize: iconSizes.huge
-                headBarTitle: count + qsTr(" artists")
+                title: count + qsTr(" artists")
                 list.query: Albums.ARTISTS
                 list.sortBy: Albums.ARTIST
                 table.list.sortBy:  Tracks.NONE
@@ -1033,10 +1031,10 @@ Maui.ApplicationWindow
     {
         target: vvave
 
-        onRefreshTables: H.refreshCollection(size)
-        onRefreshTracks: H.refreshTracks()
-        onRefreshAlbums: H.refreshAlbums()
-        onRefreshArtists: H.refreshArtists()
+//        onRefreshTables: H.refreshCollection(size)
+//        onRefreshTracks: H.refreshTracks()
+//        onRefreshAlbums: H.refreshAlbums()
+//        onRefreshArtists: H.refreshArtists()
 
         //        onCoverReady:
         //        {

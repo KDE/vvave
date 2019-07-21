@@ -29,8 +29,6 @@ Maui.Page
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
     focus: true
-
-    margins: 0
     headBar.visible: false
 
     PlaylistMenu
@@ -45,20 +43,19 @@ Maui.Page
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: toolBarHeight * 1.3
 
-    footBarItem: AlbumsRoll
+    footBar.middleContent: AlbumsRoll
     {
-        anchors.fill : parent
-        anchors.leftMargin: space.small
-        anchors.rightMargin: space.small
+//        height: toolBarHeight * 1.3
+        Layout.fillWidth: true
+        Layout.fillHeight: true
         id: albumsRoll
     }
 
-    footBar.background: Rectangle
+    footBar.background: Item
     {
         id: footerBg
         clip : true
         height: footBar.implicitHeight
-        color: "transparent"
 
         Image
         {
@@ -154,13 +151,7 @@ Maui.Page
 //                if(autoplay)
 //                    Player.playAt(0)
             }
-        }
-
-        Kirigami.Separator
-        {
-            Layout.fillWidth: true
-            color: borderColor
-        }
+        }       
     }
 
     //    function goFocusMode()

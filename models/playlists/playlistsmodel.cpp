@@ -80,6 +80,8 @@ void PlaylistsModel::setList()
     this->list << this->db->getPlaylists();
     this->list << this->defaultPlaylists();
 
+    qDebug()<< this->list;
+
     //    this->sortList();
     emit this->postListChanged();
 }

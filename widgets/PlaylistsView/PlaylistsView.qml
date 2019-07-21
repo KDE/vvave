@@ -4,14 +4,10 @@ import QtQuick.Controls 2.2
 import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
-
 import "../../view_models/BabeTable"
 import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
-
-
-
 
 ColumnLayout
 {
@@ -36,7 +32,6 @@ ColumnLayout
 
         Layout.fillHeight: true
         Layout.fillWidth: true
-
         interactive: false
         clip: true
 
@@ -49,8 +44,12 @@ ColumnLayout
         BabeList
         {
             id: playlistViewModelFilter
-
-            headBarExitIcon: "go-previous"
+//            headBarExitIcon: "go-previous"
+            headBar.leftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked: playlistSwipe.currentIndex = 0
+            }
 
             model : ListModel {}
             delegate: Maui.LabelDelegate
@@ -64,10 +63,7 @@ ColumnLayout
                     onClicked: {}
                 }
             }
-
-            onExit: playlistSwipe.currentIndex = 0
         }
-
     }
 
     ColorTagsBar
@@ -75,9 +71,7 @@ ColumnLayout
         Layout.fillWidth: true
         height: rowHeightAlt
         recSize: isMobile ? iconSize : 16
-
         onColorClicked: populate(Q.GET.colorTracks_.arg(color.toLowerCase()))
-
     }
 
     Maui.Dialog
@@ -87,7 +81,6 @@ ColumnLayout
         maxHeight: maxWidth
         maxWidth: unit * 600
         defaultButtons: false
-        page.margins: 0
 
         BabeTable
         {
@@ -99,10 +92,7 @@ ColumnLayout
             trackRating: true
             trackDuration: false
             headBar.visible: !holder.visible
-            headBarExit: false
-            headBarTitle: playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
-
-
+            title: playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
             holder.emoji: "qrc:/assets/Electricity.png"
             holder.isMask: false
             holder.title : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
@@ -154,7 +144,6 @@ ColumnLayout
             //                    }
             //                }
             //            ]
-
 
             section.criteria: ViewSection.FullString
             section.delegate: Maui.LabelDelegate

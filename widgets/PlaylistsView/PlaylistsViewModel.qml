@@ -19,9 +19,9 @@ BabeList
     id: control
 
     property alias list: _playlistsList
+    signal playSync(int index)
 
-    headBarExit: false
-    headBarTitle: "Playlists"
+    title: "Playlists"
 
     Maui.NewDialog
     {
@@ -31,9 +31,6 @@ BabeList
         acceptText: qsTr("Create")
         rejectButton.visible: false
     }
-
-    signal playSync(int index)
-    headBar.plegable: false
 
 
     headBar.rightContent: Kirigami.ActionToolBar

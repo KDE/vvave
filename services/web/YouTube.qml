@@ -11,7 +11,6 @@ Maui.Page
     id: youtubeViewRoot
     property var searchRes : []
     clip: true
-    margins: 0
     property alias viewer : youtubeViewer
     property int openVideo : 0
     headBar.visible: false
@@ -178,9 +177,6 @@ Maui.Page
             id: youtubeTable
             trackNumberVisible: false
             headBar.visible: true
-            headBarExit: true
-            headBarExitIcon: "edit-clear"
-            headBarTitle: "YouTube"
             holder.emoji: "qrc:/assets/Astronaut.png"
             holder.isMask: false
             holder.title : "No Results!"
@@ -189,7 +185,6 @@ Maui.Page
             coverArtVisible: true
             trackDuration: true
             trackRating: true
-            onExit: clearSearch()
             isArtworkRemote: true
             allowMenu: false
 
@@ -197,6 +192,17 @@ Maui.Page
 
 //            appendBtn.visible: false
 //            playAllBtn.visible: false
+
+            headBar.leftContent: ToolButton
+            {
+                icon.name: "edit-clear"
+                onClicked: clearSearch()
+            }
+
+            headBar.middleContent: Label
+            {
+                text: "YouTube"
+            }
 
             headBar.rightContent: ToolButton
             {

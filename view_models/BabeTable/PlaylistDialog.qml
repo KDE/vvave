@@ -14,6 +14,7 @@ Maui.Dialog
 
     property var tracks : []
     maxHeight: 400 * unit
+    page.padding: space.medium
 
     ColumnLayout
     {

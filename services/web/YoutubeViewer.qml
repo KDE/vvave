@@ -12,11 +12,14 @@ Maui.Page
     property alias webView: webViewer.item
     property bool wasPlaying: false
     property var currentYt : ({})
-    margins: 0
 
-    headBarExitIcon: "go-previous"
-    onExit: stackView.pop(youtubeTable)
-    headBarTitle: currentYt ? currentYt.title : "YouTube"
+    title: currentYt ? currentYt.title : "YouTube"
+
+    headBar.leftContent: ToolButton
+    {
+        icon.name: "go-previous"
+        onClicked: stackView.pop(youtubeTable)
+    }
 
     headBar.rightContent: [
 

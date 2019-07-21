@@ -24,7 +24,6 @@ Maui.Page
     signal pulled()
 
     focus: true
-    margins: 0
 
      Maui.Holder
     {
@@ -32,8 +31,6 @@ Maui.Page
         visible: babeList.count === 0
         focus: true
     }
-
-
 
     Maui.ListBrowser
     {
