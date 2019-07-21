@@ -90,78 +90,78 @@ BabeList
                     onTriggered: list.sortBy = Tracks.TITLE
                 }
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Track")
-//                    checkable: true
-//                    checked: list.sortBy === Tracks.TRACK
-//                    onTriggered: list.sortBy = Tracks.TRACK
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Track")
+                    checkable: true
+                    checked: list.sortBy === Tracks.TRACK
+                    onTriggered: list.sortBy = Tracks.TRACK
+                }
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Artist")
-//                    checkable: true
-//                    checked: list.sortBy === Tracks.ARTIST
-//                    onTriggered: list.sortBy = Tracks.ARTIST
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Artist")
+                    checkable: true
+                    checked: list.sortBy === Tracks.ARTIST
+                    onTriggered: list.sortBy = Tracks.ARTIST
+                }
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Album")
-//                    checkable: true
-//                    checked: list.sortBy === Tracks.ALBUM
-//                    onTriggered: list.sortBy = Tracks.ALBUM
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Album")
+                    checkable: true
+                    checked: list.sortBy === Tracks.ALBUM
+                    onTriggered: list.sortBy = Tracks.ALBUM
+                }
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Most played")
-//                    checkable: true
-//                    checked: list.sortBy === Tracks.COUNT
-//                    onTriggered: list.sortBy = Tracks.COUNT
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Most played")
+                    checkable: true
+                    checked: list.sortBy === Tracks.COUNT
+                    onTriggered: list.sortBy = Tracks.COUNT
+                }
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Rate")
-//                    checkable: true
-//                    checked: list.sortBy === Tracks.RATE
-//                    onTriggered: list.sortBy = Tracks.RATE
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Rate")
+                    checkable: true
+                    checked: list.sortBy === Tracks.RATE
+                    onTriggered: list.sortBy = Tracks.RATE
+                }
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Fav")
-//                    checkable: true
-//                    checked: list.sortBy === Tracks.FAV
-//                    onTriggered: list.sortBy = Tracks.FAV
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Fav")
+                    checkable: true
+                    checked: list.sortBy === Tracks.FAV
+                    onTriggered: list.sortBy = Tracks.FAV
+                }
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Release date")
-//                    checkable: true
-//                    checked: list.sortBy === Tracks.RELEASEDATE
-//                    onTriggered: list.sortBy = Tracks.RELEASEDATE
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Release date")
+                    checkable: true
+                    checked: list.sortBy === Tracks.RELEASEDATE
+                    onTriggered: list.sortBy = Tracks.RELEASEDATE
+                }
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Add date")
-//                    checkable: true
-//                    checked: list.sortBy === Tracks.ADDDATE
-//                    onTriggered: list.sortBy = Tracks.ADDDATE
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Add date")
+                    checkable: true
+                    checked: list.sortBy === Tracks.ADDDATE
+                    onTriggered: list.sortBy = Tracks.ADDDATE
+                }
 
 
-//                Kirigami.Action
-//                {
-//                    text: qsTr("Group")
-//                    checkable: true
-//                    checked: group
-//                    onTriggered: group = !group
-//                }
+                Kirigami.Action
+                {
+                    text: qsTr("Group")
+                    checkable: true
+                    checked: group
+                    onTriggered: group = !group
+                }
             },
 
             Kirigami.Action

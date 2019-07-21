@@ -101,6 +101,8 @@ BabeGrid
         parent: parent
         maxHeight: maxWidth
         maxWidth: unit * 600
+        widthHint: 1
+        heightHint: 1
         defaultButtons: false
         page.padding: 0
 
