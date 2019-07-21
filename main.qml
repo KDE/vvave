@@ -161,7 +161,7 @@ Maui.ApplicationWindow
     headBar.middleContent : Kirigami.ActionToolBar
     {
 //        display: isWide ? ToolButton.TextBesideIcon : ToolButton.TextUnderIcon
-        position: Controls.ToolBar.Header
+        position: ToolBar.Header
         Layout.fillWidth: false
         hiddenActions: [
 
