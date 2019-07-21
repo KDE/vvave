@@ -215,8 +215,6 @@ Maui.ApplicationWindow
 
             Kirigami.Action
             {
-                Layout.fillWidth: true
-
                 text: qsTr("Artists")
                 checkable: false
                 checked: currentView === viewsIndex.artists
@@ -229,8 +227,6 @@ Maui.ApplicationWindow
 
             Kirigami.Action
             {
-                Layout.fillWidth: true
-
                 text: qsTr("Playlists")
                 checkable: false
                 checked: currentView === viewsIndex.playlists
@@ -1031,10 +1027,10 @@ Maui.ApplicationWindow
     {
         target: vvave
 
-        onRefreshTables: H.refreshCollection(size)
-        onRefreshTracks: H.refreshTracks()
-        onRefreshAlbums: H.refreshAlbums()
-        onRefreshArtists: H.refreshArtists()
+//        onRefreshTables: H.refreshCollection(size)
+//        onRefreshTracks: H.refreshTracks()
+//        onRefreshAlbums: H.refreshAlbums()
+//        onRefreshArtists: H.refreshArtists()
 
         //        onCoverReady:
         //        {
