@@ -42,7 +42,7 @@ Maui.Page
 
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: toolBarHeight * 1.3
-
+    footBar.width: parent.width
     footBar.middleContent: AlbumsRoll
     {
 //        height: toolBarHeight * 1.3

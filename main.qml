@@ -243,7 +243,7 @@ Maui.ApplicationWindow
 
     footBar.visible: !mainlistEmpty
     footBar.implicitHeight: footBar.visible ? toolBarHeight * 1.2 : 0
-    page.footer: ColumnLayout
+    footer: ColumnLayout
     {
         id: _footerLayout
 
@@ -644,7 +644,7 @@ Maui.ApplicationWindow
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
 
         modal: !isWide
-        handleVisible: false
+        handleVisible: modal
         closePolicy: Popup.NoAutoClose
         contentItem: MainPlaylist
         {
