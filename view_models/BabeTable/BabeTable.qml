@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
-import org.kde.kirigami 2.6 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import BaseModel 1.0
@@ -57,10 +57,10 @@ BabeList
     focus: true
 
     //headBar.middleStrech: false
-    headBar.leftSretch: false
-    headBar.rightContent: Kirigami.ActionToolBar
+    headBar.rightSretch: false
+    headBar.leftContent: Kirigami.ActionToolBar
     {
-        position: Controls.ToolBar.Header
+        position: ToolBar.Header
         Layout.fillWidth: true
         actions:   [
             Kirigami.Action
