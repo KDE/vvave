@@ -46,8 +46,10 @@ Maui.Page
     footBar.middleContent: AlbumsRoll
     {
 //        height: toolBarHeight * 1.3
-        Layout.fillWidth: true
+//        Layout.fillWidth: true
         Layout.fillHeight: true
+        width: footBar.width
+//        height: footBar.height
         id: albumsRoll
     }
 

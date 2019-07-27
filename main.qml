@@ -642,7 +642,6 @@ Maui.ApplicationWindow
         id: _drawer
         width: Math.min(Kirigami.Units.gridUnit * 18, root.width)
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
-
         modal: !isWide
         handleVisible: modal
         closePolicy: Popup.NoAutoClose
