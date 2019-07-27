@@ -89,7 +89,7 @@ BabeTable
     function runSearch(searchTxt)
     {
         if(searchTxt)
-            if(searchTxt !== searchTable.headBarTitle)
+            if(searchTxt !== searchTable.title)
             {
                 if(savedQueries.indexOf(searchTxt) < 0)
                 {
@@ -98,7 +98,7 @@ BabeTable
                     Maui.FM.saveSettings("QUERIES", savedQueries.join(","), "BABE")
                 }
 
-                searchTable.headBarTitle = searchTxt
+                searchTable.title = searchTxt
                 var queries = searchTxt.split(",")
                 searchTable.list.searchQueries(queries)
                 searchTable.forceActiveFocus()
@@ -110,7 +110,7 @@ BabeTable
     {
         searchInput.clear()
         searchTable.list.clear()
-        searchTable.headBarTitle = ""
+        searchTable.title = ""
         suggestionsPopup.close()
     }
 
