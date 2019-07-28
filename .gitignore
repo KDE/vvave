@@ -4,6 +4,7 @@ mauikit/
 3rdparty/openssl/
 .directory
 
+*.kdev4
 *.*~
 #~*.*
 #~.*
