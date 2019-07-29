@@ -22,7 +22,7 @@ Item
         onItemClicked:
         {
             var item = browser.model.get(index)
-            _filterList.headBarTitle= item.label
+            _filterList.title= item.label
             currentFolder = item.path
             filter()
             _listDialog.open()
@@ -46,6 +46,7 @@ Item
             maxHeight: maxWidth
             maxWidth: unit * 600
             defaultButtons: false
+            page.padding: 0
             BabeTable
             {
                 id: _filterList
