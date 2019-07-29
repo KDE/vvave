@@ -28,7 +28,7 @@ import "db/Queries.js" as Q
 import "utils/Help.js" as H
 import "utils/Player.js" as Player
 
-import org.kde.kirigami 2.6 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import Player 1.0
 import AlbumsList 1.0
@@ -152,7 +152,7 @@ Maui.ApplicationWindow
 
 
     /* UI */
-    accentColor: babeColor
+//    accentColor: babeColor
     //    headBarFGColor: altColorText
     //    headBarBGColor: "#212121"
     //    altColorText: darkTextColor
@@ -296,17 +296,18 @@ Maui.ApplicationWindow
             }
         }
 
-        Kirigami.Separator
-        {
-            Layout.fillWidth: true
-            color: borderColor
-        }
+//        Kirigami.Separator
+//        {
+//            Layout.fillWidth: true
+////            color: borderColor
+//        }
 
         Maui.ToolBar
         {
             Layout.fillHeight: true
             Layout.fillWidth: true
 
+            position: ToolBar.Footer
             leftContent:  ToolButton
             {
                 icon.name: "headphones"
@@ -648,7 +649,6 @@ Maui.ApplicationWindow
         contentItem: MainPlaylist
         {
             id: mainPlaylist
-            z: 999
             Connections
             {
                 target: mainPlaylist
@@ -954,47 +954,44 @@ Maui.ApplicationWindow
             Layout.bottomMargin: space.big
             onIconClicked: _contextMenu.popup()
             onExitClicked: clear()
-            colorScheme.backgroundColor: "#212121"
+            Kirigami.Theme.backgroundColor: "#212121"
 
-            model: BaseModel
-            {
-                list: _selectionBarModelList
-            }
+//            model: BaseModel
+//            {
+//                list: _selectionBarModelList
+//            }
 
-            Tracks
-            {
-                id: _selectionBarModelList
-            }
+//            Tracks
+//            {
+//                id: _selectionBarModelList
+//            }
 
             SelectionBarMenu
             {
                 id: _contextMenu
             }
 
-            function append(item)
-            {
-                if(selectedPaths.indexOf(item.path) < 0)
-                {
-                    selectedItems.push(item)
-                    selectedPaths.push(item.path)
+//            function append(item)
+//            {
+//                _selectionBar.append(item)
 
-                    //             for(var i = 0; i < selectionList.count ; i++ )
-                    //                 if(selectionList.model.get(i).path === item.path)
-                    //                 {
-                    //                     selectionList.model.remove(i)
-                    //                     return
-                    //                 }
+////                if(selectedPaths.indexOf(item.path) < 0)
+////                {
+////                    selectedItems.push(item)
+////                    selectedPaths.push(item.path)
 
-                    selectionList.model.list.append(item)
-                    selectionList.positionViewAtEnd()
+////                    //             for(var i = 0; i < selectionList.count ; i++ )
+////                    //                 if(selectionList.model.get(i).path === item.path)
+////                    //                 {
+////                    //                     selectionList.model.remove(i)
+////                    //                     return
+////                    //                 }
 
-                    if(position === Qt.Vertical) return
+////                    selectionList.model.list.append(item)
+////                    selectionList.positionViewAtEnd()
 
-                    if(typeof(riseContent) === "undefined") return
-
-                    riseContent()
-                }
-            }
+////                }
+//            }
         }
     }
 

@@ -35,6 +35,7 @@ signals:
 
 public slots:
     QVariantMap get(const int &index) const;
+//    void remove(const int &index);
     void clear();
 };
 

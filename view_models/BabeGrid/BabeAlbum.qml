@@ -3,6 +3,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import AlbumsList 1.0
+import org.kde.kirigami 2.7 as Kirigami
 
 ItemDelegate
 {
@@ -13,7 +14,7 @@ ItemDelegate
     property int albumSize : iconSizes.huge
     property int albumRadius : 0
     property bool albumCard : true
-    property string fillColor : Qt.darker(backgroundColor, 1.1)
+    property string fillColor : Qt.darker(Kirigami.Theme.backgroundColor, 1.1)
     property bool hide : false
     property bool showLabels : true
     property bool showIndicator :  false
@@ -21,7 +22,7 @@ ItemDelegate
     property bool hideRepeated : false
     property bool increaseCurrentItem : false
 
-    property color labelColor : GridView.isCurrentItem  || hovered || down ? highlightColor : textColor
+    property color labelColor : GridView.isCurrentItem  || hovered || down ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
 
     readonly property bool sameAlbum :

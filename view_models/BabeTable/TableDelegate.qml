@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import QtGraphicalEffects 1.0
 
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import "../../view_models"
@@ -27,8 +27,8 @@ SwipeDelegate
     }
 
     property bool isCurrentListItem :  ListView.isCurrentItem
-    property color bgColor : backgroundColor
-    property string labelColor: isCurrentListItem ? highlightedTextColor : textColor
+    property color bgColor : Kirigami.Theme.backgroundColor
+    property string labelColor: isCurrentListItem ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
     property bool number : false
     property bool quickPlay : true
     property bool coverArt : false
@@ -61,7 +61,7 @@ SwipeDelegate
     background: Rectangle
     {
         height: delegateRoot.height
-        color: isCurrentListItem || hovered ? highlightColor : (trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r,
+        color: isCurrentListItem || hovered ? Kirigami.Theme.highlightColor : (trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r,
                                                                                                      Qt.lighter(trackMood, 1.3).g,
                                                                                                      Qt.lighter(trackMood, 1.3).b,
                                                                                                      0.3 ) ):
@@ -89,7 +89,7 @@ SwipeDelegate
             icon.name: "love"
             anchors.verticalCenter: parent.verticalCenter
 
-            icon.color: model.fav === "1" ? babeColor : textColor
+            icon.color: model.fav === "1" ? babeColor : Kirigami.Theme.textColor
             onClicked:
             {                
                 list.fav(index, !(list.get(index).fav == "1"))
@@ -192,7 +192,7 @@ SwipeDelegate
                                     width: artworkCover.adapt ? artworkCover.width : Math.min(artworkCover.width, artworkCover.height)
                                     height: artworkCover.adapt ? artworkCover.height : width
                                     radius: Kirigami.Units.devicePixelRatio *3
-                                    border.color: altColor
+//                                    border.color: Kirigami.Theme.View.
                                     border.width: Kirigami.Units.devicePixelRatio *3
                                 }
                             }

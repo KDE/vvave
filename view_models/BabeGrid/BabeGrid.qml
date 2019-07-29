@@ -1,7 +1,7 @@
 import QtQuick.Controls 2.2
 import QtQuick 2.9
 import ".."
-import org.kde.kirigami 2.0 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import BaseModel 1.0
@@ -13,7 +13,7 @@ Maui.Page
     //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
     //    property int hintSize : Math.sqrt(root.width*root.height)*0.3
 
-    property int albumCoverSize: Math.min(iconSizes.enormous, width * 0.3)
+    property int albumCoverSize: Math.min(120, width * 0.3)
     readonly property int albumSpacing: albumCoverSize * 0.3 + space.small
 
     property int albumCoverRadius :  radiusV

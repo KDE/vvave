@@ -31,7 +31,7 @@ Menu
         {
             mainPlaylist.list.clear()
 
-            var tracks = _selectionBarModelList.getAll()
+            var tracks = _selectionBar.selectedItems
             for(var i in tracks)
                 Player.appendTrack(tracks[i])
 
@@ -42,7 +42,7 @@ Menu
     MenuItem
     {
         text: qsTr("Append...")
-        onTriggered: Player.appendAll(_selectionBarModelList.getAll())
+        onTriggered: Player.appendAll(_selectionBar.selectedItems)
     }
 
     MenuItem
@@ -50,24 +50,24 @@ Menu
         text: qsTr("Queue")
         onTriggered:
         {
-            Player.queueTracks(_selectionBarModelList.getAll())
+            Player.queueTracks(_selectionBar.selectedItems)
             close()
         }
     }
 
-    MenuSeparator {}
+//    MenuSeparator {}
 
 
-    MenuItem
-    {
-        text: qsTr("Fav/UnFav them")
-        onTriggered:
-        {
-            for(var i= 0; i < _selectionBar.count; i++)
-                _selectionBarModelList.fav(i, !(_selectionBarModelList.get(i).fav == "1"))
+//    MenuItem
+//    {
+//        text: qsTr("Fav/UnFav them")
+//        onTriggered:
+//        {
+//            for(var i= 0; i < _selectionBar.count; i++)
+//                _selectionBarModelList.fav(i, !(_selectionBarModelList.get(i).fav == "1"))
 
-        }
-    }
+//        }
+//    }
 
 
     MenuItem
@@ -106,109 +106,109 @@ Menu
         }
     }
 
-    MenuSeparator {}
+//    MenuSeparator {}
 
-    MenuItem
-    {
-        id: starsRow
-        width: parent.width
-        height: iconSizes.medium + space.small
+//    MenuItem
+//    {
+//        id: starsRow
+//        width: parent.width
+//        height: iconSizes.medium + space.small
 
-        RowLayout
-        {
-            anchors.fill: parent
+//        RowLayout
+//        {
+//            anchors.fill: parent
 
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.name: starIcon
-                icon.width: iconSizes.medium
-                icon.color: rate >= 1 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 1
-                }
-            }
+//            ToolButton
+//            {
+//                Layout.fillWidth: true
+//                Layout.fillHeight: true
+//                icon.name: starIcon
+//                icon.width: iconSizes.medium
+//                icon.color: rate >= 1 ? starColor :starReg
+//                onClicked:
+//                {
+//                    rate = 1
+//                }
+//            }
 
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.width: iconSizes.medium
-                icon.name: starIcon
-                icon.color: rate >= 2 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 2
-                }
-            }
+//            ToolButton
+//            {
+//                Layout.fillWidth: true
+//                Layout.fillHeight: true
+//                icon.width: iconSizes.medium
+//                icon.name: starIcon
+//                icon.color: rate >= 2 ? starColor :starReg
+//                onClicked:
+//                {
+//                    rate = 2
+//                }
+//            }
 
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.width: iconSizes.medium
-                icon.name: starIcon
-                icon.color: rate >= 3 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 3
-                }
-            }
+//            ToolButton
+//            {
+//                Layout.fillWidth: true
+//                Layout.fillHeight: true
+//                icon.width: iconSizes.medium
+//                icon.name: starIcon
+//                icon.color: rate >= 3 ? starColor :starReg
+//                onClicked:
+//                {
+//                    rate = 3
+//                }
+//            }
 
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.width: iconSizes.medium
-                icon.name: starIcon
-                icon.color: rate >= 4 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 4
-                }
-            }
+//            ToolButton
+//            {
+//                Layout.fillWidth: true
+//                Layout.fillHeight: true
+//                icon.width: iconSizes.medium
+//                icon.name: starIcon
+//                icon.color: rate >= 4 ? starColor :starReg
+//                onClicked:
+//                {
+//                    rate = 4
+//                }
+//            }
 
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.width: iconSizes.medium
-                icon.name: starIcon
-                icon.color: rate >= 5 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 5
-                }
-            }
-        }
-    }
+//            ToolButton
+//            {
+//                Layout.fillWidth: true
+//                Layout.fillHeight: true
+//                icon.width: iconSizes.medium
+//                icon.name: starIcon
+//                icon.color: rate >= 5 ? starColor :starReg
+//                onClicked:
+//                {
+//                    rate = 5
+//                }
+//            }
+//        }
+//    }
 
-    onRateChanged:
-    {
-        close()
-        for(var i= 0; i < _selectionBar.count; i++)
-            _selectionBarModelList.rate(i, control.rate)
+//    onRateChanged:
+//    {
+//        close()
+//        for(var i= 0; i < _selectionBar.count; i++)
+//            _selectionBarModelList.rate(i, control.rate)
 
 
-    }
+//    }
 
-    MenuItem
-    {
-        id: colorsRow
-        width: parent.width
-        height:  iconSizes.medium + space.small
+//    MenuItem
+//    {
+//        id: colorsRow
+//        width: parent.width
+//        height:  iconSizes.medium + space.small
 
-        ColorTagsBar
-        {
-            anchors.fill: parent
-            onColorClicked:
-            {
-                for(var i= 0; i < _selectionBar.count; i++)
-                    _selectionBarModelList.color(i, color)
-                control.close()
-            }
-        }
-    }
+//        ColorTagsBar
+//        {
+//            anchors.fill: parent
+//            onColorClicked:
+//            {
+//                for(var i= 0; i < _selectionBar.count; i++)
+//                    _selectionBarModelList.color(i, color)
+//                control.close()
+//            }
+//        }
+//    }
 }

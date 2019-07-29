@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import org.kde.mauikit 1.0 as Maui
+import org.kde.kirigami 2.7 as Kirigami
 import "../../view_models"
 
 Maui.Dialog
@@ -17,7 +18,7 @@ Maui.Dialog
 
     property int currentView : 0
 
-    colorScheme.backgroundColor: darkDarkColor
+    Kirigami.Theme.backgroundColor: darkDarkColor
 
     clip: true
 
@@ -35,7 +36,7 @@ Maui.Dialog
             Maui.Holder
             {
                 id: lyricsHolder
-                colorScheme.textColor: darkTextColor
+                Kirigami.Theme.textColor: darkTextColor
                 visible: lyricsText.text.length > 0 ? false : true
                 message: "Couldn't find the lyrics!"
             }

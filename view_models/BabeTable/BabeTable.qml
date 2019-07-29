@@ -277,12 +277,12 @@ BabeList
         label: section
         isSection: true
         boldLabel: true
-        colorScheme.backgroundColor: "#333"
-        colorScheme.textColor: "#fafafa"
+        Kirigami.Theme.backgroundColor: "#333"
+        Kirigami.Theme.textColor: "#fafafa"
 
         background: Rectangle
         {
-            color:  colorScheme.backgroundColor
+            color:  Kirigami.Theme.backgroundColor
         }
     }
 

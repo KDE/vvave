@@ -1,9 +1,9 @@
 import QtQuick.Controls 2.2
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
+import org.kde.kirigami 2.7 as Kirigami
 
 import "../../view_models/BabeGrid"
-import org.kde.kirigami 2.0 as Kirigami
 import "../../utils/Player.js" as Player
 
 ListView
@@ -79,7 +79,7 @@ ListView
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: model.title
-            color: textColor
+            color: Kirigami.Theme.textColor
             font.pointSize: fontSizes.default
             verticalAlignment: Qt.AlignBottom
             clip: true
@@ -97,30 +97,30 @@ ListView
             font.pointSize: fontSizes.small
             verticalAlignment: Qt.AlignTop
             clip: true
-            color: textColor
+            color: Kirigami.Theme.textColor
             elide: Text.ElideRight
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         }
     }
 
 
-    MouseArea
-    {
-        anchors.fill : parent
-        preventStealing: true
-//        parent: applicationWindow().overlay.parent
+//    MouseArea
+//    {
+//        anchors.fill : parent
+//        preventStealing: true
+////        parent: applicationWindow().overlay.parent
 
-        onPressed:
-        {
-            console.log("albumsroll clicked")
-            mouse.accepted = false
-        }
+//        onPressed:
+//        {
+//            console.log("albumsroll clicked")
+//            mouse.accepted = false
+//        }
 
-        onReleased:
-        {
-            mouse.accepted = true
-        }
-    }
+//        onReleased:
+//        {
+//            mouse.accepted = true
+//        }
+//    }
 
     function positionAlbum(index)
     {

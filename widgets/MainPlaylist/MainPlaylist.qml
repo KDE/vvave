@@ -92,7 +92,7 @@ Maui.Page
             Rectangle
             {
                 anchors.fill: parent
-                color: viewBackgroundColor
+                color: Kirigami.Theme.viewBackgroundColor
                 opacity: 0.85
             }
         }
