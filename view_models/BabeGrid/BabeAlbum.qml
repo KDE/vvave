@@ -165,7 +165,7 @@ ItemDelegate
             ColumnLayout
             {
                 anchors.fill: parent
-                spacing: space.tiny
+//                spacing: space.tiny
 
                 Item
                 {

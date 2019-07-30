@@ -39,6 +39,7 @@ BabeList
 
     property alias playAllBtn : playAllBtn
     property alias appendBtn : appendBtn
+    property alias actionToolBar: _actionToolBar
 
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -60,6 +61,7 @@ BabeList
     headBar.rightSretch: false
     headBar.leftContent: Kirigami.ActionToolBar
     {
+        id: _actionToolBar
         position: ToolBar.Header
         Layout.fillWidth: true
         actions:   [

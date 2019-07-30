@@ -42,19 +42,23 @@ Maui.Page
                             "qrc:/services/web/YoutubePlayer.qml"
     }
 
-    Maui.Popup
+    Maui.Dialog
     {
         id: configPopup
         parent: parent
         margins: contentMargins
+widthHint: 0.9
+heightHint: 0.9
 
+        maxHeight: 200
+        maxWidth: 300
+        defaultButtons: false
         GridLayout
         {
-            anchors.centerIn: parent
-            width: parent.width*0.8
-            height: parent.height*0.9
+            anchors.fill: parent
             columns: 1
             rows: 6
+            clip: true
 
             Item
             {
@@ -187,29 +191,27 @@ Maui.Page
             trackRating: true
             isArtworkRemote: true
             allowMenu: false
+            actionToolBar.visible: false
 
             model: ListModel{}
 
-//            appendBtn.visible: false
-//            playAllBtn.visible: false
+            //            appendBtn.visible: false
+            //            playAllBtn.visible: false
 
-            headBar.leftContent: ToolButton
-            {
-                icon.name: "edit-clear"
-                onClicked: clearSearch()
-            }
 
-            headBar.middleContent: Label
-            {
-                text: "YouTube"
-            }
-
-            headBar.rightContent: ToolButton
-            {
-                id: menuBtn
-                icon.name: "application-menu"
-                onClicked: configPopup.open()
-            }
+            headBar.rightContent: [
+                ToolButton
+                {
+                    id: menuBtn
+                    icon.name: "application-menu"
+                    onClicked: configPopup.open()
+                },
+                ToolButton
+                {
+                    icon.name: "edit-clear"
+                    onClicked: clearSearch()
+                }
+            ]
 
             onRowClicked:
             {
@@ -268,9 +270,9 @@ Maui.Page
     function runSearch(searchTxt)
     {
         if(searchTxt)
-            if(searchTxt !== youtubeTable.headBarTitle)
+            if(searchTxt !== youtubeTable.title)
             {
-                youtubeTable.headBarTitle = searchTxt
+                youtubeTable.title = searchTxt
                 youtube.getQuery(searchTxt, Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25))
             }
     }
@@ -278,8 +280,8 @@ Maui.Page
     function clearSearch()
     {
         searchInput.clear()
-        youtubeTable.clearTable()
-        youtubeTable.headBarTitle = ""
+        youtubeTable.listView.model.clear()
+        youtubeTable.title = ""
         searchRes = []
     }
 

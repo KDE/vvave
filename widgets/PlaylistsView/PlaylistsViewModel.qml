@@ -21,7 +21,7 @@ BabeList
     property alias list: _playlistsList
     signal playSync(int index)
 
-    title: "Playlists"
+//    title: "Playlists"
 
     Maui.NewDialog
     {
@@ -32,8 +32,8 @@ BabeList
         rejectButton.visible: false
     }
 
-
-    headBar.rightContent: Kirigami.ActionToolBar
+//headBar.middleStrech: false
+    headBar.leftContent: Kirigami.ActionToolBar
     {
         Layout.fillWidth: true
         actions:

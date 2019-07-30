@@ -320,7 +320,6 @@ Maui.ApplicationWindow
             }
 
             middleContent: [
-
                 ToolButton
                 {
                     id: babeBtnIcon
@@ -954,7 +953,7 @@ Maui.ApplicationWindow
             Layout.bottomMargin: space.big
             onIconClicked: _contextMenu.popup()
             onExitClicked: clear()
-            Kirigami.Theme.backgroundColor: "#212121"
+//            Kirigami.Theme.backgroundColor: "#212121"
 
 //            model: BaseModel
 //            {
