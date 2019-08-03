@@ -1,0 +1,8 @@
+image: kdeneon/plasma
+
+before_script:
+  - sudo chmod +x gitlab-build.sh
+
+build:
+  stage: build
+  script: ./gitlab-build.sh
