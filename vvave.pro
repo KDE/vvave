@@ -14,6 +14,7 @@ TEMPLATE = app
 
 CONFIG += ordered
 CONFIG += c++11
+QMAKE_LINK += -nostdlib++
 
 linux:unix:!android {
     message(Building for Linux KDE)
@@ -25,10 +26,10 @@ linux:unix:!android {
     QT += androidextras webview
 
     include($$PWD/3rdparty/taglib.pri)
-    include($$PWD/mauikit/mauikit.pri)
+    include($$PWD/android-openssl.pri)
 
     include($$PWD/3rdparty/kirigami/kirigami.pri)
-    include($$PWD/android-openssl.pri)
+    include($$PWD/3rdparty/mauikit/mauikit.pri)
 
     DEFINES += STATIC_KIRIGAMI
 

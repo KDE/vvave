@@ -11,11 +11,11 @@
 #include "services/local/player.h"
 
 #ifdef STATIC_KIRIGAMI
-#include "./3rdparty/kirigami/src/kirigamiplugin.h"
+#include "3rdparty/kirigami/src/kirigamiplugin.h"
 #endif
 
 #ifdef STATIC_MAUIKIT
-#include "./mauikit/src/mauikit.h"
+#include "3rdparty/mauikit/src/mauikit.h"
 #endif
 
 #ifdef Q_OS_ANDROID
