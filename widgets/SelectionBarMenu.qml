@@ -8,7 +8,7 @@ import "../utils/Help.js" as H
 import "../utils/Player.js" as Player
 import "../view_models"
 
-import org.kde.kirigami 2.6 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 Menu
@@ -18,7 +18,7 @@ Menu
 
     property int rate : 0
     property string starColor : "#FFC107"
-    property string starReg : textColor
+    property string starReg : Kirigami.Theme.textColor
     property string starIcon: "draw-star"
 
     signal rateClicked(int rate)

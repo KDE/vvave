@@ -219,7 +219,7 @@ Maui.ApplicationWindow
                 checkable: false
                 checked: currentView === viewsIndex.artists
                 icon.name: "view-media-artist"
-                Kirigami.Theme.textColor:  currentView === viewsIndex.artists ? babeColor : altColorText
+//                Kirigami.Theme.textColor:  currentView === viewsIndex.artists ? babeColor : altColorText
                 onTriggered: currentView = viewsIndex.artists
                 //            colorScheme.highlightColor: babeColor
                 //            showIndicator: true
@@ -313,7 +313,7 @@ Maui.ApplicationWindow
                 icon.name: "headphones"
                 visible: _drawer.modal
                 checked: _drawer.visible
-                icon.color: _drawer.visible ? babeColor : textColor
+                icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
                 onClicked: _drawer.visible = !_drawer.visible
                 Kirigami.Theme.highlightColor: babeColor
                 //                text: qsTr("Now")
@@ -325,7 +325,7 @@ Maui.ApplicationWindow
                     id: babeBtnIcon
                     icon.name: "love"
                     enabled: currentTrackIndex >= 0
-                    icon.color: currentBabe ? babeColor : textColor
+                    icon.color: currentBabe ? babeColor : Kirigami.Theme.textColor
                     onClicked: if (!mainlistEmpty)
                     {
                         mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
@@ -336,7 +336,7 @@ Maui.ApplicationWindow
                 ToolButton
                 {
                     icon.name: "media-skip-backward"
-                    icon.color: textColor
+                    icon.color: Kirigami.Theme.textColor
                     onClicked: Player.previousTrack()
                     onPressAndHold: Player.playAt(prevTrackIndex)
                 },
@@ -345,7 +345,7 @@ Maui.ApplicationWindow
                 {
                     id: playIcon
                     enabled: currentTrackIndex >= 0
-                    icon.color: textColor
+                    icon.color: Kirigami.Theme.textColor
                     icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onClicked: player.playing = !player.playing
                 },
@@ -353,7 +353,7 @@ Maui.ApplicationWindow
                 ToolButton
                 {
                     id: nextBtn
-                    icon.color: textColor
+                    icon.color: Kirigami.Theme.textColor
                     icon.name: "media-skip-forward"
                     onClicked: Player.nextTrack()
                     onPressAndHold: Player.playAt(Player.shuffle())
@@ -606,7 +606,7 @@ Maui.ApplicationWindow
             text: infoMsg
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
-            color: textColor
+            color: Kirigami.Theme.textColor
 
             SequentialAnimation
             {
@@ -625,7 +625,7 @@ Maui.ApplicationWindow
                     target: infoTxt
                     property: "color"
                     easing.type: Easing.InOutQuad
-                    to: textColor
+                    to: Kirigami.Theme.textColor
                     duration: 500
                 }
             }

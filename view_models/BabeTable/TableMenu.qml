@@ -17,7 +17,7 @@ Menu
     property int rate : 0
     property bool fav : false
     property string starColor : "#FFC107"
-    property string starReg : textColor
+    property string starReg : Kirigami.Theme.textColor
     property string starIcon: "draw-star"
 
     signal removeClicked()

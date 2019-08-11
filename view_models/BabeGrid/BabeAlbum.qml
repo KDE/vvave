@@ -125,7 +125,7 @@ ItemDelegate
                             width: img.adapt ? img.width : Math.min(img.width, img.height)
                             height: img.adapt ? img.height : width
                             radius: albumRadius
-                            border.color: borderColor
+//                            border.color: borderColor
                         }
                     }
                 }
