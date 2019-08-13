@@ -8,7 +8,7 @@ function playTrack(index)
 
         if(typeof(currentTrack) === "undefined") return
 
-        if(Maui.FM.fileExists(currentTrack.url))
+        if(Maui.FM.fileExists("file://" + currentTrack.url))
         {
             player.url = currentTrack.url;
             player.playing = true

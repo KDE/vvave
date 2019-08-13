@@ -74,7 +74,7 @@ Item
 
     function filter()
     {
-        var where = "source = \""+currentFolder+"\""
+        var where = "source = \""+currentFolder.replace("file://", "")+"\""
         _filterList.list.query = (Q.GET.tracksWhere_.arg(where))
 
     }
