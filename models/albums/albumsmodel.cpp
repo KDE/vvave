@@ -107,7 +107,7 @@ void AlbumsModel::setList()
     //get albums data with modifier for missing images for artworks
     this->list = this->db->getDBData(m_Query, [&](FMH::MODEL &item)
     {
-            if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty() && !FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
+            if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty() && !FMH::fileExists(QUrl::fromLocalFile(item[FMH::MODEL_KEY::ARTWORK])))
     {
         this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FM::toMap(item));
         item[FMH::MODEL_KEY::ARTWORK] = "";

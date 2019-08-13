@@ -76,7 +76,7 @@ QVariantList vvave::sourceFolders()
 
     QVariantList res;
     for(const auto &item : sources)
-        res << FMH::getDirInfo(item[FMH::MODEL_KEY::URL]);
+        res << FMH::getDirInfo(QUrl::fromLocalFile(item[FMH::MODEL_KEY::URL]));
     return res;
 }
 
