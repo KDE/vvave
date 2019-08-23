@@ -152,12 +152,12 @@ Maui.ApplicationWindow
 
 
     /* UI */
-//    accentColor: babeColor
+    //    accentColor: babeColor
     //    headBarFGColor: altColorText
     //    headBarBGColor: "#212121"
     //    altColorText: darkTextColor
 
-//    headBar.spacing: space.big
+    //    headBar.spacing: space.big
     headBar.middleContent : Kirigami.ActionToolBar
     {
         display: isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
@@ -219,7 +219,7 @@ Maui.ApplicationWindow
                 checkable: false
                 checked: currentView === viewsIndex.artists
                 icon.name: "view-media-artist"
-//                Kirigami.Theme.textColor:  currentView === viewsIndex.artists ? babeColor : altColorText
+                //                Kirigami.Theme.textColor:  currentView === viewsIndex.artists ? babeColor : altColorText
                 onTriggered: currentView = viewsIndex.artists
                 //            colorScheme.highlightColor: babeColor
                 //            showIndicator: true
@@ -296,11 +296,11 @@ Maui.ApplicationWindow
             }
         }
 
-//        Kirigami.Separator
-//        {
-//            Layout.fillWidth: true
-////            color: borderColor
-//        }
+        //        Kirigami.Separator
+        //        {
+        //            Layout.fillWidth: true
+        ////            color: borderColor
+        //        }
 
         Maui.ToolBar
         {
@@ -308,16 +308,16 @@ Maui.ApplicationWindow
             Layout.fillWidth: true
 
             position: ToolBar.Footer
-            leftContent:  ToolButton
-            {
-                icon.name: "headphones"
-                visible: _drawer.modal
-                checked: _drawer.visible
-                icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
-                onClicked: _drawer.visible = !_drawer.visible
-                Kirigami.Theme.highlightColor: babeColor
-                //                text: qsTr("Now")
-            }
+            //            leftContent:  ToolButton
+            //            {
+            //                icon.name: "headphones"
+            //                visible: _drawer.modal
+            //                checked: _drawer.visible
+            //                icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
+            //                onClicked: _drawer.visible = !_drawer.visible
+            //                Kirigami.Theme.highlightColor: babeColor
+            //                //                text: qsTr("Now")
+            //            }
 
             middleContent: [
                 ToolButton
@@ -327,10 +327,10 @@ Maui.ApplicationWindow
                     enabled: currentTrackIndex >= 0
                     icon.color: currentBabe ? babeColor : Kirigami.Theme.textColor
                     onClicked: if (!mainlistEmpty)
-                    {
-                        mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
-                        currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
-                    }
+                               {
+                                   mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
+                                   currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
+                               }
                 },
 
                 ToolButton
@@ -645,6 +645,12 @@ Maui.ApplicationWindow
         modal: !isWide
         handleVisible: modal
         closePolicy: Popup.NoAutoClose
+
+        handleClosedIcon.source: "headphones"
+        handleOpenIcon.source: "headphones"
+        handleOpenIcon.color: babeColor
+        handleClosedIcon.color: babeColor
+
         contentItem: MainPlaylist
         {
             id: mainPlaylist
@@ -953,44 +959,44 @@ Maui.ApplicationWindow
             Layout.bottomMargin: space.big
             onIconClicked: _contextMenu.popup()
             onExitClicked: clear()
-//            Kirigami.Theme.backgroundColor: "#212121"
+            //            Kirigami.Theme.backgroundColor: "#212121"
 
-//            model: BaseModel
-//            {
-//                list: _selectionBarModelList
-//            }
+            //            model: BaseModel
+            //            {
+            //                list: _selectionBarModelList
+            //            }
 
-//            Tracks
-//            {
-//                id: _selectionBarModelList
-//            }
+            //            Tracks
+            //            {
+            //                id: _selectionBarModelList
+            //            }
 
             SelectionBarMenu
             {
                 id: _contextMenu
             }
 
-//            function append(item)
-//            {
-//                _selectionBar.append(item)
+            //            function append(item)
+            //            {
+            //                _selectionBar.append(item)
 
-////                if(selectedPaths.indexOf(item.path) < 0)
-////                {
-////                    selectedItems.push(item)
-////                    selectedPaths.push(item.path)
+            ////                if(selectedPaths.indexOf(item.path) < 0)
+            ////                {
+            ////                    selectedItems.push(item)
+            ////                    selectedPaths.push(item.path)
 
-////                    //             for(var i = 0; i < selectionList.count ; i++ )
-////                    //                 if(selectionList.model.get(i).path === item.path)
-////                    //                 {
-////                    //                     selectionList.model.remove(i)
-////                    //                     return
-////                    //                 }
+            ////                    //             for(var i = 0; i < selectionList.count ; i++ )
+            ////                    //                 if(selectionList.model.get(i).path === item.path)
+            ////                    //                 {
+            ////                    //                     selectionList.model.remove(i)
+            ////                    //                     return
+            ////                    //                 }
 
-////                    selectionList.model.list.append(item)
-////                    selectionList.positionViewAtEnd()
+            ////                    selectionList.model.list.append(item)
+            ////                    selectionList.positionViewAtEnd()
 
-////                }
-//            }
+            ////                }
+            //            }
         }
     }
 
@@ -1022,10 +1028,10 @@ Maui.ApplicationWindow
     {
         target: vvave
 
-//        onRefreshTables: H.refreshCollection(size)
-//        onRefreshTracks: H.refreshTracks()
-//        onRefreshAlbums: H.refreshAlbums()
-//        onRefreshArtists: H.refreshArtists()
+        //        onRefreshTables: H.refreshCollection(size)
+        //        onRefreshTracks: H.refreshTracks()
+        //        onRefreshAlbums: H.refreshAlbums()
+        //        onRefreshArtists: H.refreshArtists()
 
         //        onCoverReady:
         //        {
