@@ -643,7 +643,7 @@ Maui.ApplicationWindow
         width: Math.min(Kirigami.Units.gridUnit * 18, root.width)
         height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
         modal: !isWide
-        handleVisible: modal
+        handleVisible: false
         closePolicy: Popup.NoAutoClose
         contentItem: MainPlaylist
         {

@@ -6,14 +6,14 @@ Cloud::Cloud(QObject *parent) : BaseList (parent)
     this->fm = new FM(this);
     this->setList();
 
-    connect(this->fm, &FM::cloudServerContentReady, [this](const FMH::MODEL_LIST &list, const QString &url)
-    {
-        Q_UNUSED(url);
-        emit this->preListChanged();
-        this->list = list;
-        this->formatList();
-        emit this->postListChanged();
-    });
+//    connect(this->fm, &FM::cloudServerContentReady, [this](const FMH::MODEL_LIST &list, const QString &url)
+//    {
+//        Q_UNUSED(url);
+//        emit this->preListChanged();
+//        this->list = list;
+//        this->formatList();
+//        emit this->postListChanged();
+//    });
 
     connect(this->fm, &FM::warningMessage, [this](const QString &message)
     {
@@ -79,7 +79,7 @@ Cloud::Cloud(QObject *parent) : BaseList (parent)
             newItem[FMH::MODEL_KEY::TITLE] = item[FMH::MODEL_KEY::LABEL];
 
 
-        this->update(FM::toMap(newItem), this->pending.take(QString(item[FMH::MODEL_KEY::PATH]).replace(FMH::CloudCachePath+"opendesktop", FMH::PATHTYPE_NAME[FMH::PATHTYPE_KEY::CLOUD_PATH])));
+        this->update(FM::toMap(newItem), this->pending.take(QString(item[FMH::MODEL_KEY::PATH]).replace(FMH::CloudCachePath+"opendesktop", FMH::PATHTYPE_URI[FMH::PATHTYPE_KEY::CLOUD_PATH])));
         emit this->cloudItemReady(FM::toMap(newItem));
     });
 }
@@ -109,7 +109,7 @@ void Cloud::setList()
 {
     emit this->preListChanged();
     this->list.clear();
-    this->fm->getCloudServerContent(FMH::PATHTYPE_NAME[FMH::PATHTYPE_KEY::CLOUD_PATH]+"/"+this->account, FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO], 3);
+    this->fm->getCloudServerContent(FMH::PATHTYPE_URI[FMH::PATHTYPE_KEY::CLOUD_PATH]+"/"+this->account, FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO], 3);
     emit this->postListChanged();
 }
 
@@ -193,5 +193,5 @@ bool Cloud::update(const QVariantMap &data, const int &index)
 
 void Cloud::upload(const QString &url)
 {
-    this->fm->copy({FMH::getFileInfo(url)}, FMH::PATHTYPE_NAME[FMH::PATHTYPE_KEY::CLOUD_PATH]+"/"+this->account);
+    this->fm->copy({FMH::getFileInfo(url)}, FMH::PATHTYPE_URI[FMH::PATHTYPE_KEY::CLOUD_PATH]+"/"+this->account);
 }
