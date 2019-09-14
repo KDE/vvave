@@ -14,6 +14,7 @@ TEMPLATE = app
 
 CONFIG += ordered
 CONFIG += c++11
+QMAKE_LINK += -nostdlib++
 
 linux:unix:!android {
     message(Building for Linux KDE)
@@ -25,10 +26,10 @@ linux:unix:!android {
     QT += androidextras webview
 
     include($$PWD/3rdparty/taglib.pri)
-    include($$PWD/mauikit/mauikit.pri)
+    include($$PWD/android-openssl.pri)
 
     include($$PWD/3rdparty/kirigami/kirigami.pri)
-    include($$PWD/android-openssl.pri)
+    include($$PWD/3rdparty/mauikit/mauikit.pri)
 
     DEFINES += STATIC_KIRIGAMI
 
@@ -125,5 +126,19 @@ include(install.pri)
 #    message("Linux")
 #    QMAKE_POST_LINK += $$copyToBuilddir($$PWD/library/cat)
 #}
+
+DISTFILES += \
+    3rdparty/mauikit/src/android/AndroidManifest.xml \
+    3rdparty/mauikit/src/android/build.gradle \
+    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.jar \
+    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.properties \
+    3rdparty/mauikit/src/android/gradlew \
+    3rdparty/mauikit/src/android/gradlew.bat \
+    3rdparty/mauikit/src/android/res/values/libs.xml
+
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_PACKAGE_SOURCE_DIR = \
+        $$PWD/3rdparty/mauikit/src/android
+}
 
 

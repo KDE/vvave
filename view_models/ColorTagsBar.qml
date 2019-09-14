@@ -26,7 +26,7 @@ Item
                 height: recSize
                 color: vvave.moodColor(0)
                 radius: recRadius
-                border.color: altColor
+                border.color: color
                 border.width: 1
             }
 
@@ -46,7 +46,7 @@ Item
                 height: recSize
                 color: vvave.moodColor(1)
                 radius: recRadius
-                border.color: altColor
+                border.color: color
                 border.width: 1
             }
 
@@ -65,7 +65,7 @@ Item
                 height: recSize
                 color: vvave.moodColor(2)
                 radius: recRadius
-                border.color: altColor
+                border.color: color
                 border.width: 1
             }
 
@@ -84,7 +84,7 @@ Item
                 height: recSize
                 color: vvave.moodColor(3)
                 radius: recRadius
-                border.color: altColor
+                border.color: color
                 border.width: 1
             }
 
@@ -104,7 +104,7 @@ Item
                 height: recSize
                 color: vvave.moodColor(4)
                 radius: recRadius
-                border.color: altColor
+                border.color: color
                 border.width: 1
             }
 

@@ -28,10 +28,10 @@ Cloud::Cloud(QObject *parent) : BaseList (parent)
 
         newItem[FMH::MODEL_KEY::FAV] = QString("0");
         newItem[FMH::MODEL_KEY::RATE] = QString("0");
-        newItem[FMH::MODEL_KEY::URL] = FMH::fileExists(thumbnail)? thumbnail : item[FMH::MODEL_KEY::URL];
-        newItem[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(thumbnail)? thumbnail : item[FMH::MODEL_KEY::PATH];
+        newItem[FMH::MODEL_KEY::URL] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::URL];
+        newItem[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::PATH];
 
-        if(FMH::fileExists(thumbnail))
+        if(FMH::fileExists(QUrl::fromLocalFile(thumbnail)))
         {
             qDebug()<< "file exists:" << thumbnail;
             TagInfo info;
@@ -61,10 +61,10 @@ Cloud::Cloud(QObject *parent) : BaseList (parent)
 
         newItem[FMH::MODEL_KEY::FAV] = QString("0");
         newItem[FMH::MODEL_KEY::RATE] = QString("0");
-        newItem[FMH::MODEL_KEY::URL] = FMH::fileExists(thumbnail)? thumbnail : item[FMH::MODEL_KEY::URL];
-        newItem[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(thumbnail)? thumbnail : item[FMH::MODEL_KEY::PATH];
+        newItem[FMH::MODEL_KEY::URL] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::URL];
+        newItem[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::PATH];
 
-        if(FMH::fileExists(thumbnail))
+        if(FMH::fileExists(QUrl::fromLocalFile(thumbnail)))
         {
             qDebug()<< "file exists:" << thumbnail;
             TagInfo info;
@@ -122,12 +122,12 @@ void Cloud::formatList()
 
         item[FMH::MODEL_KEY::FAV] = QString("0");
         item[FMH::MODEL_KEY::RATE] = QString("0");
-        item[FMH::MODEL_KEY::URL] = FMH::fileExists(thumbnail)? thumbnail : item[FMH::MODEL_KEY::URL];
-        item[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(thumbnail)? thumbnail : item[FMH::MODEL_KEY::PATH];
+        item[FMH::MODEL_KEY::URL] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::URL];
+        item[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::PATH];
 
         qDebug()<< "CLOUD FILE" << thumbnail;
 
-        if(FMH::fileExists(thumbnail))
+        if(FMH::fileExists(QUrl::fromLocalFile(thumbnail)))
         {
             qDebug()<< "file exists:" << thumbnail;
             TagInfo info;

@@ -71,7 +71,7 @@ BabeTable
         onPlay:
         {
             currentIndex = index
-            if(Maui.FM.fileExists(_cloudList.get(index).thumbnail))
+            if(Maui.FM.fileExists("file://" + _cloudList.get(index).thumbnail))
             {
                 quickPlayTrack(index)
             }else

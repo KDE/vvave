@@ -392,7 +392,7 @@ inline QString fixString (const QString &str)
 
 inline bool fileExists(const QString &url)
 {
-    return FMH::fileExists(url);
+    return FMH::fileExists(QUrl::fromLocalFile(url));
 }
 
 inline BAE::TABLE albumType(const FMH::MODEL &albumMap)

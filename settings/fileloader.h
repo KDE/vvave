@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDirIterator>
+#include <QUrl>
 #include "../services/local/taginfo.h"
 #include "../db/collectionDB.h"
 #include "utils/bae.h"
@@ -12,7 +13,7 @@ namespace FLoader
 
 inline QStringList getPathContents(QStringList &urls, const QString &path)
 {
-    if(!FMH::fileExists(path))
+    if(!FMH::fileExists(QUrl::fromLocalFile(path)))
         return urls;
 
     if (QFileInfo(path).isDir())
@@ -35,7 +36,7 @@ inline uint getTracks(const QStringList& paths)
     const auto urls = std::accumulate(paths.begin(), paths.end(), QStringList(), getPathContents);
 
     for(const auto &path : paths)
-        if(FMH::fileExists(path))
+        if(FMH::fileExists(QUrl::fromLocalFile(path)))
             db->addFolder(path);
 
     uint newTracks = 0;
