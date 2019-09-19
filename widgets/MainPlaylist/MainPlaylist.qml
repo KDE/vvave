@@ -69,7 +69,6 @@ Maui.Page
             sourceSize.height: parent.height
 
             fillMode: Image.PreserveAspectCrop
-            cache: true
             antialiasing: true
             smooth: true
             asynchronous: true
