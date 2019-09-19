@@ -71,12 +71,12 @@ if (ANDROID)
 else()
     find_package(Taglib REQUIRED)
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)
-    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica)
+    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica SyntaxHighlighting)
     target_sources(vvave PRIVATE
         kde/mpris2.cpp
         kde/notify.cpp
         )
-    target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus KF5::Attica)
+    target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus KF5::Attica KF5::SyntaxHighlighting)
 endif()
 
 if (TARGET create-apk-vvave)
