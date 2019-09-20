@@ -28,7 +28,7 @@ SwipeDelegate
 
     property bool isCurrentListItem :  ListView.isCurrentItem
     property color bgColor : Kirigami.Theme.backgroundColor
-    property string labelColor: isCurrentListItem ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+    property string labelColor: isCurrentListItem || hovered ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
     property bool number : false
     property bool quickPlay : true
     property bool coverArt : false
@@ -43,11 +43,7 @@ SwipeDelegate
     width: parent.width
     height: sameAlbum ? rowHeight : altHeight
     padding: 0
-    clip: true
-    autoExclusive: true
     swipe.enabled: false
-    focus: true
-    focusPolicy: Qt.StrongFocus
     hoverEnabled: !isMobile
 
     signal play()
@@ -78,7 +74,7 @@ SwipeDelegate
                                                                                                      Qt.lighter(trackMood, 1.3).b,
                                                                                                      0.3 ) ):
                                                                             index % 2 === 0 ? Qt.lighter(bgColor) : bgColor)
-        opacity: hovered ? 0.3 : 1
+//        opacity: hovered ? 0.3 : 1
 
         Item
         {
@@ -109,19 +105,18 @@ SwipeDelegate
                     width: altHeight
                     height: parent.height
 
-                    ToolButton
+                    MouseArea
                     {
-                        visible: !sameAlbum
-                        anchors.fill: parent
-                        flat: true
+                         anchors.fill: parent
+                        onDoubleClicked: artworkCoverDoubleClicked()
+                        onClicked: artworkCoverClicked()
+                        onPressAndHold: if(isMobile) artworkCoverDoubleClicked()
 
                         Image
                         {
                             id: artworkCover
-                            anchors.centerIn: parent
-                            height: parent.height * 0.8
-                            width: height
-
+                            visible: !sameAlbum
+                            anchors.fill: parent
                             sourceSize.width: parent.width
                             sourceSize.height: parent.height
 
@@ -132,10 +127,8 @@ SwipeDelegate
 
 
                             fillMode:  Image.PreserveAspectFit
-                            cache: true
                             asynchronous: true
-                            //                    antialiasing: true
-                            //                    smooth: true
+                            mipmap: true
 
                             layer.enabled: coverArt
                             layer.effect: OpacityMask
@@ -150,16 +143,11 @@ SwipeDelegate
                                         width: artworkCover.adapt ? artworkCover.width : Math.min(artworkCover.width, artworkCover.height)
                                         height: artworkCover.adapt ? artworkCover.height : width
                                         radius: Kirigami.Units.devicePixelRatio *3
-    //                                    border.color: Kirigami.Theme.View.
                                         border.width: Kirigami.Units.devicePixelRatio *3
                                     }
                                 }
                             }
                         }
-
-                        onDoubleClicked: artworkCoverDoubleClicked()
-                        onClicked: artworkCoverClicked()
-                        onPressAndHold: if(isMobile) artworkCoverDoubleClicked()
                     }
 
                     Item

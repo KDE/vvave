@@ -91,17 +91,13 @@ ItemDelegate
             Image
             {
                 id: img
+                anchors.centerIn: parent
                 width: increaseCurrentItem ? albumSize * (isCurrentListItem ? 1 : 0.85) : albumSize
                 height: width
-
-                anchors.centerIn: parent
-
-                sourceSize.width: parent.width
-                sourceSize.height: parent.height
+                sourceSize.width: width
+                sourceSize.height: height
 
                 fillMode: Image.PreserveAspectFit
-                cache: true
-                antialiasing: true
                 smooth: true
                 asynchronous: true
 
@@ -125,7 +121,6 @@ ItemDelegate
                             width: img.adapt ? img.width : Math.min(img.width, img.height)
                             height: img.adapt ? img.height : width
                             radius: albumRadius
-//                            border.color: borderColor
                         }
                     }
                 }
