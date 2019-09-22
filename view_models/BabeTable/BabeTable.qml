@@ -54,7 +54,6 @@ BabeList
     //    altToolBars: true
 
     onGroupChanged: groupBy()
-
     focus: true
 
     //headBar.middleStrech: false
@@ -177,8 +176,6 @@ BabeList
         ]
     }
 
-
-
     Maui.Dialog
     {
         id: _removeDialog
@@ -206,7 +203,6 @@ BabeList
     TableMenu
     {
         id: contextMenu
-
 
         MenuSeparator {}
 
@@ -364,8 +360,6 @@ BabeList
         contextMenu.popup()
 
         rowPressed(index)
-
-        console.log(list.get(currentIndex).fav)
     }
 
     function saveList()

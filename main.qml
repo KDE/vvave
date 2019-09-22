@@ -308,16 +308,16 @@ Maui.ApplicationWindow
             Layout.fillWidth: true
 
             position: ToolBar.Footer
-            //            leftContent:  ToolButton
-            //            {
-            //                icon.name: "headphones"
-            //                visible: _drawer.modal
-            //                checked: _drawer.visible
-            //                icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
-            //                onClicked: _drawer.visible = !_drawer.visible
-            //                Kirigami.Theme.highlightColor: babeColor
-            //                //                text: qsTr("Now")
-            //            }
+                        leftContent:  ToolButton
+                        {
+                            icon.name: "headphones"
+                            visible: _drawer.modal
+                            checked: _drawer.visible
+                            icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
+                            onClicked: _drawer.visible = !_drawer.visible
+                            Kirigami.Theme.highlightColor: babeColor
+                            //                text: qsTr("Now")
+                        }
 
             middleContent: [
                 ToolButton
@@ -470,8 +470,8 @@ Maui.ApplicationWindow
             icon.name: "folder-add"
             onTriggered:
             {
-                fmDialog.onlyDirs = false
-                fmDialog.filterType = Maui.FMList.AUDIO
+                fmDialog.settings.onlyDirs = false
+                fmDialog.settings.filterType = Maui.FMList.AUDIO
                 fmDialog.show(function(paths)
                 {
                     vvave.openUrls(paths)

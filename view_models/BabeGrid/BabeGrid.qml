@@ -16,33 +16,24 @@ Maui.Page
     property int albumCoverSize: Math.min(120, width * 0.3)
     readonly property int albumSpacing: albumCoverSize * 0.3 + space.small
 
-    property int albumCoverRadius :  radiusV
+    property int albumCoverRadius :  Maui.Style.radiusV
     property bool albumCardVisible : true
 
     property alias list: _albumsList
     property alias listModel: _albumsModel
 
     property alias grid: grid
-    property alias holder: holder
+    property alias holder: grid.holder
     property alias count: grid.count
 
     signal albumCoverClicked(string album, string artist)
     signal albumCoverPressed(string album, string artist)
     signal bgClicked()
 
-//    margins: space.medium
-//    topMargin: space.big
-
     MouseArea
     {
         anchors.fill: parent
         onClicked: bgClicked()
-    }
-
-    Maui.Holder
-    {
-        id: holder
-        visible: grid.count === 0
     }
 
     Albums
@@ -62,13 +53,15 @@ Maui.Page
         onAreaClicked: bgClicked()
         adaptContent: true
         anchors.fill: parent
-        anchors.topMargin: space.big
+        anchors.topMargin: Maui.Style.space.big
 
         itemSize: albumCoverSize
         spacing: albumSpacing
 
         cellWidth: albumCoverSize + spacing
         cellHeight:  albumCoverSize + spacing*2
+
+        holder.visible: count === 0
 
         model: _albumsModel
         delegate: BabeAlbum

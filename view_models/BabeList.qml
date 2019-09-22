@@ -8,7 +8,6 @@ Maui.Page
 {
     id: control
 
-
     property alias listView : babeList.listView
     property alias model : babeList.model
     property alias delegate : babeList.delegate
@@ -16,28 +15,18 @@ Maui.Page
     property alias currentIndex : babeList.currentIndex
     property alias currentItem : babeList.currentItem
 
-    property alias holder : holder
+    property alias holder : babeList.holder
     property alias section : babeList.section
 
     property bool wasPulled : false
 
     signal pulled()
 
-    focus: true
-
-     Maui.Holder
-    {
-        id: holder
-        visible: babeList.count === 0
-        focus: true
-    }
-
     Maui.ListBrowser
     {
         id: babeList
         anchors.fill: parent
-        clip: true
-
+        holder.visible: count === 0
 //        listView.highlight: Rectangle
 //        {
 //            width: babeList.width
