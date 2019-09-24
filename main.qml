@@ -242,7 +242,7 @@ Maui.ApplicationWindow
     }
 
     footBar.visible: !mainlistEmpty
-    footBar.implicitHeight: footBar.visible ? toolBarHeight * 1.2 : 0
+    footBar.implicitHeight: footBar.visible ? Maui.Style.toolBarHeight * 1.2 : 0
     footer: ColumnLayout
     {
         id: _footerLayout

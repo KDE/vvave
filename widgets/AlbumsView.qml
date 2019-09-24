@@ -126,7 +126,6 @@ BabeGrid
                 quickPlayVisible: true
                 focus: true
                 list.sortBy: Tracks.TRACK
-                headBar.plegable: false
 
                 holder.emoji: "qrc:/assets/ElectricPlug.png"
                 holder.isMask: false

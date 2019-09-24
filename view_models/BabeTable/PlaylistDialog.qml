@@ -13,8 +13,8 @@ Maui.Dialog
     title: "Add "+ tracks.length +" tracks to..."
 
     property var tracks : []
-    maxHeight: 400 * unit
-    page.padding: space.medium
+    maxHeight: 400 * Maui.Style.unit
+    page.padding: Maui.Style.space.medium
 
     ColumnLayout
     {
@@ -33,7 +33,7 @@ Maui.Dialog
 
             model: playlistsView.playlistModel
 
-            delegate: Maui.LabelDelegate
+            delegate: Maui.ListDelegate
             {
                 id: delegate
                 label: model.playlist
@@ -51,32 +51,27 @@ Maui.Dialog
             }
         }
 
-        RowLayout
+
+        Maui.TextField
         {
             Layout.fillWidth: true
-
-            Maui.TextField
+            id: newPlaylistField
+            color: Kirigami.Theme.textColor
+            placeholderText: qsTr("New playlist")
+            onAccepted:
             {
-                Layout.fillWidth: true
-                id: newPlaylistField
-                color: textColor
-                placeholderText: qsTr("New playlist")
-                onAccepted:
-                {
-                    addPlaylist()
-                    playlistsView.playlistList.addTrack(playlistsList.listView.currentIndex, tracks)
-                    clear()
-                }
+                addPlaylist()
+                playlistsView.playlistList.addTrack(playlistsList.listView.currentIndex, tracks)
+                clear()
             }
 
-            ToolButton
+            actions.data: ToolButton
             {
                 icon.name: "checkbox"
-                icon.color: textColor
+                icon.color: Kirigami.Theme.textColor
                 onClicked: addPlaylist()
             }
         }
-
     }
 
     onAccepted:
@@ -86,7 +81,6 @@ Maui.Dialog
 
         insert()
     }
-
 
     function insert()
     {

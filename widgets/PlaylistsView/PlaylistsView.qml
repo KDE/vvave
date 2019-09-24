@@ -1,7 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
-import org.kde.kirigami 2.6 as Kirigami
+import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
 import "../../view_models/BabeTable"
@@ -12,7 +12,6 @@ import "../../utils/Help.js" as H
 ColumnLayout
 {
     id: control
-    clip: true
     spacing: 0
 
     property string playlistQuery
@@ -69,8 +68,8 @@ ColumnLayout
     ColorTagsBar
     {
         Layout.fillWidth: true
-        height: rowHeightAlt
-        recSize: isMobile ? iconSize : 16
+        height: Maui.Style.rowHeightAlt
+        recSize: Kirigami.Settings.isMobile ? iconSize : 16
         onColorClicked: populate(Q.GET.colorTracks_.arg(color.toLowerCase()))
     }
 

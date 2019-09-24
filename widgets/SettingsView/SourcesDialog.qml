@@ -14,7 +14,7 @@ Maui.Dialog
     defaultButtons: true
     acceptButton.text: qsTr("Add")
     rejectButton.text: qsTr("Remove")
-    page.padding: 0
+    page.padding: Maui.Style.space.medium
 
     onRejected:
     {
@@ -63,7 +63,7 @@ Maui.Dialog
         isMask: false
         title : "No Sources!"
         body: "Add new sources to organize and play your music collection"
-        emojiSize: iconSizes.huge
+        emojiSize: Maui.Style.iconSizes.huge
     }
 
     BabeList
@@ -80,7 +80,7 @@ Maui.Dialog
 
         model: listModel
 
-        delegate: Maui.LabelDelegate
+        delegate: Maui.ListDelegate
         {
             id: delegate
             label: url

@@ -37,7 +37,6 @@ BabeTable
         onClicked: clearSearch()
     }
 
-    footBar.drawBorder: false
     footBar.middleContent:  Maui.TextField
     {
         id: searchInput
