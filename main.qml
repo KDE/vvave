@@ -49,8 +49,8 @@ Maui.ApplicationWindow
     property alias selectionBar: _selectionBar
     property alias progressBar: progressBar
 
-    about.appIcon: "qrc:/assets/vvave.svg"
-    about.appDescription: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
+    Maui.App.iconName: "qrc:/assets/vvave.svg"
+    Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
     showAccounts: false
     /***************************************************/
     /******************** PLAYBACK ********************/

@@ -24,10 +24,7 @@ linux:unix:!android {
 } else:android {
     message(Building helpers for Android)
     QT += androidextras webview
-
     include($$PWD/3rdparty/taglib.pri)
-    include($$PWD/android-openssl.pri)
-
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
 
@@ -130,10 +127,16 @@ include(install.pri)
 DISTFILES += \
     3rdparty/mauikit/src/android/AndroidManifest.xml \
     3rdparty/mauikit/src/android/build.gradle \
+    3rdparty/mauikit/src/android/build.gradle \
+    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.jar \
     3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.jar \
     3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.properties \
+    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.properties \
+    3rdparty/mauikit/src/android/gradlew \
     3rdparty/mauikit/src/android/gradlew \
     3rdparty/mauikit/src/android/gradlew.bat \
+    3rdparty/mauikit/src/android/gradlew.bat \
+    3rdparty/mauikit/src/android/res/values/libs.xml \
     3rdparty/mauikit/src/android/res/values/libs.xml
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
