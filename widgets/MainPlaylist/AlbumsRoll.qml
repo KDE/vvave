@@ -2,6 +2,7 @@ import QtQuick.Controls 2.2
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.7 as Kirigami
+import org.kde.mauikit 1.0 as Maui
 
 import "../../view_models/BabeGrid"
 import "../../utils/Player.js" as Player
@@ -41,8 +42,8 @@ ListView
         columns: 2
         rows: 2
 
-        rowSpacing: space.tiny
-        columnSpacing: space.big
+        rowSpacing: Maui.Style.space.tiny
+        columnSpacing: Maui.Style.space.big
 
         BabeAlbum
         {
@@ -50,12 +51,12 @@ ListView
             Layout.row: 1
             Layout.rowSpan: 2
             Layout.column: 1
-            Layout.preferredWidth: iconSizes.big + space.big
-            Layout.fillHeight: true
+            Layout.preferredWidth: albumSize
+            Layout.preferredHeight: albumSize
+            Layout.alignment: Qt.AlignCenter
 
-
-            albumSize : iconSizes.big + space.big
-            albumRadius : radiusV
+            albumSize :  Maui.Style.iconSizes.big +  Maui.Style.space.big
+            albumRadius :  Maui.Style.radiusV
             showLabels: false
             showIndicator: false
             hideRepeated: false
@@ -80,7 +81,7 @@ ListView
             Layout.fillHeight: true
             text: model.title
             color: Kirigami.Theme.textColor
-            font.pointSize: fontSizes.default
+            font.pointSize:  Maui.Style.fontSizes.default
             verticalAlignment: Qt.AlignBottom
             clip: true
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
@@ -94,7 +95,7 @@ ListView
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: model.artist + " | " + model.album
-            font.pointSize: fontSizes.small
+            font.pointSize:  Maui.Style.fontSizes.small
             verticalAlignment: Qt.AlignTop
             clip: true
             color: Kirigami.Theme.textColor

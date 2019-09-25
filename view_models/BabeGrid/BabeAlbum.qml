@@ -4,25 +4,22 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import AlbumsList 1.0
 import org.kde.kirigami 2.7 as Kirigami
+import org.kde.mauikit 1.0 as Maui
 
-ItemDelegate
+Maui.GridItemDelegate
 {
     id: babeAlbumRoot
 
-    property int itemWidth : albumSize
-    property int itemHeight: albumSize
-    property int albumSize : iconSizes.huge
+    property int albumSize : Maui.Style.iconSizes.huge
     property int albumRadius : 0
     property bool albumCard : true
     property string fillColor : Qt.darker(Kirigami.Theme.backgroundColor, 1.1)
     property bool hide : false
     property bool showLabels : true
     property bool showIndicator :  false
-    property bool isCurrentListItem : ListView.isCurrentItem
     property bool hideRepeated : false
     property bool increaseCurrentItem : false
 
-    property color labelColor : GridView.isCurrentItem  || hovered || down ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
 
     readonly property bool sameAlbum :
@@ -39,30 +36,18 @@ ItemDelegate
         }else false
     }
 
-    height: visible ? itemHeight : 0
-    width : visible ? itemWidth : 0
-
     visible: !sameAlbum
-    hoverEnabled: !isMobile
-    //    spacing: 0
-
-    background: Rectangle
-    {
-        color: "transparent"
-    }
 
     ColumnLayout
     {
         anchors.fill: parent
-        anchors.centerIn: parent
-
+        spacing: 0
         Item
         {
+            Layout.alignment: Qt.AlignCenter
             Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-            Layout.maximumHeight: albumSize
             Layout.minimumHeight: albumSize
+            Layout.preferredWidth: albumSize
 
             DropShadow
             {
@@ -92,7 +77,7 @@ ItemDelegate
             {
                 id: img
                 anchors.centerIn: parent
-                width: increaseCurrentItem ? albumSize * (isCurrentListItem ? 1 : 0.85) : albumSize
+                width: albumSize
                 height: width
                 sourceSize.width: width
                 sourceSize.height: height
@@ -100,7 +85,6 @@ ItemDelegate
                 fillMode: Image.PreserveAspectFit
                 smooth: true
                 asynchronous: true
-
                 source:
                 {
                     if(artwork)
@@ -133,7 +117,7 @@ ItemDelegate
                 height: img.height * 0.1
                 width: img.width * 0.1
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: space.big
+                anchors.bottomMargin: Maui.Style.space.big
                 anchors.horizontalCenter:parent.horizontalCenter
                 radius: Math.min(width, height)
                 color: "#f84172"
@@ -149,60 +133,33 @@ ItemDelegate
             }
         }
 
-        Item
+       Label
         {
-            visible: showLabels
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignHCenter
-            Layout.margins: 0
+            text: list.query === Albums.ALBUMS ? model.album : model.artist
+            visible: showLabels
+            horizontalAlignment: Qt.AlignHCenter
+            elide: Text.ElideRight
+            font.pointSize: Maui.Style.fontSizes.default
+            font.bold: true
+            font.weight: Font.Bold
+            color: labelColor
+            wrapMode: Text.NoWrap
+        }
 
-            ColumnLayout
-            {
-                anchors.fill: parent
-//                spacing: space.tiny
+        Label
+        {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
-                Item
-                {
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignHCenter
-                    //            Layout.margins: space.medium
-
-                    Label
-                    {
-                        width: parent.width * 0.8
-                        anchors.centerIn: parent
-                        text: list.query === Albums.ALBUMS ? model.album : model.artist
-                        visible: true
-                        horizontalAlignment: Qt.AlignHCenter
-                        elide: Text.ElideRight
-                        font.pointSize: fontSizes.default
-                        font.bold: true
-                        font.weight: Font.Bold
-                        color: labelColor
-                    }
-                }
-
-                Item
-                {
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignTop
-
-                    Label
-                    {
-                        width: parent.width*0.8
-                        anchors.centerIn: parent
-
-                        text: list.query === Albums.ALBUMS ? model.artist : undefined
-                        visible: text
-                        horizontalAlignment: Qt.AlignHCenter
-                        elide: Text.ElideRight
-                        font.pointSize: fontSizes.medium
-                        color: labelColor
-                    }
-                }
-            }
-
+            text: list.query === Albums.ALBUMS ? model.artist : undefined
+            visible: showLabels && text
+            horizontalAlignment: Qt.AlignHCenter
+            elide: Text.ElideRight
+            font.pointSize: Maui.Style.fontSizes.medium
+            color: labelColor
+            wrapMode: Text.NoWrap
         }
     }
 }

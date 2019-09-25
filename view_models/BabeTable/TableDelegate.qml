@@ -9,11 +9,11 @@ import org.kde.mauikit 1.0 as Maui
 import "../../view_models"
 import "../../utils/Help.js" as H
 
-SwipeDelegate
+Maui.ListItemDelegate
 {
     id: delegateRoot
 
-    readonly property int altHeight : rowHeight * 1.4
+    readonly property int altHeight : Maui.Style.rowHeight * 1.4
     readonly property bool sameAlbum :
     {
         if(coverArt)
@@ -26,9 +26,7 @@ SwipeDelegate
         }else false
     }
 
-    property bool isCurrentListItem :  ListView.isCurrentItem
     property color bgColor : Kirigami.Theme.backgroundColor
-    property string labelColor: isCurrentListItem || hovered ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
     property bool number : false
     property bool quickPlay : true
     property bool coverArt : false
@@ -41,372 +39,371 @@ SwipeDelegate
     property bool remoteArtwork: false
 
     width: parent.width
-    height: sameAlbum ? rowHeight : altHeight
-    padding: 0
-    swipe.enabled: false
-    hoverEnabled: !isMobile
-
+    height: sameAlbum ? Maui.Style.rowHeight : altHeight
+    leftPadding: Maui.Style.space.small
+    rightPadding: leftPadding
     signal play()
-    signal rightClicked()
     signal leftClicked()
 
     signal artworkCoverClicked()
     signal artworkCoverDoubleClicked()
 
-    DropShadow
+    SwipeDelegate
     {
-        visible: swipe.position < 0
-          anchors.fill: background
-          horizontalOffset: 5
-          verticalOffset: 0
-          radius: 8.0
-          samples: 17
-          color: Qt.darker(background.color, 1.2)
-          source: background
-      }
+        anchors.fill: parent
+        swipe.enabled: false
 
-
-    background: Rectangle
-    {
-        height: delegateRoot.height
-        color: isCurrentListItem || hovered ? Kirigami.Theme.highlightColor : (trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r,
-                                                                                                     Qt.lighter(trackMood, 1.3).g,
-                                                                                                     Qt.lighter(trackMood, 1.3).b,
-                                                                                                     0.3 ) ):
-                                                                            index % 2 === 0 ? Qt.lighter(bgColor) : bgColor)
-//        opacity: hovered ? 0.3 : 1
-
-        Item
+        MouseArea
         {
             anchors.fill: parent
-            anchors.margins: space.small
+            propagateComposedEvents: true
+        }
 
-            MouseArea
+        DropShadow
+        {
+            visible: swipe.position < 0
+              anchors.fill: background
+              horizontalOffset: 5
+              verticalOffset: 0
+              radius: 8.0
+              samples: 17
+              color: Qt.darker(background.color, 1.2)
+              source: background
+          }
+
+        background: Item
+        {
+            height: delegateRoot.height
+//            color: isCurrentItem || hovered ? Kirigami.Theme.highlightColor : (trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r,
+//                                                                                                         Qt.lighter(trackMood, 1.3).g,
+//                                                                                                         Qt.lighter(trackMood, 1.3).b,
+//                                                                                                         0.3 ) ):
+//                                                                                index % 2 === 0 ? Qt.lighter(bgColor) : bgColor)
+    //        opacity: hovered ? 0.3 : 1
+
+            Item
             {
                 anchors.fill: parent
-                acceptedButtons:  Qt.RightButton
-                pressAndHoldInterval: 3000
-                onClicked: if(!isMobile && mouse.button === Qt.RightButton)
-                               rightClicked()
+                anchors.margins: space.small
 
-            }
-
-            RowLayout
-            {
-                id: gridLayout
-                anchors.fill: parent
-                spacing: 0
-
-                Item
+                RowLayout
                 {
-                    visible: coverArt
-                    Layout.fillHeight: true
-                    Layout.alignment: Qt.AlignCenter
-                    width: altHeight
-                    height: parent.height
+                    id: gridLayout
+                    anchors.fill: parent
+                    spacing: 0
 
-                    MouseArea
+                    Item
                     {
-                         anchors.fill: parent
-                        onDoubleClicked: artworkCoverDoubleClicked()
-                        onClicked: artworkCoverClicked()
-                        onPressAndHold: if(isMobile) artworkCoverDoubleClicked()
+                        visible: coverArt
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignCenter
+                        width: altHeight
+                        height: parent.height
 
-                        Image
+                        MouseArea
                         {
-                            id: artworkCover
-                            visible: !sameAlbum
-                            anchors.fill: parent
-                            sourceSize.width: parent.width
-                            sourceSize.height: parent.height
+                             anchors.fill: parent
+                            onDoubleClicked: artworkCoverDoubleClicked()
+                            onClicked: artworkCoverClicked()
+                            onPressAndHold: if(isMobile) artworkCoverDoubleClicked()
 
-                            source: typeof model.artwork === 'undefined' ?
-                                        "qrc:/assets/cover.png" :
-                                        remoteArtwork ? model.artwork :
-                                                        ((model.artwork && model.artwork.length > 0 && model.artwork !== "NONE")? "file://"+encodeURIComponent(model.artwork) : "qrc:/assets/cover.png")
-
-
-                            fillMode:  Image.PreserveAspectFit
-                            asynchronous: true
-                            mipmap: true
-
-                            layer.enabled: coverArt
-                            layer.effect: OpacityMask
+                            Image
                             {
-                                maskSource: Item
+                                id: artworkCover
+                                visible: !sameAlbum
+                                anchors.fill: parent
+                                sourceSize.width: parent.width
+                                sourceSize.height: parent.height
+
+                                source: typeof model.artwork === 'undefined' ?
+                                            "qrc:/assets/cover.png" :
+                                            remoteArtwork ? model.artwork :
+                                                            ((model.artwork && model.artwork.length > 0 && model.artwork !== "NONE")? "file://"+encodeURIComponent(model.artwork) : "qrc:/assets/cover.png")
+
+
+                                fillMode:  Image.PreserveAspectFit
+                                asynchronous: true
+                                mipmap: true
+
+                                layer.enabled: coverArt
+                                layer.effect: OpacityMask
                                 {
-                                    width: artworkCover.width
-                                    height: artworkCover.height
-                                    Rectangle
+                                    maskSource: Item
                                     {
-                                        anchors.centerIn: parent
-                                        width: artworkCover.adapt ? artworkCover.width : Math.min(artworkCover.width, artworkCover.height)
-                                        height: artworkCover.adapt ? artworkCover.height : width
-                                        radius: Kirigami.Units.devicePixelRatio *3
-                                        border.width: Kirigami.Units.devicePixelRatio *3
+                                        width: artworkCover.width
+                                        height: artworkCover.height
+                                        Rectangle
+                                        {
+                                            anchors.centerIn: parent
+                                            width: artworkCover.adapt ? artworkCover.width : Math.min(artworkCover.width, artworkCover.height)
+                                            height: artworkCover.adapt ? artworkCover.height : width
+                                            radius: Kirigami.Units.devicePixelRatio *3
+                                            border.width: Kirigami.Units.devicePixelRatio *3
+                                        }
                                     }
                                 }
+                            }
+                        }
+
+                        Item
+                        {
+                            visible : playingIndicator && (currentTrackIndex === index) && isPlaying
+
+                            height: parent.height * 0.5
+                            width: height
+                            anchors.centerIn: parent
+
+                            AnimatedImage
+                            {
+                                source: "qrc:/assets/bars.gif"
+                                anchors.centerIn: parent
+                                height: parent.height
+                                width: parent.width
+                                playing: parent.visible
                             }
                         }
                     }
 
                     Item
                     {
-                        visible : playingIndicator && (currentTrackIndex === index) && isPlaying
-
-                        height: parent.height * 0.5
-                        width: height
-                        anchors.centerIn: parent
-
-                        AnimatedImage
-                        {
-                            source: "qrc:/assets/bars.gif"
-                            anchors.centerIn: parent
-                            height: parent.height
-                            width: parent.width
-                            playing: parent.visible
-                        }
-                    }
-                }
-
-                Item
-                {
-                    visible: quickPlay
-                    Layout.fillHeight: true
-                    width:  iconSize * 1.5
-                    height: parent.height
-                    Layout.leftMargin: space.small
-
-                    ToolButton
-                    {
-                        id: playBtn
-                        anchors.centerIn: parent
-                        icon.name: "media-playback-start"
-                        icon.color: labelColor
-                        icon.width: iconSizes.medium
-                        onClicked: play()
-                    }
-                }
-
-                Item
-                {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                    Layout.margins: space.tiny
-                    Layout.leftMargin: space.small * (quickPlay ? 1 : 2)
-                    Layout.rightMargin: space.big
-
-                    GridLayout
-                    {
-                        anchors.verticalCenter: parent.verticalCenter
-                        width: parent.width
-                        rows: 2
-                        columns: 4
-                        rowSpacing: space.tiny
-
-                        Label
-                        {
-                            id: trackNumber
-                            visible: number
-                            width: 16
-                            Layout.fillHeight: true
-                            Layout.row: 1
-                            Layout.column: 1
-
-                            Layout.alignment: Qt.AlignCenter
-                            verticalAlignment:  Qt.AlignVCenter
-
-                            text: model.track + ". "
-                            font.bold: true
-                            elide: Text.ElideRight
-
-                            font.pointSize: fontSizes.default
-                            color: labelColor
-                        }
-
-                        Label
-                        {
-                            id: trackTitle
-                            //                        Layout.maximumWidth: gridLayout.width *0.5
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            Layout.row: 1
-                            Layout.column: 2
-                            Layout.alignment: Qt.AlignLeft || Qt.AlignBottom
-                            verticalAlignment:  Qt.AlignVCenter
-                            text: model.title
-    //                        font.bold: !sameAlbum
-                            font.weight: Font.Regular
-                            elide: Text.ElideRight
-                            font.pointSize: fontSizes.default
-                            color: labelColor
-
-                        }
-
-                        Label
-                        {
-                            id: trackInfo
-                            visible: coverArt ? !sameAlbum : true
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            Layout.alignment: Qt.AlignLeft || Qt.AlignTop
-                            Layout.row: 2
-                            Layout.column: 2
-                            verticalAlignment:  Qt.AlignVCenter
-                            text: model.artist + " | " + model.album
-                            font.bold: false
-                            elide: Text.ElideRight
-                            font.pointSize: fontSizes.medium
-                            color: labelColor
-                            opacity: isCurrentListItem || hovered ? 0.8 : 0.6
-
-                        }
-
-                        Label
-                        {
-                            id: trackBabe
-
-                            font.family: "Material Design Icons"
-                            visible: model.fav == "1"
-                            Layout.alignment: Qt.AlignRight
-
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-
-                            Layout.row: 1
-                            Layout.column: /*trackDurationVisible &&*/ sameAlbum ? 4 : 3
-                            horizontalAlignment: Qt.AlignRight
-                            verticalAlignment:  Qt.AlignVCenter
-                            text: model.fav ? (model.fav == "1" ? "\uf2D1" : "") : ""
-                            font.bold: false
-                            elide: Text.ElideRight
-                            font.pointSize: fontSizes.small
-                            color: labelColor
-                        }
-
-
-                        Label
-                        {
-                            font.family: "Material Design Icons"
-
-                            id: trackRating
-                            visible: trackRatingVisible
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            Layout.alignment: Qt.AlignRight
-                            Layout.row: /*trackRatingVisible && */sameAlbum ? 1 : 2
-                            Layout.column: 3
-                            //                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
-                            horizontalAlignment: Qt.AlignRight
-                            verticalAlignment:  Qt.AlignVCenter
-                            text: model.rate ? H.setStars(model.rate) : ""
-                            font.bold: false
-                            elide: Text.ElideRight
-                            font.pointSize: fontSizes.small
-                            color: labelColor
-                        }
-                    }
-                }
-
-                Item
-                {
-                    visible: menuItem
-                    Layout.fillHeight: true
-    //                Layout.fillWidth: true
-                    width: space.enormous
-
-                    MouseArea
-                    {
-                        id: handle
-                        property var downTimestamp;
-                        property int startX
-                        property int startMouseX
-                        z: delegateRoot.z +1
-
-                        anchors.fill: parent
-                        preventStealing: true
-                        onPressed:
-                        {
-                            startX = delegateRoot.background.x;
-                            startMouseX = mouse.x;
-                        }
-
-                        onPositionChanged: swipe.position = Math.min(0, Math.max(-delegateRoot.width + height, delegateRoot.background.x - (startMouseX - mouse.x)));
+                        visible: quickPlay
+                        Layout.fillHeight: true
+                        width:  iconSize * 1.5
+                        height: parent.height
+                        Layout.leftMargin: space.small
 
                         ToolButton
                         {
-                            id: menuBtn
-                            visible: true
+                            id: playBtn
                             anchors.centerIn: parent
-                            icon.name: "overflow-menu"
-                            icon.color:  labelColor
-                            onClicked: swipe.position < 0 ? swipe.close() : swipe.open(SwipeDelegate.Right)
+                            icon.name: "media-playback-start"
+                            icon.color: labelColor
+                            icon.width: iconSizes.medium
+                            onClicked: play()
                         }
-
                     }
+
+                    Item
+                    {
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                        Layout.margins: space.tiny
+                        Layout.leftMargin: space.small * (quickPlay ? 1 : 2)
+                        Layout.rightMargin: space.big
+
+                        GridLayout
+                        {
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: parent.width
+                            rows: 2
+                            columns: 4
+                            rowSpacing: space.tiny
+
+                            Label
+                            {
+                                id: trackNumber
+                                visible: number
+                                width: 16
+                                Layout.fillHeight: true
+                                Layout.row: 1
+                                Layout.column: 1
+
+                                Layout.alignment: Qt.AlignCenter
+                                verticalAlignment:  Qt.AlignVCenter
+
+                                text: model.track + ". "
+                                font.bold: true
+                                elide: Text.ElideRight
+
+                                font.pointSize: fontSizes.default
+                                color: labelColor
+                            }
+
+                            Label
+                            {
+                                id: trackTitle
+                                //                        Layout.maximumWidth: gridLayout.width *0.5
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.row: 1
+                                Layout.column: 2
+                                Layout.alignment: Qt.AlignLeft || Qt.AlignBottom
+                                verticalAlignment:  Qt.AlignVCenter
+                                text: model.title
+        //                        font.bold: !sameAlbum
+                                font.weight: Font.Regular
+                                elide: Text.ElideRight
+                                font.pointSize: fontSizes.default
+                                color: labelColor
+
+                            }
+
+                            Label
+                            {
+                                id: trackInfo
+                                visible: coverArt ? !sameAlbum : true
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.alignment: Qt.AlignLeft || Qt.AlignTop
+                                Layout.row: 2
+                                Layout.column: 2
+                                verticalAlignment:  Qt.AlignVCenter
+                                text: model.artist + " | " + model.album
+                                font.bold: false
+                                elide: Text.ElideRight
+                                font.pointSize: fontSizes.medium
+                                color: labelColor
+                                opacity: isCurrentItem || hovered ? 0.8 : 0.6
+
+                            }
+
+                            Label
+                            {
+                                id: trackBabe
+
+                                font.family: "Material Design Icons"
+                                visible: model.fav == "1"
+                                Layout.alignment: Qt.AlignRight
+
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+
+                                Layout.row: 1
+                                Layout.column: /*trackDurationVisible &&*/ sameAlbum ? 4 : 3
+                                horizontalAlignment: Qt.AlignRight
+                                verticalAlignment:  Qt.AlignVCenter
+                                text: model.fav ? (model.fav == "1" ? "\uf2D1" : "") : ""
+                                font.bold: false
+                                elide: Text.ElideRight
+                                font.pointSize: fontSizes.small
+                                color: labelColor
+                            }
+
+
+                            Label
+                            {
+                                font.family: "Material Design Icons"
+
+                                id: trackRating
+                                visible: trackRatingVisible
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.alignment: Qt.AlignRight
+                                Layout.row: /*trackRatingVisible && */sameAlbum ? 1 : 2
+                                Layout.column: 3
+                                //                    Layout.columnSpan: trackRatingVisible && sameAlbum ? 4 : 3
+                                horizontalAlignment: Qt.AlignRight
+                                verticalAlignment:  Qt.AlignVCenter
+                                text: model.rate ? H.setStars(model.rate) : ""
+                                font.bold: false
+                                elide: Text.ElideRight
+                                font.pointSize: fontSizes.small
+                                color: labelColor
+                            }
+                        }
+                    }
+
+                    Item
+                    {
+                        visible: menuItem
+                        Layout.fillHeight: true
+        //                Layout.fillWidth: true
+                        width: space.enormous
+
+                        MouseArea
+                        {
+                            id: handle
+                            property var downTimestamp;
+                            property int startX
+                            property int startMouseX
+                            z: delegateRoot.z +1
+
+                            anchors.fill: parent
+                            preventStealing: true
+                            onPressed:
+                            {
+                                startX = delegateRoot.background.x;
+                                startMouseX = mouse.x;
+                            }
+
+                            onPositionChanged: swipe.position = Math.min(0, Math.max(-delegateRoot.width + height, delegateRoot.background.x - (startMouseX - mouse.x)));
+
+                            ToolButton
+                            {
+                                id: menuBtn
+                                visible: true
+                                anchors.centerIn: parent
+                                icon.name: "overflow-menu"
+                                icon.color:  labelColor
+                                onClicked: swipe.position < 0 ? swipe.close() : swipe.open(SwipeDelegate.Right)
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+        swipe.right: Row
+        {
+            padding: space.medium
+            height: delegateRoot.height
+            anchors.right: parent.right
+            spacing: space.medium
+
+            ToolButton
+            {
+                icon.name: "documentinfo"
+                anchors.verticalCenter: parent.verticalCenter
+                onClicked: swipe.close()
+            }
+
+            ToolButton
+            {
+                icon.name: "love"
+                anchors.verticalCenter: parent.verticalCenter
+
+                icon.color: model.fav === "1" ? babeColor : Kirigami.Theme.textColor
+                onClicked:
+                {
+                    list.fav(index, !(list.get(index).fav == "1"))
+                    swipe.close()
+                }
+            }
+
+            ToolButton
+            {
+                icon.name: "view-media-recent"
+                anchors.verticalCenter: parent.verticalCenter
+
+                onClicked:
+                {
+                    swipe.close()
+                    queueTrack(index)
+                }
+            }
+
+            ToolButton
+            {
+                icon.name: "media-playback-start"
+                anchors.verticalCenter: parent.verticalCenter
+
+                onClicked:
+                {
+                    swipe.close()
+                    play()
                 }
             }
         }
 
-    }
 
-
-    swipe.right: Row
-    {
-        padding: space.medium
-        height: delegateRoot.height
-        anchors.right: parent.right
-        spacing: space.medium
-
-        ToolButton
+        function rate(stars)
         {
-            icon.name: "documentinfo"
-            anchors.verticalCenter: parent.verticalCenter
-            onClicked: swipe.close()
-        }
-
-        ToolButton
-        {
-            icon.name: "love"
-            anchors.verticalCenter: parent.verticalCenter
-
-            icon.color: model.fav === "1" ? babeColor : Kirigami.Theme.textColor
-            onClicked:
-            {                
-                list.fav(index, !(list.get(index).fav == "1"))
-                swipe.close()
-            }
-        }
-
-        ToolButton
-        {
-            icon.name: "view-media-recent"
-            anchors.verticalCenter: parent.verticalCenter
-
-            onClicked:
-            {
-                swipe.close()
-                queueTrack(index)
-            }
-        }
-
-        ToolButton
-        {
-            icon.name: "media-playback-start"
-            anchors.verticalCenter: parent.verticalCenter
-
-            onClicked:
-            {
-                swipe.close()
-                play()
-            }
+            trackRating.text = stars
         }
     }
 
-
-    function rate(stars)
-    {
-        trackRating.text = stars
-    }
 }

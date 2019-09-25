@@ -311,7 +311,6 @@ Maui.ApplicationWindow
                         leftContent:  ToolButton
                         {
                             icon.name: "headphones"
-                            visible: _drawer.modal
                             checked: _drawer.visible
                             icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
                             onClicked: _drawer.visible = !_drawer.visible

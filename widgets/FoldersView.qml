@@ -18,7 +18,7 @@ Item
         anchors.margins: space.big
         anchors.fill: parent
         showEmblem: false
-
+model: ListModel {}
         onItemClicked:
         {
             var item = browser.model.get(index)

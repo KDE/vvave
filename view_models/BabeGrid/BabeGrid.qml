@@ -13,8 +13,7 @@ Maui.Page
     //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
     //    property int hintSize : Math.sqrt(root.width*root.height)*0.3
 
-    property int albumCoverSize: Math.min(120, width * 0.3)
-    readonly property int albumSpacing: albumCoverSize * 0.3 + space.small
+    property int albumCoverSize: Math.min(180, width * 0.4)
 
     property int albumCoverRadius :  Maui.Style.radiusV
     property bool albumCardVisible : true
@@ -53,14 +52,9 @@ Maui.Page
         onAreaClicked: bgClicked()
         adaptContent: true
         anchors.fill: parent
-        anchors.topMargin: Maui.Style.space.big
+        topMargin: Maui.Style.space.big
 
         itemSize: albumCoverSize
-        spacing: albumSpacing
-
-        cellWidth: albumCoverSize + spacing
-        cellHeight:  albumCoverSize + spacing*2
-
         holder.visible: count === 0
 
         model: _albumsModel
@@ -68,12 +62,13 @@ Maui.Page
         {
             id: albumDelegate
 
-            albumSize : grid.itemSize
+            albumSize : height * 0.6
             albumRadius: albumCoverRadius
             albumCard: albumCardVisible
+            padding: Maui.Style.space.small
 
-            height: grid.cellHeight
             width: grid.cellWidth
+            height: width
 
             Connections
             {
