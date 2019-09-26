@@ -67,8 +67,10 @@ Maui.Page
             albumCard: albumCardVisible
             padding: Maui.Style.space.small
 
-            width: grid.cellWidth
-            height: width
+
+
+                       height: grid.cellHeight
+                       width: grid.cellWidth
 
             Connections
             {

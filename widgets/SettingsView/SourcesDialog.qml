@@ -28,7 +28,7 @@ Maui.Dialog
 
     onAccepted:
     {
-        fmDialog.onlyDirs = true
+        fmDialog.settings.onlyDirs = true
         fmDialog.show(function(paths)
         {
 

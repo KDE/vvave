@@ -14,11 +14,10 @@ Item
     Maui.GridBrowser
     {
         id: browser
-        //        headBarTitle: qsTr("Source folders")
-        anchors.margins: space.big
+        anchors.margins: Maui.Style.space.big
         anchors.fill: parent
         showEmblem: false
-model: ListModel {}
+        model: ListModel {}
         onItemClicked:
         {
             var item = browser.model.get(index)
@@ -27,37 +26,38 @@ model: ListModel {}
             filter()
             _listDialog.open()
         }
+    }
 
-        Maui.Holder
+
+    Maui.Holder
+    {
+        anchors.fill: parent
+        visible: !browser.count
+        emoji: "qrc:/assets/MusicCloud.png"
+        isMask: false
+        title : "No Folders!"
+        body: "Add new music to your sources to browse by folders"
+        emojiSize: iconSizes.huge
+    }
+
+    Maui.Dialog
+    {
+        id: _listDialog
+        parent: parent
+        maxHeight: maxWidth
+        maxWidth: Maui.Style.unit * 600
+        defaultButtons: false
+        page.padding: 0
+        BabeTable
         {
+            id: _filterList
             anchors.fill: parent
-            visible: !browser.count
-            emoji: "qrc:/assets/MusicCloud.png"
-            isMask: false
-            title : "No Folders!"
-            body: "Add new music to your sources to browse by folders"
-            emojiSize: iconSizes.huge
-        }
-
-        Maui.Dialog
-        {
-            id: _listDialog
-            parent: parent
-            maxHeight: maxWidth
-            maxWidth: unit * 600
-            defaultButtons: false
-            page.padding: 0
-            BabeTable
-            {
-                id: _filterList
-                anchors.fill: parent
-                coverArtVisible: true
-                holder.emoji: "qrc:/assets/MusicCloud.png"
-                holder.isMask: false
-                holder.title : "No Tracks!"
-                holder.body: "This source folder seems to be empty!"
-                holder.emojiSize: iconSizes.huge
-            }
+            coverArtVisible: true
+            holder.emoji: "qrc:/assets/MusicCloud.png"
+            holder.isMask: false
+            holder.title : "No Tracks!"
+            holder.body: "This source folder seems to be empty!"
+            holder.emojiSize: Maui.Style.iconSizes.huge
         }
     }
 

@@ -27,47 +27,6 @@ Maui.Page
         id: babeList
         anchors.fill: parent
         holder.visible: count === 0
-//        listView.highlight: Rectangle
-//        {
-//            width: babeList.width
-//            height: babeList.currentItem.height
-//            color: highlightColor
-//        }
-
-//        Keys.onUpPressed: decrementCurrentIndex()
-//        Keys.onDownPressed: incrementCurrentIndex()
-//        Keys.onReturnPressed: rowClicked(currentIndex)
-//        Keys.onEnterPressed: quickPlayTrack(currentIndex)
-
-//        boundsBehavior: !isMobile? Flickable.StopAtBounds : Flickable.OvershootBounds
-//        flickableDirection: Flickable.AutoFlickDirection
-
-        //        snapMode: isMobile? ListView.SnapToItem : ListView.NoSnap
-
-//        addDisplaced: Transition
-//        {
-//            NumberAnimation { properties: "x,y"; duration: 100 }
-//        }
-
-//        ScrollBar.vertical:BabeScrollBar { visible: !isMobile}
-
-//        onContentYChanged:
-//        {
-//            if(contentY < -120)
-//                wasPulled = true
-
-//            if(contentY == 0 && wasPulled)
-//            { pulled(); wasPulled = false}
-//        }
-
-        // Scroll is too fast on desktop, see QTBUG-56075
-        // https://bugreports.qt.io/browse/QTBUG-56075
-//        ScrollHelper
-//        {
-//            enabled: !isMobile
-//            id: scrollHelper
-//            flickable: babeList
-//            anchors.fill: babeList
-//        }
+        topMargin: Maui.Style.space.medium
     }
 }

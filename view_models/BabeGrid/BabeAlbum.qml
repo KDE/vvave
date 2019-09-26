@@ -42,6 +42,7 @@ Maui.GridItemDelegate
     {
         anchors.fill: parent
         spacing: 0
+
         Item
         {
             Layout.alignment: Qt.AlignCenter
@@ -54,7 +55,7 @@ Maui.GridItemDelegate
                 anchors.fill: card
                 visible: card.visible
                 horizontalOffset: 0
-                verticalOffset: 3
+                verticalOffset: 0
                 radius: 8.0
                 samples: 17
                 color: "#80000000"
@@ -138,7 +139,7 @@ Maui.GridItemDelegate
             Layout.fillWidth: true
             Layout.fillHeight: true
             text: list.query === Albums.ALBUMS ? model.album : model.artist
-            visible: showLabels
+            visible: showLabels && (albumSize > 50)
             horizontalAlignment: Qt.AlignHCenter
             elide: Text.ElideRight
             font.pointSize: Maui.Style.fontSizes.default
@@ -154,7 +155,7 @@ Maui.GridItemDelegate
             Layout.fillHeight: true
 
             text: list.query === Albums.ALBUMS ? model.artist : undefined
-            visible: showLabels && text
+            visible: showLabels && text && (albumSize > 70)
             horizontalAlignment: Qt.AlignHCenter
             elide: Text.ElideRight
             font.pointSize: Maui.Style.fontSizes.medium
