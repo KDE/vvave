@@ -78,7 +78,7 @@ ColumnLayout
         id: _filterDialog
         parent: parent
         maxHeight: maxWidth
-        maxWidth: unit * 600
+        maxWidth: Maui.Style.unit * 600
         defaultButtons: false
         page.padding: 0
 
@@ -97,7 +97,7 @@ ColumnLayout
             holder.isMask: false
             holder.title : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
             holder.body: "Your playlist is empty,<br>start adding new music to it"
-            holder.emojiSize: iconSizes.huge
+            holder.emojiSize: Maui.Style.iconSizes.huge
 
             contextMenuItems:
                 MenuItem

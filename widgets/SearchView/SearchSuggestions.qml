@@ -9,7 +9,7 @@ Maui.Popup
 {
     id: searchSuggestionsRoot
     property alias model : suggestionsList.model
-    maxHeight: unit * 700
+    maxHeight: Maui.Style.unit * 700
     heightHint: 0.5
 
     verticalAlignment: Qt.AlignBottom

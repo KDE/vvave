@@ -73,7 +73,7 @@ heightHint: 0.9
                 text: qsTr("Custom API Key")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.default
+                font.pointSize: Maui.Style.fontSizes.default
                 Layout.column: 1
                 Layout.row: 2
                 Layout.fillWidth: true
@@ -92,7 +92,7 @@ heightHint: 0.9
                 text: qsTr("Search results")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.default
+                font.pointSize: Maui.Style.fontSizes.default
                 Layout.column: 1
                 Layout.row: 4
                 Layout.fillWidth: true
@@ -185,7 +185,7 @@ heightHint: 0.9
             holder.isMask: false
             holder.title : "No Results!"
             holder.body: "Try with another query"
-            holder.emojiSize: iconSizes.huge
+            holder.emojiSize: Maui.Style.iconSizes.huge
             coverArtVisible: true
             trackDuration: true
             trackRating: true

@@ -17,7 +17,7 @@ BabeTable
     holder.isMask: false
     holder.title : "No Tracks!"
     holder.body: "Add new music sources"
-    holder.emojiSize: iconSizes.huge
+    holder.emojiSize: Maui.Style.iconSizes.huge
     list.query: Q.GET.allTracks
 }
 

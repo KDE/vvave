@@ -2,12 +2,13 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.1
+import org.kde.mauikit 1.0 as Maui
 
 Popup
 {
     property string message : ""
     id: notify
-    width: columnWidth
+    width: cMaui.Style.rowHeighth
     height: rowHeight
 
     padding: 0
@@ -49,7 +50,7 @@ Popup
             height: parent.height
             width: parent.width
             text: message
-            font.pointSize: fontSizes.medium
+            font.pointSize: Maui.Style.fontSizes.medium
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             color: textColor

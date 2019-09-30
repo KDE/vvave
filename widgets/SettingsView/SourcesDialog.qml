@@ -9,8 +9,8 @@ Maui.Dialog
 {
     property string pathToRemove : ""
 
-    maxWidth: unit * 600
-    maxHeight: unit * 500
+    maxWidth: Maui.Style.unit * 600
+    maxHeight: Maui.Style.unit * 500
     defaultButtons: true
     acceptButton.text: qsTr("Add")
     rejectButton.text: qsTr("Remove")

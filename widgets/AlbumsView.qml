@@ -34,7 +34,7 @@ BabeGrid
     signal albumCoverPressedAndHold(string album, string artist)
 
     visible: true
-    //        topPadding: space.large
+    //        topPadding: Maui.Style.space.large
     onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
     headBar.visible: false
 //    headBar.rightContent: Kirigami.ActionToolBar
@@ -100,7 +100,7 @@ BabeGrid
         id: albumDialog
         parent: parent
         maxHeight: maxWidth
-        maxWidth: unit * 600
+        maxWidth: Maui.Style.unit * 600
         widthHint: 1
         heightHint: 1
         defaultButtons: false
@@ -131,7 +131,7 @@ BabeGrid
                 holder.isMask: false
                 holder.title : "Oops!"
                 holder.body: "This list is empty"
-                holder.emojiSize: iconSizes.huge
+                holder.emojiSize: Maui.Style.iconSizes.huge
 
                 onRowClicked:
                 {

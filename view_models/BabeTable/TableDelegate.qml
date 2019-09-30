@@ -13,7 +13,7 @@ SwipeDelegate
 {
     id: delegateRoot
 
-    readonly property int altHeight : rowHeight * 1.4
+    readonly property int altHeight : Maui.Style.rowHeight * 1.4
     readonly property bool sameAlbum :
     {
         if(coverArt)
@@ -41,7 +41,7 @@ SwipeDelegate
     property bool remoteArtwork: false
 
     width: parent.width
-    height: sameAlbum ? rowHeight : altHeight
+    height: sameAlbum ? Maui.Style.rowHeight : altHeight
     padding: 0
     swipe.enabled: false
     hoverEnabled: !isMobile
@@ -79,7 +79,7 @@ SwipeDelegate
         Item
         {
             anchors.fill: parent
-            anchors.margins: space.small
+            anchors.margins: Maui.Style.space.small
 
             MouseArea
             {
@@ -173,9 +173,9 @@ SwipeDelegate
                 {
                     visible: quickPlay
                     Layout.fillHeight: true
-                    width:  iconSize * 1.5
+                    width:  Maui.Style.iconSizes.medium * 1.5
                     height: parent.height
-                    Layout.leftMargin: space.small
+                    Layout.leftMargin: Maui.Style.space.small
 
                     ToolButton
                     {
@@ -183,7 +183,7 @@ SwipeDelegate
                         anchors.centerIn: parent
                         icon.name: "media-playback-start"
                         icon.color: labelColor
-                        icon.width: iconSizes.medium
+                        icon.width: Maui.Style.iconSizes.medium
                         onClicked: play()
                     }
                 }
@@ -193,9 +193,9 @@ SwipeDelegate
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                    Layout.margins: space.tiny
-                    Layout.leftMargin: space.small * (quickPlay ? 1 : 2)
-                    Layout.rightMargin: space.big
+                    Layout.margins: Maui.Style.space.tiny
+                    Layout.leftMargin: Maui.Style.space.small * (quickPlay ? 1 : 2)
+                    Layout.rightMargin: Maui.Style.space.big
 
                     GridLayout
                     {
@@ -203,7 +203,7 @@ SwipeDelegate
                         width: parent.width
                         rows: 2
                         columns: 4
-                        rowSpacing: space.tiny
+                        rowSpacing: Maui.Style.space.tiny
 
                         Label
                         {
@@ -221,7 +221,7 @@ SwipeDelegate
                             font.bold: true
                             elide: Text.ElideRight
 
-                            font.pointSize: fontSizes.default
+                            font.pointSize: Maui.Style.fontSizes.default
                             color: labelColor
                         }
 
@@ -239,7 +239,7 @@ SwipeDelegate
     //                        font.bold: !sameAlbum
                             font.weight: Font.Regular
                             elide: Text.ElideRight
-                            font.pointSize: fontSizes.default
+                            font.pointSize: Maui.Style.fontSizes.default
                             color: labelColor
 
                         }
@@ -257,7 +257,7 @@ SwipeDelegate
                             text: model.artist + " | " + model.album
                             font.bold: false
                             elide: Text.ElideRight
-                            font.pointSize: fontSizes.medium
+                            font.pointSize: Maui.Style.fontSizes.medium
                             color: labelColor
                             opacity: isCurrentListItem || hovered ? 0.8 : 0.6
 
@@ -281,7 +281,7 @@ SwipeDelegate
                             text: model.fav ? (model.fav == "1" ? "\uf2D1" : "") : ""
                             font.bold: false
                             elide: Text.ElideRight
-                            font.pointSize: fontSizes.small
+                            font.pointSize: Maui.Style.fontSizes.small
                             color: labelColor
                         }
 
@@ -303,7 +303,7 @@ SwipeDelegate
                             text: model.rate ? H.setStars(model.rate) : ""
                             font.bold: false
                             elide: Text.ElideRight
-                            font.pointSize: fontSizes.small
+                            font.pointSize: Maui.Style.fontSizes.small
                             color: labelColor
                         }
                     }
@@ -314,7 +314,7 @@ SwipeDelegate
                     visible: menuItem
                     Layout.fillHeight: true
     //                Layout.fillWidth: true
-                    width: space.enormous
+                    width: Maui.Style.space.enormous
 
                     MouseArea
                     {
@@ -354,10 +354,10 @@ SwipeDelegate
 
     swipe.right: Row
     {
-        padding: space.medium
+        padding: Maui.Style.space.medium
         height: delegateRoot.height
         anchors.right: parent.right
-        spacing: space.medium
+        spacing: Maui.Style.space.medium
 
         ToolButton
         {

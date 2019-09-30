@@ -8,7 +8,7 @@ Maui.Dialog
 {
     id: linkingDialogRoot
 
-    maxHeight: unit *400
+    maxHeight: Maui.Style.unit *400
     onAccepted:
     {
 
@@ -40,7 +40,7 @@ Maui.Dialog
                 text:qsTr("Linking allows to connect two devices on the same network. Just provide the device IP address to which you want to connect")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.default
+                font.pointSize: Maui.Style.fontSizes.default
                 wrapMode: Text.Wrap
                 Layout.fillWidth: true
             }
@@ -50,7 +50,7 @@ Maui.Dialog
                 text: qsTr("IP Address")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.default
+                font.pointSize: Maui.Style.fontSizes.default
 
                 Layout.fillWidth: true
             }
@@ -96,7 +96,7 @@ Maui.Dialog
                 text:qsTr("This Device IP address: \n") +link.deviceIp()
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
-                font.pointSize: fontSizes.small
+                font.pointSize: Maui.Style.fontSizes.small
 
                 Layout.fillWidth: true
             }

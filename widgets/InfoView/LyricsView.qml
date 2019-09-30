@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.2
+import org.kde.mauikit 1.0 as Maui
 
 Item
 {
@@ -19,8 +20,7 @@ Item
     Text
     {
         text: lyrics || "Nothing here"
-        color: foregroundColor
-        font.pointSize: fontSizes.big
+        color: foregrou Maui.Style.fontSizes.     font.pointSize: fontSizes.big
         horizontalAlignment: Qt.AlignHCenter
         textFormat: Text.StyledText
     }

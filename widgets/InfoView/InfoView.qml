@@ -59,7 +59,7 @@ Maui.Dialog
                     readOnly: true
                     padding: 20
                     color: "white"
-                    font.pointSize: fontSizes.big
+                    font.pointSize: Maui.Style.fontSizes.big
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
                     textFormat: Text.RichText
@@ -148,7 +148,7 @@ Maui.Dialog
                         text: wikiAlbum
                         visible: wikiAlbum === "NONE" || wikiAlbum.length===0 ? false : true
                         color: darkTextColor
-                        font.pointSize: fontSizes.big
+                        font.pointSize: Maui.Style.fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.RichText
                         wrapMode: Text.Wrap
@@ -176,7 +176,7 @@ Maui.Dialog
                         visible: wikiArtist === "NONE" || wikiArtist.length===0 ? false : true
 
                         color: darkTextColor
-                        font.pointSize: fontSizes.big
+                        font.pointSize: Maui.Style.fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.StyledText
                         wrapMode: Text.Wrap

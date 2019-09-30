@@ -37,7 +37,7 @@ Item
         isMask: false
         title : "No Folders!"
         body: "Add new music to your sources to browse by folders"
-        emojiSize: iconSizes.huge
+        emojiSize: Maui.Style.iconSizes.huge
     }
 
     Maui.Dialog

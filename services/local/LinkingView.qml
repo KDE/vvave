@@ -109,7 +109,7 @@ ColumnLayout
                 holder.title : link.getDeviceName() ? link.getDeviceName() :
                                                       "Disconnected!"
                 holder.body: "Your linked playlist is empty"
-                holder.emojiSize: iconSizes.huge
+                holder.emojiSize: Maui.Style.iconSizes.huge
 
                 appendBtn.visible: false
                 playAllBtn.visible: false
@@ -158,7 +158,7 @@ ColumnLayout
         id: searchBox
         Layout.fillWidth: true
 //        width: parent.width
-//        height: toolBarHeight
+//        height: Maui.Style.toolBarHeight
         position: ToolBar.Footer
 
         Rectangle

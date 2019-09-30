@@ -41,11 +41,11 @@ Maui.Page
     }
 
     footBar.visible: !mainlistEmpty
-    footBar.implicitHeight: toolBarHeight * 1.3
+    footBar.implicitHeight: Maui.Style.toolBarHeight * 1.3
     footBar.width: parent.width
     footBar.middleContent: AlbumsRoll
     {
-//        height: toolBarHeight * 1.3
+//        height: Maui.Style.toolBarHeight * 1.3
         Layout.fillWidth: true
         Layout.fillHeight: true
 //        width: footBar.width
@@ -124,7 +124,7 @@ Maui.Page
             holder.isMask: false
             holder.title : "Meh!"
             holder.body: "Start putting together your playlist!"
-            holder.emojiSize: iconSizes.huge
+            holder.emojiSize: Maui.Style.iconSizes.huge
             onRowClicked: play(index)
 
             onArtworkDoubleClicked: contextMenu.babeIt(index)

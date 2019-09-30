@@ -26,7 +26,7 @@ BabeTable
     holder.isMask: false
     holder.title : "No search results!"
     holder.body: "Try with another query"
-    holder.emojiSize: iconSizes.huge
+    holder.emojiSize: Maui.Style.iconSizes.huge
     coverArtVisible: true
     trackDuration: true
     trackRating: true

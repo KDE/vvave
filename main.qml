@@ -157,7 +157,7 @@ Maui.ApplicationWindow
     //    headBarBGColor: "#212121"
     //    altColorText: darkTextColor
 
-    //    headBar.spacing: space.big
+    //    headBar.spacing: Maui.Style.space.big
     headBar.middleContent : Kirigami.ActionToolBar
     {
         display: isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
@@ -254,7 +254,7 @@ Maui.ApplicationWindow
         Slider
         {
             id: progressBar
-            Layout.preferredHeight: unit * (isMobile ?  6 : 8)
+            Layout.preferredHeight: Maui.Style.unit * (isMobile ?  6 : 8)
             Layout.fillWidth: true
 
             padding: 0
@@ -289,9 +289,9 @@ Maui.ApplicationWindow
                 x: progressBar.leftPadding + progressBar.visualPosition
                    * (progressBar.availableWidth - width)
                 y: -(progressBar.height * 0.8)
-                implicitWidth: progressBar.pressed ? iconSizes.medium : 0
-                implicitHeight: progressBar.pressed ? iconSizes.medium : 0
-                radius: progressBar.pressed ? iconSizes.medium : 0
+                implicitWidth: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
+                implicitHeight: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
+                radius: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
                 color: babeColor
             }
         }
@@ -313,7 +313,12 @@ Maui.ApplicationWindow
                             icon.name: "headphones"
                             checked: _drawer.visible
                             icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
-                            onClicked: _drawer.visible = !_drawer.visible
+                            onClicked:
+                            {
+                                console.log("SHOW DRAWER?", _drawer.visible)
+                                _drawer.visible = !_drawer.visible
+                            }
+
                             Kirigami.Theme.highlightColor: babeColor
                             //                text: qsTr("Now")
                         }
@@ -601,7 +606,7 @@ Maui.ApplicationWindow
             anchors.fill: parent
             height: parent.height
             width: parent.width
-            font.pointSize: fontSizes.medium
+            font.pointSize: Maui.Style.fontSizes.medium
             text: infoMsg
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
@@ -636,23 +641,17 @@ Maui.ApplicationWindow
         id: playlistDialog
     }
 
-    globalDrawer: Maui.GlobalDrawer
+   sideBar: Maui.AbstractSideBar
     {
         id: _drawer
-        width: Math.min(Kirigami.Units.gridUnit * 18, root.width)
-        height: root.height - root.headBar.implicitHeight - root.footBar.implicitHeight
+        width: visible ? Math.min(Kirigami.Units.gridUnit * 18, root.width) : 0
+
         modal: !isWide
-        handleVisible: false
         closePolicy: Popup.NoAutoClose
-
-        handleClosedIcon.source: "headphones"
-        handleOpenIcon.source: "headphones"
-        handleOpenIcon.color: babeColor
-        handleClosedIcon.color: babeColor
-
-        contentItem: MainPlaylist
+         MainPlaylist
         {
             id: mainPlaylist
+            anchors.fill: parent
             Connections
             {
                 target: mainPlaylist
@@ -718,7 +717,7 @@ Maui.ApplicationWindow
                 holder.isMask: false
                 holder.title : "No Albums!"
                 holder.body: "Add new music sources"
-                holder.emojiSize: iconSizes.huge
+                holder.emojiSize: Maui.Style.iconSizes.huge
                 title: count + qsTr(" albums")
                 list.query: Albums.ALBUMS
                 list.sortBy: Albums.ALBUM
@@ -772,7 +771,7 @@ Maui.ApplicationWindow
                 holder.isMask: false
                 holder.title : qsTr("No Artists!")
                 holder.body: qsTr("Add new music sources")
-                holder.emojiSize: iconSizes.huge
+                holder.emojiSize: Maui.Style.iconSizes.huge
                 title: count + qsTr(" artists")
                 list.query: Albums.ARTISTS
                 list.sortBy: Albums.ARTIST
@@ -953,9 +952,9 @@ Maui.ApplicationWindow
             id: _selectionBar
             property alias listView: _selectionBar.selectionList
             Layout.fillWidth: true
-            Layout.margins: space.big
-            Layout.topMargin: space.small
-            Layout.bottomMargin: space.big
+            Layout.margins: Maui.Style.space.big
+            Layout.topMargin: Maui.Style.space.small
+            Layout.bottomMargin: Maui.Style.space.big
             onIconClicked: _contextMenu.popup()
             onExitClicked: clear()
             //            Kirigami.Theme.backgroundColor: "#212121"

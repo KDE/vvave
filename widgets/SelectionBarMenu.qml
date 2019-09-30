@@ -14,7 +14,7 @@ import org.kde.mauikit 1.0 as Maui
 Menu
 {
     id: control
-    width: unit * 200
+    width: Maui.Style.unit * 200
 
     property int rate : 0
     property string starColor : "#FFC107"
@@ -112,7 +112,7 @@ Menu
 //    {
 //        id: starsRow
 //        width: parent.width
-//        height: iconSizes.medium + space.small
+//        height: Maui.Style.iconSizes.medium + Maui.Style.space.small
 
 //        RowLayout
 //        {
@@ -123,7 +123,7 @@ Menu
 //                Layout.fillWidth: true
 //                Layout.fillHeight: true
 //                icon.name: starIcon
-//                icon.width: iconSizes.medium
+//                icon.width: Maui.Style.iconSizes.medium
 //                icon.color: rate >= 1 ? starColor :starReg
 //                onClicked:
 //                {
@@ -135,7 +135,7 @@ Menu
 //            {
 //                Layout.fillWidth: true
 //                Layout.fillHeight: true
-//                icon.width: iconSizes.medium
+//                icon.width: Maui.Style.iconSizes.medium
 //                icon.name: starIcon
 //                icon.color: rate >= 2 ? starColor :starReg
 //                onClicked:
@@ -148,7 +148,7 @@ Menu
 //            {
 //                Layout.fillWidth: true
 //                Layout.fillHeight: true
-//                icon.width: iconSizes.medium
+//                icon.width: Maui.Style.iconSizes.medium
 //                icon.name: starIcon
 //                icon.color: rate >= 3 ? starColor :starReg
 //                onClicked:
@@ -161,7 +161,7 @@ Menu
 //            {
 //                Layout.fillWidth: true
 //                Layout.fillHeight: true
-//                icon.width: iconSizes.medium
+//                icon.width: Maui.Style.iconSizes.medium
 //                icon.name: starIcon
 //                icon.color: rate >= 4 ? starColor :starReg
 //                onClicked:
@@ -174,7 +174,7 @@ Menu
 //            {
 //                Layout.fillWidth: true
 //                Layout.fillHeight: true
-//                icon.width: iconSizes.medium
+//                icon.width: Maui.Style.iconSizes.medium
 //                icon.name: starIcon
 //                icon.color: rate >= 5 ? starColor :starReg
 //                onClicked:
@@ -198,7 +198,7 @@ Menu
 //    {
 //        id: colorsRow
 //        width: parent.width
-//        height:  iconSizes.medium + space.small
+//        height:  Maui.Style.iconSizes.medium + Maui.Style.space.small
 
 //        ColorTagsBar
 //        {

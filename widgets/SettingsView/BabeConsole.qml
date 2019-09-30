@@ -61,7 +61,7 @@ Maui.Popup
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 readOnly: true
-                font.pointSize: fontSizes.small
+                font.pointSize: Maui.Style.fontSizes.small
                 wrapMode: TextEdit.WordWrap
                 background: Rectangle
                 {

@@ -1,10 +1,11 @@
 import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import org.kde.mauikit 1.0 as Maui
 
 Item
 {
-    property int recSize : iconSizes.small
+    property int recSize: Maui.Style.iconSizes.small
     readonly property int recRadius : recSize*0.05
     signal colorClicked(string color)
 
