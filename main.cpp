@@ -22,6 +22,7 @@
 #include <QtWebView/QtWebView>
 #include <QGuiApplication>
 #include <QIcon>
+#include "mauiandroid.h"
 #else
 #include <QApplication>
 #include <QtWebEngine>
@@ -51,6 +52,8 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
     QGuiApplication::styleHints()->setMousePressAndHoldInterval(1000); // in [ms]
+    if (!MAUIAndroid::checkRunTimePermissions())
+            return -1;
 #else
     QApplication app(argc, argv);
 #endif
