@@ -308,20 +308,20 @@ Maui.ApplicationWindow
             Layout.fillWidth: true
 
             position: ToolBar.Footer
-                        leftContent:  ToolButton
-                        {
-                            icon.name: "headphones"
-                            checked: _drawer.visible
-                            icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
-                            onClicked:
-                            {
-                                console.log("SHOW DRAWER?", _drawer.visible)
-                                _drawer.visible = !_drawer.visible
-                            }
+            leftContent:  ToolButton
+            {
+                icon.name: "headphones"
+                checked: _drawer.visible
+                icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
+                onClicked:
+                {
+                    console.log("SHOW DRAWER?", _drawer.visible)
+                    _drawer.visible = !_drawer.visible
+                }
 
-                            Kirigami.Theme.highlightColor: babeColor
-                            //                text: qsTr("Now")
-                        }
+                Kirigami.Theme.highlightColor: babeColor
+                //                text: qsTr("Now")
+            }
 
             middleContent: [
                 ToolButton
@@ -641,14 +641,14 @@ Maui.ApplicationWindow
         id: playlistDialog
     }
 
-   sideBar: Maui.AbstractSideBar
+    globalDrawer: Maui.GlobalDrawer
     {
         id: _drawer
         width: visible ? Math.min(Kirigami.Units.gridUnit * 18, root.width) : 0
-
+        handleVisible: false
         modal: !isWide
         closePolicy: Popup.NoAutoClose
-         MainPlaylist
+        contentItem: MainPlaylist
         {
             id: mainPlaylist
             anchors.fill: parent

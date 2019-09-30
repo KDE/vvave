@@ -20,7 +20,8 @@ Item
     Text
     {
         text: lyrics || "Nothing here"
-        color: foregrou Maui.Style.fontSizes.     font.pointSize: fontSizes.big
+        color: foregroundColor
+        font.pointSize: Maui.Style.fontSizes.big
         horizontalAlignment: Qt.AlignHCenter
         textFormat: Text.StyledText
     }
