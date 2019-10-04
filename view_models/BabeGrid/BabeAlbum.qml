@@ -6,7 +6,7 @@ import AlbumsList 1.0
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
-Maui.GridItemDelegate
+Maui.ItemDelegate
 {
     id: babeAlbumRoot
 
@@ -19,7 +19,7 @@ Maui.GridItemDelegate
     property bool showIndicator :  false
     property bool hideRepeated : false
     property bool increaseCurrentItem : false
-
+isCurrentItem: GridView.isCurrentItem
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
 
     readonly property bool sameAlbum :
@@ -145,7 +145,7 @@ Maui.GridItemDelegate
             font.pointSize: Maui.Style.fontSizes.default
             font.bold: true
             font.weight: Font.Bold
-            color: labelColor
+            color: Kirigami.Theme.textColor
             wrapMode: Text.NoWrap
         }
 
@@ -159,7 +159,7 @@ Maui.GridItemDelegate
             horizontalAlignment: Qt.AlignHCenter
             elide: Text.ElideRight
             font.pointSize: Maui.Style.fontSizes.medium
-            color: labelColor
+            color: Kirigami.Theme.textColor
             wrapMode: Text.NoWrap
         }
     }
