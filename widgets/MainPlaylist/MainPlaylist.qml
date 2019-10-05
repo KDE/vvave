@@ -45,11 +45,11 @@ Maui.Page
     footBar.width: parent.width
     footBar.middleContent: AlbumsRoll
     {
-//        height: Maui.Style.toolBarHeight * 1.3
+        //        height: Maui.Style.toolBarHeight * 1.3
         Layout.fillWidth: true
         Layout.fillHeight: true
-//        width: footBar.width
-//        height: footBar.height
+        //        width: footBar.width
+        //        height: footBar.height
         id: albumsRoll
     }
 
@@ -97,63 +97,52 @@ Maui.Page
         }
     }
 
-
-    ColumnLayout
+    BabeTable
     {
-        id: playlistLayout
+        id: table
         anchors.fill: parent
-        width: parent.width
-        spacing: 0
+        focus: true
+        headBar.visible: false
+        footBar.visible: false
+        quickPlayVisible: false
+        coverArtVisible: true
+        trackRating: true
+        showIndicator : true
+        menuItemVisible: false
+        holder.emoji: "qrc:/assets/Radio.png"
+        holder.isMask: false
+        holder.title : "Meh!"
+        holder.body: "Start putting together your playlist!"
+        holder.emojiSize: Maui.Style.iconSizes.huge
+        onRowClicked: play(index)
 
-        //            anchors.bottom: mainPlaylistRoot.searchBox
-        BabeTable
+        onArtworkDoubleClicked: contextMenu.babeIt(index)
+
+        Component.onCompleted:
         {
-            id: table
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.alignment: Qt.AlignBottom | Qt.AlignTop
-            focus: true
-            headBar.visible: false
-            footBar.visible: false
-            quickPlayVisible: false
-            coverArtVisible: true
-            trackRating: true
-            showIndicator : true
-            menuItemVisible: false
-            holder.emoji: "qrc:/assets/Radio.png"
-            holder.isMask: false
-            holder.title : "Meh!"
-            holder.body: "Start putting together your playlist!"
-            holder.emojiSize: Maui.Style.iconSizes.huge
-            onRowClicked: play(index)
+            var lastplaylist = Maui.FM.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
+            var n = lastplaylist.length
 
-            onArtworkDoubleClicked: contextMenu.babeIt(index)
-
-            Component.onCompleted:
+            if(n>0)
             {
-                var lastplaylist = Maui.FM.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
-                var n = lastplaylist.length
-
-                if(n>0)
+                for(var i = 0; i < n; i++)
                 {
-                    for(var i = 0; i < n; i++)
-                    {
-                        var where = "url = \""+lastplaylist[i]+"\""
-                        var query = Q.GET.tracksWhere_.arg(where)
-                        table.list.appendQuery(query);
-                    }
-                }else
-                {
-                    where = "fav = 1"
-                    query = Q.GET.tracksWhere_.arg(where)
+                    var where = "url = \""+lastplaylist[i]+"\""
+                    var query = Q.GET.tracksWhere_.arg(where)
                     table.list.appendQuery(query);
                 }
-
-//                if(autoplay)
-//                    Player.playAt(0)
+            }else
+            {
+                where = "fav = 1"
+                query = Q.GET.tracksWhere_.arg(where)
+                table.list.appendQuery(query);
             }
-        }       
+
+            //                if(autoplay)
+            //                    Player.playAt(0)
+        }
     }
+
 
     //    function goFocusMode()
     //    {

@@ -320,7 +320,32 @@ Maui.ApplicationWindow
                 }
 
                 Kirigami.Theme.highlightColor: babeColor
-                //                text: qsTr("Now")
+
+                Connections
+                {
+                    target: mainPlaylist.table
+                    onCountChanged: anim.start()
+                }
+
+                NumberAnimation on x
+                {
+                    property int count : 0
+                    id: anim
+                    to: 10
+                    duration: 100
+                    onStopped:
+                    {
+                        if(anim.to===10) { anim.from=10; anim.to=0; } else { anim.from=0; anim.to=10 }
+                        count++;
+                        if(count < 5)
+                            start()
+                        else
+                        {
+                            anim.to = 0
+                            count = 0
+                        }
+                    }
+                }
             }
 
             middleContent: [
@@ -1026,7 +1051,7 @@ Maui.ApplicationWindow
     {
         target: vvave
 
-        //        onRefreshTables: H.refreshCollection(size)
+        onRefreshTables: H.refreshCollection(size)
         //        onRefreshTracks: H.refreshTracks()
         //        onRefreshAlbums: H.refreshAlbums()
         //        onRefreshArtists: H.refreshArtists()

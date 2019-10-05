@@ -10,10 +10,7 @@ import AlbumsList 1.0
 Maui.Page
 {
     id: gridPage
-    //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
-    //    property int hintSize : Math.sqrt(root.width*root.height)*0.3
-
-    property int albumCoverSize: Math.min(160, width * 0.4)
+    property int albumCoverSize: Math.min(160, width * 0.3)
 
     property int albumCoverRadius :  Maui.Style.radiusV
     property bool albumCardVisible : true

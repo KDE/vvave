@@ -47,13 +47,14 @@ vvave::~vvave() {}
 void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> cb)
 {
     QFutureWatcher<uint> *watcher = new QFutureWatcher<uint>;
-    connect(watcher, &QFutureWatcher<uint>::finished, [=]()
+    connect(watcher, &QFutureWatcher<uint>::finished, [cb, watcher]()
     {
         const uint newTracks = watcher->future().result();
+        qDebug()<< "FINISHED SCANING CXOLLECTION";
         if(cb)
             cb(newTracks);
-        watcher->deleteLater();
     });
+
     const auto func = [=]() -> uint
     {
         auto newPaths = paths;
@@ -67,6 +68,11 @@ void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> 
 
     QFuture<uint> t1 = QtConcurrent::run(func);
     watcher->setFuture(t1);
+}
+
+void vvave::emitSignal()
+{
+    emit this->refreshTables(10);
 }
 
 //// PUBLIC SLOTS

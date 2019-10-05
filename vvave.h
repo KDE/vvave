@@ -13,6 +13,7 @@ private:
     CollectionDB *db;
     void checkCollection(const QStringList &paths = BAE::defaultSources, std::function<void (uint)> cb = nullptr);
 
+    void emitSignal();
 public:
     explicit vvave(QObject *parent = nullptr);
     ~vvave();

@@ -52,45 +52,44 @@ Maui.SwipeBrowserDelegate
     label2.visible: coverArt ? !sameAlbum : true
 
     label3.text: model.fav ? (model.fav == "1" ? "\uf2D1" : "") : ""
-     label3.font.family: "Material Design Icons"
-     label4.font.family: "Material Design Icons"
-     label4.text: model.rate ? H.setStars(model.rate) : ""
+    label3.font.family: "Material Design Icons"
+    label4.font.family: "Material Design Icons"
+    label4.text: model.rate ? H.setStars(model.rate) : ""
 
-     iconVisible: !sameAlbum && coverArt
-     imageSource: typeof model.artwork === 'undefined' ?
-              "qrc:/assets/cover.png" :
-              remoteArtwork ? model.artwork :
-                              ((model.artwork && model.artwork.length > 0 && model.artwork !== "NONE")? "file://"+encodeURIComponent(model.artwork) : "qrc:/assets/cover.png")
+    iconVisible: !sameAlbum && coverArt
+    imageSource: typeof model.artwork === 'undefined' ?
+                     "qrc:/assets/cover.png" :
+                     remoteArtwork ? model.artwork :
+                                     ((model.artwork && model.artwork.length > 0 && model.artwork !== "NONE")? "file://"+encodeURIComponent(model.artwork) : "qrc:/assets/cover.png")
 
 
-     signal play()
-     signal leftClicked()
+    signal play()
+    signal leftClicked()
 
-     signal artworkCoverClicked()
-     signal artworkCoverDoubleClicked()
+    signal artworkCoverClicked()
+    signal artworkCoverDoubleClicked()
 
-     Kirigami.Theme.backgroundColor: trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r, Qt.lighter(trackMood, 1.3).g, Qt.lighter(trackMood, 1.3).b,  0.3)):  bgColor
+    Kirigami.Theme.backgroundColor: trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r, Qt.lighter(trackMood, 1.3).g, Qt.lighter(trackMood, 1.3).b,  0.3)):  bgColor
 
     quickActions: [
+        Action
+        {
+            icon.name: "love"
+            onTriggered: list.fav(index, !(list.get(index).fav == "1"))
+            checked: model.fav === "1"
+        },
 
-                Action
-                {
-                    icon.name: "love"
-                    icon.color: model.fav === "1" ? babeColor : Kirigami.Theme.textColor
-                  onTriggered: list.fav(index, !(list.get(index).fav == "1"))
-                },
+        Action
+        {
+            icon.name: "view-media-recent"
+            onTriggered: queueTrack(index)
+        },
 
-                Action
-                {
-                    icon.name: "view-media-recent"
-                    onTriggered: queueTrack(index)
-                },
-
-                Action
-                {
-                    icon.name: "media-playback-start"
-                    onTriggered: play()
-                }
+        Action
+        {
+            icon.name: "media-playback-start"
+            onTriggered: play()
+        }
     ]
 
 
