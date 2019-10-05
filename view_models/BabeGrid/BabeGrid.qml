@@ -13,7 +13,7 @@ Maui.Page
     //    readonly property int screenSize : bae.screenGeometry("width")*bae.screenGeometry("height");
     //    property int hintSize : Math.sqrt(root.width*root.height)*0.3
 
-    property int albumCoverSize: Math.min(180, width * 0.4)
+    property int albumCoverSize: Math.min(160, width * 0.4)
 
     property int albumCoverRadius :  Maui.Style.radiusV
     property bool albumCardVisible : true
@@ -66,8 +66,6 @@ Maui.Page
             albumRadius: albumCoverRadius
             albumCard: albumCardVisible
             padding: Maui.Style.space.small
-
-
 
                        height: grid.cellHeight
                        width: grid.cellWidth

@@ -14,7 +14,7 @@ function setStars(stars)
     {
     case "0":
     case 0:
-        return  " ";
+        return  "";
 
     case "1":
     case 1:
