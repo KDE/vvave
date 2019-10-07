@@ -26,7 +26,7 @@ Maui.Popup
         {
             label: section
             isSection: true
-            boldLabel: true
+            width: parent.width
         }
 
         delegate: Maui.LabelDelegate

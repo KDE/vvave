@@ -150,9 +150,8 @@ ColumnLayout
             {
                 label: filterList.section.property === qsTr("stars") ? H.setStars(section) : section
                 isSection: true
-                boldLabel: true
                 labelTxt.font.family: "Material Design Icons"
-
+                width: filterList.width
             }
 
             Connections

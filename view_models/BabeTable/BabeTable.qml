@@ -274,7 +274,7 @@ BabeList
         id: _sectionDelegate
         label: section
         isSection: true
-        boldLabel: true
+        width: babeTableRoot.width
         Kirigami.Theme.backgroundColor: "#333"
         Kirigami.Theme.textColor: "#fafafa"
 
