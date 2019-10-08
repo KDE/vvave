@@ -666,14 +666,13 @@ Maui.ApplicationWindow
         id: playlistDialog
     }
 
-    globalDrawer: Maui.GlobalDrawer
+    sideBar: Maui.AbstractSideBar
     {
         id: _drawer
         width: visible ? Math.min(Kirigami.Units.gridUnit * 18, root.width) : 0
-        handleVisible: false
         modal: !isWide
-        closePolicy: Popup.NoAutoClose
-        contentItem: MainPlaylist
+
+        MainPlaylist
         {
             id: mainPlaylist
             anchors.fill: parent
