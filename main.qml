@@ -145,19 +145,6 @@ Maui.ApplicationWindow
                            }
     }
 
-    //    BabeNotify
-    //    {
-    //        id: babeNotify //todo
-    //    }
-
-
-    /* UI */
-    //    accentColor: babeColor
-    //    headBarFGColor: altColorText
-    //    headBarBGColor: "#212121"
-    //    altColorText: darkTextColor
-
-    //    headBar.spacing: Maui.Style.space.big
     headBar.middleContent : Kirigami.ActionToolBar
     {
         display: isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
