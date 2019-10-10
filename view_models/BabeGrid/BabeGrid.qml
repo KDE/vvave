@@ -55,36 +55,44 @@ Maui.Page
         holder.visible: count === 0
 
         model: _albumsModel
-        delegate: BabeAlbum
+        delegate: Item
         {
-            id: albumDelegate
+            height: grid.cellHeight
+            width: grid.cellWidth
 
-            albumSize : height * 0.6
-            albumRadius: albumCoverRadius
-            albumCard: albumCardVisible
-            padding: Maui.Style.space.small
+            property bool isCurrentItem: GridView.isCurrentItem
 
-                       height: grid.cellHeight
-                       width: grid.cellWidth
-
-            Connections
+            BabeAlbum
             {
-                target: albumDelegate
-                onClicked:
-                {
-                    var album = _albumsList.get(index).album
-                    var artist = _albumsList.get(index).artist
-                    albumCoverClicked(album, artist)
-                    grid.currentIndex = index
-                }
+                id: albumDelegate
+                anchors.centerIn: parent
+                albumRadius: albumCoverRadius
+                albumCard: albumCardVisible
+                padding: Maui.Style.space.small
+                height: parent.height
+                width: height
+                isCurrentItem: parent.isCurrentItem
 
-                onPressAndHold:
+                Connections
                 {
-                    var album = grid.model.get(index).album
-                    var artist = grid.model.get(index).artist
-                    albumCoverPressed(album, artist)
+                    target: albumDelegate
+                    onClicked:
+                    {
+                        var album = _albumsList.get(index).album
+                        var artist = _albumsList.get(index).artist
+                        albumCoverClicked(album, artist)
+                        grid.currentIndex = index
+                    }
+
+                    onPressAndHold:
+                    {
+                        var album = grid.model.get(index).album
+                        var artist = grid.model.get(index).artist
+                        albumCoverPressed(album, artist)
+                    }
                 }
             }
         }
+
     }
 }
