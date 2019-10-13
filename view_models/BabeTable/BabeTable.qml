@@ -261,8 +261,9 @@ BabeList
 
         onShareClicked:
         {
-            isAndroid ? Maui.Android.shareDialog(list.get(listView.currentIndex)) :
-                        shareDialog.show([list.get(listView.currentIndex).url])
+            const url = list.get(listView.currentIndex).url
+            isAndroid ? Maui.Android.shareDialog("file://" + url) :
+                        shareDialog.show([url])
         }
     }
 
