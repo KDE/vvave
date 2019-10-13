@@ -109,7 +109,7 @@ void AlbumsModel::setList()
     {
             if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty() && !FMH::fileExists(QUrl::fromLocalFile(item[FMH::MODEL_KEY::ARTWORK])))
     {
-        this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FM::toMap(item));
+        this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FMH::toMap(item));
         item[FMH::MODEL_KEY::ARTWORK] = "";
     }
 });
@@ -230,7 +230,7 @@ QVariantMap AlbumsModel::get(const int &index) const
 {
     if(index >= this->list.size() || index < 0)
         return QVariantMap();
-    return FM::toMap(this->list.at(index));
+    return FMH::toMap(this->list.at(index));
 }
 
 void AlbumsModel::append(const QVariantMap &item)

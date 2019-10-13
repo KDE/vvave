@@ -121,7 +121,7 @@ void vvave::openUrls(const QStringList &urls)
     for(const auto &url : urls)
         if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], QUrl(url).toLocalFile()))
         {
-            data << FM::toMap(this->db->getDBData(QStringList() << QUrl(url).toLocalFile()).first());
+            data << FMH::toMap(this->db->getDBData(QStringList() << QUrl(url).toLocalFile()).first());
         }else
         {
             if(info.feed(QUrl(url).toLocalFile()))
