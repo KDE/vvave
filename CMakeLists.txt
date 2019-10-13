@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(MauiKit REQUIRED)
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Network WebSockets Sql QuickControls2 Xml Multimedia Widgets DBus Svg)
+find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica SyntaxHighlighting)
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
@@ -65,22 +66,17 @@ if (ANDROID)
     set(TAGLIB_INCLUDE_DIRS ${CMAKE_INSTALL_PREFIX}/include ${CMAKE_INSTALL_PREFIX}/include/taglib)
     set(TAGLIB_LIBRARIES ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_DIR}/libtag.a)
 
-    target_link_libraries(vvave Qt5::AndroidExtras Qt5::WebView Qt5::Xml OpenSSL::SSL)
+    target_link_libraries(vvave MauiKit Qt5::AndroidExtras Qt5::WebView Qt5::Xml OpenSSL::SSL)
     add_dependencies(vvave taglib)
     kde_source_files_enable_exceptions(vvave babe.cpp)
 else()
     find_package(Taglib REQUIRED)
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)
-    find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica SyntaxHighlighting)
     target_sources(vvave PRIVATE
         kde/mpris2.cpp
         kde/notify.cpp
         )
     target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus KF5::Attica KF5::SyntaxHighlighting)
-endif()
-
-if (TARGET create-apk-vvave)
-    set_target_properties(create-apk-vvave PROPERTIES ANDROID_APK_DIR "${MAUIKIT_ANDROID_DIR}")
 endif()
 
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
