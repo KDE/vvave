@@ -2,7 +2,7 @@
 #define ENUMS_H
 
 #ifdef STATIC_MAUIKIT
-#include "../mauikit/src/fm/fmh.h"
+#include "fmh.h"
 #else
 #include <MauiKit/fmh.h>
 #endif

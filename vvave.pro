@@ -23,7 +23,16 @@ linux:unix:!android {
 
 } else:android {
     message(Building helpers for Android)
-    QT += androidextras webview
+
+#DEFAULT COMPONENTS DEFINITIONS
+    DEFINES *= \
+        COMPONENT_EDITOR \
+        COMPONENT_FM \
+        COMPONENT_TERMINAL \
+        COMPONENT_TAGGING \
+        COMPONENT_SYNCING
+
+    QT *= androidextras webview
     include($$PWD/3rdparty/taglib.pri)
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
@@ -52,18 +61,16 @@ SOURCES += main.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
 #    utils/brain.cpp \
-    services/local/socket.cpp \
+#    services/local/socket.cpp \
     services/web/youtube.cpp \
     vvave.cpp \
     services/local/youtubedl.cpp \
-    services/local/linking.cpp \
+#    services/local/linking.cpp \
     services/web/Spotify/spotify.cpp \
     models/tracks/tracksmodel.cpp \
-    models/basemodel.cpp \
-    models/baselist.cpp \
     models/playlists/playlistsmodel.cpp \
     models/albums/albumsmodel.cpp \
-    models/cloud/cloud.cpp
+#    models/cloud/cloud.cpp
 
 
 RESOURCES += qml.qrc \
@@ -78,22 +85,20 @@ QML_DESIGNER_IMPORT_PATH =
 HEADERS += \
     db/collectionDB.h \
     utils/bae.h \
-    settings/fileloader.h \
+    services/local/fileloader.h \
     services/local/taginfo.h \
     services/local/player.h \
-    utils/brain.h \
-    services/local/socket.h \
+#    utils/brain.h \
+#    services/local/socket.h \
     services/web/youtube.h \
     vvave.h \
     services/local/youtubedl.h \
-    services/local/linking.h \
+#    services/local/linking.h \
     services/web/Spotify/spotify.h \
     models/tracks/tracksmodel.h \
-    models/basemodel.h \
-    models/baselist.h \
     models/playlists/playlistsmodel.h \
     models/albums/albumsmodel.h \
-    models/cloud/cloud.h
+#    models/cloud/cloud.h
 
 include(install.pri)
 
@@ -123,25 +128,3 @@ include(install.pri)
 #    message("Linux")
 #    QMAKE_POST_LINK += $$copyToBuilddir($$PWD/library/cat)
 #}
-
-DISTFILES += \
-    3rdparty/mauikit/src/android/AndroidManifest.xml \
-    3rdparty/mauikit/src/android/build.gradle \
-    3rdparty/mauikit/src/android/build.gradle \
-    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.jar \
-    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.jar \
-    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.properties \
-    3rdparty/mauikit/src/android/gradle/wrapper/gradle-wrapper.properties \
-    3rdparty/mauikit/src/android/gradlew \
-    3rdparty/mauikit/src/android/gradlew \
-    3rdparty/mauikit/src/android/gradlew.bat \
-    3rdparty/mauikit/src/android/gradlew.bat \
-    3rdparty/mauikit/src/android/res/values/libs.xml \
-    3rdparty/mauikit/src/android/res/values/libs.xml
-
-contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
-    ANDROID_PACKAGE_SOURCE_DIR = \
-        $$PWD/3rdparty/mauikit/src/android
-}
-
-

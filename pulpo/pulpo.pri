@@ -1,5 +1,5 @@
-QT       += network
-QT       += xml
+QT *= network \
+      xml
 
 CONFIG += ordered
 
