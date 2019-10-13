@@ -322,7 +322,7 @@ BabeList
             currentIndex = index
             if(selectionMode)
             {
-                H.addToSelection(listView.model.get(listView.currentIndex))
+                H.addToSelection(list.get(listView.currentIndex))
                 return
             }
 
@@ -364,10 +364,10 @@ BabeList
     function saveList()
     {
         var trackList = []
-        if(model.count > 0)
+        if(listView.count > 0)
         {
-            for(var i = 0; i < model.count; ++i)
-                trackList.push(model.get(i).url)
+            for(var i = 0; i < list.count; ++i)
+                trackList.push(list.get(i).url)
 
             playlistDialog.tracks = trackList
             playlistDialog.open()
@@ -378,10 +378,10 @@ BabeList
     {
         var trackList = []
 
-        if(model.count > 0)
+        if(listView.count > 0)
         {
-            for(var i = 0; i < model.count; ++i)
-                trackList.push(model.get(i))
+            for(var i = 0; i < listView.count; ++i)
+                trackList.push(list.get(i))
 
             Player.queueTracks(trackList)
         }
@@ -390,7 +390,7 @@ BabeList
     function goToAlbum()
     {
         root.currentView = viewsIndex.albums
-        var item = listView.model.get(listView.currentIndex)
+        var item = list.get(listView.currentIndex)
         albumsView.populateTable(item.album, item.artist)
         contextMenu.close()
     }
@@ -398,7 +398,7 @@ BabeList
     function goToArtist()
     {
         root.currentView = viewsIndex.artists
-        var item = listView.model.get(listView.currentIndex)
+        var item = list.get(listView.currentIndex)
         artistsView.populateTable(undefined, item.artist)
         contextMenu.close()
     }

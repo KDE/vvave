@@ -888,10 +888,9 @@ Maui.ApplicationWindow
                     onArtworkDoubleClicked:
                     {
                         var query = Q.GET.albumTracks_.arg(
-                                    searchView.searchTable.model.get(
+                                    searchView.list.get(
                                         index).album)
-                        query = query.arg(searchView.searchTable.model.get(
-                                              index).artist)
+                        query = query.arg(searchView.list.get(index).artist)
 
                         mainPlaylist.list.clear()
                         mainPlaylist.list.sortBy = Tracks.NONE
@@ -966,7 +965,11 @@ Maui.ApplicationWindow
             Layout.topMargin: Maui.Style.space.small
             Layout.bottomMargin: Maui.Style.space.big
             onIconClicked: _contextMenu.popup()
-            onExitClicked: clear()
+            onExitClicked:
+            {
+                root.selectionMode = false
+                clear()
+            }
 
             SelectionBarMenu
             {

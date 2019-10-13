@@ -101,12 +101,10 @@ BabeGrid
         parent: parent
         maxHeight: maxWidth
         maxWidth: Maui.Style.unit * 600
-        widthHint: 1
-        heightHint: 1
+        widthHint: 0.9
+        heightHint: 0.9
         defaultButtons: false
         page.padding: 0
-
-        //        verticalAlignment: Qt.AlignBottom
 
         ColumnLayout
         {
