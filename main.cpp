@@ -38,8 +38,6 @@
 #include "models/albums/albumsmodel.h"
 #include "models/playlists/playlistsmodel.h"
 //#include "models/cloud/cloud.h"
-#include "models/baselist.h"
-#include "models/basemodel.h"
 
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
@@ -58,13 +56,15 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 #endif
 
-    app.setApplicationName(BAE::App);
-    app.setApplicationVersion(BAE::Version);
+    app.setApplicationName(BAE::appName);
+    app.setApplicationVersion(BAE::version);
+    app.setApplicationDisplayName(BAE::displayName);
+    app.setOrganizationName(BAE::orgName);
+    app.setOrganizationDomain(BAE::orgDomain);
     app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
-    app.setDesktopFileName(BAE::App);
 
     QCommandLineParser parser;
-    parser.setApplicationDescription(BAE::Description);
+    parser.setApplicationDescription(BAE::description);
 
     const QCommandLineOption versionOption = parser.addVersionOption();
     parser.process(app);
@@ -96,26 +96,13 @@ int main(int argc, char *argv[])
     auto context = engine.rootContext();
     context->setContextProperty("vvave", &vvave);
     context->setContextProperty("youtube", &youtube);
-//    context->setContextProperty("spotify", &spotify);
-//    context->setContextProperty("link", &bae.link);
 
-    qmlRegisterUncreatableType<BaseList>("BaseList", 1, 0, "BaseList", QStringLiteral("BaseList should not be created in QML"));
-
-    qmlRegisterType<BaseModel>("BaseModel", 1, 0, "BaseModel");
     qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
     qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
     qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
 //    qmlRegisterType<Cloud>("CloudList", 1, 0, "CloudList");
 
     qmlRegisterType<Player>("Player", 1, 0, "Player");
-
-//    qmlRegisterUncreatableMetaObject(
-//                LINK::staticMetaObject, // static meta object
-//                "Link.Codes",                // import statement (can be any string)
-//                1, 0,                          // major and minor version of the import
-//                "LINK",                 // name in QML (does not have to match C++ name)
-//                "Error: only enums"            // error in case someone tries to create a MyNamespace object
-//                );
 
 #ifdef STATIC_KIRIGAMI
     KirigamiPlugin::getInstance().registerTypes();
@@ -128,11 +115,7 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID
     QtWebView::initialize();
 #else
-    //    if(QQuickStyle::availableStyles().contains("nomad"))
-    //        QQuickStyle::setStyle("nomad");
-
-    if(!BAE::isMobile())
-        QtWebEngine::initialize();
+    QtWebEngine::initialize();
 #endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

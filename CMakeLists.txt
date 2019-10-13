@@ -21,9 +21,7 @@ set(CMAKE_AUTORCC ON)
 add_executable(vvave
     qml.qrc
     main.cpp
-#    babe.cpp
     vvave.cpp
-
 #    pulpo/services/geniusService.cpp
 #    pulpo/services/deezerService.cpp
     pulpo/services/lastfmService.cpp
@@ -38,17 +36,11 @@ add_executable(vvave
     services/local/youtubedl.cpp
 #    services/local/linking.cpp
     services/local/socket.cpp
-#    services/web/babeit.cpp
     services/web/youtube.cpp
 #    services/web/Spotify/spotify.cpp
     db/collectionDB.cpp
-#    settings/BabeSettings.cpp
-#    settings/fileloader.cpp
 #    utils/brain.cpp
-#    utils/babeconsole.cpp
     models/tracks/tracksmodel.cpp
-    models/basemodel.cpp
-    models/baselist.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
 #    models/cloud/cloud.cpp
@@ -68,7 +60,7 @@ if (ANDROID)
 
     target_link_libraries(vvave MauiKit Qt5::AndroidExtras Qt5::WebView Qt5::Xml OpenSSL::SSL)
     add_dependencies(vvave taglib)
-    kde_source_files_enable_exceptions(vvave babe.cpp)
+    kde_source_files_enable_exceptions(vvave)
 else()
     find_package(Taglib REQUIRED)
     find_package(Qt5 REQUIRED COMPONENTS WebEngine)

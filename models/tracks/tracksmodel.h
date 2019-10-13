@@ -2,10 +2,17 @@
 #define TRACKSMODEL_H
 
 #include <QObject>
-#include "models/baselist.h"
+
+#ifdef STATIC_MAUIKIT
+#include "fmh.h"
+#include "mauilist.h"
+#else
+#include <MauiKit/fmh.h>
+#include <MauiKit/mauilist.h>
+#endif
 
 class CollectionDB;
-class TracksModel : public BaseList
+class TracksModel : public MauiList
 {
     Q_OBJECT
     Q_PROPERTY(QString query READ getQuery WRITE setQuery NOTIFY queryChanged())
@@ -53,21 +60,21 @@ signals:
     void sortByChanged();
 
 public slots:
-    QVariantMap get(const int &index) const override;
+    QVariantMap get(const int &index) const;
     QVariantList getAll();
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
     void appendQuery(const QString &query);
 //    void appendUrl(const QString &url);
     void searchQueries(const QStringList &queries);
-    void clear() override;
+    void clear();
     bool color(const int &index, const QString &color);
     bool fav(const int &index, const bool &value);
     bool rate(const int &index, const int &value);
     bool countUp(const int &index);
-    bool remove(const int &index) override;
+    bool remove(const int &index);
     void refresh();
-    bool update(const QVariantMap &data, const int &index) override;
+    bool update(const QVariantMap &data, const int &index);
 };
 
 #endif // TRACKSMODEL_H

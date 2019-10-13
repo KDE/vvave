@@ -2,17 +2,22 @@
 #define ALBUMSMODEL_H
 
 #include <QObject>
-#include "models/baselist.h"
+#ifdef STATIC_MAUIKIT
+#include "fmh.h"
+#include "mauilist.h"
+#else
+#include <MauiKit/fmh.h>
+#include <MauiKit/mauilist.h>
+#endif
 
 class CollectionDB;
-class AlbumsModel : public BaseList
+class AlbumsModel : public MauiList
 {
     Q_OBJECT
     Q_PROPERTY(AlbumsModel::QUERY query READ getQuery WRITE setQuery NOTIFY queryChanged())
     Q_PROPERTY(AlbumsModel::SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
 
 public:
-
     enum SORTBY : uint_fast8_t
     {
         ADDDATE = FMH::MODEL_KEY::ADDDATE,
@@ -57,7 +62,7 @@ signals:
     void sortByChanged();
 
 public slots:
-    QVariantMap get(const int &index) const override;
+    QVariantMap get(const int &index) const;
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
     void refresh();

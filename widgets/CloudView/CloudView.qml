@@ -5,7 +5,6 @@ import org.kde.mauikit 1.0 as Maui
 import "../../view_models/BabeTable"
 
 import CloudList 1.0
-import BaseModel 1.0
 
 BabeTable
 {
@@ -15,7 +14,7 @@ BabeTable
 
     property alias list : _cloudList
 
-    BaseModel
+    Maui.BaseModel
     {
         id: _cloudModel
         list: _cloudList

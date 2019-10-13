@@ -135,17 +135,17 @@ BabeGrid
 
                 onRowClicked:
                 {
-                    albumsViewGrid.rowClicked(model.get(index))
+                    albumsViewGrid.rowClicked(list.get(index))
                 }
 
                 onQuickPlayTrack:
                 {
-                    albumsViewGrid.playTrack(model.get(index))
+                    albumsViewGrid.playTrack(list.get(index))
                 }
 
                 onQueueTrack:
                 {
-                    albumsViewGrid.queueTrack(model.get(index))
+                    albumsViewGrid.queueTrack(list.get(index))
                 }
 
                 onPlayAll:

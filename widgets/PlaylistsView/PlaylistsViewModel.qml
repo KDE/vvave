@@ -4,8 +4,6 @@ import QtQuick.Controls 2.2
 import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import PlaylistsList 1.0
-import BaseModel 1.0
-
 import TracksList 1.0
 
 import "../../utils"
@@ -52,8 +50,7 @@ BabeList
         ]
     }
 
-
-    BaseModel
+    Maui.BaseModel
     {
         id: _playlistsModel
         list: _playlistsList

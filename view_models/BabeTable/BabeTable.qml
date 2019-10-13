@@ -3,8 +3,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-
-import BaseModel 1.0
 import TracksList 1.0
 
 import "../../utils/Player.js" as Player
@@ -285,7 +283,7 @@ BabeList
     }
 
 
-    BaseModel
+    Maui.BaseModel
     {
         id: _tracksModel
         list: _tracksList

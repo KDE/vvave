@@ -36,45 +36,6 @@ namespace BAE
 {
 Q_NAMESPACE
 
-inline bool isMobile()
-{
-#if defined(Q_OS_ANDROID)
-    return true;
-#elif defined(Q_OS_LINUX)
-    return false;
-#elif defined(Q_OS_WIN32)
-    return false;
-#elif defined(Q_OS_WIN64)
-    return false;
-#elif defined(Q_OS_MACOS)
-    return false;
-#elif defined(Q_OS_IOS)
-    return true;
-#elif defined(Q_OS_HAIKU)
-    return false;
-#endif
-}
-
-inline bool isAndroid()
-{
-#if defined(Q_OS_ANDROID)
-    return true;
-#elif defined(Q_OS_LINUX)
-    return false;
-#elif defined(Q_OS_WIN32)
-    return false;
-#elif defined(Q_OS_WIN64)
-    return false;
-#elif defined(Q_OS_MACOS)
-    return false;
-#elif defined(Q_OS_IOS)
-    return false;
-#elif defined(Q_OS_HAIKU)
-    return false;
-#endif
-}
-
-
 enum SEG
 {
     HALF = 500,
@@ -288,7 +249,13 @@ inline QString getNameFromLocation(const QString &str)
 const QString SettingPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/";
 const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/artwork/";
 const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/";
-const QString CachePath = BAE::isMobile() ? BAE::ArtworkPath : QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/";
+
+#ifdef Q_OS_ANDROID
+const QString CachePath = BAE::ArtworkPath;
+#else
+const QString CachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/";
+#endif
+
 const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/";
 const QString NotifyDir = SettingPath;
 
@@ -302,9 +269,13 @@ const QString DownloadsPath = FMH::DownloadsPath;
 const QString BabePort = "8483";
 const QString LinkPort = "3333";
 
-const QString App = "vvave";
-const QString Description = "vvave music player";
-const QString Version = BABE_VERSION_STR;
+const QString appName = QStringLiteral("vvave");
+const QString displayName = QStringLiteral("vvave");
+const QString version = BABE_VERSION_STR;
+const QString description = QStringLiteral("Music player");
+const QString orgName = QStringLiteral("Maui");
+const QString orgDomain = QStringLiteral("org.maui.vvave");
+
 const QString DBName = "collection.db";
 
 const QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};

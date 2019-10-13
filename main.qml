@@ -34,7 +34,6 @@ import Player 1.0
 import AlbumsList 1.0
 import TracksList 1.0
 
-import BaseModel 1.0
 import TracksList 1.0
 
 Maui.ApplicationWindow
@@ -237,6 +236,11 @@ Maui.ApplicationWindow
         width: root.width
         spacing: 0
 
+        Kirigami.Separator
+        {
+            Layout.fillWidth: true
+        }
+
         Slider
         {
             id: progressBar
@@ -266,7 +270,7 @@ Maui.ApplicationWindow
                 {
                     width: progressBar.visualPosition * parent.width
                     height: progressBar.height
-                    color: babeColor
+                    color: Kirigami.Theme.highlightColor
                 }
             }
 
@@ -278,15 +282,11 @@ Maui.ApplicationWindow
                 implicitWidth: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
                 implicitHeight: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
                 radius: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
-                color: babeColor
+                color: Kirigami.Theme.highlightColor
             }
         }
 
-        //        Kirigami.Separator
-        //        {
-        //            Layout.fillWidth: true
-        ////            color: borderColor
-        //        }
+
 
         Maui.ToolBar
         {
@@ -967,44 +967,11 @@ Maui.ApplicationWindow
             Layout.bottomMargin: Maui.Style.space.big
             onIconClicked: _contextMenu.popup()
             onExitClicked: clear()
-            //            Kirigami.Theme.backgroundColor: "#212121"
-
-            //            model: BaseModel
-            //            {
-            //                list: _selectionBarModelList
-            //            }
-
-            //            Tracks
-            //            {
-            //                id: _selectionBarModelList
-            //            }
 
             SelectionBarMenu
             {
                 id: _contextMenu
             }
-
-            //            function append(item)
-            //            {
-            //                _selectionBar.append(item)
-
-            ////                if(selectedPaths.indexOf(item.path) < 0)
-            ////                {
-            ////                    selectedItems.push(item)
-            ////                    selectedPaths.push(item.path)
-
-            ////                    //             for(var i = 0; i < selectionList.count ; i++ )
-            ////                    //                 if(selectionList.model.get(i).path === item.path)
-            ////                    //                 {
-            ////                    //                     selectionList.model.remove(i)
-            ////                    //                     return
-            ////                    //                 }
-
-            ////                    selectionList.model.list.append(item)
-            ////                    selectionList.positionViewAtEnd()
-
-            ////                }
-            //            }
         }
     }
 

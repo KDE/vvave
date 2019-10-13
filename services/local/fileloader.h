@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QDirIterator>
 #include <QUrl>
-#include "../services/local/taginfo.h"
-#include "../db/collectionDB.h"
+#include "services/local/taginfo.h"
+#include "db/collectionDB.h"
 #include "utils/bae.h"
 
 namespace FLoader

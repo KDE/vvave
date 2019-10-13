@@ -1,7 +1,7 @@
 #include "vvave.h"
 
 #include "db/collectionDB.h"
-#include "settings/fileloader.h"
+#include "services/local/fileloader.h"
 #include "utils/brain.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))

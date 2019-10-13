@@ -9,7 +9,6 @@
         <file>utils/Player.js</file>
         <file>db/Queries.js</file>
         <file>utils/Help.js</file>
-        <file>view_models/BabeScrollBar.qml</file>
         <file>assets/bars.gif</file>
         <file>view_models/BabeGrid/BabeAlbum.qml</file>
         <file>view_models/BabeGrid/BabeGrid.qml</file>
@@ -24,18 +23,12 @@
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
         <file>utils/Props.js</file>
-        <file>widgets/MyBeatView/LogginForm.qml</file>
         <file>widgets/SettingsView/SourcesDialog.qml</file>
         <file>assets/banner.png</file>
         <file>assets/banner.svg</file>
         <file>view_models/BabeTable/PlaylistDialog.qml</file>
         <file>view_models/BabeList.qml</file>
-        <file>view_models/ScrollHelper.qml</file>
-        <file>view_models/BabeTable/HeaderMenu.qml</file>
-        <file>view_models/BabeNotify.qml</file>
-        <file>widgets/MyBeatView/BabeitView.qml</file>
         <file>assets/banner-yellow.png</file>
-        <file>widgets/SettingsView/BabeConsole.qml</file>
         <file>widgets/SearchView/SearchTable.qml</file>
         <file>widgets/SearchView/SearchSuggestions.qml</file>
         <file>services/web/YouTube.qml</file>
@@ -57,7 +50,6 @@
         <file>widgets/FloatingDisk.qml</file>
         <file>services/web/WebView.qml</file>
         <file>services/web/WebView_A.qml</file>
-        <file>view_models/BabeTable/GroupDialog.qml</file>
         <file>assets/Bread.png</file>
         <file>assets/ElectricPlug.png</file>
         <file>assets/Electricity.png</file>

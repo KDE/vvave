@@ -2,7 +2,7 @@
 #include "db/collectionDB.h"
 
 
-TracksModel::TracksModel(QObject *parent) : BaseList(parent),
+TracksModel::TracksModel(QObject *parent) : MauiList(parent),
     db(CollectionDB::getInstance())
 {
     connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);

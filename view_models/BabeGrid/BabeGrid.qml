@@ -3,8 +3,6 @@ import QtQuick 2.9
 import ".."
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-
-import BaseModel 1.0
 import AlbumsList 1.0
 
 Maui.Page
@@ -37,7 +35,7 @@ Maui.Page
         id: _albumsList
     }
 
-    BaseModel
+    Maui.BaseModel
     {
         id: _albumsModel
         list: _albumsList
