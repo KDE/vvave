@@ -119,14 +119,14 @@ QVariantMap TracksModel::get(const int &index) const
 {
     if(index >= this->list.size() || index < 0)
         return QVariantMap();
-    return FM::toMap(this->list.at(index));
+    return FMH::toMap(this->list.at(index));
 }
 
 QVariantList TracksModel::getAll()
 {
     QVariantList res;
     for(const auto &item : this->list)
-        res << FM::toMap(item);
+        res << FMH::toMap(item);
 
     return res;
 }
@@ -137,7 +137,7 @@ void TracksModel::append(const QVariantMap &item)
         return;
 
     emit this->preItemAppended();   
-    this->list << FM::toModel(item);
+    this->list << FMH::toModel(item);
     emit this->postItemAppended();
 }
 
@@ -150,7 +150,7 @@ void TracksModel::append(const QVariantMap &item, const int &at)
         return;
 
     emit this->preItemAppendedAt(at);
-    this->list.insert(at, FM::toModel(item));
+    this->list.insert(at, FMH::toModel(item));
     emit this->postItemAppended();
 }
 

@@ -159,7 +159,7 @@ QVariantMap PlaylistsModel::get(const int &index) const
 {
     if(index >= this->list.size() || index < 0)
         return QVariantMap();
-    return FM::toMap(this->list.at(index));
+    return FMH::toMap(this->list.at(index));
 }
 
 void PlaylistsModel::append(const QVariantMap &item)
