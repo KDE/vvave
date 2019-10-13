@@ -576,7 +576,7 @@ Maui.ApplicationWindow
         visible: infoMsg.length && sync
         anchors.bottom: parent.bottom
         width: parent.width
-        height: iconSize
+        height: Maui.Style.rowHeight
         z: 999
 
         Rectangle
@@ -585,7 +585,7 @@ Maui.ApplicationWindow
 
             anchors.fill: parent
             z: -999
-            color: altColor
+            color: "#333"
             opacity: 0.8
 
             SequentialAnimation
@@ -605,7 +605,7 @@ Maui.ApplicationWindow
                     target: infoBg
                     property: "color"
                     easing.type: Easing.InOutQuad
-                    to: altColor
+                    to: "#333"
                     duration: 500
                 }
             }

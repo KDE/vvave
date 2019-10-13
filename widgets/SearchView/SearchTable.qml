@@ -79,7 +79,7 @@ BabeTable
         width: parent.width
         height: parent.height - searchInput.height
 
-        color: darkDarkColor
+        color: Kirigami.Theme.backgroundColor
         z: 999
         opacity: 0.5
     }

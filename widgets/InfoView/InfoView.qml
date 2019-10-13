@@ -18,7 +18,8 @@ Maui.Dialog
 
     property int currentView : 0
 
-    Kirigami.Theme.backgroundColor: darkDarkColor
+    Kirigami.Theme.backgroundColor: "#333"
+    Kirigami.Theme.textColor: "#fafafa"
 
     clip: true
 
@@ -36,7 +37,6 @@ Maui.Dialog
             Maui.Holder
             {
                 id: lyricsHolder
-                Kirigami.Theme.textColor: darkTextColor
                 visible: lyricsText.text.length > 0 ? false : true
                 message: "Couldn't find the lyrics!"
             }
@@ -147,7 +147,6 @@ Maui.Dialog
                         padding: 20
                         text: wikiAlbum
                         visible: wikiAlbum === "NONE" || wikiAlbum.length===0 ? false : true
-                        color: darkTextColor
                         font.pointSize: Maui.Style.fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.RichText
@@ -175,7 +174,6 @@ Maui.Dialog
                         text: wikiArtist
                         visible: wikiArtist === "NONE" || wikiArtist.length===0 ? false : true
 
-                        color: darkTextColor
                         font.pointSize: Maui.Style.fontSizes.big
                         horizontalAlignment: Qt.AlignHCenter
                         textFormat: Text.StyledText

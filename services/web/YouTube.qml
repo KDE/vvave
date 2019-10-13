@@ -46,9 +46,9 @@ Maui.Page
     {
         id: configPopup
         parent: parent
-        margins: contentMargins
-widthHint: 0.9
-heightHint: 0.9
+        margins: Maui.Style.contentMargins
+        widthHint: 0.9
+        heightHint: 0.9
 
         maxHeight: 200
         maxWidth: 300
