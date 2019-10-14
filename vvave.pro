@@ -102,29 +102,4 @@ HEADERS += \
 
 include(install.pri)
 
-#TAGLIB
-
-
-#INCLUDEPATH += /usr/include/python3.6m
-
-#LIBS += -lpython3.6m
-#defineReplace(copyToDir) {
-#    files = $$1
-#    DIR = $$2
-#    LINK =
-
-#    for(FILE, files) {
-#        LINK += $$QMAKE_COPY $$shell_path($$FILE) $$shell_path($$DIR) $$escape_expand(\\n\\t)
-#    }
-#    return($$LINK)
-#}
-
-#defineReplace(copyToBuilddir) {
-#    return($$copyToDir($$1, $$OUT_PWD))
-#}
-
-## Copy the binary files dependent on the system architecture
-#unix:!macx {
-#    message("Linux")
-#    QMAKE_POST_LINK += $$copyToBuilddir($$PWD/library/cat)
-#}
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
