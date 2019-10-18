@@ -259,9 +259,6 @@ const QString CachePath = QStandardPaths::writableLocation(QStandardPaths::Gener
 const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/";
 const QString NotifyDir = SettingPath;
 
-const QStringList MusicPaths = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
-const QStringList DownloadsPaths = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation);
-
 const QString MusicPath = FMH::MusicPath;
 const QString HomePath = FMH::HomePath;
 const QString DownloadsPath = FMH::DownloadsPath;
@@ -281,8 +278,6 @@ const QString DBName = "collection.db";
 const QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};
 const QStringList defaultSources = QStringList() << BAE::MusicPath
                                                  << BAE::DownloadsPath
-                                                 << BAE::MusicPaths
-                                                 << BAE::DownloadsPaths
                                                  << BAE::YoutubeCachePath;
 
 inline QString fixTitle(const QString &title,const QString &s,const QString &e)
@@ -419,14 +414,14 @@ inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MO
     QDirIterator it(CachePath, QDir::Files, QDirIterator::NoIteratorFlags);
     while (it.hasNext())
     {
-        const auto file = it.next();
-        const auto fileName = QFileInfo(file).baseName();
+        const auto file = QUrl::fromLocalFile(it.next());
+        const auto fileName = QFileInfo(file.toLocalFile()).baseName();
         switch(type)
         {
         case FMH::MODEL_KEY::ALBUM:
             if(fileName == (track[FMH::MODEL_KEY::ARTIST]+"_"+track[FMH::MODEL_KEY::ALBUM]))
             {
-                track.insert(FMH::MODEL_KEY::ARTWORK, file);
+                track.insert(FMH::MODEL_KEY::ARTWORK, file.toString());
                 return true;
             }
             break;
@@ -434,7 +429,7 @@ inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MO
         case FMH::MODEL_KEY::ARTIST:
             if(fileName == (track[FMH::MODEL_KEY::ARTIST]))
             {
-                track.insert(FMH::MODEL_KEY::ARTWORK, file);
+                track.insert(FMH::MODEL_KEY::ARTWORK, file.toString());
                 return true;
             }
             break;

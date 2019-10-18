@@ -104,7 +104,7 @@ void Player::setUrl(const QString &value)
     this->pos = 0;
     emit this->posChanged();
 
-    const auto media = QMediaContent(QUrl::fromLocalFile(this->url));
+    const auto media = QMediaContent(this->url);
     this->player->setMedia(media);
     this->emitState();
 }

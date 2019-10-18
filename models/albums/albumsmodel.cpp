@@ -58,37 +58,37 @@ void AlbumsModel::sortList()
         const auto role = key;
         switch(role)
         {
-        case FMH::MODEL_KEY::RELEASEDATE:
-        {
-            if(e1[role].toDouble() > e2[role].toDouble())
-                return true;
-            break;
-        }
+            case FMH::MODEL_KEY::RELEASEDATE:
+            {
+                if(e1[role].toDouble() > e2[role].toDouble())
+                    return true;
+                break;
+            }
 
-        case FMH::MODEL_KEY::ADDDATE:
-        {
-            const auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
-            const auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
+            case FMH::MODEL_KEY::ADDDATE:
+            {
+                const auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
+                const auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
 
-            if(date1.secsTo(QDateTime::currentDateTime()) <  date2.secsTo(QDateTime::currentDateTime()))
-                return true;
-            break;
-        }
+                if(date1.secsTo(QDateTime::currentDateTime()) <  date2.secsTo(QDateTime::currentDateTime()))
+                    return true;
+                break;
+            }
 
-        case FMH::MODEL_KEY::ARTIST:
-        case FMH::MODEL_KEY::ALBUM:
-        {
-            const auto str1 = QString(e1[role]).toLower();
-            const auto str2 = QString(e2[role]).toLower();
+            case FMH::MODEL_KEY::ARTIST:
+            case FMH::MODEL_KEY::ALBUM:
+            {
+                const auto str1 = QString(e1[role]).toLower();
+                const auto str2 = QString(e2[role]).toLower();
 
-            if(str1 < str2)
-                return true;
-            break;
-        }
+                if(str1 < str2)
+                    return true;
+                break;
+            }
 
-        default:
-            if(e1[role] < e2[role])
-                return true;
+            default:
+                if(e1[role] < e2[role])
+                    return true;
         }
 
         return false;
@@ -108,7 +108,10 @@ void AlbumsModel::setList()
     //get albums data with modifier for missing images for artworks
     this->list = this->db->getDBData(m_Query, [&](FMH::MODEL &item)
     {
-            if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty() && !FMH::fileExists(QUrl::fromLocalFile(item[FMH::MODEL_KEY::ARTWORK])))
+            if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty())
+            return;
+
+    if(QUrl(item[FMH::MODEL_KEY::ARTWORK]).isLocalFile() && !FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
     {
         this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FMH::toMap(item));
         item[FMH::MODEL_KEY::ARTWORK] = "";
@@ -132,7 +135,7 @@ void AlbumsModel::fetchInformation()
         stop = false;
         QList<PULPO::REQUEST> requests;
         int index = -1;
-        for(auto album : this->list)
+        for(auto &album : this->list)
         {
             index++;
             if(!album[FMH::MODEL_KEY::ARTWORK].isEmpty())
@@ -167,6 +170,10 @@ void AlbumsModel::fetchInformation()
                             newTrack[FMH::MODEL_KEY::ARTWORK] = path;
                             this->db->insertArtwork(newTrack);
                             this->updateArtwork(index, path);
+
+                            album[FMH::MODEL_KEY::ARTWORK] = path;
+                            emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
+
                             downloader->deleteLater();
                         });
 

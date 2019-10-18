@@ -69,7 +69,7 @@ ColumnLayout
     {
         Layout.fillWidth: true
         height: Maui.Style.rowHeightAlt
-        recSize: Kirigami.Settings.isMobile ? iconSize : 16
+        recSize: Kirigami.Settings.isMobile ? Maui.Style.iconSizes.medium : Maui.Style.iconSizes.small
         onColorClicked: populate(Q.GET.colorTracks_.arg(color.toLowerCase()))
     }
 
@@ -95,7 +95,7 @@ ColumnLayout
             title: playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
             holder.emoji: "qrc:/assets/Electricity.png"
             holder.isMask: false
-            holder.title : playlistViewModel.model.get(playlistViewModel.currentIndex).playlist
+            holder.title : playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
             holder.body: "Your playlist is empty,<br>start adding new music to it"
             holder.emojiSize: Maui.Style.iconSizes.huge
 
@@ -212,6 +212,5 @@ ColumnLayout
     function removePlaylist()
     {
         playlistList.removePlaylist(playlistViewList.currentIndex)
-        filterList.clearTable()
     }
 }

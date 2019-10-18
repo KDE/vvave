@@ -8,7 +8,7 @@ function playTrack(index)
 
         if(typeof(currentTrack) === "undefined") return
 
-        if(Maui.FM.fileExists("file://" + currentTrack.url))
+        if(Maui.FM.fileExists(currentTrack.url))
         {
             player.url = currentTrack.url;
             player.playing = true
@@ -19,14 +19,11 @@ function playTrack(index)
             //            else bae.loadCover(currentTrack.url)
 
             progressBar.enabled = true
-
-            if(!isMobile)
-            {
-                root.title = currentTrack.title + " - " +currentTrack.artist
+            root.title = currentTrack.title + " - " +currentTrack.artist
 
                 //                if(!root.active)
                 //                    bae.notifySong(currentTrack.url)
-            }
+
 
             //            if(currentTrack.lyrics.length < 1)
             //                            bae.trackLyrics(currentTrack.url)

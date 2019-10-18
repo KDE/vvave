@@ -29,27 +29,24 @@ BabeList
         rejectButton.visible: false
     }
 
-    headBar.leftContent: Kirigami.ActionToolBar
-    {
-        Layout.fillWidth: true
-        actions:
-            [
-            Kirigami.Action
-            {
-                text: qsTr("Remove")
-                icon.name: "list-remove"
-                onTriggered: removePlaylist()
-            },
-            Kirigami.Action
-            {
-                id : createPlaylistBtn
-                text: qsTr("Add")
-                icon.name : "list-add"
-                onTriggered : newPlaylistDialog.open()
-            }
-        ]
-    }
+    headBar.leftContent:  [
 
+        ToolButton
+        {
+            id : createPlaylistBtn
+            text: qsTr("Add")
+            icon.name : "list-add"
+            onClicked: newPlaylistDialog.open()
+        },
+
+        ToolButton
+        {
+            text: qsTr("Remove")
+            icon.name: "list-remove"
+            onClicked: removePlaylist()
+        }
+
+    ]
     Maui.BaseModel
     {
         id: _playlistsModel

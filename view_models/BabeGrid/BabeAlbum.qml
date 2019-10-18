@@ -81,7 +81,7 @@ Maui.ItemDelegate
             source:
             {
                 if(artwork)
-                    (artwork.length > 0 && artwork !== "NONE")? "file://"+encodeURIComponent(artwork) : "qrc:/assets/cover.png"
+                    (artwork.length > 0 && artwork !== "NONE")? artwork : "qrc:/assets/cover.png"
                 else "qrc:/assets/cover.png"
             }
             layer.enabled: albumRadius
@@ -159,6 +159,32 @@ Maui.ItemDelegate
                     opacity: 0.2
                 }
 
+
+                layer.enabled: true
+                layer.effect: OpacityMask
+                {
+                    maskSource: Item
+                    {
+                        width: blur.width
+                        height: blur.height
+
+                        Rectangle
+                        {
+                            anchors.centerIn: parent
+                            width: parent.width
+                            height: parent.height
+                            radius: albumRadius
+
+                            Rectangle
+                            {
+                                anchors.top: parent.top
+                                width: parent.width
+                                height: parent.radius
+                            }
+                        }
+                    }
+                }
+
             }
 
 
@@ -189,7 +215,7 @@ Maui.ItemDelegate
                     Layout.fillWidth: visible
                     Layout.fillHeight: visible
 
-                    text: list.query === Albums.ALBUMS ? model.artist : undefined
+                    text: list.query === Albums.ALBUMS ? model.artist : ""
                     visible: text && (control.width > 70)
                     horizontalAlignment: Qt.AlignLeft
                     elide: Text.ElideRight

@@ -92,7 +92,7 @@ Menu
 
     MenuItem
     {
-        visible: root.showAccounts
+        visible: Maui.App.handleAccounts
         text: qsTr("Copy to cloud")
         onTriggered:
         {

@@ -57,13 +57,7 @@ void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> 
 
     const auto func = [=]() -> uint
     {
-        auto newPaths = paths;
-
-        for(auto path : newPaths)
-            if(path.startsWith("file://"))
-                path.replace("file://", "");
-
-        return FLoader::getTracks(newPaths);
+        return FLoader::getTracks(QUrl::fromStringList(paths));
     };
 
     QFuture<uint> t1 = QtConcurrent::run(func);
@@ -82,7 +76,7 @@ QVariantList vvave::sourceFolders()
 
     QVariantList res;
     for(const auto &item : sources)
-        res << FMH::getDirInfo(QUrl::fromLocalFile(item[FMH::MODEL_KEY::URL]));
+        res << FMH::getDirInfo(item[FMH::MODEL_KEY::URL]);
     return res;
 }
 

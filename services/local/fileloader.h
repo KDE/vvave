@@ -11,33 +11,34 @@
 namespace FLoader
 {
 
-inline QStringList getPathContents(QStringList &urls, const QString &path)
+inline QList<QUrl> getPathContents(QList<QUrl> &urls, const QUrl &url)
 {
-    if(!FMH::fileExists(QUrl::fromLocalFile(path)))
+    if(!FMH::fileExists(url) && !url.isLocalFile())
         return urls;
 
-    if (QFileInfo(path).isDir())
+    if (QFileInfo(url.toLocalFile()).isDir())
     {
-        QDirIterator it(path, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO] << "*.m4a", QDir::Files, QDirIterator::Subdirectories);
+        QDirIterator it(url.toLocalFile(), QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO] << "*.m4a", QDir::Files, QDirIterator::Subdirectories);
 
         while (it.hasNext())
-            urls << it.next();
+            urls << QUrl::fromLocalFile(it.next());
 
-    }else if (QFileInfo(path).isFile())
-        urls << path;
+    }else if (QFileInfo(url.toLocalFile()).isFile())
+        urls << url.toString();
 
     return urls;
 }
 
 // returns the number of new items added to the collection db
-inline uint getTracks(const QStringList& paths)
+inline uint getTracks(const QList<QUrl>& paths)
 {
+    qDebug()<< paths;
     auto db = CollectionDB::getInstance();
-    const auto urls = std::accumulate(paths.begin(), paths.end(), QStringList(), getPathContents);
+    const auto urls = std::accumulate(paths.begin(), paths.end(), QList<QUrl>(), getPathContents);
 
     for(const auto &path : paths)
-        if(FMH::fileExists(QUrl::fromLocalFile(path)))
-            db->addFolder(path);
+        if(path.isLocalFile() && FMH::fileExists(path))
+            db->addFolder(path.toString());
 
     uint newTracks = 0;
 
@@ -47,10 +48,10 @@ inline uint getTracks(const QStringList& paths)
     TagInfo info;
     for(const auto &url : urls)
     {
-        if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url))
+        if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url.toString()))
             continue;
 
-        if(!info.feed(url))
+        if(!info.feed(url.toLocalFile()))
             continue;
 
         const auto track = info.getTrack();
@@ -58,13 +59,13 @@ inline uint getTracks(const QStringList& paths)
         const auto album = BAE::fixString(info.getAlbum());
         const auto title = BAE::fixString(info.getTitle()); /* to fix*/
         const auto artist = BAE::fixString(info.getArtist());
-        const auto sourceUrl = QFileInfo(url).dir().path();
+        const auto sourceUrl = FMH::parentDir(url).toString();
         const auto duration = info.getDuration();
         const auto year = info.getYear();
 
         FMH::MODEL trackMap =
         {
-            {FMH::MODEL_KEY::URL, url},
+            {FMH::MODEL_KEY::URL, url.toString()},
             {FMH::MODEL_KEY::TRACK, QString::number(track)},
             {FMH::MODEL_KEY::TITLE, title},
             {FMH::MODEL_KEY::ARTIST, artist},
@@ -72,11 +73,10 @@ inline uint getTracks(const QStringList& paths)
             {FMH::MODEL_KEY::DURATION,QString::number(duration)},
             {FMH::MODEL_KEY::GENRE, genre},
             {FMH::MODEL_KEY::SOURCE, sourceUrl},
-            {FMH::MODEL_KEY::FAV, url.startsWith(BAE::YoutubeCachePath) ? "1": "0"},
+            {FMH::MODEL_KEY::FAV, "0"},
             {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}
         };
 
-        qDebug() << url;
         BAE::artworkCache(trackMap, FMH::MODEL_KEY::ALBUM);
 
         if(db->addTrack(trackMap))

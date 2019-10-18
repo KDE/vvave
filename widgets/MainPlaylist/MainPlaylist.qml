@@ -35,7 +35,6 @@ Maui.Page
     {
         id: playlistMenu
         onClearOut: Player.clearOutPlaylist()
-        //        onHideCover: cover.visible = !cover.visible
         onClean: Player.cleanPlaylist()
         onSaveToClicked: table.saveList()
     }
@@ -45,19 +44,16 @@ Maui.Page
     footBar.width: parent.width
     footBar.middleContent: AlbumsRoll
     {
-        //        height: Maui.Style.toolBarHeight * 1.3
         Layout.fillWidth: true
         Layout.fillHeight: true
-        //        width: footBar.width
-        //        height: footBar.height
         id: albumsRoll
     }
 
     footBar.background: Item
     {
         id: footerBg
-        clip : true
         height: footBar.implicitHeight
+
 
         Image
         {
@@ -73,7 +69,7 @@ Maui.Page
             smooth: true
             asynchronous: true
 
-            source: "file://"+encodeURIComponent(currentArtwork)
+            source: currentArtwork
         }
 
         FastBlur
@@ -88,13 +84,28 @@ Maui.Page
             z:1
             clip: true
 
-            Rectangle
+            LinearGradient
             {
-                anchors.fill: parent
-                color: Kirigami.Theme.viewBackgroundColor
-                opacity: 0.85
-            }
+                    anchors.fill: parent
+                    start: Qt.point(0, 0)
+                    end: Qt.point(0, parent.height)
+                    gradient: Gradient {
+                        GradientStop { position: 0; color: Kirigami.Theme.viewBackgroundColor }
+                        GradientStop { position: 1; color: "transparent" }
+                    }
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: Kirigami.Theme.viewBackgroundColor
+                        opacity: 0.7
+                    }
+
+                }
+
         }
+
+
     }
 
     BabeTable

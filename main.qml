@@ -255,7 +255,6 @@ Maui.ApplicationWindow
                 icon.color: _drawer.visible ? babeColor : Kirigami.Theme.textColor
                 onClicked:
                 {
-                    console.log("SHOW DRAWER?", _drawer.visible)
                     _drawer.visible = !_drawer.visible
                 }
 
@@ -635,8 +634,12 @@ Maui.ApplicationWindow
             Layout.fillWidth: true
             interactive: isMobile
             currentIndex: _actionGroup.currentIndex
+            onCurrentIndexChanged: _actionGroup.currentIndex = currentIndex
+
             clip: true
             onCurrentItemChanged: currentItem.forceActiveFocus()
+
+
             TracksView
             {
                 id: tracksView

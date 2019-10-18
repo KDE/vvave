@@ -98,6 +98,7 @@ BabeGrid
     Maui.Dialog
     {
         id: albumDialog
+        property string title
         parent: parent
         maxHeight: maxWidth
         maxWidth: Maui.Style.unit * 600
@@ -105,7 +106,8 @@ BabeGrid
         heightHint: 0.9
         defaultButtons: false
         page.padding: 0
-
+headBar.visible: true
+page.title: title
         ColumnLayout
         {
             id: albumFilter
@@ -115,6 +117,7 @@ BabeGrid
             BabeTable
             {
                 id: albumsViewTable
+                headBar.position: ToolBar.Footer
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 trackNumberVisible: true
@@ -185,13 +188,13 @@ BabeGrid
         {
             query = Q.GET.albumTracks_.arg(album)
             query = query.arg(artist)
-            albumsView.table.title = album
+            albumDialog.title = album
             tagq = Q.GET.albumTags_.arg(album)
 
         }else if(artist && album === undefined)
         {
             query = Q.GET.artistTracks_.arg(artist)
-            artistsView.table.title = artist
+            albumDialog.title = artist
             tagq = Q.GET.artistTags_.arg(artist)
         }
 
