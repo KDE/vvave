@@ -40,7 +40,7 @@ Menu
         text: qsTr("Select...")
         onTriggered:
         {
-            H.addToSelection(listView.model.get(listView.currentIndex))
+            H.addToSelection(list.get(listView.currentIndex))
             contextMenu.close()
         }
     }

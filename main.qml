@@ -76,23 +76,13 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** HANDLERS ********************/
     /*************************************************/
-
-    property int currentView: viewsIndex.tracks
-
-    readonly property var viewsIndex: ({
-                                           tracks: 0,
+    readonly property var viewsIndex: ({ tracks: 0,
                                            albums: 1,
                                            artists: 2,
                                            playlists: 3,
-                                           search: 4,
-                                           folders: 5,
-                                           //                                           cloud: 6,
-                                           //                                           vvave: 7,
-                                           //                                           linking: 8,
-                                           youtube: 6,
-                                           //                                           spotify: 10
-
-                                       })
+                                           folders: 4,
+                                           youtube: 5,
+                                           search: 6})
 
     property string syncPlaylist: ""
     property bool sync: false
@@ -145,57 +135,49 @@ Maui.ApplicationWindow
 
     headBar.middleContent : Maui.ActionGroup
     {
-        currentIndex : currentView
+        id: _actionGroup
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        Layout.minimumWidth: implicitWidth
+        currentIndex : swipeView.currentIndex
 
         hiddenActions: [
-
-            Kirigami.Action
+            Action
             {
                 text: qsTr("Folders")
                 icon.name: "folder"
-                checked: currentView === viewsIndex.folders
-                checkable: false
-                onTriggered: currentView = viewsIndex.folders
             },
 
-            Kirigami.Action
+            Action
             {
                 text: qsTr("YouTube")
-                checkable: false
                 icon.name: "internet-services"
-                checked: currentView === viewsIndex.youtube
-                onTriggered: currentView = viewsIndex.youtube
-
             }
-
         ]
+
         Action
-            {
-                icon.name: "view-media-track"               
-                onTriggered: currentView = viewsIndex.tracks
-                text: qsTr("Tracks")
-            }
+        {
+            icon.name: "view-media-track"
+            text: qsTr("Tracks")
+        }
 
-            Action
-            {
-                text: qsTr("Albums")
-                icon.name: /*"album"*/ "view-media-album-cover"
-                onTriggered: currentView = viewsIndex.albums
-            }
+        Action
+        {
+            text: qsTr("Albums")
+            icon.name: /*"album"*/ "view-media-album-cover"
+        }
 
-            Action
-            {
-                text: qsTr("Artists")
-                icon.name: "view-media-artist"
-                onTriggered: currentView = viewsIndex.artists                
-            }
+        Action
+        {
+            text: qsTr("Artists")
+            icon.name: "view-media-artist"
+        }
 
-            Action
-            {
-                text: qsTr("Playlists")
-                icon.name: "view-media-playlist"
-                onTriggered: currentView = viewsIndex.playlists
-            }
+        Action
+        {
+            text: qsTr("Playlists")
+            icon.name: "view-media-playlist"
+        }
     }
 
     footBar.visible: !mainlistEmpty
@@ -362,10 +344,9 @@ Maui.ApplicationWindow
     }
 
 
-    //    leftIcon.icon.color: currentView === viewsIndex.search ? babeColor : altColorText
     onSearchButtonClicked:
     {
-        currentView = viewsIndex.search
+        _actionGroup.currentIndex = viewsIndex.search
         searchView.searchInput.forceActiveFocus()
     }
 
@@ -653,18 +634,9 @@ Maui.ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
             interactive: isMobile
-            currentIndex: currentView
+            currentIndex: _actionGroup.currentIndex
             clip: true
             onCurrentItemChanged: currentItem.forceActiveFocus()
-
-            onCurrentIndexChanged:
-            {
-                currentView = currentIndex
-                //                if (!babeitView.isConnected && currentIndex === viewsIndex.vvave)
-                //                    babeitView.logginDialog.open()
-            }
-
-
             TracksView
             {
                 id: tracksView
@@ -836,6 +808,39 @@ Maui.ApplicationWindow
                 }
             }
 
+            FoldersView
+            {
+                id: foldersView
+
+                Connections
+                {
+                    target: foldersView.list
+
+                    onRowClicked: Player.addTrack(foldersView.list.model.get(index))
+                    onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
+                    onPlayAll:
+                    {
+                        mainPlaylist.list.clear()
+                        //                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = foldersView.list.list.query
+                        Player.playAll()
+                    }
+
+                    onAppendAll:
+                    {
+                        var query = foldersView.list.list.query
+                        mainPlaylist.list.appendQuery(query)
+                        mainPlaylist.listView.positionViewAtEnd()
+                    }
+
+                    onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
+                }
+            }
+
+            YouTube
+            {
+                id: youtubeView
+            }
 
             SearchTable
             {
@@ -871,61 +876,6 @@ Maui.ApplicationWindow
                     }
                 }
             }
-
-            FoldersView
-            {
-                id: foldersView
-
-                Connections
-                {
-                    target: foldersView.list
-
-                    onRowClicked: Player.addTrack(foldersView.list.model.get(index))
-                    onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
-                    onPlayAll:
-                    {
-                        mainPlaylist.list.clear()
-                        //                        mainPlaylist.list.sortBy = Tracks.NONE
-                        mainPlaylist.list.query = foldersView.list.list.query
-                        Player.playAll()
-                    }
-
-                    onAppendAll:
-                    {
-                        var query = foldersView.list.list.query
-                        mainPlaylist.list.appendQuery(query)
-                        mainPlaylist.listView.positionViewAtEnd()
-                    }
-
-                    onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
-                }
-            }
-
-            //            CloudView
-            //            {
-            //                id: cloudView
-            //                onQuickPlayTrack: Player.quickPlay(cloudView.list.get(index))
-            //            }
-
-            //            BabeitView
-            //            {
-            //                id: babeitView
-            //            }
-
-            //            LinkingView
-            //            {
-            //                id: linkingView
-            //            }
-
-            YouTube
-            {
-                id: youtubeView
-            }
-
-            //            Spotify
-            //            {
-            //                id: spotifyView
-            //            }
         }
 
         Maui.SelectionBar
