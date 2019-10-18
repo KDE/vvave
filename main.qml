@@ -143,39 +143,6 @@ Maui.ApplicationWindow
                            }
     }
 
-<<<<<<< Updated upstream
-    headBar.middleContent : Kirigami.ActionToolBar
-    {
-        display: isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
-        position: ToolBar.Header
-        Layout.fillWidth: true
-        hiddenActions: [
-
-            Kirigami.Action
-            {
-                text: qsTr("Folders")
-                icon.name: "folder"
-                checked: currentView === viewsIndex.folders
-                checkable: false
-                onTriggered: currentView = viewsIndex.folders
-            },
-
-            Kirigami.Action
-            {
-                text: qsTr("YouTube")
-                checkable: false
-                icon.name: "internet-services"
-                checked: currentView === viewsIndex.youtube
-                onTriggered: currentView = viewsIndex.youtube
-
-            }
-=======
-<<<<<<< Updated upstream
-    BabeNotify
-    {
-        id: babeNotify //todo
-    }
-=======
     headBar.middleContent : Maui.ActionGroup
     {
         currentIndex : currentView
@@ -198,31 +165,9 @@ Maui.ApplicationWindow
                 icon.name: "internet-services"
                 checked: currentView === viewsIndex.youtube
                 onTriggered: currentView = viewsIndex.youtube
->>>>>>> Stashed changes
 
+            }
 
-<<<<<<< Updated upstream
-    /* UI */
-    property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
-    altToolBars: false
-    accentColor: bae.babeColor()
-    headBarFGColor: altColorText
-    headBarBGColor: currentView === viewsIndex.vvave ? "#7e57c2" : "#212121"
-    colorSchemeName: "vvave"
-    altColorText: darkTextColor
-    floatingBar: false
-
-    headBar.middleContent : [
-
-        Maui.ToolButton
-        {
-            iconName: "headphones"
-            iconColor: !accent  || isPlaying  ? babeColor : altColorText
-            onClicked: pageStack.currentIndex = 0
-            colorScheme.highlightColor: babeColor
-            text: qsTr("Now")
-        },
-=======
         ]
         Action
             {
@@ -251,65 +196,6 @@ Maui.ApplicationWindow
                 icon.name: "view-media-playlist"
                 onTriggered: currentView = viewsIndex.playlists
             }
-    }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
-
-        ]
-        actions: [
-            Kirigami.Action
-            {
-                icon.name: "view-media-track"
-                checked: currentView === viewsIndex.tracks
-                //            showIndicator: true
-                //            icon.color: active ? babeColor : altColorText
-                onTriggered: currentView = viewsIndex.tracks
-                text: qsTr("Tracks")
-                checkable: false
-                //            colorScheme.highlightColor: babeColor
-                //            spacing: 0
-
-            },
-
-            Kirigami.Action
-            {
-                text: qsTr("Albums")
-                checkable: false
-                checked: currentView === viewsIndex.albums
-                icon.name: /*"album"*/ "view-media-album-cover"
-                //            icon.color: currentView === viewsIndex.albums ? babeColor : altColorText
-                onTriggered: currentView = viewsIndex.albums
-                //            colorScheme.highlightColor: babeColor
-                //            showIndicator: true
-
-            },
-
-            Kirigami.Action
-            {
-                text: qsTr("Artists")
-                checkable: false
-                checked: currentView === viewsIndex.artists
-                icon.name: "view-media-artist"
-                //                Kirigami.Theme.textColor:  currentView === viewsIndex.artists ? babeColor : altColorText
-                onTriggered: currentView = viewsIndex.artists
-                //            colorScheme.highlightColor: babeColor
-                //            showIndicator: true
-            },
-
-            Kirigami.Action
-            {
-                text: qsTr("Playlists")
-                checkable: false
-                checked: currentView === viewsIndex.playlists
-                icon.name: "view-media-playlist"
-                //            icon.color: currentView === viewsIndex.playlists ? babeColor : altColorText
-                onTriggered: currentView = viewsIndex.playlists
-                //            colorScheme.highlightColor: babeColor
-                //            showIndicator: true
-
-            }
-
-        ]
     }
 
     footBar.visible: !mainlistEmpty
@@ -763,25 +649,13 @@ Maui.ApplicationWindow
 
         SwipeView
         {
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-            anchors.fill: parent
-=======
->>>>>>> Stashed changes
             id: swipeView
             Layout.fillHeight: true
             Layout.fillWidth: true
             interactive: isMobile
             currentIndex: currentView
-<<<<<<< Updated upstream
-
-            onCurrentItemChanged: currentItem.forceActiveFocus()
-=======
             clip: true
             onCurrentItemChanged: currentItem.forceActiveFocus()
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
             onCurrentIndexChanged:
             {

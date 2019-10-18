@@ -3,26 +3,14 @@
 #include "utils/brain.h"
 #include <QtConcurrent>
 
-<<<<<<< Updated upstream
-AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
-    db(CollectionDB::getInstance())
-=======
-<<<<<<< Updated upstream
-
-AlbumsModel::AlbumsModel(QObject *parent) : BaseList(parent)
-=======
 AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
     db(CollectionDB::getInstance())
 {}
 
 void AlbumsModel::componentComplete()
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 {
     connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
-
-AlbumsModel::~AlbumsModel() {}
 
 FMH::MODEL_LIST AlbumsModel::items() const
 {
