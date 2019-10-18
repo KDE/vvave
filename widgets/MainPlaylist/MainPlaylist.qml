@@ -102,10 +102,7 @@ Maui.Page
                     }
 
                 }
-
         }
-
-
     }
 
     BabeTable

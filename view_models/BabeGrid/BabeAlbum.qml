@@ -78,12 +78,15 @@ Maui.ItemDelegate
             fillMode: Image.PreserveAspectFit
             smooth: true
             asynchronous: true
-            source:
+            source: model.artwork ?  model.artwork : "qrc:/assets/cover.png"
+
+            onStatusChanged:
             {
-                if(artwork)
-                    (artwork.length > 0 && artwork !== "NONE")? artwork : "qrc:/assets/cover.png"
-                else "qrc:/assets/cover.png"
-            }
+                if (status == Image.Error)
+                 source = "qrc:/assets/cover.png";
+
+             }
+
             layer.enabled: albumRadius
             layer.effect: OpacityMask
             {
@@ -128,7 +131,7 @@ Maui.ItemDelegate
         Item
         {
             id: _labelBg
-            height: Math.min (parent.height * 0.3, _labelsLayout.implicitHeight ) + Maui.Style.space.medium
+            height: Math.min (parent.height * 0.3, _labelsLayout.implicitHeight ) + Maui.Style.space.big
             width: parent.width
             anchors.bottom: parent.bottom
             visible: showLabels
@@ -137,12 +140,24 @@ Maui.ItemDelegate
             Kirigami.Theme.backgroundColor: "#333";
             Kirigami.Theme.textColor: "#fafafa"
 
-            FastBlur
+            LinearGradient
+            {
+                id: mask
+                anchors.fill: parent
+                start: Qt.point(0, 0)
+                end: Qt.point(0, parent.height)
+                gradient: Gradient
+                {
+                    GradientStop { position: 0.2; color: "transparent" }
+                    GradientStop { position: 0.5; color: _labelBg.Kirigami.Theme.backgroundColor }
+                }
+                visible: false
+            }
+
+            MaskedBlur
             {
                 id: blur
                 anchors.fill: parent
-                radius: 120
-                opacity: 1
                 source: ShaderEffectSource
                 {
                     sourceItem: img
@@ -151,13 +166,9 @@ Maui.ItemDelegate
                                        _labelBg.width,
                                        _labelBg.height)
                 }
-
-                Rectangle
-                {
-                    anchors.fill: parent
-                    color: _labelBg.Kirigami.Theme.backgroundColor
-                    opacity: 0.2
-                }
+                maskSource: mask
+                radius: 16
+                samples: 24
 
 
                 layer.enabled: true
@@ -185,7 +196,20 @@ Maui.ItemDelegate
                     }
                 }
 
+                LinearGradient
+                {
+                    anchors.fill: parent
+                    start: Qt.point(0, 0)
+                    end: Qt.point(0, parent.height)
+                    opacity: control.hovered ? 1 : 0.9
+                    gradient: Gradient
+                    {
+                        GradientStop { position: 0.1; color: "transparent" }
+                        GradientStop { position: 1; color: _labelBg.Kirigami.Theme.backgroundColor }
+                    }
+                }
             }
+
 
 
             ColumnLayout
@@ -193,6 +217,7 @@ Maui.ItemDelegate
                 id: _labelsLayout
                 anchors.centerIn: parent
                 width: parent.width * 0.9
+                height: Math.min(parent.height * 0.9, implicitHeight)
                 spacing: 0
 
                 Label
