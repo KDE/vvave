@@ -35,7 +35,14 @@ public:
     Q_ENUM(QUERY)
 
     explicit AlbumsModel(QObject *parent = nullptr);
+<<<<<<< Updated upstream
     ~AlbumsModel();
+=======
+<<<<<<< Updated upstream
+=======
+    void componentComplete() override final;
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
     FMH::MODEL_LIST items() const override;
 

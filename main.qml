@@ -143,6 +143,7 @@ Maui.ApplicationWindow
                            }
     }
 
+<<<<<<< Updated upstream
     headBar.middleContent : Kirigami.ActionToolBar
     {
         display: isWide ? ToolButton.TextBesideIcon : ToolButton.IconOnly
@@ -168,6 +169,91 @@ Maui.ApplicationWindow
                 onTriggered: currentView = viewsIndex.youtube
 
             }
+=======
+<<<<<<< Updated upstream
+    BabeNotify
+    {
+        id: babeNotify //todo
+    }
+=======
+    headBar.middleContent : Maui.ActionGroup
+    {
+        currentIndex : currentView
+
+        hiddenActions: [
+
+            Kirigami.Action
+            {
+                text: qsTr("Folders")
+                icon.name: "folder"
+                checked: currentView === viewsIndex.folders
+                checkable: false
+                onTriggered: currentView = viewsIndex.folders
+            },
+
+            Kirigami.Action
+            {
+                text: qsTr("YouTube")
+                checkable: false
+                icon.name: "internet-services"
+                checked: currentView === viewsIndex.youtube
+                onTriggered: currentView = viewsIndex.youtube
+>>>>>>> Stashed changes
+
+
+<<<<<<< Updated upstream
+    /* UI */
+    property bool accent : pageStack.wideMode || (!pageStack.wideMode && pageStack.currentIndex === 1)
+    altToolBars: false
+    accentColor: bae.babeColor()
+    headBarFGColor: altColorText
+    headBarBGColor: currentView === viewsIndex.vvave ? "#7e57c2" : "#212121"
+    colorSchemeName: "vvave"
+    altColorText: darkTextColor
+    floatingBar: false
+
+    headBar.middleContent : [
+
+        Maui.ToolButton
+        {
+            iconName: "headphones"
+            iconColor: !accent  || isPlaying  ? babeColor : altColorText
+            onClicked: pageStack.currentIndex = 0
+            colorScheme.highlightColor: babeColor
+            text: qsTr("Now")
+        },
+=======
+        ]
+        Action
+            {
+                icon.name: "view-media-track"               
+                onTriggered: currentView = viewsIndex.tracks
+                text: qsTr("Tracks")
+            }
+
+            Action
+            {
+                text: qsTr("Albums")
+                icon.name: /*"album"*/ "view-media-album-cover"
+                onTriggered: currentView = viewsIndex.albums
+            }
+
+            Action
+            {
+                text: qsTr("Artists")
+                icon.name: "view-media-artist"
+                onTriggered: currentView = viewsIndex.artists                
+            }
+
+            Action
+            {
+                text: qsTr("Playlists")
+                icon.name: "view-media-playlist"
+                onTriggered: currentView = viewsIndex.playlists
+            }
+    }
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
         ]
         actions: [
@@ -677,13 +763,25 @@ Maui.ApplicationWindow
 
         SwipeView
         {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+            anchors.fill: parent
+=======
+>>>>>>> Stashed changes
             id: swipeView
             Layout.fillHeight: true
             Layout.fillWidth: true
             interactive: isMobile
             currentIndex: currentView
+<<<<<<< Updated upstream
 
             onCurrentItemChanged: currentItem.forceActiveFocus()
+=======
+            clip: true
+            onCurrentItemChanged: currentItem.forceActiveFocus()
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
             onCurrentIndexChanged:
             {
@@ -1036,6 +1134,15 @@ Maui.ApplicationWindow
         {
             Player.appendTracksAt(tracks, 0)
             Player.playAt(0)
+        }
+    }
+
+    Component.onCompleted:
+    {
+        if(isAndroid)
+        {
+            Maui.Android.statusbarColor(Kirigami.Theme.backgroundColor, true)
+            Maui.Android.navBarColor(Kirigami.Theme.backgroundColor, true)
         }
     }
 }

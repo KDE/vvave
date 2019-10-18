@@ -2,8 +2,19 @@
 #include "db/collectionDB.h"
 
 
+<<<<<<< Updated upstream
 TracksModel::TracksModel(QObject *parent) : MauiList(parent),
     db(CollectionDB::getInstance())
+=======
+<<<<<<< Updated upstream
+TracksModel::TracksModel(QObject *parent) : BaseList(parent)
+=======
+TracksModel::TracksModel(QObject *parent) : MauiList(parent),
+    db(CollectionDB::getInstance()) {}
+
+void TracksModel::componentComplete()
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 {
     connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
 }

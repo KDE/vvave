@@ -38,6 +38,8 @@ public:
 
     explicit TracksModel(QObject *parent = nullptr);
 
+    void componentComplete() override final;
+
     FMH::MODEL_LIST items() const override;
 
     void setQuery(const QString &query);
