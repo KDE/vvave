@@ -40,7 +40,6 @@ Maui.Page
     }
 
     footBar.visible: !mainlistEmpty
-    footBar.implicitHeight: Maui.Style.toolBarHeight * 1.3
     footBar.width: parent.width
     footBar.middleContent: AlbumsRoll
     {
@@ -53,7 +52,6 @@ Maui.Page
     {
         id: footerBg
         height: footBar.implicitHeight
-
 
         Image
         {

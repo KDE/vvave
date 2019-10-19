@@ -210,8 +210,6 @@ Maui.ItemDelegate
                 }
             }
 
-
-
             ColumnLayout
             {
                 id: _labelsLayout

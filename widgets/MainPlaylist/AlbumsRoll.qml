@@ -3,6 +3,7 @@ import QtQuick 2.9
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import QtGraphicalEffects 1.0
 
 import "../../view_models/BabeGrid"
 import "../../utils/Player.js" as Player
@@ -34,76 +35,19 @@ ListView
     //    onCurrentIndexChanged: Player.playAt(currentIndex)
 
 
-    delegate: GridLayout
+    delegate: Maui.SwipeBrowserDelegate
     {
-        height: albumsRollRoot.height
+        isCurrentItem: false
+        hoverEnabled: false
         width: albumsRollRoot.width
-        clip: true
-        columns: 2
-        rows: 2
-
-        rowSpacing: Maui.Style.space.tiny
-        columnSpacing: Maui.Style.space.big
-
-        BabeAlbum
-        {
-            id: delegate
-            Layout.row: 1
-            Layout.rowSpan: 2
-            Layout.column: 1
-            Layout.preferredWidth: albumSize
-            Layout.preferredHeight: albumSize
-            Layout.alignment: Qt.AlignCenter
-
-            albumSize :  Maui.Style.iconSizes.big +  Maui.Style.space.big
-            albumRadius :  Maui.Style.radiusV
-            showLabels: false
-            showIndicator: false
-            hideRepeated: false
-            //        increaseCurrentItem : true
-
-            Connections
-            {
-                target: delegate
-                onClicked:
-                {
-                    albumsRollRoot.currentIndex = index
-                    play(index)
-                }
-            }
-        }
-
-        Label
-        {
-            Layout.row: 1
-            Layout.column: 2
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            text: model.title
-            color: Kirigami.Theme.textColor
-            font.pointSize:  Maui.Style.fontSizes.default
-            verticalAlignment: Qt.AlignBottom
-            clip: true
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            elide: Text.ElideRight
-        }
-
-        Label
-        {
-            Layout.row: 2
-            Layout.column: 2
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            text: model.artist + " | " + model.album
-            font.pointSize:  Maui.Style.fontSizes.small
-            verticalAlignment: Qt.AlignTop
-            clip: true
-            color: Kirigami.Theme.textColor
-            elide: Text.ElideRight
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        }
+        height: albumsRollRoot.height
+        label1.text: model.title
+        label2.text: model.artist + " | " + model.album
+        imageSource: model.artwork
+        iconVisible : true
+        label1.visible : albumsRollRoot.width > height
+        label2.visible : label1.visible
     }
-
 
 //    MouseArea
 //    {

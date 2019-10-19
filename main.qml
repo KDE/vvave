@@ -180,13 +180,11 @@ Maui.ApplicationWindow
         }
     }
 
-    footBar.visible: !mainlistEmpty
-    footBar.implicitHeight: footBar.visible ? Maui.Style.toolBarHeight * 1.2 : 0
     footer: ColumnLayout
     {
         id: _footerLayout
-
-        height: footBar.height
+visible: !mainlistEmpty
+        height: visible ? Maui.Style.toolBarHeight * 1.2 : 0
         width: root.width
         spacing: 0
 
@@ -239,8 +237,6 @@ Maui.ApplicationWindow
                 color: Kirigami.Theme.highlightColor
             }
         }
-
-
 
         Maui.ToolBar
         {

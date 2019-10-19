@@ -246,17 +246,17 @@ inline QString getNameFromLocation(const QString &str)
     return ret;
 }
 
-const QString SettingPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/";
-const QString ArtworkPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/artwork/";
-const QString CollectionDBPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/";
+const QString SettingPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/").toLocalFile();
+const QString ArtworkPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/artwork/").toString();
+const QString CollectionDBPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/").toLocalFile();
 
 #ifdef Q_OS_ANDROID
 const QString CachePath = BAE::ArtworkPath;
 #else
-const QString CachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/";
+const QString CachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/").toString();
 #endif
 
-const QString YoutubeCachePath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/";
+const QString YoutubeCachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/").toLocalFile();
 const QString NotifyDir = SettingPath;
 
 const QString MusicPath = FMH::MusicPath;
@@ -411,7 +411,7 @@ inline QVariant loadSettings(const QString &key, const QString &group, const QVa
 
 inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MODEL_KEY::ID)
 {
-    QDirIterator it(CachePath, QDir::Files, QDirIterator::NoIteratorFlags);
+    QDirIterator it(QUrl(CachePath).toLocalFile(), QDir::Files, QDirIterator::NoIteratorFlags);
     while (it.hasNext())
     {
         const auto file = QUrl::fromLocalFile(it.next());

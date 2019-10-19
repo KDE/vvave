@@ -46,7 +46,7 @@ Maui.SwipeBrowserDelegate
 
     rightPadding: leftPadding
     leftPadding: Maui.Style.space.small
-    iconSizeHint: Maui.Style.rowHeight
+    iconSizeHint: height
     label1.text: number ? model.track + ". " + model.title :  model.title
     label2.text: model.artist + " | " + model.album
     label2.visible: coverArt ? !sameAlbum : true
@@ -57,10 +57,7 @@ Maui.SwipeBrowserDelegate
     label4.text: model.rate ? H.setStars(model.rate) : ""
 
     iconVisible: !sameAlbum && coverArt
-    imageSource: typeof model.artwork === 'undefined' ?
-                     "qrc:/assets/cover.png" :
-                     remoteArtwork ? model.artwork :
-                                     ((model.artwork && model.artwork.length > 0 && model.artwork !== "NONE")? "file://"+encodeURIComponent(model.artwork) : "qrc:/assets/cover.png")
+    imageSource: model.artwork ? model.artwork : "qrc:/assets/cover.png"
 
 
     signal play()

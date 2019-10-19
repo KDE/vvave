@@ -117,6 +117,8 @@ void AlbumsModel::setList()
         item[FMH::MODEL_KEY::ARTWORK] = "";
     }
 });
+
+this->fetchInformation();
 this->sortList();
 emit this->postListChanged();
 }
@@ -161,17 +163,15 @@ void AlbumsModel::fetchInformation()
                 {
                     if(res.context == PULPO::CONTEXT::IMAGE && !res.value.toString().isEmpty())
                     {
-                        qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM];
                         auto downloader = new FMH::Downloader;
                         QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, index, request, downloader = std::move(downloader)](QString path)
                         {
-                            qDebug()<< "Saving artwork file to" << path;
                             FMH::MODEL newTrack = request.track;
-                            newTrack[FMH::MODEL_KEY::ARTWORK] = path;
+                            newTrack[FMH::MODEL_KEY::ARTWORK] = QUrl::fromLocalFile(path).toString();
                             this->db->insertArtwork(newTrack);
-                            this->updateArtwork(index, path);
+//                            this->updateArtwork(index, path);
 
-                            album[FMH::MODEL_KEY::ARTWORK] = path;
+                            album[FMH::MODEL_KEY::ARTWORK] = newTrack[FMH::MODEL_KEY::ARTWORK];
                             emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
 
                             downloader->deleteLater();
@@ -183,6 +183,8 @@ void AlbumsModel::fetchInformation()
                         name.replace("/", "-");
                         name.replace("&", "-");
                         downloader->setFile(res.value.toString(),  BAE::CachePath + name + format);
+                        qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM]<< BAE::CachePath + name + format;
+
                     }
                 }
             };
