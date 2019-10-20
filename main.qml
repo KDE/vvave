@@ -47,6 +47,7 @@ Maui.ApplicationWindow
     property alias mainPlaylist: mainPlaylist
     property alias selectionBar: _selectionBar
     property alias progressBar: progressBar
+    property alias dialog : _dialogLoader.item
 
     Maui.App.iconName: "qrc:/assets/vvave.svg"
     Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
@@ -345,6 +346,11 @@ visible: !mainlistEmpty
         searchView.searchInput.forceActiveFocus()
     }
 
+    Loader
+    {
+        id: _dialogLoader
+    }
+
     InfoView
     {
         id: infoView
@@ -352,14 +358,17 @@ visible: !mainlistEmpty
         maxHeight: parent.height * 0.9
     }
 
-    Maui.ShareDialog
+
+    Component
     {
-        id: shareDialog
+        id: _shareDialogComponent
+        Maui.ShareDialog {}
     }
 
-    Maui.FileDialog
+    Component
     {
-        id: fmDialog
+        id: _fmDialogComponent
+        Maui.FileDialog { }
     }
 
     SourcesDialog
@@ -433,9 +442,10 @@ visible: !mainlistEmpty
             icon.name: "folder-add"
             onTriggered:
             {
-                fmDialog.settings.onlyDirs = false
-                fmDialog.settings.filterType = Maui.FMList.AUDIO
-                fmDialog.show(function(paths)
+                _dialogLoader.sourceComponent = _fmDialogComponent
+                root.dialog.settings.onlyDirs = false
+                root.dialog.settings.filterType = Maui.FMList.AUDIO
+                root.dialog.show(function(paths)
                 {
                     vvave.openUrls(paths)
                 })

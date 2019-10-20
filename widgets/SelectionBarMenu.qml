@@ -88,8 +88,14 @@ Menu
         text: qsTr("Share...")
         onTriggered:
         {
-            isAndroid ? Maui.Android.shareDialog(_selectionBar.selectedPaths) :
-                        shareDialog.show(_selectionBar.selectedPaths)
+            if(isAndroid)
+            {
+                 Maui.Android.shareDialog(_selectionBar.selectedPaths)
+                return
+            }
+
+            _dialogLoader.sourceComponent = _shareDialogComponent
+            root.dialog.show(_selectionBar.selectedPaths)
             close()
         }
     }

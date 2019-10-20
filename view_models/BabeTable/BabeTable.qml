@@ -217,7 +217,6 @@ BabeList
             onTriggered: goToAlbum()
         }
 
-
         onFavClicked:
         {
             list.fav(listView.currentIndex, !(list.get(listView.currentIndex).fav == "1"))
@@ -262,8 +261,15 @@ BabeList
         onShareClicked:
         {
             const url = list.get(listView.currentIndex).url
-            isAndroid ? Maui.Android.shareDialog("file://" + url) :
-                        shareDialog.show([url])
+
+            if(isAndroid)
+            {
+                 Maui.Android.shareDialog(url)
+                return
+            }
+
+            _dialogLoader.sourceComponent = _shareDialogComponent
+            root.dialog.show([url])
         }
     }
 

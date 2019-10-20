@@ -90,16 +90,16 @@ Menu
     }
 
 
-    MenuItem
-    {
-        visible: Maui.App.handleAccounts
-        text: qsTr("Copy to cloud")
-        onTriggered:
-        {
-            copyToClicked()
-            close()
-        }
-    }
+//    MenuItem
+//    {
+//        visible: Maui.App.handleAccounts
+//        text: qsTr("Copy to cloud")
+//        onTriggered:
+//        {
+//            copyToClicked()
+//            close()
+//        }
+//    }
 
     MenuItem
     {

@@ -28,8 +28,9 @@ Maui.Dialog
 
     onAccepted:
     {
-        fmDialog.settings.onlyDirs = true
-        fmDialog.show(function(paths)
+        _dialogLoader.sourceComponent = _fmDialogComponent
+        root.dialog.settings.onlyDirs = true
+        root.dialog.show(function(paths)
         {
 
             console.log("SCAN DIR <<", paths)
