@@ -140,21 +140,7 @@ Maui.ItemDelegate
             Kirigami.Theme.backgroundColor: "#333";
             Kirigami.Theme.textColor: "#fafafa"
 
-            LinearGradient
-            {
-                id: mask
-                anchors.fill: parent
-                start: Qt.point(0, 0)
-                end: Qt.point(0, parent.height)
-                gradient: Gradient
-                {
-                    GradientStop { position: 0.2; color: "transparent" }
-                    GradientStop { position: 0.5; color: _labelBg.Kirigami.Theme.backgroundColor }
-                }
-                visible: false
-            }
-
-            MaskedBlur
+            FastBlur
             {
                 id: blur
                 anchors.fill: parent
@@ -166,10 +152,14 @@ Maui.ItemDelegate
                                        _labelBg.width,
                                        _labelBg.height)
                 }
-                maskSource: mask
-                radius: 16
-                samples: 24
+                radius: 50
 
+                Rectangle
+                {
+                    anchors.fill: parent
+                    color: _labelBg.Kirigami.Theme.backgroundColor
+                    opacity: 0.4
+                }
 
                 layer.enabled: true
                 layer.effect: OpacityMask
@@ -194,20 +184,7 @@ Maui.ItemDelegate
                             }
                         }
                     }
-                }
-
-                LinearGradient
-                {
-                    anchors.fill: parent
-                    start: Qt.point(0, 0)
-                    end: Qt.point(0, parent.height)
-                    opacity: control.hovered ? 1 : 0.9
-                    gradient: Gradient
-                    {
-                        GradientStop { position: 0.1; color: "transparent" }
-                        GradientStop { position: 1; color: _labelBg.Kirigami.Theme.backgroundColor }
-                    }
-                }
+                }               
             }
 
             ColumnLayout

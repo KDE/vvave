@@ -110,12 +110,11 @@ Maui.ApplicationWindow
     onClosing: Player.savePlaylist()
     onMissingAlert:
     {
-        var message = track.title + " by " + track.artist + " is missing"
-        var messageBody = "Do you want to remove it from your collection?"
-        notify("alert", message, messageBody, function ()
+        var message = qsTr("Missing file...")
+        var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
+        notify("dialog-question", message, messageBody, function ()
         {
-            //            bae.removeTrack(currentTrack.url) //todo
-            mainPlaylist.table.model.remove(mainPlaylist.table.currentIndex)
+            mainPlaylist.list.remove(mainPlaylist.table.currentIndex)
         })
     }
 

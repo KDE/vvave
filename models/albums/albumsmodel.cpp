@@ -118,7 +118,7 @@ void AlbumsModel::setList()
     }
 });
 
-this->fetchInformation();
+//this->fetchInformation();
 this->sortList();
 emit this->postListChanged();
 }

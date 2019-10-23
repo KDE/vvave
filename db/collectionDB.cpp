@@ -26,12 +26,12 @@ using namespace BAE;
 
 CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 {
-    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [this]()
-    {
-        this->m_db.close();
-        this->instance->deleteLater();
-        this->instance = nullptr;
-    });
+//    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [this]()
+//    {
+//        this->m_db.close();
+//        this->instance->deleteLater();
+//        this->instance = nullptr;
+//    });
 
     this->name = QUuid::createUuid().toString();
 
