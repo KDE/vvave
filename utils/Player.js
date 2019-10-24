@@ -8,7 +8,7 @@ function playTrack(index)
 
         if(typeof(currentTrack) === "undefined") return
 
-        if(Maui.FM.fileExists("pp"+currentTrack.url))
+        if(Maui.FM.fileExists(currentTrack.url))
         {
             player.url = currentTrack.url;
             player.playing = true
@@ -36,7 +36,7 @@ function playTrack(index)
 }
 
 function queueTracks(tracks)
-{    
+{
     if(tracks && tracks.length > 0)
     {
         appendTracksAt(tracks, currentTrackIndex+onQueue+1)
@@ -65,7 +65,7 @@ function pauseTrack()
 }
 
 function resumeTrack()
-{    
+{
     if(!player.play() && !mainlistEmpty)
         playAt(0)
 }

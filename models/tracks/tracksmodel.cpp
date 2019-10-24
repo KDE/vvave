@@ -57,52 +57,52 @@ void TracksModel::sortList()
     {
         switch(key)
         {
-        case FMH::MODEL_KEY::RELEASEDATE:
-        case FMH::MODEL_KEY::RATE:
-        case FMH::MODEL_KEY::FAV:
-        case FMH::MODEL_KEY::COUNT:
-        {
-            if(e1[key].toInt() > e2[key].toInt())
-                return true;
-            break;
-        }
+            case FMH::MODEL_KEY::RELEASEDATE:
+            case FMH::MODEL_KEY::RATE:
+            case FMH::MODEL_KEY::FAV:
+            case FMH::MODEL_KEY::COUNT:
+            {
+                if(e1[key].toInt() > e2[key].toInt())
+                    return true;
+                break;
+            }
 
-        case FMH::MODEL_KEY::TRACK:
-        {
-            if(e1[key].toInt() < e2[key].toInt())
-                return true;
-            break;
-        }
+            case FMH::MODEL_KEY::TRACK:
+            {
+                if(e1[key].toInt() < e2[key].toInt())
+                    return true;
+                break;
+            }
 
-        case FMH::MODEL_KEY::ADDDATE:
-        {
-            auto currentTime = QDateTime::currentDateTime();
+            case FMH::MODEL_KEY::ADDDATE:
+            {
+                auto currentTime = QDateTime::currentDateTime();
 
-            auto date1 = QDateTime::fromString(e1[key], Qt::TextDate);
-            auto date2 = QDateTime::fromString(e2[key], Qt::TextDate);
+                auto date1 = QDateTime::fromString(e1[key], Qt::TextDate);
+                auto date2 = QDateTime::fromString(e2[key], Qt::TextDate);
 
-            if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
-                return true;
+                if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
+                    return true;
 
-            break;
-        }
+                break;
+            }
 
-        case FMH::MODEL_KEY::TITLE:
-        case FMH::MODEL_KEY::ARTIST:
-        case FMH::MODEL_KEY::ALBUM:
-        case FMH::MODEL_KEY::FORMAT:
-        {
-            const auto str1 = QString(e1[key]).toLower();
-            const auto str2 = QString(e2[key]).toLower();
+            case FMH::MODEL_KEY::TITLE:
+            case FMH::MODEL_KEY::ARTIST:
+            case FMH::MODEL_KEY::ALBUM:
+            case FMH::MODEL_KEY::FORMAT:
+            {
+                const auto str1 = QString(e1[key]).toLower();
+                const auto str2 = QString(e2[key]).toLower();
 
-            if(str1 < str2)
-                return true;
-            break;
-        }
+                if(str1 < str2)
+                    return true;
+                break;
+            }
 
-        default:
-            if(e1[key] < e2[key])
-                return true;
+            default:
+                if(e1[key] < e2[key])
+                    return true;
         }
 
         return false;
@@ -138,7 +138,7 @@ void TracksModel::append(const QVariantMap &item)
     if(item.isEmpty())
         return;
 
-    emit this->preItemAppended();   
+    emit this->preItemAppended();
     this->list << FMH::toModel(item);
     emit this->postItemAppended();
 }

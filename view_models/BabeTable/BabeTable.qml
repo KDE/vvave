@@ -37,7 +37,6 @@ BabeList
 
     property alias playAllBtn : playAllBtn
     property alias appendBtn : appendBtn
-    property alias actionToolBar: _actionToolBar
 
     signal rowClicked(int index)
     signal rowPressed(int index)
@@ -50,129 +49,151 @@ BabeList
     signal appendAll()
 
     //    altToolBars: true
-
     onGroupChanged: groupBy()
     focus: true
 
     //headBar.middleStrech: false
     headBar.rightSretch: false
-    headBar.leftContent: Kirigami.ActionToolBar
-    {
-        id: _actionToolBar
-        position: ToolBar.Header
-        Layout.fillWidth: true
-        actions:   [
-            Kirigami.Action
+    headBar.leftContent: [
+
+        ToolButton
+        {
+            id : playAllBtn
+//            text: qsTr("Play all")
+            icon.name : "media-playlist-play"
+            onClicked: playAll()
+        },
+        ToolButton
+        {
+            id: appendBtn
+//            text: qsTr("Append")
+            icon.name : "media-playlist-append"//"media-repeat-track-amarok"
+            onClicked: appendAll()
+        }]
+
+    headBar.rightContent: [
+
+        ToolButton
+        {
+            icon.name: "item-select"
+            onClicked: selectionMode = !selectionMode
+            checkable: false
+            checked: selectionMode
+        },
+
+        ToolButton
+        {
+            id: sortBtn
+            icon.name: "view-sort"
+            onClicked:
             {
-                id : playAllBtn
-                text: qsTr("Play all")
-                icon.name : "media-playlist-play"
-                onTriggered: playAll()
-            },
-            Kirigami.Action
-            {
-                id: appendBtn
-                text: qsTr("Append")
-                icon.name : "media-playlist-append"//"media-repeat-track-amarok"
-                onTriggered: appendAll()
-            },
-            Kirigami.Action
-            {
-                id: sortBtn
-                text: qsTr("Sort")
-                icon.name: "view-sort"
-                Kirigami.Action
-                {
-                    text: qsTr("Title")
-                    checkable: true
-                    checked: list.sortBy === Tracks.TITLE
-                    onTriggered: list.sortBy = Tracks.TITLE
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Track")
-                    checkable: true
-                    checked: list.sortBy === Tracks.TRACK
-                    onTriggered: list.sortBy = Tracks.TRACK
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Artist")
-                    checkable: true
-                    checked: list.sortBy === Tracks.ARTIST
-                    onTriggered: list.sortBy = Tracks.ARTIST
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Album")
-                    checkable: true
-                    checked: list.sortBy === Tracks.ALBUM
-                    onTriggered: list.sortBy = Tracks.ALBUM
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Most played")
-                    checkable: true
-                    checked: list.sortBy === Tracks.COUNT
-                    onTriggered: list.sortBy = Tracks.COUNT
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Rate")
-                    checkable: true
-                    checked: list.sortBy === Tracks.RATE
-                    onTriggered: list.sortBy = Tracks.RATE
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Fav")
-                    checkable: true
-                    checked: list.sortBy === Tracks.FAV
-                    onTriggered: list.sortBy = Tracks.FAV
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Release date")
-                    checkable: true
-                    checked: list.sortBy === Tracks.RELEASEDATE
-                    onTriggered: list.sortBy = Tracks.RELEASEDATE
-                }
-
-                Kirigami.Action
-                {
-                    text: qsTr("Add date")
-                    checkable: true
-                    checked: list.sortBy === Tracks.ADDDATE
-                    onTriggered: list.sortBy = Tracks.ADDDATE
-                }
-
-
-                Kirigami.Action
-                {
-                    text: qsTr("Group")
-                    checkable: true
-                    checked: group
-                    onTriggered: group = !group
-                }
-            },
-
-            Kirigami.Action
-            {
-                text: qsTr("Select")
-                icon.name: "item-select"
-                onTriggered: selectionMode = !selectionMode
-                checkable: false
-                checked: selectionMode
+                if(_sortMenu.visible)
+                    _sortMenu.close()
+                    else
+                        _sortMenu.popup(0, height)
             }
-        ]
-    }
+            checked: _sortMenu.visible
+            checkable: false
+
+            Menu
+            {
+                id: _sortMenu
+                closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnPressOutsideParent
+
+            MenuItem
+            {
+                text: qsTr("Title")
+                checkable: true
+                checked: list.sortBy === Tracks.TITLE
+                onTriggered: list.sortBy = Tracks.TITLE
+                autoExclusive: true
+            }
+
+           MenuItem
+            {
+                text: qsTr("Track")
+                checkable: true
+                checked: list.sortBy === Tracks.TRACK
+                onTriggered: list.sortBy = Tracks.TRACK
+                autoExclusive: true
+            }
+
+           MenuItem
+            {
+                text: qsTr("Artist")
+                checkable: true
+                checked: list.sortBy === Tracks.ARTIST
+                onTriggered: list.sortBy = Tracks.ARTIST
+                autoExclusive: true
+            }
+
+           MenuItem
+            {
+                text: qsTr("Album")
+                checkable: true
+                checked: list.sortBy === Tracks.ALBUM
+                onTriggered: list.sortBy = Tracks.ALBUM
+                autoExclusive: true
+            }
+
+           MenuItem
+            {
+                text: qsTr("Most played")
+                checkable: true
+                checked: list.sortBy === Tracks.COUNT
+                onTriggered: list.sortBy = Tracks.COUNT
+                autoExclusive: true
+            }
+
+            MenuItem
+            {
+                text: qsTr("Rate")
+                checkable: true
+                checked: list.sortBy === Tracks.RATE
+                onTriggered: list.sortBy = Tracks.RATE
+                autoExclusive: true
+            }
+
+           MenuItem
+            {
+                text: qsTr("Favorite")
+                checkable: true
+                checked: list.sortBy === Tracks.FAV
+                onTriggered: list.sortBy = Tracks.FAV
+                autoExclusive: true
+            }
+
+            MenuItem
+            {
+                text: qsTr("Release date")
+                checkable: true
+                checked: list.sortBy === Tracks.RELEASEDATE
+                onTriggered: list.sortBy = Tracks.RELEASEDATE
+                autoExclusive: true
+            }
+
+            MenuItem
+            {
+                text: qsTr("Add date")
+                checkable: true
+                checked: list.sortBy === Tracks.ADDDATE
+                onTriggered: list.sortBy = Tracks.ADDDATE
+                autoExclusive: true
+            }
+
+            MenuSeparator{}
+
+            MenuItem
+            {
+                text: qsTr("Group")
+                checkable: true
+                checked: group
+                onTriggered: group = !group
+            }
+            }
+        }
+]
+
 
     Maui.Dialog
     {
@@ -181,8 +202,8 @@ BabeList
         title: qsTr("Remove track")
         message: qsTr("You can delete the file from your computer or remove it from your collection")
         rejectButton.text: qsTr("Delete")
-        //        rejectButton.icon.name: "archive-remove"
         acceptButton.text: qsTr("Remove")
+        page.padding: Maui.Style.space.huge
 
         onAccepted:
         {
@@ -223,6 +244,7 @@ BabeList
         }
 
         onQueueClicked: Player.queueTracks([list.get(listView.currentIndex)])
+        onPlayClicked: quickPlayTrack(listView.currentIndex)
 
         onSaveToClicked:
         {

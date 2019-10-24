@@ -23,6 +23,7 @@ Menu
     signal removeClicked()
     signal favClicked()
     signal queueClicked()
+    signal playClicked()
     signal saveToClicked()
     signal openWithClicked()
     signal editClicked()
@@ -49,10 +50,10 @@ Menu
 
     MenuItem
     {
-        text: !fav ? qsTr("Fav it"): qsTr("UnFav it")
+        text: qsTr("Play")
         onTriggered:
         {
-            favClicked()
+            playClicked()
             close()
         }
     }
@@ -66,6 +67,16 @@ Menu
             close()
         }
     }
+
+    MenuItem
+    {
+        text: !fav ? qsTr("Fav it"): qsTr("UnFav it")
+        onTriggered:
+        {
+            favClicked()
+            close()
+        }
+    }   
 
     MenuItem
     {
@@ -103,8 +114,8 @@ Menu
 
     MenuItem
     {
-        text: isAndroid ? qsTr("Open with...") : qsTr("Show in folder...")
-
+        text: qsTr("Show in folder...")
+        visible: !isAndroid
         onTriggered:
         {
             openWithClicked()
