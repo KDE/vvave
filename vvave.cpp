@@ -113,24 +113,26 @@ void vvave::openUrls(const QStringList &urls)
     TagInfo info;
 
     for(const auto &url : urls)
-        if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], QUrl(url).toLocalFile()))
+      {
+        auto _url = QUrl::fromUserInput(url);
+        if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString()))
         {
-            data << FMH::toMap(this->db->getDBData(QStringList() << QUrl(url).toLocalFile()).first());
+            data << FMH::toMap(this->db->getDBData(QStringList() << _url.toString()).first());
         }else
         {
-            if(info.feed(QUrl(url).toLocalFile()))
+            if(info.feed(_url.toLocalFile()))
             {
                 const auto album = BAE::fixString(info.getAlbum());
                 const auto track= info.getTrack();
                 const auto title = BAE::fixString(info.getTitle()); /* to fix*/
                 const auto artist = BAE::fixString(info.getArtist());
                 const auto genre = info.getGenre();
-                const auto sourceUrl = QFileInfo(QUrl(url).toLocalFile()).dir().path();
+                const auto sourceUrl = QFileInfo(_url.toLocalFile()).dir().path();
                 const auto duration = info.getDuration();
                 const auto year = info.getYear();
 
                 data << QVariantMap({
-                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::URL], QUrl(url).toLocalFile()},
+                                        {FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString()},
                                         {FMH::MODEL_NAME[FMH::MODEL_KEY::TRACK], QString::number(track)},
                                         {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
                                         {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
@@ -143,6 +145,7 @@ void vvave::openUrls(const QStringList &urls)
                                     });
             }
         }
+      }
 
     emit this->openFiles(data);
 }
