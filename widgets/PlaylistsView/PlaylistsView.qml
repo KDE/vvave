@@ -157,8 +157,8 @@ ColumnLayout
             Connections
             {
                 target: filterList
-                onRowClicked: control.rowClicked(filterList.model.get(index))
-                onQuickPlayTrack: control.quickPlayTrack(filterList.model.get(filterList.currentIndex))
+                onRowClicked: control.rowClicked(filterList.list.get(index))
+                onQuickPlayTrack: control.quickPlayTrack(filterList.list.get(filterList.currentIndex))
 
                 onPlayAll: playAll()
                 onAppendAll: appendAll()
