@@ -59,14 +59,14 @@ BabeList
         ToolButton
         {
             id : playAllBtn
-//            text: qsTr("Play all")
+            //            text: qsTr("Play all")
             icon.name : "media-playlist-play"
             onClicked: playAll()
         },
         ToolButton
         {
             id: appendBtn
-//            text: qsTr("Append")
+            //            text: qsTr("Append")
             icon.name : "media-playlist-append"//"media-repeat-track-amarok"
             onClicked: appendAll()
         }]
@@ -81,24 +81,10 @@ BabeList
             checked: selectionMode
         },
 
-        ToolButton
+        Maui.ToolButtonMenu
         {
             id: sortBtn
             icon.name: "view-sort"
-            onClicked:
-            {
-                if(_sortMenu.visible)
-                    _sortMenu.close()
-                    else
-                        _sortMenu.popup(0, height)
-            }
-            checked: _sortMenu.visible
-            checkable: false
-
-            Menu
-            {
-                id: _sortMenu
-                closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnPressOutsideParent
 
             MenuItem
             {
@@ -109,7 +95,7 @@ BabeList
                 autoExclusive: true
             }
 
-           MenuItem
+            MenuItem
             {
                 text: qsTr("Track")
                 checkable: true
@@ -118,7 +104,7 @@ BabeList
                 autoExclusive: true
             }
 
-           MenuItem
+            MenuItem
             {
                 text: qsTr("Artist")
                 checkable: true
@@ -127,7 +113,7 @@ BabeList
                 autoExclusive: true
             }
 
-           MenuItem
+            MenuItem
             {
                 text: qsTr("Album")
                 checkable: true
@@ -136,7 +122,7 @@ BabeList
                 autoExclusive: true
             }
 
-           MenuItem
+            MenuItem
             {
                 text: qsTr("Most played")
                 checkable: true
@@ -154,7 +140,7 @@ BabeList
                 autoExclusive: true
             }
 
-           MenuItem
+            MenuItem
             {
                 text: qsTr("Favorite")
                 checkable: true
@@ -190,9 +176,8 @@ BabeList
                 checked: group
                 onTriggered: group = !group
             }
-            }
         }
-]
+    ]
 
 
     Maui.Dialog
@@ -286,7 +271,7 @@ BabeList
 
             if(isAndroid)
             {
-                 Maui.Android.shareDialog(url)
+                Maui.Android.shareDialog(url)
                 return
             }
 

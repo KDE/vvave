@@ -9,7 +9,7 @@
 class Player : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString url READ getUrl WRITE setUrl NOTIFY urlChanged)
+    Q_PROPERTY(QUrl url READ getUrl WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(int volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
     Q_PROPERTY(Player::STATE state READ getState NOTIFY stateChanged)
     Q_PROPERTY(int duration READ getDuration NOTIFY durationChanged)
@@ -31,8 +31,8 @@ public:
 
     void playBuffer();
     Q_INVOKABLE void appendBuffe(QByteArray &array);
-    void setUrl(const QString &value);
-    QString getUrl() const;
+    void setUrl(const QUrl &value);
+    QUrl getUrl() const;
 
     void setVolume(const int &value);
     int getVolume() const;
@@ -52,23 +52,23 @@ public:
 private:
     QMediaPlayer *player;
     QTimer *updater;
-    int amountBuffers =0;
-    void update();
+    int amountBuffers = 0;
+    int pos = 0;
+    int volume = 100;
+
     QBuffer *buffer;
     QByteArray array;
 
-    QString url;
-    int volume = 100;
+    QUrl url;
     Player::STATE state = STATE::STOPED;
     bool playing = false;
     bool finished = false;
 
     bool play() const;
     void pause() const;
+    void update();
 
     void emitState();
-
-    int pos = 0;
 
 signals:
     void durationChanged();

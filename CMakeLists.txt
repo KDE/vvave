@@ -37,6 +37,7 @@ add_executable(vvave
 #    services/local/linking.cpp
     services/local/socket.cpp
     services/web/youtube.cpp
+    services/web/NextCloud/nextmusic.cpp
 #    services/web/Spotify/spotify.cpp
     db/collectionDB.cpp
 #    utils/brain.cpp

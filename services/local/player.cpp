@@ -17,6 +17,34 @@ Player::Player(QObject *parent) : QObject(parent),
     connect(this->updater, &QTimer::timeout, this, &Player::update);
 }
 
+inline QNetworkRequest getOcsRequest(const QNetworkRequest& request)
+{
+    qDebug() << Q_FUNC_INFO;
+
+    // Read raw headers out of the provided request
+    QMap<QByteArray, QByteArray> rawHeaders;
+    for (const QByteArray& headerKey : request.rawHeaderList()) {
+        rawHeaders.insert(headerKey, request.rawHeader(headerKey));
+    }
+
+
+    const QString concatenated =  "mauitest:mauitest";
+    const QByteArray data = concatenated.toLocal8Bit().toBase64();
+    const QString headerData = "Basic " + data;
+
+
+    // Construct new QNetworkRequest with prepared header values
+    QNetworkRequest newRequest(request);
+
+    newRequest.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
+    newRequest.setRawHeader(QByteArrayLiteral("OCS-APIREQUEST"), QByteArrayLiteral("true"));
+
+
+    qDebug() << "headers" << newRequest.rawHeaderList() << newRequest.url();
+
+    return newRequest;
+}
+
 bool Player::play() const
 {
     if(this->url.isEmpty()) return false;
@@ -93,7 +121,7 @@ void Player::playRemote(const QString &url)
     this->play();
 }
 
-void Player::setUrl(const QString &value)
+void Player::setUrl(const QUrl &value)
 {
     if(value == this->url)
         return;
@@ -104,12 +132,13 @@ void Player::setUrl(const QString &value)
     this->pos = 0;
     emit this->posChanged();
 
-    const auto media = QMediaContent(this->url);
+    const auto media = this->url.isLocalFile() ? QMediaContent(this->url) : QMediaContent(getOcsRequest(QNetworkRequest(this->url)));
+
     this->player->setMedia(media);
     this->emitState();
 }
 
-QString Player::getUrl() const
+QUrl Player::getUrl() const
 {
     return this->url;
 }

@@ -447,6 +447,7 @@ visible: !mainlistEmpty
                 root.dialog.show(function(paths)
                 {
                     vvave.openUrls(paths)
+                    root.dialog.close()
                 })
             }
         }/*,
