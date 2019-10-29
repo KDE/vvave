@@ -93,7 +93,7 @@ ColumnLayout
             trackDuration: false
             headBar.visible: !holder.visible
             title: playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
-            holder.emoji: "qrc:/assets/Electricity.png"
+            holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: false
             holder.title : playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
             holder.body: "Your playlist is empty,<br>start adding new music to it"

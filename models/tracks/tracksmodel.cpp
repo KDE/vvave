@@ -1,6 +1,7 @@
 #include "tracksmodel.h"
 #include "db/collectionDB.h"
 
+#include "NextCloud/nextmusic.h"
 
 TracksModel::TracksModel(QObject *parent) : MauiList(parent),
     db(CollectionDB::getInstance()) {}
@@ -111,10 +112,14 @@ void TracksModel::sortList()
 
 void TracksModel::setList()
 {
-    emit this->preListChanged();
-    this->list = this->db->getDBData(this->query);
-    this->sortList();
-    emit this->postListChanged();
+    auto provider = new NextMusic(this);
+
+    provider->setCredentials({{FMH::MODEL_KEY::SERVER, "https://cloud.opendesktop.cc/remote.php/webdav/"},{FMH::MODEL_KEY::USER, "mauitest"},{FMH::MODEL_KEY::PASSWORD, "mauitest"}});
+    provider->getCollection();
+//    emit this->preListChanged();
+//    this->list = this->db->getDBData(this->query);
+//    this->sortList();
+//    emit this->postListChanged();
 }
 
 QVariantMap TracksModel::get(const int &index) const

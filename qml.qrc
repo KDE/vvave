@@ -50,16 +50,6 @@
         <file>widgets/FloatingDisk.qml</file>
         <file>services/web/WebView.qml</file>
         <file>services/web/WebView_A.qml</file>
-        <file>assets/Bread.png</file>
-        <file>assets/ElectricPlug.png</file>
-        <file>assets/Electricity.png</file>
-        <file>assets/USB.png</file>
-        <file>assets/Radio.png</file>
-        <file>assets/MusicBox.png</file>
-        <file>assets/Video tutorial.png</file>
-        <file>assets/BugSearch.png</file>
-        <file>assets/Astronaut.png</file>
-        <file>assets/MusicCloud.png</file>
         <file>widgets/FoldersView.qml</file>
         <file>assets/vvave.svg</file>
         <file>assets/materialdesignicons-webfont.ttf</file>

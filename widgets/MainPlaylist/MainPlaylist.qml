@@ -115,7 +115,7 @@ Maui.Page
         trackRating: true
         showIndicator : true
         menuItemVisible: false
-        holder.emoji: "qrc:/assets/Radio.png"
+        holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.isMask: false
         holder.title : "Meh!"
         holder.body: "Start putting together your playlist!"

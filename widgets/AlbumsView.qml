@@ -124,7 +124,7 @@ BabeGrid
                 quickPlayVisible: true
                 focus: true
                 list.sortBy: Tracks.TRACK
-                holder.emoji: "qrc:/assets/ElectricPlug.png"
+                holder.emoji: "qrc:/assets/dialog-information.svg"
                 holder.isMask: false
                 holder.title : "Oops!"
                 holder.body: "This list is empty"

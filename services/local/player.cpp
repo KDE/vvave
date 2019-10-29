@@ -27,7 +27,6 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest& request)
         rawHeaders.insert(headerKey, request.rawHeader(headerKey));
     }
 
-
     const QString concatenated =  "mauitest:mauitest";
     const QByteArray data = concatenated.toLocal8Bit().toBase64();
     const QString headerData = "Basic " + data;

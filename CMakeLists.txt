@@ -18,6 +18,11 @@ include(ECMAddAppIcon)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTORCC ON)
 
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/services/web
+    ${CMAKE_CURRENT_BINARY_DIR}/services/web
+    )
+
 add_executable(vvave
     qml.qrc
     main.cpp
@@ -38,6 +43,7 @@ add_executable(vvave
     services/local/socket.cpp
     services/web/youtube.cpp
     services/web/NextCloud/nextmusic.cpp
+    services/web/abstractmusicprovider.cpp
 #    services/web/Spotify/spotify.cpp
     db/collectionDB.cpp
 #    utils/brain.cpp
