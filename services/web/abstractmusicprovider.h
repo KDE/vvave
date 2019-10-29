@@ -58,6 +58,17 @@ protected:
     QString m_provider = "";
 
 signals:
+    void collectionReady(FMH::MODEL_LIST data);
+    void tracksReady(FMH::MODEL_LIST data);
+    void trackReady(FMH::MODEL data);
+    void artistsRedy(FMH::MODEL_LIST data);
+    void artistReady(FMH::MODEL data);
+    void albumsReady(FMH::MODEL_LIST data);
+    void albumReady(FMH::MODEL data);
+    void playlistsReady(FMH::MODEL_LIST data);
+    void playlistReady(FMH::MODEL data);
+
+    void trackPathReady(QString id, QString path);
 
 public slots:
 };

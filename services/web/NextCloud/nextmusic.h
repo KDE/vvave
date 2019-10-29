@@ -14,7 +14,7 @@ private:
     const static QString API;
     static const QString formatUrl(const QString &user, const QString &password, const QString &provider);
 
-    FMH::MODEL_LIST parseResponse(const QByteArray &array);
+    FMH::MODEL_LIST parseCollection(const QByteArray &array);
 
 signals:
 
@@ -22,6 +22,8 @@ public slots:
 
     // AbstractMusicProvider interface
 public:
+    void getTrackPath(const QString &id);
+
     void getCollection(const std::initializer_list<QString> &parameters = {}) override final;
     void getTracks() override final;
     void getTrack(const QString &id) override final;

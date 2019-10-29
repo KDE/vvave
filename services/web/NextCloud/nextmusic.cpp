@@ -13,80 +13,160 @@
 
 static const inline QNetworkRequest formRequest(const QUrl &url, const  QString &user, const QString &password)
 {
-    if(!url.isValid() && !user.isEmpty() && !password.isEmpty())
-        return QNetworkRequest();
+  if(!url.isValid() && !user.isEmpty() && !password.isEmpty())
+    return QNetworkRequest();
 
-    const QString concatenated =  QString("%1:%2").arg(user, password);
-    const QByteArray data = concatenated.toLocal8Bit().toBase64();
-    const QString headerData = "Basic " + data;
-
-
-    // Construct new QNetworkRequest with prepared header values
-    QNetworkRequest newRequest(url);
-
-    newRequest.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
-//    newRequest.setRawHeader(QByteArrayLiteral("OCS-APIREQUEST"), QByteArrayLiteral("true"));
+  const QString concatenated =  QString("%1:%2").arg(user, password);
+  const QByteArray data = concatenated.toLocal8Bit().toBase64();
+  const QString headerData = "Basic " + data;
 
 
-    qDebug() << "headers" << newRequest.rawHeaderList() << newRequest.url();
+  // Construct new QNetworkRequest with prepared header values
+  QNetworkRequest newRequest(url);
 
-    return newRequest;
+  newRequest.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
+  //    newRequest.setRawHeader(QByteArrayLiteral("OCS-APIREQUEST"), QByteArrayLiteral("true"));
+
+
+  qDebug() << "headers" << newRequest.rawHeaderList() << newRequest.url();
+
+  return newRequest;
 }
 
 const QString NextMusic::API = QStringLiteral("https://PROVIDER/index.php/apps/music/api/");
 
 NextMusic::NextMusic(QObject *parent) : AbstractMusicProvider(parent) {}
 
-FMH::MODEL_LIST NextMusic::parseResponse(const QByteArray &array)
+FMH::MODEL_LIST NextMusic::parseCollection(const QByteArray &array)
 {
-    FMH::MODEL_LIST res;
-    qDebug()<< "trying to parse array" << array;
+  FMH::MODEL_LIST res;
+//  qDebug()<< "trying to parse array" << array;
+  QJsonParseError jsonParseError;
+  QJsonDocument jsonResponse = QJsonDocument::fromJson(static_cast<QString>(array).toUtf8(), &jsonParseError);
+
+  if (jsonParseError.error != QJsonParseError::NoError)
+  {
+    qDebug()<< "ERROR PARSING";
+    return res;
+  }
+
+  const auto data = jsonResponse.toVariant();
+
+  if(data.isNull() || !data.isValid())
+    return res;
+
+  const auto list = data.toList();
+  qDebug()<< "SOFAR GOOD PARSING";
+
+  if(!list.isEmpty())
+  {
+    for(const auto &item : list)
+    {
+      const auto map = item.toMap();
+      const auto artist = map.value("name").toString();
+      const auto artistId = map.value("id").toString();
+      qDebug()<< "ARTIST" << artist << artistId;
+
+      const auto albumsList = map.value("albums").toList();
+      for(const auto &albumItem : albumsList)
+      {
+        const auto albumMap = albumItem.toMap();
+        const auto album = albumMap.value("name").toString();
+        const auto albumId = albumMap.value("id").toString();
+        const auto albumYear = albumMap.value("year").toString();
+        const auto albumCover = albumMap.value("cover").toString();
+
+        qDebug()<< "ARTIST && ALBUM" << artist << album << artistId;
+
+        const auto tracksList = albumMap.value("tracks").toList();
+        for(const auto &trackItem : tracksList)
+        {
+          const auto trackMap = trackItem.toMap();
+
+          const auto title = trackMap.value("title").toString();
+          const auto track = trackMap.value("number").toString();
+          const auto id = trackMap.value("id").toString();
+
+          const auto filesMap = trackMap.value("files").toMap();
+          for(const auto &fileKey : filesMap.keys())
+          {
+            const auto mime = fileKey;
+            const auto url = filesMap[fileKey].toString();
+
+            res << FMH::MODEL({
+                                {FMH::MODEL_KEY::ID, url},
+                                {FMH::MODEL_KEY::TITLE, title},
+                                {FMH::MODEL_KEY::TRACK, track},
+                                {FMH::MODEL_KEY::ALBUM, album},
+                                {FMH::MODEL_KEY::ARTIST, artist},
+                                {FMH::MODEL_KEY::ARTWORK, albumCover},
+                                {FMH::MODEL_KEY::RELEASEDATE, albumYear},
+                                {FMH::MODEL_KEY::SOURCE, this->m_provider}
+                              });
+
+          }
+        }
+      }
+    }
+  }
+
+  qDebug()<< res;
+  return res;
+}
+
+void NextMusic::getTrackPath(const QString &id)
+{
+  auto url = QString(NextMusic::API+"file/%1/path").replace("PROVIDER", this->m_provider).arg(id);
+
+  QString concatenated = this->m_user + ":" + this->m_password;
+  QByteArray data = concatenated.toLocal8Bit().toBase64();
+  QString headerData = "Basic " + data;
+
+  QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
+
+  const auto downloader = new FMH::Downloader;
+  connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
+  {
     QJsonParseError jsonParseError;
     QJsonDocument jsonResponse = QJsonDocument::fromJson(static_cast<QString>(array).toUtf8(), &jsonParseError);
 
     if (jsonParseError.error != QJsonParseError::NoError)
     {
-        qDebug()<< "ERROR PARSING";
-        return res;
+      qDebug()<< "ERROR PARSING";
+      return;
     }
 
     const auto data = jsonResponse.toVariant();
 
     if(data.isNull() || !data.isValid())
-        return res;
+      return;
 
-    const auto list = data.toList();
+    const auto map = data.toMap();
+    const auto url = map["path"].toString();
+    emit this->trackPathReady(id, url);
+  });
 
-    if(!list.isEmpty())
-    {
-        for(const auto &map : list)
-            res << FMH::toModel(map.toMap());
-    }
-    else
-        res << FMH::toModel(data.toMap());
-
-    return res;
+  downloader->getArray(url, header);
 }
 
 void NextMusic::getCollection(const std::initializer_list<QString> &parameters)
 {
-    auto url = QString(NextMusic::API).replace("PROVIDER", this->m_provider).append("collection");
+  auto url = QString(NextMusic::API).replace("PROVIDER", this->m_provider).append("collection");
 
-    qDebug()<< "QQQQQQQQQQ" << url;
-    QString concatenated = this->m_user + ":" + this->m_password;
-    QByteArray data = concatenated.toLocal8Bit().toBase64();
-    QString headerData = "Basic " + data;
+  QString concatenated = this->m_user + ":" + this->m_password;
+  QByteArray data = concatenated.toLocal8Bit().toBase64();
+  QString headerData = "Basic " + data;
 
-    QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
+  QMap<QString, QString> header {{"Authorization", headerData.toLocal8Bit()}};
 
-    const auto downloader = new FMH::Downloader;
-    connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
-    {
-        qDebug()<< array;
-        this->parseResponse(array);
-    });
+  const auto downloader = new FMH::Downloader;
+  connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
+  {
+    const auto data = this->parseCollection(array);
+    emit this->collectionReady(data);
+  });
 
-    downloader->getArray(url, header);
+  downloader->getArray(url, header);
 }
 
 void NextMusic::getTracks()

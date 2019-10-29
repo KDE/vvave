@@ -114,6 +114,13 @@ void TracksModel::setList()
 {
     auto provider = new NextMusic(this);
 
+    connect(provider, &NextMusic::collectionReady, [=](FMH::MODEL_LIST data)
+    {
+          emit this->preListChanged();
+          this->list = data;
+          this->sortList();
+          emit this->postListChanged();
+    });
     provider->setCredentials({{FMH::MODEL_KEY::SERVER, "https://cloud.opendesktop.cc/remote.php/webdav/"},{FMH::MODEL_KEY::USER, "mauitest"},{FMH::MODEL_KEY::PASSWORD, "mauitest"}});
     provider->getCollection();
 //    emit this->preListChanged();
