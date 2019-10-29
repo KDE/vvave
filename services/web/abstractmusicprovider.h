@@ -37,6 +37,8 @@ public:
     virtual void getFolders() = 0;
     virtual void getFolder(const QString &id) = 0;
 
+    virtual QVariantList getAlbumsList() const {return QVariantList();}
+    virtual QVariantList getArtistsList() const {return QVariantList();}
     /**
      * @brief setCredentials
      * sets the credential to authenticate to the provider server
@@ -47,7 +49,7 @@ public:
     {
         this->m_user = account[FMH::MODEL_KEY::USER];
         this->m_password = account[FMH::MODEL_KEY::PASSWORD];
-        this->m_provider = QUrl(account[FMH::MODEL_KEY::SERVER]).host();
+        this->m_provider = account[FMH::MODEL_KEY::SERVER];
     }
 
     virtual QString user() final { return this->m_user; }

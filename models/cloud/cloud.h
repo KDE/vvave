@@ -17,6 +17,8 @@ class Cloud : public MauiList
 {
     Q_OBJECT
     Q_PROPERTY(Cloud::SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
+    Q_PROPERTY(QVariantList artists READ getArtists NOTIFY artistsChanged)
+    Q_PROPERTY(QVariantList albums READ getAlbums NOTIFY albumsChanged)
 
 public:   
     enum SORTBY : uint_fast8_t
@@ -43,14 +45,16 @@ public:
     void setSortBy(const Cloud::SORTBY &sort);
     Cloud::SORTBY getSortBy() const;
 
+    QVariantList getAlbums() const;
+    QVariantList getArtists() const;
+
 private:
     AbstractMusicProvider *provider;
     FMH::MODEL_LIST list;
     void sortList();
     void setList();
 
-    Cloud::SORTBY sort = Cloud::SORTBY::ADDDATE;
-
+    Cloud::SORTBY sort = Cloud::SORTBY::ARTIST;
 
 public slots:
     QVariantMap get(const int &index) const;
@@ -65,6 +69,9 @@ signals:
     void sortByChanged();
     void fileUrlReady(QString id, QUrl url);
     void warning(QString error);
+
+    void artistsChanged();
+    void albumsChanged();
 };
 
 #endif // CLOUD_H

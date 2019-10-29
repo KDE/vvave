@@ -48,12 +48,8 @@ BabeList
     signal playAll()
     signal appendAll()
 
-    //    altToolBars: true
-    onGroupChanged: groupBy()
     focus: true
 
-    //headBar.middleStrech: false
-    headBar.rightSretch: false
     headBar.leftContent: [
 
         ToolButton
@@ -174,11 +170,14 @@ BabeList
                 text: qsTr("Group")
                 checkable: true
                 checked: group
-                onTriggered: group = !group
+                onTriggered:
+                {
+                    group = !group
+                    groupBy()
+                }
             }
         }
     ]
-
 
     Maui.Dialog
     {

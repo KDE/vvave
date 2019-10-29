@@ -19,6 +19,12 @@ Maui.ItemDelegate
     property bool showIndicator :  false
     property bool hideRepeated : false
     property bool increaseCurrentItem : false
+
+    property alias label1 : _label1
+    property alias label2 : _label2
+    property alias image : _image
+
+
     isCurrentItem: GridView.isCurrentItem
     //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
 
@@ -60,8 +66,7 @@ Maui.ItemDelegate
             id: card
             z: -999
             visible: albumCard
-            anchors.centerIn: img
-            anchors.fill: img
+            anchors.fill: _image
 
             color: fillColor
             radius: albumRadius
@@ -69,7 +74,7 @@ Maui.ItemDelegate
 
         Image
         {
-            id: img
+            id: _image
             width: parent.width
             height: width
             sourceSize.width: width
@@ -78,28 +83,26 @@ Maui.ItemDelegate
             fillMode: Image.PreserveAspectFit
             smooth: true
             asynchronous: true
-            source: model.artwork ?  model.artwork : "qrc:/assets/cover.png"
 
             onStatusChanged:
             {
                 if (status == Image.Error)
-                 source = "qrc:/assets/cover.png";
-
-             }
+                    source = "qrc:/assets/cover.png";
+            }
 
             layer.enabled: albumRadius
             layer.effect: OpacityMask
             {
                 maskSource: Item
                 {
-                    width: img.width
-                    height: img.height
+                    width: _image.width
+                    height: _image.height
 
                     Rectangle
                     {
                         anchors.centerIn: parent
-                        width: img.adapt ? img.width : Math.min(img.width, img.height)
-                        height: img.adapt ? img.height : width
+                        width: _image.adapt ? _image.width : Math.min(_image.width, _image.height)
+                        height: _image.adapt ? _image.height : width
                         radius: albumRadius
                     }
                 }
@@ -110,8 +113,8 @@ Maui.ItemDelegate
         {
             visible : showIndicator && currentTrackIndex === index
 
-            height: img.height * 0.1
-            width: img.width * 0.1
+            height: _image.height * 0.1
+            width: _image.width * 0.1
             anchors.bottom: parent.bottom
             anchors.bottomMargin: Maui.Style.space.big
             anchors.horizontalCenter:parent.horizontalCenter
@@ -146,9 +149,9 @@ Maui.ItemDelegate
                 anchors.fill: parent
                 source: ShaderEffectSource
                 {
-                    sourceItem: img
+                    sourceItem: _image
                     sourceRect:Qt.rect(0,
-                                       img.height - _labelBg.height,
+                                       _image.height - _labelBg.height,
                                        _labelBg.width,
                                        _labelBg.height)
                 }
@@ -184,7 +187,7 @@ Maui.ItemDelegate
                             }
                         }
                     }
-                }               
+                }
             }
 
             ColumnLayout
@@ -197,9 +200,9 @@ Maui.ItemDelegate
 
                 Label
                 {
+                    id: _label1
                     Layout.fillWidth: visible
                     Layout.fillHeight: visible
-                    text: list.query === Albums.ALBUMS ? model.album : model.artist
                     visible: text && control.width > 50
                     horizontalAlignment: Qt.AlignLeft
                     elide: Text.ElideRight
@@ -212,10 +215,9 @@ Maui.ItemDelegate
 
                 Label
                 {
+                    id: _label2
                     Layout.fillWidth: visible
                     Layout.fillHeight: visible
-
-                    text: list.query === Albums.ALBUMS ? model.artist : ""
                     visible: text && (control.width > 70)
                     horizontalAlignment: Qt.AlignLeft
                     elide: Text.ElideRight

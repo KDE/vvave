@@ -71,6 +71,10 @@ Maui.Page
                 width: height
                 isCurrentItem: parent.isCurrentItem
 
+                label1.text: model.album ? model.album : model.artist
+                label2.text: model.artist && model.album ? model.artist : ""
+                image.source:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
+
                 Connections
                 {
                     target: albumDelegate

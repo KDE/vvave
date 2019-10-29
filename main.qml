@@ -11,7 +11,7 @@ import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
 import "widgets/SearchView"
-//import "widgets/CloudView"
+import "widgets/CloudView"
 
 import "view_models"
 import "view_models/BabeTable"
@@ -159,6 +159,12 @@ Maui.ApplicationWindow
         {
             icon.name: "view-media-track"
             text: qsTr("Tracks")
+        }
+
+        Action
+        {
+            text: qsTr("Cloud")
+            icon.name: "folder-cloud"
         }
 
         Action
@@ -670,6 +676,11 @@ visible: !mainlistEmpty
 
                     onQueueTrack: Player.queueTracks([tracksView.list.get(index)], index)
                 }
+            }
+
+            CloudView
+            {
+                id: cloudView
             }
 
             AlbumsView

@@ -11,21 +11,27 @@
 Cloud::Cloud(QObject *parent) : MauiList (parent),
     provider(new NextMusic(this))
 {
-    this->setList();
-
     connect(MauiAccounts::instance(), &MauiAccounts::currentAccountChanged, [this](QVariantMap account)
     {
         this->provider->setCredentials(FMH::toModel(account));
+        this->setList();
     });
 
     connect(provider, &AbstractMusicProvider::collectionReady, [=](FMH::MODEL_LIST data)
     {
-          emit this->preListChanged();
-          this->list = data;
-          this->sortList();
-          emit this->postListChanged();
+        emit this->albumsChanged();
+        emit this->artistsChanged();
+
+        emit this->preListChanged();
+        this->list = data;
+        this->sortList();
+        emit this->postListChanged();
     });
 
+    connect(static_cast<NextMusic *> (provider), &NextMusic::trackPathReady, [=](QString id, QString path)
+    {
+        qDebug() << "track path remot eurl is ready at "<< path << id;
+    });
 }
 
 void Cloud::componentComplete()
@@ -48,7 +54,17 @@ void Cloud::setSortBy(const Cloud::SORTBY &sort)
 
 Cloud::SORTBY Cloud::getSortBy() const
 {
-      return this->sort;
+    return this->sort;
+}
+
+QVariantList Cloud::getAlbums() const
+{
+    return this->provider->getAlbumsList();
+}
+
+QVariantList Cloud::getArtists() const
+{
+    return this->provider->getArtistsList();
 }
 
 FMH::MODEL_LIST Cloud::items() const
@@ -139,7 +155,7 @@ QVariantMap Cloud::get(const int &index) const
 
 QVariantList Cloud::getAll()
 {
-return QVariantList();
+    return QVariantList();
 }
 
 void Cloud::upload(const QUrl &url)
@@ -149,10 +165,13 @@ void Cloud::upload(const QUrl &url)
 
 void Cloud::getFileUrl(const QString &id)
 {
-
+    static_cast<NextMusic *>(this->provider)->getTrackPath(id);
 }
 
 void Cloud::getFileUrl(const int &index)
 {
+    if(index >= this->list.size() || index < 0)
+        return;
 
+    this->getFileUrl(this->list.at(index)[FMH::MODEL_KEY::ID]);
 }

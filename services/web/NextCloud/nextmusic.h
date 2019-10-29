@@ -9,12 +9,17 @@ class NextMusic : public AbstractMusicProvider
     Q_OBJECT
 public:
     explicit NextMusic(QObject *parent = nullptr);    
+    QVariantList getAlbumsList() const override final;
+    QVariantList getArtistsList() const override final;
 
 private:
     const static QString API;
     static const QString formatUrl(const QString &user, const QString &password, const QString &provider);
 
     FMH::MODEL_LIST parseCollection(const QByteArray &array);
+
+    QVariantList m_artists;
+    QVariantList m_albums;
 
 signals:
 
