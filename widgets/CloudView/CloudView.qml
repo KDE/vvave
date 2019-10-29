@@ -5,6 +5,7 @@ import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 import "../../view_models/BabeTable"
 import "../../view_models/BabeGrid"
+import "../../utils/Player.js" as Player
 
 import CloudList 1.0
 
@@ -22,6 +23,8 @@ Maui.Page
     Cloud
     {
         id: _cloudList
+
+        onFileReady: Player.addTrack(track)
     }
 
     headBar.leftContent: [

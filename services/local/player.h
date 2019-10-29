@@ -29,8 +29,6 @@ public:
 
     explicit Player(QObject *parent = nullptr);
 
-    void playBuffer();
-    Q_INVOKABLE void appendBuffe(QByteArray &array);
     void setUrl(const QUrl &value);
     QUrl getUrl() const;
 
@@ -56,9 +54,6 @@ private:
     int pos = 0;
     int volume = 100;
 
-    QBuffer *buffer;
-    QByteArray array;
-
     QUrl url;
     Player::STATE state = STATE::STOPED;
     bool playing = false;
@@ -83,7 +78,6 @@ signals:
 
 public slots:
     static QString transformTime(const int &pos);
-    void playRemote(const QString &url);
     void stop();
 
 };

@@ -8,30 +8,29 @@ function playTrack(index)
 
         if(typeof(currentTrack) === "undefined") return
 
-        if(Maui.FM.fileExists(currentTrack.url))
+        if(!Maui.FM.fileExists(currentTrack.url) && currentTrack.url.startsWith("file://"))
         {
-            player.url = currentTrack.url;
-            player.playing = true
+            missingAlert(currentTrack)
+            return
+        }
+
+        player.url = currentTrack.url;
+        player.playing = true
+        currentArtwork =  currentTrack.artwork
+
+        progressBar.enabled = true
+        root.title = currentTrack.title + " - " +currentTrack.artist
+
+        //                if(!root.active)
+        //                    bae.notifySong(currentTrack.url)
 
 
-            if(currentTrack.artwork && currentTrack.artwork.length && currentTrack.artwork !== "NONE")
-                currentArtwork =  currentTrack.artwork
-            //            else bae.loadCover(currentTrack.url)
+        //            if(currentTrack.lyrics.length < 1)
+        //                            bae.trackLyrics(currentTrack.url)
 
-            progressBar.enabled = true
-            root.title = currentTrack.title + " - " +currentTrack.artist
-
-                //                if(!root.active)
-                //                    bae.notifySong(currentTrack.url)
-
-
-            //            if(currentTrack.lyrics.length < 1)
-            //                            bae.trackLyrics(currentTrack.url)
-
-            //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
-            //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
-            //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
-        }else missingAlert(currentTrack)
+        //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
+        //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
+        //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
     }
 }
 

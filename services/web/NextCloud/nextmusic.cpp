@@ -110,7 +110,7 @@ FMH::MODEL_LIST NextMusic::parseCollection(const QByteArray &array)
                         const auto mime = fileKey;
                         const auto url = filesMap[fileKey].toString();
 
-                        res << FMH::MODEL({
+                        const auto trackModel = FMH::MODEL({
                                               {FMH::MODEL_KEY::ID, url},
                                               {FMH::MODEL_KEY::TITLE, title},
                                               {FMH::MODEL_KEY::TRACK, track},
@@ -121,6 +121,8 @@ FMH::MODEL_LIST NextMusic::parseCollection(const QByteArray &array)
                                               {FMH::MODEL_KEY::SOURCE, this->m_provider}
                                           });
 
+                        this->m_tracks.insert(url, trackModel);
+                        res << trackModel;
                     }
                 }
             }
@@ -129,6 +131,11 @@ FMH::MODEL_LIST NextMusic::parseCollection(const QByteArray &array)
 
     qDebug()<< res;
     return res;
+}
+
+FMH::MODEL NextMusic::getTrackItem(const QString &id)
+{
+    return this->m_tracks.value(id);
 }
 
 void NextMusic::getTrackPath(const QString &id)
@@ -159,10 +166,9 @@ void NextMusic::getTrackPath(const QString &id)
             return;
 
         const auto map = data.toMap();
-        const auto url = this->provider() + map["path"].toString();
-
-        qDebug()<< "TRACK PATH...." << url;
-        emit this->trackPathReady(id, url);
+        auto path = map["path"].toString();
+        const auto url = this->provider() + (path.startsWith("/") ? path.remove(0,1) : path);
+       emit this->trackPathReady(id, url);
     });
 
     downloader->getArray(url, header);

@@ -1,12 +1,16 @@
 #include "player.h"
 #include "../../utils/bae.h"
 
+#ifdef STATIC_MAUIKIT
+#include "mauiaccounts.h"
+#else
+#include <mauiaccounts.h>
+#endif
 
 Player::Player(QObject *parent) : QObject(parent),
     player(new QMediaPlayer(this)),
     updater(new QTimer(this))
 {
-    this->buffer = new QBuffer(this->player);
 
 //    connect(this->player, &QMediaPlayer::durationChanged, this, [&](qint64 dur)
 //    {
@@ -27,7 +31,9 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest& request)
         rawHeaders.insert(headerKey, request.rawHeader(headerKey));
     }
 
-    const QString concatenated =  "mauitest:mauitest";
+    const auto account = FMH::toModel(MauiAccounts::instance()->getCurrentAccount());
+
+    const QString concatenated =  QString("%1:%2").arg(account[FMH::MODEL_KEY::USER], account[FMH::MODEL_KEY::PASSWORD]);
     const QByteArray data = concatenated.toLocal8Bit().toBase64();
     const QString headerData = "Basic " + data;
 
@@ -100,24 +106,6 @@ void Player::emitState()
 QString Player::transformTime(const int &pos)
 {
     return BAE::transformTime(pos);
-}
-
-void Player::appendBuffe(QByteArray &array)
-{
-    qDebug()<<"APENDING TO BUFFER"<< array << this->array;
-    this->array.append(array, array.length());
-    amountBuffers++;
-
-    if(amountBuffers == 1)
-        playBuffer();
-}
-
-void Player::playRemote(const QString &url)
-{
-    qDebug()<<"Trying to play remote"<<url;
-    this->url = url;
-    this->player->setMedia(QUrl::fromUserInput(url));
-    this->play();
 }
 
 void Player::setUrl(const QUrl &value)
@@ -201,17 +189,6 @@ void Player::setPos(const int &value)
 int Player::getPos() const
 {
     return this->pos;
-}
-
-void Player::playBuffer()
-{
-    buffer->setData(array);
-    buffer->open(QIODevice::ReadOnly);
-    if(!buffer->isReadable()) qDebug()<<"Cannot read buffer";
-    player->setMedia(QMediaContent(),buffer);
-    this->url = "buffer";
-    this->play();
-    this->emitState();
 }
 
 void Player::update()

@@ -67,7 +67,7 @@ public slots:
 
 signals:
     void sortByChanged();
-    void fileUrlReady(QString id, QUrl url);
+    void fileReady(QVariantMap track);
     void warning(QString error);
 
     void artistsChanged();

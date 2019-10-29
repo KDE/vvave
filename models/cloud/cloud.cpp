@@ -30,7 +30,9 @@ Cloud::Cloud(QObject *parent) : MauiList (parent),
 
     connect(static_cast<NextMusic *> (provider), &NextMusic::trackPathReady, [=](QString id, QString path)
     {
-        qDebug() << "track path remot eurl is ready at "<< path << id;
+        auto track =  static_cast<NextMusic *> (provider)->getTrackItem(id);
+        track[FMH::MODEL_KEY::URL] = path;
+        emit this->fileReady(FMH::toMap(track));
     });
 }
 

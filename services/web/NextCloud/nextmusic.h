@@ -20,6 +20,7 @@ private:
 
     QVariantList m_artists;
     QVariantList m_albums;
+    QHash<QString, FMH::MODEL> m_tracks; //(id: trackMap)
 
 signals:
 
@@ -27,6 +28,8 @@ public slots:
 
     // AbstractMusicProvider interface
 public:
+
+    FMH::MODEL getTrackItem(const QString &id);
     void getTrackPath(const QString &id);
 
     void getCollection(const std::initializer_list<QString> &parameters = {}) override final;
