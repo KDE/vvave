@@ -27,6 +27,7 @@ linux:unix:!android {
 #DEFAULT COMPONENTS DEFINITIONS
     DEFINES *= \
         COMPONENT_EDITOR \
+        COMPONENT_ACCOUNTS \
         COMPONENT_FM \
         COMPONENT_TERMINAL \
         COMPONENT_TAGGING \
@@ -70,7 +71,9 @@ SOURCES += main.cpp \
     models/tracks/tracksmodel.cpp \
     models/playlists/playlistsmodel.cpp \
     models/albums/albumsmodel.cpp \
-#    models/cloud/cloud.cpp
+    services/web/NextCloud/nextmusic.cpp \
+    services/web/abstractmusicprovider.cpp \
+    models/cloud/cloud.cpp
 
 
 RESOURCES += qml.qrc \
@@ -98,7 +101,13 @@ HEADERS += \
     models/tracks/tracksmodel.h \
     models/playlists/playlistsmodel.h \
     models/albums/albumsmodel.h \
-#    models/cloud/cloud.h
+    services/web/NextCloud/nextmusic.h \
+    services/web/abstractmusicprovider.h \
+    models/cloud/cloud.h
+
+INCLUDEPATH += \
+     $$PWD/services/web \
+     $$PWD/services/web/NextCloud
 
 include(install.pri)
 

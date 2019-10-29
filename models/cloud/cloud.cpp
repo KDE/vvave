@@ -1,87 +1,54 @@
 #include "cloud.h"
-#include "services/local/taginfo.h"
+#include "abstractmusicprovider.h"
+#include "NextCloud/nextmusic.h"
 
-Cloud::Cloud(QObject *parent) : BaseList (parent)
+#ifdef STATIC_MAUIKIT
+#include "mauiaccounts.h"
+#else
+#include <mauiaccounts.h>
+#endif
+
+Cloud::Cloud(QObject *parent) : MauiList (parent),
+    provider(new NextMusic(this))
 {
-    this->fm = new FM(this);
     this->setList();
 
-//    connect(this->fm, &FM::cloudServerContentReady, [this](const FMH::MODEL_LIST &list, const QString &url)
-//    {
-//        Q_UNUSED(url);
-//        emit this->preListChanged();
-//        this->list = list;
-//        this->formatList();
-//        emit this->postListChanged();
-//    });
-
-    connect(this->fm, &FM::warningMessage, [this](const QString &message)
+    connect(MauiAccounts::instance(), &MauiAccounts::currentAccountChanged, [this](QVariantMap account)
     {
-        emit this->warning(message);
+        this->provider->setCredentials(FMH::toModel(account));
     });
 
-    connect(this->fm, &FM::newItem, [this](const FMH::MODEL &item, const QString &path)
+    connect(provider, &AbstractMusicProvider::collectionReady, [=](FMH::MODEL_LIST data)
     {
-        auto newItem = item;
-        auto url = item[FMH::MODEL_KEY::URL];
-        auto thumbnail = item[FMH::MODEL_KEY::THUMBNAIL];
-
-        newItem[FMH::MODEL_KEY::FAV] = QString("0");
-        newItem[FMH::MODEL_KEY::RATE] = QString("0");
-        newItem[FMH::MODEL_KEY::URL] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::URL];
-        newItem[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::PATH];
-
-        if(FMH::fileExists(QUrl::fromLocalFile(thumbnail)))
-        {
-            qDebug()<< "file exists:" << thumbnail;
-            TagInfo info;
-            info.feed(thumbnail);
-
-            newItem[FMH::MODEL_KEY::ARTIST] = info.getArtist();
-            newItem[FMH::MODEL_KEY::ALBUM] = info.getAlbum();
-            newItem[FMH::MODEL_KEY::TITLE] = info.getTitle();
-            newItem[FMH::MODEL_KEY::RELEASEDATE] = QString::number(info.getYear());
-            newItem[FMH::MODEL_KEY::TRACK] = QString::number(info.getTrack());
-        }else
-            newItem[FMH::MODEL_KEY::TITLE] = item[FMH::MODEL_KEY::LABEL];
-
-        emit this->preItemAppended();
-        this->list << newItem;
-        emit this->postItemAppended();
-
+          emit this->preListChanged();
+          this->list = data;
+          this->sortList();
+          emit this->postListChanged();
     });
 
-    connect(this->fm, &FM::cloudItemReady, [this](const FMH::MODEL &item, const QString &path)
-    {
-        qDebug()<< "REQUESTED CLOUD IMAGE READY << " << item;
-        Q_UNUSED(path);
-        auto newItem = item;
-        auto url = item[FMH::MODEL_KEY::URL];
-        auto thumbnail = item[FMH::MODEL_KEY::THUMBNAIL];
+}
 
-        newItem[FMH::MODEL_KEY::FAV] = QString("0");
-        newItem[FMH::MODEL_KEY::RATE] = QString("0");
-        newItem[FMH::MODEL_KEY::URL] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::URL];
-        newItem[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::PATH];
+void Cloud::componentComplete()
+{
 
-        if(FMH::fileExists(QUrl::fromLocalFile(thumbnail)))
-        {
-            qDebug()<< "file exists:" << thumbnail;
-            TagInfo info;
-            info.feed(thumbnail);
+}
 
-            newItem[FMH::MODEL_KEY::ARTIST] = info.getArtist();
-            newItem[FMH::MODEL_KEY::ALBUM] = info.getAlbum();
-            newItem[FMH::MODEL_KEY::TITLE] = info.getTitle();
-            newItem[FMH::MODEL_KEY::RELEASEDATE] = QString::number(info.getYear());
-            newItem[FMH::MODEL_KEY::TRACK] = QString::number(info.getTrack());
-        }else
-            newItem[FMH::MODEL_KEY::TITLE] = item[FMH::MODEL_KEY::LABEL];
+void Cloud::setSortBy(const Cloud::SORTBY &sort)
+{
+    if(this->sort == sort)
+        return;
 
+    this->sort = sort;
 
-        this->update(FM::toMap(newItem), this->pending.take(QString(item[FMH::MODEL_KEY::PATH]).replace(FMH::CloudCachePath+"opendesktop", FMH::PATHTYPE_URI[FMH::PATHTYPE_KEY::CLOUD_PATH])));
-        emit this->cloudItemReady(FM::toMap(newItem));
-    });
+    emit this->preListChanged();
+    this->sortList();
+    emit this->postListChanged();
+    emit this->sortByChanged();
+}
+
+Cloud::SORTBY Cloud::getSortBy() const
+{
+      return this->sort;
 }
 
 FMH::MODEL_LIST Cloud::items() const
@@ -89,60 +56,71 @@ FMH::MODEL_LIST Cloud::items() const
     return this->list;
 }
 
-void Cloud::setAccount(const QString value)
-{
-    if(this->account == value)
-        return;
-
-    this->account = value;
-    emit this->accountChanged();
-
-    this->setList();
-}
-
-QString Cloud::getAccount() const
-{
-    return this->account;
-}
-
 void Cloud::setList()
 {
-    emit this->preListChanged();
-    this->list.clear();
-    this->fm->getCloudServerContent(FMH::PATHTYPE_URI[FMH::PATHTYPE_KEY::CLOUD_PATH]+"/"+this->account, FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO], 3);
-    emit this->postListChanged();
+    this->provider->getCollection();
 }
 
-void Cloud::formatList()
+void Cloud::sortList()
 {
-    for(auto &item : this->list)
+    if(this->sort == Cloud::SORTBY::NONE)
+        return;
+
+    const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
+    std::sort(this->list.begin(), this->list.end(), [key](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
     {
-        auto url = item[FMH::MODEL_KEY::URL];
-        auto thumbnail = item[FMH::MODEL_KEY::THUMBNAIL];
-
-        item[FMH::MODEL_KEY::FAV] = QString("0");
-        item[FMH::MODEL_KEY::RATE] = QString("0");
-        item[FMH::MODEL_KEY::URL] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::URL];
-        item[FMH::MODEL_KEY::SOURCE] = FMH::fileExists(QUrl::fromLocalFile(thumbnail))? thumbnail : item[FMH::MODEL_KEY::PATH];
-
-        qDebug()<< "CLOUD FILE" << thumbnail;
-
-        if(FMH::fileExists(QUrl::fromLocalFile(thumbnail)))
+        switch(key)
         {
-            qDebug()<< "file exists:" << thumbnail;
-            TagInfo info;
-            info.feed(thumbnail);
+            case FMH::MODEL_KEY::RELEASEDATE:
+            case FMH::MODEL_KEY::RATE:
+            case FMH::MODEL_KEY::FAV:
+            case FMH::MODEL_KEY::COUNT:
+            {
+                if(e1[key].toInt() > e2[key].toInt())
+                    return true;
+                break;
+            }
 
-            item[FMH::MODEL_KEY::ARTIST] = info.getArtist();
-            item[FMH::MODEL_KEY::ALBUM] = info.getAlbum();
-            item[FMH::MODEL_KEY::TITLE] = info.getTitle();
-            item[FMH::MODEL_KEY::RELEASEDATE] = QString::number(info.getYear());
-            item[FMH::MODEL_KEY::TRACK] = QString::number(info.getTrack());
-        }else
-        {
-            item[FMH::MODEL_KEY::TITLE] = item[FMH::MODEL_KEY::LABEL];
+            case FMH::MODEL_KEY::TRACK:
+            {
+                if(e1[key].toInt() < e2[key].toInt())
+                    return true;
+                break;
+            }
+
+            case FMH::MODEL_KEY::ADDDATE:
+            {
+                auto currentTime = QDateTime::currentDateTime();
+
+                auto date1 = QDateTime::fromString(e1[key], Qt::TextDate);
+                auto date2 = QDateTime::fromString(e2[key], Qt::TextDate);
+
+                if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
+                    return true;
+
+                break;
+            }
+
+            case FMH::MODEL_KEY::TITLE:
+            case FMH::MODEL_KEY::ARTIST:
+            case FMH::MODEL_KEY::ALBUM:
+            case FMH::MODEL_KEY::FORMAT:
+            {
+                const auto str1 = QString(e1[key]).toLower();
+                const auto str2 = QString(e2[key]).toLower();
+
+                if(str1 < str2)
+                    return true;
+                break;
+            }
+
+            default:
+                if(e1[key] < e2[key])
+                    return true;
         }
-    }
+
+        return false;
+    });
 }
 
 QVariantMap Cloud::get(const int &index) const
@@ -159,39 +137,22 @@ QVariantMap Cloud::get(const int &index) const
     return res;
 }
 
-void Cloud::requestFile(const int &index)
+QVariantList Cloud::getAll()
 {
-    if(index < 0 || index >= this->list.size())
-        return;
-
-    this->pending.insert(this->list[index][FMH::MODEL_KEY::PATH], index);
-    qDebug()<< "1-PEDNIGN CLOUD"<< this->pending;
-
-    this->fm->getCloudItem(FM::toMap(this->list[index]));
+return QVariantList();
 }
 
-bool Cloud::update(const QVariantMap &data, const int &index)
+void Cloud::upload(const QUrl &url)
 {
-    if(index < 0 || index >= this->list.size())
-        return false;
 
-    auto newData = this->list[index];
-    QVector<int> roles;
-
-    for(auto key : data.keys())
-        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
-        {
-            newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
-            roles << FMH::MODEL_NAME_KEY[key];
-        }
-
-    this->list[index] = newData;
-
-    emit this->updateModel(index, roles);
-    return true;
 }
 
-void Cloud::upload(const QString &url)
+void Cloud::getFileUrl(const QString &id)
 {
-    this->fm->copy({FMH::getFileInfo(url)}, FMH::PATHTYPE_URI[FMH::PATHTYPE_KEY::CLOUD_PATH]+"/"+this->account);
+
+}
+
+void Cloud::getFileUrl(const int &index)
+{
+
 }

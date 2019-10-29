@@ -2,50 +2,68 @@
 #define CLOUD_H
 
 #include <QObject>
-#include "../baselist.h"
+
+#ifdef STATIC_MAUIKIT
+#include "fmh.h"
+#include "mauilist.h"
+#else
+#include <MauiKit/fmh.h>
+#include <MauiKit/mauilist.h>
+#endif
 
 class FM;
-class Cloud : public BaseList
+class AbstractMusicProvider;
+class Cloud : public MauiList
 {
     Q_OBJECT
-    Q_PROPERTY(QString account READ getAccount WRITE setAccount NOTIFY accountChanged)
+    Q_PROPERTY(Cloud::SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
 
 public:   
     enum SORTBY : uint_fast8_t
     {
-        SIZE = FMH::MODEL_KEY::SIZE,
-        MODIFIED = FMH::MODEL_KEY::MODIFIED,
-        DATE = FMH::MODEL_KEY::DATE,
-        LABEL = FMH::MODEL_KEY::LABEL,
-        MIME = FMH::MODEL_KEY::MIME
+        ADDDATE = FMH::MODEL_KEY::ADDDATE,
+        RELEASEDATE = FMH::MODEL_KEY::RELEASEDATE,
+        FORMAT = FMH::MODEL_KEY::FORMAT,
+        ARTIST = FMH::MODEL_KEY::ARTIST,
+        TITLE = FMH::MODEL_KEY::TITLE,
+        ALBUM = FMH::MODEL_KEY::ALBUM,
+        RATE = FMH::MODEL_KEY::RATE,
+        FAV = FMH::MODEL_KEY::FAV,
+        TRACK = FMH::MODEL_KEY::TRACK,
+        COUNT = FMH::MODEL_KEY::COUNT,
+        NONE
 
     }; Q_ENUM(SORTBY)
 
     explicit Cloud(QObject *parent = nullptr);
+    void componentComplete() override final;
+
     FMH::MODEL_LIST items() const override;
 
-    void setAccount(const QString value);
-    QString getAccount() const;
+    void setSortBy(const Cloud::SORTBY &sort);
+    Cloud::SORTBY getSortBy() const;
 
 private:
+    AbstractMusicProvider *provider;
     FMH::MODEL_LIST list;
+    void sortList();
     void setList();
-    void formatList();
 
-    QHash<QString, int> pending;
+    Cloud::SORTBY sort = Cloud::SORTBY::ADDDATE;
 
-    QString account;
-    FM *fm;
 
 public slots:
-    QVariantMap get(const int &index) const override;
-    void requestFile(const int &index);
-    bool update(const QVariantMap &data, const int &index) override;
-    void upload(const QString &url);
+    QVariantMap get(const int &index) const;
+    QVariantList getAll();
+
+    void upload(const QUrl &url);
+
+    void getFileUrl(const QString &id);
+    void getFileUrl(const int &index);
 
 signals:
-    void accountChanged();
-    void cloudItemReady(QVariantMap item);
+    void sortByChanged();
+    void fileUrlReady(QString id, QUrl url);
     void warning(QString error);
 };
 

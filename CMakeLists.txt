@@ -50,7 +50,7 @@ add_executable(vvave
     models/tracks/tracksmodel.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
-#    models/cloud/cloud.cpp
+    models/cloud/cloud.cpp
     )
 
 if (ANDROID)
