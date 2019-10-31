@@ -22,14 +22,12 @@ BabeTable
 
     trackNumberVisible: false
     headBar.visible: count
-    holder.emoji: "qrc:/assets/BugSearch.png"
+    holder.emoji: "qrc:/assets/dialog-information.svg"
     holder.isMask: false
     holder.title : "No search results!"
     holder.body: "Try with another query"
     holder.emojiSize: Maui.Style.iconSizes.huge
     coverArtVisible: true
-    trackDuration: true
-    trackRating: true
 
     headBar.leftContent: ToolButton
     {

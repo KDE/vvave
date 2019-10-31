@@ -33,8 +33,10 @@ Menu
     signal colorClicked(color color)
     signal infoClicked()
     signal copyToClicked()
+    signal appendClicked()
 
     property alias menuItem : control.contentData
+
 
     MenuItem
     {
@@ -42,6 +44,10 @@ Menu
         onTriggered:
         {
             H.addToSelection(list.get(listView.currentIndex))
+
+            if(Kirigami.Settings.isMobile)
+                selectionMode = true
+
             contextMenu.close()
         }
     }
@@ -70,6 +76,18 @@ Menu
 
     MenuItem
     {
+        text: qsTr("Append")
+        onTriggered:
+        {
+            appendClicked()
+            close()
+        }
+    }
+
+    MenuSeparator{}
+
+    MenuItem
+    {
         text: !fav ? qsTr("Fav it"): qsTr("UnFav it")
         onTriggered:
         {
@@ -80,7 +98,7 @@ Menu
 
     MenuItem
     {
-        text: qsTr("Add to...")
+        text: qsTr("Add to")
         onTriggered:
         {
             saveToClicked()
@@ -114,7 +132,7 @@ Menu
 
     MenuItem
     {
-        text: qsTr("Show in folder...")
+        text: qsTr("Show in folder")
         visible: !isAndroid
         onTriggered:
         {
@@ -128,7 +146,7 @@ Menu
     MenuItem
     {
         visible: false
-        text: qsTr("Edit...")
+        text: qsTr("Edit.")
         onTriggered:
         {
             editClicked()

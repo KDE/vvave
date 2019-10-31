@@ -1,5 +1,5 @@
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+import QtQuick 2.12
+import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
@@ -21,14 +21,8 @@ BabeList
     property alias removeDialog : _removeDialog
 
     property bool trackNumberVisible
-    property bool quickPlayVisible : true
     property bool coverArtVisible : false
-    property bool menuItemVisible : isMobile
-    property bool trackDuration
-    property bool trackRating
     property bool allowMenu: true
-    property bool isArtworkRemote : false
-    property bool showIndicator : false
 
     property bool group : false
 
@@ -39,9 +33,11 @@ BabeList
     property alias appendBtn : appendBtn
 
     signal rowClicked(int index)
+    signal rowDoubleClicked(int index)
     signal rowPressed(int index)
     signal quickPlayTrack(int index)
     signal queueTrack(int index)
+    signal appendTrack(int index)
 
     signal artworkDoubleClicked(int index)
 
@@ -49,7 +45,7 @@ BabeList
     signal appendAll()
 
     focus: true
-
+    listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
     headBar.leftContent: [
 
         ToolButton
@@ -229,6 +225,7 @@ BabeList
 
         onQueueClicked: Player.queueTracks([list.get(listView.currentIndex)])
         onPlayClicked: quickPlayTrack(listView.currentIndex)
+        onAppendClicked: appendTrack(listView.currentIndex)
 
         onSaveToClicked:
         {
@@ -318,16 +315,13 @@ BabeList
         width: listView.width
 
         number : trackNumberVisible ? true : false
-        quickPlay: quickPlayVisible
         coverArt : coverArtVisible ? (babeTableRoot.width > 300) : coverArtVisible
-        trackDurationVisible : trackDuration
-        trackRatingVisible : trackRating
-        menuItem: menuItemVisible
-        remoteArtwork: isArtworkRemote
-        playingIndicator: showIndicator
 
-        onPressAndHold: if(isMobile && allowMenu) openItemMenu(index)
+        onPressAndHold: if(Kirigami.Settings.isMobile && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)
+
+        onLeftEmblemClicked: H.addToSelection(list.get(index))
+        isSelected: selectionBar.contains(model.url)
 
         onClicked:
         {
@@ -338,15 +332,15 @@ BabeList
                 return
             }
 
-            if(isMobile)
+            if(Kirigami.Settings.isMobile)
                 rowClicked(index)
-
         }
 
         onDoubleClicked:
         {
             currentIndex = index
-            if(!isMobile)
+
+            if(!Kirigami.Settings.isMobile)
                 rowClicked(index)
         }
 
@@ -356,10 +350,36 @@ BabeList
             quickPlayTrack(index)
         }
 
+        onAppend:
+        {
+            currentIndex = index
+            appendTrack(index)
+        }
+
         onArtworkCoverClicked:
         {
             currentIndex = index
             goToAlbum()
+        }
+
+        Connections
+        {
+            target: selectionBar
+
+            onPathRemoved:
+            {
+                if(path === model.url)
+                    delegate.isSelected = false
+            }
+
+            onPathAdded:
+            {
+                if(path === model.url)
+                    delegate.isSelected = true
+            }
+
+            onCleared: delegate.isSelected = false
+
         }
     }
 
@@ -401,16 +421,16 @@ BabeList
 
     function goToAlbum()
     {
-        root.currentView = viewsIndex.albums
-        var item = list.get(listView.currentIndex)
+        swipeView.currentIndex = viewsIndex.albums
+        const item = list.get(listView.currentIndex)
         albumsView.populateTable(item.album, item.artist)
         contextMenu.close()
     }
 
     function goToArtist()
     {
-        root.currentView = viewsIndex.artists
-        var item = list.get(listView.currentIndex)
+        swipeView.currentIndex = viewsIndex.artists
+        const item = list.get(listView.currentIndex)
         artistsView.populateTable(undefined, item.artist)
         contextMenu.close()
     }

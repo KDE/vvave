@@ -87,10 +87,7 @@ ColumnLayout
             id: filterList
             anchors.fill: parent
             clip: true
-            quickPlayVisible: true
             coverArtVisible: true
-            trackRating: true
-            trackDuration: false
             headBar.visible: !holder.visible
             title: playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
             holder.emoji: "qrc:/assets/dialog-information.svg"

@@ -55,6 +55,7 @@
         <file>assets/materialdesignicons-webfont.ttf</file>
         <file>widgets/CloudView/CloudView.qml</file>
         <file>widgets/SelectionBarMenu.qml</file>
+        <file>widgets/FocusView.qml</file>
     </qresource>
     <qresource prefix="/DB">
         <file>db/script.sql</file>

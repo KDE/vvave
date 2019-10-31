@@ -112,7 +112,6 @@ function playAt(index)
     {
         currentTrackIndex = index
         mainPlaylist.listView.currentIndex = currentTrackIndex
-        mainPlaylist.albumsRoll.positionAlbum(currentTrackIndex)
         playTrack(currentTrackIndex)
     }
 }
@@ -123,8 +122,6 @@ function quickPlay(track)
     appendTrack(track)
     playAt(mainPlaylist.listView.count-1)
     mainPlaylist.listView.positionViewAtEnd()
-    mainPlaylist.albumsRoll.positionViewAtEnd()
-
 }
 
 function appendTracksAt(tracks, at)

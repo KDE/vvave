@@ -91,11 +91,7 @@ ColumnLayout
                 anchors.fill: parent
                 clip: true
 
-                quickPlayVisible: true
                 coverArtVisible: false
-                trackRating: true
-                trackDuration: false
-                allowMenu: false
                 headBar.visible: true
                 headBarExitIcon: "go-previous"
                 headBarExit: !linkingPage.wideMode

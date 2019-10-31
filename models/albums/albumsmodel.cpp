@@ -118,9 +118,10 @@ void AlbumsModel::setList()
     }
 });
 
-//this->fetchInformation();
 this->sortList();
 emit this->postListChanged();
+
+this->fetchInformation();
 }
 
 void AlbumsModel::fetchInformation()
@@ -164,7 +165,7 @@ void AlbumsModel::fetchInformation()
                     if(res.context == PULPO::CONTEXT::IMAGE && !res.value.toString().isEmpty())
                     {
                         auto downloader = new FMH::Downloader;
-                        QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, index, request, downloader = std::move(downloader)](QString path)
+                        QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, index, request, _downloader = std::move(downloader)](QString path)
                         {
                             FMH::MODEL newTrack = request.track;
                             newTrack[FMH::MODEL_KEY::ARTWORK] = QUrl::fromLocalFile(path).toString();
@@ -174,7 +175,7 @@ void AlbumsModel::fetchInformation()
                             album[FMH::MODEL_KEY::ARTWORK] = newTrack[FMH::MODEL_KEY::ARTWORK];
                             emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
 
-                            downloader->deleteLater();
+                            _downloader->deleteLater();
                         });
 
                         QStringList filePathList = res.value.toString().split('/');

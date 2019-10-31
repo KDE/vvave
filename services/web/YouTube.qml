@@ -187,16 +187,7 @@ Maui.Page
             holder.body: "Try with another query"
             holder.emojiSize: Maui.Style.iconSizes.huge
             coverArtVisible: true
-            trackDuration: true
-            trackRating: true
-            isArtworkRemote: true
-            allowMenu: false
-
             model: ListModel{}
-
-            //            appendBtn.visible: false
-            //            playAllBtn.visible: false
-
             onRowClicked:
             {
                 watchVideo(youtubeTable.model.get(index))
@@ -206,7 +197,6 @@ Maui.Page
             {
                 playTrack(youtubeTable.model.get(index).url)
             }
-
         }
 
         YoutubeViewer

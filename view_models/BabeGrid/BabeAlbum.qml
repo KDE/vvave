@@ -46,31 +46,9 @@ Maui.ItemDelegate
 
     Item
     {
+        id: _cover
         anchors.fill: parent
         anchors.margins: Maui.Style.space.tiny
-
-        DropShadow
-        {
-            anchors.fill: card
-            visible: card.visible
-            horizontalOffset: 0
-            verticalOffset: 0
-            radius: 8.0
-            samples: 17
-            color: "#80000000"
-            source: card
-        }
-
-        Rectangle
-        {
-            id: card
-            z: -999
-            visible: albumCard
-            anchors.fill: _image
-
-            color: fillColor
-            radius: albumRadius
-        }
 
         Image
         {
@@ -229,6 +207,15 @@ Maui.ItemDelegate
         }
     }
 
-
-
+    DropShadow
+    {
+        anchors.fill: _cover
+        visible: !control.hovered
+        horizontalOffset: 0
+        verticalOffset: 0
+        radius: 8.0
+        samples: 17
+        color: "#80000000"
+        source: _cover
+    }
 }

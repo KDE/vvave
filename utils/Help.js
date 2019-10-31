@@ -63,7 +63,7 @@ function refreshTracks()
 function refreshAlbums()
 {
     albumsView.list.refresh()
-//    albumsView.list.fetchInformation();
+    //    albumsView.list.fetchInformation();
 }
 
 function refreshArtists()
@@ -99,6 +99,12 @@ function addSource()
 
 function addToSelection(item)
 {
+    if(selectionBar.contains(item.url))
+    {
+        selectionBar.removeAtPath(item.url)
+        return
+    }
+
     item.thumbnail= item.artwork
     item.icon = "audio-x-generic"
     item.label= item.title

@@ -9,14 +9,11 @@ BabeTable
 {
     id: tracksViewTable
     trackNumberVisible: false
-    trackDuration: true
-    trackRating: true
     headBar.visible: !holder.visible
     coverArtVisible: false
-    holder.emoji: "qrc:/assets/MusicCloud.png"
-    holder.isMask: false
-    holder.title : "No Tracks!"
-    holder.body: "Add new music sources"
+    holder.emoji: "qrc:/assets/dialog-information.svg"
+    holder.title : qsTr("No Tracks!")
+    holder.body: qsTr("Add new music sources")
     holder.emojiSize: Maui.Style.iconSizes.huge
     list.query: Q.GET.allTracks
 }

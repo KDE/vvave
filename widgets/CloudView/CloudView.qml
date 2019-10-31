@@ -27,6 +27,8 @@ Maui.Page
         onFileReady: Player.addTrack(track)
     }
 
+    headBar.visible: !_listView.holder.visible
+
     headBar.leftContent: [
 
         ToolButton
@@ -34,14 +36,14 @@ Maui.Page
             id : playAllBtn
             //            text: qsTr("Play all")
             icon.name : "media-playlist-play"
-//            onClicked: playAll()
+            //            onClicked: playAll()
         },
         ToolButton
         {
             id: appendBtn
             //            text: qsTr("Append")
             icon.name : "media-playlist-append"//"media-repeat-track-amarok"
-//            onClicked: appendAll()
+            //            onClicked: appendAll()
         }]
 
 
@@ -160,6 +162,20 @@ Maui.Page
         anchors.fill: parent
         clip: true
         holder.visible: count === 0
+        holder.emoji: "qrc:/assets/dialog-information.svg"
+        holder.title : qsTr("Opps!")
+        holder.body: qsTr("You don't have an account set up.\nYou can set up your account now by clicking here or under the Accounts options in the main menu")
+
+        Connections
+        {
+            target: _listView.holder
+            onActionTriggered:
+            {
+                if(root.accounts)
+                    root.accounts.open()
+            }
+        }
+
         topMargin: Maui.Style.space.medium
         model: _cloudModel
         section.property: "artist"
@@ -186,8 +202,11 @@ Maui.Page
             height: 150
             z: _listView.listView.z+999
             color: Kirigami.Theme.backgroundColor
+            visible: _headList.count > 0
+
             ListView
             {
+                id: _headList
                 anchors.fill: parent
                 anchors.margins: Maui.Style.space.medium
                 spacing: Maui.Style.space.medium
@@ -216,61 +235,49 @@ Maui.Page
         delegate: TableDelegate
         {
             id: delegate
-
             width: parent.width
-
             number :  false
-            quickPlay: true
             coverArt : false
-            trackDurationVisible : false
-            trackRatingVisible : false
-            menuItem: false
-            remoteArtwork: false
-            playingIndicator: false
-
-//            onPressAndHold: if(isMobile && allowMenu) openItemMenu(index)
-//            onRightClicked: if(allowMenu) openItemMenu(index)
-
             onClicked:
             {
                 _listView.currentIndex = index
-//                if(selectionMode)
-//                {
-//                    H.addToSelection(control.list.get(_listView.currentIndex))
-//                    return
-//                }
+                //                if(selectionMode)
+                //                {
+                //                    H.addToSelection(control.list.get(_listView.currentIndex))
+                //                    return
+                //                }
 
                 list.getFileUrl(index);
 
-//                if(isMobile)
-//                    rowClicked(index)
+                //                if(isMobile)
+                //                    rowClicked(index)
 
             }
 
-//            onDoubleClicked:
-//            {
-//                currentIndex = index
-//                if(!isMobile)
-//                    rowClicked(index)
-//            }
+            //            onDoubleClicked:
+            //            {
+            //                currentIndex = index
+            //                if(!isMobile)
+            //                    rowClicked(index)
+            //            }
 
-//            onPlay:
-//            {
-//                currentIndex = index
-//                if(Maui.FM.fileExists("file://" + _cloudList.get(index).thumbnail))
-//                {
-//                    quickPlayTrack(index)
-//                }else
-//                {
-//                    _cloudList.requestFile(index)
-//                }
-//            }
+            //            onPlay:
+            //            {
+            //                currentIndex = index
+            //                if(Maui.FM.fileExists("file://" + _cloudList.get(index).thumbnail))
+            //                {
+            //                    quickPlayTrack(index)
+            //                }else
+            //                {
+            //                    _cloudList.requestFile(index)
+            //                }
+            //            }
 
-//            onArtworkCoverClicked:
-//            {
-//                currentIndex = index
-//                goToAlbum()
-//            }
+            //            onArtworkCoverClicked:
+            //            {
+            //                currentIndex = index
+            //                goToAlbum()
+            //            }
         }
 
     }

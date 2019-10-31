@@ -10,13 +10,7 @@
 Player::Player(QObject *parent) : QObject(parent),
     player(new QMediaPlayer(this)),
     updater(new QTimer(this))
-{
-
-//    connect(this->player, &QMediaPlayer::durationChanged, this, [&](qint64 dur)
-//    {
-//        emit this->durationChanged(/*BAE::transformTime(dur/1000)*/);
-//    });
-
+{ 
     this->player->setVolume(this->volume);
     connect(this->updater, &QTimer::timeout, this, &Player::update);
 }
@@ -150,7 +144,6 @@ int Player::getDuration() const
     return static_cast<int>(this->player->duration());
 }
 
-
 Player::STATE Player::getState() const
 {
     return this->state;
@@ -196,6 +189,7 @@ void Player::update()
     if(this->player->isAvailable())
     {
         this->pos = static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);;
+        emit this->durationChanged();
         emit this->posChanged();
     }
 

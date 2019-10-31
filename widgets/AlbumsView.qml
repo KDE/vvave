@@ -27,6 +27,7 @@ BabeGrid
     signal rowClicked(var track)
     signal playTrack(var track)
     signal queueTrack(var track)
+    signal appendTrack(var track)
 
     signal appendAll(string album, string artist)
     signal playAll(string album, string artist)
@@ -118,10 +119,8 @@ BabeGrid
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 trackNumberVisible: true
-                trackRating: true
                 headBar.visible: true
                 coverArtVisible: true
-                quickPlayVisible: true
                 focus: true
                 list.sortBy: Tracks.TRACK
                 holder.emoji: "qrc:/assets/dialog-information.svg"
@@ -143,6 +142,11 @@ BabeGrid
                 onQueueTrack:
                 {
                     albumsViewGrid.queueTrack(list.get(index))
+                }
+
+                onAppendTrack:
+                {
+                    albumsViewGrid.appendTrack(list.get(index))
                 }
 
                 onPlayAll:
