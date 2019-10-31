@@ -212,6 +212,7 @@ Maui.ApplicationWindow
     Loader
     {
         id: _focusViewLoader
+        focus: true
         source: focusView ? "widgets/FocusView.qml" : ""
     }
 

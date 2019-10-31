@@ -73,10 +73,7 @@ Item
 
         drag.minimumY: 0
         drag.maximumY: root.height
-        onClicked:
-        {
-            _drawer.visible = true
-        }
+        onClicked: _drawer.visible = true
 
         Rectangle
         {
@@ -136,7 +133,6 @@ Item
         DropShadow
         {
             anchors.fill: diskBg
-            visible: card.visible
             horizontalOffset: 0
             verticalOffset: 0
             radius: 8.0

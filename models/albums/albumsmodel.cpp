@@ -108,19 +108,20 @@ void AlbumsModel::setList()
     //get albums data with modifier for missing images for artworks
     this->list = this->db->getDBData(m_Query, [&](FMH::MODEL &item)
     {
-            if(!item[FMH::MODEL_KEY::ARTWORK].isEmpty())
+            if(item[FMH::MODEL_KEY::ARTWORK].isEmpty())
             return;
 
-    if(QUrl(item[FMH::MODEL_KEY::ARTWORK]).isLocalFile() && !FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
+    if(!FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
     {
-        this->db->removeArtwork(FMH::MODEL_NAME[static_cast<FMH::MODEL_KEY>(this->query)], FMH::toMap(item));
+        const auto table = this->query == AlbumsModel::QUERY::ALBUMS ?  "albums" : "artists";
+        this->db->removeArtwork(table, FMH::toMap(item));
         item[FMH::MODEL_KEY::ARTWORK] = "";
-    }
-});
+    }});
 
 this->sortList();
 emit this->postListChanged();
 
+if(this->query == AlbumsModel::QUERY::ALBUMS)
 this->fetchInformation();
 }
 
@@ -170,7 +171,7 @@ void AlbumsModel::fetchInformation()
                             FMH::MODEL newTrack = request.track;
                             newTrack[FMH::MODEL_KEY::ARTWORK] = QUrl::fromLocalFile(path).toString();
                             this->db->insertArtwork(newTrack);
-//                            this->updateArtwork(index, path);
+                            //                            this->updateArtwork(index, path);
 
                             album[FMH::MODEL_KEY::ARTWORK] = newTrack[FMH::MODEL_KEY::ARTWORK];
                             emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
@@ -196,32 +197,31 @@ void AlbumsModel::fetchInformation()
         Pulpo pulpo;
         QEventLoop loop;
         QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
-
-        QObject::connect(this, &AlbumsModel::destroyed, [&stop]()
+        QObject::connect(this, &AlbumsModel::destroyed, [&pulpo, &loop, &stop]()
         {
             qDebug()<< stop << &stop;
+            pulpo.disconnect();
             stop = true;
+            if(loop.isRunning())
+                loop.quit();
             qDebug()<< stop << &stop;
-
         });
 
         for(const auto &req : requests)
         {
-            pulpo.request(req);
             if(stop)
             {
                 qDebug()<< "TRYING EXITING THREAD LOADINFO" << loop.isRunning();
-
-                if(loop.isRunning())
-                    loop.quit();
-
                 qDebug()<< "EXITING THREAD LOADINFO" << loop.isRunning();
                 break;
             }else {
+                pulpo.request(req);
                 loop.exec();
-
             }
         }
+
+        qDebug()<< "DISCONNET SIGNAL";
+        disconnect(this, SIGNAL(destroyed()));
     };
 
     QFuture<void> t1 = QtConcurrent::run(func);

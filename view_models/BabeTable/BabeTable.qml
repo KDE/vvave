@@ -13,7 +13,7 @@ import ".."
 
 BabeList
 {
-    id: babeTableRoot
+    id: control
     //    cacheBuffer : 300
 
     property alias list : _tracksList
@@ -172,8 +172,30 @@ BabeList
                     groupBy()
                 }
             }
+        },
+
+        ToolButton
+        {
+            id: _filterButton
+            icon.name: "view-filter"
+            checkable: true
         }
     ]
+
+    listView.headerPositioning: ListView.PullBackHeader
+
+    listView.header: Maui.ToolBar
+    {
+        visible: _filterButton.checked
+        width: control.width
+        position: ToolBar.Header
+        middleContent: Maui.TextField
+        {
+            Layout.fillWidth: true
+
+        }
+
+    }
 
     Maui.Dialog
     {
@@ -282,7 +304,7 @@ BabeList
         id: _sectionDelegate
         label: section
         isSection: true
-        width: babeTableRoot.width
+        width: control.width
         Kirigami.Theme.backgroundColor: "#333"
         Kirigami.Theme.textColor: "#fafafa"
 
@@ -302,7 +324,7 @@ BabeList
     Tracks
     {
         id: _tracksList
-        onSortByChanged: if(babeTableRoot.group) babeTableRoot.groupBy()
+        onSortByChanged: if(control.group) control.groupBy()
     }
 
     model: _tracksModel
@@ -315,7 +337,7 @@ BabeList
         width: listView.width
 
         number : trackNumberVisible ? true : false
-        coverArt : coverArtVisible ? (babeTableRoot.width > 300) : coverArtVisible
+        coverArt : coverArtVisible ? (control.width > 300) : coverArtVisible
 
         onPressAndHold: if(Kirigami.Settings.isMobile && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)

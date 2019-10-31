@@ -195,17 +195,17 @@ bool CollectionDB::update(const QString &tableName, const FMH::MODEL &updateData
     }
 
     QStringList set;
-    for (auto key : updateData.keys())
-        set.append(FMH::MODEL_NAME[key]+" = '"+updateData[key]+"'");
+    for (const auto &key : updateData.keys())
+        set.append(QString("%1 = \"%2\"").arg(FMH::MODEL_NAME[key],updateData[key]));
 
     QStringList condition;
-    for (auto key : where.keys())
-        condition.append(key+" = '"+where[key].toString()+"'");
+    for (const auto &key : where.keys())
+        condition.append(QString("%1 = \"%2\"").arg(key, where[key].toString()));
 
-    const QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(",")) ;
+    const QString sqlQueryString = "UPDATE " + tableName + " SET " + QString(set.join(",")) + " WHERE " + QString(condition.join(" AND ")) ;
     auto query = this->getQuery(sqlQueryString);
     qDebug()<<sqlQueryString;
-    return query.exec();
+    return this->execQuery(query);
 }
 
 bool CollectionDB::update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id)
@@ -230,7 +230,7 @@ bool CollectionDB::execQuery(QSqlQuery &query) const
 bool CollectionDB::execQuery(const QString &queryTxt)
 {
     auto query = this->getQuery(queryTxt);
-    return query.exec();
+    return this->execQuery(query);
 }
 
 void CollectionDB::openDB(const QString &name)

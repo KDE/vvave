@@ -12,13 +12,18 @@ Rectangle
     visible: focusView
     parent: ApplicationWindow.overlay
     anchors.fill: parent
-    z: parent.z +1
+    z: parent.z + 99999
     color: Kirigami.Theme.backgroundColor
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
 
-    Component.onCompleted: forceActiveFocus()
+    focus: true
+    Component.onCompleted:
+    {
+        _drawer.close()
+        forceActiveFocus()
+    }
 
     Keys.onBackPressed:
     {
@@ -31,7 +36,6 @@ Rectangle
         sequence: StandardKey.Back
         onActivated: focusView = false
     }
-
 
     ColumnLayout
     {
@@ -181,7 +185,6 @@ Rectangle
                 icon.name: "view-list-details"
                 onClicked: focusView = false
                 Layout.alignment: Qt.AlignCenter
-
             }
 
             ColumnLayout
@@ -189,6 +192,7 @@ Rectangle
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignCenter
+                spacing: 0
 
                 Label
                 {
@@ -286,8 +290,6 @@ Rectangle
                 opacity: 0.7
             }
         }
-
-
 
         Maui.ToolBar
         {

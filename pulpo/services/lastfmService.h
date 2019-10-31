@@ -17,7 +17,7 @@ private:
 
 public:
     explicit lastfm();
-    ~lastfm();
+    ~lastfm() override;
 
     void set(const PULPO::REQUEST &request) override final;
 

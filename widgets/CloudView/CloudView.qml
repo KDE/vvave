@@ -149,7 +149,7 @@ Maui.Page
             {
                 text: qsTr("Group")
                 checkable: true
-                checked: group
+//                checked: group
                 onTriggered: group = !group
             }
         }

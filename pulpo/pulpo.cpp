@@ -62,12 +62,11 @@ void Pulpo::start()
         case SERVICES::LastFm:
         {
             auto lastfm  = new class lastfm();
-            connect(lastfm, &lastfm::responseReady,[&, lastfm = std::move(lastfm)](PULPO::REQUEST request, PULPO::RESPONSES responses)
+            connect(lastfm, &lastfm::responseReady,[&, _lastfm = std::move(lastfm)](PULPO::REQUEST request, PULPO::RESPONSES responses)
             {
                 this->passSignal(request, responses);
-                lastfm->deleteLater();
+                _lastfm->deleteLater();
             });
-
             lastfm->set(this->req);
             break;
         }

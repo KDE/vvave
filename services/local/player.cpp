@@ -19,6 +19,8 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest& request)
 {
     qDebug() << Q_FUNC_INFO;
 
+    qDebug()<< "FORMING THE REQUEST" << request.url();
+
     // Read raw headers out of the provided request
     QMap<QByteArray, QByteArray> rawHeaders;
     for (const QByteArray& headerKey : request.rawHeaderList()) {
@@ -37,7 +39,12 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest& request)
 
     newRequest.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
     newRequest.setRawHeader(QByteArrayLiteral("OCS-APIREQUEST"), QByteArrayLiteral("true"));
+    newRequest.setRawHeader(QByteArrayLiteral("Cache-Control"), QByteArrayLiteral("public"));
+    newRequest.setRawHeader(QByteArrayLiteral("Content-Description"), QByteArrayLiteral("File Transfer"));
 
+    newRequest.setHeader(QNetworkRequest::ContentTypeHeader, "audio/mpeg");
+    newRequest.setAttribute(QNetworkRequest::CacheSaveControlAttribute, true);
+    newRequest.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 
     qDebug() << "headers" << newRequest.rawHeaderList() << newRequest.url();
 

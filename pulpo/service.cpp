@@ -32,14 +32,11 @@ void Service::retrieve(const QString &url, const QMap<QString, QString> &headers
     if(!url.isEmpty())
     {
         auto downloader = new FMH::Downloader;
-        connect(downloader, &FMH::Downloader::dataReady, [&, downloader = std::move(downloader)](QByteArray array)
+        connect(downloader, &FMH::Downloader::dataReady, [&, _downloader = std::move(downloader)](QByteArray array)
         {
-            //            qDebug()<< "DATA READY << " << array;
             emit this->arrayReady(array);
-            downloader->deleteLater();
+            _downloader->deleteLater();
         });
-
-        //        qDebug()<< "trying to get ASYNC DOWNLOADER for "<< url;
         downloader->getArray(url, headers);
     }
 }
