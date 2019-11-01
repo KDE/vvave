@@ -302,6 +302,7 @@ Maui.ApplicationWindow
                 _dialogLoader.sourceComponent = _fmDialogComponent
                 root.dialog.settings.onlyDirs = false
                 root.dialog.settings.filterType = Maui.FMList.AUDIO
+                console.log("SETTIGN FILTER TYPE FISR", root.dialog.settings.filterType, Maui.FMList.AUDIO)
                 root.dialog.show(function(paths)
                 {
                     vvave.openUrls(paths)

@@ -182,7 +182,7 @@ BabeList
         }
     ]
 
-    listView.headerPositioning: ListView.PullBackHeader
+//    listView.headerPositioning: ListView.PullBackHeader
 
     listView.header: Maui.ToolBar
     {
