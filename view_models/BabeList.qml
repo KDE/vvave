@@ -1,5 +1,5 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick 2.10
+import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
@@ -28,5 +28,8 @@ Maui.Page
         anchors.fill: parent
         holder.visible: count === 0
         topMargin: Maui.Style.space.medium
+        listView.headerPositioning: ListView.PullBackHeader
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+        Kirigami.Theme.inherit: false
     }
 }

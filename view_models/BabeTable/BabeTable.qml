@@ -77,7 +77,7 @@ BabeList
         {
             id: sortBtn
             icon.name: "view-sort"
-
+            visible: listView.count > 2
             MenuItem
             {
                 text: qsTr("Title")
@@ -179,22 +179,23 @@ BabeList
             id: _filterButton
             icon.name: "view-filter"
             checkable: true
+            visible: listView.count > 10
         }
     ]
 
-//    listView.headerPositioning: ListView.PullBackHeader
+    //    listView.headerPositioning: ListView.PullBackHeader
 
     listView.header: Maui.ToolBar
     {
+        Kirigami.Theme.backgroundColor: control.Kirigami.Theme.backgroundColor
         visible: _filterButton.checked
         width: control.width
         position: ToolBar.Header
+        z: listView.z + 9
         middleContent: Maui.TextField
         {
             Layout.fillWidth: true
-
         }
-
     }
 
     Maui.Dialog
@@ -314,7 +315,6 @@ BabeList
         }
     }
 
-
     Maui.BaseModel
     {
         id: _tracksModel
@@ -401,7 +401,6 @@ BabeList
             }
 
             onCleared: delegate.isSelected = false
-
         }
     }
 
@@ -445,7 +444,7 @@ BabeList
     {
         swipeView.currentIndex = viewsIndex.albums
         const item = list.get(listView.currentIndex)
-        albumsView.populateTable(item.album, item.artist)
+        swipeView.currentItem.item.populateTable(item.album, item.artist)
         contextMenu.close()
     }
 
@@ -453,7 +452,7 @@ BabeList
     {
         swipeView.currentIndex = viewsIndex.artists
         const item = list.get(listView.currentIndex)
-        artistsView.populateTable(undefined, item.artist)
+        swipeView.currentItem.item.populateTable(undefined, item.artist)
         contextMenu.close()
     }
 

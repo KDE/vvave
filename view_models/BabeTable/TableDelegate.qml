@@ -1,6 +1,6 @@
-import QtQuick 2.9
+import QtQuick 2.10
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.3
+import QtQuick.Controls 2.10
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.7 as Kirigami

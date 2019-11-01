@@ -9,6 +9,7 @@ AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
 
 void AlbumsModel::componentComplete()
 {
+  this->setList();
     connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
 
@@ -121,8 +122,8 @@ void AlbumsModel::setList()
 this->sortList();
 emit this->postListChanged();
 
-if(this->query == AlbumsModel::QUERY::ALBUMS)
-this->fetchInformation();
+//if(this->query == AlbumsModel::QUERY::ALBUMS)
+//this->fetchInformation();
 }
 
 void AlbumsModel::fetchInformation()

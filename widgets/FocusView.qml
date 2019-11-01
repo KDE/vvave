@@ -21,7 +21,7 @@ Rectangle
     focus: true
     Component.onCompleted:
     {
-        _drawer.close()
+        _drawer.visible = false
         forceActiveFocus()
     }
 
@@ -110,7 +110,7 @@ Rectangle
                 Rectangle
                 {
                     id: _bg
-                    width: parent.width * 0.7
+                    width: parent.height * 0.7
                     height: width
                     anchors.centerIn: parent
                     radius: Maui.Style.radiusV
@@ -132,14 +132,12 @@ Rectangle
                 Image
                 {
                     id: _image
-                    width: parent.width * 0.7
+                    width: parent.height * 0.7
                     height: width
                     anchors.centerIn: parent
 
-
                     sourceSize.width: height
                     sourceSize.height: height
-
 
                     fillMode: Image.PreserveAspectFit
                     antialiasing: false

@@ -44,10 +44,7 @@ function refreshCollection(size)
 {
     if(size>0) root.notify("emblem-info", "Collection updated", size+" new tracks added...")
 
-    refreshTracks()
-    refreshAlbums()
-    refreshArtists()
-    refreshFolders()
+
 }
 
 function refreshFolders()
