@@ -221,7 +221,7 @@ void AlbumsModel::fetchInformation()
         }
 
         qDebug()<< "DISCONNET SIGNAL";
-        disconnect(this, SIGNAL(destroyed()));
+//        disconnect(this, SIGNAL(destroyed()));
     };
 
     QFuture<void> t1 = QtConcurrent::run(func);
