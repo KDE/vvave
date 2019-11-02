@@ -631,25 +631,8 @@ Maui.ApplicationWindow
                                 Player.playAt(0)
                             }
 
-                            onPlayAll:
-                            {
-                                var query = Q.GET.albumTracks_.arg(album)
-                                query = query.arg(artist)
-                                query = query.arg(data.artist)
-
-                                mainPlaylist.list.clear()
-                                mainPlaylist.list.query = query
-                                Player.playAt(0)
-                            }
-
-                            onAppendAll:
-                            {
-                                var query = Q.GET.albumTracks_.arg(album)
-                                query = query.arg(artist)
-
-                                mainPlaylist.list.appendQuery(query)
-                                mainPlaylist.listView.positionViewAtEnd()
-                            }
+                            onPlayAll: Player.playAll(albumsView.listModel.getAll())
+                            onAppendAll: Player.appendAll(albumsView.listModel.getAll())
                         }
                     }
                 }
@@ -694,24 +677,8 @@ Maui.ApplicationWindow
                                 Player.playAt(0)
                             }
 
-                            onPlayAll:
-                            {
-                                var query = Q.GET.artistTracks_.arg(artist)
-                                query = query.arg(data.artist)
-
-                                mainPlaylist.list.clear()
-                                mainPlaylist.list.sortBy = Tracks.NONE
-                                mainPlaylist.list.query = query
-                                Player.playAt(0)
-                            }
-
-                            onAppendAll:
-                            {
-                                var query = Q.GET.artistTracks_.arg(artist)
-
-                                mainPlaylist.list.appendQuery(query)
-                                mainPlaylist.listView.positionViewAtEnd()
-                            }
+                            onPlayAll: Player.artistsView(albumsView.listModel.getAll())
+                            onAppendAll: Player.artistsView(albumsView.listModel.getAll())
                         }
                     }
                 }

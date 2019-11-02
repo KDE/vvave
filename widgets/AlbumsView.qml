@@ -22,6 +22,7 @@ BabeGrid
     property var tracks: []
 
     property alias table : albumsViewTable
+    property alias listModel : albumsViewTable.listModel
     //    property alias tagBar : tagBar
 
     signal rowClicked(var track)
