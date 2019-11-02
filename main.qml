@@ -396,7 +396,7 @@ Maui.ApplicationWindow
     sideBar: Maui.AbstractSideBar
     {
         id: _drawer
-        width: visible ? Math.min(Kirigami.Units.gridUnit * 18, root.width) : 0
+        width: visible ? Math.min(Kirigami.Units.gridUnit * 15, root.width) : 0
         modal: !isWide
 
         height: _drawer.modal ? implicitHeight - _mainPage.footer.height : implicitHeight
@@ -592,7 +592,7 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem
+                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
                     sourceComponent: CloudView
                     {
                         id: cloudView
@@ -601,8 +601,8 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem
-                    sourceComponent:AlbumsView
+                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
+                    sourceComponent: AlbumsView
                     {
                         id: albumsView
 
@@ -666,8 +666,7 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem
-
+                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
                     sourceComponent: AlbumsView
                     {
                         id: artistsView
@@ -729,7 +728,7 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem
+                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
                     sourceComponent:PlaylistsView
                     {
                         id: playlistsView
@@ -775,7 +774,7 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem
+                    active: SwipeView.isCurrentItem || item
                     sourceComponent:  FoldersView
                     {
                         id: foldersView
@@ -817,7 +816,7 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem
+                    active: SwipeView.isCurrentItem || item
                     sourceComponent: YouTube
                     {
                         id: youtubeView
@@ -826,7 +825,7 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem
+                    active: SwipeView.isCurrentItem || (item && item.listView.count > 0)
                     sourceComponent: SearchTable
                     {
                         id: searchView
