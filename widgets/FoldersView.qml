@@ -8,6 +8,7 @@ Item
 {
     id: control
     property alias list : _filterList
+    property alias listModel : _filterList.model
     property var tracks : []
     property string currentFolder : ""
 

@@ -16,7 +16,6 @@ ColumnLayout
 
     property string playlistQuery
     property alias playlistModel : playlistViewModel.model
-    property alias playlistList : playlistViewModel.list
     property alias playlistViewList : playlistViewModel
 
     signal rowClicked(var track)
@@ -89,10 +88,10 @@ ColumnLayout
             clip: true
             coverArtVisible: true
             headBar.visible: !holder.visible
-            title: playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
+            title: playlistsList.get(playlistViewModel.currentIndex).playlist
             holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: false
-            holder.title : playlistViewModel.list.get(playlistViewModel.currentIndex).playlist
+            holder.title : playlistsList.get(playlistViewModel.currentIndex).playlist
             holder.body: "Your playlist is empty,<br>start adding new music to it"
             holder.emojiSize: Maui.Style.iconSizes.huge
 
@@ -154,8 +153,8 @@ ColumnLayout
             Connections
             {
                 target: filterList
-                onRowClicked: control.rowClicked(filterList.list.get(index))
-                onQuickPlayTrack: control.quickPlayTrack(filterList.list.get(filterList.currentIndex))
+                onRowClicked: control.rowClicked(filterList.listModel.get(index))
+                onQuickPlayTrack: control.quickPlayTrack(filterList.listModel.get(filterList.currentIndex))
 
                 onPlayAll: playAll()
                 onAppendAll: appendAll()
@@ -168,7 +167,7 @@ ColumnLayout
 
                 onRemoveClicked:
                 {
-                    playlistList.removeTrack(playlistViewList.currentIndex, filterList.list.get(filterList.currentIndex).url)
+                    playlistsList.removeTrack(playlistViewList.currentIndex, filterList.listModel.get(filterList.currentIndex).url)
                     populate(playlistQuery)
                 }
             }
@@ -202,12 +201,12 @@ ColumnLayout
 
     function syncAndPlay(index)
     {
-        if(!playlistList.get(index).playlistIcon)
-            playSync(playlistList.get(index).playlist)
+        if(!playlistsList.get(index).playlistIcon)
+            playSync(playlistsList.get(index).playlist)
     }
 
     function removePlaylist()
     {
-        playlistList.removePlaylist(playlistViewList.currentIndex)
+        playlistsList.removePlaylist(playlistViewList.currentIndex)
     }
 }

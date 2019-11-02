@@ -33,8 +33,7 @@ import org.kde.mauikit 1.0 as Maui
 import Player 1.0
 import AlbumsList 1.0
 import TracksList 1.0
-
-import TracksList 1.0
+import PlaylistsList 1.0
 
 Maui.ApplicationWindow
 {
@@ -63,7 +62,7 @@ Maui.ApplicationWindow
     property int currentTrackIndex: -1
     property int prevTrackIndex: 0
 
-    property string currentArtwork: !mainlistEmpty ? mainPlaylist.list.get(0).artwork : ""
+    property string currentArtwork: !mainlistEmpty ? mainPlaylist.listModel.get(0).artwork : ""
     property bool currentBabe: currentTrack.fav == "0" ? false : true
 
     property alias durationTimeLabel: player.duration
@@ -209,12 +208,11 @@ Maui.ApplicationWindow
         maxHeight: parent.height * 0.9
     }
 
-
     Loader
     {
         id: _focusViewLoader
-        focus: true
-        source: focusView ? "widgets/FocusView.qml" : ""
+        active: focusView
+        source: "widgets/FocusView.qml"
     }
 
     Component
@@ -388,6 +386,11 @@ Maui.ApplicationWindow
         //        }
     ]
 
+    Playlists
+    {
+        id: playlistsList
+    }
+
     PlaylistDialog
     {
         id: playlistDialog
@@ -493,8 +496,8 @@ Maui.ApplicationWindow
                         icon.color: currentBabe ? babeColor : Kirigami.Theme.textColor
                         onClicked: if (!mainlistEmpty)
                                    {
-                                       mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
-                                       currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
+                                       mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
+                                       currentBabe = mainPlaylist.listModel.get(currentTrackIndex).fav == "1"
                                    }
                     },
 
@@ -568,25 +571,12 @@ Maui.ApplicationWindow
                     Connections
                     {
                         target: tracksView
-                        onRowClicked: Player.quickPlay(tracksView.list.get(index))
-                        onQuickPlayTrack: Player.quickPlay(tracksView.list.get(index))
-                        onAppendTrack: Player.addTrack(tracksView.list.get(index))
-
-                        onPlayAll:
-                        {
-                            var query = Q.GET.allTracks
-
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.query = query
-                            Player.playAll()
-                        }
-                        onAppendAll:
-                        {
-                            mainPlaylist.list.appendQuery(Q.GET.allTracks)
-                            mainPlaylist.listView.positionViewAtEnd()
-                        }
-
-                        onQueueTrack: Player.queueTracks([tracksView.list.get(index)], index)
+                        onRowClicked: Player.quickPlay(tracksView.listModel.get(index))
+                        onQuickPlayTrack: Player.quickPlay(tracksView.listModel.get(index))
+                        onAppendTrack: Player.addTrack(tracksView.listModel.get(index))
+                        onPlayAll: Player.playAll( tracksView.listModel.getAll())
+                        onAppendAll: Player.appendAll( tracksView.listModel.getAll())
+                        onQueueTrack: Player.queueTracks([tracksView.listModel.get(index)], index)
                     }
                 }
 
@@ -638,7 +628,7 @@ Maui.ApplicationWindow
                                 mainPlaylist.list.clear()
                                 mainPlaylist.list.sortBy = Tracks.NONE
                                 mainPlaylist.list.query = query
-                                Player.playAll()
+                                Player.playAt(0)
                             }
 
                             onPlayAll:
@@ -649,7 +639,7 @@ Maui.ApplicationWindow
 
                                 mainPlaylist.list.clear()
                                 mainPlaylist.list.query = query
-                                Player.playAll()
+                                Player.playAt(0)
                             }
 
                             onAppendAll:
@@ -701,7 +691,7 @@ Maui.ApplicationWindow
                                 mainPlaylist.list.clear()
                                 mainPlaylist.list.sortBy = Tracks.NONE
                                 mainPlaylist.list.query = query
-                                Player.playAll()
+                                Player.playAt(0)
                             }
 
                             onPlayAll:
@@ -712,7 +702,7 @@ Maui.ApplicationWindow
                                 mainPlaylist.list.clear()
                                 mainPlaylist.list.sortBy = Tracks.NONE
                                 mainPlaylist.list.query = query
-                                Player.playAll()
+                                Player.playAt(0)
                             }
 
                             onAppendAll:
@@ -741,28 +731,13 @@ Maui.ApplicationWindow
                             onAppendTrack: Player.addTrack(track)
                             onPlayTrack: Player.quickPlay(track)
 
-                            onPlayAll:
-                            {
-                                var query = playlistsView.playlistQuery
-                                mainPlaylist.list.clear()
-                                mainPlaylist.list.sortBy = Tracks.NONE
-                                mainPlaylist.list.query = query
-                                Player.playAll()
-                            }
+                            onPlayAll: Player.playAll(playlistsView.listModel.getAll())
 
-                            onAppendAll:
-                            {
-                                var query = playlistsView.playlistQuery
-
-                                mainPlaylist.list.appendQuery(query)
-                                mainPlaylist.listView.positionViewAtEnd()
-                            }
+                            onAppendAll: Player.appendAll(playlistsView.listModel.getAll())
 
                             onPlaySync:
                             {
-                                var query = playlistsView.playlistQuery
-                                mainPlaylist.list.appendQuery(query)
-                                Player.playAll()
+                                Player.playAll(playlistsView.listModel.getAll())
 
                                 root.sync = true
                                 root.syncPlaylist = playlist
@@ -792,23 +767,10 @@ Maui.ApplicationWindow
                             onRowClicked: Player.quickPlay(foldersView.list.model.get(index))
                             onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
 
-                            onAppendTrack: Player.addTrack(foldersView.list.model.get(index))
+                            onAppendTrack: Player.addTrack(foldersView.listModel.get(index))
+                            onPlayAll: Player.playAll(foldersView.listModel.getAll())
 
-                            onPlayAll:
-                            {
-                                mainPlaylist.list.clear()
-                                //                        mainPlaylist.list.sortBy = Tracks.NONE
-                                mainPlaylist.list.query = foldersView.list.list.query
-                                Player.playAll()
-                            }
-
-                            onAppendAll:
-                            {
-                                var query = foldersView.list.list.query
-                                mainPlaylist.list.appendQuery(query)
-                                mainPlaylist.listView.positionViewAtEnd()
-                            }
-
+                            onAppendAll: Player.appendAll(foldersView.listModel.getAll())
                             onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
                         }
                     }
@@ -833,31 +795,23 @@ Maui.ApplicationWindow
                         Connections
                         {
                             target: searchView
-                            onRowClicked: Player.quickPlay(searchView.list.get(index))
-                            onQuickPlayTrack: Player.quickPlay(searchView.list.get(index))
-                            onAppendTrack: Player.addTrack(searchView.list.get(index))
-                            onPlayAll:
-                            {
-                                mainPlaylist.list.clear()
-                                var tracks = searchView.list.getAll()
-                                for(var i in tracks)
-                                    Player.appendTrack(tracks[i])
+                            onRowClicked: Player.quickPlay(searchView.listModel.get(index))
+                            onQuickPlayTrack: Player.quickPlay(searchView.listModel.get(index))
+                            onAppendTrack: Player.addTrack(searchView.listModel.get(index))
+                            onPlayAll: Player.playAll(searchView.listModel.getAll())
 
-                                Player.playAll()
-                            }
-
-                            onAppendAll: Player.appendAll(searchView.list.getAll())
+                            onAppendAll: Player.appendAll(searchView.listModel.getAll())
                             onArtworkDoubleClicked:
                             {
                                 var query = Q.GET.albumTracks_.arg(
-                                            searchView.list.get(
+                                            searchView.listModel.get(
                                                 index).album)
-                                query = query.arg(searchView.list.get(index).artist)
+                                query = query.arg(searchView.listModel.get(index).artist)
 
                                 mainPlaylist.list.clear()
                                 mainPlaylist.list.sortBy = Tracks.NONE
                                 mainPlaylist.list.query = query
-                                Player.playAll()
+                                Player.playAt(0)
                             }
                         }
                     }

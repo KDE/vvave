@@ -22,7 +22,7 @@ Maui.Dialog
 
         BabeList
         {
-            id: playlistsList
+            id: dialogList
 
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -31,7 +31,10 @@ Maui.Dialog
             holder.title: qsTr("There's not playlists")
             holder.body: qsTr("Create a new one and start adding tracks to it")
 
-            model: playlistsView.playlistModel
+            model: Maui.BaseModel
+            {
+                list: playlistsList
+            }
 
             delegate: Maui.ListDelegate
             {
@@ -41,10 +44,10 @@ Maui.Dialog
                 Connections
                 {
                     target: delegate
-                    onClicked: playlistsList.currentIndex = index
+                    onClicked: dialogList.currentIndex = index
                     onPressAndHold:
                     {
-                        playlistsList.currentIndex = index
+                        dialogList.currentIndex = index
                         insert()
                     }
                 }
@@ -61,7 +64,7 @@ Maui.Dialog
             onAccepted:
             {
                 addPlaylist()
-                playlistsView.playlistList.addTrack(playlistsList.listView.currentIndex, tracks)
+                playlistsList.addTrack(dialogList.listView.currentIndex, tracks)
                 clear()
             }
 
@@ -84,7 +87,7 @@ Maui.Dialog
 
     function insert()
     {
-        playlistsView.playlistList.addTrack(playlistsList.listView.currentIndex, tracks)
+        playlistsList.addTrack(dialogList.listView.currentIndex, tracks)
         close()
     }
 
@@ -93,10 +96,10 @@ Maui.Dialog
         if (newPlaylistField.text)
         {
             var title = newPlaylistField.text.trim()
-            if( playlistsView.playlistList.insertAt(title, 0))
+            if(playlistsList.insertAt(title, 0))
             {
-                playlistsList.listView.currentIndex = 0
-                playlistsList.listView.positionViewAtBeginning()
+                dialogList.listView.currentIndex = 0
+                dialogList.listView.positionViewAtBeginning()
             }
 
             newPlaylistField.clear()

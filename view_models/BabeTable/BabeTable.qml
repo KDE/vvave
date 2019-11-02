@@ -45,6 +45,7 @@ BabeList
     signal appendAll()
 
     focus: true
+    holder.visible: list.count === 0
     listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
     headBar.leftContent: [
 
@@ -77,7 +78,7 @@ BabeList
         {
             id: sortBtn
             icon.name: "view-sort"
-            visible: listView.count > 2
+            visible: list.count > 2
             MenuItem
             {
                 text: qsTr("Title")
@@ -179,22 +180,22 @@ BabeList
             id: _filterButton
             icon.name: "view-filter"
             checkable: true
-            visible: listView.count > 10
+            visible: list.count > 10
         }
     ]
-
-    //    listView.headerPositioning: ListView.PullBackHeader
 
     listView.header: Maui.ToolBar
     {
         Kirigami.Theme.backgroundColor: control.Kirigami.Theme.backgroundColor
-        visible: _filterButton.checked
+        visible: _filterButton.checked && _filterButton.visible
         width: control.width
         position: ToolBar.Header
         z: listView.z + 9
         middleContent: Maui.TextField
         {
             Layout.fillWidth: true
+            onAccepted: listModel.setFilterString(text)
+            onTextChanged: listModel.setFilterString(text)
         }
     }
 
@@ -319,6 +320,9 @@ BabeList
     {
         id: _tracksModel
         list: _tracksList
+        recursiveFilteringEnabled: true
+        sortCaseSensitivity: Qt.CaseInsensitive
+        filterCaseSensitivity: Qt.CaseInsensitive
     }
 
     Tracks
@@ -417,7 +421,7 @@ BabeList
     function saveList()
     {
         var trackList = []
-        if(listView.count > 0)
+        if(list.count > 0)
         {
             for(var i = 0; i < list.count; ++i)
                 trackList.push(list.get(i).url)
@@ -431,9 +435,9 @@ BabeList
     {
         var trackList = []
 
-        if(listView.count > 0)
+        if(list.count > 0)
         {
-            for(var i = 0; i < listView.count; ++i)
+            for(var i = 0; i < list.count; ++i)
                 trackList.push(list.get(i))
 
             Player.queueTracks(trackList)

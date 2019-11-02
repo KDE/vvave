@@ -25,6 +25,11 @@ Rectangle
         forceActiveFocus()
     }
 
+    Component.onDestruction:
+    {
+        _drawer.visible = true
+    }
+
     Keys.onBackPressed:
     {
         focusView = false

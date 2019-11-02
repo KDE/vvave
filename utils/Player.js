@@ -201,11 +201,14 @@ function cleanPlaylist()
     }
 }
 
-function playAll()
+function playAll(tracks)
 {
     sync = false
     syncPlaylist = ""
     infoMsg = ""
+
+    mainPlaylist.list.clear()
+    appendAll(tracks)
 
     if(_drawer.modal && !_drawer.visible)
         _drawer.visible = true
