@@ -64,13 +64,8 @@ Maui.Dialog
                     verticalAlignment: Qt.AlignVCenter
                     textFormat: Text.RichText
                     wrapMode: Text.Wrap
-                    //                    activeFocusOnPress : true
-                    //                    selectByMouse : true
-                    //                    cursorPosition :0
-                    //                    cursorVisible: true
                 }
             }
-
         }
 
         Rectangle

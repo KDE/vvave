@@ -101,8 +101,8 @@ BabeGrid
     {
         id: albumDialog
         parent: parent
-        maxHeight: maxWidth
         maxWidth: Maui.Style.unit * 600
+        maxHeight: Math.min(Maui.Style.unit * 600, albumsViewTable.listView.contentHeight + albumsViewTable.headBar.height + (Maui.Style.space.huge*2))
         widthHint: 0.9
         heightHint: 0.9
         defaultButtons: false

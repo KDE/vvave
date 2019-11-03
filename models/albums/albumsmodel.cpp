@@ -9,7 +9,7 @@ AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
 
 void AlbumsModel::componentComplete()
 {
-  this->setList();
+    this->setList();
     connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
 
@@ -122,8 +122,8 @@ void AlbumsModel::setList()
 this->sortList();
 emit this->postListChanged();
 
-//if(this->query == AlbumsModel::QUERY::ALBUMS)
-//this->fetchInformation();
+if(this->query == AlbumsModel::QUERY::ALBUMS)
+this->fetchInformation();
 }
 
 void AlbumsModel::fetchInformation()
@@ -222,7 +222,7 @@ void AlbumsModel::fetchInformation()
         }
 
         qDebug()<< "DISCONNET SIGNAL";
-//        disconnect(this, SIGNAL(destroyed()));
+        //        disconnect(this, SIGNAL(destroyed()));
     };
 
     QFuture<void> t1 = QtConcurrent::run(func);

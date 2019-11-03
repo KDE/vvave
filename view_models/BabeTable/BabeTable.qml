@@ -341,7 +341,7 @@ BabeList
         width: listView.width
 
         number : trackNumberVisible ? true : false
-        coverArt : coverArtVisible ? (control.width > 300) : coverArtVisible
+        coverArt : coverArtVisible ? (control.width > 200) : coverArtVisible
 
         onPressAndHold: if(Kirigami.Settings.isMobile && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)

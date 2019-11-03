@@ -399,7 +399,7 @@ Maui.ApplicationWindow
     sideBar: Maui.AbstractSideBar
     {
         id: _drawer
-        width: visible ? Math.min(Kirigami.Units.gridUnit * 15, root.width) : 0
+        width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 15), root.width) : 0
         modal: !isWide
 
         height: _drawer.modal ? implicitHeight - _mainPage.footer.height : implicitHeight
