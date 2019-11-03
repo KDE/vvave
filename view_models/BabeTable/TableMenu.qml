@@ -34,9 +34,9 @@ Menu
     signal infoClicked()
     signal copyToClicked()
     signal appendClicked()
+    signal deleteClicked()
 
     property alias menuItem : control.contentData
-
 
     MenuItem
     {
@@ -84,6 +84,17 @@ Menu
         }
     }
 
+    MenuItem
+    {
+        text: qsTr("Remove")
+        onTriggered:
+        {
+            removeClicked()
+            list.remove(listView.currentIndex)
+            close()
+        }
+    }
+
     MenuSeparator{}
 
     MenuItem
@@ -94,7 +105,7 @@ Menu
             favClicked()
             close()
         }
-    }   
+    }
 
     MenuItem
     {
@@ -167,12 +178,11 @@ Menu
 
     MenuItem
     {
-        text: qsTr("Remove")
+        text: qsTr("Delete")
         Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
         onTriggered:
         {
-            removeClicked()
-            //            listModel.remove(list.currentIndex)
+            deleteClicked()
             close()
         }
     }

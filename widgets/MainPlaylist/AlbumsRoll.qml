@@ -63,6 +63,12 @@ Maui.ToolBar
         }
     }
 
+    rightContent: ToolButton
+    {
+        icon.name: "document-save"
+        onClicked: mainPlaylist.table.saveList()
+    }
+
     middleContent: ListView
     {
         id: _listView

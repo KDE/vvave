@@ -15,13 +15,12 @@ Maui.ItemDelegate
 
     isCurrentItem: ListView.isCurrentItem || isSelected
 
+    property bool showQuickActions: true
     property bool number : false
     property bool coverArt : false
     property bool showEmblem: true
     property bool keepEmblemOverlay: selectionMode
-
     property bool isSelected : false
-
     property string trackMood : model.color
 
     readonly property color bgColor : Kirigami.Theme.backgroundColor
@@ -98,6 +97,15 @@ Maui.ItemDelegate
 
             iconVisible: !control.sameAlbum && control.coverArt
             imageSource: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+        }
+
+        ToolButton
+        {
+            Layout.fillHeight: true
+            Layout.preferredWidth: implicitWidth
+            visible: showQuickActions && (Kirigami.Settings.isMobile ? true : control.hovered)
+            icon.name: "media-playlist-append"
+            onClicked: control.append()
         }
     }
 }

@@ -23,7 +23,7 @@ BabeList
     property bool trackNumberVisible
     property bool coverArtVisible : false
     property bool allowMenu: true
-
+    property bool showQuickActions : true
     property bool group : false
 
     property alias contextMenu : contextMenu
@@ -52,15 +52,14 @@ BabeList
         ToolButton
         {
             id : playAllBtn
-            //            text: qsTr("Play all")
             icon.name : "media-playlist-play"
             onClicked: playAll()
         },
+
         ToolButton
         {
             id: appendBtn
-            //            text: qsTr("Append")
-            icon.name : "media-playlist-append"//"media-repeat-track-amarok"
+            icon.name : "media-playlist-append"
             onClicked: appendAll()
         }]
 
@@ -186,7 +185,8 @@ BabeList
 
     listView.header: Maui.ToolBar
     {
-        Kirigami.Theme.backgroundColor: control.Kirigami.Theme.backgroundColor
+        Kirigami.Theme.inherit: false
+//        Kirigami.Theme.backgroundColor: control.Kirigami.Theme.backgroundColor
         visible: _filterButton.checked && _filterButton.visible
         width: control.width
         position: ToolBar.Header
@@ -259,7 +259,7 @@ BabeList
 
         onOpenWithClicked: Maui.FM.openLocation([list.get(listView.currentIndex).url])
 
-        onRemoveClicked:
+        onDeleteClicked:
         {
             _removeDialog.index= listView.currentIndex
             _removeDialog.open()
@@ -337,12 +337,10 @@ BabeList
     delegate: TableDelegate
     {
         id: delegate
-
         width: listView.width
-
         number : trackNumberVisible ? true : false
         coverArt : coverArtVisible ? (control.width > 200) : coverArtVisible
-
+        showQuickActions: control.showQuickActions
         onPressAndHold: if(Kirigami.Settings.isMobile && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)
 
@@ -424,7 +422,7 @@ BabeList
         if(list.count > 0)
         {
             for(var i = 0; i < list.count; ++i)
-                trackList.push(list.get(i).url)
+                trackList.push(listModel.get(i).url)
 
             playlistDialog.tracks = trackList
             playlistDialog.open()

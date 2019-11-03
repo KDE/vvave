@@ -59,6 +59,7 @@ Maui.Page
         holder.body: "Start putting together your playlist!"
         holder.emojiSize: Maui.Style.iconSizes.huge
         onRowClicked: play(index)
+        showQuickActions: false
 
         onArtworkDoubleClicked: contextMenu.babeIt(index)
 

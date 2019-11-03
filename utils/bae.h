@@ -247,11 +247,10 @@ inline QString getNameFromLocation(const QString &str)
 }
 
 const QString SettingPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/").toLocalFile();
-const QString ArtworkPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/artwork/").toString();
 const QString CollectionDBPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/").toLocalFile();
 
 #ifdef Q_OS_ANDROID
-const QString CachePath = BAE::ArtworkPath;
+const QString CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/").toString();
 #else
 const QString CachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/").toString();
 #endif
