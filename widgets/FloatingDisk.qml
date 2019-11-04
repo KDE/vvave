@@ -28,7 +28,8 @@ Item
 
     Maui.Badge
     {
-        anchors.centerIn: parent
+        anchors.fill: parent
+        anchors.margins: Maui.Style.space.tiny
         visible: anim.running
         text: mainPlaylist.table.count
     }

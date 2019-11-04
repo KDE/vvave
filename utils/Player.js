@@ -138,8 +138,7 @@ function appendTrack(track)
         mainPlaylist.list.append(track)
         if(sync === true)
         {
-            infoMsgAnim()
-            //            addToPlaylist([track.url], syncPlaylist)
+           playlistsList.addTrack(syncPlaylist, [track.url])
         }
     }
 }
@@ -205,7 +204,6 @@ function playAll(tracks)
 {
     sync = false
     syncPlaylist = ""
-    infoMsg = ""
 
     mainPlaylist.list.clear()
     appendAll(tracks)

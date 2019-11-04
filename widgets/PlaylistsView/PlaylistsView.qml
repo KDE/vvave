@@ -18,9 +18,11 @@ ColumnLayout
     property alias playlistModel : playlistViewModel.model
     property alias playlistViewList : playlistViewModel
 
+    property alias listModel : filterList.listModel
+
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
-    signal playAll()
+    signal playAll(string playlist)
     signal playSync(var playlist)
     signal appendAll()
 
@@ -36,7 +38,7 @@ ColumnLayout
         PlaylistsViewModel
         {
             id: playlistViewModel
-            onPlaySync: syncAndPlay(index)
+//            onPlaySync: syncAndPlay(index)
         }
 
         BabeList
@@ -156,7 +158,7 @@ ColumnLayout
                 onRowClicked: control.rowClicked(filterList.listModel.get(index))
                 onQuickPlayTrack: control.quickPlayTrack(filterList.listModel.get(filterList.currentIndex))
 
-                onPlayAll: playAll()
+                onPlayAll: control.syncAndPlay(playlistViewModel.currentIndex)
                 onAppendAll: appendAll()
                 onPulled: populate(playlistQuery)
             }
@@ -202,7 +204,9 @@ ColumnLayout
     function syncAndPlay(index)
     {
         if(!playlistsList.get(index).playlistIcon)
-            playSync(playlistsList.get(index).playlist)
+            control.playAll(playlistsList.get(index).playlist)
+
+        _filterDialog.close()
     }
 
     function removePlaylist()

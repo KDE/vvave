@@ -61,6 +61,34 @@ Maui.Page
         onRowClicked: play(index)
         showQuickActions: false
 
+        listView.footer: Maui.ToolBar
+        {
+            Kirigami.Theme.inherit: false
+            z: table.z + 999
+            width: table.width
+
+            leftContent: Label
+            {
+                text: root.syncPlaylist
+            }
+
+            rightContent: [
+            ToolButton
+                {
+                    icon.name: "edit-clear"
+                    onClicked: mainPlaylist.table.list.clear()
+                },
+
+                ToolButton
+                    {
+                        icon.name: "document-save"
+                        onClicked: mainPlaylist.table.saveList()
+                    }
+
+
+            ]
+        }
+
         onArtworkDoubleClicked: contextMenu.babeIt(index)
 
         property int startContentY

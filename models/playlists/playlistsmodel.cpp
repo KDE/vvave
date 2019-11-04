@@ -233,8 +233,13 @@ void PlaylistsModel::addTrack(const int &index, const QStringList &urls)
     if(index >= this->list.size() || index < 0)
         return;
 
-    for(auto url : urls)
-        this->db->trackPlaylist(url, this->list[index][FMH::MODEL_KEY::PLAYLIST]);
+    this->addTrack(this->list[index][FMH::MODEL_KEY::PLAYLIST], urls);
+}
+
+void PlaylistsModel::addTrack(const QString &playlist, const QStringList &urls)
+{
+    for(const auto &url : urls)
+        this->db->trackPlaylist(url, playlist);
 }
 
 void PlaylistsModel::removeTrack(const int &index, const QString &url)

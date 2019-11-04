@@ -136,7 +136,7 @@ Maui.ApplicationWindow
     headBar.middleContent : Maui.ActionGroup
     {
         id: _actionGroup
-        Layout.fillWidth: true
+//        Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.minimumWidth: implicitWidth
         currentIndex : swipeView.currentIndex
@@ -685,7 +685,7 @@ Maui.ApplicationWindow
                 Loader
                 {
                     active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
-                    sourceComponent:PlaylistsView
+                    sourceComponent: PlaylistsView
                     {
                         id: playlistsView
 

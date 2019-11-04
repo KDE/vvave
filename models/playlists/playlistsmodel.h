@@ -50,7 +50,9 @@ public slots:
     void append(const QVariantMap &item, const int &at);
     void insert(const QString &playlist);
     void insertAt(const QString &playlist, const int &at);
+
     void addTrack(const int &index, const QStringList &urls);
+    void addTrack(const QString &playlist, const QStringList &urls);
     void removeTrack(const int &index, const QString &url);
     void removePlaylist(const int &index);
 };
