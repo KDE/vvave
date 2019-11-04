@@ -40,33 +40,6 @@ function setStars(stars)
     }
 }
 
-function refreshCollection(size)
-{
-    if(size>0) root.notify("emblem-info", "Collection updated", size+" new tracks added...")
-
-
-}
-
-function refreshFolders()
-{
-    foldersView.populate()
-}
-
-function refreshTracks()
-{
-    tracksView.list.refresh()
-}
-
-function refreshAlbums()
-{
-    albumsView.list.refresh()
-    //    albumsView.list.fetchInformation();
-}
-
-function refreshArtists()
-{
-    artistsView.list.refresh()
-}
 
 function notify(title, body)
 {

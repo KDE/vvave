@@ -26,6 +26,13 @@ Item
     ToolTip.visible: _mouseArea.containsMouse && !Kirigami.Settings.isMobile
     ToolTip.text: currentTrack.title + " - " + currentTrack.artist
 
+    Maui.Badge
+    {
+        anchors.centerIn: parent
+        visible: anim.running
+        text: mainPlaylist.table.count
+    }
+
     Connections
     {
         target: mainPlaylist.table
@@ -140,19 +147,16 @@ Item
             color: "#80000000"
             source: diskBg
         }
+
+        RotationAnimator on rotation
+        {
+            from: 0
+            to: 360
+            duration: 5000
+            loops: Animation.Infinite
+            running: isPlaying
+        }
     }
-
-    RotationAnimator on rotation
-    {
-        from: 0
-        to: 360
-        duration: 5000
-        loops: Animation.Infinite
-        running: isPlaying
-    }
-
-
-
 
 
     //    Rectangle

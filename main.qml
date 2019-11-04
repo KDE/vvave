@@ -88,8 +88,6 @@ Maui.ApplicationWindow
     property string syncPlaylist: ""
     property bool sync: false
 
-    property string infoMsg: ""
-    property bool infoLabels: Maui.FM.loadSettings("LABELS", "PLAYBACK", false) == "true" ? true : false
     property bool focusView : false
     property bool selectionMode : false
 
@@ -399,9 +397,10 @@ Maui.ApplicationWindow
     sideBar: Maui.AbstractSideBar
     {
         id: _drawer
+        focus: true
         width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 15), root.width) : 0
         modal: !isWide
-        closePolicy: Popup.CloseOnEscapse | Popup.NoAutoClose
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         height: _drawer.modal ? implicitHeight - _mainPage.footer.height : implicitHeight
 
         MainPlaylist
@@ -697,18 +696,13 @@ Maui.ApplicationWindow
                             onRowClicked: Player.quickPlay(track)
                             onAppendTrack: Player.addTrack(track)
                             onPlayTrack: Player.quickPlay(track)
-
-                            onPlayAll: Player.playAll(playlistsView.listModel.getAll())
-
                             onAppendAll: Player.appendAll(playlistsView.listModel.getAll())
-
-                            onPlaySync:
+                            onPlayAll:
                             {
                                 Player.playAll(playlistsView.listModel.getAll())
 
                                 root.sync = true
                                 root.syncPlaylist = playlist
-                                root.infoMsg = qsTr("Syncing to ") + playlist
                             }
                         }
                     }
@@ -806,40 +800,18 @@ Maui.ApplicationWindow
                 }
             }
         }
-
-
-
     }
-
-
-    /*animations*/
-
-
-    /*FUNCTIONS*/
-    function infoMsgAnim()
-    {
-        animBg.running = true
-        animTxt.running = true
-    }
-
-
-    function toggleMaximized()
-    {
-        if (root.visibility === Window.Maximized) {
-            root.showNormal();
-        } else {
-            root.showMaximized();
-        }
-    }
-
 
     /*CONNECTIONS*/
-
     Connections
     {
         target: vvave
 
-        onRefreshTables: H.refreshCollection(size)
+        onRefreshTables:
+        {
+            if(size>0) root.notify("emblem-info", "Collection updated", size+" new tracks added...")
+        }
+
         //        onRefreshTracks: H.refreshTracks()
         //        onRefreshAlbums: H.refreshAlbums()
         //        onRefreshArtists: H.refreshArtists()
