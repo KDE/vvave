@@ -6,14 +6,13 @@ import org.kde.mauikit 1.0 as Maui
 import "../utils/Player.js" as Player
 import QtGraphicalEffects 1.0
 
-Rectangle
+Maui.Page
 {
     id: control
     visible: focusView
     parent: ApplicationWindow.overlay
     anchors.fill: parent
     z: parent.z + 99999
-    color: Kirigami.Theme.backgroundColor
 
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -28,6 +27,14 @@ Rectangle
     Component.onDestruction:
     {
         _drawer.visible = true
+    }
+
+    headBar.background: null
+    headBar.height: Maui.Style.toolBarHeight
+    headBar.leftContent: ToolButton
+    {
+        icon.name: "go-previous"
+        onClicked: focusView = false
     }
 
     Keys.onBackPressed:
@@ -47,136 +54,189 @@ Rectangle
         anchors.fill: parent
         anchors.margins: Maui.Style.space.big
 
-        ListView
+        RowLayout
         {
-            id: _listView
             Layout.fillWidth: true
-            Layout.preferredHeight: parent.height* 0.4
-            orientation: ListView.Horizontal
-            clip: true
-            focus: true
-            interactive: true
-            currentIndex: currentTrackIndex
-            spacing: Maui.Style.space.medium
-            cacheBuffer: control.width * 1
-            onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
+            Layout.preferredHeight: width
 
-            highlightFollowsCurrentItem: true
-            highlightMoveDuration: 0
-            snapMode: ListView.SnapToOneItem
-            model: mainPlaylist.listModel
-            highlightRangeMode: ListView.StrictlyEnforceRange
-            keyNavigationEnabled: true
-            keyNavigationWraps : true
-            onMovementEnded:
+            Item
             {
-                var index = indexAt(contentX, contentY)
-                if(index !== currentTrackIndex)
-                    Player.playAt(index)
-            }
-
-            Rectangle
-            {
-                visible: (_listView.currentIndex > 0) && (_listView.count > 1)
-
-                height: Maui.Style.iconSizes.small
-                width : height
-
-                radius: height
-
-                color: Kirigami.Theme.textColor
-                opacity: 0.4
-
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            Rectangle
-            {
-                visible: (_listView.currentIndex < _listView.count - 1) && (_listView.count > 1)
-                height: Maui.Style.iconSizes.small
-                width : height
-
-                radius: height
-
-                color: Kirigami.Theme.textColor
-                opacity: 0.4
-
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            delegate: Item
-            {
-                id: _delegate
-                height: _listView.height
-                width: _listView.width
+                Layout.fillHeight: true
+                Layout.preferredWidth: Maui.Style.iconSizes.big
 
                 Rectangle
                 {
-                    id: _bg
-                    width: parent.height * 0.7
-                    height: width
-                    anchors.centerIn: parent
-                    radius: Maui.Style.radiusV
+                    visible: (_listView.currentIndex > 0) && (_listView.count > 1)
+
+                    height: Maui.Style.iconSizes.small
+                    width : height
+
+                    radius: height
+
                     color: Kirigami.Theme.textColor
+                    opacity: 0.4
 
-                }
-
-                DropShadow
-                {
-                    anchors.fill: _bg
-                    horizontalOffset: 0
-                    verticalOffset: 0
-                    radius: 8.0
-                    samples: 17
-                    color: "#80000000"
-                    source: _bg
-                }
-
-                Image
-                {
-                    id: _image
-                    width: parent.height * 0.7
-                    height: width
                     anchors.centerIn: parent
+                }
+            }
 
-                    sourceSize.width: height
-                    sourceSize.height: height
+            ListView
+            {
+                id: _listView
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                orientation: ListView.Horizontal
+                clip: true
+                focus: true
+                interactive: true
+                currentIndex: currentTrackIndex
+                spacing: Maui.Style.space.medium
+                cacheBuffer: control.width * 1
+                onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
 
-                    fillMode: Image.PreserveAspectFit
-                    antialiasing: false
-                    smooth: true
-                    asynchronous: true
+                highlightFollowsCurrentItem: true
+                highlightMoveDuration: 0
+                snapMode: ListView.SnapToOneItem
+                model: mainPlaylist.listModel
+                highlightRangeMode: ListView.StrictlyEnforceRange
+                keyNavigationEnabled: true
+                keyNavigationWraps : true
+                onCurrentItemChanged:
+                {
+                    var index = indexAt(contentX, contentY)
+                    if(index !== currentTrackIndex)
+                        Player.playAt(index)
+                }
 
-                    source: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+                delegate: Item
+                {
+                    id: _delegate
+                    height: _listView.height
+                    width: _listView.width
 
-                    onStatusChanged:
+                    property bool isCurrentItem : ListView.isCurrentItem
+
+                    Rectangle
                     {
-                        if (status == Image.Error)
-                            source = "qrc:/assets/cover.png";
+                        id: _bg
+                        width: _image.width
+                        height: width
+                        anchors.centerIn: parent
+                        radius: height
+                        color: Kirigami.Theme.textColor
+
                     }
 
-                    layer.enabled: true
-                    layer.effect: OpacityMask
+                    DropShadow
                     {
-                        maskSource: Item
-                        {
-                            width: _image.width
-                            height: _image.height
+                        anchors.fill: _bg
+                        horizontalOffset: 0
+                        verticalOffset: 0
+                        radius: 8.0
+                        samples: 17
+                        color: "#80000000"
+                        source: _bg
+                    }
 
-                            Rectangle
+                    RotationAnimator on rotation
+                    {
+                        from: 0
+                        to: 360
+                        duration: 5000
+                        loops: Animation.Infinite
+                        running: root.isPlaying && isCurrentItem
+                    }
+
+                    Image
+                    {
+                        id: _image
+                        width: Math.min(parent.width, parent.height) * 0.9
+                        height: width
+                        anchors.centerIn: parent
+
+                        sourceSize.width: height
+                        sourceSize.height: height
+
+                        fillMode: Image.PreserveAspectFit
+                        antialiasing: false
+                        smooth: true
+                        asynchronous: true
+
+                        source: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+
+                        onStatusChanged:
+                        {
+                            if (status == Image.Error)
+                                source = "qrc:/assets/cover.png";
+                        }
+
+                        Rectangle
+                        {
+                            id: _roundRec
+                            color: control.Kirigami.Theme.backgroundColor
+                            height: parent.height * 0.2
+                            width: height
+                            anchors.centerIn: parent
+                            radius: height
+                        }
+
+                        InnerShadow
+                        {
+                            anchors.fill: _roundRec
+                            radius: 8.0
+                            samples: 16
+                            horizontalOffset: 0
+                            verticalOffset: 0
+                            color: "#b0000000"
+                            source: _roundRec
+                        }
+
+                        layer.enabled: true
+                        layer.effect: OpacityMask
+                        {
+                            maskSource: Item
                             {
-                                anchors.centerIn: parent
-                                width: _image.adapt ? _image.width : Math.min(_image.width, _image.height)
-                                height: _image.adapt ? _image.height : width
-                                radius: Maui.Style.radiusV
+                                width: _image.width
+                                height: _image.height
+
+                                Rectangle
+                                {
+                                    anchors.centerIn: parent
+                                    width: _image.width
+                                    height: _image.height
+                                    radius: height
+                                }
                             }
                         }
                     }
                 }
             }
+
+
+
+            Item
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: Maui.Style.iconSizes.big
+
+                Rectangle
+                {
+                    visible: (_listView.currentIndex < _listView.count - 1) && (_listView.count > 1)
+                    height: Maui.Style.iconSizes.small
+                    width : height
+
+                    radius: height
+
+                    color: Kirigami.Theme.textColor
+                    opacity: 0.4
+
+                    anchors.centerIn: parent
+
+                }
+            }
+
         }
+
 
         RowLayout
         {
@@ -210,7 +270,7 @@ Rectangle
                     wrapMode: Text.NoWrap
                     color: control.Kirigami.Theme.textColor
                     font.weight: Font.Normal
-                    font.pointSize: Maui.Style.fontSizes.big
+                    font.pointSize: Maui.Style.fontSizes.huge
                 }
 
                 Label
@@ -226,7 +286,7 @@ Rectangle
                     wrapMode: Text.NoWrap
                     color: control.Kirigami.Theme.textColor
                     font.weight: Font.Normal
-                    font.pointSize: Maui.Style.fontSizes.medium
+                    font.pointSize: Maui.Style.fontSizes.big
                     opacity: 0.7
                 }
             }

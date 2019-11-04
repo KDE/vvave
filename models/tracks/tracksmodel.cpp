@@ -16,8 +16,8 @@ FMH::MODEL_LIST TracksModel::items() const
 
 void TracksModel::setQuery(const QString &query)
 {
-    if(this->query == query)
-        return;
+//    if(this->query == query)
+//        return;
 
     this->query = query;
     emit this->queryChanged();

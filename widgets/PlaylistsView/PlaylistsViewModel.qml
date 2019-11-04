@@ -17,8 +17,42 @@ BabeList
 {
     id: control
 
-    signal playSync(int index)
     topPadding: Maui.Style.contentMargins
+
+    holder.emoji: "qrc:/assets/dialog-information.svg"
+    holder.title : qsTr("No Playlists!")
+    holder.body: qsTr("Start creating new custom playlists")
+
+    Connections
+    {
+        target: holder
+        onActionTriggered: newPlaylistDialog.open()
+    }
+
+    Menu
+    {
+        id: _playlistMenu
+
+        MenuItem
+        {
+            text: qsTr("Play")
+            onTriggered: populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
+        }
+
+        MenuItem
+        {
+            text: qsTr("Rename")
+        }
+
+        MenuSeparator{}
+
+        MenuItem
+        {
+            text: qsTr("Delete")
+            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+            onTriggered: removePlaylist()
+        }
+    }
 
 
     Maui.BaseModel
@@ -33,7 +67,7 @@ BabeList
     section.property: "type"
     section.delegate: Maui.LabelDelegate
     {
-        label: "Public"
+        label: "Personal"
         isSection: true
         width: control.width
     }
@@ -54,6 +88,20 @@ BabeList
                 currentPlaylist = playlistsList.get(index).playlist
                 filterList.group = false
                 populate(Q.GET.playlistTracks_.arg(currentPlaylist), true);
+            }
+
+            onRighClicked:
+            {
+                control.currentIndex = index
+                currentPlaylist = playlistsList.get(index).playlist
+                _playlistMenu.popup()
+            }
+
+            onPressAndHold:
+            {
+                control.currentIndex = index
+                currentPlaylist = playlistsList.get(index).playlist
+                _playlistMenu.popup()
             }
         }
     }

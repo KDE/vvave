@@ -11,7 +11,7 @@ Item
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
-    visible: opacity > 0.3
+    visible: opacity > 0.3 && !mainlistEmpty
 
     height:  Maui.Style.iconSizes.large * 1.2
     width: height
@@ -83,17 +83,16 @@ Item
         drag.maximumY: root.height
         onClicked: _drawer.visible = true
 
+
+
         Rectangle
         {
             id: diskBg
             anchors.centerIn: parent
             height: parent.height
             width: height
-            //            border.color: Qt.tint(Kirigami.Theme.textColor, Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.7))
             color: "white"
             radius: Math.min(width, height)
-
-
 
             Image
             {
@@ -158,26 +157,4 @@ Item
             running: isPlaying
         }
     }
-
-
-    //    Rectangle
-    //    {
-    //        anchors.centerIn: parent
-    //        width: parent.width * 0.5
-    //        height: width
-    //        radius: height
-    //        color: "transparent"
-
-    //        ShaderEffectSource
-    //                        {
-    //                            anchors.fill: parent
-    //                            sourceItem: root
-    //                            sourceRect:Qt.rect((control.x),
-    //                                               (control.y),
-    //                                               parent.width,
-    //                                               parent.height)
-    //                            hideSource: true
-    //                        }
-    //    }
-
 }

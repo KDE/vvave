@@ -85,7 +85,7 @@ FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
     return FMH::MODEL
     {
         {FMH::MODEL_KEY::PLAYLIST, playlist},
-        {FMH::MODEL_KEY::TYPE, "public"},
+        {FMH::MODEL_KEY::TYPE, "personal"},
         {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
         //        {FMH::MODEL_KEY::ICON, "view-media-playlist"}
     };

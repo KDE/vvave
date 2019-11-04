@@ -37,7 +37,6 @@ Maui.ToolBar
             source: currentArtwork
         }
 
-
         FastBlur
         {
             id: fastBlur
@@ -74,7 +73,7 @@ Maui.ToolBar
         interactive: true
         currentIndex: currentTrackIndex
         spacing: Maui.Style.space.medium
-        cacheBuffer: control.width * 1
+//        cacheBuffer: control.width * 1
         onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
 
         highlightFollowsCurrentItem: true
@@ -84,7 +83,7 @@ Maui.ToolBar
         highlightRangeMode: ListView.StrictlyEnforceRange
         keyNavigationEnabled: true
         keyNavigationWraps : true
-        onMovementEnded:
+        onCurrentItemChanged:
         {
             var index = indexAt(contentX, contentY)
             if(index !== currentTrackIndex)

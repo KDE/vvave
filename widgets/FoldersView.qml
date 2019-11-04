@@ -15,10 +15,11 @@ Item
     Maui.GridBrowser
     {
         id: browser
-        anchors.margins: Maui.Style.space.big
         anchors.fill: parent
         showEmblem: false
         model: ListModel {}
+        itemWidth: itemSize * 1.2
+        itemHeight: itemSize * 1.2
         onItemClicked:
         {
             var item = browser.model.get(index)
@@ -28,7 +29,6 @@ Item
             _listDialog.open()
         }
     }
-
 
     Maui.Holder
     {

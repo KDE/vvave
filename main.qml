@@ -77,11 +77,11 @@ Maui.ApplicationWindow
     /******************** HANDLERS ********************/
     /*************************************************/
     readonly property var viewsIndex: ({ tracks: 0,
-                                           cloud : 1,
-                                           albums: 2,
-                                           artists: 3,
-                                           playlists: 4,
-                                           folders: 5,
+                                           albums: 1,
+                                           artists: 2,
+                                           playlists: 3,
+                                           folders: 4,
+                                           cloud : 5,
                                            youtube: 6,
                                            search: 7})
 
@@ -151,6 +151,12 @@ Maui.ApplicationWindow
 
             Action
             {
+                text: qsTr("Cloud")
+                icon.name: "folder-cloud"
+            },
+
+            Action
+            {
                 text: qsTr("YouTube")
                 icon.name: "internet-services"
             }
@@ -160,12 +166,6 @@ Maui.ApplicationWindow
         {
             icon.name: "view-media-track"
             text: qsTr("Tracks")
-        }
-
-        Action
-        {
-            text: qsTr("Cloud")
-            icon.name: "folder-cloud"
         }
 
         Action
@@ -424,7 +424,7 @@ Maui.ApplicationWindow
         footer: ColumnLayout
         {
             id: _footerLayout
-            visible: !mainlistEmpty
+            visible: !mainlistEmpty || isPlaying
             height: visible ? Maui.Style.toolBarHeight * 1.2 : 0
             width: parent.width
             spacing: 0
@@ -582,15 +582,6 @@ Maui.ApplicationWindow
                 Loader
                 {
                     active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
-                    sourceComponent: CloudView
-                    {
-                        id: cloudView
-                    }
-                }
-
-                Loader
-                {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
                     sourceComponent: AlbumsView
                     {
                         id: albumsView
@@ -736,6 +727,15 @@ Maui.ApplicationWindow
                             onAppendAll: Player.appendAll(foldersView.listModel.getAll())
                             onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
                         }
+                    }
+                }
+
+                Loader
+                {
+                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
+                    sourceComponent: CloudView
+                    {
+                        id: cloudView
                     }
                 }
 

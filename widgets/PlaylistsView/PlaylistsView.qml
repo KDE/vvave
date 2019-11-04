@@ -24,6 +24,7 @@ Maui.Page
 
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
+    signal appendTrack(var track)
     signal playAll()
     signal syncAndPlay(string playlist)
     signal appendAll()
@@ -138,6 +139,7 @@ Maui.Page
                 target: filterList
                 onRowClicked: control.rowClicked(filterList.listModel.get(index))
                 onQuickPlayTrack: control.quickPlayTrack(filterList.listModel.get(filterList.currentIndex))
+                onAppendTrack: control.appendTrack(filterList.listModel.get(filterList.currentIndex))
 
                 onPlayAll:
                 {

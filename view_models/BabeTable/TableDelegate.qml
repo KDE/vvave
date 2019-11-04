@@ -21,7 +21,7 @@ Maui.ItemDelegate
     property bool showEmblem: true
     property bool keepEmblemOverlay: selectionMode
     property bool isSelected : false
-    property string trackMood : model.color
+    property color trackMood : model.color
 
     readonly property color bgColor : Kirigami.Theme.backgroundColor
     readonly property int altHeight : Maui.Style.rowHeight * 1.4
@@ -52,7 +52,7 @@ Maui.ItemDelegate
     signal artworkCoverClicked()
     signal artworkCoverDoubleClicked()
 
-    Kirigami.Theme.backgroundColor: trackMood.length > 0 ? Qt.tint(bgColor, Qt.rgba(Qt.lighter(trackMood, 1.3).r, Qt.lighter(trackMood, 1.3).g, Qt.lighter(trackMood, 1.3).b,  0.3)):  bgColor
+    Kirigami.Theme.backgroundColor: model.color.length > 0 ? Qt.rgba(trackMood.r, trackMood.g, trackMood.b, 0.2):  bgColor
 
     function rate(stars)
     {
@@ -105,6 +105,7 @@ Maui.ItemDelegate
                 visible: showQuickActions && (Kirigami.Settings.isMobile ? true : control.hovered)
                 icon.name: "media-playlist-append"
                 onClicked: control.append()
+                opacity: control.hovered ? 0.8 : 0.6
             }
         }
 

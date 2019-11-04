@@ -70,7 +70,13 @@ Maui.Page
             rightContent: ToolButton
             {
                 icon.name: "edit-clear"
-                onClicked: mainPlaylist.table.list.clear()
+                onClicked:
+                {
+                    player.stop()
+                    mainPlaylist.table.list.clear()
+                    root.sync = false
+                    root.syncPlaylist = ""
+                }
             }
 
             leftContent:  ToolButton
