@@ -3,17 +3,19 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.10
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import TracksList 1.0
 
 import "../../view_models/BabeTable"
 import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
 
-ColumnLayout
+Maui.Page
 {
     id: control
-    spacing: 0
+    spacing: Maui.Style.space.medium
 
+    property string currentPlaylist
     property string playlistQuery
     property alias playlistModel : playlistViewModel.model
     property alias playlistViewList : playlistViewModel
@@ -22,61 +24,41 @@ ColumnLayout
 
     signal rowClicked(var track)
     signal quickPlayTrack(var track)
-    signal playAll(string playlist)
-    signal playSync(var playlist)
+    signal playAll()
+    signal syncAndPlay(string playlist)
     signal appendAll()
 
-    SwipeView
+    footBar.rightContent:  [
+
+        ToolButton
+        {
+            id : createPlaylistBtn
+//            text: qsTr("Add")
+            icon.name : "list-add"
+            onClicked: newPlaylistDialog.open()
+        }
+    ]
+
+    PlaylistsViewModel
     {
-        id: playlistSwipe
-
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-        interactive: false
-        clip: true
-
-        PlaylistsViewModel
-        {
-            id: playlistViewModel
-//            onPlaySync: syncAndPlay(index)
-        }
-
-        BabeList
-        {
-            id: playlistViewModelFilter
-//            headBarExitIcon: "go-previous"
-            headBar.leftContent: ToolButton
-            {
-                icon.name: "go-previous"
-                onClicked: playlistSwipe.currentIndex = 0
-            }
-
-            model : ListModel {}
-            delegate: Maui.LabelDelegate
-            {
-                id: delegate
-                label : tag
-                Connections
-                {
-                    target: delegate
-
-                    onClicked: {}
-                }
-            }
-        }
+        id: playlistViewModel
+        anchors.fill: parent
     }
 
-    ColorTagsBar
+    Maui.NewDialog
     {
-        Layout.fillWidth: true
-        height: Maui.Style.rowHeightAlt
-        recSize: Kirigami.Settings.isMobile ? Maui.Style.iconSizes.medium : Maui.Style.iconSizes.small
-        onColorClicked: populate(Q.GET.colorTracks_.arg(color.toLowerCase()))
+        id: newPlaylistDialog
+        title: qsTr("New Playlist...")
+        onFinished: addPlaylist(text)
+        acceptText: qsTr("Create")
+        rejectButton.visible: false
     }
 
     Maui.Dialog
     {
         id: _filterDialog
+        property bool isPublic: true
+
         parent: parent
         maxHeight: maxWidth
         maxWidth: Maui.Style.unit * 600
@@ -90,18 +72,17 @@ ColumnLayout
             clip: true
             coverArtVisible: true
             headBar.visible: !holder.visible
-            title: playlistsList.get(playlistViewModel.currentIndex).playlist
+            title: control.currentPlaylist
             holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: false
-            holder.title : playlistsList.get(playlistViewModel.currentIndex).playlist
+            holder.title : title
             holder.body: "Your playlist is empty,<br>start adding new music to it"
             holder.emojiSize: Maui.Style.iconSizes.huge
 
-            contextMenuItems:
-                MenuItem
-                {
-                    text: qsTr("Remove from playlist")
-                }
+            contextMenuItems: MenuItem
+            {
+                text: qsTr("Remove from playlist")
+            }
 
 
             //        headerMenu.menuItem:  [
@@ -158,7 +139,16 @@ ColumnLayout
                 onRowClicked: control.rowClicked(filterList.listModel.get(index))
                 onQuickPlayTrack: control.quickPlayTrack(filterList.listModel.get(filterList.currentIndex))
 
-                onPlayAll: control.syncAndPlay(playlistViewModel.currentIndex)
+                onPlayAll:
+                {
+                    if(_filterDialog.isPublic)
+                        control.syncAndPlay(control.currentPlaylist)
+                    else
+                        control.playAll()
+
+                    _filterDialog.close()
+                }
+
                 onAppendAll: appendAll()
                 onPulled: populate(playlistQuery)
             }
@@ -176,17 +166,6 @@ ColumnLayout
         }
     }
 
-
-    function populateExtra(query, title)
-    {
-        //        playlistSwipe.currentIndex = 1
-
-        //        var res = bae.get(query)
-        //        playlistViewModelFilter.clearTable()
-        //        playlistViewModelFilter.headBarTitle = title
-        //        appendToExtraList(res)
-    }
-
     function appendToExtraList(res)
     {
         if(res.length>0)
@@ -194,23 +173,24 @@ ColumnLayout
                 playlistViewModelFilter.model.append(res[i])
     }
 
-    function populate(query)
+    function populate(query, isPublic)
     {
         playlistQuery = query
+        _filterDialog.isPublic = isPublic
         filterList.list.query = playlistQuery
         _filterDialog.open()
     }
 
-    function syncAndPlay(index)
-    {
-        if(!playlistsList.get(index).playlistIcon)
-            control.playAll(playlistsList.get(index).playlist)
-
-        _filterDialog.close()
-    }
 
     function removePlaylist()
     {
         playlistsList.removePlaylist(playlistViewList.currentIndex)
+    }
+
+    function addPlaylist(text)
+    {
+        var title = text.trim()
+        if(playlistsList.insert(title))
+            control.listView.positionViewAtEnd()
     }
 }

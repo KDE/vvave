@@ -5,111 +5,39 @@ import org.kde.mauikit 1.0 as Maui
 
 Item
 {
-    property int recSize: Maui.Style.iconSizes.small
+    property int recSize: Maui.Style.iconSizes.medium
     readonly property int recRadius : recSize*0.05
     signal colorClicked(string color)
 
     RowLayout
     {
-        width: parent.width
         anchors.fill: parent
-        anchors.centerIn: parent
-        ToolButton
+        spacing: Maui.Style.space.small
+
+        Repeater
         {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignCenter
-            flat: true
-            Rectangle
+            model: vvave.moodColors()
+
+            MouseArea
             {
-                anchors.centerIn: parent
-                width: recSize
-                height: recSize
-                color: vvave.moodColor(0)
-                radius: recRadius
-                border.color: color
-                border.width: 1
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                onClicked: colorClicked(modelData)
+                propagateComposedEvents: false
+                Rectangle
+                {
+                    color: modelData
+                    anchors.verticalCenter: parent.verticalCenter
+                    height: recSize
+                    width: height
+                    radius: Maui.Style.radiusV
+                    border.color: Qt.darker(color, 1.7)
+                    anchors.centerIn: parent
+                }
             }
 
-            onClicked: colorClicked(vvave.moodColor(0))
-        }
-        ToolButton
-        {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignCenter
 
-            flat: true
-            Rectangle
-            {
-                anchors.centerIn: parent
-                width: recSize
-                height: recSize
-                color: vvave.moodColor(1)
-                radius: recRadius
-                border.color: color
-                border.width: 1
-            }
-
-            onClicked: colorClicked(vvave.moodColor(1))
-        }
-        ToolButton
-        {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignCenter
-            flat: true
-            Rectangle
-            {
-                anchors.centerIn: parent
-                width: recSize
-                height: recSize
-                color: vvave.moodColor(2)
-                radius: recRadius
-                border.color: color
-                border.width: 1
-            }
-
-            onClicked: colorClicked(vvave.moodColor(2))
-        }
-        ToolButton
-        {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignCenter
-            flat: true
-            Rectangle
-            {
-                anchors.centerIn: parent
-                width: recSize
-                height: recSize
-                color: vvave.moodColor(3)
-                radius: recRadius
-                border.color: color
-                border.width: 1
-            }
-
-            onClicked: colorClicked(vvave.moodColor(3))
         }
 
-        ToolButton
-        {
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignCenter
-            flat: true
-            Rectangle
-            {
-                anchors.centerIn: parent
-                width: recSize
-                height: recSize
-                color: vvave.moodColor(4)
-                radius: recRadius
-                border.color: color
-                border.width: 1
-            }
-
-            onClicked: colorClicked(vvave.moodColor(4))
-        }
     }
 }

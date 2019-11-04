@@ -61,32 +61,59 @@ Maui.Page
         onRowClicked: play(index)
         showQuickActions: false
 
-        listView.footer: Maui.ToolBar
+        listView.header: Maui.ToolBar
         {
             Kirigami.Theme.inherit: false
-            z: table.z + 999
+            z: table.z +999
             width: table.width
-
-            leftContent: Label
+            visible: table.list.count > 0
+            rightContent: ToolButton
             {
-                text: root.syncPlaylist
+                icon.name: "edit-clear"
+                onClicked: mainPlaylist.table.list.clear()
             }
 
-            rightContent: [
-            ToolButton
+            leftContent:  ToolButton
+            {
+                icon.name: "document-save"
+                onClicked: mainPlaylist.table.saveList()
+            }
+        }
+
+        listView.footer: Rectangle
+        {
+            visible: root.sync
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+            z: table.z + 999
+            width: table.width
+            height: Maui.Style.rowHeightAlt
+            color: Kirigami.Theme.backgroundColor
+
+            RowLayout
+            {
+                anchors.fill: parent
+                anchors.leftMargin: Maui.Style.space.small
+                Label
                 {
-                    icon.name: "edit-clear"
-                    onClicked: mainPlaylist.table.list.clear()
-                },
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    anchors.margins: Maui.Style.space.small
+                    text: qsTr("Syncing to ") + root.syncPlaylist
+                }
 
                 ToolButton
+                {
+                    Layout.fillHeight: true
+                    icon.name: "dialog-close"
+                    onClicked:
                     {
-                        icon.name: "document-save"
-                        onClicked: mainPlaylist.table.saveList()
+                        root.sync = false
+                        root.syncPlaylist = ""
                     }
+                }
 
-
-            ]
+            }
         }
 
         onArtworkDoubleClicked: contextMenu.babeIt(index)

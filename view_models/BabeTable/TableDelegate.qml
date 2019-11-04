@@ -97,15 +97,17 @@ Maui.ItemDelegate
 
             iconVisible: !control.sameAlbum && control.coverArt
             imageSource: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+
+            ToolButton
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: implicitWidth
+                visible: showQuickActions && (Kirigami.Settings.isMobile ? true : control.hovered)
+                icon.name: "media-playlist-append"
+                onClicked: control.append()
+            }
         }
 
-        ToolButton
-        {
-            Layout.fillHeight: true
-            Layout.preferredWidth: implicitWidth
-            visible: showQuickActions && (Kirigami.Settings.isMobile ? true : control.hovered)
-            icon.name: "media-playlist-append"
-            onClicked: control.append()
-        }
+
     }
 }

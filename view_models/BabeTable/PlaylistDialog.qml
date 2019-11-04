@@ -3,6 +3,7 @@ import QtQuick.Controls 2.10
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import QtQuick.Layouts 1.3
+import PlaylistsList 1.0
 
 import "../../view_models"
 import "../../utils/Player.js" as Player
@@ -54,7 +55,6 @@ Maui.Dialog
             }
         }
 
-
         Maui.TextField
         {
             Layout.fillWidth: true
@@ -96,14 +96,13 @@ Maui.Dialog
         if (newPlaylistField.text)
         {
             var title = newPlaylistField.text.trim()
-            if(playlistsList.insertAt(title, 0))
+            if(playlistsList.insert(title))
             {
-                dialogList.listView.currentIndex = 0
-                dialogList.listView.positionViewAtBeginning()
+                dialogList.currentIndex = 2
+                dialogList.listView.positionViewAtEnd()
             }
 
             newPlaylistField.clear()
         }
     }
-
 }

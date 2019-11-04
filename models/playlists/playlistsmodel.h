@@ -19,7 +19,8 @@ public:
     enum SORTBY : uint_fast8_t
     {
         ADDDATE = FMH::MODEL_KEY::ADDDATE,
-        TITLE = FMH::MODEL_KEY::TITLE
+        TITLE = FMH::MODEL_KEY::TITLE,
+        TYPE = FMH::MODEL_KEY::TYPE
     }; Q_ENUM(SORTBY)
 
     explicit PlaylistsModel(QObject *parent = nullptr);
@@ -36,15 +37,14 @@ private:
     void setList();
 
     FMH::MODEL packPlaylist(const QString &playlist);
-
-    FMH::MODEL_LIST defaultPlaylists();
-
     PlaylistsModel::SORTBY sort = PlaylistsModel::SORTBY::ADDDATE;
 
 signals:
     void sortByChanged();
 
 public slots:
+    QVariantList defaultPlaylists();
+
     QVariantMap get(const int &index) const;
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);

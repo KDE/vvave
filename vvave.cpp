@@ -95,6 +95,11 @@ QString vvave::moodColor(const int &index)
     else return "";
 }
 
+QStringList vvave::moodColors()
+{
+    return BAE::MoodColors;
+}
+
 void vvave::scanDir(const QStringList &paths)
 {
     this->checkCollection(paths, [=](uint size) {emit this->refreshTables(size);});

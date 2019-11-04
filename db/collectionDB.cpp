@@ -873,8 +873,10 @@ FMH::MODEL_LIST CollectionDB::getPlaylists()
             FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],
             TABLEMAP[TABLE::PLAYLISTS]);
 
-
-    return this->getDBData(queryTxt);
+    return this->getDBData(queryTxt, [](FMH::MODEL &item)
+    {
+        item[FMH::MODEL_KEY::TYPE] = "public";
+    });
 }
 
 bool CollectionDB::removeTrack(const QString &path)

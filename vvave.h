@@ -31,6 +31,7 @@ public slots:
     QVariantList sourceFolders();
     bool removeSource(const QString &source);
     static QString moodColor(const int &index);
+    static QStringList moodColors();
     void scanDir(const QStringList &paths = BAE::defaultSources);
 
     QStringList getSourceFolders();

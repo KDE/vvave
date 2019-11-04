@@ -40,32 +40,32 @@ void PlaylistsModel::sortList()
 
         switch(role)
         {
-        case FMH::MODEL_KEY::ADDDATE:
-        {
-            auto currentTime = QDateTime::currentDateTime();
+            case FMH::MODEL_KEY::ADDDATE:
+            {
+                auto currentTime = QDateTime::currentDateTime();
 
-            auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
-            auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
+                auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
+                auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
 
-            if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
-                return true;
+                if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
+                    return true;
 
-            break;
-        }
+                break;
+            }
 
-        case FMH::MODEL_KEY::TITLE:
-        {
-            const auto str1 = QString(e1[role]).toLower();
-            const auto str2 = QString(e2[role]).toLower();
+            case FMH::MODEL_KEY::TITLE:
+            {
+                const auto str1 = QString(e1[role]).toLower();
+                const auto str2 = QString(e2[role]).toLower();
 
-            if(str1 < str2)
-                return true;
-            break;
-        }
+                if(str1 < str2)
+                    return true;
+                break;
+            }
 
-        default:
-            if(e1[role] < e2[role])
-                return true;
+            default:
+                if(e1[role] < e2[role])
+                    return true;
         }
 
         return false;
@@ -74,14 +74,8 @@ void PlaylistsModel::sortList()
 
 void PlaylistsModel::setList()
 {
-    qDebug()<< "trying to set playlists list";
     emit this->preListChanged();
-
     this->list << this->db->getPlaylists();
-    this->list << this->defaultPlaylists();
-
-    qDebug()<< this->list;
-
     //    this->sortList();
     emit this->postListChanged();
 }
@@ -91,68 +85,86 @@ FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
     return FMH::MODEL
     {
         {FMH::MODEL_KEY::PLAYLIST, playlist},
+        {FMH::MODEL_KEY::TYPE, "public"},
         {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
         //        {FMH::MODEL_KEY::ICON, "view-media-playlist"}
     };
 }
 
-FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
+QVariantList PlaylistsModel::defaultPlaylists()
 {
-    return FMH::MODEL_LIST  {
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
-            {FMH::MODEL_KEY::ICON, "view-media-playcount"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
+    const  auto model = FMH::MODEL_LIST  {
+    {
+    {FMH::MODEL_KEY::TYPE, "default"},
+    {FMH::MODEL_KEY::DESCRIPTION, "Favorite tracks"},
+    {FMH::MODEL_KEY::COLOR, "#EC407A"},
+    {FMH::MODEL_KEY::PLAYLIST, "Favs"},
+    {FMH::MODEL_KEY::ICON, "love"},
+    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+},
 
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Rating"},
-            {FMH::MODEL_KEY::ICON, "view-media-favorite"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
+    {
+    {FMH::MODEL_KEY::TYPE, "default"},
+    {FMH::MODEL_KEY::DESCRIPTION, "Top listened tracks"},
+    {FMH::MODEL_KEY::COLOR, "#FFA000"},
+    {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
+    {FMH::MODEL_KEY::ICON, "view-media-playcount"},
+    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+},
 
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Recent"},
-            {FMH::MODEL_KEY::ICON, "view-media-recent"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
+    {
+    {FMH::MODEL_KEY::TYPE, "default"},
+    {FMH::MODEL_KEY::DESCRIPTION, "Highest rated tracks"},
+    {FMH::MODEL_KEY::COLOR, "#42A5F5"},
+    {FMH::MODEL_KEY::PLAYLIST, "Rating"},
+    {FMH::MODEL_KEY::ICON, "view-media-favorite"},
+    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+},
 
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Favs"},
-            {FMH::MODEL_KEY::ICON, "love"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
+            //        {
+            //            {FMH::MODEL_KEY::TYPE, "default"},
+            //            {FMH::MODEL_KEY::PLAYLIST, "Recent"},
+            //            {FMH::MODEL_KEY::ICON, "view-media-recent"},
+            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+            //        },
 
-        {
-            {FMH::MODEL_KEY::PLAYLIST, "Online"},
-            {FMH::MODEL_KEY::ICON, "internet-services"},
-            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        },
 
-//        {
-//            {FMH::MODEL_KEY::PLAYLIST, "Tags"},
-//            {FMH::MODEL_KEY::ICON, "tag"},
-//            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-//        },
 
-//        {
-//            {FMH::MODEL_KEY::PLAYLIST, "Relationships"},
-//            {FMH::MODEL_KEY::ICON, "view-media-similarartists"},
-//            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-//        },
+    {
+    {FMH::MODEL_KEY::TYPE, "default"},
+    {FMH::MODEL_KEY::COLOR, "#26A69A"},
+    {FMH::MODEL_KEY::DESCRIPTION, "Online tracks"},
+    {FMH::MODEL_KEY::PLAYLIST, "YouTube"},
+    {FMH::MODEL_KEY::ICON, "internet-services"},
+    {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+},
 
-//        {
-//            {FMH::MODEL_KEY::PLAYLIST, "Popular"},
-//            {FMH::MODEL_KEY::ICON, "view-media-chart"},
-//            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-//        },
+            //        {
+            //            {FMH::MODEL_KEY::PLAYLIST, "Tags"},
+            //            {FMH::MODEL_KEY::ICON, "tag"},
+            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+            //        },
 
-//        {
-//            {FMH::MODEL_KEY::PLAYLIST, "Genres"},
-//            {FMH::MODEL_KEY::ICON, "view-media-genre"},
-//            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-//        }
-    };
+            //        {
+            //            {FMH::MODEL_KEY::PLAYLIST, "Relationships"},
+            //            {FMH::MODEL_KEY::ICON, "view-media-similarartists"},
+            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+            //        },
+
+            //        {
+            //            {FMH::MODEL_KEY::PLAYLIST, "Popular"},
+            //            {FMH::MODEL_KEY::ICON, "view-media-chart"},
+            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+            //        },
+
+            //        {
+            //            {FMH::MODEL_KEY::PLAYLIST, "Genres"},
+            //            {FMH::MODEL_KEY::ICON, "view-media-genre"},
+            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+            //        }
+};
+
+    return FMH::toMapList(model);
 }
 
 QVariantMap PlaylistsModel::get(const int &index) const
@@ -168,13 +180,7 @@ void PlaylistsModel::append(const QVariantMap &item)
         return;
 
     emit this->preItemAppended();
-
-    FMH::MODEL model;
-    for(auto key : item.keys())
-        model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
-
-    this->list << model;
-
+    this->list << FMH::toModel(item);
     emit this->postItemAppended();
 }
 
@@ -186,16 +192,8 @@ void PlaylistsModel::append(const QVariantMap &item, const int &at)
     if(at > this->list.size() || at < 0)
         return;
 
-    qDebug()<< "trying to append at" << at << item["title"];
-
     emit this->preItemAppendedAt(at);
-
-    FMH::MODEL model;
-    for(auto key : item.keys())
-        model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
-
-    this->list.insert(at, model);
-
+    this->list.insert(at, FMH::toModel(item));
     emit this->postItemAppended();
 }
 
@@ -206,8 +204,8 @@ void PlaylistsModel::insert(const QString &playlist)
 
     emit this->preItemAppended();
 
-    this->list << this->packPlaylist(playlist);
-
+    if(this->db->addPlaylist(playlist))
+        this->list << (this->packPlaylist(playlist));
     emit this->postItemAppended();
 }
 

@@ -697,13 +697,15 @@ Maui.ApplicationWindow
                             onAppendTrack: Player.addTrack(track)
                             onPlayTrack: Player.quickPlay(track)
                             onAppendAll: Player.appendAll(playlistsView.listModel.getAll())
-                            onPlayAll:
+                            onSyncAndPlay:
                             {
                                 Player.playAll(playlistsView.listModel.getAll())
 
                                 root.sync = true
                                 root.syncPlaylist = playlist
                             }
+
+                            onPlayAll: Player.playAll(playlistsView.listModel.getAll())
                         }
                     }
                 }
