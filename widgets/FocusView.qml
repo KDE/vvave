@@ -119,12 +119,11 @@ Maui.Page
                     Rectangle
                     {
                         id: _bg
-                        width: _image.width
+                        width: _image.width + Maui.Style.space.medium
                         height: width
                         anchors.centerIn: parent
                         radius: height
-                        color: Kirigami.Theme.textColor
-
+                        color: Kirigami.Theme.backgroundColor
                     }
 
                     DropShadow
@@ -172,9 +171,18 @@ Maui.Page
 
                         Rectangle
                         {
+                            color: control.Kirigami.Theme.backgroundColor
+                            height: parent.height * 0.25
+                            width: height
+                            anchors.centerIn: parent
+                            radius: height
+                        }
+
+                        Rectangle
+                        {
                             id: _roundRec
                             color: control.Kirigami.Theme.backgroundColor
-                            height: parent.height * 0.2
+                            height: parent.height * 0.20
                             width: height
                             anchors.centerIn: parent
                             radius: height
