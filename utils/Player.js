@@ -4,8 +4,6 @@ function playTrack(index)
 {
     if((index < mainPlaylist.listView.count) && (mainPlaylist.listView.count > 0) && (index > -1))
     {
-        currentTrack = mainPlaylist.list.get(index)
-
         if(typeof(currentTrack) === "undefined") return
 
         if(!Maui.FM.fileExists(currentTrack.url) && currentTrack.url.startsWith("file://"))
@@ -16,7 +14,6 @@ function playTrack(index)
 
         player.url = currentTrack.url;
         player.playing = true
-        currentArtwork =  currentTrack.artwork
 
         progressBar.enabled = true
         root.title = currentTrack.title + " - " +currentTrack.artist
@@ -79,13 +76,12 @@ function nextTrack()
         else
             next = currentTrackIndex+1 >= mainPlaylist.listView.count? 0 : currentTrackIndex+1
 
-        prevTrackIndex = mainPlaylist.listView.currentIndex
+        prevTrackIndex = currentTrackIndex
         playAt(next)
 
         if(onQueue > 0)
         {
             onQueue--
-            console.log(onQueue)
         }
     }
 }
@@ -94,8 +90,8 @@ function previousTrack()
 {
     if(!mainlistEmpty)
     {
-        var previous = previous = currentTrackIndex-1 >= 0 ? mainPlaylist.listView.currentIndex-1 : currentTrackIndex-1
-        prevTrackIndex = mainPlaylist.listView.currentIndex
+        const previous = currentTrackIndex-1 >= 0 ? mainPlaylist.listView.currentIndex-1 : mainPlaylist.listView.count-1
+        prevTrackIndex = currentTrackIndex
         playAt(previous)
     }
 }

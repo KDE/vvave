@@ -34,7 +34,7 @@ Item
     {
         anchors.fill: parent
         visible: !browser.count
-        emoji: "qrc:/assets/MusicCloud.png"
+        emoji: "qrc:/assets/dialog-information.svg"
         isMask: false
         title : "No Folders!"
         body: "Add new music to your sources to browse by folders"

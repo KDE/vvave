@@ -1,11 +1,11 @@
 #include "player.h"
 #include "../../utils/bae.h"
 
-#ifdef STATIC_MAUIKIT
-#include "mauiaccounts.h"
-#else
-#include <mauiaccounts.h>
-#endif
+//#ifdef STATIC_MAUIKIT
+//#include "mauiaccounts.h"
+//#else
+//#include <mauiaccounts.h>
+//#endif
 
 Player::Player(QObject *parent) : QObject(parent),
     player(new QMediaPlayer(this)),
@@ -27,7 +27,8 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest& request)
         rawHeaders.insert(headerKey, request.rawHeader(headerKey));
     }
 
-    const auto account = FMH::toModel(MauiAccounts::instance()->getCurrentAccount());
+//    const auto account = FMH::toModel(MauiAccounts::instance()->getCurrentAccount());
+    const auto account = FMH::MODEL();
 
     const QString concatenated =  QString("%1:%2").arg(account[FMH::MODEL_KEY::USER], account[FMH::MODEL_KEY::PASSWORD]);
     const QByteArray data = concatenated.toLocal8Bit().toBase64();
@@ -111,8 +112,8 @@ QString Player::transformTime(const int &pos)
 
 void Player::setUrl(const QUrl &value)
 {
-    if(value == this->url)
-        return;
+//    if(value == this->url)
+//        return;
 
     this->url = value;
     emit this->urlChanged();

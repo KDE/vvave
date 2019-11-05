@@ -54,16 +54,13 @@ Maui.ApplicationWindow
     /******************** PLAYBACK ********************/
     /*************************************************/
     property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
-    property var currentTrack: ({
-                                    fav: "0",
-                                    stars: "0"
-                                })
+    readonly property var currentTrack: mainlistEmpty?  ({url: "", artwork: "", fav: "0", stars: "0"}) : mainPlaylist.table.listModel.get(currentTrackIndex)
 
     property int currentTrackIndex: -1
     property int prevTrackIndex: 0
 
-    property string currentArtwork: !mainlistEmpty ? mainPlaylist.listModel.get(0).artwork : ""
-    property bool currentBabe: currentTrack.fav == "0" ? false : true
+    readonly property string currentArtwork: currentTrack.artwork
+    readonly property bool currentBabe: currentTrack.fav == "0" ? false : true
 
     property alias durationTimeLabel: player.duration
     property string progressTimeLabel: player.transformTime((player.duration/1000) *(player.pos/ 1000))
@@ -81,9 +78,8 @@ Maui.ApplicationWindow
                                            artists: 2,
                                            playlists: 3,
                                            folders: 4,
-                                           cloud : 5,
-                                           youtube: 6,
-                                           search: 7})
+                                           youtube: 5,
+                                           search: 6})
 
     property string syncPlaylist: ""
     property bool sync: false
@@ -136,7 +132,7 @@ Maui.ApplicationWindow
     headBar.middleContent : Maui.ActionGroup
     {
         id: _actionGroup
-//        Layout.fillWidth: true
+        //        Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.minimumWidth: implicitWidth
         currentIndex : swipeView.currentIndex
@@ -149,11 +145,11 @@ Maui.ApplicationWindow
                 icon.name: "folder"
             },
 
-//            Action
-//            {
-//                text: qsTr("Cloud")
-//                icon.name: "folder-cloud"
-//            },
+            //            Action
+            //            {
+            //                text: qsTr("Cloud")
+            //                icon.name: "folder-cloud"
+            //            },
 
             Action
             {
@@ -486,6 +482,40 @@ Maui.ApplicationWindow
 
                 position: ToolBar.Footer
 
+                rightContent: ToolButton
+                {
+                    icon.name: "media-speaker"
+                    onClicked: _sliderPopup.open()
+
+                    Popup
+                    {
+                        id: _sliderPopup
+                        height: 150
+                        width: parent.width
+                        y: -150
+                        x: 0
+                        //                            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPress
+                        Slider
+                        {
+                            id: _volumeSlider
+                            visible: true
+                            height: parent.height
+                            width: 20
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            from: 0
+                            to: 100
+                            value: player.volume
+                            orientation: Qt.Vertical
+
+                            onMoved:
+                            {
+                                player.volume = value
+                            }
+                        }
+                    }
+
+                }
+
                 middleContent: [
                     ToolButton
                     {
@@ -730,14 +760,14 @@ Maui.ApplicationWindow
                     }
                 }
 
-//                Loader
-//                {
-//                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
-//                    sourceComponent: CloudView
-//                    {
-//                        id: cloudView
-//                    }
-//                }
+                //                Loader
+                //                {
+                //                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
+                //                    sourceComponent: CloudView
+                //                    {
+                //                        id: cloudView
+                //                    }
+                //                }
 
                 Loader
                 {

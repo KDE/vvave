@@ -340,7 +340,6 @@ BabeList
         width: listView.width
         number : trackNumberVisible ? true : false
         coverArt : coverArtVisible ? (control.width > 200) : coverArtVisible
-        showQuickActions: control.showQuickActions
         onPressAndHold: if(Kirigami.Settings.isMobile && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)
 
@@ -357,6 +356,16 @@ BabeList
                     else false
                 }else false
             }else false
+        }
+
+        ToolButton
+        {
+            Layout.fillHeight: true
+            Layout.preferredWidth: implicitWidth
+            visible: control.showQuickActions && (Kirigami.Settings.isMobile ? true : delegate.hovered)
+            icon.name: "media-playlist-append"
+            onClicked: delegate.append()
+            opacity: delegate.hovered ? 0.8 : 0.6
         }
 
         onClicked:

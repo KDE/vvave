@@ -62,6 +62,26 @@ Maui.ToolBar
         }
     }
 
+    rightContent: [
+        ToolButton
+        {
+            icon.name: "edit-delete"
+            onClicked:
+            {
+                player.stop()
+                mainPlaylist.table.list.clear()
+                root.sync = false
+                root.syncPlaylist = ""
+            }
+        }
+    ]
+
+    leftContent:  ToolButton
+    {
+        icon.name: "document-save"
+        onClicked: mainPlaylist.table.saveList()
+    }
+
     middleContent: ListView
     {
         id: _listView
@@ -73,7 +93,7 @@ Maui.ToolBar
         interactive: true
         currentIndex: currentTrackIndex
         spacing: Maui.Style.space.medium
-//        cacheBuffer: control.width * 1
+        //        cacheBuffer: control.width * 1
         onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
 
         highlightFollowsCurrentItem: true
@@ -103,6 +123,7 @@ Maui.ToolBar
             {
                 anchors.fill: parent
                 iconSizeHint: height - Maui.Style.space.small
+                iconVisible: false
                 imageSource: model.artwork ? model.artwork : "qrc:/assets/cover.png"
                 label1.text: model.title
                 label2.text: model.artist + " | " + model.album

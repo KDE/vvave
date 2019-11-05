@@ -15,7 +15,7 @@ import "../../view_models/BabeTable"
 
 Maui.Page
 {
-    id: mainPlaylistRoot
+    id: control
 
     property alias list : table.list
     property alias listModel: table.listModel
@@ -58,47 +58,15 @@ Maui.Page
         holder.title : "Meh!"
         holder.body: "Start putting together your playlist!"
         holder.emojiSize: Maui.Style.iconSizes.huge
-        onRowClicked: play(index)
-        showQuickActions: false
 
-        listView.header: Maui.ToolBar
-        {
-            Kirigami.Theme.inherit: false
-            z: table.z +999
-            width: table.width
-            visible: table.list.count > 0
-            rightContent: ToolButton
-            {
-                icon.name: "edit-clear"
-                onClicked:
-                {
-                    player.stop()
-                    mainPlaylist.table.list.clear()
-                    root.sync = false
-                    root.syncPlaylist = ""
-                }
-            }
-
-            middleContent: Label
-            {
-                text: qsTr("Now playing")
-            }
-
-            leftContent:  ToolButton
-            {
-                icon.name: "document-save"
-                onClicked: mainPlaylist.table.saveList()
-            }
-        }
-
-        listView.footer: Rectangle
+        listView.header: Rectangle
         {
             visible: root.sync
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
             z: table.z + 999
             width: table.width
-            height: Maui.Style.rowHeightAlt
+            height: visible ?  Maui.Style.rowHeightAlt : 0
             color: Kirigami.Theme.backgroundColor
 
             RowLayout
@@ -124,6 +92,59 @@ Maui.Page
                     }
                 }
 
+            }
+        }
+
+        delegate: TableDelegate
+        {
+            id: delegate
+            width: listView.width
+            number : false
+            coverArt : true
+            showEmblem: false
+            onPressAndHold: if(Kirigami.Settings.isMobile && table.allowMenu) table.openItemMenu(index)
+            onRightClicked: if(allowMenu) openItemMenu(index)
+            sameAlbum:
+            {
+                if(coverArt)
+                {
+                    if(list.get(index-1))
+                    {
+                        if(list.get(index-1).album === album && list.get(index-1).artist === artist) true
+                        else false
+                    }else false
+                }else false
+            }
+
+            ToolButton
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: implicitWidth
+                visible: (Kirigami.Settings.isMobile ? true : delegate.hovered)
+                icon.name: "edit-clear"
+                onClicked:
+                {
+                    if(index === currentTrackIndex)
+                        player.stop()
+
+                    list.remove(index)
+                }
+
+                opacity: delegate.hovered ? 0.8 : 0.6
+            }
+
+            onClicked:
+            {
+                table.currentIndex = index
+                if(Kirigami.Settings.isMobile)
+                     control.play(index)
+            }
+
+            onDoubleClicked:
+            {
+                table.currentIndex = index
+                if(!Kirigami.Settings.isMobile)
+                     control.play(index)
             }
         }
 

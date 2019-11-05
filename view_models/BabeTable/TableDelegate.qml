@@ -14,7 +14,7 @@ Maui.ItemDelegate
     id: control
 
     isCurrentItem: ListView.isCurrentItem || isSelected
-
+    default property alias content : _template.content
     property bool showQuickActions: true
     property bool number : false
     property bool coverArt : false
@@ -87,16 +87,6 @@ Maui.ItemDelegate
 
             iconVisible: !control.sameAlbum && control.coverArt
             imageSource: model.artwork ? model.artwork : "qrc:/assets/cover.png"
-
-            ToolButton
-            {
-                Layout.fillHeight: true
-                Layout.preferredWidth: implicitWidth
-                visible: showQuickActions && (Kirigami.Settings.isMobile ? true : control.hovered)
-                icon.name: "media-playlist-append"
-                onClicked: control.append()
-                opacity: control.hovered ? 0.8 : 0.6
-            }
         }
 
 

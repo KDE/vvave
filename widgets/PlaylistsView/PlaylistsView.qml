@@ -52,7 +52,7 @@ Maui.Page
     Maui.NewDialog
     {
         id: newPlaylistDialog
-        title: qsTr("New Playlist...")
+        title: qsTr("Add new playlist")
         onFinished: addPlaylist(text)
         acceptText: qsTr("Create")
         rejectButton.visible: false
