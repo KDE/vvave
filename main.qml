@@ -616,7 +616,7 @@ Maui.ApplicationWindow
                     {
                         id: albumsView
 
-                        holder.emoji: "qrc:/assets/MusicBox.png"
+                        holder.emoji: "qrc:/assets/dialog-information.svg"
                         holder.isMask: false
                         holder.title : "No Albums!"
                         holder.body: "Add new music sources"
@@ -664,7 +664,7 @@ Maui.ApplicationWindow
                     {
                         id: artistsView
 
-                        holder.emoji: "qrc:/assets/MusicBox.png"
+                        holder.emoji: "qrc:/assets/dialog-information.svg"
                         holder.isMask: false
                         holder.title : qsTr("No Artists!")
                         holder.body: qsTr("Add new music sources")
