@@ -79,6 +79,11 @@ Maui.Page
                 }
             }
 
+            middleContent: Label
+            {
+                text: qsTr("Now playing")
+            }
+
             leftContent:  ToolButton
             {
                 icon.name: "document-save"

@@ -11,7 +11,7 @@ import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
 import "widgets/SearchView"
-import "widgets/CloudView"
+//import "widgets/CloudView"
 
 import "view_models"
 import "view_models/BabeTable"
@@ -149,11 +149,11 @@ Maui.ApplicationWindow
                 icon.name: "folder"
             },
 
-            Action
-            {
-                text: qsTr("Cloud")
-                icon.name: "folder-cloud"
-            },
+//            Action
+//            {
+//                text: qsTr("Cloud")
+//                icon.name: "folder-cloud"
+//            },
 
             Action
             {
@@ -730,14 +730,14 @@ Maui.ApplicationWindow
                     }
                 }
 
-                Loader
-                {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
-                    sourceComponent: CloudView
-                    {
-                        id: cloudView
-                    }
-                }
+//                Loader
+//                {
+//                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
+//                    sourceComponent: CloudView
+//                    {
+//                        id: cloudView
+//                    }
+//                }
 
                 Loader
                 {
