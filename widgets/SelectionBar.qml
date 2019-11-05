@@ -7,11 +7,13 @@ import ".."
 import "../utils/Help.js" as H
 import "../utils/Player.js" as Player
 import "../view_models"
+import "../view_models/BabeTable"
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
 
-Menu
+MauiLab.SelectionBar
 {
     id: control
     width: Maui.Style.unit * 200
@@ -23,35 +25,45 @@ Menu
 
     signal rateClicked(int rate)
 
-
-    MenuItem
+    listDelegate: TableDelegate
     {
-        text: qsTr("Play...")
+        Kirigami.Theme.inherit: true
+        width: parent.width
+        number: false
+        coverArt: true
+        showQuickActions: false
+        isSelected: true
+
+        onLeftEmblemClicked: control.removeAtIndex(index)
+
+        background: null
+    }
+
+    Action
+    {
+        text: qsTr("Play")
+        icon.name: "media-playlist-play"
         onTriggered:
         {
             mainPlaylist.list.clear()
-
-            var tracks = _selectionBar.selectedItems
-            for(var i in tracks)
-                Player.appendTrack(tracks[i])
-
-            Player.playAll()
+            Player.playAll(control.items)
         }
     }
 
-    MenuItem
+    Action
     {
-        text: qsTr("Append...")
-        onTriggered: Player.appendAll(_selectionBar.selectedItems)
+        text: qsTr("Append")
+        icon.name: "media-playlist-append"
+        onTriggered: Player.appendAll(control.items)
     }
 
-    MenuItem
+    Action
     {
         text: qsTr("Queue")
+        icon.name: "view-media-recent"
         onTriggered:
         {
-            Player.queueTracks(_selectionBar.selectedItems)
-            close()
+            Player.queueTracks(control.items)
         }
     }
 
@@ -70,45 +82,42 @@ Menu
 //    }
 
 
-    MenuItem
+    Action
     {
-        text: qsTr("Add to...")
+        text: qsTr("Add to")
+        icon.name: "document-save"
         onTriggered:
         {
-            playlistDialog.tracks = _selectionBar.selectedPaths
+            playlistDialog.tracks = control.uris
             playlistDialog.open()
-            close()
         }
     }
 
-    MenuSeparator {}
-
-    MenuItem
+    Action
     {
-        text: qsTr("Share...")
+        text: qsTr("Share")
+        icon.name: "document-share"
         onTriggered:
         {
             if(isAndroid)
             {
-                 Maui.Android.shareDialog(_selectionBar.selectedPaths)
+                 Maui.Android.shareDialog(control.uris)
                 return
             }
 
             _dialogLoader.sourceComponent = _shareDialogComponent
-            root.dialog.show(_selectionBar.selectedPaths)
-            close()
+            root.dialog.show(control.uris)
         }
     }
 
-    MenuSeparator {}
 
-    MenuItem
+    Action
     {
         text: qsTr("Remove")
+        icon.name: "edit-delete"
         Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
         onTriggered:
         {
-            close()
         }
     }
 

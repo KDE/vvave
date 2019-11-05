@@ -347,6 +347,18 @@ BabeList
         onLeftEmblemClicked: H.addToSelection(list.get(index))
         isSelected: selectionBar.contains(model.url)
 
+        sameAlbum:
+        {
+            if(coverArt)
+            {
+                if(list.get(index-1))
+                {
+                    if(list.get(index-1).album === album && list.get(index-1).artist === artist) true
+                    else false
+                }else false
+            }else false
+        }
+
         onClicked:
         {
             currentIndex = index
@@ -390,15 +402,15 @@ BabeList
         {
             target: selectionBar
 
-            onPathRemoved:
+            onUriRemoved:
             {
-                if(path === model.url)
+                if(uri === model.url)
                     delegate.isSelected = false
             }
 
-            onPathAdded:
+            onUriAdded:
             {
-                if(path === model.url)
+                if(uri === model.url)
                     delegate.isSelected = true
             }
 

@@ -1,3 +1,5 @@
+.import org.kde.kirigami 2.7 as Kirigami
+
 function rootWidth()
 {
     return root.width;
@@ -40,10 +42,9 @@ function setStars(stars)
     }
 }
 
-
 function notify(title, body)
 {
-    if(isMobile)
+    if(Kirigami.Settings.isMobile)
         root.notify(title+"\n"+body)
     else
         bae.notify(title, body)
@@ -71,7 +72,7 @@ function addToSelection(item)
 {
     if(selectionBar.contains(item.url))
     {
-        selectionBar.removeAtPath(item.url)
+        selectionBar.removeAtUri(item.url)
         return
     }
 
@@ -81,5 +82,5 @@ function addToSelection(item)
     item.mime= "image/png"
     item.tooltip= item.url
     item.path= item.url
-    selectionBar.append(item)
+    selectionBar.append(item.url, item)
 }

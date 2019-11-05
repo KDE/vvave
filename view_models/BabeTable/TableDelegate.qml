@@ -25,17 +25,7 @@ Maui.ItemDelegate
 
     readonly property color bgColor : Kirigami.Theme.backgroundColor
     readonly property int altHeight : Maui.Style.rowHeight * 1.4
-    readonly property bool sameAlbum :
-    {
-        if(coverArt)
-        {
-            if(list.get(index-1))
-            {
-                if(list.get(index-1).album === album && list.get(index-1).artist === artist) true
-                else false
-            }else false
-        }else false
-    }
+    property bool sameAlbum : false
 
     width: parent.width
     height: sameAlbum ? Maui.Style.rowHeight : altHeight

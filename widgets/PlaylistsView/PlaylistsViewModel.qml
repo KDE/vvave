@@ -110,7 +110,7 @@ BabeList
     {
         z: control.z + 999
         width: control.width
-        height: 120 + Maui.Style.rowHeight
+        height: 100 + Maui.Style.rowHeight
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         color: Kirigami.Theme.backgroundColor

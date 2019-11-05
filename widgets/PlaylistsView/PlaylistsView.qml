@@ -4,6 +4,7 @@ import QtQuick.Controls 2.10
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import TracksList 1.0
+import QtGraphicalEffects 1.0
 
 import "../../view_models/BabeTable"
 import "../../view_models"
@@ -29,16 +30,18 @@ Maui.Page
     signal syncAndPlay(string playlist)
     signal appendAll()
 
-    footBar.rightContent:  [
 
-        ToolButton
-        {
-            id : createPlaylistBtn
-//            text: qsTr("Add")
-            icon.name : "list-add"
-            onClicked: newPlaylistDialog.open()
-        }
-    ]
+    Maui.FloatingButton
+    {
+        id: _overlayButton
+        z: 999
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: Maui.Style.toolBarHeight
+        anchors.bottomMargin: Maui.Style.toolBarHeight
+        icon.name : "list-add"
+        onClicked: newPlaylistDialog.open()
+    }
 
     PlaylistsViewModel
     {
