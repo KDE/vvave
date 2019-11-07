@@ -17,7 +17,6 @@
 
 
 #include "youtube.h"
-#include "../../utils/babeconsole.h"
 
 #include <QtNetwork>
 #include <QUrl>
@@ -27,6 +26,9 @@
 #include <QNetworkRequest>
 #include <QJsonDocument>
 #include <QVariantMap>
+
+#include "../../pulpo/pulpo.h"
+#include "../../utils/bae.h"
 
 using namespace BAE;
 

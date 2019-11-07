@@ -1,0 +1,11 @@
+prefix=C:/Users/milo/Documents/vvave/3rdparty/taglib
+exec_prefix=C:/Users/milo/Documents/vvave/3rdparty/taglib
+libdir=C:/Users/milo/Documents/vvave/3rdparty/taglib/lib
+includedir=C:/Users/milo/Documents/vvave/3rdparty/taglib/include
+
+Name: TagLib
+Description: Audio meta-data library
+Requires: 
+Version: 1.10
+Libs: -LC:/Users/milo/Documents/vvave/3rdparty/taglib/lib -ltag
+Cflags: -IC:/Users/milo/Documents/vvave/3rdparty/taglib/include/taglib 

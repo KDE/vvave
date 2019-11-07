@@ -11,6 +11,7 @@
 #include "bae.h"
 #include "../pulpo/pulpo.h"
 #include "../db/collectionDB.h"
+#include "downloader.h"
 
 using namespace BAE;
 using namespace PULPO;

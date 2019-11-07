@@ -5,18 +5,13 @@
 #include <QByteArray>
 #include <QObject>
 
-#if defined(Q_OS_ANDROID)
-#include <./3rdparty/taglib/tag.h>
-#include <./3rdparty/taglib/fileref.h>
+#if defined Q_OS_ANDROID || defined Q_OS_WIN32
+#include "taglib/tag.h"
+#include "taglib/fileref.h"
 #else
 #include <taglib/tag.h>
 #include <taglib/fileref.h>
 #endif
-
-namespace TagLib
-{
-class FileRef;
-}
 
 class TagInfo : public QObject
 {
@@ -46,7 +41,7 @@ public:
     void setCover(const QByteArray &array);
 
 private:
-    TagLib::FileRef file;
+    TagLib::FileRef *file;
     QString path;
 };
 

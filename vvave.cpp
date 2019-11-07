@@ -115,7 +115,6 @@ void vvave::openUrls(const QStringList &urls)
     if(urls.isEmpty()) return;
 
     QVariantList data;
-    TagInfo info;
 
     for(const auto &url : urls)
       {
@@ -125,6 +124,7 @@ void vvave::openUrls(const QStringList &urls)
             data << FMH::toMap(this->db->getDBData(QStringList() << _url.toString()).first());
         }else
         {
+            TagInfo info;
             if(info.feed(_url.toLocalFile()))
             {
                 const auto album = BAE::fixString(info.getAlbum());
