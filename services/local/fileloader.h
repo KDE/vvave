@@ -11,7 +11,7 @@
 namespace FLoader
 {
 
-inline QList<QUrl> getPathContents(QList<QUrl> &urls, const QUrl &url)
+static inline QList<QUrl> getPathContents(QList<QUrl> &urls, const QUrl &url)
 {
     if(!FMH::fileExists(url) && !url.isLocalFile())
         return urls;
@@ -30,9 +30,8 @@ inline QList<QUrl> getPathContents(QList<QUrl> &urls, const QUrl &url)
 }
 
 // returns the number of new items added to the collection db
-inline uint getTracks(const QList<QUrl>& paths)
+static inline uint getTracks(const QList<QUrl>& paths)
 {
-    qDebug()<< paths;
     auto db = CollectionDB::getInstance();
     const auto urls = std::accumulate(paths.begin(), paths.end(), QList<QUrl>(), getPathContents);
 
@@ -48,6 +47,7 @@ inline uint getTracks(const QList<QUrl>& paths)
     TagInfo info;
     for(const auto &url : urls)
     {
+
         if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url.toString()))
             continue;
 
@@ -62,6 +62,8 @@ inline uint getTracks(const QList<QUrl>& paths)
         const auto sourceUrl = FMH::parentDir(url).toString();
         const auto duration = info.getDuration();
         const auto year = info.getYear();
+
+        qDebug()<< "GETTING TRACKS 3" << url << title << album << artist;
 
         FMH::MODEL trackMap =
         {

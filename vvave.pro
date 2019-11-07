@@ -1,40 +1,48 @@
-QT       += quick
-QT       += multimedia
-QT       += sql
-QT       += websockets
-QT       += network
-QT       += xml
-QT       += qml
-QT       += widgets
-QT       += quickcontrols2
-QT       += concurrent
+QT *= quick \
+    multimedia \
+    sql \
+    websockets \
+    network \
+    xml \
+    qml \
+    widgets \
+    quickcontrols2 \
+    concurrent
 
 TARGET = vvave
 TEMPLATE = app
 
 CONFIG += ordered
-CONFIG += c++11
-QMAKE_LINK += -nostdlib++
+CONFIG += c++17
 
 linux:unix:!android {
     message(Building for Linux KDE)
     include($$PWD/kde/kde.pri)
     LIBS += -lMauiKit
 
-} else:android {
+} else:android|win32 {
     message(Building helpers for Android)
+
+    android {
+        QMAKE_LINK += -nostdlib++
+        QT *= androidextras webview
+        ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
+        include($$PWD/3rdparty/taglib.pri)
+    }else:win32 {
+        message("Using Tablib binaries for Windows")
+
+    }
 
 #DEFAULT COMPONENTS DEFINITIONS
     DEFINES *= \
-        COMPONENT_EDITOR \
-#        COMPONENT_ACCOUNTS \
+#        COMPONENT_EDITOR \
+        COMPONENT_ACCOUNTS \
         COMPONENT_FM \
-        COMPONENT_TERMINAL \
+#        COMPONENT_TERMINAL \
         COMPONENT_TAGGING \
-        COMPONENT_SYNCING
+#        COMPONENT_SYNCING \
+        MAUIKIT_STYLE
 
-    QT *= androidextras webview
-    include($$PWD/3rdparty/taglib.pri)
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
 
@@ -111,4 +119,6 @@ HEADERS += \
 
 include(install.pri)
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
+        LIBS += -L$$PWD/3rdparty/taglib/lib/ -llibtag.dll
+        INCLUDEPATH += $$PWD/3rdparty/taglib/include
+        DEPENDPATH += $$PWD/3rdparty/taglib/include

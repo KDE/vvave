@@ -591,11 +591,11 @@ Maui.ApplicationWindow
                 {
                     id: tracksView
 
-                    Connections
-                    {
-                        target: vvave
-                        onRefreshTables: tracksView.list.refresh()
-                    }
+//                    Connections
+//                    {
+//                        target: vvave
+//                        onRefreshTables: tracksView.list.refresh()
+//                    }
 
                     Connections
                     {

@@ -255,6 +255,7 @@ void CollectionDB::openDB(const QString &name)
 
 bool CollectionDB::addTrack(const FMH::MODEL &track)
 {
+    qDebug()<< "ÄDDING TRACKS" << track;
     auto url = track[FMH::MODEL_KEY::URL];
     auto title = track[FMH::MODEL_KEY::TITLE];
     auto artist = track[FMH::MODEL_KEY::ARTIST];

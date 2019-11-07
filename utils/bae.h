@@ -1,7 +1,6 @@
 #ifndef BAE_H
 #define BAE_H
 
-#include "string"
 #include <QString>
 #include <QDebug>
 #include <QStandardPaths>
@@ -11,8 +10,7 @@
 #include <QSettings>
 #include <QDirIterator>
 #include <QScreen>
-#include <QtNetwork>
-#include <QEventLoop>
+
 
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
@@ -20,7 +18,6 @@
 #include <MauiKit/fmh.h>
 #endif
 
-#include <cmath>
 
 #define BABE_MAJOR_VERSION 0
 #define BABE_MINOR_VERSION 1
@@ -30,7 +27,6 @@
 
 #define BABE_VERSION KDE_MAKE_VERSION(0,1,0)
 
-using namespace std;
 
 namespace BAE
 {
@@ -213,7 +209,7 @@ static const DB TracksColsMap =
     {KEY::ART, KEYMAP[KEY::ART]}
 };
 
-inline QString transformTime(const qint64 &value)
+const static inline QString transformTime(const qint64 &value)
 {
     QString tStr;
     if (value)
@@ -228,7 +224,7 @@ inline QString transformTime(const qint64 &value)
     return tStr.isEmpty() ? "00:00" : tStr;
 }
 
-inline QString getNameFromLocation(const QString &str)
+const static inline QString getNameFromLocation(const QString &str)
 {
     QString ret;
     int index = 0;
@@ -246,40 +242,40 @@ inline QString getNameFromLocation(const QString &str)
     return ret;
 }
 
-const QString SettingPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/").toLocalFile();
+const static QString SettingPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/").toLocalFile();
 const QString CollectionDBPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/").toLocalFile();
 
 #ifdef Q_OS_ANDROID
-const QString CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/").toString();
+const static QString CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/").toString();
 #else
-const QString CachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/").toString();
+const static QString CachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/").toString();
 #endif
 
-const QString YoutubeCachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/").toLocalFile();
-const QString NotifyDir = SettingPath;
+const static QString YoutubeCachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/").toLocalFile();
+const static QString NotifyDir = SettingPath;
 
-const QString MusicPath = FMH::MusicPath;
-const QString HomePath = FMH::HomePath;
-const QString DownloadsPath = FMH::DownloadsPath;
+const static QString MusicPath = FMH::MusicPath;
+const static QString HomePath = FMH::HomePath;
+const static QString DownloadsPath = FMH::DownloadsPath;
 
-const QString BabePort = "8483";
-const QString LinkPort = "3333";
+const static QString BabePort = "8483";
+const static QString LinkPort = "3333";
 
-const QString appName = QStringLiteral("vvave");
-const QString displayName = QStringLiteral("vvave");
-const QString version = BABE_VERSION_STR;
-const QString description = QStringLiteral("Music player");
-const QString orgName = QStringLiteral("Maui");
-const QString orgDomain = QStringLiteral("org.maui.vvave");
+const static QString appName = QStringLiteral("vvave");
+const static QString displayName = QStringLiteral("vvave");
+const static QString version = BABE_VERSION_STR;
+const static QString description = QStringLiteral("Music player");
+const static QString orgName = QStringLiteral("Maui");
+const static QString orgDomain = QStringLiteral("org.maui.vvave");
 
-const QString DBName = "collection.db";
+const static QString DBName = "collection.db";
 
-const QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};
-const QStringList defaultSources = QStringList() << BAE::MusicPath
+const static QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};
+const static QStringList defaultSources = QStringList() << BAE::MusicPath
                                                  << BAE::DownloadsPath
                                                  << BAE::YoutubeCachePath;
 
-inline QString fixTitle(const QString &title,const QString &s,const QString &e)
+const static inline QString fixTitle(const QString &title,const QString &s,const QString &e)
 {
     QString newTitle;
     for(int i=0; i<title.size();i++)
@@ -294,7 +290,7 @@ inline QString fixTitle(const QString &title,const QString &s,const QString &e)
     return newTitle.simplified();
 }
 
-inline QString removeSubstring(const QString &newTitle, const QString &subString)
+const static inline QString removeSubstring(const QString &newTitle, const QString &subString)
 {
     const int indexFt = newTitle.indexOf(subString, 0, Qt::CaseInsensitive);
 
@@ -304,7 +300,7 @@ inline QString removeSubstring(const QString &newTitle, const QString &subString
         return newTitle;
 }
 
-inline QString ucfirst(const QString &str)/*uppercase first letter*/
+const static inline QString ucfirst(const QString &str)/*uppercase first letter*/
 {
     if (str.isEmpty()) return "";
 
@@ -329,7 +325,7 @@ inline QString ucfirst(const QString &str)/*uppercase first letter*/
     return output.simplified();
 }
 
-inline QString fixString (const QString &str)
+const static inline QString fixString (const QString &str)
 {
     //title.remove(QRegExp(QString::fromUtf8("[·-`~!@#$%^&*()_—+=|:;<>«»,.?/{}\'\"\\\[\\\]\\\\]")));
     QString title = str;
@@ -355,12 +351,12 @@ inline QString fixString (const QString &str)
     return ucfirst(title).simplified();
 }
 
-inline bool fileExists(const QString &url)
+ static inline bool fileExists(const QString &url)
 {
     return FMH::fileExists(QUrl::fromLocalFile(url));
 }
 
-inline BAE::TABLE albumType(const FMH::MODEL &albumMap)
+ static inline BAE::TABLE albumType(const FMH::MODEL &albumMap)
 {
     if(albumMap[FMH::MODEL_KEY::ALBUM].isEmpty() && !albumMap[FMH::MODEL_KEY::ARTIST].isEmpty())
         return BAE::TABLE::ARTISTS;
@@ -370,7 +366,7 @@ inline BAE::TABLE albumType(const FMH::MODEL &albumMap)
     return BAE::TABLE::NONE;
 }
 
-inline void saveArt(FMH::MODEL &track, const QByteArray &array, const QString &path)
+static inline void saveArt(FMH::MODEL &track, const QByteArray &array, const QString &path)
 {
     if(!array.isNull()&&!array.isEmpty())
     {
@@ -389,7 +385,7 @@ inline void saveArt(FMH::MODEL &track, const QByteArray &array, const QString &p
     }else qDebug()<<"array is empty";
 }
 
-inline void saveSettings(const QString &key, const QVariant &value, const QString &group)
+static inline void saveSettings(const QString &key, const QVariant &value, const QString &group)
 {
     QSettings setting("vvave","vvave");
     setting.beginGroup(group);
@@ -397,7 +393,7 @@ inline void saveSettings(const QString &key, const QVariant &value, const QStrin
     setting.endGroup();
 }
 
-inline QVariant loadSettings(const QString &key, const QString &group, const QVariant &defaultValue)
+static inline QVariant loadSettings(const QString &key, const QString &group, const QVariant &defaultValue)
 {
     QVariant variant;
     QSettings setting("vvave","vvave");
@@ -408,7 +404,7 @@ inline QVariant loadSettings(const QString &key, const QString &group, const QVa
     return variant;
 }
 
-inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MODEL_KEY::ID)
+static inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MODEL_KEY::ID)
 {
     QDirIterator it(QUrl(CachePath).toLocalFile(), QDir::Files, QDirIterator::NoIteratorFlags);
     while (it.hasNext())
@@ -438,20 +434,6 @@ inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MO
     return false;
 }
 
-inline bool internetConnection()
-{
-    QNetworkAccessManager nam;
-    QNetworkRequest req(QUrl("http://google.com"));
-    QNetworkReply *reply = nam.get(req);
-    QEventLoop loop;
-    QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    loop.exec();
-
-    if(reply->bytesAvailable())
-        return true;
-    else
-        return false;
-}
 }
 
 

@@ -3,9 +3,8 @@
 #include <QObject>
 #include <QWidget>
 #include <QMap>
-
-#include "../../pulpo/pulpo.h"
-#include "../../utils/bae.h"
+#include <QUrl>
+#include <QVariant>
 
 class YouTube : public QObject
 {
@@ -15,7 +14,6 @@ class YouTube : public QObject
     {
         SEARCH
     };
-
 
 public:
     explicit YouTube(QObject *parent = nullptr);

@@ -24,42 +24,49 @@ TagInfo::TagInfo(QObject *parent) : QObject(parent)
 {}
 
 TagInfo::~TagInfo()
-{}
+{
+    qDebug()<< "DELETING TAGINFO";
+    delete this->file;
+}
 
 bool TagInfo::feed(const QString &url)
 {
     this->path = url;
-    this->file = TagLib::FileRef(path.toUtf8());
-    return !file.isNull();
+    this->file =  new TagLib::FileRef(this->path.toStdWString().c_str());
+    return !file->isNull();
 }
 
 QString TagInfo::getAlbum() const
 {
-    return !QString::fromStdWString(file.tag()->album().toWString()).isEmpty()
-            ? QString::fromStdWString(file.tag()->album().toWString())
+    const auto value = QString::fromStdWString(file->tag()->album().toWString());
+    return !value.isEmpty()
+            ? value
             : SLANG[W::UNKNOWN];
 }
 
 QString TagInfo::getTitle() const
 {
-    return !QString::fromStdWString(file.tag()->title().toWString()).isEmpty()
-            ? QString::fromStdWString(file.tag()->title().toWString())
+    const auto value = QString::fromStdWString(file->tag()->title().toWString());
+    return !value.isEmpty()
+            ? value
             : fileName();
 }
 
 QString TagInfo::getArtist() const
 {
-    return QString::fromStdWString(file.tag()->artist().toWString()).size() > 0
-            ? QString::fromStdWString(file.tag()->artist().toWString())
+    const auto value = QString::fromStdWString(file->tag()->artist().toWString());
+    return !value.isEmpty()
+            ? value
             : SLANG[W::UNKNOWN];
 }
 
-int TagInfo::getTrack() const { return static_cast<signed int>(file.tag()->track()); }
+int TagInfo::getTrack() const { /*return static_cast<signed int>(file.tag()->track());*/ return 0; }
 
 QString TagInfo::getGenre() const
 {
-    return QString::fromStdWString(file.tag()->genre().toWString()).size() > 0
-            ? QString::fromStdWString(file.tag()->genre().toWString())
+    const auto value = QString::fromStdWString(file->tag()->genre().toWString());
+    return !value.isEmpty()
+            ? value
             : SLANG[W::UNKNOWN];
 }
 
@@ -70,21 +77,20 @@ QString TagInfo::fileName() const
 
 uint TagInfo::getYear() const
 {
-    //return BAE::getNameFromLocation(path);
-    return file.tag()->year();
+    return file->tag()->year();
 }
 
 
 int TagInfo::getDuration() const
 {
-
-    return file.audioProperties()->length();
+    return file->audioProperties()->length();
 }
 
 QString TagInfo::getComment() const
 {
-    return QString::fromStdWString(file.tag()->comment().toWString()).size() > 0
-            ? QString::fromStdWString(file.tag()->genre().toWString())
+    const auto value = QString::fromStdWString(file->tag()->comment().toWString());
+    return !value.isEmpty()
+            ?value
             : SLANG[W::UNKNOWN];
 }
 
@@ -102,39 +108,36 @@ void TagInfo::setCover(const QByteArray &array)
 
 void TagInfo::setComment(const QString &comment)
 {
-
-    this->file.tag()->setComment(comment.toStdString());
-    this->file.save();
-
+    this->file->tag()->setComment(comment.toStdString());
+    this->file->save();
 }
 
 void TagInfo::setAlbum(const QString &album)
 {
-    this->file.tag()->setAlbum(album.toStdString());
-    this->file.save();
-
+    this->file->tag()->setAlbum(album.toStdString());
+    this->file->save();
 }
 
 void TagInfo::setTitle(const QString &title)
 {
-    this->file.tag()->setTitle(title.toStdString());
-    this->file.save();
+    this->file->tag()->setTitle(title.toStdString());
+    this->file->save();
 }
 
 void TagInfo::setTrack(const int &track)
 {
-    this->file.tag()->setTrack(static_cast<unsigned int>(track));
-    this->file.save();
+    this->file->tag()->setTrack(static_cast<unsigned int>(track));
+    this->file->save();
 }
 
 void TagInfo::setArtist(const QString &artist)
 {
-    this->file.tag()->setArtist(artist.toStdString());
-    this->file.save();
+    this->file->tag()->setArtist(artist.toStdString());
+    this->file->save();
 }
 
 void TagInfo::setGenre(const QString &genre)
 {
-    this->file.tag()->setGenre(genre.toStdString());
-    this->file.save();
+    this->file->tag()->setGenre(genre.toStdString());
+    this->file->save();
 }

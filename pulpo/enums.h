@@ -12,7 +12,6 @@
 
 #include <functional>
 
-
 namespace PULPO
 {
 

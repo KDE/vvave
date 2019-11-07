@@ -7,8 +7,6 @@
 #include <QStyleHints>
 #include <QQuickStyle>
 #include <QCommandLineParser>
-#include "vvave.h"
-#include "services/local/player.h"
 
 #ifdef STATIC_KIRIGAMI
 #include "3rdparty/kirigami/src/kirigamiplugin.h"
@@ -25,8 +23,12 @@
 #include "mauiandroid.h"
 #else
 #include <QApplication>
+#ifdef Q_OS_LINUX
 #include <QtWebEngine>
 #endif
+#endif
+
+#include "vvave.h"
 
 #include "utils/bae.h"
 #include "services/web/youtube.h"
@@ -36,6 +38,8 @@
 #include "models/albums/albumsmodel.h"
 #include "models/playlists/playlistsmodel.h"
 //#include "models/cloud/cloud.h"
+#include "taglib/tag.h"
+#include "taglib/fileref.h"
 
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
@@ -70,7 +74,6 @@ int main(int argc, char *argv[])
     QStringList urls;
     if(!args.isEmpty())
         urls = args;
-
     vvave vvave;
 
     /* Services */
@@ -84,10 +87,10 @@ int main(int argc, char *argv[])
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, [&]()
     {
         qDebug()<<"FINISHED LOADING QML APP";
-        const auto currentSources = vvave.getSourceFolders();
-        vvave.scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
-        if(!urls.isEmpty())
-            vvave.openUrls(urls);
+//        const auto currentSources = vvave.getSourceFolders();
+//        vvave.scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
+//        if(!urls.isEmpty())
+//            vvave.openUrls(urls);
     });
 
     auto context = engine.rootContext();
@@ -111,7 +114,7 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_ANDROID
     QtWebView::initialize();
-#else
+#elif defined Q_OS_LINUX
     QtWebEngine::initialize();
 #endif
 

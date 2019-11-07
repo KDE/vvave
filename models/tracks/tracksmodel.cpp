@@ -111,7 +111,9 @@ void TracksModel::sortList()
 void TracksModel::setList()
 {
     emit this->preListChanged();
+    qDebug()<< "GETTIN TRACK LIST" << this->query;
     this->list = this->db->getDBData(this->query);
+    qDebug()<< list;
     this->sortList();
     emit this->postListChanged();
 }

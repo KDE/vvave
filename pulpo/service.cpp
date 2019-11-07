@@ -1,5 +1,5 @@
 #include "service.h"
-
+#include "downloader.h"
 
 Service::Service(QObject *parent) : QObject(parent)
 {
