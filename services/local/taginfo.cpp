@@ -27,11 +27,10 @@ TagInfo::TagInfo(const QString &url, QObject *parent) : QObject(parent)
 
     if(_file.isReadable())
     {
-        qDebug()<< ">>>FILE is READABLE" << _file.baseName() << url;
-        this->file = new TagLib::FileRef(this->path.toStdWString().c_str());
+        this->file = new TagLib::FileRef(TagLib::FileName(this->path.toStdWString().c_str()));
     }
     else
-        this->file = new TagLib::FileRef(nullptr);
+        this->file = new TagLib::FileRef();
 }
 
 TagInfo::~TagInfo()
