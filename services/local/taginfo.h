@@ -18,9 +18,9 @@ class TagInfo : public QObject
 
     Q_OBJECT
 public:
-    TagInfo(QObject *parent = nullptr);
+    TagInfo(const QString &url, QObject *parent = nullptr);
     ~TagInfo();
-    bool feed(const QString &url);
+    bool isNull();
     QString getAlbum() const;
     QString getTitle() const;
     QString getArtist() const;
@@ -43,6 +43,7 @@ public:
 private:
     TagLib::FileRef *file;
     QString path;
+    wchar_t * m_path;
 };
 
 #endif // TAGINFO_H

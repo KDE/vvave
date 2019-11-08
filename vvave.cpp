@@ -44,25 +44,6 @@ vvave::vvave(QObject *parent) : QObject(parent),
 
 vvave::~vvave() {}
 
-void vvave::checkCollection(const QStringList &paths, std::function<void(uint)> cb)
-{
-    QFutureWatcher<uint> *watcher = new QFutureWatcher<uint>;
-    connect(watcher, &QFutureWatcher<uint>::finished, [cb, watcher]()
-    {
-        const uint newTracks = watcher->future().result();
-        qDebug()<< "FINISHED SCANING CXOLLECTION";
-        if(cb)
-            cb(newTracks);
-    });
-
-    const auto func = [=]() -> uint
-    {
-        return FLoader::getTracks(QUrl::fromStringList(paths));
-    };
-
-    QFuture<uint> t1 = QtConcurrent::run(func);
-    watcher->setFuture(t1);
-}
 
 void vvave::emitSignal()
 {
@@ -102,8 +83,21 @@ QStringList vvave::moodColors()
 
 void vvave::scanDir(const QStringList &paths)
 {
-    this->checkCollection(paths, [=](uint size) {emit this->refreshTables(size);});
-}
+    QFutureWatcher<uint> *watcher = new QFutureWatcher<uint>;
+    connect(watcher, &QFutureWatcher<uint>::finished, [&, watcher]()
+    {
+        qDebug()<< "FINISHED SCANING CXOLLECTION";
+        emit this->refreshTables( watcher->future().result());
+        watcher->deleteLater();
+    });
+
+    const auto func = [=]() -> uint
+    {
+        return FLoader::getTracks(QUrl::fromStringList(paths));
+    };
+
+    QFuture<uint> t1 = QtConcurrent::run(func);
+    watcher->setFuture(t1);}
 
 QStringList vvave::getSourceFolders()
 {
@@ -124,8 +118,8 @@ void vvave::openUrls(const QStringList &urls)
             data << FMH::toMap(this->db->getDBData(QStringList() << _url.toString()).first());
         }else
         {
-            TagInfo info;
-            if(info.feed(_url.toLocalFile()))
+            TagInfo info(_url.toLocalFile());
+            if(!info.isNull())
             {
                 const auto album = BAE::fixString(info.getAlbum());
                 const auto track= info.getTrack();

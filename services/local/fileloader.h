@@ -44,14 +44,13 @@ static inline uint getTracks(const QList<QUrl>& paths)
     if(urls.isEmpty())
         return newTracks;
 
-    TagInfo info;
     for(const auto &url : urls)
     {
-
         if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url.toString()))
             continue;
 
-        if(!info.feed(url.toLocalFile()))
+        TagInfo info(url.toLocalFile());
+        if(info.isNull())
             continue;
 
         const auto track = info.getTrack();
@@ -63,7 +62,6 @@ static inline uint getTracks(const QList<QUrl>& paths)
         const auto duration = info.getDuration();
         const auto year = info.getYear();
 
-        qDebug()<< "GETTING TRACKS 3" << url << title << album << artist;
 
         FMH::MODEL trackMap =
         {

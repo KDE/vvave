@@ -394,7 +394,7 @@ Maui.ApplicationWindow
     {
         id: _drawer
         focus: true
-        width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 15), root.width) : 0
+        width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 20), root.width) : 0
         modal: !isWide
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         height: _drawer.modal ? implicitHeight - _mainPage.footer.height : implicitHeight
@@ -591,11 +591,11 @@ Maui.ApplicationWindow
                 {
                     id: tracksView
 
-//                    Connections
-//                    {
-//                        target: vvave
-//                        onRefreshTables: tracksView.list.refresh()
-//                    }
+                    Connections
+                    {
+                        target: vvave
+                        onRefreshTables: tracksView.list.refresh()
+                    }
 
                     Connections
                     {

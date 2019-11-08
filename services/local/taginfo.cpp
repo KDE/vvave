@@ -20,20 +20,29 @@
 
 using namespace BAE;
 
-TagInfo::TagInfo(QObject *parent) : QObject(parent)
-{}
+TagInfo::TagInfo(const QString &url, QObject *parent) : QObject(parent)
+{
+    this->path = url;
+    QFileInfo _file(this->path);
+
+    if(_file.isReadable())
+    {
+        qDebug()<< ">>>FILE is READABLE" << _file.baseName() << url;
+        this->file = new TagLib::FileRef(this->path.toStdWString().c_str());
+    }
+    else
+        this->file = new TagLib::FileRef(nullptr);
+}
 
 TagInfo::~TagInfo()
 {
     qDebug()<< "DELETING TAGINFO";
-    delete this->file;
+    //        delete this->file;
 }
 
-bool TagInfo::feed(const QString &url)
+bool TagInfo::isNull()
 {
-    this->path = url;
-    this->file =  new TagLib::FileRef(this->path.toStdWString().c_str());
-    return !file->isNull();
+    return this->file->isNull() && this->file->tag() == nullptr ;
 }
 
 QString TagInfo::getAlbum() const
@@ -60,7 +69,7 @@ QString TagInfo::getArtist() const
             : SLANG[W::UNKNOWN];
 }
 
-int TagInfo::getTrack() const { /*return static_cast<signed int>(file.tag()->track());*/ return 0; }
+int TagInfo::getTrack() const { return static_cast<signed int>(file->tag()->track()); }
 
 QString TagInfo::getGenre() const
 {
@@ -91,7 +100,7 @@ QString TagInfo::getComment() const
     const auto value = QString::fromStdWString(file->tag()->comment().toWString());
     return !value.isEmpty()
             ?value
-            : SLANG[W::UNKNOWN];
+           : SLANG[W::UNKNOWN];
 }
 
 QByteArray TagInfo::getCover() const

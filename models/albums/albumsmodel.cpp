@@ -2,6 +2,7 @@
 #include "db/collectionDB.h"
 #include "utils/brain.h"
 #include <QtConcurrent>
+#include "downloader.h"
 
 AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
     db(CollectionDB::getInstance())
@@ -122,8 +123,8 @@ void AlbumsModel::setList()
 this->sortList();
 emit this->postListChanged();
 
-//if(this->query == AlbumsModel::QUERY::ALBUMS)
-//this->fetchInformation();
+if(this->query == AlbumsModel::QUERY::ALBUMS)
+this->fetchInformation();
 }
 
 void AlbumsModel::fetchInformation()

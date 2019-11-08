@@ -87,10 +87,10 @@ int main(int argc, char *argv[])
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, [&]()
     {
         qDebug()<<"FINISHED LOADING QML APP";
-//        const auto currentSources = vvave.getSourceFolders();
-//        vvave.scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
-//        if(!urls.isEmpty())
-//            vvave.openUrls(urls);
+        const auto currentSources = vvave.getSourceFolders();
+        vvave.scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
+        if(!urls.isEmpty())
+            vvave.openUrls(urls);
     });
 
     auto context = engine.rootContext();
