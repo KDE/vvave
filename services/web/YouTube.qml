@@ -53,6 +53,7 @@ Maui.Page
         maxHeight: 200
         maxWidth: 300
         defaultButtons: false
+
         GridLayout
         {
             anchors.fill: parent
@@ -181,7 +182,8 @@ Maui.Page
             id: youtubeTable
             trackNumberVisible: false
             headBar.visible: false
-            holder.emoji: "qrc:/assets/Astronaut.png"
+            holder.visible: count === 0
+            holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: false
             holder.title : "No Results!"
             holder.body: "Try with another query"

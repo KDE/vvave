@@ -103,7 +103,7 @@ Maui.Page
             coverArt : true
             showEmblem: false
             onPressAndHold: if(Kirigami.Settings.isMobile && table.allowMenu) table.openItemMenu(index)
-            onRightClicked: if(allowMenu) openItemMenu(index)
+            onRightClicked: if(table.allowMenu) table.openItemMenu(index)
             sameAlbum:
             {
                 if(coverArt)

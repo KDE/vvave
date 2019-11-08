@@ -49,6 +49,7 @@ Item
         maxWidth: Maui.Style.unit * 600
         defaultButtons: false
         page.padding: 0
+
         BabeTable
         {
             id: _filterList
