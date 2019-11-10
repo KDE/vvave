@@ -75,7 +75,7 @@ Maui.Page
             anchors.fill: parent
             clip: true
             coverArtVisible: true
-            headBar.visible: !holder.visible
+            headBar.visible: false
             title: control.currentPlaylist
             holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: false

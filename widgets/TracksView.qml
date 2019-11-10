@@ -10,7 +10,6 @@ BabeTable
 {
     id: tracksViewTable
     trackNumberVisible: false
-    headBar.visible: !holder.visible
     coverArtVisible: false
     holder.emoji: "qrc:/assets/dialog-information.svg"
     holder.title : qsTr("No Tracks!")

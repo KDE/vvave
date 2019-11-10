@@ -120,7 +120,6 @@ BabeGrid
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 trackNumberVisible: true
-                headBar.visible: true
                 coverArtVisible: true
                 focus: true
                 list.sortBy: Tracks.TRACK
