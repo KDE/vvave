@@ -14,6 +14,7 @@ TEMPLATE = app
 
 CONFIG += ordered
 CONFIG += c++17
+CONFIG += static
 
 linux:unix:!android {
     message(Building for Linux KDE)
