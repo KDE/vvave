@@ -3,6 +3,8 @@ mauikit/
 3rdparty/mauikit/
 3rdparty/breeze-icons/
 3rdparty/openssl/
+3rdparty/taglib
+3rdparty/taglib/taglib.pri
 .directory
 
 *.kdev4
