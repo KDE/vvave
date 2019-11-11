@@ -75,6 +75,7 @@ BabeList
 
             middleContent:    Label
             {
+                Layout.fillWidth: true
                 text: control.title
                 elide : Text.ElideRight
                 font.bold : false

@@ -37,9 +37,7 @@
 #include "models/tracks/tracksmodel.h"
 #include "models/albums/albumsmodel.h"
 #include "models/playlists/playlistsmodel.h"
-//#include "models/cloud/cloud.h"
-#include "taglib/tag.h"
-#include "taglib/fileref.h"
+#include "models/cloud/cloud.h"
 
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
@@ -100,7 +98,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
     qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
     qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
-//    qmlRegisterType<Cloud>("CloudList", 1, 0, "Cloud");
+    qmlRegisterType<Cloud>("CloudList", 1, 0, "Cloud");
 
     qmlRegisterType<Player>("Player", 1, 0, "Player");
 

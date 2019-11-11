@@ -4,11 +4,15 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariantMap>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 
 #ifdef STATIC_MAUIKIT
 #include "fm.h"
+#include "downloader.h"
 #else
 #include <MauiKit/fm.h>
+#include <MauiKit/downloader.h>
 #endif
 
 static const inline QNetworkRequest formRequest(const QUrl &url, const  QString &user, const QString &password)
@@ -176,6 +180,7 @@ void NextMusic::getTrackPath(const QString &id)
 
 void NextMusic::getCollection(const std::initializer_list<QString> &parameters)
 {
+
     auto url = QString(NextMusic::API).replace("PROVIDER", QUrl(this->m_provider).host()).append("collection");
 
     QString concatenated = this->m_user + ":" + this->m_password;
@@ -187,6 +192,8 @@ void NextMusic::getCollection(const std::initializer_list<QString> &parameters)
     const auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [&, _downloader = std::move(downloader)](QByteArray array)
     {
+        qDebug()<< "FINISHED REQUEST WITH RESPONSEC : " << array;
+
         const auto data = this->parseCollection(array);
         emit this->collectionReady(data);
         _downloader->deleteLater();

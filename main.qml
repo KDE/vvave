@@ -11,7 +11,7 @@ import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
 import "widgets/SearchView"
-//import "widgets/CloudView"
+import "widgets/CloudView"
 
 import "view_models"
 import "view_models/BabeTable"
@@ -77,9 +77,10 @@ Maui.ApplicationWindow
                                            albums: 1,
                                            artists: 2,
                                            playlists: 3,
-                                           folders: 4,
-                                           youtube: 5,
-                                           search: 6})
+                                           cloud: 4,
+                                           folders: 5,
+                                           youtube: 6,
+                                           search: 7})
 
     property string syncPlaylist: ""
     property bool sync: false
@@ -141,15 +142,15 @@ Maui.ApplicationWindow
         hiddenActions: [
             Action
             {
+                text: qsTr("Cloud")
+                icon.name: "folder-cloud"
+            },
+
+            Action
+            {
                 text: qsTr("Folders")
                 icon.name: "folder"
             },
-
-            //            Action
-            //            {
-            //                text: qsTr("Cloud")
-            //                icon.name: "folder-cloud"
-            //            },
 
             Action
             {
@@ -733,6 +734,15 @@ Maui.ApplicationWindow
 
                 Loader
                 {
+                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
+                    sourceComponent: CloudView
+                    {
+                        id: cloudView
+                    }
+                }
+
+                Loader
+                {
                     active: SwipeView.isCurrentItem || item
                     sourceComponent:  FoldersView
                     {
@@ -759,15 +769,6 @@ Maui.ApplicationWindow
                         }
                     }
                 }
-
-                //                Loader
-                //                {
-                //                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
-                //                    sourceComponent: CloudView
-                //                    {
-                //                        id: cloudView
-                //                    }
-                //                }
 
                 Loader
                 {

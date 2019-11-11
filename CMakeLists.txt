@@ -42,15 +42,15 @@ add_executable(vvave
 #    services/local/linking.cpp
 #    services/local/socket.cpp
     services/web/youtube.cpp
-#    services/web/NextCloud/nextmusic.cpp
-#    services/web/abstractmusicprovider.cpp
+    services/web/NextCloud/nextmusic.cpp
+    services/web/abstractmusicprovider.cpp
 #    services/web/Spotify/spotify.cpp
     db/collectionDB.cpp
 #    utils/brain.cpp
     models/tracks/tracksmodel.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
-#    models/cloud/cloud.cpp
+    models/cloud/cloud.cpp
     )
 
 if (ANDROID)

@@ -7,7 +7,8 @@ QT *= quick \
     qml \
     widgets \
     quickcontrols2 \
-    concurrent
+    concurrent \
+    network
 
 TARGET = vvave
 TEMPLATE = app
@@ -32,6 +33,9 @@ linux:unix:!android {
     }else:win32 {
         message("Using Tablib binaries for Windows")
 
+        LIBS += -L$$PWD/3rdparty/taglib/lib/ -llibtag.dll
+        INCLUDEPATH += $$PWD/3rdparty/taglib/include
+        DEPENDPATH += $$PWD/3rdparty/taglib/include
     }
 
 #DEFAULT COMPONENTS DEFINITIONS
@@ -80,9 +84,9 @@ SOURCES += main.cpp \
     models/tracks/tracksmodel.cpp \
     models/playlists/playlistsmodel.cpp \
     models/albums/albumsmodel.cpp \
-#    services/web/NextCloud/nextmusic.cpp \
-#    services/web/abstractmusicprovider.cpp \
-#    models/cloud/cloud.cpp
+    services/web/NextCloud/nextmusic.cpp \
+    services/web/abstractmusicprovider.cpp \
+    models/cloud/cloud.cpp
 
 
 RESOURCES += qml.qrc \
@@ -110,16 +114,12 @@ HEADERS += \
     models/tracks/tracksmodel.h \
     models/playlists/playlistsmodel.h \
     models/albums/albumsmodel.h \
-#    services/web/NextCloud/nextmusic.h \
-#    services/web/abstractmusicprovider.h \
-#    models/cloud/cloud.h
+    services/web/NextCloud/nextmusic.h \
+    services/web/abstractmusicprovider.h \
+    models/cloud/cloud.h
 
-#INCLUDEPATH += \
-#     $$PWD/services/web \
-#     $$PWD/services/web/NextCloud
+INCLUDEPATH += \
+     $$PWD/services/web \
+     $$PWD/services/web/NextCloud
 
 include(install.pri)
-
-        LIBS += -L$$PWD/3rdparty/taglib/lib/ -llibtag.dll
-        INCLUDEPATH += $$PWD/3rdparty/taglib/include
-        DEPENDPATH += $$PWD/3rdparty/taglib/include
