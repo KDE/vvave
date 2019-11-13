@@ -11,12 +11,12 @@ import "../../db/Queries.js" as Q
 
 Maui.Dialog
 {
-    title: "Add "+ tracks.length +" tracks to..."
 
     property var tracks : []
     maxHeight: 400 * Maui.Style.unit
     page.padding: Maui.Style.space.medium
-
+    acceptButton.text: qsTr("Save")
+    rejectButton.text: qsTr("Cancel")
     ColumnLayout
     {
         anchors.fill: parent

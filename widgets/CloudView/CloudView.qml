@@ -165,6 +165,7 @@ Maui.Page
         holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.title : qsTr("Opps!")
         holder.body: qsTr("You don't have an account set up.\nYou can set up your account now by clicking here or under the Accounts options in the main menu")
+        listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
 
         Connections
         {
@@ -238,6 +239,13 @@ Maui.Page
             width: parent.width
             number :  false
             coverArt : false
+
+            ToolButton
+            {
+                icon.name: "document-download"
+                Layout.fillHeight: true
+            }
+
             onClicked:
             {
                 _listView.currentIndex = index

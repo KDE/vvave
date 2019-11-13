@@ -38,7 +38,8 @@ Cloud::Cloud(QObject *parent) : MauiList (parent),
 
 void Cloud::componentComplete()
 {
-
+    this->provider->setCredentials(FMH::toModel(MauiAccounts::instance()->getCurrentAccount()));
+    this->setList();
 }
 
 void Cloud::setSortBy(const Cloud::SORTBY &sort)
