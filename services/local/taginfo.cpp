@@ -28,7 +28,7 @@ TagInfo::TagInfo(const QString &url, QObject *parent) : QObject(parent)
     if(_file.isReadable())
     {
         qDebug()<< "is readble";
-        this->file = new TagLib::FileRef(path.toUtf8());
+        this->file = new TagLib::FileRef(TagLib::FileName(path.toUtf8()));
     }
     else
         this->file = new TagLib::FileRef();

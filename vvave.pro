@@ -31,19 +31,13 @@ linux:unix:!android {
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
         include($$PWD/3rdparty/taglib.pri)
     }else:win32 {
-        message("Using Tablib binaries for Windows")
 
-        LIBS += -L$$PWD/../../../../CraftRoot/lib/ -ltag
+ LIBS += -L$$PWD/'../../../../Program Files (x86)/taglib/lib/' -ltag
 
-        INCLUDEPATH += $$PWD/../../../../CraftRoot/include
-        DEPENDPATH += $$PWD/../../../../CraftRoot/include
+INCLUDEPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
+DEPENDPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
 
-        win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../CraftRoot/lib/libtag.a
-        else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../CraftRoot/lib/libtagd.a
-        else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../CraftRoot/lib/tag.lib
-        else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../CraftRoot/lib/tagd.lib
-
-    }
+ }
 
 #DEFAULT COMPONENTS DEFINITIONS
     DEFINES *= \
@@ -130,3 +124,4 @@ INCLUDEPATH += \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
+
