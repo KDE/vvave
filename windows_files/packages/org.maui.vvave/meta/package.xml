@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Vvave</DisplayName>
+    <Description>Vvave Music Player</Description>
+    <Version>1.0.0-1</Version>
+    <ReleaseDate>2019-11-04</ReleaseDate>
+    <Default>true</Default>
+    <Script>installscript.qs</Script>
+</Package>

@@ -33,9 +33,16 @@ linux:unix:!android {
     }else:win32 {
         message("Using Tablib binaries for Windows")
 
-        LIBS += -L$$PWD/3rdparty/taglib/lib/ -llibtag.dll
-        INCLUDEPATH += $$PWD/3rdparty/taglib/include
-        DEPENDPATH += $$PWD/3rdparty/taglib/include
+        LIBS += -L$$PWD/../../../../CraftRoot/lib/ -ltag
+
+        INCLUDEPATH += $$PWD/../../../../CraftRoot/include
+        DEPENDPATH += $$PWD/../../../../CraftRoot/include
+
+        win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../CraftRoot/lib/libtag.a
+        else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../CraftRoot/lib/libtagd.a
+        else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../../CraftRoot/lib/tag.lib
+        else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../../CraftRoot/lib/tagd.lib
+
     }
 
 #DEFAULT COMPONENTS DEFINITIONS
