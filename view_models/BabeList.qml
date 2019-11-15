@@ -28,7 +28,7 @@ Maui.Page
         anchors.fill: parent
         holder.visible: count === 0
         topMargin: Maui.Style.space.medium
-        listView.headerPositioning: ListView.PullBackHeader
+        listView.headerPositioning: Kirigami.Settings.isMobile ? ListView.PullBackHeader : ListView.OverlayHeader
         listView.footerPositioning: ListView.OverlayFooter
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
         Kirigami.Theme.inherit: false
