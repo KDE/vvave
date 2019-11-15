@@ -32,7 +32,7 @@ static inline QList<QUrl> getPathContents(QList<QUrl> &urls, const QUrl &url)
 // returns the number of new items added to the collection db
 static inline uint getTracks(const QList<QUrl>& paths)
 {
-    auto db = CollectionDB::getInstance();
+    const auto db = CollectionDB::getInstance();
     const auto urls = std::accumulate(paths.begin(), paths.end(), QList<QUrl>(), getPathContents);
 
     for(const auto &path : paths)
@@ -53,6 +53,8 @@ static inline uint getTracks(const QList<QUrl>& paths)
         if(info.isNull())
             continue;
 
+        qDebug()<< url << "HHH";
+
         const auto track = info.getTrack();
         const auto genre = info.getGenre();
         const auto album = BAE::fixString(info.getAlbum());
@@ -61,7 +63,6 @@ static inline uint getTracks(const QList<QUrl>& paths)
         const auto sourceUrl = FMH::parentDir(url).toString();
         const auto duration = info.getDuration();
         const auto year = info.getYear();
-
 
         FMH::MODEL trackMap =
         {

@@ -54,13 +54,12 @@ Maui.ApplicationWindow
     /******************** PLAYBACK ********************/
     /*************************************************/
     property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
-    readonly property var currentTrack: mainlistEmpty?  ({url: "", artwork: "", fav: "0", stars: "0"}) : mainPlaylist.table.listModel.get(currentTrackIndex)
+    property var currentTrack: mainlistEmpty?  ({url: "", artwork: "", fav: "0", stars: "0"}) : mainPlaylist.table.listModel.get(currentTrackIndex)
 
     property int currentTrackIndex: -1
     property int prevTrackIndex: 0
 
     readonly property string currentArtwork: currentTrack.artwork
-    readonly property bool currentBabe: currentTrack.fav == "0" ? false : true
 
     property alias durationTimeLabel: player.duration
     property string progressTimeLabel: player.transformTime((player.duration/1000) *(player.pos/ 1000))
@@ -523,11 +522,10 @@ Maui.ApplicationWindow
                         id: babeBtnIcon
                         icon.name: "love"
                         enabled: currentTrackIndex >= 0
-                        icon.color: currentBabe ? babeColor : Kirigami.Theme.textColor
+                        icon.color: currentTrack.fav == "0" ? babeColor : Kirigami.Theme.textColor
                         onClicked: if (!mainlistEmpty)
                                    {
                                        mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
-                                       currentBabe = mainPlaylist.listModel.get(currentTrackIndex).fav == "1"
                                    }
                     },
 

@@ -27,7 +27,8 @@ TagInfo::TagInfo(const QString &url, QObject *parent) : QObject(parent)
 
     if(_file.isReadable())
     {
-        this->file = new TagLib::FileRef(TagLib::FileName(this->path.toStdWString().c_str()));
+        qDebug()<< "is readble";
+        this->file = new TagLib::FileRef(path.toUtf8());
     }
     else
         this->file = new TagLib::FileRef();
@@ -36,12 +37,12 @@ TagInfo::TagInfo(const QString &url, QObject *parent) : QObject(parent)
 TagInfo::~TagInfo()
 {
     qDebug()<< "DELETING TAGINFO";
-    //        delete this->file;
+    delete this->file;
 }
 
 bool TagInfo::isNull()
 {
-    return this->file->isNull() && this->file->tag() == nullptr ;
+    return this->file->isNull();
 }
 
 QString TagInfo::getAlbum() const

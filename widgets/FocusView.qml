@@ -379,11 +379,10 @@ Maui.Page
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "love"
                     enabled: currentTrackIndex >= 0
-                    icon.color: currentBabe ? babeColor : Kirigami.Theme.textColor
+                    icon.color: currentTrack.fav == "0" ? babeColor : Kirigami.Theme.textColor
                     onClicked: if (!mainlistEmpty)
                                {
                                    mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
-                                   currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
                                }
                 },
 
