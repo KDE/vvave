@@ -7,7 +7,7 @@ import AlbumsList 1.0
 
 Maui.Page
 {
-    id: gridPage
+    id: control
     property int albumCoverSize: Math.min(160, width * 0.3)
 
     property int albumCoverRadius :  Maui.Style.radiusV
@@ -80,20 +80,25 @@ Maui.Page
                     target: albumDelegate
                     onClicked:
                     {
-                        var album = _albumsList.get(index).album
-                        var artist = _albumsList.get(index).artist
+                        const album = _albumsList.get(index).album
+                        const artist = _albumsList.get(index).artist
                         albumCoverClicked(album, artist)
                         grid.currentIndex = index
                     }
 
                     onPressAndHold:
                     {
-                        var album = grid.model.get(index).album
-                        var artist = grid.model.get(index).artist
+                        const album = grid.model.get(index).album
+                        const artist = grid.model.get(index).artist
                         albumCoverPressed(album, artist)
                     }
                 }
             }
+        }
+
+        background: Rectangle
+        {
+            color: Kirigami.Theme.backgroundColor
         }
 
     }

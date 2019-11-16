@@ -41,6 +41,7 @@ Menu
     MenuItem
     {
         text: qsTr("Select...")
+        icon.name: "item-select"
         onTriggered:
         {
             H.addToSelection(list.get(listView.currentIndex))
@@ -57,6 +58,7 @@ Menu
     MenuItem
     {
         text: qsTr("Play")
+        icon.name: "media-playlist-play"
         onTriggered:
         {
             playClicked()
@@ -67,6 +69,7 @@ Menu
     MenuItem
     {
         text: qsTr("Queue")
+        icon.name: "view-media-recent"
         onTriggered:
         {
             queueClicked()
@@ -77,6 +80,7 @@ Menu
     MenuItem
     {
         text: qsTr("Append")
+        icon.name: "media-playlist-append"
         onTriggered:
         {
             appendClicked()
@@ -87,6 +91,7 @@ Menu
     MenuItem
     {
         text: qsTr("Remove")
+        icon.name: "edit-clear"
         onTriggered:
         {
             removeClicked()
@@ -100,6 +105,7 @@ Menu
     MenuItem
     {
         text: !fav ? qsTr("Fav it"): qsTr("UnFav it")
+        icon.name: "love"
         onTriggered:
         {
             favClicked()
@@ -110,6 +116,7 @@ Menu
     MenuItem
     {
         text: qsTr("Add to")
+        icon.name: "document-save"
         onTriggered:
         {
             saveToClicked()
@@ -121,7 +128,8 @@ Menu
 
     MenuItem
     {
-        text: qsTr("Share...")
+        text: qsTr("Share")
+        icon.name: "document-share"
         onTriggered:
         {
             shareClicked()
@@ -144,6 +152,7 @@ Menu
     MenuItem
     {
         text: qsTr("Show in folder")
+        icon.name: "folder-open"
         visible: !isAndroid
         onTriggered:
         {
@@ -157,7 +166,8 @@ Menu
     MenuItem
     {
         visible: false
-        text: qsTr("Edit.")
+        text: qsTr("Edit")
+        icon.name: "document-edit"
         onTriggered:
         {
             editClicked()
@@ -179,6 +189,7 @@ Menu
     MenuItem
     {
         text: qsTr("Delete")
+        icon.name: "edit-delete"
         Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
         onTriggered:
         {
