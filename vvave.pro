@@ -31,12 +31,13 @@ linux:unix:!android {
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
         include($$PWD/3rdparty/taglib.pri)
     }else:win32 {
-        message("Using Tablib binaries for Windows")
 
-        LIBS += -L$$PWD/3rdparty/taglib/lib/ -llibtag.dll
-        INCLUDEPATH += $$PWD/3rdparty/taglib/include
-        DEPENDPATH += $$PWD/3rdparty/taglib/include
-    }
+ LIBS += -L$$PWD/'../../../../Program Files (x86)/taglib/lib/' -ltag
+
+INCLUDEPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
+DEPENDPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
+
+ }
 
 #DEFAULT COMPONENTS DEFINITIONS
     DEFINES *= \
@@ -123,3 +124,4 @@ INCLUDEPATH += \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
+

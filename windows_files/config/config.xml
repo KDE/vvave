@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Vvave</Name>
+    <Version>1.0.0</Version>
+    <Title>Vvave music player</Title>
+    <Publisher>Maui</Publisher>
+    <StartMenuDir>Vvave</StartMenuDir>
+    <TargetDir>@ApplicationsDir@/vvave</TargetDir>
+</Installer>

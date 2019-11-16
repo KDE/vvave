@@ -6,8 +6,8 @@
 #include <QObject>
 
 #if defined Q_OS_WIN32
-#include "taglib/tag.h"
-#include "taglib/fileref.h"
+#include <taglib/tag.h>
+#include <taglib/fileref.h>
 #elif defined Q_OS_ANDROID
 #include "tag.h"
 #include "fileref.h"
