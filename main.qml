@@ -132,13 +132,12 @@ Maui.ApplicationWindow
     headBar.middleContent : Maui.ActionGroup
     {
         id: _actionGroup
-        //        Layout.fillWidth: true
         Layout.fillHeight: true
+//        Layout.fillWidth: true
         Layout.minimumWidth: implicitWidth
         currentIndex : swipeView.currentIndex
         onCurrentIndexChanged: swipeView.currentIndex = currentIndex
-//        strech: false
-//        Layout.fillWidth: true
+//        strech: true
 
         hiddenActions: [
             Action
@@ -520,10 +519,11 @@ Maui.ApplicationWindow
                         id: babeBtnIcon
                         icon.name: "love"
                         enabled: currentTrackIndex >= 0
-                        icon.color: currentTrack.fav == "0" ? babeColor : Kirigami.Theme.textColor
+                        icon.color: currentTrack.fav == "0" ? Kirigami.Theme.textColor :  babeColor
                         onClicked: if (!mainlistEmpty)
                                    {
                                        mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
+                                       currentTrack = mainPlaylist.listModel.get(currentTrackIndex)
                                    }
                     },
 
