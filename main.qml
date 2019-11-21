@@ -414,6 +414,7 @@ Maui.ApplicationWindow
         id: _mainPage
         anchors.fill: parent
         headBar.position: ToolBar.Footer
+        footBar.visible: isPlaying
         headBar.rightContent: ToolButton
         {
             icon.name: _volumeSlider.value == 0 ? "media-silence" : "media-speaker"
