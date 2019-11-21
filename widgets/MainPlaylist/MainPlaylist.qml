@@ -58,7 +58,7 @@ Maui.Page
         holder.title : "Meh!"
         holder.body: "Start putting together your playlist!"
         holder.emojiSize: Maui.Style.iconSizes.huge
-
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
         listView.header: Rectangle
         {
             visible: root.sync

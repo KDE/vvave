@@ -44,7 +44,7 @@ Menu
         icon.name: "item-select"
         onTriggered:
         {
-            H.addToSelection(list.get(listView.currentIndex))
+            H.addToSelection(listModel.get(listView.currentIndex))
 
             if(Kirigami.Settings.isMobile)
                 selectionMode = true

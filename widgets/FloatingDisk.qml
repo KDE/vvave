@@ -13,10 +13,10 @@ Item
 
     visible: opacity > 0.3 && !mainlistEmpty
 
-    height:  Maui.Style.iconSizes.large * 1.2
+    height:  Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
     width: height
 
-    x: root.footBar.x + Maui.Style.space.medium
+    x: root.footBar.x + Maui.Style.space.medium + _drawer.width
     y: parent.height - height - Maui.Style.space.medium
 
     parent: ApplicationWindow.overlay
@@ -77,13 +77,11 @@ Item
         drag.target: parent
         drag.axis: Drag.XAndYAxis
         drag.minimumX: 0
-        drag.maximumX: root.width
+        drag.maximumX: root.width - control.width
 
         drag.minimumY: 0
-        drag.maximumY: root.height
-        onClicked: _drawer.visible = true
-
-
+        drag.maximumY: root.height - control.height
+        onClicked:  _drawer.visible = !_drawer.visible
 
         Rectangle
         {
@@ -133,8 +131,6 @@ Item
                     }
                 }
             }
-
-
         }
 
         DropShadow
@@ -142,7 +138,7 @@ Item
             anchors.fill: diskBg
             horizontalOffset: 0
             verticalOffset: 0
-            radius: 8.0
+            radius: _mouseArea.containsPress ? 5.0 :8.0
             samples: 17
             color: "#80000000"
             source: diskBg

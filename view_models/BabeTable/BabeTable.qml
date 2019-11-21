@@ -242,7 +242,7 @@ BabeList
 
         onRejected:
         {
-            if(Maui.FM.removeFile(list.get(index).url))
+            if(Maui.FM.removeFile(listModel.get(index).url))
                 list.remove(listView.currentIndex)
             close()
         }
@@ -269,20 +269,20 @@ BabeList
 
         onFavClicked:
         {
-            list.fav(listView.currentIndex, !(list.get(listView.currentIndex).fav == "1"))
+            list.fav(listView.currentIndex, !(listModel.get(listView.currentIndex).fav == "1"))
         }
 
-        onQueueClicked: Player.queueTracks([list.get(listView.currentIndex)])
+        onQueueClicked: Player.queueTracks([listModel.get(listView.currentIndex)])
         onPlayClicked: quickPlayTrack(listView.currentIndex)
         onAppendClicked: appendTrack(listView.currentIndex)
 
         onSaveToClicked:
         {
-            playlistDialog.tracks = [list.get(listView.currentIndex).url]
+            playlistDialog.tracks = [listModel.get(listView.currentIndex).url]
             playlistDialog.open()
         }
 
-        onOpenWithClicked: Maui.FM.openLocation([list.get(listView.currentIndex).url])
+        onOpenWithClicked: Maui.FM.openLocation([listModel.get(listView.currentIndex).url])
 
         onDeleteClicked:
         {
@@ -302,7 +302,7 @@ BabeList
 
         onInfoClicked:
         {
-            infoView.show(list.get(listView.currentIndex))
+            infoView.show(listModel.get(listView.currentIndex))
         }
 
         onCopyToClicked:
@@ -312,7 +312,7 @@ BabeList
 
         onShareClicked:
         {
-            const url = list.get(listView.currentIndex).url
+            const url = listModel.get(listView.currentIndex).url
 
             if(isAndroid)
             {
@@ -368,16 +368,16 @@ BabeList
         onPressAndHold: if(Kirigami.Settings.isMobile && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)
 
-        onLeftEmblemClicked: H.addToSelection(list.get(index))
+        onLeftEmblemClicked: H.addToSelection(listModel.get(index))
         isSelected: selectionBar.contains(model.url)
 
         sameAlbum:
         {
             if(coverArt)
             {
-                if(list.get(index-1))
+                if(listModel.get(index-1))
                 {
-                    if(list.get(index-1).album === album && list.get(index-1).artist === artist) true
+                    if(listModel.get(index-1).album === album && listModel.get(index-1).artist === artist) true
                     else false
                 }else false
             }else false
@@ -398,7 +398,7 @@ BabeList
             currentIndex = index
             if(selectionMode)
             {
-                H.addToSelection(list.get(listView.currentIndex))
+                H.addToSelection(listModel.get(listView.currentIndex))
                 return
             }
 
@@ -455,8 +455,8 @@ BabeList
     function openItemMenu(index)
     {
         currentIndex = index
-        contextMenu.rate = list.get(currentIndex).rate
-        contextMenu.fav = list.get(currentIndex).fav == "1"
+        contextMenu.rate = listModel.get(currentIndex).rate
+        contextMenu.fav = listModel.get(currentIndex).fav == "1"
         contextMenu.popup()
 
         rowPressed(index)
@@ -482,7 +482,7 @@ BabeList
         if(list.count > 0)
         {
             for(var i = 0; i < list.count; ++i)
-                trackList.push(list.get(i))
+                trackList.push(listModel.get(i))
 
             Player.queueTracks(trackList)
         }
@@ -491,7 +491,7 @@ BabeList
     function goToAlbum()
     {
         swipeView.currentIndex = viewsIndex.albums
-        const item = list.get(listView.currentIndex)
+        const item = listModel.get(listView.currentIndex)
         swipeView.currentItem.item.populateTable(item.album, item.artist)
         contextMenu.close()
     }
@@ -499,7 +499,7 @@ BabeList
     function goToArtist()
     {
         swipeView.currentIndex = viewsIndex.artists
-        const item = list.get(listView.currentIndex)
+        const item = listModel.get(listView.currentIndex)
         swipeView.currentItem.item.populateTable(undefined, item.artist)
         contextMenu.close()
     }

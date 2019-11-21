@@ -13,7 +13,7 @@ Maui.Page
     parent: ApplicationWindow.overlay
     anchors.fill: parent
     z: parent.z + 99999
-
+    title: qsTr("Now Playing")
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
 
@@ -220,8 +220,6 @@ Maui.Page
                 }
             }
 
-
-
             Item
             {
                 Layout.fillHeight: true
@@ -229,6 +227,7 @@ Maui.Page
 
                 Rectangle
                 {
+                    anchors.centerIn: parent
                     visible: (_listView.currentIndex < _listView.count - 1) && (_listView.count > 1)
                     height: Maui.Style.iconSizes.small
                     width : height
@@ -237,14 +236,9 @@ Maui.Page
 
                     color: Kirigami.Theme.textColor
                     opacity: 0.4
-
-                    anchors.centerIn: parent
-
                 }
             }
-
         }
-
 
         RowLayout
         {

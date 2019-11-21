@@ -21,7 +21,8 @@ Maui.Page
     property bool wasPulled : false
 
     signal pulled()
-
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
 
     Maui.ListBrowser
     {
@@ -31,12 +32,5 @@ Maui.Page
         topMargin: Maui.Style.space.medium
         listView.headerPositioning: Kirigami.Settings.isMobile ? ListView.PullBackHeader : ListView.OverlayHeader
         listView.footerPositioning: ListView.OverlayFooter
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
-
-        background: Rectangle
-        {
-            color: Kirigami.Theme.backgroundColor
-        }
    }
 }

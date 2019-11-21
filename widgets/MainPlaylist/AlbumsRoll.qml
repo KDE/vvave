@@ -14,9 +14,6 @@ Maui.ToolBar
     id: control
     visible: !mainlistEmpty
     padding: 0
-
-    height: Maui.Style.toolBarHeight * 1.2
-
     background: Item
     {
         Image
