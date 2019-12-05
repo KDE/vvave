@@ -41,7 +41,7 @@ Maui.Page
         id: webViewer
         clip: true
         anchors.fill: parent
-        source: isAndroid ? "qrc:/services/web/WebView_A.qml" : "qrc:/services/web/WebView.qml"
+        source: "qrc:/services/web/WebView_A.qml"
         onVisibleChanged: if(!visible) webView.url = "about:blank"
     }
 

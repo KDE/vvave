@@ -123,8 +123,8 @@ void AlbumsModel::setList()
 this->sortList();
 emit this->postListChanged();
 
-//if(this->query == AlbumsModel::QUERY::ALBUMS)
-//this->fetchInformation();
+if(this->query == AlbumsModel::QUERY::ALBUMS)
+this->fetchInformation();
 }
 
 void AlbumsModel::fetchInformation()
@@ -173,11 +173,7 @@ void AlbumsModel::fetchInformation()
                             FMH::MODEL newTrack = request.track;
                             newTrack[FMH::MODEL_KEY::ARTWORK] = QUrl::fromLocalFile(path).toString();
                             this->db->insertArtwork(newTrack);
-                            //                            this->updateArtwork(index, path);
-
-                            album[FMH::MODEL_KEY::ARTWORK] = newTrack[FMH::MODEL_KEY::ARTWORK];
-                            emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
-
+                            this->updateArtwork(index, QUrl::fromLocalFile(path).toString());
                             _downloader->deleteLater();
                         });
 
@@ -186,7 +182,7 @@ void AlbumsModel::fetchInformation()
                         QString name = !request.track[FMH::MODEL_KEY::ALBUM].isEmpty() ? request.track[FMH::MODEL_KEY::ARTIST] + "_" + request.track[FMH::MODEL_KEY::ALBUM] : request.track[FMH::MODEL_KEY::ARTIST];
                         name.replace("/", "-");
                         name.replace("&", "-");
-                        downloader->setFile(res.value.toString(),  BAE::CachePath + name + format);
+                        downloader->downloadFile(res.value.toString(),  BAE::CachePath + name + format);
                         qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM]<< BAE::CachePath + name + format;
 
                     }
@@ -199,15 +195,15 @@ void AlbumsModel::fetchInformation()
         Pulpo pulpo;
         QEventLoop loop;
         QObject::connect(&pulpo, &Pulpo::finished, &loop, &QEventLoop::quit);
-        QObject::connect(this, &AlbumsModel::destroyed, [&pulpo, &loop, &stop]()
-        {
-            qDebug()<< stop << &stop;
-            pulpo.disconnect();
-            stop = true;
-            if(loop.isRunning())
-                loop.quit();
-            qDebug()<< stop << &stop;
-        });
+//        QObject::connect(this, &AlbumsModel::destroyed, [&pulpo, &loop, &stop]()
+//        {
+//            qDebug()<< stop << &stop;
+//            pulpo.disconnect();
+//            stop = true;
+//            if(loop.isRunning())
+//                loop.quit();
+//            qDebug()<< stop << &stop;
+//        });
 
         for(const auto &req : requests)
         {
@@ -236,6 +232,7 @@ void AlbumsModel::updateArtwork(const int index, const QString &artwork)
         return;
 
     this->list[index][FMH::MODEL_KEY::ARTWORK] = artwork;
+    qDebug()<< "TRYIGN To UDPATE ARTWOIRK ALBUM" << index << artwork;
     emit this->updateModel(index, {FMH::MODEL_KEY::ARTWORK});
 }
 

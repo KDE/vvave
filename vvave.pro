@@ -15,7 +15,6 @@ TEMPLATE = app
 
 CONFIG += ordered
 CONFIG += c++17
-CONFIG += static
 
 linux:unix:!android {
     message(Building for Linux KDE)
@@ -23,13 +22,23 @@ linux:unix:!android {
     LIBS += -lMauiKit
 
 } else:android|win32 {
-    message(Building helpers for Android)
+    message(Building helpers for Android or Windows)
 
     android {
         QMAKE_LINK += -nostdlib++
         QT *= androidextras webview
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
-        include($$PWD/3rdparty/taglib.pri)
+
+        TAGLIB_REPO = https://github.com/mauikit/taglib
+        exists($$PWD/3rdparty/taglib/taglib.pri) {
+            message("Using TagLib binaries for Android")
+        }else {
+            message("Getting Luv icon theme")
+            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib)
+        }
+
+        include($$PWD/3rdparty/taglib/taglib.pri)
+
     }else:win32 {
 
  LIBS += -L$$PWD/'../../../../Program Files (x86)/taglib/lib/' -ltag
@@ -47,7 +56,8 @@ DEPENDPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
 #        COMPONENT_TERMINAL \
         COMPONENT_TAGGING \
 #        COMPONENT_SYNCING \
-        MAUIKIT_STYLE
+        MAUIKIT_STYLE \
+        ANDROID_OPENSSL
 
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)

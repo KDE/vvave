@@ -124,7 +124,7 @@ inline static QUEUE artistArtworks()
                     QString name = !request.track[FMH::MODEL_KEY::ALBUM].isEmpty() ? request.track[FMH::MODEL_KEY::ARTIST] + "_" + request.track[FMH::MODEL_KEY::ALBUM] : request.track[FMH::MODEL_KEY::ARTIST];
                     name.replace("/", "-");
                     name.replace("&", "-");
-                    downloader->setFile(res.value.toString(),  BAE::CachePath + name + format);
+//                    downloader->downloadFile(res.value.toString(),  BAE::CachePath + name + format);
                 }
             }
         };
@@ -179,7 +179,6 @@ inline static QUEUE albumArtworks()
                         db->insertArtwork(newTrack);
 
                         downloader->deleteLater();
-
                     });
 
                     QStringList filePathList = res.value.toString().split('/');
@@ -187,7 +186,7 @@ inline static QUEUE albumArtworks()
                     QString name = !request.track[FMH::MODEL_KEY::ALBUM].isEmpty() ? request.track[FMH::MODEL_KEY::ARTIST] + "_" + request.track[FMH::MODEL_KEY::ALBUM] : request.track[FMH::MODEL_KEY::ARTIST];
                     name.replace("/", "-");
                     name.replace("&", "-");
-                    downloader->setFile(res.value.toString(),  BAE::CachePath + name + format);
+//                    downloader->downloadFile(res.value.toString(),  BAE::CachePath + name + format);
                 }
             }
         };
