@@ -412,6 +412,11 @@ Maui.ApplicationWindow
     footBar.rightContent: ToolButton
     {
         icon.name: _volumeSlider.value == 0 ? "media-silence" : "media-speaker"
+        onPressAndHold :
+        {
+            _volumeSlider.value = _volumeSlider.value === 0 ? 100 : 0
+        }
+
         onClicked:
         {
             _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
