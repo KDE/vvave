@@ -168,13 +168,13 @@ void AlbumsModel::fetchInformation()
                     if(res.context == PULPO::CONTEXT::IMAGE && !res.value.toString().isEmpty())
                     {
                         auto downloader = new FMH::Downloader;
-                        QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, index, request, _downloader = std::move(downloader)](QString path)
+                        QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, index, request, downloader](QString path)
                         {
                             FMH::MODEL newTrack = request.track;
                             newTrack[FMH::MODEL_KEY::ARTWORK] = QUrl::fromLocalFile(path).toString();
                             this->db->insertArtwork(newTrack);
                             this->updateArtwork(index, QUrl::fromLocalFile(path).toString());
-                            _downloader->deleteLater();
+                            downloader->deleteLater();
                         });
 
                         QStringList filePathList = res.value.toString().split('/');
