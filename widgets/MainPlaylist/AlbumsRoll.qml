@@ -102,7 +102,7 @@ Maui.ToolBar
         keyNavigationWraps : true
         onCurrentItemChanged:
         {
-            var index = indexAt(contentX, contentY)
+            const index = indexAt(contentX, contentY)
             if(index !== currentTrackIndex)
                 Player.playAt(index)
         }

@@ -411,10 +411,10 @@ Maui.ApplicationWindow
 
     footBar.rightContent: ToolButton
     {
-        icon.name: _volumeSlider.value == 0 ? "media-silence" : "media-speaker"
+        icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
         onPressAndHold :
         {
-            _volumeSlider.value = _volumeSlider.value === 0 ? 100 : 0
+            player.volume = player.volume === 0 ? 100 : 0
         }
 
         onClicked:
