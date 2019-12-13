@@ -41,10 +41,9 @@ linux:unix:!android {
 
     }else:win32 {
 
- LIBS += -L$$PWD/'../../../../Program Files (x86)/taglib/lib/' -ltag
-
-INCLUDEPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
-DEPENDPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
+LIBS += -L$$PWD/../../Desktop/taglib/ -ltag
+INCLUDEPATH += $$PWD/../../Desktop/taglib
+DEPENDPATH += $$PWD/../../Desktop/taglib
 
  }
 
@@ -134,4 +133,3 @@ INCLUDEPATH += \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
-

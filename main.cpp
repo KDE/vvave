@@ -47,6 +47,10 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+#ifdef Q_OS_WIN32
+    qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
+#endif
+
 #ifdef Q_OS_ANDROID
     QGuiApplication app(argc, argv);
     if (!MAUIAndroid::checkRunTimePermissions())
