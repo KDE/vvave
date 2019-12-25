@@ -127,11 +127,9 @@ Maui.ApplicationWindow
     {
         id: _actionGroup
         Layout.fillHeight: true
-        //        Layout.fillWidth: true
         Layout.minimumWidth: implicitWidth
         currentIndex : swipeView.currentIndex
         onCurrentIndexChanged: swipeView.currentIndex = currentIndex
-        //        strech: true
 
         hiddenActions: [
             Action

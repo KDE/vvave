@@ -577,7 +577,7 @@ FMH::MODEL_LIST CollectionDB::getDBData(const QStringList &urls)
     return mapList;
 }
 
-FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt, std::function<void(FMH::MODEL &item)> modifier)
+FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt, std::function<bool(FMH::MODEL &item)> modifier)
 {
     FMH::MODEL_LIST mapList;
 
@@ -592,7 +592,11 @@ FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt, std::function<v
                 if(query.record().indexOf(FMH::MODEL_NAME[key]) > -1)
                     data.insert(key, query.value(FMH::MODEL_NAME[key]).toString());
             if(modifier)
-                modifier(data);
+            {
+                if(!modifier(data))
+                    continue;
+            }
+
             mapList << data;
         }
 
@@ -877,6 +881,7 @@ FMH::MODEL_LIST CollectionDB::getPlaylists()
     return this->getDBData(queryTxt, [](FMH::MODEL &item)
     {
         item[FMH::MODEL_KEY::TYPE] = "public";
+        return true;
     });
 }
 

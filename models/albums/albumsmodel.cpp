@@ -111,14 +111,16 @@ void AlbumsModel::setList()
     this->list = this->db->getDBData(m_Query, [&](FMH::MODEL &item)
     {
             if(item[FMH::MODEL_KEY::ARTWORK].isEmpty())
-            return;
+            return true;
 
     if(!FMH::fileExists(item[FMH::MODEL_KEY::ARTWORK]))
     {
         const auto table = this->query == AlbumsModel::QUERY::ALBUMS ?  "albums" : "artists";
         this->db->removeArtwork(table, FMH::toMap(item));
         item[FMH::MODEL_KEY::ARTWORK] = "";
-    }});
+    }
+    return true;
+});
 
 this->sortList();
 emit this->postListChanged();

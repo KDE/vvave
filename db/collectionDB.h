@@ -70,7 +70,7 @@ public:
     bool favTrack(const QString &path, const bool &value);
 
     FMH::MODEL_LIST getDBData(const QStringList &urls);
-    FMH::MODEL_LIST getDBData(const QString &queryTxt, std::function<void(FMH::MODEL &item)> modifier = nullptr);
+    FMH::MODEL_LIST getDBData(const QString &queryTxt, std::function<bool (FMH::MODEL &)> modifier = nullptr);
     QVariantList getDBDataQML(const QString &queryTxt);
     static QStringList dataToList(const FMH::MODEL_LIST &list, const FMH::MODEL_KEY &key);
 
