@@ -1,5 +1,6 @@
-project(vvave)
 cmake_minimum_required(VERSION 3.0)
+set(VVAVE_VERSION 1.0.0)
+project(vvave VERSION ${VVAVE_VERSION})
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
@@ -12,8 +13,9 @@ include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(ECMInstallIcons)
-include(FeatureSummary)
 include(ECMAddAppIcon)
+include(ECMSetupVersion)
+include(FeatureSummary)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTORCC ON)
@@ -51,6 +53,11 @@ add_executable(vvave
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
     models/cloud/cloud.cpp
+    )
+
+ecm_setup_version(${VVAVE_VERSION}
+    VARIABLE_PREFIX VVAVE
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/vvave_version.h"
     )
 
 if (ANDROID)
