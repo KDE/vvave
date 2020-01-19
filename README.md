@@ -17,7 +17,14 @@ make
 ### Dependencies
 
 If you've built vvave on some distro, please contribute here!
-For now, the `buildInputs` part of the next section is a good clue for what
+
+#### Ubuntu
+
+```
+sudo apt install kirigami2-dev libkf5syntaxhighlighting-dev extra-cmake-modules libtag1-dev libkf5notifications-dev libqt5websockets5-dev qtdeclarative5-dev qtmultimedia5-dev qtwebengine5-dev qtbase5-dev
+```
+
+For other distros, the `buildInputs` part of the next section is a good clue for what
 you need.
 
 ### Using a nix shell
