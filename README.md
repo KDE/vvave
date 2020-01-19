@@ -1,17 +1,31 @@
 # Building
 
-Building is easy with `qmake`:
+### Build for Android
+Use `qmake`:
 
 ```bash
 # Clone the code
-git clone --recurse-submodules git://anongit.kde.org/vvave.git
+git clone https://invent.kde.org/kde/vvave.git
 cd vvave
-# Make some build dirs
-mkdir build
-cd build
+# Create build dir
+mkdir build && cd build
 # Build
 qmake -o Makefile ../vvave.pro
 make
+```
+
+### Build for Desktop
+Use `cmake`:
+```bash
+# Clone the code
+git clone https://invent.kde.org/kde/vvave.git
+cd vvave
+# Create build dir
+mkdir build && cd build
+# Build
+cmake ..
+make
+sudo make install
 ```
 
 ### Dependencies
