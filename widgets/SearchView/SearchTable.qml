@@ -21,21 +21,14 @@ BabeTable
     property bool autoSuggestions : false
 
     trackNumberVisible: false
-    headBar.visible: count
     holder.emoji: "qrc:/assets/dialog-information.svg"
     holder.isMask: true
-    holder.title : "No search results!"
-    holder.body: "Try with another query"
+    holder.title : qsTr("No search results!")
+    holder.body: qsTr("Try with another query")
     holder.emojiSize: Maui.Style.iconSizes.huge
     coverArtVisible: true
 
-    headBar.leftContent: ToolButton
-    {
-        icon.name: "edit-clear"
-        onClicked: clearSearch()
-    }
-
-    footBar.middleContent:  Maui.TextField
+    headBar.leftContent: Maui.TextField
     {
         id: searchInput
         placeholderText: qsTr("Search...")
@@ -44,23 +37,8 @@ BabeTable
         onAccepted: runSearch(searchInput.text)
         //                    onActiveFocusChanged: if(activeFocus && autoSuggestions) suggestionsPopup.open()
         onTextEdited: if(autoSuggestions) suggestionsPopup.updateSuggestions()
-
+        onCleared: clearSearch()
     }
-
-
-//    footBar.leftContent: ToolButton
-//    {
-//        visible: true
-//        icon.name: "view-filter"
-//        icon.color: autoSuggestions ? babeColor : textColor
-//        onClicked:
-//        {
-//            autoSuggestions = !autoSuggestions
-//            Maui.FM.saveSettings("AUTOSUGGESTIONS", autoSuggestions, "BABE")
-//            if(!autoSuggestions)
-//                suggestionsPopup.close()
-//        }
-//    }
 
     SearchSuggestions
     {
@@ -86,7 +64,7 @@ BabeTable
     function runSearch(searchTxt)
     {
         if(searchTxt)
-            if(searchTxt !== searchTable.title)
+//            if(searchTxt !== searchTable.title)
             {
                 if(savedQueries.indexOf(searchTxt) < 0)
                 {
@@ -95,7 +73,7 @@ BabeTable
                     Maui.FM.saveSettings("QUERIES", savedQueries.join(","), "BABE")
                 }
 
-                searchTable.title = searchTxt
+//                searchTable.title = searchTxt
                 var queries = searchTxt.split(",")
                 searchTable.list.searchQueries(queries)
                 searchTable.forceActiveFocus()
@@ -117,6 +95,5 @@ BabeTable
         for(var i in tracks)
             searchTable.model.append(tracks[i])
     }
-
 }
 

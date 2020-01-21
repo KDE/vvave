@@ -16,7 +16,7 @@ Item
     height:  Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
     width: height
 
-    x: root.footBar.x + Maui.Style.space.medium + _drawer.width
+    x: root.footer.x + Maui.Style.space.medium
     y: parent.height - height - Maui.Style.space.medium
 
     parent: ApplicationWindow.overlay
@@ -37,10 +37,7 @@ Item
     Connections
     {
         target: mainPlaylist.table
-        onCountChanged:
-        {
-            anim.run(control.y)
-        }
+        onCountChanged: anim.run(control.y)
     }
 
     NumberAnimation on y
@@ -82,6 +79,7 @@ Item
         drag.minimumY: 0
         drag.maximumY: root.height - control.height
         onClicked:  _drawer.visible = !_drawer.visible
+        onDoubleClicked: focusView = true
 
         Rectangle
         {
