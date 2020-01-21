@@ -106,7 +106,7 @@ BabeList
         }
     }
 
-    listView.header:  Rectangle
+    listView.header: Rectangle
     {
         z: control.z + 999
         width: control.width

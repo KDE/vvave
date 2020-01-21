@@ -102,7 +102,7 @@ Maui.Page
             number : false
             coverArt : true
             showEmblem: false
-            onPressAndHold: if(Kirigami.Settings.isMobile && table.allowMenu) table.openItemMenu(index)
+            onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
             onRightClicked: if(table.allowMenu) table.openItemMenu(index)
             sameAlbum:
             {
@@ -120,7 +120,7 @@ Maui.Page
             {
                 Layout.fillHeight: true
                 Layout.preferredWidth: implicitWidth
-                visible: (Kirigami.Settings.isMobile ? true : delegate.hovered)
+                visible: (Maui.Handy.isTouch ? true : delegate.hovered)
                 icon.name: "edit-clear"
                 onClicked:
                 {
@@ -136,14 +136,14 @@ Maui.Page
             onClicked:
             {
                 table.currentIndex = index
-                if(Kirigami.Settings.isMobile)
+                if(Maui.Handy.isTouch)
                      control.play(index)
             }
 
             onDoubleClicked:
             {
                 table.currentIndex = index
-                if(!Kirigami.Settings.isMobile)
+                if(!Maui.Handy.isTouch)
                      control.play(index)
             }
         }

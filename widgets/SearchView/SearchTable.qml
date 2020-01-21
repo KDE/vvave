@@ -23,7 +23,7 @@ BabeTable
     trackNumberVisible: false
     headBar.visible: count
     holder.emoji: "qrc:/assets/dialog-information.svg"
-    holder.isMask: false
+    holder.isMask: true
     holder.title : "No search results!"
     holder.body: "Try with another query"
     holder.emojiSize: Maui.Style.iconSizes.huge

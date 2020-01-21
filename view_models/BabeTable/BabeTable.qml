@@ -365,7 +365,7 @@ BabeList
         width: listView.width
         number : trackNumberVisible ? true : false
         coverArt : coverArtVisible ? (control.width > 200) : coverArtVisible
-        onPressAndHold: if(Kirigami.Settings.isMobile && allowMenu) openItemMenu(index)
+        onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)
 
         onLeftEmblemClicked: H.addToSelection(listModel.get(index))
@@ -387,7 +387,7 @@ BabeList
         {
             Layout.fillHeight: true
             Layout.preferredWidth: implicitWidth
-            visible: control.showQuickActions && (Kirigami.Settings.isMobile ? true : delegate.hovered)
+            visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
             icon.name: "media-playlist-append"
             onClicked: delegate.append()
             opacity: delegate.hovered ? 0.8 : 0.6
@@ -402,7 +402,7 @@ BabeList
                 return
             }
 
-            if(Kirigami.Settings.isMobile)
+            if(Maui.Handy.isTouch)
                 rowClicked(index)
         }
 
@@ -410,7 +410,7 @@ BabeList
         {
             currentIndex = index
 
-            if(!Kirigami.Settings.isMobile)
+            if(!Maui.Handy.isTouch)
                 rowClicked(index)
         }
 
