@@ -11,11 +11,11 @@
 #include <QDirIterator>
 #include <QScreen>
 
-#include "vvave_version.h"
 
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
 #else
+#include "vvave_version.h"
 #include <MauiKit/fmh.h>
 #endif
 
