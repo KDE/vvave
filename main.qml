@@ -161,7 +161,7 @@ Maui.ApplicationWindow
         Action
         {
             text: qsTr("Albums")
-            icon.name: /*"album"*/ "view-media-album-cover"
+            icon.name: "view-media-album-cover"
         }
 
         Action

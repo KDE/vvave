@@ -257,6 +257,7 @@ BabeList
         MenuItem
         {
             text: qsTr("Go to Artist")
+            icon.name: "view-media-artist"
             onTriggered: goToArtist()
 
         }
@@ -264,6 +265,7 @@ BabeList
         MenuItem
         {
             text: qsTr("Go to Album")
+             icon.name: "view-media-album-cover"
             onTriggered: goToAlbum()
         }
 
