@@ -562,6 +562,7 @@ Maui.ApplicationWindow
 
                 clip: true
                 onCurrentItemChanged: currentItem.forceActiveFocus()
+                interactive: Maui.Handy.isTouch
 
                 TracksView
                 {
