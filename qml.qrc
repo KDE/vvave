@@ -4,7 +4,6 @@
         <file>widgets/TracksView.qml</file>
         <file>widgets/AlbumsView.qml</file>
         <file>assets/cover.png</file>
-        <file>data_models/db_model.qml</file>
         <file>db/script.sql</file>
         <file>utils/Player.js</file>
         <file>db/Queries.js</file>
@@ -22,7 +21,6 @@
         <file>widgets/InfoView/InfoView.qml</file>
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
-        <file>utils/Props.js</file>
         <file>widgets/SettingsView/SourcesDialog.qml</file>
         <file>view_models/BabeTable/PlaylistDialog.qml</file>
         <file>view_models/BabeList.qml</file>
