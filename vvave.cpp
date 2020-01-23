@@ -42,19 +42,10 @@ vvave::vvave(QObject *parent) : QObject(parent),
 //#endif
 }
 
-vvave::~vvave() {}
-
-
-void vvave::emitSignal()
-{
-    emit this->refreshTables(10);
-}
-
 //// PUBLIC SLOTS
 QVariantList vvave::sourceFolders()
 {
-    const auto sources = this->db->getDBData("select * from sources");
-
+    const auto sources = CollectionDB::getInstance()->getDBData("select * from sources");
     QVariantList res;
     for(const auto &item : sources)
         res << FMH::getDirInfo(item[FMH::MODEL_KEY::URL]);
@@ -65,7 +56,6 @@ bool vvave::removeSource(const QString &source)
 {
     if(!this->getSourceFolders().contains(source))
         return false;
-
     return this->db->removeSource(source);
 }
 
@@ -97,11 +87,12 @@ void vvave::scanDir(const QStringList &paths)
     };
 
     QFuture<uint> t1 = QtConcurrent::run(func);
-    watcher->setFuture(t1);}
+    watcher->setFuture(t1);
+}
 
-QStringList vvave::getSourceFolders()
+ QStringList vvave::getSourceFolders()
 {
-    return this->db->getSourcesFolders();
+    return CollectionDB::getInstance()-> getSourcesFolders();
 }
 
 void vvave::openUrls(const QStringList &urls)

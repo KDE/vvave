@@ -1,11 +1,8 @@
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
-#include <QQmlContext>
-#include <QApplication>
+
 #include <QIcon>
 #include <QLibrary>
-#include <QStyleHints>
-#include <QQuickStyle>
 #include <QCommandLineParser>
 
 #ifdef STATIC_KIRIGAMI
@@ -17,16 +14,14 @@
 #endif
 
 #ifdef Q_OS_ANDROID
-#include <QtWebView/QtWebView>
 #include <QGuiApplication>
 #include <QIcon>
 #include "mauiandroid.h"
 #else
 #include <QApplication>
-#ifdef Q_OS_LINUX
-#include <QtWebEngine>
 #endif
-#endif
+
+#include <QtWebView>
 
 #include "vvave.h"
 
@@ -76,10 +71,9 @@ int main(int argc, char *argv[])
     QStringList urls;
     if(!args.isEmpty())
         urls = args;
-    vvave vvave;
 
-    /* Services */
-    YouTube youtube;
+    static auto babe = new  vvave;
+    static auto youtube = new YouTube;
     //    Spotify spotify;
 
     QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
@@ -89,15 +83,25 @@ int main(int argc, char *argv[])
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, [&]()
     {
         qDebug()<<"FINISHED LOADING QML APP";
-        const auto currentSources = vvave.getSourceFolders();
-        vvave.scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
+        const auto currentSources = vvave::getSourceFolders();
+        babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
         if(!urls.isEmpty())
-            vvave.openUrls(urls);
+            babe->openUrls(urls);
     });
 
-    auto context = engine.rootContext();
-    context->setContextProperty("vvave", &vvave);
-    context->setContextProperty("youtube", &youtube);
+    qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "Vvave",
+                                  [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return babe;
+    });
+
+    qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "YouTube",
+                                  [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return youtube;
+    });
 
     qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
     qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
@@ -113,12 +117,7 @@ int main(int argc, char *argv[])
 #ifdef STATIC_MAUIKIT
     MauiKit::getInstance().registerTypes();
 #endif
-
-#ifdef Q_OS_ANDROID
     QtWebView::initialize();
-#elif defined Q_OS_LINUX
-    QtWebEngine::initialize();
-#endif
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())

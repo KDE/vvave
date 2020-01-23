@@ -106,7 +106,8 @@ MauiLab.SelectionBar
             }
 
             _dialogLoader.sourceComponent = _shareDialogComponent
-            root.dialog.show(control.uris)
+            root.dialog.urls = control.uris
+            root.dialog.open()
         }
     }
 

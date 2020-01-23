@@ -29,6 +29,9 @@ import "utils/Player.js" as Player
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
+import org.maui.vvave 1.0 as Vvave
+
 import Player 1.0
 import AlbumsList 1.0
 import TracksList 1.0
@@ -38,7 +41,7 @@ Maui.ApplicationWindow
 {
 
     id: root
-    title: qsTr("vvave")
+    title:  Maui.App.displayName
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -199,7 +202,7 @@ Maui.ApplicationWindow
     Component
     {
         id: _shareDialogComponent
-        Maui.ShareDialog {}
+        MauiLab.ShareDialog {}
     }
 
     Component
@@ -238,7 +241,7 @@ Maui.ApplicationWindow
                 root.dialog.settings.filterType = Maui.FMList.AUDIO
                 root.dialog.show(function(paths)
                 {
-                    vvave.openUrls(paths)
+                    Vvave.Vvave.openUrls(paths)
                     root.dialog.close()
                 })
             }
@@ -563,7 +566,7 @@ Maui.ApplicationWindow
 
                     Connections
                     {
-                        target: vvave
+                        target: Vvave.Vvave
                         onRefreshTables: tracksView.list.refresh()
                     }
 
@@ -597,7 +600,7 @@ Maui.ApplicationWindow
 
                         Connections
                         {
-                            target: vvave
+                            target: Vvave.Vvave
                             onRefreshTables: albumsView.list.refresh()
                         }
 
@@ -646,7 +649,7 @@ Maui.ApplicationWindow
 
                         Connections
                         {
-                            target: vvave
+                            target: Vvave.Vvave
                             onRefreshTables: artistsView.list.refresh()
                         }
 
@@ -719,7 +722,7 @@ Maui.ApplicationWindow
 
                         Connections
                         {
-                            target: vvave
+                            target: Vvave.Vvave
                             onRefreshTables: foldersView.populate()
                         }
 
@@ -805,7 +808,7 @@ Maui.ApplicationWindow
     /*CONNECTIONS*/
     Connections
     {
-        target: vvave
+        target: Vvave.Vvave
 
         onRefreshTables:
         {

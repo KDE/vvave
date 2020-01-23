@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.10
 import org.kde.mauikit 1.0 as Maui
+import org.maui.vvave 1.0 as Vvave
 
 Item
 {
@@ -16,7 +17,7 @@ Item
 
         Repeater
         {
-            model: vvave.moodColors()
+            model: Vvave.Vvave.moodColors()
 
             MouseArea
             {

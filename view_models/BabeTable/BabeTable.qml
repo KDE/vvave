@@ -292,7 +292,8 @@ BabeList
             }
 
             _dialogLoader.sourceComponent = _shareDialogComponent
-            root.dialog.show([url])
+            root.dialog.urls =[url]
+            root.dialog.open()
         }
     }
 

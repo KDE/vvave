@@ -253,7 +253,7 @@ const static QString BabePort = "8483";
 const static QString LinkPort = "3333";
 
 const static QString appName = QStringLiteral("vvave");
-const static QString displayName = QStringLiteral("vvave");
+const static QString displayName = QStringLiteral("Vvave");
 const static QString version = VVAVE_VERSION_STRING;
 const static QString description = QStringLiteral("Music player");
 const static QString orgName = QStringLiteral("Maui");

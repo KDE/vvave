@@ -33,9 +33,7 @@
         <file>widgets/SearchView/SearchSuggestions.qml</file>
         <file>services/web/YouTube.qml</file>
         <file>services/web/YoutubeViewer.qml</file>
-        <file>services/web/YoutubePlayer.qml</file>
         <file>services/web/YoutubeHelper.js</file>
-        <file>services/web/YoutubePlayer_A.qml</file>
         <file>services/local/LinkingDialog.qml</file>
         <file>services/local/LinkingView.qml</file>
         <file>services/local/LinkingListModel.qml</file>
@@ -48,8 +46,6 @@
         <file>services/web/Spotify/LoginForm.qml</file>
         <file>services/web/Spotify/spotify.html</file>
         <file>widgets/FloatingDisk.qml</file>
-        <file>services/web/WebView.qml</file>
-        <file>services/web/WebView_A.qml</file>
         <file>widgets/FoldersView.qml</file>
         <file>assets/vvave.svg</file>
         <file>assets/materialdesignicons-webfont.ttf</file>

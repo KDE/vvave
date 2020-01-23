@@ -2,6 +2,8 @@ import QtQuick 2.10
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.10
 import org.kde.mauikit 1.0 as Maui
+import org.maui.vvave 1.0 as Vvave
+
 import "../../view_models"
 import "../../utils/Help.js" as H
 
@@ -36,7 +38,7 @@ Maui.Dialog
             console.log("SCAN DIR <<", paths)
             for(var i in paths)
                 listModel.append({url: paths[i]})
-            vvave.scanDir([paths])
+            Vvave.Vvave.scanDir([paths])
         })
 
         getSources()
@@ -48,7 +50,7 @@ Maui.Dialog
         onAccepted:
         {
             if(pathToRemove.length>0)
-                if(vvave.removeSource(pathToRemove))
+                if( Vvave.Vvave.removeSource(pathToRemove))
                     H.refreshCollection()
             getSources()
             confirmationDialog.close()
@@ -61,9 +63,9 @@ Maui.Dialog
         anchors.fill: parent
         visible: !sources.count
         emoji: "qrc:/assets/MusicCloud.png"
-        isMask: false
-        title : "No Sources!"
-        body: "Add new sources to organize and play your music collection"
+        isMask: true
+        title : qsTr("No Sources!")
+        body: qsTr("Add new sources to organize and play your music collection")
         emojiSize: Maui.Style.iconSizes.huge
     }
 
@@ -99,7 +101,7 @@ Maui.Dialog
     function getSources()
     {
         sources.model.clear()
-        var folders = vvave.getSourceFolders()
+        var folders = Vvave.Vvave.getSourceFolders()
         for(var i in folders)
             sources.model.append({url : folders[i]})
     }
