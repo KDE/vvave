@@ -68,26 +68,27 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     const QStringList args = parser.positionalArguments();
-    QStringList urls;
-    if(!args.isEmpty())
-        urls = args;
-
-    static auto babe = new  vvave;
+      static auto babe = new  vvave;
     static auto youtube = new YouTube;
     //    Spotify spotify;
 
     QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
 
     QQmlApplicationEngine engine;
-
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, [&]()
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url, args](QObject *obj, const QUrl &objUrl)
     {
-        qDebug()<<"FINISHED LOADING QML APP";
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+
         const auto currentSources = vvave::getSourceFolders();
         babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
-        if(!urls.isEmpty())
-            babe->openUrls(urls);
-    });
+        if(!args.isEmpty())
+            babe->openUrls(args);
+
+    }, Qt::QueuedConnection);
+
 
     qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "Vvave",
                                   [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
@@ -119,9 +120,6 @@ int main(int argc, char *argv[])
 #endif
     QtWebView::initialize();
 
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
-
+    engine.load(url);
     return app.exec();
 }

@@ -111,7 +111,6 @@ MauiLab.SelectionBar
         }
     }
 
-
     Action
     {
         text: qsTr("Remove")
