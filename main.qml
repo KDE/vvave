@@ -77,8 +77,7 @@ Maui.ApplicationWindow
                                            playlists: 3,
                                            cloud: 4,
                                            folders: 5,
-                                           youtube: 6,
-                                           search: 7})
+                                           youtube: 6})
 
     property string syncPlaylist: ""
     property bool sync: false
@@ -99,7 +98,7 @@ Maui.ApplicationWindow
     onClosing: Player.savePlaylist()
     onMissingAlert:
     {
-        var message = qsTr("Missing file...")
+        var message = qsTr("Missing file")
         var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
         notify("dialog-question", message, messageBody, function ()
         {
@@ -121,6 +120,7 @@ Maui.ApplicationWindow
                                Player.nextTrack()
                            }
     }
+
 
     headBar.middleContent : Maui.ActionGroup
     {
@@ -175,13 +175,6 @@ Maui.ApplicationWindow
             text: qsTr("Playlists")
             icon.name: "view-media-playlist"
         }
-    }
-
-
-    onSearchButtonClicked:
-    {
-        _actionGroup.currentIndex = viewsIndex.search
-        searchView.searchInput.forceActiveFocus()
     }
 
     Loader
@@ -755,37 +748,37 @@ Maui.ApplicationWindow
                     }
                 }
 
-                Loader
-                {
-                    active: SwipeView.isCurrentItem || (item && item.listView.count > 0)
-                    sourceComponent: SearchTable
-                    {
-                        id: searchView
+//                Loader
+//                {
+//                    active: SwipeView.isCurrentItem || (item && item.listView.count > 0)
+//                    sourceComponent: SearchTable
+//                    {
+//                        id: searchView
 
-                        Connections
-                        {
-                            target: searchView
-                            onRowClicked: Player.quickPlay(searchView.listModel.get(index))
-                            onQuickPlayTrack: Player.quickPlay(searchView.listModel.get(index))
-                            onAppendTrack: Player.addTrack(searchView.listModel.get(index))
-                            onPlayAll: Player.playAll(searchView.listModel.getAll())
+//                        Connections
+//                        {
+//                            target: searchView
+//                            onRowClicked: Player.quickPlay(searchView.listModel.get(index))
+//                            onQuickPlayTrack: Player.quickPlay(searchView.listModel.get(index))
+//                            onAppendTrack: Player.addTrack(searchView.listModel.get(index))
+//                            onPlayAll: Player.playAll(searchView.listModel.getAll())
 
-                            onAppendAll: Player.appendAll(searchView.listModel.getAll())
-                            onArtworkDoubleClicked:
-                            {
-                                var query = Q.GET.albumTracks_.arg(
-                                            searchView.listModel.get(
-                                                index).album)
-                                query = query.arg(searchView.listModel.get(index).artist)
+//                            onAppendAll: Player.appendAll(searchView.listModel.getAll())
+//                            onArtworkDoubleClicked:
+//                            {
+//                                var query = Q.GET.albumTracks_.arg(
+//                                            searchView.listModel.get(
+//                                                index).album)
+//                                query = query.arg(searchView.listModel.get(index).artist)
 
-                                mainPlaylist.list.clear()
-                                mainPlaylist.list.sortBy = Tracks.NONE
-                                mainPlaylist.list.query = query
-                                Player.playAt(0)
-                            }
-                        }
-                    }
-                }
+//                                mainPlaylist.list.clear()
+//                                mainPlaylist.list.sortBy = Tracks.NONE
+//                                mainPlaylist.list.query = query
+//                                Player.playAt(0)
+//                            }
+//                        }
+//                    }
+//                }
             }
 
             SelectionBar

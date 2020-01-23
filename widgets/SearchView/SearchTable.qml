@@ -64,7 +64,6 @@ BabeTable
     function runSearch(searchTxt)
     {
         if(searchTxt)
-//            if(searchTxt !== searchTable.title)
             {
                 if(savedQueries.indexOf(searchTxt) < 0)
                 {
@@ -72,8 +71,6 @@ BabeTable
                     //                    suggestionsPopup.model.insert(0, {suggestion: searchInput.text})
                     Maui.FM.saveSettings("QUERIES", savedQueries.join(","), "BABE")
                 }
-
-//                searchTable.title = searchTxt
                 var queries = searchTxt.split(",")
                 searchTable.list.searchQueries(queries)
                 searchTable.forceActiveFocus()
@@ -85,7 +82,6 @@ BabeTable
     {
         searchInput.clear()
         searchTable.list.clear()
-        searchTable.title = ""
         suggestionsPopup.close()
     }
 
