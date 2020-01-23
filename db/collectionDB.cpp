@@ -15,23 +15,22 @@
 
    */
 
-
 #include "collectionDB.h"
 #include <QUuid>
 #include <QString>
 #include <QStringList>
-#include "../utils/babeconsole.h"
+#include <QCoreApplication>
 
 using namespace BAE;
 
 CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 {
-//    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [this]()
-//    {
-//        this->m_db.close();
-//        this->instance->deleteLater();
-//        this->instance = nullptr;
-//    });
+    QObject::connect(qApp, &QCoreApplication::aboutToQuit, [this]()
+    {
+        this->m_db.close();
+        this->instance->deleteLater();
+        this->instance = nullptr;
+    });
 
     this->name = QUuid::createUuid().toString();
 
@@ -49,11 +48,6 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 
 }
 
-CollectionDB::~CollectionDB()
-{
-    qDebug()<< "DELETING COLLECTIONDB SINGLETON";
-}
-
 CollectionDB *CollectionDB::instance = nullptr;
 
 CollectionDB *CollectionDB::getInstance()
@@ -68,11 +62,6 @@ CollectionDB *CollectionDB::getInstance()
         qDebug()<< "getInstance(): previous DBActions instance\n";
         return instance;
     }
-}
-
-void CollectionDB::deleteInstance()
-{
-    delete this;
 }
 
 void CollectionDB::prepareCollectionDB()
