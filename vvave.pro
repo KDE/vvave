@@ -36,6 +36,8 @@ linux:unix:!android {
         QMAKE_LINK += -nostdlib++
         QT *= androidextras webview
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
+   DISTFILES += \
+$$PWD/android_files/AndroidManifest.xml
 
         TAGLIB_REPO = https://github.com/mauikit/taglib
         exists($$PWD/3rdparty/taglib/taglib.pri) {

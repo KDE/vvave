@@ -89,7 +89,6 @@ int main(int argc, char *argv[])
 
     }, Qt::QueuedConnection);
 
-
     qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "Vvave",
                                   [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
         Q_UNUSED(engine)

@@ -24,11 +24,8 @@
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
         <file>utils/Props.js</file>
         <file>widgets/SettingsView/SourcesDialog.qml</file>
-        <file>assets/banner.png</file>
-        <file>assets/banner.svg</file>
         <file>view_models/BabeTable/PlaylistDialog.qml</file>
         <file>view_models/BabeList.qml</file>
-        <file>assets/banner-yellow.png</file>
         <file>widgets/SearchView/SearchTable.qml</file>
         <file>widgets/SearchView/SearchSuggestions.qml</file>
         <file>services/web/YouTube.qml</file>
