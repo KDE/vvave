@@ -74,7 +74,7 @@ BabeList
         middleContent: Maui.TextField
         {
             Layout.fillWidth: true
-            visible: list.count > 10
+            visible: list.count > 1
             placeholderText: qsTr("Search") + " " + list.count + " " + qsTr("tracks")
             onAccepted: listModel.filter = text
             onCleared: listModel.filter = ""

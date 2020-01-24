@@ -122,7 +122,8 @@ QVariantMap TracksModel::get(const int &index) const
 {
     if(index >= this->list.size() || index < 0)
         return QVariantMap();
-    return FMH::toMap(this->list.at(index));
+
+    return FMH::toMap(this->list.at( this->mappedIndex(index)));
 }
 
 QVariantList TracksModel::getAll()
@@ -152,8 +153,10 @@ void TracksModel::append(const QVariantMap &item, const int &at)
     if(at > this->list.size() || at < 0)
         return;
 
-    emit this->preItemAppendedAt(at);
-    this->list.insert(at, FMH::toModel(item));
+    const auto index_ = this->mappedIndex(at);
+
+    emit this->preItemAppendedAt(index_);
+    this->list.insert(index_, FMH::toModel(item));
     emit this->postItemAppended();
 }
 
@@ -232,9 +235,7 @@ void TracksModel::searchQueries(const QStringList &queries)
 void TracksModel::clear()
 {
     emit this->preListChanged();
-
     this->list.clear();
-
     emit this->postListChanged();
 }
 
@@ -243,11 +244,13 @@ bool TracksModel::color(const int &index, const QString &color)
     if(index >= this->list.size() || index < 0)
         return false;
 
-    auto item = this->list[index];
+    const auto index_ = this->mappedIndex(index);
+
+    auto item = this->list[index_];
     if(this->db->colorTagTrack(item[FMH::MODEL_KEY::URL], color))
     {
-        this->list[index][FMH::MODEL_KEY::COLOR] = color;
-        emit this->updateModel(index, {FMH::MODEL_KEY::COLOR});
+        this->list[index_][FMH::MODEL_KEY::COLOR] = color;
+        emit this->updateModel(index_, {FMH::MODEL_KEY::COLOR});
         return true;
     }
 
@@ -259,11 +262,13 @@ bool TracksModel::fav(const int &index, const bool &value)
     if(index >= this->list.size() || index < 0)
         return false;
 
-    auto item = this->list[index];
+    const auto index_ = this->mappedIndex(index);
+
+    auto item = this->list[index_];
     if(this->db->favTrack(item[FMH::MODEL_KEY::URL], value))
     {
-        this->list[index][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
-        emit this->updateModel(index, {FMH::MODEL_KEY::FAV});
+        this->list[index_][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
+        emit this->updateModel(index_, {FMH::MODEL_KEY::FAV});
         qDebug()<< "FAVVING TRACKS"<< item;
         return true;
     }
@@ -276,11 +281,13 @@ bool TracksModel::rate(const int &index, const int &value)
     if(index >= this->list.size() || index < 0)
         return false;
 
-    auto item = this->list[index];
+    const auto index_ = this->mappedIndex(index);
+
+    auto item = this->list[index_];
     if(this->db->rateTrack(item[FMH::MODEL_KEY::URL], value))
     {
-        this->list[index][FMH::MODEL_KEY::RATE] = QString::number(value);
-        emit this->updateModel(index, {FMH::MODEL_KEY::RATE});
+        this->list[index_][FMH::MODEL_KEY::RATE] = QString::number(value);
+        emit this->updateModel(index_, {FMH::MODEL_KEY::RATE});
 
         return true;
     }
@@ -293,11 +300,13 @@ bool TracksModel::countUp(const int &index)
     if(index >= this->list.size() || index < 0)
         return false;
 
-    auto item = this->list[index];
+    const auto index_ = this->mappedIndex(index);
+
+    auto item = this->list[index_];
     if(this->db->playedTrack(item[FMH::MODEL_KEY::URL]))
     {
-        this->list[index][FMH::MODEL_KEY::COUNT] = QString::number(item[FMH::MODEL_KEY::COUNT].toInt() + 1);
-        emit this->updateModel(index, {FMH::MODEL_KEY::COUNT});
+        this->list[index_][FMH::MODEL_KEY::COUNT] = QString::number(item[FMH::MODEL_KEY::COUNT].toInt() + 1);
+        emit this->updateModel(index_, {FMH::MODEL_KEY::COUNT});
 
         return true;
     }
@@ -310,8 +319,10 @@ bool TracksModel::remove(const int &index)
     if(index >= this->list.size() || index < 0)
         return false;
 
-    emit this->preItemRemoved(index);
-    this->list.removeAt(index);
+    const auto index_ = this->mappedIndex(index);
+
+    emit this->preItemRemoved(index_);
+    this->list.removeAt(index_);
     emit this->postItemRemoved();
 
     return true;
@@ -327,7 +338,9 @@ bool TracksModel::update(const QVariantMap &data, const int &index)
     if(index >= this->list.size() || index < 0)
         return false;
 
-    auto newData = this->list[index];
+    const auto index_ = this->mappedIndex(index);
+
+    auto newData = this->list[index_];
     QVector<int> roles;
 
     for(auto key : data.keys())
@@ -337,8 +350,7 @@ bool TracksModel::update(const QVariantMap &data, const int &index)
             roles << FMH::MODEL_NAME_KEY[key];
         }
 
-    this->list[index] = newData;
-    emit this->updateModel(index, roles);
+    this->list[index_] = newData;
+    emit this->updateModel(index_, roles);
     return true;
-
 }
