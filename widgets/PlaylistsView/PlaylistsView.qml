@@ -183,9 +183,9 @@ Maui.Page
         playlistQuery = query
         _filterDialog.isPublic = isPublic
         filterList.list.query = playlistQuery
+        filterList.listModel.filter = ""
         _filterDialog.open()
     }
-
 
     function removePlaylist()
     {

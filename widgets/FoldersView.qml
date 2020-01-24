@@ -24,7 +24,7 @@ Item
         onItemClicked:
         {
             var item = browser.model.get(index)
-            _filterList.title= item.label
+            _filterList.listModel.filter = ""
             currentFolder = item.path
             filter()
             _listDialog.open()
