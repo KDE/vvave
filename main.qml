@@ -285,6 +285,7 @@ Maui.ApplicationWindow
     {
         width: root.width
         spacing: 0
+        onImplicitHeightChanged: height = implicitHeight
 
         Maui.ToolBar
         {
