@@ -31,7 +31,6 @@ Maui.ItemDelegate
     height: sameAlbum ? Maui.Style.rowHeight : altHeight
     padding: 0
 
-    rightPadding: leftPadding
     leftPadding: Maui.Style.space.small
 
     signal play()

@@ -5,13 +5,15 @@ import "../view_models/BabeTable"
 import "../db/Queries.js" as Q
 import org.maui.vvave 1.0 as Vvave
 
-Item
+Maui.Page
 {
     id: control
     property alias list : _filterList
     property alias listModel : _filterList.model
     property var tracks : []
     property string currentFolder : ""
+
+    flickable: browser.flickable
 
     Maui.GridBrowser
     {

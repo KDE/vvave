@@ -24,6 +24,8 @@ Maui.Page
     signal albumCoverPressed(string album, string artist)
     signal bgClicked()
 
+    flickable: grid.flickable
+
     MouseArea
     {
         anchors.fill: parent

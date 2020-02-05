@@ -23,6 +23,7 @@ Maui.Page
     signal pulled()
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
+    flickable: babeList.flickable
 
     Maui.ListBrowser
     {

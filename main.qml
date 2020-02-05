@@ -96,6 +96,7 @@ Maui.ApplicationWindow
     /*SIGNALS*/
     signal missingAlert(var track)
 
+    flickable: swipeView.currentItem.flickable
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
