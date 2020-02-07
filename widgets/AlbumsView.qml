@@ -117,6 +117,7 @@ BabeGrid
             BabeTable
             {
                 id: albumsViewTable
+                showTitle: false
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 trackNumberVisible: true

@@ -47,151 +47,144 @@ BabeList
     focus: true
     holder.visible: list.count === 0
     listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
-    listView.header:  Maui.ToolBar
-    {
-        Kirigami.Theme.inherit: false
-        position: ToolBar.Header
-        width: control.width
-        z: listView.z + 9
-        visible: list.count > 0
 
-        leftContent: [
+    headBar.leftContent: [
 
-            ToolButton
-            {
-                id : playAllBtn
-                icon.name : "media-playlist-play"
-                onClicked: playAll()
-            },
-
-            ToolButton
-            {
-                id: appendBtn
-                icon.name : "media-playlist-append"
-                onClicked: appendAll()
-            }]
-
-        middleContent: Maui.TextField
+        ToolButton
         {
-            Layout.fillWidth: true
-            visible: list.count > 1
-            placeholderText: qsTr("Search") + " " + list.count + " " + qsTr("tracks")
-            onAccepted: listModel.filter = text
-            onCleared: listModel.filter = ""
-        }
+            id : playAllBtn
+            icon.name : "media-playlist-play"
+            onClicked: playAll()
+        },
 
-        rightContent: [
+        ToolButton
+        {
+            id: appendBtn
+            icon.name : "media-playlist-append"
+            onClicked: appendAll()
+        }]
 
-            ToolButton
+    headBar.middleContent: Maui.TextField
+    {
+        Layout.fillWidth: true
+        visible: list.count > 1
+        placeholderText: qsTr("Search") + " " + list.count + " " + qsTr("tracks")
+        onAccepted: listModel.filter = text
+        onCleared: listModel.filter = ""
+    }
+
+    headBar.rightContent: [
+
+        ToolButton
+        {
+            icon.name: "item-select"
+            onClicked: selectionMode = !selectionMode
+            checkable: false
+            checked: selectionMode
+        },
+
+        Maui.ToolButtonMenu
+        {
+            id: sortBtn
+            icon.name: "view-sort"
+            visible: list.count > 2
+            MenuItem
             {
-                icon.name: "item-select"
-                onClicked: selectionMode = !selectionMode
-                checkable: false
-                checked: selectionMode
-            },
+                text: qsTr("Title")
+                checkable: true
+                checked: list.sortBy === Tracks.TITLE
+                onTriggered: list.sortBy = Tracks.TITLE
+                autoExclusive: true
+            }
 
-            Maui.ToolButtonMenu
+            MenuItem
             {
-                id: sortBtn
-                icon.name: "view-sort"
-                visible: list.count > 2
-                MenuItem
-                {
-                    text: qsTr("Title")
-                    checkable: true
-                    checked: list.sortBy === Tracks.TITLE
-                    onTriggered: list.sortBy = Tracks.TITLE
-                    autoExclusive: true
-                }
+                text: qsTr("Track")
+                checkable: true
+                checked: list.sortBy === Tracks.TRACK
+                onTriggered: list.sortBy = Tracks.TRACK
+                autoExclusive: true
+            }
 
-                MenuItem
-                {
-                    text: qsTr("Track")
-                    checkable: true
-                    checked: list.sortBy === Tracks.TRACK
-                    onTriggered: list.sortBy = Tracks.TRACK
-                    autoExclusive: true
-                }
+            MenuItem
+            {
+                text: qsTr("Artist")
+                checkable: true
+                checked: list.sortBy === Tracks.ARTIST
+                onTriggered: list.sortBy = Tracks.ARTIST
+                autoExclusive: true
+            }
 
-                MenuItem
-                {
-                    text: qsTr("Artist")
-                    checkable: true
-                    checked: list.sortBy === Tracks.ARTIST
-                    onTriggered: list.sortBy = Tracks.ARTIST
-                    autoExclusive: true
-                }
+            MenuItem
+            {
+                text: qsTr("Album")
+                checkable: true
+                checked: list.sortBy === Tracks.ALBUM
+                onTriggered: list.sortBy = Tracks.ALBUM
+                autoExclusive: true
+            }
 
-                MenuItem
-                {
-                    text: qsTr("Album")
-                    checkable: true
-                    checked: list.sortBy === Tracks.ALBUM
-                    onTriggered: list.sortBy = Tracks.ALBUM
-                    autoExclusive: true
-                }
+            MenuItem
+            {
+                text: qsTr("Most played")
+                checkable: true
+                checked: list.sortBy === Tracks.COUNT
+                onTriggered: list.sortBy = Tracks.COUNT
+                autoExclusive: true
+            }
 
-                MenuItem
-                {
-                    text: qsTr("Most played")
-                    checkable: true
-                    checked: list.sortBy === Tracks.COUNT
-                    onTriggered: list.sortBy = Tracks.COUNT
-                    autoExclusive: true
-                }
+            MenuItem
+            {
+                text: qsTr("Rate")
+                checkable: true
+                checked: list.sortBy === Tracks.RATE
+                onTriggered: list.sortBy = Tracks.RATE
+                autoExclusive: true
+            }
 
-                MenuItem
-                {
-                    text: qsTr("Rate")
-                    checkable: true
-                    checked: list.sortBy === Tracks.RATE
-                    onTriggered: list.sortBy = Tracks.RATE
-                    autoExclusive: true
-                }
+            MenuItem
+            {
+                text: qsTr("Favorite")
+                checkable: true
+                checked: list.sortBy === Tracks.FAV
+                onTriggered: list.sortBy = Tracks.FAV
+                autoExclusive: true
+            }
 
-                MenuItem
-                {
-                    text: qsTr("Favorite")
-                    checkable: true
-                    checked: list.sortBy === Tracks.FAV
-                    onTriggered: list.sortBy = Tracks.FAV
-                    autoExclusive: true
-                }
+            MenuItem
+            {
+                text: qsTr("Release date")
+                checkable: true
+                checked: list.sortBy === Tracks.RELEASEDATE
+                onTriggered: list.sortBy = Tracks.RELEASEDATE
+                autoExclusive: true
+            }
 
-                MenuItem
-                {
-                    text: qsTr("Release date")
-                    checkable: true
-                    checked: list.sortBy === Tracks.RELEASEDATE
-                    onTriggered: list.sortBy = Tracks.RELEASEDATE
-                    autoExclusive: true
-                }
+            MenuItem
+            {
+                text: qsTr("Add date")
+                checkable: true
+                checked: list.sortBy === Tracks.ADDDATE
+                onTriggered: list.sortBy = Tracks.ADDDATE
+                autoExclusive: true
+            }
 
-                MenuItem
-                {
-                    text: qsTr("Add date")
-                    checkable: true
-                    checked: list.sortBy === Tracks.ADDDATE
-                    onTriggered: list.sortBy = Tracks.ADDDATE
-                    autoExclusive: true
-                }
+            MenuSeparator{}
 
-                MenuSeparator{}
-
-                MenuItem
+            MenuItem
+            {
+                text: qsTr("Group")
+                checkable: true
+                checked: group
+                onTriggered:
                 {
-                    text: qsTr("Group")
-                    checkable: true
-                    checked: group
-                    onTriggered:
-                    {
-                        group = !group
-                        groupBy()
-                    }
+                    group = !group
+                    groupBy()
                 }
             }
-        ]
-    }
+        }
+    ]
+
 
     Maui.Dialog
     {
