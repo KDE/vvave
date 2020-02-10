@@ -96,7 +96,7 @@ Maui.ApplicationWindow
     /*SIGNALS*/
     signal missingAlert(var track)
 
-    flickable: swipeView.currentItem.flickable ||  swipeView.currentItem.item.flickable
+//    flickable: swipeView.currentItem.flickable ||  swipeView.currentItem.item.flickable
 
    footerPositioning: ListView.InlineFooter
     /*HANDLE EVENTS*/
