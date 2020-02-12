@@ -49,46 +49,36 @@ Maui.ItemDelegate
         trackRating.text = stars
     }
 
-    RowLayout
+    Maui.ListItemTemplate
     {
+        id: _template
         anchors.fill: parent
+        isCurrentItem: control.isCurrentItem
+        iconSizeHint: height - Maui.Style.space.small
+        label1.text: control.number ? model.track + ". " + model.title :  model.title
+        label2.text: model.artist + " | " + model.album
+        label2.visible: control.coverArt ? !control.sameAlbum : true
 
-        Item
+        label3.text: model.fav ? (model.fav == "1" ? "\uf2D1" : "") : ""
+        label3.font.family: "Material Design Icons"
+        label4.font.family: "Material Design Icons"
+        label4.text: model.rate ? H.setStars(model.rate) : ""
+
+        iconVisible: !control.sameAlbum && control.coverArt
+        imageSource: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+
+        emblem.iconName: control.isSelected ? "checkbox" : " "
+        emblem.visible:  (control.keepEmblemOverlay || control.isSelected) && control.showEmblem
+        emblem.size: Maui.Style.iconSizes.medium
+
+        emblem.border.color: emblem.Kirigami.Theme.textColor
+        emblem.color: control.isSelected ? emblem.Kirigami.Theme.highlightColor : emblem.Kirigami.Theme.backgroundColor
+
+        Connections
         {
-            Layout.fillHeight: true
-            Layout.preferredWidth: _leftEmblemIcon.height + Maui.Style.space.small
-            visible: (control.keepEmblemOverlay || control.isSelected) && control.showEmblem
-
-            Maui.Badge
-            {
-                id: _leftEmblemIcon
-                anchors.centerIn: parent
-                iconName: control.isSelected ? "list-remove" : "list-add"
-                onClicked: control.leftEmblemClicked(index)
-                size: Maui.Style.iconSizes.small
-            }
+            target: _template.emblem
+            onClicked: control.leftEmblemClicked(index)
         }
-
-        Maui.ListItemTemplate
-        {
-            id: _template
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            isCurrentItem: control.isCurrentItem
-            iconSizeHint: height - Maui.Style.space.small
-            label1.text: control.number ? model.track + ". " + model.title :  model.title
-            label2.text: model.artist + " | " + model.album
-            label2.visible: control.coverArt ? !control.sameAlbum : true
-
-            label3.text: model.fav ? (model.fav == "1" ? "\uf2D1" : "") : ""
-            label3.font.family: "Material Design Icons"
-            label4.font.family: "Material Design Icons"
-            label4.text: model.rate ? H.setStars(model.rate) : ""
-
-            iconVisible: !control.sameAlbum && control.coverArt
-            imageSource: model.artwork ? model.artwork : "qrc:/assets/cover.png"
-        }
-
-
     }
+
 }
