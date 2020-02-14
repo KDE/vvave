@@ -46,6 +46,7 @@ BabeList
 
     focus: true
     holder.visible: list.count === 0
+    headBar.visible: list.count > 0
     listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
 
     headBar.leftContent: [

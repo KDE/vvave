@@ -35,7 +35,6 @@ MauiLab.SelectionBar
         isSelected: true
 
         onLeftEmblemClicked: control.removeAtIndex(index)
-
         background: null
     }
 
