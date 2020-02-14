@@ -264,7 +264,7 @@ Maui.ApplicationWindow
     {
         id: _drawer
         focus: true
-        width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 20), root.width) : 0
+        width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 18), root.width) : 0
         modal: !isWide
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         dragMargin: Maui.Style.space.big

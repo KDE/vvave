@@ -358,7 +358,7 @@ Maui.Page
 
         Maui.ToolBar
         {
-            Layout.preferredHeight: Maui.Style.toolBarHeight * 2
+            preferredHeight: Maui.Style.toolBarHeight * 2
             Layout.fillWidth: true
 
             position: ToolBar.Footer

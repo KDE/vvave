@@ -8,7 +8,7 @@ import AlbumsList 1.0
 Maui.Page
 {
     id: control
-    property int albumCoverSize: Math.min(160, Math.max(100, width * 0.3))
+    property int albumCoverSize: 120
 
     property int albumCoverRadius :  Maui.Style.radiusV
     property bool albumCardVisible : true
@@ -69,7 +69,7 @@ Maui.Page
                 albumRadius: albumCoverRadius
                 albumCard: albumCardVisible
                 padding: Maui.Style.space.small
-                height: parent.height
+                height: grid.itemSize
                 width: height
                 isCurrentItem: parent.isCurrentItem
 
