@@ -161,6 +161,7 @@ BabeList
                         iconSource: modelData.icon
                         iconVisible: true
                     }
+
                     Connections
                     {
                         target: _delegate

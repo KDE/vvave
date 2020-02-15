@@ -286,12 +286,11 @@ Maui.ApplicationWindow
     {
         width: root.width
         spacing: 0
-        onImplicitHeightChanged: height = implicitHeight
 
         Maui.ToolBar
         {
             Layout.fillWidth: true
-            preferredHeight: Maui.Style.toolBarHeightAlt * 0.9
+            preferredHeight: Maui.Style.toolBarHeightAlt * 0.8
             position: ToolBar.Footer
             visible: isPlaying
 

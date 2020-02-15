@@ -21,8 +21,7 @@ Maui.Page
         anchors.fill: parent
         showEmblem: false
         model: ListModel {}
-        itemWidth: itemSize * 1.2
-        itemHeight: itemSize * 1.2
+        cellHeight: itemSize * 1.2
         onItemClicked:
         {
             var item = browser.model.get(index)
