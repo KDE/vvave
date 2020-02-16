@@ -13,10 +13,8 @@ private:
     CollectionDB *db;
     void checkCollection(const QStringList &paths = BAE::defaultSources, std::function<void (uint)> cb = nullptr);
 
-    void emitSignal();
 public:
     explicit vvave(QObject *parent = nullptr);
-    ~vvave();
 
 signals:
     void refreshTables(uint size);
@@ -28,13 +26,13 @@ signals:
 public slots:
     ///DB Interfaces
     /// useful functions for non modeled views and actions with not direct access to a tracksmodel or its own model
-    QVariantList sourceFolders();
+    static QVariantList sourceFolders();
     bool removeSource(const QString &source);
     static QString moodColor(const int &index);
     static QStringList moodColors();
     void scanDir(const QStringList &paths = BAE::defaultSources);
 
-    QStringList getSourceFolders();
+    static QStringList getSourceFolders();
     void openUrls(const QStringList &urls);
 };
 

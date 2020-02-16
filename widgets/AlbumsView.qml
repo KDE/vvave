@@ -117,6 +117,7 @@ BabeGrid
             BabeTable
             {
                 id: albumsViewTable
+                showTitle: false
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 trackNumberVisible: true
@@ -126,7 +127,7 @@ BabeGrid
                 holder.emoji: "qrc:/assets/dialog-information.svg"
                 holder.isMask: false
                 holder.title : "Oops!"
-                holder.body: "This list is empty"
+                holder.body: qsTr("This list is empty")
                 holder.emojiSize: Maui.Style.iconSizes.huge
 
                 onRowClicked:
@@ -177,6 +178,7 @@ BabeGrid
     {
         console.log("PAPULATE ALBUMS VIEW")
         albumDialog.open()
+        albumsViewTable.listModel.filter = ""
 
         var query = ""
         var tagq = ""

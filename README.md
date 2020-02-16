@@ -1,23 +1,44 @@
 # Building
 
-Building is easy with `qmake`:
+### Build for Android
+Use `qmake`:
 
 ```bash
 # Clone the code
-git clone --recurse-submodules git://anongit.kde.org/vvave.git
+git clone https://invent.kde.org/kde/vvave.git
 cd vvave
-# Make some build dirs
-mkdir build
-cd build
+# Create build dir
+mkdir build && cd build
 # Build
 qmake -o Makefile ../vvave.pro
 make
 ```
 
+### Build for Desktop
+Use `cmake`:
+```bash
+# Clone the code
+git clone https://invent.kde.org/kde/vvave.git
+cd vvave
+# Create build dir
+mkdir build && cd build
+# Build
+cmake ..
+make
+sudo make install
+```
+
 ### Dependencies
 
 If you've built vvave on some distro, please contribute here!
-For now, the `buildInputs` part of the next section is a good clue for what
+
+#### Ubuntu
+
+```
+sudo apt install kirigami2-dev libkf5syntaxhighlighting-dev extra-cmake-modules libtag1-dev libkf5notifications-dev libqt5websockets5-dev qtdeclarative5-dev qtmultimedia5-dev qtwebengine5-dev qtbase5-dev
+```
+
+For other distros, the `buildInputs` part of the next section is a good clue for what
 you need.
 
 ### Using a nix shell

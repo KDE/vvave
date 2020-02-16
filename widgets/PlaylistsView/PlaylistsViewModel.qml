@@ -106,7 +106,7 @@ BabeList
         }
     }
 
-    listView.header:  Rectangle
+    listView.header: Rectangle
     {
         z: control.z + 999
         width: control.width
@@ -161,6 +161,7 @@ BabeList
                         iconSource: modelData.icon
                         iconVisible: true
                     }
+
                     Connections
                     {
                         target: _delegate

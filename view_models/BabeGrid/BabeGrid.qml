@@ -8,7 +8,7 @@ import AlbumsList 1.0
 Maui.Page
 {
     id: control
-    property int albumCoverSize: Math.min(160, width * 0.3)
+    property int albumCoverSize: 120
 
     property int albumCoverRadius :  Maui.Style.radiusV
     property bool albumCardVisible : true
@@ -23,6 +23,8 @@ Maui.Page
     signal albumCoverClicked(string album, string artist)
     signal albumCoverPressed(string album, string artist)
     signal bgClicked()
+
+    flickable: grid.flickable
 
     MouseArea
     {
@@ -67,7 +69,7 @@ Maui.Page
                 albumRadius: albumCoverRadius
                 albumCard: albumCardVisible
                 padding: Maui.Style.space.small
-                height: parent.height
+                height: grid.itemSize
                 width: height
                 isCurrentItem: parent.isCurrentItem
 

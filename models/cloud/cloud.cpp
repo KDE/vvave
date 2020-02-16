@@ -148,7 +148,7 @@ QVariantMap Cloud::get(const int &index) const
         return QVariantMap();
 
     QVariantMap res;
-    const auto item = this->list.at(index);
+    const auto item = this->list.at(this->mappedIndex(index));
 
     for(auto key : item.keys())
         res.insert(FMH::MODEL_NAME[key], item[key]);
@@ -176,5 +176,5 @@ void Cloud::getFileUrl(const int &index)
     if(index >= this->list.size() || index < 0)
         return;
 
-    this->getFileUrl(this->list.at(index)[FMH::MODEL_KEY::ID]);
+    this->getFileUrl(this->list.at(this->mappedIndex(index))[FMH::MODEL_KEY::ID]);
 }

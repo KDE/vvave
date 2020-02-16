@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import "../../view_models"
+import QtWebView 1.1
 
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
@@ -9,7 +10,7 @@ import org.kde.mauikit 1.0 as Maui
 Maui.Page
 {
     id: videoPlayback
-    property alias webView: webViewer.item
+    property alias webView: webView
     property bool wasPlaying: false
     property var currentYt : ({})
 
@@ -36,13 +37,31 @@ Maui.Page
         }
     ]
 
-    Loader
+    WebView
     {
-        id: webViewer
-        clip: true
+        id: webView
         anchors.fill: parent
-        source: "qrc:/services/web/WebView_A.qml"
+        visible: true
+        clip: true
+        property bool wasPlaying: false
+
         onVisibleChanged: if(!visible) webView.url = "about:blank"
+
+        onLoadingChanged:
+        {
+            if (loadRequest.errorString)
+                console.error(loadRequest.errorString);
+        }
+
+    //    onRecentlyAudibleChanged:
+    //    {
+    //        console.log("is playing", recentlyAudible)
+    //        if(recentlyAudible && isPlaying)
+    //            Player.pauseTrack()
+
+    //        if(!recentlyAudible && wasPlaying)
+    //            Player.resumeTrack()
+    //    }
     }
 
 }

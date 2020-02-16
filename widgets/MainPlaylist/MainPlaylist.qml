@@ -5,7 +5,6 @@ import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
-
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
 import "../../utils"
@@ -28,7 +27,6 @@ Maui.Page
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
     focus: true
-    headBar.visible: false
 
     PlaylistMenu
     {
@@ -38,11 +36,25 @@ Maui.Page
         onSaveToClicked: table.saveList()
     }
 
-    footer: AlbumsRoll
+    title: qsTr("Now playing")
+    headBar.rightContent: [
+        ToolButton
+        {
+            icon.name: "edit-delete"
+            onClicked:
+            {
+                player.stop()
+                mainPlaylist.table.list.clear()
+                root.sync = false
+                root.syncPlaylist = ""
+            }
+        }
+    ]
+
+    headBar.leftContent:  ToolButton
     {
-        id: _albumsRoll
-        width: table.width
-        position: ToolBar.Footer
+        icon.name: "document-save"
+        onClicked: mainPlaylist.table.saveList()
     }
 
     BabeTable
@@ -54,9 +66,9 @@ Maui.Page
         footBar.visible: false
         coverArtVisible: true
         holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.isMask: false
+        holder.isMask: true
         holder.title : "Meh!"
-        holder.body: "Start putting together your playlist!"
+        holder.body: qsTr("Start putting together your playlist!")
         holder.emojiSize: Maui.Style.iconSizes.huge
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
         listView.header: Rectangle
@@ -91,7 +103,6 @@ Maui.Page
                         root.syncPlaylist = ""
                     }
                 }
-
             }
         }
 
@@ -102,7 +113,7 @@ Maui.Page
             number : false
             coverArt : true
             showEmblem: false
-            onPressAndHold: if(Kirigami.Settings.isMobile && table.allowMenu) table.openItemMenu(index)
+            onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
             onRightClicked: if(table.allowMenu) table.openItemMenu(index)
             sameAlbum:
             {
@@ -120,7 +131,7 @@ Maui.Page
             {
                 Layout.fillHeight: true
                 Layout.preferredWidth: implicitWidth
-                visible: (Kirigami.Settings.isMobile ? true : delegate.hovered)
+                visible: (Maui.Handy.isTouch ? true : delegate.hovered)
                 icon.name: "edit-clear"
                 onClicked:
                 {
@@ -136,15 +147,15 @@ Maui.Page
             onClicked:
             {
                 table.currentIndex = index
-                if(Kirigami.Settings.isMobile)
-                     control.play(index)
+                if(Maui.Handy.isTouch)
+                    control.play(index)
             }
 
             onDoubleClicked:
             {
                 table.currentIndex = index
-                if(!Kirigami.Settings.isMobile)
-                     control.play(index)
+                if(!Maui.Handy.isTouch)
+                    control.play(index)
             }
         }
 
@@ -171,9 +182,6 @@ Maui.Page
                 query = Q.GET.tracksWhere_.arg(where)
                 table.list.appendQuery(query);
             }
-
-            //                if(autoplay)
-            //                    Player.playAt(0)
         }
     }
 

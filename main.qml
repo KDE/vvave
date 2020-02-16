@@ -18,7 +18,6 @@ import "view_models/BabeTable"
 
 import "services/local"
 import "services/web"
-//import "services/web/Spotify"
 
 import "view_models/BabeGrid"
 
@@ -30,6 +29,9 @@ import "utils/Player.js" as Player
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
+import org.maui.vvave 1.0 as Vvave
+
 import Player 1.0
 import AlbumsList 1.0
 import TracksList 1.0
@@ -39,7 +41,7 @@ Maui.ApplicationWindow
 {
 
     id: root
-    title: qsTr("vvave")
+    title:  Maui.App.displayName
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -78,8 +80,7 @@ Maui.ApplicationWindow
                                            playlists: 3,
                                            cloud: 4,
                                            folders: 5,
-                                           youtube: 6,
-                                           search: 7})
+                                           youtube: 6})
 
     property string syncPlaylist: ""
     property bool sync: false
@@ -95,12 +96,14 @@ Maui.ApplicationWindow
     /*SIGNALS*/
     signal missingAlert(var track)
 
+//    flickable: swipeView.currentItem.flickable ||  swipeView.currentItem.item.flickable
 
+   footerPositioning: ListView.InlineFooter
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
     onMissingAlert:
     {
-        var message = qsTr("Missing file...")
+        var message = qsTr("Missing file")
         var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
         notify("dialog-question", message, messageBody, function ()
         {
@@ -122,6 +125,7 @@ Maui.ApplicationWindow
                                Player.nextTrack()
                            }
     }
+
 
     headBar.middleContent : Maui.ActionGroup
     {
@@ -160,7 +164,7 @@ Maui.ApplicationWindow
         Action
         {
             text: qsTr("Albums")
-            icon.name: /*"album"*/ "view-media-album-cover"
+            icon.name: "view-media-album-cover"
         }
 
         Action
@@ -174,13 +178,6 @@ Maui.ApplicationWindow
             text: qsTr("Playlists")
             icon.name: "view-media-playlist"
         }
-    }
-
-
-    onSearchButtonClicked:
-    {
-        _actionGroup.currentIndex = viewsIndex.search
-        //        searchView.searchInput.forceActiveFocus()
     }
 
     Loader
@@ -205,7 +202,7 @@ Maui.ApplicationWindow
     Component
     {
         id: _shareDialogComponent
-        Maui.ShareDialog {}
+        MauiLab.ShareDialog {}
     }
 
     Component
@@ -222,59 +219,9 @@ Maui.ApplicationWindow
     FloatingDisk
     {
         id: _floatingDisk
-        //        opacity: 1 - _drawer.position
     }
 
     mainMenu: [
-
-        //        Maui.MenuItem
-        //        {
-        //            text: "Vvave Stream"
-        //            icon.name: "headphones"
-        //            onTriggered:
-        //            {
-        //                pageStack.currentIndex = 1
-        //                currentView = viewsIndex.vvave
-        //            }
-        //        },
-
-
-        //        Maui.MenuItem
-        //        {
-        //            text: qsTr("Linking")
-        //            icon.name: "view-links"
-        //            onTriggered:
-        //            {
-        //                pageStack.currentIndex = 1
-        //                currentView = viewsIndex.linking
-        //                if(!isLinked) linkingView.linkingConf.open()
-        //            }
-        //        },
-
-
-
-        //        Maui.MenuItem
-        //        {
-        //            text: qsTr("Cloud")
-        //            icon.name: "folder-cloud"
-        //            onTriggered:
-        //            {
-        //                pageStack.currentIndex = 1
-        //                currentView = viewsIndex.cloud
-        //            }
-        //        },
-
-
-        //        Maui.MenuItem
-        //        {
-        //            text: qsTr("Spotify")
-        //            icon.name: "internet-services"
-        //            onTriggered:
-        //            {
-        //                pageStack.currentIndex = 1
-        //                currentView = viewsIndex.spotify
-        //            }
-        //        },
 
         MenuItem
         {
@@ -294,85 +241,11 @@ Maui.ApplicationWindow
                 root.dialog.settings.filterType = Maui.FMList.AUDIO
                 root.dialog.show(function(paths)
                 {
-                    vvave.openUrls(paths)
+                    Vvave.Vvave.openUrls(paths)
                     root.dialog.close()
                 })
             }
-        }/*,
-
-                Menu
-                {
-                    title: qsTr("Collection")
-                    //            icon.name: "settings-configure"
-
-                    MenuItem
-                    {
-                        text: qsTr("Re-Scan")
-                        onTriggered: bae.refreshCollection();
-                    }
-
-                    MenuItem
-                    {
-                        text: qsTr("Refresh...")
-                        onTriggered: H.refreshCollection();
-                    }
-
-                    MenuItem
-                    {
-                        text: qsTr("Clean")
-                        onTriggered: bae.removeMissingTracks();
-                    }
-                }*/
-
-        //        Maui.Menu
-        //        {
-        //            title: qsTr("Settings...")
-        //            //            Kirigami.Action
-        //            //            {
-        //            //                text: "Brainz"
-
-        //            //                Kirigami.Action
-        //            //                {
-        //            //                    id: brainzToggle
-        //            //                    text: checked ? "Turn OFF" : "Turn ON"
-        //            //                    checked: bae.brainzState()
-        //            //                    checkable: true
-        //            //                    onToggled:
-        //            //                    {
-        //            //                        checked = !checked
-        //            //                        bae.saveSetting("AUTO", checked, "BRAINZ")
-        //            ////                        bae.brainz(checked)
-        //            //                    }
-        //            //                }
-        //            //            }
-
-
-
-        //            Maui.MenuItem
-        //            {
-        //                text: "Info label" + checked ? "ON" : "OFF"
-        //                checked: infoLabels
-        //                checkable: true
-        //                onToggled:
-        //                {
-        //                    infoLabels = checked
-        //                    bae.saveSetting("LABELS", infoLabels ? true : false, "PLAYBACK")
-
-        //                }
-        //            }
-
-        //            Maui.MenuItem
-        //            {
-        //                text: "Autoplay"
-        //                checked: autoplay
-        //                checkable: true
-        //                onToggled:
-        //                {
-        //                    autoplay = checked
-        //                    bae.saveSetting("AUTOPLAY", autoplay ? true : false, "BABE")
-        //                }
-        //            }
-        //        }
+        }
     ]
 
     Playlists
@@ -389,10 +262,10 @@ Maui.ApplicationWindow
     {
         id: _drawer
         focus: true
-        width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 20), root.width) : 0
+        width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 18), root.width) : 0
         modal: !isWide
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-        height: _drawer.modal ? implicitHeight - _mainPage.footer.height : implicitHeight
+        dragMargin: Maui.Style.space.big
 
         MainPlaylist
         {
@@ -407,175 +280,268 @@ Maui.ApplicationWindow
         }
     }
 
-    footBar.rightContent: ToolButton
+    footer: ColumnLayout
     {
-        icon.name: _volumeSlider.value == 0 ? "media-silence" : "media-speaker"
-        onClicked:
-        {
-            _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
-        }
+        width: root.width
+        spacing: 0
 
-        Popup
+        Maui.ToolBar
         {
-            id: _sliderPopup
-            height: 150
-            width: parent.width
-            y: -150
-            x: 0
-            //                            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPress
-            Slider
+            Layout.fillWidth: true
+            preferredHeight: Maui.Style.toolBarHeightAlt * 0.8
+            position: ToolBar.Footer
+            visible: isPlaying
+
+            leftContent: Label
             {
-                id: _volumeSlider
-                visible: true
-                height: parent.height
-                width: 20
-                anchors.horizontalCenter: parent.horizontalCenter
-                from: 0
-                to: 100
-                value: player.volume
-                orientation: Qt.Vertical
+                id: _label1
+                visible: text.length
+                verticalAlignment: Qt.AlignVCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: progressTimeLabel
+                elide: Text.ElideMiddle
+                wrapMode: Text.NoWrap
+                color: Kirigami.Theme.textColor
+                font.weight: Font.Normal
+                font.pointSize: Maui.Style.fontSizes.default
+            }
 
-                onMoved:
+            middleContent:  ColumnLayout
+            {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                spacing: 0
+
+                Label
                 {
-                    player.volume = value
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    visible: text.length
+                    verticalAlignment: Qt.AlignVCenter
+                    horizontalAlignment: Qt.AlignHCenter
+                    text: currentTrack.title + " <i>by</i> " +  currentTrack.artist + " | " + currentTrack.album
+                    elide: Text.ElideMiddle
+                    wrapMode: Text.NoWrap
+                    color: Kirigami.Theme.textColor
+                    font.weight: Font.Normal
+                    font.pointSize: Maui.Style.fontSizes.default
+                }
+            }
+
+            rightContent: Label
+            {
+                id: _label2
+                visible: text.length
+                verticalAlignment: Qt.AlignVCenter
+                horizontalAlignment: Qt.AlignHCenter
+                text: player.transformTime(player.duration/1000)
+                elide: Text.ElideMiddle
+                wrapMode: Text.NoWrap
+                color: Kirigami.Theme.textColor
+                font.weight: Font.Normal
+                font.pointSize: Maui.Style.fontSizes.default
+                opacity: 0.7
+            }
+
+            background: Slider
+            {
+                id: progressBar
+                padding: 0
+                from: 0
+                to: 1000
+                value: player.pos
+                spacing: 0
+                focus: true
+                onMoved: player.pos = value
+
+                Kirigami.Separator
+                {
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                }
+
+                background: Rectangle
+                {
+                    implicitWidth: progressBar.width
+                    implicitHeight: progressBar.height
+                    width: progressBar.availableWidth
+                    height: implicitHeight
+                    color: "transparent"
+                    opacity: 0.4
+
+                    Rectangle
+                    {
+                        width: progressBar.visualPosition * parent.width
+                        height: progressBar.height
+                        color: Kirigami.Theme.highlightColor
+                    }
+                }
+
+                handle: Rectangle
+                {
+                    x: progressBar.leftPadding + progressBar.visualPosition
+                       * (progressBar.availableWidth - width)
+                    y: 0
+                    implicitWidth: Maui.Style.iconSizes.medium
+                    implicitHeight: progressBar.height
+                    color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
                 }
             }
         }
 
-    }
-
-     footBar.middleContent: [
-        ToolButton
+        Maui.ToolBar
         {
-            id: babeBtnIcon
-            icon.name: "love"
-            enabled: currentTrackIndex >= 0
-            icon.color: currentTrack.fav == "0" ? Kirigami.Theme.textColor :  babeColor
-            onClicked: if (!mainlistEmpty)
-                       {
-                           mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
-                           currentTrack = mainPlaylist.listModel.get(currentTrackIndex)
-                       }
-        },
+            Layout.fillWidth: true
+            Layout.preferredHeight: Maui.Style.toolBarHeight
+            position: ToolBar.Footer
 
-        ToolButton
-        {
-            icon.name: "media-skip-backward"
-            icon.color: Kirigami.Theme.textColor
-            onClicked: Player.previousTrack()
-            onPressAndHold: Player.playAt(prevTrackIndex)
-        },
-
-        ToolButton
-        {
-            id: playIcon
-            enabled: currentTrackIndex >= 0
-            icon.color: Kirigami.Theme.textColor
-            icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
-            onClicked: player.playing = !player.playing
-        },
-
-        ToolButton
-        {
-            id: nextBtn
-            icon.color: Kirigami.Theme.textColor
-            icon.name: "media-skip-forward"
-            onClicked: Player.nextTrack()
-            onPressAndHold: Player.playAt(Player.shuffle())
-        },
-
-        ToolButton
-        {
-            id: shuffleBtn
-            icon.color: babeColor
-            icon.name: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
-            onClicked:
+            background: Item
             {
-                isShuffle = !isShuffle
-                Maui.FM.saveSettings("SHUFFLE", isShuffle, "PLAYBACK")
+                Image
+                {
+                    id: artworkBg
+                    height: parent.height
+                    width: parent.width
+
+                    sourceSize.width: parent.width
+                    sourceSize.height: parent.height
+
+                    fillMode: Image.PreserveAspectCrop
+                    antialiasing: true
+                    smooth: true
+                    asynchronous: true
+                    cache: true
+
+                    source: currentArtwork
+                }
+
+                FastBlur
+                {
+                    id: fastBlur
+                    anchors.fill: parent
+                    source: artworkBg
+                    radius: 100
+                    transparentBorder: false
+                    cached: true
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: Kirigami.Theme.backgroundColor
+                        opacity: 0.8
+                    }
+                }
+
+                Kirigami.Separator
+                {
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                }
             }
+
+            rightContent: ToolButton
+            {
+                icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
+                onPressAndHold :
+                {
+                    player.volume = player.volume === 0 ? 100 : 0
+                }
+
+                onClicked:
+                {
+                    _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
+                }
+
+                Popup
+                {
+                    id: _sliderPopup
+                    height: 150
+                    width: parent.width
+                    y: -150
+                    x: 0
+                    //                            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPress
+                    Slider
+                    {
+                        id: _volumeSlider
+                        visible: true
+                        height: parent.height
+                        width: 20
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        from: 0
+                        to: 100
+                        value: player.volume
+                        orientation: Qt.Vertical
+
+                        onMoved:
+                        {
+                            player.volume = value
+                        }
+                    }
+                }
+
+            }
+
+            middleContent: [
+                ToolButton
+                {
+                    id: babeBtnIcon
+                    icon.name: "love"
+                    enabled: currentTrackIndex >= 0
+                    icon.color: currentTrack.fav == "0" ? Kirigami.Theme.textColor :  babeColor
+                    onClicked: if (!mainlistEmpty)
+                               {
+                                   mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
+                                   currentTrack = mainPlaylist.listModel.get(currentTrackIndex)
+                               }
+                },
+
+                ToolButton
+                {
+                    icon.name: "media-skip-backward"
+                    icon.color: Kirigami.Theme.textColor
+                    onClicked: Player.previousTrack()
+                    onPressAndHold: Player.playAt(prevTrackIndex)
+                },
+
+                ToolButton
+                {
+                    id: playIcon
+                    enabled: currentTrackIndex >= 0
+                    icon.color: Kirigami.Theme.textColor
+                    icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
+                    onClicked: player.playing = !player.playing
+                },
+
+                ToolButton
+                {
+                    id: nextBtn
+                    icon.color: Kirigami.Theme.textColor
+                    icon.name: "media-skip-forward"
+                    onClicked: Player.nextTrack()
+                    onPressAndHold: Player.playAt(Player.shuffle())
+                },
+
+                ToolButton
+                {
+                    id: shuffleBtn
+                    icon.color: babeColor
+                    icon.name: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
+                    onClicked:
+                    {
+                        isShuffle = !isShuffle
+                        Maui.FM.saveSettings("SHUFFLE", isShuffle, "PLAYBACK")
+                    }
+                }
+            ]
         }
-    ]
+    }
 
     Maui.Page
     {
         id: _mainPage
         anchors.fill: parent
-        footBar.visible: isPlaying
-
-
-       footBar.leftContent:  Label
-       {
-           id: _label1
-           visible: text.length
-           verticalAlignment: Qt.AlignVCenter
-           horizontalAlignment: Qt.AlignHCenter
-           text: progressTimeLabel
-           elide: Text.ElideMiddle
-           wrapMode: Text.NoWrap
-           color: Kirigami.Theme.textColor
-           font.weight: Font.Normal
-           font.pointSize: Maui.Style.fontSizes.default
-       }
-
-
-       footBar.middleContent: Slider
-       {
-           id: progressBar
-           Layout.fillWidth: true
-           padding: 0
-           from: 0
-           to: 1000
-           value: player.pos
-           spacing: 0
-           focus: true
-           onMoved:
-           {
-               player.pos = value
-           }
-
-           //                background: Rectangle
-           //                {
-           //                    implicitWidth: progressBar.width
-           //                    implicitHeight: progressBar.height
-           //                    width: progressBar.availableWidth
-           //                    height: implicitHeight
-           //                    color: "transparent"
-
-           //                    Rectangle
-           //                    {
-           //                        width: progressBar.visualPosition * parent.width
-           //                        height: progressBar.height
-           //                        color: Kirigami.Theme.highlightColor
-           //                    }
-           //                }
-
-           //                handle: Rectangle
-           //                {
-           //                    x: progressBar.leftPadding + progressBar.visualPosition
-           //                       * (progressBar.availableWidth - width)
-           //                    y: -(progressBar.height * 0.8)
-           //                    implicitWidth: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
-           //                    implicitHeight: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
-           //                    radius: progressBar.pressed ? Maui.Style.iconSizes.medium : 0
-           //                    color: Kirigami.Theme.highlightColor
-           //                }
-       }
-
-       footBar.rightContent: Label
-       {
-           id: _label2
-           visible: text.length
-           verticalAlignment: Qt.AlignVCenter
-           horizontalAlignment: Qt.AlignHCenter
-           text: player.transformTime(player.duration/1000)
-           elide: Text.ElideMiddle
-           wrapMode: Text.NoWrap
-           color: Kirigami.Theme.textColor
-           font.weight: Font.Normal
-           font.pointSize: Maui.Style.fontSizes.default
-           opacity: 0.7
-       }
 
         ColumnLayout
         {
@@ -592,6 +558,7 @@ Maui.ApplicationWindow
 
                 clip: true
                 onCurrentItemChanged: currentItem.forceActiveFocus()
+                interactive: Maui.Handy.isTouch
 
                 TracksView
                 {
@@ -599,7 +566,7 @@ Maui.ApplicationWindow
 
                     Connections
                     {
-                        target: vvave
+                        target: Vvave.Vvave
                         onRefreshTables: tracksView.list.refresh()
                     }
 
@@ -633,7 +600,7 @@ Maui.ApplicationWindow
 
                         Connections
                         {
-                            target: vvave
+                            target: Vvave.Vvave
                             onRefreshTables: albumsView.list.refresh()
                         }
 
@@ -682,7 +649,7 @@ Maui.ApplicationWindow
 
                         Connections
                         {
-                            target: vvave
+                            target: Vvave.Vvave
                             onRefreshTables: artistsView.list.refresh()
                         }
 
@@ -755,7 +722,7 @@ Maui.ApplicationWindow
 
                         Connections
                         {
-                            target: vvave
+                            target: Vvave.Vvave
                             onRefreshTables: foldersView.populate()
                         }
 
@@ -784,37 +751,37 @@ Maui.ApplicationWindow
                     }
                 }
 
-                Loader
-                {
-                    active: SwipeView.isCurrentItem || (item && item.listView.count > 0)
-                    sourceComponent: SearchTable
-                    {
-                        id: searchView
+//                Loader
+//                {
+//                    active: SwipeView.isCurrentItem || (item && item.listView.count > 0)
+//                    sourceComponent: SearchTable
+//                    {
+//                        id: searchView
 
-                        Connections
-                        {
-                            target: searchView
-                            onRowClicked: Player.quickPlay(searchView.listModel.get(index))
-                            onQuickPlayTrack: Player.quickPlay(searchView.listModel.get(index))
-                            onAppendTrack: Player.addTrack(searchView.listModel.get(index))
-                            onPlayAll: Player.playAll(searchView.listModel.getAll())
+//                        Connections
+//                        {
+//                            target: searchView
+//                            onRowClicked: Player.quickPlay(searchView.listModel.get(index))
+//                            onQuickPlayTrack: Player.quickPlay(searchView.listModel.get(index))
+//                            onAppendTrack: Player.addTrack(searchView.listModel.get(index))
+//                            onPlayAll: Player.playAll(searchView.listModel.getAll())
 
-                            onAppendAll: Player.appendAll(searchView.listModel.getAll())
-                            onArtworkDoubleClicked:
-                            {
-                                var query = Q.GET.albumTracks_.arg(
-                                            searchView.listModel.get(
-                                                index).album)
-                                query = query.arg(searchView.listModel.get(index).artist)
+//                            onAppendAll: Player.appendAll(searchView.listModel.getAll())
+//                            onArtworkDoubleClicked:
+//                            {
+//                                var query = Q.GET.albumTracks_.arg(
+//                                            searchView.listModel.get(
+//                                                index).album)
+//                                query = query.arg(searchView.listModel.get(index).artist)
 
-                                mainPlaylist.list.clear()
-                                mainPlaylist.list.sortBy = Tracks.NONE
-                                mainPlaylist.list.query = query
-                                Player.playAt(0)
-                            }
-                        }
-                    }
-                }
+//                                mainPlaylist.list.clear()
+//                                mainPlaylist.list.sortBy = Tracks.NONE
+//                                mainPlaylist.list.query = query
+//                                Player.playAt(0)
+//                            }
+//                        }
+//                    }
+//                }
             }
 
             SelectionBar
@@ -841,7 +808,7 @@ Maui.ApplicationWindow
     /*CONNECTIONS*/
     Connections
     {
-        target: vvave
+        target: Vvave.Vvave
 
         onRefreshTables:
         {

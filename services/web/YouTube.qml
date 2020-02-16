@@ -5,6 +5,8 @@ import "../../view_models"
 import "../../view_models/BabeTable"
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import org.maui.vvave 1.0 as Vvave
+import QtWebView 1.1
 
 Maui.Page
 {
@@ -17,7 +19,7 @@ Maui.Page
 
     Connections
     {
-        target: youtube
+        target: Vvave.YouTube
         onQueryResultsReady:
         {
             searchRes = res;
@@ -35,11 +37,30 @@ Maui.Page
 
 
     /*this is for playing the track sin the background without showing the actual video*/
-    Loader
+
+    WebView
     {
-        id: youtubePlayer
-        source: isAndroid ? "qrc:/services/web/YoutubePlayer_A.qml" :
-                            "qrc:/services/web/YoutubePlayer.qml"
+        id: webView
+        anchors.fill: parent
+        visible: false
+        clip: true
+        property bool wasPlaying: false
+
+        onLoadingChanged:
+        {
+            if (loadRequest.errorString)
+                console.error(loadRequest.errorString);
+        }
+
+    //    onRecentlyAudibleChanged:
+    //    {
+    //        console.log("is playing", recentlyAudible)
+    //        if(recentlyAudible && isPlaying)
+    //            Player.pauseTrack()
+
+    //        if(!recentlyAudible && wasPlaying)
+    //            Player.resumeTrack()
+    //    }
     }
 
     Maui.Dialog
@@ -85,7 +106,7 @@ Maui.Page
                 Layout.column: 1
                 Layout.row: 3
                 Layout.fillWidth: true
-                text: Maui.FM.loadSettings("YOUTUBEKEY", "BABE",  youtube.getKey())
+                text: Maui.FM.loadSettings("YOUTUBEKEY", "BABE",  Vvave.YouTube.getKey())
             }
 
             Label
@@ -251,8 +272,8 @@ Maui.Page
         {
             var newURL = url.replace("embed/", "watch?v=")
             console.log(newURL)
-            youtubePlayer.item.url = newURL+"?autoplay=1+&vq=tiny"
-            youtubePlayer.item.runJavaScript("document.title", function(result) { console.log(result); });
+            webView.url = newURL+"?autoplay=1+&vq=tiny"
+            webView.runJavaScript("document.title", function(result) { console.log(result); });
         }
     }
 
@@ -262,7 +283,7 @@ Maui.Page
             if(searchTxt !== youtubeTable.title)
             {
                 youtubeTable.title = searchTxt
-                youtube.getQuery(searchTxt, Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25))
+                Vvave.YouTube.getQuery(searchTxt, Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25))
             }
     }
 

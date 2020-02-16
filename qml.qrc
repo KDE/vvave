@@ -4,7 +4,6 @@
         <file>widgets/TracksView.qml</file>
         <file>widgets/AlbumsView.qml</file>
         <file>assets/cover.png</file>
-        <file>data_models/db_model.qml</file>
         <file>db/script.sql</file>
         <file>utils/Player.js</file>
         <file>db/Queries.js</file>
@@ -22,20 +21,14 @@
         <file>widgets/InfoView/InfoView.qml</file>
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
-        <file>utils/Props.js</file>
         <file>widgets/SettingsView/SourcesDialog.qml</file>
-        <file>assets/banner.png</file>
-        <file>assets/banner.svg</file>
         <file>view_models/BabeTable/PlaylistDialog.qml</file>
         <file>view_models/BabeList.qml</file>
-        <file>assets/banner-yellow.png</file>
         <file>widgets/SearchView/SearchTable.qml</file>
         <file>widgets/SearchView/SearchSuggestions.qml</file>
         <file>services/web/YouTube.qml</file>
         <file>services/web/YoutubeViewer.qml</file>
-        <file>services/web/YoutubePlayer.qml</file>
         <file>services/web/YoutubeHelper.js</file>
-        <file>services/web/YoutubePlayer_A.qml</file>
         <file>services/local/LinkingDialog.qml</file>
         <file>services/local/LinkingView.qml</file>
         <file>services/local/LinkingListModel.qml</file>
@@ -48,8 +41,6 @@
         <file>services/web/Spotify/LoginForm.qml</file>
         <file>services/web/Spotify/spotify.html</file>
         <file>widgets/FloatingDisk.qml</file>
-        <file>services/web/WebView.qml</file>
-        <file>services/web/WebView_A.qml</file>
         <file>widgets/FoldersView.qml</file>
         <file>assets/vvave.svg</file>
         <file>assets/materialdesignicons-webfont.ttf</file>

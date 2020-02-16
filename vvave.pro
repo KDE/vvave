@@ -13,6 +13,14 @@ QT *= quick \
 TARGET = vvave
 TEMPLATE = app
 
+VERSION_MAJOR = 1
+VERSION_MINOR = 0
+VERSION_BUILD = 0
+
+VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
+
+DEFINES += VVAVE_VERSION_STRING=\\\"$$VERSION\\\"
+
 CONFIG += ordered
 CONFIG += c++17
 
@@ -28,6 +36,8 @@ linux:unix:!android {
         QMAKE_LINK += -nostdlib++
         QT *= androidextras webview
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
+   DISTFILES += \
+$$PWD/android_files/AndroidManifest.xml
 
         TAGLIB_REPO = https://github.com/mauikit/taglib
         exists($$PWD/3rdparty/taglib/taglib.pri) {
@@ -41,10 +51,9 @@ linux:unix:!android {
 
     }else:win32 {
 
- LIBS += -L$$PWD/'../../../../Program Files (x86)/taglib/lib/' -ltag
-
-INCLUDEPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
-DEPENDPATH += $$PWD/'../../../../Program Files (x86)/taglib/include'
+LIBS += -L$$PWD/../../Desktop/taglib/ -ltag
+INCLUDEPATH += $$PWD/../../Desktop/taglib
+DEPENDPATH += $$PWD/../../Desktop/taglib
 
  }
 
@@ -134,4 +143,3 @@ INCLUDEPATH += \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
-

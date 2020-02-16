@@ -1,19 +1,21 @@
-project(vvave)
 cmake_minimum_required(VERSION 3.0)
+set(VVAVE_VERSION 1.0.0)
+project(vvave VERSION ${VVAVE_VERSION})
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
 set(CMAKE_CXX_STANDARD 17)
 
 find_package(MauiKit REQUIRED)
-find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Network WebSockets Sql QuickControls2 Xml Multimedia Widgets DBus Svg)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Qml Quick Network WebSockets Sql QuickControls2 Xml Multimedia DBus Svg WebView)
 find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Notifications Config KIO Attica SyntaxHighlighting)
 include(KDEInstallDirs)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(ECMInstallIcons)
-include(FeatureSummary)
 include(ECMAddAppIcon)
+include(ECMSetupVersion)
+include(FeatureSummary)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTORCC ON)
@@ -53,6 +55,11 @@ add_executable(vvave
     models/cloud/cloud.cpp
     )
 
+ecm_setup_version(${VVAVE_VERSION}
+    VARIABLE_PREFIX VVAVE
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/vvave_version.h"
+    )
+
 if (ANDROID)
     find_package(Qt5 REQUIRED COMPONENTS AndroidExtras WebView Xml)
     find_package(OpenSSL REQUIRED)
@@ -70,16 +77,15 @@ if (ANDROID)
     kde_source_files_enable_exceptions(vvave)
 else()
     find_package(Taglib REQUIRED)
-    find_package(Qt5 REQUIRED COMPONENTS WebEngine)
     target_sources(vvave PRIVATE
         kde/mpris2.cpp
         kde/notify.cpp
         )
-    target_link_libraries(vvave Qt5::WebEngine KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus KF5::Attica KF5::SyntaxHighlighting)
+    target_link_libraries(vvave Qt5::WebView KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus KF5::Attica KF5::SyntaxHighlighting)
 endif()
 
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
-target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::Widgets Qt5::QuickControls2 ${TAGLIB_LIBRARIES})
+target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::WebSockets Qt5::Qml Qt5::Xml Qt5::Multimedia  Qt5::QuickControls2 ${TAGLIB_LIBRARIES})
 
 install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})

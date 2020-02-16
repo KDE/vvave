@@ -15,18 +15,9 @@
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
 #else
+#include "vvave_version.h"
 #include <MauiKit/fmh.h>
 #endif
-
-
-#define BABE_MAJOR_VERSION 0
-#define BABE_MINOR_VERSION 1
-#define BABE_PATCH_VERSION 0
-
-#define BABE_VERSION_STR "0.1.0"
-
-#define BABE_VERSION KDE_MAKE_VERSION(0,1,0)
-
 
 namespace BAE
 {
@@ -262,8 +253,8 @@ const static QString BabePort = "8483";
 const static QString LinkPort = "3333";
 
 const static QString appName = QStringLiteral("vvave");
-const static QString displayName = QStringLiteral("vvave");
-const static QString version = BABE_VERSION_STR;
+const static QString displayName = QStringLiteral("Vvave");
+const static QString version = VVAVE_VERSION_STRING;
 const static QString description = QStringLiteral("Music player");
 const static QString orgName = QStringLiteral("Maui");
 const static QString orgDomain = QStringLiteral("org.maui.vvave");
