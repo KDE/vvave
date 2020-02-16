@@ -263,9 +263,18 @@ Maui.ApplicationWindow
         id: _drawer
         focus: true
         width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 18), root.width) : 0
-        modal: !isWide
+        modal: false
+        collapsed: !isWide
+        collapsible: true
+        interactive: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         dragMargin: Maui.Style.space.big
+        overlay.visible: collapsed && position > 0 && visible
+        Connections
+        {
+            target: _drawer.overlay
+            onClicked: _drawer.position = 0
+        }
 
         MainPlaylist
         {
