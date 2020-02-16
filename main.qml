@@ -268,7 +268,6 @@ Maui.ApplicationWindow
         collapsible: true
         interactive: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-        dragMargin: Maui.Style.space.big
         overlay.visible: collapsed && position > 0 && visible
         Connections
         {
