@@ -8,6 +8,7 @@ Maui.Page
 {
     id: control
 
+    property alias listBrowser : babeList
     property alias listView : babeList.listView
     property alias model : babeList.model
     property alias delegate : babeList.delegate
@@ -21,6 +22,7 @@ Maui.Page
     property bool wasPulled : false
 
     signal pulled()
+
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
     flickable: babeList.flickable
@@ -33,6 +35,5 @@ Maui.Page
         anchors.fill: parent
         holder.visible: count === 0
         topMargin: Maui.Style.space.medium
-
    }
 }

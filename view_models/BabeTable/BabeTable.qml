@@ -29,8 +29,8 @@ BabeList
     property alias contextMenu : contextMenu
     property alias contextMenuItems : contextMenu.contentData
 
-   property alias headBarLeft : _leftLeft.data
-   
+    property alias headBarLeft : _leftLeft.data
+
     signal rowClicked(int index)
     signal rowDoubleClicked(int index)
     signal rowPressed(int index)
@@ -47,14 +47,26 @@ BabeList
     holder.visible: list.count === 0
     headBar.visible: list.count > 0
     listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
+    listBrowser.enableLassoSelection: !Kirigami.Settings.hasTransientTouchInput
+
+    Connections
+    {
+        target: control.listBrowser
+        onItemsSelected:
+        {
+            for(var i in indexes)
+            {
+                H.addToSelection(listModel.get(indexes[i]))
+            }
+        }
+    }
 
     headBar.leftContent: [
-
         Row
         {
-          id: _leftLeft  
+            id: _leftLeft
         },
-    
+
         ToolButton
         {
             id : playAllBtn
