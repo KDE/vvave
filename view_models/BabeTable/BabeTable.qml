@@ -29,9 +29,8 @@ BabeList
     property alias contextMenu : contextMenu
     property alias contextMenuItems : contextMenu.contentData
 
-    //    property alias playAllBtn : playAllBtn
-    //    property alias appendBtn : appendBtn
-
+   property alias headBarLeft : _leftLeft.data
+   
     signal rowClicked(int index)
     signal rowDoubleClicked(int index)
     signal rowPressed(int index)
@@ -51,6 +50,11 @@ BabeList
 
     headBar.leftContent: [
 
+        Row
+        {
+          id: _leftLeft  
+        },
+    
         ToolButton
         {
             id : playAllBtn

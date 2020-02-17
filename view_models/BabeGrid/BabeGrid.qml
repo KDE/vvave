@@ -8,7 +8,7 @@ import AlbumsList 1.0
 Maui.Page
 {
     id: control
-    property int albumCoverSize: 120
+    property int albumCoverSize: 130
 
     property int albumCoverRadius :  Maui.Style.radiusV
     property bool albumCardVisible : true

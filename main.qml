@@ -261,13 +261,9 @@ Maui.ApplicationWindow
     sideBar: Maui.AbstractSideBar
     {
         id: _drawer
-        focus: true
-        width: visible ? Math.min(Kirigami.Units.gridUnit * (Kirigami.Settings.isMobile? 18 : 18), root.width) : 0
-        modal: false
+        width: visible ? Math.min(Kirigami.Units.gridUnit * 16, root.width) : 0
         collapsed: !isWide
         collapsible: true
-        interactive: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         dragMargin: Maui.Style.space.big
         overlay.visible: collapsed && position > 0 && visible
         Connections
@@ -603,7 +599,6 @@ Maui.ApplicationWindow
                         holder.title : "No Albums!"
                         holder.body: "Add new music sources"
                         holder.emojiSize: Maui.Style.iconSizes.huge
-                        title: count + qsTr(" albums")
                         list.query: Albums.ALBUMS
                         list.sortBy: Albums.ALBUM
 
@@ -651,7 +646,6 @@ Maui.ApplicationWindow
                         holder.title : qsTr("No Artists!")
                         holder.body: qsTr("Add new music sources")
                         holder.emojiSize: Maui.Style.iconSizes.huge
-                        title: count + qsTr(" artists")
                         list.query: Albums.ARTISTS
                         list.sortBy: Albums.ARTIST
                         table.list.sortBy:  Tracks.NONE
