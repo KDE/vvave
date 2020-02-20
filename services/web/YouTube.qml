@@ -205,7 +205,7 @@ Maui.Page
             headBar.visible: false
             holder.visible: count === 0
             holder.emoji: "qrc:/assets/dialog-information.svg"
-            holder.isMask: false
+            holder.isMask: true
             holder.title : "No Results!"
             holder.body: "Try with another query"
             holder.emojiSize: Maui.Style.iconSizes.huge

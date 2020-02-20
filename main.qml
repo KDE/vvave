@@ -112,7 +112,6 @@ Maui.ApplicationWindow
     }
 
     /*COMPONENTS*/
-
     Player
     {
         id: player
@@ -269,7 +268,7 @@ Maui.ApplicationWindow
         Connections
         {
             target: _drawer.overlay
-            onClicked: _drawer.position = 0
+            onClicked: _drawer.visible = false
         }
 
         MainPlaylist
@@ -689,6 +688,8 @@ Maui.ApplicationWindow
                         Connections
                         {
                             target: playlistsView
+                            onQuickPlayTrack:
+                                Player.quickPlay(foldersView.list.model.get(index))
 
                             onRowClicked: Player.quickPlay(track)
                             onAppendTrack: Player.addTrack(track)

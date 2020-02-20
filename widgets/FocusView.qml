@@ -58,6 +58,7 @@ Maui.Page
         {
             Layout.fillWidth: true
             Layout.preferredHeight: width
+            clip: true
 
             Item
             {
@@ -86,7 +87,7 @@ Maui.Page
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 orientation: ListView.Horizontal
-                clip: true
+                clip: false
                 focus: true
                 interactive: true
                 currentIndex: currentTrackIndex

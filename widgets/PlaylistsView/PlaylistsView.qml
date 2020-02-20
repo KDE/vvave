@@ -11,10 +11,11 @@ import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
 
-Maui.Page
+Kirigami.PageRow
 {
     id: control
-    spacing: Maui.Style.space.medium
+    clip: true
+    defaultColumnWidth: Kirigami.Units.gridUnit * 44
 
     property string currentPlaylist
     property string playlistQuery
@@ -24,29 +25,27 @@ Maui.Page
     property alias listModel : filterList.listModel
 
     signal rowClicked(var track)
-    signal quickPlayTrack(var track)
+    signal playTrack(var track)
     signal appendTrack(var track)
     signal playAll()
     signal syncAndPlay(string playlist)
     signal appendAll()
 
-
-    Maui.FloatingButton
-    {
-        id: _overlayButton
-        z: 999
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.margins: Maui.Style.toolBarHeight
-        anchors.bottomMargin: Maui.Style.toolBarHeight
-        icon.name : "list-add"
-        onClicked: newPlaylistDialog.open()
-    }
-
-    PlaylistsViewModel
+    initialPage: PlaylistsViewModel
     {
         id: playlistViewModel
-        anchors.fill: parent
+
+        Maui.FloatingButton
+        {
+            id: _overlayButton
+            z: 999
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: Maui.Style.toolBarHeight
+            anchors.bottomMargin: Maui.Style.toolBarHeight
+            icon.name : "list-add"
+            onClicked: newPlaylistDialog.open()
+        }
     }
 
     Maui.NewDialog
@@ -58,115 +57,64 @@ Maui.Page
         rejectButton.visible: false
     }
 
-    Maui.Dialog
+    BabeTable
     {
-        id: _filterDialog
+        id: filterList
         property bool isPublic: true
 
-        parent: parent
-        maxHeight: maxWidth
-        maxWidth: Maui.Style.unit * 600
-        defaultButtons: false
-        page.padding: 0
-
-        BabeTable
+        coverArtVisible: true
+        showTitle: false
+        title: control.currentPlaylist
+        holder.emoji: "qrc:/assets/dialog-information.svg"
+        holder.isMask: true
+        holder.title : title
+        holder.body: "Your playlist is empty,<br>start adding new music to it"
+        holder.emojiSize: Maui.Style.iconSizes.huge
+        headBar.visible: true
+        headBarLeft: ToolButton
         {
-            id: filterList
-            anchors.fill: parent
-            clip: true
-            coverArtVisible: true
-            showTitle: false
-            title: control.currentPlaylist
-            holder.emoji: "qrc:/assets/dialog-information.svg"
-            holder.isMask: false
-            holder.title : title
-            holder.body: "Your playlist is empty,<br>start adding new music to it"
-            holder.emojiSize: Maui.Style.iconSizes.huge
+            icon.name: "go-previous"
+            onClicked: control.removePage(filterList)
+        }
 
-            contextMenuItems: MenuItem
+        contextMenuItems: MenuItem
+        {
+            text: qsTr("Remove from playlist")
+        }
+
+        onRowClicked: control.rowClicked(filterList.listModel.get(index))
+        onQuickPlayTrack: control.playTrack(filterList.listModel.get(filterList.currentIndex))
+        onAppendTrack: control.appendTrack(filterList.listModel.get(filterList.currentIndex))
+
+        onPlayAll:
+        {
+            if(filterList.isPublic)
+                control.syncAndPlay(control.currentPlaylist)
+            else
+                control.playAll()
+
+            control.removePage(filterList)
+        }
+
+        onAppendAll: appendAll()
+        onPulled: populate(playlistQuery)
+        section.criteria: ViewSection.FullString
+        section.delegate: Maui.LabelDelegate
+        {
+            label: filterList.section.property === qsTr("stars") ? H.setStars(section) : section
+            isSection: true
+            labelTxt.font.family: "Material Design Icons"
+            width: filterList.width
+        }
+
+        Connections
+        {
+            target: filterList.contextMenu
+
+            onRemoveClicked:
             {
-                text: qsTr("Remove from playlist")
-            }
-
-
-            //        headerMenu.menuItem:  [
-            //            Maui.MenuItem
-            //            {
-            //                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-            //                text: "Sync tags"
-            //                onTriggered: {}
-            //            },
-            //            Maui.MenuItem
-            //            {
-            //                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-            //                text: "Play-n-Sync"
-            //                onTriggered:
-            //                {
-            //                    filterList.headerMenu.close()
-            //                    syncAndPlay(playlistViewModel.currentIndex)
-            //                }
-            //            },
-            //            Maui.MenuItem
-            //            {
-            //                enabled: !playlistViewModel.model.get(playlistViewModel.currentIndex).playlistIcon
-            //                text: "Remove playlist"
-            //                onTriggered: removePlaylist()
-            //            }
-            //        ]
-
-
-            //            contextMenu.menuItem: [
-
-            //                MenuItem
-            //                {
-            //                    text: qsTr("Remove from playlist")
-            //                    onTriggered:
-            //                    {
-            //                        bae.removePlaylistTrack(filterList.model.get(filterList.currentIndex).url, playlistViewModel.model.get(playlistViewModel.currentIndex).playlist)
-            //                        populate(playlistQuery)
-            //                    }
-            //                }
-            //            ]
-
-            section.criteria: ViewSection.FullString
-            section.delegate: Maui.LabelDelegate
-            {
-                label: filterList.section.property === qsTr("stars") ? H.setStars(section) : section
-                isSection: true
-                labelTxt.font.family: "Material Design Icons"
-                width: filterList.width
-            }
-
-            Connections
-            {
-                target: filterList
-                onRowClicked: control.rowClicked(filterList.listModel.get(index))
-                onQuickPlayTrack: control.quickPlayTrack(filterList.listModel.get(filterList.currentIndex))
-                onAppendTrack: control.appendTrack(filterList.listModel.get(filterList.currentIndex))
-
-                onPlayAll:
-                {
-                    if(_filterDialog.isPublic)
-                        control.syncAndPlay(control.currentPlaylist)
-                    else
-                        control.playAll()
-
-                    _filterDialog.close()
-                }
-
-                onAppendAll: appendAll()
-                onPulled: populate(playlistQuery)
-            }
-
-            Connections
-            {
-                target: filterList.contextMenu
-
-                onRemoveClicked:
-                {
-                    playlistsList.removeTrack(playlistViewList.currentIndex, filterList.listModel.get(filterList.currentIndex).url)
-                    populate(playlistQuery)
-                }
+                playlistsList.removeTrack(playlistViewList.currentIndex, filterList.listModel.get(filterList.currentIndex).url)
+                populate(playlistQuery)
             }
         }
     }
@@ -181,10 +129,10 @@ Maui.Page
     function populate(query, isPublic)
     {
         playlistQuery = query
-        _filterDialog.isPublic = isPublic
+        filterList.isPublic = isPublic
         filterList.list.query = playlistQuery
         filterList.listModel.filter = ""
-        _filterDialog.open()
+        control.push(filterList)
     }
 
     function removePlaylist()
