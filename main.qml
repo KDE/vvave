@@ -792,13 +792,9 @@ Maui.ApplicationWindow
             {
                 id: _selectionBar
                 property alias listView: _selectionBar.selectionList
-                Layout.maximumWidth: 500
-                Layout.minimumWidth: 100
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignCenter
-                Layout.margins: Maui.Style.space.big
-                Layout.topMargin: Maui.Style.space.small
-                Layout.bottomMargin: Maui.Style.space.big
+                Layout.alignment: Qt.AlignHCenter
+                Layout.preferredWidth: Math.min(parent.width, implicitWidth)
+                Layout.margins: Maui.Style.space.medium
 
                 onExitClicked:
                 {
