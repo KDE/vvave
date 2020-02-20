@@ -558,7 +558,11 @@ Maui.ApplicationWindow
                 Layout.fillWidth: true
                 //                interactive: Kirigami.Settings.isMobile
                 currentIndex: _actionGroup.currentIndex
-                onCurrentIndexChanged: _actionGroup.currentIndex = currentIndex
+                onCurrentIndexChanged:
+                {
+                    _actionGroup.currentIndex = currentIndex
+                    currentIndex = _actionGroup.currentIndex
+                }
 
                 clip: true
                 onCurrentItemChanged: currentItem.forceActiveFocus()
