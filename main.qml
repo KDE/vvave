@@ -599,8 +599,8 @@ Maui.ApplicationWindow
 
                         holder.emoji: "qrc:/assets/dialog-information.svg"
                         holder.isMask: false
-                        holder.title : "No Albums!"
-                        holder.body: "Add new music sources"
+                        holder.title : qsTr("No Albums!")
+                        holder.body: qsTr("Add new music sources")
                         holder.emojiSize: Maui.Style.iconSizes.huge
                         list.query: Albums.ALBUMS
                         list.sortBy: Albums.ALBUM
