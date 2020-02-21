@@ -37,7 +37,7 @@ static const inline QNetworkRequest formRequest(const QUrl &url, const  QString 
     return newRequest;
 }
 
-const QString NextMusic::API = QStringLiteral("https://PROVIDER/index.php/apps/music/api/");
+const QString NextMusic::API = QStringLiteral("/index.php/apps/music/api/");
 
 NextMusic::NextMusic(QObject *parent) : AbstractMusicProvider(parent) {}
 
@@ -143,8 +143,9 @@ FMH::MODEL NextMusic::getTrackItem(const QString &id)
 }
 
 void NextMusic::getTrackPath(const QString &id)
-{
-    auto url = QString(NextMusic::API+"file/%1/path").replace("PROVIDER", QUrl(this->m_provider).host()).arg(id);
+{  
+    QUrl relativeUrl("../.."+NextMusic::API+QString("file/%1/path").arg(id));
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
 
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();
@@ -180,8 +181,8 @@ void NextMusic::getTrackPath(const QString &id)
 
 void NextMusic::getCollection(const std::initializer_list<QString> &parameters)
 {
-
-    auto url = QString(NextMusic::API).replace("PROVIDER", QUrl(this->m_provider).host()).append("collection");
+    QUrl relativeUrl("../.."+NextMusic::API+"collection");
+    auto url = QUrl(this->m_provider).resolved(relativeUrl);
 
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();

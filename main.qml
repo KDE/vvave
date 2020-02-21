@@ -692,9 +692,6 @@ Maui.ApplicationWindow
                         Connections
                         {
                             target: playlistsView
-                            onQuickPlayTrack:
-                                Player.quickPlay(foldersView.list.model.get(index))
-
                             onRowClicked: Player.quickPlay(track)
                             onAppendTrack: Player.addTrack(track)
                             onPlayTrack: Player.quickPlay(track)
