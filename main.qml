@@ -796,7 +796,7 @@ Maui.ApplicationWindow
                 Layout.alignment: Qt.AlignHCenter
                 Layout.preferredWidth: Math.min(parent.width, implicitWidth)
                 Layout.margins: Maui.Style.space.medium
-
+                maxListHeight: swipeView.height - Maui.Style.space.medium
                 onExitClicked:
                 {
                     root.selectionMode = false

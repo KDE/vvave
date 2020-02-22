@@ -58,6 +58,8 @@ Maui.Page
         {
             Layout.fillWidth: true
             Layout.preferredHeight: width
+            Layout.maximumHeight: 300
+
             clip: true
 
             Item
