@@ -2,8 +2,14 @@
 
 function playTrack(index)
 {
+
     if((index < mainPlaylist.listView.count) && (mainPlaylist.listView.count > 0) && (index > -1))
     {
+        prevTrackIndex = currentTrackIndex
+        currentTrackIndex = index
+        mainPlaylist.listView.currentIndex = currentTrackIndex
+        currentTrack = mainPlaylist.listView.itemAtIndex(currentTrackIndex)
+
         if(typeof(currentTrack) === "undefined") return
 
         if(!Maui.FM.fileExists(currentTrack.url) && currentTrack.url.startsWith("file://"))
@@ -17,17 +23,6 @@ function playTrack(index)
 
         progressBar.enabled = true
         root.title = currentTrack.title + " - " +currentTrack.artist
-
-        //                if(!root.active)
-        //                    bae.notifySong(currentTrack.url)
-
-
-        //            if(currentTrack.lyrics.length < 1)
-        //                            bae.trackLyrics(currentTrack.url)
-
-        //    root.mainPlaylist.infoView.wikiAlbum = bae.albumWiki(root.mainPlaylist.currentTrack.album,root.mainPlaylist.currentTrack.artist)
-        //    root.mainPlaylist.infoView.wikiArtist = bae.artistWiki(root.mainPlaylist.currentTrack.artist)
-        //    //    root.mainPlaylist.infoView.artistHead = bae.artistArt(root.mainPlaylist.currentTrack.artist)
     }
 }
 
@@ -36,8 +31,8 @@ function queueTracks(tracks)
     if(tracks && tracks.length > 0)
     {
         appendTracksAt(tracks, currentTrackIndex+onQueue+1)
-        onQueue++
         root.notify("", "Queue", tracks.length + " tracks added put on queue")
+        onQueue++
     }
 }
 
@@ -106,9 +101,7 @@ function playAt(index)
 {
     if((index < mainPlaylist.listView.count) && (index > -1))
     {
-        currentTrackIndex = index
-        mainPlaylist.listView.currentIndex = currentTrackIndex
-        playTrack(currentTrackIndex)
+        playTrack(index)
     }
 }
 
@@ -124,7 +117,9 @@ function appendTracksAt(tracks, at)
 {
     if(tracks)
         for(var i in tracks)
+        {
             mainPlaylist.list.append(tracks[i], parseInt(at)+parseInt(i))
+        }
 }
 
 function appendTrack(track)

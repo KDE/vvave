@@ -1,6 +1,12 @@
 #include "tracksmodel.h"
 #include "db/collectionDB.h"
 
+#ifdef STATIC_MAUIKIT
+#include "fmstatic.h"
+#else
+#include <MauiKit/fmstatic.h>
+#endif
+
 TracksModel::TracksModel(QObject *parent) : MauiList(parent),
 	db(CollectionDB::getInstance()) {}
 
@@ -112,17 +118,34 @@ void TracksModel::setList()
 {
 	emit this->preListChanged();
 	qDebug()<< "GETTIN TRACK LIST" << this->query;
-	this->list = this->db->getDBData(this->query, [&](FMH::MODEL &item) {
-				 const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
-	if(FMH::fileExists(url))
-		return true;
-	else
-	{
-		this->db->removeTrack(url.toString());
-		return false;
-	}
-});
-qDebug()<< list;
+
+    if(this->query.startsWith("#"))
+    {
+        if(this->query == "#favs")
+        {
+            this->list.clear();
+            const auto urls = FMStatic::getTagUrls("fav", {}, true);
+            for(const auto &url : urls)
+            {
+                this->list << this->db->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""), [](FMH::MODEL &item) {item[FMH::MODEL_KEY::FAV]  = "1"; return true;});
+            }
+        }
+    }else
+    {
+        this->list = this->db->getDBData(this->query, [&](FMH::MODEL &item) {
+                     const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
+        if(FMH::fileExists(url))
+        {
+            item[FMH::MODEL_KEY::FAV] = FMStatic::isFav(url) ? "1" : "0";
+            return true;
+        } else
+        {
+            this->db->removeTrack(url.toString());
+            return false;
+        }
+    });
+    }
+
 	this->sortList();
 	emit this->postListChanged();
 }
@@ -159,13 +182,11 @@ void TracksModel::append(const QVariantMap &item, const int &at)
 	if(item.isEmpty())
 		return;
 
-	if(at > this->list.size() || at < 0)
+    if(at > this->list.size() || at < 0)
 		return;
 
-	const auto index_ = this->mappedIndex(at);
-
-	emit this->preItemAppendedAt(index_);
-	this->list.insert(index_, FMH::toModel(item));
+    emit this->preItemAppendedAt(at);
+    this->list.insert(at, FMH::toModel(item));
 	emit this->postItemAppended();
 }
 
@@ -274,15 +295,16 @@ bool TracksModel::fav(const int &index, const bool &value)
 	const auto index_ = this->mappedIndex(index);
 
 	auto item = this->list[index_];
-	if(this->db->favTrack(item[FMH::MODEL_KEY::URL], value))
-	{
-		this->list[index_][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
-		emit this->updateModel(index_, {FMH::MODEL_KEY::FAV});
-		qDebug()<< "FAVVING TRACKS"<< item;
-		return true;
-	}
 
-	return false;
+    if(value)
+        FMStatic::fav(item[FMH::MODEL_KEY::URL]);
+    else
+        FMStatic::unFav(item[FMH::MODEL_KEY::URL]);
+
+    this->list[index_][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
+    emit this->updateModel(index_, {FMH::MODEL_KEY::FAV});
+
+    return true;
 }
 
 bool TracksModel::rate(const int &index, const int &value)

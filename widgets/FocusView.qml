@@ -49,6 +49,44 @@ Maui.Page
         onActivated: focusView = false
     }
 
+    background: Item
+    {
+        Image
+        {
+            id: artworkBg
+            height: parent.height
+            width: parent.width
+
+            sourceSize.width: parent.width
+            sourceSize.height: parent.height
+
+            fillMode: Image.PreserveAspectCrop
+            antialiasing: true
+            smooth: true
+            asynchronous: true
+            cache: true
+
+            source: currentArtwork
+        }
+
+        FastBlur
+        {
+            id: fastBlur
+            anchors.fill: parent
+            source: artworkBg
+            radius: 100
+            transparentBorder: false
+            cached: true
+
+            Rectangle
+            {
+                anchors.fill: parent
+                color: Kirigami.Theme.backgroundColor
+                opacity: 0.8
+            }
+        }
+    }
+
     ColumnLayout
     {
         anchors.fill: parent
@@ -124,7 +162,7 @@ Maui.Page
                         height: width
                         anchors.centerIn: parent
                         radius: height
-                        color: Kirigami.Theme.backgroundColor
+                        color: "#fafafa"
                     }
 
                     DropShadow
@@ -172,7 +210,7 @@ Maui.Page
 
                         Rectangle
                         {
-                            color: control.Kirigami.Theme.backgroundColor
+                            color: _bg.color
                             height: parent.height * 0.25
                             width: height
                             anchors.centerIn: parent
@@ -182,7 +220,7 @@ Maui.Page
                         Rectangle
                         {
                             id: _roundRec
-                            color: control.Kirigami.Theme.backgroundColor
+                            color:  control.Kirigami.Theme.backgroundColor
                             height: parent.height * 0.20
                             width: height
                             anchors.centerIn: parent
@@ -374,10 +412,11 @@ Maui.Page
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "love"
                     enabled: currentTrackIndex >= 0
-                    icon.color: currentTrack.fav == "0" ? babeColor : Kirigami.Theme.textColor
+                    checked: mainPlaylist.listView.itemAtIndex(currentTrackIndex).isFav
+                    icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                     onClicked: if (!mainlistEmpty)
                                {
-                                   mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
+                                   mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
                                }
                 },
 
