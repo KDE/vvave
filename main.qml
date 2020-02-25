@@ -793,7 +793,7 @@ Maui.ApplicationWindow
                 id: _selectionBar
                 property alias listView: _selectionBar.selectionList
                 Layout.alignment: Qt.AlignHCenter
-                Layout.preferredWidth: Math.min(parent.width, implicitWidth)
+                Layout.preferredWidth: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
                 Layout.margins: Maui.Style.space.medium
 
                 onExitClicked:
