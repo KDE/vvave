@@ -57,8 +57,8 @@ Maui.Page
             height: parent.height
             width: parent.width
 
-            sourceSize.width: parent.width
-            sourceSize.height: parent.height
+            sourceSize.width: 500
+            sourceSize.height: 600
 
             fillMode: Image.PreserveAspectCrop
             antialiasing: true
@@ -154,111 +154,120 @@ Maui.Page
                     id: _delegate
                     height: _listView.height
                     width: _listView.width
-
                     property bool isCurrentItem : ListView.isCurrentItem
 
-                    Rectangle
+                    Item
                     {
-                        id: _bg
-                        width: _image.width + Maui.Style.space.medium
-                        height: width
+                        height: Math.min(parent.height, 300)
+                        width: Math.min(parent.width, 300)
                         anchors.centerIn: parent
-                        radius: height
-                        color: "#fafafa"
-                    }
-
-                    DropShadow
-                    {
-                        anchors.fill: _bg
-                        horizontalOffset: 0
-                        verticalOffset: 0
-                        radius: 8.0
-                        samples: 17
-                        color: "#80000000"
-                        source: _bg
-                    }
-
-                    RotationAnimator on rotation
-                    {
-                        from: 0
-                        to: 360
-                        duration: 5000
-                        loops: Animation.Infinite
-                        running: root.isPlaying && isCurrentItem
-                    }
-
-                    Image
-                    {
-                        id: _image
-                        width: Math.min(parent.width, parent.height) * 0.9
-                        height: width
-                        anchors.centerIn: parent
-
-                        sourceSize.width: height
-                        sourceSize.height: height
-
-                        fillMode: Image.PreserveAspectFit
-                        antialiasing: false
-                        smooth: true
-                        asynchronous: true
-
-                        source: model.artwork ? model.artwork : "qrc:/assets/cover.png"
-
-                        onStatusChanged:
-                        {
-                            if (status == Image.Error)
-                                source = "qrc:/assets/cover.png";
-                        }
 
                         Rectangle
                         {
-                            color: _bg.color
-                            height: parent.height * 0.25
-                            width: height
+                            id: _bg
+                            width: _image.width + Maui.Style.space.medium
+                            height: width
                             anchors.centerIn: parent
                             radius: height
+                            color: "#fafafa"
                         }
 
-                        Rectangle
+                        DropShadow
                         {
-                            id: _roundRec
-                            color:  control.Kirigami.Theme.backgroundColor
-                            height: parent.height * 0.20
-                            width: height
-                            anchors.centerIn: parent
-                            radius: height
-                        }
-
-                        InnerShadow
-                        {
-                            anchors.fill: _roundRec
-                            radius: 8.0
-                            samples: 16
+                            anchors.fill: _bg
                             horizontalOffset: 0
                             verticalOffset: 0
-                            color: "#b0000000"
-                            source: _roundRec
+                            radius: 8.0
+                            samples: 17
+                            color: "#80000000"
+                            source: _bg
                         }
 
-                        layer.enabled: true
-                        layer.effect: OpacityMask
+                        RotationAnimator on rotation
                         {
-                            maskSource: Item
-                            {
-                                width: _image.width
-                                height: _image.height
+                            from: 0
+                            to: 360
+                            duration: 5000
+                            loops: Animation.Infinite
+                            running: root.isPlaying && isCurrentItem
+                        }
 
-                                Rectangle
+                        Image
+                        {
+                            id: _image
+                            width: Math.min(parent.width, parent.height) * 0.9
+                            height: width
+                            anchors.centerIn: parent
+
+                            sourceSize.width: height
+                            sourceSize.height: height
+
+                            fillMode: Image.PreserveAspectFit
+                            antialiasing: false
+                            smooth: true
+                            asynchronous: true
+
+                            source: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+
+                            onStatusChanged:
+                            {
+                                if (status == Image.Error)
+                                    source = "qrc:/assets/cover.png";
+                            }
+
+                            Rectangle
+                            {
+                                color: _bg.color
+                                height: parent.height * 0.25
+                                width: height
+                                anchors.centerIn: parent
+                                radius: height
+                            }
+
+                            Rectangle
+                            {
+                                id: _roundRec
+                                color:  control.Kirigami.Theme.backgroundColor
+                                height: parent.height * 0.20
+                                width: height
+                                anchors.centerIn: parent
+                                radius: height
+                            }
+
+                            InnerShadow
+                            {
+                                anchors.fill: _roundRec
+                                radius: 8.0
+                                samples: 16
+                                horizontalOffset: 0
+                                verticalOffset: 0
+                                color: "#b0000000"
+                                source: _roundRec
+                            }
+
+                            layer.enabled: true
+                            layer.effect: OpacityMask
+                            {
+                                maskSource: Item
                                 {
-                                    anchors.centerIn: parent
                                     width: _image.width
                                     height: _image.height
-                                    radius: height
+
+                                    Rectangle
+                                    {
+                                        anchors.centerIn: parent
+                                        width: _image.width
+                                        height: _image.height
+                                        radius: height
+                                    }
                                 }
                             }
                         }
                     }
+
                 }
+
+
             }
 
             Item

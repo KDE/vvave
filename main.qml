@@ -408,8 +408,8 @@ Maui.ApplicationWindow
                     height: parent.height
                     width: parent.width
 
-                    sourceSize.width: parent.width
-                    sourceSize.height: parent.height
+                    sourceSize.width: 500
+                    sourceSize.height: height
 
                     fillMode: Image.PreserveAspectCrop
                     antialiasing: true
