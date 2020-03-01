@@ -56,7 +56,7 @@ Maui.ApplicationWindow
     /******************** PLAYBACK ********************/
     /*************************************************/
     property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
-    property var currentTrack: mainlistEmpty?  ({url: "", artwork: "", fav: "0", stars: "0"}) : mainPlaylist.table.listModel.get(currentTrackIndex)
+    property var currentTrack: ({url: "", artwork: "", fav: "0", stars: "0"})
 
     property int currentTrackIndex: -1
     property int prevTrackIndex: 0
@@ -484,7 +484,6 @@ Maui.ApplicationWindow
                         }
                     }
                 }
-
             }
 
             middleContent: [
@@ -493,11 +492,11 @@ Maui.ApplicationWindow
                     id: babeBtnIcon
                     icon.name: "love"
                     enabled: currentTrackIndex >= 0
-                    icon.color: currentTrack.fav == "0" ? Kirigami.Theme.textColor :  babeColor
+                    checked: mainPlaylist.listView.itemAtIndex(currentTrackIndex).isFav
+                    icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                     onClicked: if (!mainlistEmpty)
                                {
                                    mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
-                                   currentTrack = mainPlaylist.listModel.get(currentTrackIndex)
                                }
                 },
 
@@ -794,7 +793,7 @@ Maui.ApplicationWindow
                 id: _selectionBar
                 property alias listView: _selectionBar.selectionList
                 Layout.alignment: Qt.AlignHCenter
-                Layout.preferredWidth: Math.min(parent.width, implicitWidth)
+                Layout.preferredWidth: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
                 Layout.margins: Maui.Style.space.medium
                 maxListHeight: swipeView.height - Maui.Style.space.medium
                 onExitClicked:

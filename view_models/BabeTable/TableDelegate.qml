@@ -23,6 +23,16 @@ Maui.ItemDelegate
     property bool isSelected : false
     property color trackMood : model.color
 
+    readonly property bool isFav : model.fav == "1"
+    readonly property color color : model.color
+    readonly property string artist : model.artist
+    readonly property string album : model.album
+    readonly property string title : model.title
+    readonly property url url : model.url
+    readonly property int rate : model.rate
+    readonly property int track : model.track
+    readonly property string artwork : model.artwork
+
     readonly property color bgColor : Kirigami.Theme.backgroundColor
     readonly property int altHeight : Maui.Style.rowHeight * 1.4
     property bool sameAlbum : false
@@ -42,7 +52,7 @@ Maui.ItemDelegate
     signal artworkCoverClicked()
     signal artworkCoverDoubleClicked()
 
-    Kirigami.Theme.backgroundColor: model.color.length > 0 ? Qt.rgba(trackMood.r, trackMood.g, trackMood.b, 0.2):  bgColor
+    Kirigami.Theme.backgroundColor: control.color.length > 0 ? Qt.rgba(trackMood.r, trackMood.g, trackMood.b, 0.2):  bgColor
 
     function rate(stars)
     {
@@ -55,17 +65,17 @@ Maui.ItemDelegate
         anchors.fill: parent
         isCurrentItem: control.isCurrentItem
         iconSizeHint: height - Maui.Style.space.small
-        label1.text: control.number ? model.track + ". " + model.title :  model.title
-        label2.text: model.artist + " | " + model.album
+        label1.text: control.number ? control.track + ". " + control.title :  control.title
+        label2.text: control.artist + " | " + control.album
         label2.visible: control.coverArt ? !control.sameAlbum : true
 
-        label3.text: model.fav ? (model.fav == "1" ? "\uf2D1" : "") : ""
+        label3.text: control.isFav == "1" ? "\uf2D1" : ""
         label3.font.family: "Material Design Icons"
         label4.font.family: "Material Design Icons"
-        label4.text: model.rate ? H.setStars(model.rate) : ""
+        label4.text: control.rate ? H.setStars(control.rate) : ""
 
         iconVisible: !control.sameAlbum && control.coverArt
-        imageSource: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+        imageSource: control.artwork ? control.artwork : "qrc:/assets/cover.png"
 
         emblem.iconName: control.isSelected ? "checkbox" : " "
         emblem.visible:  (control.keepEmblemOverlay || control.isSelected) && control.showEmblem

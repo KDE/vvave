@@ -114,7 +114,11 @@ Maui.Page
             coverArt : true
             showEmblem: false
             onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
-            onRightClicked: if(table.allowMenu) table.openItemMenu(index)
+            onRightClicked:
+            {
+                if(table.allowMenu) table.openItemMenu(index)
+            }
+
             sameAlbum:
             {
                 if(coverArt)
@@ -146,14 +150,12 @@ Maui.Page
 
             onClicked:
             {
-                table.currentIndex = index
                 if(Maui.Handy.isTouch)
                     control.play(index)
             }
 
             onDoubleClicked:
             {
-                table.currentIndex = index
                 if(!Maui.Handy.isTouch)
                     control.play(index)
             }
@@ -178,8 +180,7 @@ Maui.Page
                 }
             }else
             {
-                where = "fav = 1"
-                query = Q.GET.tracksWhere_.arg(where)
+                query = Q.GET.babedTracks()
                 table.list.appendQuery(query);
             }
         }
@@ -230,8 +231,6 @@ Maui.Page
 
     function play(index)
     {
-        prevTrackIndex = currentTrackIndex
         Player.playAt(index)
-
     }
 }
