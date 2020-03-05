@@ -10,8 +10,7 @@ Maui.Page
 {
     id: control
     visible: focusView
-    parent: ApplicationWindow.overlay
-    anchors.fill: parent
+
     z: parent.z + 99999
     title: qsTr("Now Playing")
     Kirigami.Theme.inherit: false

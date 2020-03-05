@@ -57,7 +57,7 @@ bool Player::play() const
     if(this->url.isEmpty()) return false;
 
     if(!updater->isActive())
-        this->updater->start(500);
+        this->updater->start(1000);
 
     this->player->play();
 
@@ -196,7 +196,7 @@ void Player::update()
 {
     if(this->player->isAvailable())
     {
-        this->pos = static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);;
+        this->pos = static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);
         emit this->durationChanged();
         emit this->posChanged();
     }

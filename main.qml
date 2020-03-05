@@ -191,9 +191,12 @@ Maui.ApplicationWindow
         maxHeight: parent.height * 0.9
     }
 
+    headBar.visible: !focusView
+    footBar.visible: !focusView
     Loader
     {
         id: _focusViewLoader
+        anchors.fill: parent
         active: focusView
         source: "widgets/FocusView.qml"
     }
@@ -286,8 +289,10 @@ Maui.ApplicationWindow
 
     footer: ColumnLayout
     {
+        visible: !focusView
         width: root.width
         spacing: 0
+        height: visible ? implicitHeight : 0
 
         Maui.ToolBar
         {
@@ -545,7 +550,7 @@ Maui.ApplicationWindow
     {
         id: _mainPage
         anchors.fill: parent
-
+        visible: !focusView
         ColumnLayout
         {
             anchors.fill: parent
