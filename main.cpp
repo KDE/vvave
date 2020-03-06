@@ -11,6 +11,8 @@
 
 #ifdef STATIC_MAUIKIT
 #include "3rdparty/mauikit/src/mauikit.h"
+#else
+#include <MauiKit/mauiapp.h>
 #endif
 
 #ifdef Q_OS_ANDROID
@@ -107,7 +109,6 @@ int main(int argc, char *argv[])
     qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
     qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
     qmlRegisterType<Cloud>("CloudList", 1, 0, "Cloud");
-
     qmlRegisterType<Player>("Player", 1, 0, "Player");
 
 #ifdef STATIC_KIRIGAMI
@@ -116,6 +117,8 @@ int main(int argc, char *argv[])
 
 #ifdef STATIC_MAUIKIT
     MauiKit::getInstance().registerTypes();
+#else
+    MauiApp::instance()->setEnableCSD(true);
 #endif
     QtWebView::initialize();
 
