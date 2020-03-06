@@ -384,6 +384,9 @@ BabeList
                 return
             }
 
+            if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                control.listBrowser.itemsSelected([index])
+
             if(Maui.Handy.isTouch)
                 rowClicked(index)
         }
