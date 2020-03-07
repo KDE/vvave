@@ -250,7 +250,7 @@ BabeList
 
         onFavClicked:
         {
-            list.fav(listView.currentIndex, !(listModel.get(listView.currentIndex).fav == "1"))
+            list.fav(listView.currentIndex, !Maui.FM.isFav(listModel.get(listView.currentIndex).url))
         }
 
         onQueueClicked: Player.queueTracks([listModel.get(listView.currentIndex)])
@@ -441,7 +441,7 @@ BabeList
     {
         currentIndex = index
         contextMenu.rate = listModel.get(currentIndex).rate
-        contextMenu.fav = listModel.get(currentIndex).fav == "1"
+        contextMenu.fav = Maui.FM.isFav(listModel.get(currentIndex).url)
         contextMenu.popup()
 
         rowPressed(index)

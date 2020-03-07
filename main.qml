@@ -497,11 +497,11 @@ Maui.ApplicationWindow
                     id: babeBtnIcon
                     icon.name: "love"
                     enabled: currentTrackIndex >= 0
-                    checked: mainPlaylist.listView.itemAtIndex(currentTrackIndex).isFav
+                    checked: Maui.FM.isFav(mainPlaylist.listView.model.get(currentTrackIndex).url)
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                     onClicked: if (!mainlistEmpty)
                                {
-                                   mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
+                                   mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(mainPlaylist.listModel.get(currentTrackIndex).url))
                                }
                 },
 
@@ -555,11 +555,13 @@ Maui.ApplicationWindow
         {
             anchors.fill: parent
 
-            SwipeView
+            Kirigami.ColumnView
             {
                 id: swipeView
                 Layout.fillHeight: true
                 Layout.fillWidth: true
+                columnResizeMode: Kirigami.ColumnView.SingleColumn
+
                 //                interactive: Kirigami.Settings.isMobile
                 currentIndex: _actionGroup.currentIndex
                 onCurrentIndexChanged:
@@ -596,7 +598,7 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
+
                     sourceComponent: AlbumsView
                     {
                         id: albumsView
@@ -643,7 +645,6 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
                     sourceComponent: AlbumsView
                     {
                         id: artistsView
@@ -688,7 +689,6 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
                     sourceComponent: PlaylistsView
                     {
                         id: playlistsView
@@ -715,7 +715,6 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem || item
                     sourceComponent: CloudView
                     {
                         id: cloudView
@@ -724,7 +723,6 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || item
                     sourceComponent:  FoldersView
                     {
                         id: foldersView
@@ -753,7 +751,6 @@ Maui.ApplicationWindow
 
                 Loader
                 {
-                    active: SwipeView.isCurrentItem || item
                     sourceComponent: YouTube
                     {
                         id: youtubeView

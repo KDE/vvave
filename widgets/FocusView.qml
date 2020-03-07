@@ -198,8 +198,8 @@ Maui.Page
                             height: width
                             anchors.centerIn: parent
 
-                            sourceSize.width: height
-                            sourceSize.height: height
+                            sourceSize.width: 200
+                            sourceSize.height: 200
 
                             fillMode: Image.PreserveAspectFit
                             antialiasing: false
@@ -422,11 +422,11 @@ Maui.Page
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "love"
                     enabled: currentTrackIndex >= 0
-                    checked: mainPlaylist.listView.itemAtIndex(currentTrackIndex).isFav
+                    checked: Maui.FM.isFav(mainPlaylist.listView.model.get(currentTrackIndex).url)
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                     onClicked: if (!mainlistEmpty)
                                {
-                                   mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.listModel.get(currentTrackIndex).fav == "1"))
+                                   mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(mainPlaylist.listModel.get(currentTrackIndex).url))
                                }
                 },
 

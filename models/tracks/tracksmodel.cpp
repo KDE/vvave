@@ -136,7 +136,7 @@ void TracksModel::setList()
                      const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
         if(FMH::fileExists(url))
         {
-            item[FMH::MODEL_KEY::FAV] = FMStatic::isFav(url) ? "1" : "0";
+//            item[FMH::MODEL_KEY::FAV] = FMStatic::isFav(url) ? "1" : "0";
             return true;
         } else
         {

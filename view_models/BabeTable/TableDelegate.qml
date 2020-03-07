@@ -23,7 +23,6 @@ Maui.ItemDelegate
     property bool isSelected : false
     property color trackMood : model.color
 
-    readonly property bool isFav : model.fav == "1"
     readonly property color color : model.color
     readonly property string artist : model.artist
     readonly property string album : model.album
@@ -69,8 +68,6 @@ Maui.ItemDelegate
         label2.text: control.artist + " | " + control.album
         label2.visible: control.coverArt ? !control.sameAlbum : true
 
-        label3.text: control.isFav == "1" ? "\uf2D1" : ""
-        label3.font.family: "Material Design Icons"
         label4.font.family: "Material Design Icons"
         label4.text: control.rate ? H.setStars(control.rate) : ""
 
