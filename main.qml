@@ -125,7 +125,7 @@ Maui.ApplicationWindow
                            }
     }
 
-
+    headBar.visible: !focusView
     headBar.middleContent : Maui.ActionGroup
     {
         id: _actionGroup
@@ -191,8 +191,6 @@ Maui.ApplicationWindow
         maxHeight: parent.height * 0.9
     }
 
-    headBar.visible: !focusView
-    footBar.visible: !focusView
     Loader
     {
         id: _focusViewLoader
@@ -290,7 +288,7 @@ Maui.ApplicationWindow
     footer: ColumnLayout
     {
         visible: !focusView
-        width: root.width
+        width: parent.width
         spacing: 0
         height: visible ? implicitHeight : 0
 
@@ -856,5 +854,11 @@ Maui.ApplicationWindow
             Maui.Android.statusbarColor(Kirigami.Theme.backgroundColor, true)
             Maui.Android.navBarColor(Kirigami.Theme.backgroundColor, true)
         }
+
+//        headBar.Kirigami.Theme.backgroundColor = "#333"
+//        headBar.Kirigami.Theme.textColor = "#fafafa"
+//        headBar.Kirigami.Theme.hightlightColor = babeColor
+
+
     }
 }
