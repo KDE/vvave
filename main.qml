@@ -523,10 +523,10 @@ Maui.ApplicationWindow
             Layout.fillHeight: true
             Layout.fillWidth: true
 
-            MauiLab.AppView
+            MauiLab.AppViewLoader
             {
-                action.text: qsTr("Tracks")
-                action.icon.name: "view-media-track"
+                MauiLab.AppView.title: qsTr("Tracks")
+                MauiLab.AppView.iconName: "view-media-track"
 
                 TracksView
                 {
@@ -545,10 +545,10 @@ Maui.ApplicationWindow
                 }
             }
 
-            MauiLab.AppView
+            MauiLab.AppViewLoader
             {
-                action.text: qsTr("Albums")
-                action.icon.name: "view-media-album-cover"
+              MauiLab.AppView.title: qsTr("Albums")
+               MauiLab.AppView.iconName: "view-media-album-cover"
 
                 AlbumsView
                 {
@@ -590,10 +590,10 @@ Maui.ApplicationWindow
                 }
             }
 
-            MauiLab.AppView
+            MauiLab.AppViewLoader
             {
-                action.text: qsTr("Artists")
-                action.icon.name: "view-media-artist"
+                MauiLab.AppView.title: qsTr("Artists")
+                MauiLab.AppView.iconName: "view-media-artist"
 
                 AlbumsView
                 {
@@ -633,10 +633,10 @@ Maui.ApplicationWindow
                 }
             }
 
-            MauiLab.AppView
+            MauiLab.AppViewLoader
             {
-                action.text: qsTr("Playlists")
-                action.icon.name: "view-media-playlist"
+               MauiLab.AppView.title: qsTr("Playlists")
+                MauiLab.AppView.iconName: "view-media-playlist"
 
                 PlaylistsView
                 {
@@ -658,20 +658,20 @@ Maui.ApplicationWindow
                 }
             }
 
-            MauiLab.AppView
+            MauiLab.AppViewLoader
             {
-                action.text: qsTr("Cloud")
-                action.icon.name: "folder-cloud"
+                MauiLab.AppView.title: qsTr("Cloud")
+               MauiLab.AppView.iconName: "folder-cloud"
                 CloudView
                 {
                     id: cloudView
                 }
             }
 
-            MauiLab.AppView
+            MauiLab.AppViewLoader
             {
-                action.text: qsTr("Folders")
-                action.icon.name: "folder"
+                MauiLab.AppView.title: qsTr("Folders")
+                MauiLab.AppView.iconName: "folder"
 
                 FoldersView
                 {
@@ -699,10 +699,10 @@ Maui.ApplicationWindow
                 }
             }
 
-            MauiLab.AppView
+            MauiLab.AppViewLoader
             {
-                action.text: qsTr("YouTube")
-                action.icon.name: "internet-services"
+                MauiLab.AppView.title: qsTr("YouTube")
+                MauiLab.AppView.iconName: "internet-services"
 
                 YouTube
                 {
