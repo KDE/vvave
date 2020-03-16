@@ -11,6 +11,9 @@
 
 #ifdef STATIC_MAUIKIT
 #include "3rdparty/mauikit/src/mauikit.h"
+#include "fmstatic.h"
+#else
+#include <MauiKit/fmstatic.h>
 #endif
 
 #ifdef Q_OS_ANDROID
@@ -81,9 +84,12 @@ int main(int argc, char *argv[])
     {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
+        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
+        {
+            const auto currentSources = vvave::getSourceFolders();
+            babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
+        }
 
-        const auto currentSources = vvave::getSourceFolders();
-        babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
         if(!args.isEmpty())
             babe->openUrls(args);
 

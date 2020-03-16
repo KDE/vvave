@@ -48,6 +48,7 @@
         <file>widgets/SelectionBar.qml</file>
         <file>widgets/FocusView.qml</file>
         <file>widgets/MiniMode.qml</file>
+        <file>widgets/SettingsView/SettingsDialog.qml</file>
     </qresource>
     <qresource prefix="/DB">
         <file>db/script.sql</file>

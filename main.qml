@@ -155,7 +155,13 @@ Maui.ApplicationWindow
     Component
     {
         id: _fmDialogComponent
-        Maui.FileDialog { }
+        Maui.FileDialog {}
+    }
+
+    Component
+    {
+        id: _settingsDialogComponent
+        SettingsDialog {}
     }
 
     SourcesDialog
@@ -170,12 +176,27 @@ Maui.ApplicationWindow
 
     mainMenu: [
 
+        MenuSeparator{},
+
+        MenuItem
+        {
+          text: qsTr("Settings")
+          icon.name: "settings-configure"
+          onTriggered:
+          {
+              _dialogLoader.sourceComponent = _settingsDialogComponent
+              dialog.open()
+          }
+        },
+
         MenuItem
         {
             text: qsTr("Sources")
             icon.name: "folder-add"
             onTriggered: sourcesDialog.open()
         },
+
+        MenuSeparator{},
 
         MenuItem
         {
@@ -491,255 +512,217 @@ Maui.ApplicationWindow
         }
     }
 
-    Maui.Page
+    ColumnLayout
     {
-        id: _mainPage
         anchors.fill: parent
         visible: !focusView
 
-        ColumnLayout
+        MauiLab.AppViews
         {
-            anchors.fill: parent
+            id: swipeView
+            Layout.fillHeight: true
+            Layout.fillWidth: true
 
-            MauiLab.AppViews
+            MauiLab.AppView
             {
-                id: swipeView
-                Layout.fillHeight: true
-                Layout.fillWidth: true
+                action.text: qsTr("Tracks")
+                action.icon.name: "view-media-track"
 
-                MauiLab.AppView
+                TracksView
                 {
-                    action.text: qsTr("Tracks")
-                    action.icon.name: "view-media-track"
-
-                    TracksView
+                    id: tracksView
+                    onRowClicked: Player.quickPlay(tracksView.listModel.get(index))
+                    onQuickPlayTrack: Player.quickPlay(tracksView.listModel.get(index))
+                    onAppendTrack: Player.addTrack(tracksView.listModel.get(index))
+                    onPlayAll: Player.playAll( tracksView.listModel.getAll())
+                    onAppendAll: Player.appendAll( tracksView.listModel.getAll())
+                    onQueueTrack: Player.queueTracks([tracksView.listModel.get(index)], index)
+                    Connections
                     {
-                        id: tracksView
-                        onRowClicked: Player.quickPlay(tracksView.listModel.get(index))
-                        onQuickPlayTrack: Player.quickPlay(tracksView.listModel.get(index))
-                        onAppendTrack: Player.addTrack(tracksView.listModel.get(index))
-                        onPlayAll: Player.playAll( tracksView.listModel.getAll())
-                        onAppendAll: Player.appendAll( tracksView.listModel.getAll())
-                        onQueueTrack: Player.queueTracks([tracksView.listModel.get(index)], index)
-                        Connections
-                        {
-                            target: Vvave.Vvave
-                            onRefreshTables: tracksView.list.refresh()
-                        }
+                        target: Vvave.Vvave
+                        onRefreshTables: tracksView.list.refresh()
                     }
                 }
-
-                MauiLab.AppView
-                {
-                    action.text: qsTr("Albums")
-                    action.icon.name: "view-media-album-cover"
-
-                    AlbumsView
-                    {
-                        id: albumsView
-
-                        holder.emoji: "qrc:/assets/dialog-information.svg"
-                        holder.isMask: false
-                        holder.title : qsTr("No Albums!")
-                        holder.body: qsTr("Add new music sources")
-                        holder.emojiSize: Maui.Style.iconSizes.huge
-                        list.query: Albums.ALBUMS
-                        list.sortBy: Albums.ALBUM
-
-                        onRowClicked: Player.quickPlay(track)
-                        onAppendTrack: Player.addTrack(track)
-                        onPlayTrack: Player.quickPlay(track)
-
-                        onAlbumCoverClicked: albumsView.populateTable(album, artist)
-
-                        onAlbumCoverPressedAndHold:
-                        {
-                            var query = Q.GET.albumTracks_.arg(album)
-                            query = query.arg(artist)
-
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.sortBy = Tracks.NONE
-                            mainPlaylist.list.query = query
-                            Player.playAt(0)
-                        }
-
-                        onPlayAll: Player.playAll(albumsView.listModel.getAll())
-                        onAppendAll: Player.appendAll(albumsView.listModel.getAll())
-
-                        Connections
-                        {
-                            target: Vvave.Vvave
-                            onRefreshTables: albumsView.list.refresh()
-                        }
-                    }
-                }
-
-                MauiLab.AppView
-                {
-                    action.text: qsTr("Artists")
-                    action.icon.name: "view-media-artist"
-
-                    AlbumsView
-                    {
-                        id: artistsView
-
-                        holder.emoji: "qrc:/assets/dialog-information.svg"
-                        holder.isMask: false
-                        holder.title : qsTr("No Artists!")
-                        holder.body: qsTr("Add new music sources")
-                        holder.emojiSize: Maui.Style.iconSizes.huge
-                        list.query: Albums.ARTISTS
-                        list.sortBy: Albums.ARTIST
-                        table.list.sortBy:  Tracks.NONE
-
-                        onRowClicked: Player.quickPlay(track)
-                        onAppendTrack: Player.addTrack(track)
-                        onPlayTrack: Player.quickPlay(track)
-                        onAlbumCoverClicked: artistsView.populateTable(undefined, artist)
-
-                        onAlbumCoverPressedAndHold:
-                        {
-                            var query = Q.GET.artistTracks_.arg(artist)
-                            mainPlaylist.list.clear()
-                            mainPlaylist.list.sortBy = Tracks.NONE
-                            mainPlaylist.list.query = query
-                            Player.playAt(0)
-                        }
-
-                        onPlayAll: Player.playAll(artistsView.listModel.getAll())
-                        onAppendAll: Player.appendAll(artistsView.listModel.getAll())
-
-                        Connections
-                        {
-                            target: Vvave.Vvave
-                            onRefreshTables: artistsView.list.refresh()
-                        }
-                    }
-                }
-
-                MauiLab.AppView
-                {
-                    action.text: qsTr("Playlists")
-                    action.icon.name: "view-media-playlist"
-
-                    PlaylistsView
-                    {
-                        id: playlistsView
-
-                        onRowClicked: Player.quickPlay(track)
-                        onAppendTrack: Player.addTrack(track)
-                        onPlayTrack: Player.quickPlay(track)
-                        onAppendAll: Player.appendAll(playlistsView.listModel.getAll())
-                        onSyncAndPlay:
-                        {
-                            Player.playAll(playlistsView.listModel.getAll())
-
-                            root.sync = true
-                            root.syncPlaylist = playlist
-                        }
-
-                        onPlayAll: Player.playAll(playlistsView.listModel.getAll())
-                    }
-                }
-
-                MauiLab.AppView
-                {
-                    action.text: qsTr("Cloud")
-                    action.icon.name: "folder-cloud"
-                    CloudView
-                    {
-                        id: cloudView
-                    }
-                }
-
-                MauiLab.AppView
-                {
-                    action.text: qsTr("Folders")
-                    action.icon.name: "folder"
-
-                    FoldersView
-                    {
-                        id: foldersView
-
-                        Connections
-                        {
-                            target: Vvave.Vvave
-                            onRefreshTables: foldersView.populate()
-                        }
-
-                        Connections
-                        {
-                            target: foldersView.list
-
-                            onRowClicked: Player.quickPlay(foldersView.list.model.get(index))
-                            onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
-
-                            onAppendTrack: Player.addTrack(foldersView.listModel.get(index))
-                            onPlayAll: Player.playAll(foldersView.listModel.getAll())
-
-                            onAppendAll: Player.appendAll(foldersView.listModel.getAll())
-                            onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
-                        }
-                    }
-                }
-
-                MauiLab.AppView
-                {
-                    action.text: qsTr("YouTube")
-                    action.icon.name: "internet-services"
-
-                    YouTube
-                    {
-                        id: youtubeView
-                    }
-                }
-
-//                Loader
-//                {
-//                    active: SwipeView.isCurrentItem || (item && item.listView.count > 0)
-//                    sourceComponent: SearchTable
-//                    {
-//                        id: searchView
-
-//                        Connections
-//                        {
-//                            target: searchView
-//                            onRowClicked: Player.quickPlay(searchView.listModel.get(index))
-//                            onQuickPlayTrack: Player.quickPlay(searchView.listModel.get(index))
-//                            onAppendTrack: Player.addTrack(searchView.listModel.get(index))
-//                            onPlayAll: Player.playAll(searchView.listModel.getAll())
-
-//                            onAppendAll: Player.appendAll(searchView.listModel.getAll())
-//                            onArtworkDoubleClicked:
-//                            {
-//                                var query = Q.GET.albumTracks_.arg(
-//                                            searchView.listModel.get(
-//                                                index).album)
-//                                query = query.arg(searchView.listModel.get(index).artist)
-
-//                                mainPlaylist.list.clear()
-//                                mainPlaylist.list.sortBy = Tracks.NONE
-//                                mainPlaylist.list.query = query
-//                                Player.playAt(0)
-//                            }
-//                        }
-//                    }
-//                }
             }
 
-            SelectionBar
+            MauiLab.AppView
             {
-                id: _selectionBar
-                property alias listView: _selectionBar.selectionList
-                Layout.alignment: Qt.AlignHCenter
-                Layout.preferredWidth: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-                Layout.margins: Maui.Style.space.medium
-                maxListHeight: swipeView.height - Maui.Style.space.medium
-                onExitClicked:
+                action.text: qsTr("Albums")
+                action.icon.name: "view-media-album-cover"
+
+                AlbumsView
                 {
-                    root.selectionMode = false
-                    clear()
+                    id: albumsView
+
+                    holder.emoji: "qrc:/assets/dialog-information.svg"
+                    holder.isMask: false
+                    holder.title : qsTr("No Albums!")
+                    holder.body: qsTr("Add new music sources")
+                    holder.emojiSize: Maui.Style.iconSizes.huge
+                    list.query: Albums.ALBUMS
+                    list.sortBy: Albums.ALBUM
+
+                    onRowClicked: Player.quickPlay(track)
+                    onAppendTrack: Player.addTrack(track)
+                    onPlayTrack: Player.quickPlay(track)
+
+                    onAlbumCoverClicked: albumsView.populateTable(album, artist)
+
+                    onAlbumCoverPressedAndHold:
+                    {
+                        var query = Q.GET.albumTracks_.arg(album)
+                        query = query.arg(artist)
+
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAt(0)
+                    }
+
+                    onPlayAll: Player.playAll(albumsView.listModel.getAll())
+                    onAppendAll: Player.appendAll(albumsView.listModel.getAll())
+
+                    Connections
+                    {
+                        target: Vvave.Vvave
+                        onRefreshTables: albumsView.list.refresh()
+                    }
                 }
+            }
+
+            MauiLab.AppView
+            {
+                action.text: qsTr("Artists")
+                action.icon.name: "view-media-artist"
+
+                AlbumsView
+                {
+                    id: artistsView
+
+                    holder.emoji: "qrc:/assets/dialog-information.svg"
+                    holder.isMask: false
+                    holder.title : qsTr("No Artists!")
+                    holder.body: qsTr("Add new music sources")
+                    holder.emojiSize: Maui.Style.iconSizes.huge
+                    list.query: Albums.ARTISTS
+                    list.sortBy: Albums.ARTIST
+                    table.list.sortBy:  Tracks.NONE
+
+                    onRowClicked: Player.quickPlay(track)
+                    onAppendTrack: Player.addTrack(track)
+                    onPlayTrack: Player.quickPlay(track)
+                    onAlbumCoverClicked: artistsView.populateTable(undefined, artist)
+
+                    onAlbumCoverPressedAndHold:
+                    {
+                        var query = Q.GET.artistTracks_.arg(artist)
+                        mainPlaylist.list.clear()
+                        mainPlaylist.list.sortBy = Tracks.NONE
+                        mainPlaylist.list.query = query
+                        Player.playAt(0)
+                    }
+
+                    onPlayAll: Player.playAll(artistsView.listModel.getAll())
+                    onAppendAll: Player.appendAll(artistsView.listModel.getAll())
+
+                    Connections
+                    {
+                        target: Vvave.Vvave
+                        onRefreshTables: artistsView.list.refresh()
+                    }
+                }
+            }
+
+            MauiLab.AppView
+            {
+                action.text: qsTr("Playlists")
+                action.icon.name: "view-media-playlist"
+
+                PlaylistsView
+                {
+                    id: playlistsView
+
+                    onRowClicked: Player.quickPlay(track)
+                    onAppendTrack: Player.addTrack(track)
+                    onPlayTrack: Player.quickPlay(track)
+                    onAppendAll: Player.appendAll(playlistsView.listModel.getAll())
+                    onSyncAndPlay:
+                    {
+                        Player.playAll(playlistsView.listModel.getAll())
+
+                        root.sync = true
+                        root.syncPlaylist = playlist
+                    }
+
+                    onPlayAll: Player.playAll(playlistsView.listModel.getAll())
+                }
+            }
+
+            MauiLab.AppView
+            {
+                action.text: qsTr("Cloud")
+                action.icon.name: "folder-cloud"
+                CloudView
+                {
+                    id: cloudView
+                }
+            }
+
+            MauiLab.AppView
+            {
+                action.text: qsTr("Folders")
+                action.icon.name: "folder"
+
+                FoldersView
+                {
+                    id: foldersView
+
+                    Connections
+                    {
+                        target: Vvave.Vvave
+                        onRefreshTables: foldersView.populate()
+                    }
+
+                    Connections
+                    {
+                        target: foldersView.list
+
+                        onRowClicked: Player.quickPlay(foldersView.list.model.get(index))
+                        onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
+
+                        onAppendTrack: Player.addTrack(foldersView.listModel.get(index))
+                        onPlayAll: Player.playAll(foldersView.listModel.getAll())
+
+                        onAppendAll: Player.appendAll(foldersView.listModel.getAll())
+                        onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
+                    }
+                }
+            }
+
+            MauiLab.AppView
+            {
+                action.text: qsTr("YouTube")
+                action.icon.name: "internet-services"
+
+                YouTube
+                {
+                    id: youtubeView
+                }
+            }
+        }
+
+        SelectionBar
+        {
+            id: _selectionBar
+            property alias listView: _selectionBar.selectionList
+            Layout.alignment: Qt.AlignHCenter
+            Layout.preferredWidth: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+            Layout.margins: Maui.Style.space.medium
+            maxListHeight: swipeView.height - Maui.Style.space.medium
+            onExitClicked:
+            {
+                root.selectionMode = false
+                clear()
             }
         }
     }
@@ -753,31 +736,6 @@ Maui.ApplicationWindow
         {
             if(size>0) root.notify("emblem-info", "Collection updated", size+" new tracks added...")
         }
-
-        //        onRefreshTracks: H.refreshTracks()
-        //        onRefreshAlbums: H.refreshAlbums()
-        //        onRefreshArtists: H.refreshArtists()
-
-        //        onCoverReady:
-        //        {
-        //            root.currentArtwork = path
-        //            currentTrack.artwork = currentArtwork
-        //            mainPlaylist.list.update(currentTrack, currentTrackIndex);
-        //        }
-
-        //        onTrackLyricsReady:
-        //        {
-        //            console.log(lyrics)
-        //            if (url === currentTrack.url)
-        //                Player.setLyrics(lyrics)
-        //        }
-
-        //        onSkipTrack: Player.nextTrack()
-        //        onBabeIt: if (!mainlistEmpty)
-        //                  {
-        //                      mainPlaylist.list.fav(currentTrackIndex, !(mainPlaylist.list.get(currentTrackIndex).fav == "1"))
-        //                      currentBabe = mainPlaylist.list.get(currentTrackIndex).fav == "1"
-        //                  }
 
         onOpenFiles:
         {
@@ -797,7 +755,5 @@ Maui.ApplicationWindow
 //        headBar.Kirigami.Theme.backgroundColor = "#333"
 //        headBar.Kirigami.Theme.textColor = "#fafafa"
 //        headBar.Kirigami.Theme.hightlightColor = babeColor
-
-
     }
 }

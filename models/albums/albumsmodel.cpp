@@ -1,13 +1,17 @@
 #include "albumsmodel.h"
 #include "db/collectionDB.h"
 #include "utils/brain.h"
-#include <QtConcurrent>
 #include "downloader.h"
+
+#ifdef STATIC_MAUIKIT
+#include "fmstatic.h"
+#else
+#include <MauiKit/fmstatic.h>
+#endif
 
 Q_DECLARE_METATYPE (FMH::MODEL_LIST)
 Q_DECLARE_METATYPE (FMH::MODEL)
 Q_DECLARE_METATYPE (PULPO::ONTOLOGY)
-
 
 AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
 	db(CollectionDB::getInstance())
@@ -147,7 +151,6 @@ void AlbumsModel::setList()
 		const auto table = this->query == AlbumsModel::QUERY::ALBUMS ?  "albums" : "artists";
 		this->db->removeArtwork(table, FMH::toMap(item));
 		item[FMH::MODEL_KEY::ARTWORK] = "";
-
 	}
 
 	return true;
@@ -156,8 +159,8 @@ void AlbumsModel::setList()
 this->sortList();
 emit this->postListChanged();
 
-//if(this->query == AlbumsModel::QUERY::ALBUMS)
-//this->fetchInformation();
+if(this->query == AlbumsModel::QUERY::ALBUMS && FMStatic::loadSettings("Settings", "FetchArtwork", true ).toBool())
+this->fetchInformation();
 }
 
 void AlbumsModel::fetchInformation()
