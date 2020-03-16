@@ -57,6 +57,11 @@ Maui.Page
         onClicked: mainPlaylist.table.saveList()
     }
 
+    flickable: table.flickable
+    headerPositioning: Kirigami.Settings.isMobile ? ListView.PullBackHeader : ListView.OverlayHeader
+    footerPositioning: ListView.OverlayFooter
+    padding: 0
+
     BabeTable
     {
         id: table

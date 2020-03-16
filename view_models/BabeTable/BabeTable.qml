@@ -202,7 +202,6 @@ BabeList
         }
     ]
 
-
     Maui.Dialog
     {
         id: _removeDialog
