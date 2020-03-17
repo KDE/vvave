@@ -32,9 +32,9 @@ MauiLab.SelectionBar
         number: false
         coverArt: true
         showQuickActions: false
-        isSelected: true
-
-        onLeftEmblemClicked: control.removeAtIndex(index)
+        checked: true
+        checkable: true
+        onToggled: control.removeAtIndex(index)
         background: null
     }
 

@@ -20,7 +20,7 @@ BabeList
     property alias listModel : _tracksModel
     property alias removeDialog : _removeDialog
 
-    property bool trackNumberVisible
+    property bool trackNumberVisible : false
     property bool coverArtVisible : false
     property bool allowMenu: true
     property bool showQuickActions : true
@@ -344,13 +344,14 @@ BabeList
     {
         id: delegate
         width: listView.width
-        number : trackNumberVisible ? true : false
+        number : trackNumberVisible
         coverArt : coverArtVisible ? (control.width > 200) : coverArtVisible
         onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)
 
-        onLeftEmblemClicked: H.addToSelection(listModel.get(index))
-        isSelected: selectionBar.contains(model.url)
+        onToggled: H.addToSelection(listModel.get(index))
+        checked: selectionBar.contains(model.url)
+        checkable: selectionMode
 
         sameAlbum:
         {
@@ -423,16 +424,16 @@ BabeList
             onUriRemoved:
             {
                 if(uri === model.url)
-                    delegate.isSelected = false
+                    delegate.checked = false
             }
 
             onUriAdded:
             {
                 if(uri === model.url)
-                    delegate.isSelected = true
+                    delegate.checked = true
             }
 
-            onCleared: delegate.isSelected = false
+            onCleared: delegate.checked = false
         }
     }
 

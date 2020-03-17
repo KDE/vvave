@@ -40,7 +40,7 @@ Maui.ApplicationWindow
 {
 
     id: root
-    title:  Maui.App.displayName
+    title: currentTrack ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -55,12 +55,12 @@ Maui.ApplicationWindow
     /******************** PLAYBACK ********************/
     /*************************************************/
     property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
-    property var currentTrack: ({url: "", artwork: "", fav: "0", stars: "0"})
+    property var currentTrack: mainPlaylist.listView.itemAtIndex(currentTrackIndex)
 
     property int currentTrackIndex: -1
     property int prevTrackIndex: 0
 
-    readonly property string currentArtwork: currentTrack.artwork
+    readonly property string currentArtwork: currentTrack ?  currentTrack.artwork : ""
 
     property alias durationTimeLabel: player.duration
     property string progressTimeLabel: player.transformTime((player.duration/1000) *(player.pos/ 1000))
@@ -117,7 +117,7 @@ Maui.ApplicationWindow
         volume: 100
         onFinishedChanged: if (!mainlistEmpty)
                            {
-                               if (currentTrack.url)
+                               if (currentTrack && currentTrack.url)
                                    mainPlaylist.list.countUp(currentTrackIndex)
 
                                Player.nextTrack()
@@ -294,7 +294,7 @@ Maui.ApplicationWindow
                     visible: text.length
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: currentTrack.title + " <i>by</i> " +  currentTrack.artist + " | " + currentTrack.album
+                    text: root.title
                     elide: Text.ElideMiddle
                     wrapMode: Text.NoWrap
                     color: Kirigami.Theme.textColor
@@ -328,7 +328,7 @@ Maui.ApplicationWindow
                 spacing: 0
                 focus: true
                 onMoved: player.pos = value
-
+                enabled: player.playing
                 Kirigami.Separator
                 {
                     anchors.top: parent.top
@@ -463,11 +463,11 @@ Maui.ApplicationWindow
                     id: babeBtnIcon
                     icon.name: "love"
                     enabled: currentTrackIndex >= 0
-                    checked: Maui.FM.isFav(mainPlaylist.listView.model.get(currentTrackIndex).url)
+                    checked: currentTrack ? Maui.FM.isFav(currentTrack.url) : false
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                     onClicked: if (!mainlistEmpty)
                                {
-                                   mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(mainPlaylist.listModel.get(currentTrackIndex).url))
+                                   mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
                                }
                 },
 

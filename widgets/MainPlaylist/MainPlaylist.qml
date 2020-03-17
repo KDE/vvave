@@ -117,7 +117,8 @@ Maui.Page
             width: listView.width
             number : false
             coverArt : true
-            showEmblem: false
+            checkable: false
+            checked: false
             onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
             onRightClicked:
             {

@@ -21,7 +21,7 @@ Kirigami.PageRow
     initialPage: Maui.GridBrowser
     {
         id: browser
-        showEmblem: false
+        checkable: false
         model: ListModel {}
         cellHeight: itemSize * 1.2
         onItemClicked:

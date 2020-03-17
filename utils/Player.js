@@ -2,7 +2,6 @@
 
 function playTrack(index)
 {
-
     if((index < mainPlaylist.listView.count) && (mainPlaylist.listView.count > 0) && (index > -1))
     {
         prevTrackIndex = currentTrackIndex
@@ -20,9 +19,6 @@ function playTrack(index)
 
         player.url = currentTrack.url;
         player.playing = true
-
-        progressBar.enabled = true
-        root.title = currentTrack.title + " - " +currentTrack.artist
     }
 }
 

@@ -53,7 +53,7 @@ Maui.Dialog
                 TextEdit
                 {
                     id: lyricsText
-                    text: currentTrack.lyrics
+                    text: currentTrack ? currentTrack.lyrics : ""
                     width: control.width      // ensure correct width
                     height: implicitHeight
                     readOnly: true

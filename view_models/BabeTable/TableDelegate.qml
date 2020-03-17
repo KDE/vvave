@@ -13,14 +13,15 @@ Maui.ItemDelegate
 {
     id: control
 
-    isCurrentItem: ListView.isCurrentItem || isSelected
+    isCurrentItem: ListView.isCurrentItem || checked
     default property alias content : _template.content
+
+    property alias checked : _template.checked
+    property alias checkable: _template.checkable
+
     property bool showQuickActions: true
     property bool number : false
     property bool coverArt : false
-    property bool showEmblem: true
-    property bool keepEmblemOverlay: selectionMode
-    property bool isSelected : false
     property color trackMood : model.color
 
     readonly property color color : model.color
@@ -36,8 +37,7 @@ Maui.ItemDelegate
     readonly property int altHeight : Maui.Style.rowHeight * 1.4
     property bool sameAlbum : false
 
-    width: parent.width
-    height: sameAlbum ? Maui.Style.rowHeight : altHeight
+    implicitHeight: sameAlbum ? Maui.Style.rowHeight : altHeight
     padding: 0
 
     rightPadding: leftPadding
@@ -46,17 +46,12 @@ Maui.ItemDelegate
     signal play()
     signal append()
     signal leftClicked()
-    signal leftEmblemClicked(int index)
+    signal toggled(int index, bool state)
 
     signal artworkCoverClicked()
     signal artworkCoverDoubleClicked()
 
     Kirigami.Theme.backgroundColor: control.color.length > 0 ? Qt.rgba(trackMood.r, trackMood.g, trackMood.b, 0.2):  bgColor
-
-    function rate(stars)
-    {
-        trackRating.text = stars
-    }
 
     Maui.ListItemTemplate
     {
@@ -74,18 +69,6 @@ Maui.ItemDelegate
         iconVisible: !control.sameAlbum && control.coverArt
         imageSource: control.artwork ? control.artwork : "qrc:/assets/cover.png"
 
-        emblem.iconName: control.isSelected ? "checkbox" : " "
-        emblem.visible:  (control.keepEmblemOverlay || control.isSelected) && control.showEmblem
-        emblem.size: Maui.Style.iconSizes.medium
-
-        emblem.border.color: emblem.Kirigami.Theme.textColor
-        emblem.color: control.isSelected ? emblem.Kirigami.Theme.highlightColor : emblem.Kirigami.Theme.backgroundColor
-
-        Connections
-        {
-            target: _template.emblem
-            onClicked: control.leftEmblemClicked(index)
-        }
+        onToggled: control.toggled(index, state)
     }
-
 }
