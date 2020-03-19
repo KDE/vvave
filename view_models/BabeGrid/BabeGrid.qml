@@ -97,11 +97,5 @@ Maui.Page
                 }
             }
         }
-
-        background: Rectangle
-        {
-            color: Kirigami.Theme.backgroundColor
-        }
-
     }
 }
