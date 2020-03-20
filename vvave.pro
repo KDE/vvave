@@ -39,40 +39,37 @@ linux:unix:!android {
         QT *= androidextras
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
        DISTFILES += $$PWD/android_files/AndroidManifest.xml
+    }
 
-            TAGLIB_REPO = https://github.com/mauikit/taglib
-            exists($$PWD/3rdparty/taglib/taglib.pri) {
-                message("Using TagLib binaries for Android")
-            }else {
-                message("Getting Luv icon theme")
-                system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib)
-            }
+    android|ios { #build the sources
+        TAGLIB_REPO = https://github.com/mauikit/taglib
+        exists($$PWD/3rdparty/taglib/taglib.pri) {
+            message("Using TagLib binaries for Android")
+        }else {
+            message("Getting Luv icon theme")
+            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib)
+        }
 
-            include($$PWD/3rdparty/taglib/taglib.pri)
+        include($$PWD/3rdparty/taglib/taglib.pri)
 
-    } else:macos|ios {
+    } else:macos { #from brew installation
         LIBS += -L$$PWD/../../1.11.1/lib/ -ltag.1.17.0
 
         INCLUDEPATH += $$PWD/../../1.11.1/include
         DEPENDPATH += $$PWD/../../1.11.1/include
 
-
-    } else:win32 {
+    }else:win32 { #from kde craft with msvc
 
         LIBS += -L$$PWD/../../Desktop/taglib/ -ltag
         INCLUDEPATH += $$PWD/../../Desktop/taglib
         DEPENDPATH += $$PWD/../../Desktop/taglib
-
-     }
+    }
 
 #DEFAULT COMPONENTS DEFINITIONS
     DEFINES *= \
-#        COMPONENT_EDITOR \
         COMPONENT_ACCOUNTS \
         COMPONENT_FM \
-#        COMPONENT_TERMINAL \
         COMPONENT_TAGGING \
-#        COMPONENT_SYNCING \
         MAUIKIT_STYLE \
         ANDROID_OPENSSL
 
@@ -102,20 +99,14 @@ SOURCES += main.cpp \
     db/collectionDB.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
-#    utils/brain.cpp \
-#    services/local/socket.cpp \
     services/web/youtube.cpp \
     vvave.cpp \
-    services/local/youtubedl.cpp \
-#    services/local/linking.cpp \
-#    services/web/Spotify/spotify.cpp \
     models/tracks/tracksmodel.cpp \
     models/playlists/playlistsmodel.cpp \
     models/albums/albumsmodel.cpp \
     services/web/NextCloud/nextmusic.cpp \
     services/web/abstractmusicprovider.cpp \
     models/cloud/cloud.cpp
-
 
 RESOURCES += qml.qrc \
 
@@ -125,20 +116,14 @@ QML_IMPORT_PATH =
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
-
 HEADERS += \
     db/collectionDB.h \
     utils/bae.h \
     services/local/fileloader.h \
     services/local/taginfo.h \
     services/local/player.h \
-#    utils/brain.h \
-#    services/local/socket.h \
     services/web/youtube.h \
     vvave.h \
-    services/local/youtubedl.h \
-#    services/local/linking.h \
-#    services/web/Spotify/spotify.h \
     models/tracks/tracksmodel.h \
     models/playlists/playlistsmodel.h \
     models/albums/albumsmodel.h \
@@ -151,4 +136,3 @@ INCLUDEPATH += \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
-

@@ -5,13 +5,10 @@
 #include <QByteArray>
 #include <QObject>
 
-#if defined Q_OS_WIN32
-#include <taglib/tag.h>
-#include <taglib/fileref.h>
-#elif defined Q_OS_ANDROID
+#if defined Q_OS_ANDROID || defined Q_OS_IOS
 #include "tag.h"
 #include "fileref.h"
-#else
+#elif defined Q_OS_WIN32 || defined Q_OS_MACOS || defined Q_OS_LINUX
 #include <taglib/tag.h>
 #include <taglib/fileref.h>
 #endif
