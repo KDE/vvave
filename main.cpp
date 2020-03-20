@@ -16,12 +16,19 @@
 #include <MauiKit/fmstatic.h>
 #endif
 
-#ifdef Q_OS_ANDROID
+#if defined Q_OS_ANDROID || defined Q_OS_IOS
 #include <QGuiApplication>
 #include <QIcon>
-#include "mauiandroid.h"
 #else
 #include <QApplication>
+#endif
+
+#ifdef Q_OS_ANDROID
+#include "mauiandroid.h"
+#endif
+
+#ifdef Q_OS_MACOS
+#include "mauimacos.h"
 #endif
 
 #include <QtWebView>
@@ -47,14 +54,17 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_WIN32
     qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
+#endif   
+
+#if defined Q_OS_ANDROID | defined Q_OS_IOS
+    QGuiApplication app(argc, argv);
+#else
+    QApplication app(argc, argv);
 #endif
 
 #ifdef Q_OS_ANDROID
-    QGuiApplication app(argc, argv);
     if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
         return -1;
-#else
-    QApplication app(argc, argv);
 #endif
 
     app.setApplicationName(BAE::appName);
@@ -122,8 +132,13 @@ int main(int argc, char *argv[])
 #ifdef STATIC_MAUIKIT
     MauiKit::getInstance().registerTypes();
 #endif
-    QtWebView::initialize();
 
+    QtWebView::initialize();
     engine.load(url);
+
+#ifdef Q_OS_MACOS
+    MAUIMacOS::removeTitlebarFromWindow();
+#endif
+
     return app.exec();
 }
