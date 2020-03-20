@@ -29,33 +29,41 @@ linux:unix:!android {
     include($$PWD/kde/kde.pri)
     LIBS += -lMauiKit
 
-} else:android|win32 {
+} else:android|win32|macos|ios {
     message(Building helpers for Android or Windows)
+
+        QT *= webview
 
     android {
         QMAKE_LINK += -nostdlib++
-        QT *= androidextras webview
+        QT *= androidextras
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
-   DISTFILES += \
-$$PWD/android_files/AndroidManifest.xml
+       DISTFILES += $$PWD/android_files/AndroidManifest.xml
 
-        TAGLIB_REPO = https://github.com/mauikit/taglib
-        exists($$PWD/3rdparty/taglib/taglib.pri) {
-            message("Using TagLib binaries for Android")
-        }else {
-            message("Getting Luv icon theme")
-            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib)
-        }
+            TAGLIB_REPO = https://github.com/mauikit/taglib
+            exists($$PWD/3rdparty/taglib/taglib.pri) {
+                message("Using TagLib binaries for Android")
+            }else {
+                message("Getting Luv icon theme")
+                system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib)
+            }
 
-        include($$PWD/3rdparty/taglib/taglib.pri)
+            include($$PWD/3rdparty/taglib/taglib.pri)
 
-    }else:win32 {
+    } else:macos|ios {
+        LIBS += -L$$PWD/../../1.11.1/lib/ -ltag.1.17.0
 
-LIBS += -L$$PWD/../../Desktop/taglib/ -ltag
-INCLUDEPATH += $$PWD/../../Desktop/taglib
-DEPENDPATH += $$PWD/../../Desktop/taglib
+        INCLUDEPATH += $$PWD/../../1.11.1/include
+        DEPENDPATH += $$PWD/../../1.11.1/include
 
- }
+
+    } else:win32 {
+
+        LIBS += -L$$PWD/../../Desktop/taglib/ -ltag
+        INCLUDEPATH += $$PWD/../../Desktop/taglib
+        DEPENDPATH += $$PWD/../../Desktop/taglib
+
+     }
 
 #DEFAULT COMPONENTS DEFINITIONS
     DEFINES *= \
@@ -143,3 +151,4 @@ INCLUDEPATH += \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
+
