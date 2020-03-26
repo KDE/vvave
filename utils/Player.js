@@ -11,7 +11,7 @@ function playTrack(index)
 
         if(typeof(currentTrack) === "undefined") return
 
-        if(!Maui.FM.fileExists(currentTrack.url) && currentTrack.url.startsWith("file://"))
+        if(!Maui.FM.fileExists(currentTrack.url) && String(currentTrack.url).startsWith("file://"))
         {
             missingAlert(currentTrack)
             return
