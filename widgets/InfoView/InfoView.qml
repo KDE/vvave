@@ -26,7 +26,8 @@ Maui.Dialog
     SwipeView
     {
         id: infoSwipeView
-        anchors.fill: parent
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
         currentIndex: currentView
 
