@@ -72,11 +72,10 @@ Maui.Dialog
     BabeList
     {
         id: sources
-        anchors.fill: parent
+        Layout.fillHeight: true
+        Layout.fillWidth: true
         headBar.visible: false
         title: qsTr("Sources")
-        Layout.fillWidth: true
-        Layout.fillHeight: true
         width: parent.width
 
         ListModel { id: listModel }

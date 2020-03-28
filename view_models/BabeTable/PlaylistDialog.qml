@@ -17,9 +17,11 @@ Maui.Dialog
     page.padding: Maui.Style.space.medium
     acceptButton.text: qsTr("Save")
     rejectButton.text: qsTr("Cancel")
+
     ColumnLayout
     {
-        anchors.fill: parent
+        Layout.fillHeight: true
+        Layout.fillWidth: true
 
         BabeList
         {
