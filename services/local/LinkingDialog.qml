@@ -24,7 +24,8 @@ Maui.Dialog
 
     ScrollView
     {
-        anchors.fill: parent
+        Layout.fillHeight: true
+        Layout.fillWidth: true
         clip: true
 
         contentWidth: linkingDialogRoot.width
