@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import org.maui.vvave 1.0 as Vvave
 
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
@@ -165,11 +166,8 @@ Maui.Page
                 if(!Maui.Handy.isTouch)
                     control.play(index)
             }
+
         }
-
-        onArtworkDoubleClicked: contextMenu.babeIt(index)
-
-        property int startContentY
 
         Component.onCompleted:
         {
@@ -192,48 +190,19 @@ Maui.Page
         }
     }
 
-
-    //    function goFocusMode()
-    //    {
-
-    //        if(focusMode)
-    //        {
-    //            if(isMobile)
-    //            {
-    //                root.width = screenWidth
-    //                root.height= screenHeight
-    //            }else
-    //            {
-    //                cover.y = 0
-    //                root.maximumWidth = screenWidth
-    //                root.minimumWidth = columnWidth
-    //                root.maximumHeight = screenHeight
-    //                root.minimumHeight = columnWidth
-
-    //                root.width = columnWidth
-    //                root.height = 700
-    //            }
-
-    //        }else
-    //        {
-    //            if(isMobile)
-    //            {
-
-    //            }else
-    //            {
-    //                root.maximumWidth = columnWidth
-    //                root.minimumWidth = columnWidth
-    //                root.maximumHeight = columnWidth
-    //                root.minimumHeight = columnWidth
-    //                //                root.footer.visible = false
-    //                //                mainlistContext.visible = false
-
-
-    //            }
-    //        }
-
-    //        focusMode = !focusMode
-    //    }
+    DropArea
+    {
+        id: _dropArea
+        anchors.fill: parent
+        onDropped:
+        {
+            if(drop.urls)
+            {
+                var urls = drop.urls.join(",")
+                Vvave.Vvave.openUrls(urls.split(","))
+            }
+        }
+    }
 
     function play(index)
     {

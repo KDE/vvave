@@ -13,7 +13,6 @@ Maui.ItemDelegate
 {
     id: control
 
-    isCurrentItem: ListView.isCurrentItem || checked
     default property alias content : _template.content
 
     property alias checked : _template.checked
@@ -37,12 +36,6 @@ Maui.ItemDelegate
     readonly property int altHeight : Maui.Style.rowHeight * 1.4
     property bool sameAlbum : false
 
-    implicitHeight: sameAlbum ? Maui.Style.rowHeight : altHeight
-    padding: 0
-
-    rightPadding: leftPadding
-    leftPadding: Maui.Style.space.small
-
     signal play()
     signal append()
     signal leftClicked()
@@ -52,6 +45,14 @@ Maui.ItemDelegate
     signal artworkCoverDoubleClicked()
 
     Kirigami.Theme.backgroundColor: control.color.length > 0 ? Qt.rgba(trackMood.r, trackMood.g, trackMood.b, 0.2):  bgColor
+
+    isCurrentItem: ListView.isCurrentItem || checked
+    implicitHeight: sameAlbum ? Maui.Style.rowHeight : altHeight
+    padding: 0
+
+    rightPadding: leftPadding
+    leftPadding: Maui.Style.space.small
+    draggable: true
 
     Maui.ListItemTemplate
     {

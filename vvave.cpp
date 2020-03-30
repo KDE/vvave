@@ -23,8 +23,6 @@
  * YoutubeFetcher ?
  *
  * */
-
-
 vvave::vvave(QObject *parent) : QObject(parent),
     db(CollectionDB::getInstance())
 {

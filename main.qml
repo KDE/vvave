@@ -751,9 +751,5 @@ Maui.ApplicationWindow
             Maui.Android.statusbarColor(Kirigami.Theme.backgroundColor, true)
             Maui.Android.navBarColor(Kirigami.Theme.backgroundColor, true)
         }
-
-//        headBar.Kirigami.Theme.backgroundColor = "#333"
-//        headBar.Kirigami.Theme.textColor = "#fafafa"
-//        headBar.Kirigami.Theme.hightlightColor = babeColor
     }
 }

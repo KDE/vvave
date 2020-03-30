@@ -38,8 +38,6 @@ BabeList
     signal queueTrack(int index)
     signal appendTrack(int index)
 
-    signal artworkDoubleClicked(int index)
-
     signal playAll()
     signal appendAll()
 
@@ -353,6 +351,12 @@ BabeList
         checked: selectionBar.contains(model.url)
         checkable: selectionMode
 
+        Drag.keys: ["text/uri-list"]
+        Drag.mimeData: Drag.active ?
+                           {
+                               "text/uri-list": control.filterSelectedItems(model.url)
+                           } : {}
+
         sameAlbum:
         {
             if(coverArt)
@@ -524,4 +528,15 @@ BabeList
 
         section.property =  prop
     }
+
+function filterSelectedItems(path)
+{
+    if(selectionBar && selectionBar.count > 0 && selectionBar.contains(path))
+    {
+        const uris = selectionBar.uris
+        return uris.join("\n")
+    }
+
+    return path
+}
 }
