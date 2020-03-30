@@ -12,8 +12,10 @@
 #ifdef STATIC_MAUIKIT
 #include "3rdparty/mauikit/src/mauikit.h"
 #include "fmstatic.h"
+#include "mauiapp.h"
 #else
 #include <MauiKit/fmstatic.h>
+#include <MauiKit/mauiapp.h>
 #endif
 
 #if defined Q_OS_ANDROID || defined Q_OS_IOS
@@ -50,95 +52,97 @@ Q_DECL_EXPORT
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
 #ifdef Q_OS_WIN32
-    qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
-#endif   
+	qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
+#endif
 
 #if defined Q_OS_ANDROID | defined Q_OS_IOS
-    QGuiApplication app(argc, argv);
+	QGuiApplication app(argc, argv);
 #else
-    QApplication app(argc, argv);
+	QApplication app(argc, argv);
 #endif
 
 #ifdef Q_OS_ANDROID
-    if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
-        return -1;
+	if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
+		return -1;
 #endif
 
-    app.setApplicationName(BAE::appName);
-    app.setApplicationVersion(BAE::version);
-    app.setApplicationDisplayName(BAE::displayName);
-    app.setOrganizationName(BAE::orgName);
-    app.setOrganizationDomain(BAE::orgDomain);
-    app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
+	app.setApplicationName(BAE::appName);
+	app.setApplicationVersion(BAE::version);
+	app.setApplicationDisplayName(BAE::displayName);
+	app.setOrganizationName(BAE::orgName);
+	app.setOrganizationDomain(BAE::orgDomain);
+	app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
 
-    QCommandLineParser parser;
-    parser.setApplicationDescription(BAE::description);
+	MauiApp::instance()->setCredits ({QVariantMap({{"name", "Camilo Higuita"}, {"email", "milo.h@aol.com"}, {"year", "2019-2020"}})});
 
-    const QCommandLineOption versionOption = parser.addVersionOption();
-    parser.process(app);
+	QCommandLineParser parser;
+	parser.setApplicationDescription(BAE::description);
 
-    const QStringList args = parser.positionalArguments();
-      static auto babe = new  vvave;
-    static auto youtube = new YouTube;
-    //    Spotify spotify;
+	const QCommandLineOption versionOption = parser.addVersionOption();
+	parser.process(app);
 
-    QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
+	const QStringList args = parser.positionalArguments();
+	  static auto babe = new  vvave;
+	static auto youtube = new YouTube;
+	//    Spotify spotify;
 
-    QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url, args](QObject *obj, const QUrl &objUrl)
-    {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
-        {
-            const auto currentSources = vvave::getSourceFolders();
-            babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
-        }
+	QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
 
-        if(!args.isEmpty())
-            babe->openUrls(args);
+	QQmlApplicationEngine engine;
+	const QUrl url(QStringLiteral("qrc:/main.qml"));
+	QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+					 &app, [url, args](QObject *obj, const QUrl &objUrl)
+	{
+		if (!obj && url == objUrl)
+			QCoreApplication::exit(-1);
+		if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
+		{
+			const auto currentSources = vvave::getSourceFolders();
+			babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
+		}
 
-    }, Qt::QueuedConnection);
+		if(!args.isEmpty())
+			babe->openUrls(args);
 
-    qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "Vvave",
-                                  [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
-        Q_UNUSED(engine)
-        Q_UNUSED(scriptEngine)
-        return babe;
-    });
+	}, Qt::QueuedConnection);
 
-    qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "YouTube",
-                                  [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
-        Q_UNUSED(engine)
-        Q_UNUSED(scriptEngine)
-        return youtube;
-    });
+	qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "Vvave",
+								  [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+		Q_UNUSED(engine)
+		Q_UNUSED(scriptEngine)
+		return babe;
+	});
 
-    qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
-    qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
-    qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
-    qmlRegisterType<Cloud>("CloudList", 1, 0, "Cloud");
-    qmlRegisterType<Player>("Player", 1, 0, "Player");
+	qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "YouTube",
+								  [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+		Q_UNUSED(engine)
+		Q_UNUSED(scriptEngine)
+		return youtube;
+	});
+
+	qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
+	qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
+	qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
+	qmlRegisterType<Cloud>("CloudList", 1, 0, "Cloud");
+	qmlRegisterType<Player>("Player", 1, 0, "Player");
 
 #ifdef STATIC_KIRIGAMI
-    KirigamiPlugin::getInstance().registerTypes();
+	KirigamiPlugin::getInstance().registerTypes();
 #endif
 
 #ifdef STATIC_MAUIKIT
-    MauiKit::getInstance().registerTypes();
+	MauiKit::getInstance().registerTypes();
 #endif
 
-    QtWebView::initialize();
-    engine.load(url);
+	QtWebView::initialize();
+	engine.load(url);
 
 #ifdef Q_OS_MACOS
-    MAUIMacOS::removeTitlebarFromWindow();
+	MAUIMacOS::removeTitlebarFromWindow();
 #endif
 
-    return app.exec();
+	return app.exec();
 }
