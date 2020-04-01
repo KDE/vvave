@@ -478,30 +478,35 @@ Maui.ApplicationWindow
                                }
                 },
 
-                ToolButton
+                Maui.ToolActions
                 {
-                    icon.name: "media-skip-backward"
-                    icon.color: Kirigami.Theme.textColor
-                    onClicked: Player.previousTrack()
-                    onPressAndHold: Player.playAt(prevTrackIndex)
-                },
+                    expanded: true
+                    autoExclusive: false
+                    checkable: false
 
-                ToolButton
-                {
-                    id: playIcon
-                    enabled: currentTrackIndex >= 0
-                    icon.color: Kirigami.Theme.textColor
-                    icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
-                    onClicked: player.playing = !player.playing
-                },
+                    Action
+                    {
+                        icon.name: "media-skip-backward"
+                        onTriggered: Player.previousTrack()
+                        //                    onPressAndHold: Player.playAt(prevTrackIndex)
+                    }
+                    //ambulatorios1@clinicaantioquia.com.co, copago martha hilda restrepo, cc 22146440 eps salud total, consulta expecialista urologo, hora 3:40 pm
+                    Action
+                    {
+                        id: playIcon
+                        text: qsTr("Play and pause")
+                        enabled: currentTrackIndex >= 0
+                        icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
+                        onTriggered: player.playing = !player.playing
+                    }
 
-                ToolButton
-                {
-                    id: nextBtn
-                    icon.color: Kirigami.Theme.textColor
-                    icon.name: "media-skip-forward"
-                    onClicked: Player.nextTrack()
-                    onPressAndHold: Player.playAt(Player.shuffle())
+                    Action
+                    {
+                        text: qsTr("Next")
+                        icon.name: "media-skip-forward"
+                        onTriggered: Player.nextTrack()
+                        //                    onPressAndHold: Player.playAt(Player.shuffle())
+                    }
                 },
 
                 ToolButton
