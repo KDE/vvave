@@ -79,6 +79,7 @@ BabeList
             onClicked: appendAll()
         }]
 
+    headBar.rightSretch: false
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
