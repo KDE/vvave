@@ -89,15 +89,6 @@ BabeList
     }
 
     headBar.rightContent: [
-
-        ToolButton
-        {
-            icon.name: "item-select"
-            onClicked: selectionMode = !selectionMode
-            checkable: false
-            checked: selectionMode
-        },
-
         Maui.ToolButtonMenu
         {
             id: sortBtn

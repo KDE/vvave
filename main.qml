@@ -125,6 +125,13 @@ Maui.ApplicationWindow
     }
 
     headBar.visible: !focusView
+    headBar.rightContent: ToolButton
+    {
+        icon.name: "item-select"
+        onClicked: selectionMode = !selectionMode
+        checkable: false
+        checked: selectionMode
+    }
 
     Loader
     {
