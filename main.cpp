@@ -33,8 +33,6 @@
 #include "mauimacos.h"
 #endif
 
-#include <QtWebView>
-
 #include "vvave.h"
 
 #include "utils/bae.h"
@@ -136,8 +134,6 @@ int main(int argc, char *argv[])
 #ifdef STATIC_MAUIKIT
 	MauiKit::getInstance().registerTypes();
 #endif
-
-	QtWebView::initialize();
 	engine.load(url);
 
 #ifdef Q_OS_MACOS

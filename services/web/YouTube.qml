@@ -6,7 +6,7 @@ import "../../view_models/BabeTable"
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import org.maui.vvave 1.0 as Vvave
-import QtWebView 1.1
+import QtWebEngine 1.5
 
 Maui.Page
 {
@@ -38,7 +38,7 @@ Maui.Page
 
     /*this is for playing the track sin the background without showing the actual video*/
 
-    WebView
+    WebEngineView
     {
         id: webView
         anchors.fill: parent

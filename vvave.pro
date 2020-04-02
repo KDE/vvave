@@ -10,6 +10,8 @@ QT *= quick \
     concurrent \
     network
 
+CONFIG += ordered
+CONFIG += c++17
 TARGET = vvave
 TEMPLATE = app
 
@@ -18,11 +20,7 @@ VERSION_MINOR = 0
 VERSION_BUILD = 0
 
 VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
-
 DEFINES += VVAVE_VERSION_STRING=\\\"$$VERSION\\\"
-
-CONFIG += ordered
-CONFIG += c++17
 
 linux:unix:!android {
     message(Building for Linux KDE)
@@ -32,7 +30,6 @@ linux:unix:!android {
 } else:android|win32|macos|ios {
     message(Building helpers for Android or Windows)
 
-        QT *= webview
 
     android {
         QMAKE_LINK += -nostdlib++
@@ -42,6 +39,9 @@ linux:unix:!android {
     }
 
     android|ios { #build the sources
+
+        QT *= webview
+
         TAGLIB_REPO = https://github.com/mauikit/taglib
         exists($$PWD/3rdparty/taglib/taglib.pri) {
             message("Using TagLib binaries for Android")
@@ -58,11 +58,11 @@ linux:unix:!android {
         INCLUDEPATH += $$PWD/../../1.11.1/include
         DEPENDPATH += $$PWD/../../1.11.1/include
 
-    }else:win32 { #from kde craft with msvc
+    }else:win32 { #from kde craft with msvc        
 
-        LIBS += -L$$PWD/../../Desktop/taglib/ -ltag
-        INCLUDEPATH += $$PWD/../../Desktop/taglib
-        DEPENDPATH += $$PWD/../../Desktop/taglib
+        LIBS += -L$$PWD/../../../../CraftRoot/lib/ -ltag
+        INCLUDEPATH += $$PWD/../../../../CraftRoot/include
+        DEPENDPATH += $$PWD/../../../../CraftRoot/include
     }
 
 #DEFAULT COMPONENTS DEFINITIONS
