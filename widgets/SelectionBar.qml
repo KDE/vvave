@@ -27,6 +27,7 @@ MauiLab.SelectionBar
 
     listDelegate: TableDelegate
     {
+        isCurrentItem: false
         Kirigami.Theme.inherit: true
         width: parent.width
         number: false
@@ -35,7 +36,7 @@ MauiLab.SelectionBar
         checked: true
         checkable: true
         onToggled: control.removeAtIndex(index)
-        background: null
+        background: Item {}
     }
 
     Action
