@@ -95,9 +95,9 @@ Maui.ApplicationWindow
     /*SIGNALS*/
     signal missingAlert(var track)
 
-//    flickable: swipeView.currentItem.flickable ||  swipeView.currentItem.item.flickable
+    //    flickable: swipeView.currentItem.flickable ||  swipeView.currentItem.item.flickable
 
-   footerPositioning: ListView.InlineFooter
+    footerPositioning: ListView.InlineFooter
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
     onMissingAlert:
@@ -187,13 +187,13 @@ Maui.ApplicationWindow
 
         MenuItem
         {
-          text: qsTr("Settings")
-          icon.name: "settings-configure"
-          onTriggered:
-          {
-              _dialogLoader.sourceComponent = _settingsDialogComponent
-              dialog.open()
-          }
+            text: qsTr("Settings")
+            icon.name: "settings-configure"
+            onTriggered:
+            {
+                _dialogLoader.sourceComponent = _settingsDialogComponent
+                dialog.open()
+            }
         },
 
         MenuItem
@@ -559,8 +559,8 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-              MauiLab.AppView.title: qsTr("Albums")
-               MauiLab.AppView.iconName: "view-media-album-cover"
+                MauiLab.AppView.title: qsTr("Albums")
+                MauiLab.AppView.iconName: "view-media-album-cover"
 
                 AlbumsView
                 {
@@ -647,7 +647,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-               MauiLab.AppView.title: qsTr("Playlists")
+                MauiLab.AppView.title: qsTr("Playlists")
                 MauiLab.AppView.iconName: "view-media-playlist"
 
                 PlaylistsView
@@ -673,7 +673,7 @@ Maui.ApplicationWindow
             MauiLab.AppViewLoader
             {
                 MauiLab.AppView.title: qsTr("Cloud")
-               MauiLab.AppView.iconName: "folder-cloud"
+                MauiLab.AppView.iconName: "folder-cloud"
                 CloudView
                 {
                     id: cloudView
