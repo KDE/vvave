@@ -11,7 +11,7 @@ Item
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
-    visible: opacity > 0.3 && !mainlistEmpty
+    visible: opacity > 0.3 && !mainlistEmpty && !focusView
 
     height:  Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
     width: height
