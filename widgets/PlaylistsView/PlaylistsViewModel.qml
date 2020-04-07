@@ -89,7 +89,7 @@ BabeList
                 populate(Q.GET.playlistTracks_.arg(currentPlaylist), true);
             }
 
-            onRighClicked:
+            onRightClicked:
             {
                 control.currentIndex = index
                 currentPlaylist = playlistsList.get(index).playlist
