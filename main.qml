@@ -51,6 +51,8 @@ Maui.ApplicationWindow
 
     Maui.App.iconName: "qrc:/assets/vvave.svg"
     Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
+//    Maui.App.enableCSD: true
+
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
@@ -127,6 +129,7 @@ Maui.ApplicationWindow
     headBar.visible: !focusView
     headBar.rightContent: ToolButton
     {
+        visible: Maui.Handy.isTouch
         icon.name: "item-select"
         onClicked: selectionMode = !selectionMode
         checkable: false
@@ -288,16 +291,14 @@ Maui.ApplicationWindow
                 font.pointSize: Maui.Style.fontSizes.default
             }
 
-            middleContent:  ColumnLayout
+            middleContent:  Item
             {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                spacing: 0
 
                 Label
                 {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
+                    anchors.fill: parent
                     visible: text.length
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
