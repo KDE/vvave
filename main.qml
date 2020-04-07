@@ -51,6 +51,8 @@ Maui.ApplicationWindow
 
     Maui.App.iconName: "qrc:/assets/vvave.svg"
     Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
+//    Maui.App.enableCSD: true
+
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
@@ -95,9 +97,9 @@ Maui.ApplicationWindow
     /*SIGNALS*/
     signal missingAlert(var track)
 
-//    flickable: swipeView.currentItem.flickable ||  swipeView.currentItem.item.flickable
+    //    flickable: swipeView.currentItem.flickable ||  swipeView.currentItem.item.flickable
 
-   footerPositioning: ListView.InlineFooter
+    footerPositioning: ListView.InlineFooter
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
     onMissingAlert:
@@ -127,6 +129,7 @@ Maui.ApplicationWindow
     headBar.visible: !focusView
     headBar.rightContent: ToolButton
     {
+        visible: Maui.Handy.isTouch
         icon.name: "item-select"
         onClicked: selectionMode = !selectionMode
         checkable: false
@@ -187,13 +190,13 @@ Maui.ApplicationWindow
 
         MenuItem
         {
-          text: qsTr("Settings")
-          icon.name: "settings-configure"
-          onTriggered:
-          {
-              _dialogLoader.sourceComponent = _settingsDialogComponent
-              dialog.open()
-          }
+            text: qsTr("Settings")
+            icon.name: "settings-configure"
+            onTriggered:
+            {
+                _dialogLoader.sourceComponent = _settingsDialogComponent
+                dialog.open()
+            }
         },
 
         MenuItem
@@ -288,16 +291,14 @@ Maui.ApplicationWindow
                 font.pointSize: Maui.Style.fontSizes.default
             }
 
-            middleContent:  ColumnLayout
+            middleContent:  Item
             {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                spacing: 0
 
                 Label
                 {
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
+                    anchors.fill: parent
                     visible: text.length
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
@@ -559,8 +560,8 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-              MauiLab.AppView.title: qsTr("Albums")
-               MauiLab.AppView.iconName: "view-media-album-cover"
+                MauiLab.AppView.title: qsTr("Albums")
+                MauiLab.AppView.iconName: "view-media-album-cover"
 
                 AlbumsView
                 {
@@ -647,7 +648,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-               MauiLab.AppView.title: qsTr("Playlists")
+                MauiLab.AppView.title: qsTr("Playlists")
                 MauiLab.AppView.iconName: "view-media-playlist"
 
                 PlaylistsView
@@ -673,7 +674,7 @@ Maui.ApplicationWindow
             MauiLab.AppViewLoader
             {
                 MauiLab.AppView.title: qsTr("Cloud")
-               MauiLab.AppView.iconName: "folder-cloud"
+                MauiLab.AppView.iconName: "folder-cloud"
                 CloudView
                 {
                     id: cloudView

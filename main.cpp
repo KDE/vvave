@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
 	engine.load(url);
 
 #ifdef Q_OS_MACOS
-	MAUIMacOS::removeTitlebarFromWindow();
+//	MAUIMacOS::removeTitlebarFromWindow();
 #endif
 
 	return app.exec();
