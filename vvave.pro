@@ -58,6 +58,8 @@ linux:unix:!android {
         INCLUDEPATH += $$PWD/../../1.11.1/include
         DEPENDPATH += $$PWD/../../1.11.1/include
 
+        ICON = $$PWD/macos_files/vvave.icns
+
     }else:win32 { #from kde craft with msvc
 
         LIBS += -L$$PWD/../../Desktop/taglib/ -ltag
