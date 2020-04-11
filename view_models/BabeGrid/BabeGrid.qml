@@ -11,7 +11,6 @@ Maui.Page
     property int albumCoverSize: 130
 
     property int albumCoverRadius :  Maui.Style.radiusV
-    property bool albumCardVisible : true
 
     property alias list: _albumsList
     property alias listModel: _albumsModel
@@ -51,7 +50,7 @@ Maui.Page
         anchors.fill: parent
         topMargin: Maui.Style.space.big
 
-        itemSize: albumCoverSize
+        itemSize: Math.min(albumCoverSize, Math.max(60, control.width* 0.3))
         holder.visible: count === 0
 
         model: _albumsModel
@@ -67,7 +66,6 @@ Maui.Page
                 id: albumDelegate
                 anchors.centerIn: parent
                 albumRadius: albumCoverRadius
-                albumCard: albumCardVisible
                 padding: Maui.Style.space.small
                 height: grid.itemSize
                 width: height

@@ -65,18 +65,25 @@ BabeList
             id: _leftLeft
         },
 
-        ToolButton
+        Maui.ToolActions
         {
-            id : playAllBtn
-            icon.name : "media-playlist-play"
-            onClicked: playAll()
-        },
+            expanded: isWide
+            checkable: false
+            autoExclusive: false
 
-        ToolButton
-        {
-            id: appendBtn
-            icon.name : "media-playlist-append"
-            onClicked: appendAll()
+            Action
+            {
+                icon.name : "media-playlist-play"
+                text: qsTr("Play all")
+                onTriggered: playAll()
+            }
+
+            Action
+            {
+                icon.name : "media-playlist-append"
+                text: qsTr("Append all")
+                onTriggered: appendAll()
+            }
         }]
 
     headBar.rightSretch: false

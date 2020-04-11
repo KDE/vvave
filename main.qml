@@ -580,7 +580,6 @@ Maui.ApplicationWindow
                     onPlayTrack: Player.quickPlay(track)
 
                     onAlbumCoverClicked: albumsView.populateTable(album, artist)
-
                     onAlbumCoverPressedAndHold:
                     {
                         var query = Q.GET.albumTracks_.arg(album)
@@ -611,7 +610,6 @@ Maui.ApplicationWindow
                 AlbumsView
                 {
                     id: artistsView
-
                     holder.emoji: "qrc:/assets/dialog-information.svg"
                     holder.isMask: false
                     holder.title : qsTr("No Artists!")
