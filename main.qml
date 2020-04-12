@@ -52,6 +52,7 @@ Maui.ApplicationWindow
     Maui.App.iconName: "qrc:/assets/vvave.svg"
     Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
 //    Maui.App.enableCSD: true
+    color: translucency ? "transparent" : Kirigami.Theme.backgroundColor
 
     /***************************************************/
     /******************** PLAYBACK ********************/
@@ -93,6 +94,7 @@ Maui.ApplicationWindow
     /******************** UI COLORS *******************/
     /*************************************************/
     readonly property color babeColor: "#f84172"
+    property bool translucency : Maui.Handy.isLinux
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -111,6 +113,7 @@ Maui.ApplicationWindow
             mainPlaylist.list.remove(mainPlaylist.table.currentIndex)
         })
     }
+
 
     /*COMPONENTS*/
     Player
@@ -236,6 +239,12 @@ Maui.ApplicationWindow
         id: playlistDialog
     }
 
+    background: Rectangle
+    {
+        color: Kirigami.Theme.backgroundColor
+        opacity: translucency ? 0.7 : 1
+    }
+
     sideBar: Maui.AbstractSideBar
     {
         id: _drawer
@@ -248,6 +257,12 @@ Maui.ApplicationWindow
         {
             target: _drawer.overlay
             onClicked: _drawer.close()
+        }
+
+        background: Rectangle
+        {
+            color: Kirigami.Theme.backgroundColor
+            opacity: translucency ? 0.5 : 1
         }
 
         MainPlaylist

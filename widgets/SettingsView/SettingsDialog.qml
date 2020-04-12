@@ -71,6 +71,14 @@ MauiLab.SettingsDialog
 
         Switch
         {
+            Kirigami.FormData.label: qsTr("Translucent Sidebar")
+            checkable: true
+            checked:  root.translucency
+            onToggled:  root.translucency = !root.translucency
+        }
+
+        Switch
+        {
             Layout.fillWidth: true
             Kirigami.FormData.label: qsTr("Dark Mode")
             checkable: true

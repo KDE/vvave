@@ -29,6 +29,13 @@ Maui.Page
     signal coverPressed(var tracks)
     focus: true
 
+    Kirigami.Theme.backgroundColor: "transparent"
+    background: Rectangle
+    {
+        color: Kirigami.Theme.backgroundColor
+        opacity: translucency ? 0.7 : 1
+    }
+
     PlaylistMenu
     {
         id: playlistMenu
@@ -77,6 +84,8 @@ Maui.Page
         holder.body: qsTr("Start putting together your playlist!")
         holder.emojiSize: Maui.Style.iconSizes.huge
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
+        Kirigami.Theme.backgroundColor: "transparent"
+
         listView.header: Rectangle
         {
             visible: root.sync
