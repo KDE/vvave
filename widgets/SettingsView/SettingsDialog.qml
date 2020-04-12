@@ -22,31 +22,24 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.1 as MauiLab
 
-Maui.Dialog
+MauiLab.SettingsDialog
 {
     id: control
-    maxHeight: _configLayout.implicitHeight * 1.5
-    maxWidth: 300
-    defaultButtons: false
 
     property bool fetchArtwork : Maui.FM.loadSettings("Settings", "FetchArtwork", true)
     property bool scanCollectionOnStartUp : Maui.FM.loadSettings("Settings", "ScanCollectionOnStartUp", true)
     property bool darkMode:  Maui.FM.loadSettings("Settings", "DarkMode", false)
 
-    Kirigami.FormLayout
+    MauiLab.SettingsSection
     {
-        id: _configLayout
-        anchors.fill: parent
-
-        Item
-        {
-            Kirigami.FormData.label: qsTr("Behaviour")
-            Kirigami.FormData.isSection: true
-        }
+        title: qsTr("Behaviour")
+        description: qsTr("Configure the app plugins and behavior.")
 
         Switch
         {
+            Layout.fillWidth: true
             checkable: true
             checked:  control.fetchArtwork
             Kirigami.FormData.label: qsTr("Fetch Artwork Online")
@@ -59,24 +52,26 @@ Maui.Dialog
 
         Switch
         {
+            Layout.fillWidth: true
             Kirigami.FormData.label: qsTr("Scan Collection on Start Up")
             checkable: true
             checked: control.scanCollectionOnStartUp
             onToggled:
             {
                 control.scanCollectionOnStartUp = !control.scanCollectionOnStartUp
-                 Maui.FM.saveSettings("Settings", control.scanCollectionOnStartUp, "ScanCollectionOnStartUp")
+                Maui.FM.saveSettings("Settings", control.scanCollectionOnStartUp, "ScanCollectionOnStartUp")
             }
         }
+    }
 
-        Item
-        {
-            Kirigami.FormData.label: qsTr("Interface")
-            Kirigami.FormData.isSection: true
-        }
+    MauiLab.SettingsSection
+    {
+        title: qsTr("Interface")
+        description: qsTr("Configure the app UI.")
 
         Switch
         {
+            Layout.fillWidth: true
             Kirigami.FormData.label: qsTr("Dark Mode")
             checkable: true
             checked: control.darkMode

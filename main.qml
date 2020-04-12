@@ -247,7 +247,7 @@ Maui.ApplicationWindow
         Connections
         {
             target: _drawer.overlay
-            onClicked: _drawer.visible = false
+            onClicked: _drawer.close()
         }
 
         MainPlaylist
