@@ -17,7 +17,7 @@ Maui.ListBrowserDelegate
     property bool number : false
     property bool coverArt : false
 
-    readonly property color color : model.color
+    readonly property color moodColor : model.color
     readonly property string artist : model.artist
     readonly property string album : model.album
     readonly property string title : model.title
@@ -35,8 +35,7 @@ Maui.ListBrowserDelegate
     signal artworkCoverClicked()
     signal artworkCoverDoubleClicked()
 
-    Kirigami.Theme.backgroundColor: control.color && String(control.color).length > 0 ? control.color : undefined
-    Kirigami.Theme.highlightColor: control.color
+    Kirigami.Theme.backgroundColor: model.color && String(model.color).length > 0 ? model.color : "transparent"
 
     isCurrentItem: ListView.isCurrentItem || checked
     padding: 0
