@@ -70,18 +70,18 @@ BabeList
             expanded: isWide
             checkable: false
             autoExclusive: false
-
+            display: ToolButton.TextBesideIcon
             Action
             {
                 icon.name : "media-playlist-play"
-                text: qsTr("Play all")
+                text: qsTr("Play")
                 onTriggered: playAll()
             }
 
             Action
             {
                 icon.name : "media-playlist-append"
-                text: qsTr("Append all")
+                text: qsTr("Append")
                 onTriggered: appendAll()
             }
         }]
