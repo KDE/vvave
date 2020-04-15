@@ -51,8 +51,10 @@ Maui.ApplicationWindow
 
     Maui.App.iconName: "qrc:/assets/vvave.svg"
     Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
-//    Maui.App.enableCSD: true
+    Maui.App.enableCSD: true
     color: translucency ? "transparent" : Kirigami.Theme.backgroundColor
+    floatingHeader: true
+//    autoHideHeader: true
 
     /***************************************************/
     /******************** PLAYBACK ********************/
