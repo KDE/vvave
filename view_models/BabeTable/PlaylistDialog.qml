@@ -14,7 +14,7 @@ Maui.Dialog
 
     property var tracks : []
     maxHeight: 400 * Maui.Style.unit
-    page.padding: Maui.Style.space.medium
+    page.margins: Maui.Style.space.medium
     acceptButton.text: qsTr("Save")
     rejectButton.text: qsTr("Cancel")
 
