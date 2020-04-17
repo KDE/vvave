@@ -43,7 +43,7 @@ BabeList
 
     focus: true
     holder.visible: list.count === 0
-    headBar.visible: list.count > 0
+//    headBar.visible: list.count > 0
     listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
     listBrowser.enableLassoSelection: !Kirigami.Settings.hasTransientTouchInput
 
@@ -68,6 +68,7 @@ BabeList
         Maui.ToolActions
         {
             expanded: isWide
+            enabled: list.count > 0
             checkable: false
             autoExclusive: false
             display: ToolButton.TextBesideIcon
