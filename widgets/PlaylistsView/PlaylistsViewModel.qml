@@ -16,8 +16,6 @@ import "../../utils/Help.js" as H
 BabeList
 {
     id: control
-
-    topPadding: Maui.Style.contentMargins
     holder.emoji: "qrc:/assets/dialog-information.svg"
     holder.title : qsTr("No Playlists!")
     holder.body: qsTr("Start creating new custom playlists")

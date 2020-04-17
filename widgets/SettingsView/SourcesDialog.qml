@@ -47,6 +47,8 @@ Maui.Dialog
     Maui.Dialog
     {
         id: confirmationDialog
+        page.margins: Maui.Style.space.medium
+
         onAccepted:
         {
             if(pathToRemove.length>0)
