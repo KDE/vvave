@@ -52,7 +52,7 @@ Maui.ApplicationWindow
     Maui.App.iconName: "qrc:/assets/vvave.svg"
     Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
     Maui.App.enableCSD: true
-    color: translucency ? "transparent" : Kirigami.Theme.backgroundColor
+    background.opacity: translucency ? 0.5 : 1
 //    floatingHeader: swipeView.currentIndex === viewsIndex.albums || swipeView.currentIndex === viewsIndex.artists
 //    autoHideHeader: true
 
@@ -239,12 +239,6 @@ Maui.ApplicationWindow
     PlaylistDialog
     {
         id: playlistDialog
-    }
-
-    background: Rectangle
-    {
-        color: Kirigami.Theme.backgroundColor
-        opacity: translucency ? 0.7 : 1
     }
 
     sideBar: Maui.AbstractSideBar
