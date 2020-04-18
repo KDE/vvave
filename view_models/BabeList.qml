@@ -26,8 +26,6 @@ Maui.Page
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
     flickable: babeList.flickable
-    headerPositioning: Kirigami.Settings.isMobile ? ListView.PullBackHeader : ListView.OverlayHeader
-    footerPositioning: ListView.OverlayFooter
 
     Maui.ListBrowser
     {
