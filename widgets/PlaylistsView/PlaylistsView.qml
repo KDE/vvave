@@ -71,7 +71,7 @@ Kirigami.PageRow
         holder.body: "Your playlist is empty,<br>start adding new music to it"
         holder.emojiSize: Maui.Style.iconSizes.huge
         headBar.visible: true
-        headBarLeft: ToolButton
+        headBar.farLeftContent: ToolButton
         {
             icon.name: "go-previous"
             onClicked: control.removePage(filterList)

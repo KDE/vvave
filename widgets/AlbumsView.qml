@@ -61,8 +61,8 @@ Kirigami.PageRow
         holder.title : "Oops!"
         holder.body: qsTr("This list is empty")
         holder.emojiSize: Maui.Style.iconSizes.huge
-
-        headBarLeft: ToolButton
+        headBar.visible: true
+        headBar.farLeftContent: ToolButton
         {
             icon.name: "go-previous"
             onClicked: control.removePage(_tracksTable)

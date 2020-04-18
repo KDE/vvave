@@ -1,8 +1,8 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick 2.13
+import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
-import org.kde.kirigami 2.2 as Kirigami
+import org.kde.kirigami 2.8 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import org.maui.vvave 1.0 as Vvave
 
@@ -45,8 +45,9 @@ Maui.Page
     }
 
     title: qsTr("Now playing")
-    headBar.rightContent: [
-        ToolButton
+    showTitle: true
+    headBar.visible: true
+    headBar.rightContent: ToolButton
         {
             icon.name: "edit-delete"
             onClicked:
@@ -56,8 +57,7 @@ Maui.Page
                 root.sync = false
                 root.syncPlaylist = ""
             }
-        }
-    ]
+        }    
 
     headBar.leftContent:  ToolButton
     {
@@ -66,10 +66,6 @@ Maui.Page
     }
 
     flickable: table.flickable
-    headerPositioning: Kirigami.Settings.isMobile ? ListView.PullBackHeader : ListView.OverlayHeader
-    footerPositioning: ListView.OverlayFooter
-    padding: 0
-
     BabeTable
     {
         id: table

@@ -14,8 +14,6 @@ import ".."
 BabeList
 {
     id: control
-    //    cacheBuffer : 300
-
     property alias list : _tracksList
     property alias listModel : _tracksModel
     property alias removeDialog : _removeDialog
@@ -28,9 +26,6 @@ BabeList
 
     property alias contextMenu : contextMenu
     property alias contextMenuItems : contextMenu.contentData
-
-    property alias headBarLeft : _leftLeft.data
-
     signal rowClicked(int index)
     signal rowDoubleClicked(int index)
     signal rowPressed(int index)
@@ -58,39 +53,31 @@ BabeList
         }
     }
 
-    headBar.leftContent: [
-        Row
+    headBar.leftContent: Maui.ToolActions
+    {
+        expanded: isWide
+        enabled: list.count > 0
+        checkable: false
+        autoExclusive: false
+        display: ToolButton.TextBesideIcon
+        Action
         {
-            id: _leftLeft
-        },
+            icon.name : "media-playlist-play"
+            text: qsTr("Play")
+            onTriggered: playAll()
+        }
 
-        Maui.ToolActions
+        Action
         {
-            expanded: isWide
-            enabled: list.count > 0
-            checkable: false
-            autoExclusive: false
-            display: ToolButton.TextBesideIcon
-            Action
-            {
-                icon.name : "media-playlist-play"
-                text: qsTr("Play")
-                onTriggered: playAll()
-            }
+            icon.name : "media-playlist-append"
+            text: qsTr("Append")
+            onTriggered: appendAll()
+        }
+    }
 
-            Action
-            {
-                icon.name : "media-playlist-append"
-                text: qsTr("Append")
-                onTriggered: appendAll()
-            }
-        }]
-
-    headBar.rightSretch: false
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
-        visible: list.count > 1
         placeholderText: qsTr("Search") + " " + list.count + " " + qsTr("tracks")
         onAccepted: listModel.filter = text
         onCleared: listModel.filter = ""
@@ -101,7 +88,7 @@ BabeList
         {
             id: sortBtn
             icon.name: "view-sort"
-            visible: list.count > 2
+            enabled: list.count > 2
             MenuItem
             {
                 text: qsTr("Title")
@@ -207,7 +194,7 @@ BabeList
         message: qsTr("You can delete the file from your computer or remove it from your collection")
         rejectButton.text: qsTr("Delete")
         acceptButton.text: qsTr("Remove")
-        page.padding: Maui.Style.space.huge
+        page.margins: Maui.Style.space.huge
 
         onAccepted:
         {

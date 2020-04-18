@@ -54,8 +54,8 @@ Kirigami.PageRow
         holder.title : qsTr("No Tracks!")
         holder.body: qsTr("This source folder seems to be empty!")
         holder.emojiSize: Maui.Style.iconSizes.huge
-
-        headBarLeft: ToolButton
+        headBar.visible: true
+        headBar.farLeftContent: ToolButton
         {
             icon.name: "go-previous"
             onClicked: control.removePage(_filterList)
