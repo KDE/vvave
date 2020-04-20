@@ -274,6 +274,10 @@ Maui.ApplicationWindow
         }
     }
 
+    autoHideFooter: true
+    autoHideFooterMargins: root.height * 0.2
+    autoHideFooterDelay: 5000
+
     footer: ColumnLayout
     {
         visible: !focusView
