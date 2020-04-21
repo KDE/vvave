@@ -540,16 +540,16 @@ Maui.ApplicationWindow
         }
     }
 
-    ColumnLayout
+    Maui.Page
     {
         anchors.fill: parent
         visible: !focusView
+        flickable: swipeView.currentItem.item.flickable
 
         MauiLab.AppViews
         {
             id: swipeView
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+            anchors.fill: parent
 
             MauiLab.AppViewLoader
             {
@@ -737,13 +737,13 @@ Maui.ApplicationWindow
             }
         }
 
-        SelectionBar
+        footer: SelectionBar
         {
             id: _selectionBar
             property alias listView: _selectionBar.selectionList
-            Layout.alignment: Qt.AlignHCenter
-            Layout.preferredWidth: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-            Layout.margins: Maui.Style.space.medium
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+            padding: Maui.Style.space.big
             maxListHeight: swipeView.height - Maui.Style.space.medium
             onExitClicked:
             {

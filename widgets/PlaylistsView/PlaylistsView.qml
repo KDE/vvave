@@ -11,11 +11,10 @@ import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
 
-Kirigami.PageRow
+StackView
 {
     id: control
     clip: true
-    defaultColumnWidth: Kirigami.Units.gridUnit * 44
 
     property string currentPlaylist
     property string playlistQuery
@@ -31,7 +30,9 @@ Kirigami.PageRow
     signal syncAndPlay(string playlist)
     signal appendAll()
 
-    initialPage: PlaylistsViewModel
+    property Flickable flickable : currentItem.flickable
+
+    initialItem: PlaylistsViewModel
     {
         id: playlistViewModel
 
@@ -74,7 +75,7 @@ Kirigami.PageRow
         headBar.farLeftContent: ToolButton
         {
             icon.name: "go-previous"
-            onClicked: control.removePage(filterList)
+            onClicked: control.pop()
         }
 
         contextMenuItems: MenuItem
@@ -93,7 +94,7 @@ Kirigami.PageRow
             else
                 control.playAll()
 
-            control.removePage(filterList)
+            control.pop()
         }
 
         onAppendAll: appendAll()
