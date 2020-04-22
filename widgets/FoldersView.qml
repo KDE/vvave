@@ -7,18 +7,18 @@ import "../view_models/BabeTable"
 import "../db/Queries.js" as Q
 import org.maui.vvave 1.0 as Vvave
 
-Kirigami.PageRow
+StackView
 {
     id: control
     clip: true
-    defaultColumnWidth: Kirigami.Units.gridUnit * 44
 
     property alias list : _filterList
     property alias listModel : _filterList.model
     property var tracks : []
     property string currentFolder : ""
+    property Flickable flickable: currentItem.flickable
 
-    initialPage: Maui.GridBrowser
+    initialItem: Maui.GridBrowser
     {
         id: browser
         checkable: false
@@ -58,7 +58,7 @@ Kirigami.PageRow
         headBar.farLeftContent: ToolButton
         {
             icon.name: "go-previous"
-            onClicked: control.removePage(_filterList)
+            onClicked: control.pop()
         }
     }
 
