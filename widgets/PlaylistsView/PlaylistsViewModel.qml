@@ -82,9 +82,23 @@ BabeList
             onClicked :
             {
                 control.currentIndex = index
-                currentPlaylist = playlistsList.get(index).playlist
-                filterList.group = false
-                populate(Q.GET.playlistTracks_.arg(currentPlaylist), true);
+                if(Maui.Handy.singleClick)
+                {
+                    currentPlaylist = playlistsList.get(index).playlist
+                    filterList.group = false
+                    populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
+                }
+            }
+
+            onDoubleClicked :
+            {
+                control.currentIndex = index
+                if(!Maui.Handy.singleClick)
+                {
+                    currentPlaylist = playlistsList.get(index).playlist
+                    filterList.group = false
+                    populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
+                }
             }
 
             onRightClicked:

@@ -9,7 +9,6 @@ Maui.Page
 {
     id: control
     property int albumCoverSize: 130
-
     property int albumCoverRadius :  Maui.Style.radiusV
 
     property alias list: _albumsList
@@ -56,6 +55,7 @@ Maui.Page
         model: _albumsModel
         delegate: Item
         {
+            id: _albumDelegate
             height: grid.cellHeight
             width: grid.cellWidth
 
@@ -69,7 +69,7 @@ Maui.Page
                 padding: Maui.Style.space.small
                 height: grid.itemSize
                 width: height
-                isCurrentItem: parent.isCurrentItem
+                isCurrentItem: _albumDelegate.isCurrentItem
 
                 label1.text: model.album ? model.album : model.artist
                 label2.text: model.artist && model.album ? model.artist : ""
@@ -80,10 +80,24 @@ Maui.Page
                     target: albumDelegate
                     onClicked:
                     {
-                        const album = _albumsList.get(index).album
-                        const artist = _albumsList.get(index).artist
-                        albumCoverClicked(album, artist)
                         grid.currentIndex = index
+                        if(Maui.Handy.singleClick)
+                        {
+                            const album = _albumsList.get(index).album
+                            const artist = _albumsList.get(index).artist
+                            albumCoverClicked(album, artist)
+                        }
+                    }
+
+                    onDoubleClicked:
+                    {
+                        grid.currentIndex = index
+                        if(!Maui.Handy.singleClick)
+                        {
+                            const album = _albumsList.get(index).album
+                            const artist = _albumsList.get(index).artist
+                            albumCoverClicked(album, artist)
+                        }
                     }
 
                     onPressAndHold:

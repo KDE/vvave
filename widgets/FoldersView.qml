@@ -26,11 +26,28 @@ StackView
         cellHeight: itemSize * 1.2
         onItemClicked:
         {
-            var item = browser.model.get(index)
-            _filterList.listModel.filter = ""
-            currentFolder = item.path
-            filter()
-            control.push(_filterList)
+            browser.currentIndex = index
+            if(Maui.Handy.singleClick)
+            {
+                var item = browser.model.get(index)
+                _filterList.listModel.filter = ""
+                currentFolder = item.path
+                filter()
+                control.push(_filterList)
+            }
+        }
+
+        onItemDoubleClicked:
+        {
+            browser.currentIndex = index
+            if(!Maui.Handy.singleClick)
+            {
+                var item = browser.model.get(index)
+                _filterList.listModel.filter = ""
+                currentFolder = item.path
+                filter()
+                control.push(_filterList)
+            }
         }
 
         Maui.Holder
