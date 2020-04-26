@@ -30,6 +30,7 @@ Maui.Page
     Maui.ListBrowser
     {
         id: babeList
+        clip: true
         anchors.fill: parent
         holder.visible: count === 0
         topMargin: Maui.Style.space.medium

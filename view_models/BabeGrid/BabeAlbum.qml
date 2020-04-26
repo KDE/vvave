@@ -41,7 +41,7 @@ Maui.ItemDelegate
             onStatusChanged:
             {
                 if (status == Image.Error)
-                    source = "qrc:/assets/cover.png";
+                    source = "qrc:/assets/cover.png"
             }
 
             layer.enabled: albumRadius
@@ -78,6 +78,7 @@ Maui.ItemDelegate
             FastBlur
             {
                 id: blur
+
                 anchors.fill: parent
                 source: ShaderEffectSource
                 {
@@ -87,7 +88,7 @@ Maui.ItemDelegate
                                        _labelBg.width,
                                        _labelBg.height)
                 }
-                radius: 50
+                radius: _image.source === "qrc:/assets/cover.png" ? 0 : 50
 
                 Rectangle
                 {

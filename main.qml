@@ -54,6 +54,7 @@ Maui.ApplicationWindow
     background.opacity: translucency ? 0.5 : 1
 //    floatingHeader: swipeView.currentIndex === viewsIndex.albums || swipeView.currentIndex === viewsIndex.artists
 //    autoHideHeader: true
+    floatingFooter: false
 
     /***************************************************/
     /******************** PLAYBACK ********************/

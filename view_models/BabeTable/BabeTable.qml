@@ -60,6 +60,7 @@ BabeList
         checkable: false
         autoExclusive: false
         display: ToolButton.TextBesideIcon
+        defaultIconName: "media-playback-start"
         Action
         {
             icon.name : "media-playlist-play"
