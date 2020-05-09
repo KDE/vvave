@@ -278,12 +278,62 @@ Maui.ApplicationWindow
 //    autoHideFooterMargins: root.height * 0.2
 //    autoHideFooterDelay: 5000
 
-    footer: ColumnLayout
+    footer: ItemDelegate
     {
         visible: !focusView
         width: parent.width
+        height: visible ? _footerLayout.implicitHeight : 0
+
+        background: Item
+        {
+            Image
+            {
+                id: artworkBg
+                height: parent.height
+                width: parent.width
+
+                sourceSize.width: 500
+                sourceSize.height: height
+
+                fillMode: Image.PreserveAspectCrop
+                antialiasing: true
+                smooth: true
+                asynchronous: true
+                cache: true
+
+                source: currentArtwork
+            }
+
+            FastBlur
+            {
+                id: fastBlur
+                anchors.fill: parent
+                source: artworkBg
+                radius: 100
+                transparentBorder: false
+                cached: true
+
+                Rectangle
+                {
+                    anchors.fill: parent
+                    color: Kirigami.Theme.backgroundColor
+                    opacity: 0.8
+                }
+            }
+
+            Kirigami.Separator
+            {
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+            }
+        }
+
+        ColumnLayout
+    {
+        id: _footerLayout
+        anchors.fill: parent
         spacing: 0
-        height: visible ? implicitHeight : 0
 
         Maui.ToolBar
         {
@@ -394,51 +444,7 @@ Maui.ApplicationWindow
             Layout.preferredHeight: Maui.Style.toolBarHeight
             position: ToolBar.Footer
 
-            background: Item
-            {
-                Image
-                {
-                    id: artworkBg
-                    height: parent.height
-                    width: parent.width
-
-                    sourceSize.width: 500
-                    sourceSize.height: height
-
-                    fillMode: Image.PreserveAspectCrop
-                    antialiasing: true
-                    smooth: true
-                    asynchronous: true
-                    cache: true
-
-                    source: currentArtwork
-                }
-
-                FastBlur
-                {
-                    id: fastBlur
-                    anchors.fill: parent
-                    source: artworkBg
-                    radius: 100
-                    transparentBorder: false
-                    cached: true
-
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: Kirigami.Theme.backgroundColor
-                        opacity: 0.8
-                    }
-                }
-
-                Kirigami.Separator
-                {
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                }
-            }
-
+            background: Item {}
             rightContent: ToolButton
             {
                 icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
@@ -538,6 +544,7 @@ Maui.ApplicationWindow
                 }
             ]
         }
+    }
     }
 
     Maui.Page
