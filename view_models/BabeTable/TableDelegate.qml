@@ -9,21 +9,15 @@ import org.kde.mauikit 1.0 as Maui
 import "../../view_models"
 import "../../utils/Help.js" as H
 
-Maui.ItemDelegate
+Maui.ListBrowserDelegate
 {
     id: control
-
-    default property alias content : _template.content
-
-    property alias checked : _template.checked
-    property alias checkable: _template.checkable
 
     property bool showQuickActions: true
     property bool number : false
     property bool coverArt : false
-    property color trackMood : model.color
 
-    readonly property color color : model.color
+    readonly property color moodColor : model.color
     readonly property string artist : model.artist
     readonly property string album : model.album
     readonly property string title : model.title
@@ -32,44 +26,36 @@ Maui.ItemDelegate
     readonly property int track : model.track
     readonly property string artwork : model.artwork
 
-    readonly property color bgColor : Kirigami.Theme.backgroundColor
-    readonly property int altHeight : Maui.Style.rowHeight * 1.4
     property bool sameAlbum : false
 
     signal play()
     signal append()
     signal leftClicked()
-    signal toggled(int index, bool state)
 
     signal artworkCoverClicked()
     signal artworkCoverDoubleClicked()
 
-    Kirigami.Theme.backgroundColor: control.color.length > 0 ? Qt.rgba(trackMood.r, trackMood.g, trackMood.b, 0.2):  bgColor
+    Kirigami.Theme.backgroundColor: model.color && String(model.color).length > 0 ? model.color : "transparent"
 
     isCurrentItem: ListView.isCurrentItem || checked
-    implicitHeight: sameAlbum ? Maui.Style.rowHeight : altHeight
     padding: 0
 
     rightPadding: leftPadding
     leftPadding: Maui.Style.space.small
     draggable: true
 
-    Maui.ListItemTemplate
-    {
-        id: _template
-        anchors.fill: parent
-        isCurrentItem: control.isCurrentItem
-        iconSizeHint: height - Maui.Style.space.small
-        label1.text: control.number ? control.track + ". " + control.title :  control.title
-        label2.text: control.artist + " | " + control.album
-        label2.visible: control.coverArt ? !control.sameAlbum : true
+    iconSizeHint: height - Maui.Style.space.small
+    label1.text: control.number ? control.track + ". " + control.title :  control.title
+    label2.text: control.artist + " | " + control.album
+    label2.visible: control.coverArt ? !control.sameAlbum : true
 
-        label4.font.family: "Material Design Icons"
-        label4.text: control.rate ? H.setStars(control.rate) : ""
+    label4.font.family: "Material Design Icons"
+    label4.text: control.rate ? H.setStars(control.rate) : ""
 
-        iconVisible: !control.sameAlbum && control.coverArt
-        imageSource: control.artwork ? control.artwork : "qrc:/assets/cover.png"
+    label3.text: ""
 
-        onToggled: control.toggled(index, state)
-    }
+    iconVisible: !control.sameAlbum && control.coverArt
+    imageSource: control.artwork ? control.artwork : "qrc:/assets/cover.png"
+
+//    onToggled: control.toggled(index, state)
 }

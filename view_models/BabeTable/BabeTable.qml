@@ -14,8 +14,6 @@ import ".."
 BabeList
 {
     id: control
-    //    cacheBuffer : 300
-
     property alias list : _tracksList
     property alias listModel : _tracksModel
     property alias removeDialog : _removeDialog
@@ -28,9 +26,6 @@ BabeList
 
     property alias contextMenu : contextMenu
     property alias contextMenuItems : contextMenu.contentData
-
-    property alias headBarLeft : _leftLeft.data
-
     signal rowClicked(int index)
     signal rowDoubleClicked(int index)
     signal rowPressed(int index)
@@ -43,7 +38,6 @@ BabeList
 
     focus: true
     holder.visible: list.count === 0
-    headBar.visible: list.count > 0
     listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
     listBrowser.enableLassoSelection: !Kirigami.Settings.hasTransientTouchInput
 
@@ -59,31 +53,32 @@ BabeList
         }
     }
 
-    headBar.leftContent: [
-        Row
+    headBar.leftContent: Maui.ToolActions
+    {
+        expanded: isWide
+        enabled: list.count > 0
+        checkable: false
+        autoExclusive: false
+        display: ToolButton.TextBesideIcon
+        defaultIconName: "media-playback-start"
+        Action
         {
-            id: _leftLeft
-        },
-
-        ToolButton
-        {
-            id : playAllBtn
             icon.name : "media-playlist-play"
-            onClicked: playAll()
-        },
+            text: qsTr("Play")
+            onTriggered: playAll()
+        }
 
-        ToolButton
+        Action
         {
-            id: appendBtn
             icon.name : "media-playlist-append"
-            onClicked: appendAll()
-        }]
+            text: qsTr("Append")
+            onTriggered: appendAll()
+        }
+    }
 
-    headBar.rightSretch: false
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
-        visible: list.count > 1
         placeholderText: qsTr("Search") + " " + list.count + " " + qsTr("tracks")
         onAccepted: listModel.filter = text
         onCleared: listModel.filter = ""
@@ -94,7 +89,7 @@ BabeList
         {
             id: sortBtn
             icon.name: "view-sort"
-            visible: list.count > 2
+            enabled: list.count > 2
             MenuItem
             {
                 text: qsTr("Title")
@@ -200,7 +195,7 @@ BabeList
         message: qsTr("You can delete the file from your computer or remove it from your collection")
         rejectButton.text: qsTr("Delete")
         acceptButton.text: qsTr("Remove")
-        page.padding: Maui.Style.space.huge
+        page.margins: Maui.Style.space.huge
 
         onAccepted:
         {

@@ -297,6 +297,7 @@ Maui.Page
             ToolButton
             {
                 icon.name: "view-list-details"
+                checked: _drawer.visible
                 onClicked:  _drawer.visible = !_drawer.visible
                 Layout.alignment: Qt.AlignCenter
             }

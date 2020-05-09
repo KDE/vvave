@@ -5,7 +5,6 @@ QT *= quick \
     network \
     xml \
     qml \
-    widgets \
     quickcontrols2 \
     concurrent \
     network
@@ -16,7 +15,7 @@ TARGET = vvave
 TEMPLATE = app
 
 VERSION_MAJOR = 1
-VERSION_MINOR = 0
+VERSION_MINOR = 1
 VERSION_BUILD = 0
 
 VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
@@ -56,13 +55,14 @@ linux:unix:!android {
         LIBS += -L$$PWD/../../1.11.1/lib/ -ltag.1.17.0
 
         INCLUDEPATH += $$PWD/../../1.11.1/include
-        DEPENDPATH += $$PWD/../../1.11.1/include
+        ICON = $$PWD/macos_files/vvave.icns
 
-    }else:win32 { #from kde craft with msvc        
+    }else:win32 { #from kde craft with msvc
 
         LIBS += -L$$PWD/../../../../CraftRoot/lib/ -ltag
         INCLUDEPATH += $$PWD/../../../../CraftRoot/include
         DEPENDPATH += $$PWD/../../../../CraftRoot/include
+        RC_ICONS = $$PWD/windows_files/vvave.ico
     }
 
 #DEFAULT COMPONENTS DEFINITIONS

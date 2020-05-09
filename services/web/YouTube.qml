@@ -67,7 +67,7 @@ Maui.Page
     {
         id: configPopup
         parent: parent
-        margins: Maui.Style.contentMargins
+        page.margins: Maui.Style.contentMargins
         widthHint: 0.9
         heightHint: 0.9
 

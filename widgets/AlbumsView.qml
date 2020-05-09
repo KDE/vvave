@@ -13,11 +13,10 @@ import org.kde.mauikit 1.0 as Maui
 import TracksList 1.0
 import AlbumsList 1.0
 
-Kirigami.PageRow
+StackView
 {
     id: control
     clip: true
-    defaultColumnWidth: Kirigami.Units.gridUnit * 44
 
     property string currentAlbum: ""
     property string currentArtist: ""
@@ -39,8 +38,9 @@ Kirigami.PageRow
     signal albumCoverClicked(string album, string artist)
     signal albumCoverPressedAndHold(string album, string artist)
 
+    property Flickable flickable : currentItem.flickable
 
-    initialPage: BabeGrid
+    initialItem: BabeGrid
     {
         id: albumsViewGrid
         onAlbumCoverPressed: control.albumCoverPressedAndHold(album, artist)
@@ -61,11 +61,11 @@ Kirigami.PageRow
         holder.title : "Oops!"
         holder.body: qsTr("This list is empty")
         holder.emojiSize: Maui.Style.iconSizes.huge
-
-        headBarLeft: ToolButton
+        headBar.visible: true
+        headBar.farLeftContent: ToolButton
         {
             icon.name: "go-previous"
-            onClicked: control.removePage(_tracksTable)
+            onClicked: control.pop()
         }
 
         onRowClicked:
@@ -90,13 +90,13 @@ Kirigami.PageRow
 
         onPlayAll:
         {
-            control.removePage(_tracksTable)
+            control.pop()
             control.playAll(currentAlbum, currentArtist)
         }
 
         onAppendAll:
         {
-            control.removePage(_tracksTable)
+            control.pop()
             control.appendAll(currentAlbum, currentArtist)
         }
     }

@@ -7,18 +7,18 @@ import "../view_models/BabeTable"
 import "../db/Queries.js" as Q
 import org.maui.vvave 1.0 as Vvave
 
-Kirigami.PageRow
+StackView
 {
     id: control
     clip: true
-    defaultColumnWidth: Kirigami.Units.gridUnit * 44
 
     property alias list : _filterList
     property alias listModel : _filterList.model
     property var tracks : []
     property string currentFolder : ""
+    property Flickable flickable: currentItem.flickable
 
-    initialPage: Maui.GridBrowser
+    initialItem: Maui.GridBrowser
     {
         id: browser
         checkable: false
@@ -26,11 +26,28 @@ Kirigami.PageRow
         cellHeight: itemSize * 1.2
         onItemClicked:
         {
-            var item = browser.model.get(index)
-            _filterList.listModel.filter = ""
-            currentFolder = item.path
-            filter()
-            control.push(_filterList)
+            browser.currentIndex = index
+            if(Maui.Handy.singleClick)
+            {
+                var item = browser.model.get(index)
+                _filterList.listModel.filter = ""
+                currentFolder = item.path
+                filter()
+                control.push(_filterList)
+            }
+        }
+
+        onItemDoubleClicked:
+        {
+            browser.currentIndex = index
+            if(!Maui.Handy.singleClick)
+            {
+                var item = browser.model.get(index)
+                _filterList.listModel.filter = ""
+                currentFolder = item.path
+                filter()
+                control.push(_filterList)
+            }
         }
 
         Maui.Holder
@@ -54,11 +71,11 @@ Kirigami.PageRow
         holder.title : qsTr("No Tracks!")
         holder.body: qsTr("This source folder seems to be empty!")
         holder.emojiSize: Maui.Style.iconSizes.huge
-
-        headBarLeft: ToolButton
+        headBar.visible: true
+        headBar.farLeftContent: ToolButton
         {
             icon.name: "go-previous"
-            onClicked: control.removePage(_filterList)
+            onClicked: control.pop()
         }
     }
 

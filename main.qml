@@ -51,7 +51,10 @@ Maui.ApplicationWindow
 
     Maui.App.iconName: "qrc:/assets/vvave.svg"
     Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
-//    Maui.App.enableCSD: true
+    background.opacity: translucency ? 0.5 : 1
+//    floatingHeader: swipeView.currentIndex === viewsIndex.albums || swipeView.currentIndex === viewsIndex.artists
+//    autoHideHeader: true
+    floatingFooter: false
 
     /***************************************************/
     /******************** PLAYBACK ********************/
@@ -93,6 +96,7 @@ Maui.ApplicationWindow
     /******************** UI COLORS *******************/
     /*************************************************/
     readonly property color babeColor: "#f84172"
+    property bool translucency : Maui.Handy.isLinux
 
     /*SIGNALS*/
     signal missingAlert(var track)
@@ -111,6 +115,7 @@ Maui.ApplicationWindow
             mainPlaylist.list.remove(mainPlaylist.table.currentIndex)
         })
     }
+
 
     /*COMPONENTS*/
     Player
@@ -247,7 +252,13 @@ Maui.ApplicationWindow
         Connections
         {
             target: _drawer.overlay
-            onClicked: _drawer.visible = false
+            onClicked: _drawer.close()
+        }
+
+        background: Rectangle
+        {
+            color: Kirigami.Theme.backgroundColor
+            opacity: translucency ? 0.5 : 1
         }
 
         MainPlaylist
@@ -262,6 +273,10 @@ Maui.ApplicationWindow
             }
         }
     }
+
+//    autoHideFooter: true
+//    autoHideFooterMargins: root.height * 0.2
+//    autoHideFooterDelay: 5000
 
     footer: ColumnLayout
     {
@@ -525,16 +540,16 @@ Maui.ApplicationWindow
         }
     }
 
-    ColumnLayout
+    Maui.Page
     {
         anchors.fill: parent
         visible: !focusView
+        flickable: swipeView.currentItem.item.flickable
 
         MauiLab.AppViews
         {
             id: swipeView
-            Layout.fillHeight: true
-            Layout.fillWidth: true
+            anchors.fill: parent
 
             MauiLab.AppViewLoader
             {
@@ -580,7 +595,6 @@ Maui.ApplicationWindow
                     onPlayTrack: Player.quickPlay(track)
 
                     onAlbumCoverClicked: albumsView.populateTable(album, artist)
-
                     onAlbumCoverPressedAndHold:
                     {
                         var query = Q.GET.albumTracks_.arg(album)
@@ -611,7 +625,6 @@ Maui.ApplicationWindow
                 AlbumsView
                 {
                     id: artistsView
-
                     holder.emoji: "qrc:/assets/dialog-information.svg"
                     holder.isMask: false
                     holder.title : qsTr("No Artists!")
@@ -724,13 +737,13 @@ Maui.ApplicationWindow
             }
         }
 
-        SelectionBar
+        footer: SelectionBar
         {
             id: _selectionBar
             property alias listView: _selectionBar.selectionList
-            Layout.alignment: Qt.AlignHCenter
-            Layout.preferredWidth: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-            Layout.margins: Maui.Style.space.medium
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+            padding: Maui.Style.space.big
             maxListHeight: swipeView.height - Maui.Style.space.medium
             onExitClicked:
             {

@@ -12,43 +12,19 @@ Maui.ItemDelegate
 
     property int albumSize : Maui.Style.iconSizes.huge
     property int albumRadius : 0
-    property bool albumCard : true
-    property string fillColor : Qt.darker(Kirigami.Theme.backgroundColor, 1.1)
-    property bool hide : false
     property bool showLabels : true
-    property bool showIndicator :  false
-    property bool hideRepeated : false
-    property bool increaseCurrentItem : false
 
     property alias label1 : _label1
     property alias label2 : _label2
     property alias image : _image
 
-
     isCurrentItem: GridView.isCurrentItem
-    //    height: typeof album === 'undefined' ? parseInt(albumSize+(albumSize*0.3)) : parseInt(albumSize+(albumSize*0.4))
-
-    readonly property bool sameAlbum :
-    {
-        if(hideRepeated)
-        {
-            if(albumsRollRoot.model.get(index-1))
-            {
-                if(albumsRollRoot.model.get(index-1).album === album && albumsRollRoot.model.get(index-1).artist === artist)
-                    true
-                else
-                    false
-            }else false
-        }else false
-    }
-
-    visible: !sameAlbum
+    background: Item {}
 
     Item
     {
         id: _cover
         anchors.fill: parent
-        anchors.margins: Maui.Style.space.tiny
 
         Image
         {
@@ -65,7 +41,7 @@ Maui.ItemDelegate
             onStatusChanged:
             {
                 if (status == Image.Error)
-                    source = "qrc:/assets/cover.png";
+                    source = "qrc:/assets/cover.png"
             }
 
             layer.enabled: albumRadius
@@ -87,28 +63,6 @@ Maui.ItemDelegate
             }
         }
 
-        Rectangle
-        {
-            visible : showIndicator && currentTrackIndex === index
-
-            height: _image.height * 0.1
-            width: _image.width * 0.1
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: Maui.Style.space.big
-            anchors.horizontalCenter:parent.horizontalCenter
-            radius: Math.min(width, height)
-            color: "#f84172"
-
-            AnimatedImage
-            {
-                source: "qrc:/assets/heart_indicator_white.gif"
-                anchors.centerIn: parent
-                height: parent.height * 0.6
-                width: parent.width * 0.6
-                playing: parent.visible
-            }
-        }
-
         Item
         {
             id: _labelBg
@@ -124,6 +78,7 @@ Maui.ItemDelegate
             FastBlur
             {
                 id: blur
+
                 anchors.fill: parent
                 source: ShaderEffectSource
                 {
@@ -133,7 +88,7 @@ Maui.ItemDelegate
                                        _labelBg.width,
                                        _labelBg.height)
                 }
-                radius: 50
+                radius: _image.source === "qrc:/assets/cover.png" ? 0 : 50
 
                 Rectangle
                 {
@@ -205,6 +160,16 @@ Maui.ItemDelegate
                 }
             }
         }
+    }
+
+    Rectangle
+    {
+        anchors.fill: parent
+        visible: control.isCurrentItem || control.hovered
+        color: "transparent"
+        border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : "transparent"
+        border.width: 2
+        radius: albumRadius
     }
 
     DropShadow

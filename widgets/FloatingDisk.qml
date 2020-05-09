@@ -78,7 +78,7 @@ Item
 
         drag.minimumY: 0
         drag.maximumY: root.height - control.height
-        onClicked:  _drawer.visible = !_drawer.visible
+        onClicked: _drawer.visible ? _drawer.close() : _drawer.open()
         onDoubleClicked: focusView = true
 
         Rectangle

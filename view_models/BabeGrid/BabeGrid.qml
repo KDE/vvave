@@ -9,9 +9,7 @@ Maui.Page
 {
     id: control
     property int albumCoverSize: 130
-
     property int albumCoverRadius :  Maui.Style.radiusV
-    property bool albumCardVisible : true
 
     property alias list: _albumsList
     property alias listModel: _albumsModel
@@ -51,12 +49,13 @@ Maui.Page
         anchors.fill: parent
         topMargin: Maui.Style.space.big
 
-        itemSize: albumCoverSize
+        itemSize: Math.min(albumCoverSize, Math.max(60, control.width* 0.3))
         holder.visible: count === 0
 
         model: _albumsModel
         delegate: Item
         {
+            id: _albumDelegate
             height: grid.cellHeight
             width: grid.cellWidth
 
@@ -67,11 +66,10 @@ Maui.Page
                 id: albumDelegate
                 anchors.centerIn: parent
                 albumRadius: albumCoverRadius
-                albumCard: albumCardVisible
                 padding: Maui.Style.space.small
                 height: grid.itemSize
                 width: height
-                isCurrentItem: parent.isCurrentItem
+                isCurrentItem: _albumDelegate.isCurrentItem
 
                 label1.text: model.album ? model.album : model.artist
                 label2.text: model.artist && model.album ? model.artist : ""
@@ -82,10 +80,24 @@ Maui.Page
                     target: albumDelegate
                     onClicked:
                     {
-                        const album = _albumsList.get(index).album
-                        const artist = _albumsList.get(index).artist
-                        albumCoverClicked(album, artist)
                         grid.currentIndex = index
+                        if(Maui.Handy.singleClick)
+                        {
+                            const album = _albumsList.get(index).album
+                            const artist = _albumsList.get(index).artist
+                            albumCoverClicked(album, artist)
+                        }
+                    }
+
+                    onDoubleClicked:
+                    {
+                        grid.currentIndex = index
+                        if(!Maui.Handy.singleClick)
+                        {
+                            const album = _albumsList.get(index).album
+                            const artist = _albumsList.get(index).artist
+                            albumCoverClicked(album, artist)
+                        }
                     }
 
                     onPressAndHold:

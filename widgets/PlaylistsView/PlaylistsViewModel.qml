@@ -16,8 +16,6 @@ import "../../utils/Help.js" as H
 BabeList
 {
     id: control
-
-    topPadding: Maui.Style.contentMargins
     holder.emoji: "qrc:/assets/dialog-information.svg"
     holder.title : qsTr("No Playlists!")
     holder.body: qsTr("Start creating new custom playlists")
@@ -84,9 +82,23 @@ BabeList
             onClicked :
             {
                 control.currentIndex = index
-                currentPlaylist = playlistsList.get(index).playlist
-                filterList.group = false
-                populate(Q.GET.playlistTracks_.arg(currentPlaylist), true);
+                if(Maui.Handy.singleClick)
+                {
+                    currentPlaylist = playlistsList.get(index).playlist
+                    filterList.group = false
+                    populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
+                }
+            }
+
+            onDoubleClicked :
+            {
+                control.currentIndex = index
+                if(!Maui.Handy.singleClick)
+                {
+                    currentPlaylist = playlistsList.get(index).playlist
+                    filterList.group = false
+                    populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
+                }
             }
 
             onRightClicked:
