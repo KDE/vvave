@@ -1,9 +1,7 @@
 QT *= quick \
     multimedia \
     sql \
-    websockets \
     network \
-    xml \
     qml \
     quickcontrols2 \
     concurrent \
@@ -11,6 +9,7 @@ QT *= quick \
 
 CONFIG += ordered
 CONFIG += c++17
+
 TARGET = vvave
 TEMPLATE = app
 
@@ -29,16 +28,15 @@ linux:unix:!android {
 } else:android|win32|macos|ios {
     message(Building helpers for Android or Windows)
 
-
     android {
         QMAKE_LINK += -nostdlib++
         QT *= androidextras
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
-       DISTFILES += $$PWD/android_files/AndroidManifest.xml
+        DISTFILES += $$PWD/android_files/AndroidManifest.xml
+        DEFINES *= ANDROID_OPENSSL
     }
 
     android|ios { #build the sources
-
         QT *= webview
 
         TAGLIB_REPO = https://github.com/mauikit/taglib
@@ -70,8 +68,7 @@ linux:unix:!android {
         COMPONENT_ACCOUNTS \
         COMPONENT_FM \
         COMPONENT_TAGGING \
-        MAUIKIT_STYLE \
-        ANDROID_OPENSSL
+        MAUIKIT_STYLE
 
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
