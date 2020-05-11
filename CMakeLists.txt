@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-set(VVAVE_VERSION 1.0.0)
+set(VVAVE_VERSION 1.1.0)
 project(vvave VERSION ${VVAVE_VERSION})
 
 find_package(ECM 1.7.0 REQUIRED NO_MODULE)
