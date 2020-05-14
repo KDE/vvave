@@ -2,8 +2,6 @@ import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 import "../../view_models"
-import QtWebEngine 1.5
-
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
@@ -27,7 +25,7 @@ Maui.Page
         ToolButton
         {
             icon.name : "link"
-            onClicked: webView.url = currentYt.url.replace("embed/", "watch?v=")
+            onClicked: webView.item.url = currentYt.url.replace("embed/", "watch?v=")
         },
 
         ToolButton
@@ -37,7 +35,7 @@ Maui.Page
         }
     ]
 
-    WebEngineView
+    WebView
     {
         id: webView
         anchors.fill: parent
@@ -45,13 +43,8 @@ Maui.Page
         clip: true
         property bool wasPlaying: false
 
-        onVisibleChanged: if(!visible) webView.url = "about:blank"
+        onVisibleChanged: if(!visible) webView.item.url = "about:blank"
 
-        onLoadingChanged:
-        {
-            if (loadRequest.errorString)
-                console.error(loadRequest.errorString);
-        }
 
     //    onRecentlyAudibleChanged:
     //    {

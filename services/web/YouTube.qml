@@ -6,7 +6,6 @@ import "../../view_models/BabeTable"
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import org.maui.vvave 1.0 as Vvave
-import QtWebEngine 1.5
 
 Maui.Page
 {
@@ -38,20 +37,13 @@ Maui.Page
 
     /*this is for playing the track sin the background without showing the actual video*/
 
-    WebEngineView
+    WebView
     {
         id: webView
         anchors.fill: parent
         visible: false
         clip: true
         property bool wasPlaying: false
-
-        onLoadingChanged:
-        {
-            if (loadRequest.errorString)
-                console.error(loadRequest.errorString);
-        }
-
     //    onRecentlyAudibleChanged:
     //    {
     //        console.log("is playing", recentlyAudible)
@@ -259,7 +251,7 @@ Maui.Page
             if(url && url.length > 0)
             {
                 youtubeViewer.currentYt = track
-                youtubeViewer.webView.url = url+"?autoplay=1"
+                youtubeViewer.webView.item.url = url+"?autoplay=1"
                 stackView.push(youtubeViewer)
 
             }
@@ -272,8 +264,8 @@ Maui.Page
         {
             var newURL = url.replace("embed/", "watch?v=")
             console.log(newURL)
-            webView.url = newURL+"?autoplay=1+&vq=tiny"
-            webView.runJavaScript("document.title", function(result) { console.log(result); });
+            webView.item.url = newURL+"?autoplay=1+&vq=tiny"
+            webView.item.runJavaScript("document.title", function(result) { console.log(result); });
         }
     }
 
