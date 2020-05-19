@@ -21,7 +21,6 @@
         <file>widgets/InfoView/InfoView.qml</file>
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
-        <file>widgets/SettingsView/SourcesDialog.qml</file>
         <file>view_models/BabeTable/PlaylistDialog.qml</file>
         <file>view_models/BabeList.qml</file>
         <file>widgets/SearchView/SearchTable.qml</file>

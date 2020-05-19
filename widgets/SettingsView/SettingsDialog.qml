@@ -23,6 +23,8 @@ import QtQuick.Layouts 1.3
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 import org.kde.mauikit 1.1 as MauiLab
+import org.maui.vvave 1.0 as Vvave
+import "../../utils/Help.js" as H
 
 MauiLab.SettingsDialog
 {
@@ -31,6 +33,25 @@ MauiLab.SettingsDialog
     property bool fetchArtwork : Maui.FM.loadSettings("Settings", "FetchArtwork", true)
     property bool scanCollectionOnStartUp : Maui.FM.loadSettings("Settings", "ScanCollectionOnStartUp", true)
     property bool darkMode:  Maui.FM.loadSettings("Settings", "DarkMode", false)
+
+    Maui.Dialog
+    {
+        id: confirmationDialog
+        property string url : ""
+
+        page.margins: Maui.Style.space.medium
+        title : "Remove source"
+        message : "Are you sure you want to remove the source: \n "+url
+
+        onAccepted:
+        {
+            if(url.length>0)
+                if( Vvave.Vvave.removeSource(url))
+                    H.refreshCollection()
+            confirmationDialog.close()
+        }
+        onRejected: confirmationDialog.close()
+    }
 
     MauiLab.SettingsSection
     {
@@ -84,6 +105,77 @@ MauiLab.SettingsDialog
             checkable: true
             checked: control.darkMode
             onToggled: control.darkMode = !control.darkMode
+        }
+    }
+
+    MauiLab.SettingsSection
+    {
+        title: qsTr("Sources")
+        description: qsTr("Add new sources to manage and browse your image collection")
+
+
+        ColumnLayout
+        {
+            anchors.fill: parent
+
+            Maui.ListBrowser
+            {
+                id: _sourcesList
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.minimumHeight: Math.min(500, contentHeight)
+                model: Vvave.Vvave.sources
+                delegate: Maui.ListDelegate
+                {
+                    width: parent.width
+                    iconName: "folder"
+                    iconSize: Maui.Style.iconSizes.small
+                    label: modelData
+                    onClicked: _sourcesList.currentIndex = index
+                }
+
+//                Maui.Holder
+//                {
+//                    anchors.fill: parent
+//                    visible: !_sourcesList.count
+//                    emoji: "qrc:/assets/dialog-information.svg"
+//                    isMask: true
+//                    title : qsTr("No Sources!")
+//                    body: qsTr("Add new sources to organize and play your music collection")
+//                    emojiSize: Maui.Style.iconSizes.huge
+//                }
+            }
+
+            RowLayout
+            {
+                Layout.fillWidth: true
+                Button
+                {
+                    Layout.fillWidth: true
+                    text: qsTr("Remove")
+                    onClicked:
+                    {
+                        confirmationDialog.url = _sourcesList.model[_sourcesList.currentIndex]
+                        confirmationDialog.open()
+                    }
+                }
+
+                Button
+                {
+                    Layout.fillWidth: true
+                    text: qsTr("Add")
+                    onClicked:
+                    {
+                        _dialogLoader.sourceComponent = _fmDialogComponent
+                        root.dialog.settings.onlyDirs = true
+                        root.dialog.show(function(paths)
+                        {
+                            console.log("SCAN DIR <<", paths)
+                            Vvave.Vvave.addSources([paths])
+                        })
+                    }
+                }
+            }
         }
     }
 }

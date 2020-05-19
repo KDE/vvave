@@ -49,9 +49,7 @@ Maui.ApplicationWindow
     property alias progressBar: progressBar
     property alias dialog : _dialogLoader.item
 
-    Maui.App.iconName: "qrc:/assets/vvave.svg"
-    Maui.App.description: qsTr("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ")
-    background.opacity: translucency ? 0.5 : 1
+   background.opacity: translucency ? 0.5 : 1
 //    floatingHeader: swipeView.currentIndex === viewsIndex.albums || swipeView.currentIndex === viewsIndex.artists
 //    autoHideHeader: true
     floatingFooter: false
@@ -179,11 +177,6 @@ Maui.ApplicationWindow
         SettingsDialog {}
     }
 
-    SourcesDialog
-    {
-        id: sourcesDialog
-    }
-
     FloatingDisk
     {
         id: _floatingDisk
@@ -202,13 +195,6 @@ Maui.ApplicationWindow
                 _dialogLoader.sourceComponent = _settingsDialogComponent
                 dialog.open()
             }
-        },
-
-        MenuItem
-        {
-            text: qsTr("Sources")
-            icon.name: "folder-add"
-            onTriggered: sourcesDialog.open()
         },
 
         MenuSeparator{},

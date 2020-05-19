@@ -50,11 +50,23 @@ QVariantList vvave::sourceFolders()
     return res;
 }
 
+void vvave::addSources(const QStringList &paths)
+{
+    QStringList urls = sources() << paths;
+
+    urls.removeDuplicates();
+    scanDir(urls);
+
+    emit sourcesChanged();
+}
+
 bool vvave::removeSource(const QString &source)
 {
     if(!this->getSourceFolders().contains(source))
         return false;
     return this->db->removeSource(source);
+
+    emit sourcesChanged();
 }
 
 QString vvave::moodColor(const int &index)
@@ -71,21 +83,21 @@ QStringList vvave::moodColors()
 
 void vvave::scanDir(const QStringList &paths)
 {
-    QFutureWatcher<uint> *watcher = new QFutureWatcher<uint>;
-    connect(watcher, &QFutureWatcher<uint>::finished, [&, watcher]()
-    {
-        qDebug()<< "FINISHED SCANING CXOLLECTION";
-        emit this->refreshTables( watcher->future().result());
-        watcher->deleteLater();
-    });
+//    QFutureWatcher<uint> *watcher = new QFutureWatcher<uint>;
+//    connect(watcher, &QFutureWatcher<uint>::finished, [&, watcher]()
+//    {
+//        qDebug()<< "FINISHED SCANING CXOLLECTION";
+//        emit this->refreshTables( watcher->future().result());
+//        watcher->deleteLater();
+//    });
 
-    const auto func = [=]() -> uint
-    {
-        return FLoader::getTracks(QUrl::fromStringList(paths));
-    };
+//    const auto func = [=]() -> uint
+//    {
+//        return FLoader::getTracks(QUrl::fromStringList(paths));
+//    };
 
-    QFuture<uint> t1 = QtConcurrent::run(func);
-    watcher->setFuture(t1);
+//    QFuture<uint> t1 = QtConcurrent::run(func);
+//    watcher->setFuture(t1);
 }
 
  QStringList vvave::getSourceFolders()

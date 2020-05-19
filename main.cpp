@@ -50,95 +50,98 @@ Q_DECL_EXPORT
 
 int main(int argc, char *argv[])
 {
-	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
 #ifdef Q_OS_WIN32
-	qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
+    qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
 #endif
 
 #if defined Q_OS_ANDROID | defined Q_OS_IOS
-	QGuiApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 #else
-	QApplication app(argc, argv);
+    QApplication app(argc, argv);
 #endif
 
 #ifdef Q_OS_ANDROID
-	if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
-		return -1;
+    if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
+        return -1;
 #endif
 
-	app.setApplicationName(BAE::appName);
-	app.setApplicationVersion(BAE::version);
-	app.setApplicationDisplayName(BAE::displayName);
-	app.setOrganizationName(BAE::orgName);
-	app.setOrganizationDomain(BAE::orgDomain);
-	app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
+    app.setApplicationName(BAE::appName);
+    app.setApplicationVersion(BAE::version);
+    app.setApplicationDisplayName(BAE::displayName);
+    app.setOrganizationName(BAE::orgName);
+    app.setOrganizationDomain(BAE::orgDomain);
+    app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
 
-	MauiApp::instance()->setCredits ({QVariantMap({{"name", "Camilo Higuita"}, {"email", "milo.h@aol.com"}, {"year", "2019-2020"}})});
+    MauiApp::instance()->setCredits ({QVariantMap({{"name", "Camilo Higuita"}, {"email", "milo.h@aol.com"}, {"year", "2019-2020"}})});
+    MauiApp::instance()->setIconName("qrc:/assets/vvave.svg");
+    MauiApp::instance()->setDescription("VVAVE will handle your whole music collection by retreaving semantic information from the web. Just relax, enjoy and discover your new music ");
+    MauiApp::instance()->setWebPage("https://mauikit.org");
+    MauiApp::instance()->setReportPage("https://invent.kde.org/maui/vvave/-/issues");
 
-	QCommandLineParser parser;
-	parser.setApplicationDescription(BAE::description);
+    QCommandLineParser parser;
+    parser.setApplicationDescription(BAE::description);
 
-	const QCommandLineOption versionOption = parser.addVersionOption();
-	parser.process(app);
+    const QCommandLineOption versionOption = parser.addVersionOption();
+    parser.process(app);
 
-	const QStringList args = parser.positionalArguments();
-	  static auto babe = new  vvave;
-	static auto youtube = new YouTube;
-	//    Spotify spotify;
+    const QStringList args = parser.positionalArguments();
+    static auto babe = new  vvave;
+    static auto youtube = new YouTube;
 
-	QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
+    QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
 
-	QQmlApplicationEngine engine;
-	const QUrl url(QStringLiteral("qrc:/main.qml"));
-	QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-					 &app, [url, args](QObject *obj, const QUrl &objUrl)
-	{
-		if (!obj && url == objUrl)
-			QCoreApplication::exit(-1);
-		if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
-		{
-			const auto currentSources = vvave::getSourceFolders();
-			babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
-		}
+    QQmlApplicationEngine engine;
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url, args](QObject *obj, const QUrl &objUrl)
+    {
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
+        {
+            const auto currentSources = vvave::getSourceFolders();
+            babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
+        }
 
-		if(!args.isEmpty())
-			babe->openUrls(args);
+        if(!args.isEmpty())
+            babe->openUrls(args);
 
-	}, Qt::QueuedConnection);
+    }, Qt::QueuedConnection);
 
-	qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "Vvave",
-								  [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
-		Q_UNUSED(engine)
-		Q_UNUSED(scriptEngine)
-		return babe;
-	});
+    qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "Vvave",
+                                    [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return babe;
+    });
 
-	qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "YouTube",
-								  [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
-		Q_UNUSED(engine)
-		Q_UNUSED(scriptEngine)
-		return youtube;
-	});
+    qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "YouTube",
+                                    [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {
+        Q_UNUSED(engine)
+        Q_UNUSED(scriptEngine)
+        return youtube;
+    });
 
-	qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
-	qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
-	qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
-	qmlRegisterType<Cloud>("CloudList", 1, 0, "Cloud");
-	qmlRegisterType<Player>("Player", 1, 0, "Player");
+    qmlRegisterType<TracksModel>("TracksList", 1, 0, "Tracks");
+    qmlRegisterType<PlaylistsModel>("PlaylistsList", 1, 0, "Playlists");
+    qmlRegisterType<AlbumsModel>("AlbumsList", 1, 0, "Albums");
+    qmlRegisterType<Cloud>("CloudList", 1, 0, "Cloud");
+    qmlRegisterType<Player>("Player", 1, 0, "Player");
 
 #ifdef STATIC_KIRIGAMI
-	KirigamiPlugin::getInstance().registerTypes();
+    KirigamiPlugin::getInstance().registerTypes();
 #endif
 
 #ifdef STATIC_MAUIKIT
-	MauiKit::getInstance().registerTypes();
+    MauiKit::getInstance().registerTypes();
 #endif
-	engine.load(url);
+    engine.load(url);
 
 #ifdef Q_OS_MACOS
-//	MAUIMacOS::removeTitlebarFromWindow();
+    //	MAUIMacOS::removeTitlebarFromWindow();
 #endif
 
-	return app.exec();
+    return app.exec();
 }
