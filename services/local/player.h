@@ -23,8 +23,7 @@ public:
     {
         PLAYING,
         PAUSED,
-        STOPED,
-        ERROR
+        STOPED
     };Q_ENUM(STATE)
 
     explicit Player(QObject *parent = nullptr);

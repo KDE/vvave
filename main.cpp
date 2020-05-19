@@ -33,6 +33,12 @@
 #include "mauimacos.h"
 #endif
 
+#ifdef Q_OS_WIN
+#include <QtWebEngine>
+#else
+#include <QtWebView>
+#endif
+
 #include "vvave.h"
 
 #include "utils/bae.h"
@@ -50,7 +56,13 @@ Q_DECL_EXPORT
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#if defined Q_OS_LINUX || defined Q_OS_ANDROID
+  QtWebView::initialize();
+#else
+  QtWebEngine::initialize();
+#endif
 
 #ifdef Q_OS_WIN32
     qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");

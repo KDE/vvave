@@ -15,7 +15,7 @@ TEMPLATE = app
 
 VERSION_MAJOR = 1
 VERSION_MINOR = 1
-VERSION_BUILD = 0
+VERSION_BUILD = 1
 
 VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
 DEFINES += VVAVE_VERSION_STRING=\\\"$$VERSION\\\"
@@ -56,7 +56,7 @@ linux:unix:!android {
         ICON = $$PWD/macos_files/vvave.icns
 
     }else:win32 { #from kde craft with msvc
-
+        QT += webengine
         LIBS += -L$$PWD/../../../../CraftRoot/lib/ -ltag
         INCLUDEPATH += $$PWD/../../../../CraftRoot/include
         DEPENDPATH += $$PWD/../../../../CraftRoot/include

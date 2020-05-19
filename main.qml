@@ -380,6 +380,7 @@ Maui.ApplicationWindow
             background: Slider
             {
                 id: progressBar
+                z: parent.z+1
                 padding: 0
                 from: 0
                 to: 1000
