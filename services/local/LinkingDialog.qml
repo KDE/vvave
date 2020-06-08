@@ -38,7 +38,7 @@ Maui.Dialog
 
             Label
             {
-                text:qsTr("Linking allows to connect two devices on the same network. Just provide the device IP address to which you want to connect")
+                text:i18n("Linking allows to connect two devices on the same network. Just provide the device IP address to which you want to connect")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
                 font.pointSize: Maui.Style.fontSizes.default
@@ -48,7 +48,7 @@ Maui.Dialog
 
             Label
             {
-                text: qsTr("IP Address")
+                text: i18n("IP Address")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
                 font.pointSize: Maui.Style.fontSizes.default
@@ -68,7 +68,7 @@ Maui.Dialog
             {
                 id: autoLink
                 checked: bae.loadSetting("AUTOLINKING", "BABE", false)
-                text: qsTr("Autolink to IP address")
+                text: i18n("Autolink to IP address")
 
                 onCheckedChanged:
                 {
@@ -80,7 +80,7 @@ Maui.Dialog
             {
                 id: linkState
                 checked: isLinked
-                text: isLinked ? qsTr("Linked to ")+ link.getIp(): "You're not linked"
+                text: isLinked ? i18n("Linked to ")+ link.getIp(): "You're not linked"
                 enabled: false
             }
 
@@ -88,13 +88,13 @@ Maui.Dialog
             {
                 id: servingState
                 checked: isServing
-                text: isServing ? qsTr("Serving to ")+ link.getDeviceName() : "You're not serving"
+                text: isServing ? i18n("Serving to ")+ link.getDeviceName() : "You're not serving"
                 enabled: false
             }
 
             Label
             {
-                text:qsTr("This Device IP address: \n") +link.deviceIp()
+                text:i18n("This Device IP address: \n") +link.deviceIp()
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
                 font.pointSize: Maui.Style.fontSizes.small

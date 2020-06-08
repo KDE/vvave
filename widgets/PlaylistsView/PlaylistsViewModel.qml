@@ -17,8 +17,8 @@ BabeList
 {
     id: control
     holder.emoji: "qrc:/assets/dialog-information.svg"
-    holder.title : qsTr("No Playlists!")
-    holder.body: qsTr("Start creating new custom playlists")
+    holder.title : i18n("No Playlists!")
+    holder.body: i18n("Start creating new custom playlists")
 
     Connections
     {
@@ -32,20 +32,20 @@ BabeList
 
         MenuItem
         {
-            text: qsTr("Play")
+            text: i18n("Play")
             onTriggered: populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
         }
 
         MenuItem
         {
-            text: qsTr("Rename")
+            text: i18n("Rename")
         }
 
         MenuSeparator{}
 
         MenuItem
         {
-            text: qsTr("Delete")
+            text: i18n("Delete")
             Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
             onTriggered: removePlaylist()
         }

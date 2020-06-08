@@ -59,7 +59,7 @@ StackView
         holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.isMask: false
         holder.title : "Oops!"
-        holder.body: qsTr("This list is empty")
+        holder.body: i18n("This list is empty")
         holder.emojiSize: Maui.Style.iconSizes.huge
         headBar.visible: true
         headBar.farLeftContent: ToolButton

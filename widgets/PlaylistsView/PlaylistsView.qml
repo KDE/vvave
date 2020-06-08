@@ -52,9 +52,9 @@ StackView
     Maui.NewDialog
     {
         id: newPlaylistDialog
-        title: qsTr("Add new playlist")
+        title: i18n("Add new playlist")
         onFinished: addPlaylist(text)
-        acceptText: qsTr("Create")
+        acceptButton.text: i18n("Create")
         rejectButton.visible: false
     }
 
@@ -80,7 +80,7 @@ StackView
 
         contextMenuItems: MenuItem
         {
-            text: qsTr("Remove from playlist")
+            text: i18n("Remove from playlist")
         }
 
         onRowClicked: control.rowClicked(filterList.listModel.get(index))
@@ -102,7 +102,7 @@ StackView
         section.criteria: ViewSection.FullString
         section.delegate: Maui.LabelDelegate
         {
-            label: filterList.section.property === qsTr("stars") ? H.setStars(section) : section
+            label: filterList.section.property === i18n("stars") ? H.setStars(section) : section
             isSection: true
             labelTxt.font.family: "Material Design Icons"
             width: filterList.width

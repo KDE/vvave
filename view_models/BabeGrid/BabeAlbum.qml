@@ -18,9 +18,6 @@ Maui.ItemDelegate
     property alias label2 : _label2
     property alias image : _image
 
-    isCurrentItem: GridView.isCurrentItem
-    background: Item {}
-
     Item
     {
         id: _cover

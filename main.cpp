@@ -1,8 +1,8 @@
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
+#include <QQmlContext>
 
 #include <QIcon>
-#include <QLibrary>
 #include <QCommandLineParser>
 
 #ifdef STATIC_KIRIGAMI
@@ -50,13 +50,14 @@
 #include "models/playlists/playlistsmodel.h"
 #include "models/cloud/cloud.h"
 
+#include <KI18n/KLocalizedContext>
+
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
 #endif
 
 int main(int argc, char *argv[])
 {
-
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #if defined Q_OS_LINUX || defined Q_OS_ANDROID
   QtWebView::initialize();
@@ -121,6 +122,8 @@ int main(int argc, char *argv[])
             babe->openUrls(args);
 
     }, Qt::QueuedConnection);
+
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
     qmlRegisterSingletonType<vvave>("org.maui.vvave", 1, 0, "Vvave",
                                     [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject* {

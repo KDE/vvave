@@ -15,8 +15,8 @@ Maui.Dialog
     property var tracks : []
     maxHeight: 400 * Maui.Style.unit
     page.margins: Maui.Style.space.medium
-    acceptButton.text: qsTr("Save")
-    rejectButton.text: qsTr("Cancel")
+    acceptButton.text: i18n("Save")
+    rejectButton.text: i18n("Cancel")
 
     ColumnLayout
     {
@@ -31,8 +31,8 @@ Maui.Dialog
             Layout.fillWidth: true
 
             headBar.visible: false
-            holder.title: qsTr("There's not playlists")
-            holder.body: qsTr("Create a new one and start adding tracks to it")
+            holder.title: i18n("There's not playlists")
+            holder.body: i18n("Create a new one and start adding tracks to it")
 
             model: Maui.BaseModel
             {
@@ -62,7 +62,7 @@ Maui.Dialog
             Layout.fillWidth: true
             id: newPlaylistField
             color: Kirigami.Theme.textColor
-            placeholderText: qsTr("New playlist")
+            placeholderText: i18n("New playlist")
             onAccepted:
             {
                 addPlaylist()

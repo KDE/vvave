@@ -12,8 +12,8 @@ BabeTable
     trackNumberVisible: false
     coverArtVisible: false
     holder.emoji: "qrc:/assets/dialog-information.svg"
-    holder.title : qsTr("No Tracks!")
-    holder.body: qsTr("Add new music sources")
+    holder.title : i18n("No Tracks!")
+    holder.body: i18n("Add new music sources")
     holder.emojiSize: Maui.Style.iconSizes.huge
     list.query: Q.GET.allTracks
 }

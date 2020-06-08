@@ -114,7 +114,7 @@ ColumnLayout
                 section.criteria: ViewSection.FullString
                 section.delegate: Maui.LabelDelegate
                 {
-                    label: filterList.section.property === qsTr("stars") ? H.setStars(section) : section
+                    label: filterList.section.property === i18n("stars") ? H.setStars(section) : section
                     isSection: true
                     boldLabel: true
                     labelTxt.font.family: "Material Design Icons"

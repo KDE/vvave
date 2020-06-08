@@ -106,7 +106,7 @@ Maui.ApplicationWindow
     onClosing: Player.savePlaylist()
     onMissingAlert:
     {
-        var message = qsTr("Missing file")
+        var message = i18n("Missing file")
         var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
         notify("dialog-question", message, messageBody, function ()
         {
@@ -188,7 +188,7 @@ Maui.ApplicationWindow
 
         MenuItem
         {
-            text: qsTr("Settings")
+            text: i18n("Settings")
             icon.name: "settings-configure"
             onTriggered:
             {
@@ -201,7 +201,7 @@ Maui.ApplicationWindow
 
         MenuItem
         {
-            text: qsTr("Open")
+            text: i18n("Open")
             icon.name: "folder-add"
             onTriggered:
             {
@@ -503,7 +503,7 @@ Maui.ApplicationWindow
                     Action
                     {
                         id: playIcon
-                        text: qsTr("Play and pause")
+                        text: i18n("Play and pause")
                         enabled: currentTrackIndex >= 0
                         icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
                         onTriggered: player.playing = !player.playing
@@ -511,7 +511,7 @@ Maui.ApplicationWindow
 
                     Action
                     {
-                        text: qsTr("Next")
+                        text: i18n("Next")
                         icon.name: "media-skip-forward"
                         onTriggered: Player.nextTrack()
                         //                    onPressAndHold: Player.playAt(Player.shuffle())
@@ -547,7 +547,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-                MauiLab.AppView.title: qsTr("Tracks")
+                MauiLab.AppView.title: i18n("Tracks")
                 MauiLab.AppView.iconName: "view-media-track"
 
                 TracksView
@@ -569,7 +569,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-                MauiLab.AppView.title: qsTr("Albums")
+                MauiLab.AppView.title: i18n("Albums")
                 MauiLab.AppView.iconName: "view-media-album-cover"
 
                 AlbumsView
@@ -578,8 +578,8 @@ Maui.ApplicationWindow
 
                     holder.emoji: "qrc:/assets/dialog-information.svg"
                     holder.isMask: false
-                    holder.title : qsTr("No Albums!")
-                    holder.body: qsTr("Add new music sources")
+                    holder.title : i18n("No Albums!")
+                    holder.body: i18n("Add new music sources")
                     holder.emojiSize: Maui.Style.iconSizes.huge
                     list.query: Albums.ALBUMS
                     list.sortBy: Albums.ALBUM
@@ -613,7 +613,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-                MauiLab.AppView.title: qsTr("Artists")
+                MauiLab.AppView.title: i18n("Artists")
                 MauiLab.AppView.iconName: "view-media-artist"
 
                 AlbumsView
@@ -621,8 +621,8 @@ Maui.ApplicationWindow
                     id: artistsView
                     holder.emoji: "qrc:/assets/dialog-information.svg"
                     holder.isMask: false
-                    holder.title : qsTr("No Artists!")
-                    holder.body: qsTr("Add new music sources")
+                    holder.title : i18n("No Artists!")
+                    holder.body: i18n("Add new music sources")
                     holder.emojiSize: Maui.Style.iconSizes.huge
                     list.query: Albums.ARTISTS
                     list.sortBy: Albums.ARTIST
@@ -655,7 +655,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-                MauiLab.AppView.title: qsTr("Playlists")
+                MauiLab.AppView.title: i18n("Playlists")
                 MauiLab.AppView.iconName: "view-media-playlist"
 
                 PlaylistsView
@@ -680,7 +680,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-                MauiLab.AppView.title: qsTr("Cloud")
+                MauiLab.AppView.title: i18n("Cloud")
                 MauiLab.AppView.iconName: "folder-cloud"
                 CloudView
                 {
@@ -690,7 +690,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-                MauiLab.AppView.title: qsTr("Folders")
+                MauiLab.AppView.title: i18n("Folders")
                 MauiLab.AppView.iconName: "folder"
 
                 FoldersView
@@ -721,7 +721,7 @@ Maui.ApplicationWindow
 
             MauiLab.AppViewLoader
             {
-                MauiLab.AppView.title: qsTr("YouTube")
+                MauiLab.AppView.title: i18n("YouTube")
                 MauiLab.AppView.iconName: "internet-services"
 
                 YouTube

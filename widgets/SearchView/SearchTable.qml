@@ -23,15 +23,15 @@ BabeTable
     trackNumberVisible: false
     holder.emoji: "qrc:/assets/dialog-information.svg"
     holder.isMask: true
-    holder.title : qsTr("No search results!")
-    holder.body: qsTr("Try with another query")
+    holder.title : i18n("No search results!")
+    holder.body: i18n("Try with another query")
     holder.emojiSize: Maui.Style.iconSizes.huge
     coverArtVisible: true
 
     headBar.leftContent: Maui.TextField
     {
         id: searchInput
-        placeholderText: qsTr("Search...")
+        placeholderText: i18n("Search...")
         Layout.fillWidth: true
 
         onAccepted: runSearch(searchInput.text)

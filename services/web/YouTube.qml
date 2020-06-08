@@ -84,7 +84,7 @@ Maui.Page
 
             Label
             {
-                text: qsTr("Custom API Key")
+                text: i18n("Custom API Key")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
                 font.pointSize: Maui.Style.fontSizes.default
@@ -103,7 +103,7 @@ Maui.Page
 
             Label
             {
-                text: qsTr("Search results")
+                text: i18n("Search results")
                 verticalAlignment:  Qt.AlignVCenter
                 elide: Text.ElideRight
                 font.pointSize: Maui.Style.fontSizes.default
@@ -238,7 +238,7 @@ Maui.Page
         id: searchInput
         Layout.fillWidth: true
 
-        placeholderText: qsTr("Search videos...")
+        placeholderText: i18n("Search videos...")
         wrapMode: TextEdit.Wrap
         onAccepted: runSearch(searchInput.text)
     }

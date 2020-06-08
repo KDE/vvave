@@ -64,14 +64,14 @@ BabeList
         Action
         {
             icon.name : "media-playlist-play"
-            text: qsTr("Play")
+            text: i18n("Play")
             onTriggered: playAll()
         }
 
         Action
         {
             icon.name : "media-playlist-append"
-            text: qsTr("Append")
+            text: i18n("Append")
             onTriggered: appendAll()
         }
     }
@@ -79,7 +79,7 @@ BabeList
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
-        placeholderText: qsTr("Search") + " " + list.count + " " + qsTr("tracks")
+        placeholderText: i18n("Search") + " " + list.count + " " + i18n("tracks")
         onAccepted: listModel.filter = text
         onCleared: listModel.filter = ""
     }
@@ -92,7 +92,7 @@ BabeList
             enabled: list.count > 2
             MenuItem
             {
-                text: qsTr("Title")
+                text: i18n("Title")
                 checkable: true
                 checked: list.sortBy === Tracks.TITLE
                 onTriggered: list.sortBy = Tracks.TITLE
@@ -101,7 +101,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Track")
+                text: i18n("Track")
                 checkable: true
                 checked: list.sortBy === Tracks.TRACK
                 onTriggered: list.sortBy = Tracks.TRACK
@@ -110,7 +110,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Artist")
+                text: i18n("Artist")
                 checkable: true
                 checked: list.sortBy === Tracks.ARTIST
                 onTriggered: list.sortBy = Tracks.ARTIST
@@ -119,7 +119,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Album")
+                text: i18n("Album")
                 checkable: true
                 checked: list.sortBy === Tracks.ALBUM
                 onTriggered: list.sortBy = Tracks.ALBUM
@@ -128,7 +128,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Most played")
+                text: i18n("Most played")
                 checkable: true
                 checked: list.sortBy === Tracks.COUNT
                 onTriggered: list.sortBy = Tracks.COUNT
@@ -137,7 +137,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Rate")
+                text: i18n("Rate")
                 checkable: true
                 checked: list.sortBy === Tracks.RATE
                 onTriggered: list.sortBy = Tracks.RATE
@@ -146,7 +146,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Favorite")
+                text: i18n("Favorite")
                 checkable: true
                 checked: list.sortBy === Tracks.FAV
                 onTriggered: list.sortBy = Tracks.FAV
@@ -155,7 +155,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Release date")
+                text: i18n("Release date")
                 checkable: true
                 checked: list.sortBy === Tracks.RELEASEDATE
                 onTriggered: list.sortBy = Tracks.RELEASEDATE
@@ -164,7 +164,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Add date")
+                text: i18n("Add date")
                 checkable: true
                 checked: list.sortBy === Tracks.ADDDATE
                 onTriggered: list.sortBy = Tracks.ADDDATE
@@ -175,7 +175,7 @@ BabeList
 
             MenuItem
             {
-                text: qsTr("Group")
+                text: i18n("Group")
                 checkable: true
                 checked: group
                 onTriggered:
@@ -191,10 +191,10 @@ BabeList
     {
         id: _removeDialog
         property int index
-        title: qsTr("Remove track")
-        message: qsTr("You can delete the file from your computer or remove it from your collection")
-        rejectButton.text: qsTr("Delete")
-        acceptButton.text: qsTr("Remove")
+        title: i18n("Remove track")
+        message: i18n("You can delete the file from your computer or remove it from your collection")
+        rejectButton.text: i18n("Delete")
+        acceptButton.text: i18n("Remove")
         page.margins: Maui.Style.space.huge
 
         onAccepted:
@@ -219,7 +219,7 @@ BabeList
 
         MenuItem
         {
-            text: qsTr("Go to Artist")
+            text: i18n("Go to Artist")
             icon.name: "view-media-artist"
             onTriggered: goToArtist()
 
@@ -227,7 +227,7 @@ BabeList
 
         MenuItem
         {
-            text: qsTr("Go to Album")
+            text: i18n("Go to Album")
             icon.name: "view-media-album-cover"
             onTriggered: goToAlbum()
         }

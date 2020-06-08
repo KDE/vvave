@@ -12,7 +12,7 @@ Maui.Page
     visible: focusView
 
     z: parent.z + 99999
-    title: qsTr("Now Playing")
+    title: i18n("Now Playing")
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.View
 

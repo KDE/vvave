@@ -56,8 +56,8 @@ StackView
             visible: !browser.count
             emoji: "qrc:/assets/dialog-information.svg"
             isMask: true
-            title : qsTr("No Folders!")
-            body: qsTr("Add new music to your sources to browse by folders")
+            title : i18n("No Folders!")
+            body: i18n("Add new music to your sources to browse by folders")
             emojiSize: Maui.Style.iconSizes.huge
         }
     }
@@ -68,8 +68,8 @@ StackView
         coverArtVisible: true
         holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.isMask: true
-        holder.title : qsTr("No Tracks!")
-        holder.body: qsTr("This source folder seems to be empty!")
+        holder.title : i18n("No Tracks!")
+        holder.body: i18n("This source folder seems to be empty!")
         holder.emojiSize: Maui.Style.iconSizes.huge
         headBar.visible: true
         headBar.farLeftContent: ToolButton

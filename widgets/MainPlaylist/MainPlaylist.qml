@@ -44,7 +44,7 @@ Maui.Page
         onSaveToClicked: table.saveList()
     }
 
-    title: qsTr("Now playing")
+    title: i18n("Now playing")
     showTitle: true
     headBar.visible: true
     headBar.rightContent: ToolButton
@@ -77,7 +77,7 @@ Maui.Page
         holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.isMask: true
         holder.title : "Meh!"
-        holder.body: qsTr("Start putting together your playlist!")
+        holder.body: i18n("Start putting together your playlist!")
         holder.emojiSize: Maui.Style.iconSizes.huge
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
         Kirigami.Theme.backgroundColor: "transparent"
@@ -101,7 +101,7 @@ Maui.Page
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     anchors.margins: Maui.Style.space.small
-                    text: qsTr("Syncing to ") + root.syncPlaylist
+                    text: i18n("Syncing to ") + root.syncPlaylist
                 }
 
                 ToolButton

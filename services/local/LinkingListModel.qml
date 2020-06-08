@@ -15,7 +15,7 @@ BabeList
     id: linkingListRoot
 
     headBarExit: false
-    headBarTitle: isLinked ?link.getIp() : qsTr("Disconnected")
+    headBarTitle: isLinked ?link.getIp() : i18n("Disconnected")
 
     headBar.leftContent: ToolButton
     {
@@ -34,17 +34,17 @@ BabeList
     {
         id: linkingListModel
 
-        ListElement { playlist: qsTr("Albums"); icon: "view-media-album-cover"}
-        ListElement { playlist: qsTr("Artists"); icon: "view-media-artist"}
-        ListElement { playlist: qsTr("Most Played"); icon: "view-media-playcount" /*query: Q.Query.mostPlayedTracks*/ }
-        ListElement { playlist: qsTr("Favorites"); icon: "view-media-favorite"}
-        ListElement { playlist: qsTr("Recent"); icon: "view-media-recent"}
-        ListElement { playlist: qsTr("Babes"); icon: "love"}
-        ListElement { playlist: qsTr("Online"); icon: "internet-services"}
-        ListElement { playlist: qsTr("Tags"); icon: "tag"}
-        ListElement { playlist: qsTr("Relationships"); icon: "view-media-similarartists"}
-        ListElement { playlist: qsTr("Popular"); icon: "view-media-chart"}
-        ListElement { playlist: qsTr("Genres"); icon: "view-media-genre"}
+        ListElement { playlist: i18n("Albums"); icon: "view-media-album-cover"}
+        ListElement { playlist: i18n("Artists"); icon: "view-media-artist"}
+        ListElement { playlist: i18n("Most Played"); icon: "view-media-playcount" /*query: Q.Query.mostPlayedTracks*/ }
+        ListElement { playlist: i18n("Favorites"); icon: "view-media-favorite"}
+        ListElement { playlist: i18n("Recent"); icon: "view-media-recent"}
+        ListElement { playlist: i18n("Babes"); icon: "love"}
+        ListElement { playlist: i18n("Online"); icon: "internet-services"}
+        ListElement { playlist: i18n("Tags"); icon: "tag"}
+        ListElement { playlist: i18n("Relationships"); icon: "view-media-similarartists"}
+        ListElement { playlist: i18n("Popular"); icon: "view-media-chart"}
+        ListElement { playlist: i18n("Genres"); icon: "view-media-genre"}
     }
 
     model: linkingListModel

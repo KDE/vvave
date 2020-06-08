@@ -41,7 +41,7 @@ MauiLab.SelectionBar
 
     Action
     {
-        text: qsTr("Play")
+        text: i18n("Play")
         icon.name: "media-playlist-play"
         onTriggered:
         {
@@ -52,14 +52,14 @@ MauiLab.SelectionBar
 
     Action
     {
-        text: qsTr("Append")
+        text: i18n("Append")
         icon.name: "media-playlist-append"
         onTriggered: Player.appendAll(control.items)
     }
 
     Action
     {
-        text: qsTr("Queue")
+        text: i18n("Queue")
         icon.name: "view-media-recent"
         onTriggered:
         {
@@ -72,7 +72,7 @@ MauiLab.SelectionBar
 
 //    MenuItem
 //    {
-//        text: qsTr("Fav/UnFav them")
+//        text: i18n("Fav/UnFav them")
 //        onTriggered:
 //        {
 //            for(var i= 0; i < _selectionBar.count; i++)
@@ -84,7 +84,7 @@ MauiLab.SelectionBar
 
     Action
     {
-        text: qsTr("Add to")
+        text: i18n("Add to")
         icon.name: "document-save"
         onTriggered:
         {
@@ -95,7 +95,7 @@ MauiLab.SelectionBar
 
     Action
     {
-        text: qsTr("Share")
+        text: i18n("Share")
         icon.name: "document-share"
         onTriggered:
         {
@@ -113,7 +113,7 @@ MauiLab.SelectionBar
 
     Action
     {
-        text: qsTr("Remove")
+        text: i18n("Remove")
         icon.name: "edit-delete"
         Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
         onTriggered:

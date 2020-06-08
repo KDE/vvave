@@ -55,15 +55,15 @@ MauiLab.SettingsDialog
 
     MauiLab.SettingsSection
     {
-        title: qsTr("Behaviour")
-        description: qsTr("Configure the app plugins and behavior.")
+        title: i18n("Behaviour")
+        description: i18n("Configure the app plugins and behavior.")
 
         Switch
         {
             Layout.fillWidth: true
             checkable: true
             checked:  control.fetchArtwork
-            Kirigami.FormData.label: qsTr("Fetch Artwork Online")
+            Kirigami.FormData.label: i18n("Fetch Artwork Online")
             onToggled:
             {
                 control.fetchArtwork = !control.fetchArtwork
@@ -74,7 +74,7 @@ MauiLab.SettingsDialog
         Switch
         {
             Layout.fillWidth: true
-            Kirigami.FormData.label: qsTr("Scan Collection on Start Up")
+            Kirigami.FormData.label: i18n("Scan Collection on Start Up")
             checkable: true
             checked: control.scanCollectionOnStartUp
             onToggled:
@@ -87,12 +87,12 @@ MauiLab.SettingsDialog
 
     MauiLab.SettingsSection
     {
-        title: qsTr("Interface")
-        description: qsTr("Configure the app UI.")
+        title: i18n("Interface")
+        description: i18n("Configure the app UI.")
 
         Switch
         {
-            Kirigami.FormData.label: qsTr("Translucent Sidebar")
+            Kirigami.FormData.label: i18n("Translucent Sidebar")
             checkable: true
             checked:  root.translucency
             onToggled:  root.translucency = !root.translucency
@@ -101,7 +101,7 @@ MauiLab.SettingsDialog
         Switch
         {
             Layout.fillWidth: true
-            Kirigami.FormData.label: qsTr("Dark Mode")
+            Kirigami.FormData.label: i18n("Dark Mode")
             checkable: true
             checked: control.darkMode
             onToggled: control.darkMode = !control.darkMode
@@ -110,9 +110,8 @@ MauiLab.SettingsDialog
 
     MauiLab.SettingsSection
     {
-        title: qsTr("Sources")
-        description: qsTr("Add new sources to manage and browse your image collection")
-
+        title: i18n("Sources")
+        description: i18n("Add new sources to manage and browse your image collection")
 
         ColumnLayout
         {
@@ -140,8 +139,8 @@ MauiLab.SettingsDialog
 //                    visible: !_sourcesList.count
 //                    emoji: "qrc:/assets/dialog-information.svg"
 //                    isMask: true
-//                    title : qsTr("No Sources!")
-//                    body: qsTr("Add new sources to organize and play your music collection")
+//                    title : i18n("No Sources!")
+//                    body: i18n("Add new sources to organize and play your music collection")
 //                    emojiSize: Maui.Style.iconSizes.huge
 //                }
             }
@@ -152,7 +151,7 @@ MauiLab.SettingsDialog
                 Button
                 {
                     Layout.fillWidth: true
-                    text: qsTr("Remove")
+                    text: i18n("Remove")
                     onClicked:
                     {
                         confirmationDialog.url = _sourcesList.model[_sourcesList.currentIndex]
@@ -163,7 +162,7 @@ MauiLab.SettingsDialog
                 Button
                 {
                     Layout.fillWidth: true
-                    text: qsTr("Add")
+                    text: i18n("Add")
                     onClicked:
                     {
                         _dialogLoader.sourceComponent = _fmDialogComponent

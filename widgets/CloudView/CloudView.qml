@@ -34,14 +34,14 @@ Maui.Page
         ToolButton
         {
             id : playAllBtn
-            //            text: qsTr("Play all")
+            //            text: i18n("Play all")
             icon.name : "media-playlist-play"
             //            onClicked: playAll()
         },
         ToolButton
         {
             id: appendBtn
-            //            text: qsTr("Append")
+            //            text: i18n("Append")
             icon.name : "media-playlist-append"//"media-repeat-track-amarok"
             //            onClicked: appendAll()
         }]
@@ -64,7 +64,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Title")
+                text: i18n("Title")
                 checkable: true
                 checked: list.sortBy === Cloud.TITLE
                 onTriggered: list.sortBy = Cloud.TITLE
@@ -73,7 +73,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Track")
+                text: i18n("Track")
                 checkable: true
                 checked: list.sortBy === Cloud.TRACK
                 onTriggered: list.sortBy = Cloud.TRACK
@@ -82,7 +82,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Artist")
+                text: i18n("Artist")
                 checkable: true
                 checked: list.sortBy === Cloud.ARTIST
                 onTriggered: list.sortBy = Cloud.ARTIST
@@ -91,7 +91,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Album")
+                text: i18n("Album")
                 checkable: true
                 checked: list.sortBy === Cloud.ALBUM
                 onTriggered: list.sortBy = Cloud.ALBUM
@@ -100,7 +100,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Most played")
+                text: i18n("Most played")
                 checkable: true
                 checked: list.sortBy === Cloud.COUNT
                 onTriggered: list.sortBy = Cloud.COUNT
@@ -109,7 +109,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Rate")
+                text: i18n("Rate")
                 checkable: true
                 checked: list.sortBy === Cloud.RATE
                 onTriggered: list.sortBy = Cloud.RATE
@@ -118,7 +118,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Favorite")
+                text: i18n("Favorite")
                 checkable: true
                 checked: list.sortBy === Cloud.FAV
                 onTriggered: list.sortBy = Cloud.FAV
@@ -127,7 +127,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Release date")
+                text: i18n("Release date")
                 checkable: true
                 checked: list.sortBy === Cloud.RELEASEDATE
                 onTriggered: list.sortBy = Cloud.RELEASEDATE
@@ -136,7 +136,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Add date")
+                text: i18n("Add date")
                 checkable: true
                 checked: list.sortBy === Cloud.ADDDATE
                 onTriggered: list.sortBy = Cloud.ADDDATE
@@ -147,7 +147,7 @@ Maui.Page
 
             MenuItem
             {
-                text: qsTr("Group")
+                text: i18n("Group")
                 checkable: true
 //                checked: group
                 onTriggered: group = !group
@@ -163,8 +163,8 @@ Maui.Page
         clip: true
         holder.visible: count === 0
         holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.title : qsTr("Opps!")
-        holder.body: qsTr("You don't have an account set up.\nYou can set up your account now by clicking here or under the Accounts options in the main menu")
+        holder.title : i18n("Opps!")
+        holder.body: i18n("You don't have an account set up.\nYou can set up your account now by clicking here or under the Accounts options in the main menu")
         listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
 
         Connections
