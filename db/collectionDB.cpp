@@ -253,7 +253,6 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 	auto year = track[FMH::MODEL_KEY::RELEASEDATE];
 	auto sourceUrl = track[FMH::MODEL_KEY::SOURCE];
 	auto duration = track[FMH::MODEL_KEY::DURATION];
-	auto fav = track[FMH::MODEL_KEY::FAV];
 	auto trackNumber = track[FMH::MODEL_KEY::TRACK];
 
 	auto artwork = track[FMH::MODEL_KEY::ARTWORK].isEmpty() ? "" : track[FMH::MODEL_KEY::ARTWORK];
@@ -290,13 +289,11 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::DURATION], duration},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::COUNT], 0},
-						  {FMH::MODEL_NAME[FMH::MODEL_KEY::FAV], fav},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::RATE], 0},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::RELEASEDATE], year},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime()},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::LYRICS],""},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::GENRE], genre},
-						  {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], ""},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::COMMENT], ""}};
 
@@ -334,17 +331,6 @@ bool CollectionDB::rateTrack(const QString &path, const int &value)
 {
 	if(update(TABLEMAP[TABLE::TRACKS],
 			  FMH::MODEL_NAME[FMH::MODEL_KEY::RATE],
-			  value,
-			  FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-			  path)) return true;
-	return false;
-}
-
-
-bool CollectionDB::colorTagTrack(const QString &path, const QString &value)
-{
-	if(update(TABLEMAP[TABLE::TRACKS],
-			  FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR],
 			  value,
 			  FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
 			  path)) return true;
@@ -622,19 +608,11 @@ QStringList CollectionDB::getArtistAlbums(const QString &artist)
 	return albums;
 }
 
-FMH::MODEL_LIST CollectionDB::getBabedTracks(const FMH::MODEL_KEY &orderBy, const BAE::W &order)
-{
-	const auto queryTxt = QString("SELECT * FROM %1 WHERE %2 = 1 ORDER by %3 %4").arg(TABLEMAP[TABLE::TRACKS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
-			FMH::MODEL_NAME[orderBy], SLANG[order]);
-	return this->getDBData(queryTxt);
-}
-
 FMH::MODEL_LIST CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search)
 {
 	QString queryTxt;
 
-	if(where == FMH::MODEL_KEY::COUNT || where == FMH::MODEL_KEY::RATE || where == FMH::MODEL_KEY::FAV)
+    if(where == FMH::MODEL_KEY::COUNT || where == FMH::MODEL_KEY::RATE)
 		queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
 				FMH::MODEL_NAME[where],
 				search);
@@ -736,19 +714,6 @@ FMH::MODEL_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const 
 	return this->getDBData(queryTxt);
 }
 
-
-QString CollectionDB::trackColorTag(const QString &path)
-{
-	QString color;
-	auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR],
-								 TABLEMAP[TABLE::TRACKS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL],path));
-
-	for(auto track : query)
-		color = track[FMH::MODEL_KEY::COLOR];
-
-	return color;
-}
 
 QStringList CollectionDB::getTrackTags(const QString &path)
 {

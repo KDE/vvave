@@ -30,7 +30,6 @@ Menu
     signal shareClicked()
     signal selectClicked()
     signal rateClicked(int rate)
-    signal colorClicked(color color)
     signal infoClicked()
     signal copyToClicked()
     signal appendClicked()
@@ -283,24 +282,6 @@ Menu
                     rateClicked(rate)
                     close()
                 }
-            }
-        }
-    }
-
-
-    MenuItem
-    {
-        id: colorsRow
-        width: parent.width
-        height:  Maui.Style.iconSizes.medium + Maui.Style.space.small
-
-        ColorTagsBar
-        {
-            anchors.fill: parent
-            onColorClicked:
-            {
-                control.colorClicked(color)
-                control.close()
             }
         }
     }

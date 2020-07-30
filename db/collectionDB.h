@@ -45,8 +45,6 @@ public:
 	bool addTrack(const FMH::MODEL &track);
 	bool updateTrack(const FMH::MODEL &track);
 	Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
-	Q_INVOKABLE bool colorTagTrack(const QString &path, const QString &value);
-	Q_INVOKABLE QString trackColorTag(const QString &path);
 
 	bool lyricsTrack(const FMH::MODEL &track, const QString &value);
 	Q_INVOKABLE bool playedTrack(const QString &url, const int &increment = 1);
@@ -71,7 +69,6 @@ public:
 
 	FMH::MODEL_LIST getAlbumTracks(const QString &album, const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::TRACK, const BAE::W &order = BAE::W::ASC);
 	FMH::MODEL_LIST getArtistTracks(const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
-	FMH::MODEL_LIST getBabedTracks(const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
 	FMH::MODEL_LIST getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search);
 	FMH::MODEL_LIST getPlaylistTracks(const QString &playlist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
 	FMH::MODEL_LIST getMostPlayedTracks(const int &greaterThan = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);

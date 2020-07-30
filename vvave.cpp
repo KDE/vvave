@@ -90,7 +90,7 @@ void vvave::scanDir(const QStringList &paths)
 
     connect(fileLoader, &FileLoader::finished, [this, _fileLoader = fileLoader] (FMH::MODEL_LIST res)
     {
-//        emit this->refreshTables(res.count());
+        emit this->refreshTables(res.count());
 //       _fileLoader->deleteLater();
     });
 

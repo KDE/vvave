@@ -260,11 +260,6 @@ BabeList
             list.rate(listView.currentIndex, rate);
         }
 
-        onColorClicked:
-        {
-            list.color(listView.currentIndex, color);
-        }
-
         onInfoClicked:
         {
             infoView.show(listModel.get(listView.currentIndex))

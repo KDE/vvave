@@ -70,7 +70,6 @@ public slots:
 //    void appendUrl(const QString &url);
     void searchQueries(const QStringList &queries);
     void clear();
-    bool color(const int &index, const QString &color);
     bool fav(const int &index, const bool &value);
     bool rate(const int &index, const int &value);
     bool countUp(const int &index);

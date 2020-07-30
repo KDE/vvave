@@ -274,24 +274,6 @@ void TracksModel::clear()
     emit this->postListChanged();
 }
 
-bool TracksModel::color(const int &index, const QString &color)
-{
-    if(index >= this->list.size() || index < 0)
-        return false;
-
-    const auto index_ = this->mappedIndex(index);
-
-    auto item = this->list[index_];
-    if(this->db->colorTagTrack(item[FMH::MODEL_KEY::URL], color))
-    {
-        this->list[index_][FMH::MODEL_KEY::COLOR] = color;
-        emit this->updateModel(index_, {FMH::MODEL_KEY::COLOR});
-        return true;
-    }
-
-    return false;
-}
-
 bool TracksModel::fav(const int &index, const bool &value)
 {
     if(index >= this->list.size() || index < 0)
