@@ -53,6 +53,7 @@ add_executable(vvave
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
     models/cloud/cloud.cpp
+    services/local/fileloader.h
     )
 
 ecm_setup_version(${VVAVE_VERSION}

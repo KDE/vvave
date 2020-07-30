@@ -61,12 +61,8 @@ public:
 	bool wikiAlbum(const FMH::MODEL &track, QString value);
 	bool tagsAlbum(const FMH::MODEL &track, const QString &value, const QString &context = "");
 
-	Q_INVOKABLE bool addPlaylist(const QString &title);
-	bool trackPlaylist(const QString &url, const QString &playlist);
 	bool addFolder(const QString &url);
 	bool removeFolder(const QString &url);
-
-	bool favTrack(const QString &path, const bool &value);
 
 	FMH::MODEL_LIST getDBData(const QStringList &urls);
 	FMH::MODEL_LIST getDBData(const QString &queryTxt, std::function<bool(FMH::MODEL &item)> modifier = nullptr);
@@ -79,7 +75,6 @@ public:
 	FMH::MODEL_LIST getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search);
 	FMH::MODEL_LIST getPlaylistTracks(const QString &playlist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
 	FMH::MODEL_LIST getMostPlayedTracks(const int &greaterThan = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
-	FMH::MODEL_LIST getFavTracks(const int &stars = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::RATE, const BAE::W &order = BAE::W::DESC);
 	FMH::MODEL_LIST getRecentTracks(const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
 	FMH::MODEL_LIST getOnlineTracks(const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
 
@@ -91,12 +86,8 @@ public:
 	//    QStringList getAlbumTags(const QString &album, const QString &artist);
 	QStringList getArtistAlbums(const QString &artist);
 
-	FMH::MODEL_LIST getPlaylists();
-	QStringList getPlaylistsList();
-
-	Q_INVOKABLE bool removePlaylistTrack(const QString &url, const QString &playlist);
-	Q_INVOKABLE bool removePlaylist(const QString &playlist);
 	Q_INVOKABLE void removeMissingTracks();
+
 	bool removeArtwork(const QString &table, const QVariantMap &item);
 	bool removeArtist(const QString &artist);
 	bool cleanArtists();

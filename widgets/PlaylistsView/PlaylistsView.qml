@@ -18,7 +18,6 @@ StackView
 
     property string currentPlaylist
     property string playlistQuery
-    property alias playlistModel : playlistViewModel.model
     property alias playlistViewList : playlistViewModel
 
     property alias listModel : filterList.listModel
@@ -53,6 +52,7 @@ StackView
     {
         id: newPlaylistDialog
         title: i18n("Add new playlist")
+        message: i18n("Create a new playlist to organize your music collection")
         onFinished: addPlaylist(text)
         acceptButton.text: i18n("Create")
         rejectButton.visible: false
@@ -62,7 +62,8 @@ StackView
     {
         id: filterList
         property bool isPublic: true
-
+        signal removeFromPlaylist(string url)
+        list.query: control.playlistQuery
         coverArtVisible: true
         showTitle: false
         title: control.currentPlaylist
@@ -81,6 +82,11 @@ StackView
         contextMenuItems: MenuItem
         {
             text: i18n("Remove from playlist")
+            onTriggered:
+            {
+                playlistsList.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
+                filterList.list.remove(filterList.currentIndex)
+            }
         }
 
         onRowClicked: control.rowClicked(filterList.listModel.get(index))
@@ -108,16 +114,6 @@ StackView
             width: filterList.width
         }
 
-        Connections
-        {
-            target: filterList.contextMenu
-
-            onRemoveClicked:
-            {
-                playlistsList.removeTrack(playlistViewList.currentIndex, filterList.listModel.get(filterList.currentIndex).url)
-                populate(playlistQuery)
-            }
-        }
     }
 
     function appendToExtraList(res)
@@ -127,11 +123,36 @@ StackView
                 playlistViewModelFilter.model.append(res[i])
     }
 
-    function populate(query, isPublic)
+    function populate(playlist, isPublic)
     {
-        playlistQuery = query
+        currentPlaylist = playlist
+
+        switch(currentPlaylist)
+        {
+        case "Most Played":
+            playlistQuery = Q.GET.mostPlayedTracks
+            filterList.list.sortBy = Tracks.COUNT
+            break;
+
+        case "Rating":
+            filterList.list.sortBy = Tracks.RATE
+            filterList.group = true
+
+            playlistQuery = Q.GET.favoriteTracks;
+            break;
+
+        case "Recent":
+            playlistQuery = Q.GET.recentTracks;
+            filterList.list.sortBy = Tracks.ADDDATE
+            filterList.group = true
+            break;
+
+        default:
+            playlistQuery = Q.GET.playlistTracks_.arg(currentPlaylist)
+            break;
+        }
+
         filterList.isPublic = isPublic
-        filterList.list.query = playlistQuery
         filterList.listModel.filter = ""
         control.push(filterList)
     }

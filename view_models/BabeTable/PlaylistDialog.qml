@@ -11,100 +11,88 @@ import "../../db/Queries.js" as Q
 
 Maui.Dialog
 {
-
+    id: control
     property var tracks : []
     maxHeight: 400 * Maui.Style.unit
-    page.margins: Maui.Style.space.medium
+    page.margins: 0
     acceptButton.text: i18n("Save")
     rejectButton.text: i18n("Cancel")
 
-    ColumnLayout
+    headBar.visible: true
+    headBar.middleContent: Maui.TextField
     {
+        id: newPlaylistField
+
+        Layout.fillWidth: true
+        color: Kirigami.Theme.textColor
+        placeholderText: i18n("New playlist")
+        onAccepted:
+        {
+            const playlist = text
+            control.addPlaylist(playlist)
+            control.insert(playlist, control.tracks)
+        }
+
+        actions.data: ToolButton
+        {
+            icon.name: "checkbox"
+            enabled: newPlaylistField.text.length
+            icon.color: Kirigami.Theme.textColor
+            onClicked: control.addPlaylist(newPlaylistField.text)
+        }
+    }
+
+    BabeList
+    {
+        id: dialogList
+
         Layout.fillHeight: true
         Layout.fillWidth: true
 
-        BabeList
+        headBar.visible: false
+        holder.title: i18n("There's not playlists")
+        holder.body: i18n("Create a new one and start adding tracks to it")
+
+        model: Maui.BaseModel
         {
-            id: dialogList
-
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-
-            headBar.visible: false
-            holder.title: i18n("There's not playlists")
-            holder.body: i18n("Create a new one and start adding tracks to it")
-
-            model: Maui.BaseModel
-            {
-                list: playlistsList
-            }
-
-            delegate: Maui.ListDelegate
-            {
-                id: delegate
-                label: model.playlist
-
-                Connections
-                {
-                    target: delegate
-                    onClicked: dialogList.currentIndex = index
-                    onPressAndHold:
-                    {
-                        dialogList.currentIndex = index
-                        insert()
-                    }
-                }
-            }
+            id: _playlistsModel
+            list: playlistsList
         }
 
-        Maui.TextField
+        delegate: Maui.ListDelegate
         {
-            Layout.fillWidth: true
-            id: newPlaylistField
-            color: Kirigami.Theme.textColor
-            placeholderText: i18n("New playlist")
-            onAccepted:
-            {
-                addPlaylist()
-                playlistsList.addTrack(dialogList.listView.currentIndex, tracks)
-                clear()
-            }
-
-            actions.data: ToolButton
-            {
-                icon.name: "checkbox"
-                icon.color: Kirigami.Theme.textColor
-                onClicked: addPlaylist()
-            }
+            id: delegate
+            label: model.playlist
+            iconName: model.icon
+            iconSize: Maui.Style.iconSizes.small
+            enabled: model.type === "personal"
+            onClicked: enabled ? dialogList.currentIndex = index : -1
         }
     }
 
+    onRejected: control.close()
     onAccepted:
     {
         if(newPlaylistField.text.length)
-            addPlaylist()
-
-        insert()
+            control.addPlaylist(newPlaylistField.text)
+        control.insert(_playlistsModel.get(dialogList.currentIndex).playlist, control.tracks)
     }
 
-    function insert()
+    function insert(playlist, urls)
     {
-        playlistsList.addTrack(dialogList.listView.currentIndex, tracks)
-        close()
+        playlistsList.addTrack(playlist, urls)
+        control.close()
     }
 
-    function addPlaylist()
+    function addPlaylist(playlist)
     {
-        if (newPlaylistField.text)
+        var title = newPlaylistField.text.trim()
+        if(playlistsList.insert(title))
         {
-            var title = newPlaylistField.text.trim()
-            if(playlistsList.insert(title))
-            {
-                dialogList.currentIndex = 2
-                dialogList.listView.positionViewAtEnd()
-            }
-
-            newPlaylistField.clear()
+            dialogList.currentIndex = dialogList.count -1
+            dialogList.listView.positionViewAtEnd()
         }
+
+        newPlaylistField.clear()
     }
 }

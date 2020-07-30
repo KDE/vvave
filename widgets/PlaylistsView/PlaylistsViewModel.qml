@@ -13,16 +13,24 @@ import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
 
-BabeList
+Maui.GridView
 {
     id: control
-    holder.emoji: "qrc:/assets/dialog-information.svg"
-    holder.title : i18n("No Playlists!")
-    holder.body: i18n("Start creating new custom playlists")
 
-    Connections
+    itemSize: Math.min(200, control.width)
+    itemHeight: 90
+    margins: Kirigami.Settings.isMobile ? 0 : Maui.Style.space.big
+
+    Maui.Holder
     {
-        target: holder
+        id: holder
+        emoji:  "qrc:/assets/dialog-information.svg"
+        title : i18n("No Playlists!")
+        body: i18n("Start creating new custom playlists")
+
+        emojiSize: Maui.Style.iconSizes.huge
+        visible: control.count === 0
+
         onActionTriggered: newPlaylistDialog.open()
     }
 
@@ -51,204 +59,103 @@ BabeList
         }
     }
 
-
-    Maui.BaseModel
+    model: Maui.BaseModel
     {
         id: _playlistsModel
         list: playlistsList
+        recursiveFilteringEnabled: true
+        sortCaseSensitivity: Qt.CaseInsensitive
+        filterCaseSensitivity: Qt.CaseInsensitive
     }
 
-    model: _playlistsModel
-
-    section.criteria: ViewSection.FullString
-    section.property: "type"
-    section.delegate: Maui.LabelDelegate
+    function randomHexColor()
     {
-        label: "Personal"
-        isSection: true
-        width: control.width
+        var color = '#', i = 5;
+        do{ color += "0123456789abcdef".substr(Math.random() * 16,1); }while(i--);
+        return color;
     }
 
-    delegate : Maui.ListDelegate
+    delegate : Maui.ItemDelegate
     {
         id: delegate
-        width: control.width
-        label: model.playlist
+        readonly property color m_color: model.color
 
-        Connections
-        {
-            target : delegate
-
-            onClicked :
-            {
-                control.currentIndex = index
-                if(Maui.Handy.singleClick)
-                {
-                    currentPlaylist = playlistsList.get(index).playlist
-                    filterList.group = false
-                    populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
-                }
-            }
-
-            onDoubleClicked :
-            {
-                control.currentIndex = index
-                if(!Maui.Handy.singleClick)
-                {
-                    currentPlaylist = playlistsList.get(index).playlist
-                    filterList.group = false
-                    populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
-                }
-            }
-
-            onRightClicked:
-            {
-                control.currentIndex = index
-                currentPlaylist = playlistsList.get(index).playlist
-                _playlistMenu.popup()
-            }
-
-            onPressAndHold:
-            {
-                control.currentIndex = index
-                currentPlaylist = playlistsList.get(index).playlist
-                _playlistMenu.popup()
-            }
-        }
-    }
-
-    listView.header: Rectangle
-    {
-        z: control.z + 999
-        width: control.width
-        height: 100 + Maui.Style.rowHeight
         Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        color: Kirigami.Theme.backgroundColor
+        Kirigami.Theme.backgroundColor: Qt.rgba(m_color.r, m_color.g, m_color.b, 0.9)
+        Kirigami.Theme.textColor: "white"
 
-        ColumnLayout
+        height: control.cellHeight - Maui.Style.space.medium
+        width: control.cellWidth - Maui.Style.space.medium
+        isCurrentItem: GridView.isCurrentItem
+
+        Rectangle
         {
-           anchors.fill: parent
+            anchors.fill: parent
+            radius: 8
+            color: m_color
+        }
 
-            ListView
+        Maui.ListItemTemplate
+        {
+            anchors.fill: parent
+            anchors.margins: Maui.Style.space.medium
+            iconSizeHint: Maui.Style.iconSizes.big
+            label1.text: model.playlist
+            label1.font.pointSize: Maui.Style.fontSizes.big
+            label1.font.weight: Font.Bold
+            label1.font.bold: true
+            label2.text: model.description
+            iconSource: model.icon
+            iconVisible: true
+        }
+
+        onClicked :
+        {
+            control.currentIndex = index
+            if(Maui.Handy.singleClick)
             {
-                id: _defaultPlaylists
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.margins: Maui.Style.space.medium
-                spacing: Maui.Style.space.medium
-                orientation :ListView.Horizontal
-                model: playlistsList.defaultPlaylists()
-                delegate: ItemDelegate
-                {
-                    id: _delegate
-                    readonly property color m_color: modelData.color
-                    readonly property string playlist : modelData.playlist
-
-                    Kirigami.Theme.inherit: false
-                    Kirigami.Theme.backgroundColor: Qt.rgba(m_color.r, m_color.g, m_color.b, 0.9)
-                    Kirigami.Theme.textColor: "white"
-
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: 200
-                    height:  parent.height  * 0.9
-
-                    background: Rectangle
-                    {
-                        color : Kirigami.Theme.backgroundColor
-                        radius: Maui.Style.radiusV * 2
-                        border.color: m_color
-                    }
-
-                    Maui.ListItemTemplate
-                    {
-                        anchors.fill: parent
-                        iconSizeHint: Maui.Style.iconSizes.big
-                        label1.text: playlist
-                        label1.font.pointSize: Maui.Style.fontSizes.big
-                        label1.font.weight: Font.Bold
-                        label1.font.bold: true
-                        label2.text: modelData.description
-                        iconSource: modelData.icon
-                        iconVisible: true
-                    }
-
-                    Connections
-                    {
-                        target: _delegate
-
-                        onClicked:
-                        {
-                            _defaultPlaylists.currentIndex = index
-
-                            currentPlaylist = _delegate.playlist
-                            switch(currentPlaylist)
-                            {
-                            case "Most Played":
-
-                                populate(Q.GET.mostPlayedTracks, false);
-                                filterList.list.sortBy = Tracks.COUNT
-                                break;
-
-                            case "Rating":
-                                filterList.list.sortBy = Tracks.RATE
-                                filterList.group = true
-
-                                populate(Q.GET.favoriteTracks, false);
-                                break;
-
-                            case "Recent":
-                                populate(Q.GET.recentTracks, false);
-                                filterList.list.sortBy = Tracks.ADDDATE
-                                filterList.group = true
-                                break;
-
-                            case "Favs":
-                                populate(Q.GET.babedTracks, false);
-                                break;
-
-                            case "Online":
-                                populate(Q.GET.favoriteTracks, false);
-                                break;
-
-                            case "Tags":
-                                populateExtra(Q.GET.tags, "Tags")
-                                break;
-
-                            case "Relationships":
-                                populate(Q.GET.favoriteTracks, false);
-                                break;
-
-                            case "Popular":
-                                populate(Q.GET.favoriteTracks, false);
-                                break;
-
-                            case "Genres":
-                                populateExtra(Q.GET.genres, "Genres")
-                                break;
-
-                            default:
-                                break;
-
-                            }
-                        }
-
-                    }
-
-                }
-            }
-
-            Item
-            {
-                Layout.fillWidth: true
-                Layout.margins: Maui.Style.space.medium
-                Layout.preferredHeight:  Maui.Style.rowHeight
-                ColorTagsBar
-                {
-                    anchors.fill: parent
-                    onColorClicked: populate(Q.GET.colorTracks_.arg(color.toLowerCase()), true)
-                }
+                filterList.group = false
+                populate(playlistsList.get(index).playlist, true)
             }
         }
+
+        onDoubleClicked :
+        {
+            control.currentIndex = index
+            if(!Maui.Handy.singleClick)
+            {
+                filterList.group = false
+                populate(playlistsList.get(index).playlist, true)
+            }
+        }
+
+        onRightClicked:
+        {
+            control.currentIndex = index
+            currentPlaylist = playlistsList.get(index).playlist
+            _playlistMenu.popup()
+        }
+
+        onPressAndHold:
+        {
+            control.currentIndex = index
+            currentPlaylist = playlistsList.get(index).playlist
+            _playlistMenu.popup()
+        }
+
     }
+
+    //            Item
+    //            {
+    //                Layout.fillWidth: true
+    //                Layout.margins: Maui.Style.space.medium
+    //                Layout.preferredHeight:  Maui.Style.rowHeight
+    //                ColorTagsBar
+    //                {
+    //                    anchors.fill: parent
+    //                    onColorClicked: populate(Q.GET.colorTracks_.arg(color.toLowerCase()), true)
+    //                }
+    //            }
+    //        }
+    //    }
 }

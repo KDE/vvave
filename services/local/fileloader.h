@@ -35,8 +35,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "services/local/taginfo.h"
 #include "utils/bae.h"
 
-namespace FLoader
-{
 
 class FileLoader : public QObject
 {
@@ -56,14 +54,14 @@ public:
         t.wait();
     }
 
-    void requestPath(const QList<QUrl> &urls, const bool &recursive)
+    inline void requestPath(const QList<QUrl> &urls, const bool &recursive)
     {
         qDebug()<<"FROM file loader"<< urls;
         emit this->start(urls, recursive);
     }
 
 private slots:
-    void fetch(QList<QUrl> paths, bool recursive)
+    inline void fetch(QList<QUrl> paths, bool recursive)
     {
 
         qDebug()<<"GETTING TRACKS";
@@ -145,6 +143,6 @@ signals:
 private:
     QThread t;
 };
-}
+
 
 #endif // FILELOADER_H

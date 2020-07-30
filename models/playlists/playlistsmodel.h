@@ -13,48 +13,34 @@ class CollectionDB;
 class PlaylistsModel : public MauiList
 {
     Q_OBJECT
-    Q_PROPERTY(PlaylistsModel::SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
 
 public:
-    enum SORTBY : uint_fast8_t
-    {
-        ADDDATE = FMH::MODEL_KEY::ADDDATE,
-        TITLE = FMH::MODEL_KEY::TITLE,
-        TYPE = FMH::MODEL_KEY::TYPE
-    }; Q_ENUM(SORTBY)
-
     explicit PlaylistsModel(QObject *parent = nullptr);
 
     FMH::MODEL_LIST items() const override;
-
-    void setSortBy(const PlaylistsModel::SORTBY &sort);
-    PlaylistsModel::SORTBY getSortBy() const;
+    void componentComplete() override;
 
 private:
     CollectionDB *db;
     FMH::MODEL_LIST list;
-    void sortList();
     void setList();
 
-    FMH::MODEL packPlaylist(const QString &playlist);
-    PlaylistsModel::SORTBY sort = PlaylistsModel::SORTBY::ADDDATE;
+    FMH::MODEL_LIST defaultPlaylists();
+    FMH::MODEL_LIST tags();
+    static FMH::MODEL packPlaylist(const QString &playlist);
 
 signals:
     void sortByChanged();
 
 public slots:
-    QVariantList defaultPlaylists();
 
     QVariantMap get(const int &index) const;
-    void append(const QVariantMap &item);
-    void append(const QVariantMap &item, const int &at);
     void insert(const QString &playlist);
-    void insertAt(const QString &playlist, const int &at);
 
-    void addTrack(const int &index, const QStringList &urls);
     void addTrack(const QString &playlist, const QStringList &urls);
-    void removeTrack(const int &index, const QString &url);
+    void removeTrack(const QString &playlist, const QString &url);
     void removePlaylist(const int &index);
+
 };
 
 #endif // PLAYLISTSMODEL_H

@@ -512,33 +512,6 @@ bool CollectionDB::tagsAlbum(const FMH::MODEL &track, const QString &value, cons
 	return true;
 }
 
-bool CollectionDB::addPlaylist(const QString &title)
-{
-	if(!title.isEmpty())
-	{
-		QVariantMap playlist {{FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST], title},
-							  {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime()}};
-
-		if(insert(TABLEMAP[TABLE::PLAYLISTS],playlist))
-			return true;
-	}
-
-	return false;
-}
-
-bool CollectionDB::trackPlaylist(const QString &url, const QString &playlist)
-{
-	QVariantMap map {{FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist},
-					 {FMH::MODEL_NAME[FMH::MODEL_KEY::URL],url},
-					 {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],QDate::currentDate()}};
-
-	if(insert(TABLEMAP[TABLE::TRACKS_PLAYLISTS],map))
-		return true;
-
-	return false;
-}
-
-
 bool CollectionDB::addFolder(const QString &url)
 {
 	QVariantMap map {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL],url},
@@ -726,16 +699,6 @@ FMH::MODEL_LIST CollectionDB::getPlaylistTracks(const QString &playlist, const F
 	return this->getDBData(queryTxt);
 }
 
-FMH::MODEL_LIST CollectionDB::getFavTracks(const int &stars, const int &limit, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
-{
-	const auto queryTxt= QString("SELECT * FROM %1 WHERE %2 >= %3 ORDER BY %4 %5 LIMIT %6" ).arg(TABLEMAP[TABLE::TRACKS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::RATE],
-			QString::number(stars),
-			FMH::MODEL_NAME[orderBy],SLANG[order],QString::number(limit));
-
-	return this->getDBData(queryTxt);
-}
-
 FMH::MODEL_LIST CollectionDB::getRecentTracks(const int &limit, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
 {
 	const auto queryTxt= QString("SELECT * FROM %1 ORDER BY strftime(\"%s\",%2) %3 LIMIT %4" ).arg(TABLEMAP[TABLE::TRACKS],
@@ -849,31 +812,6 @@ int CollectionDB::getTrackStars(const QString &path)
 //    return tags;
 //}
 
-QStringList CollectionDB::getPlaylistsList()
-{
-	QStringList playlists;
-	auto queryTxt = QString("SELECT %1, %2 FROM %3 ORDER BY %2 DESC").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],
-			TABLEMAP[TABLE::PLAYLISTS]);
-
-	for(auto data : this->getDBData(queryTxt))
-		playlists << data[FMH::MODEL_KEY::PLAYLIST];
-
-	return playlists;
-}
-
-FMH::MODEL_LIST CollectionDB::getPlaylists()
-{
-	auto queryTxt = QString("SELECT %1, %2 FROM %3 ORDER BY %2 DESC").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],
-			TABLEMAP[TABLE::PLAYLISTS]);
-
-	return this->getDBData(queryTxt, [](FMH::MODEL &item)
-	{
-		item[FMH::MODEL_KEY::TYPE] = "public";
-		return true;
-	});
-}
 
 bool CollectionDB::removeTrack(const QString &path)
 {
@@ -976,35 +914,6 @@ void CollectionDB::insertArtwork(const FMH::MODEL &track)
 	emit artworkInserted(track);
 }
 
-
-bool CollectionDB::removePlaylistTrack(const QString &url, const QString &playlist)
-{
-	auto queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\" AND %4 = \"%5\"").arg(TABLEMAP[TABLE::TRACKS_PLAYLISTS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
-			playlist,
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-			url);
-
-	auto query = this->getQuery(queryTxt);
-	return query.exec();
-}
-
-bool CollectionDB::removePlaylist(const QString &playlist)
-{
-	QString queryTxt;
-	queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS_PLAYLISTS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist);
-
-	auto query = this->getQuery(queryTxt);
-	if(!query.exec()) return false;
-
-	queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::PLAYLISTS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist);
-
-	query.prepare(queryTxt);
-	return query.exec();
-}
-
 void CollectionDB::removeMissingTracks()
 {
 	auto tracks = this->getDBData("select url from tracks");
@@ -1054,16 +963,6 @@ bool CollectionDB::removeFolder(const QString &url)
 
 	auto query = this->getQuery(queryTxt);
 	return query.exec();
-}
-
-bool CollectionDB::favTrack(const QString &path, const bool &value)
-{
-	if(this->update(TABLEMAP[TABLE::TRACKS],
-					FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
-					value ? 1 : 0,
-					FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-					path)) return true;
-	return false;
 }
 
 bool CollectionDB::removeAlbum(const QString &album, const QString &artist)

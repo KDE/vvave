@@ -8,9 +8,6 @@
 #include "kde/notify.h"
 #endif
 
-#include <QtConcurrent>
-#include <QFuture>
-
 #ifdef STATIC_MAUIKIT
 #include "fm.h"
 #else
@@ -83,21 +80,21 @@ QStringList vvave::moodColors()
 
 void vvave::scanDir(const QStringList &paths)
 {
-//    QFutureWatcher<uint> *watcher = new QFutureWatcher<uint>;
-//    connect(watcher, &QFutureWatcher<uint>::finished, [&, watcher]()
-//    {
-//        qDebug()<< "FINISHED SCANING CXOLLECTION";
-//        emit this->refreshTables( watcher->future().result());
-//        watcher->deleteLater();
-//    });
+    auto fileLoader = new FileLoader();
 
-//    const auto func = [=]() -> uint
-//    {
-//        return FLoader::getTracks(QUrl::fromStringList(paths));
-//    };
+    connect(fileLoader, &FileLoader::itemReady, [this](FMH::MODEL item)
+    {
+        qDebug() << item;
+        db->addTrack(item);
+    });
 
-//    QFuture<uint> t1 = QtConcurrent::run(func);
-//    watcher->setFuture(t1);
+    connect(fileLoader, &FileLoader::finished, [this, _fileLoader = fileLoader] (FMH::MODEL_LIST res)
+    {
+//        emit this->refreshTables(res.count());
+//       _fileLoader->deleteLater();
+    });
+
+    fileLoader->requestPath(QUrl::fromStringList(paths), true);
 }
 
  QStringList vvave::getSourceFolders()
