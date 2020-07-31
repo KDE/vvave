@@ -54,6 +54,11 @@ TracksModel::SORTBY TracksModel::getSortBy() const
     return this->sort;
 }
 
+int TracksModel::limit() const
+{
+    return m_limit;
+}
+
 void TracksModel::sortList()
 {
     if(this->sort == TracksModel::SORTBY::NONE)
@@ -124,13 +129,12 @@ void TracksModel::setList()
 
     if(this->query.startsWith("#"))
     {
-        const auto urls =  FMStatic::getTagUrls(query.replace("#", ""), {}, true, 99999, "audio");
+        const auto urls =  FMStatic::getTagUrls(query.replace("#", ""), {}, true, m_limit, "audio");
         this->list.clear();
         for(const auto &url : urls)
         {
             this->list << this->db->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album "
-                                                      "and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""),
-                                              [](FMH::MODEL &item) {item[FMH::MODEL_KEY::FAV]  = "1"; return true;});
+                                                      "and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
     }
 
 }else
@@ -371,4 +375,13 @@ bool TracksModel::update(const QVariantMap &data, const int &index)
     this->list[index_] = newData;
     emit this->updateModel(index_, roles);
     return true;
+}
+
+void TracksModel::setLimit(int limit)
+{
+    if (m_limit == limit)
+        return;
+
+    m_limit = limit;
+    emit limitChanged(m_limit);
 }

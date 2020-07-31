@@ -16,6 +16,7 @@ BabeTable
     holder.body: i18n("Add new music sources")
     holder.emojiSize: Maui.Style.iconSizes.huge
     list.query: Q.GET.allTracks
+    list.limit: 4
 }
 
 

@@ -1,8 +1,9 @@
+import TracksList 1.0
+
 import QtQuick 2.10
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
-import AlbumsList 1.0
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
@@ -11,37 +12,81 @@ Maui.ItemDelegate
     id: control
 
     property int albumSize : Maui.Style.iconSizes.huge
-    property int albumRadius : 0
+    property int albumRadius : Maui.Style.radiusV
     property bool showLabels : true
 
     property alias label1 : _labelsLayout.label1
     property alias label2 : _labelsLayout.label2
     property alias template: _labelsLayout
 
-    property alias image : _image
+    property string tag
+
+    function randomHexColor()
+    {
+        var color = '#', i = 5;
+        do{ color += "0123456789abcdef".substr(Math.random() * 16,1); }while(i--);
+        return color;
+    }
 
     Item
     {
         id: _cover
         anchors.fill: parent
 
-        Image
+        Item
         {
             id: _image
             width: parent.width
             height: width
-            sourceSize.width: width
-            sourceSize.height: height
 
-            fillMode: Image.PreserveAspectFit
-            smooth: true
-            asynchronous: true
-
-            onStatusChanged:
+            Rectangle
             {
-                if (status == Image.Error)
-                    source = "qrc:/assets/cover.png"
+                anchors.fill: parent
+                radius: albumRadius
+                color: randomHexColor()
+                visible: _repeater.count === 0
             }
+
+            GridLayout
+            {
+                anchors.fill: parent
+                columns: 2
+                rows: 2
+                columnSpacing: 0
+                rowSpacing: 0
+
+                Repeater
+                {
+                    id: _repeater
+                    model: Maui.BaseModel
+                    {
+                        list: Tracks
+                        {
+                            id: _collageList
+                            query: "#"+control.tag
+                            limit: 4
+                        }
+                    }
+
+                    delegate: Rectangle
+                    {
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        color: Qt.rgba(0,0,0,0.3)
+                        Image
+                        {
+                            anchors.fill: parent
+                            sourceSize.width: 80
+                            sourceSize.height: 80
+                            asynchronous: true
+                            smooth: false
+                            source: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+                            fillMode: Image.PreserveAspectCrop
+                        }
+                    }
+                }
+            }
+
 
             layer.enabled: albumRadius
             layer.effect: OpacityMask
@@ -54,8 +99,8 @@ Maui.ItemDelegate
                     Rectangle
                     {
                         anchors.centerIn: parent
-                        width: _image.adapt ? _image.width : Math.min(_image.width, _image.height)
-                        height: _image.adapt ? _image.height : width
+                        width: _image.width
+                        height: _image.height
                         radius: albumRadius
                     }
                 }
@@ -122,7 +167,6 @@ Maui.ItemDelegate
                 }
             }
 
-
             Maui.ListItemTemplate
             {
                 id: _labelsLayout
@@ -165,3 +209,4 @@ Maui.ItemDelegate
         source: _cover
     }
 }
+

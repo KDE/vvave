@@ -15,7 +15,8 @@ class CollectionDB;
 class TracksModel : public MauiList
 {
     Q_OBJECT
-    Q_PROPERTY(QString query READ getQuery WRITE setQuery NOTIFY queryChanged())
+    Q_PROPERTY(QString query READ getQuery WRITE setQuery NOTIFY queryChanged)
+    Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
     Q_PROPERTY(TracksModel::SORTBY sortBy READ getSortBy WRITE setSortBy NOTIFY sortByChanged)
 
 public:
@@ -48,6 +49,8 @@ public:
     void setSortBy(const TracksModel::SORTBY &sort);
     TracksModel::SORTBY getSortBy() const;
 
+    int limit() const;
+
 private:
     CollectionDB *db;
     FMH::MODEL_LIST list;
@@ -57,9 +60,13 @@ private:
     QString query;
     TracksModel::SORTBY sort = TracksModel::SORTBY::ADDDATE;
 
+    int m_limit = 99999;
+
 signals:
     void queryChanged();
     void sortByChanged();
+
+    void limitChanged(int limit);
 
 public slots:
     QVariantMap get(const int &index) const;
@@ -76,6 +83,7 @@ public slots:
     bool remove(const int &index);
     void refresh();
     bool update(const QVariantMap &data, const int &index);
+    void setLimit(int limit);
 };
 
 #endif // TRACKSMODEL_H

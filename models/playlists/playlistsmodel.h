@@ -16,7 +16,6 @@ class PlaylistsModel : public MauiList
 
 public:
     explicit PlaylistsModel(QObject *parent = nullptr);
-
     FMH::MODEL_LIST items() const override;
     void componentComplete() override;
 
@@ -33,7 +32,6 @@ signals:
     void sortByChanged();
 
 public slots:
-
     QVariantMap get(const int &index) const;
     void insert(const QString &playlist);
 

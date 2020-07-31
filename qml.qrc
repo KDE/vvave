@@ -47,6 +47,7 @@
         <file>services/web/WebViewLinux.qml</file>
         <file>services/web/WebViewOther.qml</file>
         <file>services/web/WebView.qml</file>
+        <file>widgets/CollageDelegate.qml</file>
     </qresource>
     <qresource prefix="/DB">
         <file>db/script.sql</file>

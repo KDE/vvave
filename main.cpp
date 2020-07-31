@@ -112,11 +112,11 @@ int main(int argc, char *argv[])
     {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
-        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
-        {
-            const auto currentSources = vvave::getSourceFolders();
-            babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
-        }
+//        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
+//        {
+//            const auto currentSources = vvave::getSourceFolders();
+//            babe->scanDir(currentSources.isEmpty() ? BAE::defaultSources : currentSources);
+//        }
 
         if(!args.isEmpty())
             babe->openUrls(args);
