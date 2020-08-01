@@ -87,7 +87,6 @@
   <url type="homepage">https://vvave.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=vvave</url>
   <url type="donation">https://www.kde.org/community/donations</url>
-  <url type="help">https://docs.kde.org/trunk5/en/extragear-multimedia/vvave/</url>
   <screenshots>
     <screenshot type="default">
       <caption>The Vvave music player</caption>
