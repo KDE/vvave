@@ -45,7 +45,7 @@ public:
       ,m_thread ( new QThread )
     {
         this->moveToThread(m_thread);
-        connect(thread, &QThread::finished, thread, &QObject::deleteLater);
+        connect(m_thread, &QThread::finished, m_thread, &QObject::deleteLater);
         connect(this, &FileLoader::start, this, &FileLoader::fetch);
         m_thread->start();
     }
