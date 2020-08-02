@@ -196,7 +196,9 @@ BabeList
         message: i18n("You can delete the file from your computer or remove it from your collection")
         rejectButton.text: i18n("Delete")
         acceptButton.text: i18n("Remove")
-        page.margins: Maui.Style.space.huge
+        template.iconSource: "emblem-warning"
+
+        page.margins: Maui.Style.space.big
 
         onAccepted:
         {
