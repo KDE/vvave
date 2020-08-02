@@ -4,8 +4,8 @@ import QtQuick.Controls 2.10
 import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.6 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-import PlaylistsList 1.0
-import TracksList 1.0
+
+import org.maui.vvave 1.0
 
 import "../../utils"
 

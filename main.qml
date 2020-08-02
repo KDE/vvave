@@ -4,14 +4,8 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
-import org.kde.mauikit 1.1 as MauiLab
-import org.maui.vvave 1.0 as Vvave
-
-import Player 1.0
-import AlbumsList 1.0
-import TracksList 1.0
-import PlaylistsList 1.0
+import org.kde.mauikit 1.2 as Maui
+import org.maui.vvave 1.0
 
 import "utils"
 
@@ -162,7 +156,7 @@ Maui.ApplicationWindow
     Component
     {
         id: _shareDialogComponent
-        MauiLab.ShareDialog {}
+        Maui.ShareDialog {}
     }
 
     Component
@@ -210,7 +204,7 @@ Maui.ApplicationWindow
                 root.dialog.settings.filterType = Maui.FMList.AUDIO
                 root.dialog.show(function(paths)
                 {
-                    Vvave.Vvave.openUrls(paths)
+                    Vvave.openUrls(paths)
                     root.dialog.close()
                 })
             }
@@ -540,15 +534,15 @@ Maui.ApplicationWindow
         visible: !focusView
         flickable: swipeView.currentItem.item.flickable
 
-        MauiLab.AppViews
+        Maui.AppViews
         {
             id: swipeView
             anchors.fill: parent
 
-            MauiLab.AppViewLoader
+            Maui.AppViewLoader
             {
-                MauiLab.AppView.title: i18n("Tracks")
-                MauiLab.AppView.iconName: "view-media-track"
+                Maui.AppView.title: i18n("Tracks")
+                Maui.AppView.iconName: "view-media-track"
 
                 TracksView
                 {
@@ -561,16 +555,16 @@ Maui.ApplicationWindow
                     onQueueTrack: Player.queueTracks([tracksView.listModel.get(index)], index)
                     Connections
                     {
-                        target: Vvave.Vvave
-//                        onRefreshTables: tracksView.list.refresh()
+                        target: Vvave
+                        onRefreshTables: tracksView.list.refresh()
                     }
                 }
             }
 
-            MauiLab.AppViewLoader
+            Maui.AppViewLoader
             {
-                MauiLab.AppView.title: i18n("Albums")
-                MauiLab.AppView.iconName: "view-media-album-cover"
+                Maui.AppView.title: i18n("Albums")
+                Maui.AppView.iconName: "view-media-album-cover"
 
                 AlbumsView
                 {
@@ -605,16 +599,16 @@ Maui.ApplicationWindow
 
                     Connections
                     {
-                        target: Vvave.Vvave
+                        target: Vvave
                         onRefreshTables: albumsView.list.refresh()
                     }
                 }
             }
 
-            MauiLab.AppViewLoader
+            Maui.AppViewLoader
             {
-                MauiLab.AppView.title: i18n("Artists")
-                MauiLab.AppView.iconName: "view-media-artist"
+                Maui.AppView.title: i18n("Artists")
+                Maui.AppView.iconName: "view-media-artist"
 
                 AlbumsView
                 {
@@ -647,16 +641,16 @@ Maui.ApplicationWindow
 
                     Connections
                     {
-                        target: Vvave.Vvave
+                        target: Vvave
                         onRefreshTables: artistsView.list.refresh()
                     }
                 }
             }
 
-            MauiLab.AppViewLoader
+            Maui.AppViewLoader
             {
-                MauiLab.AppView.title: i18n("Playlists")
-                MauiLab.AppView.iconName: "view-media-playlist"
+                Maui.AppView.title: i18n("Playlists")
+                Maui.AppView.iconName: "view-media-playlist"
 
                 PlaylistsView
                 {
@@ -678,20 +672,20 @@ Maui.ApplicationWindow
                 }
             }
 
-            MauiLab.AppViewLoader
+            Maui.AppViewLoader
             {
-                MauiLab.AppView.title: i18n("Cloud")
-                MauiLab.AppView.iconName: "folder-cloud"
+                Maui.AppView.title: i18n("Cloud")
+                Maui.AppView.iconName: "folder-cloud"
                 CloudView
                 {
                     id: cloudView
                 }
             }
 
-            MauiLab.AppViewLoader
+            Maui.AppViewLoader
             {
-                MauiLab.AppView.title: i18n("Folders")
-                MauiLab.AppView.iconName: "folder"
+                Maui.AppView.title: i18n("Folders")
+                Maui.AppView.iconName: "folder"
 
                 FoldersView
                 {
@@ -699,7 +693,7 @@ Maui.ApplicationWindow
 
                     Connections
                     {
-                        target: Vvave.Vvave
+                        target: Vvave
                         onRefreshTables: foldersView.populate()
                     }
 
@@ -719,10 +713,10 @@ Maui.ApplicationWindow
                 }
             }
 
-            MauiLab.AppViewLoader
+            Maui.AppViewLoader
             {
-                MauiLab.AppView.title: i18n("YouTube")
-                MauiLab.AppView.iconName: "internet-services"
+                Maui.AppView.title: i18n("YouTube")
+                Maui.AppView.iconName: "internet-services"
 
                 YouTube
                 {
@@ -750,7 +744,7 @@ Maui.ApplicationWindow
     /*CONNECTIONS*/
     Connections
     {
-        target: Vvave.Vvave
+        target: Vvave
 
         onRefreshTables:
         {

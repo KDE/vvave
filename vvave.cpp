@@ -29,53 +29,49 @@ vvave::vvave(QObject *parent) : QObject(parent),
         if (!dirPath.exists())
             dirPath.mkpath(".");
     }
-
-//#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-//    if(!FMH::fileExists(BAE::NotifyDir+"/vvave.notifyrc"))
-//        QFile::copy(":/assets/vvave.notifyrc", BAE::NotifyDir+"/vvave.notifyrc");
-
-//#endif
 }
 
 //// PUBLIC SLOTS
-QVariantList vvave::sourceFolders()
+QList<QUrl> vvave::folders()
 {
     const auto sources = CollectionDB::getInstance()->getDBData("select * from sources");
-    QVariantList res;
-    for(const auto &item : sources)
-        res << FMH::getDirInfo(item[FMH::MODEL_KEY::URL]);
-    return res;
+    return QUrl::fromStringList(FMH::modelToList(sources, FMH::MODEL_KEY::URL));
 }
 
 void vvave::addSources(const QStringList &paths)
 {
-    QStringList urls = sources() << paths;
+    QStringList urls = sources();
+    QStringList newUrls;
 
-    urls.removeDuplicates();
+    for(const auto &path : paths)
+    {
+        if(!urls.contains(path))
+        {
+            newUrls << path;
+        }
+    }
+
+    if(newUrls.isEmpty())
+        return;
+
+    urls << newUrls;
+    FMStatic::saveSettings("SETTINGS", QVariant::fromValue(urls), "SOURCES");
+
     scanDir(urls);
-
     emit sourcesChanged();
 }
 
 bool vvave::removeSource(const QString &source)
 {
-    if(!this->getSourceFolders().contains(source))
+    auto urls = this->sources();
+    if(!urls.contains(source))
         return false;
-    return this->db->removeSource(source);
 
+    urls.removeOne(source);
+    FMStatic::saveSettings("SETTINGS", QVariant::fromValue(urls), "SOURCES");
     emit sourcesChanged();
-}
 
-QString vvave::moodColor(const int &index)
-{
-    if(index < BAE::MoodColors.size() && index > -1)
-        return BAE::MoodColors.at(index);
-    else return "";
-}
-
-QStringList vvave::moodColors()
-{
-    return BAE::MoodColors;
+    return this->db->removeSource(source);
 }
 
 void vvave::scanDir(const QStringList &paths)
@@ -88,18 +84,32 @@ void vvave::scanDir(const QStringList &paths)
         db->addTrack(item);
     });
 
-    connect(fileLoader, &FileLoader::finished, [this, _fileLoader = fileLoader] (FMH::MODEL_LIST res)
+    connect(fileLoader, &FileLoader::itemsReady, [this](FMH::MODEL_LIST items)
     {
-//        emit this->refreshTables(res.count());
-//       _fileLoader->deleteLater();
+        emit this->refreshTables(items.size());
+    });
+
+    connect(fileLoader, &FileLoader::finished, [=, _fileLoader = fileLoader] (uint)
+    {
+qDebug()<< "FILE LOADER" << fileLoader << _fileLoader << (fileLoader== nullptr ? "meh" : "yes");
+delete fileLoader;
     });
 
     fileLoader->requestPath(QUrl::fromStringList(paths), true);
 }
 
- QStringList vvave::getSourceFolders()
+QStringList vvave::sources()
 {
-    return CollectionDB::getInstance()-> getSourcesFolders();
+    return FMStatic::loadSettings("SETTINGS", "SOURCES", QVariant::fromValue(BAE::defaultSources)).toStringList();
+}
+
+QVariantList vvave::sourcesModel()
+{
+    QVariantList res;
+    for(const auto url : sources())
+        res << FMH::getDirInfo(url);
+
+    return res;
 }
 
 void vvave::openUrls(const QStringList &urls)

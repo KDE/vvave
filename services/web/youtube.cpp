@@ -30,14 +30,16 @@
 #include "../../pulpo/pulpo.h"
 #include "../../utils/bae.h"
 
+
+#ifdef STATIC_MAUIKIT
+#include "fmstatic.h"
+#else
+#include <MauiKit/fmstatic.h>
+#endif
+
 using namespace BAE;
 
-YouTube::YouTube(QObject *parent) : QObject(parent)
-{
-
-}
-
-YouTube::~YouTube(){}
+YouTube::YouTube(QObject *parent) : QObject(parent) {}
 
 bool YouTube::getQuery(const QString &query, const int &limit)
 {
@@ -48,7 +50,7 @@ bool YouTube::getQuery(const QString &query, const int &limit)
 
     url.append("q="+encodedQuery.toString());
     url.append(QString("&maxResults=%1&part=snippet").arg(QString::number(limit)));
-    url.append("&key="+ BAE::loadSettings("YOUTUBEKEY", "BABE", this->KEY).toString());
+    url.append("&key="+ FMStatic::loadSettings("YOUTUBEKEY", "BABE", this->KEY).toString());
 
     qDebug()<< url;
     auto array = this->startConnection(url);
@@ -99,7 +101,6 @@ bool YouTube::packQueryResults(const QByteArray &array)
                 artist = data[0].trimmed();
                 title = data[1].trimmed();
             }
-
         }
 
         if(!id.isEmpty())
@@ -114,7 +115,6 @@ bool YouTube::packQueryResults(const QByteArray &array)
                 {BAE::KEYMAP[BAE::KEY::ARTIST], artist},
                 {BAE::KEYMAP[BAE::KEY::ARTWORK], artwork},
                 {BAE::KEYMAP[BAE::KEY::COMMENT], comment},
-                {BAE::KEYMAP[BAE::KEY::BABE], "0"},
                 {BAE::KEYMAP[BAE::KEY::STARS], "0"},
                 {BAE::KEYMAP[BAE::KEY::ART], ""},
                 {BAE::KEYMAP[BAE::KEY::TRACK], "0"}

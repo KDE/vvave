@@ -9,7 +9,8 @@ class CollectionDB;
 class vvave : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QStringList sources READ sources NOTIFY sourcesChanged FINAL)
+    Q_PROPERTY(QVariantList sources READ sourcesModel NOTIFY sourcesChanged FINAL)
+    Q_PROPERTY(QList<QUrl> folders READ folders NOTIFY sourcesChanged FINAL)
 
 private:
     CollectionDB *db;
@@ -17,6 +18,18 @@ private:
 
 public:
     explicit vvave(QObject *parent = nullptr);
+    QList<QUrl> folders();
+
+public slots:
+    void openUrls(const QStringList &urls);
+
+    void addSources(const QStringList &paths);
+    bool removeSource(const QString &source);
+
+    void scanDir(const QStringList &paths = BAE::defaultSources);
+
+    static QStringList sources();
+    static QVariantList sourcesModel();
 
 signals:
     void refreshTables(uint size);
@@ -25,27 +38,6 @@ signals:
     void refreshArtists();
     void openFiles(QVariantList tracks);
     void sourcesChanged();
-
-public slots:
-    ///DB Interfaces
-    /// useful functions for non modeled views and actions with not direct access to a tracksmodel or its own model
-    static QVariantList sourceFolders();
-
-    QStringList sources() const
-    {
-        return getSourceFolders();
-    }
-
-    void addSources(const QStringList &paths);
-
-    bool removeSource(const QString &source);
-    static QString moodColor(const int &index);
-    static QStringList moodColors();
-    void scanDir(const QStringList &paths = BAE::defaultSources);
-
-    static QStringList getSourceFolders();
-    void openUrls(const QStringList &urls);
-
 };
 
 #endif // VVAVE_H

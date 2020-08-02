@@ -1,11 +1,13 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.10
+import QtQuick 2.14
+import QtQuick.Controls 2.14
+
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
 import "../view_models/BabeTable"
 import "../db/Queries.js" as Q
-import org.maui.vvave 1.0 as Vvave
+
+import org.maui.vvave 1.0
 
 StackView
 {
@@ -22,7 +24,14 @@ StackView
     {
         id: browser
         checkable: false
-        model: ListModel {}
+        model: Maui.BaseModel
+        {
+            list: Folders
+            {
+                folders: Vvave.folders
+            }
+        }
+
         cellHeight: itemSize * 1.2
         onItemClicked:
         {
@@ -79,21 +88,9 @@ StackView
         }
     }
 
-    Component.onCompleted: populate()
-
-    function populate()
-    {
-        browser.model.clear()
-        var folders = Vvave.Vvave.sourceFolders();
-        if(folders.length > 0)
-            for(var i in folders)
-                browser.model.append(folders[i])
-    }
-
     function filter()
     {
         var where = "source = \""+currentFolder+"\""
         _filterList.list.query = (Q.GET.tracksWhere_.arg(where))
-
     }
 }

@@ -42,16 +42,19 @@ class FileLoader : public QObject
 
 public:
     FileLoader(QObject *parent = nullptr) : QObject(parent)
+      ,m_thread ( new QThread )
     {
-        this->moveToThread(&t);
+        this->moveToThread(m_thread);
+        connect(thread, &QThread::finished, thread, &QObject::deleteLater);
         connect(this, &FileLoader::start, this, &FileLoader::fetch);
-        this->t.start();
+        m_thread->start();
     }
 
     ~FileLoader()
     {
-        t.quit();
-        t.wait();
+        qDebug() << " DELETING THE FILE LOADER";
+        m_thread->quit();
+        m_thread->wait();
     }
 
     inline void requestPath(const QList<QUrl> &urls, const bool &recursive)
@@ -63,7 +66,6 @@ public:
 private slots:
     inline void fetch(QList<QUrl> paths, bool recursive)
     {
-
         qDebug()<<"GETTING TRACKS";
         const uint m_bsize = 5000;
         uint i = 0;
@@ -130,18 +132,18 @@ private slots:
             }
         }
         emit itemsReady(res_batch);
-        emit finished(res);
+        emit finished(res.count());
     }
 
 signals:
-    void finished(FMH::MODEL_LIST items);
+    void finished(uint size);
     void start(QList<QUrl> urls, bool recursive);
 
     void itemsReady(FMH::MODEL_LIST items);
     void itemReady(FMH::MODEL item);
 
 private:
-    QThread t;
+    QThread* m_thread;
 };
 
 

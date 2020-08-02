@@ -1,9 +1,12 @@
-import QtQuick.Controls 2.10
-import QtQuick 2.10
-import ".."
+import QtQuick.Controls 2.14
+import QtQuick 2.14
+
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-import AlbumsList 1.0
+
+import org.maui.vvave 1.0
+
+import ".."
 
 Maui.Page
 {

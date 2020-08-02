@@ -9,8 +9,6 @@
 #include <QTime>
 #include <QSettings>
 #include <QDirIterator>
-#include <QScreen>
-
 
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
@@ -80,18 +78,9 @@ enum class TABLE : uint8_t
 {
     ALBUMS,
     ARTISTS,
-    MOODS,
-    PLAYLISTS,
     SOURCES,
     SOURCES_TYPES,
     TRACKS,
-    TRACKS_MOODS,
-    TRACKS_PLAYLISTS,
-    TAGS,
-    ALBUMS_TAGS,
-    ARTISTS_TAGS,
-    TRACKS_TAGS,
-    LOGS,
     FOLDERS,
     ALL,
     NONE
@@ -101,18 +90,9 @@ static const QMap<TABLE,QString> TABLEMAP =
 {
     {TABLE::ALBUMS,"albums"},
     {TABLE::ARTISTS,"artists"},
-    {TABLE::MOODS,"moods"},
-    {TABLE::PLAYLISTS,"playlists"},
     {TABLE::SOURCES,"sources"},
     {TABLE::SOURCES_TYPES,"sources_types"},
     {TABLE::TRACKS,"tracks"},
-    {TABLE::TRACKS_MOODS,"tracks_moods"},
-    {TABLE::TRACKS_PLAYLISTS,"tracks_playlists"},
-    {TABLE::TAGS,"tags"},
-    {TABLE::ALBUMS_TAGS,"albums_tags"},
-    {TABLE::ARTISTS_TAGS,"artists_tags"},
-    {TABLE::TRACKS_TAGS,"tracks_tags"},
-    {TABLE::LOGS,"logs"},
     {TABLE::FOLDERS,"folders"}
 
 };
@@ -127,7 +107,6 @@ enum class KEY :uint8_t
     ALBUM = 5,
     DURATION = 6,
     PLAYED = 7,
-    BABE = 8,
     STARS = 9,
     RELEASE_DATE = 10,
     ADD_DATE = 11,
@@ -161,7 +140,6 @@ static const DB KEYMAP =
     {KEY::ALBUM, "album"},
     {KEY::DURATION, "duration"},
     {KEY::PLAYED, "played"},
-    {KEY::BABE, "babe"},
     {KEY::STARS, "stars"},
     {KEY::RELEASE_DATE, "releaseDate"},
     {KEY::ADD_DATE, "addDate"},
@@ -191,7 +169,6 @@ static const DB TracksColsMap =
     {KEY::ALBUM, KEYMAP[KEY::ALBUM]},
     {KEY::DURATION, KEYMAP[KEY::DURATION]},
     {KEY::PLAYED, KEYMAP[KEY::PLAYED]},
-    {KEY::BABE, KEYMAP[KEY::BABE]},
     {KEY::STARS, KEYMAP[KEY::STARS]},
     {KEY::RELEASE_DATE, KEYMAP[KEY::RELEASE_DATE]},
     {KEY::ADD_DATE, KEYMAP[KEY::ADD_DATE]},
@@ -233,7 +210,6 @@ const static inline QString getNameFromLocation(const QString &str)
     return ret;
 }
 
-const static QString SettingPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)+"/vvave/").toLocalFile();
 const QString CollectionDBPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/").toLocalFile();
 
 #ifdef Q_OS_ANDROID
@@ -243,11 +219,6 @@ const static QString CachePath =  QUrl::fromLocalFile(QStandardPaths::writableLo
 #endif
 
 const static QString YoutubeCachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/").toLocalFile();
-const static QString NotifyDir = SettingPath;
-
-const static QString MusicPath = FMH::MusicPath;
-const static QString HomePath = FMH::HomePath;
-const static QString DownloadsPath = FMH::DownloadsPath;
 
 const static QString BabePort = "8483";
 const static QString LinkPort = "3333";
@@ -255,16 +226,14 @@ const static QString LinkPort = "3333";
 const static QString appName = QStringLiteral("vvave");
 const static QString displayName = QStringLiteral("Vvave");
 const static QString version = VVAVE_VERSION_STRING;
-const static QString description = QStringLiteral("Music player");
+const static QString description = QStringLiteral("Vvave lets you organize, browse and listen to your local and online music collection");
 const static QString orgName = QStringLiteral("Maui");
 const static QString orgDomain = QStringLiteral("org.maui.vvave");
 
 const static QString DBName = "collection.db";
 
-const static QStringList MoodColors = {"#F0FF01","#01FF5B","#3DAEFD","#B401FF","#E91E63"};
-const static QStringList defaultSources = QStringList() << BAE::MusicPath
-                                                 << BAE::DownloadsPath
-                                                 << BAE::YoutubeCachePath;
+const static QStringList defaultSources = QStringList() << FMH::MusicPath
+                                                 << FMH::DownloadsPath;
 
 const static inline QString fixTitle(const QString &title,const QString &s,const QString &e)
 {
@@ -342,11 +311,6 @@ const static inline QString fixString (const QString &str)
     return ucfirst(title).simplified();
 }
 
- static inline bool fileExists(const QString &url)
-{
-    return FMH::fileExists(QUrl::fromLocalFile(url));
-}
-
  static inline BAE::TABLE albumType(const FMH::MODEL &albumMap)
 {
     if(albumMap[FMH::MODEL_KEY::ALBUM].isEmpty() && !albumMap[FMH::MODEL_KEY::ARTIST].isEmpty())
@@ -359,7 +323,7 @@ const static inline QString fixString (const QString &str)
 
 static inline void saveArt(FMH::MODEL &track, const QByteArray &array, const QString &path)
 {
-    if(!array.isNull()&&!array.isEmpty())
+    if(!array.isNull() && !array.isEmpty())
     {
         // qDebug()<<"tryna save array: "<< array;
 
@@ -368,31 +332,12 @@ static inline void saveArt(FMH::MODEL &track, const QByteArray &array, const QSt
         QString name = !track[FMH::MODEL_KEY::ALBUM].isEmpty() ? track[FMH::MODEL_KEY::ARTIST] + "_" + track[FMH::MODEL_KEY::ALBUM] : track[FMH::MODEL_KEY::ARTIST];
         name.replace("/", "-");
         name.replace("&", "-");
-        QString format = "PNG";
+        const QString format = "PNG";
         qDebug()<< "SAVER TO "<< path + name + ".png";
         if (img.save(path + name + ".png", format.toLatin1(), 100))
             track.insert(FMH::MODEL_KEY::ARTWORK,path + name + ".png");
         else  qDebug() << "couldn't save artwork";
     }else qDebug()<<"array is empty";
-}
-
-static inline void saveSettings(const QString &key, const QVariant &value, const QString &group)
-{
-    QSettings setting("vvave","vvave");
-    setting.beginGroup(group);
-    setting.setValue(key,value);
-    setting.endGroup();
-}
-
-static inline QVariant loadSettings(const QString &key, const QString &group, const QVariant &defaultValue)
-{
-    QVariant variant;
-    QSettings setting("vvave","vvave");
-    setting.beginGroup(group);
-    variant = setting.value(key, defaultValue);
-    setting.endGroup();
-
-    return variant;
 }
 
 static inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = FMH::MODEL_KEY::ID)

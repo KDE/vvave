@@ -17,7 +17,7 @@ class YouTube : public QObject
 
 public:
     explicit YouTube(QObject *parent = nullptr);
-    ~YouTube();
+
     Q_INVOKABLE bool getQuery(const QString &query, const int &limit = 5);
     bool packQueryResults(const QByteArray &array);
     void getId(const QString &results);

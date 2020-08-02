@@ -10,8 +10,7 @@ import "../utils/Help.js" as H
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-import TracksList 1.0
-import AlbumsList 1.0
+import org.maui.vvave 1.0
 
 StackView
 {

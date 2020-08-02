@@ -1,10 +1,12 @@
-import QtQuick 2.10
+import QtQuick 2.14
 import QtGraphicalEffects 1.0
-import QtQuick.Controls 2.10
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
-import AlbumsList 1.0
+
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.2 as Maui
+
+import org.maui.vvave 1.0
 
 Maui.ItemDelegate
 {

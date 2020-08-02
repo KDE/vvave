@@ -1,13 +1,15 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
+
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
+
+import org.maui.vvave 1.0
+
 import "../../view_models/BabeTable"
 import "../../view_models/BabeGrid"
 import "../../utils/Player.js" as Player
-
-import CloudList 1.0
 
 Maui.Page
 {

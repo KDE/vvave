@@ -20,13 +20,15 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.3
+
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
-import org.kde.mauikit 1.1 as MauiLab
-import org.maui.vvave 1.0 as Vvave
+import org.kde.mauikit 1.2 as Maui
+
+import org.maui.vvave 1.0
+
 import "../../utils/Help.js" as H
 
-MauiLab.SettingsDialog
+Maui.SettingsDialog
 {
     id: control
 
@@ -46,14 +48,13 @@ MauiLab.SettingsDialog
         onAccepted:
         {
             if(url.length>0)
-                if( Vvave.Vvave.removeSource(url))
-                    H.refreshCollection()
+                Vvave.removeSource(url)
             confirmationDialog.close()
         }
         onRejected: confirmationDialog.close()
     }
 
-    MauiLab.SettingsSection
+    Maui.SettingsSection
     {
         title: i18n("Behaviour")
         description: i18n("Configure the app plugins and behavior.")
@@ -85,7 +86,7 @@ MauiLab.SettingsDialog
         }
     }
 
-    MauiLab.SettingsSection
+    Maui.SettingsSection
     {
         title: i18n("Interface")
         description: i18n("Configure the app UI.")
@@ -108,7 +109,7 @@ MauiLab.SettingsDialog
         }
     }
 
-    MauiLab.SettingsSection
+    Maui.SettingsSection
     {
         title: i18n("Sources")
         description: i18n("Add new sources to manage and browse your image collection")
@@ -116,6 +117,8 @@ MauiLab.SettingsDialog
         ColumnLayout
         {
             anchors.fill: parent
+            spacing: Maui.Style.space.big
+            Layout.margins: Maui.Style.space.big
 
             Maui.ListBrowser
             {
@@ -123,13 +126,17 @@ MauiLab.SettingsDialog
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.minimumHeight: Math.min(500, contentHeight)
-                model: Vvave.Vvave.sources
+                model: Vvave.sources
                 delegate: Maui.ListDelegate
                 {
                     width: parent.width
-                    iconName: "folder"
-                    iconSize: Maui.Style.iconSizes.small
-                    label: modelData
+                    implicitHeight: Maui.Style.rowHeight * 1.2
+                    leftPadding: 0
+                    rightPadding: 0
+                    template.iconSource: modelData.icon
+                    template.iconSizeHint: Maui.Style.iconSizes.small
+                    template.label1.text: modelData.label
+                    template.label2.text: modelData.path
                     onClicked: _sourcesList.currentIndex = index
                 }
 
@@ -154,7 +161,7 @@ MauiLab.SettingsDialog
                     text: i18n("Remove")
                     onClicked:
                     {
-                        confirmationDialog.url = _sourcesList.model[_sourcesList.currentIndex]
+                        confirmationDialog.url = _sourcesList.model[_sourcesList.currentIndex].path
                         confirmationDialog.open()
                     }
                 }
@@ -170,7 +177,7 @@ MauiLab.SettingsDialog
                         root.dialog.show(function(paths)
                         {
                             console.log("SCAN DIR <<", paths)
-                            Vvave.Vvave.addSources([paths])
+                            Vvave.addSources([paths])
                         })
                     }
                 }

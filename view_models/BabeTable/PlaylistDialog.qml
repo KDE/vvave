@@ -1,9 +1,10 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.10
+import QtQuick 2.14
+import QtQuick.Controls 2.14
+import QtQuick.Layouts 1.3
+
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-import QtQuick.Layouts 1.3
-import PlaylistsList 1.0
+import org.maui.vvave 1.0
 
 import "../../view_models"
 import "../../utils/Player.js" as Player

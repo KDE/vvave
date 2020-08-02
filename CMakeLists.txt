@@ -53,6 +53,7 @@ add_executable(vvave
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
     models/cloud/cloud.cpp
+    models/folders/foldersmodel.cpp
     services/local/fileloader.h
     )
 

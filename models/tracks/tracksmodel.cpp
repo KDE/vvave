@@ -11,6 +11,7 @@ TracksModel::TracksModel(QObject *parent) : MauiList(parent),
     db(CollectionDB::getInstance())
 {
     connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
+//    connect(this->db, &CollectionDB::sourceInserted, this, &TracksModel::setList);
 }
 
 void TracksModel::componentComplete()
@@ -135,22 +136,21 @@ void TracksModel::setList()
         {
             this->list << this->db->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album "
                                                       "and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
-    }
+        }
 
-}else
-{
-this->list = this->db->getDBData(this->query, [&](FMH::MODEL &item) {
-        const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
-if(FMH::fileExists(url))
-{
-    //            item[FMH::MODEL_KEY::FAV] = FMStatic::isFav(url) ? "1" : "0";
-    return true;
-} else
-{
-this->db->removeTrack(url.toString());
-return false;
-}
-});
+    }else
+    {
+        this->list = this->db->getDBData(this->query, [&](FMH::MODEL &item) {
+                const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
+        if(FMH::fileExists(url))
+        {
+            return true;
+        } else
+        {
+            this->db->removeTrack(url.toString());
+            return false;
+        }
+    });
 }
 
 this->sortList();
