@@ -80,6 +80,7 @@ BabeList
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
+        enabled: _tracksList.count > 0
         placeholderText: i18n("Search") + " " + list.count + " " + i18n("tracks")
         onAccepted: listModel.filter = text
         onCleared: listModel.filter = ""
@@ -197,7 +198,6 @@ BabeList
         rejectButton.text: i18n("Delete")
         acceptButton.text: i18n("Remove")
         template.iconSource: "emblem-warning"
-
         page.margins: Maui.Style.space.big
 
         onAccepted:

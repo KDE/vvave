@@ -1,10 +1,10 @@
-QT *= quick \
+QT *= core \
+    quick \
     multimedia \
     sql \
     network \
     qml \
     quickcontrols2 \
-    concurrent \
     network
 
 CONFIG += ordered
@@ -29,7 +29,7 @@ linux:unix:!android {
     message(Building helpers for Android or Windows)
 
     android {
-        QMAKE_LINK += -nostdlib++
+#        QMAKE_LINK += -nostdlib++
         QT *= androidextras
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
         DISTFILES += $$PWD/android_files/AndroidManifest.xml
@@ -69,7 +69,6 @@ linux:unix:!android {
         COMPONENT_FM \
         COMPONENT_TAGGING \
         MAUIKIT_STYLE
-
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
 
@@ -99,6 +98,7 @@ SOURCES += main.cpp \
     services/web/youtube.cpp \
     vvave.cpp \
     models/tracks/tracksmodel.cpp \
+    models/folders/foldersmodel.cpp \
     models/playlists/playlistsmodel.cpp \
     models/albums/albumsmodel.cpp \
     services/web/NextCloud/nextmusic.cpp \
@@ -122,6 +122,7 @@ HEADERS += \
     services/web/youtube.h \
     vvave.h \
     models/tracks/tracksmodel.h \
+    models/folders/foldersmodel.h \
     models/playlists/playlistsmodel.h \
     models/albums/albumsmodel.h \
     services/web/NextCloud/nextmusic.h \

@@ -483,6 +483,7 @@ Maui.ApplicationWindow
 
                 Maui.ToolActions
                 {
+                    implicitHeight: Maui.Style.iconSizes.big
                     expanded: true
                     autoExclusive: false
                     checkable: false
@@ -498,6 +499,8 @@ Maui.ApplicationWindow
                     {
                         id: playIcon
                         text: i18n("Play and pause")
+                        icon.width: 32
+                        icon.height: 32
                         enabled: currentTrackIndex >= 0
                         icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
                         onTriggered: player.playing = !player.playing
@@ -745,12 +748,6 @@ Maui.ApplicationWindow
     Connections
     {
         target: Vvave
-
-        onRefreshTables:
-        {
-            if(size>0) root.notify("emblem-info", "Collection updated", size+" new tracks added...")
-        }
-
         onOpenFiles:
         {
             Player.appendTracksAt(tracks, 0)

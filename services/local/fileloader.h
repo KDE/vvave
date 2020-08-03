@@ -89,8 +89,6 @@ private slots:
                     if(info.isNull())
                         continue;
 
-                    qDebug()<< url << "HHH";
-
                     const auto track = info.getTrack();
                     const auto genre = info.getGenre();
                     const auto album = BAE::fixString(info.getAlbum());

@@ -41,9 +41,10 @@ Maui.SettingsDialog
         id: confirmationDialog
         property string url : ""
 
-        page.margins: Maui.Style.space.medium
         title : "Remove source"
         message : "Are you sure you want to remove the source: \n "+url
+        template.iconSource: "emblem-warning"
+        page.margins: Maui.Style.space.big
 
         onAccepted:
         {
@@ -139,17 +140,6 @@ Maui.SettingsDialog
                     template.label2.text: modelData.path
                     onClicked: _sourcesList.currentIndex = index
                 }
-
-//                Maui.Holder
-//                {
-//                    anchors.fill: parent
-//                    visible: !_sourcesList.count
-//                    emoji: "qrc:/assets/dialog-information.svg"
-//                    isMask: true
-//                    title : i18n("No Sources!")
-//                    body: i18n("Add new sources to organize and play your music collection")
-//                    emojiSize: Maui.Style.iconSizes.huge
-//                }
             }
 
             RowLayout
@@ -176,7 +166,6 @@ Maui.SettingsDialog
                         root.dialog.settings.onlyDirs = true
                         root.dialog.show(function(paths)
                         {
-                            console.log("SCAN DIR <<", paths)
                             Vvave.addSources([paths])
                         })
                     }

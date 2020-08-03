@@ -252,6 +252,12 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 {
     qDebug()<< "ÄDDING TRACKS" << track;
     auto url = track[FMH::MODEL_KEY::URL];
+
+    if(check_existance(TABLEMAP[BAE::TABLE::TRACKS], BAE::KEYMAP[BAE::KEY::URL], url))
+    {
+        return false;
+    }
+
     auto title = track[FMH::MODEL_KEY::TITLE];
     auto artist = track[FMH::MODEL_KEY::ARTIST];
     auto album = track[FMH::MODEL_KEY::ALBUM];

@@ -71,28 +71,33 @@ bool vvave::removeSource(const QString &source)
     FMStatic::saveSettings("SETTINGS", QVariant::fromValue(urls), "SOURCES");
     emit sourcesChanged();
 
-    return this->db->removeSource(source);
+    if(this->db->removeSource(source))
+    {
+        emit this->refreshTables();
+        return true;
+    }
+
+    return false;
 }
 
 void vvave::scanDir(const QStringList &paths)
 {
     auto fileLoader = new FileLoader();
-
-    connect(fileLoader, &FileLoader::itemReady, [this](FMH::MODEL item)
-    {
-        qDebug() << item;
-        db->addTrack(item);
-    });
+//    connect(fileLoader, &FileLoader::itemReady, [this](FMH::MODEL item)
+//    {
+//        db->addTrack(item);
+//    });
 
     connect(fileLoader, &FileLoader::itemsReady, [this](FMH::MODEL_LIST items)
     {
-        emit this->refreshTables(items.size());
+//        for(const auto &item : items)
+//            db->addTrack(item);
+        emit this->refreshTables();
     });
 
-    connect(fileLoader, &FileLoader::finished, [=, _fileLoader = fileLoader] (uint)
+    connect(fileLoader, &FileLoader::finished, [=] (uint)
     {
-qDebug()<< "FILE LOADER" << fileLoader << _fileLoader << (fileLoader== nullptr ? "meh" : "yes");
-delete fileLoader;
+        delete fileLoader;
     });
 
     fileLoader->requestPath(QUrl::fromStringList(paths), true);
@@ -119,7 +124,7 @@ void vvave::openUrls(const QStringList &urls)
     QVariantList data;
 
     for(const auto &url : urls)
-      {
+    {
         auto _url = QUrl::fromUserInput(url);
         if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString()))
         {
@@ -152,7 +157,7 @@ void vvave::openUrls(const QStringList &urls)
                                     });
             }
         }
-      }
+    }
 
     emit this->openFiles(data);
 }

@@ -12,10 +12,6 @@ class vvave : public QObject
     Q_PROPERTY(QVariantList sources READ sourcesModel NOTIFY sourcesChanged FINAL)
     Q_PROPERTY(QList<QUrl> folders READ folders NOTIFY sourcesChanged FINAL)
 
-private:
-    CollectionDB *db;
-    void checkCollection(const QStringList &paths = BAE::defaultSources, std::function<void (uint)> cb = nullptr);
-
 public:
     explicit vvave(QObject *parent = nullptr);
     QList<QUrl> folders();
@@ -31,8 +27,12 @@ public slots:
     static QStringList sources();
     static QVariantList sourcesModel();
 
+private:
+    CollectionDB *db;
+    void checkCollection(const QStringList &paths = BAE::defaultSources, std::function<void (uint)> cb = nullptr);
+
 signals:
-    void refreshTables(uint size);
+    void refreshTables();
     void refreshTracks();
     void refreshAlbums();
     void refreshArtists();
