@@ -58,8 +58,8 @@
   <summary xml:lang="zh-TW">播放您的音樂集合</summary>
   <description>
     <p> Tiny Qt Music Player to keep your favorite songs at hand. </p>
-    <p xml:lang="ca">Reproductor musical en Qt per tenir les cançons preferides a mà.</p>
-    <p xml:lang="ca-valencia">Reproductor musical en Qt per tindre les cançons preferides a mà.</p>
+    <p xml:lang="ca">Reproductor musical en Qt per a tenir les cançons preferides a mà.</p>
+    <p xml:lang="ca-valencia">Reproductor musical en Qt per a tindre les cançons preferides a mà.</p>
     <p xml:lang="cs">Maličký přehrávač ve Qt díky kterému budete mít svou oblíbenou hudbu vždy po ruce.</p>
     <p xml:lang="da">Lille Qt-musikafspiller til at afspille dine favoritsange.</p>
     <p xml:lang="de">Einfache Qt-Musikwiedergabe für Ihre Lieblingssongs.</p>
