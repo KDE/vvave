@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.9
-import QtQuick.Controls 2.13
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.7 as Kirigami
@@ -60,29 +60,37 @@ Maui.SettingsDialog
         title: i18n("Behaviour")
         description: i18n("Configure the app plugins and behavior.")
 
-        Switch
+        Maui.SettingTemplate
         {
-            Layout.fillWidth: true
-            checkable: true
-            checked:  control.fetchArtwork
-            Kirigami.FormData.label: i18n("Fetch Artwork Online")
-            onToggled:
+            label1.text: i18n("Fetch Artwork")
+            label2.text: i18n("Gathers album and artists artwoks from online services")
+
+            Switch
             {
-                control.fetchArtwork = !control.fetchArtwork
-                Maui.FM.saveSettings("Settings", control.fetchArtWork, "FetchArtwork")
+                checkable: true
+                checked:  control.fetchArtwork
+                onToggled:
+                {
+                    control.fetchArtwork = !control.fetchArtwork
+                    Maui.FM.saveSettings("Settings", control.fetchArtWork, "FetchArtwork")
+                }
             }
         }
 
-        Switch
+        Maui.SettingTemplate
         {
-            Layout.fillWidth: true
-            Kirigami.FormData.label: i18n("Scan Collection on Start Up")
-            checkable: true
-            checked: control.scanCollectionOnStartUp
-            onToggled:
+            label1.text: i18n("Auto Scan")
+            label2.text: i18n("Scan your sources to update your collection on start up")
+
+            Switch
             {
-                control.scanCollectionOnStartUp = !control.scanCollectionOnStartUp
-                Maui.FM.saveSettings("Settings", control.scanCollectionOnStartUp, "ScanCollectionOnStartUp")
+                checkable: true
+                checked: control.scanCollectionOnStartUp
+                onToggled:
+                {
+                    control.scanCollectionOnStartUp = !control.scanCollectionOnStartUp
+                    Maui.FM.saveSettings("Settings", control.scanCollectionOnStartUp, "ScanCollectionOnStartUp")
+                }
             }
         }
     }
@@ -92,21 +100,28 @@ Maui.SettingsDialog
         title: i18n("Interface")
         description: i18n("Configure the app UI.")
 
-        Switch
+        Maui.SettingTemplate
         {
-            Kirigami.FormData.label: i18n("Translucent Sidebar")
-            checkable: true
-            checked:  root.translucency
-            onToggled:  root.translucency = !root.translucency
+            label1.text: i18n("Translucent Sidebar")
+
+            Switch
+            {
+                checkable: true
+                checked:  root.translucency
+                onToggled:  root.translucency = !root.translucency
+            }
         }
 
-        Switch
+        Maui.SettingTemplate
         {
-            Layout.fillWidth: true
-            Kirigami.FormData.label: i18n("Dark Mode")
-            checkable: true
-            checked: control.darkMode
-            onToggled: control.darkMode = !control.darkMode
+            label1.text: i18n("Dark Mode")
+
+            Switch
+            {
+                checkable: true
+                checked: control.darkMode
+                onToggled: control.darkMode = !control.darkMode
+            }
         }
     }
 
@@ -117,9 +132,8 @@ Maui.SettingsDialog
 
         ColumnLayout
         {
-            anchors.fill: parent
+            Layout.fillWidth: true
             spacing: Maui.Style.space.big
-            Layout.margins: Maui.Style.space.big
 
             Maui.ListBrowser
             {
