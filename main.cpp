@@ -5,7 +5,11 @@
 #include <QIcon>
 #include <QCommandLineParser>
 
+#ifdef Q_OS_MACOS
+#include <KF5/KI18n/KLocalizedContext>
+#else
 #include <KI18n/KLocalizedContext>
+#endif
 
 #ifdef Q_OS_WIN
 #include <QtWebEngine>
@@ -63,7 +67,7 @@ int main(int argc, char *argv[])
 {
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-#if defined Q_OS_LINUX || defined Q_OS_ANDROID
+#if defined Q_OS_LINUX || defined Q_OS_ANDROID || defined Q_OS_MAC
   QtWebView::initialize();
 #else
   QtWebEngine::initialize();

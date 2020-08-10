@@ -50,6 +50,8 @@ linux:unix:!android {
         include($$PWD/3rdparty/taglib/taglib.pri)
 
     } else:macos { #from brew installation
+        QT *= webview
+
         LIBS += -L$$PWD/../../1.11.1/lib/ -ltag.1.17.0
 
         INCLUDEPATH += $$PWD/../../1.11.1/include
@@ -122,8 +124,8 @@ HEADERS += \
     services/web/youtube.h \
     vvave.h \
     models/tracks/tracksmodel.h \
-    models/folders/foldersmodel.h \
     models/playlists/playlistsmodel.h \
+    models/folders/foldersmodel.h \
     models/albums/albumsmodel.h \
     services/web/NextCloud/nextmusic.h \
     services/web/abstractmusicprovider.h \
