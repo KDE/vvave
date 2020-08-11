@@ -1,5 +1,5 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
@@ -43,9 +43,9 @@ Maui.ApplicationWindow
     property alias progressBar: progressBar
     property alias dialog : _dialogLoader.item
 
-   background.opacity: translucency ? 0.5 : 1
-//    floatingHeader: swipeView.currentIndex === viewsIndex.albums || swipeView.currentIndex === viewsIndex.artists
-//    autoHideHeader: true
+    background.opacity: translucency ? 0.5 : 1
+    //    floatingHeader: swipeView.currentIndex === viewsIndex.albums || swipeView.currentIndex === viewsIndex.artists
+    //    autoHideHeader: true
     floatingFooter: false
 
     /***************************************************/
@@ -107,7 +107,6 @@ Maui.ApplicationWindow
             mainPlaylist.list.remove(mainPlaylist.table.currentIndex)
         })
     }
-
 
     /*COMPONENTS*/
     Player
@@ -318,225 +317,225 @@ Maui.ApplicationWindow
         }
 
         ColumnLayout
-    {
-        id: _footerLayout
-        anchors.fill: parent
-        spacing: 0
-
-        Maui.ToolBar
         {
-            Layout.fillWidth: true
-            preferredHeight: Maui.Style.toolBarHeightAlt * 0.8
-            position: ToolBar.Footer
-            visible: isPlaying
+            id: _footerLayout
+            anchors.fill: parent
+            spacing: 0
 
-            leftContent: Label
+            Maui.ToolBar
             {
-                id: _label1
-                visible: text.length
-                verticalAlignment: Qt.AlignVCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: progressTimeLabel
-                elide: Text.ElideMiddle
-                wrapMode: Text.NoWrap
-                color: Kirigami.Theme.textColor
-                font.weight: Font.Normal
-                font.pointSize: Maui.Style.fontSizes.default
-            }
-
-            middleContent:  Item
-            {
-                Layout.fillHeight: true
                 Layout.fillWidth: true
+                preferredHeight: Maui.Style.toolBarHeightAlt * 0.8
+                position: ToolBar.Footer
+                visible: isPlaying
 
-                Label
+                leftContent: Label
                 {
-                    anchors.fill: parent
+                    id: _label1
                     visible: text.length
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: root.title
+                    text: progressTimeLabel
                     elide: Text.ElideMiddle
                     wrapMode: Text.NoWrap
                     color: Kirigami.Theme.textColor
                     font.weight: Font.Normal
                     font.pointSize: Maui.Style.fontSizes.default
                 }
-            }
 
-            rightContent: Label
-            {
-                id: _label2
-                visible: text.length
-                verticalAlignment: Qt.AlignVCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: player.transformTime(player.duration/1000)
-                elide: Text.ElideMiddle
-                wrapMode: Text.NoWrap
-                color: Kirigami.Theme.textColor
-                font.weight: Font.Normal
-                font.pointSize: Maui.Style.fontSizes.default
-                opacity: 0.7
-            }
-
-            background: Slider
-            {
-                id: progressBar
-                z: parent.z+1
-                padding: 0
-                from: 0
-                to: 1000
-                value: player.pos
-                spacing: 0
-                focus: true
-                onMoved: player.pos = value
-                enabled: player.playing
-                Kirigami.Separator
+                middleContent:  Item
                 {
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                }
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
 
-                background: Rectangle
-                {
-                    implicitWidth: progressBar.width
-                    implicitHeight: progressBar.height
-                    width: progressBar.availableWidth
-                    height: implicitHeight
-                    color: "transparent"
-                    opacity: 0.4
-
-                    Rectangle
+                    Label
                     {
-                        width: progressBar.visualPosition * parent.width
-                        height: progressBar.height
-                        color: Kirigami.Theme.highlightColor
+                        anchors.fill: parent
+                        visible: text.length
+                        verticalAlignment: Qt.AlignVCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: root.title
+                        elide: Text.ElideMiddle
+                        wrapMode: Text.NoWrap
+                        color: Kirigami.Theme.textColor
+                        font.weight: Font.Normal
+                        font.pointSize: Maui.Style.fontSizes.default
                     }
                 }
 
-                handle: Rectangle
+                rightContent: Label
                 {
-                    x: progressBar.leftPadding + progressBar.visualPosition
-                       * (progressBar.availableWidth - width)
-                    y: 0
-                    implicitWidth: Maui.Style.iconSizes.medium
-                    implicitHeight: progressBar.height
-                    color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
+                    id: _label2
+                    visible: text.length
+                    verticalAlignment: Qt.AlignVCenter
+                    horizontalAlignment: Qt.AlignHCenter
+                    text: player.transformTime(player.duration/1000)
+                    elide: Text.ElideMiddle
+                    wrapMode: Text.NoWrap
+                    color: Kirigami.Theme.textColor
+                    font.weight: Font.Normal
+                    font.pointSize: Maui.Style.fontSizes.default
+                    opacity: 0.7
+                }
+
+                background: Slider
+                {
+                    id: progressBar
+                    z: parent.z+1
+                    padding: 0
+                    from: 0
+                    to: 1000
+                    value: player.pos
+                    spacing: 0
+                    focus: true
+                    onMoved: player.pos = value
+                    enabled: player.playing
+                    Kirigami.Separator
+                    {
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                    }
+
+                    background: Rectangle
+                    {
+                        implicitWidth: progressBar.width
+                        implicitHeight: progressBar.height
+                        width: progressBar.availableWidth
+                        height: implicitHeight
+                        color: "transparent"
+                        opacity: 0.4
+
+                        Rectangle
+                        {
+                            width: progressBar.visualPosition * parent.width
+                            height: progressBar.height
+                            color: Kirigami.Theme.highlightColor
+                        }
+                    }
+
+                    handle: Rectangle
+                    {
+                        x: progressBar.leftPadding + progressBar.visualPosition
+                           * (progressBar.availableWidth - width)
+                        y: 0
+                        implicitWidth: Maui.Style.iconSizes.medium
+                        implicitHeight: progressBar.height
+                        color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
+                    }
                 }
             }
-        }
 
-        Maui.ToolBar
-        {
-            Layout.fillWidth: true
-            Layout.preferredHeight: Maui.Style.toolBarHeight
-            position: ToolBar.Footer
-
-            background: Item {}
-            rightContent: ToolButton
+            Maui.ToolBar
             {
-                icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
-                onPressAndHold :
-                {
-                    player.volume = player.volume === 0 ? 100 : 0
-                }
+                Layout.fillWidth: true
+                Layout.preferredHeight: Maui.Style.toolBarHeight
+                position: ToolBar.Footer
 
-                onClicked:
+                background: Item {}
+                rightContent: ToolButton
                 {
-                    _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
-                }
-
-                Popup
-                {
-                    id: _sliderPopup
-                    height: 150
-                    width: parent.width
-                    y: -150
-                    x: 0
-                    //                            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPress
-                    Slider
+                    icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
+                    onPressAndHold :
                     {
-                        id: _volumeSlider
-                        visible: true
-                        height: parent.height
-                        width: 20
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        from: 0
-                        to: 100
-                        value: player.volume
-                        orientation: Qt.Vertical
+                        player.volume = player.volume === 0 ? 100 : 0
+                    }
 
-                        onMoved:
+                    onClicked:
+                    {
+                        _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
+                    }
+
+                    Popup
+                    {
+                        id: _sliderPopup
+                        height: 150
+                        width: parent.width
+                        y: -150
+                        x: 0
+                        //                            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPress
+                        Slider
                         {
-                            player.volume = value
+                            id: _volumeSlider
+                            visible: true
+                            height: parent.height
+                            width: 20
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            from: 0
+                            to: 100
+                            value: player.volume
+                            orientation: Qt.Vertical
+
+                            onMoved:
+                            {
+                                player.volume = value
+                            }
                         }
                     }
                 }
-            }
 
-            middleContent: [
-                ToolButton
-                {
-                    id: babeBtnIcon
-                    icon.name: "love"
-                    enabled: currentTrackIndex >= 0
-                    checked: currentTrack ? Maui.FM.isFav(currentTrack.url) : false
-                    icon.color: checked ? babeColor :  Kirigami.Theme.textColor
-                    onClicked: if (!mainlistEmpty)
-                               {
-                                   mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
-                               }
-                },
-
-                Maui.ToolActions
-                {
-                    implicitHeight: Maui.Style.iconSizes.big
-                    expanded: true
-                    autoExclusive: false
-                    checkable: false
-
-                    Action
+                middleContent: [
+                    ToolButton
                     {
-                        icon.name: "media-skip-backward"
-                        onTriggered: Player.previousTrack()
-                        //                    onPressAndHold: Player.playAt(prevTrackIndex)
-                    }
-                    //ambulatorios1@clinicaantioquia.com.co, copago martha hilda restrepo, cc 22146440 eps salud total, consulta expecialista urologo, hora 3:40 pm
-                    Action
-                    {
-                        id: playIcon
-                        text: i18n("Play and pause")
-                        icon.width: 32
-                        icon.height: 32
+                        id: babeBtnIcon
+                        icon.name: "love"
                         enabled: currentTrackIndex >= 0
-                        icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
-                        onTriggered: player.playing = !player.playing
-                    }
+                        checked: currentTrack ? Maui.FM.isFav(currentTrack.url) : false
+                        icon.color: checked ? babeColor :  Kirigami.Theme.textColor
+                        onClicked: if (!mainlistEmpty)
+                                   {
+                                       mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
+                                   }
+                    },
 
-                    Action
+                    Maui.ToolActions
                     {
-                        text: i18n("Next")
-                        icon.name: "media-skip-forward"
-                        onTriggered: Player.nextTrack()
-                        //                    onPressAndHold: Player.playAt(Player.shuffle())
-                    }
-                },
+                        implicitHeight: Maui.Style.iconSizes.big
+                        expanded: true
+                        autoExclusive: false
+                        checkable: false
 
-                ToolButton
-                {
-                    id: shuffleBtn
-                    icon.color: babeColor
-                    icon.name: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
-                    onClicked:
+                        Action
+                        {
+                            icon.name: "media-skip-backward"
+                            onTriggered: Player.previousTrack()
+                            //                    onPressAndHold: Player.playAt(prevTrackIndex)
+                        }
+                        //ambulatorios1@clinicaantioquia.com.co, copago martha hilda restrepo, cc 22146440 eps salud total, consulta expecialista urologo, hora 3:40 pm
+                        Action
+                        {
+                            id: playIcon
+                            text: i18n("Play and pause")
+                            icon.width: 32
+                            icon.height: 32
+                            enabled: currentTrackIndex >= 0
+                            icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
+                            onTriggered: player.playing = !player.playing
+                        }
+
+                        Action
+                        {
+                            text: i18n("Next")
+                            icon.name: "media-skip-forward"
+                            onTriggered: Player.nextTrack()
+                            //                    onPressAndHold: Player.playAt(Player.shuffle())
+                        }
+                    },
+
+                    ToolButton
                     {
-                        isShuffle = !isShuffle
-                        Maui.FM.saveSettings("SHUFFLE", isShuffle, "PLAYBACK")
+                        id: shuffleBtn
+                        icon.color: babeColor
+                        icon.name: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
+                        onClicked:
+                        {
+                            isShuffle = !isShuffle
+                            Maui.FM.saveSettings("SHUFFLE", isShuffle, "PLAYBACK")
+                        }
                     }
-                }
-            ]
+                ]
+            }
         }
-    }
     }
 
     Maui.Page
