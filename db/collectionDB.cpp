@@ -40,7 +40,7 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 
     this->name = QUuid::createUuid().toString();
 
-    if(!FMH::fileExists(BAE::CollectionDBPath + BAE::DBName))
+    if(!FMH::fileExists(QUrl::fromUserInput(BAE::CollectionDBPath + BAE::DBName)))
     {
         QDir collectionDBPath_dir(BAE::CollectionDBPath);
         if (!collectionDBPath_dir.exists())

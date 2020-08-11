@@ -78,37 +78,33 @@ Maui.Page
                 label2.text: model.artist && model.album ? model.artist : ""
                 image.source:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
 
-                Connections
+                function onClicked(index)
                 {
-                    target: albumDelegate
-                    onClicked:
+                    grid.currentIndex = index
+                    if(Maui.Handy.singleClick)
                     {
-                        grid.currentIndex = index
-                        if(Maui.Handy.singleClick)
-                        {
-                            const album = _albumsList.get(index).album
-                            const artist = _albumsList.get(index).artist
-                            albumCoverClicked(album, artist)
-                        }
+                        const album = _albumsList.get(index).album
+                        const artist = _albumsList.get(index).artist
+                        albumCoverClicked(album, artist)
                     }
+                }
 
-                    onDoubleClicked:
+                onDoubleClicked:
+                {
+                    grid.currentIndex = index
+                    if(!Maui.Handy.singleClick)
                     {
-                        grid.currentIndex = index
-                        if(!Maui.Handy.singleClick)
-                        {
-                            const album = _albumsList.get(index).album
-                            const artist = _albumsList.get(index).artist
-                            albumCoverClicked(album, artist)
-                        }
+                        const album = _albumsList.get(index).album
+                        const artist = _albumsList.get(index).artist
+                        albumCoverClicked(album, artist)
                     }
+                }
 
-                    onPressAndHold:
-                    {
-                        const album = grid.model.get(index).album
-                        const artist = grid.model.get(index).artist
-                        albumCoverPressed(album, artist)
-                    }
+                onPressAndHold:
+                {
+                    const album = grid.model.get(index).album
+                    const artist = grid.model.get(index).artist
+                    albumCoverPressed(album, artist)
                 }
             }
         }

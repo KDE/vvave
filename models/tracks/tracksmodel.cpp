@@ -184,6 +184,7 @@ void TracksModel::append(const QVariantMap &item)
     emit this->preItemAppended();
     this->list << FMH::toModel(item);
     emit this->postItemAppended();
+    emit this->countChanged();
 }
 
 void TracksModel::append(const QVariantMap &item, const int &at)
@@ -197,6 +198,7 @@ void TracksModel::append(const QVariantMap &item, const int &at)
     emit this->preItemAppendedAt(at);
     this->list.insert(at, FMH::toModel(item));
     emit this->postItemAppended();
+    emit this->countChanged();
 }
 
 void TracksModel::appendQuery(const QString &query)
@@ -204,6 +206,7 @@ void TracksModel::appendQuery(const QString &query)
     emit this->preListChanged();
     this->list << this->db->getDBData(query);
     emit this->postListChanged();
+    emit this->countChanged();
 }
 
 void TracksModel::searchQueries(const QStringList &queries)

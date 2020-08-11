@@ -152,7 +152,7 @@ Menu
     {
         text: i18n("Show in folder")
         icon.name: "folder-open"
-        visible: !isAndroid
+        visible: !Maui.Handy.isAndroid
         onTriggered:
         {
             openWithClicked()

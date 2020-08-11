@@ -27,7 +27,6 @@ TagInfo::TagInfo(const QString &url, QObject *parent) : QObject(parent)
 
     if(_file.isReadable())
     {
-        qDebug()<< "is readble";
         this->file = new TagLib::FileRef(TagLib::FileName(path.toUtf8()));
     }
     else
@@ -36,7 +35,6 @@ TagInfo::TagInfo(const QString &url, QObject *parent) : QObject(parent)
 
 TagInfo::~TagInfo()
 {
-    qDebug()<< "DELETING TAGINFO";
     delete this->file;
 }
 

@@ -232,7 +232,10 @@ Maui.ApplicationWindow
         Connections
         {
             target: _drawer.overlay
-            onClicked: _drawer.close()
+            function onClicked()
+            {
+                _drawer.close()
+            }
         }
 
         background: Rectangle
@@ -248,15 +251,20 @@ Maui.ApplicationWindow
             Connections
             {
                 target: mainPlaylist
-                onCoverPressed: Player.appendAll(tracks)
-                onCoverDoubleClicked: Player.playAll(tracks)
+                ignoreUnknownSignals: true
+
+                function onCoverPressed(tracks)
+                {
+                    Player.appendAll(tracks)
+                }
+
+                function onCoverDoubleClicked(tracks)
+                {
+                    Player.playAll(tracks)
+                }
             }
         }
     }
-
-//    autoHideFooter: true
-//    autoHideFooterMargins: root.height * 0.2
-//    autoHideFooterDelay: 5000
 
     footer: ItemDelegate
     {
@@ -559,7 +567,11 @@ Maui.ApplicationWindow
                     Connections
                     {
                         target: Vvave
-                        onRefreshTables: tracksView.list.refresh()
+                        ignoreUnknownSignals: true
+                        function onRefreshTables()
+                        {
+                            tracksView.list.refresh()
+                        }
                     }
                 }
             }
@@ -603,7 +615,11 @@ Maui.ApplicationWindow
                     Connections
                     {
                         target: Vvave
-                        onRefreshTables: albumsView.list.refresh()
+                        ignoreUnknownSignals: true
+                        function onRefreshTables()
+                        {
+                            albumsView.list.refresh()
+                        }
                     }
                 }
             }
@@ -645,7 +661,11 @@ Maui.ApplicationWindow
                     Connections
                     {
                         target: Vvave
-                        onRefreshTables: artistsView.list.refresh()
+                        ignoreUnknownSignals: true
+                        function onRefreshTables()
+                        {
+                            artistsView.list.refresh()
+                        }
                     }
                 }
             }
@@ -693,26 +713,6 @@ Maui.ApplicationWindow
                 FoldersView
                 {
                     id: foldersView
-
-                    Connections
-                    {
-                        target: Vvave
-                        onRefreshTables: foldersView.populate()
-                    }
-
-                    Connections
-                    {
-                        target: foldersView.list
-
-                        onRowClicked: Player.quickPlay(foldersView.list.model.get(index))
-                        onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
-
-                        onAppendTrack: Player.addTrack(foldersView.listModel.get(index))
-                        onPlayAll: Player.playAll(foldersView.listModel.getAll())
-
-                        onAppendAll: Player.appendAll(foldersView.listModel.getAll())
-                        onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
-                    }
                 }
             }
 
@@ -748,7 +748,8 @@ Maui.ApplicationWindow
     Connections
     {
         target: Vvave
-        onOpenFiles:
+        ignoreUnknownSignals: true
+        function onOpenFiles(tracks)
         {
             Player.appendTracksAt(tracks, 0)
             Player.playAt(0)
@@ -757,7 +758,7 @@ Maui.ApplicationWindow
 
     Component.onCompleted:
     {
-        if(isAndroid)
+        if(Maui.Handy.isAndroid)
         {
             Maui.Android.statusbarColor(Kirigami.Theme.backgroundColor, true)
             Maui.Android.navBarColor(Kirigami.Theme.backgroundColor, true)

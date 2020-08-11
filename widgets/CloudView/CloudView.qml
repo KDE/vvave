@@ -172,7 +172,7 @@ Maui.Page
         Connections
         {
             target: _listView.holder
-            onActionTriggered:
+            function onActionTriggered()
             {
                 if(root.accounts)
                     root.accounts.open()

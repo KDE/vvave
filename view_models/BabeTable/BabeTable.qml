@@ -45,7 +45,9 @@ BabeList
     Connections
     {
         target: control.listBrowser
-        onItemsSelected:
+        ignoreUnknownSignals: true
+
+        function onItemsSelected(indexes)
         {
             for(var i in indexes)
             {
@@ -277,7 +279,7 @@ BabeList
         {
             const url = listModel.get(listView.currentIndex).url
 
-            if(isAndroid)
+            if(Maui.Handy.isAndroid)
             {
                 Maui.Android.shareDialog(url)
                 return
@@ -342,177 +344,181 @@ BabeList
                                "text/uri-list": control.filterSelectedItems(model.url)
                            } : {}
 
-        sameAlbum:
+    sameAlbum:
+    {
+        if(coverArt)
         {
-            if(coverArt)
+            if(listModel.get(index-1))
             {
-                if(listModel.get(index-1))
-                {
-                    if(listModel.get(index-1).album === album && listModel.get(index-1).artist === artist) true
-                    else false
-                }else false
+                if(listModel.get(index-1).album === album && listModel.get(index-1).artist === artist) true
+                else false
             }else false
-        }
-
-        ToolButton
-        {
-            Layout.fillHeight: true
-            Layout.preferredWidth: implicitWidth
-            visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
-            icon.name: "media-playlist-append"
-            onClicked: delegate.append()
-            opacity: delegate.hovered ? 0.8 : 0.6
-        }
-
-        onClicked:
-        {
-            currentIndex = index
-            if(selectionMode)
-            {
-                H.addToSelection(listModel.get(listView.currentIndex))
-                return
-            }
-
-            if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
-                control.listBrowser.itemsSelected([index])
-
-            if(Maui.Handy.isTouch)
-                rowClicked(index)
-        }
-
-        onDoubleClicked:
-        {
-            currentIndex = index
-
-            if(!Maui.Handy.isTouch)
-                rowClicked(index)
-        }
-
-        onPlay:
-        {
-            currentIndex = index
-            quickPlayTrack(index)
-        }
-
-        onAppend:
-        {
-            currentIndex = index
-            appendTrack(index)
-        }
-
-        onArtworkCoverClicked:
-        {
-            currentIndex = index
-            goToAlbum()
-        }
-
-        Connections
-        {
-            target: selectionBar
-
-            onUriRemoved:
-            {
-                if(uri === model.url)
-                    delegate.checked = false
-            }
-
-            onUriAdded:
-            {
-                if(uri === model.url)
-                    delegate.checked = true
-            }
-
-            onCleared: delegate.checked = false
-        }
+        }else false
     }
 
-    function openItemMenu(index)
+    ToolButton
+    {
+        Layout.fillHeight: true
+        Layout.preferredWidth: implicitWidth
+        visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
+        icon.name: "media-playlist-append"
+        onClicked: delegate.append()
+        opacity: delegate.hovered ? 0.8 : 0.6
+    }
+
+    onClicked:
     {
         currentIndex = index
-        contextMenu.rate = listModel.get(currentIndex).rate
-        contextMenu.fav = Maui.FM.isFav(listModel.get(currentIndex).url)
-        contextMenu.popup()
+        if(selectionMode)
+        {
+            H.addToSelection(listModel.get(listView.currentIndex))
+            return
+        }
 
-        rowPressed(index)
+        if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+            control.listBrowser.itemsSelected([index])
+
+        if(Maui.Handy.isTouch)
+            rowClicked(index)
     }
 
-    function saveList()
+    onDoubleClicked:
     {
-        var trackList = []
-        if(list.count > 0)
-        {
-            for(var i = 0; i < list.count; ++i)
-                trackList.push(listModel.get(i).url)
+        currentIndex = index
 
-            playlistDialog.tracks = trackList
-            playlistDialog.open()
+        if(!Maui.Handy.isTouch)
+            rowClicked(index)
+    }
+
+    onPlay:
+    {
+        currentIndex = index
+        quickPlayTrack(index)
+    }
+
+    onAppend:
+    {
+        currentIndex = index
+        appendTrack(index)
+    }
+
+    onArtworkCoverClicked:
+    {
+        currentIndex = index
+        goToAlbum()
+    }
+
+    Connections
+    {
+        target: selectionBar
+        ignoreUnknownSignals: true
+
+        function onUriRemoved (uri)
+        {
+            if(uri === model.url)
+                delegate.checked = false
+        }
+
+        function onUriAdded(uri)
+        {
+            if(uri === model.url)
+                delegate.checked = true
+        }
+
+        function onCleared()
+        {
+            delegate.checked = false
         }
     }
+}
 
-    function queueList()
+function openItemMenu(index)
+{
+    currentIndex = index
+    contextMenu.rate = listModel.get(currentIndex).rate
+    contextMenu.fav = Maui.FM.isFav(listModel.get(currentIndex).url)
+    contextMenu.popup()
+
+    rowPressed(index)
+}
+
+function saveList()
+{
+    var trackList = []
+    if(list.count > 0)
     {
-        var trackList = []
+        for(var i = 0; i < list.count; ++i)
+            trackList.push(listModel.get(i).url)
 
-        if(list.count > 0)
+        playlistDialog.tracks = trackList
+        playlistDialog.open()
+    }
+}
+
+function queueList()
+{
+    var trackList = []
+
+    if(list.count > 0)
+    {
+        for(var i = 0; i < list.count; ++i)
+            trackList.push(listModel.get(i))
+
+        Player.queueTracks(trackList)
+    }
+}
+
+function goToAlbum()
+{
+    swipeView.currentIndex = viewsIndex.albums
+    const item = listModel.get(listView.currentIndex)
+    swipeView.currentItem.item.populateTable(item.album, item.artist)
+    contextMenu.close()
+}
+
+function goToArtist()
+{
+    swipeView.currentIndex = viewsIndex.artists
+    const item = listModel.get(listView.currentIndex)
+    swipeView.currentItem.item.populateTable(undefined, item.artist)
+    contextMenu.close()
+}
+
+function groupBy()
+{
+    var prop = "undefined"
+
+    if(group)
+        switch(list.sortBy)
         {
-            for(var i = 0; i < list.count; ++i)
-                trackList.push(listModel.get(i))
-
-            Player.queueTracks(trackList)
+        case Tracks.TITLE:
+            prop = "title"
+            break
+        case Tracks.ARTIST:
+            prop = "artist"
+            break
+        case Tracks.ALBUM:
+            prop = "album"
+            break
+        case Tracks.RATE:
+            prop = "rate"
+            break
+        case Tracks.FAV:
+            prop = "fav"
+            break
+        case Tracks.ADDDATE:
+            prop = "adddate"
+            break
+        case Tracks.RELEASEDATE:
+            prop = "releasedate"
+            break;
+        case Tracks.COUNT:
+            prop = "count"
+            break
         }
-    }
 
-    function goToAlbum()
-    {
-        swipeView.currentIndex = viewsIndex.albums
-        const item = listModel.get(listView.currentIndex)
-        swipeView.currentItem.item.populateTable(item.album, item.artist)
-        contextMenu.close()
-    }
-
-    function goToArtist()
-    {
-        swipeView.currentIndex = viewsIndex.artists
-        const item = listModel.get(listView.currentIndex)
-        swipeView.currentItem.item.populateTable(undefined, item.artist)
-        contextMenu.close()
-    }
-
-    function groupBy()
-    {
-        var prop = "undefined"
-
-        if(group)
-            switch(list.sortBy)
-            {
-            case Tracks.TITLE:
-                prop = "title"
-                break
-            case Tracks.ARTIST:
-                prop = "artist"
-                break
-            case Tracks.ALBUM:
-                prop = "album"
-                break
-            case Tracks.RATE:
-                prop = "rate"
-                break
-            case Tracks.FAV:
-                prop = "fav"
-                break
-            case Tracks.ADDDATE:
-                prop = "adddate"
-                break
-            case Tracks.RELEASEDATE:
-                prop = "releasedate"
-                break;
-            case Tracks.COUNT:
-                prop = "count"
-                break
-            }
-
-        section.property =  prop
-    }
+    section.property =  prop
+}
 
 function filterSelectedItems(path)
 {

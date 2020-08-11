@@ -37,7 +37,11 @@ Item
     Connections
     {
         target: mainPlaylist.table
-        onCountChanged: anim.run(control.y)
+        ignoreUnknownSignals: true
+        function onCountChanged()
+        {
+             anim.run(control.y)
+        }
     }
 
     NumberAnimation on y

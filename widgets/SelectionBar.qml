@@ -29,7 +29,7 @@ MauiLab.SelectionBar
     {
         isCurrentItem: false
         Kirigami.Theme.inherit: true
-        width: parent.width
+        width: control.width
         number: false
         coverArt: true
         showQuickActions: false
@@ -99,7 +99,7 @@ MauiLab.SelectionBar
         icon.name: "document-share"
         onTriggered:
         {
-            if(isAndroid)
+            if(Maui.Handy.isAndroid)
             {
                  Maui.Android.shareDialog(control.uris)
                 return

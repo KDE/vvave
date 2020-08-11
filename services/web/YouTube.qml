@@ -1,11 +1,13 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
+
+import org.kde.kirigami 2.7 as Kirigami
+import org.kde.mauikit 1.2 as Maui
+import org.maui.vvave 1.0 as Vvave
+
 import "../../view_models"
 import "../../view_models/BabeTable"
-import org.kde.kirigami 2.2 as Kirigami
-import org.kde.mauikit 1.0 as Maui
-import org.maui.vvave 1.0 as Vvave
 
 Maui.Page
 {
@@ -19,7 +21,7 @@ Maui.Page
     Connections
     {
         target: Vvave.YouTube
-        onQueryResultsReady:
+        function onQueryResultsReady(res)
         {
             searchRes = res;
             populate(searchRes)
@@ -55,87 +57,44 @@ Maui.Page
     //    }
     }
 
-    Maui.Dialog
+    Maui.SettingsDialog
     {
         id: configPopup
-        parent: parent
-        page.margins: Maui.Style.contentMargins
-        widthHint: 0.9
-        heightHint: 0.9
 
-        maxHeight: 200
-        maxWidth: 300
-        defaultButtons: false
-
-        GridLayout
+        Maui.SettingsSection
         {
-            anchors.fill: parent
-            columns: 1
-            rows: 6
-            clip: true
-
-            Item
-            {
-                Layout.column: 1
-                Layout.row: 1
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-
-            Label
-            {
-                text: i18n("Custom API Key")
-                verticalAlignment:  Qt.AlignVCenter
-                elide: Text.ElideRight
-                font.pointSize: Maui.Style.fontSizes.default
-                Layout.column: 1
-                Layout.row: 2
-                Layout.fillWidth: true
-            }
+            title: i18n("Custom API Key")
+            description: i18n("Grab a custom API key to have more unlimited access")
 
             TextField
             {
-                Layout.column: 1
-                Layout.row: 3
                 Layout.fillWidth: true
                 text: Maui.FM.loadSettings("YOUTUBEKEY", "BABE",  Vvave.YouTube.getKey())
             }
+        }
 
-            Label
-            {
-                text: i18n("Search results")
-                verticalAlignment:  Qt.AlignVCenter
-                elide: Text.ElideRight
-                font.pointSize: Maui.Style.fontSizes.default
-                Layout.column: 1
-                Layout.row: 4
-                Layout.fillWidth: true
-            }
+        Maui.SettingsSection
+        {
+            title: i18n("Tunning")
+            description: i18n("Fine tunning result preferences")
 
-            SpinBox
+            Maui.SettingTemplate
             {
-                Layout.alignment: Qt.AlignRight
-                Layout.column: 1
-                Layout.row: 5
-                Layout.fillWidth: true
-                from: 1
-                to: 50
-                value: Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25)
-                editable: true
-                onValueChanged:
+                label1.text: i18n("Search Results")
+                label2.text: i18n("Maximum number of results to be displayed")
+
+                SpinBox
                 {
-                    Maui.FM.saveSettings("YOUTUBELIMIT", value, "BABE")
+                    from: 1
+                    to: 50
+                    value: Maui.FM.loadSettings("YOUTUBELIMIT", "BABE", 25)
+                    editable: true
+                    onValueChanged:
+                    {
+                        Maui.FM.saveSettings("YOUTUBELIMIT", value, "BABE")
+                    }
                 }
             }
-
-            Item
-            {
-                Layout.column: 1
-                Layout.row: 6
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-
         }
     }
 
@@ -188,7 +147,6 @@ Maui.Page
                 duration: 200
             }
         }
-
 
         initialItem: BabeTable
         {

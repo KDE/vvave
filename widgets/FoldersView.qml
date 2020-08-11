@@ -6,6 +6,7 @@ import org.kde.kirigami 2.7 as Kirigami
 
 import "../view_models/BabeTable"
 import "../db/Queries.js" as Q
+import "../utils/Player.js" as Player
 
 import org.maui.vvave 1.0
 
@@ -86,6 +87,15 @@ StackView
             icon.name: "go-previous"
             onClicked: control.pop()
         }
+
+        onRowClicked: Player.quickPlay(foldersView.list.model.get(index))
+        onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
+
+        onAppendTrack: Player.addTrack(foldersView.listModel.get(index))
+        onPlayAll: Player.playAll(foldersView.listModel.getAll())
+
+        onAppendAll: Player.appendAll(foldersView.listModel.getAll())
+        onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
     }
 
     function filter()
