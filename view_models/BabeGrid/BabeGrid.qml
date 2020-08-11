@@ -78,7 +78,7 @@ Maui.Page
                 label2.text: model.artist && model.album ? model.artist : ""
                 image.source:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
 
-                function onClicked(index)
+                onClicked:
                 {
                     grid.currentIndex = index
                     if(Maui.Handy.singleClick)
