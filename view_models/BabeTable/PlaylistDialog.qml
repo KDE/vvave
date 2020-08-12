@@ -43,7 +43,7 @@ Maui.Dialog
         }
     }
 
-    BabeList
+    stack: BabeList
     {
         id: dialogList
 
