@@ -88,7 +88,7 @@ MauiLab.SelectionBar
         icon.name: "document-save"
         onTriggered:
         {
-            playlistDialog.tracks = control.uris
+            playlistDialog.composerList.urls = control.uris
             playlistDialog.open()
         }
     }

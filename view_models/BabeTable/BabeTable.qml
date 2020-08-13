@@ -248,7 +248,7 @@ BabeList
 
         onSaveToClicked:
         {
-            playlistDialog.tracks = [listModel.get(listView.currentIndex).url]
+            playlistDialog.composerList.urls = [listModel.get(listView.currentIndex).url]
             playlistDialog.open()
         }
 
@@ -286,7 +286,7 @@ BabeList
             }
 
             _dialogLoader.sourceComponent = _shareDialogComponent
-            root.dialog.urls =[url]
+            root.dialog.urls = [url]
             root.dialog.open()
         }
     }
@@ -450,7 +450,7 @@ function saveList()
         for(var i = 0; i < list.count; ++i)
             trackList.push(listModel.get(i).url)
 
-        playlistDialog.tracks = trackList
+        playlistDialog.composerList.urls = trackList
         playlistDialog.open()
     }
 }

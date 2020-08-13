@@ -215,14 +215,17 @@ Maui.ApplicationWindow
         id: playlistsList
     }
 
-    PlaylistDialog
+    Maui.TagsDialog
     {
         id: playlistDialog
+        onTagsReady: composerList.updateToUrls(tags)
+        composerList.strict: false
     }
 
     sideBar: Maui.AbstractSideBar
     {
         id: _drawer
+        visible: true
         width: visible ? Math.min(Kirigami.Units.gridUnit * 16, root.width) : 0
         collapsed: !isWide
         collapsible: true
