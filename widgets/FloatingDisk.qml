@@ -24,7 +24,7 @@ Item
     ToolTip.delay: 1000
     ToolTip.timeout: 5000
     ToolTip.visible: _mouseArea.containsMouse && !Kirigami.Settings.isMobile
-    ToolTip.text: currentTrack ? currentTrack.title + " - " + currentTrack.artist : ""
+    ToolTip.text: sideBar.position
 
     Maui.Badge
     {
@@ -82,7 +82,7 @@ Item
 
         drag.minimumY: 0
         drag.maximumY: root.height - control.height
-        onClicked: _drawer.visible ? _drawer.close() : _drawer.open()
+        onClicked: sideBar.hidden ? sideBar.close() : sideBar.open()
         onDoubleClicked: focusView = true
 
         Rectangle

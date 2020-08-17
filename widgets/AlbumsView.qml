@@ -44,7 +44,6 @@ StackView
         id: albumsViewGrid
         onAlbumCoverPressed: control.albumCoverPressedAndHold(album, artist)
         onAlbumCoverClicked: control.albumCoverClicked(album, artist)
-        headBar.visible: false
     }
 
     BabeTable

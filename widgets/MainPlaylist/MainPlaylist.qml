@@ -29,12 +29,12 @@ Maui.Page
     signal coverPressed(var tracks)
     focus: true
 
-    Kirigami.Theme.backgroundColor: "transparent"
-    background: Rectangle
-    {
-        color: Kirigami.Theme.backgroundColor
-        opacity: translucency ? 0.7 : 1
-    }
+//    Kirigami.Theme.backgroundColor: "transparent"
+//    background: Rectangle
+//    {
+//        color: Kirigami.Theme.backgroundColor
+//        opacity: translucency ? 0.7 : 1
+//    }
 
     PlaylistMenu
     {
