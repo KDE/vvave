@@ -159,7 +159,6 @@ void AlbumsModel::setList()
 this->sortList();
 emit this->postListChanged();
 
-if(this->query == AlbumsModel::QUERY::ALBUMS && FMStatic::loadSettings("Settings", "FetchArtwork", true ).toBool())
 this->fetchInformation();
 }
 

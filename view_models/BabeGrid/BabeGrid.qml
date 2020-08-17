@@ -40,13 +40,13 @@ Maui.Page
     {
         id: grid
         anchors.fill: parent
-        viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+        viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
         gridView.topMargin: Maui.Style.contentMargins
         listView.topMargin: Maui.Style.contentMargins
         listView.spacing: Maui.Style.space.medium
 
-        gridView.itemSize: Math.min(albumCoverSize, Math.max(100, control.width* 0.3))
+        gridView.itemSize: albumCoverSize
         holder.visible: count === 0
 
         model: Maui.BaseModel
