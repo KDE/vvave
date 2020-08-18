@@ -3,7 +3,6 @@
 
 Service::Service(QObject *parent) : QObject(parent)
 {
-
 }
 
 void Service::set(const PULPO::REQUEST &request)
@@ -32,11 +31,25 @@ void Service::retrieve(const QString &url, const QMap<QString, QString> &headers
     if(!url.isEmpty())
     {
         auto downloader = new FMH::Downloader;
-        connect(downloader, &FMH::Downloader::dataReady, [&, _downloader = std::move(downloader)](QByteArray array)
+        connect(downloader, &FMH::Downloader::dataReady, [this, downloader](QByteArray array)
         {
             emit this->arrayReady(array);
-            _downloader->deleteLater();
+            downloader->deleteLater();
         });
         downloader->getArray(url, headers);
     }
+}
+
+bool Service::scopePass()
+{
+    auto info = this->request.info;
+    for(const auto inf : info)
+    {
+        if(!this->scope[this->request.ontology].contains(inf))
+        {
+            info.removeAll(inf);
+        }
+    }
+
+    return !info.isEmpty();
 }

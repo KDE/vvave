@@ -24,7 +24,7 @@ Item
     ToolTip.delay: 1000
     ToolTip.timeout: 5000
     ToolTip.visible: _mouseArea.containsMouse && !Kirigami.Settings.isMobile
-    ToolTip.text: sideBar.position
+    ToolTip.text: root.title
 
     Maui.Badge
     {

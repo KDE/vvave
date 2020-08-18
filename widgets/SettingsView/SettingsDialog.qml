@@ -32,9 +32,9 @@ Maui.SettingsDialog
 {
     id: control
 
-    property bool fetchArtwork : Maui.FM.loadSettings("Settings", "FetchArtwork", true)
-    property bool scanCollectionOnStartUp : Maui.FM.loadSettings("Settings", "ScanCollectionOnStartUp", true)
-    property bool darkMode:  Maui.FM.loadSettings("Settings", "DarkMode", false)
+    property bool fetchArtwork : Maui.FM.loadSettings("FetchArtwork", "Settings", true) == "true"
+    property bool scanCollectionOnStartUp : Maui.FM.loadSettings("ScanCollectionOnStartUp", "Settings", true) == "true"
+    property bool darkMode:  Maui.FM.loadSettings("DarkMode", "Settings", false) == "true"
 
     Maui.Dialog
     {
@@ -72,7 +72,7 @@ Maui.SettingsDialog
                 onToggled:
                 {
                     control.fetchArtwork = !control.fetchArtwork
-                    Maui.FM.saveSettings("Settings", control.fetchArtWork, "FetchArtwork")
+                    Maui.FM.saveSettings("FetchArtwork", control.fetchArtwork, "Settings")
                 }
             }
         }
@@ -89,7 +89,7 @@ Maui.SettingsDialog
                 onToggled:
                 {
                     control.scanCollectionOnStartUp = !control.scanCollectionOnStartUp
-                    Maui.FM.saveSettings("Settings", control.scanCollectionOnStartUp, "ScanCollectionOnStartUp")
+                    Maui.FM.saveSettings("ScanCollectionOnStartUp", control.scanCollectionOnStartUp, "Settings")
                 }
             }
         }

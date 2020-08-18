@@ -61,8 +61,8 @@ Maui.ItemDelegate
             Rectangle
             {
                 anchors.fill: parent
-                color: _labelBg.Kirigami.Theme.backgroundColor
-                opacity: 0.7
+                color: control.isCurrentItem ? Kirigami.Theme.highlightColor : _labelBg.Kirigami.Theme.backgroundColor
+                opacity: control.isCurrentItem || control.hovered ? 1 : 0.7
             }
 
             Maui.ListItemTemplate

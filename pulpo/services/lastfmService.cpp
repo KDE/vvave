@@ -5,9 +5,8 @@ using namespace PULPO;
 lastfm::lastfm()
 {    
     this->scope.insert(ONTOLOGY::ALBUM, {INFO::ARTWORK, INFO::WIKI, INFO::TAGS});
-    this->scope.insert(ONTOLOGY::ARTIST, {INFO::ARTWORK, INFO::WIKI, INFO::TAGS});
+    this->scope.insert(ONTOLOGY::ARTIST, {INFO::WIKI, INFO::TAGS});
     this->scope.insert(ONTOLOGY::TRACK, {INFO::TAGS, INFO::WIKI, INFO::ARTWORK, INFO::METADATA});
-
     connect(this, &lastfm::arrayReady, this, &lastfm::parse);
 }
 
@@ -20,12 +19,10 @@ void lastfm::set(const PULPO::REQUEST &request)
 {
     this->request = request;
 
-    //    if(!this->scope[this->request.ontology].contains(this->request.info))
-    //    {
-    //        qWarning()<< "Requested info is not in the ontology scope of lastfm service";
-    //        emit this->responseReady(this->request, {});
-    //        return;
-    //    }
+    if(!scopePass())
+    {
+        ERROR(this->request)
+    }
 
     auto url = this->API;
 
@@ -76,25 +73,21 @@ void lastfm::set(const PULPO::REQUEST &request)
 
 void lastfm::parseArtist(const QByteArray &array)
 {
+
     QString xmlData(array);
     QDomDocument doc;
 
     if (!doc.setContent(xmlData))
     {
         qDebug()<< "LASTFM XML FAILED 1" << this->request.track;
-        emit this->responseReady(this->request, this->responses);
-
-        return;
+        ERROR(this->request);
     }
 
     if (doc.documentElement().toElement().attributes().namedItem("status").nodeValue()!="ok")
     {
         qDebug()<< "LASTFM XML FAILED 2" << this->request.track;
-        emit this->responseReady(this->request, this->responses);
-
-        return;
+        ERROR(this->request);
     }
-
 
     QStringList artistTags;
     QByteArray artistSimilarArt;
@@ -109,42 +102,21 @@ void lastfm::parseArtist(const QByteArray &array)
 
         if (n.isElement())
         {
-            //Here retrieve the artist image
-            if(n.nodeName() == "image" && n.hasAttributes())
+            //Here retrieve the artist wiki (bio)
+            if(this->request.info.contains(INFO::WIKI))
             {
-                if(this->request.info.contains(INFO::ARTWORK))
+                if (n.nodeName() == "bio")
                 {
-                    const auto imgSize = n.attributes().namedItem("size").nodeValue();
-                    if (imgSize == "large" && n.isElement())
-                    {
-                        const auto artistArt_url = n.toElement().text();
-                        this->responses << PULPO::RESPONSE {CONTEXT::IMAGE, artistArt_url};
+                    auto artistWiki = n.childNodes().item(2).toElement().text();
 
-                        if(this->request.info.size() == 1) break;
-                        else continue;
-
-                    }else continue;
-
-                }else continue;
+                    this->responses << PULPO::RESPONSE {CONTEXT::WIKI,artistWiki};
+                }
             }
         }
     }
 
 
-    //            //Here retrieve the artist wiki (bio)
-    //            if(this->info == INFO::WIKI || this->info == INFO::ALL)
-    //            {
-    //                if (n.nodeName() == "bio")
-    //                {
-    //                    auto artistWiki = n.childNodes().item(2).toElement().text();
-    //                    //qDebug()<<"Fetching ArtistWiki LastFm[]";
 
-    //                    emit this->infoReady(this->track, this->packResponse(ONTOLOGY::ARTIST, INFO::WIKI,CONTEXT::WIKI,artistWiki));
-
-    //                    if(this->info == INFO::WIKI) return true;
-    //                    else continue;
-    //                }else if(this->info == INFO::WIKI) continue;
-    //            }
 
 
     //            //Here retrieve the artist similar artists
@@ -221,7 +193,6 @@ void lastfm::parseArtist(const QByteArray &array)
     //            this->parseSimilar();
     //    }
 
-    //    return true;
     emit this->responseReady(this->request, this->responses);
 
 }
@@ -234,17 +205,13 @@ void lastfm::parseAlbum(const QByteArray &array)
     if (!doc.setContent(xmlData))
     {
         qDebug()<< "LASTFM XML FAILED 1" << this->request.track;
-        emit this->responseReady(this->request, this->responses);
-
-        return;
+        ERROR(this->request);
     }
 
     if (doc.documentElement().toElement().attributes().namedItem("status").nodeValue()!="ok")
     {
         qDebug()<< "LASTFM XML FAILED 2" << this->request.track;
-        emit this->responseReady(this->request, this->responses);
-
-        return;
+        ERROR(this->request);
     }
 
     const auto nodeList = doc.documentElement().namedItem("album").childNodes();

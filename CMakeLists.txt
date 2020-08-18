@@ -33,7 +33,7 @@ add_executable(vvave
 #    pulpo/services/deezerService.cpp
     pulpo/services/lastfmService.cpp
 #    pulpo/services/lyricwikiaService.cpp
-#    pulpo/services/spotifyService.cpp
+    pulpo/services/spotifyService.cpp
 #    pulpo/services/musicbrainzService.cpp
     pulpo/pulpo.cpp
     pulpo/htmlparser.cpp

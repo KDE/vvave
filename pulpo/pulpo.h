@@ -32,6 +32,7 @@ private:
     PULPO::REQUEST req;
 
     void passSignal(const REQUEST &request, const RESPONSES &responses);
+    void send(const SERVICES &service);
 
 signals:
     void infoReady(PULPO::REQUEST request, PULPO::RESPONSES responses);
