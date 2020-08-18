@@ -33,19 +33,13 @@ Maui.ItemDelegate
         id: _cover
         anchors.fill: parent
 
-        Item
+        Rectangle
         {
             id: _image
             width: parent.width
             height: width
-
-            Rectangle
-            {
-                anchors.fill: parent
-                radius: albumRadius
-                color: randomHexColor()
-                visible: _repeater.count === 0
-            }
+            radius: albumRadius
+            color: randomHexColor()
 
             GridLayout
             {
@@ -86,25 +80,6 @@ Maui.ItemDelegate
                     }
                 }
             }
-
-
-            layer.enabled: albumRadius
-            layer.effect: OpacityMask
-            {
-                maskSource: Item
-                {
-                    width: _image.width
-                    height: _image.height
-
-                    Rectangle
-                    {
-                        anchors.centerIn: parent
-                        width: _image.width
-                        height: _image.height
-                        radius: albumRadius
-                    }
-                }
-            }
         }
 
         Item
@@ -119,52 +94,11 @@ Maui.ItemDelegate
             Kirigami.Theme.backgroundColor: "#333";
             Kirigami.Theme.textColor: "#fafafa"
 
-            FastBlur
+            Rectangle
             {
-                id: blur
-
                 anchors.fill: parent
-                source: ShaderEffectSource
-                {
-                    sourceItem: _image
-                    sourceRect:Qt.rect(0,
-                                       _image.height - _labelBg.height,
-                                       _labelBg.width,
-                                       _labelBg.height)
-                }
-                radius: _image.source === "qrc:/assets/cover.png" ? 0 : 50
-
-                Rectangle
-                {
-                    anchors.fill: parent
-                    color: _labelBg.Kirigami.Theme.backgroundColor
-                    opacity: 0.4
-                }
-
-                layer.enabled: true
-                layer.effect: OpacityMask
-                {
-                    maskSource: Item
-                    {
-                        width: blur.width
-                        height: blur.height
-
-                        Rectangle
-                        {
-                            anchors.centerIn: parent
-                            width: parent.width
-                            height: parent.height
-                            radius: albumRadius
-
-                            Rectangle
-                            {
-                                anchors.top: parent.top
-                                width: parent.width
-                                height: parent.radius
-                            }
-                        }
-                    }
-                }
+                color: _labelBg.Kirigami.Theme.backgroundColor
+                opacity: 0.7
             }
 
             Maui.ListItemTemplate
@@ -185,28 +119,33 @@ Maui.ItemDelegate
                 label2.wrapMode: Text.NoWrap
             }
         }
+
+        layer.enabled: albumRadius
+        layer.effect: OpacityMask
+        {
+            maskSource: Item
+            {
+                width: _cover.width
+                height: _cover.height
+
+                Rectangle
+                {
+                    anchors.centerIn: parent
+                    width: _cover.width
+                    height: _cover.height
+                    radius: albumRadius
+                }
+            }
+        }
     }
 
     Rectangle
     {
         anchors.fill: parent
-        visible: control.isCurrentItem || control.hovered
         color: "transparent"
-        border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : "transparent"
-        border.width: 2
+        border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
         radius: albumRadius
     }
 
-    DropShadow
-    {
-        anchors.fill: _cover
-        visible: !control.hovered
-        horizontalOffset: 0
-        verticalOffset: 0
-        radius: 8.0
-        samples: 17
-        color: "#80000000"
-        source: _cover
-    }
 }
 
