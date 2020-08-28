@@ -177,9 +177,7 @@ Maui.ApplicationWindow
 
     mainMenu: [
 
-        MenuSeparator{},
-
-        MenuItem
+        Action
         {
             text: i18n("Settings")
             icon.name: "settings-configure"
@@ -190,9 +188,7 @@ Maui.ApplicationWindow
             }
         },
 
-        MenuSeparator{},
-
-        MenuItem
+        Action
         {
             text: i18n("Open")
             icon.name: "folder-add"
