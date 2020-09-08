@@ -13,14 +13,10 @@ import "widgets"
 import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
-import "widgets/SearchView"
 import "widgets/CloudView"
 
 import "view_models"
 import "view_models/BabeTable"
-
-import "services/local"
-import "services/web"
 
 import "view_models/BabeGrid"
 
@@ -233,6 +229,15 @@ Maui.ApplicationWindow
             function onClicked()
             {
                 _drawer.close()
+            }
+        }
+
+        onContentDropped:
+        {
+            if(drop.urls)
+            {
+                var urls = drop.urls.join(",")
+                Vvave.openUrls(urls.split(","))
             }
         }
 
@@ -711,17 +716,6 @@ Maui.ApplicationWindow
                 FoldersView
                 {
                     id: foldersView
-                }
-            }
-
-            Maui.AppViewLoader
-            {
-                Maui.AppView.title: i18n("YouTube")
-                Maui.AppView.iconName: "internet-services"
-
-                YouTube
-                {
-                    id: youtubeView
                 }
             }
         }

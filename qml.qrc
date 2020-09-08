@@ -14,23 +14,13 @@
         <file>view_models/BabeTable/BabeTable.qml</file>
         <file>view_models/BabeTable/TableMenu.qml</file>
         <file>widgets/MainPlaylist/MainPlaylist.qml</file>
-        <file>widgets/MainPlaylist/PlaylistMenu.qml</file>
         <file>widgets/PlaylistsView/PlaylistsView.qml</file>
         <file>widgets/InfoView/InfoView.qml</file>
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
         <file>view_models/BabeList.qml</file>
-        <file>widgets/SearchView/SearchTable.qml</file>
-        <file>widgets/SearchView/SearchSuggestions.qml</file>
-        <file>services/web/YouTube.qml</file>
-        <file>services/web/YoutubeViewer.qml</file>
-        <file>services/web/YoutubeHelper.js</file>
-        <file>services/local/LinkingDialog.qml</file>
-        <file>services/local/LinkingView.qml</file>
-        <file>services/local/LinkingListModel.qml</file>
         <file>assets/vvave.notifyrc</file>
         <file>assets/vvave.png</file>
-        <file>widgets/MainPlaylist/AlbumsRoll.qml</file>
         <file>assets/heart_indicator.gif</file>
         <file>services/web/Spotify/Spotify.qml</file>
         <file>services/web/Spotify/LoginForm.qml</file>
@@ -43,9 +33,6 @@
         <file>widgets/SelectionBar.qml</file>
         <file>widgets/FocusView.qml</file>
         <file>widgets/SettingsView/SettingsDialog.qml</file>
-        <file>services/web/WebViewLinux.qml</file>
-        <file>services/web/WebViewOther.qml</file>
-        <file>services/web/WebView.qml</file>
         <file>widgets/CollageDelegate.qml</file>
     </qresource>
     <qresource prefix="/DB">
