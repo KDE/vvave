@@ -17,19 +17,18 @@ import "../../utils/Help.js" as H
 Maui.GridView
 {
     id: control
-    itemSize: Math.min(130, Math.max(60, control.width* 0.3))
+    itemSize: 130
 
     topMargin: Kirigami.Settings.isMobile ? 0 : Maui.Style.space.big
 
-        holder.emoji:  "qrc:/assets/dialog-information.svg"
-        holder.title : i18n("No Playlists!")
-        holder.body: i18n("Start creating new custom playlists")
+    holder.emoji:  "qrc:/assets/dialog-information.svg"
+    holder.title : i18n("No Playlists!")
+    holder.body: i18n("Start creating new custom playlists")
 
-        holder.emojiSize: Maui.Style.iconSizes.huge
-        holder.visible: control.count === 0
+    holder.emojiSize: Maui.Style.iconSizes.huge
+    holder.visible: control.count === 0
 
-//        onActionTriggered: newPlaylistDialog.open()
-
+//    holder.onActionTriggered: newPlaylistDialog.open()
 
     Menu
     {
