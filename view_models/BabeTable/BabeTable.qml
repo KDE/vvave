@@ -99,8 +99,8 @@ BabeList
             {
                 text: i18n("Title")
                 checkable: true
-                checked: list.sortBy === Tracks.TITLE
-                onTriggered: list.sortBy = Tracks.TITLE
+                checked: _tracksModel.sort === "title"
+                onTriggered: _tracksModel.sort = "title"
                 autoExclusive: true
             }
 
@@ -108,8 +108,8 @@ BabeList
             {
                 text: i18n("Track")
                 checkable: true
-                checked: list.sortBy === Tracks.TRACK
-                onTriggered: list.sortBy = Tracks.TRACK
+                checked: _tracksModel.sort === "track"
+                onTriggered: _tracksModel.sort = "track"
                 autoExclusive: true
             }
 
@@ -117,8 +117,8 @@ BabeList
             {
                 text: i18n("Artist")
                 checkable: true
-                checked: list.sortBy === Tracks.ARTIST
-                onTriggered: list.sortBy = Tracks.ARTIST
+                checked: _tracksModel.sort === "artist"
+                onTriggered: _tracksModel.sort ="artist"
                 autoExclusive: true
             }
 
@@ -126,8 +126,8 @@ BabeList
             {
                 text: i18n("Album")
                 checkable: true
-                checked: list.sortBy === Tracks.ALBUM
-                onTriggered: list.sortBy = Tracks.ALBUM
+                checked: _tracksModel.sort === "album"
+                onTriggered: _tracksModel.sort = "album"
                 autoExclusive: true
             }
 
@@ -135,8 +135,8 @@ BabeList
             {
                 text: i18n("Most played")
                 checkable: true
-                checked: list.sortBy === Tracks.COUNT
-                onTriggered: list.sortBy = Tracks.COUNT
+                checked: _tracksModel.sort === "count"
+                onTriggered: _tracksModel.sort = "count"
                 autoExclusive: true
             }
 
@@ -144,17 +144,8 @@ BabeList
             {
                 text: i18n("Rate")
                 checkable: true
-                checked: list.sortBy === Tracks.RATE
-                onTriggered: list.sortBy = Tracks.RATE
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Favorite")
-                checkable: true
-                checked: list.sortBy === Tracks.FAV
-                onTriggered: list.sortBy = Tracks.FAV
+                checked: _tracksModel.sort === "rate"
+                onTriggered: _tracksModel.sort = "rate"
                 autoExclusive: true
             }
 
@@ -162,8 +153,8 @@ BabeList
             {
                 text: i18n("Release date")
                 checkable: true
-                checked: list.sortBy === Tracks.RELEASEDATE
-                onTriggered: list.sortBy = Tracks.RELEASEDATE
+                checked: _tracksModel.sort === "releasedate"
+                onTriggered: _tracksModel.sort = "releasedate"
                 autoExclusive: true
             }
 
@@ -171,8 +162,8 @@ BabeList
             {
                 text: i18n("Add date")
                 checkable: true
-                checked: list.sortBy === Tracks.ADDDATE
-                onTriggered: list.sortBy = Tracks.ADDDATE
+                checked: _tracksModel.sort === "adddate"
+                onTriggered: _tracksModel.sort = "adddate"
                 autoExclusive: true
             }
 
@@ -186,7 +177,6 @@ BabeList
                 onTriggered:
                 {
                     group = !group
-                    groupBy()
                 }
             }
         }
@@ -228,7 +218,6 @@ BabeList
             text: i18n("Go to Artist")
             icon.name: "view-media-artist"
             onTriggered: goToArtist()
-
         }
 
         MenuItem
@@ -292,13 +281,15 @@ BabeList
         }
     }
 
-    section.criteria: ViewSection.FullString
+    listView.section.property: control.group ? _tracksModel.sort : ""
+    listView.section.criteria: _tracksModel.sort === "title" || _tracksModel.sort === "artist" || _tracksModel.sort === "album"?  ViewSection.FirstCharacter : ViewSection.FullString
     section.delegate: Maui.LabelDelegate
     {
         id: _sectionDelegate
-        label: section
+        label: _tracksModel.sort === "adddate" || _tracksModel.sort === "releasedate" ? Maui.FM.formatDate(Date(section), "MM/dd/yyyy") : String(section).toUpperCase()
+
         isSection: true
-        width: control.width
+        width: parent.width
         Kirigami.Theme.backgroundColor: "#333"
         Kirigami.Theme.textColor: "#fafafa"
 
@@ -312,6 +303,8 @@ BabeList
     {
         id: _tracksModel
         list: _tracksList
+        sort: "title"
+        sortOrder: Qt.AscendingOrder
         recursiveFilteringEnabled: true
         sortCaseSensitivity: Qt.CaseInsensitive
         filterCaseSensitivity: Qt.CaseInsensitive
@@ -320,7 +313,6 @@ BabeList
     Tracks
     {
         id: _tracksList
-        onSortByChanged: if(control.group) control.groupBy()
     }
 
     model: _tracksModel
@@ -483,42 +475,6 @@ function goToArtist()
     const item = listModel.get(listView.currentIndex)
     swipeView.currentItem.item.populateTable(undefined, item.artist)
     contextMenu.close()
-}
-
-function groupBy()
-{
-    var prop = "undefined"
-
-    if(group)
-        switch(list.sortBy)
-        {
-        case Tracks.TITLE:
-            prop = "title"
-            break
-        case Tracks.ARTIST:
-            prop = "artist"
-            break
-        case Tracks.ALBUM:
-            prop = "album"
-            break
-        case Tracks.RATE:
-            prop = "rate"
-            break
-        case Tracks.FAV:
-            prop = "fav"
-            break
-        case Tracks.ADDDATE:
-            prop = "adddate"
-            break
-        case Tracks.RELEASEDATE:
-            prop = "releasedate"
-            break;
-        case Tracks.COUNT:
-            prop = "count"
-            break
-        }
-
-    section.property =  prop
 }
 
 function filterSelectedItems(path)

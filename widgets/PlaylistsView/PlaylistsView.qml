@@ -132,11 +132,11 @@ StackView
         {
         case "Most Played":
             playlistQuery = Q.GET.mostPlayedTracks
-            filterList.list.sortBy = Tracks.COUNT
+            filterList.listModel.sort = "count"
             break;
 
         case "Rating":
-            filterList.list.sortBy = Tracks.RATE
+            filterList.listModel.sort = "rate"
             filterList.group = true
 
             playlistQuery = Q.GET.favoriteTracks;
@@ -144,7 +144,7 @@ StackView
 
         case "Recent":
             playlistQuery = Q.GET.recentTracks;
-            filterList.list.sortBy = Tracks.ADDDATE
+            filterList.listModel.sort = "adddate"
             filterList.group = true
             break;
 

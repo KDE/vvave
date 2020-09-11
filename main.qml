@@ -594,7 +594,7 @@ Maui.ApplicationWindow
                     holder.body: i18n("Add new music sources")
                     holder.emojiSize: Maui.Style.iconSizes.huge
                     list.query: Albums.ALBUMS
-                    list.sortBy: Albums.ALBUM
+                    listModel.sort: "track"
 
                     onRowClicked: Player.quickPlay(track)
                     onAppendTrack: Player.addTrack(track)
@@ -607,7 +607,6 @@ Maui.ApplicationWindow
                         query = query.arg(artist)
 
                         mainPlaylist.list.clear()
-                        mainPlaylist.list.sortBy = Tracks.NONE
                         mainPlaylist.list.query = query
                         Player.playAt(0)
                     }
@@ -641,8 +640,7 @@ Maui.ApplicationWindow
                     holder.body: i18n("Add new music sources")
                     holder.emojiSize: Maui.Style.iconSizes.huge
                     list.query: Albums.ARTISTS
-                    list.sortBy: Albums.ARTIST
-                    table.list.sortBy:  Tracks.NONE
+                    table.listModel.sort: "artist"
 
                     onRowClicked: Player.quickPlay(track)
                     onAppendTrack: Player.addTrack(track)
@@ -653,7 +651,6 @@ Maui.ApplicationWindow
                     {
                         var query = Q.GET.artistTracks_.arg(artist)
                         mainPlaylist.list.clear()
-                        mainPlaylist.list.sortBy = Tracks.NONE
                         mainPlaylist.list.query = query
                         Player.playAt(0)
                     }

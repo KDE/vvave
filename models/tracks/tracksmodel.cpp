@@ -37,91 +37,10 @@ QString TracksModel::getQuery() const
     return this->query;
 }
 
-void TracksModel::setSortBy(const SORTBY &sort)
-{
-    if(this->sort == sort)
-        return;
-
-    this->sort = sort;
-
-    emit this->preListChanged();
-    this->sortList();
-    emit this->postListChanged();
-    emit this->sortByChanged();
-}
-
-TracksModel::SORTBY TracksModel::getSortBy() const
-{
-    return this->sort;
-}
-
 int TracksModel::limit() const
 {
     return m_limit;
 }
-
-void TracksModel::sortList()
-{
-    if(this->sort == TracksModel::SORTBY::NONE)
-        return;
-
-    const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
-    qSort(this->list.begin(), this->list.end(), [key](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
-    {
-        switch(key)
-        {
-        case FMH::MODEL_KEY::RELEASEDATE:
-        case FMH::MODEL_KEY::RATE:
-        case FMH::MODEL_KEY::FAV:
-        case FMH::MODEL_KEY::COUNT:
-        {
-            if(e1[key].toInt() > e2[key].toInt())
-                return true;
-            break;
-        }
-
-        case FMH::MODEL_KEY::TRACK:
-        {
-            if(e1[key].toInt() < e2[key].toInt())
-                return true;
-            break;
-        }
-
-        case FMH::MODEL_KEY::ADDDATE:
-        {
-            auto currentTime = QDateTime::currentDateTime();
-
-            auto date1 = QDateTime::fromString(e1[key], Qt::TextDate);
-            auto date2 = QDateTime::fromString(e2[key], Qt::TextDate);
-
-            if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
-                return true;
-
-            break;
-        }
-
-        case FMH::MODEL_KEY::TITLE:
-        case FMH::MODEL_KEY::ARTIST:
-        case FMH::MODEL_KEY::ALBUM:
-        case FMH::MODEL_KEY::FORMAT:
-        {
-            const auto str1 = QString(e1[key]).toLower();
-            const auto str2 = QString(e2[key]).toLower();
-
-            if(str1 < str2)
-                return true;
-            break;
-        }
-
-        default:
-            if(e1[key] < e2[key])
-                return true;
-        }
-
-        return false;
-    });
-}
-
 
 void TracksModel::setList()
 {
@@ -153,10 +72,8 @@ void TracksModel::setList()
     });
 }
 
-this->sortList();
 emit this->postListChanged();
 emit countChanged();
-
 }
 
 QVariantMap TracksModel::get(const int &index) const

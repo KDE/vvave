@@ -66,70 +66,6 @@ AlbumsModel::QUERY AlbumsModel::getQuery() const
     return this->query;
 }
 
-void AlbumsModel::setSortBy(const SORTBY &sort)
-{
-    if(this->sort == sort)
-        return;
-
-    this->sort = sort;
-
-    emit this->preListChanged();
-    this->sortList();
-    emit this->postListChanged();
-    emit this->sortByChanged();
-}
-
-AlbumsModel::SORTBY AlbumsModel::getSortBy() const
-{
-    return this->sort;
-}
-
-void AlbumsModel::sortList()
-{
-    const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
-    qDebug()<< "SORTING LIST BY"<< this->sort;
-    std::sort(this->list.begin(), this->list.end(), [key](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
-    {
-        const auto role = key;
-        switch(role)
-        {
-        case FMH::MODEL_KEY::RELEASEDATE:
-        {
-            if(e1[role].toDouble() > e2[role].toDouble())
-                return true;
-            break;
-        }
-
-        case FMH::MODEL_KEY::ADDDATE:
-        {
-            const auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
-            const auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
-
-            if(date1.secsTo(QDateTime::currentDateTime()) <  date2.secsTo(QDateTime::currentDateTime()))
-                return true;
-            break;
-        }
-
-        case FMH::MODEL_KEY::ARTIST:
-        case FMH::MODEL_KEY::ALBUM:
-        {
-            const auto str1 = QString(e1[role]).toLower();
-            const auto str2 = QString(e2[role]).toLower();
-
-            if(str1 < str2)
-                return true;
-            break;
-        }
-
-        default:
-            if(e1[role] < e2[role])
-                return true;
-        }
-
-        return false;
-    });
-}
-
 void AlbumsModel::setList()
 {
     emit this->preListChanged();
@@ -156,7 +92,6 @@ void AlbumsModel::setList()
     return true;
 });
 
-this->sortList();
 emit this->postListChanged();
 
 if(FMStatic::loadSettings("FetchArtwork", "Settings", true ).toBool())

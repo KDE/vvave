@@ -53,7 +53,7 @@ StackView
         trackNumberVisible: true
         coverArtVisible: true
         focus: true
-        list.sortBy: Tracks.TRACK
+        listModel.sort: "track"
         holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.isMask: false
         holder.title : "Oops!"

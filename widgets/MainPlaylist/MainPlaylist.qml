@@ -52,6 +52,7 @@ Maui.Page
         id: table
         anchors.fill: parent
         focus: true
+        listModel.sort: ""
         headBar.visible: false
         footBar.visible: false
         coverArtVisible: true
