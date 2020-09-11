@@ -136,3 +136,5 @@ INCLUDEPATH += \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
+
+ANDROID_ABIS = armeabi-v7a

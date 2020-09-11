@@ -40,7 +40,6 @@ public slots:
 private:
 	explicit vvave(QObject *parent = nullptr);
 	CollectionDB *db;
-	void checkCollection(const QStringList &paths = BAE::defaultSources, std::function<void (uint)> cb = nullptr);
 
 signals:
 	void refreshTables();

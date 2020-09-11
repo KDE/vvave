@@ -1,8 +1,8 @@
 #include "vvave.h"
 
 #include "db/collectionDB.h"
-#include "services/local/fileloader.h"
 #include "utils/brain.h"
+#include "services/local/taginfo.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
 #include "kde/notify.h"
@@ -10,9 +10,44 @@
 
 #ifdef STATIC_MAUIKIT
 #include "fm.h"
+#include "fileloader.h"
 #else
 #include <MauiKit/fm.h>
+#include <MauiKit/fileloader.h>
 #endif
+
+static FMH::MODEL trackInfo(const QUrl &url)
+{
+    TagInfo info(url.toLocalFile());
+    if(info.isNull())
+        return FMH::MODEL();
+
+    const auto track = info.getTrack();
+    const auto genre = info.getGenre();
+    const auto album = BAE::fixString(info.getAlbum());
+    const auto title = BAE::fixString(info.getTitle()); /* to fix*/
+    const auto artist = BAE::fixString(info.getArtist());
+    const auto sourceUrl = FMH::parentDir(url).toString();
+    const auto duration = info.getDuration();
+    const auto year = info.getYear();
+
+    FMH::MODEL map =
+    {
+        {FMH::MODEL_KEY::URL, url.toString()},
+        {FMH::MODEL_KEY::TRACK, QString::number(track)},
+        {FMH::MODEL_KEY::TITLE, title},
+        {FMH::MODEL_KEY::ARTIST, artist},
+        {FMH::MODEL_KEY::ALBUM, album},
+        {FMH::MODEL_KEY::DURATION,QString::number(duration)},
+        {FMH::MODEL_KEY::GENRE, genre},
+        {FMH::MODEL_KEY::SOURCE, sourceUrl},
+        {FMH::MODEL_KEY::FAV, "0"},
+        {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}
+    };
+
+    BAE::artworkCache(map, FMH::MODEL_KEY::ALBUM);
+    return map;
+}
 
 /*
  * Sets upthe app default config paths
@@ -82,25 +117,26 @@ bool vvave::removeSource(const QString &source)
 
 void vvave::scanDir(const QStringList &paths)
 {
-	auto fileLoader = new FileLoader();
-	connect(fileLoader, &FileLoader::itemReady, [this](FMH::MODEL item)
+    auto fileLoader = new FMH::FileLoader();
+    fileLoader->informer = &trackInfo;
+    connect(fileLoader, &FMH::FileLoader::itemReady, [this](FMH::MODEL item)
 	{
 		db->addTrack(item);
 	});
 
-	connect(fileLoader, &FileLoader::itemsReady, [this](FMH::MODEL_LIST items)
+    connect(fileLoader, &FMH::FileLoader::itemsReady, [this](FMH::MODEL_LIST)
 	{
 //        for(const auto &item : items)
 //            db->addTrack(item);
 		emit this->refreshTables();
 	});
 
-	connect(fileLoader, &FileLoader::finished, [=] (uint)
+    connect(fileLoader, &FMH::FileLoader::finished, [=] (FMH::MODEL_LIST)
 	{
 		delete fileLoader;
 	});
 
-	fileLoader->requestPath(QUrl::fromStringList(paths), true);
+    fileLoader->requestPath(QUrl::fromStringList(paths), true, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO]<< "*.m4a");
 }
 
 QStringList vvave::sources()
@@ -124,39 +160,15 @@ void vvave::openUrls(const QStringList &urls)
 	QVariantList data;
 
 	for(const auto &url : urls)
-	{
-		auto _url = QUrl::fromUserInput(url);
-		if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString()))
-		{
-			data << FMH::toMap(this->db->getDBData(QStringList() << _url.toString()).first());
-		}else
-		{
-			TagInfo info(_url.toLocalFile());
-			if(!info.isNull())
-			{
-				const auto album = BAE::fixString(info.getAlbum());
-				const auto track= info.getTrack();
-				const auto title = BAE::fixString(info.getTitle()); /* to fix*/
-				const auto artist = BAE::fixString(info.getArtist());
-				const auto genre = info.getGenre();
-				const auto sourceUrl = QFileInfo(_url.toLocalFile()).dir().path();
-				const auto duration = info.getDuration();
-				const auto year = info.getYear();
-
-				data << QVariantMap({
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString()},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::TRACK], QString::number(track)},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::DURATION],QString::number(duration)},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::GENRE], genre},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCE], sourceUrl},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],"0"},
-										{FMH::MODEL_NAME[FMH::MODEL_KEY::RELEASEDATE], QString::number(year)}
-									});
-			}
-		}
+    {
+        auto _url = QUrl::fromUserInput(url);
+        if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString()))
+        {
+            data << FMH::toMap(this->db->getDBData(QStringList() << _url.toString()).first());
+        }else
+        {
+            data << FMH::toMap(trackInfo(_url));
+        }
 	}
 
 	emit this->openFiles(data);
