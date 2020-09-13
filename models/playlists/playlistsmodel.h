@@ -9,7 +9,6 @@
 #include <MauiKit/mauilist.h>
 #endif
 
-class CollectionDB;
 class PlaylistsModel : public MauiList
 {
     Q_OBJECT
@@ -20,7 +19,6 @@ public:
     void componentComplete() override;
 
 private:
-    CollectionDB *db;
     FMH::MODEL_LIST list;
     void setList();
 

@@ -1,5 +1,4 @@
 #include "playlistsmodel.h"
-#include "db/collectionDB.h"
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
@@ -7,8 +6,7 @@
 #include <MauiKit/tagging.h>
 #endif
 
-PlaylistsModel::PlaylistsModel(QObject *parent) : MauiList(parent),
-    db(CollectionDB::getInstance())
+PlaylistsModel::PlaylistsModel(QObject *parent) : MauiList(parent)
 {
     connect(Tagging::getInstance(), &Tagging::tagged, [this](QString tag)
     {
