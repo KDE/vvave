@@ -24,21 +24,25 @@ Maui.Page
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
+
+    flickable: table.flickable
+
     focus: true
     title: i18n("Now playing")
     showTitle: true
     headBar.visible: true
+
     headBar.rightContent: ToolButton
+    {
+        icon.name: "edit-delete"
+        onClicked:
         {
-            icon.name: "edit-delete"
-            onClicked:
-            {
-                player.stop()
-                mainPlaylist.table.list.clear()
-                root.sync = false
-                root.syncPlaylist = ""
-            }
+            player.stop()
+            mainPlaylist.table.list.clear()
+            root.sync = false
+            root.syncPlaylist = ""
         }
+    }
 
     headBar.leftContent:  ToolButton
     {
@@ -46,23 +50,22 @@ Maui.Page
         onClicked: mainPlaylist.table.saveList()
     }
 
-    flickable: table.flickable
     BabeTable
     {
         id: table
         anchors.fill: parent
         focus: true
         listModel.sort: ""
+
         headBar.visible: false
         footBar.visible: false
-        coverArtVisible: true
-        holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.isMask: true
-        holder.title : "Meh!"
-        holder.body: i18n("Start putting together your playlist!")
+
+        holder.emoji: "qrc:/assets/view-media-track.svg"
+        holder.title : "Nothing to play!"
+        holder.body: i18n("Start putting together your playlist.")
         holder.emojiSize: Maui.Style.iconSizes.huge
+
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
-        Kirigami.Theme.backgroundColor: "transparent"
 
         listView.header: Rectangle
         {
@@ -105,8 +108,10 @@ Maui.Page
             width: listView.width
             number : false
             coverArt : true
+
             checkable: false
             checked: false
+
             onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
             onRightClicked:
             {
@@ -115,14 +120,8 @@ Maui.Page
 
             sameAlbum:
             {
-                if(coverArt)
-                {
-                    if(list.get(index-1))
-                    {
-                        if(list.get(index-1).album === album && list.get(index-1).artist === artist) true
-                        else false
-                    }else false
-                }else false
+                const item = listModel.get(index-1)
+                return coverArt && item && item.album === album && item.artist === artist
             }
 
             ToolButton
@@ -145,15 +144,14 @@ Maui.Page
             onClicked:
             {
                 if(Maui.Handy.isTouch)
-                    control.play(index)
+                    Player.playAt(index)
             }
 
             onDoubleClicked:
             {
                 if(!Maui.Handy.isTouch)
-                    control.play(index)
+                    Player.playAt(index)
             }
-
         }
 
         Component.onCompleted:
@@ -175,12 +173,5 @@ Maui.Page
                 table.list.appendQuery(query);
             }
         }
-    }
-
-
-
-    function play(index)
-    {
-        Player.playAt(index)
     }
 }

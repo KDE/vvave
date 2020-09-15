@@ -84,6 +84,8 @@ BabeList
     {
         Layout.fillWidth: true
         Layout.minimumWidth: 100
+        Layout.maximumWidth: 500
+        Layout.alignment: Qt.AlignCenter
         enabled: _tracksList.count > 0
         placeholderText: i18n("Search") + " " + list.count + " " + i18n("tracks")
         onAccepted: listModel.filter = text
@@ -340,14 +342,8 @@ BabeList
 
     sameAlbum:
     {
-        if(coverArt)
-        {
-            if(listModel.get(index-1))
-            {
-                if(listModel.get(index-1).album === album && listModel.get(index-1).artist === artist) true
-                else false
-            }else false
-        }else false
+        const item = listModel.get(index-1)
+        return coverArt && item && item.album === album && item.artist === artist
     }
 
     ToolButton

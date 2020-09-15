@@ -54,7 +54,7 @@ StackView
         coverArtVisible: true
         focus: true
         listModel.sort: "track"
-        holder.emoji: "qrc:/assets/dialog-information.svg"
+        holder.emoji: "qrc:/assets/media-album-track.svg"
         holder.title : "Oops!"
         holder.body: i18n("This list is empty")
         holder.emojiSize: Maui.Style.iconSizes.huge

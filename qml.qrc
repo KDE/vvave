@@ -34,6 +34,8 @@
         <file>widgets/FocusView.qml</file>
         <file>widgets/SettingsView/SettingsDialog.qml</file>
         <file>widgets/CollageDelegate.qml</file>
+        <file>assets/view-media-track.svg</file>
+        <file>assets/media-album-track.svg</file>
     </qresource>
     <qresource prefix="/DB">
         <file>db/script.sql</file>

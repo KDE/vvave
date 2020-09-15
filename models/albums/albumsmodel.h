@@ -21,6 +21,7 @@ class ArtworkFetcher: public QObject
 		void fetch(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology);
 	signals:
 		void artworkReady(const FMH::MODEL &item, const int &index);
+        void finished();
 };
 
 class CollectionDB;
@@ -39,7 +40,8 @@ public:
 
 	explicit AlbumsModel(QObject *parent = nullptr);
 	~AlbumsModel();
-	void componentComplete() override final;
+
+    void componentComplete() override;
 
 	FMH::MODEL_LIST items() const override;
 

@@ -13,6 +13,7 @@ Player::Player(QObject *parent) : QObject(parent),
 { 
     this->player->setVolume(this->volume);
     connect(this->updater, &QTimer::timeout, this, &Player::update);
+    connect(this->player, &QMediaPlayer::stateChanged, this, &Player::stateChanged);
 }
 
 inline QNetworkRequest getOcsRequest(const QNetworkRequest& request)
@@ -83,26 +84,6 @@ void Player::stop()
     emit this->playingChanged();
 
     this->updater->stop();
-
-    this->emitState();
-}
-
-void Player::emitState()
-{
-    switch(this->player->state())
-    {
-    case QMediaPlayer::PlayingState:
-        this->state = Player::STATE::PLAYING;
-        break;
-    case QMediaPlayer::PausedState:
-        this->state = Player::STATE::PAUSED;
-        break;
-    case QMediaPlayer::StoppedState:
-        this->state = Player::STATE::STOPED;
-        break;
-    }
-
-    emit this->stateChanged();
 }
 
 QString Player::transformTime(const int &pos)
@@ -124,7 +105,6 @@ void Player::setUrl(const QUrl &value)
     const auto media = this->url.isLocalFile() ? QMediaContent(this->url) : QMediaContent(getOcsRequest(QNetworkRequest(this->url)));
 
     this->player->setMedia(media);
-    this->emitState();
 }
 
 QUrl Player::getUrl() const
@@ -152,9 +132,9 @@ int Player::getDuration() const
     return static_cast<int>(this->player->duration());
 }
 
-Player::STATE Player::getState() const
+QMediaPlayer::State Player::getState() const
 {
-    return this->state;
+    return this->player->state();
 }
 
 void Player::setPlaying(const bool &value)
@@ -166,7 +146,6 @@ void Player::setPlaying(const bool &value)
     else this->pause();
 
     emit this->playingChanged();
-    this->emitState();
 }
 
 bool Player::getPlaying() const
@@ -183,7 +162,6 @@ void Player::setPos(const int &value)
 {
     this->pos = value;
     this->player->setPosition(this->player->duration() / 1000 * this->pos);
-    this->emitState();
     this->posChanged();
 }
 
@@ -206,6 +184,4 @@ void Player::update()
         this->finished = true;
         emit this->finishedChanged();
     }
-
-    this->emitState();
 }

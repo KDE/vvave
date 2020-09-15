@@ -63,7 +63,7 @@ Maui.SettingsDialog
         Maui.SettingTemplate
         {
             label1.text: i18n("Fetch Artwork")
-            label2.text: i18n("Gathers album and artists artwoks from online services")
+            label2.text: i18n("Gathers album and artists artworks from online services: LastFM, Spotify, MusicBrainz, iTunes, Genius, and others.")
 
             Switch
             {
@@ -80,7 +80,7 @@ Maui.SettingsDialog
         Maui.SettingTemplate
         {
             label1.text: i18n("Auto Scan")
-            label2.text: i18n("Scan your sources to update your collection on start up")
+            label2.text: i18n("Scan all the music sources on startup to keep your collection updated")
 
             Switch
             {

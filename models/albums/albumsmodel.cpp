@@ -28,26 +28,35 @@ AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
 	{
 		qDebug()<< "FILE ARTWORK READY" << index << item[FMH::MODEL_KEY::ARTWORK];
 		this->db->insertArtwork (item);
-		this->updateArtwork (index, item[FMH::MODEL_KEY::ARTWORK]);
+        this->updateArtwork (index, item[FMH::MODEL_KEY::ARTWORK]);
 	});
 
 	this->m_worker.start ();
-
 	connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
-
-	connect(vvave::instance (), query == QUERY::ALBUMS ? &vvave::albumsAdded : &vvave::artistsAdded, this, &AlbumsModel::setList);
-	connect(vvave::instance (), &vvave::sourceRemoved, this, &AlbumsModel::setList);
 }
 
 AlbumsModel::~AlbumsModel()
 {
 	m_worker.quit();
-	m_worker.wait();
+    m_worker.wait();
 }
 
 void AlbumsModel::componentComplete()
 {
+    if(query == QUERY::ALBUMS )
+    {
+        connect(vvave::instance (), &vvave::albumsAdded, this, &AlbumsModel::setList);
+    }else
+    {
+        connect(vvave::instance (), &vvave::artistsAdded, this, &AlbumsModel::setList);
+    }
 
+    connect(vvave::instance (), &vvave::sourceRemoved, this, &AlbumsModel::setList);
+
+    if(FMStatic::loadSettings("FetchArtwork", "Settings", true ).toBool())
+    {
+        this->fetchInformation();
+    }
 }
 
 FMH::MODEL_LIST AlbumsModel::items() const
@@ -99,17 +108,15 @@ void AlbumsModel::setList()
 
 emit this->postListChanged();
 
-qDebug() << "Settings AlbumModel List";
-if(FMStatic::loadSettings("FetchArtwork", "Settings", true ).toBool())
-{
-	this->fetchInformation();
-}
 }
 
 void AlbumsModel::fetchInformation()
 {
 	qDebug() << "RNUNGING BRAIN EFFORRTS";
-	emit this->fetchArtwork (this->list, this->query == AlbumsModel::QUERY::ALBUMS ? PULPO::ONTOLOGY::ALBUM : PULPO::ONTOLOGY::ARTIST);
+    if(!this->list.isEmpty())
+    {
+        emit this->fetchArtwork (this->list, this->query == AlbumsModel::QUERY::ALBUMS ? PULPO::ONTOLOGY::ALBUM : PULPO::ONTOLOGY::ARTIST);
+    }
 }
 
 void AlbumsModel::updateArtwork(const int index, const QString &artwork)
@@ -195,7 +202,7 @@ void ArtworkFetcher::fetch(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology)
 		request.ontology = ontology;
 		request.services = {PULPO::SERVICES::LastFm, PULPO::SERVICES::Spotify};
 		request.info = {PULPO::INFO::ARTWORK};
-		request.callback = [&, index](PULPO::REQUEST request, PULPO::RESPONSES responses)
+        request.callback = [&, index](PULPO::REQUEST request, PULPO::RESPONSES responses)
 		{
 			qDebug() << "DONE WITH " << request.track ;
 
@@ -206,17 +213,15 @@ void ArtworkFetcher::fetch(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology)
 					if(!res.value.toString().isEmpty())
 					{
 						auto downloader = new FMH::Downloader;
-						QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, index, request, downloader](QString path)
+                        QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, index, request, downloader](QString path) mutable
 						{
-							FMH::MODEL newTrack = request.track;
-							newTrack[FMH::MODEL_KEY::ARTWORK] = QUrl::fromLocalFile (path).toString ();
-							emit this->artworkReady (newTrack, index);
+                            auto newTrack = request.track;
+                            newTrack[FMH::MODEL_KEY::ARTWORK] = QUrl::fromLocalFile (path).toString ();
+                            emit this->artworkReady (newTrack, index);
 							downloader->deleteLater();
 						});
 
 						const auto format = res.value.toUrl().fileName().endsWith(".png") ? ".png" : ".jpg";
-						//                    const auto format = "." + filePathList.at(filePathList.count() - 1).split(".").last();
-
 						QString name = !request.track[FMH::MODEL_KEY::ALBUM].isEmpty() ? request.track[FMH::MODEL_KEY::ARTIST] + "_" + request.track[FMH::MODEL_KEY::ALBUM] : request.track[FMH::MODEL_KEY::ARTIST];
 						name.replace("/", "-");
 						name.replace("&", "-");
@@ -224,9 +229,9 @@ void ArtworkFetcher::fetch(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology)
 						qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM]<< BAE::CachePath + name + format;
 					}else
 					{
-						FMH::MODEL newTrack = request.track;
-						newTrack[FMH::MODEL_KEY::ARTWORK] = "qrc:/assets/cover.png";
-						emit this->artworkReady (newTrack, index);
+                        auto newTrack = request.track;
+                        newTrack[FMH::MODEL_KEY::ARTWORK] = "qrc:/assets/cover.png";
+                        emit this->artworkReady (newTrack, index);
 					}
 				}
 			}
@@ -245,4 +250,6 @@ void ArtworkFetcher::fetch(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology)
 		pulpo.request(req);
 		loop.exec();
 	}
+
+    emit this->finished();
 }

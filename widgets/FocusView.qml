@@ -263,10 +263,7 @@ Maui.Page
                             }
                         }
                     }
-
                 }
-
-
             }
 
             Item
@@ -348,9 +345,7 @@ Maui.Page
                 icon.name: "documentinfo"
                 onClicked: focusView = false
                 Layout.alignment: Qt.AlignCenter
-
             }
-
         }
 
         RowLayout
@@ -422,13 +417,14 @@ Maui.Page
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "love"
-                    enabled: currentTrackIndex >= 0
-                    checked: Maui.FM.isFav(mainPlaylist.listView.model.get(currentTrackIndex).url)
+                    enabled: currentTrack
+                    checked: Maui.FM.isFav(currentTrack.url)
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
-                    onClicked: if (!mainlistEmpty)
-                               {
-                                   mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(mainPlaylist.listModel.get(currentTrackIndex).url))
-                               }
+                    onClicked:
+                    {
+                        mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
+                        root.currentTrackChanged()
+                    }
                 },
 
                 ToolButton
@@ -478,7 +474,5 @@ Maui.Page
                 }
             ]
         }
-
     }
-
 }

@@ -1,5 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
+import QtQuick.Layouts 1.3
 
 import org.kde.mauikit 1.2 as Maui
 import org.kde.kirigami 2.7 as Kirigami
@@ -42,13 +43,43 @@ StackView
 
         viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
-        gridView.itemSize: 140
+        gridView.itemSize: 120
         gridView.itemHeight: gridView.itemSize * 1.2
         gridView.margins: Kirigami.Settings.isMobile ? 0 : Maui.Style.space.big
 
         listView.topMargin: Maui.Style.contentMargins
         listView.spacing: Maui.Style.space.medium
         listView.snapMode: ListView.SnapOneItem
+
+        headBar.leftContent: Maui.ToolActions
+        {
+            autoExclusive: true
+            expanded: isWide
+            currentIndex : browser.viewType === Maui.AltBrowser.ViewType.List ? 0 : 1
+            display: ToolButton.TextBesideIcon
+
+            Action
+            {
+                text: i18n("List")
+                icon.name: "view-list-details"
+                onTriggered: browser.viewType = Maui.AltBrowser.ViewType.List
+            }
+
+            Action
+            {
+                text: i18n("Grid")
+                icon.name: "view-list-icons"
+                onTriggered: browser.viewType= Maui.AltBrowser.ViewType.Grid
+            }
+        }
+
+        headBar.middleContent: Maui.TextField
+        {
+            Layout.fillWidth: true
+            placeholderText: i18n("Filter...")
+            onAccepted: browser.model.filter = text
+            onCleared:  browser.model.filter = text
+        }
 
         gridDelegate: Maui.GridBrowserDelegate
         {

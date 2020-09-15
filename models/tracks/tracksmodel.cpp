@@ -199,6 +199,7 @@ void TracksModel::clear()
 	emit this->preListChanged();
 	this->list.clear();
 	emit this->postListChanged();
+    emit this->countChanged();
 }
 
 bool TracksModel::fav(const int &index, const bool &value)

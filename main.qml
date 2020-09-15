@@ -1,7 +1,10 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
+import QtQml 2.14
+
 import QtGraphicalEffects 1.0
+import QtMultimedia 5.0
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.2 as Maui
@@ -31,6 +34,7 @@ Maui.ApplicationWindow
 
     id: root
     title: currentTrack ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
+
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -39,16 +43,18 @@ Maui.ApplicationWindow
     property alias progressBar: progressBar
     property alias dialog : _dialogLoader.item
 
-    background.opacity: translucency ? 0.5 : 1
-    //    floatingHeader: swipeView.currentIndex === viewsIndex.albums || swipeView.currentIndex === viewsIndex.artists
-    //    autoHideHeader: true
-    floatingFooter: false
+//    background.opacity: translucency ? 0.5 : 1
 
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
     property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
-    property var currentTrack: mainPlaylist.listView.itemAtIndex(currentTrackIndex)
+    property var currentTrack : undefined
+    Binding on currentTrack
+    {
+       value: mainPlaylist.listView.itemAtIndex(currentTrackIndex)
+       restoreMode: Binding.RestoreBindingOrValue
+    }
 
     property int currentTrackIndex: -1
     property int prevTrackIndex: 0
@@ -88,8 +94,6 @@ Maui.ApplicationWindow
 
     /*SIGNALS*/
     signal missingAlert(var track)
-
-    //    flickable: swipeView.currentItem.flickable ||  swipeView.currentItem.item.flickable
 
     footerPositioning: ListView.InlineFooter
     /*HANDLE EVENTS*/
@@ -331,7 +335,7 @@ Maui.ApplicationWindow
                 Layout.fillWidth: true
                 preferredHeight: Maui.Style.toolBarHeightAlt * 0.8
                 position: ToolBar.Footer
-                visible: isPlaying
+                visible: player.state !== MediaPlayer.StoppedState
 
                 leftContent: Label
                 {
@@ -483,13 +487,15 @@ Maui.ApplicationWindow
                     {
                         id: babeBtnIcon
                         icon.name: "love"
-                        enabled: currentTrackIndex >= 0
-                        checked: currentTrack ? Maui.FM.isFav(currentTrack.url) : false
+                        enabled: currentTrack
+                        checked: Maui.FM.isFav(currentTrack.url)
                         icon.color: checked ? babeColor :  Kirigami.Theme.textColor
-                        onClicked: if (!mainlistEmpty)
-                                   {
-                                       mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
-                                   }
+                        onClicked:
+                        {
+                            mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
+                            root.currentTrackChanged()
+                        }
+
                     },
 
                     Maui.ToolActions

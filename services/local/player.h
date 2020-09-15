@@ -11,21 +11,13 @@ class Player : public QObject
     Q_OBJECT
     Q_PROPERTY(QUrl url READ getUrl WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(int volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
-    Q_PROPERTY(Player::STATE state READ getState NOTIFY stateChanged)
+    Q_PROPERTY(QMediaPlayer::State  state READ getState NOTIFY stateChanged)
     Q_PROPERTY(int duration READ getDuration NOTIFY durationChanged)
     Q_PROPERTY(bool playing READ getPlaying WRITE setPlaying NOTIFY playingChanged)
     Q_PROPERTY(bool finished READ getFinished NOTIFY finishedChanged)
     Q_PROPERTY(int pos READ getPos WRITE setPos NOTIFY posChanged)
 
 public:
-
-    enum STATE : uint_fast8_t
-    {
-        PLAYING,
-        PAUSED,
-        STOPED
-    };Q_ENUM(STATE)
-
     explicit Player(QObject *parent = nullptr);
 
     void setUrl(const QUrl &value);
@@ -36,7 +28,7 @@ public:
 
     int getDuration() const;
 
-    Player::STATE getState() const;
+    QMediaPlayer::State getState() const;
 
     void setPlaying(const bool &value);
     bool getPlaying() const;
@@ -54,15 +46,12 @@ private:
     int volume = 100;
 
     QUrl url;
-    Player::STATE state = STATE::STOPED;
     bool playing = false;
     bool finished = false;
 
     bool play() const;
     void pause() const;
     void update();
-
-    void emitState();
 
 signals:
     void durationChanged();
