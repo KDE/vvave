@@ -83,6 +83,7 @@ BabeList
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
+        Layout.minimumWidth: 100
         enabled: _tracksList.count > 0
         placeholderText: i18n("Search") + " " + list.count + " " + i18n("tracks")
         onAccepted: listModel.filter = text

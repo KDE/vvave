@@ -35,7 +35,7 @@ Maui.ItemDelegate
             sourceSize.width: width
             sourceSize.height: height
 
-            fillMode: Image.PreserveAspectFit
+            fillMode: Image.PreserveAspectCrop
             smooth: true
             asynchronous: true
 

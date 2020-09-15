@@ -85,8 +85,8 @@ Maui.Page
                 grid.currentIndex = index
                 if(Maui.Handy.singleClick)
                 {
-                    const album = _albumsList.get(index).album
-                    const artist = _albumsList.get(index).artist
+                    const album = _albumsModel.get(index).album
+                    const artist = _albumsModel.get(index).artist
                     albumCoverClicked(album, artist)
                 }
             }
@@ -96,8 +96,8 @@ Maui.Page
                 grid.currentIndex = index
                 if(!Maui.Handy.singleClick)
                 {
-                    const album = _albumsList.get(index).album
-                    const artist = _albumsList.get(index).artist
+                    const album = _albumsModel.get(index).album
+                    const artist = _albumsModel.get(index).artist
                     albumCoverClicked(album, artist)
                 }
             }
@@ -137,8 +137,8 @@ Maui.Page
                     grid.currentIndex = index
                     if(Maui.Handy.singleClick)
                     {
-                        const album = _albumsList.get(index).album
-                        const artist = _albumsList.get(index).artist
+                        const album = _albumsModel.get(index).album
+                        const artist = _albumsModel.get(index).artist
                         albumCoverClicked(album, artist)
                     }
                 }
@@ -148,8 +148,8 @@ Maui.Page
                     grid.currentIndex = index
                     if(!Maui.Handy.singleClick)
                     {
-                        const album = _albumsList.get(index).album
-                        const artist = _albumsList.get(index).artist
+                        const album = _albumsModel.get(index).album
+                        const artist = _albumsModel.get(index).artist
                         albumCoverClicked(album, artist)
                     }
                 }

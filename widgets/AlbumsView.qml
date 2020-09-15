@@ -19,9 +19,9 @@ StackView
 
     property string currentAlbum: ""
     property string currentArtist: ""
-    
+
     property var tracks: []
-    
+
     property alias table : _tracksTable
     property alias listModel : _tracksTable.listModel
     property alias holder: albumsViewGrid.holder
@@ -55,7 +55,6 @@ StackView
         focus: true
         listModel.sort: "track"
         holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.isMask: false
         holder.title : "Oops!"
         holder.body: i18n("This list is empty")
         holder.emojiSize: Maui.Style.iconSizes.huge

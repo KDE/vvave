@@ -1,7 +1,7 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 
-import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.2 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
 import "../view_models/BabeTable"
@@ -21,54 +21,112 @@ StackView
     property string currentFolder : ""
     property Flickable flickable: currentItem.flickable
 
-    initialItem: Maui.GridBrowser
+    initialItem: Maui.AltBrowser
     {
         id: browser
-        checkable: false
+
+        holder.visible: false
+        holder.emoji: "qrc:/assets/dialog-information.svg"
+        holder.title : i18n("No Folders!")
+        holder.body: i18n("Add new music to your sources to browse by folders")
+        holder.emojiSize: Maui.Style.iconSizes.huge
+
         model: Maui.BaseModel
         {
             list: Folders
             {
+                id: _foldersList
                 folders: Vvave.folders
             }
         }
 
-        cellHeight: itemSize * 1.2
-        onItemClicked:
+        viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+
+        gridView.itemSize: 140
+        gridView.itemHeight: gridView.itemSize * 1.2
+        gridView.margins: Kirigami.Settings.isMobile ? 0 : Maui.Style.space.big
+
+        listView.topMargin: Maui.Style.contentMargins
+        listView.spacing: Maui.Style.space.medium
+        listView.snapMode: ListView.SnapOneItem
+
+        gridDelegate: Maui.GridBrowserDelegate
         {
-            browser.currentIndex = index
-            if(Maui.Handy.singleClick)
+            height: browser.gridView.cellHeight
+            width: browser.gridView.cellWidth
+
+            iconSizeHint: height * 0.6
+            label1.text: model.label
+            iconSource: model.icon
+            padding: Maui.Style.space.medium
+            isCurrentItem: GridView.isCurrentItem
+            tooltipText: model.path
+
+            onClicked:
             {
-                var item = browser.model.get(index)
-                _filterList.listModel.filter = ""
-                currentFolder = item.path
-                filter()
-                control.push(_filterList)
+                browser.currentIndex = index
+                if(Maui.Handy.singleClick)
+                {
+                    var item = browser.model.get(index)
+                    _filterList.listModel.filter = ""
+                    currentFolder = item.path
+                    filter()
+                    control.push(_filterList)
+                }
+            }
+
+            onDoubleClicked:
+            {
+                browser.currentIndex = index
+                if(!Maui.Handy.singleClick)
+                {
+                    var item = browser.model.get(index)
+                    _filterList.listModel.filter = ""
+                    currentFolder = item.path
+                    filter()
+                    control.push(_filterList)
+                }
             }
         }
 
-        onItemDoubleClicked:
+        listDelegate: Maui.ListBrowserDelegate
         {
-            browser.currentIndex = index
-            if(!Maui.Handy.singleClick)
-            {
-                var item = browser.model.get(index)
-                _filterList.listModel.filter = ""
-                currentFolder = item.path
-                filter()
-                control.push(_filterList)
-            }
-        }
+            width: parent.width
+            height: Maui.Style.rowHeight * 1.5
+            leftPadding: Maui.Style.space.small
+            rightPadding: Maui.Style.space.small
+            isCurrentItem: ListView.isCurrentItem
+            iconSizeHint: Maui.Style.iconSizes.big
+            label1.text: model.label
+            label2.text: model.path
+            label3.text: Qt.formatDateTime(new Date(model.modified), "d MMM yyyy")
+            iconSource: model.icon
 
-        Maui.Holder
-        {
-            anchors.fill: parent
-            visible: !browser.count
-            emoji: "qrc:/assets/dialog-information.svg"
-            isMask: true
-            title : i18n("No Folders!")
-            body: i18n("Add new music to your sources to browse by folders")
-            emojiSize: Maui.Style.iconSizes.huge
+            onClicked:
+            {
+                browser.currentIndex = index
+                if(Maui.Handy.singleClick)
+                {
+                    var item = browser.model.get(index)
+                    _filterList.listModel.filter = ""
+                    currentFolder = item.path
+                    filter()
+                    control.push(_filterList)
+                }
+            }
+
+            onDoubleClicked:
+            {
+                browser.currentIndex = index
+                if(!Maui.Handy.singleClick)
+                {
+                    var item = browser.model.get(index)
+                    _filterList.listModel.filter = ""
+                    currentFolder = item.path
+                    filter()
+                    control.push(_filterList)
+                }
+            }
         }
     }
 

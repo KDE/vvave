@@ -13,97 +13,110 @@
 
 #include <QDebug>
 
-#include <QFileInfo>
-#include <QDir>
-
 #include <QVariantMap>
 #include <functional>
 
 #include "../utils/bae.h"
 
 enum sourceTypes
-{
+	{
 	LOCAL, ONLINE, DEVICE
-};
+	};
 
 class CollectionDB : public QObject
 {
-	Q_OBJECT
+		Q_OBJECT
 
-public:
-	static CollectionDB *getInstance();
-	bool insert(const QString &tableName, const QVariantMap &insertData);
-	bool update(const QString &tableName, const FMH::MODEL &updateData, const QVariantMap &where);
-	bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
-	bool remove(const QString &table, const QString &column, const QVariantMap &where);
+	public:
+		static CollectionDB *getInstance()
+		{
+			static CollectionDB db;
+			return &db;
+		}
 
-	bool execQuery(QSqlQuery &query) const;
-	bool execQuery(const QString &queryTxt);
+		CollectionDB(const CollectionDB &) = delete;
+		CollectionDB &operator=(const CollectionDB &) = delete;
+		CollectionDB(CollectionDB &&) = delete;
+		CollectionDB &operator=(CollectionDB &&) = delete;
 
-	/*basic public actions*/
-	void prepareCollectionDB();
-	bool check_existance(const QString &tableName, const QString &searchId, const QString &search);
+		bool insert(const QString &tableName, const QVariantMap &insertData);
+		bool update(const QString &tableName, const FMH::MODEL &updateData, const QVariantMap &where);
+		bool update(const QString &table, const QString &column, const QVariant &newValue, const QVariant &op, const QString &id);
+		bool remove(const QString &table, const QString &column, const QVariantMap &where);
 
-	/* usefull actions */
-	void insertArtwork(const FMH::MODEL &track);
+		bool execQuery(QSqlQuery &query) const;
+		bool execQuery(const QString &queryTxt);
 
-	bool addTrack(const FMH::MODEL &track);
-	bool updateTrack(const FMH::MODEL &track);
-	Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
+		/*basic public actions*/
+		bool check_existance(const QString &tableName, const QString &searchId, const QString &search);
 
-	bool lyricsTrack(const FMH::MODEL &track, const QString &value);
-	Q_INVOKABLE bool playedTrack(const QString &url, const int &increment = 1);
+		/* usefull actions */
+		void insertArtwork(const FMH::MODEL &track);
 
-    bool albumTrack(const FMH::MODEL &track, const QString &value);
-    bool trackTrack(const FMH::MODEL &track, const QString &value);
+		bool addTrack(const FMH::MODEL &track);
+		bool updateTrack(const FMH::MODEL &track);
+		Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
 
-	FMH::MODEL_LIST getDBData(const QStringList &urls);
-	FMH::MODEL_LIST getDBData(const QString &queryTxt, std::function<bool(FMH::MODEL &item)> modifier = nullptr);
-	QVariantList getDBDataQML(const QString &queryTxt);
-	static QStringList dataToList(const FMH::MODEL_LIST &list, const FMH::MODEL_KEY &key);
+		bool lyricsTrack(const FMH::MODEL &track, const QString &value);
+		Q_INVOKABLE bool playedTrack(const QString &url, const int &increment = 1);
 
-	FMH::MODEL_LIST getAlbumTracks(const QString &album, const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::TRACK, const BAE::W &order = BAE::W::ASC);
-	FMH::MODEL_LIST getArtistTracks(const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
-	FMH::MODEL_LIST getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search);
-    FMH::MODEL_LIST getMostPlayedTracks(const int &greaterThan = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
-	FMH::MODEL_LIST getRecentTracks(const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
-	FMH::MODEL_LIST getOnlineTracks(const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
+		bool albumTrack(const FMH::MODEL &track, const QString &value);
+		bool trackTrack(const FMH::MODEL &track, const QString &value);
 
-    Q_INVOKABLE int getTrackStars(const QString &path);
-    QStringList getArtistAlbums(const QString &artist);
+		FMH::MODEL_LIST getDBData(const QStringList &urls);
+		FMH::MODEL_LIST getDBData(const QString &queryTxt, std::function<bool(FMH::MODEL &item)> modifier = nullptr);
+		QVariantList getDBDataQML(const QString &queryTxt);
+		static QStringList dataToList(const FMH::MODEL_LIST &list, const FMH::MODEL_KEY &key);
 
-	Q_INVOKABLE void removeMissingTracks();
+		FMH::MODEL_LIST getAlbumTracks(const QString &album, const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::TRACK, const BAE::W &order = BAE::W::ASC);
+		FMH::MODEL_LIST getArtistTracks(const QString &artist, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ALBUM, const BAE::W &order = BAE::W::ASC);
+		FMH::MODEL_LIST getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search);
+		FMH::MODEL_LIST getMostPlayedTracks(const int &greaterThan = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
+		FMH::MODEL_LIST getRecentTracks(const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
+		FMH::MODEL_LIST getOnlineTracks(const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
 
-	bool removeArtwork(const QString &table, const QVariantMap &item);
-	bool removeArtist(const QString &artist);
-	bool cleanArtists();
-	bool removeAlbum(const QString &album, const QString &artist);
-	bool cleanAlbums();
+		int getTrackStars(const QString &path);
+		QStringList getArtistAlbums(const QString &artist);
 
-	Q_INVOKABLE bool removeSource(const QString &url);
-	Q_INVOKABLE bool removeTrack(const QString &path);
-	QSqlQuery getQuery(const QString &queryTxt);
-	/*useful tools*/
-	sourceTypes sourceType(const QString &url);
-	void openDB(const QString &name);
+		void removeMissingTracks();
 
-private:
-	static CollectionDB* instance;
-    explicit CollectionDB( QObject *parent = nullptr);
+		bool removeArtwork(const QString &table, const QVariantMap &item);
+		bool removeArtist(const QString &artist);
+		bool cleanArtists();
+		bool removeAlbum(const QString &album, const QString &artist);
+		bool cleanAlbums();
 
-	QString name;
-	QSqlDatabase m_db;
+		bool removeSource(const QString &url);
+		bool removeTrack(const QString &path);
+		QSqlQuery getQuery(const QString &queryTxt);
 
-signals:
-	void trackInserted();
-    void albumInserted();
-    void artistInserted();
-    void sourceInserted();
+		/*useful tools*/
+		sourceTypes sourceType(const QString &url);
+		void openDB(const QString &name);
 
-	void artworkInserted(const FMH::MODEL &albumMap);
+	private:
+		explicit CollectionDB( QObject *parent = nullptr);
+		void prepareCollectionDB();
 
-	void albumsCleaned(const int &amount);
-	void artistsCleaned(const int &amount);
+		QString name;
+		QSqlDatabase m_db;
+
+	signals:
+		void trackInserted(QVariantMap item);
+
+		void albumInserted(QVariantMap item);
+		void albumsInserted(QVariantList items);
+
+		void artistInserted(QVariantMap item);
+		void artistsInserted(QVariantList items);
+
+		void sourceInserted(QVariantMap item);
+		void sourcesInserted(QVariantList items);
+
+		void artworkInserted(const FMH::MODEL &albumMap);
+
+		void albumsCleaned(const int &amount);
+		void artistsCleaned(const int &amount);
 };
 
 #endif // COLLECTION_H

@@ -41,11 +41,18 @@ private:
 	explicit vvave(QObject *parent = nullptr);
 	CollectionDB *db;
 
+	uint m_newTracks = 0;
+	uint m_newAlbums = 0;
+	uint m_newArtist = 0;
+	uint m_newSources = 0;
+
 signals:
-	void refreshTables();
-	void refreshTracks();
-	void refreshAlbums();
-	void refreshArtists();
+	void sourceAdded(QUrl source);
+	void sourceRemoved(QUrl source);
+	void tracksAdded(uint size);
+	void albumsAdded(uint size);
+	void artistsAdded(uint size);
+
 	void openFiles(QVariantList tracks);
 	void sourcesChanged();
 };
