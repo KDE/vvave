@@ -302,23 +302,20 @@ BabeList
         }
     }
 
-    Maui.BaseModel
+    model: Maui.BaseModel
     {
         id: _tracksModel
-        list: _tracksList
+        list: Tracks
+        {
+            id: _tracksList
+        }
+
         sort: "title"
         sortOrder: Qt.AscendingOrder
         recursiveFilteringEnabled: true
         sortCaseSensitivity: Qt.CaseInsensitive
         filterCaseSensitivity: Qt.CaseInsensitive
     }
-
-    Tracks
-    {
-        id: _tracksList
-    }
-
-    model: _tracksModel
 
     //    property alias animBabe: delegate.animBabe
     delegate: TableDelegate
@@ -330,7 +327,7 @@ BabeList
         onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
         onRightClicked: if(allowMenu) openItemMenu(index)
 
-        onToggled: H.addToSelection(listModel.get(index))
+        onToggled: H.addToSelection(model)
         checked: selectionBar.contains(model.url)
         checkable: selectionMode
 
@@ -361,7 +358,7 @@ BabeList
         currentIndex = index
         if(selectionMode)
         {
-            H.addToSelection(listModel.get(listView.currentIndex))
+            H.addToSelection(model)
             return
         }
 

@@ -114,7 +114,6 @@ StackView
             labelTxt.font.family: "Material Design Icons"
             width: filterList.width
         }
-
     }
 
     function appendToExtraList(res)

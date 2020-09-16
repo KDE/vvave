@@ -29,10 +29,7 @@ Maui.ListBrowserDelegate
 
     signal play()
     signal append()
-    signal leftClicked()
-
     signal artworkCoverClicked()
-    signal artworkCoverDoubleClicked()
 
     isCurrentItem: ListView.isCurrentItem || checked
     padding: 0
@@ -46,13 +43,9 @@ Maui.ListBrowserDelegate
     label2.text: control.artist + " | " + control.album
     label2.visible: control.coverArt ? !control.sameAlbum : true
 
-    label4.font.family: "Material Design Icons"
-    label4.text: control.rate ? H.setStars(control.rate) : ""
-
-    label3.text: ""
+    label3.font.family: "Material Design Icons"
+    label3.text: control.rate ? H.setStars(control.rate) : ""
 
     iconVisible: !control.sameAlbum && control.coverArt
     imageSource: control.artwork ? control.artwork : "qrc:/assets/cover.png"
-
-//    onToggled: control.toggled(index, state)
 }

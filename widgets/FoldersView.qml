@@ -98,11 +98,7 @@ StackView
                 browser.currentIndex = index
                 if(Maui.Handy.singleClick)
                 {
-                    var item = browser.model.get(index)
-                    _filterList.listModel.filter = ""
-                    currentFolder = item.path
-                    filter()
-                    control.push(_filterList)
+                    filter(model.path)
                 }
             }
 
@@ -111,11 +107,7 @@ StackView
                 browser.currentIndex = index
                 if(!Maui.Handy.singleClick)
                 {
-                    var item = browser.model.get(index)
-                    _filterList.listModel.filter = ""
-                    currentFolder = item.path
-                    filter()
-                    control.push(_filterList)
+                    filter(model.path)
                 }
             }
         }
@@ -138,11 +130,7 @@ StackView
                 browser.currentIndex = index
                 if(Maui.Handy.singleClick)
                 {
-                    var item = browser.model.get(index)
-                    _filterList.listModel.filter = ""
-                    currentFolder = item.path
-                    filter()
-                    control.push(_filterList)
+                    filter(model.path)
                 }
             }
 
@@ -151,11 +139,7 @@ StackView
                 browser.currentIndex = index
                 if(!Maui.Handy.singleClick)
                 {
-                    var item = browser.model.get(index)
-                    _filterList.listModel.filter = ""
-                    currentFolder = item.path
-                    filter()
-                    control.push(_filterList)
+                    filter(model.path)
                 }
             }
         }
@@ -187,9 +171,12 @@ StackView
         onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
     }
 
-    function filter()
+    function filter(folder)
     {
-        var where = "source = \""+currentFolder+"\""
+        _filterList.listModel.filter = ""
+        currentFolder = folder
+        const where = "source = \""+currentFolder+"\""
         _filterList.list.query = (Q.GET.tracksWhere_.arg(where))
+        control.push(_filterList)
     }
 }

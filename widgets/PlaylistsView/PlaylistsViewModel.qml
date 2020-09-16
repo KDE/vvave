@@ -28,33 +28,6 @@ Maui.GridView
     holder.emojiSize: Maui.Style.iconSizes.huge
     holder.visible: control.count === 0
 
-//    holder.onActionTriggered: newPlaylistDialog.open()
-
-    Menu
-    {
-        id: _playlistMenu
-
-        MenuItem
-        {
-            text: i18n("Play")
-            onTriggered: populate(Q.GET.playlistTracks_.arg(currentPlaylist), true)
-        }
-
-        MenuItem
-        {
-            text: i18n("Rename")
-        }
-
-        MenuSeparator{}
-
-        MenuItem
-        {
-            text: i18n("Delete")
-            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-            onTriggered: removePlaylist()
-        }
-    }
-
     model: Maui.BaseModel
     {
         id: _playlistsModel
@@ -97,7 +70,7 @@ Maui.GridView
                 if(Maui.Handy.singleClick)
                 {
                     filterList.group = false
-                    populate(playlistsList.get(index).playlist, true)
+                    populate(model.playlist, true)
                 }
             }
 
@@ -107,22 +80,20 @@ Maui.GridView
                 if(!Maui.Handy.singleClick)
                 {
                     filterList.group = false
-                    populate(playlistsList.get(index).playlist, true)
+                    populate(model.playlist, true)
                 }
             }
 
             onRightClicked:
             {
                 control.currentIndex = index
-                currentPlaylist = playlistsList.get(index).playlist
-                _playlistMenu.popup()
+                currentPlaylist = model.playlist
             }
 
             onPressAndHold:
             {
                 control.currentIndex = index
-                currentPlaylist = playlistsList.get(index).playlist
-                _playlistMenu.popup()
+                currentPlaylist = model.playlist
             }
         }
     }
