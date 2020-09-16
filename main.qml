@@ -495,7 +495,6 @@ Maui.ApplicationWindow
                             mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
                             root.currentTrackChanged()
                         }
-
                     },
 
                     Maui.ToolActions

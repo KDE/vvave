@@ -21,8 +21,6 @@ StackView
     property string playlistQuery
     property alias playlistViewList : playlistViewModel
 
-    property alias listModel : filterList.listModel
-
     signal rowClicked(var track)
     signal playTrack(var track)
     signal appendTrack(var track)
@@ -59,107 +57,109 @@ StackView
         rejectButton.visible: false
     }
 
-    BabeTable
+    Component
     {
-        id: filterList
-        property bool isPublic: true
-        signal removeFromPlaylist(string url)
-        list.query: control.playlistQuery
-        coverArtVisible: true
-        showTitle: false
-        title: control.currentPlaylist
-        holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.isMask: true
-        holder.title : title
-        holder.body: "Your playlist is empty,<br>start adding new music to it"
-        holder.emojiSize: Maui.Style.iconSizes.huge
-        headBar.visible: true
-        headBar.farLeftContent: ToolButton
-        {
-            icon.name: "go-previous"
-            onClicked: control.pop()
-        }
+        id: _filterListComponent
 
-        contextMenuItems: MenuItem
+        BabeTable
         {
-            text: i18n("Remove from playlist")
-            onTriggered:
+            id: filterList
+            property bool isPublic: true
+            signal removeFromPlaylist(string url)
+            list.query: control.playlistQuery
+            coverArtVisible: true
+            showTitle: false
+            title: control.currentPlaylist
+            holder.emoji: "qrc:/assets/dialog-information.svg"
+            holder.isMask: true
+            holder.title : title
+            holder.body: "Your playlist is empty,<br>start adding new music to it"
+            holder.emojiSize: Maui.Style.iconSizes.huge
+            headBar.visible: true
+            headBar.farLeftContent: ToolButton
             {
-                playlistsList.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
-                filterList.list.remove(filterList.currentIndex)
+                icon.name: "go-previous"
+                onClicked: control.pop()
+            }
+
+            contextMenuItems: MenuItem
+            {
+                text: i18n("Remove from playlist")
+                onTriggered:
+                {
+                    playlistsList.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
+                    filterList.list.remove(filterList.currentIndex)
+                }
+            }
+
+            onRowClicked: control.rowClicked(filterList.listModel.get(index))
+            onQuickPlayTrack: control.playTrack(filterList.listModel.get(filterList.currentIndex))
+            onAppendTrack: control.appendTrack(filterList.listModel.get(filterList.currentIndex))
+
+            onPlayAll:
+            {
+                if(filterList.isPublic)
+                    control.syncAndPlay(control.currentPlaylist)
+                else
+                    control.playAll()
+
+                control.pop()
+            }
+
+            onAppendAll: appendAll()
+            onPulled: populate(playlistQuery)
+            section.criteria: ViewSection.FullString
+            section.delegate: Maui.LabelDelegate
+            {
+                label: filterList.section.property === i18n("stars") ? H.setStars(section) : section
+                isSection: true
+                labelTxt.font.family: "Material Design Icons"
+                width: filterList.width
+            }
+
+            Connections
+            {
+                target: control
+                function onCurrentPlaylistChanged()
+                {
+                    filterList.group = false
+
+                    switch(currentPlaylist)
+                    {
+                    case "Most Played":
+                        playlistQuery = Q.GET.mostPlayedTracks
+                        filterList.listModel.sort = "count"
+                        break;
+
+                    case "Rating":
+                        filterList.listModel.sort = "rate"
+                        filterList.group = true
+
+                        playlistQuery = Q.GET.favoriteTracks;
+                        break;
+
+                    case "Recent":
+                        playlistQuery = Q.GET.recentTracks;
+                        filterList.listModel.sort = "adddate"
+                        filterList.group = true
+                        break;
+
+                    default:
+                        playlistQuery = Q.GET.playlistTracks_.arg(currentPlaylist)
+                        break;
+                    }
+
+                    filterList.isPublic = isPublic
+                    filterList.listModel.filter = ""
+                }
             }
         }
-
-        onRowClicked: control.rowClicked(filterList.listModel.get(index))
-        onQuickPlayTrack: control.playTrack(filterList.listModel.get(filterList.currentIndex))
-        onAppendTrack: control.appendTrack(filterList.listModel.get(filterList.currentIndex))
-
-        onPlayAll:
-        {
-            if(filterList.isPublic)
-                control.syncAndPlay(control.currentPlaylist)
-            else
-                control.playAll()
-
-            control.pop()
-        }
-
-        onAppendAll: appendAll()
-        onPulled: populate(playlistQuery)
-        section.criteria: ViewSection.FullString
-        section.delegate: Maui.LabelDelegate
-        {
-            label: filterList.section.property === i18n("stars") ? H.setStars(section) : section
-            isSection: true
-            labelTxt.font.family: "Material Design Icons"
-            width: filterList.width
-        }
-    }
-
-    function appendToExtraList(res)
-    {
-        if(res.length>0)
-            for(var i in res)
-                playlistViewModelFilter.model.append(res[i])
     }
 
     function populate(playlist, isPublic)
     {
+        control.push(_filterListComponent)
         currentPlaylist = playlist
-
-        switch(currentPlaylist)
-        {
-        case "Most Played":
-            playlistQuery = Q.GET.mostPlayedTracks
-            filterList.listModel.sort = "count"
-            break;
-
-        case "Rating":
-            filterList.listModel.sort = "rate"
-            filterList.group = true
-
-            playlistQuery = Q.GET.favoriteTracks;
-            break;
-
-        case "Recent":
-            playlistQuery = Q.GET.recentTracks;
-            filterList.listModel.sort = "adddate"
-            filterList.group = true
-            break;
-
-        default:
-            playlistQuery = Q.GET.playlistTracks_.arg(currentPlaylist)
-            break;
-        }
-
-        filterList.isPublic = isPublic
-        filterList.listModel.filter = ""
-        control.push(filterList)
-    }
-
-    function removePlaylist()
-    {
-        playlistsList.removePlaylist(playlistViewList.currentIndex)
     }
 
     function addPlaylist(text)

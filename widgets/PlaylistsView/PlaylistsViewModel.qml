@@ -69,7 +69,6 @@ Maui.GridView
                 control.currentIndex = index
                 if(Maui.Handy.singleClick)
                 {
-                    filterList.group = false
                     populate(model.playlist, true)
                 }
             }
@@ -78,8 +77,7 @@ Maui.GridView
             {
                 control.currentIndex = index
                 if(!Maui.Handy.singleClick)
-                {
-                    filterList.group = false
+                {                    
                     populate(model.playlist, true)
                 }
             }
