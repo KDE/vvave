@@ -515,8 +515,8 @@ Maui.ApplicationWindow
                         {
                             id: playIcon
                             text: i18n("Play and pause")
-                            icon.width: 32
-                            icon.height: 32
+                            icon.width: Maui.Style.iconSizes.big
+                            icon.height: Maui.Style.iconSizes.big
                             enabled: currentTrackIndex >= 0
                             icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
                             onTriggered: player.playing = !player.playing
