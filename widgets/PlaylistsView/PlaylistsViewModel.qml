@@ -19,8 +19,6 @@ Maui.GridView
     id: control
     itemSize: 130
 
-    topMargin: Kirigami.Settings.isMobile ? 0 : Maui.Style.space.big
-
     holder.emoji:  "qrc:/assets/dialog-information.svg"
     holder.title : i18n("No Playlists!")
     holder.body: i18n("Start creating new custom playlists")

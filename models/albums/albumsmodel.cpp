@@ -32,7 +32,7 @@ AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
 	});
 
 	this->m_worker.start ();
-	connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
+//    connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
 
 AlbumsModel::~AlbumsModel()
@@ -51,12 +51,7 @@ void AlbumsModel::componentComplete()
         connect(vvave::instance (), &vvave::artistsAdded, this, &AlbumsModel::setList);
     }
 
-    connect(vvave::instance (), &vvave::sourceRemoved, this, &AlbumsModel::setList);
-
-    if(FMStatic::loadSettings("FetchArtwork", "Settings", true ).toBool())
-    {
-        this->fetchInformation();
-    }
+    connect(vvave::instance (), &vvave::sourceRemoved, this, &AlbumsModel::setList);   
 }
 
 FMH::MODEL_LIST AlbumsModel::items() const
@@ -71,6 +66,12 @@ void AlbumsModel::setQuery(const QUERY &query)
 
 	this->query = query;
 	emit this->queryChanged();
+
+    setList();
+    if(FMStatic::loadSettings("FetchArtwork", "Settings", true ).toBool())
+    {
+        this->fetchInformation();
+    }
 }
 
 AlbumsModel::QUERY AlbumsModel::getQuery() const
@@ -90,21 +91,22 @@ void AlbumsModel::setList()
 	else return;
 
 	//get albums data with modifier for missing images for artworks
-	this->list = this->db->getDBData(m_Query, [&](FMH::MODEL &item) -> bool
-	{
-				 const auto artwork = item[FMH::MODEL_KEY::ARTWORK];
+//    const auto checker = [&](FMH::MODEL &item) -> bool
+//    {
+//        const auto artwork = item[FMH::MODEL_KEY::ARTWORK];
 
-				 if(artwork.isEmpty())
-				 return true;
+//        if(artwork.isEmpty())
+//            return true;
 
-				 if(QUrl(artwork).isLocalFile () && !FMH::fileExists(artwork))
-	{
-				 this->db->removeArtwork(AlbumsModel::QUERY::ALBUMS ?  "albums" : "artists", FMH::toMap(item));
-				 item[FMH::MODEL_KEY::ARTWORK] = "";
-}
+//        if(QUrl(artwork).isLocalFile () && !FMH::fileExists(artwork))
+//        {
+//            this->db->removeArtwork(AlbumsModel::QUERY::ALBUMS ?  "albums" : "artists", FMH::toMap(item));
+//            item[FMH::MODEL_KEY::ARTWORK] = "";
+//        }
 
-				 return true;
-});
+//        return true;
+//    };
+    this->list = this->db->getDBData(m_Query);
 
 emit this->postListChanged();
 

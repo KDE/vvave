@@ -106,10 +106,10 @@ int main(int argc, char *argv[])
 		if (!obj && url == objUrl)
 			QCoreApplication::exit(-1);
 
-		if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
-		{
-			vvave::instance()->scanDir(vvave::sources());
-		}
+//		if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
+//		{
+//			vvave::instance()->scanDir(vvave::sources());
+//		}
 
 		if(!args.isEmpty())
 			 vvave::instance()->openUrls(args);

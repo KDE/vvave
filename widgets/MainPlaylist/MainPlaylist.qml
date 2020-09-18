@@ -105,7 +105,7 @@ Maui.Page
         delegate: TableDelegate
         {
             id: delegate
-            width: listView.width
+            width: parent.width
             number : false
             coverArt : true
 
@@ -167,10 +167,6 @@ Maui.Page
                     var query = Q.GET.tracksWhere_.arg(where)
                     table.list.appendQuery(query);
                 }
-            }else
-            {
-                query = Q.GET.babedTracks()
-                table.list.appendQuery(query);
             }
         }
     }

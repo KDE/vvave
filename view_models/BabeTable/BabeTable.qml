@@ -12,9 +12,22 @@ import "../../db/Queries.js" as Q
 
 import ".."
 
-BabeList
+Maui.Page
 {
     id: control
+
+    property alias listBrowser : _listBrowser
+    property alias listView : _listBrowser.flickable
+
+    property alias delegate : _listBrowser.delegate
+
+    property alias count : _listBrowser.count
+    property alias currentIndex : _listBrowser.currentIndex
+    property alias currentItem : _listBrowser.currentItem
+
+    property alias holder : _listBrowser.holder
+    property alias section : _listBrowser.section
+
     property alias list : _tracksList
     property alias listModel : _tracksModel
     property alias removeDialog : _removeDialog
@@ -27,6 +40,7 @@ BabeList
 
     property alias contextMenu : contextMenu
     property alias contextMenuItems : contextMenu.contentData
+
     signal rowClicked(int index)
     signal rowDoubleClicked(int index)
     signal rowPressed(int index)
@@ -37,25 +51,9 @@ BabeList
     signal playAll()
     signal appendAll()
 
-    focus: true
-    holder.visible: list.count === 0
-    listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
-    //    listBrowser.enableLassoSelection: !Kirigami.Settings.hasTransientTouchInput
-    listBrowser.enableLassoSelection: true
-
-    Connections
-    {
-        target: control.listBrowser
-        ignoreUnknownSignals: true
-
-        function onItemsSelected(indexes)
-        {
-            for(var i in indexes)
-            {
-                H.addToSelection(listModel.get(indexes[i]))
-            }
-        }
-    }
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+    flickable: _listBrowser.flickable
 
     headBar.leftContent: Maui.ToolActions
     {
@@ -198,14 +196,14 @@ BabeList
 
         onAccepted:
         {
-            list.remove(listView.currentIndex)
+            list.remove(control.currentIndex)
             close()
         }
 
         onRejected:
         {
             if(Maui.FM.removeFile(listModel.get(index).url))
-                list.remove(listView.currentIndex)
+                list.remove(control.currentIndex)
             close()
         }
     }
@@ -232,45 +230,45 @@ BabeList
 
         onFavClicked:
         {
-            list.fav(listView.currentIndex, !Maui.FM.isFav(listModel.get(listView.currentIndex).url))
+            list.fav(control.currentIndex, !Maui.FM.isFav(listModel.get(control.currentIndex).url))
         }
 
-        onQueueClicked: Player.queueTracks([listModel.get(listView.currentIndex)])
-        onPlayClicked: quickPlayTrack(listView.currentIndex)
-        onAppendClicked: appendTrack(listView.currentIndex)
+        onQueueClicked: Player.queueTracks([listModel.get(control.currentIndex)])
+        onPlayClicked: quickPlayTrack(control.currentIndex)
+        onAppendClicked: appendTrack(control.currentIndex)
 
         onSaveToClicked:
         {
-            playlistDialog.composerList.urls = [listModel.get(listView.currentIndex).url]
+            playlistDialog.composerList.urls = [listModel.get(control.currentIndex).url]
             playlistDialog.open()
         }
 
-        onOpenWithClicked: Maui.FM.openLocation([listModel.get(listView.currentIndex).url])
+        onOpenWithClicked: Maui.FM.openLocation([listModel.get(control.currentIndex).url])
 
         onDeleteClicked:
         {
-            _removeDialog.index= listView.currentIndex
+            _removeDialog.index= control.currentIndex
             _removeDialog.open()
         }
 
         onRateClicked:
         {
-            list.rate(listView.currentIndex, rate);
+            list.rate(control.currentIndex, rate);
         }
 
         onInfoClicked:
         {
-            infoView.show(listModel.get(listView.currentIndex))
+            infoView.show(listModel.get(control.currentIndex))
         }
 
         onCopyToClicked:
         {
-            cloudView.list.upload(listView.currentIndex)
+            cloudView.list.upload(control.currentIndex)
         }
 
         onShareClicked:
         {
-            const url = listModel.get(listView.currentIndex).url
+            const url = listModel.get(control.currentIndex).url
 
             if(Maui.Handy.isAndroid)
             {
@@ -284,140 +282,162 @@ BabeList
         }
     }
 
-    listView.section.property: control.group ? _tracksModel.sort : ""
-    listView.section.criteria: _tracksModel.sort === "title" || _tracksModel.sort === "artist" || _tracksModel.sort === "album"?  ViewSection.FirstCharacter : ViewSection.FullString
-    section.delegate: Maui.LabelDelegate
+
+    Maui.ListBrowser
     {
-        id: _sectionDelegate
-        label: _tracksModel.sort === "adddate" || _tracksModel.sort === "releasedate" ? Maui.FM.formatDate(Date(section), "MM/dd/yyyy") : String(section).toUpperCase()
+        id: _listBrowser
+        anchors.fill: parent
 
-        isSection: true
-        width: parent.width
-        Kirigami.Theme.backgroundColor: "#333"
-        Kirigami.Theme.textColor: "#fafafa"
+        focus: true
+        holder.visible: list.count === 0
+        spacing: Maui.Handy.isTouch ? Maui.Style.space.medium : Maui.Style.space.small
+        enableLassoSelection: true
 
-        background: Rectangle
+        onItemsSelected:
         {
-            color:  Kirigami.Theme.backgroundColor
-        }
-    }
-
-    model: Maui.BaseModel
-    {
-        id: _tracksModel
-        list: Tracks
-        {
-            id: _tracksList
+            for(var i in indexes)
+            {
+                H.addToSelection(listModel.get(indexes[i]))
+            }
         }
 
-        sort: "title"
-        sortOrder: Qt.AscendingOrder
-        recursiveFilteringEnabled: true
-        sortCaseSensitivity: Qt.CaseInsensitive
-        filterCaseSensitivity: Qt.CaseInsensitive
-    }
-
-    //    property alias animBabe: delegate.animBabe
-    delegate: TableDelegate
-    {
-        id: delegate
-        width: listView.width
-        number : trackNumberVisible
-        coverArt : coverArtVisible ? (control.width > 200) : coverArtVisible
-        onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
-        onRightClicked: if(allowMenu) openItemMenu(index)
-
-        onToggled: H.addToSelection(model)
-        checked: selectionBar.contains(model.url)
-        checkable: selectionMode
-
-        Drag.keys: ["text/uri-list"]
-        Drag.mimeData: Drag.active ?
-                           {
-                               "text/uri-list": control.filterSelectedItems(model.url)
-                           } : {}
-
-    sameAlbum:
-    {
-        const item = listModel.get(index-1)
-        return coverArt && item && item.album === album && item.artist === artist
-    }
-
-    ToolButton
-    {
-        Layout.fillHeight: true
-        Layout.preferredWidth: implicitWidth
-        visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
-        icon.name: "media-playlist-append"
-        onClicked: delegate.append()
-        opacity: delegate.hovered ? 0.8 : 0.6
-    }
-
-    onClicked:
-    {
-        currentIndex = index
-        if(selectionMode)
+        section.property: control.group ? _tracksModel.sort : ""
+        section.criteria: _tracksModel.sort === "title" || _tracksModel.sort === "artist" || _tracksModel.sort === "album"?  ViewSection.FirstCharacter : ViewSection.FullString
+        section.delegate: Maui.LabelDelegate
         {
-            H.addToSelection(model)
-            return
+            id: _sectionDelegate
+            label: _tracksModel.sort === "adddate" || _tracksModel.sort === "releasedate" ? Maui.FM.formatDate(Date(section), "MM/dd/yyyy") : String(section).toUpperCase()
+
+            isSection: true
+            width: parent.width
+            Kirigami.Theme.backgroundColor: "#333"
+            Kirigami.Theme.textColor: "#fafafa"
+
+            background: Rectangle
+            {
+                color:  Kirigami.Theme.backgroundColor
+            }
         }
 
-        if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
-            control.listBrowser.itemsSelected([index])
-
-        if(Maui.Handy.isTouch)
-            rowClicked(index)
-    }
-
-    onDoubleClicked:
-    {
-        currentIndex = index
-
-        if(!Maui.Handy.isTouch)
-            rowClicked(index)
-    }
-
-    onPlay:
-    {
-        currentIndex = index
-        quickPlayTrack(index)
-    }
-
-    onAppend:
-    {
-        currentIndex = index
-        appendTrack(index)
-    }
-
-    onArtworkCoverClicked:
-    {
-        currentIndex = index
-        goToAlbum()
-    }
-
-    Connections
-    {
-        target: selectionBar
-        ignoreUnknownSignals: true
-
-        function onUriRemoved (uri)
+        model: Maui.BaseModel
         {
-            if(uri === model.url)
+            id: _tracksModel
+            list: Tracks
+            {
+                id: _tracksList
+            }
+
+            sort: "title"
+            sortOrder: Qt.AscendingOrder
+            recursiveFilteringEnabled: true
+            sortCaseSensitivity: Qt.CaseInsensitive
+            filterCaseSensitivity: Qt.CaseInsensitive
+        }
+
+        //    property alias animBabe: delegate.animBabe
+        delegate: TableDelegate
+        {
+            id: delegate
+            width: parent.width
+            number : trackNumberVisible
+            coverArt : coverArtVisible ? (control.width > 200) : coverArtVisible
+            onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
+            onRightClicked: if(allowMenu) openItemMenu(index)
+
+            onToggled: H.addToSelection(model)
+            checked: selectionBar.contains(model.url)
+            checkable: selectionMode
+
+            Drag.keys: ["text/uri-list"]
+            Drag.mimeData: Drag.active ?
+                               {
+                                   "text/uri-list": control.filterSelectedItems(model.url)
+                               } : {}
+
+        sameAlbum:
+        {
+            const item = listModel.get(index-1)
+            return coverArt && item && item.album === album && item.artist === artist
+        }
+
+        ToolButton
+        {
+            Layout.fillHeight: true
+            Layout.preferredWidth: implicitWidth
+            visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
+            icon.name: "media-playlist-append"
+            onClicked: delegate.append()
+            opacity: delegate.hovered ? 0.8 : 0.6
+        }
+
+        onClicked:
+        {
+            currentIndex = index
+            if(selectionMode)
+            {
+                H.addToSelection(model)
+                return
+            }
+
+            if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                _listBrowser.itemsSelected([index])
+
+            if(Maui.Handy.isTouch)
+                rowClicked(index)
+        }
+
+        onDoubleClicked:
+        {
+            currentIndex = index
+
+            if(!Maui.Handy.isTouch)
+                rowClicked(index)
+        }
+
+        onPlay:
+        {
+            currentIndex = index
+            quickPlayTrack(index)
+        }
+
+        onAppend:
+        {
+            currentIndex = index
+            appendTrack(index)
+        }
+
+        onArtworkCoverClicked:
+        {
+            currentIndex = index
+            goToAlbum()
+        }
+
+        Connections
+        {
+            target: selectionBar
+            ignoreUnknownSignals: true
+
+            function onUriRemoved (uri)
+            {
+                if(uri === model.url)
+                    delegate.checked = false
+            }
+
+            function onUriAdded(uri)
+            {
+                if(uri === model.url)
+                    delegate.checked = true
+            }
+
+            function onCleared()
+            {
                 delegate.checked = false
-        }
-
-        function onUriAdded(uri)
-        {
-            if(uri === model.url)
-                delegate.checked = true
-        }
-
-        function onCleared()
-        {
-            delegate.checked = false
+            }
         }
     }
-}
+
+    }
+
 
 function openItemMenu(index)
 {
@@ -458,7 +478,7 @@ function queueList()
 function goToAlbum()
 {
     swipeView.currentIndex = viewsIndex.albums
-    const item = listModel.get(listView.currentIndex)
+    const item = listModel.get(control.currentIndex)
     swipeView.currentItem.item.populateTable(item.album, item.artist)
     contextMenu.close()
 }
@@ -466,7 +486,7 @@ function goToAlbum()
 function goToArtist()
 {
     swipeView.currentIndex = viewsIndex.artists
-    const item = listModel.get(listView.currentIndex)
+    const item = listModel.get(control.currentIndex)
     swipeView.currentItem.item.populateTable(undefined, item.artist)
     contextMenu.close()
 }
@@ -481,4 +501,5 @@ function filterSelectedItems(path)
 
     return path
 }
+
 }

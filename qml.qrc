@@ -18,7 +18,6 @@
         <file>widgets/InfoView/InfoView.qml</file>
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
-        <file>view_models/BabeList.qml</file>
         <file>assets/vvave.notifyrc</file>
         <file>assets/vvave.png</file>
         <file>assets/heart_indicator.gif</file>

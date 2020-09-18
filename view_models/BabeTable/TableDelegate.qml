@@ -32,10 +32,7 @@ Maui.ListBrowserDelegate
     signal artworkCoverClicked()
 
     isCurrentItem: ListView.isCurrentItem || checked
-    padding: 0
 
-    rightPadding: leftPadding
-    leftPadding: Maui.Style.space.small
     draggable: true
 
     iconSizeHint: height - Maui.Style.space.small

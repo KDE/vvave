@@ -583,7 +583,7 @@ Maui.ApplicationWindow
                 holder.title : i18n("No Albums!")
                 holder.body: i18n("Add new music sources")
                 holder.emojiSize: Maui.Style.iconSizes.huge
-                list.query: Albums.ALBUMS
+
                 listModel.sort: "track"
 
                 onRowClicked: Player.quickPlay(track)
@@ -603,6 +603,8 @@ Maui.ApplicationWindow
 
                 onPlayAll: Player.playAll(albumsView.listModel.getAll())
                 onAppendAll: Player.appendAll(albumsView.listModel.getAll())
+
+                Component.onCompleted: list.query = Albums.ALBUMS
             }
 
             AlbumsView
@@ -615,7 +617,6 @@ Maui.ApplicationWindow
                 holder.title : i18n("No Artists!")
                 holder.body: i18n("Add new music sources")
                 holder.emojiSize: Maui.Style.iconSizes.huge
-                list.query: Albums.ARTISTS
                 table.listModel.sort: "artist"
 
                 onRowClicked: Player.quickPlay(track)
@@ -633,6 +634,8 @@ Maui.ApplicationWindow
 
                 onPlayAll: Player.playAll(artistsView.listModel.getAll())
                 onAppendAll: Player.appendAll(artistsView.listModel.getAll())
+
+                Component.onCompleted: list.query = Albums.ARTISTS
             }
 
             Maui.AppViewLoader

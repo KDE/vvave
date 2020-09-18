@@ -19,7 +19,6 @@ StackView
 
     property string currentPlaylist
     property string playlistQuery
-    property alias playlistViewList : playlistViewModel
 
     signal rowClicked(var track)
     signal playTrack(var track)
@@ -30,10 +29,8 @@ StackView
 
     property Flickable flickable : currentItem.flickable
 
-    initialItem: PlaylistsViewModel
+    initialItem:  PlaylistsViewModel
     {
-        id: playlistViewModel
-
         Maui.FloatingButton
         {
             id: _overlayButton
@@ -107,7 +104,6 @@ StackView
             }
 
             onAppendAll: appendAll()
-            onPulled: populate(playlistQuery)
             section.criteria: ViewSection.FullString
             section.delegate: Maui.LabelDelegate
             {

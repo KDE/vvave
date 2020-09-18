@@ -12,13 +12,13 @@
 TracksModel::TracksModel(QObject *parent) : MauiList(parent),
 	db(CollectionDB::getInstance())
 {
-	connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
-	connect(vvave::instance (), &vvave::tracksAdded, this, &TracksModel::setList);
-	connect(vvave::instance (), &vvave::sourceRemoved, this, &TracksModel::setList);
+    connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
 }
 
 void TracksModel::componentComplete()
 {
+    connect(vvave::instance (), &vvave::tracksAdded, this, &TracksModel::setList);
+    connect(vvave::instance (), &vvave::sourceRemoved, this, &TracksModel::setList);
 }
 
 FMH::MODEL_LIST TracksModel::items() const
@@ -62,17 +62,18 @@ void TracksModel::setList()
 
 	}else
 	{
-		this->list = this->db->getDBData(this->query, [&](FMH::MODEL &item) {
-				const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
-		if(FMH::fileExists(url))
-		{
-			return true;
-		} else
-		{
-			this->db->removeTrack(url.toString());
-			return false;
-		}
-	});
+//        const auto checker = [&](FMH::MODEL &item) {
+//            const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
+//            if(FMH::fileExists(url))
+//            {
+//                return true;
+//            } else
+//            {
+//                this->db->removeTrack(url.toString());
+//                return false;
+//            }
+//        };
+        this->list = this->db->getDBData(this->query/*, checker*/);
 }
 
 emit this->postListChanged();

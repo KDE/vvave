@@ -17,7 +17,7 @@ StackView
     clip: true
 
     property alias list : _filterList
-    property alias listModel : _filterList.model
+    property alias listModel : _filterList.listModel
     property var tracks : []
     property string currentFolder : ""
     property Flickable flickable: currentItem.flickable
@@ -45,10 +45,7 @@ StackView
 
         gridView.itemSize: 120
         gridView.itemHeight: gridView.itemSize * 1.2
-        gridView.margins: Kirigami.Settings.isMobile ? 0 : Maui.Style.space.big
 
-        listView.topMargin: Maui.Style.contentMargins
-        listView.spacing: Maui.Style.space.medium
         listView.snapMode: ListView.SnapOneItem
 
         headBar.leftContent: Maui.ToolActions
@@ -115,9 +112,7 @@ StackView
         listDelegate: Maui.ListBrowserDelegate
         {
             width: parent.width
-            height: Maui.Style.rowHeight * 1.5
-            leftPadding: Maui.Style.space.small
-            rightPadding: Maui.Style.space.small
+            height: Maui.Style.rowHeight * 1.5            
             isCurrentItem: ListView.isCurrentItem
             iconSizeHint: Maui.Style.iconSizes.big
             label1.text: model.label

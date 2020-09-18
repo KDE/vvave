@@ -15,8 +15,9 @@ BabeTable
     holder.title : i18n("No Tracks!")
     holder.body: i18n("Add new music sources")
     holder.emojiSize: Maui.Style.iconSizes.huge
-    list.query: Q.GET.allTracks
-    list.limit: 4
+
+
+    Component.onCompleted: list.query= Q.GET.allTracks
 }
 
 

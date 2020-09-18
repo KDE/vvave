@@ -167,7 +167,6 @@ Maui.Page
         holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.title : i18n("Opps!")
         holder.body: i18n("You don't have an account set up.\nYou can set up your account now by clicking here or under the Accounts options in the main menu")
-        listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
 
         Connections
         {
@@ -198,7 +197,7 @@ Maui.Page
             }
         }
 
-        listView.header: Rectangle
+        flickable.header: Rectangle
         {
             Kirigami.Theme.inherit: false
             width: parent.width
@@ -232,7 +231,7 @@ Maui.Page
             }
         }
 
-        listView.headerPositioning: ListView.PullBackHeader
+        flickable.headerPositioning: ListView.PullBackHeader
 
 
         delegate: TableDelegate
