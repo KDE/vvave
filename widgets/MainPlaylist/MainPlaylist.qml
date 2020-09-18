@@ -54,9 +54,8 @@ Maui.Page
     {
         id: table
         anchors.fill: parent
-        focus: true
         listModel.sort: ""
-
+        listBrowser.enableLassoSelection: false
         headBar.visible: false
         footBar.visible: false
 
@@ -105,7 +104,7 @@ Maui.Page
         delegate: TableDelegate
         {
             id: delegate
-            width: parent.width
+            width: ListView.view.width
             number : false
             coverArt : true
 

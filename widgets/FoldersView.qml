@@ -111,7 +111,7 @@ StackView
 
         listDelegate: Maui.ListBrowserDelegate
         {
-            width: parent.width
+            width: ListView.view.width
             height: Maui.Style.rowHeight * 1.5            
             isCurrentItem: ListView.isCurrentItem
             iconSizeHint: Maui.Style.iconSizes.big

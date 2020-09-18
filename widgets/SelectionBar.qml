@@ -29,7 +29,7 @@ MauiLab.SelectionBar
     {
         isCurrentItem: false
         Kirigami.Theme.inherit: true
-        width: control.width
+        width: ListView.view.width
         number: false
         coverArt: true
         showQuickActions: false

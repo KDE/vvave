@@ -52,7 +52,7 @@ Maui.AltBrowser
     listDelegate: Maui.ItemDelegate
     {
         isCurrentItem: ListView.isCurrentItem
-        width: parent.width
+        width: ListView.view.width
         height: Maui.Style.rowHeight * 1.8
         leftPadding: Maui.Style.space.small
         rightPadding: Maui.Style.space.small
@@ -104,10 +104,9 @@ Maui.AltBrowser
             id: albumDelegate
             anchors.centerIn: parent
             albumRadius: albumCoverRadius
-            padding: Maui.Style.space.small
-            height: control.gridView.itemSize
+            height: control.gridView.itemSize - Maui.Style.space.small
             width: height
-            isCurrentItem: _albumDelegate.isCurrentItem
+            isCurrentItem: parent.isCurrentItem
 
             label1.text: model.album ? model.album : model.artist
             label2.text: model.artist && model.album ? model.artist : ""

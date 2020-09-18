@@ -290,7 +290,6 @@ Maui.Page
 
         focus: true
         holder.visible: list.count === 0
-        spacing: Maui.Handy.isTouch ? Maui.Style.space.medium : Maui.Style.space.small
         enableLassoSelection: true
 
         onItemsSelected:
@@ -338,9 +337,9 @@ Maui.Page
         delegate: TableDelegate
         {
             id: delegate
-            width: parent.width
-            number : trackNumberVisible
-            coverArt : coverArtVisible ? (control.width > 200) : coverArtVisible
+            width: ListView.view.width
+            number: trackNumberVisible
+            coverArt: coverArtVisible ? (control.width > 200) : coverArtVisible
             onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
             onRightClicked: if(allowMenu) openItemMenu(index)
 
