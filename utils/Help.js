@@ -1,15 +1,5 @@
 .import org.kde.kirigami 2.7 as Kirigami
 
-function rootWidth()
-{
-    return root.width;
-}
-
-function rootHeight()
-{
-    return root.height;
-}
-
 function setStars(stars)
 {
     switch (stars)
@@ -48,24 +38,6 @@ function notify(title, body)
         root.notify(title+"\n"+body)
     else
         bae.notify(title, body)
-}
-
-function addPlaylist(playlist)
-{
-    playlistsView.playlistViewModel.model.insert(0, playlist)
-}
-
-function searchFor(query)
-{
-    if(currentView !== viewsIndex.search)
-        currentView = viewsIndex.search
-
-    searchView.runSearch(query)
-}
-
-function addSource()
-{
-    sourcesDialog.open()
 }
 
 function addToSelection(item)

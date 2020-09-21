@@ -52,9 +52,9 @@ Maui.GridView
         CollageDelegate
         {
             anchors.centerIn: parent
-            padding: Maui.Style.space.small
-            height: control.itemSize
+            height: control.itemSize - Maui.Style.space.medium
             width: height
+
             isCurrentItem: parent.isCurrentItem
 
             tag: model.playlist

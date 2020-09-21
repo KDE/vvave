@@ -16,9 +16,6 @@ StackView
     id: control
     clip: true
 
-    property alias list : _filterList
-    property alias listModel : _filterList.listModel
-    property var tracks : []
     property string currentFolder : ""
     property Flickable flickable: currentItem.flickable
 
@@ -78,33 +75,38 @@ StackView
             onCleared:  browser.model.filter = text
         }
 
-        gridDelegate: Maui.GridBrowserDelegate
+        gridDelegate: Item
         {
             height: browser.gridView.cellHeight
             width: browser.gridView.cellWidth
 
-            iconSizeHint: height * 0.6
-            label1.text: model.label
-            iconSource: model.icon
-            padding: Maui.Style.space.medium
-            isCurrentItem: GridView.isCurrentItem
-            tooltipText: model.path
-
-            onClicked:
+            Maui.GridBrowserDelegate
             {
-                browser.currentIndex = index
-                if(Maui.Handy.singleClick)
+                anchors.fill: parent
+                anchors.margins: Maui.Style.space.medium
+                iconSizeHint: height * 0.6
+                label1.text: model.label
+                iconSource: model.icon
+                padding: Maui.Style.space.medium
+                isCurrentItem: GridView.isCurrentItem
+                tooltipText: model.path
+
+                onClicked:
                 {
-                    filter(model.path)
+                    browser.currentIndex = index
+                    if(Maui.Handy.singleClick)
+                    {
+                        filter(model.path)
+                    }
                 }
-            }
 
-            onDoubleClicked:
-            {
-                browser.currentIndex = index
-                if(!Maui.Handy.singleClick)
+                onDoubleClicked:
                 {
-                    filter(model.path)
+                    browser.currentIndex = index
+                    if(!Maui.Handy.singleClick)
+                    {
+                        filter(model.path)
+                    }
                 }
             }
         }
@@ -112,7 +114,7 @@ StackView
         listDelegate: Maui.ListBrowserDelegate
         {
             width: ListView.view.width
-            height: Maui.Style.rowHeight * 1.5            
+            height: Maui.Style.rowHeight * 1.5
             isCurrentItem: ListView.isCurrentItem
             iconSizeHint: Maui.Style.iconSizes.big
             label1.text: model.label
@@ -140,38 +142,46 @@ StackView
         }
     }
 
-    BabeTable
+    Component
     {
-        id: _filterList
-        coverArtVisible: true
-        holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.isMask: true
-        holder.title : i18n("No Tracks!")
-        holder.body: i18n("This source folder seems to be empty!")
-        holder.emojiSize: Maui.Style.iconSizes.huge
-        headBar.visible: true
-        headBar.farLeftContent: ToolButton
+        id: _filterListComponent
+
+        BabeTable
         {
-            icon.name: "go-previous"
-            onClicked: control.pop()
+            coverArtVisible: true
+            holder.emoji: "qrc:/assets/dialog-information.svg"
+            holder.isMask: true
+            holder.title : i18n("No Tracks!")
+            holder.body: i18n("This source folder seems to be empty!")
+            holder.emojiSize: Maui.Style.iconSizes.huge
+            headBar.visible: true
+            headBar.farLeftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked: control.pop()
+            }
+
+            onRowClicked: Player.quickPlay(listModel.get(index))
+            onQuickPlayTrack: Player.quickPlay(listModel.get(index))
+
+            onAppendTrack: Player.addTrack(listModel.get(index))
+            onPlayAll: Player.playAll(listModel.list.getAll())
+
+            onAppendAll: Player.appendAll(listModel.list.getAll())
+            onQueueTrack: Player.queueTracks([listModel.get(index)], index)
+
+            Component.onCompleted:
+            {
+                const where = "source = \""+control.currentFolder+"\""
+                listModel.list.query = (Q.GET.tracksWhere_.arg(where))
+            }
         }
-
-        onRowClicked: Player.quickPlay(foldersView.list.model.get(index))
-        onQuickPlayTrack: Player.quickPlay(foldersView.list.model.get(index))
-
-        onAppendTrack: Player.addTrack(foldersView.listModel.get(index))
-        onPlayAll: Player.playAll(foldersView.listModel.getAll())
-
-        onAppendAll: Player.appendAll(foldersView.listModel.getAll())
-        onQueueTrack: Player.queueTracks([foldersView.list.model.get(index)], index)
     }
+
 
     function filter(folder)
     {
-        _filterList.listModel.filter = ""
         currentFolder = folder
-        const where = "source = \""+currentFolder+"\""
-        _filterList.list.query = (Q.GET.tracksWhere_.arg(where))
-        control.push(_filterList)
+        control.push(_filterListComponent)
     }
 }

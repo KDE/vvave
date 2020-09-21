@@ -7,6 +7,7 @@ import "../view_models/BabeTable"
 
 import "../db/Queries.js" as Q
 import "../utils/Help.js" as H
+import "../utils/Player.js" as Player
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
@@ -17,24 +18,20 @@ StackView
     id: control
     clip: true
 
+    property alias list : albumsViewGrid.list
+
     property string currentAlbum: ""
     property string currentArtist: ""
 
     property var tracks: []
 
-    property alias table : _tracksTable
-    property alias listModel : _tracksTable.listModel
     property alias holder: albumsViewGrid.holder
-    property alias list : albumsViewGrid.list
 
     signal rowClicked(var track)
     signal playTrack(var track)
     signal queueTrack(var track)
     signal appendTrack(var track)
 
-    signal appendAll(string album, string artist)
-    signal playAll(string album, string artist)
-    signal albumCoverClicked(string album, string artist)
     signal albumCoverPressedAndHold(string album, string artist)
 
     property Flickable flickable : currentItem.flickable
@@ -42,117 +39,86 @@ StackView
     initialItem: BabeGrid
     {
         id: albumsViewGrid
-        onAlbumCoverPressed: control.albumCoverPressedAndHold(album, artist)
-        onAlbumCoverClicked: control.albumCoverClicked(album, artist)
+        onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
+        onAlbumCoverClicked: control.populateTable(album, artist)
     }
 
-    BabeTable
-    {
-        id: _tracksTable
-        showTitle: false
-        trackNumberVisible: true
-        coverArtVisible: true
-        focus: true
-        listModel.sort: "track"
-        holder.emoji: "qrc:/assets/media-album-track.svg"
-        holder.title : "Oops!"
-        holder.body: i18n("This list is empty")
-        holder.emojiSize: Maui.Style.iconSizes.huge
-        headBar.visible: true
-        headBar.farLeftContent: ToolButton
-        {
-            icon.name: "go-previous"
-            onClicked: control.pop()
-        }
+  Component
+  {
+      id: _tracksTableComponent
 
-        onRowClicked:
-        {
-            control.rowClicked(listModel.get(index))
-        }
+      BabeTable
+      {
+          trackNumberVisible: true
+          coverArtVisible: true
+          focus: true
+          holder.emoji: "qrc:/assets/media-album-track.svg"
+          holder.title : "Oops!"
+          holder.body: i18n("This list is empty")
+          holder.emojiSize: Maui.Style.iconSizes.huge
+          headBar.visible: true
+          headBar.farLeftContent: ToolButton
+          {
+              icon.name: "go-previous"
+              onClicked: control.pop()
+          }
 
-        onQuickPlayTrack:
-        {
-            control.playTrack(listModel.get(index))
-        }
+          onRowClicked:
+          {
+              control.rowClicked(listModel.get(index))
+          }
 
-        onQueueTrack:
-        {
-            control.queueTrack(listModel.get(index))
-        }
+          onQuickPlayTrack:
+          {
+              control.playTrack(listModel.get(index))
+          }
 
-        onAppendTrack:
-        {
-            control.appendTrack(listModel.get(index))
-        }
+          onQueueTrack:
+          {
+              control.queueTrack(listModel.get(index))
+          }
 
-        onPlayAll:
-        {
-            control.pop()
-            control.playAll(currentAlbum, currentArtist)
-        }
+          onAppendTrack:
+          {
+              control.appendTrack(listModel.get(index))
+          }
 
-        onAppendAll:
-        {
-            control.pop()
-            control.appendAll(currentAlbum, currentArtist)
-        }
-    }
+          onPlayAll:
+          {
+              control.pop()
+              Player.playAll(listModel.list.getAll())
+          }
+
+          onAppendAll:
+          {
+              control.pop()
+              Player.appendAll(listModel.list.getAll())
+          }
+
+          Component.onCompleted:
+          {
+              var query
+              if(currentAlbum && currentArtist)
+              {
+                  query = Q.GET.albumTracks_.arg(currentAlbum)
+                  query = query.arg(currentArtist)
+
+              }else if(currentArtist && !currentAlbum.length)
+              {
+                  query = Q.GET.artistTracks_.arg(currentArtist)
+              }
+
+              listModel.list.query = query
+          }
+      }
+  }
 
     function populateTable(album, artist)
     {
-        console.log("PAPULATE ALBUMS VIEW")
-        control.push(_tracksTable)
-        _tracksTable.listModel.filter = ""
-
-        var query = ""
-        var tagq = ""
-
         currentAlbum = album === undefined ? "" : album
         currentArtist= artist
 
-        if(album && artist)
-        {
-            query = Q.GET.albumTracks_.arg(album)
-            query = query.arg(artist)
-            _tracksTable.title = album
-            tagq = Q.GET.albumTags_.arg(album)
-
-        }else if(artist && album === undefined)
-        {
-            query = Q.GET.artistTracks_.arg(artist)
-            _tracksTable.title = artist
-            tagq = Q.GET.artistTags_.arg(artist)
-        }
-
-        _tracksTable.list.query = query
-
-    }
-
-    function filter(tracks)
-    {
-        var matches = []
-
-        for(var i = 0; i<tracks.length; i++)
-            matches.push(find(tracks[i].album))
-
-        for(var j = 0 ; j < albumsViewGrid.gridModel.count; j++)
-            albumsViewGrid.gridModel.remove(j,1)
-
-
-        //        for(var match in matches)
-        //        {
-        //            albumsViewGrid.gridModel.get(match).hide = true
-        //            console.log(match)
-        //        }
-    }
-
-    function find(query)
-    {
-        var indexes = []
-        for(var i = 0 ; i < albumsViewGrid.gridModel.count; i++)
-            if(albumsViewGrid.gridModel.get(i).album.includes(query))
-                indexes.push(i)
-
+        control.push(_tracksTableComponent)
     }
 }
 

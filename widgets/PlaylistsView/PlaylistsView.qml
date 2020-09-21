@@ -11,6 +11,7 @@ import "../../view_models/BabeTable"
 import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
+import "../../utils/Player.js" as Player
 
 StackView
 {
@@ -23,11 +24,19 @@ StackView
     signal rowClicked(var track)
     signal playTrack(var track)
     signal appendTrack(var track)
-    signal playAll()
     signal syncAndPlay(string playlist)
-    signal appendAll()
 
     property Flickable flickable : currentItem.flickable
+
+    Maui.NewDialog
+    {
+        id: newPlaylistDialog
+        title: i18n("Add new playlist")
+        message: i18n("Create a new playlist to organize your music collection")
+        onFinished: addPlaylist(text)
+        acceptButton.text: i18n("Create")
+        rejectButton.visible: false
+    }
 
     initialItem:  PlaylistsViewModel
     {
@@ -44,16 +53,6 @@ StackView
         }
     }
 
-    Maui.NewDialog
-    {
-        id: newPlaylistDialog
-        title: i18n("Add new playlist")
-        message: i18n("Create a new playlist to organize your music collection")
-        onFinished: addPlaylist(text)
-        acceptButton.text: i18n("Create")
-        rejectButton.visible: false
-    }
-
     Component
     {
         id: _filterListComponent
@@ -63,7 +62,6 @@ StackView
             id: filterList
             property bool isPublic: true
             signal removeFromPlaylist(string url)
-            list.query: control.playlistQuery
             coverArtVisible: true
             showTitle: false
             title: control.currentPlaylist
@@ -85,7 +83,7 @@ StackView
                 onTriggered:
                 {
                     playlistsList.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
-                    filterList.list.remove(filterList.currentIndex)
+                    listModel.list.remove(filterList.currentIndex)
                 }
             }
 
@@ -96,14 +94,20 @@ StackView
             onPlayAll:
             {
                 if(filterList.isPublic)
+                {
                     control.syncAndPlay(control.currentPlaylist)
+                    Player.playAll(listModel.list.getAll())
+                }
                 else
-                    control.playAll()
+                {
+                    Player.playAll(listModel.list.getAll())
+                }
 
                 control.pop()
             }
 
-            onAppendAll: appendAll()
+            onAppendAll: Player.appendAll(listModel.list.getAll())
+
             section.criteria: ViewSection.FullString
             section.delegate: Maui.LabelDelegate
             {
@@ -113,49 +117,46 @@ StackView
                 width: filterList.width
             }
 
-            Connections
+            Component.onCompleted:
             {
-                target: control
-                function onCurrentPlaylistChanged()
+                filterList.group = false
+
+                switch(currentPlaylist)
                 {
-                    filterList.group = false
+                case "Most Played":
+                    playlistQuery = Q.GET.mostPlayedTracks
+                    filterList.listModel.sort = "count"
+                    break;
 
-                    switch(currentPlaylist)
-                    {
-                    case "Most Played":
-                        playlistQuery = Q.GET.mostPlayedTracks
-                        filterList.listModel.sort = "count"
-                        break;
+                case "Rating":
+                    filterList.listModel.sort = "rate"
+                    filterList.group = true
 
-                    case "Rating":
-                        filterList.listModel.sort = "rate"
-                        filterList.group = true
+                    playlistQuery = Q.GET.favoriteTracks;
+                    break;
 
-                        playlistQuery = Q.GET.favoriteTracks;
-                        break;
+                case "Recent":
+                    playlistQuery = Q.GET.recentTracks;
+                    filterList.listModel.sort = "adddate"
+                    filterList.group = true
+                    break;
 
-                    case "Recent":
-                        playlistQuery = Q.GET.recentTracks;
-                        filterList.listModel.sort = "adddate"
-                        filterList.group = true
-                        break;
-
-                    default:
-                        playlistQuery = Q.GET.playlistTracks_.arg(currentPlaylist)
-                        break;
-                    }
-
-                    filterList.isPublic = isPublic
-                    filterList.listModel.filter = ""
+                default:
+                    playlistQuery = Q.GET.playlistTracks_.arg(currentPlaylist)
+                    break;
                 }
+
+                filterList.isPublic = isPublic
+                filterList.listModel.filter = ""
+                listModel.list.query= control.playlistQuery
             }
         }
     }
 
     function populate(playlist, isPublic)
     {
-        control.push(_filterListComponent)
         currentPlaylist = playlist
+        control.push(_filterListComponent)
     }
 
     function addPlaylist(text)

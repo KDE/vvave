@@ -8,9 +8,6 @@ import org.maui.vvave 1.0
 
 import "../../utils/Player.js" as Player
 import "../../utils/Help.js" as H
-import "../../db/Queries.js" as Q
-
-import ".."
 
 Maui.Page
 {
@@ -18,6 +15,8 @@ Maui.Page
 
     property alias listBrowser : _listBrowser
     property alias listView : _listBrowser.flickable
+
+    property alias listModel : _listModel
 
     property alias delegate : _listBrowser.delegate
 
@@ -28,8 +27,6 @@ Maui.Page
     property alias holder : _listBrowser.holder
     property alias section : _listBrowser.section
 
-    property alias list : _tracksList
-    property alias listModel : _tracksModel
     property alias removeDialog : _removeDialog
 
     property bool trackNumberVisible : false
@@ -58,7 +55,7 @@ Maui.Page
     headBar.leftContent: Maui.ToolActions
     {
         expanded: isWide
-        enabled: list.count > 0
+        enabled: listModel.list.count > 0
         checkable: false
         autoExclusive: false
         display: ToolButton.TextBesideIcon
@@ -84,8 +81,8 @@ Maui.Page
         Layout.minimumWidth: 100
         Layout.maximumWidth: 500
         Layout.alignment: Qt.AlignCenter
-        enabled: _tracksList.count > 0
-        placeholderText: i18n("Search") + " " + list.count + " " + i18n("tracks")
+        enabled: control.listModel.list.count > 0
+        placeholderText: i18n("Search") + " " + listModel.list.count + " " + i18n("tracks")
         onAccepted: listModel.filter = text
         onCleared: listModel.filter = ""
     }
@@ -95,13 +92,13 @@ Maui.Page
         {
             id: sortBtn
             icon.name: "view-sort"
-            enabled: list.count > 2
+            enabled: listModel.list.count > 2
             MenuItem
             {
                 text: i18n("Title")
                 checkable: true
-                checked: _tracksModel.sort === "title"
-                onTriggered: _tracksModel.sort = "title"
+                checked: control.sort === "title"
+                onTriggered: control.listModel.sort = "title"
                 autoExclusive: true
             }
 
@@ -109,8 +106,8 @@ Maui.Page
             {
                 text: i18n("Track")
                 checkable: true
-                checked: _tracksModel.sort === "track"
-                onTriggered: _tracksModel.sort = "track"
+                checked: control.listModel.sort === "track"
+                onTriggered: control.listModel.sort = "track"
                 autoExclusive: true
             }
 
@@ -118,8 +115,8 @@ Maui.Page
             {
                 text: i18n("Artist")
                 checkable: true
-                checked: _tracksModel.sort === "artist"
-                onTriggered: _tracksModel.sort ="artist"
+                checked: control.listModel.sort === "artist"
+                onTriggered: control.listModel.sort ="artist"
                 autoExclusive: true
             }
 
@@ -127,8 +124,8 @@ Maui.Page
             {
                 text: i18n("Album")
                 checkable: true
-                checked: _tracksModel.sort === "album"
-                onTriggered: _tracksModel.sort = "album"
+                checked: control.listModel.sort === "album"
+                onTriggered: control.listModel.sort = "album"
                 autoExclusive: true
             }
 
@@ -136,8 +133,8 @@ Maui.Page
             {
                 text: i18n("Most played")
                 checkable: true
-                checked: _tracksModel.sort === "count"
-                onTriggered: _tracksModel.sort = "count"
+                checked: control.listModel.sort === "count"
+                onTriggered: control.listModel.sort = "count"
                 autoExclusive: true
             }
 
@@ -145,8 +142,8 @@ Maui.Page
             {
                 text: i18n("Rate")
                 checkable: true
-                checked: _tracksModel.sort === "rate"
-                onTriggered: _tracksModel.sort = "rate"
+                checked: control.listModel.sort === "rate"
+                onTriggered: control.listModel.sort = "rate"
                 autoExclusive: true
             }
 
@@ -154,8 +151,8 @@ Maui.Page
             {
                 text: i18n("Release date")
                 checkable: true
-                checked: _tracksModel.sort === "releasedate"
-                onTriggered: _tracksModel.sort = "releasedate"
+                checked: control.listModel.sort === "releasedate"
+                onTriggered: control.listModel.sort = "releasedate"
                 autoExclusive: true
             }
 
@@ -163,8 +160,8 @@ Maui.Page
             {
                 text: i18n("Add date")
                 checkable: true
-                checked: _tracksModel.sort === "adddate"
-                onTriggered: _tracksModel.sort = "adddate"
+                checked: control.listModel.sort === "adddate"
+                onTriggered: control.listModel.sort = "adddate"
                 autoExclusive: true
             }
 
@@ -196,14 +193,14 @@ Maui.Page
 
         onAccepted:
         {
-            list.remove(control.currentIndex)
+            listModel.list.remove(control.currentIndex)
             close()
         }
 
         onRejected:
         {
             if(Maui.FM.removeFile(listModel.get(index).url))
-                list.remove(control.currentIndex)
+                listModel.list.remove(control.currentIndex)
             close()
         }
     }
@@ -230,7 +227,7 @@ Maui.Page
 
         onFavClicked:
         {
-            list.fav(control.currentIndex, !Maui.FM.isFav(listModel.get(control.currentIndex).url))
+            listModel.list.fav(control.currentIndex, !Maui.FM.isFav(listModel.get(control.currentIndex).url))
         }
 
         onQueueClicked: Player.queueTracks([listModel.get(control.currentIndex)])
@@ -253,7 +250,7 @@ Maui.Page
 
         onRateClicked:
         {
-            list.rate(control.currentIndex, rate);
+            listModel.list.rate(control.currentIndex, rate);
         }
 
         onInfoClicked:
@@ -289,7 +286,7 @@ Maui.Page
         anchors.fill: parent
 
         focus: true
-        holder.visible: list.count === 0
+        holder.visible: control.listModel.list.count === 0
         enableLassoSelection: true
 
         onItemsSelected:
@@ -300,32 +297,21 @@ Maui.Page
             }
         }
 
-        section.property: control.group ? _tracksModel.sort : ""
-        section.criteria: _tracksModel.sort === "title" || _tracksModel.sort === "artist" || _tracksModel.sort === "album"?  ViewSection.FirstCharacter : ViewSection.FullString
-        section.delegate: Maui.LabelDelegate
+        section.property: control.group ? control.listModel.sort : ""
+        section.criteria: control.listModel.sort === "title" ?  ViewSection.FirstCharacter : ViewSection.FullString
+        section.delegate: Maui.ListItemTemplate
         {
             id: _sectionDelegate
-            label: _tracksModel.sort === "adddate" || _tracksModel.sort === "releasedate" ? Maui.FM.formatDate(Date(section), "MM/dd/yyyy") : String(section).toUpperCase()
+            label1.text: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.FM.formatDate(Date(section), "MM/dd/yyyy") : String(section)
+            label1.font.pointSize: Maui.Style.fontSizes.big
 
-            isSection: true
             width: parent.width
-            Kirigami.Theme.backgroundColor: "#333"
-            Kirigami.Theme.textColor: "#fafafa"
-
-            background: Rectangle
-            {
-                color:  Kirigami.Theme.backgroundColor
-            }
         }
 
-        model: Maui.BaseModel
+        model:Maui.BaseModel
         {
-            id: _tracksModel
-            list: Tracks
-            {
-                id: _tracksList
-            }
-
+            id: _listModel
+            list: Tracks {}
             sort: "title"
             sortOrder: Qt.AscendingOrder
             recursiveFilteringEnabled: true
@@ -346,6 +332,9 @@ Maui.Page
             onToggled: H.addToSelection(model)
             checked: selectionBar.contains(model.url)
             checkable: selectionMode
+
+            signal play()
+            signal append()
 
             Drag.keys: ["text/uri-list"]
             Drag.mimeData: Drag.active ?
@@ -405,12 +394,6 @@ Maui.Page
             appendTrack(index)
         }
 
-        onArtworkCoverClicked:
-        {
-            currentIndex = index
-            goToAlbum()
-        }
-
         Connections
         {
             target: selectionBar
@@ -434,9 +417,7 @@ Maui.Page
             }
         }
     }
-
-    }
-
+}
 
 function openItemMenu(index)
 {
@@ -448,37 +429,11 @@ function openItemMenu(index)
     rowPressed(index)
 }
 
-function saveList()
-{
-    var trackList = []
-    if(list.count > 0)
-    {
-        for(var i = 0; i < list.count; ++i)
-            trackList.push(listModel.get(i).url)
-
-        playlistDialog.composerList.urls = trackList
-        playlistDialog.open()
-    }
-}
-
-function queueList()
-{
-    var trackList = []
-
-    if(list.count > 0)
-    {
-        for(var i = 0; i < list.count; ++i)
-            trackList.push(listModel.get(i))
-
-        Player.queueTracks(trackList)
-    }
-}
-
 function goToAlbum()
 {
     swipeView.currentIndex = viewsIndex.albums
     const item = listModel.get(control.currentIndex)
-    swipeView.currentItem.item.populateTable(item.album, item.artist)
+    albumsView.populateTable(item.album, item.artist)
     contextMenu.close()
 }
 
@@ -486,7 +441,7 @@ function goToArtist()
 {
     swipeView.currentIndex = viewsIndex.artists
     const item = listModel.get(control.currentIndex)
-    swipeView.currentItem.item.populateTable(undefined, item.artist)
+    artistsView.populateTable(undefined, item.artist)
     contextMenu.close()
 }
 

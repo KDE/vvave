@@ -46,17 +46,6 @@ function stop()
     root.title = "Babe..."
 }
 
-function pauseTrack()
-{
-    player.playing = false
-}
-
-function resumeTrack()
-{
-    if(!player.play() && !mainlistEmpty)
-        playAt(0)
-}
-
 function nextTrack()
 {
     if(!mainlistEmpty)
@@ -114,7 +103,7 @@ function appendTracksAt(tracks, at)
     if(tracks)
         for(var i in tracks)
         {
-            mainPlaylist.list.append(tracks[i], parseInt(at)+parseInt(i))
+            mainPlaylist.listModel.list.append(tracks[i], parseInt(at)+parseInt(i))
         }
 }
 
@@ -122,7 +111,7 @@ function appendTrack(track)
 {
     if(track)
     {
-        mainPlaylist.list.append(track)
+        mainPlaylist.listModel.list.append(track)
         if(sync === true)
         {
            playlistsList.addTrack(syncPlaylist, [track.url])
@@ -158,7 +147,7 @@ function savePlaylist()
 
     for(var i=0 ; i < n; i++)
     {
-        var url = mainPlaylist.list.get(i).url
+        var url = mainPlaylist.listModel.list.get(i).url
         list.push(url)
     }
 
@@ -166,33 +155,12 @@ function savePlaylist()
     Maui.FM.saveSettings("PLAYLIST_POS", mainPlaylist.listView.currentIndex, "MAINWINDOW")
 }
 
-
-function clearOutPlaylist()
-{
-    mainPlaylist.list.clear()
-    stop()
-}
-
-function cleanPlaylist()
-{
-    var urls = []
-
-    for(var i = 0; i < mainPlaylist.listView.count; i++)
-    {
-        var url = mainPlaylist.list.get(i).url
-
-        if(urls.indexOf(url)<0)
-            urls.push(url)
-        else mainPlaylist.list.remove(i)
-    }
-}
-
 function playAll(tracks)
 {
     sync = false
     syncPlaylist = ""
 
-    mainPlaylist.list.clear()
+    mainPlaylist.listModel.list.clear()
     appendAll(tracks)
 
     if(_drawer.modal && !_drawer.visible)

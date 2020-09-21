@@ -6,7 +6,6 @@ import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
 
-import "../../view_models"
 import "../../utils/Help.js" as H
 
 Maui.ListBrowserDelegate
@@ -26,10 +25,6 @@ Maui.ListBrowserDelegate
     readonly property string artwork : model.artwork
 
     property bool sameAlbum : false
-
-    signal play()
-    signal append()
-    signal artworkCoverClicked()
 
     isCurrentItem: ListView.isCurrentItem || checked
 

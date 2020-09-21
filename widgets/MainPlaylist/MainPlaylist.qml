@@ -15,7 +15,6 @@ Maui.Page
 {
     id: control
 
-    property alias list : table.list
     property alias listModel: table.listModel
     property alias listView : table.listView
     property alias table: table
@@ -38,7 +37,7 @@ Maui.Page
         onClicked:
         {
             player.stop()
-            mainPlaylist.table.list.clear()
+            listModel.list.clear()
             root.sync = false
             root.syncPlaylist = ""
         }
@@ -47,7 +46,7 @@ Maui.Page
     headBar.leftContent:  ToolButton
     {
         icon.name: "document-save"
-        onClicked: mainPlaylist.table.saveList()
+        onClicked: saveList()
     }
 
     BabeTable
@@ -134,7 +133,7 @@ Maui.Page
                     if(index === currentTrackIndex)
                         player.stop()
 
-                    list.remove(index)
+                    listModel.list.remove(index)
                 }
 
                 opacity: delegate.hovered ? 0.8 : 0.6
@@ -164,9 +163,22 @@ Maui.Page
                 {
                     var where = "url = \""+lastplaylist[i]+"\""
                     var query = Q.GET.tracksWhere_.arg(where)
-                    table.list.appendQuery(query);
+                    listModel.list.appendQuery(query);
                 }
             }
+        }
+    }
+
+    function saveList()
+    {
+        var trackList = []
+        if(listModel.list.count > 0)
+        {
+            for(var i = 0; i < listModel.list.count; ++i)
+                trackList.push(listModel.get(i).url)
+
+            playlistDialog.composerList.urls = trackList
+            playlistDialog.open()
         }
     }
 }

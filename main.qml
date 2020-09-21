@@ -50,11 +50,6 @@ Maui.ApplicationWindow
     /*************************************************/
     property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
     property var currentTrack : undefined
-    Binding on currentTrack
-    {
-       value: mainPlaylist.listView.itemAtIndex(currentTrackIndex)
-       restoreMode: Binding.RestoreBindingOrValue
-    }
 
     property int currentTrackIndex: -1
     property int prevTrackIndex: 0
@@ -104,7 +99,7 @@ Maui.ApplicationWindow
         var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
         notify("dialog-question", message, messageBody, function ()
         {
-            mainPlaylist.list.remove(mainPlaylist.table.currentIndex)
+            mainPlaylist.listModel.list.remove(mainPlaylist.table.currentIndex)
         })
     }
 
@@ -116,7 +111,7 @@ Maui.ApplicationWindow
         onFinishedChanged: if (!mainlistEmpty)
                            {
                                if (currentTrack && currentTrack.url)
-                                   mainPlaylist.list.countUp(currentTrackIndex)
+                                   mainPlaylist.listModel.list.countUp(currentTrackIndex)
 
                                Player.nextTrack()
                            }
@@ -492,7 +487,7 @@ Maui.ApplicationWindow
                         icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                         onClicked:
                         {
-                            mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
+                            mainPlaylist.listModel.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
                             root.currentTrackChanged()
                         }
                     },
@@ -551,6 +546,7 @@ Maui.ApplicationWindow
     {
         anchors.fill: parent
         visible: !focusView
+        floatingFooter: true
         flickable: swipeView.currentItem.flickable ||swipeView.currentItem.item.flickable
 
         Maui.AppViews
@@ -584,25 +580,19 @@ Maui.ApplicationWindow
                 holder.body: i18n("Add new music sources")
                 holder.emojiSize: Maui.Style.iconSizes.huge
 
-                listModel.sort: "track"
-
                 onRowClicked: Player.quickPlay(track)
                 onAppendTrack: Player.addTrack(track)
                 onPlayTrack: Player.quickPlay(track)
 
-                onAlbumCoverClicked: albumsView.populateTable(album, artist)
                 onAlbumCoverPressedAndHold:
                 {
                     var query = Q.GET.albumTracks_.arg(album)
                     query = query.arg(artist)
 
-                    mainPlaylist.list.clear()
-                    mainPlaylist.list.query = query
+                    mainPlaylist.listModel.list.clear()
+                    mainPlaylist.listModel.list.query = query
                     Player.playAt(0)
                 }
-
-                onPlayAll: Player.playAll(albumsView.listModel.getAll())
-                onAppendAll: Player.appendAll(albumsView.listModel.getAll())
 
                 Component.onCompleted: list.query = Albums.ALBUMS
             }
@@ -617,23 +607,18 @@ Maui.ApplicationWindow
                 holder.title : i18n("No Artists!")
                 holder.body: i18n("Add new music sources")
                 holder.emojiSize: Maui.Style.iconSizes.huge
-                table.listModel.sort: "artist"
 
                 onRowClicked: Player.quickPlay(track)
                 onAppendTrack: Player.addTrack(track)
                 onPlayTrack: Player.quickPlay(track)
-                onAlbumCoverClicked: artistsView.populateTable(undefined, artist)
 
                 onAlbumCoverPressedAndHold:
                 {
                     var query = Q.GET.artistTracks_.arg(artist)
-                    mainPlaylist.list.clear()
-                    mainPlaylist.list.query = query
+                    mainPlaylist.listModel.list.clear()
+                    mainPlaylist.listModel.list.query = query
                     Player.playAt(0)
                 }
-
-                onPlayAll: Player.playAll(artistsView.listModel.getAll())
-                onAppendAll: Player.appendAll(artistsView.listModel.getAll())
 
                 Component.onCompleted: list.query = Albums.ARTISTS
             }
@@ -650,16 +635,11 @@ Maui.ApplicationWindow
                     onRowClicked: Player.quickPlay(track)
                     onAppendTrack: Player.addTrack(track)
                     onPlayTrack: Player.quickPlay(track)
-                    onAppendAll: Player.appendAll(playlistsView.listModel.getAll())
                     onSyncAndPlay:
                     {
-                        Player.playAll(playlistsView.listModel.getAll())
-
                         root.sync = true
                         root.syncPlaylist = playlist
-                    }
-
-                    onPlayAll: Player.playAll(playlistsView.listModel.getAll())
+                    }                  
                 }
             }
 
