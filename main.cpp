@@ -9,6 +9,7 @@
 #include <KF5/KI18n/KLocalizedContext>
 #else
 #include <KI18n/KLocalizedContext>
+#include <KI18n/KLocalizedString>
 #endif
 
 #if defined Q_OS_ANDROID || defined Q_OS_IOS
@@ -37,6 +38,7 @@
 #else
 #include <MauiKit/fmstatic.h>
 #include <MauiKit/mauiapp.h>
+#include "vvave_version.h"
 #endif
 
 #include "vvave.h"
@@ -75,26 +77,31 @@ int main(int argc, char *argv[])
 		return -1;
 #endif
 
-	app.setApplicationName(BAE::appName);
-	app.setApplicationVersion(BAE::version);
-	app.setApplicationDisplayName(BAE::displayName);
-	app.setOrganizationName(BAE::orgName);
-	app.setOrganizationDomain(BAE::orgDomain);
+    app.setOrganizationName(QStringLiteral("Maui"));
 	app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
 
-	MauiApp::instance()->setCredits ({QVariantMap({{"name", "Camilo Higuita"}, {"email", "milo.h@aol.com"}, {"year", "2019-2020"}})});
-	MauiApp::instance()->setIconName("qrc:/assets/vvave.svg");
-	MauiApp::instance()->setDescription(BAE::description);
-	MauiApp::instance()->setWebPage("https://mauikit.org");
-	MauiApp::instance()->setReportPage("https://invent.kde.org/maui/vvave/-/issues");
+    MauiApp::instance()->setHandleAccounts(true); //for now pix can not handle cloud accounts
+    MauiApp::instance()->setIconName("qrc:/assets/vvave.png");
 
-	QCommandLineParser parser;
-	parser.setApplicationDescription(BAE::description);
+    KLocalizedString::setApplicationDomain("vvave");
+    KAboutData about(QStringLiteral("vvave"), i18n("Vvave"), VVAVE_VERSION_STRING, i18n("Vvave lets you organize, browse and listen to your local and online music collection."),
+                     KAboutLicense::LGPL_V3, i18n("© 2019-2020 Nitrux Development Team"));
+    about.addAuthor(i18n("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
+    about.setHomepage("https://mauikit.org");
+    about.setProductName("maui/vvave");
+    about.setBugAddress("https://invent.kde.org/maui/vvave/-/issues");
+    about.setOrganizationDomain("org.maui.vvave");
+    about.setProgramLogo(app.windowIcon());
 
-	const QCommandLineOption versionOption = parser.addVersionOption();
-	parser.process(app);
+    KAboutData::setApplicationData(about);
 
-	const QStringList args = parser.positionalArguments();
+    QCommandLineParser parser;
+    parser.process(app);
+
+    about.setupCommandLine(&parser);
+    about.processCommandLine(&parser);
+
+    const QStringList args = parser.positionalArguments();
 
 	QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
 
@@ -106,10 +113,10 @@ int main(int argc, char *argv[])
 		if (!obj && url == objUrl)
 			QCoreApplication::exit(-1);
 
-//		if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
-//		{
-//			vvave::instance()->scanDir(vvave::sources());
-//		}
+        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
+        {
+            vvave::instance()->scanDir(vvave::sources());
+        }
 
 		if(!args.isEmpty())
 			 vvave::instance()->openUrls(args);

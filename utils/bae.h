@@ -2,38 +2,20 @@
 #define BAE_H
 
 #include <QString>
-#include <QDebug>
 #include <QStandardPaths>
 #include <QFileInfo>
 #include <QImage>
 #include <QTime>
-#include <QSettings>
 #include <QDirIterator>
 
 #ifdef STATIC_MAUIKIT
 #include "fmh.h"
 #else
-#include "vvave_version.h"
 #include <MauiKit/fmh.h>
 #endif
 
 namespace BAE
 {
-
-	enum SearchT
-		{
-		LIKE,
-		SIMILAR
-		};
-
-	typedef QMap<BAE::SearchT,QString> SEARCH;
-
-	static const SEARCH SearchTMap
-	{
-		{ BAE::SearchT::LIKE, "like" },
-		{ BAE::SearchT::SIMILAR, "similar" }
-	};
-
 	enum class W : uint_fast8_t
 		{
 		ALL,
@@ -149,24 +131,6 @@ namespace BAE
 		{KEY::SQL, "sql"}
 	};
 
-	static const DB TracksColsMap =
-	{
-		{KEY::URL, KEYMAP[KEY::URL]},
-		{KEY::SOURCES_URL, KEYMAP[KEY::SOURCES_URL]},
-		{KEY::TRACK, KEYMAP[KEY::TRACK]},
-		{KEY::TITLE, KEYMAP[KEY::TITLE]},
-		{KEY::ARTIST, KEYMAP[KEY::ARTIST]},
-		{KEY::ALBUM, KEYMAP[KEY::ALBUM]},
-		{KEY::DURATION, KEYMAP[KEY::DURATION]},
-		{KEY::PLAYED, KEYMAP[KEY::PLAYED]},
-		{KEY::STARS, KEYMAP[KEY::STARS]},
-		{KEY::RELEASE_DATE, KEYMAP[KEY::RELEASE_DATE]},
-		{KEY::ADD_DATE, KEYMAP[KEY::ADD_DATE]},
-		{KEY::LYRICS, KEYMAP[KEY::LYRICS]},
-		{KEY::GENRE, KEYMAP[KEY::GENRE]},
-		{KEY::ART, KEYMAP[KEY::ART]}
-	};
-
 	const static inline QString transformTime(const qint64 &value)
 	{
 		QString tStr;
@@ -190,17 +154,7 @@ namespace BAE
 	const static QString CachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/").toString();
 #endif
 
-	const static QString YoutubeCachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/").toLocalFile();
-
-	const static QString BabePort = "8483";
-	const static QString LinkPort = "3333";
-
-	const static QString appName = QStringLiteral("vvave");
-	const static QString displayName = QStringLiteral("Vvave");
-	const static QString version = VVAVE_VERSION_STRING;
-	const static QString description = QStringLiteral("Vvave lets you organize, browse and listen to your local and online music collection");
-	const static QString orgName = QStringLiteral("Maui");
-	const static QString orgDomain = QStringLiteral("org.maui.vvave");
+    const static QString YoutubeCachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/").toLocalFile();
 
 	const static QString DBName = "collection.db";
 

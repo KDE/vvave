@@ -29,6 +29,7 @@ public:
     QString getQuery() const;
 
     int limit() const;
+    void setLimit(int limit);
 
 private:
     CollectionDB *db;
@@ -45,13 +46,11 @@ signals:
     void limitChanged(int limit);
 
 public slots:
-    QVariantMap get(const int &index) const;
     QVariantList getAll();
     void append(const QVariantMap &item);
     void append(const QVariantMap &item, const int &at);
     void appendQuery(const QString &query);
 //    void appendUrl(const QString &url);
-    void searchQueries(const QStringList &queries);
     void clear();
     bool fav(const int &index, const bool &value);
     bool rate(const int &index, const int &value);
@@ -59,7 +58,6 @@ public slots:
     bool remove(const int &index);
     void refresh();
     bool update(const QVariantMap &data, const int &index);
-    void setLimit(int limit);
 };
 
 #endif // TRACKSMODEL_H

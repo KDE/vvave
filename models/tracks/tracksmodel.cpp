@@ -80,14 +80,6 @@ emit this->postListChanged();
 emit countChanged();
 }
 
-QVariantMap TracksModel::get(const int &index) const
-{
-	if(index >= this->list.size() || index < 0)
-		return QVariantMap();
-
-	return FMH::toMap(this->list.at( this->mappedIndex(index)));
-}
-
 QVariantList TracksModel::getAll()
 {
 	QVariantList res;
@@ -128,71 +120,6 @@ void TracksModel::appendQuery(const QString &query)
 	this->list << this->db->getDBData(query);
 	emit this->postListChanged();
 	emit this->countChanged();
-}
-
-void TracksModel::searchQueries(const QStringList &queries)
-{
-	emit this->preListChanged();
-	this->list.clear();
-
-	bool hasKey = false;
-	for(auto searchQuery : queries)
-	{
-		if(searchQuery.contains(BAE::SearchTMap[BAE::SearchT::LIKE]+":") || searchQuery.startsWith("#"))
-		{
-			if(searchQuery.startsWith("#"))
-				searchQuery = searchQuery.replace("#","").trimmed();
-			else
-				searchQuery = searchQuery.replace(BAE::SearchTMap[BAE::SearchT::LIKE]+":","").trimmed();
-
-
-			searchQuery = searchQuery.trimmed();
-			if(!searchQuery.isEmpty())
-			{
-				this->list << this->db->getSearchedTracks(FMH::MODEL_KEY::WIKI, searchQuery);
-				this->list << this->db->getSearchedTracks(FMH::MODEL_KEY::TAG, searchQuery);
-				this->list << this->db->getSearchedTracks(FMH::MODEL_KEY::LYRICS, searchQuery);
-			}
-
-		}else if(searchQuery.contains((BAE::SearchTMap[BAE::SearchT::SIMILAR]+":")))
-		{
-			searchQuery=searchQuery.replace(BAE::SearchTMap[BAE::SearchT::SIMILAR]+":","").trimmed();
-			searchQuery=searchQuery.trimmed();
-			if(!searchQuery.isEmpty())
-				this->list << this->db->getSearchedTracks(FMH::MODEL_KEY::TAG, searchQuery);
-
-		}else
-		{
-			FMH::MODEL_KEY key;
-
-			QHashIterator<FMH::MODEL_KEY, QString> k(FMH::MODEL_NAME);
-			while (k.hasNext())
-			{
-				k.next();
-				if(searchQuery.contains(QString(k.value()+":")))
-				{
-					hasKey=true;
-					key=k.key();
-					searchQuery = searchQuery.replace(k.value()+":","").trimmed();
-				}
-			}
-
-			searchQuery = searchQuery.trimmed();
-
-			if(!searchQuery.isEmpty())
-			{
-				if(hasKey)
-					this->list << this->db->getSearchedTracks(key, searchQuery);
-				else
-				{
-					auto queryTxt = QString("SELECT t.*, al.artwork FROM tracks t INNER JOIN albums al ON t.album = al.album AND t.artist = al.artist WHERE t.title LIKE \"%"+searchQuery+"%\" OR t.artist LIKE \"%"+searchQuery+"%\" OR t.album LIKE \"%"+searchQuery+"%\"OR t.genre LIKE \"%"+searchQuery+"%\"OR t.url LIKE \"%"+searchQuery+"%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000");
-					this->list << this->db->getDBData(queryTxt);
-				}
-			}
-		}
-	}
-
-	emit this->postListChanged();
 }
 
 void TracksModel::clear()
