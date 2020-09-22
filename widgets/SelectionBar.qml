@@ -41,7 +41,7 @@ Maui.SelectionBar
         icon.name: "media-playlist-play"
         onTriggered:
         {
-            mainPlaylist.list.clear()
+            mainPlaylist.listModel.list.clear()
             Player.playAll(control.items)
         }
     }
