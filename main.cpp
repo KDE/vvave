@@ -7,6 +7,7 @@
 
 #if defined Q_OS_MACOS || defined Q_OS_WIN
 #include <KF5/KI18n/KLocalizedContext>
+#include <KF5/KI18n/KLocalizedString>
 #else
 #include <KI18n/KLocalizedContext>
 #include <KI18n/KLocalizedString>
@@ -52,15 +53,18 @@
 #include "models/folders/foldersmodel.h"
 #include "models/cloud/cloud.h"
 
+#define VVAVE_URI "org.maui.vvave"
+
 #ifdef Q_OS_ANDROID
 Q_DECL_EXPORT
 #endif
 
-#define VVAVE_URI "org.maui.vvave"
-
 int main(int argc, char *argv[])
 {
-	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+    QCoreApplication::setAttribute(Qt::AA_DisableSessionManager, true);
 
 #ifdef Q_OS_WIN32
 	qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
