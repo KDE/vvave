@@ -85,10 +85,10 @@ Maui.AltBrowser
             }
         }
 
-        onPressAndHold:
-        {
-            albumCoverPressed(model.album, model.artist)
-        }
+//        onPressAndHold:
+//        {
+//            albumCoverPressed(model.album, model.artist)
+//        }
     }
 
     gridDelegate: Item

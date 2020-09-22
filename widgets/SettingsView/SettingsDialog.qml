@@ -146,7 +146,7 @@ Maui.SettingsDialog
                 delegate: Maui.ListDelegate
                 {
                     width: parent.width
-                    implicitHeight: Maui.Style.rowHeight * 1.2
+                    implicitHeight: Maui.Style.rowHeight * 1.5
                     leftPadding: 0
                     rightPadding: 0
                     template.iconSource: modelData.icon

@@ -301,11 +301,12 @@ Maui.Page
         section.criteria: control.listModel.sort === "title" ?  ViewSection.FirstCharacter : ViewSection.FullString
         section.delegate: Maui.ListItemTemplate
         {
-            id: _sectionDelegate
+            implicitHeight: Maui.Style.rowHeight*2
+            width: parent.width
+
             label1.text: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.FM.formatDate(Date(section), "MM/dd/yyyy") : String(section)
             label1.font.pointSize: Maui.Style.fontSizes.big
 
-            width: parent.width
         }
 
         model:Maui.BaseModel

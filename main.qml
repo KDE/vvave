@@ -268,7 +268,7 @@ Maui.ApplicationWindow
         }
     }
 
-    footer: ItemDelegate
+    footer: Control
     {
         visible: !focusView
         width: parent.width
@@ -311,8 +311,9 @@ Maui.ApplicationWindow
                 }
             }
 
-            Kirigami.Separator
+            Maui.Separator
             {
+                position: Qt.Horizontal
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -393,12 +394,6 @@ Maui.ApplicationWindow
                     focus: true
                     onMoved: player.pos = value
                     enabled: player.playing
-                    Kirigami.Separator
-                    {
-                        anchors.top: parent.top
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                    }
 
                     background: Rectangle
                     {
@@ -434,6 +429,7 @@ Maui.ApplicationWindow
                 Layout.fillWidth: true
                 Layout.preferredHeight: Maui.Style.toolBarHeight
                 position: ToolBar.Footer
+                visible: player.state !== MediaPlayer.StoppedState
 
                 background: Item {}
                 rightContent: ToolButton
@@ -639,7 +635,7 @@ Maui.ApplicationWindow
                     {
                         root.sync = true
                         root.syncPlaylist = playlist
-                    }                  
+                    }
                 }
             }
 
