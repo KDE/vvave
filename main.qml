@@ -33,26 +33,21 @@ Maui.ApplicationWindow
 {
 
     id: root
-    title: currentTrack ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
+    title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
 
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
-    property alias mainPlaylist: mainPlaylist
     property alias selectionBar: _selectionBar
-    property alias progressBar: progressBar
     property alias dialog : _dialogLoader.item
 
-//    background.opacity: translucency ? 0.5 : 1
+    //    background.opacity: translucency ? 0.5 : 1
 
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
-    property bool isShuffle: Maui.FM.loadSettings("SHUFFLE","PLAYBACK", false)
-    property var currentTrack : undefined
-
-    property int currentTrackIndex: -1
-    property int prevTrackIndex: 0
+    property alias currentTrack : playlist.currentTrack
+    property alias currentTrackIndex: playlist.currentIndex
 
     readonly property string currentArtwork: currentTrack ?  currentTrack.artwork : ""
 
@@ -62,7 +57,7 @@ Maui.ApplicationWindow
     property alias isPlaying: player.playing
     property int onQueue: 0
 
-    property bool mainlistEmpty: !mainPlaylist.table.count > 0
+    readonly property bool mainlistEmpty: mainPlaylist.listModel.list.count ===0
 
     /***************************************************/
     /******************** HANDLERS ********************/
@@ -90,7 +85,6 @@ Maui.ApplicationWindow
     /*SIGNALS*/
     signal missingAlert(var track)
 
-    footerPositioning: ListView.InlineFooter
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
     onMissingAlert:
@@ -104,11 +98,33 @@ Maui.ApplicationWindow
     }
 
     /*COMPONENTS*/
+
+    Mpris2
+    {
+        id: mpris2Interface
+
+        playListModel: playlist
+        audioPlayer: player
+        playerName: 'vvave'
+
+//        onRaisePlayer:
+//        {
+//            rootItem.raisePlayer()
+//        }
+    }
+
+    Playlist
+    {
+        id: playlist
+        model: mainPlaylist.listModel.list
+        onCurrentTrackChanged: Player.playTrack()
+    }
+
     Player
     {
         id: player
         volume: 100
-        onFinishedChanged: if (!mainlistEmpty)
+        onFinished: if (!mainlistEmpty)
                            {
                                if (currentTrack && currentTrack.url)
                                    mainPlaylist.listModel.list.countUp(currentTrackIndex)
@@ -479,7 +495,7 @@ Maui.ApplicationWindow
                         id: babeBtnIcon
                         icon.name: "love"
                         enabled: currentTrack
-                        checked: Maui.FM.isFav(currentTrack.url)
+                        checked:currentTrack.url ? Maui.FM.isFav(currentTrack.url) : false
                         icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                         onClicked:
                         {
@@ -499,7 +515,6 @@ Maui.ApplicationWindow
                         {
                             icon.name: "media-skip-backward"
                             onTriggered: Player.previousTrack()
-                            //                    onPressAndHold: Player.playAt(prevTrackIndex)
                         }
                         //ambulatorios1@clinicaantioquia.com.co, copago martha hilda restrepo, cc 22146440 eps salud total, consulta expecialista urologo, hora 3:40 pm
                         Action
@@ -510,7 +525,7 @@ Maui.ApplicationWindow
                             icon.height: Maui.Style.iconSizes.big
                             enabled: currentTrackIndex >= 0
                             icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
-                            onTriggered: player.playing = !player.playing
+                            onTriggered: player.playing ? player.pause() : player.play()
                         }
 
                         Action
@@ -526,11 +541,10 @@ Maui.ApplicationWindow
                     {
                         id: shuffleBtn
                         icon.color: babeColor
-                        icon.name: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
+                        icon.name: playlist.shuffle ? "media-playlist-shuffle" : "media-playlist-normal"
                         onClicked:
                         {
-                            isShuffle = !isShuffle
-                            Maui.FM.saveSettings("SHUFFLE", isShuffle, "PLAYBACK")
+                            playlist.shuffle = !playlist.shuffle
                         }
                     }
                 ]
@@ -556,15 +570,7 @@ Maui.ApplicationWindow
 
                 Maui.AppView.title: i18n("Tracks")
                 Maui.AppView.iconName: "view-media-track"
-
-                onRowClicked: Player.quickPlay(tracksView.listModel.get(index))
-                onQuickPlayTrack: Player.quickPlay(tracksView.listModel.get(index))
-                onAppendTrack: Player.addTrack(tracksView.listModel.get(index))
-                onPlayAll: Player.playAll( tracksView.listModel.getAll())
-                onAppendAll: Player.appendAll( tracksView.listModel.getAll())
-                onQueueTrack: Player.queueTracks([tracksView.listModel.get(index)], index)
             }
-
 
             AlbumsView
             {
@@ -575,20 +581,6 @@ Maui.ApplicationWindow
                 holder.title : i18n("No Albums!")
                 holder.body: i18n("Add new music sources")
                 holder.emojiSize: Maui.Style.iconSizes.huge
-
-                onRowClicked: Player.quickPlay(track)
-                onAppendTrack: Player.addTrack(track)
-                onPlayTrack: Player.quickPlay(track)
-
-                onAlbumCoverPressedAndHold:
-                {
-                    var query = Q.GET.albumTracks_.arg(album)
-                    query = query.arg(artist)
-
-                    mainPlaylist.listModel.list.clear()
-                    mainPlaylist.listModel.list.query = query
-                    Player.playAt(0)
-                }
 
                 Component.onCompleted: list.query = Albums.ALBUMS
             }
@@ -604,18 +596,6 @@ Maui.ApplicationWindow
                 holder.body: i18n("Add new music sources")
                 holder.emojiSize: Maui.Style.iconSizes.huge
 
-                onRowClicked: Player.quickPlay(track)
-                onAppendTrack: Player.addTrack(track)
-                onPlayTrack: Player.quickPlay(track)
-
-                onAlbumCoverPressedAndHold:
-                {
-                    var query = Q.GET.artistTracks_.arg(artist)
-                    mainPlaylist.listModel.list.clear()
-                    mainPlaylist.listModel.list.query = query
-                    Player.playAt(0)
-                }
-
                 Component.onCompleted: list.query = Albums.ARTISTS
             }
 
@@ -627,15 +607,6 @@ Maui.ApplicationWindow
                 PlaylistsView
                 {
                     id: playlistsView
-
-                    onRowClicked: Player.quickPlay(track)
-                    onAppendTrack: Player.addTrack(track)
-                    onPlayTrack: Player.quickPlay(track)
-                    onSyncAndPlay:
-                    {
-                        root.sync = true
-                        root.syncPlaylist = playlist
-                    }
                 }
             }
 

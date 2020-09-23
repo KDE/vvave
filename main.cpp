@@ -42,10 +42,14 @@
 #include "vvave_version.h"
 #endif
 
+#include "kde/mpris2/mpris2.h"
+#include "kde/mpris2/mediaplayer2player.h"
+
 #include "vvave.h"
 
 #include "utils/bae.h"
 #include "services/local/player.h"
+#include "services/local/playlist.h"
 
 #include "models/tracks/tracksmodel.h"
 #include "models/albums/albumsmodel.h"
@@ -61,10 +65,10 @@ Q_DECL_EXPORT
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QCoreApplication::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
-    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-    QCoreApplication::setAttribute(Qt::AA_DisableSessionManager, true);
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+	QCoreApplication::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
+	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+	QCoreApplication::setAttribute(Qt::AA_DisableSessionManager, true);
 
 #ifdef Q_OS_WIN32
 	qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
@@ -81,31 +85,31 @@ int main(int argc, char *argv[])
 		return -1;
 #endif
 
-    app.setOrganizationName(QStringLiteral("Maui"));
+	app.setOrganizationName(QStringLiteral("Maui"));
 	app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
 
-    MauiApp::instance()->setHandleAccounts(true); //for now pix can not handle cloud accounts
-    MauiApp::instance()->setIconName("qrc:/assets/vvave.png");
+	MauiApp::instance()->setHandleAccounts(true); //for now pix can not handle cloud accounts
+	MauiApp::instance()->setIconName("qrc:/assets/vvave.png");
 
-    KLocalizedString::setApplicationDomain("vvave");
-    KAboutData about(QStringLiteral("vvave"), i18n("Vvave"), VVAVE_VERSION_STRING, i18n("Vvave lets you organize, browse and listen to your local and online music collection."),
-                     KAboutLicense::LGPL_V3, i18n("© 2019-2020 Nitrux Development Team"));
-    about.addAuthor(i18n("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
-    about.setHomepage("https://mauikit.org");
-    about.setProductName("maui/vvave");
-    about.setBugAddress("https://invent.kde.org/maui/vvave/-/issues");
-    about.setOrganizationDomain("org.maui.vvave");
-    about.setProgramLogo(app.windowIcon());
+	KLocalizedString::setApplicationDomain("vvave");
+	KAboutData about(QStringLiteral("vvave"), i18n("Vvave"), VVAVE_VERSION_STRING, i18n("Vvave lets you organize, browse and listen to your local and online music collection."),
+					 KAboutLicense::LGPL_V3, i18n("© 2019-2020 Nitrux Development Team"));
+	about.addAuthor(i18n("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
+	about.setHomepage("https://mauikit.org");
+	about.setProductName("maui/vvave");
+	about.setBugAddress("https://invent.kde.org/maui/vvave/-/issues");
+	about.setOrganizationDomain("org.maui.vvave");
+	about.setProgramLogo(app.windowIcon());
 
-    KAboutData::setApplicationData(about);
+	KAboutData::setApplicationData(about);
 
-    QCommandLineParser parser;
-    parser.process(app);
+	QCommandLineParser parser;
+	parser.process(app);
 
-    about.setupCommandLine(&parser);
-    about.processCommandLine(&parser);
+	about.setupCommandLine(&parser);
+	about.processCommandLine(&parser);
 
-    const QStringList args = parser.positionalArguments();
+	const QStringList args = parser.positionalArguments();
 
 	QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
 
@@ -117,10 +121,10 @@ int main(int argc, char *argv[])
 		if (!obj && url == objUrl)
 			QCoreApplication::exit(-1);
 
-        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
-        {
-            vvave::instance()->scanDir(vvave::sources());
-        }
+		if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
+		{
+			vvave::instance()->scanDir(vvave::sources());
+		}
 
 		if(!args.isEmpty())
 			 vvave::instance()->openUrls(args);
@@ -137,6 +141,10 @@ int main(int argc, char *argv[])
 	qmlRegisterType<FoldersModel>(VVAVE_URI, 1, 0, "Folders");
 	qmlRegisterType<Cloud>(VVAVE_URI, 1, 0, "Cloud");
 	qmlRegisterType<Player>(VVAVE_URI, 1, 0, "Player");
+	qmlRegisterType<Playlist>(VVAVE_URI, 1, 0,"Playlist");
+
+	qmlRegisterType<Mpris2>(VVAVE_URI, 1, 0, "Mpris2");
+	qRegisterMetaType<MediaPlayer2Player*>();
 
 #ifdef STATIC_KIRIGAMI
 	KirigamiPlugin::getInstance().registerTypes();

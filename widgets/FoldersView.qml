@@ -148,6 +148,8 @@ StackView
 
         BabeTable
         {
+            list.query : Q.GET.tracksWhere_.arg("source = \""+control.currentFolder+"\"")
+
             coverArtVisible: true
             holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: true
@@ -165,16 +167,11 @@ StackView
             onQuickPlayTrack: Player.quickPlay(listModel.get(index))
 
             onAppendTrack: Player.addTrack(listModel.get(index))
-            onPlayAll: Player.playAll(listModel.list.getAll())
+            onPlayAll: Player.playAllModel(listModel.list)
 
-            onAppendAll: Player.appendAll(listModel.list.getAll())
+            onAppendAll: Player.appendAllModel(listModel.list)
             onQueueTrack: Player.queueTracks([listModel.get(index)], index)
 
-            Component.onCompleted:
-            {
-                const where = "source = \""+control.currentFolder+"\""
-                listModel.list.query = (Q.GET.tracksWhere_.arg(where))
-            }
         }
     }
 

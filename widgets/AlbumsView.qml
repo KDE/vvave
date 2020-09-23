@@ -20,26 +20,17 @@ StackView
 
     property alias list : albumsViewGrid.list
 
+    property string currentQuery: ""
     property string currentAlbum: ""
     property string currentArtist: ""
 
-    property var tracks: []
-
     property alias holder: albumsViewGrid.holder
-
-    signal rowClicked(var track)
-    signal playTrack(var track)
-    signal queueTrack(var track)
-    signal appendTrack(var track)
-
-    signal albumCoverPressedAndHold(string album, string artist)
 
     property Flickable flickable : currentItem.flickable
 
     initialItem: BabeGrid
     {
         id: albumsViewGrid
-        onAlbumCoverPressed: albumCoverPressedAndHold(album, artist)
         onAlbumCoverClicked: control.populateTable(album, artist)
     }
 
@@ -49,6 +40,7 @@ StackView
 
       BabeTable
       {
+          list.query: control.currentQuery
           trackNumberVisible: true
           coverArtVisible: true
           focus: true
@@ -63,62 +55,45 @@ StackView
               onClicked: control.pop()
           }
 
-          onRowClicked:
-          {
-              control.rowClicked(listModel.get(index))
-          }
+          onQueueTrack: Player.queueTracks([listModel.get(index)], index)
 
-          onQuickPlayTrack:
-          {
-              control.playTrack(listModel.get(index))
-          }
-
-          onQueueTrack:
-          {
-              control.queueTrack(listModel.get(index))
-          }
-
-          onAppendTrack:
-          {
-              control.appendTrack(listModel.get(index))
-          }
+          onRowClicked: Player.quickPlay(listModel.get(index))
+          onAppendTrack: Player.addTrack(listModel.get(index))
+          onQuickPlayTrack: Player.quickPlay(listModel.get(index))
 
           onPlayAll:
           {
               control.pop()
-              Player.playAll(listModel.list.getAll())
+              Player.playAllModel(listModel.list)
           }
 
           onAppendAll:
           {
               control.pop()
-              Player.appendAll(listModel.list.getAll())
-          }
-
-          Component.onCompleted:
-          {
-              var query
-              if(currentAlbum && currentArtist)
-              {
-                  query = Q.GET.albumTracks_.arg(currentAlbum)
-                  query = query.arg(currentArtist)
-
-              }else if(currentArtist && !currentAlbum.length)
-              {
-                  query = Q.GET.artistTracks_.arg(currentArtist)
-              }
-
-              listModel.list.query = query
+              Player.appendAllModel(listModel.list)
           }
       }
   }
 
     function populateTable(album, artist)
     {
+        control.push(_tracksTableComponent)
+
         currentAlbum = album === undefined ? "" : album
         currentArtist= artist
 
-        control.push(_tracksTableComponent)
+        var query
+        if(currentAlbum && currentArtist)
+        {
+            query = Q.GET.albumTracks_.arg(currentAlbum)
+            query = query.arg(currentArtist)
+
+        }else if(currentArtist && !currentAlbum.length)
+        {
+            query = Q.GET.artistTracks_.arg(currentArtist)
+        }
+
+        control.currentQuery = query
     }
 }
 

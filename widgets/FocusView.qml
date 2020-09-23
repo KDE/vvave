@@ -129,7 +129,7 @@ Maui.Page
                 clip: false
                 focus: true
                 interactive: true
-                currentIndex: currentTrackIndex
+                currentIndex: playlist.currentIndex
                 spacing: Maui.Style.space.medium
                 cacheBuffer: control.width * 1
                 onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
@@ -418,7 +418,7 @@ Maui.Page
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "love"
                     enabled: currentTrack
-                    checked: Maui.FM.isFav(currentTrack.url)
+                    checked:currentTrack.url ? Maui.FM.isFav(currentTrack.url) : false
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                     onClicked:
                     {
@@ -434,7 +434,6 @@ Maui.Page
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
                     onClicked: Player.previousTrack()
-                    onPressAndHold: Player.playAt(prevTrackIndex)
                 },
 
                 ToolButton
@@ -456,7 +455,6 @@ Maui.Page
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "media-skip-forward"
                     onClicked: Player.nextTrack()
-                    onPressAndHold: Player.playAt(Player.shuffle())
                 },
 
                 ToolButton
@@ -465,11 +463,10 @@ Maui.Page
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
                     icon.color: babeColor
-                    icon.name: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
+                    icon.name: playlist.shuffle ? "media-playlist-shuffle" : "media-playlist-normal"
                     onClicked:
                     {
-                        isShuffle = !isShuffle
-                        Maui.FM.saveSettings("SHUFFLE", isShuffle, "PLAYBACK")
+                        playlist.shuffle = !playlist.shuffle
                     }
                 }
             ]

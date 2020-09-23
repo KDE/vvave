@@ -52,6 +52,7 @@ Maui.Page
     BabeTable
     {
         id: table
+        currentIndex: currentTrackIndex
         anchors.fill: parent
         listModel.sort: ""
         listBrowser.enableLassoSelection: false

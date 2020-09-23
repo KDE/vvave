@@ -21,11 +21,6 @@ StackView
     property string currentPlaylist
     property string playlistQuery
 
-    signal rowClicked(var track)
-    signal playTrack(var track)
-    signal appendTrack(var track)
-    signal syncAndPlay(string playlist)
-
     property Flickable flickable : currentItem.flickable
 
     Maui.NewDialog
@@ -47,7 +42,7 @@ StackView
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.margins: Maui.Style.toolBarHeight
-            anchors.bottomMargin: Maui.Style.toolBarHeight
+            anchors.bottomMargin: Maui.Style.toolBarHeight + flickable.bottomMargin
             icon.name : "list-add"
             onClicked: newPlaylistDialog.open()
         }
@@ -62,6 +57,7 @@ StackView
             id: filterList
             property bool isPublic: true
             signal removeFromPlaylist(string url)
+            list.query: control.playlistQuery
             coverArtVisible: true
             showTitle: false
             title: control.currentPlaylist
@@ -87,26 +83,25 @@ StackView
                 }
             }
 
-            onRowClicked: control.rowClicked(filterList.listModel.get(index))
-            onQuickPlayTrack: control.playTrack(filterList.listModel.get(filterList.currentIndex))
-            onAppendTrack: control.appendTrack(filterList.listModel.get(filterList.currentIndex))
+            onQueueTrack: Player.queueTracks([listModel.get(index)], index)
+
+            onRowClicked: Player.quickPlay(filterList.listModel.get(index))
+            onAppendTrack: Player.addTrack(filterList.listModel.get(index))
+            onQuickPlayTrack: Player.quickPlay(filterList.listModel.get(index))
 
             onPlayAll:
             {
                 if(filterList.isPublic)
                 {
-                    control.syncAndPlay(control.currentPlaylist)
-                    Player.playAll(listModel.list.getAll())
-                }
-                else
-                {
-                    Player.playAll(listModel.list.getAll())
+                    root.sync = true
+                    root.syncPlaylist = playlist
                 }
 
+                Player.playAllModel(listModel.list)
                 control.pop()
             }
 
-            onAppendAll: Player.appendAll(listModel.list.getAll())
+            onAppendAll: Player.appendAllModel(listModel.list)
 
             section.criteria: ViewSection.FullString
             section.delegate: Maui.LabelDelegate
@@ -148,7 +143,6 @@ StackView
 
                 filterList.isPublic = isPublic
                 filterList.listModel.filter = ""
-                listModel.list.query= control.playlistQuery
             }
         }
     }

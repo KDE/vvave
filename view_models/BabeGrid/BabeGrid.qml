@@ -21,7 +21,6 @@ Maui.AltBrowser
     readonly property int count: currentView.count
 
     signal albumCoverClicked(string album, string artist)
-    signal albumCoverPressed(string album, string artist)
 
     headBar.visible: true
     headBar.middleContent: Maui.TextField
@@ -84,11 +83,6 @@ Maui.AltBrowser
                 albumCoverClicked(model.album, model.artist)
             }
         }
-
-//        onPressAndHold:
-//        {
-//            albumCoverPressed(model.album, model.artist)
-//        }
     }
 
     gridDelegate: Item
@@ -128,11 +122,6 @@ Maui.AltBrowser
                 {
                     albumCoverClicked(model.album, model.artist)
                 }
-            }
-
-            onPressAndHold:
-            {
-                albumCoverPressed(model.album, model.artist)
             }
         }
     }

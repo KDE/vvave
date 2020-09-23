@@ -12,13 +12,14 @@
 TracksModel::TracksModel(QObject *parent) : MauiList(parent),
 	db(CollectionDB::getInstance())
 {
-    connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
+	qRegisterMetaType<TracksModel*>("const TracksModel*");
+	connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
 }
 
 void TracksModel::componentComplete()
 {
-    connect(vvave::instance (), &vvave::tracksAdded, this, &TracksModel::setList);
-    connect(vvave::instance (), &vvave::sourceRemoved, this, &TracksModel::setList);
+	connect(vvave::instance (), &vvave::tracksAdded, this, &TracksModel::setList);
+	connect(vvave::instance (), &vvave::sourceRemoved, this, &TracksModel::setList);
 }
 
 FMH::MODEL_LIST TracksModel::items() const
@@ -73,20 +74,19 @@ void TracksModel::setList()
 //                return false;
 //            }
 //        };
-        this->list = this->db->getDBData(this->query/*, checker*/);
+		this->list = this->db->getDBData(this->query/*, checker*/);
 }
 
 emit this->postListChanged();
 emit countChanged();
 }
 
-QVariantList TracksModel::getAll()
+void TracksModel::copy(const TracksModel * model)
 {
-	QVariantList res;
-	for(const auto &item : this->list)
-		res << FMH::toMap(item);
-
-	return res;
+	emit this->preListChanged ();
+	this->list << model->items ();
+	emit this->postListChanged ();
+	emit this->countChanged();
 }
 
 void TracksModel::append(const QVariantMap &item)
@@ -127,7 +127,7 @@ void TracksModel::clear()
 	emit this->preListChanged();
 	this->list.clear();
 	emit this->postListChanged();
-    emit this->countChanged();
+	emit this->countChanged();
 }
 
 bool TracksModel::fav(const int &index, const bool &value)

@@ -17,6 +17,7 @@ Maui.Page
     property alias listView : _listBrowser.flickable
 
     property alias listModel : _listModel
+    property alias list : _tracksList
 
     property alias delegate : _listBrowser.delegate
 
@@ -312,7 +313,7 @@ Maui.Page
         model:Maui.BaseModel
         {
             id: _listModel
-            list: Tracks {}
+            list: Tracks {id: _tracksList}
             sort: "title"
             sortOrder: Qt.AscendingOrder
             recursiveFilteringEnabled: true

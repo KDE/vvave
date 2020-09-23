@@ -14,50 +14,50 @@
 class CollectionDB;
 class TracksModel : public MauiList
 {
-    Q_OBJECT
-    Q_PROPERTY(QString query READ getQuery WRITE setQuery NOTIFY queryChanged)
-    Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
+	Q_OBJECT
+	Q_PROPERTY(QString query READ getQuery WRITE setQuery NOTIFY queryChanged)
+	Q_PROPERTY(int limit READ limit WRITE setLimit NOTIFY limitChanged)
 
 public:
-    explicit TracksModel(QObject *parent = nullptr);
+	explicit TracksModel(QObject *parent = nullptr);
 
-    void componentComplete() override final;
+	void componentComplete() override final;
 
-    FMH::MODEL_LIST items() const override;
+	FMH::MODEL_LIST items() const override;
 
-    void setQuery(const QString &query);
-    QString getQuery() const;
+	void setQuery(const QString &query);
+	QString getQuery() const;
 
-    int limit() const;
-    void setLimit(int limit);
+	int limit() const;
+	void setLimit(int limit);
 
 private:
-    CollectionDB *db;
-    FMH::MODEL_LIST list;
-    void sortList();
-    void setList();
+	CollectionDB *db;
+	FMH::MODEL_LIST list;
+	void sortList();
+	void setList();
 
-    QString query;
+	QString query;
 
-    int m_limit = 99999;
+	int m_limit = 99999;
 
 signals:
-    void queryChanged();
-    void limitChanged(int limit);
+	void queryChanged();
+	void limitChanged(int limit);
 
 public slots:
-    QVariantList getAll();
-    void append(const QVariantMap &item);
-    void append(const QVariantMap &item, const int &at);
-    void appendQuery(const QString &query);
-//    void appendUrl(const QString &url);
-    void clear();
-    bool fav(const int &index, const bool &value);
-    bool rate(const int &index, const int &value);
-    bool countUp(const int &index);
-    bool remove(const int &index);
-    void refresh();
-    bool update(const QVariantMap &data, const int &index);
+	void copy(const TracksModel * model);
+	void append(const QVariantMap &item);
+	void append(const QVariantMap &item, const int &at);
+	void appendQuery(const QString &query);
+
+	void clear();
+	bool fav(const int &index, const bool &value);
+	bool rate(const int &index, const int &value);
+	bool countUp(const int &index);
+	bool remove(const int &index);
+	void refresh();
+	bool update(const QVariantMap &data, const int &index);
 };
 
 #endif // TRACKSMODEL_H

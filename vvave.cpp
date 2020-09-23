@@ -1,7 +1,6 @@
 #include "vvave.h"
 
 #include "db/collectionDB.h"
-#include "utils/brain.h"
 #include "services/local/taginfo.h"
 
 #if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))

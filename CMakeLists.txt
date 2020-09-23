@@ -36,15 +36,13 @@ add_executable(vvave
     pulpo/services/spotifyService.cpp
 #    pulpo/services/musicbrainzService.cpp
     pulpo/pulpo.cpp
-#    pulpo/htmlparser.cpp
     pulpo/service.cpp
     services/local/taginfo.cpp
     services/local/player.cpp
+    services/local/playlist.cpp
     services/web/NextCloud/nextmusic.cpp
     services/web/abstractmusicprovider.cpp
-#    services/web/Spotify/spotify.cpp
     db/collectionDB.cpp
-#    utils/brain.cpp
     models/tracks/tracksmodel.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
@@ -75,7 +73,9 @@ if (ANDROID)
 else()
     find_package(Taglib REQUIRED)
     target_sources(vvave PRIVATE
-        kde/mpris2.cpp
+        kde/mpris2/mpris2.cpp
+        kde/mpris2/mediaplayer2.cpp
+        kde/mpris2/mediaplayer2player.cpp
         kde/notify.cpp
         )
     target_link_libraries(vvave KF5::ConfigCore KF5::Notifications KF5::KIOCore KF5::I18n Qt5::DBus KF5::Attica KF5::SyntaxHighlighting)
