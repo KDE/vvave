@@ -41,8 +41,6 @@ Maui.ApplicationWindow
     property alias selectionBar: _selectionBar
     property alias dialog : _dialogLoader.item
 
-    //    background.opacity: translucency ? 0.5 : 1
-
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
@@ -80,22 +78,10 @@ Maui.ApplicationWindow
     /******************** UI COLORS *******************/
     /*************************************************/
     readonly property color babeColor: "#f84172"
-    property bool translucency : Maui.Handy.isLinux
-
-    /*SIGNALS*/
-    signal missingAlert(var track)
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
-    onMissingAlert:
-    {
-        var message = i18n("Missing file")
-        var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
-        notify("dialog-question", message, messageBody, function ()
-        {
-            mainPlaylist.listModel.list.remove(mainPlaylist.table.currentIndex)
-        })
-    }
+
 
     /*COMPONENTS*/
 
@@ -107,10 +93,10 @@ Maui.ApplicationWindow
         audioPlayer: player
         playerName: 'vvave'
 
-//        onRaisePlayer:
-//        {
-//            rootItem.raisePlayer()
-//        }
+        onRaisePlayer:
+        {
+            root.raise()
+        }
     }
 
     Playlist
@@ -118,6 +104,16 @@ Maui.ApplicationWindow
         id: playlist
         model: mainPlaylist.listModel.list
         onCurrentTrackChanged: Player.playTrack()
+
+        onMissingFile:
+        {
+            var message = i18n("Missing file")
+            var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
+            notify("dialog-question", message, messageBody, function ()
+            {
+                mainPlaylist.listModel.list.remove(mainPlaylist.table.currentIndex)
+            })
+        }
     }
 
     Player
@@ -254,12 +250,6 @@ Maui.ApplicationWindow
                 var urls = drop.urls.join(",")
                 Vvave.openUrls(urls.split(","))
             }
-        }
-
-        background: Rectangle
-        {
-            color: Kirigami.Theme.backgroundColor
-            opacity: translucency ? 0.5 : 1
         }
 
         MainPlaylist

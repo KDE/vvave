@@ -32,10 +32,6 @@ Maui.SettingsDialog
 {
     id: control
 
-    property bool fetchArtwork : Maui.FM.loadSettings("FetchArtwork", "Settings", true) == "true"
-    property bool scanCollectionOnStartUp : Maui.FM.loadSettings("ScanCollectionOnStartUp", "Settings", true) == "true"
-    property bool darkMode:  Maui.FM.loadSettings("DarkMode", "Settings", false) == "true"
-
     Maui.Dialog
     {
         id: confirmationDialog
@@ -62,35 +58,36 @@ Maui.SettingsDialog
 
         Maui.SettingTemplate
         {
+            id: _fetchArtwork
             label1.text: i18n("Fetch Artwork")
             label2.text: i18n("Gathers album and artists artworks from online services: LastFM, Spotify, MusicBrainz, iTunes, Genius, and others.")
+
+            setting.key: "FetchArtwork"
+            setting.group: "Settings"
+            setting.defaultValue: true
 
             Switch
             {
                 checkable: true
-                checked:  control.fetchArtwork
-                onToggled:
-                {
-                    control.fetchArtwork = !control.fetchArtwork
-                    Maui.FM.saveSettings("FetchArtwork", control.fetchArtwork, "Settings")
-                }
+                checked: _fetchArtwork.setting.value == "true"
+                onToggled: _fetchArtwork.setting.setValue(!_fetchArtwork.setting.value)
             }
         }
 
         Maui.SettingTemplate
         {
+            id: _autoScan
             label1.text: i18n("Auto Scan")
             label2.text: i18n("Scan all the music sources on startup to keep your collection updated")
+            setting.key: "ScanCollectionOnStartUp"
+            setting.group: "Settings"
+            setting.defaultValue: true
 
             Switch
             {
                 checkable: true
-                checked: control.scanCollectionOnStartUp
-                onToggled:
-                {
-                    control.scanCollectionOnStartUp = !control.scanCollectionOnStartUp
-                    Maui.FM.saveSettings("ScanCollectionOnStartUp", control.scanCollectionOnStartUp, "Settings")
-                }
+                checked: _autoScan.setting.value == "true"
+                onToggled: _autoScan.setting.setValue(!_autoScan.setting.value)
             }
         }
     }
@@ -102,25 +99,19 @@ Maui.SettingsDialog
 
         Maui.SettingTemplate
         {
-            label1.text: i18n("Translucent Sidebar")
+            id: _darkMode
+            enabled: false
 
-            Switch
-            {
-                checkable: true
-                checked:  root.translucency
-                onToggled:  root.translucency = !root.translucency
-            }
-        }
-
-        Maui.SettingTemplate
-        {
             label1.text: i18n("Dark Mode")
+            setting.key: "DarkMode"
+            setting.group: "Settings"
+            setting.defaultValue: false
 
             Switch
             {
                 checkable: true
-                checked: control.darkMode
-                onToggled: control.darkMode = !control.darkMode
+                checked: _darkMode.setting.value == "true"
+                onToggled: _darkMode.setting.setValue(!_darkMode.setting.value)
             }
         }
     }

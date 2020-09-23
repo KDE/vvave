@@ -2,6 +2,7 @@
 #include "../../models/tracks/tracksmodel.h"
 
 #include <QRandomGenerator>
+#include <QUrl>
 
 #ifdef STATIC_MAUIKIT
 #include "utils.h"
@@ -177,20 +178,27 @@ void Playlist::setCurrentIndex(int index)
 	}
 
 	if (m_currentIndex == index)
-		return;
-
-	m_currentIndex = index;
-	emit currentIndexChanged(m_currentIndex);
+		return;	
 
 	const auto count = m_model->getCount();
 	if(count > 0 && index < count && index >= 0)
 	{
+        m_currentIndex = index;
 		m_currentTrack = m_model->get (m_currentIndex);
+        auto url = m_currentTrack["url"].toUrl();
+        if(!FMH::fileExists(url) && url.isLocalFile())
+        {
+            emit this->missingFile(m_currentTrack);
+            return;
+        }
+
 	}else
 	{
+        m_currentIndex = -1;
 		m_currentTrack = QVariantMap();
 	}
 
+    emit currentIndexChanged(m_currentIndex);
 	emit currentTrackChanged (m_currentTrack);
 }
 

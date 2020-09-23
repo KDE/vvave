@@ -3,12 +3,6 @@
 
 function playTrack()
 {
-    if(!Maui.FM.fileExists(currentTrack.url) && String(currentTrack.url).startsWith("file://"))
-    {
-        missingAlert(currentTrack)
-        return
-    }
-
     player.url = currentTrack.url;
     player.play()
 }

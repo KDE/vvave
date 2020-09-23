@@ -59,6 +59,7 @@ class Playlist : public QObject
         void currentTrackChanged(QVariantMap currentTrack);
         void currentIndexChanged(int currentIndex);
         void shuffleChanged(bool shuffle);
+        void missingFile(QVariantMap track);
 };
 
 #endif // PLAYLIST_H

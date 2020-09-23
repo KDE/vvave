@@ -84,7 +84,7 @@ emit countChanged();
 void TracksModel::copy(const TracksModel * model)
 {
 	emit this->preListChanged ();
-	this->list << model->items ();
+    this->list << model->getItems ();
 	emit this->postListChanged ();
 	emit this->countChanged();
 }
