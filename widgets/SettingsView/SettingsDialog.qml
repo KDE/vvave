@@ -69,8 +69,8 @@ Maui.SettingsDialog
             Switch
             {
                 checkable: true
-                checked: _fetchArtwork.setting.value == "true"
-                onToggled: _fetchArtwork.setting.setValue(!_fetchArtwork.setting.value)
+                checked: _fetchArtwork.setting.value() == "true"
+                onToggled: _fetchArtwork.setting.setValue(checked)
             }
         }
 
@@ -86,8 +86,8 @@ Maui.SettingsDialog
             Switch
             {
                 checkable: true
-                checked: _autoScan.setting.value == "true"
-                onToggled: _autoScan.setting.setValue(!_autoScan.setting.value)
+                checked: _autoScan.setting.value() == "true"
+                onToggled: _autoScan.setting.setValue(checked)
             }
         }
     }
@@ -111,7 +111,7 @@ Maui.SettingsDialog
             {
                 checkable: true
                 checked: _darkMode.setting.value == "true"
-                onToggled: _darkMode.setting.setValue(!_darkMode.setting.value)
+                onToggled: _darkMode.setting.setValue(checked)
             }
         }
     }

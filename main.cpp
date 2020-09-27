@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
 	about.setHomepage("https://mauikit.org");
 	about.setProductName("maui/vvave");
 	about.setBugAddress("https://invent.kde.org/maui/vvave/-/issues");
-	about.setOrganizationDomain("org.maui.vvave");
+	about.setOrganizationDomain(VVAVE_URI);
 	about.setProgramLogo(app.windowIcon());
 
 	KAboutData::setApplicationData(about);
