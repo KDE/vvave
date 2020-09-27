@@ -48,7 +48,7 @@ signals:
 public slots:
 	void copy(const TracksModel * model);
 	void append(const QVariantMap &item);
-	void append(const QVariantMap &item, const int &at);
+    void appendAt(const QVariantMap &item, const int &at);
 	void appendQuery(const QString &query);
 
 	void clear();

@@ -289,6 +289,7 @@ Maui.Page
         focus: true
         holder.visible: control.listModel.list.count === 0
         enableLassoSelection: true
+        selectionMode: root.selectionMode
 
         onItemsSelected:
         {
@@ -310,12 +311,12 @@ Maui.Page
 
         }
 
-        model:Maui.BaseModel
+        model: Maui.BaseModel
         {
             id: _listModel
             list: Tracks {id: _tracksList}
-            sort: "title"
-            sortOrder: Qt.AscendingOrder
+//            sort: "title"
+//            sortOrder: Qt.AscendingOrder
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive
             filterCaseSensitivity: Qt.CaseInsensitive

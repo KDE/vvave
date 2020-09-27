@@ -13,6 +13,7 @@ Menu
 {
     id: control
     width: Maui.Style.unit * 200
+    modal: true
 
     property int rate : 0
     property bool fav : false

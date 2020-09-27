@@ -100,7 +100,7 @@ void TracksModel::append(const QVariantMap &item)
 	emit this->countChanged();
 }
 
-void TracksModel::append(const QVariantMap &item, const int &at)
+void TracksModel::appendAt(const QVariantMap &item, const int &at)
 {
 	if(item.isEmpty())
 		return;
@@ -108,6 +108,7 @@ void TracksModel::append(const QVariantMap &item, const int &at)
 	if(at > this->list.size() || at < 0)
 		return;
 
+    qDebug() << "trying to append at << " << 0;
 	emit this->preItemAppendedAt(at);
 	this->list.insert(at, FMH::toModel(item));
 	emit this->postItemAppended();
