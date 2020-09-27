@@ -443,8 +443,8 @@ Maui.Page
                     icon.height: Maui.Style.iconSizes.huge
                     enabled: currentTrackIndex >= 0
                     icon.color: Kirigami.Theme.textColor
-                    icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
-                    onClicked: player.playing = !player.playing
+                    icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
+                    onTriggered: player.playing ? player.pause() : player.play()
                 },
 
                 ToolButton
