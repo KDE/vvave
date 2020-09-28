@@ -444,7 +444,7 @@ Maui.Page
                     enabled: currentTrackIndex >= 0
                     icon.color: Kirigami.Theme.textColor
                     icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
-                    onTriggered: player.playing ? player.pause() : player.play()
+                    onClicked: player.playing ? player.pause() : player.play()
                 },
 
                 ToolButton
