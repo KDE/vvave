@@ -80,8 +80,11 @@ private:
 
     void initDBusService();
 
+#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
     std::unique_ptr<MediaPlayer2> m_mp2;
     std::unique_ptr<MediaPlayer2Player> m_mp2p;
+#endif
+
     QString m_playerName;
     Playlist* m_playListModel = nullptr;
     Player* m_audioPlayer = nullptr;

@@ -103,24 +103,24 @@ Maui.ItemDelegate
             }
         }
     }
+    Rectangle
+    {
+        anchors.fill: parent
+
+        color: "transparent"
+        border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
+        radius: albumRadius
+        opacity: 0.6
 
         Rectangle
         {
             anchors.fill: parent
             color: "transparent"
-            border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
-            radius: albumRadius
+            radius: parent.radius - 0.5
+            border.color: Qt.lighter(Kirigami.Theme.backgroundColor, 2)
+            opacity: 0.8
+            anchors.margins: 1
         }
+    }
 
-    //    DropShadow
-    //    {
-    //        anchors.fill: _cover
-    //        visible: !control.hovered
-    //        horizontalOffset: 0
-    //        verticalOffset: 0
-    //        radius: 8.0
-    //        samples: 17
-    //        color: "#80000000"
-    //        source: _cover
-    //    }
 }

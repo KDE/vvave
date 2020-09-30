@@ -57,6 +57,8 @@ static FMH::MODEL trackInfo(const QUrl &url)
 vvave::vvave(QObject *parent) : QObject(parent),
 	db(CollectionDB::getInstance())
 {
+    qRegisterMetaType<QList<QUrl>*>("QList<QUrl>&");
+
 	for(const auto &path : QStringList{BAE::CachePath, BAE::YoutubeCachePath})
 	{
 		QDir dirPath(path);
@@ -139,6 +141,7 @@ void vvave::scanDir(const QStringList &paths)
 {
 	auto fileLoader = new FMH::FileLoader();
 	fileLoader->informer = &trackInfo;
+//    fileLoader->setBatchCount(50);
 
 	connect(fileLoader, &FMH::FileLoader::itemReady, db, &CollectionDB::addTrack);
 

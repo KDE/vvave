@@ -97,7 +97,7 @@ SOURCES += main.cpp \
     db/collectionDB.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
-    services/web/youtube.cpp \
+    services/local/playlist.cpp \
     vvave.cpp \
     models/tracks/tracksmodel.cpp \
     models/folders/foldersmodel.cpp \
@@ -105,7 +105,10 @@ SOURCES += main.cpp \
     models/albums/albumsmodel.cpp \
     services/web/NextCloud/nextmusic.cpp \
     services/web/abstractmusicprovider.cpp \
-    models/cloud/cloud.cpp
+    models/cloud/cloud.cpp \
+    kde/mpris2/mpris2.cpp \
+#    kde/mpris2/mediaplayer2.cpp \
+#    kde/mpris2/mediaplayer2player.cpp
 
 RESOURCES += qml.qrc \
 
@@ -118,10 +121,9 @@ QML_DESIGNER_IMPORT_PATH =
 HEADERS += \
     db/collectionDB.h \
     utils/bae.h \
-    services/local/fileloader.h \
     services/local/taginfo.h \
     services/local/player.h \
-    services/web/youtube.h \
+    services/local/playlist.h \
     vvave.h \
     models/tracks/tracksmodel.h \
     models/playlists/playlistsmodel.h \
@@ -129,7 +131,11 @@ HEADERS += \
     models/albums/albumsmodel.h \
     services/web/NextCloud/nextmusic.h \
     services/web/abstractmusicprovider.h \
-    models/cloud/cloud.h
+    models/cloud/cloud.h \
+    kde/mpris2/mpris2.h \
+#    kde/mpris2/mediaplayer2.h \
+#    kde/mpris2/mediaplayer2player.h
+
 
 INCLUDEPATH += \
      $$PWD/services/web \

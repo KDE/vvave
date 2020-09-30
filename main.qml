@@ -129,6 +129,7 @@ Maui.ApplicationWindow
                            }
     }
 
+    altHeader: Kirigami.Settings.isMobile
     headBar.visible: !focusView
     headBar.rightContent: ToolButton
     {
@@ -648,14 +649,5 @@ Maui.ApplicationWindow
             Player.appendTracksAt(tracks, 0)
             Player.playAt(0)
         }
-    }
-
-    Component.onCompleted:
-    {
-        if(Maui.Handy.isAndroid)
-        {
-            Maui.Android.statusbarColor(Kirigami.Theme.backgroundColor, true)
-            Maui.Android.navBarColor(Kirigami.Theme.backgroundColor, true)
-        }
-    }
+    } 
 }

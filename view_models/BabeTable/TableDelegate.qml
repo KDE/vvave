@@ -40,4 +40,6 @@ Maui.ListBrowserDelegate
 
     iconVisible: !control.sameAlbum && control.coverArt
     imageSource: control.artwork ? control.artwork : "qrc:/assets/cover.png"
+
+    template.leftMargin: iconVisible ? 0 : Maui.Style.space.medium
 }

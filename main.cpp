@@ -15,9 +15,14 @@
 
 #if defined Q_OS_ANDROID || defined Q_OS_IOS
 #include <QGuiApplication>
-#include <QIcon>
 #else
 #include <QApplication>
+#endif
+
+#include "kde/mpris2/mpris2.h"
+
+#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#include "kde/mpris2/mediaplayer2player.h"
 #endif
 
 #ifdef Q_OS_ANDROID
@@ -41,9 +46,6 @@
 #include <MauiKit/mauiapp.h>
 #include "vvave_version.h"
 #endif
-
-#include "kde/mpris2/mpris2.h"
-#include "kde/mpris2/mediaplayer2player.h"
 
 #include "vvave.h"
 
@@ -121,10 +123,10 @@ int main(int argc, char *argv[])
 		if (!obj && url == objUrl)
 			QCoreApplication::exit(-1);
 
-		if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
-		{
+        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
+        {
 			vvave::instance()->scanDir(vvave::sources());
-		}
+        }
 
 		if(!args.isEmpty())
 			 vvave::instance()->openUrls(args);
@@ -142,9 +144,11 @@ int main(int argc, char *argv[])
 	qmlRegisterType<Cloud>(VVAVE_URI, 1, 0, "Cloud");
 	qmlRegisterType<Player>(VVAVE_URI, 1, 0, "Player");
 	qmlRegisterType<Playlist>(VVAVE_URI, 1, 0,"Playlist");
+    qmlRegisterType<Mpris2>(VVAVE_URI, 1, 0, "Mpris2");
 
-	qmlRegisterType<Mpris2>(VVAVE_URI, 1, 0, "Mpris2");
+#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
 	qRegisterMetaType<MediaPlayer2Player*>();
+#endif
 
 #ifdef STATIC_KIRIGAMI
 	KirigamiPlugin::getInstance().registerTypes();
