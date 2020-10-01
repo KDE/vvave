@@ -2,7 +2,6 @@ QT *= core \
     quick \
     multimedia \
     sql \
-    network \
     qml \
     quickcontrols2 \
     network
@@ -34,31 +33,47 @@ linux:unix:!android {
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
         DISTFILES += $$PWD/android_files/AndroidManifest.xml
         DEFINES *= ANDROID_OPENSSL
-    }
 
-    android|ios { #build the sources
-        QT *= webview
-
-        TAGLIB_REPO = https://github.com/mauikit/taglib
-        exists($$PWD/3rdparty/taglib/taglib.pri) {
+        TAGLIB_REPO = https://github.com/mauikit/TagLib-android.git
+        exists($$PWD/3rdparty/taglib-android) {
             message("Using TagLib binaries for Android")
         }else {
-            message("Getting Luv icon theme")
-            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib)
+            message("Getting TagLib binaries for android")
+            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib-android)
         }
 
-        include($$PWD/3rdparty/taglib/taglib.pri)
+        ANDROID_EXTRA_LIBS += $$PWD/3rdparty/taglib-android/libtag.so \
+                               $$PWD/3rdparty/taglib-android/libtag_c.so
+
+        LIBS += -L$$PWD/3rdparty/taglib-android/ -ltag \
+                -L$$PWD/3rdparty/taglib-android/ -ltag_c
+
+        INCLUDEPATH += $$PWD/3rdparty/taglib-android/include
+        DEPENDPATH += $$PWD/3rdparty/taglib-android/include
+
+        PRE_TARGETDEPS += $$PWD/3rdparty/taglib-android/libtag.so \
+                         $$PWD/3rdparty/taglib-android/libtag_c.so
+    }
+
+    ios { #build the sources
+
+        TAGLIB_REPO = https://github.com/mauikit/taglib
+        exists($$PWD/3rdparty/taglib-ios/taglib.pri) {
+            message("Using TagLib sources for iOS")
+        }else {
+            message("Getting TagLib sources fro iOS")
+            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib-ios)
+        }
+
+        include($$PWD/3rdparty/taglib-ios/taglib.pri)
 
     } else:macos { #from brew installation
-        QT *= webview
-
         LIBS += -L$$PWD/../../1.11.1/lib/ -ltag.1.17.0
 
         INCLUDEPATH += $$PWD/../../1.11.1/include
         ICON = $$PWD/macos_files/vvave.icns
 
     }else:win32 { #from kde craft with msvc
-        QT += webengine
         LIBS += -L$$PWD/../../../../CraftRoot/lib/ -ltag
         INCLUDEPATH += $$PWD/../../../../CraftRoot/include
         DEPENDPATH += $$PWD/../../../../CraftRoot/include
@@ -144,3 +159,5 @@ INCLUDEPATH += \
 include(install.pri)
 
 ANDROID_ABIS = armeabi-v7a
+
+
