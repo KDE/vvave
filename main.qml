@@ -49,10 +49,10 @@ Maui.ApplicationWindow
 
     readonly property string currentArtwork: currentTrack ?  currentTrack.artwork : ""
 
-    property alias durationTimeLabel: player.duration
-    property string progressTimeLabel: player.transformTime((player.duration/1000) *(player.pos/ 1000))
+    readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/ 1000))
+    readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
 
-    property alias isPlaying: player.playing
+    readonly property alias isPlaying: player.playing
     property int onQueue: 0
 
     readonly property bool mainlistEmpty: mainPlaylist.listModel.list.count ===0
@@ -380,7 +380,7 @@ Maui.ApplicationWindow
                     visible: text.length
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: player.transformTime(player.duration/1000)
+                    text: durationTimeLabel
                     elide: Text.ElideMiddle
                     wrapMode: Text.NoWrap
                     color: Kirigami.Theme.textColor

@@ -523,17 +523,6 @@ FMH::MODEL_LIST CollectionDB::getRecentTracks(const int &limit, const FMH::MODEL
 	return this->getDBData(queryTxt);
 }
 
-FMH::MODEL_LIST CollectionDB::getOnlineTracks(const FMH::MODEL_KEY &orderBy, const BAE::W &order)
-{
-	const auto queryTxt= QString("SELECT * FROM %1 WHERE %2 LIKE \"%3%\" ORDER BY %4 %5" ).arg(TABLEMAP[TABLE::TRACKS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-			YoutubeCachePath,
-			FMH::MODEL_NAME[orderBy],
-			SLANG[order]);
-
-	return this->getDBData(queryTxt);
-}
-
 FMH::MODEL_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const int &limit, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
 {
 	auto queryTxt = QString("SELECT * FROM %1 WHERE %2 > %3 ORDER BY %4 %5 LIMIT %6" ).arg(TABLEMAP[TABLE::TRACKS],

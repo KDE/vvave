@@ -73,7 +73,6 @@ class CollectionDB : public QObject
 		FMH::MODEL_LIST getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search);
 		FMH::MODEL_LIST getMostPlayedTracks(const int &greaterThan = 1, const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::COUNT, const BAE::W &order = BAE::W::DESC);
 		FMH::MODEL_LIST getRecentTracks(const int &limit = 50, const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
-		FMH::MODEL_LIST getOnlineTracks(const FMH::MODEL_KEY &orderBy = FMH::MODEL_KEY::ADDDATE, const BAE::W &order = BAE::W::DESC);
 
 		int getTrackStars(const QString &path);
 		QStringList getArtistAlbums(const QString &artist);

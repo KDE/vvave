@@ -59,7 +59,7 @@ vvave::vvave(QObject *parent) : QObject(parent),
 {
     qRegisterMetaType<QList<QUrl>*>("QList<QUrl>&");
 
-	for(const auto &path : QStringList{BAE::CachePath, BAE::YoutubeCachePath})
+    for(const auto &path : QStringList{BAE::CachePath})
 	{
 		QDir dirPath(path);
 		if (!dirPath.exists())

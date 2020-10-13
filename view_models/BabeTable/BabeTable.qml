@@ -267,16 +267,7 @@ Maui.Page
         onShareClicked:
         {
             const url = listModel.get(control.currentIndex).url
-
-            if(Maui.Handy.isAndroid)
-            {
-                Maui.Android.shareDialog(url)
-                return
-            }
-
-            _dialogLoader.sourceComponent = _shareDialogComponent
-            root.dialog.urls = [url]
-            root.dialog.open()
+            Maui.Platform.shareFiles([url])
         }
     }
 
@@ -285,7 +276,7 @@ Maui.Page
     {
         id: _listBrowser
         anchors.fill: parent
-
+        clip: true
         focus: true
         holder.visible: control.listModel.list.count === 0
         enableLassoSelection: true

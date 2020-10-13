@@ -129,14 +129,14 @@ Maui.Page
                 clip: false
                 focus: true
                 interactive: true
-                currentIndex: playlist.currentIndex
+                currentIndex: root.currentTrackIndex
                 spacing: Maui.Style.space.medium
                 cacheBuffer: control.width * 1
                 onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
 
                 highlightFollowsCurrentItem: true
                 highlightMoveDuration: 0
-                snapMode: ListView.SnapToOneItem
+                snapMode: ListView.SnapOneItem
                 model: mainPlaylist.listModel
                 highlightRangeMode: ListView.StrictlyEnforceRange
                 keyNavigationEnabled: true
@@ -144,7 +144,7 @@ Maui.Page
                 onCurrentItemChanged:
                 {
                     var index = indexAt(contentX, contentY)
-                    if(index !== currentTrackIndex)
+                    if(index !== root.currentTrackIndex && index >= 0)
                         Player.playAt(index)
                 }
 
@@ -314,7 +314,7 @@ Maui.Page
                     Layout.fillHeight: false
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: currentTrack.title
+                    text: root.currentTrack.title
                     elide: Text.ElideMiddle
                     wrapMode: Text.NoWrap
                     color: control.Kirigami.Theme.textColor
@@ -330,7 +330,7 @@ Maui.Page
                     Layout.fillHeight: false
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: currentTrack.artist
+                    text: root.currentTrack.artist
                     elide: Text.ElideMiddle
                     wrapMode: Text.NoWrap
                     color: control.Kirigami.Theme.textColor
@@ -417,12 +417,13 @@ Maui.Page
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "love"
-                    enabled: currentTrack
-                    checked:currentTrack.url ? Maui.FM.isFav(currentTrack.url) : false
+                    enabled: root.currentTrack
+                    checked: root.currentTrack.url ? Maui.FM.isFav(root.currentTrack.url) : false
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
+
                     onClicked:
                     {
-                        mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
+                        mainPlaylist.listModel.list.fav(root.currentTrackIndex, !Maui.FM.isFav(root.currentTrack.url))
                         root.currentTrackChanged()
                     }
                 },
@@ -441,7 +442,7 @@ Maui.Page
                     id: playIcon
                     icon.width: Maui.Style.iconSizes.huge
                     icon.height: Maui.Style.iconSizes.huge
-                    enabled: currentTrackIndex >= 0
+                    enabled: root.currentTrackIndex >= 0
                     icon.color: Kirigami.Theme.textColor
                     icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
                     onClicked: player.playing ? player.pause() : player.play()

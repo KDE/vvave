@@ -131,21 +131,6 @@ namespace BAE
 		{KEY::SQL, "sql"}
 	};
 
-	const static inline QString transformTime(const qint64 &value)
-	{
-		QString tStr;
-		if (value)
-		{
-			QTime time((value/3600)%60, (value/60)%60, value%60, (value*1000)%1000);
-			QString format = "mm:ss";
-			if (value > 3600)
-				format = "hh:mm:ss";
-			tStr = time.toString(format);
-		}
-
-		return tStr.isEmpty() ? "00:00" : tStr;
-	}
-
 	static const QString CollectionDBPath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/vvave/").toLocalFile();
 
 #ifdef Q_OS_ANDROID
@@ -154,10 +139,7 @@ namespace BAE
 	const static QString CachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/").toString();
 #endif
 
-    const static QString YoutubeCachePath =  QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation)+"/vvave/youtube/").toLocalFile();
-
-	const static QString DBName = "collection.db";
-
+    const static QString DBName = QStringLiteral("collection.db");
 	const static QStringList defaultSources = QStringList() << FMH::MusicPath
 															<< FMH::DownloadsPath;
 
@@ -295,7 +277,6 @@ namespace BAE
 		}
 		return false;
 	}
-
 }
 
 

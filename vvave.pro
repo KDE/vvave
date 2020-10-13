@@ -61,7 +61,7 @@ linux:unix:!android {
         exists($$PWD/3rdparty/taglib-ios/taglib.pri) {
             message("Using TagLib sources for iOS")
         }else {
-            message("Getting TagLib sources fro iOS")
+            message("Getting TagLib sources for iOS")
             system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib-ios)
         }
 

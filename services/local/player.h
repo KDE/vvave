@@ -48,7 +48,7 @@ signals:
 	void finished();
 
 public slots:
-	static QString transformTime(const int &pos);
+    static QString transformTime(const int &value);
 	void stop();
 
 	bool play() const;

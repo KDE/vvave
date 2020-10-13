@@ -21,7 +21,9 @@ Player::Player(QObject *parent) : QObject(parent),
 		emit this->stateChanged ();
 		emit this->playingChanged();
 	});
+
 	connect(this->player, &QMediaPlayer::positionChanged, this, &Player::posChanged);
+    connect(this->player, &QMediaPlayer::durationChanged, this, &Player::durationChanged);
 }
 
 inline QNetworkRequest getOcsRequest(const QNetworkRequest& request)
@@ -85,9 +87,19 @@ void Player::stop()
 	}
 }
 
-QString Player::transformTime(const int &pos)
+QString Player::transformTime(const int &value)
 {
-	return BAE::transformTime(pos);
+    QString tStr;
+    if (value)
+    {
+        QTime time((value/3600)%60, (value/60)%60, value%60, (value*1000)%1000);
+        QString format = "mm:ss";
+        if (value > 3600)
+            format = "hh:mm:ss";
+        tStr = time.toString(format);
+    }
+
+    return tStr.isEmpty() ? "00:00" : tStr;
 }
 
 void Player::setUrl(const QUrl &value)
