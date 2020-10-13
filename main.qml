@@ -5,6 +5,7 @@ import QtQml 2.14
 
 import QtGraphicalEffects 1.0
 import QtMultimedia 5.0
+import Qt.labs.settings 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.2 as Maui
@@ -23,7 +24,7 @@ import "view_models/BabeTable"
 
 import "view_models/BabeGrid"
 
-import "widgets/InfoView"
+//import "widgets/InfoView"
 
 import "db/Queries.js" as Q
 import "utils/Help.js" as H
@@ -82,8 +83,13 @@ Maui.ApplicationWindow
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
 
-
-    /*COMPONENTS*/
+    Settings
+    {
+        id: settings
+        category: "Settings"
+        property bool fetchArtwork: true
+        property bool autoScan: true
+    }
 
     Mpris2
     {
@@ -145,12 +151,12 @@ Maui.ApplicationWindow
         id: _dialogLoader
     }
 
-    InfoView
-    {
-        id: infoView
-        maxWidth: parent.width * 0.8
-        maxHeight: parent.height * 0.9
-    }
+//    InfoView
+//    {
+//        id: infoView
+//        maxWidth: parent.width * 0.8
+//        maxHeight: parent.height * 0.9
+//    }
 
     Loader
     {
@@ -158,12 +164,6 @@ Maui.ApplicationWindow
         anchors.fill: parent
         active: focusView
         source: "widgets/FocusView.qml"
-    }
-
-    Component
-    {
-        id: _shareDialogComponent
-        Maui.ShareDialog {}
     }
 
     Component
@@ -649,5 +649,5 @@ Maui.ApplicationWindow
             Player.appendTracksAt(tracks, 0)
             Player.playAt(0)
         }
-    } 
+    }
 }

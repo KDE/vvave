@@ -256,7 +256,7 @@ Maui.Page
 
         onInfoClicked:
         {
-            infoView.show(listModel.get(control.currentIndex))
+//            infoView.show(listModel.get(control.currentIndex))
         }
 
         onCopyToClicked:

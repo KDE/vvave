@@ -93,18 +93,7 @@ Maui.SelectionBar
     {
         text: i18n("Share")
         icon.name: "document-share"
-        onTriggered:
-        {
-            if(Maui.Handy.isAndroid)
-            {
-                 Maui.Android.shareDialog(control.uris)
-                return
-            }
-
-            _dialogLoader.sourceComponent = _shareDialogComponent
-            root.dialog.urls = control.uris
-            root.dialog.open()
-        }
+        onTriggered: Maui.Platform.shareFiles(control.uris)
     }
 
     Action
