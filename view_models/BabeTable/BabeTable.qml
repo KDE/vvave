@@ -34,7 +34,7 @@ Maui.Page
     property bool coverArtVisible : false
     property bool allowMenu: true
     property bool showQuickActions : true
-    property bool group : false
+    property bool group : settings.group
 
     property alias contextMenu : contextMenu
     property alias contextMenuItems : contextMenu.contentData
@@ -87,99 +87,6 @@ Maui.Page
         onAccepted: listModel.filter = text
         onCleared: listModel.filter = ""
     }
-
-    headBar.rightContent: [
-        Maui.ToolButtonMenu
-        {
-            id: sortBtn
-            icon.name: "view-sort"
-            enabled: listModel.list.count > 2
-            MenuItem
-            {
-                text: i18n("Title")
-                checkable: true
-                checked: control.sort === "title"
-                onTriggered: control.listModel.sort = "title"
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Track")
-                checkable: true
-                checked: control.listModel.sort === "track"
-                onTriggered: control.listModel.sort = "track"
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Artist")
-                checkable: true
-                checked: control.listModel.sort === "artist"
-                onTriggered: control.listModel.sort ="artist"
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Album")
-                checkable: true
-                checked: control.listModel.sort === "album"
-                onTriggered: control.listModel.sort = "album"
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Most played")
-                checkable: true
-                checked: control.listModel.sort === "count"
-                onTriggered: control.listModel.sort = "count"
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Rate")
-                checkable: true
-                checked: control.listModel.sort === "rate"
-                onTriggered: control.listModel.sort = "rate"
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Release date")
-                checkable: true
-                checked: control.listModel.sort === "releasedate"
-                onTriggered: control.listModel.sort = "releasedate"
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Add date")
-                checkable: true
-                checked: control.listModel.sort === "adddate"
-                onTriggered: control.listModel.sort = "adddate"
-                autoExclusive: true
-            }
-
-            MenuSeparator{}
-
-            MenuItem
-            {
-                text: i18n("Group")
-                checkable: true
-                checked: group
-                onTriggered:
-                {
-                    group = !group
-                }
-            }
-        }
-    ]
 
     Maui.Dialog
     {

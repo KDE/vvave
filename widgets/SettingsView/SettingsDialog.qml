@@ -20,7 +20,7 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
-
+import QtQml 2.14
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.2 as Maui
 
@@ -81,6 +81,103 @@ Maui.SettingsDialog
                 onToggled: settings.autoScan = !settings.autoScan
             }
         }
+
+        Maui.SettingTemplate
+        {
+            label1.text: i18n("Group")
+            label2.text: i18n("Group by the sorting category.")
+
+            Switch
+            {
+                Layout.fillHeight: true
+                checkable: true
+                checked:  settings.group
+                onToggled: settings.group = !settings.group
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            label1.text: i18n("Sorting by")
+            label2.text: i18n("Change the sorting key.")
+
+
+            Maui.ToolActions
+            {
+                expanded: true
+                autoExclusive: true
+                display: ToolButton.TextOnly
+
+                Binding on currentIndex
+                {
+                    value:  switch(settings.sortBy)
+                            {
+                            case "title": return 0;
+                            case "artist": return 1;
+                            case "album": return 2;
+                            default: return -1;
+                            }
+                    restoreMode: Binding.RestoreValue
+                }
+
+                Action
+                {
+                    text: i18n("Title")
+                    onTriggered: settings.sortBy = "title"
+                }
+
+                Action
+                {
+                    text: i18n("Artist")
+                    onTriggered: settings.sortBy = "artist"
+                }
+
+                Action
+                {
+                    text: i18n("Album")
+                    onTriggered: settings.sortBy = "album"
+                }
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            label1.text: i18n("Sort order")
+            label2.text: i18n("Change the sorting order.")
+
+            Maui.ToolActions
+            {
+                expanded: true
+                autoExclusive: true
+                display: ToolButton.IconOnly
+
+                Binding on currentIndex
+                {
+                    value:  switch(settings.sortOrder)
+                            {
+                            case Qt.AscendingOrder: return 0;
+                            case Qt.DescendingOrder: return 1;
+                            default: return -1;
+                            }
+                    restoreMode: Binding.RestoreValue
+                }
+
+                Action
+                {
+                    text: i18n("Ascending")
+                    icon.name: "view-sort-ascending"
+                    onTriggered: settings.sortOrder = Qt.AscendingOrder
+                }
+
+                Action
+                {
+                    text: i18n("Descending")
+                    icon.name: "view-sort-descending"
+                    onTriggered: settings.sortOrder = Qt.DescendingOrder
+                }
+            }
+        }
+
     }
 
     Maui.SettingsSection

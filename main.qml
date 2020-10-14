@@ -87,6 +87,10 @@ Maui.ApplicationWindow
         category: "Settings"
         property bool fetchArtwork: true
         property bool autoScan: true
+
+        property string sortBy : "title"
+        property int sortOrder: Qt.AscendingOrder
+        property bool group: sortBy === "artist" || sortBy === "album"
     }
 
     Mpris2

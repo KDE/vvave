@@ -21,6 +21,9 @@ BabeTable
     onAppendAll: Player.appendAllModel( listModel.list)
     onQueueTrack: Player.queueTracks([listModel.get(index)], index)
 
+    listModel.sort: settings.sortBy
+    listModel.sortOrder: settings.sortOrder
+
     Component.onCompleted: listModel.list.query= Q.GET.allTracks
 }
 
