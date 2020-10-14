@@ -2,6 +2,8 @@
 #define VVAVE_H
 
 #include <QObject>
+#include <QQmlEngine>
+
 #include "utils/bae.h"
 #include <functional>
 
@@ -11,8 +13,11 @@ class vvave : public QObject
 	Q_OBJECT
 	Q_PROPERTY(QVariantList sources READ sourcesModel NOTIFY sourcesChanged FINAL)
 	Q_PROPERTY(QList<QUrl> folders READ folders NOTIFY sourcesChanged FINAL)
+    Q_PROPERTY(bool autoScan READ autoScan WRITE setAutoScan NOTIFY autoScanChanged)
 
 public:
+    static vvave *qmlAttachedProperties(QObject *object);
+
 	static vvave * instance()
 	{
 		static vvave vvave;
@@ -26,6 +31,8 @@ public:
 
 	QList<QUrl> folders();
 
+    bool autoScan() const;
+
 public slots:
 	void openUrls(const QStringList &urls);
 
@@ -37,6 +44,8 @@ public slots:
 	static QStringList sources();
 	static QVariantList sourcesModel();
 
+    void setAutoScan(bool autoScan);
+
 private:
 	explicit vvave(QObject *parent = nullptr);
 	CollectionDB *db;
@@ -46,6 +55,8 @@ private:
 	uint m_newArtist = 0;
 	uint m_newSources = 0;
 
+    bool m_autoScan = false;
+
 signals:
 	void sourceAdded(QUrl source);
 	void sourceRemoved(QUrl source);
@@ -54,7 +65,10 @@ signals:
 	void artistsAdded(uint size);
 
 	void openFiles(QVariantList tracks);
-	void sourcesChanged();
+    void sourcesChanged();
+    void autoScanChanged(bool autoScan);
 };
+
+QML_DECLARE_TYPEINFO(vvave, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // VVAVE_H

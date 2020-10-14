@@ -19,7 +19,7 @@ Maui.Page
     focus: true
     Component.onCompleted:
     {
-        _drawer.visible = false
+//        _drawer.visible = false
         forceActiveFocus()
     }
 

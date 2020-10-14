@@ -34,46 +34,51 @@ StackView
         onAlbumCoverClicked: control.populateTable(album, artist)
     }
 
-  Component
-  {
-      id: _tracksTableComponent
+    Component
+    {
+        id: _tracksTableComponent
 
-      BabeTable
-      {
-          list.query: control.currentQuery
-          trackNumberVisible: true
-          coverArtVisible: true
-          focus: true
-          holder.emoji: "qrc:/assets/media-album-track.svg"
-          holder.title : "Oops!"
-          holder.body: i18n("This list is empty")
-          holder.emojiSize: Maui.Style.iconSizes.huge
-          headBar.visible: true
-          headBar.farLeftContent: ToolButton
-          {
-              icon.name: "go-previous"
-              onClicked: control.pop()
-          }
+        BabeTable
+        {
+            list.query: control.currentQuery
+            trackNumberVisible: true
+            coverArtVisible: true
+            focus: true
+            holder.emoji: "qrc:/assets/media-album-track.svg"
+            holder.title : "Oops!"
+            holder.body: i18n("This list is empty")
+            holder.emojiSize: Maui.Style.iconSizes.huge
+            headBar.visible: true
+            headBar.farLeftContent: ToolButton
+            {
+                icon.name: "go-previous"
+                onClicked: control.pop()
+            }
 
-          onQueueTrack: Player.queueTracks([listModel.get(index)], index)
+            onQueueTrack: Player.queueTracks([listModel.get(index)], index)
 
-          onRowClicked: Player.quickPlay(listModel.get(index))
-          onAppendTrack: Player.addTrack(listModel.get(index))
-          onQuickPlayTrack: Player.quickPlay(listModel.get(index))
+            onRowClicked: Player.quickPlay(listModel.get(index))
+            onAppendTrack: Player.addTrack(listModel.get(index))
+            onQuickPlayTrack: Player.quickPlay(listModel.get(index))
 
-          onPlayAll:
-          {
-              control.pop()
-              Player.playAllModel(listModel.list)
-          }
+            onPlayAll:
+            {
+                control.pop()
+                Player.playAllModel(listModel.list)
+            }
 
-          onAppendAll:
-          {
-              control.pop()
-              Player.appendAllModel(listModel.list)
-          }
-      }
-  }
+            onAppendAll:
+            {
+                control.pop()
+                Player.appendAllModel(listModel.list)
+            }
+        }
+    }
+
+    Component.onCompleted:
+    {
+        control.list.fetchArtwork = settings.fetchArtwork
+    }
 
     function populateTable(album, artist)
     {

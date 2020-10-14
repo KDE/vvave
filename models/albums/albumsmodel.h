@@ -16,8 +16,9 @@
 
 class ArtworkFetcher: public QObject
 {
-		Q_OBJECT
-	public:
+    Q_OBJECT
+
+public:
 		void fetch(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology);
 	signals:
 		void artworkReady(const FMH::MODEL &item, const int &index);
@@ -29,6 +30,7 @@ class AlbumsModel : public MauiList
 {
 	Q_OBJECT
 	Q_PROPERTY(AlbumsModel::QUERY query READ getQuery WRITE setQuery NOTIFY queryChanged())
+    Q_PROPERTY(bool fetchArtwork READ fetchArtwork WRITE setFetchArtwork NOTIFY fetchArtworkChanged)
 
 public:
 	enum QUERY : uint_fast8_t
@@ -48,6 +50,8 @@ public:
 	void setQuery(const AlbumsModel::QUERY &query);
 	AlbumsModel::QUERY getQuery() const;
 
+    bool fetchArtwork() const;
+
 private:
 	bool stopThreads = false;
 	CollectionDB *db;
@@ -59,9 +63,7 @@ private:
 	AlbumsModel::QUERY query;
 	void updateArtwork(const int index, const QString &artwork);
 
-signals:
-	void queryChanged();
-	void fetchArtwork(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology);
+    bool m_fetchArtwork = false;
 
 public slots:
 	QVariantMap get(const int &index) const;
@@ -69,7 +71,13 @@ public slots:
 	void append(const QVariantMap &item, const int &at);
 	void refresh();
 
-	void fetchInformation();
+    void fetchInformation();
+    void setFetchArtwork(bool fetchArtwork);
+
+signals:
+    void queryChanged();
+    void startFetchingArtwork(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology);
+    void fetchArtworkChanged(bool fetchArtwork);
 };
 
 #endif // ALBUMSMODEL_H

@@ -53,8 +53,7 @@ Maui.AltBrowser
         isCurrentItem: ListView.isCurrentItem
         width: ListView.view.width
         height: Maui.Style.rowHeight * 1.8
-        leftPadding: Maui.Style.space.small
-        rightPadding: Maui.Style.space.small
+
 
         Maui.ListItemTemplate
         {
@@ -64,6 +63,7 @@ Maui.AltBrowser
             label2.text: model.artist && model.album ? model.artist : ""
             imageSource:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
             iconSizeHint: height * 0.9
+            leftMargin: 0
         }
 
         onClicked:

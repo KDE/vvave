@@ -123,11 +123,6 @@ int main(int argc, char *argv[])
 		if (!obj && url == objUrl)
 			QCoreApplication::exit(-1);
 
-        if(FMStatic::loadSettings("Settings", "ScanCollectionOnStartUp", true ).toBool())
-        {
-			vvave::instance()->scanDir(vvave::sources());
-        }
-
 		if(!args.isEmpty())
 			 vvave::instance()->openUrls(args);
 
@@ -135,7 +130,7 @@ int main(int argc, char *argv[])
 
 	engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
-	qmlRegisterSingletonInstance<vvave>(VVAVE_URI, 1, 0, "Vvave", vvave::instance ());
+    qmlRegisterUncreatableType<vvave>(VVAVE_URI, 1, 0, "Vvave", "Can not create VVave");
 
 	qmlRegisterType<TracksModel>(VVAVE_URI, 1, 0, "Tracks");
 	qmlRegisterType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists");

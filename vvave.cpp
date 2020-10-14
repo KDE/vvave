@@ -84,19 +84,30 @@ vvave::vvave(QObject *parent) : QObject(parent),
 	connect(db, &CollectionDB::sourceInserted, [this](QVariantMap)
 	{
 		m_newSources++;
-	});
+    });
 }
 
 //// PUBLIC SLOTS
+vvave *vvave::qmlAttachedProperties(QObject *object)
+{
+    Q_UNUSED(object)
+    return vvave::instance();
+}
+
 QList<QUrl> vvave::folders()
 {
 	const auto sources = CollectionDB::getInstance()->getDBData("select * from sources");
 	return QUrl::fromStringList(FMH::modelToList(sources, FMH::MODEL_KEY::URL));
 }
 
+bool vvave::autoScan() const
+{
+    return m_autoScan;
+}
+
 void vvave::addSources(const QStringList &paths)
 {
-	QStringList urls = sources();
+    QStringList urls = sources();
 	QStringList newUrls;
 
 	for(const auto &path : paths)
@@ -188,16 +199,30 @@ QVariantList vvave::sourcesModel()
 	return res;
 }
 
+void vvave::setAutoScan(bool autoScan)
+{
+    if (m_autoScan == autoScan)
+        return;
+
+    m_autoScan = autoScan;
+    emit autoScanChanged(m_autoScan);
+
+    if(m_autoScan)
+    {
+        scanDir(sources());
+    }
+}
+
 void vvave::openUrls(const QStringList &urls)
 {
-	if(urls.isEmpty()) return;
+    if(urls.isEmpty()) return;
 
-	QVariantList data;
+    QVariantList data;
 
-	for(const auto &url : urls)
-	{
-		auto _url = QUrl::fromUserInput(url);
-		if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString()))
+    for(const auto &url : urls)
+    {
+        auto _url = QUrl::fromUserInput(url);
+        if(db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString()))
 		{
 			data << FMH::toMap(this->db->getDBData(QStringList() << _url.toString()).first());
 		}else
