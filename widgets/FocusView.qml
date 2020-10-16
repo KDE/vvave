@@ -167,7 +167,7 @@ Maui.Page
                             width: _image.width + Maui.Style.space.medium
                             height: width
                             anchors.centerIn: parent
-                            radius: height
+                            radius: Maui.Style.radiusV
                             color: "#fafafa"
                         }
 
@@ -182,14 +182,14 @@ Maui.Page
                             source: _bg
                         }
 
-                        RotationAnimator on rotation
-                        {
-                            from: 0
-                            to: 360
-                            duration: 5000
-                            loops: Animation.Infinite
-                            running: root.isPlaying && isCurrentItem
-                        }
+//                        RotationAnimator on rotation
+//                        {
+//                            from: 0
+//                            to: 360
+//                            duration: 5000
+//                            loops: Animation.Infinite
+//                            running: root.isPlaying && isCurrentItem
+//                        }
 
                         Image
                         {
@@ -199,7 +199,6 @@ Maui.Page
                             anchors.centerIn: parent
 
                             sourceSize.width: 200
-                            sourceSize.height: 200
 
                             fillMode: Image.PreserveAspectFit
                             antialiasing: false
@@ -214,35 +213,35 @@ Maui.Page
                                     source = "qrc:/assets/cover.png";
                             }
 
-                            Rectangle
-                            {
-                                color: _bg.color
-                                height: parent.height * 0.25
-                                width: height
-                                anchors.centerIn: parent
-                                radius: height
-                            }
+//                            Rectangle
+//                            {
+//                                color: _bg.color
+//                                height: parent.height * 0.25
+//                                width: height
+//                                anchors.centerIn: parent
+//                                radius: height
+//                            }
 
-                            Rectangle
-                            {
-                                id: _roundRec
-                                color:  control.Kirigami.Theme.backgroundColor
-                                height: parent.height * 0.20
-                                width: height
-                                anchors.centerIn: parent
-                                radius: height
-                            }
+//                            Rectangle
+//                            {
+//                                id: _roundRec
+//                                color:  control.Kirigami.Theme.backgroundColor
+//                                height: parent.height * 0.20
+//                                width: height
+//                                anchors.centerIn: parent
+//                                radius: height
+//                            }
 
-                            InnerShadow
-                            {
-                                anchors.fill: _roundRec
-                                radius: 8.0
-                                samples: 16
-                                horizontalOffset: 0
-                                verticalOffset: 0
-                                color: "#b0000000"
-                                source: _roundRec
-                            }
+//                            InnerShadow
+//                            {
+//                                anchors.fill: _roundRec
+//                                radius: 8.0
+//                                samples: 16
+//                                horizontalOffset: 0
+//                                verticalOffset: 0
+//                                color: "#b0000000"
+//                                source: _roundRec
+//                            }
 
                             layer.enabled: true
                             layer.effect: OpacityMask
@@ -257,7 +256,7 @@ Maui.Page
                                         anchors.centerIn: parent
                                         width: _image.width
                                         height: _image.height
-                                        radius: height
+                                        radius: Maui.Style.radiusV
                                     }
                                 }
                             }

@@ -13,8 +13,8 @@ Maui.ItemDelegate
     id: control
 
     property int albumSize : Maui.Style.iconSizes.huge
-    property int albumRadius : 0
-    property bool showLabels : true
+    property int albumRadius : Maui.Style.radiusV
+    property bool showLabels : label1.text.length || label2.text.length
 
     property alias label1 : _labelsLayout.label1
     property alias label2 : _labelsLayout.label2
@@ -43,7 +43,7 @@ Maui.ItemDelegate
             {
                 if (status == Image.Error)
                     source = "qrc:/assets/cover.png"
-            }
+            }         
         }
 
         Item
@@ -103,9 +103,13 @@ Maui.ItemDelegate
             }
         }
     }
+
     Rectangle
     {
-        anchors.fill: parent
+        anchors.centerIn: _cover
+
+                            width: _image.status === Image.Ready ? Math.min(parent.width, _image.paintedWidth) : parent.width
+                            height:  _image.status === Image.Ready ? Math.min(parent.height, _image.paintedHeight) : parent.height
 
         color: "transparent"
         border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
@@ -122,5 +126,4 @@ Maui.ItemDelegate
             anchors.margins: 1
         }
     }
-
 }
