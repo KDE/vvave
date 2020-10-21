@@ -70,7 +70,7 @@ Maui.ApplicationWindow
     property string syncPlaylist: ""
     property bool sync: false
 
-    property bool focusView : false
+    readonly property bool focusView : _stackView.depth === 2
     property bool selectionMode : false
 
     /***************************************************/
@@ -129,12 +129,12 @@ Maui.ApplicationWindow
         id: player
         volume: 100
         onFinished: if (!mainlistEmpty)
-                           {
-                               if (currentTrack && currentTrack.url)
-                                   mainPlaylist.listModel.list.countUp(currentTrackIndex)
+                    {
+                        if (currentTrack && currentTrack.url)
+                            mainPlaylist.listModel.list.countUp(currentTrackIndex)
 
-                               Player.nextTrack()
-                           }
+                        Player.nextTrack()
+                    }
     }
 
     altHeader: Kirigami.Settings.isMobile
@@ -153,20 +153,13 @@ Maui.ApplicationWindow
         id: _dialogLoader
     }
 
-//    InfoView
-//    {
-//        id: infoView
-//        maxWidth: parent.width * 0.8
-//        maxHeight: parent.height * 0.9
-//    }
+    //    InfoView
+    //    {
+    //        id: infoView
+    //        maxWidth: parent.width * 0.8
+    //        maxHeight: parent.height * 0.9
+    //    }
 
-    Loader
-    {
-        id: _focusViewLoader
-        anchors.fill: parent
-        active: focusView
-        source: "widgets/FocusView.qml"
-    }
 
     Component
     {
@@ -283,101 +276,117 @@ Maui.ApplicationWindow
         width: parent.width
     }
 
-    Maui.Page
+
+    Component
     {
-        anchors.fill: parent
-        visible: !focusView
-        floatingFooter: true
-        flickable: swipeView.currentItem.flickable ||swipeView.currentItem.item.flickable
+        id: _focusViewComponent
 
-        Maui.AppViews
+        FocusView
         {
-            id: swipeView
-            anchors.fill: parent
-
-            TracksView
-            {
-                id: tracksView
-
-                Maui.AppView.title: i18n("Tracks")
-                Maui.AppView.iconName: "view-media-track"
-            }
-
-            AlbumsView
-            {
-                id: albumsView
-                Maui.AppView.title: i18n("Albums")
-                Maui.AppView.iconName: "view-media-album-cover"
-                holder.emoji: "qrc:/assets/dialog-information.svg"
-                holder.title : i18n("No Albums!")
-                holder.body: i18n("Add new music sources")
-                holder.emojiSize: Maui.Style.iconSizes.huge
-
-                Component.onCompleted: list.query = Albums.ALBUMS
-            }
-
-            AlbumsView
-            {
-                id: artistsView
-                Maui.AppView.title: i18n("Artists")
-                Maui.AppView.iconName: "view-media-artist"
-
-                holder.emoji: "qrc:/assets/dialog-information.svg"
-                holder.title : i18n("No Artists!")
-                holder.body: i18n("Add new music sources")
-                holder.emojiSize: Maui.Style.iconSizes.huge
-
-                Component.onCompleted: list.query = Albums.ARTISTS
-            }
-
-            Maui.AppViewLoader
-            {
-                Maui.AppView.title: i18n("Playlists")
-                Maui.AppView.iconName: "view-media-playlist"
-
-                PlaylistsView
-                {
-                    id: playlistsView
-                }
-            }
-
-            Maui.AppViewLoader
-            {
-                Maui.AppView.title: i18n("Cloud")
-                Maui.AppView.iconName: "folder-cloud"
-                CloudView
-                {
-                    id: cloudView
-                }
-            }
-
-            Maui.AppViewLoader
-            {
-                Maui.AppView.title: i18n("Folders")
-                Maui.AppView.iconName: "folder"
-
-                FoldersView
-                {
-                    id: foldersView
-                }
-            }
-        }
-
-        footer: SelectionBar
-        {
-            id: _selectionBar
-            property alias listView: _selectionBar.selectionList
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-            padding: Maui.Style.space.big
-            maxListHeight: swipeView.height - Maui.Style.space.medium
-            onExitClicked:
-            {
-                root.selectionMode = false
-                clear()
-            }
         }
     }
+
+    StackView
+    {
+        id: _stackView
+        anchors.fill: parent
+
+        initialItem: Maui.Page
+        {
+            floatingFooter: true
+            flickable: swipeView.currentItem.flickable ||swipeView.currentItem.item.flickable
+
+            Maui.AppViews
+            {
+                id: swipeView
+                anchors.fill: parent
+
+                TracksView
+                {
+                    id: tracksView
+
+                    Maui.AppView.title: i18n("Tracks")
+                    Maui.AppView.iconName: "view-media-track"
+                }
+
+                AlbumsView
+                {
+                    id: albumsView
+                    Maui.AppView.title: i18n("Albums")
+                    Maui.AppView.iconName: "view-media-album-cover"
+                    holder.emoji: "qrc:/assets/dialog-information.svg"
+                    holder.title : i18n("No Albums!")
+                    holder.body: i18n("Add new music sources")
+                    holder.emojiSize: Maui.Style.iconSizes.huge
+
+                    Component.onCompleted: list.query = Albums.ALBUMS
+                }
+
+                AlbumsView
+                {
+                    id: artistsView
+                    Maui.AppView.title: i18n("Artists")
+                    Maui.AppView.iconName: "view-media-artist"
+
+                    holder.emoji: "qrc:/assets/dialog-information.svg"
+                    holder.title : i18n("No Artists!")
+                    holder.body: i18n("Add new music sources")
+                    holder.emojiSize: Maui.Style.iconSizes.huge
+
+                    Component.onCompleted: list.query = Albums.ARTISTS
+                }
+
+                Maui.AppViewLoader
+                {
+                    Maui.AppView.title: i18n("Playlists")
+                    Maui.AppView.iconName: "view-media-playlist"
+
+                    PlaylistsView
+                    {
+                        id: playlistsView
+                    }
+                }
+
+                Maui.AppViewLoader
+                {
+                    Maui.AppView.title: i18n("Cloud")
+                    Maui.AppView.iconName: "folder-cloud"
+                    CloudView
+                    {
+                        id: cloudView
+                    }
+                }
+
+                Maui.AppViewLoader
+                {
+                    Maui.AppView.title: i18n("Folders")
+                    Maui.AppView.iconName: "folder"
+
+                    FoldersView
+                    {
+                        id: foldersView
+                    }
+                }
+            }
+
+            footer: SelectionBar
+            {
+                id: _selectionBar
+                property alias listView: _selectionBar.selectionList
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+                padding: Maui.Style.space.big
+                maxListHeight: swipeView.height - Maui.Style.space.medium
+                onExitClicked:
+                {
+                    root.selectionMode = false
+                    clear()
+                }
+            }
+        }
+
+    }
+
 
     Component.onCompleted:
     {
@@ -393,6 +402,17 @@ Maui.ApplicationWindow
         {
             Player.appendTracksAt(tracks, 0)
             Player.playAt(0)
+        }
+    }
+
+    function toggleFocusView()
+    {
+        if(focusView)
+        {
+            _stackView.pop(StackView.Immediate)
+        }else
+        {
+            _stackView.push(_focusViewComponent, StackView.Immediate)
         }
     }
 }

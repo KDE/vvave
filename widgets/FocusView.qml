@@ -9,17 +9,11 @@ import QtGraphicalEffects 1.0
 Maui.Page
 {
     id: control
-    visible: focusView
 
-    z: parent.z + 99999
     title: i18n("Now Playing")
-    Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
 
-    focus: true
     Component.onCompleted:
     {
-//        _drawer.visible = false
         forceActiveFocus()
     }
 
@@ -28,24 +22,25 @@ Maui.Page
         _drawer.visible = true
     }
 
+    headBar.visible: true
     headBar.background: null
     headBar.height: Maui.Style.toolBarHeight
     headBar.leftContent: ToolButton
     {
         icon.name: "go-previous"
-        onClicked: focusView = false
+        onClicked: toggleFocusView()
     }
 
     Keys.onBackPressed:
     {
-        focusView = false
+        toggleFocusView()
         event.accepted = true
     }
 
     Shortcut
     {
         sequence: StandardKey.Back
-        onActivated: focusView = false
+        onActivated: toggleFocusView()
     }
 
     background: Item
@@ -342,7 +337,7 @@ Maui.Page
             ToolButton
             {
                 icon.name: "documentinfo"
-                onClicked: focusView = false
+                onClicked: toggleFocusView()
                 Layout.alignment: Qt.AlignCenter
             }
         }
