@@ -94,7 +94,7 @@ StackView
                 if(filterList.isPublic)
                 {
                     root.sync = true
-                    root.syncPlaylist = playlist
+                    root.syncPlaylist = currentPlaylist
                 }
 
                 Player.playAllModel(listModel.list)

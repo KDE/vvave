@@ -47,14 +47,15 @@ Maui.GridView
         height: control.cellHeight
         width: control.cellWidth
 
-        property bool isCurrentItem: GridView.isCurrentItem
+        property bool isCurrentItem: GridView.isCurrentItem       
 
         CollageDelegate
         {
+            id: _collageDelegate
             anchors.centerIn: parent
             height: control.itemSize - Maui.Style.space.medium
             width: height
-
+            images: model.preview.split(",")
             isCurrentItem: parent.isCurrentItem
 
             tag: model.playlist

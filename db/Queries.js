@@ -26,9 +26,6 @@ var GET = {
     albumTags_: "select distinct tag from albums_tags where context = 'tag' and album = \"%1\" and artist = \"%2\"",
     artistTags_: "select distinct tag from artists_tags where context = 'tag' and artist = \"%1\"",
 
-
-    colorTracks_: "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.color = \"%1\""
-
 }
 
 var INSERT = {

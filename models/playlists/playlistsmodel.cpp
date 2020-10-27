@@ -1,18 +1,30 @@
 #include "playlistsmodel.h"
+#include "db/collectionDB.h"
 
 #ifdef STATIC_MAUIKIT
 #include "tagging.h"
+#include "fmstatic.h"
 #else
 #include <MauiKit/tagging.h>
+#include <MauiKit/fmstatic.h>
 #endif
 
 PlaylistsModel::PlaylistsModel(QObject *parent) : MauiList(parent)
 {
-    connect(Tagging::getInstance(), &Tagging::tagged, [this](QString tag)
+    connect(Tagging::getInstance(), &Tagging::tagged, [this](QVariantMap tag)
     {
         emit this->preItemAppended();
-        this->list << (this->packPlaylist(tag));
+        this->list << (this->packPlaylist(tag.value("tag").toString()));
         emit this->postItemAppended();
+    });
+
+    connect(Tagging::getInstance(), &Tagging::urlTagged, [this](QUrl, QString tag)
+    {
+        const auto index = this->mappedIndex(this->indexOf(FMH::MODEL_KEY::PLAYLIST, tag));
+        auto item = this->list[index];
+        item[FMH::MODEL_KEY::PREVIEW] = playlistArtworkPreviews(tag);
+        this->list[index] = item;
+        this->updateModel(index, {});
     });
 }
 
@@ -43,7 +55,47 @@ FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
         {FMH::MODEL_KEY::ICON, "tag"},
         {FMH::MODEL_KEY::TYPE, "personal"},
         {FMH::MODEL_KEY::DESCRIPTION, "Personal"},
+        {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews(playlist)}
     };
+}
+
+QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
+{
+    QStringList res;
+    if(playlist == "Most Played")
+    {
+        const auto data = CollectionDB::getInstance()->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist WHERE t.count > 0 ORDER BY count desc LIMIT 4"));
+        for(const auto &item : data)
+        {
+            res << item[FMH::MODEL_KEY::ARTWORK];
+        }
+
+        return res.join(",");
+    }
+
+    if(playlist == "Rating")
+    {
+        const auto data =  CollectionDB::getInstance()->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where rate > 0 order by rate desc limit 4"));
+        for(const auto &item : data)
+        {
+            res << item[FMH::MODEL_KEY::ARTWORK];
+        }
+
+        return res.join(",");
+    }
+
+    const auto urls =  FMStatic::getTagUrls(playlist, {}, true, 4, "audio");
+    for(const auto &url : urls)
+    {
+        const auto data =   CollectionDB::getInstance()->getDBData(QString("select t.url, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
+
+        for(const auto &item : data)
+        {
+            res << item[FMH::MODEL_KEY::ARTWORK];
+        }
+    }
+
+    return res.join(",");
 }
 
 FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
@@ -62,6 +114,7 @@ FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
             {FMH::MODEL_KEY::TYPE, "default"},
             {FMH::MODEL_KEY::COLOR, "#FFA000"},
             {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
+            {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Most Played")},
             {FMH::MODEL_KEY::ICON, "view-media-playcount"},
             {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
         },
@@ -71,6 +124,7 @@ FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
             {FMH::MODEL_KEY::TYPE, "default"},
             {FMH::MODEL_KEY::COLOR, "#42A5F5"},
             {FMH::MODEL_KEY::PLAYLIST, "Rating"},
+            {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Rating")},
             {FMH::MODEL_KEY::ICON, "view-media-favorite"},
             {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
         }
@@ -82,7 +136,7 @@ FMH::MODEL_LIST PlaylistsModel::tags()
     FMH::MODEL_LIST res;
     const auto tags = Tagging::getInstance()->getUrlsTags(true);
 
-    return std::accumulate(tags.constBegin(), tags.constEnd(), res, [](FMH::MODEL_LIST &list, const QVariant &item)
+    return std::accumulate(tags.constBegin(), tags.constEnd(), res, [this](FMH::MODEL_LIST &list, const QVariant &item)
     {
         const auto map = item.toMap();
         auto res = packPlaylist(map.value("tag").toString());

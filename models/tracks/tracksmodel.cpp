@@ -49,12 +49,14 @@ int TracksModel::limit() const
 void TracksModel::setList()
 {
 	emit this->preListChanged();
+    this->list.clear();
+
 	qDebug()<< "GETTIN TRACK LIST" << this->query;
 
 	if(this->query.startsWith("#"))
 	{
-		const auto urls =  FMStatic::getTagUrls(query.replace("#", ""), {}, true, m_limit, "audio");
-		this->list.clear();
+        auto m_query = query;
+        const auto urls =  FMStatic::getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
 		for(const auto &url : urls)
 		{
 			this->list << this->db->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album "

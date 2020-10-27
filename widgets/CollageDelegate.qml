@@ -19,6 +19,7 @@ Maui.ItemDelegate
     property alias label2 : _labelsLayout.label2
     property alias template: _labelsLayout
 
+    property var images : []
     property string tag
 
     function randomHexColor()
@@ -52,15 +53,7 @@ Maui.ItemDelegate
                 Repeater
                 {
                     id: _repeater
-                    model: Maui.BaseModel
-                    {
-                        list: Tracks
-                        {
-                            id: _collageList
-                            query: "#"+control.tag
-                            limit: 4
-                        }
-                    }
+                    model: control.images
 
                     delegate: Rectangle
                     {
@@ -74,7 +67,7 @@ Maui.ItemDelegate
                             sourceSize.height: 80
                             asynchronous: true
                             smooth: false
-                            source: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+                            source: modelData ? modelData : "qrc:/assets/cover.png"
                             fillMode: Image.PreserveAspectCrop
                         }
                     }

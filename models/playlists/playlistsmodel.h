@@ -24,10 +24,12 @@ private:
 
     FMH::MODEL_LIST defaultPlaylists();
     FMH::MODEL_LIST tags();
-    static FMH::MODEL packPlaylist(const QString &playlist);
+    FMH::MODEL packPlaylist(const QString &playlist);
+    QString playlistArtworkPreviews(const QString &playlist);
 
 signals:
     void sortByChanged();
+    void fileTagged(QUrl url, QString playlist);
 
 public slots:
     QVariantMap get(const int &index) const;
