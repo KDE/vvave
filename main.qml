@@ -30,7 +30,6 @@ import "utils/Player.js" as Player
 
 Maui.ApplicationWindow
 {
-
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
 

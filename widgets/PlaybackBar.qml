@@ -14,7 +14,6 @@ Control
     id: control
     implicitHeight: visible ? _footerLayout.implicitHeight : 0
 
-
     background: Item
     {
         Image
