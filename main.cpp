@@ -6,10 +6,8 @@
 #include <QCommandLineParser>
 
 #if defined Q_OS_MACOS || defined Q_OS_WIN
-#include <KF5/KI18n/KLocalizedContext>
 #include <KF5/KI18n/KLocalizedString>
 #else
-#include <KI18n/KLocalizedContext>
 #include <KI18n/KLocalizedString>
 #endif
 
@@ -128,9 +126,8 @@ int main(int argc, char *argv[])
 
 	}, Qt::QueuedConnection);
 
-	engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
-    qmlRegisterUncreatableType<vvave>(VVAVE_URI, 1, 0, "Vvave", "Can not create VVave");
+	qmlRegisterUncreatableType<vvave>(VVAVE_URI, 1, 0, "Vvave", "Can not create VVave");
 
 	qmlRegisterType<TracksModel>(VVAVE_URI, 1, 0, "Tracks");
 	qmlRegisterType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists");
