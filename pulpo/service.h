@@ -10,6 +10,12 @@
 #include "enums.h"
 #include "../utils/bae.h"
 
+#define ERROR( request ) \
+{ \
+emit this->error(request); \
+return; \
+}
+
 class Service : public QObject
 {
     Q_OBJECT
@@ -35,9 +41,12 @@ protected:
 
     static PULPO::RESPONSE packResponse(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info, const PULPO::VALUE &value);
 
+    bool scopePass();
+
 signals:
     void arrayReady(QByteArray array);
     void responseReady(PULPO::REQUEST request, PULPO::RESPONSES responses);
+    void error(PULPO::REQUEST request);
 
 public slots:
 };

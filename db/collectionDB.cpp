@@ -21,20 +21,19 @@
 #include <QStringList>
 #include <QCoreApplication>
 
+#ifdef STATIC_MAUIKIT
+#include "fmh.h"
+#else
+#include <MauiKit/fmh.h>
+#endif
+
 using namespace BAE;
 
 CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 {
-	QObject::connect(qApp, &QCoreApplication::aboutToQuit, [this]()
-	{
-		this->m_db.close();
-		this->instance->deleteLater();
-		this->instance = nullptr;
-	});
-
 	this->name = QUuid::createUuid().toString();
 
-	if(!BAE::fileExists(BAE::CollectionDBPath + BAE::DBName))
+	if(!FMH::fileExists(QUrl::fromUserInput(BAE::CollectionDBPath + BAE::DBName)))
 	{
 		QDir collectionDBPath_dir(BAE::CollectionDBPath);
 		if (!collectionDBPath_dir.exists())
@@ -46,22 +45,6 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 
 	}else this->openDB(this->name);
 
-}
-
-CollectionDB *CollectionDB::instance = nullptr;
-
-CollectionDB *CollectionDB::getInstance()
-{
-	if(!instance)
-	{
-		instance = new CollectionDB();
-		qDebug() << "getInstance(): First DBActions instance\n";
-		return instance;
-	} else
-	{
-		qDebug()<< "getInstance(): previous DBActions instance\n";
-		return instance;
-	}
 }
 
 void CollectionDB::prepareCollectionDB()
@@ -244,19 +227,25 @@ void CollectionDB::openDB(const QString &name)
 
 bool CollectionDB::addTrack(const FMH::MODEL &track)
 {
-	qDebug()<< "ÄDDING TRACKS" << track;
-	auto url = track[FMH::MODEL_KEY::URL];
-	auto title = track[FMH::MODEL_KEY::TITLE];
-	auto artist = track[FMH::MODEL_KEY::ARTIST];
-	auto album = track[FMH::MODEL_KEY::ALBUM];
-	auto genre = track[FMH::MODEL_KEY::GENRE];
-	auto year = track[FMH::MODEL_KEY::RELEASEDATE];
-	auto sourceUrl = track[FMH::MODEL_KEY::SOURCE];
-	auto duration = track[FMH::MODEL_KEY::DURATION];
-	auto fav = track[FMH::MODEL_KEY::FAV];
-	auto trackNumber = track[FMH::MODEL_KEY::TRACK];
+	if(track.isEmpty ())
+		return false;
 
-	auto artwork = track[FMH::MODEL_KEY::ARTWORK].isEmpty() ? "" : track[FMH::MODEL_KEY::ARTWORK];
+	const auto url = track[FMH::MODEL_KEY::URL];
+	if(check_existance(TABLEMAP[BAE::TABLE::TRACKS], BAE::KEYMAP[BAE::KEY::URL], url))
+	{
+		return false;
+	}
+
+	const auto title = track[FMH::MODEL_KEY::TITLE];
+	const auto artist = track[FMH::MODEL_KEY::ARTIST];
+	const auto album = track[FMH::MODEL_KEY::ALBUM];
+	const auto genre = track[FMH::MODEL_KEY::GENRE];
+	const auto year = track[FMH::MODEL_KEY::RELEASEDATE];
+	const auto sourceUrl = track[FMH::MODEL_KEY::SOURCE];
+	const auto duration = track[FMH::MODEL_KEY::DURATION];
+	const auto trackNumber = track[FMH::MODEL_KEY::TRACK];
+
+	const auto artwork = track[FMH::MODEL_KEY::ARTWORK].isEmpty() ? "" : track[FMH::MODEL_KEY::ARTWORK];
 
 	auto artistTrack = track;
 	artistTrack[FMH::MODEL_KEY::ARTWORK] = "";
@@ -264,25 +253,28 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 	auto artistArtwork = artistTrack[FMH::MODEL_KEY::ARTWORK];
 
 	/* first needs to insert the source, album and artist*/
-	QVariantMap sourceMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], sourceUrl},
+	const QVariantMap sourceMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], sourceUrl},
 						   {FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCETYPE], sourceType(url)}};
 
-	insert(TABLEMAP[BAE::TABLE::SOURCES], sourceMap);
+	if(insert(TABLEMAP[BAE::TABLE::SOURCES], sourceMap))
+			emit sourceInserted(sourceMap);
 
-	QVariantMap artistMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
+	const QVariantMap artistMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
 						   {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK], artistArtwork},
 						   {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""}};
 
-	insert(TABLEMAP[TABLE::ARTISTS],artistMap);
+	if(insert(TABLEMAP[TABLE::ARTISTS], artistMap))
+		emit artistInserted(artistMap);
 
-	QVariantMap albumMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album},
+	const QVariantMap albumMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK], artwork},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI],""}};
 
-	insert(TABLEMAP[TABLE::ALBUMS],albumMap);
+	if(insert(TABLEMAP[TABLE::ALBUMS], albumMap))
+		emit albumInserted(albumMap);
 
-	QVariantMap trackMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url},
+	const QVariantMap trackMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCE], sourceUrl},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::TRACK], trackNumber},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::TITLE], title},
@@ -290,17 +282,22 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::DURATION], duration},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::COUNT], 0},
-						  {FMH::MODEL_NAME[FMH::MODEL_KEY::FAV], fav},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::RATE], 0},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::RELEASEDATE], year},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime()},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::LYRICS],""},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::GENRE], genre},
-						  {FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR], ""},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::COMMENT], ""}};
 
-	return this->insert(BAE::TABLEMAP[BAE::TABLE::TRACKS], trackMap);
+	if(this->insert(BAE::TABLEMAP[BAE::TABLE::TRACKS], trackMap))
+	{
+		qDebug() << "TrackInserted!!!!!!" << trackMap;
+		emit trackInserted(trackMap);
+		return true;
+	}
+
+	return false;
 }
 
 bool CollectionDB::updateTrack(const FMH::MODEL &track)
@@ -340,17 +337,6 @@ bool CollectionDB::rateTrack(const QString &path, const int &value)
 	return false;
 }
 
-
-bool CollectionDB::colorTagTrack(const QString &path, const QString &value)
-{
-	if(update(TABLEMAP[TABLE::TRACKS],
-			  FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR],
-			  value,
-			  FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-			  path)) return true;
-	return false;
-}
-
 bool CollectionDB::lyricsTrack(const FMH::MODEL &track, const QString &value)
 {
 
@@ -362,22 +348,6 @@ bool CollectionDB::lyricsTrack(const FMH::MODEL &track, const QString &value)
 	return false;
 }
 
-bool CollectionDB::tagsTrack(const FMH::MODEL &track, const QString &value, const QString &context)
-{
-	auto url = track[FMH::MODEL_KEY::URL];
-
-	qDebug()<<"INSERTIN TRACK TAG"<<value<<context<<url;
-
-	QVariantMap tagMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::TAG],value},{FMH::MODEL_NAME[FMH::MODEL_KEY::CONTEXT],context}};
-
-	QVariantMap trackTagMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::TAG], value},
-							 {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTEXT], context},
-							 {FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url}};
-
-	insert(TABLEMAP[TABLE::TAGS],tagMap);
-	insert(TABLEMAP[TABLE::TRACKS_TAGS],trackTagMap);
-	return true;
-}
 
 bool CollectionDB::albumTrack(const FMH::MODEL &track, const QString &value)
 {
@@ -435,122 +405,6 @@ bool CollectionDB::playedTrack(const QString &url, const int &increment)
 	return false;
 }
 
-bool CollectionDB::wikiTrack(const FMH::MODEL &track, const QString &value)
-{
-	auto url = track[FMH::MODEL_KEY::URL];
-
-	if(update(TABLEMAP[TABLE::TRACKS],
-			  FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI],
-			  value,
-			  FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-			  url)) return true;
-
-	return false;
-}
-
-bool CollectionDB::wikiArtist(const FMH::MODEL &track, const QString &value)
-{
-	auto artist = track[FMH::MODEL_KEY::ARTIST];
-
-	if(update(TABLEMAP[TABLE::ARTISTS],
-			  FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI],
-			  value,
-			  FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],
-			  artist)) return true;
-	return false;
-}
-
-bool CollectionDB::tagsArtist(const FMH::MODEL &track, const QString &value, const QString &context)
-{
-	auto artist = track[FMH::MODEL_KEY::ARTIST];
-
-	QVariantMap tagMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::TAG], value},
-						{FMH::MODEL_NAME[FMH::MODEL_KEY::CONTEXT], context}};
-
-	QVariantMap artistTagMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::TAG], value},
-							  {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTEXT], context},
-							  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist}};
-
-	insert(TABLEMAP[TABLE::TAGS],tagMap);
-	insert(TABLEMAP[TABLE::ARTISTS_TAGS],artistTagMap);
-
-	return true;
-
-}
-
-bool CollectionDB::wikiAlbum(const FMH::MODEL &track,  QString value)
-{
-	auto artist = track[FMH::MODEL_KEY::ARTIST];
-	auto album = track[FMH::MODEL_KEY::ALBUM];
-
-	auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(
-				TABLEMAP[TABLE::ALBUMS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], value.replace("\"","\"\""),
-			FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM],
-			album,FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist);
-
-
-	qDebug()<<queryStr;
-	auto query = this->getQuery(queryStr);
-	return query.exec();
-}
-
-bool CollectionDB::tagsAlbum(const FMH::MODEL &track, const QString &value, const QString &context)
-{
-	auto artist = track[FMH::MODEL_KEY::ARTIST];
-	auto album = track[FMH::MODEL_KEY::ALBUM];
-
-	QVariantMap tagMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::TAG],value},{FMH::MODEL_NAME[FMH::MODEL_KEY::CONTEXT],context}};
-
-	QVariantMap albumsTagMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::TAG],value},
-							  {FMH::MODEL_NAME[FMH::MODEL_KEY::CONTEXT],context},
-							  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],artist},
-							  {FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM],album}};
-
-	insert(TABLEMAP[TABLE::TAGS],tagMap);
-	insert(TABLEMAP[TABLE::ALBUMS_TAGS],albumsTagMap);
-	return true;
-}
-
-bool CollectionDB::addPlaylist(const QString &title)
-{
-	if(!title.isEmpty())
-	{
-		QVariantMap playlist {{FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST], title},
-							  {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE], QDateTime::currentDateTime()}};
-
-		if(insert(TABLEMAP[TABLE::PLAYLISTS],playlist))
-			return true;
-	}
-
-	return false;
-}
-
-bool CollectionDB::trackPlaylist(const QString &url, const QString &playlist)
-{
-	QVariantMap map {{FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist},
-					 {FMH::MODEL_NAME[FMH::MODEL_KEY::URL],url},
-					 {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],QDate::currentDate()}};
-
-	if(insert(TABLEMAP[TABLE::TRACKS_PLAYLISTS],map))
-		return true;
-
-	return false;
-}
-
-
-bool CollectionDB::addFolder(const QString &url)
-{
-	QVariantMap map {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL],url},
-					 {FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],QDateTime::currentDateTime()}};
-
-	if(insert(TABLEMAP[TABLE::FOLDERS],map))
-		return true;
-
-	return false;
-}
-
-
 FMH::MODEL_LIST CollectionDB::getDBData(const QStringList &urls)
 {
 	FMH::MODEL_LIST mapList;
@@ -595,20 +449,6 @@ FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt, std::function<b
 	return mapList;
 }
 
-QStringList CollectionDB::dataToList(const FMH::MODEL_LIST &list, const FMH::MODEL_KEY &key)
-{
-	QStringList res;
-
-	if(list.isEmpty())
-		return res;
-
-	for(const auto &item : list)
-		res << item[key];
-
-	return res;
-}
-
-
 FMH::MODEL_LIST CollectionDB::getAlbumTracks(const QString &album, const QString &artist, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
 {
 	const auto queryTxt = QString("SELECT * FROM %1 WHERE %2 = \"%3\" AND %4 = \"%5\" ORDER by %6 %7").arg(TABLEMAP[TABLE::TRACKS],
@@ -649,19 +489,11 @@ QStringList CollectionDB::getArtistAlbums(const QString &artist)
 	return albums;
 }
 
-FMH::MODEL_LIST CollectionDB::getBabedTracks(const FMH::MODEL_KEY &orderBy, const BAE::W &order)
-{
-	const auto queryTxt = QString("SELECT * FROM %1 WHERE %2 = 1 ORDER by %3 %4").arg(TABLEMAP[TABLE::TRACKS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
-			FMH::MODEL_NAME[orderBy], SLANG[order]);
-	return this->getDBData(queryTxt);
-}
-
 FMH::MODEL_LIST CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, const QString &search)
 {
 	QString queryTxt;
 
-	if(where == FMH::MODEL_KEY::COUNT || where == FMH::MODEL_KEY::RATE || where == FMH::MODEL_KEY::FAV)
+	if(where == FMH::MODEL_KEY::COUNT || where == FMH::MODEL_KEY::RATE)
 		queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
 				FMH::MODEL_NAME[where],
 				search);
@@ -674,38 +506,6 @@ FMH::MODEL_LIST CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, con
 				FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],
 				FMH::MODEL_NAME[where],
 				search);
-
-
-	else if(where == FMH::MODEL_KEY::PLAYLIST)
-
-		queryTxt = QString("SELECT t.* FROM %1 t INNER JOIN %2 tp ON t.%3 = tp.%3 WHERE tp.%4 = \"%5\"").arg(TABLEMAP[TABLE::TRACKS],
-				TABLEMAP[TABLE::TRACKS_PLAYLISTS],
-				FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-				FMH::MODEL_NAME[where],
-				search);
-
-
-	else if(where == FMH::MODEL_KEY::TAG)
-
-		queryTxt = QString("SELECT t.* FROM %1 t INNER JOIN %2 tt ON t.%3 = tt.%3 WHERE tt.%4 = \"%5\" COLLATE NOCASE "
-						   "UNION "
-						   "SELECT t.* FROM %1 t INNER JOIN %6 at ON t.%7 = at.%7 AND t.%8 = at.%8 WHERE at.%4 = \"%5\" COLLATE NOCASE "
-						   "UNION "
-						   "SELECT t.* FROM %1 t INNER JOIN %9 art ON t.%8 = art.%8 WHERE art.%4 LIKE \"%%5%\" COLLATE NOCASE "
-						   "UNION "
-						   "SELECT DISTINCT t.* FROM %1 t INNER JOIN %9 at ON t.%8 = at.%4 WHERE at.%8 LIKE \"%%5%\" COLLATE NOCASE").arg(
-					TABLEMAP[TABLE::TRACKS],
-				TABLEMAP[TABLE::TRACKS_TAGS],
-				FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-				FMH::MODEL_NAME[where],
-				search,
-				TABLEMAP[TABLE::ALBUMS_TAGS],
-				FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM],
-				FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],
-				TABLEMAP[TABLE::ARTISTS_TAGS]);
-
-	//    else if(where == FMH::MODEL_KEY::SQL)
-	//        queryTxt = search;
 	else
 		queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE t.%2 LIKE \"%%3%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000").arg(TABLEMAP[TABLE::TRACKS],
 				FMH::MODEL_NAME[where],
@@ -715,50 +515,12 @@ FMH::MODEL_LIST CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, con
 
 }
 
-FMH::MODEL_LIST CollectionDB::getPlaylistTracks(const QString &playlist, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
-{
-	const auto queryTxt= QString("SELECT t.* FROM %1 t INNER JOIN %2 tp ON t.%3 = tp.%3 WHERE tp.%4 = '%5' ORDER BY tp.%6 %7").arg(TABLEMAP[TABLE::TRACKS],
-			TABLEMAP[TABLE::TRACKS_PLAYLISTS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
-			playlist, FMH::MODEL_NAME[orderBy], SLANG[order]);
-
-	return this->getDBData(queryTxt);
-}
-
-FMH::MODEL_LIST CollectionDB::getFavTracks(const int &stars, const int &limit, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
-{
-	const auto queryTxt= QString("SELECT * FROM %1 WHERE %2 >= %3 ORDER BY %4 %5 LIMIT %6" ).arg(TABLEMAP[TABLE::TRACKS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::RATE],
-			QString::number(stars),
-			FMH::MODEL_NAME[orderBy],SLANG[order],QString::number(limit));
-
-	return this->getDBData(queryTxt);
-}
-
 FMH::MODEL_LIST CollectionDB::getRecentTracks(const int &limit, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
 {
 	const auto queryTxt= QString("SELECT * FROM %1 ORDER BY strftime(\"%s\",%2) %3 LIMIT %4" ).arg(TABLEMAP[TABLE::TRACKS],
 			FMH::MODEL_NAME[orderBy],SLANG[order],QString::number(limit));
 
 	return this->getDBData(queryTxt);
-}
-
-FMH::MODEL_LIST CollectionDB::getOnlineTracks(const FMH::MODEL_KEY &orderBy, const BAE::W &order)
-{
-	const auto queryTxt= QString("SELECT * FROM %1 WHERE %2 LIKE \"%3%\" ORDER BY %4 %5" ).arg(TABLEMAP[TABLE::TRACKS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-			YoutubeCachePath,
-			FMH::MODEL_NAME[orderBy],
-			SLANG[order]);
-
-	return this->getDBData(queryTxt);
-}
-
-QStringList CollectionDB::getSourcesFolders()
-{
-	const auto data = this->getDBData("select * from folders order by strftime(\"%s\", addDate) desc");
-	return this->dataToList(data, FMH::MODEL_KEY::URL);
 }
 
 FMH::MODEL_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const int &limit, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
@@ -773,26 +535,6 @@ FMH::MODEL_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const 
 	return this->getDBData(queryTxt);
 }
 
-
-QString CollectionDB::trackColorTag(const QString &path)
-{
-	QString color;
-	auto query = this->getDBData(QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::COLOR],
-								 TABLEMAP[TABLE::TRACKS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL],path));
-
-	for(auto track : query)
-		color = track[FMH::MODEL_KEY::COLOR];
-
-	return color;
-}
-
-QStringList CollectionDB::getTrackTags(const QString &path)
-{
-	Q_UNUSED(path);
-	return {};
-}
-
 int CollectionDB::getTrackStars(const QString &path)
 {
 	int stars = 0;
@@ -804,75 +546,6 @@ int CollectionDB::getTrackStars(const QString &path)
 		stars = track[FMH::MODEL_KEY::RATE].toInt();
 
 	return stars;
-}
-
-//QStringList CollectionDB::getArtistTags(const QString &artist)
-//{
-//    QStringList tags;
-
-//    auto queryStr = QString("SELECT at.%1 FROM %2 at "
-//                            "INNER JOIN %3 ta ON ta.%1 = at.%1 "
-//                            "WHERE ta.%4 = '%5' "
-//                            "AND at.%6 = \"%7\"").arg(FMH::MODEL_NAME[KEY::TAG],
-//            TABLEMAP[TABLE::ARTISTS_TAGS],
-//            TABLEMAP[TABLE::TAGS],
-//            FMH::MODEL_NAME[KEY::CONTEXT],
-//            PULPO::CONTEXT_MAP[PULPO::CONTEXT::ARTIST_SIMILAR],
-//            FMH::MODEL_NAME[KEY::ARTIST],artist);
-//    auto query = this->getDBData(queryStr);
-//    for(auto track : query)
-//        tags << track[KEY::TAG];
-
-//    return tags;
-//}
-
-
-//QStringList CollectionDB::getAlbumTags(const QString &album, const QString &artist)
-//{
-//    QStringList tags;
-
-//    auto queryStr = QString("SELECT at.%1 FROM %2 at "
-//                            "INNER JOIN %3 ta ON ta.%1 = at.%1 "
-//                            "WHERE ta.%4 = '%5' AND at.%6 = \"%7\" AND at.%8 = \"%9\"").arg(FMH::MODEL_NAME[KEY::TAG],
-//            TABLEMAP[TABLE::ALBUMS_TAGS],
-//            TABLEMAP[TABLE::TAGS],
-//            FMH::MODEL_NAME[KEY::CONTEXT],
-//            PULPO::CONTEXT_MAP[PULPO::CONTEXT::TAG],
-//            FMH::MODEL_NAME[KEY::ALBUM],album,
-//            FMH::MODEL_NAME[KEY::ARTIST],artist);
-
-//    auto query = this->getDBData(queryStr);
-
-//    for(auto track : query)
-//        tags << track[KEY::TAG];
-
-//    return tags;
-//}
-
-QStringList CollectionDB::getPlaylistsList()
-{
-	QStringList playlists;
-	auto queryTxt = QString("SELECT %1, %2 FROM %3 ORDER BY %2 DESC").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],
-			TABLEMAP[TABLE::PLAYLISTS]);
-
-	for(auto data : this->getDBData(queryTxt))
-		playlists << data[FMH::MODEL_KEY::PLAYLIST];
-
-	return playlists;
-}
-
-FMH::MODEL_LIST CollectionDB::getPlaylists()
-{
-	auto queryTxt = QString("SELECT %1, %2 FROM %3 ORDER BY %2 DESC").arg(FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::ADDDATE],
-			TABLEMAP[TABLE::PLAYLISTS]);
-
-	return this->getDBData(queryTxt, [](FMH::MODEL &item)
-	{
-		item[FMH::MODEL_KEY::TYPE] = "public";
-		return true;
-	});
 }
 
 bool CollectionDB::removeTrack(const QString &path)
@@ -896,28 +569,23 @@ QSqlQuery CollectionDB::getQuery(const QString &queryTxt)
 bool CollectionDB::removeSource(const QString &url)
 {
 	const auto path = url.endsWith("/") ? url.chopped(1) : url;
-	auto queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::TRACKS_PLAYLISTS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL], path);
-	qDebug() << queryTxt;
+
+	auto queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::TRACKS],
+			FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCE], path);
+
 	auto query = this->getQuery(queryTxt);
+	query.prepare(queryTxt);
+
 	if(query.exec())
 	{
-		queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::TRACKS],
-				FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCE], path);
-
+		queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::SOURCES],
+				FMH::MODEL_NAME[FMH::MODEL_KEY::URL], path);
 		query.prepare(queryTxt);
 		if(query.exec())
 		{
-			queryTxt = QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(TABLEMAP[TABLE::SOURCES],
-					FMH::MODEL_NAME[FMH::MODEL_KEY::URL],path);
-			query.prepare(queryTxt);
-			if(query.exec())
-			{
-				this->removeFolder(path);
-				if(cleanAlbums())
-					cleanArtists();
-				return true;
-			}
+			if(cleanAlbums())
+				cleanArtists();
+			return true;
 		}
 	}
 
@@ -976,41 +644,12 @@ void CollectionDB::insertArtwork(const FMH::MODEL &track)
 	emit artworkInserted(track);
 }
 
-
-bool CollectionDB::removePlaylistTrack(const QString &url, const QString &playlist)
-{
-	auto queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\" AND %4 = \"%5\"").arg(TABLEMAP[TABLE::TRACKS_PLAYLISTS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],
-			playlist,
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-			url);
-
-	auto query = this->getQuery(queryTxt);
-	return query.exec();
-}
-
-bool CollectionDB::removePlaylist(const QString &playlist)
-{
-	QString queryTxt;
-	queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS_PLAYLISTS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist);
-
-	auto query = this->getQuery(queryTxt);
-	if(!query.exec()) return false;
-
-	queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::PLAYLISTS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::PLAYLIST],playlist);
-
-	query.prepare(queryTxt);
-	return query.exec();
-}
-
 void CollectionDB::removeMissingTracks()
 {
 	auto tracks = this->getDBData("select url from tracks");
 
 	for(auto track : tracks)
-		if(!BAE::fileExists(track[FMH::MODEL_KEY::URL]))
+		if(!FMH::fileExists(track[FMH::MODEL_KEY::URL]))
 			this->removeTrack(track[FMH::MODEL_KEY::URL]);
 
 }
@@ -1044,28 +683,6 @@ bool CollectionDB::cleanArtists()
 	return query.exec();
 }
 
-bool CollectionDB::removeFolder(const QString &url)
-{
-	const auto queryTxt=QString("DELETE FROM %1 WHERE %2 LIKE \"%3%\"").arg(
-				TABLEMAP[TABLE::FOLDERS],
-			FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url);
-
-	qDebug()<<queryTxt;
-
-	auto query = this->getQuery(queryTxt);
-	return query.exec();
-}
-
-bool CollectionDB::favTrack(const QString &path, const bool &value)
-{
-	if(this->update(TABLEMAP[TABLE::TRACKS],
-					FMH::MODEL_NAME[FMH::MODEL_KEY::FAV],
-					value ? 1 : 0,
-					FMH::MODEL_NAME[FMH::MODEL_KEY::URL],
-					path)) return true;
-	return false;
-}
-
 bool CollectionDB::removeAlbum(const QString &album, const QString &artist)
 {
 	const auto queryTxt = QString("DELETE FROM %1 WHERE %2 = \"%3\" AND %4 = \"%5\"").arg(TABLEMAP[TABLE::ALBUMS],
@@ -1081,7 +698,7 @@ bool CollectionDB::removeAlbum(const QString &album, const QString &artist)
 bool CollectionDB::cleanAlbums()
 {
 	//    delete from albums where (album, artist) in (select a.album, a.artist from albums a except select distinct album, artist from tracks);
-   const auto queryTxt=QString("DELETE FROM %1 WHERE (%2, %3) IN (SELECT %2, %3 FROM %1 EXCEPT SELECT DISTINCT %2, %3  FROM %4)").arg(
+	const auto queryTxt=QString("DELETE FROM %1 WHERE (%2, %3) IN (SELECT %2, %3 FROM %1 EXCEPT SELECT DISTINCT %2, %3  FROM %4)").arg(
 				TABLEMAP[TABLE::ALBUMS],
 			FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM],
 			FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],

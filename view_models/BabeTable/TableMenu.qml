@@ -13,6 +13,7 @@ Menu
 {
     id: control
     width: Maui.Style.unit * 200
+    modal: true
 
     property int rate : 0
     property bool fav : false
@@ -30,7 +31,6 @@ Menu
     signal shareClicked()
     signal selectClicked()
     signal rateClicked(int rate)
-    signal colorClicked(color color)
     signal infoClicked()
     signal copyToClicked()
     signal appendClicked()
@@ -153,7 +153,7 @@ Menu
     {
         text: i18n("Show in folder")
         icon.name: "folder-open"
-        visible: !isAndroid
+        visible: !Maui.Handy.isAndroid
         onTriggered:
         {
             openWithClicked()
@@ -283,24 +283,6 @@ Menu
                     rateClicked(rate)
                     close()
                 }
-            }
-        }
-    }
-
-
-    MenuItem
-    {
-        id: colorsRow
-        width: parent.width
-        height:  Maui.Style.iconSizes.medium + Maui.Style.space.small
-
-        ColorTagsBar
-        {
-            anchors.fill: parent
-            onColorClicked:
-            {
-                control.colorClicked(color)
-                control.close()
             }
         }
     }

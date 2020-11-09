@@ -24,7 +24,7 @@ Item
     ToolTip.delay: 1000
     ToolTip.timeout: 5000
     ToolTip.visible: _mouseArea.containsMouse && !Kirigami.Settings.isMobile
-    ToolTip.text: currentTrack ? currentTrack.title + " - " + currentTrack.artist : ""
+    ToolTip.text: root.title
 
     Maui.Badge
     {
@@ -37,7 +37,11 @@ Item
     Connections
     {
         target: mainPlaylist.table
-        onCountChanged: anim.run(control.y)
+        ignoreUnknownSignals: true
+        function onCountChanged()
+        {
+             anim.run(control.y)
+        }
     }
 
     NumberAnimation on y
@@ -78,8 +82,8 @@ Item
 
         drag.minimumY: 0
         drag.maximumY: root.height - control.height
-        onClicked: _drawer.visible ? _drawer.close() : _drawer.open()
-        onDoubleClicked: focusView = true
+        onClicked: sideBar.hidden ? sideBar.close() : sideBar.open()
+        onDoubleClicked: toggleFocusView()
 
         Rectangle
         {

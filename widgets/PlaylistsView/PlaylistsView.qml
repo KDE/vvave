@@ -1,15 +1,17 @@
 import QtQuick 2.10
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.10
+import QtGraphicalEffects 1.0
+
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.0 as Maui
-import TracksList 1.0
-import QtGraphicalEffects 1.0
+import org.maui.vvave 1.0
 
 import "../../view_models/BabeTable"
 import "../../view_models"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
+import "../../utils/Player.js" as Player
 
 StackView
 {
@@ -18,24 +20,21 @@ StackView
 
     property string currentPlaylist
     property string playlistQuery
-    property alias playlistModel : playlistViewModel.model
-    property alias playlistViewList : playlistViewModel
-
-    property alias listModel : filterList.listModel
-
-    signal rowClicked(var track)
-    signal playTrack(var track)
-    signal appendTrack(var track)
-    signal playAll()
-    signal syncAndPlay(string playlist)
-    signal appendAll()
 
     property Flickable flickable : currentItem.flickable
 
-    initialItem: PlaylistsViewModel
+    Maui.NewDialog
     {
-        id: playlistViewModel
+        id: newPlaylistDialog
+        title: i18n("Add new playlist")
+        message: i18n("Create a new playlist to organize your music collection")
+        onFinished: addPlaylist(text)
+        acceptButton.text: i18n("Create")
+        rejectButton.visible: false
+    }
 
+    initialItem:  PlaylistsViewModel
+    {
         Maui.FloatingButton
         {
             id: _overlayButton
@@ -43,102 +42,115 @@ StackView
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.margins: Maui.Style.toolBarHeight
-            anchors.bottomMargin: Maui.Style.toolBarHeight
+            anchors.bottomMargin: Maui.Style.toolBarHeight + flickable.bottomMargin
             icon.name : "list-add"
             onClicked: newPlaylistDialog.open()
         }
     }
 
-    Maui.NewDialog
+    Component
     {
-        id: newPlaylistDialog
-        title: i18n("Add new playlist")
-        onFinished: addPlaylist(text)
-        acceptButton.text: i18n("Create")
-        rejectButton.visible: false
-    }
+        id: _filterListComponent
 
-    BabeTable
-    {
-        id: filterList
-        property bool isPublic: true
-
-        coverArtVisible: true
-        showTitle: false
-        title: control.currentPlaylist
-        holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.isMask: true
-        holder.title : title
-        holder.body: "Your playlist is empty,<br>start adding new music to it"
-        holder.emojiSize: Maui.Style.iconSizes.huge
-        headBar.visible: true
-        headBar.farLeftContent: ToolButton
+        BabeTable
         {
-            icon.name: "go-previous"
-            onClicked: control.pop()
-        }
-
-        contextMenuItems: MenuItem
-        {
-            text: i18n("Remove from playlist")
-        }
-
-        onRowClicked: control.rowClicked(filterList.listModel.get(index))
-        onQuickPlayTrack: control.playTrack(filterList.listModel.get(filterList.currentIndex))
-        onAppendTrack: control.appendTrack(filterList.listModel.get(filterList.currentIndex))
-
-        onPlayAll:
-        {
-            if(filterList.isPublic)
-                control.syncAndPlay(control.currentPlaylist)
-            else
-                control.playAll()
-
-            control.pop()
-        }
-
-        onAppendAll: appendAll()
-        onPulled: populate(playlistQuery)
-        section.criteria: ViewSection.FullString
-        section.delegate: Maui.LabelDelegate
-        {
-            label: filterList.section.property === i18n("stars") ? H.setStars(section) : section
-            isSection: true
-            labelTxt.font.family: "Material Design Icons"
-            width: filterList.width
-        }
-
-        Connections
-        {
-            target: filterList.contextMenu
-
-            onRemoveClicked:
+            id: filterList
+            property bool isPublic: true
+            signal removeFromPlaylist(string url)
+            list.query: control.playlistQuery
+            coverArtVisible: true
+            showTitle: false
+            title: control.currentPlaylist
+            holder.emoji: "qrc:/assets/dialog-information.svg"
+            holder.isMask: true
+            holder.title : title
+            holder.body: "Your playlist is empty,<br>start adding new music to it"
+            holder.emojiSize: Maui.Style.iconSizes.huge
+            headBar.visible: true
+            headBar.farLeftContent: ToolButton
             {
-                playlistsList.removeTrack(playlistViewList.currentIndex, filterList.listModel.get(filterList.currentIndex).url)
-                populate(playlistQuery)
+                icon.name: "go-previous"
+                onClicked: control.pop()
+            }
+
+            contextMenuItems: MenuItem
+            {
+                text: i18n("Remove from playlist")
+                onTriggered:
+                {
+                    playlistsList.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
+                    listModel.list.remove(filterList.currentIndex)
+                }
+            }
+
+            onQueueTrack: Player.queueTracks([listModel.get(index)], index)
+
+            onRowClicked: Player.quickPlay(filterList.listModel.get(index))
+            onAppendTrack: Player.addTrack(filterList.listModel.get(index))
+            onQuickPlayTrack: Player.quickPlay(filterList.listModel.get(index))
+
+            onPlayAll:
+            {
+                if(filterList.isPublic)
+                {
+                    root.sync = true
+                    root.syncPlaylist = currentPlaylist
+                }
+
+                Player.playAllModel(listModel.list)
+                control.pop()
+            }
+
+            onAppendAll: Player.appendAllModel(listModel.list)
+
+            section.criteria: ViewSection.FullString
+            section.delegate: Maui.LabelDelegate
+            {
+                label: filterList.section.property === i18n("stars") ? H.setStars(section) : section
+                isSection: true
+                labelTxt.font.family: "Material Design Icons"
+                width: filterList.width
+            }
+
+            Component.onCompleted:
+            {
+                filterList.group = false
+
+                switch(currentPlaylist)
+                {
+                case "Most Played":
+                    playlistQuery = Q.GET.mostPlayedTracks
+                    filterList.listModel.sort = "count"
+                    break;
+
+                case "Rating":
+                    filterList.listModel.sort = "rate"
+                    filterList.group = true
+
+                    playlistQuery = Q.GET.favoriteTracks;
+                    break;
+
+                case "Recent":
+                    playlistQuery = Q.GET.recentTracks;
+                    filterList.listModel.sort = "adddate"
+                    filterList.group = true
+                    break;
+
+                default:
+                    playlistQuery = Q.GET.playlistTracks_.arg(currentPlaylist)
+                    break;
+                }
+
+                filterList.isPublic = isPublic
+                filterList.listModel.filter = ""
             }
         }
     }
 
-    function appendToExtraList(res)
+    function populate(playlist, isPublic)
     {
-        if(res.length>0)
-            for(var i in res)
-                playlistViewModelFilter.model.append(res[i])
-    }
-
-    function populate(query, isPublic)
-    {
-        playlistQuery = query
-        filterList.isPublic = isPublic
-        filterList.list.query = playlistQuery
-        filterList.listModel.filter = ""
-        control.push(filterList)
-    }
-
-    function removePlaylist()
-    {
-        playlistsList.removePlaylist(playlistViewList.currentIndex)
+        currentPlaylist = playlist
+        control.push(_filterListComponent)
     }
 
     function addPlaylist(text)

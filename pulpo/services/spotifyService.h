@@ -2,10 +2,9 @@
 #define SPOTIFYSERVICE_H
 
 #include <QObject>
-#include "../pulpo.h"
+#include "../service.h"
 
-
-class spotify : public Pulpo
+class spotify : public Service
 {
     Q_OBJECT
 
@@ -15,13 +14,13 @@ private:
     const QString CLIENT_SECRET = "b3f1562559f3405dbcde4a435f50089a";
 
 public:
-    explicit spotify(const FMH::MODEL &song);
-    virtual bool setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &infoType);
+    explicit spotify();
+    void set(const PULPO::REQUEST &request) override final;
 
 protected:
-    virtual bool parseArtist();
-    virtual bool parseAlbum();
-    virtual bool parseTrack();
+    virtual void parseArtist(const QByteArray &array) override final;
+    virtual void parseAlbum(const QByteArray &array) override final;
+    virtual void parseTrack(const QByteArray &array) override final;
 };
 
 #endif // SPOTIFY_H

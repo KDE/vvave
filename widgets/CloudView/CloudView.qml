@@ -1,13 +1,15 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
+
 import org.kde.mauikit 1.0 as Maui
 import org.kde.kirigami 2.7 as Kirigami
+
+import org.maui.vvave 1.0
+
 import "../../view_models/BabeTable"
 import "../../view_models/BabeGrid"
 import "../../utils/Player.js" as Player
-
-import CloudList 1.0
 
 Maui.Page
 {
@@ -165,12 +167,11 @@ Maui.Page
         holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.title : i18n("Opps!")
         holder.body: i18n("You don't have an account set up.\nYou can set up your account now by clicking here or under the Accounts options in the main menu")
-        listView.spacing: Maui.Style.space.small * (Kirigami.Settings.isMobile ? 1.4 : 1.2)
 
         Connections
         {
             target: _listView.holder
-            onActionTriggered:
+            function onActionTriggered()
             {
                 if(root.accounts)
                     root.accounts.open()
@@ -196,7 +197,7 @@ Maui.Page
             }
         }
 
-        listView.header: Rectangle
+        flickable.header: Rectangle
         {
             Kirigami.Theme.inherit: false
             width: parent.width
@@ -230,7 +231,7 @@ Maui.Page
             }
         }
 
-        listView.headerPositioning: ListView.PullBackHeader
+        flickable.headerPositioning: ListView.PullBackHeader
 
 
         delegate: TableDelegate

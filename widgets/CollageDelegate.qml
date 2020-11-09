@@ -1,8 +1,7 @@
-import QtQuick 2.14
+import QtQuick 2.10
 import QtGraphicalEffects 1.0
-import QtQuick.Controls 2.14
+import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
-
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.2 as Maui
 
@@ -14,36 +13,66 @@ Maui.ItemDelegate
 
     property int albumSize : Maui.Style.iconSizes.huge
     property int albumRadius : Maui.Style.radiusV
-    property bool showLabels : label1.text.length || label2.text.length
+    property bool showLabels : true
 
     property alias label1 : _labelsLayout.label1
     property alias label2 : _labelsLayout.label2
     property alias template: _labelsLayout
 
-    property alias image : _image
+    property var images : []
+    property string tag
+
+    function randomHexColor()
+    {
+        var color = '#', i = 5;
+        do{ color += "0123456789abcdef".substr(Math.random() * 16,1); }while(i--);
+        return color;
+    }
 
     Item
     {
         id: _cover
         anchors.fill: parent
 
-        Image
+        Rectangle
         {
             id: _image
             width: parent.width
             height: width
-            sourceSize.width: width
-            sourceSize.height: height
+            radius: albumRadius
+            color: randomHexColor()
 
-            fillMode: Image.PreserveAspectCrop
-            smooth: true
-            asynchronous: true
-
-            onStatusChanged:
+            GridLayout
             {
-                if (status == Image.Error)
-                    source = "qrc:/assets/cover.png"
-            }         
+                anchors.fill: parent
+                columns: 2
+                rows: 2
+                columnSpacing: 0
+                rowSpacing: 0
+
+                Repeater
+                {
+                    id: _repeater
+                    model: control.images
+
+                    delegate: Rectangle
+                    {
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        color: Qt.rgba(0,0,0,0.3)
+                        Image
+                        {
+                            anchors.fill: parent
+                            sourceSize.width: 80
+                            sourceSize.height: 80
+                            asynchronous: true
+                            smooth: false
+                            source: modelData ? modelData : "qrc:/assets/cover.png"
+                            fillMode: Image.PreserveAspectCrop
+                        }
+                    }
+                }
+            }
         }
 
         Item
@@ -61,8 +90,8 @@ Maui.ItemDelegate
             Rectangle
             {
                 anchors.fill: parent
-                color: control.isCurrentItem ? Kirigami.Theme.highlightColor : _labelBg.Kirigami.Theme.backgroundColor
-                opacity: control.isCurrentItem || control.hovered ? 1 : 0.7
+                color: _labelBg.Kirigami.Theme.backgroundColor
+                opacity: 0.7
             }
 
             Maui.ListItemTemplate
@@ -82,7 +111,6 @@ Maui.ItemDelegate
                 label2.font.pointSize: Maui.Style.fontSizes.medium
                 label2.wrapMode: Text.NoWrap
             }
-
         }
 
         layer.enabled: albumRadius
@@ -106,24 +134,11 @@ Maui.ItemDelegate
 
     Rectangle
     {
-        anchors.centerIn: _cover
-
-                            width: _image.status === Image.Ready ? Math.min(parent.width, _image.paintedWidth) : parent.width
-                            height:  _image.status === Image.Ready ? Math.min(parent.height, _image.paintedHeight) : parent.height
-
+        anchors.fill: parent
         color: "transparent"
         border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
         radius: albumRadius
-        opacity: 0.6
-
-        Rectangle
-        {
-            anchors.fill: parent
-            color: "transparent"
-            radius: parent.radius - 0.5
-            border.color: Qt.lighter(Kirigami.Theme.backgroundColor, 2)
-            opacity: 0.8
-            anchors.margins: 1
-        }
     }
+
 }
+

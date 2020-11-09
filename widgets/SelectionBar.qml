@@ -2,18 +2,14 @@ import QtQuick 2.0
 import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
-import "../utils"
-import ".."
-import "../utils/Help.js" as H
+
 import "../utils/Player.js" as Player
-import "../view_models"
 import "../view_models/BabeTable"
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
-import org.kde.mauikit 1.1 as MauiLab
+import org.kde.mauikit 1.2 as Maui
 
-MauiLab.SelectionBar
+Maui.SelectionBar
 {
     id: control
     width: Maui.Style.unit * 200
@@ -29,7 +25,7 @@ MauiLab.SelectionBar
     {
         isCurrentItem: false
         Kirigami.Theme.inherit: true
-        width: parent.width
+        width: ListView.view.width
         number: false
         coverArt: true
         showQuickActions: false
@@ -45,7 +41,7 @@ MauiLab.SelectionBar
         icon.name: "media-playlist-play"
         onTriggered:
         {
-            mainPlaylist.list.clear()
+            mainPlaylist.listModel.list.clear()
             Player.playAll(control.items)
         }
     }
@@ -88,7 +84,7 @@ MauiLab.SelectionBar
         icon.name: "document-save"
         onTriggered:
         {
-            playlistDialog.tracks = control.uris
+            playlistDialog.composerList.urls = control.uris
             playlistDialog.open()
         }
     }
@@ -97,18 +93,7 @@ MauiLab.SelectionBar
     {
         text: i18n("Share")
         icon.name: "document-share"
-        onTriggered:
-        {
-            if(isAndroid)
-            {
-                 Maui.Android.shareDialog(control.uris)
-                return
-            }
-
-            _dialogLoader.sourceComponent = _shareDialogComponent
-            root.dialog.urls = control.uris
-            root.dialog.open()
-        }
+        onTriggered: Maui.Platform.shareFiles(control.uris)
     }
 
     Action
@@ -120,110 +105,4 @@ MauiLab.SelectionBar
         {
         }
     }
-
-//    MenuSeparator {}
-
-//    MenuItem
-//    {
-//        id: starsRow
-//        width: parent.width
-//        height: Maui.Style.iconSizes.medium + Maui.Style.space.small
-
-//        RowLayout
-//        {
-//            anchors.fill: parent
-
-//            ToolButton
-//            {
-//                Layout.fillWidth: true
-//                Layout.fillHeight: true
-//                icon.name: starIcon
-//                icon.width: Maui.Style.iconSizes.medium
-//                icon.color: rate >= 1 ? starColor :starReg
-//                onClicked:
-//                {
-//                    rate = 1
-//                }
-//            }
-
-//            ToolButton
-//            {
-//                Layout.fillWidth: true
-//                Layout.fillHeight: true
-//                icon.width: Maui.Style.iconSizes.medium
-//                icon.name: starIcon
-//                icon.color: rate >= 2 ? starColor :starReg
-//                onClicked:
-//                {
-//                    rate = 2
-//                }
-//            }
-
-//            ToolButton
-//            {
-//                Layout.fillWidth: true
-//                Layout.fillHeight: true
-//                icon.width: Maui.Style.iconSizes.medium
-//                icon.name: starIcon
-//                icon.color: rate >= 3 ? starColor :starReg
-//                onClicked:
-//                {
-//                    rate = 3
-//                }
-//            }
-
-//            ToolButton
-//            {
-//                Layout.fillWidth: true
-//                Layout.fillHeight: true
-//                icon.width: Maui.Style.iconSizes.medium
-//                icon.name: starIcon
-//                icon.color: rate >= 4 ? starColor :starReg
-//                onClicked:
-//                {
-//                    rate = 4
-//                }
-//            }
-
-//            ToolButton
-//            {
-//                Layout.fillWidth: true
-//                Layout.fillHeight: true
-//                icon.width: Maui.Style.iconSizes.medium
-//                icon.name: starIcon
-//                icon.color: rate >= 5 ? starColor :starReg
-//                onClicked:
-//                {
-//                    rate = 5
-//                }
-//            }
-//        }
-//    }
-
-//    onRateChanged:
-//    {
-//        close()
-//        for(var i= 0; i < _selectionBar.count; i++)
-//            _selectionBarModelList.rate(i, control.rate)
-
-
-//    }
-
-//    MenuItem
-//    {
-//        id: colorsRow
-//        width: parent.width
-//        height:  Maui.Style.iconSizes.medium + Maui.Style.space.small
-
-//        ColorTagsBar
-//        {
-//            anchors.fill: parent
-//            onColorClicked:
-//            {
-//                for(var i= 0; i < _selectionBar.count; i++)
-//                    _selectionBarModelList.color(i, color)
-//                control.close()
-//            }
-//        }
-//    }
 }

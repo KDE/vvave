@@ -28,9 +28,8 @@ Page
             headBar.leftContent: ToolButton
             {
                 icon.name: "internet-services"
-                onClicked:if(!isAndroid)
+                onClicked:if(!Maui.Handy.isAndroid)
                 {
-
                     loginLoader.source = "LoginForm.qml"
                     loginLoader.item.parent = spotifyView
                     loginLoader.item.open()

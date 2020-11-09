@@ -3,84 +3,68 @@ import QtQuick.Controls 2.13
 import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 import org.kde.kirigami 2.8 as Kirigami
-import org.kde.mauikit 1.0 as Maui
-import org.maui.vvave 1.0 as Vvave
+import org.kde.mauikit 1.2 as Maui
 
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
 import "../../utils"
 import "../../widgets"
-import "../../view_models"
 import "../../view_models/BabeTable"
 
 Maui.Page
 {
     id: control
 
-    property alias list : table.list
     property alias listModel: table.listModel
     property alias listView : table.listView
     property alias table: table
-    property alias menu : playlistMenu
 
     property alias contextMenu: table.contextMenu
 
     signal coverDoubleClicked(var tracks)
     signal coverPressed(var tracks)
+
+    flickable: table.flickable
+
     focus: true
-
-    Kirigami.Theme.backgroundColor: "transparent"
-    background: Rectangle
-    {
-        color: Kirigami.Theme.backgroundColor
-        opacity: translucency ? 0.7 : 1
-    }
-
-    PlaylistMenu
-    {
-        id: playlistMenu
-        onClearOut: Player.clearOutPlaylist()
-        onClean: Player.cleanPlaylist()
-        onSaveToClicked: table.saveList()
-    }
-
     title: i18n("Now playing")
     showTitle: true
     headBar.visible: true
+
     headBar.rightContent: ToolButton
+    {
+        icon.name: "edit-delete"
+        onClicked:
         {
-            icon.name: "edit-delete"
-            onClicked:
-            {
-                player.stop()
-                mainPlaylist.table.list.clear()
-                root.sync = false
-                root.syncPlaylist = ""
-            }
-        }    
+            player.stop()
+            listModel.list.clear()
+            root.sync = false
+            root.syncPlaylist = ""
+        }
+    }
 
     headBar.leftContent:  ToolButton
     {
         icon.name: "document-save"
-        onClicked: mainPlaylist.table.saveList()
+        onClicked: saveList()
     }
 
-    flickable: table.flickable
     BabeTable
     {
         id: table
+        currentIndex: currentTrackIndex
         anchors.fill: parent
-        focus: true
+        listModel.sort: ""
+        listBrowser.enableLassoSelection: false
         headBar.visible: false
         footBar.visible: false
-        coverArtVisible: true
-        holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.isMask: true
-        holder.title : "Meh!"
-        holder.body: i18n("Start putting together your playlist!")
+
+        holder.emoji: "qrc:/assets/view-media-track.svg"
+        holder.title : "Nothing to play!"
+        holder.body: i18n("Start putting together your playlist.")
         holder.emojiSize: Maui.Style.iconSizes.huge
+
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
-        Kirigami.Theme.backgroundColor: "transparent"
 
         listView.header: Rectangle
         {
@@ -120,11 +104,13 @@ Maui.Page
         delegate: TableDelegate
         {
             id: delegate
-            width: listView.width
+            width: ListView.view.width
             number : false
             coverArt : true
+
             checkable: false
             checked: false
+
             onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
             onRightClicked:
             {
@@ -133,14 +119,8 @@ Maui.Page
 
             sameAlbum:
             {
-                if(coverArt)
-                {
-                    if(list.get(index-1))
-                    {
-                        if(list.get(index-1).album === album && list.get(index-1).artist === artist) true
-                        else false
-                    }else false
-                }else false
+                const item = listModel.get(index-1)
+                return coverArt && item && item.album === album && item.artist === artist
             }
 
             ToolButton
@@ -154,7 +134,7 @@ Maui.Page
                     if(index === currentTrackIndex)
                         player.stop()
 
-                    list.remove(index)
+                    listModel.list.remove(index)
                 }
 
                 opacity: delegate.hovered ? 0.8 : 0.6
@@ -163,15 +143,14 @@ Maui.Page
             onClicked:
             {
                 if(Maui.Handy.isTouch)
-                    control.play(index)
+                    Player.playAt(index)
             }
 
             onDoubleClicked:
             {
                 if(!Maui.Handy.isTouch)
-                    control.play(index)
+                    Player.playAt(index)
             }
-
         }
 
         Component.onCompleted:
@@ -185,32 +164,22 @@ Maui.Page
                 {
                     var where = "url = \""+lastplaylist[i]+"\""
                     var query = Q.GET.tracksWhere_.arg(where)
-                    table.list.appendQuery(query);
+                    listModel.list.appendQuery(query);
                 }
-            }else
-            {
-                query = Q.GET.babedTracks()
-                table.list.appendQuery(query);
             }
         }
     }
 
-    DropArea
+    function saveList()
     {
-        id: _dropArea
-        anchors.fill: parent
-        onDropped:
+        var trackList = []
+        if(listModel.list.count > 0)
         {
-            if(drop.urls)
-            {
-                var urls = drop.urls.join(",")
-                Vvave.Vvave.openUrls(urls.split(","))
-            }
-        }
-    }
+            for(var i = 0; i < listModel.list.count; ++i)
+                trackList.push(listModel.get(i).url)
 
-    function play(index)
-    {
-        Player.playAt(index)
+            playlistDialog.composerList.urls = trackList
+            playlistDialog.open()
+        }
     }
 }

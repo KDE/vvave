@@ -2,50 +2,73 @@
 #define VVAVE_H
 
 #include <QObject>
+#include <QQmlEngine>
+
 #include "utils/bae.h"
 #include <functional>
 
 class CollectionDB;
 class vvave : public QObject
 {
-    Q_OBJECT
-    Q_PROPERTY(QStringList sources READ sources NOTIFY sourcesChanged FINAL)
-
-private:
-    CollectionDB *db;
-    void checkCollection(const QStringList &paths = BAE::defaultSources, std::function<void (uint)> cb = nullptr);
+	Q_OBJECT
+	Q_PROPERTY(QVariantList sources READ sourcesModel NOTIFY sourcesChanged FINAL)
+	Q_PROPERTY(QList<QUrl> folders READ folders NOTIFY sourcesChanged FINAL)
+    Q_PROPERTY(bool autoScan READ autoScan WRITE setAutoScan NOTIFY autoScanChanged)
 
 public:
-    explicit vvave(QObject *parent = nullptr);
+    static vvave *qmlAttachedProperties(QObject *object);
 
-signals:
-    void refreshTables(uint size);
-    void refreshTracks();
-    void refreshAlbums();
-    void refreshArtists();
-    void openFiles(QVariantList tracks);
-    void sourcesChanged();
+	static vvave * instance()
+	{
+		static vvave vvave;
+		return &vvave;
+	}
+
+	vvave(const vvave &) = delete;
+	vvave &operator=(const vvave &) = delete;
+	vvave(vvave &&) = delete;
+	vvave &operator=(vvave &&) = delete;
+
+	QList<QUrl> folders();
+
+    bool autoScan() const;
 
 public slots:
-    ///DB Interfaces
-    /// useful functions for non modeled views and actions with not direct access to a tracksmodel or its own model
-    static QVariantList sourceFolders();
+	void openUrls(const QStringList &urls);
 
-    QStringList sources() const
-    {
-        return getSourceFolders();
-    }
+	void addSources(const QStringList &paths);
+	bool removeSource(const QString &source);
 
-    void addSources(const QStringList &paths);
+	void scanDir(const QStringList &paths = BAE::defaultSources);
 
-    bool removeSource(const QString &source);
-    static QString moodColor(const int &index);
-    static QStringList moodColors();
-    void scanDir(const QStringList &paths = BAE::defaultSources);
+	static QStringList sources();
+	static QVariantList sourcesModel();
 
-    static QStringList getSourceFolders();
-    void openUrls(const QStringList &urls);
+    void setAutoScan(bool autoScan);
 
+private:
+	explicit vvave(QObject *parent = nullptr);
+	CollectionDB *db;
+
+	uint m_newTracks = 0;
+	uint m_newAlbums = 0;
+	uint m_newArtist = 0;
+	uint m_newSources = 0;
+
+    bool m_autoScan = false;
+
+signals:
+	void sourceAdded(QUrl source);
+	void sourceRemoved(QUrl source);
+	void tracksAdded(uint size);
+	void albumsAdded(uint size);
+	void artistsAdded(uint size);
+
+	void openFiles(QVariantList tracks);
+    void sourcesChanged();
+    void autoScanChanged(bool autoScan);
 };
+
+QML_DECLARE_TYPEINFO(vvave, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // VVAVE_H

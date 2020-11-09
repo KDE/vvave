@@ -1,8 +1,34 @@
 #include "playlistsmodel.h"
 #include "db/collectionDB.h"
 
-PlaylistsModel::PlaylistsModel(QObject *parent) : MauiList(parent),
-    db(CollectionDB::getInstance())
+#ifdef STATIC_MAUIKIT
+#include "tagging.h"
+#include "fmstatic.h"
+#else
+#include <MauiKit/tagging.h>
+#include <MauiKit/fmstatic.h>
+#endif
+
+PlaylistsModel::PlaylistsModel(QObject *parent) : MauiList(parent)
+{
+    connect(Tagging::getInstance(), &Tagging::tagged, [this](QVariantMap tag)
+    {
+        emit this->preItemAppended();
+        this->list << (this->packPlaylist(tag.value("tag").toString()));
+        emit this->postItemAppended();
+    });
+
+    connect(Tagging::getInstance(), &Tagging::urlTagged, [this](QUrl, QString tag)
+    {
+        const auto index = this->mappedIndex(this->indexOf(FMH::MODEL_KEY::PLAYLIST, tag));
+        auto item = this->list[index];
+        item[FMH::MODEL_KEY::PREVIEW] = playlistArtworkPreviews(tag);
+        this->list[index] = item;
+        this->updateModel(index, {});
+    });
+}
+
+void PlaylistsModel::componentComplete()
 {
     this->setList();
 }
@@ -12,71 +38,11 @@ FMH::MODEL_LIST PlaylistsModel::items() const
     return this->list;
 }
 
-void PlaylistsModel::setSortBy(const SORTBY &sort)
-{
-    if(this->sort == sort)
-        return;
-
-    this->sort = sort;
-
-    this->preListChanged();
-    this->sortList();
-    this->postListChanged();
-    emit this->sortByChanged();
-}
-
-PlaylistsModel::SORTBY PlaylistsModel::getSortBy() const
-{
-    return this->sort;
-}
-
-void PlaylistsModel::sortList()
-{
-    const auto key = static_cast<FMH::MODEL_KEY>(this->sort);
-    qDebug()<< "SORTING LIST BY"<< this->sort;
-    qSort(this->list.begin() + this->defaultPlaylists().size(), this->list.end(), [key](const FMH::MODEL &e1, const FMH::MODEL &e2) -> bool
-    {
-        auto role = key;
-
-        switch(role)
-        {
-            case FMH::MODEL_KEY::ADDDATE:
-            {
-                auto currentTime = QDateTime::currentDateTime();
-
-                auto date1 = QDateTime::fromString(e1[role], Qt::TextDate);
-                auto date2 = QDateTime::fromString(e2[role], Qt::TextDate);
-
-                if(date1.secsTo(currentTime) <  date2.secsTo(currentTime))
-                    return true;
-
-                break;
-            }
-
-            case FMH::MODEL_KEY::TITLE:
-            {
-                const auto str1 = QString(e1[role]).toLower();
-                const auto str2 = QString(e2[role]).toLower();
-
-                if(str1 < str2)
-                    return true;
-                break;
-            }
-
-            default:
-                if(e1[role] < e2[role])
-                    return true;
-        }
-
-        return false;
-    });
-}
-
 void PlaylistsModel::setList()
 {
     emit this->preListChanged();
-    this->list << this->db->getPlaylists();
-    //    this->sortList();
+    this->list << this->defaultPlaylists();
+    this->list << this->tags();
     emit this->postListChanged();
 }
 
@@ -85,86 +51,99 @@ FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
     return FMH::MODEL
     {
         {FMH::MODEL_KEY::PLAYLIST, playlist},
+        {FMH::MODEL_KEY::COLOR, "#333"},
+        {FMH::MODEL_KEY::ICON, "tag"},
         {FMH::MODEL_KEY::TYPE, "personal"},
-        {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-        //        {FMH::MODEL_KEY::ICON, "view-media-playlist"}
+        {FMH::MODEL_KEY::DESCRIPTION, "Personal"},
+        {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews(playlist)}
     };
 }
 
-QVariantList PlaylistsModel::defaultPlaylists()
+QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
 {
-    const  auto model = FMH::MODEL_LIST  {
+    QStringList res;
+    if(playlist == "Most Played")
     {
-    {FMH::MODEL_KEY::TYPE, "default"},
-    {FMH::MODEL_KEY::DESCRIPTION, "Favorite tracks"},
-    {FMH::MODEL_KEY::COLOR, "#EC407A"},
-    {FMH::MODEL_KEY::PLAYLIST, "Favs"},
-    {FMH::MODEL_KEY::ICON, "love"},
-    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-},
+        const auto data = CollectionDB::getInstance()->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist WHERE t.count > 0 ORDER BY count desc LIMIT 4"));
+        for(const auto &item : data)
+        {
+            res << item[FMH::MODEL_KEY::ARTWORK];
+        }
 
+        return res.join(",");
+    }
+
+    if(playlist == "Rating")
     {
-    {FMH::MODEL_KEY::TYPE, "default"},
-    {FMH::MODEL_KEY::DESCRIPTION, "Top listened tracks"},
-    {FMH::MODEL_KEY::COLOR, "#FFA000"},
-    {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
-    {FMH::MODEL_KEY::ICON, "view-media-playcount"},
-    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-},
+        const auto data =  CollectionDB::getInstance()->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where rate > 0 order by rate desc limit 4"));
+        for(const auto &item : data)
+        {
+            res << item[FMH::MODEL_KEY::ARTWORK];
+        }
 
+        return res.join(",");
+    }
+
+    const auto urls =  FMStatic::getTagUrls(playlist, {}, true, 4, "audio");
+    for(const auto &url : urls)
     {
-    {FMH::MODEL_KEY::TYPE, "default"},
-    {FMH::MODEL_KEY::DESCRIPTION, "Highest rated tracks"},
-    {FMH::MODEL_KEY::COLOR, "#42A5F5"},
-    {FMH::MODEL_KEY::PLAYLIST, "Rating"},
-    {FMH::MODEL_KEY::ICON, "view-media-favorite"},
-    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-},
+        const auto data =   CollectionDB::getInstance()->getDBData(QString("select t.url, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
 
-            //        {
-            //            {FMH::MODEL_KEY::TYPE, "default"},
-            //            {FMH::MODEL_KEY::PLAYLIST, "Recent"},
-            //            {FMH::MODEL_KEY::ICON, "view-media-recent"},
-            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-            //        },
+        for(const auto &item : data)
+        {
+            res << item[FMH::MODEL_KEY::ARTWORK];
+        }
+    }
 
+    return res.join(",");
+}
 
+FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
+{
+    return FMH::MODEL_LIST  {
+        //    {
+        //    {FMH::MODEL_KEY::DESCRIPTION, "Favorite tracks"},
+        //    {FMH::MODEL_KEY::COLOR, "#EC407A"},
+        //    {FMH::MODEL_KEY::PLAYLIST, "Favs"},
+        //    {FMH::MODEL_KEY::ICON, "love"},
+        //    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+        //},
 
+        {
+            {FMH::MODEL_KEY::DESCRIPTION, "Top listened tracks"},
+            {FMH::MODEL_KEY::TYPE, "default"},
+            {FMH::MODEL_KEY::COLOR, "#FFA000"},
+            {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
+            {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Most Played")},
+            {FMH::MODEL_KEY::ICON, "view-media-playcount"},
+            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+        },
+
+        {
+            {FMH::MODEL_KEY::DESCRIPTION, "Highest rated tracks"},
+            {FMH::MODEL_KEY::TYPE, "default"},
+            {FMH::MODEL_KEY::COLOR, "#42A5F5"},
+            {FMH::MODEL_KEY::PLAYLIST, "Rating"},
+            {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Rating")},
+            {FMH::MODEL_KEY::ICON, "view-media-favorite"},
+            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
+        }
+    };
+}
+
+FMH::MODEL_LIST PlaylistsModel::tags()
+{
+    FMH::MODEL_LIST res;
+    const auto tags = Tagging::getInstance()->getUrlsTags(true);
+
+    return std::accumulate(tags.constBegin(), tags.constEnd(), res, [this](FMH::MODEL_LIST &list, const QVariant &item)
     {
-    {FMH::MODEL_KEY::TYPE, "default"},
-    {FMH::MODEL_KEY::COLOR, "#26A69A"},
-    {FMH::MODEL_KEY::DESCRIPTION, "Online tracks"},
-    {FMH::MODEL_KEY::PLAYLIST, "YouTube"},
-    {FMH::MODEL_KEY::ICON, "internet-services"},
-    {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-},
-
-            //        {
-            //            {FMH::MODEL_KEY::PLAYLIST, "Tags"},
-            //            {FMH::MODEL_KEY::ICON, "tag"},
-            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-            //        },
-
-            //        {
-            //            {FMH::MODEL_KEY::PLAYLIST, "Relationships"},
-            //            {FMH::MODEL_KEY::ICON, "view-media-similarartists"},
-            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-            //        },
-
-            //        {
-            //            {FMH::MODEL_KEY::PLAYLIST, "Popular"},
-            //            {FMH::MODEL_KEY::ICON, "view-media-chart"},
-            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-            //        },
-
-            //        {
-            //            {FMH::MODEL_KEY::PLAYLIST, "Genres"},
-            //            {FMH::MODEL_KEY::ICON, "view-media-genre"},
-            //            {FMH::MODEL_KEY::ADDDATE,QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-            //        }
-};
-
-    return FMH::toMapList(model);
+        const auto map = item.toMap();
+        auto res = packPlaylist(map.value("tag").toString());
+        res[FMH::MODEL_KEY::ICON] = map.value("icon").toString();
+        list << res;
+        return list;
+    });
 }
 
 QVariantMap PlaylistsModel::get(const int &index) const
@@ -174,89 +153,36 @@ QVariantMap PlaylistsModel::get(const int &index) const
     return FMH::toMap(this->list.at(index));
 }
 
-void PlaylistsModel::append(const QVariantMap &item)
-{
-    if(item.isEmpty())
-        return;
-
-    emit this->preItemAppended();
-    this->list << FMH::toModel(item);
-    emit this->postItemAppended();
-}
-
-void PlaylistsModel::append(const QVariantMap &item, const int &at)
-{
-    if(item.isEmpty())
-        return;
-
-    if(at > this->list.size() || at < 0)
-        return;
-
-    emit this->preItemAppendedAt(at);
-    this->list.insert(at, FMH::toModel(item));
-    emit this->postItemAppended();
-}
-
 void PlaylistsModel::insert(const QString &playlist)
 {
     if(playlist.isEmpty())
         return;
 
-    emit this->preItemAppended();
-
-    if(this->db->addPlaylist(playlist))
-        this->list << (this->packPlaylist(playlist));
-    emit this->postItemAppended();
-}
-
-void PlaylistsModel::insertAt(const QString &playlist, const int &at)
-{
-    if(playlist.isEmpty())
-        return;
-
-    if(at > this->list.size() || at < 0)
-        return;
-
-    emit this->preItemAppendedAt(at);
-
-    if(this->db->addPlaylist(playlist))
-        this->list.insert(at, this->packPlaylist(playlist));
-
-    emit this->postItemAppended();
-
-}
-
-void PlaylistsModel::addTrack(const int &index, const QStringList &urls)
-{
-    if(index >= this->list.size() || index < 0)
-        return;
-
-    this->addTrack(this->list[index][FMH::MODEL_KEY::PLAYLIST], urls);
+    Tagging::getInstance()->tag(playlist);
 }
 
 void PlaylistsModel::addTrack(const QString &playlist, const QStringList &urls)
 {
     for(const auto &url : urls)
-        this->db->trackPlaylist(url, playlist);
+        Tagging::getInstance()->tagUrl(url, playlist);
 }
 
-void PlaylistsModel::removeTrack(const int &index, const QString &url)
+void PlaylistsModel::removeTrack(const QString &playlist, const QString &url)
+{  
+    qDebug()<< "trying to remove" << playlist << url;
+    Tagging::getInstance()->removeUrlTag(url, playlist);
+}
+
+void PlaylistsModel::removePlaylist(const int &index) //TODO
 {
     if(index >= this->list.size() || index < 0)
         return;
 
-    this->db->removePlaylistTrack(url, this->list.at(index)[FMH::MODEL_KEY::PLAYLIST]);
+//    if(Tagging::getInstance()->remove(this->list.at(index)[FMH::MODEL_KEY::PLAYLIST]))
+//    {
+//        emit this->preItemRemoved(index);
+//        this->list.removeAt(index);
+//        emit this->postItemRemoved();
+//    }
 }
 
-void PlaylistsModel::removePlaylist(const int &index)
-{
-    if(index >= this->list.size() || index < 0)
-        return;
-
-    if(this->db->removePlaylist(this->list.at(index)[FMH::MODEL_KEY::PLAYLIST]))
-    {
-        emit this->preItemRemoved(index);
-        this->list.removeAt(index);
-        emit this->postItemRemoved();
-    }
-}

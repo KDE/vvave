@@ -1,10 +1,9 @@
-QT *= quick \
+QT *= core \
+    quick \
     multimedia \
     sql \
-    network \
     qml \
     quickcontrols2 \
-    concurrent \
     network
 
 CONFIG += ordered
@@ -14,8 +13,8 @@ TARGET = vvave
 TEMPLATE = app
 
 VERSION_MAJOR = 1
-VERSION_MINOR = 1
-VERSION_BUILD = 1
+VERSION_MINOR = 2
+VERSION_BUILD = 0
 
 VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
 DEFINES += VVAVE_VERSION_STRING=\\\"$$VERSION\\\"
@@ -29,25 +28,44 @@ linux:unix:!android {
     message(Building helpers for Android or Windows)
 
     android {
-        QMAKE_LINK += -nostdlib++
+#        QMAKE_LINK += -nostdlib++
         QT *= androidextras
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
         DISTFILES += $$PWD/android_files/AndroidManifest.xml
         DEFINES *= ANDROID_OPENSSL
-    }
 
-    android|ios { #build the sources
-        QT *= webview
-
-        TAGLIB_REPO = https://github.com/mauikit/taglib
-        exists($$PWD/3rdparty/taglib/taglib.pri) {
+        TAGLIB_REPO = https://github.com/mauikit/TagLib-android.git
+        exists($$PWD/3rdparty/taglib-android) {
             message("Using TagLib binaries for Android")
         }else {
-            message("Getting Luv icon theme")
-            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib)
+            message("Getting TagLib binaries for android")
+            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib-android)
         }
 
-        include($$PWD/3rdparty/taglib/taglib.pri)
+        ANDROID_EXTRA_LIBS += $$PWD/3rdparty/taglib-android/libtag.so \
+                               $$PWD/3rdparty/taglib-android/libtag_c.so
+
+        LIBS += -L$$PWD/3rdparty/taglib-android/ -ltag \
+                -L$$PWD/3rdparty/taglib-android/ -ltag_c
+
+        INCLUDEPATH += $$PWD/3rdparty/taglib-android/include
+        DEPENDPATH += $$PWD/3rdparty/taglib-android/include
+
+        PRE_TARGETDEPS += $$PWD/3rdparty/taglib-android/libtag.so \
+                         $$PWD/3rdparty/taglib-android/libtag_c.so
+    }
+
+    ios { #build the sources
+
+        TAGLIB_REPO = https://github.com/mauikit/taglib
+        exists($$PWD/3rdparty/taglib-ios/taglib.pri) {
+            message("Using TagLib sources for iOS")
+        }else {
+            message("Getting TagLib sources for iOS")
+            system(git clone $$TAGLIB_REPO $$PWD/3rdparty/taglib-ios)
+        }
+
+        include($$PWD/3rdparty/taglib-ios/taglib.pri)
 
     } else:macos { #from brew installation
         LIBS += -L$$PWD/../../1.11.1/lib/ -ltag.1.17.0
@@ -56,7 +74,6 @@ linux:unix:!android {
         ICON = $$PWD/macos_files/vvave.icns
 
     }else:win32 { #from kde craft with msvc
-        QT += webengine
         LIBS += -L$$PWD/../../../../CraftRoot/lib/ -ltag
         INCLUDEPATH += $$PWD/../../../../CraftRoot/include
         DEPENDPATH += $$PWD/../../../../CraftRoot/include
@@ -69,7 +86,6 @@ linux:unix:!android {
         COMPONENT_FM \
         COMPONENT_TAGGING \
         MAUIKIT_STYLE
-
     include($$PWD/3rdparty/kirigami/kirigami.pri)
     include($$PWD/3rdparty/mauikit/mauikit.pri)
 
@@ -96,14 +112,18 @@ SOURCES += main.cpp \
     db/collectionDB.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
-    services/web/youtube.cpp \
+    services/local/playlist.cpp \
     vvave.cpp \
     models/tracks/tracksmodel.cpp \
+    models/folders/foldersmodel.cpp \
     models/playlists/playlistsmodel.cpp \
     models/albums/albumsmodel.cpp \
     services/web/NextCloud/nextmusic.cpp \
     services/web/abstractmusicprovider.cpp \
-    models/cloud/cloud.cpp
+    models/cloud/cloud.cpp \
+    kde/mpris2/mpris2.cpp \
+#    kde/mpris2/mediaplayer2.cpp \
+#    kde/mpris2/mediaplayer2player.cpp
 
 RESOURCES += qml.qrc \
 
@@ -116,20 +136,28 @@ QML_DESIGNER_IMPORT_PATH =
 HEADERS += \
     db/collectionDB.h \
     utils/bae.h \
-    services/local/fileloader.h \
     services/local/taginfo.h \
     services/local/player.h \
-    services/web/youtube.h \
+    services/local/playlist.h \
     vvave.h \
     models/tracks/tracksmodel.h \
     models/playlists/playlistsmodel.h \
+    models/folders/foldersmodel.h \
     models/albums/albumsmodel.h \
     services/web/NextCloud/nextmusic.h \
     services/web/abstractmusicprovider.h \
-    models/cloud/cloud.h
+    models/cloud/cloud.h \
+    kde/mpris2/mpris2.h \
+#    kde/mpris2/mediaplayer2.h \
+#    kde/mpris2/mediaplayer2player.h
+
 
 INCLUDEPATH += \
      $$PWD/services/web \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
+
+ANDROID_ABIS = armeabi-v7a
+
+

@@ -17,8 +17,7 @@ var GET = {
     favoriteTracks : "select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where rate > 0 order by rate desc limit 100",
     recentTracks: "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist order by strftime(\"%s\", t.addDate) desc LIMIT 100",
     babedTracks: "#favs",
-    playlistTracks_ : "select t.* , al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist inner join tracks_playlists pl on pl.url = t.url where pl.playlist = \"%1\" order by strftime(\"%s\", pl.addDate) desc",
-    playlists: "select * from playlists order by strftime(\"%s\", addDate) desc",
+    playlistTracks_ : "#%1",
 
     genres: "select distinct genre as tag from tracks",
 
@@ -26,9 +25,6 @@ var GET = {
     trackTags : "select distinct tag from tracks_tags where context = 'tag' and tag collate nocase not in (select artist from artists) and tag in (select tag from tracks_tags group by tag having count(url) > 1) order by tag collate nocase limit 1000",
     albumTags_: "select distinct tag from albums_tags where context = 'tag' and album = \"%1\" and artist = \"%2\"",
     artistTags_: "select distinct tag from artists_tags where context = 'tag' and artist = \"%1\"",
-
-
-    colorTracks_: "select t.*, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.color = \"%1\""
 
 }
 

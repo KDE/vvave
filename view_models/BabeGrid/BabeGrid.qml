@@ -1,11 +1,15 @@
-import QtQuick.Controls 2.10
-import QtQuick 2.10
-import ".."
-import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
-import AlbumsList 1.0
+import QtQuick.Controls 2.14
+import QtQuick 2.14
+import QtQuick.Layouts 1.3
 
-Maui.Page
+import org.kde.kirigami 2.7 as Kirigami
+import org.kde.mauikit 1.2 as Maui
+
+import org.maui.vvave 1.0
+
+import ".."
+
+Maui.AltBrowser
 {
     id: control
     property int albumCoverSize: 130
@@ -14,100 +18,112 @@ Maui.Page
     property alias list: _albumsList
     property alias listModel: _albumsModel
 
-    property alias grid: grid
-    property alias holder: grid.holder
-    property alias count: grid.count
+    readonly property int count: currentView.count
 
     signal albumCoverClicked(string album, string artist)
-    signal albumCoverPressed(string album, string artist)
-    signal bgClicked()
 
-    flickable: grid.flickable
-
-    MouseArea
+    headBar.visible: true
+    headBar.middleContent: Maui.TextField
     {
-        anchors.fill: parent
-        onClicked: bgClicked()
+        Layout.fillWidth: true
+        placeholderText: i18n("Filter")
+        onAccepted: _albumsModel.filter = text
+        onCleared: _albumsModel.filter = ""
     }
 
-    Albums
-    {
-        id: _albumsList
-    }
+    viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
-    Maui.BaseModel
+    gridView.itemSize: albumCoverSize
+    holder.visible: count === 0
+
+    model: Maui.BaseModel
     {
         id: _albumsModel
-        list: _albumsList
+        recursiveFilteringEnabled: true
+        sortCaseSensitivity: Qt.CaseInsensitive
+        filterCaseSensitivity: Qt.CaseInsensitive
+        list: Albums
+        {
+            id: _albumsList
+        }
     }
 
-    Maui.GridView
+    listDelegate: Maui.ItemDelegate
     {
-        id: grid
-        onAreaClicked: bgClicked()
-        adaptContent: true
-        anchors.fill: parent
-        topMargin: Maui.Style.space.big
+        isCurrentItem: ListView.isCurrentItem
+        width: ListView.view.width
+        height: Maui.Style.rowHeight * 1.8
 
-        itemSize: Math.min(albumCoverSize, Math.max(60, control.width* 0.3))
-        holder.visible: count === 0
 
-        model: _albumsModel
-        delegate: Item
+        Maui.ListItemTemplate
         {
-            id: _albumDelegate
-            height: grid.cellHeight
-            width: grid.cellWidth
+            anchors.fill: parent
+            spacing: Maui.Style.space.medium
+            label1.text: model.album ? model.album : model.artist
+            label2.text: model.artist && model.album ? model.artist : ""
+            imageSource:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
+            iconSizeHint: height * 0.9
+            leftMargin: 0
+        }
 
-            property bool isCurrentItem: GridView.isCurrentItem
-
-            BabeAlbum
+        onClicked:
+        {
+            control.currentIndex = index
+            if(Maui.Handy.singleClick)
             {
-                id: albumDelegate
-                anchors.centerIn: parent
-                albumRadius: albumCoverRadius
-                padding: Maui.Style.space.small
-                height: grid.itemSize
-                width: height
-                isCurrentItem: _albumDelegate.isCurrentItem
+                albumCoverClicked(model.album, model.artist)
+            }
+        }
 
-                label1.text: model.album ? model.album : model.artist
-                label2.text: model.artist && model.album ? model.artist : ""
-                image.source:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
+        onDoubleClicked:
+        {
+            control.currentIndex = index
+            if(!Maui.Handy.singleClick)
+            {
+                albumCoverClicked(model.album, model.artist)
+            }
+        }
+    }
 
-                Connections
+    gridDelegate: Item
+    {
+        id: _albumDelegate
+        height: control.gridView.cellHeight
+        width: control.gridView.cellWidth
+
+        property bool isCurrentItem: GridView.isCurrentItem
+
+        BabeAlbum
+        {
+            id: albumDelegate
+            anchors.centerIn: parent
+            albumRadius: albumCoverRadius
+            height: control.gridView.itemSize - Maui.Style.space.small
+            width: height
+            isCurrentItem: parent.isCurrentItem
+
+            label1.text: model.album ? model.album : model.artist
+            label2.text: model.artist && model.album ? model.artist : ""
+            image.source:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
+
+            onClicked:
+            {
+                control.currentIndex = index
+                if(Maui.Handy.singleClick)
                 {
-                    target: albumDelegate
-                    onClicked:
-                    {
-                        grid.currentIndex = index
-                        if(Maui.Handy.singleClick)
-                        {
-                            const album = _albumsList.get(index).album
-                            const artist = _albumsList.get(index).artist
-                            albumCoverClicked(album, artist)
-                        }
-                    }
+                    albumCoverClicked(model.album, model.artist)
+                }
+            }
 
-                    onDoubleClicked:
-                    {
-                        grid.currentIndex = index
-                        if(!Maui.Handy.singleClick)
-                        {
-                            const album = _albumsList.get(index).album
-                            const artist = _albumsList.get(index).artist
-                            albumCoverClicked(album, artist)
-                        }
-                    }
-
-                    onPressAndHold:
-                    {
-                        const album = grid.model.get(index).album
-                        const artist = grid.model.get(index).artist
-                        albumCoverPressed(album, artist)
-                    }
+            onDoubleClicked:
+            {
+                control.currentIndex = index
+                if(!Maui.Handy.singleClick)
+                {
+                    albumCoverClicked(model.album, model.artist)
                 }
             }
         }
     }
 }
+

@@ -9,17 +9,11 @@ import QtGraphicalEffects 1.0
 Maui.Page
 {
     id: control
-    visible: focusView
 
-    z: parent.z + 99999
     title: i18n("Now Playing")
-    Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
 
-    focus: true
     Component.onCompleted:
     {
-        _drawer.visible = false
         forceActiveFocus()
     }
 
@@ -28,24 +22,25 @@ Maui.Page
         _drawer.visible = true
     }
 
+    headBar.visible: true
     headBar.background: null
     headBar.height: Maui.Style.toolBarHeight
     headBar.leftContent: ToolButton
     {
         icon.name: "go-previous"
-        onClicked: focusView = false
+        onClicked: toggleFocusView()
     }
 
     Keys.onBackPressed:
     {
-        focusView = false
+        toggleFocusView()
         event.accepted = true
     }
 
     Shortcut
     {
         sequence: StandardKey.Back
-        onActivated: focusView = false
+        onActivated: toggleFocusView()
     }
 
     background: Item
@@ -129,14 +124,14 @@ Maui.Page
                 clip: false
                 focus: true
                 interactive: true
-                currentIndex: currentTrackIndex
+                currentIndex: root.currentTrackIndex
                 spacing: Maui.Style.space.medium
                 cacheBuffer: control.width * 1
                 onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
 
                 highlightFollowsCurrentItem: true
                 highlightMoveDuration: 0
-                snapMode: ListView.SnapToOneItem
+                snapMode: ListView.SnapOneItem
                 model: mainPlaylist.listModel
                 highlightRangeMode: ListView.StrictlyEnforceRange
                 keyNavigationEnabled: true
@@ -144,7 +139,7 @@ Maui.Page
                 onCurrentItemChanged:
                 {
                     var index = indexAt(contentX, contentY)
-                    if(index !== currentTrackIndex)
+                    if(index !== root.currentTrackIndex && index >= 0)
                         Player.playAt(index)
                 }
 
@@ -167,7 +162,7 @@ Maui.Page
                             width: _image.width + Maui.Style.space.medium
                             height: width
                             anchors.centerIn: parent
-                            radius: height
+                            radius: Maui.Style.radiusV
                             color: "#fafafa"
                         }
 
@@ -182,14 +177,14 @@ Maui.Page
                             source: _bg
                         }
 
-                        RotationAnimator on rotation
-                        {
-                            from: 0
-                            to: 360
-                            duration: 5000
-                            loops: Animation.Infinite
-                            running: root.isPlaying && isCurrentItem
-                        }
+//                        RotationAnimator on rotation
+//                        {
+//                            from: 0
+//                            to: 360
+//                            duration: 5000
+//                            loops: Animation.Infinite
+//                            running: root.isPlaying && isCurrentItem
+//                        }
 
                         Image
                         {
@@ -199,7 +194,6 @@ Maui.Page
                             anchors.centerIn: parent
 
                             sourceSize.width: 200
-                            sourceSize.height: 200
 
                             fillMode: Image.PreserveAspectFit
                             antialiasing: false
@@ -214,35 +208,35 @@ Maui.Page
                                     source = "qrc:/assets/cover.png";
                             }
 
-                            Rectangle
-                            {
-                                color: _bg.color
-                                height: parent.height * 0.25
-                                width: height
-                                anchors.centerIn: parent
-                                radius: height
-                            }
+//                            Rectangle
+//                            {
+//                                color: _bg.color
+//                                height: parent.height * 0.25
+//                                width: height
+//                                anchors.centerIn: parent
+//                                radius: height
+//                            }
 
-                            Rectangle
-                            {
-                                id: _roundRec
-                                color:  control.Kirigami.Theme.backgroundColor
-                                height: parent.height * 0.20
-                                width: height
-                                anchors.centerIn: parent
-                                radius: height
-                            }
+//                            Rectangle
+//                            {
+//                                id: _roundRec
+//                                color:  control.Kirigami.Theme.backgroundColor
+//                                height: parent.height * 0.20
+//                                width: height
+//                                anchors.centerIn: parent
+//                                radius: height
+//                            }
 
-                            InnerShadow
-                            {
-                                anchors.fill: _roundRec
-                                radius: 8.0
-                                samples: 16
-                                horizontalOffset: 0
-                                verticalOffset: 0
-                                color: "#b0000000"
-                                source: _roundRec
-                            }
+//                            InnerShadow
+//                            {
+//                                anchors.fill: _roundRec
+//                                radius: 8.0
+//                                samples: 16
+//                                horizontalOffset: 0
+//                                verticalOffset: 0
+//                                color: "#b0000000"
+//                                source: _roundRec
+//                            }
 
                             layer.enabled: true
                             layer.effect: OpacityMask
@@ -257,16 +251,13 @@ Maui.Page
                                         anchors.centerIn: parent
                                         width: _image.width
                                         height: _image.height
-                                        radius: height
+                                        radius: Maui.Style.radiusV
                                     }
                                 }
                             }
                         }
                     }
-
                 }
-
-
             }
 
             Item
@@ -317,7 +308,7 @@ Maui.Page
                     Layout.fillHeight: false
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: currentTrack.title
+                    text: root.currentTrack.title
                     elide: Text.ElideMiddle
                     wrapMode: Text.NoWrap
                     color: control.Kirigami.Theme.textColor
@@ -333,7 +324,7 @@ Maui.Page
                     Layout.fillHeight: false
                     verticalAlignment: Qt.AlignVCenter
                     horizontalAlignment: Qt.AlignHCenter
-                    text: currentTrack.artist
+                    text: root.currentTrack.artist
                     elide: Text.ElideMiddle
                     wrapMode: Text.NoWrap
                     color: control.Kirigami.Theme.textColor
@@ -346,11 +337,9 @@ Maui.Page
             ToolButton
             {
                 icon.name: "documentinfo"
-                onClicked: focusView = false
+                onClicked: toggleFocusView()
                 Layout.alignment: Qt.AlignCenter
-
             }
-
         }
 
         RowLayout
@@ -422,13 +411,15 @@ Maui.Page
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "love"
-                    enabled: currentTrackIndex >= 0
-                    checked: Maui.FM.isFav(mainPlaylist.listView.model.get(currentTrackIndex).url)
+                    enabled: root.currentTrack
+                    checked: root.currentTrack.url ? Maui.FM.isFav(root.currentTrack.url) : false
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
-                    onClicked: if (!mainlistEmpty)
-                               {
-                                   mainPlaylist.list.fav(currentTrackIndex, !Maui.FM.isFav(mainPlaylist.listModel.get(currentTrackIndex).url))
-                               }
+
+                    onClicked:
+                    {
+                        mainPlaylist.listModel.list.fav(root.currentTrackIndex, !Maui.FM.isFav(root.currentTrack.url))
+                        root.currentTrackChanged()
+                    }
                 },
 
                 ToolButton
@@ -438,7 +429,6 @@ Maui.Page
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
                     onClicked: Player.previousTrack()
-                    onPressAndHold: Player.playAt(prevTrackIndex)
                 },
 
                 ToolButton
@@ -446,10 +436,10 @@ Maui.Page
                     id: playIcon
                     icon.width: Maui.Style.iconSizes.huge
                     icon.height: Maui.Style.iconSizes.huge
-                    enabled: currentTrackIndex >= 0
+                    enabled: root.currentTrackIndex >= 0
                     icon.color: Kirigami.Theme.textColor
-                    icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
-                    onClicked: player.playing = !player.playing
+                    icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
+                    onClicked: player.playing ? player.pause() : player.play()
                 },
 
                 ToolButton
@@ -460,7 +450,6 @@ Maui.Page
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "media-skip-forward"
                     onClicked: Player.nextTrack()
-                    onPressAndHold: Player.playAt(Player.shuffle())
                 },
 
                 ToolButton
@@ -469,16 +458,13 @@ Maui.Page
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
                     icon.color: babeColor
-                    icon.name: isShuffle ? "media-playlist-shuffle" : "media-playlist-normal"
+                    icon.name: playlist.shuffle ? "media-playlist-shuffle" : "media-playlist-normal"
                     onClicked:
                     {
-                        isShuffle = !isShuffle
-                        Maui.FM.saveSettings("SHUFFLE", isShuffle, "PLAYBACK")
+                        playlist.shuffle = !playlist.shuffle
                     }
                 }
             ]
         }
-
     }
-
 }
