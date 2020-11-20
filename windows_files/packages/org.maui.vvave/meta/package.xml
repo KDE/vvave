@@ -2,8 +2,11 @@
 <Package>
     <DisplayName>Vvave</DisplayName>
     <Description>Vvave Music Player</Description>
-    <Version>1.0.0-1</Version>
-    <ReleaseDate>2019-11-04</ReleaseDate>
+    <Version>1.2.0</Version>
+    <ReleaseDate>2020-11-20</ReleaseDate>
+    <Licenses>
+        <License name="GPLv3" file="license.txt" />
+    </Licenses>
     <Default>true</Default>
     <Script>installscript.qs</Script>
 </Package>

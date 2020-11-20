@@ -39,12 +39,13 @@ function Component()
 
 Component.prototype.createOperations = function()
 {
-    // call default implementation to actually install README.txt!
-    component.createOperations();
-
-    if (systemInfo.productType === "windows") {
-        component.addOperation("CreateShortcut", "@TargetDir@/vvave.exe", "@StartMenuDir@/vvave.lnk",
-            "workingDirectory=@TargetDir@", "iconPath=%SystemRoot%/system32/SHELL32.dll",
-            "iconId=2");
+ 	component.createOperations();
+      if (systemInfo.productType === "windows") {
+        component.addOperation("CreateShortcut", 
+                            "@TargetDir@/vvave.exe",// target
+                            "@DesktopDir@/Vvave.lnk",// link-path
+                            "workingDirectory=@TargetDir@",// working-dir
+                            "iconPath=@TargetDir@/vvave.exe", "iconId=0",// icon
+                            "description=Music Player");// description
     }
 }
