@@ -32,7 +32,6 @@ AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
     });
 
     this->m_worker.start ();
-    //    connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
 
 AlbumsModel::~AlbumsModel()
@@ -52,6 +51,8 @@ void AlbumsModel::componentComplete()
     }
 
     connect(vvave::instance (), &vvave::sourceRemoved, this, &AlbumsModel::setList);
+    connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
+    setList();
 }
 
 FMH::MODEL_LIST AlbumsModel::items() const
@@ -66,8 +67,6 @@ void AlbumsModel::setQuery(const QUERY &query)
 
     this->query = query;
     emit this->queryChanged();
-
-    setList();
 }
 
 AlbumsModel::QUERY AlbumsModel::getQuery() const
@@ -91,6 +90,7 @@ void AlbumsModel::setList()
         m_Query = "select * from artists order by artist asc";
     else return;
 
+    qDebug() << "Album query is" << m_Query;
     //get albums data with modifier for missing images for artworks
     //    const auto checker = [&](FMH::MODEL &item) -> bool
     //    {

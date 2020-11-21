@@ -22,6 +22,11 @@ Maui.ItemDelegate
 
     property alias image : _image
 
+
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.backgroundColor: "#333";
+    Kirigami.Theme.textColor: "#fafafa"
+
     Item
     {
         id: _cover
@@ -43,27 +48,27 @@ Maui.ItemDelegate
             {
                 if (status == Image.Error)
                     source = "qrc:/assets/cover.png"
-            }         
+            }
+        }
+
+        LinearGradient
+        {
+            anchors.fill: parent
+            start: Qt.point(0, 0)
+            end: Qt.point(0, parent.height)
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "transparent" }
+                GradientStop { position: control.isCurrentItem || control.hovered ? 0.7 : 0.9 ; color: control.Kirigami.Theme.backgroundColor }
+            }
         }
 
         Item
         {
             id: _labelBg
-            height: Math.min (parent.height * 0.3, _labelsLayout.implicitHeight ) + Maui.Style.space.big
+            height: Math.max (parent.height * 0.3, _labelsLayout.implicitHeight ) + Maui.Style.space.big
             width: parent.width
             anchors.bottom: parent.bottom
             visible: showLabels
-
-            Kirigami.Theme.inherit: false
-            Kirigami.Theme.backgroundColor: "#333";
-            Kirigami.Theme.textColor: "#fafafa"
-
-            Rectangle
-            {
-                anchors.fill: parent
-                color: control.isCurrentItem ? Kirigami.Theme.highlightColor : _labelBg.Kirigami.Theme.backgroundColor
-                opacity: control.isCurrentItem || control.hovered ? 1 : 0.7
-            }
 
             Maui.ListItemTemplate
             {
@@ -71,10 +76,11 @@ Maui.ItemDelegate
                 anchors.centerIn: parent
                 width: parent.width * 0.9
                 height: Math.min(parent.height * 0.9, implicitHeight)
-                implicitHeight: label1.implicitHeight + label2.implicitHeight + spacing
+                implicitHeight: leftLabels.implicitHeight + spacing
 
                 label1.visible: label1.text && control.width > 50
-                label1.font.pointSize: Maui.Style.fontSizes.default
+                label1.font.pointSize: Maui.Style.fontSizes.big
+                label1.wrapMode: Text.WordWrap
                 label1.font.bold: true
                 label1.font.weight: Font.Bold
 

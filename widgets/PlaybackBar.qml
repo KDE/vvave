@@ -83,8 +83,6 @@ Control
                 elide: Text.ElideMiddle
                 wrapMode: Text.NoWrap
                 color: Kirigami.Theme.textColor
-                font.weight: Font.Normal
-                font.pointSize: Maui.Style.fontSizes.default
             }
 
             middleContent:  Item
@@ -102,8 +100,6 @@ Control
                     elide: Text.ElideMiddle
                     wrapMode: Text.NoWrap
                     color: Kirigami.Theme.textColor
-                    font.weight: Font.Normal
-                    font.pointSize: Maui.Style.fontSizes.default
                 }
             }
 
@@ -117,8 +113,6 @@ Control
                 elide: Text.ElideMiddle
                 wrapMode: Text.NoWrap
                 color: Kirigami.Theme.textColor
-                font.weight: Font.Normal
-                font.pointSize: Maui.Style.fontSizes.default
                 opacity: 0.7
             }
 

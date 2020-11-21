@@ -317,8 +317,7 @@ Maui.ApplicationWindow
                     holder.title : i18n("No Albums!")
                     holder.body: i18n("Add new music sources")
                     holder.emojiSize: Maui.Style.iconSizes.huge
-
-                    Component.onCompleted: list.query = Albums.ALBUMS
+                    list.query: Albums.ALBUMS
                 }
 
                 AlbumsView
@@ -331,8 +330,7 @@ Maui.ApplicationWindow
                     holder.title : i18n("No Artists!")
                     holder.body: i18n("Add new music sources")
                     holder.emojiSize: Maui.Style.iconSizes.huge
-
-                    Component.onCompleted: list.query = Albums.ARTISTS
+                    list.query : Albums.ARTISTS
                 }
 
                 Maui.AppViewLoader

@@ -1,9 +1,7 @@
 #include "foldersmodel.h"
 
-FoldersModel::FoldersModel()
-{
-
-}
+FoldersModel::FoldersModel(QObject *parent) : MauiList(parent)
+{}
 
 FMH::MODEL_LIST FoldersModel::items() const
 {
