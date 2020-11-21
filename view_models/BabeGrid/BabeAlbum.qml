@@ -98,9 +98,7 @@ Maui.ItemDelegate
 
                 Rectangle
                 {
-                    anchors.centerIn: parent
-                    width: _cover.width
-                    height: _cover.height
+                    anchors.fill: parent
                     radius: albumRadius
                 }
             }
