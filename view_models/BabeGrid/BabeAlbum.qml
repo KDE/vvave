@@ -22,7 +22,6 @@ Maui.ItemDelegate
 
     property alias image : _image
 
-
     Kirigami.Theme.inherit: false
     Kirigami.Theme.backgroundColor: "#333";
     Kirigami.Theme.textColor: "#fafafa"
@@ -62,30 +61,25 @@ Maui.ItemDelegate
             }
         }
 
-        Item
+        Maui.ListItemTemplate
         {
-            id: _labelBg
-            height: _labelsLayout.implicitHeight + Maui.Style.space.big
-            width: parent.width
-            anchors.bottom: parent.bottom
+            id: _labelsLayout
             visible: showLabels
 
-            Maui.ListItemTemplate
-            {
-                id: _labelsLayout
-                width: parent.width * 0.9
-                anchors.centerIn: parent
-                label1.visible: label1.text && control.width > 50
-                label1.font.pointSize: Maui.Style.fontSizes.big
-                label1.wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                label1.font.bold: true
-                label1.font.weight: Font.Bold
+            width: parent.width
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Maui.Style.space.medium
+            height: Math.min(parent.height, leftLabels.implicitHeight)
+            label1.visible: label1.text && control.width > 50
+            label1.font.pointSize: Maui.Style.fontSizes.big
+            //                label1.wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            label1.color: control.hovered || control.isCurrentItem ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+            label1.font.bold: true
+            label1.font.weight: Font.Bold
 
-                label2.visible: label2.text && (control.width > 70)
-                label2.font.pointSize: Maui.Style.fontSizes.medium
-                label2.wrapMode: Text.NoWrap
-            }
-
+            label2.visible: label2.text && (control.width > 70)
+            label2.font.pointSize: Maui.Style.fontSizes.medium
+            label2.wrapMode: Text.NoWrap
         }
 
         layer.enabled: albumRadius
