@@ -1,9 +1,10 @@
-import QtQuick 2.12
-import QtQuick.Controls 2.12
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
-import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.2 as Maui
+import org.kde.kirigami 2.9 as Kirigami
+import org.kde.mauikit 1.3 as Maui
+
 import org.maui.vvave 1.0
 
 import "../../utils/Player.js" as Player
@@ -88,16 +89,19 @@ Maui.Page
         onCleared: listModel.filter = ""
     }
 
-    Maui.Dialog
+    Maui.FileListingDialog
     {
         id: _removeDialog
+
         property int index
+
+        urls: [listModel.get(index).url]
+
         title: i18n("Remove track")
-        message: i18n("You can delete the file from your computer or remove it from your collection")
+        message: i18n("You can delete the file from your computer or remove it from your collection.")
+
         rejectButton.text: i18n("Delete")
         acceptButton.text: i18n("Remove")
-        template.iconSource: "emblem-warning"
-        page.margins: Maui.Style.space.big
 
         onAccepted:
         {
@@ -107,7 +111,7 @@ Maui.Page
 
         onRejected:
         {
-            if(Maui.FM.removeFile(listModel.get(index).url))
+            if(Maui.FM.removeFiles(_removeDialog.urls))
                 listModel.list.remove(control.currentIndex)
             close()
         }

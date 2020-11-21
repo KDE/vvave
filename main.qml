@@ -6,7 +6,7 @@ import QtQml 2.14
 import Qt.labs.settings 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.2 as Maui
+import org.kde.mauikit 1.3 as Maui
 import org.maui.vvave 1.0
 
 import "utils"
@@ -172,6 +172,32 @@ Maui.ApplicationWindow
         SettingsDialog {}
     }
 
+    Component
+    {
+        id: _removeDialogComponent
+
+        Maui.FileListingDialog
+        {
+            id: _removeDialog
+
+            urls: selectionBar.uris
+
+            title: i18n("Remove %1 tracks", urls.length)
+            message: i18n("Are you sure you want to remove this files? This action can not be undone.")
+
+            rejectButton.text: i18n("Delete")
+            acceptButton.text: i18n("Cancel")
+
+            onAccepted: close()
+
+            onRejected:
+            {
+                Maui.FM.removeFiles(_removeDialog.urls)
+                close()
+            }
+        }
+    }
+
     FloatingDisk
     {
         id: _floatingDisk
@@ -275,14 +301,11 @@ Maui.ApplicationWindow
         width: parent.width
     }
 
-
     Component
     {
         id: _focusViewComponent
 
-        FocusView
-        {
-        }
+        FocusView { }
     }
 
     StackView
@@ -348,6 +371,7 @@ Maui.ApplicationWindow
                 {
                     Maui.AppView.title: i18n("Cloud")
                     Maui.AppView.iconName: "folder-cloud"
+
                     CloudView
                     {
                         id: cloudView
@@ -381,9 +405,7 @@ Maui.ApplicationWindow
                 }
             }
         }
-
     }
-
 
     Component.onCompleted:
     {
