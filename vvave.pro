@@ -14,7 +14,7 @@ TEMPLATE = app
 
 VERSION_MAJOR = 1
 VERSION_MINOR = 2
-VERSION_BUILD = 0
+VERSION_BUILD = 1
 
 VERSION = $${VERSION_MAJOR}.$${VERSION_MINOR}.$${VERSION_BUILD}
 DEFINES += VVAVE_VERSION_STRING=\\\"$$VERSION\\\"
@@ -28,11 +28,11 @@ linux:unix:!android {
     message(Building helpers for Android or Windows)
 
     android {
-#        QMAKE_LINK += -nostdlib++
         QT *= androidextras
         ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android_files
         DISTFILES += $$PWD/android_files/AndroidManifest.xml
         DEFINES *= ANDROID_OPENSSL
+        ANDROID_ABIS = armeabi-v7a
 
         TAGLIB_REPO = https://github.com/mauikit/TagLib-android.git
         exists($$PWD/3rdparty/taglib-android) {
@@ -68,9 +68,12 @@ linux:unix:!android {
         include($$PWD/3rdparty/taglib-ios/taglib.pri)
 
     } else:macos { #from brew installation
-        LIBS += -L$$PWD/../../1.11.1/lib/ -ltag.1.17.0
 
-        INCLUDEPATH += $$PWD/../../1.11.1/include
+        LIBS += -L/usr/local/Cellar/taglib/1.11.1/lib/ -ltag.1.17.0
+
+        INCLUDEPATH += /usr/local/Cellar/taglib/1.11.1/include
+        DEPENDPATH += /usr/local/Cellar/taglib/1.11.1/include
+
         ICON = $$PWD/macos_files/vvave.icns
 
     }else:win32 { #from kde craft with msvc
@@ -157,7 +160,3 @@ INCLUDEPATH += \
      $$PWD/services/web/NextCloud
 
 include(install.pri)
-
-ANDROID_ABIS = armeabi-v7a
-
-
