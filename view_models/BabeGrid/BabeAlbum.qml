@@ -65,7 +65,7 @@ Maui.ItemDelegate
         Item
         {
             id: _labelBg
-            height: Math.max (parent.height * 0.3, _labelsLayout.implicitHeight ) + Maui.Style.space.big
+            height: _labelsLayout.implicitHeight + Maui.Style.space.big
             width: parent.width
             anchors.bottom: parent.bottom
             visible: showLabels
@@ -73,14 +73,11 @@ Maui.ItemDelegate
             Maui.ListItemTemplate
             {
                 id: _labelsLayout
-                anchors.centerIn: parent
                 width: parent.width * 0.9
-                height: Math.min(parent.height * 0.9, implicitHeight)
-                implicitHeight: leftLabels.implicitHeight + spacing
-
+                anchors.centerIn: parent
                 label1.visible: label1.text && control.width > 50
                 label1.font.pointSize: Maui.Style.fontSizes.big
-                label1.wrapMode: Text.WordWrap
+                label1.wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 label1.font.bold: true
                 label1.font.weight: Font.Bold
 
@@ -114,8 +111,8 @@ Maui.ItemDelegate
     {
         anchors.centerIn: _cover
 
-                            width: _image.status === Image.Ready ? Math.min(parent.width, _image.paintedWidth) : parent.width
-                            height:  _image.status === Image.Ready ? Math.min(parent.height, _image.paintedHeight) : parent.height
+        width: _image.status === Image.Ready ? Math.min(parent.width, _image.paintedWidth) : parent.width
+        height:  _image.status === Image.Ready ? Math.min(parent.height, _image.paintedHeight) : parent.height
 
         color: "transparent"
         border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
