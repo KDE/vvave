@@ -15,7 +15,7 @@ class PlaylistsModel : public MauiList
 
 public:
     explicit PlaylistsModel(QObject *parent = nullptr);
-    FMH::MODEL_LIST items() const override;
+    const FMH::MODEL_LIST &items() const override;
     void componentComplete() override;
 
 private:

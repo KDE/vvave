@@ -15,6 +15,8 @@ Maui.Page
 {
     id: control
 
+    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+
     property alias listModel: table.listModel
     property alias listView : table.listView
     property alias table: table
@@ -26,10 +28,11 @@ Maui.Page
 
     flickable: table.flickable
 
-    focus: true
     title: i18n("Now playing")
     showTitle: true
+
     headBar.visible: true
+    headerBackground.color: "transparent"
 
     headBar.rightContent: ToolButton
     {
@@ -58,13 +61,12 @@ Maui.Page
         listBrowser.enableLassoSelection: false
         headBar.visible: false
         footBar.visible: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
         holder.emoji: "qrc:/assets/view-media-track.svg"
         holder.title : "Nothing to play!"
         holder.body: i18n("Start putting together your playlist.")
         holder.emojiSize: Maui.Style.iconSizes.huge
-
-        Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
         listView.header: Rectangle
         {

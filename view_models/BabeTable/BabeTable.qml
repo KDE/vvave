@@ -52,7 +52,11 @@ Maui.Page
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
+
     flickable: _listBrowser.flickable
+
+    headBar.visible: true
+    headerBackground.color: "transparent"
 
     headBar.leftContent: Maui.ToolActions
     {
@@ -62,6 +66,7 @@ Maui.Page
         autoExclusive: false
         display: ToolButton.TextBesideIcon
         defaultIconName: "media-playback-start"
+
         Action
         {
             icon.name : "media-playlist-play"
@@ -181,7 +186,6 @@ Maui.Page
             Maui.Platform.shareFiles([url])
         }
     }
-
 
     Maui.ListBrowser
     {

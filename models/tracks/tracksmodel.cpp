@@ -10,22 +10,22 @@
 #endif
 
 TracksModel::TracksModel(QObject *parent) : MauiList(parent),
-    db(CollectionDB::getInstance())
+	db(CollectionDB::getInstance())
 {
-    qRegisterMetaType<TracksModel*>("const TracksModel*");
+	qRegisterMetaType<TracksModel*>("const TracksModel*");
 }
 
 void TracksModel::componentComplete()
 {
-    connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
-    connect(vvave::instance (), &vvave::tracksAdded, this, &TracksModel::setList);
-    connect(vvave::instance (), &vvave::sourceRemoved, this, &TracksModel::setList);
-    setList();
+	connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
+	connect(vvave::instance (), &vvave::tracksAdded, this, &TracksModel::setList);
+	connect(vvave::instance (), &vvave::sourceRemoved, this, &TracksModel::setList);
+	setList();
 }
 
-FMH::MODEL_LIST TracksModel::items() const
+const FMH::MODEL_LIST &TracksModel::items() const
 {
-    return this->list;
+	return this->list;
 }
 
 void TracksModel::setQuery(const QString &query)
@@ -33,42 +33,42 @@ void TracksModel::setQuery(const QString &query)
 //    if(this->query == query)
 //        return;
 
-    this->query = query;
-    emit this->queryChanged();
+	this->query = query;
+	emit this->queryChanged();
 }
 
 QString TracksModel::getQuery() const
 {
-    return this->query;
+	return this->query;
 }
 
 int TracksModel::limit() const
 {
-    return m_limit;
+	return m_limit;
 }
 
 void TracksModel::setList()
 {
-    if(query.isEmpty())
-        return;
+	if(query.isEmpty())
+		return;
 
-    emit this->preListChanged();
-    this->list.clear();
+	emit this->preListChanged();
+	this->list.clear();
 
-    qDebug()<< "GETTIN TRACK LIST" << this->query;
+	qDebug()<< "GETTIN TRACK LIST" << this->query;
 
-    if(this->query.startsWith("#"))
-    {
-        auto m_query = query;
-        const auto urls =  FMStatic::getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
-        for(const auto &url : urls)
-        {
-            this->list << this->db->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album "
-                                                      "and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
-        }
+	if(this->query.startsWith("#"))
+	{
+		auto m_query = query;
+		const auto urls =  FMStatic::getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
+		for(const auto &url : urls)
+		{
+			this->list << this->db->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album "
+													  "and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
+		}
 
-    }else
-    {
+	}else
+	{
 //        const auto checker = [&](FMH::MODEL &item) {
 //            const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
 //            if(FMH::fileExists(url))
@@ -80,7 +80,7 @@ void TracksModel::setList()
 //                return false;
 //            }
 //        };
-        this->list = this->db->getDBData(this->query/*, checker*/);
+		this->list = this->db->getDBData(this->query/*, checker*/);
 }
 
 emit this->postListChanged();
@@ -89,158 +89,158 @@ emit countChanged();
 
 void TracksModel::copy(const TracksModel * model)
 {
-    emit this->preListChanged ();
-    this->list << model->getItems ();
-    emit this->postListChanged ();
-    emit this->countChanged();
+	emit this->preListChanged ();
+	this->list << model->getItems ();
+	emit this->postListChanged ();
+	emit this->countChanged();
 }
 
 void TracksModel::append(const QVariantMap &item)
 {
-    if(item.isEmpty())
-        return;
+	if(item.isEmpty())
+		return;
 
-    emit this->preItemAppended();
-    this->list << FMH::toModel(item);
-    emit this->postItemAppended();
-    emit this->countChanged();
+	emit this->preItemAppended();
+	this->list << FMH::toModel(item);
+	emit this->postItemAppended();
+	emit this->countChanged();
 }
 
 void TracksModel::appendAt(const QVariantMap &item, const int &at)
 {
-    if(item.isEmpty())
-        return;
+	if(item.isEmpty())
+		return;
 
-    if(at > this->list.size() || at < 0)
-        return;
+	if(at > this->list.size() || at < 0)
+		return;
 
-    qDebug() << "trying to append at << " << 0;
-    emit this->preItemAppendedAt(at);
-    this->list.insert(at, FMH::toModel(item));
-    emit this->postItemAppended();
-    emit this->countChanged();
+	qDebug() << "trying to append at << " << 0;
+	emit this->preItemAppendedAt(at);
+	this->list.insert(at, FMH::toModel(item));
+	emit this->postItemAppended();
+	emit this->countChanged();
 }
 
 void TracksModel::appendQuery(const QString &query)
 {
-    emit this->preListChanged();
-    this->list << this->db->getDBData(query);
-    emit this->postListChanged();
-    emit this->countChanged();
+	emit this->preListChanged();
+	this->list << this->db->getDBData(query);
+	emit this->postListChanged();
+	emit this->countChanged();
 }
 
 void TracksModel::clear()
 {
-    emit this->preListChanged();
-    this->list.clear();
-    emit this->postListChanged();
-    emit this->countChanged();
+	emit this->preListChanged();
+	this->list.clear();
+	emit this->postListChanged();
+	emit this->countChanged();
 }
 
 bool TracksModel::fav(const int &index, const bool &value)
 {
-    if(index >= this->list.size() || index < 0)
-        return false;
+	if(index >= this->list.size() || index < 0)
+		return false;
 
-    const auto index_ = this->mappedIndex(index);
+	const auto index_ = this->mappedIndex(index);
 
-    auto item = this->list[index_];
+	auto item = this->list[index_];
 
-    if(value)
-        FMStatic::fav(item[FMH::MODEL_KEY::URL]);
-    else
-        FMStatic::unFav(item[FMH::MODEL_KEY::URL]);
+	if(value)
+		FMStatic::fav(item[FMH::MODEL_KEY::URL]);
+	else
+		FMStatic::unFav(item[FMH::MODEL_KEY::URL]);
 
-    this->list[index_][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
-    emit this->updateModel(index_, {FMH::MODEL_KEY::FAV});
+	this->list[index_][FMH::MODEL_KEY::FAV] = value ?  "1" : "0";
+	emit this->updateModel(index_, {FMH::MODEL_KEY::FAV});
 
-    return true;
+	return true;
 }
 
 bool TracksModel::rate(const int &index, const int &value)
 {
-    if(index >= this->list.size() || index < 0)
-        return false;
+	if(index >= this->list.size() || index < 0)
+		return false;
 
-    const auto index_ = this->mappedIndex(index);
+	const auto index_ = this->mappedIndex(index);
 
-    auto item = this->list[index_];
-    if(this->db->rateTrack(item[FMH::MODEL_KEY::URL], value))
-    {
-        this->list[index_][FMH::MODEL_KEY::RATE] = QString::number(value);
-        emit this->updateModel(index_, {FMH::MODEL_KEY::RATE});
+	auto item = this->list[index_];
+	if(this->db->rateTrack(item[FMH::MODEL_KEY::URL], value))
+	{
+		this->list[index_][FMH::MODEL_KEY::RATE] = QString::number(value);
+		emit this->updateModel(index_, {FMH::MODEL_KEY::RATE});
 
-        return true;
-    }
+		return true;
+	}
 
-    return false;
+	return false;
 }
 
 bool TracksModel::countUp(const int &index)
 {
-    if(index >= this->list.size() || index < 0)
-        return false;
+	if(index >= this->list.size() || index < 0)
+		return false;
 
-    const auto index_ = this->mappedIndex(index);
+	const auto index_ = this->mappedIndex(index);
 
-    auto item = this->list[index_];
-    if(this->db->playedTrack(item[FMH::MODEL_KEY::URL]))
-    {
-        this->list[index_][FMH::MODEL_KEY::COUNT] = QString::number(item[FMH::MODEL_KEY::COUNT].toInt() + 1);
-        emit this->updateModel(index_, {FMH::MODEL_KEY::COUNT});
+	auto item = this->list[index_];
+	if(this->db->playedTrack(item[FMH::MODEL_KEY::URL]))
+	{
+		this->list[index_][FMH::MODEL_KEY::COUNT] = QString::number(item[FMH::MODEL_KEY::COUNT].toInt() + 1);
+		emit this->updateModel(index_, {FMH::MODEL_KEY::COUNT});
 
-        return true;
-    }
+		return true;
+	}
 
-    return false;
+	return false;
 }
 
 bool TracksModel::remove(const int &index)
 {
-    if(index >= this->list.size() || index < 0)
-        return false;
+	if(index >= this->list.size() || index < 0)
+		return false;
 
-    const auto index_ = this->mappedIndex(index);
+	const auto index_ = this->mappedIndex(index);
 
-    emit this->preItemRemoved(index_);
-    this->list.removeAt(index_);
-    emit this->postItemRemoved();
+	emit this->preItemRemoved(index_);
+	this->list.removeAt(index_);
+	emit this->postItemRemoved();
 
-    return true;
+	return true;
 }
 
 void TracksModel::refresh()
 {
-    this->setList();
+	this->setList();
 }
 
 bool TracksModel::update(const QVariantMap &data, const int &index)
 {
-    if(index >= this->list.size() || index < 0)
-        return false;
+	if(index >= this->list.size() || index < 0)
+		return false;
 
-    const auto index_ = this->mappedIndex(index);
+	const auto index_ = this->mappedIndex(index);
 
-    auto newData = this->list[index_];
-    QVector<int> roles;
+	auto newData = this->list[index_];
+	QVector<int> roles;
 
-    for(auto key : data.keys())
-        if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
-        {
-            newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
-            roles << FMH::MODEL_NAME_KEY[key];
-        }
+	for(auto key : data.keys())
+		if(newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString())
+		{
+			newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
+			roles << FMH::MODEL_NAME_KEY[key];
+		}
 
-    this->list[index_] = newData;
-    emit this->updateModel(index_, roles);
-    return true;
+	this->list[index_] = newData;
+	emit this->updateModel(index_, roles);
+	return true;
 }
 
 void TracksModel::setLimit(int limit)
 {
-    if (m_limit == limit)
-        return;
+	if (m_limit == limit)
+		return;
 
-    m_limit = limit;
-    emit limitChanged(m_limit);
+	m_limit = limit;
+	emit limitChanged(m_limit);
 }

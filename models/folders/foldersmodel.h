@@ -20,7 +20,7 @@ class FoldersModel : public MauiList
 public:
     FoldersModel(QObject *parent = nullptr);
 
-    FMH::MODEL_LIST items() const override final;
+    const FMH::MODEL_LIST &items() const override final;
     void setFolders(const QList<QUrl> &folders);
     QList<QUrl> folders () const;
 
