@@ -123,10 +123,11 @@ Control
                 padding: 0
                 from: 0
                 to: 1000
-                value: player.pos
+                value: player.pos/player.duration*1000
+
                 spacing: 0
                 focus: true
-                onMoved: player.pos = value
+                onMoved: player.pos = (player.duration / 1000) * value
                 enabled: player.playing
 
                 background: Rectangle
