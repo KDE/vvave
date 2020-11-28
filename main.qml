@@ -136,7 +136,7 @@ Maui.ApplicationWindow
                     }
     }
 
-    altHeader: Kirigami.Settings.isMobile
+    altHeader: Kirigami.SettingsisMobile
     headBar.visible: !focusView
     headBar.rightContent: ToolButton
     {

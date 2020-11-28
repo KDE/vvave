@@ -30,6 +30,7 @@ Maui.ItemDelegate
     {
         id: _cover
         anchors.fill: parent
+        clip: true
 
         Image
         {
@@ -53,7 +54,7 @@ Maui.ItemDelegate
         LinearGradient
         {
             anchors.fill: parent
-            start: Qt.point(0, 0)
+            start: Qt.point(0, height * 0.5)
             end: Qt.point(0, parent.height)
             gradient: Gradient {
                 GradientStop { position: 0.0; color: "transparent" }
@@ -101,15 +102,16 @@ Maui.ItemDelegate
 
     Rectangle
     {
-        anchors.centerIn: _cover
+        anchors.fill: _cover
+        Kirigami.Theme.inherit: false
+//        anchors.centerIn: _cover
 
-        width: _image.status === Image.Ready ? Math.min(parent.width, _image.paintedWidth) : parent.width
-        height:  _image.status === Image.Ready ? Math.min(parent.height, _image.paintedHeight) : parent.height
+//        width: _image.status === Image.Ready ? Math.min(parent.width, _image.paintedWidth) : parent.width
+//        height:  _image.status === Image.Ready ? Math.min(parent.height, _image.paintedHeight) : parent.height
 
         color: "transparent"
         border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
         radius: albumRadius
-        opacity: 0.6
 
         Rectangle
         {
@@ -117,7 +119,7 @@ Maui.ItemDelegate
             color: "transparent"
             radius: parent.radius - 0.5
             border.color: Qt.lighter(Kirigami.Theme.backgroundColor, 2)
-            opacity: 0.8
+            opacity: 0.2
             anchors.margins: 1
         }
     }
