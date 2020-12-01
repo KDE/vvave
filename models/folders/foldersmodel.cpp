@@ -1,34 +1,32 @@
 #include "foldersmodel.h"
 
-FoldersModel::FoldersModel()
-{
+FoldersModel::FoldersModel(QObject *parent) : MauiList(parent)
+{}
 
-}
-
-FMH::MODEL_LIST FoldersModel::items() const
+const FMH::MODEL_LIST &FoldersModel::items() const
 {
-    return this->list;
+	return this->list;
 }
 
 void FoldersModel::setFolders(const QList<QUrl> &folders)
 {
-    if(m_folders == folders)
-        return;
+	if(m_folders == folders)
+		return;
 
-    m_folders = folders;
+	m_folders = folders;
 
-    emit this->preListChanged();
-    this->list.clear();
+	emit this->preListChanged();
+	this->list.clear();
 
-    for(const auto &folder : m_folders)
-    {
-        this->list << FMH::getDirInfoModel(folder);
-    }
-    emit this->postListChanged();
-    emit foldersChanged();
+	for(const auto &folder : m_folders)
+	{
+		this->list << FMH::getDirInfoModel(folder);
+	}
+	emit this->postListChanged();
+	emit foldersChanged();
 }
 
 QList<QUrl> FoldersModel::folders() const
 {
-    return m_folders;
+	return m_folders;
 }

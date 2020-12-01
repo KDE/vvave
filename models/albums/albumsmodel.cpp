@@ -32,7 +32,6 @@ AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
 	});
 
 	this->m_worker.start ();
-	//    connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
 }
 
 AlbumsModel::~AlbumsModel()
@@ -52,9 +51,11 @@ void AlbumsModel::componentComplete()
 	}
 
 	connect(vvave::instance (), &vvave::sourceRemoved, this, &AlbumsModel::setList);
+	connect(this, &AlbumsModel::queryChanged, this, &AlbumsModel::setList);
+	setList();
 }
 
-FMH::MODEL_LIST AlbumsModel::items() const
+const FMH::MODEL_LIST &AlbumsModel::items() const
 {
 	return this->list;
 }
@@ -66,8 +67,6 @@ void AlbumsModel::setQuery(const QUERY &query)
 
 	this->query = query;
 	emit this->queryChanged();
-
-	setList();
 }
 
 AlbumsModel::QUERY AlbumsModel::getQuery() const
@@ -91,6 +90,7 @@ void AlbumsModel::setList()
 		m_Query = "select * from artists order by artist asc";
 	else return;
 
+	qDebug() << "Album query is" << m_Query;
 	//get albums data with modifier for missing images for artworks
 	//    const auto checker = [&](FMH::MODEL &item) -> bool
 	//    {
@@ -246,8 +246,8 @@ void ArtworkFetcher::fetch(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology)
 						QString name = !request.track[FMH::MODEL_KEY::ALBUM].isEmpty() ? request.track[FMH::MODEL_KEY::ARTIST] + "_" + request.track[FMH::MODEL_KEY::ALBUM] : request.track[FMH::MODEL_KEY::ARTIST];
 						name.replace("/", "-");
 						name.replace("&", "-");
-						downloader->downloadFile(res.value.toString(),  BAE::CachePath + name + format);
-						qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM]<< BAE::CachePath + name + format;
+						downloader->downloadFile(res.value.toString(),  BAE::CachePath.toString() + name + format);
+						qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM]<< BAE::CachePath.toString() + name + format;
 					}else
 					{
 						auto newTrack = request.track;

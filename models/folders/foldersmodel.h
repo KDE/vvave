@@ -18,9 +18,9 @@ class FoldersModel : public MauiList
     Q_PROPERTY(QList<QUrl> folders READ folders WRITE setFolders NOTIFY foldersChanged)
 
 public:
-    FoldersModel();
+    FoldersModel(QObject *parent = nullptr);
 
-    FMH::MODEL_LIST items() const override final;
+    const FMH::MODEL_LIST &items() const override final;
     void setFolders(const QList<QUrl> &folders);
     QList<QUrl> folders () const;
 

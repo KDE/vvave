@@ -6,7 +6,7 @@ import QtQml 2.14
 import Qt.labs.settings 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.2 as Maui
+import org.kde.mauikit 1.3 as Maui
 import org.maui.vvave 1.0
 
 import "utils"
@@ -47,7 +47,7 @@ Maui.ApplicationWindow
 
     readonly property string currentArtwork: currentTrack ?  currentTrack.artwork : ""
 
-    readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/ 1000))
+    readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
     readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
 
     readonly property alias isPlaying: player.playing
@@ -136,7 +136,7 @@ Maui.ApplicationWindow
                     }
     }
 
-    altHeader: Kirigami.Settings.isMobile
+    altHeader: Kirigami.SettingsisMobile
     headBar.visible: !focusView
     headBar.rightContent: ToolButton
     {
@@ -170,6 +170,32 @@ Maui.ApplicationWindow
     {
         id: _settingsDialogComponent
         SettingsDialog {}
+    }
+
+    Component
+    {
+        id: _removeDialogComponent
+
+        Maui.FileListingDialog
+        {
+            id: _removeDialog
+
+            urls: selectionBar.uris
+
+            title: i18n("Remove %1 tracks", urls.length)
+            message: i18n("Are you sure you want to remove this files? This action can not be undone.")
+
+            rejectButton.text: i18n("Delete")
+            acceptButton.text: i18n("Cancel")
+
+            onAccepted: close()
+
+            onRejected:
+            {
+                Maui.FM.removeFiles(_removeDialog.urls)
+                close()
+            }
+        }
     }
 
     FloatingDisk
@@ -275,14 +301,11 @@ Maui.ApplicationWindow
         width: parent.width
     }
 
-
     Component
     {
         id: _focusViewComponent
 
-        FocusView
-        {
-        }
+        FocusView { }
     }
 
     StackView
@@ -317,8 +340,7 @@ Maui.ApplicationWindow
                     holder.title : i18n("No Albums!")
                     holder.body: i18n("Add new music sources")
                     holder.emojiSize: Maui.Style.iconSizes.huge
-
-                    Component.onCompleted: list.query = Albums.ALBUMS
+                    list.query: Albums.ALBUMS
                 }
 
                 AlbumsView
@@ -331,8 +353,7 @@ Maui.ApplicationWindow
                     holder.title : i18n("No Artists!")
                     holder.body: i18n("Add new music sources")
                     holder.emojiSize: Maui.Style.iconSizes.huge
-
-                    Component.onCompleted: list.query = Albums.ARTISTS
+                    list.query : Albums.ARTISTS
                 }
 
                 Maui.AppViewLoader
@@ -350,6 +371,7 @@ Maui.ApplicationWindow
                 {
                     Maui.AppView.title: i18n("Cloud")
                     Maui.AppView.iconName: "folder-cloud"
+
                     CloudView
                     {
                         id: cloudView
@@ -383,9 +405,7 @@ Maui.ApplicationWindow
                 }
             }
         }
-
     }
-
 
     Component.onCompleted:
     {

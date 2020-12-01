@@ -22,7 +22,12 @@ Maui.AltBrowser
 
     signal albumCoverClicked(string album, string artist)
 
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+
     headBar.visible: true
+    headerBackground.color: "transparent"
+
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true

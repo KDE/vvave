@@ -22,10 +22,15 @@ Maui.ItemDelegate
 
     property alias image : _image
 
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.backgroundColor: "#333";
+    Kirigami.Theme.textColor: "#fafafa"
+
     Item
     {
         id: _cover
         anchors.fill: parent
+        clip: true
 
         Image
         {
@@ -43,46 +48,39 @@ Maui.ItemDelegate
             {
                 if (status == Image.Error)
                     source = "qrc:/assets/cover.png"
-            }         
+            }
         }
 
-        Item
+        LinearGradient
         {
-            id: _labelBg
-            height: Math.min (parent.height * 0.3, _labelsLayout.implicitHeight ) + Maui.Style.space.big
-            width: parent.width
-            anchors.bottom: parent.bottom
+            anchors.fill: parent
+            start: Qt.point(0, height * 0.5)
+            end: Qt.point(0, parent.height)
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "transparent" }
+                GradientStop { position: control.isCurrentItem || control.hovered ? 0.7 : 0.9 ; color: control.Kirigami.Theme.backgroundColor }
+            }
+        }
+
+        Maui.ListItemTemplate
+        {
+            id: _labelsLayout
             visible: showLabels
 
-            Kirigami.Theme.inherit: false
-            Kirigami.Theme.backgroundColor: "#333";
-            Kirigami.Theme.textColor: "#fafafa"
+            width: parent.width
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: Maui.Style.space.medium
+            height: Math.min(parent.height, leftLabels.implicitHeight)
+            label1.visible: label1.text && control.width > 50
+            label1.font.pointSize: Maui.Style.fontSizes.big
+            //                label1.wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            label1.color: control.hovered || control.isCurrentItem ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+            label1.font.bold: true
+            label1.font.weight: Font.Bold
 
-            Rectangle
-            {
-                anchors.fill: parent
-                color: control.isCurrentItem ? Kirigami.Theme.highlightColor : _labelBg.Kirigami.Theme.backgroundColor
-                opacity: control.isCurrentItem || control.hovered ? 1 : 0.7
-            }
-
-            Maui.ListItemTemplate
-            {
-                id: _labelsLayout
-                anchors.centerIn: parent
-                width: parent.width * 0.9
-                height: Math.min(parent.height * 0.9, implicitHeight)
-                implicitHeight: label1.implicitHeight + label2.implicitHeight + spacing
-
-                label1.visible: label1.text && control.width > 50
-                label1.font.pointSize: Maui.Style.fontSizes.default
-                label1.font.bold: true
-                label1.font.weight: Font.Bold
-
-                label2.visible: label2.text && (control.width > 70)
-                label2.font.pointSize: Maui.Style.fontSizes.medium
-                label2.wrapMode: Text.NoWrap
-            }
-
+            label2.visible: label2.text && (control.width > 70)
+            label2.font.pointSize: Maui.Style.fontSizes.medium
+            label2.wrapMode: Text.NoWrap
         }
 
         layer.enabled: albumRadius
@@ -95,9 +93,7 @@ Maui.ItemDelegate
 
                 Rectangle
                 {
-                    anchors.centerIn: parent
-                    width: _cover.width
-                    height: _cover.height
+                    anchors.fill: parent
                     radius: albumRadius
                 }
             }
@@ -106,15 +102,16 @@ Maui.ItemDelegate
 
     Rectangle
     {
-        anchors.centerIn: _cover
+        anchors.fill: _cover
+        Kirigami.Theme.inherit: false
+//        anchors.centerIn: _cover
 
-                            width: _image.status === Image.Ready ? Math.min(parent.width, _image.paintedWidth) : parent.width
-                            height:  _image.status === Image.Ready ? Math.min(parent.height, _image.paintedHeight) : parent.height
+//        width: _image.status === Image.Ready ? Math.min(parent.width, _image.paintedWidth) : parent.width
+//        height:  _image.status === Image.Ready ? Math.min(parent.height, _image.paintedHeight) : parent.height
 
         color: "transparent"
         border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
         radius: albumRadius
-        opacity: 0.6
 
         Rectangle
         {
@@ -122,7 +119,7 @@ Maui.ItemDelegate
             color: "transparent"
             radius: parent.radius - 0.5
             border.color: Qt.lighter(Kirigami.Theme.backgroundColor, 2)
-            opacity: 0.8
+            opacity: 0.2
             anchors.margins: 1
         }
     }

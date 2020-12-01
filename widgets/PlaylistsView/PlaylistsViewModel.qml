@@ -1,9 +1,10 @@
-import QtQuick 2.10
+import QtQuick 2.14
+import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.10
 import QtGraphicalEffects 1.12
-import org.kde.kirigami 2.6 as Kirigami
-import org.kde.mauikit 1.0 as Maui
+
+import org.kde.kirigami 2.8 as Kirigami
+import org.kde.mauikit 1.3 as Maui
 
 import org.maui.vvave 1.0
 
@@ -17,7 +18,8 @@ import "../../utils/Help.js" as H
 Maui.GridView
 {
     id: control
-    itemSize: 130
+    itemSize: Math.min(260, Math.max(140, Math.floor(width* 0.3)))
+    itemHeight: itemSize
 
     holder.emoji:  "qrc:/assets/dialog-information.svg"
     holder.title : i18n("No Playlists!")
@@ -42,56 +44,48 @@ Maui.GridView
         return color;
     }
 
-    delegate : Item
+    delegate : Maui.GalleryRollItem
     {
+        id: _collageDelegate
         height: control.cellHeight
         width: control.cellWidth
 
-        property bool isCurrentItem: GridView.isCurrentItem       
+        isCurrentItem: GridView.isCurrentItem
+        images: model.preview.split(",")
 
-        CollageDelegate
+        label1.text: model.playlist
+        label2.text: model.description
+        template.iconSource: model.icon
+
+        onClicked :
         {
-            id: _collageDelegate
-            anchors.centerIn: parent
-            height: control.itemSize - Maui.Style.space.medium
-            width: height
-            images: model.preview.split(",")
-            isCurrentItem: parent.isCurrentItem
-
-            tag: model.playlist
-            label1.text: model.playlist
-            label2.text: model.description
-            template.iconSource: model.icon
-
-            onClicked :
+            control.currentIndex = index
+            if(Maui.Handy.singleClick)
             {
-                control.currentIndex = index
-                if(Maui.Handy.singleClick)
-                {
-                    populate(model.playlist, true)
-                }
-            }
-
-            onDoubleClicked :
-            {
-                control.currentIndex = index
-                if(!Maui.Handy.singleClick)
-                {                    
-                    populate(model.playlist, true)
-                }
-            }
-
-            onRightClicked:
-            {
-                control.currentIndex = index
-                currentPlaylist = model.playlist
-            }
-
-            onPressAndHold:
-            {
-                control.currentIndex = index
-                currentPlaylist = model.playlist
+                populate(model.playlist, true)
             }
         }
+
+        onDoubleClicked :
+        {
+            control.currentIndex = index
+            if(!Maui.Handy.singleClick)
+            {
+                populate(model.playlist, true)
+            }
+        }
+
+        onRightClicked:
+        {
+            control.currentIndex = index
+            currentPlaylist = model.playlist
+        }
+
+        onPressAndHold:
+        {
+            control.currentIndex = index
+            currentPlaylist = model.playlist
+        }
     }
+
 }

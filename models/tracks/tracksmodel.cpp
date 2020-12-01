@@ -13,16 +13,17 @@ TracksModel::TracksModel(QObject *parent) : MauiList(parent),
 	db(CollectionDB::getInstance())
 {
 	qRegisterMetaType<TracksModel*>("const TracksModel*");
-	connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
 }
 
 void TracksModel::componentComplete()
 {
+	connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
 	connect(vvave::instance (), &vvave::tracksAdded, this, &TracksModel::setList);
 	connect(vvave::instance (), &vvave::sourceRemoved, this, &TracksModel::setList);
+	setList();
 }
 
-FMH::MODEL_LIST TracksModel::items() const
+const FMH::MODEL_LIST &TracksModel::items() const
 {
 	return this->list;
 }
@@ -48,15 +49,18 @@ int TracksModel::limit() const
 
 void TracksModel::setList()
 {
+	if(query.isEmpty())
+		return;
+
 	emit this->preListChanged();
-    this->list.clear();
+	this->list.clear();
 
 	qDebug()<< "GETTIN TRACK LIST" << this->query;
 
 	if(this->query.startsWith("#"))
 	{
-        auto m_query = query;
-        const auto urls =  FMStatic::getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
+		auto m_query = query;
+		const auto urls =  FMStatic::getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
 		for(const auto &url : urls)
 		{
 			this->list << this->db->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album "
@@ -86,7 +90,7 @@ emit countChanged();
 void TracksModel::copy(const TracksModel * model)
 {
 	emit this->preListChanged ();
-    this->list << model->getItems ();
+	this->list << model->getItems ();
 	emit this->postListChanged ();
 	emit this->countChanged();
 }
@@ -110,7 +114,7 @@ void TracksModel::appendAt(const QVariantMap &item, const int &at)
 	if(at > this->list.size() || at < 0)
 		return;
 
-    qDebug() << "trying to append at << " << 0;
+	qDebug() << "trying to append at << " << 0;
 	emit this->preItemAppendedAt(at);
 	this->list.insert(at, FMH::toModel(item));
 	emit this->postItemAppended();

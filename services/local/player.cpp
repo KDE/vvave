@@ -152,10 +152,10 @@ bool Player::getPlaying() const
 
 void Player::setPos(const int &value)
 {
-	this->player->setPosition(this->player->duration() / 1000 * value);
+    this->player->setPosition(value);
 }
 
 int Player::getPos() const
 {
-	return static_cast<int>(static_cast<double>(this->player->position())/this->player->duration()*1000);
+    return this->player->position();
 }
