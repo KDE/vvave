@@ -113,6 +113,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     db/collectionDB.cpp \
+    services/local/artworkprovider.cpp \
     services/local/taginfo.cpp \
     services/local/player.cpp \
     services/local/playlist.cpp \
@@ -138,6 +139,7 @@ QML_DESIGNER_IMPORT_PATH =
 
 HEADERS += \
     db/collectionDB.h \
+    services/local/artworkprovider.h \
     utils/bae.h \
     services/local/taginfo.h \
     services/local/player.h \

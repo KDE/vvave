@@ -38,6 +38,7 @@ add_executable(vvave
     pulpo/pulpo.cpp
     pulpo/service.cpp
     services/local/taginfo.cpp
+    services/local/artworkprovider.cpp
     services/local/player.cpp
     services/local/playlist.cpp
     services/web/NextCloud/nextmusic.cpp

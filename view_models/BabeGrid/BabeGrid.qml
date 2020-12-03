@@ -18,6 +18,8 @@ Maui.AltBrowser
     property alias list: _albumsList
     property alias listModel: _albumsModel
 
+    property string prefix : ""
+
     readonly property int count: currentView.count
 
     signal albumCoverClicked(string album, string artist)
@@ -66,7 +68,7 @@ Maui.AltBrowser
             spacing: Maui.Style.space.medium
             label1.text: model.album ? model.album : model.artist
             label2.text: model.artist && model.album ? model.artist : ""
-            imageSource:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
+            imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
             iconSizeHint: height * 0.9
             leftMargin: 0
         }
@@ -109,7 +111,7 @@ Maui.AltBrowser
 
             label1.text: model.album ? model.album : model.artist
             label2.text: model.artist && model.album ? model.artist : ""
-            image.source:  model.artwork ?  model.artwork : "qrc:/assets/cover.png"
+            image.source: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
 
             onClicked:
             {

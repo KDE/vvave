@@ -336,6 +336,7 @@ Maui.ApplicationWindow
                     id: albumsView
                     Maui.AppView.title: i18n("Albums")
                     Maui.AppView.iconName: "view-media-album-cover"
+                    prefix: "album"
                     holder.emoji: "qrc:/assets/dialog-information.svg"
                     holder.title : i18n("No Albums!")
                     holder.body: i18n("Add new music sources")
@@ -348,7 +349,7 @@ Maui.ApplicationWindow
                     id: artistsView
                     Maui.AppView.title: i18n("Artists")
                     Maui.AppView.iconName: "view-media-artist"
-
+                    prefix: "artist"
                     holder.emoji: "qrc:/assets/dialog-information.svg"
                     holder.title : i18n("No Artists!")
                     holder.body: i18n("Add new music sources")
@@ -410,6 +411,7 @@ Maui.ApplicationWindow
     Component.onCompleted:
     {
         Vvave.autoScan = settings.autoScan
+        vvave.fetchArtwork = settings.fetchArtwork
     }
 
     /*CONNECTIONS*/

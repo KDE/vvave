@@ -262,7 +262,7 @@ namespace BAE
                     {
                         track.insert(FMH::MODEL_KEY::ARTWORK, file.toString());
                         return true;
-                    }
+                    }else continue;
                     break;
 
                 case FMH::MODEL_KEY::ARTIST:
@@ -270,13 +270,14 @@ namespace BAE
                     {
                         track.insert(FMH::MODEL_KEY::ARTWORK, file.toString());
                         return true;
-                    }
+                    }else continue;
                     break;
                 default: break;
             }
         }
         return false;
     }
+
 }
 
 

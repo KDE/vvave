@@ -34,7 +34,6 @@ public:
 private:
     CollectionDB *db;
     FMH::MODEL_LIST list;
-    void sortList();
     void setList();
 
     QString query;

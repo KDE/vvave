@@ -91,6 +91,15 @@ vvave *vvave::qmlAttachedProperties(QObject *object)
     return vvave::instance();
 }
 
+void vvave::setFetchArtwork(bool fetchArtwork)
+{
+    if (m_fetchArtwork == fetchArtwork)
+        return;
+
+    m_fetchArtwork = fetchArtwork;
+    emit fetchArtworkChanged(m_fetchArtwork);
+}
+
 QList<QUrl> vvave::folders()
 {
     const auto sources = CollectionDB::getInstance()->getDBData("select * from sources");
@@ -100,6 +109,11 @@ QList<QUrl> vvave::folders()
 bool vvave::autoScan() const
 {
     return m_autoScan;
+}
+
+bool vvave::fetchArtwork() const
+{
+    return m_fetchArtwork;
 }
 
 void vvave::addSources(const QStringList &paths)

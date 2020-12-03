@@ -50,6 +50,7 @@
 #include "utils/bae.h"
 #include "services/local/player.h"
 #include "services/local/playlist.h"
+#include "services/local/artworkprovider.h"
 
 #include "models/tracks/tracksmodel.h"
 #include "models/albums/albumsmodel.h"
@@ -137,6 +138,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<Player>(VVAVE_URI, 1, 0, "Player");
 	qmlRegisterType<Playlist>(VVAVE_URI, 1, 0,"Playlist");
     qmlRegisterType<Mpris2>(VVAVE_URI, 1, 0, "Mpris2");
+
+    engine.addImageProvider("artwork", new ArtworkProvider());
 
 #if defined Q_OS_LINUX && !defined Q_OS_ANDROID
 	qRegisterMetaType<MediaPlayer2Player*>();

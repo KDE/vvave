@@ -63,7 +63,7 @@ void TracksModel::setList()
 		const auto urls =  FMStatic::getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
 		for(const auto &url : urls)
 		{
-			this->list << this->db->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on al.album = t.album "
+            this->list << this->db->getDBData(QString("select t.* from tracks t inner join albums al on al.album = t.album "
 													  "and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
 		}
 
@@ -84,7 +84,7 @@ void TracksModel::setList()
 }
 
 emit this->postListChanged();
-emit countChanged();
+emit this->countChanged();
 }
 
 void TracksModel::copy(const TracksModel * model)

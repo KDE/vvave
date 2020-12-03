@@ -25,6 +25,7 @@ StackView
     property string currentArtist: ""
 
     property alias holder: albumsViewGrid.holder
+    property alias prefix: albumsViewGrid.prefix
 
     property Flickable flickable : currentItem.flickable
 
@@ -73,11 +74,6 @@ StackView
                 Player.appendAllModel(listModel.list)
             }
         }
-    }
-
-    Component.onCompleted:
-    {
-        control.list.fetchArtwork = settings.fetchArtwork
     }
 
     function populateTable(album, artist)

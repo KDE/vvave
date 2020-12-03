@@ -1,7 +1,6 @@
 CREATE TABLE ARTISTS
 (
 artist   TEXT  ,
-artwork TEXT ,
 wiki    TEXT,
 PRIMARY KEY(artist)
 );
@@ -10,7 +9,6 @@ CREATE TABLE ALBUMS
 (
 album   TEXT ,
 artist  TEXT,
-artwork TEXT,
 wiki    TEXT,
 PRIMARY KEY(album, artist),
 FOREIGN KEY(artist) REFERENCES artists(artist)

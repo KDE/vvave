@@ -51,8 +51,6 @@ class CollectionDB : public QObject
 		bool check_existance(const QString &tableName, const QString &searchId, const QString &search);
 
 		/* usefull actions */
-		void insertArtwork(const FMH::MODEL &track);
-
 		bool addTrack(const FMH::MODEL &track);
 		bool updateTrack(const FMH::MODEL &track);
 		Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
@@ -79,7 +77,6 @@ class CollectionDB : public QObject
 
 		void removeMissingTracks();
 
-		bool removeArtwork(const QString &table, const QVariantMap &item);
 		bool removeArtist(const QString &artist);
 		bool cleanArtists();
 		bool removeAlbum(const QString &album, const QString &artist);
@@ -111,8 +108,6 @@ class CollectionDB : public QObject
 
 		void sourceInserted(QVariantMap item);
 		void sourcesInserted(QVariantList items);
-
-		void artworkInserted(const FMH::MODEL &albumMap);
 
 		void albumsCleaned(const int &amount);
 		void artistsCleaned(const int &amount);

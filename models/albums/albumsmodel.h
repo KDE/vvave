@@ -14,70 +14,44 @@
 
 #include "pulpo/pulpo.h"
 
-class ArtworkFetcher: public QObject
-{
-    Q_OBJECT
-
-public:
-                void fetch(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology);
-        signals:
-                void artworkReady(const FMH::MODEL &item, const int &index);
-        void finished();
-};
-
 class CollectionDB;
 class AlbumsModel : public MauiList
 {
-        Q_OBJECT
-        Q_PROPERTY(AlbumsModel::QUERY query READ getQuery WRITE setQuery NOTIFY queryChanged())
-    Q_PROPERTY(bool fetchArtwork READ fetchArtwork WRITE setFetchArtwork NOTIFY fetchArtworkChanged)
+    Q_OBJECT
+    Q_PROPERTY(AlbumsModel::QUERY query READ getQuery WRITE setQuery NOTIFY queryChanged())
 
 public:
-        enum QUERY : uint_fast8_t
-        {
-                ARTISTS = FMH::MODEL_KEY::ARTIST,
-                ALBUMS = FMH::MODEL_KEY::ALBUM
-        };
-        Q_ENUM(QUERY)
+    enum QUERY : uint_fast8_t
+    {
+        ARTISTS = FMH::MODEL_KEY::ARTIST,
+        ALBUMS = FMH::MODEL_KEY::ALBUM
+    };
+    Q_ENUM(QUERY)
 
-        explicit AlbumsModel(QObject *parent = nullptr);
-        ~AlbumsModel();
+    explicit AlbumsModel(QObject *parent = nullptr);
 
     void componentComplete() override;
 
-        const FMH::MODEL_LIST &items() const override;
+    const FMH::MODEL_LIST &items() const override;
 
-        void setQuery(const AlbumsModel::QUERY &query);
-        AlbumsModel::QUERY getQuery() const;
-
-    bool fetchArtwork() const;
+    void setQuery(const AlbumsModel::QUERY &query);
+    AlbumsModel::QUERY getQuery() const;
 
 private:
-        bool stopThreads = false;
-        CollectionDB *db;
-        FMH::MODEL_LIST list;
-        QThread m_worker;
+    CollectionDB *db;
+    FMH::MODEL_LIST list;
 
-        void setList();
+    void setList();
 
-        AlbumsModel::QUERY query;
-        void updateArtwork(const int index, const QString &artwork);
-
-    bool m_fetchArtwork = false;
+    AlbumsModel::QUERY query;
 
 public slots:
-        QVariantMap get(const int &index) const;
-        void append(const QVariantMap &item);
-        void append(const QVariantMap &item, const int &at);
-        void refresh();
-
-    void fetchInformation();
-    void setFetchArtwork(bool fetchArtwork);
+    void append(const QVariantMap &item);
+    void append(const QVariantMap &item, const int &at);
+    void refresh();
 
 signals:
     void queryChanged();
-    void startFetchingArtwork(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology);
-    void fetchArtworkChanged(bool fetchArtwork);
 };
 
 #endif // ALBUMSMODEL_H

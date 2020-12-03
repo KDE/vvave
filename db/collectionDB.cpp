@@ -245,13 +245,6 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 	const auto duration = track[FMH::MODEL_KEY::DURATION];
 	const auto trackNumber = track[FMH::MODEL_KEY::TRACK];
 
-	const auto artwork = track[FMH::MODEL_KEY::ARTWORK].isEmpty() ? "" : track[FMH::MODEL_KEY::ARTWORK];
-
-	auto artistTrack = track;
-	artistTrack[FMH::MODEL_KEY::ARTWORK] = "";
-	BAE::artworkCache(artistTrack, FMH::MODEL_KEY::ARTIST);
-	auto artistArtwork = artistTrack[FMH::MODEL_KEY::ARTWORK];
-
 	/* first needs to insert the source, album and artist*/
 	const QVariantMap sourceMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], sourceUrl},
 						   {FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCETYPE], sourceType(url)}};
@@ -259,8 +252,7 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 	if(insert(TABLEMAP[BAE::TABLE::SOURCES], sourceMap))
 			emit sourceInserted(sourceMap);
 
-	const QVariantMap artistMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
-						   {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK], artistArtwork},
+    const QVariantMap artistMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
 						   {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""}};
 
 	if(insert(TABLEMAP[TABLE::ARTISTS], artistMap))
@@ -268,7 +260,6 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 
 	const QVariantMap albumMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist},
-						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK], artwork},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI],""}};
 
 	if(insert(TABLEMAP[TABLE::ALBUMS], albumMap))
@@ -305,14 +296,12 @@ bool CollectionDB::updateTrack(const FMH::MODEL &track)
 	if(this->check_existance(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], track[FMH::MODEL_KEY::URL]))
 	{
 		QVariantMap artistMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], track[FMH::MODEL_KEY::ARTIST]},
-							   {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK], ""},
 							   {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI],""}};
 
 		insert(TABLEMAP[TABLE::ARTISTS],artistMap);
 
 		QVariantMap albumMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], track[FMH::MODEL_KEY::ALBUM]},
 							  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], track[FMH::MODEL_KEY::ARTIST]},
-							  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK], ""},
 							  {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI],""}};
 		insert(TABLEMAP[TABLE::ALBUMS],albumMap);
 
@@ -367,7 +356,6 @@ bool CollectionDB::albumTrack(const FMH::MODEL &track, const QString &value)
 	auto oldAlbum = result.first();
 	QVariantMap albumMap {{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM],value},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], oldAlbum[FMH::MODEL_KEY::ARTIST]},
-						  {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK], oldAlbum[FMH::MODEL_KEY::ARTWORK]},
 						  {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], oldAlbum[FMH::MODEL_KEY::WIKI]}};
 
 	if (!insert(TABLEMAP[TABLE::ALBUMS],albumMap)) return false;
@@ -494,12 +482,12 @@ FMH::MODEL_LIST CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, con
 	QString queryTxt;
 
 	if(where == FMH::MODEL_KEY::COUNT || where == FMH::MODEL_KEY::RATE)
-		queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
+        queryTxt = QString("SELECT t.* FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS],
 				FMH::MODEL_NAME[where],
 				search);
 	else if(where == FMH::MODEL_KEY::WIKI)
 
-		queryTxt = QString("SELECT DISTINCT t.*, al.artwork FROM %1 t INNER JOIN %2 al ON t.%3 = al.%3 INNER JOIN %4 ar ON t.%5 = ar.%5 WHERE al.%6 LIKE \"%%7%\" OR ar.%6 LIKE \"%%7%\" COLLATE NOCASE").arg(TABLEMAP[TABLE::TRACKS],
+        queryTxt = QString("SELECT DISTINCT t.* FROM %1 t INNER JOIN %2 al ON t.%3 = al.%3 INNER JOIN %4 ar ON t.%5 = ar.%5 WHERE al.%6 LIKE \"%%7%\" OR ar.%6 LIKE \"%%7%\" COLLATE NOCASE").arg(TABLEMAP[TABLE::TRACKS],
 				TABLEMAP[TABLE::ALBUMS],
 				FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM],
 				TABLEMAP[TABLE::ARTISTS],
@@ -507,7 +495,7 @@ FMH::MODEL_LIST CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, con
 				FMH::MODEL_NAME[where],
 				search);
 	else
-		queryTxt = QString("SELECT t.*, al.artwork FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE t.%2 LIKE \"%%3%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000").arg(TABLEMAP[TABLE::TRACKS],
+        queryTxt = QString("SELECT t.* FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE t.%2 LIKE \"%%3%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000").arg(TABLEMAP[TABLE::TRACKS],
 				FMH::MODEL_NAME[where],
 				search);
 
@@ -602,48 +590,6 @@ sourceTypes CollectionDB::sourceType(const QString &url)
 
 /*******************OLD STUFF********************/
 
-void CollectionDB::insertArtwork(const FMH::MODEL &track)
-{
-	auto artist = track[FMH::MODEL_KEY::ARTIST];
-	auto album =track[FMH::MODEL_KEY::ALBUM];
-	auto path = track[FMH::MODEL_KEY::ARTWORK];
-
-	switch(BAE::albumType(track))
-	{
-	case TABLE::ALBUMS :
-	{
-		auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\" AND %6 = \"%7\"").arg(TABLEMAP[TABLE::ALBUMS],
-				FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK],
-				path.isEmpty() ? SLANG[W::NONE] : path,
-												  FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM],
-												  album,
-												  FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],
-												  artist);
-
-		auto query = this->getQuery(queryStr);
-		if(!query.exec())qDebug()<<"COULDNT Artwork[cover] inerted into DB"<<artist<<album;
-		break;
-
-	}
-	case TABLE::ARTISTS:
-	{
-		auto queryStr = QString("UPDATE %1 SET %2 = \"%3\" WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::ARTISTS],
-				FMH::MODEL_NAME[FMH::MODEL_KEY::ARTWORK],
-				path.isEmpty() ? SLANG[W::NONE] : path,
-												  FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST],
-												  artist);
-		auto query = this->getQuery(queryStr);
-		if(!query.exec())qDebug()<<"COULDNT Artwork[head] inerted into DB"<<artist;
-
-		break;
-
-	}
-	default: return;
-	}
-
-	emit artworkInserted(track);
-}
-
 void CollectionDB::removeMissingTracks()
 {
 	auto tracks = this->getDBData("select url from tracks");
@@ -652,11 +598,6 @@ void CollectionDB::removeMissingTracks()
 		if(!FMH::fileExists(track[FMH::MODEL_KEY::URL]))
 			this->removeTrack(track[FMH::MODEL_KEY::URL]);
 
-}
-
-bool CollectionDB::removeArtwork(const QString &table, const QVariantMap &item)
-{
-	return this->update(table, {{FMH::MODEL_KEY::ARTWORK, ""}}, item);
 }
 
 bool CollectionDB::removeArtist(const QString &artist)

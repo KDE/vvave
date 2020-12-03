@@ -64,22 +64,22 @@ QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
 	QStringList res;
 	if(playlist == "Most Played")
 	{
-		const auto data = CollectionDB::getInstance()->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist WHERE t.count > 0 ORDER BY count desc LIMIT 4"));
+        const auto data = CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist WHERE t.count > 0 ORDER BY count desc LIMIT 4"));
 		for(const auto &item : data)
-		{
-			res << item[FMH::MODEL_KEY::ARTWORK];
-		}
+		{            
+            res << QString("image://artwork/album:%1:%2").arg(item[FMH::MODEL_KEY::ARTIST], item[FMH::MODEL_KEY::ALBUM]);
+        }
 
 		return res.join(",");
 	}
 
 	if(playlist == "Rating")
 	{
-		const auto data =  CollectionDB::getInstance()->getDBData(QString("select t.*, al.artwork from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where rate > 0 order by rate desc limit 4"));
+        const auto data =  CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where rate > 0 order by rate desc limit 4"));
 		for(const auto &item : data)
 		{
-			res << item[FMH::MODEL_KEY::ARTWORK];
-		}
+            res << QString("image://artwork/album:%1:%2").arg(item[FMH::MODEL_KEY::ARTIST], item[FMH::MODEL_KEY::ALBUM]);
+        }
 
 		return res.join(",");
 	}
@@ -87,12 +87,12 @@ QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
 	const auto urls =  FMStatic::getTagUrls(playlist, {}, true, 4, "audio");
 	for(const auto &url : urls)
 	{
-		const auto data =   CollectionDB::getInstance()->getDBData(QString("select t.url, al.artwork from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
+        const auto data =   CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.url = %1").arg("\""+url.toString()+"\""));
 
 		for(const auto &item : data)
 		{
-			res << item[FMH::MODEL_KEY::ARTWORK];
-		}
+            res << QString("image://artwork/album:%1:%2").arg(item[FMH::MODEL_KEY::ARTIST], item[FMH::MODEL_KEY::ALBUM]);
+        }
 	}
 
 	return res.join(",");
