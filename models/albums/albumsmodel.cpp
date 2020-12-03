@@ -64,63 +64,9 @@ void AlbumsModel::setList()
 		m_Query = "select * from artists order by artist asc";
 	else return;
 
-	qDebug() << "Album query is" << m_Query;
-	//get albums data with modifier for missing images for artworks
-	//    const auto checker = [&](FMH::MODEL &item) -> bool
-	//    {
-	//        const auto artwork = item[FMH::MODEL_KEY::ARTWORK];
-
-	//        if(artwork.isEmpty())
-	//            return true;
-
-	//        if(QUrl(artwork).isLocalFile () && !FMH::fileExists(artwork))
-	//        {
-	//            this->db->removeArtwork(AlbumsModel::QUERY::ALBUMS ?  "albums" : "artists", FMH::toMap(item));
-	//            item[FMH::MODEL_KEY::ARTWORK] = "";
-	//        }
-
-	//        return true;
-	//    };
 	this->list = this->db->getDBData(m_Query);
 
     emit this->postListChanged();
-}
-
-void AlbumsModel::append(const QVariantMap &item)
-{
-	if(item.isEmpty())
-		return;
-
-	emit this->preItemAppended();
-
-	FMH::MODEL model;
-	for(auto key : item.keys())
-		model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
-
-	this->list << model;
-
-	emit this->postItemAppended();
-}
-
-void AlbumsModel::append(const QVariantMap &item, const int &at)
-{
-	if(item.isEmpty())
-		return;
-
-	if(at > this->list.size() || at < 0)
-		return;
-
-	qDebug()<< "trying to append at" << at << item["title"];
-
-	emit this->preItemAppendedAt(at);
-
-	FMH::MODEL model;
-	for(auto key : item.keys())
-		model.insert(FMH::MODEL_NAME_KEY[key], item[key].toString());
-
-	this->list.insert(at, model);
-
-	emit this->postItemAppended();
 }
 
 void AlbumsModel::refresh()

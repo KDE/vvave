@@ -46,8 +46,6 @@ private:
     AlbumsModel::QUERY query;
 
 public slots:
-    void append(const QVariantMap &item);
-    void append(const QVariantMap &item, const int &at);
     void refresh();
 
 signals:
