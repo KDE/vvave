@@ -55,7 +55,6 @@
 #include "models/tracks/tracksmodel.h"
 #include "models/albums/albumsmodel.h"
 #include "models/playlists/playlistsmodel.h"
-#include "models/folders/foldersmodel.h"
 #include "models/cloud/cloud.h"
 
 #define VVAVE_URI "org.maui.vvave"
@@ -133,7 +132,6 @@ int main(int argc, char *argv[])
 	qmlRegisterType<TracksModel>(VVAVE_URI, 1, 0, "Tracks");
 	qmlRegisterType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists");
 	qmlRegisterType<AlbumsModel>(VVAVE_URI, 1, 0, "Albums");
-	qmlRegisterType<FoldersModel>(VVAVE_URI, 1, 0, "Folders");
 	qmlRegisterType<Cloud>(VVAVE_URI, 1, 0, "Cloud");
 	qmlRegisterType<Player>(VVAVE_URI, 1, 0, "Player");
 	qmlRegisterType<Playlist>(VVAVE_URI, 1, 0,"Playlist");

@@ -3,6 +3,7 @@
 #include <MauiKit/downloader.h>
 #include "taginfo.h"
 #include "../../utils/bae.h"
+#include "vvave.h"
 
 AsyncImageResponse::AsyncImageResponse(const QString & id, const QSize & requestedSize)
     : m_id(id), m_requestedSize(requestedSize)
@@ -42,7 +43,7 @@ AsyncImageResponse::AsyncImageResponse(const QString & id, const QSize & request
         qDebug() << "ARTWORK CACHED" << album << artist;
         m_image = QImage(QUrl(data[FMH::MODEL_KEY::ARTWORK]).toLocalFile());
         emit this->finished();
-    }else
+    }else if(vvave::instance()->fetchArtwork())
     {
         auto m_artworkFetcher = new ArtworkFetcher;
         connect(m_artworkFetcher, &ArtworkFetcher::finished, m_artworkFetcher, &ArtworkFetcher::deleteLater);
@@ -64,6 +65,10 @@ AsyncImageResponse::AsyncImageResponse(const QString & id, const QSize & request
         });
 
         m_artworkFetcher->fetch(data, m_type == FMH::MODEL_KEY::ALBUM ? PULPO::ONTOLOGY::ALBUM : PULPO::ONTOLOGY::ARTIST);
+    }else
+    {
+        m_image = QImage(":/assets/cover.png");
+        emit this->finished();
     }
 }
 

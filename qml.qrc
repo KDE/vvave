@@ -25,7 +25,6 @@
         <file>services/web/Spotify/LoginForm.qml</file>
         <file>services/web/Spotify/spotify.html</file>
         <file>widgets/FloatingDisk.qml</file>
-        <file>widgets/FoldersView.qml</file>
         <file>assets/vvave.svg</file>
         <file>assets/materialdesignicons-webfont.ttf</file>
         <file>widgets/CloudView/CloudView.qml</file>

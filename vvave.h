@@ -12,7 +12,6 @@ class vvave : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QVariantList sources READ sourcesModel NOTIFY sourcesChanged FINAL)
-	Q_PROPERTY(QList<QUrl> folders READ folders NOTIFY sourcesChanged FINAL)
     Q_PROPERTY(bool autoScan READ autoScan WRITE setAutoScan NOTIFY autoScanChanged)
     Q_PROPERTY(bool fetchArtwork READ fetchArtwork WRITE setFetchArtwork NOTIFY fetchArtworkChanged)
 
@@ -30,8 +29,6 @@ public:
 	vvave &operator=(const vvave &) = delete;
 	vvave(vvave &&) = delete;
 	vvave &operator=(vvave &&) = delete;
-
-	QList<QUrl> folders();
 
     bool autoScan() const;
 

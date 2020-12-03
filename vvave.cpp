@@ -100,12 +100,6 @@ void vvave::setFetchArtwork(bool fetchArtwork)
     emit fetchArtworkChanged(m_fetchArtwork);
 }
 
-QList<QUrl> vvave::folders()
-{
-    const auto sources = CollectionDB::getInstance()->getDBData("select * from sources");
-    return QUrl::fromStringList(FMH::modelToList(sources, FMH::MODEL_KEY::URL));
-}
-
 bool vvave::autoScan() const
 {
     return m_autoScan;

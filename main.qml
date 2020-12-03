@@ -62,9 +62,7 @@ Maui.ApplicationWindow
                                            albums: 1,
                                            artists: 2,
                                            playlists: 3,
-                                           cloud: 4,
-                                           folders: 5,
-                                           youtube: 6})
+                                           cloud: 4 })
 
     property string syncPlaylist: ""
     property bool sync: false
@@ -378,17 +376,6 @@ Maui.ApplicationWindow
                         id: cloudView
                     }
                 }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Folders")
-                    Maui.AppView.iconName: "folder"
-
-                    FoldersView
-                    {
-                        id: foldersView
-                    }
-                }
             }
 
             footer: SelectionBar
@@ -411,7 +398,7 @@ Maui.ApplicationWindow
     Component.onCompleted:
     {
         Vvave.autoScan = settings.autoScan
-        vvave.fetchArtwork = settings.fetchArtwork
+        Vvave.fetchArtwork = settings.fetchArtwork
     }
 
     /*CONNECTIONS*/
