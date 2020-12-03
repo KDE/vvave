@@ -101,15 +101,7 @@ Item
                 anchors.fill: parent
                 anchors.margins: Maui.Style.space.tiny
                 anchors.centerIn: parent
-                source:
-                {
-                    if (currentArtwork)
-                        (currentArtwork.length > 0 && currentArtwork
-                         !== "NONE") ? currentArtwork: "qrc:/assets/cover.png"
-                    else
-                        "qrc:/assets/cover.png"
-                }
-
+                source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
                 fillMode: Image.PreserveAspectFit
                 cache: false
                 antialiasing: true
@@ -123,11 +115,7 @@ Item
                         height: miniArtwork.height
                         Rectangle
                         {
-                            anchors.centerIn: parent
-                            width: miniArtwork.adapt ? miniArtwork.width : Math.min(
-                                                           miniArtwork.width,
-                                                           miniArtwork.height)
-                            height: miniArtwork.adapt ? miniArtwork.height : width
+                            anchors.fill: parent
                             radius: Math.min(width, height)
                         }
                     }

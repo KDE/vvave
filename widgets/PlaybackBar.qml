@@ -31,7 +31,7 @@ Control
             asynchronous: true
             cache: true
 
-            source: currentArtwork
+            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
         }
 
         FastBlur

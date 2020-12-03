@@ -45,8 +45,6 @@ Maui.ApplicationWindow
     property alias currentTrack : playlist.currentTrack
     property alias currentTrackIndex: playlist.currentIndex
 
-    readonly property string currentArtwork: currentTrack ?  currentTrack.artwork : ""
-
     readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
     readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
 

@@ -60,7 +60,7 @@ Maui.Page
             asynchronous: true
             cache: true
 
-            source: currentArtwork
+            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
         }
 
         FastBlur
@@ -200,7 +200,7 @@ Maui.Page
                             smooth: true
                             asynchronous: true
 
-                            source: model.artwork ? model.artwork : "qrc:/assets/cover.png"
+                            source: "image://artwork/album:"+model.artist + ":"+ model.album
 
                             onStatusChanged:
                             {
@@ -369,13 +369,10 @@ Maui.Page
                 padding: 0
                 from: 0
                 to: 1000
-                value: player.pos
+                value: player.pos/player.duration*1000
                 spacing: 0
                 focus: true
-                onMoved:
-                {
-                    player.pos = value
-                }
+                onMoved: player.pos = (player.duration / 1000) * value
             }
 
             Label
@@ -385,7 +382,7 @@ Maui.Page
                 Layout.fillHeight: false
                 verticalAlignment: Qt.AlignVCenter
                 horizontalAlignment: Qt.AlignHCenter
-                text: player.transformTime(player.duration/1000)
+                text: durationTimeLabel
                 elide: Text.ElideMiddle
                 wrapMode: Text.NoWrap
                 color: control.Kirigami.Theme.textColor
