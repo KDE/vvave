@@ -42,7 +42,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** PLAYBACK ********************/
     /*************************************************/
-    property alias currentTrack : playlist.currentTrack
+    readonly property alias currentTrack : playlist.currentTrack
     property alias currentTrackIndex: playlist.currentIndex
 
     readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
@@ -312,6 +312,7 @@ Maui.ApplicationWindow
         initialItem: Maui.Page
         {
             floatingFooter: true
+            headBar.visible: false
             flickable: swipeView.currentItem.flickable ||swipeView.currentItem.item.flickable
 
             Maui.AppViews
