@@ -7,13 +7,8 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
-#ifdef STATIC_MAUIKIT
-#include "fm.h"
-#include "downloader.h"
-#else
 #include <MauiKit/fm.h>
 #include <MauiKit/downloader.h>
-#endif
 
 static const inline QNetworkRequest formRequest(const QUrl &url, const  QString &user, const QString &password)
 {

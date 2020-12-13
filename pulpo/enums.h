@@ -1,11 +1,7 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#else
 #include <MauiKit/fmh.h>
-#endif
 
 #include <QMap>
 #include <QVariant>

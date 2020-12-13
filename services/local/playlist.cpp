@@ -4,11 +4,7 @@
 #include <QRandomGenerator>
 #include <QUrl>
 
-#ifdef STATIC_MAUIKIT
-#include "utils.h"
-#else
 #include <MauiKit/utils.h>
-#endif
 
 Playlist::Playlist(QObject * parent) :  QObject(parent)
 ,m_shuffle(UTIL::loadSettings("SHUFFLE","PLAYBACK", false).toBool())

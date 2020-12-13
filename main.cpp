@@ -31,19 +31,9 @@
 #include "mauimacos.h"
 #endif
 
-#ifdef STATIC_KIRIGAMI
-#include "3rdparty/kirigami/src/kirigamiplugin.h"
-#endif
-
-#ifdef STATIC_MAUIKIT
-#include "3rdparty/mauikit/src/mauikit.h"
-#include "fmstatic.h"
-#include "mauiapp.h"
-#else
 #include <MauiKit/fmstatic.h>
 #include <MauiKit/mauiapp.h>
 #include "vvave_version.h"
-#endif
 
 #include "vvave.h"
 
@@ -143,14 +133,7 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<MediaPlayer2Player*>();
 #endif
 
-#ifdef STATIC_KIRIGAMI
-	KirigamiPlugin::getInstance().registerTypes();
-#endif
-
-#ifdef STATIC_MAUIKIT
-    MauiKit::getInstance().registerTypes(&engine);
-#endif
-	engine.load(url);
+    engine.load(url);
 
 #ifdef Q_OS_MACOS
 	//	MAUIMacOS::removeTitlebarFromWindow();

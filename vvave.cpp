@@ -7,13 +7,8 @@
 #include "kde/notify.h"
 #endif
 
-#ifdef STATIC_MAUIKIT
-#include "fm.h"
-#include "fileloader.h"
-#else
 #include <MauiKit/fm.h>
 #include <MauiKit/fileloader.h>
-#endif
 
 static FMH::MODEL trackInfo(const QUrl &url)
 {

@@ -1,13 +1,8 @@
 #ifndef PLAYLISTSMODEL_H
 #define PLAYLISTSMODEL_H
 
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#include "mauilist.h"
-#else
 #include <MauiKit/fmh.h>
 #include <MauiKit/mauilist.h>
-#endif
 
 class PlaylistsModel : public MauiList
 {

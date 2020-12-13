@@ -1,11 +1,7 @@
 #include "player.h"
 #include "../../utils/bae.h"
 
-#ifdef STATIC_MAUIKIT
-#include "mauiaccounts.h"
-#else
-#include <mauiaccounts.h>
-#endif
+#include <MauiKit/mauiaccounts.h>
 
 Player::Player(QObject *parent) : QObject(parent),
   player(new QMediaPlayer(this))

@@ -1,13 +1,8 @@
 #include "playlistsmodel.h"
 #include "db/collectionDB.h"
 
-#ifdef STATIC_MAUIKIT
-#include "tagging.h"
-#include "fmstatic.h"
-#else
 #include <MauiKit/tagging.h>
 #include <MauiKit/fmstatic.h>
-#endif
 
 PlaylistsModel::PlaylistsModel(QObject *parent) : MauiList(parent)
 {

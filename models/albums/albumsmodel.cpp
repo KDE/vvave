@@ -3,13 +3,8 @@
 
 #include "vvave.h"
 
-#ifdef STATIC_MAUIKIT
-#include "fmstatic.h"
-#include "downloader.h"
-#else
 #include <MauiKit/fmstatic.h>
 #include <MauiKit/downloader.h>
-#endif
 
 AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent),
 	db(CollectionDB::getInstance())

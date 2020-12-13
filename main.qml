@@ -134,14 +134,6 @@ Maui.ApplicationWindow
 
     altHeader: Kirigami.SettingsisMobile
     headBar.visible: !focusView
-    headBar.rightContent: ToolButton
-    {
-        visible: Maui.Handy.isTouch
-        icon.name: "item-select"
-        onClicked: selectionMode = !selectionMode
-        checkable: false
-        checked: selectionMode
-    }
 
     Loader
     {

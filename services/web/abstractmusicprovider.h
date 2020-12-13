@@ -2,11 +2,9 @@
 #define ABSTRACTMUSICPROVIDER_H
 
 #include <QObject>
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#else
+
 #include <MauiKit/fmh.h>
-#endif
+
 /**
  * @brief The AbstractMusicSyncer class
  * is an abstraction for different services backend to stream music.
