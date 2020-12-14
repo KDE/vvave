@@ -49,6 +49,23 @@ Maui.ItemDelegate
                 if (status == Image.Error)
                     source = "qrc:/assets/cover.png"
             }
+
+            OpacityMask
+            {
+                source: mask
+                maskSource: _image
+            }
+
+            LinearGradient
+            {
+                id: mask
+                anchors.fill: parent
+                gradient: Gradient
+                {
+                    GradientStop { position: 0.2; color: "transparent"}
+                    GradientStop { position: 0.9; color: control.Kirigami.Theme.backgroundColor}
+                }
+            }
         }
 
         LinearGradient

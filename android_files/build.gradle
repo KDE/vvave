@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.6.0'
     }
 }
 
@@ -17,10 +17,9 @@ repositories {
 apply plugin: 'com.android.application'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    compile 'com.android.support:support-v4:25.3.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+        compile 'com.android.support:support-v4:25.3.1'
 }
-
 
 android {
     /*******************************************************
@@ -38,7 +37,7 @@ android {
 
     compileSdkVersion androidCompileSdkVersion.toInteger()
 
-    buildToolsVersion androidBuildToolsVersion
+    buildToolsVersion '28.0.3'
 
     sourceSets {
         main {
@@ -53,18 +52,27 @@ android {
        }
     }
 
+    tasks.withType(JavaCompile) {
+        options.incremental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     lintOptions {
         abortOnError false
     }
 
-//     Do not compress Qt binary resources file
-//     aaptOptions {
-//         noCompress 'rcc'
-//     }
-// 
-//     defaultConfig {
-//         resConfig "en"
-//         minSdkVersion = qtMinSdkVersion
-//         targetSdkVersion = qtTargetSdkVersion
-//     }
+    // Do not compress Qt binary resources file
+    aaptOptions {
+        noCompress 'rcc'
+    }
+
+    defaultConfig {
+        resConfig "en"
+        minSdkVersion = qtMinSdkVersion
+        targetSdkVersion = qtTargetSdkVersion
+    }
 }

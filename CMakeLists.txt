@@ -118,7 +118,6 @@ else()
     target_sources(vvave PRIVATE
         kde/mpris2/mediaplayer2.cpp
         kde/mpris2/mediaplayer2player.cpp
-        kde/notify.cpp
         )
 
     target_link_libraries(vvave KF5::ConfigCore KF5::KIOCore Qt5::DBus)

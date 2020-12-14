@@ -18,7 +18,7 @@ Maui.AltBrowser
     property alias list: _albumsList
     property alias listModel: _albumsModel
 
-    property string prefix : ""
+    readonly property string prefix : list.query === Albums.ALBUMS ? "album" : "artist"
 
     readonly property int count: currentView.count
 

@@ -113,8 +113,9 @@ void ArtworkFetcher::fetch(FMH::MODEL data, PULPO::ONTOLOGY ontology)
 
                     const auto format = res.value.toUrl().fileName().endsWith(".png") ? ".png" : ".jpg";
                     QString name = !request.track[FMH::MODEL_KEY::ALBUM].isEmpty() ? request.track[FMH::MODEL_KEY::ARTIST] + "_" + request.track[FMH::MODEL_KEY::ALBUM] : request.track[FMH::MODEL_KEY::ARTIST];
-                    name.replace("/", "-");
-                    name.replace("&", "-");
+
+                    BAE::fixArtworkImageFileName(name);
+
                     downloader->downloadFile(imageUrl,  BAE::CachePath.toString() + name + format);
                     qDebug()<<"SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM]<< BAE::CachePath.toString() + name + format;
 

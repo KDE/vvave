@@ -35,7 +35,7 @@ Maui.Page
     property bool coverArtVisible : false
     property bool allowMenu: true
     property bool showQuickActions : true
-    property bool group : settings.group
+    property bool group : false
 
     property alias contextMenu : contextMenu
     property alias contextMenuItems : contextMenu.contentData

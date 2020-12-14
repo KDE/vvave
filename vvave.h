@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQmlEngine>
+#include <QStringList>
 
 #include "utils/bae.h"
 #include <functional>
@@ -37,10 +38,10 @@ public:
 public slots:
 	void openUrls(const QStringList &urls);
 
-	void addSources(const QStringList &paths);
+    void addSources(const QList<QUrl> &paths);
 	bool removeSource(const QString &source);
 
-	void scanDir(const QStringList &paths = BAE::defaultSources);
+    void scanDir(const QList<QUrl> &paths = QUrl::fromStringList(BAE::defaultSources));
 
 	static QStringList sources();
 	static QVariantList sourcesModel();
