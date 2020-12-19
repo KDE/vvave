@@ -33,6 +33,9 @@ Maui.ApplicationWindow
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
 
+    Vvave.autoScan: settings.autoScan
+    Vvave.fetchArtwork: settings.fetchArtwork
+
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -73,6 +76,8 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property color babeColor: "#f84172"
 
+    headBar.visible: !focusView
+
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
 
@@ -82,10 +87,6 @@ Maui.ApplicationWindow
         category: "Settings"
         property bool fetchArtwork: true
         property bool autoScan: true
-
-        property string sortBy : "title"
-        property int sortOrder: Qt.AscendingOrder
-        property bool group: sortBy === "artist" || sortBy === "album"
     }
 
     Mpris2
@@ -132,34 +133,9 @@ Maui.ApplicationWindow
                     }
     }
 
-    altHeader: Kirigami.SettingsisMobile
-    headBar.visible: !focusView
-    headBar.rightContent: ToolButton
-    {
-        visible: Maui.Handy.isTouch
-        icon.name: "item-select"
-        onClicked: selectionMode = !selectionMode
-        checkable: false
-        checked: selectionMode
-    }
-
     Loader
     {
         id: _dialogLoader
-    }
-
-    //    InfoView
-    //    {
-    //        id: infoView
-    //        maxWidth: parent.width * 0.8
-    //        maxHeight: parent.height * 0.9
-    //    }
-
-
-    Component
-    {
-        id: _fmDialogComponent
-        Maui.FileDialog {}
     }
 
     Component
@@ -194,9 +170,27 @@ Maui.ApplicationWindow
         }
     }
 
+    Component
+    {
+        id: _focusViewComponent
+        FocusView { }
+    }
+
     FloatingDisk
     {
         id: _floatingDisk
+    }
+
+    Playlists
+    {
+        id: playlistsList
+    }
+
+    Maui.TagsDialog
+    {
+        id: playlistDialog
+        onTagsReady: composerList.updateToUrls(tags)
+        composerList.strict: false
     }
 
     mainMenu: [
@@ -210,37 +204,8 @@ Maui.ApplicationWindow
                 _dialogLoader.sourceComponent = _settingsDialogComponent
                 dialog.open()
             }
-        },
-
-        Action
-        {
-            text: i18n("Open")
-            icon.name: "folder-add"
-            onTriggered:
-            {
-                _dialogLoader.sourceComponent = _fmDialogComponent
-                root.dialog.settings.onlyDirs = false
-                root.dialog.settings.filterType = Maui.FMList.AUDIO
-                root.dialog.show(function(paths)
-                {
-                    Vvave.openUrls(paths)
-                    root.dialog.close()
-                })
-            }
         }
     ]
-
-    Playlists
-    {
-        id: playlistsList
-    }
-
-    Maui.TagsDialog
-    {
-        id: playlistDialog
-        onTagsReady: composerList.updateToUrls(tags)
-        composerList.strict: false
-    }
 
     sideBar: Maui.AbstractSideBar
     {
@@ -273,21 +238,6 @@ Maui.ApplicationWindow
         {
             id: mainPlaylist
             anchors.fill: parent
-            Connections
-            {
-                target: mainPlaylist
-                ignoreUnknownSignals: true
-
-                function onCoverPressed(tracks)
-                {
-                    Player.appendAll(tracks)
-                }
-
-                function onCoverDoubleClicked(tracks)
-                {
-                    Player.playAll(tracks)
-                }
-            }
         }
     }
 
@@ -295,13 +245,6 @@ Maui.ApplicationWindow
     {
         visible: !focusView
         width: parent.width
-    }
-
-    Component
-    {
-        id: _focusViewComponent
-
-        FocusView { }
     }
 
     StackView
@@ -313,7 +256,7 @@ Maui.ApplicationWindow
         {
             floatingFooter: true
             headBar.visible: false
-            flickable: swipeView.currentItem.flickable ||swipeView.currentItem.item.flickable
+            flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
 
             Maui.AppViews
             {
@@ -333,11 +276,10 @@ Maui.ApplicationWindow
                     id: albumsView
                     Maui.AppView.title: i18n("Albums")
                     Maui.AppView.iconName: "view-media-album-cover"
-                    prefix: "album"
-                    holder.emoji: "qrc:/assets/dialog-information.svg"
+
                     holder.title : i18n("No Albums!")
                     holder.body: i18n("Add new music sources")
-                    holder.emojiSize: Maui.Style.iconSizes.huge
+
                     list.query: Albums.ALBUMS
                 }
 
@@ -346,11 +288,10 @@ Maui.ApplicationWindow
                     id: artistsView
                     Maui.AppView.title: i18n("Artists")
                     Maui.AppView.iconName: "view-media-artist"
-                    prefix: "artist"
-                    holder.emoji: "qrc:/assets/dialog-information.svg"
+
                     holder.title : i18n("No Artists!")
                     holder.body: i18n("Add new music sources")
-                    holder.emojiSize: Maui.Style.iconSizes.huge
+
                     list.query : Albums.ARTISTS
                 }
 
@@ -380,7 +321,6 @@ Maui.ApplicationWindow
             footer: SelectionBar
             {
                 id: _selectionBar
-                property alias listView: _selectionBar.selectionList
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
                 padding: Maui.Style.space.big
@@ -392,12 +332,6 @@ Maui.ApplicationWindow
                 }
             }
         }
-    }
-
-    Component.onCompleted:
-    {
-        Vvave.autoScan = settings.autoScan
-        Vvave.fetchArtwork = settings.fetchArtwork
     }
 
     /*CONNECTIONS*/

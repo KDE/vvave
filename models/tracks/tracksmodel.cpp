@@ -3,11 +3,7 @@
 
 #include "vvave.h"
 
-#ifdef STATIC_MAUIKIT
-#include "fmstatic.h"
-#else
 #include <MauiKit/fmstatic.h>
-#endif
 
 TracksModel::TracksModel(QObject *parent) : MauiList(parent),
 	db(CollectionDB::getInstance())

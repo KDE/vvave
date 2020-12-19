@@ -23,9 +23,6 @@ Maui.Page
 
     property alias contextMenu: table.contextMenu
 
-    signal coverDoubleClicked(var tracks)
-    signal coverPressed(var tracks)
-
     flickable: table.flickable
 
     title: i18n("Now playing")

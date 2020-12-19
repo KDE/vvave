@@ -4,13 +4,8 @@
 #include <QObject>
 #include <QThread>
 
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#include "mauilist.h"
-#else
 #include <MauiKit/fmh.h>
 #include <MauiKit/mauilist.h>
-#endif
 
 #include "pulpo/pulpo.h"
 

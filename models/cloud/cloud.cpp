@@ -2,11 +2,7 @@
 #include "abstractmusicprovider.h"
 #include "NextCloud/nextmusic.h"
 
-#ifdef STATIC_MAUIKIT
-#include "mauiaccounts.h"
-#else
-#include <mauiaccounts.h>
-#endif
+#include <MauiKit/mauiaccounts.h>
 
 Cloud::Cloud(QObject *parent) : MauiList (parent),
 	provider(new NextMusic(this))

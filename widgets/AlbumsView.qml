@@ -32,6 +32,9 @@ StackView
     initialItem: BabeGrid
     {
         id: albumsViewGrid
+        holder.emojiSize: Maui.Style.iconSizes.huge
+        holder.emoji: "qrc:/assets/dialog-information.svg"
+
         onAlbumCoverClicked: control.populateTable(album, artist)
     }
 

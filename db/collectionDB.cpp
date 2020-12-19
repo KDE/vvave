@@ -21,11 +21,7 @@
 #include <QStringList>
 #include <QCoreApplication>
 
-#ifdef STATIC_MAUIKIT
-#include "fmh.h"
-#else
 #include <MauiKit/fmh.h>
-#endif
 
 using namespace BAE;
 

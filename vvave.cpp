@@ -7,13 +7,8 @@
 #include "kde/notify.h"
 #endif
 
-#ifdef STATIC_MAUIKIT
-#include "fm.h"
-#include "fileloader.h"
-#else
 #include <MauiKit/fm.h>
 #include <MauiKit/fileloader.h>
-#endif
 
 static FMH::MODEL trackInfo(const QUrl &url)
 {
@@ -110,10 +105,10 @@ bool vvave::fetchArtwork() const
     return m_fetchArtwork;
 }
 
-void vvave::addSources(const QStringList &paths)
+void vvave::addSources(const QList<QUrl> &paths)
 {
-    QStringList urls = sources();
-    QStringList newUrls;
+    auto urls = QUrl::fromStringList(sources());
+    QList<QUrl> newUrls;
 
     for(const auto &path : paths)
     {
@@ -128,7 +123,7 @@ void vvave::addSources(const QStringList &paths)
         return;
 
     urls << newUrls;
-    FMStatic::saveSettings("SETTINGS", QVariant::fromValue(urls), "SOURCES");
+    FMStatic::saveSettings("SETTINGS", QVariant::fromValue(QUrl::toStringList(urls)), "SOURCES");
 
     scanDir(urls);
     emit sourcesChanged();
@@ -153,7 +148,7 @@ bool vvave::removeSource(const QString &source)
     return false;
 }
 
-void vvave::scanDir(const QStringList &paths)
+void vvave::scanDir(const QList<QUrl> &paths)
 {
     auto fileLoader = new FMH::FileLoader();
     fileLoader->informer = &trackInfo;
@@ -187,7 +182,7 @@ void vvave::scanDir(const QStringList &paths)
         delete fileLoader;
     });
 
-    fileLoader->requestPath(QUrl::fromStringList(paths), true, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO]<< "*.m4a");
+    fileLoader->requestPath(paths, true, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO]<< "*.m4a");
 }
 
 QStringList vvave::sources()
@@ -214,7 +209,7 @@ void vvave::setAutoScan(bool autoScan)
 
     if(m_autoScan)
     {
-        scanDir(sources());
+        scanDir(QUrl::fromStringList(sources()));
     }
 }
 
