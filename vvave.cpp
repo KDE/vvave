@@ -3,10 +3,6 @@
 #include "db/collectionDB.h"
 #include "services/local/taginfo.h"
 
-#if (defined (Q_OS_LINUX) && !defined (Q_OS_ANDROID))
-#include "kde/notify.h"
-#endif
-
 #include <MauiKit/fm.h>
 #include <MauiKit/fileloader.h>
 

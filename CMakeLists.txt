@@ -28,7 +28,7 @@ find_package(MauiKit REQUIRED)
 
 find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Qml Quick Network Sql QuickControls2 Xml Multimedia Svg Concurrent)
 
-find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS I18n CoreAddons Notifications)
+find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
 
 if(ANDROID)
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS AndroidExtras)
@@ -127,7 +127,7 @@ target_compile_definitions(vvave
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
-target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia  Qt5::QuickControls2 KF5::CoreAddons KF5::I18n KF5::Notifications ${TAGLIB_LIBRARIES})
+target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${TAGLIB_LIBRARIES})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
