@@ -1,13 +1,13 @@
 #ifndef ARTWORKPROVIDER_H
 #define ARTWORKPROVIDER_H
 
-#include <QObject>
-#include <QImage>
-#include <QQuickImageProvider>
 #include "pulpo/pulpo.h"
+#include <QImage>
+#include <QObject>
+#include <QQuickImageProvider>
 #include <QThread>
 
-class ArtworkFetcher: public QObject
+class ArtworkFetcher : public QObject
 {
     Q_OBJECT
 
@@ -17,7 +17,6 @@ signals:
     void artworkReady(const QUrl &url);
     void finished();
 };
-
 
 class AsyncImageResponse : public QQuickImageResponse
 {
@@ -37,13 +36,10 @@ class ArtworkProvider : public QQuickAsyncImageProvider
 public:
     QQuickImageResponse *requestImageResponse(const QString &id, const QSize &requestedSize) override;
 
-
-//    void updateArtwork(const int index, const QString &artwork);
-//    void startFetchingArtwork(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology);
-
+    //    void updateArtwork(const int index, const QString &artwork);
+    //    void startFetchingArtwork(FMH::MODEL_LIST data, PULPO::ONTOLOGY ontology);
 
 signals:
-
 };
 
 #endif // ARTWORKPROVIDER_H

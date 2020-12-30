@@ -16,11 +16,7 @@ class AlbumsModel : public MauiList
     Q_PROPERTY(AlbumsModel::QUERY query READ getQuery WRITE setQuery NOTIFY queryChanged())
 
 public:
-    enum QUERY : uint_fast8_t
-    {
-        ARTISTS = FMH::MODEL_KEY::ARTIST,
-        ALBUMS = FMH::MODEL_KEY::ALBUM
-    };
+    enum QUERY : uint_fast8_t { ARTISTS = FMH::MODEL_KEY::ARTIST, ALBUMS = FMH::MODEL_KEY::ALBUM };
     Q_ENUM(QUERY)
 
     explicit AlbumsModel(QObject *parent = nullptr);

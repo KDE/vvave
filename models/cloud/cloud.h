@@ -16,8 +16,7 @@ class Cloud : public MauiList
     Q_PROPERTY(QVariantList albums READ getAlbums NOTIFY albumsChanged)
 
 public:
-    enum SORTBY : uint_fast8_t
-    {
+    enum SORTBY : uint_fast8_t {
         ADDDATE = FMH::MODEL_KEY::ADDDATE,
         RELEASEDATE = FMH::MODEL_KEY::RELEASEDATE,
         FORMAT = FMH::MODEL_KEY::FORMAT,
@@ -30,7 +29,8 @@ public:
         COUNT = FMH::MODEL_KEY::COUNT,
         NONE
 
-    }; Q_ENUM(SORTBY)
+    };
+    Q_ENUM(SORTBY)
 
     explicit Cloud(QObject *parent = nullptr);
     void componentComplete() override final;

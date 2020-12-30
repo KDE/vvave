@@ -23,35 +23,23 @@ class Mpris2 : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString playerName
-               READ playerName
-               WRITE setPlayerName
-               NOTIFY playerNameChanged)
+    Q_PROPERTY(QString playerName READ playerName WRITE setPlayerName NOTIFY playerNameChanged)
 
-    Q_PROPERTY(Playlist* playListModel
-               READ playListModel
-               WRITE setPlayListModel
-               NOTIFY playListModelChanged)
+    Q_PROPERTY(Playlist *playListModel READ playListModel WRITE setPlayListModel NOTIFY playListModelChanged)
 
-    Q_PROPERTY(Player* audioPlayer
-               READ audioPlayer
-               WRITE setAudioPlayer
-               NOTIFY audioPlayerChanged)
+    Q_PROPERTY(Player *audioPlayer READ audioPlayer WRITE setAudioPlayer NOTIFY audioPlayerChanged)
 
-    Q_PROPERTY(bool showProgressOnTaskBar
-               READ showProgressOnTaskBar
-               WRITE setShowProgressOnTaskBar
-               NOTIFY showProgressOnTaskBarChanged)
+    Q_PROPERTY(bool showProgressOnTaskBar READ showProgressOnTaskBar WRITE setShowProgressOnTaskBar NOTIFY showProgressOnTaskBarChanged)
 
 public:
-    explicit Mpris2(QObject* parent = nullptr);
+    explicit Mpris2(QObject *parent = nullptr);
     ~Mpris2() override;
 
     QString playerName() const;
 
-    Playlist* playListModel() const;
+    Playlist *playListModel() const;
 
-    Player* audioPlayer() const;
+    Player *audioPlayer() const;
 
     bool showProgressOnTaskBar() const;
 
@@ -59,9 +47,9 @@ public Q_SLOTS:
 
     void setPlayerName(const QString &playerName);
 
-    void setPlayListModel(Playlist* playListModel);
+    void setPlayListModel(Playlist *playListModel);
 
-    void setAudioPlayer(Player* audioPlayer);
+    void setAudioPlayer(Player *audioPlayer);
 
     void setShowProgressOnTaskBar(bool value);
 
@@ -77,7 +65,6 @@ Q_SIGNALS:
     void showProgressOnTaskBarChanged();
 
 private:
-
     void initDBusService();
 
 #if defined Q_OS_LINUX && !defined Q_OS_ANDROID
@@ -86,9 +73,9 @@ private:
 #endif
 
     QString m_playerName;
-    Playlist* m_playListModel = nullptr;
-    Player* m_audioPlayer = nullptr;
+    Playlist *m_playListModel = nullptr;
+    Player *m_audioPlayer = nullptr;
     bool mShowProgressOnTaskBar = true;
 };
 
-#endif //MEDIACENTER_MPRIS2_H
+#endif // MEDIACENTER_MPRIS2_H

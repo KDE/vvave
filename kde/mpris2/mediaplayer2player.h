@@ -10,8 +10,8 @@
 #define MEDIAPLAYER2PLAYER_H
 
 #include <QDBusAbstractAdaptor>
-#include <QDBusObjectPath>
 #include <QDBusMessage>
+#include <QDBusObjectPath>
 
 class Playlist;
 class Player;
@@ -38,9 +38,7 @@ class MediaPlayer2Player : public QDBusAbstractAdaptor
     Q_PROPERTY(int mediaPlayerPresent READ mediaPlayerPresent WRITE setMediaPlayerPresent NOTIFY mediaPlayerPresentChanged)
 
 public:
-    explicit MediaPlayer2Player(Playlist *playListControler, Player *audioPlayer,
-                                bool showProgressOnTaskBar,
-                                QObject* parent = nullptr);
+    explicit MediaPlayer2Player(Playlist *playListControler, Player *audioPlayer, bool showProgressOnTaskBar, QObject *parent = nullptr);
     ~MediaPlayer2Player() override;
 
     QString PlaybackStatus() const;

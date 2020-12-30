@@ -1,14 +1,14 @@
 #ifndef PULPO_H
 #define PULPO_H
 
-#include <QPixmap>
-#include <QList>
 #include <QDebug>
 #include <QImage>
-#include <QtCore>
-#include <QUrl>
+#include <QList>
 #include <QObject>
+#include <QPixmap>
+#include <QUrl>
 #include <QVariantMap>
+#include <QtCore>
 
 #include "../utils/bae.h"
 #include "enums.h"

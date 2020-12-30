@@ -16,7 +16,9 @@ class AbstractMusicProvider : public QObject
     Q_OBJECT
 public:
     explicit AbstractMusicProvider(QObject *parent = nullptr);
-    virtual ~AbstractMusicProvider() {}
+    virtual ~AbstractMusicProvider()
+    {
+    }
 
     virtual void getCollection(const std::initializer_list<QString> &parameters = {}) = 0;
 
@@ -35,8 +37,14 @@ public:
     virtual void getFolders() = 0;
     virtual void getFolder(const QString &id) = 0;
 
-    virtual QVariantList getAlbumsList() const {return QVariantList();}
-    virtual QVariantList getArtistsList() const {return QVariantList();}
+    virtual QVariantList getAlbumsList() const
+    {
+        return QVariantList();
+    }
+    virtual QVariantList getArtistsList() const
+    {
+        return QVariantList();
+    }
     /**
      * @brief setCredentials
      * sets the credential to authenticate to the provider server
@@ -50,8 +58,15 @@ public:
         this->m_provider = account[FMH::MODEL_KEY::SERVER];
     }
 
-    virtual QString user() final { return this->m_user; }
-    virtual QString provider() final { return this->m_provider; }
+    virtual QString user() final
+    {
+        return this->m_user;
+    }
+    virtual QString provider() final
+    {
+        return this->m_provider;
+    }
+
 protected:
     QString m_user = "";
     QString m_password = "";

@@ -1,14 +1,14 @@
 #ifndef NEXTMUSIC_H
 #define NEXTMUSIC_H
 
-#include <QObject>
 #include "abstractmusicprovider.h"
+#include <QObject>
 
 class NextMusic : public AbstractMusicProvider
 {
     Q_OBJECT
 public:
-    explicit NextMusic(QObject *parent = nullptr);    
+    explicit NextMusic(QObject *parent = nullptr);
     QVariantList getAlbumsList() const override final;
     QVariantList getArtistsList() const override final;
 
@@ -28,7 +28,6 @@ public slots:
 
     // AbstractMusicProvider interface
 public:
-
     FMH::MODEL getTrackItem(const QString &id);
     void getTrackPath(const QString &id);
 

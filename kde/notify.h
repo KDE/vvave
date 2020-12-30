@@ -1,18 +1,18 @@
 #ifndef NOTIFY_H
 #define NOTIFY_H
 
-#include <QObject>
 #include <QByteArray>
+#include <QObject>
 
 #include <klocalizedstring.h>
-#include <knotifyconfig.h>
 #include <knotification.h>
+#include <knotifyconfig.h>
 
-#include <QStandardPaths>
-#include <QPixmap>
+#include "../utils/bae.h"
 #include <QDebug>
 #include <QMap>
-#include "../utils/bae.h"
+#include <QPixmap>
+#include <QStandardPaths>
 
 class Notify : public QObject
 {
@@ -25,7 +25,7 @@ public:
     void notify(const QString &title, const QString &body);
 
 private:
-  FMH::MODEL track;
+    FMH::MODEL track;
 
 signals:
     void babeSong();

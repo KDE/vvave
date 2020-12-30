@@ -26,33 +26,33 @@
 //#include "qgumbodocument.h"p
 //#include "qgumbonode.h"
 
-Pulpo::Pulpo(QObject *parent): QObject(parent) {}
+Pulpo::Pulpo(QObject *parent)
+    : QObject(parent)
+{
+}
 
 Pulpo::~Pulpo()
 {
-    qDebug()<< "DELETING PULPO INSTANCE";
+    qDebug() << "DELETING PULPO INSTANCE";
 }
 
 void Pulpo::request(const PULPO::REQUEST &request)
 {
     this->req = request;
 
-    if(this->req.track.isEmpty())
-    {
+    if (this->req.track.isEmpty()) {
         emit this->error();
         return;
     }
 
-    if(this->req.services.isEmpty())
-    {
-        qWarning()<< "Please register at least one Pulpo Service";
+    if (this->req.services.isEmpty()) {
+        qWarning() << "Please register at least one Pulpo Service";
         emit this->error();
         return;
     }
 
     this->start();
 }
-
 
 void Pulpo::start()
 {
@@ -61,7 +61,7 @@ void Pulpo::start()
 
 void Pulpo::passSignal(const REQUEST &request, const RESPONSES &responses)
 {
-    if(request.callback)
+    if (request.callback)
         request.callback(request, responses);
     else
         emit this->infoReady(request, responses);
@@ -70,25 +70,19 @@ void Pulpo::passSignal(const REQUEST &request, const RESPONSES &responses)
 
 void Pulpo::send(const SERVICES &service)
 {
-    switch (service)
-    {
-    case SERVICES::LastFm:
-    {
-        auto lastfm  = new class lastfm();
-        connect(lastfm, &lastfm::responseReady, [this, lastfm](PULPO::REQUEST request, PULPO::RESPONSES responses)
-        {
+    switch (service) {
+    case SERVICES::LastFm: {
+        auto lastfm = new class lastfm();
+        connect(lastfm, &lastfm::responseReady, [this, lastfm](PULPO::REQUEST request, PULPO::RESPONSES responses) {
             this->passSignal(request, responses);
             lastfm->deleteLater();
         });
 
-        connect(lastfm, &lastfm::error, [this, service, lastfm](PULPO::REQUEST request)
-        {
-            if(!request.services.isEmpty())
-            {
+        connect(lastfm, &lastfm::error, [this, service, lastfm](PULPO::REQUEST request) {
+            if (!request.services.isEmpty()) {
                 request.services.removeOne(service);
                 this->request(request);
-            }else
-            {
+            } else {
                 emit this->error();
             }
 
@@ -99,23 +93,18 @@ void Pulpo::send(const SERVICES &service)
         break;
     }
 
-    case SERVICES::Spotify:
-    {
-        auto spotify  = new class spotify();
-        connect(spotify, &lastfm::responseReady, [this, spotify](PULPO::REQUEST request, PULPO::RESPONSES responses)
-        {
+    case SERVICES::Spotify: {
+        auto spotify = new class spotify();
+        connect(spotify, &lastfm::responseReady, [this, spotify](PULPO::REQUEST request, PULPO::RESPONSES responses) {
             this->passSignal(request, responses);
             spotify->deleteLater();
         });
 
-        connect(spotify, &lastfm::error, [this, service, spotify](PULPO::REQUEST request)
-        {
-            if(!request.services.isEmpty())
-            {
+        connect(spotify, &lastfm::error, [this, service, spotify](PULPO::REQUEST request) {
+            if (!request.services.isEmpty()) {
                 request.services.removeOne(service);
                 this->request(request);
-            }else
-            {
+            } else {
                 emit this->error();
             }
 
@@ -126,14 +115,11 @@ void Pulpo::send(const SERVICES &service)
         break;
     }
 
-    default:
-    {
-        if(!this->req.services.isEmpty())
-        {
+    default: {
+        if (!this->req.services.isEmpty()) {
             this->req.services.removeOne(service);
             this->request(req);
-        }else
-        {
+        } else {
             emit this->error();
         }
     }

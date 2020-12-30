@@ -1,7 +1,7 @@
 #ifndef MUSICBRAINZSERVICE_H
 #define MUSICBRAINZSERVICE_H
-#include <QObject>
 #include "../pulpo.h"
+#include <QObject>
 
 using namespace BAE;
 
@@ -11,7 +11,7 @@ class musicBrainz : public Pulpo
 
 private:
     const QString API = "http://musicbrainz.org/ws/2/";
-    const QMap<QString,QString> header = { {"User-Agent", "Babe/1.0 ( babe.kde.org )"} };
+    const QMap<QString, QString> header = {{"User-Agent", "Babe/1.0 ( babe.kde.org )"}};
 
 public:
     explicit musicBrainz(const FMH::MODEL &song);

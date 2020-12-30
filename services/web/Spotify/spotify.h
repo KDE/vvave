@@ -1,13 +1,12 @@
 #ifndef SPOTIFY_H
 #define SPOTIFY_H
 
+#include <QMap>
 #include <QObject>
 #include <QWidget>
-#include <QMap>
 
 #include "../../../pulpo/pulpo.h"
 #include "../../../utils/bae.h"
-
 
 class Spotify : public QObject
 {
@@ -17,7 +16,6 @@ public:
     ~Spotify();
     Q_INVOKABLE void setCode(const QString &code = "");
     Q_INVOKABLE QString getCode();
-
 
 private:
     QString code;
