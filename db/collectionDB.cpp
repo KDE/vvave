@@ -175,6 +175,10 @@ bool CollectionDB::update(const QString &table, const QString &column, const QVa
 
 bool CollectionDB::remove(const QString &table, const QString &column, const QVariantMap &where)
 {
+    Q_UNUSED(table)
+    Q_UNUSED(column)
+    Q_UNUSED(where)
+    
     return false;
 }
 

@@ -151,6 +151,7 @@ QVariantList Cloud::getAll()
 
 void Cloud::upload(const QUrl &url)
 {
+    Q_UNUSED(url)
 }
 
 void Cloud::getFileUrl(const QString &id)

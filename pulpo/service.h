@@ -34,12 +34,15 @@ protected:
     virtual void set(const PULPO::REQUEST &request);
     virtual void parseArtist(const QByteArray &array)
     {
+        Q_UNUSED(array)
     }
     virtual void parseAlbum(const QByteArray &array)
     {
+        Q_UNUSED(array)
     }
     virtual void parseTrack(const QByteArray &array)
     {
+        Q_UNUSED(array)
     }
 
     void retrieve(const QString &url, const QMap<QString, QString> &headers = {});

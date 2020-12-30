@@ -125,6 +125,8 @@ void Playlist::save()
 
 void Playlist::append(const QUrl &url) // TODO
 {
+    Q_UNUSED(url)
+    
     if (!m_model) {
         return;
     }

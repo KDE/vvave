@@ -166,6 +166,8 @@ void NextMusic::getTrackPath(const QString &id)
 
 void NextMusic::getCollection(const std::initializer_list<QString> &parameters)
 {
+    Q_UNUSED(parameters)
+
     QUrl relativeUrl("../.." + NextMusic::API + "collection");
     auto url = QUrl(this->m_provider).resolved(relativeUrl);
 
@@ -193,6 +195,7 @@ void NextMusic::getTracks()
 
 void NextMusic::getTrack(const QString &id)
 {
+    Q_UNUSED(id)
 }
 
 void NextMusic::getArtists()
@@ -201,6 +204,7 @@ void NextMusic::getArtists()
 
 void NextMusic::getArtist(const QString &id)
 {
+    Q_UNUSED(id)
 }
 
 void NextMusic::getAlbums()
@@ -209,6 +213,7 @@ void NextMusic::getAlbums()
 
 void NextMusic::getAlbum(const QString &id)
 {
+    Q_UNUSED(id)
 }
 
 void NextMusic::getPlaylists()
@@ -217,6 +222,7 @@ void NextMusic::getPlaylists()
 
 void NextMusic::getPlaylist(const QString &id)
 {
+    Q_UNUSED(id)
 }
 
 void NextMusic::getFolders()
@@ -225,4 +231,5 @@ void NextMusic::getFolders()
 
 void NextMusic::getFolder(const QString &id)
 {
+    Q_UNUSED(id)
 }
