@@ -1,8 +1,8 @@
 #ifndef DEEZERSERVICE_H
 #define DEEZERSERVICE_H
 
-#include <QObject>
 #include "../pulpo.h"
+#include <QObject>
 
 class deezer : public Pulpo
 {

@@ -47,6 +47,7 @@ if(UNIX AND NOT APPLE AND NOT ANDROID)
 endif()
 
 include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDEClangFormat)
 include(ECMSetupVersion)
 include(FeatureSummary)
 
@@ -127,7 +128,7 @@ target_compile_definitions(vvave
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
-target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia  Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${TAGLIB_LIBRARIES})
+target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${TAGLIB_LIBRARIES})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
@@ -139,3 +140,6 @@ if(UNIX AND NOT APPLE AND NOT ANDROID)
 
     feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 endif()
+
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})

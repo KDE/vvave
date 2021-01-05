@@ -1,8 +1,8 @@
 #ifndef SPOTIFYSERVICE_H
 #define SPOTIFYSERVICE_H
 
-#include <QObject>
 #include "../service.h"
+#include <QObject>
 
 class spotify : public Service
 {

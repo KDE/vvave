@@ -1,7 +1,8 @@
 #include "service.h"
 #include "downloader.h"
 
-Service::Service(QObject *parent) : QObject(parent)
+Service::Service(QObject *parent)
+    : QObject(parent)
 {
 }
 
@@ -12,8 +13,7 @@ void Service::set(const PULPO::REQUEST &request)
 
 void Service::parse(const QByteArray &array)
 {
-    switch(this->request.ontology)
-    {
+    switch (this->request.ontology) {
     case PULPO::ONTOLOGY::ALBUM:
         this->parseAlbum(array);
         break;
@@ -28,11 +28,9 @@ void Service::parse(const QByteArray &array)
 
 void Service::retrieve(const QString &url, const QMap<QString, QString> &headers)
 {
-    if(!url.isEmpty())
-    {
+    if (!url.isEmpty()) {
         auto downloader = new FMH::Downloader;
-        connect(downloader, &FMH::Downloader::dataReady, [this, downloader](QByteArray array)
-        {
+        connect(downloader, &FMH::Downloader::dataReady, [this, downloader](QByteArray array) {
             emit this->arrayReady(array);
             downloader->deleteLater();
         });
@@ -43,10 +41,8 @@ void Service::retrieve(const QString &url, const QMap<QString, QString> &headers
 bool Service::scopePass()
 {
     auto info = this->request.info;
-    for(const auto inf : info)
-    {
-        if(!this->scope[this->request.ontology].contains(inf))
-        {
+    for (const auto inf : info) {
+        if (!this->scope[this->request.ontology].contains(inf)) {
             info.removeAll(inf);
         }
     }

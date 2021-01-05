@@ -5,10 +5,8 @@ lyricWikia::lyricWikia(const FMH::MODEL &song)
     this->availableInfo.insert(ONTOLOGY::TRACK, {INFO::LYRICS});
     this->track = song;
 
-    connect(this, &lyricWikia::arrayReady, [this](QByteArray data)
-    {
-
-        qDebug()<< "GOT THE ARRAY";
+    connect(this, &lyricWikia::arrayReady, [this](QByteArray data) {
+        qDebug() << "GOT THE ARRAY";
         this->array = data;
         this->parseArray();
     });
@@ -16,7 +14,6 @@ lyricWikia::lyricWikia(const FMH::MODEL &song)
 
 lyricWikia::~lyricWikia()
 {
-
 }
 
 bool lyricWikia::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info)
@@ -24,32 +21,31 @@ bool lyricWikia::setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO
     this->ontology = ontology;
     this->info = info;
 
-    if(!this->availableInfo[this->ontology].contains(this->info))
+    if (!this->availableInfo[this->ontology].contains(this->info))
         return false;
 
     auto url = this->API;
 
-    switch(this->ontology)
-    {
-        case PULPO::ONTOLOGY::TRACK:
-        {
-            QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
-            encodedArtist.toEncoded(QUrl::FullyEncoded);
+    switch (this->ontology) {
+    case PULPO::ONTOLOGY::TRACK: {
+        QUrl encodedArtist(this->track[FMH::MODEL_KEY::ARTIST]);
+        encodedArtist.toEncoded(QUrl::FullyEncoded);
 
-            QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
-            encodedTrack.toEncoded(QUrl::FullyEncoded);
+        QUrl encodedTrack(this->track[FMH::MODEL_KEY::TITLE]);
+        encodedTrack.toEncoded(QUrl::FullyEncoded);
 
-            url.append("&artist=" + encodedArtist.toString());
-            url.append("&song=" + encodedTrack.toString());
-            url.append("&fmt=xml");
+        url.append("&artist=" + encodedArtist.toString());
+        url.append("&song=" + encodedTrack.toString());
+        url.append("&fmt=xml");
 
-            break;
-        }
-
-        default: return false;
+        break;
     }
 
-    qDebug()<< "[lyricwikia service]: "<< url;
+    default:
+        return false;
+    }
+
+    qDebug() << "[lyricwikia service]: " << url;
 
     this->startConnectionAsync(url);
 
@@ -62,15 +58,16 @@ bool lyricWikia::parseTrack()
 
     QDomDocument doc;
 
-    if (!doc.setContent(xmlData)) return false;
+    if (!doc.setContent(xmlData))
+        return false;
 
     QString temp = doc.documentElement().namedItem("url").toElement().text().toLatin1();
-    QUrl temp_u (temp);
+    QUrl temp_u(temp);
     temp_u.toEncoded(QUrl::FullyEncoded);
 
     temp = temp_u.toString();
 
-    temp.replace("http://lyrics.fandom.com/","http://lyrics.fandom.com/index.php?title=");
+    temp.replace("http://lyrics.fandom.com/", "http://lyrics.fandom.com/index.php?title=");
     temp.append("&action=edit");
     QRegExp url_regexp("<url>(.*)</url>");
     url_regexp.setMinimal(true);
@@ -78,11 +75,10 @@ bool lyricWikia::parseTrack()
     QString referer = url_regexp.cap(1);
 
     auto downloader = new FMH::Downloader;
-    connect(downloader, &FMH::Downloader::dataReady, [=] (QByteArray data)
-    {
+    connect(downloader, &FMH::Downloader::dataReady, [=](QByteArray data) {
         qDebug() << "Receiving lyrics" << data;
 
-        if(data.isEmpty())
+        if (data.isEmpty())
             return;
 
         this->extractLyrics(data);
@@ -102,21 +98,21 @@ bool lyricWikia::extractLyrics(const QByteArray &array)
     lyrics_regexp.indexIn(content);
     QString lyrics = lyrics_regexp.cap(1);
 
-    if(lyrics.isEmpty()) return false;
+    if (lyrics.isEmpty())
+        return false;
 
     lyrics = lyrics.trimmed();
     lyrics.replace("\n", "<br>");
 
     QString text;
 
-    if(!lyrics.contains("PUT LYRICS HERE")&&!lyrics.isEmpty())
-    {
+    if (!lyrics.contains("PUT LYRICS HERE") && !lyrics.isEmpty()) {
         text = "<h2 align='center' >" + this->track[FMH::MODEL_KEY::TITLE] + "</h2>";
         text += lyrics;
 
-        text= "<div align='center'>"+text+"</div>";
+        text = "<div align='center'>" + text + "</div>";
     }
 
-    emit this->infoReady(this->track, this->packResponse(ONTOLOGY::TRACK, INFO::LYRICS,CONTEXT::LYRIC,text));
+    emit this->infoReady(this->track, this->packResponse(ONTOLOGY::TRACK, INFO::LYRICS, CONTEXT::LYRIC, text));
     return true;
 }

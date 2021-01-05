@@ -46,8 +46,7 @@ Menu
         {
             H.addToSelection(listModel.get(listView.currentIndex))
 
-            if(Kirigami.Settings.isMobile)
-                selectionMode = true
+            selectionMode = Maui.Handy.isTouch
 
             contextMenu.close()
         }

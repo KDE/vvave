@@ -12,7 +12,6 @@
 #include <QDBusAbstractAdaptor>
 #include <QStringList>
 
-
 class MediaPlayer2 : public QDBusAbstractAdaptor
 {
     Q_OBJECT
@@ -29,7 +28,7 @@ class MediaPlayer2 : public QDBusAbstractAdaptor
     Q_PROPERTY(QStringList SupportedMimeTypes READ SupportedMimeTypes CONSTANT)
 
 public:
-    explicit MediaPlayer2(QObject* parent = nullptr);
+    explicit MediaPlayer2(QObject *parent = nullptr);
     ~MediaPlayer2() override;
 
     bool CanQuit() const;
@@ -48,7 +47,6 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void raisePlayer();
-
 };
 
-#endif //MEDIACENTER_MEDIAPLAYER2_H
+#endif // MEDIACENTER_MEDIAPLAYER2_H

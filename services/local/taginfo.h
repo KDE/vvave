@@ -1,21 +1,20 @@
 #ifndef TAGINFO_H
 #define TAGINFO_H
 
-#include <QString>
 #include <QByteArray>
 #include <QObject>
+#include <QString>
 
 #if defined Q_OS_ANDROID || defined Q_OS_IOS
-#include <taglib/tag.h>
 #include <taglib/fileref.h>
+#include <taglib/tag.h>
 #elif defined Q_OS_WIN32 || defined Q_OS_MACOS || defined Q_OS_LINUX
-#include <taglib/tag.h>
 #include <taglib/fileref.h>
+#include <taglib/tag.h>
 #endif
 
 class TagInfo : public QObject
 {
-
     Q_OBJECT
 public:
     TagInfo(const QString &url, QObject *parent = nullptr);
@@ -32,7 +31,7 @@ public:
     int getDuration() const;
     uint getYear() const;
 
-    void setAlbum(const QString &album) ;
+    void setAlbum(const QString &album);
     void setTitle(const QString &title);
     void setTrack(const int &track);
     void setArtist(const QString &artist);
@@ -43,7 +42,7 @@ public:
 private:
     TagLib::FileRef *file;
     QString path;
-    wchar_t * m_path;
+    wchar_t *m_path;
 };
 
 #endif // TAGINFO_H

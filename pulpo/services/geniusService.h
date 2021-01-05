@@ -1,8 +1,8 @@
 #ifndef GENIUSSERVICE_H
 #define GENIUSSERVICE_H
 
-#include <QObject>
 #include "../pulpo.h"
+#include <QObject>
 
 class genius : public Pulpo
 {
@@ -20,10 +20,12 @@ public:
     explicit genius(const FMH::MODEL &song);
     virtual bool setUpService(const PULPO::ONTOLOGY &ontology, const PULPO::INFO &info);
 
-
 protected:
     virtual bool parseArtist();
-    virtual bool parseAlbum(){return false;}
+    virtual bool parseAlbum()
+    {
+        return false;
+    }
     virtual bool parseTrack();
 };
 

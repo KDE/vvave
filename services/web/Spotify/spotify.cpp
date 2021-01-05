@@ -1,34 +1,31 @@
 #include "spotify.h"
 
-#include <QObject>
-#include <QtNetwork>
-#include <QUrl>
-#include <QNetworkAccessManager>
 #include <QDomDocument>
+#include <QJsonDocument>
+#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QJsonDocument>
+#include <QObject>
+#include <QUrl>
 #include <QVariantMap>
+#include <QtNetwork>
 
 using namespace BAE;
 
-
-Spotify::Spotify(QObject *parent) : QObject(parent)
+Spotify::Spotify(QObject *parent)
+    : QObject(parent)
 {
-
 }
 
 Spotify::~Spotify()
 {
-
 }
 
 void Spotify::setCode(const QString &code)
 {
-    if(code.isEmpty())
+    if (code.isEmpty())
         this->code = BAE::loadSettings("SPOTIFY_CODE", "VVAVE", "").toString();
-    else
-    {
+    else {
         this->code = code;
         BAE::saveSettings("SPOTIFY_CODE", code, "VVAVE");
     }

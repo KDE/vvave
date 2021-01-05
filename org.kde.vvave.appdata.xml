@@ -14,6 +14,7 @@
   <name xml:lang="es">Vvave</name>
   <name xml:lang="et">Vvave</name>
   <name xml:lang="eu">Vvave</name>
+  <name xml:lang="fi">Vvave</name>
   <name xml:lang="fr">Vvave</name>
   <name xml:lang="gl">Vvave</name>
   <name xml:lang="hi">वैव (Vvave)</name>
@@ -23,6 +24,7 @@
   <name xml:lang="ko">Vvave</name>
   <name xml:lang="nl">Vvave</name>
   <name xml:lang="nn">Vvave</name>
+  <name xml:lang="pa">ਵੇਵੇਵ</name>
   <name xml:lang="pl">Vvave</name>
   <name xml:lang="pt">Vvave</name>
   <name xml:lang="pt-BR">Vvave</name>
@@ -45,6 +47,7 @@
   <summary xml:lang="es">Reproducir su colección de música</summary>
   <summary xml:lang="et">Muusikakogu esitamine</summary>
   <summary xml:lang="eu">Jo zure musika bilduma</summary>
+  <summary xml:lang="fi">Toista musiikkikokoelmaasi</summary>
   <summary xml:lang="fr">Jouez votre collection musicale</summary>
   <summary xml:lang="gl">Reproduza a súa colección de música</summary>
   <summary xml:lang="hi">अपना संगीत संग्रह बजाएँ</summary>
@@ -54,6 +57,7 @@
   <summary xml:lang="ko">내 음악 모음집 재생</summary>
   <summary xml:lang="nl">Uw muziekcollectie afspelen</summary>
   <summary xml:lang="nn">Spel av musikksamlinga di</summary>
+  <summary xml:lang="pa">ਆਪਣੇ ਸੰਗੀਤ ਭੰਡਾਰ ਨੂੰ ਸੁਣੋ</summary>
   <summary xml:lang="pl">Odtwarza swój zbiór muzyki</summary>
   <summary xml:lang="pt">Tocar a sua colecção de música</summary>
   <summary xml:lang="pt-BR">Reproduza sua coleção de músicas</summary>
@@ -76,6 +80,7 @@
     <p xml:lang="es">Pequeño reproductor de música en Qt para tener a mano sus canciones favoritas.</p>
     <p xml:lang="et">Tilluke Qt muusikamängija hoiab lemmikpalad käeulatuses.</p>
     <p xml:lang="eu">Qt musika jotzaile ñimiñoa zure gogoko abestiak eskura izateko.</p>
+    <p xml:lang="fi">Pikkuruinen Qt-musiikkisoitin suosikkikappaleittasi pitämiseksi lähellä.</p>
     <p xml:lang="fr">Lecteur de musique Qt minimaliste pour garder toutes vos chansons préférées à portée de main.</p>
     <p xml:lang="gl">Pequeno reprodutor de música desenvolvido con Qt para ter a man as túas cancións favoritas.</p>
     <p xml:lang="hi">छोटा Qt संगीत चालक जो आपके पसंदीदा गीतों को उपलब्ध कराता है</p>
@@ -85,6 +90,7 @@
     <p xml:lang="ko">좋아하는 음악을 간단하게 재생할 수 있는 작은 Qt 음악 재생기입니다.</p>
     <p xml:lang="nl">Kleine Qt Music speler om uw favoriete songs bij de hand te houden.</p>
     <p xml:lang="nn">Liten Qt-basert musikkspelar for lett tilgang til favorittmusikken din.</p>
+    <p xml:lang="pa">ਤੁਹਾਡੇ ਪਸੰਦੀਦਾ ਗਾਣੇ ਚਲਾਉਣ ਵਾਲਾ ਨਿੰਮਾ ਜਿਹਾ Qt ਸੰਗੀਤ ਪਲੇਅਰ ਹੈ।</p>
     <p xml:lang="pl">Mały odtwarzacz muzyki Qt trzymający twoje ulubione piosenki w pobliżu.</p>
     <p xml:lang="pt">Leitor de Música Minúsculo em Qt para manter as suas músicas favoritas à mão.</p>
     <p xml:lang="pt-BR">Pequeno reprodutor de música para manter suas músicas favoritas a mão.</p>
@@ -112,6 +118,7 @@
       <caption xml:lang="es">El reproductor de música Vvave</caption>
       <caption xml:lang="et">Vvave muusikamängija</caption>
       <caption xml:lang="eu">Vvave musika jotzailea</caption>
+      <caption xml:lang="fi">Vvave-musiikkisoitin</caption>
       <caption xml:lang="fr">Lecteur de musique Vvave</caption>
       <caption xml:lang="gl">O reprodutor de música Vvave</caption>
       <caption xml:lang="hi">वैव संगीत चालक</caption>
@@ -121,6 +128,7 @@
       <caption xml:lang="ko">Vvave 음악 재생기</caption>
       <caption xml:lang="nl">De Vvave muziekspeler</caption>
       <caption xml:lang="nn">Vvave musikkspelar</caption>
+      <caption xml:lang="pa">ਵੇਵੇਵ ਸੰਗੀਤ ਪਲੇਅਰ</caption>
       <caption xml:lang="pl">Odtwarzacz muzyki Vvave</caption>
       <caption xml:lang="pt">O leitor de música Vvave</caption>
       <caption xml:lang="pt-BR">O reprodutor de músicas Vvave</caption>

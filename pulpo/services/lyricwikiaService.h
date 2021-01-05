@@ -1,7 +1,7 @@
 #ifndef LYRICWIKIASERVICE_H
 #define LYRICWIKIASERVICE_H
-#include <QObject>
 #include "../pulpo.h"
+#include <QObject>
 
 class lyricWikia : public Pulpo
 {
@@ -19,7 +19,6 @@ public:
 
 protected:
     virtual bool parseTrack();
-
 };
 
 #endif // LYRICWIKIASERVICE_H

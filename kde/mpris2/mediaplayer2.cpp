@@ -8,65 +8,64 @@
 
 #include "mediaplayer2.h"
 
-#include <QCoreApplication>
 #include <KCoreAddons/KAboutData>
+#include <QCoreApplication>
 
-MediaPlayer2::MediaPlayer2(QObject* parent)
-	: QDBusAbstractAdaptor(parent)
+MediaPlayer2::MediaPlayer2(QObject *parent)
+    : QDBusAbstractAdaptor(parent)
 {
 }
 
-MediaPlayer2::~MediaPlayer2()
-= default;
+MediaPlayer2::~MediaPlayer2() = default;
 
 bool MediaPlayer2::CanQuit() const
 {
-	return true;
+    return true;
 }
 
 bool MediaPlayer2::CanRaise() const
 {
-	return true;
+    return true;
 }
 bool MediaPlayer2::HasTrackList() const
 {
-	return false;
+    return false;
 }
 
 void MediaPlayer2::Quit()
 {
-	QCoreApplication::quit();
+    QCoreApplication::quit();
 }
 
 void MediaPlayer2::Raise()
 {
-	emit raisePlayer();
+    emit raisePlayer();
 }
 
 QString MediaPlayer2::Identity() const
 {
-	return KAboutData::applicationData().displayName();
+    return KAboutData::applicationData().displayName();
 }
 
 QString MediaPlayer2::DesktopEntry() const
 {
-	return KAboutData::applicationData().desktopFileName();
+    return KAboutData::applicationData().desktopFileName();
 }
 
 QStringList MediaPlayer2::SupportedUriSchemes() const
 {
-	return QStringList() << QStringLiteral("file");
+    return QStringList() << QStringLiteral("file");
 }
 
 QStringList MediaPlayer2::SupportedMimeTypes() const
 {
-//    KService::Ptr app = KService::serviceByDesktopName(KCmdLineArgs::aboutData()->appName());
+    //    KService::Ptr app = KService::serviceByDesktopName(KCmdLineArgs::aboutData()->appName());
 
-//    if (app) {
-//        return app->mimeTypes();
-//    }
+    //    if (app) {
+    //        return app->mimeTypes();
+    //    }
 
-	return QStringList();
+    return QStringList();
 }
 
 #include "moc_mediaplayer2.cpp"
