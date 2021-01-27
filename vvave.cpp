@@ -212,3 +212,10 @@ void vvave::openUrls(const QStringList &urls)
 
     emit this->openFiles(data);
 }
+
+QList<QUrl> vvave::folders()
+{
+    const auto sources = CollectionDB::getInstance()->getDBData("select * from sources");
+    return QUrl::fromStringList(FMH::modelToList(sources, FMH::MODEL_KEY::URL));
+}
+

@@ -13,6 +13,7 @@ class vvave : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QVariantList sources READ sourcesModel NOTIFY sourcesChanged FINAL)
+    Q_PROPERTY(QList<QUrl> folders READ folders NOTIFY sourcesChanged FINAL)
     Q_PROPERTY(bool autoScan READ autoScan WRITE setAutoScan NOTIFY autoScanChanged)
     Q_PROPERTY(bool fetchArtwork READ fetchArtwork WRITE setFetchArtwork NOTIFY fetchArtworkChanged)
 
@@ -33,6 +34,8 @@ public:
     bool autoScan() const;
 
     bool fetchArtwork() const;
+
+    QList<QUrl> folders();
 
 public slots:
     void openUrls(const QStringList &urls);

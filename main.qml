@@ -16,6 +16,7 @@ import "widgets/PlaylistsView"
 import "widgets/MainPlaylist"
 import "widgets/SettingsView"
 import "widgets/CloudView"
+import "widgets/FoldersView"
 
 import "view_models"
 import "view_models/BabeTable"
@@ -63,7 +64,8 @@ Maui.ApplicationWindow
                                            albums: 1,
                                            artists: 2,
                                            playlists: 3,
-                                           cloud: 4 })
+                                           folders: 4,
+                                           cloud: 5 })
 
     property string syncPlaylist: ""
     property bool sync: false
@@ -303,6 +305,17 @@ Maui.ApplicationWindow
                     PlaylistsView
                     {
                         id: playlistsView
+                    }
+                }
+
+                Maui.AppViewLoader
+                {
+                    Maui.AppView.title: i18n("Folders")
+                    Maui.AppView.iconName: "folder"
+
+                    FoldersView
+                    {
+                        id: foldersView
                     }
                 }
 

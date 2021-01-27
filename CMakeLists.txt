@@ -85,6 +85,7 @@ set(vvave_SRCS
     models/tracks/tracksmodel.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
+    models/folders/foldersmodel.cpp
     models/cloud/cloud.cpp
     kde/mpris2/mpris2.cpp
     )
