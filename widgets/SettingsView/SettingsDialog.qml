@@ -154,18 +154,17 @@ Maui.SettingsDialog
                     text: i18n("Add")
                     onClicked:
                     {
-                        fileDialog.open()
+                        _dialogLoader.sourceComponent = _fileDialogComponent
+                        dialog.settings.onlyDirs = true
+                        dialog.callback = function(urls)
+                        {
+                            Vvave.addSources(urls)
+                        }
+                        dialog.open()
                     }
                 }
             }
         }
     }
-
-        Maui.FileDialog
-        {
-            id: fileDialog
-            settings.onlyDirs: true
-            onFinished:  Vvave.addSources(urls)
-        }
 
 }

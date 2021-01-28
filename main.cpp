@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
 
-    qmlRegisterUncreatableType<vvave>(VVAVE_URI, 1, 0, "Vvave", "Can not create VVave");
+    qmlRegisterSingletonInstance<vvave>(VVAVE_URI, 1, 0, "Vvave", vvave::instance());
 
     qmlRegisterType<TracksModel>(VVAVE_URI, 1, 0, "Tracks");
     qmlRegisterType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists");

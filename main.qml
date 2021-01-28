@@ -34,9 +34,6 @@ Maui.ApplicationWindow
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
 
-    Vvave.autoScan: settings.autoScan
-    Vvave.fetchArtwork: settings.fetchArtwork
-
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
@@ -138,6 +135,16 @@ Maui.ApplicationWindow
     Loader
     {
         id: _dialogLoader
+    }
+
+    Component
+    {
+        id: _fileDialogComponent
+
+        Maui.FileDialog
+        {
+
+        }
     }
 
     Component
@@ -345,6 +352,12 @@ Maui.ApplicationWindow
                 }
             }
         }
+    }
+
+    Component.onCompleted:
+    {
+        Vvave.autoScan = settings.autoScan
+        Vvave.fetchArtwork = settings.fetchArtwork
     }
 
     /*CONNECTIONS*/
