@@ -220,19 +220,9 @@ Maui.ApplicationWindow
     {
         id: _drawer
         visible: true
-        width: visible ? Math.min(Kirigami.Units.gridUnit * 16, root.width) : 0
+        preferredWidth: Kirigami.Units.gridUnit * 16
         collapsed: !isWide
         collapsible: true
-        dragMargin: Maui.Style.space.big
-        overlay.visible: collapsed && position > 0 && visible
-        Connections
-        {
-            target: _drawer.overlay
-            function onClicked()
-            {
-                _drawer.close()
-            }
-        }
 
         onContentDropped:
         {

@@ -82,7 +82,7 @@ Item
 
         drag.minimumY: 0
         drag.maximumY: root.height - control.height
-        onClicked: sideBar.hidden ? sideBar.close() : sideBar.open()
+        onClicked: sideBar.visible ? sideBar.close() : sideBar.open()
         onDoubleClicked: toggleFocusView()
 
         Rectangle
