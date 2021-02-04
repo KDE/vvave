@@ -75,6 +75,8 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property color babeColor: "#f84172"
 
+    altHeader: Kirigami.Settings.isMobile
+
     headBar.visible: !focusView
 
     /*HANDLE EVENTS*/
