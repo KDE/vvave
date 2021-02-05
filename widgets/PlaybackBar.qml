@@ -164,7 +164,7 @@ Control
             Layout.fillWidth: true
             Layout.preferredHeight: Maui.Style.toolBarHeight
             position: ToolBar.Footer
-            visible: player.state !== MediaPlayer.StoppedState
+//            visible: player.state !== MediaPlayer.StoppedState
 
             background: Item {}
             rightContent: ToolButton
