@@ -14,9 +14,18 @@ class Playlist : public QObject
     Q_PROPERTY(QVariantMap currentTrack READ currentTrack NOTIFY currentTrackChanged FINAL)
     Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
 
-    Q_PROPERTY(bool shuffle READ shuffle WRITE setShuffle NOTIFY shuffleChanged)
+    Q_PROPERTY(PlayMode playMode READ playMode WRITE setPlayMode NOTIFY playModeChanged)
 
 public:
+
+    enum PlayMode : uint_fast8_t
+    {
+        Normal,
+        Shuffle,
+        Repeat
+    };
+    Q_ENUM(PlayMode)
+
     explicit Playlist(QObject *parent = nullptr);
     TracksModel *model() const;
 
@@ -24,7 +33,8 @@ public:
 
     int currentIndex() const;
 
-    bool shuffle() const;
+
+    PlayMode playMode() const;
 
 private:
     TracksModel *m_model = nullptr;
@@ -32,7 +42,8 @@ private:
     QVariantMap m_currentTrack;
     int m_currentIndex = -1;
     int m_previousIndex = -1;
-    bool m_shuffle = false;
+
+    PlayMode m_playMode = PlayMode::Normal;
 
 public slots:
 
@@ -51,15 +62,15 @@ public slots:
     void setModel(TracksModel *model);
     void setCurrentIndex(int index);
 
-    void setShuffle(bool shuffle);
+    void setPlayMode(PlayMode playMode);
 
 signals:
     void canPlayChanged();
     void modelChanged(TracksModel *model);
     void currentTrackChanged(QVariantMap currentTrack);
     void currentIndexChanged(int currentIndex);
-    void shuffleChanged(bool shuffle);
     void missingFile(QVariantMap track);
+    void playModeChanged(PlayMode playMode);
 };
 
 #endif // PLAYLIST_H

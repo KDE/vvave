@@ -8,7 +8,7 @@
 
 Playlist::Playlist(QObject *parent)
     : QObject(parent)
-    , m_shuffle(UTIL::loadSettings("SHUFFLE", "PLAYBACK", false).toBool())
+    , m_playMode(static_cast<Playlist::PlayMode>(UTIL::loadSettings("PLAYMODE", "PLAYBACK", 0).toUInt()))
 {
 }
 
@@ -27,9 +27,9 @@ int Playlist::currentIndex() const
     return m_currentIndex;
 }
 
-bool Playlist::shuffle() const
+Playlist::PlayMode Playlist::playMode() const
 {
-    return m_shuffle;
+    return m_playMode;
 }
 
 bool Playlist::canGoNext() const
@@ -67,10 +67,25 @@ void Playlist::next()
 
     m_previousIndex = m_currentIndex;
 
-    if (m_shuffle) {
-        nextShuffle();
-    } else {
+    switch(m_playMode)
+    {
+    case PlayMode::Normal:
+    {
         setCurrentIndex(m_currentIndex + 1 >= m_model->getCount() ? 0 : m_currentIndex + 1);
+        break;
+    }
+
+    case PlayMode::Shuffle:
+    {
+        nextShuffle();
+        break;
+    }
+
+    case PlayMode::Repeat:
+    {
+        setCurrentIndex(m_currentIndex);
+        break;
+    }
     }
 }
 
@@ -163,8 +178,8 @@ void Playlist::setCurrentIndex(int index)
         return;
     }
 
-    if (m_currentIndex == index)
-        return;
+//    if (m_currentIndex == index)
+//        return;
 
     const auto count = m_model->getCount();
     if (count > 0 && index < count && index >= 0) {
@@ -185,12 +200,13 @@ void Playlist::setCurrentIndex(int index)
     emit currentTrackChanged(m_currentTrack);
 }
 
-void Playlist::setShuffle(bool shuffle)
+void Playlist::setPlayMode(Playlist::PlayMode playMode)
 {
-    if (m_shuffle == shuffle)
+    if (m_playMode == playMode)
         return;
 
-    m_shuffle = shuffle;
-    UTIL::saveSettings("SHUFFLE", m_shuffle, "PLAYBACK");
-    emit shuffleChanged(m_shuffle);
+    m_playMode = playMode;
+    UTIL::saveSettings("PLAYMODE", m_playMode, "PLAYBACK");
+    emit playModeChanged(m_playMode);
 }
+

@@ -7,6 +7,8 @@ import QtMultimedia 5.0
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.mauikit 1.2 as Maui
 
+import org.maui.vvave 1.0 as Vvave
+
 import "../utils/Player.js" as Player
 
 Control
@@ -235,7 +237,7 @@ Control
                         icon.name: "media-skip-backward"
                         onTriggered: Player.previousTrack()
                     }
-                    //ambulatorios1@clinicaantioquia.com.co, copago martha hilda restrepo, cc 22146440 eps salud total, consulta expecialista urologo, hora 3:40 pm
+
                     Action
                     {
                         id: playIcon
@@ -252,18 +254,34 @@ Control
                         text: i18n("Next")
                         icon.name: "media-skip-forward"
                         onTriggered: Player.nextTrack()
-                        //                    onPressAndHold: Player.playAt(Player.shuffle())
                     }
                 },
 
                 ToolButton
                 {
-                    id: shuffleBtn
-                    icon.color: babeColor
-                    icon.name: playlist.shuffle ? "media-playlist-shuffle" : "media-playlist-normal"
+                    icon.name: switch(playlist.playMode)
+                               {
+                               case Vvave.Playlist.Normal: return "media-playlist-normal"
+                               case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
+                               case Vvave.Playlist.Repeat: return "media-playlist-repeat"
+                               }
                     onClicked:
                     {
-                        playlist.shuffle = !playlist.shuffle
+                        switch(playlist.playMode)
+                        {
+                        case Vvave.Playlist.Normal:
+                            playlist.playMode = Vvave.Playlist.Shuffle
+                            break
+
+                        case Vvave.Playlist.Shuffle:
+                            playlist.playMode = Vvave.Playlist.Repeat
+                            break
+
+
+                        case Vvave.Playlist.Repeat:
+                            playlist.playMode = Vvave.Playlist.Normal
+                            break
+                        }
                     }
                 }
             ]
