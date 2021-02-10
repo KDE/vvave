@@ -31,6 +31,12 @@ StackView
 
         model: Maui.BaseModel
         {
+            sort: "label"
+            sortOrder: Qt.AscendingOrder
+            recursiveFilteringEnabled: true
+            sortCaseSensitivity: Qt.CaseInsensitive
+            filterCaseSensitivity: Qt.CaseInsensitive
+
             list: Folders
             {
                 id: _foldersList
