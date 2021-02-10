@@ -70,11 +70,11 @@ vvave::vvave(QObject *parent)
 }
 
 //// PUBLIC SLOTS
-vvave *vvave::qmlAttachedProperties(QObject *object)
-{
-    Q_UNUSED(object)
-    return vvave::instance();
-}
+//vvave *vvave::qmlAttachedProperties(QObject *object)
+//{
+//    Q_UNUSED(object)
+//    return vvave::instance();
+//}
 
 void vvave::setFetchArtwork(bool fetchArtwork)
 {

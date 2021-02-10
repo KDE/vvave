@@ -2,7 +2,7 @@
 #define VVAVE_H
 
 #include <QObject>
-#include <QQmlEngine>
+//#include <QQmlEngine>
 #include <QStringList>
 
 #include "utils/bae.h"
@@ -18,7 +18,7 @@ class vvave : public QObject
     Q_PROPERTY(bool fetchArtwork READ fetchArtwork WRITE setFetchArtwork NOTIFY fetchArtworkChanged)
 
 public:
-    static vvave *qmlAttachedProperties(QObject *object);
+//    static vvave *qmlAttachedProperties(QObject *object);
 
     static vvave *instance()
     {
@@ -76,6 +76,6 @@ signals:
     void fetchArtworkChanged(bool fetchArtwork);
 };
 
-QML_DECLARE_TYPEINFO(vvave, QML_HAS_ATTACHED_PROPERTIES)
+//QML_DECLARE_TYPEINFO(vvave, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // VVAVE_H
