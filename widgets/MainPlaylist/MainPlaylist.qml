@@ -28,7 +28,6 @@ Maui.Page
     title: i18n("Now playing")
     showTitle: true
 
-    headBar.visible: true
     headerBackground.color: "transparent"
 
     headBar.rightContent: ToolButton

@@ -122,7 +122,7 @@ Maui.SettingsDialog
                 model: Vvave.sources
                 delegate: Maui.ListDelegate
                 {
-                    width: parent.width
+                    width: ListView.view.width
                     implicitHeight: Maui.Style.rowHeight * 1.5
                     leftPadding: 0
                     rightPadding: 0
@@ -131,39 +131,37 @@ Maui.SettingsDialog
                     template.label1.text: modelData.label
                     template.label2.text: modelData.path
                     onClicked: _sourcesList.currentIndex = index
+
+                    template.content: ToolButton
+                    {
+                        icon.name: "edit-clear"
+                        flat: true
+                        onClicked:
+                        {
+                            confirmationDialog.url = modelData.path
+                            confirmationDialog.open()
+                        }
+                    }
                 }
             }
 
-            RowLayout
+            Button
             {
                 Layout.fillWidth: true
-                Button
+                text: i18n("Add")
+                flat: true
+                onClicked:
                 {
-                    Layout.fillWidth: true
-                    text: i18n("Remove")
-                    onClicked:
+                    _dialogLoader.sourceComponent = _fileDialogComponent
+                    dialog.settings.onlyDirs = true
+                    dialog.callback = function(urls)
                     {
-                        confirmationDialog.url = _sourcesList.model[_sourcesList.currentIndex].path
-                        confirmationDialog.open()
+                        Vvave.addSources(urls)
                     }
-                }
-
-                Button
-                {
-                    Layout.fillWidth: true
-                    text: i18n("Add")
-                    onClicked:
-                    {
-                        _dialogLoader.sourceComponent = _fileDialogComponent
-                        dialog.settings.onlyDirs = true
-                        dialog.callback = function(urls)
-                        {
-                            Vvave.addSources(urls)
-                        }
-                        dialog.open()
-                    }
+                    dialog.open()
                 }
             }
+
         }
     }
 
