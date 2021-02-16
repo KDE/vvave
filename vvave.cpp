@@ -1,14 +1,12 @@
 #include "vvave.h"
 
-#include <QCoreApplication>
-
 #include "db/collectionDB.h"
 #include "services/local/taginfo.h"
 
 #include <MauiKit/fileloader.h>
 #include <MauiKit/fm.h>
 
-vvave *vvave::m_instance = nullptr;
+#include <QTimer>
 
 static FMH::MODEL trackInfo(const QUrl &url)
 {
@@ -56,23 +54,62 @@ vvave::vvave(QObject *parent)
     if (!dirPath.exists())
         dirPath.mkpath(".");
 
-    connect(db, &CollectionDB::trackInserted, [this](QVariantMap) {
+
+    auto tracksTimer = new QTimer(this);
+    tracksTimer->setSingleShot(true);
+    tracksTimer->setInterval(1000);
+
+    auto albumsTimer = new QTimer(this);
+    albumsTimer->setSingleShot(true);
+    albumsTimer->setInterval(1000);
+
+    auto artistTimer = new QTimer(this);
+    artistTimer->setSingleShot(true);
+    artistTimer->setInterval(1000);
+
+    connect(db, &CollectionDB::trackInserted, [this, tracksTimer](QVariantMap) {
         m_newTracks++;
+        tracksTimer->start();
     });
 
-    connect(db, &CollectionDB::albumInserted, [this](QVariantMap) {
+    connect(db, &CollectionDB::albumInserted, [this, albumsTimer](QVariantMap) {
         m_newAlbums++;
+        albumsTimer->start();
     });
 
-    connect(db, &CollectionDB::artistInserted, [this](QVariantMap) {
+    connect(db, &CollectionDB::artistInserted, [this, artistTimer](QVariantMap) {
         m_newArtist++;
+        artistTimer->start();
     });
 
     connect(db, &CollectionDB::sourceInserted, [this](QVariantMap) {
         m_newSources++;
     });
 
-    connect(qApp, &QCoreApplication::aboutToQuit, this, &vvave::deleteLater);
+    connect(tracksTimer, &QTimer::timeout, [this]()
+    {
+        if (m_newTracks > 0) {
+            emit tracksAdded(m_newTracks);
+            m_newTracks = 0;
+        }
+    });
+
+    connect(albumsTimer, &QTimer::timeout, [this]()
+    {
+        if (m_newAlbums > 0) {
+            emit albumsAdded(m_newAlbums);
+            m_newAlbums = 0;
+        }
+    });
+
+
+    connect(artistTimer, &QTimer::timeout, [this]()
+    {
+        if (m_newArtist > 0) {
+            emit artistsAdded(m_newArtist);
+            m_newArtist = 0;
+        }
+    });
 }
 
 //// PUBLIC SLOTS
@@ -148,27 +185,7 @@ void vvave::scanDir(const QList<QUrl> &paths)
     //    fileLoader->setBatchCount(50);
 
     connect(fileLoader, &FMH::FileLoader::itemReady, db, &CollectionDB::addTrack);
-
-    connect(fileLoader, &FMH::FileLoader::itemsReady, [this](FMH::MODEL_LIST) {
-        if (m_newTracks > 0) {
-            emit tracksAdded(m_newTracks);
-            m_newTracks = 0;
-        }
-
-        if (m_newAlbums > 0) {
-            emit albumsAdded(m_newAlbums);
-            m_newAlbums = 0;
-        }
-
-        if (m_newArtist > 0) {
-            emit artistsAdded(m_newArtist);
-            m_newArtist = 0;
-        }
-    });
-
-    connect(fileLoader, &FMH::FileLoader::finished, [=](FMH::MODEL_LIST) {
-        delete fileLoader;
-    });
+    connect(fileLoader, &FMH::FileLoader::finished, fileLoader, &FMH::FileLoader::deleteLater);
 
     fileLoader->requestPath(paths, true, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO] << "*.m4a");
 }
