@@ -1,10 +1,14 @@
 #include "vvave.h"
 
+#include <QCoreApplication>
+
 #include "db/collectionDB.h"
 #include "services/local/taginfo.h"
 
 #include <MauiKit/fileloader.h>
 #include <MauiKit/fm.h>
+
+vvave *vvave::m_instance = nullptr;
 
 static FMH::MODEL trackInfo(const QUrl &url)
 {
@@ -67,6 +71,8 @@ vvave::vvave(QObject *parent)
     connect(db, &CollectionDB::sourceInserted, [this](QVariantMap) {
         m_newSources++;
     });
+
+    connect(qApp, &QCoreApplication::aboutToQuit, this, &vvave::deleteLater);
 }
 
 //// PUBLIC SLOTS

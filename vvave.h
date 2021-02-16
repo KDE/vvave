@@ -18,12 +18,17 @@ class vvave : public QObject
     Q_PROPERTY(bool fetchArtwork READ fetchArtwork WRITE setFetchArtwork NOTIFY fetchArtworkChanged)
 
 public:
-//    static vvave *qmlAttachedProperties(QObject *object);
+    //    static vvave *qmlAttachedProperties(QObject *object);
 
     static vvave *instance()
     {
-        static vvave vvave;
-        return &vvave;
+        if(m_instance)
+        {
+            return m_instance;
+        }
+
+        m_instance = new vvave;
+        return m_instance;
     }
 
     vvave(const vvave &) = delete;
@@ -54,6 +59,8 @@ public slots:
 private:
     explicit vvave(QObject *parent = nullptr);
     CollectionDB *db;
+
+    static vvave * m_instance;
 
     uint m_newTracks = 0;
     uint m_newAlbums = 0;
