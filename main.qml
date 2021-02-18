@@ -248,10 +248,20 @@ Maui.ApplicationWindow
         width: parent.width
     }
 
+    ProgressBar
+    {
+        id: _scanningProgress
+        width: parent.width
+        anchors.bottom: parent.bottom
+        indeterminate: true
+        visible: Vvave.scanning
+    }
+
     StackView
     {
         id: _stackView
         anchors.fill: parent
+        anchors.bottomMargin: _scanningProgress.height
 
         initialItem: Maui.Page
         {

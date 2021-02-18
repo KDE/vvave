@@ -16,7 +16,7 @@ Item
     height:  Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
     width: height
 
-    x: root.footer.x + Maui.Style.space.medium
+    x: root.width - width - Maui.Style.space.medium
     y: parent.height - height - Maui.Style.space.medium
 
     parent: ApplicationWindow.overlay

@@ -54,7 +54,6 @@ vvave::vvave(QObject *parent)
     if (!dirPath.exists())
         dirPath.mkpath(".");
 
-
     auto tracksTimer = new QTimer(this);
     tracksTimer->setSingleShot(true);
     tracksTimer->setInterval(1000);
@@ -102,7 +101,6 @@ vvave::vvave(QObject *parent)
         }
     });
 
-
     connect(artistTimer, &QTimer::timeout, [this]()
     {
         if (m_newArtist > 0) {
@@ -111,13 +109,6 @@ vvave::vvave(QObject *parent)
         }
     });
 }
-
-//// PUBLIC SLOTS
-//vvave *vvave::qmlAttachedProperties(QObject *object)
-//{
-//    Q_UNUSED(object)
-//    return vvave::instance();
-//}
 
 void vvave::setFetchArtwork(bool fetchArtwork)
 {
@@ -185,9 +176,18 @@ void vvave::scanDir(const QList<QUrl> &paths)
     //    fileLoader->setBatchCount(50);
 
     connect(fileLoader, &FMH::FileLoader::itemReady, db, &CollectionDB::addTrack);
-    connect(fileLoader, &FMH::FileLoader::finished, fileLoader, &FMH::FileLoader::deleteLater);
+    connect(fileLoader, &FMH::FileLoader::finished, fileLoader, [this, fileLoader](FMH::MODEL_LIST, QList<QUrl>)
+    {
+        m_scanning = false;
+        emit scanningChanged(m_scanning);
+
+        fileLoader->deleteLater();
+    });
 
     fileLoader->requestPath(paths, true, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO] << "*.m4a");
+
+    m_scanning = true;
+    emit scanningChanged(m_scanning);
 }
 
 QStringList vvave::sources()
@@ -240,5 +240,10 @@ QList<QUrl> vvave::folders()
 {
     const auto sources = CollectionDB::getInstance()->getDBData("select * from sources");
     return QUrl::fromStringList(FMH::modelToList(sources, FMH::MODEL_KEY::URL));
+}
+
+bool vvave::scanning() const
+{
+    return m_scanning;
 }
 

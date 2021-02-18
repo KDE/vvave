@@ -17,8 +17,8 @@ Standard: Cpp11
 # 4 spaces indent
 TabWidth: 4
 
-# 2 * 80 wide lines
-ColumnLimit: 160
+# 3 * 80 wide lines
+ColumnLimit: 240
 
 # sort includes inside line separated groups
 SortIncludes: true
@@ -47,9 +47,8 @@ BinPackArguments: false
 # don't move parameters to own lines if they are not all on the same
 BinPackParameters: false
 
-# In case we have an if statement whith multiple lines the operator should be at the beginning of the line
-# but we do not want to break assignments
-BreakBeforeBinaryOperators: NonAssignment
+# don't break binary ops
+BreakBeforeBinaryOperators: None
 
 # format C++11 braced lists like function calls
 Cpp11BracedListStyle: true

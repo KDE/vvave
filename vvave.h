@@ -17,9 +17,9 @@ class vvave : public QObject
     Q_PROPERTY(bool autoScan READ autoScan WRITE setAutoScan NOTIFY autoScanChanged)
     Q_PROPERTY(bool fetchArtwork READ fetchArtwork WRITE setFetchArtwork NOTIFY fetchArtworkChanged)
 
-public:
-//    static vvave *qmlAttachedProperties(QObject *object);
+    Q_PROPERTY(bool scanning READ scanning NOTIFY scanningChanged FINAL)
 
+public:
     static vvave *instance()
     {
         static vvave vvave;
@@ -36,6 +36,8 @@ public:
     bool fetchArtwork() const;
 
     QList<QUrl> folders();
+
+    bool scanning() const;
 
 public slots:
     void openUrls(const QStringList &urls);
@@ -63,6 +65,8 @@ private:
     bool m_autoScan = false;
     bool m_fetchArtwork = false;
 
+    bool m_scanning = false;
+
 signals:
     void sourceAdded(QUrl source);
     void sourceRemoved(QUrl source);
@@ -74,8 +78,7 @@ signals:
     void sourcesChanged();
     void autoScanChanged(bool autoScan);
     void fetchArtworkChanged(bool fetchArtwork);
+    void scanningChanged(bool scanning);
 };
-
-//QML_DECLARE_TYPEINFO(vvave, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // VVAVE_H

@@ -51,15 +51,7 @@ Control
                 color: Kirigami.Theme.backgroundColor
                 opacity: 0.8
             }
-        }
-
-        Maui.Separator
-        {
-            position: Qt.Horizontal
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.right: parent.right
-        }
+        }       
     }
 
     ColumnLayout
@@ -139,12 +131,12 @@ Control
                     width: progressBar.availableWidth
                     height: implicitHeight
                     color: "transparent"
-                    opacity: 0.4
+                    opacity: progressBar.pressed ? 0.5 : 1
 
                     Rectangle
                     {
                         width: progressBar.visualPosition * parent.width
-                        height: progressBar.height
+                        height: progressBar.pressed ? progressBar.height : 5
                         color: Kirigami.Theme.highlightColor
                     }
                 }
@@ -169,6 +161,19 @@ Control
 //            visible: player.state !== MediaPlayer.StoppedState
 
             background: Item {}
+
+            farLeftContent: ToolButton
+            {
+                visible: _drawer.collapsed
+                icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
+                onClicked: _drawer.toggle()
+
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("Toogle SideBar")
+            }
+
             rightContent: ToolButton
             {
                 icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
@@ -286,5 +291,13 @@ Control
                 }
             ]
         }
+    }
+
+    Maui.Separator
+    {
+        position: Qt.Horizontal
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
     }
 }
