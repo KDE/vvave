@@ -94,7 +94,7 @@ void lastfm::parseArtist(const QByteArray &array)
             // Here retrieve the artist wiki (bio)
             if (this->request.info.contains(INFO::WIKI)) {
                 if (n.nodeName() == "bio") {
-                    auto artistWiki = n.childNodes().item(2).toElement().text();
+                    auto artistWiki = n.childNodes().item(3).toElement().text();
 
                     this->responses << PULPO::RESPONSE{CONTEXT::WIKI, artistWiki};
                 }

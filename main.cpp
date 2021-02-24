@@ -31,16 +31,19 @@
 #include "mauimacos.h"
 #endif
 
-#include "vvave_version.h"
 #include <MauiKit/fmstatic.h>
 #include <MauiKit/mauiapp.h>
+
+#include "vvave_version.h"
+
+#include "utils/bae.h"
 
 #include "vvave.h"
 
 #include "services/local/artworkprovider.h"
 #include "services/local/player.h"
 #include "services/local/playlist.h"
-#include "utils/bae.h"
+#include "services/local/trackinfo.h"
 
 #include "models/albums/albumsmodel.h"
 #include "models/cloud/cloud.h"
@@ -50,11 +53,7 @@
 
 #define VVAVE_URI "org.maui.vvave"
 
-#ifdef Q_OS_ANDROID
-Q_DECL_EXPORT
-#endif
-
-int main(int argc, char *argv[])
+Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
@@ -130,6 +129,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<Player>(VVAVE_URI, 1, 0, "Player");
     qmlRegisterType<Playlist>(VVAVE_URI, 1, 0, "Playlist");
     qmlRegisterType<Mpris2>(VVAVE_URI, 1, 0, "Mpris2");
+
+    qmlRegisterType<TrackInfo>(VVAVE_URI, 1, 0, "TrackInfo");
 
     engine.addImageProvider("artwork", new ArtworkProvider());
 

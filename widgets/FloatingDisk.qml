@@ -17,7 +17,7 @@ Item
     width: height
 
     x: root.width - width - Maui.Style.space.medium
-    y: parent.height - height - Maui.Style.space.medium
+    y: parent.height - height - Maui.Style.space.medium - root.footer.height
 
     parent: ApplicationWindow.overlay
     z: parent.z + 1
@@ -82,8 +82,7 @@ Item
 
         drag.minimumY: 0
         drag.maximumY: root.height - control.height
-        onClicked: sideBar.visible ? sideBar.close() : sideBar.open()
-        onDoubleClicked: toggleFocusView()
+        onClicked: toggleFocusView()
 
         Rectangle
         {
