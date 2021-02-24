@@ -164,7 +164,7 @@ Control
 
             farLeftContent: ToolButton
             {
-                visible: _drawer.collapsed
+                visible: !_drawer.visible
                 icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
                 onClicked: _drawer.toggle()
 

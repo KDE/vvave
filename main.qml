@@ -181,10 +181,10 @@ Maui.ApplicationWindow
         }
     }
 
-    Component
+    FocusView
     {
         id: _focusViewComponent
-        FocusView { }
+        visible: StackView.status === StackView.Active
     }
 
     FloatingDisk
@@ -261,7 +261,7 @@ Maui.ApplicationWindow
     {
         id: _stackView
         anchors.fill: parent
-        anchors.bottomMargin: _scanningProgress.height
+        anchors.bottomMargin: _scanningProgress.visible ? _scanningProgress.height : 0
 
         initialItem: Maui.Page
         {

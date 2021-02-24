@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.14)
 
-set(VVAVE_VERSION 1.2.1)
+set(VVAVE_VERSION 1.2.2)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
