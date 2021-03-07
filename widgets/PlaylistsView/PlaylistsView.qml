@@ -1,10 +1,10 @@
-import QtQuick 2.10
+import QtQuick 2.14
 import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.10
+import QtQuick.Controls 2.14
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
+import org.kde.mauikit 1.3 as Maui
 import org.maui.vvave 1.0
 
 import "../../view_models/BabeTable"
@@ -23,14 +23,9 @@ StackView
 
     property Flickable flickable : currentItem.flickable
 
-    Maui.NewDialog
+    Maui.NewTagDialog
     {
-        id: newPlaylistDialog
-        title: i18n("Add new playlist")
-        message: i18n("Create a new playlist to organize your music collection")
-        onFinished: addPlaylist(text)
-        acceptButton.text: i18n("Create")
-        rejectButton.visible: false
+        id: newPlaylistDialog       
     }
 
     initialItem:  PlaylistsViewModel
@@ -151,12 +146,5 @@ StackView
     {
         currentPlaylist = playlist
         control.push(_filterListComponent)
-    }
-
-    function addPlaylist(text)
-    {
-        var title = text.trim()
-        if(playlistsList.insert(title))
-            control.listView.positionViewAtEnd()
     }
 }
