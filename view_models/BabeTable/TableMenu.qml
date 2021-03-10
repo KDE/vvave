@@ -114,8 +114,8 @@ Menu
 
     MenuItem
     {
-        text: i18n("Add to")
-        icon.name: "document-save"
+        text: i18n("Tags")
+        icon.name: "tag"
         onTriggered:
         {
             saveToClicked()

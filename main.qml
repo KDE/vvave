@@ -23,8 +23,6 @@ import "view_models/BabeTable"
 
 import "view_models/BabeGrid"
 
-//import "widgets/InfoView"
-
 import "db/Queries.js" as Q
 import "utils/Help.js" as H
 import "utils/Player.js" as Player
@@ -142,11 +140,7 @@ Maui.ApplicationWindow
     Component
     {
         id: _fileDialogComponent
-
-        Maui.FileDialog
-        {
-
-        }
+        Maui.FileDialog {}
     }
 
     Component
@@ -308,8 +302,8 @@ Maui.ApplicationWindow
 
                 Maui.AppViewLoader
                 {
-                    Maui.AppView.title: i18n("Playlists")
-                    Maui.AppView.iconName: "view-media-playlist"
+                    Maui.AppView.title: i18n("Tags")
+                    Maui.AppView.iconName: "tag"
 
                     PlaylistsView
                     {

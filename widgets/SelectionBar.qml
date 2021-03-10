@@ -63,25 +63,10 @@ Maui.SelectionBar
         }
     }
 
-//    MenuSeparator {}
-
-
-//    MenuItem
-//    {
-//        text: i18n("Fav/UnFav them")
-//        onTriggered:
-//        {
-//            for(var i= 0; i < _selectionBar.count; i++)
-//                _selectionBarModelList.fav(i, !(_selectionBarModelList.get(i).fav == "1"))
-
-//        }
-//    }
-
-
     Action
     {
-        text: i18n("Add to")
-        icon.name: "document-save"
+        text: i18n("Tags")
+        icon.name: "tag"
         onTriggered:
         {
             playlistDialog.composerList.urls = control.uris

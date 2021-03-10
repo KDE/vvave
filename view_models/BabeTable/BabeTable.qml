@@ -103,21 +103,21 @@ Maui.Page
         urls: [listModel.get(index).url]
 
         title: i18n("Remove track")
-        message: i18n("You can delete the file from your computer or remove it from your collection.")
+        message: i18n("Are you sure you want to delete the file from your computer? This action can not be undone.")
 
-        rejectButton.text: i18n("Delete")
         acceptButton.text: i18n("Remove")
 
         onAccepted:
         {
-            listModel.list.remove(control.currentIndex)
+            if(Maui.FM.removeFiles(_removeDialog.urls))
+            {
+                 listModel.list.remove(control.currentIndex)
+            }
             close()
         }
 
         onRejected:
-        {
-            if(Maui.FM.removeFiles(_removeDialog.urls))
-                listModel.list.remove(control.currentIndex)
+        {            
             close()
         }
     }
