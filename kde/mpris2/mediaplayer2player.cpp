@@ -359,7 +359,7 @@ int MediaPlayer2Player::currentTrack() const
 void MediaPlayer2Player::setCurrentTrack(int newTrackPosition)
 {
     m_currentTrack = m_playListControler->currentTrack().value("url").toString();
-    m_currentTrackId = QDBusObjectPath(QLatin1String("/org/kde/elisa/playlist/") + QString::number(newTrackPosition)).path();
+    m_currentTrackId = QDBusObjectPath(QLatin1String("/org/maui/vvave/playlist/") + QString::number(newTrackPosition)).path();
 
     emit currentTrackChanged();
 
@@ -417,7 +417,7 @@ void MediaPlayer2Player::setShowProgressOnTaskBar(bool value)
         parameters.insert(QStringLiteral("progress"), qRound(static_cast<double>(m_position / m_audioPlayer->getDuration())) / 1000.0);
     }
 
-    mProgressIndicatorSignal.setArguments({QStringLiteral("application://org.kde.elisa.desktop"), parameters});
+    mProgressIndicatorSignal.setArguments({QStringLiteral("application://org.maui.vvave.desktop"), parameters});
 
     QDBusConnection::sessionBus().send(mProgressIndicatorSignal);
 }
