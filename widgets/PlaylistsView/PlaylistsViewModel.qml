@@ -37,13 +37,6 @@ Maui.GridView
         filterCaseSensitivity: Qt.CaseInsensitive
     }
 
-    function randomHexColor()
-    {
-        var color = '#', i = 5;
-        do{ color += "0123456789abcdef".substr(Math.random() * 16,1); }while(i--);
-        return color;
-    }
-
     delegate : Maui.GalleryRollItem
     {
         id: _collageDelegate

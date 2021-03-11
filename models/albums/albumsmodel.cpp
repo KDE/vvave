@@ -12,7 +12,6 @@ AlbumsModel::AlbumsModel(QObject *parent)
 {
     qRegisterMetaType<FMH::MODEL_LIST>("FMH::MODEL_LIST");
     qRegisterMetaType<FMH::MODEL>("FMH::MODEL");
-    qRegisterMetaType<PULPO::ONTOLOGY>("PULPO::ONTOLOGY");
 }
 
 void AlbumsModel::componentComplete()
@@ -67,4 +66,16 @@ void AlbumsModel::setList()
 void AlbumsModel::refresh()
 {
     this->setList();
+}
+
+int AlbumsModel::indexOfName(const QString &query)
+{
+    const auto it = std::find_if(this->items().constBegin(), this->items().constEnd(), [&](const FMH::MODEL &item) -> bool {
+            return item[this->query == AlbumsModel::QUERY::ALBUMS ? FMH::MODEL_KEY::ALBUM : FMH::MODEL_KEY::ARTIST].startsWith(query, Qt::CaseInsensitive);
+        });
+
+        if (it != this->items().constEnd())
+            return this->mappedIndexFromSource(std::distance(this->items().constBegin(), it));
+        else
+            return -1;
 }

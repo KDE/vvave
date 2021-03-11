@@ -7,7 +7,6 @@
 #include <MauiKit/fmh.h>
 #include <MauiKit/mauilist.h>
 
-#include "pulpo/pulpo.h"
 
 class CollectionDB;
 class AlbumsModel : public MauiList
@@ -38,6 +37,7 @@ private:
 
 public slots:
     void refresh();
+    int indexOfName(const QString &query);
 
 signals:
     void queryChanged();

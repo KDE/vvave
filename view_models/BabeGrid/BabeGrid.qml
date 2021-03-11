@@ -2,8 +2,8 @@ import QtQuick.Controls 2.14
 import QtQuick 2.14
 import QtQuick.Layouts 1.3
 
-import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.2 as Maui
+import org.kde.kirigami 2.14 as Kirigami
+import org.kde.mauikit 1.3 as Maui
 
 import org.maui.vvave 1.0
 
@@ -33,6 +33,7 @@ Maui.AltBrowser
     headBar.middleContent: Maui.TextField
     {
         Layout.fillWidth: true
+        Layout.maximumWidth: 500
         placeholderText: i18n("Filter")
         onAccepted: _albumsModel.filter = text
         onCleared: _albumsModel.filter = ""
@@ -42,6 +43,55 @@ Maui.AltBrowser
 
     gridView.itemSize: albumCoverSize
     holder.visible: count === 0
+
+    property string typingQuery
+
+     Maui.Chip
+     {
+         z: control.z + 99999
+         Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+         visible: _typingTimer.running
+         label.text: typingQuery
+         anchors.left: parent.left
+         anchors.bottom: parent.bottom
+         showCloseButton: false
+         anchors.margins: Maui.Style.space.medium
+     }
+
+     Timer
+     {
+         id: _typingTimer
+         interval: 500
+         onTriggered:
+         {
+               control.currentIndex = _albumsList.indexOfName(typingQuery)
+               typingQuery = ""
+         }
+     }
+
+     Connections
+     {
+         target: control.currentView
+         ignoreUnknownSignals: true
+         function onKeyPress(event)
+         {
+             const index = control.currentIndex
+             const item = _albumsModel.get(index)
+
+             var pat = /^([a-zA-Z0-9 _-]+)$/
+             if(event.count === 1 && pat.test(event.text))
+             {
+                 typingQuery += event.text
+                 _typingTimer.restart()
+             }
+
+             //shortcut for opening
+             if(event.key === Qt.Key_Return)
+             {
+                 albumCoverClicked(item.album, item.artist)
+             }
+         }
+     }
 
     model: Maui.BaseModel
     {

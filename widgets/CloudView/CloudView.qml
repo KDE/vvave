@@ -16,153 +16,45 @@ Maui.Page
     id: control
     property alias list : _cloudList
 
-    Maui.BaseModel
-    {
-        id: _cloudModel
-        list: _cloudList
-    }
-
-    Cloud
-    {
-        id: _cloudList
-
-        onFileReady: Player.addTrack(track)
-    }
-
     headBar.visible: !_listView.holder.visible
 
-    headBar.leftContent: [
+    headBar.leftContent: Maui.ToolActions
+    {
+        expanded: isWide
+        enabled: listModel.list.count > 0
+        checkable: false
+        autoExclusive: false
+        display: ToolButton.TextBesideIcon
+        defaultIconName: "media-playback-start"
 
-        ToolButton
+        Action
         {
-            id : playAllBtn
-            //            text: i18n("Play all")
             icon.name : "media-playlist-play"
-            //            onClicked: playAll()
-        },
-        ToolButton
-        {
-            id: appendBtn
-            //            text: i18n("Append")
-            icon.name : "media-playlist-append"//"media-repeat-track-amarok"
-            //            onClicked: appendAll()
-        }]
-
-
-    headBar.rightContent: [
-
-        ToolButton
-        {
-            icon.name: "item-select"
-            onClicked: selectionMode = !selectionMode
-            checkable: false
-            checked: selectionMode
-        },
-
-        Maui.ToolButtonMenu
-        {
-            id: sortBtn
-            icon.name: "view-sort"
-
-            MenuItem
-            {
-                text: i18n("Title")
-                checkable: true
-                checked: list.sortBy === Cloud.TITLE
-                onTriggered: list.sortBy = Cloud.TITLE
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Track")
-                checkable: true
-                checked: list.sortBy === Cloud.TRACK
-                onTriggered: list.sortBy = Cloud.TRACK
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Artist")
-                checkable: true
-                checked: list.sortBy === Cloud.ARTIST
-                onTriggered: list.sortBy = Cloud.ARTIST
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Album")
-                checkable: true
-                checked: list.sortBy === Cloud.ALBUM
-                onTriggered: list.sortBy = Cloud.ALBUM
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Most played")
-                checkable: true
-                checked: list.sortBy === Cloud.COUNT
-                onTriggered: list.sortBy = Cloud.COUNT
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Rate")
-                checkable: true
-                checked: list.sortBy === Cloud.RATE
-                onTriggered: list.sortBy = Cloud.RATE
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Favorite")
-                checkable: true
-                checked: list.sortBy === Cloud.FAV
-                onTriggered: list.sortBy = Cloud.FAV
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Release date")
-                checkable: true
-                checked: list.sortBy === Cloud.RELEASEDATE
-                onTriggered: list.sortBy = Cloud.RELEASEDATE
-                autoExclusive: true
-            }
-
-            MenuItem
-            {
-                text: i18n("Add date")
-                checkable: true
-                checked: list.sortBy === Cloud.ADDDATE
-                onTriggered: list.sortBy = Cloud.ADDDATE
-                autoExclusive: true
-            }
-
-            MenuSeparator{}
-
-            MenuItem
-            {
-                text: i18n("Group")
-                checkable: true
-//                checked: group
-                onTriggered: group = !group
-            }
+            text: i18n("Play")
+//            onTriggered: playAll()
         }
-    ]
 
+        Action
+        {
+            icon.name : "media-playlist-append"
+            text: i18n("Append")
+//            onTriggered: appendAll()
+        }
+    }
+
+    headBar.middleContent: Maui.TextField
+    {
+        Layout.fillWidth: true
+        Layout.maximumWidth: 500
+        placeholderText: i18n("Filter")
+        onAccepted: _cloudModel.filter = text
+        onCleared: _cloudModel.filter = ""
+    }
 
     Maui.ListBrowser
     {
         id: _listView
         anchors.fill: parent
-        clip: true
         holder.visible: count === 0
         holder.emoji: "qrc:/assets/dialog-information.svg"
         holder.title : i18n("Opps!")
@@ -178,31 +70,54 @@ Maui.Page
             }
         }
 
-        topMargin: Maui.Style.space.medium
-        model: _cloudModel
+        model: Maui.BaseModel
+        {
+            id: _cloudModel
+            list: Cloud
+            {
+                id: _cloudList
+
+                onFileReady: Player.addTrack(track)
+            }
+        }
+
         section.property: "artist"
         section.criteria: ViewSection.FullString
-        section.delegate: Maui.LabelDelegate
+        section.delegate: Item
         {
-            id: _sectionDelegate
-            label: section
-            isSection: true
-            width: parent.width
-            Kirigami.Theme.backgroundColor: "#333"
-            Kirigami.Theme.textColor: "#fafafa"
+            width: ListView.view.width
+            implicitHeight: Maui.Style.rowHeight*2.5
 
-            background: Rectangle
+            Rectangle
             {
-                color:  Kirigami.Theme.backgroundColor
+                color: Qt.tint(control.Kirigami.Theme.textColor, Qt.rgba(control.Kirigami.Theme.backgroundColor.r, control.Kirigami.Theme.backgroundColor.g, control.Kirigami.Theme.backgroundColor.b, 0.9))
+                anchors.centerIn: parent
+                width: parent.width
+                height: Maui.Style.rowHeight * 1.5
+
+                radius: Maui.Style.radiusV
+
+                Maui.ListItemTemplate
+                {
+                    anchors.centerIn:  parent
+                    label1.text: String(section)
+
+                    label1.font.pointSize: Maui.Style.fontSizes.big
+                    label1.font.bold: true
+                    width: parent.width
+                    imageSizeHint: height * 0.7
+                    maskRadius: height/2
+                    imageBorder: false
+
+                    imageSource: "image://artwork/artist:"+ String(section)
+                }
             }
         }
 
         flickable.header: Rectangle
         {
-            Kirigami.Theme.inherit: false
             width: parent.width
             height: 150
-            z: _listView.listView.z+999
             color: Kirigami.Theme.backgroundColor
             visible: _headList.count > 0
 
@@ -224,15 +139,13 @@ Maui.Page
                     isCurrentItem: ListView.isCurrentItem
                     anchors.verticalCenter: parent.verticalCenter
                     showLabels: true
-                    label1.text: modelData.album ? modelData.album : modelData.artist
-                    label2.text: modelData.artist && modelData.album ? modelData.artist : ""
-                    image.source:  modelData.artwork ?  modelData.artwork : "qrc:/assets/cover.png"
+                    label1.text: modelData.artist
+                    image.source: "image://artwork/artist:"+ modelData.artist
                 }
             }
         }
 
         flickable.headerPositioning: ListView.PullBackHeader
-
 
         delegate: TableDelegate
         {

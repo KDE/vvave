@@ -28,7 +28,7 @@ StackView
         id: newPlaylistDialog       
     }
 
-    initialItem:  PlaylistsViewModel
+    initialItem: PlaylistsViewModel
     {
         Maui.FloatingButton
         {
