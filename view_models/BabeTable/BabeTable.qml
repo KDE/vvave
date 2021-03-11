@@ -10,6 +10,8 @@ import org.maui.vvave 1.0
 import "../../utils/Player.js" as Player
 import "../../utils/Help.js" as H
 
+import "../../widgets"
+
 Maui.Page
 {
     id: control
@@ -94,6 +96,11 @@ Maui.Page
         onCleared: listModel.filter = ""
     }
 
+    MetadataDialog
+    {
+        id: _metadataDialog
+    }
+
     Maui.FileListingDialog
     {
         id: _removeDialog
@@ -173,6 +180,12 @@ Maui.Page
         onInfoClicked:
         {
 //            infoView.show(listModel.get(control.currentIndex))
+        }
+
+        onEditClicked:
+        {
+            _metadataDialog.url = listModel.get(control.currentIndex).url
+            _metadataDialog.open()
         }
 
         onCopyToClicked:

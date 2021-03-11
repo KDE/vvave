@@ -44,6 +44,7 @@
 #include "services/local/player.h"
 #include "services/local/playlist.h"
 #include "services/local/trackinfo.h"
+#include "services/local/metadataeditor.h"
 
 #include "models/albums/albumsmodel.h"
 #include "models/cloud/cloud.h"
@@ -131,6 +132,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<Mpris2>(VVAVE_URI, 1, 0, "Mpris2");
 
     qmlRegisterType<TrackInfo>(VVAVE_URI, 1, 0, "TrackInfo");
+    qmlRegisterType<MetadataEditor>(VVAVE_URI, 1, 0, "MetadataEditor");
 
     engine.addImageProvider("artwork", new ArtworkProvider());
 

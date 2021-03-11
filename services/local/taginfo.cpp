@@ -23,14 +23,12 @@ using namespace BAE;
 TagInfo::TagInfo(const QString &url, QObject *parent)
     : QObject(parent)
 {
-    this->path = url;
-    QFileInfo _file(this->path);
-
-    if (_file.isReadable()) {
-        this->file = new TagLib::FileRef(TagLib::FileName(path.toUtf8()));
-    } else
-        this->file = new TagLib::FileRef();
+    this->setFile(url);
 }
+
+TagInfo::TagInfo(QObject *parent)
+    : QObject(parent)
+{}
 
 TagInfo::~TagInfo()
 {
@@ -81,6 +79,17 @@ uint TagInfo::getYear() const
     return file->tag()->year();
 }
 
+void TagInfo::setFile(const QString &url)
+{
+    this->path = url;
+    QFileInfo _file(this->path);
+
+    if (_file.isReadable() && _file.exists()) {
+        this->file = new TagLib::FileRef(TagLib::FileName(path.toUtf8()));
+    } else
+        this->file = new TagLib::FileRef();
+}
+
 int TagInfo::getDuration() const
 {
     return file->audioProperties()->length();
@@ -124,6 +133,12 @@ void TagInfo::setTitle(const QString &title)
 void TagInfo::setTrack(const int &track)
 {
     this->file->tag()->setTrack(static_cast<unsigned int>(track));
+    this->file->save();
+}
+
+void TagInfo::setYear(const int &year)
+{
+    this->file->tag()->setYear(static_cast<unsigned int>(year));
     this->file->save();
 }
 

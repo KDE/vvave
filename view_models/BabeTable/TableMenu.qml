@@ -164,7 +164,6 @@ Menu
 
     MenuItem
     {
-        visible: false
         text: i18n("Edit")
         icon.name: "document-edit"
         onTriggered:

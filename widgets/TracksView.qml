@@ -1,7 +1,10 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.12
-import org.kde.mauikit 1.0 as Maui
+import QtQuick 2.14
+import QtQuick.Controls 2.14
+
+import org.kde.mauikit 1.3 as Maui
+
 import "../view_models/BabeTable"
+
 import "../db/Queries.js" as Q
 import "../utils/Player.js" as Player
 

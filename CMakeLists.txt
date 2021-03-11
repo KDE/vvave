@@ -80,6 +80,7 @@ set(vvave_SRCS
     services/local/player.cpp
     services/local/playlist.cpp
     services/local/trackinfo.cpp
+    services/local/metadataeditor.cpp
     services/web/NextCloud/nextmusic.cpp
     services/web/abstractmusicprovider.cpp
     db/collectionDB.cpp
