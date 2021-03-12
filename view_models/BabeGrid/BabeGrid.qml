@@ -64,8 +64,13 @@ Maui.AltBrowser
          interval: 500
          onTriggered:
          {
-               control.currentIndex = _albumsList.indexOfName(typingQuery)
-               typingQuery = ""
+             const index = _albumsList.indexOfName(typingQuery)
+             if(index > -1)
+             {
+                 control.currentIndex = index
+             }
+
+             typingQuery = ""
          }
      }
 
