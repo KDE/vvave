@@ -22,7 +22,7 @@ set(REQUIRED_QT_VERSION 5.10.0)
 set(REQUIRED_KF5_VERSION 5.60)
 
 find_package(ECM ${REQUIRED_KF5_VERSION} REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 find_package(MauiKit REQUIRED)
 
@@ -118,7 +118,14 @@ if (ANDROID)
 #    add_dependencies(vvave taglib)
     kde_source_files_enable_exceptions(vvave)
 else()
-    find_package(Taglib REQUIRED)
+
+    find_package(Taglib 1.4 REQUIRED)
+
+    if(Taglib_FOUND)
+        message(STATUS "FOUDN TAG LIB" ${Taglib_VERSION}  ${Taglib_INCLUDE_DIRS})
+        include_directories( ${Taglib_INCLUDE_DIRS} )
+endif()
+
     target_sources(vvave PRIVATE
         kde/mpris2/mediaplayer2.cpp
         kde/mpris2/mediaplayer2player.cpp
@@ -131,7 +138,7 @@ target_compile_definitions(vvave
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
 target_include_directories(vvave PRIVATE ${TAGLIB_INCLUDE_DIRS})
-target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${TAGLIB_LIBRARIES})
+target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${Taglib_LIBRARIES})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
