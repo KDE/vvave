@@ -58,7 +58,6 @@ Maui.Page
     flickable: _listBrowser.flickable
 
     headBar.visible: true
-    headerBackground.color: "transparent"
 
     headBar.leftContent: Maui.ToolActions
     {
@@ -124,7 +123,7 @@ Maui.Page
         }
 
         onRejected:
-        {            
+        {
             close()
         }
     }

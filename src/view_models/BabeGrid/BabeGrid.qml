@@ -28,7 +28,6 @@ Maui.AltBrowser
     Kirigami.Theme.inherit: false
 
     headBar.visible: true
-    headerBackground.color: "transparent"
 
     headBar.middleContent: Maui.TextField
     {

@@ -31,7 +31,6 @@ Maui.Page
     showTitle: true
 
     headBar.visible: !mainlistEmpty
-    headerBackground.color: "transparent"
 
     headBar.rightContent: ToolButton
     {
