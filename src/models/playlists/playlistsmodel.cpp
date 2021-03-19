@@ -62,15 +62,6 @@ QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
         return res.join(",");
     }
 
-    if (playlist == "Rating") {
-        const auto data = CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where rate > 0 order by rate desc limit 4"));
-        for (const auto &item : data) {
-            res << QString("image://artwork/album:%1:%2").arg(item[FMH::MODEL_KEY::ARTIST], item[FMH::MODEL_KEY::ALBUM]);
-        }
-
-        return res.join(",");
-    }
-
     const auto urls = FMStatic::getTagUrls(playlist, {}, true, 4, "audio");
     for (const auto &url : urls) {
         const auto data = CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.url = %1").arg("\"" + url.toString() + "\""));
@@ -99,14 +90,6 @@ FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
                             {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
                             {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Most Played")},
                             {FMH::MODEL_KEY::ICON, "view-media-playcount"},
-                            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}},
-
-                           {{FMH::MODEL_KEY::DESCRIPTION, "Highest rated tracks"},
-                            {FMH::MODEL_KEY::TYPE, "default"},
-                            {FMH::MODEL_KEY::COLOR, "#42A5F5"},
-                            {FMH::MODEL_KEY::PLAYLIST, "Rating"},
-                            {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Rating")},
-                            {FMH::MODEL_KEY::ICON, "view-media-favorite"},
                             {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}}};
 }
 

@@ -1,4 +1,3 @@
-#include <QFontDatabase>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
@@ -101,8 +100,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     about.processCommandLine(&parser);
 
     const QStringList args = parser.positionalArguments();
-
-    QFontDatabase::addApplicationFont(":/assets/materialdesignicons-webfont.ttf");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

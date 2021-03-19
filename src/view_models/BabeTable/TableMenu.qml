@@ -15,25 +15,17 @@ Menu
     width: Maui.Style.unit * 200
     modal: true
 
-    property int rate : 0
     property bool fav : false
-    property string starColor : "#FFC107"
-    property string starReg : Kirigami.Theme.textColor
-    property string starIcon: "draw-star"
 
-    signal removeClicked()
     signal favClicked()
     signal queueClicked()
-    signal playClicked()
     signal saveToClicked()
     signal openWithClicked()
     signal editClicked()
     signal shareClicked()
     signal selectClicked()
-    signal rateClicked(int rate)
     signal infoClicked()
     signal copyToClicked()
-    signal appendClicked()
     signal deleteClicked()
 
     property alias menuItem : control.contentData
@@ -56,45 +48,11 @@ Menu
 
     MenuItem
     {
-        text: i18n("Play")
-        icon.name: "media-playlist-play"
-        onTriggered:
-        {
-            playClicked()
-            close()
-        }
-    }
-
-    MenuItem
-    {
         text: i18n("Queue")
         icon.name: "view-media-recent"
         onTriggered:
         {
             queueClicked()
-            close()
-        }
-    }
-
-    MenuItem
-    {
-        text: i18n("Append")
-        icon.name: "media-playlist-append"
-        onTriggered:
-        {
-            appendClicked()
-            close()
-        }
-    }
-
-    MenuItem
-    {
-        text: i18n("Remove")
-        icon.name: "edit-clear"
-        onTriggered:
-        {
-            removeClicked()
-            list.remove(listView.currentIndex)
             close()
         }
     }
@@ -195,93 +153,4 @@ Menu
             close()
         }
     }
-
-    MenuSeparator {}
-
-    MenuItem
-    {
-        id: starsRow
-        width: parent.width
-        height: Maui.Style.iconSizes.medium + Maui.Style.space.small
-
-        RowLayout
-        {
-            anchors.fill: parent
-
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.name: starIcon
-                icon.width: Maui.Style.iconSizes.medium
-                icon.color: rate >= 1 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 1
-                    rateClicked(rate)
-                    close()
-                }
-            }
-
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.width: Maui.Style.iconSizes.medium
-                icon.name: starIcon
-                icon.color: rate >= 2 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 2
-                    rateClicked(rate)
-                    close()
-                }
-            }
-
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.width: Maui.Style.iconSizes.medium
-                icon.name: starIcon
-                icon.color: rate >= 3 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 3
-                    rateClicked(rate)
-                    close()
-                }
-            }
-
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.width: Maui.Style.iconSizes.medium
-                icon.name: starIcon
-                icon.color: rate >= 4 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 4
-                    rateClicked(rate)
-                    close()
-                }
-            }
-
-            ToolButton
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                icon.width: Maui.Style.iconSizes.medium
-                icon.name: starIcon
-                icon.color: rate >= 5 ? starColor :starReg
-                onClicked:
-                {
-                    rate = 5
-                    rateClicked(rate)
-                    close()
-                }
-            }
-        }
-    }
-}
+ }

@@ -15,70 +15,97 @@ import "../../widgets"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
 
-Maui.GridView
+Maui.Page
 {
     id: control
-    itemSize: Math.min(260, Math.max(140, Math.floor(width* 0.3)))
-    itemHeight: itemSize
 
-    holder.emoji:  "qrc:/assets/dialog-information.svg"
-    holder.title : i18n("No Playlists!")
-    holder.body: i18n("Start creating new custom playlists")
+    footBar.visible: false
 
-    holder.emojiSize: Maui.Style.iconSizes.huge
-    holder.visible: control.count === 0
-
-    model: Maui.BaseModel
+    headBar.middleContent: Maui.TextField
     {
-        id: _playlistsModel
-        list: playlistsList
-        recursiveFilteringEnabled: true
-        sortCaseSensitivity: Qt.CaseInsensitive
-        filterCaseSensitivity: Qt.CaseInsensitive
+        Layout.maximumWidth: 500
+        Layout.fillWidth: true
+        placeholderText: i18n("Filter")
+        onAccepted: _playlistsModel.filter = text
+        onCleared: _playlistsModel.filter = ""
     }
 
-    delegate : Maui.GalleryRollItem
+    headBar.rightContent: ToolButton
     {
-        id: _collageDelegate
-        height: control.cellHeight
-        width: control.cellWidth
-
-        isCurrentItem: GridView.isCurrentItem
-        images: model.preview.split(",")
-
-        label1.text: model.playlist
-        label2.text: model.description
-        template.iconSource: model.icon
-
-        onClicked :
+        icon.name: "list-add"
+        onClicked:
         {
-            control.currentIndex = index
-            if(Maui.Handy.singleClick)
-            {
-                populate(model.playlist, true)
-            }
-        }
-
-        onDoubleClicked :
-        {
-            control.currentIndex = index
-            if(!Maui.Handy.singleClick)
-            {
-                populate(model.playlist, true)
-            }
-        }
-
-        onRightClicked:
-        {
-            control.currentIndex = index
-            currentPlaylist = model.playlist
-        }
-
-        onPressAndHold:
-        {
-            control.currentIndex = index
-            currentPlaylist = model.playlist
+            newPlaylistDialog.open()
         }
     }
 
+    Maui.GridView
+    {
+        id: _gridView
+
+        anchors.fill: parent
+
+        itemSize: Math.min(260, Math.max(140, Math.floor(width* 0.3)))
+        itemHeight: itemSize
+
+        holder.emoji:  "qrc:/assets/dialog-information.svg"
+        holder.title : i18n("No Playlists!")
+        holder.body: i18n("Start creating new custom playlists")
+
+        holder.emojiSize: Maui.Style.iconSizes.huge
+        holder.visible: _gridView.count === 0
+
+        model: Maui.BaseModel
+        {
+            id: _playlistsModel
+            list: playlistsList
+            recursiveFilteringEnabled: true
+            sortCaseSensitivity: Qt.CaseInsensitive
+            filterCaseSensitivity: Qt.CaseInsensitive
+        }
+
+        delegate : Maui.GalleryRollItem
+        {
+            id: _collageDelegate
+            height: _gridView.cellHeight
+            width: _gridView.cellWidth
+
+            isCurrentItem: GridView.isCurrentItem
+            images: model.preview.split(",")
+
+            label1.text: model.playlist
+            label2.text: model.description
+            template.iconSource: model.icon
+
+            onClicked :
+            {
+                _gridView.currentIndex = index
+                if(Maui.Handy.singleClick)
+                {
+                    populate(model.playlist, true)
+                }
+            }
+
+            onDoubleClicked :
+            {
+                _gridView.currentIndex = index
+                if(!Maui.Handy.singleClick)
+                {
+                    populate(model.playlist, true)
+                }
+            }
+
+            onRightClicked:
+            {
+                _gridView.currentIndex = index
+                currentPlaylist = model.playlist
+            }
+
+            onPressAndHold:
+            {
+                _gridView.currentIndex = index
+                currentPlaylist = model.playlist
+            }
+        }
+    }
 }

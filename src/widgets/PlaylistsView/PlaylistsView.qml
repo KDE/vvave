@@ -30,17 +30,6 @@ StackView
 
     initialItem: PlaylistsViewModel
     {
-        Maui.FloatingButton
-        {
-            id: _overlayButton
-            z: 999
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            anchors.margins: Maui.Style.toolBarHeight
-            anchors.bottomMargin: Maui.Style.toolBarHeight + flickable.bottomMargin
-            icon.name : "list-add"
-            onClicked: newPlaylistDialog.open()
-        }
     }
 
     Component

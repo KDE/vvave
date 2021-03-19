@@ -152,24 +152,6 @@ bool TracksModel::fav(const int &index, const bool &value)
     return true;
 }
 
-bool TracksModel::rate(const int &index, const int &value)
-{
-    if (index >= this->list.size() || index < 0)
-        return false;
-
-    const auto index_ = this->mappedIndex(index);
-
-    auto item = this->list[index_];
-    if (this->db->rateTrack(item[FMH::MODEL_KEY::URL], value)) {
-        this->list[index_][FMH::MODEL_KEY::RATE] = QString::number(value);
-        emit this->updateModel(index_, {FMH::MODEL_KEY::RATE});
-
-        return true;
-    }
-
-    return false;
-}
-
 bool TracksModel::countUp(const int &index)
 {
     if (index >= this->list.size() || index < 0)

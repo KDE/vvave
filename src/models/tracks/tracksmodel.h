@@ -47,7 +47,6 @@ public slots:
 
     void clear();
     bool fav(const int &index, const bool &value);
-    bool rate(const int &index, const int &value);
     bool countUp(const int &index);
     bool remove(const int &index);
     void refresh();

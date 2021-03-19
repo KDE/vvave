@@ -1,6 +1,3 @@
-.import org.kde.mauikit 1.0 as Maui
-.import org.maui.vvave 1.0 as Vvave
-
 function playTrack()
 {
     player.url = currentTrack.url;

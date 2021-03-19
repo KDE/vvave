@@ -154,8 +154,6 @@ Maui.Page
         }
 
         onQueueClicked: Player.queueTracks([listModel.get(control.currentIndex)])
-        onPlayClicked: quickPlayTrack(control.currentIndex)
-        onAppendClicked: appendTrack(control.currentIndex)
 
         onSaveToClicked:
         {
@@ -169,11 +167,6 @@ Maui.Page
         {
             _removeDialog.index= control.currentIndex
             _removeDialog.open()
-        }
-
-        onRateClicked:
-        {
-            listModel.list.rate(control.currentIndex, rate);
         }
 
         onInfoClicked:
@@ -366,7 +359,6 @@ Maui.Page
 function openItemMenu(index)
 {
     currentIndex = index
-    contextMenu.rate = listModel.get(currentIndex).rate
     contextMenu.fav = Maui.FM.isFav(listModel.get(currentIndex).url)
     contextMenu.popup()
 

@@ -20,7 +20,6 @@ Maui.ListBrowserDelegate
     readonly property string album : model.album
     readonly property string title : model.title
     readonly property url url : model.url
-    readonly property int rate : model.rate
     readonly property int track : model.track
 
     property bool sameAlbum : false
@@ -33,9 +32,6 @@ Maui.ListBrowserDelegate
     label1.text: control.number ? control.track + ". " + control.title :  control.title
     label2.text: control.artist + " | " + control.album
     label2.visible: control.coverArt ? !control.sameAlbum : true
-
-    label3.font.family: "Material Design Icons"
-    label3.text: control.rate ? H.setStars(control.rate) : ""
 
     iconVisible: !control.sameAlbum && control.coverArt
     imageSource: coverArt ? "image://artwork/album:"+ control.artist+":"+control.album : ""
