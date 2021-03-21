@@ -104,10 +104,6 @@ Maui.Page
     {
         id: _removeDialog
 
-        property int index
-
-        urls: [listModel.get(index).url]
-
         title: i18n("Remove track")
         message: i18n("Are you sure you want to delete the file from your computer? This action can not be undone.")
 
@@ -157,15 +153,15 @@ Maui.Page
 
         onSaveToClicked:
         {
-            playlistDialog.composerList.urls = [listModel.get(control.currentIndex).url]
+            playlistDialog.composerList.urls = filterSelection(listModel.get(control.currentIndex).url)
             playlistDialog.open()
         }
 
-        onOpenWithClicked: Maui.FM.openLocation([listModel.get(control.currentIndex).url])
+        onOpenWithClicked: Maui.FM.openLocation(filterSelection(listModel.get(control.currentIndex).url))
 
         onDeleteClicked:
         {
-            _removeDialog.index= control.currentIndex
+            _removeDialog.urls = filterSelection(listModel.get(control.currentIndex).url)
             _removeDialog.open()
         }
 
@@ -390,6 +386,17 @@ function filterSelectedItems(path)
     }
 
     return path
+}
+
+function filterSelection(url)
+{
+    if(selectionBar.contains(url))
+    {
+        return selectionBar.uris
+    }else
+    {
+        return [url]
+    }
 }
 
 }
