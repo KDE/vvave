@@ -356,7 +356,7 @@ function openItemMenu(index)
 {
     currentIndex = index
     contextMenu.fav = Maui.FM.isFav(listModel.get(currentIndex).url)
-    contextMenu.popup()
+    contextMenu.open()
 
     rowPressed(index)
 }

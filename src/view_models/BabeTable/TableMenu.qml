@@ -2,18 +2,17 @@ import QtQuick 2.0
 import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
+
+import org.kde.mauikit 1.3 as Maui
+import org.kde.kirigami 2.6 as Kirigami
+
 import "../../utils"
 import ".."
 import "../../utils/Help.js" as H
 
-import org.kde.mauikit 1.0 as Maui
-import org.kde.kirigami 2.6 as Kirigami
-
-Menu
+Maui.ContextualMenu
 {
     id: control
-    width: Maui.Style.unit * 200
-    modal: true
 
     property bool fav : false
 
@@ -39,8 +38,7 @@ Menu
             H.addToSelection(listModel.get(listView.currentIndex))
 
             selectionMode = Maui.Handy.isTouch
-
-            contextMenu.close()
+            control.close()
         }
     }
 
