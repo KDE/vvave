@@ -12,6 +12,7 @@ Maui.Dialog
     id: control
 
     title: i18n("Edit")
+    closeButton.visible: false
     property alias url  : _editor.url
 
     page.margins: Maui.Style.space.big
