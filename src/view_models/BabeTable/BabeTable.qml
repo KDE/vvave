@@ -59,26 +59,22 @@ Maui.Page
 
     headBar.visible: true
 
-    headBar.leftContent: Maui.ToolActions
+    headBar.leftContent: Maui.ToolButtonMenu
     {
-        expanded: isWide
         enabled: listModel.list.count > 0
-        checkable: false
-        autoExclusive: false
-        display: ToolButton.TextBesideIcon
-        defaultIconName: "media-playback-start"
+        icon.name: "media-playback-start"
 
-        Action
+        MenuItem
         {
             icon.name : "media-playlist-play"
-            text: i18n("Play")
+            text: i18n("Play All")
             onTriggered: playAll()
         }
 
-        Action
+        MenuItem
         {
             icon.name : "media-playlist-append"
-            text: i18n("Append")
+            text: i18n("Append All")
             onTriggered: appendAll()
         }
     }

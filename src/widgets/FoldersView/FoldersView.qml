@@ -49,27 +49,16 @@ StackView
         gridView.itemSize: 120
         gridView.itemHeight: gridView.itemSize * 1.2
 
-        listView.snapMode: ListView.SnapOneItem
+        listView.snapMode: ListView.SnapOneItem       
 
-        headBar.leftContent: Maui.ToolActions
+        headBar.leftContent: ToolButton
         {
-            autoExclusive: true
-            expanded: isWide
-            currentIndex : browser.viewType === Maui.AltBrowser.ViewType.List ? 0 : 1
-            display: ToolButton.TextBesideIcon
+//           enabled: _foldersList.count > 0
+           icon.name: browser.viewType === Maui.AltBrowser.ViewType.List ? "view-list-icons" : "view-list-details"
 
-            Action
+            onClicked:
             {
-                text: i18n("List")
-                icon.name: "view-list-details"
-                onTriggered: browser.viewType = Maui.AltBrowser.ViewType.List
-            }
-
-            Action
-            {
-                text: i18n("Grid")
-                icon.name: "view-list-icons"
-                onTriggered: browser.viewType= Maui.AltBrowser.ViewType.Grid
+                browser.viewType =  browser.viewType === Maui.AltBrowser.ViewType.List ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
             }
         }
 
