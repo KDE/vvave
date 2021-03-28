@@ -113,7 +113,7 @@ Maui.Page
             width: ListView.view.width
             number : false
             coverArt : true
-
+            draggable: false
             checkable: false
             checked: false
 

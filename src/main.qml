@@ -267,6 +267,7 @@ Maui.ApplicationWindow
             {
                 id: swipeView
                 anchors.fill: parent
+                maxViews: 3
 
                 TracksView
                 {
