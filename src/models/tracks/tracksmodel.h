@@ -17,7 +17,6 @@ public:
     explicit TracksModel(QObject *parent = nullptr);
 
     void componentComplete() override final;
-
     const FMH::MODEL_LIST &items() const override final;
 
     void setQuery(const QString &query);
@@ -28,12 +27,12 @@ public:
 
 private:
     CollectionDB *db;
+
     FMH::MODEL_LIST list;
-    void setList();
-
     QString query;
-
     int m_limit = 99999;
+
+    void setList();
 
 signals:
     void queryChanged();
@@ -51,6 +50,8 @@ public slots:
     bool remove(const int &index);
     void refresh();
     bool update(const QVariantMap &data, const int &index);
+    
+    void updateMetadata(const QVariantMap &data, const int &index);
 };
 
 #endif // TRACKSMODEL_H

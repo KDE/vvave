@@ -233,6 +233,7 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
     const auto sourceUrl = track[FMH::MODEL_KEY::SOURCE];
     const auto duration = track[FMH::MODEL_KEY::DURATION];
     const auto trackNumber = track[FMH::MODEL_KEY::TRACK];
+    const auto comment = track[FMH::MODEL_KEY::COMMENT];
 
     /* first needs to insert the source, album and artist*/
     const QVariantMap sourceMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], sourceUrl}, {FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCETYPE], sourceType(url)}};
@@ -264,7 +265,7 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
                                {FMH::MODEL_NAME[FMH::MODEL_KEY::LYRICS], ""},
                                {FMH::MODEL_NAME[FMH::MODEL_KEY::GENRE], genre},
                                {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""},
-                               {FMH::MODEL_NAME[FMH::MODEL_KEY::COMMENT], ""}};
+                               {FMH::MODEL_NAME[FMH::MODEL_KEY::COMMENT], comment}};
 
     if (this->insert(BAE::TABLEMAP[BAE::TABLE::TRACKS], trackMap)) {
         qDebug() << "TrackInserted!!!!!!" << trackMap;
@@ -278,18 +279,23 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 bool CollectionDB::updateTrack(const FMH::MODEL &track)
 {
     if (this->check_existance(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], track[FMH::MODEL_KEY::URL])) {
-        QVariantMap artistMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], track[FMH::MODEL_KEY::ARTIST]}, {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""}};
+        QVariantMap artistMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], track[FMH::MODEL_KEY::ARTIST]}};
 
         insert(TABLEMAP[TABLE::ARTISTS], artistMap);
 
-        QVariantMap albumMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], track[FMH::MODEL_KEY::ALBUM]}, {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], track[FMH::MODEL_KEY::ARTIST]}, {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""}};
+        QVariantMap albumMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], track[FMH::MODEL_KEY::ALBUM]}, {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], track[FMH::MODEL_KEY::ARTIST]}};
+
         insert(TABLEMAP[TABLE::ALBUMS], albumMap);
 
         QVariantMap condition{{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], track[FMH::MODEL_KEY::URL]}};
 
         if (this->update(TABLEMAP[TABLE::TRACKS], track, condition))
+        {
             if (cleanAlbums())
+            {
                 cleanArtists();
+            }
+        }
 
         return true;
     }

@@ -2,6 +2,7 @@
 #include "db/collectionDB.h"
 
 #include "vvave.h"
+#include "services/local/metadataeditor.h"
 
 #include <MauiKit/FileBrowsing/fmstatic.h>
 #include <MauiKit/FileBrowsing/tagging.h>
@@ -209,6 +210,30 @@ bool TracksModel::update(const QVariantMap &data, const int &index)
     this->list[index_] = newData;
     emit this->updateModel(index_, roles);
     return true;
+}
+
+void TracksModel::updateMetadata(const QVariantMap &data, const int &index)
+{
+    this->update(data, index);
+    auto model = FMH::toModel(data);
+
+    MetadataEditor editor;
+    editor.setUrl(model[FMH::MODEL_KEY::URL]);
+
+    editor.setTitle(model[FMH::MODEL_KEY::TITLE]);
+    editor.setArtist(model[FMH::MODEL_KEY::ARTIST]);
+    editor.setAlbum(model[FMH::MODEL_KEY::ALBUM]);
+    editor.setYear(model[FMH::MODEL_KEY::RELEASEDATE].toInt());
+    editor.setGenre(model[FMH::MODEL_KEY::GENRE]);
+    editor.setComment(model[FMH::MODEL_KEY::COMMENT]);
+    editor.setTrack(model[FMH::MODEL_KEY::TRACK].toInt());
+
+    auto n_model = FMH::filterModel(model, {FMH::MODEL_KEY::URL, FMH::MODEL_KEY::TITLE,FMH::MODEL_KEY::ARTIST,FMH::MODEL_KEY::ALBUM,FMH::MODEL_KEY::RELEASEDATE,FMH::MODEL_KEY::GENRE, FMH::MODEL_KEY::TRACK, FMH::MODEL_KEY::COMMENT});
+
+    if(this->db->updateTrack(n_model))
+    {
+        qDebug() << "Track data was updated correctly";
+    }
 }
 
 void TracksModel::setLimit(int limit)

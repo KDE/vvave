@@ -11,28 +11,33 @@ Maui.Dialog
 {
     id: control
 
+    property var data : control.model.get(control.index)
+    property int index : -1 //index of the item in the model TracksModel
+
+    property Maui.BaseModel model
+
     title: i18n("Edit")
     closeButton.visible: false
-    property alias url  : _editor.url
-
     page.margins: Maui.Style.space.big
     spacing: Maui.Style.space.big
 
+    signal edited(var data, int index)
+
     onAccepted:
     {
-        _editor.title = _titleField.text;
-        _editor.artist = _artistField.text;
-        _editor.album = _albumField.text;
-        _editor.track = _trackField.text;
-        _editor.genre = _genreField.text;
+        control.data.title = _titleField.text;
+        control.data.artist = _artistField.text;
+        control.data.album = _albumField.text;
+        control.data.track = _trackField.text;
+        control.data.genre = _genreField.text;
+        control.data.releasedate = _yearField.text;
+        control.data.comment = _commentField.text;
+
+        control.edited(control.data, control.index)
+        control.close()
     }
 
     onRejected: close()
-
-    Vvave.MetadataEditor
-    {
-        id: _editor
-    }
 
     ColumnLayout
     {
@@ -47,7 +52,7 @@ Maui.Dialog
         Maui.TextField
         {
             id: _titleField
-            text: _editor.title
+            text: control.data.title
             Layout.fillWidth: true
         }
     }
@@ -65,7 +70,7 @@ Maui.Dialog
         Maui.TextField
         {
             id: _artistField
-            text: _editor.artist
+            text: control.data.artist
              Layout.fillWidth: true
         }
     }
@@ -83,7 +88,7 @@ Maui.Dialog
         Maui.TextField
         {
             id: _albumField
-            text: _editor.album
+            text: control.data.album
              Layout.fillWidth: true
         }
     }
@@ -101,7 +106,7 @@ Maui.Dialog
         Maui.TextField
         {
             id: _trackField
-            text: _editor.track
+            text: control.data.track
              Layout.fillWidth: true
         }
     }
@@ -119,7 +124,7 @@ Maui.Dialog
         Maui.TextField
         {
             id: _genreField
-            text: _editor.genre
+            text: control.data.genre
              Layout.fillWidth: true
         }
     }
@@ -137,7 +142,7 @@ Maui.Dialog
         Maui.TextField
         {
             id: _yearField
-            text: _editor.year
+            text: control.data.releasedate
              Layout.fillWidth: true
         }
     }
@@ -155,7 +160,7 @@ Maui.Dialog
         Maui.TextField
         {
             id: _commentField
-            text: _editor.comment
+            text: control.data.comment
              Layout.fillWidth: true
         }
     }

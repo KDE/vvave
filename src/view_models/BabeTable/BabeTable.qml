@@ -92,9 +92,20 @@ Maui.Page
         onCleared: listModel.filter = ""
     }
 
-    MetadataDialog
+    Component
     {
-        id: _metadataDialog
+        id: _metadataDialogComponent
+
+        MetadataDialog
+        {
+            model: listModel
+            index: control.currentIndex
+
+            onEdited:
+            {
+                control.list.updateMetadata(data, index)
+            }
+        }
     }
 
     Maui.FileListingDialog
@@ -168,9 +179,9 @@ Maui.Page
         }
 
         onEditClicked:
-        {
-            _metadataDialog.url = listModel.get(control.currentIndex).url
-            _metadataDialog.open()
+        {          
+            _dialogLoader.sourceComponent = _metadataDialogComponent
+            dialog.open()
         }
 
         onCopyToClicked:

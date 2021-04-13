@@ -23,16 +23,17 @@ static FMH::MODEL trackInfo(const QUrl &url)
     const auto sourceUrl = FMStatic::parentDir(url).toString();
     const auto duration = info.getDuration();
     const auto year = info.getYear();
+    const auto comment = info.getComment();
 
     FMH::MODEL map = {{FMH::MODEL_KEY::URL, url.toString()},
                       {FMH::MODEL_KEY::TRACK, QString::number(track)},
                       {FMH::MODEL_KEY::TITLE, title},
                       {FMH::MODEL_KEY::ARTIST, artist},
                       {FMH::MODEL_KEY::ALBUM, album},
+                      {FMH::MODEL_KEY::COMMENT, comment},
                       {FMH::MODEL_KEY::DURATION, QString::number(duration)},
                       {FMH::MODEL_KEY::GENRE, genre},
                       {FMH::MODEL_KEY::SOURCE, sourceUrl},
-                      {FMH::MODEL_KEY::FAV, "0"},
                       {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}};
 
     BAE::artworkCache(map, FMH::MODEL_KEY::ALBUM);
