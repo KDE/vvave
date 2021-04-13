@@ -7,8 +7,8 @@
 #include <QUrl>
 #include <QVariantMap>
 
-#include <MauiKit/downloader.h>
-#include <MauiKit/fm.h>
+#include <MauiKit/FileBrowsing/downloader.h>
+#include <MauiKit/FileBrowsing/fm.h>
 
 static const inline QNetworkRequest formRequest(const QUrl &url, const QString &user, const QString &password)
 {

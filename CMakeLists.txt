@@ -18,17 +18,18 @@ set(CMAKE_AUTORCC ON)
 
 project(vvave VERSION ${VVAVE_VERSION})
 
-set(REQUIRED_QT_VERSION 5.10.0)
+set(REQUIRED_QT_VERSION 5.14.0)
 set(REQUIRED_KF5_VERSION 5.60)
 
 find_package(ECM ${REQUIRED_KF5_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-find_package(MauiKit REQUIRED)
-
 find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Qml Quick Network Sql QuickControls2 Xml Multimedia Svg Concurrent)
 
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
+
+find_package(MauiKit REQUIRED COMPONENTS FileBrowsing)
+find_package(MauiKit REQUIRED)
 
 if(ANDROID)
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS AndroidExtras)

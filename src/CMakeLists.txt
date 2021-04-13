@@ -76,7 +76,7 @@ else()
         kde/mpris2/mediaplayer2player.cpp
         )
 
-    target_link_libraries(vvave KF5::ConfigCore KF5::KIOCore Qt5::DBus)
+    target_link_libraries(vvave KF5::ConfigCore KF5::KIOCore KF5::KIOFileWidgets Qt5::DBus)
 endif()
 
 target_compile_definitions(vvave
@@ -84,7 +84,7 @@ target_compile_definitions(vvave
 
 target_include_directories(vvave PRIVATE ${Taglib_INCLUDE_DIRS})
 
-target_link_libraries(vvave MauiKit Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${Taglib_LIBRARIES})
+target_link_libraries(vvave MauiKit MauiKit::FileBrowsing Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${Taglib_LIBRARIES})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS vvave ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include <MauiKit/fmh.h>
+#include <MauiKit/Core/fmh.h>
 
 /**
  * @brief The AbstractMusicSyncer class

@@ -4,7 +4,7 @@
 #include <QRandomGenerator>
 #include <QUrl>
 
-#include <MauiKit/utils.h>
+#include <MauiKit/Core/utils.h>
 
 Playlist::Playlist(QObject *parent)
     : QObject(parent)
@@ -141,7 +141,7 @@ void Playlist::save()
 void Playlist::append(const QUrl &url) // TODO
 {
     Q_UNUSED(url)
-    
+
     if (!m_model) {
         return;
     }

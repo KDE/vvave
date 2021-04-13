@@ -30,8 +30,8 @@
 #include "mauimacos.h"
 #endif
 
-#include <MauiKit/fmstatic.h>
-#include <MauiKit/mauiapp.h>
+#include <MauiKit/FileBrowsing/fmstatic.h>
+#include <MauiKit/Core/mauiapp.h>
 
 #include "../vvave_version.h"
 

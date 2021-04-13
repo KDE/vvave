@@ -4,7 +4,8 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.14 as Kirigami
-import org.kde.mauikit 1.3 as Maui
+import org.mauikit.controls 1.3 as Maui
+import org.mauikit.filebrowsing 1.3 as FB
 
 import org.maui.vvave 1.0 as Vvave
 
@@ -399,12 +400,12 @@ Maui.Page
                         icon.height: Maui.Style.iconSizes.big
                         icon.name: "love"
                         enabled: root.currentTrack
-                        checked: root.currentTrack.url ? Maui.FM.isFav(root.currentTrack.url) : false
+                        checked: root.currentTrack.url ? FB.Tagging.isFav(root.currentTrack.url) : false
                         icon.color: checked ? babeColor :  Kirigami.Theme.textColor
 
                         onClicked:
                         {
-                            mainPlaylist.listModel.list.fav(root.currentTrackIndex, !Maui.FM.isFav(root.currentTrack.url))
+                            mainPlaylist.listModel.list.fav(root.currentTrackIndex, !FB.Tagging.isFav(root.currentTrack.url))
                             root.currentTrackChanged()
                         }
                     },

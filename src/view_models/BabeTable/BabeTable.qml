@@ -3,7 +3,8 @@ import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.9 as Kirigami
-import org.kde.mauikit 1.3 as Maui
+import org.mauikit.controls 1.3 as Maui
+import org.mauikit.filebrowsing 1.3 as FB
 
 import org.maui.vvave 1.0
 
@@ -107,7 +108,7 @@ Maui.Page
 
         onAccepted:
         {
-            if(Maui.FM.removeFiles(_removeDialog.urls))
+            if(FB.FM.removeFiles(_removeDialog.urls))
             {
                  listModel.list.remove(control.currentIndex)
             }
@@ -142,7 +143,7 @@ Maui.Page
 
         onFavClicked:
         {
-            listModel.list.fav(control.currentIndex, !Maui.FM.isFav(listModel.get(control.currentIndex).url))
+            listModel.list.fav(control.currentIndex, !FB.Tagging.isFav(listModel.get(control.currentIndex).url))
         }
 
         onQueueClicked: Player.queueTracks([listModel.get(control.currentIndex)])
@@ -153,7 +154,7 @@ Maui.Page
             playlistDialog.open()
         }
 
-        onOpenWithClicked: Maui.FM.openLocation(filterSelection(listModel.get(control.currentIndex).url))
+        onOpenWithClicked: FB.FM.openLocation(filterSelection(listModel.get(control.currentIndex).url))
 
         onDeleteClicked:
         {
@@ -222,7 +223,7 @@ Maui.Page
                 {
                     anchors.centerIn:  parent
 
-                    label1.text: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.FM.formatDate(Date(section), "MM/dd/yyyy") : String(section)
+                    label1.text: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.Handy.formatDate(Date(section), "MM/dd/yyyy") : String(section)
 
                     label1.font.pointSize: Maui.Style.fontSizes.big
                     label1.font.bold: true
@@ -351,7 +352,7 @@ Maui.Page
 function openItemMenu(index)
 {
     currentIndex = index
-    contextMenu.fav = Maui.FM.isFav(listModel.get(currentIndex).url)
+    contextMenu.fav = FB.Tagging.isFav(listModel.get(currentIndex).url)
     contextMenu.open()
 
     rowPressed(index)

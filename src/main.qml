@@ -6,7 +6,9 @@ import QtQml 2.14
 import Qt.labs.settings 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.3 as Maui
+import org.mauikit.controls 1.3 as Maui
+import org.mauikit.filebrowsing 1.3 as FB
+
 import org.maui.vvave 1.0
 
 import "utils"
@@ -140,7 +142,7 @@ Maui.ApplicationWindow
     Component
     {
         id: _fileDialogComponent
-        Maui.FileDialog {}
+        FB.FileDialog {}
     }
 
     Component
@@ -169,7 +171,7 @@ Maui.ApplicationWindow
 
             onRejected:
             {
-                Maui.FM.removeFiles(_removeDialog.urls)
+                FB.FM.removeFiles(_removeDialog.urls)
                 close()
             }
         }
@@ -191,7 +193,7 @@ Maui.ApplicationWindow
         id: playlistsList
     }
 
-    Maui.TagsDialog
+    FB.TagsDialog
     {
         id: playlistDialog
         onTagsReady: composerList.updateToUrls(tags)

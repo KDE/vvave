@@ -4,7 +4,10 @@ import QtQuick.Controls 2.14
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.3 as Maui
+
+import org.mauikit.controls 1.3 as Maui
+import org.mauikit.filebrowsing 1.3 as FB
+
 import org.maui.vvave 1.0
 
 import "../../view_models/BabeTable"
@@ -23,9 +26,9 @@ StackView
 
     property Flickable flickable : currentItem.flickable
 
-    Maui.NewTagDialog
+    FB.NewTagDialog
     {
-        id: newPlaylistDialog       
+        id: newPlaylistDialog
     }
 
     initialItem: PlaylistsViewModel

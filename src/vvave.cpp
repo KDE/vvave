@@ -3,8 +3,9 @@
 #include "db/collectionDB.h"
 #include "services/local/taginfo.h"
 
-#include <MauiKit/fileloader.h>
-#include <MauiKit/fm.h>
+#include <MauiKit/FileBrowsing/fileloader.h>
+#include <MauiKit/FileBrowsing/fm.h>
+#include <MauiKit/Core/utils.h>
 
 #include <QTimer>
 
@@ -19,7 +20,7 @@ static FMH::MODEL trackInfo(const QUrl &url)
     const auto album = BAE::fixString(info.getAlbum());
     const auto title = BAE::fixString(info.getTitle()); /* to fix*/
     const auto artist = BAE::fixString(info.getArtist());
-    const auto sourceUrl = FMH::parentDir(url).toString();
+    const auto sourceUrl = FMStatic::parentDir(url).toString();
     const auto duration = info.getDuration();
     const auto year = info.getYear();
 
@@ -145,7 +146,7 @@ void vvave::addSources(const QList<QUrl> &paths)
         return;
 
     urls << newUrls;
-    FMStatic::saveSettings("SETTINGS", QVariant::fromValue(QUrl::toStringList(urls)), "SOURCES");
+    UTIL::saveSettings("SETTINGS", QVariant::fromValue(QUrl::toStringList(urls)), "SOURCES");
 
     scanDir(urls);
     emit sourcesChanged();
@@ -158,7 +159,7 @@ bool vvave::removeSource(const QString &source)
         return false;
 
     urls.removeOne(source);
-    FMStatic::saveSettings("SETTINGS", QVariant::fromValue(urls), "SOURCES");
+    UTIL::saveSettings("SETTINGS", QVariant::fromValue(urls), "SOURCES");
     emit sourcesChanged();
 
     if (this->db->removeSource(source)) {
@@ -184,7 +185,7 @@ void vvave::scanDir(const QList<QUrl> &paths)
         fileLoader->deleteLater();
     });
 
-    fileLoader->requestPath(paths, true, QStringList() << FMH::FILTER_LIST[FMH::FILTER_TYPE::AUDIO] << "*.m4a");
+    fileLoader->requestPath(paths, true, QStringList() << FMStatic::FILTER_LIST[FMStatic::FILTER_TYPE::AUDIO] << "*.m4a");
 
     m_scanning = true;
     emit scanningChanged(m_scanning);
@@ -192,14 +193,14 @@ void vvave::scanDir(const QList<QUrl> &paths)
 
 QStringList vvave::sources()
 {
-    return FMStatic::loadSettings("SETTINGS", "SOURCES", QVariant::fromValue(BAE::defaultSources)).toStringList();
+    return UTIL::loadSettings("SETTINGS", "SOURCES", QVariant::fromValue(BAE::defaultSources)).toStringList();
 }
 
 QVariantList vvave::sourcesModel()
 {
     QVariantList res;
     for (const auto &url : sources())
-        res << FMH::getDirInfo(url);
+        res << FMStatic::getDirInfo(url);
 
     return res;
 }

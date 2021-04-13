@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.12
 import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.8 as Kirigami
-import org.kde.mauikit 1.3 as Maui
+import org.mauikit.controls 1.3 as Maui
 
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
@@ -161,7 +161,7 @@ Maui.Page
 
         Component.onCompleted:
         {
-            var lastplaylist = Maui.FM.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
+            var lastplaylist = Maui.Handy.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
             var n = lastplaylist.length
 
             if(n>0)

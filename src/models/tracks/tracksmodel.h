@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include <MauiKit/fmh.h>
-#include <MauiKit/mauilist.h>
+#include <MauiKit/Core/fmh.h>
+#include <MauiKit/Core/mauilist.h>
 
 class CollectionDB;
 class TracksModel : public MauiList

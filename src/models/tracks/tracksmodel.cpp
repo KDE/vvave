@@ -3,7 +3,8 @@
 
 #include "vvave.h"
 
-#include <MauiKit/fmstatic.h>
+#include <MauiKit/FileBrowsing/fmstatic.h>
+#include <MauiKit/FileBrowsing/tagging.h>
 
 TracksModel::TracksModel(QObject *parent)
     : MauiList(parent)
@@ -56,7 +57,7 @@ void TracksModel::setList()
 
     if (this->query.startsWith("#")) {
         auto m_query = query;
-        const auto urls = FMStatic::getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
+        const auto urls = Tagging::getInstance()->getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
         for (const auto &url : urls) {
             this->list << this->db->getDBData(QString("select t.* from tracks t inner join albums al on al.album = t.album "
                                                       "and al.artist = t.artist where t.url = %1")
@@ -142,9 +143,9 @@ bool TracksModel::fav(const int &index, const bool &value)
     auto item = this->list[index_];
 
     if (value)
-        FMStatic::fav(item[FMH::MODEL_KEY::URL]);
+        Tagging::getInstance()->fav(item[FMH::MODEL_KEY::URL]);
     else
-        FMStatic::unFav(item[FMH::MODEL_KEY::URL]);
+        Tagging::getInstance()->unFav(item[FMH::MODEL_KEY::URL]);
 
     this->list[index_][FMH::MODEL_KEY::FAV] = value ? "1" : "0";
     emit this->updateModel(index_, {FMH::MODEL_KEY::FAV});

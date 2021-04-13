@@ -2,7 +2,7 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
-import org.kde.mauikit 1.3 as Maui
+import org.mauikit.controls 1.3 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
 import "../../view_models/BabeTable"

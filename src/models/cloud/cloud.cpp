@@ -1,8 +1,11 @@
 #include "cloud.h"
+
+#include <QDateTime>
+
 #include "NextCloud/nextmusic.h"
 #include "abstractmusicprovider.h"
 
-#include <MauiKit/mauiaccounts.h>
+#include <MauiKit/Core/mauiaccounts.h>
 
 Cloud::Cloud(QObject *parent)
     : MauiList(parent)

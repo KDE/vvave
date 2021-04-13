@@ -1,7 +1,7 @@
 #include "player.h"
 #include "../../utils/bae.h"
 
-#include <MauiKit/mauiaccounts.h>
+#include <MauiKit/Core/mauiaccounts.h>
 
 Player::Player(QObject *parent)
     : QObject(parent)

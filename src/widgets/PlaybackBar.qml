@@ -5,7 +5,9 @@ import QtGraphicalEffects 1.0
 import QtMultimedia 5.0
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.2 as Maui
+
+import org.mauikit.controls 1.2 as Maui
+import org.mauikit.filebrowsing 1.3 as FB
 
 import org.maui.vvave 1.0 as Vvave
 
@@ -164,7 +166,7 @@ Control
 
             farLeftContent: ToolButton
             {
-                checked: _drawer.visible
+                visible: !_drawer.visible
                 icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
                 onClicked: _drawer.toggle()
 
@@ -221,11 +223,11 @@ Control
                     id: babeBtnIcon
                     icon.name: "love"
                     enabled: currentTrack
-                    checked:currentTrack.url ? Maui.FM.isFav(currentTrack.url) : false
+                    checked:currentTrack.url ? FB.Tagging.isFav(currentTrack.url) : false
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                     onClicked:
                     {
-                        mainPlaylist.listModel.list.fav(currentTrackIndex, !Maui.FM.isFav(currentTrack.url))
+                        mainPlaylist.listModel.list.fav(currentTrackIndex, !FB.Tagging.isFav(currentTrack.url))
                         root.currentTrackChanged()
                     }
                 },

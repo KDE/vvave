@@ -8,7 +8,8 @@
 #include <QString>
 #include <QTime>
 
-#include <MauiKit/fmh.h>
+#include <MauiKit/Core/fmh.h>
+#include <MauiKit/FileBrowsing/fmstatic.h>
 
 namespace BAE
 {
@@ -90,7 +91,7 @@ const static QUrl CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocati
 #endif
 
 const static QString DBName = QStringLiteral("collection.db");
-const static QStringList defaultSources = QStringList() << FMH::MusicPath << FMH::DownloadsPath;
+const static QStringList defaultSources = QStringList() << FMStatic::MusicPath << FMStatic::DownloadsPath;
 
 const static inline QString fixTitle(const QString &title, const QString &s, const QString &e)
 {

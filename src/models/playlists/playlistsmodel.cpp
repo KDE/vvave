@@ -1,8 +1,8 @@
 #include "playlistsmodel.h"
 #include "db/collectionDB.h"
 
-#include <MauiKit/fmstatic.h>
-#include <MauiKit/tagging.h>
+#include <MauiKit/FileBrowsing/fmstatic.h>
+#include <MauiKit/FileBrowsing/tagging.h>
 
 PlaylistsModel::PlaylistsModel(QObject *parent)
     : MauiList(parent)
@@ -18,7 +18,7 @@ PlaylistsModel::PlaylistsModel(QObject *parent)
         auto item = this->list[index];
         item[FMH::MODEL_KEY::PREVIEW] = playlistArtworkPreviews(tag);
         this->list[index] = item;
-        this->updateModel(index, {});
+       emit this->updateModel(index, {});
     });
 }
 
@@ -62,7 +62,7 @@ QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
         return res.join(",");
     }
 
-    const auto urls = FMStatic::getTagUrls(playlist, {}, true, 4, "audio");
+    const auto urls = Tagging::getInstance()->getTagUrls(playlist, {}, true, 4, "audio");
     for (const auto &url : urls) {
         const auto data = CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on al.album = t.album and al.artist = t.artist where t.url = %1").arg("\"" + url.toString() + "\""));
 

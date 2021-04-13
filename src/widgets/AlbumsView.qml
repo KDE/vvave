@@ -10,7 +10,7 @@ import "../utils/Help.js" as H
 import "../utils/Player.js" as Player
 
 import org.kde.kirigami 2.7 as Kirigami
-import org.kde.mauikit 1.0 as Maui
+import org.mauikit.controls 1.0 as Maui
 import org.maui.vvave 1.0
 
 StackView

@@ -21,7 +21,8 @@
 #include <QStringList>
 #include <QUuid>
 
-#include <MauiKit/fmh.h>
+#include <MauiKit/Core/fmh.h>
+#include <MauiKit/FileBrowsing/fmstatic.h>
 
 using namespace BAE;
 
@@ -178,7 +179,7 @@ bool CollectionDB::remove(const QString &table, const QString &column, const QVa
     Q_UNUSED(table)
     Q_UNUSED(column)
     Q_UNUSED(where)
-    
+
     return false;
 }
 
