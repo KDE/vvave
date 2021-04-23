@@ -38,7 +38,7 @@ Maui.AltBrowser
         onCleared: _albumsModel.filter = ""
     }
 
-    viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+    viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
     gridView.itemSize: albumCoverSize
     holder.visible: count === 0

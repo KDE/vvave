@@ -49,33 +49,10 @@ endif()
 
 if (ANDROID)
     find_package(OpenSSL REQUIRED)
-#    include(ExternalProject)
-#    externalproject_add(taglib
-#        URL http://taglib.org/releases/taglib-1.11.1.tar.gz
-#        CMAKE_ARGS -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-#        )
-
-    set(LOCAL_TAGLIB_DIR "/home/camilo/Qt5152/5.15.2/android")
-    set(TAGLIB_INCLUDE_DIRS ${LOCAL_TAGLIB_DIR}/include ${LOCAL_TAGLIB_DIR}/include/taglib)
-    set(TAGLIB_LIBRARIES ${LOCAL_TAGLIB_DIR}/lib/libtag.so ${LOCAL_TAGLIB_DIR}/lib/libtag_c.so)
 
     target_link_libraries(vvave Qt5::AndroidExtras OpenSSL::SSL)
-#    add_dependencies(vvave taglib)
     kde_source_files_enable_exceptions(vvave)
-else()
-
-    find_package(Taglib 1.4 REQUIRED)
-
-    if(Taglib_FOUND)
-        message(STATUS "FOUDN TAG LIB" ${Taglib_VERSION}  ${Taglib_INCLUDE_DIRS})
-        include_directories( ${Taglib_INCLUDE_DIRS} )
-    endif()
-
-    target_sources(vvave PRIVATE
-        kde/mpris2/mediaplayer2.cpp
-        kde/mpris2/mediaplayer2player.cpp
-        )
-
+else()  
     target_link_libraries(vvave KF5::ConfigCore KF5::KIOCore KF5::KIOFileWidgets Qt5::DBus)
 endif()
 

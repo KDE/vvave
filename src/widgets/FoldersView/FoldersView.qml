@@ -44,23 +44,12 @@ StackView
             }
         }
 
-        viewType: control.width > Kirigami.Units.gridUnit * 25 ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+        viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
         gridView.itemSize: 120
         gridView.itemHeight: gridView.itemSize * 1.2
 
         listView.snapMode: ListView.SnapOneItem       
-
-        headBar.leftContent: ToolButton
-        {
-//           enabled: _foldersList.count > 0
-           icon.name: browser.viewType === Maui.AltBrowser.ViewType.List ? "view-list-icons" : "view-list-details"
-
-            onClicked:
-            {
-                browser.viewType =  browser.viewType === Maui.AltBrowser.ViewType.List ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
-            }
-        }
 
         headBar.middleContent: Maui.TextField
         {
