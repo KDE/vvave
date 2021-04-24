@@ -23,7 +23,7 @@
 #endif
 
 #ifdef Q_OS_ANDROID
-#include "mauiandroid.h"
+#include <MauiKit/Core/mauiandroid.h>
 #endif
 
 #ifdef Q_OS_MACOS
