@@ -36,7 +36,6 @@
         <file>widgets/PlaybackBar.qml</file>
         <file>widgets/FoldersView/FoldersView.qml</file>
         <file>widgets/MetadataDialog.qml</file>
-        <file>qtquickcontrols2.conf</file>
     </qresource>
     <qresource prefix="/DB">
         <file>db/script.sql</file>

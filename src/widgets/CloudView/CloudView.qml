@@ -18,29 +18,29 @@ Maui.Page
 
     headBar.visible: !_listView.holder.visible
 
-    headBar.leftContent: Maui.ToolActions
-    {
-        expanded: isWide
-        enabled: listModel.list.count > 0
-        checkable: false
-        autoExclusive: false
-        display: ToolButton.TextBesideIcon
-        defaultIconName: "media-playback-start"
+//    headBar.leftContent: Maui.ToolActions
+//    {
+//        expanded: isWide
+//        enabled: listModel.list.count > 0
+//        checkable: false
+//        autoExclusive: false
+//        display: ToolButton.TextBesideIcon
+//        defaultIconName: "media-playback-start"
 
-        Action
-        {
-            icon.name : "media-playlist-play"
-            text: i18n("Play")
-//            onTriggered: playAll()
-        }
+//        Action
+//        {
+//            icon.name : "media-playlist-play"
+//            text: i18n("Play")
+////            onTriggered: playAll()
+//        }
 
-        Action
-        {
-            icon.name : "media-playlist-append"
-            text: i18n("Append")
-//            onTriggered: appendAll()
-        }
-    }
+//        Action
+//        {
+//            icon.name : "media-playlist-append"
+//            text: i18n("Append")
+////            onTriggered: appendAll()
+//        }
+//    }
 
     headBar.middleContent: Maui.TextField
     {
@@ -114,51 +114,51 @@ Maui.Page
             }
         }
 
-        flickable.header: Rectangle
-        {
-            width: parent.width
-            height: 150
-            color: Kirigami.Theme.backgroundColor
-            visible: _headList.count > 0
+//        flickable.header: Rectangle
+//        {
+//            width: parent.width
+//            height: 150
+//            color: Kirigami.Theme.backgroundColor
+//            visible: _headList.count > 0
 
-            ListView
-            {
-                id: _headList
-                anchors.fill: parent
-                anchors.margins: Maui.Style.space.medium
-                spacing: Maui.Style.space.medium
-                orientation: ListView.Horizontal
+//            ListView
+//            {
+//                id: _headList
+//                anchors.fill: parent
+//                anchors.margins: Maui.Style.space.medium
+//                spacing: Maui.Style.space.medium
+//                orientation: ListView.Horizontal
 
-                model: list.artists
+//                model: list.artists
 
-                delegate: BabeAlbum
-                {
-                    height: 120
-                    width: height
-                    albumRadius: Maui.Style.radiusV
-                    isCurrentItem: ListView.isCurrentItem
-                    anchors.verticalCenter: parent.verticalCenter
-                    showLabels: true
-                    label1.text: modelData.artist
-                    image.source: "image://artwork/artist:"+ modelData.artist
-                }
-            }
-        }
+//                delegate: BabeAlbum
+//                {
+//                    height: 120
+//                    width: height
+//                    albumRadius: Maui.Style.radiusV
+//                    isCurrentItem: ListView.isCurrentItem
+//                    anchors.verticalCenter: parent.verticalCenter
+//                    showLabels: true
+//                    label1.text: modelData.artist
+//                    image.source: "image://artwork/artist:"+ modelData.artist
+//                }
+//            }
+//        }
 
         flickable.headerPositioning: ListView.PullBackHeader
 
         delegate: TableDelegate
         {
             id: delegate
-            width: parent.width
+            width: ListView.view.width
             number :  false
             coverArt : false
 
-            ToolButton
-            {
-                icon.name: "document-download"
-                Layout.fillHeight: true
-            }
+//            ToolButton
+//            {
+//                icon.name: "document-download"
+//                Layout.fillHeight: true
+//            }
 
             onClicked:
             {
