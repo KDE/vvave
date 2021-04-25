@@ -74,7 +74,7 @@ add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
 add_definitions(-DGIT_BRANCH="${GIT_BRANCH}")
 
 else()
-    add_definitions(-DGIT_COMMIT_HASH="${INDEX_VERSION}")
+    add_definitions(-DGIT_COMMIT_HASH="${VVAVE_VERSION}")
     add_definitions(-DGIT_BRANCH="Stable")
 endif()
 
