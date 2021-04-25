@@ -16,16 +16,28 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-project(vvave VERSION ${VVAVE_VERSION})
+project(vvave VERSION ${VVAVE_VERSION} LANGUAGES CXX)
 
 set(REQUIRED_QT_VERSION 5.14.0)
-set(REQUIRED_KF5_VERSION 5.60)
+set(REQUIRED_KF5_VERSION 5.40.0)
 
 find_package(ECM ${REQUIRED_KF5_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Qml Quick Network Sql QuickControls2 Xml Multimedia Svg Concurrent)
+if(UNIX AND NOT APPLE AND NOT ANDROID)
+    include(KDEInstallDirs)
+    include(KDECMakeSettings)
+    include(ECMInstallIcons)
+    include(ECMAddAppIcon)
+endif()
 
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDEClangFormat)
+include(ECMSetupVersion)
+include(ECMSourceVersionControl)
+include(FeatureSummary)
+
+find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Network Sql QuickControls2 Xml Multimedia Svg Concurrent)
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
 
 find_package(MauiKit REQUIRED COMPONENTS FileBrowsing)
@@ -41,19 +53,6 @@ elseif(UNIX)
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS DBus)
     find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS Config KIO)
 endif()
-
-if(UNIX AND NOT APPLE AND NOT ANDROID)
-    include(KDEInstallDirs)
-    include(KDECMakeSettings)
-    include(ECMInstallIcons)
-    include(ECMAddAppIcon)
-endif()
-
-include(KDECompilerSettings NO_POLICY_SCOPE)
-include(KDEClangFormat)
-include(ECMSetupVersion)
-include(ECMSourceVersionControl)
-include(FeatureSummary)
 
 if(${ECM_SOURCE_UNDER_VERSION_CONTROL})
 execute_process(
