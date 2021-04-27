@@ -17,7 +17,9 @@ Maui.Dialog
     property Maui.BaseModel model
 
     title: i18n("Edit")
-    closeButton.visible: false
+
+    hint: 1
+    closeButtonVisible: false
     page.margins: Maui.Style.space.big
     spacing: Maui.Style.space.big
 
