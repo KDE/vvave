@@ -274,9 +274,9 @@ Maui.Page
 
                 ToolButton
                 {
-                    icon.name: "view-list-details"
+                    icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
                     checked: _drawer.visible
-                    onClicked:  _drawer.visible = !_drawer.visible
+                    onClicked: _drawer.toggle()
                     Layout.alignment: Qt.AlignCenter
                 }
 
