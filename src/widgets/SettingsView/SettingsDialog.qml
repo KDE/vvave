@@ -85,25 +85,6 @@ Maui.SettingsDialog
 
     Maui.SettingsSection
     {
-        title: i18n("Interface")
-        description: i18n("Configure the app UI.")
-
-        Maui.SettingTemplate
-        {
-            id: _darkMode
-            enabled: false
-
-            label1.text: i18n("Dark Mode")
-
-            Switch
-            {
-                checkable: true
-            }
-        }
-    }
-
-    Maui.SettingsSection
-    {
         title: i18n("Sources")
         description: i18n("Add new sources to manage and browse your image collection")
         lastOne: true
