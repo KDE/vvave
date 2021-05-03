@@ -110,15 +110,18 @@ Maui.ApplicationWindow
         model: mainPlaylist.listModel.list
         onCurrentTrackChanged: Player.playTrack()
 
-        onMissingFile:
-        {
-            var message = i18n("Missing file")
-            var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
-            notify("dialog-question", message, messageBody, function ()
-            {
-                mainPlaylist.listModel.list.remove(mainPlaylist.table.currentIndex)
-            })
-        }
+//        onMissingFile:
+//        {
+//            var message = i18n("Missing file")
+//            var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
+//            notify("dialog-question", message, messageBody, function ()
+//            {
+//                console.log("REMOVE TIU MSISING")
+//                mainPlaylist.table.list.remove(mainPlaylist.table.currentIndex)
+//                console.log("REMOVE TIU MSISING 2")
+
+//            })
+//        }
     }
 
     Player

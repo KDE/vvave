@@ -54,6 +54,7 @@ void TracksModel::setList()
     emit this->preListChanged();
     this->list.clear();
 
+    QStringList missingFiles;
     qDebug() << "GETTIN TRACK LIST" << this->query;
 
     if (this->query.startsWith("#")) {
@@ -66,22 +67,30 @@ void TracksModel::setList()
         }
 
     } else {
-        //        const auto checker = [&](FMH::MODEL &item) {
-        //            const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
-        //            if(FMH::fileExists(url))
-        //            {
-        //                return true;
-        //            } else
-        //            {
-        //                this->db->removeTrack(url.toString());
-        //                return false;
-        //            }
-        //        };
-        this->list = this->db->getDBData(this->query /*, checker*/);
+                const auto checker = [&](FMH::MODEL &item) {
+                    const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
+                    if(FMH::fileExists(url))
+                    {
+                        return true;
+                    } else
+                    {
+                        missingFiles << url.toString();
+                        return false;
+                    }
+                };
+        this->list = this->db->getDBData(this->query ,checker);
     }
+
+    qDebug() << "missing files" << missingFiles;
 
     emit this->postListChanged();
     emit this->countChanged();
+
+    if(missingFiles.size() > 0)
+    {
+        this->removeMissingFiles(missingFiles);
+        emit this->missingFiles(missingFiles);
+    }
 }
 
 void TracksModel::copy(const TracksModel *model)
@@ -174,16 +183,29 @@ bool TracksModel::countUp(const int &index)
 
 bool TracksModel::remove(const int &index)
 {
+    qDebug() << "REMOVE AT" << index;
+
     if (index >= this->list.size() || index < 0)
         return false;
 
+
     const auto index_ = this->mappedIndex(index);
+
+    qDebug() << "REMOVE AT" << index << index_;
 
     emit this->preItemRemoved(index_);
     this->list.removeAt(index_);
     emit this->postItemRemoved();
 
     return true;
+}
+
+void TracksModel::removeMissingFiles(const QStringList &urls)
+{
+    for(const auto &url : urls)
+    {
+        this->db->removeTrack(url);
+    }
 }
 
 void TracksModel::refresh()

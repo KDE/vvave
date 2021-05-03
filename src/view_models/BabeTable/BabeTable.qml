@@ -248,13 +248,19 @@ Maui.Page
             }
         }
 
-
         model: Maui.BaseModel
         {
             id: _listModel
-            list: Tracks {id: _tracksList}
-//            sort: "title"
-//            sortOrder: Qt.AscendingOrder
+            list: Tracks
+            {
+                id: _tracksList
+                onMissingFiles:
+                {
+                    var message = i18n("%1 Missing files", urls.length)
+                    var messageBody = "Missing files have been removed from the collection."
+                    notify("dialog-question", message, messageBody)
+                }
+            }
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive
             filterCaseSensitivity: Qt.CaseInsensitive

@@ -37,6 +37,7 @@ private:
 signals:
     void queryChanged();
     void limitChanged(int limit);
+    void missingFiles(QStringList urls);
 
 public slots:
     void copy(const TracksModel *model);
@@ -48,6 +49,9 @@ public slots:
     bool fav(const int &index, const bool &value);
     bool countUp(const int &index);
     bool remove(const int &index);
+
+    void removeMissingFiles(const QStringList &urls);
+
     void refresh();
     bool update(const QVariantMap &data, const int &index);
     
