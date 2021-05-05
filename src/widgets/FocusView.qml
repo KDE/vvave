@@ -44,6 +44,11 @@ Maui.Page
         }
     }
 
+    headBar.farRightContent: Maui.WindowControls
+              {
+                  side: Qt.RightEdge
+              }
+
     Keys.onBackPressed:
     {
         toggleFocusView()
