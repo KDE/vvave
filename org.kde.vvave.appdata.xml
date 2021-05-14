@@ -152,6 +152,11 @@
     <binary>vvave</binary>
   </provides>
   <content_rating type="oars-1.0"/>
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
   <project_group>KDE</project_group>
   <releases>
     <release version="1.2.2" date="2021-05-11">
