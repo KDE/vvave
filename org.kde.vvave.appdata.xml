@@ -151,7 +151,7 @@
   <provides>
     <binary>vvave</binary>
   </provides>
-  <content_rating type="oars-1.0" />
+  <content_rating type="oars-1.0"/>
   <project_group>KDE</project_group>
   <releases>
     <release version="1.2.2" date="2021-05-11">
