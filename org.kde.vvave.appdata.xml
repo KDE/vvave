@@ -143,8 +143,8 @@
       <caption xml:lang="uk">Музичний програвач Vvave</caption>
       <caption xml:lang="x-test">xxThe Vvave music playerxx</caption>
       <caption xml:lang="zh-TW">Vvave 音樂播放器</caption>
-      <image type="source" width="1366" height="744">
-        https://github.com/KDE/vvave/blob/master/screenshots/exm.png
+      <image type="source" width="1903" height="1320">
+        https://cdn.kde.org/screenshots/vvave/vvave.png
       </image>
     </screenshot>
   </screenshots>
