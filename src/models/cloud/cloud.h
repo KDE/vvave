@@ -52,9 +52,6 @@ private:
     Cloud::SORTBY sort = Cloud::SORTBY::ARTIST;
 
 public slots:
-    QVariantMap get(const int &index) const;
-    QVariantList getAll();
-
     void upload(const QUrl &url);
 
     void getFileUrl(const QString &id);

@@ -80,10 +80,10 @@ void lastfm::parseArtist(const QByteArray &array)
         ERROR(this->request);
     }
 
-    QStringList artistTags;
-    QByteArray artistSimilarArt;
-    QStringList artistSimilar;
-    QStringList artistStats;
+//    QStringList artistTags;
+//    QByteArray artistSimilarArt;
+//    QStringList artistSimilar;
+//    QStringList artistStats;
 
     const QDomNodeList nodeList = doc.documentElement().namedItem("artist").childNodes();
 

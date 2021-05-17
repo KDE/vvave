@@ -62,7 +62,7 @@ public slots:
     void setModel(TracksModel *model);
     void setCurrentIndex(int index);
 
-    void setPlayMode(PlayMode playMode);
+    void setPlayMode(Playlist::PlayMode playMode);
 
 signals:
     void canPlayChanged();
@@ -70,7 +70,7 @@ signals:
     void currentTrackChanged(QVariantMap currentTrack);
     void currentIndexChanged(int currentIndex);
     void missingFile(QVariantMap track);
-    void playModeChanged(PlayMode playMode);
+    void playModeChanged(Playlist::PlayMode playMode);
 };
 
 #endif // PLAYLIST_H

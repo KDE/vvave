@@ -222,12 +222,14 @@ bool TracksModel::update(const QVariantMap &data, const int &index)
 
     auto newData = this->list[index_];
     QVector<int> roles;
-
-    for (auto key : data.keys())
+    const auto keys = data.keys();
+    for (const auto &key : keys)
+    {
         if (newData[FMH::MODEL_NAME_KEY[key]] != data[key].toString()) {
             newData.insert(FMH::MODEL_NAME_KEY[key], data[key].toString());
             roles << FMH::MODEL_NAME_KEY[key];
         }
+    }
 
     this->list[index_] = newData;
     emit this->updateModel(index_, roles);

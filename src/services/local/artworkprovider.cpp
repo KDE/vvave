@@ -91,7 +91,7 @@ void ArtworkFetcher::fetch(FMH::MODEL data, PULPO::ONTOLOGY ontology)
 
                 if (!imageUrl.isEmpty()) {
                     auto downloader = new FMH::Downloader;
-                    QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, request, downloader](QString path) mutable {
+                    QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, downloader](QString path) mutable {
                         downloader->deleteLater();
                         emit this->artworkReady(QUrl::fromLocalFile(path));
                     });

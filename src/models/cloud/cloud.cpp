@@ -133,25 +133,6 @@ void Cloud::sortList()
     });
 }
 
-QVariantMap Cloud::get(const int &index) const
-{
-    if (index >= this->list.size() || index < 0)
-        return QVariantMap();
-
-    QVariantMap res;
-    const auto item = this->list.at(this->mappedIndex(index));
-
-    for (auto key : item.keys())
-        res.insert(FMH::MODEL_NAME[key], item[key]);
-
-    return res;
-}
-
-QVariantList Cloud::getAll()
-{
-    return QVariantList();
-}
-
 void Cloud::upload(const QUrl &url)
 {
     Q_UNUSED(url)

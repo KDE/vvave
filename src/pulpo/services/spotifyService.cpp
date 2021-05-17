@@ -200,7 +200,7 @@ void spotify::parseTrack(const QByteArray &array)
     }
 
     // get album title
-    for (auto item : items) {
+    for (const auto &item : items) {
         auto album = item.toMap().value("album").toMap();
         auto trackArtist = album.value("artists").toList().first().toMap().value("name").toString();
 

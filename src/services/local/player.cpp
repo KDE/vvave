@@ -29,7 +29,9 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest &request)
 
     // Read raw headers out of the provided request
     QMap<QByteArray, QByteArray> rawHeaders;
-    for (const QByteArray &headerKey : request.rawHeaderList()) {
+    const auto headerList =request.rawHeaderList();
+
+    for (const QByteArray &headerKey : headerList) {
         rawHeaders.insert(headerKey, request.rawHeader(headerKey));
     }
 

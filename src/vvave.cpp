@@ -17,9 +17,9 @@ static FMH::MODEL trackInfo(const QUrl &url)
 
     const auto track = info.getTrack();
     const auto genre = info.getGenre();
-    const auto album = BAE::fixString(info.getAlbum());
-    const auto title = BAE::fixString(info.getTitle()); /* to fix*/
-    const auto artist = BAE::fixString(info.getArtist());
+    const auto album = info.getAlbum();
+    const auto title = info.getTitle(); /* to fix*/
+    const auto artist = info.getArtist();
     const auto sourceUrl = FMStatic::parentDir(url).toString();
     const auto duration = info.getDuration();
     const auto year = info.getYear();
@@ -200,8 +200,11 @@ QStringList vvave::sources()
 QVariantList vvave::sourcesModel()
 {
     QVariantList res;
-    for (const auto &url : sources())
+    const auto urls = sources();
+    for (const auto &url : urls)
+    {
         res << FMStatic::getDirInfo(url);
+    }
 
     return res;
 }
@@ -229,7 +232,8 @@ void vvave::openUrls(const QStringList &urls)
     for (const auto &url : urls) {
         auto _url = QUrl::fromUserInput(url);
         if (db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString())) {
-            data << FMH::toMap(this->db->getDBData(QStringList() << _url.toString()).first());
+            const auto item = this->db->getDBData(QStringList() << _url.toString());
+            data << FMH::toMap(item.first());
         } else {
             data << FMH::toMap(trackInfo(_url));
         }

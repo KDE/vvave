@@ -107,13 +107,6 @@ FMH::MODEL_LIST PlaylistsModel::tags()
     });
 }
 
-QVariantMap PlaylistsModel::get(const int &index) const
-{
-    if (index >= this->list.size() || index < 0)
-        return QVariantMap();
-    return FMH::toMap(this->list.at(index));
-}
-
 void PlaylistsModel::insert(const QString &playlist)
 {
     if (playlist.isEmpty())

@@ -27,7 +27,6 @@ signals:
     void fileTagged(QUrl url, QString playlist);
 
 public slots:
-    QVariantMap get(const int &index) const;
     void insert(const QString &playlist);
 
     void addTrack(const QString &playlist, const QStringList &urls);

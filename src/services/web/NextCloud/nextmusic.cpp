@@ -96,11 +96,12 @@ FMH::MODEL_LIST NextMusic::parseCollection(const QByteArray &array)
 
                     const auto title = trackMap.value("title").toString();
                     const auto track = trackMap.value("number").toString();
-                    const auto id = trackMap.value("id").toString();
+//                    const auto id = trackMap.value("id").toString();
 
                     const auto filesMap = trackMap.value("files").toMap();
-                    for (const auto &fileKey : filesMap.keys()) {
-                        const auto mime = fileKey;
+                    const auto keys = filesMap.keys();
+                    for (const auto &fileKey : keys) {
+//                        const auto mime = fileKey;
                         const auto url = filesMap[fileKey].toString();
 
                         const auto trackModel = FMH::MODEL({{FMH::MODEL_KEY::ID, url},
@@ -141,7 +142,7 @@ void NextMusic::getTrackPath(const QString &id)
     QMap<QString, QString> header{{"Authorization", headerData.toLocal8Bit()}};
 
     const auto downloader = new FMH::Downloader;
-    connect(downloader, &FMH::Downloader::dataReady, [this, id, _downloader = std::move(downloader)](QByteArray array) {
+    connect(downloader, &FMH::Downloader::dataReady, [this, id, downloader](QByteArray array) {
         QJsonParseError jsonParseError;
         QJsonDocument jsonResponse = QJsonDocument::fromJson(static_cast<QString>(array).toUtf8(), &jsonParseError);
 
@@ -159,6 +160,8 @@ void NextMusic::getTrackPath(const QString &id)
         auto path = map["path"].toString();
         const auto url = this->provider() + (path.startsWith("/") ? path.remove(0, 1) : path);
         emit this->trackPathReady(id, url);
+
+        downloader->deleteLater();
     });
 
     downloader->getArray(url, header);
@@ -178,12 +181,12 @@ void NextMusic::getCollection(const std::initializer_list<QString> &parameters)
     QMap<QString, QString> header{{"Authorization", headerData.toLocal8Bit()}};
 
     const auto downloader = new FMH::Downloader;
-    connect(downloader, &FMH::Downloader::dataReady, [&, _downloader = std::move(downloader)](QByteArray array) {
+    connect(downloader, &FMH::Downloader::dataReady, [this, downloader](QByteArray array) {
         qDebug() << "FINISHED REQUEST WITH RESPONSEC : " << array;
 
         const auto data = this->parseCollection(array);
         emit this->collectionReady(data);
-        _downloader->deleteLater();
+        downloader->deleteLater();
     });
 
     downloader->getArray(url, header);
