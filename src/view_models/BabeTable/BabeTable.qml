@@ -280,9 +280,6 @@ Maui.Page
             checked: selectionBar.contains(model.url)
             checkable: selectionMode
 
-            signal play()
-            signal append()
-
             Drag.keys: ["text/uri-list"]
             Drag.mimeData: Drag.active ?
                                {
@@ -301,7 +298,12 @@ Maui.Page
             Layout.preferredWidth: implicitWidth
             visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
             icon.name: "media-playlist-append"
-            onClicked: delegate.append()
+            onClicked:
+            {
+                currentIndex = index
+                appendTrack(index)
+            }
+
             opacity: delegate.hovered ? 0.8 : 0.6
         }
 
@@ -327,19 +329,7 @@ Maui.Page
 
             if(!Maui.Handy.isTouch)
                 rowClicked(index)
-        }
-
-        onPlay:
-        {
-            currentIndex = index
-            quickPlayTrack(index)
-        }
-
-        onAppend:
-        {
-            currentIndex = index
-            appendTrack(index)
-        }
+        }      
 
         Connections
         {

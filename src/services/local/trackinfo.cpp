@@ -90,7 +90,7 @@ void TrackInfo::getAlbumInfo()
 
     auto pulpo = new Pulpo;
     QObject::connect(pulpo, &Pulpo::finished, pulpo, &Pulpo::deleteLater);
-    QObject::connect(pulpo, &Pulpo::error, [this, pulpo]() {
+    QObject::connect(pulpo, &Pulpo::error, [pulpo]() {
         pulpo->deleteLater();
     });
 
@@ -117,7 +117,7 @@ void TrackInfo::getArtistInfo()
 
     auto pulpo = new Pulpo;
     QObject::connect(pulpo, &Pulpo::finished, pulpo, &Pulpo::deleteLater);
-    QObject::connect(pulpo, &Pulpo::error, [this, pulpo]() {
+    QObject::connect(pulpo, &Pulpo::error, [pulpo]() {
         pulpo->deleteLater();
     });
 
@@ -144,7 +144,7 @@ void TrackInfo::getTrackInfo()
 
     auto pulpo = new Pulpo;
     QObject::connect(pulpo, &Pulpo::finished, pulpo, &Pulpo::deleteLater);
-    QObject::connect(pulpo, &Pulpo::error, [this, pulpo]() {
+    QObject::connect(pulpo, &Pulpo::error, [pulpo]() {
         pulpo->deleteLater();
     });
 

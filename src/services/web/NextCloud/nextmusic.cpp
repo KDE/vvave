@@ -10,25 +10,25 @@
 #include <MauiKit/FileBrowsing/downloader.h>
 #include <MauiKit/FileBrowsing/fm.h>
 
-static const inline QNetworkRequest formRequest(const QUrl &url, const QString &user, const QString &password)
-{
-    if (!url.isValid() && !user.isEmpty() && !password.isEmpty())
-        return QNetworkRequest();
+//static const inline QNetworkRequest formRequest(const QUrl &url, const QString &user, const QString &password)
+//{
+//    if (!url.isValid() && !user.isEmpty() && !password.isEmpty())
+//        return QNetworkRequest();
 
-    const QString concatenated = QString("%1:%2").arg(user, password);
-    const QByteArray data = concatenated.toLocal8Bit().toBase64();
-    const QString headerData = "Basic " + data;
+//    const QString concatenated = QString("%1:%2").arg(user, password);
+//    const QByteArray data = concatenated.toLocal8Bit().toBase64();
+//    const QString headerData = "Basic " + data;
 
-    // Construct new QNetworkRequest with prepared header values
-    QNetworkRequest newRequest(url);
+//    // Construct new QNetworkRequest with prepared header values
+//    QNetworkRequest newRequest(url);
 
-    newRequest.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
-    //    newRequest.setRawHeader(QByteArrayLiteral("OCS-APIREQUEST"), QByteArrayLiteral("true"));
+//    newRequest.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
+//    //    newRequest.setRawHeader(QByteArrayLiteral("OCS-APIREQUEST"), QByteArrayLiteral("true"));
 
-    qDebug() << "headers" << newRequest.rawHeaderList() << newRequest.url();
+//    qDebug() << "headers" << newRequest.rawHeaderList() << newRequest.url();
 
-    return newRequest;
-}
+//    return newRequest;
+//}
 
 const QString NextMusic::API = QStringLiteral("/index.php/apps/music/api/");
 

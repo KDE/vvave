@@ -140,6 +140,8 @@ void Mpris2::setShowProgressOnTaskBar(bool value)
     m_mp2p->setShowProgressOnTaskBar(value);
     mShowProgressOnTaskBar = value;
     Q_EMIT showProgressOnTaskBarChanged();
+#else
+   Q_UNUSED(value)
 #endif
 }
 
