@@ -238,9 +238,7 @@ Maui.Page
                     label1.font.pointSize: Maui.Style.fontSizes.big
                     label1.font.bold: true
                     anchors.fill: parent
-
-                    maskRadius: height/2
-
+                    leftMargin: 0
                     imageSource: control.listModel.sort === "artist" ? "image://artwork/artist:"+ section : ""
                 }
             }
