@@ -109,23 +109,14 @@ Maui.AltBrowser
         }
     }
 
-    listDelegate: Maui.ItemDelegate
+    listDelegate: Maui.ListBrowserDelegate
     {
-        isCurrentItem: ListView.isCurrentItem
         width: ListView.view.width
         height: Maui.Style.rowHeight * 1.8
 
-
-        Maui.ListItemTemplate
-        {
-            anchors.fill: parent
-            spacing: Maui.Style.space.medium
-            label1.text: model.album ? model.album : model.artist
-            label2.text: model.artist && model.album ? model.artist : ""
-            imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
-            iconSizeHint: height * 0.9
-            leftMargin: 0
-        }
+        label1.text: model.album ? model.album : model.artist
+        label2.text: model.artist && model.album ? model.artist : ""
+        imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
 
         onClicked:
         {

@@ -105,9 +105,7 @@ Maui.Page
                     label1.font.pointSize: Maui.Style.fontSizes.big
                     label1.font.bold: true
                     width: parent.width
-                    imageSizeHint: height * 0.7
                     maskRadius: height/2
-                    imageBorder: false
 
                     imageSource: "image://artwork/artist:"+ String(section)
                 }

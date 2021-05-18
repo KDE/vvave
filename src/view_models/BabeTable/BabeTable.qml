@@ -232,16 +232,14 @@ Maui.Page
 
                 Maui.ListItemTemplate
                 {
-                    anchors.centerIn:  parent
 
                     label1.text: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.Handy.formatDate(Date(section), "MM/dd/yyyy") : String(section)
 
                     label1.font.pointSize: Maui.Style.fontSizes.big
                     label1.font.bold: true
-                    width: parent.width
-                    imageSizeHint: height * 0.7
+                    anchors.fill: parent
+
                     maskRadius: height/2
-                    imageBorder: false
 
                     imageSource: control.listModel.sort === "artist" ? "image://artwork/artist:"+ section : ""
                 }
