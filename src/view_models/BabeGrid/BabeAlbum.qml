@@ -30,7 +30,6 @@ Maui.ItemDelegate
     {
         id: _cover
         anchors.fill: parent
-        clip: true
 
         Image
         {
@@ -106,23 +105,5 @@ Maui.ItemDelegate
         }
     }
 
-    Rectangle
-    {
-        anchors.fill: _cover
-        Kirigami.Theme.inherit: false
 
-        color: "transparent"
-        border.color: control.isCurrentItem || control.hovered ? Kirigami.Theme.highlightColor : Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.2)
-        radius: albumRadius
-
-        Rectangle
-        {
-            anchors.fill: parent
-            color: "transparent"
-            radius: parent.radius - 0.5
-            border.color: Qt.lighter(Kirigami.Theme.backgroundColor, 2)
-            opacity: 0.2
-            anchors.margins: 1
-        }
-    }
 }

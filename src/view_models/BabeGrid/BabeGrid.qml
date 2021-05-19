@@ -116,6 +116,8 @@ Maui.AltBrowser
 
         label1.text: model.album ? model.album : model.artist
         label2.text: model.artist && model.album ? model.artist : ""
+        iconSizeHint: Maui.Style.iconSizes.small
+        iconSource: "folder-music"
         imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
 
         onClicked:
