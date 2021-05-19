@@ -1,4 +1,8 @@
-# Building
+# vvave
+
+<a href='https://flathub.org/apps/details/org.kde.vvave'><img width='190px' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-i-en.png'/></a>
+
+## Building
 
 ### Build for Android
 Use `qmake`:
