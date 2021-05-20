@@ -65,7 +65,7 @@ target_compile_definitions(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${Taglib_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} MauiKit MauiKit::FileBrowsing Qt5::Core Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${Taglib_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} MauiKit MauiKit::FileBrowsing MauiKitAccounts Qt5::Core Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${Taglib_LIBRARIES})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS ${PROJECT_NAME} ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
