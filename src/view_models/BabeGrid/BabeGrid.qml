@@ -41,6 +41,8 @@ Maui.AltBrowser
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
     gridView.itemSize: albumCoverSize
+    gridView.cacheBuffer: height * 5
+    listView.cacheBuffer: height * 5
     holder.visible: count === 0
 
     property string typingQuery
