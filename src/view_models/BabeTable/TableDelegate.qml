@@ -28,7 +28,7 @@ Maui.ListBrowserDelegate
 
     draggable: true
 
-    iconSizeHint: height - Maui.Style.space.small
+    iconSizeHint: Maui.Style.space.small
     label1.text: control.number ? control.track + ". " + control.title :  control.title
     label2.text: control.artist + " | " + control.album
     label2.visible: control.coverArt ? !control.sameAlbum : true
