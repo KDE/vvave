@@ -203,7 +203,7 @@ QVariantList vvave::sourcesModel()
     const auto urls = sources();
     for (const auto &url : urls)
     {
-        res << FMStatic::getDirInfo(url);
+        res << FMStatic::getFileInfo(url);
     }
 
     return res;
