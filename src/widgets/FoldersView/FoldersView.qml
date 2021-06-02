@@ -54,6 +54,7 @@ StackView
         headBar.middleContent: Maui.TextField
         {
             Layout.fillWidth: true
+            Layout.maximumWidth: 500
             placeholderText: i18n("Filter...")
             onAccepted: browser.model.filter = text
             onCleared:  browser.model.filter = text
@@ -68,7 +69,7 @@ StackView
             {
                 anchors.fill: parent
                 anchors.margins: Maui.Style.space.medium
-                iconSizeHint: height * 0.6
+                iconSizeHint: Maui.Style.iconSizes.large
                 label1.text: model.label
                 iconSource: model.icon
                 padding: Maui.Style.space.medium

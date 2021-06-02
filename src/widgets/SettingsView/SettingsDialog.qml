@@ -101,6 +101,8 @@ Maui.SettingsDialog
                 Layout.fillWidth: true
                 Layout.minimumHeight: Math.min(500, contentHeight)
                 model: Vvave.sources
+                currentIndex: -1
+
                 delegate: Maui.ListDelegate
                 {
                     width: ListView.view.width
@@ -111,7 +113,6 @@ Maui.SettingsDialog
                     template.iconSizeHint: Maui.Style.iconSizes.small
                     template.label1.text: modelData.label
                     template.label2.text: modelData.path
-                    onClicked: _sourcesList.currentIndex = index
 
                     template.content: ToolButton
                     {
