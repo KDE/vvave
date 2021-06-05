@@ -4,11 +4,7 @@
 #include <QCommandLineParser>
 #include <QIcon>
 
-#if defined Q_OS_MACOS || defined Q_OS_WIN
-#include <KF5/KI18n/KLocalizedString>
-#else
 #include <KI18n/KLocalizedString>
-#endif
 
 #if defined Q_OS_ANDROID || defined Q_OS_IOS
 #include <QGuiApplication>
@@ -27,15 +23,13 @@
 #endif
 
 #ifdef Q_OS_MACOS
-#include "mauimacos.h"
+#include <MauiKit/Core/mauimacos.h>
 #endif
 
 #include <MauiKit/FileBrowsing/fmstatic.h>
 #include <MauiKit/Core/mauiapp.h>
 
 #include "../vvave_version.h"
-
-#include "utils/bae.h"
 
 #include "vvave.h"
 
