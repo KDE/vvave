@@ -239,6 +239,7 @@ Maui.Page
                     label1.font.bold: true
                     anchors.fill: parent
                     leftMargin: 0
+                    iconSource: "view-media-artist"
                     imageSource: control.listModel.sort === "artist" ? "image://artwork/artist:"+ section : ""
                 }
             }

@@ -112,7 +112,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterSingletonInstance<vvave>(VVAVE_URI, 1, 0, "Vvave", vvave::instance());
 
     qmlRegisterType<TracksModel>(VVAVE_URI, 1, 0, "Tracks");
-    qmlRegisterType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists");
     qmlRegisterType<AlbumsModel>(VVAVE_URI, 1, 0, "Albums");
     qmlRegisterType<Cloud>(VVAVE_URI, 1, 0, "Cloud");
     qmlRegisterType<FoldersModel>(VVAVE_URI, 1, 0, "Folders");
@@ -123,6 +122,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qmlRegisterType<TrackInfo>(VVAVE_URI, 1, 0, "TrackInfo");
     qmlRegisterType<MetadataEditor>(VVAVE_URI, 1, 0, "MetadataEditor");
+
+    qmlRegisterSingletonType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
+        Q_UNUSED(scriptEngine)
+        Q_UNUSED(engine)
+           return new PlaylistsModel;
+       });
 
     engine.addImageProvider("artwork", new ArtworkProvider());
 

@@ -20,11 +20,8 @@ PlaylistsModel::PlaylistsModel(QObject *parent)
         this->list[index] = item;
        emit this->updateModel(index, {});
     });
-}
 
-void PlaylistsModel::componentComplete()
-{
-    this->setList();
+     this->setList();
 }
 
 const FMH::MODEL_LIST &PlaylistsModel::items() const

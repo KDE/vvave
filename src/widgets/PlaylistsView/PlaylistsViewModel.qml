@@ -6,7 +6,7 @@ import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.8 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 
-import org.maui.vvave 1.0
+import org.maui.vvave 1.0 as Vvave
 
 import "../../utils"
 
@@ -18,6 +18,9 @@ import "../../utils/Help.js" as H
 Maui.Page
 {
     id: control
+
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
 
     footBar.visible: false
 
@@ -45,7 +48,8 @@ Maui.Page
 
         anchors.fill: parent
 
-        itemSize: Math.min(260, Math.max(140, Math.floor(width* 0.3)))
+        //        itemSize: Math.min(260, Math.max(140, Math.floor(width* 0.3)))
+        itemSize: 160
         itemHeight: itemSize
 
         holder.emoji:  "qrc:/assets/dialog-information.svg"
@@ -58,54 +62,66 @@ Maui.Page
         model: Maui.BaseModel
         {
             id: _playlistsModel
-            list: playlistsList
+            list: Vvave.Playlists
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
-        delegate : Maui.GalleryRollItem
+        delegate : Item
         {
-            id: _collageDelegate
-            height: _gridView.cellHeight
-            width: _gridView.cellWidth
+            height: GridView.view.cellHeight
+            width: GridView.view.cellWidth
 
-            isCurrentItem: GridView.isCurrentItem
-            images: model.preview.split(",")
-
-            label1.text: model.playlist
-            label2.text: model.description
-            template.iconSource: model.icon
-
-            onClicked :
+            Maui.GalleryRollItem
             {
-                _gridView.currentIndex = index
-                if(Maui.Handy.singleClick)
+                id: _collageDelegate
+                anchors.fill: parent
+                anchors.margins: Maui.Style.space.medium
+
+                isCurrentItem: parent.GridView.isCurrentItem
+                images: model.preview.split(",")
+
+                label1.font.bold: true
+                label1.font.weight: Font.Bold
+                label1.text: model.playlist
+                label1.horizontalAlignment: Qt.AlignLeft
+                label2.horizontalAlignment: Qt.AlignLeft
+                label2.text: model.description
+                iconSource: model.icon
+
+                onClicked :
                 {
-                    populate(model.playlist, true)
+                    _gridView.currentIndex = index
+                    if(Maui.Handy.singleClick)
+                    {
+                        populate(model.playlist, true)
+                    }
+                }
+
+                onDoubleClicked :
+                {
+                    _gridView.currentIndex = index
+                    if(!Maui.Handy.singleClick)
+                    {
+                        populate(model.playlist, true)
+                    }
+                }
+
+                onRightClicked:
+                {
+                    _gridView.currentIndex = index
+                    currentPlaylist = model.playlist
+                }
+
+                onPressAndHold:
+                {
+                    _gridView.currentIndex = index
+                    currentPlaylist = model.playlist
                 }
             }
 
-            onDoubleClicked :
-            {
-                _gridView.currentIndex = index
-                if(!Maui.Handy.singleClick)
-                {
-                    populate(model.playlist, true)
-                }
-            }
-
-            onRightClicked:
-            {
-                _gridView.currentIndex = index
-                currentPlaylist = model.playlist
-            }
-
-            onPressAndHold:
-            {
-                _gridView.currentIndex = index
-                currentPlaylist = model.playlist
-            }
         }
+
     }
 }

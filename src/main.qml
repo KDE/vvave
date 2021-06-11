@@ -191,11 +191,6 @@ Maui.ApplicationWindow
         id: _floatingDisk
     }
 
-    Playlists
-    {
-        id: playlistsList
-    }
-
     FB.TagsDialog
     {
         id: playlistDialog

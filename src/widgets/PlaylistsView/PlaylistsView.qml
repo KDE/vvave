@@ -8,7 +8,7 @@ import org.kde.kirigami 2.7 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 import org.mauikit.filebrowsing 1.3 as FB
 
-import org.maui.vvave 1.0
+import org.maui.vvave 1.0 as Vvave
 
 import "../../view_models/BabeTable"
 import "../../view_models"
@@ -65,7 +65,7 @@ StackView
                 text: i18n("Remove from playlist")
                 onTriggered:
                 {
-                    playlistsList.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
+                    Vvave.Playlists.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
                     listModel.list.remove(filterList.currentIndex)
                 }
             }

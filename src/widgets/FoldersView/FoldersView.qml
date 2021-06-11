@@ -62,8 +62,8 @@ StackView
 
         gridDelegate: Item
         {
-            height: browser.gridView.cellHeight
-            width: browser.gridView.cellWidth
+            height: GridView.view.cellHeight
+            width: GridView.view.cellWidth
 
             Maui.GridBrowserDelegate
             {
@@ -73,7 +73,7 @@ StackView
                 label1.text: model.label
                 iconSource: model.icon
                 padding: Maui.Style.space.medium
-                isCurrentItem: GridView.isCurrentItem
+                isCurrentItem: parent.GridView.isCurrentItem
                 tooltipText: model.path
 
                 onClicked:

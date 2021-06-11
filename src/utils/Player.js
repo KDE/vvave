@@ -1,3 +1,5 @@
+.import org.maui.vvave 1.0 as Vvave
+
 function playTrack()
 {
     player.url = currentTrack.url;
@@ -66,7 +68,7 @@ function appendTrack(track)
         playlist.append(track)
         if(sync === true)
         {
-           playlistsList.addTrack(syncPlaylist, [track.url])
+           Vvave.Playlists.addTrack(syncPlaylist, [track.url])
         }
     }
 }

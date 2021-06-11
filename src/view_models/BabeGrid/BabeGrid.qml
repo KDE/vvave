@@ -41,6 +41,7 @@ Maui.AltBrowser
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
     gridView.itemSize: albumCoverSize
+    gridView.itemHeight: albumCoverSize * 1.2
     gridView.cacheBuffer: height * 5
     listView.cacheBuffer: height * 5
     holder.visible: count === 0
@@ -144,23 +145,22 @@ Maui.AltBrowser
     gridDelegate: Item
     {
         id: _albumDelegate
-        height: control.gridView.cellHeight
-        width: control.gridView.cellWidth
 
-        property bool isCurrentItem: GridView.isCurrentItem
+        height: GridView.view.cellHeight
+        width: GridView.view.cellWidth
 
         BabeAlbum
         {
             id: albumDelegate
-            anchors.centerIn: parent
-            albumRadius: albumCoverRadius
-            height: control.gridView.itemSize - Maui.Style.space.small
-            width: height
-            isCurrentItem: parent.isCurrentItem
+
+            anchors.fill: parent
+            anchors.margins: Maui.Style.space.medium
+
+            isCurrentItem: parent.GridView.isCurrentItem
 
             label1.text: model.album ? model.album : model.artist
             label2.text: model.artist && model.album ? model.artist : ""
-            image.source: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
+            imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
 
             onClicked:
             {
