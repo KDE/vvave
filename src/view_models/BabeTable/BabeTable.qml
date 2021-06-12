@@ -179,7 +179,7 @@ Maui.Page
         }
 
         onEditClicked:
-        {          
+        {
             _dialogLoader.sourceComponent = _metadataDialogComponent
             dialog.open()
         }
@@ -326,7 +326,7 @@ Maui.Page
 
             if(!Maui.Handy.isTouch)
                 rowClicked(index)
-        }      
+        }
 
         Connections
         {

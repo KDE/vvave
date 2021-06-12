@@ -18,6 +18,7 @@ Maui.GridBrowserDelegate
  label1.font.bold: true
  label1.font.weight: Font.Bold
  iconSource: "media-album-cover"
+ template.labelSizeHint: 40
 
 // label2.visible: label2.text && (control.width > 70)
 // label2.font.pointSize: Maui.Style.fontSizes.medium

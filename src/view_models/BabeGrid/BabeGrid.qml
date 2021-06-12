@@ -12,9 +12,6 @@ import ".."
 Maui.AltBrowser
 {
     id: control
-    property int albumCoverSize: 130
-    property int albumCoverRadius :  Maui.Style.radiusV
-
     property alias list: _albumsList
     property alias listModel: _albumsModel
 
@@ -40,8 +37,8 @@ Maui.AltBrowser
 
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
-    gridView.itemSize: albumCoverSize
-    gridView.itemHeight: albumCoverSize * 1.2
+    gridView.itemSize: 130
+    gridView.itemHeight: 130 * 1.5
     gridView.cacheBuffer: height * 5
     listView.cacheBuffer: height * 5
     holder.visible: count === 0
@@ -144,17 +141,14 @@ Maui.AltBrowser
 
     gridDelegate: Item
     {
-        id: _albumDelegate
-
         height: GridView.view.cellHeight
         width: GridView.view.cellWidth
 
         BabeAlbum
         {
-            id: albumDelegate
-
-            anchors.fill: parent
-            anchors.margins: Maui.Style.space.medium
+            anchors.centerIn: parent
+            width: control.gridView.itemSize - Maui.Style.space.medium
+            height:control.gridView.itemHeight  - Maui.Style.space.medium
 
             isCurrentItem: parent.GridView.isCurrentItem
 
