@@ -15,63 +15,116 @@ import "../../widgets"
 import "../../db/Queries.js" as Q
 import "../../utils/Help.js" as H
 
+Maui.AltBrowser
+{
+    id: control
 
-    Maui.AltBrowser
+    anchors.fill: parent
+
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+
+    viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+
+    gridView.itemSize: 130
+    gridView.itemHeight: 130 * 1.5
+
+    holder.emoji:  "qrc:/assets/dialog-information.svg"
+    holder.title : i18n("No Playlists!")
+    holder.body: i18n("Start creating new custom playlists")
+
+    holder.emojiSize: Maui.Style.iconSizes.huge
+    holder.visible: count === 0
+
+    model: Maui.BaseModel
     {
-        id: control
+        id: _playlistsModel
+        list: Vvave.Playlists
+        recursiveFilteringEnabled: true
+        sortCaseSensitivity: Qt.CaseInsensitive
+        filterCaseSensitivity: Qt.CaseInsensitive
+    }
 
-        anchors.fill: parent
+    footBar.visible: false
 
-        viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
+    headBar.middleContent: Maui.TextField
+    {
+        Layout.maximumWidth: 500
+        Layout.fillWidth: true
+        placeholderText: i18n("Filter")
+        onAccepted: _playlistsModel.filter = text
+        onCleared: _playlistsModel.filter = ""
+    }
 
-        gridView.itemSize: 130
-        gridView.itemHeight: 130 * 1.5
-
-        holder.emoji:  "qrc:/assets/dialog-information.svg"
-        holder.title : i18n("No Playlists!")
-        holder.body: i18n("Start creating new custom playlists")
-
-        holder.emojiSize: Maui.Style.iconSizes.huge
-        holder.visible: count === 0
-
-        model: Maui.BaseModel
+    headBar.rightContent: ToolButton
+    {
+        icon.name: "list-add"
+        onClicked:
         {
-            id: _playlistsModel
-            list: Vvave.Playlists
-            recursiveFilteringEnabled: true
-            sortCaseSensitivity: Qt.CaseInsensitive
-            filterCaseSensitivity: Qt.CaseInsensitive
+            newPlaylistDialog.open()
         }
+    }
 
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
+    listDelegate: Maui.ListBrowserDelegate
+    {
+        width: ListView.view.width
+        height: Maui.Style.rowHeight * 1.8
 
-        footBar.visible: false
+        isCurrentItem: ListView.isCurrentItem
 
-        headBar.middleContent: Maui.TextField
+        label1.font.bold: true
+        label1.font.weight: Font.Bold
+        label1.text: model.playlist
+        label1.horizontalAlignment: Qt.AlignLeft
+        label2.horizontalAlignment: Qt.AlignLeft
+        label2.text: model.description
+        iconSource: model.icon
+
+        onClicked :
         {
-            Layout.maximumWidth: 500
-            Layout.fillWidth: true
-            placeholderText: i18n("Filter")
-            onAccepted: _playlistsModel.filter = text
-            onCleared: _playlistsModel.filter = ""
-        }
-
-        headBar.rightContent: ToolButton
-        {
-            icon.name: "list-add"
-            onClicked:
+            control.currentIndex = index
+            if(Maui.Handy.singleClick)
             {
-                newPlaylistDialog.open()
+                populate(model.playlist, true)
             }
         }
 
-        listDelegate: Maui.ListBrowserDelegate
+        onDoubleClicked :
         {
-            width: ListView.view.width
-            height: Maui.Style.rowHeight * 1.8
+            control.currentIndex = index
+            if(!Maui.Handy.singleClick)
+            {
+                populate(model.playlist, true)
+            }
+        }
+
+        onRightClicked:
+        {
+            control.currentIndex = index
+            currentPlaylist = model.playlist
+        }
+
+        onPressAndHold:
+        {
+            control.currentIndex = index
+        }
+
+    }
+
+    gridDelegate : Item
+    {
+        height: GridView.view.cellHeight
+        width: GridView.view.cellWidth
+
+        Maui.GalleryRollItem
+        {
+            id: _collageDelegate
+            anchors.centerIn: parent
+            width: control.gridView.itemSize - Maui.Style.space.medium
+            height:control.gridView.itemHeight  - Maui.Style.space.medium
 
             isCurrentItem: parent.GridView.isCurrentItem
+            images: model.preview.split(",")
 
             label1.font.bold: true
             label1.font.weight: Font.Bold
@@ -80,63 +133,39 @@ import "../../utils/Help.js" as H
             label2.horizontalAlignment: Qt.AlignLeft
             label2.text: model.description
             iconSource: model.icon
-        }
+            template.labelSizeHint: 40
 
-        gridDelegate : Item
-        {
-            height: GridView.view.cellHeight
-            width: GridView.view.cellWidth
-
-            Maui.GalleryRollItem
+            onClicked :
             {
-                id: _collageDelegate
-                anchors.centerIn: parent
-                width: control.gridView.itemSize - Maui.Style.space.medium
-                height:control.gridView.itemHeight  - Maui.Style.space.medium
-
-                isCurrentItem: parent.GridView.isCurrentItem
-                images: model.preview.split(",")
-
-                label1.font.bold: true
-                label1.font.weight: Font.Bold
-                label1.text: model.playlist
-                label1.horizontalAlignment: Qt.AlignLeft
-                label2.horizontalAlignment: Qt.AlignLeft
-                label2.text: model.description
-                iconSource: model.icon
-                template.labelSizeHint: 40
-
-                onClicked :
+                control.currentIndex = index
+                if(Maui.Handy.singleClick)
                 {
-                    control.currentIndex = index
-                    if(Maui.Handy.singleClick)
-                    {
-                        populate(model.playlist, true)
-                    }
-                }
-
-                onDoubleClicked :
-                {
-                    control.currentIndex = index
-                    if(!Maui.Handy.singleClick)
-                    {
-                        populate(model.playlist, true)
-                    }
-                }
-
-                onRightClicked:
-                {
-                    control.currentIndex = index
-                    currentPlaylist = model.playlist
-                }
-
-                onPressAndHold:
-                {
-                    control.currentIndex = index
-                    currentPlaylist = model.playlist
+                    populate(model.playlist, true)
                 }
             }
 
+            onDoubleClicked :
+            {
+                control.currentIndex = index
+                if(!Maui.Handy.singleClick)
+                {
+                    populate(model.playlist, true)
+                }
+            }
+
+            onRightClicked:
+            {
+                control.currentIndex = index
+                currentPlaylist = model.playlist
+            }
+
+            onPressAndHold:
+            {
+                control.currentIndex = index
+                currentPlaylist = model.playlist
+            }
         }
 
     }
+
+}

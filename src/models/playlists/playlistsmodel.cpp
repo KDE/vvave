@@ -81,7 +81,7 @@ FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
                            //    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
                            //},
 
-                           {{FMH::MODEL_KEY::DESCRIPTION, "Top listened tracks"},
+                           {{FMH::MODEL_KEY::DESCRIPTION, "Top listened"},
                             {FMH::MODEL_KEY::TYPE, "default"},
                             {FMH::MODEL_KEY::COLOR, "#FFA000"},
                             {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
