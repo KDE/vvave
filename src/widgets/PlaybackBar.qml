@@ -169,6 +169,7 @@ Control
                 icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
                 onClicked: _drawer.toggle()
 
+                checked: _drawer.visible
                 ToolTip.delay: 1000
                 ToolTip.timeout: 5000
                 ToolTip.visible: hovered
