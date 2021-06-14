@@ -37,8 +37,8 @@ Maui.AltBrowser
 
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
-    gridView.itemSize: 130
-    gridView.itemHeight: 130 * 1.5
+    gridView.itemSize: 140
+    gridView.itemHeight: 180
     gridView.cacheBuffer: height * 5
     listView.cacheBuffer: height * 5
     holder.visible: count === 0
@@ -144,7 +144,7 @@ Maui.AltBrowser
         height: GridView.view.cellHeight
         width: GridView.view.cellWidth
 
-        BabeAlbum
+        Maui.GridBrowserDelegate
         {
             anchors.centerIn: parent
             width: control.gridView.itemSize - Maui.Style.space.medium
@@ -155,6 +155,10 @@ Maui.AltBrowser
             label1.text: model.album ? model.album : model.artist
             label2.text: model.artist && model.album ? model.artist : ""
             imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
+            label1.font.bold: true
+            label1.font.weight: Font.Bold
+            iconSource: "media-album-cover"
+            template.labelSizeHint: 40
 
             onClicked:
             {

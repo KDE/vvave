@@ -26,8 +26,8 @@ Maui.AltBrowser
 
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
-    gridView.itemSize: 130
-    gridView.itemHeight: 130 * 1.5
+    gridView.itemSize: 140
+    gridView.itemHeight: 180
 
     holder.emoji:  "qrc:/assets/dialog-information.svg"
     holder.title : i18n("No Playlists!")

@@ -104,7 +104,6 @@ StackView
             iconSizeHint: Maui.Style.iconSizes.big
             label1.text: model.label
             label2.text: model.path
-            label3.text: Qt.formatDateTime(new Date(model.modified), "d MMM yyyy")
             iconSource: model.icon
 
             onClicked:

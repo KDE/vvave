@@ -404,6 +404,7 @@ Maui.Page
                         icon.width: Maui.Style.iconSizes.big
                         icon.height: Maui.Style.iconSizes.big
                         icon.name: "love"
+                        flat: true
                         enabled: root.currentTrack
                         checked: root.currentTrack.url ? FB.Tagging.isFav(root.currentTrack.url) : false
                         icon.color: checked ? babeColor :  Kirigami.Theme.textColor
@@ -418,6 +419,7 @@ Maui.Page
                     ToolButton
                     {
                         icon.name: "media-skip-backward"
+                          flat: true
                         icon.color: Kirigami.Theme.textColor
                         icon.width: Maui.Style.iconSizes.big
                         icon.height: Maui.Style.iconSizes.big
@@ -427,6 +429,7 @@ Maui.Page
                     ToolButton
                     {
                         id: playIcon
+                          flat: true
                         icon.width: Maui.Style.iconSizes.huge
                         icon.height: Maui.Style.iconSizes.huge
                         enabled: root.currentTrackIndex >= 0
@@ -438,6 +441,7 @@ Maui.Page
                     ToolButton
                     {
                         id: nextBtn
+                          flat: true
                         icon.color: Kirigami.Theme.textColor
                         icon.width: Maui.Style.iconSizes.big
                         icon.height: Maui.Style.iconSizes.big
@@ -448,6 +452,7 @@ Maui.Page
                     ToolButton
                     {
                         id: shuffleBtn
+                          flat: true
                         icon.width: Maui.Style.iconSizes.big
                         icon.height: Maui.Style.iconSizes.big
 

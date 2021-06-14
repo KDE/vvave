@@ -221,6 +221,7 @@ Control
                 {
                     id: babeBtnIcon
                     icon.name: "love"
+                    flat: true
                     enabled: currentTrack
                     checked:currentTrack.url ? FB.Tagging.isFav(currentTrack.url) : false
                     icon.color: checked ? babeColor :  Kirigami.Theme.textColor
