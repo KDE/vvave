@@ -59,7 +59,7 @@ Maui.Page
     flickable: _listBrowser.flickable
 
     headBar.visible: true
-
+    headBar.forceCenterMiddleContent: false
     headBar.leftContent: Maui.ToolButtonMenu
     {
         enabled: listModel.list.count > 0

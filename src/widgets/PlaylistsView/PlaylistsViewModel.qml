@@ -46,7 +46,7 @@ Maui.AltBrowser
     }
 
     footBar.visible: false
-
+    headBar.forceCenterMiddleContent: false
     headBar.middleContent: Maui.TextField
     {
         Layout.maximumWidth: 500
