@@ -28,7 +28,7 @@ Item
         {
             color: Kirigami.Theme.backgroundColor
             radius: Maui.Style.radiusV
-            opacity: 0.3
+            opacity: 0.5
         }
 
         ColumnLayout

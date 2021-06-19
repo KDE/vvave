@@ -27,7 +27,7 @@ Maui.Page
 
     flickable: table.flickable
 
-    title: i18n("Now playing")
+    title: i18n("Playlist")
     showTitle: true
 
     headBar.visible: !mainlistEmpty

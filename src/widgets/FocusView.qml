@@ -49,6 +49,15 @@ Maui.Page
         side: Qt.RightEdge
     }
 
+    headBar.rightContent: ToolButton
+    {
+        icon.name: "documentinfo"
+        onClicked:
+        {
+            _stackView.push(_infoComponent)
+        }
+    }
+
     Keys.onBackPressed:
     {
         toggleFocusView()
@@ -156,23 +165,27 @@ Maui.Page
                         id: _listView
                         Layout.fillWidth: true
                         Layout.fillHeight: true
+
                         orientation: ListView.Horizontal
+
                         clip: false
                         focus: true
                         interactive: true
+
                         currentIndex: root.currentTrackIndex
-                        spacing: Maui.Style.space.medium
-                        cacheBuffer: control.width * 1
-                        onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
+                        spacing: 0
+                        cacheBuffer: control.width
 
                         highlightFollowsCurrentItem: true
                         highlightMoveDuration: 0
                         snapMode: ListView.SnapOneItem
                         model: mainPlaylist.listModel
-                        highlightRangeMode: ListView.StrictlyEnforceRange
+                        highlightRangeMode:ListView.ApplyRange
+
                         keyNavigationEnabled: true
                         keyNavigationWraps : true
-                        onCurrentItemChanged:
+
+                        onMovementEnded:
                         {
                             var index = indexAt(contentX, contentY)
                             if(index !== root.currentTrackIndex && index >= 0)
@@ -190,6 +203,7 @@ Maui.Page
                             {
                                 height: Math.min(parent.height, 300)
                                 width: Math.min(parent.width, 300)
+
                                 anchors.centerIn: parent
 
                                 Rectangle
@@ -248,7 +262,7 @@ Maui.Page
                                                 anchors.centerIn: parent
                                                 width: _image.width
                                                 height: _image.height
-                                                radius: Maui.Style.radiusV
+                                                radius: _bg.radius
                                             }
                                         }
                                     }
@@ -277,23 +291,13 @@ Maui.Page
                     }
                 }
 
-                RowLayout
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: Maui.Style.toolBarHeight
 
-                    ToolButton
-                    {
-                        icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
-                        checked: _drawer.visible
-                        onClicked: _drawer.toggle()
-                        Layout.alignment: Qt.AlignCenter
-                    }
 
                     ColumnLayout
                     {
                         Layout.fillWidth: true
-                        Layout.fillHeight: true
+                        Layout.preferredHeight: Maui.Style.toolBarHeight
+
                         Layout.alignment: Qt.AlignCenter
                         spacing: 0
 
@@ -331,17 +335,8 @@ Maui.Page
                         }
                     }
 
-                    ToolButton
-                    {
-                        icon.name: "documentinfo"
-                        onClicked:
-                        {
-                            _stackView.push(_infoComponent)
-                        }
 
-                        Layout.alignment: Qt.AlignCenter
-                    }
-                }
+
 
                 RowLayout
                 {
@@ -401,6 +396,13 @@ Maui.Page
                     position: ToolBar.Footer
 
                     background: null
+
+                    leftContent: ToolButton
+                        {
+                            icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
+                            checked: _drawer.visible
+                            onClicked: _drawer.toggle()
+                        }
 
                     middleContent: [
                         ToolButton
