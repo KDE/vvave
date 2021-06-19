@@ -40,14 +40,14 @@ Maui.Page
             if(_stackView.depth === 2)
                 _stackView.pop()
             else
-                 toggleFocusView()
+                toggleFocusView()
         }
     }
 
     headBar.farRightContent: Maui.WindowControls
-              {
-                  side: Qt.RightEdge
-              }
+    {
+        side: Qt.RightEdge
+    }
 
     Keys.onBackPressed:
     {
@@ -115,373 +115,379 @@ Maui.Page
         anchors.fill: parent
         anchors.margins: Maui.Style.space.big
 
-        initialItem: ColumnLayout
+        initialItem: Loader
         {
-            RowLayout
+            asynchronous: true
+
+            ColumnLayout
             {
-                Layout.fillWidth: true
-                Layout.preferredHeight: width
-                Layout.maximumHeight: 300
-
-                clip: true
-
-                Item
+                anchors.fill: parent
+                RowLayout
                 {
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: Maui.Style.iconSizes.big
-
-                    Rectangle
-                    {
-                        visible: (_listView.currentIndex > 0) && (_listView.count > 1)
-
-                        height: Maui.Style.iconSizes.small
-                        width : height
-
-                        radius: height
-
-                        color: Kirigami.Theme.textColor
-                        opacity: 0.4
-
-                        anchors.centerIn: parent
-                    }
-                }
-
-                ListView
-                {
-                    id: _listView
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    orientation: ListView.Horizontal
-                    clip: false
-                    focus: true
-                    interactive: true
-                    currentIndex: root.currentTrackIndex
-                    spacing: Maui.Style.space.medium
-                    cacheBuffer: control.width * 1
-                    onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
+                    Layout.preferredHeight: width
+                    Layout.maximumHeight: 300
 
-                    highlightFollowsCurrentItem: true
-                    highlightMoveDuration: 0
-                    snapMode: ListView.SnapOneItem
-                    model: mainPlaylist.listModel
-                    highlightRangeMode: ListView.StrictlyEnforceRange
-                    keyNavigationEnabled: true
-                    keyNavigationWraps : true
-                    onCurrentItemChanged:
+                    clip: true
+
+                    Item
                     {
-                        var index = indexAt(contentX, contentY)
-                        if(index !== root.currentTrackIndex && index >= 0)
-                            Player.playAt(index)
+                        Layout.fillHeight: true
+                        Layout.preferredWidth: Maui.Style.iconSizes.big
+
+                        Rectangle
+                        {
+                            visible: (_listView.currentIndex > 0) && (_listView.count > 1)
+
+                            height: Maui.Style.iconSizes.small
+                            width : height
+
+                            radius: height
+
+                            color: Kirigami.Theme.textColor
+                            opacity: 0.4
+
+                            anchors.centerIn: parent
+                        }
                     }
 
-                    delegate: Item
+                    ListView
                     {
-                        id: _delegate
-                        height: ListView.view.height
-                        width: ListView.view.width
-                        property bool isCurrentItem : ListView.isCurrentItem
+                        id: _listView
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        orientation: ListView.Horizontal
+                        clip: false
+                        focus: true
+                        interactive: true
+                        currentIndex: root.currentTrackIndex
+                        spacing: Maui.Style.space.medium
+                        cacheBuffer: control.width * 1
+                        onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Center)
 
-                        Item
+                        highlightFollowsCurrentItem: true
+                        highlightMoveDuration: 0
+                        snapMode: ListView.SnapOneItem
+                        model: mainPlaylist.listModel
+                        highlightRangeMode: ListView.StrictlyEnforceRange
+                        keyNavigationEnabled: true
+                        keyNavigationWraps : true
+                        onCurrentItemChanged:
                         {
-                            height: Math.min(parent.height, 300)
-                            width: Math.min(parent.width, 300)
-                            anchors.centerIn: parent
+                            var index = indexAt(contentX, contentY)
+                            if(index !== root.currentTrackIndex && index >= 0)
+                                Player.playAt(index)
+                        }
 
-                            Rectangle
-                            {
-                                id: _bg
-                                width: _image.width + Maui.Style.space.medium
-                                height: width
-                                anchors.centerIn: parent
-                                radius: Maui.Style.radiusV
-                                color: "#fafafa"
-                            }
+                        delegate: Item
+                        {
+                            id: _delegate
+                            height: ListView.view.height
+                            width: ListView.view.width
+                            property bool isCurrentItem : ListView.isCurrentItem
 
-                            DropShadow
+                            Item
                             {
-                                anchors.fill: _bg
-                                horizontalOffset: 0
-                                verticalOffset: 0
-                                radius: 8.0
-                                samples: 17
-                                color: "#80000000"
-                                source: _bg
-                            }
-
-                            Image
-                            {
-                                id: _image
-                                width: Math.min(parent.width, parent.height) * 0.9
-                                height: width
+                                height: Math.min(parent.height, 300)
+                                width: Math.min(parent.width, 300)
                                 anchors.centerIn: parent
 
-                                sourceSize.width: 200
-
-                                fillMode: Image.PreserveAspectFit
-                                antialiasing: false
-                                smooth: true
-                                asynchronous: true
-
-                                source: "image://artwork/album:"+model.artist + ":"+ model.album
-
-                                onStatusChanged:
+                                Rectangle
                                 {
-                                    if (status == Image.Error)
-                                        source = "qrc:/assets/cover.png";
+                                    id: _bg
+                                    width: _image.width + Maui.Style.space.medium
+                                    height: width
+                                    anchors.centerIn: parent
+                                    radius: Maui.Style.radiusV
+                                    color: "#fafafa"
                                 }
 
-                                layer.enabled: true
-                                layer.effect: OpacityMask
+                                DropShadow
                                 {
-                                    maskSource: Item
-                                    {
-                                        width: _image.width
-                                        height: _image.height
+                                    anchors.fill: _bg
+                                    horizontalOffset: 0
+                                    verticalOffset: 0
+                                    radius: 8.0
+                                    samples: 17
+                                    color: "#80000000"
+                                    source: _bg
+                                }
 
-                                        Rectangle
+                                Image
+                                {
+                                    id: _image
+                                    width: Math.min(parent.width, parent.height) * 0.9
+                                    height: width
+                                    anchors.centerIn: parent
+
+                                    sourceSize.width: 200
+
+                                    fillMode: Image.PreserveAspectFit
+                                    antialiasing: false
+                                    smooth: true
+                                    asynchronous: true
+
+                                    source: "image://artwork/album:"+model.artist + ":"+ model.album
+
+                                    onStatusChanged:
+                                    {
+                                        if (status == Image.Error)
+                                            source = "qrc:/assets/cover.png";
+                                    }
+
+                                    layer.enabled: true
+                                    layer.effect: OpacityMask
+                                    {
+                                        maskSource: Item
                                         {
-                                            anchors.centerIn: parent
                                             width: _image.width
                                             height: _image.height
-                                            radius: Maui.Style.radiusV
+
+                                            Rectangle
+                                            {
+                                                anchors.centerIn: parent
+                                                width: _image.width
+                                                height: _image.height
+                                                radius: Maui.Style.radiusV
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                }
 
-                Item
-                {
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: Maui.Style.iconSizes.big
-
-                    Rectangle
+                    Item
                     {
-                        anchors.centerIn: parent
-                        visible: (_listView.currentIndex < _listView.count - 1) && (_listView.count > 1)
-                        height: Maui.Style.iconSizes.small
-                        width : height
+                        Layout.fillHeight: true
+                        Layout.preferredWidth: Maui.Style.iconSizes.big
 
-                        radius: height
+                        Rectangle
+                        {
+                            anchors.centerIn: parent
+                            visible: (_listView.currentIndex < _listView.count - 1) && (_listView.count > 1)
+                            height: Maui.Style.iconSizes.small
+                            width : height
 
-                        color: Kirigami.Theme.textColor
-                        opacity: 0.4
+                            radius: height
+
+                            color: Kirigami.Theme.textColor
+                            opacity: 0.4
+                        }
                     }
                 }
-            }
 
-            RowLayout
-            {
-                Layout.fillWidth: true
-                Layout.preferredHeight: Maui.Style.toolBarHeight
-
-                ToolButton
-                {
-                    icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
-                    checked: _drawer.visible
-                    onClicked: _drawer.toggle()
-                    Layout.alignment: Qt.AlignCenter
-                }
-
-                ColumnLayout
+                RowLayout
                 {
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.alignment: Qt.AlignCenter
-                    spacing: 0
+                    Layout.preferredHeight: Maui.Style.toolBarHeight
+
+                    ToolButton
+                    {
+                        icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
+                        checked: _drawer.visible
+                        onClicked: _drawer.toggle()
+                        Layout.alignment: Qt.AlignCenter
+                    }
+
+                    ColumnLayout
+                    {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignCenter
+                        spacing: 0
+
+                        Label
+                        {
+                            id: _label1
+                            visible: text.length
+                            Layout.fillWidth: true
+                            Layout.fillHeight: false
+                            verticalAlignment: Qt.AlignVCenter
+                            horizontalAlignment: Qt.AlignHCenter
+                            text: root.currentTrack.title
+                            elide: Text.ElideMiddle
+                            wrapMode: Text.NoWrap
+                            color: control.Kirigami.Theme.textColor
+                            font.weight: Font.Normal
+                            font.pointSize: Maui.Style.fontSizes.huge
+                        }
+
+                        Label
+                        {
+                            id: _label2
+                            visible: text.length
+                            Layout.fillWidth: true
+                            Layout.fillHeight: false
+                            verticalAlignment: Qt.AlignVCenter
+                            horizontalAlignment: Qt.AlignHCenter
+                            text: root.currentTrack.artist
+                            elide: Text.ElideMiddle
+                            wrapMode: Text.NoWrap
+                            color: control.Kirigami.Theme.textColor
+                            font.weight: Font.Normal
+                            font.pointSize: Maui.Style.fontSizes.big
+                            opacity: 0.7
+                        }
+                    }
+
+                    ToolButton
+                    {
+                        icon.name: "documentinfo"
+                        onClicked:
+                        {
+                            _stackView.push(_infoComponent)
+                        }
+
+                        Layout.alignment: Qt.AlignCenter
+                    }
+                }
+
+                RowLayout
+                {
+                    Layout.fillWidth: true
 
                     Label
                     {
-                        id: _label1
                         visible: text.length
                         Layout.fillWidth: true
                         Layout.fillHeight: false
                         verticalAlignment: Qt.AlignVCenter
                         horizontalAlignment: Qt.AlignHCenter
-                        text: root.currentTrack.title
+                        text: progressTimeLabel
                         elide: Text.ElideMiddle
                         wrapMode: Text.NoWrap
                         color: control.Kirigami.Theme.textColor
                         font.weight: Font.Normal
-                        font.pointSize: Maui.Style.fontSizes.huge
+                        font.pointSize: Maui.Style.fontSizes.medium
+                        opacity: 0.7
+                    }
+
+                    Slider
+                    {
+                        id: progressBar
+                        Layout.fillWidth: true
+                        padding: 0
+                        from: 0
+                        to: 1000
+                        value: player.pos/player.duration*1000
+                        spacing: 0
+                        focus: true
+                        onMoved: player.pos = (player.duration / 1000) * value
                     }
 
                     Label
                     {
-                        id: _label2
                         visible: text.length
                         Layout.fillWidth: true
                         Layout.fillHeight: false
                         verticalAlignment: Qt.AlignVCenter
                         horizontalAlignment: Qt.AlignHCenter
-                        text: root.currentTrack.artist
+                        text: durationTimeLabel
                         elide: Text.ElideMiddle
                         wrapMode: Text.NoWrap
                         color: control.Kirigami.Theme.textColor
                         font.weight: Font.Normal
-                        font.pointSize: Maui.Style.fontSizes.big
+                        font.pointSize: Maui.Style.fontSizes.medium
                         opacity: 0.7
                     }
                 }
 
-                ToolButton
+                Maui.ToolBar
                 {
-                    icon.name: "documentinfo"
-                    onClicked:
-                    {
-                        _stackView.push(_infoComponent)
-                    }
-
-                    Layout.alignment: Qt.AlignCenter
-                }
-            }
-
-            RowLayout
-            {
-                Layout.fillWidth: true
-
-                Label
-                {
-                    visible: text.length
+                    preferredHeight: Maui.Style.toolBarHeight * 2
                     Layout.fillWidth: true
-                    Layout.fillHeight: false
-                    verticalAlignment: Qt.AlignVCenter
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: progressTimeLabel
-                    elide: Text.ElideMiddle
-                    wrapMode: Text.NoWrap
-                    color: control.Kirigami.Theme.textColor
-                    font.weight: Font.Normal
-                    font.pointSize: Maui.Style.fontSizes.medium
-                    opacity: 0.7
-                }
 
-                Slider
-                {
-                    id: progressBar
-                    Layout.fillWidth: true
-                    padding: 0
-                    from: 0
-                    to: 1000
-                    value: player.pos/player.duration*1000
-                    spacing: 0
-                    focus: true
-                    onMoved: player.pos = (player.duration / 1000) * value
-                }
+                    position: ToolBar.Footer
 
-                Label
-                {
-                    visible: text.length
-                    Layout.fillWidth: true
-                    Layout.fillHeight: false
-                    verticalAlignment: Qt.AlignVCenter
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: durationTimeLabel
-                    elide: Text.ElideMiddle
-                    wrapMode: Text.NoWrap
-                    color: control.Kirigami.Theme.textColor
-                    font.weight: Font.Normal
-                    font.pointSize: Maui.Style.fontSizes.medium
-                    opacity: 0.7
-                }
-            }
+                    background: null
 
-            Maui.ToolBar
-            {
-                preferredHeight: Maui.Style.toolBarHeight * 2
-                Layout.fillWidth: true
-
-                position: ToolBar.Footer
-
-                background: null
-
-                middleContent: [
-                    ToolButton
-                    {
-                        id: babeBtnIcon
-                        icon.width: Maui.Style.iconSizes.big
-                        icon.height: Maui.Style.iconSizes.big
-                        icon.name: "love"
-                        flat: true
-                        enabled: root.currentTrack
-                        checked: root.currentTrack.url ? FB.Tagging.isFav(root.currentTrack.url) : false
-                        icon.color: checked ? babeColor :  Kirigami.Theme.textColor
-
-                        onClicked:
+                    middleContent: [
+                        ToolButton
                         {
-                            mainPlaylist.listModel.list.fav(root.currentTrackIndex, !FB.Tagging.isFav(root.currentTrack.url))
-                            root.currentTrackChanged()
-                        }
-                    },
+                            id: babeBtnIcon
+                            icon.width: Maui.Style.iconSizes.big
+                            icon.height: Maui.Style.iconSizes.big
+                            icon.name: "love"
+                            flat: true
+                            enabled: root.currentTrack
+                            checked: root.currentTrack.url ? FB.Tagging.isFav(root.currentTrack.url) : false
+                            icon.color: checked ? babeColor :  Kirigami.Theme.textColor
 
-                    ToolButton
-                    {
-                        icon.name: "media-skip-backward"
-                          flat: true
-                        icon.color: Kirigami.Theme.textColor
-                        icon.width: Maui.Style.iconSizes.big
-                        icon.height: Maui.Style.iconSizes.big
-                        onClicked: Player.previousTrack()
-                    },
-
-                    ToolButton
-                    {
-                        id: playIcon
-                          flat: true
-                        icon.width: Maui.Style.iconSizes.huge
-                        icon.height: Maui.Style.iconSizes.huge
-                        enabled: root.currentTrackIndex >= 0
-                        icon.color: Kirigami.Theme.textColor
-                        icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
-                        onClicked: player.playing ? player.pause() : player.play()
-                    },
-
-                    ToolButton
-                    {
-                        id: nextBtn
-                          flat: true
-                        icon.color: Kirigami.Theme.textColor
-                        icon.width: Maui.Style.iconSizes.big
-                        icon.height: Maui.Style.iconSizes.big
-                        icon.name: "media-skip-forward"
-                        onClicked: Player.nextTrack()
-                    },
-
-                    ToolButton
-                    {
-                        id: shuffleBtn
-                          flat: true
-                        icon.width: Maui.Style.iconSizes.big
-                        icon.height: Maui.Style.iconSizes.big
-
-                        icon.name: switch(playlist.playMode)
-                                   {
-                                   case Vvave.Playlist.Normal: return "media-playlist-normal"
-                                   case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
-                                   case Vvave.Playlist.Repeat: return "media-playlist-repeat"
-                                   }
-                        onClicked:
-                        {
-                            switch(playlist.playMode)
+                            onClicked:
                             {
-                            case Vvave.Playlist.Normal:
-                                playlist.playMode = Vvave.Playlist.Shuffle
-                                break
+                                mainPlaylist.listModel.list.fav(root.currentTrackIndex, !FB.Tagging.isFav(root.currentTrack.url))
+                                root.currentTrackChanged()
+                            }
+                        },
 
-                            case Vvave.Playlist.Shuffle:
-                                playlist.playMode = Vvave.Playlist.Repeat
-                                break
+                        ToolButton
+                        {
+                            icon.name: "media-skip-backward"
+                            flat: true
+                            icon.color: Kirigami.Theme.textColor
+                            icon.width: Maui.Style.iconSizes.big
+                            icon.height: Maui.Style.iconSizes.big
+                            onClicked: Player.previousTrack()
+                        },
+
+                        ToolButton
+                        {
+                            id: playIcon
+                            flat: true
+                            icon.width: Maui.Style.iconSizes.huge
+                            icon.height: Maui.Style.iconSizes.huge
+                            enabled: root.currentTrackIndex >= 0
+                            icon.color: Kirigami.Theme.textColor
+                            icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
+                            onClicked: player.playing ? player.pause() : player.play()
+                        },
+
+                        ToolButton
+                        {
+                            id: nextBtn
+                            flat: true
+                            icon.color: Kirigami.Theme.textColor
+                            icon.width: Maui.Style.iconSizes.big
+                            icon.height: Maui.Style.iconSizes.big
+                            icon.name: "media-skip-forward"
+                            onClicked: Player.nextTrack()
+                        },
+
+                        ToolButton
+                        {
+                            id: shuffleBtn
+                            flat: true
+                            icon.width: Maui.Style.iconSizes.big
+                            icon.height: Maui.Style.iconSizes.big
+
+                            icon.name: switch(playlist.playMode)
+                                       {
+                                       case Vvave.Playlist.Normal: return "media-playlist-normal"
+                                       case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
+                                       case Vvave.Playlist.Repeat: return "media-playlist-repeat"
+                                       }
+                            onClicked:
+                            {
+                                switch(playlist.playMode)
+                                {
+                                case Vvave.Playlist.Normal:
+                                    playlist.playMode = Vvave.Playlist.Shuffle
+                                    break
+
+                                case Vvave.Playlist.Shuffle:
+                                    playlist.playMode = Vvave.Playlist.Repeat
+                                    break
 
 
-                            case Vvave.Playlist.Repeat:
-                                playlist.playMode = Vvave.Playlist.Normal
-                                break
+                                case Vvave.Playlist.Repeat:
+                                    playlist.playMode = Vvave.Playlist.Normal
+                                    break
+                                }
                             }
                         }
-                    }
-                ]
+                    ]
+                }
             }
         }
     }
