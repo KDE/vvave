@@ -19,7 +19,6 @@ import "../../utils/Player.js" as Player
 StackView
 {
     id: control
-    clip: true
 
     property string currentPlaylist
     property string playlistQuery

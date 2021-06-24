@@ -14,7 +14,6 @@ import org.maui.vvave 1.0
 StackView
 {
     id: control
-    clip: true
 
     property string currentFolder : ""
     property Flickable flickable: currentItem.flickable
