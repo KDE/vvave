@@ -148,6 +148,7 @@ Maui.Page
 
             onClicked:
             {
+                table.forceActiveFocus()
                 if(Maui.Handy.isTouch)
                     Player.playAt(index)
             }

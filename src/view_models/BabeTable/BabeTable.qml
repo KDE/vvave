@@ -200,8 +200,6 @@ Maui.Page
     {
         id: _listBrowser
         anchors.fill: parent
-        clip: true
-        focus: true
         holder.visible: control.listModel.list.count === 0
         enableLassoSelection: true
         selectionMode: root.selectionMode
@@ -211,6 +209,19 @@ Maui.Page
             for(var i in indexes)
             {
                 H.addToSelection(listModel.get(indexes[i]))
+            }
+        }
+
+        onKeyPress:
+        {
+            if(event.key === Qt.Key_Return)
+            {
+                control.rowClicked(_listBrowser.currentIndex)
+            }
+
+            if(event.key === Qt.Key_Space)
+            {
+                control.appendTrack(_listBrowser.currentIndex)
             }
         }
 
@@ -270,6 +281,7 @@ Maui.Page
             width: ListView.view.width
             number: trackNumberVisible
             coverArt: coverArtVisible ? (control.width > 200) : coverArtVisible
+
             onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
             onRightClicked: if(allowMenu) openItemMenu(index)
 
@@ -306,6 +318,7 @@ Maui.Page
 
         onClicked:
         {
+            _listBrowser.forceActiveFocus()
             currentIndex = index
             if(selectionMode)
             {
@@ -357,8 +370,7 @@ function openItemMenu(index)
 {
     currentIndex = index
     contextMenu.fav = FB.Tagging.isFav(listModel.get(currentIndex).url)
-    contextMenu.open()
-
+    contextMenu.show()
     rowPressed(index)
 }
 
@@ -367,7 +379,6 @@ function goToAlbum()
     swipeView.currentIndex = viewsIndex.albums
     const item = listModel.get(control.currentIndex)
     albumsView.populateTable(item.album, item.artist)
-    contextMenu.close()
 }
 
 function goToArtist()
@@ -375,7 +386,6 @@ function goToArtist()
     swipeView.currentIndex = viewsIndex.artists
     const item = listModel.get(control.currentIndex)
     artistsView.populateTable(undefined, item.artist)
-    contextMenu.close()
 }
 
 function filterSelectedItems(path)
@@ -398,6 +408,11 @@ function filterSelection(url)
     {
         return [url]
     }
+}
+
+function forceActiveFocus()
+{
+    _listBrowser.forceActiveFocus()
 }
 
 }
