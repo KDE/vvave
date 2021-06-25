@@ -3,7 +3,7 @@ import QtQuick.Controls 2.14
 
 import org.mauikit.controls 1.3 as Maui
 
-import "../view_models/BabeTable"
+import "BabeTable"
 
 import "../db/Queries.js" as Q
 import "../utils/Player.js" as Player

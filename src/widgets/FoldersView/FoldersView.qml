@@ -3,9 +3,8 @@ import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
 import org.mauikit.controls 1.3 as Maui
-import org.kde.kirigami 2.7 as Kirigami
 
-import "../../view_models/BabeTable"
+import "../BabeTable"
 import "../../db/Queries.js" as Q
 import "../../utils/Player.js" as Player
 
@@ -48,7 +47,7 @@ StackView
         gridView.itemSize: 120
         gridView.itemHeight: gridView.itemSize * 1.2
 
-        listView.snapMode: ListView.SnapOneItem       
+        listView.snapMode: ListView.SnapOneItem
 
         headBar.middleContent: Maui.TextField
         {

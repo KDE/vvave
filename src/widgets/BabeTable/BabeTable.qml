@@ -3,13 +3,13 @@ import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.9 as Kirigami
+
 import org.mauikit.controls 1.3 as Maui
 import org.mauikit.filebrowsing 1.3 as FB
 
 import org.maui.vvave 1.0
 
 import "../../utils/Player.js" as Player
-import "../../utils/Help.js" as H
 
 import "../../widgets"
 
@@ -208,7 +208,7 @@ Maui.Page
         {
             for(var i in indexes)
             {
-                H.addToSelection(listModel.get(indexes[i]))
+                selectionBar.addToSelection(listModel.get(indexes[i]))
             }
         }
 
@@ -285,7 +285,7 @@ Maui.Page
             onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
             onRightClicked: if(allowMenu) openItemMenu(index)
 
-            onToggled: H.addToSelection(model)
+            onToggled: selectionBar.addToSelection(model)
             checked: selectionBar.contains(model.url)
             checkable: selectionMode
 
@@ -322,7 +322,7 @@ Maui.Page
             currentIndex = index
             if(selectionMode)
             {
-                H.addToSelection(model)
+                selectionBar.addToSelection(model)
                 return
             }
 

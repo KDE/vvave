@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 
@@ -8,7 +7,6 @@ import org.kde.kirigami 2.6 as Kirigami
 
 import "../../utils"
 import ".."
-import "../../utils/Help.js" as H
 
 Maui.ContextualMenu
 {
@@ -35,7 +33,7 @@ Maui.ContextualMenu
         icon.name: "item-select"
         onTriggered:
         {
-            H.addToSelection(listModel.get(listView.currentIndex))
+            selectionBar.addToSelection(listModel.get(listView.currentIndex))
 
             selectionMode = Maui.Handy.isTouch
             control.close()

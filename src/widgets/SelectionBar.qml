@@ -1,10 +1,8 @@
 import QtQuick 2.0
-import QtQuick 2.10
 import QtQuick.Controls 2.10
-import QtQuick.Layouts 1.3
 
 import "../utils/Player.js" as Player
-import "../view_models/BabeTable"
+import "BabeTable"
 
 import org.kde.kirigami 2.7 as Kirigami
 import org.mauikit.controls 1.2 as Maui
@@ -13,13 +11,6 @@ Maui.SelectionBar
 {
     id: control
     width: Maui.Style.unit * 200
-
-    property int rate : 0
-    property string starColor : "#FFC107"
-    property string starReg : Kirigami.Theme.textColor
-    property string starIcon: "draw-star"
-
-    signal rateClicked(int rate)
 
     listDelegate: TableDelegate
     {
@@ -91,5 +82,22 @@ Maui.SelectionBar
             _dialogLoader.sourceComponent = _removeDialogComponent
             dialog.open()
         }
+    }
+
+    function addToSelection(item)
+    {
+        if(control.contains(item.url))
+        {
+            control.removeAtUri(item.url)
+            return
+        }
+
+        item.thumbnail= item.artwork
+        item.icon = "audio-x-generic"
+        item.label= item.title
+        item.mime= "image/png"
+        item.tooltip= item.url
+        item.path= item.url
+        control.append(item.url, item)
     }
 }

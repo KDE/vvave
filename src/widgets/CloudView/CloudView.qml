@@ -7,8 +7,8 @@ import org.kde.kirigami 2.7 as Kirigami
 
 import org.maui.vvave 1.0
 
-import "../../view_models/BabeTable"
-import "../../view_models/BabeGrid"
+import "../BabeTable"
+import "../BabeGrid"
 import "../../utils/Player.js" as Player
 
 Maui.Page

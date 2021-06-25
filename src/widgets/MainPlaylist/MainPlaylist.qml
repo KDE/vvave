@@ -1,17 +1,15 @@
 import QtQuick 2.14
 import QtQml 2.14
+import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.12
-import QtGraphicalEffects 1.0
 
 import org.kde.kirigami 2.8 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
-import "../../utils"
-import "../../widgets"
-import "../../view_models/BabeTable"
+
+import "../BabeTable"
 
 Maui.Page
 {

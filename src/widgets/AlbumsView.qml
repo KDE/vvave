@@ -1,16 +1,14 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.10
-import QtQuick.Layouts 1.3
 
-import "../view_models/BabeGrid"
-import "../view_models/BabeTable"
+import "BabeGrid"
+import "BabeTable"
 
 import "../db/Queries.js" as Q
-import "../utils/Help.js" as H
 import "../utils/Player.js" as Player
 
-import org.kde.kirigami 2.7 as Kirigami
 import org.mauikit.controls 1.0 as Maui
+
 import org.maui.vvave 1.0
 
 StackView

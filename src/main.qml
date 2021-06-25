@@ -20,13 +20,6 @@ import "widgets/SettingsView"
 import "widgets/CloudView"
 import "widgets/FoldersView"
 
-import "view_models"
-import "view_models/BabeTable"
-
-import "view_models/BabeGrid"
-
-import "db/Queries.js" as Q
-import "utils/Help.js" as H
 import "utils/Player.js" as Player
 
 Maui.ApplicationWindow

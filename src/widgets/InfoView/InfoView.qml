@@ -1,14 +1,11 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
-import QtGraphicalEffects 1.0
 
 import org.mauikit.controls 1.3 as Maui
 import org.kde.kirigami 2.7 as Kirigami
 
 import org.maui.vvave 1.0 as Vvave
-
-import "../../view_models"
 
 Item
 {

@@ -1,19 +1,11 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
-import QtGraphicalEffects 1.12
 
 import org.kde.kirigami 2.8 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 
 import org.maui.vvave 1.0 as Vvave
-
-import "../../utils"
-
-import "../../view_models"
-import "../../widgets"
-import "../../db/Queries.js" as Q
-import "../../utils/Help.js" as H
 
 Maui.AltBrowser
 {
@@ -165,7 +157,5 @@ Maui.AltBrowser
                 currentPlaylist = model.playlist
             }
         }
-
     }
-
 }
