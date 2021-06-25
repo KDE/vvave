@@ -32,17 +32,26 @@ Maui.Page
     headBar.visible: true
     headBar.background: null
     headBar.height: Maui.Style.toolBarHeight
-    headBar.leftContent: ToolButton
-    {
-        icon.name: "go-previous"
-        onClicked:
+    headBar.leftContent: [
+        ToolButton
         {
-            if(_stackView.depth === 2)
-                _stackView.pop()
-            else
-                toggleFocusView()
+            icon.name: "go-previous"
+            onClicked:
+            {
+                if(_stackView.depth === 2)
+                    _stackView.pop()
+                else
+                    toggleFocusView()
+            }
+        },
+
+        ToolButton
+        {
+            icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
+            checked: _drawer.visible
+            onClicked: _drawer.toggle()
         }
-    }
+    ]
 
     headBar.farRightContent: Maui.WindowControls
     {
@@ -293,47 +302,47 @@ Maui.Page
 
 
 
-                    ColumnLayout
+                ColumnLayout
+                {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: Maui.Style.toolBarHeight
+
+                    Layout.alignment: Qt.AlignCenter
+                    spacing: 0
+
+                    Label
                     {
+                        id: _label1
+                        visible: text.length
                         Layout.fillWidth: true
-                        Layout.preferredHeight: Maui.Style.toolBarHeight
-
-                        Layout.alignment: Qt.AlignCenter
-                        spacing: 0
-
-                        Label
-                        {
-                            id: _label1
-                            visible: text.length
-                            Layout.fillWidth: true
-                            Layout.fillHeight: false
-                            verticalAlignment: Qt.AlignVCenter
-                            horizontalAlignment: Qt.AlignHCenter
-                            text: root.currentTrack.title
-                            elide: Text.ElideMiddle
-                            wrapMode: Text.NoWrap
-                            color: control.Kirigami.Theme.textColor
-                            font.weight: Font.Normal
-                            font.pointSize: Maui.Style.fontSizes.huge
-                        }
-
-                        Label
-                        {
-                            id: _label2
-                            visible: text.length
-                            Layout.fillWidth: true
-                            Layout.fillHeight: false
-                            verticalAlignment: Qt.AlignVCenter
-                            horizontalAlignment: Qt.AlignHCenter
-                            text: root.currentTrack.artist
-                            elide: Text.ElideMiddle
-                            wrapMode: Text.NoWrap
-                            color: control.Kirigami.Theme.textColor
-                            font.weight: Font.Normal
-                            font.pointSize: Maui.Style.fontSizes.big
-                            opacity: 0.7
-                        }
+                        Layout.fillHeight: false
+                        verticalAlignment: Qt.AlignVCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: root.currentTrack.title
+                        elide: Text.ElideMiddle
+                        wrapMode: Text.NoWrap
+                        color: control.Kirigami.Theme.textColor
+                        font.weight: Font.Normal
+                        font.pointSize: Maui.Style.fontSizes.huge
                     }
+
+                    Label
+                    {
+                        id: _label2
+                        visible: text.length
+                        Layout.fillWidth: true
+                        Layout.fillHeight: false
+                        verticalAlignment: Qt.AlignVCenter
+                        horizontalAlignment: Qt.AlignHCenter
+                        text: root.currentTrack.artist
+                        elide: Text.ElideMiddle
+                        wrapMode: Text.NoWrap
+                        color: control.Kirigami.Theme.textColor
+                        font.weight: Font.Normal
+                        font.pointSize: Maui.Style.fontSizes.big
+                        opacity: 0.7
+                    }
+                }
 
 
 
@@ -396,13 +405,6 @@ Maui.Page
                     position: ToolBar.Footer
 
                     background: null
-
-                    leftContent: ToolButton
-                        {
-                            icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
-                            checked: _drawer.visible
-                            onClicked: _drawer.toggle()
-                        }
 
                     middleContent: [
                         ToolButton
