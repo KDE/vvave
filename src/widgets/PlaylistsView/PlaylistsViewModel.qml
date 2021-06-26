@@ -11,8 +11,6 @@ Maui.AltBrowser
 {
     id: control
 
-    anchors.fill: parent
-
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
