@@ -297,9 +297,9 @@ Control
         }
     }
 
-    Maui.Separator
+    Kirigami.Separator
     {
-        edge: Qt.TopEdge
+//        edge: Qt.TopEdge
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
