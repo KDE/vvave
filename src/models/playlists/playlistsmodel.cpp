@@ -14,7 +14,7 @@ PlaylistsModel::PlaylistsModel(QObject *parent)
     });
 
     connect(Tagging::getInstance(), &Tagging::urlTagged, [this](QUrl, QString tag) {
-        const auto index = this->mappedIndex(this->indexOf(FMH::MODEL_KEY::PLAYLIST, tag));
+        const auto index = this->indexOf(FMH::MODEL_KEY::PLAYLIST, tag);
         auto item = this->list[index];
         item[FMH::MODEL_KEY::PREVIEW] = playlistArtworkPreviews(tag);
         this->list[index] = item;

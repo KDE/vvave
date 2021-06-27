@@ -66,7 +66,7 @@ Maui.AltBrowser
              const index = _albumsList.indexOfName(typingQuery)
              if(index > -1)
              {
-                 control.currentIndex = index
+                 control.currentIndex = _albumsModel.mappedFromSource(index)
              }
 
              typingQuery = ""

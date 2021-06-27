@@ -148,5 +148,5 @@ void Cloud::getFileUrl(const int &index)
     if (index >= this->list.size() || index < 0)
         return;
 
-    this->getFileUrl(this->list.at(this->mappedIndex(index))[FMH::MODEL_KEY::ID]);
+    this->getFileUrl(this->list.at((index))[FMH::MODEL_KEY::ID]);
 }

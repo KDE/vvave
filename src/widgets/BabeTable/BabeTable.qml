@@ -103,7 +103,7 @@ Maui.Page
 
             onEdited:
             {
-                control.list.updateMetadata(data, index)
+                control.list.updateMetadata(data, model.mappedToSource(index))
             }
         }
     }
@@ -154,7 +154,7 @@ Maui.Page
 
         onFavClicked:
         {
-            listModel.list.fav(control.currentIndex, !FB.Tagging.isFav(listModel.get(control.currentIndex).url))
+            listModel.list.fav(listModel.mappedToSource(control.currentIndex), !FB.Tagging.isFav(listModel.get(control.currentIndex).url))
         }
 
         onQueueClicked: Player.queueTracks([listModel.get(control.currentIndex)])
