@@ -6,6 +6,7 @@ import Qt.labs.settings 1.0
 import org.kde.kirigami 2.7 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 import org.mauikit.filebrowsing 1.3 as FB
+import org.mauikit.accounts 1.0 as MA
 
 import org.maui.vvave 1.0
 
@@ -189,7 +190,9 @@ Maui.ApplicationWindow
 
     mainMenu: [
 
-        Action
+        MA.AccountsMenuItem{},
+
+        MenuItem
         {
             text: i18n("Settings")
             icon.name: "settings-configure"
@@ -198,6 +201,13 @@ Maui.ApplicationWindow
                 _dialogLoader.sourceComponent = _settingsDialogComponent
                 dialog.open()
             }
+        },
+
+        MenuItem
+        {
+            text: i18n("About")
+            icon.name: "documentinfo"
+            onTriggered: root.about()
         }
     ]
 

@@ -137,6 +137,7 @@ Maui.Page
         initialItem: Loader
         {
             asynchronous: true
+            active: visible || item
 
             ColumnLayout
             {
