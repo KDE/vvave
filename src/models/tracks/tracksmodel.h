@@ -40,7 +40,6 @@ signals:
     void missingFiles(QStringList urls);
 
 public slots:
-    void copy(const TracksModel *model);
     void append(const QVariantMap &item);
     void appendAt(const QVariantMap &item, const int &at);
     void appendQuery(const QString &query);

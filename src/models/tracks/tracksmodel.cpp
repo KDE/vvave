@@ -93,14 +93,6 @@ void TracksModel::setList()
     }
 }
 
-void TracksModel::copy(const TracksModel *model)
-{
-    emit this->preListChanged();
-    this->list << model->getItems();
-    emit this->postListChanged();
-    emit this->countChanged();
-}
-
 void TracksModel::append(const QVariantMap &item)
 {
     if (item.isEmpty())
