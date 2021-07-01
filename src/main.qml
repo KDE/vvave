@@ -188,7 +188,9 @@ Maui.ApplicationWindow
         composerList.strict: false
     }
 
-    mainMenu: [
+    headBar.leftContent: Maui.ToolButtonMenu
+    {
+        icon.name: "application-menu"
 
         MA.AccountsMenuItem{},
 
@@ -201,7 +203,7 @@ Maui.ApplicationWindow
                 _dialogLoader.sourceComponent = _settingsDialogComponent
                 dialog.open()
             }
-        },
+        }
 
         MenuItem
         {
@@ -209,7 +211,7 @@ Maui.ApplicationWindow
             icon.name: "documentinfo"
             onTriggered: root.about()
         }
-    ]
+    }
 
     sideBar: Maui.AbstractSideBar
     {
