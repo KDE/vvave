@@ -192,7 +192,7 @@ Maui.ApplicationWindow
     {
         icon.name: "application-menu"
 
-        MA.AccountsMenuItem{},
+        MA.AccountsMenuItem{}
 
         MenuItem
         {
