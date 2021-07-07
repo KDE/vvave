@@ -24,16 +24,16 @@ Maui.AltBrowser
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
-    headBar.visible: false
+    headBar.visible: currentView.contentHeight > height
 
-//    headBar.middleContent: Maui.TextField
-//    {
-//        Layout.fillWidth: true
-//        Layout.maximumWidth: 500
-//        placeholderText: i18n("Filter")
-//        onAccepted: _albumsModel.filter = text
-//        onCleared: _albumsModel.filter = ""
-//    }
+    headBar.middleContent: Maui.TextField
+    {
+        Layout.fillWidth: true
+        Layout.maximumWidth: 500
+        placeholderText: i18n("Filter")
+        onAccepted: _albumsModel.filter = text
+        onCleared: _albumsModel.filter = ""
+    }
 
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 

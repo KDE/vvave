@@ -48,7 +48,7 @@ StackView
         gridView.itemHeight: gridView.itemSize * 1.2
 
         listView.snapMode: ListView.SnapOneItem
-
+        headBar.visible: currentView.contentHeight > height
         headBar.middleContent: Maui.TextField
         {
             Layout.fillWidth: true

@@ -109,9 +109,11 @@ Maui.AltBrowser
         Maui.GalleryRollItem
         {
             id: _collageDelegate
-            anchors.centerIn: parent
-            width: control.gridView.itemSize - Maui.Style.space.medium
-            height:control.gridView.itemHeight  - Maui.Style.space.medium
+            anchors.fill: parent
+            anchors.margins: Kirigami.Settings.isMobile ? Maui.Style.space.small : Maui.Style.space.medium
+
+            imageWidth: 120
+            imageHeight: 120
 
             isCurrentItem: parent.GridView.isCurrentItem
             images: model.preview.split(",")
