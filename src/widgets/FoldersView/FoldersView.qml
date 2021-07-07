@@ -3,6 +3,7 @@ import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
 import org.mauikit.controls 1.3 as Maui
+import org.kde.kirigami 2.14 as Kirigami
 
 import "../BabeTable"
 import "../../db/Queries.js" as Q
@@ -17,37 +18,11 @@ StackView
     property string currentFolder : ""
     property Flickable flickable: currentItem.flickable
 
-    initialItem: Maui.AltBrowser
+    initialItem: Maui.Page
     {
-        id: browser
+        Kirigami.Theme.colorSet: Kirigami.Theme.View
+        Kirigami.Theme.inherit: false
 
-        holder.visible: false
-        holder.emoji: "qrc:/assets/dialog-information.svg"
-        holder.title : i18n("No Folders!")
-        holder.body: i18n("Add new music to your sources to browse by folders")
-        holder.emojiSize: Maui.Style.iconSizes.huge
-
-        model: Maui.BaseModel
-        {
-            sort: "label"
-            sortOrder: Qt.AscendingOrder
-            recursiveFilteringEnabled: true
-            sortCaseSensitivity: Qt.CaseInsensitive
-            filterCaseSensitivity: Qt.CaseInsensitive
-
-            list: Folders
-            {
-                id: _foldersList
-                folders: Vvave.folders
-            }
-        }
-
-        viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
-
-        gridView.itemSize: 120
-        gridView.itemHeight: gridView.itemSize * 1.2
-
-        listView.snapMode: ListView.SnapOneItem
         headBar.visible: currentView.contentHeight > height
         headBar.middleContent: Maui.TextField
         {
@@ -58,21 +33,45 @@ StackView
             onCleared:  browser.model.filter = text
         }
 
-        gridDelegate: Item
+        Maui.Holder
         {
-            height: GridView.view.cellHeight
-            width: GridView.view.cellWidth
+            visible: _foldersList.count === 0
+            emoji: "qrc:/assets/dialog-information.svg"
+            title : i18n("No Folders!")
+            body: i18n("Add new music to your sources to browse by folders")
+            emojiSize: Maui.Style.iconSizes.huge
+        }
 
-            Maui.GridBrowserDelegate
+        Maui.ListBrowser
+        {
+            id: browser
+
+            anchors.fill: parent
+
+            model: Maui.BaseModel
             {
-                anchors.fill: parent
-                anchors.margins: Maui.Style.space.medium
-                iconSizeHint: Maui.Style.iconSizes.large
+                sort: "label"
+                sortOrder: Qt.AscendingOrder
+                recursiveFilteringEnabled: true
+                sortCaseSensitivity: Qt.CaseInsensitive
+                filterCaseSensitivity: Qt.CaseInsensitive
+
+                list: Folders
+                {
+                    id: _foldersList
+                    folders: Vvave.folders
+                }
+            }
+
+            delegate: Maui.ListBrowserDelegate
+            {
+                width: ListView.view.width
+                height: Maui.Style.rowHeight * 1.5
+                isCurrentItem: ListView.isCurrentItem
+                iconSizeHint: Maui.Style.iconSizes.medium
                 label1.text: model.label
+                label2.text: model.path
                 iconSource: model.icon
-                padding: Maui.Style.space.medium
-                isCurrentItem: parent.GridView.isCurrentItem
-                tooltipText: model.path
 
                 onClicked:
                 {
@@ -90,35 +89,6 @@ StackView
                     {
                         filter(model.path)
                     }
-                }
-            }
-        }
-
-        listDelegate: Maui.ListBrowserDelegate
-        {
-            width: ListView.view.width
-            height: Maui.Style.rowHeight * 1.5
-            isCurrentItem: ListView.isCurrentItem
-            iconSizeHint: Maui.Style.iconSizes.big
-            label1.text: model.label
-            label2.text: model.path
-            iconSource: model.icon
-
-            onClicked:
-            {
-                browser.currentIndex = index
-                if(Maui.Handy.singleClick)
-                {
-                    filter(model.path)
-                }
-            }
-
-            onDoubleClicked:
-            {
-                browser.currentIndex = index
-                if(!Maui.Handy.singleClick)
-                {
-                    filter(model.path)
                 }
             }
         }
