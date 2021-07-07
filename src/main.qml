@@ -65,9 +65,7 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property color babeColor: "#f84172"
 
-    altHeader: Kirigami.Settings.isMobile
-
-    headBar.visible: !focusView
+    headBar.visible: false
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
@@ -100,31 +98,34 @@ Maui.ApplicationWindow
         model: mainPlaylist.listModel.list
         onCurrentTrackChanged: Player.playTrack()
 
-//        onMissingFile:
-//        {
-//            var message = i18n("Missing file")
-//            var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
-//            notify("dialog-question", message, messageBody, function ()
-//            {
-//                console.log("REMOVE TIU MSISING")
-//                mainPlaylist.table.list.remove(mainPlaylist.table.currentIndex)
-//                console.log("REMOVE TIU MSISING 2")
+        onMissingFile:
+        {
+            var message = i18n("Missing file")
+            var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
+            notify("dialog-question", message, messageBody, function ()
+            {
+                console.log("REMOVE TIU MSISING")
+                mainPlaylist.table.list.remove(mainPlaylist.table.currentIndex)
+                console.log("REMOVE TIU MSISING 2")
 
-//            })
-//        }
+            })
+        }
     }
 
     Player
     {
         id: player
         volume: 100
-        onFinished: if (!mainlistEmpty)
-                    {
-                        if (currentTrack && currentTrack.url)
-                            mainPlaylist.listModel.list.countUp(currentTrackIndex)
+        onFinished:
+        {
+            if (!mainlistEmpty)
+            {
+                if (currentTrack && currentTrack.url)
+                    mainPlaylist.listModel.list.countUp(currentTrackIndex)
 
-                        Player.nextTrack()
-                    }
+                Player.nextTrack()
+            }
+        }
     }
 
     Loader
@@ -188,36 +189,11 @@ Maui.ApplicationWindow
         composerList.strict: false
     }
 
-    headBar.leftContent: Maui.ToolButtonMenu
-    {
-        icon.name: "application-menu"
-
-        MA.AccountsMenuItem{}
-
-        MenuItem
-        {
-            text: i18n("Settings")
-            icon.name: "settings-configure"
-            onTriggered:
-            {
-                _dialogLoader.sourceComponent = _settingsDialogComponent
-                dialog.open()
-            }
-        }
-
-        MenuItem
-        {
-            text: i18n("About")
-            icon.name: "documentinfo"
-            onTriggered: root.about()
-        }
-    }
-
     sideBar: Maui.AbstractSideBar
     {
         id: _drawer
         visible: true
-        preferredWidth: Kirigami.Units.gridUnit * 16
+        preferredWidth: Kirigami.Units.gridUnit * 18
         collapsed: !isWide
         collapsible: true
 
@@ -243,32 +219,53 @@ Maui.ApplicationWindow
         width: parent.width
     }
 
-    Maui.ProgressIndicator
-    {
-        id: _scanningProgress
-        width: parent.width
-        anchors.bottom: parent.bottom
-        visible: Vvave.scanning
-    }
-
     StackView
     {
         id: _stackView
         focus: true
         anchors.fill: parent
-        anchors.bottomMargin: _scanningProgress.visible ? _scanningProgress.height : 0
 
         initialItem: Maui.Page
         {
+            id: _viewsPage
+
             floatingFooter: true
-            headBar.visible: false
+            altHeader: Kirigami.Settings.isMobile
+
+            headBar.visible: true
             flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
+
+            headBar.leftContent: Maui.ToolButtonMenu
+            {
+                icon.name: "application-menu"
+
+                MA.AccountsMenuItem{}
+
+                MenuItem
+                {
+                    text: i18n("Settings")
+                    icon.name: "settings-configure"
+                    onTriggered:
+                    {
+                        _dialogLoader.sourceComponent = _settingsDialogComponent
+                        dialog.open()
+                    }
+                }
+
+                MenuItem
+                {
+                    text: i18n("About")
+                    icon.name: "documentinfo"
+                    onTriggered: root.about()
+                }
+            }
 
             Maui.AppViews
             {
                 id: swipeView
                 anchors.fill: parent
                 maxViews: 3
+                toolbar: _viewsPage.headBar
 
                 TracksView
                 {
@@ -334,6 +331,14 @@ Maui.ApplicationWindow
                         id: cloudView
                     }
                 }
+            }
+
+            Maui.ProgressIndicator
+            {
+                id: _scanningProgress
+                width: parent.width
+                anchors.bottom: parent.bottom
+                visible: Vvave.scanning
             }
 
             footer: SelectionBar
