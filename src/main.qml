@@ -254,6 +254,7 @@ Maui.ApplicationWindow
     StackView
     {
         id: _stackView
+        focus: true
         anchors.fill: parent
         anchors.bottomMargin: _scanningProgress.visible ? _scanningProgress.height : 0
 
