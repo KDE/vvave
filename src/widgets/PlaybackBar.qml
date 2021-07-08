@@ -17,7 +17,7 @@ import "../utils/Player.js" as Player
 Control
 {
     id: control
-    implicitHeight: visible ? _footerLayout.implicitHeight : 0
+    implicitHeight: visible ? Maui.Style.toolBarHeight : 0
 
     background: Item
     {
@@ -57,249 +57,190 @@ Control
         }
     }
 
-    ColumnLayout
+    Maui.ToolBar
     {
         id: _footerLayout
+
         anchors.fill: parent
-        spacing: 0
+        position: ToolBar.Footer
+        //            visible: player.state !== MediaPlayer.StoppedState
 
-        Maui.ToolBar
+        background: Slider
         {
-            Layout.fillWidth: true
-            preferredHeight: Maui.Style.toolBarHeightAlt * 0.8
-            position: ToolBar.Footer
-            visible: player.state !== MediaPlayer.StoppedState
+            id: progressBar
+            height: 16
+            z: parent.z+1
+            padding: 0
+            from: 0
+            to: 1000
+            value: player.pos/player.duration*1000
 
-            leftContent: Label
+            spacing: 0
+            focus: true
+            onMoved: player.pos = (player.duration / 1000) * value
+            enabled: player.playing
+
+            background: Rectangle
             {
-                id: _label1
-                visible: text.length
-                verticalAlignment: Qt.AlignVCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: progressTimeLabel
-                elide: Text.ElideMiddle
-                wrapMode: Text.NoWrap
-                color: Kirigami.Theme.textColor
-            }
+                implicitWidth: progressBar.width
+                implicitHeight: progressBar.height
+                width: progressBar.availableWidth
+                color: "transparent"
+                opacity: progressBar.pressed ? 0.5 : 1
 
-            middleContent:  Item
-            {
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-
-                Label
+                Rectangle
                 {
-                    anchors.fill: parent
-                    visible: text.length
-                    verticalAlignment: Qt.AlignVCenter
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: root.title
-                    elide: Text.ElideMiddle
-                    wrapMode: Text.NoWrap
-                    color: Kirigami.Theme.textColor
+                    width: progressBar.visualPosition * parent.width
+                    height: progressBar.pressed ? 5 :  2
+                    color: Kirigami.Theme.highlightColor
                 }
             }
 
-            rightContent: Label
+            handle: Rectangle
             {
-                id: _label2
-                visible: text.length
-                verticalAlignment: Qt.AlignVCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: durationTimeLabel
-                elide: Text.ElideMiddle
-                wrapMode: Text.NoWrap
-                color: Kirigami.Theme.textColor
-                opacity: 0.7
+                x: progressBar.leftPadding + progressBar.visualPosition
+                   * (progressBar.availableWidth - width)
+                y: 0
+                implicitWidth: Maui.Style.iconSizes.medium
+                implicitHeight: 16
+                color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
+            }
+        }
+
+        farLeftContent: ToolButton
+        {
+            icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
+            onClicked: _drawer.toggle()
+
+            checked: _drawer.visible
+            ToolTip.delay: 1000
+            ToolTip.timeout: 5000
+            ToolTip.visible: hovered
+            ToolTip.text: i18n("Toogle SideBar")
+        }
+
+        rightContent: ToolButton
+        {
+            icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
+            onPressAndHold :
+            {
+                player.volume = player.volume === 0 ? 100 : 0
             }
 
-            background: Slider
+            onClicked:
             {
-                id: progressBar
-                z: parent.z+1
-                padding: 0
-                from: 0
-                to: 1000
-                value: player.pos/player.duration*1000
+                _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
+            }
 
-                spacing: 0
-                focus: true
-                onMoved: player.pos = (player.duration / 1000) * value
-                enabled: player.playing
-
-                background: Rectangle
+            Popup
+            {
+                id: _sliderPopup
+                height: 150
+                width: parent.width
+                y: -150
+                x: 0
+                //                            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPress
+                Slider
                 {
-                    implicitWidth: progressBar.width
-                    implicitHeight: progressBar.height
-                    width: progressBar.availableWidth
-                    height: implicitHeight
-                    color: "transparent"
-                    opacity: progressBar.pressed ? 0.5 : 1
+                    id: _volumeSlider
+                    visible: true
+                    height: parent.height
+                    width: 20
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    from: 0
+                    to: 100
+                    value: player.volume
+                    orientation: Qt.Vertical
 
-                    Rectangle
+                    onMoved:
                     {
-                        width: progressBar.visualPosition * parent.width
-                        height: progressBar.pressed ? progressBar.height : 5
-                        color: Kirigami.Theme.highlightColor
+                        player.volume = value
                     }
-                }
-
-                handle: Rectangle
-                {
-                    x: progressBar.leftPadding + progressBar.visualPosition
-                       * (progressBar.availableWidth - width)
-                    y: 0
-                    implicitWidth: Maui.Style.iconSizes.medium
-                    implicitHeight: progressBar.height
-                    color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
                 }
             }
         }
 
-        Maui.ToolBar
-        {
-            Layout.fillWidth: true
-            Layout.preferredHeight: Maui.Style.toolBarHeight
-            position: ToolBar.Footer
-//            visible: player.state !== MediaPlayer.StoppedState
-
-            background: Item {}
-
-            farLeftContent: ToolButton
+        middleContent: [
+            ToolButton
             {
-                icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
-                onClicked: _drawer.toggle()
-
-                checked: _drawer.visible
-                ToolTip.delay: 1000
-                ToolTip.timeout: 5000
-                ToolTip.visible: hovered
-                ToolTip.text: i18n("Toogle SideBar")
-            }
-
-            rightContent: ToolButton
-            {
-                icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
-                onPressAndHold :
-                {
-                    player.volume = player.volume === 0 ? 100 : 0
-                }
-
+                id: babeBtnIcon
+                icon.name: "love"
+                flat: true
+                enabled: currentTrack
+                checked:currentTrack.url ? FB.Tagging.isFav(currentTrack.url) : false
+                icon.color: checked ? babeColor :  Kirigami.Theme.textColor
                 onClicked:
                 {
-                    _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
+                    mainPlaylist.listModel.list.fav(currentTrackIndex, !FB.Tagging.isFav(currentTrack.url))
+                    root.currentTrackChanged()
+                }
+            },
+
+            Maui.ToolActions
+            {
+                implicitHeight: Maui.Style.iconSizes.big
+                expanded: true
+                autoExclusive: false
+                checkable: false
+
+                Action
+                {
+                    icon.name: "media-skip-backward"
+                    onTriggered: Player.previousTrack()
                 }
 
-                Popup
+                Action
                 {
-                    id: _sliderPopup
-                    height: 150
-                    width: parent.width
-                    y: -150
-                    x: 0
-                    //                            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPress
-                    Slider
-                    {
-                        id: _volumeSlider
-                        visible: true
-                        height: parent.height
-                        width: 20
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        from: 0
-                        to: 100
-                        value: player.volume
-                        orientation: Qt.Vertical
+                    id: playIcon
+                    text: i18n("Play and pause")
+                    icon.width: Maui.Style.iconSizes.big
+                    icon.height: Maui.Style.iconSizes.big
+                    enabled: currentTrackIndex >= 0
+                    icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
+                    onTriggered: player.playing ? player.pause() : player.play()
+                }
 
-                        onMoved:
-                        {
-                            player.volume = value
-                        }
+                Action
+                {
+                    text: i18n("Next")
+                    icon.name: "media-skip-forward"
+                    onTriggered: Player.nextTrack()
+                }
+            },
+
+            ToolButton
+            {
+                icon.name: switch(playlist.playMode)
+                           {
+                           case Vvave.Playlist.Normal: return "media-playlist-normal"
+                           case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
+                           case Vvave.Playlist.Repeat: return "media-playlist-repeat"
+                           }
+                onClicked:
+                {
+                    switch(playlist.playMode)
+                    {
+                    case Vvave.Playlist.Normal:
+                        playlist.playMode = Vvave.Playlist.Shuffle
+                        break
+
+                    case Vvave.Playlist.Shuffle:
+                        playlist.playMode = Vvave.Playlist.Repeat
+                        break
+
+
+                    case Vvave.Playlist.Repeat:
+                        playlist.playMode = Vvave.Playlist.Normal
+                        break
                     }
                 }
             }
-
-            middleContent: [
-                ToolButton
-                {
-                    id: babeBtnIcon
-                    icon.name: "love"
-                    flat: true
-                    enabled: currentTrack
-                    checked:currentTrack.url ? FB.Tagging.isFav(currentTrack.url) : false
-                    icon.color: checked ? babeColor :  Kirigami.Theme.textColor
-                    onClicked:
-                    {
-                        mainPlaylist.listModel.list.fav(currentTrackIndex, !FB.Tagging.isFav(currentTrack.url))
-                        root.currentTrackChanged()
-                    }
-                },
-
-                Maui.ToolActions
-                {
-                    implicitHeight: Maui.Style.iconSizes.big
-                    expanded: true
-                    autoExclusive: false
-                    checkable: false
-
-                    Action
-                    {
-                        icon.name: "media-skip-backward"
-                        onTriggered: Player.previousTrack()
-                    }
-
-                    Action
-                    {
-                        id: playIcon
-                        text: i18n("Play and pause")
-                        icon.width: Maui.Style.iconSizes.big
-                        icon.height: Maui.Style.iconSizes.big
-                        enabled: currentTrackIndex >= 0
-                        icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
-                        onTriggered: player.playing ? player.pause() : player.play()
-                    }
-
-                    Action
-                    {
-                        text: i18n("Next")
-                        icon.name: "media-skip-forward"
-                        onTriggered: Player.nextTrack()
-                    }
-                },
-
-                ToolButton
-                {
-                    icon.name: switch(playlist.playMode)
-                               {
-                               case Vvave.Playlist.Normal: return "media-playlist-normal"
-                               case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
-                               case Vvave.Playlist.Repeat: return "media-playlist-repeat"
-                               }
-                    onClicked:
-                    {
-                        switch(playlist.playMode)
-                        {
-                        case Vvave.Playlist.Normal:
-                            playlist.playMode = Vvave.Playlist.Shuffle
-                            break
-
-                        case Vvave.Playlist.Shuffle:
-                            playlist.playMode = Vvave.Playlist.Repeat
-                            break
-
-
-                        case Vvave.Playlist.Repeat:
-                            playlist.playMode = Vvave.Playlist.Normal
-                            break
-                        }
-                    }
-                }
-            ]
-        }
+        ]
     }
 
     Kirigami.Separator
     {
-//        edge: Qt.TopEdge
+        //        edge: Qt.TopEdge
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
