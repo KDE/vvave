@@ -301,16 +301,24 @@ Maui.Page
             return coverArt && item && item.album === album && item.artist === artist
         }
 
-        ToolButton
+        AbstractButton
         {
             Layout.fillHeight: true
-            Layout.preferredWidth: implicitWidth
+            Layout.preferredWidth: Maui.Style.rowHeight
             visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
             icon.name: "media-playlist-append"
             onClicked:
             {
                 currentIndex = index
                 appendTrack(index)
+            }
+
+            Kirigami.Icon
+            {
+                anchors.centerIn: parent
+                height: Maui.Style.iconSizes.small
+                width: height
+                source: parent.icon.name
             }
 
             opacity: delegate.hovered ? 0.8 : 0.6

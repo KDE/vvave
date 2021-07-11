@@ -301,8 +301,6 @@ Maui.Page
                     }
                 }
 
-
-
                 ColumnLayout
                 {
                     Layout.fillWidth: true
@@ -344,9 +342,6 @@ Maui.Page
                         opacity: 0.7
                     }
                 }
-
-
-
 
                 RowLayout
                 {
@@ -492,6 +487,47 @@ Maui.Page
                             }
                         }
                     ]
+                }
+
+                RowLayout
+                {
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 300
+                    Layout.alignment: Qt.AlignHCenter
+                    spacing: Maui.Style.space.medium
+
+                    Kirigami.Icon
+                    {
+                        visible: text.length
+                       implicitHeight: Maui.Style.iconSizes.small
+                       implicitWidth: implicitHeight
+                       source: "audio-volume-low"
+                    }
+
+                    Slider
+                    {
+                        id: volumeBar
+                        Layout.fillWidth: true
+                        padding: 0
+                        spacing: 0
+                        from: 0
+                        to: 100
+                        value: player.volume
+                        orientation: Qt.Horizontal
+
+                        onMoved:
+                        {
+                            player.volume = value
+                        }
+                    }
+
+                    Kirigami.Icon
+                    {
+                        visible: text.length
+                        implicitHeight: Maui.Style.iconSizes.small
+                        implicitWidth: implicitHeight
+                        source: "audio-volume-high"
+                    }
                 }
             }
         }

@@ -183,18 +183,18 @@ Control
                 autoExclusive: false
                 checkable: false
 
-                Action
-                {
-                    icon.name: "media-skip-backward"
-                    onTriggered: Player.previousTrack()
-                }
+//                Action
+//                {
+//                    icon.name: "media-skip-backward"
+//                    onTriggered: Player.previousTrack()
+//                }
 
                 Action
                 {
                     id: playIcon
                     text: i18n("Play and pause")
-                    icon.width: Maui.Style.iconSizes.big
-                    icon.height: Maui.Style.iconSizes.big
+//                    icon.width: Maui.Style.iconSizes.big
+//                    icon.height: Maui.Style.iconSizes.big
                     enabled: currentTrackIndex >= 0
                     icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onTriggered: player.playing ? player.pause() : player.play()

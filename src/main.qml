@@ -171,12 +171,6 @@ Maui.ApplicationWindow
         }
     }
 
-    FocusView
-    {
-        id: _focusViewComponent
-        visible: StackView.status === StackView.Active
-    }
-
     FloatingDisk
     {
         id: _floatingDisk
@@ -212,7 +206,6 @@ Maui.ApplicationWindow
             anchors.fill: parent
         }
     }
-
 
     StackView
     {
@@ -359,6 +352,17 @@ Maui.ApplicationWindow
             {
                 visible: !focusView
                 width: parent.width
+            }
+        }
+
+        Loader
+        {
+            id: _focusViewComponent
+            visible: StackView.status === StackView.Active
+            active: StackView.status === StackView.Active || item
+            FocusView
+            {
+                anchors.fill: parent
             }
         }
     }
