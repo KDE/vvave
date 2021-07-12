@@ -19,6 +19,7 @@ Maui.Page
     id: control
 
     title: _stackView.depth === 2 ? i18n("Information") : i18n("Now Playing")
+    altHeader: root.altHeader
 
     StackView.onActivated:
     {

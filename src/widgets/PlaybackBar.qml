@@ -101,6 +101,7 @@ Control
                 x: progressBar.leftPadding + progressBar.visualPosition
                    * (progressBar.availableWidth - width)
                 y: 0
+                radius: height
                 implicitWidth: Maui.Style.iconSizes.medium
                 implicitHeight: 16
                 color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"

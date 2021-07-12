@@ -65,7 +65,8 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property color babeColor: "#f84172"
 
-    headBar.visible: false
+    headBar.visible: !focusView
+    altHeader: Kirigami.Settings.isMobile
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
@@ -206,6 +207,36 @@ Maui.ApplicationWindow
             anchors.fill: parent
         }
     }
+    headBar.leftContent: Maui.ToolButtonMenu
+    {
+        icon.name: "application-menu"
+
+        MA.AccountsMenuItem{}
+
+        MenuItem
+        {
+            text: i18n("Settings")
+            icon.name: "settings-configure"
+            onTriggered:
+            {
+                _dialogLoader.sourceComponent = _settingsDialogComponent
+                dialog.open()
+            }
+        }
+
+        MenuItem
+        {
+            text: i18n("About")
+            icon.name: "documentinfo"
+            onTriggered: root.about()
+        }
+    }
+
+    footer: PlaybackBar
+    {
+        visible: !focusView
+        width: parent.width
+    }
 
     StackView
     {
@@ -215,128 +246,94 @@ Maui.ApplicationWindow
 
         initialItem: Maui.Page
         {
-            id: _viewsPage
-            altHeader: Kirigami.Settings.isMobile
-            headBar.visible: true
+            headBar.visible: false
+            floatingFooter: true
+            flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
 
-            headBar.leftContent: Maui.ToolButtonMenu
+            Maui.AppViews
             {
-                icon.name: "application-menu"
+                id: swipeView
+                anchors.fill: parent
+                maxViews: 3
+                toolbar: root.headBar
 
-                MA.AccountsMenuItem{}
-
-                MenuItem
+                TracksView
                 {
-                    text: i18n("Settings")
-                    icon.name: "settings-configure"
-                    onTriggered:
+                    id: tracksView
+
+                    Maui.AppView.title: i18n("Tracks")
+                    Maui.AppView.iconName: "view-media-track"
+                }
+
+                AlbumsView
+                {
+                    id: albumsView
+                    Maui.AppView.title: i18n("Albums")
+                    Maui.AppView.iconName: "view-media-album-cover"
+
+                    holder.title : i18n("No Albums!")
+                    holder.body: i18n("Add new music sources")
+
+                    list.query: Albums.ALBUMS
+                }
+
+                AlbumsView
+                {
+                    id: artistsView
+                    Maui.AppView.title: i18n("Artists")
+                    Maui.AppView.iconName: "view-media-artist"
+
+                    holder.title : i18n("No Artists!")
+                    holder.body: i18n("Add new music sources")
+
+                    list.query : Albums.ARTISTS
+                }
+
+                Maui.AppViewLoader
+                {
+                    Maui.AppView.title: i18n("Tags")
+                    Maui.AppView.iconName: "tag"
+
+                    PlaylistsView
                     {
-                        _dialogLoader.sourceComponent = _settingsDialogComponent
-                        dialog.open()
+                        id: playlistsView
                     }
                 }
 
-                MenuItem
+                Maui.AppViewLoader
                 {
-                    text: i18n("About")
-                    icon.name: "documentinfo"
-                    onTriggered: root.about()
+                    Maui.AppView.title: i18n("Folders")
+                    Maui.AppView.iconName: "folder"
+
+                    FoldersView
+                    {
+                        id: foldersView
+                    }
+                }
+
+                Maui.AppViewLoader
+                {
+                    Maui.AppView.title: i18n("Cloud")
+                    Maui.AppView.iconName: "folder-cloud"
+
+                    CloudView
+                    {
+                        id: cloudView
+                    }
                 }
             }
 
-            Maui.Page
+            footer: SelectionBar
             {
-                anchors.fill: parent
-
-                headBar.visible: false
-                floatingFooter: true
-                flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
-
-                Maui.AppViews
+                id: _selectionBar
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+                padding: Maui.Style.space.big
+                maxListHeight: swipeView.height - Maui.Style.space.medium
+                onExitClicked:
                 {
-                    id: swipeView
-                    anchors.fill: parent
-                    maxViews: 3
-                    toolbar: _viewsPage.headBar
-
-                    TracksView
-                    {
-                        id: tracksView
-
-                        Maui.AppView.title: i18n("Tracks")
-                        Maui.AppView.iconName: "view-media-track"
-                    }
-
-                    AlbumsView
-                    {
-                        id: albumsView
-                        Maui.AppView.title: i18n("Albums")
-                        Maui.AppView.iconName: "view-media-album-cover"
-
-                        holder.title : i18n("No Albums!")
-                        holder.body: i18n("Add new music sources")
-
-                        list.query: Albums.ALBUMS
-                    }
-
-                    AlbumsView
-                    {
-                        id: artistsView
-                        Maui.AppView.title: i18n("Artists")
-                        Maui.AppView.iconName: "view-media-artist"
-
-                        holder.title : i18n("No Artists!")
-                        holder.body: i18n("Add new music sources")
-
-                        list.query : Albums.ARTISTS
-                    }
-
-                    Maui.AppViewLoader
-                    {
-                        Maui.AppView.title: i18n("Tags")
-                        Maui.AppView.iconName: "tag"
-
-                        PlaylistsView
-                        {
-                            id: playlistsView
-                        }
-                    }
-
-                    Maui.AppViewLoader
-                    {
-                        Maui.AppView.title: i18n("Folders")
-                        Maui.AppView.iconName: "folder"
-
-                        FoldersView
-                        {
-                            id: foldersView
-                        }
-                    }
-
-                    Maui.AppViewLoader
-                    {
-                        Maui.AppView.title: i18n("Cloud")
-                        Maui.AppView.iconName: "folder-cloud"
-
-                        CloudView
-                        {
-                            id: cloudView
-                        }
-                    }
-                }
-
-                footer: SelectionBar
-                {
-                    id: _selectionBar
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-                    padding: Maui.Style.space.big
-                    maxListHeight: swipeView.height - Maui.Style.space.medium
-                    onExitClicked:
-                    {
-                        root.selectionMode = false
-                        clear()
-                    }
+                    root.selectionMode = false
+                    clear()
                 }
             }
 
@@ -348,12 +345,10 @@ Maui.ApplicationWindow
                 visible: Vvave.scanning
             }
 
-            footer: PlaybackBar
-            {
-                visible: !focusView
-                width: parent.width
-            }
         }
+
+
+
 
         Loader
         {
