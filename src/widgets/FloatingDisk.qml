@@ -12,7 +12,7 @@ Item
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
-    visible: opacity > 0.3 && !mainlistEmpty && !focusView && isPlaying
+    visible: opacity > 0.3 && !mainlistEmpty && _viewsPage.visible && isPlaying
 
     height:  Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
     width: height
@@ -84,6 +84,7 @@ Item
         drag.minimumY: 0
         drag.maximumY: root.height - control.height
         onClicked: toggleFocusView()
+        onPressAndHold: toggleMiniMode()
 
         Rectangle
         {

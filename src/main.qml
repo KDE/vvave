@@ -1,5 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
+import QtQuick.Window 2.15
 
 import Qt.labs.settings 1.0
 
@@ -23,6 +24,15 @@ Maui.ApplicationWindow
 {
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
+
+//    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
+
+    readonly property int preferredMiniModeSize: 200
+    minimumHeight: miniMode ? preferredMiniModeSize : 0
+    minimumWidth: miniMode ? preferredMiniModeSize : 0
+
+    maximumWidth: miniMode ? minimumWidth : Screen.desktopAvailableWidth
+    maximumHeight: miniMode ? minimumHeight : Screen.desktopAvailableHeight
 
     /***************************************************/
     /******************** ALIASES ********************/
@@ -57,7 +67,9 @@ Maui.ApplicationWindow
     property string syncPlaylist: ""
     property bool sync: false
 
-    readonly property bool focusView : _stackView.depth === 2
+    readonly property bool focusView : _focusViewComponent.visible
+    readonly property bool miniMode : _miniModeComponent.visible
+
     property bool selectionMode : false
 
     /***************************************************/
@@ -65,7 +77,7 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property color babeColor: "#f84172"
 
-    headBar.visible: !focusView
+    headBar.visible: _viewsPage.visible
     altHeader: Kirigami.Settings.isMobile
 
     /*HANDLE EVENTS*/
@@ -175,6 +187,7 @@ Maui.ApplicationWindow
     FloatingDisk
     {
         id: _floatingDisk
+
     }
 
     FB.TagsDialog
@@ -207,6 +220,7 @@ Maui.ApplicationWindow
             anchors.fill: parent
         }
     }
+
     headBar.leftContent: Maui.ToolButtonMenu
     {
         icon.name: "application-menu"
@@ -234,7 +248,7 @@ Maui.ApplicationWindow
 
     footer: PlaybackBar
     {
-        visible: !focusView
+        visible: _viewsPage.visible
         width: parent.width
     }
 
@@ -246,6 +260,8 @@ Maui.ApplicationWindow
 
         initialItem: Maui.Page
         {
+            id: _viewsPage
+            visible: StackView.status === StackView.Active
             headBar.visible: false
             floatingFooter: true
             flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
@@ -347,9 +363,6 @@ Maui.ApplicationWindow
 
         }
 
-
-
-
         Loader
         {
             id: _focusViewComponent
@@ -359,6 +372,18 @@ Maui.ApplicationWindow
             {
                 anchors.fill: parent
             }
+        }
+
+        Loader
+        {
+            id: _miniModeComponent
+            visible: active
+            active: StackView.status === StackView.Active
+            MiniMode
+            {
+                anchors.fill: parent
+            }
+
         }
     }
 
@@ -395,6 +420,36 @@ Maui.ApplicationWindow
         }else
         {
             _stackView.push(_focusViewComponent, StackView.Immediate)
+        }
+    }
+
+    property int oldH : root. height
+    property int oldW : root.width
+    property point oldP : Qt.point(root.x, root.y)
+
+    function toggleMiniMode()
+    {
+        if(miniMode)
+        {
+            _stackView.pop(StackView.Immediate)
+
+            root.width = oldW
+            root.height = oldH
+
+            root.x = oldP.x
+            root.y = oldP.y
+        }else
+        {
+            root.oldH = root.height
+            root.oldW = root.width
+            root.oldP = Qt.point(root.x, root.y)
+
+            _stackView.push(_miniModeComponent, StackView.Immediate)
+
+            root.x = Screen.desktopAvailableWidth - root.preferredMiniModeSize - Maui.Style.space.big
+            root.y = Screen.desktopAvailableHeight - root.preferredMiniModeSize - Maui.Style.space.big
+
+
         }
     }
 }

@@ -18,19 +18,6 @@ Maui.Page
 {
     id: control
 
-    title: _stackView.depth === 2 ? i18n("Information") : i18n("Now Playing")
-    altHeader: root.altHeader
-
-    StackView.onActivated:
-    {
-        forceActiveFocus()
-    }
-
-    StackView.onDeactivated:
-    {
-        _drawer.visible = true
-    }
-
     headBar.visible: true
     headBar.background: null
     headBar.height: Maui.Style.toolBarHeight
