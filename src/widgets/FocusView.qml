@@ -486,7 +486,6 @@ Maui.Page
 
                     Kirigami.Icon
                     {
-                        visible: text.length
                        implicitHeight: Maui.Style.iconSizes.small
                        implicitWidth: implicitHeight
                        source: "audio-volume-low"
@@ -511,7 +510,6 @@ Maui.Page
 
                     Kirigami.Icon
                     {
-                        visible: text.length
                         implicitHeight: Maui.Style.iconSizes.small
                         implicitWidth: implicitHeight
                         source: "audio-volume-high"

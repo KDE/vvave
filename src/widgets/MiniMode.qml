@@ -8,6 +8,7 @@ import org.mauikit.filebrowsing 1.3 as FB
 import org.maui.vvave 1.0 as Vvave
 
 import "../utils/Player.js" as Player
+import org.kde.kirigami 2.14 as Kirigami
 
 MouseArea
 {
@@ -75,7 +76,6 @@ MouseArea
             {
                 id: nextBtn
                 flat: true
-                icon.color: Kirigami.Theme.textColor
                 icon.width: Maui.Style.iconSizes.big
                 icon.height: Maui.Style.iconSizes.big
                 icon.name: "media-skip-forward"
