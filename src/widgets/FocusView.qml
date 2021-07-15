@@ -21,6 +21,7 @@ Maui.Page
     headBar.visible: true
     headBar.background: null
     headBar.height: Maui.Style.toolBarHeight
+
     headBar.leftContent: [
         ToolButton
         {
@@ -477,44 +478,44 @@ Maui.Page
                     ]
                 }
 
-                RowLayout
-                {
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: 300
-                    Layout.alignment: Qt.AlignHCenter
-                    spacing: Maui.Style.space.medium
+//                RowLayout
+//                {
+//                    Layout.fillWidth: true
+//                    Layout.maximumWidth: 300
+//                    Layout.alignment: Qt.AlignHCenter
+//                    spacing: Maui.Style.space.medium
 
-                    Kirigami.Icon
-                    {
-                       implicitHeight: Maui.Style.iconSizes.small
-                       implicitWidth: implicitHeight
-                       source: "audio-volume-low"
-                    }
+//                    Kirigami.Icon
+//                    {
+//                       implicitHeight: Maui.Style.iconSizes.small
+//                       implicitWidth: implicitHeight
+//                       source: "audio-volume-low"
+//                    }
 
-                    Slider
-                    {
-                        id: volumeBar
-                        Layout.fillWidth: true
-                        padding: 0
-                        spacing: 0
-                        from: 0
-                        to: 100
-                        value: player.volume
-                        orientation: Qt.Horizontal
+//                    Slider
+//                    {
+//                        id: volumeBar
+//                        Layout.fillWidth: true
+//                        padding: 0
+//                        spacing: 0
+//                        from: 0
+//                        to: 100
+//                        value: player.volume
+//                        orientation: Qt.Horizontal
 
-                        onMoved:
-                        {
-                            player.volume = value
-                        }
-                    }
+//                        onMoved:
+//                        {
+//                            player.volume = value
+//                        }
+//                    }
 
-                    Kirigami.Icon
-                    {
-                        implicitHeight: Maui.Style.iconSizes.small
-                        implicitWidth: implicitHeight
-                        source: "audio-volume-high"
-                    }
-                }
+//                    Kirigami.Icon
+//                    {
+//                        implicitHeight: Maui.Style.iconSizes.small
+//                        implicitWidth: implicitHeight
+//                        source: "audio-volume-high"
+//                    }
+//                }
             }
         }
     }

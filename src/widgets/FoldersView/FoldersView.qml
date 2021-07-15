@@ -35,6 +35,7 @@ StackView
 
         Maui.Holder
         {
+            anchors.fill: parent
             visible: _foldersList.count === 0
             emoji: "qrc:/assets/dialog-information.svg"
             title : i18n("No Folders!")

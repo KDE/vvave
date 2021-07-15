@@ -368,6 +368,7 @@ Maui.ApplicationWindow
             id: _focusViewComponent
             visible: StackView.status === StackView.Active
             active: StackView.status === StackView.Active || item
+
             FocusView
             {
                 anchors.fill: parent
