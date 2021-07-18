@@ -25,7 +25,7 @@ Maui.ApplicationWindow
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
 
-//    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
+    //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
     readonly property int preferredMiniModeSize: 200
     minimumHeight: miniMode ? preferredMiniModeSize : 0
@@ -58,9 +58,9 @@ Maui.ApplicationWindow
     /******************** HANDLERS ********************/
     /*************************************************/
     readonly property var viewsIndex: ({ tracks: 0,
-                                           albums: 1,
-                                           artists: 2,
-                                           playlists: 3,
+                                           playlists: 1,
+                                           albums: 2,
+                                           artists: 3,
                                            folders: 4,
                                            cloud: 5 })
 
@@ -281,6 +281,13 @@ Maui.ApplicationWindow
                     Maui.AppView.iconName: "view-media-track"
                 }
 
+                PlaylistsView
+                {
+                    id: playlistsView
+                    Maui.AppView.title: i18n("Tags")
+                    Maui.AppView.iconName: "tag"
+                }
+
                 AlbumsView
                 {
                     id: albumsView
@@ -303,17 +310,6 @@ Maui.ApplicationWindow
                     holder.body: i18n("Add new music sources")
 
                     list.query : Albums.ARTISTS
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Tags")
-                    Maui.AppView.iconName: "tag"
-
-                    PlaylistsView
-                    {
-                        id: playlistsView
-                    }
                 }
 
                 Maui.AppViewLoader

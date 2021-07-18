@@ -40,10 +40,8 @@ void PlaylistsModel::setList()
 FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
 {
     return FMH::MODEL{{FMH::MODEL_KEY::PLAYLIST, playlist},
-                      {FMH::MODEL_KEY::COLOR, "#333"},
                       {FMH::MODEL_KEY::ICON, "tag"},
                       {FMH::MODEL_KEY::TYPE, "personal"},
-                      {FMH::MODEL_KEY::DESCRIPTION, "Personal"},
                       {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews(playlist)}};
 }
 
@@ -73,17 +71,8 @@ QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
 
 FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
 {
-    return FMH::MODEL_LIST{//    {
-                           //    {FMH::MODEL_KEY::DESCRIPTION, "Favorite tracks"},
-                           //    {FMH::MODEL_KEY::COLOR, "#EC407A"},
-                           //    {FMH::MODEL_KEY::PLAYLIST, "Favs"},
-                           //    {FMH::MODEL_KEY::ICON, "love"},
-                           //    {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}
-                           //},
-
-                           {{FMH::MODEL_KEY::DESCRIPTION, "Top listened"},
-                            {FMH::MODEL_KEY::TYPE, "default"},
-                            {FMH::MODEL_KEY::COLOR, "#FFA000"},
+    return FMH::MODEL_LIST{
+                           {{FMH::MODEL_KEY::TYPE, "default"},
                             {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
                             {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Most Played")},
                             {FMH::MODEL_KEY::ICON, "view-media-playcount"},

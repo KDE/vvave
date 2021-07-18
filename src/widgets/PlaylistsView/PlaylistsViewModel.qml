@@ -67,7 +67,6 @@ Maui.AltBrowser
         label1.text: model.playlist
         label1.horizontalAlignment: Qt.AlignLeft
         label2.horizontalAlignment: Qt.AlignLeft
-        label2.text: model.description
         iconSource: model.icon
 
         onClicked :
@@ -98,7 +97,6 @@ Maui.AltBrowser
         {
             control.currentIndex = index
         }
-
     }
 
     gridDelegate : Item
@@ -120,12 +118,9 @@ Maui.AltBrowser
 
             label1.font.bold: true
             label1.font.weight: Font.Bold
-            label1.text: model.playlist
-            label1.horizontalAlignment: Qt.AlignLeft
-            label2.horizontalAlignment: Qt.AlignLeft
-            label2.text: model.description
+            label1.text: model.playlist           
             iconSource: model.icon
-            template.labelSizeHint: 40
+            template.labelSizeHint: 24
 
             onClicked :
             {
