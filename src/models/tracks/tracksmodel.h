@@ -43,6 +43,7 @@ public slots:
     void append(const QVariantMap &item);
     void appendAt(const QVariantMap &item, const int &at);
     void appendQuery(const QString &query);
+    void copy(const TracksModel *list);
 
     void clear();
     bool fav(const int &index, const bool &value);

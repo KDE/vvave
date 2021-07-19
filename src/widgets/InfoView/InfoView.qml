@@ -31,7 +31,7 @@ Item
         ColumnLayout
         {
             width: parent.width
-            spacing: Maui.Style.spacing.big
+            spacing: Maui.Style.space.big
 
             Maui.ListItemTemplate
             {

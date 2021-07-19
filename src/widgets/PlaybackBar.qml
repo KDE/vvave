@@ -140,7 +140,7 @@ Control
                 width: parent.width
                 y: -150
                 x: 0
-                //                            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPress
+
                 Slider
                 {
                     id: _volumeSlider
