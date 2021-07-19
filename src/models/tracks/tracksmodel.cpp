@@ -129,6 +129,11 @@ void TracksModel::appendQuery(const QString &query)
 
 void TracksModel::copy(const TracksModel *list)
 {
+    if(!list)
+    {
+        return;
+    }
+
     emit this->preItemsAppended(list->getCount());
     this->list <<  list->items();
     emit this->postItemAppended();
