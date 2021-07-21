@@ -277,7 +277,7 @@ Maui.ApplicationWindow
                 {
                     id: tracksView
 
-                    Maui.AppView.title: i18n("Tracks")
+                    Maui.AppView.title: i18n("Songs")
                     Maui.AppView.iconName: "view-media-track"
                 }
 

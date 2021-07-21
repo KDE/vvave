@@ -60,14 +60,14 @@ Maui.Page
 
     headBar.visible: true
     headBar.forceCenterMiddleContent: false
-    headBar.leftContent: Maui.ToolButtonMenu
+    headBar.rightContent: Maui.ToolButtonMenu
     {
         enabled: listModel.list.count > 0
         icon.name: "media-playback-start"
 
         MenuItem
         {
-            icon.name : "media-playlist-play"
+            icon.name : "media-playback-start"
             text: i18n("Play All")
             onTriggered: playAll()
         }
@@ -87,7 +87,7 @@ Maui.Page
         Layout.maximumWidth: 500
         Layout.alignment: Qt.AlignCenter
         enabled: control.listModel.list.count > 0
-        placeholderText: i18n("Search") + " " + listModel.list.count + " " + i18n("tracks")
+        placeholderText: i18n("Search") + " " + listModel.list.count + " " + i18n("songs")
         onAccepted: listModel.filter = text
         onCleared: listModel.filter = ""
     }
@@ -234,7 +234,7 @@ Maui.Page
 
             Rectangle
             {
-                color: Qt.tint(control.Kirigami.Theme.textColor, Qt.rgba(control.Kirigami.Theme.backgroundColor.r, control.Kirigami.Theme.backgroundColor.g, control.Kirigami.Theme.backgroundColor.b, 0.9))
+                color: Qt.tint(control.Kirigami.Theme.textColor, Qt.rgba(control.Kirigami.Theme.backgroundColor.r, control.Kirigami.Theme.backgroundColor.g, control.Kirigami.Theme.backgroundColor.b, 0.95))
                 anchors.centerIn: parent
                 width: parent.width
                 height: Maui.Style.rowHeight * 1.5

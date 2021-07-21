@@ -29,7 +29,7 @@ Maui.SelectionBar
     Action
     {
         text: i18n("Play")
-        icon.name: "media-playlist-play"
+        icon.name: "media-playback-start"
         onTriggered:
         {
             mainPlaylist.listModel.list.clear()
@@ -46,16 +46,6 @@ Maui.SelectionBar
 
     Action
     {
-        text: i18n("Queue")
-        icon.name: "view-media-recent"
-        onTriggered:
-        {
-            Player.queueTracks(control.items)
-        }
-    }
-
-    Action
-    {
         text: i18n("Tags")
         icon.name: "tag"
         onTriggered:
@@ -65,24 +55,37 @@ Maui.SelectionBar
         }
     }
 
-    Action
-    {
-        text: i18n("Share")
-        icon.name: "document-share"
-        onTriggered: Maui.Platform.shareFiles(control.uris)
-    }
 
-    Action
-    {
-        text: i18n("Remove")
-        icon.name: "edit-delete"
-        Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
-        onTriggered:
+    hiddenActions: [
+        Action
         {
-            _dialogLoader.sourceComponent = _removeDialogComponent
-            dialog.open()
+            text: i18n("Share")
+            icon.name: "document-share"
+            onTriggered: Maui.Platform.shareFiles(control.uris)
+        },
+
+        Action
+        {
+            text: i18n("Queue")
+            icon.name: "view-media-recent"
+            onTriggered:
+            {
+                Player.queueTracks(control.items)
+            }
+        },
+
+        Action
+        {
+            text: i18n("Remove")
+            icon.name: "edit-delete"
+            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+            onTriggered:
+            {
+                _dialogLoader.sourceComponent = _removeDialogComponent
+                dialog.open()
+            }
         }
-    }
+    ]
 
     function addToSelection(item)
     {
