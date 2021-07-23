@@ -43,7 +43,7 @@ if(ANDROID)
     set(ANDROID_ABIS "armeabi-v7a")
 endif()
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick Network Sql QuickControls2 Xml Multimedia)
+find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick QuickControls2 Network Sql Xml Multimedia)
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
 
 find_package(MauiKit REQUIRED COMPONENTS FileBrowsing Accounts)
@@ -52,10 +52,9 @@ find_package(MauiKit REQUIRED)
 find_package(Taglib 1.4 REQUIRED)
 
 if(ANDROID)
-    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS AndroidExtras)    
+    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS AndroidExtras)
 elseif(UNIX)
-    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS DBus)
-    find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS Config KIO)
+    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS DBus Widgets)
 endif()
 
 if(${ECM_SOURCE_UNDER_VERSION_CONTROL})
