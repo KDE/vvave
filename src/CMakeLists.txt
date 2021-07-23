@@ -12,12 +12,12 @@ set(vvave_SRCS
     qml.qrc
     main.cpp
     vvave.cpp
-#    pulpo/services/geniusService.cpp
-#    pulpo/services/deezerService.cpp
+    #    pulpo/services/geniusService.cpp
+    #    pulpo/services/deezerService.cpp
     pulpo/services/lastfmService.cpp
-#    pulpo/services/lyricwikiaService.cpp
+    #    pulpo/services/lyricwikiaService.cpp
     pulpo/services/spotifyService.cpp
-#    pulpo/services/musicbrainzService.cpp
+    #    pulpo/services/musicbrainzService.cpp
     pulpo/pulpo.cpp
     pulpo/service.cpp
     services/local/taginfo.cpp
@@ -53,15 +53,15 @@ if (ANDROID)
     target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras OpenSSL::SSL)
     kde_source_files_enable_exceptions(${PROJECT_NAME})
 elseif(UNIX)
-        target_sources(${PROJECT_NAME} PRIVATE
-            kde/mpris2/mediaplayer2.cpp
-            kde/mpris2/mediaplayer2player.cpp
-            )
+    target_sources(${PROJECT_NAME} PRIVATE
+        kde/mpris2/mediaplayer2.cpp
+        kde/mpris2/mediaplayer2player.cpp
+        )
     target_link_libraries(${PROJECT_NAME} KF5::ConfigCore KF5::KIOCore KF5::KIOFileWidgets Qt5::DBus)
 endif()
 
 target_compile_definitions(${PROJECT_NAME}
-  PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${Taglib_INCLUDE_DIRS})
 
