@@ -84,7 +84,7 @@ Maui.SettingsDialog
     Maui.SettingsSection
     {
         title: i18n("Sources")
-        description: i18n("Add new sources to manage and browse your image collection")
+        description: i18n("Add or remove sources")
         lastOne: true
 
         ColumnLayout

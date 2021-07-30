@@ -414,9 +414,11 @@ Maui.ApplicationWindow
         if(focusView)
         {
             _stackView.pop(StackView.Immediate)
+            _stackView.currentItem.forceActiveFocus()
         }else
         {
             _stackView.push(_focusViewComponent, StackView.Immediate)
+            _focusViewComponent.forceActiveFocus()
         }
     }
 

@@ -18,6 +18,8 @@ Maui.Page
 {
     id: control
 
+    focus: true
+
     headBar.visible: true
     headBar.background: null
     headBar.height: Maui.Style.toolBarHeight
@@ -61,6 +63,24 @@ Maui.Page
     {
         toggleFocusView()
         event.accepted = true
+    }
+
+    Keys.onLeftPressed:
+    {
+        Player.previousTrack()
+    }
+
+    Keys.onRightPressed:
+    {
+        Player.nextTrack()
+    }
+
+    Keys.onUpPressed:
+    {
+        if(player.playing)
+            player.pause()
+        else
+            player.play()
     }
 
     Shortcut
@@ -125,6 +145,7 @@ Maui.Page
 
         initialItem: Loader
         {
+            focus: true
             asynchronous: true
             active: visible || item
 
@@ -167,7 +188,6 @@ Maui.Page
 
                         orientation: ListView.Horizontal
 
-                        clip: false
                         focus: true
                         interactive: true
 
@@ -518,5 +538,10 @@ Maui.Page
 //                }
             }
         }
+    }
+
+    function forceActiveFocus()
+    {
+        _stackView.initialItem.forceActiveFocus()
     }
 }
