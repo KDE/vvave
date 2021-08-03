@@ -109,7 +109,7 @@ Maui.AltBrowser
             id: _collageDelegate
             anchors.fill: parent
             anchors.margins: Kirigami.Settings.isMobile ? Maui.Style.space.small : Maui.Style.space.medium
-
+            orientation: Qt.Vertical
             imageWidth: 120
             imageHeight: 120
 
@@ -118,7 +118,7 @@ Maui.AltBrowser
 
             label1.font.bold: true
             label1.font.weight: Font.Bold
-            label1.text: model.playlist           
+            label1.text: model.playlist
             iconSource: model.icon
             template.labelSizeHint: 24
 

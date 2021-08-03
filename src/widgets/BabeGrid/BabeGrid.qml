@@ -151,7 +151,7 @@ Maui.AltBrowser
             height:control.gridView.itemHeight  - Maui.Style.space.medium
 
             isCurrentItem: parent.GridView.isCurrentItem
-
+            maskRadius: radius
             label1.text: model.album ? model.album : model.artist
             label2.text: model.artist && model.album ? model.artist : ""
             imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)

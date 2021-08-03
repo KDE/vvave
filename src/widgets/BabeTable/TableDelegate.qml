@@ -20,7 +20,6 @@ Maui.ListBrowserDelegate
     property bool sameAlbum : false
 
     isCurrentItem: ListView.isCurrentItem || checked
-
     draggable: true
 
     iconSizeHint: Maui.Style.space.small
