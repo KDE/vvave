@@ -87,6 +87,21 @@ Maui.SettingsDialog
         description: i18n("Add or remove sources")
         lastOne: true
 
+        //        template.template.content: ToolButton
+        //        {
+        //            icon.name: "list-add"
+        //            onClicked:
+        //            {
+        //                _dialogLoader.sourceComponent = _fileDialogComponent
+        //                dialog.settings.onlyDirs = true
+        //                dialog.callback = function(urls)
+        //                {
+        //                    Vvave.addSources(urls)
+        //                }
+        //                dialog.open()
+        //            }
+        //        }
+
         ColumnLayout
         {
             Layout.fillWidth: true
@@ -94,12 +109,14 @@ Maui.SettingsDialog
 
             Maui.ListBrowser
             {
+
                 id: _sourcesList
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.minimumHeight: Math.min(500, contentHeight)
                 model: Vvave.sources
                 currentIndex: -1
+                padding: 0
 
                 delegate: Maui.ListDelegate
                 {
@@ -129,7 +146,7 @@ Maui.SettingsDialog
             {
                 Layout.fillWidth: true
                 text: i18n("Add")
-                flat: true
+                //                flat: true
                 onClicked:
                 {
                     _dialogLoader.sourceComponent = _fileDialogComponent
