@@ -23,7 +23,6 @@ StackView
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         Kirigami.Theme.inherit: false
 
-        headBar.visible: browser.contentHeight > height
         headBar.middleContent: Maui.TextField
         {
             Layout.fillWidth: true
