@@ -281,13 +281,6 @@ Maui.ApplicationWindow
                     Maui.AppView.iconName: "view-media-track"
                 }
 
-                PlaylistsView
-                {
-                    id: playlistsView
-                    Maui.AppView.title: i18n("Tags")
-                    Maui.AppView.iconName: "tag"
-                }
-
                 AlbumsView
                 {
                     id: albumsView
@@ -310,6 +303,16 @@ Maui.ApplicationWindow
                     holder.body: i18n("Add new music sources")
 
                     list.query : Albums.ARTISTS
+                }
+
+                Maui.AppViewLoader
+                {
+                    Maui.AppView.title: i18n("Tags")
+                    Maui.AppView.iconName: "tag"
+                    PlaylistsView
+                    {
+
+                    }
                 }
 
                 Maui.AppViewLoader
