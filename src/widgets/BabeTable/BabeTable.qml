@@ -82,12 +82,13 @@ Maui.Page
 
     headBar.middleContent: Maui.TextField
     {
+        visible: listModel.list.count > 1
         Layout.fillWidth: true
         Layout.minimumWidth: 100
         Layout.maximumWidth: 500
         Layout.alignment: Qt.AlignCenter
         enabled: control.listModel.list.count > 0
-        placeholderText: i18n("Search") + " " + listModel.list.count + " " + i18n("songs")
+        placeholderText: i18np("Filter", "Filter %1 songs", listModel.list.count)
         onAccepted: listModel.filter = text
         onCleared: listModel.filter = ""
     }

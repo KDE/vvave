@@ -116,7 +116,6 @@ function appendAllModel(model)
    mainPlaylist.listView.positionViewAtEnd()
 }
 
-
 function playAllModel(model)
 {
     sync = false

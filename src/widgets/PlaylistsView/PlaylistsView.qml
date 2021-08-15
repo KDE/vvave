@@ -72,14 +72,14 @@ StackView
 
             onPlayAll:
             {
+                Player.playAllModel(listModel.list)
+                control.pop()                
+
                 if(filterList.isPublic)
                 {
                     root.sync = true
                     root.syncPlaylist = currentPlaylist
                 }
-
-                Player.playAllModel(listModel.list)
-                control.pop()
             }
 
             onAppendAll: Player.appendAllModel(listModel.list)

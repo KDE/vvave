@@ -61,6 +61,7 @@ void AlbumsModel::setList()
     this->list = this->db->getDBData(m_Query);
 
     emit this->postListChanged();
+    emit this->countChanged();
 }
 
 void AlbumsModel::refresh()

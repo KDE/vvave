@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.10
-import QtQuick.Layouts 1.3
 
 import org.mauikit.controls 1.3 as Maui
 import org.kde.kirigami 2.6 as Kirigami
@@ -27,6 +26,34 @@ Maui.ContextualMenu
 
     property alias menuItem : control.contentData
 
+    Maui.MenuItemActionRow
+    {
+        Action
+        {
+            //                text: !fav ? i18n("Fav it"): i18n("UnFav it")
+            checked: control.fav
+            checkable: true
+            icon.name: "love"
+            onTriggered: favClicked()
+        }
+
+        Action
+        {
+            //                text: i18n("Tags")
+            icon.name: "tag"
+            onTriggered: saveToClicked()
+        }
+
+        Action
+        {
+            //                text: i18n("Share")
+            icon.name: "document-share"
+            onTriggered: shareClicked()
+        }
+    }
+
+    MenuSeparator {}
+
     MenuItem
     {
         text: i18n("Select...")
@@ -36,7 +63,6 @@ Maui.ContextualMenu
             selectionBar.addToSelection(listModel.get(listView.currentIndex))
 
             selectionMode = Maui.Handy.isTouch
-            control.close()
         }
     }
 
@@ -49,58 +75,23 @@ Maui.ContextualMenu
         onTriggered:
         {
             queueClicked()
-            close()
         }
     }
 
     MenuSeparator{}
 
-    MenuItem
-    {
-        text: !fav ? i18n("Fav it"): i18n("UnFav it")
-        icon.name: "love"
-        onTriggered:
-        {
-            favClicked()
-            close()
-        }
-    }
-
-    MenuItem
-    {
-        text: i18n("Tags")
-        icon.name: "tag"
-        onTriggered:
-        {
-            saveToClicked()
-            close()
-        }
-    }
-
-    MenuSeparator {}
-
-    MenuItem
-    {
-        text: i18n("Share")
-        icon.name: "document-share"
-        onTriggered:
-        {
-            shareClicked()
-            close()
-        }
-    }
 
 
-//    MenuItem
-//    {
-//        visible: Maui.App.handleAccounts
-//        text: i18n("Copy to cloud")
-//        onTriggered:
-//        {
-//            copyToClicked()
-//            close()
-//        }
-//    }
+    //    MenuItem
+    //    {
+    //        visible: Maui.App.handleAccounts
+    //        text: i18n("Copy to cloud")
+    //        onTriggered:
+    //        {
+    //            copyToClicked()
+    //            close()
+    //        }
+    //    }
 
     MenuItem
     {
@@ -110,7 +101,6 @@ Maui.ContextualMenu
         onTriggered:
         {
             openWithClicked()
-            close()
         }
     }
 
@@ -123,19 +113,18 @@ Maui.ContextualMenu
         onTriggered:
         {
             editClicked()
-            close()
         }
     }
 
-//    Maui.MenuItem
-//    {
-//        text: i18n("Info...")
-//        onTriggered:
-//        {
-//            infoClicked()
-//            close()
-//        }
-//    }
+    //    Maui.MenuItem
+    //    {
+    //        text: i18n("Info...")
+    //        onTriggered:
+    //        {
+    //            infoClicked()
+    //            close()
+    //        }
+    //    }
 
 
     MenuItem
@@ -146,7 +135,6 @@ Maui.ContextualMenu
         onTriggered:
         {
             deleteClicked()
-            close()
         }
     }
- }
+}

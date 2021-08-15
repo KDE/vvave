@@ -211,19 +211,23 @@ Maui.Page
                                 Player.playAt(index)
                         }
 
-                        delegate: Item
+                        delegate: ColumnLayout
                         {
                             id: _delegate
                             height: ListView.view.height
                             width: ListView.view.width
+                            spacing: Maui.Style.space.huge
                             property bool isCurrentItem : ListView.isCurrentItem
 
                             Item
                             {
-                                height: Math.min(parent.height, 300)
-                                width: Math.min(parent.width, 300)
+                                Layout.fillHeight: true
+                                Layout.maximumWidth: 300
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignCenter
+//                                width: Math.min(parent.width, 300)
 
-                                anchors.centerIn: parent
+//                                anchors.centerIn: parent
 
                                 Rectangle
                                 {
@@ -286,6 +290,47 @@ Maui.Page
                                         }
                                     }
                                 }
+                            }                            
+
+                            ColumnLayout
+                            {
+                                Layout.fillWidth: true
+                                implicitHeight: Maui.Style.toolBarHeight
+
+                                spacing: 0
+
+                                Label
+                                {
+                                    id: _label1
+                                    visible: text.length
+                                    Layout.fillWidth: true
+                                    Layout.fillHeight: false
+                                    verticalAlignment: Qt.AlignVCenter
+                                    horizontalAlignment: Qt.AlignHCenter
+                                    text: model.title
+                                    elide: Text.ElideMiddle
+                                    wrapMode: Text.NoWrap
+                                    color: control.Kirigami.Theme.textColor
+                                    font.weight: Font.Normal
+                                    font.pointSize: Maui.Style.fontSizes.huge
+                                }
+
+                                Label
+                                {
+                                    id: _label2
+                                    visible: text.length
+                                    Layout.fillWidth: true
+                                    Layout.fillHeight: false
+                                    verticalAlignment: Qt.AlignVCenter
+                                    horizontalAlignment: Qt.AlignHCenter
+                                    text: model.artist
+                                    elide: Text.ElideMiddle
+                                    wrapMode: Text.NoWrap
+                                    color: control.Kirigami.Theme.textColor
+                                    font.weight: Font.Normal
+                                    font.pointSize: Maui.Style.fontSizes.big
+                                    opacity: 0.7
+                                }
                             }
                         }
                     }
@@ -310,51 +355,10 @@ Maui.Page
                     }
                 }
 
-                ColumnLayout
-                {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: Maui.Style.toolBarHeight
-
-                    Layout.alignment: Qt.AlignCenter
-                    spacing: 0
-
-                    Label
-                    {
-                        id: _label1
-                        visible: text.length
-                        Layout.fillWidth: true
-                        Layout.fillHeight: false
-                        verticalAlignment: Qt.AlignVCenter
-                        horizontalAlignment: Qt.AlignHCenter
-                        text: root.currentTrack.title
-                        elide: Text.ElideMiddle
-                        wrapMode: Text.NoWrap
-                        color: control.Kirigami.Theme.textColor
-                        font.weight: Font.Normal
-                        font.pointSize: Maui.Style.fontSizes.huge
-                    }
-
-                    Label
-                    {
-                        id: _label2
-                        visible: text.length
-                        Layout.fillWidth: true
-                        Layout.fillHeight: false
-                        verticalAlignment: Qt.AlignVCenter
-                        horizontalAlignment: Qt.AlignHCenter
-                        text: root.currentTrack.artist
-                        elide: Text.ElideMiddle
-                        wrapMode: Text.NoWrap
-                        color: control.Kirigami.Theme.textColor
-                        font.weight: Font.Normal
-                        font.pointSize: Maui.Style.fontSizes.big
-                        opacity: 0.7
-                    }
-                }
-
                 RowLayout
                 {
                     Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignCenter
 
                     Label
                     {

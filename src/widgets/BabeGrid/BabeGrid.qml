@@ -28,7 +28,7 @@ Maui.AltBrowser
     {
         Layout.fillWidth: true
         Layout.maximumWidth: 500
-        placeholderText: i18n("Filter")
+        placeholderText: i18np("Filter", "Filter %1 albums", _albumsList.count)
         onAccepted: _albumsModel.filter = text
         onCleared: _albumsModel.filter = ""
     }
@@ -157,6 +157,14 @@ Maui.AltBrowser
             label1.font.weight: Font.Bold
             iconSource: "media-album-cover"
             template.labelSizeHint: 40
+
+            ToolButton
+            {
+                visible: parent.hovered
+                anchors.centerIn: parent
+                icon.name: "media-playback-start"
+//                onClicked:
+            }
 
             onClicked:
             {

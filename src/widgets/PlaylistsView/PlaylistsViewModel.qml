@@ -41,7 +41,7 @@ Maui.AltBrowser
     {
         Layout.maximumWidth: 500
         Layout.fillWidth: true
-        placeholderText: i18n("Filter")
+        placeholderText: i18np("Filter", "Filter %1 tags", Vvave.Playlists.count)
         onAccepted: _playlistsModel.filter = text
         onCleared: _playlistsModel.filter = ""
     }

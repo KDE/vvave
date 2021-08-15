@@ -58,9 +58,9 @@ Maui.ApplicationWindow
     /******************** HANDLERS ********************/
     /*************************************************/
     readonly property var viewsIndex: ({ tracks: 0,
-                                           playlists: 1,
-                                           albums: 2,
-                                           artists: 3,
+                                           albums: 1,
+                                           artists: 2,
+                                           playlists: 3,
                                            folders: 4,
                                            cloud: 5 })
 
