@@ -16,7 +16,7 @@ Maui.Page
     id: control
     property alias list : _cloudList
 
-    headBar.visible: !_listView.holder.visible
+//    headBar.visible: !_listView.holder.visible
 
 //    headBar.leftContent: Maui.ToolActions
 //    {
