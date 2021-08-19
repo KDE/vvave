@@ -45,11 +45,6 @@ Maui.Page
         }
     ]
 
-    headBar.farRightContent: Maui.WindowControls
-    {
-        side: Qt.RightEdge
-    }
-
     headBar.rightContent: ToolButton
     {
         icon.name: "documentinfo"
