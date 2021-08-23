@@ -30,6 +30,7 @@ Comment[sl]=Droben predvajalnik glasbe
 Comment[sv]=Mycket liten musikspelare
 Comment[uk]=Маленький музичний програвач
 Comment[x-test]=xxTiny Music Playerxx
+Comment[zh_CN]=简易音乐播放器
 Comment[zh_TW]=輕巧的音樂播放器
 Name=vvave
 Name[ca]=vvave
@@ -62,6 +63,7 @@ Name[sl]=vvave
 Name[sv]=vvave
 Name[uk]=vvave
 Name[x-test]=xxvvavexx
+Name[zh_CN]=vvave
 Name[zh_TW]=vvave
 
 [Event/Notify]
@@ -95,6 +97,7 @@ Name[sl]=vvave...
 Name[sv]=vvave...
 Name[uk]=vvave…
 Name[x-test]=xxvvave...xx
+Name[zh_CN]=vvave...
 Name[zh_TW]=vvave...
 Comment=Connection to device failed
 Comment[ca]=Ha fallat la connexió amb el dispositiu
