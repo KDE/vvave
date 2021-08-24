@@ -202,7 +202,7 @@ Maui.ApplicationWindow
         id: _drawer
         visible: true
         preferredWidth: Kirigami.Units.gridUnit * 18
-        collapsed: !isWide
+        collapsed : root.width < preferredWidth * 2
         collapsible: true
 
         onContentDropped:
