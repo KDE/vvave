@@ -144,6 +144,7 @@ Maui.AltBrowser
 
         Maui.GridBrowserDelegate
         {
+            id: _template
             anchors.centerIn: parent
             width: control.gridView.itemSize - Maui.Style.space.medium
             height:control.gridView.itemHeight  - Maui.Style.space.medium
@@ -157,14 +158,6 @@ Maui.AltBrowser
             label1.font.weight: Font.Bold
             iconSource: "media-album-cover"
             template.labelSizeHint: 40
-
-            ToolButton
-            {
-                visible: parent.hovered
-                anchors.centerIn: parent
-                icon.name: "media-playback-start"
-//                onClicked:
-            }
 
             onClicked:
             {

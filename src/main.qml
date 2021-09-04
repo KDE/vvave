@@ -77,8 +77,7 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property color babeColor: "#f84172"
 
-    headBar.visible: _viewsPage.visible
-    altHeader: Kirigami.Settings.isMobile
+    headBar.visible: false
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
@@ -120,7 +119,6 @@ Maui.ApplicationWindow
                 console.log("REMOVE TIU MSISING")
                 mainPlaylist.table.list.remove(mainPlaylist.table.currentIndex)
                 console.log("REMOVE TIU MSISING 2")
-
             })
         }
     }
@@ -221,31 +219,6 @@ Maui.ApplicationWindow
         }
     }
 
-    headBar.leftContent: Maui.ToolButtonMenu
-    {
-        icon.name: "application-menu"
-
-        MA.AccountsMenuItem{}
-
-        MenuItem
-        {
-            text: i18n("Settings")
-            icon.name: "settings-configure"
-            onTriggered:
-            {
-                _dialogLoader.sourceComponent = _settingsDialogComponent
-                dialog.open()
-            }
-        }
-
-        MenuItem
-        {
-            text: i18n("About")
-            icon.name: "documentinfo"
-            onTriggered: root.about()
-        }
-    }
-
     footer: PlaybackBar
     {
         visible: _viewsPage.visible
@@ -258,20 +231,59 @@ Maui.ApplicationWindow
         focus: true
         anchors.fill: parent
 
-        initialItem: Maui.Page
+        initialItem: Item
         {
             id: _viewsPage
-            visible: StackView.status === StackView.Active
-            headBar.visible: false
-            floatingFooter: true
-            flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
 
             Maui.AppViews
             {
                 id: swipeView
                 anchors.fill: parent
                 maxViews: 3
-                toolbar: root.headBar
+
+                floatingFooter: true
+                flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
+                altHeader: Kirigami.Settings.isMobile
+                showCSDControls: true
+
+                headBar.leftContent: Maui.ToolButtonMenu
+                {
+                    icon.name: "application-menu"
+
+                    MA.AccountsMenuItem{}
+
+                    MenuItem
+                    {
+                        text: i18n("Settings")
+                        icon.name: "settings-configure"
+                        onTriggered:
+                        {
+                            _dialogLoader.sourceComponent = _settingsDialogComponent
+                            dialog.open()
+                        }
+                    }
+
+                    MenuItem
+                    {
+                        text: i18n("About")
+                        icon.name: "documentinfo"
+                        onTriggered: root.about()
+                    }
+                }
+
+                footer: SelectionBar
+                {
+                    id: _selectionBar
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+                    padding: Maui.Style.space.big
+                    maxListHeight: swipeView.height - Maui.Style.space.medium
+                    onExitClicked:
+                    {
+                        root.selectionMode = false
+                        clear()
+                    }
+                }
 
                 TracksView
                 {
@@ -338,19 +350,6 @@ Maui.ApplicationWindow
                 }
             }
 
-            footer: SelectionBar
-            {
-                id: _selectionBar
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-                padding: Maui.Style.space.big
-                maxListHeight: swipeView.height - Maui.Style.space.medium
-                onExitClicked:
-                {
-                    root.selectionMode = false
-                    clear()
-                }
-            }
 
             Maui.ProgressIndicator
             {
@@ -359,7 +358,6 @@ Maui.ApplicationWindow
                 anchors.bottom: parent.bottom
                 visible: Vvave.scanning
             }
-
         }
 
         Loader

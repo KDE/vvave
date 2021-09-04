@@ -48,9 +48,19 @@ Maui.Page
     headBar.rightContent: ToolButton
     {
         icon.name: "documentinfo"
+        checkable: true
+        checked: _stackView.depth === 2
         onClicked:
         {
-            _stackView.push(_infoComponent)
+            if(_stackView.depth === 2)
+
+            {
+                _stackView.pop()
+            }else
+            {
+                _stackView.push(_infoComponent)
+
+            }
         }
     }
 
