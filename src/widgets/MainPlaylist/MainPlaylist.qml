@@ -27,7 +27,17 @@ Maui.Page
 
     title: i18n("Playlist")
     showTitle: true
+    background: Rectangle
+    {
+        color: Kirigami.Theme.backgroundColor
+        opacity: 0.2
+    }
 
+    headBar.background: Rectangle
+    {
+        color: Kirigami.Theme.backgroundColor
+        opacity: 0.2
+    }
     headBar.visible: !mainlistEmpty
 
     headBar.rightContent: ToolButton
@@ -51,6 +61,12 @@ Maui.Page
     BabeTable
     {
         id: table
+
+        background: Rectangle
+        {
+            color: Kirigami.Theme.backgroundColor
+            opacity: 0.2
+        }
 
         Binding on currentIndex
         {

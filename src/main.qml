@@ -81,6 +81,13 @@ Maui.ApplicationWindow
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
+    Maui.WindowBlur
+    {
+        view: root
+        geometry: Qt.rect(root.x, root.y, root.width, root.height)
+        windowRadius: root.background.radius
+        enabled: true
+    }
 
     Settings
     {
@@ -212,6 +219,7 @@ Maui.ApplicationWindow
             }
         }
 
+        background: null
         MainPlaylist
         {
             id: mainPlaylist
@@ -240,7 +248,7 @@ Maui.ApplicationWindow
                 id: swipeView
                 anchors.fill: parent
                 maxViews: 3
-
+                interactive: Kirigami.Settings.isMobile
                 floatingFooter: true
                 flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
                 altHeader: Kirigami.Settings.isMobile
