@@ -33,11 +33,7 @@ Maui.Page
         opacity: 0.2
     }
 
-    headBar.background: Rectangle
-    {
-        color: Kirigami.Theme.backgroundColor
-        opacity: 0.2
-    }
+    headBar.background:null
     headBar.visible: !mainlistEmpty
 
     headBar.rightContent: ToolButton

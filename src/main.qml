@@ -81,6 +81,7 @@ Maui.ApplicationWindow
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
+
     Maui.WindowBlur
     {
         view: root
