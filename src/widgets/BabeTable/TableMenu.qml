@@ -30,7 +30,7 @@ Maui.ContextualMenu
     {
         Action
         {
-            //                text: !fav ? i18n("Fav it"): i18n("UnFav it")
+            text: !fav ? i18n("Fav it"): i18n("UnFav it")
             checked: control.fav
             checkable: true
             icon.name: "love"
@@ -39,14 +39,24 @@ Maui.ContextualMenu
 
         Action
         {
-            //                text: i18n("Tags")
+            text: i18n("Tags")
             icon.name: "tag"
             onTriggered: saveToClicked()
         }
 
         Action
         {
-            //                text: i18n("Share")
+            text: i18n("Edit")
+            icon.name: "document-edit"
+            onTriggered:
+            {
+                editClicked()
+            }
+        }
+
+        Action
+        {
+            text: i18n("Share")
             icon.name: "document-share"
             onTriggered: shareClicked()
         }
@@ -84,7 +94,7 @@ Maui.ContextualMenu
 
     //    MenuItem
     //    {
-    //        visible: Maui.App.handleAccounts
+    //        enabled: Maui.App.handleAccounts
     //        text: i18n("Copy to cloud")
     //        onTriggered:
     //        {
@@ -97,7 +107,7 @@ Maui.ContextualMenu
     {
         text: i18n("Show in folder")
         icon.name: "folder-open"
-        visible: !Maui.Handy.isAndroid
+        enabled: !Maui.Handy.isAndroid
         onTriggered:
         {
             openWithClicked()
@@ -106,15 +116,7 @@ Maui.ContextualMenu
 
     MenuSeparator {}
 
-    MenuItem
-    {
-        text: i18n("Edit")
-        icon.name: "document-edit"
-        onTriggered:
-        {
-            editClicked()
-        }
-    }
+
 
     //    Maui.MenuItem
     //    {

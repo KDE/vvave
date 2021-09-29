@@ -287,6 +287,8 @@ Maui.ApplicationWindow
                     width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
                     padding: Maui.Style.space.big
                     maxListHeight: swipeView.height - Maui.Style.space.medium
+                    display: ToolButton.IconOnly
+
                     onExitClicked:
                     {
                         root.selectionMode = false

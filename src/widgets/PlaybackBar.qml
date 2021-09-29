@@ -162,20 +162,20 @@ Control
         }
 
         middleContent: [
-            ToolButton
-            {
-                id: babeBtnIcon
-                icon.name: "love"
-                flat: true
-                enabled: currentTrack
-                checked:currentTrack.url ? FB.Tagging.isFav(currentTrack.url) : false
-                icon.color: checked ? babeColor :  Kirigami.Theme.textColor
-                onClicked:
-                {
-                    mainPlaylist.listModel.list.fav(currentTrackIndex, !FB.Tagging.isFav(currentTrack.url))
-                    root.currentTrackChanged()
-                }
-            },
+//            ToolButton
+//            {
+//                id: babeBtnIcon
+//                icon.name: "love"
+//                flat: true
+//                enabled: currentTrack
+//                checked:currentTrack.url ? FB.Tagging.isFav(currentTrack.url) : false
+//                icon.color: checked ? babeColor :  Kirigami.Theme.textColor
+//                onClicked:
+//                {
+//                    mainPlaylist.listModel.list.fav(currentTrackIndex, !FB.Tagging.isFav(currentTrack.url))
+//                    root.currentTrackChanged()
+//                }
+//            },
 
             Maui.ToolActions
             {
@@ -207,35 +207,35 @@ Control
                     icon.name: "media-skip-forward"
                     onTriggered: Player.nextTrack()
                 }
-            },
-
-            ToolButton
-            {
-                icon.name: switch(playlist.playMode)
-                           {
-                           case Vvave.Playlist.Normal: return "media-playlist-normal"
-                           case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
-                           case Vvave.Playlist.Repeat: return "media-playlist-repeat"
-                           }
-                onClicked:
-                {
-                    switch(playlist.playMode)
-                    {
-                    case Vvave.Playlist.Normal:
-                        playlist.playMode = Vvave.Playlist.Shuffle
-                        break
-
-                    case Vvave.Playlist.Shuffle:
-                        playlist.playMode = Vvave.Playlist.Repeat
-                        break
-
-
-                    case Vvave.Playlist.Repeat:
-                        playlist.playMode = Vvave.Playlist.Normal
-                        break
-                    }
-                }
             }
+
+//            ToolButton
+//            {
+//                icon.name: switch(playlist.playMode)
+//                           {
+//                           case Vvave.Playlist.Normal: return "media-playlist-normal"
+//                           case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
+//                           case Vvave.Playlist.Repeat: return "media-playlist-repeat"
+//                           }
+//                onClicked:
+//                {
+//                    switch(playlist.playMode)
+//                    {
+//                    case Vvave.Playlist.Normal:
+//                        playlist.playMode = Vvave.Playlist.Shuffle
+//                        break
+
+//                    case Vvave.Playlist.Shuffle:
+//                        playlist.playMode = Vvave.Playlist.Repeat
+//                        break
+
+
+//                    case Vvave.Playlist.Repeat:
+//                        playlist.playMode = Vvave.Playlist.Normal
+//                        break
+//                    }
+//                }
+//            }
         ]
     }
 

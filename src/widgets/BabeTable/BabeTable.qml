@@ -78,6 +78,15 @@ Maui.Page
             text: i18n("Append All")
             onTriggered: appendAll()
         }
+
+        MenuSeparator{}
+
+        MenuItem
+        {
+            icon.name : "edit-select-all"
+            text: i18n("Select All")
+//            onTriggered: appendAll()
+        }
     }
 
     headBar.middleContent: Maui.TextField
