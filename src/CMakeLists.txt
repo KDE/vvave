@@ -9,7 +9,6 @@ include_directories(
     )
 
 set(vvave_SRCS
-    qml.qrc
     main.cpp
     vvave.cpp
     #    pulpo/services/geniusService.cpp
@@ -37,13 +36,21 @@ set(vvave_SRCS
     kde/mpris2/mpris2.cpp
     )
 
+if(QUICK_COMPILER)
+        qtquick_compiler_add_resources(vvave_QML_QRC qml.qrc)
+else()
+        qt5_add_resources(vvave_QML_QRC qml.qrc)
+endif()
+
 if(ANDROID)
     add_library(${PROJECT_NAME} SHARED
         ${vvave_SRCS}
+        ${vvave_QML_QRC}
         )
 else()
     add_executable(${PROJECT_NAME}
         ${vvave_SRCS}
+        ${vvave_QML_QRC}
         )
 endif()
 

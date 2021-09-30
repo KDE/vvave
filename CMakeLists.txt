@@ -43,8 +43,18 @@ if(ANDROID)
     set(ANDROID_ABIS "armeabi-v7a")
 endif()
 
+option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
+
 find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick QuickControls2 Network Sql Xml Multimedia)
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
+
+if(QUICK_COMPILER)
+        find_package(Qt5QuickCompiler)
+        set_package_properties(Qt5QuickCompiler PROPERTIES
+                DESCRIPTION "Compile QML at build time"
+                TYPE OPTIONAL
+        )
+endif()
 
 find_package(MauiKit REQUIRED COMPONENTS FileBrowsing Accounts)
 find_package(MauiKit REQUIRED)
