@@ -388,8 +388,8 @@ Maui.ApplicationWindow
 
     Component.onCompleted:
     {
-//        Vvave.autoScan = settings.autoScan
-//        Vvave.fetchArtwork = settings.fetchArtwork
+        Vvave.autoScan = settings.autoScan
+        Vvave.fetchArtwork = settings.fetchArtwork
 
         if(Maui.Handy.isAndroid)
         {
