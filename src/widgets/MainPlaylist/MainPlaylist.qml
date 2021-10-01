@@ -80,7 +80,6 @@ Maui.Page
         holder.emoji: "qrc:/assets/view-media-track.svg"
         holder.title : "Nothing to play!"
         holder.body: i18n("Start putting together your playlist.")
-        holder.emojiSize: Maui.Style.iconSizes.huge
 
         listView.header: Rectangle
         {
@@ -202,8 +201,9 @@ Maui.Page
             for(var i = 0; i < listModel.list.count; ++i)
                 trackList.push(listModel.get(i).url)
 
-            playlistDialog.composerList.urls = trackList
-            playlistDialog.open()
+            _dialogLoader.sourceComponent = _playlistDialogComponent
+            dialog.composerList.urls = trackList
+            dialog.open()
         }
     }
 }

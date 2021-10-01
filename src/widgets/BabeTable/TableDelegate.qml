@@ -7,7 +7,6 @@ Maui.ListBrowserDelegate
 {
     id: control
 
-    property bool showQuickActions: true
     property bool number : false
     property bool coverArt : false
 

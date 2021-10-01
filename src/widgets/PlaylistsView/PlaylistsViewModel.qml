@@ -23,7 +23,6 @@ Maui.AltBrowser
     holder.title : i18n("No Playlists!")
     holder.body: i18n("Start creating new custom playlists")
 
-    holder.emojiSize: Maui.Style.iconSizes.huge
     holder.visible: count === 0
 
     model: Maui.BaseModel

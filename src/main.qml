@@ -24,6 +24,7 @@ Maui.ApplicationWindow
 {
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
+    headBar.visible: false
 
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
@@ -77,18 +78,19 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property color babeColor: "#f84172"
 
-    headBar.visible: false
 
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
 
-    Maui.WindowBlur
-    {
-        view: root
-        geometry: Qt.rect(root.x, root.y, root.width, root.height)
-        windowRadius: root.background.radius
-        enabled: true
-    }
+//    Maui.WindowBlur
+//    {
+//        view: root
+//        geometry: Qt.rect(root.x, root.y, root.width, root.height)
+//        windowRadius: root.background.radius
+//        enabled: !Kirigami.Settings.isMobile
+//    }
+
+    //    FloatingDisk {}
 
     Settings
     {
@@ -190,17 +192,15 @@ Maui.ApplicationWindow
         }
     }
 
-    FloatingDisk
+    Component
     {
-        id: _floatingDisk
+        id: _playlistDialogComponent
 
-    }
-
-    FB.TagsDialog
-    {
-        id: playlistDialog
-        onTagsReady: composerList.updateToUrls(tags)
-        composerList.strict: false
+        FB.TagsDialog
+        {
+            onTagsReady: composerList.updateToUrls(tags)
+            composerList.strict: false
+        }
     }
 
     sideBar: Maui.AbstractSideBar
@@ -332,10 +332,7 @@ Maui.ApplicationWindow
                 {
                     Maui.AppView.title: i18n("Tags")
                     Maui.AppView.iconName: "tag"
-                    PlaylistsView
-                    {
-
-                    }
+                    PlaylistsView {}
                 }
 
                 Maui.AppViewLoader
@@ -343,10 +340,7 @@ Maui.ApplicationWindow
                     Maui.AppView.title: i18n("Folders")
                     Maui.AppView.iconName: "folder"
 
-                    FoldersView
-                    {
-                        id: foldersView
-                    }
+                    FoldersView {}
                 }
 
                 Maui.AppViewLoader
@@ -354,10 +348,7 @@ Maui.ApplicationWindow
                     Maui.AppView.title: i18n("Cloud")
                     Maui.AppView.iconName: "folder-cloud"
 
-                    CloudView
-                    {
-                        id: cloudView
-                    }
+                    CloudView {}
                 }
             }
 
@@ -392,20 +383,18 @@ Maui.ApplicationWindow
             {
                 anchors.fill: parent
             }
-
         }
     }
 
     Component.onCompleted:
     {
-        Vvave.autoScan = settings.autoScan
-        Vvave.fetchArtwork = settings.fetchArtwork
+//        Vvave.autoScan = settings.autoScan
+//        Vvave.fetchArtwork = settings.fetchArtwork
 
         if(Maui.Handy.isAndroid)
         {
             Maui.Android.statusbarColor(headBar.Kirigami.Theme.backgroundColor, false)
             Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, false)
-
         }
     }
 
@@ -459,8 +448,6 @@ Maui.ApplicationWindow
 
             root.x = Screen.desktopAvailableWidth - root.preferredMiniModeSize - Maui.Style.space.big
             root.y = Screen.desktopAvailableHeight - root.preferredMiniModeSize - Maui.Style.space.big
-
-
         }
     }
 }

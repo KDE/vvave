@@ -7,8 +7,6 @@ import "BabeTable"
 import "../db/Queries.js" as Q
 import "../utils/Player.js" as Player
 
-import org.mauikit.controls 1.0 as Maui
-
 import org.maui.vvave 1.0
 
 StackView
@@ -29,7 +27,6 @@ StackView
     initialItem: BabeGrid
     {
         id: albumsViewGrid
-        holder.emojiSize: Maui.Style.iconSizes.huge
         holder.emoji: "qrc:/assets/dialog-information.svg"
 
         onAlbumCoverClicked: control.populateTable(album, artist)
@@ -45,10 +42,11 @@ StackView
             trackNumberVisible: true
             coverArtVisible: true
             focus: true
+
             holder.emoji: "qrc:/assets/media-album-track.svg"
             holder.title : "Oops!"
             holder.body: i18n("This list is empty")
-            holder.emojiSize: Maui.Style.iconSizes.huge
+
             headBar.visible: true
             headBar.farLeftContent: ToolButton
             {
@@ -57,10 +55,8 @@ StackView
             }
 
             onQueueTrack: Player.queueTracks([listModel.get(index)], index)
-
             onRowClicked: Player.quickPlay(listModel.get(index))
             onAppendTrack: Player.addTrack(listModel.get(index))
-            onQuickPlayTrack: Player.quickPlay(listModel.get(index))
 
             onPlayAll:
             {

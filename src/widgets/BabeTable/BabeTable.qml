@@ -32,8 +32,6 @@ Maui.Page
     property alias holder : _listBrowser.holder
     property alias section : _listBrowser.section
 
-    property alias removeDialog : _removeDialog
-
     property bool trackNumberVisible : false
     property bool coverArtVisible : false
     property bool allowMenu: true
@@ -46,7 +44,6 @@ Maui.Page
     signal rowClicked(int index)
     signal rowDoubleClicked(int index)
     signal rowPressed(int index)
-    signal quickPlayTrack(int index)
     signal queueTrack(int index)
     signal appendTrack(int index)
 
@@ -85,7 +82,6 @@ Maui.Page
         {
             icon.name : "edit-select-all"
             text: i18n("Select All")
-//            onTriggered: appendAll()
         }
     }
 
@@ -118,27 +114,30 @@ Maui.Page
         }
     }
 
-    Maui.FileListingDialog
+    Component
     {
-        id: _removeDialog
+        id: _removeDialogComponent
 
-        title: i18n("Remove track")
-        message: i18n("Are you sure you want to delete the file from your computer? This action can not be undone.")
-
-        acceptButton.text: i18n("Remove")
-
-        onAccepted:
+        Maui.FileListingDialog
         {
-            if(FB.FM.removeFiles(_removeDialog.urls))
+            title: i18n("Remove track")
+            message: i18n("Are you sure you want to delete the file from your computer? This action can not be undone.")
+
+            acceptButton.text: i18n("Remove")
+
+            onAccepted:
             {
-                 listModel.list.remove(control.currentIndex)
+                if(FB.FM.removeFiles(urls))
+                {
+                    listModel.list.remove(control.currentIndex)
+                }
+                close()
             }
-            close()
-        }
 
-        onRejected:
-        {
-            close()
+            onRejected:
+            {
+                close()
+            }
         }
     }
 
@@ -171,21 +170,23 @@ Maui.Page
 
         onSaveToClicked:
         {
-            playlistDialog.composerList.urls = filterSelection(listModel.get(control.currentIndex).url)
-            playlistDialog.open()
+            _dialogLoader.sourceComponent = _playlistDialogComponent
+            dialog.composerList.urls = filterSelection(listModel.get(control.currentIndex).url)
+            dialog.open()
         }
 
         onOpenWithClicked: FB.FM.openLocation(filterSelection(listModel.get(control.currentIndex).url))
 
         onDeleteClicked:
         {
-            _removeDialog.urls = filterSelection(listModel.get(control.currentIndex).url)
-            _removeDialog.open()
+            _dialogLoader.sourceComponent = _removeDialogComponent
+            dialog.urls = filterSelection(listModel.get(control.currentIndex).url)
+            dialog.open()
         }
 
         onInfoClicked:
         {
-//            infoView.show(listModel.get(control.currentIndex))
+            //            infoView.show(listModel.get(control.currentIndex))
         }
 
         onEditClicked:
@@ -284,7 +285,6 @@ Maui.Page
             filterCaseSensitivity: Qt.CaseInsensitive
         }
 
-        //    property alias animBabe: delegate.animBabe
         delegate: TableDelegate
         {
             id: delegate
@@ -305,132 +305,132 @@ Maui.Page
                                    "text/uri-list": control.filterSelectedItems(model.url)
                                } : {}
 
-        sameAlbum:
-        {
-            const item = listModel.get(index-1)
-            return coverArt && item && item.album === album && item.artist === artist
-        }
+            sameAlbum:
+            {
+                const item = listModel.get(index-1)
+                return coverArt && item && item.album === album && item.artist === artist
+            }
 
-        AbstractButton
-        {
-            Layout.fillHeight: true
-            Layout.preferredWidth: Maui.Style.rowHeight
-            visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
-            icon.name: "media-playlist-append"
+            AbstractButton
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: Maui.Style.rowHeight
+                visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
+                icon.name: "media-playlist-append"
+                onClicked:
+                {
+                    currentIndex = index
+                    appendTrack(index)
+                }
+
+                Kirigami.Icon
+                {
+                    anchors.centerIn: parent
+                    height: Maui.Style.iconSizes.small
+                    width: height
+                    source: parent.icon.name
+                }
+
+                opacity: delegate.hovered ? 0.8 : 0.6
+            }
+
             onClicked:
             {
+                _listBrowser.forceActiveFocus()
                 currentIndex = index
-                appendTrack(index)
+
+                if(selectionMode)
+                {
+                    selectionBar.addToSelection(model)
+                    return
+                }
+
+                if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                    _listBrowser.itemsSelected([index])
+
+                if(Maui.Handy.isTouch)
+                    rowClicked(index)
             }
 
-            Kirigami.Icon
+            onDoubleClicked:
             {
-                anchors.centerIn: parent
-                height: Maui.Style.iconSizes.small
-                width: height
-                source: parent.icon.name
+                currentIndex = index
+
+                if(!Maui.Handy.isTouch)
+                    rowClicked(index)
             }
 
-            opacity: delegate.hovered ? 0.8 : 0.6
-        }
-
-        onClicked:
-        {
-            _listBrowser.forceActiveFocus()
-            currentIndex = index
-            if(selectionMode)
+            Connections
             {
-                selectionBar.addToSelection(model)
-                return
-            }
+                target: selectionBar
+                ignoreUnknownSignals: true
 
-            if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
-                _listBrowser.itemsSelected([index])
+                function onUriRemoved (uri)
+                {
+                    if(uri === model.url)
+                        delegate.checked = false
+                }
 
-            if(Maui.Handy.isTouch)
-                rowClicked(index)
-        }
+                function onUriAdded(uri)
+                {
+                    if(uri === model.url)
+                        delegate.checked = true
+                }
 
-        onDoubleClicked:
-        {
-            currentIndex = index
-
-            if(!Maui.Handy.isTouch)
-                rowClicked(index)
-        }
-
-        Connections
-        {
-            target: selectionBar
-            ignoreUnknownSignals: true
-
-            function onUriRemoved (uri)
-            {
-                if(uri === model.url)
+                function onCleared()
+                {
                     delegate.checked = false
-            }
-
-            function onUriAdded(uri)
-            {
-                if(uri === model.url)
-                    delegate.checked = true
-            }
-
-            function onCleared()
-            {
-                delegate.checked = false
+                }
             }
         }
     }
-}
 
-function openItemMenu(index)
-{
-    currentIndex = index
-    contextMenu.fav = FB.Tagging.isFav(listModel.get(currentIndex).url)
-    contextMenu.show()
-    rowPressed(index)
-}
-
-function goToAlbum()
-{
-    swipeView.currentIndex = viewsIndex.albums
-    const item = listModel.get(control.currentIndex)
-    albumsView.populateTable(item.album, item.artist)
-}
-
-function goToArtist()
-{
-    swipeView.currentIndex = viewsIndex.artists
-    const item = listModel.get(control.currentIndex)
-    artistsView.populateTable(undefined, item.artist)
-}
-
-function filterSelectedItems(path)
-{
-    if(selectionBar && selectionBar.count > 0 && selectionBar.contains(path))
+    function openItemMenu(index)
     {
-        const uris = selectionBar.uris
-        return uris.join("\n")
+        currentIndex = index
+        contextMenu.fav = FB.Tagging.isFav(listModel.get(currentIndex).url)
+        contextMenu.show()
+        rowPressed(index)
     }
 
-    return path
-}
-
-function filterSelection(url)
-{
-    if(selectionBar.contains(url))
+    function goToAlbum()
     {
-        return selectionBar.uris
-    }else
-    {
-        return [url]
+        swipeView.currentIndex = viewsIndex.albums
+        const item = listModel.get(control.currentIndex)
+        albumsView.populateTable(item.album, item.artist)
     }
-}
 
-function forceActiveFocus()
-{
-    _listBrowser.forceActiveFocus()
-}
+    function goToArtist()
+    {
+        swipeView.currentIndex = viewsIndex.artists
+        const item = listModel.get(control.currentIndex)
+        artistsView.populateTable(undefined, item.artist)
+    }
 
+    function filterSelectedItems(path)
+    {
+        if(selectionBar && selectionBar.count > 0 && selectionBar.contains(path))
+        {
+            const uris = selectionBar.uris
+            return uris.join("\n")
+        }
+
+        return path
+    }
+
+    function filterSelection(url)
+    {
+        if(selectionBar.contains(url))
+        {
+            return selectionBar.uris
+        }else
+        {
+            return [url]
+        }
+    }
+
+    function forceActiveFocus()
+    {
+        _listBrowser.forceActiveFocus()
+    }
 }

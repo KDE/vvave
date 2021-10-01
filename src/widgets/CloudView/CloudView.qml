@@ -186,7 +186,6 @@ Maui.Page
             //                currentIndex = index
             //                if(FB.FM.fileExists("file://" + _cloudList.get(index).thumbnail))
             //                {
-            //                    quickPlayTrack(index)
             //                }else
             //                {
             //                    _cloudList.requestFile(index)

@@ -39,7 +39,6 @@ StackView
             emoji: "qrc:/assets/dialog-information.svg"
             title : i18n("No Folders!")
             body: i18n("Add new music to your sources to browse by folders")
-            emojiSize: Maui.Style.iconSizes.huge
         }
 
         Maui.ListBrowser
@@ -103,11 +102,12 @@ StackView
             list.query : Q.GET.tracksWhere_.arg("source = \""+control.currentFolder+"\"")
 
             coverArtVisible: true
+
             holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: true
             holder.title : i18n("No Tracks!")
             holder.body: i18n("This source folder seems to be empty!")
-            holder.emojiSize: Maui.Style.iconSizes.huge
+
             headBar.visible: true
             headBar.farLeftContent: ToolButton
             {
@@ -116,17 +116,13 @@ StackView
             }
 
             onRowClicked: Player.quickPlay(listModel.get(index))
-            onQuickPlayTrack: Player.quickPlay(listModel.get(index))
-
             onAppendTrack: Player.addTrack(listModel.get(index))
             onPlayAll: Player.playAllModel(listModel.list)
 
             onAppendAll: Player.appendAllModel(listModel.list)
             onQueueTrack: Player.queueTracks([listModel.get(index)], index)
-
         }
     }
-
 
     function filter(folder)
     {

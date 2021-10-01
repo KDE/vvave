@@ -25,9 +25,7 @@ StackView
         id: newPlaylistDialog
     }
 
-    initialItem: PlaylistsViewModel
-    {
-    }
+    initialItem: PlaylistsViewModel {}
 
     Component
     {
@@ -36,17 +34,20 @@ StackView
         BabeTable
         {
             id: filterList
+
             property bool isPublic: true
             signal removeFromPlaylist(string url)
+
             list.query: control.playlistQuery
             coverArtVisible: true
             showTitle: false
             title: control.currentPlaylist
+
             holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: true
             holder.title : title
             holder.body: "Your playlist is empty,<br>start adding new music to it"
-            holder.emojiSize: Maui.Style.iconSizes.huge
+
             headBar.visible: true
             headBar.farLeftContent: ToolButton
             {
@@ -65,10 +66,8 @@ StackView
             }
 
             onQueueTrack: Player.queueTracks([listModel.get(index)], index)
-
             onRowClicked: Player.quickPlay(filterList.listModel.get(index))
             onAppendTrack: Player.addTrack(filterList.listModel.get(index))
-            onQuickPlayTrack: Player.quickPlay(filterList.listModel.get(index))
 
             onPlayAll:
             {

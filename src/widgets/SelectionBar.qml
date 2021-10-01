@@ -19,7 +19,6 @@ Maui.SelectionBar
         width: ListView.view.width
         number: false
         coverArt: true
-        showQuickActions: false
         checked: true
         checkable: true
         onToggled: control.removeAtIndex(index)
@@ -50,11 +49,11 @@ Maui.SelectionBar
         icon.name: "tag"
         onTriggered:
         {
-            playlistDialog.composerList.urls = control.uris
-            playlistDialog.open()
+            _dialogLoader.sourceComponent = _playlistDialogComponent
+            dialog.composerList.urls = control.uris
+            dialog.open()
         }
     }
-
 
     hiddenActions: [
         Action

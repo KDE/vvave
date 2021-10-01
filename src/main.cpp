@@ -93,18 +93,16 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(
-        &engine,
-        &QQmlApplicationEngine::objectCreated,
-        &app,
-        [url, args](QObject *obj, const QUrl &objUrl) {
-            if (!obj && url == objUrl)
-                QCoreApplication::exit(-1);
 
-            if (!args.isEmpty())
-                vvave::instance()->openUrls(args);
-        },
-        Qt::QueuedConnection);
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url, args](QObject *obj, const QUrl &objUrl)
+    {
+        if (!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+
+        if (!args.isEmpty())
+            vvave::instance()->openUrls(args);
+
+    }, Qt::QueuedConnection);
 
     qmlRegisterSingletonInstance<vvave>(VVAVE_URI, 1, 0, "Vvave", vvave::instance());
 
@@ -120,11 +118,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<TrackInfo>(VVAVE_URI, 1, 0, "TrackInfo");
     qmlRegisterType<MetadataEditor>(VVAVE_URI, 1, 0, "MetadataEditor");
 
-    qmlRegisterSingletonType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
-        Q_UNUSED(scriptEngine)
-        Q_UNUSED(engine)
-           return new PlaylistsModel;
-       });
+    qmlRegisterSingletonType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists", [](QQmlEngine*, QJSEngine*) -> QObject * {
+
+        return new PlaylistsModel;
+    });
 
     engine.addImageProvider("artwork", new ArtworkProvider());
 
