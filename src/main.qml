@@ -90,7 +90,11 @@ Maui.ApplicationWindow
     //        enabled: !Kirigami.Settings.isMobile
     //    }
 
-    //    FloatingDisk {}
+    Loader
+    {
+        asynchronous: true
+        FloatingDisk {}
+    }
 
     Settings
     {
@@ -100,17 +104,17 @@ Maui.ApplicationWindow
         property bool autoScan: true
     }
 
-//    Mpris2
-//    {
-//        playListModel: playlist
-//        audioPlayer: player
-//        playerName: 'vvave'
+        Mpris2
+        {
+            playListModel: playlist
+            audioPlayer: player
+            playerName: 'vvave'
 
-//        onRaisePlayer:
-//        {
-//            root.raise()
-//        }
-//    }
+            onRaisePlayer:
+            {
+                root.raise()
+            }
+        }
 
     Playlist
     {
@@ -226,11 +230,16 @@ Maui.ApplicationWindow
         }
     }
 
-//    footer: PlaybackBar
-//    {
-//        visible: _viewsPage.visible
-//        width: parent.width
-//    }
+    footer: Loader
+    {
+        asynchronous: true
+        width: parent.width
+
+        sourceComponent: PlaybackBar
+        {
+            visible: _viewsPage.visible
+        }
+    }
 
     StackView
     {
@@ -257,7 +266,7 @@ Maui.ApplicationWindow
                 {
                     icon.name: "application-menu"
 
-//                    MA.AccountsMenuItem{}
+                    //                    MA.AccountsMenuItem{}
 
                     MenuItem
                     {
@@ -294,12 +303,12 @@ Maui.ApplicationWindow
                     }
                 }
 
-                TracksView
+                Maui.AppViewLoader
                 {
-                    id: tracksView
-
                     Maui.AppView.title: i18n("Songs")
                     Maui.AppView.iconName: "view-media-track"
+
+                    TracksView {}
                 }
 
                 Maui.AppViewLoader
@@ -386,8 +395,8 @@ Maui.ApplicationWindow
 
     Component.onCompleted:
     {
-//        Vvave.autoScan = settings.autoScan
-//        Vvave.fetchArtwork = settings.fetchArtwork
+        //        Vvave.autoScan = settings.autoScan
+        //        Vvave.fetchArtwork = settings.fetchArtwork
 
         if(Maui.Handy.isAndroid)
         {
