@@ -388,14 +388,14 @@ Maui.ApplicationWindow
 
     Component.onCompleted:
     {
-        Vvave.autoScan = settings.autoScan
-        Vvave.fetchArtwork = settings.fetchArtwork
+//        Vvave.autoScan = settings.autoScan
+//        Vvave.fetchArtwork = settings.fetchArtwork
 
-        if(Maui.Handy.isAndroid)
-        {
-            Maui.Android.statusbarColor(headBar.Kirigami.Theme.backgroundColor, false)
-            Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, false)
-        }
+//        if(Maui.Handy.isAndroid)
+//        {
+//            Maui.Android.statusbarColor(headBar.Kirigami.Theme.backgroundColor, false)
+//            Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, false)
+//        }
     }
 
     /*CONNECTIONS*/
