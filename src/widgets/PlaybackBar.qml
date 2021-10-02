@@ -2,7 +2,6 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
-import QtGraphicalEffects 1.0
 import QtMultimedia 5.0
 
 import org.kde.kirigami 2.7 as Kirigami
@@ -19,43 +18,42 @@ Control
     id: control
     implicitHeight: visible ? Maui.Style.toolBarHeight : 0
 
-    background: Item
-    {
-        Image
-        {
-            id: artworkBg
-            height: parent.height
-            width: parent.width
+//    background: Item
+//    {
+//        Image
+//        {
+//            id: artworkBg
+//            height: parent.height
+//            width: parent.width
 
-            sourceSize.width: 500
-            sourceSize.height: height
+//            sourceSize.width: 500
+//            sourceSize.height: height
 
-            fillMode: Image.PreserveAspectCrop
-            antialiasing: true
-            smooth: true
-            asynchronous: true
-            cache: true
+//            fillMode: Image.PreserveAspectCrop
+//            antialiasing: true
+//            smooth: true
+//            asynchronous: true
+//            cache: true
 
-            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
-        }
+//            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+//        }
 
-        FastBlur
-        {
-            id: fastBlur
-            anchors.fill: parent
-            source: artworkBg
-            radius: 100
-            transparentBorder: false
-            cached: true
+//        FastBlur
+//        {
+//            anchors.fill: parent
+//            source: artworkBg
+//            radius: 100
+//            transparentBorder: false
+//            cached: true
 
-            Rectangle
-            {
-                anchors.fill: parent
-                color: Kirigami.Theme.backgroundColor
-                opacity: 0.8
-            }
-        }
-    }
+//            Rectangle
+//            {
+//                anchors.fill: parent
+//                color: Kirigami.Theme.backgroundColor
+//                opacity: 0.8
+//            }
+//        }
+//    }
 
     Maui.ToolBar
     {
@@ -65,48 +63,48 @@ Control
         position: ToolBar.Footer
         //            visible: player.state !== MediaPlayer.StoppedState
 
-        background: Slider
-        {
-            id: progressBar
-            height: 16
-            z: parent.z+1
-            padding: 0
-            from: 0
-            to: 1000
-            value: player.pos/player.duration*1000
+//        background: Slider
+//        {
+//            id: progressBar
+//            height: 16
+//            z: parent.z+1
+//            padding: 0
+//            from: 0
+//            to: 1000
+//            value: player.pos/player.duration*1000
 
-            spacing: 0
-            focus: true
-            onMoved: player.pos = (player.duration / 1000) * value
-            enabled: player.playing
+//            spacing: 0
+//            focus: true
+//            onMoved: player.pos = (player.duration / 1000) * value
+//            enabled: player.playing
 
-            background: Rectangle
-            {
-                implicitWidth: progressBar.width
-                implicitHeight: progressBar.height
-                width: progressBar.availableWidth
-                color: "transparent"
-                opacity: progressBar.pressed ? 0.5 : 1
+//            background: Rectangle
+//            {
+//                implicitWidth: progressBar.width
+//                implicitHeight: progressBar.height
+//                width: progressBar.availableWidth
+//                color: "transparent"
+//                opacity: progressBar.pressed ? 0.5 : 1
 
-                Rectangle
-                {
-                    width: progressBar.visualPosition * parent.width
-                    height: progressBar.pressed ? 5 :  2
-                    color: Kirigami.Theme.highlightColor
-                }
-            }
+//                Rectangle
+//                {
+//                    width: progressBar.visualPosition * parent.width
+//                    height: progressBar.pressed ? 5 :  2
+//                    color: Kirigami.Theme.highlightColor
+//                }
+//            }
 
-            handle: Rectangle
-            {
-                x: progressBar.leftPadding + progressBar.visualPosition
-                   * (progressBar.availableWidth - width)
-                y: 0
-                radius: height
-                implicitWidth: Maui.Style.iconSizes.medium
-                implicitHeight: 16
-                color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
-            }
-        }
+//            handle: Rectangle
+//            {
+//                x: progressBar.leftPadding + progressBar.visualPosition
+//                   * (progressBar.availableWidth - width)
+//                y: 0
+//                radius: height
+//                implicitWidth: Maui.Style.iconSizes.medium
+//                implicitHeight: 16
+//                color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
+//            }
+//        }
 
         farLeftContent: ToolButton
         {

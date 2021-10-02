@@ -354,14 +354,12 @@ Maui.ApplicationWindow
                 }
             }
 
-
-            Maui.ProgressIndicator
-            {
-                id: _scanningProgress
-                width: parent.width
-                anchors.bottom: parent.bottom
-                visible: Vvave.scanning
-            }
+//            Maui.ProgressIndicator
+//            {
+//                width: parent.width
+//                anchors.bottom: parent.bottom
+//                visible: Vvave.scanning
+//            }
         }
 
         Loader
