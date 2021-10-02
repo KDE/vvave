@@ -82,13 +82,13 @@ Maui.ApplicationWindow
     /*HANDLE EVENTS*/
     onClosing: Player.savePlaylist()
 
-//    Maui.WindowBlur
-//    {
-//        view: root
-//        geometry: Qt.rect(root.x, root.y, root.width, root.height)
-//        windowRadius: root.background.radius
-//        enabled: !Kirigami.Settings.isMobile
-//    }
+    //    Maui.WindowBlur
+    //    {
+    //        view: root
+    //        geometry: Qt.rect(root.x, root.y, root.width, root.height)
+    //        windowRadius: root.background.radius
+    //        enabled: !Kirigami.Settings.isMobile
+    //    }
 
     //    FloatingDisk {}
 
@@ -304,28 +304,30 @@ Maui.ApplicationWindow
                     Maui.AppView.iconName: "view-media-track"
                 }
 
-                AlbumsView
+                Maui.AppViewLoader
                 {
-                    id: albumsView
                     Maui.AppView.title: i18n("Albums")
                     Maui.AppView.iconName: "view-media-album-cover"
 
-                    holder.title : i18n("No Albums!")
-                    holder.body: i18n("Add new music sources")
-
-                    list.query: Albums.ALBUMS
+                    AlbumsView
+                    {
+                        holder.title : i18n("No Albums!")
+                        holder.body: i18n("Add new music sources")
+                        list.query: Albums.ALBUMS
+                    }
                 }
 
-                AlbumsView
+                Maui.AppViewLoader
                 {
-                    id: artistsView
                     Maui.AppView.title: i18n("Artists")
                     Maui.AppView.iconName: "view-media-artist"
 
-                    holder.title : i18n("No Artists!")
-                    holder.body: i18n("Add new music sources")
-
-                    list.query : Albums.ARTISTS
+                    AlbumsView
+                    {
+                        holder.title : i18n("No Artists!")
+                        holder.body: i18n("Add new music sources")
+                        list.query : Albums.ARTISTS
+                    }
                 }
 
                 Maui.AppViewLoader

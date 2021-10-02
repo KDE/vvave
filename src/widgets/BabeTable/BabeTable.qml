@@ -397,14 +397,14 @@ Maui.Page
     {
         swipeView.currentIndex = viewsIndex.albums
         const item = listModel.get(control.currentIndex)
-        albumsView.populateTable(item.album, item.artist)
+        swipeView.currentItem.item.populateTable(item.album, item.artist)
     }
 
     function goToArtist()
     {
         swipeView.currentIndex = viewsIndex.artists
         const item = listModel.get(control.currentIndex)
-        artistsView.populateTable(undefined, item.artist)
+         swipeView.currentItem.item.populateTable(undefined, item.artist)
     }
 
     function filterSelectedItems(path)
