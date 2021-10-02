@@ -304,54 +304,54 @@ Maui.ApplicationWindow
                     Maui.AppView.iconName: "view-media-track"
                 }
 
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Albums")
-                    Maui.AppView.iconName: "view-media-album-cover"
+//                Maui.AppViewLoader
+//                {
+//                    Maui.AppView.title: i18n("Albums")
+//                    Maui.AppView.iconName: "view-media-album-cover"
 
-                    AlbumsView
-                    {
-                        holder.title : i18n("No Albums!")
-                        holder.body: i18n("Add new music sources")
-                        list.query: Albums.ALBUMS
-                    }
-                }
+//                    AlbumsView
+//                    {
+//                        holder.title : i18n("No Albums!")
+//                        holder.body: i18n("Add new music sources")
+//                        list.query: Albums.ALBUMS
+//                    }
+//                }
 
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Artists")
-                    Maui.AppView.iconName: "view-media-artist"
+//                Maui.AppViewLoader
+//                {
+//                    Maui.AppView.title: i18n("Artists")
+//                    Maui.AppView.iconName: "view-media-artist"
 
-                    AlbumsView
-                    {
-                        holder.title : i18n("No Artists!")
-                        holder.body: i18n("Add new music sources")
-                        list.query : Albums.ARTISTS
-                    }
-                }
+//                    AlbumsView
+//                    {
+//                        holder.title : i18n("No Artists!")
+//                        holder.body: i18n("Add new music sources")
+//                        list.query : Albums.ARTISTS
+//                    }
+//                }
 
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Tags")
-                    Maui.AppView.iconName: "tag"
-                    PlaylistsView {}
-                }
+//                Maui.AppViewLoader
+//                {
+//                    Maui.AppView.title: i18n("Tags")
+//                    Maui.AppView.iconName: "tag"
+//                    PlaylistsView {}
+//                }
 
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Folders")
-                    Maui.AppView.iconName: "folder"
+//                Maui.AppViewLoader
+//                {
+//                    Maui.AppView.title: i18n("Folders")
+//                    Maui.AppView.iconName: "folder"
 
-                    FoldersView {}
-                }
+//                    FoldersView {}
+//                }
 
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Cloud")
-                    Maui.AppView.iconName: "folder-cloud"
+//                Maui.AppViewLoader
+//                {
+//                    Maui.AppView.title: i18n("Cloud")
+//                    Maui.AppView.iconName: "folder-cloud"
 
-                    CloudView {}
-                }
+//                    CloudView {}
+//                }
             }
 
             Maui.ProgressIndicator
