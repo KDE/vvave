@@ -100,19 +100,17 @@ Maui.ApplicationWindow
         property bool autoScan: true
     }
 
-    Mpris2
-    {
-        id: mpris2Interface
+//    Mpris2
+//    {
+//        playListModel: playlist
+//        audioPlayer: player
+//        playerName: 'vvave'
 
-        playListModel: playlist
-        audioPlayer: player
-        playerName: 'vvave'
-
-        onRaisePlayer:
-        {
-            root.raise()
-        }
-    }
+//        onRaisePlayer:
+//        {
+//            root.raise()
+//        }
+//    }
 
     Playlist
     {
@@ -228,11 +226,11 @@ Maui.ApplicationWindow
         }
     }
 
-    footer: PlaybackBar
-    {
-        visible: _viewsPage.visible
-        width: parent.width
-    }
+//    footer: PlaybackBar
+//    {
+//        visible: _viewsPage.visible
+//        width: parent.width
+//    }
 
     StackView
     {
@@ -259,7 +257,7 @@ Maui.ApplicationWindow
                 {
                     icon.name: "application-menu"
 
-                    MA.AccountsMenuItem{}
+//                    MA.AccountsMenuItem{}
 
                     MenuItem
                     {
