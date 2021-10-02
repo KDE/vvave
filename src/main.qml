@@ -52,7 +52,7 @@ Maui.ApplicationWindow
 
     readonly property alias isPlaying: player.playing
     property int onQueue: 0
-
+    property alias mainPlaylist : _mainPlaylistLoader.item
     readonly property bool mainlistEmpty: mainPlaylist.listModel.list.count ===0
 
     /***************************************************/
@@ -223,10 +223,14 @@ Maui.ApplicationWindow
         }
 
         background: null
-        MainPlaylist
-        {
-            id: mainPlaylist
+        Loader
+        {            id: _mainPlaylistLoader
             anchors.fill: parent
+
+            asynchronous: true
+            sourceComponent: MainPlaylist
+            {
+            }
         }
     }
 
@@ -234,11 +238,9 @@ Maui.ApplicationWindow
     {
         asynchronous: true
         width: parent.width
+        visible: _viewsPage.visible
 
-        sourceComponent: PlaybackBar
-        {
-            visible: _viewsPage.visible
-        }
+        sourceComponent: PlaybackBar {}
     }
 
     StackView
@@ -400,8 +402,8 @@ Maui.ApplicationWindow
 
     Component.onCompleted:
     {
-        //        Vvave.autoScan = settings.autoScan
-        //        Vvave.fetchArtwork = settings.fetchArtwork
+        Vvave.autoScan = settings.autoScan
+        Vvave.fetchArtwork = settings.fetchArtwork
 
         if(Maui.Handy.isAndroid)
         {

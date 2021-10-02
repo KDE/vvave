@@ -92,7 +92,7 @@ Maui.Page
     headBar.middleContent: Loader
     {
         asynchronous: true
-        Maui.TextField
+        sourceComponent: Maui.TextField
         {
             visible: listModel.list.count > 1
             Layout.fillWidth: true
