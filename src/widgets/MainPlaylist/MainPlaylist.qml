@@ -178,18 +178,18 @@ Maui.Page
 
         Component.onCompleted:
         {
-            var lastplaylist = Maui.Handy.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
-            var n = lastplaylist.length
+//            var lastplaylist = Maui.Handy.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
+//            var n = lastplaylist.length
 
-            if(n>0)
-            {
-                for(var i = 0; i < n; i++)
-                {
-                    var where = "url = \""+lastplaylist[i]+"\""
-                    var query = Q.GET.tracksWhere_.arg(where)
-                    listModel.list.appendQuery(query);
-                }
-            }
+//            if(n>0)
+//            {
+//                for(var i = 0; i < n; i++)
+//                {
+//                    var where = "url = \""+lastplaylist[i]+"\""
+//                    var query = Q.GET.tracksWhere_.arg(where)
+//                    listModel.list.appendQuery(query);
+//                }
+//            }
         }
     }
 
