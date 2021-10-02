@@ -1,6 +1,6 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-
+#include <QDebug>
 #include <QCommandLineParser>
 #include <QIcon>
 
@@ -49,6 +49,8 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
+  qDebug() << "APP LOADING SPEED TESTS" << 0;
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
@@ -62,10 +64,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QApplication app(argc, argv);
 #endif
 
+    qDebug() << "APP LOADING SPEED TESTS" << 1;
+
 #ifdef Q_OS_ANDROID
     if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
         return -1;
 #endif
+
+    qDebug() << "APP LOADING SPEED TESTS" << 2;
 
     app.setOrganizationName(QStringLiteral("Maui"));
     app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
@@ -93,6 +99,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
+
+    qDebug() << "APP LOADING SPEED TESTS" << 3;
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url, args](QObject *obj, const QUrl &objUrl)
     {
@@ -129,7 +137,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qRegisterMetaType<MediaPlayer2Player *>();
 #endif
 
+    qDebug() << "APP LOADING SPEED TESTS" << 4;
+
     engine.load(url);
+
+    qDebug() << "APP LOADING SPEED TESTS" << 5;
+
 
 #ifdef Q_OS_MACOS
     //	MAUIMacOS::removeTitlebarFromWindow();
