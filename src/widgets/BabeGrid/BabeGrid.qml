@@ -24,13 +24,17 @@ Maui.AltBrowser
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
-    headBar.middleContent: Maui.TextField
+    headBar.middleContent: Loader
     {
-        Layout.fillWidth: true
-        Layout.maximumWidth: 500
-        placeholderText: i18np("Filter", "Filter %1 albums", _albumsList.count)
-        onAccepted: _albumsModel.filter = text
-        onCleared: _albumsModel.filter = ""
+        asynchronous: true
+        sourceComponent: Maui.TextField
+        {
+            Layout.fillWidth: true
+            Layout.maximumWidth: 500
+            placeholderText: i18np("Filter", "Filter %1 albums", _albumsList.count)
+            onAccepted: _albumsModel.filter = text
+            onCleared: _albumsModel.filter = ""
+        }
     }
 
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
@@ -43,57 +47,57 @@ Maui.AltBrowser
 
     property string typingQuery
 
-     Maui.Chip
-     {
-         z: control.z + 99999
-         Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
-         visible: _typingTimer.running
-         label.text: typingQuery
-         anchors.left: parent.left
-         anchors.bottom: parent.bottom
-         showCloseButton: false
-         anchors.margins: Maui.Style.space.medium
-     }
+    Maui.Chip
+    {
+        z: control.z + 99999
+        Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+        visible: _typingTimer.running
+        label.text: typingQuery
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        showCloseButton: false
+        anchors.margins: Maui.Style.space.medium
+    }
 
-     Timer
-     {
-         id: _typingTimer
-         interval: 250
-         onTriggered:
-         {
-             const index = _albumsList.indexOfName(typingQuery)
-             if(index > -1)
-             {
-                 control.currentIndex = _albumsModel.mappedFromSource(index)
-             }
+    Timer
+    {
+        id: _typingTimer
+        interval: 250
+        onTriggered:
+        {
+            const index = _albumsList.indexOfName(typingQuery)
+            if(index > -1)
+            {
+                control.currentIndex = _albumsModel.mappedFromSource(index)
+            }
 
-             typingQuery = ""
-         }
-     }
+            typingQuery = ""
+        }
+    }
 
-     Connections
-     {
-         target: control.currentView
-         ignoreUnknownSignals: true
-         function onKeyPress(event)
-         {
-             const index = control.currentIndex
-             const item = _albumsModel.get(index)
+    Connections
+    {
+        target: control.currentView
+        ignoreUnknownSignals: true
+        function onKeyPress(event)
+        {
+            const index = control.currentIndex
+            const item = _albumsModel.get(index)
 
-             var pat = /^([a-zA-Z0-9 _-]+)$/
-             if(event.count === 1 && pat.test(event.text))
-             {
-                 typingQuery += event.text
-                 _typingTimer.restart()
-             }
+            var pat = /^([a-zA-Z0-9 _-]+)$/
+            if(event.count === 1 && pat.test(event.text))
+            {
+                typingQuery += event.text
+                _typingTimer.restart()
+            }
 
-             //shortcut for opening
-             if(event.key === Qt.Key_Return)
-             {
-                 albumCoverClicked(item.album, item.artist)
-             }
-         }
-     }
+            //shortcut for opening
+            if(event.key === Qt.Key_Return)
+            {
+                albumCoverClicked(item.album, item.artist)
+            }
+        }
+    }
 
     model: Maui.BaseModel
     {

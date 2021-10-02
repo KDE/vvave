@@ -104,17 +104,17 @@ Maui.ApplicationWindow
         property bool autoScan: true
     }
 
-        Mpris2
-        {
-            playListModel: playlist
-            audioPlayer: player
-            playerName: 'vvave'
+    Mpris2
+    {
+        playListModel: playlist
+        audioPlayer: player
+        playerName: 'vvave'
 
-            onRaisePlayer:
-            {
-                root.raise()
-            }
+        onRaisePlayer:
+        {
+            root.raise()
         }
+    }
 
     Playlist
     {
@@ -262,28 +262,33 @@ Maui.ApplicationWindow
                 altHeader: Kirigami.Settings.isMobile
                 showCSDControls: true
 
-                headBar.leftContent: Maui.ToolButtonMenu
+                headBar.leftContent: Loader
                 {
-                    icon.name: "application-menu"
+                    asynchronous: true
 
-                    //                    MA.AccountsMenuItem{}
-
-                    MenuItem
+                    sourceComponent: Maui.ToolButtonMenu
                     {
-                        text: i18n("Settings")
-                        icon.name: "settings-configure"
-                        onTriggered:
+                        icon.name: "application-menu"
+
+                        MA.AccountsMenuItem{}
+
+                        MenuItem
                         {
-                            _dialogLoader.sourceComponent = _settingsDialogComponent
-                            dialog.open()
+                            text: i18n("Settings")
+                            icon.name: "settings-configure"
+                            onTriggered:
+                            {
+                                _dialogLoader.sourceComponent = _settingsDialogComponent
+                                dialog.open()
+                            }
                         }
-                    }
 
-                    MenuItem
-                    {
-                        text: i18n("About")
-                        icon.name: "documentinfo"
-                        onTriggered: root.about()
+                        MenuItem
+                        {
+                            text: i18n("About")
+                            icon.name: "documentinfo"
+                            onTriggered: root.about()
+                        }
                     }
                 }
 

@@ -57,45 +57,53 @@ Maui.Page
 
     headBar.visible: true
     headBar.forceCenterMiddleContent: false
-    headBar.rightContent: Maui.ToolButtonMenu
+    headBar.rightContent: Loader
     {
-        enabled: listModel.list.count > 0
-        icon.name: "media-playback-start"
-
-        MenuItem
+        asynchronous: true
+        sourceComponent: Maui.ToolButtonMenu
         {
-            icon.name : "media-playback-start"
-            text: i18n("Play All")
-            onTriggered: playAll()
-        }
+            enabled: listModel.list.count > 0
+            icon.name: "media-playback-start"
 
-        MenuItem
-        {
-            icon.name : "media-playlist-append"
-            text: i18n("Append All")
-            onTriggered: appendAll()
-        }
+            MenuItem
+            {
+                icon.name : "media-playback-start"
+                text: i18n("Play All")
+                onTriggered: playAll()
+            }
 
-        MenuSeparator{}
+            MenuItem
+            {
+                icon.name : "media-playlist-append"
+                text: i18n("Append All")
+                onTriggered: appendAll()
+            }
 
-        MenuItem
-        {
-            icon.name : "edit-select-all"
-            text: i18n("Select All")
+            MenuSeparator{}
+
+            MenuItem
+            {
+                icon.name : "edit-select-all"
+                text: i18n("Select All")
+            }
         }
     }
 
-    headBar.middleContent: Maui.TextField
+    headBar.middleContent: Loader
     {
-        visible: listModel.list.count > 1
-        Layout.fillWidth: true
-        Layout.minimumWidth: 100
-        Layout.maximumWidth: 500
-        Layout.alignment: Qt.AlignCenter
-        enabled: control.listModel.list.count > 0
-        placeholderText: i18np("Filter", "Filter %1 songs", listModel.list.count)
-        onAccepted: listModel.filter = text
-        onCleared: listModel.filter = ""
+        asynchronous: true
+        Maui.TextField
+        {
+            visible: listModel.list.count > 1
+            Layout.fillWidth: true
+            Layout.minimumWidth: 100
+            Layout.maximumWidth: 500
+            Layout.alignment: Qt.AlignCenter
+            enabled: control.listModel.list.count > 0
+            placeholderText: i18np("Filter", "Filter %1 songs", listModel.list.count)
+            onAccepted: listModel.filter = text
+            onCleared: listModel.filter = ""
+        }
     }
 
     Component
@@ -305,132 +313,132 @@ Maui.Page
                                    "text/uri-list": control.filterSelectedItems(model.url)
                                } : {}
 
-            sameAlbum:
-            {
-                const item = listModel.get(index-1)
-                return coverArt && item && item.album === album && item.artist === artist
-            }
+        sameAlbum:
+        {
+            const item = listModel.get(index-1)
+            return coverArt && item && item.album === album && item.artist === artist
+        }
 
-            AbstractButton
-            {
-                Layout.fillHeight: true
-                Layout.preferredWidth: Maui.Style.rowHeight
-                visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
-                icon.name: "media-playlist-append"
-                onClicked:
-                {
-                    currentIndex = index
-                    appendTrack(index)
-                }
-
-                Kirigami.Icon
-                {
-                    anchors.centerIn: parent
-                    height: Maui.Style.iconSizes.small
-                    width: height
-                    source: parent.icon.name
-                }
-
-                opacity: delegate.hovered ? 0.8 : 0.6
-            }
-
+        AbstractButton
+        {
+            Layout.fillHeight: true
+            Layout.preferredWidth: Maui.Style.rowHeight
+            visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
+            icon.name: "media-playlist-append"
             onClicked:
             {
-                _listBrowser.forceActiveFocus()
                 currentIndex = index
-
-                if(selectionMode)
-                {
-                    selectionBar.addToSelection(model)
-                    return
-                }
-
-                if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
-                    _listBrowser.itemsSelected([index])
-
-                if(Maui.Handy.isTouch)
-                    rowClicked(index)
+                appendTrack(index)
             }
 
-            onDoubleClicked:
+            Kirigami.Icon
             {
-                currentIndex = index
-
-                if(!Maui.Handy.isTouch)
-                    rowClicked(index)
+                anchors.centerIn: parent
+                height: Maui.Style.iconSizes.small
+                width: height
+                source: parent.icon.name
             }
 
-            Connections
+            opacity: delegate.hovered ? 0.8 : 0.6
+        }
+
+        onClicked:
+        {
+            _listBrowser.forceActiveFocus()
+            currentIndex = index
+
+            if(selectionMode)
             {
-                target: selectionBar
-                ignoreUnknownSignals: true
+                selectionBar.addToSelection(model)
+                return
+            }
 
-                function onUriRemoved (uri)
-                {
-                    if(uri === model.url)
-                        delegate.checked = false
-                }
+            if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                _listBrowser.itemsSelected([index])
 
-                function onUriAdded(uri)
-                {
-                    if(uri === model.url)
-                        delegate.checked = true
-                }
+            if(Maui.Handy.isTouch)
+                rowClicked(index)
+        }
 
-                function onCleared()
-                {
+        onDoubleClicked:
+        {
+            currentIndex = index
+
+            if(!Maui.Handy.isTouch)
+                rowClicked(index)
+        }
+
+        Connections
+        {
+            target: selectionBar
+            ignoreUnknownSignals: true
+
+            function onUriRemoved (uri)
+            {
+                if(uri === model.url)
                     delegate.checked = false
-                }
+            }
+
+            function onUriAdded(uri)
+            {
+                if(uri === model.url)
+                    delegate.checked = true
+            }
+
+            function onCleared()
+            {
+                delegate.checked = false
             }
         }
     }
+}
 
-    function openItemMenu(index)
+function openItemMenu(index)
+{
+    currentIndex = index
+    contextMenu.fav = FB.Tagging.isFav(listModel.get(currentIndex).url)
+    contextMenu.show()
+    rowPressed(index)
+}
+
+function goToAlbum()
+{
+    swipeView.currentIndex = viewsIndex.albums
+    const item = listModel.get(control.currentIndex)
+    swipeView.currentItem.item.populateTable(item.album, item.artist)
+}
+
+function goToArtist()
+{
+    swipeView.currentIndex = viewsIndex.artists
+    const item = listModel.get(control.currentIndex)
+    swipeView.currentItem.item.populateTable(undefined, item.artist)
+}
+
+function filterSelectedItems(path)
+{
+    if(selectionBar && selectionBar.count > 0 && selectionBar.contains(path))
     {
-        currentIndex = index
-        contextMenu.fav = FB.Tagging.isFav(listModel.get(currentIndex).url)
-        contextMenu.show()
-        rowPressed(index)
+        const uris = selectionBar.uris
+        return uris.join("\n")
     }
 
-    function goToAlbum()
-    {
-        swipeView.currentIndex = viewsIndex.albums
-        const item = listModel.get(control.currentIndex)
-        swipeView.currentItem.item.populateTable(item.album, item.artist)
-    }
+    return path
+}
 
-    function goToArtist()
+function filterSelection(url)
+{
+    if(selectionBar.contains(url))
     {
-        swipeView.currentIndex = viewsIndex.artists
-        const item = listModel.get(control.currentIndex)
-         swipeView.currentItem.item.populateTable(undefined, item.artist)
-    }
-
-    function filterSelectedItems(path)
+        return selectionBar.uris
+    }else
     {
-        if(selectionBar && selectionBar.count > 0 && selectionBar.contains(path))
-        {
-            const uris = selectionBar.uris
-            return uris.join("\n")
-        }
-
-        return path
+        return [url]
     }
+}
 
-    function filterSelection(url)
-    {
-        if(selectionBar.contains(url))
-        {
-            return selectionBar.uris
-        }else
-        {
-            return [url]
-        }
-    }
-
-    function forceActiveFocus()
-    {
-        _listBrowser.forceActiveFocus()
-    }
+function forceActiveFocus()
+{
+    _listBrowser.forceActiveFocus()
+}
 }
