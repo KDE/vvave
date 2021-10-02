@@ -17,9 +17,9 @@ BabeTable
     onAppendAll: Player.appendAllModel( listModel.list)
     onQueueTrack: Player.queueTracks([listModel.get(index)], index)
 
-    list.query: Q.GET.allTracks
-    listModel.sort: "artist"
-    listModel.sortOrder: Qt.AscendingOrder
+//    list.query: Q.GET.allTracks
+//    listModel.sort: "artist"
+//    listModel.sortOrder: Qt.AscendingOrder
     group: true
 }
 

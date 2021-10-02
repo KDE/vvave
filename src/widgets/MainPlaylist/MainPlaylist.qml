@@ -176,18 +176,18 @@ Maui.Page
             }
         }
 
-        Component.onCompleted:
-        {
-            const lastplaylist = Maui.Handy.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
-            const n = lastplaylist.length
+//        Component.onCompleted:
+//        {
+//            const lastplaylist = Maui.Handy.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
+//            const n = lastplaylist.length
 
-            for(var i = 0; i < n; i++)
-            {
-                var where = "url = \""+lastplaylist[i]+"\""
-                var query = Q.GET.tracksWhere_.arg(where)
-                listModel.list.appendQuery(query);
-            }
-        }
+//            for(var i = 0; i < n; i++)
+//            {
+//                var where = "url = \""+lastplaylist[i]+"\""
+//                var query = Q.GET.tracksWhere_.arg(where)
+//                listModel.list.appendQuery(query);
+//            }
+//        }
     }
 
     function saveList()
