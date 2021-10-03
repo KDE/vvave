@@ -38,7 +38,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
-    property alias selectionBar: _selectionBar
+    property alias selectionBar: _selectionBarLoader.item
     property alias dialog : _dialogLoader.item
 
     /***************************************************/
@@ -294,19 +294,24 @@ Maui.ApplicationWindow
                     }
                 }
 
-                footer: SelectionBar
+                footer: Loader
                 {
-                    id: _selectionBar
+                    id: _selectionBarLoader
                     anchors.horizontalCenter: parent.horizontalCenter
-                    width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-                    padding: Maui.Style.space.big
-                    maxListHeight: swipeView.height - Maui.Style.space.medium
-                    display: ToolButton.IconOnly
+                    width: Math.min(parent.width-(Maui.Style.space.medium*2), item.implicitWidth)
+                    asynchronous: true
 
-                    onExitClicked:
+                    sourceComponent: SelectionBar
                     {
-                        root.selectionMode = false
-                        clear()
+                        padding: Maui.Style.space.big
+                        maxListHeight: swipeView.height - Maui.Style.space.medium
+                        display: ToolButton.IconOnly
+
+                        onExitClicked:
+                        {
+                            root.selectionMode = false
+                            clear()
+                        }
                     }
                 }
 

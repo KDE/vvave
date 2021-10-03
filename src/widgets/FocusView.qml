@@ -135,11 +135,7 @@ Maui.Page
     Component
     {
         id: _infoComponent
-
-        InfoView
-        {
-
-        }
+        InfoView {}
     }
 
     StackView
@@ -295,7 +291,7 @@ Maui.Page
                                         }
                                     }
                                 }
-                            }                            
+                            }
 
                             ColumnLayout
                             {

@@ -27,10 +27,13 @@ Maui.AltBrowser
     headBar.middleContent: Loader
     {
         asynchronous: true
+        Layout.fillWidth: true
+        Layout.minimumWidth: 100
+        Layout.maximumWidth: 500
+        Layout.alignment: Qt.AlignCenter
+
         sourceComponent: Maui.TextField
         {
-            Layout.fillWidth: true
-            Layout.maximumWidth: 500
             placeholderText: i18np("Filter", "Filter %1 albums", _albumsList.count)
             onAccepted: _albumsModel.filter = text
             onCleared: _albumsModel.filter = ""

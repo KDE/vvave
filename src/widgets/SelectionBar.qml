@@ -10,7 +10,6 @@ import org.mauikit.controls 1.2 as Maui
 Maui.SelectionBar
 {
     id: control
-    width: Maui.Style.unit * 200
 
     listDelegate: TableDelegate
     {
