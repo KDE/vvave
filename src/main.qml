@@ -92,8 +92,9 @@ Maui.ApplicationWindow
 
     Loader
     {
+        active: (!mainlistEmpty && isPlaying) || item
         asynchronous: true
-        FloatingDisk {}
+        sourceComponent: FloatingDisk {}
     }
 
     Settings
@@ -223,14 +224,14 @@ Maui.ApplicationWindow
         }
 
         background: null
+
         Loader
-        {            id: _mainPlaylistLoader
+        {
+            id: _mainPlaylistLoader
             anchors.fill: parent
 
             asynchronous: true
-            sourceComponent: MainPlaylist
-            {
-            }
+            sourceComponent: MainPlaylist {}
         }
     }
 
@@ -373,11 +374,13 @@ Maui.ApplicationWindow
                 }
             }
 
-            Maui.ProgressIndicator
+            Loader
             {
                 width: parent.width
                 anchors.bottom: parent.bottom
-                visible: Vvave.scanning
+                active: Vvave.scanning
+                visible: active
+                sourceComponent: Maui.ProgressIndicator {}
             }
         }
 
