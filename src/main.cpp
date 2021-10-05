@@ -126,10 +126,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<TrackInfo>(VVAVE_URI, 1, 0, "TrackInfo");
     qmlRegisterType<MetadataEditor>(VVAVE_URI, 1, 0, "MetadataEditor");
 
-    qmlRegisterSingletonType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists", [](QQmlEngine*, QJSEngine*) -> QObject * {
-
-        return new PlaylistsModel;
-    });
+    qmlRegisterType<PlaylistsModel>(VVAVE_URI, 1, 0, "Playlists");
 
     engine.addImageProvider("artwork", new ArtworkProvider());
 

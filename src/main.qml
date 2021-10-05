@@ -90,6 +90,7 @@ Maui.ApplicationWindow
     //        enabled: !Kirigami.Settings.isMobile
     //    }
 
+
     Loader
     {
         active: (!mainlistEmpty && isPlaying) || item

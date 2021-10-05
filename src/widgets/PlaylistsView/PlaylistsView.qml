@@ -19,13 +19,18 @@ StackView
     property string playlistQuery
 
     property Flickable flickable : currentItem.flickable
+property alias playlistList :_playlistPage.list
 
     Component
     {
         id: newPlaylistDialogComponent
-    FB.NewTagDialog {}
-}
-    initialItem: PlaylistsViewModel {}
+        FB.NewTagDialog {}
+    }
+
+    initialItem: PlaylistsViewModel
+    {
+    id: _playlistPage
+    }
 
     Component
     {
@@ -60,7 +65,7 @@ StackView
                 text: i18n("Remove from playlist")
                 onTriggered:
                 {
-                    Vvave.Playlists.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
+                    control.playlistList.removeTrack(currentPlaylist, listModel.get(filterList.currentIndex).url)
                     listModel.list.remove(filterList.currentIndex)
                 }
             }

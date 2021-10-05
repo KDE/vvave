@@ -1,4 +1,4 @@
-.import org.maui.vvave 1.0 as Vvave
+.import org.mauikit.filebrowsing 1.3 as FB
 
 function playTrack()
 {
@@ -68,7 +68,7 @@ function appendTrack(track)
         playlist.append(track)
         if(sync === true)
         {
-           Vvave.Playlists.addTrack(syncPlaylist, [track.url])
+           FB.Tagging.tagUrl(track.url, syncPlaylist)
         }
     }
 }

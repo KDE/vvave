@@ -10,7 +10,7 @@ import org.maui.vvave 1.0 as Vvave
 Maui.AltBrowser
 {
     id: control
-
+    property alias list: _playlistsList
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
@@ -29,6 +29,10 @@ Maui.AltBrowser
     {
         id: _playlistsModel
         list: Vvave.Playlists
+        {
+            id: _playlistsList
+        }
+
         recursiveFilteringEnabled: true
         sortCaseSensitivity: Qt.CaseInsensitive
         filterCaseSensitivity: Qt.CaseInsensitive
@@ -40,7 +44,7 @@ Maui.AltBrowser
     {
         Layout.maximumWidth: 500
         Layout.fillWidth: true
-        placeholderText: i18np("Filter", "Filter %1 tags", Vvave.Playlists.count)
+        placeholderText: i18np("Filter", "Filter %1 tags", control.list.count)
         onAccepted: _playlistsModel.filter = text
         onCleared: _playlistsModel.filter = ""
     }
