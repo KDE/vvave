@@ -38,7 +38,7 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
-    property alias selectionBar: _selectionBar
+    property Maui.SelectionBar selectionBar: _viewsPageLoader.item.selectionBar
     property alias dialog : _dialogLoader.item
 
     /***************************************************/
@@ -251,132 +251,140 @@ Maui.ApplicationWindow
         focus: true
         anchors.fill: parent
 
-        initialItem: Item
+        initialItem: Loader
         {
-            id: _viewsPage
+            id: _viewsPageLoader
+            visible: StackView.status === StackView.Active
+            active: StackView.status === StackView.Active || item
+            asynchronous: true
 
-            Maui.AppViews
+            sourceComponent: Item
             {
-                id: swipeView
-                anchors.fill: parent
-                maxViews: 3
-                interactive: Kirigami.Settings.isMobile
-                floatingFooter: true
-                flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
-                altHeader: Kirigami.Settings.isMobile
-                showCSDControls: true
+                property alias selectionBar: _selectionBar
 
-                headBar.leftContent: Loader
+                Maui.AppViews
                 {
-                    asynchronous: true
+                    id: swipeView
+                    anchors.fill: parent
+                    maxViews: 3
+                    interactive: Kirigami.Settings.isMobile
+                    floatingFooter: true
+                    flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
+                    altHeader: Kirigami.Settings.isMobile
+                    showCSDControls: true
 
-                    sourceComponent: Maui.ToolButtonMenu
+                    headBar.leftContent: Loader
                     {
-                        icon.name: "application-menu"
+                        asynchronous: true
 
-                        MA.AccountsMenuItem{}
-
-                        MenuItem
+                        sourceComponent: Maui.ToolButtonMenu
                         {
-                            text: i18n("Settings")
-                            icon.name: "settings-configure"
-                            onTriggered:
+                            icon.name: "application-menu"
+
+                            MA.AccountsMenuItem{}
+
+                            MenuItem
                             {
-                                _dialogLoader.sourceComponent = _settingsDialogComponent
-                                dialog.open()
+                                text: i18n("Settings")
+                                icon.name: "settings-configure"
+                                onTriggered:
+                                {
+                                    _dialogLoader.sourceComponent = _settingsDialogComponent
+                                    dialog.open()
+                                }
+                            }
+
+                            MenuItem
+                            {
+                                text: i18n("About")
+                                icon.name: "documentinfo"
+                                onTriggered: root.about()
                             }
                         }
+                    }
 
-                        MenuItem
+                    footer: SelectionBar
+                    {
+                        id: _selectionBar
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+                        padding: Maui.Style.space.big
+                        maxListHeight: swipeView.height - Maui.Style.space.medium
+                        display: ToolButton.IconOnly
+
+                        onExitClicked:
                         {
-                            text: i18n("About")
-                            icon.name: "documentinfo"
-                            onTriggered: root.about()
+                            root.selectionMode = false
+                            clear()
                         }
                     }
-                }
 
-                footer: SelectionBar
-                {
-                    id: _selectionBar
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-                    padding: Maui.Style.space.big
-                    maxListHeight: swipeView.height - Maui.Style.space.medium
-                    display: ToolButton.IconOnly
-
-                    onExitClicked:
+                    Maui.AppViewLoader
                     {
-                        root.selectionMode = false
-                        clear()
+                        Maui.AppView.title: i18n("Songs")
+                        Maui.AppView.iconName: "view-media-track"
+
+                        TracksView {}
+                    }
+
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Albums")
+                        Maui.AppView.iconName: "view-media-album-cover"
+
+                        AlbumsView
+                        {
+                            holder.title : i18n("No Albums!")
+                            holder.body: i18n("Add new music sources")
+                            list.query: Albums.ALBUMS
+                        }
+                    }
+
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Artists")
+                        Maui.AppView.iconName: "view-media-artist"
+
+                        AlbumsView
+                        {
+                            holder.title : i18n("No Artists!")
+                            holder.body: i18n("Add new music sources")
+                            list.query : Albums.ARTISTS
+                        }
+                    }
+
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Tags")
+                        Maui.AppView.iconName: "tag"
+                        PlaylistsView {}
+                    }
+
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Folders")
+                        Maui.AppView.iconName: "folder"
+
+                        FoldersView {}
+                    }
+
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Cloud")
+                        Maui.AppView.iconName: "folder-cloud"
+
+                        CloudView {}
                     }
                 }
 
-                Maui.AppViewLoader
+                Loader
                 {
-                    Maui.AppView.title: i18n("Songs")
-                    Maui.AppView.iconName: "view-media-track"
-
-                    TracksView {}
+                    width: parent.width
+                    anchors.bottom: parent.bottom
+                    active: Vvave.scanning
+                    visible: active
+                    sourceComponent: Maui.ProgressIndicator {}
                 }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Albums")
-                    Maui.AppView.iconName: "view-media-album-cover"
-
-                    AlbumsView
-                    {
-                        holder.title : i18n("No Albums!")
-                        holder.body: i18n("Add new music sources")
-                        list.query: Albums.ALBUMS
-                    }
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Artists")
-                    Maui.AppView.iconName: "view-media-artist"
-
-                    AlbumsView
-                    {
-                        holder.title : i18n("No Artists!")
-                        holder.body: i18n("Add new music sources")
-                        list.query : Albums.ARTISTS
-                    }
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Tags")
-                    Maui.AppView.iconName: "tag"
-                    PlaylistsView {}
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Folders")
-                    Maui.AppView.iconName: "folder"
-
-                    FoldersView {}
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Cloud")
-                    Maui.AppView.iconName: "folder-cloud"
-
-                    CloudView {}
-                }
-            }
-
-            Loader
-            {
-                width: parent.width
-                anchors.bottom: parent.bottom
-                active: Vvave.scanning
-                visible: active
-                sourceComponent: Maui.ProgressIndicator {}
             }
         }
 
