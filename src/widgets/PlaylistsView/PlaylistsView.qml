@@ -20,11 +20,11 @@ StackView
 
     property Flickable flickable : currentItem.flickable
 
-    FB.NewTagDialog
+    Component
     {
-        id: newPlaylistDialog
-    }
-
+        id: newPlaylistDialogComponent
+    FB.NewTagDialog {}
+}
     initialItem: PlaylistsViewModel {}
 
     Component
@@ -72,7 +72,7 @@ StackView
             onPlayAll:
             {
                 Player.playAllModel(listModel.list)
-                control.pop()                
+                control.pop()
 
                 if(filterList.isPublic)
                 {

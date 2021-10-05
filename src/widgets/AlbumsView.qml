@@ -1,13 +1,11 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 import "BabeGrid"
 import "BabeTable"
 
 import "../db/Queries.js" as Q
 import "../utils/Player.js" as Player
-
-import org.maui.vvave 1.0
 
 StackView
 {

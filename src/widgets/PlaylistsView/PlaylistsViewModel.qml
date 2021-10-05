@@ -50,7 +50,8 @@ Maui.AltBrowser
         icon.name: "list-add"
         onClicked:
         {
-            newPlaylistDialog.open()
+            _dialogLoader.sourceComponent = newPlaylistDialogComponent
+            dialog.open()
         }
     }
 
