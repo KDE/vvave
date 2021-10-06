@@ -8,7 +8,6 @@
 #include "utils/bae.h"
 #include <functional>
 
-class CollectionDB;
 class vvave : public QObject
 {
     Q_OBJECT
@@ -55,12 +54,6 @@ public slots:
 
 private:
     explicit vvave(QObject *parent = nullptr);
-    CollectionDB *db;
-
-    uint m_newTracks = 0;
-    uint m_newAlbums = 0;
-    uint m_newArtist = 0;
-    uint m_newSources = 0;
 
     bool m_autoScan = false;
     bool m_fetchArtwork = false;
@@ -70,9 +63,6 @@ private:
 signals:
     void sourceAdded(QUrl source);
     void sourceRemoved(QUrl source);
-    void tracksAdded(uint size);
-    void albumsAdded(uint size);
-    void artistsAdded(uint size);
 
     void openFiles(QVariantList tracks);
     void sourcesChanged();

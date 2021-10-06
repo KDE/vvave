@@ -35,6 +35,8 @@ private:
 
     AlbumsModel::QUERY query;
 
+    int m_newAlbums;
+
 public slots:
     void refresh();
     int indexOfName(const QString &query);

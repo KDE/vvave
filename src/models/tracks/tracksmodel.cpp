@@ -7,6 +7,8 @@
 #include <MauiKit/FileBrowsing/fmstatic.h>
 #include <MauiKit/FileBrowsing/tagging.h>
 
+#include <QTimer>
+
 TracksModel::TracksModel(QObject *parent)
     : MauiList(parent)
     , db(CollectionDB::getInstance())
@@ -16,8 +18,25 @@ TracksModel::TracksModel(QObject *parent)
 
 void TracksModel::componentComplete()
 {
+    auto tracksTimer = new QTimer(this);
+    tracksTimer->setSingleShot(true);
+    tracksTimer->setInterval(1000);
+
+    connect(db, &CollectionDB::trackInserted, [this, tracksTimer](QVariantMap) {
+        m_newTracks++;
+        tracksTimer->start();
+    });
+
+
+    connect(tracksTimer, &QTimer::timeout, [this]()
+    {
+        if (m_newTracks > 0) {
+            this->setList();
+            m_newTracks = 0;
+        }
+    });
+
     connect(this, &TracksModel::queryChanged, this, &TracksModel::setList);
-    connect(vvave::instance(), &vvave::tracksAdded, this, &TracksModel::setList);
     connect(vvave::instance(), &vvave::sourceRemoved, this, &TracksModel::setList);
     setList();
 }

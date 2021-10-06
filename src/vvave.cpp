@@ -48,68 +48,12 @@ static FMH::MODEL trackInfo(const QUrl &url)
  * */
 vvave::vvave(QObject *parent)
     : QObject(parent)
-    , db(CollectionDB::getInstance())
 {
     qRegisterMetaType<QList<QUrl> *>("QList<QUrl>&");
 
     QDir dirPath(BAE::CachePath.toLocalFile());
     if (!dirPath.exists())
         dirPath.mkpath(".");
-
-    auto tracksTimer = new QTimer(this);
-    tracksTimer->setSingleShot(true);
-    tracksTimer->setInterval(1000);
-
-    auto albumsTimer = new QTimer(this);
-    albumsTimer->setSingleShot(true);
-    albumsTimer->setInterval(1000);
-
-    auto artistTimer = new QTimer(this);
-    artistTimer->setSingleShot(true);
-    artistTimer->setInterval(1000);
-
-    connect(db, &CollectionDB::trackInserted, [this, tracksTimer](QVariantMap) {
-        m_newTracks++;
-        tracksTimer->start();
-    });
-
-    connect(db, &CollectionDB::albumInserted, [this, albumsTimer](QVariantMap) {
-        m_newAlbums++;
-        albumsTimer->start();
-    });
-
-    connect(db, &CollectionDB::artistInserted, [this, artistTimer](QVariantMap) {
-        m_newArtist++;
-        artistTimer->start();
-    });
-
-    connect(db, &CollectionDB::sourceInserted, [this](QVariantMap) {
-        m_newSources++;
-    });
-
-    connect(tracksTimer, &QTimer::timeout, [this]()
-    {
-        if (m_newTracks > 0) {
-            emit tracksAdded(m_newTracks);
-            m_newTracks = 0;
-        }
-    });
-
-    connect(albumsTimer, &QTimer::timeout, [this]()
-    {
-        if (m_newAlbums > 0) {
-            emit albumsAdded(m_newAlbums);
-            m_newAlbums = 0;
-        }
-    });
-
-    connect(artistTimer, &QTimer::timeout, [this]()
-    {
-        if (m_newArtist > 0) {
-            emit artistsAdded(m_newArtist);
-            m_newArtist = 0;
-        }
-    });
 }
 
 void vvave::setFetchArtwork(bool fetchArtwork)
@@ -163,7 +107,7 @@ bool vvave::removeSource(const QString &source)
     UTIL::saveSettings("SETTINGS", QVariant::fromValue(urls), "SOURCES");
     emit sourcesChanged();
 
-    if (this->db->removeSource(source)) {
+    if (CollectionDB::getInstance()->removeSource(source)) {
         emit this->sourceRemoved(source);
         return true;
     }
@@ -177,7 +121,7 @@ void vvave::scanDir(const QList<QUrl> &paths)
     fileLoader->informer = &trackInfo;
     //    fileLoader->setBatchCount(50);
 
-    connect(fileLoader, &FMH::FileLoader::itemReady, db, &CollectionDB::addTrack);
+    connect(fileLoader, &FMH::FileLoader::itemReady, CollectionDB::getInstance(), &CollectionDB::addTrack);
     connect(fileLoader, &FMH::FileLoader::finished, fileLoader, [this, fileLoader](FMH::MODEL_LIST, QList<QUrl>)
     {
         m_scanning = false;
@@ -231,8 +175,8 @@ void vvave::openUrls(const QStringList &urls)
 
     for (const auto &url : urls) {
         auto _url = QUrl::fromUserInput(url);
-        if (db->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString())) {
-            const auto item = this->db->getDBData(QStringList() << _url.toString());
+        if (CollectionDB::getInstance()->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString())) {
+            const auto item = CollectionDB::getInstance()->getDBData(QStringList() << _url.toString());
             data << FMH::toMap(item.first());
         } else {
             data << FMH::toMap(trackInfo(_url));

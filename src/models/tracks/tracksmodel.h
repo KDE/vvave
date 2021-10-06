@@ -31,6 +31,7 @@ private:
     FMH::MODEL_LIST list;
     QString query;
     int m_limit = 99999;
+    int m_newTracks;
 
     void setList();
 

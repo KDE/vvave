@@ -6,6 +6,8 @@
 #include <MauiKit/FileBrowsing/downloader.h>
 #include <MauiKit/FileBrowsing/fmstatic.h>
 
+#include <QTimer>
+
 AlbumsModel::AlbumsModel(QObject *parent)
     : MauiList(parent)
     , db(CollectionDB::getInstance())
@@ -16,10 +18,39 @@ AlbumsModel::AlbumsModel(QObject *parent)
 
 void AlbumsModel::componentComplete()
 {
+    auto timer = new QTimer(this);
+    timer->setSingleShot(true);
+    timer->setInterval(1000);
+
     if (query == QUERY::ALBUMS) {
-        connect(vvave::instance(), &vvave::albumsAdded, this, &AlbumsModel::setList);
+
+        connect(db, &CollectionDB::albumInserted, [this, timer](QVariantMap) {
+            m_newAlbums++;
+            timer->start();
+        });
+
+        connect(timer, &QTimer::timeout, [this]()
+        {
+            if (m_newAlbums > 0) {
+                this->setList();
+                m_newAlbums = 0;
+            }
+        });
+
     } else {
-        connect(vvave::instance(), &vvave::artistsAdded, this, &AlbumsModel::setList);
+
+        connect(db, &CollectionDB::artistInserted, [this, timer](QVariantMap) {
+            m_newAlbums++;
+            timer->start();
+        });
+
+        connect(timer, &QTimer::timeout, [this]()
+        {
+            if (m_newAlbums > 0) {
+                this->setList();
+                m_newAlbums = 0;
+            }
+        });
     }
 
     connect(vvave::instance(), &vvave::sourceRemoved, this, &AlbumsModel::setList);
