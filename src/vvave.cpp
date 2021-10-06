@@ -65,11 +65,6 @@ void vvave::setFetchArtwork(bool fetchArtwork)
     emit fetchArtworkChanged(m_fetchArtwork);
 }
 
-bool vvave::autoScan() const
-{
-    return m_autoScan;
-}
-
 bool vvave::fetchArtwork() const
 {
     return m_fetchArtwork;
@@ -136,6 +131,11 @@ void vvave::scanDir(const QList<QUrl> &paths)
     emit scanningChanged(m_scanning);
 }
 
+void vvave::rescan()
+{
+    scanDir(QUrl::fromStringList(sources()));
+}
+
 QStringList vvave::sources()
 {
     return UTIL::loadSettings("SETTINGS", "SOURCES", QVariant::fromValue(BAE::defaultSources)).toStringList();
@@ -151,19 +151,6 @@ QVariantList vvave::sourcesModel()
     }
 
     return res;
-}
-
-void vvave::setAutoScan(bool autoScan)
-{
-    if (m_autoScan == autoScan)
-        return;
-
-    m_autoScan = autoScan;
-    emit autoScanChanged(m_autoScan);
-
-    if (m_autoScan) {
-        scanDir(QUrl::fromStringList(sources()));
-    }
 }
 
 void vvave::openUrls(const QStringList &urls)

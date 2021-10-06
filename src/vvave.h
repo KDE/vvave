@@ -13,9 +13,7 @@ class vvave : public QObject
     Q_OBJECT
     Q_PROPERTY(QVariantList sources READ sourcesModel NOTIFY sourcesChanged FINAL)
     Q_PROPERTY(QList<QUrl> folders READ folders NOTIFY sourcesChanged FINAL)
-    Q_PROPERTY(bool autoScan READ autoScan WRITE setAutoScan NOTIFY autoScanChanged)
     Q_PROPERTY(bool fetchArtwork READ fetchArtwork WRITE setFetchArtwork NOTIFY fetchArtworkChanged)
-
     Q_PROPERTY(bool scanning READ scanning NOTIFY scanningChanged FINAL)
 
 public:
@@ -30,8 +28,6 @@ public:
     vvave(vvave &&) = delete;
     vvave &operator=(vvave &&) = delete;
 
-    bool autoScan() const;
-
     bool fetchArtwork() const;
 
     QList<QUrl> folders();
@@ -45,19 +41,17 @@ public slots:
     bool removeSource(const QString &source);
 
     void scanDir(const QList<QUrl> &paths = QUrl::fromStringList(BAE::defaultSources));
+    void rescan();
 
     static QStringList sources();
     static QVariantList sourcesModel();
 
-    void setAutoScan(bool autoScan);
     void setFetchArtwork(bool fetchArtwork);
 
 private:
     explicit vvave(QObject *parent = nullptr);
 
-    bool m_autoScan = false;
     bool m_fetchArtwork = false;
-
     bool m_scanning = false;
 
 signals:
@@ -66,7 +60,6 @@ signals:
 
     void openFiles(QVariantList tracks);
     void sourcesChanged();
-    void autoScanChanged(bool autoScan);
     void fetchArtworkChanged(bool fetchArtwork);
     void scanningChanged(bool scanning);
 };

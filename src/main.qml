@@ -317,7 +317,16 @@ Maui.ApplicationWindow
                     Maui.AppView.title: i18n("Songs")
                     Maui.AppView.iconName: "view-media-track"
 
-                    TracksView {}
+                    TracksView
+                    {
+                        Component.onCompleted:
+                        {
+                            if(settings.autoScan)
+                            {
+                                Vvave.rescan()
+                            }
+                        }
+                    }
                 }
 
                 Maui.AppViewLoader
@@ -406,7 +415,6 @@ Maui.ApplicationWindow
 
     Component.onCompleted:
     {
-        Vvave.autoScan = settings.autoScan
         Vvave.fetchArtwork = settings.fetchArtwork
 
         if(Maui.Handy.isAndroid)

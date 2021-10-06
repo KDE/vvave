@@ -158,6 +158,13 @@ Maui.SettingsDialog
                 }
             }
 
+            Button
+            {
+                Layout.fillWidth: true
+                text: i18n("Scan now")
+                onClicked: Vvave.rescan()
+
+            }
         }
     }
 
