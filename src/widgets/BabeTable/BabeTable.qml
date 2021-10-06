@@ -305,7 +305,7 @@ Maui.Page
             onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
             onRightClicked: if(allowMenu) openItemMenu(index)
 
-            onToggled: selectionBar.addToSelection(model)
+            onToggled: selectionBar.addToSelection(control.listModel.get(index))
             checked: selectionBar.contains(model.url)
             checkable: selectionMode
 

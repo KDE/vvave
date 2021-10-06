@@ -87,9 +87,9 @@ Maui.SelectionBar
 
     function addToSelection(item)
     {
-        if(control.contains(item.url))
+        if(control.contains(String(item.url)))
         {
-            control.removeAtUri(item.url)
+            control.removeAtUri(String(item.url))
             return
         }
 
@@ -99,6 +99,7 @@ Maui.SelectionBar
         item.mime= "image/png"
         item.tooltip= item.url
         item.path= item.url
+
         control.append(item.url, item)
     }
 }
