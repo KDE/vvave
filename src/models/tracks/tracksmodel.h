@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-#include <MauiKit/Core/fmh.h>
 #include <MauiKit/Core/mauilist.h>
 
 class CollectionDB;
@@ -38,7 +37,6 @@ private:
 signals:
     void queryChanged();
     void limitChanged(int limit);
-    void missingFiles(QStringList urls);
 
 public slots:
     void append(const QVariantMap &item);
@@ -51,8 +49,7 @@ public slots:
     bool fav(const int &index, const bool &value);
     bool countUp(const int &index);
     bool remove(const int &index);
-
-    void removeMissingFiles(const QStringList &urls);
+    bool removeMissing(const int &index);
 
     void refresh();
     bool update(const QVariantMap &data, const int &index);

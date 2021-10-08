@@ -29,11 +29,7 @@ Control
             sourceSize.height: height
 
             fillMode: Image.PreserveAspectCrop
-            antialiasing: true
-            smooth: true
             asynchronous: true
-            cache: true
-
             source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
         }
 
@@ -41,7 +37,7 @@ Control
         {
             anchors.fill: parent
             source: artworkBg
-            radius: 100
+            radius: 64
             transparentBorder: false
             cached: true
 
@@ -195,7 +191,8 @@ Control
 
     Kirigami.Separator
     {
-        //        edge: Qt.TopEdge
+        height: 0.5
+        weight: Kirigami.Separator.Weight.Light
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right

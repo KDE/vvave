@@ -22,15 +22,16 @@ void TracksModel::componentComplete()
     tracksTimer->setSingleShot(true);
     tracksTimer->setInterval(1000);
 
-    connect(db, &CollectionDB::trackInserted, [this, tracksTimer](QVariantMap) {
+    connect(db, &CollectionDB::trackInserted, [this, tracksTimer](QVariantMap)
+    {
         m_newTracks++;
         tracksTimer->start();
     });
 
-
     connect(tracksTimer, &QTimer::timeout, [this]()
     {
-        if (m_newTracks > 0) {
+        if (m_newTracks > 0)
+        {
             this->setList();
             m_newTracks = 0;
         }
@@ -73,10 +74,10 @@ void TracksModel::setList()
     emit this->preListChanged();
     this->list.clear();
 
-    QStringList missingFiles;
     qDebug() << "GETTIN TRACK LIST" << this->query;
 
-    if (this->query.startsWith("#")) {
+    if (this->query.startsWith("#"))
+    {
         auto m_query = query;
         const auto urls = Tagging::getInstance()->getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
         for (const auto &url : urls) {
@@ -85,31 +86,14 @@ void TracksModel::setList()
                                                   .arg("\"" + url.toString() + "\""));
         }
 
-    } else {
-                const auto checker = [&](FMH::MODEL &item) {
-                    const auto url = QUrl(item[FMH::MODEL_KEY::URL]);
-                    if(FMH::fileExists(url))
-                    {
-                        return true;
-                    } else
-                    {
-                        missingFiles << url.toString();
-                        return false;
-                    }
-                };
-        this->list = this->db->getDBData(this->query ,checker);
+    } else
+    {
+        this->list = this->db->getDBData(this->query);
     }
-
-    qDebug() << "missing files" << missingFiles;
 
     emit this->postListChanged();
     emit this->countChanged();
 
-    if(missingFiles.size() > 0)
-    {
-        this->removeMissingFiles(missingFiles);
-        emit this->missingFiles(missingFiles);
-    }
 }
 
 void TracksModel::append(const QVariantMap &item)
@@ -227,12 +211,14 @@ bool TracksModel::remove(const int &index)
     return true;
 }
 
-void TracksModel::removeMissingFiles(const QStringList &urls)
+bool TracksModel::removeMissing(const int &index)
 {
-    for(const auto &url : urls)
-    {
-        this->db->removeTrack(url);
-    }
+    if (index > this->list.size() || index < 0)
+        return false;
+
+    auto url = this->list.at(index)[FMH::MODEL_KEY::URL];
+    this->remove(index);
+    return this->db->removeTrack(url);
 }
 
 void TracksModel::refresh()

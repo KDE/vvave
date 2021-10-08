@@ -194,18 +194,15 @@ void Playlist::setCurrentIndex(int index)
         return;
     }
 
-//    if (m_currentIndex == index)
-//        return;
-
     const auto count = m_model->getCount();
     if (count > 0 && index < count && index >= 0)
     {
         m_currentIndex = index;
         m_currentTrack = m_model->get(m_currentIndex);
         auto url = m_currentTrack["url"].toUrl();
-        if (!FMH::fileExists(url) && url.isLocalFile()) {
+        if (!FMH::fileExists(url) && url.isLocalFile())
+        {
             emit this->missingFile(m_currentTrack);
-            return;
         }
 
     } else

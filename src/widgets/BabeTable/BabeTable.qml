@@ -56,13 +56,15 @@ Maui.Page
     flickable: _listBrowser.flickable
 
     headBar.visible: control.list.count > 0
-    headBar.forceCenterMiddleContent: false
+    headBar.forceCenterMiddleContent: isWide
     headBar.rightContent: Loader
     {
         asynchronous: true
+        active: listModel.list.count > 0
+        visible: active
+
         sourceComponent: Maui.ToolButtonMenu
         {
-            enabled: listModel.list.count > 0
             icon.name: "media-playback-start"
 
             MenuItem
@@ -92,6 +94,9 @@ Maui.Page
     headBar.middleContent: Loader
     {
         asynchronous: true
+        active: listModel.list.count > 1
+        visible: active
+
         Layout.fillWidth: true
         Layout.minimumWidth: 100
         Layout.maximumWidth: 500
@@ -99,9 +104,6 @@ Maui.Page
 
         sourceComponent: Maui.TextField
         {
-            visible: listModel.list.count > 1
-
-            enabled: control.listModel.list.count > 0
             placeholderText: i18np("Filter", "Filter %1 songs", listModel.list.count)
             onAccepted: listModel.filter = text
             onCleared: listModel.filter = ""
@@ -282,13 +284,7 @@ Maui.Page
             id: _listModel
             list: Tracks
             {
-                id: _tracksList
-                onMissingFiles:
-                {
-                    var message = i18n("%1 Missing files", urls.length)
-                    var messageBody = "Missing files have been removed from the collection."
-                    notify("dialog-question", message, messageBody)
-                }
+                id: _tracksList               
             }
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive

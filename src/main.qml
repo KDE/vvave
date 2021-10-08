@@ -129,9 +129,9 @@ Maui.ApplicationWindow
             var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
             notify("dialog-question", message, messageBody, function ()
             {
-                console.log("REMOVE TIU MSISING")
-                mainPlaylist.table.list.remove(mainPlaylist.table.currentIndex)
-                console.log("REMOVE TIU MSISING 2")
+                console.log("REMOVE TIU MSISING", mainPlaylist.table.currentIndex)
+                mainPlaylist.table.list.removeMissing(mainPlaylist.table.currentIndex)
+                console.log("REMOVE TIU MSISING 2", mainPlaylist.table.currentIndex)
             })
         }
     }
@@ -259,12 +259,12 @@ Maui.ApplicationWindow
                 id: swipeView
                 anchors.fill: parent
                 maxViews: 3
-                interactive: Kirigami.Settings.isMobile
+//                interactive: Kirigami.Settings.isMobile
                 floatingFooter: true
                 flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
                 altHeader: Kirigami.Settings.isMobile
                 showCSDControls: true
-
+                headBar.forceCenterMiddleContent: isWide
                 headBar.leftContent: Loader
                 {
                     asynchronous: true
