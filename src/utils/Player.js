@@ -55,10 +55,12 @@ function quickPlay(track)
 function appendTracksAt(tracks, at)
 {
     if(tracks)
+    {
         for(var i in tracks)
         {
             mainPlaylist.listModel.list.appendAt(tracks[i], parseInt(at)+parseInt(i))
         }
+    }
 }
 
 function appendTrack(track)
@@ -88,11 +90,6 @@ function appendAll(tracks)
         appendTrack(track)
 
     mainPlaylist.listView.positionViewAtEnd()
-}
-
-function savePlaylist()
-{
-   playlist.save()
 }
 
 function playAll(tracks)

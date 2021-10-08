@@ -61,53 +61,46 @@ Control
         anchors.fill: parent
         position: ToolBar.Footer
 
-        background: Loader
+        background: Slider
         {
+            id: progressBar
             height: 16
             z: parent.z+1
-            asynchronous: true
-            active: control.visible
+            padding: 0
+            from: 0
+            to: 1000
+            value: player.pos/player.duration*1000
 
-            sourceComponent: Slider
+            spacing: 0
+            focus: true
+            onMoved: player.pos = (player.duration / 1000) * value
+            enabled: player.playing
+
+            background: Rectangle
             {
-                id: progressBar
+                implicitWidth: progressBar.width
+                implicitHeight: progressBar.height
+                width: progressBar.availableWidth
+                color: "transparent"
+                opacity: progressBar.pressed ? 0.5 : 1
 
-                padding: 0
-                from: 0
-                to: 1000
-                value: player.pos/player.duration*1000
-
-                spacing: 0
-                focus: true
-                onMoved: player.pos = (player.duration / 1000) * value
-                enabled: player.playing
-
-                background: Rectangle
+                Rectangle
                 {
-                    implicitWidth: progressBar.width
-                    implicitHeight: progressBar.height
-                    width: progressBar.availableWidth
-                    color: "transparent"
-                    opacity: progressBar.pressed ? 0.5 : 1
-
-                    Rectangle
-                    {
-                        width: progressBar.visualPosition * parent.width
-                        height: progressBar.pressed ? 5 :  2
-                        color: Kirigami.Theme.highlightColor
-                    }
+                    width: progressBar.visualPosition * parent.width
+                    height: progressBar.pressed ? 5 :  2
+                    color: Kirigami.Theme.highlightColor
                 }
+            }
 
-                handle: Rectangle
-                {
-                    x: progressBar.leftPadding + progressBar.visualPosition
-                       * (progressBar.availableWidth - width)
-                    y: 0
-                    radius: height
-                    implicitWidth: Maui.Style.iconSizes.medium
-                    implicitHeight: 16
-                    color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
-                }
+            handle: Rectangle
+            {
+                x: progressBar.leftPadding + progressBar.visualPosition
+                   * (progressBar.availableWidth - width)
+                y: 0
+                radius: height
+                implicitWidth: Maui.Style.iconSizes.medium
+                implicitHeight: 16
+                color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
             }
         }
 

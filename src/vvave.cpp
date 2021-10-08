@@ -9,7 +9,7 @@
 
 #include <QTimer>
 
-static FMH::MODEL trackInfo(const QUrl &url)
+FMH::MODEL vvave::trackInfo(const QUrl &url)
 {
     TagInfo info(url.toLocalFile());
     if (info.isNull())

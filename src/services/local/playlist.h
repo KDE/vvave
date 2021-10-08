@@ -32,8 +32,6 @@ public:
     QVariantMap currentTrack() const;
 
     int currentIndex() const;
-
-
     PlayMode playMode() const;
 
 private:
@@ -46,7 +44,6 @@ private:
     PlayMode m_playMode = PlayMode::Normal;
 
 public slots:
-
     bool canGoNext() const;
     bool canGoPrevious() const;
     bool canPlay() const;
@@ -55,8 +52,10 @@ public slots:
     void previous();
     void nextShuffle();
     void clear();
+
     void save();
-    void append(const QUrl &url);
+    void loadLastPlaylist();
+
     void append(const QVariantMap &track);
 
     void setModel(TracksModel *model);

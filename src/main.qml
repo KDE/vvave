@@ -80,7 +80,7 @@ Maui.ApplicationWindow
 
 
     /*HANDLE EVENTS*/
-    onClosing: Player.savePlaylist()
+    onClosing: playlist.save()
 
     //    Maui.WindowBlur
     //    {
@@ -89,7 +89,6 @@ Maui.ApplicationWindow
     //        windowRadius: root.background.radius
     //        enabled: !Kirigami.Settings.isMobile
     //    }
-
 
     Loader
     {

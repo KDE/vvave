@@ -123,6 +123,18 @@ void TracksModel::append(const QVariantMap &item)
     emit this->countChanged();
 }
 
+void TracksModel::appendUrl(const QUrl &url)
+{
+    if (CollectionDB::getInstance()->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url.toString()))
+    {
+        const auto item = CollectionDB::getInstance()->getDBData(QStringList() << url.toString());
+        append(FMH::toMap(item.first()));
+    } else
+    {
+        append(FMH::toMap(vvave::trackInfo(url)));
+    }
+}
+
 void TracksModel::appendAt(const QVariantMap &item, const int &at)
 {
     if (item.isEmpty())
@@ -271,6 +283,11 @@ void TracksModel::updateMetadata(const QVariantMap &data, const int &index)
     {
         qDebug() << "Track data was updated correctly";
     }
+}
+
+QStringList TracksModel::urls() const
+{
+    return FMH::modelToList(this->list, FMH::MODEL_KEY::URL);
 }
 
 void TracksModel::setLimit(int limit)

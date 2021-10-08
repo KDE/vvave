@@ -1,5 +1,6 @@
 import QtQuick 2.14
 import QtQml 2.14
+
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.14
 
@@ -14,6 +15,9 @@ import "../BabeTable"
 Maui.Page
 {
     id: control
+    flickable: table.flickable
+    title: i18n("Playlist")
+    showTitle: true
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
@@ -23,17 +27,13 @@ Maui.Page
 
     property alias contextMenu: table.contextMenu
 
-    flickable: table.flickable
-
-    title: i18n("Playlist")
-    showTitle: true
     background: Rectangle
     {
         color: Kirigami.Theme.backgroundColor
         opacity: 0.2
     }
 
-    headBar.background:null
+    headBar.background: null
     headBar.visible: !mainlistEmpty
 
     headBar.rightContent: ToolButton
@@ -48,7 +48,7 @@ Maui.Page
         }
     }
 
-    headBar.leftContent:  ToolButton
+    headBar.leftContent: ToolButton
     {
         icon.name: "document-save"
         onClicked: saveList()
@@ -175,29 +175,13 @@ Maui.Page
                     Player.playAt(index)
             }
         }
-
-        Component.onCompleted:
-        {
-            const lastplaylist = Maui.Handy.loadSettings("LASTPLAYLIST", "PLAYLIST", [])
-            const n = lastplaylist.length
-
-            for(var i = 0; i < n; i++)
-            {
-                var where = "url = \""+lastplaylist[i]+"\""
-                var query = Q.GET.tracksWhere_.arg(where)
-                listModel.list.appendQuery(query);
-            }
-        }
     }
 
     function saveList()
     {
-        var trackList = []
+        var trackList = listModel.list.urls()
         if(listModel.list.count > 0)
         {
-            for(var i = 0; i < listModel.list.count; ++i)
-                trackList.push(listModel.get(i).url)
-
             _dialogLoader.sourceComponent = _playlistDialogComponent
             dialog.composerList.urls = trackList
             dialog.open()

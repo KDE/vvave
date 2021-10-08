@@ -3,7 +3,7 @@
 
 #include <QRandomGenerator>
 #include <QUrl>
-
+#include <QDebug>
 #include <MauiKit/Core/utils.h>
 
 Playlist::Playlist(QObject *parent)
@@ -32,9 +32,27 @@ Playlist::PlayMode Playlist::playMode() const
     return m_playMode;
 }
 
+void Playlist::loadLastPlaylist()
+{
+    if (!m_model)
+    {
+        return;
+    }
+
+    QStringList urls = UTIL::loadSettings("LASTPLAYLIST", "PLAYLIST", QStringList()).toStringList();
+    int lastIndex =   UTIL::loadSettings("PLAYLIST_POS", "MAINWINDOW", -1).toInt();
+    for (const auto &url : urls)
+    {
+       m_model->appendUrl(QUrl::fromUserInput(url));
+    }
+
+    this->setCurrentIndex(lastIndex);
+}
+
 bool Playlist::canGoNext() const
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return false;
     }
 
@@ -43,7 +61,8 @@ bool Playlist::canGoNext() const
 
 bool Playlist::canGoPrevious() const
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return false;
     }
 
@@ -52,7 +71,8 @@ bool Playlist::canGoPrevious() const
 
 bool Playlist::canPlay() const
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return false;
     }
 
@@ -61,7 +81,8 @@ bool Playlist::canPlay() const
 
 void Playlist::next()
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return;
     }
 
@@ -91,7 +112,8 @@ void Playlist::next()
 
 void Playlist::previous()
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return;
     }
 
@@ -102,7 +124,8 @@ void Playlist::previous()
 
 void Playlist::nextShuffle()
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return;
     }
 
@@ -112,7 +135,8 @@ void Playlist::nextShuffle()
 
 void Playlist::clear()
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return;
     }
 
@@ -122,7 +146,8 @@ void Playlist::clear()
 
 void Playlist::save()
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return;
     }
 
@@ -138,20 +163,10 @@ void Playlist::save()
     UTIL::saveSettings("PLAYLIST_POS", m_currentIndex, "MAINWINDOW");
 }
 
-void Playlist::append(const QUrl &url) // TODO
-{
-    Q_UNUSED(url)
-
-    if (!m_model) {
-        return;
-    }
-
-    //	m_model->append ()
-}
-
 void Playlist::append(const QVariantMap &track)
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return;
     }
 
@@ -164,17 +179,18 @@ void Playlist::setModel(TracksModel *model)
         return;
 
     m_model->disconnect();
-
     m_model = model;
 
     connect(m_model, &TracksModel::countChanged, this, &Playlist::canPlayChanged);
 
+    this->loadLastPlaylist();
     emit modelChanged(m_model);
 }
 
 void Playlist::setCurrentIndex(int index)
 {
-    if (!m_model) {
+    if (!m_model)
+    {
         return;
     }
 
@@ -182,7 +198,8 @@ void Playlist::setCurrentIndex(int index)
 //        return;
 
     const auto count = m_model->getCount();
-    if (count > 0 && index < count && index >= 0) {
+    if (count > 0 && index < count && index >= 0)
+    {
         m_currentIndex = index;
         m_currentTrack = m_model->get(m_currentIndex);
         auto url = m_currentTrack["url"].toUrl();
@@ -191,7 +208,8 @@ void Playlist::setCurrentIndex(int index)
             return;
         }
 
-    } else {
+    } else
+    {
         m_currentIndex = -1;
         m_currentTrack = QVariantMap();
     }

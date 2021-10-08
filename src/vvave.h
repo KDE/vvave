@@ -2,11 +2,9 @@
 #define VVAVE_H
 
 #include <QObject>
-//#include <QQmlEngine>
 #include <QStringList>
 
 #include "utils/bae.h"
-#include <functional>
 
 class vvave : public QObject
 {
@@ -47,6 +45,7 @@ public slots:
     static QVariantList sourcesModel();
 
     void setFetchArtwork(bool fetchArtwork);
+    static FMH::MODEL trackInfo(const QUrl &url);
 
 private:
     explicit vvave(QObject *parent = nullptr);

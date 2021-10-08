@@ -42,6 +42,7 @@ signals:
 
 public slots:
     void append(const QVariantMap &item);
+    void appendUrl(const QUrl &url);
     void appendAt(const QVariantMap &item, const int &at);
     void appendQuery(const QString &query);
     void copy(const TracksModel *list);
@@ -57,6 +58,8 @@ public slots:
     bool update(const QVariantMap &data, const int &index);
     
     void updateMetadata(const QVariantMap &data, const int &index);
+
+    QStringList urls() const;
 };
 
 #endif // TRACKSMODEL_H

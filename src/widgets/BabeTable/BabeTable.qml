@@ -55,7 +55,7 @@ Maui.Page
 
     flickable: _listBrowser.flickable
 
-    headBar.visible: true
+    headBar.visible: control.list.count > 0
     headBar.forceCenterMiddleContent: false
     headBar.rightContent: Loader
     {
