@@ -54,13 +54,15 @@ function quickPlay(track)
 
 function appendTracksAt(tracks, at)
 {
-    if(tracks)
+    for(var i in tracks)
     {
-        for(var i in tracks)
-        {
-            mainPlaylist.listModel.list.appendAt(tracks[i], parseInt(at)+parseInt(i))
-        }
+        mainPlaylist.listModel.list.appendAt(tracks[i], parseInt(at)+parseInt(i))
     }
+}
+
+function appendUrls(urls)
+{
+    mainPlaylist.listModel.list.appendUrls(urls)
 }
 
 function appendTrack(track)

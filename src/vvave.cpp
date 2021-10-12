@@ -7,8 +7,6 @@
 #include <MauiKit/FileBrowsing/fm.h>
 #include <MauiKit/Core/utils.h>
 
-#include <QTimer>
-
 FMH::MODEL vvave::trackInfo(const QUrl &url)
 {
     TagInfo info(url.toLocalFile());
@@ -38,6 +36,13 @@ FMH::MODEL vvave::trackInfo(const QUrl &url)
 
     BAE::artworkCache(map, FMH::MODEL_KEY::ALBUM);
     return map;
+}
+
+QVariantList vvave::pendingTracks()
+{
+    auto res = m_pendingTracks;
+    m_pendingTracks.clear();
+   return res;
 }
 
 /*
@@ -158,19 +163,15 @@ void vvave::openUrls(const QStringList &urls)
     if (urls.isEmpty())
         return;
 
-    QVariantList data;
-
     for (const auto &url : urls) {
         auto _url = QUrl::fromUserInput(url);
         if (CollectionDB::getInstance()->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString())) {
             const auto item = CollectionDB::getInstance()->getDBData(QStringList() << _url.toString());
-            data << FMH::toMap(item.first());
+            m_pendingTracks << FMH::toMap(item.first());
         } else {
-            data << FMH::toMap(trackInfo(_url));
+            m_pendingTracks << FMH::toMap(trackInfo(_url));
         }
     }
-
-    emit this->openFiles(data);
 }
 
 QList<QUrl> vvave::folders()

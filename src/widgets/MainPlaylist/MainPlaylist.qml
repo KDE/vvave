@@ -7,6 +7,8 @@ import QtQuick.Controls 2.14
 import org.kde.kirigami 2.8 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 
+import org.maui.vvave 1.0
+
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
 

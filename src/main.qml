@@ -219,7 +219,7 @@ Maui.ApplicationWindow
             if(drop.urls)
             {
                 var urls = drop.urls.join(",")
-                Vvave.openUrls(urls.split(","))
+                Player.appendUrls(urls.split(","))
             }
         }
 
@@ -232,6 +232,12 @@ Maui.ApplicationWindow
 
             asynchronous: true
             sourceComponent: MainPlaylist {}
+            onLoaded:
+            {
+                const tracks = Vvave.pendingTracks()
+                Player.appendTracksAt(tracks, 0)
+                Player.playAt(0)
+            }
         }
     }
 
@@ -420,18 +426,6 @@ Maui.ApplicationWindow
         {
             Maui.Android.statusbarColor(headBar.Kirigami.Theme.backgroundColor, false)
             Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, false)
-        }
-    }
-
-    /*CONNECTIONS*/
-    Connections
-    {
-        target: Vvave
-        ignoreUnknownSignals: true
-        function onOpenFiles(tracks)
-        {
-            Player.appendTracksAt(tracks, 0)
-            Player.playAt(0)
         }
     }
 

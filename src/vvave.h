@@ -47,17 +47,20 @@ public slots:
     void setFetchArtwork(bool fetchArtwork);
     static FMH::MODEL trackInfo(const QUrl &url);
 
+    QVariantList pendingTracks();
+
 private:
     explicit vvave(QObject *parent = nullptr);
 
     bool m_fetchArtwork = false;
     bool m_scanning = false;
 
+    QVariantList m_pendingTracks;
+
 signals:
     void sourceAdded(QUrl source);
     void sourceRemoved(QUrl source);
 
-    void openFiles(QVariantList tracks);
     void sourcesChanged();
     void fetchArtworkChanged(bool fetchArtwork);
     void scanningChanged(bool scanning);

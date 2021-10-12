@@ -119,6 +119,14 @@ void TracksModel::appendUrl(const QUrl &url)
     }
 }
 
+void TracksModel::appendUrls(const QStringList &urls)
+{
+    for(const auto &url : urls)
+    {
+        this->appendUrl(url);
+    }
+}
+
 void TracksModel::appendAt(const QVariantMap &item, const int &at)
 {
     if (item.isEmpty())

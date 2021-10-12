@@ -40,13 +40,13 @@ void Playlist::loadLastPlaylist()
     }
 
     QStringList urls = UTIL::loadSettings("LASTPLAYLIST", "PLAYLIST", QStringList()).toStringList();
-    int lastIndex =   UTIL::loadSettings("PLAYLIST_POS", "MAINWINDOW", -1).toInt();
+//    int lastIndex =   UTIL::loadSettings("PLAYLIST_POS", "MAINWINDOW", -1).toInt();
     for (const auto &url : urls)
     {
        m_model->appendUrl(QUrl::fromUserInput(url));
     }
 
-    this->setCurrentIndex(lastIndex);
+//    this->setCurrentIndex(lastIndex);
 }
 
 bool Playlist::canGoNext() const
