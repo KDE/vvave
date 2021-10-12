@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QStringList>
 
-#include "utils/bae.h"
+#include <MauiKit/Core/fmh.h>
 
 class vvave : public QObject
 {
@@ -38,7 +38,7 @@ public slots:
     void addSources(const QList<QUrl> &paths);
     bool removeSource(const QString &source);
 
-    void scanDir(const QList<QUrl> &paths = QUrl::fromStringList(BAE::defaultSources));
+    void scanDir(const QList<QUrl> &paths);
     void rescan();
 
     static QStringList sources();

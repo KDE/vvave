@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-#include <MauiKit/Core/fmh.h>
 #include <MauiKit/Core/mauilist.h>
 
 class FoldersModel : public MauiList
@@ -17,10 +16,13 @@ public:
     const FMH::MODEL_LIST &items() const override final;
     void setFolders(const QList<QUrl> &folders);
     QList<QUrl> folders () const;
+    void componentComplete() override final;
 
 private:
         FMH::MODEL_LIST list;
         QList<QUrl> m_folders;
+
+        void setList();
 
 signals:
         void foldersChanged();

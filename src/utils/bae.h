@@ -3,10 +3,8 @@
 
 #include <QDirIterator>
 #include <QFileInfo>
-#include <QImage>
 #include <QStandardPaths>
 #include <QString>
-#include <QTime>
 
 #include <MauiKit/Core/fmh.h>
 #include <MauiKit/FileBrowsing/fmstatic.h>

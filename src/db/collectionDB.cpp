@@ -16,10 +16,11 @@
    */
 
 #include "collectionDB.h"
-#include <QCoreApplication>
+
 #include <QString>
 #include <QStringList>
 #include <QUuid>
+#include <QDateTime>
 
 #include <MauiKit/Core/fmh.h>
 #include <MauiKit/FileBrowsing/fmstatic.h>

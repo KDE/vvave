@@ -1,6 +1,8 @@
 #include "playlistsmodel.h"
 #include "db/collectionDB.h"
 
+#include <QDateTime>
+
 #include <MauiKit/FileBrowsing/fmstatic.h>
 #include <MauiKit/FileBrowsing/tagging.h>
 

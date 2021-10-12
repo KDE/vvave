@@ -7,6 +7,8 @@
 #include <MauiKit/FileBrowsing/fm.h>
 #include <MauiKit/Core/utils.h>
 
+#include "utils/bae.h"
+
 FMH::MODEL vvave::trackInfo(const QUrl &url)
 {
     TagInfo info(url.toLocalFile());
@@ -34,7 +36,6 @@ FMH::MODEL vvave::trackInfo(const QUrl &url)
                       {FMH::MODEL_KEY::SOURCE, sourceUrl},
                       {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}};
 
-    BAE::artworkCache(map, FMH::MODEL_KEY::ALBUM);
     return map;
 }
 
