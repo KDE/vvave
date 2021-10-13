@@ -13,7 +13,9 @@ FMH::MODEL vvave::trackInfo(const QUrl &url)
 {
     TagInfo info(url.toLocalFile());
     if (info.isNull())
+    {
         return FMH::MODEL();
+    }
 
     const auto track = info.getTrack();
     const auto genre = info.getGenre();
@@ -25,7 +27,7 @@ FMH::MODEL vvave::trackInfo(const QUrl &url)
     const auto year = info.getYear();
     const auto comment = info.getComment();
 
-    FMH::MODEL map = {{FMH::MODEL_KEY::URL, url.toString()},
+    return FMH::MODEL {{FMH::MODEL_KEY::URL, url.toString()},
                       {FMH::MODEL_KEY::TRACK, QString::number(track)},
                       {FMH::MODEL_KEY::TITLE, title},
                       {FMH::MODEL_KEY::ARTIST, artist},
@@ -35,15 +37,13 @@ FMH::MODEL vvave::trackInfo(const QUrl &url)
                       {FMH::MODEL_KEY::GENRE, genre},
                       {FMH::MODEL_KEY::SOURCE, sourceUrl},
                       {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}};
-
-    return map;
 }
 
 QVariantList vvave::pendingTracks()
 {
     auto res = m_pendingTracks;
     m_pendingTracks.clear();
-   return res;
+    return res;
 }
 
 /*

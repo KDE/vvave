@@ -11,7 +11,6 @@
 
 TracksModel::TracksModel(QObject *parent)
     : MauiList(parent)
-    , db(CollectionDB::getInstance())
 {
     qRegisterMetaType<TracksModel *>("const TracksModel*");
 }
@@ -22,7 +21,7 @@ void TracksModel::componentComplete()
     tracksTimer->setSingleShot(true);
     tracksTimer->setInterval(1000);
 
-    connect(db, &CollectionDB::trackInserted, [this, tracksTimer](QVariantMap)
+    connect(CollectionDB::getInstance(), &CollectionDB::trackInserted, [this, tracksTimer](QVariantMap)
     {
         m_newTracks++;
         tracksTimer->start();
@@ -81,14 +80,14 @@ void TracksModel::setList()
         auto m_query = query;
         const auto urls = Tagging::getInstance()->getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
         for (const auto &url : urls) {
-            this->list << this->db->getDBData(QString("select t.* from tracks t inner join albums al on al.album = t.album "
+            this->list << CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on al.album = t.album "
                                                       "and al.artist = t.artist where t.url = %1")
                                                   .arg("\"" + url.toString() + "\""));
         }
 
     } else
     {
-        this->list = this->db->getDBData(this->query);
+        this->list = CollectionDB::getInstance()->getDBData(this->query);
     }
 
     emit this->postListChanged();
@@ -145,7 +144,7 @@ void TracksModel::appendAt(const QVariantMap &item, const int &at)
 void TracksModel::appendQuery(const QString &query)
 {
     emit this->preListChanged();
-    this->list << this->db->getDBData(query);
+    this->list << CollectionDB::getInstance()->getDBData(query);
     emit this->postListChanged();
     emit this->countChanged();
 }
@@ -195,7 +194,7 @@ bool TracksModel::countUp(const int &index)
         return false;
 
     auto item = this->list[index];
-    if (this->db->playedTrack(item[FMH::MODEL_KEY::URL])) {
+    if (CollectionDB::getInstance()->playedTrack(item[FMH::MODEL_KEY::URL])) {
         this->list[index][FMH::MODEL_KEY::COUNT] = QString::number(item[FMH::MODEL_KEY::COUNT].toInt() + 1);
         emit this->updateModel(index, {FMH::MODEL_KEY::COUNT});
 
@@ -226,7 +225,7 @@ bool TracksModel::removeMissing(const int &index)
 
     auto url = this->list.at(index)[FMH::MODEL_KEY::URL];
     this->remove(index);
-    return this->db->removeTrack(url);
+    return CollectionDB::getInstance()->removeTrack(url);
 }
 
 void TracksModel::refresh()
@@ -273,7 +272,7 @@ void TracksModel::updateMetadata(const QVariantMap &data, const int &index)
 
     auto n_model = FMH::filterModel(model, {FMH::MODEL_KEY::URL, FMH::MODEL_KEY::TITLE,FMH::MODEL_KEY::ARTIST,FMH::MODEL_KEY::ALBUM,FMH::MODEL_KEY::RELEASEDATE,FMH::MODEL_KEY::GENRE, FMH::MODEL_KEY::TRACK, FMH::MODEL_KEY::COMMENT});
 
-    if(this->db->updateTrack(n_model))
+    if(CollectionDB::getInstance()->updateTrack(n_model))
     {
         qDebug() << "Track data was updated correctly";
     }

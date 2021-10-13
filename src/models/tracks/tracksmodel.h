@@ -5,7 +5,6 @@
 
 #include <MauiKit/Core/mauilist.h>
 
-class CollectionDB;
 class TracksModel : public MauiList
 {
     Q_OBJECT
@@ -25,8 +24,6 @@ public:
     void setLimit(int limit);
 
 private:
-    CollectionDB *db;
-
     FMH::MODEL_LIST list;
     QString query;
     int m_limit = 99999;

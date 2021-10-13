@@ -4,11 +4,8 @@
 #include <QObject>
 #include <QThread>
 
-#include <MauiKit/Core/fmh.h>
 #include <MauiKit/Core/mauilist.h>
 
-
-class CollectionDB;
 class AlbumsModel : public MauiList
 {
     Q_OBJECT
@@ -28,7 +25,6 @@ public:
     AlbumsModel::QUERY getQuery() const;
 
 private:
-    CollectionDB *db;
     FMH::MODEL_LIST list;
 
     void setList();

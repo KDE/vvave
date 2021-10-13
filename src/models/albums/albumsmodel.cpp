@@ -10,7 +10,6 @@
 
 AlbumsModel::AlbumsModel(QObject *parent)
     : MauiList(parent)
-    , db(CollectionDB::getInstance())
 {
     qRegisterMetaType<FMH::MODEL_LIST>("FMH::MODEL_LIST");
     qRegisterMetaType<FMH::MODEL>("FMH::MODEL");
@@ -24,7 +23,7 @@ void AlbumsModel::componentComplete()
 
     if (query == QUERY::ALBUMS) {
 
-        connect(db, &CollectionDB::albumInserted, [this, timer](QVariantMap) {
+        connect(CollectionDB::getInstance(), &CollectionDB::albumInserted, [this, timer](QVariantMap) {
             m_newAlbums++;
             timer->start();
         });
@@ -39,7 +38,7 @@ void AlbumsModel::componentComplete()
 
     } else {
 
-        connect(db, &CollectionDB::artistInserted, [this, timer](QVariantMap) {
+        connect(CollectionDB::getInstance(), &CollectionDB::artistInserted, [this, timer](QVariantMap) {
             m_newAlbums++;
             timer->start();
         });
@@ -89,7 +88,7 @@ void AlbumsModel::setList()
     else
         return;
 
-    this->list = this->db->getDBData(m_Query);
+    this->list = CollectionDB::getInstance()->getDBData(m_Query);
 
     emit this->postListChanged();
     emit this->countChanged();
