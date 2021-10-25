@@ -19,7 +19,7 @@ StackView
     property string playlistQuery
 
     property Flickable flickable : currentItem.flickable
-property alias playlistList :_playlistPage.list
+    property alias playlistList :_playlistPage.list
 
     Component
     {
@@ -29,7 +29,7 @@ property alias playlistList :_playlistPage.list
 
     initialItem: PlaylistsViewModel
     {
-    id: _playlistPage
+        id: _playlistPage
     }
 
     Component

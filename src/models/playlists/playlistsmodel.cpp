@@ -20,10 +20,10 @@ PlaylistsModel::PlaylistsModel(QObject *parent)
         auto item = this->list[index];
         item[FMH::MODEL_KEY::PREVIEW] = playlistArtworkPreviews(tag);
         this->list[index] = item;
-       emit this->updateModel(index, {});
+        emit this->updateModel(index, {});
     });
 
-     this->setList();
+    this->setList();
 }
 
 const FMH::MODEL_LIST &PlaylistsModel::items() const
@@ -42,9 +42,9 @@ void PlaylistsModel::setList()
 FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
 {
     return FMH::MODEL{{FMH::MODEL_KEY::PLAYLIST, playlist},
-                      {FMH::MODEL_KEY::ICON, "tag"},
-                      {FMH::MODEL_KEY::TYPE, "personal"},
-                      {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews(playlist)}};
+        {FMH::MODEL_KEY::ICON, "tag"},
+        {FMH::MODEL_KEY::TYPE, "personal"},
+        {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews(playlist)}};
 }
 
 QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
@@ -74,11 +74,11 @@ QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
 FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
 {
     return FMH::MODEL_LIST{
-                           {{FMH::MODEL_KEY::TYPE, "default"},
-                            {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
-                            {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Most Played")},
-                            {FMH::MODEL_KEY::ICON, "view-media-playcount"},
-                            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}}};
+        {{FMH::MODEL_KEY::TYPE, "default"},
+            {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
+            {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Most Played")},
+            {FMH::MODEL_KEY::ICON, "view-media-playcount"},
+            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}}};
 }
 
 FMH::MODEL_LIST PlaylistsModel::tags()
@@ -118,12 +118,14 @@ void PlaylistsModel::removeTrack(const QString &playlist, const QString &url)
 void PlaylistsModel::removePlaylist(const int &index) // TODO
 {
     if (index >= this->list.size() || index < 0)
+    {
         return;
+    }
 
-    //    if(Tagging::getInstance()->remove(this->list.at(index)[FMH::MODEL_KEY::PLAYLIST]))
-    //    {
-    //        emit this->preItemRemoved(index);
-    //        this->list.removeAt(index);
-    //        emit this->postItemRemoved();
-    //    }
+    if(Tagging::getInstance()->removeTag(this->list.at(index)[FMH::MODEL_KEY::PLAYLIST], true))
+    {
+        emit this->preItemRemoved(index);
+        this->list.removeAt(index);
+        emit this->postItemRemoved();
+    }
 }

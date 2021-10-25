@@ -25,6 +25,50 @@ Maui.AltBrowser
 
     holder.visible: count === 0
 
+    Component
+    {
+        id: _removeTagDialogComponent
+        Maui.Dialog
+        {
+            title: i18n("Remove '%1'", currentPlaylist)
+            acceptButton.text: i18n("Accept")
+            rejectButton.text: i18n("Cancel")
+            page.margins: Maui.Style.space.big
+            message: i18n("Are you sure you want to remove this tag? This operation can not be undone.")
+            onAccepted:
+            {
+                _playlistsList.removePlaylist(control.model.mappedToSource(control.currentIndex))
+                close()
+            }
+
+            onRejected: close()
+        }
+    }
+
+    Maui.ContextualMenu
+    {
+        id: _tagMenu
+
+        MenuItem
+        {
+            text: i18n("Edit")
+            icon.name: "document-edit"
+            onTriggered:
+            {}
+        }
+
+        MenuItem
+        {
+            text: i18n("Remove")
+            icon.name: "edit-delete"
+            onTriggered:
+            {
+                _dialogLoader.sourceComponent = _removeTagDialogComponent
+                dialog.open()
+            }
+        }
+    }
+
     model: Maui.BaseModel
     {
         id: _playlistsModel
@@ -95,11 +139,14 @@ Maui.AltBrowser
         {
             control.currentIndex = index
             currentPlaylist = model.playlist
+            _tagMenu.show()
         }
 
         onPressAndHold:
         {
             control.currentIndex = index
+            currentPlaylist = model.playlist
+            _tagMenu.show()
         }
     }
 
@@ -148,12 +195,14 @@ Maui.AltBrowser
             {
                 control.currentIndex = index
                 currentPlaylist = model.playlist
+                _tagMenu.show()
             }
 
             onPressAndHold:
             {
                 control.currentIndex = index
                 currentPlaylist = model.playlist
+                _tagMenu.show()
             }
         }
     }
