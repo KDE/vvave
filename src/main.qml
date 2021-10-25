@@ -453,6 +453,11 @@ Maui.ApplicationWindow
 
     function toggleMiniMode()
     {
+        if(Kirigami.Settings.isMobile)
+        {
+            return
+        }
+
         if(miniMode)
         {
             _stackView.pop(StackView.Immediate)

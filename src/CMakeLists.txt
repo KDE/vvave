@@ -59,13 +59,15 @@ if (ANDROID)
 
     target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras OpenSSL::SSL)
     kde_source_files_enable_exceptions(${PROJECT_NAME})
-elseif(UNIX)
+elseif(UNIX AND NOT WIN32 AND NOT APPLE)
     target_sources(${PROJECT_NAME} PRIVATE
         kde/mpris2/mediaplayer2.cpp
         kde/mpris2/mediaplayer2player.cpp
         )
     target_link_libraries(${PROJECT_NAME} Qt5::DBus)
-else()
+endif()
+
+if(UNIX OR WIN32 OR APPLE AND NOT ANDROID)
     target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
 endif()
 
