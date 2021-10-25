@@ -86,7 +86,7 @@ void ArtworkFetcher::fetch(FMH::MODEL data, PULPO::ONTOLOGY ontology)
         qDebug() << "DONE WITH " << request.track;
 
         for (const auto &res : responses) {
-            if (res.context == PULPO::CONTEXT::IMAGE) {
+            if (res.context == PULPO::PULPO_CONTEXT::IMAGE) {
                 auto imageUrl = res.value.toString();
 
                 if (!imageUrl.isEmpty()) {

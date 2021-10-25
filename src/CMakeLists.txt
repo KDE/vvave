@@ -64,7 +64,9 @@ elseif(UNIX)
         kde/mpris2/mediaplayer2.cpp
         kde/mpris2/mediaplayer2player.cpp
         )
-    target_link_libraries(${PROJECT_NAME} Qt5::Widgets Qt5::DBus)
+    target_link_libraries(${PROJECT_NAME} Qt5::DBus)
+else()
+    target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
 endif()
 
 target_compile_definitions(${PROJECT_NAME}

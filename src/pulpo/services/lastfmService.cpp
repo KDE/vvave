@@ -96,7 +96,7 @@ void lastfm::parseArtist(const QByteArray &array)
                 if (n.nodeName() == "bio") {
                     auto artistWiki = n.childNodes().item(3).toElement().text();
 
-                    this->responses << PULPO::RESPONSE{CONTEXT::WIKI, artistWiki};
+                    this->responses << PULPO::RESPONSE{PULPO_CONTEXT::WIKI, artistWiki};
                 }
             }
         }
@@ -204,7 +204,7 @@ void lastfm::parseAlbum(const QByteArray &array)
 
                     if (imgSize == "large" && n.isElement()) {
                         const auto albumArt_url = n.toElement().text();
-                        this->responses << PULPO::RESPONSE{CONTEXT::IMAGE, albumArt_url};
+                        this->responses << PULPO::RESPONSE{PULPO_CONTEXT::IMAGE, albumArt_url};
 
                         if (this->request.info.size() == 1)
                             break;
@@ -223,7 +223,7 @@ void lastfm::parseAlbum(const QByteArray &array)
                     const auto albumWiki = n.childNodes().item(1).toElement().text();
                     // qDebug()<<"Fetching AlbumWiki LastFm[]";
 
-                    this->responses << PULPO::RESPONSE{CONTEXT::WIKI, albumWiki};
+                    this->responses << PULPO::RESPONSE{PULPO_CONTEXT::WIKI, albumWiki};
 
                     if (this->request.info.size() == 1)
                         break;
@@ -243,7 +243,7 @@ void lastfm::parseAlbum(const QByteArray &array)
                         albumTags << m.childNodes().item(0).toElement().text();
                     }
 
-                    this->responses << PULPO::RESPONSE{CONTEXT::TAG, albumTags};
+                    this->responses << PULPO::RESPONSE{PULPO_CONTEXT::TAG, albumTags};
 
                     if (this->request.info.size() == 1)
                         break;

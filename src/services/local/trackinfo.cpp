@@ -81,7 +81,7 @@ void TrackInfo::getAlbumInfo()
         qDebug() << "DONE WITH " << request.track;
 
         for (const auto &res : responses) {
-            if (res.context == PULPO::CONTEXT::WIKI) {
+            if (res.context == PULPO::PULPO_CONTEXT::WIKI) {
                 m_albumWiki = res.value.toString();
                 emit this->albumWikiChanged(m_albumWiki);
             }
@@ -108,7 +108,7 @@ void TrackInfo::getArtistInfo()
         qDebug() << "DONE WITH " << request.track;
 
         for (const auto &res : responses) {
-            if (res.context == PULPO::CONTEXT::WIKI) {
+            if (res.context == PULPO::PULPO_CONTEXT::WIKI) {
                 m_artistWiki = res.value.toString();
                 emit this->artistWikiChanged(m_artistWiki);
             }
@@ -135,7 +135,7 @@ void TrackInfo::getTrackInfo()
         qDebug() << "DONE WITH " << request.track;
 
         for (const auto &res : responses) {
-            if (res.context == PULPO::CONTEXT::LYRIC) {
+            if (res.context == PULPO::PULPO_CONTEXT::LYRIC) {
                 m_lyrics = res.value.toString();
                 emit this->lyricsChanged(m_lyrics);
             }

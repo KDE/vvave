@@ -4,15 +4,6 @@
 #
 # SPDX-License-Identifier: MIT
 
-# This file got automatically created by ECM, do not edit
-# See https://clang.llvm.org/docs/ClangFormatStyleOptions.html for the config options
-# and https://community.kde.org/Policies/Frameworks_Coding_Style#Clang-format_automatic_code_formatting
-# for clang-format tips & tricks
----
-Language: JavaScript
-DisableFormat: true
----
-
 # Style for C++
 Language: Cpp
 
@@ -56,7 +47,7 @@ BinPackArguments: false
 # don't move parameters to own lines if they are not all on the same
 BinPackParameters: false
 
-# In case we have an if statement with multiple lines the operator should be at the beginning of the line
+# In case we have an if statement whith multiple lines the operator should be at the beginning of the line
 # but we do not want to break assignments
 BreakBeforeBinaryOperators: NonAssignment
 

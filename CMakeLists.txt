@@ -8,8 +8,11 @@ cmake_minimum_required(VERSION 3.16)
 set(VVAVE_VERSION 2.1.0)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(UNIX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
+endif()
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -64,7 +67,9 @@ find_package(Taglib 1.4 REQUIRED)
 if(ANDROID)
     find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS AndroidExtras)
 elseif(UNIX)
-    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS DBus Widgets)
+    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS DBus)
+else()
+    find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets)
 endif()
 
 if(${ECM_SOURCE_UNDER_VERSION_CONTROL})

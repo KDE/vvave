@@ -123,16 +123,16 @@ void spotify::parseArtist(const QByteArray &array)
         stats << root.value("popularity").toString();
         stats << root.value("followers").toMap().value("total").toString();
 
-        this->responses << PULPO::RESPONSE{CONTEXT::ARTIST_STAT, stats};
+        this->responses << PULPO::RESPONSE{PULPO_CONTEXT::ARTIST_STAT, stats};
 
         auto genres = root.value("genres").toStringList();
-        this->responses << PULPO::RESPONSE{CONTEXT::GENRE, genres};
+        this->responses << PULPO::RESPONSE{PULPO_CONTEXT::GENRE, genres};
     }
 
     if (this->request.info.contains(INFO::ARTWORK)) {
         const auto images = root.value("images").toList();
         auto albumArt_url = images.isEmpty() ? "" : images.first().toMap().value("url").toString();
-        this->responses << PULPO::RESPONSE{CONTEXT::IMAGE, albumArt_url};
+        this->responses << PULPO::RESPONSE{PULPO_CONTEXT::IMAGE, albumArt_url};
     }
 
     emit this->responseReady(this->request, this->responses);
@@ -166,7 +166,7 @@ void spotify::parseAlbum(const QByteArray &array)
 
     if (this->request.info.contains(INFO::ARTWORK)) {
         auto albumArt_url = items.first().toMap().value("images").toList().first().toMap().value("url").toString();
-        this->responses << PULPO::RESPONSE{CONTEXT::IMAGE, albumArt_url};
+        this->responses << PULPO::RESPONSE{PULPO_CONTEXT::IMAGE, albumArt_url};
     }
 
     emit this->responseReady(this->request, this->responses);
@@ -207,20 +207,20 @@ void spotify::parseTrack(const QByteArray &array)
         if (trackArtist.contains(this->request.track[FMH::MODEL_KEY::ARTIST])) {
             if (this->request.info.contains(INFO::TAGS)) {
                 auto popularity = item.toMap().value("popularity").toString();
-                this->responses << PULPO::RESPONSE{CONTEXT::TRACK_STAT, popularity};
+                this->responses << PULPO::RESPONSE{PULPO_CONTEXT::TRACK_STAT, popularity};
             }
 
             if (this->request.info.contains(INFO::METADATA)) {
                 auto trackAlbum = album.value("name").toString();
-                this->responses << PULPO::RESPONSE{CONTEXT::ALBUM_TITLE, trackAlbum};
+                this->responses << PULPO::RESPONSE{PULPO_CONTEXT::ALBUM_TITLE, trackAlbum};
 
                 auto trackPosition = item.toMap().value("track_number").toString();
-                this->responses << PULPO::RESPONSE{CONTEXT::TRACK_NUMBER, trackPosition};
+                this->responses << PULPO::RESPONSE{PULPO_CONTEXT::TRACK_NUMBER, trackPosition};
             }
 
             if (this->request.info.contains(INFO::ARTWORK)) {
                 auto albumArt_url = album.value("images").toList().first().toMap().value("url").toString();
-                this->responses << PULPO::RESPONSE{CONTEXT::IMAGE, albumArt_url};
+                this->responses << PULPO::RESPONSE{PULPO_CONTEXT::IMAGE, albumArt_url};
             }
 
         } else
