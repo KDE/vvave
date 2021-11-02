@@ -19,6 +19,7 @@ Player::Player(QObject *parent)
 
     connect(this->player, &QMediaPlayer::positionChanged, this, &Player::posChanged);
     connect(this->player, &QMediaPlayer::durationChanged, this, &Player::durationChanged);
+
 }
 
 inline QNetworkRequest getOcsRequest(const QNetworkRequest &request)

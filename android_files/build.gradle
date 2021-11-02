@@ -15,6 +15,8 @@ repositories {
 }
 
 apply plugin: 'com.android.application'
+apply from: '../version.gradle'
+def timestamp = (int)(new Date().getTime()/1000)
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
@@ -68,11 +70,29 @@ android {
     // Do not compress Qt binary resources file
     aaptOptions {
         noCompress 'rcc'
+        ignoreAssetsPattern '!<dir>ECM:!<dir>aclocal:!<dir>doc:!<dir>gtk-doc:!<dir>man:!<dir>mime:!<dir>pkgconfig:!<dir>qlogging-categories5:!<file>iso_15924.mo:!<file>iso_3166-2.mo:!<file>iso_3166-3.mo:!<file>iso_4217.mo:!<file>iso_639-2.mo:!<file>iso_639-3.mo:!<file>iso_639-5.mo:!<file>kcodecs5_qt.qm:!<file>kde5_xml_mimetypes.qm:!<file>knotifications5_qt.qm:!<file>libkholidays5_qt.qm:!<file>libkmime5.mo:!<file>iso_3166-3.json:!<file>iso_4217.json:!<file>iso_639-2.json:!<file>iso_639-3.json:!<file>iso_639-5.json:!<file>schema-15924.json:!<file>schema-3166-1.json:!<file>schema-3166-2.json:!<file>schema-3166-3.json:!<file>schema-4217.json:!<file>schema-639-2.json:!<file>schema-639-3.json:!<file>schema-639-5.json'
     }
 
     defaultConfig {
         resConfig "en"
         minSdkVersion = qtMinSdkVersion
         targetSdkVersion = qtTargetSdkVersion
+        manifestPlaceholders = [versionName: projectVersionFull, versionCode: timestamp]
     }
+
+          packagingOptions {
+                 exclude 'lib/*/*_Controls.2_Fusion_*'
+                 exclude 'lib/*/*_Controls.2_Imagine_*'
+                 exclude 'lib/*/*RemoteObjects*'
+                 exclude 'lib/*/*StateMachine*'
+                 exclude 'lib/*/*_imageformats_qico_*'
+                 exclude 'lib/*/*_imageformats_qicns_*'
+                 exclude 'lib/*/*_imageformats_qtga_*'
+                 exclude 'lib/*/*_imageformats_qtiff_*'
+                 exclude 'lib/*/*_qmltooling_*'
+                 exclude 'lib/*/*_qtgeoservices_esri_*'
+                 exclude 'lib/*/*_qtgeoservices_mapbox_*'
+                 exclude 'lib/*/*_qtgeoservices_nokia_*'
+             }
+
 }

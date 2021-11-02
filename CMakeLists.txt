@@ -44,6 +44,7 @@ include(FeatureSummary)
 if(ANDROID)
     set(ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android_files)
     set(ANDROID_ABIS "armeabi-v7a")
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/android_files/version.gradle.in ${CMAKE_BINARY_DIR}/version.gradle)
 endif()
 
 option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
