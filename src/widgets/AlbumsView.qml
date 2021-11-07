@@ -26,6 +26,14 @@ StackView
     {
         id: albumsViewGrid
         holder.emoji: "qrc:/assets/dialog-information.svg"
+        holder.actions:[
+
+            Action
+            {
+                text: i18n("Add sources")
+                onTriggered: openSettingsDialog()
+            }
+        ]
 
         onAlbumCoverClicked: control.populateTable(album, artist)
     }

@@ -290,11 +290,7 @@ Maui.ApplicationWindow
                         {
                             text: i18n("Settings")
                             icon.name: "settings-configure"
-                            onTriggered:
-                            {
-                                _dialogLoader.sourceComponent = _settingsDialogComponent
-                                dialog.open()
-                            }
+                            onTriggered: openSettingsDialog()
                         }
 
                         MenuItem
@@ -478,5 +474,11 @@ Maui.ApplicationWindow
             root.x = Screen.desktopAvailableWidth - root.preferredMiniModeSize - Maui.Style.space.big
             root.y = Screen.desktopAvailableHeight - root.preferredMiniModeSize - Maui.Style.space.big
         }
+    }
+
+    function openSettingsDialog()
+    {
+        _dialogLoader.sourceComponent = _settingsDialogComponent
+        dialog.open()
     }
 }

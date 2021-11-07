@@ -39,6 +39,11 @@ StackView
             emoji: "qrc:/assets/dialog-information.svg"
             title : i18n("No Folders!")
             body: i18n("Add new music to your sources to browse by folders")
+            Action
+            {
+                text: i18n("Add sources")
+                onTriggered: openSettingsDialog()
+            }
         }
 
         Maui.ListBrowser
