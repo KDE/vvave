@@ -118,66 +118,138 @@ Maui.Page
             }
         }
 
-        delegate: TableDelegate
+        delegate: Rectangle
         {
-            id: delegate
+            id: delegateRoot
             width: ListView.view.width
-            number : false
-            coverArt : true
-            draggable: false
-            checkable: false
-            checked: false
+            height: delegate.implicitHeight
+            property int mindex : index
 
-            onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
-            onRightClicked:
-            {
-                if(table.allowMenu) table.openItemMenu(index)
-            }
+            Drag.active: dragArea.held
+            Drag.source: delegateRoot
+            Drag.hotSpot.x: width / 2
+            Drag.hotSpot.y: height / 2
+            Drag.dragType: Drag.Automatic
+//            Drag.supportedActions: Qt.MoveAction
 
-            sameAlbum:
-            {
-                const item = listModel.get(index-1)
-                return coverArt && item && item.album === album && item.artist === artist
-            }
+            radius: delegate.radius
+            color: Drag.active ? Kirigami.Theme.hoverColor : "transparent"
 
-            AbstractButton
+            TableDelegate
             {
-                Layout.fillHeight: true
-                Layout.preferredWidth: Maui.Style.rowHeight
-                visible: (Maui.Handy.isTouch ? true : delegate.hovered)
-                icon.name: "edit-clear"
+                id: delegate
+                isCurrentItem: parent.ListView.isCurrentItem
+               anchors.fill: parent
+
+                number : false
+                coverArt : true
+                draggable: false
+                checkable: false
+                checked: false
+
+                onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
+
+                onRightClicked:
+                {
+                    if(table.allowMenu) table.openItemMenu(index)
+                }
+
+                sameAlbum: control.totalMoves, evaluate(listModel.get(mindex-1))
+
+                function evaluate(item) {
+                    return coverArt && item && item.album === model.album && item.artist === model.artist
+                }
+
+                AbstractButton
+                {
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: Maui.Style.rowHeight
+                    visible: (Maui.Handy.isTouch ? true : delegate.hovered)
+                    icon.name: "edit-clear"
+                    onClicked:
+                    {
+                        if(index === currentTrackIndex)
+                            player.stop()
+
+                        listModel.list.remove(index)
+                    }
+
+                    Kirigami.Icon
+                    {
+                        anchors.centerIn: parent
+                        height: Maui.Style.iconSizes.small
+                        width: height
+                        source: parent.icon.name
+                    }
+                    opacity: delegate.hovered ? 0.8 : 0.6
+                }
+
+                Item
+                {
+                    implicitHeight: implicitWidth
+                    implicitWidth: 32
+
+                    Kirigami.Icon
+                    {
+                        source: "handle-left"
+                        height: 22
+                        width : height
+                        anchors.centerIn: parent
+                    }
+
+                    MouseArea
+                    {
+                        id: dragArea
+                        anchors.fill: parent
+                        property bool held: false
+
+                        drag.target: held ? delegateRoot : undefined
+                        drag.axis: Drag.YAxis
+                        drag.smoothed: false
+                        preventStealing: true
+                        onPressAndHold: held = true
+                        onReleased:
+                        {
+                            held = false
+                        }
+                    }
+                }
+
+
                 onClicked:
                 {
-                    if(index === currentTrackIndex)
-                        player.stop()
-
-                    listModel.list.remove(index)
+                    table.forceActiveFocus()
+                    if(Maui.Handy.isTouch)
+                        Player.playAt(index)
                 }
 
-                Kirigami.Icon
+                onDoubleClicked:
                 {
-                    anchors.centerIn: parent
-                    height: Maui.Style.iconSizes.small
-                    width: height
-                    source: parent.icon.name
+                    if(!Maui.Handy.isTouch)
+                        Player.playAt(index)
                 }
-                opacity: delegate.hovered ? 0.8 : 0.6
             }
 
-            onClicked:
+
+            DropArea
             {
-                table.forceActiveFocus()
-                if(Maui.Handy.isTouch)
-                    Player.playAt(index)
+                id: _dropArea
+                anchors { fill: parent;  }
+
+                onEntered:  {
+                    console.log("Move ", drag.source.mindex,
+                                delegateRoot.mindex)
+                    table.list.move(
+                                drag.source.mindex,
+                                delegateRoot.mindex)
+                    control.totalMoves++
+                }
             }
 
-            onDoubleClicked:
-            {
-                if(!Maui.Handy.isTouch)
-                    Player.playAt(index)
-            }
         }
     }
+
+    property int totalMoves: 0
 
     function saveList()
     {

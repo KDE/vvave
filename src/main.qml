@@ -218,7 +218,7 @@ Maui.ApplicationWindow
         preferredWidth: Kirigami.Units.gridUnit * 18
         collapsed : root.width < preferredWidth * 2
         collapsible: true
-
+        dropArea.enabled: false
         onContentDropped:
         {
             if(drop.urls)

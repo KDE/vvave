@@ -278,6 +278,19 @@ void TracksModel::updateMetadata(const QVariantMap &data, const int &index)
     }
 }
 
+bool TracksModel::move(const int &index, const int &to)
+{
+    if (index >= this->list.size() || index < 0)
+        return false;
+
+    if (to >= this->list.size() || to < 0)
+        return false;
+
+    this->list.swapItemsAt(index, to);
+    emit this->itemMoved(index, to);
+    return true;
+}
+
 QStringList TracksModel::urls() const
 {
     return FMH::modelToList(this->list, FMH::MODEL_KEY::URL);

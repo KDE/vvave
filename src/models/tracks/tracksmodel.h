@@ -54,6 +54,8 @@ public slots:
     
     void updateMetadata(const QVariantMap &data, const int &index);
 
+    bool move(const int &index, const int &to);
+
     QStringList urls() const;
 };
 
