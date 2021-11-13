@@ -60,7 +60,7 @@ Maui.Page
     headBar.rightContent: Loader
     {
         asynchronous: true
-        active: listModel.list.count > 0
+        active: headBar.visible
         visible: active
 
         sourceComponent: Maui.ToolButtonMenu
@@ -284,7 +284,7 @@ Maui.Page
             id: _listModel
             list: Tracks
             {
-                id: _tracksList               
+                id: _tracksList
             }
             recursiveFilteringEnabled: true
             sortCaseSensitivity: Qt.CaseInsensitive
