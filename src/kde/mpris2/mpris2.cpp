@@ -10,7 +10,7 @@
 #include "../../services/local/player.h"
 #include "../../services/local/playlist.h"
 
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
 #include "mediaplayer2.h"
 #include "mediaplayer2player.h"
 #include <QDBusConnection>
@@ -29,7 +29,7 @@ Mpris2::Mpris2(QObject *parent)
 
 void Mpris2::initDBusService()
 {
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
 
     QString mspris2Name(QStringLiteral("org.mpris.MediaPlayer2.") + m_playerName);
 

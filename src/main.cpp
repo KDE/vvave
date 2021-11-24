@@ -14,7 +14,7 @@
 
 #include "kde/mpris2/mpris2.h"
 
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
 #include "kde/mpris2/mediaplayer2player.h"
 #endif
 
@@ -130,7 +130,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     engine.addImageProvider("artwork", new ArtworkProvider());
 
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
     qRegisterMetaType<MediaPlayer2Player *>();
 #endif
 
