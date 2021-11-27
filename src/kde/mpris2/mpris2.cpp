@@ -87,7 +87,7 @@ void Mpris2::setPlayerName(const QString &playerName)
 
     m_playerName = playerName;
 
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
     if (m_playListModel && m_audioPlayer && m_audioPlayer && !m_playerName.isEmpty()) {
         if (!m_mp2) {
             initDBusService();
@@ -106,7 +106,7 @@ void Mpris2::setPlayListModel(Playlist *playListModel)
 
     m_playListModel = playListModel;
 
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
 
     if (m_playListModel && m_audioPlayer && m_audioPlayer && !m_playerName.isEmpty()) {
         if (!m_mp2) {
@@ -123,7 +123,7 @@ void Mpris2::setAudioPlayer(Player *audioPlayer)
         return;
 
     m_audioPlayer = audioPlayer;
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
 
     if (m_playListModel && m_audioPlayer && m_audioPlayer && !m_playerName.isEmpty()) {
         if (!m_mp2) {
@@ -136,7 +136,7 @@ void Mpris2::setAudioPlayer(Player *audioPlayer)
 
 void Mpris2::setShowProgressOnTaskBar(bool value)
 {
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
     m_mp2p->setShowProgressOnTaskBar(value);
     mShowProgressOnTaskBar = value;
     Q_EMIT showProgressOnTaskBarChanged();

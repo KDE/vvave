@@ -67,7 +67,7 @@ Q_SIGNALS:
 private:
     void initDBusService();
 
-#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
     std::unique_ptr<MediaPlayer2> m_mp2;
     std::unique_ptr<MediaPlayer2Player> m_mp2p;
 #endif
