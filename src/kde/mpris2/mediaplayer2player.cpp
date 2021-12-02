@@ -17,6 +17,9 @@
 #include <QDBusMessage>
 #include <QStringList>
 
+#include "utils/bae.h"
+#include <MauiKit/Core/fmh.h>
+
 static const double MAX_RATE = 1.0;
 static const double MIN_RATE = 1.0;
 
@@ -388,9 +391,14 @@ QVariantMap MediaPlayer2Player::getMetadataOfCurrentTrack()
 
     result[QStringLiteral("xesam:artist")] = QStringList{track["artist"].toString()};
 
-    result[QStringLiteral("mpris:artUrl")] = track["artwork"].toString();
+FMH::MODEL data{{FMH::MODEL_KEY::ARTIST, track["artist"].toString()}, {FMH::MODEL_KEY::ALBUM, track["album"].toString()}};
 
-    return result;
+if (BAE::artworkCache(data, FMH::MODEL_KEY::ALBUM))
+{
+    result[QStringLiteral("mpris:artUrl")] =  QUrl(data[FMH::MODEL_KEY::ARTWORK]).toString();
+}
+
+return result;
 }
 
 int MediaPlayer2Player::mediaPlayerPresent() const
