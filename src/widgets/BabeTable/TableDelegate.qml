@@ -27,5 +27,5 @@ Maui.ListBrowserDelegate
 
     iconVisible: !control.sameAlbum && control.coverArt
     imageSource: coverArt ? "image://artwork/album:"+ control.artist+":"+control.album : ""
-    template.leftMargin: iconVisible ? 0 : Maui.Style.space.medium
+//    template.leftPadding: iconVisible ? 0 : Maui.Style.space.medium
 }
