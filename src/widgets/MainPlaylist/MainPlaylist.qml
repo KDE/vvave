@@ -130,7 +130,7 @@ Maui.Page
             Drag.hotSpot.x: width / 2
             Drag.hotSpot.y: height / 2
             Drag.dragType: Drag.Automatic
-//            Drag.supportedActions: Qt.MoveAction
+//                        Drag.supportedActions: Qt.MoveAction
 
             radius: delegate.radius
             color: Drag.active ? Kirigami.Theme.hoverColor : "transparent"
@@ -139,7 +139,7 @@ Maui.Page
             {
                 id: delegate
                 isCurrentItem: parent.ListView.isCurrentItem
-               anchors.fill: parent
+                anchors.fill: parent
 
                 number : false
                 coverArt : true
@@ -160,105 +160,109 @@ Maui.Page
                     return coverArt && item && item.album === model.album && item.artist === model.artist
                 }
 
-                AbstractButton
-                {
-                    Layout.fillHeight: true
-                    Layout.preferredWidth: Maui.Style.rowHeight
-                    visible: (Maui.Handy.isTouch ? true : delegate.hovered)
-                    icon.name: "edit-clear"
-                    onClicked:
+                    AbstractButton
                     {
-                        if(index === currentTrackIndex)
-                            player.stop()
-
-                        listModel.list.remove(index)
-                    }
-
-                    Kirigami.Icon
-                    {
-                        anchors.centerIn: parent
-                        height: Maui.Style.iconSizes.small
-                        width: height
-                        source: parent.icon.name
-                    }
-                    opacity: delegate.hovered ? 0.8 : 0.6
-                }
-
-                Item
-                {
-                    implicitHeight: implicitWidth
-                    implicitWidth: 32
-
-                    Kirigami.Icon
-                    {
-                        source: "handle-left"
-                        height: 22
-                        width : height
-                        anchors.centerIn: parent
-                    }
-
-                    MouseArea
-                    {
-                        id: dragArea
-                        anchors.fill: parent
-                        property bool held: false
-
-                        drag.target: held ? delegateRoot : undefined
-                        drag.axis: Drag.YAxis
-                        drag.smoothed: false
-                        preventStealing: true
-                        onPressAndHold: held = true
-                        onReleased:
+                        Layout.fillHeight: true
+                        Layout.preferredWidth: Maui.Style.rowHeight
+                        visible: (Maui.Handy.isTouch ? true : delegate.hovered)
+                        icon.name: "edit-clear"
+                        onClicked:
                         {
-                            held = false
+                            if(index === currentTrackIndex)
+                                player.stop()
+
+                            listModel.list.remove(index)
+                        }
+
+                        Kirigami.Icon
+                        {
+                            anchors.centerIn: parent
+                            height: Maui.Style.iconSizes.small
+                            width: height
+                            source: parent.icon.name
+                        }
+                        opacity: delegate.hovered ? 0.8 : 0.6
+                    }
+
+                    Item
+                    {
+                        implicitHeight: implicitWidth
+                        implicitWidth: 32
+
+                        Rectangle
+                        {
+                            radius: 8
+                            color: Qt.darker(Kirigami.Theme.backgroundColor)
+                            height: 16
+                            width : height
+                            anchors.centerIn: parent
+                        }
+
+                        MouseArea
+                        {
+                            id: dragArea
+                            anchors.fill: parent
+                            property bool held: false
+
+                            drag.target: held ? delegateRoot : undefined
+                            drag.axis: Drag.YAxis
+                            drag.smoothed: false
+                            preventStealing: true
+                            onPressAndHold: held = true
+                            onReleased:
+                            {
+                                held = false
+                            }
                         }
                     }
+
+
+                    onClicked:
+                    {
+                        table.forceActiveFocus()
+                        if(Maui.Handy.isTouch)
+                            Player.playAt(index)
+                    }
+
+                    onDoubleClicked:
+                    {
+                        if(!Maui.Handy.isTouch)
+                            Player.playAt(index)
+                    }
                 }
 
-
-                onClicked:
+                DropArea
                 {
-                    table.forceActiveFocus()
-                    if(Maui.Handy.isTouch)
-                        Player.playAt(index)
+                    id: _dropArea
+                    anchors.fill: parent
+
+                    onEntered:
+                    {
+                        console.log("Move ", drag.source.mindex,
+                                    delegateRoot.mindex)
+
+                        table.list.move(
+                                    drag.source.mindex,
+                                    delegateRoot.mindex)
+                        control.totalMoves++
+
+
+                    }
                 }
 
-                onDoubleClicked:
-                {
-                    if(!Maui.Handy.isTouch)
-                        Player.playAt(index)
-                }
             }
-
-
-            DropArea
-            {
-                id: _dropArea
-                anchors { fill: parent;  }
-
-                onEntered:  {
-                    console.log("Move ", drag.source.mindex,
-                                delegateRoot.mindex)
-                    table.list.move(
-                                drag.source.mindex,
-                                delegateRoot.mindex)
-                    control.totalMoves++
-                }
-            }
-
         }
-    }
 
-    property int totalMoves: 0
+        property int totalMoves: 0
 
-    function saveList()
-    {
-        var trackList = listModel.list.urls()
-        if(listModel.list.count > 0)
+        function saveList()
         {
-            _dialogLoader.sourceComponent = _playlistDialogComponent
-            dialog.composerList.urls = trackList
-            dialog.open()
+            var trackList = listModel.list.urls()
+            if(listModel.list.count > 0)
+            {
+                _dialogLoader.sourceComponent = _playlistDialogComponent
+                dialog.composerList.urls = trackList
+                dialog.open()
+            }
         }
     }
-}
