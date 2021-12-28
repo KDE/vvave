@@ -272,7 +272,7 @@ Maui.Page
                     label1.font.pointSize: Maui.Style.fontSizes.big
                     label1.font.bold: true
                     anchors.fill: parent
-                    lefPadding: 0
+                    leftPadding: 0
                     iconSource: "view-media-artist"
                     imageSource: control.listModel.sort === "artist" ? "image://artwork/artist:"+ section : ""
                 }
