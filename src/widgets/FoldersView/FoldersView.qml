@@ -70,11 +70,12 @@ StackView
             delegate: Maui.ListBrowserDelegate
             {
                 width: ListView.view.width
-                height: Maui.Style.rowHeight * 1.5
+                template.headerSizeHint: Maui.Style.rowHeight
                 isCurrentItem: ListView.isCurrentItem
                 iconSizeHint: Maui.Style.iconSizes.medium
                 label1.text: model.label
                 label2.text: model.path
+                label2.wrapMode: Text.Wrap
                 iconSource: model.icon
 
                 onClicked:

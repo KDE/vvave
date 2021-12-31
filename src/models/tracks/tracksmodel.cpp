@@ -286,7 +286,7 @@ bool TracksModel::move(const int &index, const int &to)
     if (to >= this->list.size() || to < 0)
         return false;
 
-    this->list.swapItemsAt(index, to);
+    this->list.move(index, to);
     emit this->itemMoved(index, to);
     return true;
 }

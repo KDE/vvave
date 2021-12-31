@@ -11,11 +11,12 @@ import org.mauikit.controls 1.2 as Maui
 import org.maui.vvave 1.0 as Vvave
 
 import "../utils/Player.js" as Player
+import QtQuick.Templates 2.15 as T
 
-Control
+T.Control
 {
     id: control
-    implicitHeight: visible ? Maui.Style.toolBarHeight : 0
+    implicitHeight: visible ? implicitContentHeight : 0
 
     background: Item
     {
@@ -48,13 +49,20 @@ Control
                 opacity: 0.8
             }
         }
+
+        Kirigami.Separator
+        {
+            height: 0.5
+            weight: Kirigami.Separator.Weight.Light
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+        }
     }
 
-    Maui.ToolBar
+    contentItem: Maui.ToolBar
     {
         id: _footerLayout
-
-        anchors.fill: parent
         position: ToolBar.Footer
 
         background: Slider
@@ -187,14 +195,5 @@ Control
                 }
             }
         ]
-    }
-
-    Kirigami.Separator
-    {
-        height: 0.5
-        weight: Kirigami.Separator.Weight.Light
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
     }
 }

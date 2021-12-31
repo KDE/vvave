@@ -59,6 +59,7 @@ Maui.Page
     BabeTable
     {
         id: table
+        anchors.fill: parent
 
         background: Rectangle
         {
@@ -72,7 +73,6 @@ Maui.Page
             restoreMode: Binding.RestoreBindingOrValue
         }
 
-        anchors.fill: parent
         listModel.sort: ""
         listBrowser.enableLassoSelection: false
         headBar.visible: false
@@ -118,139 +118,99 @@ Maui.Page
             }
         }
 
-        delegate: Rectangle
+        delegate: TableDelegate
         {
-            id: delegateRoot
+            id: delegate
             width: ListView.view.width
             height: delegate.implicitHeight
             property int mindex : index
+            isCurrentItem: ListView.isCurrentItem
+            mouseArea.drag.axis: Drag.YAxis
+            Drag.source: delegate
 
-            Drag.active: dragArea.held
-            Drag.source: delegateRoot
-            Drag.hotSpot.x: width / 2
-            Drag.hotSpot.y: height / 2
-            Drag.dragType: Drag.Automatic
-//                        Drag.supportedActions: Qt.MoveAction
+            number : false
+            coverArt : true
+            draggable: true
+            checkable: false
+            checked: false
 
-            radius: delegate.radius
-            color: Drag.active ? Kirigami.Theme.hoverColor : "transparent"
+            onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
 
-            TableDelegate
+            onRightClicked:
             {
-                id: delegate
-                isCurrentItem: parent.ListView.isCurrentItem
-                anchors.fill: parent
+                if(table.allowMenu) table.openItemMenu(index)
+            }
 
-                number : false
-                coverArt : true
-                draggable: false
-                checkable: false
-                checked: false
+            sameAlbum: control.totalMoves, evaluate(listModel.get(mindex-1))
 
-                onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
+            function evaluate(item)
+            {
+                return coverArt && item && item.album === model.album && item.artist === model.artist
+            }
 
-                onRightClicked:
+                AbstractButton
                 {
-                    if(table.allowMenu) table.openItemMenu(index)
-                }
-
-                sameAlbum: control.totalMoves, evaluate(listModel.get(mindex-1))
-
-                function evaluate(item) {
-                    return coverArt && item && item.album === model.album && item.artist === model.artist
-                }
-
-                    AbstractButton
-                    {
-                        Layout.fillHeight: true
-                        Layout.preferredWidth: Maui.Style.rowHeight
-                        visible: (Maui.Handy.isTouch ? true : delegate.hovered)
-                        icon.name: "edit-clear"
-                        onClicked:
-                        {
-                            if(index === currentTrackIndex)
-                                player.stop()
-
-                            listModel.list.remove(index)
-                        }
-
-                        Kirigami.Icon
-                        {
-                            anchors.centerIn: parent
-                            height: Maui.Style.iconSizes.small
-                            width: height
-                            source: parent.icon.name
-                        }
-                        opacity: delegate.hovered ? 0.8 : 0.6
-                    }
-
-                    Item
-                    {
-                        implicitHeight: implicitWidth
-                        implicitWidth: 32
-
-                        Rectangle
-                        {
-                            radius: 8
-                            color: Qt.darker(Kirigami.Theme.backgroundColor)
-                            height: 16
-                            width : height
-                            anchors.centerIn: parent
-                        }
-
-                        MouseArea
-                        {
-                            id: dragArea
-                            anchors.fill: parent
-                            property bool held: false
-
-                            drag.target: held ? delegateRoot : undefined
-                            drag.axis: Drag.YAxis
-                            drag.smoothed: false
-                            preventStealing: true
-                            onPressAndHold: held = true
-                            onReleased:
-                            {
-                                held = false
-                            }
-                        }
-                    }
-
-
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: Maui.Style.rowHeight
+                    visible: (Maui.Handy.isTouch ? true : delegate.hovered)
+                    icon.name: "edit-clear"
                     onClicked:
                     {
-                        table.forceActiveFocus()
-                        if(Maui.Handy.isTouch)
-                            Player.playAt(index)
+                        if(index === currentTrackIndex)
+                            player.stop()
+
+                        listModel.list.remove(index)
                     }
 
-                    onDoubleClicked:
+                    Kirigami.Icon
                     {
-                        if(!Maui.Handy.isTouch)
-                            Player.playAt(index)
+                        anchors.centerIn: parent
+                        height: Maui.Style.iconSizes.small
+                        width: height
+                        source: parent.icon.name
                     }
+                    opacity: delegate.hovered ? 0.8 : 0.6
                 }
 
-                DropArea
+                onClicked:
                 {
-                    id: _dropArea
-                    anchors.fill: parent
+                    table.forceActiveFocus()
+                    if(Maui.Handy.isTouch)
+                        Player.playAt(index)
+                }
 
-                    onEntered:
-                    {
-                        console.log("Move ", drag.source.mindex,
-                                    delegateRoot.mindex)
+                onDoubleClicked:
+                {
+                    if(!Maui.Handy.isTouch)
+                        Player.playAt(index)
+                }
 
-                        table.list.move(
-                                    drag.source.mindex,
-                                    delegateRoot.mindex)
-                        control.totalMoves++
+                //                layout.data: Rectangle
+                //                {
+                //                    implicitHeight: delegate.containsDrag ? 20 : 0
+                //                    Layout.fillWidth: true
+                //                }
 
+                onContentEntered:
+                {
 
-                    }
+                }
+
+                onContentDropped:
+                {
+                    console.log("Move ", drop.source.mindex,
+                                delegate.mindex)
+
+                    table.list.move(
+                                drop.source.mindex,
+                                delegate.mindex)
+                    control.totalMoves++
+
                 }
 
             }
+
+
         }
 
         property int totalMoves: 0

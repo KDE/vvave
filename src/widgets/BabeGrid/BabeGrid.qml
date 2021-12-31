@@ -114,11 +114,11 @@ Maui.AltBrowser
     listDelegate: Maui.ListBrowserDelegate
     {
         width: ListView.view.width
-        height: Maui.Style.rowHeight * 1.8
 
         label1.text: model.album ? model.album : model.artist
         label2.text: model.artist && model.album ? model.artist : ""
         iconSizeHint: Maui.Style.iconSizes.small
+        template.headerSizeHint: Maui.Style.rowHeight * 1.8
         iconSource: "folder-music"
         imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
 

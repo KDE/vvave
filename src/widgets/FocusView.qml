@@ -22,7 +22,6 @@ Maui.Page
 
     headBar.visible: true
     headBar.background: null
-    headBar.height: Maui.Style.toolBarHeight
 
     headBar.leftContent: [
         ToolButton
@@ -138,12 +137,21 @@ Maui.Page
         InfoView {}
     }
 
+    Maui.Holder
+    {
+        anchors.fill: parent
+        visible: _listView.count === 0
+        emoji: "qrc:/assets/view-media-track.svg"
+        title : "Nothing to play!"
+        body: i18n("Start putting together your playlist.")
+    }
+
     StackView
     {
         id: _stackView
         anchors.fill: parent
         anchors.margins: Maui.Style.space.big
-
+        visible: _listView.count > 0
         initialItem: Loader
         {
             focus: true
@@ -226,9 +234,9 @@ Maui.Page
                                 Layout.maximumWidth: 300
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignCenter
-//                                width: Math.min(parent.width, 300)
+                                //                                width: Math.min(parent.width, 300)
 
-//                                anchors.centerIn: parent
+                                //                                anchors.centerIn: parent
 
                                 Rectangle
                                 {
@@ -503,44 +511,44 @@ Maui.Page
                     ]
                 }
 
-//                RowLayout
-//                {
-//                    Layout.fillWidth: true
-//                    Layout.maximumWidth: 300
-//                    Layout.alignment: Qt.AlignHCenter
-//                    spacing: Maui.Style.space.medium
+                //                RowLayout
+                //                {
+                //                    Layout.fillWidth: true
+                //                    Layout.maximumWidth: 300
+                //                    Layout.alignment: Qt.AlignHCenter
+                //                    spacing: Maui.Style.space.medium
 
-//                    Kirigami.Icon
-//                    {
-//                       implicitHeight: Maui.Style.iconSizes.small
-//                       implicitWidth: implicitHeight
-//                       source: "audio-volume-low"
-//                    }
+                //                    Kirigami.Icon
+                //                    {
+                //                       implicitHeight: Maui.Style.iconSizes.small
+                //                       implicitWidth: implicitHeight
+                //                       source: "audio-volume-low"
+                //                    }
 
-//                    Slider
-//                    {
-//                        id: volumeBar
-//                        Layout.fillWidth: true
-//                        padding: 0
-//                        spacing: 0
-//                        from: 0
-//                        to: 100
-//                        value: player.volume
-//                        orientation: Qt.Horizontal
+                //                    Slider
+                //                    {
+                //                        id: volumeBar
+                //                        Layout.fillWidth: true
+                //                        padding: 0
+                //                        spacing: 0
+                //                        from: 0
+                //                        to: 100
+                //                        value: player.volume
+                //                        orientation: Qt.Horizontal
 
-//                        onMoved:
-//                        {
-//                            player.volume = value
-//                        }
-//                    }
+                //                        onMoved:
+                //                        {
+                //                            player.volume = value
+                //                        }
+                //                    }
 
-//                    Kirigami.Icon
-//                    {
-//                        implicitHeight: Maui.Style.iconSizes.small
-//                        implicitWidth: implicitHeight
-//                        source: "audio-volume-high"
-//                    }
-//                }
+                //                    Kirigami.Icon
+                //                    {
+                //                        implicitHeight: Maui.Style.iconSizes.small
+                //                        implicitWidth: implicitHeight
+                //                        source: "audio-volume-high"
+                //                    }
+                //                }
             }
         }
     }
