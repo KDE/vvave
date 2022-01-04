@@ -16,6 +16,7 @@ Maui.ListBrowserDelegate
     readonly property int track : model.track
 
     property bool sameAlbum : false
+    maskRadius: Maui.Style.radiusV
 
     isCurrentItem: ListView.isCurrentItem || checked
     draggable: true

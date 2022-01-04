@@ -25,6 +25,7 @@ Maui.ApplicationWindow
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
     headBar.visible: false
+    Maui.App.darkMode: settings.darkMode
 
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
@@ -108,6 +109,7 @@ Maui.ApplicationWindow
         category: "Settings"
         property bool fetchArtwork: true
         property bool autoScan: true
+        property bool darkMode : true
     }
 
     Mpris2
@@ -423,10 +425,15 @@ Maui.ApplicationWindow
     {
         Vvave.fetchArtwork = settings.fetchArtwork
 
+       setAndroidStatusBarColor()
+    }
+
+    function setAndroidStatusBarColor()
+    {
         if(Maui.Handy.isAndroid)
         {
-            Maui.Android.statusbarColor(headBar.Kirigami.Theme.backgroundColor, false)
-            Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, false)
+            Maui.Android.statusbarColor( Kirigami.Theme.backgroundColor, !Maui.App.darkMode)
+            Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, !Maui.App.darkMode)
         }
     }
 

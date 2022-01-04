@@ -36,7 +36,8 @@ Item
             Maui.ListItemTemplate
             {
                 Layout.fillWidth: true
-                implicitHeight: Maui.Style.toolBarHeight
+                maskRadius: Maui.Style.radiusV
+
                 label1.text: currentTrack.artist
                 label1.font.pointSize: Maui.Style.fontSizes.huge
                 label1.font.bold: true
@@ -63,7 +64,7 @@ Item
             Maui.ListItemTemplate
             {
                 Layout.fillWidth: true
-                implicitHeight: Maui.Style.toolBarHeight
+                maskRadius: Maui.Style.radiusV
 
                 label1.text: currentTrack.album
                 label1.font.pointSize: Maui.Style.fontSizes.huge

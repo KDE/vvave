@@ -121,6 +121,7 @@ Maui.AltBrowser
         template.headerSizeHint: Maui.Style.rowHeight * 1.8
         iconSource: "folder-music"
         imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
+        maskRadius: Maui.Style.radiusV
 
         onClicked:
         {

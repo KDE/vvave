@@ -267,6 +267,7 @@ Maui.Page
                 Maui.ListItemTemplate
                 {
 
+                    maskRadius: Maui.Style.radiusV
                     label1.text: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.Handy.formatDate(Date(section), "MM/dd/yyyy") : String(section)
 
                     label1.font.pointSize: Maui.Style.fontSizes.big
