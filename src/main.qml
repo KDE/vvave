@@ -424,7 +424,6 @@ Maui.ApplicationWindow
     Component.onCompleted:
     {
         Vvave.fetchArtwork = settings.fetchArtwork
-
        setAndroidStatusBarColor()
     }
 

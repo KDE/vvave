@@ -424,7 +424,10 @@ Maui.Page
 
                     background: null
 
-                    middleContent: [
+                    middleContent: Row
+                    {
+                        Layout.alignment: Qt.AlignCenter
+
                         ToolButton
                         {
                             id: babeBtnIcon
@@ -441,7 +444,7 @@ Maui.Page
                                 mainPlaylist.listModel.list.fav(root.currentTrackIndex, !FB.Tagging.isFav(root.currentTrack.url))
                                 root.currentTrackChanged()
                             }
-                        },
+                        }
 
                         ToolButton
                         {
@@ -451,7 +454,7 @@ Maui.Page
                             icon.width: Maui.Style.iconSizes.big
                             icon.height: Maui.Style.iconSizes.big
                             onClicked: Player.previousTrack()
-                        },
+                        }
 
                         ToolButton
                         {
@@ -463,7 +466,7 @@ Maui.Page
                             icon.color: Kirigami.Theme.textColor
                             icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
                             onClicked: player.playing ? player.pause() : player.play()
-                        },
+                        }
 
                         ToolButton
                         {
@@ -474,7 +477,7 @@ Maui.Page
                             icon.height: Maui.Style.iconSizes.big
                             icon.name: "media-skip-forward"
                             onClicked: Player.nextTrack()
-                        },
+                        }
 
                         ToolButton
                         {
@@ -508,7 +511,7 @@ Maui.Page
                                 }
                             }
                         }
-                    ]
+                    }
                 }
 
                 //                RowLayout

@@ -1,5 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
+import QtQuick.Layouts 1.3
 
 import QtMultimedia 5.0
 import QtGraphicalEffects 1.0
@@ -165,7 +166,9 @@ T.Control
 
             Maui.ToolActions
             {
-                implicitHeight: Maui.Style.iconSizes.big
+                Layout.alignment: Qt.AlignCenter
+
+//                implicitHeight: Maui.Style.iconSizes.big
                 expanded: true
                 autoExclusive: false
                 checkable: false
@@ -180,8 +183,8 @@ T.Control
                 {
                     id: playIcon
                     text: i18n("Play and pause")
-                    icon.width: Maui.Style.iconSizes.big
-                    icon.height: Maui.Style.iconSizes.big
+//                    icon.width: Maui.Style.iconSizes.big
+//                    icon.height: Maui.Style.iconSizes.big
                     enabled: currentTrackIndex >= 0
                     icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onTriggered: player.playing ? player.pause() : player.play()
