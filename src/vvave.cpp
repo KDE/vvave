@@ -28,15 +28,15 @@ FMH::MODEL vvave::trackInfo(const QUrl &url)
     const auto comment = info.getComment();
 
     return FMH::MODEL {{FMH::MODEL_KEY::URL, url.toString()},
-                      {FMH::MODEL_KEY::TRACK, QString::number(track)},
-                      {FMH::MODEL_KEY::TITLE, title},
-                      {FMH::MODEL_KEY::ARTIST, artist},
-                      {FMH::MODEL_KEY::ALBUM, album},
-                      {FMH::MODEL_KEY::COMMENT, comment},
-                      {FMH::MODEL_KEY::DURATION, QString::number(duration)},
-                      {FMH::MODEL_KEY::GENRE, genre},
-                      {FMH::MODEL_KEY::SOURCE, sourceUrl},
-                      {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}};
+        {FMH::MODEL_KEY::TRACK, QString::number(track)},
+        {FMH::MODEL_KEY::TITLE, title},
+        {FMH::MODEL_KEY::ARTIST, artist},
+        {FMH::MODEL_KEY::ALBUM, album},
+        {FMH::MODEL_KEY::COMMENT, comment},
+        {FMH::MODEL_KEY::DURATION, QString::number(duration)},
+        {FMH::MODEL_KEY::GENRE, genre},
+        {FMH::MODEL_KEY::SOURCE, sourceUrl},
+        {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}};
 }
 
 QVariantList vvave::pendingTracks()
@@ -153,7 +153,10 @@ QVariantList vvave::sourcesModel()
     const auto urls = sources();
     for (const auto &url : urls)
     {
-        res << FMStatic::getFileInfo(url);
+        if(FMStatic::fileExists(url))
+        {
+            res << FMStatic::getFileInfo(url);
+        }
     }
 
     return res;
