@@ -277,7 +277,7 @@ Maui.ApplicationWindow
                 flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
                 altHeader: Kirigami.Settings.isMobile
                 showCSDControls: true
-                headBar.forceCenterMiddleContent: isWide
+//                headBar.forceCenterMiddleContent: isWide
                 headBar.leftContent: Loader
                 {
                     asynchronous: true
