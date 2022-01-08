@@ -3,8 +3,9 @@ import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
 import org.mauikit.controls 1.3 as Maui
+import QtQuick.Templates 2.15 as T
 
-Maui.Dialog
+Maui.SettingsDialog
 {
     id: control
 
@@ -12,13 +13,8 @@ Maui.Dialog
     property int index : -1 //index of the item in the model TracksModel
 
     property Maui.BaseModel model
-
+    defaultButtons: true
     title: i18n("Edit")
-
-    hint: 1
-    closeButtonVisible: false
-    page.margins: Maui.Style.space.big
-    spacing: Maui.Style.space.big
 
     signal edited(var data, int index)
 
@@ -38,129 +34,116 @@ Maui.Dialog
 
     onRejected: close()
 
-    ColumnLayout
+    Maui.SettingsSection
     {
-        Layout.fillWidth: true
+        id: _template
+        title: i18n("Metadata")
+        description: i18n("Embeded metadata info.")
 
-        Label
+        Maui.SettingTemplate
         {
-            text: i18n("Track Title")
-             Layout.fillWidth: true
-        }
-
-        Maui.TextField
-        {
-            id: _titleField
-            text: control.data.title
             Layout.fillWidth: true
+
+            label1.text: i18n("Track Title")
+
+            Maui.TextField
+            {
+                id: _titleField
+                text: control.data.title
+                Layout.fillWidth: true
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            Layout.fillWidth: true
+
+            label1.text: i18n("Artist")
+
+
+            Maui.TextField
+            {
+                id: _artistField
+                text: control.data.artist
+                Layout.fillWidth: true
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            Layout.fillWidth: true
+
+            label1.text: i18n("Album")
+
+            Maui.TextField
+            {
+                id: _albumField
+                text: control.data.album
+                Layout.fillWidth: true
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            Layout.fillWidth: true
+
+            label1.text: i18n("Track")
+
+            Maui.TextField
+            {
+                id: _trackField
+                text: control.data.track
+                Layout.fillWidth: true
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            Layout.fillWidth: true
+
+            label1.text: i18n("Genre")
+
+            Maui.TextField
+            {
+                id: _genreField
+                text: control.data.genre
+                Layout.fillWidth: true
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            Layout.fillWidth: true
+
+            label1.text: i18n("Year")
+
+            Maui.TextField
+            {
+                id: _yearField
+                text: control.data.releasedate
+                Layout.fillWidth: true
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            Layout.fillWidth: true
+
+            label1.text: i18n("Comment")
+
+            Maui.TextField
+            {
+                id: _commentField
+                text: control.data.comment
+                Layout.fillWidth: true
+            }
         }
     }
 
-    ColumnLayout
+    Maui.SettingsSection
     {
-        Layout.fillWidth: true
-
-        Label
-        {
-            text: i18n("Artist")
-             Layout.fillWidth: true
-        }
-
-        Maui.TextField
-        {
-            id: _artistField
-            text: control.data.artist
-             Layout.fillWidth: true
-        }
+        title: i18n("File Info")
+        description: i18n("Locla file info.")
     }
 
-    ColumnLayout
-    {
-        Layout.fillWidth: true
-
-        Label
-        {
-            text: i18n("Album")
-             Layout.fillWidth: true
-        }
-
-        Maui.TextField
-        {
-            id: _albumField
-            text: control.data.album
-             Layout.fillWidth: true
-        }
-    }
-
-    ColumnLayout
-    {
-        Layout.fillWidth: true
-
-        Label
-        {
-            text: i18n("Track")
-             Layout.fillWidth: true
-        }
-
-        Maui.TextField
-        {
-            id: _trackField
-            text: control.data.track
-             Layout.fillWidth: true
-        }
-    }
-
-    ColumnLayout
-    {
-        Layout.fillWidth: true
-
-        Label
-        {
-            text: i18n("Genre")
-             Layout.fillWidth: true
-        }
-
-        Maui.TextField
-        {
-            id: _genreField
-            text: control.data.genre
-             Layout.fillWidth: true
-        }
-    }
-
-    ColumnLayout
-    {
-        Layout.fillWidth: true
-
-        Label
-        {
-            text: i18n("Year")
-             Layout.fillWidth: true
-        }
-
-        Maui.TextField
-        {
-            id: _yearField
-            text: control.data.releasedate
-             Layout.fillWidth: true
-        }
-    }
-
-    ColumnLayout
-    {
-        Layout.fillWidth: true
-
-        Label
-        {
-            text: i18n("Comment")
-             Layout.fillWidth: true
-        }
-
-        Maui.TextField
-        {
-            id: _commentField
-            text: control.data.comment
-             Layout.fillWidth: true
-        }
-    }
 }
