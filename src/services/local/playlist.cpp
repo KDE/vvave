@@ -215,6 +215,26 @@ void Playlist::setCurrentIndex(int index)
     emit currentTrackChanged(m_currentTrack);
 }
 
+void Playlist::changeCurrentIndex(int index)
+{
+    if (!m_model)
+    {
+        return;
+    }
+
+    const auto count = m_model->getCount();
+    if (count > 0 && index < count && index >= 0)
+    {
+        m_currentIndex = index;
+    } else
+    {
+        return;
+    }
+
+    qDebug() << "changing current track index" << index << m_currentIndex;
+    emit currentIndexChanged(m_currentIndex);
+}
+
 void Playlist::setPlayMode(Playlist::PlayMode playMode)
 {
     if (m_playMode == playMode)

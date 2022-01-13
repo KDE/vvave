@@ -29,6 +29,11 @@ function stop()
     progressBar.enabled = false
 }
 
+function changeCurrentIndex(index)
+{
+     playlist.changeCurrentIndex(index)
+}
+
 function nextTrack()
 {
    playlist.next()

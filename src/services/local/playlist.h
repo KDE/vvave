@@ -17,7 +17,6 @@ class Playlist : public QObject
     Q_PROPERTY(PlayMode playMode READ playMode WRITE setPlayMode NOTIFY playModeChanged)
 
 public:
-
     enum PlayMode : uint_fast8_t
     {
         Normal,
@@ -60,6 +59,7 @@ public slots:
 
     void setModel(TracksModel *model);
     void setCurrentIndex(int index);
+    void changeCurrentIndex(int index);
 
     void setPlayMode(Playlist::PlayMode playMode);
 

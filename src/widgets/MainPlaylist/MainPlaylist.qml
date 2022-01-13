@@ -204,13 +204,17 @@ Maui.Page
                     table.list.move(
                                 drop.source.mindex,
                                 delegate.mindex)
+
                     control.totalMoves++
 
+                    Player.changeCurrentIndex(delegate.mindex-1)
                 }
-
             }
-
-
+        }
+        Label
+        {
+            color:"orange"
+            text: currentTrackIndex + " / " + table.currentIndex
         }
 
         property int totalMoves: 0
