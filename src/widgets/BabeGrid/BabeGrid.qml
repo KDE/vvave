@@ -32,7 +32,7 @@ Maui.AltBrowser
         Layout.maximumWidth: 500
         Layout.alignment: Qt.AlignCenter
 
-        sourceComponent: Maui.TextField
+        sourceComponent: Maui.SearchField
         {
             placeholderText: i18np("Filter", "Filter %1 albums", _albumsList.count)
             onAccepted: _albumsModel.filter = text

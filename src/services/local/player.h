@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtMultimedia/QMediaPlayer>
 
+class PowerManagementInterface;
 class Player : public QObject
 {
     Q_OBJECT
@@ -34,7 +35,7 @@ public:
 private:
     QMediaPlayer *player;
     QUrl url;
-
+    PowerManagementInterface *m_power;
     int amountBuffers = 0;
     int volume = 100;
 

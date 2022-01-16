@@ -2,10 +2,12 @@
 
 #include <QTime>
 #include <MauiKit/Accounts/mauiaccounts.h>
+#include "powermanagementinterface.h"
 
 Player::Player(QObject *parent)
     : QObject(parent)
     , player(new QMediaPlayer(this))
+    , m_power(new PowerManagementInterface(this))
 {
     this->player->setVolume(this->volume);
     connect(this->player, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state) {
@@ -65,7 +67,7 @@ bool Player::play() const
     if (this->url.isEmpty())
         return false;
     this->player->play();
-
+    this->m_power->setPreventSleep(true);
     return true;
 }
 
@@ -73,6 +75,8 @@ void Player::pause() const
 {
     if (this->player->isAvailable())
         this->player->pause();
+    this->m_power->setPreventSleep(false);
+
 }
 
 void Player::stop()
@@ -82,6 +86,8 @@ void Player::stop()
         this->url = QString();
         this->player->setMedia(QMediaContent());
     }
+
+    this->m_power->setPreventSleep(false);
 }
 
 QString Player::transformTime(const int &value)

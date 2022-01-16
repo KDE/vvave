@@ -23,7 +23,7 @@ StackView
         Kirigami.Theme.colorSet: Kirigami.Theme.View
         Kirigami.Theme.inherit: false
 
-        headBar.middleContent: Maui.TextField
+        headBar.middleContent: Maui.SearchField
         {
             Layout.fillWidth: true
             Layout.maximumWidth: 500

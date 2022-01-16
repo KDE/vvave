@@ -102,7 +102,7 @@ Maui.Page
         Layout.maximumWidth: 500
         Layout.alignment: Qt.AlignCenter
 
-        sourceComponent: Maui.TextField
+        sourceComponent: Maui.SearchField
         {
             placeholderText: i18np("Filter", "Filter %1 songs", listModel.list.count)
             onAccepted: listModel.filter = text

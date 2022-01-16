@@ -84,10 +84,11 @@ Maui.AltBrowser
 
     footBar.visible: false
     headBar.forceCenterMiddleContent: false
-    headBar.middleContent: Maui.TextField
+    headBar.middleContent: Maui.SearchField
     {
         Layout.maximumWidth: 500
         Layout.fillWidth: true
+        Layout.alignment: Qt.AlignCenter
         placeholderText: i18np("Filter", "Filter %1 tags", control.list.count)
         onAccepted: _playlistsModel.filter = text
         onCleared: _playlistsModel.filter = ""

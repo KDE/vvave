@@ -40,7 +40,7 @@ MediaPlayer2Player::MediaPlayer2Player(Playlist *playListControler, Player *audi
     connect(m_playListControler, &Playlist::canPlayChanged, this, &MediaPlayer2Player::skipForwardControlEnabledChanged);
     connect(m_audioPlayer, &Player::stateChanged, this, &MediaPlayer2Player::playerPlaybackStateChanged);
     connect(m_audioPlayer, &Player::stateChanged, this, &MediaPlayer2Player::playerIsSeekableChanged);
-    connect(m_audioPlayer, &Player::posChanged, this, &MediaPlayer2Player::audioPositionChanged);
+//    connect(m_audioPlayer, &Player::posChanged, this, &MediaPlayer2Player::audioPositionChanged);
     connect(m_audioPlayer, &Player::durationChanged, this, &MediaPlayer2Player::audioDurationChanged);
     connect(m_audioPlayer, &Player::volumeChanged, this, &MediaPlayer2Player::playerVolumeChanged);
 
