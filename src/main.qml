@@ -318,6 +318,14 @@ Maui.ApplicationWindow
                         root.selectionMode = false
                         clear()
                     }
+
+                    onVisibleChanged:
+                    {
+                        if(!visible)
+                        {
+                            root.selectionMode = false
+                        }
+                    }
                 }
 
                 Maui.AppViewLoader

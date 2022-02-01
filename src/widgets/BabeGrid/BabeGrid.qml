@@ -20,6 +20,7 @@ Maui.AltBrowser
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
+    headBar.visible: listModel.list.count > 1
 
     headBar.middleContent: Loader
     {

@@ -122,7 +122,8 @@ Maui.Page
         {
             id: delegate
             width: ListView.view.width
-            height: delegate.implicitHeight
+            height: Math.max(implicitHeight, Maui.Style.rowHeight)
+
             property int mindex : index
             isCurrentItem: ListView.isCurrentItem
             mouseArea.drag.axis: Drag.YAxis
@@ -207,14 +208,12 @@ Maui.Page
 
                     control.totalMoves++
 
-                    Player.changeCurrentIndex(delegate.mindex-1)
+                    if(delegate.index <= currentTrackIndex)
+                    {
+                        Player.changeCurrentIndex(delegate.mindex)
+                    }
                 }
             }
-        }
-        Label
-        {
-            color:"orange"
-            text: currentTrackIndex + " / " + table.currentIndex
         }
 
         property int totalMoves: 0

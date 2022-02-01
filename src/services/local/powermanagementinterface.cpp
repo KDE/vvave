@@ -8,7 +8,11 @@
 
 #include <KLocalizedString>
 
+#if defined Q_OS_LINUX && !defined Q_OS_ANDROID
 #define Qt5DBus_FOUND true
+#else
+#define Qt5DBus_FOUND false
+#endif
 
 #if Qt5DBus_FOUND
 #include <QDBusConnection>

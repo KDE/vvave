@@ -295,6 +295,7 @@ Maui.Page
         {
             id: delegate
             width: ListView.view.width
+            height: Math.max(implicitHeight, Maui.Style.rowHeight)
             number: trackNumberVisible
             coverArt: coverArtVisible ? (control.width > 200) : coverArtVisible
 
