@@ -41,7 +41,7 @@ function nextTrack()
 
 function previousTrack()
 {
-    root.root.playlistManagerManager.previous()
+    root.playlistManager.previous()
 }
 
 function playAt(index)

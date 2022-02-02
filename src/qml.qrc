@@ -14,7 +14,6 @@
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
         <file>assets/vvave.notifyrc</file>
         <file>assets/vvave.png</file>
-        <file>assets/heart_indicator.gif</file>
         <file>widgets/FloatingDisk.qml</file>
         <file>assets/vvave.svg</file>
         <file>widgets/CloudView/CloudView.qml</file>

@@ -424,7 +424,7 @@ Maui.Page
 
                     background: null
 
-                    middleContent: Row
+                    middleContent: RowLayout
                     {
                         Layout.alignment: Qt.AlignCenter
 
