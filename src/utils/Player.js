@@ -31,22 +31,22 @@ function stop()
 
 function changeCurrentIndex(index)
 {
-     playlist.changeCurrentIndex(index)
+    root.playlistManager.changeCurrentIndex(index)
 }
 
 function nextTrack()
 {
-   playlist.next()
+    root.playlistManager.next()
 }
 
 function previousTrack()
 {
-   playlist.previous()
+    root.root.playlistManagerManager.previous()
 }
 
 function playAt(index)
 {
-    playlist.currentIndex = index
+    root.playlistManager.play(index)
 }
 
 function quickPlay(track)
@@ -74,10 +74,10 @@ function appendTrack(track)
 {
     if(track)
     {
-        playlist.append(track)
+        root.playlistManager.append(track)
         if(sync === true)
         {
-           FB.Tagging.tagUrl(track.url, syncPlaylist)
+            FB.Tagging.tagUrl(track.url, syncPlaylist)
         }
     }
 }
@@ -104,7 +104,7 @@ function playAll(tracks)
     sync = false
     syncPlaylist = ""
 
-    playlist.clear()
+    root.playlistManager.clear()
     appendAll(tracks)
 
     if(_drawer.modal && !_drawer.visible)
@@ -116,8 +116,8 @@ function playAll(tracks)
 
 function appendAllModel(model)
 {
-   mainPlaylist.listModel.list.copy(model)
-   mainPlaylist.listView.positionViewAtEnd()
+    mainPlaylist.listModel.list.copy(model)
+    mainPlaylist.listView.positionViewAtEnd()
 }
 
 function playAllModel(model)
@@ -125,7 +125,7 @@ function playAllModel(model)
     sync = false
     syncPlaylist = ""
 
-    playlist.clear()
+    root.playlistManager.clear()
     appendAllModel(model)
 
     if(_drawer.modal && !_drawer.visible)

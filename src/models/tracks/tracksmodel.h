@@ -47,6 +47,7 @@ public slots:
     bool fav(const int &index, const bool &value);
     bool countUp(const int &index);
     bool remove(const int &index);
+    bool erase(const int &index);
     bool removeMissing(const int &index);
 
     void refresh();

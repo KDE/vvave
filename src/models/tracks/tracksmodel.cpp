@@ -81,8 +81,8 @@ void TracksModel::setList()
         const auto urls = Tagging::getInstance()->getTagUrls(m_query.replace("#", ""), {}, true, m_limit, "audio");
         for (const auto &url : urls) {
             this->list << CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on al.album = t.album "
-                                                      "and al.artist = t.artist where t.url = %1")
-                                                  .arg("\"" + url.toString() + "\""));
+                                                                         "and al.artist = t.artist where t.url = %1")
+                                                                 .arg("\"" + url.toString() + "\""));
         }
 
     } else
@@ -92,7 +92,6 @@ void TracksModel::setList()
 
     emit this->postListChanged();
     emit this->countChanged();
-
 }
 
 void TracksModel::append(const QVariantMap &item)
@@ -218,14 +217,25 @@ bool TracksModel::remove(const int &index)
     return true;
 }
 
+bool TracksModel::erase(const int &index)
+{
+    qDebug() << "ERASE AT" << index;
+
+    if (index >= this->list.size() || index < 0)
+        return false;
+    auto url = this->list.at(index)[FMH::MODEL_KEY::URL];
+
+    if(this->remove(index))
+    {
+        return CollectionDB::getInstance()->removeTrack(url);
+    }
+
+    return false;
+}
+
 bool TracksModel::removeMissing(const int &index)
 {
-    if (index > this->list.size() || index < 0)
-        return false;
-
-    auto url = this->list.at(index)[FMH::MODEL_KEY::URL];
-    this->remove(index);
-    return CollectionDB::getInstance()->removeTrack(url);
+    return erase(index);
 }
 
 void TracksModel::refresh()

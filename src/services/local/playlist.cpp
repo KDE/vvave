@@ -133,6 +133,11 @@ void Playlist::nextShuffle()
     setCurrentIndex(std::rand() % count);
 }
 
+void Playlist::play(int index)
+{
+    setCurrentIndex(index);
+}
+
 void Playlist::clear()
 {
     if (!m_model)
@@ -243,5 +248,33 @@ void Playlist::setPlayMode(Playlist::PlayMode playMode)
     m_playMode = playMode;
     UTIL::saveSettings("PLAYMODE", m_playMode, "PLAYBACK");
     emit playModeChanged(m_playMode);
+}
+
+void Playlist::move(int from, int to)
+{
+    if(!m_model)
+    {
+        return;
+    }
+
+    m_model->move(from, to);
+    if(to <= m_currentIndex)
+    {
+        changeCurrentIndex(m_currentIndex+1);
+    }
+}
+
+void Playlist::remove(int index)
+{
+    if(!m_model)
+    {
+        return;
+    }
+
+    m_model->remove(index);
+    if(index <= m_currentIndex)
+    {
+        changeCurrentIndex(m_currentIndex-1);
+    }
 }
 

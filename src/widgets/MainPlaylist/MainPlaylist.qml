@@ -3,6 +3,7 @@ import QtQml 2.14
 
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.14
+ import QtGraphicalEffects 1.15
 
 import org.kde.kirigami 2.8 as Kirigami
 import org.mauikit.controls 1.3 as Maui
@@ -60,6 +61,11 @@ Maui.Page
     {
         id: table
         anchors.fill: parent
+
+        Label{
+            color: "orange"
+            text: currentTrackIndex
+        }
 
         background: Rectangle
         {
@@ -139,7 +145,10 @@ Maui.Page
 
             onRightClicked:
             {
-                if(table.allowMenu) table.openItemMenu(index)
+                if(table.allowMenu)
+                {
+                    table.openItemMenu(index)
+                }
             }
 
             sameAlbum: control.totalMoves, evaluate(listModel.get(mindex-1))
@@ -149,18 +158,42 @@ Maui.Page
                 return coverArt && item && item.album === model.album && item.artist === model.artist
             }
 
+                Item
+                {
+                    visible: mindex === currentTrackIndex
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: Maui.Style.rowHeight
+
+                    AnimatedImage
+                    {
+                        id: _playingIcon
+                        height: 16
+                        width: height
+                        playing: root.isPlaying
+                        anchors.centerIn: parent
+                        source: "qrc:/assets/playing.gif"
+                    }
+
+                    ColorOverlay
+                    {
+                        anchors.fill: _playingIcon
+                        source: _playingIcon
+                        color: Kirigami.Theme.textColor
+                    }
+                }
+
                 AbstractButton
                 {
                     Layout.fillHeight: true
                     Layout.preferredWidth: Maui.Style.rowHeight
-                    visible: (Maui.Handy.isTouch ? true : delegate.hovered)
+                    visible: (Maui.Handy.isTouch ? true : delegate.hovered) && index !== currentTrackIndex
                     icon.name: "edit-clear"
                     onClicked:
                     {
                         if(index === currentTrackIndex)
                             player.stop()
 
-                        listModel.list.remove(index)
+                        root.playlistManager.remove(index)
                     }
 
                     Kirigami.Icon
@@ -186,32 +219,15 @@ Maui.Page
                         Player.playAt(index)
                 }
 
-                //                layout.data: Rectangle
-                //                {
-                //                    implicitHeight: delegate.containsDrag ? 20 : 0
-                //                    Layout.fillWidth: true
-                //                }
-
-                onContentEntered:
-                {
-
-                }
 
                 onContentDropped:
                 {
                     console.log("Move ", drop.source.mindex,
                                 delegate.mindex)
 
-                    table.list.move(
-                                drop.source.mindex,
-                                delegate.mindex)
+                    root.playlistManager.move(drop.source.mindex, delegate.mindex)
 
                     control.totalMoves++
-
-                    if(delegate.index <= currentTrackIndex)
-                    {
-                        Player.changeCurrentIndex(delegate.mindex)
-                    }
                 }
             }
         }

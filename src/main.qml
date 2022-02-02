@@ -41,6 +41,7 @@ Maui.ApplicationWindow
     /*************************************************/
     property alias selectionBar: _selectionBar
     property alias dialog : _dialogLoader.item
+    property alias playlistManager : playlist
 
     /***************************************************/
     /******************** PLAYBACK ********************/

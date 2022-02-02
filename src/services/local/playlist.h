@@ -12,7 +12,7 @@ class Playlist : public QObject
 
     Q_PROPERTY(TracksModel *model WRITE setModel READ model NOTIFY modelChanged)
     Q_PROPERTY(QVariantMap currentTrack READ currentTrack NOTIFY currentTrackChanged FINAL)
-    Q_PROPERTY(int currentIndex READ currentIndex WRITE setCurrentIndex NOTIFY currentIndexChanged)
+    Q_PROPERTY(int currentIndex READ currentIndex NOTIFY currentIndexChanged FINAL)
 
     Q_PROPERTY(PlayMode playMode READ playMode WRITE setPlayMode NOTIFY playModeChanged)
 
@@ -50,6 +50,7 @@ public slots:
     void next();
     void previous();
     void nextShuffle();
+    void play(int index);
     void clear();
 
     void save();
@@ -62,6 +63,9 @@ public slots:
     void changeCurrentIndex(int index);
 
     void setPlayMode(Playlist::PlayMode playMode);
+
+    void move(int from, int to);
+    void remove(int index);
 
 signals:
     void canPlayChanged();

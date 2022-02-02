@@ -9,6 +9,7 @@ Maui.ContextualMenu
     id: control
 
     property bool fav : false
+    property int index
 
     signal favClicked()
     signal queueClicked()
@@ -67,8 +68,7 @@ Maui.ContextualMenu
         icon.name: "item-select"
         onTriggered:
         {
-            selectionBar.addToSelection(listModel.get(listView.currentIndex))
-
+            selectionBar.addToSelection(listModel.get(control.index))
             selectionMode = Maui.Handy.isTouch
         }
     }

@@ -117,7 +117,6 @@ Maui.Page
         MetadataDialog
         {
             model: listModel
-            index: control.currentIndex
 
             onEdited:
             {
@@ -141,7 +140,7 @@ Maui.Page
             {
                 if(FB.FM.removeFiles(urls))
                 {
-                    listModel.list.remove(control.currentIndex)
+                    listModel.list.erase(listModel.mappedToSource(control.currentIndex))
                 }
                 close()
             }
@@ -175,24 +174,24 @@ Maui.Page
 
         onFavClicked:
         {
-            listModel.list.fav(listModel.mappedToSource(control.currentIndex), !FB.Tagging.isFav(listModel.get(control.currentIndex).url))
+            listModel.list.fav(listModel.mappedToSource(contextMenu.index), !FB.Tagging.isFav(listModel.get(contextMenu.index).url))
         }
 
-        onQueueClicked: Player.queueTracks([listModel.get(control.currentIndex)])
+        onQueueClicked: Player.queueTracks([listModel.get(contextMenu.index)])
 
         onSaveToClicked:
         {
             _dialogLoader.sourceComponent = _playlistDialogComponent
-            dialog.composerList.urls = filterSelection(listModel.get(control.currentIndex).url)
+            dialog.composerList.urls = filterSelection(listModel.get(contextMenu.index).url)
             dialog.open()
         }
 
-        onOpenWithClicked: FB.FM.openLocation(filterSelection(listModel.get(control.currentIndex).url))
+        onOpenWithClicked: FB.FM.openLocation(filterSelection(listModel.get(contextMenu.index).url))
 
         onDeleteClicked:
         {
             _dialogLoader.sourceComponent = _removeDialogComponent
-            dialog.urls = filterSelection(listModel.get(control.currentIndex).url)
+            dialog.urls = filterSelection(listModel.get(contextMenu.index).url)
             dialog.open()
         }
 
@@ -204,17 +203,18 @@ Maui.Page
         onEditClicked:
         {
             _dialogLoader.sourceComponent = _metadataDialogComponent
+            dialog.index = contextMenu.index
             dialog.open()
         }
 
         onCopyToClicked:
         {
-            cloudView.list.upload(control.currentIndex)
+            cloudView.list.upload(contextMenu.index)
         }
 
         onShareClicked:
         {
-            const url = listModel.get(control.currentIndex).url
+            const url = listModel.get(contextMenu.index).url
             Maui.Platform.shareFiles([url])
         }
     }
@@ -395,7 +395,8 @@ Maui.Page
 function openItemMenu(index)
 {
     currentIndex = index
-    contextMenu.fav = FB.Tagging.isFav(listModel.get(currentIndex).url)
+    contextMenu.index = index
+    contextMenu.fav = FB.Tagging.isFav(listModel.get(contextMenu.index).url)
     contextMenu.show()
     rowPressed(index)
 }
