@@ -262,6 +262,11 @@ void Playlist::move(int from, int to)
     {
         changeCurrentIndex(m_currentIndex+1);
     }
+
+    if(from <= m_currentIndex && to > m_currentIndex)
+    {
+        changeCurrentIndex(m_currentIndex-1);
+    }
 }
 
 void Playlist::remove(int index)
