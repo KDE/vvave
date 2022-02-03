@@ -62,11 +62,6 @@ Maui.Page
         id: table
         anchors.fill: parent
 
-        Label{
-            color: "orange"
-            text: currentTrackIndex
-        }
-
         background: Rectangle
         {
             color: Kirigami.Theme.backgroundColor
