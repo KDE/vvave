@@ -397,6 +397,7 @@ function openItemMenu(index)
     currentIndex = index
     contextMenu.index = index
     contextMenu.fav = FB.Tagging.isFav(listModel.get(contextMenu.index).url)
+    contextMenu.titleInfo = listModel.get(contextMenu.index)
     contextMenu.show()
     rowPressed(index)
 }
@@ -404,7 +405,7 @@ function openItemMenu(index)
 function goToAlbum()
 {
     swipeView.currentIndex = viewsIndex.albums
-    const item = listModel.get(control.currentIndex)
+    const item = listModel.get(control.czurrentIndex)
     swipeView.currentItem.item.populateTable(item.album, item.artist)
 }
 

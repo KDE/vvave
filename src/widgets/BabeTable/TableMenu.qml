@@ -10,6 +10,7 @@ Maui.ContextualMenu
 
     property bool fav : false
     property int index
+    property var titleInfo
 
     signal favClicked()
     signal queueClicked()
@@ -23,6 +24,10 @@ Maui.ContextualMenu
     signal deleteClicked()
 
     property alias menuItem : control.contentData
+
+    title: control.titleInfo.title
+    subtitle: control.titleInfo.artist
+    titleImageSource: "image://artwork/album:"+ control.titleInfo.artist+":"+control.titleInfo.album
 
     Maui.MenuItemActionRow
     {

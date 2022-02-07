@@ -173,7 +173,7 @@ Maui.Page
                     {
                         anchors.fill: _playingIcon
                         source: _playingIcon
-                        color: Kirigami.Theme.textColor
+                        color: delegate.label1.color
                     }
                 }
 
@@ -217,10 +217,18 @@ Maui.Page
 
                 onContentDropped:
                 {
-                    console.log("Move ", drop.source.mindex,
-                                delegate.mindex)
+                    console.log("Move or insert ", drop.source.mindex)
+                    if(typeof drop.source.mindex !== 'undefined')
+                    {
+                        console.log("Move ", drop.source.mindex,
+                                    delegate.mindex)
 
-                    root.playlistManager.move(drop.source.mindex, delegate.mindex)
+                        root.playlistManager.move(drop.source.mindex, delegate.mindex)
+
+                    }else
+                    {
+                        root.playlistManager.insert(String(drop.urls).split(","), delegate.mindex)
+                    }
 
                     control.totalMoves++
                 }

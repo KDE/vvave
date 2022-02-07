@@ -36,11 +36,13 @@ signals:
     void limitChanged(int limit);
 
 public slots:
-    void append(const QVariantMap &item);
-    void appendUrl(const QUrl &url);
-    void appendUrls(const QStringList &urls);
-    void appendAt(const QVariantMap &item, const int &at);
-    void appendQuery(const QString &query);
+    bool append(const QVariantMap &item);
+    bool appendUrl(const QUrl &url);
+    bool insertUrl(const QString &url, const int &index);
+    bool insertUrls(const QStringList &urls, const int &index);
+    bool appendUrls(const QStringList &urls);
+    bool appendAt(const QVariantMap &item, const int &at);
+    bool appendQuery(const QString &query);
     void copy(const TracksModel *list);
 
     void clear();

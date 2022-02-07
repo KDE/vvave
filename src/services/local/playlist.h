@@ -57,6 +57,7 @@ public slots:
     void loadLastPlaylist();
 
     void append(const QVariantMap &track);
+    void insert(const QStringList &urls, const int &index);
 
     void setModel(TracksModel *model);
     void setCurrentIndex(int index);

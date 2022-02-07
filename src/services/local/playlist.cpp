@@ -40,13 +40,13 @@ void Playlist::loadLastPlaylist()
     }
 
     QStringList urls = UTIL::loadSettings("LASTPLAYLIST", "PLAYLIST", QStringList()).toStringList();
-//    int lastIndex =   UTIL::loadSettings("PLAYLIST_POS", "MAINWINDOW", -1).toInt();
+    //    int lastIndex =   UTIL::loadSettings("PLAYLIST_POS", "MAINWINDOW", -1).toInt();
     for (const auto &url : urls)
     {
-       m_model->appendUrl(QUrl::fromUserInput(url));
+        m_model->appendUrl(QUrl::fromUserInput(url));
     }
 
-//    this->setCurrentIndex(lastIndex);
+    //    this->setCurrentIndex(lastIndex);
 }
 
 bool Playlist::canGoNext() const
@@ -178,6 +178,25 @@ void Playlist::append(const QVariantMap &track)
     m_model->append(track);
 }
 
+void Playlist::insert(const QStringList &urls, const int &index)
+{
+    if (!m_model)
+    {
+        return;
+    }
+
+    if(!m_model->insertUrls(urls, index))
+    {
+        return;
+    }
+
+    if(index <= m_currentIndex)
+    {
+        changeCurrentIndex(m_currentIndex+urls.count());
+        return;
+    }
+}
+
 void Playlist::setModel(TracksModel *model)
 {
     if (m_model == model)
@@ -236,7 +255,6 @@ void Playlist::changeCurrentIndex(int index)
         return;
     }
 
-    qDebug() << "changing current track index" << index << m_currentIndex;
     emit currentIndexChanged(m_currentIndex);
 }
 
@@ -258,14 +276,26 @@ void Playlist::move(int from, int to)
     }
 
     m_model->move(from, to);
-    if(to <= m_currentIndex)
+
+    qDebug() << "changing current track index" << from << to << m_currentIndex;
+
+
+    if(from == m_currentIndex)
+    {
+        changeCurrentIndex(to);
+        return;
+    }
+
+    if(to <= m_currentIndex && from > m_currentIndex)
     {
         changeCurrentIndex(m_currentIndex+1);
+        return;
     }
 
     if(from <= m_currentIndex && to > m_currentIndex)
     {
         changeCurrentIndex(m_currentIndex-1);
+        return;
     }
 }
 

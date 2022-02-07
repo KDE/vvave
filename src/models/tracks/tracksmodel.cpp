@@ -94,58 +94,98 @@ void TracksModel::setList()
     emit this->countChanged();
 }
 
-void TracksModel::append(const QVariantMap &item)
+bool TracksModel::append(const QVariantMap &item)
 {
     if (item.isEmpty())
-        return;
+        return false;
 
     emit this->preItemAppended();
     this->list << FMH::toModel(item);
     emit this->postItemAppended();
     emit this->countChanged();
+
+    return true;
 }
 
-void TracksModel::appendUrl(const QUrl &url)
+bool TracksModel::appendUrl(const QUrl &url)
 {
     if (CollectionDB::getInstance()->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url.toString()))
     {
         const auto item = CollectionDB::getInstance()->getDBData(QStringList() << url.toString());
-        append(FMH::toMap(item.first()));
+       return append(FMH::toMap(item.first()));
     } else
     {
-        append(FMH::toMap(vvave::trackInfo(url)));
+       return append(FMH::toMap(vvave::trackInfo(url)));
     }
 }
 
-void TracksModel::appendUrls(const QStringList &urls)
+bool TracksModel::insertUrl(const QString &url, const int &index)
+{
+    if (CollectionDB::getInstance()->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url))
+    {
+        const auto item = CollectionDB::getInstance()->getDBData(QStringList() << url);
+        return appendAt(FMH::toMap(item.first()), index);
+    } else
+    {
+        return appendAt(FMH::toMap(vvave::trackInfo(url)), index);
+    }
+}
+
+bool TracksModel::insertUrls(const QStringList &urls, const int &index)
+{
+    if(urls.isEmpty())
+    {
+        return false;
+    }
+
+    uint i = 0;
+    for(const auto &url : urls)
+    {
+        qDebug() << "URLS OT INSERT" << url;
+
+        if(this->insertUrl(url, index+i))
+        {
+            qDebug() << "URLS OT INSERT" << url;
+            i++;
+        }
+    }
+
+    return true;
+}
+
+bool TracksModel::appendUrls(const QStringList &urls)
 {
     for(const auto &url : urls)
     {
         this->appendUrl(url);
     }
+
+    return true;
 }
 
-void TracksModel::appendAt(const QVariantMap &item, const int &at)
+bool TracksModel::appendAt(const QVariantMap &item, const int &at)
 {
     if (item.isEmpty())
-        return;
+        return false;
 
     if (at > this->list.size() || at < 0)
-        return;
+        return false;
 
     qDebug() << "trying to append at << " << 0;
     emit this->preItemAppendedAt(at);
     this->list.insert(at, FMH::toModel(item));
     emit this->postItemAppended();
     emit this->countChanged();
+    return true;
 }
 
-void TracksModel::appendQuery(const QString &query)
+bool TracksModel::appendQuery(const QString &query)
 {
     emit this->preListChanged();
     this->list << CollectionDB::getInstance()->getDBData(query);
     emit this->postListChanged();
     emit this->countChanged();
+    return true;
 }
 
 void TracksModel::copy(const TracksModel *list)
@@ -180,9 +220,6 @@ bool TracksModel::fav(const int &index, const bool &value)
         Tagging::getInstance()->fav(item[FMH::MODEL_KEY::URL]);
     else
         Tagging::getInstance()->unFav(item[FMH::MODEL_KEY::URL]);
-
-    this->list[index][FMH::MODEL_KEY::FAV] = value ? "1" : "0";
-    emit this->updateModel(index, {FMH::MODEL_KEY::FAV});
 
     return true;
 }
