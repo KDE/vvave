@@ -54,7 +54,7 @@
   <summary xml:lang="gl">Reproduza a súa colección de música</summary>
   <summary xml:lang="hi">अपना संगीत संग्रह बजाएँ</summary>
   <summary xml:lang="hu">Játssza le zenei gyűjteményét</summary>
-  <summary xml:lang="id">Putar koleksi musikmu</summary>
+  <summary xml:lang="id">Putar koleksi musik Anda</summary>
   <summary xml:lang="it">Riproduce la tua collezione musicale</summary>
   <summary xml:lang="ko">내 음악 모음집 재생</summary>
   <summary xml:lang="nl">Uw muziekcollectie afspelen</summary>
@@ -89,7 +89,7 @@
     <p xml:lang="gl">Pequeno reprodutor de música desenvolvido con Qt para ter a man as túas cancións favoritas.</p>
     <p xml:lang="hi">छोटा क्यूट संगीत चालक जो आपके मनचाहे गीतों को उपलब्ध कराता है।</p>
     <p xml:lang="hu">Qt-s zenelejátszó a kedvenc számaihoz.</p>
-    <p xml:lang="id">Pemutar Musik Qt yang mungil menjaga lagu favoritmu tertangani.</p>
+    <p xml:lang="id">Pemutar Musik Qt yang mungil menjaga lagu favorit Anda tertangani.</p>
     <p xml:lang="it">Piccolo lettore musicale basato su Qt per tenere le tue canzoni preferite a portata di mano.</p>
     <p xml:lang="ko">좋아하는 음악을 간단하게 재생할 수 있는 작은 Qt 음악 재생기입니다.</p>
     <p xml:lang="nl">Kleine Qt Music speler om uw favoriete songs bij de hand te houden.</p>
