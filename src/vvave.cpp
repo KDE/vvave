@@ -46,6 +46,17 @@ QVariantList vvave::pendingTracks()
     return res;
 }
 
+QString vvave::artworkUrl(const QString &artist, const QString &album)
+{
+    FMH::MODEL data = {{FMH::MODEL_KEY::ARTIST, artist}, {FMH::MODEL_KEY::ALBUM, album}};
+    if (BAE::artworkCache(data, FMH::MODEL_KEY::ALBUM))
+    {
+        return QUrl(data[FMH::MODEL_KEY::ARTWORK]).toLocalFile();
+    }
+
+    return QString();
+}
+
 /*
  * Sets upthe app default config paths
  * BrainDeamon to get collection information

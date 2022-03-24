@@ -49,6 +49,8 @@ public slots:
 
     QVariantList pendingTracks();
 
+    QString artworkUrl(const QString &artist, const QString &album);
+
 private:
     explicit vvave(QObject *parent = nullptr);
 

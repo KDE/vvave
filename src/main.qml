@@ -26,6 +26,7 @@ Maui.ApplicationWindow
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
     headBar.visible: false
     Maui.App.darkMode: settings.darkMode
+   Maui.Style.adaptiveColorScheme: true
 
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
@@ -251,10 +252,11 @@ Maui.ApplicationWindow
 
     footer: Loader
     {
+        id: _playbackBarLoader
         asynchronous: true
         width: parent.width
         visible: _viewsPage.visible
-
+        active: visible
         sourceComponent: PlaybackBar {}
     }
 
