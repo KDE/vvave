@@ -23,6 +23,9 @@ Maui.Page
     headBar.visible: true
     headBar.background: null
 
+    readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
+    readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
+
     headBar.leftContent: [
         ToolButton
         {
@@ -111,6 +114,13 @@ Maui.Page
             cache: true
 
             source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+
+            onStatusChanged:
+            {
+                console.log("Trying to setr adaptive color based on album >>>>>>>>>>>", status === Image.Ready)
+                if(status === Image.Ready)
+                    Maui.Style.adaptiveColorSchemeSource = Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
+            }
         }
 
         FastBlur
@@ -376,7 +386,7 @@ Maui.Page
                         Layout.fillHeight: false
                         verticalAlignment: Qt.AlignVCenter
                         horizontalAlignment: Qt.AlignHCenter
-                        text: progressTimeLabel
+                        text: control.progressTimeLabel
                         elide: Text.ElideMiddle
                         wrapMode: Text.NoWrap
                         color: control.Kirigami.Theme.textColor
@@ -405,7 +415,7 @@ Maui.Page
                         Layout.fillHeight: false
                         verticalAlignment: Qt.AlignVCenter
                         horizontalAlignment: Qt.AlignHCenter
-                        text: durationTimeLabel
+                        text: control.durationTimeLabel
                         elide: Text.ElideMiddle
                         wrapMode: Text.NoWrap
                         color: control.Kirigami.Theme.textColor

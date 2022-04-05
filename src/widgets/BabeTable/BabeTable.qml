@@ -405,7 +405,7 @@ function openItemMenu(index)
 function goToAlbum()
 {
     swipeView.currentIndex = viewsIndex.albums
-    const item = listModel.get(control.czurrentIndex)
+    const item = listModel.get(control.currentIndex)
     swipeView.currentItem.item.populateTable(item.album, item.artist)
 }
 

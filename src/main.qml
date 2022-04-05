@@ -25,14 +25,15 @@ Maui.ApplicationWindow
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
     headBar.visible: false
+
     Maui.App.darkMode: settings.darkMode
-   Maui.Style.adaptiveColorScheme: true
+    Maui.Style.adaptiveColorScheme: focusView
 
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
     readonly property int preferredMiniModeSize: 200
-    minimumHeight: miniMode ? preferredMiniModeSize : 0
-    minimumWidth: miniMode ? preferredMiniModeSize : 0
+    minimumHeight: miniMode ? preferredMiniModeSize : 300
+    minimumWidth: miniMode ? preferredMiniModeSize : 200
 
     maximumWidth: miniMode ? minimumWidth : Screen.desktopAvailableWidth
     maximumHeight: miniMode ? minimumHeight : Screen.desktopAvailableHeight
@@ -49,9 +50,6 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property alias currentTrack : playlist.currentTrack
     property alias currentTrackIndex: playlist.currentIndex
-
-    readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
-    readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
 
     readonly property alias isPlaying: player.playing
     property int onQueue: 0
@@ -275,12 +273,12 @@ Maui.ApplicationWindow
                 id: swipeView
                 anchors.fill: parent
                 maxViews: 3
-//                interactive: Kirigami.Settings.isMobile
+                //                interactive: Kirigami.Settings.isMobile
                 floatingFooter: true
                 flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
                 altHeader: Kirigami.Settings.isMobile
                 showCSDControls: true
-//                headBar.forceCenterMiddleContent: isWide
+                //                headBar.forceCenterMiddleContent: isWide
                 headBar.leftContent: Loader
                 {
                     asynchronous: true
@@ -435,7 +433,7 @@ Maui.ApplicationWindow
     Component.onCompleted:
     {
         Vvave.fetchArtwork = settings.fetchArtwork
-       setAndroidStatusBarColor()
+        setAndroidStatusBarColor()
     }
 
     function setAndroidStatusBarColor()

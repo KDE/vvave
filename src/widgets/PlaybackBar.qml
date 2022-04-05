@@ -18,7 +18,7 @@ T.Control
 {
     id: control
     implicitHeight: visible ? implicitContentHeight : 0
-    readonly property alias image : artworkBg
+    readonly property alias image : artworkBg    
 
     background: Item
     {
@@ -34,13 +34,6 @@ T.Control
             fillMode: Image.PreserveAspectCrop
             asynchronous: true
             source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
-
-            onStatusChanged:
-            {
-                console.log("Trying to setr adaptive color based on album >>>>>>>>>>>", status === Image.Ready)
-                if(status === Image.Ready)
-                Maui.Style.adaptiveColorSchemeSource = Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
-            }
         }
 
         FastBlur
