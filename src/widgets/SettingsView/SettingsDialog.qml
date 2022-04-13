@@ -81,6 +81,22 @@ Maui.SettingsDialog
 
         Maui.SettingTemplate
         {
+            label1.text: i18n("Focus View")
+            label2.text: i18n("Make the focus view the default")
+
+            Switch
+            {
+                Layout.fillHeight: true
+                checked: settings.focusViewDefault
+                onToggled:
+                {
+                     settings.focusViewDefault = !settings.focusViewDefault
+                }
+            }
+        }
+
+        Maui.SettingTemplate
+        {
             label1.text: i18n("Dark Mode")
             label2.text: i18n("Switch between light and dark colorscheme")
 

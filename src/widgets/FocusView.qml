@@ -13,6 +13,9 @@ import org.maui.vvave 1.0 as Vvave
 import "../utils/Player.js" as Player
 
 import "../widgets/InfoView"
+import "BabeTable"
+
+import "../db/Queries.js" as Q
 
 Maui.Page
 {
@@ -26,14 +29,15 @@ Maui.Page
     readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
     readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
 
+
     headBar.leftContent: [
         ToolButton
         {
             icon.name: "go-previous"
             onClicked:
             {
-                if(_stackView.depth === 2)
-                    _stackView.pop()
+                if(_focusStackView.depth === 2)
+                    _focusStackView.pop()
                 else
                     toggleFocusView()
             }
@@ -47,22 +51,112 @@ Maui.Page
         }
     ]
 
+    footBar.background: null
+    footBar.forceCenterMiddleContent: root.isWide
+    footBar.middleContent: Maui.SearchField
+    {
+        id: _filterField
+        placeholderText: i18n("Find")
+        Layout.alignment: Qt.AlignCenter
+        Layout.maximumWidth: 500
+        Layout.fillWidth: true
+        clip: false
+        onTextChanged:
+        {
+            if(text.length > 2)
+            {
+                _list.list.query = Q.GET.tracksWhere_.arg("t.title LIKE \"%"+text+"%\" OR t.artist LIKE \"%"+text+"%\" OR t.album LIKE \"%"+text+"%\" OR t.genre LIKE \"%"+text+"%\"")
+                _results.open()
+            }else
+            {
+                if(_results.visible)
+                {
+                    _results.close()
+                }
+            }
+        }
+
+        Popup
+        {
+            id: _results
+                        parent: control.footBar
+            y: 0 - (height)
+            x: 0
+            width: parent.width
+            height: Math.min(500,Math.max(_list.listBrowser.implicitHeight, 300))
+
+            onClosed: _filterField.clear()
+
+            BabeTable
+            {
+                id: _list
+                headBar.visible: false
+                anchors.fill: parent
+                coverArtVisible: true
+
+                holder.emoji: "qrc:/assets/dialog-information.svg"
+                holder.title : i18n("No Results!")
+                holder.body: i18n("Try with something else")
+
+                onRowClicked:
+                {
+                    Player.quickPlay(listModel.get(index))
+                    _results.close()
+                }
+
+                onAppendTrack:
+                {
+                    Player.addTrack(listModel.get(index))
+                }
+
+                onPlayAll:
+                {
+                    Player.playAllModel(listModel.list)
+                    _results.close()
+
+                }
+
+                onAppendAll:
+                {
+                    Player.appendAllModel(listModel.list)
+                    _results.close()
+
+                }
+
+                onQueueTrack:
+                {
+                    Player.queueTracks([listModel.get(index)], index)
+                }
+            }
+        }
+
+    }
+
     headBar.rightContent: ToolButton
     {
         icon.name: "documentinfo"
         checkable: true
-        checked: _stackView.depth === 2
+        checked: _focusStackView.depth === 2
         onClicked:
         {
-            if(_stackView.depth === 2)
-
+            if(_focusStackView.depth === 2)
             {
-                _stackView.pop()
+                _focusStackView.pop()
             }else
             {
-                _stackView.push(_infoComponent)
-
+                _focusStackView.push(_infoComponent)
             }
+        }
+    }
+
+    Keys.enabled: true
+    Keys.onPressed:
+    {
+        console.log("KEY PRESSED")
+        if((event.key == Qt.Key_K) && (event.modifiers & Qt.ControlModifier))
+        {
+            _filterField.forceActiveFocus()
+            event.accepted = true
         }
     }
 
@@ -158,10 +252,11 @@ Maui.Page
 
     StackView
     {
-        id: _stackView
+        id: _focusStackView
         anchors.fill: parent
         anchors.margins: Maui.Style.space.big
         visible: _listView.count > 0
+
         initialItem: Loader
         {
             focus: true
@@ -195,7 +290,7 @@ Maui.Page
                             color: Kirigami.Theme.textColor
                             opacity: 0.4
 
-                            anchors.centerIn: parent
+                            anchors.bottom: parent.bottom
                         }
                     }
 
@@ -361,7 +456,7 @@ Maui.Page
 
                         Rectangle
                         {
-                            anchors.centerIn: parent
+                            anchors.bottom: parent.bottom
                             visible: (_listView.currentIndex < _listView.count - 1) && (_listView.count > 1)
                             height: Maui.Style.iconSizes.small
                             width : height
@@ -568,6 +663,8 @@ Maui.Page
 
     function forceActiveFocus()
     {
-        _stackView.initialItem.forceActiveFocus()
+        _focusStackView.initialItem.forceActiveFocus()
     }
+
+    Component.onCompleted: forceActiveFocus()
 }

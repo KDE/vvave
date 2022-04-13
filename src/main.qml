@@ -110,6 +110,7 @@ Maui.ApplicationWindow
         property bool fetchArtwork: true
         property bool autoScan: true
         property bool darkMode : true
+        property bool focusViewDefault: true
     }
 
     Mpris2
@@ -264,9 +265,12 @@ Maui.ApplicationWindow
         focus: true
         anchors.fill: parent
 
-        initialItem: Item
+        initialItem: settings.focusViewDefault ?  _focusViewComponent : _viewsPage
+
+        Item
         {
             id: _viewsPage
+            visible: StackView.status === StackView.Active
 
             Maui.AppViews
             {
@@ -449,13 +453,22 @@ Maui.ApplicationWindow
     {
         if(focusView)
         {
-            _stackView.pop(StackView.Immediate)
-            _stackView.currentItem.forceActiveFocus()
+            if(_stackView.depth === 1)
+            {
+                _stackView.replace(_focusViewComponent, _viewsPage)
+
+            }else
+            {
+                _stackView.pop()
+            }
+
         }else
         {
-            _stackView.push(_focusViewComponent, StackView.Immediate)
-            _focusViewComponent.forceActiveFocus()
+            _stackView.push(_focusViewComponent)
         }
+
+        _stackView.currentItem.forceActiveFocus()
+
     }
 
     property int oldH : root. height
