@@ -129,7 +129,6 @@ Maui.Page
                 }
             }
         }
-
     }
 
     headBar.rightContent: ToolButton
@@ -378,7 +377,7 @@ Maui.Page
                                     smooth: true
                                     asynchronous: true
 
-                                    source: "image://artwork/album:"+model.artist + ":"+ model.album
+                                    source: "image://artwork/album:"+model.artist + ":"+ model.album || "image://artwork/artist:"+model.artist
 
                                     onStatusChanged:
                                     {

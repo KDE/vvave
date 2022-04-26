@@ -32,11 +32,11 @@ Maui.ApplicationWindow
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
     readonly property int preferredMiniModeSize: 200
-    minimumHeight: miniMode ? preferredMiniModeSize : 300
-    minimumWidth: miniMode ? preferredMiniModeSize : 200
+//    minimumHeight: miniMode ? preferredMiniModeSize : 300
+//    minimumWidth: miniMode ? preferredMiniModeSize : 200
 
-    maximumWidth: miniMode ? minimumWidth : Screen.desktopAvailableWidth
-    maximumHeight: miniMode ? minimumHeight : Screen.desktopAvailableHeight
+//    maximumWidth: miniMode ? minimumWidth : Screen.desktopAvailableWidth
+//    maximumHeight: miniMode ? minimumHeight : Screen.desktopAvailableHeight
 
     /***************************************************/
     /******************** ALIASES ********************/
