@@ -36,8 +36,19 @@ Maui.AltBrowser
         sourceComponent: Maui.SearchField
         {
             placeholderText: i18np("Filter", "Filter %1 albums", _albumsList.count)
-            onAccepted: _albumsModel.filter = text
-            onCleared: _albumsModel.filter = ""
+
+            onAccepted:
+            {
+//                if(text.includes(","))
+//                {
+                    _albumsModel.filters = text.split(",")
+//                }else
+                {
+//                    _albumsModel.filter = text
+                }
+            }
+
+            onCleared: _albumsModel.clearFilters()
         }
     }
 

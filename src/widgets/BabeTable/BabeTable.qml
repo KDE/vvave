@@ -105,8 +105,18 @@ Maui.Page
         sourceComponent: Maui.SearchField
         {
             placeholderText: i18np("Filter", "Filter %1 songs", listModel.list.count)
-            onAccepted: listModel.filter = text
-            onCleared: listModel.filter = ""
+            onAccepted:
+            {
+                if(text.includes(","))
+                {
+                    listModel.filters = text.split(",")
+                }else
+                {
+                    listModel.filter = text
+                }
+            }
+
+            onCleared: listModel.clearFilters()
         }
     }
 
