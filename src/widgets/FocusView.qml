@@ -213,6 +213,7 @@ Maui.Page
                 console.log("Trying to setr adaptive color based on album >>>>>>>>>>>", status === Image.Ready)
                 if(status === Image.Ready)
                     Maui.Style.adaptiveColorSchemeSource = Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
+                setAndroidStatusBarColor()
             }
         }
 
@@ -230,6 +231,11 @@ Maui.Page
                 anchors.fill: parent
                 color: Kirigami.Theme.backgroundColor
                 opacity: 0.8
+
+                onColorChanged:
+                {
+                    setAndroidStatusBarColor()
+                }
             }
         }
     }
