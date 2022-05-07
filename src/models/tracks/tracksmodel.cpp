@@ -229,6 +229,7 @@ bool TracksModel::countUp(const int &index)
     if (index >= this->list.size() || index < 0)
         return false;
 
+    qDebug() << "COUNT UP TRACK" << index;
     auto item = this->list[index];
     if (CollectionDB::getInstance()->playedTrack(item[FMH::MODEL_KEY::URL])) {
         this->list[index][FMH::MODEL_KEY::COUNT] = QString::number(item[FMH::MODEL_KEY::COUNT].toInt() + 1);

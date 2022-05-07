@@ -88,7 +88,7 @@ const static QUrl CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocati
 const static QUrl CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + "/vvave/");
 #endif
 
-const static QString DBName = QStringLiteral("collection.db");
+const static QString DBName = QStringLiteral("collection_v2.db");
 const static QStringList defaultSources = QStringList() << FMStatic::MusicPath << FMStatic::DownloadsPath;
 
 static inline BAE::TABLE albumType(const FMH::MODEL &albumMap)

@@ -53,7 +53,7 @@ public:
     Q_INVOKABLE bool rateTrack(const QString &path, const int &value);
 
     bool lyricsTrack(const FMH::MODEL &track, const QString &value);
-    Q_INVOKABLE bool playedTrack(const QString &url, const int &increment = 1);
+    Q_INVOKABLE bool playedTrack(const QString &url);
 
     bool albumTrack(const FMH::MODEL &track, const QString &value);
     bool trackTrack(const FMH::MODEL &track, const QString &value);
@@ -81,7 +81,8 @@ public:
 
     bool removeSource(const QString &url);
     bool removeTrack(const QString &path);
-    QSqlQuery getQuery(const QString &queryTxt);
+    QSqlQuery getQuery(const QString &queryTxt) const;
+    QSqlQuery getQuery() const;
 
     /*useful tools*/
     sourceTypes sourceType(const QString &url);

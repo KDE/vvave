@@ -363,14 +363,24 @@ bool CollectionDB::albumTrack(const FMH::MODEL &track, const QString &value)
     return true;
 }
 
-bool CollectionDB::playedTrack(const QString &url, const int &increment)
-{
-    auto queryTxt = QString("UPDATE %1 SET %2 = %2 + %3 WHERE %4 = \"%5\"").arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::COUNT], QString::number(increment), FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url);
-
-    auto query = this->getQuery(queryTxt);
+bool CollectionDB::playedTrack(const QString &url)
+{    
+    auto query = getQuery();
+    query.prepare("UPDATE TRACKS SET count = count + 1 WHERE url = :url");
+    query.bindValue(":url", url);
 
     if (query.exec())
+    {
+//        query.clar();
+        auto query2 = getQuery();
+
+        query2.prepare("UPDATE TRACKS SET lastsync = :date WHERE url = :url");
+        query2.bindValue(":date", QDateTime::currentDateTime());
+        query2.bindValue(":url", url);
+
+        query2.exec();
         return true;
+    }
 
     return false;
 }
@@ -507,9 +517,15 @@ bool CollectionDB::removeTrack(const QString &path)
     return false;
 }
 
-QSqlQuery CollectionDB::getQuery(const QString &queryTxt)
+QSqlQuery CollectionDB::getQuery(const QString &queryTxt) const
 {
     return QSqlQuery(queryTxt, this->m_db);
+}
+
+QSqlQuery CollectionDB::getQuery() const
+{
+    QSqlQuery query(this->m_db);
+    return query;
 }
 
 bool CollectionDB::removeSource(const QString &url)
