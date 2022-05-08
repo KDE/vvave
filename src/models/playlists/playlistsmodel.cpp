@@ -90,7 +90,11 @@ FMH::MODEL_LIST PlaylistsModel::tags()
         const auto map = item.toMap();
         auto res = packPlaylist(map.value("tag").toString());
         res[FMH::MODEL_KEY::ICON] = map.value("icon").toString();
-        list << res;
+
+        if(list.count() <= m_limit)
+        {
+            list << res;
+        }
         return list;
     });
 }
@@ -128,4 +132,17 @@ void PlaylistsModel::removePlaylist(const int &index) // TODO
         this->list.removeAt(index);
         emit this->postItemRemoved();
     }
+}
+
+int PlaylistsModel::limit() const
+{
+    return m_limit;
+}
+
+void PlaylistsModel::setLimit(int newLimit)
+{
+    if (m_limit == newLimit)
+        return;
+    m_limit = newLimit;
+    emit limitChanged();
 }

@@ -43,62 +43,151 @@ BabeTable
     listModel.sortOrder: Qt.AscendingOrder
     group: true
 
-    listView.header: ListView
+    listView.header: Column
     {
-        id: _recentTracksList
-        model: Maui.BaseModel
-        {
-            id: _recentModel
-            list: Vvave.Tracks
-            {
-                query: Q.GET.mostPlayedTracks
-            }
-
-        }
-
-        height: 140
         width: parent.width
-        orientation: ListView.Horizontal
         spacing: Maui.Style.space.medium
-        delegate: Item
+
+        Maui.SectionDropDown
         {
-            height: ListView.view.height
-            width: height-40
+            width: parent.width
+            label1.text: i18n("Popular Tracks")
+            label2.text: i18n("Play them again.")
+        }
 
-            Maui.GridBrowserDelegate
+        Maui.ListBrowser
+        {
+            id: _recentTracksList
+            model: Maui.BaseModel
             {
-                id: _template
-                anchors.fill: parent
-
-                isCurrentItem: parent.ListView.isCurrentItem
-                maskRadius: radius
-                label1.text: model.title
-                label2.text: model.artist
-                imageSource: "image://artwork/album:"+ model.artist+":"+model.album
-                label1.font.bold: true
-                label1.font.weight: Font.Bold
-                iconSource: "media-album-cover"
-                template.labelSizeHint: 40
-
-                onClicked:
+                id: _recentModel
+                list: Vvave.Tracks
                 {
-                    _recentTracksList.currentIndex = index
-                    if(Maui.Handy.singleClick)
-                    {
-                        Player.quickPlay(_recentModel.get(_recentTracksList.currentIndex))
-                    }
+                    query: Q.GET.mostPlayedTracks
                 }
 
-                onDoubleClicked:
+            }
+
+            Connections
+            {
+                target: player
+                function onFinished()
                 {
-                    _recentTracksList.currentIndex = index
-                    if(!Maui.Handy.singleClick)
+                    _recentModel.list.refresh()
+                }
+            }
+
+            height: 140
+            width: parent.width
+            orientation: ListView.Horizontal
+            spacing: Maui.Style.space.medium
+            delegate: Item
+            {
+                height: ListView.view.height
+                width: height-40
+
+                Maui.GridBrowserDelegate
+                {
+                    id: _template
+                    anchors.fill: parent
+
+                    isCurrentItem: parent.ListView.isCurrentItem
+                    maskRadius: radius
+                    label1.text: model.title
+                    label2.text: model.artist
+                    label1.horizontalAlignment: Qt.AlignLeft
+                    label2.horizontalAlignment: Qt.AlignLeft
+                    imageSource: "image://artwork/album:"+ model.artist+":"+model.album
+                    label1.font.bold: true
+                    label1.font.weight: Font.Bold
+                    iconSource: "media-album-cover"
+                    template.labelSizeHint: 40
+
+                    onClicked:
                     {
-                        Player.quickPlay(_recentModel.get(_recentTracksList.currentIndex))
+                        _recentTracksList.currentIndex = index
+                        if(Maui.Handy.singleClick)
+                        {
+                            Player.quickPlay(_recentModel.get(_recentTracksList.currentIndex))
+                        }
+                    }
+
+                    onDoubleClicked:
+                    {
+                        _recentTracksList.currentIndex = index
+                        if(!Maui.Handy.singleClick)
+                        {
+                            Player.quickPlay(_recentModel.get(_recentTracksList.currentIndex))
+                        }
                     }
                 }
             }
         }
+
+
+        Maui.SectionDropDown
+        {
+            width: parent.width
+            label1.text: i18n("Playlists")
+            label2.text: i18n("Play them again.")
+        }
+
+
+        Maui.ListBrowser
+        {
+            id: _playlistsList
+            model: Maui.BaseModel
+            {
+                list: Vvave.Playlists
+                {
+                    id: _playlists
+                    limit: 10
+                }
+            }
+
+            height: 180
+            width: parent.width
+            orientation: ListView.Horizontal
+            spacing: Maui.Style.space.medium
+            delegate: Item
+            {
+                height: ListView.view.height
+                width: height-40
+
+                Maui.CollageItem
+                {
+                    anchors.fill: parent
+                    images: model.preview.split(",")
+
+                    isCurrentItem: parent.ListView.isCurrentItem
+                    maskRadius: radius
+                    label1.text: model.playlist
+                    iconSource: model.icon
+                    label1.font.bold: true
+                    label1.font.weight: Font.Bold
+                    template.labelSizeHint: 40
+
+                    onClicked:
+                    {
+                        _playlistsList.currentIndex = index
+                        if(Maui.Handy.singleClick)
+                        {
+                            swipeView.currentIndex = viewsIndex.playlists
+                        }
+                    }
+
+                    onDoubleClicked:
+                    {
+                        _playlistsList.currentIndex = index
+                        if(!Maui.Handy.singleClick)
+                        {
+                            swipeView.currentIndex = viewsIndex.playlists
+                        }
+                    }
+                }
+            }
+        }
+
 
     }
 }

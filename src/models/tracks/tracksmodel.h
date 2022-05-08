@@ -1,5 +1,4 @@
-#ifndef TRACKSMODEL_H
-#define TRACKSMODEL_H
+#pragma once
 
 #include <QObject>
 
@@ -62,4 +61,3 @@ public slots:
     QStringList urls() const;
 };
 
-#endif // TRACKSMODEL_H

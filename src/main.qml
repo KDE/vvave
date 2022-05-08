@@ -154,7 +154,9 @@ Maui.ApplicationWindow
             if (!mainlistEmpty)
             {
                 if (currentTrack && currentTrack.url)
-                    mainPlaylist.listModel.list.countUp(currentTrackIndex)
+                {
+                    mainPlaylist.listModel.list.countUp(currentTrackIndex)                    
+                }
 
                 Player.nextTrack()
             }
