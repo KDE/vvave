@@ -22,8 +22,6 @@ PlaylistsModel::PlaylistsModel(QObject *parent)
         this->list[index] = item;
         emit this->updateModel(index, {});
     });
-
-    this->setList();
 }
 
 const FMH::MODEL_LIST &PlaylistsModel::items() const
@@ -34,7 +32,10 @@ const FMH::MODEL_LIST &PlaylistsModel::items() const
 void PlaylistsModel::setList()
 {
     emit this->preListChanged();
-    this->list << this->defaultPlaylists();
+    if(m_limit == 9999)
+    {
+        this->list << this->defaultPlaylists();
+    }
     this->list << this->tags();
     emit this->postListChanged();
 }
@@ -132,6 +133,11 @@ void PlaylistsModel::removePlaylist(const int &index) // TODO
         this->list.removeAt(index);
         emit this->postItemRemoved();
     }
+}
+
+void PlaylistsModel::componentComplete()
+{
+    this->setList();
 }
 
 int PlaylistsModel::limit() const
