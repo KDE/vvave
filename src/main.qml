@@ -268,7 +268,7 @@ Maui.ApplicationWindow
         focus: true
         anchors.fill: parent
 
-        initialItem:  _focusViewComponent
+        initialItem: _focusViewComponent
 
         Component.onCompleted:
         {
@@ -278,32 +278,43 @@ Maui.ApplicationWindow
            }
         }
 
-        pushEnter: Transition {
-            PropertyAnimation {
+        pushEnter: Transition
+        {
+            PropertyAnimation
+            {
                 property: "opacity"
                 from: 0
                 to:1
                 duration: 200
             }
         }
-        pushExit: Transition {
-            PropertyAnimation {
+
+        pushExit: Transition
+        {
+            PropertyAnimation
+            {
                 property: "opacity"
                 from: 1
                 to:0
                 duration: 200
             }
         }
-        popEnter: Transition {
-            PropertyAnimation {
+
+        popEnter: Transition
+        {
+            PropertyAnimation
+            {
                 property: "opacity"
                 from: 0
                 to:1
                 duration: 200
             }
         }
-        popExit: Transition {
-            PropertyAnimation {
+
+        popExit: Transition
+        {
+            PropertyAnimation
+            {
                 property: "opacity"
                 from: 1
                 to:0
