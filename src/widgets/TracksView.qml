@@ -12,6 +12,7 @@ import "../utils/Player.js" as Player
 
 BabeTable
 {
+    id: control
     trackNumberVisible: false
     coverArtVisible: false
 
@@ -187,8 +188,11 @@ BabeTable
                 }
             }
         }
+    }
 
-
+    Component.onCompleted:
+    {
+        control.listView.positionViewAtBeginning()
     }
 }
 

@@ -333,7 +333,7 @@ Maui.Page
             Layout.fillHeight: true
             Layout.preferredWidth: Maui.Style.rowHeight
             visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
-            icon.name: "media-playlist-append"
+            icon.name: "list-add"
             onClicked:
             {
                 currentIndex = index

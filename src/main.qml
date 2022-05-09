@@ -111,7 +111,7 @@ Maui.ApplicationWindow
         property bool fetchArtwork: true
         property bool autoScan: true
         property bool darkMode : true
-        property bool focusViewDefault: true
+        property bool focusViewDefault: false
     }
 
     Mpris2
@@ -268,7 +268,48 @@ Maui.ApplicationWindow
         focus: true
         anchors.fill: parent
 
-        initialItem: settings.focusViewDefault ?  _focusViewComponent : _viewsPage
+        initialItem:  _focusViewComponent
+
+        Component.onCompleted:
+        {
+           if(!settings.focusViewDefault)
+           {
+               toggleFocusView()
+           }
+        }
+
+        pushEnter: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 200
+            }
+        }
+        pushExit: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 200
+            }
+        }
+        popEnter: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 200
+            }
+        }
+        popExit: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 200
+            }
+        }
 
         Item
         {
