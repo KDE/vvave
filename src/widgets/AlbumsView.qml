@@ -1,13 +1,15 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import org.mauikit.controls 1.3 as Maui
+
 import "BabeGrid"
 import "BabeTable"
 
 import "../db/Queries.js" as Q
 import "../utils/Player.js" as Player
 
-StackView
+Maui.StackView
 {
     id: control
 
@@ -83,7 +85,7 @@ StackView
         control.push(_tracksTableComponent)
 
         currentAlbum = album === undefined ? "" : album
-        currentArtist= artist
+        currentArtist = artist
 
         var query
         if(currentAlbum && currentArtist)
@@ -96,6 +98,7 @@ StackView
             query = Q.GET.artistTracks_.arg(currentArtist)
         }
 
+        console.log("GET ARTIST OR ALBUM BY", album, artist)
         control.currentQuery = query
     }
 }

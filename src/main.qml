@@ -155,7 +155,7 @@ Maui.ApplicationWindow
             {
                 if (currentTrack && currentTrack.url)
                 {
-                    mainPlaylist.listModel.list.countUp(currentTrackIndex)                    
+                    mainPlaylist.listModel.list.countUp(currentTrackIndex)
                 }
 
                 Player.nextTrack()
@@ -262,7 +262,7 @@ Maui.ApplicationWindow
         sourceComponent: PlaybackBar {}
     }
 
-    StackView
+    Maui.StackView
     {
         id: _stackView
         focus: true
@@ -272,53 +272,9 @@ Maui.ApplicationWindow
 
         Component.onCompleted:
         {
-           if(!settings.focusViewDefault)
-           {
-               toggleFocusView()
-           }
-        }
-
-        pushEnter: Transition
-        {
-            PropertyAnimation
+            if(!settings.focusViewDefault)
             {
-                property: "opacity"
-                from: 0
-                to:1
-                duration: 200
-            }
-        }
-
-        pushExit: Transition
-        {
-            PropertyAnimation
-            {
-                property: "opacity"
-                from: 1
-                to:0
-                duration: 200
-            }
-        }
-
-        popEnter: Transition
-        {
-            PropertyAnimation
-            {
-                property: "opacity"
-                from: 0
-                to:1
-                duration: 200
-            }
-        }
-
-        popExit: Transition
-        {
-            PropertyAnimation
-            {
-                property: "opacity"
-                from: 1
-                to:0
-                duration: 200
+                toggleFocusView()
             }
         }
 
@@ -407,27 +363,52 @@ Maui.ApplicationWindow
 
                 Maui.AppViewLoader
                 {
+                    id: _albumsViewLoader
+
                     Maui.AppView.title: i18n("Albums")
                     Maui.AppView.iconName: "view-media-album-cover"
+
+                    property var pendingAlbum : ({})
 
                     AlbumsView
                     {
                         holder.title : i18n("No Albums!")
                         holder.body: i18n("Add new music sources")
                         list.query: Albums.ALBUMS
+
+                        Component.onCompleted:
+                        {
+                            if(Object.keys(_albumsViewLoader.pendingAlbum).length)
+                            {
+                                console.log("POPULATE ALBUMS",_albumsViewLoader.pendingAlbum.artist, _albumsViewLoader.pendingAlbum.album )
+                                populateTable(_albumsViewLoader.pendingAlbum.album, _albumsViewLoader.pendingAlbum.artist)
+                            }
+                        }
                     }
                 }
 
                 Maui.AppViewLoader
                 {
+                    id: _artistViewLoader
                     Maui.AppView.title: i18n("Artists")
                     Maui.AppView.iconName: "view-media-artist"
+
+                    property string pendingArtist
 
                     AlbumsView
                     {
                         holder.title : i18n("No Artists!")
                         holder.body: i18n("Add new music sources")
                         list.query : Albums.ARTISTS
+
+                        Component.onCompleted:
+                        {
+                            if(_artistViewLoader.pendingArtist.length)
+                            {
+                                populateTable(undefined, _artistViewLoader.pendingArtist)
+
+                            }
+                        }
                     }
                 }
 
@@ -474,6 +455,7 @@ Maui.ApplicationWindow
             FocusView
             {
                 anchors.fill: parent
+                showCSDControls: settings.focusViewDefault
             }
         }
 
@@ -563,5 +545,31 @@ Maui.ApplicationWindow
     {
         _dialogLoader.sourceComponent = _settingsDialogComponent
         dialog.open()
+    }
+
+    function goToAlbum(artist, album)
+    {
+        console.log("GO TO ALBUM", artist, album)
+
+        swipeView.currentIndex = viewsIndex.albums
+        if(_albumsViewLoader.item)
+        {
+            _albumsViewLoader.item.populateTable(album, artist)
+        }else
+        {
+            _albumsViewLoader.pendingAlbum = ({'artist': artist, 'album': album})
+        }
+    }
+
+    function goToArtist(artist)
+    {
+        swipeView.currentIndex = viewsIndex.artists
+        if(_artistViewLoader.item)
+        {
+            _artistViewLoader.item.populateTable(undefined, artist)
+        }else
+        {
+            _artistViewLoader.pendingArtist = artist
+        }
     }
 }

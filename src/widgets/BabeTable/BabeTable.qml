@@ -172,14 +172,18 @@ Maui.Page
         {
             text: i18n("Go to Artist")
             icon.name: "view-media-artist"
-            onTriggered: goToArtist()
+            onTriggered: goToArtist(listModel.get(control.currentIndex).artist)
         }
 
         MenuItem
         {
             text: i18n("Go to Album")
             icon.name: "view-media-album-cover"
-            onTriggered: goToAlbum()
+            onTriggered:
+            {
+                let item = listModel.get(control.currentIndex)
+                goToAlbum(item.artist, item.album)
+            }
         }
 
         onFavClicked:
@@ -411,20 +415,6 @@ function openItemMenu(index)
     contextMenu.titleInfo = listModel.get(contextMenu.index)
     contextMenu.show()
     rowPressed(index)
-}
-
-function goToAlbum()
-{
-    swipeView.currentIndex = viewsIndex.albums
-    const item = listModel.get(control.currentIndex)
-    swipeView.currentItem.item.populateTable(item.album, item.artist)
-}
-
-function goToArtist()
-{
-    swipeView.currentIndex = viewsIndex.artists
-    const item = listModel.get(control.currentIndex)
-    swipeView.currentItem.item.populateTable(undefined, item.artist)
 }
 
 function filterSelectedItems(path)

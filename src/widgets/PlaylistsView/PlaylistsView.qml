@@ -11,7 +11,7 @@ import "../BabeTable"
 import "../../db/Queries.js" as Q
 import "../../utils/Player.js" as Player
 
-StackView
+Maui.StackView
 {
     id: control
 

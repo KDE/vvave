@@ -11,7 +11,7 @@ import "../../utils/Player.js" as Player
 
 import org.maui.vvave 1.0
 
-StackView
+Maui.StackView
 {
     id: control
 

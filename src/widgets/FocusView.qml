@@ -255,7 +255,7 @@ Maui.Page
         body: i18n("Start putting together your playlist.")
     }
 
-    StackView
+    Maui.StackView
     {
         id: _focusStackView
         anchors.fill: parent
