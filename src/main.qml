@@ -549,7 +549,10 @@ Maui.ApplicationWindow
 
     function goToAlbum(artist, album)
     {
-        console.log("GO TO ALBUM", artist, album)
+        if(root.focusView)
+        {
+            toggleFocusView()
+        }
 
         swipeView.currentIndex = viewsIndex.albums
         if(_albumsViewLoader.item)
@@ -563,6 +566,11 @@ Maui.ApplicationWindow
 
     function goToArtist(artist)
     {
+        if(root.focusView)
+        {
+            toggleFocusView()
+        }
+
         swipeView.currentIndex = viewsIndex.artists
         if(_artistViewLoader.item)
         {
