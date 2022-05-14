@@ -28,7 +28,7 @@ Maui.Page
 
     readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
     readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
-
+Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
 
     headBar.leftContent: [
         ToolButton
@@ -189,55 +189,62 @@ Maui.Page
         onActivated: toggleFocusView()
     }
 
-    background: Item
+    background: Rectangle
     {
-        Image
+        color: Kirigami.Theme.backgroundColor
+        //                        opacity: 0.8
+
+        onColorChanged:
         {
-            id: artworkBg
-            height: parent.height
-            width: parent.width
-
-            sourceSize.width: 500
-            sourceSize.height: 600
-
-            fillMode: Image.PreserveAspectCrop
-            antialiasing: true
-            smooth: true
-            asynchronous: true
-            cache: true
-
-            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
-
-            onStatusChanged:
-            {
-                console.log("Trying to setr adaptive color based on album >>>>>>>>>>>", status === Image.Ready)
-                if(status === Image.Ready)
-                    Maui.Style.adaptiveColorSchemeSource = Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
-                setAndroidStatusBarColor()
-            }
+            setAndroidStatusBarColor()
         }
+        //        Image
+        //        {
+        //            id: artworkBg
+        //            height: parent.height
+        //            width: parent.width
 
-        FastBlur
-        {
-            id: fastBlur
-            anchors.fill: parent
-            source: artworkBg
-            radius: 100
-            transparentBorder: false
-            cached: true
+        //            sourceSize.width: 500
+        //            sourceSize.height: 600
 
-            Rectangle
-            {
-                anchors.fill: parent
-                color: Kirigami.Theme.backgroundColor
-                opacity: 0.8
+        //            fillMode: Image.PreserveAspectCrop
+        //            antialiasing: true
+        //            smooth: true
+        //            asynchronous: true
+        //            cache: true
 
-                onColorChanged:
-                {
-                    setAndroidStatusBarColor()
-                }
-            }
-        }
+        //            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+
+        //            onStatusChanged:
+        //            {
+        //                console.log("Trying to setr adaptive color based on album >>>>>>>>>>>", status === Image.Ready)
+        //                if(status === Image.Ready)
+        //                    Maui.Style.adaptiveColorSchemeSource = Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
+        //                setAndroidStatusBarColor()
+        //            }
+        //        }
+
+        //        FastBlur
+        //        {
+        //            id: fastBlur
+        //            anchors.fill: parent
+        //            source: artworkBg
+        //            radius: 100
+        //            transparentBorder: false
+        //            cached: true
+
+        //            Rectangle
+        //            {
+        //                anchors.fill: parent
+        //                color: Kirigami.Theme.backgroundColor
+        //                opacity: 0.8
+
+        //                onColorChanged:
+        //                {
+        //                    setAndroidStatusBarColor()
+        //                }
+        //            }
+        //        }
     }
 
     Component
@@ -287,7 +294,7 @@ Maui.Page
                         {
                             visible: (_listView.currentIndex > 0) && (_listView.count > 1)
 
-                            height: Maui.Style.iconSizes.small
+                            height: Maui.Style.iconSizes.tiny
                             width : height
 
                             radius: height
@@ -463,7 +470,7 @@ Maui.Page
                         {
                             anchors.bottom: parent.bottom
                             visible: (_listView.currentIndex < _listView.count - 1) && (_listView.count > 1)
-                            height: Maui.Style.iconSizes.small
+                            height: Maui.Style.iconSizes.tiny
                             width : height
 
                             radius: height

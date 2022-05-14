@@ -26,6 +26,8 @@ Maui.ApplicationWindow
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
     headBar.visible: false
 
+//    Maui.Style.accentColor: Maui.App.darkMode ? babeColor : babeColor
+    
     Maui.App.darkMode: settings.darkMode
     Maui.Style.adaptiveColorScheme: focusView
 
