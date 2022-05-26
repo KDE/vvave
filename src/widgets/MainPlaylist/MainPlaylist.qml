@@ -34,6 +34,11 @@ Maui.Page
     {
         color: Kirigami.Theme.backgroundColor
         opacity: 0.2
+
+        Behavior on color
+                {
+                    Maui.ColorTransition{}
+                }
     }
 
     headBar.background: null
@@ -66,6 +71,11 @@ Maui.Page
         {
             color: Kirigami.Theme.backgroundColor
             opacity: 0.2
+
+            Behavior on color
+                    {
+                        Maui.ColorTransition{}
+                    }
         }
 
         Binding on currentIndex
@@ -84,13 +94,48 @@ Maui.Page
         holder.title : "Nothing to play!"
         holder.body: i18n("Start putting together your playlist.")
 
-        listView.header: Rectangle
+        listView.header: Column
+        {
+            width: parent.width
+
+
+            Rectangle
+            {
+                width: parent.width
+                height: width
+color: Kirigami.Theme.highlightColor
+                Image
+                {
+                    id: _image
+                    width: Math.min(parent.width, parent.height) * 0.9
+                    height: width
+                    anchors.centerIn: parent
+
+                    sourceSize.width: 200
+
+                    fillMode: Image.PreserveAspectFit
+                    antialiasing: false
+                    smooth: true
+                    asynchronous: true
+
+                    source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album || "image://artwork/artist:"+currentTrack.artist
+
+                    onStatusChanged:
+                    {
+                        if (status == Image.Error)
+                            source = "qrc:/assets/cover.png";
+                    }
+                }
+            }
+
+
+            Rectangle
         {
             visible: root.sync
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
             z: table.z + 999
-            width: table.width
+            width: parent.width
             height: visible ?  Maui.Style.rowHeightAlt : 0
             color: Kirigami.Theme.backgroundColor
 
@@ -117,6 +162,7 @@ Maui.Page
                     }
                 }
             }
+        }
         }
 
         delegate: TableDelegate

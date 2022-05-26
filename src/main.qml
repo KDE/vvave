@@ -28,9 +28,8 @@ Maui.ApplicationWindow
 
 //    Maui.Style.accentColor: Maui.App.darkMode ? babeColor : babeColor
     
-    Maui.App.darkMode: settings.darkMode
+    Maui.Style.darkMode: settings.darkMode
     Maui.Style.adaptiveColorScheme: focusView
-
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
     readonly property int preferredMiniModeSize: 200
@@ -86,18 +85,7 @@ Maui.ApplicationWindow
     onClosing: playlist.save()
     onFocusViewChanged: setAndroidStatusBarColor()
 
-    Loader
-    {
-        active: !Kirigami.Settings.isMobile && Maui.Handy.isLinux
-        asynchronous: true
-        sourceComponent: Maui.WindowBlur
-        {
-            view: root
-            geometry: Qt.rect(root.x, root.y, root.width, root.height)
-            windowRadius: root.background.radius
-            enabled: true
-        }
-    }
+
 
     Loader
     {
@@ -269,7 +257,6 @@ Maui.ApplicationWindow
         id: _stackView
         focus: true
         anchors.fill: parent
-
         initialItem: _focusViewComponent
 
         Component.onCompleted:

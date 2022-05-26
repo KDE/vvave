@@ -277,6 +277,10 @@ Maui.Page
                 height: Maui.Style.rowHeight * 1.5
 
                 radius: Maui.Style.radiusV
+                Behavior on color
+                        {
+                            Maui.ColorTransition{}
+                        }
 
                 Maui.ListItemTemplate
                 {

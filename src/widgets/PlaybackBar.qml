@@ -49,6 +49,11 @@ T.Control
                 anchors.fill: parent
                 color: Kirigami.Theme.backgroundColor
                 opacity: 0.8
+                Behavior on color
+                        {
+                            Maui.ColorTransition{}
+                        }
+
             }
         }
 
@@ -59,6 +64,11 @@ T.Control
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
+            Behavior on color
+                    {
+                        Maui.ColorTransition{}
+                    }
+
         }
     }
 
@@ -89,12 +99,21 @@ T.Control
                 width: progressBar.availableWidth
                 color: "transparent"
                 opacity: progressBar.pressed ? 0.5 : 1
+                Behavior on color
+                        {
+                            Maui.ColorTransition{}
+                        }
 
                 Rectangle
                 {
                     width: progressBar.visualPosition * parent.width
                     height: progressBar.pressed ? 5 :  2
                     color: Kirigami.Theme.highlightColor
+                    Behavior on color
+                            {
+                                Maui.ColorTransition{}
+                            }
+
                 }
             }
 
@@ -107,6 +126,11 @@ T.Control
                 implicitWidth: Maui.Style.iconSizes.medium
                 implicitHeight: 16
                 color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
+                Behavior on color
+                        {
+                            Maui.ColorTransition{}
+                        }
+
             }
         }
 

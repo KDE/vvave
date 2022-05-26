@@ -193,6 +193,10 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
     {
         color: Kirigami.Theme.backgroundColor
         //                        opacity: 0.8
+        Behavior on color
+                {
+                    Maui.ColorTransition{}
+                }
 
         onColorChanged:
         {
