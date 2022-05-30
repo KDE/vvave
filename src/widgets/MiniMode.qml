@@ -51,7 +51,7 @@ MouseArea
                 flat: true
                 enabled: root.currentTrack
                 checked: root.currentTrack.url ? FB.Tagging.isFav(root.currentTrack.url) : false
-                icon.color: checked ? babeColor :  Kirigami.Theme.textColor
+                icon.color: checked ? babeColor :  Maui.Theme.textColor
 
                 onClicked:
                 {
@@ -67,7 +67,7 @@ MouseArea
                 icon.width: Maui.Style.iconSizes.big
                 icon.height: Maui.Style.iconSizes.big
                 enabled: root.currentTrackIndex >= 0
-                icon.color: Kirigami.Theme.textColor
+                icon.color: Maui.Theme.textColor
                 icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
                 onClicked: player.playing ? player.pause() : player.play()
             }

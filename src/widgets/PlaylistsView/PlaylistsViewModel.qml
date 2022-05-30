@@ -11,8 +11,8 @@ Maui.AltBrowser
 {
     id: control
     property alias list: _playlistsList
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
+    Maui.Theme.colorSet: Maui.Theme.View
+    Maui.Theme.inherit: false
 
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 

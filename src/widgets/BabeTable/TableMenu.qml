@@ -135,7 +135,7 @@ Maui.ContextualMenu
     {
         text: i18n("Delete")
         icon.name: "edit-delete"
-        Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+        Maui.Theme.textColor: Maui.Theme.negativeTextColor
         onTriggered:
         {
             deleteClicked()

@@ -47,7 +47,7 @@ T.Control
             Rectangle
             {
                 anchors.fill: parent
-                color: Kirigami.Theme.backgroundColor
+                color: Maui.Theme.backgroundColor
                 opacity: 0.8
                 Behavior on color
                         {
@@ -108,7 +108,7 @@ T.Control
                 {
                     width: progressBar.visualPosition * parent.width
                     height: progressBar.pressed ? 5 :  2
-                    color: Kirigami.Theme.highlightColor
+                    color: Maui.Theme.highlightColor
                     Behavior on color
                             {
                                 Maui.ColorTransition{}
@@ -125,7 +125,7 @@ T.Control
                 radius: height
                 implicitWidth: Maui.Style.iconSizes.medium
                 implicitHeight: 16
-                color: progressBar.pressed ? Qt.lighter(Kirigami.Theme.highlightColor, 1.2) : "transparent"
+                color: progressBar.pressed ? Qt.lighter(Maui.Theme.highlightColor, 1.2) : "transparent"
                 Behavior on color
                         {
                             Maui.ColorTransition{}

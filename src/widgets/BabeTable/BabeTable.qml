@@ -50,8 +50,8 @@ Maui.Page
     signal playAll()
     signal appendAll()
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
+    Maui.Theme.colorSet: Maui.Theme.View
+    Maui.Theme.inherit: false
 
     flickable: _listBrowser.flickable
 
@@ -271,7 +271,7 @@ Maui.Page
 
             Rectangle
             {
-                color: Qt.tint(control.Kirigami.Theme.textColor, Qt.rgba(control.Kirigami.Theme.backgroundColor.r, control.Kirigami.Theme.backgroundColor.g, control.Kirigami.Theme.backgroundColor.b, 0.95))
+                color: Qt.tint(control.Maui.Theme.textColor, Qt.rgba(control.Maui.Theme.backgroundColor.r, control.Maui.Theme.backgroundColor.g, control.Maui.Theme.backgroundColor.b, 0.95))
                 anchors.centerIn: parent
                 width: parent.width
                 height: Maui.Style.rowHeight * 1.5

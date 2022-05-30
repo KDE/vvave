@@ -191,7 +191,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
 
     background: Rectangle
     {
-        color: Kirigami.Theme.backgroundColor
+        color: Maui.Theme.backgroundColor
         //                        opacity: 0.8
         Behavior on color
                 {
@@ -240,7 +240,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
         //            Rectangle
         //            {
         //                anchors.fill: parent
-        //                color: Kirigami.Theme.backgroundColor
+        //                color: Maui.Theme.backgroundColor
         //                opacity: 0.8
 
         //                onColorChanged:
@@ -303,7 +303,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
 
                             radius: height
 
-                            color: Kirigami.Theme.textColor
+                            color: Maui.Theme.textColor
                             opacity: 0.4
 
                             anchors.bottom: parent.bottom
@@ -440,7 +440,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                                     text: model.title
                                     elide: Text.ElideMiddle
                                     wrapMode: Text.NoWrap
-                                    color: control.Kirigami.Theme.textColor
+                                    color: control.Maui.Theme.textColor
                                     font.weight: Font.Normal
                                     font.pointSize: Maui.Style.fontSizes.huge
                                 }
@@ -456,7 +456,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                                     text: model.artist
                                     elide: Text.ElideMiddle
                                     wrapMode: Text.NoWrap
-                                    color: control.Kirigami.Theme.textColor
+                                    color: control.Maui.Theme.textColor
                                     font.weight: Font.Normal
                                     font.pointSize: Maui.Style.fontSizes.big
                                     opacity: 0.7
@@ -479,7 +479,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
 
                             radius: height
 
-                            color: Kirigami.Theme.textColor
+                            color: Maui.Theme.textColor
                             opacity: 0.4
                         }
                     }
@@ -500,7 +500,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                         text: control.progressTimeLabel
                         elide: Text.ElideMiddle
                         wrapMode: Text.NoWrap
-                        color: control.Kirigami.Theme.textColor
+                        color: control.Maui.Theme.textColor
                         font.weight: Font.Normal
                         font.pointSize: Maui.Style.fontSizes.medium
                         opacity: 0.7
@@ -529,7 +529,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                         text: control.durationTimeLabel
                         elide: Text.ElideMiddle
                         wrapMode: Text.NoWrap
-                        color: control.Kirigami.Theme.textColor
+                        color: control.Maui.Theme.textColor
                         font.weight: Font.Normal
                         font.pointSize: Maui.Style.fontSizes.medium
                         opacity: 0.7
@@ -558,7 +558,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                             flat: true
                             enabled: root.currentTrack
                             checked: root.currentTrack.url ? FB.Tagging.isFav(root.currentTrack.url) : false
-                            icon.color: checked ? babeColor :  Kirigami.Theme.textColor
+                            icon.color: checked ? babeColor :  Maui.Theme.textColor
 
                             onClicked:
                             {
@@ -571,7 +571,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                         {
                             icon.name: "media-skip-backward"
                             flat: true
-                            icon.color: Kirigami.Theme.textColor
+                            icon.color: Maui.Theme.textColor
                             icon.width: Maui.Style.iconSizes.big
                             icon.height: Maui.Style.iconSizes.big
                             onClicked: Player.previousTrack()
@@ -584,7 +584,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                             icon.width: Maui.Style.iconSizes.huge
                             icon.height: Maui.Style.iconSizes.huge
                             enabled: root.currentTrackIndex >= 0
-                            icon.color: Kirigami.Theme.textColor
+                            icon.color: Maui.Theme.textColor
                             icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
                             onClicked: player.playing ? player.pause() : player.play()
                         }
@@ -593,7 +593,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                         {
                             id: nextBtn
                             flat: true
-                            icon.color: Kirigami.Theme.textColor
+                            icon.color: Maui.Theme.textColor
                             icon.width: Maui.Style.iconSizes.big
                             icon.height: Maui.Style.iconSizes.big
                             icon.name: "media-skip-forward"

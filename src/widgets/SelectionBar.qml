@@ -14,7 +14,7 @@ Maui.SelectionBar
     listDelegate: TableDelegate
     {
         isCurrentItem: false
-        Kirigami.Theme.inherit: true
+        Maui.Theme.inherit: true
         width: ListView.view.width
         number: false
         coverArt: true
@@ -76,7 +76,7 @@ Maui.SelectionBar
         {
             text: i18n("Remove")
             icon.name: "edit-delete"
-            Kirigami.Theme.textColor: Kirigami.Theme.negativeTextColor
+            Maui.Theme.textColor: Maui.Theme.negativeTextColor
             onTriggered:
             {
                 _dialogLoader.sourceComponent = _removeDialogComponent

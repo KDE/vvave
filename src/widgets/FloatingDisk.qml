@@ -13,8 +13,8 @@ Item
     parent: ApplicationWindow.overlay
     z: parent.z + 1
 
-    Kirigami.Theme.inherit: false
-    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+    Maui.Theme.inherit: false
+    Maui.Theme.colorSet: Maui.Theme.Complementary
 
     visible: opacity > 0.3 && _viewsPage.visible
 

@@ -22,7 +22,7 @@ Maui.Page
     title: i18n("Playlist")
     showTitle: true
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+    Maui.Theme.colorSet: Maui.Theme.Window
 
     property alias listModel: table.listModel
     property alias listView : table.listView
@@ -32,7 +32,7 @@ Maui.Page
 
     background: Rectangle
     {
-        color: Kirigami.Theme.backgroundColor
+        color: Maui.Theme.backgroundColor
         opacity: 0.2
 
         Behavior on color
@@ -69,7 +69,7 @@ Maui.Page
 
         background: Rectangle
         {
-            color: Kirigami.Theme.backgroundColor
+            color: Maui.Theme.backgroundColor
             opacity: 0.2
 
             Behavior on color
@@ -88,7 +88,7 @@ Maui.Page
         listBrowser.enableLassoSelection: false
         headBar.visible: false
         footBar.visible: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.Window
+        Maui.Theme.colorSet: Maui.Theme.Window
 
         holder.emoji: "qrc:/assets/view-media-track.svg"
         holder.title : "Nothing to play!"
@@ -103,7 +103,7 @@ Maui.Page
             {
                 width: parent.width
                 height: width
-color: Kirigami.Theme.highlightColor
+color: Maui.Theme.highlightColor
                 Image
                 {
                     id: _image
@@ -132,12 +132,12 @@ color: Kirigami.Theme.highlightColor
             Rectangle
         {
             visible: root.sync
-            Kirigami.Theme.inherit: false
-            Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+            Maui.Theme.inherit: false
+            Maui.Theme.colorSet:Maui.Theme.Complementary
             z: table.z + 999
             width: parent.width
             height: visible ?  Maui.Style.rowHeightAlt : 0
-            color: Kirigami.Theme.backgroundColor
+            color: Maui.Theme.backgroundColor
 
             RowLayout
             {

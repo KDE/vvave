@@ -23,7 +23,7 @@ Item
 
         background: Rectangle
         {
-            color: Kirigami.Theme.backgroundColor
+            color: Maui.Theme.backgroundColor
             radius: Maui.Style.radiusV
             opacity: 0.5
         }

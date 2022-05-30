@@ -18,8 +18,8 @@ Maui.AltBrowser
 
     signal albumCoverClicked(string album, string artist)
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
+    Maui.Theme.colorSet: Maui.Theme.View
+    Maui.Theme.inherit: false
     headBar.visible: listModel.list.count > 1
 
     headBar.middleContent: Loader
@@ -65,7 +65,7 @@ Maui.AltBrowser
     Maui.Chip
     {
         z: control.z + 99999
-        Kirigami.Theme.colorSet:Kirigami.Theme.Complementary
+        Maui.Theme.colorSet:Maui.Theme.Complementary
         visible: _typingTimer.running
         label.text: typingQuery
         anchors.left: parent.left

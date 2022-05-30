@@ -25,11 +25,8 @@ Maui.ApplicationWindow
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
     headBar.visible: false
-
-//    Maui.Style.accentColor: Maui.App.darkMode ? babeColor : babeColor
     
-    Maui.Style.darkMode: settings.darkMode
-    Maui.Style.adaptiveColorScheme: focusView
+    Maui.Style.styleType: focusView ? Maui.Style.Adaptive : (settings.darkMode ? Maui.Style.Dark : Maui.Style.Light)
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
     readonly property int preferredMiniModeSize: 200
@@ -84,8 +81,6 @@ Maui.ApplicationWindow
     /*HANDLE EVENTS*/
     onClosing: playlist.save()
     onFocusViewChanged: setAndroidStatusBarColor()
-
-
 
     Loader
     {
@@ -470,8 +465,8 @@ Maui.ApplicationWindow
     {
         if(Maui.Handy.isAndroid)
         {
-            Maui.Android.statusbarColor( Kirigami.Theme.backgroundColor, !Maui.App.darkMode)
-            Maui.Android.navBarColor(headBar.visible ? headBar.Kirigami.Theme.backgroundColor : Kirigami.Theme.backgroundColor, !Maui.App.darkMode)
+            Maui.Android.statusbarColor( Maui.Theme.backgroundColor, !settings.darkMode)
+            Maui.Android.navBarColor(headBar.visible ? headBar.Maui.Theme.backgroundColor : Maui.Theme.backgroundColor, !settings.darkMode)
         }
     }
 

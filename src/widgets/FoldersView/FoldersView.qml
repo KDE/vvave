@@ -20,8 +20,8 @@ Maui.StackView
 
     initialItem: Maui.Page
     {
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
+        Maui.Theme.colorSet: Maui.Theme.View
+        Maui.Theme.inherit: false
 
         headBar.middleContent: Maui.SearchField
         {

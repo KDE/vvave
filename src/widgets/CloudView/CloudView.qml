@@ -92,7 +92,7 @@ Maui.Page
 
             Rectangle
             {
-                color: Qt.tint(control.Kirigami.Theme.textColor, Qt.rgba(control.Kirigami.Theme.backgroundColor.r, control.Kirigami.Theme.backgroundColor.g, control.Kirigami.Theme.backgroundColor.b, 0.9))
+                color: Qt.tint(control.Maui.Theme.textColor, Qt.rgba(control.Maui.Theme.backgroundColor.r, control.Maui.Theme.backgroundColor.g, control.Maui.Theme.backgroundColor.b, 0.9))
                 anchors.centerIn: parent
                 width: parent.width
                 height: Maui.Style.rowHeight * 1.5
@@ -117,7 +117,7 @@ Maui.Page
 //        {
 //            width: parent.width
 //            height: 150
-//            color: Kirigami.Theme.backgroundColor
+//            color: Maui.Theme.backgroundColor
 //            visible: _headList.count > 0
 
 //            ListView
