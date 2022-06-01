@@ -4,7 +4,6 @@ import QtQuick.Window 2.15
 
 import Qt.labs.settings 1.0
 
-import org.kde.kirigami 2.7 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 import org.mauikit.filebrowsing 1.3 as FB
 import org.mauikit.accounts 1.0 as MA
@@ -206,7 +205,7 @@ Maui.ApplicationWindow
     {
         id: _drawer
         visible: true
-        preferredWidth: Kirigami.Units.gridUnit * 18
+        preferredWidth: Maui.Style.units.gridUnit * 18
         collapsed : root.width < preferredWidth * 2
         collapsible: true
         dropArea.enabled: false
@@ -272,10 +271,10 @@ Maui.ApplicationWindow
                 id: swipeView
                 anchors.fill: parent
                 maxViews: 3
-                //                interactive: Kirigami.Settings.isMobile
+                //                interactive: Maui.Handy.isMobile
                 floatingFooter: true
                 flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
-                altHeader: Kirigami.Settings.isMobile
+                altHeader: Maui.Handy.isMobile
                 showCSDControls: true
                 //                headBar.forceCenterMiddleContent: isWide
                 headBar.leftContent: Loader
@@ -498,7 +497,7 @@ Maui.ApplicationWindow
 
     function toggleMiniMode()
     {
-        if(Kirigami.Settings.isMobile)
+        if(Maui.Handy.isMobile)
         {
             return
         }

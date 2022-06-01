@@ -2,7 +2,6 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
-import org.kde.kirigami 2.8 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 
 import org.maui.vvave 1.0 as Vvave
@@ -160,7 +159,7 @@ Maui.AltBrowser
         {
             id: _collageDelegate
             anchors.fill: parent
-            anchors.margins: Kirigami.Settings.isMobile ? Maui.Style.space.small : Maui.Style.space.medium
+            anchors.margins: Maui.Handy.isMobile ? Maui.Style.space.small : Maui.Style.space.medium
             orientation: Qt.Vertical
             imageWidth: 120
             imageHeight: 120

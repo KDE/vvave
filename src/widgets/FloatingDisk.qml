@@ -3,7 +3,6 @@ import QtQuick.Controls 2.10
 
 import QtGraphicalEffects 1.0
 
-import org.kde.kirigami 2.7 as Kirigami
 import org.mauikit.controls 1.0 as Maui
 
 Item
@@ -23,7 +22,7 @@ Item
 
     ToolTip.delay: 1000
     ToolTip.timeout: 5000
-    ToolTip.visible: _mouseArea.containsMouse && !Kirigami.Settings.isMobile
+    ToolTip.visible: _mouseArea.containsMouse && !Maui.Handy.isMobile
     ToolTip.text: root.title
 
     Component.onCompleted:
