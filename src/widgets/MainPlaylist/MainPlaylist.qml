@@ -3,7 +3,7 @@ import QtQml 2.14
 
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.14
- import QtGraphicalEffects 1.15
+import QtGraphicalEffects 1.15
 
 import org.kde.kirigami 2.8 as Kirigami
 import org.mauikit.controls 1.3 as Maui
@@ -19,7 +19,7 @@ Maui.Page
 {
     id: control
     flickable: table.flickable
-    title: i18n("Playlist")
+    //    title: i18n("Playlist")
     showTitle: true
 
     Maui.Theme.colorSet: Maui.Theme.Window
@@ -36,9 +36,9 @@ Maui.Page
         opacity: 0.2
 
         Behavior on color
-                {
-                    Maui.ColorTransition{}
-                }
+        {
+            Maui.ColorTransition{}
+        }
     }
 
     headBar.background: null
@@ -73,9 +73,9 @@ Maui.Page
             opacity: 0.2
 
             Behavior on color
-                    {
-                        Maui.ColorTransition{}
-                    }
+            {
+                Maui.ColorTransition{}
+            }
         }
 
         Binding on currentIndex
@@ -98,71 +98,68 @@ Maui.Page
         {
             width: parent.width
 
-
-            Rectangle
+            Loader
             {
-                width: parent.width
+                width: visible ? parent.width : 0
                 height: width
-color: Maui.Theme.highlightColor
-                Image
+
+                asynchronous: true
+                active: !focusView
+                visible: active
+                sourceComponent: Item
                 {
-                    id: _image
-                    width: Math.min(parent.width, parent.height) * 0.9
-                    height: width
-                    anchors.centerIn: parent
-
-                    sourceSize.width: 200
-
-                    fillMode: Image.PreserveAspectFit
-                    antialiasing: false
-                    smooth: true
-                    asynchronous: true
-
-                    source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album || "image://artwork/artist:"+currentTrack.artist
-
-                    onStatusChanged:
+                    //                color: Maui.Theme.highlightColor
+                    id: _imgHeader
+                    Maui.GalleryRollTemplate
                     {
-                        if (status == Image.Error)
-                            source = "qrc:/assets/cover.png";
+                        id: _image
+                        anchors.fill: parent
+                        anchors.margins: Maui.Style.space.medium
+                        radius: Maui.Style.radiusV
+                        interactive: true
+                        fillMode: Image.PreserveAspectCrop
+
+                        images: ["image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album, "image://artwork/artist:"+currentTrack.artist]
+
                     }
                 }
             }
 
 
             Rectangle
-        {
-            visible: root.sync
-            Maui.Theme.inherit: false
-            Maui.Theme.colorSet:Maui.Theme.Complementary
-            z: table.z + 999
-            width: parent.width
-            height: visible ?  Maui.Style.rowHeightAlt : 0
-            color: Maui.Theme.backgroundColor
-
-            RowLayout
             {
-                anchors.fill: parent
-                anchors.leftMargin: Maui.Style.space.small
-                Label
-                {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    anchors.margins: Maui.Style.space.small
-                    text: i18n("Syncing to ") + root.syncPlaylist
-                }
+                visible: root.sync
+                Maui.Theme.inherit: false
+                Maui.Theme.colorSet:Maui.Theme.Complementary
+                z: table.z + 999
+                width: parent.width
+                height: visible ?  Maui.Style.rowHeightAlt : 0
+                color: Maui.Theme.backgroundColor
 
-                ToolButton
+                RowLayout
                 {
-                    Layout.fillHeight: true
-                    icon.name: "dialog-close"
-                    onClicked:
+                    anchors.fill: parent
+                    anchors.leftMargin: Maui.Style.space.small
+                    Label
                     {
-                        root.sync = false
-                        root.syncPlaylist = ""
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        anchors.margins: Maui.Style.space.small
+                        text: i18n("Syncing to ") + root.syncPlaylist
+                    }
+
+                    ToolButton
+                    {
+                        Layout.fillHeight: true
+                        icon.name: "dialog-close"
+                        onClicked:
+                        {
+                            root.sync = false
+                            root.syncPlaylist = ""
+                        }
                     }
                 }
             }
-        }
         }
 
         delegate: TableDelegate

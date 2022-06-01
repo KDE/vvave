@@ -69,6 +69,15 @@ Maui.StackView
                 }
             }
 
+            section.property: browser.model.sort
+            section.criteria: ViewSection.FirstCharacter
+            section.delegate: Maui.LabelDelegate
+            {
+                isSection: true
+                width: ListView.view.width
+                label: String(section)
+            }
+
             delegate: Maui.ListBrowserDelegate
             {
                 width: ListView.view.width
@@ -76,7 +85,7 @@ Maui.StackView
                 isCurrentItem: ListView.isCurrentItem
                 iconSizeHint: Maui.Style.iconSizes.medium
                 label1.text: model.label
-                label2.text: model.path
+                label2.text: model.path.replace("file://", "")
                 label2.wrapMode: Text.Wrap
                 iconSource: model.icon
 

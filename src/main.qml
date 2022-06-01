@@ -205,7 +205,7 @@ Maui.ApplicationWindow
     {
         id: _drawer
         visible: true
-        preferredWidth: Maui.Style.units.gridUnit * 18
+        preferredWidth: Maui.Style.units.gridUnit * 16
         collapsed : root.width < preferredWidth * 2
         collapsible: true
         dropArea.enabled: false

@@ -264,38 +264,13 @@ Maui.Page
 
         section.property: control.group ? control.listModel.sort : ""
         section.criteria: control.listModel.sort === "title" ?  ViewSection.FirstCharacter : ViewSection.FullString
-        section.delegate: Item
+        section.delegate: Maui.LabelDelegate
         {
+            isSection: true
             width: ListView.view.width
-            implicitHeight: Maui.Style.rowHeight*2.5
+//            iconSource: "view-media-artist"
+            label: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.Handy.formatDate(Date(section), "MM/dd/yyyy") : String(section)
 
-            Rectangle
-            {
-                color: Qt.tint(control.Maui.Theme.textColor, Qt.rgba(control.Maui.Theme.backgroundColor.r, control.Maui.Theme.backgroundColor.g, control.Maui.Theme.backgroundColor.b, 0.95))
-                anchors.centerIn: parent
-                width: parent.width
-                height: Maui.Style.rowHeight * 1.5
-
-                radius: Maui.Style.radiusV
-                Behavior on color
-                        {
-                            Maui.ColorTransition{}
-                        }
-
-                Maui.ListItemTemplate
-                {
-
-                    maskRadius: Maui.Style.radiusV
-                    label1.text: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.Handy.formatDate(Date(section), "MM/dd/yyyy") : String(section)
-
-                    label1.font.pointSize: Maui.Style.fontSizes.big
-                    label1.font.bold: true
-                    label1.font.weight: Font.Bold
-                    anchors.fill: parent
-                    iconSource: "view-media-artist"
-                    imageSource: control.listModel.sort === "artist" ? "image://artwork/artist:"+ section : ""
-                }
-            }
         }
 
         model: Maui.BaseModel

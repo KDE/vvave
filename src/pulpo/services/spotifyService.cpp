@@ -68,7 +68,7 @@ void spotify::set(const PULPO::REQUEST &request)
     sp_request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
     sp_request.setRawHeader("Authorization", header.toLocal8Bit());
 
-    QNetworkAccessManager *manager = new QNetworkAccessManager;
+    static QNetworkAccessManager *manager = new QNetworkAccessManager;
     QNetworkReply *reply = manager->post(sp_request, "grant_type=client_credentials");
 
     connect(reply, &QNetworkReply::finished, [this, reply, url]() {
