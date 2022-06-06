@@ -125,7 +125,6 @@ Maui.Page
                 }
             }
 
-
             Rectangle
             {
                 visible: root.sync

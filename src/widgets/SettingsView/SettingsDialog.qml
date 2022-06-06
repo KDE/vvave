@@ -103,7 +103,7 @@ Maui.SettingsDialog
             Switch
             {
                 Layout.fillHeight: true
-                checked: Maui.App.styleType === Maui.Style.Dark
+                checked: Maui.Style.styleType === Maui.Style.Dark
                 onToggled:
                 {
                      settings.darkMode = !settings.darkMode

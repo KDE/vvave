@@ -25,7 +25,8 @@ Maui.ApplicationWindow
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
     headBar.visible: false
     
-    Maui.Style.styleType: focusView ? Maui.Style.Adaptive : (settings.darkMode ? Maui.Style.Dark : Maui.Style.Light)
+//    Maui.Style.styleType: focusView ? Maui.Style.Adaptive : (settings.darkMode ? Maui.Style.Dark : Maui.Style.Light)
+    Maui.Style.styleType: focusView ? Maui.Style.Adaptive : undefined
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
     readonly property int preferredMiniModeSize: 200
