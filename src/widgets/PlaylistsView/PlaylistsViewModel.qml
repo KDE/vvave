@@ -88,7 +88,7 @@ Maui.AltBrowser
         Layout.maximumWidth: 500
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignCenter
-        placeholderText: i18np("Filter", "Filter %1 tags", control.list.count)
+        placeholderText: i18np("Filter", "Filter %1 tags", control.count)
         onAccepted: _playlistsModel.filter = text
         onCleared: _playlistsModel.filter = ""
     }
@@ -116,6 +116,13 @@ Maui.AltBrowser
         label1.horizontalAlignment: Qt.AlignLeft
         label2.horizontalAlignment: Qt.AlignLeft
         iconSource: model.icon
+
+        template.iconComponent:  Maui.GalleryRollTemplate
+        {
+            orientation: Qt.Horizontal
+            radius: Maui.Style.radiusV
+            images: model.preview.split(",")
+        }
 
         onClicked :
         {

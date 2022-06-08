@@ -104,7 +104,7 @@ Maui.Page
                 height: width
 
                 asynchronous: true
-                active: !focusView
+                active: !focusView && control.height > control.width*3
                 visible: active
                 sourceComponent: Item
                 {
