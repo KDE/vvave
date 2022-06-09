@@ -240,6 +240,7 @@ Maui.Page
         holder.visible: control.listModel.list.count === 0
         enableLassoSelection: true
         selectionMode: root.selectionMode
+        currentIndex: -1
 
         onItemsSelected:
         {
@@ -268,7 +269,7 @@ Maui.Page
         {
             isSection: true
             width: ListView.view.width
-//            iconSource: "view-media-artist"
+            //            iconSource: "view-media-artist"
             label: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.Handy.formatDate(Date(section), "MM/dd/yyyy") : String(section)
 
         }
@@ -330,6 +331,7 @@ Maui.Page
                 height: Maui.Style.iconSizes.small
                 width: height
                 source: parent.icon.name
+                color: delegate.label1.color
             }
 
             opacity: delegate.hovered ? 0.8 : 0.6

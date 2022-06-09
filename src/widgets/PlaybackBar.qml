@@ -18,7 +18,7 @@ T.Control
 {
     id: control
     implicitHeight: visible ? implicitContentHeight : 0
-    readonly property alias image : artworkBg    
+    readonly property alias image : artworkBg
 
     background: Item
     {
@@ -50,14 +50,13 @@ T.Control
                 color: Maui.Theme.backgroundColor
                 opacity: 0.8
                 Behavior on color
-                        {
-                            Maui.ColorTransition{}
-                        }
-
+                {
+                    Maui.ColorTransition{}
+                }
             }
         }
 
-        Kirigami.Separator
+        Maui.Separator
         {
             height: 0.5
             weight: Kirigami.Separator.Weight.Light
@@ -65,9 +64,9 @@ T.Control
             anchors.left: parent.left
             anchors.right: parent.right
             Behavior on color
-                    {
-                        Maui.ColorTransition{}
-                    }
+            {
+                Maui.ColorTransition{}
+            }
 
         }
     }
@@ -100,9 +99,9 @@ T.Control
                 color: "transparent"
                 opacity: progressBar.pressed ? 0.5 : 1
                 Behavior on color
-                        {
-                            Maui.ColorTransition{}
-                        }
+                {
+                    Maui.ColorTransition{}
+                }
 
                 Rectangle
                 {
@@ -110,9 +109,9 @@ T.Control
                     height: progressBar.pressed ? 5 :  2
                     color: Maui.Theme.highlightColor
                     Behavior on color
-                            {
-                                Maui.ColorTransition{}
-                            }
+                    {
+                        Maui.ColorTransition{}
+                    }
 
                 }
             }
@@ -127,9 +126,9 @@ T.Control
                 implicitHeight: 16
                 color: progressBar.pressed ? Qt.lighter(Maui.Theme.highlightColor, 1.2) : "transparent"
                 Behavior on color
-                        {
-                            Maui.ColorTransition{}
-                        }
+                {
+                    Maui.ColorTransition{}
+                }
 
             }
         }
@@ -153,46 +152,46 @@ T.Control
         }
 
 
-//            ToolButton
-//        {
-//            icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
-//            onPressAndHold :
-//            {
-//                player.volume = player.volume === 0 ? 100 : 0
-//            }
+        //            ToolButton
+        //        {
+        //            icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
+        //            onPressAndHold :
+        //            {
+        //                player.volume = player.volume === 0 ? 100 : 0
+        //            }
 
-//            onClicked:
-//            {
-//                _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
-//            }
+        //            onClicked:
+        //            {
+        //                _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
+        //            }
 
-//            Popup
-//            {
-//                id: _sliderPopup
-//                height: 150
-//                width: parent.width
-//                y: -150
-//                x: 0
+        //            Popup
+        //            {
+        //                id: _sliderPopup
+        //                height: 150
+        //                width: parent.width
+        //                y: -150
+        //                x: 0
 
-//                Slider
-//                {
-//                    id: _volumeSlider
-//                    visible: true
-//                    height: parent.height
-//                    width: 20
-//                    anchors.horizontalCenter: parent.horizontalCenter
-//                    from: 0
-//                    to: 100
-//                    value: player.volume
-//                    orientation: Qt.Vertical
+        //                Slider
+        //                {
+        //                    id: _volumeSlider
+        //                    visible: true
+        //                    height: parent.height
+        //                    width: 20
+        //                    anchors.horizontalCenter: parent.horizontalCenter
+        //                    from: 0
+        //                    to: 100
+        //                    value: player.volume
+        //                    orientation: Qt.Vertical
 
-//                    onMoved:
-//                    {
-//                        player.volume = value
-//                    }
-//                }
-//            }
-//        }
+        //                    onMoved:
+        //                    {
+        //                        player.volume = value
+        //                    }
+        //                }
+        //            }
+        //        }
 
         middleContent: [
 
@@ -200,7 +199,7 @@ T.Control
             {
                 Layout.alignment: Qt.AlignCenter
 
-//                implicitHeight: Maui.Style.iconSizes.big
+                //                implicitHeight: Maui.Style.iconSizes.big
                 expanded: true
                 autoExclusive: false
                 checkable: false
@@ -215,8 +214,8 @@ T.Control
                 {
                     id: playIcon
                     text: i18n("Play and pause")
-//                    icon.width: Maui.Style.iconSizes.big
-//                    icon.height: Maui.Style.iconSizes.big
+                    //                    icon.width: Maui.Style.iconSizes.big
+                    //                    icon.height: Maui.Style.iconSizes.big
                     enabled: currentTrackIndex >= 0
                     icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
                     onTriggered: player.playing ? player.pause() : player.play()
