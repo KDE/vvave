@@ -235,6 +235,7 @@ Maui.Page
 
                     Kirigami.Icon
                     {
+                        color: delegate.label1.color
                         anchors.centerIn: parent
                         height: Maui.Style.iconSizes.small
                         width: height

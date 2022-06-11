@@ -50,7 +50,7 @@ Maui.SettingsDialog
             {
                 id: _titleField
                 text: control.data.title
-                Layout.fillWidth: true
+                implicitWidth: parent.parent.width
             }
         }
 
@@ -65,7 +65,7 @@ Maui.SettingsDialog
             {
                 id: _artistField
                 text: control.data.artist
-                Layout.fillWidth: true
+                implicitWidth: parent.parent.width
             }
         }
 
@@ -79,7 +79,7 @@ Maui.SettingsDialog
             {
                 id: _albumField
                 text: control.data.album
-                Layout.fillWidth: true
+                implicitWidth: parent.parent.width
             }
         }
 
@@ -93,7 +93,7 @@ Maui.SettingsDialog
             {
                 id: _trackField
                 text: control.data.track
-                Layout.fillWidth: true
+                implicitWidth: parent.parent.width
             }
         }
 
@@ -107,7 +107,7 @@ Maui.SettingsDialog
             {
                 id: _genreField
                 text: control.data.genre
-                Layout.fillWidth: true
+                implicitWidth: parent.parent.width
             }
         }
 
@@ -121,7 +121,7 @@ Maui.SettingsDialog
             {
                 id: _yearField
                 text: control.data.releasedate
-                Layout.fillWidth: true
+                implicitWidth: parent.parent.width
             }
         }
 
@@ -135,7 +135,7 @@ Maui.SettingsDialog
             {
                 id: _commentField
                 text: control.data.comment
-                Layout.fillWidth: true
+                implicitWidth: parent.parent.width
             }
         }
     }
