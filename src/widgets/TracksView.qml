@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.3
 
 import org.mauikit.controls 1.3 as Maui
 import org.maui.vvave 1.0 as Vvave
@@ -49,29 +50,27 @@ BabeTable
         width: parent.width
         spacing: Maui.Style.space.big
 
-        Column
+        Maui.SettingsSection
         {
             visible: _recentTracksList.count
             width: parent.width
-            spacing: Maui.Style.space.medium
+            title: i18n("Popular Tracks")
+            description: i18n("Play them again.")
 
-            Maui.SectionDropDown
-            {
-                width: parent.width
-                label1.text: i18n("Popular Tracks")
-                label2.text: i18n("Play them again.")
-            }
-
-            Maui.ListBrowser
+            Maui.GridView
             {
                 id: _recentTracksList
                 verticalScrollBarPolicy: ScrollBar.AlwaysOff
                 //                horizontalScrollBarPolicy:  ScrollBar.AlwaysOff
                 currentIndex: -1
-                height: 140
-                width: parent.width
-                orientation: ListView.Horizontal
-                spacing: Maui.Style.space.medium
+                Layout.fillWidth: true
+                Layout.preferredHeight: 220
+                flickable.flow: GridView.FlowTopToBottom
+                //                Layout.preferredHeight:140
+                itemSize: 160
+                itemHeight: 70
+                //                orientation: ListView.Horizontal
+                //                spacing: Maui.Style.space.medium
                 model: Maui.BaseModel
                 {
                     id: _recentModel
@@ -93,30 +92,29 @@ BabeTable
 
                 delegate: Item
                 {
-                    height: ListView.view.height
-                    width: height+40
+                    height: GridView.view.cellHeight
+                    width: GridView.view.cellWidth
 
-                    Maui.GridBrowserDelegate
+                    Maui.ListBrowserDelegate
                     {
                         id: _template
                         anchors.fill: parent
-
+anchors.margins: Maui.Style.space.small
                         //                        isCurrentItem: parent.ListView.isCurrentItem
                         maskRadius: radius
                         label1.text: model.title
                         label2.text: model.artist
-
                         imageSource: "image://artwork/album:"+ model.artist+":"+model.album
-
+iconVisible: true
                         label1.font.bold: true
                         label1.font.weight: Font.Bold
                         iconSource: "media-album-cover"
                         //                        template.imageSizeHint: 100
-                        template.labelSizeHint: 32
+//                        template.labelSizeHint: 32
                         template.fillMode: Image.PreserveAspectFit
-                        template.alignment: Qt.AlignLeft
-                        template.imageSizeHint: height - 32
-                        flat: true
+//                        template.alignment: Qt.AlignLeft
+//                        template.imageSizeHint: 60
+//                        flat: true
                         onClicked:
                         {
                             _recentTracksList.currentIndex = index
@@ -139,18 +137,14 @@ BabeTable
             }
         }
 
-        Column
+        Maui.SettingsSection
         {
             visible: _playlistsList.count
             width: parent.width
-            spacing: Maui.Style.space.medium
 
-            Maui.SectionDropDown
-            {
-                width: parent.width
-                label1.text: i18n("Playlists")
-                label2.text: i18n("Recent playlists")
-            }
+            title: i18n("Playlists")
+            description: i18n("Recent playlists")
+
 
             Maui.ListBrowser
             {
@@ -167,8 +161,8 @@ BabeTable
 
                 verticalScrollBarPolicy: ScrollBar.AlwaysOff
                 //                horizontalScrollBarPolicy:  ScrollBar.AlwaysOff
-                height: 180
-                width: parent.width
+                Layout.preferredHeight: 180
+                Layout.fillWidth: true
                 orientation: ListView.Horizontal
                 spacing: Maui.Style.space.medium
                 delegate: Item
