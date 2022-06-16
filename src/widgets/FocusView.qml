@@ -4,7 +4,6 @@ import QtQuick.Layouts 1.3
 
 import QtGraphicalEffects 1.0
 
-import org.kde.kirigami 2.14 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 import org.mauikit.filebrowsing 1.3 as FB
 
@@ -642,7 +641,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                     Layout.alignment: Qt.AlignHCenter
                     spacing: Maui.Style.space.medium
 
-                    Kirigami.Icon
+                    Maui.Icon
                     {
                         implicitHeight: Maui.Style.iconSizes.small
                         implicitWidth: implicitHeight
@@ -666,7 +665,7 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                         }
                     }
 
-                    Kirigami.Icon
+                    Maui.Icon
                     {
                         implicitHeight: Maui.Style.iconSizes.small
                         implicitWidth: implicitHeight

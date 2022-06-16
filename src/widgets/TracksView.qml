@@ -94,7 +94,7 @@ BabeTable
                 delegate: Item
                 {
                     height: ListView.view.height
-                    width: height-40
+                    width: height+40
 
                     Maui.GridBrowserDelegate
                     {
@@ -105,14 +105,17 @@ BabeTable
                         maskRadius: radius
                         label1.text: model.title
                         label2.text: model.artist
-                        label1.horizontalAlignment: Qt.AlignLeft
-                        label2.horizontalAlignment: Qt.AlignLeft
+
                         imageSource: "image://artwork/album:"+ model.artist+":"+model.album
+
                         label1.font.bold: true
                         label1.font.weight: Font.Bold
                         iconSource: "media-album-cover"
                         //                        template.imageSizeHint: 100
                         template.labelSizeHint: 32
+                        template.fillMode: Image.PreserveAspectFit
+                        template.alignment: Qt.AlignLeft
+                        template.imageSizeHint: height - 32
                         flat: true
                         onClicked:
                         {
@@ -187,6 +190,9 @@ BabeTable
                         label1.font.bold: true
                         label1.font.weight: Font.Bold
                         template.labelSizeHint: 32
+
+                        template.alignment: Qt.AlignLeft
+                        template.imageSizeHint: height - 32
 
                         onClicked:
                         {

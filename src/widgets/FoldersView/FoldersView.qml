@@ -3,7 +3,6 @@ import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
 import org.mauikit.controls 1.3 as Maui
-import org.kde.kirigami 2.14 as Kirigami
 
 import "../BabeTable"
 import "../../db/Queries.js" as Q
@@ -88,6 +87,7 @@ Maui.StackView
                 label2.text: model.path.replace("file://", "")
                 label2.wrapMode: Text.Wrap
                 iconSource: model.icon
+                template.isMask: true
 
                 onClicked:
                 {

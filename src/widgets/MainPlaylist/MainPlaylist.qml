@@ -5,7 +5,6 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.14
 import QtGraphicalEffects 1.15
 
-import org.kde.kirigami 2.8 as Kirigami
 import org.mauikit.controls 1.3 as Maui
 
 import org.maui.vvave 1.0
@@ -233,7 +232,7 @@ Maui.Page
                         root.playlistManager.remove(index)
                     }
 
-                    Kirigami.Icon
+                    Maui.Icon
                     {
                         color: delegate.label1.color
                         anchors.centerIn: parent

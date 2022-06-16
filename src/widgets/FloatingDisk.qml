@@ -1,5 +1,6 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
+import QtQuick 2.15
+import QtQml 2.15
+import QtQuick.Controls 2.15
 
 import QtGraphicalEffects 1.0
 
@@ -25,11 +26,21 @@ Item
     ToolTip.visible: _mouseArea.containsMouse && !Maui.Handy.isMobile
     ToolTip.text: root.title
 
-    Component.onCompleted:
+
+    Binding on x
     {
-        control.x= root.width - control.implicitWidth - Maui.Style.space.medium
-        control.y= root.height - control.implicitHeight - Maui.Style.space.medium - root.page.footerContainer.implicitHeight
+        value: root.width - control.implicitWidth - Maui.Style.space.medium
+        restoreMode: Binding.RestoreBindingOrValue
+        delayed: true
     }
+
+    Binding on y
+    {
+        value: root.height - control.implicitHeight - Maui.Style.space.medium - root.page.footerContainer.implicitHeight
+        restoreMode: Binding.RestoreBindingOrValue
+        delayed: true
+    }
+
 
     Maui.Badge
     {
@@ -129,7 +140,6 @@ Item
         loops: Animation.Infinite
         running: isPlaying
     }
-
 
     MouseArea
     {

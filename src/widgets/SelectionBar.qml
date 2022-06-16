@@ -4,7 +4,6 @@ import QtQuick.Controls 2.10
 import "../utils/Player.js" as Player
 import "BabeTable"
 
-import org.kde.kirigami 2.7 as Kirigami
 import org.mauikit.controls 1.2 as Maui
 
 Maui.SelectionBar

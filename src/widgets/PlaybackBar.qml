@@ -5,7 +5,6 @@ import QtQuick.Layouts 1.3
 import QtMultimedia 5.0
 import QtGraphicalEffects 1.0
 
-import org.kde.kirigami 2.7 as Kirigami
 
 import org.mauikit.controls 1.3 as Maui
 
@@ -59,7 +58,6 @@ T.Control
         Maui.Separator
         {
             height: 0.5
-            weight: Kirigami.Separator.Weight.Light
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right

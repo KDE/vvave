@@ -118,22 +118,7 @@ Maui.SettingsDialog
     {
         title: i18n("Sources")
         description: i18n("Add or remove sources")
-        lastOne: true
 
-        //        template.template.content: ToolButton
-        //        {
-        //            icon.name: "list-add"
-        //            onClicked:
-        //            {
-        //                _dialogLoader.sourceComponent = _fileDialogComponent
-        //                dialog.settings.onlyDirs = true
-        //                dialog.callback = function(urls)
-        //                {
-        //                    Vvave.addSources(urls)
-        //                }
-        //                dialog.open()
-        //            }
-        //        }
 
         ColumnLayout
         {
