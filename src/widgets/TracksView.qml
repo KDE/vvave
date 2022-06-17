@@ -61,16 +61,14 @@ BabeTable
             {
                 id: _recentTracksList
                 verticalScrollBarPolicy: ScrollBar.AlwaysOff
-                //                horizontalScrollBarPolicy:  ScrollBar.AlwaysOff
+                adaptContent: false
+                horizontalScrollBarPolicy:  ScrollBar.AsNeeded
                 currentIndex: -1
                 Layout.fillWidth: true
                 Layout.preferredHeight: 220
                 flickable.flow: GridView.FlowTopToBottom
-                //                Layout.preferredHeight:140
                 itemSize: 160
                 itemHeight: 70
-                //                orientation: ListView.Horizontal
-                //                spacing: Maui.Style.space.medium
                 model: Maui.BaseModel
                 {
                     id: _recentModel
@@ -99,22 +97,16 @@ BabeTable
                     {
                         id: _template
                         anchors.fill: parent
-anchors.margins: Maui.Style.space.small
-                        //                        isCurrentItem: parent.ListView.isCurrentItem
+                        anchors.margins: Maui.Style.space.small
                         maskRadius: radius
                         label1.text: model.title
                         label2.text: model.artist
                         imageSource: "image://artwork/album:"+ model.artist+":"+model.album
-iconVisible: true
+                        iconVisible: true
                         label1.font.bold: true
                         label1.font.weight: Font.Bold
                         iconSource: "media-album-cover"
-                        //                        template.imageSizeHint: 100
-//                        template.labelSizeHint: 32
                         template.fillMode: Image.PreserveAspectFit
-//                        template.alignment: Qt.AlignLeft
-//                        template.imageSizeHint: 60
-//                        flat: true
                         onClicked:
                         {
                             _recentTracksList.currentIndex = index

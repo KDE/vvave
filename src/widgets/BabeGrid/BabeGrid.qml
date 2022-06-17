@@ -165,8 +165,8 @@ Maui.AltBrowser
         {
             id: _template
             anchors.centerIn: parent
-            width: control.gridView.itemSize - Maui.Style.space.medium
-            height:control.gridView.itemHeight  - Maui.Style.space.medium
+            width: control.gridView.itemSize - Maui.Style.space.big
+            height: control.gridView.itemHeight  - Maui.Style.space.big
 
             isCurrentItem: parent.GridView.isCurrentItem
             maskRadius: radius
@@ -177,7 +177,7 @@ Maui.AltBrowser
             label1.font.weight: Font.Bold
             iconSource: "media-album-cover"
             template.labelSizeHint: 40
-            template.alignment: Qt.AlignLeft
+//            template.alignment: Qt.AlignLeft
 
             onClicked:
             {
