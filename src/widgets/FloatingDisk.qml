@@ -36,7 +36,7 @@ Item
 
     Binding on y
     {
-        value: root.height - control.implicitHeight - Maui.Style.space.medium - root.page.footerContainer.implicitHeight
+        value: root.height - control.implicitHeight - Maui.Style.space.medium - _mainPage.footerContainer.implicitHeight
         restoreMode: Binding.RestoreBindingOrValue
         delayed: true
     }

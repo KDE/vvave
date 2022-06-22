@@ -44,9 +44,9 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
 
         ToolButton
         {
-            icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
-            checked: _drawer.visible
-            onClicked: _drawer.toggle()
+            icon.name:  _sideBarView.sideBar.visible ? "sidebar-collapse" : "sidebar-expand"
+            checked:  _sideBarView.sideBar.visible
+            onClicked:  _sideBarView.sideBar.toggle()
         }
     ]
 

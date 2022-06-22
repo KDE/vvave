@@ -133,10 +133,10 @@ T.Control
 
         farLeftContent: ToolButton
         {
-            icon.name: _drawer.visible ? "sidebar-collapse" : "sidebar-expand"
-            onClicked: _drawer.toggle()
+            icon.name: _sideBarView.sideBar.visible ? "sidebar-collapse" : "sidebar-expand"
+            onClicked:  _sideBarView.sideBar.toggle()
 
-            checked: _drawer.visible
+            checked:  _sideBarView.sideBar.visible
             ToolTip.delay: 1000
             ToolTip.timeout: 5000
             ToolTip.visible: hovered

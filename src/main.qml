@@ -23,7 +23,6 @@ Maui.ApplicationWindow
 {
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
-    headBar.visible: false
     
     Maui.Style.styleType: focusView ? Maui.Style.Adaptive :  (Maui.Handy.isAndroid ? settings.darkMode ? Maui.Style.Dark : Maui.Style.Light : undefined)
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
@@ -201,255 +200,254 @@ Maui.ApplicationWindow
         }
     }
 
-    sideBar: Maui.AbstractSideBar
+    Maui.SideBarView
     {
-        id: _drawer
-        visible: true
-        preferredWidth: Maui.Style.units.gridUnit * 16
-        collapsed : root.width < preferredWidth * 2
-        collapsible: true
-        dropArea.enabled: false
-        onContentDropped:
+
+        id: _sideBarView
+        sideBar.preferredWidth: Maui.Style.units.gridUnit * 16
+
+        sideBarContent: Item
         {
-            if(drop.urls)
-            {
-                var urls = drop.urls.join(",")
-                Player.appendUrls(urls.split(","))
-            }
-        }
-
-        background: null
-
-        Loader
-        {
-            id: _mainPlaylistLoader
-            anchors.fill: parent
-
-            asynchronous: true
-            sourceComponent: MainPlaylist {}
-            onLoaded:
-            {
-                const tracks = Vvave.pendingTracks()
-                Player.appendTracksAt(tracks, 0)
-                Player.playAt(0)
-            }
-        }
-    }
-
-    footer: Loader
-    {
-        id: _playbackBarLoader
-        asynchronous: true
-        width: parent.width
-        visible: _viewsPage.visible
-        active: visible
-        sourceComponent: PlaybackBar {}
-    }
-
-    Maui.StackView
-    {
-        id: _stackView
-        focus: true
-        anchors.fill: parent
-        initialItem: _focusViewComponent
-
-        Component.onCompleted:
-        {
-            if(!settings.focusViewDefault)
-            {
-                toggleFocusView()
-            }
-        }
-
-        Item
-        {
-            id: _viewsPage
-            visible: StackView.status === StackView.Active
-
-            Maui.AppViews
-            {
-                id: swipeView
-                anchors.fill: parent
-                maxViews: 3
-                //                interactive: Maui.Handy.isMobile
-                floatingFooter: true
-                flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
-                altHeader: Maui.Handy.isMobile
-                showCSDControls: true
-                //                headBar.forceCenterMiddleContent: isWide
-                headBar.leftContent: Loader
-                {
-                    asynchronous: true
-
-                    sourceComponent: Maui.ToolButtonMenu
-                    {
-                        icon.name: "application-menu"
-
-                        MA.AccountsMenuItem{}
-
-                        MenuItem
-                        {
-                            text: i18n("Settings")
-                            icon.name: "settings-configure"
-                            onTriggered: openSettingsDialog()
-                        }
-
-                        MenuItem
-                        {
-                            text: i18n("About")
-                            icon.name: "documentinfo"
-                            onTriggered: root.about()
-                        }
-                    }
-                }
-
-                footer: SelectionBar
-                {
-                    id: _selectionBar
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
-
-                    maxListHeight: swipeView.height - Maui.Style.space.medium
-                    display: ToolButton.IconOnly
-
-                    onExitClicked:
-                    {
-                        root.selectionMode = false
-                        clear()
-                    }
-
-                    onVisibleChanged:
-                    {
-                        if(!visible)
-                        {
-                            root.selectionMode = false
-                        }
-                    }
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Songs")
-                    Maui.AppView.iconName: "view-media-track"
-
-                    TracksView
-                    {
-                        Component.onCompleted:
-                        {
-                            if(settings.autoScan)
-                            {
-                                Vvave.rescan()
-                            }
-                        }
-                    }
-                }
-
-                Maui.AppViewLoader
-                {
-                    id: _albumsViewLoader
-
-                    Maui.AppView.title: i18n("Albums")
-                    Maui.AppView.iconName: "view-media-album-cover"
-
-                    property var pendingAlbum : ({})
-
-                    AlbumsView
-                    {
-                        holder.title : i18n("No Albums!")
-                        holder.body: i18n("Add new music sources")
-                        list.query: Albums.ALBUMS
-
-                        Component.onCompleted:
-                        {
-                            if(Object.keys(_albumsViewLoader.pendingAlbum).length)
-                            {
-                                console.log("POPULATE ALBUMS",_albumsViewLoader.pendingAlbum.artist, _albumsViewLoader.pendingAlbum.album )
-                                populateTable(_albumsViewLoader.pendingAlbum.album, _albumsViewLoader.pendingAlbum.artist)
-                            }
-                        }
-                    }
-                }
-
-                Maui.AppViewLoader
-                {
-                    id: _artistViewLoader
-                    Maui.AppView.title: i18n("Artists")
-                    Maui.AppView.iconName: "view-media-artist"
-
-                    property string pendingArtist
-
-                    AlbumsView
-                    {
-                        holder.title : i18n("No Artists!")
-                        holder.body: i18n("Add new music sources")
-                        list.query : Albums.ARTISTS
-
-                        Component.onCompleted:
-                        {
-                            if(_artistViewLoader.pendingArtist.length)
-                            {
-                                populateTable(undefined, _artistViewLoader.pendingArtist)
-
-                            }
-                        }
-                    }
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Tags")
-                    Maui.AppView.iconName: "tag"
-                    PlaylistsView {}
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Folders")
-                    Maui.AppView.iconName: "folder"
-
-                    FoldersView {}
-                }
-
-                Maui.AppViewLoader
-                {
-                    Maui.AppView.title: i18n("Cloud")
-                    Maui.AppView.iconName: "folder-cloud"
-
-                    CloudView {}
-                }
-            }
-
+            id: _drawer
+anchors.fill: parent
             Loader
             {
+                id: _mainPlaylistLoader
+                anchors.fill: parent
+
+                asynchronous: true
+                sourceComponent: MainPlaylist {}
+                onLoaded:
+                {
+                    const tracks = Vvave.pendingTracks()
+                    Player.appendTracksAt(tracks, 0)
+                    Player.playAt(0)
+                }
+            }
+        }
+
+        Maui.Page
+        {
+id: _mainPage
+            anchors.fill: parent
+            headBar.visible: false
+
+            footer: Loader
+            {
+                id: _playbackBarLoader
+                asynchronous: true
                 width: parent.width
-                anchors.bottom: parent.bottom
-                active: Vvave.scanning
-                visible: active
-                sourceComponent: Maui.ProgressIndicator {}
+                visible: _viewsPage.visible
+                active: visible
+                sourceComponent: PlaybackBar {}
             }
-        }
 
-        Loader
-        {
-            id: _focusViewComponent
-            visible: StackView.status === StackView.Active
-            active: StackView.status === StackView.Active || item
-
-            FocusView
+            Maui.StackView
             {
+                id: _stackView
+                focus: true
                 anchors.fill: parent
-                showCSDControls: settings.focusViewDefault
-            }
-        }
+                initialItem: _focusViewComponent
 
-        Loader
-        {
-            id: _miniModeComponent
-            visible: active
-            active: StackView.status === StackView.Active
-            MiniMode
-            {
-                anchors.fill: parent
+                Component.onCompleted:
+                {
+                    if(!settings.focusViewDefault)
+                    {
+                        toggleFocusView()
+                    }
+                }
+
+                Item
+                {
+                    id: _viewsPage
+                    visible: StackView.status === StackView.Active
+
+                    Maui.AppViews
+                    {
+                        id: swipeView
+                        anchors.fill: parent
+                        maxViews: 3
+                        //                interactive: Maui.Handy.isMobile
+                        floatingFooter: true
+                        flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
+                        altHeader: Maui.Handy.isMobile
+                        showCSDControls: true
+                        //                headBar.forceCenterMiddleContent: isWide
+                        headBar.leftContent: Loader
+                        {
+                            asynchronous: true
+
+                            sourceComponent: Maui.ToolButtonMenu
+                            {
+                                icon.name: "application-menu"
+
+                                MA.AccountsMenuItem{}
+
+                                MenuItem
+                                {
+                                    text: i18n("Settings")
+                                    icon.name: "settings-configure"
+                                    onTriggered: openSettingsDialog()
+                                }
+
+                                MenuItem
+                                {
+                                    text: i18n("About")
+                                    icon.name: "documentinfo"
+                                    onTriggered: root.about()
+                                }
+                            }
+                        }
+
+                        footer: SelectionBar
+                        {
+                            id: _selectionBar
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+
+                            maxListHeight: swipeView.height - Maui.Style.space.medium
+                            display: ToolButton.IconOnly
+
+                            onExitClicked:
+                            {
+                                root.selectionMode = false
+                                clear()
+                            }
+
+                            onVisibleChanged:
+                            {
+                                if(!visible)
+                                {
+                                    root.selectionMode = false
+                                }
+                            }
+                        }
+
+                        Maui.AppViewLoader
+                        {
+                            Maui.AppView.title: i18n("Songs")
+                            Maui.AppView.iconName: "view-media-track"
+
+                            TracksView
+                            {
+                                Component.onCompleted:
+                                {
+                                    if(settings.autoScan)
+                                    {
+                                        Vvave.rescan()
+                                    }
+                                }
+                            }
+                        }
+
+                        Maui.AppViewLoader
+                        {
+                            id: _albumsViewLoader
+
+                            Maui.AppView.title: i18n("Albums")
+                            Maui.AppView.iconName: "view-media-album-cover"
+
+                            property var pendingAlbum : ({})
+
+                            AlbumsView
+                            {
+                                holder.title : i18n("No Albums!")
+                                holder.body: i18n("Add new music sources")
+                                list.query: Albums.ALBUMS
+
+                                Component.onCompleted:
+                                {
+                                    if(Object.keys(_albumsViewLoader.pendingAlbum).length)
+                                    {
+                                        console.log("POPULATE ALBUMS",_albumsViewLoader.pendingAlbum.artist, _albumsViewLoader.pendingAlbum.album )
+                                        populateTable(_albumsViewLoader.pendingAlbum.album, _albumsViewLoader.pendingAlbum.artist)
+                                    }
+                                }
+                            }
+                        }
+
+                        Maui.AppViewLoader
+                        {
+                            id: _artistViewLoader
+                            Maui.AppView.title: i18n("Artists")
+                            Maui.AppView.iconName: "view-media-artist"
+
+                            property string pendingArtist
+
+                            AlbumsView
+                            {
+                                holder.title : i18n("No Artists!")
+                                holder.body: i18n("Add new music sources")
+                                list.query : Albums.ARTISTS
+
+                                Component.onCompleted:
+                                {
+                                    if(_artistViewLoader.pendingArtist.length)
+                                    {
+                                        populateTable(undefined, _artistViewLoader.pendingArtist)
+
+                                    }
+                                }
+                            }
+                        }
+
+                        Maui.AppViewLoader
+                        {
+                            Maui.AppView.title: i18n("Tags")
+                            Maui.AppView.iconName: "tag"
+                            PlaylistsView {}
+                        }
+
+                        Maui.AppViewLoader
+                        {
+                            Maui.AppView.title: i18n("Folders")
+                            Maui.AppView.iconName: "folder"
+
+                            FoldersView {}
+                        }
+
+                        Maui.AppViewLoader
+                        {
+                            Maui.AppView.title: i18n("Cloud")
+                            Maui.AppView.iconName: "folder-cloud"
+
+                            CloudView {}
+                        }
+                    }
+
+                    Loader
+                    {
+                        width: parent.width
+                        anchors.bottom: parent.bottom
+                        active: Vvave.scanning
+                        visible: active
+                        sourceComponent: Maui.ProgressIndicator {}
+                    }
+                }
+
+                Loader
+                {
+                    id: _focusViewComponent
+                    visible: StackView.status === StackView.Active
+                    active: StackView.status === StackView.Active || item
+
+                    FocusView
+                    {
+                        anchors.fill: parent
+                        showCSDControls: settings.focusViewDefault
+                    }
+                }
+
+                Loader
+                {
+                    id: _miniModeComponent
+                    visible: active
+                    active: StackView.status === StackView.Active
+                    MiniMode
+                    {
+                        anchors.fill: parent
+                    }
+                }
             }
         }
     }
