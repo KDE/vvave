@@ -209,7 +209,7 @@ Maui.ApplicationWindow
         sideBarContent: Item
         {
             id: _drawer
-anchors.fill: parent
+            anchors.fill: parent
             Loader
             {
                 id: _mainPlaylistLoader
@@ -228,7 +228,7 @@ anchors.fill: parent
 
         Maui.Page
         {
-id: _mainPage
+            id: _mainPage
             anchors.fill: parent
             headBar.visible: false
 
