@@ -32,6 +32,11 @@ Playlist::PlayMode Playlist::playMode() const
     return m_playMode;
 }
 
+Playlist::RepeatMode Playlist::repeatMode() const
+{
+    return m_repeatMode;
+}
+
 void Playlist::loadLastPlaylist()
 {
     if (!m_model)
@@ -88,6 +93,32 @@ void Playlist::next()
 
     m_previousIndex = m_currentIndex;
 
+    switch(m_repeatMode)
+    {
+
+    case RepeatMode::Repeat:
+    {
+        setCurrentIndex(m_currentIndex);
+        return;
+    }
+
+    case RepeatMode::RepeatOnce:
+    {
+        if(m_repeatFlag == 0)
+        {
+            m_repeatFlag = 1;
+            setCurrentIndex(m_currentIndex);
+            return;
+        }else
+        {
+            m_repeatFlag = 0;
+        }
+        break;
+    }
+    default:
+    case RepeatMode::NoRepeat: break;
+    }
+
     switch(m_playMode)
     {
     case PlayMode::Normal:
@@ -99,12 +130,6 @@ void Playlist::next()
     case PlayMode::Shuffle:
     {
         nextShuffle();
-        break;
-    }
-
-    case PlayMode::Repeat:
-    {
-        setCurrentIndex(m_currentIndex);
         break;
     }
     }
@@ -311,5 +336,14 @@ void Playlist::remove(int index)
     {
         changeCurrentIndex(m_currentIndex-1);
     }
+}
+
+void Playlist::setRepeatMode(Playlist::RepeatMode repeatMode)
+{
+    if (m_repeatMode == repeatMode)
+        return;
+
+    m_repeatMode = repeatMode;
+    emit repeatModeChanged(m_repeatMode);
 }
 

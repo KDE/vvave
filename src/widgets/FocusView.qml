@@ -29,26 +29,26 @@ Maui.Page
     readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
 Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
 
-    headBar.leftContent: [
-        ToolButton
-        {
-            icon.name: _focusStackView.depth === 2 ? "go-previous" : "go-down"
-            onClicked:
-            {
-                if(_focusStackView.depth === 2)
-                    _focusStackView.pop()
-                else
-                    toggleFocusView()
-            }
-        },
+//    headBar.leftContent: [
+//        ToolButton
+//        {
+//            icon.name: _focusStackView.depth === 2 ? "go-previous" : "go-down"
+//            onClicked:
+//            {
+//                if(_focusStackView.depth === 2)
+//                    _focusStackView.pop()
+//                else
+//                    toggleFocusView()
+//            }
+//        },
 
-        ToolButton
-        {
-            icon.name:  _sideBarView.sideBar.visible ? "sidebar-collapse" : "sidebar-expand"
-            checked:  _sideBarView.sideBar.visible
-            onClicked:  _sideBarView.sideBar.toggle()
-        }
-    ]
+//        ToolButton
+//        {
+//            icon.name:  _sideBarView.sideBar.visible ? "sidebar-collapse" : "sidebar-expand"
+//            checked:  _sideBarView.sideBar.visible
+//            onClicked:  _sideBarView.sideBar.toggle()
+//        }
+//    ]
 
     footBar.background: null
     footBar.forceCenterMiddleContent: root.isWide
@@ -548,6 +548,38 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                     {
                         Layout.alignment: Qt.AlignCenter
 
+
+                        ToolButton
+                        {
+                            flat: true
+                            icon.width: Maui.Style.iconSizes.big
+                            icon.height: Maui.Style.iconSizes.big
+
+                            icon.name: switch(playlist.repeatMode)
+                                       {
+                                       case Vvave.Playlist.NoRepeat: return "media-repeat-none"
+                                       case Vvave.Playlist.RepeatOnce: return "media-playlist-repeat-song"
+                                       case Vvave.Playlist.Repeat: return "media-playlist-repeat"
+                                       }
+                            onClicked:
+                            {
+                                switch(playlist.repeatMode)
+                                {
+                                case Vvave.Playlist.NoRepeat:
+                                    playlist.repeatMode = Vvave.Playlist.Repeat
+                                    break
+
+                                case Vvave.Playlist.Repeat:
+                                    playlist.repeatMode = Vvave.Playlist.RepeatOnce
+                                    break
+
+                                case Vvave.Playlist.RepeatOnce:
+                                    playlist.repeatMode = Vvave.Playlist.NoRepeat
+                                    break
+                                }
+                            }
+                        }
+
                         ToolButton
                         {
                             id: babeBtnIcon
@@ -568,39 +600,6 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
 
                         ToolButton
                         {
-                            icon.name: "media-skip-backward"
-                            flat: true
-                            icon.color: Maui.Theme.textColor
-                            icon.width: Maui.Style.iconSizes.big
-                            icon.height: Maui.Style.iconSizes.big
-                            onClicked: Player.previousTrack()
-                        }
-
-                        ToolButton
-                        {
-                            id: playIcon
-                            flat: true
-                            icon.width: Maui.Style.iconSizes.huge
-                            icon.height: Maui.Style.iconSizes.huge
-                            enabled: root.currentTrackIndex >= 0
-                            icon.color: Maui.Theme.textColor
-                            icon.name: player.playing ? "media-playback-pause" : "media-playback-start"
-                            onClicked: player.playing ? player.pause() : player.play()
-                        }
-
-                        ToolButton
-                        {
-                            id: nextBtn
-                            flat: true
-                            icon.color: Maui.Theme.textColor
-                            icon.width: Maui.Style.iconSizes.big
-                            icon.height: Maui.Style.iconSizes.big
-                            icon.name: "media-skip-forward"
-                            onClicked: Player.nextTrack()
-                        }
-
-                        ToolButton
-                        {
                             id: shuffleBtn
                             flat: true
                             icon.width: Maui.Style.iconSizes.big
@@ -610,7 +609,6 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                                        {
                                        case Vvave.Playlist.Normal: return "media-playlist-normal"
                                        case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
-                                       case Vvave.Playlist.Repeat: return "media-playlist-repeat"
                                        }
                             onClicked:
                             {
@@ -621,11 +619,6 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                                     break
 
                                 case Vvave.Playlist.Shuffle:
-                                    playlist.playMode = Vvave.Playlist.Repeat
-                                    break
-
-
-                                case Vvave.Playlist.Repeat:
                                     playlist.playMode = Vvave.Playlist.Normal
                                     break
                                 }

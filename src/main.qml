@@ -95,6 +95,7 @@ Maui.ApplicationWindow
         property bool autoScan: true
         property bool darkMode : true
         property bool focusViewDefault: false
+        property alias sideBarWidth : _sideBarView.sideBar.preferredWidth
     }
 
     Mpris2
@@ -237,7 +238,6 @@ Maui.ApplicationWindow
                 id: _playbackBarLoader
                 asynchronous: true
                 width: parent.width
-                visible: _viewsPage.visible
                 active: visible
                 sourceComponent: PlaybackBar {}
             }
