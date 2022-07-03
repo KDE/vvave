@@ -68,7 +68,7 @@ BabeTable
                 Layout.preferredHeight: 220
                 flickable.flow: GridView.FlowTopToBottom
                 itemSize: 160
-                itemHeight: 70
+                itemHeight: 64
                 model: Maui.BaseModel
                 {
                     id: _recentModel
