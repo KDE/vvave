@@ -77,7 +77,8 @@ T.Control
         background: Slider
         {
             id: progressBar
-            height: 16
+            visible: !focusView
+            height: visible ? 16 : 0
             z: parent.z+1
             padding: 0
             from: 0

@@ -22,33 +22,13 @@ Maui.Page
 
     focus: true
 
-    headBar.visible: true
+    headBar.visible: false
     headBar.background: null
 
     readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
     readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
-Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
+    Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
 
-//    headBar.leftContent: [
-//        ToolButton
-//        {
-//            icon.name: _focusStackView.depth === 2 ? "go-previous" : "go-down"
-//            onClicked:
-//            {
-//                if(_focusStackView.depth === 2)
-//                    _focusStackView.pop()
-//                else
-//                    toggleFocusView()
-//            }
-//        },
-
-//        ToolButton
-//        {
-//            icon.name:  _sideBarView.sideBar.visible ? "sidebar-collapse" : "sidebar-expand"
-//            checked:  _sideBarView.sideBar.visible
-//            onClicked:  _sideBarView.sideBar.toggle()
-//        }
-//    ]
 
     footBar.background: null
     footBar.forceCenterMiddleContent: root.isWide
@@ -130,23 +110,6 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
         }
     }
 
-    headBar.rightContent: ToolButton
-    {
-        icon.name: "documentinfo"
-        checkable: true
-        checked: _focusStackView.depth === 2
-        onClicked:
-        {
-            if(_focusStackView.depth === 2)
-            {
-                _focusStackView.pop()
-            }else
-            {
-                _focusStackView.push(_infoComponent)
-            }
-        }
-    }
-
     Keys.enabled: true
     Keys.onPressed:
     {
@@ -193,9 +156,9 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
         color: Maui.Theme.backgroundColor
         //                        opacity: 0.8
         Behavior on color
-                {
-                    Maui.ColorTransition{}
-                }
+        {
+            Maui.ColorTransition{}
+        }
 
         onColorChanged:
         {
@@ -253,7 +216,21 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
     Component
     {
         id: _infoComponent
-        InfoView {}
+        InfoView
+        {
+            headBar.background: null
+            headBar.leftContent: ToolButton
+            {
+                icon.name: _focusStackView.depth === 2 ? "go-previous" : "go-down"
+                onClicked:
+                {
+                    if(_focusStackView.depth === 2)
+                    {
+                        _focusStackView.pop()
+                    }
+                }
+            }
+        }
     }
 
     Maui.Holder
@@ -265,11 +242,11 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
         body: i18n("Start putting together your playlist.")
     }
 
-    Maui.StackView
+    StackView
     {
         id: _focusStackView
         anchors.fill: parent
-        anchors.margins: Maui.Style.space.big
+         padding: Maui.Style.space.big
         visible: _listView.count > 0
 
         initialItem: Loader
@@ -282,204 +259,159 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
             {
                 anchors.fill: parent
 
-                RowLayout
+                ListView
                 {
+                    id: _listView
                     Layout.fillWidth: true
                     Layout.preferredHeight: width
                     Layout.maximumHeight: 300
 
-                    Item
+
+                    orientation: ListView.Horizontal
+
+                    focus: true
+                    interactive: true
+
+                    currentIndex: root.currentTrackIndex
+                    spacing: 0
+                    cacheBuffer: control.width
+
+                    highlightFollowsCurrentItem: true
+                    highlightMoveDuration: 0
+                    snapMode: ListView.SnapOneItem
+                    model: mainPlaylist.listModel
+                    highlightRangeMode:ListView.ApplyRange
+
+                    keyNavigationEnabled: true
+                    keyNavigationWraps : true
+
+                    onMovementEnded:
                     {
-                        Layout.fillHeight: true
-                        Layout.preferredWidth: Maui.Style.iconSizes.big
-
-                        Rectangle
-                        {
-                            visible: (_listView.currentIndex > 0) && (_listView.count > 1)
-
-                            height: Maui.Style.iconSizes.tiny
-                            width : height
-
-                            radius: height
-
-                            color: Maui.Theme.textColor
-                            opacity: 0.4
-
-                            anchors.bottom: parent.bottom
-                        }
+                        var index = indexAt(contentX, contentY)
+                        if(index !== root.currentTrackIndex && index >= 0)
+                            Player.playAt(index)
                     }
 
-                    ListView
+                    delegate: ColumnLayout
                     {
-                        id: _listView
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
+                        id: _delegate
+                        height: ListView.view.height
+                        width: ListView.view.width
+                        spacing: Maui.Style.space.huge
+                        property bool isCurrentItem : ListView.isCurrentItem
 
-                        orientation: ListView.Horizontal
-
-                        focus: true
-                        interactive: true
-
-                        currentIndex: root.currentTrackIndex
-                        spacing: 0
-                        cacheBuffer: control.width
-
-                        highlightFollowsCurrentItem: true
-                        highlightMoveDuration: 0
-                        snapMode: ListView.SnapOneItem
-                        model: mainPlaylist.listModel
-                        highlightRangeMode:ListView.ApplyRange
-
-                        keyNavigationEnabled: true
-                        keyNavigationWraps : true
-
-                        onMovementEnded:
+                        Item
                         {
-                            var index = indexAt(contentX, contentY)
-                            if(index !== root.currentTrackIndex && index >= 0)
-                                Player.playAt(index)
-                        }
+                            Layout.fillHeight: true
+                            Layout.maximumWidth: 300
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignCenter
+                            //                                width: Math.min(parent.width, 300)
 
-                        delegate: ColumnLayout
-                        {
-                            id: _delegate
-                            height: ListView.view.height
-                            width: ListView.view.width
-                            spacing: Maui.Style.space.huge
-                            property bool isCurrentItem : ListView.isCurrentItem
+                            //                                anchors.centerIn: parent
 
-                            Item
+                            Rectangle
                             {
-                                Layout.fillHeight: true
-                                Layout.maximumWidth: 300
-                                Layout.fillWidth: true
-                                Layout.alignment: Qt.AlignCenter
-                                //                                width: Math.min(parent.width, 300)
+                                id: _bg
+                                width: _image.width + Maui.Style.space.medium
+                                height: width
+                                anchors.centerIn: parent
+                                radius: Maui.Style.radiusV
+                                color: "#fafafa"
+                            }
 
-                                //                                anchors.centerIn: parent
+                            DropShadow
+                            {
+                                anchors.fill: _bg
+                                horizontalOffset: 0
+                                verticalOffset: 0
+                                radius: 8.0
+                                samples: 17
+                                color: "#80000000"
+                                source: _bg
+                            }
 
-                                Rectangle
+                            Image
+                            {
+                                id: _image
+                                width: Math.min(parent.width, parent.height) * 0.9
+                                height: width
+                                anchors.centerIn: parent
+
+                                sourceSize.width: 200
+
+                                fillMode: Image.PreserveAspectFit
+                                antialiasing: false
+                                smooth: true
+                                asynchronous: true
+
+                                source: "image://artwork/album:"+model.artist + ":"+ model.album || "image://artwork/artist:"+model.artist
+
+                                onStatusChanged:
                                 {
-                                    id: _bg
-                                    width: _image.width + Maui.Style.space.medium
-                                    height: width
-                                    anchors.centerIn: parent
-                                    radius: Maui.Style.radiusV
-                                    color: "#fafafa"
+                                    if (status == Image.Error)
+                                        source = "qrc:/assets/cover.png";
                                 }
 
-                                DropShadow
+                                layer.enabled: true
+                                layer.effect: OpacityMask
                                 {
-                                    anchors.fill: _bg
-                                    horizontalOffset: 0
-                                    verticalOffset: 0
-                                    radius: 8.0
-                                    samples: 17
-                                    color: "#80000000"
-                                    source: _bg
-                                }
-
-                                Image
-                                {
-                                    id: _image
-                                    width: Math.min(parent.width, parent.height) * 0.9
-                                    height: width
-                                    anchors.centerIn: parent
-
-                                    sourceSize.width: 200
-
-                                    fillMode: Image.PreserveAspectFit
-                                    antialiasing: false
-                                    smooth: true
-                                    asynchronous: true
-
-                                    source: "image://artwork/album:"+model.artist + ":"+ model.album || "image://artwork/artist:"+model.artist
-
-                                    onStatusChanged:
+                                    maskSource: Item
                                     {
-                                        if (status == Image.Error)
-                                            source = "qrc:/assets/cover.png";
-                                    }
+                                        width: _image.width
+                                        height: _image.height
 
-                                    layer.enabled: true
-                                    layer.effect: OpacityMask
-                                    {
-                                        maskSource: Item
+                                        Rectangle
                                         {
+                                            anchors.centerIn: parent
                                             width: _image.width
                                             height: _image.height
-
-                                            Rectangle
-                                            {
-                                                anchors.centerIn: parent
-                                                width: _image.width
-                                                height: _image.height
-                                                radius: _bg.radius
-                                            }
+                                            radius: _bg.radius
                                         }
                                     }
                                 }
                             }
-
-                            ColumnLayout
-                            {
-                                Layout.fillWidth: true
-                                implicitHeight: Maui.Style.toolBarHeight
-
-                                spacing: 0
-
-                                Label
-                                {
-                                    id: _label1
-                                    visible: text.length
-                                    Layout.fillWidth: true
-                                    Layout.fillHeight: false
-                                    verticalAlignment: Qt.AlignVCenter
-                                    horizontalAlignment: Qt.AlignHCenter
-                                    text: model.title
-                                    elide: Text.ElideMiddle
-                                    wrapMode: Text.NoWrap
-                                    color: control.Maui.Theme.textColor
-                                    font.weight: Font.Normal
-                                    font.pointSize: Maui.Style.fontSizes.huge
-                                }
-
-                                Label
-                                {
-                                    id: _label2
-                                    visible: text.length
-                                    Layout.fillWidth: true
-                                    Layout.fillHeight: false
-                                    verticalAlignment: Qt.AlignVCenter
-                                    horizontalAlignment: Qt.AlignHCenter
-                                    text: model.artist
-                                    elide: Text.ElideMiddle
-                                    wrapMode: Text.NoWrap
-                                    color: control.Maui.Theme.textColor
-                                    font.weight: Font.Normal
-                                    font.pointSize: Maui.Style.fontSizes.big
-                                    opacity: 0.7
-                                }
-                            }
                         }
-                    }
 
-                    Item
-                    {
-                        Layout.fillHeight: true
-                        Layout.preferredWidth: Maui.Style.iconSizes.big
-
-                        Rectangle
+                        ColumnLayout
                         {
-                            anchors.bottom: parent.bottom
-                            visible: (_listView.currentIndex < _listView.count - 1) && (_listView.count > 1)
-                            height: Maui.Style.iconSizes.tiny
-                            width : height
+                            Layout.fillWidth: true
+                            implicitHeight: Maui.Style.toolBarHeight
 
-                            radius: height
+                            spacing: 0
 
-                            color: Maui.Theme.textColor
-                            opacity: 0.4
+                            Label
+                            {
+                                id: _label1
+                                visible: text.length
+                                Layout.fillWidth: true
+                                Layout.fillHeight: false
+                                verticalAlignment: Qt.AlignVCenter
+                                horizontalAlignment: Qt.AlignHCenter
+                                text: model.title
+                                elide: Text.ElideMiddle
+                                wrapMode: Text.NoWrap
+                                color: control.Maui.Theme.textColor
+                                font.weight: Font.Normal
+                                font.pointSize: Maui.Style.fontSizes.huge
+                            }
+
+                            Label
+                            {
+                                id: _label2
+                                visible: text.length
+                                Layout.fillWidth: true
+                                Layout.fillHeight: false
+                                verticalAlignment: Qt.AlignVCenter
+                                horizontalAlignment: Qt.AlignHCenter
+                                text: model.artist
+                                elide: Text.ElideMiddle
+                                wrapMode: Text.NoWrap
+                                color: control.Maui.Theme.textColor
+                                font.weight: Font.Normal
+                                font.pointSize: Maui.Style.fontSizes.big
+                                opacity: 0.7
+                            }
                         }
                     }
                 }
@@ -548,6 +480,27 @@ Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artis
                     {
                         Layout.alignment: Qt.AlignCenter
 
+                        ToolButton
+                        {
+
+                            flat: true
+                            icon.width: Maui.Style.iconSizes.big
+                            icon.height: Maui.Style.iconSizes.big
+
+                            icon.name: "documentinfo"
+                            checkable: true
+                            checked: _focusStackView.depth === 2
+                            onClicked:
+                            {
+                                if(_focusStackView.depth === 2)
+                                {
+                                    _focusStackView.pop()
+                                }else
+                                {
+                                    _focusStackView.push(_infoComponent)
+                                }
+                            }
+                        }
 
                         ToolButton
                         {

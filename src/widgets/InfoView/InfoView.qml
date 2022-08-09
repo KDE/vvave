@@ -7,7 +7,7 @@ import org.kde.kirigami 2.7 as Kirigami
 
 import org.maui.vvave 1.0 as Vvave
 
-Item
+Maui.Page
 {
     id: control
 

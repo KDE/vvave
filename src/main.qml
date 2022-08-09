@@ -462,8 +462,9 @@ Maui.ApplicationWindow
     {
         if(Maui.Handy.isAndroid)
         {
-            Maui.Android.statusbarColor( Maui.Theme.backgroundColor, !settings.darkMode)
-            Maui.Android.navBarColor(Maui.Theme.backgroundColor, !settings.darkMode)
+            const isDark = Maui.ColorUtils.brightnessForColor(Maui.Theme.backgroundColor) === Maui.ColorUtils.Dark
+            Maui.Android.statusbarColor(Maui.Theme.backgroundColor, !isDark)
+            Maui.Android.navBarColor(Maui.Theme.backgroundColor, !isDark)
         }
     }
 
