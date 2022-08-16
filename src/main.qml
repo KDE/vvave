@@ -434,7 +434,6 @@ Maui.ApplicationWindow
                     FocusView
                     {
                         anchors.fill: parent
-                        showCSDControls: settings.focusViewDefault
                     }
                 }
 
