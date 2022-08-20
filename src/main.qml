@@ -203,9 +203,9 @@ Maui.ApplicationWindow
 
     Maui.SideBarView
     {
-
         id: _sideBarView
         sideBar.preferredWidth: Maui.Style.units.gridUnit * 16
+        anchors.fill: parent
 
         sideBarContent: Item
         {
