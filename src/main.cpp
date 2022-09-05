@@ -45,6 +45,8 @@
 #include "models/tracks/tracksmodel.h"
 #include "models/folders/foldersmodel.h"
 
+#include "kde/server.h"
+
 #define VVAVE_URI "org.maui.vvave"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
@@ -96,23 +98,45 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     about.processCommandLine(&parser);
 
     const QStringList args = parser.positionalArguments();
+    QStringList paths;
+
+    if (!args.isEmpty())
+    {
+        for(const auto &path : args)
+            paths << QUrl::fromUserInput(path).toString();
+    }
+
+#if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
+    if (AppInstance::attachToExistingInstance(QUrl::fromStringList(paths)))
+    {
+        // Successfully attached to existing instance of Nota
+        return 0;
+    }
+
+    AppInstance::registerService();
+#endif
+
+    Server *server = new Server();
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
 
     qDebug() << "APP LOADING SPEED TESTS" << 3;
 
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url, args](QObject *obj, const QUrl &objUrl)
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url, args, server](QObject *obj, const QUrl &objUrl)
     {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
 
+        server->setQmlObject(obj);
+
         if (!args.isEmpty())
-            vvave::instance()->openUrls(args);
+            server->openFiles(args);
 
     }, Qt::QueuedConnection);
 
     qmlRegisterSingletonInstance<vvave>(VVAVE_URI, 1, 0, "Vvave", vvave::instance());
+    qmlRegisterSingletonInstance<Server>(VVAVE_URI, 1, 0, "Server", server);
 
     qmlRegisterType<TracksModel>(VVAVE_URI, 1, 0, "Tracks");
     qmlRegisterType<AlbumsModel>(VVAVE_URI, 1, 0, "Albums");

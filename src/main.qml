@@ -216,14 +216,8 @@ Maui.ApplicationWindow
                 id: _mainPlaylistLoader
                 anchors.fill: parent
 
-                asynchronous: true
+                asynchronous: false
                 sourceComponent: MainPlaylist {}
-                onLoaded:
-                {
-                    const tracks = Vvave.pendingTracks()
-                    Player.appendTracksAt(tracks, 0)
-                    Player.playAt(0)
-                }
             }
         }
 
@@ -560,5 +554,17 @@ Maui.ApplicationWindow
         {
             _artistViewLoader.pendingArtist = artist
         }
+    }
+
+    function openFiles(urls)
+    {
+        console.log("APPEND URLS", urls)
+        Player.appendUrlsAt(urls, 0)
+        Player.playAt(0)
+    }
+
+    function isUrlOpen(url : string) : bool
+    {
+        return false;
     }
 }

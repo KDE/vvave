@@ -33,8 +33,6 @@ public:
     bool scanning() const;
 
 public slots:
-    void openUrls(const QStringList &urls);
-
     void addSources(const QList<QUrl> &paths);
     bool removeSource(const QString &source);
 
@@ -47,8 +45,6 @@ public slots:
     void setFetchArtwork(bool fetchArtwork);
     static FMH::MODEL trackInfo(const QUrl &url);
 
-    QVariantList pendingTracks();
-
     QString artworkUrl(const QString &artist, const QString &album);
 
 private:
@@ -56,8 +52,6 @@ private:
 
     bool m_fetchArtwork = false;
     bool m_scanning = false;
-
-    QVariantList m_pendingTracks;
 
 signals:
     void sourceAdded(QUrl source);

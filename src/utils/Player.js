@@ -70,6 +70,11 @@ function appendUrls(urls)
     mainPlaylist.listModel.list.appendUrls(urls)
 }
 
+function appendUrlsAt(urls, at)
+{
+    mainPlaylist.listModel.list.insertUrls(urls, at)
+}
+
 function appendTrack(track)
 {
     if(track)

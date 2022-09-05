@@ -29,17 +29,6 @@ Maui.Page
 
     property alias contextMenu: table.contextMenu
 
-    background: Rectangle
-    {
-        color: Maui.Theme.backgroundColor
-        opacity: 0.2
-
-        Behavior on color
-        {
-            Maui.ColorTransition{}
-        }
-    }
-
     headBar.background: null
     headBar.visible: !mainlistEmpty
 

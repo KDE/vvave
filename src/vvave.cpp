@@ -39,13 +39,6 @@ FMH::MODEL vvave::trackInfo(const QUrl &url)
         {FMH::MODEL_KEY::RELEASEDATE, QString::number(year)}};
 }
 
-QVariantList vvave::pendingTracks()
-{
-    auto res = m_pendingTracks;
-    m_pendingTracks.clear();
-    return res;
-}
-
 QString vvave::artworkUrl(const QString &artist, const QString &album)
 {
     FMH::MODEL data = {{FMH::MODEL_KEY::ARTIST, artist}, {FMH::MODEL_KEY::ALBUM, album}};
@@ -171,22 +164,6 @@ QVariantList vvave::sourcesModel()
     }
 
     return res;
-}
-
-void vvave::openUrls(const QStringList &urls)
-{
-    if (urls.isEmpty())
-        return;
-
-    for (const auto &url : urls) {
-        auto _url = QUrl::fromUserInput(url);
-        if (CollectionDB::getInstance()->check_existance(BAE::TABLEMAP[BAE::TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::URL], _url.toString())) {
-            const auto item = CollectionDB::getInstance()->getDBData(QStringList() << _url.toString());
-            m_pendingTracks << FMH::toMap(item.first());
-        } else {
-            m_pendingTracks << FMH::toMap(trackInfo(_url));
-        }
-    }
 }
 
 QList<QUrl> vvave::folders()

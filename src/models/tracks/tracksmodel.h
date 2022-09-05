@@ -37,11 +37,14 @@ signals:
 public slots:
     bool append(const QVariantMap &item);
     bool appendUrl(const QUrl &url);
+
     bool insertUrl(const QString &url, const int &index);
     bool insertUrls(const QStringList &urls, const int &index);
+
     bool appendUrls(const QStringList &urls);
     bool appendAt(const QVariantMap &item, const int &at);
     bool appendQuery(const QString &query);
+
     void copy(const TracksModel *list);
 
     void clear();

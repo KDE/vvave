@@ -35,12 +35,19 @@ set(vvave_SRCS
     models/folders/foldersmodel.cpp
     models/cloud/cloud.cpp
     kde/mpris2/mpris2.cpp
+    kde/server.cpp
     )
 
 if(QUICK_COMPILER)
         qtquick_compiler_add_resources(vvave_QML_QRC qml.qrc)
 else()
         qt5_add_resources(vvave_QML_QRC qml.qrc)
+endif()
+
+if(UNIX AND NOT ANDROID)
+    qt_generate_dbus_interface(${CMAKE_CURRENT_SOURCE_DIR}/kde/server.h org.kde.Vvave.xml)
+    qt_add_dbus_adaptor(vvave_dbus_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.kde.Vvave.xml kde/server.h Server)
+    qt_add_dbus_interface(vvave_dbus_SRCS ${CMAKE_CURRENT_BINARY_DIR}/org.kde.Vvave.xml vvaveinterface)
 endif()
 
 if(ANDROID)
@@ -52,6 +59,7 @@ else()
     add_executable(${PROJECT_NAME}
         ${vvave_SRCS}
         ${vvave_QML_QRC}
+        ${vvave_dbus_SRCS}
         )
 endif()
 
