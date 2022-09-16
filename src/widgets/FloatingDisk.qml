@@ -138,7 +138,7 @@ Item
         to: 360
         duration: 5000
         loops: Animation.Infinite
-        running: isPlaying
+        running: isPlaying && Maui.Style.enableEffects
     }
 
     MouseArea

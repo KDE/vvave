@@ -47,6 +47,8 @@ BabeTable
 
     listView.header: Column
     {
+        height: visible ? implicitHeight : 0
+        visible: control.listModel.filter.length === 0 && control.listModel.filters.length === 0
         width: parent.width
         spacing: Maui.Style.space.big
 
@@ -60,6 +62,7 @@ BabeTable
             Maui.GridView
             {
                 id: _recentTracksList
+                scrollView.orientation: Qt.Horizontal
                 verticalScrollBarPolicy: ScrollBar.AlwaysOff
                 adaptContent: false
                 horizontalScrollBarPolicy:  ScrollBar.AsNeeded
@@ -155,7 +158,7 @@ BabeTable
                 //                horizontalScrollBarPolicy:  ScrollBar.AlwaysOff
                 Layout.preferredHeight: 180
                 Layout.fillWidth: true
-                orientation: ListView.Horizontal
+                orientation: Qt.Horizontal
                 spacing: Maui.Style.space.medium
                 delegate: Item
                 {

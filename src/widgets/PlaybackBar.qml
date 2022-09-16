@@ -17,40 +17,52 @@ T.Control
 {
     id: control
     implicitHeight: visible ? implicitContentHeight : 0
-    readonly property alias image : artworkBg
 
-    background: Item
+    background: Rectangle
     {
-        Image
-        {
-            id: artworkBg
-            height: parent.height
-            width: parent.width
+        color: Maui.Theme.backgroundColor
+        opacity: root.focusView ? 0 : 1
 
-            sourceSize.width: 500
-            sourceSize.height: height
-
-            fillMode: Image.PreserveAspectCrop
-            asynchronous: true
-            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
-        }
-
-        FastBlur
+        Loader
         {
             anchors.fill: parent
-            source: artworkBg
-            radius: 64
-            transparentBorder: false
-            cached: true
-
-            Rectangle
+            active: Maui.Style.enableEffects && !root.focusView
+            sourceComponent: Item
             {
-                anchors.fill: parent
-                color: Maui.Theme.backgroundColor
-                opacity: 0.8
-                Behavior on color
+                Image
                 {
-                    Maui.ColorTransition{}
+                    id: artworkBg
+                    height: parent.height
+                    width: parent.width
+
+                    sourceSize.width: 500
+                    sourceSize.height: height
+
+                    fillMode: Image.PreserveAspectCrop
+                    asynchronous: true
+                    source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+                }
+
+                FastBlur
+                {
+                    anchors.fill: parent
+                    source: artworkBg
+                    radius: 64
+                    transparentBorder: false
+                    cached: true
+
+
+                }
+
+                Rectangle
+                {
+                    anchors.fill: parent
+                    color: Maui.Theme.backgroundColor
+                    opacity: 0.8
+                    Behavior on color
+                    {
+                        Maui.ColorTransition{}
+                    }
                 }
             }
         }
@@ -65,7 +77,6 @@ T.Control
             {
                 Maui.ColorTransition{}
             }
-
         }
     }
 

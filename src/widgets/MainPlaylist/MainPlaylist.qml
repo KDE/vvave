@@ -17,9 +17,6 @@ import "../BabeTable"
 Maui.Page
 {
     id: control
-    flickable: table.flickable
-    //    title: i18n("Playlist")
-    showTitle: true
 
     Maui.Theme.colorSet: Maui.Theme.Window
 
@@ -29,10 +26,10 @@ Maui.Page
 
     property alias contextMenu: table.contextMenu
 
-    headBar.background: null
-    headBar.visible: !mainlistEmpty
+    headBar.visible: false
+    footBar.visible: !mainlistEmpty
 
-    headBar.rightContent: ToolButton
+    footBar.rightContent: ToolButton
     {
         icon.name: "edit-delete"
         onClicked:
@@ -44,7 +41,7 @@ Maui.Page
         }
     }
 
-    headBar.leftContent: ToolButton
+    footBar.leftContent: ToolButton
     {
         icon.name: "document-save"
         onClicked: saveList()
@@ -194,7 +191,7 @@ Maui.Page
                         id: _playingIcon
                         height: 16
                         width: height
-                        playing: root.isPlaying
+                        playing: root.isPlaying && Maui.Style.enableEffects
                         anchors.centerIn: parent
                         source: "qrc:/assets/playing.gif"
                     }

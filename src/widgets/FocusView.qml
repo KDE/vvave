@@ -24,6 +24,7 @@ Pane
 
     readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
     readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
+
     Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
 
     Keys.enabled: true
@@ -70,7 +71,7 @@ Pane
     background: Rectangle
     {
         color: Maui.Theme.backgroundColor
-        //                        opacity: 0.8
+
         Behavior on color
         {
             Maui.ColorTransition{}
@@ -80,41 +81,52 @@ Pane
         {
             setAndroidStatusBarColor()
         }
-        Image
+
+        Loader
         {
-            id: artworkBg
-            height: parent.height *3
-            width: parent.width *3
-            anchors.centerIn: parent
-
-            sourceSize.width: 400
-            sourceSize.height: 200
-
-            fillMode: Image.PreserveAspectCrop
-
+            anchors.fill: parent
+            active: Maui.Style.enableEffects
             asynchronous: true
-            cache: true
 
-            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
-        }
-
-        FastBlur
-        {
-            id: fastBlur
-            height: artworkBg.height
-            width: artworkBg.width
-            anchors.centerIn: parent
-
-            source: artworkBg
-            radius: 64
-            transparentBorder: false
-            cached: true
-
-            Rectangle
+            sourceComponent: Item
             {
-                anchors.fill: parent
-                color: Maui.Theme.backgroundColor
-                opacity: 0.9
+                Image
+                {
+                    id: artworkBg
+                    height: parent.height *3
+                    width: parent.width *3
+                    anchors.centerIn: parent
+
+                    sourceSize.width: 400
+                    sourceSize.height: 200
+
+                    fillMode: Image.PreserveAspectCrop
+
+                    asynchronous: true
+                    cache: true
+
+                    source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+                }
+
+                FastBlur
+                {
+                    id: fastBlur
+                    height: artworkBg.height
+                    width: artworkBg.width
+                    anchors.centerIn: parent
+
+                    source: artworkBg
+                    radius: 64
+                    transparentBorder: false
+                    cached: true
+
+                    Rectangle
+                    {
+                        anchors.fill: parent
+                        color: Maui.Theme.backgroundColor
+                        opacity: 0.9
+                    }
+                }
             }
         }
     }
@@ -155,7 +167,7 @@ Pane
             sourceComponent: Maui.Page
             {
                 showCSDControls: settings.focusViewDefault
-background: null
+                background: null
                 headBar.background: null
                 footBar.background: null
                 footBar.forceCenterMiddleContent: root.isWide

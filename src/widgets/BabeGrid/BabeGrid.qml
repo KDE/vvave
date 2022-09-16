@@ -177,7 +177,7 @@ Maui.AltBrowser
             label1.font.weight: Font.Bold
             iconSource: "media-album-cover"
             template.labelSizeHint: 40
-//            template.alignment: Qt.AlignLeft
+            template.alignment: Qt.AlignLeft
 
             onClicked:
             {

@@ -45,13 +45,13 @@ void Playlist::loadLastPlaylist()
     }
 
     QStringList urls = UTIL::loadSettings("LASTPLAYLIST", "PLAYLIST", QStringList()).toStringList();
-    //    int lastIndex =   UTIL::loadSettings("PLAYLIST_POS", "MAINWINDOW", -1).toInt();
+    int lastIndex =   UTIL::loadSettings("PLAYLIST_POS", "MAINWINDOW", -1).toInt();
     for (const auto &url : urls)
     {
         m_model->appendUrl(QUrl::fromUserInput(url));
     }
 
-    //    this->setCurrentIndex(lastIndex);
+    this->setCurrentIndex(lastIndex);
 }
 
 bool Playlist::canGoNext() const
@@ -249,6 +249,7 @@ void Playlist::setCurrentIndex(int index)
         m_currentIndex = index;
         m_currentTrack = m_model->get(m_currentIndex);
         auto url = m_currentTrack["url"].toUrl();
+
         if (!FMH::fileExists(url) && url.isLocalFile())
         {
             emit this->missingFile(m_currentTrack);
