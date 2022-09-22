@@ -116,14 +116,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     AppInstance::registerService();
 #endif
 
-    Server *server = new Server();
+    auto server =  std::make_unique<Server>();
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
 
     qDebug() << "APP LOADING SPEED TESTS" << 3;
 
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url, args, server](QObject *obj, const QUrl &objUrl)
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url, args, &server](QObject *obj, const QUrl &objUrl)
     {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
@@ -136,7 +136,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
 
     qmlRegisterSingletonInstance<vvave>(VVAVE_URI, 1, 0, "Vvave", vvave::instance());
-    qmlRegisterSingletonInstance<Server>(VVAVE_URI, 1, 0, "Server", server);
+    qmlRegisterSingletonInstance<Server>(VVAVE_URI, 1, 0, "Server", server.get());
 
     qmlRegisterType<TracksModel>(VVAVE_URI, 1, 0, "Tracks");
     qmlRegisterType<AlbumsModel>(VVAVE_URI, 1, 0, "Albums");

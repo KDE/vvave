@@ -264,7 +264,7 @@ Maui.ApplicationWindow
                         //                interactive: Maui.Handy.isMobile
                         floatingFooter: true
                         flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
-                        altHeader: !root.isWide
+                        altHeader: Maui.Handy.isMobile
                         showCSDControls: true
                         //                headBar.forceCenterMiddleContent: isWide
                         headBar.leftContent: Loader
