@@ -209,7 +209,7 @@ T.Control
             {
                 Layout.alignment: Qt.AlignCenter
 
-                //                implicitHeight: Maui.Style.iconSizes.big
+                display: ToolButton.IconOnly
                 expanded: true
                 autoExclusive: false
                 checkable: false
