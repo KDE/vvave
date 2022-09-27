@@ -21,13 +21,15 @@ Maui.ListBrowserDelegate
     isCurrentItem: ListView.isCurrentItem || checked
     draggable: true
 
-    iconSizeHint: Maui.Style.space.small
-template.headerSizeHint: 48
+    iconSizeHint: Maui.Style.iconSizes.medium
+    iconSource: "media-album-cover"
+    template.isMask: true
+    template.headerSizeHint: 48
     label1.text: control.number ? control.track + ". " + control.title :  control.title
     label2.text: control.artist + " | " + control.album
     label2.visible: control.coverArt ? !control.sameAlbum : true
 
     iconVisible: !control.sameAlbum && control.coverArt
     imageSource: coverArt ? "image://artwork/album:"+ control.artist+":"+control.album : ""
-//    template.leftPadding: iconVisible ? 0 : Maui.Style.space.medium
+    //    template.leftPadding: iconVisible ? 0 : Maui.Style.space.medium
 }

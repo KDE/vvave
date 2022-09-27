@@ -1,5 +1,6 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
+import QtQuick 2.15
+import QtQml 2.15
+import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
 import QtGraphicalEffects 1.0
@@ -211,6 +212,7 @@ Pane
                             headBar.visible: false
                             anchors.fill: parent
                             coverArtVisible: true
+                            clip: true
 
                             holder.emoji: "qrc:/assets/dialog-information.svg"
                             holder.title : i18n("No Results!")
@@ -253,7 +255,7 @@ Pane
                 Maui.Holder
                 {
                     anchors.fill: parent
-                    visible: _listView.count === 0
+                    visible: mainPlaylist.table.count === 0
                     emoji: "qrc:/assets/view-media-track.svg"
                     title : "Nothing to play!"
                     body: i18n("Start putting together your playlist.")
@@ -262,160 +264,170 @@ Pane
                 ColumnLayout
                 {
                     anchors.fill: parent
-                    visible: _listView.count > 0
                     spacing: Maui.Style.space.medium
+                    visible: mainPlaylist.table.count > 0
 
-                    ListView
+                    Loader
                     {
-                        id: _listView
+                        asynchronous: true
+                        active: mainPlaylist
+
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        implicitHeight: 300
                         Layout.maximumHeight: 400
                         Layout.minimumHeight: 100
 
-                        orientation: ListView.Horizontal
-
-                        focus: true
-                        interactive: true
-
-                        currentIndex: root.currentTrackIndex
-                        spacing: 0
-                        cacheBuffer: control.width
-
-                        highlightFollowsCurrentItem: true
-                        highlightMoveDuration: 0
-                        snapMode: ListView.SnapOneItem
-                        model: mainPlaylist.listModel
-                        highlightRangeMode:ListView.ApplyRange
-
-                        keyNavigationEnabled: true
-                        keyNavigationWraps : true
-
-                        onMovementEnded:
+                        onLoaded: item.positionViewAtIndex(currentTrackIndex, ListView.Center)
+                        sourceComponent: ListView
                         {
-                            var index = indexAt(contentX, contentY)
-                            if(index !== root.currentTrackIndex && index >= 0)
-                                Player.playAt(index)
-                        }
+                            implicitHeight: 300
 
-                        delegate: ColumnLayout
-                        {
-                            id: _delegate
-                            height: ListView.view.height
-                            width: ListView.view.width
-                            spacing: Maui.Style.space.big
-                            property bool isCurrentItem : ListView.isCurrentItem
+                            orientation: ListView.Horizontal
 
-                            Item
+                            focus: true
+                            interactive: true
+
+                            Binding on currentIndex
                             {
-                                Layout.fillHeight: true
-                                Layout.fillWidth: true
-                                Layout.alignment: Qt.AlignCenter
+                                value: currentTrackIndex
+                                restoreMode: Binding.RestoreBindingOrValue
+                            }
 
-                                Rectangle
+                            spacing: 0
+                            highlightFollowsCurrentItem: true
+                            highlightMoveDuration: 0
+                            snapMode: ListView.SnapOneItem
+                            model: mainPlaylist.listModel
+                            highlightRangeMode: ListView.ApplyRange
+
+                            keyNavigationEnabled: true
+                            keyNavigationWraps : true
+
+                            onMovementEnded:
+                            {
+                                var index = indexAt(contentX, contentY)
+                                if(index !== root.currentTrackIndex && index >= 0)
+                                    Player.playAt(index)
+                            }
+
+                            delegate: ColumnLayout
+                            {
+                                height: ListView.view.height
+                                width: ListView.view.width
+                                spacing: Maui.Style.space.big
+                                property bool isCurrentItem : ListView.isCurrentItem
+
+                                Item
                                 {
-                                    id: _bg
-                                    width: _image.width + Maui.Style.space.medium
-                                    height: width
-                                    anchors.centerIn: parent
-                                    radius: Maui.Style.radiusV
-                                    color: "#fafafa"
-                                }
+                                    Layout.fillHeight: true
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignCenter
 
-                                DropShadow
-                                {
-                                    anchors.fill: _bg
-                                    horizontalOffset: 0
-                                    verticalOffset: 0
-                                    radius: 8.0
-                                    samples: 17
-                                    color: "#80000000"
-                                    source: _bg
-                                }
-
-                                Image
-                                {
-                                    id: _image
-                                    width: Math.min(parent.width, parent.height) * 0.9
-                                    height: width
-                                    anchors.centerIn: parent
-
-                                    sourceSize.width: 200
-
-                                    fillMode: Image.PreserveAspectFit
-                                    antialiasing: false
-                                    smooth: true
-                                    asynchronous: true
-
-                                    source: "image://artwork/album:"+model.artist + ":"+ model.album || "image://artwork/artist:"+model.artist
-
-                                    onStatusChanged:
+                                    Rectangle
                                     {
-                                        if (status == Image.Error)
-                                            source = "qrc:/assets/cover.png";
+                                        id: _bg
+                                        width: _image.width + Maui.Style.space.medium
+                                        height: width
+                                        anchors.centerIn: parent
+                                        radius: Maui.Style.radiusV
+                                        color: "#fafafa"
                                     }
 
-                                    layer.enabled: true
-                                    layer.effect: OpacityMask
+                                    DropShadow
                                     {
-                                        maskSource: Item
-                                        {
-                                            width: _image.width
-                                            height: _image.height
+                                        anchors.fill: _bg
+                                        horizontalOffset: 0
+                                        verticalOffset: 0
+                                        radius: 8.0
+                                        samples: 17
+                                        color: "#80000000"
+                                        source: _bg
+                                    }
 
-                                            Rectangle
+                                    Image
+                                    {
+                                        id: _image
+                                        width: Math.min(parent.width, parent.height) * 0.9
+                                        height: width
+                                        anchors.centerIn: parent
+
+                                        sourceSize.width: 200
+
+                                        fillMode: Image.PreserveAspectFit
+                                        antialiasing: false
+                                        smooth: true
+                                        asynchronous: true
+
+                                        source: "image://artwork/album:"+model.artist + ":"+ model.album || "image://artwork/artist:"+model.artist
+
+                                        onStatusChanged:
+                                        {
+                                            if (status == Image.Error)
+                                                source = "qrc:/assets/cover.png";
+                                        }
+
+                                        layer.enabled: true
+                                        layer.effect: OpacityMask
+                                        {
+                                            maskSource: Item
                                             {
-                                                anchors.centerIn: parent
                                                 width: _image.width
                                                 height: _image.height
-                                                radius: _bg.radius
+
+                                                Rectangle
+                                                {
+                                                    anchors.centerIn: parent
+                                                    width: _image.width
+                                                    height: _image.height
+                                                    radius: _bg.radius
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
 
-                            ColumnLayout
-                            {
-                                Layout.fillWidth: true
-                                implicitHeight: Maui.Style.toolBarHeight
-                                spacing: 0
-
-                                Label
+                                ColumnLayout
                                 {
-                                    id: _label1
-                                    visible: text.length
                                     Layout.fillWidth: true
-                                    Layout.fillHeight: false
-                                    verticalAlignment: Qt.AlignVCenter
-                                    horizontalAlignment: Qt.AlignHCenter
-                                    text: model.title
-                                    elide: Text.ElideMiddle
-                                    wrapMode: Text.NoWrap
-                                    color: Maui.Theme.textColor
-                                    font.weight: Font.Bold
-                                    font.pointSize: Maui.Style.fontSizes.huge
-                                }
+                                    implicitHeight: Maui.Style.toolBarHeight
+                                    spacing: 0
 
-                                Label
-                                {
-                                    id: _label2
-                                    visible: text.length
-                                    Layout.fillWidth: true
-                                    Layout.fillHeight: false
-                                    verticalAlignment: Qt.AlignVCenter
-                                    horizontalAlignment: Qt.AlignHCenter
-                                    text: model.artist
-                                    elide: Text.ElideMiddle
-                                    wrapMode: Text.NoWrap
-                                    color: Maui.Theme.textColor
-                                    font.weight: Font.Normal
-                                    font.pointSize: Maui.Style.fontSizes.big
-                                    opacity: 0.7
+                                    Label
+                                    {
+                                        id: _label1
+                                        visible: text.length
+                                        Layout.fillWidth: true
+                                        Layout.fillHeight: false
+                                        verticalAlignment: Qt.AlignVCenter
+                                        horizontalAlignment: Qt.AlignHCenter
+                                        text: model.title
+                                        elide: Text.ElideMiddle
+                                        wrapMode: Text.NoWrap
+                                        color: Maui.Theme.textColor
+                                        font.weight: Font.Bold
+                                        font.pointSize: Maui.Style.fontSizes.huge
+                                    }
+
+                                    Label
+                                    {
+                                        id: _label2
+                                        visible: text.length
+                                        Layout.fillWidth: true
+                                        Layout.fillHeight: false
+                                        verticalAlignment: Qt.AlignVCenter
+                                        horizontalAlignment: Qt.AlignHCenter
+                                        text: model.artist
+                                        elide: Text.ElideMiddle
+                                        wrapMode: Text.NoWrap
+                                        color: Maui.Theme.textColor
+                                        font.weight: Font.Normal
+                                        font.pointSize: Maui.Style.fontSizes.big
+                                        opacity: 0.7
+                                    }
                                 }
                             }
                         }
+
                     }
 
                     RowLayout
@@ -457,17 +469,14 @@ Pane
                         }
                     }
 
-
-                    Grid
+                    Row
                     {
                         Layout.alignment: Qt.AlignCenter
-                        rows:2
-                        columns: 2
+                        spacing: Maui.Style.space.medium
+
                         ToolButton
                         {
                             id: babeBtnIcon
-                            icon.width: Maui.Style.iconSizes.big
-                            icon.height: Maui.Style.iconSizes.big
                             icon.name: "love"
                             flat: true
                             enabled: root.currentTrack
@@ -485,8 +494,6 @@ Pane
                         {
 
                             flat: true
-                            icon.width: Maui.Style.iconSizes.big
-                            icon.height: Maui.Style.iconSizes.big
 
                             icon.name: "documentinfo"
                             checkable: true
@@ -506,9 +513,6 @@ Pane
                         ToolButton
                         {
                             flat: true
-                            icon.width: Maui.Style.iconSizes.big
-                            icon.height: Maui.Style.iconSizes.big
-
                             icon.name: switch(playlist.repeatMode)
                                        {
                                        case Vvave.Playlist.NoRepeat: return "media-repeat-none"
@@ -538,8 +542,6 @@ Pane
                         {
                             id: shuffleBtn
                             flat: true
-                            icon.width: Maui.Style.iconSizes.big
-                            icon.height: Maui.Style.iconSizes.big
 
                             icon.name: switch(playlist.playMode)
                                        {
@@ -626,5 +628,8 @@ Pane
         _focusStackView.initialItem.forceActiveFocus()
     }
 
-    Component.onCompleted: forceActiveFocus()
+    Component.onCompleted:
+    {
+        forceActiveFocus()
+    }
 }

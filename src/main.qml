@@ -45,7 +45,7 @@ Maui.ApplicationWindow
     /******************** PLAYBACK ********************/
     /*************************************************/
     readonly property alias currentTrack : playlist.currentTrack
-    property alias currentTrackIndex: playlist.currentIndex
+    readonly property alias currentTrackIndex: playlist.currentIndex
 
     readonly property alias isPlaying: player.playing
     property int onQueue: 0
