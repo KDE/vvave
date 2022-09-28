@@ -65,7 +65,7 @@ Maui.ApplicationWindow
     property string syncPlaylist: ""
     property bool sync: false
 
-    readonly property bool focusView : _focusViewComponent.visible
+    readonly property bool focusView : _stackView.depth === 1
     readonly property bool miniMode : _miniModeComponent.visible
 
     property bool selectionMode : false
@@ -236,7 +236,7 @@ Maui.ApplicationWindow
                 sourceComponent: PlaybackBar {}
             }
 
-            Maui.StackView
+            StackView
             {
                 id: _stackView
                 focus: true
@@ -251,10 +251,96 @@ Maui.ApplicationWindow
                     }
                 }
 
+                pushExit: Transition
+                {
+                    ParallelAnimation
+                    {
+                        PropertyAnimation
+                        {
+                            property: "y"
+                            from: 0
+                            to:  _stackView.height
+                            duration: 200
+                            easing.type: Easing.InOutCubic
+                        }
+
+                        PropertyAnimation
+                        {
+                            property: "x"
+                            from: 0
+                            to:  _stackView.width
+                            duration: 200
+                            easing.type: Easing.InOutCubic
+                        }
+
+                        PropertyAnimation
+                        {
+                            property: "scale"
+                            from: 1
+                            to:  0
+                            duration: 200
+                            easing.type: Easing.InOutCubic
+                        }
+
+
+                        NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 300; easing.type: Easing.InOutCubic }
+                    }
+                }
+
+                pushEnter: Transition
+                {
+                    ParallelAnimation
+                    {
+                        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 300; easing.type: Easing.OutCubic }
+                    }
+                }
+
+                popEnter: Transition
+                {
+                    ParallelAnimation
+                    {
+                        PropertyAnimation
+                        {
+                            property: "y"
+                            from: _stackView.height
+                            to: 0
+                            duration: 200
+                            easing.type: Easing.InOutCubic
+                        }
+
+                        PropertyAnimation
+                        {
+                            property: "x"
+                            from: _stackView.width
+                            to: 0
+                            duration: 200
+                            easing.type: Easing.InOutCubic
+                        }
+
+                        PropertyAnimation
+                        {
+                            property: "scale"
+                            from: 0
+                            to: 1
+                            duration: 200
+                            easing.type: Easing.InOutCubic
+                        }
+
+                        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 200; easing.type: Easing.OutCubic }
+                    }
+                } //OK
+
+                popExit: Transition
+                {
+                    ParallelAnimation
+                    {
+                        NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 200; easing.type: Easing.OutCubic }
+                    }
+                }
+
                 Item
                 {
                     id: _viewsPage
-                    visible: StackView.status === StackView.Active
 
                     Maui.AppViews
                     {
@@ -419,15 +505,12 @@ Maui.ApplicationWindow
                     }
                 }
 
-                Loader
+                Component
                 {
                     id: _focusViewComponent
-                    visible: StackView.status === StackView.Active
-                    active: StackView.status === StackView.Active || item
 
                     FocusView
                     {
-                        anchors.fill: parent
                     }
                 }
 
@@ -465,18 +548,11 @@ Maui.ApplicationWindow
     {
         if(focusView)
         {
-            if(_stackView.depth === 1)
-            {
-                _stackView.replace(_focusViewComponent, _viewsPage)
-
-            }else
-            {
-                _stackView.pop()
-            }
+            _stackView.push(_viewsPage)
 
         }else
         {
-            _stackView.push(_focusViewComponent)
+            _stackView.pop()
         }
 
         _stackView.currentItem.forceActiveFocus()
@@ -567,4 +643,4 @@ Maui.ApplicationWindow
     {
         return false;
     }
-}
+    }

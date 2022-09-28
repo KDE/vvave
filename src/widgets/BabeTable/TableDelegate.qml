@@ -21,10 +21,12 @@ Maui.ListBrowserDelegate
     isCurrentItem: ListView.isCurrentItem || checked
     draggable: true
 
-    iconSizeHint: Maui.Style.iconSizes.medium
+//    iconSizeHint: Maui.Style.iconSizes.medium
+//    template.imageSizeHint:  48
     iconSource: "media-album-cover"
+
     template.isMask: true
-    template.headerSizeHint: 48
+
     label1.text: control.number ? control.track + ". " + control.title :  control.title
     label2.text: control.artist + " | " + control.album
     label2.visible: control.coverArt ? !control.sameAlbum : true

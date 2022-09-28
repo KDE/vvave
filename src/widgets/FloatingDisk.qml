@@ -16,9 +16,10 @@ Item
     Maui.Theme.inherit: false
     Maui.Theme.colorSet: Maui.Theme.Complementary
 
-    visible: opacity > 0.3 && _viewsPage.visible
+    visible: opacity > 0
 
-    implicitHeight: Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
+    implicitHeight: !focusView ? Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2) : Maui.Style.iconSizes.large*5
+
     implicitWidth: implicitHeight
 
     ToolTip.delay: 1000
@@ -26,6 +27,18 @@ Item
     ToolTip.visible: _mouseArea.containsMouse && !Maui.Handy.isMobile
     ToolTip.text: root.title
 
+    opacity: focusView ? 0 :  1
+
+    OpacityAnimator on opacity
+    {
+        duration: 300
+        easing.type: Easing.OutCubic
+    }
+
+    Behavior on implicitHeight
+    {
+        NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
+    }
 
     Binding on x
     {
@@ -56,7 +69,7 @@ Item
         ignoreUnknownSignals: true
         function onCountChanged()
         {
-             anim.run(control.y)
+            anim.run(control.y)
         }
     }
 
@@ -158,5 +171,5 @@ Item
 
         onClicked: toggleFocusView()
         onPressAndHold: toggleMiniMode()
-  }
+    }
 }
