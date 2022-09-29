@@ -16,9 +16,11 @@ Item
     Maui.Theme.inherit: false
     Maui.Theme.colorSet: Maui.Theme.Complementary
 
-    visible: opacity > 0
+//    visible: opacity > 0
 
-    implicitHeight: !focusView ? Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2) : Maui.Style.iconSizes.large*5
+    scale: focusView ? 2 : 1
+
+    implicitHeight:  Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
 
     implicitWidth: implicitHeight
 
@@ -31,13 +33,13 @@ Item
 
     OpacityAnimator on opacity
     {
-        duration: 300
+        duration: 200
         easing.type: Easing.OutCubic
     }
 
-    Behavior on implicitHeight
+    Behavior on scale
     {
-        NumberAnimation { duration: 300; easing.type: Easing.OutCubic }
+        NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
     }
 
     Binding on x

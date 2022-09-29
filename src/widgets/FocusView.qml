@@ -163,7 +163,6 @@ Pane
         {
             focus: true
             asynchronous: true
-            active: visible || item
 
             sourceComponent: Maui.Page
             {
