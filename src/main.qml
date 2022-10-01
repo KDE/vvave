@@ -50,7 +50,7 @@ Maui.ApplicationWindow
     readonly property alias isPlaying: player.playing
     property int onQueue: 0
     property alias mainPlaylist : _mainPlaylistLoader.item
-    readonly property bool mainlistEmpty: mainPlaylist.listModel.list.count ===0
+    readonly property bool mainlistEmpty: mainPlaylist ? mainPlaylist.listModel.list.count === 0 : false
 
     /***************************************************/
     /******************** HANDLERS ********************/
@@ -264,36 +264,32 @@ Maui.ApplicationWindow
                             easing.type: Easing.InOutCubic
                         }
 
-                        PropertyAnimation
-                        {
-                            property: "x"
-                            from: 0
-                            to:  _stackView.width
-                            duration: 200
-                            easing.type: Easing.InOutCubic
-                        }
+//                        PropertyAnimation
+//                        {
+//                            property: "x"
+//                            from: 0
+//                            to:  _stackView.width
+//                            duration: 200
+//                            easing.type: Easing.InOutCubic
+//                        }
 
-                        PropertyAnimation
-                        {
-                            property: "scale"
-                            from: 1
-                            to:  0
-                            duration: 200
-                            easing.type: Easing.InOutCubic
-                        }
+//                        PropertyAnimation
+//                        {
+//                            property: "scale"
+//                            from: 1
+//                            to:  0
+//                            duration: 200
+//                            easing.type: Easing.InOutCubic
+//                        }
 
 
                         NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 300; easing.type: Easing.InOutCubic }
                     }
                 }
 
-                pushEnter: Transition
-                {
-                    ParallelAnimation
-                    {
-                        NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 300; easing.type: Easing.OutCubic }
-                    }
-                }
+                pushEnter: null
+
+                popExit: null
 
                 popEnter: Transition
                 {
@@ -308,51 +304,38 @@ Maui.ApplicationWindow
                             easing.type: Easing.InOutCubic
                         }
 
-                        PropertyAnimation
-                        {
-                            property: "x"
-                            from: _stackView.width
-                            to: 0
-                            duration: 200
-                            easing.type: Easing.InOutCubic
-                        }
+//                        PropertyAnimation
+//                        {
+//                            property: "x"
+//                            from: _stackView.width
+//                            to: 0
+//                            duration: 200
+//                            easing.type: Easing.InOutCubic
+//                        }
 
-                        PropertyAnimation
-                        {
-                            property: "scale"
-                            from: 0
-                            to: 1
-                            duration: 200
-                            easing.type: Easing.InOutCubic
-                        }
+//                        PropertyAnimation
+//                        {
+//                            property: "scale"
+//                            from: 0
+//                            to: 1
+//                            duration: 200
+//                            easing.type: Easing.InOutCubic
+//                        }
 
                         NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 200; easing.type: Easing.OutCubic }
                     }
                 } //OK
 
-                popExit: Transition
-                {
-                    ParallelAnimation
-                    {
-                        NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 200; easing.type: Easing.OutCubic }
-                    }
-                }
-
-                Item
-                {
-                    id: _viewsPage
-
                     Maui.AppViews
                     {
                         id: swipeView
-                        anchors.fill: parent
                         maxViews: 3
-                        //                interactive: Maui.Handy.isMobile
+
                         floatingFooter: true
                         flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
                         altHeader: Maui.Handy.isMobile
                         showCSDControls: true
-                        //                headBar.forceCenterMiddleContent: isWide
+
                         headBar.leftContent: Loader
                         {
                             asynchronous: true
@@ -493,9 +476,9 @@ Maui.ApplicationWindow
 
                             CloudView {}
                         }
-                    }
 
-                    Loader
+
+                    data: Loader
                     {
                         width: parent.width
                         anchors.bottom: parent.bottom
@@ -548,7 +531,7 @@ Maui.ApplicationWindow
     {
         if(focusView)
         {
-            _stackView.push(_viewsPage)
+            _stackView.push(swipeView)
 
         }else
         {
