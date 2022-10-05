@@ -95,11 +95,12 @@ Maui.Page
                 {
                     //                color: Maui.Theme.highlightColor
                     id: _imgHeader
+
                     Maui.GalleryRollTemplate
                     {
                         id: _image
                         anchors.fill: parent
-                        anchors.margins: Maui.Style.space.medium
+                        anchors.bottomMargin: Maui.Style.space.medium
                         radius: Maui.Style.radiusV
                         interactive: true
                         fillMode: Image.PreserveAspectCrop
