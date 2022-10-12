@@ -174,8 +174,8 @@
     <release version="2.1.2" date="2022-05-16">
       <url>https://mauikit.org/blog/maui-2-1-2-release/</url>
     </release>
- <release version="2.2.0" date="2022-08-30">
-    <url>https://mauikit.org/blog/maui-2-2-0-release/</url>
-  </release>
+    <release version="2.2.0" date="2022-08-30">
+      <url>https://mauikit.org/blog/maui-2-2-0-release/</url>
+    </release>
   </releases>
 </component>
