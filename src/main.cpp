@@ -89,6 +89,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     about.setBugAddress("https://invent.kde.org/maui/vvave/-/issues");
     about.setOrganizationDomain(VVAVE_URI);
     about.setProgramLogo(app.windowIcon());
+    about.setDesktopFileName("org.kde.vvave");
 
     KAboutData::setApplicationData(about);
 
