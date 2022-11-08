@@ -101,6 +101,8 @@ ecm_setup_version(${VVAVE_VERSION}
 
 add_subdirectory(src)
 
+ki18n_install(po)
+
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(FILES org.kde.vvave.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
     install(FILES org.kde.vvave.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
