@@ -1,0 +1,525 @@
+# Translation of vvave.po to Catalan
+# Copyright (C) 2022 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Josep M. Ferrer <txemaq@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: vvave\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-11-09 00:46+0000\n"
+"PO-Revision-Date: 2022-11-09 12:23+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.12.0\n"
+
+#: src/main.cpp:84
+#, kde-format
+msgid "Vvave"
+msgstr "Vvave"
+
+#: src/main.cpp:84
+#, kde-format
+msgid "Organize and listen to your music."
+msgstr "Organitzeu i escolteu la vostra música."
+
+#: src/main.cpp:84
+#, kde-format
+msgid "© 2019-%1 Maui Development Team"
+msgstr "© 2019-%1 Maui Development Team"
+
+#: src/main.cpp:86
+#, kde-format
+msgid "Camilo Higuita"
+msgstr "Camilo Higuita"
+
+#: src/main.cpp:86
+#, kde-format
+msgid "Developer"
+msgstr "Desenvolupador"
+
+#: src/main.qml:121
+#, kde-format
+msgid "Missing file"
+msgstr "Manca un fitxer"
+
+#: src/main.qml:177
+#, kde-format
+msgid "Remove %1 tracks"
+msgstr "Elimina %1 peces"
+
+#: src/main.qml:178
+#, kde-format
+msgid ""
+"Are you sure you want to remove this files? This action can not be undone."
+msgstr ""
+"Esteu segur que voleu eliminar aquests fitxers? Aquesta operació no es pot "
+"desfer."
+
+#: src/main.qml:180 src/widgets/BabeTable/TableMenu.qml:135
+#, kde-format
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: src/main.qml:181 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#, kde-format
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#: src/main.qml:351
+#, kde-format
+msgid "Settings"
+msgstr "Configuració"
+
+#: src/main.qml:358
+#, kde-format
+msgid "About"
+msgstr "Quant a"
+
+#: src/main.qml:391
+#, kde-format
+msgid "Songs"
+msgstr "Cançons"
+
+#: src/main.qml:410
+#, kde-format
+msgid "Albums"
+msgstr "Àlbums"
+
+#: src/main.qml:417
+#, kde-format
+msgid "No Albums!"
+msgstr "Cap àlbum!"
+
+#: src/main.qml:418 src/main.qml:443 src/widgets/TracksView.qml:22
+#, kde-format
+msgid "Add new music sources"
+msgstr "Afegeix fonts noves de música"
+
+#: src/main.qml:435
+#, kde-format
+msgid "Artists"
+msgstr "Artistes"
+
+#: src/main.qml:442
+#, kde-format
+msgid "No Artists!"
+msgstr "Cap artista!"
+
+#: src/main.qml:459 src/widgets/BabeTable/TableMenu.qml:44
+#: src/widgets/SelectionBar.qml:46
+#, kde-format
+msgid "Tags"
+msgstr "Etiquetes"
+
+#: src/main.qml:466
+#, kde-format
+msgid "Folders"
+msgstr "Carpetes"
+
+#: src/main.qml:474
+#, kde-format
+msgid "Cloud"
+msgstr "Núvol"
+
+#: src/services/local/powermanagementinterface.cpp:173
+#: src/services/local/powermanagementinterface.cpp:223
+#, kde-format
+msgctxt "explanation for sleep inhibit during play of music"
+msgid "Playing music"
+msgstr "Reproducció de música"
+
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:45
+#: src/widgets/TracksView.qml:27
+#, kde-format
+msgid "Add sources"
+msgstr "Afegeix fonts"
+
+#: src/widgets/AlbumsView.qml:56
+#, kde-format
+msgid "This list is empty"
+msgstr "Aquesta llista està buit"
+
+#: src/widgets/BabeGrid/BabeGrid.qml:37 src/widgets/BabeTable/BabeTable.qml:97
+#: src/widgets/CloudView/CloudView.qml:49
+#: src/widgets/FoldersView/FoldersView.qml:31
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
+#, kde-format
+msgid "Filter"
+msgid_plural "Filter %1 folders"
+msgstr[0] "Filtre"
+msgstr[1] "Filtra %1 carpetes"
+
+#: src/widgets/BabeTable/BabeTable.qml:71
+#, kde-format
+msgid "Play All"
+msgstr "Reprodueix-ho tot"
+
+#: src/widgets/BabeTable/BabeTable.qml:78
+#, kde-format
+msgid "Append All"
+msgstr "Afegeix-ho tot"
+
+#: src/widgets/BabeTable/BabeTable.qml:134
+#, kde-format
+msgid "Remove track"
+msgstr "Elimina la peça"
+
+#: src/widgets/BabeTable/BabeTable.qml:135
+#, kde-format
+msgid ""
+"Are you sure you want to delete the file from your computer? This action can "
+"not be undone."
+msgstr ""
+"Esteu segur que voleu suprimir aquest fitxer de l'ordinador? Aquesta acció "
+"no es pot desfer."
+
+#: src/widgets/BabeTable/BabeTable.qml:137
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Elimina"
+
+#: src/widgets/BabeTable/BabeTable.qml:163
+#, kde-format
+msgid "Go to Artist"
+msgstr "Ves a l'artista"
+
+#: src/widgets/BabeTable/BabeTable.qml:170
+#, kde-format
+msgid "Go to Album"
+msgstr "Ves a l'àlbum"
+
+#: src/widgets/BabeTable/TableMenu.qml:35
+#, kde-format
+msgid "Fav it"
+msgstr "Marca com a preferit"
+
+#: src/widgets/BabeTable/TableMenu.qml:35
+#, kde-format
+msgid "UnFav it"
+msgstr "Desmarca com a preferit"
+
+#: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
+#, kde-format
+msgid "Edit"
+msgstr "Edita"
+
+#: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
+#, kde-format
+msgid "Share"
+msgstr "Comparteix"
+
+#: src/widgets/BabeTable/TableMenu.qml:71
+#, kde-format
+msgid "Select..."
+msgstr "Selecciona..."
+
+#: src/widgets/BabeTable/TableMenu.qml:84 src/widgets/SelectionBar.qml:66
+#, kde-format
+msgid "Queue"
+msgstr "Cua"
+
+#: src/widgets/BabeTable/TableMenu.qml:109
+#, kde-format
+msgid "Show in folder"
+msgstr "Mostra a la carpeta"
+
+#: src/widgets/CloudView/CloudView.qml:60
+#, kde-format
+msgid "Opps!"
+msgstr "Vaja!"
+
+#: src/widgets/CloudView/CloudView.qml:61
+#, kde-format
+msgid ""
+"You don't have an account set up.\n"
+"You can set up your account now by clicking here or under the Accounts "
+"options in the main menu"
+msgstr ""
+"No hi ha cap compte configurat.\n"
+"Ara podeu configurar el vostre compte fent clic aquí o sota les opcions "
+"Comptes en el menú principal"
+
+#: src/widgets/FocusView.qml:177
+#, kde-format
+msgid "Find"
+msgstr "Cerca"
+
+#: src/widgets/FocusView.qml:217
+#, kde-format
+msgid "No Results!"
+msgstr "Cap resultat!"
+
+#: src/widgets/FocusView.qml:218
+#, kde-format
+msgid "Try with something else"
+msgstr "Intenteu-ho amb alguna altra cosa"
+
+#: src/widgets/FocusView.qml:260 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#, kde-format
+msgid "Start putting together your playlist."
+msgstr "Comenceu posant junta la llista de reproducció."
+
+#: src/widgets/FoldersView/FoldersView.qml:41
+#, kde-format
+msgid "No Folders!"
+msgstr "Cap carpeta!"
+
+#: src/widgets/FoldersView/FoldersView.qml:42
+#, kde-format
+msgid "Add new music to your sources to browse by folders"
+msgstr "Afegeix música nova a les vostres fonts navegant per les carpetes"
+
+#: src/widgets/FoldersView/FoldersView.qml:125 src/widgets/TracksView.qml:21
+#, kde-format
+msgid "No Tracks!"
+msgstr "Cap peça!"
+
+#: src/widgets/FoldersView/FoldersView.qml:126
+#, kde-format
+msgid "This source folder seems to be empty!"
+msgstr "Aquesta carpeta de fonts sembla que està buida!"
+
+#: src/widgets/InfoView/InfoView.qml:45
+#, kde-format
+msgid "Artist Info"
+msgstr "Informació de l'artista"
+
+#: src/widgets/InfoView/InfoView.qml:73
+#, kde-format
+msgid "Album Info"
+msgstr "Informació de l'àlbum"
+
+#: src/widgets/MainPlaylist/MainPlaylist.qml:133
+#, kde-format
+msgid "Syncing to "
+msgstr "Sincronitza amb"
+
+#: src/widgets/MetadataDialog.qml:40
+#, kde-format
+msgid "Metadata"
+msgstr "Metadades"
+
+#: src/widgets/MetadataDialog.qml:41
+#, kde-format
+msgid "Embeded metadata info."
+msgstr "Informació de les metadades incrustades."
+
+#: src/widgets/MetadataDialog.qml:47
+#, kde-format
+msgid "Track Title"
+msgstr "Títol de la peça"
+
+#: src/widgets/MetadataDialog.qml:61
+#, kde-format
+msgid "Artist"
+msgstr "Artista"
+
+#: src/widgets/MetadataDialog.qml:76
+#, kde-format
+msgid "Album"
+msgstr "Àlbum"
+
+#: src/widgets/MetadataDialog.qml:90
+#, kde-format
+msgid "Track"
+msgstr "Peça"
+
+#: src/widgets/MetadataDialog.qml:104
+#, kde-format
+msgid "Genre"
+msgstr "Gènere"
+
+#: src/widgets/MetadataDialog.qml:118
+#, kde-format
+msgid "Year"
+msgstr "Any"
+
+#: src/widgets/MetadataDialog.qml:132
+#, kde-format
+msgid "Comment"
+msgstr "Comentari"
+
+#: src/widgets/MetadataDialog.qml:145
+#, kde-format
+msgid "File Info"
+msgstr "Informació del fitxer"
+
+#: src/widgets/MetadataDialog.qml:146
+#, kde-format
+msgid "Locla file info."
+msgstr "Informació del fitxer local."
+
+#: src/widgets/PlaybackBar.qml:155
+#, kde-format
+msgid "Toogle SideBar"
+msgstr "Alterna la barra lateral"
+
+#: src/widgets/PlaybackBar.qml:226
+#, kde-format
+msgid "Play and pause"
+msgstr "Reproducció i pausa"
+
+#: src/widgets/PlaybackBar.qml:236
+#, kde-format
+msgid "Next"
+msgstr "Següent"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:65
+#, kde-format
+msgid "Remove from playlist"
+msgstr "Elimina de la llista de reproducció"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:94
+#, kde-format
+msgid "stars"
+msgstr "estrelles"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
+#, kde-format
+msgid "No Playlists!"
+msgstr "Cap llista de reproducció!"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
+#, kde-format
+msgid "Start creating new custom playlists"
+msgstr "Comenceu creant llistes de reproducció personalitzades noves"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
+#, kde-format
+msgid "Remove '%1'"
+msgstr "Elimina «%1»"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
+#, kde-format
+msgid "Accept"
+msgstr "Accepta"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
+#, kde-format
+msgid ""
+"Are you sure you want to remove this tag? This operation can not be undone."
+msgstr ""
+"Esteu segur que voleu eliminar aquesta etiqueta? Aquesta operació no es pot "
+"desfer."
+
+#: src/widgets/SelectionBar.qml:28
+#, kde-format
+msgid "Play"
+msgstr "Reprodueix"
+
+#: src/widgets/SelectionBar.qml:39
+#, kde-format
+msgid "Append"
+msgstr "Afegeix"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:53
+#, kde-format
+msgid "Behaviour"
+msgstr "Comportament"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:54
+#, kde-format
+msgid "Configure the app plugins and behavior."
+msgstr "Configura els connectors i el comportament de l'aplicació."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:58
+#, kde-format
+msgid "Fetch Artwork"
+msgstr "Recupera la caràtula"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:59
+#, kde-format
+msgid ""
+"Gathers album and artists artworks from online services: LastFM, Spotify, "
+"MusicBrainz, iTunes, Genius, and others."
+msgstr ""
+"Recupera les caràtules dels àlbums i dels artistes des de serveis en línia: "
+"LastFM, Spotify, MusicBrainz, iTunes, Genius i altres."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:71
+#, kde-format
+msgid "Auto Scan"
+msgstr "Exploració automàtica"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:72
+#, kde-format
+msgid ""
+"Scan all the music sources on startup to keep your collection up to date"
+msgstr ""
+"Explora totes les fonts de música en iniciar per a mantenir actualitzada la "
+"col·lecció"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:84
+#, kde-format
+msgid "Focus View"
+msgstr "Vista de focus"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#, kde-format
+msgid "Make the focus view the default"
+msgstr "Converteix la vista de focus en la predeterminada"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:101
+#, kde-format
+msgid "Dark Mode"
+msgstr "Mode fosc"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:102
+#, kde-format
+msgid "Switch between light and dark colorscheme"
+msgstr "Alterna entre els esquemes de color clar i fosc"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:119
+#, kde-format
+msgid "Sources"
+msgstr "Fonts"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:120
+#, kde-format
+msgid "Add or remove sources"
+msgstr "Afegeix o elimina fonts"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:163
+#, kde-format
+msgid "Add"
+msgstr "Afegeix"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:180
+#, kde-format
+msgid "Scan now"
+msgstr "Explora ara"
+
+#: src/widgets/TracksView.qml:33
+#, kde-format
+msgid "Open file"
+msgstr "Obre un fitxer"
+
+#: src/widgets/TracksView.qml:59
+#, kde-format
+msgid "Popular Tracks"
+msgstr "Peces populars"
+
+#: src/widgets/TracksView.qml:60
+#, kde-format
+msgid "Play them again."
+msgstr "Torna a reproduir-les."
+
+#: src/widgets/TracksView.qml:140
+#, kde-format
+msgid "Playlists"
+msgstr "Llistes de reproducció"
+
+#: src/widgets/TracksView.qml:141
+#, kde-format
+msgid "Recent playlists"
+msgstr "Llistes de reproducció recents"
