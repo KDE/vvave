@@ -38,7 +38,7 @@ Maui.SettingsDialog
     {
         id: _template
         title: i18n("Metadata")
-        description: i18n("Embeded metadata info.")
+        description: i18n("Embedded metadata info.")
 
         Maui.SettingTemplate
         {
@@ -143,7 +143,7 @@ Maui.SettingsDialog
     Maui.SettingsSection
     {
         title: i18n("File Info")
-        description: i18n("Locla file info.")
+        description: i18n("Local file info.")
     }
 
 }
