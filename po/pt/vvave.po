@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:46+0000\n"
+"POT-Creation-Date: 2022-11-11 00:44+0000\n"
 "PO-Revision-Date: 2022-11-09 22:02+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -54,10 +54,15 @@ msgid "Remove %1 tracks"
 msgstr ""
 
 #: src/main.qml:178
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to remove this tag? This operation can not be "
+#| "undone."
 msgid ""
-"Are you sure you want to remove this files? This action can not be undone."
+"Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
+"Tem a certeza que deseja remover esta marca? Esta operação não pode ser "
+"anulada."
 
 #: src/main.qml:180 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
@@ -303,7 +308,7 @@ msgstr "Meta-dados"
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
-msgid "Embeded metadata info."
+msgid "Embedded metadata info."
 msgstr ""
 
 #: src/widgets/MetadataDialog.qml:47
@@ -348,7 +353,7 @@ msgstr "Informações do Ficheiro"
 
 #: src/widgets/MetadataDialog.qml:146
 #, kde-format
-msgid "Locla file info."
+msgid "Local file info."
 msgstr ""
 
 #: src/widgets/PlaybackBar.qml:155

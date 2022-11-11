@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:46+0000\n"
+"POT-Creation-Date: 2022-11-11 00:44+0000\n"
 "PO-Revision-Date: 2022-11-09 18:36+0100\n"
 "Last-Translator: KDE Francophone <kde-francophone@kde.org>\n"
 "Language-Team: KDE Francophone <kde-francophone@kde.org>\n"
@@ -50,7 +50,7 @@ msgstr ""
 #: src/main.qml:178
 #, kde-format
 msgid ""
-"Are you sure you want to remove this files? This action can not be undone."
+"Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 
 #: src/main.qml:180 src/widgets/BabeTable/TableMenu.qml:135
@@ -297,7 +297,7 @@ msgstr ""
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
-msgid "Embeded metadata info."
+msgid "Embedded metadata info."
 msgstr ""
 
 #: src/widgets/MetadataDialog.qml:47
@@ -342,7 +342,7 @@ msgstr ""
 
 #: src/widgets/MetadataDialog.qml:146
 #, kde-format
-msgid "Locla file info."
+msgid "Local file info."
 msgstr ""
 
 #: src/widgets/PlaybackBar.qml:155

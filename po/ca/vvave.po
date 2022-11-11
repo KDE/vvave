@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-09 00:46+0000\n"
+"POT-Creation-Date: 2022-11-11 00:44+0000\n"
 "PO-Revision-Date: 2022-11-09 12:23+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -55,9 +55,11 @@ msgid "Remove %1 tracks"
 msgstr "Elimina %1 peces"
 
 #: src/main.qml:178
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to remove this files? This action can not be undone."
 msgid ""
-"Are you sure you want to remove this files? This action can not be undone."
+"Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 "Esteu segur que voleu eliminar aquests fitxers? Aquesta operació no es pot "
 "desfer."
@@ -310,8 +312,9 @@ msgid "Metadata"
 msgstr "Metadades"
 
 #: src/widgets/MetadataDialog.qml:41
-#, kde-format
-msgid "Embeded metadata info."
+#, fuzzy, kde-format
+#| msgid "Embeded metadata info."
+msgid "Embedded metadata info."
 msgstr "Informació de les metadades incrustades."
 
 #: src/widgets/MetadataDialog.qml:47
@@ -355,8 +358,9 @@ msgid "File Info"
 msgstr "Informació del fitxer"
 
 #: src/widgets/MetadataDialog.qml:146
-#, kde-format
-msgid "Locla file info."
+#, fuzzy, kde-format
+#| msgid "Locla file info."
+msgid "Local file info."
 msgstr "Informació del fitxer local."
 
 #: src/widgets/PlaybackBar.qml:155
