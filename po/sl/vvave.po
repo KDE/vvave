@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-11 00:44+0000\n"
-"PO-Revision-Date: 2022-11-10 11:17+0100\n"
+"PO-Revision-Date: 2022-11-11 10:08+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -54,13 +54,11 @@ msgid "Remove %1 tracks"
 msgstr "Odstrani %1 sledi"
 
 #: src/main.qml:178
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove this files? This action can not be undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
-"Ali ste prepričani, da želite odstraniti ta stik? Tega dejanja ne morete "
+"Ali ste prepričani, da želite odstraniti te datoteke? Tega dejanja ne morete "
 "povrniti."
 
 #: src/main.qml:180 src/widgets/BabeTable/TableMenu.qml:135
@@ -313,8 +311,7 @@ msgid "Metadata"
 msgstr "Metapodatki"
 
 #: src/widgets/MetadataDialog.qml:41
-#, fuzzy, kde-format
-#| msgid "Embeded metadata info."
+#, kde-format
 msgid "Embedded metadata info."
 msgstr "Vdelane informacije metapodatkov"
 
@@ -361,7 +358,7 @@ msgstr "Informacije o datoteki"
 #: src/widgets/MetadataDialog.qml:146
 #, kde-format
 msgid "Local file info."
-msgstr ""
+msgstr "Informacija o lokalni datoteki"
 
 #: src/widgets/PlaybackBar.qml:155
 #, kde-format
@@ -464,12 +461,12 @@ msgstr "Prečeši vse vire glasbe na začetku, da ohranjaš svojo zbirko osveže
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Focus View"
-msgstr ""
+msgstr "Osredotočeni pogled"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Make the focus view the default"
-msgstr ""
+msgstr "Postavi osredotočeni pogled za privzetega"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:101
 #, kde-format

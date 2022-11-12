@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-11 00:44+0000\n"
-"PO-Revision-Date: 2022-11-10 17:15+0200\n"
+"PO-Revision-Date: 2022-11-11 17:33+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -54,9 +54,7 @@ msgid "Remove %1 tracks"
 msgstr "Вилучити доріжки (%1)"
 
 #: src/main.qml:178
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove this files? This action can not be undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
@@ -313,8 +311,7 @@ msgid "Metadata"
 msgstr "Метадані"
 
 #: src/widgets/MetadataDialog.qml:41
-#, fuzzy, kde-format
-#| msgid "Embeded metadata info."
+#, kde-format
 msgid "Embedded metadata info."
 msgstr "Вбудовані метадані."
 
@@ -359,8 +356,7 @@ msgid "File Info"
 msgstr "Відомості про файл"
 
 #: src/widgets/MetadataDialog.qml:146
-#, fuzzy, kde-format
-#| msgid "Locla file info."
+#, kde-format
 msgid "Local file info."
 msgstr "Дані з локального файла."
 
