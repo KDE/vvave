@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-11 00:44+0000\n"
-"PO-Revision-Date: 2022-11-09 12:23+0100\n"
+"PO-Revision-Date: 2022-11-11 09:18+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -55,13 +55,11 @@ msgid "Remove %1 tracks"
 msgstr "Elimina %1 peces"
 
 #: src/main.qml:178
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove this files? This action can not be undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
-"Segur que voleu eliminar estos fitxers? Esta operació no es pot desfer."
+"Segur que voleu eliminar estos fitxers? Esta operació no es podrà desfer."
 
 #: src/main.qml:180 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
@@ -311,8 +309,7 @@ msgid "Metadata"
 msgstr "Metadades"
 
 #: src/widgets/MetadataDialog.qml:41
-#, fuzzy, kde-format
-#| msgid "Embeded metadata info."
+#, kde-format
 msgid "Embedded metadata info."
 msgstr "Informació de les metadades incrustades."
 
@@ -357,8 +354,7 @@ msgid "File Info"
 msgstr "Informació del fitxer"
 
 #: src/widgets/MetadataDialog.qml:146
-#, fuzzy, kde-format
-#| msgid "Locla file info."
+#, kde-format
 msgid "Local file info."
 msgstr "Informació del fitxer local."
 
@@ -412,7 +408,7 @@ msgstr "Accepta"
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
-"Segur que voleu eliminar esta etiqueta? Esta operació no es pot desfer."
+"Segur que voleu eliminar esta etiqueta? Esta operació no es podrà desfer."
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
