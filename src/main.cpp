@@ -78,8 +78,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app.setOrganizationName(QStringLiteral("Maui"));
     app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
 
-    MauiApp::instance()->setIconName("qrc:/assets/vvave.png");
-
     KLocalizedString::setApplicationDomain("vvave");
     KAboutData about(QStringLiteral("vvave"), i18n("Vvave"), VVAVE_VERSION_STRING, i18n("Organize and listen to your music."), KAboutLicense::LGPL_V3, i18n("© 2019-%1 Maui Development Team", QString::number(QDate::currentDate().year())),QString(GIT_BRANCH) + "/" + QString(GIT_COMMIT_HASH));
 
@@ -90,8 +88,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     about.setOrganizationDomain(VVAVE_URI);
     about.setProgramLogo(app.windowIcon());
     about.setDesktopFileName("org.kde.vvave");
+    about.addComponent("TagLib");
 
     KAboutData::setApplicationData(about);
+
+    MauiApp::instance()->setIconName("qrc:/assets/vvave.png");
 
     QCommandLineParser parser;
     about.setupCommandLine(&parser);
