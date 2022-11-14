@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-11 00:44+0000\n"
-"PO-Revision-Date: 2022-11-09 20:23-0400\n"
+"PO-Revision-Date: 2022-11-13 15:33+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: src/main.cpp:84
 #, kde-format
@@ -53,14 +53,12 @@ msgid "Remove %1 tracks"
 msgstr "%1 tracks verwijderen"
 
 #: src/main.qml:178
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove this tag? This operation can not be "
-#| "undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
-"Wilt u deze tag verwijderen? Deze bewerking kan niet ongedaan worden gemaakt."
+"Wilt u deze bestanden verwijderen? Deze actie kan niet ongedaan worden "
+"gemaakt."
 
 #: src/main.qml:180 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
@@ -183,7 +181,7 @@ msgstr ""
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
-msgstr ""
+msgstr "Verwijderen"
 
 #: src/widgets/BabeTable/BabeTable.qml:163
 #, kde-format
@@ -392,7 +390,7 @@ msgstr ""
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
 #, kde-format
 msgid "Remove '%1'"
-msgstr ""
+msgstr "'%1' verwijderen"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
 #, kde-format
