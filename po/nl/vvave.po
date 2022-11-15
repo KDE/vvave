@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-11 00:44+0000\n"
-"PO-Revision-Date: 2022-11-13 15:33+0100\n"
+"POT-Creation-Date: 2022-11-15 00:45+0000\n"
+"PO-Revision-Date: 2022-11-14 15:33+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,29 +15,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.08.3\n"
 
-#: src/main.cpp:84
+#: src/main.cpp:82
 #, kde-format
 msgid "Vvave"
 msgstr "Vvave"
 
-#: src/main.cpp:84
+#: src/main.cpp:82
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Uw muziek organiseren en er naar luisteren."
 
-#: src/main.cpp:84
+#: src/main.cpp:82
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© 2019-%1 Ontwikkelteam van Maui"
 
-#: src/main.cpp:86
+#: src/main.cpp:84
 #, kde-format
 msgid "Camilo Higuita"
 msgstr "Camilo Higuita"
 
-#: src/main.cpp:86
+#: src/main.cpp:84
 #, kde-format
 msgid "Developer"
 msgstr "Ontwikkelaar"
@@ -93,12 +93,12 @@ msgstr "Albums"
 #: src/main.qml:417
 #, kde-format
 msgid "No Albums!"
-msgstr ""
+msgstr "Geen Albums!"
 
 #: src/main.qml:418 src/main.qml:443 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
-msgstr ""
+msgstr "Nieuwe muziekbronnen toevoegen"
 
 #: src/main.qml:435
 #, kde-format
