@@ -3,12 +3,12 @@
     <!-- The following comment will be replaced upon deployment with default permissions based on the dependencies of the application.
          Remove the comment if you do not require these default permissions. -->
 
-
     <!-- The following comment will be replaced upon deployment with default features based on the dependencies of the application.
          Remove the comment if you do not require these default features. -->
 
 
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Vvave" android:extractNativeLibs="true" android:icon="@drawable/icon">
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:label="Vvave" android:screenOrientation="unspecified" android:launchMode="singleTop">
@@ -16,8 +16,12 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <intent-filter>
+              <action android:name="android.intent.action.SEND_MULTIPLE"/>
+              <category android:name="android.intent.category.DEFAULT"/>
+              <data android:mimeType="*/*"/>
+          </intent-filter>
             <!-- Application arguments -->
-            <!-- meta-data android:name="android.app.arguments" android:value="arg1 arg2 arg3"/ -->
             <!-- Application arguments -->
             <meta-data android:name="android.app.lib_name" android:value="vvave"/>
             <meta-data android:name="android.app.qt_sources_resource_id" android:resource="@array/qt_sources"/>
@@ -71,10 +75,52 @@
             <!-- extract android style -->
         </activity>
         <!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
-        <provider android:name="android.support.v4.content.FileProvider" android:authorities="org.maui.vvave.fileprovider" android:grantUriPermissions="true" android:exported="false">
+        <provider android:name="androidx.core.content.FileProvider" android:authorities="org.maui.vvave.fileprovider" android:grantUriPermissions="true" android:exported="false">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths"/>
             </provider>
+
+<service android:name=".QMediaSessionManager" android:process=":vvaveService">
+<!-- Deploy Qt libs as part of package -->
+
+ <meta-data android:name="android.app.bundle_local_qt_libs" android:value="-- %%BUNDLE_LOCAL_QT_LIBS%% --"/>
+
+ <!-- Deploy Qt libs as part of package -->
+
+
+ <!-- Run with local libs -->
+
+ <meta-data android:name="android.app.use_local_qt_libs" android:value="-- %%USE_LOCAL_QT_LIBS%% --"/>
+
+ <meta-data android:name="android.app.libs_prefix" android:value="/data/local/tmp/qt/"/>
+
+ <meta-data android:name="android.app.load_local_libs_resource_id" android:resource="@array/load_local_libs"/>
+
+ <meta-data android:name="android.app.load_local_jars" android:value="-- %%INSERT_LOCAL_JARS%% --"/>
+
+ <meta-data android:name="android.app.static_init_classes" android:value="-- %%INSERT_INIT_CLASSES%% --"/>
+
+ <!-- Run with local libs -->
+
+
+ <!--  Messages maps -->
+
+ <meta-data android:value="@string/fatal_error_msg" android:name="android.app.fatal_error_msg"/>
+
+ <meta-data android:value="@string/unsupported_android_version" android:name="android.app.unsupported_android_version"/>
+
+ <!--  Messages maps -->
+
+
+ <!-- Background running -->
+
+ <meta-data android:name="android.app.background_running" android:value="true"/>
+
+ <!-- Background running -->
+            <meta-data android:name="android.app.lib_name" android:value="vvave"/>
+            <meta-data android:name="android.app.arguments" android:value="-service"/>
+        </service>
     </application>
+
 
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -84,4 +130,7 @@
 <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"/>
 <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
+<uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
+   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+
 </manifest>

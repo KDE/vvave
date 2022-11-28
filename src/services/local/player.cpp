@@ -3,6 +3,8 @@
 #include <QTime>
 #include <MauiKit/Accounts/mauiaccounts.h>
 #include "powermanagementinterface.h"
+#include <QMediaPlayerControl>
+#include <QMediaService>
 
 Player::Player(QObject *parent)
     : QObject(parent)
@@ -22,6 +24,8 @@ Player::Player(QObject *parent)
     connect(this->player, &QMediaPlayer::positionChanged, this, &Player::posChanged);
     connect(this->player, &QMediaPlayer::durationChanged, this, &Player::durationChanged);
 
+    auto mediaService = player->service();
+    QMediaPlayerControl *control = qobject_cast<QMediaPlayerControl *>(mediaService->requestControl("org.qt-project.qt.mediaplayercontrol/5.0"));
 }
 
 inline QNetworkRequest getOcsRequest(const QNetworkRequest &request)

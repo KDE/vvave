@@ -2,7 +2,7 @@
 
 function playTrack()
 {
-    player.url = currentTrack.url;
+    player.url = currentTrack.url ? currentTrack.url : "";
     player.play()
 }
 

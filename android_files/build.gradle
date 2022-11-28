@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath 'com.android.tools.build:gradle:3.6.4'
     }
 }
 
@@ -20,7 +20,9 @@ def timestamp = (int)(new Date().getTime()/1000)
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-        compile 'com.android.support:support-v4:25.3.1'
+            implementation "androidx.appcompat:appcompat:1.2.0"
+               implementation 'androidx.media:media:1.4.3'
+
 }
 
 android {
@@ -39,24 +41,24 @@ android {
 
     compileSdkVersion androidCompileSdkVersion.toInteger()
 
-    buildToolsVersion '28.0.3'
-
+    buildToolsVersion androidBuildToolsVersion
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = [qt5AndroidDir + '/src', 'src', 'java']
             aidl.srcDirs = [qt5AndroidDir + '/src', 'src', 'aidl']
             res.srcDirs = [qt5AndroidDir + '/res', 'res']
-            resources.srcDirs = ['resources']
+            resources.srcDirs = ['src']
             renderscript.srcDirs = ['src']
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
        }
-    }
+    }    
 
-    tasks.withType(JavaCompile) {
-        options.incremental = true
-    }
+
+//    tasks.withType(JavaCompile) {
+//        options.incremental = true
+//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -68,13 +70,13 @@ android {
     }
 
     // Do not compress Qt binary resources file
-    aaptOptions {
-        noCompress 'rcc'
-        ignoreAssetsPattern '!<dir>ECM:!<dir>aclocal:!<dir>doc:!<dir>gtk-doc:!<dir>man:!<dir>mime:!<dir>pkgconfig:!<dir>qlogging-categories5:!<file>iso_15924.mo:!<file>iso_3166-2.mo:!<file>iso_3166-3.mo:!<file>iso_4217.mo:!<file>iso_639-2.mo:!<file>iso_639-3.mo:!<file>iso_639-5.mo:!<file>kcodecs5_qt.qm:!<file>kde5_xml_mimetypes.qm:!<file>knotifications5_qt.qm:!<file>libkholidays5_qt.qm:!<file>libkmime5.mo:!<file>iso_3166-3.json:!<file>iso_4217.json:!<file>iso_639-2.json:!<file>iso_639-3.json:!<file>iso_639-5.json:!<file>schema-15924.json:!<file>schema-3166-1.json:!<file>schema-3166-2.json:!<file>schema-3166-3.json:!<file>schema-4217.json:!<file>schema-639-2.json:!<file>schema-639-3.json:!<file>schema-639-5.json'
-    }
+//    aaptOptions {
+//        noCompress 'rcc'
+//        ignoreAssetsPattern '!<dir>ECM:!<dir>aclocal:!<dir>doc:!<dir>gtk-doc:!<dir>man:!<dir>mime:!<dir>pkgconfig:!<dir>qlogging-categories5:!<file>iso_15924.mo:!<file>iso_3166-2.mo:!<file>iso_3166-3.mo:!<file>iso_4217.mo:!<file>iso_639-2.mo:!<file>iso_639-3.mo:!<file>iso_639-5.mo:!<file>kcodecs5_qt.qm:!<file>kde5_xml_mimetypes.qm:!<file>knotifications5_qt.qm:!<file>libkholidays5_qt.qm:!<file>libkmime5.mo:!<file>iso_3166-3.json:!<file>iso_4217.json:!<file>iso_639-2.json:!<file>iso_639-3.json:!<file>iso_639-5.json:!<file>schema-15924.json:!<file>schema-3166-1.json:!<file>schema-3166-2.json:!<file>schema-3166-3.json:!<file>schema-4217.json:!<file>schema-639-2.json:!<file>schema-639-3.json:!<file>schema-639-5.json'
+//    }
 
     defaultConfig {
-        resConfig "en"
+//        resConfig "en"
         minSdkVersion = qtMinSdkVersion
         targetSdkVersion = qtTargetSdkVersion
         manifestPlaceholders = [versionName: projectVersionFull, versionCode: timestamp]

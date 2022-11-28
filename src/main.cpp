@@ -20,6 +20,9 @@
 
 #ifdef Q_OS_ANDROID
 #include <MauiKit/Core/mauiandroid.h>
+#include <QAndroidService>
+#include <QAndroidJniEnvironment>
+#include <QAndroidJniObject>
 #endif
 
 #ifdef Q_OS_MACOS
@@ -53,6 +56,15 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 {
   qDebug() << "APP LOADING SPEED TESTS" << 0;
 
+  #ifdef Q_OS_ANDROID
+ if (argc > 1 && strcmp(argv[1], "-service") == 0)
+  {
+      qDebug() << "Service starting with from the same .so file";
+      QAndroidService app(argc, argv);
+      return app.exec();
+  }
+#endif
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
@@ -60,7 +72,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
 #endif
 
-#if defined Q_OS_ANDROID | defined Q_OS_IOS
+#if defined Q_OS_ANDROID || defined Q_OS_IOS
     QGuiApplication app(argc, argv);
 #else
     QApplication app(argc, argv);
@@ -68,9 +80,17 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qDebug() << "APP LOADING SPEED TESTS" << 1;
 
+
 #ifdef Q_OS_ANDROID
     if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
         return -1;
+
+
+    QAndroidJniObject::callStaticMethod<void>(
+        "org/vvave/mediasession/QMediaSessionManager",
+        "startQtAndroidService",
+        "(Landroid/content/Context;)V",
+        QtAndroid::androidActivity().object());
 #endif
 
     qDebug() << "APP LOADING SPEED TESTS" << 2;
@@ -164,6 +184,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qDebug() << "APP LOADING SPEED TESTS" << 4;
 
+
     engine.load(url);
 
     qDebug() << "APP LOADING SPEED TESTS" << 5;
@@ -172,6 +193,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #ifdef Q_OS_MACOS
     //	MAUIMacOS::removeTitlebarFromWindow();
 #endif
+
+
 
     return app.exec();
 }
