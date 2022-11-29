@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-15 00:45+0000\n"
+"POT-Creation-Date: 2022-11-29 00:45+0000\n"
 "PO-Revision-Date: 2022-11-15 09:49+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -19,27 +19,27 @@ msgstr ""
 "X-POFile-SpellExtra: Vvave Maui Higuita Cloud Ups LastFM Spotify\n"
 "X-POFile-SpellExtra: MusicBrainz iTunes Genius\n"
 
-#: src/main.cpp:82
+#: src/main.cpp:102
 #, kde-format
 msgid "Vvave"
 msgstr "Vvave"
 
-#: src/main.cpp:82
+#: src/main.cpp:102
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Organize e oiça a sua música."
 
-#: src/main.cpp:82
+#: src/main.cpp:102
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© 2019-%1 da Equipa de Desenvolvimento do Maui"
 
-#: src/main.cpp:84
+#: src/main.cpp:104
 #, kde-format
 msgid "Camilo Higuita"
 msgstr "Camilo Higuita"
 
-#: src/main.cpp:84
+#: src/main.cpp:104
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolvimento"

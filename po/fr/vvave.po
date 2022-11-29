@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-15 00:45+0000\n"
+"POT-Creation-Date: 2022-11-29 00:45+0000\n"
 "PO-Revision-Date: 2022-11-09 18:36+0100\n"
 "Last-Translator: KDE Francophone <kde-francophone@kde.org>\n"
 "Language-Team: KDE Francophone <kde-francophone@kde.org>\n"
@@ -12,27 +12,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/main.cpp:82
+#: src/main.cpp:102
 #, kde-format
 msgid "Vvave"
 msgstr ""
 
-#: src/main.cpp:82
+#: src/main.cpp:102
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr ""
 
-#: src/main.cpp:82
+#: src/main.cpp:102
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
 msgstr ""
 
-#: src/main.cpp:84
+#: src/main.cpp:104
 #, kde-format
 msgid "Camilo Higuita"
 msgstr ""
 
-#: src/main.cpp:84
+#: src/main.cpp:104
 #, kde-format
 msgid "Developer"
 msgstr ""
