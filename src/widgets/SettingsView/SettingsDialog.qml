@@ -69,13 +69,26 @@ Maui.SettingsDialog
         Maui.SettingTemplate
         {
             label1.text: i18n("Auto Scan")
-            label2.text: i18n("Scan all the music sources on startup to keep your collection up to date")
+            label2.text: i18n("Scan all the music sources on startup to keep your collection up to date.")
 
             Switch
             {
                 checkable: true
                 checked: settings.autoScan
                 onToggled: settings.autoScan = !settings.autoScan
+            }
+        }
+
+        Maui.SettingTemplate
+        {
+            label1.text: i18n("Auto Resume")
+            label2.text: i18n("Resume the last session playlist.")
+
+            Switch
+            {
+                checkable: true
+                checked: playlist.autoResume
+                onToggled: playlist.autoResume = !playlist.autoResume
             }
         }
 
@@ -99,7 +112,7 @@ Maui.SettingsDialog
         {
             visible: Maui.Handy.isAndroid
             label1.text: i18n("Dark Mode")
-            label2.text: i18n("Switch between light and dark colorscheme")
+            label2.text: i18n("Switch between light and dark colorscheme.")
 
             Switch
             {

@@ -113,6 +113,7 @@ Maui.ApplicationWindow
     Playlist
     {
         id: playlist
+
         model: mainPlaylist.listModel.list
         onCurrentTrackChanged: Player.playTrack()
 

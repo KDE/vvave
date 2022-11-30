@@ -9,6 +9,7 @@
 Playlist::Playlist(QObject *parent)
     : QObject(parent)
     , m_playMode(static_cast<Playlist::PlayMode>(UTIL::loadSettings("PLAYMODE", "PLAYBACK", 0).toUInt()))
+    ,m_autoResume(UTIL::loadSettings("autoResume", "Settings", -1).toBool())
 {
 }
 
@@ -35,6 +36,11 @@ Playlist::PlayMode Playlist::playMode() const
 Playlist::RepeatMode Playlist::repeatMode() const
 {
     return m_repeatMode;
+}
+
+bool Playlist::autoResume() const
+{
+    return m_autoResume;
 }
 
 void Playlist::loadLastPlaylist()
@@ -231,8 +237,6 @@ void Playlist::setModel(TracksModel *model)
     m_model = model;
 
     connect(m_model, &TracksModel::countChanged, this, &Playlist::canPlayChanged);
-
-    this->loadLastPlaylist();
     emit modelChanged(m_model);
 }
 
@@ -348,3 +352,27 @@ void Playlist::setRepeatMode(Playlist::RepeatMode repeatMode)
     emit repeatModeChanged(m_repeatMode);
 }
 
+void Playlist::setAutoResume(bool autoResume)
+{
+    if (m_autoResume == autoResume)
+        return;
+
+    m_autoResume = autoResume;
+    UTIL::saveSettings("autoResume", m_autoResume, "Settings");
+    emit autoResumeChanged(m_autoResume);
+}
+
+
+void Playlist::classBegin()
+{
+}
+
+void Playlist::componentComplete()
+{
+
+    qDebug() << "LOAD PLAYLIST AUTORESUME" << m_autoResume;
+    if(m_autoResume)
+    {
+        this->loadLastPlaylist();
+    }
+}
