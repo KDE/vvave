@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-29 00:45+0000\n"
+"POT-Creation-Date: 2022-12-01 00:45+0000\n"
 "PO-Revision-Date: 2022-11-09 18:36+0100\n"
 "Last-Translator: KDE Francophone <kde-francophone@kde.org>\n"
 "Language-Team: KDE Francophone <kde-francophone@kde.org>\n"
@@ -37,84 +37,84 @@ msgstr ""
 msgid "Developer"
 msgstr ""
 
-#: src/main.qml:121
+#: src/main.qml:122
 #, kde-format
 msgid "Missing file"
 msgstr ""
 
-#: src/main.qml:177
+#: src/main.qml:178
 #, kde-format
 msgid "Remove %1 tracks"
 msgstr ""
 
-#: src/main.qml:178
+#: src/main.qml:179
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 
-#: src/main.qml:180 src/widgets/BabeTable/TableMenu.qml:135
+#: src/main.qml:181 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: src/main.qml:181 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/main.qml:182 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
 msgstr ""
 
-#: src/main.qml:351
+#: src/main.qml:352
 #, kde-format
 msgid "Settings"
 msgstr ""
 
-#: src/main.qml:358
+#: src/main.qml:359
 #, kde-format
 msgid "About"
 msgstr ""
 
-#: src/main.qml:391
+#: src/main.qml:392
 #, kde-format
 msgid "Songs"
 msgstr ""
 
-#: src/main.qml:410
+#: src/main.qml:411
 #, kde-format
 msgid "Albums"
 msgstr ""
 
-#: src/main.qml:417
+#: src/main.qml:418
 #, kde-format
 msgid "No Albums!"
 msgstr ""
 
-#: src/main.qml:418 src/main.qml:443 src/widgets/TracksView.qml:22
+#: src/main.qml:419 src/main.qml:444 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr ""
 
-#: src/main.qml:435
+#: src/main.qml:436
 #, kde-format
 msgid "Artists"
 msgstr ""
 
-#: src/main.qml:442
+#: src/main.qml:443
 #, kde-format
 msgid "No Artists!"
 msgstr ""
 
-#: src/main.qml:459 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:460 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr ""
 
-#: src/main.qml:466
+#: src/main.qml:467
 #, kde-format
 msgid "Folders"
 msgstr ""
 
-#: src/main.qml:474
+#: src/main.qml:475
 #, kde-format
 msgid "Cloud"
 msgstr ""
@@ -436,45 +436,55 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid ""
-"Scan all the music sources on startup to keep your collection up to date"
+"Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
-msgid "Focus View"
+msgid "Auto Resume"
 msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
+msgid "Resume the last session playlist."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:97
+#, kde-format
+msgid "Focus View"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:98
+#, kde-format
 msgid "Make the focus view the default"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:101
+#: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
 msgid "Dark Mode"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:102
+#: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
-msgid "Switch between light and dark colorscheme"
+msgid "Switch between light and dark colorscheme."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:119
+#: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Sources"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:120
+#: src/widgets/SettingsView/SettingsDialog.qml:133
 #, kde-format
 msgid "Add or remove sources"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:163
+#: src/widgets/SettingsView/SettingsDialog.qml:176
 #, kde-format
 msgid "Add"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:180
+#: src/widgets/SettingsView/SettingsDialog.qml:193
 #, kde-format
 msgid "Scan now"
 msgstr ""
