@@ -167,18 +167,18 @@
   </recommends>
   <project_group>KDE</project_group>
   <releases>
- <release version="2.2.1" date="2022-11-25">
+    <release version="2.2.1" date="2022-11-25">
       <url>https://mauikit.org/blog/maui-2-2-1-release/</url>
     </release>
-<release version="2.2.0" date="2022-08-30">
+    <release version="2.2.0" date="2022-08-30">
       <url>https://mauikit.org/blog/maui-2-2-0-release/</url>
     </release>
-<release version="2.1.2" date="2022-05-16">
+    <release version="2.1.2" date="2022-05-16">
       <url>https://mauikit.org/blog/maui-2-1-2-release/</url>
     </release>
     <release version="1.2.2" date="2021-05-11">
       <url>https://nxos.org/maui/maui-1-2-2-release/</url>
     </release>
     <release version="0.1.0" date="2018-09-06"/>
- </releases>
+  </releases>
 </component>
