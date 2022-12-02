@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:45+0000\n"
-"PO-Revision-Date: 2022-11-11 20:04+0300\n"
+"PO-Revision-Date: 2022-12-01 17:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -448,23 +448,22 @@ msgid "Auto Scan"
 msgstr "Otomatik Tara"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scan all the music sources on startup to keep your collection up to date"
+#, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
-"Başlangıçta tüm müzik kaynaklarınızı tarayıp koleksiyonunuzu güncel tut"
+"Müzik koleksiyonunuzu güncel tutmak için başlangıçta tüm müzik kaynaklarını "
+"tarayın."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "Otomatik Sürdür"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "Son oturumdaki listeyi sürdür."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:97
 #, kde-format
@@ -482,10 +481,9 @@ msgid "Dark Mode"
 msgstr "Koyu Kip"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Açık ve koyu renk şemaları arasında geçiş yap"
+msgstr "Açık ve koyu renk şemaları arasında geçiş yapın."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format

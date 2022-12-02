@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:45+0000\n"
-"PO-Revision-Date: 2022-11-11 04:16+0100\n"
+"PO-Revision-Date: 2022-12-01 16:40+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.11.90\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -451,24 +451,22 @@ msgid "Auto Scan"
 msgstr "Explorar automáticamente"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scan all the music sources on startup to keep your collection up to date"
+#, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 "Explorar todas las fuentes de música durante el inicio para mantener la "
-"colección actualizada"
+"colección actualizada."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "Continuar automáticamente"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "Continuar la lista de reproducción de la última sesión."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:97
 #, kde-format
@@ -486,10 +484,9 @@ msgid "Dark Mode"
 msgstr "Modo oscuro"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Cambiar entre los esquemas de color claro y oscuro"
+msgstr "Cambiar entre los esquemas de color claro y oscuro."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format

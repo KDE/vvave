@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:45+0000\n"
-"PO-Revision-Date: 2022-11-16 15:25+0100\n"
+"PO-Revision-Date: 2022-12-01 12:28+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -449,24 +449,22 @@ msgid "Auto Scan"
 msgstr "Automatische scan"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scan all the music sources on startup to keep your collection up to date"
+#, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 "Alle muziekbronnen scannen bij opstarten om uw verzameling up-to-date te "
-"houden"
+"houden."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "Automatisch hervatten"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "De afspeellijst van de laatste sessie hervatten."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:97
 #, kde-format
@@ -484,10 +482,9 @@ msgid "Dark Mode"
 msgstr "Donkere modus"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Tussen licht en donker kleurenschema wisselen"
+msgstr "Tussen licht en donker kleurenschema wisselen."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
