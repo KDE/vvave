@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:45+0000\n"
-"PO-Revision-Date: 2022-11-15 09:48+0100\n"
+"PO-Revision-Date: 2022-12-02 06:54+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.1.1\n"
 
 #: src/main.cpp:102
@@ -453,22 +453,20 @@ msgid "Auto Scan"
 msgstr "Samodejno prečesavanje"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scan all the music sources on startup to keep your collection up to date"
+#, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
-msgstr "Prečeši vse vire glasbe na začetku, da ohranjaš svojo zbirko osveženo"
+msgstr "Prečeši vse vire glasbe ob zagonu, da ohranjaš svojo zbirko osveženo."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "Samodejno nadaljuj"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "Nadaljuj seznam predvajanja zadnje seje."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:97
 #, kde-format
@@ -486,10 +484,9 @@ msgid "Dark Mode"
 msgstr "Temni način"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Preklopi med svetlo in temno barvno shemo"
+msgstr "Preklopi med svetlo in temno barvno shemo."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
