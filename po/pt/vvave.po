@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:45+0000\n"
-"PO-Revision-Date: 2022-11-15 09:49+0000\n"
+"PO-Revision-Date: 2022-12-04 02:29+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -452,24 +452,22 @@ msgid "Auto Scan"
 msgstr "Sondagem Automática"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
-#, fuzzy, kde-format
-#| msgid ""
-#| "Scan all the music sources on startup to keep your collection up to date"
+#, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 "Analisa todas as fontes de músicas no arranque para manter a sua colecção "
-"actualizada"
+"actualizada."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "Continuar Automaticamente"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "Prosseguir a lista de reprodução da última sessão."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:97
 #, kde-format
@@ -487,10 +485,9 @@ msgid "Dark Mode"
 msgstr "Modo Escuro"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
-#, fuzzy, kde-format
-#| msgid "Switch between light and dark colorscheme"
+#, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Alternar entre o esquema de cores claro e escuro"
+msgstr "Alternar entre o esquema de cores claro e escuro."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
