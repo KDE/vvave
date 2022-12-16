@@ -188,7 +188,7 @@ void Playlist::save()
     }
 
     QStringList urls;
-    const auto count = std::min(m_model->getCount(), 15);
+    const auto count = m_model->getCount();
 
     for (int i = 0; i < count; i++) {
         auto url = m_model->get(i).value("url").toString();
