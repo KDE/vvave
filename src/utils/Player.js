@@ -1,5 +1,7 @@
 .import org.mauikit.filebrowsing 1.3 as FB
 
+.import org.maui.vvave 1.0 as Vvave
+
 function playTrack()
 {
     player.url = currentTrack.url ? currentTrack.url : "";
@@ -124,6 +126,12 @@ function appendAllModel(model)
 {
     mainPlaylist.listModel.list.copy(model)
     mainPlaylist.listView.positionViewAtEnd()
+
+    if (model.count > 1 && root.playlistManager.playMode == Vvave.Playlist.Shuffle)
+        root.playlistManager.shuffleRange(
+            mainPlaylist.listView.count - model.count,
+            mainPlaylist.listView.count
+        )
 }
 
 function playAllModel(model)

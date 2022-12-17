@@ -1,10 +1,12 @@
 #include "playlist.h"
 #include "../../models/tracks/tracksmodel.h"
 
-#include <QRandomGenerator>
+// #include <QRandomGenerator>
 #include <QUrl>
 #include <QDebug>
 #include <MauiKit/Core/utils.h>
+
+#include <random>
 
 Playlist::Playlist(QObject *parent)
     : QObject(parent)
@@ -280,7 +282,68 @@ void Playlist::setPlayMode(Playlist::PlayMode playMode)
 
     m_playMode = playMode;
     UTIL::saveSettings("PLAYMODE", m_playMode, "PLAYBACK");
+
+    if (playMode == Playlist::PlayMode::Shuffle)
+    {
+        this->shuffleRange(0, m_model->getCount());
+    }
+
     emit playModeChanged(m_playMode);
+}
+
+void Playlist::shuffleRange(int start, int stop)
+{
+    const auto count = m_model->getCount();
+
+    std::vector<int> new_indices = {};
+    new_indices.reserve(count);
+    for (int i = 0; i < start; i++) {
+        new_indices.push_back(i);
+    }
+
+    std::vector<int> shuffled_indices = {};
+    shuffled_indices.reserve(stop - start);
+    for (int i = start; i < stop; i++) {
+        shuffled_indices.push_back(i);
+    }
+    std::random_device rd;
+    std::mt19937 g{rd()};
+    // This isn't really a great randomness source:
+    // https://stackoverflow.com/questions/45069219/how-to-succinctly-portably-and-thoroughly-seed-the-mt19937-prng
+    // https://stackoverflow.com/questions/18880654/why-do-i-get-the-same-sequence-for-every-run-with-stdrandom-device-with-mingw
+    // https://en.cppreference.com/w/cpp/numeric/random/random_device
+    // But at least in recent versions of most compilers, it should generate a new sequence each time:
+    // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=85494
+    std::shuffle(
+        shuffled_indices.begin(),
+        shuffled_indices.end(),
+        g
+    );
+
+    new_indices.insert(new_indices.end(), shuffled_indices.begin(), shuffled_indices.end());
+
+    for (int i = stop; i < count; i++) {
+        new_indices.push_back(i);
+    };
+
+    std::vector<QVariantMap> new_tracks = {};
+
+    int new_index = -1;
+
+    for (int i=0; i < new_indices.size(); i++) {
+        new_tracks.push_back(m_model->get(new_indices[i]));
+        if (new_indices[i] == currentIndex())
+        {
+            new_index = i;
+        }
+    }
+
+    m_model->clear();
+    for (auto track: new_tracks) {
+        m_model->append(track);
+    }
+
+    changeCurrentIndex(new_index);
 }
 
 void Playlist::move(int from, int to)

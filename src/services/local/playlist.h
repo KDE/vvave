@@ -84,6 +84,8 @@ public slots:
 
     void setPlayMode(Playlist::PlayMode playMode);
 
+    void shuffleRange(int start, int stop);
+
     void move(int from, int to);
     void remove(int index);
 
