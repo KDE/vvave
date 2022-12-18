@@ -293,18 +293,12 @@ void Playlist::setPlayMode(Playlist::PlayMode playMode)
 
 void Playlist::shuffleRange(int start, int stop)
 {
-    const auto count = m_model->getCount();
+    int len = stop - start;
 
-    std::vector<int> new_indices = {};
-    new_indices.reserve(count);
-    for (int i = 0; i < start; i++) {
-        new_indices.push_back(i);
-    }
-
-    std::vector<int> shuffled_indices = {};
-    shuffled_indices.reserve(stop - start);
-    for (int i = start; i < stop; i++) {
-        shuffled_indices.push_back(i);
+    std::vector<int> shuffled_offsets = {};
+    shuffled_offsets.reserve(len);
+    for (int i = 0; i < len; i++) {
+        shuffled_offsets.push_back(i);
     }
     std::random_device rd;
     std::mt19937 g{rd()};
@@ -315,35 +309,32 @@ void Playlist::shuffleRange(int start, int stop)
     // But at least in recent versions of most compilers, it should generate a new sequence each time:
     // https://gcc.gnu.org/bugzilla/show_bug.cgi?id=85494
     std::shuffle(
-        shuffled_indices.begin(),
-        shuffled_indices.end(),
+        shuffled_offsets.begin(),
+        shuffled_offsets.end(),
         g
     );
 
-    new_indices.insert(new_indices.end(), shuffled_indices.begin(), shuffled_indices.end());
-
-    for (int i = stop; i < count; i++) {
-        new_indices.push_back(i);
-    };
-
-    std::vector<QVariantMap> new_tracks = {};
-
+    std::vector<QVariantMap> shuffled_tracks = {};
     int new_index = -1;
 
-    for (int i=0; i < new_indices.size(); i++) {
-        new_tracks.push_back(m_model->get(new_indices[i]));
-        if (new_indices[i] == currentIndex())
+    for (int i = 0; i < len; i++) {
+        int remap_i = start + shuffled_offsets[i];
+        shuffled_tracks.push_back(m_model->get(remap_i));
+        if (remap_i == currentIndex())
         {
-            new_index = i;
+            new_index = start + i;
         }
     }
 
-    m_model->clear();
-    for (auto track: new_tracks) {
-        m_model->append(track);
+    int i = start;
+    for (auto track: shuffled_tracks) {
+        m_model->update(track, i++);
     }
 
-    changeCurrentIndex(new_index);
+    if (new_index != -1)
+    {
+        changeCurrentIndex(new_index);
+    }
 }
 
 void Playlist::move(int from, int to)
