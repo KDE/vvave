@@ -7,6 +7,7 @@
 #include <MauiKit/Core/utils.h>
 
 #include <random>
+#include <chrono>
 
 Playlist::Playlist(QObject *parent)
     : QObject(parent)
@@ -295,11 +296,19 @@ void Playlist::shuffleRange(int start, int stop)
 {
     int len = stop - start;
 
+    auto time = [](auto& lastTime, QString label) {
+        qDebug() << label << (double)std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now() - lastTime).count() / 1e9 << "seconds.";
+        lastTime = std::chrono::steady_clock::now();
+    };
+    auto st = std::chrono::steady_clock::now();
+    auto st1 = st;
+
     std::vector<int> shuffled_offsets = {};
     shuffled_offsets.reserve(len);
     for (int i = 0; i < len; i++) {
         shuffled_offsets.push_back(i);
     }
+    time(st, "Init Offsets");
     std::random_device rd;
     std::mt19937 g{rd()};
     // This isn't really a great randomness source:
@@ -313,6 +322,7 @@ void Playlist::shuffleRange(int start, int stop)
         shuffled_offsets.end(),
         g
     );
+    time(st, "Shuffle Offsets");
 
     std::vector<QVariantMap> shuffled_tracks = {};
     int new_index = -1;
@@ -325,16 +335,20 @@ void Playlist::shuffleRange(int start, int stop)
             new_index = start + i;
         }
     }
+    time(st, "Init Tracks");
 
     int i = start;
     for (auto track: shuffled_tracks) {
         m_model->update(track, i++);
     }
+    time(st, "Update Tracks");
 
     if (new_index != -1)
     {
         changeCurrentIndex(new_index);
     }
+    time(st, "Update Index");
+    time(st1, "Total");
 }
 
 void Playlist::move(int from, int to)
