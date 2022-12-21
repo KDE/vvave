@@ -137,4 +137,17 @@ Maui.StackView
         currentPlaylist = playlist
         control.push(_filterListComponent)
     }
+
+    function getFilterField() : Item
+    {
+        return control.currentItem.getFilterField()
+    }
+
+    function getGoBackFunc() : Function
+    {
+        if (control.depth > 1)
+            return () => { control.pop() }
+        else
+            return null
+    }
 }

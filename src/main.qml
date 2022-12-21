@@ -76,8 +76,127 @@ Maui.ApplicationWindow
 
 
     /*HANDLE EVENTS*/
+
+    signal contextualPlayNext()
+
     onClosing: playlist.save()
     onFocusViewChanged: setAndroidStatusBarColor()
+
+    Shortcut
+    {
+        sequence: "Space"
+        onActivated: {
+            if(player.playing)
+                player.pause()
+            else
+                player.play()
+        }
+    }
+
+    Shortcut
+    {
+        sequence: "P"
+        onActivated: Player.previousTrack()
+    }
+
+    Shortcut
+    {
+        sequence: "N"
+        onActivated: Player.nextTrack()
+    }
+
+    Shortcut
+    {
+        sequence: "Left"
+        enabled: !(activeFocusItem instanceof Maui.GridView || activeFocusItem instanceof GridView)
+        onActivated: player.pos -= 10000
+    }
+
+    Shortcut
+    {
+        sequence: "Right"
+        enabled: !(activeFocusItem instanceof Maui.GridView || activeFocusItem instanceof GridView)
+        onActivated: player.pos += 10000
+    }
+
+    Shortcut
+    {
+        sequence: "+"
+        sequences: ["="]
+        onActivated: player.volume += 5
+    }
+
+    Shortcut
+    {
+        sequence: "-"
+        onActivated: player.volume -= 5
+    }
+
+    Shortcut
+    {
+        sequence: StandardKey.Find
+        onActivated: {
+            console.log("FOCUS FILTER")
+
+            let filterField = getFilterField()
+
+            if (!filterField)
+                return
+
+            if (!filterField.activeFocus)
+                filterField.forceActiveFocus()
+            else
+                filterField.focus = false
+        }
+    }
+
+    Shortcut
+    {
+        sequence: StandardKey.Cancel
+        onActivated: {
+            // I couldn't get Keys.onShortcutOverride in each view to work. I guess this is more dynamic anyway.
+            let func = getGoBackFunc()
+            if (func) {
+                func()
+                return
+            }
+            toggleFocusView()
+        }
+    }
+
+    Shortcut
+    {
+        sequence: "Ctrl+Tab" // StandardKey.NextChild and .PreviousChild seem broken on Linux.
+        onActivated: swipeView.currentIndex = ((swipeView.currentIndex + 1) % swipeView.count + swipeView.count) % swipeView.count
+    }
+
+    Shortcut
+    {
+        sequence: "Ctrl+Shift+Tab"
+        onActivated: swipeView.currentIndex = ((swipeView.currentIndex - 1) % swipeView.count + swipeView.count) % swipeView.count
+    }
+
+    Shortcut
+    {
+        sequences: ["Shift+Return", "Shift+Enter"]
+        // StandardKey.InsertLineSeparator only gets "Enter", not "Return".
+        onActivated: contextualPlayNext()
+    }
+
+    Shortcut
+    {
+        sequence: "Menu"
+        onActivated: {
+            if (activeFocusItem) {
+                let func = (activeFocusItem.currentItem ?? activeFocusItem).tryOpenContextMenu
+                if (func) {
+                    func()
+                    return
+                }
+            }
+            console.log("NO CONTEXT MENU", activeFocusItem, activeFocusItem.currentItem)
+        }
+    }
 
     Loader
     {
@@ -486,6 +605,18 @@ Maui.ApplicationWindow
                         visible: active
                         sourceComponent: Maui.ProgressIndicator {}
                     }
+
+                    function getFilterField() : Item
+                    {
+                        return currentItem.item.getFilterField()
+                    }
+
+                    function getGoBackFunc() : Function
+                    {
+                        return 'getGoBackFunc' in currentItem.item ?
+                            currentItem.item.getGoBackFunc() :
+                            null
+                    }
                 }
 
                 Component
@@ -626,4 +757,24 @@ Maui.ApplicationWindow
     {
         return false;
     }
+
+    function getFilterField() : Item
+    {
+        return ('getFilterField' in _stackView.currentItem) ?
+            _stackView.currentItem.getFilterField() :
+            null
+    }
+
+    function getGoBackFunc() : Function
+    {
+        let filterField = getFilterField()
+        if (filterField && filterField.activeFocus) {
+            return () => { filterField.focus = false }
+        } else {
+            return ('getGoBackFunc' in _stackView.currentItem) ?
+                _stackView.currentItem.getGoBackFunc() :
+                null
+        }
+    }
+
     }

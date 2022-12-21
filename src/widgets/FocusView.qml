@@ -28,47 +28,6 @@ Pane
 
     Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
 
-    Keys.enabled: true
-    Keys.onPressed:
-    {
-        console.log("KEY PRESSED")
-        if((event.key == Qt.Key_K) && (event.modifiers & Qt.ControlModifier))
-        {
-            _filterField.forceActiveFocus()
-            event.accepted = true
-        }
-    }
-
-    Keys.onBackPressed:
-    {
-        toggleFocusView()
-        event.accepted = true
-    }
-
-    Keys.onLeftPressed:
-    {
-        Player.previousTrack()
-    }
-
-    Keys.onRightPressed:
-    {
-        Player.nextTrack()
-    }
-
-    Keys.onUpPressed:
-    {
-        if(player.playing)
-            player.pause()
-        else
-            player.play()
-    }
-
-    Shortcut
-    {
-        sequence: StandardKey.Back
-        onActivated: toggleFocusView()
-    }
-
     background: Rectangle
     {
         color: Maui.Theme.backgroundColor
@@ -152,20 +111,24 @@ Pane
         }
     }
 
-
     StackView
     {
         id: _focusStackView
         anchors.fill: parent
         Keys.forwardTo: control
 
+        property alias loader: _loader
+
         initialItem: Loader
         {
+            id: _loader
             focus: true
             asynchronous: true
 
+
             sourceComponent: Maui.Page
             {
+                property alias filterField: _filterField
                 showCSDControls: settings.focusViewDefault
                 background: null
                 headBar.background: null
@@ -179,6 +142,10 @@ Pane
                     Layout.maximumWidth: 500
                     Layout.fillWidth: true
                     clip: false
+
+                    KeyNavigation.up: _list
+                    KeyNavigation.down: _list
+
                     onTextChanged:
                     {
                         if(text.length > 2)
@@ -630,5 +597,10 @@ Pane
     Component.onCompleted:
     {
         forceActiveFocus()
+    }
+
+    function getFilterField() : Item
+    {
+        return _focusStackView.loader.item.filterField
     }
 }

@@ -24,11 +24,16 @@ Maui.StackView
 
         headBar.middleContent: Maui.SearchField
         {
+            id: _filterField
             Layout.fillWidth: true
             Layout.maximumWidth: 500
             Layout.alignment: Qt.AlignCenter
 
             placeholderText: i18np("Filter", "Filter %1 folders", _foldersList.count)
+
+            KeyNavigation.up: browser
+            KeyNavigation.down: browser
+
             onAccepted: browser.model.filter = text
             onCleared:  browser.model.filter = text
         }
@@ -108,6 +113,10 @@ Maui.StackView
                 }
             }
         }
+        function getFilterField() : Item
+        {
+            return _filterField
+        }
     }
 
     Component
@@ -145,5 +154,18 @@ Maui.StackView
     {
         currentFolder = folder
         control.push(_filterListComponent)
+    }
+
+    function getFilterField() : Item
+    {
+        return control.currentItem.getFilterField()
+    }
+
+    function getGoBackFunc() : Function
+    {
+        if (control.depth > 1)
+            return () => { control.pop() }
+        else
+            return null
     }
 }

@@ -101,5 +101,18 @@ Maui.StackView
         console.log("GET ARTIST OR ALBUM BY", album, artist)
         control.currentQuery = query
     }
+
+    function getFilterField() : Item
+    {
+        return control.currentItem.getFilterField()
+    }
+
+    function getGoBackFunc() : Function
+    {
+        if (control.depth > 1)
+            return () => { control.pop() }
+        else
+            return null
+    }
 }
 

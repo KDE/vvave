@@ -83,6 +83,7 @@ Maui.Page
 
     headBar.middleContent: Loader
     {
+        id: _filterLoader
         asynchronous: true
         active: listModel.list.count > 1
         visible: active
@@ -95,6 +96,10 @@ Maui.Page
         sourceComponent: Maui.SearchField
         {
             placeholderText: i18np("Filter", "Filter %1 songs", listModel.list.count)
+
+            KeyNavigation.up: _listBrowser
+            KeyNavigation.down: _listBrowser
+
             onAccepted:
             {
                 if(text.includes(","))
@@ -246,11 +251,6 @@ Maui.Page
             {
                 control.rowClicked(_listBrowser.currentIndex)
             }
-
-            if(event.key === Qt.Key_Space)
-            {
-                control.appendTrack(_listBrowser.currentIndex)
-            }
         }
 
         section.property: control.group ? control.listModel.sort : ""
@@ -284,8 +284,13 @@ Maui.Page
             number: trackNumberVisible
             coverArt: coverArtVisible ? (control.width > 200) : coverArtVisible
 
-            onPressAndHold: if(Maui.Handy.isTouch && allowMenu) openItemMenu(index)
-            onRightClicked: if(allowMenu) openItemMenu(index)
+            onPressAndHold: { if(Maui.Handy.isTouch) tryOpenContextMenu() }
+            onRightClicked: tryOpenContextMenu()
+
+            function tryOpenContextMenu() : undefined
+            {
+                if (allowMenu) openItemMenu(index)
+            }
 
             onToggled: selectionBar.addToSelection(control.listModel.get(index))
             checked: selectionBar.contains(model.url)
@@ -376,6 +381,16 @@ Maui.Page
             }
         }
     }
+
+    Connections
+    {
+        target: root
+
+        function onContextualPlayNext(event) {
+            if (_listBrowser.activeFocus)
+                Player.queueTracks([listModel.get(_listBrowser.currentIndex)])
+        }
+    }
 }
 
 function openItemMenu(index)
@@ -413,5 +428,10 @@ function filterSelection(url)
 function forceActiveFocus()
 {
     _listBrowser.forceActiveFocus()
+}
+
+function getFilterField() : Item
+{
+    return _filterLoader.item
 }
 }

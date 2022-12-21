@@ -23,6 +23,7 @@ Maui.AltBrowser
 
     headBar.middleContent: Loader
     {
+        id: _filterLoader
         asynchronous: true
         active: listModel.list.count > 1
         visible: active
@@ -35,6 +36,9 @@ Maui.AltBrowser
         sourceComponent: Maui.SearchField
         {
             placeholderText: i18np("Filter", "Filter %1 albums", _albumsList.count)
+
+            KeyNavigation.up: currentView
+            KeyNavigation.down: currentView
 
             onAccepted:
             {
@@ -195,6 +199,11 @@ Maui.AltBrowser
                 }
             }
         }
+    }
+
+    function getFilterField() : Item
+    {
+        return _filterLoader.item
     }
 }
 

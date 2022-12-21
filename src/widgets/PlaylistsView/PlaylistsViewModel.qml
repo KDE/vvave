@@ -85,10 +85,15 @@ Maui.AltBrowser
     headBar.forceCenterMiddleContent: false
     headBar.middleContent: Maui.SearchField
     {
+        id: _filterField
         Layout.maximumWidth: 500
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignCenter
         placeholderText: i18np("Filter", "Filter %1 tags", control.count)
+
+        KeyNavigation.up: currentView
+        KeyNavigation.down: currentView
+
         onAccepted: _playlistsModel.filter = text
         onCleared: _playlistsModel.filter = ""
     }
@@ -142,14 +147,11 @@ Maui.AltBrowser
             }
         }
 
-        onRightClicked:
-        {
-            control.currentIndex = index
-            currentPlaylist = model.playlist
-            _tagMenu.show()
-        }
+        onRightClicked: tryOpenContextMenu()
 
-        onPressAndHold:
+        onPressAndHold: tryOpenContextMenu()
+
+        function tryOpenContextMenu() : undefined
         {
             control.currentIndex = index
             currentPlaylist = model.playlist
@@ -198,19 +200,22 @@ Maui.AltBrowser
                 }
             }
 
-            onRightClicked:
-            {
-                control.currentIndex = index
-                currentPlaylist = model.playlist
-                _tagMenu.show()
-            }
+            onRightClicked: tryOpenContextMenu()
 
-            onPressAndHold:
-            {
-                control.currentIndex = index
-                currentPlaylist = model.playlist
-                _tagMenu.show()
-            }
+            onPressAndHold: tryOpenContextMenu()
+
         }
+
+        function tryOpenContextMenu() : undefined
+        {
+            control.currentIndex = index
+            currentPlaylist = model.playlist
+            _tagMenu.show()
+        }
+    }
+
+    function getFilterField() : Item
+    {
+        return _filterField
     }
 }

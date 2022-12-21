@@ -166,12 +166,12 @@ Maui.Page
 
             onPressAndHold: if(Maui.Handy.isTouch && table.allowMenu) table.openItemMenu(index)
 
-            onRightClicked:
+            onRightClicked: tryOpenContextMenu()
+
+            function tryOpenContextMenu() : undefined
             {
-                if(table.allowMenu)
-                {
+                if (table.allowMenu)
                     table.openItemMenu(index)
-                }
             }
 
             sameAlbum: control.totalMoves, evaluate(listModel.get(mindex-1))

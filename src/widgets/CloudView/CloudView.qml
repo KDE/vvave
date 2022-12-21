@@ -42,11 +42,16 @@ Maui.Page
 
     headBar.middleContent: Maui.SearchField
     {
+        id: _filterField
         Layout.fillWidth: true
         Layout.maximumWidth: 500
         Layout.alignment: Qt.AlignCenter
 
         placeholderText: i18n("Filter")
+
+        KeyNavigation.up: _listView
+        KeyNavigation.down: _listView
+
         onAccepted: _cloudModel.filter = text
         onCleared: _cloudModel.filter = ""
     }
@@ -198,6 +203,11 @@ Maui.Page
             //            }
         }
 
+    }
+
+    function getFilterField() : Item
+    {
+        return _filterField
     }
 
 }
