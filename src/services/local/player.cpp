@@ -13,7 +13,8 @@ Player::Player(QObject *parent)
 {
     this->player->setVolume(this->volume);
     connect(this->player, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state) {
-        if (state == QMediaPlayer::StoppedState && this->player->position() == this->player->duration()) {
+        auto position = this->player->position();
+        if (state == QMediaPlayer::StoppedState && position > 0.0 && position == this->player->duration()) {
             emit this->finished();
         }
 
