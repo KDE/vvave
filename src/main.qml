@@ -82,8 +82,11 @@ Maui.ApplicationWindow
     onClosing: playlist.save()
     onFocusViewChanged: setAndroidStatusBarColor()
 
+    property list<Shortcut> shortcuts: [
     Shortcut
     {
+        readonly property string dialogLabel: "Play/Pause"
+        readonly property string dialogCategory: "Playback"
         sequence: "Space"
         onActivated: {
             if(player.playing)
@@ -91,49 +94,63 @@ Maui.ApplicationWindow
             else
                 player.play()
         }
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Previous"
+        readonly property string dialogCategory: "Playback"
         sequence: "P"
         onActivated: Player.previousTrack()
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Next"
+        readonly property string dialogCategory: "Playback"
         sequence: "N"
         onActivated: Player.nextTrack()
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Rewind 10 seconds"
+        readonly property string dialogCategory: "Playback"
         sequence: "Left"
         enabled: !(activeFocusItem instanceof Maui.GridView || activeFocusItem instanceof GridView)
         onActivated: player.pos -= 10000
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Skip 10 seconds"
+        readonly property string dialogCategory: "Playback"
         sequence: "Right"
         enabled: !(activeFocusItem instanceof Maui.GridView || activeFocusItem instanceof GridView)
         onActivated: player.pos += 10000
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Increase Volume"
+        readonly property string dialogCategory: "Playback"
         sequence: "+"
         sequences: ["="]
         onActivated: player.volume += 5
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Decrease Volume"
+        readonly property string dialogCategory: "Playback"
         sequence: "-"
         onActivated: player.volume -= 5
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Filter"
+        readonly property string dialogCategory: "Navigation"
         sequence: StandardKey.Find
         onActivated: {
             console.log("FOCUS FILTER")
@@ -148,10 +165,12 @@ Maui.ApplicationWindow
             else
                 filterField.focus = false
         }
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Focus View"
+        readonly property string dialogCategory: "Navigation"
         sequence: StandardKey.Cancel
         onActivated: {
             // I couldn't get Keys.onShortcutOverride in each view to work. I guess this is more dynamic anyway.
@@ -162,29 +181,38 @@ Maui.ApplicationWindow
             }
             toggleFocusView()
         }
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Next Category"
+        readonly property string dialogCategory: "Navigation"
         sequence: "Ctrl+Tab" // StandardKey.NextChild and .PreviousChild seem broken on Linux.
         onActivated: swipeView.currentIndex = ((swipeView.currentIndex + 1) % swipeView.count + swipeView.count) % swipeView.count
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Previous Category"
+        readonly property string dialogCategory: "Navigation"
         sequence: "Ctrl+Shift+Tab"
         onActivated: swipeView.currentIndex = ((swipeView.currentIndex - 1) % swipeView.count + swipeView.count) % swipeView.count
-    }
+    },
 
     Shortcut
     {
-        sequences: ["Shift+Return", "Shift+Enter"]
+        readonly property string dialogLabel: "Queue Track"
+        readonly property string dialogCategory: "Navigation"
+        sequence: "Shift+Return"
+        sequences: ["Shift+Enter"]
         // StandardKey.InsertLineSeparator only gets "Enter", not "Return".
         onActivated: contextualPlayNext()
-    }
+    },
 
     Shortcut
     {
+        readonly property string dialogLabel: "Context Actions"
+        readonly property string dialogCategory: "Navigation"
         sequence: "Menu"
         onActivated: {
             if (activeFocusItem) {
@@ -197,6 +225,7 @@ Maui.ApplicationWindow
             console.log("NO CONTEXT MENU", activeFocusItem, activeFocusItem.currentItem)
         }
     }
+    ]
 
     Loader
     {
@@ -275,6 +304,12 @@ Maui.ApplicationWindow
     {
         id: _fileDialogComponent
         FB.FileDialog {}
+    }
+
+    Component
+    {
+        id: _shortcutsDialogComponent
+        ShortcutsDialog {}
     }
 
     Component
@@ -464,6 +499,13 @@ Maui.ApplicationWindow
                                 icon.name: "application-menu"
 
                                 MA.AccountsMenuItem{}
+
+                                MenuItem
+                                {
+                                    text: i18n("Shortcuts")
+                                    icon.name: "configure-shortcuts"
+                                    onTriggered: openShortcutsDialog()
+                                }
 
                                 MenuItem
                                 {
@@ -704,6 +746,12 @@ Maui.ApplicationWindow
             root.x = Screen.desktopAvailableWidth - root.preferredMiniModeSize - Maui.Style.space.big
             root.y = Screen.desktopAvailableHeight - root.preferredMiniModeSize - Maui.Style.space.big
         }
+    }
+
+    function openShortcutsDialog() : undefined
+    {
+        _dialogLoader.sourceComponent = _shortcutsDialogComponent
+        dialog.open()
     }
 
     function openSettingsDialog()
