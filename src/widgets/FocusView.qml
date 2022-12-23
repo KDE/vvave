@@ -71,7 +71,6 @@ Pane
 
     Item
     {
-        id: _dragHandler
         anchors.fill: parent
         DragHandler
         {
