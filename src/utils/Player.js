@@ -11,7 +11,8 @@ function queueTracks(tracks)
     if(tracks && tracks.length > 0)
     {
         appendTracksAt(tracks, currentTrackIndex+onQueue+1)
-        root.notify("", "Queue", tracks.length + " tracks added put on queue")
+        // root.notify("", "Queue", tracks.length + " tracks added put on queue")
+        // This freezes the whole UI. It should probably be a toast popup instead.
         onQueue++
     }
 }
