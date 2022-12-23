@@ -79,8 +79,15 @@ Maui.SettingsDialog
             }
             category_shortcuts[sc.dialogCategory].push({
                 label: sc.dialogLabel,
-                combo: sc.nativeText.split("/(?<=[^\+])\+|\+(?=[^\+])/")
-                // Split on "+" characters that have at least one other neighbour, to handle shortcuts with a literal [+] key.
+                // combo: sc.nativeText.split(/(?<=[^\+])\+|\+(?=[^\+])/)
+                combo: sc.nativeText
+                    .split("+")
+                    .map((key) => key == "" ? "+" : key)
+                    .join("\n")
+                    .replace(/\+\n\+/g, "+")
+                    .split("\n")
+                // Split on "+" but try to handle shortcuts that include a literal [+] key.
+                // QML doesn't like lookbehinds, so we get this chain.
             })
         }
 
