@@ -14,6 +14,7 @@ Player::Player(QObject *parent)
     this->player->setVolume(this->volume);
     connect(this->player, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state) {
         auto position = this->player->position();
+        // QMediaPlayer::duration() "may not be available when initial playback begins". Sometimes rapidly changing tracks causes position == 0.0 == duration, so check for that.
         if (state == QMediaPlayer::StoppedState && position > 0.0 && position == this->player->duration()) {
             emit this->finished();
         }
