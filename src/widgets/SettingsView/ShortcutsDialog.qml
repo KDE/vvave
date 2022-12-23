@@ -77,7 +77,6 @@ Maui.SettingsDialog
                 categories.push(sc.dialogCategory)
                 category_shortcuts[sc.dialogCategory] = []
             }
-            console.log(sc.nativeText.split(/(?<!(\+|^))\+/))
             category_shortcuts[sc.dialogCategory].push({
                 label: sc.dialogLabel,
                 combo: sc.nativeText.split("/(?<=[^\+])\+|\+(?=[^\+])/")
