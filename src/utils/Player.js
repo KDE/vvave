@@ -10,9 +10,8 @@ function queueTracks(tracks)
 {
     if(tracks && tracks.length > 0)
     {
-        appendTracksAt(tracks, currentTrackIndex+onQueue+1)
+        appendTracksAt(tracks, currentTrackIndex+1)
         root.notify("", "Queue", tracks.length + " tracks added put on queue")
-        onQueue++
     }
 }
 

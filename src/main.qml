@@ -48,7 +48,6 @@ Maui.ApplicationWindow
     readonly property alias currentTrackIndex: playlist.currentIndex
 
     readonly property alias isPlaying: player.playing
-    property int onQueue: 0
     property alias mainPlaylist : _mainPlaylistLoader.item
     readonly property bool mainlistEmpty: mainPlaylist ? mainPlaylist.listModel.list.count === 0 : false
 
