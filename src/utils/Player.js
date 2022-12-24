@@ -13,6 +13,7 @@ function queueTracks(tracks)
         appendTracksAt(tracks, currentTrackIndex+onQueue+1)
         // root.notify("", "Queue", tracks.length + " tracks added put on queue")
         // This freezes the whole UI. It should probably be a toast popup instead.
+        // Something similar AbstractApplicationWindow::showPassiveNotification() from Kirigami would be less flow-breaking.
         onQueue++
     }
 }
