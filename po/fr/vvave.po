@@ -1,36 +1,38 @@
+# Xavier BESNARD <xavier.besnard]neuf.fr>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:45+0000\n"
-"PO-Revision-Date: 2022-11-09 18:36+0100\n"
-"Last-Translator: KDE Francophone <kde-francophone@kde.org>\n"
-"Language-Team: KDE Francophone <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2022-12-27 18:32+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "Vvave"
-msgstr ""
+msgstr "Vvave"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr ""
+msgstr "Organiser et écouter votre musique."
 
 #: src/main.cpp:102
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
-msgstr ""
+msgstr "© 2019-%1 L'équipe de développement de Maui"
 
 #: src/main.cpp:104
 #, kde-format
 msgid "Camilo Higuita"
-msgstr ""
+msgstr "Camilo Higuita"
 
 #: src/main.cpp:104
 #, kde-format
@@ -40,48 +42,50 @@ msgstr ""
 #: src/main.qml:122
 #, kde-format
 msgid "Missing file"
-msgstr ""
+msgstr "Fichier manquant"
 
 #: src/main.qml:178
 #, kde-format
 msgid "Remove %1 tracks"
-msgstr ""
+msgstr "Supprimer les %1 pistes"
 
 #: src/main.qml:179
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
+"Voulez-vous vraiment supprimer ces fichiers ? Cette action ne peut être "
+"annulée."
 
 #: src/main.qml:181 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: src/main.qml:182 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: src/main.qml:352
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Configuration"
 
 #: src/main.qml:359
 #, kde-format
 msgid "About"
-msgstr ""
+msgstr "A propos"
 
 #: src/main.qml:392
 #, kde-format
 msgid "Songs"
-msgstr ""
+msgstr "Chansons"
 
 #: src/main.qml:411
 #, kde-format
 msgid "Albums"
-msgstr ""
+msgstr "Albums"
 
 #: src/main.qml:418
 #, kde-format
@@ -91,7 +95,7 @@ msgstr ""
 #: src/main.qml:419 src/main.qml:444 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
-msgstr ""
+msgstr "Ajouter de nouvelles sources de musiques"
 
 #: src/main.qml:436
 #, kde-format
@@ -101,13 +105,13 @@ msgstr ""
 #: src/main.qml:443
 #, kde-format
 msgid "No Artists!"
-msgstr ""
+msgstr "Aucun artiste !"
 
 #: src/main.qml:460 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
-msgstr ""
+msgstr "Étiquettes"
 
 #: src/main.qml:467
 #, kde-format
@@ -124,18 +128,18 @@ msgstr ""
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr ""
+msgstr "Lecture de musique"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:45
 #: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
-msgstr ""
+msgstr "Ajouter des sources"
 
 #: src/widgets/AlbumsView.qml:56
 #, kde-format
 msgid "This list is empty"
-msgstr ""
+msgstr "Cette liste est vide."
 
 #: src/widgets/BabeGrid/BabeGrid.qml:37 src/widgets/BabeTable/BabeTable.qml:97
 #: src/widgets/CloudView/CloudView.qml:49
@@ -144,13 +148,13 @@ msgstr ""
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtrer"
+msgstr[1] "Filtrer les %1 dossiers"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
 msgid "Play All"
-msgstr ""
+msgstr "Tout lire"
 
 #: src/widgets/BabeTable/BabeTable.qml:78
 #, kde-format
@@ -160,7 +164,7 @@ msgstr ""
 #: src/widgets/BabeTable/BabeTable.qml:134
 #, kde-format
 msgid "Remove track"
-msgstr ""
+msgstr "Supprimer une piste"
 
 #: src/widgets/BabeTable/BabeTable.qml:135
 #, kde-format
@@ -174,22 +178,22 @@ msgstr ""
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
-msgstr ""
+msgstr "Supprimer"
 
 #: src/widgets/BabeTable/BabeTable.qml:163
 #, kde-format
 msgid "Go to Artist"
-msgstr ""
+msgstr "Aller à un artiste"
 
 #: src/widgets/BabeTable/BabeTable.qml:170
 #, kde-format
 msgid "Go to Album"
-msgstr ""
+msgstr "Aller à un album"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "Fav it"
-msgstr ""
+msgstr "Le mettre en favori"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
@@ -200,12 +204,12 @@ msgstr ""
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Modifier"
 
 #: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
 #, kde-format
 msgid "Share"
-msgstr ""
+msgstr "Partager"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
 #, kde-format
@@ -215,17 +219,17 @@ msgstr ""
 #: src/widgets/BabeTable/TableMenu.qml:84 src/widgets/SelectionBar.qml:66
 #, kde-format
 msgid "Queue"
-msgstr ""
+msgstr "Mettre en file"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
 msgid "Show in folder"
-msgstr ""
+msgstr "Afficher dans un dossier"
 
 #: src/widgets/CloudView/CloudView.qml:60
 #, kde-format
 msgid "Opps!"
-msgstr ""
+msgstr "Oups !"
 
 #: src/widgets/CloudView/CloudView.qml:61
 #, kde-format
@@ -234,21 +238,24 @@ msgid ""
 "You can set up your account now by clicking here or under the Accounts "
 "options in the main menu"
 msgstr ""
+"Vous n’avez aucun compte. \n"
+"Vous pouvez configurer votre compte maintenant en cliquant ici ou sous les "
+"options « Comptes » dans le menu principal"
 
 #: src/widgets/FocusView.qml:177
 #, kde-format
 msgid "Find"
-msgstr ""
+msgstr "Trouver"
 
 #: src/widgets/FocusView.qml:217
 #, kde-format
 msgid "No Results!"
-msgstr ""
+msgstr "Aucun résultat !"
 
 #: src/widgets/FocusView.qml:218
 #, kde-format
 msgid "Try with something else"
-msgstr ""
+msgstr "Essayer avec quelque chose d'autre"
 
 #: src/widgets/FocusView.qml:260 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
@@ -258,12 +265,13 @@ msgstr ""
 #: src/widgets/FoldersView/FoldersView.qml:41
 #, kde-format
 msgid "No Folders!"
-msgstr ""
+msgstr "Aucun dossier !"
 
 #: src/widgets/FoldersView/FoldersView.qml:42
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
 msgstr ""
+"Ajouter de nouvelles musiques à votre source pour parcourir les dossiers"
 
 #: src/widgets/FoldersView/FoldersView.qml:125 src/widgets/TracksView.qml:21
 #, kde-format
@@ -273,12 +281,12 @@ msgstr ""
 #: src/widgets/FoldersView/FoldersView.qml:126
 #, kde-format
 msgid "This source folder seems to be empty!"
-msgstr ""
+msgstr "Ce dossier de source semble être vide !"
 
 #: src/widgets/InfoView/InfoView.qml:45
 #, kde-format
 msgid "Artist Info"
-msgstr ""
+msgstr "Informations sur un artiste"
 
 #: src/widgets/InfoView/InfoView.qml:73
 #, kde-format
@@ -288,7 +296,7 @@ msgstr ""
 #: src/widgets/MainPlaylist/MainPlaylist.qml:133
 #, kde-format
 msgid "Syncing to "
-msgstr ""
+msgstr "Synchronisation avec "
 
 #: src/widgets/MetadataDialog.qml:40
 #, kde-format
@@ -298,37 +306,37 @@ msgstr ""
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
 msgid "Embedded metadata info."
-msgstr ""
+msgstr "Informations intégrées de métadonnées."
 
 #: src/widgets/MetadataDialog.qml:47
 #, kde-format
 msgid "Track Title"
-msgstr ""
+msgstr "Titre de la piste"
 
 #: src/widgets/MetadataDialog.qml:61
 #, kde-format
 msgid "Artist"
-msgstr ""
+msgstr "Artiste"
 
 #: src/widgets/MetadataDialog.qml:76
 #, kde-format
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: src/widgets/MetadataDialog.qml:90
 #, kde-format
 msgid "Track"
-msgstr ""
+msgstr "Piste"
 
 #: src/widgets/MetadataDialog.qml:104
 #, kde-format
 msgid "Genre"
-msgstr ""
+msgstr "Genre"
 
 #: src/widgets/MetadataDialog.qml:118
 #, kde-format
 msgid "Year"
-msgstr ""
+msgstr "Année"
 
 #: src/widgets/MetadataDialog.qml:132
 #, kde-format
@@ -343,7 +351,7 @@ msgstr ""
 #: src/widgets/MetadataDialog.qml:146
 #, kde-format
 msgid "Local file info."
-msgstr ""
+msgstr "Informations locales sur un fichier."
 
 #: src/widgets/PlaybackBar.qml:155
 #, kde-format
@@ -353,53 +361,55 @@ msgstr ""
 #: src/widgets/PlaybackBar.qml:226
 #, kde-format
 msgid "Play and pause"
-msgstr ""
+msgstr "Lire et mettre en pause"
 
 #: src/widgets/PlaybackBar.qml:236
 #, kde-format
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:65
 #, kde-format
 msgid "Remove from playlist"
-msgstr ""
+msgstr "Supprimer de la liste de lecture"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:94
 #, kde-format
 msgid "stars"
-msgstr ""
+msgstr "étoiles"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
 #, kde-format
 msgid "No Playlists!"
-msgstr ""
+msgstr "Aucune liste de lecture !"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
 #, kde-format
 msgid "Start creating new custom playlists"
-msgstr ""
+msgstr "Démarrer la création de nouvelles listes de lecture personnalisées"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
 #, kde-format
 msgid "Remove '%1'"
-msgstr ""
+msgstr "Supprimer « %1 »"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
 #, kde-format
 msgid "Accept"
-msgstr ""
+msgstr "Accepter"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
+"Voulez-vous vraiment supprimer cette étiquette ? Cette action ne peut être "
+"annulée."
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr ""
+msgstr "Lire"
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
@@ -415,6 +425,7 @@ msgstr ""
 #, kde-format
 msgid "Configure the app plugins and behavior."
 msgstr ""
+"Configurer les modules externes de l'application et leurs comportements."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -427,6 +438,8 @@ msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
+"Collecte des œuvres d’album et d’artistes à partir de services en ligne : "
+"LastFM, Spotify, MusicBrainz, iTunes, Genius et d’autres."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
@@ -438,6 +451,8 @@ msgstr ""
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
+"Analyser toutes les sources de musique au démarrage pour conserver votre "
+"collection à jour."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
@@ -477,12 +492,12 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:133
 #, kde-format
 msgid "Add or remove sources"
-msgstr ""
+msgstr "Ajouter ou supprimer des sources"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:176
 #, kde-format
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:193
 #, kde-format
@@ -497,12 +512,12 @@ msgstr ""
 #: src/widgets/TracksView.qml:59
 #, kde-format
 msgid "Popular Tracks"
-msgstr ""
+msgstr "Pistes populaires"
 
 #: src/widgets/TracksView.qml:60
 #, kde-format
 msgid "Play them again."
-msgstr ""
+msgstr "Les lire à nouveau."
 
 #: src/widgets/TracksView.qml:140
 #, kde-format
@@ -512,4 +527,4 @@ msgstr ""
 #: src/widgets/TracksView.qml:141
 #, kde-format
 msgid "Recent playlists"
-msgstr ""
+msgstr "Listes de lecture récentes"
