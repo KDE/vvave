@@ -102,6 +102,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     KAboutData about(QStringLiteral("vvave"), i18n("Vvave"), VVAVE_VERSION_STRING, i18n("Organize and listen to your music."), KAboutLicense::LGPL_V3, i18n("© 2019-%1 Maui Development Team", QString::number(QDate::currentDate().year())),QString(GIT_BRANCH) + "/" + QString(GIT_COMMIT_HASH));
 
     about.addAuthor(i18n("Camilo Higuita"), i18n("Developer"), QStringLiteral("milo.h@aol.com"));
+    about.addCredit("Will Chen", i18n("Contributor"));
+
     about.setHomepage("https://mauikit.org");
     about.setProductName("maui/vvave");
     about.setBugAddress("https://invent.kde.org/maui/vvave/-/issues");

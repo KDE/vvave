@@ -81,7 +81,7 @@ Maui.ContextualMenu
 
     MenuItem
     {
-        text: i18n("Queue")
+        text: i18n("Play next")
         icon.name: "view-media-recent"
         onTriggered:
         {
