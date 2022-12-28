@@ -43,6 +43,12 @@ bool Playlist::autoResume() const
     return m_autoResume;
 }
 
+void Playlist::appendHistory()
+{
+    if(m_currentIndex >= 0)
+        m_history.append({m_currentIndex, m_currentTrack});
+}
+
 void Playlist::loadLastPlaylist()
 {
     if (!m_model)
@@ -97,7 +103,7 @@ void Playlist::next()
         return;
     }
 
-    m_previousIndex = m_currentIndex;
+    appendHistory();
 
     switch(m_repeatMode)
     {
@@ -148,8 +154,33 @@ void Playlist::previous()
         return;
     }
 
-    auto previous = m_currentIndex - 1 >= 0 ? m_currentIndex - 1 : m_model->getCount() - 1;
-    m_previousIndex = m_currentIndex;
+    if(!canGoPrevious())
+        return;
+
+
+    int previous = -1;
+
+    //Check if it can go to previously played track in the history and check that such track still exists in the playlist. Otherwise go to the immediate previous track
+    if(m_history.isEmpty())
+    {
+        previous = m_currentIndex - 1 >= 0 ? m_currentIndex - 1 : m_model->getCount() - 1;
+    }else
+    {
+        const auto trackH = m_history.takeLast();
+        const auto trackIndex = trackH.first;
+        const auto trackUrl = trackH.second.value("url").toString();
+
+        const auto possibleTrack = m_model->get(trackIndex).value("url").toString();
+
+        if(trackUrl == possibleTrack)
+        {
+            previous = trackIndex;
+        }else
+        {
+            previous = m_currentIndex - 1 >= 0 ? m_currentIndex - 1 : m_model->getCount() - 1;
+        }
+    }
+
     setCurrentIndex(previous);
 }
 
@@ -161,11 +192,15 @@ void Playlist::nextShuffle()
     }
 
     auto count = m_model->getCount();
+
+    appendHistory();
+
     setCurrentIndex(std::rand() % count);
 }
 
 void Playlist::play(int index)
 {
+    appendHistory();
     setCurrentIndex(index);
 }
 
@@ -177,6 +212,7 @@ void Playlist::clear()
     }
 
     m_model->clear();
+    m_history.clear();
     setCurrentIndex(-1);
 }
 
