@@ -28,6 +28,59 @@ Pane
 
     Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
 
+    Keys.enabled: true
+    Keys.onPressed:
+    {
+        console.log("KEY PRESSED")
+        if((event.key == Qt.Key_K) && (event.modifiers & Qt.ControlModifier))
+        {
+            _filterField.forceActiveFocus()
+            event.accepted = true
+        }
+    }
+
+    Keys.onBackPressed:
+    {
+        toggleFocusView()
+        event.accepted = true
+    }
+
+    Keys.onLeftPressed:
+    {
+        Player.previousTrack()
+    }
+
+    Keys.onRightPressed:
+    {
+        Player.nextTrack()
+    }
+
+    Keys.onUpPressed:
+    {
+        if(player.playing)
+            player.pause()
+        else
+            player.play()
+    }
+
+    Shortcut
+    {
+        sequence: StandardKey.Back
+        onActivated: toggleFocusView()
+    }
+
+    Item
+    {
+        anchors.fill: parent
+        DragHandler
+        {
+            acceptedDevices: PointerDevice.GenericPointer
+            grabPermissions: PointerHandler.CanTakeOverFromItems | PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverbyAnything
+            onActiveChanged: { if (active) root.startSystemMove(); }
+            // Harmonize(d) with ToolBar.qml, TabBar.qml from MauiKit.
+        }
+    }
+
     background: Rectangle
     {
         color: Maui.Theme.backgroundColor
