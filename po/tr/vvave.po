@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-01 00:45+0000\n"
+"POT-Creation-Date: 2022-12-29 00:51+0000\n"
 "PO-Revision-Date: 2022-12-01 17:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -42,85 +42,95 @@ msgstr "Camilo Higuita"
 msgid "Developer"
 msgstr "Geliştirici"
 
-#: src/main.qml:122
+#: src/main.cpp:105
+#, kde-format
+msgid "Contributor"
+msgstr ""
+
+#: src/main.qml:271
 #, kde-format
 msgid "Missing file"
 msgstr "Eksik dosya"
 
-#: src/main.qml:178
+#: src/main.qml:333
 #, kde-format
 msgid "Remove %1 tracks"
 msgstr "%1 parçayı kaldır"
 
-#: src/main.qml:179
+#: src/main.qml:334
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 "Bu dosyaları kaldırmak istediğinize emin misiniz? Bu işlem geri alınamaz."
 
-#: src/main.qml:181 src/widgets/BabeTable/TableMenu.qml:135
+#: src/main.qml:336 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
 msgstr "Sil"
 
-#: src/main.qml:182 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/main.qml:337 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
 msgstr "İptal"
 
-#: src/main.qml:352
+#: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
+#, kde-format
+msgid "Shortcuts"
+msgstr ""
+
+#: src/main.qml:514
 #, kde-format
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/main.qml:359
+#: src/main.qml:521
 #, kde-format
 msgid "About"
 msgstr "Hakkında"
 
-#: src/main.qml:392
+#: src/main.qml:554
 #, kde-format
 msgid "Songs"
 msgstr "Şarkılar"
 
-#: src/main.qml:411
+#: src/main.qml:573
 #, kde-format
 msgid "Albums"
 msgstr "Albümler"
 
-#: src/main.qml:418
+#: src/main.qml:580
 #, kde-format
 msgid "No Albums!"
 msgstr "Albüm Yok!"
 
-#: src/main.qml:419 src/main.qml:444 src/widgets/TracksView.qml:22
+#: src/main.qml:581 src/main.qml:606 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr "Yeni müzik kaynakları ekle"
 
-#: src/main.qml:436
+#: src/main.qml:598
 #, kde-format
 msgid "Artists"
 msgstr "Sanatçılar"
 
-#: src/main.qml:443
+#: src/main.qml:605
 #, kde-format
 msgid "No Artists!"
 msgstr "Sanatçı Yok!"
 
-#: src/main.qml:460 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:622 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiketler"
 
-#: src/main.qml:467
+#: src/main.qml:629
 #, kde-format
 msgid "Folders"
 msgstr "Klasörler"
 
-#: src/main.qml:475
+#: src/main.qml:637
 #, kde-format
 msgid "Cloud"
 msgstr "Bulut"
@@ -132,7 +142,7 @@ msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
 msgstr "Müzik çalınıyor"
 
-#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:45
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
 #: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
@@ -143,10 +153,10 @@ msgstr "Kaynak ekle"
 msgid "This list is empty"
 msgstr "Liste boş"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:37 src/widgets/BabeTable/BabeTable.qml:97
-#: src/widgets/CloudView/CloudView.qml:49
-#: src/widgets/FoldersView/FoldersView.qml:31
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
+#: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
+#: src/widgets/CloudView/CloudView.qml:50
+#: src/widgets/FoldersView/FoldersView.qml:32
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 folders"
@@ -163,12 +173,12 @@ msgstr "Tümünü Çal"
 msgid "Append All"
 msgstr "Tümünü İliştir"
 
-#: src/widgets/BabeTable/BabeTable.qml:134
+#: src/widgets/BabeTable/BabeTable.qml:139
 #, kde-format
 msgid "Remove track"
 msgstr "Parçayı kaldır"
 
-#: src/widgets/BabeTable/BabeTable.qml:135
+#: src/widgets/BabeTable/BabeTable.qml:140
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
@@ -177,19 +187,19 @@ msgstr ""
 "Bu dosyayı bilgisayarınızdan kaldırmak istediğinize emin misiniz? Bu eylem "
 "geri alınamaz."
 
-#: src/widgets/BabeTable/BabeTable.qml:137
+#: src/widgets/BabeTable/BabeTable.qml:142
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
 msgstr "Kaldır"
 
-#: src/widgets/BabeTable/BabeTable.qml:163
+#: src/widgets/BabeTable/BabeTable.qml:168
 #, kde-format
 msgid "Go to Artist"
 msgstr "Sanatçıya Git"
 
-#: src/widgets/BabeTable/BabeTable.qml:170
+#: src/widgets/BabeTable/BabeTable.qml:175
 #, kde-format
 msgid "Go to Album"
 msgstr "Albüme Git"
@@ -220,22 +230,23 @@ msgstr "Paylaş"
 msgid "Select..."
 msgstr "Seç..."
 
-#: src/widgets/BabeTable/TableMenu.qml:84 src/widgets/SelectionBar.qml:66
-#, kde-format
-msgid "Queue"
-msgstr "Kuyruk"
+#: src/widgets/BabeTable/TableMenu.qml:84
+#, fuzzy, kde-format
+#| msgid "Play"
+msgid "Play next"
+msgstr "Çal"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
 msgid "Show in folder"
 msgstr "Klasörde göster"
 
-#: src/widgets/CloudView/CloudView.qml:60
+#: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
 msgid "Opps!"
 msgstr "Ups!"
 
-#: src/widgets/CloudView/CloudView.qml:61
+#: src/widgets/CloudView/CloudView.qml:66
 #, kde-format
 msgid ""
 "You don't have an account set up.\n"
@@ -246,42 +257,42 @@ msgstr ""
 "Buraya tıklayarak veya ana menüdeki Hesaplar seçeneğine giderek "
 "hesaplarınızı ayarlayabilirsiniz"
 
-#: src/widgets/FocusView.qml:177
+#: src/widgets/FocusView.qml:193
 #, kde-format
 msgid "Find"
 msgstr "Bul"
 
-#: src/widgets/FocusView.qml:217
+#: src/widgets/FocusView.qml:237
 #, kde-format
 msgid "No Results!"
 msgstr "Sonuç Yok!"
 
-#: src/widgets/FocusView.qml:218
+#: src/widgets/FocusView.qml:238
 #, kde-format
 msgid "Try with something else"
 msgstr "Başka bir şey deneyin"
 
-#: src/widgets/FocusView.qml:260 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:280 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Çalma listenizi oluşturmaya başlayın."
 
-#: src/widgets/FoldersView/FoldersView.qml:41
+#: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
 msgid "No Folders!"
 msgstr "Klasör Yok!"
 
-#: src/widgets/FoldersView/FoldersView.qml:42
+#: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
 msgstr "Klasörleri tarayarak kaynaklarınıza müzik ekleyin"
 
-#: src/widgets/FoldersView/FoldersView.qml:125 src/widgets/TracksView.qml:21
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "No Tracks!"
 msgstr "Parça Yok!"
 
-#: src/widgets/FoldersView/FoldersView.qml:126
+#: src/widgets/FoldersView/FoldersView.qml:135
 #, kde-format
 msgid "This source folder seems to be empty!"
 msgstr "Bu kaynak klasörü boş gibi görünüyor!"
@@ -418,6 +429,11 @@ msgstr "Çal"
 msgid "Append"
 msgstr "İliştir"
 
+#: src/widgets/SelectionBar.qml:66
+#, kde-format
+msgid "Queue"
+msgstr "Kuyruk"
+
 #: src/widgets/SettingsView/SettingsDialog.qml:53
 #, kde-format
 msgid "Behaviour"
@@ -504,6 +520,12 @@ msgstr "Ekle"
 #, kde-format
 msgid "Scan now"
 msgstr "Şimdi Tara"
+
+#: src/widgets/SettingsView/ShortcutsDialog.qml:24
+#: src/widgets/SettingsView/ShortcutsDialog.qml:37
+#, kde-format
+msgid "Unknown"
+msgstr ""
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
