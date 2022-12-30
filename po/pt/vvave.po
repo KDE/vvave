@@ -47,7 +47,7 @@ msgstr "Desenvolvimento"
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Contribuinte"
 
 #: src/main.qml:271
 #, kde-format
@@ -80,7 +80,7 @@ msgstr "Cancelar"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Atalhos"
 
 #: src/main.qml:514
 #, kde-format

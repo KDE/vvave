@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-29 00:51+0000\n"
-"PO-Revision-Date: 2022-12-01 16:40+0100\n"
+"PO-Revision-Date: 2022-12-29 10:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.11.90\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -47,7 +47,7 @@ msgstr "Desarrollador"
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Colaborador"
 
 #: src/main.qml:271
 #, kde-format
@@ -79,7 +79,7 @@ msgstr "Cancelar"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Accesos rápidos"
 
 #: src/main.qml:514
 #, kde-format
@@ -233,10 +233,9 @@ msgid "Select..."
 msgstr "Seleccionar..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "Reproducir"
+msgstr "Reproducir siguiente"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -528,7 +527,7 @@ msgstr "Explorar ahora"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format

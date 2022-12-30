@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-29 00:51+0000\n"
-"PO-Revision-Date: 2022-12-01 12:28+0100\n"
+"PO-Revision-Date: 2022-12-29 12:46+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Ontwikkelaar"
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Medewerker"
 
 #: src/main.qml:271
 #, kde-format
@@ -78,7 +78,7 @@ msgstr "Annuleren"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Sneltoetsen"
 
 #: src/main.qml:514
 #, kde-format
@@ -232,10 +232,9 @@ msgid "Select..."
 msgstr "Selecteren..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "Afspelen"
+msgstr "Volgende afspelen"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -526,7 +525,7 @@ msgstr "Nu scannen"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format

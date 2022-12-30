@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-29 00:51+0000\n"
-"PO-Revision-Date: 2022-12-01 10:44+0200\n"
+"PO-Revision-Date: 2022-12-29 08:40+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -46,7 +46,7 @@ msgstr "Розробник"
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Учасник"
 
 #: src/main.qml:271
 #, kde-format
@@ -79,7 +79,7 @@ msgstr "Скасувати"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Скорочення"
 
 #: src/main.qml:514
 #, kde-format
@@ -235,10 +235,9 @@ msgid "Select..."
 msgstr "Вибрати…"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "Відтворити"
+msgstr "Відтворити наступну"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -528,7 +527,7 @@ msgstr "Сканувати зараз"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомо"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
