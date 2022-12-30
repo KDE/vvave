@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-29 00:51+0000\n"
-"PO-Revision-Date: 2022-12-01 09:21+0100\n"
+"PO-Revision-Date: 2022-12-30 08:11+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -46,7 +46,7 @@ msgstr "პროგრამისტი"
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "მოხალისე"
 
 #: src/main.qml:271
 #, kde-format
@@ -79,7 +79,7 @@ msgstr "_გაუქმება"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "მალსახმობები"
 
 #: src/main.qml:514
 #, kde-format
@@ -233,10 +233,9 @@ msgid "Select..."
 msgstr "აირჩიეთ..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "დაკვრა"
+msgstr "შემდეგის დაკვრა"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -525,7 +524,7 @@ msgstr "ახლა სკანირება"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
