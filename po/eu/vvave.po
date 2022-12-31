@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-29 00:51+0000\n"
-"PO-Revision-Date: 2022-12-03 08:20+0100\n"
+"PO-Revision-Date: 2022-12-30 21:32+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -48,7 +48,7 @@ msgstr "Garatzailea"
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Kolaboratzailea"
 
 #: src/main.qml:271
 #, kde-format
@@ -81,7 +81,7 @@ msgstr "Utzi"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Lasterbideak"
 
 #: src/main.qml:514
 #, kde-format
@@ -235,10 +235,9 @@ msgid "Select..."
 msgstr "Hautatu..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "Jo"
+msgstr "Jo hurrengoa"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -528,7 +527,7 @@ msgstr "Miatu orain"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Ezezaguna"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
