@@ -1,10 +1,10 @@
-# Xavier BESNARD <xavier.besnard]neuf.fr>, 2022.
+# Xavier BESNARD <xavier.besnard]neuf.fr>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-29 00:51+0000\n"
-"PO-Revision-Date: 2022-12-29 11:16+0100\n"
+"PO-Revision-Date: 2023-01-01 10:16+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -42,7 +42,7 @@ msgstr "Développeur"
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Contributeur"
 
 #: src/main.qml:271
 #, kde-format
@@ -75,7 +75,7 @@ msgstr "Annuler"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Raccourcis"
 
 #: src/main.qml:514
 #, kde-format
@@ -229,10 +229,9 @@ msgid "Select..."
 msgstr "Sélectionner..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "Lire"
+msgstr "Lire le morceau suivant"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -273,7 +272,7 @@ msgstr "Essayer avec quelque chose d'autre"
 #: src/widgets/FocusView.qml:280 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
-msgstr ""
+msgstr "Commencez à constituer votre liste de lecture."
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
@@ -475,22 +474,22 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "Continuer automatiquement"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "Continuer la liste de lecture de la session précédente."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:97
 #, kde-format
 msgid "Focus View"
-msgstr ""
+msgstr "Vue en Focalisation"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
 #, kde-format
 msgid "Make the focus view the default"
-msgstr ""
+msgstr "Faire de la vue en Focalisation, la vue par défaut"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
@@ -500,7 +499,7 @@ msgstr "Mode sombre"
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr ""
+msgstr "Basculer entre les thème clair et sombre "
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
@@ -526,7 +525,7 @@ msgstr "Analyser maintenant"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
