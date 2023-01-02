@@ -54,17 +54,13 @@ private:
     TracksModel *m_model = nullptr;
     Player *m_player = nullptr;
     QVariantMap m_currentTrack;
-
     int m_currentIndex = -1;
-    QVector<QPair<int, QVariantMap>> m_history; //history of track and its index
 
     PlayMode m_playMode = PlayMode::Normal;
     RepeatMode m_repeatMode = RepeatMode::NoRepeat;
     uint m_repeatFlag = 0;
 
     bool m_autoResume;
-
-    void appendHistory();
 
 public slots:
     bool canGoNext() const;
@@ -108,7 +104,6 @@ signals:
 
     // QQmlParserStatus interface
 public:
-    void classBegin() override final;
     void componentComplete() override final;
 };
 
