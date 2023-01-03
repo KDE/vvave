@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-29 00:51+0000\n"
+"POT-Creation-Date: 2023-01-03 00:46+0000\n"
 "PO-Revision-Date: 2023-01-01 10:16+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -254,22 +254,22 @@ msgstr ""
 "Vous pouvez configurer votre compte maintenant en cliquant ici ou sous les "
 "options « Comptes » dans le menu principal"
 
-#: src/widgets/FocusView.qml:193
+#: src/widgets/FocusView.qml:152
 #, kde-format
 msgid "Find"
 msgstr "Trouver"
 
-#: src/widgets/FocusView.qml:237
+#: src/widgets/FocusView.qml:196
 #, kde-format
 msgid "No Results!"
 msgstr "Aucun résultat !"
 
-#: src/widgets/FocusView.qml:238
+#: src/widgets/FocusView.qml:197
 #, kde-format
 msgid "Try with something else"
 msgstr "Essayer avec quelque chose d'autre"
 
-#: src/widgets/FocusView.qml:280 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:239 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Commencez à constituer votre liste de lecture."

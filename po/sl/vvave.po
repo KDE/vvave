@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2022.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-29 00:51+0000\n"
-"PO-Revision-Date: 2022-12-02 06:54+0100\n"
+"POT-Creation-Date: 2023-01-03 00:46+0000\n"
+"PO-Revision-Date: 2023-01-02 20:50+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -46,7 +46,7 @@ msgstr "Razvojnik"
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Sodelavec"
 
 #: src/main.qml:271
 #, kde-format
@@ -79,7 +79,7 @@ msgstr "Prekliči"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Bližnjice"
 
 #: src/main.qml:514
 #, kde-format
@@ -235,10 +235,9 @@ msgid "Select..."
 msgstr "Izberi..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "Predvajaj"
+msgstr "Predvajaj naslednje"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -261,22 +260,22 @@ msgstr ""
 "Račun lahko nastavite zdaj s klikom sem ali pod možnostmi računa v glavnem "
 "meniju"
 
-#: src/widgets/FocusView.qml:193
+#: src/widgets/FocusView.qml:152
 #, kde-format
 msgid "Find"
 msgstr "Najdi"
 
-#: src/widgets/FocusView.qml:237
+#: src/widgets/FocusView.qml:196
 #, kde-format
 msgid "No Results!"
 msgstr "Ni zadetkov!"
 
-#: src/widgets/FocusView.qml:238
+#: src/widgets/FocusView.qml:197
 #, kde-format
 msgid "Try with something else"
 msgstr "Poskusite nekaj drugega"
 
-#: src/widgets/FocusView.qml:280 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:239 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Začetek sestavljanja seznama predvajanja."
@@ -528,7 +527,7 @@ msgstr "Prečeši zdaj"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Neznano"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
