@@ -1,26 +1,26 @@
-# German translations for vvave package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# Automatically generated, 2022.
+# Vit Pelcak <vit@pelcak.org>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-03 00:46+0000\n"
-"PO-Revision-Date: 2022-11-11 10:25+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: de\n"
+"PO-Revision-Date: 2023-01-03 16:18+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "Vvave"
-msgstr ""
+msgstr "Vvave"
 
 #: src/main.cpp:102
 #, kde-format
@@ -30,27 +30,27 @@ msgstr ""
 #: src/main.cpp:102
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
-msgstr ""
+msgstr "© 2019-%1 Vývojový tým Maui"
 
 #: src/main.cpp:104
 #, kde-format
 msgid "Camilo Higuita"
-msgstr ""
+msgstr "Camilo Higuita"
 
 #: src/main.cpp:104
 #, kde-format
 msgid "Developer"
-msgstr ""
+msgstr "Vývojář"
 
 #: src/main.cpp:105
 #, kde-format
 msgid "Contributor"
-msgstr ""
+msgstr "Přispěvatel"
 
 #: src/main.qml:271
 #, kde-format
 msgid "Missing file"
-msgstr ""
+msgstr "Chybějící soubor"
 
 #: src/main.qml:333
 #, kde-format
@@ -66,37 +66,37 @@ msgstr ""
 #: src/main.qml:336 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 #: src/main.qml:337 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Zkratky"
 
 #: src/main.qml:514
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #: src/main.qml:521
 #, kde-format
 msgid "About"
-msgstr ""
+msgstr "O aplikaci"
 
 #: src/main.qml:554
 #, kde-format
 msgid "Songs"
-msgstr ""
+msgstr "Písně"
 
 #: src/main.qml:573
 #, kde-format
 msgid "Albums"
-msgstr ""
+msgstr "Alba"
 
 #: src/main.qml:580
 #, kde-format
@@ -111,7 +111,7 @@ msgstr ""
 #: src/main.qml:598
 #, kde-format
 msgid "Artists"
-msgstr ""
+msgstr "Umělci"
 
 #: src/main.qml:605
 #, kde-format
@@ -122,30 +122,30 @@ msgstr ""
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
-msgstr ""
+msgstr "Značky"
 
 #: src/main.qml:629
 #, kde-format
 msgid "Folders"
-msgstr ""
+msgstr "Složky"
 
 #: src/main.qml:637
 #, kde-format
 msgid "Cloud"
-msgstr ""
+msgstr "Cloud"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr ""
+msgstr "Přehrávám hudbu"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
 #: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
-msgstr ""
+msgstr "Přidat zdroje"
 
 #: src/widgets/AlbumsView.qml:56
 #, kde-format
@@ -159,23 +159,24 @@ msgstr ""
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtrovat"
+msgstr[1] "Filtrovat %1 složky"
+msgstr[2] "Filtrovat %1 složek"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
 msgid "Play All"
-msgstr ""
+msgstr "Přehrát vše"
 
 #: src/widgets/BabeTable/BabeTable.qml:78
 #, kde-format
 msgid "Append All"
-msgstr ""
+msgstr "Přidat vše"
 
 #: src/widgets/BabeTable/BabeTable.qml:139
 #, kde-format
 msgid "Remove track"
-msgstr ""
+msgstr "Odstranit skladbu"
 
 #: src/widgets/BabeTable/BabeTable.qml:140
 #, kde-format
@@ -189,17 +190,17 @@ msgstr ""
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
-msgstr ""
+msgstr "Odstranit"
 
 #: src/widgets/BabeTable/BabeTable.qml:168
 #, kde-format
 msgid "Go to Artist"
-msgstr ""
+msgstr "Přejít na umělce"
 
 #: src/widgets/BabeTable/BabeTable.qml:175
 #, kde-format
 msgid "Go to Album"
-msgstr ""
+msgstr "Přejít na album"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
@@ -215,27 +216,27 @@ msgstr ""
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Upravit"
 
 #: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
 #, kde-format
 msgid "Share"
-msgstr ""
+msgstr "Sdílet"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
 #, kde-format
 msgid "Select..."
-msgstr ""
+msgstr "Vybrat..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
 #, kde-format
 msgid "Play next"
-msgstr ""
+msgstr "Přehrát následující"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
 msgid "Show in folder"
-msgstr ""
+msgstr "Zobrazit ve složce"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
@@ -253,12 +254,12 @@ msgstr ""
 #: src/widgets/FocusView.qml:152
 #, kde-format
 msgid "Find"
-msgstr ""
+msgstr "Najít"
 
 #: src/widgets/FocusView.qml:196
 #, kde-format
 msgid "No Results!"
-msgstr ""
+msgstr "Žádné výsledky."
 
 #: src/widgets/FocusView.qml:197
 #, kde-format
@@ -273,7 +274,7 @@ msgstr ""
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
 msgid "No Folders!"
-msgstr ""
+msgstr "Žádné složky!"
 
 #: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
@@ -283,7 +284,7 @@ msgstr ""
 #: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "No Tracks!"
-msgstr ""
+msgstr "Žádné skladby!"
 
 #: src/widgets/FoldersView/FoldersView.qml:135
 #, kde-format
@@ -298,7 +299,7 @@ msgstr ""
 #: src/widgets/InfoView/InfoView.qml:73
 #, kde-format
 msgid "Album Info"
-msgstr ""
+msgstr "Informace o albu"
 
 #: src/widgets/MainPlaylist/MainPlaylist.qml:133
 #, kde-format
@@ -308,7 +309,7 @@ msgstr ""
 #: src/widgets/MetadataDialog.qml:40
 #, kde-format
 msgid "Metadata"
-msgstr ""
+msgstr "Metadata"
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
@@ -318,42 +319,42 @@ msgstr ""
 #: src/widgets/MetadataDialog.qml:47
 #, kde-format
 msgid "Track Title"
-msgstr ""
+msgstr "Název stopy"
 
 #: src/widgets/MetadataDialog.qml:61
 #, kde-format
 msgid "Artist"
-msgstr ""
+msgstr "Umělec"
 
 #: src/widgets/MetadataDialog.qml:76
 #, kde-format
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: src/widgets/MetadataDialog.qml:90
 #, kde-format
 msgid "Track"
-msgstr ""
+msgstr "Stopa"
 
 #: src/widgets/MetadataDialog.qml:104
 #, kde-format
 msgid "Genre"
-msgstr ""
+msgstr "Žánr"
 
 #: src/widgets/MetadataDialog.qml:118
 #, kde-format
 msgid "Year"
-msgstr ""
+msgstr "Rok"
 
 #: src/widgets/MetadataDialog.qml:132
 #, kde-format
 msgid "Comment"
-msgstr ""
+msgstr "Komentář"
 
 #: src/widgets/MetadataDialog.qml:145
 #, kde-format
 msgid "File Info"
-msgstr ""
+msgstr "Informace o souboru"
 
 #: src/widgets/MetadataDialog.qml:146
 #, kde-format
@@ -363,22 +364,22 @@ msgstr ""
 #: src/widgets/PlaybackBar.qml:155
 #, kde-format
 msgid "Toogle SideBar"
-msgstr ""
+msgstr "Přepnout postranní panel"
 
 #: src/widgets/PlaybackBar.qml:226
 #, kde-format
 msgid "Play and pause"
-msgstr ""
+msgstr "Přehrát a pozastavit"
 
 #: src/widgets/PlaybackBar.qml:236
 #, kde-format
 msgid "Next"
-msgstr ""
+msgstr "Následující"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:65
 #, kde-format
 msgid "Remove from playlist"
-msgstr ""
+msgstr "Odstranit ze seznamu skladeb"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:94
 #, kde-format
@@ -398,12 +399,12 @@ msgstr ""
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
 #, kde-format
 msgid "Remove '%1'"
-msgstr ""
+msgstr "Odstranit '%1'"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
 #, kde-format
 msgid "Accept"
-msgstr ""
+msgstr "Přijmout"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
 #, kde-format
@@ -414,27 +415,27 @@ msgstr ""
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr ""
+msgstr "Přehrát"
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
 msgid "Append"
-msgstr ""
+msgstr "Přidat"
 
 #: src/widgets/SelectionBar.qml:66
 #, kde-format
 msgid "Queue"
-msgstr ""
+msgstr "Fronta"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
 #, kde-format
 msgid "Behaviour"
-msgstr ""
+msgstr "Chování"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
 msgid "Configure the app plugins and behavior."
-msgstr ""
+msgstr "Nastavení modulů a chování aplikace."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -451,18 +452,18 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Auto Scan"
-msgstr ""
+msgstr "Automaticky prozkoumávat"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
-msgstr ""
+msgstr "Prozkoumat zdroje při spuštění pro aktualizaci vaší sbírky."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "Automaticky obnovit"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
@@ -482,43 +483,43 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
 msgid "Dark Mode"
-msgstr ""
+msgstr "Tmavý režim"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr ""
+msgstr "Přepínač mezi světlým a tmavým barevným schématem."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Sources"
-msgstr ""
+msgstr "Zdroje"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:133
 #, kde-format
 msgid "Add or remove sources"
-msgstr ""
+msgstr "Přidat nebo odebrat zdroje"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:176
 #, kde-format
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:193
 #, kde-format
 msgid "Scan now"
-msgstr ""
+msgstr "Prozkoumat nyní"
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:24
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámý"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Open file"
-msgstr ""
+msgstr "Otevřít soubor"
 
 #: src/widgets/TracksView.qml:59
 #, kde-format
@@ -533,7 +534,7 @@ msgstr ""
 #: src/widgets/TracksView.qml:140
 #, kde-format
 msgid "Playlists"
-msgstr ""
+msgstr "Seznamy skladeb"
 
 #: src/widgets/TracksView.qml:141
 #, kde-format
