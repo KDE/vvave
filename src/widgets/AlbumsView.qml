@@ -9,7 +9,7 @@ import "BabeTable"
 import "../db/Queries.js" as Q
 import "../utils/Player.js" as Player
 
-Maui.StackView
+StackView
 {
     id: control
 

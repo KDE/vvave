@@ -46,7 +46,7 @@ Maui.SettingsDialog
 
             label1.text: i18n("Track Title")
 
-            Maui.TextField
+            TextField
             {
                 id: _titleField
                 text: control.data.title
@@ -61,7 +61,7 @@ Maui.SettingsDialog
             label1.text: i18n("Artist")
 
 
-            Maui.TextField
+            TextField
             {
                 id: _artistField
                 text: control.data.artist
@@ -75,7 +75,7 @@ Maui.SettingsDialog
 
             label1.text: i18n("Album")
 
-            Maui.TextField
+            TextField
             {
                 id: _albumField
                 text: control.data.album
@@ -89,7 +89,7 @@ Maui.SettingsDialog
 
             label1.text: i18n("Track")
 
-            Maui.TextField
+            TextField
             {
                 id: _trackField
                 text: control.data.track
@@ -103,7 +103,7 @@ Maui.SettingsDialog
 
             label1.text: i18n("Genre")
 
-            Maui.TextField
+            TextField
             {
                 id: _genreField
                 text: control.data.genre
@@ -117,7 +117,7 @@ Maui.SettingsDialog
 
             label1.text: i18n("Year")
 
-            Maui.TextField
+            TextField
             {
                 id: _yearField
                 text: control.data.releasedate
@@ -131,7 +131,7 @@ Maui.SettingsDialog
 
             label1.text: i18n("Comment")
 
-            Maui.TextField
+            TextField
             {
                 id: _commentField
                 text: control.data.comment

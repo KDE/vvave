@@ -370,3 +370,8 @@ void Playlist::componentComplete()
         this->loadLastPlaylist();
     }
 }
+
+void Playlist::classBegin()
+{
+
+}

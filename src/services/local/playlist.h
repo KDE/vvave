@@ -104,7 +104,9 @@ signals:
 
     // QQmlParserStatus interface
 public:
+    void classBegin() override final;
     void componentComplete() override final;
 };
+
 
 #endif // PLAYLIST_H

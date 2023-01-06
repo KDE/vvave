@@ -10,7 +10,7 @@ import "../../utils/Player.js" as Player
 
 import org.maui.vvave 1.0
 
-Maui.StackView
+StackView
 {
     id: control
 
@@ -29,7 +29,7 @@ Maui.StackView
             Layout.maximumWidth: 500
             Layout.alignment: Qt.AlignCenter
 
-            placeholderText: i18np("Filter", "Filter %1 folders", _foldersList.count)
+            placeholderText: i18np("Filter %1 folder", "Filter %1 folders", _foldersList.count)
 
             KeyNavigation.up: browser
             KeyNavigation.down: browser
