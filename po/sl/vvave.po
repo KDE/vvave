@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:46+0000\n"
+"POT-Creation-Date: 2023-01-07 00:47+0000\n"
 "PO-Revision-Date: 2023-01-02 20:50+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -157,11 +157,12 @@ msgstr "Ta seznam je prazen"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
-#: src/widgets/FoldersView/FoldersView.qml:32
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filter"
+#| msgid_plural "Filter %1 folders"
 msgid "Filter"
-msgid_plural "Filter %1 folders"
+msgid_plural "Filter %1 albums"
 msgstr[0] "Filtriraj %1 mapo"
 msgstr[1] "Filtriraj %1 mapi"
 msgstr[2] "Filtriraj %1 mape"
@@ -279,6 +280,15 @@ msgstr "Poskusite nekaj drugega"
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Začetek sestavljanja seznama predvajanja."
+
+#: src/widgets/FoldersView/FoldersView.qml:32
+#, kde-format
+msgid "Filter %1 folder"
+msgid_plural "Filter %1 folders"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format

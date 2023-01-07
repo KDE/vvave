@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:46+0000\n"
+"POT-Creation-Date: 2023-01-07 00:47+0000\n"
 "PO-Revision-Date: 2022-12-29 10:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -157,11 +157,12 @@ msgstr "Esta lista está vacía"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
-#: src/widgets/FoldersView/FoldersView.qml:32
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filter"
+#| msgid_plural "Filter %1 folders"
 msgid "Filter"
-msgid_plural "Filter %1 folders"
+msgid_plural "Filter %1 albums"
 msgstr[0] "Filtrar"
 msgstr[1] "Filtrar %1 carpetas"
 
@@ -277,6 +278,13 @@ msgstr "Pruebe con algo"
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Empiece a crear la lista de reproducción."
+
+#: src/widgets/FoldersView/FoldersView.qml:32
+#, kde-format
+msgid "Filter %1 folder"
+msgid_plural "Filter %1 folders"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:46+0000\n"
+"POT-Creation-Date: 2023-01-07 00:47+0000\n"
 "PO-Revision-Date: 2022-12-30 23:56+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -155,11 +155,12 @@ msgstr "Liste boş"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
-#: src/widgets/FoldersView/FoldersView.qml:32
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filter"
+#| msgid_plural "Filter %1 folders"
 msgid "Filter"
-msgid_plural "Filter %1 folders"
+msgid_plural "Filter %1 albums"
 msgstr[0] "Süz"
 msgstr[1] "%1 klasörü süz"
 
@@ -275,6 +276,13 @@ msgstr "Başka bir şey deneyin"
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Çalma listenizi oluşturmaya başlayın."
+
+#: src/widgets/FoldersView/FoldersView.qml:32
+#, kde-format
+msgid "Filter %1 folder"
+msgid_plural "Filter %1 folders"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format

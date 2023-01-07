@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-03 00:46+0000\n"
+"POT-Creation-Date: 2023-01-07 00:47+0000\n"
 "PO-Revision-Date: 2022-12-29 08:40+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -157,11 +157,12 @@ msgstr "Цей список порожній"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
-#: src/widgets/FoldersView/FoldersView.qml:32
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Filter"
+#| msgid_plural "Filter %1 folders"
 msgid "Filter"
-msgid_plural "Filter %1 folders"
+msgid_plural "Filter %1 albums"
 msgstr[0] "Фільтрувати %1 теку"
 msgstr[1] "Фільтрувати %1 теки"
 msgstr[2] "Фільтрувати %1 тек"
@@ -279,6 +280,15 @@ msgstr "Спробувати інше"
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Почніть збирати ваш список відтворення."
+
+#: src/widgets/FoldersView/FoldersView.qml:32
+#, kde-format
+msgid "Filter %1 folder"
+msgid_plural "Filter %1 folders"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
