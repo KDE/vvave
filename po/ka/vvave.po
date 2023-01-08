@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:47+0000\n"
-"PO-Revision-Date: 2022-12-30 08:11+0100\n"
+"PO-Revision-Date: 2023-01-07 06:20+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -158,13 +158,11 @@ msgstr "ეს სია ცარიელია"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "ფილტრი"
-msgstr[1] "%1 საქაღალდის გაფილტვრა"
+msgstr[0] "გაფილტვრა"
+msgstr[1] "%1 ალბომი გაფილტვრა"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -282,8 +280,8 @@ msgstr "დაიწყეთ თქვენი დასაკრავი ს
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 საქაღალდის გაფილტვრა"
+msgstr[1] "%1 საქაღალდის გაფილტვრა"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format

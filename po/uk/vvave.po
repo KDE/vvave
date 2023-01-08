@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:47+0000\n"
-"PO-Revision-Date: 2022-12-29 08:40+0200\n"
+"PO-Revision-Date: 2023-01-07 09:03+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -158,15 +158,13 @@ msgstr "Цей список порожній"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "Фільтрувати %1 теку"
-msgstr[1] "Фільтрувати %1 теки"
-msgstr[2] "Фільтрувати %1 тек"
-msgstr[3] "Фільтрувати %1 теку"
+msgstr[0] "Фільтрувати %1 альбом"
+msgstr[1] "Фільтрувати %1 альбоми"
+msgstr[2] "Фільтрувати %1 альбомів"
+msgstr[3] "Фільтрувати"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -285,10 +283,10 @@ msgstr "Почніть збирати ваш список відтворення
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Фільтрувати %1 теку"
+msgstr[1] "Фільтрувати %1 теки"
+msgstr[2] "Фільтрувати %1 тек"
+msgstr[3] "Фільтрувати теку"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format

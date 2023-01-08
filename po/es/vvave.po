@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the vvave package.
 #
 # Automatically generated, 2022.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:47+0000\n"
-"PO-Revision-Date: 2022-12-29 10:28+0100\n"
+"PO-Revision-Date: 2023-01-07 22:30+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -158,13 +158,11 @@ msgstr "Esta lista está vacía"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "Filtrar"
-msgstr[1] "Filtrar %1 carpetas"
+msgstr[1] "Filtrar %1 álbumes"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -283,8 +281,8 @@ msgstr "Empiece a crear la lista de reproducción."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtrar %1 carpeta"
+msgstr[1] "Filtrar %1 carpetas"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format

@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:47+0000\n"
-"PO-Revision-Date: 2022-12-30 23:56+0300\n"
+"PO-Revision-Date: 2023-01-07 23:16+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -25,7 +25,7 @@ msgstr "Vvave"
 #: src/main.cpp:102
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr "Müziğinizi düzenleyin ve dinleyin."
+msgstr "Müziğini dinle ve organize et."
 
 #: src/main.cpp:102
 #, kde-format
@@ -156,13 +156,11 @@ msgstr "Liste boş"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "Süz"
-msgstr[1] "%1 klasörü süz"
+msgstr[1] "%1 albümü süz"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -281,8 +279,8 @@ msgstr "Çalma listenizi oluşturmaya başlayın."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 klasörü süz"
+msgstr[1] "%1 klasörü süz"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format

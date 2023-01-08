@@ -1,15 +1,15 @@
 # Translation of vvave.po to Catalan
-# Copyright (C) 2022 This_file_is_part_of_KDE
+# Copyright (C) 2022-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-07 00:47+0000\n"
-"PO-Revision-Date: 2022-12-29 06:14+0100\n"
+"PO-Revision-Date: 2023-01-07 10:02+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -159,13 +159,11 @@ msgstr "Aquesta llista està buit"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "Filtre"
-msgstr[1] "Filtra %1 carpetes"
+msgstr[0] "Filtra"
+msgstr[1] "Filtra %1 àlbums"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -284,8 +282,8 @@ msgstr "Comenceu posant junta la llista de reproducció."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtra %1 carpeta"
+msgstr[1] "Filtra %1 carpetes"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
