@@ -33,48 +33,6 @@ Maui.ToolBar
         onClicked: toggleFocusView()
     }
 
-
-    //            ToolButton
-    //        {
-    //            icon.name: _volumeSlider.value === 0 ? "player-volume-muted" : "player-volume"
-    //            onPressAndHold :
-    //            {
-    //                player.volume = player.volume === 0 ? 100 : 0
-    //            }
-
-    //            onClicked:
-    //            {
-    //                _sliderPopup.visible ? _sliderPopup.close() : _sliderPopup.open()
-    //            }
-
-    //            Popup
-    //            {
-    //                id: _sliderPopup
-    //                height: 150
-    //                width: parent.width
-    //                y: -150
-    //                x: 0
-
-    //                Slider
-    //                {
-    //                    id: _volumeSlider
-    //                    visible: true
-    //                    height: parent.height
-    //                    width: 20
-    //                    anchors.horizontalCenter: parent.horizontalCenter
-    //                    from: 0
-    //                    to: 100
-    //                    value: player.volume
-    //                    orientation: Qt.Vertical
-
-    //                    onMoved:
-    //                    {
-    //                        player.volume = value
-    //                    }
-    //                }
-    //            }
-    //        }
-
     middleContent: [
 
         Maui.ToolActions
