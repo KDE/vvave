@@ -126,14 +126,9 @@ void Playlist::next()
     switch(m_playMode)
     {
     case PlayMode::Normal:
-    {
-        setCurrentIndex(m_currentIndex + 1 >= m_model->getCount() ? 0 : m_currentIndex + 1);
-        break;
-    }
-
     case PlayMode::Shuffle:
     {
-        nextShuffle();
+        setCurrentIndex(m_currentIndex + 1 >= m_model->getCount() ? 0 : m_currentIndex + 1);
         break;
     }
     }
@@ -152,18 +147,6 @@ void Playlist::previous()
     int previous = m_currentIndex - 1 >= 0 ? m_currentIndex - 1 : m_model->getCount() - 1;
 
     setCurrentIndex(previous);
-}
-
-void Playlist::nextShuffle()
-{
-    if (!m_model)
-    {
-        return;
-    }
-
-    auto count = m_model->getCount();
-
-    setCurrentIndex(std::rand() % count);
 }
 
 void Playlist::play(int index)

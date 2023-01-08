@@ -69,7 +69,6 @@ public slots:
 
     void next();
     void previous();
-    void nextShuffle();
     void play(int index);
     void clear();
 
