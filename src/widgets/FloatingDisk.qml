@@ -6,7 +6,7 @@ import QtGraphicalEffects 1.0
 
 import org.mauikit.controls 1.3 as Maui
 
-Item
+Control
 {
     id: control
 
@@ -16,25 +16,25 @@ Item
     Maui.Theme.inherit: false
     Maui.Theme.colorSet: Maui.Theme.Complementary
 
-//    visible: opacity > 0
+    visible: opacity > 0
 
     scale: focusView ? 2 : 1
 
-    implicitHeight:  Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
+    implicitHeight: _mouseArea.implicitHeight + topPadding + bottomPadding
+    implicitWidth: _mouseArea.implicitWidth + leftPadding + rightPadding
 
-    implicitWidth: implicitHeight
+    padding: Maui.Style.space.tiny
 
     ToolTip.delay: 1000
     ToolTip.timeout: 5000
     ToolTip.visible: _mouseArea.containsMouse && !Maui.Handy.isMobile
     ToolTip.text: root.title
 
-    opacity: focusView ? 0 :  1
+    opacity: root.focusView ? 0 :  1
 
-    OpacityAnimator on opacity
+    Behavior on opacity
     {
-        duration: 200
-        easing.type: Easing.OutCubic
+        NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
     }
 
     Behavior on scale
@@ -42,127 +42,52 @@ Item
         NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
     }
 
-    Binding on x
-    {
-        value: root.width - control.implicitWidth - Maui.Style.space.medium
-        restoreMode: Binding.RestoreBindingOrValue
-        delayed: true
-    }
+    y: root.height - control.implicitHeight - Maui.Style.space.medium - _mainPage.footerContainer.implicitHeight
+    x: root.width - control.implicitWidth - Maui.Style.space.medium
 
-    Binding on y
-    {
-        value: root.height - control.implicitHeight - Maui.Style.space.medium - _mainPage.footerContainer.implicitHeight
-        restoreMode: Binding.RestoreBindingOrValue
-        delayed: true
-    }
+//    Binding on x
+//    {
+//        when: !_mouseArea.pressed
+//        value: control.x
+//        restoreMode: Binding.RestoreBindingOrValue
+//        delayed: true
+//    }
 
+//    Binding on y
+//    {
+//        when: !_mouseArea.pressed
+//        value: control.y
+//        restoreMode: Binding.RestoreBindingOrValue
+//        delayed: true
+//    }
 
-    Maui.Badge
-    {
-        anchors.fill: parent
-        anchors.margins: Maui.Style.space.tiny
-        visible: anim.running
-        text: mainPlaylist.table.count
-    }
-
-    Connections
-    {
-        target: mainPlaylist.table
-        ignoreUnknownSignals: true
-        function onCountChanged()
-        {
-            anim.run(control.y)
-        }
-    }
-
-    NumberAnimation on y
-    {
-        id: anim
-        property int startY
-        running: false
-        from : control.y
-        to: control.y - 20
-        duration: 250
-        loops: 2
-
-        onStopped:
-        {
-            control.y = startY
-        }
-
-        function run(y)
-        {
-            if(y < 10)
-                return
-            startY = y
-            anim.start()
-            anim.running = true
-        }
-    }
-
-    Rectangle
+    background: Rectangle
     {
         id: diskBg
-        anchors.fill: parent
         color: "white"
         radius: Math.min(width, height)
 
-        Image
+        layer.enabled: true
+        layer.effect: DropShadow
         {
-            id: miniArtwork
-            focus: true
-            anchors.fill: parent
-            anchors.margins: Maui.Style.space.tiny
-            anchors.centerIn: parent
-            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
-            fillMode: Image.PreserveAspectFit
-            cache: false
-            antialiasing: true
-
-            layer.enabled: true
-            layer.effect: OpacityMask
-            {
-                maskSource: Item
-                {
-                    width: miniArtwork.width
-                    height: miniArtwork.height
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        radius: Math.min(width, height)
-                    }
-                }
-            }
+            horizontalOffset: 0
+            verticalOffset: 0
+            radius: _mouseArea.containsPress ? 5.0 :8.0
+            samples: 17
+            color: "#80000000"
         }
     }
 
-    DropShadow
-    {
-        anchors.fill: diskBg
-        horizontalOffset: 0
-        verticalOffset: 0
-        radius: _mouseArea.containsPress ? 5.0 :8.0
-        samples: 17
-        color: "#80000000"
-        source: diskBg
-    }
-
-    RotationAnimator on rotation
-    {
-        from: 0
-        to: 360
-        duration: 5000
-        loops: Animation.Infinite
-        running: isPlaying && Maui.Style.enableEffects
-    }
-
-    MouseArea
+    contentItem: MouseArea
     {
         id: _mouseArea
-        anchors.fill: parent
+
+        implicitHeight: Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
+         implicitWidth: implicitHeight
+
         hoverEnabled: true
 
-        drag.target: parent
+        drag.target: control
         drag.axis: Drag.XAndYAxis
 
         drag.minimumX: 0
@@ -172,6 +97,35 @@ Item
         drag.maximumY: root.height - control.height
 
         onClicked: toggleFocusView()
-        onPressAndHold: toggleMiniMode()
+//        onPressAndHold: toggleMiniMode()
+
+        Image
+        {
+            id: miniArtwork
+            focus: true
+            anchors.fill: parent
+            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+            fillMode: Image.PreserveAspectFit
+
+            layer.enabled: true
+            layer.effect: OpacityMask
+            {
+                maskSource: Rectangle
+                {
+                    height: miniArtwork.height
+                    width: miniArtwork.width
+                    radius: Math.min(width, height)
+                }
+            }
+        }
+    }
+
+    RotationAnimator on rotation
+    {
+        from: 0
+        to: 360
+        duration: 5000
+        loops: Animation.Infinite
+        running: isPlaying && Maui.Style.enableEffects
     }
 }

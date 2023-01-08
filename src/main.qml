@@ -64,7 +64,7 @@ Maui.ApplicationWindow
     property string syncPlaylist: ""
     property bool sync: false
 
-    readonly property bool focusView : _stackView.depth === 1
+    readonly property bool focusView : _stackView.currentItem.objectName === "FocusView"
     readonly property bool miniMode : _miniModeComponent.visible
 
     property bool selectionMode : false
@@ -231,7 +231,7 @@ Maui.ApplicationWindow
 
     Loader
     {
-        active: (!mainlistEmpty && isPlaying) || item
+        active: (root.isPlaying && !root.mainlistEmpty)
         asynchronous: true
         sourceComponent: FloatingDisk {}
     }
@@ -669,6 +669,7 @@ Maui.ApplicationWindow
 
                     FocusView
                     {
+                        objectName: "FocusView"
                     }
                 }
 
