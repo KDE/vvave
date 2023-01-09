@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:47+0000\n"
+"POT-Creation-Date: 2023-01-09 00:54+0000\n"
 "PO-Revision-Date: 2023-01-07 06:20+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -33,20 +33,10 @@ msgstr "მუსიკის მოსმენის და დალაგე
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© 2019- %1 Maui განვითარების გუნდი"
 
-#: src/main.cpp:104
-#, kde-format
-msgid "Camilo Higuita"
-msgstr "კამილო ჰიგუიტა"
-
-#: src/main.cpp:104
+#: src/main.cpp:104 src/main.cpp:105
 #, kde-format
 msgid "Developer"
 msgstr "პროგრამისტი"
-
-#: src/main.cpp:105
-#, kde-format
-msgid "Contributor"
-msgstr "მოხალისე"
 
 #: src/main.qml:271
 #, kde-format
@@ -256,22 +246,22 @@ msgstr ""
 "ჯერ ანგარიში არ დაგიმატებიათ.\n"
 "ანგარიშის დამატება აქ და მთავარ მენიუში ანგარიშების მორგებაში შეგიძლიათ"
 
-#: src/widgets/FocusView.qml:152
+#: src/widgets/FocusView.qml:146
 #, kde-format
 msgid "Find"
 msgstr "მოძებნა"
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "No Results!"
 msgstr "შედეგების გარეშე!"
 
-#: src/widgets/FocusView.qml:197
+#: src/widgets/FocusView.qml:191
 #, kde-format
 msgid "Try with something else"
 msgstr "სცადეთ რამე სხვით"
 
-#: src/widgets/FocusView.qml:239 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:233 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "დაიწყეთ თქვენი დასაკრავი სიის აწყობა."
@@ -373,17 +363,17 @@ msgstr "ფაილის ინფორმაცია"
 msgid "Local file info."
 msgstr "ლოკალური ფაილის ინფორმაცია."
 
-#: src/widgets/PlaybackBar.qml:155
+#: src/widgets/PlaybackBar.qml:27
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "გვერდითი პანელის გადართვა"
 
-#: src/widgets/PlaybackBar.qml:226
+#: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
 msgstr "დაკვრა და გაჩერება"
 
-#: src/widgets/PlaybackBar.qml:236
+#: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
 msgstr "შემდეგი"
@@ -556,3 +546,9 @@ msgstr "დასაკრავი სიები"
 #, kde-format
 msgid "Recent playlists"
 msgstr "მიმდინარე დასაკრავი სიები"
+
+#~ msgid "Camilo Higuita"
+#~ msgstr "კამილო ჰიგუიტა"
+
+#~ msgid "Contributor"
+#~ msgstr "მოხალისე"

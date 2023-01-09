@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:47+0000\n"
-"PO-Revision-Date: 2023-01-01 10:16+0100\n"
+"POT-Creation-Date: 2023-01-09 00:54+0000\n"
+"PO-Revision-Date: 2023-01-08 10:06+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -29,20 +29,10 @@ msgstr "Organiser et écouter votre musique."
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© 2019-%1 L'équipe de développement de Maui"
 
-#: src/main.cpp:104
-#, kde-format
-msgid "Camilo Higuita"
-msgstr "Camilo Higuita"
-
-#: src/main.cpp:104
+#: src/main.cpp:104 src/main.cpp:105
 #, kde-format
 msgid "Developer"
 msgstr "Développeur"
-
-#: src/main.cpp:105
-#, kde-format
-msgid "Contributor"
-msgstr "Contributeur"
 
 #: src/main.qml:271
 #, kde-format
@@ -154,13 +144,11 @@ msgstr "Cette liste est vide."
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "Filtrer"
-msgstr[1] "Filtrer les %1 dossiers"
+msgstr[1] "Filtrer les %1 albums"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -255,22 +243,22 @@ msgstr ""
 "Vous pouvez configurer votre compte maintenant en cliquant ici ou sous les "
 "options « Comptes » dans le menu principal"
 
-#: src/widgets/FocusView.qml:152
+#: src/widgets/FocusView.qml:146
 #, kde-format
 msgid "Find"
 msgstr "Trouver"
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "No Results!"
 msgstr "Aucun résultat !"
 
-#: src/widgets/FocusView.qml:197
+#: src/widgets/FocusView.qml:191
 #, kde-format
 msgid "Try with something else"
 msgstr "Essayer avec quelque chose d'autre"
 
-#: src/widgets/FocusView.qml:239 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:233 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Commencez à constituer votre liste de lecture."
@@ -279,8 +267,8 @@ msgstr "Commencez à constituer votre liste de lecture."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtrer le dossier %1"
+msgstr[1] "Filtrer les %1 dossiers"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
@@ -373,17 +361,17 @@ msgstr "Informations sur le fichier"
 msgid "Local file info."
 msgstr "Informations locales sur un fichier."
 
-#: src/widgets/PlaybackBar.qml:155
+#: src/widgets/PlaybackBar.qml:27
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "Afficher / Masquer une barre latérale"
 
-#: src/widgets/PlaybackBar.qml:226
+#: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
 msgstr "Lire et mettre en pause"
 
-#: src/widgets/PlaybackBar.qml:236
+#: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
 msgstr "Suivant"
@@ -559,3 +547,9 @@ msgstr "Listes de lecture"
 #, kde-format
 msgid "Recent playlists"
 msgstr "Listes de lecture récentes"
+
+#~ msgid "Camilo Higuita"
+#~ msgstr "Camilo Higuita"
+
+#~ msgid "Contributor"
+#~ msgstr "Contributeur"

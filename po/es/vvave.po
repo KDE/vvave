@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:47+0000\n"
+"POT-Creation-Date: 2023-01-09 00:54+0000\n"
 "PO-Revision-Date: 2023-01-07 22:30+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -34,20 +34,10 @@ msgstr "Organice y escuche su música."
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© 2019-%1 El equipo de desarrollo de Maui"
 
-#: src/main.cpp:104
-#, kde-format
-msgid "Camilo Higuita"
-msgstr "Camilo Higuita"
-
-#: src/main.cpp:104
+#: src/main.cpp:104 src/main.cpp:105
 #, kde-format
 msgid "Developer"
 msgstr "Desarrollador"
-
-#: src/main.cpp:105
-#, kde-format
-msgid "Contributor"
-msgstr "Colaborador"
 
 #: src/main.qml:271
 #, kde-format
@@ -257,22 +247,22 @@ msgstr ""
 "Puede configurar una ahora pulsando aquí o debajo de las opciones de las "
 "cuentas en el menú principal."
 
-#: src/widgets/FocusView.qml:152
+#: src/widgets/FocusView.qml:146
 #, kde-format
 msgid "Find"
 msgstr "Buscar"
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "No Results!"
 msgstr "No hay resultados"
 
-#: src/widgets/FocusView.qml:197
+#: src/widgets/FocusView.qml:191
 #, kde-format
 msgid "Try with something else"
 msgstr "Pruebe con algo"
 
-#: src/widgets/FocusView.qml:239 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:233 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Empiece a crear la lista de reproducción."
@@ -374,17 +364,17 @@ msgstr "Información del archivo"
 msgid "Local file info."
 msgstr "Información del archivo local."
 
-#: src/widgets/PlaybackBar.qml:155
+#: src/widgets/PlaybackBar.qml:27
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "Conmutar barra lateral"
 
-#: src/widgets/PlaybackBar.qml:226
+#: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
 msgstr "Reproducir y pausar"
 
-#: src/widgets/PlaybackBar.qml:236
+#: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
 msgstr "Siguiente"
@@ -559,3 +549,9 @@ msgstr "Listas de reproducción"
 #, kde-format
 msgid "Recent playlists"
 msgstr "Listas de reproducción recientes"
+
+#~ msgid "Camilo Higuita"
+#~ msgstr "Camilo Higuita"
+
+#~ msgid "Contributor"
+#~ msgstr "Colaborador"

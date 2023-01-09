@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:47+0000\n"
+"POT-Creation-Date: 2023-01-09 00:54+0000\n"
 "PO-Revision-Date: 2023-01-07 09:03+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -33,20 +33,10 @@ msgstr "Упорядкуйте вашу музику і насолоджуйте
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© Команда розробників Maui, 2019–%1"
 
-#: src/main.cpp:104
-#, kde-format
-msgid "Camilo Higuita"
-msgstr "Camilo Higuita"
-
-#: src/main.cpp:104
+#: src/main.cpp:104 src/main.cpp:105
 #, kde-format
 msgid "Developer"
 msgstr "Розробник"
-
-#: src/main.cpp:105
-#, kde-format
-msgid "Contributor"
-msgstr "Учасник"
 
 #: src/main.qml:271
 #, kde-format
@@ -259,22 +249,22 @@ msgstr ""
 "Ви можете налаштувати ваш обліковий запис, натиснувши тут, або скористатися "
 "пунктами обробки облікових записів у головному меню."
 
-#: src/widgets/FocusView.qml:152
+#: src/widgets/FocusView.qml:146
 #, kde-format
 msgid "Find"
 msgstr "Знайти"
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "No Results!"
 msgstr "Нічого не знайдено!"
 
-#: src/widgets/FocusView.qml:197
+#: src/widgets/FocusView.qml:191
 #, kde-format
 msgid "Try with something else"
 msgstr "Спробувати інше"
 
-#: src/widgets/FocusView.qml:239 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:233 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Почніть збирати ваш список відтворення."
@@ -378,17 +368,17 @@ msgstr "Відомості про файл"
 msgid "Local file info."
 msgstr "Дані з локального файла."
 
-#: src/widgets/PlaybackBar.qml:155
+#: src/widgets/PlaybackBar.qml:27
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "Увімкнути чи вимкнути бічну панель"
 
-#: src/widgets/PlaybackBar.qml:226
+#: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
 msgstr "Відтворення і призупинення"
 
-#: src/widgets/PlaybackBar.qml:236
+#: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
 msgstr "Далі"
@@ -561,3 +551,9 @@ msgstr "Списки відтворення"
 #, kde-format
 msgid "Recent playlists"
 msgstr "Нещодавні списки відтворення"
+
+#~ msgid "Camilo Higuita"
+#~ msgstr "Camilo Higuita"
+
+#~ msgid "Contributor"
+#~ msgstr "Учасник"

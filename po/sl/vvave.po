@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-07 00:47+0000\n"
-"PO-Revision-Date: 2023-01-02 20:50+0100\n"
+"POT-Creation-Date: 2023-01-09 00:54+0000\n"
+"PO-Revision-Date: 2023-01-08 10:17+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -33,20 +33,10 @@ msgstr "Organiziraj si poslušanje svoje glasbe."
 msgid "© 2019-%1 Maui Development Team"
 msgstr "© 2019-%1 razvojna ekipa Maui"
 
-#: src/main.cpp:104
-#, kde-format
-msgid "Camilo Higuita"
-msgstr "Camilo Higuita"
-
-#: src/main.cpp:104
+#: src/main.cpp:104 src/main.cpp:105
 #, kde-format
 msgid "Developer"
 msgstr "Razvojnik"
-
-#: src/main.cpp:105
-#, kde-format
-msgid "Contributor"
-msgstr "Sodelavec"
 
 #: src/main.qml:271
 #, kde-format
@@ -158,15 +148,13 @@ msgstr "Ta seznam je prazen"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "Filtriraj %1 mapo"
-msgstr[1] "Filtriraj %1 mapi"
-msgstr[2] "Filtriraj %1 mape"
-msgstr[3] "Filtriraj %1 map"
+msgstr[0] "Filtriraj %1 album"
+msgstr[1] "Filtriraj %1 albuma"
+msgstr[2] "Filtriraj %1 albume"
+msgstr[3] "Filtriraj %1 albumov"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -261,22 +249,22 @@ msgstr ""
 "Račun lahko nastavite zdaj s klikom sem ali pod možnostmi računa v glavnem "
 "meniju"
 
-#: src/widgets/FocusView.qml:152
+#: src/widgets/FocusView.qml:146
 #, kde-format
 msgid "Find"
 msgstr "Najdi"
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "No Results!"
 msgstr "Ni zadetkov!"
 
-#: src/widgets/FocusView.qml:197
+#: src/widgets/FocusView.qml:191
 #, kde-format
 msgid "Try with something else"
 msgstr "Poskusite nekaj drugega"
 
-#: src/widgets/FocusView.qml:239 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:233 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Začetek sestavljanja seznama predvajanja."
@@ -285,10 +273,10 @@ msgstr "Začetek sestavljanja seznama predvajanja."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Filtriraj %1 mapo"
+msgstr[1] "Filtriraj %1 mapi"
+msgstr[2] "Filtriraj %1 mape"
+msgstr[3] "Filtriraj %1 map"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
@@ -378,19 +366,19 @@ msgstr "Informacije o datoteki"
 #: src/widgets/MetadataDialog.qml:146
 #, kde-format
 msgid "Local file info."
-msgstr "Informacija o lokalni datoteki"
+msgstr "Informacija o lokalni datoteki."
 
-#: src/widgets/PlaybackBar.qml:155
+#: src/widgets/PlaybackBar.qml:27
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "Preklopi stransko vrstico"
 
-#: src/widgets/PlaybackBar.qml:226
+#: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
 msgstr "Predvajanje in premor"
 
-#: src/widgets/PlaybackBar.qml:236
+#: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
 msgstr "Naslednji"
@@ -563,3 +551,9 @@ msgstr "Seznami predvajanj"
 #, kde-format
 msgid "Recent playlists"
 msgstr "Nedavni seznami predvajanj"
+
+#~ msgid "Camilo Higuita"
+#~ msgstr "Camilo Higuita"
+
+#~ msgid "Contributor"
+#~ msgstr "Sodelavec"
