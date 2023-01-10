@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-09 00:54+0000\n"
-"PO-Revision-Date: 2022-12-04 02:29+0000\n"
+"PO-Revision-Date: 2023-01-09 18:25+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -149,13 +149,11 @@ msgstr "Esta lista está vazia"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "Filtrar"
-msgstr[1] "Filtrar as %1 pastas"
+msgstr[1] "Filtrar os %1 álbuns"
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -225,10 +223,9 @@ msgid "Select..."
 msgstr "Seleccionar..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "Tocar"
+msgstr "Tocar o seguinte"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -275,8 +272,8 @@ msgstr "Comece por organizar a sua lista de reprodução."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtrar %1 pasta"
+msgstr[1] "Filtrar %1 pastas"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
@@ -321,7 +318,7 @@ msgstr "Meta-dados"
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
 msgid "Embedded metadata info."
-msgstr "Meta-dados incorporados:"
+msgstr "Meta-dados incorporados."
 
 #: src/widgets/MetadataDialog.qml:47
 #, kde-format
@@ -527,7 +524,7 @@ msgstr "Sondar agora"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
@@ -553,9 +550,3 @@ msgstr "Listas de Reprodução"
 #, kde-format
 msgid "Recent playlists"
 msgstr "Listas de reprodução recentes"
-
-#~ msgid "Camilo Higuita"
-#~ msgstr "Camilo Higuita"
-
-#~ msgid "Contributor"
-#~ msgstr "Contribuinte"
