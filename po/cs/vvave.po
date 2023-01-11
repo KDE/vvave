@@ -145,14 +145,12 @@ msgstr ""
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "Filtrovat"
-msgstr[1] "Filtrovat %1 složky"
-msgstr[2] "Filtrovat %1 složek"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: src/widgets/BabeTable/BabeTable.qml:71
 #, kde-format
@@ -266,9 +264,9 @@ msgstr ""
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Filtrovat %1 složku"
+msgstr[1] "Filtrovat %1 složky"
+msgstr[2] "Filtrovat %1 složek"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
@@ -539,9 +537,3 @@ msgstr "Seznamy skladeb"
 #, kde-format
 msgid "Recent playlists"
 msgstr ""
-
-#~ msgid "Camilo Higuita"
-#~ msgstr "Camilo Higuita"
-
-#~ msgid "Contributor"
-#~ msgstr "Přispěvatel"
