@@ -32,6 +32,7 @@
         <file>widgets/BabeGrid/BabeGrid.qml</file>
         <file>widgets/MiniMode.qml</file>
         <file>assets/playing.gif</file>
+        <file>widgets/TracksGroup.qml</file>
     </qresource>
     <qresource prefix="/DB">
         <file>db/script.sql</file>

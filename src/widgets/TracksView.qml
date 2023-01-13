@@ -52,82 +52,66 @@ BabeTable
         width: parent.width
         spacing: Maui.Style.space.big
 
-        Maui.SettingsSection
+        TracksGroup
         {
-            visible: _recentTracksList.count
             width: parent.width
             title: i18n("Popular Tracks")
             description: i18n("Play them again.")
+            list.query: Q.GET.mostPlayedTracks
+        }
 
-            Maui.GridView
+        TracksGroup
+        {
+            width: parent.width
+            title: i18n("New Tracks")
+            description: i18n("Newly added.")
+            list.query: Q.GET.newTracks
+        }
+
+        GridLayout
+        {
+            Maui.Theme.colorSet: Maui.Theme.Window
+            Maui.Theme.inherit: false
+
+            width: parent.width
+            columnSpacing: Maui.Style.space.big
+            rowSpacing: Maui.Style.space.big
+            columns: width >= 800 ? 2 : 1
+            rows: 2
+
+            TracksGroup
             {
-                id: _recentTracksList
-                scrollView.orientation: Qt.Horizontal
-                verticalScrollBarPolicy: ScrollBar.AlwaysOff
-                adaptContent: false
-                horizontalScrollBarPolicy:  ScrollBar.AsNeeded
-                currentIndex: -1
+
+                list.query: Q.GET.recentTracks
+                Layout.minimumWidth: 400
                 Layout.fillWidth: true
-                Layout.preferredHeight: 220
-                flickable.flow: GridView.FlowTopToBottom
-                itemSize: 160
-                itemHeight: 64
-                model: Maui.BaseModel
+                
+                title: i18n("Recent Tracks")
+                description: i18n("Recently played.")
+                padding: Maui.Style.space.medium
+                
+                background: Rectangle
                 {
-                    id: _recentModel
-                    list: Vvave.Tracks
-                    {
-                        query: Q.GET.mostPlayedTracks
-                    }
-
+                    color: Maui.Theme.backgroundColor
+                    radius: Maui.Style.radiusV
                 }
+            }
 
-                Connections
+            TracksGroup
+            {
+                Layout.minimumWidth: 400
+                Layout.fillWidth: true
+
+                title: i18n("Never Played")
+                description: i18n("Dust off.")
+
+                padding: Maui.Style.space.medium
+                list.query: Q.GET.neverPlayedTracks
+
+                background: Rectangle
                 {
-                    target: player
-                    function onFinished()
-                    {
-                        _recentModel.list.refresh()
-                    }
-                }
-
-                delegate: Item
-                {
-                    height: GridView.view.cellHeight
-                    width: GridView.view.cellWidth
-
-                    Maui.ListBrowserDelegate
-                    {
-                        id: _template
-                        anchors.fill: parent
-                        anchors.margins: Maui.Style.space.small
-                        maskRadius: radius
-                        label1.text: model.title
-                        label2.text: model.artist
-                        imageSource: "image://artwork/album:"+ model.artist+":"+model.album
-                        iconVisible: true
-                        label1.font.bold: true
-                        label1.font.weight: Font.Bold
-                        iconSource: "media-album-cover"
-                        template.fillMode: Image.PreserveAspectFit
-                        onClicked:
-                        {
-                            _recentTracksList.currentIndex = index
-                            if(Maui.Handy.singleClick)
-                            {
-                                Player.quickPlay(_recentModel.get(_recentTracksList.currentIndex))
-                            }
-                        }
-
-                        onDoubleClicked:
-                        {
-                            _recentTracksList.currentIndex = index
-                            if(!Maui.Handy.singleClick)
-                            {
-                                Player.quickPlay(_recentModel.get(_recentTracksList.currentIndex))
-                            }
-                        }
-                    }
+                    color: Maui.Theme.backgroundColor
+                    radius: Maui.Style.radiusV
                 }
             }
         }
