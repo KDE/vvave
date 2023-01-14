@@ -21,8 +21,37 @@ Maui.SettingsSection
     property alias gridView : _gridView
     property alias list : _list
 
-    clip: true
+    property int orientation: Qt.Horizontal
+
+    padding: Maui.Style.space.medium
+
     visible: _gridView.count
+
+    background: Rectangle
+    {
+        color: Maui.Theme.backgroundColor
+        radius: Maui.Style.radiusV
+    }
+
+     template.template.content:  Maui.ToolButtonMenu
+    {
+        icon.name: "media-playback-start"
+
+        MenuItem
+        {
+            icon.name : "media-playback-start"
+            text: i18n("Play All")
+            onTriggered: Player.playAllModel(control.listModel.list)
+
+        }
+
+        MenuItem
+        {
+            icon.name : "media-playlist-append"
+            text: i18n("Append All")
+            onTriggered: Player.appendAllModel(control.listModel.list)
+        }
+    }
 
     TableMenu
     {
@@ -93,28 +122,49 @@ Maui.SettingsSection
             const url = listModel.get(contextMenu.index).url
             Maui.Platform.shareFiles([url])
         }
+
+        onClosed: control.currentIndex = -1
     }
 
 
     Maui.GridView
     {
         id: _gridView
-        scrollView.orientation: Qt.Horizontal
+        clip: true
+
+        enableLassoSelection: true
+
+        scrollView.orientation: control.orientation
+
         verticalScrollBarPolicy: ScrollBar.AlwaysOff
-        adaptContent: false
         horizontalScrollBarPolicy:  ScrollBar.AsNeeded
+
+        adaptContent: control.orientation ===  Qt.Horizontal ? false : true
         currentIndex: -1
+
         Layout.fillWidth: true
+        Layout.fillHeight: true
         Layout.preferredHeight: 220
-        flickable.flow: GridView.FlowTopToBottom
+
+        flickable.flow: control.orientation ===  Qt.Horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
+
         itemSize: 160
         itemHeight: 64
+
         model: Maui.BaseModel
         {
             id: _listModel
             list: Vvave.Tracks
             {
                 id: _list
+            }
+        }
+
+        onItemsSelected:
+        {
+            for(var i in indexes)
+            {
+                selectionBar.addToSelection(control.listModel.get(indexes[i]))
             }
         }
 
@@ -132,20 +182,54 @@ Maui.SettingsSection
             height: GridView.view.cellHeight
             width: GridView.view.cellWidth
 
-            Maui.ListBrowserDelegate
+            TableDelegate
             {
+                id: delegate
+                coverArt: true
                 anchors.fill: parent
                 anchors.margins: Maui.Style.space.small
-                maskRadius: radius
-                label1.text: model.title
+//                maskRadius: radius
+//                label1.text: model.title
                 label2.text: model.artist
-                imageSource: "image://artwork/album:"+ model.artist+":"+model.album
-                iconVisible: true
-                label1.font.bold: true
-                label1.font.weight: Font.Bold
-                iconSource: "media-album-cover"
-                template.fillMode: Image.PreserveAspectFit
+//                imageSource: "image://artwork/album:"+ model.artist+":"+model.album
+//                iconVisible: true
+//                label1.font.bold: true
+//                label1.font.weight: Font.Bold
+//                iconSource: "media-album-cover"
                 isCurrentItem: parent.GridView.isCurrentItem || checked
+
+                onToggled: selectionBar.addToSelection(control.listModel.get(index))
+                checked: selectionBar.contains(model.url)
+                checkable: selectionMode
+
+                Drag.keys: ["text/uri-list"]
+                Drag.mimeData: Drag.active ?
+                                   {
+                                       "text/uri-list": model.url
+                                   } : {}
+
+            Connections
+            {
+                target: selectionBar
+                ignoreUnknownSignals: true
+
+                function onUriRemoved (uri)
+                {
+                    if(uri === model.url)
+                        delegate.checked = false
+                }
+
+                function onUriAdded(uri)
+                {
+                    if(uri === model.url)
+                        delegate.checked = true
+                }
+
+                function onCleared()
+                {
+                    delegate.checked = false
+                }
+            }
 
                 onClicked:
                 {

@@ -171,7 +171,7 @@ Maui.AltBrowser
             height: control.gridView.itemHeight  - Maui.Style.space.big
 
             isCurrentItem: parent.GridView.isCurrentItem
-            maskRadius: radius
+            maskRadius: Maui.Style.radiusV
             label1.text: model.album ? model.album : model.artist
             label2.text: model.artist && model.album ? model.artist : ""
             imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
@@ -180,6 +180,7 @@ Maui.AltBrowser
             iconSource: "media-album-cover"
             template.labelSizeHint: 40
             template.alignment: Qt.AlignLeft
+            template.fillMode: Image.PreserveAspectFit
 
             onClicked:
             {

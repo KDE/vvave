@@ -537,32 +537,60 @@ StackView
                 }
 
 
-
-                RowLayout
+                ColumnLayout
                 {
                     Layout.fillWidth: true
+                    Layout.maximumWidth: 600
+
                     Layout.alignment: Qt.AlignCenter
 
-                    Label
+                    spacing: 0
+
+                    RowLayout
                     {
-                        visible: text.length
                         Layout.fillWidth: true
-                        Layout.fillHeight: false
-                        verticalAlignment: Qt.AlignVCenter
-                        horizontalAlignment: Qt.AlignHCenter
-                        text: control.progressTimeLabel
-                        elide: Text.ElideMiddle
-                        wrapMode: Text.NoWrap
-                        color: control.Maui.Theme.textColor
-                        font.weight: Font.Normal
-                        font.pointSize: Maui.Style.fontSizes.medium
-                        opacity: 0.7
+
+                        Label
+                        {
+                            visible: text.length
+                            Layout.fillWidth: true
+                            verticalAlignment: Qt.AlignVCenter
+                            horizontalAlignment: Qt.AlignLeft
+                            text: control.progressTimeLabel
+                            elide: Text.ElideMiddle
+                            wrapMode: Text.NoWrap
+                            color: control.Maui.Theme.textColor
+                            font.weight: Font.Normal
+                            font.pointSize: Maui.Style.fontSizes.medium
+                            opacity: 0.7
+                        }
+
+                        Item
+                        {
+                            Layout.fillWidth: true
+                        }
+
+                        Label
+                        {
+                            visible: text.length
+                            Layout.fillWidth: true
+                            verticalAlignment: Qt.AlignVCenter
+                            horizontalAlignment: Qt.AlignRight
+                            text: control.durationTimeLabel
+                            elide: Text.ElideMiddle
+                            wrapMode: Text.NoWrap
+                            color: control.Maui.Theme.textColor
+                            font.weight: Font.Normal
+                            font.pointSize: Maui.Style.fontSizes.medium
+                            opacity: 0.7
+                        }
                     }
 
                     Slider
                     {
                         id: progressBar
                         Layout.fillWidth: true
+
                         padding: 0
                         from: 0
                         to: 1000
@@ -570,22 +598,6 @@ StackView
                         spacing: 0
                         focus: true
                         onMoved: player.pos = (player.duration / 1000) * value
-                    }
-
-                    Label
-                    {
-                        visible: text.length
-                        Layout.fillWidth: true
-                        Layout.fillHeight: false
-                        verticalAlignment: Qt.AlignVCenter
-                        horizontalAlignment: Qt.AlignHCenter
-                        text: control.durationTimeLabel
-                        elide: Text.ElideMiddle
-                        wrapMode: Text.NoWrap
-                        color: control.Maui.Theme.textColor
-                        font.weight: Font.Normal
-                        font.pointSize: Maui.Style.fontSizes.medium
-                        opacity: 0.7
                     }
                 }
 
