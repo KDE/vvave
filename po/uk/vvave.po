@@ -544,7 +544,6 @@ msgstr "Відтворіть їх знову."
 
 #: src/widgets/TracksView.qml:66
 #, kde-format
-#| msgid "No Tracks!"
 msgid "New Tracks"
 msgstr "Нові композиції"
 
@@ -555,13 +554,11 @@ msgstr "Щойно додано."
 
 #: src/widgets/TracksView.qml:89
 #, kde-format
-#| msgid "Remove track"
 msgid "Recent Tracks"
 msgstr "Нещодавні композиції"
 
 #: src/widgets/TracksView.qml:90
 #, kde-format
-#| msgid "Recent playlists"
 msgid "Recently played."
 msgstr "Нещодавно відтворено."
 
