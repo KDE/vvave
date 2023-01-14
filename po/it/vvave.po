@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-09 00:54+0000\n"
+"POT-Creation-Date: 2023-01-14 00:55+0000\n"
 "PO-Revision-Date: 2022-12-02 08:48+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -186,12 +186,12 @@ msgstr ""
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: src/widgets/BabeTable/BabeTable.qml:168
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:35
 #, kde-format
 msgid "Go to Artist"
 msgstr "Vai all'artista"
 
-#: src/widgets/BabeTable/BabeTable.qml:175
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:42
 #, kde-format
 msgid "Go to Album"
 msgstr "Vai all'album"
@@ -532,22 +532,55 @@ msgstr ""
 msgid "Open file"
 msgstr "Apri file"
 
-#: src/widgets/TracksView.qml:59
+#: src/widgets/TracksView.qml:58
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Tracce popolari"
 
-#: src/widgets/TracksView.qml:60
+#: src/widgets/TracksView.qml:59
 #, kde-format
 msgid "Play them again."
 msgstr "Riproducile nuovamente."
 
-#: src/widgets/TracksView.qml:140
+#: src/widgets/TracksView.qml:66
+#, fuzzy, kde-format
+#| msgid "No Tracks!"
+msgid "New Tracks"
+msgstr "Nessuna traccia."
+
+#: src/widgets/TracksView.qml:67
+#, kde-format
+msgid "Newly added."
+msgstr ""
+
+#: src/widgets/TracksView.qml:89
+#, fuzzy, kde-format
+#| msgid "Remove track"
+msgid "Recent Tracks"
+msgstr "Rimuovi traccia"
+
+#: src/widgets/TracksView.qml:90
+#, fuzzy, kde-format
+#| msgid "Recent playlists"
+msgid "Recently played."
+msgstr "Scalette recenti"
+
+#: src/widgets/TracksView.qml:105
+#, kde-format
+msgid "Never Played"
+msgstr ""
+
+#: src/widgets/TracksView.qml:106
+#, kde-format
+msgid "Dust off."
+msgstr ""
+
+#: src/widgets/TracksView.qml:124
 #, kde-format
 msgid "Playlists"
 msgstr "Scalette"
 
-#: src/widgets/TracksView.qml:141
+#: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Recent playlists"
 msgstr "Scalette recenti"

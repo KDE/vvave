@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-09 00:54+0000\n"
+"POT-Creation-Date: 2023-01-14 00:55+0000\n"
 "PO-Revision-Date: 2023-01-09 18:25+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -186,12 +186,12 @@ msgstr ""
 msgid "Remove"
 msgstr "Remover"
 
-#: src/widgets/BabeTable/BabeTable.qml:168
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:35
 #, kde-format
 msgid "Go to Artist"
 msgstr "Ir para o Artista"
 
-#: src/widgets/BabeTable/BabeTable.qml:175
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:42
 #, kde-format
 msgid "Go to Album"
 msgstr "Ir para o Álbum"
@@ -531,22 +531,55 @@ msgstr "Desconhecido"
 msgid "Open file"
 msgstr "Abrir um ficheiro"
 
-#: src/widgets/TracksView.qml:59
+#: src/widgets/TracksView.qml:58
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Faixas Populares"
 
-#: src/widgets/TracksView.qml:60
+#: src/widgets/TracksView.qml:59
 #, kde-format
 msgid "Play them again."
 msgstr "Reproduzi-las de novo."
 
-#: src/widgets/TracksView.qml:140
+#: src/widgets/TracksView.qml:66
+#, fuzzy, kde-format
+#| msgid "No Tracks!"
+msgid "New Tracks"
+msgstr "Sem Faixas!"
+
+#: src/widgets/TracksView.qml:67
+#, kde-format
+msgid "Newly added."
+msgstr ""
+
+#: src/widgets/TracksView.qml:89
+#, fuzzy, kde-format
+#| msgid "Remove track"
+msgid "Recent Tracks"
+msgstr "Remover a faixa"
+
+#: src/widgets/TracksView.qml:90
+#, fuzzy, kde-format
+#| msgid "Recent playlists"
+msgid "Recently played."
+msgstr "Listas de reprodução recentes"
+
+#: src/widgets/TracksView.qml:105
+#, kde-format
+msgid "Never Played"
+msgstr ""
+
+#: src/widgets/TracksView.qml:106
+#, kde-format
+msgid "Dust off."
+msgstr ""
+
+#: src/widgets/TracksView.qml:124
 #, kde-format
 msgid "Playlists"
 msgstr "Listas de Reprodução"
 
-#: src/widgets/TracksView.qml:141
+#: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Recent playlists"
 msgstr "Listas de reprodução recentes"

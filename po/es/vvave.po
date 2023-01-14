@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-09 00:54+0000\n"
+"POT-Creation-Date: 2023-01-14 00:55+0000\n"
 "PO-Revision-Date: 2023-01-07 22:30+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -185,12 +185,12 @@ msgstr ""
 msgid "Remove"
 msgstr "Eliminar"
 
-#: src/widgets/BabeTable/BabeTable.qml:168
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:35
 #, kde-format
 msgid "Go to Artist"
 msgstr "Ir a artista"
 
-#: src/widgets/BabeTable/BabeTable.qml:175
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:42
 #, kde-format
 msgid "Go to Album"
 msgstr "Ir a álbum"
@@ -530,22 +530,55 @@ msgstr "Desconocido"
 msgid "Open file"
 msgstr "Abrir archivo"
 
-#: src/widgets/TracksView.qml:59
+#: src/widgets/TracksView.qml:58
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Pistas populares"
 
-#: src/widgets/TracksView.qml:60
+#: src/widgets/TracksView.qml:59
 #, kde-format
 msgid "Play them again."
 msgstr "Volver a reproducirlas."
 
-#: src/widgets/TracksView.qml:140
+#: src/widgets/TracksView.qml:66
+#, fuzzy, kde-format
+#| msgid "No Tracks!"
+msgid "New Tracks"
+msgstr "No hay pistas"
+
+#: src/widgets/TracksView.qml:67
+#, kde-format
+msgid "Newly added."
+msgstr ""
+
+#: src/widgets/TracksView.qml:89
+#, fuzzy, kde-format
+#| msgid "Remove track"
+msgid "Recent Tracks"
+msgstr "Eliminar pista"
+
+#: src/widgets/TracksView.qml:90
+#, fuzzy, kde-format
+#| msgid "Recent playlists"
+msgid "Recently played."
+msgstr "Listas de reproducción recientes"
+
+#: src/widgets/TracksView.qml:105
+#, kde-format
+msgid "Never Played"
+msgstr ""
+
+#: src/widgets/TracksView.qml:106
+#, kde-format
+msgid "Dust off."
+msgstr ""
+
+#: src/widgets/TracksView.qml:124
 #, kde-format
 msgid "Playlists"
 msgstr "Listas de reproducción"
 
-#: src/widgets/TracksView.qml:141
+#: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Recent playlists"
 msgstr "Listas de reproducción recientes"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-09 00:54+0000\n"
+"POT-Creation-Date: 2023-01-14 00:55+0000\n"
 "PO-Revision-Date: 2023-01-08 10:06+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -181,12 +181,12 @@ msgstr ""
 msgid "Remove"
 msgstr "Supprimer"
 
-#: src/widgets/BabeTable/BabeTable.qml:168
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:35
 #, kde-format
 msgid "Go to Artist"
 msgstr "Aller à un artiste"
 
-#: src/widgets/BabeTable/BabeTable.qml:175
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:42
 #, kde-format
 msgid "Go to Album"
 msgstr "Aller à un album"
@@ -528,22 +528,55 @@ msgstr "Inconnu"
 msgid "Open file"
 msgstr "Ouvrir un fichier"
 
-#: src/widgets/TracksView.qml:59
+#: src/widgets/TracksView.qml:58
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Pistes populaires"
 
-#: src/widgets/TracksView.qml:60
+#: src/widgets/TracksView.qml:59
 #, kde-format
 msgid "Play them again."
 msgstr "Les lire à nouveau."
 
-#: src/widgets/TracksView.qml:140
+#: src/widgets/TracksView.qml:66
+#, fuzzy, kde-format
+#| msgid "No Tracks!"
+msgid "New Tracks"
+msgstr "Aucune piste !"
+
+#: src/widgets/TracksView.qml:67
+#, kde-format
+msgid "Newly added."
+msgstr ""
+
+#: src/widgets/TracksView.qml:89
+#, fuzzy, kde-format
+#| msgid "Remove track"
+msgid "Recent Tracks"
+msgstr "Supprimer une piste"
+
+#: src/widgets/TracksView.qml:90
+#, fuzzy, kde-format
+#| msgid "Recent playlists"
+msgid "Recently played."
+msgstr "Listes de lecture récentes"
+
+#: src/widgets/TracksView.qml:105
+#, kde-format
+msgid "Never Played"
+msgstr ""
+
+#: src/widgets/TracksView.qml:106
+#, kde-format
+msgid "Dust off."
+msgstr ""
+
+#: src/widgets/TracksView.qml:124
 #, kde-format
 msgid "Playlists"
 msgstr "Listes de lecture"
 
-#: src/widgets/TracksView.qml:141
+#: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Recent playlists"
 msgstr "Listes de lecture récentes"

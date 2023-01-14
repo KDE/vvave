@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-09 00:54+0000\n"
+"POT-Creation-Date: 2023-01-14 00:55+0000\n"
 "PO-Revision-Date: 2022-11-11 10:25+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -180,12 +180,12 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: src/widgets/BabeTable/BabeTable.qml:168
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:35
 #, kde-format
 msgid "Go to Artist"
 msgstr ""
 
-#: src/widgets/BabeTable/BabeTable.qml:175
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:42
 #, kde-format
 msgid "Go to Album"
 msgstr ""
@@ -516,22 +516,52 @@ msgstr ""
 msgid "Open file"
 msgstr ""
 
-#: src/widgets/TracksView.qml:59
+#: src/widgets/TracksView.qml:58
 #, kde-format
 msgid "Popular Tracks"
 msgstr ""
 
-#: src/widgets/TracksView.qml:60
+#: src/widgets/TracksView.qml:59
 #, kde-format
 msgid "Play them again."
 msgstr ""
 
-#: src/widgets/TracksView.qml:140
+#: src/widgets/TracksView.qml:66
+#, kde-format
+msgid "New Tracks"
+msgstr ""
+
+#: src/widgets/TracksView.qml:67
+#, kde-format
+msgid "Newly added."
+msgstr ""
+
+#: src/widgets/TracksView.qml:89
+#, kde-format
+msgid "Recent Tracks"
+msgstr ""
+
+#: src/widgets/TracksView.qml:90
+#, kde-format
+msgid "Recently played."
+msgstr ""
+
+#: src/widgets/TracksView.qml:105
+#, kde-format
+msgid "Never Played"
+msgstr ""
+
+#: src/widgets/TracksView.qml:106
+#, kde-format
+msgid "Dust off."
+msgstr ""
+
+#: src/widgets/TracksView.qml:124
 #, kde-format
 msgid "Playlists"
 msgstr ""
 
-#: src/widgets/TracksView.qml:141
+#: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Recent playlists"
 msgstr ""
