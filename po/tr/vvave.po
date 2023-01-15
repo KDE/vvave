@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 00:55+0000\n"
-"PO-Revision-Date: 2023-01-07 23:16+0300\n"
+"POT-Creation-Date: 2023-01-15 00:55+0000\n"
+"PO-Revision-Date: 2023-01-14 21:49+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -94,7 +94,7 @@ msgstr "Albümler"
 msgid "No Albums!"
 msgstr "Albüm Yok!"
 
-#: src/main.qml:581 src/main.qml:606 src/widgets/TracksView.qml:22
+#: src/main.qml:581 src/main.qml:606 src/widgets/TracksView.qml:489
 #, kde-format
 msgid "Add new music sources"
 msgstr "Yeni müzik kaynakları ekle"
@@ -133,7 +133,7 @@ msgid "Playing music"
 msgstr "Müzik çalınıyor"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:27
+#: src/widgets/TracksView.qml:494
 #, kde-format
 msgid "Add sources"
 msgstr "Kaynak ekle"
@@ -152,12 +152,12 @@ msgid_plural "Filter %1 albums"
 msgstr[0] "Süz"
 msgstr[1] "%1 albümü süz"
 
-#: src/widgets/BabeTable/BabeTable.qml:71
+#: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:43
 #, kde-format
 msgid "Play All"
 msgstr "Tümünü Çal"
 
-#: src/widgets/BabeTable/BabeTable.qml:78
+#: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:51
 #, kde-format
 msgid "Append All"
 msgstr "Tümünü İliştir"
@@ -183,12 +183,12 @@ msgstr ""
 msgid "Remove"
 msgstr "Kaldır"
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:35
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:64
 #, kde-format
 msgid "Go to Artist"
 msgstr "Sanatçıya Git"
 
-#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:42
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:71
 #, kde-format
 msgid "Go to Album"
 msgstr "Albüme Git"
@@ -282,7 +282,7 @@ msgstr "Klasör Yok!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Klasörleri tarayarak kaynaklarınıza müzik ekleyin"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:488
 #, kde-format
 msgid "No Tracks!"
 msgstr "Parça Yok!"
@@ -522,63 +522,95 @@ msgstr "Şimdi Tara"
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: src/widgets/TracksView.qml:33
+#: src/widgets/TracksView.qml:35
 #, kde-format
-msgid "Open file"
-msgstr "Dosya Aç"
+msgid "Search collection"
+msgstr ""
 
-#: src/widgets/TracksView.qml:58
+#: src/widgets/TracksView.qml:75
+#, kde-format
+msgid "New Tracks"
+msgstr "Yeni Parçalar"
+
+#: src/widgets/TracksView.qml:76 src/widgets/TracksView.qml:103
+#: src/widgets/TracksView.qml:178
+#, kde-format
+msgid "Newly added."
+msgstr "Yeni eklendi."
+
+#: src/widgets/TracksView.qml:81
+#, kde-format
+msgid "View All"
+msgstr ""
+
+#: src/widgets/TracksView.qml:102
+#, fuzzy, kde-format
+#| msgid "Recent playlists"
+msgid "Recent Artists"
+msgstr "Son kullanılan çalma listeleri"
+
+#: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
+#: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
+#: src/widgets/TracksView.qml:452
+#, kde-format
+msgid "More"
+msgstr ""
+
+#: src/widgets/TracksView.qml:177
+#, fuzzy, kde-format
+#| msgid "Albums"
+msgid "Recent Albums"
+msgstr "Albümler"
+
+#: src/widgets/TracksView.qml:251
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Popüler Parçalar"
 
-#: src/widgets/TracksView.qml:59
+#: src/widgets/TracksView.qml:252
 #, kde-format
 msgid "Play them again."
 msgstr "Onları yeniden çalın."
 
-#: src/widgets/TracksView.qml:66
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
-msgid "New Tracks"
-msgstr "Parça Yok!"
-
-#: src/widgets/TracksView.qml:67
-#, kde-format
-msgid "Newly added."
-msgstr ""
-
-#: src/widgets/TracksView.qml:89
-#, fuzzy, kde-format
-#| msgid "Remove track"
-msgid "Recent Tracks"
-msgstr "Parçayı kaldır"
-
-#: src/widgets/TracksView.qml:90
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
-msgid "Recently played."
-msgstr "Son kullanılan çalma listeleri"
-
-#: src/widgets/TracksView.qml:105
-#, kde-format
-msgid "Never Played"
-msgstr ""
-
-#: src/widgets/TracksView.qml:106
-#, kde-format
-msgid "Dust off."
-msgstr ""
-
-#: src/widgets/TracksView.qml:124
+#: src/widgets/TracksView.qml:321
 #, kde-format
 msgid "Playlists"
 msgstr "Çalma Listeleri"
 
-#: src/widgets/TracksView.qml:125
+#: src/widgets/TracksView.qml:322
 #, kde-format
 msgid "Recent playlists"
 msgstr "Son kullanılan çalma listeleri"
+
+#: src/widgets/TracksView.qml:427
+#, kde-format
+msgid "Recent Tracks"
+msgstr "Son Parçalar"
+
+#: src/widgets/TracksView.qml:428
+#, kde-format
+msgid "Recently played."
+msgstr "Son çalınan parçalar."
+
+#: src/widgets/TracksView.qml:445
+#, kde-format
+msgid "Never Played"
+msgstr "Hiç Çalınmadı"
+
+#: src/widgets/TracksView.qml:446 src/widgets/TracksView.qml:465
+#, kde-format
+msgid "Dust off."
+msgstr "Tozunu al."
+
+#: src/widgets/TracksView.qml:464
+#, kde-format
+msgid "Classics"
+msgstr ""
+
+#: src/widgets/TracksView.qml:500
+#, kde-format
+msgid "Open file"
+msgstr "Dosya Aç"
 
 #~ msgid "Camilo Higuita"
 #~ msgstr "Camilo Higuita"

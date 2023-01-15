@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 00:55+0000\n"
+"POT-Creation-Date: 2023-01-15 00:55+0000\n"
 "PO-Revision-Date: 2023-01-09 18:25+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -97,7 +97,7 @@ msgstr "Álbuns"
 msgid "No Albums!"
 msgstr "Sem Álbuns!"
 
-#: src/main.qml:581 src/main.qml:606 src/widgets/TracksView.qml:22
+#: src/main.qml:581 src/main.qml:606 src/widgets/TracksView.qml:489
 #, kde-format
 msgid "Add new music sources"
 msgstr "Adicionar novas fontes de músicas"
@@ -136,7 +136,7 @@ msgid "Playing music"
 msgstr "A tocar música"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:27
+#: src/widgets/TracksView.qml:494
 #, kde-format
 msgid "Add sources"
 msgstr "Adicionar fontes"
@@ -155,12 +155,12 @@ msgid_plural "Filter %1 albums"
 msgstr[0] "Filtrar"
 msgstr[1] "Filtrar os %1 álbuns"
 
-#: src/widgets/BabeTable/BabeTable.qml:71
+#: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:43
 #, kde-format
 msgid "Play All"
 msgstr "Reproduzir Tudo"
 
-#: src/widgets/BabeTable/BabeTable.qml:78
+#: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:51
 #, kde-format
 msgid "Append All"
 msgstr "Adicionar Tudo"
@@ -186,12 +186,12 @@ msgstr ""
 msgid "Remove"
 msgstr "Remover"
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:35
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:64
 #, kde-format
 msgid "Go to Artist"
 msgstr "Ir para o Artista"
 
-#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:42
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:71
 #, kde-format
 msgid "Go to Album"
 msgstr "Ir para o Álbum"
@@ -285,7 +285,7 @@ msgstr "Sem Pastas!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Adicione novas músicas às suas fontes a navegar por pastas"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:488
 #, kde-format
 msgid "No Tracks!"
 msgstr "Sem Faixas!"
@@ -526,60 +526,95 @@ msgstr "Sondar agora"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: src/widgets/TracksView.qml:33
+#: src/widgets/TracksView.qml:35
 #, kde-format
-msgid "Open file"
-msgstr "Abrir um ficheiro"
+msgid "Search collection"
+msgstr ""
 
-#: src/widgets/TracksView.qml:58
-#, kde-format
-msgid "Popular Tracks"
-msgstr "Faixas Populares"
-
-#: src/widgets/TracksView.qml:59
-#, kde-format
-msgid "Play them again."
-msgstr "Reproduzi-las de novo."
-
-#: src/widgets/TracksView.qml:66
+#: src/widgets/TracksView.qml:75
 #, fuzzy, kde-format
 #| msgid "No Tracks!"
 msgid "New Tracks"
 msgstr "Sem Faixas!"
 
-#: src/widgets/TracksView.qml:67
+#: src/widgets/TracksView.qml:76 src/widgets/TracksView.qml:103
+#: src/widgets/TracksView.qml:178
 #, kde-format
 msgid "Newly added."
 msgstr ""
 
-#: src/widgets/TracksView.qml:89
+#: src/widgets/TracksView.qml:81
+#, kde-format
+msgid "View All"
+msgstr ""
+
+#: src/widgets/TracksView.qml:102
+#, fuzzy, kde-format
+#| msgid "Recent playlists"
+msgid "Recent Artists"
+msgstr "Listas de reprodução recentes"
+
+#: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
+#: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
+#: src/widgets/TracksView.qml:452
+#, kde-format
+msgid "More"
+msgstr ""
+
+#: src/widgets/TracksView.qml:177
+#, fuzzy, kde-format
+#| msgid "Albums"
+msgid "Recent Albums"
+msgstr "Álbuns"
+
+#: src/widgets/TracksView.qml:251
+#, kde-format
+msgid "Popular Tracks"
+msgstr "Faixas Populares"
+
+#: src/widgets/TracksView.qml:252
+#, kde-format
+msgid "Play them again."
+msgstr "Reproduzi-las de novo."
+
+#: src/widgets/TracksView.qml:321
+#, kde-format
+msgid "Playlists"
+msgstr "Listas de Reprodução"
+
+#: src/widgets/TracksView.qml:322
+#, kde-format
+msgid "Recent playlists"
+msgstr "Listas de reprodução recentes"
+
+#: src/widgets/TracksView.qml:427
 #, fuzzy, kde-format
 #| msgid "Remove track"
 msgid "Recent Tracks"
 msgstr "Remover a faixa"
 
-#: src/widgets/TracksView.qml:90
+#: src/widgets/TracksView.qml:428
 #, fuzzy, kde-format
 #| msgid "Recent playlists"
 msgid "Recently played."
 msgstr "Listas de reprodução recentes"
 
-#: src/widgets/TracksView.qml:105
+#: src/widgets/TracksView.qml:445
 #, kde-format
 msgid "Never Played"
 msgstr ""
 
-#: src/widgets/TracksView.qml:106
+#: src/widgets/TracksView.qml:446 src/widgets/TracksView.qml:465
 #, kde-format
 msgid "Dust off."
 msgstr ""
 
-#: src/widgets/TracksView.qml:124
+#: src/widgets/TracksView.qml:464
 #, kde-format
-msgid "Playlists"
-msgstr "Listas de Reprodução"
+msgid "Classics"
+msgstr ""
 
-#: src/widgets/TracksView.qml:125
+#: src/widgets/TracksView.qml:500
 #, kde-format
-msgid "Recent playlists"
-msgstr "Listas de reprodução recentes"
+msgid "Open file"
+msgstr "Abrir um ficheiro"
