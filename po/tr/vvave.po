@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-15 00:55+0000\n"
-"PO-Revision-Date: 2023-01-14 21:49+0300\n"
+"PO-Revision-Date: 2023-01-15 17:51+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -253,7 +253,7 @@ msgstr "Bul"
 #: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "No Results!"
-msgstr "Sonuç Yok!"
+msgstr "Sonuç yok!"
 
 #: src/widgets/FocusView.qml:191
 #, kde-format
@@ -525,7 +525,7 @@ msgstr "Bilinmiyor"
 #: src/widgets/TracksView.qml:35
 #, kde-format
 msgid "Search collection"
-msgstr ""
+msgstr "Koleksiyonda ara"
 
 #: src/widgets/TracksView.qml:75
 #, kde-format
@@ -541,26 +541,24 @@ msgstr "Yeni eklendi."
 #: src/widgets/TracksView.qml:81
 #, kde-format
 msgid "View All"
-msgstr ""
+msgstr "Tümünü Görüntüle"
 
 #: src/widgets/TracksView.qml:102
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recent Artists"
-msgstr "Son kullanılan çalma listeleri"
+msgstr "Son Çalınan Sanatçılar"
 
 #: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
 #: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
 #: src/widgets/TracksView.qml:452
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "Daha Fazla"
 
 #: src/widgets/TracksView.qml:177
-#, fuzzy, kde-format
-#| msgid "Albums"
+#, kde-format
 msgid "Recent Albums"
-msgstr "Albümler"
+msgstr "Son Çalınan Albümler"
 
 #: src/widgets/TracksView.qml:251
 #, kde-format
@@ -580,12 +578,12 @@ msgstr "Çalma Listeleri"
 #: src/widgets/TracksView.qml:322
 #, kde-format
 msgid "Recent playlists"
-msgstr "Son kullanılan çalma listeleri"
+msgstr "Son çalınan listeler"
 
 #: src/widgets/TracksView.qml:427
 #, kde-format
 msgid "Recent Tracks"
-msgstr "Son Parçalar"
+msgstr "Son Çalınan Parçalar"
 
 #: src/widgets/TracksView.qml:428
 #, kde-format
@@ -595,7 +593,7 @@ msgstr "Son çalınan parçalar."
 #: src/widgets/TracksView.qml:445
 #, kde-format
 msgid "Never Played"
-msgstr "Hiç Çalınmadı"
+msgstr "Hiç Çalınmayanlar"
 
 #: src/widgets/TracksView.qml:446 src/widgets/TracksView.qml:465
 #, kde-format
@@ -605,7 +603,7 @@ msgstr "Tozunu al."
 #: src/widgets/TracksView.qml:464
 #, kde-format
 msgid "Classics"
-msgstr ""
+msgstr "Klasikler"
 
 #: src/widgets/TracksView.qml:500
 #, kde-format

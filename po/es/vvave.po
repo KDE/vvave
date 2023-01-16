@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-15 00:55+0000\n"
-"PO-Revision-Date: 2023-01-15 00:18+0100\n"
+"PO-Revision-Date: 2023-01-15 12:00+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -528,7 +528,7 @@ msgstr "Desconocido"
 #: src/widgets/TracksView.qml:35
 #, kde-format
 msgid "Search collection"
-msgstr ""
+msgstr "Buscar en la colección"
 
 #: src/widgets/TracksView.qml:75
 #, kde-format
@@ -544,26 +544,24 @@ msgstr "Añadidas recientemente."
 #: src/widgets/TracksView.qml:81
 #, kde-format
 msgid "View All"
-msgstr ""
+msgstr "Ver todo"
 
 #: src/widgets/TracksView.qml:102
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recent Artists"
-msgstr "Listas de reproducción recientes"
+msgstr "Artistas recientes"
 
 #: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
 #: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
 #: src/widgets/TracksView.qml:452
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "Más"
 
 #: src/widgets/TracksView.qml:177
-#, fuzzy, kde-format
-#| msgid "Albums"
+#, kde-format
 msgid "Recent Albums"
-msgstr "Álbumes"
+msgstr "Álbumes recientes"
 
 #: src/widgets/TracksView.qml:251
 #, kde-format
@@ -608,7 +606,7 @@ msgstr "Desempolvar."
 #: src/widgets/TracksView.qml:464
 #, kde-format
 msgid "Classics"
-msgstr ""
+msgstr "Clásicos"
 
 #: src/widgets/TracksView.qml:500
 #, kde-format

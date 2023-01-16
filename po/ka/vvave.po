@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-15 00:55+0000\n"
-"PO-Revision-Date: 2023-01-07 06:20+0100\n"
+"PO-Revision-Date: 2023-01-15 03:35+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -525,43 +525,40 @@ msgstr "უცნობი"
 #: src/widgets/TracksView.qml:35
 #, kde-format
 msgid "Search collection"
-msgstr ""
+msgstr "კოლექციაში ძებნა"
 
 #: src/widgets/TracksView.qml:75
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "New Tracks"
-msgstr "ტრეკების გარეშე!"
+msgstr "ახალი ტრეკები"
 
 #: src/widgets/TracksView.qml:76 src/widgets/TracksView.qml:103
 #: src/widgets/TracksView.qml:178
 #, kde-format
 msgid "Newly added."
-msgstr ""
+msgstr "ახლახანს დამატებული."
 
 #: src/widgets/TracksView.qml:81
 #, kde-format
 msgid "View All"
-msgstr ""
+msgstr "ყველას ნახვა"
 
 #: src/widgets/TracksView.qml:102
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recent Artists"
-msgstr "მიმდინარე დასაკრავი სიები"
+msgstr "უახლესი შემსრულებლები"
 
 #: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
 #: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
 #: src/widgets/TracksView.qml:452
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "მეტი"
 
 #: src/widgets/TracksView.qml:177
-#, fuzzy, kde-format
-#| msgid "Albums"
+#, kde-format
 msgid "Recent Albums"
-msgstr "ალბომები"
+msgstr "უახლესი ალბომები"
 
 #: src/widgets/TracksView.qml:251
 #, kde-format
@@ -584,31 +581,29 @@ msgid "Recent playlists"
 msgstr "მიმდინარე დასაკრავი სიები"
 
 #: src/widgets/TracksView.qml:427
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Recent Tracks"
-msgstr "ტრეკის წაშლა"
+msgstr "უახლესი ტრეკები"
 
 #: src/widgets/TracksView.qml:428
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recently played."
-msgstr "მიმდინარე დასაკრავი სიები"
+msgstr "ახლახანს დაკრული."
 
 #: src/widgets/TracksView.qml:445
 #, kde-format
 msgid "Never Played"
-msgstr ""
+msgstr "არასდროს-დაკრული"
 
 #: src/widgets/TracksView.qml:446 src/widgets/TracksView.qml:465
 #, kde-format
 msgid "Dust off."
-msgstr ""
+msgstr "მტვრის გადაყრა."
 
 #: src/widgets/TracksView.qml:464
 #, kde-format
 msgid "Classics"
-msgstr ""
+msgstr "კლასიკა"
 
 #: src/widgets/TracksView.qml:500
 #, kde-format

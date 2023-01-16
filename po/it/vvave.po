@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# Paolo Zamponi <zapaolo@email.it>, 2022.
+# Paolo Zamponi <zapaolo@email.it>, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-15 00:55+0000\n"
-"PO-Revision-Date: 2022-12-02 08:48+0100\n"
+"PO-Revision-Date: 2023-01-12 17:43+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -68,7 +68,7 @@ msgstr "Annulla"
 #: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "Scorciatoie"
 
 #: src/main.qml:514
 #, kde-format
@@ -147,13 +147,11 @@ msgstr "Questa lista è vuota"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "Filtro"
-msgstr[1] "Filtra %1 cartelle"
+msgstr[0] "Filtra"
+msgstr[1] "Filtra %1 album"
 
 #: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:43
 #, kde-format
@@ -223,10 +221,9 @@ msgid "Select..."
 msgstr "Seleziona..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Play next"
-msgstr "Riproduci"
+msgstr "Riproduci successivo"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
@@ -273,8 +270,8 @@ msgstr "Inizia creando la tua scaletta."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtra %1 cartella"
+msgstr[1] "Filtra %1 cartelle"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
@@ -525,7 +522,7 @@ msgstr "Analizza adesso"
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Sconosciuto"
 
 #: src/widgets/TracksView.qml:35
 #, kde-format

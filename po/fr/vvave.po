@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-15 00:55+0000\n"
-"PO-Revision-Date: 2023-01-08 10:06+0100\n"
+"PO-Revision-Date: 2023-01-14 19:40+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -529,16 +529,15 @@ msgid "Search collection"
 msgstr ""
 
 #: src/widgets/TracksView.qml:75
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "New Tracks"
-msgstr "Aucune piste !"
+msgstr "Nouvelles pistes"
 
 #: src/widgets/TracksView.qml:76 src/widgets/TracksView.qml:103
 #: src/widgets/TracksView.qml:178
 #, kde-format
 msgid "Newly added."
-msgstr ""
+msgstr "Nouvellement ajouté."
 
 #: src/widgets/TracksView.qml:81
 #, kde-format
@@ -585,26 +584,24 @@ msgid "Recent playlists"
 msgstr "Listes de lecture récentes"
 
 #: src/widgets/TracksView.qml:427
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Recent Tracks"
-msgstr "Supprimer une piste"
+msgstr "Pistes récentes"
 
 #: src/widgets/TracksView.qml:428
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recently played."
-msgstr "Listes de lecture récentes"
+msgstr "Lu récemment."
 
 #: src/widgets/TracksView.qml:445
 #, kde-format
 msgid "Never Played"
-msgstr ""
+msgstr "Jamais lu"
 
 #: src/widgets/TracksView.qml:446 src/widgets/TracksView.qml:465
 #, kde-format
 msgid "Dust off."
-msgstr ""
+msgstr "Dépoussiérer."
 
 #: src/widgets/TracksView.qml:464
 #, kde-format
