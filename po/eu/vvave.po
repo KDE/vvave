@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-15 00:55+0000\n"
-"PO-Revision-Date: 2023-01-14 23:48+0100\n"
+"PO-Revision-Date: 2023-01-16 07:22+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -528,7 +528,7 @@ msgstr "Ezezaguna"
 #: src/widgets/TracksView.qml:35
 #, kde-format
 msgid "Search collection"
-msgstr ""
+msgstr "Bilatu bilduman"
 
 #: src/widgets/TracksView.qml:75
 #, kde-format
@@ -544,26 +544,24 @@ msgstr "Berriki gehitua."
 #: src/widgets/TracksView.qml:81
 #, kde-format
 msgid "View All"
-msgstr ""
+msgstr "Ikusi dena"
 
 #: src/widgets/TracksView.qml:102
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recent Artists"
-msgstr "Azken aldiko jotze-zerrendak"
+msgstr "Azken aldiko artistak"
 
 #: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
 #: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
 #: src/widgets/TracksView.qml:452
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "Gehiago"
 
 #: src/widgets/TracksView.qml:177
-#, fuzzy, kde-format
-#| msgid "Albums"
+#, kde-format
 msgid "Recent Albums"
-msgstr "Albumak"
+msgstr "Azken aldiko albumak"
 
 #: src/widgets/TracksView.qml:251
 #, kde-format
@@ -608,7 +606,7 @@ msgstr "Kendu hautsa."
 #: src/widgets/TracksView.qml:464
 #, kde-format
 msgid "Classics"
-msgstr ""
+msgstr "Klasikoak"
 
 #: src/widgets/TracksView.qml:500
 #, kde-format
