@@ -541,7 +541,7 @@ StackView
                 {
                     Layout.fillWidth: true
                     Layout.maximumWidth: 600
-
+                    Layout.margins: Maui.Style.space.medium
                     Layout.alignment: Qt.AlignCenter
 
                     spacing: 0

@@ -59,6 +59,7 @@ StackView
             headBar.farLeftContent: ToolButton
             {
                 icon.name: "go-previous"
+                text: control.prefix === "album"  ? i18n("Albums") : i18n("Artists")
                 onClicked: control.pop()
             }
 

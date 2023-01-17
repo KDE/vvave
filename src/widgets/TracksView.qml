@@ -91,7 +91,7 @@ StackView
                         width: parent.width
                         columnSpacing: Maui.Style.space.big
                         rowSpacing: Maui.Style.space.big
-                        columns: width >= 800 ? 2 : 1
+                        columns: width >= 600 ? 2 : 1
                         rows: 2
 
                         Maui.SettingsSection

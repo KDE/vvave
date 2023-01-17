@@ -585,7 +585,6 @@ Maui.ApplicationWindow
                                 {
                                     if(Object.keys(_albumsViewLoader.pendingAlbum).length)
                                     {
-                                        console.log("POPULATE ALBUMS",_albumsViewLoader.pendingAlbum.artist, _albumsViewLoader.pendingAlbum.album )
                                         populateTable(_albumsViewLoader.pendingAlbum.album, _albumsViewLoader.pendingAlbum.artist)
                                     }
                                 }
