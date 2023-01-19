@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-15 00:55+0000\n"
-"PO-Revision-Date: 2023-01-09 18:25+0000\n"
+"PO-Revision-Date: 2023-01-18 13:36+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -529,43 +529,40 @@ msgstr "Desconhecido"
 #: src/widgets/TracksView.qml:35
 #, kde-format
 msgid "Search collection"
-msgstr ""
+msgstr "Procurar na colecção"
 
 #: src/widgets/TracksView.qml:75
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "New Tracks"
-msgstr "Sem Faixas!"
+msgstr "Faixas Novas"
 
 #: src/widgets/TracksView.qml:76 src/widgets/TracksView.qml:103
 #: src/widgets/TracksView.qml:178
 #, kde-format
 msgid "Newly added."
-msgstr ""
+msgstr "Adicionado recentemente."
 
 #: src/widgets/TracksView.qml:81
 #, kde-format
 msgid "View All"
-msgstr ""
+msgstr "Ver Tudo"
 
 #: src/widgets/TracksView.qml:102
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recent Artists"
-msgstr "Listas de reprodução recentes"
+msgstr "Artistas Recentes"
 
 #: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
 #: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
 #: src/widgets/TracksView.qml:452
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "Mais"
 
 #: src/widgets/TracksView.qml:177
-#, fuzzy, kde-format
-#| msgid "Albums"
+#, kde-format
 msgid "Recent Albums"
-msgstr "Álbuns"
+msgstr "Álbuns Recentes"
 
 #: src/widgets/TracksView.qml:251
 #, kde-format
@@ -588,31 +585,29 @@ msgid "Recent playlists"
 msgstr "Listas de reprodução recentes"
 
 #: src/widgets/TracksView.qml:427
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Recent Tracks"
-msgstr "Remover a faixa"
+msgstr "Faixas Recentes"
 
 #: src/widgets/TracksView.qml:428
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recently played."
-msgstr "Listas de reprodução recentes"
+msgstr "Tocadas recentemente."
 
 #: src/widgets/TracksView.qml:445
 #, kde-format
 msgid "Never Played"
-msgstr ""
+msgstr "Nunca Tocadas"
 
 #: src/widgets/TracksView.qml:446 src/widgets/TracksView.qml:465
 #, kde-format
 msgid "Dust off."
-msgstr ""
+msgstr "Tirar o pó."
 
 #: src/widgets/TracksView.qml:464
 #, kde-format
 msgid "Classics"
-msgstr ""
+msgstr "Clássicos"
 
 #: src/widgets/TracksView.qml:500
 #, kde-format
