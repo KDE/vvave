@@ -516,13 +516,12 @@ msgstr "Neznámý"
 #: src/widgets/TracksView.qml:35
 #, kde-format
 msgid "Search collection"
-msgstr ""
+msgstr "Prohledat sbírku"
 
 #: src/widgets/TracksView.qml:75
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "New Tracks"
-msgstr "Žádné skladby!"
+msgstr ""
 
 #: src/widgets/TracksView.qml:76 src/widgets/TracksView.qml:103
 #: src/widgets/TracksView.qml:178
@@ -536,23 +535,21 @@ msgid "View All"
 msgstr ""
 
 #: src/widgets/TracksView.qml:102
-#, fuzzy, kde-format
-#| msgid "Artists"
+#, kde-format
 msgid "Recent Artists"
-msgstr "Umělci"
+msgstr ""
 
 #: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
 #: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
 #: src/widgets/TracksView.qml:452
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "Více"
 
 #: src/widgets/TracksView.qml:177
-#, fuzzy, kde-format
-#| msgid "Albums"
+#, kde-format
 msgid "Recent Albums"
-msgstr "Alba"
+msgstr ""
 
 #: src/widgets/TracksView.qml:251
 #, kde-format
@@ -575,10 +572,9 @@ msgid "Recent playlists"
 msgstr ""
 
 #: src/widgets/TracksView.qml:427
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Recent Tracks"
-msgstr "Odstranit skladbu"
+msgstr ""
 
 #: src/widgets/TracksView.qml:428
 #, kde-format
