@@ -17,7 +17,10 @@ var GET = {
 
     favoriteTracks : "select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where rate > 0 order by rate desc limit 100",
 
-    newTracks: "select t.* from (select * from tracks order by releasedate desc, strftime(\"%s\", adddate) desc limit 100) t inner join albums al on t.album = al.album and t.artist = al.artist where t.count <= 4 order by t.title asc limit 40",
+    newTracks: "select t.* from (select * from tracks order by releasedate desc, strftime(\"%s\", adddate) desc limit 100) t inner join albums al on t.album = al.album and t.artist = al.artist where t.count <= 4 order by t.title asc limit 20",
+
+    randomTracks: "select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where t.count <= 4 order by  RANDOM() limit 10",
+
 
     oldTracks: "select t.* from (select * from tracks where releasedate > 0 order by releasedate asc limit 100) t inner join albums al on t.album = al.album and t.artist = al.artist order by t.title asc limit 40",
 
@@ -27,7 +30,7 @@ var GET = {
     recentArtists: "select distinct a.artist from (select * from tracks order by strftime(\"%s\", adddate) desc limit 100) a order by a.artist asc",
     recentAlbums: "select distinct a.album, a.artist from (select * from tracks order by releasedate desc, strftime(\"%s\", adddate) desc limit 100) a order by a.album asc limit 50",
 
-    neverPlayedTracks: "select t.* from (select * from tracks order by strftime(\"%s\", adddate) asc) t inner join albums al on t.album = al.album and t.artist = al.artist where t.count <= 1 order by t.count asc limit 20",
+    neverPlayedTracks: "select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where t.count <= 1 order by RANDOM() limit 20",
     neverPlayedTracks_: "select t.* from (select * from tracks order by strftime(\"%s\", adddate) asc) t inner join albums al on t.album = al.album and t.artist = al.artist where t.count <= 1 order by t.title asc limit 100",
 
     babedTracks: "#favs",

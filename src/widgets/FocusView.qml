@@ -183,7 +183,7 @@ StackView
                         id: _list
                         headBar.visible: false
                         anchors.fill: parent
-                        coverArtVisible: true
+                        coverArtVisible: settings.showArtwork
                         clip: true
 
                         holder.emoji: "qrc:/assets/dialog-information.svg"

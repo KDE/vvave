@@ -48,7 +48,7 @@ StackView
         {
             list.query: control.currentQuery
             trackNumberVisible: true
-            coverArtVisible: true
+            coverArtVisible: settings.showArtwork
             focus: true
 
             holder.emoji: "qrc:/assets/media-album-track.svg"

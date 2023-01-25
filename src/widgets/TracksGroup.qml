@@ -15,13 +15,16 @@ import "../utils/Player.js" as Player
 Maui.SettingsSection
 {
     id: control
+    Maui.Theme.colorSet: Maui.Theme.Window
+    Maui.Theme.inherit: false
 
     property alias currentIndex: _gridView.currentIndex
     property alias listModel : _listModel
-    property alias gridView : _gridView
+    property alias browser : _gridView
     property alias list : _list
 
     property int orientation: Qt.Horizontal
+    property bool coverArt: settings.showArtwork
 
     padding: Maui.Style.space.medium
 
@@ -33,7 +36,7 @@ Maui.SettingsSection
         radius: Maui.Style.radiusV
     }
 
-     template.template.content:  Maui.ToolButtonMenu
+    template.template.content: Maui.ToolButtonMenu
     {
         icon.name: "media-playback-start"
 
@@ -134,12 +137,6 @@ Maui.SettingsSection
 
         enableLassoSelection: true
 
-        scrollView.orientation: control.orientation
-
-        verticalScrollBarPolicy: ScrollBar.AlwaysOff
-        horizontalScrollBarPolicy:  ScrollBar.AsNeeded
-
-        adaptContent: control.orientation ===  Qt.Horizontal ? false : true
         currentIndex: -1
 
         Layout.fillWidth: true
@@ -148,8 +145,13 @@ Maui.SettingsSection
 
         flickable.flow: control.orientation ===  Qt.Horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
 
-        itemSize: 160
+        itemSize: control.orientation === Qt.Vertical ? Math.max(Math.floor(_gridView.width/ 3), 200) : 200
         itemHeight: 64
+        scrollView.orientation: control.orientation
+        adaptContent: control.orientation ===  Qt.Horizontal ? false : true
+
+        verticalScrollBarPolicy: ScrollBar.AlwaysOff
+        horizontalScrollBarPolicy:  ScrollBar.AsNeeded
 
         model: Maui.BaseModel
         {
@@ -185,17 +187,17 @@ Maui.SettingsSection
             TableDelegate
             {
                 id: delegate
-                coverArt: true
+                coverArt: control.coverArt
                 anchors.fill: parent
                 anchors.margins: Maui.Style.space.small
-//                maskRadius: radius
-//                label1.text: model.title
+                appendButton: (Maui.Handy.isTouch ? true : delegate.hovered)
+                onAppendClicked:
+                {
+                    control.currentIndex = index
+                    Player.appendTrack(listModel.get(index))
+                }
                 label2.text: model.artist
-//                imageSource: "image://artwork/album:"+ model.artist+":"+model.album
-//                iconVisible: true
-//                label1.font.bold: true
-//                label1.font.weight: Font.Bold
-//                iconSource: "media-album-cover"
+
                 isCurrentItem: parent.GridView.isCurrentItem || checked
 
                 onToggled: selectionBar.addToSelection(control.listModel.get(index))
@@ -231,36 +233,36 @@ Maui.SettingsSection
                 }
             }
 
-                onClicked:
+            onClicked:
+            {
+                _gridView.currentIndex = index
+                if(Maui.Handy.singleClick)
                 {
-                    _gridView.currentIndex = index
-                    if(Maui.Handy.singleClick)
-                    {
-                        Player.quickPlay(_listModel.get(_gridView.currentIndex))
-                    }
+                    Player.quickPlay(_listModel.get(_gridView.currentIndex))
                 }
+            }
 
-                onPressAndHold: { if(Maui.Handy.isTouch) openItemMenu(index) }
-                onRightClicked: openItemMenu(index)
+            onPressAndHold: { if(Maui.Handy.isTouch) openItemMenu(index) }
+            onRightClicked: openItemMenu(index)
 
-                onDoubleClicked:
+            onDoubleClicked:
+            {
+                _gridView.currentIndex = index
+                if(!Maui.Handy.singleClick)
                 {
-                    _gridView.currentIndex = index
-                    if(!Maui.Handy.singleClick)
-                    {
-                        Player.quickPlay(_listModel.get(_gridView.currentIndex))
-                    }
+                    Player.quickPlay(_listModel.get(_gridView.currentIndex))
                 }
             }
         }
     }
+}
 
-    function openItemMenu(index)
-    {
-        currentIndex = index
-        contextMenu.index = index
-        contextMenu.fav = FB.Tagging.isFav(listModel.get(contextMenu.index).url)
-        contextMenu.titleInfo = listModel.get(contextMenu.index)
-        contextMenu.show()
-    }
+function openItemMenu(index)
+{
+    currentIndex = index
+    contextMenu.index = index
+    contextMenu.fav = FB.Tagging.isFav(listModel.get(contextMenu.index).url)
+    contextMenu.titleInfo = listModel.get(contextMenu.index)
+    contextMenu.show()
+}
 }

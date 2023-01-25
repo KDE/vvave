@@ -245,6 +245,7 @@ Maui.ApplicationWindow
         property bool darkMode : true
         property bool focusViewDefault: false
         property alias sideBarWidth : _sideBarView.sideBar.preferredWidth
+        property bool showArtwork: false
     }
 
     Mpris2

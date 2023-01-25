@@ -283,7 +283,7 @@ Maui.Page
             height: Math.max(implicitHeight, Maui.Style.rowHeight)
             number: trackNumberVisible
             coverArt: coverArtVisible ? (control.width > 200) : coverArtVisible
-
+            appendButton: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
             onPressAndHold: { if(Maui.Handy.isTouch) tryOpenContextMenu() }
             onRightClicked: tryOpenContextMenu()
 
@@ -292,146 +292,128 @@ Maui.Page
                 if (allowMenu) openItemMenu(index)
             }
 
-            onToggled: selectionBar.addToSelection(control.listModel.get(index))
-            checked: selectionBar.contains(model.url)
-            checkable: selectionMode
+                onToggled: selectionBar.addToSelection(control.listModel.get(index))
+                checked: selectionBar.contains(model.url)
+                checkable: selectionMode
 
-            Drag.keys: ["text/uri-list"]
-            Drag.mimeData: Drag.active ?
-                               {
-                                   "text/uri-list": control.filterSelectedItems(model.url)
-                               } : {}
+                Drag.keys: ["text/uri-list"]
+                Drag.mimeData: Drag.active ?
+                                   {
+                                       "text/uri-list": control.filterSelectedItems(model.url)
+                                   } : {}
 
-        sameAlbum:
-        {
-            const item = listModel.get(index-1)
-            return coverArt && item && item.album === album && item.artist === artist
-        }
-
-        AbstractButton
-        {
-            Layout.fillHeight: true
-            Layout.preferredWidth: Maui.Style.rowHeight
-            visible: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
-            icon.name: "list-add"
-            onClicked:
+            sameAlbum:
             {
+                const item = listModel.get(index-1)
+                return coverArt && item && item.album === album && item.artist === artist
+            }
+
+
+            onAppendClicked:{
                 currentIndex = index
                 appendTrack(index)
             }
 
-            Maui.Icon
+            onClicked:
             {
-                anchors.centerIn: parent
-                height: Maui.Style.iconSizes.small
-                width: height
-                source: parent.icon.name
-                color: delegate.label1.color
+                _listBrowser.forceActiveFocus()
+                currentIndex = index
+
+                if(selectionMode)
+                {
+                    selectionBar.addToSelection(model)
+                    return
+                }
+
+                if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                    _listBrowser.itemsSelected([index])
+
+                if(Maui.Handy.isTouch)
+                    rowClicked(index)
             }
 
-            opacity: delegate.hovered ? 0.8 : 0.6
-        }
-
-        onClicked:
-        {
-            _listBrowser.forceActiveFocus()
-            currentIndex = index
-
-            if(selectionMode)
+            onDoubleClicked:
             {
-                selectionBar.addToSelection(model)
-                return
+                currentIndex = index
+
+                if(!Maui.Handy.isTouch)
+                    rowClicked(index)
             }
 
-            if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
-                _listBrowser.itemsSelected([index])
+            Connections
+            {
+                target: selectionBar
+                ignoreUnknownSignals: true
 
-            if(Maui.Handy.isTouch)
-                rowClicked(index)
-        }
+                function onUriRemoved (uri)
+                {
+                    if(uri === model.url)
+                        delegate.checked = false
+                }
 
-        onDoubleClicked:
-        {
-            currentIndex = index
+                function onUriAdded(uri)
+                {
+                    if(uri === model.url)
+                        delegate.checked = true
+                }
 
-            if(!Maui.Handy.isTouch)
-                rowClicked(index)
+                function onCleared()
+                {
+                    delegate.checked = false
+                }
+            }
         }
 
         Connections
         {
-            target: selectionBar
-            ignoreUnknownSignals: true
+            target: root
 
-            function onUriRemoved (uri)
-            {
-                if(uri === model.url)
-                    delegate.checked = false
-            }
-
-            function onUriAdded(uri)
-            {
-                if(uri === model.url)
-                    delegate.checked = true
-            }
-
-            function onCleared()
-            {
-                delegate.checked = false
+            function onContextualPlayNext(event) {
+                if (_listBrowser.activeFocus)
+                    Player.queueTracks([listModel.get(_listBrowser.currentIndex)])
             }
         }
     }
 
-    Connections
+    function openItemMenu(index)
     {
-        target: root
+        currentIndex = index
+        contextMenu.index = index
+        contextMenu.fav = FB.Tagging.isFav(listModel.get(contextMenu.index).url)
+        contextMenu.titleInfo = listModel.get(contextMenu.index)
+        contextMenu.show()
+        rowPressed(index)
+    }
 
-        function onContextualPlayNext(event) {
-            if (_listBrowser.activeFocus)
-                Player.queueTracks([listModel.get(_listBrowser.currentIndex)])
+    function filterSelectedItems(path)
+    {
+        if(selectionBar && selectionBar.count > 0 && selectionBar.contains(path))
+        {
+            const uris = selectionBar.uris
+            return uris.join("\n")
+        }
+
+        return path
+    }
+
+    function filterSelection(url)
+    {
+        if(selectionBar.contains(url))
+        {
+            return selectionBar.uris
+        }else
+        {
+            return [url]
         }
     }
-}
 
-function openItemMenu(index)
-{
-    currentIndex = index
-    contextMenu.index = index
-    contextMenu.fav = FB.Tagging.isFav(listModel.get(contextMenu.index).url)
-    contextMenu.titleInfo = listModel.get(contextMenu.index)
-    contextMenu.show()
-    rowPressed(index)
-}
-
-function filterSelectedItems(path)
-{
-    if(selectionBar && selectionBar.count > 0 && selectionBar.contains(path))
+    function forceActiveFocus()
     {
-        const uris = selectionBar.uris
-        return uris.join("\n")
+        _listBrowser.forceActiveFocus()
     }
 
-    return path
-}
-
-function filterSelection(url)
-{
-    if(selectionBar.contains(url))
+    function getFilterField() : Item
     {
-        return selectionBar.uris
-    }else
-    {
-        return [url]
+        return _filterLoader.item
     }
-}
-
-function forceActiveFocus()
-{
-    _listBrowser.forceActiveFocus()
-}
-
-function getFilterField() : Item
-{
-    return _filterLoader.item
-}
-}
+    }

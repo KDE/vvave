@@ -152,14 +152,14 @@ Maui.Page
             id: delegate
             width: ListView.view.width
             height: Math.max(implicitHeight, Maui.Style.rowHeight)
-
+            appendButton: false
             property int mindex : index
             isCurrentItem: ListView.isCurrentItem
             mouseArea.drag.axis: Drag.YAxis
             Drag.source: delegate
 
             number : false
-            coverArt : true
+            coverArt : settings.showArtwork
             draggable: true
             checkable: false
             checked: false

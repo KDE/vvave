@@ -15,7 +15,6 @@ StackView
 {
     id: control
 
-
     initialItem: Maui.Page
     {
         headBar.middleContent: Loader
@@ -46,432 +45,114 @@ StackView
             }
         }
 
-        ScrollView
+
+        TracksGroup
         {
             anchors.fill: parent
-            padding: Maui.Style.space.medium
-
-            Flickable
+            background: null
+            width: parent.width
+            title: i18n("Your Collection")
+            description: i18n("Random tracks from your collection.")
+            list.query: Q.GET.randomTracks
+            implicitHeight: browser.implicitHeight + template.implicitHeight + topPadding + bottomPadding
+            orientation: Qt.Vertical
+            template.template.content: Button
             {
+                text: i18n("View All")
+                onClicked: openAllTracks()
+            }
+
+            browser.flickable.footer:  Column
+            {
+                id: _overviewLayout
+                //                   visible: control.listModel.filter.length === 0 && control.listModel.filters.length === 0
                 width: parent.width
-                //                contentWidth: availableWidth
-                contentHeight: _overviewLayout.implicitHeight
+                spacing: Maui.Style.space.big
 
-                Column
+                Item
                 {
-                    id: _overviewLayout
-                    //                   visible: control.listModel.filter.length === 0 && control.listModel.filters.length === 0
                     width: parent.width
-                    spacing: Maui.Style.space.big
+                    implicitHeight: Maui.Style.space.huge
+                }
+
+                TracksGroup
+                {
+
+                    width: parent.width
+
+                    orientation: Qt.Vertical
+                    title: i18n("Popular Tracks")
+                    description: i18n("Play them again.")
+                    list.query: Q.GET.mostPlayedTracks
+                }
 
 
+                GridLayout
+                {
+                    width: parent.width
+                    columnSpacing: Maui.Style.space.big
+                    rowSpacing: Maui.Style.space.big
+                    columns: width >= 800 ? 2 : 1
+                    rows: 2
 
                     TracksGroup
                     {
-                        Maui.Theme.colorSet: Maui.Theme.Window
-                        Maui.Theme.inherit: false
+                        id: _recentGroup
+                        list.query: Q.GET.recentTracks
+                        orientation: Qt.Vertical
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.row: 0
+                        Layout.column: 0
+                        Layout.rowSpan: 2
 
-                        width: parent.width
-                        title: i18n("New Tracks")
-                        description: i18n("Newly added.")
-                        list.query: Q.GET.newTracks
-
-                        template.template.content: Button
-                        {
-                            text: i18n("View All")
-                            onClicked: openAllTracks()
-                        }
-                    }
-
-                    GridLayout
-                    {
-                        Maui.Theme.colorSet: Maui.Theme.Window
-                        Maui.Theme.inherit: false
-
-                        width: parent.width
-                        columnSpacing: Maui.Style.space.big
-                        rowSpacing: Maui.Style.space.big
-                        columns: width >= 600 ? 2 : 1
-                        rows: 2
-
-                        Maui.SettingsSection
-                        {
-                            Layout.fillWidth: true
-                            Layout.row: 0
-                            Layout.column: 0
-                            title: i18n("Recent Artists")
-                            description: i18n("Newly added.")
-                            padding: Maui.Style.space.medium
-                            template.template.content: Button
-                            {
-                                text: i18n("More")
-                                onClicked:  swipeView.currentIndex = viewsIndex.artists
-                            }
-
-                            background: Rectangle
-                            {
-                                color: Maui.Theme.backgroundColor
-                                radius: Maui.Style.radiusV
-                            }
-
-                            Maui.ListBrowser
-                            {
-                                id: _recentArtistsView
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 160
-                                orientation: ListView.Horizontal
-                                clip: true
-
-                                model: Maui.BaseModel
-                                {
-                                    list: Vvave.Tracks
-                                    {
-                                        query: Q.GET.recentArtists
-                                    }
-                                }
-
-                                delegate:  Maui.GridBrowserDelegate
-                                {
-                                    height: 140
-                                    width: 100
-
-                                    label1.text: model.album ? model.album : model.artist
-                                    label2.text: model.artist && model.album ? model.artist : ""
-                                    imageSource: "image://artwork/%1:".arg("artist")+ model.artist
-                                    label1.font.bold: true
-                                    label1.font.weight: Font.Bold
-                                    iconSource: "media-album-cover"
-                                    template.labelSizeHint: 40
-                                    template.alignment: Qt.AlignLeft
-                                    maskRadius: 100
-                                    template.fillMode: Image.PreserveAspectFit
-
-                                    onClicked:
-                                    {
-                                        _recentArtistsView.currentIndex = index
-                                        if(Maui.Handy.singleClick)
-                                        {
-                                            goToArtist(_recentArtistsView.model.get(_recentArtistsView.currentIndex).artist)
-                                        }
-                                    }
-
-                                    onDoubleClicked:
-                                    {
-                                        _recentArtistsView.currentIndex = index
-                                        if(!Maui.Handy.singleClick)
-                                        {
-                                            goToArtist(_recentArtistsView.model.get(_recentArtistsView.currentIndex).artist)
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-
-                        Maui.SettingsSection
-                        {
-
-                            Layout.fillWidth: true
-                            Layout.row: 1
-                            Layout.column: 0
-                            title: i18n("Recent Albums")
-                            description: i18n("Newly added.")
-                            template.template.content: Button
-                            {
-                                text: i18n("More")
-                                onClicked:  swipeView.currentIndex = viewsIndex.albums
-                            }
-
-
-
-                            Maui.ListBrowser
-                            {
-                                id: _recentAlbumsView
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 160
-                                orientation: ListView.Horizontal
-                                clip: true
-                                model: Maui.BaseModel
-                                {
-                                    list: Vvave.Tracks
-                                    {
-                                        query: Q.GET.recentAlbums
-                                    }
-                                }
-
-                                delegate:  Maui.GridBrowserDelegate
-                                {
-                                    height: 140
-                                    width: 100
-
-                                    label1.text: model.album ? model.album : model.artist
-                                    label2.text: model.artist && model.album ? model.artist : ""
-                                    imageSource: "image://artwork/%1:".arg("album")+ model.artist+":"+model.album
-                                    label1.font.bold: true
-                                    label1.font.weight: Font.Bold
-                                    iconSource: "media-album-cover"
-                                    template.labelSizeHint: 40
-                                    template.alignment: Qt.AlignLeft
-                                    maskRadius: Maui.Style.radiusV
-                                    template.fillMode: Image.PreserveAspectFit
-
-                                    onClicked:
-                                    {
-                                        _recentAlbumsView.currentIndex = index
-                                        if(Maui.Handy.singleClick)
-                                        {
-                                            let item = _recentAlbumsView.model.get(_recentAlbumsView.currentIndex)
-                                            goToAlbum(item.artist, item.album)
-                                        }
-                                    }
-
-                                    onDoubleClicked:
-                                    {
-                                        _recentAlbumsView.currentIndex = index
-                                        if(!Maui.Handy.singleClick)
-                                        {
-                                            let item = _recentAlbumsView.model.get(_recentAlbumsView.currentIndex)
-                                            goToAlbum(item.artist, item.album)
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-
-                        TracksGroup
-                        {
-
-                            Layout.fillWidth: true
-                            Layout.row: 0
-                            Layout.rowSpan: 2
-                            Layout.column: 1
-                            Layout.fillHeight: true
-
-                            title: i18n("Popular Tracks")
-                            description: i18n("Play them again.")
-                            list.query: Q.GET.mostPlayedTracks
-                        }
-
-//                        Maui.SettingsSection
-//                        {
-//                            Layout.fillWidth: true
-//                            Layout.row: 0
-//                            Layout.rowSpan: 2
-//                            Layout.column: 1
-//                            Layout.fillHeight: true
-//                            title: i18n("Geners")
-//                            description: i18n("Newly added.")
-//                            padding: Maui.Style.space.medium
-//                            template.template.content: Button
-//                            {
-//                                text: i18n("More")
-//                                onClicked: openOverviewTable(Q.GET.recentTracks_)
-//                            }
-
-//                            background: Rectangle
-//                            {
-//                                color: Maui.Theme.backgroundColor
-//                                radius: Maui.Style.radiusV
-//                            }
-
-//                            Maui.ListBrowser
-//                            {
-//                                id: _genersView
-//                                Layout.fillWidth: true
-//                                Layout.fillHeight: true
-//                                clip: true
-
-//                                model: Maui.BaseModel
-//                                {
-//                                    list: Vvave.Tracks
-//                                    {
-//                                        query: Q.GET.recentArtists
-//                                    }
-//                                }
-
-//                                delegate:  Maui.ListBrowserDelegate
-//                                {
-//                                    width: ListView.view.width
-////                                    width: 140
-//                                    height: Maui.Style.rowHeight
-
-//                                    label1.text: model.album ? model.album : model.artist
-//                                    label2.text: model.artist && model.album ? model.artist : ""
-//                                    imageSource: "image://artwork/%1:".arg("artist")+ model.artist
-//                                    label1.font.bold: true
-//                                    label1.font.weight: Font.Bold
-//                                    iconSource: "media-album-cover"
-//                                }
-
-//                            }
-//                        }
-
-
-                    }
-
-                    Maui.SettingsSection
-                    {
-                        Maui.Theme.colorSet: Maui.Theme.Window
-                        Maui.Theme.inherit: false
-
-                        visible: _playlistsList.count
-                        width: parent.width
-
-                        title: i18n("Playlists")
-                        description: i18n("Recent playlists")
-
-                        padding: Maui.Style.space.medium
+                        title: i18n("Recent Tracks")
+                        description: i18n("Recently played.")
 
                         template.template.content: Button
                         {
                             text: i18n("More")
-                            onClicked: swipeView.currentIndex = viewsIndex.playlists
+                            onClicked: openOverviewTable(Q.GET.recentTracks_)
                         }
 
-                        background: Rectangle
-                        {
-                            color: Maui.Theme.backgroundColor
-                            radius: Maui.Style.radiusV
-                        }
-
-                        Maui.ListBrowser
-                        {
-                            id: _playlistsList
-                            clip: true
-
-                            model: Maui.BaseModel
-                            {
-                                list: Vvave.Playlists
-                                {
-                                    id: _playlists
-                                    limit: 10
-                                }
-                            }
-                            currentIndex: -1
-
-                            verticalScrollBarPolicy: ScrollBar.AlwaysOff
-                            //                horizontalScrollBarPolicy:  ScrollBar.AlwaysOff
-                            Layout.preferredHeight: 180
-                            Layout.fillWidth: true
-                            orientation: Qt.Horizontal
-                            spacing: Maui.Style.space.medium
-                            delegate: Item
-                            {
-                                height: ListView.view.height
-                                width: height-40
-
-                                Maui.CollageItem
-                                {
-                                    anchors.fill: parent
-                                    images: model.preview.split(",")
-                                    flat: true
-                                    label1.horizontalAlignment: Qt.AlignLeft
-
-                                    //                        isCurrentItem: parent.ListView.isCurrentItem
-                                    maskRadius: radius
-                                    label1.text: model.playlist
-                                    iconSource: model.icon
-                                    label1.font.bold: true
-                                    label1.font.weight: Font.Bold
-                                    template.labelSizeHint: 32
-
-                                    template.alignment: Qt.AlignLeft
-                                    template.imageSizeHint: height - 32
-
-                                    onClicked:
-                                    {
-                                        _playlistsList.currentIndex = index
-                                        if(Maui.Handy.singleClick)
-                                        {
-                                            swipeView.currentIndex = viewsIndex.playlists
-                                        }
-                                    }
-
-                                    onDoubleClicked:
-                                    {
-                                        _playlistsList.currentIndex = index
-                                        if(!Maui.Handy.singleClick)
-                                        {
-                                            swipeView.currentIndex = viewsIndex.playlists
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
 
-                    GridLayout
+                    TracksGroup
                     {
-                        Maui.Theme.colorSet: Maui.Theme.Window
-                        Maui.Theme.inherit: false
+                        Layout.fillWidth: true
+                        Layout.row: 0
+                        Layout.column: 1
 
-                        width: parent.width
-                        columnSpacing: Maui.Style.space.big
-                        rowSpacing: Maui.Style.space.big
-                        columns: width >= 800 ? 2 : 1
-                        rows: 2
+                        title: i18n("Never Played")
+                        description: i18n("Dust off.")
 
-                        TracksGroup
+                        list.query: Q.GET.neverPlayedTracks
+
+                        template.template.content: Button
                         {
-                            id: _recentGroup
-                            list.query: Q.GET.recentTracks
-                            orientation: Qt.Vertical
-                            Layout.minimumWidth: 400
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            Layout.row: 0
-                            Layout.column: 0
-                            Layout.rowSpan: 2
-
-                            title: i18n("Recent Tracks")
-                            description: i18n("Recently played.")
-
-                            template.template.content: Button
-                            {
-                                text: i18n("More")
-                                onClicked: openOverviewTable(Q.GET.recentTracks_)
-                            }
-
-                        }
-
-                        TracksGroup
-                        {
-                            Layout.minimumWidth: 400
-                            Layout.fillWidth: true
-                            Layout.row: 0
-                            Layout.column: 1
-
-                            title: i18n("Never Played")
-                            description: i18n("Dust off.")
-
-                            list.query: Q.GET.neverPlayedTracks
-
-                            template.template.content: Button
-                            {
-                                text: i18n("More")
-                                onClicked: openOverviewTable(Q.GET.neverPlayedTracks_)
-                            }
-                        }
-
-                        TracksGroup
-                        {
-                            Layout.row: 1
-                            Layout.column: 1
-                            Layout.minimumWidth: 400
-                            Layout.fillWidth: true
-
-                            title: i18n("Classics")
-                            description: i18n("Dust off.")
-
-                            list.query: Q.GET.oldTracks
+                            text: i18n("More")
+                            onClicked: openOverviewTable(Q.GET.neverPlayedTracks_)
                         }
                     }
 
-               }
+                    TracksGroup
+                    {
+                        Layout.row: 1
+                        Layout.column: 1
+                        Layout.fillWidth: true
+
+                        title: i18n("Classics")
+                        description: i18n("Dust off.")
+
+                        list.query: Q.GET.oldTracks
+                    }
+                }
             }
 
         }
+
+
+
     }
 
 

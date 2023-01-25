@@ -125,6 +125,22 @@ Maui.SettingsDialog
                 }
             }
         }
+
+        Maui.SettingTemplate
+        {
+            label1.text: i18n("Artwork")
+            label2.text: i18n("Show the cover artwork for the tracks.")
+
+            Switch
+            {
+                Layout.fillHeight: true
+                checked: settings.showArtwork
+                onToggled:
+                {
+                    settings.showArtwork = !settings.showArtwork
+                }
+            }
+        }
     }
 
     Maui.SettingsSection

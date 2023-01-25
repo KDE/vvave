@@ -42,9 +42,9 @@ StackView
 
             property bool isPublic: true
             signal removeFromPlaylist(string url)
+            coverArtVisible: settings.showArtwork
 
             list.query: control.playlistQuery
-            coverArtVisible: true
             showTitle: false
             title: control.currentPlaylist
 
