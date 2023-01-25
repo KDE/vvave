@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-15 00:55+0000\n"
+"POT-Creation-Date: 2023-01-25 00:57+0000\n"
 "PO-Revision-Date: 2023-01-16 08:29+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -37,17 +37,17 @@ msgstr "© 2019-%1 La squadra di sviluppo di Maui"
 msgid "Developer"
 msgstr "Sviluppatore"
 
-#: src/main.qml:271
+#: src/main.qml:272
 #, kde-format
 msgid "Missing file"
 msgstr "File mancante"
 
-#: src/main.qml:333
+#: src/main.qml:334
 #, kde-format
 msgid "Remove %1 tracks"
 msgstr "Rimuovi %1 tracce"
 
-#: src/main.qml:334
+#: src/main.qml:335
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -55,52 +55,52 @@ msgstr ""
 "Sei sicuro di voler rimuovere questi file? Questa azione non può essere "
 "annullata."
 
-#: src/main.qml:336 src/widgets/BabeTable/TableMenu.qml:135
+#: src/main.qml:337 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
 msgstr "Elimina"
 
-#: src/main.qml:337 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/main.qml:338 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
+#: src/main.qml:508 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
 msgstr "Scorciatoie"
 
-#: src/main.qml:514
+#: src/main.qml:515
 #, kde-format
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: src/main.qml:521
+#: src/main.qml:522
 #, kde-format
 msgid "About"
 msgstr "Informazioni su"
 
-#: src/main.qml:554
+#: src/main.qml:555
 #, kde-format
 msgid "Songs"
 msgstr "Brani"
 
-#: src/main.qml:573
+#: src/main.qml:574 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Albums"
 msgstr "Album"
 
-#: src/main.qml:580
+#: src/main.qml:581
 #, kde-format
 msgid "No Albums!"
 msgstr "Nessun album."
 
-#: src/main.qml:581 src/main.qml:606 src/widgets/TracksView.qml:489
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:170
 #, kde-format
 msgid "Add new music sources"
 msgstr "Aggiungi nuove fonti musicali"
 
-#: src/main.qml:598
+#: src/main.qml:598 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Artists"
 msgstr "Artisti"
@@ -134,7 +134,7 @@ msgid "Playing music"
 msgstr "Musica in riproduzione"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:494
+#: src/widgets/TracksView.qml:175
 #, kde-format
 msgid "Add sources"
 msgstr "Aggiungi fonti"
@@ -153,12 +153,12 @@ msgid_plural "Filter %1 albums"
 msgstr[0] "Filtra"
 msgstr[1] "Filtra %1 album"
 
-#: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:43
+#: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
 #, kde-format
 msgid "Play All"
 msgstr "Riproduci tutto"
 
-#: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:51
+#: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:54
 #, kde-format
 msgid "Append All"
 msgstr "Aggiungi tutto"
@@ -184,12 +184,12 @@ msgstr ""
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:64
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
 msgstr "Vai all'artista"
 
-#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:71
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:74
 #, kde-format
 msgid "Go to Album"
 msgstr "Vai all'album"
@@ -283,7 +283,7 @@ msgstr "Nessuna cartella."
 msgid "Add new music to your sources to browse by folders"
 msgstr "Aggiungi nuova musica alle fonti cercando per cartella"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:488
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:169
 #, kde-format
 msgid "No Tracks!"
 msgstr "Nessuna traccia."
@@ -498,22 +498,33 @@ msgstr "Modalità scura"
 msgid "Switch between light and dark colorscheme."
 msgstr "Passa dallo schema di colori chiaro allo scuro e viceversa."
 
+#: src/widgets/SettingsView/SettingsDialog.qml:131
+#, fuzzy, kde-format
+#| msgid "Fetch Artwork"
+msgid "Artwork"
+msgstr "Scarica la copertina"
+
 #: src/widgets/SettingsView/SettingsDialog.qml:132
+#, kde-format
+msgid "Show the cover artwork for the tracks."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
 msgid "Sources"
 msgstr "Fonti"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:133
+#: src/widgets/SettingsView/SettingsDialog.qml:149
 #, kde-format
 msgid "Add or remove sources"
 msgstr "Aggiungi o rimuovi le fonti"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:176
+#: src/widgets/SettingsView/SettingsDialog.qml:192
 #, kde-format
 msgid "Add"
 msgstr "Aggiungi"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:193
+#: src/widgets/SettingsView/SettingsDialog.qml:209
 #, kde-format
 msgid "Scan now"
 msgstr "Analizza adesso"
@@ -524,93 +535,89 @@ msgstr "Analizza adesso"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: src/widgets/TracksView.qml:35
+#: src/widgets/TracksView.qml:34
 #, kde-format
 msgid "Search collection"
 msgstr "Cerca nella collezione"
 
-#: src/widgets/TracksView.qml:75
-#, kde-format
-msgid "New Tracks"
-msgstr "Nuove tracce"
+#: src/widgets/TracksView.qml:54
+#, fuzzy, kde-format
+#| msgid "Search collection"
+msgid "Your Collection"
+msgstr "Cerca nella collezione"
 
-#: src/widgets/TracksView.qml:76 src/widgets/TracksView.qml:103
-#: src/widgets/TracksView.qml:178
+#: src/widgets/TracksView.qml:55
 #, kde-format
-msgid "Newly added."
-msgstr "Appena aggiunta."
+msgid "Random tracks from your collection."
+msgstr ""
 
-#: src/widgets/TracksView.qml:81
+#: src/widgets/TracksView.qml:61
 #, kde-format
 msgid "View All"
 msgstr "Visualizza tutto"
 
-#: src/widgets/TracksView.qml:102
-#, kde-format
-msgid "Recent Artists"
-msgstr "Artisti recenti"
-
-#: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
-#: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
-#: src/widgets/TracksView.qml:452
-#, kde-format
-msgid "More"
-msgstr "Altro"
-
-#: src/widgets/TracksView.qml:177
-#, kde-format
-msgid "Recent Albums"
-msgstr "Album recenti"
-
-#: src/widgets/TracksView.qml:251
+#: src/widgets/TracksView.qml:84
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Tracce popolari"
 
-#: src/widgets/TracksView.qml:252
+#: src/widgets/TracksView.qml:85
 #, kde-format
 msgid "Play them again."
 msgstr "Riproducile nuovamente."
 
-#: src/widgets/TracksView.qml:321
-#, kde-format
-msgid "Playlists"
-msgstr "Scalette"
-
-#: src/widgets/TracksView.qml:322
-#, kde-format
-msgid "Recent playlists"
-msgstr "Scalette recenti"
-
-#: src/widgets/TracksView.qml:427
+#: src/widgets/TracksView.qml:109
 #, kde-format
 msgid "Recent Tracks"
 msgstr "Tracce recenti"
 
-#: src/widgets/TracksView.qml:428
+#: src/widgets/TracksView.qml:110
 #, kde-format
 msgid "Recently played."
 msgstr "Riprodotte di recente."
 
-#: src/widgets/TracksView.qml:445
+#: src/widgets/TracksView.qml:114 src/widgets/TracksView.qml:133
+#, kde-format
+msgid "More"
+msgstr "Altro"
+
+#: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Never Played"
 msgstr "Mai riprodotte"
 
-#: src/widgets/TracksView.qml:446 src/widgets/TracksView.qml:465
+#: src/widgets/TracksView.qml:127 src/widgets/TracksView.qml:145
 #, kde-format
 msgid "Dust off."
 msgstr ""
 
-#: src/widgets/TracksView.qml:464
+#: src/widgets/TracksView.qml:144
 #, kde-format
 msgid "Classics"
 msgstr "Classici"
 
-#: src/widgets/TracksView.qml:500
+#: src/widgets/TracksView.qml:181
 #, kde-format
 msgid "Open file"
 msgstr "Apri file"
+
+#~ msgid "New Tracks"
+#~ msgstr "Nuove tracce"
+
+#~ msgid "Newly added."
+#~ msgstr "Appena aggiunta."
+
+#~ msgid "Recent Artists"
+#~ msgstr "Artisti recenti"
+
+#~ msgid "Recent Albums"
+#~ msgstr "Album recenti"
+
+#~ msgid "Playlists"
+#~ msgstr "Scalette"
+
+#~ msgid "Recent playlists"
+#~ msgstr "Scalette recenti"
 
 #~ msgid "Camilo Higuita"
 #~ msgstr "Camilo Higuita"

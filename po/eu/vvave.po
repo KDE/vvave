@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-15 00:55+0000\n"
+"POT-Creation-Date: 2023-01-25 00:57+0000\n"
 "PO-Revision-Date: 2023-01-16 07:22+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -40,17 +40,17 @@ msgstr "© 2019-%1 Maui Garatzeko Taldea"
 msgid "Developer"
 msgstr "Garatzailea"
 
-#: src/main.qml:271
+#: src/main.qml:272
 #, kde-format
 msgid "Missing file"
 msgstr "Fitxategia falta da"
 
-#: src/main.qml:333
+#: src/main.qml:334
 #, kde-format
 msgid "Remove %1 tracks"
 msgstr "Kendu %1 pista"
 
-#: src/main.qml:334
+#: src/main.qml:335
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -58,52 +58,52 @@ msgstr ""
 "Ziur zaude fitxategi horiek kendu nahi dituzula? Ekintza hori ezin da "
 "desegin."
 
-#: src/main.qml:336 src/widgets/BabeTable/TableMenu.qml:135
+#: src/main.qml:337 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: src/main.qml:337 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/main.qml:338 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
 msgstr "Utzi"
 
-#: src/main.qml:507 src/widgets/SettingsView/ShortcutsDialog.qml:13
+#: src/main.qml:508 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
 msgstr "Lasterbideak"
 
-#: src/main.qml:514
+#: src/main.qml:515
 #, kde-format
 msgid "Settings"
 msgstr "Ezarpenak"
 
-#: src/main.qml:521
+#: src/main.qml:522
 #, kde-format
 msgid "About"
 msgstr "Honi buruz"
 
-#: src/main.qml:554
+#: src/main.qml:555
 #, kde-format
 msgid "Songs"
 msgstr "Abestiak"
 
-#: src/main.qml:573
+#: src/main.qml:574 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Albums"
 msgstr "Albumak"
 
-#: src/main.qml:580
+#: src/main.qml:581
 #, kde-format
 msgid "No Albums!"
 msgstr "Albumik ez!"
 
-#: src/main.qml:581 src/main.qml:606 src/widgets/TracksView.qml:489
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:170
 #, kde-format
 msgid "Add new music sources"
 msgstr "Gehitu musika-sorburu berriak"
 
-#: src/main.qml:598
+#: src/main.qml:598 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Artists"
 msgstr "Artistak"
@@ -137,7 +137,7 @@ msgid "Playing music"
 msgstr "Musika jotzea"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:494
+#: src/widgets/TracksView.qml:175
 #, kde-format
 msgid "Add sources"
 msgstr "Gehitu sorburuak"
@@ -156,12 +156,12 @@ msgid_plural "Filter %1 albums"
 msgstr[0] "Iragazi"
 msgstr[1] "Iragazi %1 album"
 
-#: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:43
+#: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
 #, kde-format
 msgid "Play All"
 msgstr "Jo guztia"
 
-#: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:51
+#: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:54
 #, kde-format
 msgid "Append All"
 msgstr "Erantsi guztia"
@@ -187,12 +187,12 @@ msgstr ""
 msgid "Remove"
 msgstr "Kendu"
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:64
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
 msgstr "Joan artistagana"
 
-#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:71
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:74
 #, kde-format
 msgid "Go to Album"
 msgstr "Joan albumera"
@@ -286,7 +286,7 @@ msgstr "Karpetarik ez!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Gehitu musika berria zure sorburuetara karpeten arabera arakatzeko"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:488
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:169
 #, kde-format
 msgid "No Tracks!"
 msgstr "Pistarik ez!"
@@ -499,22 +499,33 @@ msgstr "Modu iluna"
 msgid "Switch between light and dark colorscheme."
 msgstr "Aldatu kolore-antolaera argi eta ilunaren artean."
 
+#: src/widgets/SettingsView/SettingsDialog.qml:131
+#, fuzzy, kde-format
+#| msgid "Fetch Artwork"
+msgid "Artwork"
+msgstr "Ekarri artelana"
+
 #: src/widgets/SettingsView/SettingsDialog.qml:132
+#, kde-format
+msgid "Show the cover artwork for the tracks."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
 msgid "Sources"
 msgstr "Sorburuak"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:133
+#: src/widgets/SettingsView/SettingsDialog.qml:149
 #, kde-format
 msgid "Add or remove sources"
 msgstr "Gehitu edo kendu sorburuak"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:176
+#: src/widgets/SettingsView/SettingsDialog.qml:192
 #, kde-format
 msgid "Add"
 msgstr "Gehitu"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:193
+#: src/widgets/SettingsView/SettingsDialog.qml:209
 #, kde-format
 msgid "Scan now"
 msgstr "Miatu orain"
@@ -525,93 +536,89 @@ msgstr "Miatu orain"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: src/widgets/TracksView.qml:35
+#: src/widgets/TracksView.qml:34
 #, kde-format
 msgid "Search collection"
 msgstr "Bilatu bilduman"
 
-#: src/widgets/TracksView.qml:75
-#, kde-format
-msgid "New Tracks"
-msgstr "Pista berriak"
+#: src/widgets/TracksView.qml:54
+#, fuzzy, kde-format
+#| msgid "Search collection"
+msgid "Your Collection"
+msgstr "Bilatu bilduman"
 
-#: src/widgets/TracksView.qml:76 src/widgets/TracksView.qml:103
-#: src/widgets/TracksView.qml:178
+#: src/widgets/TracksView.qml:55
 #, kde-format
-msgid "Newly added."
-msgstr "Berriki gehitua."
+msgid "Random tracks from your collection."
+msgstr ""
 
-#: src/widgets/TracksView.qml:81
+#: src/widgets/TracksView.qml:61
 #, kde-format
 msgid "View All"
 msgstr "Ikusi dena"
 
-#: src/widgets/TracksView.qml:102
-#, kde-format
-msgid "Recent Artists"
-msgstr "Azken aldiko artistak"
-
-#: src/widgets/TracksView.qml:107 src/widgets/TracksView.qml:181
-#: src/widgets/TracksView.qml:328 src/widgets/TracksView.qml:432
-#: src/widgets/TracksView.qml:452
-#, kde-format
-msgid "More"
-msgstr "Gehiago"
-
-#: src/widgets/TracksView.qml:177
-#, kde-format
-msgid "Recent Albums"
-msgstr "Azken aldiko albumak"
-
-#: src/widgets/TracksView.qml:251
+#: src/widgets/TracksView.qml:84
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Pista ezagunak"
 
-#: src/widgets/TracksView.qml:252
+#: src/widgets/TracksView.qml:85
 #, kde-format
 msgid "Play them again."
 msgstr "Berriz jo itzazu."
 
-#: src/widgets/TracksView.qml:321
-#, kde-format
-msgid "Playlists"
-msgstr "Jotze-zerrendak"
-
-#: src/widgets/TracksView.qml:322
-#, kde-format
-msgid "Recent playlists"
-msgstr "Azken aldiko jotze-zerrendak"
-
-#: src/widgets/TracksView.qml:427
+#: src/widgets/TracksView.qml:109
 #, kde-format
 msgid "Recent Tracks"
 msgstr "Azken aldiko pistak"
 
-#: src/widgets/TracksView.qml:428
+#: src/widgets/TracksView.qml:110
 #, kde-format
 msgid "Recently played."
 msgstr "Azken aldian joa."
 
-#: src/widgets/TracksView.qml:445
+#: src/widgets/TracksView.qml:114 src/widgets/TracksView.qml:133
+#, kde-format
+msgid "More"
+msgstr "Gehiago"
+
+#: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Never Played"
 msgstr "Inoiz jo gabe"
 
-#: src/widgets/TracksView.qml:446 src/widgets/TracksView.qml:465
+#: src/widgets/TracksView.qml:127 src/widgets/TracksView.qml:145
 #, kde-format
 msgid "Dust off."
 msgstr "Kendu hautsa."
 
-#: src/widgets/TracksView.qml:464
+#: src/widgets/TracksView.qml:144
 #, kde-format
 msgid "Classics"
 msgstr "Klasikoak"
 
-#: src/widgets/TracksView.qml:500
+#: src/widgets/TracksView.qml:181
 #, kde-format
 msgid "Open file"
 msgstr "Ireki fitxategia"
+
+#~ msgid "New Tracks"
+#~ msgstr "Pista berriak"
+
+#~ msgid "Newly added."
+#~ msgstr "Berriki gehitua."
+
+#~ msgid "Recent Artists"
+#~ msgstr "Azken aldiko artistak"
+
+#~ msgid "Recent Albums"
+#~ msgstr "Azken aldiko albumak"
+
+#~ msgid "Playlists"
+#~ msgstr "Jotze-zerrendak"
+
+#~ msgid "Recent playlists"
+#~ msgstr "Azken aldiko jotze-zerrendak"
 
 #~ msgid "Camilo Higuita"
 #~ msgstr "Camilo Higuita"
