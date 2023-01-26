@@ -501,10 +501,9 @@ msgid "Switch between light and dark colorscheme."
 msgstr "Alternar entre o esquema de cores claro e escuro."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
-#, fuzzy, kde-format
-#| msgid "Fetch Artwork"
+#, kde-format
 msgid "Artwork"
-msgstr "Obter as Imagens"
+msgstr "Gráficos"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format

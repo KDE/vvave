@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:57+0000\n"
-"PO-Revision-Date: 2023-01-15 17:51+0300\n"
+"PO-Revision-Date: 2023-01-25 19:14+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -497,15 +497,14 @@ msgid "Switch between light and dark colorscheme."
 msgstr "Açık ve koyu renk şemaları arasında geçiş yapın."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
-#, fuzzy, kde-format
-#| msgid "Fetch Artwork"
+#, kde-format
 msgid "Artwork"
-msgstr "Kapak Görselini Getir"
+msgstr "Kapak Görseli"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "Parçalar için kapak görselini gösterin."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
@@ -539,15 +538,14 @@ msgid "Search collection"
 msgstr "Koleksiyonda ara"
 
 #: src/widgets/TracksView.qml:54
-#, fuzzy, kde-format
-#| msgid "Search collection"
+#, kde-format
 msgid "Your Collection"
-msgstr "Koleksiyonda ara"
+msgstr "Koleksiyonunuz"
 
 #: src/widgets/TracksView.qml:55
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Koleksiyonunuzdan rastgele parçalar."
 
 #: src/widgets/TracksView.qml:61
 #, kde-format

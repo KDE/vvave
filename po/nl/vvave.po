@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:57+0000\n"
-"PO-Revision-Date: 2023-01-15 15:38+0100\n"
+"PO-Revision-Date: 2023-01-25 11:37+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -498,15 +498,14 @@ msgid "Switch between light and dark colorscheme."
 msgstr "Tussen licht en donker kleurenschema wisselen."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
-#, fuzzy, kde-format
-#| msgid "Fetch Artwork"
+#, kde-format
 msgid "Artwork"
-msgstr "Hoezen ophalen"
+msgstr "Illustraties"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "De hoesillustratie voor de tracks tonen."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
@@ -540,15 +539,14 @@ msgid "Search collection"
 msgstr "Verzameling doorzoeken"
 
 #: src/widgets/TracksView.qml:54
-#, fuzzy, kde-format
-#| msgid "Search collection"
+#, kde-format
 msgid "Your Collection"
-msgstr "Verzameling doorzoeken"
+msgstr "Uw verzameling"
 
 #: src/widgets/TracksView.qml:55
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Willekeurige tracks uit uw verzameling."
 
 #: src/widgets/TracksView.qml:61
 #, kde-format
