@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-25 00:57+0000\n"
+"POT-Creation-Date: 2023-01-27 00:57+0000\n"
 "PO-Revision-Date: 2023-01-25 09:12+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -96,7 +96,7 @@ msgstr "Альбоми"
 msgid "No Albums!"
 msgstr "Немає альбомів!"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:170
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:169
 #, kde-format
 msgid "Add new music sources"
 msgstr "Додати нові джерела музики"
@@ -135,7 +135,7 @@ msgid "Playing music"
 msgstr "Відтворюємо музику"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:175
+#: src/widgets/TracksView.qml:174
 #, kde-format
 msgid "Add sources"
 msgstr "Додати джерела"
@@ -288,7 +288,7 @@ msgstr "Немає тек!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Додайте нову музику до ваших джерел, щоб здійснювати навігацію теками"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:169
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:168
 #, kde-format
 msgid "No Tracks!"
 msgstr "Немає композицій!"
@@ -537,70 +537,79 @@ msgstr "Сканувати зараз"
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: src/widgets/TracksView.qml:34
+#: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Search collection"
 msgstr "Пошук у збірці"
 
-#: src/widgets/TracksView.qml:54
+#: src/widgets/TracksView.qml:53
 #, kde-format
 msgid "Your Collection"
 msgstr "Ваша збірка"
 
-#: src/widgets/TracksView.qml:55
+#: src/widgets/TracksView.qml:54
 #, kde-format
 msgid "Random tracks from your collection."
 msgstr "Випадкові композиції з вашої збірки."
 
-#: src/widgets/TracksView.qml:61
+#: src/widgets/TracksView.qml:60
 #, kde-format
 msgid "View All"
 msgstr "Переглянути все"
 
-#: src/widgets/TracksView.qml:84
+#: src/widgets/TracksView.qml:83
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Популярні композиції"
 
-#: src/widgets/TracksView.qml:85
+#: src/widgets/TracksView.qml:84
 #, kde-format
 msgid "Play them again."
 msgstr "Відтворіть їх знову."
 
-#: src/widgets/TracksView.qml:109
+#: src/widgets/TracksView.qml:108
 #, kde-format
 msgid "Recent Tracks"
 msgstr "Нещодавні композиції"
 
-#: src/widgets/TracksView.qml:110
+#: src/widgets/TracksView.qml:109
 #, kde-format
 msgid "Recently played."
 msgstr "Нещодавно відтворено."
 
-#: src/widgets/TracksView.qml:114 src/widgets/TracksView.qml:133
+#: src/widgets/TracksView.qml:113 src/widgets/TracksView.qml:132
 #, kde-format
 msgid "More"
 msgstr "Більше"
 
-#: src/widgets/TracksView.qml:126
+#: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Never Played"
 msgstr "Ніколи не слухали"
 
-#: src/widgets/TracksView.qml:127 src/widgets/TracksView.qml:145
+#: src/widgets/TracksView.qml:126
 #, kde-format
-msgid "Dust off."
-msgstr "Збити пил."
+msgid "Give these tracks a first listen."
+msgstr ""
 
-#: src/widgets/TracksView.qml:144
+#: src/widgets/TracksView.qml:143
 #, kde-format
 msgid "Classics"
 msgstr "Класика"
 
-#: src/widgets/TracksView.qml:181
+#: src/widgets/TracksView.qml:144
+#, fuzzy, kde-format
+#| msgid "Random tracks from your collection."
+msgid "Oldest released tracks from your collection."
+msgstr "Випадкові композиції з вашої збірки."
+
+#: src/widgets/TracksView.qml:180
 #, kde-format
 msgid "Open file"
 msgstr "Відкрити файл"
+
+#~ msgid "Dust off."
+#~ msgstr "Збити пил."
 
 #~ msgid "New Tracks"
 #~ msgstr "Нові композиції"

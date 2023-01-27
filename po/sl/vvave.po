@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-25 00:57+0000\n"
-"PO-Revision-Date: 2023-01-15 10:10+0100\n"
+"POT-Creation-Date: 2023-01-27 00:57+0000\n"
+"PO-Revision-Date: 2023-01-26 10:41+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -96,7 +96,7 @@ msgstr "Albumi"
 msgid "No Albums!"
 msgstr "Ni albumov!"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:170
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:169
 #, kde-format
 msgid "Add new music sources"
 msgstr "Dodaj nove vire glasbe"
@@ -135,7 +135,7 @@ msgid "Playing music"
 msgstr "Predvajanje glasbe"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:175
+#: src/widgets/TracksView.qml:174
 #, kde-format
 msgid "Add sources"
 msgstr "Dodaj vire"
@@ -288,7 +288,7 @@ msgstr "Ni map!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Dodaj novo glasbo med svoje vire za brskanje po mapah"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:169
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:168
 #, kde-format
 msgid "No Tracks!"
 msgstr "Ni sledi!"
@@ -502,15 +502,14 @@ msgid "Switch between light and dark colorscheme."
 msgstr "Preklopi med svetlo in temno barvno shemo."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
-#, fuzzy, kde-format
-#| msgid "Fetch Artwork"
+#, kde-format
 msgid "Artwork"
-msgstr "Dobavi umetniška dela"
+msgstr "Umetniško delo"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "Za sledi prikaži umetniško delo naslovnice."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
@@ -538,71 +537,79 @@ msgstr "Prečeši zdaj"
 msgid "Unknown"
 msgstr "Neznano"
 
-#: src/widgets/TracksView.qml:34
+#: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Search collection"
 msgstr "Išči zbirko"
 
-#: src/widgets/TracksView.qml:54
-#, fuzzy, kde-format
-#| msgid "Search collection"
+#: src/widgets/TracksView.qml:53
+#, kde-format
 msgid "Your Collection"
-msgstr "Išči zbirko"
+msgstr "Vaša zbirka"
 
-#: src/widgets/TracksView.qml:55
+#: src/widgets/TracksView.qml:54
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Slučajne sledi iz vaše zbirke."
 
-#: src/widgets/TracksView.qml:61
+#: src/widgets/TracksView.qml:60
 #, kde-format
 msgid "View All"
 msgstr "Poglej vse"
 
-#: src/widgets/TracksView.qml:84
+#: src/widgets/TracksView.qml:83
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Popularne sledi"
 
-#: src/widgets/TracksView.qml:85
+#: src/widgets/TracksView.qml:84
 #, kde-format
 msgid "Play them again."
 msgstr "Predvajaj jih znova."
 
-#: src/widgets/TracksView.qml:109
+#: src/widgets/TracksView.qml:108
 #, kde-format
 msgid "Recent Tracks"
 msgstr "Nedavne sledi"
 
-#: src/widgets/TracksView.qml:110
+#: src/widgets/TracksView.qml:109
 #, kde-format
 msgid "Recently played."
 msgstr "Nedavno predvajano."
 
-#: src/widgets/TracksView.qml:114 src/widgets/TracksView.qml:133
+#: src/widgets/TracksView.qml:113 src/widgets/TracksView.qml:132
 #, kde-format
 msgid "More"
 msgstr "Več"
 
-#: src/widgets/TracksView.qml:126
+#: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Never Played"
 msgstr "Nikoli predvajano"
 
-#: src/widgets/TracksView.qml:127 src/widgets/TracksView.qml:145
+#: src/widgets/TracksView.qml:126
 #, kde-format
-msgid "Dust off."
-msgstr "Obrisano prahu."
+msgid "Give these tracks a first listen."
+msgstr ""
 
-#: src/widgets/TracksView.qml:144
+#: src/widgets/TracksView.qml:143
 #, kde-format
 msgid "Classics"
 msgstr "Klasika"
 
-#: src/widgets/TracksView.qml:181
+#: src/widgets/TracksView.qml:144
+#, fuzzy, kde-format
+#| msgid "Random tracks from your collection."
+msgid "Oldest released tracks from your collection."
+msgstr "Slučajne sledi iz vaše zbirke."
+
+#: src/widgets/TracksView.qml:180
 #, kde-format
 msgid "Open file"
 msgstr "Odpri datoteko"
+
+#~ msgid "Dust off."
+#~ msgstr "Obrisano prahu."
 
 #~ msgid "New Tracks"
 #~ msgstr "Nove sledi"
