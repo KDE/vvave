@@ -21,7 +21,6 @@ StackView
         {
             id: _filterLoader
             asynchronous: true
-            active: listModel.list.count > 1
             visible: active
 
             Layout.fillWidth: true
@@ -41,7 +40,7 @@ StackView
                     openOverviewTable( Q.GET.tracksWhere_.arg("t.title LIKE \"%"+text+"%\" OR t.artist LIKE \"%"+text+"%\" OR t.album LIKE \"%"+text+"%\" OR t.genre LIKE \"%"+text+"%\""))
                 }
 
-                onCleared: listModel.clearFilters()
+                onCleared: control.pop()
             }
         }
 
@@ -124,7 +123,7 @@ StackView
                         Layout.column: 1
 
                         title: i18n("Never Played")
-                        description: i18n("Dust off.")
+                        description: i18n("Give these tracks a first listen.")
 
                         list.query: Q.GET.neverPlayedTracks
 
@@ -142,7 +141,7 @@ StackView
                         Layout.fillWidth: true
 
                         title: i18n("Classics")
-                        description: i18n("Dust off.")
+                        description: i18n("Oldest released tracks from your collection.")
 
                         list.query: Q.GET.oldTracks
                     }
