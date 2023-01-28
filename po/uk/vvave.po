@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2023-01-25 09:12+0200\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"PO-Revision-Date: 2023-01-27 10:56+0200\n"
+"Last-Translator: Fracture dept <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -590,7 +590,7 @@ msgstr "Ніколи не слухали"
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Послухати ці композиції уперше."
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
@@ -598,10 +598,9 @@ msgid "Classics"
 msgstr "Класика"
 
 #: src/widgets/TracksView.qml:144
-#, fuzzy, kde-format
-#| msgid "Random tracks from your collection."
+#, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr "Випадкові композиції з вашої збірки."
+msgstr "Найстаріші випущені композиції з вашої збірки."
 
 #: src/widgets/TracksView.qml:180
 #, kde-format

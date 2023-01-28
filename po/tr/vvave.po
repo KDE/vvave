@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2023-01-25 19:14+0300\n"
+"PO-Revision-Date: 2023-01-27 18:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -585,7 +585,7 @@ msgstr "Hiç Çalınmayanlar"
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Bu parçaları ilk kez dinleyin."
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
@@ -593,10 +593,9 @@ msgid "Classics"
 msgstr "Klasikler"
 
 #: src/widgets/TracksView.qml:144
-#, fuzzy, kde-format
-#| msgid "Random tracks from your collection."
+#, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr "Koleksiyonunuzdan rastgele parçalar."
+msgstr "Koleksiyonunuzdaki en eski tarihli parçalar."
 
 #: src/widgets/TracksView.qml:180
 #, kde-format

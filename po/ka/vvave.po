@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2023-01-25 07:08+0100\n"
+"PO-Revision-Date: 2023-01-27 12:16+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -585,7 +585,7 @@ msgstr "არასდროს-დაკრული"
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "ამ ტრეკების პირველი მოსმენა."
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
@@ -593,10 +593,9 @@ msgid "Classics"
 msgstr "კლასიკა"
 
 #: src/widgets/TracksView.qml:144
-#, fuzzy, kde-format
-#| msgid "Random tracks from your collection."
+#, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr "შემთხვევითი ტრეკები თქვენი კოლექციიდან."
+msgstr "უძველესი ტრეკები თქვენი კოლექციიდან."
 
 #: src/widgets/TracksView.qml:180
 #, kde-format
