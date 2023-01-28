@@ -34,13 +34,13 @@ Maui.SettingsDialog
 
     onRejected: close()
 
-    Maui.SettingsSection
+    Maui.SectionGroup
     {
         id: _template
         title: i18n("Metadata")
         description: i18n("Embedded metadata info.")
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             Layout.fillWidth: true
 
@@ -54,7 +54,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             Layout.fillWidth: true
 
@@ -69,7 +69,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             Layout.fillWidth: true
 
@@ -83,7 +83,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             Layout.fillWidth: true
 
@@ -97,7 +97,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             Layout.fillWidth: true
 
@@ -111,7 +111,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             Layout.fillWidth: true
 
@@ -125,7 +125,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             Layout.fillWidth: true
 
@@ -140,7 +140,7 @@ Maui.SettingsDialog
         }
     }
 
-    Maui.SettingsSection
+    Maui.SectionGroup
     {
         title: i18n("File Info")
         description: i18n("Local file info.")

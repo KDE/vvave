@@ -12,7 +12,7 @@ import "BabeGrid"
 import "../db/Queries.js" as Q
 import "../utils/Player.js" as Player
 
-Maui.SettingsSection
+Maui.SectionGroup
 {
     id: control
     Maui.Theme.colorSet: Maui.Theme.Window
@@ -130,7 +130,7 @@ Maui.SettingsSection
     }
 
 
-    Maui.GridView
+    Maui.GridBrowser
     {
         id: _gridView
         clip: true

@@ -48,12 +48,12 @@ Maui.SettingsDialog
         onRejected: confirmationDialog.close()
     }
 
-    Maui.SettingsSection
+    Maui.SectionGroup
     {
         title: i18n("Behaviour")
         description: i18n("Configure the app plugins and behavior.")
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Fetch Artwork")
             label2.text: i18n("Gathers album and artists artworks from online services: LastFM, Spotify, MusicBrainz, iTunes, Genius, and others.")
@@ -66,7 +66,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Auto Scan")
             label2.text: i18n("Scan all the music sources on startup to keep your collection up to date.")
@@ -79,7 +79,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Auto Resume")
             label2.text: i18n("Resume the last session playlist.")
@@ -92,7 +92,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Focus View")
             label2.text: i18n("Make the focus view the default")
@@ -108,7 +108,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             visible: Maui.Handy.isAndroid
             label1.text: i18n("Dark Mode")
@@ -126,7 +126,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Artwork")
             label2.text: i18n("Show the cover artwork for the tracks.")
@@ -143,7 +143,7 @@ Maui.SettingsDialog
         }
     }
 
-    Maui.SettingsSection
+    Maui.SectionGroup
     {
         title: i18n("Sources")
         description: i18n("Add or remove sources")

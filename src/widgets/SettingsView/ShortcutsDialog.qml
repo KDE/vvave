@@ -20,7 +20,7 @@ Maui.SettingsDialog
     Component
     {
         id: _shortcutCategoryComponent
-        Maui.SettingsSection {
+        Maui.SectionGroup {
             title: i18n("Unknown")
             function setTitle(rawtext: string) : undefined
             {
@@ -32,7 +32,7 @@ Maui.SettingsDialog
     Component
     {
         id: _shortcutLabelComponent
-        Maui.SettingTemplate
+        Maui.SectionItem
         {
             label1.text: i18n("Unknown")
 

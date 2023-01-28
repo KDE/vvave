@@ -119,7 +119,7 @@ Maui.ApplicationWindow
         readonly property string dialogLabel: "Rewind 10 seconds"
         readonly property string dialogCategory: "Playback"
         sequence: "Left"
-        enabled: !(activeFocusItem instanceof Maui.GridView || activeFocusItem instanceof GridView)
+        enabled: !(activeFocusItem instanceof Maui.GridBrowser || activeFocusItem instanceof GridView)
         onActivated: player.pos -= 10000
     },
 
@@ -128,7 +128,7 @@ Maui.ApplicationWindow
         readonly property string dialogLabel: "Skip 10 seconds"
         readonly property string dialogCategory: "Playback"
         sequence: "Right"
-        enabled: !(activeFocusItem instanceof Maui.GridView || activeFocusItem instanceof GridView)
+        enabled: !(activeFocusItem instanceof Maui.GridBrowser || activeFocusItem instanceof GridView)
         onActivated: player.pos += 10000
     },
 
