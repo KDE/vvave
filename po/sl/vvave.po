@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2023-01-26 10:41+0100\n"
+"PO-Revision-Date: 2023-01-28 10:03+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -321,7 +321,7 @@ msgstr "Metapodatki"
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
 msgid "Embedded metadata info."
-msgstr "Vdelane informacije metapodatkov"
+msgstr "Vdelane informacije metapodatkov."
 
 #: src/widgets/MetadataDialog.qml:47
 #, kde-format
@@ -590,7 +590,7 @@ msgstr "Nikoli predvajano"
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Daj te sledi na začetek poslušanja."
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
@@ -598,10 +598,9 @@ msgid "Classics"
 msgstr "Klasika"
 
 #: src/widgets/TracksView.qml:144
-#, fuzzy, kde-format
-#| msgid "Random tracks from your collection."
+#, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr "Slučajne sledi iz vaše zbirke."
+msgstr "Najstarejše sledi iz vaše zbirke."
 
 #: src/widgets/TracksView.qml:180
 #, kde-format
