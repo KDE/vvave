@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2023-01-16 08:29+0100\n"
+"PO-Revision-Date: 2023-01-29 08:38+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -499,15 +499,14 @@ msgid "Switch between light and dark colorscheme."
 msgstr "Passa dallo schema di colori chiaro allo scuro e viceversa."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
-#, fuzzy, kde-format
-#| msgid "Fetch Artwork"
+#, kde-format
 msgid "Artwork"
-msgstr "Scarica la copertina"
+msgstr "Grafica"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "Mostra la copertina di queste tracce."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
@@ -541,15 +540,14 @@ msgid "Search collection"
 msgstr "Cerca nella collezione"
 
 #: src/widgets/TracksView.qml:53
-#, fuzzy, kde-format
-#| msgid "Search collection"
+#, kde-format
 msgid "Your Collection"
-msgstr "Cerca nella collezione"
+msgstr "La tua collezione"
 
 #: src/widgets/TracksView.qml:54
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Tracce a caso dalla tua collezione."
 
 #: src/widgets/TracksView.qml:60
 #, kde-format
@@ -589,7 +587,7 @@ msgstr "Mai riprodotte"
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Ascolta per la prima volta queste tracce."
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
@@ -599,7 +597,7 @@ msgstr "Classici"
 #: src/widgets/TracksView.qml:144
 #, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr ""
+msgstr "Tracce più vecchie della tua collezione."
 
 #: src/widgets/TracksView.qml:180
 #, kde-format

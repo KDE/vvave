@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2023-01-25 22:57+0100\n"
+"PO-Revision-Date: 2023-01-29 11:01+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -586,7 +586,7 @@ msgstr "Jamais lu"
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Faire une première écoute de ces morceaux."
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
@@ -594,10 +594,9 @@ msgid "Classics"
 msgstr "Classique"
 
 #: src/widgets/TracksView.qml:144
-#, fuzzy, kde-format
-#| msgid "Random tracks from your collection."
+#, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr "Pistes aléatoires à partir de votre collection"
+msgstr "Morceaux les plus anciens de votre collection."
 
 #: src/widgets/TracksView.qml:180
 #, kde-format
