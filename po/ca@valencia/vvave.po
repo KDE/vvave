@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2023-01-15 11:28+0100\n"
+"PO-Revision-Date: 2023-01-27 11:59+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -499,15 +499,14 @@ msgid "Switch between light and dark colorscheme."
 msgstr "Alterna entre els esquemes de color clar i fosc."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
-#, fuzzy, kde-format
-#| msgid "Fetch Artwork"
+#, kde-format
 msgid "Artwork"
-msgstr "Recupera la caràtula"
+msgstr "Grafisme"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "Mostra el grafisme de les caràtules de les peces."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
@@ -541,15 +540,14 @@ msgid "Search collection"
 msgstr "Busca en la col·lecció"
 
 #: src/widgets/TracksView.qml:53
-#, fuzzy, kde-format
-#| msgid "Search collection"
+#, kde-format
 msgid "Your Collection"
-msgstr "Busca en la col·lecció"
+msgstr "La vostra col·lecció"
 
 #: src/widgets/TracksView.qml:54
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Peces aleatòries de la vostra col·lecció."
 
 #: src/widgets/TracksView.qml:60
 #, kde-format
@@ -589,7 +587,7 @@ msgstr "Mai reproduïdes"
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Doneu a estes peces una primera audició."
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
@@ -599,30 +597,9 @@ msgstr "Clàssics"
 #: src/widgets/TracksView.qml:144
 #, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr ""
+msgstr "Les pistes més antigues publicades de la vostra col·lecció."
 
 #: src/widgets/TracksView.qml:180
 #, kde-format
 msgid "Open file"
 msgstr "Obri un fitxer"
-
-#~ msgid "Dust off."
-#~ msgstr "Trau la pols."
-
-#~ msgid "New Tracks"
-#~ msgstr "Peces noves"
-
-#~ msgid "Newly added."
-#~ msgstr "Afegides noves."
-
-#~ msgid "Recent Artists"
-#~ msgstr "Artistes recents"
-
-#~ msgid "Recent Albums"
-#~ msgstr "Àlbums recents"
-
-#~ msgid "Playlists"
-#~ msgstr "Llistes de reproducció"
-
-#~ msgid "Recent playlists"
-#~ msgstr "Llistes de reproducció recents"
