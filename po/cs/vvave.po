@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2023-01-03 16:18+0100\n"
+"PO-Revision-Date: 2023-01-31 13:14+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -148,9 +148,9 @@ msgstr ""
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Filtrovat"
+msgstr[1] "Filtrovat %1 alba"
+msgstr[2] "Filtrovat %1 alb"
 
 #: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -490,12 +490,12 @@ msgstr "Přepínač mezi světlým a tmavým barevným schématem."
 #: src/widgets/SettingsView/SettingsDialog.qml:131
 #, kde-format
 msgid "Artwork"
-msgstr ""
+msgstr "Grafika"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "Zobrazit obrázky alb pro skladby."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
@@ -529,20 +529,19 @@ msgid "Search collection"
 msgstr "Prohledat sbírku"
 
 #: src/widgets/TracksView.qml:53
-#, fuzzy, kde-format
-#| msgid "Search collection"
+#, kde-format
 msgid "Your Collection"
-msgstr "Prohledat sbírku"
+msgstr "Vaše sbírka"
 
 #: src/widgets/TracksView.qml:54
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Náhodné skladby z vaší sbírky."
 
 #: src/widgets/TracksView.qml:60
 #, kde-format
 msgid "View All"
-msgstr ""
+msgstr "Zobrazit všechny"
 
 #: src/widgets/TracksView.qml:83
 #, kde-format
@@ -557,12 +556,12 @@ msgstr ""
 #: src/widgets/TracksView.qml:108
 #, kde-format
 msgid "Recent Tracks"
-msgstr ""
+msgstr "Nedávné skladby"
 
 #: src/widgets/TracksView.qml:109
 #, kde-format
 msgid "Recently played."
-msgstr ""
+msgstr "Nedávno hrané."
 
 #: src/widgets/TracksView.qml:113 src/widgets/TracksView.qml:132
 #, kde-format
@@ -572,27 +571,24 @@ msgstr "Více"
 #: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Never Played"
-msgstr ""
+msgstr "Nikdy nehrané"
 
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Dopřejte těmto skladbám první poslech."
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
 msgid "Classics"
-msgstr ""
+msgstr "Vážná hudba"
 
 #: src/widgets/TracksView.qml:144
 #, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr ""
+msgstr "Nejstarší vydané skladby z vaší sbírky."
 
 #: src/widgets/TracksView.qml:180
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "Playlists"
-#~ msgstr "Seznamy skladeb"
