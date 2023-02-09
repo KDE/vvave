@@ -1,146 +1,146 @@
-# German translations for vvave package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# Automatically generated, 2022.
 #
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-27 00:57+0000\n"
-"PO-Revision-Date: 2022-11-11 10:25+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: de\n"
+"PO-Revision-Date: 2023-02-09 01:59+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "Vvave"
-msgstr ""
+msgstr "Vvave"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr ""
+msgstr "管理並聆聽您的音樂。"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
-msgstr ""
+msgstr "© 2019-%1 Maui 開發團隊"
 
 #: src/main.cpp:104 src/main.cpp:105
 #, kde-format
 msgid "Developer"
-msgstr ""
+msgstr "開發者"
 
 #: src/main.qml:272
 #, kde-format
 msgid "Missing file"
-msgstr ""
+msgstr "缺失檔案"
 
 #: src/main.qml:334
 #, kde-format
 msgid "Remove %1 tracks"
-msgstr ""
+msgstr "移除 %1 個音軌"
 
 #: src/main.qml:335
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
-msgstr ""
+msgstr "您確定要刪除這些檔案嗎？這個動作無法復原。"
 
 #: src/main.qml:337 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 #: src/main.qml:338 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: src/main.qml:508 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr ""
+msgstr "快捷鍵"
 
 #: src/main.qml:515
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: src/main.qml:522
 #, kde-format
 msgid "About"
-msgstr ""
+msgstr "關於"
 
 #: src/main.qml:555
 #, kde-format
 msgid "Songs"
-msgstr ""
+msgstr "歌曲"
 
 #: src/main.qml:574 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Albums"
-msgstr ""
+msgstr "專輯"
 
 #: src/main.qml:581
 #, kde-format
 msgid "No Albums!"
-msgstr ""
+msgstr "沒有專輯！"
 
 #: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:169
 #, kde-format
 msgid "Add new music sources"
-msgstr ""
+msgstr "新增音樂來源"
 
 #: src/main.qml:598 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Artists"
-msgstr ""
+msgstr "藝人"
 
 #: src/main.qml:605
 #, kde-format
 msgid "No Artists!"
-msgstr ""
+msgstr "沒有藝人！"
 
 #: src/main.qml:622 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
-msgstr ""
+msgstr "標籤"
 
 #: src/main.qml:629
 #, kde-format
 msgid "Folders"
-msgstr ""
+msgstr "資料夾"
 
 #: src/main.qml:637
 #, kde-format
 msgid "Cloud"
-msgstr ""
+msgstr "雲端"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr ""
+msgstr "正在播放音樂"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
 #: src/widgets/TracksView.qml:174
 #, kde-format
 msgid "Add sources"
-msgstr ""
+msgstr "新增來源"
 
 #: src/widgets/AlbumsView.qml:56
 #, kde-format
 msgid "This list is empty"
-msgstr ""
+msgstr "這個列表是空的"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
@@ -148,88 +148,87 @@ msgstr ""
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "過濾 %1 個專輯"
 
 #: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
 #, kde-format
 msgid "Play All"
-msgstr ""
+msgstr "播放全部"
 
 #: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:54
 #, kde-format
 msgid "Append All"
-msgstr ""
+msgstr "將全部加到最後"
 
 #: src/widgets/BabeTable/BabeTable.qml:139
 #, kde-format
 msgid "Remove track"
-msgstr ""
+msgstr "移除音軌"
 
 #: src/widgets/BabeTable/BabeTable.qml:140
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
-msgstr ""
+msgstr "您確定要從您的電腦上移除這個檔案嗎？這個動作無法復原。"
 
 #: src/widgets/BabeTable/BabeTable.qml:142
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
-msgstr ""
+msgstr "跳到藝人"
 
 #: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:74
 #, kde-format
 msgid "Go to Album"
-msgstr ""
+msgstr "跳到專輯"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "Fav it"
-msgstr ""
+msgstr "加到最愛"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "UnFav it"
-msgstr ""
+msgstr "從最愛中移除它"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "編輯"
 
 #: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
 #, kde-format
 msgid "Share"
-msgstr ""
+msgstr "分享"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
 #, kde-format
 msgid "Select..."
-msgstr ""
+msgstr "選擇…"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
 #, kde-format
 msgid "Play next"
-msgstr ""
+msgstr "播放下一個"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
 msgid "Show in folder"
-msgstr ""
+msgstr "在資料夾顯示"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
 msgid "Opps!"
-msgstr ""
+msgstr "糟糕！"
 
 #: src/widgets/CloudView/CloudView.qml:66
 #, kde-format
@@ -238,204 +237,205 @@ msgid ""
 "You can set up your account now by clicking here or under the Accounts "
 "options in the main menu"
 msgstr ""
+"您還沒有設定帳號。\n"
+"您可以點擊這裡來設定帳號或是在主選單下的帳號選項裡進行設定"
 
 #: src/widgets/FocusView.qml:146
 #, kde-format
 msgid "Find"
-msgstr ""
+msgstr "尋找"
 
 #: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "No Results!"
-msgstr ""
+msgstr "沒有結果！"
 
 #: src/widgets/FocusView.qml:191
 #, kde-format
 msgid "Try with something else"
-msgstr ""
+msgstr "試試看別的東西"
 
 #: src/widgets/FocusView.qml:233 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
-msgstr ""
+msgstr "開始製作您的播放清單。"
 
 #: src/widgets/FoldersView/FoldersView.qml:32
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "過濾 %1 個資料夾"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
 msgid "No Folders!"
-msgstr ""
+msgstr "沒有資料夾！"
 
 #: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
-msgstr ""
+msgstr "新增音樂到您的來源來以資料夾進行瀏覽"
 
 #: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:168
 #, kde-format
 msgid "No Tracks!"
-msgstr ""
+msgstr "沒有音軌！"
 
 #: src/widgets/FoldersView/FoldersView.qml:135
 #, kde-format
 msgid "This source folder seems to be empty!"
-msgstr ""
+msgstr "這個來源資料夾看起來是空的！"
 
 #: src/widgets/InfoView/InfoView.qml:45
 #, kde-format
 msgid "Artist Info"
-msgstr ""
+msgstr "藝人資訊"
 
 #: src/widgets/InfoView/InfoView.qml:73
 #, kde-format
 msgid "Album Info"
-msgstr ""
+msgstr "專輯資訊"
 
 #: src/widgets/MainPlaylist/MainPlaylist.qml:133
 #, kde-format
 msgid "Syncing to "
-msgstr ""
+msgstr "正在同步到"
 
 #: src/widgets/MetadataDialog.qml:40
 #, kde-format
 msgid "Metadata"
-msgstr ""
+msgstr "中繼資料"
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
 msgid "Embedded metadata info."
-msgstr ""
+msgstr "嵌入的中繼資料。"
 
 #: src/widgets/MetadataDialog.qml:47
 #, kde-format
 msgid "Track Title"
-msgstr ""
+msgstr "音軌標題"
 
 #: src/widgets/MetadataDialog.qml:61
 #, kde-format
 msgid "Artist"
-msgstr ""
+msgstr "藝人"
 
 #: src/widgets/MetadataDialog.qml:76
 #, kde-format
 msgid "Album"
-msgstr ""
+msgstr "專輯"
 
 #: src/widgets/MetadataDialog.qml:90
 #, kde-format
 msgid "Track"
-msgstr ""
+msgstr "音軌"
 
 #: src/widgets/MetadataDialog.qml:104
 #, kde-format
 msgid "Genre"
-msgstr ""
+msgstr "曲風"
 
 #: src/widgets/MetadataDialog.qml:118
 #, kde-format
 msgid "Year"
-msgstr ""
+msgstr "年份"
 
 #: src/widgets/MetadataDialog.qml:132
 #, kde-format
 msgid "Comment"
-msgstr ""
+msgstr "備註"
 
 #: src/widgets/MetadataDialog.qml:145
 #, kde-format
 msgid "File Info"
-msgstr ""
+msgstr "檔案資訊"
 
 #: src/widgets/MetadataDialog.qml:146
 #, kde-format
 msgid "Local file info."
-msgstr ""
+msgstr "本機檔案資訊。"
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
 msgid "Toogle SideBar"
-msgstr ""
+msgstr "切換側邊欄"
 
 #: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
-msgstr ""
+msgstr "播放和暫停"
 
 #: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
-msgstr ""
+msgstr "下一個"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:65
 #, kde-format
 msgid "Remove from playlist"
-msgstr ""
+msgstr "從播放清單移除"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:94
 #, kde-format
 msgid "stars"
-msgstr ""
+msgstr "星"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
 #, kde-format
 msgid "No Playlists!"
-msgstr ""
+msgstr "沒有播放清單！"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
 #, kde-format
 msgid "Start creating new custom playlists"
-msgstr ""
+msgstr "開始建立新的自訂播放清單"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
 #, kde-format
 msgid "Remove '%1'"
-msgstr ""
+msgstr "移除 '%1'"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
 #, kde-format
 msgid "Accept"
-msgstr ""
+msgstr "接受"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
-msgstr ""
+msgstr "您確定要移除這個標籤嗎？這個動作無法復原。"
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr ""
+msgstr "播放"
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
 msgid "Append"
-msgstr ""
+msgstr "加到最後"
 
 #: src/widgets/SelectionBar.qml:66
 #, kde-format
 msgid "Queue"
-msgstr ""
+msgstr "佇列"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
 #, kde-format
 msgid "Behaviour"
-msgstr ""
+msgstr "行為"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
 msgid "Configure the app plugins and behavior."
-msgstr ""
+msgstr "設定應用程式外掛與行為。"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
 msgid "Fetch Artwork"
-msgstr ""
+msgstr "取得封面"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:59
 #, kde-format
@@ -443,150 +443,152 @@ msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
+"從 LastFM、Spotify、MusicBrainz、iTunes、Genius 等線上服務取得專輯和藝人封"
+"面。"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Auto Scan"
-msgstr ""
+msgstr "自動掃描"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
-msgstr ""
+msgstr "啟動時掃描所有音樂來源來確保您的收藏是最新狀態。"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "自動繼續播放"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "繼續播放上一個工作階段的播放清單。"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:97
 #, kde-format
 msgid "Focus View"
-msgstr ""
+msgstr "專注檢視"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
 #, kde-format
 msgid "Make the focus view the default"
-msgstr ""
+msgstr "將專注檢視設為預設"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
 msgid "Dark Mode"
-msgstr ""
+msgstr "暗色模式"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr ""
+msgstr "在明亮和暗色配色方案間切換。"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
 #, kde-format
 msgid "Artwork"
-msgstr ""
+msgstr "封面"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "顯示音軌的封面。"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
 msgid "Sources"
-msgstr ""
+msgstr "來源"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:149
 #, kde-format
 msgid "Add or remove sources"
-msgstr ""
+msgstr "新增或移除來源"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:192
 #, kde-format
 msgid "Add"
-msgstr ""
+msgstr "新增"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:209
 #, kde-format
 msgid "Scan now"
-msgstr ""
+msgstr "現在掃描"
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:24
 #: src/widgets/SettingsView/ShortcutsDialog.qml:37
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Search collection"
-msgstr ""
+msgstr "搜尋收藏"
 
 #: src/widgets/TracksView.qml:53
 #, kde-format
 msgid "Your Collection"
-msgstr ""
+msgstr "您的收藏"
 
 #: src/widgets/TracksView.qml:54
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "從您的收藏中的隨機音軌。"
 
 #: src/widgets/TracksView.qml:60
 #, kde-format
 msgid "View All"
-msgstr ""
+msgstr "檢視全部"
 
 #: src/widgets/TracksView.qml:83
 #, kde-format
 msgid "Popular Tracks"
-msgstr ""
+msgstr "最受歡迎的音軌"
 
 #: src/widgets/TracksView.qml:84
 #, kde-format
 msgid "Play them again."
-msgstr ""
+msgstr "再次播放它們。"
 
 #: src/widgets/TracksView.qml:108
 #, kde-format
 msgid "Recent Tracks"
-msgstr ""
+msgstr "最近音軌"
 
 #: src/widgets/TracksView.qml:109
 #, kde-format
 msgid "Recently played."
-msgstr ""
+msgstr "最近播放的。"
 
 #: src/widgets/TracksView.qml:113 src/widgets/TracksView.qml:132
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "更多"
 
 #: src/widgets/TracksView.qml:125
 #, kde-format
 msgid "Never Played"
-msgstr ""
+msgstr "從未播放"
 
 #: src/widgets/TracksView.qml:126
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "聽聽看這些音軌吧。"
 
 #: src/widgets/TracksView.qml:143
 #, kde-format
 msgid "Classics"
-msgstr ""
+msgstr "經典"
 
 #: src/widgets/TracksView.qml:144
 #, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr ""
+msgstr "您的收藏中發行時間最久以前的音軌。"
 
 #: src/widgets/TracksView.qml:180
 #, kde-format
 msgid "Open file"
-msgstr ""
+msgstr "開啟檔案"
