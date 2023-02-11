@@ -110,3 +110,4 @@ GenericName[uk]=Аудіопрогравач
 GenericName[x-test]=xxAudio Playerxx
 GenericName[zh_CN]=音频播放器
 GenericName[zh_TW]=音樂播放器
+SingleMainWindow=true
