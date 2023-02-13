@@ -17,19 +17,14 @@ StackView
 
     initialItem: Maui.Page
     {
-        headBar.middleContent: Loader
-        {
-            id: _filterLoader
-            asynchronous: true
-            visible: active
-
-            Layout.fillWidth: true
-            Layout.minimumWidth: 100
-            Layout.maximumWidth: 500
-            Layout.alignment: Qt.AlignCenter
-
-            sourceComponent: Maui.SearchField
+        headBar.middleContent: Maui.SearchField
             {
+                id: _searchField
+
+                Layout.fillWidth: true
+                Layout.minimumWidth: 100
+                Layout.maximumWidth: 500
+                Layout.alignment: Qt.AlignCenter
                 placeholderText: i18n("Search collection")
 
                 KeyNavigation.up: control.currentItem
@@ -42,7 +37,7 @@ StackView
 
                 onCleared: control.pop()
             }
-        }
+
 
 
         TracksGroup
@@ -193,7 +188,11 @@ StackView
             headBar.leftContent: ToolButton
             {
                 icon.name: "go-previous"
-                onClicked: control.pop()
+                onClicked:
+                {
+                    _searchField.clear()
+                    control.pop()
+                }
             }
 
         }

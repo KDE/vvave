@@ -89,7 +89,7 @@ Maui.Page
                 height: width
 
                 asynchronous: true
-                active: !focusView && control.height > control.width*3
+                active: !focusView && control.height > control.width*3 && currentTrackIndex >= 0
                 visible: active
                 sourceComponent: Item
                 {
