@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 00:57+0000\n"
+"POT-Creation-Date: 2023-02-14 00:57+0000\n"
 "PO-Revision-Date: 2023-01-29 08:38+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -95,7 +95,7 @@ msgstr "Album"
 msgid "No Albums!"
 msgstr "Nessun album."
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:169
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:164
 #, kde-format
 msgid "Add new music sources"
 msgstr "Aggiungi nuove fonti musicali"
@@ -134,7 +134,7 @@ msgid "Playing music"
 msgstr "Musica in riproduzione"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:174
+#: src/widgets/TracksView.qml:169
 #, kde-format
 msgid "Add sources"
 msgstr "Aggiungi fonti"
@@ -283,7 +283,7 @@ msgstr "Nessuna cartella."
 msgid "Add new music to your sources to browse by folders"
 msgstr "Aggiungi nuova musica alle fonti cercando per cartella"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:168
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:163
 #, kde-format
 msgid "No Tracks!"
 msgstr "Nessuna traccia."
@@ -534,72 +534,72 @@ msgstr "Analizza adesso"
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: src/widgets/TracksView.qml:33
+#: src/widgets/TracksView.qml:28
 #, kde-format
 msgid "Search collection"
 msgstr "Cerca nella collezione"
 
-#: src/widgets/TracksView.qml:53
+#: src/widgets/TracksView.qml:48
 #, kde-format
 msgid "Your Collection"
 msgstr "La tua collezione"
 
-#: src/widgets/TracksView.qml:54
+#: src/widgets/TracksView.qml:49
 #, kde-format
 msgid "Random tracks from your collection."
 msgstr "Tracce a caso dalla tua collezione."
 
-#: src/widgets/TracksView.qml:60
+#: src/widgets/TracksView.qml:55
 #, kde-format
 msgid "View All"
 msgstr "Visualizza tutto"
 
-#: src/widgets/TracksView.qml:83
+#: src/widgets/TracksView.qml:78
 #, kde-format
 msgid "Popular Tracks"
 msgstr "Tracce popolari"
 
-#: src/widgets/TracksView.qml:84
+#: src/widgets/TracksView.qml:79
 #, kde-format
 msgid "Play them again."
 msgstr "Riproducile nuovamente."
 
-#: src/widgets/TracksView.qml:108
+#: src/widgets/TracksView.qml:103
 #, kde-format
 msgid "Recent Tracks"
 msgstr "Tracce recenti"
 
-#: src/widgets/TracksView.qml:109
+#: src/widgets/TracksView.qml:104
 #, kde-format
 msgid "Recently played."
 msgstr "Riprodotte di recente."
 
-#: src/widgets/TracksView.qml:113 src/widgets/TracksView.qml:132
+#: src/widgets/TracksView.qml:108 src/widgets/TracksView.qml:127
 #, kde-format
 msgid "More"
 msgstr "Altro"
 
-#: src/widgets/TracksView.qml:125
+#: src/widgets/TracksView.qml:120
 #, kde-format
 msgid "Never Played"
 msgstr "Mai riprodotte"
 
-#: src/widgets/TracksView.qml:126
+#: src/widgets/TracksView.qml:121
 #, kde-format
 msgid "Give these tracks a first listen."
 msgstr "Ascolta per la prima volta queste tracce."
 
-#: src/widgets/TracksView.qml:143
+#: src/widgets/TracksView.qml:138
 #, kde-format
 msgid "Classics"
 msgstr "Classici"
 
-#: src/widgets/TracksView.qml:144
+#: src/widgets/TracksView.qml:139
 #, kde-format
 msgid "Oldest released tracks from your collection."
 msgstr "Tracce più vecchie della tua collezione."
 
-#: src/widgets/TracksView.qml:180
+#: src/widgets/TracksView.qml:175
 #, kde-format
 msgid "Open file"
 msgstr "Apri file"

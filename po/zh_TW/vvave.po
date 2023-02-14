@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-27 00:57+0000\n"
+"POT-Creation-Date: 2023-02-14 00:57+0000\n"
 "PO-Revision-Date: 2023-02-09 01:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -93,7 +93,7 @@ msgstr "專輯"
 msgid "No Albums!"
 msgstr "沒有專輯！"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:169
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:164
 #, kde-format
 msgid "Add new music sources"
 msgstr "新增音樂來源"
@@ -132,7 +132,7 @@ msgid "Playing music"
 msgstr "正在播放音樂"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:174
+#: src/widgets/TracksView.qml:169
 #, kde-format
 msgid "Add sources"
 msgstr "新增來源"
@@ -276,7 +276,7 @@ msgstr "沒有資料夾！"
 msgid "Add new music to your sources to browse by folders"
 msgstr "新增音樂到您的來源來以資料夾進行瀏覽"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:168
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:163
 #, kde-format
 msgid "No Tracks!"
 msgstr "沒有音軌！"
@@ -523,72 +523,72 @@ msgstr "現在掃描"
 msgid "Unknown"
 msgstr "未知"
 
-#: src/widgets/TracksView.qml:33
+#: src/widgets/TracksView.qml:28
 #, kde-format
 msgid "Search collection"
 msgstr "搜尋收藏"
 
-#: src/widgets/TracksView.qml:53
+#: src/widgets/TracksView.qml:48
 #, kde-format
 msgid "Your Collection"
 msgstr "您的收藏"
 
-#: src/widgets/TracksView.qml:54
+#: src/widgets/TracksView.qml:49
 #, kde-format
 msgid "Random tracks from your collection."
 msgstr "從您的收藏中的隨機音軌。"
 
-#: src/widgets/TracksView.qml:60
+#: src/widgets/TracksView.qml:55
 #, kde-format
 msgid "View All"
 msgstr "檢視全部"
 
-#: src/widgets/TracksView.qml:83
+#: src/widgets/TracksView.qml:78
 #, kde-format
 msgid "Popular Tracks"
 msgstr "最受歡迎的音軌"
 
-#: src/widgets/TracksView.qml:84
+#: src/widgets/TracksView.qml:79
 #, kde-format
 msgid "Play them again."
 msgstr "再次播放它們。"
 
-#: src/widgets/TracksView.qml:108
+#: src/widgets/TracksView.qml:103
 #, kde-format
 msgid "Recent Tracks"
 msgstr "最近音軌"
 
-#: src/widgets/TracksView.qml:109
+#: src/widgets/TracksView.qml:104
 #, kde-format
 msgid "Recently played."
 msgstr "最近播放的。"
 
-#: src/widgets/TracksView.qml:113 src/widgets/TracksView.qml:132
+#: src/widgets/TracksView.qml:108 src/widgets/TracksView.qml:127
 #, kde-format
 msgid "More"
 msgstr "更多"
 
-#: src/widgets/TracksView.qml:125
+#: src/widgets/TracksView.qml:120
 #, kde-format
 msgid "Never Played"
 msgstr "從未播放"
 
-#: src/widgets/TracksView.qml:126
+#: src/widgets/TracksView.qml:121
 #, kde-format
 msgid "Give these tracks a first listen."
 msgstr "聽聽看這些音軌吧。"
 
-#: src/widgets/TracksView.qml:143
+#: src/widgets/TracksView.qml:138
 #, kde-format
 msgid "Classics"
 msgstr "經典"
 
-#: src/widgets/TracksView.qml:144
+#: src/widgets/TracksView.qml:139
 #, kde-format
 msgid "Oldest released tracks from your collection."
 msgstr "您的收藏中發行時間最久以前的音軌。"
 
-#: src/widgets/TracksView.qml:180
+#: src/widgets/TracksView.qml:175
 #, kde-format
 msgid "Open file"
 msgstr "開啟檔案"
