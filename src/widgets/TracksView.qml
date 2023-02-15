@@ -71,10 +71,7 @@ StackView
 
                 TracksGroup
                 {
-
                     width: parent.width
-
-                    orientation: Qt.Vertical
                     title: i18n("Popular Tracks")
                     description: i18n("Play them again.")
                     list.query: Q.GET.mostPlayedTracks
@@ -93,7 +90,6 @@ StackView
                     {
                         id: _recentGroup
                         list.query: Q.GET.recentTracks
-                        orientation: Qt.Vertical
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.row: 0
@@ -184,7 +180,7 @@ StackView
 
             //            list.query: Q.GET.allTracks
 
-
+            headBar.visible: true
             headBar.leftContent: ToolButton
             {
                 icon.name: "go-previous"

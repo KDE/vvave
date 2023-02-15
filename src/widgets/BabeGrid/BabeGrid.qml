@@ -59,8 +59,6 @@ Maui.AltBrowser
 
     gridView.itemSize: 140
     gridView.itemHeight: 180
-    gridView.cacheBuffer: height * 5
-    listView.cacheBuffer: height * 5
     holder.visible: count === 0
 
     property string typingQuery
