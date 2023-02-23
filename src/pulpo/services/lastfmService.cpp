@@ -238,8 +238,8 @@ void lastfm::parseAlbum(const QByteArray &array)
                 if (this->request.info.contains(INFO::TAGS)) {
                     auto tagsList = n.toElement().childNodes();
                     QStringList albumTags;
-                    for (int i = 0; i < tagsList.count(); i++) {
-                        QDomNode m = tagsList.item(i);
+                    for (int j = 0; j < tagsList.count(); j++) {
+                        QDomNode m = tagsList.item(j);
                         albumTags << m.childNodes().item(0).toElement().text();
                     }
 
