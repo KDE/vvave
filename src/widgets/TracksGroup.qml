@@ -150,9 +150,6 @@ Maui.SectionGroup
         scrollView.orientation: control.orientation
         adaptContent: control.orientation ===  Qt.Horizontal ? false : true
 
-        verticalScrollBarPolicy: ScrollBar.AlwaysOff
-        horizontalScrollBarPolicy:  ScrollBar.AsNeeded
-
         model: Maui.BaseModel
         {
             id: _listModel

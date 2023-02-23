@@ -77,7 +77,6 @@ StackView
                     list.query: Q.GET.mostPlayedTracks
                 }
 
-
                 GridLayout
                 {
                     width: parent.width
