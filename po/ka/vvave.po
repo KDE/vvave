@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 00:57+0000\n"
+"POT-Creation-Date: 2023-02-23 00:57+0000\n"
 "PO-Revision-Date: 2023-02-03 16:24+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -96,7 +96,7 @@ msgstr "ალბომები"
 msgid "No Albums!"
 msgstr "ალბომების გარეშე!"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:160
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:159
 #, kde-format
 msgid "Add new music sources"
 msgstr "მუსიკის ახალი წყაროს დამაება"
@@ -135,7 +135,7 @@ msgid "Playing music"
 msgstr "მიმდინარეობს დაკვრა"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:165
+#: src/widgets/TracksView.qml:164
 #, kde-format
 msgid "Add sources"
 msgstr "წყაროების დამატება"
@@ -283,7 +283,7 @@ msgstr "საქაღალდეების გარეშე!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "დაამატეთ ახალი მუსიკა თქვენს წყაროებში, საქაღალდეებში მოძებნით"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:159
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:158
 #, kde-format
 msgid "No Tracks!"
 msgstr "ტრეკების გარეშე!"
@@ -562,42 +562,42 @@ msgstr "პოპულარული ტრეკები"
 msgid "Play them again."
 msgstr "თავიდან დაკვრა."
 
-#: src/widgets/TracksView.qml:99
+#: src/widgets/TracksView.qml:98
 #, kde-format
 msgid "Recent Tracks"
 msgstr "უახლესი ტრეკები"
 
-#: src/widgets/TracksView.qml:100
+#: src/widgets/TracksView.qml:99
 #, kde-format
 msgid "Recently played."
 msgstr "ახლახანს დაკრული."
 
-#: src/widgets/TracksView.qml:104 src/widgets/TracksView.qml:123
+#: src/widgets/TracksView.qml:103 src/widgets/TracksView.qml:122
 #, kde-format
 msgid "More"
 msgstr "მეტი"
 
-#: src/widgets/TracksView.qml:116
+#: src/widgets/TracksView.qml:115
 #, kde-format
 msgid "Never Played"
 msgstr "არასდროს-დაკრული"
 
-#: src/widgets/TracksView.qml:117
+#: src/widgets/TracksView.qml:116
 #, kde-format
 msgid "Give these tracks a first listen."
 msgstr "ამ ტრეკების პირველი მოსმენა."
 
-#: src/widgets/TracksView.qml:134
+#: src/widgets/TracksView.qml:133
 #, kde-format
 msgid "Classics"
 msgstr "კლასიკა"
 
-#: src/widgets/TracksView.qml:135
+#: src/widgets/TracksView.qml:134
 #, kde-format
 msgid "Oldest released tracks from your collection."
 msgstr "უძველესი ტრეკები თქვენი კოლექციიდან."
 
-#: src/widgets/TracksView.qml:171
+#: src/widgets/TracksView.qml:170
 #, kde-format
 msgid "Open file"
 msgstr "ფაილის გახსნა"
