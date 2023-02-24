@@ -137,11 +137,7 @@ StackView
                     }
                 }
             }
-
         }
-
-
-
     }
 
 
@@ -208,4 +204,8 @@ StackView
         control.currentItem.group = true
     }
 
+    function getFilterField() : Item
+    {
+        return _searchField
+    }
 }

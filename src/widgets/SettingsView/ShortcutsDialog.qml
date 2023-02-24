@@ -2,11 +2,11 @@ import QtQuick 2.14
 import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.3
 
-import org.mauikit.controls 1.2 as Maui
+import org.mauikit.controls 1.3 as Maui
 
 import org.maui.vvave 1.0
 
-Maui.SettingsDialog
+Maui.Dialog
 {
 
     id: control
@@ -14,13 +14,15 @@ Maui.SettingsDialog
     persistent: false
     page.showTitle: false
     headBar.visible: false
+    defaultButtons: false
     maxHeight: 500 // Copied from Nota. I don't like hardcoded layout, though.
     maxWidth: 350
 
     Component
     {
         id: _shortcutCategoryComponent
-        Maui.SectionGroup {
+        Maui.SectionGroup
+        {
             title: i18n("Unknown")
             function setTitle(rawtext: string) : undefined
             {
@@ -93,6 +95,7 @@ Maui.SettingsDialog
 
         for (let category of categories) {
             let section = _shortcutCategoryComponent.createObject(control)
+            console.log("Trying ot push to scollable")
             scrollable.push(section)
             section.setTitle(category)
             for (let shortcut of category_shortcuts[category]) {
