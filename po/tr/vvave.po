@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-23 00:57+0000\n"
+"POT-Creation-Date: 2023-02-25 00:59+0000\n"
 "PO-Revision-Date: 2023-01-27 18:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -94,7 +94,7 @@ msgstr "Albümler"
 msgid "No Albums!"
 msgstr "Albüm Yok!"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:159
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:155
 #, kde-format
 msgid "Add new music sources"
 msgstr "Yeni müzik kaynakları ekle"
@@ -133,7 +133,7 @@ msgid "Playing music"
 msgstr "Müzik çalınıyor"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:164
+#: src/widgets/TracksView.qml:160
 #, kde-format
 msgid "Add sources"
 msgstr "Kaynak ekle"
@@ -282,7 +282,7 @@ msgstr "Klasör Yok!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Klasörleri tarayarak kaynaklarınıza müzik ekleyin"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:158
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:154
 #, kde-format
 msgid "No Tracks!"
 msgstr "Parça Yok!"
@@ -526,8 +526,8 @@ msgstr "Ekle"
 msgid "Scan now"
 msgstr "Şimdi Tara"
 
-#: src/widgets/SettingsView/ShortcutsDialog.qml:24
-#: src/widgets/SettingsView/ShortcutsDialog.qml:37
+#: src/widgets/SettingsView/ShortcutsDialog.qml:26
+#: src/widgets/SettingsView/ShortcutsDialog.qml:39
 #, kde-format
 msgid "Unknown"
 msgstr "Bilinmiyor"
@@ -597,7 +597,7 @@ msgstr "Klasikler"
 msgid "Oldest released tracks from your collection."
 msgstr "Koleksiyonunuzdaki en eski tarihli parçalar."
 
-#: src/widgets/TracksView.qml:170
+#: src/widgets/TracksView.qml:166
 #, kde-format
 msgid "Open file"
 msgstr "Dosya Aç"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-23 00:57+0000\n"
+"POT-Creation-Date: 2023-02-25 00:59+0000\n"
 "PO-Revision-Date: 2023-01-31 13:14+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -93,7 +93,7 @@ msgstr "Alba"
 msgid "No Albums!"
 msgstr ""
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:159
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:155
 #, kde-format
 msgid "Add new music sources"
 msgstr ""
@@ -132,7 +132,7 @@ msgid "Playing music"
 msgstr "Přehrávám hudbu"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:164
+#: src/widgets/TracksView.qml:160
 #, kde-format
 msgid "Add sources"
 msgstr "Přidat zdroje"
@@ -278,7 +278,7 @@ msgstr "Žádné složky!"
 msgid "Add new music to your sources to browse by folders"
 msgstr ""
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:158
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:154
 #, kde-format
 msgid "No Tracks!"
 msgstr "Žádné skladby!"
@@ -407,7 +407,7 @@ msgstr "Přijmout"
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
-msgstr ""
+msgstr "Opravdu si přejete odstranit tuto značku? Tento krok nejde vrátit."
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
@@ -517,8 +517,8 @@ msgstr "Přidat"
 msgid "Scan now"
 msgstr "Prozkoumat nyní"
 
-#: src/widgets/SettingsView/ShortcutsDialog.qml:24
-#: src/widgets/SettingsView/ShortcutsDialog.qml:37
+#: src/widgets/SettingsView/ShortcutsDialog.qml:26
+#: src/widgets/SettingsView/ShortcutsDialog.qml:39
 #, kde-format
 msgid "Unknown"
 msgstr "Neznámý"
@@ -588,7 +588,7 @@ msgstr "Vážná hudba"
 msgid "Oldest released tracks from your collection."
 msgstr "Nejstarší vydané skladby z vaší sbírky."
 
-#: src/widgets/TracksView.qml:170
+#: src/widgets/TracksView.qml:166
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-23 00:57+0000\n"
+"POT-Creation-Date: 2023-02-25 00:59+0000\n"
 "PO-Revision-Date: 2023-01-29 11:01+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -92,7 +92,7 @@ msgstr "Albums"
 msgid "No Albums!"
 msgstr "Aucun album !"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:159
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:155
 #, kde-format
 msgid "Add new music sources"
 msgstr "Ajouter de nouvelles sources de musiques"
@@ -131,7 +131,7 @@ msgid "Playing music"
 msgstr "Lecture de musique"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:164
+#: src/widgets/TracksView.qml:160
 #, kde-format
 msgid "Add sources"
 msgstr "Ajouter des sources"
@@ -281,7 +281,7 @@ msgid "Add new music to your sources to browse by folders"
 msgstr ""
 "Ajouter de nouvelles musiques à votre source pour parcourir les dossiers"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:158
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:154
 #, kde-format
 msgid "No Tracks!"
 msgstr "Aucune piste !"
@@ -527,8 +527,8 @@ msgstr "Ajouter"
 msgid "Scan now"
 msgstr "Analyser maintenant"
 
-#: src/widgets/SettingsView/ShortcutsDialog.qml:24
-#: src/widgets/SettingsView/ShortcutsDialog.qml:37
+#: src/widgets/SettingsView/ShortcutsDialog.qml:26
+#: src/widgets/SettingsView/ShortcutsDialog.qml:39
 #, kde-format
 msgid "Unknown"
 msgstr "Inconnu"
@@ -598,7 +598,7 @@ msgstr "Classique"
 msgid "Oldest released tracks from your collection."
 msgstr "Morceaux les plus anciens de votre collection."
 
-#: src/widgets/TracksView.qml:170
+#: src/widgets/TracksView.qml:166
 #, kde-format
 msgid "Open file"
 msgstr "Ouvrir un fichier"
