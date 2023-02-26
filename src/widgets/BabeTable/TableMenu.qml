@@ -68,7 +68,7 @@ Maui.ContextualMenu
 
     MenuItem
     {
-        text: i18n("Select...")
+        text: i18n("Select")
         icon.name: "item-select"
         onTriggered:
         {
@@ -81,7 +81,7 @@ Maui.ContextualMenu
 
     MenuItem
     {
-        text: i18n("Play next")
+        text: i18n("Play Next")
         icon.name: "view-media-recent"
         onTriggered:
         {
@@ -106,7 +106,7 @@ Maui.ContextualMenu
 
     MenuItem
     {
-        text: i18n("Show in folder")
+        text: i18n("Show in Folder")
         icon.name: "folder-open"
         enabled: !Maui.Handy.isAndroid
         onTriggered:

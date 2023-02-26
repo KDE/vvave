@@ -95,7 +95,7 @@ Maui.SettingsDialog
         Maui.SectionItem
         {
             label1.text: i18n("Focus View")
-            label2.text: i18n("Make the focus view the default")
+            label2.text: i18n("Make the focus view the default.")
 
             Switch
             {
