@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 00:59+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2023-02-15 15:21+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -218,18 +218,21 @@ msgid "Share"
 msgstr "Partilhar"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, kde-format
-msgid "Select..."
+#, fuzzy, kde-format
+#| msgid "Select..."
+msgid "Select"
 msgstr "Seleccionar..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, kde-format
-msgid "Play next"
+#, fuzzy, kde-format
+#| msgid "Play next"
+msgid "Play Next"
 msgstr "Tocar o seguinte"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, kde-format
-msgid "Show in folder"
+#, fuzzy, kde-format
+#| msgid "Show in folder"
+msgid "Show in Folder"
 msgstr "Mostrar na pasta"
 
 #: src/widgets/CloudView/CloudView.qml:65
@@ -486,8 +489,9 @@ msgid "Focus View"
 msgstr "Focar a Janela"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
-#, kde-format
-msgid "Make the focus view the default"
+#, fuzzy, kde-format
+#| msgid "Make the focus view the default"
+msgid "Make the focus view the default."
 msgstr "Colocar a janela em primeiro plano"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114

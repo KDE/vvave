@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 00:59+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2023-01-27 11:59+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -217,18 +217,21 @@ msgid "Share"
 msgstr "Compartix"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, kde-format
-msgid "Select..."
+#, fuzzy, kde-format
+#| msgid "Select..."
+msgid "Select"
 msgstr "Selecciona..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, kde-format
-msgid "Play next"
+#, fuzzy, kde-format
+#| msgid "Play next"
+msgid "Play Next"
 msgstr "Reproduïx la següent"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, kde-format
-msgid "Show in folder"
+#, fuzzy, kde-format
+#| msgid "Show in folder"
+msgid "Show in Folder"
 msgstr "Mostra en la carpeta"
 
 #: src/widgets/CloudView/CloudView.qml:65
@@ -484,8 +487,9 @@ msgid "Focus View"
 msgstr "Vista de focus"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
-#, kde-format
-msgid "Make the focus view the default"
+#, fuzzy, kde-format
+#| msgid "Make the focus view the default"
+msgid "Make the focus view the default."
 msgstr "Convertix la vista de focus en la predeterminada"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114

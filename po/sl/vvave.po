@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 00:59+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2023-02-25 09:26+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
-"%100<=4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #: src/main.cpp:102
@@ -219,18 +219,21 @@ msgid "Share"
 msgstr "Deli"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, kde-format
-msgid "Select..."
+#, fuzzy, kde-format
+#| msgid "Select..."
+msgid "Select"
 msgstr "Izberi..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, kde-format
-msgid "Play next"
+#, fuzzy, kde-format
+#| msgid "Play next"
+msgid "Play Next"
 msgstr "Predvajaj naslednje"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, kde-format
-msgid "Show in folder"
+#, fuzzy, kde-format
+#| msgid "Show in folder"
+msgid "Show in Folder"
 msgstr "Prikaži v mapi"
 
 #: src/widgets/CloudView/CloudView.qml:65
@@ -487,8 +490,9 @@ msgid "Focus View"
 msgstr "Osredotočeni pogled"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
-#, kde-format
-msgid "Make the focus view the default"
+#, fuzzy, kde-format
+#| msgid "Make the focus view the default"
+msgid "Make the focus view the default."
 msgstr "Postavi osredotočeni pogled za privzetega"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114

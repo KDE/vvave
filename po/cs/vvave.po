@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 00:59+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2023-01-31 13:14+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -213,18 +213,21 @@ msgid "Share"
 msgstr "Sdílet"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, kde-format
-msgid "Select..."
+#, fuzzy, kde-format
+#| msgid "Select..."
+msgid "Select"
 msgstr "Vybrat..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, kde-format
-msgid "Play next"
+#, fuzzy, kde-format
+#| msgid "Play next"
+msgid "Play Next"
 msgstr "Přehrát následující"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, kde-format
-msgid "Show in folder"
+#, fuzzy, kde-format
+#| msgid "Show in folder"
+msgid "Show in Folder"
 msgstr "Zobrazit ve složce"
 
 #: src/widgets/CloudView/CloudView.qml:65
@@ -474,7 +477,7 @@ msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
 #, kde-format
-msgid "Make the focus view the default"
+msgid "Make the focus view the default."
 msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114

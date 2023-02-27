@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 00:59+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2023-01-27 18:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -215,18 +215,21 @@ msgid "Share"
 msgstr "Paylaş"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, kde-format
-msgid "Select..."
+#, fuzzy, kde-format
+#| msgid "Select..."
+msgid "Select"
 msgstr "Seç..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, kde-format
-msgid "Play next"
+#, fuzzy, kde-format
+#| msgid "Play next"
+msgid "Play Next"
 msgstr "Sonrakini çal"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, kde-format
-msgid "Show in folder"
+#, fuzzy, kde-format
+#| msgid "Show in folder"
+msgid "Show in Folder"
 msgstr "Klasörde göster"
 
 #: src/widgets/CloudView/CloudView.qml:65
@@ -482,8 +485,9 @@ msgid "Focus View"
 msgstr "Odak Görünümü"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
-#, kde-format
-msgid "Make the focus view the default"
+#, fuzzy, kde-format
+#| msgid "Make the focus view the default"
+msgid "Make the focus view the default."
 msgstr "Odak görünümünü öntanımlı görünüm yap"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114

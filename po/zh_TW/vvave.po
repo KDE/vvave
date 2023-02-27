@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-25 00:59+0000\n"
+"POT-Creation-Date: 2023-02-27 00:59+0000\n"
 "PO-Revision-Date: 2023-02-09 01:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -211,18 +211,21 @@ msgid "Share"
 msgstr "分享"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, kde-format
-msgid "Select..."
+#, fuzzy, kde-format
+#| msgid "Select..."
+msgid "Select"
 msgstr "選擇…"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, kde-format
-msgid "Play next"
+#, fuzzy, kde-format
+#| msgid "Play next"
+msgid "Play Next"
 msgstr "播放下一個"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, kde-format
-msgid "Show in folder"
+#, fuzzy, kde-format
+#| msgid "Show in folder"
+msgid "Show in Folder"
 msgstr "在資料夾顯示"
 
 #: src/widgets/CloudView/CloudView.qml:65
@@ -473,8 +476,9 @@ msgid "Focus View"
 msgstr "專注檢視"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
-#, kde-format
-msgid "Make the focus view the default"
+#, fuzzy, kde-format
+#| msgid "Make the focus view the default"
+msgid "Make the focus view the default."
 msgstr "將專注檢視設為預設"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114
