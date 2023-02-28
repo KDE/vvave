@@ -167,6 +167,9 @@
   </recommends>
   <project_group>KDE</project_group>
   <releases>
+    <release version="2.2.2" date="2023-02-28">
+      <url>https://mauikit.org/blog/maui-project-release-report-1/</url>
+    </release>
     <release version="2.2.1" date="2022-11-25">
       <url>https://mauikit.org/blog/maui-2-2-1-release/</url>
     </release>
