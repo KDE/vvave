@@ -224,10 +224,9 @@ msgid "Select"
 msgstr "Seleccionar..."
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play next"
+#, kde-format
 msgid "Play Next"
-msgstr "Tocar o seguinte"
+msgstr "Reproduzir o Seguinte"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, fuzzy, kde-format

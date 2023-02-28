@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2023-01-31 13:14+0100\n"
+"PO-Revision-Date: 2023-02-27 14:44+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -213,20 +213,17 @@ msgid "Share"
 msgstr "Sdílet"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, fuzzy, kde-format
-#| msgid "Select..."
+#, kde-format
 msgid "Select"
-msgstr "Vybrat..."
+msgstr "Vybrat"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play next"
+#, kde-format
 msgid "Play Next"
 msgstr "Přehrát následující"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, fuzzy, kde-format
-#| msgid "Show in folder"
+#, kde-format
 msgid "Show in Folder"
 msgstr "Zobrazit ve složce"
 

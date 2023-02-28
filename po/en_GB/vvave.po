@@ -1,15 +1,15 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# Steve Allewell <steve.allewell@gmail.com>, 2022.
+# Steve Allewell <steve.allewell@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2022-12-31 17:32+0000\n"
+"PO-Revision-Date: 2023-02-27 20:33+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: English <kde-l10n-en_gb@kde.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -146,9 +146,7 @@ msgstr "This list is empty"
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
-#, fuzzy, kde-format
-#| msgid "Filter"
-#| msgid_plural "Filter %1 folders"
+#, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "Filter"
@@ -217,22 +215,19 @@ msgid "Share"
 msgstr "Share"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, fuzzy, kde-format
-#| msgid "Select..."
+#, kde-format
 msgid "Select"
-msgstr "Select..."
+msgstr "Select"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play next"
+#, kde-format
 msgid "Play Next"
-msgstr "Play next"
+msgstr "Play Next"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, fuzzy, kde-format
-#| msgid "Show in folder"
+#, kde-format
 msgid "Show in Folder"
-msgstr "Show in folder"
+msgstr "Show in Folder"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
@@ -274,8 +269,8 @@ msgstr "Start putting together your playlist."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filter %1 folder"
+msgstr[1] "Filter %1 folders"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
@@ -486,10 +481,9 @@ msgid "Focus View"
 msgstr "Focus View"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
-#, fuzzy, kde-format
-#| msgid "Make the focus view the default"
+#, kde-format
 msgid "Make the focus view the default."
-msgstr "Make the focus view the default"
+msgstr "Make the focus view the default."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
@@ -502,15 +496,14 @@ msgid "Switch between light and dark colorscheme."
 msgstr "Switch between light and dark colour scheme."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
-#, fuzzy, kde-format
-#| msgid "Fetch Artwork"
+#, kde-format
 msgid "Artwork"
-msgstr "Fetch Artwork"
+msgstr "Artwork"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "Show the cover artwork for the tracks."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
@@ -541,22 +534,22 @@ msgstr "Unknown"
 #: src/widgets/TracksView.qml:28
 #, kde-format
 msgid "Search collection"
-msgstr ""
+msgstr "Search collection"
 
 #: src/widgets/TracksView.qml:48
 #, kde-format
 msgid "Your Collection"
-msgstr ""
+msgstr "Your Collection"
 
 #: src/widgets/TracksView.qml:49
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Random tracks from your collection."
 
 #: src/widgets/TracksView.qml:55
 #, kde-format
 msgid "View All"
-msgstr ""
+msgstr "View All"
 
 #: src/widgets/TracksView.qml:75
 #, kde-format
@@ -569,41 +562,39 @@ msgid "Play them again."
 msgstr "Play them again."
 
 #: src/widgets/TracksView.qml:98
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Recent Tracks"
-msgstr "Remove track"
+msgstr "Recent Tracks"
 
 #: src/widgets/TracksView.qml:99
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "Recently played."
-msgstr "Recent playlists"
+msgstr "Recently played."
 
 #: src/widgets/TracksView.qml:103 src/widgets/TracksView.qml:122
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "More"
 
 #: src/widgets/TracksView.qml:115
 #, kde-format
 msgid "Never Played"
-msgstr ""
+msgstr "Never Played"
 
 #: src/widgets/TracksView.qml:116
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Give these tracks a first listen."
 
 #: src/widgets/TracksView.qml:133
 #, kde-format
 msgid "Classics"
-msgstr ""
+msgstr "Classics"
 
 #: src/widgets/TracksView.qml:134
 #, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr ""
+msgstr "Oldest released tracks from your collection."
 
 #: src/widgets/TracksView.qml:166
 #, kde-format
