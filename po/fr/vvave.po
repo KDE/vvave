@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2023-01-29 11:01+0100\n"
+"PO-Revision-Date: 2023-02-27 19:17+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -213,20 +213,17 @@ msgid "Share"
 msgstr "Partager"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, fuzzy, kde-format
-#| msgid "Select..."
+#, kde-format
 msgid "Select"
-msgstr "Sélectionner..."
+msgstr "Sélectionner"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play next"
+#, kde-format
 msgid "Play Next"
 msgstr "Lire le morceau suivant"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, fuzzy, kde-format
-#| msgid "Show in folder"
+#, kde-format
 msgid "Show in Folder"
 msgstr "Afficher dans un dossier"
 
@@ -486,10 +483,9 @@ msgid "Focus View"
 msgstr "Vue en Focalisation"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
-#, fuzzy, kde-format
-#| msgid "Make the focus view the default"
+#, kde-format
 msgid "Make the focus view the default."
-msgstr "Faire de la vue en Focalisation, la vue par défaut"
+msgstr "Faire de la vue « Focalisation » par défaut"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
