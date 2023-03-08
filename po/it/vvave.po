@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2023-01-29 08:38+0100\n"
+"PO-Revision-Date: 2023-03-05 16:12+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -216,20 +216,17 @@ msgid "Share"
 msgstr "Condividi"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
-#, fuzzy, kde-format
-#| msgid "Select..."
+#, kde-format
 msgid "Select"
-msgstr "Seleziona..."
+msgstr "Seleziona"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
-#, fuzzy, kde-format
-#| msgid "Play next"
+#, kde-format
 msgid "Play Next"
 msgstr "Riproduci successivo"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
-#, fuzzy, kde-format
-#| msgid "Show in folder"
+#, kde-format
 msgid "Show in Folder"
 msgstr "Mostra nella cartella"
 
@@ -487,10 +484,9 @@ msgid "Focus View"
 msgstr "Vista centrale"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:98
-#, fuzzy, kde-format
-#| msgid "Make the focus view the default"
+#, kde-format
 msgid "Make the focus view the default."
-msgstr "Reni predefinita la vista centrale"
+msgstr "Rendi predefinita la vista attiva."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
