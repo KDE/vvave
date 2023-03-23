@@ -1,28 +1,26 @@
-# German translations for vvave package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
 #
-# Automatically generated, 2022.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2023-03-12 17:19+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
-"Language-Team: German <kde-i18n-de@kde.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2023-03-22 17:45-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.07.70\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "Vvave"
-msgstr ""
+msgstr "Vvave"
 
 #: src/main.cpp:102
 #, kde-format
@@ -32,119 +30,117 @@ msgstr ""
 #: src/main.cpp:102
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
-msgstr "Copyright © 2019-%1 Maui-Entwicklerteam"
+msgstr ""
 
 #: src/main.cpp:104 src/main.cpp:105
 #, kde-format
 msgid "Developer"
-msgstr "Entwickler"
+msgstr "Desenvolvedor"
 
 #: src/main.qml:272
 #, kde-format
 msgid "Missing file"
-msgstr "Fehlende Datei"
+msgstr ""
 
 #: src/main.qml:334
 #, kde-format
 msgid "Remove %1 tracks"
-msgstr "%1 Stücke entfernen"
+msgstr ""
 
 #: src/main.qml:335
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
-"Möchten Sie diese Dateien wirklich löschen? Diese Aktion kann nicht "
-"rückgängig gemacht werden."
 
 #: src/main.qml:337 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
-msgstr "Löschen"
+msgstr "Excluir"
 
 #: src/main.qml:338 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Cancelar"
 
 #: src/main.qml:508 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr "Kurzbefehle"
+msgstr "Atalhos"
 
 #: src/main.qml:515
 #, kde-format
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "Configurações"
 
 #: src/main.qml:522
 #, kde-format
 msgid "About"
-msgstr "Über"
+msgstr "Sobre"
 
 #: src/main.qml:555
 #, kde-format
 msgid "Songs"
-msgstr "Songs"
+msgstr "Músicas"
 
 #: src/main.qml:574 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Albums"
-msgstr "Alben"
+msgstr "Álbuns"
 
 #: src/main.qml:581
 #, kde-format
 msgid "No Albums!"
-msgstr "Keine Alben!"
+msgstr ""
 
 #: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:155
 #, kde-format
 msgid "Add new music sources"
-msgstr "Neue Musikquellen hinzufügen"
+msgstr ""
 
 #: src/main.qml:598 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Artists"
-msgstr "Interpreten"
+msgstr "Artistas"
 
 #: src/main.qml:605
 #, kde-format
 msgid "No Artists!"
-msgstr "Keine Interpreten!"
+msgstr ""
 
 #: src/main.qml:622 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
-msgstr "Stichwörter"
+msgstr "Etiquetas"
 
 #: src/main.qml:629
 #, kde-format
 msgid "Folders"
-msgstr "Ordner"
+msgstr "Pastas"
 
 #: src/main.qml:637
 #, kde-format
 msgid "Cloud"
-msgstr "Cloud"
+msgstr "Nuvem"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr "Musik-Wiedergabe"
+msgstr "Reproduzindo música"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
 #: src/widgets/TracksView.qml:160
 #, kde-format
 msgid "Add sources"
-msgstr "Quellen hinzufügen"
+msgstr ""
 
 #: src/widgets/AlbumsView.qml:56
 #, kde-format
 msgid "This list is empty"
-msgstr "Diese Liste ist leer"
+msgstr ""
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
@@ -152,23 +148,23 @@ msgstr "Diese Liste ist leer"
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtrar"
+msgstr[1] "Filtrar %1 álbuns"
 
 #: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
 #, kde-format
 msgid "Play All"
-msgstr "Alles abspielen"
+msgstr ""
 
 #: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:54
 #, kde-format
 msgid "Append All"
-msgstr "Alles anhängen"
+msgstr ""
 
 #: src/widgets/BabeTable/BabeTable.qml:139
 #, kde-format
 msgid "Remove track"
-msgstr "Stück entfernen"
+msgstr ""
 
 #: src/widgets/BabeTable/BabeTable.qml:140
 #, kde-format
@@ -182,7 +178,7 @@ msgstr ""
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
-msgstr "Entfernen"
+msgstr "Excluir"
 
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
@@ -197,43 +193,43 @@ msgstr ""
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "Fav it"
-msgstr ""
+msgstr "Favoritar"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "UnFav it"
-msgstr ""
+msgstr "Desfavoritar"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
 #, kde-format
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Editar"
 
 #: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
 #, kde-format
 msgid "Share"
-msgstr "Teilen"
+msgstr "Compartilhar"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
 #, kde-format
 msgid "Select"
-msgstr "Auswählen"
+msgstr "Selecionar"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
 #, kde-format
 msgid "Play Next"
-msgstr "Nächste wiedergeben"
+msgstr "Reproduzir próxima"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
 msgid "Show in Folder"
-msgstr "In Ordner anzeigen"
+msgstr "Mostrar na pasta"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
 msgid "Opps!"
-msgstr ""
+msgstr "Ops!"
 
 #: src/widgets/CloudView/CloudView.qml:66
 #, kde-format
@@ -246,12 +242,12 @@ msgstr ""
 #: src/widgets/FocusView.qml:146
 #, kde-format
 msgid "Find"
-msgstr "Suchen"
+msgstr "Localizar"
 
 #: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "No Results!"
-msgstr "Keine Ergebnisse"
+msgstr "Nenhum resultado!"
 
 #: src/widgets/FocusView.qml:191
 #, kde-format
@@ -267,13 +263,13 @@ msgstr ""
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] "%1 Ordner filtern"
-msgstr[1] "%1 Ordner filtern"
+msgstr[0] "Filtrar %1 pasta"
+msgstr[1] "Filtrar %1 pastas"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
 msgid "No Folders!"
-msgstr "Keine Ordner!"
+msgstr "Nenhuma pasta!"
 
 #: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
@@ -283,7 +279,7 @@ msgstr ""
 #: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:154
 #, kde-format
 msgid "No Tracks!"
-msgstr "Keine Stücke!"
+msgstr ""
 
 #: src/widgets/FoldersView/FoldersView.qml:135
 #, kde-format
@@ -308,7 +304,7 @@ msgstr ""
 #: src/widgets/MetadataDialog.qml:40
 #, kde-format
 msgid "Metadata"
-msgstr "Metadaten"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
@@ -318,42 +314,42 @@ msgstr ""
 #: src/widgets/MetadataDialog.qml:47
 #, kde-format
 msgid "Track Title"
-msgstr "Stück-Titel"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:61
 #, kde-format
 msgid "Artist"
-msgstr "Interpret"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:76
 #, kde-format
 msgid "Album"
-msgstr "Album"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:90
 #, kde-format
 msgid "Track"
-msgstr "Stück"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:104
 #, kde-format
 msgid "Genre"
-msgstr "Genre"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:118
 #, kde-format
 msgid "Year"
-msgstr "Jahr"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:132
 #, kde-format
 msgid "Comment"
-msgstr "Kommentar"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:145
 #, kde-format
 msgid "File Info"
-msgstr "Datei-Informationen"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:146
 #, kde-format
@@ -363,7 +359,7 @@ msgstr ""
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
 msgid "Toogle SideBar"
-msgstr "Seitenleiste umschalten"
+msgstr ""
 
 #: src/widgets/PlaybackBar.qml:56
 #, kde-format
@@ -373,22 +369,22 @@ msgstr ""
 #: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
-msgstr "Weiter"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:65
 #, kde-format
 msgid "Remove from playlist"
-msgstr "Aus Wiedergabeliste entfernen"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:94
 #, kde-format
 msgid "stars"
-msgstr "Sterne"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
 #, kde-format
 msgid "No Playlists!"
-msgstr "Keine Wiedergabelisten!"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
 #, kde-format
@@ -398,12 +394,12 @@ msgstr ""
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
 #, kde-format
 msgid "Remove '%1'"
-msgstr "„%1“ entfernen"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
 #, kde-format
 msgid "Accept"
-msgstr "Akzeptieren"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
 #, kde-format
@@ -414,27 +410,27 @@ msgstr ""
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr "Abspielen"
+msgstr ""
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
 msgid "Append"
-msgstr "Anhängen"
+msgstr ""
 
 #: src/widgets/SelectionBar.qml:66
 #, kde-format
 msgid "Queue"
-msgstr "Warteschlange"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
 #, kde-format
 msgid "Behaviour"
-msgstr "Verhalten"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
 msgid "Configure the app plugins and behavior."
-msgstr "Module und Verhalten der App einrichten."
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -462,7 +458,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Auto Resume"
-msgstr "Automatisch fortsetzen"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
@@ -482,17 +478,17 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
 msgid "Dark Mode"
-msgstr "Dunkler Modus"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Zwischen hellem und dunklem Farbschema umschalten."
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:131
 #, kde-format
 msgid "Artwork"
-msgstr "Grafikdesign"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
@@ -502,17 +498,17 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
 msgid "Sources"
-msgstr "Quellen"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:149
 #, kde-format
 msgid "Add or remove sources"
-msgstr "Quellen hinzufügen oder entfernen"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:192
 #, kde-format
 msgid "Add"
-msgstr "Hinzufügen"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:209
 #, kde-format
@@ -523,17 +519,17 @@ msgstr ""
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
 #, kde-format
 msgid "Unknown"
-msgstr "Unbekannt"
+msgstr ""
 
 #: src/widgets/TracksView.qml:28
 #, kde-format
 msgid "Search collection"
-msgstr "Sammlung durchsuchen"
+msgstr ""
 
 #: src/widgets/TracksView.qml:48
 #, kde-format
 msgid "Your Collection"
-msgstr "Ihre Sammlung"
+msgstr ""
 
 #: src/widgets/TracksView.qml:49
 #, kde-format
@@ -543,7 +539,7 @@ msgstr ""
 #: src/widgets/TracksView.qml:55
 #, kde-format
 msgid "View All"
-msgstr "Alle anzeigen"
+msgstr ""
 
 #: src/widgets/TracksView.qml:75
 #, kde-format
@@ -563,17 +559,17 @@ msgstr ""
 #: src/widgets/TracksView.qml:99
 #, kde-format
 msgid "Recently played."
-msgstr "Kürzlich gespielt."
+msgstr ""
 
 #: src/widgets/TracksView.qml:103 src/widgets/TracksView.qml:122
 #, kde-format
 msgid "More"
-msgstr "Mehr"
+msgstr ""
 
 #: src/widgets/TracksView.qml:115
 #, kde-format
 msgid "Never Played"
-msgstr "Nie gespielt"
+msgstr ""
 
 #: src/widgets/TracksView.qml:116
 #, kde-format
@@ -583,7 +579,7 @@ msgstr ""
 #: src/widgets/TracksView.qml:133
 #, kde-format
 msgid "Classics"
-msgstr "Klassiker"
+msgstr ""
 
 #: src/widgets/TracksView.qml:134
 #, kde-format
@@ -593,4 +589,4 @@ msgstr ""
 #: src/widgets/TracksView.qml:166
 #, kde-format
 msgid "Open file"
-msgstr "Datei öffnen"
+msgstr ""
