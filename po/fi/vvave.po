@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-27 00:59+0000\n"
-"PO-Revision-Date: 2023-01-18 17:00+0200\n"
+"PO-Revision-Date: 2023-03-11 22:27+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -214,17 +214,17 @@ msgstr "Jaa"
 #: src/widgets/BabeTable/TableMenu.qml:71
 #, kde-format
 msgid "Select"
-msgstr ""
+msgstr "Valitse"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
 #, kde-format
 msgid "Play Next"
-msgstr ""
+msgstr "Toista seuraava"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
 msgid "Show in Folder"
-msgstr ""
+msgstr "Näytä kansiossa"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
@@ -303,7 +303,7 @@ msgstr "Albumin tiedot"
 #: src/widgets/MainPlaylist/MainPlaylist.qml:133
 #, kde-format
 msgid "Syncing to "
-msgstr ""
+msgstr "Synkronoidaan → "
 
 #: src/widgets/MetadataDialog.qml:40
 #, kde-format
@@ -483,7 +483,7 @@ msgstr "Kohdistusnäkymä"
 #: src/widgets/SettingsView/SettingsDialog.qml:98
 #, kde-format
 msgid "Make the focus view the default."
-msgstr ""
+msgstr "Asettaa kohdistusnäkymän oletukseksi."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:114
 #, kde-format
@@ -498,12 +498,12 @@ msgstr "Vaihda vaalean ja tumman värimallin välillä."
 #: src/widgets/SettingsView/SettingsDialog.qml:131
 #, kde-format
 msgid "Artwork"
-msgstr ""
+msgstr "Kansikuva"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "Näitä kappaleille kansikuva."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:148
 #, kde-format
@@ -539,12 +539,12 @@ msgstr "Tarkista kokoelma"
 #: src/widgets/TracksView.qml:48
 #, kde-format
 msgid "Your Collection"
-msgstr ""
+msgstr "Kokoelma"
 
 #: src/widgets/TracksView.qml:49
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Sekalaisia kappaleita kokoelmasta."
 
 #: src/widgets/TracksView.qml:55
 #, kde-format
@@ -584,7 +584,7 @@ msgstr "Ei koskaan toistettu"
 #: src/widgets/TracksView.qml:116
 #, kde-format
 msgid "Give these tracks a first listen."
-msgstr ""
+msgstr "Koekuuntele nämä kappaleet."
 
 #: src/widgets/TracksView.qml:133
 #, kde-format
@@ -594,7 +594,7 @@ msgstr "Klassikot"
 #: src/widgets/TracksView.qml:134
 #, kde-format
 msgid "Oldest released tracks from your collection."
-msgstr ""
+msgstr "Kokoelman vanhimmat kappaleet."
 
 #: src/widgets/TracksView.qml:166
 #, kde-format
