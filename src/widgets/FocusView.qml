@@ -140,7 +140,7 @@ StackView
             headBar.background: null
             footBar.background: null
             footBar.forceCenterMiddleContent: root.isWide
-            footBar.middleContent: Maui.SearchField
+            footBar.middleContent: Maui.TextFieldPopup
             {
                 id: _filterField
                 placeholderText: i18n("Find")
@@ -148,79 +148,73 @@ StackView
                 Layout.maximumWidth: 500
                 Layout.fillWidth: true
                 clip: false
-
+                position: ToolBar.Footer
                 KeyNavigation.up: _list
                 KeyNavigation.down: _list
+                //                popup.height: Math.min(500,Math.max(_list.listBrowser.implicitHeight, 300))
+
+                Timer
+                {
+                    id: _typeTimer
+                    interval: 1700
+                    onTriggered:
+                    {
+                        _list.list.query = Q.GET.tracksWhere_.arg("t.title LIKE \"%"+_filterField.text+"%\" OR t.artist LIKE \"%"+_filterField.text+"%\" OR t.album LIKE \"%"+_filterField.text+"%\" OR t.genre LIKE \"%"+_filterField.text+"%\"")
+                    }
+                }
 
                 onTextChanged:
                 {
-                    if(text.length > 2)
-                    {
-                        _list.list.query = Q.GET.tracksWhere_.arg("t.title LIKE \"%"+text+"%\" OR t.artist LIKE \"%"+text+"%\" OR t.album LIKE \"%"+text+"%\" OR t.genre LIKE \"%"+text+"%\"")
-                        _results.open()
-                    }else
-                    {
-                        if(_results.visible)
-                        {
-                            _results.close()
-                        }
-                    }
+                    if(text.length == 0)
+                        return;
+
+                    _typeTimer.start()
                 }
 
-                Popup
+                onClosed: _filterField.clear()
+
+                BabeTable
                 {
-                    id: _results
-                    parent: control.footBar
-                    y: 0 - (height)
-                    x: 0
-                    width: parent.width
-                    height: Math.min(500,Math.max(_list.listBrowser.implicitHeight, 300))
+                    id: _list
+                    headBar.visible: false
+                    anchors.fill: parent
+                    coverArtVisible: settings.showArtwork
+                    clip: true
 
-                    onClosed: _filterField.clear()
+                    holder.emoji: "qrc:/assets/dialog-information.svg"
+                    holder.title : i18n("No Results!")
+                    holder.body: i18n("Try with something else")
 
-                    BabeTable
+                    onRowClicked:
                     {
-                        id: _list
-                        headBar.visible: false
-                        anchors.fill: parent
-                        coverArtVisible: settings.showArtwork
-                        clip: true
+                        Player.quickPlay(listModel.get(index))
+                        _filterField.close()
+                    }
 
-                        holder.emoji: "qrc:/assets/dialog-information.svg"
-                        holder.title : i18n("No Results!")
-                        holder.body: i18n("Try with something else")
+                    onAppendTrack:
+                    {
+                        Player.addTrack(listModel.get(index))
+                    }
 
-                        onRowClicked:
-                        {
-                            Player.quickPlay(listModel.get(index))
-                            _results.close()
-                        }
+                    onPlayAll:
+                    {
+                        Player.playAllModel(listModel.list)
+                        _filterField.close()
 
-                        onAppendTrack:
-                        {
-                            Player.addTrack(listModel.get(index))
-                        }
+                    }
 
-                        onPlayAll:
-                        {
-                            Player.playAllModel(listModel.list)
-                            _results.close()
+                    onAppendAll:
+                    {
+                        Player.appendAllModel(listModel.list)
+                        _filterField.close()
+                    }
 
-                        }
-
-                        onAppendAll:
-                        {
-                            Player.appendAllModel(listModel.list)
-                            _results.close()
-
-                        }
-
-                        onQueueTrack:
-                        {
-                            Player.queueTracks([listModel.get(index)], index)
-                        }
+                    onQueueTrack:
+                    {
+                        Player.queueTracks([listModel.get(index)], index)
                     }
                 }
+
             }
 
 
