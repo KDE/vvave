@@ -111,12 +111,9 @@ Maui.AltBrowser
     listDelegate: Maui.ListBrowserDelegate
     {
         width: ListView.view.width
-        // height: Maui.Style.rowHeight * 1.8
-
         isCurrentItem: ListView.isCurrentItem
 
         label1.text: model.playlist
-// label1.fontWeight: Font.DemiBold
 
         iconSource: model.icon
         iconVisible: true

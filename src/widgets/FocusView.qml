@@ -217,9 +217,7 @@ StackView
                         Player.queueTracks([listModel.get(index)], index)
                     }
                 }
-
             }
-
 
             Maui.Holder
             {
@@ -249,6 +247,7 @@ StackView
                     onLoaded: item.positionViewAtIndex(currentTrackIndex, ListView.Center)
                     sourceComponent: ListView
                     {
+                        id: _listView
                         implicitHeight: 300
 
                         orientation: ListView.Horizontal
@@ -272,11 +271,21 @@ StackView
                         keyNavigationEnabled: true
                         keyNavigationWraps : true
 
+                        Timer
+                        {
+                            id: _flickTimer
+                            interval: 700
+                            onTriggered:
+                            {
+                                var index = _listView.indexAt(_listView.contentX, _listView.contentY)
+                                if(index !== root.currentTrackIndex && index >= 0)
+                                    Player.playAt(index)
+                            }
+                        }
+
                         onMovementEnded:
                         {
-                            var index = indexAt(contentX, contentY)
-                            if(index !== root.currentTrackIndex && index >= 0)
-                                Player.playAt(index)
+                          _flickTimer.start()
                         }
 
                         delegate: ColumnLayout
@@ -533,7 +542,6 @@ StackView
                     }
                 }
 
-
                 ColumnLayout
                 {
                     Layout.fillWidth: true
@@ -597,7 +605,6 @@ StackView
                         onMoved: player.pos = (player.duration / 1000) * value
                     }
                 }
-
 
             }
         }
