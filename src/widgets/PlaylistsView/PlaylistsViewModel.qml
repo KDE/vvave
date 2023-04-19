@@ -111,19 +111,21 @@ Maui.AltBrowser
     listDelegate: Maui.ListBrowserDelegate
     {
         width: ListView.view.width
-        height: Maui.Style.rowHeight * 1.8
+        // height: Maui.Style.rowHeight * 1.8
 
         isCurrentItem: ListView.isCurrentItem
 
-        label1.font.bold: true
-        label1.font.weight: Font.Bold
         label1.text: model.playlist
-        label1.horizontalAlignment: Qt.AlignLeft
-        label2.horizontalAlignment: Qt.AlignLeft
-        iconSource: model.icon
+// label1.fontWeight: Font.DemiBold
 
-        template.iconComponent:  Maui.GalleryRollTemplate
+        iconSource: model.icon
+        iconVisible: true
+        iconSizeHint: Maui.Style.iconSizes.big
+
+        template.iconComponent: Maui.GalleryRollTemplate
         {
+            implicitHeight: Maui.Style.iconSizes.big
+            implicitWidth: Maui.Style.iconSizes.big
             orientation: Qt.Horizontal
             radius: Maui.Style.radiusV
             images: model.preview.split(",")
@@ -176,8 +178,6 @@ Maui.AltBrowser
             isCurrentItem: parent.GridView.isCurrentItem
             images: model.preview.split(",")
 
-            label1.font.bold: true
-            label1.font.weight: Font.Bold
             label1.text: model.playlist
             iconSource: model.icon
             template.labelSizeHint: 24
