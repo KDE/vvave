@@ -159,15 +159,18 @@ StackView
                     interval: 1700
                     onTriggered:
                     {
+                        if(_filterField.text.length == 0)
+                        {
+                            _list.list.clear()
+                            return;
+                        }
+
                         _list.list.query = Q.GET.tracksWhere_.arg("t.title LIKE \"%"+_filterField.text+"%\" OR t.artist LIKE \"%"+_filterField.text+"%\" OR t.album LIKE \"%"+_filterField.text+"%\" OR t.genre LIKE \"%"+_filterField.text+"%\"")
                     }
                 }
 
                 onTextChanged:
                 {
-                    if(text.length == 0)
-                        return;
-
                     _typeTimer.start()
                 }
 
