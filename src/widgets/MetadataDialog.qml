@@ -42,36 +42,33 @@ Maui.SettingsDialog
 
         Maui.SectionItem
         {
-            Layout.fillWidth: true
-
             label1.text: i18n("Track Title")
-
+columns: 1
             TextField
             {
                 id: _titleField
                 text: control.data.title
-                implicitWidth: parent.parent.width
+                Layout.fillWidth: true
             }
         }
 
         Maui.SectionItem
         {
-            Layout.fillWidth: true
-
             label1.text: i18n("Artist")
-
+            columns: 1
 
             TextField
             {
                 id: _artistField
                 text: control.data.artist
-                implicitWidth: parent.parent.width
+Layout.fillWidth: true
+
             }
         }
 
         Maui.SectionItem
         {
-            Layout.fillWidth: true
+            columns: 1
 
             label1.text: i18n("Album")
 
@@ -79,13 +76,14 @@ Maui.SettingsDialog
             {
                 id: _albumField
                 text: control.data.album
-                implicitWidth: parent.parent.width
+Layout.fillWidth: true
+
             }
         }
 
         Maui.SectionItem
         {
-            Layout.fillWidth: true
+            columns: 1
 
             label1.text: i18n("Track")
 
@@ -93,13 +91,14 @@ Maui.SettingsDialog
             {
                 id: _trackField
                 text: control.data.track
-                implicitWidth: parent.parent.width
+Layout.fillWidth: true
+
             }
         }
 
         Maui.SectionItem
         {
-            Layout.fillWidth: true
+            columns: 1
 
             label1.text: i18n("Genre")
 
@@ -107,13 +106,14 @@ Maui.SettingsDialog
             {
                 id: _genreField
                 text: control.data.genre
-                implicitWidth: parent.parent.width
+Layout.fillWidth: true
+
             }
         }
 
         Maui.SectionItem
         {
-            Layout.fillWidth: true
+            columns: 1
 
             label1.text: i18n("Year")
 
@@ -121,13 +121,14 @@ Maui.SettingsDialog
             {
                 id: _yearField
                 text: control.data.releasedate
-                implicitWidth: parent.parent.width
+Layout.fillWidth: true
+
             }
         }
 
         Maui.SectionItem
         {
-            Layout.fillWidth: true
+            columns: 1
 
             label1.text: i18n("Comment")
 
@@ -135,15 +136,9 @@ Maui.SettingsDialog
             {
                 id: _commentField
                 text: control.data.comment
-                implicitWidth: parent.parent.width
+Layout.fillWidth: true
+
             }
         }
     }
-
-    Maui.SectionGroup
-    {
-        title: i18n("File Info")
-        description: i18n("Local file info.")
-    }
-
 }
