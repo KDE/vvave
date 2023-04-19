@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-27 00:59+0000\n"
+"POT-Creation-Date: 2023-04-19 00:48+0000\n"
 "PO-Revision-Date: 2023-02-27 08:53+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -254,17 +254,17 @@ msgstr ""
 msgid "Find"
 msgstr "Знайти"
 
-#: src/widgets/FocusView.qml:190
+#: src/widgets/FocusView.qml:185
 #, kde-format
 msgid "No Results!"
 msgstr "Нічого не знайдено!"
 
-#: src/widgets/FocusView.qml:191
+#: src/widgets/FocusView.qml:186
 #, kde-format
 msgid "Try with something else"
 msgstr "Спробувати інше"
 
-#: src/widgets/FocusView.qml:233 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Почніть збирати ваш список відтворення."
