@@ -274,7 +274,7 @@ StackView
                         Timer
                         {
                             id: _flickTimer
-                            interval: 700
+                            interval: 1700
                             onTriggered:
                             {
                                 var index = _listView.indexAt(_listView.contentX, _listView.contentY)
