@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-19 00:48+0000\n"
+"POT-Creation-Date: 2023-04-20 00:47+0000\n"
 "PO-Revision-Date: 2023-02-27 06:30+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -251,17 +251,17 @@ msgstr ""
 msgid "Find"
 msgstr "მოძებნა"
 
-#: src/widgets/FocusView.qml:185
+#: src/widgets/FocusView.qml:188
 #, kde-format
 msgid "No Results!"
 msgstr "შედეგების გარეშე!"
 
-#: src/widgets/FocusView.qml:186
+#: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "Try with something else"
 msgstr "სცადეთ რამე სხვით"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "დაიწყეთ თქვენი დასაკრავი სიის აწყობა."
@@ -318,27 +318,27 @@ msgstr "მეტამონაცემები"
 msgid "Embedded metadata info."
 msgstr "ჩაშენებული მეტამონაცემები."
 
-#: src/widgets/MetadataDialog.qml:47
+#: src/widgets/MetadataDialog.qml:45
 #, kde-format
 msgid "Track Title"
 msgstr "აუდიობილიკი სახელი"
 
-#: src/widgets/MetadataDialog.qml:61
+#: src/widgets/MetadataDialog.qml:57
 #, kde-format
 msgid "Artist"
 msgstr "შემსრულებელი"
 
-#: src/widgets/MetadataDialog.qml:76
+#: src/widgets/MetadataDialog.qml:73
 #, kde-format
 msgid "Album"
 msgstr "ალბომი"
 
-#: src/widgets/MetadataDialog.qml:90
+#: src/widgets/MetadataDialog.qml:88
 #, kde-format
 msgid "Track"
 msgstr "ტრეკი"
 
-#: src/widgets/MetadataDialog.qml:104
+#: src/widgets/MetadataDialog.qml:103
 #, kde-format
 msgid "Genre"
 msgstr "ჟანრი"
@@ -348,20 +348,10 @@ msgstr "ჟანრი"
 msgid "Year"
 msgstr "წელი"
 
-#: src/widgets/MetadataDialog.qml:132
+#: src/widgets/MetadataDialog.qml:133
 #, kde-format
 msgid "Comment"
 msgstr "კომენტარი"
-
-#: src/widgets/MetadataDialog.qml:145
-#, kde-format
-msgid "File Info"
-msgstr "ფაილის ინფორმაცია"
-
-#: src/widgets/MetadataDialog.qml:146
-#, kde-format
-msgid "Local file info."
-msgstr "ლოკალური ფაილის ინფორმაცია."
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
@@ -601,6 +591,12 @@ msgstr "უძველესი ტრეკები თქვენი კო
 #, kde-format
 msgid "Open file"
 msgstr "ფაილის გახსნა"
+
+#~ msgid "File Info"
+#~ msgstr "ფაილის ინფორმაცია"
+
+#~ msgid "Local file info."
+#~ msgstr "ლოკალური ფაილის ინფორმაცია."
 
 #~ msgid "Dust off."
 #~ msgstr "მტვრის გადაყრა."

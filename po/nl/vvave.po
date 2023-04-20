@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-19 00:48+0000\n"
+"POT-Creation-Date: 2023-04-20 00:47+0000\n"
 "PO-Revision-Date: 2023-02-27 10:45+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -251,17 +251,17 @@ msgstr ""
 msgid "Find"
 msgstr "Zoeken"
 
-#: src/widgets/FocusView.qml:185
+#: src/widgets/FocusView.qml:188
 #, kde-format
 msgid "No Results!"
 msgstr "Geen resultaten!"
 
-#: src/widgets/FocusView.qml:186
+#: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "Try with something else"
 msgstr "Met iets anders proberen"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Begin met uw afspeellijst samen te stellen."
@@ -318,27 +318,27 @@ msgstr "Metagegevens"
 msgid "Embedded metadata info."
 msgstr "Ingebedde metagegevensinformatie."
 
-#: src/widgets/MetadataDialog.qml:47
+#: src/widgets/MetadataDialog.qml:45
 #, kde-format
 msgid "Track Title"
 msgstr "Tracktitel"
 
-#: src/widgets/MetadataDialog.qml:61
+#: src/widgets/MetadataDialog.qml:57
 #, kde-format
 msgid "Artist"
 msgstr "Artiest"
 
-#: src/widgets/MetadataDialog.qml:76
+#: src/widgets/MetadataDialog.qml:73
 #, kde-format
 msgid "Album"
 msgstr "Album"
 
-#: src/widgets/MetadataDialog.qml:90
+#: src/widgets/MetadataDialog.qml:88
 #, kde-format
 msgid "Track"
 msgstr "Track"
 
-#: src/widgets/MetadataDialog.qml:104
+#: src/widgets/MetadataDialog.qml:103
 #, kde-format
 msgid "Genre"
 msgstr "Genre"
@@ -348,20 +348,10 @@ msgstr "Genre"
 msgid "Year"
 msgstr "Jaar"
 
-#: src/widgets/MetadataDialog.qml:132
+#: src/widgets/MetadataDialog.qml:133
 #, kde-format
 msgid "Comment"
 msgstr "Toelichting"
-
-#: src/widgets/MetadataDialog.qml:145
-#, kde-format
-msgid "File Info"
-msgstr "Bestandsinformatie"
-
-#: src/widgets/MetadataDialog.qml:146
-#, kde-format
-msgid "Local file info."
-msgstr "Informatie over lokaal bestand."
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
@@ -602,6 +592,12 @@ msgstr "Oudste uitgegeven tracks uit uw verzameling."
 #, kde-format
 msgid "Open file"
 msgstr "Bestand openen"
+
+#~ msgid "File Info"
+#~ msgstr "Bestandsinformatie"
+
+#~ msgid "Local file info."
+#~ msgstr "Informatie over lokaal bestand."
 
 #~ msgid "Dust off."
 #~ msgstr "Afgestoft."

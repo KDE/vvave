@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-19 00:48+0000\n"
+"POT-Creation-Date: 2023-04-20 00:47+0000\n"
 "PO-Revision-Date: 2023-03-12 12:07+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -243,17 +243,17 @@ msgstr ""
 msgid "Find"
 msgstr "Nájsť"
 
-#: src/widgets/FocusView.qml:185
+#: src/widgets/FocusView.qml:188
 #, fuzzy, kde-format
 msgid "No Results!"
 msgstr "Žiadne výsledky"
 
-#: src/widgets/FocusView.qml:186
+#: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "Try with something else"
 msgstr ""
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr ""
@@ -311,27 +311,27 @@ msgstr "Metadáta"
 msgid "Embedded metadata info."
 msgstr ""
 
-#: src/widgets/MetadataDialog.qml:47
+#: src/widgets/MetadataDialog.qml:45
 #, kde-format
 msgid "Track Title"
 msgstr "Názov stopy"
 
-#: src/widgets/MetadataDialog.qml:61
+#: src/widgets/MetadataDialog.qml:57
 #, fuzzy, kde-format
 msgid "Artist"
 msgstr "Interpret"
 
-#: src/widgets/MetadataDialog.qml:76
+#: src/widgets/MetadataDialog.qml:73
 #, kde-format
 msgid "Album"
 msgstr "Album"
 
-#: src/widgets/MetadataDialog.qml:90
+#: src/widgets/MetadataDialog.qml:88
 #, fuzzy, kde-format
 msgid "Track"
 msgstr "Stopa"
 
-#: src/widgets/MetadataDialog.qml:104
+#: src/widgets/MetadataDialog.qml:103
 #, kde-format
 msgid "Genre"
 msgstr "Žáner"
@@ -341,20 +341,10 @@ msgstr "Žáner"
 msgid "Year"
 msgstr "Rok"
 
-#: src/widgets/MetadataDialog.qml:132
+#: src/widgets/MetadataDialog.qml:133
 #, fuzzy, kde-format
 msgid "Comment"
 msgstr "Komentár"
-
-#: src/widgets/MetadataDialog.qml:145
-#, fuzzy, kde-format
-msgid "File Info"
-msgstr "Informácie o súbore"
-
-#: src/widgets/MetadataDialog.qml:146
-#, kde-format
-msgid "Local file info."
-msgstr ""
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
@@ -590,3 +580,7 @@ msgstr ""
 #, kde-format
 msgid "Open file"
 msgstr "Otvoriť súbor"
+
+#, fuzzy
+#~ msgid "File Info"
+#~ msgstr "Informácie o súbore"

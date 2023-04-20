@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-19 00:48+0000\n"
+"POT-Creation-Date: 2023-04-20 00:47+0000\n"
 "PO-Revision-Date: 2023-02-27 14:44+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -245,17 +245,17 @@ msgstr ""
 msgid "Find"
 msgstr "Najít"
 
-#: src/widgets/FocusView.qml:185
+#: src/widgets/FocusView.qml:188
 #, kde-format
 msgid "No Results!"
 msgstr "Žádné výsledky."
 
-#: src/widgets/FocusView.qml:186
+#: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "Try with something else"
 msgstr ""
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr ""
@@ -313,27 +313,27 @@ msgstr "Metadata"
 msgid "Embedded metadata info."
 msgstr ""
 
-#: src/widgets/MetadataDialog.qml:47
+#: src/widgets/MetadataDialog.qml:45
 #, kde-format
 msgid "Track Title"
 msgstr "Název stopy"
 
-#: src/widgets/MetadataDialog.qml:61
+#: src/widgets/MetadataDialog.qml:57
 #, kde-format
 msgid "Artist"
 msgstr "Umělec"
 
-#: src/widgets/MetadataDialog.qml:76
+#: src/widgets/MetadataDialog.qml:73
 #, kde-format
 msgid "Album"
 msgstr "Album"
 
-#: src/widgets/MetadataDialog.qml:90
+#: src/widgets/MetadataDialog.qml:88
 #, kde-format
 msgid "Track"
 msgstr "Stopa"
 
-#: src/widgets/MetadataDialog.qml:104
+#: src/widgets/MetadataDialog.qml:103
 #, kde-format
 msgid "Genre"
 msgstr "Žánr"
@@ -343,20 +343,10 @@ msgstr "Žánr"
 msgid "Year"
 msgstr "Rok"
 
-#: src/widgets/MetadataDialog.qml:132
+#: src/widgets/MetadataDialog.qml:133
 #, kde-format
 msgid "Comment"
 msgstr "Komentář"
-
-#: src/widgets/MetadataDialog.qml:145
-#, kde-format
-msgid "File Info"
-msgstr "Informace o souboru"
-
-#: src/widgets/MetadataDialog.qml:146
-#, kde-format
-msgid "Local file info."
-msgstr ""
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
@@ -592,3 +582,6 @@ msgstr "Nejstarší vydané skladby z vaší sbírky."
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
+
+#~ msgid "File Info"
+#~ msgstr "Informace o souboru"

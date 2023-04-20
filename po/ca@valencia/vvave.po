@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-19 00:48+0000\n"
+"POT-Creation-Date: 2023-04-20 00:47+0000\n"
 "PO-Revision-Date: 2023-02-27 10:45+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -252,17 +252,17 @@ msgstr ""
 msgid "Find"
 msgstr "Busca"
 
-#: src/widgets/FocusView.qml:185
+#: src/widgets/FocusView.qml:188
 #, kde-format
 msgid "No Results!"
 msgstr "Cap resultat!"
 
-#: src/widgets/FocusView.qml:186
+#: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "Try with something else"
 msgstr "Intenteu-ho amb alguna altra cosa"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Comenceu posant unix la llista de reproducció."
@@ -319,27 +319,27 @@ msgstr "Metadades"
 msgid "Embedded metadata info."
 msgstr "Informació de les metadades incrustades."
 
-#: src/widgets/MetadataDialog.qml:47
+#: src/widgets/MetadataDialog.qml:45
 #, kde-format
 msgid "Track Title"
 msgstr "Títol de la peça"
 
-#: src/widgets/MetadataDialog.qml:61
+#: src/widgets/MetadataDialog.qml:57
 #, kde-format
 msgid "Artist"
 msgstr "Artista"
 
-#: src/widgets/MetadataDialog.qml:76
+#: src/widgets/MetadataDialog.qml:73
 #, kde-format
 msgid "Album"
 msgstr "Àlbum"
 
-#: src/widgets/MetadataDialog.qml:90
+#: src/widgets/MetadataDialog.qml:88
 #, kde-format
 msgid "Track"
 msgstr "Peça"
 
-#: src/widgets/MetadataDialog.qml:104
+#: src/widgets/MetadataDialog.qml:103
 #, kde-format
 msgid "Genre"
 msgstr "Gènere"
@@ -349,20 +349,10 @@ msgstr "Gènere"
 msgid "Year"
 msgstr "Any"
 
-#: src/widgets/MetadataDialog.qml:132
+#: src/widgets/MetadataDialog.qml:133
 #, kde-format
 msgid "Comment"
 msgstr "Comentari"
-
-#: src/widgets/MetadataDialog.qml:145
-#, kde-format
-msgid "File Info"
-msgstr "Informació del fitxer"
-
-#: src/widgets/MetadataDialog.qml:146
-#, kde-format
-msgid "Local file info."
-msgstr "Informació del fitxer local."
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
@@ -603,3 +593,9 @@ msgstr "Les pistes més antigues publicades de la vostra col·lecció."
 #, kde-format
 msgid "Open file"
 msgstr "Obri un fitxer"
+
+#~ msgid "File Info"
+#~ msgstr "Informació del fitxer"
+
+#~ msgid "Local file info."
+#~ msgstr "Informació del fitxer local."

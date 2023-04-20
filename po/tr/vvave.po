@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-19 00:48+0000\n"
+"POT-Creation-Date: 2023-04-20 00:47+0000\n"
 "PO-Revision-Date: 2023-02-27 19:48+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -250,17 +250,17 @@ msgstr ""
 msgid "Find"
 msgstr "Bul"
 
-#: src/widgets/FocusView.qml:185
+#: src/widgets/FocusView.qml:188
 #, kde-format
 msgid "No Results!"
 msgstr "Sonuç yok!"
 
-#: src/widgets/FocusView.qml:186
+#: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "Try with something else"
 msgstr "Başka bir şey deneyin"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Çalma listenizi oluşturmaya başlayın."
@@ -317,27 +317,27 @@ msgstr "Üst Veri"
 msgid "Embedded metadata info."
 msgstr "Gömülü üst veri bilgisi."
 
-#: src/widgets/MetadataDialog.qml:47
+#: src/widgets/MetadataDialog.qml:45
 #, kde-format
 msgid "Track Title"
 msgstr "Parça Başlığı"
 
-#: src/widgets/MetadataDialog.qml:61
+#: src/widgets/MetadataDialog.qml:57
 #, kde-format
 msgid "Artist"
 msgstr "Sanatçı"
 
-#: src/widgets/MetadataDialog.qml:76
+#: src/widgets/MetadataDialog.qml:73
 #, kde-format
 msgid "Album"
 msgstr "Albüm"
 
-#: src/widgets/MetadataDialog.qml:90
+#: src/widgets/MetadataDialog.qml:88
 #, kde-format
 msgid "Track"
 msgstr "Parça"
 
-#: src/widgets/MetadataDialog.qml:104
+#: src/widgets/MetadataDialog.qml:103
 #, kde-format
 msgid "Genre"
 msgstr "Tür"
@@ -347,20 +347,10 @@ msgstr "Tür"
 msgid "Year"
 msgstr "Yıl"
 
-#: src/widgets/MetadataDialog.qml:132
+#: src/widgets/MetadataDialog.qml:133
 #, kde-format
 msgid "Comment"
 msgstr "Açıklama"
-
-#: src/widgets/MetadataDialog.qml:145
-#, kde-format
-msgid "File Info"
-msgstr "Dosya Bilgisi"
-
-#: src/widgets/MetadataDialog.qml:146
-#, kde-format
-msgid "Local file info."
-msgstr "Yerel dosya bilgisi."
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
@@ -601,6 +591,12 @@ msgstr "Koleksiyonunuzdaki en eski tarihli parçalar."
 #, kde-format
 msgid "Open file"
 msgstr "Dosya Aç"
+
+#~ msgid "File Info"
+#~ msgstr "Dosya Bilgisi"
+
+#~ msgid "Local file info."
+#~ msgstr "Yerel dosya bilgisi."
 
 #~ msgid "Dust off."
 #~ msgstr "Tozunu al."
