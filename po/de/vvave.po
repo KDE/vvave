@@ -9,25 +9,25 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-20 00:47+0000\n"
-"PO-Revision-Date: 2023-03-12 17:19+0100\n"
+"PO-Revision-Date: 2023-04-20 19:33+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.07.70\n"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "Vvave"
-msgstr ""
+msgstr "Vvave"
 
 #: src/main.cpp:102
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr ""
+msgstr "Musik anhören und verwalten."
 
 #: src/main.cpp:102
 #, kde-format
@@ -152,8 +152,8 @@ msgstr "Diese Liste ist leer"
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtern"
+msgstr[1] "%1 Alben filtern"
 
 #: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -176,6 +176,8 @@ msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr ""
+"Möchten Sie diese Datei wirklich von Ihrem Computer löschen? Diese Aktion "
+"kann nicht rückgängig gemacht werden."
 
 #: src/widgets/BabeTable/BabeTable.qml:142
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
@@ -187,22 +189,22 @@ msgstr "Entfernen"
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
-msgstr ""
+msgstr "Zu Interpreten gehen"
 
 #: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:74
 #, kde-format
 msgid "Go to Album"
-msgstr ""
+msgstr "Zu Album gehen"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "Fav it"
-msgstr ""
+msgstr "Zu Favoriten hinzufügen"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "UnFav it"
-msgstr ""
+msgstr "Aus Favoriten entfernen"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
@@ -233,7 +235,7 @@ msgstr "In Ordner anzeigen"
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
 msgid "Opps!"
-msgstr ""
+msgstr "Ups!"
 
 #: src/widgets/CloudView/CloudView.qml:66
 #, kde-format
@@ -293,12 +295,12 @@ msgstr ""
 #: src/widgets/InfoView/InfoView.qml:45
 #, kde-format
 msgid "Artist Info"
-msgstr ""
+msgstr "Interpreten-Informationen"
 
 #: src/widgets/InfoView/InfoView.qml:73
 #, kde-format
 msgid "Album Info"
-msgstr ""
+msgstr "Album-Informationen"
 
 #: src/widgets/MainPlaylist/MainPlaylist.qml:133
 #, kde-format
@@ -429,7 +431,7 @@ msgstr "Module und Verhalten der App einrichten."
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
 msgid "Fetch Artwork"
-msgstr ""
+msgstr "Cover-Bild abrufen"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:59
 #, kde-format
@@ -507,7 +509,7 @@ msgstr "Hinzufügen"
 #: src/widgets/SettingsView/SettingsDialog.qml:209
 #, kde-format
 msgid "Scan now"
-msgstr ""
+msgstr "Jetzt scannen"
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:26
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
@@ -528,7 +530,7 @@ msgstr "Ihre Sammlung"
 #: src/widgets/TracksView.qml:49
 #, kde-format
 msgid "Random tracks from your collection."
-msgstr ""
+msgstr "Zufällige Lieder aus Ihrer Sammlung."
 
 #: src/widgets/TracksView.qml:55
 #, kde-format
@@ -538,7 +540,7 @@ msgstr "Alle anzeigen"
 #: src/widgets/TracksView.qml:75
 #, kde-format
 msgid "Popular Tracks"
-msgstr ""
+msgstr "Beliebte Lieder"
 
 #: src/widgets/TracksView.qml:76
 #, kde-format
@@ -548,7 +550,7 @@ msgstr ""
 #: src/widgets/TracksView.qml:98
 #, kde-format
 msgid "Recent Tracks"
-msgstr ""
+msgstr "Zuletzt gespielte Lieder"
 
 #: src/widgets/TracksView.qml:99
 #, kde-format
