@@ -15,7 +15,6 @@ StackView
 {
     id: control
 
-    property string currentPlaylist
     property string playlistQuery
 
     property Flickable flickable : currentItem.flickable
@@ -40,8 +39,12 @@ StackView
         {
             id: filterList
 
+            property string currentPlaylist //id
+
             property bool isPublic: true
+
             signal removeFromPlaylist(string url)
+
             coverArtVisible: settings.showArtwork
 
             list.query: control.playlistQuery
@@ -51,7 +54,7 @@ StackView
             holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: true
             holder.title : title
-            holder.body: "Your playlist is empty,<br>start adding new music to it"
+            holder.body: i18n("Your playlist is empty. Start adding new music to it")
 
             headBar.visible: true
             headBar.farLeftContent: ToolButton
@@ -88,54 +91,53 @@ StackView
 
             onAppendAll: Player.appendAllModel(listModel.list)
 
-            section.criteria: ViewSection.FullString
-            section.delegate: Maui.LabelDelegate
-            {
-                label: filterList.section.property === i18n("stars") ? H.setStars(section) : section
-                isSection: true
-                labelTxt.font.family: "Material Design Icons"
-                width: filterList.width
-            }
 
             Component.onCompleted:
             {
-                filterList.group = false
+                isPublic = false
 
                 switch(currentPlaylist)
                 {
-                case "Most Played":
+                case "mostPlayed":
                     playlistQuery = Q.GET.mostPlayedTracks
-                    filterList.listModel.sort = "count"
+                    filterList.listModel.sort = "title"
                     break;
 
-                case "Rating":
-                    filterList.listModel.sort = "rate"
-                    filterList.group = true
-
-                    playlistQuery = Q.GET.favoriteTracks;
+                case "randomTracks":
+                    filterList.listModel.sort = "title"
+                    playlistQuery = Q.GET.randomTracks_;
                     break;
 
-                case "Recent":
-                    playlistQuery = Q.GET.recentTracks;
-                    filterList.listModel.sort = "adddate"
-                    filterList.group = true
+                case "recentTracks":
+                    playlistQuery = Q.GET.recentTracks_;
+                    filterList.listModel.sort = "title"
+                    break;
+
+                case "neverPlayed":
+                    playlistQuery = Q.GET.neverPlayedTracks_;
+                    filterList.listModel.sort = "title"
+                    break;
+
+                case "classicTracks":
+                    playlistQuery = Q.GET.oldTracks;
+                    filterList.listModel.sort = "title"
                     break;
 
                 default:
+                    isPublic = true
                     playlistQuery = Q.GET.playlistTracks_.arg(currentPlaylist)
                     break;
                 }
 
                 filterList.isPublic = isPublic
-                filterList.listModel.filter = ""
+                filterList.listModel.clearFilters()
             }
         }
     }
 
     function populate(playlist, isPublic)
     {
-        currentPlaylist = playlist
-        control.push(_filterListComponent)
+        control.push(_filterListComponent, {'currentPlaylist': playlist, 'isPublic': isPublic})
     }
 
     function getFilterField() : Item

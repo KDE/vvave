@@ -133,7 +133,7 @@ Maui.AltBrowser
             control.currentIndex = index
             if(Maui.Handy.singleClick)
             {
-                populate(model.playlist, true)
+                populate(model.key, true)
             }
         }
 
@@ -142,7 +142,7 @@ Maui.AltBrowser
             control.currentIndex = index
             if(!Maui.Handy.singleClick)
             {
-                populate(model.playlist, true)
+                populate(model.key, true)
             }
         }
 
@@ -153,7 +153,7 @@ Maui.AltBrowser
         function tryOpenContextMenu() : undefined
         {
             control.currentIndex = index
-            currentPlaylist = model.playlist
+            currentPlaylist = model.key
             _tagMenu.show()
         }
     }
@@ -184,7 +184,7 @@ Maui.AltBrowser
                 control.currentIndex = index
                 if(Maui.Handy.singleClick)
                 {
-                    populate(model.playlist, true)
+                    populate(model.key, true)
                 }
             }
 
@@ -193,7 +193,7 @@ Maui.AltBrowser
                 control.currentIndex = index
                 if(!Maui.Handy.singleClick)
                 {
-                    populate(model.playlist, true)
+                    populate(model.key, true)
                 }
             }
 
@@ -206,7 +206,7 @@ Maui.AltBrowser
         function tryOpenContextMenu() : undefined
         {
             control.currentIndex = index
-            currentPlaylist = model.playlist
+            currentPlaylist = model.key
             _tagMenu.show()
         }
     }

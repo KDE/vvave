@@ -6,6 +6,8 @@
 #include <MauiKit/FileBrowsing/fmstatic.h>
 #include <MauiKit/FileBrowsing/tagging.h>
 
+#include <KI18n/KLocalizedString>
+
 PlaylistsModel::PlaylistsModel(QObject *parent)
     : MauiList(parent)
 {
@@ -42,7 +44,9 @@ void PlaylistsModel::setList()
 
 FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
 {
-    return FMH::MODEL{{FMH::MODEL_KEY::PLAYLIST, playlist},
+    return FMH::MODEL{
+        {FMH::MODEL_KEY::KEY, playlist},
+        {FMH::MODEL_KEY::PLAYLIST, playlist},
         {FMH::MODEL_KEY::ICON, "tag"},
         {FMH::MODEL_KEY::TYPE, "personal"},
         {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews(playlist)}};
@@ -51,11 +55,39 @@ FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
 QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
 {
     QStringList res;
-    if (playlist == "Most Played") {
-        const auto data = CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist WHERE t.count > 0 ORDER BY count desc LIMIT 4"));
-        for (const auto &item : data) {
-            res << QString("image://artwork/album:%1:%2").arg(item[FMH::MODEL_KEY::ARTIST], item[FMH::MODEL_KEY::ALBUM]);
-        }
+
+    auto extractor = [&res](FMH::MODEL &item) -> bool
+    {
+        res << QString("image://artwork/album:%1:%2").arg(item[FMH::MODEL_KEY::ARTIST], item[FMH::MODEL_KEY::ALBUM]);
+        return true;
+    };
+
+    if (playlist == "mostPlayed") {
+      CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist WHERE t.count >= 3 order by strftime(\"%s\", t.addDate) desc, t.count asc LIMIT 4"), extractor);
+
+        return res.join(",");
+    }
+
+    if (playlist == "randomTracks") {
+      CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where t.count <= 4 order by  RANDOM()"), extractor);
+
+        return res.join(",");
+    }
+
+    if (playlist == "recentTracks") {
+      CollectionDB::getInstance()->getDBData(QString("select t.* from (select * from tracks order by strftime(\"%s\", lastsync) desc limit 10) t inner join albums al on t.album = al.album and t.artist = al.artist order by t.title asc LIMIT 4"), extractor);
+
+        return res.join(",");
+    }
+
+    if (playlist == "neverPlayed") {
+      CollectionDB::getInstance()->getDBData(QString("select t.* from tracks t inner join albums al on t.album = al.album and t.artist = al.artist where t.count <= 1 order by RANDOM()"), extractor);
+
+        return res.join(",");
+    }
+
+    if (playlist == "classicTracks") {
+      CollectionDB::getInstance()->getDBData(QString("select t.* from (select * from tracks where releasedate > 0 order by releasedate asc limit 100) t inner join albums al on t.album = al.album and t.artist = al.artist order by t.title asc LIMIT 4"), extractor);
 
         return res.join(",");
     }
@@ -74,12 +106,42 @@ QString PlaylistsModel::playlistArtworkPreviews(const QString &playlist)
 
 FMH::MODEL_LIST PlaylistsModel::defaultPlaylists()
 {
-    return FMH::MODEL_LIST{
-        {{FMH::MODEL_KEY::TYPE, "default"},
-            {FMH::MODEL_KEY::PLAYLIST, "Most Played"},
-            {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("Most Played")},
-            {FMH::MODEL_KEY::ICON, "view-media-playcount"},
-            {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}}};
+    const FMH::MODEL mostPlayed =  {{FMH::MODEL_KEY::TYPE, "default"},
+                              {FMH::MODEL_KEY::PLAYLIST, i18n("Most Played")},
+                              {FMH::MODEL_KEY::KEY, "mostPlayed"},
+                              {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("mostPlayed")},
+                              {FMH::MODEL_KEY::ICON, "view-media-playcount"},
+                              {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}};
+
+    const FMH::MODEL randomTracks =  {{FMH::MODEL_KEY::TYPE, "default"},
+                                {FMH::MODEL_KEY::PLAYLIST, i18n("Random Tracks")},
+                                {FMH::MODEL_KEY::KEY, "randomTracks"},
+                                {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("randomTracks")},
+                                {FMH::MODEL_KEY::ICON, "view-media-playcount"},
+                                {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}};
+
+   const FMH::MODEL recentTracks =  {{FMH::MODEL_KEY::TYPE, "default"},
+                                {FMH::MODEL_KEY::PLAYLIST, i18n("Recent Tracks")},
+                                {FMH::MODEL_KEY::KEY, "recentTracks"},
+                                {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("recentTracks")},
+                                {FMH::MODEL_KEY::ICON, "view-media-playcount"},
+                                {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}};
+
+   const FMH::MODEL neverPlayed =  {{FMH::MODEL_KEY::TYPE, "default"},
+                               {FMH::MODEL_KEY::PLAYLIST, i18n("Never Played")},
+                               {FMH::MODEL_KEY::KEY, "neverPlayed"},
+                               {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("neverPlayed")},
+                               {FMH::MODEL_KEY::ICON, "view-media-playcount"},
+                               {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}};
+
+   const FMH::MODEL classicTracks =  {{FMH::MODEL_KEY::TYPE, "default"},
+                                 {FMH::MODEL_KEY::PLAYLIST, i18n("Classic Tracks")},
+                                 {FMH::MODEL_KEY::KEY, "classicTracks"},
+                                 {FMH::MODEL_KEY::PREVIEW, playlistArtworkPreviews("classicTracks")},
+                                 {FMH::MODEL_KEY::ICON, "view-media-playcount"},
+                                 {FMH::MODEL_KEY::ADDDATE, QDateTime::currentDateTime().toString(Qt::DateFormat::TextDate)}};
+
+    return FMH::MODEL_LIST () << mostPlayed << randomTracks << recentTracks << neverPlayed << classicTracks;
 }
 
 FMH::MODEL_LIST PlaylistsModel::tags()
@@ -88,8 +150,11 @@ FMH::MODEL_LIST PlaylistsModel::tags()
     const auto tags = Tagging::getInstance()->getUrlsTags(true);
 
     return std::accumulate(tags.constBegin(), tags.constEnd(), res, [this](FMH::MODEL_LIST &list, const QVariant &item) {
+
         const auto map = item.toMap();
+
         auto res = packPlaylist(map.value("tag").toString());
+
         res[FMH::MODEL_KEY::ICON] = map.value("icon").toString();
 
         if(list.count() <= m_limit)
