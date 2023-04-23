@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:47+0000\n"
+"POT-Creation-Date: 2023-04-23 00:48+0000\n"
 "PO-Revision-Date: 2023-03-11 22:27+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -93,7 +93,7 @@ msgstr "Albumit"
 msgid "No Albums!"
 msgstr "Ei albumeja!"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:155
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr "Lisää uusia musiikkilähteitä"
@@ -124,6 +124,34 @@ msgstr "Kansiot"
 msgid "Cloud"
 msgstr "Pilvi"
 
+#: src/models/playlists/playlistsmodel.cpp:110
+#, fuzzy, kde-format
+#| msgid "Never Played"
+msgid "Most Played"
+msgstr "Ei koskaan toistettu"
+
+#: src/models/playlists/playlistsmodel.cpp:117
+#, fuzzy, kde-format
+#| msgid "No Tracks!"
+msgid "Random Tracks"
+msgstr "Ei raitoja!"
+
+#: src/models/playlists/playlistsmodel.cpp:124
+#, kde-format
+msgid "Recent Tracks"
+msgstr "Viimeisimmät raidat"
+
+#: src/models/playlists/playlistsmodel.cpp:131
+#, kde-format
+msgid "Never Played"
+msgstr "Ei koskaan toistettu"
+
+#: src/models/playlists/playlistsmodel.cpp:138
+#, fuzzy, kde-format
+#| msgid "Classics"
+msgid "Classic Tracks"
+msgstr "Klassikot"
+
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
@@ -132,7 +160,7 @@ msgid "Playing music"
 msgstr "Toistetaan musiikkia"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:160
+#: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
 msgstr "Lisää lähteitä"
@@ -280,7 +308,7 @@ msgstr "Ei kansioita!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Lisää uutta musiikkia lähteisiin selaamalla kansioita"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:154
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "No Tracks!"
 msgstr "Ei raitoja!"
@@ -365,15 +393,15 @@ msgstr "Toista tai tauko"
 msgid "Next"
 msgstr "Seuraava"
 
-#: src/widgets/PlaylistsView/PlaylistsView.qml:65
+#: src/widgets/PlaylistsView/PlaylistsView.qml:57
+#, kde-format
+msgid "Your playlist is empty. Start adding new music to it"
+msgstr ""
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
 msgid "Remove from playlist"
 msgstr "Poista soittolistasta"
-
-#: src/widgets/PlaylistsView/PlaylistsView.qml:94
-#, kde-format
-msgid "stars"
-msgstr "tähteä"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
 #, kde-format
@@ -521,75 +549,43 @@ msgstr "Tarkista nyt"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: src/widgets/TracksView.qml:28
-#, kde-format
-msgid "Search collection"
-msgstr "Tarkista kokoelma"
-
-#: src/widgets/TracksView.qml:48
-#, kde-format
-msgid "Your Collection"
-msgstr "Kokoelma"
-
-#: src/widgets/TracksView.qml:49
-#, kde-format
-msgid "Random tracks from your collection."
-msgstr "Sekalaisia kappaleita kokoelmasta."
-
-#: src/widgets/TracksView.qml:55
-#, kde-format
-msgid "View All"
-msgstr "Näytä kaikki"
-
-#: src/widgets/TracksView.qml:75
-#, kde-format
-msgid "Popular Tracks"
-msgstr "Suositut raidat"
-
-#: src/widgets/TracksView.qml:76
-#, kde-format
-msgid "Play them again."
-msgstr "Toista ne uudelleen."
-
-#: src/widgets/TracksView.qml:98
-#, kde-format
-msgid "Recent Tracks"
-msgstr "Viimeisimmät raidat"
-
-#: src/widgets/TracksView.qml:99
-#, kde-format
-msgid "Recently played."
-msgstr "Viimeksi toistettu."
-
-#: src/widgets/TracksView.qml:103 src/widgets/TracksView.qml:122
-#, kde-format
-msgid "More"
-msgstr "Lisää"
-
-#: src/widgets/TracksView.qml:115
-#, kde-format
-msgid "Never Played"
-msgstr "Ei koskaan toistettu"
-
-#: src/widgets/TracksView.qml:116
-#, kde-format
-msgid "Give these tracks a first listen."
-msgstr "Koekuuntele nämä kappaleet."
-
-#: src/widgets/TracksView.qml:133
-#, kde-format
-msgid "Classics"
-msgstr "Klassikot"
-
-#: src/widgets/TracksView.qml:134
-#, kde-format
-msgid "Oldest released tracks from your collection."
-msgstr "Kokoelman vanhimmat kappaleet."
-
-#: src/widgets/TracksView.qml:166
+#: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Open file"
 msgstr "Avaa tiedosto"
+
+#~ msgid "stars"
+#~ msgstr "tähteä"
+
+#~ msgid "Search collection"
+#~ msgstr "Tarkista kokoelma"
+
+#~ msgid "Your Collection"
+#~ msgstr "Kokoelma"
+
+#~ msgid "Random tracks from your collection."
+#~ msgstr "Sekalaisia kappaleita kokoelmasta."
+
+#~ msgid "View All"
+#~ msgstr "Näytä kaikki"
+
+#~ msgid "Popular Tracks"
+#~ msgstr "Suositut raidat"
+
+#~ msgid "Play them again."
+#~ msgstr "Toista ne uudelleen."
+
+#~ msgid "Recently played."
+#~ msgstr "Viimeksi toistettu."
+
+#~ msgid "More"
+#~ msgstr "Lisää"
+
+#~ msgid "Give these tracks a first listen."
+#~ msgstr "Koekuuntele nämä kappaleet."
+
+#~ msgid "Oldest released tracks from your collection."
+#~ msgstr "Kokoelman vanhimmat kappaleet."
 
 #~ msgid "File Info"
 #~ msgstr "Tiedoston tiedot"

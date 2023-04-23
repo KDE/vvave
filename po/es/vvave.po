@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:47+0000\n"
+"POT-Creation-Date: 2023-04-23 00:48+0000\n"
 "PO-Revision-Date: 2023-02-27 05:06+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -96,7 +96,7 @@ msgstr "Álbumes"
 msgid "No Albums!"
 msgstr "No hay álbumes"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:155
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr "Añadir nueva fuente de música"
@@ -127,6 +127,34 @@ msgstr "Carpetas"
 msgid "Cloud"
 msgstr "Nube"
 
+#: src/models/playlists/playlistsmodel.cpp:110
+#, fuzzy, kde-format
+#| msgid "Never Played"
+msgid "Most Played"
+msgstr "Nunca reproducidas"
+
+#: src/models/playlists/playlistsmodel.cpp:117
+#, fuzzy, kde-format
+#| msgid "No Tracks!"
+msgid "Random Tracks"
+msgstr "No hay pistas"
+
+#: src/models/playlists/playlistsmodel.cpp:124
+#, kde-format
+msgid "Recent Tracks"
+msgstr "Pistas recientes"
+
+#: src/models/playlists/playlistsmodel.cpp:131
+#, kde-format
+msgid "Never Played"
+msgstr "Nunca reproducidas"
+
+#: src/models/playlists/playlistsmodel.cpp:138
+#, fuzzy, kde-format
+#| msgid "Classics"
+msgid "Classic Tracks"
+msgstr "Clásicos"
+
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
@@ -135,7 +163,7 @@ msgid "Playing music"
 msgstr "Reproduciendo música"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:160
+#: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
 msgstr "Añadir fuentes"
@@ -284,7 +312,7 @@ msgstr "No hay carpetas"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Añada nueva música a sus fuentes para explorar las carpetas"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:154
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "No Tracks!"
 msgstr "No hay pistas"
@@ -369,15 +397,15 @@ msgstr "Reproducir y pausar"
 msgid "Next"
 msgstr "Siguiente"
 
-#: src/widgets/PlaylistsView/PlaylistsView.qml:65
+#: src/widgets/PlaylistsView/PlaylistsView.qml:57
+#, kde-format
+msgid "Your playlist is empty. Start adding new music to it"
+msgstr ""
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
 msgid "Remove from playlist"
 msgstr "Eliminar de la lista de reproducción"
-
-#: src/widgets/PlaylistsView/PlaylistsView.qml:94
-#, kde-format
-msgid "stars"
-msgstr "estrellas"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
 #, kde-format
@@ -525,75 +553,43 @@ msgstr "Explorar ahora"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: src/widgets/TracksView.qml:28
-#, kde-format
-msgid "Search collection"
-msgstr "Buscar en la colección"
-
-#: src/widgets/TracksView.qml:48
-#, kde-format
-msgid "Your Collection"
-msgstr "Su colección"
-
-#: src/widgets/TracksView.qml:49
-#, kde-format
-msgid "Random tracks from your collection."
-msgstr "Pistas aleatorias de su colección."
-
-#: src/widgets/TracksView.qml:55
-#, kde-format
-msgid "View All"
-msgstr "Ver todo"
-
-#: src/widgets/TracksView.qml:75
-#, kde-format
-msgid "Popular Tracks"
-msgstr "Pistas populares"
-
-#: src/widgets/TracksView.qml:76
-#, kde-format
-msgid "Play them again."
-msgstr "Volver a reproducirlas."
-
-#: src/widgets/TracksView.qml:98
-#, kde-format
-msgid "Recent Tracks"
-msgstr "Pistas recientes"
-
-#: src/widgets/TracksView.qml:99
-#, kde-format
-msgid "Recently played."
-msgstr "Reproducidas recientemente."
-
-#: src/widgets/TracksView.qml:103 src/widgets/TracksView.qml:122
-#, kde-format
-msgid "More"
-msgstr "Más"
-
-#: src/widgets/TracksView.qml:115
-#, kde-format
-msgid "Never Played"
-msgstr "Nunca reproducidas"
-
-#: src/widgets/TracksView.qml:116
-#, kde-format
-msgid "Give these tracks a first listen."
-msgstr "Oír estas pistas por primera vez."
-
-#: src/widgets/TracksView.qml:133
-#, kde-format
-msgid "Classics"
-msgstr "Clásicos"
-
-#: src/widgets/TracksView.qml:134
-#, kde-format
-msgid "Oldest released tracks from your collection."
-msgstr "Pistas publicadas más antiguas de su colección."
-
-#: src/widgets/TracksView.qml:166
+#: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Open file"
 msgstr "Abrir archivo"
+
+#~ msgid "stars"
+#~ msgstr "estrellas"
+
+#~ msgid "Search collection"
+#~ msgstr "Buscar en la colección"
+
+#~ msgid "Your Collection"
+#~ msgstr "Su colección"
+
+#~ msgid "Random tracks from your collection."
+#~ msgstr "Pistas aleatorias de su colección."
+
+#~ msgid "View All"
+#~ msgstr "Ver todo"
+
+#~ msgid "Popular Tracks"
+#~ msgstr "Pistas populares"
+
+#~ msgid "Play them again."
+#~ msgstr "Volver a reproducirlas."
+
+#~ msgid "Recently played."
+#~ msgstr "Reproducidas recientemente."
+
+#~ msgid "More"
+#~ msgstr "Más"
+
+#~ msgid "Give these tracks a first listen."
+#~ msgstr "Oír estas pistas por primera vez."
+
+#~ msgid "Oldest released tracks from your collection."
+#~ msgstr "Pistas publicadas más antiguas de su colección."
 
 #~ msgid "File Info"
 #~ msgstr "Información del archivo"

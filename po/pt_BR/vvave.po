@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:47+0000\n"
+"POT-Creation-Date: 2023-04-23 00:48+0000\n"
 "PO-Revision-Date: 2023-03-22 17:45-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -93,7 +93,7 @@ msgstr "Álbuns"
 msgid "No Albums!"
 msgstr ""
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:155
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr ""
@@ -124,6 +124,31 @@ msgstr "Pastas"
 msgid "Cloud"
 msgstr "Nuvem"
 
+#: src/models/playlists/playlistsmodel.cpp:110
+#, kde-format
+msgid "Most Played"
+msgstr ""
+
+#: src/models/playlists/playlistsmodel.cpp:117
+#, kde-format
+msgid "Random Tracks"
+msgstr ""
+
+#: src/models/playlists/playlistsmodel.cpp:124
+#, kde-format
+msgid "Recent Tracks"
+msgstr ""
+
+#: src/models/playlists/playlistsmodel.cpp:131
+#, kde-format
+msgid "Never Played"
+msgstr ""
+
+#: src/models/playlists/playlistsmodel.cpp:138
+#, kde-format
+msgid "Classic Tracks"
+msgstr ""
+
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
@@ -132,7 +157,7 @@ msgid "Playing music"
 msgstr "Reproduzindo música"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:160
+#: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
 msgstr ""
@@ -276,7 +301,7 @@ msgstr "Nenhuma pasta!"
 msgid "Add new music to your sources to browse by folders"
 msgstr ""
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:154
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "No Tracks!"
 msgstr ""
@@ -361,14 +386,14 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/widgets/PlaylistsView/PlaylistsView.qml:65
+#: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
-msgid "Remove from playlist"
+msgid "Your playlist is empty. Start adding new music to it"
 msgstr ""
 
-#: src/widgets/PlaylistsView/PlaylistsView.qml:94
+#: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
-msgid "stars"
+msgid "Remove from playlist"
 msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
@@ -511,72 +536,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: src/widgets/TracksView.qml:28
-#, kde-format
-msgid "Search collection"
-msgstr ""
-
-#: src/widgets/TracksView.qml:48
-#, kde-format
-msgid "Your Collection"
-msgstr ""
-
-#: src/widgets/TracksView.qml:49
-#, kde-format
-msgid "Random tracks from your collection."
-msgstr ""
-
-#: src/widgets/TracksView.qml:55
-#, kde-format
-msgid "View All"
-msgstr ""
-
-#: src/widgets/TracksView.qml:75
-#, kde-format
-msgid "Popular Tracks"
-msgstr ""
-
-#: src/widgets/TracksView.qml:76
-#, kde-format
-msgid "Play them again."
-msgstr ""
-
-#: src/widgets/TracksView.qml:98
-#, kde-format
-msgid "Recent Tracks"
-msgstr ""
-
-#: src/widgets/TracksView.qml:99
-#, kde-format
-msgid "Recently played."
-msgstr ""
-
-#: src/widgets/TracksView.qml:103 src/widgets/TracksView.qml:122
-#, kde-format
-msgid "More"
-msgstr ""
-
-#: src/widgets/TracksView.qml:115
-#, kde-format
-msgid "Never Played"
-msgstr ""
-
-#: src/widgets/TracksView.qml:116
-#, kde-format
-msgid "Give these tracks a first listen."
-msgstr ""
-
-#: src/widgets/TracksView.qml:133
-#, kde-format
-msgid "Classics"
-msgstr ""
-
-#: src/widgets/TracksView.qml:134
-#, kde-format
-msgid "Oldest released tracks from your collection."
-msgstr ""
-
-#: src/widgets/TracksView.qml:166
+#: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Open file"
 msgstr ""

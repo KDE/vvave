@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-20 00:47+0000\n"
+"POT-Creation-Date: 2023-04-23 00:48+0000\n"
 "PO-Revision-Date: 2023-03-12 12:07+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -91,7 +91,7 @@ msgstr "Albumy"
 msgid "No Albums!"
 msgstr ""
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:155
+#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr ""
@@ -122,6 +122,31 @@ msgstr "Priečinky"
 msgid "Cloud"
 msgstr "Oblak"
 
+#: src/models/playlists/playlistsmodel.cpp:110
+#, fuzzy, kde-format
+msgid "Most Played"
+msgstr "nikdy nehrané"
+
+#: src/models/playlists/playlistsmodel.cpp:117
+#, fuzzy, kde-format
+msgid "Random Tracks"
+msgstr "Žiadne stopy"
+
+#: src/models/playlists/playlistsmodel.cpp:124
+#, kde-format
+msgid "Recent Tracks"
+msgstr ""
+
+#: src/models/playlists/playlistsmodel.cpp:131
+#, fuzzy, kde-format
+msgid "Never Played"
+msgstr "nikdy nehrané"
+
+#: src/models/playlists/playlistsmodel.cpp:138
+#, kde-format
+msgid "Classic Tracks"
+msgstr ""
+
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
@@ -130,7 +155,7 @@ msgid "Playing music"
 msgstr "Prehráva sa hudba"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:160
+#: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
 msgstr ""
@@ -276,7 +301,7 @@ msgstr "Žiadne priečinky!"
 msgid "Add new music to your sources to browse by folders"
 msgstr ""
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:154
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
 #, fuzzy, kde-format
 msgid "No Tracks!"
 msgstr "Žiadne stopy"
@@ -361,15 +386,15 @@ msgstr ""
 msgid "Next"
 msgstr "Nasledujúci"
 
-#: src/widgets/PlaylistsView/PlaylistsView.qml:65
+#: src/widgets/PlaylistsView/PlaylistsView.qml:57
+#, kde-format
+msgid "Your playlist is empty. Start adding new music to it"
+msgstr ""
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, fuzzy, kde-format
 msgid "Remove from playlist"
 msgstr "Odstrániť zo zoznamu skladieb"
-
-#: src/widgets/PlaylistsView/PlaylistsView.qml:94
-#, fuzzy, kde-format
-msgid "stars"
-msgstr "Hviezdy"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
 #, kde-format
@@ -511,75 +536,25 @@ msgstr ""
 msgid "Unknown"
 msgstr "Neznáme"
 
-#: src/widgets/TracksView.qml:28
-#, kde-format
-msgid "Search collection"
-msgstr "Prehľadať kolekciu"
-
-#: src/widgets/TracksView.qml:48
-#, kde-format
-msgid "Your Collection"
-msgstr ""
-
-#: src/widgets/TracksView.qml:49
-#, kde-format
-msgid "Random tracks from your collection."
-msgstr ""
-
-#: src/widgets/TracksView.qml:55
-#, kde-format
-msgid "View All"
-msgstr ""
-
-#: src/widgets/TracksView.qml:75
-#, kde-format
-msgid "Popular Tracks"
-msgstr ""
-
-#: src/widgets/TracksView.qml:76
-#, kde-format
-msgid "Play them again."
-msgstr ""
-
-#: src/widgets/TracksView.qml:98
-#, kde-format
-msgid "Recent Tracks"
-msgstr ""
-
-#: src/widgets/TracksView.qml:99
-#, fuzzy, kde-format
-msgid "Recently played."
-msgstr "Nedávno hrané"
-
-#: src/widgets/TracksView.qml:103 src/widgets/TracksView.qml:122
-#, fuzzy, kde-format
-msgid "More"
-msgstr "Viac"
-
-#: src/widgets/TracksView.qml:115
-#, fuzzy, kde-format
-msgid "Never Played"
-msgstr "nikdy nehrané"
-
-#: src/widgets/TracksView.qml:116
-#, kde-format
-msgid "Give these tracks a first listen."
-msgstr ""
-
-#: src/widgets/TracksView.qml:133
-#, kde-format
-msgid "Classics"
-msgstr ""
-
-#: src/widgets/TracksView.qml:134
-#, kde-format
-msgid "Oldest released tracks from your collection."
-msgstr ""
-
-#: src/widgets/TracksView.qml:166
+#: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Open file"
 msgstr "Otvoriť súbor"
+
+#, fuzzy
+#~ msgid "stars"
+#~ msgstr "Hviezdy"
+
+#~ msgid "Search collection"
+#~ msgstr "Prehľadať kolekciu"
+
+#, fuzzy
+#~ msgid "Recently played."
+#~ msgstr "Nedávno hrané"
+
+#, fuzzy
+#~ msgid "More"
+#~ msgstr "Viac"
 
 #, fuzzy
 #~ msgid "File Info"
