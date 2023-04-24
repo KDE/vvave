@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-23 00:48+0000\n"
-"PO-Revision-Date: 2023-02-27 19:48+0300\n"
+"PO-Revision-Date: 2023-04-23 11:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -126,16 +126,14 @@ msgid "Cloud"
 msgstr "Bulut"
 
 #: src/models/playlists/playlistsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Never Played"
+#, kde-format
 msgid "Most Played"
-msgstr "Hiç Çalınmayanlar"
+msgstr "En Çok Çalınanlar"
 
 #: src/models/playlists/playlistsmodel.cpp:117
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "Random Tracks"
-msgstr "Parça Yok!"
+msgstr "Rastgele Parçalar"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
@@ -148,10 +146,9 @@ msgid "Never Played"
 msgstr "Hiç Çalınmayanlar"
 
 #: src/models/playlists/playlistsmodel.cpp:138
-#, fuzzy, kde-format
-#| msgid "Classics"
+#, kde-format
 msgid "Classic Tracks"
-msgstr "Klasikler"
+msgstr "Klasik Parçalar"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
@@ -398,7 +395,7 @@ msgstr "Sonraki"
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr ""
+msgstr "Çalma listeniz boş. Ona yeni müzik ekleyin"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format

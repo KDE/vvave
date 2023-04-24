@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-23 00:48+0000\n"
-"PO-Revision-Date: 2023-02-27 05:06+0100\n"
+"PO-Revision-Date: 2023-04-23 04:18+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -128,16 +128,14 @@ msgid "Cloud"
 msgstr "Nube"
 
 #: src/models/playlists/playlistsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Never Played"
+#, kde-format
 msgid "Most Played"
-msgstr "Nunca reproducidas"
+msgstr "Más reproducidas"
 
 #: src/models/playlists/playlistsmodel.cpp:117
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "Random Tracks"
-msgstr "No hay pistas"
+msgstr "Pistas aleatorias"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
@@ -150,10 +148,9 @@ msgid "Never Played"
 msgstr "Nunca reproducidas"
 
 #: src/models/playlists/playlistsmodel.cpp:138
-#, fuzzy, kde-format
-#| msgid "Classics"
+#, kde-format
 msgid "Classic Tracks"
-msgstr "Clásicos"
+msgstr "Pistas clásicas"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
@@ -400,7 +397,7 @@ msgstr "Siguiente"
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr ""
+msgstr "La lista de reproducción está vacía. Empiece añadiendo nueva música."
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
