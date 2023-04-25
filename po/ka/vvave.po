@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-23 00:48+0000\n"
-"PO-Revision-Date: 2023-02-27 06:30+0100\n"
+"PO-Revision-Date: 2023-04-24 06:01+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -128,16 +128,14 @@ msgid "Cloud"
 msgstr "ღრუბელი"
 
 #: src/models/playlists/playlistsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Never Played"
+#, kde-format
 msgid "Most Played"
-msgstr "არასდროს-დაკრული"
+msgstr "ხშირად დაკრული"
 
 #: src/models/playlists/playlistsmodel.cpp:117
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "Random Tracks"
-msgstr "ტრეკების გარეშე!"
+msgstr "შემთხვევითი ტრეკები"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
@@ -150,10 +148,9 @@ msgid "Never Played"
 msgstr "არასდროს-დაკრული"
 
 #: src/models/playlists/playlistsmodel.cpp:138
-#, fuzzy, kde-format
-#| msgid "Classics"
+#, kde-format
 msgid "Classic Tracks"
-msgstr "კლასიკა"
+msgstr "კლასიკური ტრეკები"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
@@ -399,7 +396,7 @@ msgstr "შემდეგი"
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr ""
+msgstr "თქვენი დასაკრავი სია ცარიელია. დაიწყეთ მასში მუსიკის დამატება"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format

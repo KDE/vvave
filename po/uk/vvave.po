@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-23 00:48+0000\n"
-"PO-Revision-Date: 2023-02-27 08:53+0200\n"
+"PO-Revision-Date: 2023-04-23 08:45+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -128,16 +128,14 @@ msgid "Cloud"
 msgstr "Хмара"
 
 #: src/models/playlists/playlistsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Never Played"
+#, kde-format
 msgid "Most Played"
-msgstr "Ніколи не слухали"
+msgstr "Часто слухали"
 
 #: src/models/playlists/playlistsmodel.cpp:117
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "Random Tracks"
-msgstr "Немає композицій!"
+msgstr "Випадкові композиції"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
@@ -150,10 +148,9 @@ msgid "Never Played"
 msgstr "Ніколи не слухали"
 
 #: src/models/playlists/playlistsmodel.cpp:138
-#, fuzzy, kde-format
-#| msgid "Classics"
+#, kde-format
 msgid "Classic Tracks"
-msgstr "Класика"
+msgstr "Класичні композиції"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
@@ -405,6 +402,7 @@ msgstr "Далі"
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
 msgstr ""
+"Ваш список відтворення порожній. Почніть з додавання до нього композицій"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
