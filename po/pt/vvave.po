@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-23 00:48+0000\n"
-"PO-Revision-Date: 2023-03-06 15:57+0000\n"
+"PO-Revision-Date: 2023-04-25 21:18+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -129,16 +129,14 @@ msgid "Cloud"
 msgstr "'Cloud'"
 
 #: src/models/playlists/playlistsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Never Played"
+#, kde-format
 msgid "Most Played"
-msgstr "Nunca Tocadas"
+msgstr "Mais Tocadas"
 
 #: src/models/playlists/playlistsmodel.cpp:117
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "Random Tracks"
-msgstr "Sem Faixas!"
+msgstr "Faixas Aleatórias"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
@@ -151,10 +149,9 @@ msgid "Never Played"
 msgstr "Nunca Tocadas"
 
 #: src/models/playlists/playlistsmodel.cpp:138
-#, fuzzy, kde-format
-#| msgid "Classics"
+#, kde-format
 msgid "Classic Tracks"
-msgstr "Clássicos"
+msgstr "Faixas Clássicas"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
@@ -402,6 +399,7 @@ msgstr "Seguinte"
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
 msgstr ""
+"A sua lista de reprodução está vazia. Comece a adicionar música nova a ela"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
@@ -558,42 +556,3 @@ msgstr "Desconhecido"
 #, kde-format
 msgid "Open file"
 msgstr "Abrir um ficheiro"
-
-#~ msgid "stars"
-#~ msgstr "estrelas"
-
-#~ msgid "Search collection"
-#~ msgstr "Procurar na colecção"
-
-#~ msgid "Your Collection"
-#~ msgstr "A Sua Colecção"
-
-#~ msgid "Random tracks from your collection."
-#~ msgstr "Faixas aleatórias da sua colecção."
-
-#~ msgid "View All"
-#~ msgstr "Ver Tudo"
-
-#~ msgid "Popular Tracks"
-#~ msgstr "Faixas Populares"
-
-#~ msgid "Play them again."
-#~ msgstr "Reproduzi-las de novo."
-
-#~ msgid "Recently played."
-#~ msgstr "Tocadas recentemente."
-
-#~ msgid "More"
-#~ msgstr "Mais"
-
-#~ msgid "Give these tracks a first listen."
-#~ msgstr "Dê a estas faixas uma oportunidade para serem ouvidas."
-
-#~ msgid "Oldest released tracks from your collection."
-#~ msgstr "As faixas lançadas há mais tempo da sua colecção."
-
-#~ msgid "File Info"
-#~ msgstr "Informações do Ficheiro"
-
-#~ msgid "Local file info."
-#~ msgstr "Dados do ficheiro local."
