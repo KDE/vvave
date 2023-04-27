@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-23 00:48+0000\n"
-"PO-Revision-Date: 2023-04-22 17:09+0200\n"
+"PO-Revision-Date: 2023-04-26 20:08+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -129,16 +129,14 @@ msgid "Cloud"
 msgstr "Cloud"
 
 #: src/models/playlists/playlistsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Never Played"
+#, kde-format
 msgid "Most Played"
-msgstr "Nie gespielt"
+msgstr "Am meisten abgespielt"
 
 #: src/models/playlists/playlistsmodel.cpp:117
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "Random Tracks"
-msgstr "Keine Stücke!"
+msgstr "Zufällige Stücke"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
