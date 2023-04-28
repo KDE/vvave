@@ -30,7 +30,6 @@ set(vvave_SRCS
     services/web/abstractmusicprovider.cpp
     db/collectionDB.cpp
     models/tracks/tracksmodel.cpp
-    models/tracks/overviewmodel.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
     models/folders/foldersmodel.cpp
