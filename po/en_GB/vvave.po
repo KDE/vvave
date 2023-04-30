@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-23 00:48+0000\n"
-"PO-Revision-Date: 2023-02-27 20:33+0000\n"
+"PO-Revision-Date: 2023-04-29 12:34+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: British English\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -126,16 +126,14 @@ msgid "Cloud"
 msgstr "Cloud"
 
 #: src/models/playlists/playlistsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Never Played"
+#, kde-format
 msgid "Most Played"
-msgstr "Never Played"
+msgstr "Most Played"
 
 #: src/models/playlists/playlistsmodel.cpp:117
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "Random Tracks"
-msgstr "No Tracks!"
+msgstr "Random Tracks"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
@@ -148,10 +146,9 @@ msgid "Never Played"
 msgstr "Never Played"
 
 #: src/models/playlists/playlistsmodel.cpp:138
-#, fuzzy, kde-format
-#| msgid "Classics"
+#, kde-format
 msgid "Classic Tracks"
-msgstr "Classics"
+msgstr "Classic Tracks"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
@@ -398,7 +395,7 @@ msgstr "Next"
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr ""
+msgstr "Your playlist is empty. Start adding new music to it"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format

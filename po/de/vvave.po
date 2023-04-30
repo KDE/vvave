@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-23 00:48+0000\n"
-"PO-Revision-Date: 2023-04-26 20:08+0200\n"
+"PO-Revision-Date: 2023-04-29 12:03+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -284,7 +284,7 @@ msgstr "Keine Ergebnisse"
 #: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "Try with something else"
-msgstr ""
+msgstr "Versuchen Sie etwas anderes"
 
 #: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
