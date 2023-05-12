@@ -50,8 +50,40 @@ Maui.SettingsDialog
 
     Maui.SectionGroup
     {
-        title: i18n("Behaviour")
-        description: i18n("Configure the app plugins and behavior.")
+        title: i18n("Playback")
+        description: i18n("Configure the playback behavior.")
+
+        Maui.SectionItem
+        {
+            label1.text: i18n("Auto Resume")
+            label2.text: i18n("Resume the last session playlist.")
+
+            Switch
+            {
+                checkable: true
+                checked: playlist.autoResume
+                onToggled: playlist.autoResume = !playlist.autoResume
+            }
+        }
+
+        Maui.SectionItem
+        {
+            label1.text: i18n("Volume")
+            label2.text: i18n("Show volume controls.")
+
+            Switch
+            {
+                checkable: true
+                checked: settings.volumeControl
+                onToggled: settings.volumeControl = !settings.volumeControl
+            }
+        }
+    }
+
+    Maui.SectionGroup
+    {
+        title: i18n("Collection")
+        description: i18n("Configure the app plugins and collection behavior.")
 
         Maui.SectionItem
         {
@@ -78,19 +110,13 @@ Maui.SettingsDialog
                 onToggled: settings.autoScan = !settings.autoScan
             }
         }
+    }
 
-        Maui.SectionItem
-        {
-            label1.text: i18n("Auto Resume")
-            label2.text: i18n("Resume the last session playlist.")
+    Maui.SectionGroup
+    {
+        title: i18n("General")
+        description: i18n("Configure the app plugins and collection behavior.")
 
-            Switch
-            {
-                checkable: true
-                checked: playlist.autoResume
-                onToggled: playlist.autoResume = !playlist.autoResume
-            }
-        }
 
         Maui.SectionItem
         {
@@ -141,6 +167,22 @@ Maui.SettingsDialog
                 }
             }
         }
+
+        Maui.SectionItem
+        {
+            label1.text: i18n("Titles")
+            label2.text: i18n("Show the title of albums and artists in the grid view.")
+
+            Switch
+            {
+                Layout.fillHeight: true
+                checked: settings.showTitles
+                onToggled:
+                {
+                    settings.showTitles = !settings.showTitles
+                }
+            }
+        }
     }
 
     Maui.SectionGroup
@@ -167,7 +209,7 @@ Maui.SettingsDialog
 
                 delegate: Maui.ListDelegate
                 {
-                    width: ListView.view.width                 
+                    width: ListView.view.width
                     template.iconSource: modelData.icon
                     template.iconSizeHint: Maui.Style.iconSizes.small
                     template.label1.text: modelData.label

@@ -409,10 +409,13 @@ StackView
 
                 RowLayout
                 {
+                    visible: settings.volumeControl
                     Layout.fillWidth: true
                     Layout.maximumWidth: 300
+
                     Layout.alignment: Qt.AlignHCenter
-                    spacing: Maui.Style.space.medium
+
+                    spacing: Maui.Style.space.small
 
                     Maui.Icon
                     {
@@ -564,10 +567,6 @@ StackView
                             text: control.progressTimeLabel
                             elide: Text.ElideMiddle
                             wrapMode: Text.NoWrap
-                            color: control.Maui.Theme.textColor
-                            font.weight: Font.Normal
-                            font.pointSize: Maui.Style.fontSizes.medium
-                            opacity: 0.7
                         }
 
                         Item
@@ -584,10 +583,6 @@ StackView
                             text: control.durationTimeLabel
                             elide: Text.ElideMiddle
                             wrapMode: Text.NoWrap
-                            color: control.Maui.Theme.textColor
-                            font.weight: Font.Normal
-                            font.pointSize: Maui.Style.fontSizes.medium
-                            opacity: 0.7
                         }
                     }
 

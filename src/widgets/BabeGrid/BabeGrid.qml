@@ -57,7 +57,7 @@ Maui.AltBrowser
 
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 
-    gridView.itemSize: 140
+    gridView.itemSize: 180
     gridView.itemHeight: 180
     holder.visible: count === 0
 
@@ -165,18 +165,22 @@ Maui.AltBrowser
         {
             id: _template
             anchors.centerIn: parent
-            width: control.gridView.itemSize - Maui.Style.space.big
-            height: control.gridView.itemHeight  - Maui.Style.space.big
+
+            width: control.gridView.itemSize - Maui.Style.space.medium
+            height: control.gridView.itemHeight  - Maui.Style.space.medium
 
             isCurrentItem: parent.GridView.isCurrentItem
             maskRadius: Maui.Style.radiusV
+
+            tooltipText: label1.text
             label1.text: model.album ? model.album : model.artist
             label2.text: model.artist && model.album ? model.artist : ""
+
             imageSource: "image://artwork/%1:".arg(control.prefix)+( control.prefix === "album" ? model.artist+":"+model.album : model.artist)
-            label1.font.bold: true
-            label1.font.weight: Font.Bold
+
             iconSource: "media-album-cover"
-            template.labelSizeHint: 40
+
+            template.labelsVisible: settings.showTitles
             template.alignment: Qt.AlignLeft
             template.fillMode: Image.PreserveAspectFit
 

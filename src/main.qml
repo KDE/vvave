@@ -23,7 +23,7 @@ Maui.ApplicationWindow
 {
     id: root
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
-    
+
     Maui.Style.styleType: focusView ? Maui.Style.Adaptive : (Maui.Handy.isAndroid ? settings.darkMode ? Maui.Style.Dark : Maui.Style.Light : undefined)
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
@@ -246,6 +246,8 @@ Maui.ApplicationWindow
         property bool focusViewDefault: false
         property alias sideBarWidth : _sideBarView.sideBar.preferredWidth
         property bool showArtwork: false
+        property bool showTitles: true
+        property bool volumeControl: true
     }
 
     Mpris2
@@ -421,25 +423,6 @@ Maui.ApplicationWindow
                             easing.type: Easing.InOutCubic
                         }
 
-//                        PropertyAnimation
-//                        {
-//                            property: "x"
-//                            from: 0
-//                            to:  _stackView.width
-//                            duration: 200
-//                            easing.type: Easing.InOutCubic
-//                        }
-
-//                        PropertyAnimation
-//                        {
-//                            property: "scale"
-//                            from: 1
-//                            to:  0
-//                            duration: 200
-//                            easing.type: Easing.InOutCubic
-//                        }
-
-
                         NumberAnimation { property: "opacity"; from: 1; to: 0; duration: 300; easing.type: Easing.InOutCubic }
                     }
                 }
@@ -460,24 +443,6 @@ Maui.ApplicationWindow
                             duration: 200
                             easing.type: Easing.InOutCubic
                         }
-
-//                        PropertyAnimation
-//                        {
-//                            property: "x"
-//                            from: _stackView.width
-//                            to: 0
-//                            duration: 200
-//                            easing.type: Easing.InOutCubic
-//                        }
-
-//                        PropertyAnimation
-//                        {
-//                            property: "scale"
-//                            from: 0
-//                            to: 1
-//                            duration: 200
-//                            easing.type: Easing.InOutCubic
-//                        }
 
                         NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 200; easing.type: Easing.OutCubic }
                     }

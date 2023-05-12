@@ -19,7 +19,7 @@ Maui.ToolBar
     {
         icon.name: _sideBarView.sideBar.visible ? "sidebar-collapse" : "sidebar-expand"
         onClicked:  _sideBarView.sideBar.toggle()
-
+        visible: _sideBarView.sideBar.collapsed
         checked:  _sideBarView.sideBar.visible
         ToolTip.delay: 1000
         ToolTip.timeout: 5000
