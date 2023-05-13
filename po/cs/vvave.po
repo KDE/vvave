@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-23 00:48+0000\n"
+"POT-Creation-Date: 2023-05-13 00:46+0000\n"
 "PO-Revision-Date: 2023-02-27 14:44+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -37,89 +37,89 @@ msgstr "© 2019-%1 Vývojový tým Maui"
 msgid "Developer"
 msgstr "Vývojář"
 
-#: src/main.qml:272
+#: src/main.qml:274
 #, kde-format
 msgid "Missing file"
 msgstr "Chybějící soubor"
 
-#: src/main.qml:334
+#: src/main.qml:336
 #, kde-format
 msgid "Remove %1 tracks"
 msgstr ""
 
-#: src/main.qml:335
+#: src/main.qml:337
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 
-#: src/main.qml:337 src/widgets/BabeTable/TableMenu.qml:135
+#: src/main.qml:339 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
 msgstr "Smazat"
 
-#: src/main.qml:338 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/main.qml:340 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: src/main.qml:508 src/widgets/SettingsView/ShortcutsDialog.qml:13
+#: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
 msgstr "Zkratky"
 
-#: src/main.qml:515
+#: src/main.qml:480
 #, kde-format
 msgid "Settings"
 msgstr "Nastavení"
 
-#: src/main.qml:522
+#: src/main.qml:487
 #, kde-format
 msgid "About"
 msgstr "O aplikaci"
 
-#: src/main.qml:555
+#: src/main.qml:520
 #, kde-format
 msgid "Songs"
 msgstr "Písně"
 
-#: src/main.qml:574 src/widgets/AlbumsView.qml:62
+#: src/main.qml:539 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Albums"
 msgstr "Alba"
 
-#: src/main.qml:581
+#: src/main.qml:546
 #, kde-format
 msgid "No Albums!"
 msgstr ""
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:22
+#: src/main.qml:547 src/main.qml:571 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr ""
 
-#: src/main.qml:598 src/widgets/AlbumsView.qml:62
+#: src/main.qml:563 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Artists"
 msgstr "Umělci"
 
-#: src/main.qml:605
+#: src/main.qml:570
 #, kde-format
 msgid "No Artists!"
 msgstr ""
 
-#: src/main.qml:622 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:587 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Značky"
 
-#: src/main.qml:629
+#: src/main.qml:594
 #, kde-format
 msgid "Folders"
 msgstr "Složky"
 
-#: src/main.qml:637
+#: src/main.qml:602
 #, kde-format
 msgid "Cloud"
 msgstr "Cloud"
@@ -443,94 +443,134 @@ msgid "Queue"
 msgstr "Fronta"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, kde-format
-msgid "Behaviour"
-msgstr "Chování"
+#, fuzzy, kde-format
+#| msgid "Play"
+msgid "Playback"
+msgstr "Přehrát"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, kde-format
-msgid "Configure the app plugins and behavior."
+#, fuzzy, kde-format
+#| msgid "Configure the app plugins and behavior."
+msgid "Configure the playback behavior."
 msgstr "Nastavení modulů a chování aplikace."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
+msgid "Auto Resume"
+msgstr "Automaticky obnovit"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:59
+#, kde-format
+msgid "Resume the last session playlist."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:71
+#, kde-format
+msgid "Volume"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:72
+#, kde-format
+msgid "Show volume controls."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#, fuzzy, kde-format
+#| msgid "Your Collection"
+msgid "Collection"
+msgstr "Vaše sbírka"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#: src/widgets/SettingsView/SettingsDialog.qml:118
+#, fuzzy, kde-format
+#| msgid "Configure the app plugins and behavior."
+msgid "Configure the app plugins and collection behavior."
+msgstr "Nastavení modulů a chování aplikace."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:90
+#, kde-format
 msgid "Fetch Artwork"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:91
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:71
+#: src/widgets/SettingsView/SettingsDialog.qml:103
 #, kde-format
 msgid "Auto Scan"
 msgstr "Automaticky prozkoumávat"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:104
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr "Prozkoumat zdroje při spuštění pro aktualizaci vaší sbírky."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:84
+#: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
-msgid "Auto Resume"
-msgstr "Automaticky obnovit"
-
-#: src/widgets/SettingsView/SettingsDialog.qml:85
-#, kde-format
-msgid "Resume the last session playlist."
+msgid "General"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:97
+#: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Focus View"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:98
+#: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Make the focus view the default."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:114
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Dark Mode"
 msgstr "Tmavý režim"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:115
+#: src/widgets/SettingsView/SettingsDialog.qml:141
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "Přepínač mezi světlým a tmavým barevným schématem."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:131
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Artwork"
 msgstr "Grafika"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:132
+#: src/widgets/SettingsView/SettingsDialog.qml:158
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Zobrazit obrázky alb pro skladby."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:148
+#: src/widgets/SettingsView/SettingsDialog.qml:173
+#, kde-format
+msgid "Titles"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:174
+#, kde-format
+msgid "Show the title of albums and artists in the grid view."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Sources"
 msgstr "Zdroje"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:149
+#: src/widgets/SettingsView/SettingsDialog.qml:191
 #, kde-format
 msgid "Add or remove sources"
 msgstr "Přidat nebo odebrat zdroje"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:192
+#: src/widgets/SettingsView/SettingsDialog.qml:234
 #, kde-format
 msgid "Add"
 msgstr "Přidat"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:209
+#: src/widgets/SettingsView/SettingsDialog.qml:251
 #, kde-format
 msgid "Scan now"
 msgstr "Prozkoumat nyní"
@@ -546,11 +586,11 @@ msgstr "Neznámý"
 msgid "Open file"
 msgstr "Otevřít soubor"
 
+#~ msgid "Behaviour"
+#~ msgstr "Chování"
+
 #~ msgid "Search collection"
 #~ msgstr "Prohledat sbírku"
-
-#~ msgid "Your Collection"
-#~ msgstr "Vaše sbírka"
 
 #~ msgid "Random tracks from your collection."
 #~ msgstr "Náhodné skladby z vaší sbírky."

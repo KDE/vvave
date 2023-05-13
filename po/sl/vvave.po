@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-23 00:48+0000\n"
+"POT-Creation-Date: 2023-05-13 00:46+0000\n"
 "PO-Revision-Date: 2023-04-24 10:02+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -38,17 +38,17 @@ msgstr "© 2019-%1 razvojna ekipa Maui"
 msgid "Developer"
 msgstr "Razvojnik"
 
-#: src/main.qml:272
+#: src/main.qml:274
 #, kde-format
 msgid "Missing file"
 msgstr "Manjkajoča datoteka"
 
-#: src/main.qml:334
+#: src/main.qml:336
 #, kde-format
 msgid "Remove %1 tracks"
 msgstr "Odstrani %1 sledi"
 
-#: src/main.qml:335
+#: src/main.qml:337
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -56,73 +56,73 @@ msgstr ""
 "Ali ste prepričani, da želite odstraniti te datoteke? Tega dejanja ne morete "
 "povrniti."
 
-#: src/main.qml:337 src/widgets/BabeTable/TableMenu.qml:135
+#: src/main.qml:339 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
 msgstr "Zbriši"
 
-#: src/main.qml:338 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/main.qml:340 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: src/main.qml:508 src/widgets/SettingsView/ShortcutsDialog.qml:13
+#: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
 msgstr "Bližnjice"
 
-#: src/main.qml:515
+#: src/main.qml:480
 #, kde-format
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: src/main.qml:522
+#: src/main.qml:487
 #, kde-format
 msgid "About"
 msgstr "O programu"
 
-#: src/main.qml:555
+#: src/main.qml:520
 #, kde-format
 msgid "Songs"
 msgstr "Pesmi"
 
-#: src/main.qml:574 src/widgets/AlbumsView.qml:62
+#: src/main.qml:539 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Albums"
 msgstr "Albumi"
 
-#: src/main.qml:581
+#: src/main.qml:546
 #, kde-format
 msgid "No Albums!"
 msgstr "Ni albumov!"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:22
+#: src/main.qml:547 src/main.qml:571 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr "Dodaj nove vire glasbe"
 
-#: src/main.qml:598 src/widgets/AlbumsView.qml:62
+#: src/main.qml:563 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Artists"
 msgstr "Umetniki"
 
-#: src/main.qml:605
+#: src/main.qml:570
 #, kde-format
 msgid "No Artists!"
 msgstr "Ni umetnikov!"
 
-#: src/main.qml:622 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:587 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Oznake"
 
-#: src/main.qml:629
+#: src/main.qml:594
 #, kde-format
 msgid "Folders"
 msgstr "Mape"
 
-#: src/main.qml:637
+#: src/main.qml:602
 #, kde-format
 msgid "Cloud"
 msgstr "Oblak"
@@ -452,21 +452,56 @@ msgid "Queue"
 msgstr "V čakalno vrsto"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, kde-format
-msgid "Behaviour"
-msgstr "Obnašanje"
+#, fuzzy, kde-format
+#| msgid "Play"
+msgid "Playback"
+msgstr "Predvajaj"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, kde-format
-msgid "Configure the app plugins and behavior."
+#, fuzzy, kde-format
+#| msgid "Configure the app plugins and behavior."
+msgid "Configure the playback behavior."
 msgstr "Konfiguriraj vtičnike aplikacije in obnašanje."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
+msgid "Auto Resume"
+msgstr "Samodejno nadaljuj"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:59
+#, kde-format
+msgid "Resume the last session playlist."
+msgstr "Nadaljuj seznam predvajanja zadnje seje."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:71
+#, kde-format
+msgid "Volume"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:72
+#, kde-format
+msgid "Show volume controls."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#, fuzzy, kde-format
+#| msgid "Your Collection"
+msgid "Collection"
+msgstr "Vaša zbirka"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#: src/widgets/SettingsView/SettingsDialog.qml:118
+#, fuzzy, kde-format
+#| msgid "Configure the app plugins and behavior."
+msgid "Configure the app plugins and collection behavior."
+msgstr "Konfiguriraj vtičnike aplikacije in obnašanje."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:90
+#, kde-format
 msgid "Fetch Artwork"
 msgstr "Dobavi umetniška dela"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:91
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -475,73 +510,78 @@ msgstr ""
 "Nabira albume in umetniška dela iz spletnih storitev: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius in drugih."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:71
+#: src/widgets/SettingsView/SettingsDialog.qml:103
 #, kde-format
 msgid "Auto Scan"
 msgstr "Samodejno prečesavanje"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:104
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr "Prečeši vse vire glasbe ob zagonu, da ohranjaš svojo zbirko osveženo."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:84
+#: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
-msgid "Auto Resume"
-msgstr "Samodejno nadaljuj"
+msgid "General"
+msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:85
-#, kde-format
-msgid "Resume the last session playlist."
-msgstr "Nadaljuj seznam predvajanja zadnje seje."
-
-#: src/widgets/SettingsView/SettingsDialog.qml:97
+#: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Focus View"
 msgstr "Osredotočeni pogled"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:98
+#: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Postavi osredotočeni pogled za privzetega."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:114
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Dark Mode"
 msgstr "Temni način"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:115
+#: src/widgets/SettingsView/SettingsDialog.qml:141
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "Preklopi med svetlo in temno barvno shemo."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:131
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Artwork"
 msgstr "Umetniško delo"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:132
+#: src/widgets/SettingsView/SettingsDialog.qml:158
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Za sledi prikaži umetniško delo naslovnice."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:148
+#: src/widgets/SettingsView/SettingsDialog.qml:173
+#, kde-format
+msgid "Titles"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:174
+#, kde-format
+msgid "Show the title of albums and artists in the grid view."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Sources"
 msgstr "Viri"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:149
+#: src/widgets/SettingsView/SettingsDialog.qml:191
 #, kde-format
 msgid "Add or remove sources"
 msgstr "Dodaj ali odstrani vire"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:192
+#: src/widgets/SettingsView/SettingsDialog.qml:234
 #, kde-format
 msgid "Add"
 msgstr "Dodaj"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:209
+#: src/widgets/SettingsView/SettingsDialog.qml:251
 #, kde-format
 msgid "Scan now"
 msgstr "Prečeši zdaj"
@@ -557,14 +597,14 @@ msgstr "Neznano"
 msgid "Open file"
 msgstr "Odpri datoteko"
 
+#~ msgid "Behaviour"
+#~ msgstr "Obnašanje"
+
 #~ msgid "stars"
 #~ msgstr "zvezdice"
 
 #~ msgid "Search collection"
 #~ msgstr "Išči zbirko"
-
-#~ msgid "Your Collection"
-#~ msgstr "Vaša zbirka"
 
 #~ msgid "Random tracks from your collection."
 #~ msgstr "Slučajne sledi iz vaše zbirke."

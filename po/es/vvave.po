@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-23 00:48+0000\n"
+"POT-Creation-Date: 2023-05-13 00:46+0000\n"
 "PO-Revision-Date: 2023-04-23 04:18+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -39,90 +39,90 @@ msgstr "© 2019-%1 El equipo de desarrollo de Maui"
 msgid "Developer"
 msgstr "Desarrollador"
 
-#: src/main.qml:272
+#: src/main.qml:274
 #, kde-format
 msgid "Missing file"
 msgstr "Archivo ausente"
 
-#: src/main.qml:334
+#: src/main.qml:336
 #, kde-format
 msgid "Remove %1 tracks"
 msgstr "Eliminar %1 pistas"
 
-#: src/main.qml:335
+#: src/main.qml:337
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 "¿Seguro que quiere eliminar estos archivos? Esta acción no se puede deshacer."
 
-#: src/main.qml:337 src/widgets/BabeTable/TableMenu.qml:135
+#: src/main.qml:339 src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
 msgstr "Borrar"
 
-#: src/main.qml:338 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/main.qml:340 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/main.qml:508 src/widgets/SettingsView/ShortcutsDialog.qml:13
+#: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
 msgstr "Accesos rápidos"
 
-#: src/main.qml:515
+#: src/main.qml:480
 #, kde-format
 msgid "Settings"
 msgstr "Preferencias"
 
-#: src/main.qml:522
+#: src/main.qml:487
 #, kde-format
 msgid "About"
 msgstr "Acerca de"
 
-#: src/main.qml:555
+#: src/main.qml:520
 #, kde-format
 msgid "Songs"
 msgstr "Canciones"
 
-#: src/main.qml:574 src/widgets/AlbumsView.qml:62
+#: src/main.qml:539 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Albums"
 msgstr "Álbumes"
 
-#: src/main.qml:581
+#: src/main.qml:546
 #, kde-format
 msgid "No Albums!"
 msgstr "No hay álbumes"
 
-#: src/main.qml:582 src/main.qml:606 src/widgets/TracksView.qml:22
+#: src/main.qml:547 src/main.qml:571 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr "Añadir nueva fuente de música"
 
-#: src/main.qml:598 src/widgets/AlbumsView.qml:62
+#: src/main.qml:563 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Artists"
 msgstr "Artistas"
 
-#: src/main.qml:605
+#: src/main.qml:570
 #, kde-format
 msgid "No Artists!"
 msgstr "No hay artistas"
 
-#: src/main.qml:622 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:587 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: src/main.qml:629
+#: src/main.qml:594
 #, kde-format
 msgid "Folders"
 msgstr "Carpetas"
 
-#: src/main.qml:637
+#: src/main.qml:602
 #, kde-format
 msgid "Cloud"
 msgstr "Nube"
@@ -448,21 +448,56 @@ msgid "Queue"
 msgstr "En cola"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, kde-format
-msgid "Behaviour"
-msgstr "Comportamiento"
+#, fuzzy, kde-format
+#| msgid "Play"
+msgid "Playback"
+msgstr "Reproducir"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, kde-format
-msgid "Configure the app plugins and behavior."
+#, fuzzy, kde-format
+#| msgid "Configure the app plugins and behavior."
+msgid "Configure the playback behavior."
 msgstr "Configura los complementos de la aplicación y su comportamiento."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
+msgid "Auto Resume"
+msgstr "Continuar automáticamente"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:59
+#, kde-format
+msgid "Resume the last session playlist."
+msgstr "Continuar la lista de reproducción de la última sesión."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:71
+#, kde-format
+msgid "Volume"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:72
+#, kde-format
+msgid "Show volume controls."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#, fuzzy, kde-format
+#| msgid "Your Collection"
+msgid "Collection"
+msgstr "Su colección"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#: src/widgets/SettingsView/SettingsDialog.qml:118
+#, fuzzy, kde-format
+#| msgid "Configure the app plugins and behavior."
+msgid "Configure the app plugins and collection behavior."
+msgstr "Configura los complementos de la aplicación y su comportamiento."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:90
+#, kde-format
 msgid "Fetch Artwork"
 msgstr "Obtener material gráfico"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:91
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -471,12 +506,12 @@ msgstr ""
 "Obtiene material gráfico sobre el álbum y los artistas de servicios en "
 "línea: LastFM, Spotify, MusicBrainz, iTunes, Genius, etc."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:71
+#: src/widgets/SettingsView/SettingsDialog.qml:103
 #, kde-format
 msgid "Auto Scan"
 msgstr "Explorar automáticamente"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:104
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -484,62 +519,67 @@ msgstr ""
 "Explorar todas las fuentes de música durante el inicio para mantener la "
 "colección actualizada."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:84
+#: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
-msgid "Auto Resume"
-msgstr "Continuar automáticamente"
+msgid "General"
+msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:85
-#, kde-format
-msgid "Resume the last session playlist."
-msgstr "Continuar la lista de reproducción de la última sesión."
-
-#: src/widgets/SettingsView/SettingsDialog.qml:97
+#: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Focus View"
 msgstr "Vista enfocada"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:98
+#: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Hacer que la vista enfocada sea la predeterminada."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:114
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Dark Mode"
 msgstr "Modo oscuro"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:115
+#: src/widgets/SettingsView/SettingsDialog.qml:141
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "Cambiar entre los esquemas de color claro y oscuro."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:131
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Artwork"
 msgstr "Material gráfico"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:132
+#: src/widgets/SettingsView/SettingsDialog.qml:158
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Mostrar el material gráfico de la carátula de las pistas."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:148
+#: src/widgets/SettingsView/SettingsDialog.qml:173
+#, kde-format
+msgid "Titles"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:174
+#, kde-format
+msgid "Show the title of albums and artists in the grid view."
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Sources"
 msgstr "Fuentes"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:149
+#: src/widgets/SettingsView/SettingsDialog.qml:191
 #, kde-format
 msgid "Add or remove sources"
 msgstr "Añadir o eliminar fuentes"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:192
+#: src/widgets/SettingsView/SettingsDialog.qml:234
 #, kde-format
 msgid "Add"
 msgstr "Añadir"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:209
+#: src/widgets/SettingsView/SettingsDialog.qml:251
 #, kde-format
 msgid "Scan now"
 msgstr "Explorar ahora"
@@ -555,14 +595,14 @@ msgstr "Desconocido"
 msgid "Open file"
 msgstr "Abrir archivo"
 
+#~ msgid "Behaviour"
+#~ msgstr "Comportamiento"
+
 #~ msgid "stars"
 #~ msgstr "estrellas"
 
 #~ msgid "Search collection"
 #~ msgstr "Buscar en la colección"
-
-#~ msgid "Your Collection"
-#~ msgstr "Su colección"
 
 #~ msgid "Random tracks from your collection."
 #~ msgstr "Pistas aleatorias de su colección."
