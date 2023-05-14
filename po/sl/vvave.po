@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-24 10:02+0200\n"
+"PO-Revision-Date: 2023-05-13 09:48+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #: src/main.cpp:102
@@ -452,16 +452,14 @@ msgid "Queue"
 msgstr "V čakalno vrsto"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Predvajaj"
+msgstr "Playback"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Konfiguriraj vtičnike aplikacije in obnašanje."
+msgstr "Konfiguriraj obnašanje playbacka."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -476,25 +474,23 @@ msgstr "Nadaljuj seznam predvajanja zadnje seje."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Glasnost"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Prikaži kontrole glasnosti."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "Vaša zbirka"
+msgstr "Zbirka"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Konfiguriraj vtičnike aplikacije in obnašanje."
+msgstr "Konfiguriraj vtičnike aplikacije in obnašanje zbirke."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -524,7 +520,7 @@ msgstr "Prečeši vse vire glasbe ob zagonu, da ohranjaš svojo zbirko osveženo
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Splošno"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -559,12 +555,12 @@ msgstr "Za sledi prikaži umetniško delo naslovnice."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Naslovi"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Prikazuj naslove albumov in umetnike v mrežnem pogledu."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format

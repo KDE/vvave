@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-23 14:38+0200\n"
+"PO-Revision-Date: 2023-05-13 10:19+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -447,16 +447,14 @@ msgid "Queue"
 msgstr "In wachtrij zetten"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
 msgstr "Afspelen"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "De app plug-ins en gedrag configureren."
+msgstr "Het afspeelgedrag configureren."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -471,25 +469,23 @@ msgstr "De afspeellijst van de laatste sessie hervatten."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Volumebesturing tonen."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "Uw verzameling"
+msgstr "Verzameling"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "De app plug-ins en gedrag configureren."
+msgstr "De app plug-ins en het gedrag van de verzameling configureren."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -521,7 +517,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -556,12 +552,12 @@ msgstr "De hoesillustratie voor de tracks tonen."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Titels"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "De titel van albums en artiesten in de rasterweergave tonen."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format

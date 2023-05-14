@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-23 10:08+0200\n"
+"PO-Revision-Date: 2023-05-13 12:45+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -447,16 +447,14 @@ msgid "Queue"
 msgstr "Cua"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Reproduïx"
+msgstr "Reproducció"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Configura els connectors i el comportament de l'aplicació."
+msgstr "Configura el comportament de la reproducció."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -471,24 +469,24 @@ msgstr "Reprén la llista de reproducció de l'última sessió."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Volum"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Mostra els controls de volum."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Collection"
-msgstr ""
+msgstr "Col·lecció"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Configura els connectors i el comportament de l'aplicació."
+msgstr ""
+"Configura els connectors de l'aplicació i el comportament de la col·lecció."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -520,7 +518,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -555,12 +553,12 @@ msgstr "Mostra el grafisme de les caràtules de les peces."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Títols"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Mostra el títols dels àlbums i els artistes en la vista de quadrícula."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
@@ -592,6 +590,3 @@ msgstr "Desconegut"
 #, kde-format
 msgid "Open file"
 msgstr "Obri un fitxer"
-
-#~ msgid "Behaviour"
-#~ msgstr "Comportament"

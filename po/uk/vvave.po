@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-23 08:45+0300\n"
+"PO-Revision-Date: 2023-05-13 08:45+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -451,16 +451,14 @@ msgid "Queue"
 msgstr "Додати до черги"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Відтворити"
+msgstr "Відтворення"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Налаштувати додатки і поведінку програми."
+msgstr "Налаштувати поведінку при відтворенні."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -475,25 +473,23 @@ msgstr "Відновлювати відтворення списку з оста
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Гучність"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Показати засоби керування гучністю."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "Ваша збірка"
+msgstr "Збірка"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Налаштувати додатки і поведінку програми."
+msgstr "Налаштувати додатки і поведінку збірки."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -525,7 +521,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Загальне"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -560,12 +556,12 @@ msgstr "Показувати зображення обкладинки комп�
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Назви"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Показувати у таблиці назви альбомів і виконавців."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-23 11:36+0300\n"
+"PO-Revision-Date: 2023-05-13 13:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -445,16 +445,14 @@ msgid "Queue"
 msgstr "Kuyruk"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Çal"
+msgstr "Çalma"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Uygulama eklentilerini ve davranışını yapılandırın."
+msgstr "Çalma davranışını yapılandırın."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -469,25 +467,23 @@ msgstr "Son oturumdaki listeyi sürdür."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Ses Düzeyi"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Ses düzeyi denetimlerini gösterin."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "Koleksiyonunuz"
+msgstr "Koleksiyon"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Uygulama eklentilerini ve davranışını yapılandırın."
+msgstr "Uygulama eklentilerini ve koleksiyon davranışını yapılandırın."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -519,7 +515,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -554,12 +550,12 @@ msgstr "Parçalar için kapak görselini gösterin."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Başlıklar"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Izgara görünümünde albümlerin ve sanatçıların başlıklarını göster."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
