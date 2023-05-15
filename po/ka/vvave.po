@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-24 06:01+0200\n"
+"PO-Revision-Date: 2023-05-14 06:23+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -446,16 +446,14 @@ msgid "Queue"
 msgstr "რიგი"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
 msgstr "დაკვრა"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "აპის დამატებებისა და ქცევის მორგება."
+msgstr "დაკვრის ქცევის მორგება."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -470,25 +468,23 @@ msgstr "ბოლო სესიის დასაკრავი სიის
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "ხმის დონე"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "ხმის კონტროლის ჩვენება."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "თქვენი კოლექცია"
+msgstr "კოლექცია"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "აპის დამატებებისა და ქცევის მორგება."
+msgstr "აპის დამატებებისა და კოლექციის ქცევის მორგება."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -519,7 +515,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "ზოგადი"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -554,12 +550,12 @@ msgstr "ტრეკებისთვის ყდის სურათის 
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "სათაურები"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "ბადის ხედში ალბომებისა და შემსრულებლების სახელების ჩვენება."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-23 04:18+0200\n"
+"PO-Revision-Date: 2023-05-14 01:27+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -448,16 +448,14 @@ msgid "Queue"
 msgstr "En cola"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
 msgstr "Reproducir"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Configura los complementos de la aplicación y su comportamiento."
+msgstr "Configurar el comportamiento de la reproducción."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -472,25 +470,25 @@ msgstr "Continuar la lista de reproducción de la última sesión."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Volumen"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Mostrar los controles del volumen."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "Su colección"
+msgstr "Colección"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Configura los complementos de la aplicación y su comportamiento."
+msgstr ""
+"Configura los complementos de la aplicación y el comportamiento de la "
+"colección."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -522,7 +520,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -557,12 +555,13 @@ msgstr "Mostrar el material gráfico de la carátula de las pistas."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Títulos"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr ""
+"Mostrar el título de los álbumes y los artistas en la vista de cuadrícula."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
