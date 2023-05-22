@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-29 12:34+0100\n"
+"PO-Revision-Date: 2023-05-21 14:59+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -445,16 +445,14 @@ msgid "Queue"
 msgstr "Queue"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Play"
+msgstr "Playback"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Configure the app plugins and behaviour."
+msgstr "Configure the playback behaviour."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -469,25 +467,23 @@ msgstr "Resume the last session playlist."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Show volume controls."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "Your Collection"
+msgstr "Collection"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Configure the app plugins and behaviour."
+msgstr "Configure the app plugins and collection behaviour."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -518,7 +514,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -553,12 +549,12 @@ msgstr "Show the cover artwork for the tracks."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Titles"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Show the title of albums and artists in the grid view."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
