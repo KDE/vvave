@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-29 15:36+0200\n"
+"PO-Revision-Date: 2023-05-20 09:11+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -447,16 +447,14 @@ msgid "Queue"
 msgstr "Accoda"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Riproduci"
+msgstr "Riproduzione"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Configura le estensioni e il comportamento dell'applicazione."
+msgstr "Configura il comportamento della riproduzione."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -471,25 +469,24 @@ msgstr "Riprendi l'ultima sessione della scaletta."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Mostra i controlli del volume."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "La tua collezione"
+msgstr "Collezione"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Configura le estensioni e il comportamento dell'applicazione."
+msgstr ""
+"Configura le estensioni del programma e il comportamento della collezione."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -521,7 +518,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -556,12 +553,12 @@ msgstr "Mostra la copertina di queste tracce."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Titoli"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Mostra il titolo degli album e gli artisti nella vista a griglia."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
