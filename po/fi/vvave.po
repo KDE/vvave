@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-05-08 13:48+0300\n"
+"PO-Revision-Date: 2023-06-04 23:10+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -443,16 +443,14 @@ msgid "Queue"
 msgstr "Jono"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Toista"
+msgstr "Toisto"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Sovelluksen liitännäisten ja toiminnan asetukset."
+msgstr "Toiston toiminta-asetukset."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -467,25 +465,23 @@ msgstr "Jatka viime istunnon soittolistaa."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Äänenvoimakkuus"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Näytä äänenvoimakkuuden säätimet."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
 msgstr "Kokoelma"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Sovelluksen liitännäisten ja toiminnan asetukset."
+msgstr "Sovelluksen liitännäisten ja kokoelman toiminta-asetukset."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -517,7 +513,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Perusasetukset"
 
 # *** TARKISTA: tässä ja seuraavassa on epäselvää, onko ”focus view” jokin tila vai toiminta (’kohdista näkymään’)
 #: src/widgets/SettingsView/SettingsDialog.qml:123
@@ -553,12 +549,12 @@ msgstr "Näitä kappaleille kansikuva."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Otsikot"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Näytä ruudukkonäkymässä albumien nimet ja artistit."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
