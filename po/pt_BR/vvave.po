@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-03-22 17:45-0300\n"
+"PO-Revision-Date: 2023-07-05 17:51-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -30,7 +30,7 @@ msgstr ""
 #: src/main.cpp:102
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
-msgstr ""
+msgstr "© 2019-%1 Equipe de desenvolvimento do Maui"
 
 #: src/main.cpp:104 src/main.cpp:105
 #, kde-format
@@ -40,7 +40,7 @@ msgstr "Desenvolvedor"
 #: src/main.qml:274
 #, kde-format
 msgid "Missing file"
-msgstr ""
+msgstr "Arquivo faltante"
 
 #: src/main.qml:336
 #, kde-format
@@ -127,7 +127,7 @@ msgstr "Nuvem"
 #: src/models/playlists/playlistsmodel.cpp:110
 #, kde-format
 msgid "Most Played"
-msgstr ""
+msgstr "Mais reproduzidas"
 
 #: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
@@ -160,12 +160,12 @@ msgstr "Reproduzindo música"
 #: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
-msgstr ""
+msgstr "Adicionar fontes"
 
 #: src/widgets/AlbumsView.qml:56
 #, kde-format
 msgid "This list is empty"
-msgstr ""
+msgstr "Esta lista está"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
@@ -344,32 +344,32 @@ msgstr ""
 #: src/widgets/MetadataDialog.qml:57
 #, kde-format
 msgid "Artist"
-msgstr ""
+msgstr "Artista"
 
 #: src/widgets/MetadataDialog.qml:73
 #, kde-format
 msgid "Album"
-msgstr ""
+msgstr "Álbum"
 
 #: src/widgets/MetadataDialog.qml:88
 #, kde-format
 msgid "Track"
-msgstr ""
+msgstr "Faixa"
 
 #: src/widgets/MetadataDialog.qml:103
 #, kde-format
 msgid "Genre"
-msgstr ""
+msgstr "Gênero"
 
 #: src/widgets/MetadataDialog.qml:118
 #, kde-format
 msgid "Year"
-msgstr ""
+msgstr "Ano"
 
 #: src/widgets/MetadataDialog.qml:133
 #, kde-format
 msgid "Comment"
-msgstr ""
+msgstr "Comentário"
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
@@ -384,7 +384,7 @@ msgstr ""
 #: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
-msgstr ""
+msgstr "Próximo"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
@@ -394,12 +394,12 @@ msgstr ""
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
 msgid "Remove from playlist"
-msgstr ""
+msgstr "Remover da lista de músicas"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
 #, kde-format
 msgid "No Playlists!"
-msgstr ""
+msgstr "Sem lista de músicas!"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
 #, kde-format
@@ -414,23 +414,25 @@ msgstr ""
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
 #, kde-format
 msgid "Accept"
-msgstr ""
+msgstr "Aceitar"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
+"Tem certeza que deseja remover esta etiqueta? Esta operação não pode ser "
+"desfeita."
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr ""
+msgstr "Reproduzir"
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
 msgid "Append"
-msgstr ""
+msgstr "Anexar"
 
 #: src/widgets/SelectionBar.qml:66
 #, kde-format
@@ -460,7 +462,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
@@ -470,13 +472,13 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #, kde-format
 msgid "Collection"
-msgstr ""
+msgstr "Coleção"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
 #, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr ""
+msgstr "Configura os plugins do aplicativo e o comportamento da coleção."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -504,7 +506,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -529,7 +531,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Artwork"
-msgstr ""
+msgstr "Arte"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:158
 #, kde-format
@@ -559,7 +561,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:234
 #, kde-format
 msgid "Add"
-msgstr ""
+msgstr "Adicionar"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:251
 #, kde-format
@@ -570,9 +572,9 @@ msgstr ""
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Open file"
-msgstr ""
+msgstr "Abrir arquivo"
