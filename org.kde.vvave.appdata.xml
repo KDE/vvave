@@ -11,6 +11,7 @@
   <name xml:lang="de">Vvave</name>
   <name xml:lang="el">Vvave</name>
   <name xml:lang="en-GB">Vvave</name>
+  <name xml:lang="eo">Vvave</name>
   <name xml:lang="es">Vvave</name>
   <name xml:lang="et">Vvave</name>
   <name xml:lang="eu">Vvave</name>
@@ -47,6 +48,7 @@
   <summary xml:lang="de">Wiedergabe Ihrer Musik-Sammlung</summary>
   <summary xml:lang="el">Αναπαραγωγή της μουσικής συλλογής σας</summary>
   <summary xml:lang="en-GB">Play your music collection</summary>
+  <summary xml:lang="eo">Ludu vian muzikaron</summary>
   <summary xml:lang="es">Reproducir su colección de música</summary>
   <summary xml:lang="et">Muusikakogu esitamine</summary>
   <summary xml:lang="eu">Jo zure musika bilduma</summary>
@@ -83,6 +85,7 @@
     <p xml:lang="de">Einfache Qt-Musikwiedergabe für Ihre Lieblingssongs.</p>
     <p xml:lang="el">Μικροσκοπικό μουσικό κουτί σε Qt για να έχετε τα αγαπημένα σας τραγούδια έτοιμα όταν τα ζητάτε.</p>
     <p xml:lang="en-GB">Tiny Qt Music Player to keep your favourite songs at hand.</p>
+    <p xml:lang="eo">Eta Qt-Muzikludilo por teni viajn plej ŝatatajn kantojn atingeblaj.</p>
     <p xml:lang="es">Pequeño reproductor de música en Qt para tener a mano sus canciones favoritas.</p>
     <p xml:lang="et">Tilluke Qt muusikamängija hoiab lemmikpalad käeulatuses.</p>
     <p xml:lang="eu">Qt musika jotzaile ñimiñoa zure gogoko abestiak eskura izateko.</p>
@@ -124,6 +127,7 @@
       <caption xml:lang="de">Vvave-Musikwiedergabe</caption>
       <caption xml:lang="el">Το πρόγραμμα αναπαραγωγής μουσικής Vvave</caption>
       <caption xml:lang="en-GB">The Vvave music player</caption>
+      <caption xml:lang="eo">La Vvave-muzikludilo</caption>
       <caption xml:lang="es">El reproductor de música Vvave</caption>
       <caption xml:lang="et">Vvave muusikamängija</caption>
       <caption xml:lang="eu">Vvave musika jotzailea</caption>
