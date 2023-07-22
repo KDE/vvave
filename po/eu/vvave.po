@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-13 00:46+0000\n"
-"PO-Revision-Date: 2023-04-13 23:39+0200\n"
+"PO-Revision-Date: 2023-07-21 12:34+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -130,16 +130,14 @@ msgid "Cloud"
 msgstr "Hodeia"
 
 #: src/models/playlists/playlistsmodel.cpp:110
-#, fuzzy, kde-format
-#| msgid "Never Played"
+#, kde-format
 msgid "Most Played"
-msgstr "Inoiz jo gabe"
+msgstr "Gehien jotakoa"
 
 #: src/models/playlists/playlistsmodel.cpp:117
-#, fuzzy, kde-format
-#| msgid "No Tracks!"
+#, kde-format
 msgid "Random Tracks"
-msgstr "Pistarik ez!"
+msgstr "Ausazko pistak"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
@@ -152,10 +150,9 @@ msgid "Never Played"
 msgstr "Inoiz jo gabe"
 
 #: src/models/playlists/playlistsmodel.cpp:138
-#, fuzzy, kde-format
-#| msgid "Classics"
+#, kde-format
 msgid "Classic Tracks"
-msgstr "Klasikoak"
+msgstr "Pista klasikoak"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
@@ -402,7 +399,7 @@ msgstr "Hurrengoa"
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr ""
+msgstr "zure jotze-zerrenda hutsik dago. Hasi hartan musika gehitzen"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
@@ -452,16 +449,14 @@ msgid "Queue"
 msgstr "Ilara"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Jo"
+msgstr "Atzera-jo"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the playback behavior."
-msgstr "Konfiguratu aplikazioaren pluginak eta jokabidea."
+msgstr "Konfiguratu atzera-jotzearen jokabidea."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
@@ -476,25 +471,23 @@ msgstr "Berrekin azken saioko jotze-zerrenda."
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Volume"
-msgstr ""
+msgstr "Bolumena"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Erakutsi bolumen-aginteak."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Your Collection"
+#, kde-format
 msgid "Collection"
-msgstr "Zure bilduma"
+msgstr "Bilduma"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #: src/widgets/SettingsView/SettingsDialog.qml:118
-#, fuzzy, kde-format
-#| msgid "Configure the app plugins and behavior."
+#, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr "Konfiguratu aplikazioaren pluginak eta jokabidea."
+msgstr "Konfiguratu aplikazioaren pluginak eta bildumaren jokabidea."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -525,7 +518,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Orokorra"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
@@ -560,12 +553,12 @@ msgstr "Pistetarako, azaleko artelana erakutsi."
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
-msgstr ""
+msgstr "Tituluak"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Erakutsi albumaren titulua eta artistak sareta-ikuspegian."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
