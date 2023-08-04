@@ -1,0 +1,587 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the vvave package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: vvave\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-05-13 00:46+0000\n"
+"PO-Revision-Date: 2023-08-03 20:42+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: src/main.cpp:102
+#, kde-format
+msgid "Vvave"
+msgstr "Vvave"
+
+#: src/main.cpp:102
+#, kde-format
+msgid "Organize and listen to your music."
+msgstr "Organisera och lyssna på dina låtar."
+
+#: src/main.cpp:102
+#, kde-format
+msgid "© 2019-%1 Maui Development Team"
+msgstr "© 2019-%1 Maui utvecklingsgrupp"
+
+#: src/main.cpp:104 src/main.cpp:105
+#, kde-format
+msgid "Developer"
+msgstr "Utvecklare"
+
+#: src/main.qml:274
+#, kde-format
+msgid "Missing file"
+msgstr "Saknar fil"
+
+#: src/main.qml:336
+#, kde-format
+msgid "Remove %1 tracks"
+msgstr "Ta bort %1 spår"
+
+#: src/main.qml:337
+#, kde-format
+msgid ""
+"Are you sure you want to remove these files? This action can not be undone."
+msgstr "Är du säker på att du vill ta bort filerna? Åtgärden kan inte ångras."
+
+#: src/main.qml:339 src/widgets/BabeTable/TableMenu.qml:135
+#, kde-format
+msgid "Delete"
+msgstr "Ta bort"
+
+#: src/main.qml:340 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#, kde-format
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
+#, kde-format
+msgid "Shortcuts"
+msgstr "Genvägar"
+
+#: src/main.qml:480
+#, kde-format
+msgid "Settings"
+msgstr "Inställningar"
+
+#: src/main.qml:487
+#, kde-format
+msgid "About"
+msgstr "Om"
+
+#: src/main.qml:520
+#, kde-format
+msgid "Songs"
+msgstr "Låtar"
+
+#: src/main.qml:539 src/widgets/AlbumsView.qml:62
+#, kde-format
+msgid "Albums"
+msgstr "Album"
+
+#: src/main.qml:546
+#, kde-format
+msgid "No Albums!"
+msgstr "Inga album."
+
+#: src/main.qml:547 src/main.qml:571 src/widgets/TracksView.qml:22
+#, kde-format
+msgid "Add new music sources"
+msgstr "Lägg till nya musikkällor"
+
+#: src/main.qml:563 src/widgets/AlbumsView.qml:62
+#, kde-format
+msgid "Artists"
+msgstr "Artister"
+
+#: src/main.qml:570
+#, kde-format
+msgid "No Artists!"
+msgstr "Inga artister."
+
+#: src/main.qml:587 src/widgets/BabeTable/TableMenu.qml:44
+#: src/widgets/SelectionBar.qml:46
+#, kde-format
+msgid "Tags"
+msgstr "Taggar"
+
+#: src/main.qml:594
+#, kde-format
+msgid "Folders"
+msgstr "Kataloger"
+
+#: src/main.qml:602
+#, kde-format
+msgid "Cloud"
+msgstr "Moln"
+
+#: src/models/playlists/playlistsmodel.cpp:110
+#, kde-format
+msgid "Most Played"
+msgstr "Mest spelade"
+
+#: src/models/playlists/playlistsmodel.cpp:117
+#, kde-format
+msgid "Random Tracks"
+msgstr "Slumpmässiga spår"
+
+#: src/models/playlists/playlistsmodel.cpp:124
+#, kde-format
+msgid "Recent Tracks"
+msgstr "Senaste spår"
+
+#: src/models/playlists/playlistsmodel.cpp:131
+#, kde-format
+msgid "Never Played"
+msgstr "Aldrig spelade"
+
+#: src/models/playlists/playlistsmodel.cpp:138
+#, kde-format
+msgid "Classic Tracks"
+msgstr "Klassiska spår"
+
+#: src/services/local/powermanagementinterface.cpp:173
+#: src/services/local/powermanagementinterface.cpp:223
+#, kde-format
+msgctxt "explanation for sleep inhibit during play of music"
+msgid "Playing music"
+msgstr "Spelar musik"
+
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
+#: src/widgets/TracksView.qml:27
+#, kde-format
+msgid "Add sources"
+msgstr "Lägg till källor"
+
+#: src/widgets/AlbumsView.qml:56
+#, kde-format
+msgid "This list is empty"
+msgstr "Listan är tom"
+
+#: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
+#: src/widgets/CloudView/CloudView.qml:50
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#, kde-format
+msgid "Filter"
+msgid_plural "Filter %1 albums"
+msgstr[0] "Filter"
+msgstr[1] "Filtrera %1 album"
+
+#: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
+#, kde-format
+msgid "Play All"
+msgstr "Spela alla"
+
+#: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:54
+#, kde-format
+msgid "Append All"
+msgstr "Lägg till alla"
+
+#: src/widgets/BabeTable/BabeTable.qml:139
+#, kde-format
+msgid "Remove track"
+msgstr "Ta bort spår"
+
+#: src/widgets/BabeTable/BabeTable.qml:140
+#, kde-format
+msgid ""
+"Are you sure you want to delete the file from your computer? This action can "
+"not be undone."
+msgstr ""
+"Är du säker på att du vill ta bort filen från datorn? Åtgärden kan inte "
+"ångras."
+
+#: src/widgets/BabeTable/BabeTable.qml:142
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Ta bort"
+
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
+#, kde-format
+msgid "Go to Artist"
+msgstr "Gå till artist"
+
+#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:74
+#, kde-format
+msgid "Go to Album"
+msgstr "Gå till album"
+
+#: src/widgets/BabeTable/TableMenu.qml:35
+#, kde-format
+msgid "Fav it"
+msgstr "Favorit"
+
+#: src/widgets/BabeTable/TableMenu.qml:35
+#, kde-format
+msgid "UnFav it"
+msgstr "Ta bort från favoriter"
+
+#: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
+#, kde-format
+msgid "Edit"
+msgstr "Redigera"
+
+#: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
+#, kde-format
+msgid "Share"
+msgstr "Dela"
+
+#: src/widgets/BabeTable/TableMenu.qml:71
+#, kde-format
+msgid "Select"
+msgstr "Markera"
+
+#: src/widgets/BabeTable/TableMenu.qml:84
+#, kde-format
+msgid "Play Next"
+msgstr "Spela nästa"
+
+#: src/widgets/BabeTable/TableMenu.qml:109
+#, kde-format
+msgid "Show in Folder"
+msgstr "Visa i katalog"
+
+#: src/widgets/CloudView/CloudView.qml:65
+#, kde-format
+msgid "Opps!"
+msgstr "Hoppsan!"
+
+#: src/widgets/CloudView/CloudView.qml:66
+#, kde-format
+msgid ""
+"You don't have an account set up.\n"
+"You can set up your account now by clicking here or under the Accounts "
+"options in the main menu"
+msgstr ""
+"Du har inte något konto inställt.\n"
+"Du kan ställa in kontot nu genom att klicka här eller under "
+"kontoalternativet i huvudmenyn."
+
+#: src/widgets/FocusView.qml:146
+#, kde-format
+msgid "Find"
+msgstr "Sök"
+
+#: src/widgets/FocusView.qml:188
+#, kde-format
+msgid "No Results!"
+msgstr "Inga resultat."
+
+#: src/widgets/FocusView.qml:189
+#, kde-format
+msgid "Try with something else"
+msgstr "Försök med någonting annat"
+
+#: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#, kde-format
+msgid "Start putting together your playlist."
+msgstr "Börja sätta ihop din spellista."
+
+#: src/widgets/FoldersView/FoldersView.qml:32
+#, kde-format
+msgid "Filter %1 folder"
+msgid_plural "Filter %1 folders"
+msgstr[0] ""
+msgstr[1] "Filtrera %1 kataloger"
+
+#: src/widgets/FoldersView/FoldersView.qml:46
+#, kde-format
+msgid "No Folders!"
+msgstr "Inga kataloger."
+
+#: src/widgets/FoldersView/FoldersView.qml:47
+#, kde-format
+msgid "Add new music to your sources to browse by folders"
+msgstr "Lägg till ny musik i dina källor för att bläddra enligt kataloger"
+
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
+#, kde-format
+msgid "No Tracks!"
+msgstr "Inga spår."
+
+#: src/widgets/FoldersView/FoldersView.qml:135
+#, kde-format
+msgid "This source folder seems to be empty!"
+msgstr "Källkatalogen verkar vara tom."
+
+#: src/widgets/InfoView/InfoView.qml:45
+#, kde-format
+msgid "Artist Info"
+msgstr "Artistinformation"
+
+#: src/widgets/InfoView/InfoView.qml:73
+#, kde-format
+msgid "Album Info"
+msgstr "Albuminformation"
+
+#: src/widgets/MainPlaylist/MainPlaylist.qml:133
+#, kde-format
+msgid "Syncing to "
+msgstr "Synkroniserar till"
+
+#: src/widgets/MetadataDialog.qml:40
+#, kde-format
+msgid "Metadata"
+msgstr "Metadata"
+
+#: src/widgets/MetadataDialog.qml:41
+#, kde-format
+msgid "Embedded metadata info."
+msgstr "Inbädda metadatainformation."
+
+#: src/widgets/MetadataDialog.qml:45
+#, kde-format
+msgid "Track Title"
+msgstr "Spårtitel"
+
+#: src/widgets/MetadataDialog.qml:57
+#, kde-format
+msgid "Artist"
+msgstr "Artist"
+
+#: src/widgets/MetadataDialog.qml:73
+#, kde-format
+msgid "Album"
+msgstr "Album"
+
+#: src/widgets/MetadataDialog.qml:88
+#, kde-format
+msgid "Track"
+msgstr "Spår"
+
+#: src/widgets/MetadataDialog.qml:103
+#, kde-format
+msgid "Genre"
+msgstr "Genre"
+
+#: src/widgets/MetadataDialog.qml:118
+#, kde-format
+msgid "Year"
+msgstr "År"
+
+#: src/widgets/MetadataDialog.qml:133
+#, kde-format
+msgid "Comment"
+msgstr "Kommentar"
+
+#: src/widgets/PlaybackBar.qml:27
+#, kde-format
+msgid "Toogle SideBar"
+msgstr "Visa eller dölj sidorad"
+
+#: src/widgets/PlaybackBar.qml:56
+#, kde-format
+msgid "Play and pause"
+msgstr "Spela och paus"
+
+#: src/widgets/PlaybackBar.qml:66
+#, kde-format
+msgid "Next"
+msgstr "Nästa"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:57
+#, kde-format
+msgid "Your playlist is empty. Start adding new music to it"
+msgstr "Din spellista är tom. Börja lägga till ny musik i den."
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:68
+#, kde-format
+msgid "Remove from playlist"
+msgstr "Ta bort från spellista"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
+#, kde-format
+msgid "No Playlists!"
+msgstr "Inga spellistor."
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
+#, kde-format
+msgid "Start creating new custom playlists"
+msgstr "Börja skapa nya egna spellistor"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
+#, kde-format
+msgid "Remove '%1'"
+msgstr "Ta bort '%1'"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
+#, kde-format
+msgid "Accept"
+msgstr "Acceptera"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
+#, kde-format
+msgid ""
+"Are you sure you want to remove this tag? This operation can not be undone."
+msgstr ""
+"Är du säker på att du vill ta bort etiketten? Åtgärden går inte att ångra."
+
+#: src/widgets/SelectionBar.qml:28
+#, kde-format
+msgid "Play"
+msgstr "Spela"
+
+#: src/widgets/SelectionBar.qml:39
+#, kde-format
+msgid "Append"
+msgstr "Lägg till"
+
+#: src/widgets/SelectionBar.qml:66
+#, kde-format
+msgid "Queue"
+msgstr "Köa"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:53
+#, kde-format
+msgid "Playback"
+msgstr "Uppspelning"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:54
+#, kde-format
+msgid "Configure the playback behavior."
+msgstr "Anpassa spellistans beteende."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:58
+#, kde-format
+msgid "Auto Resume"
+msgstr "Återuppta automatiskt"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:59
+#, kde-format
+msgid "Resume the last session playlist."
+msgstr "Återuppta den senaste sessionens spellista."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:71
+#, kde-format
+msgid "Volume"
+msgstr "Volym"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:72
+#, kde-format
+msgid "Show volume controls."
+msgstr "Visa volymkontroller."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#, kde-format
+msgid "Collection"
+msgstr "Samling"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#: src/widgets/SettingsView/SettingsDialog.qml:118
+#, kde-format
+msgid "Configure the app plugins and collection behavior."
+msgstr "Anpassa programmets insticksprogram och samlingsbeteende."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:90
+#, kde-format
+msgid "Fetch Artwork"
+msgstr "Hämta omslag"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:91
+#, kde-format
+msgid ""
+"Gathers album and artists artworks from online services: LastFM, Spotify, "
+"MusicBrainz, iTunes, Genius, and others."
+msgstr ""
+"Samlar album- och artistomslag från nättjänster: LastFM, Spotify, "
+"MusicBrainz, iTunes, Genius med flera."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:103
+#, kde-format
+msgid "Auto Scan"
+msgstr "Sök automatiskt"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:104
+#, kde-format
+msgid ""
+"Scan all the music sources on startup to keep your collection up to date."
+msgstr ""
+"Sök igenom alla musikkällor vid start för att hålla samlingen uppdaterad."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:117
+#, kde-format
+msgid "General"
+msgstr "Allmänt"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:123
+#, kde-format
+msgid "Focus View"
+msgstr "Fokuserad vy"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:124
+#, kde-format
+msgid "Make the focus view the default."
+msgstr "Gör den fokuserade vyn förvald."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:140
+#, kde-format
+msgid "Dark Mode"
+msgstr "Mörkt läge"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:141
+#, kde-format
+msgid "Switch between light and dark colorscheme."
+msgstr "Byt mellan ljust och mörkt färgschema."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:157
+#, kde-format
+msgid "Artwork"
+msgstr "Omslag"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:158
+#, kde-format
+msgid "Show the cover artwork for the tracks."
+msgstr "Visa omslaget för spåren."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:173
+#, kde-format
+msgid "Titles"
+msgstr "Rubriker"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:174
+#, kde-format
+msgid "Show the title of albums and artists in the grid view."
+msgstr "Visa titel för album och artister i rutnätet."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:190
+#, kde-format
+msgid "Sources"
+msgstr "Källor"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:191
+#, kde-format
+msgid "Add or remove sources"
+msgstr "Lägg till eller ta bort källor"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:234
+#, kde-format
+msgid "Add"
+msgstr "Lägg till"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:251
+#, kde-format
+msgid "Scan now"
+msgstr "Sök nu"
+
+#: src/widgets/SettingsView/ShortcutsDialog.qml:26
+#: src/widgets/SettingsView/ShortcutsDialog.qml:39
+#, kde-format
+msgid "Unknown"
+msgstr "Okänd"
+
+#: src/widgets/TracksView.qml:33
+#, kde-format
+msgid "Open file"
+msgstr "Öppna fil"
