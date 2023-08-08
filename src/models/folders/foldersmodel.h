@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include <MauiKit/Core/mauilist.h>
+#include <MauiKit3/Core/mauilist.h>
 
 class FoldersModel : public MauiList
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include <MauiKit/Core/mauilist.h>
+#include <MauiKit3/Core/mauilist.h>
 
 class PlaylistsModel : public MauiList
 {

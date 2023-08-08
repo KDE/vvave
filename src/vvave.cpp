@@ -3,9 +3,9 @@
 #include "db/collectionDB.h"
 #include "services/local/taginfo.h"
 
-#include <MauiKit/FileBrowsing/fileloader.h>
-#include <MauiKit/FileBrowsing/fm.h>
-#include <MauiKit/Core/utils.h>
+#include <MauiKit3/FileBrowsing/fileloader.h>
+#include <MauiKit3/FileBrowsing/fm.h>
+#include <MauiKit3/Core/utils.h>
 
 #include "utils/bae.h"
 

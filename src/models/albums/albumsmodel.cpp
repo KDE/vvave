@@ -3,8 +3,8 @@
 
 #include "vvave.h"
 
-#include <MauiKit/FileBrowsing/downloader.h>
-#include <MauiKit/FileBrowsing/fmstatic.h>
+#include <MauiKit3/FileBrowsing/downloader.h>
+#include <MauiKit3/FileBrowsing/fmstatic.h>
 
 #include <QTimer>
 

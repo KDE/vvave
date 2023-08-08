@@ -1,5 +1,5 @@
 #include "service.h"
-#include <MauiKit/FileBrowsing/downloader.h>
+#include <MauiKit3/FileBrowsing/downloader.h>
 
 Service::Service(QObject *parent)
     : QObject(parent)

@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include <MauiKit/Core/fmh.h>
-#include <MauiKit/Core/mauilist.h>
+#include <MauiKit3/Core/fmh.h>
+#include <MauiKit3/Core/mauilist.h>
 
 class FM;
 class AbstractMusicProvider;

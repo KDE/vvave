@@ -6,8 +6,8 @@
 #include <QStandardPaths>
 #include <QString>
 
-#include <MauiKit/Core/fmh.h>
-#include <MauiKit/FileBrowsing/fmstatic.h>
+#include <MauiKit3/Core/fmh.h>
+#include <MauiKit3/FileBrowsing/fmstatic.h>
 
 namespace BAE
 {

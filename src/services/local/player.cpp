@@ -1,7 +1,7 @@
 #include "player.h"
 
 #include <QTime>
-#include <MauiKit/Accounts/mauiaccounts.h>
+#include <MauiKit3/Accounts/mauiaccounts.h>
 #include "powermanagementinterface.h"
 #include <QMediaPlayerControl>
 #include <QMediaService>

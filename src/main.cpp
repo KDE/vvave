@@ -19,18 +19,18 @@
 #endif
 
 #ifdef Q_OS_ANDROID
-#include <MauiKit/Core/mauiandroid.h>
+#include <MauiKit3/Core/mauiandroid.h>
 #include <QAndroidService>
 #include <QAndroidJniEnvironment>
 #include <QAndroidJniObject>
 #endif
 
 #ifdef Q_OS_MACOS
-#include <MauiKit/Core/mauimacos.h>
+#include <MauiKit3/Core/mauimacos.h>
 #endif
 
-#include <MauiKit/FileBrowsing/fmstatic.h>
-#include <MauiKit/Core/mauiapp.h>
+#include <MauiKit3/FileBrowsing/fmstatic.h>
+#include <MauiKit3/Core/mauiapp.h>
 
 #include "../vvave_version.h"
 

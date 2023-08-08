@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QStringList>
 
-#include <MauiKit/Core/fmh.h>
+#include <MauiKit3/Core/fmh.h>
 
 class vvave : public QObject
 {

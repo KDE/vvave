@@ -27,12 +27,11 @@ Maui.AltBrowser
     Component
     {
         id: _removeTagDialogComponent
-        Maui.Dialog
+        Maui.InfoDialog
         {
             title: i18n("Remove '%1'", currentPlaylist)
-            acceptButton.text: i18n("Accept")
-            rejectButton.text: i18n("Cancel")
-            page.margins: Maui.Style.space.big
+//            acceptButton.text: i18n("Accept")
+//            rejectButton.text: i18n("Cancel")
             message: i18n("Are you sure you want to remove this tag? This operation can not be undone.")
             onAccepted:
             {
