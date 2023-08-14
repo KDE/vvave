@@ -2,7 +2,7 @@
 #include "../../utils/bae.h"
 #include "taginfo.h"
 #include "vvave.h"
-#include <MauiKit/FileBrowsing/downloader.h>
+#include <MauiKit3/FileBrowsing/downloader.h>
 #include <QImage>
 
 AsyncImageResponse::AsyncImageResponse(const QString &id, const QSize &requestedSize)

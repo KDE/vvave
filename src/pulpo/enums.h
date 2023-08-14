@@ -1,7 +1,7 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 
-#include <MauiKit/Core/fmh.h>
+#include <MauiKit3/Core/fmh.h>
 
 #include <QMap>
 #include <QVariant>

@@ -6,7 +6,7 @@
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/services/web
     ${CMAKE_CURRENT_BINARY_DIR}/services/web
-    )
+)
 
 set(vvave_SRCS
     main.cpp
@@ -35,13 +35,12 @@ set(vvave_SRCS
     models/folders/foldersmodel.cpp
     models/cloud/cloud.cpp
     kde/mpris2/mpris2.cpp
-    kde/server.cpp
-    )
+    kde/server.cpp)
 
 if(QUICK_COMPILER)
-        qtquick_compiler_add_resources(vvave_QML_QRC qml.qrc)
+    qtquick_compiler_add_resources(vvave_QML_QRC qml.qrc)
 else()
-        qt5_add_resources(vvave_QML_QRC qml.qrc)
+    qt5_add_resources(vvave_QML_QRC qml.qrc)
 endif()
 
 if(UNIX AND NOT ANDROID)
@@ -51,28 +50,28 @@ if(UNIX AND NOT ANDROID)
 endif()
 
 if(ANDROID)
-    add_library(${PROJECT_NAME} SHARED
+    add_library(${PROJECT_NAME}
+        SHARED
         ${vvave_SRCS}
-        ${vvave_QML_QRC}
-        )
+        ${vvave_QML_QRC})
 else()
     add_executable(${PROJECT_NAME}
         ${vvave_SRCS}
         ${vvave_QML_QRC}
-        ${vvave_dbus_SRCS}
-        )
+        ${vvave_dbus_SRCS})
 endif()
 
 if (ANDROID)
     find_package(OpenSSL REQUIRED)
 
     target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras OpenSSL::SSL)
+
     kde_source_files_enable_exceptions(${PROJECT_NAME})
+
 elseif(UNIX AND NOT WIN32 AND NOT APPLE)
     target_sources(${PROJECT_NAME} PRIVATE
         kde/mpris2/mediaplayer2.cpp
-        kde/mpris2/mediaplayer2player.cpp
-        )
+        kde/mpris2/mediaplayer2player.cpp)
     target_link_libraries(${PROJECT_NAME} Qt5::DBus)
 endif()
 
@@ -85,7 +84,20 @@ target_compile_definitions(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${Taglib_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} MauiKit MauiKit::FileBrowsing MauiKit::Accounts Qt5::Core Qt5::Network Qt5::Sql Qt5::Qml Qt5::Xml Qt5::Multimedia Qt5::QuickControls2 KF5::CoreAddons KF5::I18n ${Taglib_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}
+    MauiKit3
+    MauiKit3::FileBrowsing
+    MauiKit3::Accounts
+    Qt5::Core
+    Qt5::Network
+    Qt5::Sql
+    Qt5::Qml
+    Qt5::Xml
+    Qt5::Multimedia
+    Qt5::QuickControls2
+    KF5::CoreAddons
+    KF5::I18n
+    ${Taglib_LIBRARIES})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS ${PROJECT_NAME} ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

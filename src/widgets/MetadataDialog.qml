@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 import org.mauikit.controls 1.3 as Maui
 import QtQuick.Templates 2.15 as T
 
-Maui.SettingsDialog
+Maui.InfoDialog
 {
     id: control
 
@@ -13,7 +13,7 @@ Maui.SettingsDialog
     property int index : -1 //index of the item in the model TracksModel
 
     property Maui.BaseModel model
-    defaultButtons: true
+
     title: i18n("Edit")
 
     signal edited(var data, int index)

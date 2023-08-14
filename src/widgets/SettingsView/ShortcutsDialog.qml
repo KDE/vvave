@@ -6,7 +6,7 @@ import org.mauikit.controls 1.3 as Maui
 
 import org.maui.vvave 1.0
 
-Maui.Dialog
+Maui.PopupPage
 {
 
     id: control
@@ -14,7 +14,7 @@ Maui.Dialog
     persistent: false
     page.showTitle: false
     headBar.visible: false
-    defaultButtons: false
+
     maxHeight: 500 // Copied from Nota. I don't like hardcoded layout, though.
     maxWidth: 350
 

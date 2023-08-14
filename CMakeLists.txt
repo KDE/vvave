@@ -48,15 +48,14 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Q
 find_package(KF5 ${REQUIRED_KF5_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
 
 if(QUICK_COMPILER)
-        find_package(Qt5QuickCompiler)
-        set_package_properties(Qt5QuickCompiler PROPERTIES
-                DESCRIPTION "Compile QML at build time"
-                TYPE OPTIONAL
-        )
+    find_package(Qt5QuickCompiler)
+    set_package_properties(Qt5QuickCompiler PROPERTIES
+        DESCRIPTION "Compile QML at build time"
+        TYPE OPTIONAL)
 endif()
 
-find_package(MauiKit REQUIRED COMPONENTS FileBrowsing Accounts)
-find_package(MauiKit REQUIRED)
+find_package(MauiKit3 REQUIRED COMPONENTS FileBrowsing Accounts)
+find_package(MauiKit3 REQUIRED)
 
 find_package(Taglib 1.4 REQUIRED)
 
@@ -71,23 +70,21 @@ if(UNIX OR WIN32 OR APPLE AND NOT ANDROID)
 endif()
 
 if(${ECM_SOURCE_UNDER_VERSION_CONTROL})
-execute_process(
-  COMMAND git rev-parse --abbrev-ref HEAD
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  OUTPUT_VARIABLE GIT_BRANCH
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-)
+    execute_process(
+        COMMAND git rev-parse --abbrev-ref HEAD
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_BRANCH
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-# Get the latest abbreviated commit hash of the working branch
-execute_process(
-  COMMAND git log -1 --format=%h
-  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-  OUTPUT_VARIABLE GIT_COMMIT_HASH
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-)
+    # Get the latest abbreviated commit hash of the working branch
+    execute_process(
+        COMMAND git log -1 --format=%h
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_COMMIT_HASH
+        OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
-add_definitions(-DGIT_BRANCH="${GIT_BRANCH}")
+    add_definitions(-DGIT_COMMIT_HASH="${GIT_COMMIT_HASH}")
+    add_definitions(-DGIT_BRANCH="${GIT_BRANCH}")
 
 else()
     add_definitions(-DGIT_COMMIT_HASH="${VVAVE_VERSION}")
@@ -96,8 +93,7 @@ endif()
 
 ecm_setup_version(${VVAVE_VERSION}
     VARIABLE_PREFIX VVAVE
-    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/vvave_version.h"
-    )
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/vvave_version.h")
 
 add_subdirectory(src)
 
