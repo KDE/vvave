@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 00:46+0000\n"
+"POT-Creation-Date: 2023-08-15 00:44+0000\n"
 "PO-Revision-Date: 2023-05-13 10:19+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -54,16 +54,6 @@ msgid ""
 msgstr ""
 "Wilt u deze bestanden verwijderen? Deze actie kan niet ongedaan worden "
 "gemaakt."
-
-#: src/main.qml:339 src/widgets/BabeTable/TableMenu.qml:135
-#, kde-format
-msgid "Delete"
-msgstr "Verwijderen"
-
-#: src/main.qml:340 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, kde-format
-msgid "Cancel"
-msgstr "Annuleren"
 
 #: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
@@ -171,7 +161,7 @@ msgstr "Deze lijst is leeg"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
@@ -202,13 +192,6 @@ msgstr ""
 "Wilt u dit bestand van uw computer verwijderen? Deze actie kan niet ongedaan "
 "worden gemaakt."
 
-#: src/widgets/BabeTable/BabeTable.qml:142
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
-#: src/widgets/SelectionBar.qml:76
-#, kde-format
-msgid "Remove"
-msgstr "Verwijderen"
-
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
@@ -230,7 +213,7 @@ msgid "UnFav it"
 msgstr "Fav. opheffen"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "Bewerken"
@@ -254,6 +237,11 @@ msgstr "Volgende afspelen"
 #, kde-format
 msgid "Show in Folder"
 msgstr "In map tonen"
+
+#: src/widgets/BabeTable/TableMenu.qml:135
+#, kde-format
+msgid "Delete"
+msgstr "Verwijderen"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
@@ -419,17 +407,20 @@ msgstr "Met aanmaken van nieuwe aangepaste afspeellijsten beginnen"
 msgid "Remove '%1'"
 msgstr "'%1' verwijderen"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
-#, kde-format
-msgid "Accept"
-msgstr "Accepteren"
-
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
+#. i18n("Accept")
+#. rejectButton.text: i18n("Cancel")
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
 "Wilt u deze tag verwijderen? Deze bewerking kan niet ongedaan worden gemaakt."
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Verwijderen"
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
@@ -446,53 +437,53 @@ msgstr "Achteraan toevoegen"
 msgid "Queue"
 msgstr "In wachtrij zetten"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:53
+#: src/widgets/SettingsView/SettingsDialog.qml:52
 #, kde-format
 msgid "Playback"
 msgstr "Afspelen"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:54
+#: src/widgets/SettingsView/SettingsDialog.qml:53
 #, kde-format
 msgid "Configure the playback behavior."
 msgstr "Het afspeelgedrag configureren."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:58
+#: src/widgets/SettingsView/SettingsDialog.qml:57
 #, kde-format
 msgid "Auto Resume"
 msgstr "Automatisch hervatten"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
 msgid "Resume the last session playlist."
 msgstr "De afspeellijst van de laatste sessie hervatten."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:71
+#: src/widgets/SettingsView/SettingsDialog.qml:70
 #, kde-format
 msgid "Volume"
 msgstr "Volume"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Show volume controls."
 msgstr "Volumebesturing tonen."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:85
+#: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Collection"
 msgstr "Verzameling"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:86
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "Configure the app plugins and collection behavior."
 msgstr "De app plug-ins en het gedrag van de verzameling configureren."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:90
+#: src/widgets/SettingsView/SettingsDialog.qml:89
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Hoezen ophalen"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:91
+#: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -501,12 +492,12 @@ msgstr ""
 "Verzamelt illustraties van album en artiesten uit online services: LastFM, "
 "Spotify, MusicBrainz, iTunes, Genius, en andere."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:103
+#: src/widgets/SettingsView/SettingsDialog.qml:102
 #, kde-format
 msgid "Auto Scan"
 msgstr "Automatische scan"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:104
+#: src/widgets/SettingsView/SettingsDialog.qml:103
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -514,67 +505,67 @@ msgstr ""
 "Alle muziekbronnen scannen bij opstarten om uw verzameling up-to-date te "
 "houden."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:117
+#: src/widgets/SettingsView/SettingsDialog.qml:116
 #, kde-format
 msgid "General"
 msgstr "Algemeen"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:123
+#: src/widgets/SettingsView/SettingsDialog.qml:122
 #, kde-format
 msgid "Focus View"
 msgstr "Weergavefocus"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Maak weergavefocus de standaard"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Dark Mode"
 msgstr "Donkere modus"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:141
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "Tussen licht en donker kleurenschema wisselen."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Artwork"
 msgstr "Illustraties"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:158
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "De hoesillustratie voor de tracks tonen."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Titles"
 msgstr "Titels"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:174
+#: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "De titel van albums en artiesten in de rasterweergave tonen."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
+#: src/widgets/SettingsView/SettingsDialog.qml:189
 #, kde-format
 msgid "Sources"
 msgstr "Bronnen"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:191
+#: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Add or remove sources"
 msgstr "Bronnen toevoegen of verwijderen"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:234
+#: src/widgets/SettingsView/SettingsDialog.qml:233
 #, kde-format
 msgid "Add"
 msgstr "Toevoegen"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:251
+#: src/widgets/SettingsView/SettingsDialog.qml:250
 #, kde-format
 msgid "Scan now"
 msgstr "Nu scannen"
@@ -589,6 +580,12 @@ msgstr "Onbekend"
 #, kde-format
 msgid "Open file"
 msgstr "Bestand openen"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuleren"
+
+#~ msgid "Accept"
+#~ msgstr "Accepteren"
 
 #~ msgid "Behaviour"
 #~ msgstr "Gedrag"

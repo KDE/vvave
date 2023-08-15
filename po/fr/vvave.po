@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 00:46+0000\n"
+"POT-Creation-Date: 2023-08-15 00:44+0000\n"
 "PO-Revision-Date: 2023-05-15 12:58+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -51,16 +51,6 @@ msgid ""
 msgstr ""
 "Voulez-vous vraiment supprimer ces fichiers ? Cette action ne peut être "
 "annulée."
-
-#: src/main.qml:339 src/widgets/BabeTable/TableMenu.qml:135
-#, kde-format
-msgid "Delete"
-msgstr "Supprimer"
-
-#: src/main.qml:340 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, kde-format
-msgid "Cancel"
-msgstr "Annuler"
 
 #: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
@@ -168,7 +158,7 @@ msgstr "Cette liste est vide."
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
@@ -199,13 +189,6 @@ msgstr ""
 "Voulez-vous vraiment supprimer le fichier de votre ordinateur ? Cette action "
 "ne peut être annulée."
 
-#: src/widgets/BabeTable/BabeTable.qml:142
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
-#: src/widgets/SelectionBar.qml:76
-#, kde-format
-msgid "Remove"
-msgstr "Supprimer"
-
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
@@ -227,7 +210,7 @@ msgid "UnFav it"
 msgstr "L'enlever des favoris"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "Modifier"
@@ -251,6 +234,11 @@ msgstr "Lire le morceau suivant"
 #, kde-format
 msgid "Show in Folder"
 msgstr "Afficher dans un dossier"
+
+#: src/widgets/BabeTable/TableMenu.qml:135
+#, kde-format
+msgid "Delete"
+msgstr "Supprimer"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
@@ -417,18 +405,21 @@ msgstr "Démarrer la création de nouvelles listes de lecture personnalisées"
 msgid "Remove '%1'"
 msgstr "Supprimer « %1 »"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
-#, kde-format
-msgid "Accept"
-msgstr "Accepter"
-
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
+#. i18n("Accept")
+#. rejectButton.text: i18n("Cancel")
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
 "Voulez-vous vraiment supprimer cette étiquette ? Cette action ne peut être "
 "annulée."
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Supprimer"
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
@@ -445,55 +436,55 @@ msgstr "Ajouter"
 msgid "Queue"
 msgstr "Mettre en file"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:53
+#: src/widgets/SettingsView/SettingsDialog.qml:52
 #, kde-format
 msgid "Playback"
 msgstr "Lecture"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:54
+#: src/widgets/SettingsView/SettingsDialog.qml:53
 #, kde-format
 msgid "Configure the playback behavior."
 msgstr "Configurer le comportement de la lecture."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:58
+#: src/widgets/SettingsView/SettingsDialog.qml:57
 #, kde-format
 msgid "Auto Resume"
 msgstr "Continuer automatiquement"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
 msgid "Resume the last session playlist."
 msgstr "Continuer la liste de lecture de la session précédente."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:71
+#: src/widgets/SettingsView/SettingsDialog.qml:70
 #, kde-format
 msgid "Volume"
 msgstr "Volume"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Show volume controls."
 msgstr "Afficher les contrôles de volume."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:85
+#: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Collection"
 msgstr "Collection"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:86
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "Configure the app plugins and collection behavior."
 msgstr ""
 "Configurer les modules externes de l'application et leurs comportements pour "
 "la collection."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:90
+#: src/widgets/SettingsView/SettingsDialog.qml:89
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Rechercher des illustrations"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:91
+#: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -502,12 +493,12 @@ msgstr ""
 "Collecte des œuvres d'album et d'artistes à partir de services en ligne : "
 "LastFM, Spotify, MusicBrainz, iTunes, Genius et d'autres."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:103
+#: src/widgets/SettingsView/SettingsDialog.qml:102
 #, kde-format
 msgid "Auto Scan"
 msgstr "Analyser automatiquement"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:104
+#: src/widgets/SettingsView/SettingsDialog.qml:103
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -515,67 +506,67 @@ msgstr ""
 "Analyser toutes les sources de musique au démarrage pour conserver votre "
 "collection à jour."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:117
+#: src/widgets/SettingsView/SettingsDialog.qml:116
 #, kde-format
 msgid "General"
 msgstr "Général"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:123
+#: src/widgets/SettingsView/SettingsDialog.qml:122
 #, kde-format
 msgid "Focus View"
 msgstr "Vue en Focalisation"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Faire de la vue « Focalisation » par défaut"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Dark Mode"
 msgstr "Mode sombre"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:141
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "Basculer entre les thème clair et sombre "
 
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Artwork"
 msgstr "Illustration"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:158
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Afficher l'illustration de couverture pour les pistes."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Titles"
 msgstr "Titres"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:174
+#: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Afficher le titre des albums et les artistes dans une vue en grille."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
+#: src/widgets/SettingsView/SettingsDialog.qml:189
 #, kde-format
 msgid "Sources"
 msgstr "Sources"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:191
+#: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Add or remove sources"
 msgstr "Ajouter ou supprimer des sources"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:234
+#: src/widgets/SettingsView/SettingsDialog.qml:233
 #, kde-format
 msgid "Add"
 msgstr "Ajouter"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:251
+#: src/widgets/SettingsView/SettingsDialog.qml:250
 #, kde-format
 msgid "Scan now"
 msgstr "Analyser maintenant"
@@ -590,6 +581,12 @@ msgstr "Inconnu"
 #, kde-format
 msgid "Open file"
 msgstr "Ouvrir un fichier"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuler"
+
+#~ msgid "Accept"
+#~ msgstr "Accepter"
 
 #~ msgid "Behaviour"
 #~ msgstr "Ergonomie"

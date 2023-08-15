@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 00:46+0000\n"
+"POT-Creation-Date: 2023-08-15 00:44+0000\n"
 "PO-Revision-Date: 2023-05-21 14:59+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -53,16 +53,6 @@ msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 "Are you sure you want to remove these files? This action can not be undone."
-
-#: src/main.qml:339 src/widgets/BabeTable/TableMenu.qml:135
-#, kde-format
-msgid "Delete"
-msgstr "Delete"
-
-#: src/main.qml:340 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, kde-format
-msgid "Cancel"
-msgstr "Cancel"
 
 #: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
@@ -170,7 +160,7 @@ msgstr "This list is empty"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
@@ -201,13 +191,6 @@ msgstr ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 
-#: src/widgets/BabeTable/BabeTable.qml:142
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
-#: src/widgets/SelectionBar.qml:76
-#, kde-format
-msgid "Remove"
-msgstr "Remove"
-
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
@@ -229,7 +212,7 @@ msgid "UnFav it"
 msgstr "UnFav it"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "Edit"
@@ -253,6 +236,11 @@ msgstr "Play Next"
 #, kde-format
 msgid "Show in Folder"
 msgstr "Show in Folder"
+
+#: src/widgets/BabeTable/TableMenu.qml:135
+#, kde-format
+msgid "Delete"
+msgstr "Delete"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
@@ -417,17 +405,20 @@ msgstr "Start creating new custom playlists"
 msgid "Remove '%1'"
 msgstr "Remove '%1'"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
-#, kde-format
-msgid "Accept"
-msgstr "Accept"
-
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
+#. i18n("Accept")
+#. rejectButton.text: i18n("Cancel")
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
 "Are you sure you want to remove this tag? This operation can not be undone."
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Remove"
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
@@ -444,53 +435,53 @@ msgstr "Append"
 msgid "Queue"
 msgstr "Queue"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:53
+#: src/widgets/SettingsView/SettingsDialog.qml:52
 #, kde-format
 msgid "Playback"
 msgstr "Playback"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:54
+#: src/widgets/SettingsView/SettingsDialog.qml:53
 #, kde-format
 msgid "Configure the playback behavior."
 msgstr "Configure the playback behaviour."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:58
+#: src/widgets/SettingsView/SettingsDialog.qml:57
 #, kde-format
 msgid "Auto Resume"
 msgstr "Auto Resume"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
 msgid "Resume the last session playlist."
 msgstr "Resume the last session playlist."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:71
+#: src/widgets/SettingsView/SettingsDialog.qml:70
 #, kde-format
 msgid "Volume"
 msgstr "Volume"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Show volume controls."
 msgstr "Show volume controls."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:85
+#: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Collection"
 msgstr "Collection"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:86
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "Configure the app plugins and collection behavior."
 msgstr "Configure the app plugins and collection behaviour."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:90
+#: src/widgets/SettingsView/SettingsDialog.qml:89
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Fetch Artwork"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:91
+#: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -499,79 +490,79 @@ msgstr ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:103
+#: src/widgets/SettingsView/SettingsDialog.qml:102
 #, kde-format
 msgid "Auto Scan"
 msgstr "Auto Scan"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:104
+#: src/widgets/SettingsView/SettingsDialog.qml:103
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 "Scan all the music sources on startup to keep your collection up to date."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:117
+#: src/widgets/SettingsView/SettingsDialog.qml:116
 #, kde-format
 msgid "General"
 msgstr "General"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:123
+#: src/widgets/SettingsView/SettingsDialog.qml:122
 #, kde-format
 msgid "Focus View"
 msgstr "Focus View"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Make the focus view the default."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Dark Mode"
 msgstr "Dark Mode"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:141
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "Switch between light and dark colour scheme."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Artwork"
 msgstr "Artwork"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:158
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Show the cover artwork for the tracks."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Titles"
 msgstr "Titles"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:174
+#: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Show the title of albums and artists in the grid view."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
+#: src/widgets/SettingsView/SettingsDialog.qml:189
 #, kde-format
 msgid "Sources"
 msgstr "Sources"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:191
+#: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Add or remove sources"
 msgstr "Add or remove sources"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:234
+#: src/widgets/SettingsView/SettingsDialog.qml:233
 #, kde-format
 msgid "Add"
 msgstr "Add"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:251
+#: src/widgets/SettingsView/SettingsDialog.qml:250
 #, kde-format
 msgid "Scan now"
 msgstr "Scan now"
@@ -586,6 +577,12 @@ msgstr "Unknown"
 #, kde-format
 msgid "Open file"
 msgstr "Open file"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
+
+#~ msgid "Accept"
+#~ msgstr "Accept"
 
 #~ msgid "Behaviour"
 #~ msgstr "Behaviour"
