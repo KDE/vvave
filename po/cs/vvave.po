@@ -569,9 +569,3 @@ msgstr "Neznámý"
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "Cancel"
-#~ msgstr "Zrušit"
-
-#~ msgid "Accept"
-#~ msgstr "Přijmout"
