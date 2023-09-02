@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
+Dependencies:
+- 'on': ['@all']
+  'require':
+    'frameworks/extra-cmake-modules': '@latest'
+    'frameworks/kconfig': '@latest'
+    'frameworks/ki18n': '@latest'
+    'frameworks/kio': '@latest'
+    'frameworks/knotifications': '@latest'
+    'maui/mauikit': '@latest'
+    'maui/mauikit-accounts': '@latest'
+    'maui/mauikit-filebrowsing': '@latest'
