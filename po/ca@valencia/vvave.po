@@ -581,9 +581,3 @@ msgstr "Desconegut"
 #, kde-format
 msgid "Open file"
 msgstr "Obri un fitxer"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancel·la"
-
-#~ msgid "Accept"
-#~ msgstr "Accepta"
