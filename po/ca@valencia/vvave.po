@@ -196,12 +196,12 @@ msgstr ""
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
-msgstr "Ves a l'artista"
+msgstr "Ves fins a l'artista"
 
 #: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:74
 #, kde-format
 msgid "Go to Album"
-msgstr "Ves a l'àlbum"
+msgstr "Ves fins a l'àlbum"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
