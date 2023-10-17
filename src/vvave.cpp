@@ -5,7 +5,8 @@
 
 #include <MauiKit3/FileBrowsing/fileloader.h>
 #include <MauiKit3/FileBrowsing/fm.h>
-#include <MauiKit3/Core/utils.h>
+
+#include <QSettings>
 
 #include "utils/bae.h"
 
@@ -96,7 +97,11 @@ void vvave::addSources(const QList<QUrl> &paths)
         return;
 
     urls << newUrls;
-    UTIL::saveSettings("SETTINGS", QVariant::fromValue(QUrl::toStringList(urls)), "SOURCES");
+
+    QSettings settings;
+    settings.beginGroup("SETTINGS");
+    settings.setValue("SOURCES", QVariant::fromValue(QUrl::toStringList(urls)));
+    settings.endGroup();
 
     scanDir(urls);
     emit sourcesChanged();
@@ -109,7 +114,12 @@ bool vvave::removeSource(const QString &source)
         return false;
 
     urls.removeOne(source);
-    UTIL::saveSettings("SETTINGS", QVariant::fromValue(urls), "SOURCES");
+
+    QSettings settings;
+    settings.beginGroup("SETTINGS");
+    settings.setValue("SOURCES", QVariant::fromValue(urls));
+    settings.endGroup();
+
     emit sourcesChanged();
 
     if (CollectionDB::getInstance()->removeSource(source)) {
@@ -148,7 +158,11 @@ void vvave::rescan()
 
 QStringList vvave::sources()
 {
-    return UTIL::loadSettings("SETTINGS", "SOURCES", QVariant::fromValue(BAE::defaultSources)).toStringList();
+    QSettings settings;
+    settings.beginGroup("SETTINGS");
+    auto data = settings.value("SOURCES", QVariant::fromValue(BAE::defaultSources)).toStringList();
+    settings.endGroup();
+    return data;
 }
 
 QVariantList vvave::sourcesModel()

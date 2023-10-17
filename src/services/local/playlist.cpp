@@ -10,9 +10,12 @@
 
 Playlist::Playlist(QObject *parent)
     : QObject(parent)
-    , m_playMode(static_cast<Playlist::PlayMode>(UTIL::loadSettings("PLAYMODE", "PLAYBACK", 0).toUInt()))
-    ,m_autoResume(UTIL::loadSettings("autoResume", "Settings", -1).toBool())
 {
+    QSettings settings;
+    settings.beginGroup("PLAYBACK");
+    m_playMode = static_cast<PlayMode>(settings.value("PLAYMODE", 0).toUInt());
+    m_autoResume = settings.value("autoResume", false).toBool();
+    settings.endGroup();
 }
 
 TracksModel *Playlist::model() const
@@ -52,8 +55,12 @@ void Playlist::loadLastPlaylist()
         return;
     }
 
-    QStringList urls = UTIL::loadSettings("LASTPLAYLIST", "PLAYLIST", QStringList()).toStringList();
-    int lastIndex =   UTIL::loadSettings("PLAYLIST_POS", "MAINWINDOW", -1).toInt();
+    QSettings settings;
+    settings.beginGroup("PLAYLIST");
+    QStringList urls = settings.value("LASTPLAYLIST", QString()).toStringList();
+    int lastIndex = settings.value("PLAYLIST_POS", QString()).toInt();
+    settings.endGroup();
+
     for (const auto &url : urls)
     {
         m_model->appendUrl(QUrl::fromUserInput(url));
@@ -182,8 +189,11 @@ void Playlist::save()
         urls << url;
     }
 
-    UTIL::saveSettings("LASTPLAYLIST", urls, "PLAYLIST");
-    UTIL::saveSettings("PLAYLIST_POS", m_currentIndex, "MAINWINDOW");
+    QSettings settings;
+    settings.beginGroup("PLAYLIST");
+    settings.setValue("LASTPLAYLIST", urls);
+    settings.setValue("PLAYLIST_POS", m_currentIndex);
+    settings.endGroup();
 }
 
 void Playlist::append(const QVariantMap &track)
@@ -281,7 +291,11 @@ void Playlist::setPlayMode(Playlist::PlayMode playMode)
         return;
 
     m_playMode = playMode;
-    UTIL::saveSettings("PLAYMODE", m_playMode, "PLAYBACK");
+
+    QSettings settings;
+    settings.beginGroup("PLAYBACK");
+    settings.setValue("PLAYMODE", m_playMode);
+    settings.endGroup();
 
     if (playMode == Playlist::PlayMode::Shuffle)
     {
@@ -396,7 +410,12 @@ void Playlist::setAutoResume(bool autoResume)
         return;
 
     m_autoResume = autoResume;
-    UTIL::saveSettings("autoResume", m_autoResume, "Settings");
+
+    QSettings settings;
+    settings.beginGroup("PLAYBACK");
+    settings.setValue("autoResume", m_autoResume);
+    settings.endGroup();
+
     emit autoResumeChanged(m_autoResume);
 }
 
