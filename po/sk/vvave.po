@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 00:46+0000\n"
+"POT-Creation-Date: 2023-08-15 00:44+0000\n"
 "PO-Revision-Date: 2023-03-12 12:07+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -50,16 +50,6 @@ msgstr ""
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
-
-#: src/main.qml:339 src/widgets/BabeTable/TableMenu.qml:135
-#, fuzzy, kde-format
-msgid "Delete"
-msgstr "Vymazať"
-
-#: src/main.qml:340 src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-msgid "Cancel"
-msgstr "Zrušiť"
 
 #: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, fuzzy, kde-format
@@ -167,7 +157,7 @@ msgstr ""
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, fuzzy, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
@@ -197,13 +187,6 @@ msgid ""
 "not be undone."
 msgstr ""
 
-#: src/widgets/BabeTable/BabeTable.qml:142
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
-#: src/widgets/SelectionBar.qml:76
-#, fuzzy, kde-format
-msgid "Remove"
-msgstr "Odstrániť"
-
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
@@ -225,7 +208,7 @@ msgid "UnFav it"
 msgstr ""
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, fuzzy, kde-format
 msgid "Edit"
 msgstr "Upraviť"
@@ -249,6 +232,11 @@ msgstr ""
 #, fuzzy, kde-format
 msgid "Show in Folder"
 msgstr "Zobraziť v priečinku"
+
+#: src/widgets/BabeTable/TableMenu.qml:135
+#, fuzzy, kde-format
+msgid "Delete"
+msgstr "Vymazať"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
@@ -411,16 +399,19 @@ msgstr ""
 msgid "Remove '%1'"
 msgstr "Odstrániť"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
-#, fuzzy, kde-format
-msgid "Accept"
-msgstr "Prijať"
-
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
+#. i18n("Accept")
+#. rejectButton.text: i18n("Cancel")
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, fuzzy, kde-format
+msgid "Remove"
+msgstr "Odstrániť"
 
 #: src/widgets/SelectionBar.qml:28
 #, fuzzy, kde-format
@@ -437,134 +428,134 @@ msgstr "Pripojiť"
 msgid "Queue"
 msgstr "Fronta"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:53
+#: src/widgets/SettingsView/SettingsDialog.qml:52
 #, fuzzy, kde-format
 msgid "Playback"
 msgstr "Prehrať"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:54
+#: src/widgets/SettingsView/SettingsDialog.qml:53
 #, fuzzy, kde-format
 #| msgid "Configure the app plugins and behavior."
 msgid "Configure the playback behavior."
 msgstr "Nastaviť doplnky aplikácie a správanie."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:58
+#: src/widgets/SettingsView/SettingsDialog.qml:57
 #, kde-format
 msgid "Auto Resume"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
 msgid "Resume the last session playlist."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:71
+#: src/widgets/SettingsView/SettingsDialog.qml:70
 #, kde-format
 msgid "Volume"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Show volume controls."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:85
+#: src/widgets/SettingsView/SettingsDialog.qml:84
 #, fuzzy, kde-format
 #| msgid "Search collection"
 msgid "Collection"
 msgstr "Prehľadať kolekciu"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:86
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:85
+#: src/widgets/SettingsView/SettingsDialog.qml:117
 #, fuzzy, kde-format
 #| msgid "Configure the app plugins and behavior."
 msgid "Configure the app plugins and collection behavior."
 msgstr "Nastaviť doplnky aplikácie a správanie."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:90
+#: src/widgets/SettingsView/SettingsDialog.qml:89
 #, kde-format
 msgid "Fetch Artwork"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:91
+#: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:103
+#: src/widgets/SettingsView/SettingsDialog.qml:102
 #, kde-format
 msgid "Auto Scan"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:104
+#: src/widgets/SettingsView/SettingsDialog.qml:103
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:117
+#: src/widgets/SettingsView/SettingsDialog.qml:116
 #, kde-format
 msgid "General"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:123
+#: src/widgets/SettingsView/SettingsDialog.qml:122
 #, kde-format
 msgid "Focus View"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Make the focus view the default."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Dark Mode"
 msgstr "Tmavý režim"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:141
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, fuzzy, kde-format
 msgid "Artwork"
 msgstr "Grafický dizajn"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:158
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Titles"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:174
+#: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
+#: src/widgets/SettingsView/SettingsDialog.qml:189
 #, fuzzy, kde-format
 msgid "Sources"
 msgstr "Zdroje"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:191
+#: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Add or remove sources"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:234
+#: src/widgets/SettingsView/SettingsDialog.qml:233
 #, fuzzy, kde-format
 msgid "Add"
 msgstr "Pridať"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:251
+#: src/widgets/SettingsView/SettingsDialog.qml:250
 #, kde-format
 msgid "Scan now"
 msgstr ""
@@ -579,6 +570,14 @@ msgstr "Neznáme"
 #, kde-format
 msgid "Open file"
 msgstr "Otvoriť súbor"
+
+#, fuzzy
+#~ msgid "Cancel"
+#~ msgstr "Zrušiť"
+
+#, fuzzy
+#~ msgid "Accept"
+#~ msgstr "Prijať"
 
 #~ msgid "Behaviour"
 #~ msgstr "Správanie"

@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# Paolo Zamponi <feus73@gmail.com>, 2022, 2023.
+# Shinjo Park <kde@peremen.name>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-15 00:44+0000\n"
-"PO-Revision-Date: 2023-05-20 09:11+0200\n"
-"Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
-"Language-Team: Italian <kde-i18n-it@kde.org>\n"
-"Language: it\n"
+"PO-Revision-Date: 2023-08-25 23:39+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.1\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: src/main.cpp:102
 #, kde-format
@@ -25,139 +25,137 @@ msgstr "Vvave"
 #: src/main.cpp:102
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr "Organizza e ascolta la tua musica."
+msgstr "음악을 정리하고 듣습니다."
 
 #: src/main.cpp:102
 #, kde-format
 msgid "© 2019-%1 Maui Development Team"
-msgstr "© 2019-%1 La squadra di sviluppo di Maui"
+msgstr "© 2019-%1 Maui Development Team"
 
 #: src/main.cpp:104 src/main.cpp:105
 #, kde-format
 msgid "Developer"
-msgstr "Sviluppatore"
+msgstr "개발자"
 
 #: src/main.qml:274
 #, kde-format
 msgid "Missing file"
-msgstr "File mancante"
+msgstr "파일 없음"
 
 #: src/main.qml:336
 #, kde-format
 msgid "Remove %1 tracks"
-msgstr "Rimuovi %1 tracce"
+msgstr "%1곡 삭제"
 
 #: src/main.qml:337
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
-msgstr ""
-"Sei sicuro di voler rimuovere questi file? Questa azione non può essere "
-"annullata."
+msgstr "이 파일을 삭제하시겠습니까? 실행 취소할 수 없습니다."
 
 #: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
 #, kde-format
 msgid "Shortcuts"
-msgstr "Scorciatoie"
+msgstr "단축키"
 
 #: src/main.qml:480
 #, kde-format
 msgid "Settings"
-msgstr "Impostazioni"
+msgstr "설정"
 
 #: src/main.qml:487
 #, kde-format
 msgid "About"
-msgstr "Informazioni su"
+msgstr "정보"
 
 #: src/main.qml:520
 #, kde-format
 msgid "Songs"
-msgstr "Brani"
+msgstr "곡"
 
 #: src/main.qml:539 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Albums"
-msgstr "Album"
+msgstr "앨범"
 
 #: src/main.qml:546
 #, kde-format
 msgid "No Albums!"
-msgstr "Nessun album."
+msgstr "앨범 없음!"
 
 #: src/main.qml:547 src/main.qml:571 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
-msgstr "Aggiungi nuove fonti musicali"
+msgstr "새 음악 원본 추가"
 
 #: src/main.qml:563 src/widgets/AlbumsView.qml:62
 #, kde-format
 msgid "Artists"
-msgstr "Artisti"
+msgstr "아티스트"
 
 #: src/main.qml:570
 #, kde-format
 msgid "No Artists!"
-msgstr "Nessun artista."
+msgstr "아티스트 없음!"
 
 #: src/main.qml:587 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
-msgstr "Etichette"
+msgstr "태그"
 
 #: src/main.qml:594
 #, kde-format
 msgid "Folders"
-msgstr "Cartelle"
+msgstr "폴더"
 
 #: src/main.qml:602
 #, kde-format
 msgid "Cloud"
-msgstr "Cloud"
+msgstr "클라우드"
 
 #: src/models/playlists/playlistsmodel.cpp:110
 #, kde-format
 msgid "Most Played"
-msgstr "Più riprodotte"
+msgstr "가장 많이 재생됨"
 
 #: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
 msgid "Random Tracks"
-msgstr "Tracce casuali"
+msgstr "무작위 곡"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
 msgid "Recent Tracks"
-msgstr "Tracce recenti"
+msgstr "최근 곡"
 
 #: src/models/playlists/playlistsmodel.cpp:131
 #, kde-format
 msgid "Never Played"
-msgstr "Mai riprodotte"
+msgstr "재생되지 않음"
 
 #: src/models/playlists/playlistsmodel.cpp:138
 #, kde-format
 msgid "Classic Tracks"
-msgstr "Tracce classiche"
+msgstr "클래식 곡"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr "Musica in riproduzione"
+msgstr "음악 재생 중"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
 #: src/widgets/TracksView.qml:27
 #, kde-format
 msgid "Add sources"
-msgstr "Aggiungi fonti"
+msgstr "원본 추가"
 
 #: src/widgets/AlbumsView.qml:56
 #, kde-format
 msgid "This list is empty"
-msgstr "Questa lista è vuota"
+msgstr "이 목록이 비어 있음"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
@@ -165,88 +163,85 @@ msgstr "Questa lista è vuota"
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "Filtra"
-msgstr[1] "Filtra %1 album"
+msgstr[0] "앨범 %1개 필터"
 
 #: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
 #, kde-format
 msgid "Play All"
-msgstr "Riproduci tutto"
+msgstr "모두 재생"
 
 #: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:54
 #, kde-format
 msgid "Append All"
-msgstr "Aggiungi tutto"
+msgstr "모두 덧붙이기"
 
 #: src/widgets/BabeTable/BabeTable.qml:139
 #, kde-format
 msgid "Remove track"
-msgstr "Rimuovi traccia"
+msgstr "트랙 삭제"
 
 #: src/widgets/BabeTable/BabeTable.qml:140
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
-msgstr ""
-"Sei sicuro di voler eliminare il file dal computer? Questa azione non può "
-"essere annullata."
+msgstr "컴퓨터에서 파일을 삭제하시겠습니까? 실행 취소할 수 없습니다."
 
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
-msgstr "Vai all'artista"
+msgstr "아티스트로 이동"
 
 #: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:74
 #, kde-format
 msgid "Go to Album"
-msgstr "Vai all'album"
+msgstr "앨범으로 이동"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "Fav it"
-msgstr "Aggiungilo ai preferiti"
+msgstr "책갈피에 추가"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "UnFav it"
-msgstr "Rimuovilo dai preferiti"
+msgstr "책갈피 해제"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
-msgstr "Modifica"
+msgstr "편집"
 
 #: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
 #, kde-format
 msgid "Share"
-msgstr "Condividi"
+msgstr "공유"
 
 #: src/widgets/BabeTable/TableMenu.qml:71
 #, kde-format
 msgid "Select"
-msgstr "Seleziona"
+msgstr "선택"
 
 #: src/widgets/BabeTable/TableMenu.qml:84
 #, kde-format
 msgid "Play Next"
-msgstr "Riproduci successivo"
+msgstr "다음 재생"
 
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
 msgid "Show in Folder"
-msgstr "Mostra nella cartella"
+msgstr "포함하는 폴더 열기"
 
 #: src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
 msgid "Delete"
-msgstr "Elimina"
+msgstr "삭제"
 
 #: src/widgets/CloudView/CloudView.qml:65
 #, kde-format
 msgid "Opps!"
-msgstr "Ops."
+msgstr "이런!"
 
 #: src/widgets/CloudView/CloudView.qml:66
 #, kde-format
@@ -255,156 +250,154 @@ msgid ""
 "You can set up your account now by clicking here or under the Accounts "
 "options in the main menu"
 msgstr ""
-"Non hai impostato un account.\n"
-"Puoi farlo adesso facendo clic qui o sotto le opzioni Account nel menu "
-"principale"
+"계정을 설정하지 않았습니다.\n"
+"여기를 클릭하거나 주 메뉴의 계정 옵션에서 계정을 설정할 수 있습니다"
 
 #: src/widgets/FocusView.qml:146
 #, kde-format
 msgid "Find"
-msgstr "Trova"
+msgstr "찾기"
 
 #: src/widgets/FocusView.qml:188
 #, kde-format
 msgid "No Results!"
-msgstr "Nessun risultato."
+msgstr "결과 없음!"
 
 #: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "Try with something else"
-msgstr "Prova con qualcos'altro"
+msgstr "다른 항목으로 시도하십시오"
 
 #: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
-msgstr "Inizia creando la tua scaletta."
+msgstr "재생 목록에 항목을 추가하여 시작하십시오."
 
 #: src/widgets/FoldersView/FoldersView.qml:32
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] "Filtra %1 cartella"
-msgstr[1] "Filtra %1 cartelle"
+msgstr[0] "폴더 %1개 필터"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
 msgid "No Folders!"
-msgstr "Nessuna cartella."
+msgstr "폴더가 없습니다!"
 
 #: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
-msgstr "Aggiungi nuova musica alle fonti cercando per cartella"
+msgstr "폴더로 탐색할 수 있도록 음악 원본 추가"
 
 #: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "No Tracks!"
-msgstr "Nessuna traccia."
+msgstr "곡 없음!"
 
 #: src/widgets/FoldersView/FoldersView.qml:135
 #, kde-format
 msgid "This source folder seems to be empty!"
-msgstr "La cartella della fonte sembra vuota."
+msgstr "원본 폴더가 비어 있는 것 같습니다!"
 
 #: src/widgets/InfoView/InfoView.qml:45
 #, kde-format
 msgid "Artist Info"
-msgstr "Informazioni sull'artista"
+msgstr "아티스트 정보"
 
 #: src/widgets/InfoView/InfoView.qml:73
 #, kde-format
 msgid "Album Info"
-msgstr "Informazioni sull'album"
+msgstr "앨범 정보"
 
 #: src/widgets/MainPlaylist/MainPlaylist.qml:133
 #, kde-format
 msgid "Syncing to "
-msgstr "Sincronizzazione a "
+msgstr "동기화 대상: "
 
 #: src/widgets/MetadataDialog.qml:40
 #, kde-format
 msgid "Metadata"
-msgstr "Metadati"
+msgstr "메타데이터"
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
 msgid "Embedded metadata info."
-msgstr "Incorpora informazioni dei metadati."
+msgstr "내장된 메타데이터 정보입니다."
 
 #: src/widgets/MetadataDialog.qml:45
 #, kde-format
 msgid "Track Title"
-msgstr "Titolo della traccia"
+msgstr "트랙 제목"
 
 #: src/widgets/MetadataDialog.qml:57
 #, kde-format
 msgid "Artist"
-msgstr "Artista"
+msgstr "아티스트"
 
 #: src/widgets/MetadataDialog.qml:73
 #, kde-format
 msgid "Album"
-msgstr "Album"
+msgstr "앨범"
 
 #: src/widgets/MetadataDialog.qml:88
 #, kde-format
 msgid "Track"
-msgstr "Traccia"
+msgstr "트랙"
 
 #: src/widgets/MetadataDialog.qml:103
 #, kde-format
 msgid "Genre"
-msgstr "Genere"
+msgstr "장르"
 
 #: src/widgets/MetadataDialog.qml:118
 #, kde-format
 msgid "Year"
-msgstr "Anno"
+msgstr "연도"
 
 #: src/widgets/MetadataDialog.qml:133
 #, kde-format
 msgid "Comment"
-msgstr "Commento"
+msgstr "설명"
 
 #: src/widgets/PlaybackBar.qml:27
 #, kde-format
 msgid "Toogle SideBar"
-msgstr "Commuta la barra laterale"
+msgstr "사이드바 전환"
 
 #: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
-msgstr "Riproduzione e pausa"
+msgstr "재생 및 일시 정지"
 
 #: src/widgets/PlaybackBar.qml:66
 #, kde-format
 msgid "Next"
-msgstr "Successivo"
+msgstr "다음"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr "La tua scaletta è vuota. Inizia ad aggiungere nuova musica"
+msgstr "재생 목록이 비어 있습니다. 음악을 추가하여 시작하십시오"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
 msgid "Remove from playlist"
-msgstr "Rimuovi dalla scaletta"
+msgstr "재생 목록에서 삭제"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
 #, kde-format
 msgid "No Playlists!"
-msgstr "Nessuna scaletta."
+msgstr "재생 목록이 없습니다!"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
 #, kde-format
 msgid "Start creating new custom playlists"
-msgstr "Inizio creazione delle nuove scalette personalizzate"
+msgstr "새 사용자 정의 재생 목록을 만들어서 시작하십시오"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
 #, kde-format
 msgid "Remove '%1'"
-msgstr "Rimuovi «%1»"
+msgstr "'%1' 삭제"
 
 #. i18n("Accept")
 #. rejectButton.text: i18n("Cancel")
@@ -412,77 +405,74 @@ msgstr "Rimuovi «%1»"
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
-msgstr ""
-"Sei sicuro di voler rimuovere questa etichetta? Questa operazione non può "
-"essere annullata."
+msgstr "이 태그를 삭제하시겠습니까? 실행 취소할 수 없습니다."
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
-msgstr "Rimuovi"
+msgstr "삭제"
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr "Riproduci"
+msgstr "재생"
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
 msgid "Append"
-msgstr "Aggiungi"
+msgstr "덧붙이기"
 
 #: src/widgets/SelectionBar.qml:66
 #, kde-format
 msgid "Queue"
-msgstr "Accoda"
+msgstr "대기열에 추가"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:52
 #, kde-format
 msgid "Playback"
-msgstr "Riproduzione"
+msgstr "재생"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:53
 #, kde-format
 msgid "Configure the playback behavior."
-msgstr "Configura il comportamento della riproduzione."
+msgstr "재생 행동을 설정합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:57
 #, kde-format
 msgid "Auto Resume"
-msgstr "Riprendi automaticamente"
+msgstr "자동 재개"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:58
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr "Riprendi l'ultima sessione della scaletta."
+msgstr "마지막 세션의 재생 목록을 다시 시작합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:70
 #, kde-format
 msgid "Volume"
-msgstr "Volume"
+msgstr "음량"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:71
 #, kde-format
 msgid "Show volume controls."
-msgstr "Mostra i controlli del volume."
+msgstr "음량 제어를 표시합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:84
 #, kde-format
 msgid "Collection"
-msgstr "Collezione"
+msgstr "모음집"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:85
 #: src/widgets/SettingsView/SettingsDialog.qml:117
 #, kde-format
 msgid "Configure the app plugins and collection behavior."
-msgstr ""
-"Configura le estensioni del programma e il comportamento della collezione."
+msgstr "앱 플러그인과 모음집 행동을 설정합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:89
 #, kde-format
 msgid "Fetch Artwork"
-msgstr "Scarica la copertina"
+msgstr "아트워크 가져오기"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:90
 #, kde-format
@@ -490,160 +480,92 @@ msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
-"Raccogli le copertine degli album e degli artisti dai servizi online: "
-"LastFM, Spotify, MusicBrainz, iTunes, Genius e altri."
+"LastFM, Spotify, MusicBrainz, iTunes, Genius 등 온라인 서비스에서 아티스트와 "
+"앨범 아트워크를 가져옵니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:102
 #, kde-format
 msgid "Auto Scan"
-msgstr "Analizza automaticamente"
+msgstr "자동 검색"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:103
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
-msgstr ""
-"Analizza tutte le fonti musicali all'avvio per tenere aggiornata la "
-"collezione."
+msgstr "시작할 때 모든 음악 원본을 검색하여 모음집을 최신 상태로 유지합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:116
 #, kde-format
 msgid "General"
-msgstr "Generale"
+msgstr "일반"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:122
 #, kde-format
 msgid "Focus View"
-msgstr "Vista centrale"
+msgstr "포커스 보기"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Make the focus view the default."
-msgstr "Rendi predefinita la vista attiva."
+msgstr "포커스 보기를 기본값으로 사용합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Dark Mode"
-msgstr "Modalità scura"
+msgstr "어두운 모드"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Switch between light and dark colorscheme."
-msgstr "Passa dallo schema di colori chiaro allo scuro e viceversa."
+msgstr "밝은 색상과 어두운 색상을 전환합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Artwork"
-msgstr "Grafica"
+msgstr "아트워크"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr "Mostra la copertina di queste tracce."
+msgstr "트랙에 설정된 커버 아트워크를 표시합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Titles"
-msgstr "Titoli"
+msgstr "제목"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr "Mostra il titolo degli album e gli artisti nella vista a griglia."
+msgstr "모눈 보기에 앨범 제목과 아티스트를 표시합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:189
 #, kde-format
 msgid "Sources"
-msgstr "Fonti"
+msgstr "원본"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Add or remove sources"
-msgstr "Aggiungi o rimuovi le fonti"
+msgstr "원본 추가/삭제"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:233
 #, kde-format
 msgid "Add"
-msgstr "Aggiungi"
+msgstr "추가"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:250
 #, kde-format
 msgid "Scan now"
-msgstr "Analizza adesso"
+msgstr "지금 검색"
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:26
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
 #, kde-format
 msgid "Unknown"
-msgstr "Sconosciuto"
+msgstr "알 수 없음"
 
 #: src/widgets/TracksView.qml:33
 #, kde-format
 msgid "Open file"
-msgstr "Apri file"
-
-#~ msgid "Cancel"
-#~ msgstr "Annulla"
-
-#~ msgid "Accept"
-#~ msgstr "Accetta"
-
-#~ msgid "Behaviour"
-#~ msgstr "Comportamento"
-
-#~ msgid "stars"
-#~ msgstr "stelle"
-
-#~ msgid "Search collection"
-#~ msgstr "Cerca nella collezione"
-
-#~ msgid "Random tracks from your collection."
-#~ msgstr "Tracce a caso dalla tua collezione."
-
-#~ msgid "View All"
-#~ msgstr "Visualizza tutto"
-
-#~ msgid "Popular Tracks"
-#~ msgstr "Tracce popolari"
-
-#~ msgid "Play them again."
-#~ msgstr "Riproducile nuovamente."
-
-#~ msgid "Recently played."
-#~ msgstr "Riprodotte di recente."
-
-#~ msgid "More"
-#~ msgstr "Altro"
-
-#~ msgid "Give these tracks a first listen."
-#~ msgstr "Ascolta per la prima volta queste tracce."
-
-#~ msgid "Oldest released tracks from your collection."
-#~ msgstr "Tracce più vecchie della tua collezione."
-
-#~ msgid "File Info"
-#~ msgstr "Informazioni sul file"
-
-#~ msgid "Local file info."
-#~ msgstr "Informazioni sul file locale."
-
-#~ msgid "New Tracks"
-#~ msgstr "Nuove tracce"
-
-#~ msgid "Newly added."
-#~ msgstr "Appena aggiunta."
-
-#~ msgid "Recent Artists"
-#~ msgstr "Artisti recenti"
-
-#~ msgid "Recent Albums"
-#~ msgstr "Album recenti"
-
-#~ msgid "Playlists"
-#~ msgstr "Scalette"
-
-#~ msgid "Recent playlists"
-#~ msgstr "Scalette recenti"
-
-#~ msgid "Camilo Higuita"
-#~ msgstr "Camilo Higuita"
+msgstr "파일 열기"
