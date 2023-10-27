@@ -34,9 +34,11 @@ Maui.SettingsDialog
         id: confirmationDialog
         property string url : ""
 
-        title : "Remove source"
-        message : "Are you sure you want to remove the source: \n "+url
+        title : i18n("Remove source")
+        message : i18n("Are you sure you want to remove the source: \n%1", url)
         template.iconSource: "emblem-warning"
+
+        standardButtons: Dialog.Ok | Dialog.Cancel
 
         onAccepted:
         {
@@ -50,7 +52,7 @@ Maui.SettingsDialog
     Maui.SectionGroup
     {
         title: i18n("Playback")
-        description: i18n("Configure the playback behavior.")
+//        description: i18n("Configure the playback behavior.")
 
         Maui.SectionItem
         {
@@ -82,7 +84,7 @@ Maui.SettingsDialog
     Maui.SectionGroup
     {
         title: i18n("Collection")
-        description: i18n("Configure the app plugins and collection behavior.")
+//        description: i18n("Configure the app plugins and collection behavior.")
 
         Maui.SectionItem
         {
@@ -114,8 +116,7 @@ Maui.SettingsDialog
     Maui.SectionGroup
     {
         title: i18n("General")
-        description: i18n("Configure the app plugins and collection behavior.")
-
+//        description: i18n("Configure the app plugins and collection behavior.")
 
         Maui.SectionItem
         {
@@ -187,28 +188,22 @@ Maui.SettingsDialog
     Maui.SectionGroup
     {
         title: i18n("Sources")
-        description: i18n("Add or remove sources")
-
+//        description: i18n("Add or remove sources")
 
         ColumnLayout
         {
             Layout.fillWidth: true
-            spacing: Maui.Style.space.big
+            spacing: Maui.Style.space.medium
 
-            Maui.ListBrowser
+            Repeater
             {
-
-                id: _sourcesList
-                Layout.fillHeight: true
-                Layout.fillWidth: true
                 Layout.minimumHeight: Math.min(500, contentHeight)
                 model: Vvave.sources
-                currentIndex: -1
-                padding: 0
 
                 delegate: Maui.ListDelegate
                 {
-                    width: ListView.view.width
+                    Layout.fillWidth: true
+
                     template.iconSource: modelData.icon
                     template.iconSizeHint: Maui.Style.iconSizes.small
                     template.label1.text: modelData.label
@@ -249,7 +244,6 @@ Maui.SettingsDialog
                 Layout.fillWidth: true
                 text: i18n("Scan now")
                 onClicked: Vvave.rescan()
-
             }
         }
     }

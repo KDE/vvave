@@ -8,12 +8,12 @@ import org.maui.vvave 1.0
 
 Maui.PopupPage
 {
-
     id: control
     title: i18n("Shortcuts")
     persistent: false
     page.showTitle: false
     headBar.visible: false
+    scrollView.padding: 0
 
     maxHeight: 500 // Copied from Nota. I don't like hardcoded layout, though.
     maxWidth: 350

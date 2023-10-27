@@ -78,9 +78,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QApplication app(argc, argv);
 #endif
 
-    qDebug() << "APP LOADING SPEED TESTS" << 1;
-
-
 #ifdef Q_OS_ANDROID
     if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
         return -1;
@@ -99,7 +96,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
 
     KLocalizedString::setApplicationDomain("vvave");
-    KAboutData about(QStringLiteral("vvave"), i18n("Vvave"), VVAVE_VERSION_STRING, i18n("Organize and listen to your music."), KAboutLicense::LGPL_V3, i18n("© 2019-%1 Maui Development Team", QString::number(QDate::currentDate().year())),QString(GIT_BRANCH) + "/" + QString(GIT_COMMIT_HASH));
+    KAboutData about(QStringLiteral("vvave"),
+                     i18n("Vvave"),
+                     VVAVE_VERSION_STRING,
+                     i18n("Organize and listen to your music."),
+                     KAboutLicense::LGPL_V3,
+                     i18n("© 2019-2023 Maui Development Team"),
+                     QString(GIT_BRANCH) + "/" + QString(GIT_COMMIT_HASH));
 
     about.addAuthor("Camilo Higuita", i18n("Developer"), QStringLiteral("milo.h@aol.com"));
     about.addAuthor("Will Chen", i18n("Developer"), QStringLiteral("intralexical@gmail.com"));
