@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-15 00:44+0000\n"
+"POT-Creation-Date: 2023-10-28 00:42+0000\n"
 "PO-Revision-Date: 2023-05-13 08:45+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: src/main.cpp:102
+#: src/main.cpp:100
 #, kde-format
 msgid "Vvave"
 msgstr "Vvave"
@@ -28,12 +28,13 @@ msgstr "Vvave"
 msgid "Organize and listen to your music."
 msgstr "Упорядкуйте вашу музику і насолоджуйтеся нею."
 
-#: src/main.cpp:102
-#, kde-format
-msgid "© 2019-%1 Maui Development Team"
+#: src/main.cpp:104
+#, fuzzy, kde-format
+#| msgid "© 2019-%1 Maui Development Team"
+msgid "© 2019-2023 Maui Development Team"
 msgstr "© Команда розробників Maui, 2019–%1"
 
-#: src/main.cpp:104 src/main.cpp:105
+#: src/main.cpp:107 src/main.cpp:108
 #, kde-format
 msgid "Developer"
 msgstr "Розробник"
@@ -56,7 +57,7 @@ msgstr ""
 "Ви справді хочете вилучити ці файли? Наслідки цієї дії не можна буде "
 "скасувати."
 
-#: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:13
+#: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Скорочення"
@@ -441,53 +442,60 @@ msgstr "Дописати"
 msgid "Queue"
 msgstr "Додати до черги"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:52
+#: src/widgets/SettingsView/SettingsDialog.qml:37
+#, fuzzy, kde-format
+#| msgid "Remove track"
+msgid "Remove source"
+msgstr "Вилучити маршрути"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:38
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to remove these files? This action can not be "
+#| "undone."
+msgid ""
+"Are you sure you want to remove the source: \n"
+"%1"
+msgstr ""
+"Ви справді хочете вилучити ці файли? Наслідки цієї дії не можна буде "
+"скасувати."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
 msgid "Playback"
 msgstr "Відтворення"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:53
-#, kde-format
-msgid "Configure the playback behavior."
-msgstr "Налаштувати поведінку при відтворенні."
-
-#: src/widgets/SettingsView/SettingsDialog.qml:57
+#: src/widgets/SettingsView/SettingsDialog.qml:59
 #, kde-format
 msgid "Auto Resume"
 msgstr "Автопоновлення"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:58
+#: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Resume the last session playlist."
 msgstr "Відновлювати відтворення списку з останнього сеансу."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:70
+#: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
 msgid "Volume"
 msgstr "Гучність"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:71
+#: src/widgets/SettingsView/SettingsDialog.qml:73
 #, kde-format
 msgid "Show volume controls."
 msgstr "Показати засоби керування гучністю."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:84
+#: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Collection"
 msgstr "Збірка"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:85
-#: src/widgets/SettingsView/SettingsDialog.qml:117
-#, kde-format
-msgid "Configure the app plugins and collection behavior."
-msgstr "Налаштувати додатки і поведінку збірки."
-
-#: src/widgets/SettingsView/SettingsDialog.qml:89
+#: src/widgets/SettingsView/SettingsDialog.qml:91
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Отримати графіку"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:90
+#: src/widgets/SettingsView/SettingsDialog.qml:92
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -496,12 +504,12 @@ msgstr ""
 "Збирає графіку для альбому та виконавців з джерел в інтернеті: LastFM, "
 "Spotify, MusicBrainz, iTunes, Genius та інших."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:102
+#: src/widgets/SettingsView/SettingsDialog.qml:104
 #, kde-format
 msgid "Auto Scan"
 msgstr "Автосканування"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:103
+#: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -509,67 +517,62 @@ msgstr ""
 "Сканувати під час запуску усі джерела музичних творів для підтримання "
 "актуальності збірки."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:116
+#: src/widgets/SettingsView/SettingsDialog.qml:118
 #, kde-format
 msgid "General"
 msgstr "Загальне"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:122
+#: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Focus View"
 msgstr "Панель фокуса"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:123
+#: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Зробити панель фокуса типовою."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:139
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Dark Mode"
 msgstr "Темний режим"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:141
 #, kde-format
 msgid "Switch between light and dark colorscheme."
 msgstr "Перемкнутися між світлою і темною схемою кольорів."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:156
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Artwork"
 msgstr "Графіка"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:158
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Показувати зображення обкладинки композицій."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:172
+#: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Titles"
 msgstr "Назви"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:174
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Показувати у таблиці назви альбомів і виконавців."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:189
+#: src/widgets/SettingsView/SettingsDialog.qml:190
 #, kde-format
 msgid "Sources"
 msgstr "Джерела"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
-#, kde-format
-msgid "Add or remove sources"
-msgstr "Додати або вилучити джерела"
-
-#: src/widgets/SettingsView/SettingsDialog.qml:233
+#: src/widgets/SettingsView/SettingsDialog.qml:228
 #, kde-format
 msgid "Add"
 msgstr "Додати"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:250
+#: src/widgets/SettingsView/SettingsDialog.qml:245
 #, kde-format
 msgid "Scan now"
 msgstr "Сканувати зараз"
@@ -584,6 +587,15 @@ msgstr "Невідомо"
 #, kde-format
 msgid "Open file"
 msgstr "Відкрити файл"
+
+#~ msgid "Configure the playback behavior."
+#~ msgstr "Налаштувати поведінку при відтворенні."
+
+#~ msgid "Configure the app plugins and collection behavior."
+#~ msgstr "Налаштувати додатки і поведінку збірки."
+
+#~ msgid "Add or remove sources"
+#~ msgstr "Додати або вилучити джерела"
 
 #~ msgid "Cancel"
 #~ msgstr "Скасувати"
