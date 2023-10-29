@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-05-13 12:45+0200\n"
+"PO-Revision-Date: 2023-10-28 10:54+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: src/main.cpp:100
 #, kde-format
@@ -30,10 +30,9 @@ msgid "Organize and listen to your music."
 msgstr "Organitzeu i escolteu la vostra música."
 
 #: src/main.cpp:104
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 L'equip de desenvolupament de Maui"
+msgstr "© 2019-2023 L'equip de desenvolupament de Maui"
 
 #: src/main.cpp:107 src/main.cpp:108
 #, kde-format
@@ -439,21 +438,18 @@ msgid "Queue"
 msgstr "Cua"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:37
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove source"
-msgstr "Elimina la peça"
+msgstr "Elimina la font"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove these files? This action can not be "
-#| "undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
 msgstr ""
-"Segur que voleu eliminar estos fitxers? Esta operació no es podrà desfer."
+"Segur que voleu eliminar la font: \n"
+"%1"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
@@ -582,14 +578,3 @@ msgstr "Desconegut"
 #, kde-format
 msgid "Open file"
 msgstr "Obri un fitxer"
-
-#~ msgid "Configure the playback behavior."
-#~ msgstr "Configura el comportament de la reproducció."
-
-#~ msgid "Configure the app plugins and collection behavior."
-#~ msgstr ""
-#~ "Configura els connectors de l'aplicació i el comportament de la "
-#~ "col·lecció."
-
-#~ msgid "Add or remove sources"
-#~ msgstr "Afig o elimina fonts"

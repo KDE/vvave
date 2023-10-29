@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-05-13 10:19+0200\n"
+"PO-Revision-Date: 2023-10-28 11:37+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: src/main.cpp:100
 #, kde-format
@@ -28,10 +28,9 @@ msgid "Organize and listen to your music."
 msgstr "Uw muziek organiseren en er naar luisteren."
 
 #: src/main.cpp:104
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 Ontwikkelteam van Maui"
+msgstr "© 2019-2023 Ontwikkelteam van Maui"
 
 #: src/main.cpp:107 src/main.cpp:108
 #, kde-format
@@ -439,22 +438,18 @@ msgid "Queue"
 msgstr "In wachtrij zetten"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:37
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove source"
-msgstr "Track verwijderen"
+msgstr "Bron verwijderen"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove these files? This action can not be "
-#| "undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
 msgstr ""
-"Wilt u deze bestanden verwijderen? Deze actie kan niet ongedaan worden "
-"gemaakt."
+"Wilt u de bron verwijderen: \n"
+"%1"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format

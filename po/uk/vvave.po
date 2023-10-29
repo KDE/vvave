@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-05-13 08:45+0300\n"
+"PO-Revision-Date: 2023-10-28 09:21+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -29,10 +29,9 @@ msgid "Organize and listen to your music."
 msgstr "Упорядкуйте вашу музику і насолоджуйтеся нею."
 
 #: src/main.cpp:104
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© Команда розробників Maui, 2019–%1"
+msgstr "© Команда розробників Maui, 2019–2023"
 
 #: src/main.cpp:107 src/main.cpp:108
 #, kde-format
@@ -443,22 +442,18 @@ msgid "Queue"
 msgstr "Додати до черги"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:37
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove source"
-msgstr "Вилучити маршрути"
+msgstr "Вилучити джерело"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove these files? This action can not be "
-#| "undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
 msgstr ""
-"Ви справді хочете вилучити ці файли? Наслідки цієї дії не можна буде "
-"скасувати."
+"Ви справді хочете вилучити це джерело:\n"
+"%1"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
