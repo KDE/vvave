@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-05-14 06:23+0200\n"
+"PO-Revision-Date: 2023-10-30 05:33+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: src/main.cpp:100
 #, kde-format
@@ -29,10 +29,9 @@ msgid "Organize and listen to your music."
 msgstr "მუსიკის მოსმენის და დალაგება."
 
 #: src/main.cpp:104
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019- %1 Maui განვითარების გუნდი"
+msgstr "© 2019-2023 Maui განვითარების გუნდი"
 
 #: src/main.cpp:107 src/main.cpp:108
 #, kde-format
@@ -438,22 +437,18 @@ msgid "Queue"
 msgstr "რიგი"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:37
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove source"
-msgstr "ტრეკის წაშლა"
+msgstr "წყაროს წაშლა"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove these files? This action can not be "
-#| "undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
 msgstr ""
-"დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ ეს ფაილები? ქმედება "
-"შეუქცევადია."
+"დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ წყარო:\n"
+"%1"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
