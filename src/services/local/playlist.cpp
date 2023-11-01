@@ -4,7 +4,7 @@
 // #include <QRandomGenerator>
 #include <QUrl>
 #include <QDebug>
-#include <MauiKit3/Core/utils.h>
+#include <QSettings>
 
 #include <random>
 
