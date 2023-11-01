@@ -28,10 +28,9 @@ msgid "Organize and listen to your music."
 msgstr ""
 
 #: src/main.cpp:104
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 Vývojový tým Maui"
+msgstr ""
 
 #: src/main.cpp:107 src/main.cpp:108
 #, kde-format
@@ -432,20 +431,16 @@ msgid "Queue"
 msgstr "Fronta"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:37
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove source"
-msgstr "Odstranit skladbu"
+msgstr "Odstranit zdroj"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove this tag? This operation can not be "
-#| "undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
-msgstr "Opravdu si přejete odstranit tuto značku? Tento krok nejde vrátit."
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
@@ -570,12 +565,3 @@ msgstr "Neznámý"
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "Configure the playback behavior."
-#~ msgstr "Nastavení chování přehrávání."
-
-#~ msgid "Configure the app plugins and collection behavior."
-#~ msgstr "Nastavení chování modulů aplikace a sbírky."
-
-#~ msgid "Add or remove sources"
-#~ msgstr "Přidat nebo odebrat zdroje"

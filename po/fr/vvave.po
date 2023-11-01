@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-10-24 21:01+0200\n"
+"PO-Revision-Date: 2023-10-30 15:19+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: src/main.cpp:100
 #, kde-format
@@ -25,10 +25,9 @@ msgid "Organize and listen to your music."
 msgstr "Organiser et écouter votre musique."
 
 #: src/main.cpp:104
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 L'équipe de développement de Maui"
+msgstr "© 2019 - 2023 L'équipe de développement de Maui"
 
 #: src/main.cpp:107 src/main.cpp:108
 #, kde-format
@@ -438,22 +437,18 @@ msgid "Queue"
 msgstr "Mettre en file"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:37
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove source"
-msgstr "Supprimer une piste"
+msgstr "Supprimer une source"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove these files? This action can not be "
-#| "undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
 msgstr ""
-"Voulez-vous vraiment supprimer ces fichiers ? Cette action ne peut être "
-"annulée."
+"Voulez-vous vraiment supprimer cette source :\n"
+"%1 ?"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
