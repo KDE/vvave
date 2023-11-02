@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-28 00:42+0000\n"
-"PO-Revision-Date: 2023-08-03 20:42+0200\n"
+"PO-Revision-Date: 2023-11-01 07:33+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: src/main.cpp:100
 #, kde-format
@@ -28,10 +28,9 @@ msgid "Organize and listen to your music."
 msgstr "Organisera och lyssna på dina låtar."
 
 #: src/main.cpp:104
-#, fuzzy, kde-format
-#| msgid "© 2019-%1 Maui Development Team"
+#, kde-format
 msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-%1 Maui utvecklingsgrupp"
+msgstr "© 2019-2023 Maui utvecklingsgrupp"
 
 #: src/main.cpp:107 src/main.cpp:108
 #, kde-format
@@ -282,7 +281,7 @@ msgstr "Börja sätta ihop din spellista."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
+msgstr[0] "Filtrera %1 katalog"
 msgstr[1] "Filtrera %1 kataloger"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
@@ -436,20 +435,18 @@ msgid "Queue"
 msgstr "Köa"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:37
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove source"
-msgstr "Ta bort spår"
+msgstr "Ta bort källa"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove these files? This action can not be "
-#| "undone."
+#, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
-msgstr "Är du säker på att du vill ta bort filerna? Åtgärden kan inte ångras."
+msgstr ""
+"Är du säker på att du vill ta bort källan:\n"
+"%1"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
