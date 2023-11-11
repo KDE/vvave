@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:29+0000\n"
+"POT-Creation-Date: 2023-11-11 00:41+0000\n"
 "PO-Revision-Date: 2023-10-28 12:06+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -78,7 +78,7 @@ msgstr "Honi buruz"
 msgid "Songs"
 msgstr "Abestiak"
 
-#: src/main.qml:539 src/widgets/AlbumsView.qml:62
+#: src/main.qml:539 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumak"
@@ -93,7 +93,7 @@ msgstr "Albumik ez!"
 msgid "Add new music sources"
 msgstr "Gehitu musika-sorburu berriak"
 
-#: src/main.qml:563 src/widgets/AlbumsView.qml:62
+#: src/main.qml:563 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistak"
@@ -157,12 +157,12 @@ msgstr "Musika jotzea"
 msgid "Add sources"
 msgstr "Gehitu sorburuak"
 
-#: src/widgets/AlbumsView.qml:56
+#: src/widgets/AlbumsView.qml:70
 #, kde-format
 msgid "This list is empty"
 msgstr "Zerrenda hau hutsik dago"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
+#: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:29+0000\n"
+"POT-Creation-Date: 2023-11-11 00:41+0000\n"
 "PO-Revision-Date: 2023-06-04 23:10+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -74,7 +74,7 @@ msgstr "Tietoa"
 msgid "Songs"
 msgstr "Kappaleet"
 
-#: src/main.qml:539 src/widgets/AlbumsView.qml:62
+#: src/main.qml:539 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumit"
@@ -89,7 +89,7 @@ msgstr "Ei albumeja!"
 msgid "Add new music sources"
 msgstr "Lisää uusia musiikkilähteitä"
 
-#: src/main.qml:563 src/widgets/AlbumsView.qml:62
+#: src/main.qml:563 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistit"
@@ -153,12 +153,12 @@ msgstr "Toistetaan musiikkia"
 msgid "Add sources"
 msgstr "Lisää lähteitä"
 
-#: src/widgets/AlbumsView.qml:56
+#: src/widgets/AlbumsView.qml:70
 #, kde-format
 msgid "This list is empty"
 msgstr "Luettelo on tyhjä"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
+#: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format

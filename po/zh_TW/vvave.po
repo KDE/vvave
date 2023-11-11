@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-05 12:29+0000\n"
+"POT-Creation-Date: 2023-11-11 00:41+0000\n"
 "PO-Revision-Date: 2023-02-09 01:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -74,7 +74,7 @@ msgstr "關於"
 msgid "Songs"
 msgstr "歌曲"
 
-#: src/main.qml:539 src/widgets/AlbumsView.qml:62
+#: src/main.qml:539 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "專輯"
@@ -89,7 +89,7 @@ msgstr "沒有專輯！"
 msgid "Add new music sources"
 msgstr "新增音樂來源"
 
-#: src/main.qml:563 src/widgets/AlbumsView.qml:62
+#: src/main.qml:563 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "藝人"
@@ -156,12 +156,12 @@ msgstr "正在播放音樂"
 msgid "Add sources"
 msgstr "新增來源"
 
-#: src/widgets/AlbumsView.qml:56
+#: src/widgets/AlbumsView.qml:70
 #, kde-format
 msgid "This list is empty"
 msgstr "這個列表是空的"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:38 src/widgets/BabeTable/BabeTable.qml:98
+#: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:98
 #: src/widgets/CloudView/CloudView.qml:50
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format
