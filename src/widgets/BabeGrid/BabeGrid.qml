@@ -1,5 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.15
 
 import org.mauikit.controls 1.3 as Maui
 
@@ -16,6 +17,7 @@ Maui.AltBrowser
     readonly property int count: currentView.count
 
     signal albumCoverClicked(string album, string artist)
+    signal playAll(string album, string artist)
 
     Maui.Theme.colorSet: Maui.Theme.View
     Maui.Theme.inherit: false
@@ -42,12 +44,12 @@ Maui.AltBrowser
 
             onAccepted:
             {
-//                if(text.includes(","))
-//                {
-                    _albumsModel.filters = text.split(",")
-//                }else
+                //                if(text.includes(","))
+                //                {
+                _albumsModel.filters = text.split(",")
+                //                }else
                 {
-//                    _albumsModel.filter = text
+                    //                    _albumsModel.filter = text
                 }
             }
 
@@ -201,6 +203,27 @@ Maui.AltBrowser
                     albumCoverClicked(model.album, model.artist)
                 }
             }
+
+            ToolButton
+            {
+                parent: _template.iconContainer
+                anchors.centerIn: parent
+                icon.name: "media-playback-start"
+                icon.color: "white"
+                icon.height: 32
+                icon.width: 32
+                padding: Maui.Style.space.big
+                visible: _template.hovered
+
+                onClicked: control.playAll(model.album, model.artist)
+
+                background: Rectangle
+                {
+                    color: "black"
+                    radius: height
+                    opacity: 0.5
+                }
+            }
         }
     }
 
@@ -208,5 +231,5 @@ Maui.AltBrowser
     {
         return _filterLoader.item
     }
-}
+    }
 

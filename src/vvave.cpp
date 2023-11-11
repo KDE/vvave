@@ -51,6 +51,11 @@ QString vvave::artworkUrl(const QString &artist, const QString &album)
     return QString();
 }
 
+QVariantList vvave::getTracks(const QString &query)
+{
+    return FMH::toMapList(CollectionDB::getInstance()->getDBData(query));
+}
+
 /*
  * Sets upthe app default config paths
  * BrainDeamon to get collection information
@@ -73,7 +78,7 @@ void vvave::setFetchArtwork(bool fetchArtwork)
         return;
 
     m_fetchArtwork = fetchArtwork;
-    emit fetchArtworkChanged(m_fetchArtwork);
+    Q_EMIT fetchArtworkChanged(m_fetchArtwork);
 }
 
 bool vvave::fetchArtwork() const
@@ -89,7 +94,7 @@ void vvave::addSources(const QList<QUrl> &paths)
     for (const auto &path : paths) {
         if (!urls.contains(path)) {
             newUrls << path;
-            emit sourceAdded(path);
+            Q_EMIT sourceAdded(path);
         }
     }
 
@@ -104,7 +109,7 @@ void vvave::addSources(const QList<QUrl> &paths)
     settings.endGroup();
 
     scanDir(urls);
-    emit sourcesChanged();
+    Q_EMIT sourcesChanged();
 }
 
 bool vvave::removeSource(const QString &source)
@@ -120,10 +125,10 @@ bool vvave::removeSource(const QString &source)
     settings.setValue("SOURCES", QVariant::fromValue(urls));
     settings.endGroup();
 
-    emit sourcesChanged();
+    Q_EMIT sourcesChanged();
 
     if (CollectionDB::getInstance()->removeSource(source)) {
-        emit this->sourceRemoved(source);
+        Q_EMIT this->sourceRemoved(source);
         return true;
     }
 
@@ -140,7 +145,7 @@ void vvave::scanDir(const QList<QUrl> &paths)
     connect(fileLoader, &FMH::FileLoader::finished, fileLoader, [this, fileLoader](FMH::MODEL_LIST, QList<QUrl>)
     {
         m_scanning = false;
-        emit scanningChanged(m_scanning);
+        Q_EMIT scanningChanged(m_scanning);
 
         fileLoader->deleteLater();
     });
@@ -148,7 +153,7 @@ void vvave::scanDir(const QList<QUrl> &paths)
     fileLoader->requestPath(paths, true, QStringList() << FMStatic::FILTER_LIST[FMStatic::FILTER_TYPE::AUDIO] << "*.m4a");
 
     m_scanning = true;
-    emit scanningChanged(m_scanning);
+    Q_EMIT scanningChanged(m_scanning);
 }
 
 void vvave::rescan()

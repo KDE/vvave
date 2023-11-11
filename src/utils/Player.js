@@ -134,6 +134,12 @@ function appendAllModel(model)
         )
 }
 
+function playQuery(query)
+{
+    const tracks = Vvave.Vvave.getTracks(query)
+    playAll(tracks)
+}
+
 function playAllModel(model)
 {
     sync = false

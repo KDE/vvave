@@ -1,5 +1,4 @@
-#ifndef VVAVE_H
-#define VVAVE_H
+#pragma once
 
 #include <QObject>
 #include <QStringList>
@@ -32,7 +31,7 @@ public:
 
     bool scanning() const;
 
-public slots:
+public Q_SLOTS:
     void addSources(const QList<QUrl> &paths);
     bool removeSource(const QString &source);
 
@@ -47,13 +46,20 @@ public slots:
 
     QString artworkUrl(const QString &artist, const QString &album);
 
+    /**
+     * @brief Get the tracks resulting from looking up the DB with a given query
+     * @param query The querystring
+     * @return A list of tracks
+     */
+    QVariantList getTracks(const QString &query);
+
 private:
     explicit vvave(QObject *parent = nullptr);
 
     bool m_fetchArtwork = false;
     bool m_scanning = false;
 
-signals:
+Q_SIGNALS:
     void sourceAdded(QUrl source);
     void sourceRemoved(QUrl source);
 
@@ -61,5 +67,3 @@ signals:
     void fetchArtworkChanged(bool fetchArtwork);
     void scanningChanged(bool scanning);
 };
-
-#endif // VVAVE_H

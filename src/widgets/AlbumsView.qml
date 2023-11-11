@@ -38,6 +38,20 @@ StackView
         ]
 
         onAlbumCoverClicked: control.populateTable(album, artist)
+        onPlayAll:
+        {
+            var query
+            if(album && artist)
+            {
+            query = Q.GET.albumTracks_.arg(album)
+            query = query.arg(artist)
+            }else if(artist && !album)
+            {
+              query = Q.GET.artistTracks_.arg(artist)
+            }
+
+            Player.playQuery(query)
+        }
     }
 
     Component
