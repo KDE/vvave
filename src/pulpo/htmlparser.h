@@ -1,5 +1,5 @@
-#ifndef HTMLPARSER_H
-#define HTMLPARSER_H
+#pragma once
+
 #include <QDebug>
 #include <QObject>
 #include <QString>
@@ -18,11 +18,7 @@ public:
 private:
     QByteArray html;
 
-signals:
+Q_SIGNALS:
     void finishedParsingTags(const QStringList &tags);
     void finishedExtractingProp(const QString &prop);
-
-public slots:
 };
-
-#endif // HTMLPARSER_H

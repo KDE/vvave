@@ -1,5 +1,4 @@
-﻿#ifndef PLAYLIST_H
-#define PLAYLIST_H
+﻿#pragma once
 
 #include <QObject>
 #include <QVariant>
@@ -50,6 +49,9 @@ public:
 
     bool autoResume() const;
 
+    void classBegin() override final;
+    void componentComplete() override final;
+
 private:
     TracksModel *m_model = nullptr;
     Player *m_player = nullptr;
@@ -62,7 +64,7 @@ private:
 
     bool m_autoResume;
 
-public slots:
+public Q_SLOTS:
     bool canGoNext() const;
     bool canGoPrevious() const;
     bool canPlay() const;
@@ -93,7 +95,7 @@ public slots:
 
     void setAutoResume(bool autoResume);
 
-signals:
+Q_SIGNALS:
     void canPlayChanged();
     void modelChanged(TracksModel *model);
     void currentTrackChanged(QVariantMap currentTrack);
@@ -102,12 +104,4 @@ signals:
     void playModeChanged(Playlist::PlayMode playMode);
     void repeatModeChanged(RepeatMode repeatMode);
     void autoResumeChanged(bool autoResume);
-
-    // QQmlParserStatus interface
-public:
-    void classBegin() override final;
-    void componentComplete() override final;
 };
-
-
-#endif // PLAYLIST_H

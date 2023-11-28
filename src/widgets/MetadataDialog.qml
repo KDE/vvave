@@ -18,6 +18,8 @@ Maui.InfoDialog
 
     signal edited(var data, int index)
 
+    standardButtons: Dialog.Ok | Dialog.Cancel
+
     onAccepted:
     {
         control.data.title = _titleField.text;
@@ -43,7 +45,7 @@ Maui.InfoDialog
         Maui.SectionItem
         {
             label1.text: i18n("Track Title")
-columns: 1
+            columns: 1
             TextField
             {
                 id: _titleField
@@ -61,7 +63,7 @@ columns: 1
             {
                 id: _artistField
                 text: control.data.artist
-Layout.fillWidth: true
+                Layout.fillWidth: true
 
             }
         }
@@ -76,7 +78,7 @@ Layout.fillWidth: true
             {
                 id: _albumField
                 text: control.data.album
-Layout.fillWidth: true
+                Layout.fillWidth: true
 
             }
         }
@@ -91,7 +93,7 @@ Layout.fillWidth: true
             {
                 id: _trackField
                 text: control.data.track
-Layout.fillWidth: true
+                Layout.fillWidth: true
 
             }
         }
@@ -106,7 +108,7 @@ Layout.fillWidth: true
             {
                 id: _genreField
                 text: control.data.genre
-Layout.fillWidth: true
+                Layout.fillWidth: true
 
             }
         }
@@ -121,7 +123,7 @@ Layout.fillWidth: true
             {
                 id: _yearField
                 text: control.data.releasedate
-Layout.fillWidth: true
+                Layout.fillWidth: true
 
             }
         }
@@ -136,7 +138,7 @@ Layout.fillWidth: true
             {
                 id: _commentField
                 text: control.data.comment
-Layout.fillWidth: true
+                Layout.fillWidth: true
 
             }
         }

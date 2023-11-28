@@ -1,6 +1,4 @@
-﻿#ifndef ALBUMSMODEL_H
-#define ALBUMSMODEL_H
-
+﻿#pragma once
 #include <QObject>
 #include <QThread>
 
@@ -33,12 +31,10 @@ private:
 
     int m_newAlbums;
 
-public slots:
+public Q_SLOTS:
     void refresh();
     int indexOfName(const QString &query);
 
-signals:
+Q_SIGNALS:
     void queryChanged();
 };
-
-#endif // ALBUMSMODEL_H

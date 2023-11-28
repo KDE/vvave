@@ -1,5 +1,4 @@
-#ifndef PULPO_H
-#define PULPO_H
+#pragma once
 
 #include <QDebug>
 #include <QImage>
@@ -34,10 +33,8 @@ private:
     void passSignal(const REQUEST &request, const RESPONSES &responses);
     void send(const SERVICES &service);
 
-signals:
+Q_SIGNALS:
     void infoReady(PULPO::REQUEST request, PULPO::RESPONSES responses);
     void error();
     void finished();
 };
-
-#endif // ARTWORK_H

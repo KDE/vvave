@@ -1,5 +1,4 @@
-#ifndef FOLDERSMODEL_H
-#define FOLDERSMODEL_H
+#pragma once
 
 #include <QObject>
 
@@ -24,9 +23,7 @@ private:
 
         void setList();
 
-signals:
+Q_SIGNALS:
         void foldersChanged();
 
 };
-
-#endif // FOLDERSMODEL_H

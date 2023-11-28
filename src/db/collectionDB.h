@@ -1,5 +1,4 @@
-#ifndef COLLECTIONDB_H
-#define COLLECTIONDB_H
+#pragma once
 
 #include <QList>
 #include <QString>
@@ -95,7 +94,7 @@ private:
     QString name;
     QSqlDatabase m_db;
 
-signals:
+Q_SIGNALS:
     void trackInserted(QVariantMap item);
 
     void albumInserted(QVariantMap item);
@@ -110,5 +109,3 @@ signals:
     void albumsCleaned(const int &amount);
     void artistsCleaned(const int &amount);
 };
-
-#endif // COLLECTION_H

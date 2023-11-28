@@ -5,9 +5,7 @@
 
    SPDX-License-Identifier: GPL-3.0-or-later
  ***************************************************************************/
-
-#ifndef MEDIACENTER_MPRIS2_H
-#define MEDIACENTER_MPRIS2_H
+#pragma once
 
 #include <QObject>
 #include <QSharedPointer>
@@ -78,4 +76,3 @@ private:
     bool mShowProgressOnTaskBar = true;
 };
 
-#endif // MEDIACENTER_MPRIS2_H

@@ -17,19 +17,19 @@ Cloud::Cloud(QObject *parent)
     });
 
     connect(provider, &AbstractMusicProvider::collectionReady, [=](FMH::MODEL_LIST data) {
-        emit this->albumsChanged();
-        emit this->artistsChanged();
+        Q_EMIT this->albumsChanged();
+        Q_EMIT this->artistsChanged();
 
-        emit this->preListChanged();
+        Q_EMIT this->preListChanged();
         this->list = data;
         this->sortList();
-        emit this->postListChanged();
+        Q_EMIT this->postListChanged();
     });
 
     connect(static_cast<NextMusic *>(provider), &NextMusic::trackPathReady, [=](QString id, QString path) {
         auto track = static_cast<NextMusic *>(provider)->getTrackItem(id);
         track[FMH::MODEL_KEY::URL] = path;
-        emit this->fileReady(FMH::toMap(track));
+        Q_EMIT this->fileReady(FMH::toMap(track));
     });
 }
 
@@ -46,10 +46,10 @@ void Cloud::setSortBy(const Cloud::SORTBY &sort)
 
     this->sort = sort;
 
-    emit this->preListChanged();
+    Q_EMIT this->preListChanged();
     this->sortList();
-    emit this->postListChanged();
-    emit this->sortByChanged();
+    Q_EMIT this->postListChanged();
+    Q_EMIT this->sortByChanged();
 }
 
 Cloud::SORTBY Cloud::getSortBy() const

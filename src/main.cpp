@@ -31,6 +31,9 @@
 
 #include <MauiKit3/FileBrowsing/fmstatic.h>
 #include <MauiKit3/Core/mauiapp.h>
+#include <MauiKit3/FileBrowsing/moduleinfo.h>
+
+#include <taglib/taglib.h>
 
 #include "../vvave_version.h"
 
@@ -82,12 +85,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
         return -1;
 
-
-    QAndroidJniObject::callStaticMethod<void>(
-        "org/vvave/mediasession/QMediaSessionManager",
-        "startQtAndroidService",
-        "(Landroid/content/Context;)V",
-        QtAndroid::androidActivity().object());
+//    QAndroidJniObject::callStaticMethod<void>(
+//        "org/vvave/mediasession/QMediaSessionManager",
+//        "startQtAndroidService",
+//        "(Landroid/content/Context;)V",
+//        QtAndroid::androidActivity().object());
 #endif
 
     qDebug() << "APP LOADING SPEED TESTS" << 2;
@@ -97,7 +99,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     KLocalizedString::setApplicationDomain("vvave");
     KAboutData about(QStringLiteral("vvave"),
-                     i18n("Vvave"),
+                     QStringLiteral("Vvave"),
                      VVAVE_VERSION_STRING,
                      i18n("Organize and listen to your music."),
                      KAboutLicense::LGPL_V3,
@@ -113,7 +115,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     about.setOrganizationDomain(VVAVE_URI);
     about.setProgramLogo(app.windowIcon());
     about.setDesktopFileName("org.kde.vvave");
-    about.addComponent("TagLib");
+
+    about.addComponent("TagLib",
+                       "",
+                       QString("%1.%2.%3").arg(QString::number(TAGLIB_MAJOR_VERSION),QString::number(TAGLIB_MINOR_VERSION),QString::number(TAGLIB_PATCH_VERSION)),
+                       "https://taglib.org/api/index.html");
+
+    const auto FBData = MauiKitFileBrowsing::aboutData();
+    about.addComponent(FBData.name(), MauiKitFileBrowsing::buildVersion(), FBData.version(), FBData.webAddress());
 
     KAboutData::setApplicationData(about);
 
@@ -189,17 +198,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qDebug() << "APP LOADING SPEED TESTS" << 4;
 
-
     engine.load(url);
 
     qDebug() << "APP LOADING SPEED TESTS" << 5;
 
-
 #ifdef Q_OS_MACOS
     //	MAUIMacOS::removeTitlebarFromWindow();
 #endif
-
-
 
     return app.exec();
 }

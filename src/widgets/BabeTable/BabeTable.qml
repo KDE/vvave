@@ -237,7 +237,7 @@ Maui.Page
         selectionMode: root.selectionMode
         currentIndex: -1
 
-        onItemsSelected:
+        onItemsSelected: (indexes) =>
         {
             for(var i in indexes)
             {
@@ -245,7 +245,7 @@ Maui.Page
             }
         }
 
-        onKeyPress:
+        onKeyPress: (event) =>
         {
             if(event.key === Qt.Key_Return)
             {

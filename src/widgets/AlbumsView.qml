@@ -37,8 +37,8 @@ StackView
             }
         ]
 
-        onAlbumCoverClicked: control.populateTable(album, artist)
-        onPlayAll:
+        onAlbumCoverClicked:(album, artist) => control.populateTable(album, artist)
+        onPlayAll: (album, artist) =>
         {
             var query
             if(album && artist)

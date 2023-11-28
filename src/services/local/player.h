@@ -1,5 +1,4 @@
-﻿#ifndef PLAYER_H
-#define PLAYER_H
+﻿#pragma once
 
 #include <QObject>
 #include <QtMultimedia/QMediaPlayer>
@@ -32,6 +31,13 @@ public:
     int getPos() const;
     void setPos(const int &value);
 
+public Q_SLOTS:
+    static QString transformTime(const int &value);
+    void stop();
+
+    bool play() const;
+    void pause() const;
+
 private:
     QMediaPlayer *player;
     QUrl url;
@@ -39,7 +45,7 @@ private:
     int amountBuffers = 0;
     int volume = 100;
 
-signals:
+Q_SIGNALS:
     void durationChanged();
     void urlChanged();
     void volumeChanged();
@@ -47,13 +53,4 @@ signals:
     void stateChanged();
     void playingChanged();
     void finished();
-
-public slots:
-    static QString transformTime(const int &value);
-    void stop();
-
-    bool play() const;
-    void pause() const;
 };
-
-#endif // PLAYER_H

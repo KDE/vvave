@@ -68,7 +68,7 @@ void AlbumsModel::setQuery(const QUERY &query)
         return;
 
     this->query = query;
-    emit this->queryChanged();
+    Q_EMIT this->queryChanged();
 }
 
 AlbumsModel::QUERY AlbumsModel::getQuery() const
@@ -78,7 +78,7 @@ AlbumsModel::QUERY AlbumsModel::getQuery() const
 
 void AlbumsModel::setList()
 {
-    emit this->preListChanged();
+    Q_EMIT this->preListChanged();
 
     QString m_Query;
     if (this->query == AlbumsModel::QUERY::ALBUMS)
@@ -90,8 +90,8 @@ void AlbumsModel::setList()
 
     this->list = CollectionDB::getInstance()->getDBData(m_Query);
 
-    emit this->postListChanged();
-    emit this->countChanged();
+    Q_EMIT this->postListChanged();
+    Q_EMIT this->countChanged();
 }
 
 void AlbumsModel::refresh()

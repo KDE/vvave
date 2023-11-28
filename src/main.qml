@@ -269,7 +269,7 @@ Maui.ApplicationWindow
         model: mainPlaylist.listModel.list
         onCurrentTrackChanged: Player.playTrack()
 
-        onMissingFile:
+        onMissingFile: (track) =>
         {
             var message = i18n("Missing file")
             var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
@@ -333,11 +333,8 @@ Maui.ApplicationWindow
 
             urls: selectionBar.uris
 
-            title: i18n("Remove %1 tracks", urls.length)
+            title: i18np("Remove track", "Remove %1 tracks", urls.length)
             message: i18n("Are you sure you want to remove these files? This action can not be undone.")
-
-//            rejectButton.text: i18n("Delete")
-//            acceptButton.text: i18n("Cancel")
 
             onAccepted: close()
 
@@ -355,7 +352,7 @@ Maui.ApplicationWindow
 
         FB.TagsDialog
         {
-            onTagsReady: composerList.updateToUrls(tags)
+            onTagsReady: (tags) => composerList.updateToUrls(tags)
             composerList.strict: false
         }
     }
@@ -620,6 +617,9 @@ Maui.ApplicationWindow
                         return currentItem.item.getFilterField()
                     }
 
+                        /**
+                          * Check if the "go back" function exists in the current view and return the reference to the function
+                          */
                     function getGoBackFunc() : Function
                     {
                         return 'getGoBackFunc' in currentItem.item ?
@@ -680,7 +680,6 @@ Maui.ApplicationWindow
         }
 
         _stackView.currentItem.forceActiveFocus()
-
     }
 
     property int oldH : root. height
@@ -792,5 +791,4 @@ Maui.ApplicationWindow
                 null
         }
     }
-
     }

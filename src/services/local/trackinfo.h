@@ -1,5 +1,4 @@
-#ifndef TRACKINFO_H
-#define TRACKINFO_H
+#pragma once
 
 #include <QObject>
 #include <QVariantMap>
@@ -15,7 +14,6 @@ class TrackInfo : public QObject
 
     Q_PROPERTY(QVariantMap track READ track WRITE setTrack NOTIFY trackChanged)
 
-
 public:
     explicit TrackInfo(QObject *parent = nullptr);
 
@@ -29,7 +27,7 @@ public:
 
     QVariantMap track() const;
 
-public slots:
+public Q_SLOTS:
     void setTrack(QVariantMap track);
 
 private:
@@ -53,13 +51,10 @@ private:
     QString m_album;
     QString m_title;
 
-signals:
-
+Q_SIGNALS:
     void albumWikiChanged(QString albumWiki);
     void artistWikiChanged(QString artistWiki);
     void trackWikiChanged(QString trackWiki);
     void lyricsChanged(QString lyrics);
     void trackChanged(QVariantMap track);
 };
-
-#endif // TRACKINFO_H

@@ -1,5 +1,4 @@
-﻿#ifndef METADATAEDITOR_H
-#define METADATAEDITOR_H
+﻿#pragma once
 
 #include <QObject>
 #include <QString>
@@ -33,7 +32,7 @@ public:
 
     int year() const;
 
-public slots:
+public Q_SLOTS:
     void setUrl(QUrl url);
 
     void setTitle(QString title);
@@ -70,8 +69,7 @@ private:
 
     int m_year;
 
-signals:
-
+Q_SIGNALS:
     void urlChanged(QUrl url);
     void titleChanged(QString title);
     void artistChanged(QString artist);
@@ -81,5 +79,3 @@ signals:
     void commentChanged(QString comment);
     void yearChanged(int year);
 };
-
-#endif // METADATAEDITOR_H

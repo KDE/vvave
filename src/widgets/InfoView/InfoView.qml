@@ -3,7 +3,6 @@ import QtQuick.Controls 2.10
 import QtQuick.Layouts 1.3
 
 import org.mauikit.controls 1.3 as Maui
-import org.kde.kirigami 2.7 as Kirigami
 
 import org.maui.vvave 1.0 as Vvave
 
@@ -17,76 +16,64 @@ Maui.Page
         track : root.currentTrack
     }
 
-    Kirigami.ScrollablePage
+    Maui.ScrollColumn
     {
         anchors.fill: parent
+        spacing: Maui.Style.space.big
+        clip: true
 
-        background: Rectangle
+        Maui.ListItemTemplate
         {
-            color: Maui.Theme.backgroundColor
-            radius: Maui.Style.radiusV
-            opacity: 0.5
+            Layout.fillWidth: true
+            maskRadius: Maui.Style.radiusV
+
+            label1.text: currentTrack.artist
+            label1.font.pointSize: Maui.Style.fontSizes.huge
+            label1.font.bold: true
+            label1.font.weight: Font.Black
+            label2.text: i18n("Artist Info")
+
+            imageSource: "image://artwork/artist:" + currentTrack.artist
+            iconSizeHint: Maui.Style.iconSizes.huge
         }
 
-        ColumnLayout
+        TextArea
         {
-            width: parent.width
-            spacing: Maui.Style.space.big
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            readOnly: true
+            text: _trackInfo.artistWiki
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            textFormat: Text.RichText
 
-            Maui.ListItemTemplate
-            {
-                Layout.fillWidth: true
-                maskRadius: Maui.Style.radiusV
-
-                label1.text: currentTrack.artist
-                label1.font.pointSize: Maui.Style.fontSizes.huge
-                label1.font.bold: true
-                label1.font.weight: Font.Black
-                label2.text: i18n("Artist Info")
-
-                imageSource: "image://artwork/artist:" + currentTrack.artist
-                iconSizeHint: Maui.Style.iconSizes.huge
-            }
-
-            TextArea
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                readOnly: true
-                text: _trackInfo.artistWiki
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                textFormat: Text.RichText
-
-                background: null
-            }
+            background: null
+        }
 
 
-            Maui.ListItemTemplate
-            {
-                Layout.fillWidth: true
-                maskRadius: Maui.Style.radiusV
+        Maui.ListItemTemplate
+        {
+            Layout.fillWidth: true
+            maskRadius: Maui.Style.radiusV
 
-                label1.text: currentTrack.album
-                label1.font.pointSize: Maui.Style.fontSizes.huge
-                label1.font.bold: true
-                label1.font.weight: Font.Black
-                label2.text: i18n("Album Info")
-                imageSource: "image://artwork/album:" + currentTrack.artist+":"+currentTrack.album
-                iconSizeHint: Maui.Style.iconSizes.huge
-            }
+            label1.text: currentTrack.album
+            label1.font.pointSize: Maui.Style.fontSizes.huge
+            label1.font.bold: true
+            label1.font.weight: Font.Black
+            label2.text: i18n("Album Info")
+            imageSource: "image://artwork/album:" + currentTrack.artist+":"+currentTrack.album
+            iconSizeHint: Maui.Style.iconSizes.huge
+        }
 
-            TextArea
-            {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                readOnly: true
-                text: _trackInfo.albumWiki
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                textFormat: Text.RichText
+        TextArea
+        {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            readOnly: true
+            text: _trackInfo.albumWiki
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            textFormat: Text.RichText
 
-                background: null
-            }
+            background: null
         }
     }
-
 }

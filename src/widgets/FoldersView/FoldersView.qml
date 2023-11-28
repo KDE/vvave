@@ -15,7 +15,7 @@ StackView
     id: control
 
     property string currentFolder : ""
-    property Flickable flickable: currentItem.flickable
+    readonly property Flickable flickable: currentItem.flickable
 
     initialItem: Maui.Page
     {
@@ -141,12 +141,12 @@ StackView
                 onClicked: control.pop()
             }
 
-            onRowClicked: Player.quickPlay(listModel.get(index))
-            onAppendTrack: Player.addTrack(listModel.get(index))
-            onPlayAll: Player.playAllModel(listModel.list)
+            onRowClicked: (index) => Player.quickPlay(listModel.get(index))
+            onAppendTrack: (index) => Player.addTrack(listModel.get(index))
+            onQueueTrack: (index) => Player.queueTracks([listModel.get(index)], index)
 
+            onPlayAll: Player.playAllModel(listModel.list)
             onAppendAll: Player.appendAllModel(listModel.list)
-            onQueueTrack: Player.queueTracks([listModel.get(index)], index)
         }
     }
 

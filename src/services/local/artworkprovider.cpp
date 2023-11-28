@@ -13,7 +13,7 @@ AsyncImageResponse::AsyncImageResponse(const QString &id, const QSize &requested
 
     if (parts.isEmpty()) {
         m_image = QImage(":/assets/cover.png");
-        emit this->finished();
+        Q_EMIT this->finished();
         return;
     }
 
@@ -39,7 +39,7 @@ AsyncImageResponse::AsyncImageResponse(const QString &id, const QSize &requested
     if (BAE::artworkCache(data, m_type)) {
         qDebug() << "ARTWORK CACHED" << album << artist;
         m_image = QImage(QUrl(data[FMH::MODEL_KEY::ARTWORK]).toLocalFile());
-        emit this->finished();
+        Q_EMIT this->finished();
     } else if (vvave::instance()->fetchArtwork()) {
         auto m_artworkFetcher = new ArtworkFetcher;
         connect(m_artworkFetcher, &ArtworkFetcher::finished, m_artworkFetcher, &ArtworkFetcher::deleteLater);
@@ -52,14 +52,14 @@ AsyncImageResponse::AsyncImageResponse(const QString &id, const QSize &requested
                 this->m_image = QImage(url.toLocalFile());
             }
 
-            emit this->finished();
+            Q_EMIT this->finished();
             m_artworkFetcher->deleteLater();
         });
 
         m_artworkFetcher->fetch(data, m_type == FMH::MODEL_KEY::ALBUM ? PULPO::ONTOLOGY::ALBUM : PULPO::ONTOLOGY::ARTIST);
     } else {
         m_image = QImage(":/assets/cover.png");
-        emit this->finished();
+        Q_EMIT this->finished();
     }
 }
 
@@ -93,7 +93,7 @@ void ArtworkFetcher::fetch(FMH::MODEL data, PULPO::ONTOLOGY ontology)
                     auto downloader = new FMH::Downloader;
                     QObject::connect(downloader, &FMH::Downloader::fileSaved, [&, downloader](QString path) mutable {
                         downloader->deleteLater();
-                        emit this->artworkReady(QUrl::fromLocalFile(path));
+                        Q_EMIT this->artworkReady(QUrl::fromLocalFile(path));
                     });
 
                     const auto format = res.value.toUrl().fileName().endsWith(".png") ? ".png" : ".jpg";
@@ -105,7 +105,7 @@ void ArtworkFetcher::fetch(FMH::MODEL data, PULPO::ONTOLOGY ontology)
                     qDebug() << "SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM] << BAE::CachePath.toString() + name + format;
 
                 } else {
-                    emit this->artworkReady(QUrl(":/assets/cover.png"));
+                    Q_EMIT this->artworkReady(QUrl(":/assets/cover.png"));
                 }
             }
         }
@@ -114,7 +114,7 @@ void ArtworkFetcher::fetch(FMH::MODEL data, PULPO::ONTOLOGY ontology)
     auto pulpo = new Pulpo;
     QObject::connect(pulpo, &Pulpo::finished, pulpo, &Pulpo::deleteLater);
     QObject::connect(pulpo, &Pulpo::error, [this, pulpo]() {
-        emit this->artworkReady(QUrl(":/assets/cover.png"));
+        Q_EMIT this->artworkReady(QUrl(":/assets/cover.png"));
         pulpo->deleteLater();
     });
 

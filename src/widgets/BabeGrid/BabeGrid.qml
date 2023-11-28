@@ -231,5 +231,5 @@ Maui.AltBrowser
     {
         return _filterLoader.item
     }
-    }
+}
 

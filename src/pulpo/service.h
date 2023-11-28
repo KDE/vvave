@@ -1,5 +1,4 @@
-#ifndef SERVICE_H
-#define SERVICE_H
+#pragma once
 
 #include <QDomDocument>
 #include <QJsonDocument>
@@ -11,9 +10,9 @@
 #include "enums.h"
 
 #define ERROR(request)                                                                                                                                                                                                                         \
-    {                                                                                                                                                                                                                                          \
-        emit this->error(request);                                                                                                                                                                                                             \
-        return;                                                                                                                                                                                                                                \
+{                                                                                                                                                                                                                                          \
+    emit this->error(request);                                                                                                                                                                                                             \
+    return;                                                                                                                                                                                                                                \
     }
 
 class Service : public QObject
@@ -51,12 +50,8 @@ protected:
 
     bool scopePass();
 
-signals:
+Q_SIGNALS:
     void arrayReady(QByteArray array);
     void responseReady(PULPO::REQUEST request, PULPO::RESPONSES responses);
     void error(PULPO::REQUEST request);
-
-public slots:
 };
-
-#endif // SERVICE_H

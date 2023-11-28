@@ -18,7 +18,7 @@ Maui.ListBrowserDelegate
     readonly property int track : model.track
 
     property bool sameAlbum : false
-property bool appendButton : false
+    property bool appendButton : false
 
     signal appendClicked()
 
@@ -26,9 +26,6 @@ property bool appendButton : false
 
     isCurrentItem: ListView.isCurrentItem || checked
     draggable: true
-
-//    iconSizeHint: Maui.Style.iconSizes.medium
-//    template.imageSizeHint:  48
     iconSource: "media-album-cover"
 
     template.isMask: true
@@ -39,25 +36,14 @@ property bool appendButton : false
 
     iconVisible: !control.sameAlbum && control.coverArt
     imageSource: coverArt ? "image://artwork/album:"+ control.artist+":"+control.album : ""
-    //    template.leftPadding: iconVisible ? 0 : Maui.Style.space.medium
 
-    AbstractButton
+    ToolButton
     {
-        Layout.fillHeight: true
-        Layout.preferredWidth: Maui.Style.rowHeight
         visible: control.appendButton
         icon.name: "list-add"
         onClicked: control.appendClicked()
-
-
-        Maui.Icon
-        {
-            anchors.centerIn: parent
-            height: Maui.Style.iconSizes.small
-            width: height
-            source: parent.icon.name
-            color: delegate.label1.color
-        }
+        icon.color: delegate.label1.color
+        flat: true
 
         opacity: delegate.hovered ? 0.8 : 0.6
     }

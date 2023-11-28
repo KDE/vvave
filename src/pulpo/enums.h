@@ -1,5 +1,4 @@
-#ifndef ENUMS_H
-#define ENUMS_H
+#pragma once
 
 #include <MauiKit3/Core/fmh.h>
 
@@ -113,7 +112,5 @@ struct REQUEST {
 
     std::function<void(REQUEST request, RESPONSES responses)> callback = nullptr;
 };
-
 }
 
-#endif // ENUMS_H

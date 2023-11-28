@@ -188,13 +188,13 @@ StackView
                     holder.title : i18n("No Results!")
                     holder.body: i18n("Try with something else")
 
-                    onRowClicked:
+                    onRowClicked: (index) =>
                     {
                         Player.quickPlay(listModel.get(index))
                         _filterField.close()
                     }
 
-                    onAppendTrack:
+                    onAppendTrack: (index) =>
                     {
                         Player.addTrack(listModel.get(index))
                     }
@@ -212,7 +212,7 @@ StackView
                         _filterField.close()
                     }
 
-                    onQueueTrack:
+                    onQueueTrack: (index) =>
                     {
                         Player.queueTracks([listModel.get(index)], index)
                     }

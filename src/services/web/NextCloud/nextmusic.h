@@ -1,6 +1,4 @@
-#ifndef NEXTMUSIC_H
-#define NEXTMUSIC_H
-
+#pragma once
 #include "abstractmusicprovider.h"
 #include <QObject>
 
@@ -12,22 +10,6 @@ public:
     QVariantList getAlbumsList() const override final;
     QVariantList getArtistsList() const override final;
 
-private:
-    const static QString API;
-    static const QString formatUrl(const QString &user, const QString &password, const QString &provider);
-
-    FMH::MODEL_LIST parseCollection(const QByteArray &array);
-
-    QVariantList m_artists;
-    QVariantList m_albums;
-    QHash<QString, FMH::MODEL> m_tracks; //(id: trackMap)
-
-signals:
-
-public slots:
-
-    // AbstractMusicProvider interface
-public:
     FMH::MODEL getTrackItem(const QString &id);
     void getTrackPath(const QString &id);
 
@@ -41,7 +23,15 @@ public:
     void getPlaylists() override final;
     void getPlaylist(const QString &id) override final;
     void getFolders() override final;
-    void getFolder(const QString &id) override final;
-};
+    void getFolder(const QString &id) override final;    
 
-#endif // NEXTMUSIC_H
+private:
+    const static QString API;
+    static const QString formatUrl(const QString &user, const QString &password, const QString &provider);
+
+    FMH::MODEL_LIST parseCollection(const QByteArray &array);
+
+    QVariantList m_artists;
+    QVariantList m_albums;
+    QHash<QString, FMH::MODEL> m_tracks; //(id: trackMap)
+};

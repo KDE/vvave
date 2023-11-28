@@ -16,11 +16,11 @@ Player::Player(QObject *parent)
         auto position = this->player->position();
         // QMediaPlayer::duration() "may not be available when initial playback begins". Sometimes rapidly changing tracks causes position == 0.0 == duration, so check for that.
         if (state == QMediaPlayer::StoppedState && position > 0.0 && position == this->player->duration()) {
-            emit this->finished();
+            Q_EMIT this->finished();
         }
 
-        emit this->stateChanged();
-        emit this->playingChanged();
+        Q_EMIT this->stateChanged();
+        Q_EMIT this->playingChanged();
     });
 
     connect(this->player, &QMediaPlayer::positionChanged, this, &Player::posChanged);
@@ -113,7 +113,7 @@ void Player::setUrl(const QUrl &value)
     //        return;
 
     this->url = value;
-    emit this->urlChanged();
+    Q_EMIT this->urlChanged();
 
     const auto media = this->url.isLocalFile() ? QMediaContent(this->url) : QMediaContent(getOcsRequest(QNetworkRequest(this->url)));
 
@@ -132,7 +132,7 @@ void Player::setVolume(const int &value)
 
     this->volume = value;
     this->player->setVolume(volume);
-    emit this->volumeChanged();
+    Q_EMIT this->volumeChanged();
 }
 
 int Player::getVolume() const

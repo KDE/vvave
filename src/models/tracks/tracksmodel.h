@@ -30,11 +30,11 @@ private:
 
     void setList();
 
-signals:
+Q_SIGNALS:
     void queryChanged();
     void limitChanged(int limit);
 
-public slots:
+public Q_SLOTS:
     bool append(const QVariantMap &item);
     bool appendUrl(const QUrl &url);
 

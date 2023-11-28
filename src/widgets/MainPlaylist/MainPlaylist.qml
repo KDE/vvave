@@ -21,10 +21,10 @@ Maui.Page
     Maui.Theme.colorSet: Maui.Theme.Window
 
     property alias listModel: table.listModel
-    property alias listView : table.listView
-    property alias table: table
+    readonly property alias listView : table.listView
+    readonly property alias table: table
 
-    property alias contextMenu: table.contextMenu
+    readonly property alias contextMenu: table.contextMenu
 
     headBar.visible: false
     footBar.visible: !mainlistEmpty
@@ -125,6 +125,7 @@ Maui.Page
                 {
                     anchors.fill: parent
                     anchors.leftMargin: Maui.Style.space.small
+
                     Label
                     {
                         Layout.fillWidth: true
@@ -150,10 +151,13 @@ Maui.Page
         delegate: TableDelegate
         {
             id: delegate
+
             width: ListView.view.width
             height: Math.max(implicitHeight, Maui.Style.rowHeight)
             appendButton: false
+
             property int mindex : index
+
             isCurrentItem: ListView.isCurrentItem
             mouseArea.drag.axis: Drag.YAxis
             Drag.source: delegate
@@ -244,7 +248,7 @@ Maui.Page
                 }
 
 
-                onContentDropped:
+                onContentDropped: (drop) =>
                 {
                     console.log("Move or insert ", drop.source.mindex)
                     if(typeof drop.source.mindex !== 'undefined')

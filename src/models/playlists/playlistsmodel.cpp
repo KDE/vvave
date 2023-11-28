@@ -12,9 +12,9 @@ PlaylistsModel::PlaylistsModel(QObject *parent)
     : MauiList(parent)
 {
     connect(Tagging::getInstance(), &Tagging::tagged, [this](QVariantMap tag) {
-        emit this->preItemAppended();
+        Q_EMIT this->preItemAppended();
         this->list << (this->packPlaylist(tag.value("tag").toString()));
-        emit this->postItemAppended();
+        Q_EMIT this->postItemAppended();
     });
 
     connect(Tagging::getInstance(), &Tagging::urlTagged, [this](QUrl, QString tag) {
@@ -22,7 +22,7 @@ PlaylistsModel::PlaylistsModel(QObject *parent)
         auto item = this->list[index];
         item[FMH::MODEL_KEY::PREVIEW] = playlistArtworkPreviews(tag);
         this->list[index] = item;
-        emit this->updateModel(index, {});
+        Q_EMIT this->updateModel(index, {});
     });
 }
 
@@ -33,13 +33,13 @@ const FMH::MODEL_LIST &PlaylistsModel::items() const
 
 void PlaylistsModel::setList()
 {
-    emit this->preListChanged();
+    Q_EMIT this->preListChanged();
     if(m_limit == 9999)
     {
         this->list << this->defaultPlaylists();
     }
     this->list << this->tags();
-    emit this->postListChanged();
+    Q_EMIT this->postListChanged();
 }
 
 FMH::MODEL PlaylistsModel::packPlaylist(const QString &playlist)
@@ -194,9 +194,9 @@ void PlaylistsModel::removePlaylist(const int &index) // TODO
 
     if(Tagging::getInstance()->removeTag(this->list.at(index)[FMH::MODEL_KEY::PLAYLIST], true))
     {
-        emit this->preItemRemoved(index);
+        Q_EMIT this->preItemRemoved(index);
         this->list.removeAt(index);
-        emit this->postItemRemoved();
+        Q_EMIT this->postItemRemoved();
     }
 }
 
@@ -215,5 +215,5 @@ void PlaylistsModel::setLimit(int newLimit)
     if (m_limit == newLimit)
         return;
     m_limit = newLimit;
-    emit limitChanged();
+    Q_EMIT limitChanged();
 }

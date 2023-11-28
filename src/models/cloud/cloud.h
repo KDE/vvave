@@ -1,5 +1,4 @@
-#ifndef CLOUD_H
-#define CLOUD_H
+#pragma once
 
 #include <QObject>
 
@@ -51,13 +50,13 @@ private:
 
     Cloud::SORTBY sort = Cloud::SORTBY::ARTIST;
 
-public slots:
+public Q_SLOTS:
     void upload(const QUrl &url);
 
     void getFileUrl(const QString &id);
     void getFileUrl(const int &index);
 
-signals:
+Q_SIGNALS:
     void sortByChanged();
     void fileReady(QVariantMap track);
     void warning(QString error);
@@ -65,5 +64,3 @@ signals:
     void artistsChanged();
     void albumsChanged();
 };
-
-#endif // CLOUD_H

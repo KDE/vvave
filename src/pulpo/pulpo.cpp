@@ -41,13 +41,13 @@ void Pulpo::request(const PULPO::REQUEST &request)
     this->req = request;
 
     if (this->req.track.isEmpty()) {
-        emit this->error();
+        Q_EMIT this->error();
         return;
     }
 
     if (this->req.services.isEmpty()) {
         qWarning() << "Please register at least one Pulpo Service";
-        emit this->error();
+        Q_EMIT this->error();
         return;
     }
 
@@ -64,8 +64,8 @@ void Pulpo::passSignal(const REQUEST &request, const RESPONSES &responses)
     if (request.callback)
         request.callback(request, responses);
     else
-        emit this->infoReady(request, responses);
-    emit this->finished();
+        Q_EMIT this->infoReady(request, responses);
+    Q_EMIT this->finished();
 }
 
 void Pulpo::send(const SERVICES &service)
@@ -83,7 +83,7 @@ void Pulpo::send(const SERVICES &service)
                 request.services.removeOne(service);
                 this->request(request);
             } else {
-                emit this->error();
+                Q_EMIT this->error();
             }
 
             lastfm->deleteLater();
@@ -105,7 +105,7 @@ void Pulpo::send(const SERVICES &service)
                 request.services.removeOne(service);
                 this->request(request);
             } else {
-                emit this->error();
+                Q_EMIT this->error();
             }
 
             spotify->deleteLater();
@@ -120,7 +120,7 @@ void Pulpo::send(const SERVICES &service)
             this->req.services.removeOne(service);
             this->request(req);
         } else {
-            emit this->error();
+            Q_EMIT this->error();
         }
     }
     }

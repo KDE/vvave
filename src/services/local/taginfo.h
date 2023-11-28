@@ -1,6 +1,4 @@
-#ifndef TAGINFO_H
-#define TAGINFO_H
-
+#pragma once
 #include <QByteArray>
 #include <QObject>
 #include <QString>
@@ -43,5 +41,3 @@ private:
     QString path;
     wchar_t *m_path;
 };
-
-#endif // TAGINFO_H

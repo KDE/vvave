@@ -52,7 +52,7 @@ void TracksModel::setQuery(const QString &query)
     //        return;
 
     this->query = query;
-    emit this->queryChanged();
+    Q_EMIT this->queryChanged();
 }
 
 QString TracksModel::getQuery() const
@@ -70,7 +70,7 @@ void TracksModel::setList()
     if (query.isEmpty())
         return;
 
-    emit this->preListChanged();
+    Q_EMIT this->preListChanged();
     this->list.clear();
 
     qDebug() << "GETTIN TRACK LIST" << this->query;
@@ -90,8 +90,8 @@ void TracksModel::setList()
         this->list = CollectionDB::getInstance()->getDBData(this->query);
     }
 
-    emit this->postListChanged();
-    emit this->countChanged();
+    Q_EMIT this->postListChanged();
+    Q_EMIT this->countChanged();
 }
 
 bool TracksModel::append(const QVariantMap &item)
@@ -99,10 +99,10 @@ bool TracksModel::append(const QVariantMap &item)
     if (item.isEmpty())
         return false;
 
-    emit this->preItemAppended();
+    Q_EMIT this->preItemAppended();
     this->list << FMH::toModel(item);
-    emit this->postItemAppended();
-    emit this->countChanged();
+    Q_EMIT this->postItemAppended();
+    Q_EMIT this->countChanged();
 
     return true;
 }
@@ -172,19 +172,19 @@ bool TracksModel::appendAt(const QVariantMap &item, const int &at)
         return false;
 
     qDebug() << "trying to append at << " << 0;
-    emit this->preItemAppendedAt(at);
+    Q_EMIT this->preItemAppendedAt(at);
     this->list.insert(at, FMH::toModel(item));
-    emit this->postItemAppended();
-    emit this->countChanged();
+    Q_EMIT this->postItemAppended();
+    Q_EMIT this->countChanged();
     return true;
 }
 
 bool TracksModel::appendQuery(const QString &query)
 {
-    emit this->preListChanged();
+    Q_EMIT this->preListChanged();
     this->list << CollectionDB::getInstance()->getDBData(query);
-    emit this->postListChanged();
-    emit this->countChanged();
+    Q_EMIT this->postListChanged();
+    Q_EMIT this->countChanged();
     return true;
 }
 
@@ -195,18 +195,18 @@ void TracksModel::copy(const TracksModel *list)
         return;
     }
 
-    emit this->preItemsAppended(list->getCount());
+    Q_EMIT this->preItemsAppended(list->getCount());
     this->list <<  list->items();
-    emit this->postItemAppended();
-    emit this->countChanged();
+    Q_EMIT this->postItemAppended();
+    Q_EMIT this->countChanged();
 }
 
 void TracksModel::clear()
 {
-    emit this->preListChanged();
+    Q_EMIT this->preListChanged();
     this->list.clear();
-    emit this->postListChanged();
-    emit this->countChanged();
+    Q_EMIT this->postListChanged();
+    Q_EMIT this->countChanged();
 }
 
 bool TracksModel::fav(const int &index, const bool &value)
@@ -233,7 +233,7 @@ bool TracksModel::countUp(const int &index)
     auto item = this->list[index];
     if (CollectionDB::getInstance()->playedTrack(item[FMH::MODEL_KEY::URL])) {
         this->list[index][FMH::MODEL_KEY::COUNT] = QString::number(item[FMH::MODEL_KEY::COUNT].toInt() + 1);
-        emit this->updateModel(index, {FMH::MODEL_KEY::COUNT});
+        Q_EMIT this->updateModel(index, {FMH::MODEL_KEY::COUNT});
 
         return true;
     }
@@ -248,9 +248,9 @@ bool TracksModel::remove(const int &index)
     if (index >= this->list.size() || index < 0)
         return false;
 
-    emit this->preItemRemoved(index);
+    Q_EMIT this->preItemRemoved(index);
     this->list.removeAt(index);
-    emit this->postItemRemoved();
+    Q_EMIT this->postItemRemoved();
 
     return true;
 }
@@ -298,7 +298,7 @@ bool TracksModel::update(const QVariantMap &data, const int &index)
     }
 
     this->list[index] = newData;
-    emit this->updateModel(index, roles);
+    Q_EMIT this->updateModel(index, roles);
     return true;
 }
 
@@ -335,7 +335,7 @@ bool TracksModel::move(const int &index, const int &to)
         return false;
 
     this->list.move(index, to);
-    emit this->itemMoved(index, to);
+    Q_EMIT this->itemMoved(index, to);
     return true;
 }
 
@@ -350,5 +350,5 @@ void TracksModel::setLimit(int limit)
         return;
 
     m_limit = limit;
-    emit limitChanged(m_limit);
+    Q_EMIT limitChanged(m_limit);
 }

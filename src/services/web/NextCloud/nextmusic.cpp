@@ -159,7 +159,7 @@ void NextMusic::getTrackPath(const QString &id)
         const auto map = data.toMap();
         auto path = map["path"].toString();
         const auto url = this->provider() + (path.startsWith("/") ? path.remove(0, 1) : path);
-        emit this->trackPathReady(id, url);
+        Q_EMIT this->trackPathReady(id, url);
 
         downloader->deleteLater();
     });
@@ -185,7 +185,7 @@ void NextMusic::getCollection(const std::initializer_list<QString> &parameters)
         qDebug() << "FINISHED REQUEST WITH RESPONSEC : " << array;
 
         const auto data = this->parseCollection(array);
-        emit this->collectionReady(data);
+        Q_EMIT this->collectionReady(data);
         downloader->deleteLater();
     });
 

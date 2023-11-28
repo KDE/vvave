@@ -14,32 +14,6 @@ Maui.Page
     id: control
     property alias list : _cloudList
 
-//    headBar.visible: !_listView.holder.visible
-
-//    headBar.leftContent: Maui.ToolActions
-//    {
-//        expanded: isWide
-//        enabled: listModel.list.count > 0
-//        checkable: false
-//        autoExclusive: false
-//        display: ToolButton.TextBesideIcon
-//        defaultIconName: "media-playback-start"
-
-//        Action
-//        {
-//            icon.name : "media-playlist-play"
-//            text: i18n("Play")
-////            onTriggered: playAll()
-//        }
-
-//        Action
-//        {
-//            icon.name : "media-playlist-append"
-//            text: i18n("Append")
-////            onTriggered: appendAll()
-//        }
-//    }
-
     headBar.middleContent: Maui.SearchField
     {
         id: _filterField

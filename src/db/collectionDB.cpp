@@ -248,17 +248,17 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
     const QVariantMap sourceMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], sourceUrl}, {FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCETYPE], sourceType(url)}};
 
     if (insert(TABLEMAP[BAE::TABLE::SOURCES], sourceMap))
-        emit sourceInserted(sourceMap);
+        Q_EMIT sourceInserted(sourceMap);
 
     const QVariantMap artistMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist}, {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""}};
 
     if (insert(TABLEMAP[TABLE::ARTISTS], artistMap))
-        emit artistInserted(artistMap);
+        Q_EMIT artistInserted(artistMap);
 
     const QVariantMap albumMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album}, {FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist}, {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""}};
 
     if (insert(TABLEMAP[TABLE::ALBUMS], albumMap))
-        emit albumInserted(albumMap);
+        Q_EMIT albumInserted(albumMap);
 
     const QVariantMap trackMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::URL], url},
                                {FMH::MODEL_NAME[FMH::MODEL_KEY::SOURCE], sourceUrl},
@@ -278,7 +278,7 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 
     if (this->insert(BAE::TABLEMAP[BAE::TABLE::TRACKS], trackMap)) {
         qDebug() << "TrackInserted!!!!!!" << trackMap;
-        emit trackInserted(trackMap);
+        Q_EMIT trackInserted(trackMap);
         return true;
     }
 
@@ -583,7 +583,7 @@ bool CollectionDB::cleanArtists()
     qDebug() << queryTxt;
 
     auto query = this->getQuery(queryTxt);
-    emit this->artistsCleaned(query.numRowsAffected());
+    Q_EMIT this->artistsCleaned(query.numRowsAffected());
     return query.exec();
 }
 
@@ -602,6 +602,6 @@ bool CollectionDB::cleanAlbums()
             .arg(TABLEMAP[TABLE::ALBUMS], FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], TABLEMAP[TABLE::TRACKS]);
     qDebug() << queryTxt;
     auto query = this->getQuery(queryTxt);
-    emit albumsCleaned(query.numRowsAffected());
+    Q_EMIT albumsCleaned(query.numRowsAffected());
     return query.exec();
 }

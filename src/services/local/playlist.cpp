@@ -234,7 +234,7 @@ void Playlist::setModel(TracksModel *model)
     m_model = model;
 
     connect(m_model, &TracksModel::countChanged, this, &Playlist::canPlayChanged);
-    emit modelChanged(m_model);
+    Q_EMIT modelChanged(m_model);
 }
 
 void Playlist::setCurrentIndex(int index)
@@ -253,7 +253,7 @@ void Playlist::setCurrentIndex(int index)
 
         if (!FMH::fileExists(url) && url.isLocalFile())
         {
-            emit this->missingFile(m_currentTrack);
+            Q_EMIT this->missingFile(m_currentTrack);
         }
 
     } else
@@ -262,8 +262,8 @@ void Playlist::setCurrentIndex(int index)
         m_currentTrack = QVariantMap();
     }
 
-    emit currentIndexChanged(m_currentIndex);
-    emit currentTrackChanged(m_currentTrack);
+    Q_EMIT currentIndexChanged(m_currentIndex);
+    Q_EMIT currentTrackChanged(m_currentTrack);
 }
 
 void Playlist::changeCurrentIndex(int index)
@@ -282,7 +282,7 @@ void Playlist::changeCurrentIndex(int index)
         return;
     }
 
-    emit currentIndexChanged(m_currentIndex);
+    Q_EMIT currentIndexChanged(m_currentIndex);
 }
 
 void Playlist::setPlayMode(Playlist::PlayMode playMode)
@@ -302,7 +302,7 @@ void Playlist::setPlayMode(Playlist::PlayMode playMode)
         this->shuffleRange(0, m_model->getCount());
     }
 
-    emit playModeChanged(m_playMode);
+    Q_EMIT playModeChanged(m_playMode);
 }
 
 void Playlist::shuffleRange(int start, int stop)
@@ -401,7 +401,7 @@ void Playlist::setRepeatMode(Playlist::RepeatMode repeatMode)
         return;
 
     m_repeatMode = repeatMode;
-    emit repeatModeChanged(m_repeatMode);
+    Q_EMIT repeatModeChanged(m_repeatMode);
 }
 
 void Playlist::setAutoResume(bool autoResume)
@@ -416,7 +416,7 @@ void Playlist::setAutoResume(bool autoResume)
     settings.setValue("autoResume", m_autoResume);
     settings.endGroup();
 
-    emit autoResumeChanged(m_autoResume);
+    Q_EMIT autoResumeChanged(m_autoResume);
 }
 
 void Playlist::componentComplete()

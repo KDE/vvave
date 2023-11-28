@@ -9,7 +9,9 @@ import org.maui.vvave 1.0 as Vvave
 Maui.AltBrowser
 {
     id: control
-    property alias list: _playlistsList
+
+    readonly property alias list: _playlistsList
+
     Maui.Theme.colorSet: Maui.Theme.View
     Maui.Theme.inherit: false
 
@@ -29,9 +31,7 @@ Maui.AltBrowser
         id: _removeTagDialogComponent
         Maui.InfoDialog
         {
-            title: i18n("Remove '%1'", currentPlaylist)
-//            acceptButton.text: i18n("Accept")
-//            rejectButton.text: i18n("Cancel")
+            title: i18n("Remove '%1'?", currentPlaylist)
             message: i18n("Are you sure you want to remove this tag? This operation can not be undone.")
             onAccepted:
             {

@@ -17,8 +17,8 @@ StackView
 
     property string playlistQuery
 
-    property Flickable flickable : currentItem.flickable
-    property alias playlistList :_playlistPage.list
+    readonly property Flickable flickable : currentItem.flickable
+    readonly property alias playlistList :_playlistPage.list
 
     Component
     {
@@ -73,9 +73,9 @@ StackView
                 }
             }
 
-            onQueueTrack: Player.queueTracks([listModel.get(index)], index)
-            onRowClicked: Player.quickPlay(filterList.listModel.get(index))
-            onAppendTrack: Player.addTrack(filterList.listModel.get(index))
+            onQueueTrack: (index) => Player.queueTracks([listModel.get(index)], index)
+            onRowClicked: (index) => Player.quickPlay(filterList.listModel.get(index))
+            onAppendTrack: (index) => Player.addTrack(filterList.listModel.get(index))
 
             onPlayAll:
             {
@@ -90,7 +90,6 @@ StackView
             }
 
             onAppendAll: Player.appendAllModel(listModel.list)
-
 
             Component.onCompleted:
             {
@@ -145,11 +144,11 @@ StackView
         return control.currentItem.getFilterField()
     }
 
-    function getGoBackFunc() : Function
-    {
-        if (control.depth > 1)
+        function getGoBackFunc() : Function
+        {
+            if (control.depth > 1)
             return () => { control.pop() }
-        else
-            return null
-    }
-}
+                else
+                return null
+            }
+            }
