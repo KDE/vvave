@@ -79,7 +79,12 @@ Maui.ApplicationWindow
 
     signal contextualPlayNext()
 
-    onClosing: playlist.save()
+    onClosing: (close) =>
+    {
+        playlist.save()
+        close.accepted = true
+    }
+
     onFocusViewChanged: setAndroidStatusBarColor()
 
     // NOTE: Anything in `.dialogLabel` or `.dialogCategory` get dynamically passed to `i18n` in ShortcutsDialog.qml, and thus should have translations. They are not translated here in case that affects their uniqueness as object keys.
