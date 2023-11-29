@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:41+0000\n"
-"PO-Revision-Date: 2023-10-28 09:21+0300\n"
+"PO-Revision-Date: 2023-11-29 09:36+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -39,14 +39,13 @@ msgid "Missing file"
 msgstr "Не вистачає файла"
 
 #: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
-msgstr[0] "Вилучити маршрути"
-msgstr[1] "Вилучити маршрути"
-msgstr[2] "Вилучити маршрути"
-msgstr[3] "Вилучити маршрути"
+msgstr[0] "Вилучити %1 маршрут"
+msgstr[1] "Вилучити %1 маршрути"
+msgstr[2] "Вилучити %1 маршрутів"
+msgstr[3] "Вилучити маршрут"
 
 #: src/main.qml:342
 #, kde-format
@@ -403,10 +402,9 @@ msgid "Start creating new custom playlists"
 msgstr "Розпочніть створення нетипових списків відтворення"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-#| msgid "Remove '%1'"
+#, kde-format
 msgid "Remove '%1'?"
-msgstr "Вилучити «%1»"
+msgstr "Вилучити «%1»?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
