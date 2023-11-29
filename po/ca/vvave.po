@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-11 00:41+0000\n"
+"POT-Creation-Date: 2023-11-29 00:41+0000\n"
 "PO-Revision-Date: 2023-10-28 10:54+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -19,37 +19,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: src/main.cpp:100
-#, kde-format
-msgid "Vvave"
-msgstr "Vvave"
-
-#: src/main.cpp:102
+#: src/main.cpp:104
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Organitzeu i escolteu la vostra música."
 
-#: src/main.cpp:104
+#: src/main.cpp:106
 #, kde-format
 msgid "© 2019-2023 Maui Development Team"
 msgstr "© 2019-2023 Maui Development Team"
 
-#: src/main.cpp:107 src/main.cpp:108
+#: src/main.cpp:109 src/main.cpp:110
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolupador"
 
-#: src/main.qml:274
+#: src/main.qml:279
 #, kde-format
 msgid "Missing file"
 msgstr "Manca un fitxer"
 
-#: src/main.qml:336
-#, kde-format
-msgid "Remove %1 tracks"
-msgstr "Elimina %1 peces"
+#: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
+#, fuzzy, kde-format
+#| msgid "Remove track"
+msgid "Remove track"
+msgid_plural "Remove %1 tracks"
+msgstr[0] "Elimina la peça"
+msgstr[1] "Elimina la peça"
 
-#: src/main.qml:337
+#: src/main.qml:342
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -57,63 +55,63 @@ msgstr ""
 "Esteu segur que voleu eliminar aquests fitxers? Aquesta operació no es pot "
 "desfer."
 
-#: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:475 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Dreceres"
 
-#: src/main.qml:480
+#: src/main.qml:482
 #, kde-format
 msgid "Settings"
 msgstr "Configuració"
 
-#: src/main.qml:487
+#: src/main.qml:489
 #, kde-format
 msgid "About"
 msgstr "Quant a"
 
-#: src/main.qml:520
+#: src/main.qml:522
 #, kde-format
 msgid "Songs"
 msgstr "Cançons"
 
-#: src/main.qml:539 src/widgets/AlbumsView.qml:76
+#: src/main.qml:541 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Àlbums"
 
-#: src/main.qml:546
+#: src/main.qml:548
 #, kde-format
 msgid "No Albums!"
 msgstr "Cap àlbum!"
 
-#: src/main.qml:547 src/main.qml:571 src/widgets/TracksView.qml:22
+#: src/main.qml:549 src/main.qml:573 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr "Afegeix fonts noves de música"
 
-#: src/main.qml:563 src/widgets/AlbumsView.qml:76
+#: src/main.qml:565 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistes"
 
-#: src/main.qml:570
+#: src/main.qml:572
 #, kde-format
 msgid "No Artists!"
 msgstr "Cap artista!"
 
-#: src/main.qml:587 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:589 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiquetes"
 
-#: src/main.qml:594
+#: src/main.qml:596
 #, kde-format
 msgid "Folders"
 msgstr "Carpetes"
 
-#: src/main.qml:602
+#: src/main.qml:604
 #, kde-format
 msgid "Cloud"
 msgstr "Núvol"
@@ -162,7 +160,7 @@ msgid "This list is empty"
 msgstr "Aquesta llista està buit"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:98
-#: src/widgets/CloudView/CloudView.qml:50
+#: src/widgets/CloudView/CloudView.qml:24
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format
 msgid "Filter"
@@ -179,11 +177,6 @@ msgstr "Reprodueix-ho tot"
 #, kde-format
 msgid "Append All"
 msgstr "Afegeix-ho tot"
-
-#: src/widgets/BabeTable/BabeTable.qml:139
-#, kde-format
-msgid "Remove track"
-msgstr "Elimina la peça"
 
 #: src/widgets/BabeTable/BabeTable.qml:140
 #, kde-format
@@ -245,12 +238,12 @@ msgstr "Mostra a la carpeta"
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: src/widgets/CloudView/CloudView.qml:65
+#: src/widgets/CloudView/CloudView.qml:39
 #, kde-format
 msgid "Opps!"
 msgstr "Vaja!"
 
-#: src/widgets/CloudView/CloudView.qml:66
+#: src/widgets/CloudView/CloudView.qml:40
 #, kde-format
 msgid ""
 "You don't have an account set up.\n"
@@ -308,62 +301,62 @@ msgstr "Cap peça!"
 msgid "This source folder seems to be empty!"
 msgstr "Aquesta carpeta de fonts sembla que està buida!"
 
-#: src/widgets/InfoView/InfoView.qml:45
+#: src/widgets/InfoView/InfoView.qml:34
 #, kde-format
 msgid "Artist Info"
 msgstr "Informació de l'artista"
 
-#: src/widgets/InfoView/InfoView.qml:73
+#: src/widgets/InfoView/InfoView.qml:62
 #, kde-format
 msgid "Album Info"
 msgstr "Informació de l'àlbum"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:133
+#: src/widgets/MainPlaylist/MainPlaylist.qml:134
 #, kde-format
 msgid "Syncing to "
 msgstr "Sincronitza amb"
 
-#: src/widgets/MetadataDialog.qml:40
+#: src/widgets/MetadataDialog.qml:42
 #, kde-format
 msgid "Metadata"
 msgstr "Metadades"
 
-#: src/widgets/MetadataDialog.qml:41
+#: src/widgets/MetadataDialog.qml:43
 #, kde-format
 msgid "Embedded metadata info."
 msgstr "Informació de les metadades incrustades."
 
-#: src/widgets/MetadataDialog.qml:45
+#: src/widgets/MetadataDialog.qml:47
 #, kde-format
 msgid "Track Title"
 msgstr "Títol de la peça"
 
-#: src/widgets/MetadataDialog.qml:57
+#: src/widgets/MetadataDialog.qml:59
 #, kde-format
 msgid "Artist"
 msgstr "Artista"
 
-#: src/widgets/MetadataDialog.qml:73
+#: src/widgets/MetadataDialog.qml:75
 #, kde-format
 msgid "Album"
 msgstr "Àlbum"
 
-#: src/widgets/MetadataDialog.qml:88
+#: src/widgets/MetadataDialog.qml:90
 #, kde-format
 msgid "Track"
 msgstr "Peça"
 
-#: src/widgets/MetadataDialog.qml:103
+#: src/widgets/MetadataDialog.qml:105
 #, kde-format
 msgid "Genre"
 msgstr "Gènere"
 
-#: src/widgets/MetadataDialog.qml:118
+#: src/widgets/MetadataDialog.qml:120
 #, kde-format
 msgid "Year"
 msgstr "Any"
 
-#: src/widgets/MetadataDialog.qml:133
+#: src/widgets/MetadataDialog.qml:135
 #, kde-format
 msgid "Comment"
 msgstr "Comentari"
@@ -393,23 +386,22 @@ msgstr "La llista de reproducció està buida. Comenceu afegint-hi música nova"
 msgid "Remove from playlist"
 msgstr "Elimina de la llista de reproducció"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
 #, kde-format
 msgid "No Playlists!"
 msgstr "Cap llista de reproducció!"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
 #, kde-format
 msgid "Start creating new custom playlists"
 msgstr "Comenceu creant llistes de reproducció personalitzades noves"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
-#, kde-format
-msgid "Remove '%1'"
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#, fuzzy, kde-format
+#| msgid "Remove '%1'"
+msgid "Remove '%1'?"
 msgstr "Elimina «%1»"
 
-#. i18n("Accept")
-#. rejectButton.text: i18n("Cancel")
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid ""
@@ -580,3 +572,9 @@ msgstr "Desconegut"
 #, kde-format
 msgid "Open file"
 msgstr "Obre un fitxer"
+
+#~ msgid "Vvave"
+#~ msgstr "Vvave"
+
+#~ msgid "Remove %1 tracks"
+#~ msgstr "Elimina %1 peces"

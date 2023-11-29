@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-11 00:41+0000\n"
+"POT-Creation-Date: 2023-11-29 00:41+0000\n"
 "PO-Revision-Date: 2023-02-09 01:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -17,100 +17,97 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 23.03.70\n"
 
-#: src/main.cpp:100
-#, kde-format
-msgid "Vvave"
-msgstr "Vvave"
-
-#: src/main.cpp:102
+#: src/main.cpp:104
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "管理並聆聽您的音樂。"
 
-#: src/main.cpp:104
+#: src/main.cpp:106
 #, fuzzy, kde-format
 #| msgid "© 2019-%1 Maui Development Team"
 msgid "© 2019-2023 Maui Development Team"
 msgstr "© 2019-%1 Maui 開發團隊"
 
-#: src/main.cpp:107 src/main.cpp:108
+#: src/main.cpp:109 src/main.cpp:110
 #, kde-format
 msgid "Developer"
 msgstr "開發者"
 
-#: src/main.qml:274
+#: src/main.qml:279
 #, kde-format
 msgid "Missing file"
 msgstr "缺失檔案"
 
-#: src/main.qml:336
-#, kde-format
-msgid "Remove %1 tracks"
-msgstr "移除 %1 個音軌"
+#: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
+#, fuzzy, kde-format
+#| msgid "Remove track"
+msgid "Remove track"
+msgid_plural "Remove %1 tracks"
+msgstr[0] "移除音軌"
 
-#: src/main.qml:337
+#: src/main.qml:342
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "您確定要刪除這些檔案嗎？這個動作無法復原。"
 
-#: src/main.qml:473 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:475 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "快捷鍵"
 
-#: src/main.qml:480
+#: src/main.qml:482
 #, kde-format
 msgid "Settings"
 msgstr "設定"
 
-#: src/main.qml:487
+#: src/main.qml:489
 #, kde-format
 msgid "About"
 msgstr "關於"
 
-#: src/main.qml:520
+#: src/main.qml:522
 #, kde-format
 msgid "Songs"
 msgstr "歌曲"
 
-#: src/main.qml:539 src/widgets/AlbumsView.qml:76
+#: src/main.qml:541 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "專輯"
 
-#: src/main.qml:546
+#: src/main.qml:548
 #, kde-format
 msgid "No Albums!"
 msgstr "沒有專輯！"
 
-#: src/main.qml:547 src/main.qml:571 src/widgets/TracksView.qml:22
+#: src/main.qml:549 src/main.qml:573 src/widgets/TracksView.qml:22
 #, kde-format
 msgid "Add new music sources"
 msgstr "新增音樂來源"
 
-#: src/main.qml:563 src/widgets/AlbumsView.qml:76
+#: src/main.qml:565 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "藝人"
 
-#: src/main.qml:570
+#: src/main.qml:572
 #, kde-format
 msgid "No Artists!"
 msgstr "沒有藝人！"
 
-#: src/main.qml:587 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:589 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "標籤"
 
-#: src/main.qml:594
+#: src/main.qml:596
 #, kde-format
 msgid "Folders"
 msgstr "資料夾"
 
-#: src/main.qml:602
+#: src/main.qml:604
 #, kde-format
 msgid "Cloud"
 msgstr "雲端"
@@ -162,7 +159,7 @@ msgid "This list is empty"
 msgstr "這個列表是空的"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:98
-#: src/widgets/CloudView/CloudView.qml:50
+#: src/widgets/CloudView/CloudView.qml:24
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format
 msgid "Filter"
@@ -178,11 +175,6 @@ msgstr "播放全部"
 #, kde-format
 msgid "Append All"
 msgstr "將全部加到最後"
-
-#: src/widgets/BabeTable/BabeTable.qml:139
-#, kde-format
-msgid "Remove track"
-msgstr "移除音軌"
 
 #: src/widgets/BabeTable/BabeTable.qml:140
 #, kde-format
@@ -245,12 +237,12 @@ msgstr "在資料夾顯示"
 msgid "Delete"
 msgstr "刪除"
 
-#: src/widgets/CloudView/CloudView.qml:65
+#: src/widgets/CloudView/CloudView.qml:39
 #, kde-format
 msgid "Opps!"
 msgstr "糟糕！"
 
-#: src/widgets/CloudView/CloudView.qml:66
+#: src/widgets/CloudView/CloudView.qml:40
 #, kde-format
 msgid ""
 "You don't have an account set up.\n"
@@ -306,62 +298,62 @@ msgstr "沒有音軌！"
 msgid "This source folder seems to be empty!"
 msgstr "這個來源資料夾看起來是空的！"
 
-#: src/widgets/InfoView/InfoView.qml:45
+#: src/widgets/InfoView/InfoView.qml:34
 #, kde-format
 msgid "Artist Info"
 msgstr "藝人資訊"
 
-#: src/widgets/InfoView/InfoView.qml:73
+#: src/widgets/InfoView/InfoView.qml:62
 #, kde-format
 msgid "Album Info"
 msgstr "專輯資訊"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:133
+#: src/widgets/MainPlaylist/MainPlaylist.qml:134
 #, kde-format
 msgid "Syncing to "
 msgstr "正在同步到"
 
-#: src/widgets/MetadataDialog.qml:40
+#: src/widgets/MetadataDialog.qml:42
 #, kde-format
 msgid "Metadata"
 msgstr "中繼資料"
 
-#: src/widgets/MetadataDialog.qml:41
+#: src/widgets/MetadataDialog.qml:43
 #, kde-format
 msgid "Embedded metadata info."
 msgstr "嵌入的中繼資料。"
 
-#: src/widgets/MetadataDialog.qml:45
+#: src/widgets/MetadataDialog.qml:47
 #, kde-format
 msgid "Track Title"
 msgstr "音軌標題"
 
-#: src/widgets/MetadataDialog.qml:57
+#: src/widgets/MetadataDialog.qml:59
 #, kde-format
 msgid "Artist"
 msgstr "藝人"
 
-#: src/widgets/MetadataDialog.qml:73
+#: src/widgets/MetadataDialog.qml:75
 #, kde-format
 msgid "Album"
 msgstr "專輯"
 
-#: src/widgets/MetadataDialog.qml:88
+#: src/widgets/MetadataDialog.qml:90
 #, kde-format
 msgid "Track"
 msgstr "音軌"
 
-#: src/widgets/MetadataDialog.qml:103
+#: src/widgets/MetadataDialog.qml:105
 #, kde-format
 msgid "Genre"
 msgstr "曲風"
 
-#: src/widgets/MetadataDialog.qml:118
+#: src/widgets/MetadataDialog.qml:120
 #, kde-format
 msgid "Year"
 msgstr "年份"
 
-#: src/widgets/MetadataDialog.qml:133
+#: src/widgets/MetadataDialog.qml:135
 #, kde-format
 msgid "Comment"
 msgstr "備註"
@@ -391,23 +383,22 @@ msgstr ""
 msgid "Remove from playlist"
 msgstr "從播放清單移除"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:22
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
 #, kde-format
 msgid "No Playlists!"
 msgstr "沒有播放清單！"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
 #, kde-format
 msgid "Start creating new custom playlists"
 msgstr "開始建立新的自訂播放清單"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:32
-#, kde-format
-msgid "Remove '%1'"
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#, fuzzy, kde-format
+#| msgid "Remove '%1'"
+msgid "Remove '%1'?"
 msgstr "移除 '%1'"
 
-#. i18n("Accept")
-#. rejectButton.text: i18n("Cancel")
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid ""
@@ -579,6 +570,12 @@ msgstr "未知"
 #, kde-format
 msgid "Open file"
 msgstr "開啟檔案"
+
+#~ msgid "Vvave"
+#~ msgstr "Vvave"
+
+#~ msgid "Remove %1 tracks"
+#~ msgstr "移除 %1 個音軌"
 
 #, fuzzy
 #~| msgid "Configure the app plugins and behavior."
