@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:41+0000\n"
-"PO-Revision-Date: 2023-10-28 09:39+0200\n"
+"PO-Revision-Date: 2023-11-29 22:46+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
-"%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
+"%100<=4 ? 2 : 3);\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: src/main.cpp:104
 #, kde-format
@@ -39,14 +39,13 @@ msgid "Missing file"
 msgstr "Manjkajoča datoteka"
 
 #: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
-msgstr[0] "Odstrani sled"
-msgstr[1] "Odstrani sled"
-msgstr[2] "Odstrani sled"
-msgstr[3] "Odstrani sled"
+msgstr[0] "Odstrani %1 sledi"
+msgstr[1] "Odstrani %1 sledi"
+msgstr[2] "Odstrani %1 sledi"
+msgstr[3] "Odstrani %1 sledi"
 
 #: src/main.qml:342
 #, kde-format
@@ -402,10 +401,9 @@ msgid "Start creating new custom playlists"
 msgstr "Začetek ustvarjanje novih seznamov predvajanja po meri"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-#| msgid "Remove '%1'"
+#, kde-format
 msgid "Remove '%1'?"
-msgstr "Odstrani '%1'"
+msgstr "Naj odstranim '%1'?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format

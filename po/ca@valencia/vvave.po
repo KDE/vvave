@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:41+0000\n"
-"PO-Revision-Date: 2023-10-28 10:54+0200\n"
+"PO-Revision-Date: 2023-11-29 15:25+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -40,12 +40,11 @@ msgid "Missing file"
 msgstr "Falta un fitxer"
 
 #: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Elimina la peça"
-msgstr[1] "Elimina la peça"
+msgstr[1] "Elimina %1 peces"
 
 #: src/main.qml:342
 #, kde-format
@@ -396,10 +395,9 @@ msgid "Start creating new custom playlists"
 msgstr "Comenceu creant llistes de reproducció personalitzades noves"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-#| msgid "Remove '%1'"
+#, kde-format
 msgid "Remove '%1'?"
-msgstr "Elimina «%1»"
+msgstr "Voleu eliminar «%1»?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
@@ -570,9 +568,3 @@ msgstr "Desconegut"
 #, kde-format
 msgid "Open file"
 msgstr "Obri un fitxer"
-
-#~ msgid "Vvave"
-#~ msgstr "Vvave"
-
-#~ msgid "Remove %1 tracks"
-#~ msgstr "Elimina %1 peces"
