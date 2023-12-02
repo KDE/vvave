@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:41+0000\n"
-"PO-Revision-Date: 2023-11-14 12:06-0300\n"
+"PO-Revision-Date: 2023-12-01 17:20-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -38,12 +38,11 @@ msgid "Missing file"
 msgstr "Arquivo faltante"
 
 #: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Remover faixa"
-msgstr[1] "Remover faixa"
+msgstr[1] "Remover %1 faixas"
 
 #: src/main.qml:342
 #, kde-format
@@ -396,10 +395,9 @@ msgid "Start creating new custom playlists"
 msgstr "Comece a criar novas playlists personalizadas"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-#| msgid "Remove '%1'"
+#, kde-format
 msgid "Remove '%1'?"
-msgstr "Remover '%1'"
+msgstr "Remover '%1'?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
