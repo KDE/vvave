@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-29 00:41+0000\n"
-"PO-Revision-Date: 2023-10-30 20:05+0100\n"
+"PO-Revision-Date: 2023-12-03 09:52+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: src/main.cpp:104
 #, kde-format
@@ -38,12 +38,11 @@ msgid "Missing file"
 msgstr "Ficheiro que falta"
 
 #: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Eliminar a pista"
-msgstr[1] "Eliminar a pista"
+msgstr[1] "Eliminar as %1 pistas"
 
 #: src/main.qml:342
 #, kde-format
@@ -393,10 +392,9 @@ msgid "Start creating new custom playlists"
 msgstr "Comece a crear novas listas de reprodución"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-#| msgid "Remove '%1'"
+#, kde-format
 msgid "Remove '%1'?"
-msgstr "Retirar «%1»"
+msgstr "Retirar «%1»?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
