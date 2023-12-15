@@ -38,13 +38,12 @@ msgid "Missing file"
 msgstr "Chybějící soubor"
 
 #: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
-msgstr[0] "Odstranit skladbu"
-msgstr[1] "Odstranit skladbu"
-msgstr[2] "Odstranit skladbu"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: src/main.qml:342
 #, kde-format
@@ -391,10 +390,9 @@ msgid "Start creating new custom playlists"
 msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-#| msgid "Remove '%1'"
+#, kde-format
 msgid "Remove '%1'?"
-msgstr "Odstranit '%1'"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
@@ -560,6 +558,3 @@ msgstr "Neznámý"
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "Vvave"
-#~ msgstr "Vvave"
