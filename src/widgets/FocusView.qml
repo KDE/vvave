@@ -97,6 +97,7 @@ StackView
     Component
     {
         id: _infoComponent
+
         InfoView
         {
             headBar.background: null
@@ -307,7 +308,13 @@ StackView
                                     width: _image.width + Maui.Style.space.medium
                                     height: width
                                     anchors.centerIn: parent
-                                    radius: Maui.Style.radiusV
+                                    radius: root.focusView ? Maui.Style.radiusV :  Math.min(width, height)
+
+                                    Behavior on radius
+                                    {
+                                        NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+                                    }
+
                                     color: "#fafafa"
                                 }
 

@@ -28,8 +28,6 @@ function setLyrics(lyrics)
 function stop()
 {
     player.stop()
-    progressBar.value = 0
-    progressBar.enabled = false
 }
 
 function changeCurrentIndex(index)
@@ -152,5 +150,21 @@ function playAllModel(model)
         _drawer.visible = true
 
     mainPlaylist.listView.positionViewAtBeginning()
+    playAt(0)
+}
+
+function shuffleAllModel(model)
+{
+    sync = false
+    syncPlaylist = ""
+
+    root.playlistManager.clear()
+    appendAllModel(model)
+
+    if(_drawer.modal && !_drawer.visible)
+        _drawer.visible = true
+
+    mainPlaylist.listView.positionViewAtBeginning()
+    root.playlistManager.playMode = Vvave.Playlist.Shuffle
     playAt(0)
 }

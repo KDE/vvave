@@ -58,7 +58,9 @@ else()
     add_executable(${PROJECT_NAME}
         ${vvave_SRCS}
         ${vvave_QML_QRC}
-        ${vvave_dbus_SRCS})
+        ${vvave_dbus_SRCS}
+        ../../build-vvave-Imported_Kit_temporary-Release/src/SleepTimerDialog.qml
+        widgets/SleepTimerDialog.qml)
 endif()
 
 if (ANDROID)

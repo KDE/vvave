@@ -90,6 +90,7 @@ StackView
             }
 
             onAppendAll: Player.appendAllModel(listModel.list)
+            onShuffleAll: Player.shuffleAllModel(listModel.list)
 
             Component.onCompleted:
             {
@@ -144,11 +145,11 @@ StackView
         return control.currentItem.getFilterField()
     }
 
-        function getGoBackFunc() : Function
-        {
-            if (control.depth > 1)
+    function getGoBackFunc() : Function
+    {
+        if (control.depth > 1)
             return () => { control.pop() }
-                else
-                return null
-            }
-            }
+        else
+            return null
+    }
+}

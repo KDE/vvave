@@ -147,6 +147,7 @@ StackView
 
             onPlayAll: Player.playAllModel(listModel.list)
             onAppendAll: Player.appendAllModel(listModel.list)
+            onShuffleAll: Player.shuffleAllModel(listModel.list)
         }
     }
 

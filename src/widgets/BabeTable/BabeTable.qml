@@ -15,20 +15,20 @@ Maui.Page
 {
     id: control
 
-    property alias listBrowser : _listBrowser
-    property alias listView : _listBrowser.flickable
+    readonly property alias listBrowser : _listBrowser
+    readonly property alias listView : _listBrowser.flickable
 
-    property alias listModel : _listModel
-    property alias list : _tracksList
+    readonly property alias listModel : _listModel
+    readonly property alias list : _tracksList
 
     property alias delegate : _listBrowser.delegate
 
-    property alias count : _listBrowser.count
+    readonly property alias count : _listBrowser.count
     property alias currentIndex : _listBrowser.currentIndex
-    property alias currentItem : _listBrowser.currentItem
+    readonly property alias currentItem : _listBrowser.currentItem
 
-    property alias holder : _listBrowser.holder
-    property alias section : _listBrowser.section
+    readonly property alias holder : _listBrowser.holder
+    readonly property alias section : _listBrowser.section
 
     property bool trackNumberVisible : false
     property bool coverArtVisible : false
@@ -36,7 +36,7 @@ Maui.Page
     property bool showQuickActions : true
     property bool group : false
 
-    property alias contextMenu : contextMenu
+    readonly property alias contextMenu : contextMenu
     property alias contextMenuItems : contextMenu.contentData
 
     signal rowClicked(int index)
@@ -47,6 +47,7 @@ Maui.Page
 
     signal playAll()
     signal appendAll()
+    signal shuffleAll()
 
     Maui.Theme.colorSet: Maui.Theme.View
     Maui.Theme.inherit: false
@@ -64,6 +65,13 @@ Maui.Page
         sourceComponent: Maui.ToolButtonMenu
         {
             icon.name: "media-playback-start"
+
+            MenuItem
+            {
+                icon.name : "media-playlist-shuffle"
+                text: i18n("Shuffle Play")
+                onTriggered: shuffleAll()
+            }
 
             MenuItem
             {
@@ -123,7 +131,7 @@ Maui.Page
         {
             model: listModel
 
-            onEdited:
+            onEdited: (data, index) =>
             {
                 control.list.updateMetadata(data, model.mappedToSource(index))
             }
@@ -139,21 +147,25 @@ Maui.Page
             title: i18n("Remove track")
             message: i18n("Are you sure you want to delete the file from your computer? This action can not be undone.")
 
-//            acceptButton.text: i18n("Remove")
-
-            onAccepted:
+            actions: [
+            Action
             {
-                if(FB.FM.removeFiles(urls))
+                text: i18n("Remove")
+                onTriggered:
                 {
-                    listModel.list.erase(listModel.mappedToSource(control.currentIndex))
+                    if(FB.FM.removeFiles(urls))
+                    {
+                        listModel.list.erase(listModel.mappedToSource(control.currentIndex))
+                    }
+                    close()
                 }
-                close()
-            }
+            },
 
-            onRejected:
+            Action
             {
-                close()
-            }
+                text: i18n("Cancel")
+                onTriggered: close()
+            }]
         }
     }
 
@@ -284,7 +296,13 @@ Maui.Page
             number: trackNumberVisible
             coverArt: coverArtVisible ? (control.width > 200) : coverArtVisible
             appendButton: control.showQuickActions && (Maui.Handy.isTouch ? true : delegate.hovered)
-            onPressAndHold: { if(Maui.Handy.isTouch) tryOpenContextMenu() }
+
+            onPressAndHold:
+            {
+                if(Maui.Handy.isTouch)
+                    tryOpenContextMenu()
+            }
+
             onRightClicked: tryOpenContextMenu()
 
             function tryOpenContextMenu() : undefined
@@ -292,7 +310,8 @@ Maui.Page
                 if (allowMenu) openItemMenu(index)
             }
 
-                onToggled: selectionBar.addToSelection(control.listModel.get(index))
+                onToggled: (state) => selectionBar.addToSelection(control.listModel.get(index))
+
                 checked: selectionBar.contains(model.url)
                 checkable: selectionMode
 
@@ -345,7 +364,7 @@ Maui.Page
                 target: selectionBar
                 ignoreUnknownSignals: true
 
-                function onUriRemoved (uri)
+                function onUriRemoved(uri)
                 {
                     if(uri === model.url)
                         delegate.checked = false

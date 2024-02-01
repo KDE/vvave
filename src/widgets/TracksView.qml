@@ -1,6 +1,5 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.3
 
 import org.mauikit.controls 1.3 as Maui
 import org.maui.vvave 1.0 as Vvave
@@ -39,11 +38,11 @@ BabeTable
     listModel.sortOrder : Qt.AscendingOrder
     group: true
 
-    onRowClicked: Player.quickPlay(listModel.get(index))
-    onAppendTrack: Player.addTrack(listModel.get(index))
+    onRowClicked: (index) => Player.quickPlay(listModel.get(index))
+    onAppendTrack: (index) => Player.addTrack(listModel.get(index))
+    onQueueTrack:(index) => Player.queueTracks([listModel.get(index)], index)
+
     onPlayAll: Player.playAllModel(listModel.list)
     onAppendAll: Player.appendAllModel(listModel.list)
-    onQueueTrack: Player.queueTracks([listModel.get(index)], index)
-
-
+    onShuffleAll: Player.shuffleAllModel(listModel.list)
 }

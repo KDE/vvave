@@ -77,9 +77,9 @@ StackView
                 onClicked: control.pop()
             }
 
-            onQueueTrack: Player.queueTracks([listModel.get(index)], index)
-            onRowClicked: Player.quickPlay(listModel.get(index))
-            onAppendTrack: Player.addTrack(listModel.get(index))
+            onQueueTrack: (index) => Player.queueTracks([listModel.get(index)], index)
+            onRowClicked: (index) => Player.quickPlay(listModel.get(index))
+            onAppendTrack: (index) => Player.addTrack(listModel.get(index))
 
             onPlayAll:
             {
@@ -91,6 +91,12 @@ StackView
             {
                 control.pop()
                 Player.appendAllModel(listModel.list)
+            }
+
+            onShuffleAll:
+            {
+                control.pop()
+                Player.shuffleAllModel(listModel.list)
             }
         }
     }

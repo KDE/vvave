@@ -33,6 +33,7 @@
         <file>widgets/MiniMode.qml</file>
         <file>assets/playing.gif</file>
         <file>widgets/TracksGroup.qml</file>
+        <file>widgets/SleepTimerDialog.qml</file>
     </qresource>
     <qresource prefix="/DB">
         <file>db/script.sql</file>

@@ -18,7 +18,7 @@ Control
 
     visible: opacity > 0
 
-    scale: focusView ? 2 : 1
+    scale: root.focusView ? 2 : 1
 
     implicitHeight: _mouseArea.implicitHeight + topPadding + bottomPadding
     implicitWidth: _mouseArea.implicitWidth + leftPadding + rightPadding
@@ -31,6 +31,13 @@ Control
     ToolTip.text: root.title
 
     opacity: root.focusView ? 0 :  1
+
+    property int radius:  root.focusView ? Maui.Style.radiusV : Math.min(width, height)
+
+    Behavior on radius
+    {
+        NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+    }
 
     Behavior on opacity
     {
@@ -65,7 +72,7 @@ Control
     {
         id: diskBg
         color: "white"
-        radius: Math.min(width, height)
+        radius: control.radius
 
         layer.enabled: true
         layer.effect: DropShadow
@@ -83,7 +90,7 @@ Control
         id: _mouseArea
 
         implicitHeight: Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
-         implicitWidth: implicitHeight
+        implicitWidth: implicitHeight
 
         hoverEnabled: true
 
@@ -114,7 +121,7 @@ Control
                 {
                     height: miniArtwork.height
                     width: miniArtwork.width
-                    radius: Math.min(width, height)
+                    radius: control.radius
                 }
             }
         }

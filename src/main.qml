@@ -22,6 +22,7 @@ import "utils/Player.js" as Player
 Maui.ApplicationWindow
 {
     id: root
+
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
 
     Maui.Style.styleType: focusView ? Maui.Style.Adaptive : (Maui.Handy.isAndroid ? settings.darkMode ? Maui.Style.Dark : Maui.Style.Light : undefined)
@@ -37,9 +38,9 @@ Maui.ApplicationWindow
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
-    property alias selectionBar: _selectionBar
-    property alias dialog : _dialogLoader.item
-    property alias playlistManager : playlist
+    readonly property alias selectionBar: _selectionBar
+    readonly property alias dialog : _dialogLoader.item
+    readonly property alias playlistManager : playlist
 
     /***************************************************/
     /******************** PLAYBACK ********************/
@@ -63,6 +64,8 @@ Maui.ApplicationWindow
 
     property string syncPlaylist: ""
     property bool sync: false
+    property string sleepOption : "none"
+    property bool closeAfterSleep: false
 
     readonly property bool focusView : _stackView.currentItem.objectName === "FocusView"
     readonly property bool miniMode : _miniModeComponent.visible
@@ -74,165 +77,192 @@ Maui.ApplicationWindow
     /*************************************************/
     readonly property color babeColor: "#f84172"
 
-
     /*HANDLE EVENTS*/
-
     signal contextualPlayNext()
 
     onClosing: (close) =>
-    {
-        playlist.save()
-        close.accepted = true
-    }
+               {
+                   playlist.save()
+                   close.accepted = true
+               }
 
     onFocusViewChanged: setAndroidStatusBarColor()
 
-    // NOTE: Anything in `.dialogLabel` or `.dialogCategory` get dynamically passed to `i18n` in ShortcutsDialog.qml, and thus should have translations. They are not translated here in case that affects their uniqueness as object keys.
-
-    property list<Shortcut> shortcuts: [
-    Shortcut
+    Loader
     {
-        readonly property string dialogLabel: "Play/Pause"
-        readonly property string dialogCategory: "Playback"
-        sequence: "Space"
-        onActivated: {
-            if(player.playing)
-                player.pause()
-            else
-                player.play()
-        }
-    },
+        id: _timerLoader
+        active: false
 
-    Shortcut
-    {
-        readonly property string dialogLabel: "Previous"
-        readonly property string dialogCategory: "Playback"
-        sequence: "P"
-        onActivated: Player.previousTrack()
-    },
-
-    Shortcut
-    {
-        readonly property string dialogLabel: "Next"
-        readonly property string dialogCategory: "Playback"
-        sequence: "N"
-        onActivated: Player.nextTrack()
-    },
-
-    Shortcut
-    {
-        readonly property string dialogLabel: "Rewind 10 seconds"
-        readonly property string dialogCategory: "Playback"
-        sequence: "Left"
-        enabled: !(activeFocusItem instanceof Maui.GridBrowser || activeFocusItem instanceof GridView)
-        onActivated: player.pos -= 10000
-    },
-
-    Shortcut
-    {
-        readonly property string dialogLabel: "Skip 10 seconds"
-        readonly property string dialogCategory: "Playback"
-        sequence: "Right"
-        enabled: !(activeFocusItem instanceof Maui.GridBrowser || activeFocusItem instanceof GridView)
-        onActivated: player.pos += 10000
-    },
-
-    Shortcut
-    {
-        readonly property string dialogLabel: "Increase Volume"
-        readonly property string dialogCategory: "Playback"
-        sequence: "+"
-        sequences: ["="]
-        onActivated: player.volume += 5
-    },
-
-    Shortcut
-    {
-        readonly property string dialogLabel: "Decrease Volume"
-        readonly property string dialogCategory: "Playback"
-        sequence: "-"
-        onActivated: player.volume -= 5
-    },
-
-    Shortcut
-    {
-        readonly property string dialogLabel: "Filter"
-        readonly property string dialogCategory: "Navigation"
-        sequence: StandardKey.Find
-        onActivated: {
-            console.log("FOCUS FILTER")
-
-            let filterField = getFilterField()
-
-            if (!filterField)
-                return
-
-            if (!filterField.activeFocus)
-                filterField.forceActiveFocus()
-            else
-                filterField.focus = false
-        }
-    },
-
-    Shortcut
-    {
-        readonly property string dialogLabel: "Focus View"
-        readonly property string dialogCategory: "Navigation"
-        sequence: StandardKey.Cancel
-        onActivated: {
-            // I couldn't get Keys.onShortcutOverride in each view to work. I guess this is more dynamic anyway.
-            let func = getGoBackFunc()
-            if (func) {
-                func()
-                return
+        sourceComponent: Timer
+        {
+            onTriggered:
+            {
+                Player.stop()
+                if(closeAfterSleep)
+                    root.close()
             }
-            toggleFocusView()
         }
-    },
+    }
 
-    Shortcut
-    {
-        readonly property string dialogLabel: "Next Category"
-        readonly property string dialogCategory: "Navigation"
-        sequence: "Ctrl+Tab" // StandardKey.NextChild and .PreviousChild seem broken on Linux.
-        onActivated: swipeView.currentIndex = ((swipeView.currentIndex + 1) % swipeView.count + swipeView.count) % swipeView.count
-    },
+    // NOTE: Anything in `.dialogLabel` or `.dialogCategory` get dynamically passed to `i18n` in ShortcutsDialog.qml, and thus should have translations. They are not translated here in case that affects their uniqueness as object keys.
+    property list<Shortcut> shortcuts: [
+        Shortcut
+        {
+            readonly property string dialogLabel: "Play/Pause"
+            readonly property string dialogCategory: "Playback"
+            sequence: "Space"
+            onActivated: {
+                if(player.playing)
+                    player.pause()
+                else
+                    player.play()
+            }
+        },
 
-    Shortcut
-    {
-        readonly property string dialogLabel: "Previous Category"
-        readonly property string dialogCategory: "Navigation"
-        sequence: "Ctrl+Shift+Tab"
-        onActivated: swipeView.currentIndex = ((swipeView.currentIndex - 1) % swipeView.count + swipeView.count) % swipeView.count
-    },
+        Shortcut
+        {
+            readonly property string dialogLabel: "Previous"
+            readonly property string dialogCategory: "Playback"
+            sequence: "P"
+            onActivated: Player.previousTrack()
+        },
 
-    Shortcut
-    {
-        readonly property string dialogLabel: "Queue Track"
-        readonly property string dialogCategory: "Navigation"
-        sequence: "Shift+Return"
-        sequences: ["Shift+Enter"]
-        // StandardKey.InsertLineSeparator only gets "Enter", not "Return".
-        onActivated: contextualPlayNext()
-    },
+        Shortcut
+        {
+            readonly property string dialogLabel: "Next"
+            readonly property string dialogCategory: "Playback"
+            sequence: "N"
+            onActivated: Player.nextTrack()
+        },
 
-    Shortcut
-    {
-        readonly property string dialogLabel: "Context Actions"
-        readonly property string dialogCategory: "Navigation"
-        sequence: "Menu"
-        onActivated: {
-            if (activeFocusItem) {
-                let func = (activeFocusItem.currentItem ?? activeFocusItem).tryOpenContextMenu
+        Shortcut
+        {
+            readonly property string dialogLabel: "Rewind 10 seconds"
+            readonly property string dialogCategory: "Playback"
+            sequence: "Left"
+            enabled: !(activeFocusItem instanceof Maui.GridBrowser || activeFocusItem instanceof GridView)
+            onActivated: player.pos -= 10000
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Skip 10 seconds"
+            readonly property string dialogCategory: "Playback"
+            sequence: "Right"
+            enabled: !(activeFocusItem instanceof Maui.GridBrowser || activeFocusItem instanceof GridView)
+            onActivated: player.pos += 10000
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Increase Volume"
+            readonly property string dialogCategory: "Playback"
+            sequence: "+"
+            sequences: ["="]
+            onActivated: player.volume += 5
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Decrease Volume"
+            readonly property string dialogCategory: "Playback"
+            sequence: "-"
+            onActivated: player.volume -= 5
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Filter"
+            readonly property string dialogCategory: "Navigation"
+            sequence: StandardKey.Find
+            onActivated: {
+                console.log("FOCUS FILTER")
+
+                let filterField = getFilterField()
+
+                if (!filterField)
+                    return
+
+                if (!filterField.activeFocus)
+                    filterField.forceActiveFocus()
+                else
+                    filterField.focus = false
+            }
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Focus View"
+            readonly property string dialogCategory: "Navigation"
+            sequence: StandardKey.Cancel
+            onActivated: {
+                // I couldn't get Keys.onShortcutOverride in each view to work. I guess this is more dynamic anyway.
+                let func = getGoBackFunc()
+                if (func) {
+                    func()
+                    return
+                }
+                toggleFocusView()
+            }
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Go Back"
+            readonly property string dialogCategory: "Navigation"
+            sequence: StandardKey.Back
+            onActivated: {
+                // I couldn't get Keys.onShortcutOverride in each view to work. I guess this is more dynamic anyway.
+                let func = getGoBackFunc()
                 if (func) {
                     func()
                     return
                 }
             }
-            console.log("NO CONTEXT MENU", activeFocusItem, activeFocusItem.currentItem)
-        }
-    }
-    ]
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Next Category"
+            readonly property string dialogCategory: "Navigation"
+            sequence: "Ctrl+Tab" // StandardKey.NextChild and .PreviousChild seem broken on Linux.
+            onActivated: swipeView.currentIndex = ((swipeView.currentIndex + 1) % swipeView.count + swipeView.count) % swipeView.count
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Previous Category"
+            readonly property string dialogCategory: "Navigation"
+            sequence: "Ctrl+Shift+Tab"
+            onActivated: swipeView.currentIndex = ((swipeView.currentIndex - 1) % swipeView.count + swipeView.count) % swipeView.count
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Queue Track"
+            readonly property string dialogCategory: "Navigation"
+            sequence: "Shift+Return"
+            sequences: ["Shift+Enter"]
+            // StandardKey.InsertLineSeparator only gets "Enter", not "Return".
+            onActivated: contextualPlayNext()
+        },
+
+        Shortcut
+        {
+            readonly property string dialogLabel: "Context Actions"
+            readonly property string dialogCategory: "Navigation"
+            sequence: "Menu"
+            onActivated: {
+                if (activeFocusItem) {
+                    let func = (activeFocusItem.currentItem ?? activeFocusItem).tryOpenContextMenu
+                    if (func) {
+                        func()
+                        return
+                    }
+                }
+                console.log("NO CONTEXT MENU", activeFocusItem, activeFocusItem.currentItem)
+            }
+        }]
 
     Loader
     {
@@ -275,16 +305,16 @@ Maui.ApplicationWindow
         onCurrentTrackChanged: Player.playTrack()
 
         onMissingFile: (track) =>
-        {
-            var message = i18n("Missing file")
-            var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
-            notify("dialog-question", message, messageBody, function ()
-            {
-                console.log("REMOVE TIU MSISING", mainPlaylist.table.currentIndex)
-                mainPlaylist.table.list.removeMissing(mainPlaylist.table.currentIndex)
-                console.log("REMOVE TIU MSISING 2", mainPlaylist.table.currentIndex)
-            })
-        }
+                       {
+                           var message = i18n("Missing file")
+                           var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
+                           notify("dialog-question", message, messageBody, function ()
+                           {
+                               console.log("REMOVE TIU MSISING", mainPlaylist.table.currentIndex)
+                               mainPlaylist.table.list.removeMissing(mainPlaylist.table.currentIndex)
+                               console.log("REMOVE TIU MSISING 2", mainPlaylist.table.currentIndex)
+                           })
+                       }
     }
 
     Player
@@ -300,7 +330,29 @@ Maui.ApplicationWindow
                     mainPlaylist.listModel.list.countUp(currentTrackIndex)
                 }
 
-                Player.nextTrack()
+                switch(root.sleepOption)
+                {
+                case "none": Player.nextTrack(); break;
+                case "eot":
+                {
+                     Player.stop()
+                    if(closeAfterSleep)
+                        root.close()
+                }
+
+                case "eop":
+                {
+                    if(currentTrackIndex === mainPlaylist.listView.count-1)
+                    {
+                        Player.stop();
+                       if(closeAfterSleep)
+                           root.close()
+                    }else
+                    {
+                        Player.nextTrack();
+                    }
+                }
+                }
             }
         }
     }
@@ -359,6 +411,16 @@ Maui.ApplicationWindow
         {
             onTagsReady: (tags) => composerList.updateToUrls(tags)
             composerList.strict: false
+        }
+    }
+
+    Component
+    {
+        id: _sleepTimerDialogComponent
+
+        SleepTimerDialog
+        {
+
         }
     }
 
@@ -450,162 +512,172 @@ Maui.ApplicationWindow
                     }
                 } //OK
 
-                    Maui.AppViews
+                Maui.AppViews
+                {
+                    id: swipeView
+                    maxViews: 3
+
+                    floatingFooter: true
+                    flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
+                    altHeader: Maui.Handy.isMobile
+                    showCSDControls: true
+
+                    headBar.leftContent: Loader
                     {
-                        id: swipeView
-                        maxViews: 3
+                        asynchronous: true
 
-                        floatingFooter: true
-                        flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
-                        altHeader: Maui.Handy.isMobile
-                        showCSDControls: true
-
-                        headBar.leftContent: Loader
+                        sourceComponent: Maui.ToolButtonMenu
                         {
-                            asynchronous: true
+                            icon.name: "application-menu"
 
-                            sourceComponent: Maui.ToolButtonMenu
+                            MA.AccountsMenuItem{}
+
+                            MenuItem
                             {
-                                icon.name: "application-menu"
+                                text: i18n("Sleep Timer")
+                                icon.name: "player-time"
+                                onTriggered: openSleepTimerDialog()
+                            }
 
-                                MA.AccountsMenuItem{}
+                            MenuSeparator{}
 
-                                MenuItem
-                                {
-                                    text: i18n("Shortcuts")
-                                    icon.name: "configure-shortcuts"
-                                    onTriggered: openShortcutsDialog()
-                                }
+                            MenuItem
+                            {
+                                text: i18n("Shortcuts")
+                                icon.name: "configure-shortcuts"
+                                onTriggered: openShortcutsDialog()
+                            }
 
-                                MenuItem
-                                {
-                                    text: i18n("Settings")
-                                    icon.name: "settings-configure"
-                                    onTriggered: openSettingsDialog()
-                                }
+                            MenuItem
+                            {
+                                text: i18n("Settings")
+                                icon.name: "settings-configure"
+                                onTriggered: openSettingsDialog()
+                            }
 
-                                MenuItem
-                                {
-                                    text: i18n("About")
-                                    icon.name: "documentinfo"
-                                    onTriggered: root.about()
-                                }
+                            MenuItem
+                            {
+                                text: i18n("About")
+                                icon.name: "documentinfo"
+                                onTriggered: root.about()
                             }
                         }
+                    }
 
-                        footer: SelectionBar
+                    footer: SelectionBar
+                    {
+                        id: _selectionBar
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+
+                        maxListHeight: swipeView.height - Maui.Style.space.medium
+                        display: ToolButton.IconOnly
+
+                        onExitClicked:
                         {
-                            id: _selectionBar
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            width: Math.min(parent.width-(Maui.Style.space.medium*2), implicitWidth)
+                            root.selectionMode = false
+                            clear()
+                        }
 
-                            maxListHeight: swipeView.height - Maui.Style.space.medium
-                            display: ToolButton.IconOnly
-
-                            onExitClicked:
+                        onVisibleChanged:
+                        {
+                            if(!visible)
                             {
                                 root.selectionMode = false
-                                clear()
                             }
+                        }
+                    }
 
-                            onVisibleChanged:
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Songs")
+                        Maui.AppView.iconName: "view-media-track"
+
+                        TracksView
+                        {
+                            Component.onCompleted:
                             {
-                                if(!visible)
+                                if(settings.autoScan)
                                 {
-                                    root.selectionMode = false
+                                    Vvave.rescan()
                                 }
                             }
                         }
+                    }
 
-                        Maui.AppViewLoader
+                    Maui.AppViewLoader
+                    {
+                        id: _albumsViewLoader
+
+                        Maui.AppView.title: i18n("Albums")
+                        Maui.AppView.iconName: "view-media-album-cover"
+
+                        property var pendingAlbum : ({})
+
+                        AlbumsView
                         {
-                            Maui.AppView.title: i18n("Songs")
-                            Maui.AppView.iconName: "view-media-track"
+                            holder.title : i18n("No Albums!")
+                            holder.body: i18n("Add new music sources")
+                            list.query: Albums.ALBUMS
 
-                            TracksView
+                            Component.onCompleted:
                             {
-                                Component.onCompleted:
+                                if(Object.keys(_albumsViewLoader.pendingAlbum).length)
                                 {
-                                    if(settings.autoScan)
-                                    {
-                                        Vvave.rescan()
-                                    }
+                                    populateTable(_albumsViewLoader.pendingAlbum.album, _albumsViewLoader.pendingAlbum.artist)
                                 }
                             }
                         }
+                    }
 
-                        Maui.AppViewLoader
+                    Maui.AppViewLoader
+                    {
+                        id: _artistViewLoader
+                        Maui.AppView.title: i18n("Artists")
+                        Maui.AppView.iconName: "view-media-artist"
+
+                        property string pendingArtist
+
+                        AlbumsView
                         {
-                            id: _albumsViewLoader
+                            holder.title : i18n("No Artists!")
+                            holder.body: i18n("Add new music sources")
+                            list.query : Albums.ARTISTS
 
-                            Maui.AppView.title: i18n("Albums")
-                            Maui.AppView.iconName: "view-media-album-cover"
-
-                            property var pendingAlbum : ({})
-
-                            AlbumsView
+                            Component.onCompleted:
                             {
-                                holder.title : i18n("No Albums!")
-                                holder.body: i18n("Add new music sources")
-                                list.query: Albums.ALBUMS
-
-                                Component.onCompleted:
+                                if(_artistViewLoader.pendingArtist.length)
                                 {
-                                    if(Object.keys(_albumsViewLoader.pendingAlbum).length)
-                                    {
-                                        populateTable(_albumsViewLoader.pendingAlbum.album, _albumsViewLoader.pendingAlbum.artist)
-                                    }
+                                    populateTable(undefined, _artistViewLoader.pendingArtist)
+
                                 }
                             }
                         }
+                    }
 
-                        Maui.AppViewLoader
-                        {
-                            id: _artistViewLoader
-                            Maui.AppView.title: i18n("Artists")
-                            Maui.AppView.iconName: "view-media-artist"
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Tags")
+                        Maui.AppView.iconName: "tag"
 
-                            property string pendingArtist
+                        PlaylistsView {}
+                    }
 
-                            AlbumsView
-                            {
-                                holder.title : i18n("No Artists!")
-                                holder.body: i18n("Add new music sources")
-                                list.query : Albums.ARTISTS
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Folders")
+                        Maui.AppView.iconName: "folder"
 
-                                Component.onCompleted:
-                                {
-                                    if(_artistViewLoader.pendingArtist.length)
-                                    {
-                                        populateTable(undefined, _artistViewLoader.pendingArtist)
+                        FoldersView {}
+                    }
 
-                                    }
-                                }
-                            }
-                        }
+                    Maui.AppViewLoader
+                    {
+                        Maui.AppView.title: i18n("Cloud")
+                        Maui.AppView.iconName: "folder-cloud"
 
-                        Maui.AppViewLoader
-                        {
-                            Maui.AppView.title: i18n("Tags")
-                            Maui.AppView.iconName: "tag"
-                            PlaylistsView {}
-                        }
-
-                        Maui.AppViewLoader
-                        {
-                            Maui.AppView.title: i18n("Folders")
-                            Maui.AppView.iconName: "folder"
-
-                            FoldersView {}
-                        }
-
-                        Maui.AppViewLoader
-                        {
-                            Maui.AppView.title: i18n("Cloud")
-                            Maui.AppView.iconName: "folder-cloud"
-
-                            CloudView {}
-                        }
+                        CloudView {}
+                    }
 
 
                     data: Loader
@@ -622,14 +694,14 @@ Maui.ApplicationWindow
                         return currentItem.item.getFilterField()
                     }
 
-                        /**
+                    /**
                           * Check if the "go back" function exists in the current view and return the reference to the function
                           */
                     function getGoBackFunc() : Function
                     {
                         return 'getGoBackFunc' in currentItem.item ?
-                            currentItem.item.getGoBackFunc() :
-                            null
+                                    currentItem.item.getGoBackFunc() :
+                                    null
                     }
                 }
 
@@ -781,8 +853,8 @@ Maui.ApplicationWindow
     function getFilterField() : Item
     {
         return ('getFilterField' in _stackView.currentItem) ?
-            _stackView.currentItem.getFilterField() :
-            null
+                    _stackView.currentItem.getFilterField() :
+                    null
     }
 
     function getGoBackFunc() : Function
@@ -792,8 +864,34 @@ Maui.ApplicationWindow
             return () => { filterField.focus = false }
         } else {
             return ('getGoBackFunc' in _stackView.currentItem) ?
-                _stackView.currentItem.getGoBackFunc() :
-                null
+                        _stackView.currentItem.getGoBackFunc() :
+                        null
         }
     }
+
+    function openSleepTimerDialog()
+    {
+        _dialogLoader.sourceComponent = _sleepTimerDialogComponent
+        dialog.open()
     }
+
+    function setSleepTimer(option)
+    {
+        console.log("Setting sleep timer to ", option)
+        const timerFunc = (min) =>
+                        {
+            _timerLoader.active = true
+            _timerLoader.item.interval = min * 60 * 1000
+        };
+
+        switch(option)
+        {
+        case "15m" : ; timerFunc(15); break;
+        case "30m" : timerFunc(30); break;
+        case "60m" : timerFunc(60); break;
+        case "eot" : root.sleepOption = "eot"; break;
+        case "eop" : root.sleepOption = "eop"; break;
+        case "none" : root.sleepOption = "none"; _timerLoader.active=false; break;
+        }
+    }
+}
