@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-29 00:41+0000\n"
+"POT-Creation-Date: 2024-02-02 01:35+0000\n"
 "PO-Revision-Date: 2023-05-14 12:58+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -35,12 +35,12 @@ msgstr "© 2019-%1 da Equipa de Desenvolvimento do Maui"
 msgid "Developer"
 msgstr "Desenvolvimento"
 
-#: src/main.qml:279
+#: src/main.qml:309
 #, kde-format
 msgid "Missing file"
 msgstr "Ficheiro em falta"
 
-#: src/main.qml:341 src/widgets/BabeTable/BabeTable.qml:139
+#: src/main.qml:393 src/widgets/BabeTable/BabeTable.qml:147
 #, fuzzy, kde-format
 #| msgid "Remove track"
 msgid "Remove track"
@@ -48,7 +48,7 @@ msgid_plural "Remove %1 tracks"
 msgstr[0] "Remover a faixa"
 msgstr[1] "Remover a faixa"
 
-#: src/main.qml:342
+#: src/main.qml:394
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -56,63 +56,68 @@ msgstr ""
 "Tem a certeza que deseja remover estes ficheiros? Esta operação não pode ser "
 "anulada."
 
-#: src/main.qml:475 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:537 src/widgets/SleepTimerDialog.qml:11
+#, kde-format
+msgid "Sleep Timer"
+msgstr ""
+
+#: src/main.qml:546 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: src/main.qml:482
+#: src/main.qml:553
 #, kde-format
 msgid "Settings"
 msgstr "Configuração"
 
-#: src/main.qml:489
+#: src/main.qml:560
 #, kde-format
 msgid "About"
 msgstr "Acerca"
 
-#: src/main.qml:522
+#: src/main.qml:593
 #, kde-format
 msgid "Songs"
 msgstr "Músicas"
 
-#: src/main.qml:541 src/widgets/AlbumsView.qml:76
+#: src/main.qml:612 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Álbuns"
 
-#: src/main.qml:548
+#: src/main.qml:619
 #, kde-format
 msgid "No Albums!"
 msgstr "Sem Álbuns!"
 
-#: src/main.qml:549 src/main.qml:573 src/widgets/TracksView.qml:22
+#: src/main.qml:620 src/main.qml:644 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
 msgstr "Adicionar novas fontes de músicas"
 
-#: src/main.qml:565 src/widgets/AlbumsView.qml:76
+#: src/main.qml:636 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistas"
 
-#: src/main.qml:572
+#: src/main.qml:643
 #, kde-format
 msgid "No Artists!"
 msgstr "Sem Artistas!"
 
-#: src/main.qml:589 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:660 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Marcas"
 
-#: src/main.qml:596
+#: src/main.qml:668
 #, kde-format
 msgid "Folders"
 msgstr "Pastas"
 
-#: src/main.qml:604
+#: src/main.qml:676
 #, kde-format
 msgid "Cloud"
 msgstr "'Cloud'"
@@ -150,7 +155,7 @@ msgid "Playing music"
 msgstr "A tocar música"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:27
+#: src/widgets/TracksView.qml:26
 #, kde-format
 msgid "Add sources"
 msgstr "Adicionar fontes"
@@ -160,7 +165,7 @@ msgstr "Adicionar fontes"
 msgid "This list is empty"
 msgstr "Esta lista está vazia"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:98
+#: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:106
 #: src/widgets/CloudView/CloudView.qml:24
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format
@@ -169,17 +174,22 @@ msgid_plural "Filter %1 albums"
 msgstr[0] "Filtrar"
 msgstr[1] "Filtrar os %1 álbuns"
 
-#: src/widgets/BabeTable/BabeTable.qml:71 src/widgets/TracksGroup.qml:46
+#: src/widgets/BabeTable/BabeTable.qml:72
+#, kde-format
+msgid "Shuffle Play"
+msgstr ""
+
+#: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
 #, kde-format
 msgid "Play All"
 msgstr "Reproduzir Tudo"
 
-#: src/widgets/BabeTable/BabeTable.qml:78 src/widgets/TracksGroup.qml:54
+#: src/widgets/BabeTable/BabeTable.qml:86 src/widgets/TracksGroup.qml:54
 #, kde-format
 msgid "Append All"
 msgstr "Adicionar Tudo"
 
-#: src/widgets/BabeTable/BabeTable.qml:140
+#: src/widgets/BabeTable/BabeTable.qml:148
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
@@ -188,12 +198,24 @@ msgstr ""
 "Tem a certeza que deseja remover o ficheiro do seu computador? Esta acção "
 "não pode ser anulada."
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/TracksGroup.qml:67
+#: src/widgets/BabeTable/BabeTable.qml:153
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Remover"
+
+#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:141
+#, kde-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/widgets/BabeTable/BabeTable.qml:180 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
 msgstr "Ir para o Artista"
 
-#: src/widgets/BabeTable/BabeTable.qml:175 src/widgets/TracksGroup.qml:74
+#: src/widgets/BabeTable/BabeTable.qml:187 src/widgets/TracksGroup.qml:74
 #, kde-format
 msgid "Go to Album"
 msgstr "Ir para o Álbum"
@@ -255,22 +277,22 @@ msgstr ""
 "Poderá configurar agora a sua conta se carregar aqui ou nas opções das "
 "Contas do menu principal"
 
-#: src/widgets/FocusView.qml:146
+#: src/widgets/FocusView.qml:147
 #, kde-format
 msgid "Find"
 msgstr "Procurar"
 
-#: src/widgets/FocusView.qml:188
+#: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "No Results!"
 msgstr "Sem Resultados!"
 
-#: src/widgets/FocusView.qml:189
+#: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "Try with something else"
 msgstr "Experimentar algo diferente"
 
-#: src/widgets/FocusView.qml:228 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:229 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Comece por organizar a sua lista de reprodução."
@@ -292,7 +314,7 @@ msgstr "Sem Pastas!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Adicione novas músicas às suas fontes a navegar por pastas"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:21
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "No Tracks!"
 msgstr "Sem Faixas!"
@@ -411,12 +433,6 @@ msgid ""
 msgstr ""
 "Tem a certeza que deseja remover esta marca? Esta operação não pode ser "
 "anulada."
-
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
-#: src/widgets/SelectionBar.qml:76
-#, kde-format
-msgid "Remove"
-msgstr "Remover"
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
@@ -574,7 +590,49 @@ msgstr "Sondar agora"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: src/widgets/TracksView.qml:33
+#: src/widgets/SleepTimerDialog.qml:31
+#, kde-format
+msgid "15 minutes"
+msgstr ""
+
+#: src/widgets/SleepTimerDialog.qml:47
+#, kde-format
+msgid "30 minutes"
+msgstr ""
+
+#: src/widgets/SleepTimerDialog.qml:63
+#, kde-format
+msgid "1 hour"
+msgstr ""
+
+#: src/widgets/SleepTimerDialog.qml:79
+#, fuzzy, kde-format
+#| msgid "Random Tracks"
+msgid "End of track"
+msgstr "Faixas Aleatórias"
+
+#: src/widgets/SleepTimerDialog.qml:95
+#, fuzzy, kde-format
+#| msgid "No Playlists!"
+msgid "End of playlist"
+msgstr "Sem Listas de Reprodução!"
+
+#: src/widgets/SleepTimerDialog.qml:111
+#, kde-format
+msgid "Off"
+msgstr ""
+
+#: src/widgets/SleepTimerDialog.qml:133
+#, kde-format
+msgid "Close application after sleeping"
+msgstr ""
+
+#: src/widgets/SleepTimerDialog.qml:147
+#, kde-format
+msgid "Accept"
+msgstr "Aceitar"
+
+#: src/widgets/TracksView.qml:32
 #, kde-format
 msgid "Open file"
 msgstr "Abrir um ficheiro"
@@ -593,9 +651,3 @@ msgstr "Abrir um ficheiro"
 
 #~ msgid "Add or remove sources"
 #~ msgstr "Adicionar ou remover fontes"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgid "Accept"
-#~ msgstr "Aceitar"
