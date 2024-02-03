@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 01:35+0000\n"
-"PO-Revision-Date: 2024-01-30 14:35+0100\n"
+"PO-Revision-Date: 2024-02-02 09:48+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -57,7 +57,7 @@ msgstr ""
 #: src/main.qml:537 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr ""
+msgstr "Temporitzador d'adormir-se"
 
 #: src/main.qml:546 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
@@ -175,7 +175,7 @@ msgstr[1] "Filtra %1 àlbums"
 #: src/widgets/BabeTable/BabeTable.qml:72
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "Barreja la reproducció"
 
 #: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -206,7 +206,7 @@ msgstr "Elimina"
 #: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:141
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·la"
 
 #: src/widgets/BabeTable/BabeTable.qml:180 src/widgets/TracksGroup.qml:67
 #, kde-format
@@ -585,44 +585,42 @@ msgstr "Desconegut"
 #: src/widgets/SleepTimerDialog.qml:31
 #, kde-format
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuts"
 
 #: src/widgets/SleepTimerDialog.qml:47
 #, kde-format
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuts"
 
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
 msgid "1 hour"
-msgstr ""
+msgstr "1 hora"
 
 #: src/widgets/SleepTimerDialog.qml:79
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "Peces aleatòries"
+msgstr "Final de la peça"
 
 #: src/widgets/SleepTimerDialog.qml:95
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "End of playlist"
-msgstr "Cap llista de reproducció!"
+msgstr "Final de la llista de reproducció"
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Inactiu"
 
 #: src/widgets/SleepTimerDialog.qml:133
 #, kde-format
 msgid "Close application after sleeping"
-msgstr ""
+msgstr "Tanca l'aplicació després d'adormir-se"
 
 #: src/widgets/SleepTimerDialog.qml:147
 #, kde-format
 msgid "Accept"
-msgstr ""
+msgstr "Accepta"
 
 #: src/widgets/TracksView.qml:32
 #, kde-format

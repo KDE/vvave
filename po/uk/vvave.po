@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2023.
+# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 01:35+0000\n"
-"PO-Revision-Date: 2023-11-29 09:36+0200\n"
+"PO-Revision-Date: 2024-02-02 09:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: src/main.cpp:104
 #, kde-format
@@ -58,7 +58,7 @@ msgstr ""
 #: src/main.qml:537 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr ""
+msgstr "Таймер присипляння"
 
 #: src/main.qml:546 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
@@ -178,7 +178,7 @@ msgstr[3] "Фільтрувати"
 #: src/widgets/BabeTable/BabeTable.qml:72
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "Відтворення у випадковому порядку"
 
 #: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -589,39 +589,37 @@ msgstr "Невідомо"
 #: src/widgets/SleepTimerDialog.qml:31
 #, kde-format
 msgid "15 minutes"
-msgstr ""
+msgstr "15 хвилин"
 
 #: src/widgets/SleepTimerDialog.qml:47
 #, kde-format
 msgid "30 minutes"
-msgstr ""
+msgstr "30 хвилин"
 
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
 msgid "1 hour"
-msgstr ""
+msgstr "1 година"
 
 #: src/widgets/SleepTimerDialog.qml:79
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "Випадкові композиції"
+msgstr "Кінець композиції"
 
 #: src/widgets/SleepTimerDialog.qml:95
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "End of playlist"
-msgstr "Нещодавні списки відтворення"
+msgstr "Кінець списку відтворення"
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Вимкнути"
 
 #: src/widgets/SleepTimerDialog.qml:133
 #, kde-format
 msgid "Close application after sleeping"
-msgstr ""
+msgstr "Закрити програму після присипляння"
 
 #: src/widgets/SleepTimerDialog.qml:147
 #, kde-format

@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# SPDX-FileCopyrightText: 2022, 2023 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 01:35+0000\n"
-"PO-Revision-Date: 2023-11-29 18:10+0100\n"
+"PO-Revision-Date: 2024-02-02 11:35+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: src/main.cpp:104
 #, kde-format
@@ -55,7 +55,7 @@ msgstr ""
 #: src/main.qml:537 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr ""
+msgstr "Timer voor slapen"
 
 #: src/main.qml:546 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
@@ -173,7 +173,7 @@ msgstr[1] "%1 albums filteren"
 #: src/widgets/BabeTable/BabeTable.qml:72
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "Willekeurig afspelen"
 
 #: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -583,39 +583,37 @@ msgstr "Onbekend"
 #: src/widgets/SleepTimerDialog.qml:31
 #, kde-format
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuten"
 
 #: src/widgets/SleepTimerDialog.qml:47
 #, kde-format
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuten"
 
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
 msgid "1 hour"
-msgstr ""
+msgstr "1 uur"
 
 #: src/widgets/SleepTimerDialog.qml:79
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "Willekeurige tracks"
+msgstr "Einde van de track"
 
 #: src/widgets/SleepTimerDialog.qml:95
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "End of playlist"
-msgstr "Recente afspeellijsten"
+msgstr "Einde van de afspeellijst"
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Uit"
 
 #: src/widgets/SleepTimerDialog.qml:133
 #, kde-format
 msgid "Close application after sleeping"
-msgstr ""
+msgstr "Toepassing sluiten na slapen"
 
 #: src/widgets/SleepTimerDialog.qml:147
 #, kde-format
