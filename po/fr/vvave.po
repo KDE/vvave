@@ -199,8 +199,7 @@ msgid "Remove"
 msgstr "Supprimer"
 
 #: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:141
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#, kde-format
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -618,8 +617,7 @@ msgid "Close application after sleeping"
 msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:147
-#, fuzzy, kde-format
-#| msgid "Accept"
+#, kde-format
 msgid "Accept"
 msgstr "Accepter"
 
