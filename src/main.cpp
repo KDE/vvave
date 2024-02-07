@@ -103,7 +103,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
                      VVAVE_VERSION_STRING,
                      i18n("Organize and listen to your music."),
                      KAboutLicense::LGPL_V3,
-                     i18n("© 2019-2023 Maui Development Team"),
+                     APP_COPYRIGHT_NOTICE,
                      QString(GIT_BRANCH) + "/" + QString(GIT_COMMIT_HASH));
 
     about.addAuthor("Camilo Higuita", i18n("Developer"), QStringLiteral("milo.h@aol.com"));

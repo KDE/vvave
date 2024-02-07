@@ -158,6 +158,7 @@ Maui.AltBrowser
         }
     }
 
+
     gridDelegate: Item
     {
         height: GridView.view.cellHeight
@@ -204,10 +205,14 @@ Maui.AltBrowser
                 }
             }
 
-            ToolButton
+            Loader
             {
-                parent: _template.iconContainer
-                anchors.centerIn: parent
+                active: !Maui.Handy.isMobile
+                asynchronous: true
+parent: _template.iconContainer
+                anchors.centerIn: parent                
+            sourceComponent: ToolButton
+            {                
                 icon.name: "media-playback-start"
                 icon.color: "white"
                 icon.height: 32
@@ -221,8 +226,9 @@ Maui.AltBrowser
                 {
                     color: "black"
                     radius: height
-                    opacity: 0.5
+                    opacity: hovered ? 0.8 : 0.5
                 }
+            }
             }
         }
     }

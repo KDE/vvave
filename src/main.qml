@@ -332,12 +332,12 @@ Maui.ApplicationWindow
 
                 switch(root.sleepOption)
                 {
-                case "none": Player.nextTrack(); break;
                 case "eot":
                 {
-                     Player.stop()
+                    Player.stop()
                     if(closeAfterSleep)
                         root.close()
+                    break;
                 }
 
                 case "eop":
@@ -345,13 +345,17 @@ Maui.ApplicationWindow
                     if(currentTrackIndex === mainPlaylist.listView.count-1)
                     {
                         Player.stop();
-                       if(closeAfterSleep)
-                           root.close()
+                        if(closeAfterSleep)
+                            root.close()
                     }else
                     {
                         Player.nextTrack();
                     }
+                    break;
                 }
+                case "none":
+                default:
+                    Player.nextTrack();
                 }
             }
         }
@@ -891,7 +895,8 @@ Maui.ApplicationWindow
         case "60m" : timerFunc(60); break;
         case "eot" : root.sleepOption = "eot"; break;
         case "eop" : root.sleepOption = "eop"; break;
-        case "none" : root.sleepOption = "none"; _timerLoader.active=false; break;
+        case "none" :
+        default: root.sleepOption = "none"; _timerLoader.active=false; break;
         }
     }
 }
