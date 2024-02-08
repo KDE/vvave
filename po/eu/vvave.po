@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-02 01:35+0000\n"
+"POT-Creation-Date: 2024-02-08 01:39+0000\n"
 "PO-Revision-Date: 2023-12-06 11:33+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -25,11 +25,6 @@ msgstr ""
 msgid "Organize and listen to your music."
 msgstr "Antolatu eta entzun zure musika."
 
-#: src/main.cpp:106
-#, kde-format
-msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-2023 Maui garapen taldea"
-
 #: src/main.cpp:109 src/main.cpp:110
 #, kde-format
 msgid "Developer"
@@ -40,14 +35,14 @@ msgstr "Garatzailea"
 msgid "Missing file"
 msgstr "Fitxategia falta da"
 
-#: src/main.qml:393 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:397 src/widgets/BabeTable/BabeTable.qml:147
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Kendu pista"
 msgstr[1] "Kendu %1 pista"
 
-#: src/main.qml:394
+#: src/main.qml:398
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -55,68 +50,68 @@ msgstr ""
 "Ziur zaude fitxategi horiek kendu nahi dituzula? Ekintza hori ezin da "
 "desegin."
 
-#: src/main.qml:537 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:541 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr ""
 
-#: src/main.qml:546 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:550 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Lasterbideak"
 
-#: src/main.qml:553
+#: src/main.qml:557
 #, kde-format
 msgid "Settings"
 msgstr "Ezarpenak"
 
-#: src/main.qml:560
+#: src/main.qml:564
 #, kde-format
 msgid "About"
 msgstr "Honi buruz"
 
-#: src/main.qml:593
+#: src/main.qml:597
 #, kde-format
 msgid "Songs"
 msgstr "Abestiak"
 
-#: src/main.qml:612 src/widgets/AlbumsView.qml:76
+#: src/main.qml:616 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumak"
 
-#: src/main.qml:619
+#: src/main.qml:623
 #, kde-format
 msgid "No Albums!"
 msgstr "Albumik ez!"
 
-#: src/main.qml:620 src/main.qml:644 src/widgets/TracksView.qml:21
+#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
 msgstr "Gehitu musika-sorburu berriak"
 
-#: src/main.qml:636 src/widgets/AlbumsView.qml:76
+#: src/main.qml:640 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistak"
 
-#: src/main.qml:643
+#: src/main.qml:647
 #, kde-format
 msgid "No Artists!"
 msgstr "Artistarik ez!"
 
-#: src/main.qml:660 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiketak"
 
-#: src/main.qml:668
+#: src/main.qml:672
 #, kde-format
 msgid "Folders"
 msgstr "Karpetak"
 
-#: src/main.qml:676
+#: src/main.qml:680
 #, kde-format
 msgid "Cloud"
 msgstr "Hodeia"
@@ -627,6 +622,9 @@ msgstr "Onartu"
 #, kde-format
 msgid "Open file"
 msgstr "Ireki fitxategia"
+
+#~ msgid "© 2019-2023 Maui Development Team"
+#~ msgstr "© 2019-2023 Maui garapen taldea"
 
 #~ msgid "Vvave"
 #~ msgstr "Vvave"

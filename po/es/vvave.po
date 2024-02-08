@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-02 01:35+0000\n"
+"POT-Creation-Date: 2024-02-08 01:39+0000\n"
 "PO-Revision-Date: 2024-02-02 18:13+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -24,11 +24,6 @@ msgstr ""
 msgid "Organize and listen to your music."
 msgstr "Organice y escuche su música."
 
-#: src/main.cpp:106
-#, kde-format
-msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-2023 El equipo de desarrollo de Maui"
-
 #: src/main.cpp:109 src/main.cpp:110
 #, kde-format
 msgid "Developer"
@@ -39,82 +34,82 @@ msgstr "Desarrollador"
 msgid "Missing file"
 msgstr "Archivo ausente"
 
-#: src/main.qml:393 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:397 src/widgets/BabeTable/BabeTable.qml:147
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Eliminar pista"
 msgstr[1] "Eliminar %1 pistas"
 
-#: src/main.qml:394
+#: src/main.qml:398
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 "¿Seguro que quiere eliminar estos archivos? Esta acción no se puede deshacer."
 
-#: src/main.qml:537 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:541 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Temporizador para reposo"
 
-#: src/main.qml:546 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:550 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Accesos rápidos"
 
-#: src/main.qml:553
+#: src/main.qml:557
 #, kde-format
 msgid "Settings"
 msgstr "Preferencias"
 
-#: src/main.qml:560
+#: src/main.qml:564
 #, kde-format
 msgid "About"
 msgstr "Acerca de"
 
-#: src/main.qml:593
+#: src/main.qml:597
 #, kde-format
 msgid "Songs"
 msgstr "Canciones"
 
-#: src/main.qml:612 src/widgets/AlbumsView.qml:76
+#: src/main.qml:616 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Álbumes"
 
-#: src/main.qml:619
+#: src/main.qml:623
 #, kde-format
 msgid "No Albums!"
 msgstr "No hay álbumes"
 
-#: src/main.qml:620 src/main.qml:644 src/widgets/TracksView.qml:21
+#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
 msgstr "Añadir nueva fuente de música"
 
-#: src/main.qml:636 src/widgets/AlbumsView.qml:76
+#: src/main.qml:640 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistas"
 
-#: src/main.qml:643
+#: src/main.qml:647
 #, kde-format
 msgid "No Artists!"
 msgstr "No hay artistas"
 
-#: src/main.qml:660 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: src/main.qml:668
+#: src/main.qml:672
 #, kde-format
 msgid "Folders"
 msgstr "Carpetas"
 
-#: src/main.qml:676
+#: src/main.qml:680
 #, kde-format
 msgid "Cloud"
 msgstr "Nube"
@@ -626,6 +621,9 @@ msgstr "Aceptar"
 #, kde-format
 msgid "Open file"
 msgstr "Abrir archivo"
+
+#~ msgid "© 2019-2023 Maui Development Team"
+#~ msgstr "© 2019-2023 El equipo de desarrollo de Maui"
 
 #~ msgid "Vvave"
 #~ msgstr "Vvave"

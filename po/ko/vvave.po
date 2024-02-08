@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-02 01:35+0000\n"
+"POT-Creation-Date: 2024-02-08 01:39+0000\n"
 "PO-Revision-Date: 2024-02-05 19:52+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -22,11 +22,6 @@ msgstr ""
 msgid "Organize and listen to your music."
 msgstr "음악을 정리하고 듣습니다."
 
-#: src/main.cpp:106
-#, kde-format
-msgid "© 2019-2023 Maui Development Team"
-msgstr "© 2019-2023 Maui Development Team"
-
 #: src/main.cpp:109 src/main.cpp:110
 #, kde-format
 msgid "Developer"
@@ -37,80 +32,80 @@ msgstr "개발자"
 msgid "Missing file"
 msgstr "파일 없음"
 
-#: src/main.qml:393 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:397 src/widgets/BabeTable/BabeTable.qml:147
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "%1곡 삭제"
 
-#: src/main.qml:394
+#: src/main.qml:398
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "이 파일을 삭제하시겠습니까? 실행 취소할 수 없습니다."
 
-#: src/main.qml:537 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:541 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "수면 타이머"
 
-#: src/main.qml:546 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:550 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "단축키"
 
-#: src/main.qml:553
+#: src/main.qml:557
 #, kde-format
 msgid "Settings"
 msgstr "설정"
 
-#: src/main.qml:560
+#: src/main.qml:564
 #, kde-format
 msgid "About"
 msgstr "정보"
 
-#: src/main.qml:593
+#: src/main.qml:597
 #, kde-format
 msgid "Songs"
 msgstr "곡"
 
-#: src/main.qml:612 src/widgets/AlbumsView.qml:76
+#: src/main.qml:616 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "앨범"
 
-#: src/main.qml:619
+#: src/main.qml:623
 #, kde-format
 msgid "No Albums!"
 msgstr "앨범 없음!"
 
-#: src/main.qml:620 src/main.qml:644 src/widgets/TracksView.qml:21
+#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
 msgstr "새 음악 원본 추가"
 
-#: src/main.qml:636 src/widgets/AlbumsView.qml:76
+#: src/main.qml:640 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "아티스트"
 
-#: src/main.qml:643
+#: src/main.qml:647
 #, kde-format
 msgid "No Artists!"
 msgstr "아티스트 없음!"
 
-#: src/main.qml:660 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "태그"
 
-#: src/main.qml:668
+#: src/main.qml:672
 #, kde-format
 msgid "Folders"
 msgstr "폴더"
 
-#: src/main.qml:676
+#: src/main.qml:680
 #, kde-format
 msgid "Cloud"
 msgstr "클라우드"
@@ -612,6 +607,9 @@ msgstr "수락"
 #, kde-format
 msgid "Open file"
 msgstr "파일 열기"
+
+#~ msgid "© 2019-2023 Maui Development Team"
+#~ msgstr "© 2019-2023 Maui Development Team"
 
 #~ msgid "Vvave"
 #~ msgstr "Vvave"
