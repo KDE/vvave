@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# SPDX-FileCopyrightText: 2023 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2023, 2024 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-08 01:39+0000\n"
-"PO-Revision-Date: 2023-10-31 16:29+0100\n"
+"PO-Revision-Date: 2024-01-19 15:55+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: src/main.cpp:104
 #, kde-format
@@ -36,9 +36,9 @@ msgstr "Chybějící soubor"
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Odstranit skladbu"
+msgstr[1] "Odstranit %1 skladby"
+msgstr[2] "Odstranit %1 skladeb"
 
 #: src/main.qml:398
 #, kde-format
@@ -197,7 +197,7 @@ msgstr "Odstranit"
 #: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:141
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: src/widgets/BabeTable/BabeTable.qml:180 src/widgets/TracksGroup.qml:67
 #, kde-format
@@ -409,7 +409,7 @@ msgstr ""
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Remove '%1'?"
-msgstr ""
+msgstr "Odstranit '%1'?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
@@ -568,12 +568,12 @@ msgstr "Neznámý"
 #: src/widgets/SleepTimerDialog.qml:31
 #, kde-format
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minut"
 
 #: src/widgets/SleepTimerDialog.qml:47
 #, kde-format
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minut"
 
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
@@ -581,21 +581,19 @@ msgid "1 hour"
 msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:79
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "Náhodné skladby"
+msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:95
-#, fuzzy, kde-format
-#| msgid "Remove from playlist"
+#, kde-format
 msgid "End of playlist"
-msgstr "Odstranit ze seznamu skladeb"
+msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Vypnuto"
 
 #: src/widgets/SleepTimerDialog.qml:133
 #, kde-format
@@ -605,12 +603,9 @@ msgstr ""
 #: src/widgets/SleepTimerDialog.qml:147
 #, kde-format
 msgid "Accept"
-msgstr ""
+msgstr "Přijmout"
 
 #: src/widgets/TracksView.qml:32
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "© 2019-2023 Maui Development Team"
-#~ msgstr "© 2019-2023 Vývojový tým Maui"
