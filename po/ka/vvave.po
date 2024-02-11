@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-08 01:39+0000\n"
-"PO-Revision-Date: 2023-12-01 07:17+0100\n"
+"PO-Revision-Date: 2024-02-11 02:28+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -51,7 +51,7 @@ msgstr ""
 #: src/main.qml:541 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr ""
+msgstr "ძილის წამმზომი"
 
 #: src/main.qml:550 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
@@ -169,7 +169,7 @@ msgstr[1] "%1 ალბომი გაფილტვრა"
 #: src/widgets/BabeTable/BabeTable.qml:72
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "შემთხვევითი დაკვრა"
 
 #: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -576,39 +576,37 @@ msgstr "უცნობი"
 #: src/widgets/SleepTimerDialog.qml:31
 #, kde-format
 msgid "15 minutes"
-msgstr ""
+msgstr "15 წუთი"
 
 #: src/widgets/SleepTimerDialog.qml:47
 #, kde-format
 msgid "30 minutes"
-msgstr ""
+msgstr "30 წუთი"
 
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
 msgid "1 hour"
-msgstr ""
+msgstr "1 საათი"
 
 #: src/widgets/SleepTimerDialog.qml:79
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "შემთხვევითი ტრეკები"
+msgstr "ტრეკის დასასრული"
 
 #: src/widgets/SleepTimerDialog.qml:95
-#, fuzzy, kde-format
-#| msgid "Recent playlists"
+#, kde-format
 msgid "End of playlist"
-msgstr "მიმდინარე დასაკრავი სიები"
+msgstr "ფაილი დასაკრავი სიის ბოლო"
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "გამორთვა"
 
 #: src/widgets/SleepTimerDialog.qml:133
 #, kde-format
 msgid "Close application after sleeping"
-msgstr ""
+msgstr "აპლიკაციის დახურვა ძილის შემდეგ"
 
 #: src/widgets/SleepTimerDialog.qml:147
 #, kde-format
