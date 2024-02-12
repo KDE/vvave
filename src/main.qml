@@ -25,7 +25,7 @@ Maui.ApplicationWindow
 
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
 
-    Maui.Style.styleType: focusView ? Maui.Style.Adaptive : (Maui.Handy.isAndroid ? settings.darkMode ? Maui.Style.Dark : Maui.Style.Light : undefined)
+    Maui.Style.styleType: focusView ? Maui.Style.Adaptive : undefined
     //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
     readonly property int preferredMiniModeSize: 200
@@ -277,7 +277,6 @@ Maui.ApplicationWindow
         category: "Settings"
         property bool fetchArtwork: true
         property bool autoScan: true
-        property bool darkMode : true
         property bool focusViewDefault: false
         property alias sideBarWidth : _sideBarView.sideBar.preferredWidth
         property bool showArtwork: false
@@ -563,7 +562,7 @@ Maui.ApplicationWindow
                             {
                                 text: i18n("About")
                                 icon.name: "documentinfo"
-                                onTriggered: root.about()
+                                onTriggered: Maui.App.aboutDialog()
                             }
                         }
                     }
@@ -736,17 +735,6 @@ Maui.ApplicationWindow
     Component.onCompleted:
     {
         Vvave.fetchArtwork = settings.fetchArtwork
-        setAndroidStatusBarColor()
-    }
-
-    function setAndroidStatusBarColor()
-    {
-        if(Maui.Handy.isAndroid)
-        {
-            const isDark = Maui.ColorUtils.brightnessForColor(Maui.Theme.backgroundColor) === Maui.ColorUtils.Dark
-            Maui.Android.statusbarColor(Maui.Theme.backgroundColor, !isDark)
-            Maui.Android.navBarColor(Maui.Theme.backgroundColor, !isDark)
-        }
     }
 
     function toggleFocusView()

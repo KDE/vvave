@@ -133,25 +133,7 @@ Maui.SettingsDialog
                 }
             }
         }
-
-        Maui.SectionItem
-        {
-            visible: Maui.Handy.isAndroid
-            label1.text: i18n("Dark Mode")
-            label2.text: i18n("Switch between light and dark colorscheme.")
-
-            Switch
-            {
-                Layout.fillHeight: true
-                checked: Maui.Style.styleType === Maui.Style.Dark
-                onToggled:
-                {
-                     settings.darkMode = !settings.darkMode
-                    setAndroidStatusBarColor()
-                }
-            }
-        }
-
+        
         Maui.SectionItem
         {
             label1.text: i18n("Artwork")
