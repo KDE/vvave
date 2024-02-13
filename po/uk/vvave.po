@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-08 01:39+0000\n"
+"POT-Creation-Date: 2024-02-13 01:40+0000\n"
 "PO-Revision-Date: 2024-02-02 09:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -28,12 +28,12 @@ msgstr "Упорядкуйте вашу музику і насолоджуйте
 msgid "Developer"
 msgstr "Розробник"
 
-#: src/main.qml:309
+#: src/main.qml:308
 #, kde-format
 msgid "Missing file"
 msgstr "Не вистачає файла"
 
-#: src/main.qml:397 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:396 src/widgets/BabeTable/BabeTable.qml:147
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -42,7 +42,7 @@ msgstr[1] "Вилучити %1 маршрути"
 msgstr[2] "Вилучити %1 маршрутів"
 msgstr[3] "Вилучити маршрут"
 
-#: src/main.qml:398
+#: src/main.qml:397
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -50,68 +50,68 @@ msgstr ""
 "Ви справді хочете вилучити ці файли? Наслідки цієї дії не можна буде "
 "скасувати."
 
-#: src/main.qml:541 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Таймер присипляння"
 
-#: src/main.qml:550 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Скорочення"
 
-#: src/main.qml:557
+#: src/main.qml:556
 #, kde-format
 msgid "Settings"
 msgstr "Параметри"
 
-#: src/main.qml:564
+#: src/main.qml:563
 #, kde-format
 msgid "About"
 msgstr "Про програму"
 
-#: src/main.qml:597
+#: src/main.qml:596
 #, kde-format
 msgid "Songs"
 msgstr "Пісні"
 
-#: src/main.qml:616 src/widgets/AlbumsView.qml:76
+#: src/main.qml:615 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Альбоми"
 
-#: src/main.qml:623
+#: src/main.qml:622
 #, kde-format
 msgid "No Albums!"
 msgstr "Немає альбомів!"
 
-#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:21
+#: src/main.qml:623 src/main.qml:647 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
 msgstr "Додати нові джерела музики"
 
-#: src/main.qml:640 src/widgets/AlbumsView.qml:76
+#: src/main.qml:639 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Виконавці"
 
-#: src/main.qml:647
+#: src/main.qml:646
 #, kde-format
 msgid "No Artists!"
 msgstr "Немає виконавців!"
 
-#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:663 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Мітки"
 
-#: src/main.qml:672
+#: src/main.qml:671
 #, kde-format
 msgid "Folders"
 msgstr "Теки"
 
-#: src/main.qml:680
+#: src/main.qml:679
 #, kde-format
 msgid "Cloud"
 msgstr "Хмара"
@@ -530,47 +530,37 @@ msgstr "Панель фокуса"
 msgid "Make the focus view the default."
 msgstr "Зробити панель фокуса типовою."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
-#, kde-format
-msgid "Dark Mode"
-msgstr "Темний режим"
-
-#: src/widgets/SettingsView/SettingsDialog.qml:141
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr "Перемкнутися між світлою і темною схемою кольорів."
-
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Artwork"
 msgstr "Графіка"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:158
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Показувати зображення обкладинки композицій."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:155
 #, kde-format
 msgid "Titles"
 msgstr "Назви"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:174
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Показувати у таблиці назви альбомів і виконавців."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
+#: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Sources"
 msgstr "Джерела"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:228
+#: src/widgets/SettingsView/SettingsDialog.qml:210
 #, kde-format
 msgid "Add"
 msgstr "Додати"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:245
+#: src/widgets/SettingsView/SettingsDialog.qml:227
 #, kde-format
 msgid "Scan now"
 msgstr "Сканувати зараз"
@@ -625,6 +615,12 @@ msgstr "Прийняти"
 #, kde-format
 msgid "Open file"
 msgstr "Відкрити файл"
+
+#~ msgid "Dark Mode"
+#~ msgstr "Темний режим"
+
+#~ msgid "Switch between light and dark colorscheme."
+#~ msgstr "Перемкнутися між світлою і темною схемою кольорів."
 
 #~ msgid "© 2019-2023 Maui Development Team"
 #~ msgstr "© Команда розробників Maui, 2019–2023"

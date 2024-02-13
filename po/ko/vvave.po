@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-08 01:39+0000\n"
+"POT-Creation-Date: 2024-02-13 01:40+0000\n"
 "PO-Revision-Date: 2024-02-05 19:52+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -27,85 +27,85 @@ msgstr "음악을 정리하고 듣습니다."
 msgid "Developer"
 msgstr "개발자"
 
-#: src/main.qml:309
+#: src/main.qml:308
 #, kde-format
 msgid "Missing file"
 msgstr "파일 없음"
 
-#: src/main.qml:397 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:396 src/widgets/BabeTable/BabeTable.qml:147
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "%1곡 삭제"
 
-#: src/main.qml:398
+#: src/main.qml:397
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "이 파일을 삭제하시겠습니까? 실행 취소할 수 없습니다."
 
-#: src/main.qml:541 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "수면 타이머"
 
-#: src/main.qml:550 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "단축키"
 
-#: src/main.qml:557
+#: src/main.qml:556
 #, kde-format
 msgid "Settings"
 msgstr "설정"
 
-#: src/main.qml:564
+#: src/main.qml:563
 #, kde-format
 msgid "About"
 msgstr "정보"
 
-#: src/main.qml:597
+#: src/main.qml:596
 #, kde-format
 msgid "Songs"
 msgstr "곡"
 
-#: src/main.qml:616 src/widgets/AlbumsView.qml:76
+#: src/main.qml:615 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "앨범"
 
-#: src/main.qml:623
+#: src/main.qml:622
 #, kde-format
 msgid "No Albums!"
 msgstr "앨범 없음!"
 
-#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:21
+#: src/main.qml:623 src/main.qml:647 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
 msgstr "새 음악 원본 추가"
 
-#: src/main.qml:640 src/widgets/AlbumsView.qml:76
+#: src/main.qml:639 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "아티스트"
 
-#: src/main.qml:647
+#: src/main.qml:646
 #, kde-format
 msgid "No Artists!"
 msgstr "아티스트 없음!"
 
-#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:663 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "태그"
 
-#: src/main.qml:672
+#: src/main.qml:671
 #, kde-format
 msgid "Folders"
 msgstr "폴더"
 
-#: src/main.qml:680
+#: src/main.qml:679
 #, kde-format
 msgid "Cloud"
 msgstr "클라우드"
@@ -512,47 +512,37 @@ msgstr "포커스 보기"
 msgid "Make the focus view the default."
 msgstr "포커스 보기를 기본값으로 사용합니다."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
-#, kde-format
-msgid "Dark Mode"
-msgstr "어두운 모드"
-
-#: src/widgets/SettingsView/SettingsDialog.qml:141
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr "밝은 색상과 어두운 색상을 전환합니다."
-
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Artwork"
 msgstr "아트워크"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:158
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "트랙에 설정된 커버 아트워크를 표시합니다."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:155
 #, kde-format
 msgid "Titles"
 msgstr "제목"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:174
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "모눈 보기에 앨범 제목과 아티스트를 표시합니다."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
+#: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Sources"
 msgstr "원본"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:228
+#: src/widgets/SettingsView/SettingsDialog.qml:210
 #, kde-format
 msgid "Add"
 msgstr "추가"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:245
+#: src/widgets/SettingsView/SettingsDialog.qml:227
 #, kde-format
 msgid "Scan now"
 msgstr "지금 검색"
@@ -607,6 +597,12 @@ msgstr "수락"
 #, kde-format
 msgid "Open file"
 msgstr "파일 열기"
+
+#~ msgid "Dark Mode"
+#~ msgstr "어두운 모드"
+
+#~ msgid "Switch between light and dark colorscheme."
+#~ msgstr "밝은 색상과 어두운 색상을 전환합니다."
 
 #~ msgid "© 2019-2023 Maui Development Team"
 #~ msgstr "© 2019-2023 Maui Development Team"

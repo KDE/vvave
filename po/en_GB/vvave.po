@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-08 01:39+0000\n"
+"POT-Creation-Date: 2024-02-13 01:40+0000\n"
 "PO-Revision-Date: 2023-05-21 14:59+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -27,12 +27,12 @@ msgstr "Organise and listen to your music."
 msgid "Developer"
 msgstr "Developer"
 
-#: src/main.qml:309
+#: src/main.qml:308
 #, kde-format
 msgid "Missing file"
 msgstr "Missing file"
 
-#: src/main.qml:397 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:396 src/widgets/BabeTable/BabeTable.qml:147
 #, fuzzy, kde-format
 #| msgid "Remove track"
 msgid "Remove track"
@@ -40,75 +40,75 @@ msgid_plural "Remove %1 tracks"
 msgstr[0] "Remove track"
 msgstr[1] "Remove track"
 
-#: src/main.qml:398
+#: src/main.qml:397
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 "Are you sure you want to remove these files? This action can not be undone."
 
-#: src/main.qml:541 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr ""
 
-#: src/main.qml:550 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Shortcuts"
 
-#: src/main.qml:557
+#: src/main.qml:556
 #, kde-format
 msgid "Settings"
 msgstr "Settings"
 
-#: src/main.qml:564
+#: src/main.qml:563
 #, kde-format
 msgid "About"
 msgstr "About"
 
-#: src/main.qml:597
+#: src/main.qml:596
 #, kde-format
 msgid "Songs"
 msgstr "Songs"
 
-#: src/main.qml:616 src/widgets/AlbumsView.qml:76
+#: src/main.qml:615 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albums"
 
-#: src/main.qml:623
+#: src/main.qml:622
 #, kde-format
 msgid "No Albums!"
 msgstr "No Albums!"
 
-#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:21
+#: src/main.qml:623 src/main.qml:647 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
 msgstr "Add new music sources"
 
-#: src/main.qml:640 src/widgets/AlbumsView.qml:76
+#: src/main.qml:639 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artists"
 
-#: src/main.qml:647
+#: src/main.qml:646
 #, kde-format
 msgid "No Artists!"
 msgstr "No Artists!"
 
-#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:663 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Tags"
 
-#: src/main.qml:672
+#: src/main.qml:671
 #, kde-format
 msgid "Folders"
 msgstr "Folders"
 
-#: src/main.qml:680
+#: src/main.qml:679
 #, kde-format
 msgid "Cloud"
 msgstr "Cloud"
@@ -526,47 +526,37 @@ msgstr "Focus View"
 msgid "Make the focus view the default."
 msgstr "Make the focus view the default."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
-#, kde-format
-msgid "Dark Mode"
-msgstr "Dark Mode"
-
-#: src/widgets/SettingsView/SettingsDialog.qml:141
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr "Switch between light and dark colour scheme."
-
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Artwork"
 msgstr "Artwork"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:158
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Show the cover artwork for the tracks."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:155
 #, kde-format
 msgid "Titles"
 msgstr "Titles"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:174
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Show the title of albums and artists in the grid view."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
+#: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Sources"
 msgstr "Sources"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:228
+#: src/widgets/SettingsView/SettingsDialog.qml:210
 #, kde-format
 msgid "Add"
 msgstr "Add"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:245
+#: src/widgets/SettingsView/SettingsDialog.qml:227
 #, kde-format
 msgid "Scan now"
 msgstr "Scan now"
@@ -623,6 +613,12 @@ msgstr "Accept"
 #, kde-format
 msgid "Open file"
 msgstr "Open file"
+
+#~ msgid "Dark Mode"
+#~ msgstr "Dark Mode"
+
+#~ msgid "Switch between light and dark colorscheme."
+#~ msgstr "Switch between light and dark colour scheme."
 
 #, fuzzy
 #~| msgid "© 2019-%1 Maui Development Team"

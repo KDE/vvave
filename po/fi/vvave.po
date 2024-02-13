@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-08 01:39+0000\n"
+"POT-Creation-Date: 2024-02-13 01:40+0000\n"
 "PO-Revision-Date: 2023-11-30 15:01+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -27,12 +27,12 @@ msgstr "Järjestä ja kuuntele musiikkiasi."
 msgid "Developer"
 msgstr "Kehittäjä"
 
-#: src/main.qml:309
+#: src/main.qml:308
 #, kde-format
 msgid "Missing file"
 msgstr "Puuttuva tiedosto"
 
-#: src/main.qml:397 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:396 src/widgets/BabeTable/BabeTable.qml:147
 #, fuzzy, kde-format
 #| msgid "Remove track"
 msgid "Remove track"
@@ -40,74 +40,74 @@ msgid_plural "Remove %1 tracks"
 msgstr[0] "Poista raita"
 msgstr[1] "Poista raita"
 
-#: src/main.qml:398
+#: src/main.qml:397
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "Haluatko varmasti poistaa nämä tiedostot? Toimintoa ei voi kumota."
 
-#: src/main.qml:541 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr ""
 
-#: src/main.qml:550 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: src/main.qml:557
+#: src/main.qml:556
 #, kde-format
 msgid "Settings"
 msgstr "Asetukset"
 
-#: src/main.qml:564
+#: src/main.qml:563
 #, kde-format
 msgid "About"
 msgstr "Tietoa"
 
-#: src/main.qml:597
+#: src/main.qml:596
 #, kde-format
 msgid "Songs"
 msgstr "Kappaleet"
 
-#: src/main.qml:616 src/widgets/AlbumsView.qml:76
+#: src/main.qml:615 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumit"
 
-#: src/main.qml:623
+#: src/main.qml:622
 #, kde-format
 msgid "No Albums!"
 msgstr "Ei albumeja!"
 
-#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:21
+#: src/main.qml:623 src/main.qml:647 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
 msgstr "Lisää uusia musiikkilähteitä"
 
-#: src/main.qml:640 src/widgets/AlbumsView.qml:76
+#: src/main.qml:639 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistit"
 
-#: src/main.qml:647
+#: src/main.qml:646
 #, kde-format
 msgid "No Artists!"
 msgstr "Ei artisteja!"
 
-#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:663 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Luokitukset"
 
-#: src/main.qml:672
+#: src/main.qml:671
 #, kde-format
 msgid "Folders"
 msgstr "Kansiot"
 
-#: src/main.qml:680
+#: src/main.qml:679
 #, kde-format
 msgid "Cloud"
 msgstr "Pilvi"
@@ -523,47 +523,37 @@ msgstr "Kohdistusnäkymä"
 msgid "Make the focus view the default."
 msgstr "Asettaa kohdistusnäkymän oletukseksi."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
-#, kde-format
-msgid "Dark Mode"
-msgstr "Tumma tila"
-
-#: src/widgets/SettingsView/SettingsDialog.qml:141
-#, kde-format
-msgid "Switch between light and dark colorscheme."
-msgstr "Vaihda vaalean ja tumman värimallin välillä."
-
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
 msgid "Artwork"
 msgstr "Kansikuva"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:158
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Näitä kappaleille kansikuva."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:155
 #, kde-format
 msgid "Titles"
 msgstr "Otsikot"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:174
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Näytä ruudukkonäkymässä albumien nimet ja artistit."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:190
+#: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
 msgid "Sources"
 msgstr "Lähteet"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:228
+#: src/widgets/SettingsView/SettingsDialog.qml:210
 #, kde-format
 msgid "Add"
 msgstr "Lisää"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:245
+#: src/widgets/SettingsView/SettingsDialog.qml:227
 #, kde-format
 msgid "Scan now"
 msgstr "Tarkista nyt"
@@ -620,6 +610,12 @@ msgstr "Hyväksy"
 #, kde-format
 msgid "Open file"
 msgstr "Avaa tiedosto"
+
+#~ msgid "Dark Mode"
+#~ msgstr "Tumma tila"
+
+#~ msgid "Switch between light and dark colorscheme."
+#~ msgstr "Vaihda vaalean ja tumman värimallin välillä."
 
 #~ msgid "© 2019-2023 Maui Development Team"
 #~ msgstr "© 2019–2023 Maui-kehitysryhmä"
