@@ -599,9 +599,3 @@ msgstr "Přijmout"
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "Dark Mode"
-#~ msgstr "Tmavý režim"
-
-#~ msgid "Switch between light and dark colorscheme."
-#~ msgstr "Přepínač mezi světlým a tmavým barevným schématem."
