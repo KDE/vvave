@@ -129,6 +129,7 @@ Maui.PopupPage
 
     CheckBox
     {
+        enabled: control.option !== "none"
         Layout.fillWidth: true
         text: i18n("Close application after sleeping")
         onToggled: closeAfterSleep = checked
