@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-13 01:40+0000\n"
+"POT-Creation-Date: 2024-02-17 01:39+0000\n"
 "PO-Revision-Date: 2024-02-05 19:52+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -190,7 +190,7 @@ msgstr "컴퓨터에서 파일을 삭제하시겠습니까? 실행 취소할 수
 msgid "Remove"
 msgstr "삭제"
 
-#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:141
+#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:142
 #, kde-format
 msgid "Cancel"
 msgstr "취소"
@@ -583,12 +583,12 @@ msgstr "재생 목록의 끝"
 msgid "Off"
 msgstr "끄기"
 
-#: src/widgets/SleepTimerDialog.qml:133
+#: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after sleeping"
 msgstr "수면 타이머 이후 앱 끝내기"
 
-#: src/widgets/SleepTimerDialog.qml:147
+#: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
 msgid "Accept"
 msgstr "수락"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-13 01:40+0000\n"
+"POT-Creation-Date: 2024-02-17 01:39+0000\n"
 "PO-Revision-Date: 2024-02-04 12:55+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -194,7 +194,7 @@ msgstr ""
 msgid "Remove"
 msgstr "Eliminar"
 
-#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:141
+#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:142
 #, kde-format
 msgid "Cancel"
 msgstr "Cancelar"
@@ -590,12 +590,12 @@ msgstr "Fin da lista de reprodución"
 msgid "Off"
 msgstr "Desactivada"
 
-#: src/widgets/SleepTimerDialog.qml:133
+#: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after sleeping"
 msgstr "Pechar a aplicación tras durmir"
 
-#: src/widgets/SleepTimerDialog.qml:147
+#: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
 msgid "Accept"
 msgstr "Aceptar"

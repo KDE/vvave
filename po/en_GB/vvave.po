@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-13 01:40+0000\n"
+"POT-Creation-Date: 2024-02-17 01:39+0000\n"
 "PO-Revision-Date: 2023-05-21 14:59+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -196,7 +196,7 @@ msgstr ""
 msgid "Remove"
 msgstr "Remove"
 
-#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:141
+#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:142
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel"
@@ -599,12 +599,12 @@ msgstr "Recent playlists"
 msgid "Off"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:133
+#: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after sleeping"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:147
+#: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
 msgid "Accept"
 msgstr "Accept"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-13 01:40+0000\n"
+"POT-Creation-Date: 2024-02-17 01:39+0000\n"
 "PO-Revision-Date: 2024-02-05 18:24+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -190,7 +190,7 @@ msgstr "您確定要從您的電腦上移除這個檔案嗎？這個動作無法
 msgid "Remove"
 msgstr "移除"
 
-#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:141
+#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:142
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
@@ -583,12 +583,12 @@ msgstr "播放清單尾端"
 msgid "Off"
 msgstr "關閉"
 
-#: src/widgets/SleepTimerDialog.qml:133
+#: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after sleeping"
 msgstr "睡著後關閉應用程式"
 
-#: src/widgets/SleepTimerDialog.qml:147
+#: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
 msgid "Accept"
 msgstr "接受"
