@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# Tommi Nieminen <translator@legisign.org>, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-17 01:39+0000\n"
-"PO-Revision-Date: 2023-11-30 15:01+0200\n"
+"PO-Revision-Date: 2024-02-14 20:14+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -33,12 +33,11 @@ msgid "Missing file"
 msgstr "Puuttuva tiedosto"
 
 #: src/main.qml:396 src/widgets/BabeTable/BabeTable.qml:147
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Poista raita"
-msgstr[1] "Poista raita"
+msgstr[1] "Poista %1 raitaa"
 
 #: src/main.qml:397
 #, kde-format
@@ -49,7 +48,7 @@ msgstr "Haluatko varmasti poistaa nämä tiedostot? Toimintoa ei voi kumota."
 #: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr ""
+msgstr "Uniajastin"
 
 #: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
@@ -167,7 +166,7 @@ msgstr[1] "Suodata %1 albumia"
 #: src/widgets/BabeTable/BabeTable.qml:72
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "Sekoita soittolista"
 
 #: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -409,10 +408,9 @@ msgid "Start creating new custom playlists"
 msgstr "Ala luoda uusia mukautettuja soittolistoja"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-#| msgid "Remove '%1'"
+#, kde-format
 msgid "Remove '%1'?"
-msgstr "Poista ”%1”"
+msgstr "Poistetaanko ”%1”?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
@@ -567,39 +565,37 @@ msgstr "Tuntematon"
 #: src/widgets/SleepTimerDialog.qml:31
 #, kde-format
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minuuttia"
 
 #: src/widgets/SleepTimerDialog.qml:47
 #, kde-format
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minuuttia"
 
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
 msgid "1 hour"
-msgstr ""
+msgstr "1 tunti"
 
 #: src/widgets/SleepTimerDialog.qml:79
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "Satunnaiset raidat"
+msgstr "Raidan loppu"
 
 #: src/widgets/SleepTimerDialog.qml:95
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "End of playlist"
-msgstr "Ei soittolistoja!"
+msgstr "Soittolistan loppu"
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Ei käytössä"
 
 #: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after sleeping"
-msgstr ""
+msgstr "Sulje sovellus valmiustilan jälkeen"
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
