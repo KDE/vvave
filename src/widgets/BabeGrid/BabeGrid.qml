@@ -209,26 +209,26 @@ Maui.AltBrowser
             {
                 active: !Maui.Handy.isMobile
                 asynchronous: true
-parent: _template.iconContainer
-                anchors.centerIn: parent                
-            sourceComponent: ToolButton
-            {                
-                icon.name: "media-playback-start"
-                icon.color: "white"
-                icon.height: 32
-                icon.width: 32
-                padding: Maui.Style.space.big
-                visible: _template.hovered
-
-                onClicked: control.playAll(model.album, model.artist)
-
-                background: Rectangle
+                parent: _template.iconContainer
+                anchors.centerIn: parent
+                sourceComponent: ToolButton
                 {
-                    color: "black"
-                    radius: height
-                    opacity: hovered ? 0.8 : 0.5
+                    icon.name: "media-playback-start"
+                    icon.color: "white"
+                    icon.height: 32
+                    icon.width: 32
+                    padding: Maui.Style.space.big
+                    visible: _template.hovered
+
+                    onClicked: control.playAll(model.album, model.artist)
+
+                    background: Rectangle
+                    {
+                        color: "black"
+                        radius: height
+                        opacity: hovered ? 0.8 : 0.5
+                    }
                 }
-            }
             }
         }
     }
@@ -237,5 +237,5 @@ parent: _template.iconContainer
     {
         return _filterLoader.item
     }
-}
+    }
 

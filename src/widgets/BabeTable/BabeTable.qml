@@ -333,7 +333,7 @@ Maui.Page
                 appendTrack(index)
             }
 
-            onClicked:
+            onClicked: (mouse) =>
             {
                 _listBrowser.forceActiveFocus()
                 currentIndex = index
