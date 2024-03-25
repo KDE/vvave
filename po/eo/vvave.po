@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-17 01:39+0000\n"
-"PO-Revision-Date: 2024-02-26 21:30+0100\n"
+"PO-Revision-Date: 2024-03-24 10:34+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo.org>\n"
 "Language: eo\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: src/main.cpp:104
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr ""
+msgstr "Organizu kaj aŭskultu vian muzikon."
 
 #: src/main.cpp:109 src/main.cpp:110
 #, kde-format
@@ -31,7 +31,7 @@ msgstr "Ellaboranto"
 #: src/main.qml:308
 #, kde-format
 msgid "Missing file"
-msgstr ""
+msgstr "Mankas dosiero"
 
 #: src/main.qml:396 src/widgets/BabeTable/BabeTable.qml:147
 #, kde-format
@@ -79,12 +79,12 @@ msgstr "Albumoj"
 #: src/main.qml:622
 #, kde-format
 msgid "No Albums!"
-msgstr ""
+msgstr "Neniuj Albumoj!"
 
 #: src/main.qml:623 src/main.qml:647 src/widgets/TracksView.qml:21
 #, kde-format
 msgid "Add new music sources"
-msgstr ""
+msgstr "Aldonu novajn muzikfontojn"
 
 #: src/main.qml:639 src/widgets/AlbumsView.qml:76
 #, kde-format
@@ -94,7 +94,7 @@ msgstr "Artistoj"
 #: src/main.qml:646
 #, kde-format
 msgid "No Artists!"
-msgstr ""
+msgstr "Neniuj Artistoj!"
 
 #: src/main.qml:663 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
@@ -115,7 +115,7 @@ msgstr "Nubo"
 #: src/models/playlists/playlistsmodel.cpp:110
 #, kde-format
 msgid "Most Played"
-msgstr ""
+msgstr "Plej Ludita"
 
 #: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
@@ -125,17 +125,17 @@ msgstr "Hazardaj Trakoj"
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
 msgid "Recent Tracks"
-msgstr ""
+msgstr "Lastatempaj Trakoj"
 
 #: src/models/playlists/playlistsmodel.cpp:131
 #, kde-format
 msgid "Never Played"
-msgstr ""
+msgstr "Neniam Ludita"
 
 #: src/models/playlists/playlistsmodel.cpp:138
 #, kde-format
 msgid "Classic Tracks"
-msgstr ""
+msgstr "Klasikaj Trakoj"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
@@ -148,12 +148,12 @@ msgstr "Ludante muzikon"
 #: src/widgets/TracksView.qml:26
 #, kde-format
 msgid "Add sources"
-msgstr ""
+msgstr "Aldoni fontojn"
 
 #: src/widgets/AlbumsView.qml:70
 #, kde-format
 msgid "This list is empty"
-msgstr ""
+msgstr "Ĉi tiu listo estas malplena"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:106
 #: src/widgets/CloudView/CloudView.qml:24
@@ -167,7 +167,7 @@ msgstr[1] ""
 #: src/widgets/BabeTable/BabeTable.qml:72
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "Miŝu Ludon"
 
 #: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -177,7 +177,7 @@ msgstr "Ludi Ĉion"
 #: src/widgets/BabeTable/BabeTable.qml:86 src/widgets/TracksGroup.qml:54
 #, kde-format
 msgid "Append All"
-msgstr ""
+msgstr "Aldonu Ĉion"
 
 #: src/widgets/BabeTable/BabeTable.qml:148
 #, kde-format
@@ -201,22 +201,22 @@ msgstr "Nuligi"
 #: src/widgets/BabeTable/BabeTable.qml:180 src/widgets/TracksGroup.qml:67
 #, kde-format
 msgid "Go to Artist"
-msgstr ""
+msgstr "Iru al Artisto"
 
 #: src/widgets/BabeTable/BabeTable.qml:187 src/widgets/TracksGroup.qml:74
 #, kde-format
 msgid "Go to Album"
-msgstr ""
+msgstr "Iru al Albumo"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "Fav it"
-msgstr ""
+msgstr "Fav ĝin"
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "UnFav it"
-msgstr ""
+msgstr "MalFavi ĝin"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
@@ -242,7 +242,7 @@ msgstr "Ludi Sekvantan"
 #: src/widgets/BabeTable/TableMenu.qml:109
 #, kde-format
 msgid "Show in Folder"
-msgstr ""
+msgstr "Montri en Dosierujo"
 
 #: src/widgets/BabeTable/TableMenu.qml:135
 #, kde-format
@@ -252,7 +252,7 @@ msgstr "Forigi"
 #: src/widgets/CloudView/CloudView.qml:39
 #, kde-format
 msgid "Opps!"
-msgstr ""
+msgstr "Ops!"
 
 #: src/widgets/CloudView/CloudView.qml:40
 #, kde-format
@@ -270,17 +270,17 @@ msgstr "Trovi"
 #: src/widgets/FocusView.qml:189
 #, kde-format
 msgid "No Results!"
-msgstr ""
+msgstr "Neniuj Rezultoj!"
 
 #: src/widgets/FocusView.qml:190
 #, kde-format
 msgid "Try with something else"
-msgstr ""
+msgstr "Provu per io alia"
 
 #: src/widgets/FocusView.qml:229 src/widgets/MainPlaylist/MainPlaylist.qml:80
 #, kde-format
 msgid "Start putting together your playlist."
-msgstr ""
+msgstr "Komencu kunmeti vian ludliston."
 
 #: src/widgets/FoldersView/FoldersView.qml:32
 #, kde-format
@@ -292,37 +292,37 @@ msgstr[1] ""
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
 msgid "No Folders!"
-msgstr ""
+msgstr "Neniuj Dosierujoj!"
 
 #: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
-msgstr ""
+msgstr "Aldonu novan muzikon al viaj fontoj por foliumi per dosierujoj"
 
 #: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "No Tracks!"
-msgstr ""
+msgstr "Neniuj Spuroj!"
 
 #: src/widgets/FoldersView/FoldersView.qml:135
 #, kde-format
 msgid "This source folder seems to be empty!"
-msgstr ""
+msgstr "Ĉi tiu fonta dosierujo ŝajnas esti malplena!"
 
 #: src/widgets/InfoView/InfoView.qml:34
 #, kde-format
 msgid "Artist Info"
-msgstr ""
+msgstr "Artista Informo"
 
 #: src/widgets/InfoView/InfoView.qml:62
 #, kde-format
 msgid "Album Info"
-msgstr ""
+msgstr "Albumaj Informoj"
 
 #: src/widgets/MainPlaylist/MainPlaylist.qml:134
 #, kde-format
 msgid "Syncing to "
-msgstr ""
+msgstr "Sinkronigante al"
 
 #: src/widgets/MetadataDialog.qml:42
 #, kde-format
@@ -332,7 +332,7 @@ msgstr "Metadatenoj"
 #: src/widgets/MetadataDialog.qml:43
 #, kde-format
 msgid "Embedded metadata info."
-msgstr ""
+msgstr "Informitaj metadatenoj."
 
 #: src/widgets/MetadataDialog.qml:47
 #, kde-format
@@ -377,7 +377,7 @@ msgstr "Baskuligi Flankbaron"
 #: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
-msgstr ""
+msgstr "Ludu kaj paŭzu"
 
 #: src/widgets/PlaybackBar.qml:66
 #, kde-format
@@ -387,7 +387,7 @@ msgstr "Sekva"
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr ""
+msgstr "Via ludlisto estas malplena. Komencu aldoni novan muzikon al ĝi"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
@@ -397,17 +397,17 @@ msgstr "Forigi el ludlisto"
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
 #, kde-format
 msgid "No Playlists!"
-msgstr ""
+msgstr "Neniuj Ludlistoj!"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
 #, kde-format
 msgid "Start creating new custom playlists"
-msgstr ""
+msgstr "Komencu krei novajn proprajn ludlistojn"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Remove '%1'?"
-msgstr ""
+msgstr "Ĉu forigi '%1'?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
@@ -450,12 +450,12 @@ msgstr "Reproduktado"
 #: src/widgets/SettingsView/SettingsDialog.qml:59
 #, kde-format
 msgid "Auto Resume"
-msgstr ""
+msgstr "Aŭtomata Rekomenco"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "Rekomencu la lastan sean ludliston."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:72
 #, kde-format
@@ -465,7 +465,7 @@ msgstr "Laŭteco"
 #: src/widgets/SettingsView/SettingsDialog.qml:73
 #, kde-format
 msgid "Show volume controls."
-msgstr ""
+msgstr "Montru laŭtecajn regilojn."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
@@ -475,7 +475,7 @@ msgstr "Kolekto"
 #: src/widgets/SettingsView/SettingsDialog.qml:91
 #, kde-format
 msgid "Fetch Artwork"
-msgstr ""
+msgstr "Prenu Artaĵojn"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:92
 #, kde-format
@@ -487,7 +487,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:104
 #, kde-format
 msgid "Auto Scan"
-msgstr ""
+msgstr "Aŭtomata Skanado"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
@@ -503,12 +503,12 @@ msgstr "Ĝenerala"
 #: src/widgets/SettingsView/SettingsDialog.qml:123
 #, kde-format
 msgid "Focus View"
-msgstr ""
+msgstr "Fokusa Vido"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Make the focus view the default."
-msgstr ""
+msgstr "Faru la fokusan vidon la defaŭltan."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:139
 #, kde-format
@@ -518,7 +518,7 @@ msgstr "Artaĵoj"
 #: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr ""
+msgstr "Montru la kovrilan arton por la spuroj."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:155
 #, kde-format
@@ -528,7 +528,7 @@ msgstr "Titoloj"
 #: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Montru la titolon de albumoj kaj artistoj en la kradvido."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:172
 #, kde-format
@@ -543,7 +543,7 @@ msgstr "Aldoni"
 #: src/widgets/SettingsView/SettingsDialog.qml:227
 #, kde-format
 msgid "Scan now"
-msgstr ""
+msgstr "Skani nun"
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:26
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
@@ -569,12 +569,12 @@ msgstr "1 horo"
 #: src/widgets/SleepTimerDialog.qml:79
 #, kde-format
 msgid "End of track"
-msgstr ""
+msgstr "Fino de trako"
 
 #: src/widgets/SleepTimerDialog.qml:95
 #, kde-format
 msgid "End of playlist"
-msgstr ""
+msgstr "Fino de ludlisto"
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
@@ -584,7 +584,7 @@ msgstr "Malŝaltita"
 #: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after sleeping"
-msgstr ""
+msgstr "Fermu la aplikon post dormo"
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
