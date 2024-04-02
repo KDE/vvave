@@ -38,7 +38,7 @@ void TrackInfo::setTrack(QVariantMap track)
         return;
 
     m_track = track;
-    emit trackChanged(m_track);
+    Q_EMIT trackChanged(m_track);
 }
 
 void TrackInfo::getInfo()
@@ -83,7 +83,7 @@ void TrackInfo::getAlbumInfo()
         for (const auto &res : responses) {
             if (res.context == PULPO::PULPO_CONTEXT::WIKI) {
                 m_albumWiki = res.value.toString();
-                emit this->albumWikiChanged(m_albumWiki);
+                Q_EMIT this->albumWikiChanged(m_albumWiki);
             }
         }
     };
@@ -110,7 +110,7 @@ void TrackInfo::getArtistInfo()
         for (const auto &res : responses) {
             if (res.context == PULPO::PULPO_CONTEXT::WIKI) {
                 m_artistWiki = res.value.toString();
-                emit this->artistWikiChanged(m_artistWiki);
+                Q_EMIT this->artistWikiChanged(m_artistWiki);
             }
         }
     };
@@ -137,7 +137,7 @@ void TrackInfo::getTrackInfo()
         for (const auto &res : responses) {
             if (res.context == PULPO::PULPO_CONTEXT::LYRIC) {
                 m_lyrics = res.value.toString();
-                emit this->lyricsChanged(m_lyrics);
+                Q_EMIT this->lyricsChanged(m_lyrics);
             }
         }
     };

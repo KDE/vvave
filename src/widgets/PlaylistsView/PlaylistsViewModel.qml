@@ -1,10 +1,9 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.mauikit.controls 1.3 as Maui
-
-import org.maui.vvave 1.0 as Vvave
+import org.mauikit.controls  as Maui
+import org.maui.vvave as Vvave
 
 Maui.AltBrowser
 {
@@ -149,7 +148,7 @@ Maui.AltBrowser
 
         onPressAndHold: tryOpenContextMenu()
 
-        function tryOpenContextMenu() : undefined
+        function tryOpenContextMenu()
         {
             control.currentIndex = index
             currentPlaylist = model.key
@@ -202,7 +201,7 @@ Maui.AltBrowser
 
         }
 
-        function tryOpenContextMenu() : undefined
+        function tryOpenContextMenu()
         {
             control.currentIndex = index
             currentPlaylist = model.key

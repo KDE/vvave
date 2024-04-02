@@ -3,10 +3,10 @@
 
 #include <QDateTime>
 
-#include <MauiKit3/FileBrowsing/fmstatic.h>
-#include <MauiKit3/FileBrowsing/tagging.h>
+#include <MauiKit4/FileBrowsing/fmstatic.h>
+#include <MauiKit4/FileBrowsing/tagging.h>
 
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 
 PlaylistsModel::PlaylistsModel(QObject *parent)
     : MauiList(parent)
@@ -17,7 +17,7 @@ PlaylistsModel::PlaylistsModel(QObject *parent)
         Q_EMIT this->postItemAppended();
     });
 
-    connect(Tagging::getInstance(), &Tagging::urlTagged, [this](QUrl, QString tag) {
+    connect(Tagging::getInstance(), &Tagging::urlTagged, [this](QString, QString tag) {
         const auto index = this->indexOf(FMH::MODEL_KEY::PLAYLIST, tag);
         auto item = this->list[index];
         item[FMH::MODEL_KEY::PREVIEW] = playlistArtworkPreviews(tag);

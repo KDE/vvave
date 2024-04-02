@@ -3,6 +3,7 @@
 #include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+ #include <QByteArrayView>
 
 using namespace PULPO;
 
@@ -62,11 +63,11 @@ void spotify::set(const PULPO::REQUEST &request)
 
     auto credentials = this->CLIENT_ID + ":" + this->CLIENT_SECRET;
     auto auth = credentials.toLocal8Bit().toBase64();
-    QString header = "Basic " + auth;
+    auto header = QByteArrayView("Basic ") + QByteArrayView(auth);
 
     auto sp_request = QNetworkRequest(QUrl("https://accounts.spotify.com/api/token"));
     sp_request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-    sp_request.setRawHeader("Authorization", header.toLocal8Bit());
+    sp_request.setRawHeader("Authorization", header);
 
     static QNetworkAccessManager *manager = new QNetworkAccessManager;
     QNetworkReply *reply = manager->post(sp_request, "grant_type=client_credentials");
@@ -135,7 +136,7 @@ void spotify::parseArtist(const QByteArray &array)
         this->responses << PULPO::RESPONSE{PULPO_CONTEXT::IMAGE, albumArt_url};
     }
 
-    emit this->responseReady(this->request, this->responses);
+    Q_EMIT this->responseReady(this->request, this->responses);
 }
 
 void spotify::parseAlbum(const QByteArray &array)
@@ -169,7 +170,7 @@ void spotify::parseAlbum(const QByteArray &array)
         this->responses << PULPO::RESPONSE{PULPO_CONTEXT::IMAGE, albumArt_url};
     }
 
-    emit this->responseReady(this->request, this->responses);
+    Q_EMIT this->responseReady(this->request, this->responses);
 }
 
 void spotify::parseTrack(const QByteArray &array)
@@ -227,5 +228,5 @@ void spotify::parseTrack(const QByteArray &array)
             continue;
     }
 
-    emit this->responseReady(this->request, this->responses);
+    Q_EMIT this->responseReady(this->request, this->responses);
 }

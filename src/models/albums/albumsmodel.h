@@ -2,7 +2,7 @@
 #include <QObject>
 #include <QThread>
 
-#include <MauiKit3/Core/mauilist.h>
+#include <MauiKit4/Core/mauilist.h>
 
 class AlbumsModel : public MauiList
 {

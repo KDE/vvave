@@ -31,10 +31,10 @@ void Service::retrieve(const QString &url, const QMap<QString, QString> &headers
     if (!url.isEmpty()) {
         auto downloader = new FMH::Downloader;
         connect(downloader, &FMH::Downloader::dataReady, [this, downloader](QByteArray array) {
-            emit this->arrayReady(array);
+            Q_EMIT this->arrayReady(array);
             downloader->deleteLater();
         });
-        downloader->getArray(url, headers);
+        downloader->getArray(QUrl(url), headers);
     }
 }
 

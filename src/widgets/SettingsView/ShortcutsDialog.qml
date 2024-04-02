@@ -1,10 +1,10 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.mauikit.controls 1.3 as Maui
+import org.mauikit.controls as Maui
 
-import org.maui.vvave 1.0
+import org.maui.vvave
 
 Maui.PopupPage
 {
@@ -24,7 +24,7 @@ Maui.PopupPage
         Maui.SectionGroup
         {
             title: i18n("Unknown")
-            function setTitle(rawtext: string) : undefined
+            function setTitle(rawtext: string)
             {
                 this.title = i18n(rawtext)
             }
@@ -45,12 +45,12 @@ Maui.PopupPage
                 autoExclusive: false
             }
 
-            function setText(rawtext: string) : undefined
+            function setText(rawtext: string)
             {
                 this.label1.text = i18n(rawtext)
             }
 
-            function addKeys(keynames: array<string>) : undefined
+            function addKeys(keynames)
             {
                 for (let name of keynames) {
                     _actions.actions.push(

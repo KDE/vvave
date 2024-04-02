@@ -1,5 +1,5 @@
 #include "foldersmodel.h"
-#include <MauiKit3/FileBrowsing/fmstatic.h>
+#include <MauiKit4/FileBrowsing/fmstatic.h>
 
 FoldersModel::FoldersModel(QObject *parent) : MauiList(parent)
 {}

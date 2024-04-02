@@ -173,7 +173,7 @@ void lastfm::parseArtist(const QByteArray &array)
     //            this->parseSimilar();
     //    }
 
-    emit this->responseReady(this->request, this->responses);
+    Q_EMIT this->responseReady(this->request, this->responses);
 }
 
 void lastfm::parseAlbum(const QByteArray &array)
@@ -256,7 +256,7 @@ void lastfm::parseAlbum(const QByteArray &array)
         }
     }
 
-    emit this->responseReady(this->request, this->responses);
+    Q_EMIT this->responseReady(this->request, this->responses);
 }
 
 // void lastfm::parseTrack(const QByteArray &array)

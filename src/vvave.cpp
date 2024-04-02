@@ -3,8 +3,8 @@
 #include "db/collectionDB.h"
 #include "services/local/taginfo.h"
 
-#include <MauiKit3/FileBrowsing/fileloader.h>
-#include <MauiKit3/FileBrowsing/fm.h>
+#include <MauiKit4/FileBrowsing/fileloader.h>
+#include <MauiKit4/FileBrowsing/fm.h>
 
 #include <QSettings>
 
@@ -128,7 +128,7 @@ bool vvave::removeSource(const QString &source)
     Q_EMIT sourcesChanged();
 
     if (CollectionDB::getInstance()->removeSource(source)) {
-        Q_EMIT this->sourceRemoved(source);
+        Q_EMIT this->sourceRemoved(QUrl(source));
         return true;
     }
 
@@ -173,7 +173,7 @@ QStringList vvave::sources()
 QVariantList vvave::sourcesModel()
 {
     QVariantList res;
-    const auto urls = sources();
+    const auto urls = QUrl::fromStringList(sources());
     for (const auto &url : urls)
     {
         if(FMStatic::fileExists(url))

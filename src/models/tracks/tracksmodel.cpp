@@ -4,8 +4,8 @@
 #include "vvave.h"
 #include "services/local/metadataeditor.h"
 
-#include <MauiKit3/FileBrowsing/fmstatic.h>
-#include <MauiKit3/FileBrowsing/tagging.h>
+#include <MauiKit4/FileBrowsing/fmstatic.h>
+#include <MauiKit4/FileBrowsing/tagging.h>
 
 #include <QTimer>
 
@@ -127,7 +127,7 @@ bool TracksModel::insertUrl(const QString &url, const int &index)
         return appendAt(FMH::toMap(item.first()), index);
     } else
     {
-        return appendAt(FMH::toMap(vvave::trackInfo(url)), index);
+        return appendAt(FMH::toMap(vvave::trackInfo(QUrl(url))), index);
     }
 }
 
@@ -155,7 +155,7 @@ bool TracksModel::insertUrls(const QStringList &urls, const int &index)
 
 bool TracksModel::appendUrls(const QStringList &urls)
 {
-    for(const auto &url : urls)
+    for(const auto &url : QUrl::fromStringList(urls))
     {
         this->appendUrl(url);
     }
@@ -217,9 +217,9 @@ bool TracksModel::fav(const int &index, const bool &value)
     auto item = this->list[index];
 
     if (value)
-        Tagging::getInstance()->fav(item[FMH::MODEL_KEY::URL]);
+        Tagging::getInstance()->fav(QUrl(item[FMH::MODEL_KEY::URL]));
     else
-        Tagging::getInstance()->unFav(item[FMH::MODEL_KEY::URL]);
+        Tagging::getInstance()->unFav(QUrl(item[FMH::MODEL_KEY::URL]));
 
     return true;
 }
@@ -308,7 +308,7 @@ void TracksModel::updateMetadata(const QVariantMap &data, const int &index)
     auto model = FMH::toModel(data);
 
     MetadataEditor editor;
-    editor.setUrl(model[FMH::MODEL_KEY::URL]);
+    editor.setUrl(QUrl(model[FMH::MODEL_KEY::URL]));
 
     editor.setTitle(model[FMH::MODEL_KEY::TITLE]);
     editor.setArtist(model[FMH::MODEL_KEY::ARTIST]);

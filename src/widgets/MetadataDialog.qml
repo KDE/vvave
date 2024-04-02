@@ -1,9 +1,8 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.mauikit.controls 1.3 as Maui
-import QtQuick.Templates 2.15 as T
+import org.mauikit.controls as Maui
 
 Maui.InfoDialog
 {
@@ -45,7 +44,7 @@ Maui.InfoDialog
         Maui.SectionItem
         {
             label1.text: i18n("Track Title")
-            columns: 1
+
             TextField
             {
                 id: _titleField
@@ -57,7 +56,6 @@ Maui.InfoDialog
         Maui.SectionItem
         {
             label1.text: i18n("Artist")
-            columns: 1
 
             TextField
             {
@@ -70,8 +68,6 @@ Maui.InfoDialog
 
         Maui.SectionItem
         {
-            columns: 1
-
             label1.text: i18n("Album")
 
             TextField
@@ -85,8 +81,6 @@ Maui.InfoDialog
 
         Maui.SectionItem
         {
-            columns: 1
-
             label1.text: i18n("Track")
 
             TextField
@@ -100,8 +94,6 @@ Maui.InfoDialog
 
         Maui.SectionItem
         {
-            columns: 1
-
             label1.text: i18n("Genre")
 
             TextField
@@ -115,8 +107,6 @@ Maui.InfoDialog
 
         Maui.SectionItem
         {
-            columns: 1
-
             label1.text: i18n("Year")
 
             TextField
@@ -130,8 +120,6 @@ Maui.InfoDialog
 
         Maui.SectionItem
         {
-            columns: 1
-
             label1.text: i18n("Comment")
 
             TextField

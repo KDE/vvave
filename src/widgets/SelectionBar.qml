@@ -1,10 +1,10 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.10
+import QtQuick
+import QtQuick.Controls
+
+import org.mauikit.controls as Maui
 
 import "../utils/Player.js" as Player
 import "BabeTable"
-
-import org.mauikit.controls 1.2 as Maui
 
 Maui.SelectionBar
 {

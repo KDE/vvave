@@ -8,7 +8,7 @@
 
 #include "mediaplayer2.h"
 
-#include <KCoreAddons/KAboutData>
+#include <KAboutData>
 #include <QCoreApplication>
 
 MediaPlayer2::MediaPlayer2(QObject *parent)
@@ -39,7 +39,7 @@ void MediaPlayer2::Quit()
 
 void MediaPlayer2::Raise()
 {
-    emit raisePlayer();
+    Q_EMIT raisePlayer();
 }
 
 QString MediaPlayer2::Identity() const

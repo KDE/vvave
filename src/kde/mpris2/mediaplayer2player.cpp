@@ -96,7 +96,7 @@ bool MediaPlayer2Player::CanGoNext() const
 
 void MediaPlayer2Player::Next()
 {
-    emit next();
+    Q_EMIT next();
 
     if (m_playListControler) {
         m_playListControler->next();
@@ -110,7 +110,7 @@ bool MediaPlayer2Player::CanGoPrevious() const
 
 void MediaPlayer2Player::Previous()
 {
-    emit previous();
+    Q_EMIT previous();
 
     if (m_playListControler) {
         m_playListControler->previous();
@@ -131,7 +131,7 @@ void MediaPlayer2Player::Pause()
 
 void MediaPlayer2Player::PlayPause()
 {
-    emit playPause();
+    Q_EMIT playPause();
 
     if (m_playListControler) {
         m_audioPlayer->pause();
@@ -140,7 +140,7 @@ void MediaPlayer2Player::PlayPause()
 
 void MediaPlayer2Player::Stop()
 {
-    emit stop();
+    Q_EMIT stop();
 
     if (m_playListControler) {
         m_audioPlayer->stop();
@@ -167,7 +167,7 @@ double MediaPlayer2Player::Volume() const
 void MediaPlayer2Player::setVolume(double volume)
 {
     m_volume = qBound(0.0, volume, 1.0);
-    emit volumeChanged(m_volume);
+    Q_EMIT volumeChanged(m_volume);
 
     m_audioPlayer->setVolume(100 * m_volume);
 
@@ -217,7 +217,7 @@ void MediaPlayer2Player::setRate(double newRate)
         Pause();
     } else {
         m_rate = qBound(MinimumRate(), newRate, MaximumRate());
-        emit rateChanged(m_rate);
+        Q_EMIT rateChanged(m_rate);
 
         signalPropertiesChange(QStringLiteral("Rate"), Rate());
     }
@@ -253,7 +253,7 @@ void MediaPlayer2Player::Seek(qlonglong Offset)
 
 void MediaPlayer2Player::emitSeeked(int pos)
 {
-    emit Seeked(qlonglong(pos) * 1000);
+    Q_EMIT Seeked(qlonglong(pos) * 1000);
 }
 
 void MediaPlayer2Player::SetPosition(const QDBusObjectPath &trackId, qlonglong pos)
@@ -288,8 +288,8 @@ void MediaPlayer2Player::playControlEnabledChanged()
     signalPropertiesChange(QStringLiteral("CanPause"), CanPause());
     signalPropertiesChange(QStringLiteral("CanPlay"), CanPlay());
 
-    emit canPauseChanged();
-    emit canPlayChanged();
+    Q_EMIT canPauseChanged();
+    Q_EMIT canPlayChanged();
 }
 
 void MediaPlayer2Player::skipBackwardControlEnabledChanged()
@@ -301,7 +301,7 @@ void MediaPlayer2Player::skipBackwardControlEnabledChanged()
     m_canGoPrevious = m_playListControler->canGoPrevious();
 
     signalPropertiesChange(QStringLiteral("CanGoPrevious"), CanGoPrevious());
-    emit canGoPreviousChanged();
+    Q_EMIT canGoPreviousChanged();
 }
 
 void MediaPlayer2Player::skipForwardControlEnabledChanged()
@@ -313,23 +313,23 @@ void MediaPlayer2Player::skipForwardControlEnabledChanged()
     m_canGoNext = m_playListControler->canGoNext();
 
     signalPropertiesChange(QStringLiteral("CanGoNext"), CanGoNext());
-    emit canGoNextChanged();
+    Q_EMIT canGoNextChanged();
 }
 
 void MediaPlayer2Player::playerPlaybackStateChanged()
 {
     signalPropertiesChange(QStringLiteral("PlaybackStatus"), PlaybackStatus());
-    emit playbackStatusChanged();
+    Q_EMIT playbackStatusChanged();
 
     playerIsSeekableChanged();
 }
 
 void MediaPlayer2Player::playerIsSeekableChanged()
 {
-    m_playerIsSeekableChanged = m_audioPlayer->getState() == QMediaPlayer::State::PausedState || m_audioPlayer->getState() == QMediaPlayer::State::PlayingState;
+    m_playerIsSeekableChanged = m_audioPlayer->getState() == QMediaPlayer::PlaybackState::PausedState || m_audioPlayer->getState() == QMediaPlayer::PlaybackState::PlayingState;
 
     signalPropertiesChange(QStringLiteral("CanSeek"), CanSeek());
-    emit canSeekChanged();
+    Q_EMIT canSeekChanged();
 }
 
 void MediaPlayer2Player::audioPositionChanged()
@@ -364,7 +364,7 @@ void MediaPlayer2Player::setCurrentTrack(int newTrackPosition)
     m_currentTrack = m_playListControler->currentTrack().value("url").toString();
     m_currentTrackId = QDBusObjectPath(QLatin1String("/org/maui/vvave/playlist/") + QString::number(newTrackPosition)).path();
 
-    emit currentTrackChanged();
+    Q_EMIT currentTrackChanged();
 
     m_metadata = getMetadataOfCurrentTrack();
     signalPropertiesChange(QStringLiteral("Metadata"), Metadata());
@@ -434,16 +434,16 @@ void MediaPlayer2Player::setMediaPlayerPresent(int status)
 {
     if (m_mediaPlayerPresent != status) {
         m_mediaPlayerPresent = status;
-        emit mediaPlayerPresentChanged();
+        Q_EMIT mediaPlayerPresentChanged();
 
         signalPropertiesChange(QStringLiteral("CanGoNext"), CanGoNext());
         signalPropertiesChange(QStringLiteral("CanGoPrevious"), CanGoPrevious());
         signalPropertiesChange(QStringLiteral("CanPause"), CanPause());
         signalPropertiesChange(QStringLiteral("CanPlay"), CanPlay());
-        emit canGoNextChanged();
-        emit canGoPreviousChanged();
-        emit canPauseChanged();
-        emit canPlayChanged();
+        Q_EMIT canGoNextChanged();
+        Q_EMIT canGoPreviousChanged();
+        Q_EMIT canPauseChanged();
+        Q_EMIT canPlayChanged();
     }
 }
 

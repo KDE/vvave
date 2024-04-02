@@ -6,8 +6,8 @@
 #include <QStandardPaths>
 #include <QString>
 
-#include <MauiKit3/Core/fmh.h>
-#include <MauiKit3/FileBrowsing/fmstatic.h>
+#include <MauiKit4/Core/fmh.h>
+#include <MauiKit4/FileBrowsing/fmstatic.h>
 
 namespace BAE
 {
@@ -117,7 +117,7 @@ static inline bool artworkCache(FMH::MODEL &track, const FMH::MODEL_KEY &type = 
         const auto fileName = QFileInfo(file.toLocalFile()).baseName();
         switch (type) {
         case FMH::MODEL_KEY::ALBUM: {
-            auto name = track[FMH::MODEL_KEY::ARTIST] + "_" + track[FMH::MODEL_KEY::ALBUM];
+            QString name = track[FMH::MODEL_KEY::ARTIST] + "_" + track[FMH::MODEL_KEY::ALBUM];
             fixArtworkImageFileName(name);
 
             if (fileName == name) {

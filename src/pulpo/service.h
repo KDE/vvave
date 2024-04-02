@@ -11,7 +11,7 @@
 
 #define ERROR(request)                                                                                                                                                                                                                         \
 {                                                                                                                                                                                                                                          \
-    emit this->error(request);                                                                                                                                                                                                             \
+    Q_EMIT this->error(request);                                                                                                                                                                                                             \
     return;                                                                                                                                                                                                                                \
     }
 

@@ -52,7 +52,7 @@ void MetadataEditor::setUrl(QUrl url)
         return;
 
     m_url = url;
-    emit urlChanged(m_url);
+    Q_EMIT urlChanged(m_url);
 }
 
 void MetadataEditor::setTitle(QString title)
@@ -62,7 +62,7 @@ void MetadataEditor::setTitle(QString title)
 
     m_title = title;
     m_tag->setTitle(m_title);
-    emit titleChanged(m_title);
+    Q_EMIT titleChanged(m_title);
 }
 
 void MetadataEditor::setArtist(QString artist)
@@ -72,7 +72,7 @@ void MetadataEditor::setArtist(QString artist)
 
     m_artist = artist;
     m_tag->setArtist(m_artist);
-    emit artistChanged(m_artist);
+    Q_EMIT artistChanged(m_artist);
 }
 
 void MetadataEditor::setAlbum(QString album)
@@ -82,7 +82,7 @@ void MetadataEditor::setAlbum(QString album)
 
     m_album = album;
     m_tag->setAlbum(m_album);
-    emit albumChanged(m_album);
+    Q_EMIT albumChanged(m_album);
 }
 
 void MetadataEditor::setTrack(int track)
@@ -92,7 +92,7 @@ void MetadataEditor::setTrack(int track)
 
     m_track = track;
     m_tag->setTrack(m_track);
-    emit trackChanged(m_track);
+    Q_EMIT trackChanged(m_track);
 }
 
 void MetadataEditor::setGenre(QString genre)
@@ -102,7 +102,7 @@ void MetadataEditor::setGenre(QString genre)
 
     m_genre = genre;
     m_tag->setGenre(m_genre);
-    emit genreChanged(m_genre);
+    Q_EMIT genreChanged(m_genre);
 }
 
 void MetadataEditor::setComment(QString comment)
@@ -112,7 +112,7 @@ void MetadataEditor::setComment(QString comment)
 
     m_comment = comment;
     m_tag->setComment(m_comment);
-    emit commentChanged(m_comment);
+    Q_EMIT commentChanged(m_comment);
 }
 
 void MetadataEditor::setYear(int year)
@@ -122,7 +122,7 @@ void MetadataEditor::setYear(int year)
 
     m_year = year;
     m_tag->setYear(m_year);
-    emit yearChanged(m_year);
+    Q_EMIT yearChanged(m_year);
 }
 
 void MetadataEditor::getData()
@@ -130,23 +130,23 @@ void MetadataEditor::getData()
     m_tag->setFile(this->m_url.toLocalFile());
 
     m_title = m_tag->getTitle();
-    emit this->titleChanged(m_title);
+    Q_EMIT this->titleChanged(m_title);
 
     m_artist = m_tag->getArtist();
-    emit this->artistChanged(m_artist);
+    Q_EMIT this->artistChanged(m_artist);
 
     m_album = m_tag->getAlbum();
-    emit this->albumChanged(m_album);
+    Q_EMIT this->albumChanged(m_album);
 
     m_genre = m_tag->getGenre();
-    emit this->genreChanged(m_genre);
+    Q_EMIT this->genreChanged(m_genre);
 
     m_track = m_tag->getTrack();
-    emit this->trackChanged(m_track);
+    Q_EMIT this->trackChanged(m_track);
 
     m_year = m_tag->getYear();
-    emit this->yearChanged(m_year);
+    Q_EMIT this->yearChanged(m_year);
 
     m_comment = m_tag->getComment();
-    emit this->commentChanged(m_comment);
+    Q_EMIT this->commentChanged(m_comment);
 }

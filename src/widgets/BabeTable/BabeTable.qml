@@ -1,11 +1,11 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.mauikit.controls 1.3 as Maui
-import org.mauikit.filebrowsing 1.3 as FB
+import org.mauikit.controls as Maui
+import org.mauikit.filebrowsing as FB
 
-import org.maui.vvave 1.0
+import org.maui.vvave
 
 import "../../utils/Player.js" as Player
 
@@ -272,7 +272,7 @@ Maui.Page
             isSection: true
             width: ListView.view.width
             //            iconSource: "view-media-artist"
-            label: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.Handy.formatDate(Date(section), "MM/dd/yyyy") : String(section)
+            text: control.listModel.sort === "adddate" || control.listModel.sort === "releasedate" ? Maui.Handy.formatDate(Date(section), "MM/dd/yyyy") : String(section)
 
         }
 
@@ -305,7 +305,7 @@ Maui.Page
 
             onRightClicked: tryOpenContextMenu()
 
-            function tryOpenContextMenu() : undefined
+            function tryOpenContextMenu()
             {
                 if (allowMenu) openItemMenu(index)
             }

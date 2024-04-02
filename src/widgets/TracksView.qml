@@ -1,15 +1,14 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Controls
 
-import org.mauikit.controls 1.3 as Maui
-import org.maui.vvave 1.0 as Vvave
+import org.mauikit.controls as Maui
+import org.maui.vvave as Vvave
 
 import "BabeTable"
 import "BabeGrid"
 
 import "../db/Queries.js" as Q
 import "../utils/Player.js" as Player
-
 
 BabeTable
 {

@@ -17,13 +17,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.mauikit.controls 1.3 as Maui
+import org.mauikit.controls as Maui
 
-import org.maui.vvave 1.0
+import org.maui.vvave
 
 Maui.SettingsDialog
 {
@@ -54,7 +54,7 @@ Maui.SettingsDialog
         title: i18n("Playback")
 //        description: i18n("Configure the playback behavior.")
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Auto Resume")
             label2.text: i18n("Resume the last session playlist.")
@@ -67,7 +67,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Volume")
             label2.text: i18n("Show volume controls.")
@@ -86,7 +86,7 @@ Maui.SettingsDialog
         title: i18n("Collection")
 //        description: i18n("Configure the app plugins and collection behavior.")
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Fetch Artwork")
             label2.text: i18n("Gathers album and artists artworks from online services: LastFM, Spotify, MusicBrainz, iTunes, Genius, and others.")
@@ -99,7 +99,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Auto Scan")
             label2.text: i18n("Scan all the music sources on startup to keep your collection up to date.")
@@ -118,7 +118,7 @@ Maui.SettingsDialog
         title: i18n("General")
 //        description: i18n("Configure the app plugins and collection behavior.")
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Focus View")
             label2.text: i18n("Make the focus view the default.")
@@ -134,7 +134,7 @@ Maui.SettingsDialog
             }
         }
         
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Artwork")
             label2.text: i18n("Show the cover artwork for the tracks.")
@@ -150,7 +150,7 @@ Maui.SettingsDialog
             }
         }
 
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Titles")
             label2.text: i18n("Show the title of albums and artists in the grid view.")
@@ -179,7 +179,6 @@ Maui.SettingsDialog
 
             Repeater
             {
-                Layout.minimumHeight: Math.min(500, contentHeight)
                 model: Vvave.sources
 
                 delegate: Maui.ListDelegate

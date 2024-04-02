@@ -1,14 +1,14 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Window 2.15
+import QtQuick
+import QtCore
 
-import Qt.labs.settings 1.0
+import QtQuick.Controls
+import QtQuick.Window
 
-import org.mauikit.controls 1.3 as Maui
-import org.mauikit.filebrowsing 1.3 as FB
-import org.mauikit.accounts 1.0 as MA
+import org.mauikit.controls as Maui
+import org.mauikit.filebrowsing  as FB
+import org.mauikit.accounts as MA
 
-import org.maui.vvave 1.0
+import org.maui.vvave
 
 import "widgets"
 import "widgets/PlaylistsView"
@@ -365,11 +365,11 @@ Maui.ApplicationWindow
         id: _dialogLoader
     }
 
-    Component
-    {
-        id: _fileDialogComponent
-        FB.FileDialog {}
-    }
+    // Component
+    // {
+    //     id: _fileDialogComponent
+    //     FB.FileDialog {}
+    // }
 
     Component
     {
@@ -396,26 +396,26 @@ Maui.ApplicationWindow
             title: i18np("Remove track", "Remove %1 tracks", urls.length)
             message: i18n("Are you sure you want to remove these files? This action can not be undone.")
 
-            onAccepted: close()
+            // onAccepted: close()
 
-            onRejected:
-            {
-                FB.FM.removeFiles(_removeDialog.urls)
-                close()
-            }
+            // onRejected:
+            // {
+            //     FB.FM.removeFiles(_removeDialog.urls)
+            //     close()
+            // }
         }
     }
 
-    Component
-    {
-        id: _playlistDialogComponent
+    // Component
+    // {
+    //     id: _playlistDialogComponent
 
-        FB.TagsDialog
-        {
-            onTagsReady: (tags) => composerList.updateToUrls(tags)
-            composerList.strict: false
-        }
-    }
+    //     FB.TagsDialog
+    //     {
+    //         onTagsReady: (tags) => composerList.updateToUrls(tags)
+    //         composerList.strict: false
+    //     }
+    // }
 
     Component
     {
@@ -523,7 +523,7 @@ Maui.ApplicationWindow
                     floatingFooter: true
                     flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
                     altHeader: Maui.Handy.isMobile
-                    showCSDControls: true
+                    Maui.Controls.showCSD: true
 
                     headBar.leftContent: Loader
                     {
@@ -700,7 +700,7 @@ Maui.ApplicationWindow
                     /**
                           * Check if the "go back" function exists in the current view and return the reference to the function
                           */
-                    function getGoBackFunc() : Function
+                    function getGoBackFunc()
                     {
                         return 'getGoBackFunc' in currentItem.item ?
                                     currentItem.item.getGoBackFunc() :
@@ -784,7 +784,7 @@ Maui.ApplicationWindow
         }
     }
 
-    function openShortcutsDialog() : undefined
+    function openShortcutsDialog()
     {
         _dialogLoader.sourceComponent = _shortcutsDialogComponent
         dialog.open()
@@ -849,7 +849,7 @@ Maui.ApplicationWindow
                     null
     }
 
-    function getGoBackFunc() : Function
+    function getGoBackFunc()
     {
         let filterField = getFilterField()
         if (filterField && filterField.activeFocus) {

@@ -4,7 +4,7 @@
 #include <QCommandLineParser>
 #include <QIcon>
 
-#include <KI18n/KLocalizedString>
+#include <KLocalizedString>
 
 #if defined Q_OS_ANDROID || defined Q_OS_IOS
 #include <QGuiApplication>
@@ -19,19 +19,19 @@
 #endif
 
 #ifdef Q_OS_ANDROID
-#include <MauiKit3/Core/mauiandroid.h>
+#include <MauiKit4/Core/mauiandroid.h>
 #include <QAndroidService>
 #include <QAndroidJniEnvironment>
 #include <QAndroidJniObject>
 #endif
 
 #ifdef Q_OS_MACOS
-#include <MauiKit3/Core/mauimacos.h>
+#include <MauiKit4/Core/mauimacos.h>
 #endif
 
-#include <MauiKit3/FileBrowsing/fmstatic.h>
-#include <MauiKit3/Core/mauiapp.h>
-#include <MauiKit3/FileBrowsing/moduleinfo.h>
+#include <MauiKit4/FileBrowsing/fmstatic.h>
+#include <MauiKit4/Core/mauiapp.h>
+#include <MauiKit4/FileBrowsing/moduleinfo.h>
 
 #include <taglib/taglib.h>
 

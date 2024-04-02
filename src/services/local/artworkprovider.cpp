@@ -101,7 +101,7 @@ void ArtworkFetcher::fetch(FMH::MODEL data, PULPO::ONTOLOGY ontology)
 
                     BAE::fixArtworkImageFileName(name);
 
-                    downloader->downloadFile(imageUrl, BAE::CachePath.toString() + name + format);
+                    downloader->downloadFile(QUrl(imageUrl), QUrl(BAE::CachePath.toString() + name + format));
                     qDebug() << "SAVING ARTWORK FOR: " << request.track[FMH::MODEL_KEY::ALBUM] << BAE::CachePath.toString() + name + format;
 
                 } else {

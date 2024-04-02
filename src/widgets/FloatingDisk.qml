@@ -1,10 +1,10 @@
-import QtQuick 2.15
-import QtQml 2.15
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQml
+import QtQuick.Controls
 
-import QtGraphicalEffects 1.0
+import QtQuick.Effects
 
-import org.mauikit.controls 1.3 as Maui
+import org.mauikit.controls as Maui
 
 Control
 {
@@ -74,15 +74,16 @@ Control
         color: "white"
         radius: control.radius
 
-        layer.enabled: true
-        layer.effect: DropShadow
-        {
-            horizontalOffset: 0
-            verticalOffset: 0
-            radius: _mouseArea.containsPress ? 5.0 :8.0
-            samples: 17
-            color: "#80000000"
-        }
+        // layer.enabled: true
+        // layer.effect: MultiEffect
+        // {
+        //     shadowHorizontalOffset: 0
+        //     shadowVerticalOffset: 0
+        //     shadowEnabled: true
+        //     // shadowBlur: _mouseArea.containsPress ? 5.0 :8.0
+        //     // samples: 17
+        //     shadowColor: "#80000000"
+        // }
     }
 
     contentItem: MouseArea
@@ -114,16 +115,17 @@ Control
             source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
             fillMode: Image.PreserveAspectFit
 
-            layer.enabled: true
-            layer.effect: OpacityMask
-            {
-                maskSource: Rectangle
-                {
-                    height: miniArtwork.height
-                    width: miniArtwork.width
-                    radius: control.radius
-                }
-            }
+            // layer.enabled: true
+            // layer.effect: MultiEffect
+            // {
+            //     maskEnabled: true
+            //     maskSource: Rectangle
+            //     {
+            //         height: miniArtwork.height
+            //         width: miniArtwork.width
+            //         radius: control.radius
+            //     }
+            // }
         }
     }
 

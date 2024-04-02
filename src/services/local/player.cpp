@@ -1,18 +1,23 @@
 #include "player.h"
 
 #include <QTime>
-#include <MauiKit3/Accounts/mauiaccounts.h>
+
+#include <MauiKit4/Accounts/mauiaccounts.h>
+#include <QNetworkRequest>
+#include <QByteArrayView>
+
 #include "powermanagementinterface.h"
-#include <QMediaPlayerControl>
-#include <QMediaService>
+
 
 Player::Player(QObject *parent)
     : QObject(parent)
     , player(new QMediaPlayer(this))
+    , m_output(new QAudioOutput(this))
     , m_power(new PowerManagementInterface(this))
 {
-    this->player->setVolume(this->volume);
-    connect(this->player, &QMediaPlayer::stateChanged, [this](QMediaPlayer::State state) {
+    this->player->setAudioOutput(m_output);
+    m_output->setVolume(this->volume);
+    connect(this->player, &QMediaPlayer::playbackStateChanged, [this](QMediaPlayer::PlaybackState state) {
         auto position = this->player->position();
         // QMediaPlayer::duration() "may not be available when initial playback begins". Sometimes rapidly changing tracks causes position == 0.0 == duration, so check for that.
         if (state == QMediaPlayer::StoppedState && position > 0.0 && position == this->player->duration()) {
@@ -46,12 +51,12 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest &request)
 
     const QString concatenated = QString("%1:%2").arg(account[FMH::MODEL_KEY::USER], account[FMH::MODEL_KEY::PASSWORD]);
     const QByteArray data = concatenated.toLocal8Bit().toBase64();
-    const QString headerData = "Basic " + data;
+    const auto headerData = QByteArrayView("Basic ") + QByteArrayView(data);
 
     // Construct new QNetworkRequest with prepared header values
     QNetworkRequest newRequest(request);
 
-    newRequest.setRawHeader(QString("Authorization").toLocal8Bit(), headerData.toLocal8Bit());
+    newRequest.setRawHeader(QString("Authorization").toLocal8Bit(), headerData);
     newRequest.setRawHeader(QByteArrayLiteral("OCS-APIREQUEST"), QByteArrayLiteral("true"));
     newRequest.setRawHeader(QByteArrayLiteral("Cache-Control"), QByteArrayLiteral("public"));
     newRequest.setRawHeader(QByteArrayLiteral("Content-Description"), QByteArrayLiteral("File Transfer"));
@@ -86,8 +91,8 @@ void Player::stop()
 {
     if (this->player->isAvailable()) {
         this->player->stop();
-        this->url = QString();
-        this->player->setMedia(QMediaContent());
+        this->url = QUrl();
+        this->player->setSource(url);
     }
 
     this->m_power->setPreventSleep(false);
@@ -115,9 +120,7 @@ void Player::setUrl(const QUrl &value)
     this->url = value;
     Q_EMIT this->urlChanged();
 
-    const auto media = this->url.isLocalFile() ? QMediaContent(this->url) : QMediaContent(getOcsRequest(QNetworkRequest(this->url)));
-
-    this->player->setMedia(media);
+    this->player->setSource(this->url.isLocalFile() ? this->url : getOcsRequest(QNetworkRequest(this->url)).url());
 }
 
 QUrl Player::getUrl() const
@@ -131,7 +134,7 @@ void Player::setVolume(const int &value)
         return;
 
     this->volume = value;
-    this->player->setVolume(volume);
+    m_output->setVolume(volume);
     Q_EMIT this->volumeChanged();
 }
 
@@ -145,14 +148,14 @@ int Player::getDuration() const
     return static_cast<int>(this->player->duration());
 }
 
-QMediaPlayer::State Player::getState() const
+QMediaPlayer::PlaybackState Player::getState() const
 {
-    return this->player->state();
+    return this->player->playbackState();
 }
 
 bool Player::getPlaying() const
 {
-    return player->state() == QMediaPlayer::State::PlayingState;
+    return player->playbackState() == QMediaPlayer::PlaybackState::PlayingState;
 }
 
 void Player::setPos(const int &value)

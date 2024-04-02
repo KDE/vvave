@@ -6,9 +6,10 @@
 #include <QNetworkRequest>
 #include <QUrl>
 #include <QVariantMap>
+#include <QByteArrayView>
 
-#include <MauiKit3/FileBrowsing/downloader.h>
-#include <MauiKit3/FileBrowsing/fm.h>
+#include <MauiKit4/FileBrowsing/downloader.h>
+#include <MauiKit4/FileBrowsing/fm.h>
 
 //static const inline QNetworkRequest formRequest(const QUrl &url, const QString &user, const QString &password)
 //{
@@ -137,9 +138,9 @@ void NextMusic::getTrackPath(const QString &id)
 
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();
-    QString headerData = "Basic " + data;
+    const auto headerData = QByteArrayView("Basic ") + QByteArrayView(data);
 
-    QMap<QString, QString> header{{"Authorization", headerData.toLocal8Bit()}};
+    QMap<QString, QString> header{{"Authorization", QString(headerData)}};
 
     const auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [this, id, downloader](QByteArray array) {
@@ -176,9 +177,9 @@ void NextMusic::getCollection(const std::initializer_list<QString> &parameters)
 
     QString concatenated = this->m_user + ":" + this->m_password;
     QByteArray data = concatenated.toLocal8Bit().toBase64();
-    QString headerData = "Basic " + data;
+    const auto headerData = QByteArrayView("Basic ") + QByteArrayView(data);
 
-    QMap<QString, QString> header{{"Authorization", headerData.toLocal8Bit()}};
+    QMap<QString, QString> header{{"Authorization", QString(headerData)}};
 
     const auto downloader = new FMH::Downloader;
     connect(downloader, &FMH::Downloader::dataReady, [this, downloader](QByteArray array) {

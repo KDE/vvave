@@ -1,6 +1,6 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
-import org.mauikit.controls 1.0 as Maui
+import QtQuick
+import QtQuick.Controls
+import org.mauikit.controls as Maui
 
 Item
 {

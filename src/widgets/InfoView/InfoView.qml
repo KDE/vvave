@@ -1,10 +1,10 @@
-import QtQuick 2.10
-import QtQuick.Controls 2.10
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.mauikit.controls 1.3 as Maui
+import org.mauikit.controls as Maui
 
-import org.maui.vvave 1.0 as Vvave
+import org.maui.vvave as Vvave
 
 Maui.Page
 {

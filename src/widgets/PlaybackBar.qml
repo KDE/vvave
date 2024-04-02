@@ -1,15 +1,10 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import QtMultimedia 5.0
-import QtGraphicalEffects 1.0
-import org.mauikit.controls 1.3 as Maui
-
-import org.maui.vvave 1.0 as Vvave
+import org.mauikit.controls as Maui
 
 import "../utils/Player.js" as Player
-import QtQuick.Templates 2.15 as T
 
 Maui.ToolBar
 {
@@ -18,7 +13,7 @@ Maui.ToolBar
     farLeftContent: ToolButton
     {
         icon.name: _sideBarView.sideBar.visible ? "sidebar-collapse" : "sidebar-expand"
-        onClicked:  _sideBarView.sideBar.toggle()
+        onClicked: _sideBarView.sideBar.toggle()
         visible: _sideBarView.sideBar.collapsed
         checked:  _sideBarView.sideBar.visible
         ToolTip.delay: 1000

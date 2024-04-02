@@ -3,10 +3,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY)
+
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/services/web
-    ${CMAKE_CURRENT_BINARY_DIR}/services/web
-)
+    ${CMAKE_CURRENT_BINARY_DIR}/services/web)
 
 set(vvave_SRCS
     main.cpp
@@ -35,13 +36,15 @@ set(vvave_SRCS
     models/folders/foldersmodel.cpp
     models/cloud/cloud.cpp
     kde/mpris2/mpris2.cpp
-    kde/server.cpp)
+    kde/server.cpp
+    qml.qrc
+    assets.qrc)
 
-if(QUICK_COMPILER)
-    qtquick_compiler_add_resources(vvave_QML_QRC qml.qrc)
-else()
-    qt5_add_resources(vvave_QML_QRC qml.qrc)
-endif()
+# if(QUICK_COMPILER)
+#     qtquick_compiler_add_resources(vvave_QML_QRC qml.qrc)
+# else()
+#     qt5_add_resources(vvave_QML_QRC )
+# endif()
 
 if(UNIX AND NOT ANDROID)
     qt_generate_dbus_interface(${CMAKE_CURRENT_SOURCE_DIR}/kde/server.h org.kde.Vvave.xml)
@@ -52,19 +55,17 @@ endif()
 if(ANDROID)
     add_library(${PROJECT_NAME}
         SHARED
-        ${vvave_SRCS}
-        ${vvave_QML_QRC})
+        ${vvave_SRCS})
 else()
     add_executable(${PROJECT_NAME}
         ${vvave_SRCS}
-        ${vvave_QML_QRC}
         ${vvave_dbus_SRCS})
 endif()
 
 if (ANDROID)
     find_package(OpenSSL REQUIRED)
 
-    target_link_libraries(${PROJECT_NAME} Qt5::AndroidExtras OpenSSL::SSL)
+    target_link_libraries(${PROJECT_NAME} Qt6::AndroidExtras OpenSSL::SSL)
 
     kde_source_files_enable_exceptions(${PROJECT_NAME})
 
@@ -72,11 +73,11 @@ elseif(UNIX AND NOT WIN32 AND NOT APPLE)
     target_sources(${PROJECT_NAME} PRIVATE
         kde/mpris2/mediaplayer2.cpp
         kde/mpris2/mediaplayer2player.cpp)
-    target_link_libraries(${PROJECT_NAME} Qt5::DBus)
+    target_link_libraries(${PROJECT_NAME} Qt6::DBus)
 endif()
 
 if(UNIX OR WIN32 OR APPLE AND NOT ANDROID)
-    target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+    target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
 endif()
 
 target_compile_definitions(${PROJECT_NAME}
@@ -85,18 +86,18 @@ target_compile_definitions(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PRIVATE ${Taglib_INCLUDE_DIRS})
 
 target_link_libraries(${PROJECT_NAME}
-    MauiKit3
-    MauiKit3::FileBrowsing
-    MauiKit3::Accounts
-    Qt5::Core
-    Qt5::Network
-    Qt5::Sql
-    Qt5::Qml
-    Qt5::Xml
-    Qt5::Multimedia
-    Qt5::QuickControls2
-    KF5::CoreAddons
-    KF5::I18n
+    MauiKit4
+    MauiKit4::FileBrowsing
+    MauiKit4::Accounts
+    Qt6::Core
+    Qt6::Network
+    Qt6::Sql
+    Qt6::Qml
+    Qt6::Xml
+    Qt6::Multimedia
+    Qt6::QuickControls2
+    KF6::CoreAddons
+    KF6::I18n
     ${Taglib_LIBRARIES})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)

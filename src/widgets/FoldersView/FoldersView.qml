@@ -1,14 +1,14 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
-import QtQuick.Layouts 1.3
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.mauikit.controls 1.3 as Maui
+import org.mauikit.controls as Maui
 
 import "../BabeTable"
 import "../../db/Queries.js" as Q
 import "../../utils/Player.js" as Player
 
-import org.maui.vvave 1.0
+import org.maui.vvave
 
 StackView
 {
@@ -79,7 +79,7 @@ StackView
             {
                 isSection: true
                 width: ListView.view.width
-                label: String(section)
+                text: String(section)
             }
 
             delegate: Maui.ListBrowserDelegate
@@ -162,7 +162,7 @@ StackView
         return control.currentItem.getFilterField()
     }
 
-    function getGoBackFunc() : Function
+    function getGoBackFunc()
     {
         if (control.depth > 1)
             return () => { control.pop() }

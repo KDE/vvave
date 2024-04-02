@@ -1,10 +1,10 @@
-import QtQuick 2.14
-import QtQuick.Controls 2.14
+import QtQuick
+import QtQuick.Controls
 
-import org.mauikit.controls 1.3 as Maui
-import org.mauikit.filebrowsing 1.3 as FB
+import org.mauikit.controls as Maui
+import org.mauikit.filebrowsing as FB
 
-import org.maui.vvave 1.0 as Vvave
+import org.maui.vvave as Vvave
 
 import "../BabeTable"
 
@@ -145,7 +145,7 @@ StackView
         return control.currentItem.getFilterField()
     }
 
-    function getGoBackFunc() : Function
+    function getGoBackFunc()
     {
         if (control.depth > 1)
             return () => { control.pop() }

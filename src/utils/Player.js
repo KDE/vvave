@@ -1,6 +1,6 @@
-.import org.mauikit.filebrowsing 1.3 as FB
+.import org.mauikit.filebrowsing as FB
 
-.import org.maui.vvave 1.0 as Vvave
+.import org.maui.vvave as Vvave
 
 function playTrack()
 {

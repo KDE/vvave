@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include <MauiKit3/Core/fmh.h>
+#include <MauiKit4/Core/fmh.h>
 
 /**
  * @brief The AbstractMusicSyncer class
@@ -72,7 +72,7 @@ protected:
     QString m_password = "";
     QString m_provider = "";
 
-signals:
+Q_SIGNALS:
     void collectionReady(FMH::MODEL_LIST data);
     void tracksReady(FMH::MODEL_LIST data);
     void trackReady(FMH::MODEL data);
@@ -84,8 +84,6 @@ signals:
     void playlistReady(FMH::MODEL data);
 
     void trackPathReady(QString id, QString path);
-
-public slots:
 };
 
 #endif // ABSTRACTMUSICPROVIDER_H

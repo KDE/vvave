@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QtMultimedia/QMediaPlayer>
+#include <QtMultimedia/QAudioOutput>
 
 class PowerManagementInterface;
 class Player : public QObject
@@ -9,7 +10,7 @@ class Player : public QObject
     Q_OBJECT
     Q_PROPERTY(QUrl url READ getUrl WRITE setUrl NOTIFY urlChanged)
     Q_PROPERTY(int volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
-    Q_PROPERTY(QMediaPlayer::State state READ getState NOTIFY stateChanged)
+    Q_PROPERTY(QMediaPlayer::PlaybackState state READ getState NOTIFY stateChanged)
     Q_PROPERTY(int duration READ getDuration NOTIFY durationChanged)
     Q_PROPERTY(bool playing READ getPlaying NOTIFY playingChanged)
     Q_PROPERTY(int pos READ getPos WRITE setPos NOTIFY posChanged)
@@ -25,7 +26,7 @@ public:
 
     int getDuration() const;
 
-    QMediaPlayer::State getState() const;
+    QMediaPlayer::PlaybackState getState() const;
     bool getPlaying() const;
 
     int getPos() const;
@@ -40,6 +41,7 @@ public Q_SLOTS:
 
 private:
     QMediaPlayer *player;
+    QAudioOutput *m_output;
     QUrl url;
     PowerManagementInterface *m_power;
     int amountBuffers = 0;

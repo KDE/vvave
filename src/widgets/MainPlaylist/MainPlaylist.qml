@@ -1,13 +1,13 @@
-import QtQuick 2.15
-import QtQml 2.15
+import QtQuick
+import QtQml
 
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.14
-import QtGraphicalEffects 1.15
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Effects
 
-import org.mauikit.controls 1.3 as Maui
+import org.mauikit.controls as Maui
 
-import org.maui.vvave 1.0
+import org.maui.vvave
 
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
@@ -172,7 +172,7 @@ Maui.Page
 
             onRightClicked: tryOpenContextMenu()
 
-            function tryOpenContextMenu() : undefined
+            function tryOpenContextMenu()
             {
                 if (table.allowMenu)
                     table.openItemMenu(index)
@@ -199,13 +199,16 @@ Maui.Page
                         playing: root.isPlaying && Maui.Style.enableEffects
                         anchors.centerIn: parent
                         source: "qrc:/assets/playing.gif"
+                        visible: false
                     }
 
-                    ColorOverlay
+                    MultiEffect
                     {
                         anchors.fill: _playingIcon
                         source: _playingIcon
-                        color: delegate.label1.color
+                        colorization: 1.0
+                        contrast: 1.0
+                        colorizationColor: "#fafafa"
                     }
                 }
 

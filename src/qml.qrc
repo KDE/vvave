@@ -3,26 +3,17 @@
         <file>main.qml</file>
         <file>widgets/TracksView.qml</file>
         <file>widgets/AlbumsView.qml</file>
-        <file>assets/cover.png</file>
-        <file>db/script.sql</file>
-        <file>utils/Player.js</file>
-        <file>db/Queries.js</file>
         <file>widgets/MainPlaylist/MainPlaylist.qml</file>
         <file>widgets/PlaylistsView/PlaylistsView.qml</file>
         <file>widgets/InfoView/InfoView.qml</file>
         <file>widgets/InfoView/LyricsView.qml</file>
         <file>widgets/PlaylistsView/PlaylistsViewModel.qml</file>
-        <file>assets/vvave.notifyrc</file>
-        <file>assets/vvave.png</file>
         <file>widgets/FloatingDisk.qml</file>
-        <file>assets/vvave.svg</file>
         <file>widgets/CloudView/CloudView.qml</file>
         <file>widgets/SelectionBar.qml</file>
         <file>widgets/FocusView.qml</file>
         <file>widgets/SettingsView/SettingsDialog.qml</file>
         <file>widgets/SettingsView/ShortcutsDialog.qml</file>
-        <file>assets/view-media-track.svg</file>
-        <file>assets/media-album-track.svg</file>
         <file>widgets/PlaybackBar.qml</file>
         <file>widgets/FoldersView/FoldersView.qml</file>
         <file>widgets/MetadataDialog.qml</file>
@@ -31,11 +22,7 @@
         <file>widgets/BabeTable/BabeTable.qml</file>
         <file>widgets/BabeGrid/BabeGrid.qml</file>
         <file>widgets/MiniMode.qml</file>
-        <file>assets/playing.gif</file>
         <file>widgets/TracksGroup.qml</file>
         <file>widgets/SleepTimerDialog.qml</file>
-    </qresource>
-    <qresource prefix="/DB">
-        <file>db/script.sql</file>
     </qresource>
 </RCC>

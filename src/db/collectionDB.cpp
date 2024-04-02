@@ -13,7 +13,7 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
-   */
+ */
 
 #include "collectionDB.h"
 
@@ -138,7 +138,7 @@ bool CollectionDB::insert(const QString &tableName, const QVariantMap &insertDat
     query.prepare(sqlQueryString);
 
     int k = 0;
-    foreach (const QVariant &value, values)
+    for (const QVariant &value : values)
         query.bindValue(k++, value);
 
     return query.exec();
@@ -346,9 +346,9 @@ bool CollectionDB::albumTrack(const FMH::MODEL &track, const QString &value)
     if (!insert(TABLEMAP[TABLE::ALBUMS], albumMap))
         return false;
 
-    // update albums SET album = "newalbumname" WHERE album = "albumname" NAD artist = "aretist name";
+           // update albums SET album = "newalbumname" WHERE album = "albumname" NAD artist = "aretist name";
     queryTxt = QString("UPDATE %1 SET %2 = %3 AND %4 = %5 WHERE %2 = %6 AND %4 = %5")
-            .arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], value, FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], oldAlbum[FMH::MODEL_KEY::ARTIST], oldAlbum[FMH::MODEL_KEY::ALBUM]);
+                   .arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], value, FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], oldAlbum[FMH::MODEL_KEY::ARTIST], oldAlbum[FMH::MODEL_KEY::ALBUM]);
     auto query = this->getQuery(queryTxt);
 
     if (!execQuery(query))
@@ -371,7 +371,7 @@ bool CollectionDB::playedTrack(const QString &url)
 
     if (query.exec())
     {
-//        query.clar();
+        //        query.clar();
         auto query2 = getQuery();
 
         query2.prepare("UPDATE TRACKS SET lastsync = :date WHERE url = :url");
@@ -436,7 +436,7 @@ FMH::MODEL_LIST CollectionDB::getDBData(const QString &queryTxt, std::function<b
 FMH::MODEL_LIST CollectionDB::getAlbumTracks(const QString &album, const QString &artist, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
 {
     const auto queryTxt = QString("SELECT * FROM %1 WHERE %2 = \"%3\" AND %4 = \"%5\" ORDER by %6 %7")
-            .arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist, FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album, FMH::MODEL_NAME[orderBy], SLANG[order]);
+                              .arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist, FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], album, FMH::MODEL_NAME[orderBy], SLANG[order]);
 
     return this->getDBData(queryTxt);
 }
@@ -444,7 +444,7 @@ FMH::MODEL_LIST CollectionDB::getAlbumTracks(const QString &album, const QString
 FMH::MODEL_LIST CollectionDB::getArtistTracks(const QString &artist, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
 {
     const auto queryTxt =
-            QString("SELECT * FROM %1 WHERE %2 = \"%3\" ORDER by %4 %5, %6 %5").arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist, FMH::MODEL_NAME[orderBy], SLANG[order], FMH::MODEL_NAME[FMH::MODEL_KEY::TRACK]);
+        QString("SELECT * FROM %1 WHERE %2 = \"%3\" ORDER by %4 %5, %6 %5").arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist, FMH::MODEL_NAME[orderBy], SLANG[order], FMH::MODEL_NAME[FMH::MODEL_KEY::TRACK]);
 
     return this->getDBData(queryTxt);
 }
@@ -470,11 +470,11 @@ FMH::MODEL_LIST CollectionDB::getSearchedTracks(const FMH::MODEL_KEY &where, con
         queryTxt = QString("SELECT t.* FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE %2 = \"%3\"").arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[where], search);
     else if (where == FMH::MODEL_KEY::WIKI)
 
-        queryTxt = QString("SELECT DISTINCT t.* FROM %1 t INNER JOIN %2 al ON t.%3 = al.%3 INNER JOIN %4 ar ON t.%5 = ar.%5 WHERE al.%6 LIKE \"%%7%\" OR ar.%6 LIKE \"%%7%\" COLLATE NOCASE")
-                .arg(TABLEMAP[TABLE::TRACKS], TABLEMAP[TABLE::ALBUMS], FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], TABLEMAP[TABLE::ARTISTS], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], FMH::MODEL_NAME[where], search);
+    queryTxt = QString("SELECT DISTINCT t.* FROM %1 t INNER JOIN %2 al ON t.%3 = al.%3 INNER JOIN %4 ar ON t.%5 = ar.%5 WHERE al.%6 LIKE \"%%7%\" OR ar.%6 LIKE \"%%7%\" COLLATE NOCASE")
+                   .arg(TABLEMAP[TABLE::TRACKS], TABLEMAP[TABLE::ALBUMS], FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], TABLEMAP[TABLE::ARTISTS], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], FMH::MODEL_NAME[where], search);
     else
         queryTxt = QString("SELECT t.* FROM %1 t inner join albums al on al.album = t.album and t.artist = al.artist WHERE t.%2 LIKE \"%%3%\" ORDER BY strftime(\"%s\", t.addDate) desc LIMIT 1000")
-                .arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[where], search);
+                       .arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[where], search);
 
     return this->getDBData(queryTxt);
 }
@@ -489,7 +489,7 @@ FMH::MODEL_LIST CollectionDB::getRecentTracks(const int &limit, const FMH::MODEL
 FMH::MODEL_LIST CollectionDB::getMostPlayedTracks(const int &greaterThan, const int &limit, const FMH::MODEL_KEY &orderBy, const BAE::W &order)
 {
     auto queryTxt =
-            QString("SELECT * FROM %1 WHERE %2 > %3 ORDER BY %4 %5 LIMIT %6").arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::COUNT], QString::number(greaterThan), FMH::MODEL_NAME[orderBy], SLANG[order], QString::number(limit));
+        QString("SELECT * FROM %1 WHERE %2 > %3 ORDER BY %4 %5 LIMIT %6").arg(TABLEMAP[TABLE::TRACKS], FMH::MODEL_NAME[FMH::MODEL_KEY::COUNT], QString::number(greaterThan), FMH::MODEL_NAME[orderBy], SLANG[order], QString::number(limit));
 
     return this->getDBData(queryTxt);
 }
@@ -564,7 +564,7 @@ void CollectionDB::removeMissingTracks()
     auto tracks = this->getDBData("select url from tracks");
 
     for (auto track : tracks)
-        if (!FMH::fileExists(track[FMH::MODEL_KEY::URL]))
+        if (!FMH::fileExists(QUrl(track[FMH::MODEL_KEY::URL])))
             this->removeTrack(track[FMH::MODEL_KEY::URL]);
 }
 
@@ -599,7 +599,7 @@ bool CollectionDB::cleanAlbums()
 {
     //    delete from albums where (album, artist) in (select a.album, a.artist from albums a except select distinct album, artist from tracks);
     const auto queryTxt = QString("DELETE FROM %1 WHERE (%2, %3) IN (SELECT %2, %3 FROM %1 EXCEPT SELECT DISTINCT %2, %3  FROM %4)")
-            .arg(TABLEMAP[TABLE::ALBUMS], FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], TABLEMAP[TABLE::TRACKS]);
+                              .arg(TABLEMAP[TABLE::ALBUMS], FMH::MODEL_NAME[FMH::MODEL_KEY::ALBUM], FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], TABLEMAP[TABLE::TRACKS]);
     qDebug() << queryTxt;
     auto query = this->getQuery(queryTxt);
     Q_EMIT albumsCleaned(query.numRowsAffected());
