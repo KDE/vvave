@@ -10,6 +10,8 @@
 
 #include "utils/bae.h"
 
+Q_GLOBAL_STATIC(vvave, vvaveInstance)
+
 FMH::MODEL vvave::trackInfo(const QUrl &url)
 {
     TagInfo info(url.toLocalFile());
@@ -53,6 +55,7 @@ QString vvave::artworkUrl(const QString &artist, const QString &album)
 
 QVariantList vvave::getTracks(const QString &query)
 {
+    // return QVariantList();
     return FMH::toMapList(CollectionDB::getInstance()->getDBData(query));
 }
 
@@ -62,6 +65,11 @@ QVariantList vvave::getTracks(const QString &query)
  * YoutubeFetcher ?
  *
  * */
+vvave *vvave::instance()
+{
+    return vvaveInstance();
+}
+
 vvave::vvave(QObject *parent)
     : QObject(parent)
 {

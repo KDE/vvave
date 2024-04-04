@@ -14,16 +14,8 @@ class vvave : public QObject
     Q_PROPERTY(bool scanning READ scanning NOTIFY scanningChanged FINAL)
 
 public:
-    static vvave *instance()
-    {
-        static vvave vvave;
-        return &vvave;
-    }
-
-    vvave(const vvave &) = delete;
-    vvave &operator=(const vvave &) = delete;
-    vvave(vvave &&) = delete;
-    vvave &operator=(vvave &&) = delete;
+    explicit vvave(QObject *parent = nullptr);
+    static vvave *instance();
 
     bool fetchArtwork() const;
 
@@ -54,8 +46,6 @@ public Q_SLOTS:
     QVariantList getTracks(const QString &query);
 
 private:
-    explicit vvave(QObject *parent = nullptr);
-
     bool m_fetchArtwork = false;
     bool m_scanning = false;
 

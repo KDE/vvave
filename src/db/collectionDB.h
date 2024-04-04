@@ -24,16 +24,8 @@ class CollectionDB : public QObject
     Q_OBJECT
 
 public:
-    static CollectionDB *getInstance()
-    {
-        static CollectionDB db;
-        return &db;
-    }
-
-    CollectionDB(const CollectionDB &) = delete;
-    CollectionDB &operator=(const CollectionDB &) = delete;
-    CollectionDB(CollectionDB &&) = delete;
-    CollectionDB &operator=(CollectionDB &&) = delete;
+    explicit CollectionDB(QObject *parent = nullptr);
+    static CollectionDB *getInstance();
 
     bool insert(const QString &tableName, const QVariantMap &insertData);
     bool update(const QString &tableName, const FMH::MODEL &updateData, const QVariantMap &where);
@@ -88,7 +80,6 @@ public:
     void openDB(const QString &name);
 
 private:
-    explicit CollectionDB(QObject *parent = nullptr);
     void prepareCollectionDB();
 
     QString name;

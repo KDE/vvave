@@ -120,7 +120,7 @@ void Player::setUrl(const QUrl &value)
     this->url = value;
     Q_EMIT this->urlChanged();
 
-    this->player->setSource(this->url.isLocalFile() ? this->url : getOcsRequest(QNetworkRequest(this->url)).url());
+    this->player->setSource(this->url);
 }
 
 QUrl Player::getUrl() const

@@ -22,10 +22,17 @@
 #include <QUuid>
 #include <QDateTime>
 
-#include <MauiKit3/Core/fmh.h>
-#include <MauiKit3/FileBrowsing/fmstatic.h>
+#include <MauiKit4/Core/fmh.h>
+#include <MauiKit4/FileBrowsing/fmstatic.h>
 
 using namespace BAE;
+
+Q_GLOBAL_STATIC(CollectionDB, collectionInstance)
+
+CollectionDB *CollectionDB::getInstance()
+{
+    return collectionInstance();
+}
 
 CollectionDB::CollectionDB(QObject *parent)
     : QObject(parent)

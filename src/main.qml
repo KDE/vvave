@@ -365,11 +365,11 @@ Maui.ApplicationWindow
         id: _dialogLoader
     }
 
-    // Component
-    // {
-    //     id: _fileDialogComponent
-    //     FB.FileDialog {}
-    // }
+    Component
+    {
+        id: _fileDialogComponent
+        FB.FileDialog {}
+    }
 
     Component
     {
@@ -406,16 +406,16 @@ Maui.ApplicationWindow
         }
     }
 
-    // Component
-    // {
-    //     id: _playlistDialogComponent
+    Component
+    {
+        id: _playlistDialogComponent
 
-    //     FB.TagsDialog
-    //     {
-    //         onTagsReady: (tags) => composerList.updateToUrls(tags)
-    //         composerList.strict: false
-    //     }
-    // }
+        FB.TagsDialog
+        {
+            onTagsReady: (tags) => composerList.updateToUrls(tags)
+            composerList.strict: false
+        }
+    }
 
     Component
     {

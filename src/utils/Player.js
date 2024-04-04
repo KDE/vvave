@@ -150,7 +150,7 @@ function playAllModel(model)
         _drawer.visible = true
 
     mainPlaylist.listView.positionViewAtBeginning()
-    playAt(0)
+    // playAt(0)
 }
 
 function shuffleAllModel(model)

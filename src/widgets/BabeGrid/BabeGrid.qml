@@ -209,7 +209,7 @@ Maui.AltBrowser
             {
                 active: !Maui.Handy.isMobile
                 asynchronous: true
-                parent: _template.iconContainer
+                parent: _template.template.iconItem
                 anchors.centerIn: parent
                 sourceComponent: ToolButton
                 {
