@@ -59,6 +59,7 @@ CMakeLists.txt.user*
 
 # build folders and output
 build/
+build.6/
 vvave
 
 # LSP & IDE
