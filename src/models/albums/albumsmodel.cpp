@@ -8,8 +8,7 @@
 
 #include <QTimer>
 
-AlbumsModel::AlbumsModel(QObject *parent)
-    : MauiList(parent)
+AlbumsModel::AlbumsModel(QObject *parent) : MauiList(parent)
 {
     qRegisterMetaType<FMH::MODEL_LIST>("FMH::MODEL_LIST");
     qRegisterMetaType<FMH::MODEL>("FMH::MODEL");

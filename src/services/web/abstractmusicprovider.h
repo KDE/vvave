@@ -1,5 +1,4 @@
-#ifndef ABSTRACTMUSICPROVIDER_H
-#define ABSTRACTMUSICPROVIDER_H
+#pragma once
 
 #include <QObject>
 
@@ -85,5 +84,3 @@ Q_SIGNALS:
 
     void trackPathReady(QString id, QString path);
 };
-
-#endif // ABSTRACTMUSICPROVIDER_H

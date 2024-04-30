@@ -1,4 +1,5 @@
 #include "metadataeditor.h"
+#include "taginfo.h"
 
 MetadataEditor::MetadataEditor(QObject *parent) : QObject(parent)
   , m_tag(new TagInfo(this))

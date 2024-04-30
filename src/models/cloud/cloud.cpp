@@ -7,8 +7,7 @@
 
 #include <MauiKit4/Accounts/mauiaccounts.h>
 
-Cloud::Cloud(QObject *parent)
-    : MauiList(parent)
+Cloud::Cloud(QObject *parent) : MauiList(parent)
     , provider(new NextMusic(this))
 {
     connect(MauiAccounts::instance(), &MauiAccounts::currentAccountChanged, [this](QVariantMap account) {

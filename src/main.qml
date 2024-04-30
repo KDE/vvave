@@ -23,17 +23,11 @@ Maui.ApplicationWindow
 {
     id: root
 
+    visible: !miniMode
     title: currentTrack.url ? currentTrack.title + " - " +  currentTrack.artist + " | " + currentTrack.album : ""
 
     Maui.Style.styleType: focusView ? Maui.Style.Adaptive : undefined
-    //    flags: miniMode ? Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.Popup | Qt.BypassWindowManagerHint : undefined
 
-    readonly property int preferredMiniModeSize: 200
-    //    minimumHeight: miniMode ? preferredMiniModeSize : 300
-    //    minimumWidth: miniMode ? preferredMiniModeSize : 200
-
-    //    maximumWidth: miniMode ? minimumWidth : Screen.desktopAvailableWidth
-    //    maximumHeight: miniMode ? minimumHeight : Screen.desktopAvailableHeight
 
     /***************************************************/
     /******************** ALIASES ********************/
@@ -674,15 +668,6 @@ Maui.ApplicationWindow
                         FoldersView {}
                     }
 
-                    Maui.AppViewLoader
-                    {
-                        Maui.AppView.title: i18n("Cloud")
-                        Maui.AppView.iconName: "folder-cloud"
-
-                        CloudView {}
-                    }
-
-
                     data: Loader
                     {
                         width: parent.width
@@ -702,9 +687,7 @@ Maui.ApplicationWindow
                           */
                     function getGoBackFunc()
                     {
-                        return 'getGoBackFunc' in currentItem.item ?
-                                    currentItem.item.getGoBackFunc() :
-                                    null
+                        return 'getGoBackFunc' in currentItem.item ? currentItem.item.getGoBackFunc() : null
                     }
                 }
 
@@ -717,20 +700,21 @@ Maui.ApplicationWindow
                         objectName: "FocusView"
                     }
                 }
-
-                Loader
-                {
-                    id: _miniModeComponent
-                    visible: active
-                    active: StackView.status === StackView.Active
-                    MiniMode
-                    {
-                        anchors.fill: parent
-                    }
-                }
             }
         }
     }
+
+    Loader
+    {
+        id: _miniModeComponent
+        visible: active
+        active: false
+        sourceComponent: MiniMode
+        {
+        }
+    }
+
+
 
     Component.onCompleted:
     {
@@ -751,10 +735,6 @@ Maui.ApplicationWindow
         _stackView.currentItem.forceActiveFocus()
     }
 
-    property int oldH : root. height
-    property int oldW : root.width
-    property point oldP : Qt.point(root.x, root.y)
-
     function toggleMiniMode()
     {
         if(Maui.Handy.isMobile)
@@ -764,23 +744,11 @@ Maui.ApplicationWindow
 
         if(miniMode)
         {
-            _stackView.pop(StackView.Immediate)
-
-            root.width = oldW
-            root.height = oldH
-
-            root.x = oldP.x
-            root.y = oldP.y
+            _miniModeComponent.item.close()
+            _miniModeComponent.active = false
         }else
         {
-            root.oldH = root.height
-            root.oldW = root.width
-            root.oldP = Qt.point(root.x, root.y)
-
-            _stackView.push(_miniModeComponent, StackView.Immediate)
-
-            root.x = Screen.desktopAvailableWidth - root.preferredMiniModeSize - Maui.Style.space.big
-            root.y = Screen.desktopAvailableHeight - root.preferredMiniModeSize - Maui.Style.space.big
+            _miniModeComponent.active = true
         }
     }
 

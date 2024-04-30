@@ -1,4 +1,5 @@
 #pragma once
+
 #include <MauiKit4/Core/mauilist.h>
 
 class PlaylistsModel : public MauiList

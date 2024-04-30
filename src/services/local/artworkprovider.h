@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pulpo/pulpo.h"
+
 #include <QImage>
 #include <QObject>
 #include <QQuickImageProvider>

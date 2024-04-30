@@ -1,13 +1,12 @@
 #include "player.h"
 
-#include <QTime>
-
 #include <MauiKit4/Accounts/mauiaccounts.h>
+
 #include <QNetworkRequest>
 #include <QByteArrayView>
+#include <QTime>
 
 #include "powermanagementinterface.h"
-
 
 Player::Player(QObject *parent)
     : QObject(parent)

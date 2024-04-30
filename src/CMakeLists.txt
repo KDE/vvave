@@ -6,8 +6,7 @@
 remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY)
 
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/services/web
-    ${CMAKE_CURRENT_BINARY_DIR}/services/web)
+    ${CMAKE_CURRENT_SOURCE_DIR}/services/web)
 
 set(vvave_SRCS
     main.cpp
@@ -27,24 +26,20 @@ set(vvave_SRCS
     services/local/trackinfo.cpp
     services/local/metadataeditor.cpp
     services/local/powermanagementinterface.cpp
-    services/web/NextCloud/nextmusic.cpp
-    services/web/abstractmusicprovider.cpp
+    # services/web/NextCloud/nextmusic.cpp
+    # services/web/abstractmusicprovider.cpp
     db/collectionDB.cpp
     models/tracks/tracksmodel.cpp
     models/playlists/playlistsmodel.cpp
     models/albums/albumsmodel.cpp
     models/folders/foldersmodel.cpp
-    models/cloud/cloud.cpp
+    # models/cloud/cloud.cpp
     kde/mpris2/mpris2.cpp
-    kde/server.cpp
+    kde/server.cpp)
+
+qt_add_resources(vvave_QML_QRC
     qml.qrc
     assets.qrc)
-
-# if(QUICK_COMPILER)
-#     qtquick_compiler_add_resources(vvave_QML_QRC qml.qrc)
-# else()
-#     qt5_add_resources(vvave_QML_QRC )
-# endif()
 
 if(UNIX AND NOT ANDROID)
     qt_generate_dbus_interface(${CMAKE_CURRENT_SOURCE_DIR}/kde/server.h org.kde.Vvave.xml)
@@ -55,11 +50,13 @@ endif()
 if(ANDROID)
     add_library(${PROJECT_NAME}
         SHARED
-        ${vvave_SRCS})
+        ${vvave_SRCS}
+        ${vvave_QML_QRC})
 else()
     add_executable(${PROJECT_NAME}
         ${vvave_SRCS}
-        ${vvave_dbus_SRCS})
+        ${vvave_dbus_SRCS}
+        ${vvave_QML_QRC})
 endif()
 
 if (ANDROID)

@@ -3,7 +3,7 @@
 #include <QJsonObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
- #include <QByteArrayView>
+#include <QByteArrayView>
 
 using namespace PULPO;
 
@@ -200,7 +200,7 @@ void spotify::parseTrack(const QByteArray &array)
         ERROR(this->request)
     }
 
-    // get album title
+           // get album title
     for (const auto &item : items) {
         auto album = item.toMap().value("album").toMap();
         auto trackArtist = album.value("artists").toList().first().toMap().value("name").toString();

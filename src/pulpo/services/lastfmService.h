@@ -1,5 +1,4 @@
-#ifndef LASTFMSERVICE_H
-#define LASTFMSERVICE_H
+#pragma once
 
 #include "../service.h"
 #include <QObject>
@@ -9,8 +8,8 @@ class lastfm : public Service
     Q_OBJECT
 
 private:
-    const QString API = "http://ws.audioscrobbler.com/2.0/";
-    const QString KEY = "&api_key=ba6f0bd3c887da9101c10a50cf2af133";
+    inline static const QString API = "http://ws.audioscrobbler.com/2.0/";
+    inline static const QString KEY = "&api_key=ba6f0bd3c887da9101c10a50cf2af133";
 
     void parseSimilar();
 
@@ -27,5 +26,3 @@ protected:
 
     /*INTERNAL IMPLEMENTATION*/
 };
-
-#endif // LASTFM_H

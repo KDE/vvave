@@ -1,5 +1,5 @@
 #include "service.h"
-#include <MauiKit3/FileBrowsing/downloader.h>
+#include <MauiKit4/FileBrowsing/downloader.h>
 
 Service::Service(QObject *parent)
     : QObject(parent)
@@ -9,6 +9,21 @@ Service::Service(QObject *parent)
 void Service::set(const PULPO::REQUEST &request)
 {
     this->request = request;
+}
+
+void Service::parseArtist(const QByteArray &)
+{
+
+}
+
+void Service::parseAlbum(const QByteArray &)
+{
+
+}
+
+void Service::parseTrack(const QByteArray &)
+{
+
 }
 
 void Service::parse(const QByteArray &array)

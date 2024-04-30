@@ -46,7 +46,6 @@
 #include "services/local/metadataeditor.h"
 
 #include "models/albums/albumsmodel.h"
-#include "models/cloud/cloud.h"
 #include "models/playlists/playlistsmodel.h"
 #include "models/tracks/tracksmodel.h"
 #include "models/folders/foldersmodel.h"
@@ -67,9 +66,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
       return app.exec();
   }
 #endif
-
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 
 #ifdef Q_OS_WIN32
     qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
@@ -178,7 +174,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qmlRegisterType<TracksModel>(VVAVE_URI, 1, 0, "Tracks");
     qmlRegisterType<AlbumsModel>(VVAVE_URI, 1, 0, "Albums");
-    qmlRegisterType<Cloud>(VVAVE_URI, 1, 0, "Cloud");
     qmlRegisterType<FoldersModel>(VVAVE_URI, 1, 0, "Folders");
 
     qmlRegisterType<Player>(VVAVE_URI, 1, 0, "Player");

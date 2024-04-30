@@ -10,7 +10,7 @@ Control
 {
     id: control
 
-    parent: ApplicationWindow.overlay
+    parent: Overlay.overlay
     z: parent.z + 1
 
     Maui.Theme.inherit: false
@@ -52,21 +52,21 @@ Control
     y: root.height - control.implicitHeight - Maui.Style.space.medium - _mainPage.footerContainer.implicitHeight
     x: root.width - control.implicitWidth - Maui.Style.space.medium
 
-//    Binding on x
-//    {
-//        when: !_mouseArea.pressed
-//        value: control.x
-//        restoreMode: Binding.RestoreBindingOrValue
-//        delayed: true
-//    }
+    //    Binding on x
+    //    {
+    //        when: !_mouseArea.pressed
+    //        value: control.x
+    //        restoreMode: Binding.RestoreBindingOrValue
+    //        delayed: true
+    //    }
 
-//    Binding on y
-//    {
-//        when: !_mouseArea.pressed
-//        value: control.y
-//        restoreMode: Binding.RestoreBindingOrValue
-//        delayed: true
-//    }
+    //    Binding on y
+    //    {
+    //        when: !_mouseArea.pressed
+    //        value: control.y
+    //        restoreMode: Binding.RestoreBindingOrValue
+    //        delayed: true
+    //    }
 
     background: Rectangle
     {
@@ -74,16 +74,16 @@ Control
         color: "white"
         radius: control.radius
 
-        // layer.enabled: true
-        // layer.effect: MultiEffect
-        // {
-        //     shadowHorizontalOffset: 0
-        //     shadowVerticalOffset: 0
-        //     shadowEnabled: true
-        //     // shadowBlur: _mouseArea.containsPress ? 5.0 :8.0
-        //     // samples: 17
-        //     shadowColor: "#80000000"
-        // }
+        layer.enabled: true
+        layer.effect: MultiEffect
+        {
+            shadowHorizontalOffset: 0
+            shadowVerticalOffset: 0
+            shadowEnabled: true
+            // shadowBlur: _mouseArea.containsPress ? 5.0 :8.0
+            // samples: 17
+            shadowColor: "#80000000"
+        }
     }
 
     contentItem: MouseArea
@@ -105,27 +105,37 @@ Control
         drag.maximumY: root.height - control.height
 
         onClicked: toggleFocusView()
-//        onPressAndHold: toggleMiniMode()
+        onPressAndHold: toggleMiniMode()
 
         Image
         {
             id: miniArtwork
-            focus: true
             anchors.fill: parent
             source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
             fillMode: Image.PreserveAspectFit
+            layer.enabled: true
+            layer.effect: MultiEffect
+            {
+                source: miniArtwork
+                maskEnabled: true
+                maskSource: _mask
+            }
+        }
 
-            // layer.enabled: true
-            // layer.effect: MultiEffect
-            // {
-            //     maskEnabled: true
-            //     maskSource: Rectangle
-            //     {
-            //         height: miniArtwork.height
-            //         width: miniArtwork.width
-            //         radius: control.radius
-            //     }
-            // }
+        Item
+        {
+            id: _mask
+            visible: false
+            layer.enabled: true
+            height: miniArtwork.height
+            width: miniArtwork.width
+
+            Rectangle
+            {
+                height: parent.height
+                width: parent.width
+                radius: control.radius
+            }
         }
     }
 

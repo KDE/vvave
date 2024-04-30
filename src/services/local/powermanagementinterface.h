@@ -1,8 +1,8 @@
 /*
    SPDX-FileCopyrightText: 2019 (c) Matthieu Gallien <matthieu_gallien@yahoo.fr>
 
-   SPDX-License-Identifier: LGPL-3.0-or-later
- */
+SPDX-License-Identifier: LGPL-3.0-or-later
+*/
 
 #pragma once
 
@@ -19,13 +19,13 @@ class PowerManagementInterface : public QObject
     Q_OBJECT
 
     Q_PROPERTY(bool preventSleep
-               READ preventSleep
-               WRITE setPreventSleep
-               NOTIFY preventSleepChanged)
+                   READ preventSleep
+                       WRITE setPreventSleep
+                           NOTIFY preventSleepChanged)
 
     Q_PROPERTY(bool sleepInhibited
-               READ sleepInhibited
-               NOTIFY sleepInhibitedChanged)
+                   READ sleepInhibited
+                       NOTIFY sleepInhibitedChanged)
 
 public:
 

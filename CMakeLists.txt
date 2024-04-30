@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-set(VVAVE_VERSION 3.1.1)
+set(VVAVE_VERSION 4.0.0)
 add_compile_definitions(APP_COPYRIGHT_NOTICE="© 2019-2024 Maui Development Team")
 
 set(CMAKE_CXX_STANDARD 17)
@@ -16,9 +16,9 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(QT_MAJOR_VERSION 6)
-
 project(vvave VERSION ${VVAVE_VERSION} LANGUAGES CXX)
+
+set(QT_MAJOR_VERSION 6)
 
 set(REQUIRED_QT_VERSION 6.5.2)
 set(REQUIRED_KF_VERSION 5.240.0)
@@ -29,8 +29,6 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     include(KDEInstallDirs)
     include(KDECMakeSettings)
-    include(ECMInstallIcons)
-    include(ECMAddAppIcon)
 endif()
 
 include(KDECompilerSettings NO_POLICY_SCOPE)

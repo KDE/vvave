@@ -1,4 +1,5 @@
 #pragma once
+
 #include "abstractmusicprovider.h"
 #include <QObject>
 

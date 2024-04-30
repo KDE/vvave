@@ -4,8 +4,7 @@
 #include <QString>
 #include <QUrl>
 
-#include "taginfo.h"
-
+class TagInfo;
 class MetadataEditor : public QObject
 {
     Q_OBJECT

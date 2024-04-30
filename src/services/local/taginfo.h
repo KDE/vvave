@@ -1,11 +1,13 @@
 #pragma once
+
 #include <QByteArray>
 #include <QObject>
 #include <QString>
 
-#include <taglib/fileref.h>
-#include <taglib/tag.h>
-
+namespace TagLib
+{
+class FileRef;
+}
 class TagInfo : public QObject
 {
     Q_OBJECT

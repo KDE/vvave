@@ -34,12 +34,12 @@ CollectionDB *CollectionDB::getInstance()
     return collectionInstance();
 }
 
-CollectionDB::CollectionDB(QObject *parent)
-    : QObject(parent)
+CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 {
     this->name = QUuid::createUuid().toString();
 
-    if (!FMH::fileExists(QUrl::fromUserInput(BAE::CollectionDBPath + BAE::DBName))) {
+    if (!FMH::fileExists(QUrl::fromUserInput(BAE::CollectionDBPath + BAE::DBName)))
+    {
         QDir collectionDBPath_dir(BAE::CollectionDBPath);
         if (!collectionDBPath_dir.exists())
             collectionDBPath_dir.mkpath(".");
@@ -48,8 +48,10 @@ CollectionDB::CollectionDB(QObject *parent)
         qDebug() << "Collection doesn't exists, trying to create it" << BAE::CollectionDBPath + BAE::DBName;
         this->prepareCollectionDB();
 
-    } else
+    } else        
+    {
         this->openDB(this->name);
+    }
 }
 
 void CollectionDB::prepareCollectionDB()
@@ -59,14 +61,16 @@ void CollectionDB::prepareCollectionDB()
     QFile file(":/db/script.sql");
     qDebug() << file.exists();
 
-    if (!file.exists()) {
+    if (!file.exists())
+    {
         QString log = QStringLiteral("Fatal error on build database. The file '");
         log.append(file.fileName() + QStringLiteral("' for database and tables creation query cannot be not found!"));
         qDebug() << log;
         return;
     }
 
-    if (!file.open(QIODevice::ReadOnly)) {
+    if (!file.open(QIODevice::ReadOnly))
+    {
         qDebug() << QStringLiteral("Fatal error on try to create database! The file with sql queries for database creation cannot be opened!");
         return;
     }
@@ -77,7 +81,8 @@ void CollectionDB::prepareCollectionDB()
     QString cleanedLine;
     QStringList strings;
 
-    while (!file.atEnd()) {
+    while (!file.atEnd())
+    {
         hasText = false;
         line = "";
         readLine = "";
@@ -111,7 +116,8 @@ bool CollectionDB::check_existance(const QString &tableName, const QString &sear
     auto queryStr = QString("SELECT %1 FROM %2 WHERE %3 = \"%4\"").arg(searchId, tableName, searchId, search);
     auto query = this->getQuery(queryStr);
 
-    if (!query.exec()) {
+    if (!query.exec())
+    {
         qDebug() << query.lastError().text();
         return false;
     }
@@ -124,11 +130,13 @@ bool CollectionDB::check_existance(const QString &tableName, const QString &sear
 
 bool CollectionDB::insert(const QString &tableName, const QVariantMap &insertData)
 {
-    if (tableName.isEmpty()) {
+    if (tableName.isEmpty())
+    {
         qDebug() << QStringLiteral("Fatal error on insert! The table name is empty!");
         return false;
 
-    } else if (insertData.isEmpty()) {
+    } else if (insertData.isEmpty())
+    {
         qDebug() << QStringLiteral("Fatal error on insert! The insertData is empty!");
         return false;
     }
@@ -153,10 +161,12 @@ bool CollectionDB::insert(const QString &tableName, const QVariantMap &insertDat
 
 bool CollectionDB::update(const QString &tableName, const FMH::MODEL &updateData, const QVariantMap &where)
 {
-    if (tableName.isEmpty()) {
+    if (tableName.isEmpty())
+    {
         qDebug() << QStringLiteral("Fatal error on insert! The table name is empty!");
         return false;
-    } else if (updateData.isEmpty()) {
+    } else if (updateData.isEmpty())
+    {
         qDebug() << QStringLiteral("Fatal error on insert! The insertData is empty!");
         return false;
     }
@@ -216,12 +226,14 @@ bool CollectionDB::execQuery(const QString &queryTxt)
 
 void CollectionDB::openDB(const QString &name)
 {
-    if (!QSqlDatabase::contains(name)) {
+    if (!QSqlDatabase::contains(name))
+    {
         this->m_db = QSqlDatabase::addDatabase(QStringLiteral("QSQLITE"), name);
         this->m_db.setDatabaseName(BAE::CollectionDBPath + BAE::DBName);
     }
 
-    if (!this->m_db.isOpen()) {
+    if (!this->m_db.isOpen())
+    {
         if (!this->m_db.open())
             qDebug() << "ERROR OPENING DB" << this->m_db.lastError().text() << m_db.connectionName();
         else {
@@ -237,7 +249,8 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
         return false;
 
     const auto url = track[FMH::MODEL_KEY::URL];
-    if (check_existance(TABLEMAP[BAE::TABLE::TRACKS], BAE::KEYMAP[BAE::KEY::URL], url)) {
+    if (check_existance(TABLEMAP[BAE::TABLE::TRACKS], BAE::KEYMAP[BAE::KEY::URL], url))
+    {
         return false;
     }
 

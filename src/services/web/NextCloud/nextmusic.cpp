@@ -1,4 +1,5 @@
 #include "nextmusic.h"
+
 #include <QDomDocument>
 #include <QJsonDocument>
 #include <QJsonObject>
