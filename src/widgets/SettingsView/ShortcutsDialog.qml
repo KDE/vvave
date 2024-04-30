@@ -34,7 +34,7 @@ Maui.PopupPage
     Component
     {
         id: _shortcutLabelComponent
-        Maui.SectionItem
+        Maui.FlexSectionItem
         {
             label1.text: i18n("Unknown")
 
