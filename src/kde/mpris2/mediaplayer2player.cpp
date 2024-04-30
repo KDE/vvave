@@ -18,7 +18,7 @@
 #include <QStringList>
 
 #include "utils/bae.h"
-#include <MauiKit3/Core/fmh.h>
+#include <MauiKit4/Core/fmh.h>
 
 static const double MAX_RATE = 1.0;
 static const double MIN_RATE = 1.0;
