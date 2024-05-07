@@ -93,12 +93,8 @@ Maui.Page
                 visible: active
                 sourceComponent: Item
                 {
-                    //                color: Maui.Theme.highlightColor
-                    id: _imgHeader
-
                     Maui.GalleryRollTemplate
                     {
-                        id: _image
                         anchors.fill: parent
                         anchors.bottomMargin: Maui.Style.space.medium
                         radius: Maui.Style.radiusV
@@ -106,8 +102,13 @@ Maui.Page
                         fillMode: Image.PreserveAspectCrop
 
                         images: ["image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album, "image://artwork/artist:"+currentTrack.artist]
-
                     }
+
+                   MouseArea
+                   {
+                       anchors.fill: parent
+                       onDoubleClicked: toggleMiniMode()
+                   }
                 }
             }
 

@@ -132,9 +132,9 @@ Maui.Page
             model: listModel
 
             onEdited: (data, index) =>
-            {
-                control.list.updateMetadata(data, model.mappedToSource(index))
-            }
+                      {
+                          control.list.updateMetadata(data, model.mappedToSource(index))
+                      }
         }
     }
 
@@ -148,24 +148,24 @@ Maui.Page
             message: i18n("Are you sure you want to delete the file from your computer? This action can not be undone.")
 
             actions: [
-            Action
-            {
-                text: i18n("Remove")
-                onTriggered:
+                Action
                 {
-                    if(FB.FM.removeFiles(urls))
+                    text: i18n("Remove")
+                    onTriggered:
                     {
-                        listModel.list.erase(listModel.mappedToSource(control.currentIndex))
+                        if(FB.FM.removeFiles(urls))
+                        {
+                            listModel.list.erase(listModel.mappedToSource(control.currentIndex))
+                        }
+                        close()
                     }
-                    close()
-                }
-            },
+                },
 
-            Action
-            {
-                text: i18n("Cancel")
-                onTriggered: close()
-            }]
+                Action
+                {
+                    text: i18n("Cancel")
+                    onTriggered: close()
+                }]
         }
     }
 
@@ -250,20 +250,20 @@ Maui.Page
         currentIndex: -1
 
         onItemsSelected: (indexes) =>
-        {
-            for(var i in indexes)
-            {
-                selectionBar.addToSelection(listModel.get(indexes[i]))
-            }
-        }
+                         {
+                             for(var i in indexes)
+                             {
+                                 selectionBar.addToSelection(listModel.get(indexes[i]))
+                             }
+                         }
 
         onKeyPress: (event) =>
-        {
-            if(event.key === Qt.Key_Return)
-            {
-                control.rowClicked(_listBrowser.currentIndex)
-            }
-        }
+                    {
+                        if(event.key === Qt.Key_Return)
+                        {
+                            control.rowClicked(_listBrowser.currentIndex)
+                        }
+                    }
 
         section.property: control.group ? control.listModel.sort : ""
         section.criteria: control.listModel.sort === "title" ?  ViewSection.FirstCharacter : ViewSection.FullString
@@ -310,16 +310,15 @@ Maui.Page
                 if (allowMenu) openItemMenu(index)
             }
 
-                onToggled: (state) => selectionBar.addToSelection(control.listModel.get(index))
+            onToggled: (state) => selectionBar.addToSelection(control.listModel.get(index))
 
-                checked: selectionBar.contains(model.url)
-                checkable: selectionMode
+            checked: selectionBar.contains(model.url)
+            checkable: selectionMode
 
-                Drag.keys: ["text/uri-list"]
-                Drag.mimeData: Drag.active ?
-                                   {
-                                       "text/uri-list": control.filterSelectedItems(model.url)
-                                   } : {}
+            Drag.keys: ["text/uri-list"]
+            Drag.mimeData: {
+                "text/uri-list": control.filterSelectedItems(model.url)
+            }
 
             sameAlbum:
             {
@@ -334,22 +333,22 @@ Maui.Page
             }
 
             onClicked: (mouse) =>
-            {
-                _listBrowser.forceActiveFocus()
-                currentIndex = index
+                       {
+                           _listBrowser.forceActiveFocus()
+                           currentIndex = index
 
-                if(selectionMode)
-                {
-                    selectionBar.addToSelection(model)
-                    return
-                }
+                           if(selectionMode)
+                           {
+                               selectionBar.addToSelection(model)
+                               return
+                           }
 
-                if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
-                    _listBrowser.itemsSelected([index])
+                           if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                           _listBrowser.itemsSelected([index])
 
-                if(Maui.Handy.isTouch)
-                    rowClicked(index)
-            }
+                           if(Maui.Handy.isTouch)
+                           rowClicked(index)
+                       }
 
             onDoubleClicked:
             {
@@ -409,10 +408,10 @@ Maui.Page
         if(selectionBar && selectionBar.count > 0 && selectionBar.contains(path))
         {
             const uris = selectionBar.uris
-            return uris.join("\n")
+            return uris
         }
 
-        return path
+        return [path]
     }
 
     function filterSelection(url)
@@ -435,4 +434,4 @@ Maui.Page
     {
         return _filterLoader.item
     }
-    }
+}

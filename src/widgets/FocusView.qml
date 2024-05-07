@@ -119,7 +119,6 @@ StackView
         anchors.fill: parent
         DragHandler
         {
-            acceptedDevices: PointerDevice.GenericPointer
             grabPermissions: PointerHandler.CanTakeOverFromItems | PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverbyAnything
             onActiveChanged: { if (active) root.startSystemMove(); }
             // Harmonize(d) with ToolBar.qml, TabBar.qml from MauiKit.

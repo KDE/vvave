@@ -27,6 +27,9 @@ Maui.BaseWindow
 
     flags:  Qt.Widget | Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint
 
+    Maui.Theme.colorSet: Maui.Theme.Complementary
+    Maui.Theme.inherit: false
+
     MouseArea
     {
         id: _mouseArea
@@ -49,6 +52,9 @@ Maui.BaseWindow
 
         Control
         {
+            Maui.Theme.colorSet: Maui.Theme.Complementary
+            Maui.Theme.inherit: false
+
             anchors.fill: parent
             visible: _mouseArea.containsMouse
             background: Rectangle
@@ -59,6 +65,8 @@ Maui.BaseWindow
 
             Grid
             {
+                Maui.Theme.colorSet: Maui.Theme.Complementary
+
                 anchors.centerIn: parent
                 columns: 2
                 rows: 2
@@ -67,7 +75,9 @@ Maui.BaseWindow
 
                 ToolButton
                 {
-                    id: babeBtnIcon
+                    Maui.Theme.colorSet: Maui.Theme.Complementary
+                    Maui.Theme.inherit: false
+
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
                     icon.name: "love"
@@ -85,7 +95,8 @@ Maui.BaseWindow
 
                 ToolButton
                 {
-                    id: playIcon
+                    Maui.Theme.colorSet: Maui.Theme.Complementary
+                    Maui.Theme.inherit: false
                     flat: true
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
@@ -97,7 +108,8 @@ Maui.BaseWindow
 
                 ToolButton
                 {
-                    id: nextBtn
+                    Maui.Theme.colorSet: Maui.Theme.Complementary
+                    Maui.Theme.inherit: false
                     flat: true
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
@@ -107,7 +119,9 @@ Maui.BaseWindow
 
                 ToolButton
                 {
-                    id: shuffleBtn
+                    Maui.Theme.colorSet: Maui.Theme.Complementary
+                    Maui.Theme.inherit: false
+
                     flat: true
                     icon.width: Maui.Style.iconSizes.big
                     icon.height: Maui.Style.iconSizes.big
