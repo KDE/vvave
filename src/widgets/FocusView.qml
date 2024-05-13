@@ -495,59 +495,6 @@ StackView
                             }
                         }
                     }
-
-                    ToolButton
-                    {
-                        flat: true
-                        icon.name: switch(playlist.repeatMode)
-                                   {
-                                   case Vvave.Playlist.NoRepeat: return "media-repeat-none"
-                                   case Vvave.Playlist.RepeatOnce: return "media-playlist-repeat-song"
-                                   case Vvave.Playlist.Repeat: return "media-playlist-repeat"
-                                   }
-                        onClicked:
-                        {
-                            switch(playlist.repeatMode)
-                            {
-                            case Vvave.Playlist.NoRepeat:
-                                playlist.repeatMode = Vvave.Playlist.Repeat
-                                break
-
-                            case Vvave.Playlist.Repeat:
-                                playlist.repeatMode = Vvave.Playlist.RepeatOnce
-                                break
-
-                            case Vvave.Playlist.RepeatOnce:
-                                playlist.repeatMode = Vvave.Playlist.NoRepeat
-                                break
-                            }
-                        }
-                    }
-
-                    ToolButton
-                    {
-                        id: shuffleBtn
-                        flat: true
-
-                        icon.name: switch(playlist.playMode)
-                                   {
-                                   case Vvave.Playlist.Normal: return "media-playlist-normal"
-                                   case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
-                                   }
-                        onClicked:
-                        {
-                            switch(playlist.playMode)
-                            {
-                            case Vvave.Playlist.Normal:
-                                playlist.playMode = Vvave.Playlist.Shuffle
-                                break
-
-                            case Vvave.Playlist.Shuffle:
-                                playlist.playMode = Vvave.Playlist.Normal
-                                break
-                            }
-                        }
-                    }
                 }
 
                 ColumnLayout

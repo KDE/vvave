@@ -7,7 +7,7 @@ import QtQuick.Effects
 
 import org.mauikit.controls as Maui
 
-import org.maui.vvave
+import org.maui.vvave as Vvave
 
 import "../../utils/Player.js" as Player
 import "../../db/Queries.js" as Q
@@ -41,11 +41,62 @@ Maui.Page
         }
     }
 
-    footBar.leftContent: ToolButton
-    {
-        icon.name: "document-save"
-        onClicked: saveList()
-    }
+    footBar.leftContent: [
+        ToolButton
+        {
+            icon.name: "document-save"
+            onClicked: saveList()
+        },
+
+        ToolButton
+        {
+            icon.name: switch(playlist.repeatMode)
+                       {
+                       case Vvave.Playlist.NoRepeat: return "media-repeat-none"
+                       case Vvave.Playlist.RepeatOnce: return "media-playlist-repeat-song"
+                       case Vvave.Playlist.Repeat: return "media-playlist-repeat"
+                       }
+            onClicked:
+            {
+                switch(playlist.repeatMode)
+                {
+                case Vvave.Playlist.NoRepeat:
+                    playlist.repeatMode = Vvave.Playlist.Repeat
+                    break
+
+                case Vvave.Playlist.Repeat:
+                    playlist.repeatMode = Vvave.Playlist.RepeatOnce
+                    break
+
+                case Vvave.Playlist.RepeatOnce:
+                    playlist.repeatMode = Vvave.Playlist.NoRepeat
+                    break
+                }
+            }
+        },
+
+        ToolButton
+        {
+            icon.name: switch(playlist.playMode)
+                       {
+                       case Vvave.Playlist.Normal: return "media-playlist-normal"
+                       case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
+                       }
+
+            onClicked:
+            {
+                switch(playlist.playMode)
+                {
+                case Vvave.Playlist.Normal:
+                    playlist.playMode = Vvave.Playlist.Shuffle
+                    break
+
+                case Vvave.Playlist.Shuffle:
+                    playlist.playMode = Vvave.Playlist.Normal
+                    break
+                }
+            }
+        }]
 
     BabeTable
     {
@@ -104,11 +155,11 @@ Maui.Page
                         images: ["image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album, "image://artwork/artist:"+currentTrack.artist]
                     }
 
-                   MouseArea
-                   {
-                       anchors.fill: parent
-                       onDoubleClicked: toggleMiniMode()
-                   }
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onDoubleClicked: toggleMiniMode()
+                    }
                 }
             }
 
@@ -251,24 +302,23 @@ Maui.Page
                         Player.playAt(index)
                 }
 
-
                 onContentDropped: (drop) =>
-                {
-                    console.log("Move or insert ", drop.source.mindex)
-                    if(typeof drop.source.mindex !== 'undefined')
-                    {
-                        console.log("Move ", drop.source.mindex,
-                                    delegate.mindex)
+                                  {
+                                      console.log("Move or insert ", drop.source.mindex)
+                                      if(typeof drop.source.mindex !== 'undefined')
+                                      {
+                                          console.log("Move ", drop.source.mindex,
+                                                      delegate.mindex)
 
-                        root.playlistManager.move(drop.source.mindex, delegate.mindex)
+                                          root.playlistManager.move(drop.source.mindex, delegate.mindex)
 
-                    }else
-                    {
-                        root.playlistManager.insert(String(drop.urls).split(","), delegate.mindex)
-                    }
+                                      }else
+                                      {
+                                          root.playlistManager.insert(String(drop.urls).split(","), delegate.mindex)
+                                      }
 
-                    control.totalMoves++
-                }
+                                      control.totalMoves++
+                                  }
             }
         }
 

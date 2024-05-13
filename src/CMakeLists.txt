@@ -85,7 +85,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${Taglib_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME}
     MauiKit4
     MauiKit4::FileBrowsing
-    MauiKit4::Accounts
     Qt6::Core
     Qt6::Network
     Qt6::Sql

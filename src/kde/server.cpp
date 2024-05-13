@@ -94,7 +94,7 @@ bool AppInstance::attachToExistingInstance(const QList<QUrl>& inputUrls, const Q
         }
     }
 
-    for (const auto& interface: qAsConst(dolphinInterfaces))
+    for (const auto& interface: std::as_const(dolphinInterfaces))
     {
         auto reply = interface.first->openFiles(newUrls);
         reply.waitForFinished();

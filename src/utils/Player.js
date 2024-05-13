@@ -103,6 +103,13 @@ function appendAll(tracks)
         appendTrack(track)
 
     mainPlaylist.listView.positionViewAtEnd()
+
+    if (tracks.length > 1 && root.playlistManager.playMode === Vvave.Playlist.Shuffle)
+    {
+        root.playlistManager.shuffleRange(
+            mainPlaylist.listView.count - tracks.length,
+            mainPlaylist.listView.count)
+    }
 }
 
 function playAll(tracks)
@@ -125,11 +132,12 @@ function appendAllModel(model)
     mainPlaylist.listModel.list.copy(model)
     mainPlaylist.listView.positionViewAtEnd()
 
-    if (model.count > 1 && root.playlistManager.playMode == Vvave.Playlist.Shuffle)
+    if (model.count > 1 && root.playlistManager.playMode === Vvave.Playlist.Shuffle)
+    {
         root.playlistManager.shuffleRange(
             mainPlaylist.listView.count - model.count,
-            mainPlaylist.listView.count
-        )
+            mainPlaylist.listView.count)
+    }
 }
 
 function playQuery(query)
@@ -150,7 +158,7 @@ function playAllModel(model)
         _drawer.visible = true
 
     mainPlaylist.listView.positionViewAtBeginning()
-    // playAt(0)
+    playAt(0)
 }
 
 function shuffleAllModel(model)

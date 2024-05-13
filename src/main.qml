@@ -6,7 +6,6 @@ import QtQuick.Window
 
 import org.mauikit.controls as Maui
 import org.mauikit.filebrowsing  as FB
-import org.mauikit.accounts as MA
 
 import org.maui.vvave
 
@@ -526,8 +525,6 @@ Maui.ApplicationWindow
                         sourceComponent: Maui.ToolButtonMenu
                         {
                             icon.name: "application-menu"
-
-                            MA.AccountsMenuItem{}
 
                             MenuItem
                             {

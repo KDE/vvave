@@ -46,7 +46,7 @@ endif()
 find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick QuickControls2 Network Sql Xml Multimedia)
 find_package(KF6 ${REQUIRED_KF_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
 
-find_package(MauiKit4 REQUIRED COMPONENTS FileBrowsing Accounts)
+find_package(MauiKit4 REQUIRED COMPONENTS FileBrowsing)
 
 find_package(Taglib 1.4 REQUIRED)
 
