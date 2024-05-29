@@ -77,6 +77,7 @@ Maui.Page
 
         ToolButton
         {
+            checked:  playlist.playMode === Vvave.Playlist.Shuffle
             icon.name: switch(playlist.playMode)
                        {
                        case Vvave.Playlist.Normal: return "media-playlist-normal"

@@ -9,7 +9,7 @@ class Player : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QUrl url READ getUrl WRITE setUrl NOTIFY urlChanged)
-    Q_PROPERTY(int volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
+    Q_PROPERTY(qreal volume READ getVolume WRITE setVolume NOTIFY volumeChanged)
     Q_PROPERTY(QMediaPlayer::PlaybackState state READ getState NOTIFY stateChanged)
     Q_PROPERTY(int duration READ getDuration NOTIFY durationChanged)
     Q_PROPERTY(bool playing READ getPlaying NOTIFY playingChanged)
@@ -21,8 +21,8 @@ public:
     void setUrl(const QUrl &value);
     QUrl getUrl() const;
 
-    void setVolume(const int &value);
-    int getVolume() const;
+    void setVolume(const qreal &value);
+    qreal getVolume() const;
 
     int getDuration() const;
 
@@ -45,7 +45,7 @@ private:
     QUrl url;
     PowerManagementInterface *m_power;
     int amountBuffers = 0;
-    int volume = 100;
+    qreal volume = 1.0;
 
 Q_SIGNALS:
     void durationChanged();

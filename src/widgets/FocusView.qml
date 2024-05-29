@@ -435,10 +435,10 @@ StackView
                         Layout.fillWidth: true
                         padding: 0
                         spacing: 0
-                        from: 0
-                        to: 100
+                        from: 0.0
+                        to: 1.0
                         value: player.volume
-                        stepSize: 5
+
                         orientation: Qt.Horizontal
 
                         onMoved:
@@ -494,6 +494,14 @@ StackView
                                 control.push(_infoComponent)
                             }
                         }
+                    }
+
+                    ToolButton
+                    {
+
+                        flat: true
+                        icon.name: "minimize"
+                        onClicked: toggleMiniMode()
                     }
                 }
 

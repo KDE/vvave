@@ -127,7 +127,7 @@ QUrl Player::getUrl() const
     return this->url;
 }
 
-void Player::setVolume(const int &value)
+void Player::setVolume(const qreal &value)
 {
     if (value == this->volume)
         return;
@@ -137,7 +137,7 @@ void Player::setVolume(const int &value)
     Q_EMIT this->volumeChanged();
 }
 
-int Player::getVolume() const
+qreal Player::getVolume() const
 {
     return this->volume;
 }

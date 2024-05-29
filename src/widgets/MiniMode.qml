@@ -25,7 +25,7 @@ Maui.BaseWindow
     x: Screen.width - width - 50
     y: Screen.height - height - 50
 
-    flags:  Qt.Widget | Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint
+    flags: Qt.Widget | Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint
 
     Maui.Theme.colorSet: Maui.Theme.Complementary
     Maui.Theme.inherit: false
