@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-17 01:39+0000\n"
-"PO-Revision-Date: 2024-01-19 15:55+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2024-04-30 15:21+0200\n"
+"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: src/main.cpp:104
 #, kde-format
@@ -49,7 +49,7 @@ msgstr ""
 #: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr ""
+msgstr "Časovač uspání"
 
 #: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
@@ -168,7 +168,7 @@ msgstr[2] "Filtrovat %1 alb"
 #: src/widgets/BabeTable/BabeTable.qml:72
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "Promíchat seznam skladeb"
 
 #: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
 #, kde-format
@@ -568,17 +568,17 @@ msgstr "30 minut"
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
 msgid "1 hour"
-msgstr ""
+msgstr "1 hodina"
 
 #: src/widgets/SleepTimerDialog.qml:79
 #, kde-format
 msgid "End of track"
-msgstr ""
+msgstr "Konec skladby"
 
 #: src/widgets/SleepTimerDialog.qml:95
 #, kde-format
 msgid "End of playlist"
-msgstr ""
+msgstr "Konec seznamu skladeb"
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
@@ -588,7 +588,7 @@ msgstr "Vypnuto"
 #: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after sleeping"
-msgstr ""
+msgstr "Zavřít aplikaci po uspání"
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format

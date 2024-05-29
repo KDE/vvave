@@ -144,7 +144,7 @@ msgstr "Peces clàssiques"
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr "Reproducció de música"
+msgstr "Reproduïu la música"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
 #: src/widgets/TracksView.qml:26
@@ -384,7 +384,7 @@ msgstr "Alterna la barra lateral"
 #: src/widgets/PlaybackBar.qml:56
 #, kde-format
 msgid "Play and pause"
-msgstr "Reproducció i pausa"
+msgstr "Reproduïu i pausa"
 
 #: src/widgets/PlaybackBar.qml:66
 #, kde-format
@@ -455,7 +455,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
 msgid "Playback"
-msgstr "Reproducció"
+msgstr "Reproduïu"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:59
 #, kde-format
@@ -609,12 +609,3 @@ msgstr "Accepta"
 #, kde-format
 msgid "Open file"
 msgstr "Obri un fitxer"
-
-#~ msgid "Dark Mode"
-#~ msgstr "Mode fosc"
-
-#~ msgid "Switch between light and dark colorscheme."
-#~ msgstr "Alterna entre els esquemes de color clar i fosc."
-
-#~ msgid "© 2019-2023 Maui Development Team"
-#~ msgstr "© 2019-2023 L'equip de desenvolupament de Maui"
