@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-17 01:39+0000\n"
+"POT-Creation-Date: 2024-05-30 01:47+0000\n"
 "PO-Revision-Date: 2024-02-02 09:20+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -18,22 +18,22 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 23.04.1\n"
 
-#: src/main.cpp:104
+#: src/main.cpp:100
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Упорядкуйте вашу музику і насолоджуйтеся нею."
 
-#: src/main.cpp:109 src/main.cpp:110
+#: src/main.cpp:105 src/main.cpp:106
 #, kde-format
 msgid "Developer"
 msgstr "Розробник"
 
-#: src/main.qml:308
+#: src/main.qml:301
 #, kde-format
 msgid "Missing file"
 msgstr "Не вистачає файла"
 
-#: src/main.qml:396 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:389 src/widgets/BabeTable/BabeTable.qml:147
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -42,7 +42,7 @@ msgstr[1] "Вилучити %1 маршрути"
 msgstr[2] "Вилучити %1 маршрутів"
 msgstr[3] "Вилучити маршрут"
 
-#: src/main.qml:397
+#: src/main.qml:390
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -50,71 +50,66 @@ msgstr ""
 "Ви справді хочете вилучити ці файли? Наслідки цієї дії не можна буде "
 "скасувати."
 
-#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:531 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Таймер присипляння"
 
-#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:540 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Скорочення"
 
-#: src/main.qml:556
+#: src/main.qml:547
 #, kde-format
 msgid "Settings"
 msgstr "Параметри"
 
-#: src/main.qml:563
+#: src/main.qml:554
 #, kde-format
 msgid "About"
 msgstr "Про програму"
 
-#: src/main.qml:596
+#: src/main.qml:587
 #, kde-format
 msgid "Songs"
 msgstr "Пісні"
 
-#: src/main.qml:615 src/widgets/AlbumsView.qml:76
+#: src/main.qml:606 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Альбоми"
 
-#: src/main.qml:622
+#: src/main.qml:613
 #, kde-format
 msgid "No Albums!"
 msgstr "Немає альбомів!"
 
-#: src/main.qml:623 src/main.qml:647 src/widgets/TracksView.qml:21
+#: src/main.qml:614 src/main.qml:638 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Додати нові джерела музики"
 
-#: src/main.qml:639 src/widgets/AlbumsView.qml:76
+#: src/main.qml:630 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Виконавці"
 
-#: src/main.qml:646
+#: src/main.qml:637
 #, kde-format
 msgid "No Artists!"
 msgstr "Немає виконавців!"
 
-#: src/main.qml:663 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:654 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Мітки"
 
-#: src/main.qml:671
+#: src/main.qml:662
 #, kde-format
 msgid "Folders"
 msgstr "Теки"
-
-#: src/main.qml:679
-#, kde-format
-msgid "Cloud"
-msgstr "Хмара"
 
 #: src/models/playlists/playlistsmodel.cpp:110
 #, kde-format
@@ -149,7 +144,7 @@ msgid "Playing music"
 msgstr "Відтворюємо музику"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
-#: src/widgets/TracksView.qml:26
+#: src/widgets/TracksView.qml:25
 #, kde-format
 msgid "Add sources"
 msgstr "Додати джерела"
@@ -161,7 +156,7 @@ msgstr "Цей список порожній"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:106
 #: src/widgets/CloudView/CloudView.qml:24
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:90
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
@@ -175,12 +170,12 @@ msgstr[3] "Фільтрувати"
 msgid "Shuffle Play"
 msgstr "Відтворення у випадковому порядку"
 
-#: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:46
+#: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
 msgstr "Відтворити все"
 
-#: src/widgets/BabeTable/BabeTable.qml:86 src/widgets/TracksGroup.qml:54
+#: src/widgets/BabeTable/BabeTable.qml:86 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
 msgstr "Дописати усі"
@@ -195,7 +190,7 @@ msgstr ""
 "дуже важко скасувати."
 
 #: src/widgets/BabeTable/BabeTable.qml:153
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:59
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
@@ -206,12 +201,12 @@ msgstr "Вилучити"
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/widgets/BabeTable/BabeTable.qml:180 src/widgets/TracksGroup.qml:67
+#: src/widgets/BabeTable/BabeTable.qml:180 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "Перейти до виконавця"
 
-#: src/widgets/BabeTable/BabeTable.qml:187 src/widgets/TracksGroup.qml:74
+#: src/widgets/BabeTable/BabeTable.qml:187 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "Перейти до альбому"
@@ -226,8 +221,8 @@ msgstr "Додати до улюблених"
 msgid "UnFav it"
 msgstr "Прибрати з улюблених"
 
-#: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:17
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
+#: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:16
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:51
 #, kde-format
 msgid "Edit"
 msgstr "Змінити"
@@ -273,22 +268,22 @@ msgstr ""
 "Ви можете налаштувати ваш обліковий запис, натиснувши тут, або скористатися "
 "пунктами обробки облікових записів у головному меню."
 
-#: src/widgets/FocusView.qml:147
+#: src/widgets/FocusView.qml:145
 #, kde-format
 msgid "Find"
 msgstr "Знайти"
 
-#: src/widgets/FocusView.qml:189
+#: src/widgets/FocusView.qml:187
 #, kde-format
 msgid "No Results!"
 msgstr "Нічого не знайдено!"
 
-#: src/widgets/FocusView.qml:190
+#: src/widgets/FocusView.qml:188
 #, kde-format
 msgid "Try with something else"
 msgstr "Спробувати інше"
 
-#: src/widgets/FocusView.qml:229 src/widgets/MainPlaylist/MainPlaylist.qml:80
+#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Почніть збирати ваш список відтворення."
@@ -312,7 +307,7 @@ msgstr "Немає тек!"
 msgid "Add new music to your sources to browse by folders"
 msgstr "Додайте нову музику до ваших джерел, щоб здійснювати навігацію теками"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:20
+#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:19
 #, kde-format
 msgid "No Tracks!"
 msgstr "Немає композицій!"
@@ -327,72 +322,72 @@ msgstr "Здається, ця тека джерел є порожньою!"
 msgid "Artist Info"
 msgstr "Інформація про виконавця"
 
-#: src/widgets/InfoView/InfoView.qml:62
+#: src/widgets/InfoView/InfoView.qml:61
 #, kde-format
 msgid "Album Info"
 msgstr "Дані щодо альбому"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:134
+#: src/widgets/MainPlaylist/MainPlaylist.qml:187
 #, kde-format
 msgid "Syncing to "
 msgstr "Синхронізуємо з "
 
-#: src/widgets/MetadataDialog.qml:42
+#: src/widgets/MetadataDialog.qml:41
 #, kde-format
 msgid "Metadata"
 msgstr "Метадані"
 
-#: src/widgets/MetadataDialog.qml:43
+#: src/widgets/MetadataDialog.qml:42
 #, kde-format
 msgid "Embedded metadata info."
 msgstr "Вбудовані метадані."
 
-#: src/widgets/MetadataDialog.qml:47
+#: src/widgets/MetadataDialog.qml:46
 #, kde-format
 msgid "Track Title"
 msgstr "Назва композиції"
 
-#: src/widgets/MetadataDialog.qml:59
+#: src/widgets/MetadataDialog.qml:58
 #, kde-format
 msgid "Artist"
 msgstr "Виконавець"
 
-#: src/widgets/MetadataDialog.qml:75
+#: src/widgets/MetadataDialog.qml:71
 #, kde-format
 msgid "Album"
 msgstr "Альбом"
 
-#: src/widgets/MetadataDialog.qml:90
+#: src/widgets/MetadataDialog.qml:84
 #, kde-format
 msgid "Track"
 msgstr "Композиція"
 
-#: src/widgets/MetadataDialog.qml:105
+#: src/widgets/MetadataDialog.qml:97
 #, kde-format
 msgid "Genre"
 msgstr "Жанр"
 
-#: src/widgets/MetadataDialog.qml:120
+#: src/widgets/MetadataDialog.qml:110
 #, kde-format
 msgid "Year"
 msgstr "Рік"
 
-#: src/widgets/MetadataDialog.qml:135
+#: src/widgets/MetadataDialog.qml:123
 #, kde-format
 msgid "Comment"
 msgstr "Коментар"
 
-#: src/widgets/PlaybackBar.qml:27
+#: src/widgets/PlaybackBar.qml:22
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "Увімкнути чи вимкнути бічну панель"
 
-#: src/widgets/PlaybackBar.qml:56
+#: src/widgets/PlaybackBar.qml:51
 #, kde-format
 msgid "Play and pause"
 msgstr "Відтворення і призупинення"
 
-#: src/widgets/PlaybackBar.qml:66
+#: src/widgets/PlaybackBar.qml:61
 #, kde-format
 msgid "Next"
 msgstr "Далі"
@@ -408,22 +403,22 @@ msgstr ""
 msgid "Remove from playlist"
 msgstr "Вилучити зі списку відтворення"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
 #, kde-format
 msgid "No Playlists!"
 msgstr "Немає списків відтворення!"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
 #, kde-format
 msgid "Start creating new custom playlists"
 msgstr "Розпочніть створення нетипових списків відтворення"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
 #, kde-format
 msgid "Remove '%1'?"
 msgstr "Вилучити «%1»?"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
@@ -555,12 +550,12 @@ msgstr "Показувати у таблиці назви альбомів і в
 msgid "Sources"
 msgstr "Джерела"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:210
+#: src/widgets/SettingsView/SettingsDialog.qml:209
 #, kde-format
 msgid "Add"
 msgstr "Додати"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:227
+#: src/widgets/SettingsView/SettingsDialog.qml:226
 #, kde-format
 msgid "Scan now"
 msgstr "Сканувати зараз"
@@ -611,10 +606,13 @@ msgstr "Закрити програму після присипляння"
 msgid "Accept"
 msgstr "Прийняти"
 
-#: src/widgets/TracksView.qml:32
+#: src/widgets/TracksView.qml:31
 #, kde-format
 msgid "Open file"
 msgstr "Відкрити файл"
+
+#~ msgid "Cloud"
+#~ msgstr "Хмара"
 
 #~ msgid "Dark Mode"
 #~ msgstr "Темний режим"
