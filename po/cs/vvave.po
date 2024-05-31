@@ -594,6 +594,3 @@ msgstr "Přijmout"
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "Cloud"
-#~ msgstr "Cloud"
