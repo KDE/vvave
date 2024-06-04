@@ -76,6 +76,10 @@
   <summary xml:lang="x-test">xxPlay your music collectionxx</summary>
   <summary xml:lang="zh-CN">播放您收藏的音乐</summary>
   <summary xml:lang="zh-TW">播放您的音樂收藏</summary>
+  <developer>
+    <name>maui</name>
+    <url>https://mauikit.org/</url>
+  </developer>
   <description>
     <p> Tiny Qt Music Player to keep your favorite songs at hand. </p>
     <p xml:lang="ca">Reproductor musical en Qt per a tenir les cançons preferides a mà.</p>
@@ -117,6 +121,7 @@
   <url type="homepage">https://vvave.kde.org/</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?product=vvave</url>
   <url type="donation">https://www.kde.org/community/donations</url>
+  <url type="vcs-browser">https://invent.kde.org/maui/vvave</url>
   <screenshots>
     <screenshot type="default">
       <caption>The Vvave music player</caption>
@@ -160,6 +165,11 @@
       </image>
     </screenshot>
   </screenshots>
+  <categories>
+    <category>Qt</category>
+    <category>Audio</category>
+    <category>Player</category>
+  </categories>
   <provides>
     <binary>vvave</binary>
   </provides>
