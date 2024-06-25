@@ -584,11 +584,13 @@ Maui.ApplicationWindow
 
                     Maui.AppViewLoader
                     {
-                        Maui.AppView.title: i18n("Songs")
-                        Maui.AppView.iconName: "view-media-track"
+                        Maui.Controls.title: i18n("Songs")
+                        Maui.Controls.iconName: "view-media-track"
+                        Maui.Controls.badgeText: "+100"
 
                         TracksView
                         {
+                            id: _tracksView
                             Component.onCompleted:
                             {
                                 if(settings.autoScan)
@@ -603,8 +605,8 @@ Maui.ApplicationWindow
                     {
                         id: _albumsViewLoader
 
-                        Maui.AppView.title: i18n("Albums")
-                        Maui.AppView.iconName: "view-media-album-cover"
+                        Maui.Controls.title: i18n("Albums")
+                        Maui.Controls.iconName: "view-media-album-cover"
 
                         property var pendingAlbum : ({})
 
@@ -627,8 +629,8 @@ Maui.ApplicationWindow
                     Maui.AppViewLoader
                     {
                         id: _artistViewLoader
-                        Maui.AppView.title: i18n("Artists")
-                        Maui.AppView.iconName: "view-media-artist"
+                        Maui.Controls.title: i18n("Artists")
+                        Maui.Controls.iconName: "view-media-artist"
 
                         property string pendingArtist
 
@@ -651,16 +653,16 @@ Maui.ApplicationWindow
 
                     Maui.AppViewLoader
                     {
-                        Maui.AppView.title: i18n("Tags")
-                        Maui.AppView.iconName: "tag"
+                        Maui.Controls.title: i18n("Tags")
+                        Maui.Controls.iconName: "tag"
 
                         PlaylistsView {}
                     }
 
                     Maui.AppViewLoader
                     {
-                        Maui.AppView.title: i18n("Folders")
-                        Maui.AppView.iconName: "folder"
+                        Maui.Controls.title: i18n("Folders")
+                        Maui.Controls.iconName: "folder"
 
                         FoldersView {}
                     }
@@ -710,8 +712,6 @@ Maui.ApplicationWindow
         {
         }
     }
-
-
 
     Component.onCompleted:
     {
