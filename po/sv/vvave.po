@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-30 01:47+0000\n"
+"POT-Creation-Date: 2024-06-26 01:46+0000\n"
 "PO-Revision-Date: 2024-05-03 08:55+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -70,38 +70,38 @@ msgstr "Om"
 msgid "Songs"
 msgstr "Låtar"
 
-#: src/main.qml:606 src/widgets/AlbumsView.qml:76
+#: src/main.qml:608 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Album"
 
-#: src/main.qml:613
+#: src/main.qml:615
 #, kde-format
 msgid "No Albums!"
 msgstr "Inga album."
 
-#: src/main.qml:614 src/main.qml:638 src/widgets/TracksView.qml:20
+#: src/main.qml:616 src/main.qml:640 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Lägg till nya musikkällor"
 
-#: src/main.qml:630 src/widgets/AlbumsView.qml:76
+#: src/main.qml:632 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artister"
 
-#: src/main.qml:637
+#: src/main.qml:639
 #, kde-format
 msgid "No Artists!"
 msgstr "Inga artister."
 
-#: src/main.qml:654 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:656 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Taggar"
 
-#: src/main.qml:662
+#: src/main.qml:664
 #, kde-format
 msgid "Folders"
 msgstr "Kataloger"
