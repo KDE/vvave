@@ -1,16 +1,16 @@
 # translation of vvave.pot to Esperanto
 # Copyright (C) 2024 Free Software Foundation, Inc.
 # This file is distributed under the same license as the vvave package.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2024.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-26 01:46+0000\n"
-"PO-Revision-Date: 2024-03-24 10:34+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
-"Language-Team: Esperanto <kde-i18n-eo.org>\n"
+"PO-Revision-Date: 2024-06-30 17:15+0200\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
+"Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,14 +37,16 @@ msgstr "Mankas dosiero"
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Forigi trakon"
+msgstr[1] "Forigi %1 trakojn"
 
 #: src/main.qml:390
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
+"Ĉu vi certas, ke vi volas forigi ĉi tiujn dosierojn? Ĉi tiu ago ne povas "
+"esti malfarita."
 
 #: src/main.qml:531 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -156,8 +158,8 @@ msgstr "Ĉi tiu listo estas malplena"
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtri"
+msgstr[1] "Filtri %1 albumojn"
 
 #: src/widgets/BabeTable/BabeTable.qml:72
 #, kde-format
@@ -180,6 +182,8 @@ msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr ""
+"Ĉu vi certas, ke vi volas forigi la dosieron de via komputilo? Ĉi tiu ago ne "
+"povas esti malfarita."
 
 #: src/widgets/BabeTable/BabeTable.qml:153
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:59
@@ -256,6 +260,9 @@ msgid ""
 "You can set up your account now by clicking here or under the Accounts "
 "options in the main menu"
 msgstr ""
+"Vi ne havas konton agordita.\n"
+"Vi povas agordi vian konton nun alklakante ĉi tie aŭ sub la elektebloj de "
+"Kontoj en la ĉefa menuo"
 
 #: src/widgets/FocusView.qml:145
 #, kde-format
@@ -281,8 +288,8 @@ msgstr "Komencu kunmeti vian ludliston."
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Filtri %1 dosierujon"
+msgstr[1] "Filtri %1 dosierujojn"
 
 #: src/widgets/FoldersView/FoldersView.qml:46
 #, kde-format
@@ -409,6 +416,8 @@ msgstr "Ĉu forigi '%1'?"
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
+"Ĉu vi certas, ke vi volas forigi ĉi tiun etikedon? Ĉi tiu operacio ne povas "
+"esti malfarita."
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
@@ -436,6 +445,8 @@ msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
 msgstr ""
+"Ĉu vi certas, ke vi volas forigi la fonton: \n"
+"%1"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:54
 #, kde-format
@@ -478,6 +489,8 @@ msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
+"Kolektas albumajn kaj artaĵojn de artistoj de interretaj servoj: LastFM, "
+"Spotify, MusicBrainz, iTunes, Genius kaj aliaj."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:104
 #, kde-format
@@ -489,6 +502,7 @@ msgstr "Aŭtomata Skanado"
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
+"Skani ĉiujn muzikfontojn dum ekfunkciigo por teni vian kolekton ĝisdatigita."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:118
 #, kde-format
@@ -590,6 +604,3 @@ msgstr "Akcepti"
 #, kde-format
 msgid "Open file"
 msgstr "Malfermi dosieron"
-
-#~ msgid "Cloud"
-#~ msgstr "Nubo"
