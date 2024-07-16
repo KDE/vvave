@@ -19,6 +19,8 @@ Maui.AltBrowser
     signal albumCoverClicked(string album, string artist)
     signal playAll(string album, string artist)
 
+    Maui.Controls.level : Maui.Controls.Secondary
+
     Maui.Theme.colorSet: Maui.Theme.View
     Maui.Theme.inherit: false
     headBar.visible: listModel.list.count > 1

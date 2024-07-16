@@ -13,6 +13,7 @@ Maui.AltBrowser
 
     Maui.Theme.colorSet: Maui.Theme.View
     Maui.Theme.inherit: false
+    Maui.Controls.level : Maui.Controls.Secondary
 
     viewType: root.isWide ? Maui.AltBrowser.ViewType.Grid : Maui.AltBrowser.ViewType.List
 

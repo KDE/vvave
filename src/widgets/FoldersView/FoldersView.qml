@@ -21,6 +21,7 @@ StackView
     {
         Maui.Theme.colorSet: Maui.Theme.View
         Maui.Theme.inherit: false
+        Maui.Controls.level : Maui.Controls.Secondary
 
         headBar.middleContent: Maui.SearchField
         {

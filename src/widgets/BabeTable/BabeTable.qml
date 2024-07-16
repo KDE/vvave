@@ -52,6 +52,8 @@ Maui.Page
     Maui.Theme.colorSet: Maui.Theme.View
     Maui.Theme.inherit: false
 
+    Maui.Controls.level : Maui.Controls.Secondary
+
     flickable: _listBrowser.flickable
 
     headBar.visible: control.list.count > 0
