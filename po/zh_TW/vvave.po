@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-26 01:46+0000\n"
+"POT-Creation-Date: 2024-07-17 01:42+0000\n"
 "PO-Revision-Date: 2024-02-05 18:24+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -32,7 +32,7 @@ msgstr "開發者"
 msgid "Missing file"
 msgstr "缺失檔案"
 
-#: src/main.qml:389 src/widgets/BabeTable/BabeTable.qml:147
+#: src/main.qml:389 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -137,7 +137,7 @@ msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
 msgstr "正在播放音樂"
 
-#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:50
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
 #: src/widgets/TracksView.qml:25
 #, kde-format
 msgid "Add sources"
@@ -148,54 +148,54 @@ msgstr "新增來源"
 msgid "This list is empty"
 msgstr "這個列表是空的"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:40 src/widgets/BabeTable/BabeTable.qml:106
+#: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
 #: src/widgets/CloudView/CloudView.qml:24
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:90
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "過濾 %1 個專輯"
 
-#: src/widgets/BabeTable/BabeTable.qml:72
+#: src/widgets/BabeTable/BabeTable.qml:74
 #, kde-format
 msgid "Shuffle Play"
 msgstr "隨機播放"
 
-#: src/widgets/BabeTable/BabeTable.qml:79 src/widgets/TracksGroup.qml:47
+#: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
 msgstr "播放全部"
 
-#: src/widgets/BabeTable/BabeTable.qml:86 src/widgets/TracksGroup.qml:55
+#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
 msgstr "將全部加到最後"
 
-#: src/widgets/BabeTable/BabeTable.qml:148
+#: src/widgets/BabeTable/BabeTable.qml:150
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr "您確定要從您的電腦上移除這個檔案嗎？這個動作無法復原。"
 
-#: src/widgets/BabeTable/BabeTable.qml:153
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:59
+#: src/widgets/BabeTable/BabeTable.qml:155
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
 msgstr "移除"
 
-#: src/widgets/BabeTable/BabeTable.qml:166 src/widgets/SleepTimerDialog.qml:142
+#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
 
-#: src/widgets/BabeTable/BabeTable.qml:180 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:182 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "跳到藝人"
 
-#: src/widgets/BabeTable/BabeTable.qml:187 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:189 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "跳到專輯"
@@ -211,7 +211,7 @@ msgid "UnFav it"
 msgstr "從最愛中移除它"
 
 #: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:16
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:51
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "編輯"
@@ -276,28 +276,28 @@ msgstr "試試看別的東西"
 msgid "Start putting together your playlist."
 msgstr "開始製作您的播放清單。"
 
-#: src/widgets/FoldersView/FoldersView.qml:32
+#: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
 msgstr[0] "過濾 %1 個資料夾"
 
-#: src/widgets/FoldersView/FoldersView.qml:46
+#: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
 msgid "No Folders!"
 msgstr "沒有資料夾！"
 
-#: src/widgets/FoldersView/FoldersView.qml:47
+#: src/widgets/FoldersView/FoldersView.qml:48
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
 msgstr "新增音樂到您的來源來以資料夾進行瀏覽"
 
-#: src/widgets/FoldersView/FoldersView.qml:134 src/widgets/TracksView.qml:19
+#: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
 #, kde-format
 msgid "No Tracks!"
 msgstr "沒有音軌！"
 
-#: src/widgets/FoldersView/FoldersView.qml:135
+#: src/widgets/FoldersView/FoldersView.qml:136
 #, kde-format
 msgid "This source folder seems to be empty!"
 msgstr "這個來源資料夾看起來是空的！"
@@ -387,22 +387,22 @@ msgstr "您的播放清單是空白的。添加新的音樂到播放清單裡即
 msgid "Remove from playlist"
 msgstr "從播放清單移除"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:23
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
 #, kde-format
 msgid "No Playlists!"
 msgstr "沒有播放清單！"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
 #, kde-format
 msgid "Start creating new custom playlists"
 msgstr "開始建立新的自訂播放清單"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:33
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Remove '%1'?"
 msgstr "移除 '%1'？"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
