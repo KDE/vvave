@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the vvave package.
+# SPDX-FileCopyrightText: 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-17 01:42+0000\n"
-"PO-Revision-Date: 2023-10-29 09:31+0100\n"
+"PO-Revision-Date: 2024-07-21 13:26+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: src/main.cpp:100
 #, kde-format
@@ -33,13 +34,12 @@ msgid "Missing file"
 msgstr "Brak pliku"
 
 #: src/main.qml:389 src/widgets/BabeTable/BabeTable.qml:149
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Usuń utwór"
-msgstr[1] "Usuń utwór"
-msgstr[2] "Usuń utwór"
+msgstr[1] "Usuń %1 utworu"
+msgstr[2] "Usuń %1 utworów"
 
 #: src/main.qml:390
 #, kde-format
@@ -50,7 +50,7 @@ msgstr "Czy na pewno usunąć te pliki? Nie będzie można wycofać tego działa
 #: src/main.qml:531 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr ""
+msgstr "Minutnik do uśpienia"
 
 #: src/main.qml:540 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
@@ -164,7 +164,7 @@ msgstr[2] "Odfiltruj %1 albumów"
 #: src/widgets/BabeTable/BabeTable.qml:74
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "Odtwarzaj losowo"
 
 #: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
 #, kde-format
@@ -355,7 +355,7 @@ msgstr "Album"
 #: src/widgets/MetadataDialog.qml:84
 #, kde-format
 msgid "Track"
-msgstr "Ścieżka"
+msgstr "Utwór"
 
 #: src/widgets/MetadataDialog.qml:97
 #, kde-format
@@ -408,10 +408,9 @@ msgid "Start creating new custom playlists"
 msgstr "Rozpocznij tworzenie nowej własnej listy odtwarzania."
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
-#, fuzzy, kde-format
-#| msgid "Remove '%1'"
+#, kde-format
 msgid "Remove '%1'?"
-msgstr "Usuń '%1'"
+msgstr "Usunąć '%1'?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
@@ -564,39 +563,37 @@ msgstr "Nieznany"
 #: src/widgets/SleepTimerDialog.qml:31
 #, kde-format
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minut"
 
 #: src/widgets/SleepTimerDialog.qml:47
 #, kde-format
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minut"
 
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
 msgid "1 hour"
-msgstr ""
+msgstr "1 godzina"
 
 #: src/widgets/SleepTimerDialog.qml:79
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "Losowe utwory"
+msgstr "Koniec utworu"
 
 #: src/widgets/SleepTimerDialog.qml:95
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "End of playlist"
-msgstr "Nie ma żadnej listy odtwarzania!"
+msgstr "Koniec listy odtwarzania"
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Wył."
 
 #: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after sleeping"
-msgstr ""
+msgstr "Zamknij aplikację po uśpieniu"
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
