@@ -38,7 +38,6 @@ set(vvave_SRCS
     kde/server.cpp)
 
 qt_add_resources(vvave_QML_QRC
-    qml.qrc
     assets.qrc)
 
 if(UNIX AND NOT ANDROID)
@@ -48,33 +47,72 @@ if(UNIX AND NOT ANDROID)
 endif()
 
 if(ANDROID)
-    add_library(${PROJECT_NAME}
-        SHARED
+    qt_add_executable(${PROJECT_NAME}
+        MANUAL_FINALIZATION
         ${vvave_SRCS}
         ${vvave_QML_QRC})
 else()
-    add_executable(${PROJECT_NAME}
+    qt_add_executable(${PROJECT_NAME}
         ${vvave_SRCS}
         ${vvave_dbus_SRCS}
         ${vvave_QML_QRC})
 endif()
 
+qt_add_qml_module(${PROJECT_NAME} URI app.maui.vvave
+    NO_PLUGIN
+    QML_FILES
+    main.qml
+    widgets/TracksView.qml
+    widgets/AlbumsView.qml
+    widgets/MainPlaylist/MainPlaylist.qml
+    widgets/PlaylistsView/PlaylistsView.qml
+    widgets/InfoView/InfoView.qml
+    widgets/InfoView/LyricsView.qml
+    widgets/PlaylistsView/PlaylistsViewModel.qml
+    widgets/FloatingDisk.qml
+    widgets/CloudView/CloudView.qml
+    widgets/SelectionBar.qml
+    widgets/FocusView.qml
+    widgets/SettingsView/SettingsDialog.qml
+    widgets/SettingsView/ShortcutsDialog.qml
+    widgets/PlaybackBar.qml
+    widgets/FoldersView/FoldersView.qml
+    widgets/MetadataDialog.qml
+    widgets/BabeTable/TableDelegate.qml
+    widgets/BabeTable/TableMenu.qml
+    widgets/BabeTable/BabeTable.qml
+    widgets/BabeGrid/BabeGrid.qml
+    widgets/MiniMode.qml
+    widgets/TracksGroup.qml
+    widgets/SleepTimerDialog.qml
+
+    utils/Player.js
+    db/Queries.js)
+
 if (ANDROID)
     find_package(OpenSSL REQUIRED)
 
-    target_link_libraries(${PROJECT_NAME} Qt6::AndroidExtras OpenSSL::SSL)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        OpenSSL::SSL)
 
     kde_source_files_enable_exceptions(${PROJECT_NAME})
 
 elseif(UNIX AND NOT WIN32 AND NOT APPLE)
-    target_sources(${PROJECT_NAME} PRIVATE
+    target_sources(${PROJECT_NAME}
+        PRIVATE
         kde/mpris2/mediaplayer2.cpp
         kde/mpris2/mediaplayer2player.cpp)
-    target_link_libraries(${PROJECT_NAME} Qt6::DBus)
+
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        Qt6::DBus)
 endif()
 
 if(UNIX OR WIN32 OR APPLE AND NOT ANDROID)
-    target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
+    target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        Qt6::Widgets)
 endif()
 
 target_compile_definitions(${PROJECT_NAME}
@@ -82,7 +120,11 @@ target_compile_definitions(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${Taglib_INCLUDE_DIRS})
 
+set(Taglib_LIBRARIES
+    TagLib::tag)
+
 target_link_libraries(${PROJECT_NAME}
+    PRIVATE
     MauiKit4
     MauiKit4::FileBrowsing
     Qt6::Core
@@ -101,3 +143,4 @@ if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(FILES assets/vvave.svg DESTINATION ${KDE_INSTALL_ICONDIR}/hicolor/scalable/apps)
 endif()
 
+qt_finalize_target(${PROJECT_NAME})

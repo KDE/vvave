@@ -20,9 +20,6 @@
 
 #ifdef Q_OS_ANDROID
 #include <MauiKit4/Core/mauiandroid.h>
-#include <QAndroidService>
-#include <QAndroidJniEnvironment>
-#include <QAndroidJniObject>
 #endif
 
 #ifdef Q_OS_MACOS
@@ -56,16 +53,7 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-  qDebug() << "APP LOADING SPEED TESTS" << 0;
-
-  #ifdef Q_OS_ANDROID
- if (argc > 1 && strcmp(argv[1], "-service") == 0)
-  {
-      qDebug() << "Service starting with from the same .so file";
-      QAndroidService app(argc, argv);
-      return app.exec();
-  }
-#endif
+    qDebug() << "APP LOADING SPEED TESTS" << 0;
 
 #ifdef Q_OS_WIN32
     qputenv("QT_MULTIMEDIA_PREFERRED_PLUGINS", "w");
@@ -151,21 +139,21 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     auto server =  std::make_unique<Server>();
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/app/maui/vvave/main.qml"));
 
     qDebug() << "APP LOADING SPEED TESTS" << 3;
 
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url, args, &server](QObject *obj, const QUrl &objUrl)
-    {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
+        {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
 
-        server->setQmlObject(obj);
+            server->setQmlObject(obj);
 
-        if (!args.isEmpty())
-            server->openFiles(args);
+            if (!args.isEmpty())
+                server->openFiles(args);
 
-    }, Qt::QueuedConnection);
+        }, Qt::QueuedConnection);
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 

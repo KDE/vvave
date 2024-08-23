@@ -131,7 +131,7 @@ Maui.PopupPage
     {
         enabled: control.option !== "none"
         Layout.fillWidth: true
-        text: i18n("Close application after sleeping")
+        text: i18n("Close application after")
         onToggled: closeAfterSleep = checked
     }
 

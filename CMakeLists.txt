@@ -43,21 +43,23 @@ if(ANDROID)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/android_files/version.gradle.in ${CMAKE_BINARY_DIR}/version.gradle)
 endif()
 
-find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Qml Quick QuickControls2 Network Sql Xml Multimedia)
+find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Core Qml Quick QuickControls2 Network Sql Xml Multimedia)
 find_package(KF6 ${REQUIRED_KF_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
 
 find_package(MauiKit4 REQUIRED COMPONENTS FileBrowsing)
 
-find_package(Taglib 1.4 REQUIRED)
-
 if(ANDROID)
-    find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS AndroidExtras)
-elseif(UNIX)
-    find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS DBus)
+    find_package(taglib 1.4 REQUIRED)
+else()
+    find_package(TagLib 1.4 REQUIRED)
+endif()
+
+if(UNIX AND NOT ANDROID)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS DBus)
 endif()
 
 if(UNIX OR WIN32 OR APPLE AND NOT ANDROID)
-    find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Widgets)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Widgets)
 endif()
 
 if(${ECM_SOURCE_UNDER_VERSION_CONTROL})
@@ -99,3 +101,6 @@ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+
+qt_finalize_project()
+
