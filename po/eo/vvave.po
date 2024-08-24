@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-17 01:42+0000\n"
+"POT-Creation-Date: 2024-08-24 01:47+0000\n"
 "PO-Revision-Date: 2024-06-30 17:15+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: src/main.cpp:100
+#: src/main.cpp:88
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Organizu kaj aŭskultu vian muzikon."
 
-#: src/main.cpp:105 src/main.cpp:106
+#: src/main.cpp:93 src/main.cpp:94
 #, kde-format
 msgid "Developer"
 msgstr "Ellaboranto"
@@ -591,8 +591,9 @@ msgid "Off"
 msgstr "Malŝaltita"
 
 #: src/widgets/SleepTimerDialog.qml:134
-#, kde-format
-msgid "Close application after sleeping"
+#, fuzzy, kde-format
+#| msgid "Close application after sleeping"
+msgid "Close application after"
 msgstr "Fermu la aplikon post dormo"
 
 #: src/widgets/SleepTimerDialog.qml:148

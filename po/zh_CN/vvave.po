@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-17 01:42+0000\n"
+"POT-Creation-Date: 2024-08-24 01:47+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,12 +17,12 @@ msgstr ""
 "X-Crowdin-File: /kf5-trunk/messages/vvave/vvave.pot\n"
 "X-Crowdin-File-ID: 41159\n"
 
-#: src/main.cpp:100
+#: src/main.cpp:88
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr ""
 
-#: src/main.cpp:105 src/main.cpp:106
+#: src/main.cpp:93 src/main.cpp:94
 #, kde-format
 msgid "Developer"
 msgstr ""
@@ -574,7 +574,7 @@ msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
-msgid "Close application after sleeping"
+msgid "Close application after"
 msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:148

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-17 01:42+0000\n"
+"POT-Creation-Date: 2024-08-24 01:47+0000\n"
 "PO-Revision-Date: 2023-03-12 12:07+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -15,12 +15,12 @@ msgstr ""
 "X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: src/main.cpp:100
+#: src/main.cpp:88
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr ""
 
-#: src/main.cpp:105 src/main.cpp:106
+#: src/main.cpp:93 src/main.cpp:94
 #, kde-format
 msgid "Developer"
 msgstr "Vývojár"
@@ -579,7 +579,7 @@ msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
-msgid "Close application after sleeping"
+msgid "Close application after"
 msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:148

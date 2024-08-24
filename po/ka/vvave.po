@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-17 01:42+0000\n"
+"POT-Creation-Date: 2024-08-24 01:47+0000\n"
 "PO-Revision-Date: 2024-02-11 02:28+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: src/main.cpp:100
+#: src/main.cpp:88
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "მუსიკის მოსმენის და დალაგება."
 
-#: src/main.cpp:105 src/main.cpp:106
+#: src/main.cpp:93 src/main.cpp:94
 #, kde-format
 msgid "Developer"
 msgstr "პროგრამისტი"
@@ -589,8 +589,9 @@ msgid "Off"
 msgstr "გამორთვა"
 
 #: src/widgets/SleepTimerDialog.qml:134
-#, kde-format
-msgid "Close application after sleeping"
+#, fuzzy, kde-format
+#| msgid "Close application after sleeping"
+msgid "Close application after"
 msgstr "აპლიკაციის დახურვა ძილის შემდეგ"
 
 #: src/widgets/SleepTimerDialog.qml:148

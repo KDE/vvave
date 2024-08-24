@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-17 01:42+0000\n"
+"POT-Creation-Date: 2024-08-24 01:47+0000\n"
 "PO-Revision-Date: 2023-05-14 12:58+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "X-POFile-SpellExtra: Vvave Maui Higuita Cloud Ups LastFM Spotify\n"
 "X-POFile-SpellExtra: MusicBrainz iTunes Genius\n"
 
-#: src/main.cpp:100
+#: src/main.cpp:88
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Organize e oiça a sua música."
 
-#: src/main.cpp:105 src/main.cpp:106
+#: src/main.cpp:93 src/main.cpp:94
 #, kde-format
 msgid "Developer"
 msgstr "Desenvolvimento"
@@ -603,7 +603,7 @@ msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
-msgid "Close application after sleeping"
+msgid "Close application after"
 msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:148
