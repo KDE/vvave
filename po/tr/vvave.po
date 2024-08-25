@@ -590,10 +590,9 @@ msgid "Off"
 msgstr "Kapalı"
 
 #: src/widgets/SleepTimerDialog.qml:134
-#, fuzzy, kde-format
-#| msgid "Close application after sleeping"
+#, kde-format
 msgid "Close application after"
-msgstr "Uykuya geçince uygulamayı kapat"
+msgstr "Şundan sonra uygulamayı kapat"
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
@@ -604,93 +603,3 @@ msgstr "Kabul Et"
 #, kde-format
 msgid "Open file"
 msgstr "Dosya Aç"
-
-#~ msgid "Cloud"
-#~ msgstr "Bulut"
-
-#~ msgid "Dark Mode"
-#~ msgstr "Koyu Kip"
-
-#~ msgid "Switch between light and dark colorscheme."
-#~ msgstr "Açık ve koyu renk şemaları arasında geçiş yapın."
-
-#~ msgid "© 2019-2023 Maui Development Team"
-#~ msgstr "© 2019-2023 Maui Geliştirme Takımı"
-
-#~ msgid "Vvave"
-#~ msgstr "Vvave"
-
-#~ msgid "Remove %1 tracks"
-#~ msgstr "%1 parçayı kaldır"
-
-#~ msgid "Configure the playback behavior."
-#~ msgstr "Çalma davranışını yapılandırın."
-
-#~ msgid "Configure the app plugins and collection behavior."
-#~ msgstr "Uygulama eklentilerini ve koleksiyon davranışını yapılandırın."
-
-#~ msgid "Add or remove sources"
-#~ msgstr "Kaynaklar ekle veya kaldır"
-
-#~ msgid "Behaviour"
-#~ msgstr "Davranış"
-
-#~ msgid "stars"
-#~ msgstr "yıldız"
-
-#~ msgid "Search collection"
-#~ msgstr "Koleksiyonda ara"
-
-#~ msgid "Random tracks from your collection."
-#~ msgstr "Koleksiyonunuzdan rastgele parçalar."
-
-#~ msgid "View All"
-#~ msgstr "Tümünü Görüntüle"
-
-#~ msgid "Popular Tracks"
-#~ msgstr "Popüler Parçalar"
-
-#~ msgid "Play them again."
-#~ msgstr "Onları yeniden çalın."
-
-#~ msgid "Recently played."
-#~ msgstr "Son çalınan parçalar."
-
-#~ msgid "More"
-#~ msgstr "Daha Fazla"
-
-#~ msgid "Give these tracks a first listen."
-#~ msgstr "Bu parçaları ilk kez dinleyin."
-
-#~ msgid "Oldest released tracks from your collection."
-#~ msgstr "Koleksiyonunuzdaki en eski tarihli parçalar."
-
-#~ msgid "File Info"
-#~ msgstr "Dosya Bilgisi"
-
-#~ msgid "Local file info."
-#~ msgstr "Yerel dosya bilgisi."
-
-#~ msgid "Dust off."
-#~ msgstr "Tozunu al."
-
-#~ msgid "New Tracks"
-#~ msgstr "Yeni Parçalar"
-
-#~ msgid "Newly added."
-#~ msgstr "Yeni eklendi."
-
-#~ msgid "Recent Artists"
-#~ msgstr "Son Çalınan Sanatçılar"
-
-#~ msgid "Recent Albums"
-#~ msgstr "Son Çalınan Albümler"
-
-#~ msgid "Playlists"
-#~ msgstr "Çalma Listeleri"
-
-#~ msgid "Camilo Higuita"
-#~ msgstr "Camilo Higuita"
-
-#~ msgid "Contributor"
-#~ msgstr "Katkıcı"

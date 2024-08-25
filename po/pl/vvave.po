@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-24 01:47+0000\n"
-"PO-Revision-Date: 2024-07-21 13:26+0200\n"
+"PO-Revision-Date: 2024-08-24 12:14+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -591,10 +591,9 @@ msgid "Off"
 msgstr "Wył."
 
 #: src/widgets/SleepTimerDialog.qml:134
-#, fuzzy, kde-format
-#| msgid "Close application after sleeping"
+#, kde-format
 msgid "Close application after"
-msgstr "Zamknij aplikację po uśpieniu"
+msgstr "Zamknij aplikację po"
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
