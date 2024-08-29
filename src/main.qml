@@ -586,7 +586,6 @@ Maui.ApplicationWindow
                     {
                         Maui.Controls.title: i18n("Songs")
                         Maui.Controls.iconName: "view-media-track"
-                        Maui.Controls.badgeText: "+100"
 
                         TracksView
                         {
