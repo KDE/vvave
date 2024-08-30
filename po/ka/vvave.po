@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 01:47+0000\n"
+"POT-Creation-Date: 2024-08-30 01:54+0000\n"
 "PO-Revision-Date: 2024-02-11 02:28+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -73,38 +73,38 @@ msgstr "შესახებ"
 msgid "Songs"
 msgstr "სიმღერები"
 
-#: src/main.qml:608 src/widgets/AlbumsView.qml:76
+#: src/main.qml:607 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "ალბომები"
 
-#: src/main.qml:615
+#: src/main.qml:614
 #, kde-format
 msgid "No Albums!"
 msgstr "ალბომების გარეშე!"
 
-#: src/main.qml:616 src/main.qml:640 src/widgets/TracksView.qml:20
+#: src/main.qml:615 src/main.qml:639 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "მუსიკის ახალი წყაროს დამაება"
 
-#: src/main.qml:632 src/widgets/AlbumsView.qml:76
+#: src/main.qml:631 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "შემსრულებლები"
 
-#: src/main.qml:639
+#: src/main.qml:638
 #, kde-format
 msgid "No Artists!"
 msgstr "შემსრულებლების გარეშე!"
 
-#: src/main.qml:656 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:655 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "ჭდეები"
 
-#: src/main.qml:664
+#: src/main.qml:663
 #, kde-format
 msgid "Folders"
 msgstr "საქაღალდეები"

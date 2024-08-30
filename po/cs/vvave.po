@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 01:47+0000\n"
+"POT-Creation-Date: 2024-08-30 01:54+0000\n"
 "PO-Revision-Date: 2024-08-27 13:51+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -71,38 +71,38 @@ msgstr "O aplikaci"
 msgid "Songs"
 msgstr "Písně"
 
-#: src/main.qml:608 src/widgets/AlbumsView.qml:76
+#: src/main.qml:607 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Alba"
 
-#: src/main.qml:615
+#: src/main.qml:614
 #, kde-format
 msgid "No Albums!"
 msgstr ""
 
-#: src/main.qml:616 src/main.qml:640 src/widgets/TracksView.qml:20
+#: src/main.qml:615 src/main.qml:639 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr ""
 
-#: src/main.qml:632 src/widgets/AlbumsView.qml:76
+#: src/main.qml:631 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Umělci"
 
-#: src/main.qml:639
+#: src/main.qml:638
 #, kde-format
 msgid "No Artists!"
 msgstr ""
 
-#: src/main.qml:656 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:655 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Značky"
 
-#: src/main.qml:664
+#: src/main.qml:663
 #, kde-format
 msgid "Folders"
 msgstr "Složky"
