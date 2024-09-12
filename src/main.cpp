@@ -65,17 +65,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QApplication app(argc, argv);
 #endif
 
-#ifdef Q_OS_ANDROID
-    if (!MAUIAndroid::checkRunTimePermissions({"android.permission.WRITE_EXTERNAL_STORAGE"}))
-        return -1;
-
-//    QAndroidJniObject::callStaticMethod<void>(
-//        "org/vvave/mediasession/QMediaSessionManager",
-//        "startQtAndroidService",
-//        "(Landroid/content/Context;)V",
-//        QtAndroid::androidActivity().object());
-#endif
-
     qDebug() << "APP LOADING SPEED TESTS" << 2;
 
     app.setOrganizationName(QStringLiteral("Maui"));
@@ -125,6 +114,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         for(const auto &path : args)
             paths << QUrl::fromUserInput(path).toString();
     }
+
+#ifdef Q_OS_ANDROID
+    if (!MAUIAndroid::checkRunTimePermissions({"android.permission.MANAGE_EXTERNAL_STORAGE",
+                                               "android.permission.WRITE_EXTERNAL_STORAGE"}))
+        qWarning() << "Failed to get WRITE and READ permissions";
+#endif
 
 #if (defined Q_OS_LINUX || defined Q_OS_FREEBSD) && !defined Q_OS_ANDROID
     if (AppInstance::attachToExistingInstance(QUrl::fromStringList(paths)))

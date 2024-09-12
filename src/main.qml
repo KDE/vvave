@@ -380,7 +380,7 @@ Maui.ApplicationWindow
     {
         id: _removeDialogComponent
 
-        Maui.FileListingDialog
+        FB.FileListingDialog
         {
             id: _removeDialog
 

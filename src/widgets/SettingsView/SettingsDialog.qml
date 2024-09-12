@@ -22,6 +22,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import org.mauikit.controls as Maui
+import org.mauikit.filebrowsing as FB
 
 import org.maui.vvave
 
@@ -211,7 +212,8 @@ Maui.SettingsDialog
                 onClicked:
                 {
                     _dialogLoader.sourceComponent = _fileDialogComponent
-                    dialog.settings.onlyDirs = true
+                    dialog.mode = FB.FileDialog.Modes.Open
+                    dialog.browser.settings.onlyDirs = false
                     dialog.callback = function(urls)
                     {
                         Vvave.addSources(urls)

@@ -144,7 +144,7 @@ Maui.Page
     {
         id: _removeDialogComponent
 
-        Maui.FileListingDialog
+        FB.FileListingDialog
         {
             title: i18n("Remove track")
             message: i18n("Are you sure you want to delete the file from your computer? This action can not be undone.")

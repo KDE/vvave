@@ -80,11 +80,12 @@ static const DB KEYMAP = {{KEY::URL, "url"},
                           {KEY::COMMENT, "comment"},
                           {KEY::SQL, "sql"}};
 
-static const QString CollectionDBPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/vvave/").toLocalFile();
 
 #ifdef Q_OS_ANDROID
-const static QUrl CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/vvave/");
+static const QString CollectionDBPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/vvave/").toLocalFile();
+const static QUrl CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/vvave/");
 #else
+static const QString CollectionDBPath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/vvave/").toLocalFile();
 const static QUrl CachePath = QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + "/vvave/");
 #endif
 

@@ -47,6 +47,8 @@ if(UNIX AND NOT ANDROID)
 endif()
 
 if(ANDROID)
+    include(/home/camilo/Android/Sdk/android_openssl/android_openssl.cmake)
+
     qt_add_executable(${PROJECT_NAME}
         MANUAL_FINALIZATION
         ${vvave_SRCS}
@@ -55,6 +57,10 @@ if(ANDROID)
     set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android_files)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/android_files/version.gradle.in ${CMAKE_BINARY_DIR}/src/version.gradle)
 
+    add_android_openssl_libraries(${PROJECT_NAME})
+    # set_property(TARGET ${PROJECT_NAME} PROPERTY QT_ANDROID_EXTRA_LIBS
+    #     /home/camilo/Android/Sdk/android_openssl/ libcrypto_1_1.so
+    #     /home/camilo/Android/Sdk/android_openssl/libssl_1_1.so)
 else()
     qt_add_executable(${PROJECT_NAME}
         ${vvave_SRCS}

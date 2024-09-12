@@ -50,6 +50,7 @@ CollectionDB::CollectionDB(QObject *parent) : QObject(parent)
 
     } else        
     {
+        qDebug()<< "Collection exists at" << QUrl::fromUserInput(BAE::CollectionDBPath + BAE::DBName);
         this->openDB(this->name);
     }
 }
@@ -58,7 +59,7 @@ void CollectionDB::prepareCollectionDB()
 {
     QSqlQuery query(this->m_db);
 
-    QFile file(":/db/script.sql");
+    QFile file(":/DB/db/script.sql");
     qDebug() << file.exists();
 
     if (!file.exists())
@@ -118,7 +119,7 @@ bool CollectionDB::check_existance(const QString &tableName, const QString &sear
 
     if (!query.exec())
     {
-        qDebug() << query.lastError().text();
+        qDebug() << "Check existance failed with: " << query.lastError().text() << tableName << searchId << search;
         return false;
     }
 
@@ -154,9 +155,21 @@ bool CollectionDB::insert(const QString &tableName, const QVariantMap &insertDat
 
     int k = 0;
     for (const QVariant &value : values)
+    {
+        qDebug() << "Binding to INSERT << " << value;
         query.bindValue(k++, value);
+    }
 
-    return query.exec();
+    qDebug() << "Insert values "<< insertData.values();
+
+
+    bool ok = query.exec();
+
+    if(!ok)
+    {
+        qWarning() << "Insertion failed for " << query.executedQuery() << "\n" << query.lastError().text();
+    }
+    return ok;
 }
 
 bool CollectionDB::update(const QString &tableName, const FMH::MODEL &updateData, const QVariantMap &where)
@@ -245,12 +258,15 @@ void CollectionDB::openDB(const QString &name)
 
 bool CollectionDB::addTrack(const FMH::MODEL &track)
 {
+    qDebug() << "ADD TRACK " << track.values();
+
     if (track.isEmpty())
         return false;
 
     const auto url = track[FMH::MODEL_KEY::URL];
     if (check_existance(TABLEMAP[BAE::TABLE::TRACKS], BAE::KEYMAP[BAE::KEY::URL], url))
     {
+        qDebug() << "File alredy exists";
         return false;
     }
 
@@ -269,6 +285,8 @@ bool CollectionDB::addTrack(const FMH::MODEL &track)
 
     if (insert(TABLEMAP[BAE::TABLE::SOURCES], sourceMap))
         Q_EMIT sourceInserted(sourceMap);
+
+    qDebug() << "Inserted the source map";
 
     const QVariantMap artistMap{{FMH::MODEL_NAME[FMH::MODEL_KEY::ARTIST], artist}, {FMH::MODEL_NAME[FMH::MODEL_KEY::WIKI], ""}};
 
