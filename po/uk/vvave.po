@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-30 01:54+0000\n"
+"POT-Creation-Date: 2024-09-13 01:49+0000\n"
 "PO-Revision-Date: 2024-08-24 09:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 23.04.3\n"
 
-#: src/main.cpp:88
+#: src/main.cpp:77
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Упорядкуйте вашу музику і насолоджуйтеся нею."
 
-#: src/main.cpp:93 src/main.cpp:94
+#: src/main.cpp:82 src/main.cpp:83
 #, kde-format
 msgid "Developer"
 msgstr "Розробник"
@@ -439,12 +439,12 @@ msgstr "Дописати"
 msgid "Queue"
 msgstr "Додати до черги"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:37
+#: src/widgets/SettingsView/SettingsDialog.qml:38
 #, kde-format
 msgid "Remove source"
 msgstr "Вилучити джерело"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:38
+#: src/widgets/SettingsView/SettingsDialog.qml:39
 #, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
@@ -453,42 +453,42 @@ msgstr ""
 "Ви справді хочете вилучити це джерело:\n"
 "%1"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:54
+#: src/widgets/SettingsView/SettingsDialog.qml:55
 #, kde-format
 msgid "Playback"
 msgstr "Відтворення"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Auto Resume"
 msgstr "Автопоновлення"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:60
+#: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
 msgid "Resume the last session playlist."
 msgstr "Відновлювати відтворення списку з останнього сеансу."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:73
 #, kde-format
 msgid "Volume"
 msgstr "Гучність"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:73
+#: src/widgets/SettingsView/SettingsDialog.qml:74
 #, kde-format
 msgid "Show volume controls."
 msgstr "Показати засоби керування гучністю."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:86
+#: src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Collection"
 msgstr "Збірка"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:91
+#: src/widgets/SettingsView/SettingsDialog.qml:92
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Отримати графіку"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:92
+#: src/widgets/SettingsView/SettingsDialog.qml:93
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -497,12 +497,12 @@ msgstr ""
 "Збирає графіку для альбому та виконавців з джерел в інтернеті: LastFM, "
 "Spotify, MusicBrainz, iTunes, Genius та інших."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:104
+#: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid "Auto Scan"
 msgstr "Автосканування"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:106
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -510,52 +510,52 @@ msgstr ""
 "Сканувати під час запуску усі джерела музичних творів для підтримання "
 "актуальності збірки."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:119
 #, kde-format
 msgid "General"
 msgstr "Загальне"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:123
+#: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Focus View"
 msgstr "Панель фокуса"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:125
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Зробити панель фокуса типовою."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:139
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Artwork"
 msgstr "Графіка"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:141
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Показувати зображення обкладинки композицій."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:155
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Titles"
 msgstr "Назви"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:156
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Показувати у таблиці назви альбомів і виконавців."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:172
+#: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Sources"
 msgstr "Джерела"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:209
+#: src/widgets/SettingsView/SettingsDialog.qml:210
 #, kde-format
 msgid "Add"
 msgstr "Додати"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:226
+#: src/widgets/SettingsView/SettingsDialog.qml:228
 #, kde-format
 msgid "Scan now"
 msgstr "Сканувати зараз"

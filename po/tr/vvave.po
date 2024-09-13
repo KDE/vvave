@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-30 01:54+0000\n"
+"POT-Creation-Date: 2024-09-13 01:49+0000\n"
 "PO-Revision-Date: 2024-03-22 16:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 24.02.1\n"
 
-#: src/main.cpp:88
+#: src/main.cpp:77
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Müziğinizi dinleyin ve organize edin."
 
-#: src/main.cpp:93 src/main.cpp:94
+#: src/main.cpp:82 src/main.cpp:83
 #, kde-format
 msgid "Developer"
 msgstr "Geliştirici"
@@ -432,12 +432,12 @@ msgstr "İliştir"
 msgid "Queue"
 msgstr "Kuyruk"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:37
+#: src/widgets/SettingsView/SettingsDialog.qml:38
 #, kde-format
 msgid "Remove source"
 msgstr "Kaynağı kaldır"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:38
+#: src/widgets/SettingsView/SettingsDialog.qml:39
 #, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
@@ -446,42 +446,42 @@ msgstr ""
 "Kaynağı kaldırmak istediğinizden emin misiniz: \n"
 "%1"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:54
+#: src/widgets/SettingsView/SettingsDialog.qml:55
 #, kde-format
 msgid "Playback"
 msgstr "Çalma"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Auto Resume"
 msgstr "Otomatik Sürdür"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:60
+#: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
 msgid "Resume the last session playlist."
 msgstr "Son oturumdaki listeyi sürdür."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:73
 #, kde-format
 msgid "Volume"
 msgstr "Ses Düzeyi"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:73
+#: src/widgets/SettingsView/SettingsDialog.qml:74
 #, kde-format
 msgid "Show volume controls."
 msgstr "Ses düzeyi denetimlerini gösterin."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:86
+#: src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Collection"
 msgstr "Koleksiyon"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:91
+#: src/widgets/SettingsView/SettingsDialog.qml:92
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Kapak Görselini Getir"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:92
+#: src/widgets/SettingsView/SettingsDialog.qml:93
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -490,12 +490,12 @@ msgstr ""
 "Çevrimiçi hizmetlerden albüm ve sanatçı görsellerini toplar: LastFM, "
 "Spotify, MusicBrainz, iTunes, Genius ve diğerleri."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:104
+#: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid "Auto Scan"
 msgstr "Otomatik Tara"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:106
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -503,52 +503,52 @@ msgstr ""
 "Müzik koleksiyonunuzu güncel tutmak için başlangıçta tüm müzik kaynaklarını "
 "tarayın."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:119
 #, kde-format
 msgid "General"
 msgstr "Genel"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:123
+#: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Focus View"
 msgstr "Odak Görünümü"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:125
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Odak görünümünü öntanımlı görünüm yapın."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:139
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Artwork"
 msgstr "Kapak Görseli"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:141
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Parçalar için kapak görselini gösterin."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:155
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Titles"
 msgstr "Başlıklar"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:156
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Izgara görünümünde albümlerin ve sanatçıların başlıklarını göster."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:172
+#: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Sources"
 msgstr "Kaynaklar"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:209
+#: src/widgets/SettingsView/SettingsDialog.qml:210
 #, kde-format
 msgid "Add"
 msgstr "Ekle"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:226
+#: src/widgets/SettingsView/SettingsDialog.qml:228
 #, kde-format
 msgid "Scan now"
 msgstr "Şimdi Tara"

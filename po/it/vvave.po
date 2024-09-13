@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-30 01:54+0000\n"
+"POT-Creation-Date: 2024-09-13 01:49+0000\n"
 "PO-Revision-Date: 2024-08-27 18:55+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 24.05.2\n"
 
-#: src/main.cpp:88
+#: src/main.cpp:77
 #, kde-format
 msgid "Organize and listen to your music."
 msgstr "Organizza e ascolta la tua musica."
 
-#: src/main.cpp:93 src/main.cpp:94
+#: src/main.cpp:82 src/main.cpp:83
 #, kde-format
 msgid "Developer"
 msgstr "Sviluppatore"
@@ -433,12 +433,12 @@ msgstr "Aggiungi"
 msgid "Queue"
 msgstr "Accoda"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:37
+#: src/widgets/SettingsView/SettingsDialog.qml:38
 #, kde-format
 msgid "Remove source"
 msgstr "Rimuovi fonte"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:38
+#: src/widgets/SettingsView/SettingsDialog.qml:39
 #, kde-format
 msgid ""
 "Are you sure you want to remove the source: \n"
@@ -447,42 +447,42 @@ msgstr ""
 "Sei sicuro di voler eliminare la fonte: \n"
 "%1"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:54
+#: src/widgets/SettingsView/SettingsDialog.qml:55
 #, kde-format
 msgid "Playback"
 msgstr "Riproduzione"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:59
+#: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Auto Resume"
 msgstr "Riprendi automaticamente"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:60
+#: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
 msgid "Resume the last session playlist."
 msgstr "Riprendi l'ultima sessione della scaletta."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:72
+#: src/widgets/SettingsView/SettingsDialog.qml:73
 #, kde-format
 msgid "Volume"
 msgstr "Volume"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:73
+#: src/widgets/SettingsView/SettingsDialog.qml:74
 #, kde-format
 msgid "Show volume controls."
 msgstr "Mostra i controlli del volume."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:86
+#: src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Collection"
 msgstr "Collezione"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:91
+#: src/widgets/SettingsView/SettingsDialog.qml:92
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Scarica la copertina"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:92
+#: src/widgets/SettingsView/SettingsDialog.qml:93
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -491,12 +491,12 @@ msgstr ""
 "Raccogli le copertine degli album e degli artisti dai servizi online: "
 "LastFM, Spotify, MusicBrainz, iTunes, Genius e altri."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:104
+#: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid "Auto Scan"
 msgstr "Analizza automaticamente"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:106
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -504,52 +504,52 @@ msgstr ""
 "Analizza tutte le fonti musicali all'avvio per tenere aggiornata la "
 "collezione."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:119
 #, kde-format
 msgid "General"
 msgstr "Generale"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:123
+#: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Focus View"
 msgstr "Vista centrale"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:125
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Rendi predefinita la vista attiva."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:139
+#: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Artwork"
 msgstr "Grafica"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:141
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Mostra la copertina di queste tracce."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:155
+#: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Titles"
 msgstr "Titoli"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:156
+#: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Mostra il titolo degli album e gli artisti nella vista a griglia."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:172
+#: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Sources"
 msgstr "Fonti"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:209
+#: src/widgets/SettingsView/SettingsDialog.qml:210
 #, kde-format
 msgid "Add"
 msgstr "Aggiungi"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:226
+#: src/widgets/SettingsView/SettingsDialog.qml:228
 #, kde-format
 msgid "Scan now"
 msgstr "Analizza adesso"
