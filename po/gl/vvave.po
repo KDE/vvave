@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 01:49+0000\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
 "PO-Revision-Date: 2024-08-25 15:41+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -261,22 +261,22 @@ msgstr ""
 "Para configurala agora prema aquí ou baixo as opcións de contas no menú "
 "principal."
 
-#: src/widgets/FocusView.qml:145
+#: src/widgets/FocusView.qml:153
 #, kde-format
 msgid "Find"
 msgstr "Atopar"
 
-#: src/widgets/FocusView.qml:187
+#: src/widgets/FocusView.qml:195
 #, kde-format
 msgid "No Results!"
 msgstr "Non hai resultados."
 
-#: src/widgets/FocusView.qml:188
+#: src/widgets/FocusView.qml:196
 #, kde-format
 msgid "Try with something else"
 msgstr "Probar outra cousa"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Prepare a súa lista de reprodución."

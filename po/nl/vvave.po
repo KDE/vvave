@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 01:49+0000\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
 "PO-Revision-Date: 2024-08-24 13:04+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -263,22 +263,22 @@ msgstr ""
 "U kunt uw account nu opzetten door te hier te klikken here onder de optie "
 "Accounts in het hoofdmenu"
 
-#: src/widgets/FocusView.qml:145
+#: src/widgets/FocusView.qml:153
 #, kde-format
 msgid "Find"
 msgstr "Zoeken"
 
-#: src/widgets/FocusView.qml:187
+#: src/widgets/FocusView.qml:195
 #, kde-format
 msgid "No Results!"
 msgstr "Geen resultaten!"
 
-#: src/widgets/FocusView.qml:188
+#: src/widgets/FocusView.qml:196
 #, kde-format
 msgid "Try with something else"
 msgstr "Met iets anders proberen"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Begin met uw afspeellijst samen te stellen."

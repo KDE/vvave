@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 01:49+0000\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
 "PO-Revision-Date: 2024-02-05 19:52+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -256,22 +256,22 @@ msgstr ""
 "계정을 설정하지 않았습니다.\n"
 "여기를 클릭하거나 주 메뉴의 계정 옵션에서 계정을 설정할 수 있습니다"
 
-#: src/widgets/FocusView.qml:145
+#: src/widgets/FocusView.qml:153
 #, kde-format
 msgid "Find"
 msgstr "찾기"
 
-#: src/widgets/FocusView.qml:187
+#: src/widgets/FocusView.qml:195
 #, kde-format
 msgid "No Results!"
 msgstr "결과 없음!"
 
-#: src/widgets/FocusView.qml:188
+#: src/widgets/FocusView.qml:196
 #, kde-format
 msgid "Try with something else"
 msgstr "다른 항목으로 시도하십시오"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "재생 목록에 항목을 추가하여 시작하십시오."

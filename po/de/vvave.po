@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 01:49+0000\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
 "PO-Revision-Date: 2023-04-29 12:03+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -264,22 +264,22 @@ msgid ""
 "options in the main menu"
 msgstr ""
 
-#: src/widgets/FocusView.qml:145
+#: src/widgets/FocusView.qml:153
 #, kde-format
 msgid "Find"
 msgstr "Suchen"
 
-#: src/widgets/FocusView.qml:187
+#: src/widgets/FocusView.qml:195
 #, kde-format
 msgid "No Results!"
 msgstr "Keine Ergebnisse"
 
-#: src/widgets/FocusView.qml:188
+#: src/widgets/FocusView.qml:196
 #, kde-format
 msgid "Try with something else"
 msgstr "Versuchen Sie etwas anderes"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Stellen Sie jetzt Ihre Wiedergabeliste zusammen."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 01:49+0000\n"
+"POT-Creation-Date: 2024-09-17 01:53+0000\n"
 "PO-Revision-Date: 2024-02-05 18:24+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -256,22 +256,22 @@ msgstr ""
 "您還沒有設定帳號。\n"
 "您可以點擊這裡來設定帳號或是在主選單下的帳號選項裡進行設定"
 
-#: src/widgets/FocusView.qml:145
+#: src/widgets/FocusView.qml:153
 #, kde-format
 msgid "Find"
 msgstr "尋找"
 
-#: src/widgets/FocusView.qml:187
+#: src/widgets/FocusView.qml:195
 #, kde-format
 msgid "No Results!"
 msgstr "沒有結果！"
 
-#: src/widgets/FocusView.qml:188
+#: src/widgets/FocusView.qml:196
 #, kde-format
 msgid "Try with something else"
 msgstr "試試看別的東西"
 
-#: src/widgets/FocusView.qml:227 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "開始製作您的播放清單。"
