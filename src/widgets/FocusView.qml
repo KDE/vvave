@@ -3,7 +3,7 @@ import QtQml
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 
 import org.mauikit.controls as Maui
 import org.mauikit.filebrowsing as FB
@@ -55,6 +55,7 @@ StackView
                 Image
                 {
                     id: artworkBg
+                    visible: false
                     height: parent.height *3
                     width: parent.width *3
                     anchors.centerIn: parent
@@ -67,27 +68,29 @@ StackView
                     asynchronous: true
                     cache: true
 
-                    source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+                    source: "image://artwork/album:"+currentTrack.artist + ":" + currentTrack.album
                 }
 
-                FastBlur
+                MultiEffect
                 {
                     id: fastBlur
+                    visible: true
                     height: artworkBg.height
                     width: artworkBg.width
                     anchors.centerIn: parent
-
+                    blurEnabled: true
                     source: artworkBg
-                    radius: 64
-                    transparentBorder: false
-                    cached: true
+                    blur: 1.0
+                    blurMax: 64
+                    brightness: 0.4
+                    saturation: 0.2
+                }
 
-                    Rectangle
-                    {
-                        anchors.fill: parent
-                        color: Maui.Theme.backgroundColor
-                        opacity: 0.9
-                    }
+                Rectangle
+                {
+                    anchors.fill: parent
+                    color: Maui.Theme.backgroundColor
+                    opacity: 0.7
                 }
             }
         }
@@ -114,14 +117,19 @@ StackView
         }
     }
 
-    Item
+    Loader
     {
         anchors.fill: parent
-        DragHandler
+        active: !Maui.Handy.isMobile
+        asynchronous: true
+        sourceComponent: Item
         {
-            grabPermissions: PointerHandler.CanTakeOverFromItems | PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverbyAnything
-            onActiveChanged: { if (active) root.startSystemMove(); }
-            // Harmonize(d) with ToolBar.qml, TabBar.qml from MauiKit.
+            DragHandler
+            {
+                grabPermissions: PointerHandler.CanTakeOverFromItems | PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverbyAnything
+                onActiveChanged: { if (active) root.startSystemMove(); }
+                // Harmonize(d) with ToolBar.qml, TabBar.qml from MauiKit.
+            }
         }
     }
 
@@ -188,15 +196,15 @@ StackView
                     holder.body: i18n("Try with something else")
 
                     onRowClicked: (index) =>
-                    {
-                        Player.quickPlay(listModel.get(index))
-                        _filterField.close()
-                    }
+                                  {
+                                      Player.quickPlay(listModel.get(index))
+                                      _filterField.close()
+                                  }
 
                     onAppendTrack: (index) =>
-                    {
-                        Player.addTrack(listModel.get(index))
-                    }
+                                   {
+                                       Player.addTrack(listModel.get(index))
+                                   }
 
                     onPlayAll:
                     {
@@ -212,9 +220,9 @@ StackView
                     }
 
                     onQueueTrack: (index) =>
-                    {
-                        Player.queueTracks([listModel.get(index)], index)
-                    }
+                                  {
+                                      Player.queueTracks([listModel.get(index)], index)
+                                  }
                 }
             }
 
@@ -273,7 +281,7 @@ StackView
                         Timer
                         {
                             id: _flickTimer
-                            interval: 1700
+                            interval: 1000
                             onTriggered:
                             {
                                 var index = _listView.indexAt(_listView.contentX, _listView.contentY)
@@ -284,7 +292,7 @@ StackView
 
                         onMovementEnded:
                         {
-                          _flickTimer.start()
+                            _flickTimer.start()
                         }
 
                         delegate: ColumnLayout
@@ -314,17 +322,14 @@ StackView
                                     }
 
                                     color: "#fafafa"
-                                }
-
-                                DropShadow
-                                {
-                                    anchors.fill: _bg
-                                    horizontalOffset: 0
-                                    verticalOffset: 0
-                                    radius: 8.0
-                                    samples: 17
-                                    color: "#80000000"
-                                    source: _bg
+                                    layer.enabled: true
+                                    layer.effect: MultiEffect
+                                    {
+                                        shadowHorizontalOffset: 0
+                                        shadowVerticalOffset: 0
+                                        shadowEnabled: true
+                                        shadowColor: "#80000000"
+                                    }
                                 }
 
                                 Image
@@ -350,16 +355,17 @@ StackView
                                     }
 
                                     layer.enabled: true
-                                    layer.effect: OpacityMask
+                                    layer.effect: MultiEffect
                                     {
-                                        maskSource: Item
+                                        maskEnabled: true
+                                        maskThresholdMin: 0.5
+                                        maskSpreadAtMin: 1.0
+                                        maskSpreadAtMax: 0.0
+                                        maskThresholdMax: 1.0
+                                        maskSource: ShaderEffectSource
                                         {
-                                            width: _image.width
-                                            height: _image.height
-
-                                            Rectangle
+                                            sourceItem: Rectangle
                                             {
-                                                anchors.centerIn: parent
                                                 width: _image.width
                                                 height: _image.height
                                                 radius: _bg.radius
@@ -565,7 +571,6 @@ StackView
         }
     }
 
-
     function forceActiveFocus()
     {
         control.item.forceActiveFocus()
@@ -580,4 +585,4 @@ StackView
     {
         return control.loader.item.filterField
     }
-    }
+}
