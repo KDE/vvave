@@ -289,6 +289,19 @@ Maui.ApplicationWindow
         }
     }
 
+    Action
+    {
+        id: _missingFileAction
+        text: i18n("Remove")
+        Maui.Controls.status: Maui.Controls.Negative
+        onTriggered:
+        {
+            console.log("REMOVE TIU MSISING", mainPlaylist.table.currentIndex)
+            mainPlaylist.table.list.removeMissing(mainPlaylist.table.currentIndex)
+            console.log("REMOVE TIU MSISING 2", mainPlaylist.table.currentIndex)
+        }
+    }
+
     Playlist
     {
         id: playlist
@@ -296,16 +309,12 @@ Maui.ApplicationWindow
         model: mainPlaylist.listModel.list
         onCurrentTrackChanged: Player.playTrack()
 
+
         onMissingFile: (track) =>
                        {
                            var message = i18n("Missing file")
                            var messageBody = track.title + " by " + track.artist + " is missing.\nDo you want to remove it from your collection?"
-                           notify("dialog-question", message, messageBody, function ()
-                           {
-                               console.log("REMOVE TIU MSISING", mainPlaylist.table.currentIndex)
-                               mainPlaylist.table.list.removeMissing(mainPlaylist.table.currentIndex)
-                               console.log("REMOVE TIU MSISING 2", mainPlaylist.table.currentIndex)
-                           })
+                           notify("dialog-question", message, messageBody, [_missingFileAction])
                        }
     }
 

@@ -25,8 +25,8 @@ Maui.ContextualMenu
     property alias menuItem : control.contentData
 
     title: control.titleInfo.title
-    subtitle: control.titleInfo.artist
-    titleImageSource: "image://artwork/album:"+ control.titleInfo.artist+":"+control.titleInfo.album
+    Maui.Controls.subtitle: control.titleInfo.artist
+    icon.source: "image://artwork/album:"+ control.titleInfo.artist+":"+control.titleInfo.album
 
     Maui.MenuItemActionRow
     {
@@ -134,7 +134,7 @@ Maui.ContextualMenu
     {
         text: i18n("Delete")
         icon.name: "edit-delete"
-        Maui.Theme.textColor: Maui.Theme.negativeTextColor
+        Maui.Controls.status: Maui.Controls.Negative
         onTriggered:
         {
             deleteClicked()
