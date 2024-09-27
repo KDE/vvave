@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"POT-Creation-Date: 2024-09-27 01:53+0000\n"
 "PO-Revision-Date: 2024-08-27 18:55+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -27,19 +27,26 @@ msgstr "Organizza e ascolta la tua musica."
 msgid "Developer"
 msgstr "Sviluppatore"
 
-#: src/main.qml:301
+#: src/main.qml:295 src/widgets/BabeTable/BabeTable.qml:155
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: src/main.qml:315
 #, kde-format
 msgid "Missing file"
 msgstr "File mancante"
 
-#: src/main.qml:389 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:398 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Rimuovi traccia"
 msgstr[1] "Rimuovi %1 tracce"
 
-#: src/main.qml:390
+#: src/main.qml:399
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -47,63 +54,63 @@ msgstr ""
 "Sei sicuro di voler rimuovere questi file? Questa azione non può essere "
 "annullata."
 
-#: src/main.qml:531 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Sveglia"
 
-#: src/main.qml:540 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Scorciatoie"
 
-#: src/main.qml:547
+#: src/main.qml:556
 #, kde-format
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: src/main.qml:554
+#: src/main.qml:563
 #, kde-format
 msgid "About"
 msgstr "Informazioni su"
 
-#: src/main.qml:587
+#: src/main.qml:596
 #, kde-format
 msgid "Songs"
 msgstr "Brani"
 
-#: src/main.qml:607 src/widgets/AlbumsView.qml:76
+#: src/main.qml:616 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Album"
 
-#: src/main.qml:614
+#: src/main.qml:623
 #, kde-format
 msgid "No Albums!"
 msgstr "Nessun album."
 
-#: src/main.qml:615 src/main.qml:639 src/widgets/TracksView.qml:20
+#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Aggiungi nuove fonti musicali"
 
-#: src/main.qml:631 src/widgets/AlbumsView.qml:76
+#: src/main.qml:640 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artisti"
 
-#: src/main.qml:638
+#: src/main.qml:647
 #, kde-format
 msgid "No Artists!"
 msgstr "Nessun artista."
 
-#: src/main.qml:655 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etichette"
 
-#: src/main.qml:663
+#: src/main.qml:672
 #, kde-format
 msgid "Folders"
 msgstr "Cartelle"
@@ -183,13 +190,6 @@ msgid ""
 msgstr ""
 "Sei sicuro di voler eliminare il file dal computer? Questa azione non può "
 "essere annullata."
-
-#: src/widgets/BabeTable/BabeTable.qml:155
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
-#: src/widgets/SelectionBar.qml:76
-#, kde-format
-msgid "Remove"
-msgstr "Rimuovi"
 
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
 #, kde-format

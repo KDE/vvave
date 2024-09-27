@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"POT-Creation-Date: 2024-09-27 01:53+0000\n"
 "PO-Revision-Date: 2024-02-11 02:28+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -28,19 +28,26 @@ msgstr "მუსიკის მოსმენის და დალაგე
 msgid "Developer"
 msgstr "პროგრამისტი"
 
-#: src/main.qml:301
+#: src/main.qml:295 src/widgets/BabeTable/BabeTable.qml:155
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "მოშორება"
+
+#: src/main.qml:315
 #, kde-format
 msgid "Missing file"
 msgstr "აკლია ფაილი"
 
-#: src/main.qml:389 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:398 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "ტრეკის წაშლა"
 msgstr[1] "%1 ტრეკის წაშლა"
 
-#: src/main.qml:390
+#: src/main.qml:399
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -48,63 +55,63 @@ msgstr ""
 "დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ ეს ფაილები? ქმედება "
 "შეუქცევადია."
 
-#: src/main.qml:531 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "ძილის წამმზომი"
 
-#: src/main.qml:540 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "მალსახმობები"
 
-#: src/main.qml:547
+#: src/main.qml:556
 #, kde-format
 msgid "Settings"
 msgstr "მორგება"
 
-#: src/main.qml:554
+#: src/main.qml:563
 #, kde-format
 msgid "About"
 msgstr "შესახებ"
 
-#: src/main.qml:587
+#: src/main.qml:596
 #, kde-format
 msgid "Songs"
 msgstr "სიმღერები"
 
-#: src/main.qml:607 src/widgets/AlbumsView.qml:76
+#: src/main.qml:616 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "ალბომები"
 
-#: src/main.qml:614
+#: src/main.qml:623
 #, kde-format
 msgid "No Albums!"
 msgstr "ალბომების გარეშე!"
 
-#: src/main.qml:615 src/main.qml:639 src/widgets/TracksView.qml:20
+#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "მუსიკის ახალი წყაროს დამაება"
 
-#: src/main.qml:631 src/widgets/AlbumsView.qml:76
+#: src/main.qml:640 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "შემსრულებლები"
 
-#: src/main.qml:638
+#: src/main.qml:647
 #, kde-format
 msgid "No Artists!"
 msgstr "შემსრულებლების გარეშე!"
 
-#: src/main.qml:655 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "ჭდეები"
 
-#: src/main.qml:663
+#: src/main.qml:672
 #, kde-format
 msgid "Folders"
 msgstr "საქაღალდეები"
@@ -184,13 +191,6 @@ msgid ""
 msgstr ""
 "დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ ეს ფაილი თქვენი კომპიუტერიდან? "
 "ეს ქმედება შეუქცევადია."
-
-#: src/widgets/BabeTable/BabeTable.qml:155
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
-#: src/widgets/SelectionBar.qml:76
-#, kde-format
-msgid "Remove"
-msgstr "მოშორება"
 
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
 #, kde-format

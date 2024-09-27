@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"POT-Creation-Date: 2024-09-27 01:53+0000\n"
 "PO-Revision-Date: 2024-08-24 11:47+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -29,19 +29,26 @@ msgstr "Organitzeu i escolteu la vostra música."
 msgid "Developer"
 msgstr "Desenvolupador"
 
-#: src/main.qml:301
+#: src/main.qml:295 src/widgets/BabeTable/BabeTable.qml:155
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Elimina"
+
+#: src/main.qml:315
 #, kde-format
 msgid "Missing file"
 msgstr "Manca un fitxer"
 
-#: src/main.qml:389 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:398 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Elimina la peça"
 msgstr[1] "Elimina %1 peces"
 
-#: src/main.qml:390
+#: src/main.qml:399
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -49,63 +56,63 @@ msgstr ""
 "Esteu segur que voleu eliminar aquests fitxers? Aquesta operació no es pot "
 "desfer."
 
-#: src/main.qml:531 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Temporitzador d'adormir-se"
 
-#: src/main.qml:540 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Dreceres"
 
-#: src/main.qml:547
+#: src/main.qml:556
 #, kde-format
 msgid "Settings"
 msgstr "Configuració"
 
-#: src/main.qml:554
+#: src/main.qml:563
 #, kde-format
 msgid "About"
 msgstr "Quant a"
 
-#: src/main.qml:587
+#: src/main.qml:596
 #, kde-format
 msgid "Songs"
 msgstr "Cançons"
 
-#: src/main.qml:607 src/widgets/AlbumsView.qml:76
+#: src/main.qml:616 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Àlbums"
 
-#: src/main.qml:614
+#: src/main.qml:623
 #, kde-format
 msgid "No Albums!"
 msgstr "Cap àlbum!"
 
-#: src/main.qml:615 src/main.qml:639 src/widgets/TracksView.qml:20
+#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Afegeix fonts noves de música"
 
-#: src/main.qml:631 src/widgets/AlbumsView.qml:76
+#: src/main.qml:640 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistes"
 
-#: src/main.qml:638
+#: src/main.qml:647
 #, kde-format
 msgid "No Artists!"
 msgstr "Cap artista!"
 
-#: src/main.qml:655 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiquetes"
 
-#: src/main.qml:663
+#: src/main.qml:672
 #, kde-format
 msgid "Folders"
 msgstr "Carpetes"
@@ -185,13 +192,6 @@ msgid ""
 msgstr ""
 "Esteu segur que voleu suprimir aquest fitxer de l'ordinador? Aquesta acció "
 "no es pot desfer."
-
-#: src/widgets/BabeTable/BabeTable.qml:155
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
-#: src/widgets/SelectionBar.qml:76
-#, kde-format
-msgid "Remove"
-msgstr "Elimina"
 
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
 #, kde-format

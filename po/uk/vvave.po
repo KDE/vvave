@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-17 01:53+0000\n"
+"POT-Creation-Date: 2024-09-27 01:53+0000\n"
 "PO-Revision-Date: 2024-08-24 09:29+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -28,12 +28,19 @@ msgstr "Упорядкуйте вашу музику і насолоджуйте
 msgid "Developer"
 msgstr "Розробник"
 
-#: src/main.qml:301
+#: src/main.qml:295 src/widgets/BabeTable/BabeTable.qml:155
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:76
+#, kde-format
+msgid "Remove"
+msgstr "Вилучити"
+
+#: src/main.qml:315
 #, kde-format
 msgid "Missing file"
 msgstr "Не вистачає файла"
 
-#: src/main.qml:389 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:398 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -42,7 +49,7 @@ msgstr[1] "Вилучити %1 маршрути"
 msgstr[2] "Вилучити %1 маршрутів"
 msgstr[3] "Вилучити маршрут"
 
-#: src/main.qml:390
+#: src/main.qml:399
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -50,63 +57,63 @@ msgstr ""
 "Ви справді хочете вилучити ці файли? Наслідки цієї дії не можна буде "
 "скасувати."
 
-#: src/main.qml:531 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Таймер присипляння"
 
-#: src/main.qml:540 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Скорочення"
 
-#: src/main.qml:547
+#: src/main.qml:556
 #, kde-format
 msgid "Settings"
 msgstr "Параметри"
 
-#: src/main.qml:554
+#: src/main.qml:563
 #, kde-format
 msgid "About"
 msgstr "Про програму"
 
-#: src/main.qml:587
+#: src/main.qml:596
 #, kde-format
 msgid "Songs"
 msgstr "Пісні"
 
-#: src/main.qml:607 src/widgets/AlbumsView.qml:76
+#: src/main.qml:616 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Альбоми"
 
-#: src/main.qml:614
+#: src/main.qml:623
 #, kde-format
 msgid "No Albums!"
 msgstr "Немає альбомів!"
 
-#: src/main.qml:615 src/main.qml:639 src/widgets/TracksView.qml:20
+#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Додати нові джерела музики"
 
-#: src/main.qml:631 src/widgets/AlbumsView.qml:76
+#: src/main.qml:640 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Виконавці"
 
-#: src/main.qml:638
+#: src/main.qml:647
 #, kde-format
 msgid "No Artists!"
 msgstr "Немає виконавців!"
 
-#: src/main.qml:655 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Мітки"
 
-#: src/main.qml:663
+#: src/main.qml:672
 #, kde-format
 msgid "Folders"
 msgstr "Теки"
@@ -188,13 +195,6 @@ msgid ""
 msgstr ""
 "Ви справді хочете вилучити файл з вашого комп'ютера? Наслідки цієї дії буде "
 "дуже важко скасувати."
-
-#: src/widgets/BabeTable/BabeTable.qml:155
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
-#: src/widgets/SelectionBar.qml:76
-#, kde-format
-msgid "Remove"
-msgstr "Вилучити"
 
 #: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
 #, kde-format
