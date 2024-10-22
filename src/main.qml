@@ -517,7 +517,7 @@ Maui.ApplicationWindow
                     }
                 } //OK
 
-                Maui.AppViews
+                Maui.SwipeView
                 {
                     id: swipeView
                     maxViews: 3
@@ -591,7 +591,7 @@ Maui.ApplicationWindow
                         }
                     }
 
-                    Maui.AppViewLoader
+                    Maui.SwipeViewLoader
                     {
                         Maui.Controls.title: i18n("Songs")
                         Maui.Controls.iconName: "view-media-track"
@@ -609,7 +609,7 @@ Maui.ApplicationWindow
                         }
                     }
 
-                    Maui.AppViewLoader
+                    Maui.SwipeViewLoader
                     {
                         id: _albumsViewLoader
 
@@ -634,7 +634,7 @@ Maui.ApplicationWindow
                         }
                     }
 
-                    Maui.AppViewLoader
+                    Maui.SwipeViewLoader
                     {
                         id: _artistViewLoader
                         Maui.Controls.title: i18n("Artists")
@@ -659,7 +659,7 @@ Maui.ApplicationWindow
                         }
                     }
 
-                    Maui.AppViewLoader
+                    Maui.SwipeViewLoader
                     {
                         Maui.Controls.title: i18n("Tags")
                         Maui.Controls.iconName: "tag"
@@ -667,7 +667,7 @@ Maui.ApplicationWindow
                         PlaylistsView {}
                     }
 
-                    Maui.AppViewLoader
+                    Maui.SwipeViewLoader
                     {
                         Maui.Controls.title: i18n("Folders")
                         Maui.Controls.iconName: "folder"
