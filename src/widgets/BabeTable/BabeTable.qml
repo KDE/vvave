@@ -250,7 +250,7 @@ Maui.Page
         enableLassoSelection: true
         selectionMode: root.selectionMode
         currentIndex: -1
-
+        flickable.reuseItems: true
         onItemsSelected: (indexes) =>
                          {
                              for(var i in indexes)
@@ -328,7 +328,6 @@ Maui.Page
                 return coverArt && item && item.album === album && item.artist === artist
             }
 
-
             onAppendClicked:{
                 currentIndex = index
                 appendTrack(index)
@@ -345,7 +344,7 @@ Maui.Page
                                return
                            }
 
-                           if ((mouse.button == Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
+                           if ((mouse.button === Qt.LeftButton) && (mouse.modifiers & Qt.ControlModifier))
                            _listBrowser.itemsSelected([index])
 
                            if(Maui.Handy.isTouch)

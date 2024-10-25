@@ -63,6 +63,8 @@ Maui.AltBrowser
 
     gridView.itemSize: 180
     gridView.itemHeight: 180
+    gridView.flickable.reuseItems: true
+    listView.flickable.reuseItems: true
     holder.visible: count === 0
 
     property string typingQuery
