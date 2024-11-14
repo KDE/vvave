@@ -44,7 +44,9 @@ Maui.ListBrowserDelegate
         onClicked: control.appendClicked()
         icon.color: delegate.label1.color
         flat: true
-
+        icon.width: 16
+        icon.height: 16
+        padding: 0
         opacity: delegate.hovered ? 0.8 : 0.6
     }
 }

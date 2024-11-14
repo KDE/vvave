@@ -42,7 +42,7 @@ Maui.ApplicationWindow
     readonly property alias currentTrackIndex: playlist.currentIndex
 
     readonly property alias isPlaying: player.playing
-    property alias mainPlaylist : _mainPlaylistLoader.item
+    readonly property alias mainPlaylist : _mainPlaylistLoader.item
     readonly property bool mainlistEmpty: mainPlaylist ? mainPlaylist.listModel.list.count === 0 : false
 
     /***************************************************/
@@ -257,12 +257,34 @@ Maui.ApplicationWindow
             }
         }]
 
-    Loader
+
+        DragHandler
+        {
+            target: _floatingViewer
+            xAxis.maximum: parent.width - _floatingViewer.width
+            xAxis.minimum: 0
+
+            yAxis.maximum : parent.height - _floatingViewer.height
+            yAxis.minimum: 0
+
+            onActiveChanged:
+            {
+                if(!active)
+                {
+                    let newX = Math.abs(_floatingViewer.x - (parent.width - _floatingViewer.implicitWidth - 20))
+                    _floatingViewer.y = Qt.binding(()=> { return parent.height - _floatingViewer.implicitHeight - 20 - _mainPage.footerContainer.implicitHeight})
+                    _floatingViewer.x = Qt.binding(()=> { return (parent.width - _floatingViewer.implicitWidth - 20 - newX) < 0 ? 20 : parent.width - _floatingViewer.implicitWidth - 20 - newX})
+                }
+            }
+        }
+
+
+    FloatingDisk
     {
-        active: (root.isPlaying && !root.mainlistEmpty)
-        asynchronous: true
-        sourceComponent: FloatingDisk {}
+        id: _floatingViewer
+        active: (root.isPlaying && !root.mainlistEmpty) || item
     }
+
 
     Settings
     {
@@ -439,6 +461,7 @@ Maui.ApplicationWindow
         {
             id: _drawer
             anchors.fill: parent
+
             Loader
             {
                 id: _mainPlaylistLoader

@@ -1,35 +1,27 @@
 import QtQuick
-import QtQml
 import QtQuick.Controls
-
+import QtQuick.Layouts
 import QtQuick.Effects
-
 import org.mauikit.controls as Maui
 
-Control
+Loader
 {
     id: control
 
-    parent: Overlay.overlay
-    z: parent.z + 1
+    asynchronous: true
+    z:  Overlay.overlay.z
+    x: parent.width - implicitWidth - 20
+    y: parent.height - implicitHeight - 20 - _mainPage.footerContainer.implicitHeight
 
-    Maui.Theme.inherit: false
-    Maui.Theme.colorSet: Maui.Theme.Complementary
-
-    visible: opacity > 0
-
-    scale: root.focusView ? 2 : 1
-
-    implicitHeight: _mouseArea.implicitHeight + topPadding + bottomPadding
-    implicitWidth: _mouseArea.implicitWidth + leftPadding + rightPadding
-
-    padding: Maui.Style.space.tiny
 
     ToolTip.delay: 1000
     ToolTip.timeout: 5000
     ToolTip.visible: _mouseArea.containsMouse && !Maui.Handy.isMobile
     ToolTip.text: root.title
 
+    visible: opacity > 0
+
+    scale: root.focusView ? 2 : 1
     opacity: root.focusView ? 0 :  1
 
     property int radius:  root.focusView ? Maui.Style.radiusV : Math.min(width, height)
@@ -49,102 +41,175 @@ Control
         NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
     }
 
-    y: root.height - control.implicitHeight - Maui.Style.space.medium - _mainPage.footerContainer.implicitHeight
-    x: root.width - control.implicitWidth - Maui.Style.space.medium
-
-    //    Binding on x
-    //    {
-    //        when: !_mouseArea.pressed
-    //        value: control.x
-    //        restoreMode: Binding.RestoreBindingOrValue
-    //        delayed: true
-    //    }
-
-    //    Binding on y
-    //    {
-    //        when: !_mouseArea.pressed
-    //        value: control.y
-    //        restoreMode: Binding.RestoreBindingOrValue
-    //        delayed: true
-    //    }
-
-    background: Rectangle
+    ScaleAnimator on scale
     {
-        id: diskBg
-        color: "white"
-        radius: control.radius
-
-        layer.enabled: true
-        layer.effect: MultiEffect
-        {
-            shadowHorizontalOffset: 0
-            shadowVerticalOffset: 0
-            shadowEnabled: true
-            // shadowBlur: _mouseArea.containsPress ? 5.0 :8.0
-            // samples: 17
-            shadowColor: "#80000000"
-        }
+        from: 0.2
+        to: 1
+        duration: Maui.Style.units.longDuration
+        running: parent.visible
+        easing.type: Easing.OutInQuad
     }
 
-    contentItem: MouseArea
+    // OpacityAnimator on opacity
+    // {
+    //     from: 0
+    //     to: 1
+    //     duration: Maui.Style.units.longDuration
+    //     running: status === Loader.Ready
+    // }
+
+    sourceComponent: AbstractButton
     {
-        id: _mouseArea
-
-        implicitHeight: Maui.Style.iconSizes.large * (_mouseArea.containsPress ? 1.19 : 1.2)
-        implicitWidth: implicitHeight
-
+        id: _floatingViewer
+        Maui.Controls.badgeText: mainPlaylist.listModel.list.count
+        implicitHeight: 80 + topPadding + bottomPadding
+        implicitWidth: 80 + leftPadding + rightPadding
         hoverEnabled: true
 
-        drag.target: control
-        drag.axis: Drag.XAndYAxis
+        padding: 4
 
-        drag.minimumX: 0
-        drag.maximumX: root.width - control.width
+        scale: hovered ? 1.2 : 1
 
-        drag.minimumY: 0
-        drag.maximumY: root.height - control.height
-
-        onClicked: toggleFocusView()
-        onPressAndHold: toggleMiniMode()
-
-        Image
+        Behavior on scale
         {
-            id: miniArtwork
-            anchors.fill: parent
-            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
-            fillMode: Image.PreserveAspectFit
+            NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+        }
+
+        Behavior on implicitHeight
+        {
+            NumberAnimation
+            {
+                duration: Maui.Style.units.shortDuration
+                easing.type: Easing.InQuad
+            }
+        }
+
+        onClicked:
+        {
+            if( mainPlaylist.listModel.list.count > 0)
+            {
+                toggleFocusView()
+                return;
+            }
+        }
+
+        background: Rectangle
+        {
+            color: Maui.Theme.backgroundColor
+
+            radius: control.radius
+            // property color borderColor: Maui.Theme.textColor
+            // border.color: Maui.Style.trueBlack ? Qt.rgba(borderColor.r, borderColor.g, borderColor.b, 0.3) : undefined
             layer.enabled: true
             layer.effect: MultiEffect
             {
-                source: miniArtwork
-                maskEnabled: true
-                maskSource: _mask
+                autoPaddingEnabled: true
+                shadowEnabled: true
+                shadowColor: "#000000"
             }
         }
 
-        Item
+        Loader
         {
-            id: _mask
-            visible: false
-            layer.enabled: true
-            height: miniArtwork.height
-            width: miniArtwork.width
+            id: _badgeLoader
 
-            Rectangle
+            z: _floatingViewer.contentItem.z + 9999
+            asynchronous: true
+
+            active: _floatingViewer.Maui.Controls.badgeText && _floatingViewer.Maui.Controls.badgeText.length > 0 && _floatingViewer.visible
+            visible: active
+
+            anchors.horizontalCenter: parent.right
+            anchors.verticalCenter: parent.top
+            anchors.verticalCenterOffset: 10
+            anchors.horizontalCenterOffset: -5
+
+            sourceComponent: Maui.Badge
             {
-                height: parent.height
-                width: parent.width
-                radius: control.radius
+                text: _floatingViewer.Maui.Controls.badgeText
+
+                padding: 2
+                font.pointSize: Maui.Style.fontSizes.tiny
+
+                Maui.Controls.status: Maui.Controls.Negative
+
+                OpacityAnimator on opacity
+                {
+                    from: 0
+                    to: 1
+                    duration: Maui.Style.units.longDuration
+                    running: parent.visible
+                }
+
+                ScaleAnimator on scale
+                {
+                    from: 0.5
+                    to: 1
+                    duration: Maui.Style.units.longDuration
+                    running: parent.visible
+                    easing.type: Easing.OutInQuad
+                }
             }
         }
-    }
 
-    RotationAnimator on rotation
-    {
-        from: 0
-        to: 360
-        duration: 5000
-        loops: Animation.Infinite
-        running: isPlaying && Maui.Style.enableEffects
+        contentItem: Item
+        {
+            id: miniArtwork
+
+            Image
+        {
+            anchors.fill: parent
+            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+            // verticalAlignment:  Image.AlignTop
+            // fillMode: Image.PreserveAspectFit
+
+            RotationAnimator on rotation
+            {
+                from: 0
+                to: 360
+                duration: 7000
+                loops: Animation.Infinite
+                running: isPlaying && Maui.Style.enableEffects
+            }
+        }
+
+        Rectangle
+        {
+            anchors.fill: parent
+            color: Maui.Theme.backgroundColor
+            opacity: 0.5
+            visible: _floatingViewer.hovered
+            Maui.Icon
+            {
+                anchors.centerIn: parent
+                source: "quickview"
+                height: 48
+                width: 48
+            }
+        }
+
+
+            layer.enabled: true
+
+            layer.effect: MultiEffect
+            {
+                maskEnabled: true
+                maskThresholdMin: 0.5
+                maskSpreadAtMin: 1.0
+                maskSpreadAtMax: 0.0
+                maskThresholdMax: 1.0
+                maskSource: ShaderEffectSource
+                {
+                    sourceItem: Rectangle
+                    {
+                        width: miniArtwork.width
+                        height: miniArtwork.height
+                        radius: control.radius
+                    }
+                }
+            }
+
+        }
     }
 }
+
