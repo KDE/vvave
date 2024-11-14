@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-27 01:53+0000\n"
+"POT-Creation-Date: 2024-11-14 01:51+0000\n"
 "PO-Revision-Date: 2024-08-24 13:04+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -27,26 +27,26 @@ msgstr "Uw muziek organiseren en er naar luisteren."
 msgid "Developer"
 msgstr "Ontwikkelaar"
 
-#: src/main.qml:295 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:317 src/widgets/BabeTable/BabeTable.qml:155
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: src/main.qml:315
+#: src/main.qml:337
 #, kde-format
 msgid "Missing file"
 msgstr "Ontbrekend bestand"
 
-#: src/main.qml:398 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:420 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Track verwijderen"
 msgstr[1] "%1 tracks verwijderen"
 
-#: src/main.qml:399
+#: src/main.qml:421
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -54,63 +54,63 @@ msgstr ""
 "Wilt u deze bestanden verwijderen? Deze actie kan niet ongedaan worden "
 "gemaakt."
 
-#: src/main.qml:540 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:563 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Timer voor slapen"
 
-#: src/main.qml:549 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:572 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Sneltoetsen"
 
-#: src/main.qml:556
+#: src/main.qml:579
 #, kde-format
 msgid "Settings"
 msgstr "Instellingen"
 
-#: src/main.qml:563
+#: src/main.qml:586
 #, kde-format
 msgid "About"
 msgstr "Info over"
 
-#: src/main.qml:596
+#: src/main.qml:619
 #, kde-format
 msgid "Songs"
 msgstr "Songs"
 
-#: src/main.qml:616 src/widgets/AlbumsView.qml:76
+#: src/main.qml:639 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albums"
 
-#: src/main.qml:623
+#: src/main.qml:646
 #, kde-format
 msgid "No Albums!"
 msgstr "Geen Albums!"
 
-#: src/main.qml:624 src/main.qml:648 src/widgets/TracksView.qml:20
+#: src/main.qml:647 src/main.qml:671 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Nieuwe muziekbronnen toevoegen"
 
-#: src/main.qml:640 src/widgets/AlbumsView.qml:76
+#: src/main.qml:663 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artiesten"
 
-#: src/main.qml:647
+#: src/main.qml:670
 #, kde-format
 msgid "No Artists!"
 msgstr "Geen artiesten!"
 
-#: src/main.qml:664 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:687 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Tags"
 
-#: src/main.qml:672
+#: src/main.qml:695
 #, kde-format
 msgid "Folders"
 msgstr "Mappen"
