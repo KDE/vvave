@@ -49,7 +49,7 @@ find_package(MauiKit4 REQUIRED COMPONENTS FileBrowsing)
 if(ANDROID)
     find_package(taglib 1.4 REQUIRED)
 else()
-    find_package(TagLib 1.4 REQUIRED)
+    find_package(Taglib 1.4 REQUIRED)
 endif()
 
 if(UNIX AND NOT ANDROID)

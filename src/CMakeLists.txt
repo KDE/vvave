@@ -131,7 +131,7 @@ target_compile_definitions(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PRIVATE ${Taglib_INCLUDE_DIRS})
 
 set(Taglib_LIBRARIES
-    TagLib::tag)
+    Taglib::Taglib)
 
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
