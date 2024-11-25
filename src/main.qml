@@ -740,6 +740,11 @@ Maui.ApplicationWindow
         active: false
         sourceComponent: MiniMode
         {
+            onClosing: (close) =>
+                       {
+                           toggleMiniMode()
+                           close.accepted = true
+                       }
         }
     }
 
