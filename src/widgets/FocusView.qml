@@ -139,6 +139,11 @@ StackView
         focus: true
         asynchronous: true
 
+        function forceActiveFocus()
+        {
+            item.forceActiveFocus()
+        }
+
         sourceComponent: Maui.Page
         {
             property alias filterField: _filterField
@@ -573,7 +578,7 @@ StackView
 
     function forceActiveFocus()
     {
-        control.item.forceActiveFocus()
+        control.currentItem.forceActiveFocus()
     }
 
     Component.onCompleted:

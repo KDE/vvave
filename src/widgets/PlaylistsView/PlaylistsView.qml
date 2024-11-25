@@ -49,7 +49,7 @@ StackView
 
             list.query: control.playlistQuery
             showTitle: false
-            title: control.currentPlaylist
+            title: currentPlaylist
 
             holder.emoji: "qrc:/assets/dialog-information.svg"
             holder.isMask: true

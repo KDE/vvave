@@ -108,6 +108,9 @@ if (ANDROID)
 
     kde_source_files_enable_exceptions(${PROJECT_NAME})
 
+    set(Taglib_LIBRARIES
+        TagLib::tag)
+
 elseif(UNIX AND NOT WIN32 AND NOT APPLE)
     target_sources(${PROJECT_NAME}
         PRIVATE
@@ -117,6 +120,9 @@ elseif(UNIX AND NOT WIN32 AND NOT APPLE)
     target_link_libraries(${PROJECT_NAME}
         PRIVATE
         Qt6::DBus)
+
+    set(Taglib_LIBRARIES
+        Taglib::Taglib)
 endif()
 
 if(UNIX OR WIN32 OR APPLE AND NOT ANDROID)
@@ -129,9 +135,6 @@ target_compile_definitions(${PROJECT_NAME}
     PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${Taglib_INCLUDE_DIRS})
-
-set(Taglib_LIBRARIES
-    Taglib::Taglib)
 
 target_link_libraries(${PROJECT_NAME}
     PRIVATE

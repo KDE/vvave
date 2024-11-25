@@ -13,12 +13,6 @@ Loader
     x: parent.width - implicitWidth - 20
     y: parent.height - implicitHeight - 20 - _mainPage.footerContainer.implicitHeight
 
-
-    ToolTip.delay: 1000
-    ToolTip.timeout: 5000
-    ToolTip.visible: _mouseArea.containsMouse && !Maui.Handy.isMobile
-    ToolTip.text: root.title
-
     visible: opacity > 0
 
     scale: root.focusView ? 2 : 1
@@ -61,14 +55,20 @@ Loader
     sourceComponent: AbstractButton
     {
         id: _floatingViewer
+
+        ToolTip.delay: 1000
+        ToolTip.timeout: 5000
+        ToolTip.visible: hovered
+        ToolTip.text: root.title
+
         Maui.Controls.badgeText: mainPlaylist.listModel.list.count
         implicitHeight: 80 + topPadding + bottomPadding
         implicitWidth: 80 + leftPadding + rightPadding
-        hoverEnabled: true
+        hoverEnabled: !Maui.Handy.isMobile
 
         padding: 4
 
-        scale: hovered ? 1.2 : 1
+        scale: hovered || pressed ? 1.2 : 1
 
         Behavior on scale
         {

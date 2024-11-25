@@ -257,32 +257,31 @@ Maui.ApplicationWindow
             }
         }]
 
+    FloatingDisk
+    {
+        id: _floatingViewer
+        active: (root.isPlaying && !root.mainlistEmpty) || item
+        visible:!root.mainlistEmpty
 
         DragHandler
         {
             target: _floatingViewer
-            xAxis.maximum: parent.width - _floatingViewer.width
+            xAxis.maximum: root.width - _floatingViewer.width
             xAxis.minimum: 0
 
-            yAxis.maximum : parent.height - _floatingViewer.height
+            yAxis.maximum : root.height - _floatingViewer.height
             yAxis.minimum: 0
 
             onActiveChanged:
             {
                 if(!active)
                 {
-                    let newX = Math.abs(_floatingViewer.x - (parent.width - _floatingViewer.implicitWidth - 20))
-                    _floatingViewer.y = Qt.binding(()=> { return parent.height - _floatingViewer.implicitHeight - 20 - _mainPage.footerContainer.implicitHeight})
-                    _floatingViewer.x = Qt.binding(()=> { return (parent.width - _floatingViewer.implicitWidth - 20 - newX) < 0 ? 20 : parent.width - _floatingViewer.implicitWidth - 20 - newX})
+                    let newX = Math.abs(_floatingViewer.x - (root.width - _floatingViewer.implicitWidth - 20))
+                    _floatingViewer.y = Qt.binding(()=> { return root.height - _floatingViewer.implicitHeight - 20 - _mainPage.footerContainer.implicitHeight})
+                    _floatingViewer.x = Qt.binding(()=> { return (root.width - _floatingViewer.implicitWidth - 20 - newX) < 0 ? 20 : root.width - _floatingViewer.implicitWidth - 20 - newX})
                 }
             }
         }
-
-
-    FloatingDisk
-    {
-        id: _floatingViewer
-        active: (root.isPlaying && !root.mainlistEmpty) || item
     }
 
 

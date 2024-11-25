@@ -142,7 +142,7 @@ Maui.Page
 
                 asynchronous: true
                 active: !focusView && control.height > control.width*3 && currentTrackIndex >= 0
-                visible: active
+                visible: active && !mainlistEmpty
                 sourceComponent: Item
                 {
                     Maui.GalleryRollTemplate
