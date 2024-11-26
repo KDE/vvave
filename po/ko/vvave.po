@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 01:51+0000\n"
+"POT-Creation-Date: 2024-11-26 01:50+0000\n"
 "PO-Revision-Date: 2024-02-05 19:52+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -27,87 +27,87 @@ msgstr "음악을 정리하고 듣습니다."
 msgid "Developer"
 msgstr "개발자"
 
-#: src/main.qml:317 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
 msgstr "삭제"
 
-#: src/main.qml:337
+#: src/main.qml:336
 #, kde-format
 msgid "Missing file"
 msgstr "파일 없음"
 
-#: src/main.qml:420 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "%1곡 삭제"
 
-#: src/main.qml:421
+#: src/main.qml:420
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "이 파일을 삭제하시겠습니까? 실행 취소할 수 없습니다."
 
-#: src/main.qml:563 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "수면 타이머"
 
-#: src/main.qml:572 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "단축키"
 
-#: src/main.qml:579
+#: src/main.qml:578
 #, kde-format
 msgid "Settings"
 msgstr "설정"
 
-#: src/main.qml:586
+#: src/main.qml:585
 #, kde-format
 msgid "About"
 msgstr "정보"
 
-#: src/main.qml:619
+#: src/main.qml:618
 #, kde-format
 msgid "Songs"
 msgstr "곡"
 
-#: src/main.qml:639 src/widgets/AlbumsView.qml:76
+#: src/main.qml:638 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "앨범"
 
-#: src/main.qml:646
+#: src/main.qml:645
 #, kde-format
 msgid "No Albums!"
 msgstr "앨범 없음!"
 
-#: src/main.qml:647 src/main.qml:671 src/widgets/TracksView.qml:20
+#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "새 음악 원본 추가"
 
-#: src/main.qml:663 src/widgets/AlbumsView.qml:76
+#: src/main.qml:662 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "아티스트"
 
-#: src/main.qml:670
+#: src/main.qml:669
 #, kde-format
 msgid "No Artists!"
 msgstr "아티스트 없음!"
 
-#: src/main.qml:687 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "태그"
 
-#: src/main.qml:695
+#: src/main.qml:694
 #, kde-format
 msgid "Folders"
 msgstr "폴더"
@@ -256,22 +256,22 @@ msgstr ""
 "계정을 설정하지 않았습니다.\n"
 "여기를 클릭하거나 주 메뉴의 계정 옵션에서 계정을 설정할 수 있습니다"
 
-#: src/widgets/FocusView.qml:153
+#: src/widgets/FocusView.qml:158
 #, kde-format
 msgid "Find"
 msgstr "찾기"
 
-#: src/widgets/FocusView.qml:195
+#: src/widgets/FocusView.qml:200
 #, kde-format
 msgid "No Results!"
 msgstr "결과 없음!"
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:201
 #, kde-format
 msgid "Try with something else"
 msgstr "다른 항목으로 시도하십시오"
 
-#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "재생 목록에 항목을 추가하여 시작하십시오."

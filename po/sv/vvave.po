@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 01:51+0000\n"
+"POT-Creation-Date: 2024-11-26 01:50+0000\n"
 "PO-Revision-Date: 2024-08-24 08:05+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -27,88 +27,88 @@ msgstr "Organisera och lyssna på dina låtar."
 msgid "Developer"
 msgstr "Utvecklare"
 
-#: src/main.qml:317 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
 msgstr "Ta bort"
 
-#: src/main.qml:337
+#: src/main.qml:336
 #, kde-format
 msgid "Missing file"
 msgstr "Saknar fil"
 
-#: src/main.qml:420 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Ta bort spår"
 msgstr[1] "Ta bort %1 spår"
 
-#: src/main.qml:421
+#: src/main.qml:420
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "Är du säker på att du vill ta bort filerna? Åtgärden kan inte ångras."
 
-#: src/main.qml:563 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Sovtidtagare"
 
-#: src/main.qml:572 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Genvägar"
 
-#: src/main.qml:579
+#: src/main.qml:578
 #, kde-format
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/main.qml:586
+#: src/main.qml:585
 #, kde-format
 msgid "About"
 msgstr "Om"
 
-#: src/main.qml:619
+#: src/main.qml:618
 #, kde-format
 msgid "Songs"
 msgstr "Låtar"
 
-#: src/main.qml:639 src/widgets/AlbumsView.qml:76
+#: src/main.qml:638 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Album"
 
-#: src/main.qml:646
+#: src/main.qml:645
 #, kde-format
 msgid "No Albums!"
 msgstr "Inga album."
 
-#: src/main.qml:647 src/main.qml:671 src/widgets/TracksView.qml:20
+#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Lägg till nya musikkällor"
 
-#: src/main.qml:663 src/widgets/AlbumsView.qml:76
+#: src/main.qml:662 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artister"
 
-#: src/main.qml:670
+#: src/main.qml:669
 #, kde-format
 msgid "No Artists!"
 msgstr "Inga artister."
 
-#: src/main.qml:687 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Taggar"
 
-#: src/main.qml:695
+#: src/main.qml:694
 #, kde-format
 msgid "Folders"
 msgstr "Kataloger"
@@ -261,22 +261,22 @@ msgstr ""
 "Du kan ställa in kontot nu genom att klicka här eller under "
 "kontoalternativet i huvudmenyn."
 
-#: src/widgets/FocusView.qml:153
+#: src/widgets/FocusView.qml:158
 #, kde-format
 msgid "Find"
 msgstr "Sök"
 
-#: src/widgets/FocusView.qml:195
+#: src/widgets/FocusView.qml:200
 #, kde-format
 msgid "No Results!"
 msgstr "Inga resultat."
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:201
 #, kde-format
 msgid "Try with something else"
 msgstr "Försök med någonting annat"
 
-#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Börja sätta ihop din spellista."

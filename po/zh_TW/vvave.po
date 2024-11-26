@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 01:51+0000\n"
+"POT-Creation-Date: 2024-11-26 01:50+0000\n"
 "PO-Revision-Date: 2024-10-07 14:58+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -27,87 +27,87 @@ msgstr "管理並聆聽您的音樂。"
 msgid "Developer"
 msgstr "開發者"
 
-#: src/main.qml:317 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
 msgstr "移除"
 
-#: src/main.qml:337
+#: src/main.qml:336
 #, kde-format
 msgid "Missing file"
 msgstr "缺失檔案"
 
-#: src/main.qml:420 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "移除 %1 個音軌"
 
-#: src/main.qml:421
+#: src/main.qml:420
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "您確定要刪除這些檔案嗎？這個動作無法復原。"
 
-#: src/main.qml:563 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "睡眠計時器"
 
-#: src/main.qml:572 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "快捷鍵"
 
-#: src/main.qml:579
+#: src/main.qml:578
 #, kde-format
 msgid "Settings"
 msgstr "設定"
 
-#: src/main.qml:586
+#: src/main.qml:585
 #, kde-format
 msgid "About"
 msgstr "關於"
 
-#: src/main.qml:619
+#: src/main.qml:618
 #, kde-format
 msgid "Songs"
 msgstr "歌曲"
 
-#: src/main.qml:639 src/widgets/AlbumsView.qml:76
+#: src/main.qml:638 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "專輯"
 
-#: src/main.qml:646
+#: src/main.qml:645
 #, kde-format
 msgid "No Albums!"
 msgstr "沒有專輯！"
 
-#: src/main.qml:647 src/main.qml:671 src/widgets/TracksView.qml:20
+#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "新增音樂來源"
 
-#: src/main.qml:663 src/widgets/AlbumsView.qml:76
+#: src/main.qml:662 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "藝人"
 
-#: src/main.qml:670
+#: src/main.qml:669
 #, kde-format
 msgid "No Artists!"
 msgstr "沒有藝人！"
 
-#: src/main.qml:687 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "標籤"
 
-#: src/main.qml:695
+#: src/main.qml:694
 #, kde-format
 msgid "Folders"
 msgstr "資料夾"
@@ -256,22 +256,22 @@ msgstr ""
 "您還沒有設定帳號。\n"
 "您可以點擊這裡來設定帳號或是在主選單下的帳號選項裡進行設定"
 
-#: src/widgets/FocusView.qml:153
+#: src/widgets/FocusView.qml:158
 #, kde-format
 msgid "Find"
 msgstr "尋找"
 
-#: src/widgets/FocusView.qml:195
+#: src/widgets/FocusView.qml:200
 #, kde-format
 msgid "No Results!"
 msgstr "沒有結果！"
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:201
 #, kde-format
 msgid "Try with something else"
 msgstr "試試看別的東西"
 
-#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "開始製作您的播放清單。"

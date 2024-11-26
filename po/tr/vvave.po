@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-14 01:51+0000\n"
+"POT-Creation-Date: 2024-11-26 01:50+0000\n"
 "PO-Revision-Date: 2024-03-22 16:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -28,89 +28,89 @@ msgstr "Müziğinizi dinleyin ve organize edin."
 msgid "Developer"
 msgstr "Geliştirici"
 
-#: src/main.qml:317 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
 msgid "Remove"
 msgstr "Kaldır"
 
-#: src/main.qml:337
+#: src/main.qml:336
 #, kde-format
 msgid "Missing file"
 msgstr "Eksik dosya"
 
-#: src/main.qml:420 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Parçayı Kaldır"
 msgstr[1] "%1 Parçayı Kaldır"
 
-#: src/main.qml:421
+#: src/main.qml:420
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 "Bu dosyaları kaldırmak istediğinizden emin misiniz? Bu işlem geri alınamaz."
 
-#: src/main.qml:563 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Uyku Sayacı"
 
-#: src/main.qml:572 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Kısayollar"
 
-#: src/main.qml:579
+#: src/main.qml:578
 #, kde-format
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/main.qml:586
+#: src/main.qml:585
 #, kde-format
 msgid "About"
 msgstr "Hakkında"
 
-#: src/main.qml:619
+#: src/main.qml:618
 #, kde-format
 msgid "Songs"
 msgstr "Şarkılar"
 
-#: src/main.qml:639 src/widgets/AlbumsView.qml:76
+#: src/main.qml:638 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albümler"
 
-#: src/main.qml:646
+#: src/main.qml:645
 #, kde-format
 msgid "No Albums!"
 msgstr "Albüm Yok!"
 
-#: src/main.qml:647 src/main.qml:671 src/widgets/TracksView.qml:20
+#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Yeni müzik kaynakları ekle"
 
-#: src/main.qml:663 src/widgets/AlbumsView.qml:76
+#: src/main.qml:662 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Sanatçılar"
 
-#: src/main.qml:670
+#: src/main.qml:669
 #, kde-format
 msgid "No Artists!"
 msgstr "Sanatçı Yok!"
 
-#: src/main.qml:687 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiketler"
 
-#: src/main.qml:695
+#: src/main.qml:694
 #, kde-format
 msgid "Folders"
 msgstr "Klasörler"
@@ -263,22 +263,22 @@ msgstr ""
 "Buraya tıklayarak veya ana menüdeki Hesaplar seçeneğine giderek "
 "hesaplarınızı ayarlayabilirsiniz"
 
-#: src/widgets/FocusView.qml:153
+#: src/widgets/FocusView.qml:158
 #, kde-format
 msgid "Find"
 msgstr "Bul"
 
-#: src/widgets/FocusView.qml:195
+#: src/widgets/FocusView.qml:200
 #, kde-format
 msgid "No Results!"
 msgstr "Sonuç yok!"
 
-#: src/widgets/FocusView.qml:196
+#: src/widgets/FocusView.qml:201
 #, kde-format
 msgid "Try with something else"
 msgstr "Başka bir şey deneyin"
 
-#: src/widgets/FocusView.qml:235 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Çalma listenizi oluşturmaya başlayın."
