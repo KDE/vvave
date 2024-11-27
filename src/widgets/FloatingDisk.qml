@@ -157,36 +157,36 @@ Loader
             id: miniArtwork
 
             Image
-        {
-            anchors.fill: parent
-            source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
-            // verticalAlignment:  Image.AlignTop
-            // fillMode: Image.PreserveAspectFit
-
-            RotationAnimator on rotation
             {
-                from: 0
-                to: 360
-                duration: 7000
-                loops: Animation.Infinite
-                running: isPlaying && Maui.Style.enableEffects
-            }
-        }
+                anchors.fill: parent
+                source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
+                // verticalAlignment:  Image.AlignTop
+                // fillMode: Image.PreserveAspectFit
 
-        Rectangle
-        {
-            anchors.fill: parent
-            color: Maui.Theme.backgroundColor
-            opacity: 0.5
-            visible: _floatingViewer.hovered
-            Maui.Icon
-            {
-                anchors.centerIn: parent
-                source: "quickview"
-                height: 48
-                width: 48
+                RotationAnimator on rotation
+                {
+                    from: 0
+                    to: 360
+                    duration: 7000
+                    loops: Animation.Infinite
+                    running: isPlaying && Maui.Style.enableEffects
+                }
             }
-        }
+
+            Rectangle
+            {
+                anchors.fill: parent
+                color: Maui.Theme.backgroundColor
+                opacity: 0.5
+                visible: _floatingViewer.hovered
+                Maui.Icon
+                {
+                    anchors.centerIn: parent
+                    source: "quickview"
+                    height: 48
+                    width: 48
+                }
+            }
 
 
             layer.enabled: true

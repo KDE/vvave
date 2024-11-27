@@ -471,20 +471,10 @@ StackView
                     Layout.alignment: Qt.AlignCenter
                     spacing: Maui.Style.space.medium
 
-                    ToolButton
-                    {
-                        id: babeBtnIcon
-                        icon.name: "love"
-                        flat: true
+                    FB.FavButton
+                    {                       
                         enabled: root.currentTrack
-                        checked: root.currentTrack.url ? FB.Tagging.isFav(root.currentTrack.url) : false
-                        icon.color: checked ? babeColor :  Maui.Theme.textColor
-
-                        onClicked:
-                        {
-                            mainPlaylist.listModel.list.fav(root.currentTrackIndex, !FB.Tagging.isFav(root.currentTrack.url))
-                            root.currentTrackChanged()
-                        }
+                        url: root.currentTrack.url
                     }
 
                     ToolButton
