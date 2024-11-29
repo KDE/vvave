@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-26 01:50+0000\n"
-"PO-Revision-Date: 2024-02-05 19:52+0100\n"
+"PO-Revision-Date: 2024-11-28 21:19+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -579,10 +579,9 @@ msgid "Off"
 msgstr "끄기"
 
 #: src/widgets/SleepTimerDialog.qml:134
-#, fuzzy, kde-format
-#| msgid "Close application after sleeping"
+#, kde-format
 msgid "Close application after"
-msgstr "수면 타이머 이후 앱 끝내기"
+msgstr "다음 이후 앱 끝내기"
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
