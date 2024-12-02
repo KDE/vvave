@@ -315,7 +315,7 @@ Maui.Page
             onToggled: (state) => selectionBar.addToSelection(control.listModel.get(index))
 
             checked: selectionBar.contains(model.url)
-            checkable: selectionMode
+            checkable: selectionMode || checked
 
             Drag.keys: ["text/uri-list"]
             Drag.mimeData: {

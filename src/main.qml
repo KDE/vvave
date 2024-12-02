@@ -261,7 +261,7 @@ Maui.ApplicationWindow
     {
         id: _floatingViewer
         active: (root.isPlaying && !root.mainlistEmpty) || item
-        visible:!root.mainlistEmpty
+        visible: !root.mainlistEmpty
 
         DragHandler
         {
