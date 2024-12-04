@@ -419,13 +419,23 @@ Maui.ApplicationWindow
             title: i18np("Remove track", "Remove %1 tracks", urls.length)
             message: i18n("Are you sure you want to remove these files? This action can not be undone.")
 
-            // onAccepted: close()
+            actions: [
+                Action
+                {
+                    Maui.Controls.status: Maui.Controls.Negative
+                    text: i18n("Remove")
+                    onTriggered:
+                    {
+                        FB.FM.removeFiles(_removeDialog.urls)
+                        close()
+                    }
+                },
 
-            // onRejected:
-            // {
-            //     FB.FM.removeFiles(_removeDialog.urls)
-            //     close()
-            // }
+                Action
+                {
+                    text: i18n("Cancel")
+                    onTriggered: close()
+                }]
         }
     }
 

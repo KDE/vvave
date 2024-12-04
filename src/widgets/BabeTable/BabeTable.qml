@@ -152,6 +152,7 @@ Maui.Page
             actions: [
                 Action
                 {
+                    Maui.Controls.status: Maui.Controls.Negative
                     text: i18n("Remove")
                     onTriggered:
                     {
