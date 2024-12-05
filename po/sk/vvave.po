@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 01:50+0000\n"
+"POT-Creation-Date: 2024-12-05 01:51+0000\n"
 "PO-Revision-Date: 2023-03-12 12:07+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Developer"
 msgstr "Vývojár"
 
-#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, fuzzy, kde-format
@@ -51,63 +51,69 @@ msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 
-#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:142
+#, fuzzy, kde-format
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: src/main.qml:572 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr ""
 
-#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:581 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, fuzzy, kde-format
 msgid "Shortcuts"
 msgstr "Skratky"
 
-#: src/main.qml:578
+#: src/main.qml:588
 #, fuzzy, kde-format
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: src/main.qml:585
+#: src/main.qml:595
 #, fuzzy, kde-format
 msgid "About"
 msgstr "O aplikácii"
 
-#: src/main.qml:618
+#: src/main.qml:628
 #, kde-format
 msgid "Songs"
 msgstr ""
 
-#: src/main.qml:638 src/widgets/AlbumsView.qml:76
+#: src/main.qml:648 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumy"
 
-#: src/main.qml:645
+#: src/main.qml:655
 #, kde-format
 msgid "No Albums!"
 msgstr ""
 
-#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
+#: src/main.qml:656 src/main.qml:680 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr ""
 
-#: src/main.qml:662 src/widgets/AlbumsView.qml:76
+#: src/main.qml:672 src/widgets/AlbumsView.qml:76
 #, fuzzy, kde-format
 msgid "Artists"
 msgstr "Interpreti"
 
-#: src/main.qml:669
+#: src/main.qml:679
 #, kde-format
 msgid "No Artists!"
 msgstr ""
 
-#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:696 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, fuzzy, kde-format
 msgid "Tags"
 msgstr "Značky"
 
-#: src/main.qml:694
+#: src/main.qml:704
 #, fuzzy, kde-format
 msgid "Folders"
 msgstr "Priečinky"
@@ -187,17 +193,12 @@ msgid ""
 "not be undone."
 msgstr ""
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
-#, fuzzy, kde-format
-msgid "Cancel"
-msgstr "Zrušiť"
-
-#: src/widgets/BabeTable/BabeTable.qml:182 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr ""
 
-#: src/widgets/BabeTable/BabeTable.qml:189 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr ""

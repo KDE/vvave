@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 01:50+0000\n"
+"POT-Creation-Date: 2024-12-05 01:51+0000\n"
 "PO-Revision-Date: 2024-08-24 08:05+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -27,7 +27,7 @@ msgstr "Organisera och lyssna på dina låtar."
 msgid "Developer"
 msgstr "Utvecklare"
 
-#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
@@ -52,63 +52,69 @@ msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "Är du säker på att du vill ta bort filerna? Åtgärden kan inte ångras."
 
-#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:142
+#, kde-format
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/main.qml:572 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Sovtidtagare"
 
-#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:581 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Genvägar"
 
-#: src/main.qml:578
+#: src/main.qml:588
 #, kde-format
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/main.qml:585
+#: src/main.qml:595
 #, kde-format
 msgid "About"
 msgstr "Om"
 
-#: src/main.qml:618
+#: src/main.qml:628
 #, kde-format
 msgid "Songs"
 msgstr "Låtar"
 
-#: src/main.qml:638 src/widgets/AlbumsView.qml:76
+#: src/main.qml:648 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Album"
 
-#: src/main.qml:645
+#: src/main.qml:655
 #, kde-format
 msgid "No Albums!"
 msgstr "Inga album."
 
-#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
+#: src/main.qml:656 src/main.qml:680 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Lägg till nya musikkällor"
 
-#: src/main.qml:662 src/widgets/AlbumsView.qml:76
+#: src/main.qml:672 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artister"
 
-#: src/main.qml:669
+#: src/main.qml:679
 #, kde-format
 msgid "No Artists!"
 msgstr "Inga artister."
 
-#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:696 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Taggar"
 
-#: src/main.qml:694
+#: src/main.qml:704
 #, kde-format
 msgid "Folders"
 msgstr "Kataloger"
@@ -189,17 +195,12 @@ msgstr ""
 "Är du säker på att du vill ta bort filen från datorn? Åtgärden kan inte "
 "ångras."
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
-#, kde-format
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: src/widgets/BabeTable/BabeTable.qml:182 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "Gå till artist"
 
-#: src/widgets/BabeTable/BabeTable.qml:189 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "Gå till album"

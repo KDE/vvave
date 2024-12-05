@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 01:50+0000\n"
+"POT-Creation-Date: 2024-12-05 01:51+0000\n"
 "PO-Revision-Date: 2024-08-27 09:58+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -28,7 +28,7 @@ msgstr "Organiziraj si poslušanje svoje glasbe."
 msgid "Developer"
 msgstr "Razvojnik"
 
-#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
@@ -57,63 +57,69 @@ msgstr ""
 "Ali ste prepričani, da želite odstraniti te datoteke? Tega dejanja ne morete "
 "povrniti."
 
-#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:142
+#, kde-format
+msgid "Cancel"
+msgstr "Prekliči"
+
+#: src/main.qml:572 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Časovnik za spanje"
 
-#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:581 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Bližnjice"
 
-#: src/main.qml:578
+#: src/main.qml:588
 #, kde-format
 msgid "Settings"
 msgstr "Nastavitve"
 
-#: src/main.qml:585
+#: src/main.qml:595
 #, kde-format
 msgid "About"
 msgstr "O programu"
 
-#: src/main.qml:618
+#: src/main.qml:628
 #, kde-format
 msgid "Songs"
 msgstr "Pesmi"
 
-#: src/main.qml:638 src/widgets/AlbumsView.qml:76
+#: src/main.qml:648 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumi"
 
-#: src/main.qml:645
+#: src/main.qml:655
 #, kde-format
 msgid "No Albums!"
 msgstr "Ni albumov!"
 
-#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
+#: src/main.qml:656 src/main.qml:680 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Dodaj nove vire glasbe"
 
-#: src/main.qml:662 src/widgets/AlbumsView.qml:76
+#: src/main.qml:672 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Umetniki"
 
-#: src/main.qml:669
+#: src/main.qml:679
 #, kde-format
 msgid "No Artists!"
 msgstr "Ni umetnikov!"
 
-#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:696 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Oznake"
 
-#: src/main.qml:694
+#: src/main.qml:704
 #, kde-format
 msgid "Folders"
 msgstr "Mape"
@@ -196,17 +202,12 @@ msgstr ""
 "Ali ste prepričani, da želite odstraniti to datoteko iz vašega računalnika? "
 "Tega dejanja ne morete povrniti."
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
-#, kde-format
-msgid "Cancel"
-msgstr "Prekliči"
-
-#: src/widgets/BabeTable/BabeTable.qml:182 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "Pojdi na umetnika"
 
-#: src/widgets/BabeTable/BabeTable.qml:189 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "Pojdi na album"

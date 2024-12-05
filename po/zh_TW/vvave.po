@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 01:50+0000\n"
+"POT-Creation-Date: 2024-12-05 01:51+0000\n"
 "PO-Revision-Date: 2024-10-07 14:58+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -27,7 +27,7 @@ msgstr "管理並聆聽您的音樂。"
 msgid "Developer"
 msgstr "開發者"
 
-#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
@@ -51,63 +51,69 @@ msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "您確定要刪除這些檔案嗎？這個動作無法復原。"
 
-#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:142
+#, kde-format
+msgid "Cancel"
+msgstr "取消"
+
+#: src/main.qml:572 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "睡眠計時器"
 
-#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:581 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "快捷鍵"
 
-#: src/main.qml:578
+#: src/main.qml:588
 #, kde-format
 msgid "Settings"
 msgstr "設定"
 
-#: src/main.qml:585
+#: src/main.qml:595
 #, kde-format
 msgid "About"
 msgstr "關於"
 
-#: src/main.qml:618
+#: src/main.qml:628
 #, kde-format
 msgid "Songs"
 msgstr "歌曲"
 
-#: src/main.qml:638 src/widgets/AlbumsView.qml:76
+#: src/main.qml:648 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "專輯"
 
-#: src/main.qml:645
+#: src/main.qml:655
 #, kde-format
 msgid "No Albums!"
 msgstr "沒有專輯！"
 
-#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
+#: src/main.qml:656 src/main.qml:680 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "新增音樂來源"
 
-#: src/main.qml:662 src/widgets/AlbumsView.qml:76
+#: src/main.qml:672 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "藝人"
 
-#: src/main.qml:669
+#: src/main.qml:679
 #, kde-format
 msgid "No Artists!"
 msgstr "沒有藝人！"
 
-#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:696 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "標籤"
 
-#: src/main.qml:694
+#: src/main.qml:704
 #, kde-format
 msgid "Folders"
 msgstr "資料夾"
@@ -185,17 +191,12 @@ msgid ""
 "not be undone."
 msgstr "您確定要從您的電腦上移除這個檔案嗎？這個動作無法復原。"
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
-#, kde-format
-msgid "Cancel"
-msgstr "取消"
-
-#: src/widgets/BabeTable/BabeTable.qml:182 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "跳到藝人"
 
-#: src/widgets/BabeTable/BabeTable.qml:189 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "跳到專輯"

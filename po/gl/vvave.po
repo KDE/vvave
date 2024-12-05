@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 01:50+0000\n"
+"POT-Creation-Date: 2024-12-05 01:51+0000\n"
 "PO-Revision-Date: 2024-08-25 15:41+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -27,7 +27,7 @@ msgstr "Organice e escoite música."
 msgid "Developer"
 msgstr "Desenvolvemento."
 
-#: src/main.qml:316 src/widgets/BabeTable/BabeTable.qml:155
+#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:76
 #, kde-format
@@ -53,63 +53,69 @@ msgid ""
 msgstr ""
 "Seguro que quere eliminar estes ficheiros? Esta acción non se pode desfacer."
 
-#: src/main.qml:562 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:142
+#, kde-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/main.qml:572 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Temporizador para durmir"
 
-#: src/main.qml:571 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:581 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Atallos"
 
-#: src/main.qml:578
+#: src/main.qml:588
 #, kde-format
 msgid "Settings"
 msgstr "Configuración"
 
-#: src/main.qml:585
+#: src/main.qml:595
 #, kde-format
 msgid "About"
 msgstr "Sobre"
 
-#: src/main.qml:618
+#: src/main.qml:628
 #, kde-format
 msgid "Songs"
 msgstr "Cancións"
 
-#: src/main.qml:638 src/widgets/AlbumsView.qml:76
+#: src/main.qml:648 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Álbums"
 
-#: src/main.qml:645
+#: src/main.qml:655
 #, kde-format
 msgid "No Albums!"
 msgstr "Non hai álbums."
 
-#: src/main.qml:646 src/main.qml:670 src/widgets/TracksView.qml:20
+#: src/main.qml:656 src/main.qml:680 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Engadir novas fontes de música"
 
-#: src/main.qml:662 src/widgets/AlbumsView.qml:76
+#: src/main.qml:672 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Intérpretes"
 
-#: src/main.qml:669
+#: src/main.qml:679
 #, kde-format
 msgid "No Artists!"
 msgstr "Non hai intérpretes."
 
-#: src/main.qml:686 src/widgets/BabeTable/TableMenu.qml:44
+#: src/main.qml:696 src/widgets/BabeTable/TableMenu.qml:44
 #: src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: src/main.qml:694
+#: src/main.qml:704
 #, kde-format
 msgid "Folders"
 msgstr "Cartafoles"
@@ -189,17 +195,12 @@ msgid ""
 msgstr ""
 "Seguro que quere eliminar o ficheiro? Esta acción non se pode desfacer."
 
-#: src/widgets/BabeTable/BabeTable.qml:168 src/widgets/SleepTimerDialog.qml:142
-#, kde-format
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: src/widgets/BabeTable/BabeTable.qml:182 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "Ir á intérprete"
 
-#: src/widgets/BabeTable/BabeTable.qml:189 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "Ir ao álbum"
