@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-05 01:51+0000\n"
-"PO-Revision-Date: 2024-08-25 15:41+0200\n"
+"PO-Revision-Date: 2024-12-08 20:38+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -175,7 +175,7 @@ msgstr[1] "Filtrar %1 álbums"
 #: src/widgets/BabeTable/BabeTable.qml:74
 #, kde-format
 msgid "Shuffle Play"
-msgstr "Reproducir sen orde"
+msgstr "Reproducir aleatoriamente"
 
 #: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
 #, kde-format
