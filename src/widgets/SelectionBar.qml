@@ -45,12 +45,7 @@ Maui.SelectionBar
     {
         text: i18n("Tags")
         icon.name: "tag"
-        onTriggered:
-        {
-            _dialogLoader.sourceComponent = _playlistDialogComponent
-            dialog.composerList.urls = control.uris
-            dialog.open()
-        }
+        onTriggered: tagUrls(control.uris)
     }
 
     hiddenActions: [

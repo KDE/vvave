@@ -423,145 +423,181 @@ StackView
                     }
                 }
 
-                RowLayout
+                Loader
                 {
-                    visible: settings.volumeControl
+                    asynchronous: true
+                    active: settings.volumeControl
                     Layout.fillWidth: true
                     Layout.maximumWidth: 300
 
                     Layout.alignment: Qt.AlignHCenter
-
-                    spacing: Maui.Style.space.small
-
-                    Maui.Icon
+                    sourceComponent:  RowLayout
                     {
-                        implicitHeight: Maui.Style.iconSizes.small
-                        implicitWidth: implicitHeight
-                        source: "audio-volume-low"
-                    }
+                        spacing: Maui.Style.space.small
 
-                    Slider
-                    {
-                        id: volumeBar
-                        Layout.fillWidth: true
-                        padding: 0
-                        spacing: 0
-                        from: 0.0
-                        to: 1.0
-                        value: player.volume
-
-                        orientation: Qt.Horizontal
-
-                        onMoved:
+                        Maui.Icon
                         {
-                            player.volume = value
+                            implicitHeight: Maui.Style.iconSizes.small
+                            implicitWidth: implicitHeight
+                            source: "audio-volume-low"
                         }
-                    }
 
-                    Maui.Icon
-                    {
-                        implicitHeight: Maui.Style.iconSizes.small
-                        implicitWidth: implicitHeight
-                        source: "audio-volume-high"
+                        Slider
+                        {
+                            Layout.fillWidth: true
+                            padding: 0
+                            spacing: 0
+                            from: 0.0
+                            to: 1.0
+                            value: player.volume
+
+                            orientation: Qt.Horizontal
+
+                            onMoved:
+                            {
+                                player.volume = value
+                            }
+                        }
+
+                        Maui.Icon
+                        {
+                            implicitHeight: Maui.Style.iconSizes.small
+                            implicitWidth: implicitHeight
+                            source: "audio-volume-high"
+                        }
                     }
                 }
 
-                Row
+                Loader
                 {
-                    Layout.alignment: Qt.AlignCenter
-                    spacing: Maui.Style.space.medium
-
-                    FB.FavButton
-                    {                       
-                        enabled: root.currentTrack
-                        url: root.currentTrack.url
-                    }
-
-                    ToolButton
+                    asynchronous: true
+                    Layout.fillWidth: true
+                    sourceComponent: Maui.ToolBar
                     {
 
-                        flat: true
-
-                        icon.name: "documentinfo"
-                        checkable: true
-                        checked: control.depth === 2
-                        onClicked:
+                        background: null
+                        middleContent: Row
                         {
-                            if(control.depth === 2)
+                            Layout.alignment: Qt.AlignCenter
+                            spacing: Maui.Style.defaultSpacing
+
+                            FB.FavButton
                             {
-                                control.pop()
-                            }else
+                                enabled: root.currentTrack
+                                url: root.currentTrack.url
+                                text: i18n("Favorite")
+                            }
+
+                            ToolButton
                             {
-                                control.push(_infoComponent)
+
+                                flat: true
+                                text: i18n("Info")
+
+                                icon.name: "documentinfo"
+                                checkable: true
+                                checked: control.depth === 2
+                                onClicked:
+                                {
+                                    if(control.depth === 2)
+                                    {
+                                        control.pop()
+                                    }else
+                                    {
+                                        control.push(_infoComponent)
+                                    }
+                                }
+                            }
+
+                            ToolButton
+                            {
+                                text: i18n("Mini Mode")
+
+                                flat: true
+                                icon.name: "window"
+                                onClicked: toggleMiniMode()
+                            }
+
+                            ToolButton
+                            {
+                                text: i18n("Share")
+
+                                flat: true
+                                icon.name: "document-share"
+                                onClicked: Maui.Platform.shareFiles([currentTrack.url])
+                            }
+
+                            ToolButton
+                            {
+                                text: i18n("Save")
+
+                                flat: true
+                                icon.name: "tag"
+                                onClicked: tagUrls([currentTrack.url])
                             }
                         }
                     }
-
-                    ToolButton
-                    {
-
-                        flat: true
-                        icon.name: "minimize"
-                        onClicked: toggleMiniMode()
-                    }
                 }
 
-                ColumnLayout
+                Loader
                 {
+                    asynchronous: true
                     Layout.fillWidth: true
                     Layout.maximumWidth: 600
                     Layout.margins: Maui.Style.space.medium
                     Layout.alignment: Qt.AlignCenter
 
-                    spacing: 0
-
-                    RowLayout
+                    sourceComponent: ColumnLayout
                     {
-                        Layout.fillWidth: true
 
-                        Label
-                        {
-                            visible: text.length
-                            Layout.fillWidth: true
-                            verticalAlignment: Qt.AlignVCenter
-                            horizontalAlignment: Qt.AlignLeft
-                            text: control.progressTimeLabel
-                            elide: Text.ElideMiddle
-                            wrapMode: Text.NoWrap
-                        }
-
-                        Item
-                        {
-                            Layout.fillWidth: true
-                        }
-
-                        Label
-                        {
-                            visible: text.length
-                            Layout.fillWidth: true
-                            verticalAlignment: Qt.AlignVCenter
-                            horizontalAlignment: Qt.AlignRight
-                            text: control.durationTimeLabel
-                            elide: Text.ElideMiddle
-                            wrapMode: Text.NoWrap
-                        }
-                    }
-
-                    Slider
-                    {
-                        id: progressBar
-                        Layout.fillWidth: true
-
-                        padding: 0
-                        from: 0
-                        to: 1000
-                        value: player.pos/player.duration*1000
                         spacing: 0
-                        focus: true
-                        onMoved: player.pos = (player.duration / 1000) * value
+
+                        RowLayout
+                        {
+                            Layout.fillWidth: true
+
+                            Label
+                            {
+                                visible: text.length
+                                Layout.fillWidth: true
+                                verticalAlignment: Qt.AlignVCenter
+                                horizontalAlignment: Qt.AlignLeft
+                                text: control.progressTimeLabel
+                                elide: Text.ElideMiddle
+                                wrapMode: Text.NoWrap
+                            }
+
+                            Item
+                            {
+                                Layout.fillWidth: true
+                            }
+
+                            Label
+                            {
+                                visible: text.length
+                                Layout.fillWidth: true
+                                verticalAlignment: Qt.AlignVCenter
+                                horizontalAlignment: Qt.AlignRight
+                                text: control.durationTimeLabel
+                                elide: Text.ElideMiddle
+                                wrapMode: Text.NoWrap
+                            }
+                        }
+
+                        Slider
+                        {
+                            Layout.fillWidth: true
+
+                            padding: 0
+                            from: 0
+                            to: 1000
+                            value: player.pos/player.duration*1000
+                            spacing: 0
+                            focus: true
+                            onMoved: player.pos = (player.duration / 1000) * value
+                        }
                     }
                 }
-
             }
         }
     }

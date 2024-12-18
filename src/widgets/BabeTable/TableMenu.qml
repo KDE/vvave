@@ -39,12 +39,6 @@ Maui.ContextualMenu
             onTriggered: favClicked()
         }
 
-        Action
-        {
-            text: i18n("Tags")
-            icon.name: "tag"
-            onTriggered: saveToClicked()
-        }
 
         Action
         {
@@ -62,6 +56,15 @@ Maui.ContextualMenu
             icon.name: "document-share"
             onTriggered: shareClicked()
         }
+    }
+
+
+    Action
+    {
+        text: i18n("Add to playlist")
+        icon.name: "tag"
+        onTriggered: saveToClicked()
+        shortcut: "Ctrl+S"
     }
 
     MenuSeparator {}

@@ -445,7 +445,32 @@ Maui.ApplicationWindow
 
         FB.TagsDialog
         {
-            onTagsReady: (tags) => composerList.updateToUrls(tags)
+
+            Action
+            {
+                property string tag
+                id: _openPlaylistAction
+                text: tag
+                onTriggered:
+                {
+                    console.log("Open playlist view", tag)
+                    goToPlaylist(tag)
+                }
+            }
+
+            onTagsReady: (tags) =>
+                         {
+                             var actions = []
+                             if(tags.length === 1)
+                             {
+                                 _openPlaylistAction.tag = tags[0]
+                                 actions = [_openPlaylistAction]
+                             }
+
+                             Maui.App.rootComponent.notify("dialog-info", i18n("Saved"), i18n("Track added to playlist"), actions)
+                             composerList.updateToUrls(tags)
+                         }
+
             composerList.strict: false
         }
     }
@@ -693,8 +718,10 @@ Maui.ApplicationWindow
 
                     Maui.SwipeViewLoader
                     {
+                        id: _playlistsViewLoader
                         Maui.Controls.title: i18n("Tags")
                         Maui.Controls.iconName: "tag"
+                        property string pendingTag
 
                         PlaylistsView {}
                     }
@@ -838,6 +865,30 @@ Maui.ApplicationWindow
         {
             _artistViewLoader.pendingArtist = artist
         }
+    }
+
+    function goToPlaylist(tag)
+    {
+        if(root.focusView)
+        {
+            toggleFocusView()
+        }
+
+        swipeView.currentIndex = viewsIndex.playlists
+        if(_playlistsViewLoader.item)
+        {
+            _playlistsViewLoader.item.populate(tag)
+        }else
+        {
+            _playlistsViewLoader.pendingTag = tag
+        }
+    }
+
+    function tagUrls(urls)
+    {
+        _dialogLoader.sourceComponent = _playlistDialogComponent
+        dialog.composerList.urls = urls
+        dialog.open()
     }
 
     function openFiles(urls)

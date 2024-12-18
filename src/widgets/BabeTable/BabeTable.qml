@@ -205,9 +205,7 @@ Maui.Page
 
         onSaveToClicked:
         {
-            _dialogLoader.sourceComponent = _playlistDialogComponent
-            dialog.composerList.urls = filterSelection(listModel.get(contextMenu.index).url)
-            dialog.open()
+           tagUrls(filterSelection(listModel.get(contextMenu.index).url))
         }
 
         onOpenWithClicked: FB.FM.openLocation(filterSelection(listModel.get(contextMenu.index).url))
