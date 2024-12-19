@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 01:51+0000\n"
+"POT-Creation-Date: 2024-12-19 01:51+0000\n"
 "PO-Revision-Date: 2024-08-24 08:05+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -29,7 +29,7 @@ msgstr "Utvecklare"
 
 #: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
-#: src/widgets/SelectionBar.qml:76
+#: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "Ta bort"
@@ -58,63 +58,73 @@ msgstr "Är du säker på att du vill ta bort filerna? Åtgärden kan inte ångr
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/main.qml:572 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:470
+#, kde-format
+msgid "Saved"
+msgstr ""
+
+#: src/main.qml:470
+#, fuzzy, kde-format
+#| msgid "End of playlist"
+msgid "Track added to playlist"
+msgstr "Spellistans slut"
+
+#: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Sovtidtagare"
 
-#: src/main.qml:581 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Genvägar"
 
-#: src/main.qml:588
+#: src/main.qml:613
 #, kde-format
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/main.qml:595
+#: src/main.qml:620
 #, kde-format
 msgid "About"
 msgstr "Om"
 
-#: src/main.qml:628
+#: src/main.qml:653
 #, kde-format
 msgid "Songs"
 msgstr "Låtar"
 
-#: src/main.qml:648 src/widgets/AlbumsView.qml:76
+#: src/main.qml:673 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Album"
 
-#: src/main.qml:655
+#: src/main.qml:680
 #, kde-format
 msgid "No Albums!"
 msgstr "Inga album."
 
-#: src/main.qml:656 src/main.qml:680 src/widgets/TracksView.qml:20
+#: src/main.qml:681 src/main.qml:705 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Lägg till nya musikkällor"
 
-#: src/main.qml:672 src/widgets/AlbumsView.qml:76
+#: src/main.qml:697 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artister"
 
-#: src/main.qml:679
+#: src/main.qml:704
 #, kde-format
 msgid "No Artists!"
 msgstr "Inga artister."
 
-#: src/main.qml:696 src/widgets/BabeTable/TableMenu.qml:44
-#: src/widgets/SelectionBar.qml:46
+#: src/main.qml:722 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Taggar"
 
-#: src/main.qml:704
+#: src/main.qml:731
 #, kde-format
 msgid "Folders"
 msgstr "Kataloger"
@@ -215,33 +225,40 @@ msgstr "Favorit"
 msgid "UnFav it"
 msgstr "Ta bort från favoriter"
 
-#: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:16
+#: src/widgets/BabeTable/TableMenu.qml:45 src/widgets/MetadataDialog.qml:16
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "Redigera"
 
-#: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
+#: src/widgets/BabeTable/TableMenu.qml:55 src/widgets/FocusView.qml:523
+#: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
 msgstr "Dela"
 
-#: src/widgets/BabeTable/TableMenu.qml:71
+#: src/widgets/BabeTable/TableMenu.qml:64
+#, fuzzy, kde-format
+#| msgid "End of playlist"
+msgid "Add to playlist"
+msgstr "Spellistans slut"
+
+#: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
 msgid "Select"
 msgstr "Markera"
 
-#: src/widgets/BabeTable/TableMenu.qml:84
+#: src/widgets/BabeTable/TableMenu.qml:87
 #, kde-format
 msgid "Play Next"
 msgstr "Spela nästa"
 
-#: src/widgets/BabeTable/TableMenu.qml:109
+#: src/widgets/BabeTable/TableMenu.qml:112
 #, kde-format
 msgid "Show in Folder"
 msgstr "Visa i katalog"
 
-#: src/widgets/BabeTable/TableMenu.qml:135
+#: src/widgets/BabeTable/TableMenu.qml:138
 #, kde-format
 msgid "Delete"
 msgstr "Ta bort"
@@ -281,6 +298,26 @@ msgstr "Försök med någonting annat"
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Börja sätta ihop din spellista."
+
+#: src/widgets/FocusView.qml:488
+#, kde-format
+msgid "Favorite"
+msgstr ""
+
+#: src/widgets/FocusView.qml:495
+#, kde-format
+msgid "Info"
+msgstr ""
+
+#: src/widgets/FocusView.qml:514
+#, kde-format
+msgid "Mini Mode"
+msgstr ""
+
+#: src/widgets/FocusView.qml:532
+#, kde-format
+msgid "Save"
+msgstr ""
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
@@ -426,7 +463,7 @@ msgstr "Spela"
 msgid "Append"
 msgstr "Lägg till"
 
-#: src/widgets/SelectionBar.qml:66
+#: src/widgets/SelectionBar.qml:61
 #, kde-format
 msgid "Queue"
 msgstr "Köa"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 01:51+0000\n"
+"POT-Creation-Date: 2024-12-19 01:51+0000\n"
 "PO-Revision-Date: 2023-04-29 12:03+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -31,7 +31,7 @@ msgstr "Entwickler"
 
 #: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
-#: src/widgets/SelectionBar.qml:76
+#: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "Entfernen"
@@ -63,63 +63,73 @@ msgstr ""
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/main.qml:572 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:470
+#, kde-format
+msgid "Saved"
+msgstr ""
+
+#: src/main.qml:470
+#, fuzzy, kde-format
+#| msgid "No Playlists!"
+msgid "Track added to playlist"
+msgstr "Keine Wiedergabelisten!"
+
+#: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr ""
 
-#: src/main.qml:581 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Kurzbefehle"
 
-#: src/main.qml:588
+#: src/main.qml:613
 #, kde-format
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: src/main.qml:595
+#: src/main.qml:620
 #, kde-format
 msgid "About"
 msgstr "Über"
 
-#: src/main.qml:628
+#: src/main.qml:653
 #, kde-format
 msgid "Songs"
 msgstr "Songs"
 
-#: src/main.qml:648 src/widgets/AlbumsView.qml:76
+#: src/main.qml:673 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Alben"
 
-#: src/main.qml:655
+#: src/main.qml:680
 #, kde-format
 msgid "No Albums!"
 msgstr "Keine Alben!"
 
-#: src/main.qml:656 src/main.qml:680 src/widgets/TracksView.qml:20
+#: src/main.qml:681 src/main.qml:705 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Neue Musikquellen hinzufügen"
 
-#: src/main.qml:672 src/widgets/AlbumsView.qml:76
+#: src/main.qml:697 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Interpreten"
 
-#: src/main.qml:679
+#: src/main.qml:704
 #, kde-format
 msgid "No Artists!"
 msgstr "Keine Interpreten!"
 
-#: src/main.qml:696 src/widgets/BabeTable/TableMenu.qml:44
-#: src/widgets/SelectionBar.qml:46
+#: src/main.qml:722 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Stichwörter"
 
-#: src/main.qml:704
+#: src/main.qml:731
 #, kde-format
 msgid "Folders"
 msgstr "Ordner"
@@ -221,33 +231,40 @@ msgstr "Zu Favoriten hinzufügen"
 msgid "UnFav it"
 msgstr "Aus Favoriten entfernen"
 
-#: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:16
+#: src/widgets/BabeTable/TableMenu.qml:45 src/widgets/MetadataDialog.qml:16
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
+#: src/widgets/BabeTable/TableMenu.qml:55 src/widgets/FocusView.qml:523
+#: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
 msgstr "Teilen"
 
-#: src/widgets/BabeTable/TableMenu.qml:71
+#: src/widgets/BabeTable/TableMenu.qml:64
+#, fuzzy, kde-format
+#| msgid "No Playlists!"
+msgid "Add to playlist"
+msgstr "Keine Wiedergabelisten!"
+
+#: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/widgets/BabeTable/TableMenu.qml:84
+#: src/widgets/BabeTable/TableMenu.qml:87
 #, kde-format
 msgid "Play Next"
 msgstr "Nächste wiedergeben"
 
-#: src/widgets/BabeTable/TableMenu.qml:109
+#: src/widgets/BabeTable/TableMenu.qml:112
 #, kde-format
 msgid "Show in Folder"
 msgstr "In Ordner anzeigen"
 
-#: src/widgets/BabeTable/TableMenu.qml:135
+#: src/widgets/BabeTable/TableMenu.qml:138
 #, kde-format
 msgid "Delete"
 msgstr "Löschen"
@@ -284,6 +301,27 @@ msgstr "Versuchen Sie etwas anderes"
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Stellen Sie jetzt Ihre Wiedergabeliste zusammen."
+
+#: src/widgets/FocusView.qml:488
+#, kde-format
+msgid "Favorite"
+msgstr ""
+
+#: src/widgets/FocusView.qml:495
+#, fuzzy, kde-format
+#| msgid "File Info"
+msgid "Info"
+msgstr "Datei-Informationen"
+
+#: src/widgets/FocusView.qml:514
+#, kde-format
+msgid "Mini Mode"
+msgstr ""
+
+#: src/widgets/FocusView.qml:532
+#, kde-format
+msgid "Save"
+msgstr ""
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
@@ -429,7 +467,7 @@ msgstr "Abspielen"
 msgid "Append"
 msgstr "Anhängen"
 
-#: src/widgets/SelectionBar.qml:66
+#: src/widgets/SelectionBar.qml:61
 #, kde-format
 msgid "Queue"
 msgstr "Warteschlange"
@@ -666,6 +704,3 @@ msgstr "Datei öffnen"
 
 #~ msgid "More"
 #~ msgstr "Mehr"
-
-#~ msgid "File Info"
-#~ msgstr "Datei-Informationen"

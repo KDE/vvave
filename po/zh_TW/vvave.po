@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-05 01:51+0000\n"
+"POT-Creation-Date: 2024-12-19 01:51+0000\n"
 "PO-Revision-Date: 2024-10-07 14:58+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -29,7 +29,7 @@ msgstr "開發者"
 
 #: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
-#: src/widgets/SelectionBar.qml:76
+#: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "移除"
@@ -57,63 +57,73 @@ msgstr "您確定要刪除這些檔案嗎？這個動作無法復原。"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/main.qml:572 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:470
+#, kde-format
+msgid "Saved"
+msgstr ""
+
+#: src/main.qml:470
+#, fuzzy, kde-format
+#| msgid "End of playlist"
+msgid "Track added to playlist"
+msgstr "播放清單尾端"
+
+#: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "睡眠計時器"
 
-#: src/main.qml:581 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "快捷鍵"
 
-#: src/main.qml:588
+#: src/main.qml:613
 #, kde-format
 msgid "Settings"
 msgstr "設定"
 
-#: src/main.qml:595
+#: src/main.qml:620
 #, kde-format
 msgid "About"
 msgstr "關於"
 
-#: src/main.qml:628
+#: src/main.qml:653
 #, kde-format
 msgid "Songs"
 msgstr "歌曲"
 
-#: src/main.qml:648 src/widgets/AlbumsView.qml:76
+#: src/main.qml:673 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "專輯"
 
-#: src/main.qml:655
+#: src/main.qml:680
 #, kde-format
 msgid "No Albums!"
 msgstr "沒有專輯！"
 
-#: src/main.qml:656 src/main.qml:680 src/widgets/TracksView.qml:20
+#: src/main.qml:681 src/main.qml:705 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "新增音樂來源"
 
-#: src/main.qml:672 src/widgets/AlbumsView.qml:76
+#: src/main.qml:697 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "藝人"
 
-#: src/main.qml:679
+#: src/main.qml:704
 #, kde-format
 msgid "No Artists!"
 msgstr "沒有藝人！"
 
-#: src/main.qml:696 src/widgets/BabeTable/TableMenu.qml:44
-#: src/widgets/SelectionBar.qml:46
+#: src/main.qml:722 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "標籤"
 
-#: src/main.qml:704
+#: src/main.qml:731
 #, kde-format
 msgid "Folders"
 msgstr "資料夾"
@@ -211,33 +221,40 @@ msgstr "加到最愛"
 msgid "UnFav it"
 msgstr "從最愛中移除它"
 
-#: src/widgets/BabeTable/TableMenu.qml:51 src/widgets/MetadataDialog.qml:16
+#: src/widgets/BabeTable/TableMenu.qml:45 src/widgets/MetadataDialog.qml:16
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "編輯"
 
-#: src/widgets/BabeTable/TableMenu.qml:61 src/widgets/SelectionBar.qml:59
+#: src/widgets/BabeTable/TableMenu.qml:55 src/widgets/FocusView.qml:523
+#: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
 msgstr "分享"
 
-#: src/widgets/BabeTable/TableMenu.qml:71
+#: src/widgets/BabeTable/TableMenu.qml:64
+#, fuzzy, kde-format
+#| msgid "End of playlist"
+msgid "Add to playlist"
+msgstr "播放清單尾端"
+
+#: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
 msgid "Select"
 msgstr "選擇"
 
-#: src/widgets/BabeTable/TableMenu.qml:84
+#: src/widgets/BabeTable/TableMenu.qml:87
 #, kde-format
 msgid "Play Next"
 msgstr "播放下一個"
 
-#: src/widgets/BabeTable/TableMenu.qml:109
+#: src/widgets/BabeTable/TableMenu.qml:112
 #, kde-format
 msgid "Show in Folder"
 msgstr "在資料夾顯示"
 
-#: src/widgets/BabeTable/TableMenu.qml:135
+#: src/widgets/BabeTable/TableMenu.qml:138
 #, kde-format
 msgid "Delete"
 msgstr "刪除"
@@ -276,6 +293,27 @@ msgstr "試試看別的東西"
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "開始製作您的播放清單。"
+
+#: src/widgets/FocusView.qml:488
+#, kde-format
+msgid "Favorite"
+msgstr ""
+
+#: src/widgets/FocusView.qml:495
+#, fuzzy, kde-format
+#| msgid "File Info"
+msgid "Info"
+msgstr "檔案資訊"
+
+#: src/widgets/FocusView.qml:514
+#, kde-format
+msgid "Mini Mode"
+msgstr ""
+
+#: src/widgets/FocusView.qml:532
+#, kde-format
+msgid "Save"
+msgstr ""
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
@@ -419,7 +457,7 @@ msgstr "播放"
 msgid "Append"
 msgstr "加到最後"
 
-#: src/widgets/SelectionBar.qml:66
+#: src/widgets/SelectionBar.qml:61
 #, kde-format
 msgid "Queue"
 msgstr "佇列"
@@ -657,9 +695,6 @@ msgstr "開啟檔案"
 
 #~ msgid "Oldest released tracks from your collection."
 #~ msgstr "您的收藏中發行時間最久以前的音軌。"
-
-#~ msgid "File Info"
-#~ msgstr "檔案資訊"
 
 #~ msgid "Local file info."
 #~ msgstr "本機檔案資訊。"
