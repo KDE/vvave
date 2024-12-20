@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-19 01:51+0000\n"
-"PO-Revision-Date: 2024-12-08 20:38+0100\n"
+"PO-Revision-Date: 2024-12-19 22:27+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -62,13 +62,12 @@ msgstr "Cancelar"
 #: src/main.qml:470
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "Gardouse"
 
 #: src/main.qml:470
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "Fin da lista de reprodución"
+msgstr "A pista engadiuse á lista de reprodución."
 
 #: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -220,6 +219,7 @@ msgstr "Ir ao álbum"
 msgid "Fav it"
 msgstr "Facer favorito"
 
+# skip-rule: trasno-remove_reverse
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "UnFav it"
@@ -238,10 +238,9 @@ msgid "Share"
 msgstr "Compartir"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Add to playlist"
-msgstr "Fin da lista de reprodución"
+msgstr "Engadir á lista de reprodución"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
@@ -302,22 +301,22 @@ msgstr "Prepare a súa lista de reprodución."
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "Favorita"
 
 #: src/widgets/FocusView.qml:495
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Información"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "Modo mini"
 
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "Gardar"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
