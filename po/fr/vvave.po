@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-19 01:51+0000\n"
-"PO-Revision-Date: 2024-08-25 11:47+0200\n"
+"PO-Revision-Date: 2024-12-20 08:53+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -60,13 +60,12 @@ msgstr "Annuler"
 #: src/main.qml:470
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "Enregistré"
 
 #: src/main.qml:470
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "Fin de la liste de lecture"
+msgstr "La piste a été ajoutée à la liste de lecture."
 
 #: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -237,10 +236,9 @@ msgid "Share"
 msgstr "Partager"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Add to playlist"
-msgstr "Fin de la liste de lecture"
+msgstr "Ajouter à la liste de lecture"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
@@ -301,23 +299,22 @@ msgstr "Commencez à constituer votre liste de lecture."
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "Préféré"
 
 #: src/widgets/FocusView.qml:495
-#, fuzzy, kde-format
-#| msgid "File Info"
+#, kde-format
 msgid "Info"
-msgstr "Informations sur le fichier"
+msgstr "Informations"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "Mode réduit"
 
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "Enregistrer"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
