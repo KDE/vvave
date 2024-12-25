@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-19 01:51+0000\n"
-"PO-Revision-Date: 2024-11-28 21:19+0100\n"
+"PO-Revision-Date: 2024-12-24 19:21+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -60,13 +60,12 @@ msgstr "취소"
 #: src/main.qml:470
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "저장됨"
 
 #: src/main.qml:470
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "재생 목록의 끝"
+msgstr "재생 목록에 곡 추가됨"
 
 #: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -234,10 +233,9 @@ msgid "Share"
 msgstr "공유"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Add to playlist"
-msgstr "재생 목록의 끝"
+msgstr "재생 목록에 추가"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
@@ -297,22 +295,22 @@ msgstr "재생 목록에 항목을 추가하여 시작하십시오."
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "책갈피"
 
 #: src/widgets/FocusView.qml:495
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "정보"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "미니 모드"
 
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
