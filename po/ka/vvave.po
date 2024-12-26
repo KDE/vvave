@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-19 01:51+0000\n"
-"PO-Revision-Date: 2024-02-11 02:28+0100\n"
+"PO-Revision-Date: 2024-12-25 22:36+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -64,13 +64,12 @@ msgstr "გაუქმება"
 #: src/main.qml:470
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "შენახულია"
 
 #: src/main.qml:470
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "ფაილი დასაკრავი სიის ბოლო"
+msgstr "ტრეკი დაემატა დასაკრავ სიას"
 
 #: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -241,10 +240,9 @@ msgid "Share"
 msgstr "გაზიარება"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Add to playlist"
-msgstr "ფაილი დასაკრავი სიის ბოლო"
+msgstr "დასაკრავი სიაში დამატება"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
@@ -304,23 +302,22 @@ msgstr "დაიწყეთ თქვენი დასაკრავი ს
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "რჩეული"
 
 #: src/widgets/FocusView.qml:495
-#, fuzzy, kde-format
-#| msgid "File Info"
+#, kde-format
 msgid "Info"
-msgstr "ფაილის ინფორმაცია"
+msgstr "ინფორმაცია"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "მინი რეჟიმი"
 
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "შენახვა"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
@@ -628,10 +625,9 @@ msgid "Off"
 msgstr "გამორთვა"
 
 #: src/widgets/SleepTimerDialog.qml:134
-#, fuzzy, kde-format
-#| msgid "Close application after sleeping"
+#, kde-format
 msgid "Close application after"
-msgstr "აპლიკაციის დახურვა ძილის შემდეგ"
+msgstr "აპლიკაციის დახურვა შემდეგ"
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
