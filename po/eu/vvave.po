@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-19 01:51+0000\n"
-"PO-Revision-Date: 2024-08-24 08:18+0200\n"
+"PO-Revision-Date: 2024-12-26 20:25+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -66,13 +66,12 @@ msgstr "Utzi"
 #: src/main.qml:470
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "Gordeta"
 
 #: src/main.qml:470
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "Jotze-zerrendaren amaiera"
+msgstr "Pista jotze-zerrendara gehitu da"
 
 #: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -243,10 +242,9 @@ msgid "Share"
 msgstr "Partekatu"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Add to playlist"
-msgstr "Jotze-zerrendaren amaiera"
+msgstr "Gehitu jotze-zerrendara"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
@@ -307,23 +305,22 @@ msgstr "Hasi zure jotze-zerrenda osatzen."
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "Gogokoa"
 
 #: src/widgets/FocusView.qml:495
-#, fuzzy, kde-format
-#| msgid "File Info"
+#, kde-format
 msgid "Info"
-msgstr "Fitxategiaren informazioa"
+msgstr "Informazioa"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "Mini modua"
 
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "Gorde"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
