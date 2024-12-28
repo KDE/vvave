@@ -1,202 +1,199 @@
-# translation of vvave.pot to Esperanto
-# Copyright (C) 2024 Free Software Foundation, Inc.
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# Oliver Kellogg <olivermkellogg@gmail.com>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-19 01:51+0000\n"
-"PO-Revision-Date: 2024-12-27 17:40+0100\n"
-"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
-"Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
-"Language: eo\n"
+"PO-Revision-Date: 2024-12-27 19:01+0100\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: src/main.cpp:77
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr "Organizu kaj aŭskultu vian muzikon."
+msgstr "Organisa tu cargas."
 
 #: src/main.cpp:82 src/main.cpp:83
 #, kde-format
 msgid "Developer"
-msgstr "Ellaboranto"
+msgstr "Developpator"
 
 #: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
-msgstr "Forigi"
+msgstr "Remove"
 
 #: src/main.qml:336
 #, kde-format
 msgid "Missing file"
-msgstr "Mankas dosiero"
+msgstr "File mancante"
 
 #: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
-msgstr[0] "Forigi trakon"
-msgstr[1] "Forigi %1 trakojn"
+msgstr[0] "Remove tracia"
+msgstr[1] "Remove %1 tracias"
 
 #: src/main.qml:420
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
-"Ĉu vi certas, ke vi volas forigi ĉi tiujn dosierojn? Ĉi tiu ago ne povas "
-"esti malfarita."
 
 #: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
 #: src/widgets/SleepTimerDialog.qml:142
 #, kde-format
 msgid "Cancel"
-msgstr "Nuligi"
+msgstr "Cancella"
 
 #: src/main.qml:470
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "Salveguardate"
 
 #: src/main.qml:470
 #, kde-format
 msgid "Track added to playlist"
-msgstr "Trako aldonita al ludlisto"
+msgstr ""
 
 #: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr "Sleep Timer"
+msgstr "Temporisator de dormir"
 
 #: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
-msgstr "Ŝparvojoj"
+msgstr "Vias breve"
 
 #: src/main.qml:613
 #, kde-format
 msgid "Settings"
-msgstr "Agordoj"
+msgstr "Preferentias"
 
 #: src/main.qml:620
 #, kde-format
 msgid "About"
-msgstr "Pri"
+msgstr "A proposito"
 
 #: src/main.qml:653
 #, kde-format
 msgid "Songs"
-msgstr "Kantoj"
+msgstr "Cantos"
 
 #: src/main.qml:673 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
-msgstr "Albumoj"
+msgstr "Albumes"
 
 #: src/main.qml:680
 #, kde-format
 msgid "No Albums!"
-msgstr "Neniuj Albumoj!"
+msgstr ""
 
 #: src/main.qml:681 src/main.qml:705 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
-msgstr "Aldonu novajn muzikfontojn"
+msgstr ""
 
 #: src/main.qml:697 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
-msgstr "Artistoj"
+msgstr "Artistas"
 
 #: src/main.qml:704
 #, kde-format
 msgid "No Artists!"
-msgstr "Neniuj Artistoj!"
+msgstr ""
 
 #: src/main.qml:722 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
-msgstr "Etikedoj"
+msgstr "Etiquettas"
 
 #: src/main.qml:731
 #, kde-format
 msgid "Folders"
-msgstr "Dosierujoj"
+msgstr "Dossieres"
 
 #: src/models/playlists/playlistsmodel.cpp:110
 #, kde-format
 msgid "Most Played"
-msgstr "Plej Ludita"
+msgstr "Plus reproducite"
 
 #: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
 msgid "Random Tracks"
-msgstr "Hazardaj Trakoj"
+msgstr "Tracias casual"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
 msgid "Recent Tracks"
-msgstr "Lastatempaj Trakoj"
+msgstr ""
 
 #: src/models/playlists/playlistsmodel.cpp:131
 #, kde-format
 msgid "Never Played"
-msgstr "Neniam Ludita"
+msgstr "Jammais Reproducite"
 
 #: src/models/playlists/playlistsmodel.cpp:138
 #, kde-format
 msgid "Classic Tracks"
-msgstr "Klasikaj Trakoj"
+msgstr ""
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr "Ludante muzikon"
+msgstr "Reproducente musica"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
 #: src/widgets/TracksView.qml:25
 #, kde-format
 msgid "Add sources"
-msgstr "Aldoni fontojn"
+msgstr ""
 
 #: src/widgets/AlbumsView.qml:70
 #, kde-format
 msgid "This list is empty"
-msgstr "Ĉi tiu listo estas malplena"
+msgstr ""
 
 #: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
 #: src/widgets/CloudView/CloudView.qml:24
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
-#, kde-format
+#, fuzzy, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "Filtri"
-msgstr[1] "Filtri %1 albumojn"
+msgstr[0] "Filtro"
+msgstr[1] ""
 
 #: src/widgets/BabeTable/BabeTable.qml:74
 #, kde-format
 msgid "Shuffle Play"
-msgstr "Miŝu Ludon"
+msgstr ""
 
 #: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
-msgstr "Ludi Ĉion"
+msgstr "Reproduce toto"
 
 #: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
-msgstr "Aldonu Ĉion"
+msgstr ""
 
 #: src/widgets/BabeTable/BabeTable.qml:150
 #, kde-format
@@ -204,70 +201,68 @@ msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr ""
-"Ĉu vi certas, ke vi volas forigi la dosieron de via komputilo? Ĉi tiu ago ne "
-"povas esti malfarita."
 
 #: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
-msgstr "Iru al Artisto"
+msgstr ""
 
 #: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
-msgstr "Iru al Albumo"
+msgstr ""
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "Fav it"
-msgstr "Fav ĝin"
+msgstr ""
 
 #: src/widgets/BabeTable/TableMenu.qml:35
 #, kde-format
 msgid "UnFav it"
-msgstr "MalFavi ĝin"
+msgstr "UnFav lo (levar lo ex favoritos)"
 
 #: src/widgets/BabeTable/TableMenu.qml:45 src/widgets/MetadataDialog.qml:16
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
-msgstr "Redakti"
+msgstr "Modifica"
 
 #: src/widgets/BabeTable/TableMenu.qml:55 src/widgets/FocusView.qml:523
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
-msgstr "Kunhavigi"
+msgstr "Comparti"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
 #, kde-format
 msgid "Add to playlist"
-msgstr "Aldoni al ludlisto"
+msgstr "Adde al lista de reproduction"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
 msgid "Select"
-msgstr "Elekti"
+msgstr "Selige"
 
 #: src/widgets/BabeTable/TableMenu.qml:87
 #, kde-format
 msgid "Play Next"
-msgstr "Ludi Sekvantan"
+msgstr "Reproduce proxime"
 
 #: src/widgets/BabeTable/TableMenu.qml:112
 #, kde-format
 msgid "Show in Folder"
-msgstr "Montri en Dosierujo"
+msgstr "Monstra in dossier"
 
 #: src/widgets/BabeTable/TableMenu.qml:138
 #, kde-format
 msgid "Delete"
-msgstr "Forigi"
+msgstr "Dele"
 
 #: src/widgets/CloudView/CloudView.qml:39
 #, kde-format
 msgid "Opps!"
-msgstr "Ops!"
+msgstr "Opps!"
 
 #: src/widgets/CloudView/CloudView.qml:40
 #, kde-format
@@ -276,39 +271,36 @@ msgid ""
 "You can set up your account now by clicking here or under the Accounts "
 "options in the main menu"
 msgstr ""
-"Vi ne havas konton agordita.\n"
-"Vi povas agordi vian konton nun alklakante ĉi tie aŭ sub la elektebloj de "
-"Kontoj en la ĉefa menuo"
 
 #: src/widgets/FocusView.qml:158
 #, kde-format
 msgid "Find"
-msgstr "Trovi"
+msgstr "Trova"
 
 #: src/widgets/FocusView.qml:200
 #, kde-format
 msgid "No Results!"
-msgstr "Neniuj Rezultoj!"
+msgstr "Nulle resultatos!"
 
 #: src/widgets/FocusView.qml:201
 #, kde-format
 msgid "Try with something else"
-msgstr "Provu per io alia"
+msgstr ""
 
 #: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
 #, kde-format
 msgid "Start putting together your playlist."
-msgstr "Komencu kunmeti vian ludliston."
+msgstr ""
 
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "Favorito"
 
 #: src/widgets/FocusView.qml:495
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
@@ -318,162 +310,162 @@ msgstr ""
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "Salveguarda"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] "Filtri %1 dosierujon"
-msgstr[1] "Filtri %1 dosierujojn"
+msgstr[0] ""
+msgstr[1] "%1 dossieres"
 
 #: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
 msgid "No Folders!"
-msgstr "Neniuj Dosierujoj!"
+msgstr "Necun dossieres!"
 
 #: src/widgets/FoldersView/FoldersView.qml:48
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
-msgstr "Aldonu novan muzikon al viaj fontoj por foliumi per dosierujoj"
+msgstr ""
 
 #: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
 #, kde-format
 msgid "No Tracks!"
-msgstr "Neniuj Spuroj!"
+msgstr ""
 
 #: src/widgets/FoldersView/FoldersView.qml:136
 #, kde-format
 msgid "This source folder seems to be empty!"
-msgstr "Ĉi tiu fonta dosierujo ŝajnas esti malplena!"
+msgstr ""
 
 #: src/widgets/InfoView/InfoView.qml:34
 #, kde-format
 msgid "Artist Info"
-msgstr "Artista Informo"
+msgstr ""
 
 #: src/widgets/InfoView/InfoView.qml:61
 #, kde-format
 msgid "Album Info"
-msgstr "Albumaj Informoj"
+msgstr ""
 
 #: src/widgets/MainPlaylist/MainPlaylist.qml:187
 #, kde-format
 msgid "Syncing to "
-msgstr "Sinkronigante al"
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
 msgid "Metadata"
-msgstr "Metadatenoj"
+msgstr "Metadatos"
 
 #: src/widgets/MetadataDialog.qml:42
 #, kde-format
 msgid "Embedded metadata info."
-msgstr "Informitaj metadatenoj."
+msgstr ""
 
 #: src/widgets/MetadataDialog.qml:46
 #, kde-format
 msgid "Track Title"
-msgstr "Traka titolo"
+msgstr "Titulo de tracia"
 
 #: src/widgets/MetadataDialog.qml:58
 #, kde-format
 msgid "Artist"
-msgstr "Artisto"
+msgstr "Artista"
 
 #: src/widgets/MetadataDialog.qml:71
 #, kde-format
 msgid "Album"
-msgstr "Albumo"
+msgstr "Album"
 
 #: src/widgets/MetadataDialog.qml:84
 #, kde-format
 msgid "Track"
-msgstr "Trako"
+msgstr "Tracia"
 
 #: src/widgets/MetadataDialog.qml:97
 #, kde-format
 msgid "Genre"
-msgstr "Ĝenro"
+msgstr "Genere"
 
 #: src/widgets/MetadataDialog.qml:110
 #, kde-format
 msgid "Year"
-msgstr "Jaro"
+msgstr "Anno"
 
 #: src/widgets/MetadataDialog.qml:123
 #, kde-format
 msgid "Comment"
-msgstr "Komento"
+msgstr "Commento"
 
 #: src/widgets/PlaybackBar.qml:22
 #, kde-format
 msgid "Toogle SideBar"
-msgstr "Baskuligi Flankbaron"
+msgstr "Commuta barra de latere"
 
 #: src/widgets/PlaybackBar.qml:51
 #, kde-format
 msgid "Play and pause"
-msgstr "Ludu kaj paŭzu"
+msgstr ""
 
 #: src/widgets/PlaybackBar.qml:61
 #, kde-format
 msgid "Next"
-msgstr "Sekva"
+msgstr "Proxime"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr "Via ludlisto estas malplena. Komencu aldoni novan muzikon al ĝi"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
 msgid "Remove from playlist"
-msgstr "Forigi el ludlisto"
+msgstr "Remove ex lista de reproduction"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
 #, kde-format
 msgid "No Playlists!"
-msgstr "Neniuj Ludlistoj!"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
 #, kde-format
 msgid "Start creating new custom playlists"
-msgstr "Komencu krei novajn proprajn ludlistojn"
+msgstr ""
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Remove '%1'?"
-msgstr "Ĉu forigi '%1'?"
+msgstr "Remove '%1'?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
-"Ĉu vi certas, ke vi volas forigi ĉi tiun etikedon? Ĉi tiu operacio ne povas "
-"esti malfarita."
+"Tu es secur que tu vole remover iste etiquetta? Iste operation non pote "
+"esser annullate."
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr "Ludi"
+msgstr "Reproduce"
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
 msgid "Append"
-msgstr "Aldoni"
+msgstr "Adjunge"
 
 #: src/widgets/SelectionBar.qml:61
 #, kde-format
 msgid "Queue"
-msgstr "Vico"
+msgstr "Cauda"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
 #, kde-format
 msgid "Remove source"
-msgstr "Forigi fonton"
+msgstr "Remove fonte"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:39
 #, kde-format
@@ -481,43 +473,41 @@ msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
 msgstr ""
-"Ĉu vi certas, ke vi volas forigi la fonton: \n"
-"%1"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:55
 #, kde-format
 msgid "Playback"
-msgstr "Reproduktado"
+msgstr "Reproduce"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Auto Resume"
-msgstr "Aŭtomata Rekomenco"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr "Rekomencu la lastan sean ludliston."
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:73
 #, kde-format
 msgid "Volume"
-msgstr "Laŭteco"
+msgstr "Volumine"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:74
 #, kde-format
 msgid "Show volume controls."
-msgstr "Montru laŭtecajn regilojn."
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Collection"
-msgstr "Kolekto"
+msgstr "Collection"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:92
 #, kde-format
 msgid "Fetch Artwork"
-msgstr "Prenu Artaĵojn"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:93
 #, kde-format
@@ -525,118 +515,115 @@ msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
-"Kolektas albumajn kaj artaĵojn de artistoj de interretaj servoj: LastFM, "
-"Spotify, MusicBrainz, iTunes, Genius kaj aliaj."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid "Auto Scan"
-msgstr "Aŭtomata Skanado"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:106
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
-"Skani ĉiujn muzikfontojn dum ekfunkciigo por teni vian kolekton ĝisdatigita."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:119
 #, kde-format
 msgid "General"
-msgstr "Ĝenerala"
+msgstr "General"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:124
 #, kde-format
 msgid "Focus View"
-msgstr "Fokusa Vido"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:125
 #, kde-format
 msgid "Make the focus view the default."
-msgstr "Faru la fokusan vidon la defaŭltan."
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:140
 #, kde-format
 msgid "Artwork"
-msgstr "Artaĵoj"
+msgstr "Material Illustrative (Artwork)"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:141
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr "Montru la kovrilan arton por la spuroj."
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:156
 #, kde-format
 msgid "Titles"
-msgstr "Titoloj"
+msgstr "Titulos"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:157
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr "Montru la titolon de albumoj kaj artistoj en la kradvido."
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:173
 #, kde-format
 msgid "Sources"
-msgstr "Fontoj"
+msgstr "Fontes"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:210
 #, kde-format
 msgid "Add"
-msgstr "Aldoni"
+msgstr "Adde"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:228
 #, kde-format
 msgid "Scan now"
-msgstr "Skani nun"
+msgstr ""
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:26
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
 #, kde-format
 msgid "Unknown"
-msgstr "Nekonata"
+msgstr "Incognite"
 
 #: src/widgets/SleepTimerDialog.qml:31
 #, kde-format
 msgid "15 minutes"
-msgstr "15 minutoj"
+msgstr "15 minutas"
 
 #: src/widgets/SleepTimerDialog.qml:47
 #, kde-format
 msgid "30 minutes"
-msgstr "30 minutoj"
+msgstr "30 minutas"
 
 #: src/widgets/SleepTimerDialog.qml:63
 #, kde-format
 msgid "1 hour"
-msgstr "1 horo"
+msgstr "1 hora"
 
 #: src/widgets/SleepTimerDialog.qml:79
 #, kde-format
 msgid "End of track"
-msgstr "Fino de trako"
+msgstr "Fine de tracia"
 
 #: src/widgets/SleepTimerDialog.qml:95
 #, kde-format
 msgid "End of playlist"
-msgstr "Fino de ludlisto"
+msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:111
 #, kde-format
 msgid "Off"
-msgstr "Malŝaltita"
+msgstr "De-Activate (Off)"
 
 #: src/widgets/SleepTimerDialog.qml:134
 #, kde-format
 msgid "Close application after"
-msgstr "Fermi la aplikon post"
+msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:148
 #, kde-format
 msgid "Accept"
-msgstr "Akcepti"
+msgstr "Accepta"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
 msgid "Open file"
-msgstr "Malfermi dosieron"
+msgstr "Aperi file"
