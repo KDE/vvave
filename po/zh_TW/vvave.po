@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-19 01:51+0000\n"
-"PO-Revision-Date: 2024-10-07 14:58+0900\n"
+"PO-Revision-Date: 2024-12-29 01:46+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -60,13 +60,12 @@ msgstr "取消"
 #: src/main.qml:470
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "已儲存"
 
 #: src/main.qml:470
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "播放清單尾端"
+msgstr "音軌已加入播放清單"
 
 #: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -234,10 +233,9 @@ msgid "Share"
 msgstr "分享"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Add to playlist"
-msgstr "播放清單尾端"
+msgstr "加入播放清單"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
@@ -297,23 +295,22 @@ msgstr "開始製作您的播放清單。"
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "最愛"
 
 #: src/widgets/FocusView.qml:495
-#, fuzzy, kde-format
-#| msgid "File Info"
+#, kde-format
 msgid "Info"
-msgstr "檔案資訊"
+msgstr "資訊"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "迷你模式"
 
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "儲存"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
