@@ -19,6 +19,7 @@
   <name xml:lang="fi">Vvave</name>
   <name xml:lang="fr">Vvave</name>
   <name xml:lang="gl">Vvave</name>
+  <name xml:lang="he">Vvave</name>
   <name xml:lang="hi">वैव (Vvave)</name>
   <name xml:lang="hu">Vvave</name>
   <name xml:lang="ia">Vvave</name>
@@ -58,6 +59,7 @@
   <summary xml:lang="fi">Toista musiikkikokoelmaasi</summary>
   <summary xml:lang="fr">Jouez votre collection musicale</summary>
   <summary xml:lang="gl">Reproduza a súa colección de música</summary>
+  <summary xml:lang="he">נגינת אוסף המוזיקה שלך</summary>
   <summary xml:lang="hi">अपना संगीत संग्रह बजाएँ</summary>
   <summary xml:lang="hu">Játssza le zenei gyűjteményét</summary>
   <summary xml:lang="id">Putar koleksi musik Anda</summary>
@@ -100,6 +102,7 @@
     <p xml:lang="fi">Pikkuruinen Qt-musiikkisoitin suosikkikappaleittasi pitämiseksi lähellä.</p>
     <p xml:lang="fr">Lecteur de musique Qt minimaliste pour conserver toutes vos chansons préférées à portée de main.</p>
     <p xml:lang="gl">Pequeno reprodutor de música desenvolvido con Qt para ter a man as túas cancións favoritas.</p>
+    <p xml:lang="he">נגן מוזיקה פצפון שנכתב ב־Qt כדי שהשירים שלך יהיו נגישים לך.</p>
     <p xml:lang="hi">छोटा क्यूट संगीत चालक जो आपके मनचाहे गीतों को उपलब्ध कराता है।</p>
     <p xml:lang="hu">Qt-s zenelejátszó a kedvenc számaihoz.</p>
     <p xml:lang="id">Pemutar Musik Qt yang kecil menjaga lagu favorit Anda tertangani.</p>
@@ -144,6 +147,7 @@
       <caption xml:lang="fi">Vvave-musiikkisoitin</caption>
       <caption xml:lang="fr">Lecteur de musique Vvave</caption>
       <caption xml:lang="gl">O reprodutor de música Vvave.</caption>
+      <caption xml:lang="he">נגן המוזיקה Vvave</caption>
       <caption xml:lang="hi">वीवेव संगीत वादक</caption>
       <caption xml:lang="hu">A Vvave zenelejátszó</caption>
       <caption xml:lang="id">Pemutar musik Vvave</caption>
