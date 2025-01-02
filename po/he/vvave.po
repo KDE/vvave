@@ -1,0 +1,640 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the vvave package.
+#
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: vvave\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-12-19 01:51+0000\n"
+"PO-Revision-Date: 2025-01-01 07:05+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n==2 ? 1 : n>10 && n%10==0 ? "
+"2 : 3);\n"
+"X-Generator: Lokalize 24.12.0\n"
+
+#: src/main.cpp:77
+#, kde-format
+msgid "Organize and listen to your music."
+msgstr "סידור והאזנה למוזיקה שלך."
+
+#: src/main.cpp:82 src/main.cpp:83
+#, kde-format
+msgid "Developer"
+msgstr "מפתח"
+
+#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:71
+#, kde-format
+msgid "Remove"
+msgstr "הסרה"
+
+#: src/main.qml:336
+#, kde-format
+msgid "Missing file"
+msgstr "קובץ חסר"
+
+#: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
+#, kde-format
+msgid "Remove track"
+msgid_plural "Remove %1 tracks"
+msgstr[0] "הסרת רצועה"
+msgstr[1] "הסרת שתי רצועות"
+msgstr[2] "הסרת %1 רצועות"
+msgstr[3] "הסרת %1 רצועות"
+
+#: src/main.qml:420
+#, kde-format
+msgid ""
+"Are you sure you want to remove these files? This action can not be undone."
+msgstr "להסיר את הקבצים האלה? זאת פעולה בלתי הפיכה."
+
+#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:142
+#, kde-format
+msgid "Cancel"
+msgstr "ביטול"
+
+#: src/main.qml:470
+#, kde-format
+msgid "Saved"
+msgstr "נשמר"
+
+#: src/main.qml:470
+#, kde-format
+msgid "Track added to playlist"
+msgstr "הרצועה נוספה לרשימת הנגינה"
+
+#: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
+#, kde-format
+msgid "Sleep Timer"
+msgstr "מתזמן שינה"
+
+#: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#, kde-format
+msgid "Shortcuts"
+msgstr "מקשי קיצור"
+
+#: src/main.qml:613
+#, kde-format
+msgid "Settings"
+msgstr "הגדרות"
+
+#: src/main.qml:620
+#, kde-format
+msgid "About"
+msgstr "על אודות"
+
+#: src/main.qml:653
+#, kde-format
+msgid "Songs"
+msgstr "שירים"
+
+#: src/main.qml:673 src/widgets/AlbumsView.qml:76
+#, kde-format
+msgid "Albums"
+msgstr "אלבומים"
+
+#: src/main.qml:680
+#, kde-format
+msgid "No Albums!"
+msgstr "אין אלבומים!"
+
+#: src/main.qml:681 src/main.qml:705 src/widgets/TracksView.qml:20
+#, kde-format
+msgid "Add new music sources"
+msgstr "הוספת מקורות מוזיקה חדשים"
+
+#: src/main.qml:697 src/widgets/AlbumsView.qml:76
+#, kde-format
+msgid "Artists"
+msgstr "אומנים"
+
+#: src/main.qml:704
+#, kde-format
+msgid "No Artists!"
+msgstr "אין אומנים!"
+
+#: src/main.qml:722 src/widgets/SelectionBar.qml:46
+#, kde-format
+msgid "Tags"
+msgstr "תגיות"
+
+#: src/main.qml:731
+#, kde-format
+msgid "Folders"
+msgstr "תיקיות"
+
+#: src/models/playlists/playlistsmodel.cpp:110
+#, kde-format
+msgid "Most Played"
+msgstr "הכי הרבה השמעות"
+
+#: src/models/playlists/playlistsmodel.cpp:117
+#, kde-format
+msgid "Random Tracks"
+msgstr "רצועות אקראיות"
+
+#: src/models/playlists/playlistsmodel.cpp:124
+#, kde-format
+msgid "Recent Tracks"
+msgstr "רצועות אחרונות"
+
+#: src/models/playlists/playlistsmodel.cpp:131
+#, kde-format
+msgid "Never Played"
+msgstr "מעולם לא הושמע"
+
+#: src/models/playlists/playlistsmodel.cpp:138
+#, kde-format
+msgid "Classic Tracks"
+msgstr "רצועות קלסיות"
+
+#: src/services/local/powermanagementinterface.cpp:173
+#: src/services/local/powermanagementinterface.cpp:223
+#, kde-format
+msgctxt "explanation for sleep inhibit during play of music"
+msgid "Playing music"
+msgstr "השמעת מוזיקה"
+
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
+#: src/widgets/TracksView.qml:25
+#, kde-format
+msgid "Add sources"
+msgstr "הוספת מקורות"
+
+#: src/widgets/AlbumsView.qml:70
+#, kde-format
+msgid "This list is empty"
+msgstr "הרשימה ריקה"
+
+#: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
+#: src/widgets/CloudView/CloudView.qml:24
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
+#, kde-format
+msgid "Filter"
+msgid_plural "Filter %1 albums"
+msgstr[0] "סינון"
+msgstr[1] "סינון שני אלבומים"
+msgstr[2] "סינון %1 אלבומים"
+msgstr[3] "סינון %1 אלבומים"
+
+#: src/widgets/BabeTable/BabeTable.qml:74
+#, kde-format
+msgid "Shuffle Play"
+msgstr "השמעה מעורבבת"
+
+#: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
+#, kde-format
+msgid "Play All"
+msgstr "להשמיע הכול"
+
+#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:55
+#, kde-format
+msgid "Append All"
+msgstr "הוספה של הכול לסוף"
+
+#: src/widgets/BabeTable/BabeTable.qml:150
+#, kde-format
+msgid ""
+"Are you sure you want to delete the file from your computer? This action can "
+"not be undone."
+msgstr "למחוק את הקובץ מהמחשב שלך? זאת פעולה בלתי הפיכה."
+
+#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
+#, kde-format
+msgid "Go to Artist"
+msgstr "מעבר לאומן/נית"
+
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
+#, kde-format
+msgid "Go to Album"
+msgstr "מעבר לאלבום"
+
+#: src/widgets/BabeTable/TableMenu.qml:35
+#, kde-format
+msgid "Fav it"
+msgstr "הוספה למועדפים"
+
+#: src/widgets/BabeTable/TableMenu.qml:35
+#, kde-format
+msgid "UnFav it"
+msgstr "הוצאה מהמועדפים"
+
+#: src/widgets/BabeTable/TableMenu.qml:45 src/widgets/MetadataDialog.qml:16
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
+#, kde-format
+msgid "Edit"
+msgstr "עריכה"
+
+#: src/widgets/BabeTable/TableMenu.qml:55 src/widgets/FocusView.qml:523
+#: src/widgets/SelectionBar.qml:54
+#, kde-format
+msgid "Share"
+msgstr "שיתוף"
+
+#: src/widgets/BabeTable/TableMenu.qml:64
+#, kde-format
+msgid "Add to playlist"
+msgstr "הוספה לרשימת הנגינה"
+
+#: src/widgets/BabeTable/TableMenu.qml:74
+#, kde-format
+msgid "Select"
+msgstr "בחירה"
+
+#: src/widgets/BabeTable/TableMenu.qml:87
+#, kde-format
+msgid "Play Next"
+msgstr "לנגן את הבא"
+
+#: src/widgets/BabeTable/TableMenu.qml:112
+#, kde-format
+msgid "Show in Folder"
+msgstr "הצגה בתיקייה"
+
+#: src/widgets/BabeTable/TableMenu.qml:138
+#, kde-format
+msgid "Delete"
+msgstr "מחיקה"
+
+#: src/widgets/CloudView/CloudView.qml:39
+#, kde-format
+msgid "Opps!"
+msgstr "אופס!"
+
+#: src/widgets/CloudView/CloudView.qml:40
+#, kde-format
+msgid ""
+"You don't have an account set up.\n"
+"You can set up your account now by clicking here or under the Accounts "
+"options in the main menu"
+msgstr ""
+"לא הגדרת אף חשבון.\n"
+"אפשר להגדיר חשבון כעת בלחיצה כאן או תחת אפשרויות חשבונות בתפריט הראשי"
+
+#: src/widgets/FocusView.qml:158
+#, kde-format
+msgid "Find"
+msgstr "איתור"
+
+#: src/widgets/FocusView.qml:200
+#, kde-format
+msgid "No Results!"
+msgstr "אין תוצאות!"
+
+#: src/widgets/FocusView.qml:201
+#, kde-format
+msgid "Try with something else"
+msgstr "לנסות עם משהו אחר"
+
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#, kde-format
+msgid "Start putting together your playlist."
+msgstr "אפשר להתחיל לגבש את רשימת הנגינה שלך."
+
+#: src/widgets/FocusView.qml:488
+#, kde-format
+msgid "Favorite"
+msgstr "מועדפים"
+
+#: src/widgets/FocusView.qml:495
+#, kde-format
+msgid "Info"
+msgstr "פרטים"
+
+#: src/widgets/FocusView.qml:514
+#, kde-format
+msgid "Mini Mode"
+msgstr "מצב מוקטן"
+
+#: src/widgets/FocusView.qml:532
+#, kde-format
+msgid "Save"
+msgstr "שמירה"
+
+#: src/widgets/FoldersView/FoldersView.qml:33
+#, kde-format
+msgid "Filter %1 folder"
+msgid_plural "Filter %1 folders"
+msgstr[0] "סינון תיקייה"
+msgstr[1] "סינון שתי תיקיות"
+msgstr[2] "סינון %1 תיקיות"
+msgstr[3] "סינון %1 תיקיות"
+
+#: src/widgets/FoldersView/FoldersView.qml:47
+#, kde-format
+msgid "No Folders!"
+msgstr "אין תיקיות!"
+
+#: src/widgets/FoldersView/FoldersView.qml:48
+#, kde-format
+msgid "Add new music to your sources to browse by folders"
+msgstr "אפשר להוסיף מוזיקה חדשה למקורות שלך כדי לעיין לפי תיקיות"
+
+#: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
+#, kde-format
+msgid "No Tracks!"
+msgstr "אין רצועות!"
+
+#: src/widgets/FoldersView/FoldersView.qml:136
+#, kde-format
+msgid "This source folder seems to be empty!"
+msgstr "תיקיית המקור הזאת נראית ריקה!"
+
+#: src/widgets/InfoView/InfoView.qml:34
+#, kde-format
+msgid "Artist Info"
+msgstr "פרטי אומן/נית"
+
+#: src/widgets/InfoView/InfoView.qml:61
+#, kde-format
+msgid "Album Info"
+msgstr "פרטי אלבום"
+
+#: src/widgets/MainPlaylist/MainPlaylist.qml:187
+#, kde-format
+msgid "Syncing to "
+msgstr "מסתנכרן אל"
+
+#: src/widgets/MetadataDialog.qml:41
+#, kde-format
+msgid "Metadata"
+msgstr "נתוני־על"
+
+#: src/widgets/MetadataDialog.qml:42
+#, kde-format
+msgid "Embedded metadata info."
+msgstr "נתוני העל מוטמעים."
+
+#: src/widgets/MetadataDialog.qml:46
+#, kde-format
+msgid "Track Title"
+msgstr "כותרת רצועה"
+
+#: src/widgets/MetadataDialog.qml:58
+#, kde-format
+msgid "Artist"
+msgstr "אומן/נית"
+
+#: src/widgets/MetadataDialog.qml:71
+#, kde-format
+msgid "Album"
+msgstr "אלבום"
+
+#: src/widgets/MetadataDialog.qml:84
+#, kde-format
+msgid "Track"
+msgstr "רצועה"
+
+#: src/widgets/MetadataDialog.qml:97
+#, kde-format
+msgid "Genre"
+msgstr "סגנון"
+
+#: src/widgets/MetadataDialog.qml:110
+#, kde-format
+msgid "Year"
+msgstr "שנה"
+
+#: src/widgets/MetadataDialog.qml:123
+#, kde-format
+msgid "Comment"
+msgstr "הערה"
+
+#: src/widgets/PlaybackBar.qml:22
+#, kde-format
+msgid "Toogle SideBar"
+msgstr "הצגת/הסתרת סרגל צד"
+
+#: src/widgets/PlaybackBar.qml:51
+#, kde-format
+msgid "Play and pause"
+msgstr "נגינה והשהיה"
+
+#: src/widgets/PlaybackBar.qml:61
+#, kde-format
+msgid "Next"
+msgstr "הבא"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:57
+#, kde-format
+msgid "Your playlist is empty. Start adding new music to it"
+msgstr "רשימת הנגינה שלך ריקה. אפשר להוסיף אליה מוזיקה"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:68
+#, kde-format
+msgid "Remove from playlist"
+msgstr "הסרה מרשימת הנגינה"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
+#, kde-format
+msgid "No Playlists!"
+msgstr "אין רשימות נגינה!"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
+#, kde-format
+msgid "Start creating new custom playlists"
+msgstr "התחלת יצירת רשימות נגינה משלך"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#, kde-format
+msgid "Remove '%1'?"
+msgstr "להסיר את ‚%1’?"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
+#, kde-format
+msgid ""
+"Are you sure you want to remove this tag? This operation can not be undone."
+msgstr "להסיר את התגית הזאת? זאת פעולה בלתי הפיכה."
+
+#: src/widgets/SelectionBar.qml:28
+#, kde-format
+msgid "Play"
+msgstr "השמעה"
+
+#: src/widgets/SelectionBar.qml:39
+#, kde-format
+msgid "Append"
+msgstr "הוספה לסוף"
+
+#: src/widgets/SelectionBar.qml:61
+#, kde-format
+msgid "Queue"
+msgstr "תור"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:38
+#, kde-format
+msgid "Remove source"
+msgstr "הסרת מקור"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:39
+#, kde-format
+msgid ""
+"Are you sure you want to remove the source: \n"
+"%1"
+msgstr ""
+"להסיר את המקור: \n"
+"%1"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:55
+#, kde-format
+msgid "Playback"
+msgstr "נגינה"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:60
+#, kde-format
+msgid "Auto Resume"
+msgstr "המשך אוטומטי"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:61
+#, kde-format
+msgid "Resume the last session playlist."
+msgstr "להמשיך את רשימת הנגינה מההפעלה האחרונה."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:73
+#, kde-format
+msgid "Volume"
+msgstr "עוצמת שמע"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:74
+#, kde-format
+msgid "Show volume controls."
+msgstr "הצגת פקדי עוצמת שמע."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:87
+#, kde-format
+msgid "Collection"
+msgstr "אוסף"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:92
+#, kde-format
+msgid "Fetch Artwork"
+msgstr "משיכת יצירת אומנות מתאימה"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:93
+#, kde-format
+msgid ""
+"Gathers album and artists artworks from online services: LastFM, Spotify, "
+"MusicBrainz, iTunes, Genius, and others."
+msgstr ""
+"איסוף יצירות האומנות של העטיפות משירותים מקוונים: LastFM,‏ Spotify, "
+"MusicBrainz,‏ iTunes,‏ Genius ועוד."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:105
+#, kde-format
+msgid "Auto Scan"
+msgstr "סריקה אוטומטית"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:106
+#, kde-format
+msgid ""
+"Scan all the music sources on startup to keep your collection up to date."
+msgstr "סריקת כל מקורות המוזיקה עם העלייה כדי לשמור על עדכניות האוסף שלך."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:119
+#, kde-format
+msgid "General"
+msgstr "כללי"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:124
+#, kde-format
+msgid "Focus View"
+msgstr "תצוגת מיקוד"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:125
+#, kde-format
+msgid "Make the focus view the default."
+msgstr "תצוגת המיקוד תהיה ברירת המחדל."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:140
+#, kde-format
+msgid "Artwork"
+msgstr "יצירת אומנות"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:141
+#, kde-format
+msgid "Show the cover artwork for the tracks."
+msgstr "הצגת יצירת אומנות העטיפה לרצועות."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:156
+#, kde-format
+msgid "Titles"
+msgstr "כותרות"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:157
+#, kde-format
+msgid "Show the title of albums and artists in the grid view."
+msgstr "הצגת כותרת של אלבומים ואומנים בתצוגת הרשת."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:173
+#, kde-format
+msgid "Sources"
+msgstr "מקורות"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:210
+#, kde-format
+msgid "Add"
+msgstr "הוספה"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:228
+#, kde-format
+msgid "Scan now"
+msgstr "לסרוק כעת"
+
+#: src/widgets/SettingsView/ShortcutsDialog.qml:26
+#: src/widgets/SettingsView/ShortcutsDialog.qml:39
+#, kde-format
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: src/widgets/SleepTimerDialog.qml:31
+#, kde-format
+msgid "15 minutes"
+msgstr "15 דקות"
+
+#: src/widgets/SleepTimerDialog.qml:47
+#, kde-format
+msgid "30 minutes"
+msgstr "חצי שעה"
+
+#: src/widgets/SleepTimerDialog.qml:63
+#, kde-format
+msgid "1 hour"
+msgstr "שעה"
+
+#: src/widgets/SleepTimerDialog.qml:79
+#, kde-format
+msgid "End of track"
+msgstr "סוף הרצועה"
+
+#: src/widgets/SleepTimerDialog.qml:95
+#, kde-format
+msgid "End of playlist"
+msgstr "סוף רשימת הנגינה"
+
+#: src/widgets/SleepTimerDialog.qml:111
+#, kde-format
+msgid "Off"
+msgstr "כבוי"
+
+#: src/widgets/SleepTimerDialog.qml:134
+#, kde-format
+msgid "Close application after"
+msgstr "לסגור את הנגן לאחר"
+
+#: src/widgets/SleepTimerDialog.qml:148
+#, kde-format
+msgid "Accept"
+msgstr "אישור"
+
+#: src/widgets/TracksView.qml:31
+#, kde-format
+msgid "Open file"
+msgstr "פתיחת קובץ"
