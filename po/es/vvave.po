@@ -79,7 +79,7 @@ msgstr "Temporizador para reposo"
 #: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
-msgstr "Accesos rápidos"
+msgstr "Atajos de teclado"
 
 #: src/main.qml:613
 #, kde-format
