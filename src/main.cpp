@@ -68,7 +68,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qDebug() << "APP LOADING SPEED TESTS" << 2;
 
     app.setOrganizationName(QStringLiteral("Maui"));
-    app.setWindowIcon(QIcon("qrc:/assets/vvave.png"));
+    app.setWindowIcon(QIcon(":/assets/vvave.png"));
 
     KLocalizedString::setApplicationDomain("vvave");
     KAboutData about(QStringLiteral("vvave"),
