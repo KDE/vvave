@@ -226,7 +226,7 @@ Maui.SettingsDialog
                 {
                     _dialogLoader.sourceComponent = _fileDialogComponent
                     dialog.mode = FB.FileDialog.Modes.Open
-                    dialog.browser.settings.onlyDirs = false
+                    dialog.browser.settings.onlyDirs = true
                     dialog.callback = function(urls)
                     {
                         Vvave.addSources(urls)
