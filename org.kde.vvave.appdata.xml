@@ -27,6 +27,7 @@
   <name xml:lang="it">Vvave</name>
   <name xml:lang="ka">Vvave</name>
   <name xml:lang="ko">Vvave</name>
+  <name xml:lang="lt">Vvave</name>
   <name xml:lang="nl">Vvave</name>
   <name xml:lang="nn">Vvave</name>
   <name xml:lang="pa">ਵੇਵੇਵ</name>
@@ -66,6 +67,7 @@
   <summary xml:lang="it">Riproduce la tua collezione musicale</summary>
   <summary xml:lang="ka">მუსიკის თქვენი კოლექციის დაკვრა</summary>
   <summary xml:lang="ko">내 음악 모음집 재생</summary>
+  <summary xml:lang="lt">Atkurti muzikinę kolekciją</summary>
   <summary xml:lang="nl">Uw muziekcollectie afspelen</summary>
   <summary xml:lang="nn">Spel av musikksamlinga di</summary>
   <summary xml:lang="pa">ਆਪਣੇ ਸੰਗੀਤ ਭੰਡਾਰ ਨੂੰ ਸੁਣੋ</summary>
@@ -109,6 +111,7 @@
     <p xml:lang="it">Piccolo lettore musicale basato su Qt per tenere le tue canzoni preferite a portata di mano.</p>
     <p xml:lang="ka">ნამცეცა Qt-ზე დაწერილი მუსიკის დამკვრელი თქვენს სიმღერებთან პირდაპირი წვდომით.</p>
     <p xml:lang="ko">좋아하는 음악을 간단하게 재생할 수 있는 작은 Qt 음악 재생기입니다.</p>
+    <p xml:lang="lt">Mažas Qt muzikos grotuvas, kad visada turėtumėte dainas po ranka.</p>
     <p xml:lang="nl">Kleine Qt Music speler om uw favoriete songs bij de hand te houden.</p>
     <p xml:lang="nn">Liten Qt-basert musikkspelar for lett tilgang til favorittmusikken din.</p>
     <p xml:lang="pa">ਤੁਹਾਡੇ ਪਸੰਦੀਦਾ ਗਾਣੇ ਚਲਾਉਣ ਵਾਲਾ ਨਿੰਮਾ ਜਿਹਾ Qt ਸੰਗੀਤ ਪਲੇਅਰ ਹੈ।</p>
@@ -154,6 +157,7 @@
       <caption xml:lang="it">Il lettore musicale Vvave</caption>
       <caption xml:lang="ka">Vvave მუსიკალური დამკვრელი</caption>
       <caption xml:lang="ko">Vvave 음악 재생기</caption>
+      <caption xml:lang="lt">Vvave muzikos grotuvas</caption>
       <caption xml:lang="nl">De Vvave muziekspeler</caption>
       <caption xml:lang="nn">Vvave musikkspelar</caption>
       <caption xml:lang="pa">ਵੇਵੇਵ ਸੰਗੀਤ ਪਲੇਅਰ</caption>
