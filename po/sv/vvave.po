@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-12-19 01:51+0000\n"
-"PO-Revision-Date: 2024-08-24 08:05+0200\n"
+"PO-Revision-Date: 2025-01-11 12:38+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -61,13 +61,12 @@ msgstr "Avbryt"
 #: src/main.qml:470
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "Sparad"
 
 #: src/main.qml:470
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "Spellistans slut"
+msgstr "Spår tillagt i spellista"
 
 #: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -238,10 +237,9 @@ msgid "Share"
 msgstr "Dela"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Add to playlist"
-msgstr "Spellistans slut"
+msgstr "Lägg till i spellista"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
@@ -302,22 +300,22 @@ msgstr "Börja sätta ihop din spellista."
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "Favorit"
 
 #: src/widgets/FocusView.qml:495
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Information"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "Minimalt läge"
 
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "Spara"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
