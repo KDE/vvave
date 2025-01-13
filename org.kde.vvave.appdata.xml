@@ -195,6 +195,9 @@
   </recommends>
   <project_group>KDE</project_group>
   <releases>
+    <release version="4.0.1" date="2024-12-02">
+      <url>https://mauikit.org/blog/maui-release-briefing-7/</url>
+    </release>
     <release version="4.0.0" date="2024-09-09">
       <url>https://mauikit.org/blog/maui-release-briefing-6/</url>
     </release>
