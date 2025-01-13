@@ -57,8 +57,6 @@ Maui.ApplicationWindow
 
     property string syncPlaylist: ""
     property bool sync: false
-    property string sleepOption : "none"
-    property bool closeAfterSleep: false
 
     readonly property bool focusView : _stackView.currentItem.objectName === "FocusView"
     readonly property bool miniMode : _miniModeComponent.visible
@@ -75,6 +73,15 @@ Maui.ApplicationWindow
 
     onClosing: (close) =>
                {
+                   if(settings.askBeforeClose && isPlaying)
+                   {
+
+                     close.accepted = false
+_dialogLoader.sourceComponent = _closeDialogComponent
+dialog.open()
+return
+                }
+
                    playlist.save()
                    close.accepted = true
                }
@@ -296,6 +303,9 @@ Maui.ApplicationWindow
         property bool showArtwork: false
         property bool showTitles: true
         property bool volumeControl: true
+        property bool askBeforeClose : true
+        property string sleepOption : "none"
+        property bool closeAfterSleep: false
     }
 
     Mpris2
@@ -386,6 +396,34 @@ Maui.ApplicationWindow
     Loader
     {
         id: _dialogLoader
+    }
+
+    Component
+    {
+        id: _closeDialogComponent
+        Maui.InfoDialog
+        {
+            title: i18n("Stop and Close")
+            message: i18n("Are you sure you want to stop the music playing and exit?")
+
+            template.iconSource: "dialog-warning"
+
+            standardButtons: Dialog.Cancel | Dialog.Yes
+
+            CheckBox
+            {
+                checked: settings.askBeforeClose
+                onToggled: settings.askBeforeClose = checked
+                text: i18n("Ask before closing if music is playing")
+            }
+            onRejected: close()
+            onAccepted:
+            {
+                player.pause()
+                root.close()
+            }
+
+        }
     }
 
     Component

@@ -250,6 +250,7 @@ Maui.Page
         selectionMode: root.selectionMode
         currentIndex: -1
         flickable.reuseItems: true
+
         onItemsSelected: (indexes) =>
                          {
                              for(var i in indexes)

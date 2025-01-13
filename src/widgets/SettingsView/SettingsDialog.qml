@@ -80,6 +80,19 @@ Maui.SettingsDialog
                 onToggled: settings.volumeControl = !settings.volumeControl
             }
         }
+
+        Maui.FlexSectionItem
+        {
+            label1.text: i18n("Exiting")
+            label2.text: i18n("Ask before closing if music is playing")
+
+            Switch
+            {
+                checkable: true
+                checked: settings.askBeforeClose
+                onToggled: settings.askBeforeClose = !settings.askBeforeClose
+            }
+        }
     }
 
     Maui.SectionGroup
@@ -134,7 +147,7 @@ Maui.SettingsDialog
                 }
             }
         }
-        
+
         Maui.FlexSectionItem
         {
             label1.text: i18n("Artwork")

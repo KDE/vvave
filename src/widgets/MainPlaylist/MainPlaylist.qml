@@ -130,7 +130,6 @@ Maui.Page
         holder.emoji: "qrc:/assets/view-media-track.svg"
         holder.title : "Nothing to play!"
         holder.body: i18n("Start putting together your playlist.")
-
         listView.header: Column
         {
             width: parent.width
@@ -145,6 +144,13 @@ Maui.Page
                 visible: active && !mainlistEmpty
                 sourceComponent: Item
                 {
+                    scale: _mouseArea.pressed ? 0.9 :  1
+
+                    Behavior on scale
+                    {
+                        NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+                    }
+
                     Maui.GalleryRollTemplate
                     {
                         anchors.fill: parent
@@ -158,9 +164,38 @@ Maui.Page
 
                     MouseArea
                     {
+                        id:_mouseArea
                         anchors.fill: parent
                         onDoubleClicked: toggleMiniMode()
+                        hoverEnabled: true
+
+                        Rectangle
+                        {
+                            anchors.fill: parent
+                            color: Maui.Theme.backgroundColor
+                            visible: parent.containsMouse
+                            opacity: parent.pressed ? 0.8 : 0.6
+                        }
+
+                        Maui.Icon
+                        {
+                            visible: parent.containsMouse
+
+                            source: "window"
+                            color: Maui.Theme.textColor
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            anchors.margins: Maui.Style.space.medium
+                        }
                     }
+                }
+
+                OpacityAnimator on opacity
+                {
+                    from: 0
+                    to: 1
+                    duration: Maui.Style.units.longDuration
+                    running: parent.status === Loader.Ready
                 }
             }
 

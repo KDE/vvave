@@ -24,6 +24,7 @@ Maui.ToolBar
 
     rightContent: ToolButton
     {
+        visible: focusView
         icon.name: root.focusView ? "go-down" : "go-up"
         onClicked: toggleFocusView()
     }

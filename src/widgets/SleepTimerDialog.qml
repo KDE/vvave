@@ -17,7 +17,7 @@ Maui.PopupPage
         autoExclusive: true
     }
 
-    property string option : "none"
+    property string option : settings.sleepOption
 
 
     ButtonGroup
@@ -29,6 +29,7 @@ Maui.PopupPage
     {
         ButtonGroup.group: _group
         text: i18n("15 minutes")
+        checked: settings.sleepOption === "15m"
         onToggled: () =>
                    {
                        if(checked)
@@ -45,6 +46,8 @@ Maui.PopupPage
     {
         ButtonGroup.group: _group
         text: i18n("30 minutes")
+        checked: settings.sleepOption === "30m"
+
         onToggled: () =>
                    {
                        if(checked)
@@ -61,6 +64,8 @@ Maui.PopupPage
     {
         ButtonGroup.group: _group
         text: i18n("1 hour")
+        checked: settings.sleepOption === "60m"
+
         onToggled: () =>
                    {
                        if(checked)
@@ -77,6 +82,8 @@ Maui.PopupPage
     {
         ButtonGroup.group: _group
         text: i18n("End of track")
+        checked: settings.sleepOption === "eot"
+
         onToggled: () =>
                    {
                        if(checked)
@@ -93,6 +100,8 @@ Maui.PopupPage
     {
         ButtonGroup.group: _group
         text: i18n("End of playlist")
+        checked: settings.sleepOption === "eop"
+
         onToggled: () =>
                    {
                        if(checked)
@@ -108,8 +117,9 @@ Maui.PopupPage
     OptionEntry
     {
         ButtonGroup.group: _group
+        checked: settings.sleepOption === "none"
+
         text: i18n("Off")
-        checked: true
         onToggled: () =>
                    {
                        if(checked)
@@ -132,7 +142,8 @@ Maui.PopupPage
         enabled: control.option !== "none"
         Layout.fillWidth: true
         text: i18n("Close application after")
-        onToggled: closeAfterSleep = checked
+        checked: settings.closeAfterSleep
+        onToggled: settings.closeAfterSleep = checked
     }
 
 
@@ -145,7 +156,7 @@ Maui.PopupPage
 
         Action
         {
-            text: i18n("Accept")
+            text: i18n("Set")
             onTriggered:
             {
                 setSleepTimer(control.option)
