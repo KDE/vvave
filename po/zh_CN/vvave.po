@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-19 01:51+0000\n"
+"POT-Creation-Date: 2025-01-14 00:40+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -27,102 +27,117 @@ msgstr ""
 msgid "Developer"
 msgstr ""
 
-#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:326 src/main.qml:464 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr ""
 
-#: src/main.qml:336
+#: src/main.qml:346
 #, kde-format
 msgid "Missing file"
 msgstr ""
 
-#: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:406
+#, kde-format
+msgid "Stop and Close"
+msgstr ""
+
+#: src/main.qml:407
+#, kde-format
+msgid "Are you sure you want to stop the music playing and exit?"
+msgstr ""
+
+#: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
+#, kde-format
+msgid "Ask before closing if music is playing"
+msgstr ""
+
+#: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] ""
 
-#: src/main.qml:420
+#: src/main.qml:458
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 
-#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
-#: src/widgets/SleepTimerDialog.qml:142
+#: src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:153
 #, kde-format
 msgid "Cancel"
 msgstr ""
 
-#: src/main.qml:470
+#: src/main.qml:508
 #, kde-format
 msgid "Saved"
 msgstr ""
 
-#: src/main.qml:470
+#: src/main.qml:508
 #, kde-format
 msgid "Track added to playlist"
 msgstr ""
 
-#: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:635 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr ""
 
-#: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:644 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr ""
 
-#: src/main.qml:613
+#: src/main.qml:651
 #, kde-format
 msgid "Settings"
 msgstr ""
 
-#: src/main.qml:620
+#: src/main.qml:658
 #, kde-format
 msgid "About"
 msgstr ""
 
-#: src/main.qml:653
+#: src/main.qml:691
 #, kde-format
 msgid "Songs"
 msgstr ""
 
-#: src/main.qml:673 src/widgets/AlbumsView.qml:76
+#: src/main.qml:711 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr ""
 
-#: src/main.qml:680
+#: src/main.qml:718
 #, kde-format
 msgid "No Albums!"
 msgstr ""
 
-#: src/main.qml:681 src/main.qml:705 src/widgets/TracksView.qml:20
+#: src/main.qml:719 src/main.qml:743 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr ""
 
-#: src/main.qml:697 src/widgets/AlbumsView.qml:76
+#: src/main.qml:735 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr ""
 
-#: src/main.qml:704
+#: src/main.qml:742
 #, kde-format
 msgid "No Artists!"
 msgstr ""
 
-#: src/main.qml:722 src/widgets/SelectionBar.qml:46
+#: src/main.qml:760 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr ""
 
-#: src/main.qml:731
+#: src/main.qml:769
 #, kde-format
 msgid "Folders"
 msgstr ""
@@ -346,7 +361,7 @@ msgstr ""
 msgid "Album Info"
 msgstr ""
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:187
+#: src/widgets/MainPlaylist/MainPlaylist.qml:222
 #, kde-format
 msgid "Syncing to "
 msgstr ""
@@ -401,12 +416,12 @@ msgstr ""
 msgid "Toogle SideBar"
 msgstr ""
 
-#: src/widgets/PlaybackBar.qml:51
+#: src/widgets/PlaybackBar.qml:52
 #, kde-format
 msgid "Play and pause"
 msgstr ""
 
-#: src/widgets/PlaybackBar.qml:61
+#: src/widgets/PlaybackBar.qml:62
 #, kde-format
 msgid "Next"
 msgstr ""
@@ -494,80 +509,85 @@ msgstr ""
 msgid "Show volume controls."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#, kde-format
+msgid "Exiting"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Collection"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:92
+#: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid "Fetch Artwork"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:93
+#: src/widgets/SettingsView/SettingsDialog.qml:106
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:118
 #, kde-format
 msgid "Auto Scan"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:106
+#: src/widgets/SettingsView/SettingsDialog.qml:119
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:119
+#: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "General"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:137
 #, kde-format
 msgid "Focus View"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:125
+#: src/widgets/SettingsView/SettingsDialog.qml:138
 #, kde-format
 msgid "Make the focus view the default."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Artwork"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:141
+#: src/widgets/SettingsView/SettingsDialog.qml:154
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:156
+#: src/widgets/SettingsView/SettingsDialog.qml:169
 #, kde-format
 msgid "Titles"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:170
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:186
 #, kde-format
 msgid "Sources"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:210
+#: src/widgets/SettingsView/SettingsDialog.qml:223
 #, kde-format
 msgid "Add"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:228
+#: src/widgets/SettingsView/SettingsDialog.qml:241
 #, kde-format
 msgid "Scan now"
 msgstr ""
@@ -583,39 +603,39 @@ msgstr ""
 msgid "15 minutes"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:47
+#: src/widgets/SleepTimerDialog.qml:48
 #, kde-format
 msgid "30 minutes"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:63
+#: src/widgets/SleepTimerDialog.qml:66
 #, kde-format
 msgid "1 hour"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:79
+#: src/widgets/SleepTimerDialog.qml:84
 #, kde-format
 msgid "End of track"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:95
+#: src/widgets/SleepTimerDialog.qml:102
 #, kde-format
 msgid "End of playlist"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:111
+#: src/widgets/SleepTimerDialog.qml:122
 #, kde-format
 msgid "Off"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:134
+#: src/widgets/SleepTimerDialog.qml:144
 #, kde-format
 msgid "Close application after"
 msgstr ""
 
-#: src/widgets/SleepTimerDialog.qml:148
+#: src/widgets/SleepTimerDialog.qml:159
 #, kde-format
-msgid "Accept"
+msgid "Set"
 msgstr ""
 
 #: src/widgets/TracksView.qml:31

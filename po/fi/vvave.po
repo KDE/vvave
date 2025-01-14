@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-19 01:51+0000\n"
+"POT-Creation-Date: 2025-01-14 00:40+0000\n"
 "PO-Revision-Date: 2024-10-17 10:30+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -27,104 +27,124 @@ msgstr "Järjestä ja kuuntele musiikkiasi."
 msgid "Developer"
 msgstr "Kehittäjä"
 
-#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:326 src/main.qml:464 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "Poista"
 
-#: src/main.qml:336
+#: src/main.qml:346
 #, kde-format
 msgid "Missing file"
 msgstr "Puuttuva tiedosto"
 
-#: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:406
+#, kde-format
+msgid "Stop and Close"
+msgstr ""
+
+#: src/main.qml:407
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to remove the source: \n"
+#| "%1"
+msgid "Are you sure you want to stop the music playing and exit?"
+msgstr ""
+"Haluatko varmasti poistaa lähteen:\n"
+"%1"
+
+#: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
+#, kde-format
+msgid "Ask before closing if music is playing"
+msgstr ""
+
+#: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Poista raita"
 msgstr[1] "Poista %1 raitaa"
 
-#: src/main.qml:420
+#: src/main.qml:458
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "Haluatko varmasti poistaa nämä tiedostot? Toimintoa ei voi kumota."
 
-#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
-#: src/widgets/SleepTimerDialog.qml:142
+#: src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:153
 #, kde-format
 msgid "Cancel"
 msgstr "Peru"
 
-#: src/main.qml:470
+#: src/main.qml:508
 #, kde-format
 msgid "Saved"
 msgstr ""
 
-#: src/main.qml:470
+#: src/main.qml:508
 #, fuzzy, kde-format
 #| msgid "End of playlist"
 msgid "Track added to playlist"
 msgstr "Soittolistan loppu"
 
-#: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:635 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Uniajastin"
 
-#: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:644 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: src/main.qml:613
+#: src/main.qml:651
 #, kde-format
 msgid "Settings"
 msgstr "Asetukset"
 
-#: src/main.qml:620
+#: src/main.qml:658
 #, kde-format
 msgid "About"
 msgstr "Tietoa"
 
-#: src/main.qml:653
+#: src/main.qml:691
 #, kde-format
 msgid "Songs"
 msgstr "Kappaleet"
 
-#: src/main.qml:673 src/widgets/AlbumsView.qml:76
+#: src/main.qml:711 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumit"
 
-#: src/main.qml:680
+#: src/main.qml:718
 #, kde-format
 msgid "No Albums!"
 msgstr "Ei albumeja!"
 
-#: src/main.qml:681 src/main.qml:705 src/widgets/TracksView.qml:20
+#: src/main.qml:719 src/main.qml:743 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Lisää uusia musiikkilähteitä"
 
-#: src/main.qml:697 src/widgets/AlbumsView.qml:76
+#: src/main.qml:735 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistit"
 
-#: src/main.qml:704
+#: src/main.qml:742
 #, kde-format
 msgid "No Artists!"
 msgstr "Ei artisteja!"
 
-#: src/main.qml:722 src/widgets/SelectionBar.qml:46
+#: src/main.qml:760 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Luokitukset"
 
-#: src/main.qml:731
+#: src/main.qml:769
 #, kde-format
 msgid "Folders"
 msgstr "Kansiot"
@@ -356,7 +376,7 @@ msgstr "Artistin tiedot"
 msgid "Album Info"
 msgstr "Albumin tiedot"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:187
+#: src/widgets/MainPlaylist/MainPlaylist.qml:222
 #, kde-format
 msgid "Syncing to "
 msgstr "Synkronoidaan → "
@@ -411,12 +431,12 @@ msgstr "Huomautus"
 msgid "Toogle SideBar"
 msgstr "Näytä tai piilota sivupalkki"
 
-#: src/widgets/PlaybackBar.qml:51
+#: src/widgets/PlaybackBar.qml:52
 #, kde-format
 msgid "Play and pause"
 msgstr "Toista tai tauko"
 
-#: src/widgets/PlaybackBar.qml:61
+#: src/widgets/PlaybackBar.qml:62
 #, kde-format
 msgid "Next"
 msgstr "Seuraava"
@@ -507,17 +527,22 @@ msgstr "Äänenvoimakkuus"
 msgid "Show volume controls."
 msgstr "Näytä äänenvoimakkuuden säätimet."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#, kde-format
+msgid "Exiting"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Collection"
 msgstr "Kokoelma"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:92
+#: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Nouda kansikuva"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:93
+#: src/widgets/SettingsView/SettingsDialog.qml:106
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -526,12 +551,12 @@ msgstr ""
 "Noutaa albumi- ja artistikuvat verkkopalveluista (LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius yms.)."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:118
 #, kde-format
 msgid "Auto Scan"
 msgstr "Automaattitarkistus"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:106
+#: src/widgets/SettingsView/SettingsDialog.qml:119
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -539,53 +564,53 @@ msgstr ""
 "Tarkista kaikki musiikkilähteet käynnistettäessä kokoelman pitämiseksi ajan "
 "tasalla."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:119
+#: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "General"
 msgstr "Perusasetukset"
 
 # *** TARKISTA: tässä ja seuraavassa on epäselvää, onko ”focus view” jokin tila vai toiminta (’kohdista näkymään’)
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:137
 #, kde-format
 msgid "Focus View"
 msgstr "Kohdistusnäkymä"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:125
+#: src/widgets/SettingsView/SettingsDialog.qml:138
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Asettaa kohdistusnäkymän oletukseksi."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Artwork"
 msgstr "Kansikuva"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:141
+#: src/widgets/SettingsView/SettingsDialog.qml:154
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Näitä kappaleille kansikuva."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:156
+#: src/widgets/SettingsView/SettingsDialog.qml:169
 #, kde-format
 msgid "Titles"
 msgstr "Otsikot"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:170
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Näytä ruudukkonäkymässä albumien nimet ja artistit."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:186
 #, kde-format
 msgid "Sources"
 msgstr "Lähteet"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:210
+#: src/widgets/SettingsView/SettingsDialog.qml:223
 #, kde-format
 msgid "Add"
 msgstr "Lisää"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:228
+#: src/widgets/SettingsView/SettingsDialog.qml:241
 #, kde-format
 msgid "Scan now"
 msgstr "Tarkista nyt"
@@ -601,46 +626,50 @@ msgstr "Tuntematon"
 msgid "15 minutes"
 msgstr "15 minuuttia"
 
-#: src/widgets/SleepTimerDialog.qml:47
+#: src/widgets/SleepTimerDialog.qml:48
 #, kde-format
 msgid "30 minutes"
 msgstr "30 minuuttia"
 
-#: src/widgets/SleepTimerDialog.qml:63
+#: src/widgets/SleepTimerDialog.qml:66
 #, kde-format
 msgid "1 hour"
 msgstr "1 tunti"
 
-#: src/widgets/SleepTimerDialog.qml:79
+#: src/widgets/SleepTimerDialog.qml:84
 #, kde-format
 msgid "End of track"
 msgstr "Raidan loppu"
 
-#: src/widgets/SleepTimerDialog.qml:95
+#: src/widgets/SleepTimerDialog.qml:102
 #, kde-format
 msgid "End of playlist"
 msgstr "Soittolistan loppu"
 
-#: src/widgets/SleepTimerDialog.qml:111
+#: src/widgets/SleepTimerDialog.qml:122
 #, kde-format
 msgid "Off"
 msgstr "Ei käytössä"
 
 # *** TARKISTA: Täytyisi muuttaa tämän JATKOT, ei tätä jonoa
-#: src/widgets/SleepTimerDialog.qml:134
+#: src/widgets/SleepTimerDialog.qml:144
 #, kde-format
 msgid "Close application after"
 msgstr "Sulje sovellus"
 
-#: src/widgets/SleepTimerDialog.qml:148
-#, kde-format
-msgid "Accept"
-msgstr "Hyväksy"
+#: src/widgets/SleepTimerDialog.qml:159
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Set"
+msgstr "Valitse"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
 msgid "Open file"
 msgstr "Avaa tiedosto"
+
+#~ msgid "Accept"
+#~ msgstr "Hyväksy"
 
 #~ msgid "Cloud"
 #~ msgstr "Pilvi"

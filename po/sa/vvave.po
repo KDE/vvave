@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-12-19 01:51+0000\n"
+"POT-Creation-Date: 2025-01-14 00:40+0000\n"
 "PO-Revision-Date: 2024-12-29 23:03+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -29,103 +29,121 @@ msgstr "भवतः सङ्गीतं व्यवस्थितं कृ
 msgid "Developer"
 msgstr "विकासकः"
 
-#: src/main.qml:316 src/main.qml:426 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:326 src/main.qml:464 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "अपाकरोति"
 
-#: src/main.qml:336
+#: src/main.qml:346
 #, kde-format
 msgid "Missing file"
 msgstr "अनुपलब्धा सञ्चिका"
 
-#: src/main.qml:419 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:406
+#, kde-format
+msgid "Stop and Close"
+msgstr ""
+
+#: src/main.qml:407
+#, fuzzy, kde-format
+#| msgid ""
+#| "Are you sure you want to remove the source: \n"
+#| "%1"
+msgid "Are you sure you want to stop the music playing and exit?"
+msgstr "किं भवान् निश्चितरूपेण स्रोतः हर्तुं इच्छति: %1"
+
+#: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
+#, kde-format
+msgid "Ask before closing if music is playing"
+msgstr ""
+
+#: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "पटलं निष्कासयन्तु"
 msgstr[1] "%1 पटलानि निष्कासयन्तु"
 
-#: src/main.qml:420
+#: src/main.qml:458
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "किं भवन्तः एताः सञ्चिकाः हर्तुं इच्छन्ति इति निश्चितम्? एतत् कर्म न निवर्तयितुं शक्यते।"
 
-#: src/main.qml:436 src/widgets/BabeTable/BabeTable.qml:169
-#: src/widgets/SleepTimerDialog.qml:142
+#: src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:153
 #, kde-format
 msgid "Cancel"
 msgstr "निरसयतु"
 
-#: src/main.qml:470
+#: src/main.qml:508
 #, kde-format
 msgid "Saved"
 msgstr "रक्षितम्"
 
-#: src/main.qml:470
+#: src/main.qml:508
 #, kde-format
 msgid "Track added to playlist"
 msgstr "प्लेलिस्ट् मध्ये ट्रैक योजितः"
 
-#: src/main.qml:597 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:635 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "स्लीप टाइमर"
 
-#: src/main.qml:606 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:644 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "शॉर्टकट"
 
-#: src/main.qml:613
+#: src/main.qml:651
 #, kde-format
 msgid "Settings"
 msgstr "सेटिंग्स्"
 
-#: src/main.qml:620
+#: src/main.qml:658
 #, kde-format
 msgid "About"
 msgstr "विषये"
 
-#: src/main.qml:653
+#: src/main.qml:691
 #, kde-format
 msgid "Songs"
 msgstr "गीतानि"
 
-#: src/main.qml:673 src/widgets/AlbumsView.qml:76
+#: src/main.qml:711 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "एल्बम"
 
-#: src/main.qml:680
+#: src/main.qml:718
 #, kde-format
 msgid "No Albums!"
 msgstr "कोऽपि एल्बमः नास्ति!"
 
-#: src/main.qml:681 src/main.qml:705 src/widgets/TracksView.qml:20
+#: src/main.qml:719 src/main.qml:743 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "नूतनानि सङ्गीतस्रोतानि योजयन्तु"
 
-#: src/main.qml:697 src/widgets/AlbumsView.qml:76
+#: src/main.qml:735 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "कलाकाराः"
 
-#: src/main.qml:704
+#: src/main.qml:742
 #, kde-format
 msgid "No Artists!"
 msgstr "न कलाकाराः!"
 
-#: src/main.qml:722 src/widgets/SelectionBar.qml:46
+#: src/main.qml:760 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "टैग्स"
 
-#: src/main.qml:731
+#: src/main.qml:769
 #, kde-format
 msgid "Folders"
 msgstr "पुटम्"
@@ -354,7 +372,7 @@ msgstr "कलाकार जानकारी"
 msgid "Album Info"
 msgstr "एल्बम इन्फो"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:187
+#: src/widgets/MainPlaylist/MainPlaylist.qml:222
 #, kde-format
 msgid "Syncing to "
 msgstr "समन्वयनम्"
@@ -409,12 +427,12 @@ msgstr "टिप्पणी"
 msgid "Toogle SideBar"
 msgstr "टूल् साइडबार"
 
-#: src/widgets/PlaybackBar.qml:51
+#: src/widgets/PlaybackBar.qml:52
 #, kde-format
 msgid "Play and pause"
 msgstr "क्रीडन्तु विरामं च कुर्वन्तु"
 
-#: src/widgets/PlaybackBar.qml:61
+#: src/widgets/PlaybackBar.qml:62
 #, kde-format
 msgid "Next"
 msgstr "अग्रिम"
@@ -504,17 +522,22 @@ msgstr "मात्रा"
 msgid "Show volume controls."
 msgstr "मात्रानियन्त्रणानि दर्शयतु।"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#, kde-format
+msgid "Exiting"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Collection"
 msgstr "सङ्ग्रह"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:92
+#: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "कलाकृतिं आनयतु"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:93
+#: src/widgets/SettingsView/SettingsDialog.qml:106
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -523,63 +546,63 @@ msgstr ""
 "ऑनलाइनसेवाभ्यः एल्बमस्य कलाकारानां च कलाकृतीनां संग्रहणं करोति: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, इत्यादयः।"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:118
 #, kde-format
 msgid "Auto Scan"
 msgstr "ऑटो स्कैन"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:106
+#: src/widgets/SettingsView/SettingsDialog.qml:119
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr "भवतः संग्रहं अद्यतनं कर्तुं स्टार्टअप इत्यत्र सर्वान् सङ्गीतस्रोतान् स्कैन् कुर्वन्तु।"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:119
+#: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "General"
 msgstr "सामान्य"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:124
+#: src/widgets/SettingsView/SettingsDialog.qml:137
 #, kde-format
 msgid "Focus View"
 msgstr "फोकस व्यू"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:125
+#: src/widgets/SettingsView/SettingsDialog.qml:138
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "फोकस दृश्यं पूर्वनिर्धारितं कुर्वन्तु ।"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:140
+#: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Artwork"
 msgstr "कलाकृति"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:141
+#: src/widgets/SettingsView/SettingsDialog.qml:154
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "पङ्क्तयः कृते आवरणकलाकृतिं दर्शयतु।"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:156
+#: src/widgets/SettingsView/SettingsDialog.qml:169
 #, kde-format
 msgid "Titles"
 msgstr "उपाधिः"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:157
+#: src/widgets/SettingsView/SettingsDialog.qml:170
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "जालदृश्ये एल्बमानां कलाकारानां च शीर्षकं दर्शयतु ।"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:173
+#: src/widgets/SettingsView/SettingsDialog.qml:186
 #, kde-format
 msgid "Sources"
 msgstr "स्रोतः"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:210
+#: src/widgets/SettingsView/SettingsDialog.qml:223
 #, kde-format
 msgid "Add"
 msgstr "संयोजयति"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:228
+#: src/widgets/SettingsView/SettingsDialog.qml:241
 #, kde-format
 msgid "Scan now"
 msgstr "अधुना स्कैन् कुर्वन्तु"
@@ -595,42 +618,46 @@ msgstr "अज्ञात"
 msgid "15 minutes"
 msgstr "१५ मिनिट्"
 
-#: src/widgets/SleepTimerDialog.qml:47
+#: src/widgets/SleepTimerDialog.qml:48
 #, kde-format
 msgid "30 minutes"
 msgstr "३० मिनिट्"
 
-#: src/widgets/SleepTimerDialog.qml:63
+#: src/widgets/SleepTimerDialog.qml:66
 #, kde-format
 msgid "1 hour"
 msgstr "१ घण्टा"
 
-#: src/widgets/SleepTimerDialog.qml:79
+#: src/widgets/SleepTimerDialog.qml:84
 #, kde-format
 msgid "End of track"
 msgstr "पटलस्य अन्तः"
 
-#: src/widgets/SleepTimerDialog.qml:95
+#: src/widgets/SleepTimerDialog.qml:102
 #, kde-format
 msgid "End of playlist"
 msgstr "प्लेलिस्ट् इत्यस्य समाप्तिः"
 
-#: src/widgets/SleepTimerDialog.qml:111
+#: src/widgets/SleepTimerDialog.qml:122
 #, kde-format
 msgid "Off"
 msgstr "दूरे"
 
-#: src/widgets/SleepTimerDialog.qml:134
+#: src/widgets/SleepTimerDialog.qml:144
 #, kde-format
 msgid "Close application after"
 msgstr "पश्चात् आवेदनम् बन्दं कुर्वन्तु"
 
-#: src/widgets/SleepTimerDialog.qml:148
-#, kde-format
-msgid "Accept"
-msgstr "स्वीकरोतु"
+#: src/widgets/SleepTimerDialog.qml:159
+#, fuzzy, kde-format
+#| msgid "Select"
+msgid "Set"
+msgstr "विचि"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
 msgid "Open file"
 msgstr "सञ्चिकां उद्घाटयन्तु"
+
+#~ msgid "Accept"
+#~ msgstr "स्वीकरोतु"
