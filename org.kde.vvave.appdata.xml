@@ -63,6 +63,7 @@
   <summary xml:lang="he">נגינת אוסף המוזיקה שלך</summary>
   <summary xml:lang="hi">अपना संगीत संग्रह बजाएँ</summary>
   <summary xml:lang="hu">Játssza le zenei gyűjteményét</summary>
+  <summary xml:lang="ia">Reproduce tu collection de musica</summary>
   <summary xml:lang="id">Putar koleksi musik Anda</summary>
   <summary xml:lang="it">Riproduce la tua collezione musicale</summary>
   <summary xml:lang="ka">მუსიკის თქვენი კოლექციის დაკვრა</summary>
@@ -107,6 +108,7 @@
     <p xml:lang="he">נגן מוזיקה פצפון שנכתב ב־Qt כדי שהשירים שלך יהיו נגישים לך.</p>
     <p xml:lang="hi">छोटा क्यूट संगीत चालक जो आपके मनचाहे गीतों को उपलब्ध कराता है।</p>
     <p xml:lang="hu">Qt-s zenelejátszó a kedvenc számaihoz.</p>
+    <p xml:lang="ia">Parve reproductor de musica de Qt per mantener tu cantos favorite al mano.</p>
     <p xml:lang="id">Pemutar Musik Qt yang kecil menjaga lagu favorit Anda tertangani.</p>
     <p xml:lang="it">Piccolo lettore musicale basato su Qt per tenere le tue canzoni preferite a portata di mano.</p>
     <p xml:lang="ka">ნამცეცა Qt-ზე დაწერილი მუსიკის დამკვრელი თქვენს სიმღერებთან პირდაპირი წვდომით.</p>
@@ -153,6 +155,7 @@
       <caption xml:lang="he">נגן המוזיקה Vvave</caption>
       <caption xml:lang="hi">वीवेव संगीत वादक</caption>
       <caption xml:lang="hu">A Vvave zenelejátszó</caption>
+      <caption xml:lang="ia">Le Vvave reproductor de musica</caption>
       <caption xml:lang="id">Pemutar musik Vvave</caption>
       <caption xml:lang="it">Il lettore musicale Vvave</caption>
       <caption xml:lang="ka">Vvave მუსიკალური დამკვრელი</caption>
