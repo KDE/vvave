@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# SPDX-FileCopyrightText: 2023, 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-14 00:40+0000\n"
-"PO-Revision-Date: 2024-12-19 22:27+0100\n"
+"PO-Revision-Date: 2025-01-15 00:08+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -42,22 +42,17 @@ msgstr "Ficheiro que falta"
 #: src/main.qml:406
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "Deter e pechar"
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"Seguro que quere eliminar a fonte\n"
-"%1?"
+msgstr "Seguro que quere deter a música e saír?"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "Preguntar antes de pechar se hai música reproducíndose."
 
 #: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -529,7 +524,7 @@ msgstr "Amosar o control de volume."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "Saíndo"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -653,10 +648,9 @@ msgid "Close application after"
 msgstr "Pechar a aplicación tras"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Seleccionar"
+msgstr "Definir"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format

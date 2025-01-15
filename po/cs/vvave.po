@@ -648,10 +648,9 @@ msgid "Close application after"
 msgstr "Zavřít aplikaci po"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Vybrat"
+msgstr "Nastavit"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format

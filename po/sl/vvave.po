@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-14 00:40+0000\n"
-"PO-Revision-Date: 2024-12-19 06:55+0100\n"
+"PO-Revision-Date: 2025-01-14 06:43+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -43,22 +43,18 @@ msgstr "Manjkajoča datoteka"
 #: src/main.qml:406
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "Ustavi in zapri"
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr ""
-"Ali ste prepričani, da želite odstraniti vir:\n"
-"%1"
+"Ali ste prepričani, da želite ustaviti predvajanje glasbe in zapustiti?"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "Vprašaj pred zapiranjem, če se predvaja glasba"
 
 #: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -538,7 +534,7 @@ msgstr "Prikaži kontrole glasnosti."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "Zapuščanje"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -662,10 +658,9 @@ msgid "Close application after"
 msgstr "Zapri aplikacijo pp"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Izberi"
+msgstr "Nastavi"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format

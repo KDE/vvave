@@ -1,14 +1,14 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 # Emir SARI <emir_sari@icloud.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-14 00:40+0000\n"
-"PO-Revision-Date: 2024-12-19 16:44+0300\n"
+"PO-Revision-Date: 2025-01-14 16:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -43,22 +43,17 @@ msgstr "Eksik dosya"
 #: src/main.qml:406
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "Durdur ve Kapat"
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"Kaynağı kaldırmak istediğinizden emin misiniz: \n"
-"%1"
+msgstr "Müzik çalmayı durdurmak ve çıkmak istediğinizden emin misiniz?"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "Müzik çalıyorsa kapatmadan önce sor"
 
 #: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -464,7 +459,7 @@ msgstr "Yeni özel çalma listeleri oluşturmaya başlayın"
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
 #, kde-format
 msgid "Remove '%1'?"
-msgstr "'%1' Kaldırılsın mı?"
+msgstr "Kaldır: “%1”?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
@@ -530,7 +525,7 @@ msgstr "Ses düzeyi denetimlerini gösterin."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "Çıkılıyor"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -656,10 +651,9 @@ msgid "Close application after"
 msgstr "Şundan sonra uygulamayı kapat"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Seç"
+msgstr "Ayarla"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format

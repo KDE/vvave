@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-14 00:40+0000\n"
-"PO-Revision-Date: 2025-01-13 12:51+0100\n"
+"PO-Revision-Date: 2025-01-14 18:19+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -45,14 +45,9 @@ msgid "Stop and Close"
 msgstr ""
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove this tag? This operation can not be "
-#| "undone."
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"Tu es secur que tu vole remover iste etiquetta? Iste operation non pote "
-"esser annullate."
+msgstr "Tu es secur que tu vole stoppar le reproduction de musica e exir?"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
@@ -522,7 +517,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "Exiente"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -644,10 +639,9 @@ msgid "Close application after"
 msgstr "Claude application post"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Selige"
+msgstr "Assigna"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format

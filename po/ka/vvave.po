@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-14 00:40+0000\n"
-"PO-Revision-Date: 2024-12-25 22:36+0100\n"
+"PO-Revision-Date: 2025-01-14 05:18+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -43,22 +43,18 @@ msgstr "აკლია ფაილი"
 #: src/main.qml:406
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "გაჩერება და დახურვა"
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr ""
-"დარწმუნებული ბრძანდებით, რომ გნებავთ, წაშალოთ წყარო:\n"
-"%1"
+"დარწმუნებული ბრძანდებით, რომ გნებავთ, გააჩეროთ მუსიკის დაკვრა და გახვიდეთ?"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "კითხვა დახურვამდე, თუ მუსიკა იკვრება"
 
 #: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -530,7 +526,7 @@ msgstr "ხმის კონტროლის ჩვენება."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "გასვლა"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -655,10 +651,9 @@ msgid "Close application after"
 msgstr "აპლიკაციის დახურვა შემდეგ"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "აირჩიეთ"
+msgstr "დაყენება"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
