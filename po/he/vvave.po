@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-14 00:40+0000\n"
-"PO-Revision-Date: 2025-01-01 07:05+0200\n"
+"PO-Revision-Date: 2025-01-14 07:47+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -43,22 +43,17 @@ msgstr "קובץ חסר"
 #: src/main.qml:406
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "עצירה וסגירה"
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"להסיר את המקור: \n"
-"%1"
+msgstr "לעצור את המוזיקה שמתנגנת ולצאת?"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "לשאול לפני סגירה אם מתנגנת מוזיקה"
 
 #: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -531,7 +526,7 @@ msgstr "הצגת פקדי עוצמת שמע."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "יציאה"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -655,10 +650,9 @@ msgid "Close application after"
 msgstr "לסגור את הנגן לאחר"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "בחירה"
+msgstr "הגדרה"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
