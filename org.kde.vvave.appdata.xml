@@ -196,6 +196,9 @@
     <control>keyboard</control>
     <control>touch</control>
   </recommends>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
   <project_group>KDE</project_group>
   <releases>
     <release version="4.0.1" date="2024-12-02">
