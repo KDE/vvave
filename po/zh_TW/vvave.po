@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-14 00:40+0000\n"
-"PO-Revision-Date: 2024-12-29 01:46+0900\n"
+"PO-Revision-Date: 2025-01-24 23:07+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -42,22 +42,17 @@ msgstr "缺失檔案"
 #: src/main.qml:406
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "停止後關閉"
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"您確定要移除以下來源嗎：\n"
-"%1"
+msgstr "您確定要結束音樂播放並離開嗎？"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "音樂播放時詢問是否關閉"
 
 #: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -521,7 +516,7 @@ msgstr "顯示音量控制。"
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "退出"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -645,10 +640,9 @@ msgid "Close application after"
 msgstr "計時器結束之後關閉應用程式"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "選擇"
+msgstr "設定"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format

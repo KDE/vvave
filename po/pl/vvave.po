@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# SPDX-FileCopyrightText: 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-14 00:40+0000\n"
-"PO-Revision-Date: 2024-08-24 12:14+0200\n"
+"PO-Revision-Date: 2025-01-25 12:49+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -43,22 +43,17 @@ msgstr "Brak pliku"
 #: src/main.qml:406
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "Zatrzymaj i zamknij"
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"Czy na pewno usunąć źródło: \n"
-"%1"
+msgstr "Czy na pewno zatrzymać odtwarzanie muzyki i wyjść?"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "Zapytaj przed zamknięciem, jeśli odtwarzana jest muzyka"
 
 #: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -83,13 +78,12 @@ msgstr "Anuluj"
 #: src/main.qml:508
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "Zapisany"
 
 #: src/main.qml:508
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "Koniec listy odtwarzania"
+msgstr "Utwór dodany do listy odtwarzania"
 
 #: src/main.qml:635 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -261,10 +255,9 @@ msgid "Share"
 msgstr "Udostępnij"
 
 #: src/widgets/BabeTable/TableMenu.qml:64
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Add to playlist"
-msgstr "Koniec listy odtwarzania"
+msgstr "Dodaj do listy odtwarzania"
 
 #: src/widgets/BabeTable/TableMenu.qml:74
 #, kde-format
@@ -324,23 +317,22 @@ msgstr "Rozpocznij tworzenie swoich list odtwarzania."
 #: src/widgets/FocusView.qml:488
 #, kde-format
 msgid "Favorite"
-msgstr ""
+msgstr "Ulubione"
 
 #: src/widgets/FocusView.qml:495
-#, fuzzy, kde-format
-#| msgid "File Info"
+#, kde-format
 msgid "Info"
-msgstr "Szczegóły pliku"
+msgstr "Dane"
 
 #: src/widgets/FocusView.qml:514
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "Tryb mini"
 
 #: src/widgets/FocusView.qml:532
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "Zapisz"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
@@ -535,7 +527,7 @@ msgstr "Pokaż sterowanie głośnością."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "Kończenie"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -660,10 +652,9 @@ msgid "Close application after"
 msgstr "Zamknij aplikację po"
 
 #: src/widgets/SleepTimerDialog.qml:159
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Wybierz"
+msgstr "Ustaw"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
