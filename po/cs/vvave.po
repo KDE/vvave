@@ -45,14 +45,9 @@ msgid "Stop and Close"
 msgstr ""
 
 #: src/main.qml:407
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr ""
-"Přejete si skutečně odstranit zdroj: \n"
-"%1"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
@@ -85,10 +80,9 @@ msgid "Saved"
 msgstr "Uloženo"
 
 #: src/main.qml:508
-#, fuzzy, kde-format
-#| msgid "End of playlist"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "Konec seznamu skladeb"
+msgstr ""
 
 #: src/main.qml:635 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -656,6 +650,3 @@ msgstr "Nastavit"
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "Accept"
-#~ msgstr "Přijmout"
