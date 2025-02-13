@@ -42,17 +42,17 @@ msgstr ""
 #: src/main.qml:406
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "停止并关闭"
 
 #: src/main.qml:407
 #, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
+msgstr "您确定要停止播放音乐并退出吗？"
 
 #: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "如果音乐正在播放时退出则询问"
 
 #: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -512,7 +512,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "退出"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -636,7 +636,7 @@ msgstr ""
 #: src/widgets/SleepTimerDialog.qml:159
 #, kde-format
 msgid "Set"
-msgstr ""
+msgstr "设置"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
