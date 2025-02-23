@@ -74,7 +74,7 @@ StackView
                 MultiEffect
                 {
                     id: fastBlur
-                    visible: true
+                    visible: GraphicsInfo.api !== GraphicsInfo.Software
                     height: artworkBg.height
                     width: artworkBg.width
                     anchors.centerIn: parent
@@ -327,7 +327,7 @@ StackView
                                     }
 
                                     color: "#fafafa"
-                                    layer.enabled: true
+                                    layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
                                     layer.effect: MultiEffect
                                     {
                                         shadowHorizontalOffset: 0
@@ -359,7 +359,7 @@ StackView
                                             source = "qrc:/assets/cover.png";
                                     }
 
-                                    layer.enabled: true
+                                    layer.enabled: GraphicsInfo.api !== GraphicsInfo.Software
                                     layer.effect: MultiEffect
                                     {
                                         maskEnabled: true
