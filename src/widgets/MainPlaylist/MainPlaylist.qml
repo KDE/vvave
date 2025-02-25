@@ -287,7 +287,7 @@ Maui.Page
                         playing: root.isPlaying && Maui.Style.enableEffects
                         anchors.centerIn: parent
                         source: "qrc:/assets/playing.gif"
-                        visible: false
+                        visible: GraphicsInfo.api === GraphicsInfo.Software
                     }
 
                     MultiEffect
@@ -297,6 +297,7 @@ Maui.Page
                         colorization: 1.0
                         contrast: 1.0
                         colorizationColor: "#fafafa"
+                        visible: GraphicsInfo.api !== GraphicsInfo.Software
                     }
                 }
 
