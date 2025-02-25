@@ -85,7 +85,7 @@
   <summary xml:lang="x-test">xxPlay your music collectionxx</summary>
   <summary xml:lang="zh-CN">播放您收藏的音乐</summary>
   <summary xml:lang="zh-TW">播放您的音樂收藏</summary>
-  <developer>
+  <developer id="org.mauikit">
     <name>maui</name>
     <url>https://mauikit.org/</url>
   </developer>
