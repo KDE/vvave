@@ -362,7 +362,7 @@ return
                     mainPlaylist.listModel.list.countUp(currentTrackIndex)
                 }
 
-                switch(root.sleepOption)
+                switch(settings.sleepOption)
                 {
                 case "eot":
                 {
@@ -977,13 +977,13 @@ return
 
         switch(option)
         {
-        case "15m" : ; timerFunc(15); break;
+        case "15m" : timerFunc(15); break;
         case "30m" : timerFunc(30); break;
         case "60m" : timerFunc(60); break;
-        case "eot" : root.sleepOption = "eot"; break;
-        case "eop" : root.sleepOption = "eop"; break;
+        case "eot" : settings.sleepOption = "eot"; break;
+        case "eop" : settings.sleepOption = "eop"; break;
         case "none" :
-        default: root.sleepOption = "none"; _timerLoader.active=false; break;
+        default: settings.sleepOption = "none"; _timerLoader.active=false; break;
         }
     }
 }
