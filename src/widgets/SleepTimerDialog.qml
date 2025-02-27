@@ -9,6 +9,7 @@ Maui.PopupPage
     id: control
 
     title: i18n("Sleep Timer")
+    persistent: false
 
     component OptionEntry : CheckBox
     {

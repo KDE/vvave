@@ -29,17 +29,38 @@ Maui.Page
     headBar.visible: false
     footBar.visible: !mainlistEmpty
 
-    footBar.rightContent: ToolButton
-    {
-        icon.name: "edit-delete"
-        onClicked:
+    footBar.rightContent:[
+
+        ToolButton
         {
-            player.stop()
-            listModel.list.clear()
-            root.sync = false
-            root.syncPlaylist = ""
-        }
-    }
+            icon.name: "edit-delete"
+            onClicked:
+            {
+                player.stop()
+                listModel.list.clear()
+                root.sync = false
+                root.syncPlaylist = ""
+            }
+        },
+   Loader
+   {
+       active: settings.sleepOption !== "none"
+       visible: active
+       sourceComponent: Label
+       {
+           font.family: "Monospace"
+           text: "Zzz"
+           color: "white"
+           padding: Maui.Style.space.tiny
+
+           // icon.name: "clock"
+           background: Rectangle
+           {
+               color: "purple"
+               radius: 4
+           }
+       }
+}]
 
     footBar.leftContent: [
         ToolButton

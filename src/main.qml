@@ -62,6 +62,7 @@ Maui.ApplicationWindow
     readonly property bool miniMode : _miniModeComponent.visible
 
     property bool selectionMode : false
+    property bool _forceClose: false
 
     /***************************************************/
     /******************** UI COLORS *******************/
@@ -73,7 +74,7 @@ Maui.ApplicationWindow
 
     onClosing: (close) =>
                {
-                   if(settings.askBeforeClose && isPlaying)
+                   if(settings.askBeforeClose && isPlaying && (!root._forceClose))
                    {
 
                      close.accepted = false
@@ -98,8 +99,11 @@ return
             onTriggered:
             {
                 Player.stop()
-                if(closeAfterSleep)
-                    root.close()
+                if(settings.closeAfterSleep)
+                {
+                    root._forceClose = true
+                     root.close()
+                }
             }
         }
     }
@@ -268,7 +272,7 @@ return
     {
         id: _floatingViewer
         active: (root.isPlaying && !root.mainlistEmpty) || item
-        visible: !root.mainlistEmpty
+        visible: !root.mainlistEmpty && !root.focusView
 
         DragHandler
         {
@@ -367,8 +371,11 @@ return
                 case "eot":
                 {
                     Player.stop()
-                    if(closeAfterSleep)
+                    if(settings.closeAfterSleep)
+                    {
+                        root._forceClose = true
                         root.close()
+                    }
                     break;
                 }
 
@@ -377,8 +384,11 @@ return
                     if(currentTrackIndex === mainPlaylist.listView.count-1)
                     {
                         Player.stop();
-                        if(closeAfterSleep)
+                        if(settings.closeAfterSleep)
+                        {
+                            root._forceClose = true
                             root.close()
+                        }
                     }else
                     {
                         Player.nextTrack();
@@ -977,13 +987,31 @@ return
 
         switch(option)
         {
-        case "15m" : timerFunc(15); break;
-        case "30m" : timerFunc(30); break;
-        case "60m" : timerFunc(60); break;
-        case "eot" : settings.sleepOption = "eot"; break;
-        case "eop" : settings.sleepOption = "eop"; break;
+        case "15m" :
+            settings.sleepOption = "15m";
+            timerFunc(15);
+            break;
+        case "30m" :
+            settings.sleepOption = "30m";
+            timerFunc(30);
+            break;
+        case "60m" :
+            settings.sleepOption = "60m";
+            timerFunc(60);
+            break;
+        case "eot" :
+            settings.sleepOption = "eot";
+            _timerLoader.active=false;
+            break;
+        case "eop" :
+            settings.sleepOption = "eop";
+            _timerLoader.active=false;
+            break;
         case "none" :
-        default: settings.sleepOption = "none"; _timerLoader.active=false; break;
+        default:
+            settings.sleepOption = "none";
+            _timerLoader.active=false;
+            break;
         }
     }
 }
