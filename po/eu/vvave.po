@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-14 00:40+0000\n"
+"POT-Creation-Date: 2025-02-28 00:41+0000\n"
 "PO-Revision-Date: 2025-01-14 06:37+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -30,41 +30,41 @@ msgstr "Zure musika antolatu eta entzun."
 msgid "Developer"
 msgstr "Garatzailea"
 
-#: src/main.qml:326 src/main.qml:464 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:330 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "Kendu"
 
-#: src/main.qml:346
+#: src/main.qml:350
 #, kde-format
 msgid "Missing file"
 msgstr "Fitxategia falta da"
 
-#: src/main.qml:406
+#: src/main.qml:416
 #, kde-format
 msgid "Stop and Close"
 msgstr "Gelditu eta itxi"
 
-#: src/main.qml:407
+#: src/main.qml:417
 #, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr "Ziur zaude jotzen ari den musika gelditu eta irten nahi dituzula?"
 
-#: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr "Musika jotzen ari bada, itxi aurretik galdetu"
 
-#: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:467 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Kendu pista"
 msgstr[1] "Kendu %1 pista"
 
-#: src/main.qml:458
+#: src/main.qml:468
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -72,78 +72,78 @@ msgstr ""
 "Ziur zaude fitxategi horiek kendu nahi dituzula? Ekintza hori ezin da "
 "desegin."
 
-#: src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:169
-#: src/widgets/SleepTimerDialog.qml:153
+#: src/main.qml:484 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
 msgstr "Utzi"
 
-#: src/main.qml:508
+#: src/main.qml:518
 #, kde-format
 msgid "Saved"
 msgstr "Gordeta"
 
-#: src/main.qml:508
+#: src/main.qml:518
 #, kde-format
 msgid "Track added to playlist"
 msgstr "Pista jotze-zerrendara gehitu da"
 
-#: src/main.qml:635 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:645 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Lokartzeko tenporizadorea"
 
-#: src/main.qml:644 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:654 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Lasterbideak"
 
-#: src/main.qml:651
+#: src/main.qml:661
 #, kde-format
 msgid "Settings"
 msgstr "Ezarpenak"
 
-#: src/main.qml:658
+#: src/main.qml:668
 #, kde-format
 msgid "About"
 msgstr "Honi buruz"
 
-#: src/main.qml:691
+#: src/main.qml:701
 #, kde-format
 msgid "Songs"
 msgstr "Abestiak"
 
-#: src/main.qml:711 src/widgets/AlbumsView.qml:76
+#: src/main.qml:721 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumak"
 
-#: src/main.qml:718
+#: src/main.qml:728
 #, kde-format
 msgid "No Albums!"
 msgstr "Albumik ez!"
 
-#: src/main.qml:719 src/main.qml:743 src/widgets/TracksView.qml:20
+#: src/main.qml:729 src/main.qml:753 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Gehitu musika-sorburu berriak"
 
-#: src/main.qml:735 src/widgets/AlbumsView.qml:76
+#: src/main.qml:745 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistak"
 
-#: src/main.qml:742
+#: src/main.qml:752
 #, kde-format
 msgid "No Artists!"
 msgstr "Artistarik ez!"
 
-#: src/main.qml:760 src/widgets/SelectionBar.qml:46
+#: src/main.qml:770 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiketak"
 
-#: src/main.qml:769
+#: src/main.qml:779
 #, kde-format
 msgid "Folders"
 msgstr "Karpetak"
@@ -312,7 +312,7 @@ msgstr "Emaitzarik ez!"
 msgid "Try with something else"
 msgstr "Saiatu beste zerbaitekin"
 
-#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Hasi zure jotze-zerrenda osatzen."
@@ -374,7 +374,7 @@ msgstr "Artistaren informazioa"
 msgid "Album Info"
 msgstr "Albumaren informazioa"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:222
+#: src/widgets/MainPlaylist/MainPlaylist.qml:243
 #, kde-format
 msgid "Syncing to "
 msgstr "Honekin sinkronizatzea, "
@@ -617,42 +617,42 @@ msgstr "Miatu orain"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: src/widgets/SleepTimerDialog.qml:31
+#: src/widgets/SleepTimerDialog.qml:32
 #, kde-format
 msgid "15 minutes"
 msgstr "15 minutu"
 
-#: src/widgets/SleepTimerDialog.qml:48
+#: src/widgets/SleepTimerDialog.qml:49
 #, kde-format
 msgid "30 minutes"
 msgstr "30 minutu"
 
-#: src/widgets/SleepTimerDialog.qml:66
+#: src/widgets/SleepTimerDialog.qml:67
 #, kde-format
 msgid "1 hour"
 msgstr "ordu 1"
 
-#: src/widgets/SleepTimerDialog.qml:84
+#: src/widgets/SleepTimerDialog.qml:85
 #, kde-format
 msgid "End of track"
 msgstr "Pistaren amaiera"
 
-#: src/widgets/SleepTimerDialog.qml:102
+#: src/widgets/SleepTimerDialog.qml:103
 #, kde-format
 msgid "End of playlist"
 msgstr "Jotze-zerrendaren amaiera"
 
-#: src/widgets/SleepTimerDialog.qml:122
+#: src/widgets/SleepTimerDialog.qml:123
 #, kde-format
 msgid "Off"
 msgstr "Itzalita"
 
-#: src/widgets/SleepTimerDialog.qml:144
+#: src/widgets/SleepTimerDialog.qml:145
 #, kde-format
 msgid "Close application after"
 msgstr "Itxi aplikazioa hau eta gero:"
 
-#: src/widgets/SleepTimerDialog.qml:159
+#: src/widgets/SleepTimerDialog.qml:160
 #, kde-format
 msgid "Set"
 msgstr "Ezarri"

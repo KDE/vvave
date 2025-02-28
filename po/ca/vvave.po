@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-14 00:40+0000\n"
+"POT-Creation-Date: 2025-02-28 00:41+0000\n"
 "PO-Revision-Date: 2025-01-14 10:51+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -29,41 +29,41 @@ msgstr "Organitzeu i escolteu la vostra música."
 msgid "Developer"
 msgstr "Desenvolupador"
 
-#: src/main.qml:326 src/main.qml:464 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:330 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "Elimina"
 
-#: src/main.qml:346
+#: src/main.qml:350
 #, kde-format
 msgid "Missing file"
 msgstr "Manca un fitxer"
 
-#: src/main.qml:406
+#: src/main.qml:416
 #, kde-format
 msgid "Stop and Close"
 msgstr "Atura i tanca"
 
-#: src/main.qml:407
+#: src/main.qml:417
 #, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr "Segur que voleu aturar la reproducció de música i sortir?"
 
-#: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr "Pregunta abans de tancar si hi ha música reproduint-se"
 
-#: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:467 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Elimina la peça"
 msgstr[1] "Elimina %1 peces"
 
-#: src/main.qml:458
+#: src/main.qml:468
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -71,78 +71,78 @@ msgstr ""
 "Esteu segur que voleu eliminar aquests fitxers? Aquesta operació no es pot "
 "desfer."
 
-#: src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:169
-#: src/widgets/SleepTimerDialog.qml:153
+#: src/main.qml:484 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: src/main.qml:508
+#: src/main.qml:518
 #, kde-format
 msgid "Saved"
 msgstr "Desat"
 
-#: src/main.qml:508
+#: src/main.qml:518
 #, kde-format
 msgid "Track added to playlist"
 msgstr "La peça s'ha afegit a la llista de reproducció"
 
-#: src/main.qml:635 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:645 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Temporitzador d'adormir-se"
 
-#: src/main.qml:644 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:654 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Dreceres"
 
-#: src/main.qml:651
+#: src/main.qml:661
 #, kde-format
 msgid "Settings"
 msgstr "Configuració"
 
-#: src/main.qml:658
+#: src/main.qml:668
 #, kde-format
 msgid "About"
 msgstr "Quant a"
 
-#: src/main.qml:691
+#: src/main.qml:701
 #, kde-format
 msgid "Songs"
 msgstr "Cançons"
 
-#: src/main.qml:711 src/widgets/AlbumsView.qml:76
+#: src/main.qml:721 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Àlbums"
 
-#: src/main.qml:718
+#: src/main.qml:728
 #, kde-format
 msgid "No Albums!"
 msgstr "Cap àlbum!"
 
-#: src/main.qml:719 src/main.qml:743 src/widgets/TracksView.qml:20
+#: src/main.qml:729 src/main.qml:753 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Afegeix fonts noves de música"
 
-#: src/main.qml:735 src/widgets/AlbumsView.qml:76
+#: src/main.qml:745 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistes"
 
-#: src/main.qml:742
+#: src/main.qml:752
 #, kde-format
 msgid "No Artists!"
 msgstr "Cap artista!"
 
-#: src/main.qml:760 src/widgets/SelectionBar.qml:46
+#: src/main.qml:770 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiquetes"
 
-#: src/main.qml:769
+#: src/main.qml:779
 #, kde-format
 msgid "Folders"
 msgstr "Carpetes"
@@ -311,7 +311,7 @@ msgstr "Cap resultat!"
 msgid "Try with something else"
 msgstr "Intenteu-ho amb alguna altra cosa"
 
-#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Comenceu posant junta la llista de reproducció."
@@ -373,7 +373,7 @@ msgstr "Informació de l'artista"
 msgid "Album Info"
 msgstr "Informació de l'àlbum"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:222
+#: src/widgets/MainPlaylist/MainPlaylist.qml:243
 #, kde-format
 msgid "Syncing to "
 msgstr "Sincronitza amb"
@@ -618,42 +618,42 @@ msgstr "Explora ara"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: src/widgets/SleepTimerDialog.qml:31
+#: src/widgets/SleepTimerDialog.qml:32
 #, kde-format
 msgid "15 minutes"
 msgstr "15 minuts"
 
-#: src/widgets/SleepTimerDialog.qml:48
+#: src/widgets/SleepTimerDialog.qml:49
 #, kde-format
 msgid "30 minutes"
 msgstr "30 minuts"
 
-#: src/widgets/SleepTimerDialog.qml:66
+#: src/widgets/SleepTimerDialog.qml:67
 #, kde-format
 msgid "1 hour"
 msgstr "1 hora"
 
-#: src/widgets/SleepTimerDialog.qml:84
+#: src/widgets/SleepTimerDialog.qml:85
 #, kde-format
 msgid "End of track"
 msgstr "Final de la peça"
 
-#: src/widgets/SleepTimerDialog.qml:102
+#: src/widgets/SleepTimerDialog.qml:103
 #, kde-format
 msgid "End of playlist"
 msgstr "Final de la llista de reproducció"
 
-#: src/widgets/SleepTimerDialog.qml:122
+#: src/widgets/SleepTimerDialog.qml:123
 #, kde-format
 msgid "Off"
 msgstr "Inactiu"
 
-#: src/widgets/SleepTimerDialog.qml:144
+#: src/widgets/SleepTimerDialog.qml:145
 #, kde-format
 msgid "Close application after"
 msgstr "Tanca l'aplicació després de"
 
-#: src/widgets/SleepTimerDialog.qml:159
+#: src/widgets/SleepTimerDialog.qml:160
 #, kde-format
 msgid "Set"
 msgstr "Estableix"

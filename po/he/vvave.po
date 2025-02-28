@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-14 00:40+0000\n"
+"POT-Creation-Date: 2025-02-28 00:41+0000\n"
 "PO-Revision-Date: 2025-01-14 07:47+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -28,34 +28,34 @@ msgstr "סידור והאזנה למוזיקה שלך."
 msgid "Developer"
 msgstr "מפתח"
 
-#: src/main.qml:326 src/main.qml:464 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:330 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "הסרה"
 
-#: src/main.qml:346
+#: src/main.qml:350
 #, kde-format
 msgid "Missing file"
 msgstr "קובץ חסר"
 
-#: src/main.qml:406
+#: src/main.qml:416
 #, kde-format
 msgid "Stop and Close"
 msgstr "עצירה וסגירה"
 
-#: src/main.qml:407
+#: src/main.qml:417
 #, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr "לעצור את המוזיקה שמתנגנת ולצאת?"
 
-#: src/main.qml:417 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr "לשאול לפני סגירה אם מתנגנת מוזיקה"
 
-#: src/main.qml:457 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:467 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -64,84 +64,84 @@ msgstr[1] "הסרת שתי רצועות"
 msgstr[2] "הסרת %1 רצועות"
 msgstr[3] "הסרת %1 רצועות"
 
-#: src/main.qml:458
+#: src/main.qml:468
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "להסיר את הקבצים האלה? זאת פעולה בלתי הפיכה."
 
-#: src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:169
-#: src/widgets/SleepTimerDialog.qml:153
+#: src/main.qml:484 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
 msgstr "ביטול"
 
-#: src/main.qml:508
+#: src/main.qml:518
 #, kde-format
 msgid "Saved"
 msgstr "נשמר"
 
-#: src/main.qml:508
+#: src/main.qml:518
 #, kde-format
 msgid "Track added to playlist"
 msgstr "הרצועה נוספה לרשימת הנגינה"
 
-#: src/main.qml:635 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:645 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "מתזמן שינה"
 
-#: src/main.qml:644 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:654 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "מקשי קיצור"
 
-#: src/main.qml:651
+#: src/main.qml:661
 #, kde-format
 msgid "Settings"
 msgstr "הגדרות"
 
-#: src/main.qml:658
+#: src/main.qml:668
 #, kde-format
 msgid "About"
 msgstr "על אודות"
 
-#: src/main.qml:691
+#: src/main.qml:701
 #, kde-format
 msgid "Songs"
 msgstr "שירים"
 
-#: src/main.qml:711 src/widgets/AlbumsView.qml:76
+#: src/main.qml:721 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "אלבומים"
 
-#: src/main.qml:718
+#: src/main.qml:728
 #, kde-format
 msgid "No Albums!"
 msgstr "אין אלבומים!"
 
-#: src/main.qml:719 src/main.qml:743 src/widgets/TracksView.qml:20
+#: src/main.qml:729 src/main.qml:753 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "הוספת מקורות מוזיקה חדשים"
 
-#: src/main.qml:735 src/widgets/AlbumsView.qml:76
+#: src/main.qml:745 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "אומנים"
 
-#: src/main.qml:742
+#: src/main.qml:752
 #, kde-format
 msgid "No Artists!"
 msgstr "אין אומנים!"
 
-#: src/main.qml:760 src/widgets/SelectionBar.qml:46
+#: src/main.qml:770 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "תגיות"
 
-#: src/main.qml:769
+#: src/main.qml:779
 #, kde-format
 msgid "Folders"
 msgstr "תיקיות"
@@ -309,7 +309,7 @@ msgstr "אין תוצאות!"
 msgid "Try with something else"
 msgstr "לנסות עם משהו אחר"
 
-#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:132
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "אפשר להתחיל לגבש את רשימת הנגינה שלך."
@@ -373,7 +373,7 @@ msgstr "פרטי אומן/נית"
 msgid "Album Info"
 msgstr "פרטי אלבום"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:222
+#: src/widgets/MainPlaylist/MainPlaylist.qml:243
 #, kde-format
 msgid "Syncing to "
 msgstr "מסתנכרן אל"
@@ -614,42 +614,42 @@ msgstr "לסרוק כעת"
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: src/widgets/SleepTimerDialog.qml:31
+#: src/widgets/SleepTimerDialog.qml:32
 #, kde-format
 msgid "15 minutes"
 msgstr "15 דקות"
 
-#: src/widgets/SleepTimerDialog.qml:48
+#: src/widgets/SleepTimerDialog.qml:49
 #, kde-format
 msgid "30 minutes"
 msgstr "חצי שעה"
 
-#: src/widgets/SleepTimerDialog.qml:66
+#: src/widgets/SleepTimerDialog.qml:67
 #, kde-format
 msgid "1 hour"
 msgstr "שעה"
 
-#: src/widgets/SleepTimerDialog.qml:84
+#: src/widgets/SleepTimerDialog.qml:85
 #, kde-format
 msgid "End of track"
 msgstr "סוף הרצועה"
 
-#: src/widgets/SleepTimerDialog.qml:102
+#: src/widgets/SleepTimerDialog.qml:103
 #, kde-format
 msgid "End of playlist"
 msgstr "סוף רשימת הנגינה"
 
-#: src/widgets/SleepTimerDialog.qml:122
+#: src/widgets/SleepTimerDialog.qml:123
 #, kde-format
 msgid "Off"
 msgstr "כבוי"
 
-#: src/widgets/SleepTimerDialog.qml:144
+#: src/widgets/SleepTimerDialog.qml:145
 #, kde-format
 msgid "Close application after"
 msgstr "לסגור את הנגן לאחר"
 
-#: src/widgets/SleepTimerDialog.qml:159
+#: src/widgets/SleepTimerDialog.qml:160
 #, kde-format
 msgid "Set"
 msgstr "הגדרה"
