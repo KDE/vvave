@@ -57,6 +57,7 @@ Maui.ApplicationWindow
 
     property string syncPlaylist: ""
     property bool sync: false
+    property string lastUsedPlaylist
 
     readonly property bool focusView : _stackView.currentItem.objectName === "FocusView"
     readonly property bool miniMode : _miniModeComponent.visible
@@ -77,11 +78,11 @@ Maui.ApplicationWindow
                    if(settings.askBeforeClose && isPlaying && (!root._forceClose))
                    {
 
-                     close.accepted = false
-_dialogLoader.sourceComponent = _closeDialogComponent
-dialog.open()
-return
-                }
+                       close.accepted = false
+                       _dialogLoader.sourceComponent = _closeDialogComponent
+                       dialog.open()
+                       return
+                   }
 
                    playlist.save()
                    close.accepted = true
@@ -102,7 +103,7 @@ return
                 if(settings.closeAfterSleep)
                 {
                     root._forceClose = true
-                     root.close()
+                    root.close()
                 }
             }
         }
@@ -432,7 +433,6 @@ return
                 player.pause()
                 root.close()
             }
-
         }
     }
 
@@ -493,7 +493,6 @@ return
 
         FB.TagsDialog
         {
-
             Action
             {
                 property string tag
@@ -513,6 +512,7 @@ return
                              {
                                  _openPlaylistAction.tag = tags[0]
                                  actions = [_openPlaylistAction]
+                                 root.lastUsedPlaylist = tags[0]
                              }
 
                              Maui.App.rootComponent.notify("dialog-info", i18n("Saved"), i18n("Track added to playlist"), actions)

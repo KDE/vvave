@@ -146,17 +146,18 @@ Maui.BaseWindow
                     }
                 }
             }
+        }
+    }
 
-            DragHandler
+
+    DragHandler
+    {
+        grabPermissions: PointerHandler.CanTakeOverFromItems | PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverByAnything
+        onActiveChanged:
+        {
+            if (active)
             {
-                grabPermissions: PointerHandler.CanTakeOverFromItems | PointerHandler.CanTakeOverFromHandlersOfDifferentType | PointerHandler.ApprovesTakeOverByAnything
-                onActiveChanged:
-                {
-                    if (active)
-                    {
-                        control.startSystemMove()
-                    }
-                }
+                control.startSystemMove()
             }
         }
     }

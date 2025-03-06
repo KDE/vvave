@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 import org.mauikit.controls as Maui
+import org.mauikit.filebrowsing as FB
 
 Maui.ContextualMenu
 {
@@ -58,6 +59,17 @@ Maui.ContextualMenu
         }
     }
 
+    MenuItem
+    {
+        visible: root.lastUsedPlaylist.length > 0
+        height: visible ? implicitHeight : -control.spacing
+        text: i18n("Add to '%1'", root.lastUsedPlaylist)
+        icon.name: "tag"
+        onTriggered:
+        {
+            FB.Tagging.tagUrl(control.titleInfo.url, root.lastUsedPlaylist)
+        }
+    }
 
     Action
     {
