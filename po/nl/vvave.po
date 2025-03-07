@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-28 00:41+0000\n"
+"POT-Creation-Date: 2025-03-07 00:41+0000\n"
 "PO-Revision-Date: 2025-01-14 11:27+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -27,29 +27,29 @@ msgstr "Uw muziek organiseren en er naar luisteren."
 msgid "Developer"
 msgstr "Ontwikkelaar"
 
-#: src/main.qml:330 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:331 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: src/main.qml:350
+#: src/main.qml:351
 #, kde-format
 msgid "Missing file"
 msgstr "Ontbrekend bestand"
 
-#: src/main.qml:416
+#: src/main.qml:417
 #, kde-format
 msgid "Stop and Close"
 msgstr "Stoppen en sluiten"
 
-#: src/main.qml:417
+#: src/main.qml:418
 #, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr "Wilt u muziek afspelen stoppen en eindigen?"
 
-#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:428 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr "Vragen voor afsluiten als er muziek speelt"
@@ -231,49 +231,54 @@ msgstr "Ga naar Artiest"
 msgid "Go to Album"
 msgstr "Ga naar Album"
 
-#: src/widgets/BabeTable/TableMenu.qml:35
+#: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "Fav it"
 msgstr "Fav maken"
 
-#: src/widgets/BabeTable/TableMenu.qml:35
+#: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "UnFav it"
 msgstr "Fav. opheffen"
 
-#: src/widgets/BabeTable/TableMenu.qml:45 src/widgets/MetadataDialog.qml:16
+#: src/widgets/BabeTable/TableMenu.qml:46 src/widgets/MetadataDialog.qml:16
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "Bewerken"
 
-#: src/widgets/BabeTable/TableMenu.qml:55 src/widgets/FocusView.qml:523
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:523
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
 msgstr "Delen"
 
-#: src/widgets/BabeTable/TableMenu.qml:64
+#: src/widgets/BabeTable/TableMenu.qml:66
+#, kde-format
+msgid "Add to '%1'"
+msgstr ""
+
+#: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
 msgid "Add to playlist"
 msgstr "Aan afspeellijst toevoegen"
 
-#: src/widgets/BabeTable/TableMenu.qml:74
+#: src/widgets/BabeTable/TableMenu.qml:86
 #, kde-format
 msgid "Select"
 msgstr "Selecteren"
 
-#: src/widgets/BabeTable/TableMenu.qml:87
+#: src/widgets/BabeTable/TableMenu.qml:99
 #, kde-format
 msgid "Play Next"
 msgstr "Volgende afspelen"
 
-#: src/widgets/BabeTable/TableMenu.qml:112
+#: src/widgets/BabeTable/TableMenu.qml:124
 #, kde-format
 msgid "Show in Folder"
 msgstr "In map tonen"
 
-#: src/widgets/BabeTable/TableMenu.qml:138
+#: src/widgets/BabeTable/TableMenu.qml:150
 #, kde-format
 msgid "Delete"
 msgstr "Verwijderen"

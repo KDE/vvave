@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-28 00:41+0000\n"
+"POT-Creation-Date: 2025-03-07 00:41+0000\n"
 "PO-Revision-Date: 2025-01-31 22:31+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -27,24 +27,24 @@ msgstr "Järjestä ja kuuntele musiikkiasi."
 msgid "Developer"
 msgstr "Kehittäjä"
 
-#: src/main.qml:330 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:331 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
 msgstr "Poista"
 
-#: src/main.qml:350
+#: src/main.qml:351
 #, kde-format
 msgid "Missing file"
 msgstr "Puuttuva tiedosto"
 
-#: src/main.qml:416
+#: src/main.qml:417
 #, kde-format
 msgid "Stop and Close"
 msgstr ""
 
-#: src/main.qml:417
+#: src/main.qml:418
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure you want to remove the source: \n"
@@ -54,7 +54,7 @@ msgstr ""
 "Haluatko varmasti poistaa lähteen:\n"
 "%1"
 
-#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:428 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr ""
@@ -232,49 +232,54 @@ msgstr "Siirry artistiin"
 msgid "Go to Album"
 msgstr "Siirry albumiin"
 
-#: src/widgets/BabeTable/TableMenu.qml:35
+#: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "Fav it"
 msgstr "Merkitse suosikiksi"
 
-#: src/widgets/BabeTable/TableMenu.qml:35
+#: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "UnFav it"
 msgstr "Poista suosikeista"
 
-#: src/widgets/BabeTable/TableMenu.qml:45 src/widgets/MetadataDialog.qml:16
+#: src/widgets/BabeTable/TableMenu.qml:46 src/widgets/MetadataDialog.qml:16
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
 #, kde-format
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: src/widgets/BabeTable/TableMenu.qml:55 src/widgets/FocusView.qml:523
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:523
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
 msgstr "Jaa"
 
-#: src/widgets/BabeTable/TableMenu.qml:64
+#: src/widgets/BabeTable/TableMenu.qml:66
+#, kde-format
+msgid "Add to '%1'"
+msgstr ""
+
+#: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
 msgid "Add to playlist"
 msgstr "Lisää soittolistalle"
 
-#: src/widgets/BabeTable/TableMenu.qml:74
+#: src/widgets/BabeTable/TableMenu.qml:86
 #, kde-format
 msgid "Select"
 msgstr "Valitse"
 
-#: src/widgets/BabeTable/TableMenu.qml:87
+#: src/widgets/BabeTable/TableMenu.qml:99
 #, kde-format
 msgid "Play Next"
 msgstr "Toista seuraava"
 
-#: src/widgets/BabeTable/TableMenu.qml:112
+#: src/widgets/BabeTable/TableMenu.qml:124
 #, kde-format
 msgid "Show in Folder"
 msgstr "Näytä kansiossa"
 
-#: src/widgets/BabeTable/TableMenu.qml:138
+#: src/widgets/BabeTable/TableMenu.qml:150
 #, kde-format
 msgid "Delete"
 msgstr "Poista"
