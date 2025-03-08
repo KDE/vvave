@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-07 00:41+0000\n"
-"PO-Revision-Date: 2025-01-14 12:02+0100\n"
+"PO-Revision-Date: 2025-03-07 16:56+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -257,7 +257,7 @@ msgstr "Compartir"
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "Añadir a «%1»"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
@@ -667,95 +667,3 @@ msgstr "Definir"
 #, kde-format
 msgid "Open file"
 msgstr "Abrir archivo"
-
-#~ msgid "Accept"
-#~ msgstr "Aceptar"
-
-#~ msgid "Cloud"
-#~ msgstr "Nube"
-
-#~ msgid "Dark Mode"
-#~ msgstr "Modo oscuro"
-
-#~ msgid "Switch between light and dark colorscheme."
-#~ msgstr "Cambiar entre los esquemas de color claro y oscuro."
-
-#~ msgid "© 2019-2023 Maui Development Team"
-#~ msgstr "© 2019-2023 El equipo de desarrollo de Maui"
-
-#~ msgid "Vvave"
-#~ msgstr "Vvave"
-
-#~ msgid "Remove %1 tracks"
-#~ msgstr "Eliminar %1 pistas"
-
-#~ msgid "Configure the playback behavior."
-#~ msgstr "Configurar el comportamiento de la reproducción."
-
-#~ msgid "Configure the app plugins and collection behavior."
-#~ msgstr ""
-#~ "Configura los complementos de la aplicación y el comportamiento de la "
-#~ "colección."
-
-#~ msgid "Add or remove sources"
-#~ msgstr "Añadir o eliminar fuentes"
-
-#~ msgid "Behaviour"
-#~ msgstr "Comportamiento"
-
-#~ msgid "stars"
-#~ msgstr "estrellas"
-
-#~ msgid "Search collection"
-#~ msgstr "Buscar en la colección"
-
-#~ msgid "Random tracks from your collection."
-#~ msgstr "Pistas aleatorias de su colección."
-
-#~ msgid "View All"
-#~ msgstr "Ver todo"
-
-#~ msgid "Popular Tracks"
-#~ msgstr "Pistas populares"
-
-#~ msgid "Play them again."
-#~ msgstr "Volver a reproducirlas."
-
-#~ msgid "Recently played."
-#~ msgstr "Reproducidas recientemente."
-
-#~ msgid "More"
-#~ msgstr "Más"
-
-#~ msgid "Give these tracks a first listen."
-#~ msgstr "Oír estas pistas por primera vez."
-
-#~ msgid "Oldest released tracks from your collection."
-#~ msgstr "Pistas publicadas más antiguas de su colección."
-
-#~ msgid "Local file info."
-#~ msgstr "Información del archivo local."
-
-#~ msgid "Dust off."
-#~ msgstr "Desempolvar."
-
-#~ msgid "New Tracks"
-#~ msgstr "Pistas nuevas"
-
-#~ msgid "Newly added."
-#~ msgstr "Añadidas recientemente."
-
-#~ msgid "Recent Artists"
-#~ msgstr "Artistas recientes"
-
-#~ msgid "Recent Albums"
-#~ msgstr "Álbumes recientes"
-
-#~ msgid "Playlists"
-#~ msgstr "Listas de reproducción"
-
-#~ msgid "Camilo Higuita"
-#~ msgstr "Camilo Higuita"
-
-#~ msgid "Contributor"
-#~ msgstr "Colaborador"
