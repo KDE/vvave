@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-07 00:41+0000\n"
-"PO-Revision-Date: 2025-01-31 22:31+0200\n"
+"PO-Revision-Date: 2025-02-21 11:21+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -42,22 +42,17 @@ msgstr "Puuttuva tiedosto"
 #: src/main.qml:417
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "Pysäytä ja sulje"
 
 #: src/main.qml:418
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"Haluatko varmasti poistaa lähteen:\n"
-"%1"
+msgstr "Haluatko varmasti pysäyttää musiikin toiston ja lopettaa?"
 
 #: src/main.qml:428 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "Vahvista sulkeminen, kun musiikki soi"
 
 #: src/main.qml:467 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -532,7 +527,7 @@ msgstr "Näytä äänenvoimakkuuden säätimet."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "Lopetetaan"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -660,10 +655,9 @@ msgid "Close application after"
 msgstr "Sulje sovellus"
 
 #: src/widgets/SleepTimerDialog.qml:160
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Valitse"
+msgstr "Aseta"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format

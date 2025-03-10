@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-07 00:41+0000\n"
-"PO-Revision-Date: 2025-01-15 09:13+0100\n"
+"PO-Revision-Date: 2025-03-08 10:15+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -254,7 +254,7 @@ msgstr "Partager"
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "Ajouter à « %1 »."
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
