@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-07 00:41+0000\n"
-"PO-Revision-Date: 2025-01-14 06:37+0100\n"
+"PO-Revision-Date: 2025-03-25 21:35+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -259,7 +259,7 @@ msgstr "Partekatu"
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "Gehitu '%1'(e)ra"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
