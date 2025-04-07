@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# SPDX-FileCopyrightText: 2023, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-07 00:41+0000\n"
-"PO-Revision-Date: 2024-12-24 19:21+0100\n"
+"PO-Revision-Date: 2025-04-07 01:12+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -42,22 +42,17 @@ msgstr "파일 없음"
 #: src/main.qml:417
 #, kde-format
 msgid "Stop and Close"
-msgstr ""
+msgstr "정지하고 끝내기"
 
 #: src/main.qml:418
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"다음 원본을 삭제하시겠습니까?\n"
-" %1"
+msgstr "음악 재생을 정지하고 끝내시겠습니까?"
 
 #: src/main.qml:428 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "음악 재생 중일 때 묻기"
 
 #: src/main.qml:467 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
@@ -255,7 +250,7 @@ msgstr "공유"
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "'%1'에 추가"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
@@ -526,7 +521,7 @@ msgstr "음량 제어를 표시합니다."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "종료"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -650,10 +645,9 @@ msgid "Close application after"
 msgstr "다음 이후 앱 끝내기"
 
 #: src/widgets/SleepTimerDialog.qml:160
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "선택"
+msgstr "설정"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
