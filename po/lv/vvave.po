@@ -1,0 +1,667 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the vvave package.
+#
+# SPDX-FileCopyrightText: 2025 Toms Trasuns <toms.trasuns@posteo.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: vvave\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-03-07 00:41+0000\n"
+"PO-Revision-Date: 2025-04-07 17:45+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 24.12.3\n"
+
+#: src/main.cpp:77
+#, kde-format
+msgid "Organize and listen to your music."
+msgstr "Sakārtojiet un klausīties ierīcē esošo mūziku"
+
+#: src/main.cpp:82 src/main.cpp:83
+#, kde-format
+msgid "Developer"
+msgstr "Izstrādātājs"
+
+#: src/main.qml:331 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/widgets/SelectionBar.qml:71
+#, kde-format
+msgid "Remove"
+msgstr "Noņemt"
+
+#: src/main.qml:351
+#, kde-format
+msgid "Missing file"
+msgstr "Trūkst datnes"
+
+#: src/main.qml:417
+#, kde-format
+msgid "Stop and Close"
+msgstr "Apturēt un aizvērt"
+
+#: src/main.qml:418
+#, kde-format
+msgid "Are you sure you want to stop the music playing and exit?"
+msgstr "Vai tiešām vēlaties apturēt mūzikas atskaņošanu un iziet?"
+
+#: src/main.qml:428 src/widgets/SettingsView/SettingsDialog.qml:87
+#, kde-format
+msgid "Ask before closing if music is playing"
+msgstr "Jautājiet pirms aizvēršanas, ja kaut ko atskaņo"
+
+#: src/main.qml:467 src/widgets/BabeTable/BabeTable.qml:149
+#, kde-format
+msgid "Remove track"
+msgid_plural "Remove %1 tracks"
+msgstr[0] "Noņemt %1 celiņu"
+msgstr[1] "Noņemt %1 celiņus"
+msgstr[2] "Noņemt %1 celiņu"
+
+#: src/main.qml:468
+#, kde-format
+msgid ""
+"Are you sure you want to remove these files? This action can not be undone."
+msgstr ""
+"Vai tiešām vēlaties noņemt šīs datnes? Šo darbību atsaukt vairs nevarēsiet."
+
+#: src/main.qml:484 src/widgets/BabeTable/BabeTable.qml:169
+#: src/widgets/SleepTimerDialog.qml:154
+#, kde-format
+msgid "Cancel"
+msgstr "Atcelt"
+
+#: src/main.qml:518
+#, kde-format
+msgid "Saved"
+msgstr "Saglabāts"
+
+#: src/main.qml:518
+#, kde-format
+msgid "Track added to playlist"
+msgstr "Celiņš ir pievienots repertuāram"
+
+#: src/main.qml:645 src/widgets/SleepTimerDialog.qml:11
+#, kde-format
+msgid "Sleep Timer"
+msgstr "Gulēšanas taimeris"
+
+#: src/main.qml:654 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#, kde-format
+msgid "Shortcuts"
+msgstr "Saīsnes"
+
+#: src/main.qml:661
+#, kde-format
+msgid "Settings"
+msgstr "Iestatījumi"
+
+#: src/main.qml:668
+#, kde-format
+msgid "About"
+msgstr "Par"
+
+#: src/main.qml:701
+#, kde-format
+msgid "Songs"
+msgstr "Dziesmas"
+
+#: src/main.qml:721 src/widgets/AlbumsView.qml:76
+#, kde-format
+msgid "Albums"
+msgstr "Albumi"
+
+#: src/main.qml:728
+#, kde-format
+msgid "No Albums!"
+msgstr "Albumu nav!"
+
+#: src/main.qml:729 src/main.qml:753 src/widgets/TracksView.qml:20
+#, kde-format
+msgid "Add new music sources"
+msgstr "Pievienojiet jaunus mūzikas avotus"
+
+#: src/main.qml:745 src/widgets/AlbumsView.qml:76
+#, kde-format
+msgid "Artists"
+msgstr "Izpildītāji"
+
+#: src/main.qml:752
+#, kde-format
+msgid "No Artists!"
+msgstr "Izpildītāju nav!"
+
+#: src/main.qml:770 src/widgets/SelectionBar.qml:46
+#, kde-format
+msgid "Tags"
+msgstr "Birkas"
+
+#: src/main.qml:779
+#, kde-format
+msgid "Folders"
+msgstr "Mapes"
+
+#: src/models/playlists/playlistsmodel.cpp:110
+#, kde-format
+msgid "Most Played"
+msgstr "Visbiežāk atskaņotie"
+
+#: src/models/playlists/playlistsmodel.cpp:117
+#, kde-format
+msgid "Random Tracks"
+msgstr "Nejauši celiņi"
+
+#: src/models/playlists/playlistsmodel.cpp:124
+#, kde-format
+msgid "Recent Tracks"
+msgstr "Nesen atskaņots"
+
+#: src/models/playlists/playlistsmodel.cpp:131
+#, kde-format
+msgid "Never Played"
+msgstr "Nekad nav atskaņots"
+
+#: src/models/playlists/playlistsmodel.cpp:138
+#, kde-format
+msgid "Classic Tracks"
+msgstr "Klasikas celiņi"
+
+#: src/services/local/powermanagementinterface.cpp:173
+#: src/services/local/powermanagementinterface.cpp:223
+#, kde-format
+msgctxt "explanation for sleep inhibit during play of music"
+msgid "Playing music"
+msgstr "Atskaņo"
+
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
+#: src/widgets/TracksView.qml:25
+#, kde-format
+msgid "Add sources"
+msgstr "Pievienot avotus"
+
+#: src/widgets/AlbumsView.qml:70
+#, kde-format
+msgid "This list is empty"
+msgstr "Šis saraksts ir tukšs"
+
+#: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
+#: src/widgets/CloudView/CloudView.qml:24
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
+#, kde-format
+msgid "Filter"
+msgid_plural "Filter %1 albums"
+msgstr[0] "Filtrēt %1 albumu"
+msgstr[1] "Filtrēt %1 albumus"
+msgstr[2] "Filtrēt %1 albumu"
+
+#: src/widgets/BabeTable/BabeTable.qml:74
+#, kde-format
+msgid "Shuffle Play"
+msgstr "Jaukt atskaņošanas secību"
+
+#: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
+#, kde-format
+msgid "Play All"
+msgstr "Atskaņot visu"
+
+#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:55
+#, kde-format
+msgid "Append All"
+msgstr "Pievienot visu"
+
+#: src/widgets/BabeTable/BabeTable.qml:150
+#, kde-format
+msgid ""
+"Are you sure you want to delete the file from your computer? This action can "
+"not be undone."
+msgstr ""
+"Vai tiešām vēlaties dzēst šo datni no ierīces? Šo darbību atsaukt nevarēsiet."
+
+#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
+#, kde-format
+msgid "Go to Artist"
+msgstr "Iet uz izpildītāju"
+
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
+#, kde-format
+msgid "Go to Album"
+msgstr "Iet uz albumu"
+
+#: src/widgets/BabeTable/TableMenu.qml:36
+#, kde-format
+msgid "Fav it"
+msgstr "Pievienot iecienītajiem"
+
+#: src/widgets/BabeTable/TableMenu.qml:36
+#, kde-format
+msgid "UnFav it"
+msgstr "Noņemt no iecienītajiem"
+
+#: src/widgets/BabeTable/TableMenu.qml:46 src/widgets/MetadataDialog.qml:16
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
+#, kde-format
+msgid "Edit"
+msgstr "Rediģēt"
+
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:523
+#: src/widgets/SelectionBar.qml:54
+#, kde-format
+msgid "Share"
+msgstr "Kopīgot"
+
+#: src/widgets/BabeTable/TableMenu.qml:66
+#, kde-format
+msgid "Add to '%1'"
+msgstr "Pievienot pie „%1“"
+
+#: src/widgets/BabeTable/TableMenu.qml:76
+#, kde-format
+msgid "Add to playlist"
+msgstr "Pievienot repertuāram"
+
+#: src/widgets/BabeTable/TableMenu.qml:86
+#, kde-format
+msgid "Select"
+msgstr "Atlasīt"
+
+#: src/widgets/BabeTable/TableMenu.qml:99
+#, kde-format
+msgid "Play Next"
+msgstr "Atskaņot nākamo"
+
+#: src/widgets/BabeTable/TableMenu.qml:124
+#, kde-format
+msgid "Show in Folder"
+msgstr "Rādīt mapē"
+
+#: src/widgets/BabeTable/TableMenu.qml:150
+#, kde-format
+msgid "Delete"
+msgstr "Dzēst"
+
+#: src/widgets/CloudView/CloudView.qml:39
+#, kde-format
+msgid "Opps!"
+msgstr "Vai, vai!"
+
+#: src/widgets/CloudView/CloudView.qml:40
+#, kde-format
+msgid ""
+"You don't have an account set up.\n"
+"You can set up your account now by clicking here or under the Accounts "
+"options in the main menu"
+msgstr ""
+"Jums nav sagatavots konts.\n"
+"Varat norādīt savu kontu, klikšķinot te vai zem Kontu opcijas galvenajā "
+"izvēlnē"
+
+#: src/widgets/FocusView.qml:158
+#, kde-format
+msgid "Find"
+msgstr "Meklēt"
+
+#: src/widgets/FocusView.qml:200
+#, kde-format
+msgid "No Results!"
+msgstr "Rezultātu nav!"
+
+#: src/widgets/FocusView.qml:201
+#, kde-format
+msgid "Try with something else"
+msgstr "Koriģējiet meklēšanu"
+
+#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#, kde-format
+msgid "Start putting together your playlist."
+msgstr "Sāciet veidot savu repertuāru."
+
+#: src/widgets/FocusView.qml:488
+#, kde-format
+msgid "Favorite"
+msgstr "Iecienīts"
+
+#: src/widgets/FocusView.qml:495
+#, kde-format
+msgid "Info"
+msgstr "Informācija"
+
+#: src/widgets/FocusView.qml:514
+#, kde-format
+msgid "Mini Mode"
+msgstr "Mini režīms"
+
+#: src/widgets/FocusView.qml:532
+#, kde-format
+msgid "Save"
+msgstr "Saglabāt"
+
+#: src/widgets/FoldersView/FoldersView.qml:33
+#, kde-format
+msgid "Filter %1 folder"
+msgid_plural "Filter %1 folders"
+msgstr[0] "Filtrēt %1 mapi"
+msgstr[1] "Filtrēt %1 mapes"
+msgstr[2] "Filtrēt %1 mapju"
+
+#: src/widgets/FoldersView/FoldersView.qml:47
+#, kde-format
+msgid "No Folders!"
+msgstr "Mapju nav!"
+
+#: src/widgets/FoldersView/FoldersView.qml:48
+#, kde-format
+msgid "Add new music to your sources to browse by folders"
+msgstr "Lai pārlūkotu pēc mapēm, pievienojiet avotiem jaunu mūziku"
+
+#: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
+#, kde-format
+msgid "No Tracks!"
+msgstr "Bez celiņiem!"
+
+#: src/widgets/FoldersView/FoldersView.qml:136
+#, kde-format
+msgid "This source folder seems to be empty!"
+msgstr "Izskatās, ka šis avots ir tukšs."
+
+#: src/widgets/InfoView/InfoView.qml:34
+#, kde-format
+msgid "Artist Info"
+msgstr "Informācija par izpildītāju"
+
+#: src/widgets/InfoView/InfoView.qml:61
+#, kde-format
+msgid "Album Info"
+msgstr "Informācija par albumu"
+
+#: src/widgets/MainPlaylist/MainPlaylist.qml:243
+#, kde-format
+msgid "Syncing to "
+msgstr "Sinhronizē uz "
+
+#: src/widgets/MetadataDialog.qml:41
+#, kde-format
+msgid "Metadata"
+msgstr "Metadati"
+
+#: src/widgets/MetadataDialog.qml:42
+#, kde-format
+msgid "Embedded metadata info."
+msgstr "Iegultie metadati."
+
+#: src/widgets/MetadataDialog.qml:46
+#, kde-format
+msgid "Track Title"
+msgstr "Celiņa nosaukums"
+
+#: src/widgets/MetadataDialog.qml:58
+#, kde-format
+msgid "Artist"
+msgstr "Izpildītājs"
+
+#: src/widgets/MetadataDialog.qml:71
+#, kde-format
+msgid "Album"
+msgstr "Albums"
+
+#: src/widgets/MetadataDialog.qml:84
+#, kde-format
+msgid "Track"
+msgstr "Celiņš"
+
+#: src/widgets/MetadataDialog.qml:97
+#, kde-format
+msgid "Genre"
+msgstr "Žanrs"
+
+#: src/widgets/MetadataDialog.qml:110
+#, kde-format
+msgid "Year"
+msgstr "Gads"
+
+#: src/widgets/MetadataDialog.qml:123
+#, kde-format
+msgid "Comment"
+msgstr "Komentārs"
+
+#: src/widgets/PlaybackBar.qml:22
+#, kde-format
+msgid "Toogle SideBar"
+msgstr "Pārslēgt sānu joslu"
+
+#: src/widgets/PlaybackBar.qml:52
+#, kde-format
+msgid "Play and pause"
+msgstr "Atskaņot un pauzēt"
+
+#: src/widgets/PlaybackBar.qml:62
+#, kde-format
+msgid "Next"
+msgstr "Nākamais"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:57
+#, kde-format
+msgid "Your playlist is empty. Start adding new music to it"
+msgstr "Repertuārs ir tukšs. Pievienojiet tam celiņus"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:68
+#, kde-format
+msgid "Remove from playlist"
+msgstr "Noņemt no repertuāra"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
+#, kde-format
+msgid "No Playlists!"
+msgstr "Repertuāru nav!"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
+#, kde-format
+msgid "Start creating new custom playlists"
+msgstr "Sāciet veidot jaunu pielāgotus repertuārus"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#, kde-format
+msgid "Remove '%1'?"
+msgstr "Vai noņemt „%1“?"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
+#, kde-format
+msgid ""
+"Are you sure you want to remove this tag? This operation can not be undone."
+msgstr ""
+"Vai tiešām vēlaties noņemt šo birku? Šo operāciju atsaukt vairs nevarēsiet."
+
+#: src/widgets/SelectionBar.qml:28
+#, kde-format
+msgid "Play"
+msgstr "Atskaņot"
+
+#: src/widgets/SelectionBar.qml:39
+#, kde-format
+msgid "Append"
+msgstr "Pievienot"
+
+#: src/widgets/SelectionBar.qml:61
+#, kde-format
+msgid "Queue"
+msgstr "Rindot"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:38
+#, kde-format
+msgid "Remove source"
+msgstr "Noņemt avotu"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:39
+#, kde-format
+msgid ""
+"Are you sure you want to remove the source: \n"
+"%1"
+msgstr ""
+"Vai tiešām vēlaties noņemt avotu:\n"
+"%1"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:55
+#, kde-format
+msgid "Playback"
+msgstr "Atskaņot"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:60
+#, kde-format
+msgid "Auto Resume"
+msgstr "Automātiski turpināt atskaņošanu"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:61
+#, kde-format
+msgid "Resume the last session playlist."
+msgstr "Turpināt atskaņot pēdējās sesijas repertuāru."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:73
+#, kde-format
+msgid "Volume"
+msgstr "Skaļums"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:74
+#, kde-format
+msgid "Show volume controls."
+msgstr "Rādīt skaļuma vadīklas."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#, kde-format
+msgid "Exiting"
+msgstr "Iziet"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:100
+#, kde-format
+msgid "Collection"
+msgstr "Kolekcija"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:105
+#, kde-format
+msgid "Fetch Artwork"
+msgstr "Ielādēt attēlus"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:106
+#, kde-format
+msgid ""
+"Gathers album and artists artworks from online services: LastFM, Spotify, "
+"MusicBrainz, iTunes, Genius, and others."
+msgstr ""
+"Ielādē albuma un izpildītāja attēlus no tiešsaistes pakalpojumiem: „LastFM“, "
+"„Spotify“, „MusicBrainz“, „iTunes“, „Genius“ un citiem."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:118
+#, kde-format
+msgid "Auto Scan"
+msgstr "Skenēt automātiski"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:119
+#, kde-format
+msgid ""
+"Scan all the music sources on startup to keep your collection up to date."
+msgstr ""
+"Ieslēdzoties skenēt visus mūzikas avotus, lai tie vienmēr būtu aktuāli."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:132
+#, kde-format
+msgid "General"
+msgstr "Pamata"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:137
+#, kde-format
+msgid "Focus View"
+msgstr "Fokusa skats"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:138
+#, kde-format
+msgid "Make the focus view the default."
+msgstr "Fokusa skatu padarīt par noklusējumu"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:153
+#, kde-format
+msgid "Artwork"
+msgstr "Attēls"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:154
+#, kde-format
+msgid "Show the cover artwork for the tracks."
+msgstr "Rādīt celiņu albuma attēlus."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:169
+#, kde-format
+msgid "Titles"
+msgstr "Nosaukumi"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:170
+#, kde-format
+msgid "Show the title of albums and artists in the grid view."
+msgstr "Režģa skatā rādīt albumu un izpildītāju nosaukumus."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:186
+#, kde-format
+msgid "Sources"
+msgstr "Avoti"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:223
+#, kde-format
+msgid "Add"
+msgstr "Pievienot"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:241
+#, kde-format
+msgid "Scan now"
+msgstr "Skenēt tagad"
+
+#: src/widgets/SettingsView/ShortcutsDialog.qml:26
+#: src/widgets/SettingsView/ShortcutsDialog.qml:39
+#, kde-format
+msgid "Unknown"
+msgstr "Nezināms"
+
+#: src/widgets/SleepTimerDialog.qml:32
+#, kde-format
+msgid "15 minutes"
+msgstr "Pēc 15 minūtēm"
+
+#: src/widgets/SleepTimerDialog.qml:49
+#, kde-format
+msgid "30 minutes"
+msgstr "Pēc 30 minūtēm"
+
+#: src/widgets/SleepTimerDialog.qml:67
+#, kde-format
+msgid "1 hour"
+msgstr "Pēc stundas"
+
+#: src/widgets/SleepTimerDialog.qml:85
+#, kde-format
+msgid "End of track"
+msgstr "Pēc celiņa beigām"
+
+#: src/widgets/SleepTimerDialog.qml:103
+#, kde-format
+msgid "End of playlist"
+msgstr "Pēc repertuāra beigām"
+
+#: src/widgets/SleepTimerDialog.qml:123
+#, kde-format
+msgid "Off"
+msgstr "Izslēgts"
+
+#: src/widgets/SleepTimerDialog.qml:145
+#, kde-format
+msgid "Close application after"
+msgstr "Aizvērt programmu pēc"
+
+#: src/widgets/SleepTimerDialog.qml:160
+#, kde-format
+msgid "Set"
+msgstr "Iestatīt"
+
+#: src/widgets/TracksView.qml:31
+#, kde-format
+msgid "Open file"
+msgstr "Atvērt datni"
