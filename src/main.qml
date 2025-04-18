@@ -412,9 +412,9 @@ Maui.ApplicationWindow
     Component
     {
         id: _closeDialogComponent
+
         Maui.InfoDialog
         {
-            title: i18n("Stop and Close")
             message: i18n("Are you sure you want to stop the music playing and exit?")
 
             template.iconSource: "dialog-warning"
@@ -427,6 +427,7 @@ Maui.ApplicationWindow
                 onToggled: settings.askBeforeClose = checked
                 text: i18n("Ask before closing if music is playing")
             }
+
             onRejected: close()
             onAccepted:
             {
@@ -533,6 +534,45 @@ Maui.ApplicationWindow
         }
     }
 
+    Component
+    {
+        id: _mainMenuComponent
+        Maui.ToolButtonMenu
+        {
+            icon.name: "application-menu"
+
+            MenuItem
+            {
+                text: i18n("Sleep Timer")
+                icon.name: "player-time"
+                onTriggered: openSleepTimerDialog()
+            }
+
+            MenuSeparator{}
+
+            MenuItem
+            {
+                text: i18n("Shortcuts")
+                icon.name: "configure-shortcuts"
+                onTriggered: openShortcutsDialog()
+            }
+
+            MenuItem
+            {
+                text: i18n("Settings")
+                icon.name: "settings-configure"
+                onTriggered: openSettingsDialog()
+            }
+
+            MenuItem
+            {
+                text: i18n("About")
+                icon.name: "documentinfo"
+                onTriggered: Maui.App.aboutDialog()
+            }
+        }
+    }
+
     Maui.SideBarView
     {
         id: _sideBarView
@@ -635,41 +675,7 @@ Maui.ApplicationWindow
                     headBar.leftContent: Loader
                     {
                         asynchronous: true
-
-                        sourceComponent: Maui.ToolButtonMenu
-                        {
-                            icon.name: "application-menu"
-
-                            MenuItem
-                            {
-                                text: i18n("Sleep Timer")
-                                icon.name: "player-time"
-                                onTriggered: openSleepTimerDialog()
-                            }
-
-                            MenuSeparator{}
-
-                            MenuItem
-                            {
-                                text: i18n("Shortcuts")
-                                icon.name: "configure-shortcuts"
-                                onTriggered: openShortcutsDialog()
-                            }
-
-                            MenuItem
-                            {
-                                text: i18n("Settings")
-                                icon.name: "settings-configure"
-                                onTriggered: openSettingsDialog()
-                            }
-
-                            MenuItem
-                            {
-                                text: i18n("About")
-                                icon.name: "documentinfo"
-                                onTriggered: Maui.App.aboutDialog()
-                            }
-                        }
+                        sourceComponent: _mainMenuComponent
                     }
 
                     footer: SelectionBar

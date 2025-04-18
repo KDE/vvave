@@ -152,6 +152,13 @@ StackView
             headBar.background: null
             footBar.background: null
             footBar.forceCenterMiddleContent: root.isWide
+
+            headBar.leftContent: Loader
+            {
+                asynchronous: true
+                sourceComponent: _mainMenuComponent
+            }
+
             footBar.middleContent: Maui.TextFieldPopup
             {
                 id: _filterField
@@ -485,7 +492,6 @@ StackView
                             {
                                 enabled: root.currentTrack
                                 url: root.currentTrack.url
-                                text: i18n("Favorite")
                             }
 
                             ToolButton
@@ -493,7 +499,7 @@ StackView
 
                                 flat: true
                                 text: i18n("Info")
-
+                                display: ToolButton.IconOnly
                                 icon.name: "documentinfo"
                                 checkable: true
                                 checked: control.depth === 2
@@ -512,7 +518,7 @@ StackView
                             ToolButton
                             {
                                 text: i18n("Mini Mode")
-
+                                display: ToolButton.IconOnly
                                 flat: true
                                 icon.name: "window"
                                 onClicked: toggleMiniMode()
@@ -521,7 +527,7 @@ StackView
                             ToolButton
                             {
                                 text: i18n("Share")
-
+                                display: ToolButton.IconOnly
                                 flat: true
                                 icon.name: "document-share"
                                 onClicked: Maui.Platform.shareFiles([currentTrack.url])
@@ -530,7 +536,7 @@ StackView
                             ToolButton
                             {
                                 text: i18n("Save")
-
+                                display: ToolButton.IconOnly
                                 flat: true
                                 icon.name: "tag"
                                 onClicked: tagUrls([currentTrack.url])

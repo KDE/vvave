@@ -18,7 +18,7 @@ Loader
     scale: root.focusView ? 2 : 1
     opacity: root.focusView ? 0 :  1
 
-    property int radius:  root.focusView ? Maui.Style.radiusV : Math.min(width, height)
+    property int radius: root.focusView || !isPlaying ? Maui.Style.radiusV : Math.min(width, height)
 
     Behavior on radius
     {
@@ -95,7 +95,7 @@ Loader
 
         background: Rectangle
         {
-            color: Maui.Theme.backgroundColor
+            color: "white"
 
             radius: control.radius
             // property color borderColor: Maui.Theme.textColor
@@ -158,6 +158,7 @@ Loader
 
             Image
             {
+                id: _img
                 anchors.fill: parent
                 source: "image://artwork/album:"+currentTrack.artist + ":"+ currentTrack.album
                 // verticalAlignment:  Image.AlignTop
@@ -170,6 +171,8 @@ Loader
                     duration: 7000
                     loops: Animation.Infinite
                     running: isPlaying && Maui.Style.enableEffects
+                    // alwaysRunToEnd: true
+                    onStopped: _img.rotation = 0
                 }
             }
 
