@@ -72,39 +72,38 @@ Maui.PopupPage
 
     Component.onCompleted: {
         let categories = []
-        let category_shortcuts = {}
-        for (let i = 0; i < shortcuts.length; i++) {
-            let sc = shortcuts[i]
-            if (!(sc.dialogCategory in category_shortcuts)) {
-                categories.push(sc.dialogCategory)
-                category_shortcuts[sc.dialogCategory] = []
-            }
-            category_shortcuts[sc.dialogCategory].push({
-                label: sc.dialogLabel,
-                // combo: sc.nativeText.split(/(?<=[^\+])\+|\+(?=[^\+])/)
-                combo: sc.nativeText
-                    .split("+")
-                    .map((key) => key == "" ? "+" : key)
-                    .join("\n")
-                    .replace(/\+\n\+/g, "+")
-                    .split("\n")
-                // Split on "+" but try to handle shortcuts that include a literal [+] key.
-                // QML doesn't like lookbehinds, so we get this chain.
-            })
-        }
+                let category_shortcuts = {}
+                for (let i = 0; i < shortcuts.length; i++)
+                {
+                    let sc = shortcuts[i]
+                    if (!(sc.dialogCategory in category_shortcuts)) {
+                        categories.push(sc.dialogCategory)
+                        category_shortcuts[sc.dialogCategory] = []
+                    }
+                    var cat = category_shortcuts[sc.dialogCategory]
 
-        for (let category of categories) {
-            let section = _shortcutCategoryComponent.createObject(control)
-            console.log("Trying ot push to scollable")
-            scrollable.push(section)
-            section.setTitle(category)
-            for (let shortcut of category_shortcuts[category]) {
-                let label = _shortcutLabelComponent.createObject(section)
-                section.content.push(label)
-                label.setText(shortcut.label)
-                label.addKeys(shortcut.combo)
-            }
-        }
+                    var combo = sc.nativeText.split("+").map((key) => key == "" ? "+" : key).join("\n").replace('/\+\n\+/g', "+").split("\n")
+                    cat.push({
+                        label: sc.dialogLabel,
+                        // combo: sc.nativeText.split(/(?<=[^\+])\+|\+(?=[^\+])/)
+                        combo: combo
+                        // Split on "+" but try to handle shortcuts that include a literal [+] key.
+                        // QML doesn't like lookbehinds, so we get this chain.
+                    })
+                }
+
+                for (let category of categories) {
+                    let section = _shortcutCategoryComponent.createObject(control)
+                    console.log("Trying ot push to scollable")
+                    scrollable.push(section)
+                    section.setTitle(category)
+                    for (let shortcut of category_shortcuts[category]) {
+                        let label = _shortcutLabelComponent.createObject(section)
+                        section.content.push(label)
+                        label.setText(shortcut.label)
+                        label.addKeys(shortcut.combo)
+                    }
+                }
 
     }
 }

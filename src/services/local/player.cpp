@@ -5,6 +5,7 @@
 #include <QNetworkRequest>
 #include <QByteArrayView>
 #include <QTime>
+#include <QThread>
 
 #include "powermanagementinterface.h"
 
@@ -15,6 +16,7 @@ Player::Player(QObject *parent)
     , m_power(new PowerManagementInterface(this))
 {
     this->player->setAudioOutput(m_output);
+    // this->player->setAutoPlay(true);
     m_output->setVolume(this->volume);
     connect(this->player, &QMediaPlayer::playbackStateChanged, [this](QMediaPlayer::PlaybackState state) {
         auto position = this->player->position();
@@ -26,6 +28,16 @@ Player::Player(QObject *parent)
         Q_EMIT this->stateChanged();
         Q_EMIT this->playingChanged();
     });
+
+    // connect(this->player, &QMediaPlayer::mediaStatusChanged, [this](auto status)
+    // {
+    //     qDebug() << status;
+    //     if(status == QMediaPlayer::MediaStatus::LoadedMedia)
+    //     {
+    //         player->setPosition(500);
+    //          this->play();
+    //     }
+    // });
 
     connect(this->player, &QMediaPlayer::positionChanged, this, &Player::posChanged);
     connect(this->player, &QMediaPlayer::durationChanged, this, &Player::durationChanged);
@@ -73,8 +85,20 @@ bool Player::play() const
 {
     if (this->url.isEmpty())
         return false;
+
+    const auto status = player->mediaStatus();
+     if(status == QMediaPlayer::MediaStatus::NoMedia ||
+         // status == QMediaPlayer::MediaStatus::LoadingMedia ||
+         status == QMediaPlayer::MediaStatus::StalledMedia ||
+         status == QMediaPlayer::MediaStatus::InvalidMedia)
+     {
+qWarning() << "Error in playback and media status" << status;
+return false;
+    }
+
     this->player->play();
     this->m_power->setPreventSleep(true);
+
     return true;
 }
 
@@ -113,8 +137,8 @@ QString Player::transformTime(const int &value)
 
 void Player::setUrl(const QUrl &value)
 {
-    //    if(value == this->url)
-    //        return;
+       if(value == this->url)
+           return;
 
     this->url = value;
     Q_EMIT this->urlChanged();

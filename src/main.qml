@@ -345,7 +345,6 @@ Maui.ApplicationWindow
         model: mainPlaylist.listModel.list
         onCurrentTrackChanged: Player.playTrack()
 
-
         onMissingFile: (track) =>
                        {
                            var message = i18n("Missing file")

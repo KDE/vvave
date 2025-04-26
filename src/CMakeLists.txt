@@ -68,6 +68,9 @@ else()
         ${vvave_QML_QRC})
 endif()
 
+set_source_files_properties(utils/Player.js PROPERTIES QT_QML_SKIP_QMLDIR_ENTRY TRUE)
+set_source_files_properties(db/Queries.js PROPERTIES QT_QML_SKIP_QMLDIR_ENTRY TRUE)
+
 qt_add_qml_module(${PROJECT_NAME} URI app.maui.vvave
     NO_PLUGIN
     QML_FILES
