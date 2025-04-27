@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 00:41+0000\n"
+"POT-Creation-Date: 2025-04-27 00:41+0000\n"
 "PO-Revision-Date: 2024-12-29 23:03+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -36,17 +36,12 @@ msgstr "विकासकः"
 msgid "Remove"
 msgstr "अपाकरोति"
 
-#: src/main.qml:351
+#: src/main.qml:350
 #, kde-format
 msgid "Missing file"
 msgstr "अनुपलब्धा सञ्चिका"
 
 #: src/main.qml:417
-#, kde-format
-msgid "Stop and Close"
-msgstr ""
-
-#: src/main.qml:418
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure you want to remove the source: \n"
@@ -54,7 +49,7 @@ msgstr ""
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr "किं भवान् निश्चितरूपेण स्रोतः हर्तुं इच्छति: %1"
 
-#: src/main.qml:428 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr ""
@@ -88,62 +83,62 @@ msgstr "रक्षितम्"
 msgid "Track added to playlist"
 msgstr "प्लेलिस्ट् मध्ये ट्रैक योजितः"
 
-#: src/main.qml:645 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:545 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "स्लीप टाइमर"
 
-#: src/main.qml:654 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:554 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "शॉर्टकट"
 
-#: src/main.qml:661
+#: src/main.qml:561
 #, kde-format
 msgid "Settings"
 msgstr "सेटिंग्स्"
 
-#: src/main.qml:668
+#: src/main.qml:568
 #, kde-format
 msgid "About"
 msgstr "विषये"
 
-#: src/main.qml:701
+#: src/main.qml:706
 #, kde-format
 msgid "Songs"
 msgstr "गीतानि"
 
-#: src/main.qml:721 src/widgets/AlbumsView.qml:76
+#: src/main.qml:726 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "एल्बम"
 
-#: src/main.qml:728
+#: src/main.qml:733
 #, kde-format
 msgid "No Albums!"
 msgstr "कोऽपि एल्बमः नास्ति!"
 
-#: src/main.qml:729 src/main.qml:753 src/widgets/TracksView.qml:20
+#: src/main.qml:734 src/main.qml:758 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "नूतनानि सङ्गीतस्रोतानि योजयन्तु"
 
-#: src/main.qml:745 src/widgets/AlbumsView.qml:76
+#: src/main.qml:750 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "कलाकाराः"
 
-#: src/main.qml:752
+#: src/main.qml:757
 #, kde-format
 msgid "No Artists!"
 msgstr "न कलाकाराः!"
 
-#: src/main.qml:770 src/widgets/SelectionBar.qml:46
+#: src/main.qml:775 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "टैग्स"
 
-#: src/main.qml:779
+#: src/main.qml:784
 #, kde-format
 msgid "Folders"
 msgstr "पुटम्"
@@ -249,7 +244,7 @@ msgstr "UnFav it"
 msgid "Edit"
 msgstr "सम्पादन"
 
-#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:523
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:529
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
@@ -300,42 +295,37 @@ msgstr ""
 "भवतः खातं स्थापितं नास्ति। अत्र क्लिक् कृत्वा अथवा मुख्यमेनूमध्ये Accounts विकल्पानां अधः "
 "इदानीं स्वस्य खातं स्थापयितुं शक्नुवन्ति"
 
-#: src/widgets/FocusView.qml:158
+#: src/widgets/FocusView.qml:165
 #, kde-format
 msgid "Find"
 msgstr "अन्वेषय"
 
-#: src/widgets/FocusView.qml:200
+#: src/widgets/FocusView.qml:207
 #, kde-format
 msgid "No Results!"
 msgstr "न परिणामः!"
 
-#: src/widgets/FocusView.qml:201
+#: src/widgets/FocusView.qml:208
 #, kde-format
 msgid "Try with something else"
 msgstr "अन्येन किमपि सह प्रयतस्व"
 
-#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#: src/widgets/FocusView.qml:247 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "स्वस्य प्लेलिस्ट् एकत्र स्थापयितुं आरभत।"
 
-#: src/widgets/FocusView.qml:488
-#, kde-format
-msgid "Favorite"
-msgstr "प्रिय"
-
-#: src/widgets/FocusView.qml:495
+#: src/widgets/FocusView.qml:501
 #, kde-format
 msgid "Info"
 msgstr "Info"
 
-#: src/widgets/FocusView.qml:514
+#: src/widgets/FocusView.qml:520
 #, kde-format
 msgid "Mini Mode"
 msgstr "मिनी मोड"
 
-#: src/widgets/FocusView.qml:532
+#: src/widgets/FocusView.qml:538
 #, kde-format
 msgid "Save"
 msgstr "रक्ष्"
@@ -663,6 +653,9 @@ msgstr "विचि"
 #, kde-format
 msgid "Open file"
 msgstr "सञ्चिकां उद्घाटयन्तु"
+
+#~ msgid "Favorite"
+#~ msgstr "प्रिय"
 
 #~ msgid "Accept"
 #~ msgstr "स्वीकरोतु"

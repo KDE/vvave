@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 00:41+0000\n"
+"POT-Creation-Date: 2025-04-27 00:41+0000\n"
 "PO-Revision-Date: 2025-03-07 16:56+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -36,22 +36,17 @@ msgstr "Desarrollador"
 msgid "Remove"
 msgstr "Eliminar"
 
-#: src/main.qml:351
+#: src/main.qml:350
 #, kde-format
 msgid "Missing file"
 msgstr "Archivo ausente"
 
 #: src/main.qml:417
 #, kde-format
-msgid "Stop and Close"
-msgstr "Detener y cerrar"
-
-#: src/main.qml:418
-#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr "¿Seguro que quiere detener la música que está reproduciendo y salir?"
 
-#: src/main.qml:428 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr "Preguntar antes de cerrar si se está reproduciendo música"
@@ -86,62 +81,62 @@ msgstr "Guardada"
 msgid "Track added to playlist"
 msgstr "Pista añadida a la lista de reproducción"
 
-#: src/main.qml:645 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:545 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Temporizador para reposo"
 
-#: src/main.qml:654 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:554 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Atajos de teclado"
 
-#: src/main.qml:661
+#: src/main.qml:561
 #, kde-format
 msgid "Settings"
 msgstr "Preferencias"
 
-#: src/main.qml:668
+#: src/main.qml:568
 #, kde-format
 msgid "About"
 msgstr "Acerca de"
 
-#: src/main.qml:701
+#: src/main.qml:706
 #, kde-format
 msgid "Songs"
 msgstr "Canciones"
 
-#: src/main.qml:721 src/widgets/AlbumsView.qml:76
+#: src/main.qml:726 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Álbumes"
 
-#: src/main.qml:728
+#: src/main.qml:733
 #, kde-format
 msgid "No Albums!"
 msgstr "No hay álbumes"
 
-#: src/main.qml:729 src/main.qml:753 src/widgets/TracksView.qml:20
+#: src/main.qml:734 src/main.qml:758 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Añadir nueva fuente de música"
 
-#: src/main.qml:745 src/widgets/AlbumsView.qml:76
+#: src/main.qml:750 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistas"
 
-#: src/main.qml:752
+#: src/main.qml:757
 #, kde-format
 msgid "No Artists!"
 msgstr "No hay artistas"
 
-#: src/main.qml:770 src/widgets/SelectionBar.qml:46
+#: src/main.qml:775 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: src/main.qml:779
+#: src/main.qml:784
 #, kde-format
 msgid "Folders"
 msgstr "Carpetas"
@@ -248,7 +243,7 @@ msgstr "No favorito"
 msgid "Edit"
 msgstr "Editar"
 
-#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:523
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:529
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
@@ -300,42 +295,37 @@ msgstr ""
 "Puede configurar una ahora pulsando aquí o debajo de las opciones de las "
 "cuentas en el menú principal."
 
-#: src/widgets/FocusView.qml:158
+#: src/widgets/FocusView.qml:165
 #, kde-format
 msgid "Find"
 msgstr "Buscar"
 
-#: src/widgets/FocusView.qml:200
+#: src/widgets/FocusView.qml:207
 #, kde-format
 msgid "No Results!"
 msgstr "No hay resultados"
 
-#: src/widgets/FocusView.qml:201
+#: src/widgets/FocusView.qml:208
 #, kde-format
 msgid "Try with something else"
 msgstr "Pruebe con algo"
 
-#: src/widgets/FocusView.qml:240 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#: src/widgets/FocusView.qml:247 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Empiece a crear la lista de reproducción."
 
-#: src/widgets/FocusView.qml:488
-#, kde-format
-msgid "Favorite"
-msgstr "Favorita"
-
-#: src/widgets/FocusView.qml:495
+#: src/widgets/FocusView.qml:501
 #, kde-format
 msgid "Info"
 msgstr "Información"
 
-#: src/widgets/FocusView.qml:514
+#: src/widgets/FocusView.qml:520
 #, kde-format
 msgid "Mini Mode"
 msgstr "Modo mini"
 
-#: src/widgets/FocusView.qml:532
+#: src/widgets/FocusView.qml:538
 #, kde-format
 msgid "Save"
 msgstr "Guardar"
@@ -667,3 +657,9 @@ msgstr "Definir"
 #, kde-format
 msgid "Open file"
 msgstr "Abrir archivo"
+
+#~ msgid "Stop and Close"
+#~ msgstr "Detener y cerrar"
+
+#~ msgid "Favorite"
+#~ msgstr "Favorita"
