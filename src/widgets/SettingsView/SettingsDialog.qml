@@ -224,13 +224,13 @@ Maui.SettingsDialog
                 //                flat: true
                 onClicked:
                 {
-                    _dialogLoader.sourceComponent = _fileDialogComponent
-                    dialog.mode = FB.FileDialog.Modes.Open
-                    dialog.browser.settings.onlyDirs = true
-                    dialog.callback = function(urls)
-                    {
-                        Vvave.addSources(urls)
-                    }
+                    let props =({'mode' : FB.FileDialog.Modes.Open,
+                                    'browser.settings.onlyDirs' : true,
+                                    'callback' : function(urls)
+                                    {
+                                        Vvave.addSources(urls)
+                                    }})
+                    var dialog = _fileDialogComponent.createObject(root, props)
                     dialog.open()
                 }
             }

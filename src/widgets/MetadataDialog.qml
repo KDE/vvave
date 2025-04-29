@@ -13,7 +13,7 @@ Maui.InfoDialog
 
     property Maui.BaseModel model
 
-    title: i18n("Edit")
+    // title: i18n("Edit")
 
     signal edited(var data, int index)
 

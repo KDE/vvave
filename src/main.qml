@@ -3,6 +3,7 @@ import QtCore
 
 import QtQuick.Controls
 import QtQuick.Window
+import QtQuick.Layouts
 
 import org.mauikit.controls as Maui
 import org.mauikit.filebrowsing  as FB
@@ -27,12 +28,12 @@ Maui.ApplicationWindow
 
     Maui.Style.styleType: focusView ? Maui.Style.Adaptive : undefined
 
+    property QtObject tagsDialog : null
 
     /***************************************************/
     /******************** ALIASES ********************/
     /*************************************************/
     readonly property alias selectionBar: _selectionBar
-    readonly property alias dialog : _dialogLoader.item
     readonly property alias playlistManager : playlist
 
     /***************************************************/
@@ -77,9 +78,8 @@ Maui.ApplicationWindow
                {
                    if(settings.askBeforeClose && isPlaying && (!root._forceClose))
                    {
-
                        close.accepted = false
-                       _dialogLoader.sourceComponent = _closeDialogComponent
+                       var dialog = _closeDialogComponent.createObject(root)
                        dialog.open()
                        return
                    }
@@ -403,11 +403,6 @@ Maui.ApplicationWindow
         }
     }
 
-    Loader
-    {
-        id: _dialogLoader
-    }
-
     Component
     {
         id: _closeDialogComponent
@@ -415,6 +410,7 @@ Maui.ApplicationWindow
         Maui.InfoDialog
         {
             message: i18n("Are you sure you want to stop the music playing and exit?")
+            onClosed: destroy()
 
             template.iconSource: "dialog-warning"
 
@@ -422,6 +418,7 @@ Maui.ApplicationWindow
 
             CheckBox
             {
+                Layout.fillWidth: true
                 checked: settings.askBeforeClose
                 onToggled: settings.askBeforeClose = checked
                 text: i18n("Ask before closing if music is playing")
@@ -439,19 +436,19 @@ Maui.ApplicationWindow
     Component
     {
         id: _fileDialogComponent
-        FB.FileDialog {}
+        FB.FileDialog {onClosed: destroy()}
     }
 
     Component
     {
         id: _shortcutsDialogComponent
-        ShortcutsDialog {}
+        ShortcutsDialog {onClosed: destroy()}
     }
 
     Component
     {
         id: _settingsDialogComponent
-        SettingsDialog {}
+        SettingsDialog {onClosed: destroy()}
     }
 
     Component
@@ -461,6 +458,7 @@ Maui.ApplicationWindow
         FB.FileListingDialog
         {
             id: _removeDialog
+            onClosed: destroy()
 
             urls: selectionBar.uris
 
@@ -529,7 +527,7 @@ Maui.ApplicationWindow
 
         SleepTimerDialog
         {
-
+            onClosed: destroy()
         }
     }
 
@@ -876,13 +874,13 @@ Maui.ApplicationWindow
 
     function openShortcutsDialog()
     {
-        _dialogLoader.sourceComponent = _shortcutsDialogComponent
+        var dialog = _shortcutsDialogComponent.createObject(root)
         dialog.open()
     }
 
     function openSettingsDialog()
     {
-        _dialogLoader.sourceComponent = _settingsDialogComponent
+        var dialog = _settingsDialogComponent.createObject(root)
         dialog.open()
     }
 
@@ -939,9 +937,15 @@ Maui.ApplicationWindow
 
     function tagUrls(urls)
     {
-        _dialogLoader.sourceComponent = _playlistDialogComponent
-        dialog.composerList.urls = urls
-        dialog.open()
+        if(root.tagsDialog)
+        {
+            root.tagsDialog.composerList.urls = urls
+        }else
+        {
+           root.tagsDialog =  _playlistDialogComponent.createObject(root, ({'composerList.urls' : urls}))
+        }
+
+        root.tagsDialog.open()
     }
 
     function openFiles(urls)
@@ -977,7 +981,7 @@ Maui.ApplicationWindow
 
     function openSleepTimerDialog()
     {
-        _dialogLoader.sourceComponent = _sleepTimerDialogComponent
+        var dialog = _sleepTimerDialogComponent.createObject(root)
         dialog.open()
     }
 

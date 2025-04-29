@@ -132,7 +132,7 @@ Maui.Page
         MetadataDialog
         {
             model: listModel
-
+            onClosed: destroy()
             onEdited: (data, index) =>
                       {
                           control.list.updateMetadata(data, model.mappedToSource(index))
@@ -148,7 +148,7 @@ Maui.Page
         {
             title: i18n("Remove track")
             message: i18n("Are you sure you want to delete the file from your computer? This action can not be undone.")
-
+            onClosed: destroy()
             actions: [
                 Action
                 {
@@ -205,15 +205,14 @@ Maui.Page
 
         onSaveToClicked:
         {
-           tagUrls(filterSelection(listModel.get(contextMenu.index).url))
+            tagUrls(filterSelection(listModel.get(contextMenu.index).url))
         }
 
         onOpenWithClicked: FB.FM.openLocation(filterSelection(listModel.get(contextMenu.index).url))
 
         onDeleteClicked:
         {
-            _dialogLoader.sourceComponent = _removeDialogComponent
-            dialog.urls = filterSelection(listModel.get(contextMenu.index).url)
+            var dialog = _removeDialogComponent.createObject(control, ({'urls' : filterSelection(listModel.get(contextMenu.index).url)}))
             dialog.open()
         }
 
@@ -224,8 +223,7 @@ Maui.Page
 
         onEditClicked:
         {
-            _dialogLoader.sourceComponent = _metadataDialogComponent
-            dialog.index = contextMenu.index
+            var dialog = _metadataDialogComponent.createObject(control, ({'index': contextMenu.index}))
             dialog.open()
         }
 

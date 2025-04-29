@@ -384,12 +384,10 @@ Maui.Page
 
         function saveList()
         {
-            var trackList = listModel.list.urls()
+            let trackList = listModel.list.urls()
             if(listModel.list.count > 0)
             {
-                _dialogLoader.sourceComponent = _playlistDialogComponent
-                dialog.composerList.urls = trackList
-                dialog.open()
+                tagUrls(trackList)
             }
         }
     }

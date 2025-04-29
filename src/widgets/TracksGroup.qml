@@ -90,17 +90,14 @@ Maui.SectionGroup
 
         onSaveToClicked:
         {
-            _dialogLoader.sourceComponent = _playlistDialogComponent
-            dialog.composerList.urls = filterSelection(listModel.get(contextMenu.index).url)
-            dialog.open()
+            tagUrls(filterSelection(listModel.get(contextMenu.index).url))
         }
 
         onOpenWithClicked: FB.FM.openLocation(filterSelection(listModel.get(contextMenu.index).url))
 
         onDeleteClicked:
         {
-            _dialogLoader.sourceComponent = _removeDialogComponent
-            dialog.urls = filterSelection(listModel.get(contextMenu.index).url)
+            var dialog = _removeDialogComponent.createObject(root, ({'urls' : filterSelection(listModel.get(contextMenu.index).url)}))
             dialog.open()
         }
 
@@ -111,8 +108,7 @@ Maui.SectionGroup
 
         onEditClicked:
         {
-            _dialogLoader.sourceComponent = _metadataDialogComponent
-            dialog.index = contextMenu.index
+           var dialog = _metadataDialogComponent.createObject(root, ({'index' : contextMenu.index}))
             dialog.open()
         }
 

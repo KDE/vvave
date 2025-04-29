@@ -23,7 +23,7 @@ StackView
     Component
     {
         id: newPlaylistDialogComponent
-        FB.NewTagDialog {}
+        FB.NewTagDialog {onClosed: destroy()}
     }
 
     initialItem: PlaylistsViewModel

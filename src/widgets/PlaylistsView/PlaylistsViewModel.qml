@@ -31,6 +31,7 @@ Maui.AltBrowser
         id: _removeTagDialogComponent
         Maui.InfoDialog
         {
+            onClosed: destroy()
             title: i18n("Remove '%1'?", currentPlaylist)
             message: i18n("Are you sure you want to remove this tag? This operation can not be undone.")
             onAccepted:
@@ -61,7 +62,7 @@ Maui.AltBrowser
             icon.name: "edit-delete"
             onTriggered:
             {
-                _dialogLoader.sourceComponent = _removeTagDialogComponent
+                var dialog = _removeTagDialogComponent.createObject(control)
                 dialog.open()
             }
         }
@@ -102,7 +103,7 @@ Maui.AltBrowser
         icon.name: "list-add"
         onClicked:
         {
-            _dialogLoader.sourceComponent = newPlaylistDialogComponent
+           var dialog = newPlaylistDialogComponent.createObject(control)
             dialog.open()
         }
     }

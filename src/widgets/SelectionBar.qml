@@ -73,7 +73,7 @@ Maui.SelectionBar
             Maui.Theme.textColor: Maui.Theme.negativeTextColor
             onTriggered:
             {
-                _dialogLoader.sourceComponent = _removeDialogComponent
+                var dialog = _removeDialogComponent.createObject(root)
                 dialog.open()
             }
         }
