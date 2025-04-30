@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:41+0000\n"
+"POT-Creation-Date: 2025-04-30 00:41+0000\n"
 "PO-Revision-Date: 2025-03-11 11:01+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -27,8 +27,8 @@ msgstr "Organisa tu cargas."
 msgid "Developer"
 msgstr "Developpator"
 
-#: src/main.qml:331 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/main.qml:331 src/main.qml:472 src/widgets/BabeTable/BabeTable.qml:156
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
@@ -39,24 +39,24 @@ msgstr "Remove"
 msgid "Missing file"
 msgstr "File mancante"
 
-#: src/main.qml:417
+#: src/main.qml:412
 #, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
 msgstr "Tu es secur que tu vole stoppar le reproduction de musica e exir?"
 
-#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:424 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr "Demanda ante clauder si musica es executante"
 
-#: src/main.qml:467 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:465 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Remove tracia"
 msgstr[1] "Remove %1 tracias"
 
-#: src/main.qml:468
+#: src/main.qml:466
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
@@ -64,78 +64,78 @@ msgstr ""
 "Tu es secur que tu vole remover iste files? Iste action non pote esser "
 "annullate."
 
-#: src/main.qml:484 src/widgets/BabeTable/BabeTable.qml:169
+#: src/main.qml:482 src/widgets/BabeTable/BabeTable.qml:169
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
 msgstr "Cancella"
 
-#: src/main.qml:518
+#: src/main.qml:516
 #, kde-format
 msgid "Saved"
 msgstr "Salveguardate"
 
-#: src/main.qml:518
+#: src/main.qml:516
 #, kde-format
 msgid "Track added to playlist"
 msgstr "Tracia addite allista de reproduction"
 
-#: src/main.qml:545 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:543 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Temporisator de dormir"
 
-#: src/main.qml:554 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:552 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Vias breve"
 
-#: src/main.qml:561
+#: src/main.qml:559
 #, kde-format
 msgid "Settings"
 msgstr "Preferentias"
 
-#: src/main.qml:568
+#: src/main.qml:566
 #, kde-format
 msgid "About"
 msgstr "A proposito"
 
-#: src/main.qml:706
+#: src/main.qml:704
 #, kde-format
 msgid "Songs"
 msgstr "Cantos"
 
-#: src/main.qml:726 src/widgets/AlbumsView.qml:76
+#: src/main.qml:724 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumes"
 
-#: src/main.qml:733
+#: src/main.qml:731
 #, kde-format
 msgid "No Albums!"
 msgstr "Necun Albumes!"
 
-#: src/main.qml:734 src/main.qml:758 src/widgets/TracksView.qml:20
+#: src/main.qml:732 src/main.qml:756 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Adde nove fontes de musica"
 
-#: src/main.qml:750 src/widgets/AlbumsView.qml:76
+#: src/main.qml:748 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistas"
 
-#: src/main.qml:757
+#: src/main.qml:755
 #, kde-format
 msgid "No Artists!"
 msgstr "Necun Artistas!"
 
-#: src/main.qml:775 src/widgets/SelectionBar.qml:46
+#: src/main.qml:773 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiquettas"
 
-#: src/main.qml:784
+#: src/main.qml:782
 #, kde-format
 msgid "Folders"
 msgstr "Dossieres"
@@ -185,7 +185,7 @@ msgstr "Iste lista es vacue"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
 #: src/widgets/CloudView/CloudView.qml:24
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
@@ -236,8 +236,8 @@ msgstr "Fav lo"
 msgid "UnFav it"
 msgstr "UnFav lo (levar lo ex favoritos)"
 
-#: src/widgets/BabeTable/TableMenu.qml:46 src/widgets/MetadataDialog.qml:16
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
+#: src/widgets/BabeTable/TableMenu.qml:46
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
 #, kde-format
 msgid "Edit"
 msgstr "Modifica"
@@ -451,12 +451,12 @@ msgstr "Nulle lista de reproduction!"
 msgid "Start creating new custom playlists"
 msgstr "Initia crear nove listas de reproduction personalisate"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid "Remove '%1'?"
 msgstr "Remove '%1'?"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."

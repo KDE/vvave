@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-27 00:41+0000\n"
+"POT-Creation-Date: 2025-04-30 00:41+0000\n"
 "PO-Revision-Date: 2025-01-11 12:34+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -29,8 +29,8 @@ msgstr "Tvarkyti muziką ir jos klausytis."
 msgid "Developer"
 msgstr "Plėtotojas"
 
-#: src/main.qml:331 src/main.qml:474 src/widgets/BabeTable/BabeTable.qml:156
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:60
+#: src/main.qml:331 src/main.qml:472 src/widgets/BabeTable/BabeTable.qml:156
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
@@ -41,7 +41,7 @@ msgstr "Šalinti"
 msgid "Missing file"
 msgstr "Trūksta failo"
 
-#: src/main.qml:417
+#: src/main.qml:412
 #, fuzzy, kde-format
 #| msgid ""
 #| "Are you sure you want to remove the source: \n"
@@ -51,12 +51,12 @@ msgstr ""
 "Ar tikrai norite pašalinti šaltinį: \n"
 "%1"
 
-#: src/main.qml:427 src/widgets/SettingsView/SettingsDialog.qml:87
+#: src/main.qml:424 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
 msgstr ""
 
-#: src/main.qml:467 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:465 src/widgets/BabeTable/BabeTable.qml:149
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -65,85 +65,85 @@ msgstr[1] "Šalinti %1 takelius"
 msgstr[2] "Šalinti %1 takelių"
 msgstr[3] "Šalinti %1 takelį"
 
-#: src/main.qml:468
+#: src/main.qml:466
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
 "Ar tikrai norite pašalinti šiuos failus? Šio veiksmo neįmanoma bus atšaukti."
 
-#: src/main.qml:484 src/widgets/BabeTable/BabeTable.qml:169
+#: src/main.qml:482 src/widgets/BabeTable/BabeTable.qml:169
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
 msgstr "Atsisakyti"
 
-#: src/main.qml:518
+#: src/main.qml:516
 #, kde-format
 msgid "Saved"
 msgstr "Įrašyta"
 
-#: src/main.qml:518
+#: src/main.qml:516
 #, kde-format
 msgid "Track added to playlist"
 msgstr "Takelis pridėtas į grojaraštį"
 
-#: src/main.qml:545 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:543 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Miego laikmatis"
 
-#: src/main.qml:554 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:552 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Spartieji klavišai"
 
-#: src/main.qml:561
+#: src/main.qml:559
 #, kde-format
 msgid "Settings"
 msgstr "Nuostatos"
 
-#: src/main.qml:568
+#: src/main.qml:566
 #, kde-format
 msgid "About"
 msgstr "Apie"
 
-#: src/main.qml:706
+#: src/main.qml:704
 #, kde-format
 msgid "Songs"
 msgstr "Dainos"
 
-#: src/main.qml:726 src/widgets/AlbumsView.qml:76
+#: src/main.qml:724 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumai"
 
-#: src/main.qml:733
+#: src/main.qml:731
 #, kde-format
 msgid "No Albums!"
 msgstr "Nėra albumų!"
 
-#: src/main.qml:734 src/main.qml:758 src/widgets/TracksView.qml:20
+#: src/main.qml:732 src/main.qml:756 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Pridėti naujų muzikos šaltinių"
 
-#: src/main.qml:750 src/widgets/AlbumsView.qml:76
+#: src/main.qml:748 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Atlikėjai"
 
-#: src/main.qml:757
+#: src/main.qml:755
 #, kde-format
 msgid "No Artists!"
 msgstr "Nėra atlikėjų!"
 
-#: src/main.qml:775 src/widgets/SelectionBar.qml:46
+#: src/main.qml:773 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Žymės"
 
-#: src/main.qml:784
+#: src/main.qml:782
 #, kde-format
 msgid "Folders"
 msgstr "Aplankai"
@@ -193,7 +193,7 @@ msgstr "Šis sąrašas yra tuščias"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
 #: src/widgets/CloudView/CloudView.qml:24
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:91
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
@@ -246,8 +246,8 @@ msgstr "Mėgstama"
 msgid "UnFav it"
 msgstr "Nebemėgstama"
 
-#: src/widgets/BabeTable/TableMenu.qml:46 src/widgets/MetadataDialog.qml:16
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:52
+#: src/widgets/BabeTable/TableMenu.qml:46
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
 #, kde-format
 msgid "Edit"
 msgstr "Taisyti"
@@ -463,12 +463,12 @@ msgstr "Nėra grojaraščių!"
 msgid "Start creating new custom playlists"
 msgstr "Pradėti kurti naujus tinkintus grojaraščius"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:34
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid "Remove '%1'?"
 msgstr "Šalinti „%1“?"
 
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
