@@ -88,7 +88,6 @@ qt_add_qml_module(${PROJECT_NAME} URI app.maui.vvave
     widgets/FocusView.qml
     widgets/SettingsView/SettingsDialog.qml
     widgets/SettingsView/ShortcutsDialog.qml
-    widgets/PlaybackBar.qml
     widgets/FoldersView/FoldersView.qml
     widgets/MetadataDialog.qml
     widgets/BabeTable/TableDelegate.qml
