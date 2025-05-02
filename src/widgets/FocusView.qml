@@ -150,16 +150,13 @@ StackView
             Maui.Controls.showCSD: settings.focusViewDefault
             background: null
             headBar.background: null
-            footBar.background: null
-            footBar.forceCenterMiddleContent: root.isWide
-
             headBar.leftContent: Loader
             {
                 asynchronous: true
                 sourceComponent: _mainMenuComponent
             }
 
-            footBar.middleContent: Maui.TextFieldPopup
+            headBar.middleContent: Maui.TextFieldPopup
             {
                 id: _filterField
                 placeholderText: i18n("Find")
@@ -167,7 +164,7 @@ StackView
                 Layout.maximumWidth: 500
                 Layout.fillWidth: true
                 clip: false
-                position: ToolBar.Footer
+                position: ToolBar.Header
                 KeyNavigation.up: _list
                 KeyNavigation.down: _list
                 //                popup.height: Math.min(500,Math.max(_list.listBrowser.implicitHeight, 300))
@@ -462,7 +459,7 @@ StackView
 
                             onMoved:
                             {
-                                player.volume = value
+                                settings.volume = value
                             }
                         }
 

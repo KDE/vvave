@@ -57,7 +57,7 @@ Maui.SettingsDialog
 
         Maui.FlexSectionItem
         {
-            label1.text: i18n("Auto Resume")
+            label1.text: i18n("Save & Restore Session")
             label2.text: i18n("Resume the last session playlist.")
 
             Switch

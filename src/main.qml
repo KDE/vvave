@@ -83,8 +83,8 @@ Maui.ApplicationWindow
                        dialog.open()
                        return
                    }
-
                    playlist.save()
+
                    close.accepted = true
                }
 
@@ -296,7 +296,6 @@ Maui.ApplicationWindow
         }
     }
 
-
     Settings
     {
         id: settings
@@ -311,6 +310,7 @@ Maui.ApplicationWindow
         property bool askBeforeClose : true
         property string sleepOption : "none"
         property bool closeAfterSleep: false
+        property double volume: 1.0
     }
 
     Mpris2
@@ -356,7 +356,7 @@ Maui.ApplicationWindow
     Player
     {
         id: player
-        volume: 100
+        volume: settings.volume
         onFinished:
         {
             if (!mainlistEmpty)
@@ -422,6 +422,14 @@ Maui.ApplicationWindow
                 checked: settings.askBeforeClose
                 onToggled: settings.askBeforeClose = checked
                 text: i18n("Ask before closing if music is playing")
+            }
+
+            CheckBox
+            {
+                Layout.fillWidth: true
+                checked: playlist.autoResume
+                onToggled: playlist.autoResume = checked
+                text: i18n("Save current playlist session")
             }
 
             onRejected: close()
@@ -597,14 +605,70 @@ Maui.ApplicationWindow
             anchors.fill: parent
             headBar.visible: false
 
-            footer: Loader
+            footerMargins: root.focusView ? 0 : Maui.Style.defaultPadding
+            // floatingFooter: !root.focusView
+
+            // footBar.background: Rectangle
+            // {
+            //     color: Maui.Theme.backgroundColor
+            //     visible: !root.focusView
+            // }
+
+            footBar.farLeftContent: ToolButton
             {
-                id: _playbackBarLoader
-                asynchronous: true
-                width: parent.width
-                active: visible
-                sourceComponent: PlaybackBar {}
+                icon.name: _sideBarView.sideBar.visible ? "sidebar-collapse" : "sidebar-expand"
+                onClicked: _sideBarView.sideBar.toggle()
+                visible: _sideBarView.sideBar.collapsed
+                checked:  _sideBarView.sideBar.visible
+                ToolTip.delay: 1000
+                ToolTip.timeout: 5000
+                ToolTip.visible: hovered
+                ToolTip.text: i18n("Toogle SideBar")
             }
+
+            footBar.rightContent: ToolButton
+            {
+                visible: focusView
+                icon.name: root.focusView ? "go-down" : "go-up"
+                onClicked: toggleFocusView()
+            }
+
+            footBar.middleContent: [
+
+                Maui.ToolActions
+                {
+                    Layout.alignment: Qt.AlignCenter
+
+                    display: ToolButton.IconOnly
+                    expanded: true
+                    autoExclusive: false
+                    checkable: false
+
+                    Action
+                    {
+                        icon.name: "media-skip-backward"
+                        onTriggered: Player.previousTrack()
+                    }
+
+                    Action
+                    {
+                        id: playIcon
+                        text: i18n("Play and pause")
+                        //                    icon.width: Maui.Style.iconSizes.big
+                        //                    icon.height: Maui.Style.iconSizes.big
+                        enabled: currentTrackIndex >= 0
+                        icon.name: isPlaying ? "media-playback-pause" : "media-playback-start"
+                        onTriggered: player.playing ? player.pause() : player.play()
+                    }
+
+                    Action
+                    {
+                        text: i18n("Next")
+                        icon.name: "media-skip-forward"
+                        onTriggered: Player.nextTrack()
+                    }
+                }
+            ]
 
             StackView
             {
@@ -942,7 +1006,7 @@ Maui.ApplicationWindow
             root.tagsDialog.composerList.urls = urls
         }else
         {
-           root.tagsDialog =  _playlistDialogComponent.createObject(root, ({'composerList.urls' : urls}))
+            root.tagsDialog =  _playlistDialogComponent.createObject(root, ({'composerList.urls' : urls}))
         }
 
         root.tagsDialog.open()

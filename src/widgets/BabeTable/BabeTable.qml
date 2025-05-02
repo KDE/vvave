@@ -57,7 +57,14 @@ Maui.Page
     flickable: _listBrowser.flickable
 
     headBar.visible: control.list.count > 0
-    headBar.forceCenterMiddleContent: isWide
+    headerMargins: Maui.Style.defaultPadding
+    // headBar.background: Rectangle
+    // {
+    //     color: Maui.Theme.backgroundColor
+    //     radius: Maui.Style.radiusV
+    //     opacity: 0.9
+    // }
+
     headBar.rightContent: Loader
     {
         asynchronous: true
