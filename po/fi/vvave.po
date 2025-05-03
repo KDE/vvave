@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 00:41+0000\n"
+"POT-Creation-Date: 2025-05-03 00:41+0000\n"
 "PO-Revision-Date: 2025-02-21 11:21+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -27,7 +27,7 @@ msgstr "Järjestä ja kuuntele musiikkiasi."
 msgid "Developer"
 msgstr "Kehittäjä"
 
-#: src/main.qml:331 src/main.qml:472 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:163
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
@@ -49,91 +49,111 @@ msgstr "Haluatko varmasti pysäyttää musiikin toiston ja lopettaa?"
 msgid "Ask before closing if music is playing"
 msgstr "Vahvista sulkeminen, kun musiikki soi"
 
-#: src/main.qml:465 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:432
+#, kde-format
+msgid "Save current playlist session"
+msgstr ""
+
+#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "Poista raita"
 msgstr[1] "Poista %1 raitaa"
 
-#: src/main.qml:466
+#: src/main.qml:474
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "Haluatko varmasti poistaa nämä tiedostot? Toimintoa ei voi kumota."
 
-#: src/main.qml:482 src/widgets/BabeTable/BabeTable.qml:169
+#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:176
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
 msgstr "Peru"
 
-#: src/main.qml:516
+#: src/main.qml:524
 #, kde-format
 msgid "Saved"
 msgstr "Tallennettu"
 
-#: src/main.qml:516
+#: src/main.qml:524
 #, kde-format
 msgid "Track added to playlist"
 msgstr "Kappale lisätty soittolistalle"
 
-#: src/main.qml:543 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:551 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Uniajastin"
 
-#: src/main.qml:552 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:560 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Pikanäppäimet"
 
-#: src/main.qml:559
+#: src/main.qml:567
 #, kde-format
 msgid "Settings"
 msgstr "Asetukset"
 
-#: src/main.qml:566
+#: src/main.qml:574
 #, kde-format
 msgid "About"
 msgstr "Tietoa"
 
-#: src/main.qml:704
+#: src/main.qml:626
+#, kde-format
+msgid "Toogle SideBar"
+msgstr "Näytä tai piilota sivupalkki"
+
+#: src/main.qml:656
+#, kde-format
+msgid "Play and pause"
+msgstr "Toista tai tauko"
+
+#: src/main.qml:666
+#, kde-format
+msgid "Next"
+msgstr "Seuraava"
+
+#: src/main.qml:768
 #, kde-format
 msgid "Songs"
 msgstr "Kappaleet"
 
-#: src/main.qml:724 src/widgets/AlbumsView.qml:76
+#: src/main.qml:788 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumit"
 
-#: src/main.qml:731
+#: src/main.qml:795
 #, kde-format
 msgid "No Albums!"
 msgstr "Ei albumeja!"
 
-#: src/main.qml:732 src/main.qml:756 src/widgets/TracksView.qml:20
+#: src/main.qml:796 src/main.qml:820 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Lisää uusia musiikkilähteitä"
 
-#: src/main.qml:748 src/widgets/AlbumsView.qml:76
+#: src/main.qml:812 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistit"
 
-#: src/main.qml:755
+#: src/main.qml:819
 #, kde-format
 msgid "No Artists!"
 msgstr "Ei artisteja!"
 
-#: src/main.qml:773 src/widgets/SelectionBar.qml:46
+#: src/main.qml:837 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Luokitukset"
 
-#: src/main.qml:782
+#: src/main.qml:846
 #, kde-format
 msgid "Folders"
 msgstr "Kansiot"
@@ -181,7 +201,7 @@ msgstr "Lisää lähteitä"
 msgid "This list is empty"
 msgstr "Luettelo on tyhjä"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
+#: src/widgets/BabeGrid/BabeGrid.qml:51 src/widgets/BabeTable/BabeTable.qml:115
 #: src/widgets/CloudView/CloudView.qml:24
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
 #, kde-format
@@ -190,34 +210,34 @@ msgid_plural "Filter %1 albums"
 msgstr[0] "Suodata"
 msgstr[1] "Suodata %1 albumia"
 
-#: src/widgets/BabeTable/BabeTable.qml:74
+#: src/widgets/BabeTable/BabeTable.qml:81
 #, kde-format
 msgid "Shuffle Play"
 msgstr "Sekoita soittolista"
 
-#: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
+#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
 msgstr "Toista kaikki"
 
-#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:55
+#: src/widgets/BabeTable/BabeTable.qml:95 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
 msgstr "Lisää kaikki"
 
-#: src/widgets/BabeTable/BabeTable.qml:150
+#: src/widgets/BabeTable/BabeTable.qml:157
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr "Haluatko varmasti poistaa tiedoston koneelta? Toimintoa ei voi kumota."
 
-#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "Siirry artistiin"
 
-#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:197 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "Siirry albumiin"
@@ -238,7 +258,7 @@ msgstr "Poista suosikeista"
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:529
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:526
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
@@ -290,37 +310,37 @@ msgstr ""
 "Tilin voi asettaa nyt napsauttamalla tästä tai päävalikosta Tilit-valinnan "
 "alta."
 
-#: src/widgets/FocusView.qml:165
+#: src/widgets/FocusView.qml:162
 #, kde-format
 msgid "Find"
 msgstr "Etsi"
 
-#: src/widgets/FocusView.qml:207
+#: src/widgets/FocusView.qml:204
 #, kde-format
 msgid "No Results!"
 msgstr "Ei tuloksia!"
 
-#: src/widgets/FocusView.qml:208
+#: src/widgets/FocusView.qml:205
 #, kde-format
 msgid "Try with something else"
 msgstr "Yritä jotakin muuta"
 
-#: src/widgets/FocusView.qml:247 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Aletaan koota soittolistaa."
 
-#: src/widgets/FocusView.qml:501
+#: src/widgets/FocusView.qml:498
 #, kde-format
 msgid "Info"
 msgstr "Tietoa"
 
-#: src/widgets/FocusView.qml:520
+#: src/widgets/FocusView.qml:517
 #, kde-format
 msgid "Mini Mode"
 msgstr "Pienoistila"
 
-#: src/widgets/FocusView.qml:538
+#: src/widgets/FocusView.qml:535
 #, kde-format
 msgid "Save"
 msgstr "Tallenna"
@@ -413,21 +433,6 @@ msgstr "Vuosi"
 msgid "Comment"
 msgstr "Huomautus"
 
-#: src/widgets/PlaybackBar.qml:22
-#, kde-format
-msgid "Toogle SideBar"
-msgstr "Näytä tai piilota sivupalkki"
-
-#: src/widgets/PlaybackBar.qml:52
-#, kde-format
-msgid "Play and pause"
-msgstr "Toista tai tauko"
-
-#: src/widgets/PlaybackBar.qml:62
-#, kde-format
-msgid "Next"
-msgstr "Seuraava"
-
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
@@ -496,8 +501,8 @@ msgstr "Toisto"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
-msgid "Auto Resume"
-msgstr "Jatka automaattisesti"
+msgid "Save & Restore Session"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
@@ -653,6 +658,9 @@ msgstr "Aseta"
 #, kde-format
 msgid "Open file"
 msgstr "Avaa tiedosto"
+
+#~ msgid "Auto Resume"
+#~ msgstr "Jatka automaattisesti"
 
 #~ msgid "Stop and Close"
 #~ msgstr "Pysäytä ja sulje"

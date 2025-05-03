@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 00:41+0000\n"
+"POT-Creation-Date: 2025-05-03 00:41+0000\n"
 "PO-Revision-Date: 2025-03-10 20:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -27,7 +27,7 @@ msgstr "管理並聆聽您的音樂。"
 msgid "Developer"
 msgstr "開發者"
 
-#: src/main.qml:331 src/main.qml:472 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:163
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
@@ -49,90 +49,110 @@ msgstr "您確定要結束音樂播放並離開嗎？"
 msgid "Ask before closing if music is playing"
 msgstr "音樂播放時詢問是否關閉"
 
-#: src/main.qml:465 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:432
+#, kde-format
+msgid "Save current playlist session"
+msgstr ""
+
+#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
 msgstr[0] "移除 %1 個音軌"
 
-#: src/main.qml:466
+#: src/main.qml:474
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "您確定要刪除這些檔案嗎？這個動作無法復原。"
 
-#: src/main.qml:482 src/widgets/BabeTable/BabeTable.qml:169
+#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:176
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
 
-#: src/main.qml:516
+#: src/main.qml:524
 #, kde-format
 msgid "Saved"
 msgstr "已儲存"
 
-#: src/main.qml:516
+#: src/main.qml:524
 #, kde-format
 msgid "Track added to playlist"
 msgstr "音軌已加入播放清單"
 
-#: src/main.qml:543 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:551 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "睡眠計時器"
 
-#: src/main.qml:552 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:560 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "快捷鍵"
 
-#: src/main.qml:559
+#: src/main.qml:567
 #, kde-format
 msgid "Settings"
 msgstr "設定"
 
-#: src/main.qml:566
+#: src/main.qml:574
 #, kde-format
 msgid "About"
 msgstr "關於"
 
-#: src/main.qml:704
+#: src/main.qml:626
+#, kde-format
+msgid "Toogle SideBar"
+msgstr "切換側邊欄"
+
+#: src/main.qml:656
+#, kde-format
+msgid "Play and pause"
+msgstr "播放和暫停"
+
+#: src/main.qml:666
+#, kde-format
+msgid "Next"
+msgstr "下一個"
+
+#: src/main.qml:768
 #, kde-format
 msgid "Songs"
 msgstr "歌曲"
 
-#: src/main.qml:724 src/widgets/AlbumsView.qml:76
+#: src/main.qml:788 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "專輯"
 
-#: src/main.qml:731
+#: src/main.qml:795
 #, kde-format
 msgid "No Albums!"
 msgstr "沒有專輯！"
 
-#: src/main.qml:732 src/main.qml:756 src/widgets/TracksView.qml:20
+#: src/main.qml:796 src/main.qml:820 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "新增音樂來源"
 
-#: src/main.qml:748 src/widgets/AlbumsView.qml:76
+#: src/main.qml:812 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "藝人"
 
-#: src/main.qml:755
+#: src/main.qml:819
 #, kde-format
 msgid "No Artists!"
 msgstr "沒有藝人！"
 
-#: src/main.qml:773 src/widgets/SelectionBar.qml:46
+#: src/main.qml:837 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "標籤"
 
-#: src/main.qml:782
+#: src/main.qml:846
 #, kde-format
 msgid "Folders"
 msgstr "資料夾"
@@ -180,7 +200,7 @@ msgstr "新增來源"
 msgid "This list is empty"
 msgstr "這個列表是空的"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
+#: src/widgets/BabeGrid/BabeGrid.qml:51 src/widgets/BabeTable/BabeTable.qml:115
 #: src/widgets/CloudView/CloudView.qml:24
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
 #, kde-format
@@ -188,34 +208,34 @@ msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "過濾 %1 個專輯"
 
-#: src/widgets/BabeTable/BabeTable.qml:74
+#: src/widgets/BabeTable/BabeTable.qml:81
 #, kde-format
 msgid "Shuffle Play"
 msgstr "隨機播放"
 
-#: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
+#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
 msgstr "播放全部"
 
-#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:55
+#: src/widgets/BabeTable/BabeTable.qml:95 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
 msgstr "將全部加到最後"
 
-#: src/widgets/BabeTable/BabeTable.qml:150
+#: src/widgets/BabeTable/BabeTable.qml:157
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr "您確定要從您的電腦上移除這個檔案嗎？這個動作無法復原。"
 
-#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "跳到藝人"
 
-#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:197 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "跳到專輯"
@@ -236,7 +256,7 @@ msgstr "從最愛中移除它"
 msgid "Edit"
 msgstr "編輯"
 
-#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:529
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:526
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
@@ -287,37 +307,37 @@ msgstr ""
 "您還沒有設定帳號。\n"
 "您可以點擊這裡來設定帳號或是在主選單下的帳號選項裡進行設定"
 
-#: src/widgets/FocusView.qml:165
+#: src/widgets/FocusView.qml:162
 #, kde-format
 msgid "Find"
 msgstr "尋找"
 
-#: src/widgets/FocusView.qml:207
+#: src/widgets/FocusView.qml:204
 #, kde-format
 msgid "No Results!"
 msgstr "沒有結果！"
 
-#: src/widgets/FocusView.qml:208
+#: src/widgets/FocusView.qml:205
 #, kde-format
 msgid "Try with something else"
 msgstr "試試看別的東西"
 
-#: src/widgets/FocusView.qml:247 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "開始製作您的播放清單。"
 
-#: src/widgets/FocusView.qml:501
+#: src/widgets/FocusView.qml:498
 #, kde-format
 msgid "Info"
 msgstr "資訊"
 
-#: src/widgets/FocusView.qml:520
+#: src/widgets/FocusView.qml:517
 #, kde-format
 msgid "Mini Mode"
 msgstr "迷你模式"
 
-#: src/widgets/FocusView.qml:538
+#: src/widgets/FocusView.qml:535
 #, kde-format
 msgid "Save"
 msgstr "儲存"
@@ -408,21 +428,6 @@ msgstr "年份"
 msgid "Comment"
 msgstr "備註"
 
-#: src/widgets/PlaybackBar.qml:22
-#, kde-format
-msgid "Toogle SideBar"
-msgstr "切換側邊欄"
-
-#: src/widgets/PlaybackBar.qml:52
-#, kde-format
-msgid "Play and pause"
-msgstr "播放和暫停"
-
-#: src/widgets/PlaybackBar.qml:62
-#, kde-format
-msgid "Next"
-msgstr "下一個"
-
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
@@ -490,8 +495,8 @@ msgstr "播放"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
-msgid "Auto Resume"
-msgstr "自動繼續播放"
+msgid "Save & Restore Session"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
@@ -643,6 +648,9 @@ msgstr "設定"
 #, kde-format
 msgid "Open file"
 msgstr "開啟檔案"
+
+#~ msgid "Auto Resume"
+#~ msgstr "自動繼續播放"
 
 #~ msgid "Stop and Close"
 #~ msgstr "停止後關閉"

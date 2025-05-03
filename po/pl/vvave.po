@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 00:41+0000\n"
+"POT-Creation-Date: 2025-05-03 00:41+0000\n"
 "PO-Revision-Date: 2025-01-25 12:49+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -28,7 +28,7 @@ msgstr "Porządkuj i słuchaj swojej muzyki."
 msgid "Developer"
 msgstr "Programista"
 
-#: src/main.qml:331 src/main.qml:472 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:163
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
@@ -50,7 +50,12 @@ msgstr "Czy na pewno zatrzymać odtwarzanie muzyki i wyjść?"
 msgid "Ask before closing if music is playing"
 msgstr "Zapytaj przed zamknięciem, jeśli odtwarzana jest muzyka"
 
-#: src/main.qml:465 src/widgets/BabeTable/BabeTable.qml:149
+#: src/main.qml:432
+#, kde-format
+msgid "Save current playlist session"
+msgstr ""
+
+#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -58,84 +63,99 @@ msgstr[0] "Usuń utwór"
 msgstr[1] "Usuń %1 utworu"
 msgstr[2] "Usuń %1 utworów"
 
-#: src/main.qml:466
+#: src/main.qml:474
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "Czy na pewno usunąć te pliki? Nie będzie można wycofać tego działania."
 
-#: src/main.qml:482 src/widgets/BabeTable/BabeTable.qml:169
+#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:176
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/main.qml:516
+#: src/main.qml:524
 #, kde-format
 msgid "Saved"
 msgstr "Zapisany"
 
-#: src/main.qml:516
+#: src/main.qml:524
 #, kde-format
 msgid "Track added to playlist"
 msgstr "Utwór dodany do listy odtwarzania"
 
-#: src/main.qml:543 src/widgets/SleepTimerDialog.qml:11
+#: src/main.qml:551 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
 msgstr "Minutnik do uśpienia"
 
-#: src/main.qml:552 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#: src/main.qml:560 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
 msgstr "Skróty"
 
-#: src/main.qml:559
+#: src/main.qml:567
 #, kde-format
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: src/main.qml:566
+#: src/main.qml:574
 #, kde-format
 msgid "About"
 msgstr "O programie"
 
-#: src/main.qml:704
+#: src/main.qml:626
+#, kde-format
+msgid "Toogle SideBar"
+msgstr "Przełącz pasek boczny"
+
+#: src/main.qml:656
+#, kde-format
+msgid "Play and pause"
+msgstr "Odtwórz i wstrzymaj"
+
+#: src/main.qml:666
+#, kde-format
+msgid "Next"
+msgstr "Następny"
+
+#: src/main.qml:768
 #, kde-format
 msgid "Songs"
 msgstr "Piosenki"
 
-#: src/main.qml:724 src/widgets/AlbumsView.qml:76
+#: src/main.qml:788 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumy"
 
-#: src/main.qml:731
+#: src/main.qml:795
 #, kde-format
 msgid "No Albums!"
 msgstr "Brak albumów!"
 
-#: src/main.qml:732 src/main.qml:756 src/widgets/TracksView.qml:20
+#: src/main.qml:796 src/main.qml:820 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Dodaj nowe zasoby z muzyką"
 
-#: src/main.qml:748 src/widgets/AlbumsView.qml:76
+#: src/main.qml:812 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Wykonawcy"
 
-#: src/main.qml:755
+#: src/main.qml:819
 #, kde-format
 msgid "No Artists!"
 msgstr "Brak wykonawcy!"
 
-#: src/main.qml:773 src/widgets/SelectionBar.qml:46
+#: src/main.qml:837 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Znaczniki"
 
-#: src/main.qml:782
+#: src/main.qml:846
 #, kde-format
 msgid "Folders"
 msgstr "Katalogi"
@@ -183,7 +203,7 @@ msgstr "Dodaj zasoby"
 msgid "This list is empty"
 msgstr "Ta lista jest pusta"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:42 src/widgets/BabeTable/BabeTable.qml:108
+#: src/widgets/BabeGrid/BabeGrid.qml:51 src/widgets/BabeTable/BabeTable.qml:115
 #: src/widgets/CloudView/CloudView.qml:24
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
 #, kde-format
@@ -193,22 +213,22 @@ msgstr[0] "Odfiltruj"
 msgstr[1] "Odfiltruj %1 albumy"
 msgstr[2] "Odfiltruj %1 albumów"
 
-#: src/widgets/BabeTable/BabeTable.qml:74
+#: src/widgets/BabeTable/BabeTable.qml:81
 #, kde-format
 msgid "Shuffle Play"
 msgstr "Odtwarzaj losowo"
 
-#: src/widgets/BabeTable/BabeTable.qml:81 src/widgets/TracksGroup.qml:47
+#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
 msgstr "Odtwórz wszystko"
 
-#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:55
+#: src/widgets/BabeTable/BabeTable.qml:95 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
 msgstr "Dołącz wszystkie"
 
-#: src/widgets/BabeTable/BabeTable.qml:150
+#: src/widgets/BabeTable/BabeTable.qml:157
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
@@ -217,12 +237,12 @@ msgstr ""
 "Czy na pewno usunąć ten pliki z twojego komputera? Nie będzie można wycofać "
 "tego działania."
 
-#: src/widgets/BabeTable/BabeTable.qml:183 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "Przejdź do wykonawcy"
 
-#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:197 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "Przejdź do albumu"
@@ -243,7 +263,7 @@ msgstr "Usuń z ulubionych"
 msgid "Edit"
 msgstr "Edytuj"
 
-#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:529
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:526
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
@@ -294,37 +314,37 @@ msgstr ""
 "Nie masz ustawionego żadnego konta.\n"
 "Możesz to zrobić teraz, naciskając tutaj lub w ustawieniu Kont w menu głównym"
 
-#: src/widgets/FocusView.qml:165
+#: src/widgets/FocusView.qml:162
 #, kde-format
 msgid "Find"
 msgstr "Poszukaj"
 
-#: src/widgets/FocusView.qml:207
+#: src/widgets/FocusView.qml:204
 #, kde-format
 msgid "No Results!"
 msgstr "Brak wyników!"
 
-#: src/widgets/FocusView.qml:208
+#: src/widgets/FocusView.qml:205
 #, kde-format
 msgid "Try with something else"
 msgstr "Spróbuj czegoś innego"
 
-#: src/widgets/FocusView.qml:247 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Rozpocznij tworzenie swoich list odtwarzania."
 
-#: src/widgets/FocusView.qml:501
+#: src/widgets/FocusView.qml:498
 #, kde-format
 msgid "Info"
 msgstr "Dane"
 
-#: src/widgets/FocusView.qml:520
+#: src/widgets/FocusView.qml:517
 #, kde-format
 msgid "Mini Mode"
 msgstr "Tryb mini"
 
-#: src/widgets/FocusView.qml:538
+#: src/widgets/FocusView.qml:535
 #, kde-format
 msgid "Save"
 msgstr "Zapisz"
@@ -418,21 +438,6 @@ msgstr "Rok"
 msgid "Comment"
 msgstr "Uwaga"
 
-#: src/widgets/PlaybackBar.qml:22
-#, kde-format
-msgid "Toogle SideBar"
-msgstr "Przełącz pasek boczny"
-
-#: src/widgets/PlaybackBar.qml:52
-#, kde-format
-msgid "Play and pause"
-msgstr "Odtwórz i wstrzymaj"
-
-#: src/widgets/PlaybackBar.qml:62
-#, kde-format
-msgid "Next"
-msgstr "Następny"
-
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
@@ -501,8 +506,8 @@ msgstr "Odtwarzanie"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
-msgid "Auto Resume"
-msgstr "Sam wznawiaj"
+msgid "Save & Restore Session"
+msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
@@ -655,6 +660,9 @@ msgstr "Ustaw"
 #, kde-format
 msgid "Open file"
 msgstr "Otwórz plik"
+
+#~ msgid "Auto Resume"
+#~ msgstr "Sam wznawiaj"
 
 #~ msgid "Stop and Close"
 #~ msgstr "Zatrzymaj i zamknij"
