@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-03 00:41+0000\n"
-"PO-Revision-Date: 2025-03-07 16:25+0200\n"
+"PO-Revision-Date: 2025-05-03 09:30+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -53,7 +53,7 @@ msgstr "Питати перед закриттям, якщо щось відтв
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Зберегти сеанс поточного списку відтворення"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
@@ -512,7 +512,7 @@ msgstr "Відтворення"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Збереження і відновлення сеансу"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-03 00:41+0000\n"
-"PO-Revision-Date: 2025-03-07 13:23+0100\n"
+"PO-Revision-Date: 2025-05-03 12:45+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -52,7 +52,7 @@ msgstr "Vragen voor afsluiten als er muziek speelt"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Huidige afspeellijstsessie op&slaan"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
@@ -506,7 +506,7 @@ msgstr "Afspelen"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Sessie opslaan & herstellen"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format

@@ -1,5 +1,5 @@
 # Spanish translations for vvave.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
 # Automatically generated, 2022.
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-03 00:41+0000\n"
-"PO-Revision-Date: 2025-03-07 16:56+0100\n"
+"PO-Revision-Date: 2025-05-03 18:27+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -54,7 +54,7 @@ msgstr "Preguntar antes de cerrar si se está reproduciendo música"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Guardar la sesión de lista de reproducción actual"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
@@ -507,7 +507,7 @@ msgstr "Reproducir"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Guardar y restaurar sesión"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
@@ -662,12 +662,3 @@ msgstr "Definir"
 #, kde-format
 msgid "Open file"
 msgstr "Abrir archivo"
-
-#~ msgid "Auto Resume"
-#~ msgstr "Continuar automáticamente"
-
-#~ msgid "Stop and Close"
-#~ msgstr "Detener y cerrar"
-
-#~ msgid "Favorite"
-#~ msgstr "Favorita"
