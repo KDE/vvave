@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-03 00:41+0000\n"
-"PO-Revision-Date: 2025-03-07 05:51+0100\n"
+"PO-Revision-Date: 2025-05-04 04:07+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -54,7 +54,7 @@ msgstr "კითხვა დახურვამდე, თუ მუსი�
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "მიმდინარე დასაკრავი სიის სესიის შენახვა"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
@@ -506,7 +506,7 @@ msgstr "დაკვრა"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "სესიის შენახვა & აღდგენა"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format

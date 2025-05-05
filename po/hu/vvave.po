@@ -1,206 +1,207 @@
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# SPDX-FileCopyrightText: 2023, 2024, 2025 Adrián Chaves (Gallaecio)
 #
+# SPDX-FileCopyrightText: 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-03 00:41+0000\n"
-"PO-Revision-Date: 2025-05-04 13:29+0200\n"
-"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
-"Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
-"Language: gl\n"
+"PO-Revision-Date: 2025-05-04 22:15+0200\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 25.04.0\n"
 
 #: src/main.cpp:77
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr "Organice e escoite música."
+msgstr "Rendszerezze és hallgassa zenéit."
 
 #: src/main.cpp:82 src/main.cpp:83
 #, kde-format
 msgid "Developer"
-msgstr "Desenvolvemento."
+msgstr "Fejlesztő"
 
 #: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:163
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
 msgid "Remove"
-msgstr "Eliminar"
+msgstr "Eltávolítás"
 
 #: src/main.qml:350
 #, kde-format
 msgid "Missing file"
-msgstr "Ficheiro que falta"
+msgstr "Hiányzó fájl"
 
 #: src/main.qml:412
 #, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr "Seguro que quere deter a música e saír?"
+msgstr "Biztos, hogy le szeretné állítani a zenelejátszást és kilépni?"
 
 #: src/main.qml:424 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr "Preguntar antes de pechar se hai música reproducíndose."
+msgstr "Rákérdezés bezárás előtt, ha szól a zene"
 
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr "Gardar a sesión da lista de reprodución actual."
+msgstr "Jelenlegi lejátszási lista-munkamenet mentése"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
-msgstr[0] "Eliminar a pista"
-msgstr[1] "Eliminar as %1 pistas"
+msgstr[0] "Szám eltávolítása"
+msgstr[1] "%1 szám eltávolítása"
 
 #: src/main.qml:474
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr ""
-"Seguro que quere eliminar estes ficheiros? Esta acción non se pode desfacer."
+"Biztosan el szeretné távolítani ezeket a fájlokat? A művelet nem vonható "
+"vissza."
 
 #: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:176
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Mégse"
 
 #: src/main.qml:524
 #, kde-format
 msgid "Saved"
-msgstr "Gardouse"
+msgstr "Mentve"
 
 #: src/main.qml:524
 #, kde-format
 msgid "Track added to playlist"
-msgstr "A pista engadiuse á lista de reprodución."
+msgstr "Szám hozzáadva a lejátszólistához"
 
 #: src/main.qml:551 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr "Temporizador para durmir"
+msgstr "Alvásidőzítő"
 
 #: src/main.qml:560 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
 msgid "Shortcuts"
-msgstr "Atallos"
+msgstr "Gyorsbillentyűk"
 
 #: src/main.qml:567
 #, kde-format
 msgid "Settings"
-msgstr "Configuración"
+msgstr "Beállítások"
 
 #: src/main.qml:574
 #, kde-format
 msgid "About"
-msgstr "Sobre"
+msgstr "Névjegy"
 
 #: src/main.qml:626
 #, kde-format
 msgid "Toogle SideBar"
-msgstr "Conmutar a barra lateral"
+msgstr "Oldalsáv be/ki"
 
 #: src/main.qml:656
 #, kde-format
 msgid "Play and pause"
-msgstr "Reproducir e pausar"
+msgstr "Lejátszás és szünet"
 
 #: src/main.qml:666
 #, kde-format
 msgid "Next"
-msgstr "Seguinte"
+msgstr "Következő"
 
 #: src/main.qml:768
 #, kde-format
 msgid "Songs"
-msgstr "Cancións"
+msgstr "Dalok"
 
 #: src/main.qml:788 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
-msgstr "Álbums"
+msgstr "Albumok"
 
 #: src/main.qml:795
 #, kde-format
 msgid "No Albums!"
-msgstr "Non hai álbums."
+msgstr "Nincsenek albumok."
 
 #: src/main.qml:796 src/main.qml:820 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
-msgstr "Engadir novas fontes de música"
+msgstr "Új zeneforrások hozzáadása"
 
 #: src/main.qml:812 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
-msgstr "Intérpretes"
+msgstr "Előadók"
 
 #: src/main.qml:819
 #, kde-format
 msgid "No Artists!"
-msgstr "Non hai intérpretes."
+msgstr "Nincsenek előadók."
 
 #: src/main.qml:837 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
-msgstr "Etiquetas"
+msgstr "Címkék"
 
 #: src/main.qml:846
 #, kde-format
 msgid "Folders"
-msgstr "Cartafoles"
+msgstr "Mappák"
 
 #: src/models/playlists/playlistsmodel.cpp:110
 #, kde-format
 msgid "Most Played"
-msgstr "Máis reproducido"
+msgstr "Legtöbbször lejátszott"
 
 #: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
 msgid "Random Tracks"
-msgstr "Pistas ao chou"
+msgstr "Véletlenszerű számok"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
 msgid "Recent Tracks"
-msgstr "Pistas recentes"
+msgstr "Legutóbbi számok"
 
 #: src/models/playlists/playlistsmodel.cpp:131
 #, kde-format
 msgid "Never Played"
-msgstr "Non reproducido"
+msgstr "Soha nem lejátszott"
 
 #: src/models/playlists/playlistsmodel.cpp:138
 #, kde-format
 msgid "Classic Tracks"
-msgstr "Pistas clásicas"
+msgstr "Klasszikus számok"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr "Reproducindo música"
+msgstr "Zenelejátszás"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
 #: src/widgets/TracksView.qml:25
 #, kde-format
 msgid "Add sources"
-msgstr "Engadir fontes"
+msgstr "Források hozzáadása"
 
 #: src/widgets/AlbumsView.qml:70
 #, kde-format
 msgid "This list is empty"
-msgstr "A lista está baleira."
+msgstr "Ez a lista üres"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:51 src/widgets/BabeTable/BabeTable.qml:115
 #: src/widgets/CloudView/CloudView.qml:24
@@ -208,23 +209,23 @@ msgstr "A lista está baleira."
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
-msgstr[0] "Filtrar"
-msgstr[1] "Filtrar %1 álbums"
+msgstr[0] "Szűrés"
+msgstr[1] "%1 album szűrése"
 
 #: src/widgets/BabeTable/BabeTable.qml:81
 #, kde-format
 msgid "Shuffle Play"
-msgstr "Reproducir aleatoriamente"
+msgstr "Keverés"
 
 #: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
-msgstr "Reproducilo todo"
+msgstr "Összes lejátszása"
 
 #: src/widgets/BabeTable/BabeTable.qml:95 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
-msgstr "Engadilo todo"
+msgstr "Összes hozzáfűzése"
 
 #: src/widgets/BabeTable/BabeTable.qml:157
 #, kde-format
@@ -232,75 +233,75 @@ msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr ""
-"Seguro que quere eliminar o ficheiro? Esta acción non se pode desfacer."
+"Biztosan törölni szeretné ezt a fájlt a számítógépéről? A művelet nem "
+"vonható vissza."
 
 #: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
-msgstr "Ir á intérprete"
+msgstr "Ugrás az előadóra"
 
 #: src/widgets/BabeTable/BabeTable.qml:197 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
-msgstr "Ir ao álbum"
+msgstr "Ugrás az albumra"
 
 #: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "Fav it"
-msgstr "Facer favorito"
+msgstr "Kedvelem"
 
-# skip-rule: trasno-remove_reverse
 #: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "UnFav it"
-msgstr "Retirar dos favoritos"
+msgstr "Nem kedvelem"
 
 #: src/widgets/BabeTable/TableMenu.qml:46
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
 #, kde-format
 msgid "Edit"
-msgstr "Editar"
+msgstr "Szerkesztés"
 
 #: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:526
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
-msgstr "Compartir"
+msgstr "Megosztás"
 
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr "Engadir a «%1»"
+msgstr "Hozzáadás ehhez: „%1”"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
 msgid "Add to playlist"
-msgstr "Engadir á lista de reprodución"
+msgstr "Hozzáadás a lejátszólistához"
 
 #: src/widgets/BabeTable/TableMenu.qml:86
 #, kde-format
 msgid "Select"
-msgstr "Seleccionar"
+msgstr "Kiválasztás"
 
 #: src/widgets/BabeTable/TableMenu.qml:99
 #, kde-format
 msgid "Play Next"
-msgstr "Reproducir a seguinte"
+msgstr "Következő lejátszása"
 
 #: src/widgets/BabeTable/TableMenu.qml:124
 #, kde-format
 msgid "Show in Folder"
-msgstr "Amosar no cartafol"
+msgstr "Megjelenítés mappában"
 
 #: src/widgets/BabeTable/TableMenu.qml:150
 #, kde-format
 msgid "Delete"
-msgstr "Eliminar"
+msgstr "Törlés"
 
 #: src/widgets/CloudView/CloudView.qml:39
 #, kde-format
 msgid "Opps!"
-msgstr "Vaites!"
+msgstr "Hoppá!"
 
 #: src/widgets/CloudView/CloudView.qml:40
 #, kde-format
@@ -309,183 +310,183 @@ msgid ""
 "You can set up your account now by clicking here or under the Accounts "
 "options in the main menu"
 msgstr ""
-"Non ten unha conta configurada.\n"
-"Para configurala agora prema aquí ou baixo as opcións de contas no menú "
-"principal."
+"Nincs beállítva fiók.\n"
+"A fiókot beállíthatja most azonnal ide kattintva, vagy a Fiókok beállításban "
+"a főmenüben."
 
 #: src/widgets/FocusView.qml:162
 #, kde-format
 msgid "Find"
-msgstr "Atopar"
+msgstr "Keresés"
 
 #: src/widgets/FocusView.qml:204
 #, kde-format
 msgid "No Results!"
-msgstr "Non hai resultados."
+msgstr "Nincs találat."
 
 #: src/widgets/FocusView.qml:205
 #, kde-format
 msgid "Try with something else"
-msgstr "Probar outra cousa"
+msgstr "Próbálkozzon valami mással"
 
 #: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:153
 #, kde-format
 msgid "Start putting together your playlist."
-msgstr "Prepare a súa lista de reprodución."
+msgstr "Kezdje el összeállítani lejátszási listáját."
 
 #: src/widgets/FocusView.qml:498
 #, kde-format
 msgid "Info"
-msgstr "Información"
+msgstr "Információ"
 
 #: src/widgets/FocusView.qml:517
 #, kde-format
 msgid "Mini Mode"
-msgstr "Modo mini"
+msgstr "Mini mód"
 
 #: src/widgets/FocusView.qml:535
 #, kde-format
 msgid "Save"
-msgstr "Gardar"
+msgstr "Mentés"
 
 #: src/widgets/FoldersView/FoldersView.qml:33
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
-msgstr[0] "Filtrar %1 cartafol"
-msgstr[1] "Filtrar %1 cartafoles"
+msgstr[0] "%1 mappa szűrése"
+msgstr[1] "%1 mappa szűrése"
 
 #: src/widgets/FoldersView/FoldersView.qml:47
 #, kde-format
 msgid "No Folders!"
-msgstr "Non hai cartafoles."
+msgstr "Nincsenek mappák."
 
 #: src/widgets/FoldersView/FoldersView.qml:48
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
-msgstr "Engada música ás fontes para explorar por cartafoles."
+msgstr "Új zenék hozzáadása a forrásokhoz a mappák szerinti böngészéshez"
 
 #: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
 #, kde-format
 msgid "No Tracks!"
-msgstr "Non hai pistas."
+msgstr "Nincsenek számok."
 
 #: src/widgets/FoldersView/FoldersView.qml:136
 #, kde-format
 msgid "This source folder seems to be empty!"
-msgstr "O cartafol parece estar baleiro."
+msgstr "Ez a forrásmappa üresnek tűnik."
 
 #: src/widgets/InfoView/InfoView.qml:34
 #, kde-format
 msgid "Artist Info"
-msgstr "Información da intérprete"
+msgstr "Előadó-információk"
 
 #: src/widgets/InfoView/InfoView.qml:61
 #, kde-format
 msgid "Album Info"
-msgstr "Información do álbum"
+msgstr "Albuminformációk"
 
 #: src/widgets/MainPlaylist/MainPlaylist.qml:243
 #, kde-format
 msgid "Syncing to "
-msgstr "Sincronizando con"
+msgstr "Szinkronizálás ide: "
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
 msgid "Metadata"
-msgstr "Metadatos"
+msgstr "Metaadatok"
 
 #: src/widgets/MetadataDialog.qml:42
 #, kde-format
 msgid "Embedded metadata info."
-msgstr "Metadatos incrustados."
+msgstr "Beágyazott metaadat-információk."
 
 #: src/widgets/MetadataDialog.qml:46
 #, kde-format
 msgid "Track Title"
-msgstr "Título da pista"
+msgstr "Szám címe"
 
 #: src/widgets/MetadataDialog.qml:58
 #, kde-format
 msgid "Artist"
-msgstr "Intérprete"
+msgstr "Előadó"
 
 #: src/widgets/MetadataDialog.qml:71
 #, kde-format
 msgid "Album"
-msgstr "Álbum"
+msgstr "Album"
 
 #: src/widgets/MetadataDialog.qml:84
 #, kde-format
 msgid "Track"
-msgstr "Pista"
+msgstr "Szám"
 
 #: src/widgets/MetadataDialog.qml:97
 #, kde-format
 msgid "Genre"
-msgstr "Xénero"
+msgstr "Műfaj"
 
 #: src/widgets/MetadataDialog.qml:110
 #, kde-format
 msgid "Year"
-msgstr "Ano"
+msgstr "Év"
 
 #: src/widgets/MetadataDialog.qml:123
 #, kde-format
 msgid "Comment"
-msgstr "Comentario"
+msgstr "Megjegyzés"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:57
 #, kde-format
 msgid "Your playlist is empty. Start adding new music to it"
-msgstr "A lista de reprodución está baleira. Engádalle música."
+msgstr "A lejátszólista üres. Kezdjen el új zenéket hozzáadni"
 
 #: src/widgets/PlaylistsView/PlaylistsView.qml:68
 #, kde-format
 msgid "Remove from playlist"
-msgstr "Retirar da lista de reprodución"
+msgstr "Eltávolítás a lejátszólistáról"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
 #, kde-format
 msgid "No Playlists!"
-msgstr "Non hai listas de reprodución."
+msgstr "Nincsenek lejátszólisták."
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
 #, kde-format
 msgid "Start creating new custom playlists"
-msgstr "Comece a crear novas listas de reprodución"
+msgstr "Kezdjen el új saját lejátszási listákat létrehozni"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
 msgid "Remove '%1'?"
-msgstr "Retirar «%1»?"
+msgstr "Eltávolítja ezt: „%1”?"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
 #, kde-format
 msgid ""
 "Are you sure you want to remove this tag? This operation can not be undone."
 msgstr ""
-"Seguro que quere eliminar a etiqueta? A operación non se pode desfacer."
+"Biztosan el szeretné távolítani ezt a címkét? A művelet nem vonható vissza."
 
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr "Reproducir"
+msgstr "Lejátszás"
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
 msgid "Append"
-msgstr "Engadir"
+msgstr "Hozzáfűzés"
 
 #: src/widgets/SelectionBar.qml:61
 #, kde-format
 msgid "Queue"
-msgstr "Pór na fila"
+msgstr "Lejátszási sor"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:38
 #, kde-format
 msgid "Remove source"
-msgstr "Retirar a fonte"
+msgstr "Forrás eltávolítása"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:39
 #, kde-format
@@ -493,48 +494,48 @@ msgid ""
 "Are you sure you want to remove the source: \n"
 "%1"
 msgstr ""
-"Seguro que quere eliminar a fonte\n"
-"%1?"
+"Biztosan el szeretné távolítani a forrást: \n"
+"%1"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:55
 #, kde-format
 msgid "Playback"
-msgstr "Reprodución"
+msgstr "Lejátszás"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr "Gardar e restaurar a sesión"
+msgstr "Munkamenet mentése és visszaállítása"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr "Retomar a lista de reprodución da última sesión."
+msgstr "A legutóbbi munkamenet lejátszólistájának folytatása."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:73
 #, kde-format
 msgid "Volume"
-msgstr "Volume"
+msgstr "Hangerő"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:74
 #, kde-format
 msgid "Show volume controls."
-msgstr "Amosar o control de volume."
+msgstr "Hangvezérlők megjelenítése."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr "Saíndo"
+msgstr "Kilépés"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Collection"
-msgstr "Colección"
+msgstr "Gyűjtemény"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:105
 #, kde-format
 msgid "Fetch Artwork"
-msgstr "Obter os gráficos"
+msgstr "Grafika letöltése"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:106
 #, kde-format
@@ -542,157 +543,119 @@ msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
-"Recolle os gráficos dos álbums e intérpretes de servizos de Internet: "
-"LastFM, Spotify, MusicBrainz, iTunes, Genius e outros."
+"Összegyűjti az albumok és előadók műveit az online szolgáltatásokból: "
+"Spotify,  LastFM, Spotify, MusicBrainz, iTunes, Genius és mások."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:118
 #, kde-format
 msgid "Auto Scan"
-msgstr "Examinar automaticamente"
+msgstr "Automatikus keresés"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:119
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
-msgstr "Examinar as fontes de música no inicio para manter a colección ao día."
+msgstr ""
+"Indításkor az összes zeneforrást beolvassa, hogy gyűjteménye naprakész "
+"maradjon."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:132
 #, kde-format
 msgid "General"
-msgstr "Xeral"
+msgstr "Általános"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:137
 #, kde-format
 msgid "Focus View"
-msgstr "Vista de concentración"
+msgstr "Fókusznézet"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:138
 #, kde-format
 msgid "Make the focus view the default."
-msgstr "Facer a vista de concentración a predeterminada."
+msgstr "Legyen a fókusznézet az alapértelmezett."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Artwork"
-msgstr "Gráficos"
+msgstr "Grafika"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:154
 #, kde-format
 msgid "Show the cover artwork for the tracks."
-msgstr "Amosar os gráficos de portada das pistas."
+msgstr "Borítókép megjelenítése a számokhoz."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:169
 #, kde-format
 msgid "Titles"
-msgstr "Títulos"
+msgstr "Címek"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:170
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr "Amosar o título dos álbums e intérpretes na vista de grade."
+msgstr "Albumok címének és az előadónak a megjelenítése rácsnézetben."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:186
 #, kde-format
 msgid "Sources"
-msgstr "Fontes"
+msgstr "Források"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:223
 #, kde-format
 msgid "Add"
-msgstr "Engadir"
+msgstr "Hozzáadás"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:241
 #, kde-format
 msgid "Scan now"
-msgstr "Examinar"
+msgstr "Keresés most"
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:26
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
 #, kde-format
 msgid "Unknown"
-msgstr "Descoñecida"
+msgstr "Ismeretlen"
 
 #: src/widgets/SleepTimerDialog.qml:32
 #, kde-format
 msgid "15 minutes"
-msgstr "15 minutos"
+msgstr "15 perc"
 
 #: src/widgets/SleepTimerDialog.qml:49
 #, kde-format
 msgid "30 minutes"
-msgstr "30 minutos"
+msgstr "30 perc"
 
 #: src/widgets/SleepTimerDialog.qml:67
 #, kde-format
 msgid "1 hour"
-msgstr "1 hora"
+msgstr "1 óra"
 
 #: src/widgets/SleepTimerDialog.qml:85
 #, kde-format
 msgid "End of track"
-msgstr "Fin da pista"
+msgstr "Szám vége után"
 
 #: src/widgets/SleepTimerDialog.qml:103
 #, kde-format
 msgid "End of playlist"
-msgstr "Fin da lista de reprodución"
+msgstr "Lejátszólista vége után"
 
 #: src/widgets/SleepTimerDialog.qml:123
 #, kde-format
 msgid "Off"
-msgstr "Desactivada"
+msgstr "Ki"
 
 #: src/widgets/SleepTimerDialog.qml:145
 #, kde-format
 msgid "Close application after"
-msgstr "Pechar a aplicación tras"
+msgstr "Alkalmazás bezárásának késleltetése:"
 
 #: src/widgets/SleepTimerDialog.qml:160
 #, kde-format
 msgid "Set"
-msgstr "Definir"
+msgstr "Beállítás"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
 msgid "Open file"
-msgstr "Abrir un ficheiro"
-
-#~ msgid "Auto Resume"
-#~ msgstr "Continuación automática"
-
-#~ msgid "Stop and Close"
-#~ msgstr "Deter e pechar"
-
-#~ msgid "Favorite"
-#~ msgstr "Favorita"
-
-#~ msgid "Accept"
-#~ msgstr "Aceptar"
-
-#~ msgid "Cloud"
-#~ msgstr "Nube"
-
-#~ msgid "Dark Mode"
-#~ msgstr "Modo escuro"
-
-#~ msgid "Switch between light and dark colorscheme."
-#~ msgstr "Cambiar entre os esquemas de cores claro e escuro."
-
-#~ msgid "© 2019-2023 Maui Development Team"
-#~ msgstr "© 2019-2023 Equipo de desenvolvemento de Maui"
-
-#~ msgid "Vvave"
-#~ msgstr "Vvave"
-
-#~ msgid "Remove %1 tracks"
-#~ msgstr "Eliminar as %1 pistas"
-
-#~ msgid "Configure the playback behavior."
-#~ msgstr "Configure o comportamento da reprodución."
-
-#~ msgid "Configure the app plugins and collection behavior."
-#~ msgstr ""
-#~ "Configurar os complementos da aplicación e o comportamento da colección."
-
-#~ msgid "Add or remove sources"
-#~ msgstr "Engadir ou retirar fontes"
+msgstr "Fájl megnyitása"
