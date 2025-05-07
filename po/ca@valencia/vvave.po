@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-03 00:41+0000\n"
-"PO-Revision-Date: 2025-03-07 09:35+0100\n"
+"PO-Revision-Date: 2025-05-03 09:27+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -54,7 +54,7 @@ msgstr "Pregunta abans de tancar si hi ha música reproduint-se"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Guarda la sessió de la llista de reproducció actual"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
@@ -506,7 +506,7 @@ msgstr "Reproduïu"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Guarda i restaura la sessió"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
@@ -660,12 +660,3 @@ msgstr "Establix"
 #, kde-format
 msgid "Open file"
 msgstr "Obri un fitxer"
-
-#~ msgid "Auto Resume"
-#~ msgstr "Represa automàtica"
-
-#~ msgid "Stop and Close"
-#~ msgstr "Para i tanca"
-
-#~ msgid "Favorite"
-#~ msgstr "Preferida"
