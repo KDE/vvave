@@ -264,7 +264,7 @@ Maui.Page
                              }
                          }
 
-        onKeyPress: (event) =>
+        Keys.onPressed: (event) =>
                     {
                         if(event.key === Qt.Key_Return)
                         {
