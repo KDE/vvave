@@ -27,114 +27,104 @@ Maui.Page
     readonly property alias contextMenu: table.contextMenu
 
     headBar.visible: false
-    footBar.visible: !mainlistEmpty
 
-    footBar.rightContent:[
-
-        ToolButton
-        {
-            icon.name: "edit-delete"
-            onClicked:
-            {
-                player.stop()
-                listModel.list.clear()
-                root.sync = false
-                root.syncPlaylist = ""
-            }
-        },
-   Loader
-   {
-       active: settings.sleepOption !== "none"
-       visible: active
-       sourceComponent: Label
-       {
-           font.family: "Monospace"
-           text: "Zzz"
-           color: "white"
-           padding: Maui.Style.space.tiny
-
-           // icon.name: "clock"
-           background: Rectangle
-           {
-               color: "purple"
-               radius: 4
-           }
-       }
-}]
-
-    footBar.leftContent: [
-        ToolButton
-        {
-            icon.name: "document-save"
-            onClicked: saveList()
-        },
-
-        ToolButton
-        {
-            icon.name: switch(playlist.repeatMode)
-                       {
-                       case Vvave.Playlist.NoRepeat: return "media-repeat-none"
-                       case Vvave.Playlist.RepeatOnce: return "media-playlist-repeat-song"
-                       case Vvave.Playlist.Repeat: return "media-playlist-repeat"
-                       }
-            onClicked:
-            {
-                switch(playlist.repeatMode)
-                {
-                case Vvave.Playlist.NoRepeat:
-                    playlist.repeatMode = Vvave.Playlist.Repeat
-                    break
-
-                case Vvave.Playlist.Repeat:
-                    playlist.repeatMode = Vvave.Playlist.RepeatOnce
-                    break
-
-                case Vvave.Playlist.RepeatOnce:
-                    playlist.repeatMode = Vvave.Playlist.NoRepeat
-                    break
-                }
-            }
-        },
-
-        ToolButton
-        {
-            checked:  playlist.playMode === Vvave.Playlist.Shuffle
-            icon.name: switch(playlist.playMode)
-                       {
-                       case Vvave.Playlist.Normal: return "media-playlist-normal"
-                       case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
-                       }
-
-            onClicked:
-            {
-                switch(playlist.playMode)
-                {
-                case Vvave.Playlist.Normal:
-                    playlist.playMode = Vvave.Playlist.Shuffle
-                    break
-
-                case Vvave.Playlist.Shuffle:
-                    playlist.playMode = Vvave.Playlist.Normal
-                    break
-                }
-            }
-        }]
 
     BabeTable
     {
         id: table
         anchors.fill: parent
+        footBar.visible: !mainlistEmpty
+        footerMargins: Maui.Style.defaultPadding
+        footBar.rightContent:[
 
-        background: Rectangle
-        {
-            color: Maui.Theme.backgroundColor
-            opacity: 0.2
-
-            Behavior on color
+            ToolButton
             {
-                Maui.ColorTransition{}
-            }
-        }
+                icon.name: "edit-delete"
+                onClicked:
+                {
+                    player.stop()
+                    listModel.list.clear()
+                    root.sync = false
+                    root.syncPlaylist = ""
+                }
+            },
+            Loader
+            {
+                active: settings.sleepOption !== "none"
+                visible: active
+                sourceComponent: Label
+                {
+                    font.family: "Monospace"
+                    text: "Zzz"
+                    color: "white"
+                    padding: Maui.Style.space.tiny
+
+                    // icon.name: "clock"
+                    background: Rectangle
+                    {
+                        color: "purple"
+                        radius: 4
+                    }
+                }
+            }]
+
+        footBar.leftContent: [
+            ToolButton
+            {
+                icon.name: "document-save"
+                onClicked: saveList()
+            },
+
+            ToolButton
+            {
+                icon.name: switch(playlist.repeatMode)
+                           {
+                           case Vvave.Playlist.NoRepeat: return "media-repeat-none"
+                           case Vvave.Playlist.RepeatOnce: return "media-playlist-repeat-song"
+                           case Vvave.Playlist.Repeat: return "media-playlist-repeat"
+                           }
+                onClicked:
+                {
+                    switch(playlist.repeatMode)
+                    {
+                    case Vvave.Playlist.NoRepeat:
+                        playlist.repeatMode = Vvave.Playlist.Repeat
+                        break
+
+                    case Vvave.Playlist.Repeat:
+                        playlist.repeatMode = Vvave.Playlist.RepeatOnce
+                        break
+
+                    case Vvave.Playlist.RepeatOnce:
+                        playlist.repeatMode = Vvave.Playlist.NoRepeat
+                        break
+                    }
+                }
+            },
+
+            ToolButton
+            {
+                checked:  playlist.playMode === Vvave.Playlist.Shuffle
+                icon.name: switch(playlist.playMode)
+                           {
+                           case Vvave.Playlist.Normal: return "media-playlist-normal"
+                           case Vvave.Playlist.Shuffle: return "media-playlist-shuffle"
+                           }
+
+                onClicked:
+                {
+                    switch(playlist.playMode)
+                    {
+                    case Vvave.Playlist.Normal:
+                        playlist.playMode = Vvave.Playlist.Shuffle
+                        break
+
+                    case Vvave.Playlist.Shuffle:
+                        playlist.playMode = Vvave.Playlist.Normal
+                        break
+                    }
+                }
+            }]
 
         Binding on currentIndex
         {
@@ -145,7 +135,6 @@ Maui.Page
         listModel.sort: ""
         listBrowser.enableLassoSelection: false
         headBar.visible: false
-        footBar.visible: false
         Maui.Theme.colorSet: Maui.Theme.Window
 
         holder.emoji: "qrc:/assets/view-media-track.svg"
