@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 00:41+0000\n"
+"POT-Creation-Date: 2025-05-11 00:41+0000\n"
 "PO-Revision-Date: 2025-05-03 09:30+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -334,7 +334,7 @@ msgstr "Нічого не знайдено!"
 msgid "Try with something else"
 msgstr "Спробувати інше"
 
-#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:142
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Почніть збирати ваш список відтворення."
@@ -393,7 +393,7 @@ msgstr "Інформація про виконавця"
 msgid "Album Info"
 msgstr "Дані щодо альбому"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:243
+#: src/widgets/MainPlaylist/MainPlaylist.qml:232
 #, kde-format
 msgid "Syncing to "
 msgstr "Синхронізуємо з "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 00:41+0000\n"
+"POT-Creation-Date: 2025-05-11 00:41+0000\n"
 "PO-Revision-Date: 2024-08-24 12:20+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -335,7 +335,7 @@ msgstr "No Results!"
 msgid "Try with something else"
 msgstr "Try with something else"
 
-#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:142
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Start putting together your playlist."
@@ -393,7 +393,7 @@ msgstr "Artist Info"
 msgid "Album Info"
 msgstr "Album Info"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:243
+#: src/widgets/MainPlaylist/MainPlaylist.qml:232
 #, kde-format
 msgid "Syncing to "
 msgstr "Syncing to "

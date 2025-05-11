@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-03 00:41+0000\n"
+"POT-Creation-Date: 2025-05-11 00:41+0000\n"
 "PO-Revision-Date: 2025-05-03 06:06+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -335,7 +335,7 @@ msgstr "Ni zadetkov!"
 msgid "Try with something else"
 msgstr "Poskusite nekaj drugega"
 
-#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:153
+#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:142
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Začetek sestavljanja seznama predvajanja."
@@ -394,7 +394,7 @@ msgstr "Informacije o umetniku"
 msgid "Album Info"
 msgstr "Informacije o albumu"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:243
+#: src/widgets/MainPlaylist/MainPlaylist.qml:232
 #, kde-format
 msgid "Syncing to "
 msgstr "Se sinhronizira z "
