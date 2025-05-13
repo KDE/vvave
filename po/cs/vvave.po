@@ -650,9 +650,3 @@ msgstr "Nastavit"
 #, kde-format
 msgid "Open file"
 msgstr "Otevřít soubor"
-
-#~ msgid "Auto Resume"
-#~ msgstr "Automaticky obnovit"
-
-#~ msgid "Favorite"
-#~ msgstr "Oblíbené"

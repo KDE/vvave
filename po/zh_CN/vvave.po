@@ -642,6 +642,3 @@ msgstr "设置"
 #, kde-format
 msgid "Open file"
 msgstr ""
-
-#~ msgid "Stop and Close"
-#~ msgstr "停止并关闭"
