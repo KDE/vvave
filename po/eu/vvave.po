@@ -1,7 +1,7 @@
 # Translation for vvave.po to Euskara/Basque (eu).
 # Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# SPDX-FileCopyrightText: 2023, 2024, 2025 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2022, 2023, 2024, 2025.
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-11 00:41+0000\n"
-"PO-Revision-Date: 2025-03-25 21:35+0100\n"
+"PO-Revision-Date: 2025-05-15 21:40+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -55,7 +55,7 @@ msgstr "Musika jotzen ari bada, itxi aurretik galdetu"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Gorde uneko jotze-zerrenda saioa"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
 #, kde-format
@@ -508,7 +508,7 @@ msgstr "Atzera-jo"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Saioa gorde eta leheneratu"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
