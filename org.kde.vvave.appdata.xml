@@ -5,6 +5,7 @@
   <project_license>LGPL-3.0</project_license>
   <launchable type="desktop-id">org.kde.vvave.desktop</launchable>
   <name>Vvave</name>
+  <name xml:lang="ar">فاف</name>
   <name xml:lang="ca">Vvave</name>
   <name xml:lang="ca-valencia">Vvave</name>
   <name xml:lang="cs">Vvave</name>
@@ -47,6 +48,7 @@
   <name xml:lang="zh-CN">Vvave</name>
   <name xml:lang="zh-TW">Vvave</name>
   <summary>Play your music collection</summary>
+  <summary xml:lang="ar">شغّل مجموعتك الموسيقية</summary>
   <summary xml:lang="ca">Reprodueix la vostra col·lecció de música</summary>
   <summary xml:lang="ca-valencia">Reproduïx la vostra col·lecció de música</summary>
   <summary xml:lang="cs">Přehrávejte svou hudební sbírku</summary>
@@ -93,6 +95,7 @@
   </developer>
   <description>
     <p> Tiny Qt Music Player to keep your favorite songs at hand. </p>
+    <p xml:lang="ar">مشغل موسيقى صغير الحجم للاحتفاظ بأغانيك المفضلة في متناول يدك.</p>
     <p xml:lang="ca">Reproductor musical en Qt per a tenir les cançons preferides a mà.</p>
     <p xml:lang="ca-valencia">Reproductor musical en Qt per a tindre les cançons preferides a mà.</p>
     <p xml:lang="cs">Maličký přehrávač ve Qt díky kterému budete mít svou oblíbenou hudbu vždy po ruce.</p>
@@ -141,6 +144,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>The Vvave music player</caption>
+      <caption xml:lang="ar">مشغّل الموسيقى فاف</caption>
       <caption xml:lang="ca">El reproductor de música Vvave</caption>
       <caption xml:lang="ca-valencia">El reproductor de música Vvave</caption>
       <caption xml:lang="cs">Přehrávač hudby Vvave</caption>
