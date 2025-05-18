@@ -1,6 +1,7 @@
 [Global]
 IconName=preferences-system-bluetooth
 Comment=Tiny Music Player
+Comment[ar]=مشغّل صوتي صغير
 Comment[ca]=Reproductor de música petit
 Comment[ca@valencia]=Reproductor de música xicotet
 Comment[cs]=Drobný přehrávač hudby
@@ -42,6 +43,7 @@ Comment[x-test]=xxTiny Music Playerxx
 Comment[zh_CN]=简易音乐播放器
 Comment[zh_TW]=輕巧的音樂播放器
 Name=vvave
+Name[ar]=فاف
 Name[ca]=vvave
 Name[ca@valencia]=vvave
 Name[cs]=vvave
@@ -86,6 +88,7 @@ Name[zh_TW]=vvave
 
 [Event/Notify]
 Name=vvave...
+Name[ar]=فاف…
 Name[ca]=vvave...
 Name[ca@valencia]=vvave…
 Name[cs]=vvave...
@@ -127,6 +130,7 @@ Name[x-test]=xxvvave...xx
 Name[zh_CN]=vvave...
 Name[zh_TW]=vvave...
 Comment=Connection to device failed
+Comment[ar]=فشل الاتّصال بالجهاز
 Comment[ca]=Ha fallat la connexió amb el dispositiu
 Comment[ca@valencia]=No s'ha pogut connectar amb el dispositiu
 Comment[cs]=Připojení k zařízení selhalo
