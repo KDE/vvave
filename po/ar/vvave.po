@@ -1,0 +1,667 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the vvave package.
+# SPDX-FileCopyrightText: 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vvave\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-05-11 00:41+0000\n"
+"PO-Revision-Date: 2025-05-17 12:08+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: src/main.cpp:77
+#, kde-format
+msgid "Organize and listen to your music."
+msgstr "نظّم موسيقاك واستمع إليها."
+
+#: src/main.cpp:82 src/main.cpp:83
+#, kde-format
+msgid "Developer"
+msgstr "المطور"
+
+#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:163
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
+#: src/widgets/SelectionBar.qml:71
+#, kde-format
+msgid "Remove"
+msgstr "أزل"
+
+#: src/main.qml:350
+#, kde-format
+msgid "Missing file"
+msgstr "ملف ناقص"
+
+#: src/main.qml:412
+#, kde-format
+msgid "Are you sure you want to stop the music playing and exit?"
+msgstr "هل أنت متأكد من أنك تريد إيقاف تشغيل الموسيقى والخروج؟"
+
+#: src/main.qml:424 src/widgets/SettingsView/SettingsDialog.qml:87
+#, kde-format
+msgid "Ask before closing if music is playing"
+msgstr "اسأل قبل الإغلاق إذا كانت الموسيقى تُشغل"
+
+#: src/main.qml:432
+#, kde-format
+msgid "Save current playlist session"
+msgstr "احفظ جلسة قائمة التشغيل الحالية"
+
+#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
+#, kde-format
+msgid "Remove track"
+msgid_plural "Remove %1 tracks"
+msgstr[0] "أزل المقطوعة"
+msgstr[1] "أزل مقطوعة"
+msgstr[2] "أزل مقطوعتين"
+msgstr[3] "أزل %1 مقطوعات"
+msgstr[4] "أزل %1 مقطوعة"
+msgstr[5] "أزل %1 مقطوعة"
+
+#: src/main.qml:474
+#, kde-format
+msgid ""
+"Are you sure you want to remove these files? This action can not be undone."
+msgstr "هل أنت متأكد من إزالة هذه الملفات؟ لا يمكن التراجع عن هذا الإجراء."
+
+#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:176
+#: src/widgets/SleepTimerDialog.qml:154
+#, kde-format
+msgid "Cancel"
+msgstr "ألغِ"
+
+#: src/main.qml:524
+#, kde-format
+msgid "Saved"
+msgstr "محفوظ"
+
+#: src/main.qml:524
+#, kde-format
+msgid "Track added to playlist"
+msgstr "أضف المقطوعة إلى قائمة التّشغيل"
+
+#: src/main.qml:551 src/widgets/SleepTimerDialog.qml:11
+#, kde-format
+msgid "Sleep Timer"
+msgstr "مؤقت النوم"
+
+#: src/main.qml:560 src/widgets/SettingsView/ShortcutsDialog.qml:12
+#, kde-format
+msgid "Shortcuts"
+msgstr "الاختصارات"
+
+#: src/main.qml:567
+#, kde-format
+msgid "Settings"
+msgstr "إعدادات"
+
+#: src/main.qml:574
+#, kde-format
+msgid "About"
+msgstr "عن"
+
+#: src/main.qml:626
+#, kde-format
+msgid "Toogle SideBar"
+msgstr "بدل الشريط الجانبي"
+
+#: src/main.qml:656
+#, kde-format
+msgid "Play and pause"
+msgstr "شغّل وألبث"
+
+#: src/main.qml:666
+#, kde-format
+msgid "Next"
+msgstr "التالي"
+
+#: src/main.qml:768
+#, kde-format
+msgid "Songs"
+msgstr "أغاني"
+
+#: src/main.qml:788 src/widgets/AlbumsView.qml:76
+#, kde-format
+msgid "Albums"
+msgstr "الألبومات"
+
+#: src/main.qml:795
+#, kde-format
+msgid "No Albums!"
+msgstr "لا توجد ألبومات!"
+
+#: src/main.qml:796 src/main.qml:820 src/widgets/TracksView.qml:20
+#, kde-format
+msgid "Add new music sources"
+msgstr "أضف مصادر موسيقى جديدة"
+
+#: src/main.qml:812 src/widgets/AlbumsView.qml:76
+#, kde-format
+msgid "Artists"
+msgstr "الفنّانون"
+
+#: src/main.qml:819
+#, kde-format
+msgid "No Artists!"
+msgstr "لا يوجد فنانون!"
+
+#: src/main.qml:837 src/widgets/SelectionBar.qml:46
+#, kde-format
+msgid "Tags"
+msgstr "الوسوم"
+
+#: src/main.qml:846
+#, kde-format
+msgid "Folders"
+msgstr "المجلّدات"
+
+#: src/models/playlists/playlistsmodel.cpp:110
+#, kde-format
+msgid "Most Played"
+msgstr "الأكثر تشغيلًا"
+
+#: src/models/playlists/playlistsmodel.cpp:117
+#, kde-format
+msgid "Random Tracks"
+msgstr "مقطوعات عشوائيّة"
+
+#: src/models/playlists/playlistsmodel.cpp:124
+#, kde-format
+msgid "Recent Tracks"
+msgstr "المقطوعات الحديثة"
+
+#: src/models/playlists/playlistsmodel.cpp:131
+#, kde-format
+msgid "Never Played"
+msgstr "غير المشغلة"
+
+#: src/models/playlists/playlistsmodel.cpp:138
+#, kde-format
+msgid "Classic Tracks"
+msgstr "المقطوعات التقليدية"
+
+#: src/services/local/powermanagementinterface.cpp:173
+#: src/services/local/powermanagementinterface.cpp:223
+#, kde-format
+msgctxt "explanation for sleep inhibit during play of music"
+msgid "Playing music"
+msgstr "يشغل صوتيات"
+
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
+#: src/widgets/TracksView.qml:25
+#, kde-format
+msgid "Add sources"
+msgstr "أضف مصادر"
+
+#: src/widgets/AlbumsView.qml:70
+#, kde-format
+msgid "This list is empty"
+msgstr "هذه القائمة فارغة"
+
+#: src/widgets/BabeGrid/BabeGrid.qml:51 src/widgets/BabeTable/BabeTable.qml:115
+#: src/widgets/CloudView/CloudView.qml:24
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#, kde-format
+msgid "Filter"
+msgid_plural "Filter %1 albums"
+msgstr[0] "رشّح"
+msgstr[1] "رشح ألبوم واحد"
+msgstr[2] "رشح ألبومين"
+msgstr[3] "رشح %1 ألبومات"
+msgstr[4] "رشح %1 ألبومًا"
+msgstr[5] "رشح %1 ألبوم"
+
+#: src/widgets/BabeTable/BabeTable.qml:81
+#, kde-format
+msgid "Shuffle Play"
+msgstr "تشغيل خليط"
+
+#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:47
+#, kde-format
+msgid "Play All"
+msgstr "شغل الكل"
+
+#: src/widgets/BabeTable/BabeTable.qml:95 src/widgets/TracksGroup.qml:55
+#, kde-format
+msgid "Append All"
+msgstr "ألحق الكل"
+
+#: src/widgets/BabeTable/BabeTable.qml:157
+#, kde-format
+msgid ""
+"Are you sure you want to delete the file from your computer? This action can "
+"not be undone."
+msgstr ""
+"هل أنت متأكد من رغبتك في حذف الملف من حاسوبك؟ لا يمكن التراجع عن هذا الإجراء."
+
+#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:68
+#, kde-format
+msgid "Go to Artist"
+msgstr "اذهب إلى الفنّان"
+
+#: src/widgets/BabeTable/BabeTable.qml:197 src/widgets/TracksGroup.qml:75
+#, kde-format
+msgid "Go to Album"
+msgstr "اذهب إلى الألبوم"
+
+#: src/widgets/BabeTable/TableMenu.qml:36
+#, kde-format
+msgid "Fav it"
+msgstr "فضّلها"
+
+#: src/widgets/BabeTable/TableMenu.qml:36
+#, kde-format
+msgid "UnFav it"
+msgstr "أزل التفضيل"
+
+#: src/widgets/BabeTable/TableMenu.qml:46
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
+#, kde-format
+msgid "Edit"
+msgstr "حرّر"
+
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:526
+#: src/widgets/SelectionBar.qml:54
+#, kde-format
+msgid "Share"
+msgstr "شارك"
+
+#: src/widgets/BabeTable/TableMenu.qml:66
+#, kde-format
+msgid "Add to '%1'"
+msgstr "أضف إلى '%1'"
+
+#: src/widgets/BabeTable/TableMenu.qml:76
+#, kde-format
+msgid "Add to playlist"
+msgstr "أضف إلى قائمة التّشغيل"
+
+#: src/widgets/BabeTable/TableMenu.qml:86
+#, kde-format
+msgid "Select"
+msgstr "اختر"
+
+#: src/widgets/BabeTable/TableMenu.qml:99
+#, kde-format
+msgid "Play Next"
+msgstr "شغل التالي"
+
+#: src/widgets/BabeTable/TableMenu.qml:124
+#, kde-format
+msgid "Show in Folder"
+msgstr "أظهر في مجلد"
+
+#: src/widgets/BabeTable/TableMenu.qml:150
+#, kde-format
+msgid "Delete"
+msgstr "احذف"
+
+#: src/widgets/CloudView/CloudView.qml:39
+#, kde-format
+msgid "Opps!"
+msgstr "أوبس!"
+
+#: src/widgets/CloudView/CloudView.qml:40
+#, kde-format
+msgid ""
+"You don't have an account set up.\n"
+"You can set up your account now by clicking here or under the Accounts "
+"options in the main menu"
+msgstr ""
+"لم تُعدّ حساباً.\n"
+"يمكنك إعداد حسابك الآن بالضغط هنا أو تحت خيارات الحسابات في القائمة الرئيسة"
+
+#: src/widgets/FocusView.qml:162
+#, kde-format
+msgid "Find"
+msgstr "اعثر"
+
+#: src/widgets/FocusView.qml:204
+#, kde-format
+msgid "No Results!"
+msgstr "لا توجد نتائج!"
+
+#: src/widgets/FocusView.qml:205
+#, kde-format
+msgid "Try with something else"
+msgstr "جرب شيئا مختلفا"
+
+#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:142
+#, kde-format
+msgid "Start putting together your playlist."
+msgstr "ابدأ بتجميع قائمة التشغيل الخاصة بك."
+
+#: src/widgets/FocusView.qml:498
+#, kde-format
+msgid "Info"
+msgstr "معلومات"
+
+#: src/widgets/FocusView.qml:517
+#, kde-format
+msgid "Mini Mode"
+msgstr "الوضع المصغر"
+
+#: src/widgets/FocusView.qml:535
+#, kde-format
+msgid "Save"
+msgstr "احفظ"
+
+#: src/widgets/FoldersView/FoldersView.qml:33
+#, kde-format
+msgid "Filter %1 folder"
+msgid_plural "Filter %1 folders"
+msgstr[0] "لا يوجد  مجلّدات"
+msgstr[1] "رشّح مجلد واحد"
+msgstr[2] "رشّح المجلدين"
+msgstr[3] "رشّح %1 المجلّدات"
+msgstr[4] "رشّح %1 مجلدًا"
+msgstr[5] "رشّح %1 مجلد"
+
+#: src/widgets/FoldersView/FoldersView.qml:47
+#, kde-format
+msgid "No Folders!"
+msgstr "لا يوجد  مجلّدات!"
+
+#: src/widgets/FoldersView/FoldersView.qml:48
+#, kde-format
+msgid "Add new music to your sources to browse by folders"
+msgstr "أضف موسيقى جديدة إلى مصادرك للتصفح حسب المجلدات"
+
+#: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
+#, kde-format
+msgid "No Tracks!"
+msgstr "لا يوجد مقطوعات!"
+
+#: src/widgets/FoldersView/FoldersView.qml:136
+#, kde-format
+msgid "This source folder seems to be empty!"
+msgstr "يبدو أن مجلد المصدر هذا فارغ!"
+
+#: src/widgets/InfoView/InfoView.qml:34
+#, kde-format
+msgid "Artist Info"
+msgstr "معلومات الفنّان"
+
+#: src/widgets/InfoView/InfoView.qml:61
+#, kde-format
+msgid "Album Info"
+msgstr "معلومات الألبوم"
+
+#: src/widgets/MainPlaylist/MainPlaylist.qml:232
+#, kde-format
+msgid "Syncing to "
+msgstr "زامن مع "
+
+#: src/widgets/MetadataDialog.qml:41
+#, kde-format
+msgid "Metadata"
+msgstr "البيانات الوصفيّة"
+
+#: src/widgets/MetadataDialog.qml:42
+#, kde-format
+msgid "Embedded metadata info."
+msgstr "معلومات البيانات الوصفية المضمنة."
+
+#: src/widgets/MetadataDialog.qml:46
+#, kde-format
+msgid "Track Title"
+msgstr "عنوان المقطوعة"
+
+#: src/widgets/MetadataDialog.qml:58
+#, kde-format
+msgid "Artist"
+msgstr "الفنّان"
+
+#: src/widgets/MetadataDialog.qml:71
+#, kde-format
+msgid "Album"
+msgstr "الألبوم"
+
+#: src/widgets/MetadataDialog.qml:84
+#, kde-format
+msgid "Track"
+msgstr "المقطوعة"
+
+#: src/widgets/MetadataDialog.qml:97
+#, kde-format
+msgid "Genre"
+msgstr "النوع"
+
+#: src/widgets/MetadataDialog.qml:110
+#, kde-format
+msgid "Year"
+msgstr "السنة"
+
+#: src/widgets/MetadataDialog.qml:123
+#, kde-format
+msgid "Comment"
+msgstr "تعليق"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:57
+#, kde-format
+msgid "Your playlist is empty. Start adding new music to it"
+msgstr "قائمة تشغيلك فارغة. ابدأ بإضافة موسيقى جديدة إليها"
+
+#: src/widgets/PlaylistsView/PlaylistsView.qml:68
+#, kde-format
+msgid "Remove from playlist"
+msgstr "أزل من قائمة التّشغيل"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
+#, kde-format
+msgid "No Playlists!"
+msgstr "لا توجد قوائم تشغيل!"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
+#, kde-format
+msgid "Start creating new custom playlists"
+msgstr "ابدأ في إنشاء قوائم تشغيل مخصصة جديدة"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
+#, kde-format
+msgid "Remove '%1'?"
+msgstr "أزل '%1'؟"
+
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:36
+#, kde-format
+msgid ""
+"Are you sure you want to remove this tag? This operation can not be undone."
+msgstr "هل أنت متأكد أنك تريد إزالة هذه الوسم؟ لا يمكن التراجع عن هذه العملية."
+
+#: src/widgets/SelectionBar.qml:28
+#, kde-format
+msgid "Play"
+msgstr "شغّل"
+
+#: src/widgets/SelectionBar.qml:39
+#, kde-format
+msgid "Append"
+msgstr "ألحق"
+
+#: src/widgets/SelectionBar.qml:61
+#, kde-format
+msgid "Queue"
+msgstr "صفّ"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:38
+#, kde-format
+msgid "Remove source"
+msgstr "إزالة مصدر"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:39
+#, kde-format
+msgid ""
+"Are you sure you want to remove the source: \n"
+"%1"
+msgstr ""
+"هل تريد بالتأكيد إزالة المصدر: \n"
+" %1"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:55
+#, kde-format
+msgid "Playback"
+msgstr "التّشغيل"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:60
+#, kde-format
+msgid "Save & Restore Session"
+msgstr "حفظ واستعد الجلسة"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:61
+#, kde-format
+msgid "Resume the last session playlist."
+msgstr "استئناف قائمة تشغيل الجلسة الأخيرة."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:73
+#, kde-format
+msgid "Volume"
+msgstr "الصوت"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:74
+#, kde-format
+msgid "Show volume controls."
+msgstr "اعرض متحكمات الصوت."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:86
+#, kde-format
+msgid "Exiting"
+msgstr "يخرج"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:100
+#, kde-format
+msgid "Collection"
+msgstr "المجموعة"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:105
+#, kde-format
+msgid "Fetch Artwork"
+msgstr "اجلب  الصور الفنية"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:106
+#, kde-format
+msgid ""
+"Gathers album and artists artworks from online services: LastFM, Spotify, "
+"MusicBrainz, iTunes, Genius, and others."
+msgstr ""
+"يجمع الأعمال الفنية للألبومات والفنانين من الخدمات عبر الإنترنت: LastFM و "
+"Spotify و MusicBrainz و iTunes و Genius وغيرها."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:118
+#, kde-format
+msgid "Auto Scan"
+msgstr "مسح آليّ"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:119
+#, kde-format
+msgid ""
+"Scan all the music sources on startup to keep your collection up to date."
+msgstr "افحص جميع مصادر الموسيقى عند بدء التشغيل لتحديث مجموعتك الموسيقية."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:132
+#, kde-format
+msgid "General"
+msgstr "عامّ"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:137
+#, kde-format
+msgid "Focus View"
+msgstr "عرض التركيز"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:138
+#, kde-format
+msgid "Make the focus view the default."
+msgstr "اجعل عرض التركيز هو العرض المبدئي."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:153
+#, kde-format
+msgid "Artwork"
+msgstr "الغلاف الفنّي"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:154
+#, kde-format
+msgid "Show the cover artwork for the tracks."
+msgstr "اعرض الغلاف الفني للأغاني."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:169
+#, kde-format
+msgid "Titles"
+msgstr "العناوين"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:170
+#, kde-format
+msgid "Show the title of albums and artists in the grid view."
+msgstr "أظهر عناوين الألبومات والفنانين في عرض الشبكة."
+
+#: src/widgets/SettingsView/SettingsDialog.qml:186
+#, kde-format
+msgid "Sources"
+msgstr "المصادر"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:223
+#, kde-format
+msgid "Add"
+msgstr "أضف"
+
+#: src/widgets/SettingsView/SettingsDialog.qml:241
+#, kde-format
+msgid "Scan now"
+msgstr "امسح الآن"
+
+#: src/widgets/SettingsView/ShortcutsDialog.qml:26
+#: src/widgets/SettingsView/ShortcutsDialog.qml:39
+#, kde-format
+msgid "Unknown"
+msgstr "مجهول"
+
+#: src/widgets/SleepTimerDialog.qml:32
+#, kde-format
+msgid "15 minutes"
+msgstr "15 دقيقة"
+
+#: src/widgets/SleepTimerDialog.qml:49
+#, kde-format
+msgid "30 minutes"
+msgstr "30 دقيقة"
+
+#: src/widgets/SleepTimerDialog.qml:67
+#, kde-format
+msgid "1 hour"
+msgstr "ساعة واحدة"
+
+#: src/widgets/SleepTimerDialog.qml:85
+#, kde-format
+msgid "End of track"
+msgstr "نهاية المقطوعة"
+
+#: src/widgets/SleepTimerDialog.qml:103
+#, kde-format
+msgid "End of playlist"
+msgstr "نهاية قائمة التشغيل"
+
+#: src/widgets/SleepTimerDialog.qml:123
+#, kde-format
+msgid "Off"
+msgstr "مغلق"
+
+#: src/widgets/SleepTimerDialog.qml:145
+#, kde-format
+msgid "Close application after"
+msgstr "أغلق التطبيق بعد"
+
+#: src/widgets/SleepTimerDialog.qml:160
+#, kde-format
+msgid "Set"
+msgstr "عيّن"
+
+#: src/widgets/TracksView.qml:31
+#, kde-format
+msgid "Open file"
+msgstr "افتح ملفًا"
