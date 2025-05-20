@@ -82,7 +82,7 @@ Maui.AltBrowser
     }
 
     footBar.visible: false
-    headBar.forceCenterMiddleContent: false
+    headerMargins: Maui.Style.contentMargins
     headBar.middleContent: Maui.SearchField
     {
         id: _filterField

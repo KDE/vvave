@@ -88,7 +88,7 @@ StackView
 
                 Rectangle
                 {
-                    anchors.fill: parent
+                    anchors.fill: artworkBg
                     color: Maui.Theme.backgroundColor
                     opacity: 0.7
                 }

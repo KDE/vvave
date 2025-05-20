@@ -25,7 +25,7 @@ Maui.AltBrowser
     Maui.Theme.inherit: false
     headBar.visible: listModel.list.count > 1
 
-    headerMargins: Maui.Style.defaultPadding
+    headerMargins: Maui.Style.contentMargins
     floatingHeader: true
     // headBar.background: Rectangle
     // {

@@ -582,37 +582,28 @@ Maui.ApplicationWindow
     {
         id: _sideBarView
         sideBar.preferredWidth: Maui.Style.units.gridUnit * 16
+        sideBar.floats: sideBar.collapsed
         anchors.fill: parent
 
-        sideBarContent: Item
+        Maui.Theme.colorSet: Maui.Theme.View
+
+        sideBarContent: Loader
         {
-            id: _drawer
+            id: _mainPlaylistLoader
             anchors.fill: parent
+            anchors.margins: Maui.Style.contentMargins
 
-            Loader
-            {
-                id: _mainPlaylistLoader
-                anchors.fill: parent
-
-                asynchronous: false
-                sourceComponent: MainPlaylist {}
-            }
+            asynchronous: false
+            sourceComponent: MainPlaylist {}
         }
 
         Maui.Page
         {
             id: _mainPage
             anchors.fill: parent
+            background: null
             headBar.visible: false
-
-            footerMargins: root.focusView ? 0 : Maui.Style.defaultPadding
-            // floatingFooter: !root.focusView
-
-            // footBar.background: Rectangle
-            // {
-            //     color: Maui.Theme.backgroundColor
-            //     visible: !root.focusView
-            // }
+            footerMargins: Maui.Style.contentMargins
 
             footBar.farLeftContent: ToolButton
             {
@@ -676,6 +667,7 @@ Maui.ApplicationWindow
                 focus: true
                 anchors.fill: parent
                 initialItem: _focusViewComponent
+                background: null
 
                 Component.onCompleted:
                 {
@@ -728,10 +720,12 @@ Maui.ApplicationWindow
                     id: swipeView
                     maxViews: 3
 
+                    headerMargins: Maui.Style.contentMargins
                     floatingFooter: true
                     flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
                     altHeader: Maui.Handy.isMobile
                     Maui.Controls.showCSD: true
+                    background: null
 
                     headBar.leftContent: Loader
                     {

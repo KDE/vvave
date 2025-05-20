@@ -47,7 +47,6 @@ if(UNIX AND NOT ANDROID)
 endif()
 
 if(ANDROID)
-    include(/home/camilo/Android/Sdk/android_openssl/android_openssl.cmake)
 
     qt_add_executable(${PROJECT_NAME}
         MANUAL_FINALIZATION
@@ -57,10 +56,8 @@ if(ANDROID)
     set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android_files)
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/android_files/version.gradle.in ${CMAKE_BINARY_DIR}/src/version.gradle)
 
+    include(/home/camilo/Android/Sdk/android_openssl/android_openssl.cmake)
     add_android_openssl_libraries(${PROJECT_NAME})
-    # set_property(TARGET ${PROJECT_NAME} PROPERTY QT_ANDROID_EXTRA_LIBS
-    #     /home/camilo/Android/Sdk/android_openssl/ libcrypto_1_1.so
-    #     /home/camilo/Android/Sdk/android_openssl/libssl_1_1.so)
 else()
     qt_add_executable(${PROJECT_NAME}
         ${vvave_SRCS}
@@ -102,16 +99,20 @@ qt_add_qml_module(${PROJECT_NAME} URI app.maui.vvave
     db/Queries.js)
 
 if (ANDROID)
-    find_package(OpenSSL REQUIRED)
+    # find_package(OpenSSL REQUIRED)
 
-    target_link_libraries(${PROJECT_NAME}
-        PRIVATE
-        OpenSSL::SSL)
+    # target_link_libraries(${PROJECT_NAME}
+    #     PRIVATE
+    #     OpenSSL::SSL)
 
     kde_source_files_enable_exceptions(${PROJECT_NAME})
 
+    # target_link_libraries(${PROJECT_NAME} PRIVATE -L/home/camilo/Qt/6.9.0/android_arm64_v8a/lib/libtag_arm64-v8a.so)
+    # target_link_libraries(${PROJECT_NAME} PRIVATE -L/home/camilo/Qt/6.9.0/android_arm64_v8a/lib/libtag_c_arm64-v8a.so)
+    # target_include_directories(${PROJECT_NAME} PUBLIC "/home/camilo/Qt/6.9.0/android_arm64_v8a/include/taglib")
+
     set(Taglib_LIBRARIES
-        TagLib::tag)
+        Taglib::Taglib)
 
 elseif(UNIX AND NOT WIN32 AND NOT APPLE)
     target_sources(${PROJECT_NAME}
@@ -151,7 +152,7 @@ target_link_libraries(${PROJECT_NAME}
     Qt6::QuickControls2
     KF6::CoreAddons
     KF6::I18n
-    ${Taglib_LIBRARIES})
+${Taglib_LIBRARIES})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     install(TARGETS ${PROJECT_NAME} ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

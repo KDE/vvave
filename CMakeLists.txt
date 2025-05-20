@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
 set(VVAVE_VERSION 4.0.2)
 add_compile_definitions(APP_COPYRIGHT_NOTICE="© 2019-2025 Maui Development Team")
@@ -25,6 +25,7 @@ set(REQUIRED_KF_VERSION 5.240.0)
 
 find_package(ECM ${REQUIRED_KF_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+# set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH})
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     include(KDEInstallDirs)
@@ -38,7 +39,7 @@ include(ECMSourceVersionControl)
 include(FeatureSummary)
 
 if(ANDROID)
-    set(ANDROID_ABIS "armeabi-v7a")
+    set(ANDROID_ABIS "arm64-v8a")
 endif()
 
 find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS Core Qml Quick QuickControls2 Network Sql Xml Multimedia)
@@ -47,7 +48,8 @@ find_package(KF6 ${REQUIRED_KF_VERSION} REQUIRED COMPONENTS I18n CoreAddons)
 find_package(MauiKit4 REQUIRED COMPONENTS FileBrowsing)
 
 if(ANDROID)
-    find_package(taglib 1.4 REQUIRED)
+    find_package(Taglib 1.4 REQUIRED)
+    # target_link_libraries
 else()
     find_package(Taglib 1.4 REQUIRED)
 endif()

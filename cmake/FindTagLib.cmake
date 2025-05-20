@@ -43,7 +43,7 @@ if(TAGLIBCONFIG_EXECUTABLE)
         message(STATUS "Found taglib: ${TAGLIB_LIBRARIES}")
      endif(TAGLIB_LIBRARIES AND TAGLIB_CFLAGS)
      string(REGEX REPLACE " *-I" ";" TAGLIB_INCLUDES "${TAGLIB_CFLAGS}")
-     string(SUBSTRING ${TAGLIB_INCLUDES} 0 -1 TAGLIB_INCLUDES)
+     # string(SUBSTRING ${TAGLIB_INCLUDES} 0 -1 TAGLIB_INCLUDES)
   endif(TAGLIB_VERSION VERSION_LESS "${TAGLIB_MIN_VERSION}")
   mark_as_advanced(TAGLIB_CFLAGS TAGLIB_LIBRARIES TAGLIB_INCLUDES)
 
@@ -69,8 +69,8 @@ else(TAGLIBCONFIG_EXECUTABLE)
     ${KDE4_LIB_DIR}
     ${LIB_INSTALL_DIR}
   )
-  
-  find_package_handle_standard_args(Taglib DEFAULT_MSG 
+
+  find_package_handle_standard_args(Taglib DEFAULT_MSG
                                     TAGLIB_INCLUDES TAGLIB_LIBRARIES)
 endif(TAGLIBCONFIG_EXECUTABLE)
 
@@ -84,4 +84,3 @@ else(TAGLIB_FOUND)
     message(FATAL_ERROR "Could not find Taglib")
   endif(Taglib_FIND_REQUIRED)
 endif(TAGLIB_FOUND)
-

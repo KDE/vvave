@@ -28,13 +28,20 @@ Maui.Page
 
     headBar.visible: false
 
+    background: Rectangle
+    {
+        color: Maui.Theme.alternateBackgroundColor
+        radius: Maui.Style.radiusV
+    }
 
     BabeTable
     {
         id: table
+        clip: true
         anchors.fill: parent
         footBar.visible: !mainlistEmpty
         footerMargins: Maui.Style.defaultPadding
+        background: null
         footBar.rightContent:[
 
             ToolButton
