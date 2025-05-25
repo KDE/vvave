@@ -312,7 +312,7 @@ msgid ""
 "options in the main menu"
 msgstr ""
 "No hi ha cap compte configurat.\n"
-"Ara podeu configurar el vostre compte fent clic ací o davall les opcions "
+"Ara podeu configurar el vostre compte clicant ací o davall les opcions "
 "Comptes en el menú principal"
 
 #: src/widgets/FocusView.qml:162
