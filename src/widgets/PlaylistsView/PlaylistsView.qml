@@ -18,7 +18,7 @@ StackView
     property string playlistQuery
 
     readonly property Flickable flickable : currentItem.flickable
-    readonly property alias playlistList :_playlistPage.list
+    readonly property alias playlistList : _playlistPage.list
 
     Component
     {

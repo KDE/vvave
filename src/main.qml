@@ -592,6 +592,7 @@ Maui.ApplicationWindow
             id: _mainPlaylistLoader
             anchors.fill: parent
             anchors.margins: Maui.Style.contentMargins
+            anchors.rightMargin: 0
 
             asynchronous: false
             sourceComponent: MainPlaylist {}

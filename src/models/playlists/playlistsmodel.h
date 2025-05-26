@@ -1,7 +1,7 @@
 #pragma once
 
 #include <MauiKit4/Core/mauilist.h>
-
+class Tagging;
 class PlaylistsModel : public MauiList
 {
     Q_OBJECT
@@ -9,6 +9,7 @@ class PlaylistsModel : public MauiList
 
 public:
     explicit PlaylistsModel(QObject *parent = nullptr);
+    ~PlaylistsModel();
     const FMH::MODEL_LIST &items() const override;
 
     int limit() const;
@@ -24,6 +25,7 @@ public Q_SLOTS:
     void removePlaylist(const int &index);
 
 private:
+    Tagging *m_tagging;
     FMH::MODEL_LIST list;
     void setList();
 

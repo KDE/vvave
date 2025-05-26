@@ -11,19 +11,26 @@
 PlaylistsModel::PlaylistsModel(QObject *parent)
     : MauiList(parent)
 {
-    connect(Tagging::getInstance(), &Tagging::tagged, [this](QVariantMap tag) {
+    m_tagging = Tagging::getInstance();
+    connect(m_tagging, &Tagging::tagged, [this](QVariantMap tag) {
         Q_EMIT this->preItemAppended();
         this->list << (this->packPlaylist(tag.value("tag").toString()));
         Q_EMIT this->postItemAppended();
     });
 
-    connect(Tagging::getInstance(), &Tagging::urlTagged, [this](QString, QString tag) {
+    connect(m_tagging, &Tagging::urlTagged, [this](QString, QString tag) {
         const auto index = this->indexOf(FMH::MODEL_KEY::PLAYLIST, tag);
         auto item = this->list[index];
         item[FMH::MODEL_KEY::PREVIEW] = playlistArtworkPreviews(tag);
         this->list[index] = item;
         Q_EMIT this->updateModel(index, {});
     });
+}
+
+PlaylistsModel::~PlaylistsModel()
+{
+    m_tagging->disconnect();
+    m_tagging = nullptr;
 }
 
 const FMH::MODEL_LIST &PlaylistsModel::items() const
