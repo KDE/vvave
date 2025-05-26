@@ -57,13 +57,8 @@ Maui.Page
     flickable: _listBrowser.flickable
 
     headBar.visible: control.list.count > 0
-    headerMargins: Maui.Style.contentMargins
-    // headBar.background: Rectangle
-    // {
-    //     color: Maui.Theme.backgroundColor
-    //     radius: Maui.Style.radiusV
-    //     opacity: 0.9
-    // }
+    headerContainer.margins: Maui.Style.contentMargins
+    headerContainer.topMargin: 0
 
     headBar.rightContent: Loader
     {

@@ -149,6 +149,7 @@ StackView
             property alias filterField: _filterField
             Maui.Controls.showCSD: settings.focusViewDefault
             background: null
+            headerContainer.margins: Maui.Style.contentMargins
             headBar.background: null
             headBar.leftContent: Loader
             {

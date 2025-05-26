@@ -25,14 +25,10 @@ Maui.AltBrowser
     Maui.Theme.inherit: false
     headBar.visible: listModel.list.count > 1
 
-    headerMargins: Maui.Style.contentMargins
+    headerContainer.margins: Maui.Style.contentMargins
+    headerContainer.topMargin: 0
+
     floatingHeader: true
-    // headBar.background: Rectangle
-    // {
-    //     color: Maui.Theme.backgroundColor
-    //     radius: Maui.Style.radiusV
-    //     opacity: 0.9
-    // }
 
     headBar.middleContent: Loader
     {

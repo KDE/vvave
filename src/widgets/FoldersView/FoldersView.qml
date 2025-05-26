@@ -23,7 +23,9 @@ StackView
         Maui.Theme.inherit: false
         Maui.Controls.level : Maui.Controls.Secondary
 
-        headerMargins: Maui.Style.contentMargins
+        headerContainer.margins: Maui.Style.contentMargins
+        headerContainer.topMargin: 0
+
         headBar.middleContent: Maui.SearchField
         {
             id: _filterField

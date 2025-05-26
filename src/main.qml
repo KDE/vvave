@@ -721,6 +721,8 @@ Maui.ApplicationWindow
                     maxViews: 3
 
                     headerMargins: Maui.Style.contentMargins
+                    footerMargins: headerMargins
+
                     floatingFooter: true
                     flickable: swipeView.currentItem.flickable || swipeView.currentItem.item.flickable
                     altHeader: Maui.Handy.isMobile
