@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-11 00:41+0000\n"
+"POT-Creation-Date: 2025-05-27 00:40+0000\n"
 "PO-Revision-Date: 2024-12-29 23:03+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -29,7 +29,7 @@ msgstr "भवतः सङ्गीतं व्यवस्थितं कृ
 msgid "Developer"
 msgstr "विकासकः"
 
-#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:163
+#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:158
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Save current playlist session"
 msgstr ""
 
-#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -72,7 +72,7 @@ msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "किं भवन्तः एताः सञ्चिकाः हर्तुं इच्छन्ति इति निश्चितम्? एतत् कर्म न निवर्तयितुं शक्यते।"
 
-#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:176
+#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:171
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
@@ -108,82 +108,82 @@ msgstr "सेटिंग्स्"
 msgid "About"
 msgstr "विषये"
 
-#: src/main.qml:626
+#: src/main.qml:618
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "टूल् साइडबार"
 
-#: src/main.qml:656
+#: src/main.qml:648
 #, kde-format
 msgid "Play and pause"
 msgstr "क्रीडन्तु विरामं च कुर्वन्तु"
 
-#: src/main.qml:666
+#: src/main.qml:658
 #, kde-format
 msgid "Next"
 msgstr "अग्रिम"
 
-#: src/main.qml:768
+#: src/main.qml:765
 #, kde-format
 msgid "Songs"
 msgstr "गीतानि"
 
-#: src/main.qml:788 src/widgets/AlbumsView.qml:76
+#: src/main.qml:785 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "एल्बम"
 
-#: src/main.qml:795
+#: src/main.qml:792
 #, kde-format
 msgid "No Albums!"
 msgstr "कोऽपि एल्बमः नास्ति!"
 
-#: src/main.qml:796 src/main.qml:820 src/widgets/TracksView.qml:20
+#: src/main.qml:793 src/main.qml:817 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "नूतनानि सङ्गीतस्रोतानि योजयन्तु"
 
-#: src/main.qml:812 src/widgets/AlbumsView.qml:76
+#: src/main.qml:809 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "कलाकाराः"
 
-#: src/main.qml:819
+#: src/main.qml:816
 #, kde-format
 msgid "No Artists!"
 msgstr "न कलाकाराः!"
 
-#: src/main.qml:837 src/widgets/SelectionBar.qml:46
+#: src/main.qml:834 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "टैग्स"
 
-#: src/main.qml:846
+#: src/main.qml:843
 #, kde-format
 msgid "Folders"
 msgstr "पुटम्"
 
-#: src/models/playlists/playlistsmodel.cpp:110
+#: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
 msgid "Most Played"
 msgstr "सर्वाधिकं क्रीडितः"
 
-#: src/models/playlists/playlistsmodel.cpp:117
+#: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
 msgid "Random Tracks"
 msgstr "यादृच्छिक पटल"
 
-#: src/models/playlists/playlistsmodel.cpp:124
+#: src/models/playlists/playlistsmodel.cpp:131
 #, kde-format
 msgid "Recent Tracks"
 msgstr "Recent Tracks"
 
-#: src/models/playlists/playlistsmodel.cpp:131
+#: src/models/playlists/playlistsmodel.cpp:138
 #, kde-format
 msgid "Never Played"
 msgstr "कदापि न क्रीडितः"
 
-#: src/models/playlists/playlistsmodel.cpp:138
+#: src/models/playlists/playlistsmodel.cpp:145
 #, kde-format
 msgid "Classic Tracks"
 msgstr "क्लासिक पटल"
@@ -195,7 +195,7 @@ msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
 msgstr "सङ्गीतं वादयन्"
 
-#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:54
 #: src/widgets/TracksView.qml:25
 #, kde-format
 msgid "Add sources"
@@ -206,31 +206,31 @@ msgstr "स्रोतांसि योजयतु"
 msgid "This list is empty"
 msgstr "इयं सूची रिक्तम् अस्ति"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:51 src/widgets/BabeTable/BabeTable.qml:115
+#: src/widgets/BabeGrid/BabeGrid.qml:47 src/widgets/BabeTable/BabeTable.qml:110
 #: src/widgets/CloudView/CloudView.qml:24
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:94
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "छाननम्"
 msgstr[1] "%1 एल्बमान् फ़िल्टर कुर्वन्तु"
 
-#: src/widgets/BabeTable/BabeTable.qml:81
+#: src/widgets/BabeTable/BabeTable.qml:76
 #, kde-format
 msgid "Shuffle Play"
 msgstr "शफल प्ले"
 
-#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:47
+#: src/widgets/BabeTable/BabeTable.qml:83 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
 msgstr "Play All"
 
-#: src/widgets/BabeTable/BabeTable.qml:95 src/widgets/TracksGroup.qml:55
+#: src/widgets/BabeTable/BabeTable.qml:90 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
 msgstr "सर्वं योजयतु"
 
-#: src/widgets/BabeTable/BabeTable.qml:157
+#: src/widgets/BabeTable/BabeTable.qml:152
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
@@ -238,12 +238,12 @@ msgid ""
 msgstr ""
 "किं भवन्तः निश्चयेन स्वसङ्गणकात् सञ्चिकां विलोपयितुम् इच्छन्ति? एतत् कर्म न निवर्तयितुं शक्यते।"
 
-#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:185 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "Artist इति गच्छन्तु"
 
-#: src/widgets/BabeTable/BabeTable.qml:197 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:192 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "Album इत्यत्र गच्छन्तु"
@@ -264,7 +264,7 @@ msgstr "UnFav it"
 msgid "Edit"
 msgstr "सम्पादन"
 
-#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:526
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:527
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
@@ -315,64 +315,64 @@ msgstr ""
 "भवतः खातं स्थापितं नास्ति। अत्र क्लिक् कृत्वा अथवा मुख्यमेनूमध्ये Accounts विकल्पानां अधः "
 "इदानीं स्वस्य खातं स्थापयितुं शक्नुवन्ति"
 
-#: src/widgets/FocusView.qml:162
+#: src/widgets/FocusView.qml:163
 #, kde-format
 msgid "Find"
 msgstr "अन्वेषय"
 
-#: src/widgets/FocusView.qml:204
+#: src/widgets/FocusView.qml:205
 #, kde-format
 msgid "No Results!"
 msgstr "न परिणामः!"
 
-#: src/widgets/FocusView.qml:205
+#: src/widgets/FocusView.qml:206
 #, kde-format
 msgid "Try with something else"
 msgstr "अन्येन किमपि सह प्रयतस्व"
 
-#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:142
+#: src/widgets/FocusView.qml:245 src/widgets/MainPlaylist/MainPlaylist.qml:149
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "स्वस्य प्लेलिस्ट् एकत्र स्थापयितुं आरभत।"
 
-#: src/widgets/FocusView.qml:498
+#: src/widgets/FocusView.qml:499
 #, kde-format
 msgid "Info"
 msgstr "Info"
 
-#: src/widgets/FocusView.qml:517
+#: src/widgets/FocusView.qml:518
 #, kde-format
 msgid "Mini Mode"
 msgstr "मिनी मोड"
 
-#: src/widgets/FocusView.qml:535
+#: src/widgets/FocusView.qml:536
 #, kde-format
 msgid "Save"
 msgstr "रक्ष्"
 
-#: src/widgets/FoldersView/FoldersView.qml:33
+#: src/widgets/FoldersView/FoldersView.qml:36
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
 msgstr[0] "%1 सञ्चयम् फ़िल्टर कुर्वन्तु"
 msgstr[1] "%1 सञ्चयम् फ़िल्टर कुर्वन्तु"
 
-#: src/widgets/FoldersView/FoldersView.qml:47
+#: src/widgets/FoldersView/FoldersView.qml:50
 #, kde-format
 msgid "No Folders!"
 msgstr "न फोल्डर्स्!"
 
-#: src/widgets/FoldersView/FoldersView.qml:48
+#: src/widgets/FoldersView/FoldersView.qml:51
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
 msgstr "पुटैः ब्राउज् कर्तुं स्वस्रोतेषु नूतनं सङ्गीतं योजयन्तु"
 
-#: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
+#: src/widgets/FoldersView/FoldersView.qml:138 src/widgets/TracksView.qml:19
 #, kde-format
 msgid "No Tracks!"
 msgstr "नो ट्रैक्स्!"
 
-#: src/widgets/FoldersView/FoldersView.qml:136
+#: src/widgets/FoldersView/FoldersView.qml:139
 #, kde-format
 msgid "This source folder seems to be empty!"
 msgstr "इदं स्रोतपुटं रिक्तं दृश्यते!"
@@ -387,7 +387,7 @@ msgstr "कलाकार जानकारी"
 msgid "Album Info"
 msgstr "एल्बम इन्फो"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:232
+#: src/widgets/MainPlaylist/MainPlaylist.qml:239
 #, kde-format
 msgid "Syncing to "
 msgstr "समन्वयनम्"

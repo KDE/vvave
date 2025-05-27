@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-11 00:41+0000\n"
+"POT-Creation-Date: 2025-05-27 00:40+0000\n"
 "PO-Revision-Date: 2025-05-03 14:23+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -28,7 +28,7 @@ msgstr "סידור והאזנה למוזיקה שלך."
 msgid "Developer"
 msgstr "מפתח"
 
-#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:163
+#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:158
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
@@ -55,7 +55,7 @@ msgstr "לשאול לפני סגירה אם מתנגנת מוזיקה"
 msgid "Save current playlist session"
 msgstr "שמירת הפעלת רשימת הנגינה הנוכחית"
 
-#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -70,7 +70,7 @@ msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
 msgstr "להסיר את הקבצים האלה? זאת פעולה בלתי הפיכה."
 
-#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:176
+#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:171
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
@@ -106,82 +106,82 @@ msgstr "הגדרות"
 msgid "About"
 msgstr "על אודות"
 
-#: src/main.qml:626
+#: src/main.qml:618
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "הצגת/הסתרת סרגל צד"
 
-#: src/main.qml:656
+#: src/main.qml:648
 #, kde-format
 msgid "Play and pause"
 msgstr "נגינה והשהיה"
 
-#: src/main.qml:666
+#: src/main.qml:658
 #, kde-format
 msgid "Next"
 msgstr "הבא"
 
-#: src/main.qml:768
+#: src/main.qml:765
 #, kde-format
 msgid "Songs"
 msgstr "שירים"
 
-#: src/main.qml:788 src/widgets/AlbumsView.qml:76
+#: src/main.qml:785 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "אלבומים"
 
-#: src/main.qml:795
+#: src/main.qml:792
 #, kde-format
 msgid "No Albums!"
 msgstr "אין אלבומים!"
 
-#: src/main.qml:796 src/main.qml:820 src/widgets/TracksView.qml:20
+#: src/main.qml:793 src/main.qml:817 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "הוספת מקורות מוזיקה חדשים"
 
-#: src/main.qml:812 src/widgets/AlbumsView.qml:76
+#: src/main.qml:809 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "אומנים"
 
-#: src/main.qml:819
+#: src/main.qml:816
 #, kde-format
 msgid "No Artists!"
 msgstr "אין אומנים!"
 
-#: src/main.qml:837 src/widgets/SelectionBar.qml:46
+#: src/main.qml:834 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "תגיות"
 
-#: src/main.qml:846
+#: src/main.qml:843
 #, kde-format
 msgid "Folders"
 msgstr "תיקיות"
 
-#: src/models/playlists/playlistsmodel.cpp:110
+#: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
 msgid "Most Played"
 msgstr "הכי הרבה השמעות"
 
-#: src/models/playlists/playlistsmodel.cpp:117
+#: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
 msgid "Random Tracks"
 msgstr "רצועות אקראיות"
 
-#: src/models/playlists/playlistsmodel.cpp:124
+#: src/models/playlists/playlistsmodel.cpp:131
 #, kde-format
 msgid "Recent Tracks"
 msgstr "רצועות אחרונות"
 
-#: src/models/playlists/playlistsmodel.cpp:131
+#: src/models/playlists/playlistsmodel.cpp:138
 #, kde-format
 msgid "Never Played"
 msgstr "מעולם לא הושמע"
 
-#: src/models/playlists/playlistsmodel.cpp:138
+#: src/models/playlists/playlistsmodel.cpp:145
 #, kde-format
 msgid "Classic Tracks"
 msgstr "רצועות קלסיות"
@@ -193,7 +193,7 @@ msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
 msgstr "השמעת מוזיקה"
 
-#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:54
 #: src/widgets/TracksView.qml:25
 #, kde-format
 msgid "Add sources"
@@ -204,9 +204,9 @@ msgstr "הוספת מקורות"
 msgid "This list is empty"
 msgstr "הרשימה ריקה"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:51 src/widgets/BabeTable/BabeTable.qml:115
+#: src/widgets/BabeGrid/BabeGrid.qml:47 src/widgets/BabeTable/BabeTable.qml:110
 #: src/widgets/CloudView/CloudView.qml:24
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:94
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
@@ -215,34 +215,34 @@ msgstr[1] "סינון שני אלבומים"
 msgstr[2] "סינון %1 אלבומים"
 msgstr[3] "סינון %1 אלבומים"
 
-#: src/widgets/BabeTable/BabeTable.qml:81
+#: src/widgets/BabeTable/BabeTable.qml:76
 #, kde-format
 msgid "Shuffle Play"
 msgstr "השמעה מעורבבת"
 
-#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:47
+#: src/widgets/BabeTable/BabeTable.qml:83 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
 msgstr "להשמיע הכול"
 
-#: src/widgets/BabeTable/BabeTable.qml:95 src/widgets/TracksGroup.qml:55
+#: src/widgets/BabeTable/BabeTable.qml:90 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
 msgstr "הוספה של הכול לסוף"
 
-#: src/widgets/BabeTable/BabeTable.qml:157
+#: src/widgets/BabeTable/BabeTable.qml:152
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr "למחוק את הקובץ מהמחשב שלך? זאת פעולה בלתי הפיכה."
 
-#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:185 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "מעבר לאומן/נית"
 
-#: src/widgets/BabeTable/BabeTable.qml:197 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:192 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "מעבר לאלבום"
@@ -263,7 +263,7 @@ msgstr "הוצאה מהמועדפים"
 msgid "Edit"
 msgstr "עריכה"
 
-#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:526
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:527
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
@@ -314,42 +314,42 @@ msgstr ""
 "לא הגדרת אף חשבון.\n"
 "אפשר להגדיר חשבון כעת בלחיצה כאן או תחת אפשרויות חשבונות בתפריט הראשי"
 
-#: src/widgets/FocusView.qml:162
+#: src/widgets/FocusView.qml:163
 #, kde-format
 msgid "Find"
 msgstr "איתור"
 
-#: src/widgets/FocusView.qml:204
+#: src/widgets/FocusView.qml:205
 #, kde-format
 msgid "No Results!"
 msgstr "אין תוצאות!"
 
-#: src/widgets/FocusView.qml:205
+#: src/widgets/FocusView.qml:206
 #, kde-format
 msgid "Try with something else"
 msgstr "לנסות עם משהו אחר"
 
-#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:142
+#: src/widgets/FocusView.qml:245 src/widgets/MainPlaylist/MainPlaylist.qml:149
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "אפשר להתחיל לגבש את רשימת הנגינה שלך."
 
-#: src/widgets/FocusView.qml:498
+#: src/widgets/FocusView.qml:499
 #, kde-format
 msgid "Info"
 msgstr "פרטים"
 
-#: src/widgets/FocusView.qml:517
+#: src/widgets/FocusView.qml:518
 #, kde-format
 msgid "Mini Mode"
 msgstr "מצב מוקטן"
 
-#: src/widgets/FocusView.qml:535
+#: src/widgets/FocusView.qml:536
 #, kde-format
 msgid "Save"
 msgstr "שמירה"
 
-#: src/widgets/FoldersView/FoldersView.qml:33
+#: src/widgets/FoldersView/FoldersView.qml:36
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
@@ -358,22 +358,22 @@ msgstr[1] "סינון שתי תיקיות"
 msgstr[2] "סינון %1 תיקיות"
 msgstr[3] "סינון %1 תיקיות"
 
-#: src/widgets/FoldersView/FoldersView.qml:47
+#: src/widgets/FoldersView/FoldersView.qml:50
 #, kde-format
 msgid "No Folders!"
 msgstr "אין תיקיות!"
 
-#: src/widgets/FoldersView/FoldersView.qml:48
+#: src/widgets/FoldersView/FoldersView.qml:51
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
 msgstr "אפשר להוסיף מוזיקה חדשה למקורות שלך כדי לעיין לפי תיקיות"
 
-#: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
+#: src/widgets/FoldersView/FoldersView.qml:138 src/widgets/TracksView.qml:19
 #, kde-format
 msgid "No Tracks!"
 msgstr "אין רצועות!"
 
-#: src/widgets/FoldersView/FoldersView.qml:136
+#: src/widgets/FoldersView/FoldersView.qml:139
 #, kde-format
 msgid "This source folder seems to be empty!"
 msgstr "תיקיית המקור הזאת נראית ריקה!"
@@ -388,7 +388,7 @@ msgstr "פרטי אומן/נית"
 msgid "Album Info"
 msgstr "פרטי אלבום"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:232
+#: src/widgets/MainPlaylist/MainPlaylist.qml:239
 #, kde-format
 msgid "Syncing to "
 msgstr "מסתנכרן אל"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-11 00:41+0000\n"
+"POT-Creation-Date: 2025-05-27 00:40+0000\n"
 "PO-Revision-Date: 2025-05-15 21:40+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -30,7 +30,7 @@ msgstr "Zure musika antolatu eta entzun."
 msgid "Developer"
 msgstr "Garatzailea"
 
-#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:163
+#: src/main.qml:331 src/main.qml:480 src/widgets/BabeTable/BabeTable.qml:158
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:61
 #: src/widgets/SelectionBar.qml:71
 #, kde-format
@@ -57,7 +57,7 @@ msgstr "Musika jotzen ari bada, itxi aurretik galdetu"
 msgid "Save current playlist session"
 msgstr "Gorde uneko jotze-zerrenda saioa"
 
-#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:156
+#: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
@@ -72,7 +72,7 @@ msgstr ""
 "Ziur zaude fitxategi horiek kendu nahi dituzula? Ekintza hori ezin da "
 "desegin."
 
-#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:176
+#: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:171
 #: src/widgets/SleepTimerDialog.qml:154
 #, kde-format
 msgid "Cancel"
@@ -108,82 +108,82 @@ msgstr "Ezarpenak"
 msgid "About"
 msgstr "Honi buruz"
 
-#: src/main.qml:626
+#: src/main.qml:618
 #, kde-format
 msgid "Toogle SideBar"
 msgstr "Txandakatu alboko-barra"
 
-#: src/main.qml:656
+#: src/main.qml:648
 #, kde-format
 msgid "Play and pause"
 msgstr "Jo eta eten"
 
-#: src/main.qml:666
+#: src/main.qml:658
 #, kde-format
 msgid "Next"
 msgstr "Hurrengoa"
 
-#: src/main.qml:768
+#: src/main.qml:765
 #, kde-format
 msgid "Songs"
 msgstr "Abestiak"
 
-#: src/main.qml:788 src/widgets/AlbumsView.qml:76
+#: src/main.qml:785 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Albums"
 msgstr "Albumak"
 
-#: src/main.qml:795
+#: src/main.qml:792
 #, kde-format
 msgid "No Albums!"
 msgstr "Albumik ez!"
 
-#: src/main.qml:796 src/main.qml:820 src/widgets/TracksView.qml:20
+#: src/main.qml:793 src/main.qml:817 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
 msgstr "Gehitu musika-sorburu berriak"
 
-#: src/main.qml:812 src/widgets/AlbumsView.qml:76
+#: src/main.qml:809 src/widgets/AlbumsView.qml:76
 #, kde-format
 msgid "Artists"
 msgstr "Artistak"
 
-#: src/main.qml:819
+#: src/main.qml:816
 #, kde-format
 msgid "No Artists!"
 msgstr "Artistarik ez!"
 
-#: src/main.qml:837 src/widgets/SelectionBar.qml:46
+#: src/main.qml:834 src/widgets/SelectionBar.qml:46
 #, kde-format
 msgid "Tags"
 msgstr "Etiketak"
 
-#: src/main.qml:846
+#: src/main.qml:843
 #, kde-format
 msgid "Folders"
 msgstr "Karpetak"
 
-#: src/models/playlists/playlistsmodel.cpp:110
+#: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
 msgid "Most Played"
 msgstr "Gehien jotakoa"
 
-#: src/models/playlists/playlistsmodel.cpp:117
+#: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
 msgid "Random Tracks"
 msgstr "Ausazko pistak"
 
-#: src/models/playlists/playlistsmodel.cpp:124
+#: src/models/playlists/playlistsmodel.cpp:131
 #, kde-format
 msgid "Recent Tracks"
 msgstr "Azken aldiko pistak"
 
-#: src/models/playlists/playlistsmodel.cpp:131
+#: src/models/playlists/playlistsmodel.cpp:138
 #, kde-format
 msgid "Never Played"
 msgstr "Inoiz jo gabe"
 
-#: src/models/playlists/playlistsmodel.cpp:138
+#: src/models/playlists/playlistsmodel.cpp:145
 #, kde-format
 msgid "Classic Tracks"
 msgstr "Pista klasikoak"
@@ -195,7 +195,7 @@ msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
 msgstr "Musika jotzea"
 
-#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:51
+#: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:54
 #: src/widgets/TracksView.qml:25
 #, kde-format
 msgid "Add sources"
@@ -206,31 +206,31 @@ msgstr "Gehitu sorburuak"
 msgid "This list is empty"
 msgstr "Zerrenda hau hutsik dago"
 
-#: src/widgets/BabeGrid/BabeGrid.qml:51 src/widgets/BabeTable/BabeTable.qml:115
+#: src/widgets/BabeGrid/BabeGrid.qml:47 src/widgets/BabeTable/BabeTable.qml:110
 #: src/widgets/CloudView/CloudView.qml:24
-#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:92
+#: src/widgets/PlaylistsView/PlaylistsViewModel.qml:94
 #, kde-format
 msgid "Filter"
 msgid_plural "Filter %1 albums"
 msgstr[0] "Iragazi"
 msgstr[1] "Iragazi %1 album"
 
-#: src/widgets/BabeTable/BabeTable.qml:81
+#: src/widgets/BabeTable/BabeTable.qml:76
 #, kde-format
 msgid "Shuffle Play"
 msgstr "Nahastuta jo"
 
-#: src/widgets/BabeTable/BabeTable.qml:88 src/widgets/TracksGroup.qml:47
+#: src/widgets/BabeTable/BabeTable.qml:83 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
 msgstr "Jo guztia"
 
-#: src/widgets/BabeTable/BabeTable.qml:95 src/widgets/TracksGroup.qml:55
+#: src/widgets/BabeTable/BabeTable.qml:90 src/widgets/TracksGroup.qml:55
 #, kde-format
 msgid "Append All"
 msgstr "Erantsi guztia"
 
-#: src/widgets/BabeTable/BabeTable.qml:157
+#: src/widgets/BabeTable/BabeTable.qml:152
 #, kde-format
 msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
@@ -239,12 +239,12 @@ msgstr ""
 "Ziur zaude fitxategia zure ordenagailutik ezabatu nahi duzula? Ekintza hau "
 "ezin da desegin."
 
-#: src/widgets/BabeTable/BabeTable.qml:190 src/widgets/TracksGroup.qml:68
+#: src/widgets/BabeTable/BabeTable.qml:185 src/widgets/TracksGroup.qml:68
 #, kde-format
 msgid "Go to Artist"
 msgstr "Joan artistagana"
 
-#: src/widgets/BabeTable/BabeTable.qml:197 src/widgets/TracksGroup.qml:75
+#: src/widgets/BabeTable/BabeTable.qml:192 src/widgets/TracksGroup.qml:75
 #, kde-format
 msgid "Go to Album"
 msgstr "Joan albumera"
@@ -265,7 +265,7 @@ msgstr "Kendu gogoko"
 msgid "Edit"
 msgstr "Editatu"
 
-#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:526
+#: src/widgets/BabeTable/TableMenu.qml:56 src/widgets/FocusView.qml:527
 #: src/widgets/SelectionBar.qml:54
 #, kde-format
 msgid "Share"
@@ -317,64 +317,64 @@ msgstr ""
 "Zure kontua orain ezar dezakezu, hemen edo Kontuak aukeraren azpian klik "
 "eginez"
 
-#: src/widgets/FocusView.qml:162
+#: src/widgets/FocusView.qml:163
 #, kde-format
 msgid "Find"
 msgstr "Aurkitu"
 
-#: src/widgets/FocusView.qml:204
+#: src/widgets/FocusView.qml:205
 #, kde-format
 msgid "No Results!"
 msgstr "Emaitzarik ez!"
 
-#: src/widgets/FocusView.qml:205
+#: src/widgets/FocusView.qml:206
 #, kde-format
 msgid "Try with something else"
 msgstr "Saiatu beste zerbaitekin"
 
-#: src/widgets/FocusView.qml:244 src/widgets/MainPlaylist/MainPlaylist.qml:142
+#: src/widgets/FocusView.qml:245 src/widgets/MainPlaylist/MainPlaylist.qml:149
 #, kde-format
 msgid "Start putting together your playlist."
 msgstr "Hasi zure jotze-zerrenda osatzen."
 
-#: src/widgets/FocusView.qml:498
+#: src/widgets/FocusView.qml:499
 #, kde-format
 msgid "Info"
 msgstr "Informazioa"
 
-#: src/widgets/FocusView.qml:517
+#: src/widgets/FocusView.qml:518
 #, kde-format
 msgid "Mini Mode"
 msgstr "Mini modua"
 
-#: src/widgets/FocusView.qml:535
+#: src/widgets/FocusView.qml:536
 #, kde-format
 msgid "Save"
 msgstr "Gorde"
 
-#: src/widgets/FoldersView/FoldersView.qml:33
+#: src/widgets/FoldersView/FoldersView.qml:36
 #, kde-format
 msgid "Filter %1 folder"
 msgid_plural "Filter %1 folders"
 msgstr[0] "Iragazi karpeta %1"
 msgstr[1] "Iragazi %1 karpeta"
 
-#: src/widgets/FoldersView/FoldersView.qml:47
+#: src/widgets/FoldersView/FoldersView.qml:50
 #, kde-format
 msgid "No Folders!"
 msgstr "Karpetarik ez!"
 
-#: src/widgets/FoldersView/FoldersView.qml:48
+#: src/widgets/FoldersView/FoldersView.qml:51
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
 msgstr "Gehitu musika berria zure sorburuetara karpeten arabera arakatzeko"
 
-#: src/widgets/FoldersView/FoldersView.qml:135 src/widgets/TracksView.qml:19
+#: src/widgets/FoldersView/FoldersView.qml:138 src/widgets/TracksView.qml:19
 #, kde-format
 msgid "No Tracks!"
 msgstr "Pistarik ez!"
 
-#: src/widgets/FoldersView/FoldersView.qml:136
+#: src/widgets/FoldersView/FoldersView.qml:139
 #, kde-format
 msgid "This source folder seems to be empty!"
 msgstr "Sorburu-karpeta hau hutsik dagoela dirudi!"
@@ -389,7 +389,7 @@ msgstr "Artistaren informazioa"
 msgid "Album Info"
 msgstr "Albumaren informazioa"
 
-#: src/widgets/MainPlaylist/MainPlaylist.qml:232
+#: src/widgets/MainPlaylist/MainPlaylist.qml:239
 #, kde-format
 msgid "Syncing to "
 msgstr "Honekin sinkronizatzea, "
