@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-27 00:40+0000\n"
-"PO-Revision-Date: 2025-02-21 11:21+0200\n"
+"PO-Revision-Date: 2025-05-27 23:21+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -52,7 +52,7 @@ msgstr "Vahvista sulkeminen, kun musiikki soi"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Tallenna nykyinen soittolistaistunto"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
@@ -267,7 +267,7 @@ msgstr "Jaa"
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "Lisää kohteeseen ”%1”"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
@@ -502,7 +502,7 @@ msgstr "Toisto"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Tallenna ja palauta istunto"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
