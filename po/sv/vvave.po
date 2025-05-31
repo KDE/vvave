@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-27 00:40+0000\n"
-"PO-Revision-Date: 2025-03-26 17:47+0100\n"
+"PO-Revision-Date: 2025-05-30 21:07+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -52,7 +52,7 @@ msgstr "Fråga innan avslutning om musik spelas"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Spara aktuell spellistesession"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
@@ -503,7 +503,7 @@ msgstr "Uppspelning"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Spara och återställ session"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
