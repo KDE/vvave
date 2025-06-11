@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-27 00:40+0000\n"
-"PO-Revision-Date: 2025-04-07 01:12+0200\n"
+"PO-Revision-Date: 2025-06-10 21:42+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -52,7 +52,7 @@ msgstr "음악 재생 중일 때 묻기"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "현재 재생 목록 세션 저장"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
@@ -496,7 +496,7 @@ msgstr "재생"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "세션 저장과 복원"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
