@@ -572,7 +572,7 @@ msgstr "ხედის ფოკუსი"
 #: src/widgets/SettingsView/SettingsDialog.qml:138
 #, kde-format
 msgid "Make the focus view the default."
-msgstr "ხედის ფოკუსი ნაგულისხმებად დაყენება."
+msgstr "ხედის ფოკუსი ნაგულისხმევად დაყენება."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
