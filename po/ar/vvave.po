@@ -613,7 +613,7 @@ msgstr "أضف"
 #: src/widgets/SettingsView/SettingsDialog.qml:241
 #, kde-format
 msgid "Scan now"
-msgstr "امسح الآن"
+msgstr "امحُ الآن"
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:26
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
