@@ -1,21 +1,22 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2023.
+# SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-27 00:40+0000\n"
-"PO-Revision-Date: 2023-12-01 17:20-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2025-08-29 08:45-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -40,24 +41,19 @@ msgid "Missing file"
 msgstr "Arquivo faltante"
 
 #: src/main.qml:412
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"Tem certeza de que deseja remover a fonte: \n"
-"%1"
+msgstr "Tem certeza de que deseja parar a reprodução da música e sair?"
 
 #: src/main.qml:424 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "Pergunte antes de fechar se há música tocando"
 
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Salvar sessão atual da lista de reprodução"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
@@ -83,18 +79,17 @@ msgstr "Cancelar"
 #: src/main.qml:524
 #, kde-format
 msgid "Saved"
-msgstr ""
+msgstr "Salvo"
 
 #: src/main.qml:524
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "Sem lista de músicas!"
+msgstr "Faixa adicionada à lista de músicas"
 
 #: src/main.qml:551 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
 msgid "Sleep Timer"
-msgstr ""
+msgstr "Temporizador de sono"
 
 #: src/main.qml:560 src/widgets/SettingsView/ShortcutsDialog.qml:12
 #, kde-format
@@ -221,7 +216,7 @@ msgstr[1] "Filtrar %1 álbuns"
 #: src/widgets/BabeTable/BabeTable.qml:76
 #, kde-format
 msgid "Shuffle Play"
-msgstr ""
+msgstr "Reproduzir embaralhado"
 
 #: src/widgets/BabeTable/BabeTable.qml:83 src/widgets/TracksGroup.qml:47
 #, kde-format
@@ -277,13 +272,12 @@ msgstr "Compartilhar"
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "Adicionar à '%1'"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "Add to playlist"
-msgstr "Sem lista de músicas!"
+msgstr "Adicionar à lista de músicas"
 
 #: src/widgets/BabeTable/TableMenu.qml:86
 #, kde-format
@@ -344,17 +338,17 @@ msgstr "Comece a montar sua playlist."
 #: src/widgets/FocusView.qml:499
 #, kde-format
 msgid "Info"
-msgstr ""
+msgstr "Informações"
 
 #: src/widgets/FocusView.qml:518
 #, kde-format
 msgid "Mini Mode"
-msgstr ""
+msgstr "Modo mini"
 
 #: src/widgets/FocusView.qml:536
 #, kde-format
 msgid "Save"
-msgstr ""
+msgstr "Salvar"
 
 #: src/widgets/FoldersView/FoldersView.qml:36
 #, kde-format
@@ -514,7 +508,7 @@ msgstr "Reprodução"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Salvar e restaurar sessão"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
@@ -534,7 +528,7 @@ msgstr "Mostrar controles de volume."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "Saindo"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -627,45 +621,42 @@ msgstr "Desconhecido"
 #: src/widgets/SleepTimerDialog.qml:32
 #, kde-format
 msgid "15 minutes"
-msgstr ""
+msgstr "15 minutos"
 
 #: src/widgets/SleepTimerDialog.qml:49
 #, kde-format
 msgid "30 minutes"
-msgstr ""
+msgstr "30 minutos"
 
 #: src/widgets/SleepTimerDialog.qml:67
 #, kde-format
 msgid "1 hour"
-msgstr ""
+msgstr "1 hora"
 
 #: src/widgets/SleepTimerDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "Faixas aleatórias"
+msgstr "Fim da faixa"
 
 #: src/widgets/SleepTimerDialog.qml:103
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "End of playlist"
-msgstr "Sem lista de músicas!"
+msgstr "Fim da lista de músicas"
 
 #: src/widgets/SleepTimerDialog.qml:123
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Desligado"
 
 #: src/widgets/SleepTimerDialog.qml:145
 #, kde-format
 msgid "Close application after"
-msgstr ""
+msgstr "Fechar aplicativo após"
 
 #: src/widgets/SleepTimerDialog.qml:160
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Selecionar"
+msgstr "Definir"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
