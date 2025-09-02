@@ -282,7 +282,7 @@ msgstr "Afig a la llista de reproducció"
 #: src/widgets/BabeTable/TableMenu.qml:86
 #, kde-format
 msgid "Select"
-msgstr "Selecciona"
+msgstr "Tria"
 
 #: src/widgets/BabeTable/TableMenu.qml:99
 #, kde-format
