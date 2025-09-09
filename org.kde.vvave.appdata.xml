@@ -44,7 +44,6 @@
   <name xml:lang="sv">Vvave</name>
   <name xml:lang="tr">Vvave</name>
   <name xml:lang="uk">Vvave</name>
-  <name xml:lang="x-test">xxVvavexx</name>
   <name xml:lang="zh-CN">Vvave</name>
   <name xml:lang="zh-TW">Vvave</name>
   <summary>Play your music collection</summary>
@@ -86,7 +85,6 @@
   <summary xml:lang="sv">Spela din musiksamling</summary>
   <summary xml:lang="tr">Müzik koleksiyonunuzu çalın</summary>
   <summary xml:lang="uk">Відтворіть вашу музичну збірку</summary>
-  <summary xml:lang="x-test">xxPlay your music collectionxx</summary>
   <summary xml:lang="zh-CN">播放您收藏的音乐</summary>
   <summary xml:lang="zh-TW">播放您的音樂收藏</summary>
   <developer id="org.mauikit">
@@ -133,7 +131,6 @@
     <p xml:lang="sv">Mycket liten Qt musikspelare för att ha dina favoritlåtar till hands.</p>
     <p xml:lang="tr">En sevdiğiniz şarkıları elinizin altında tutmak için küçük Qt Müzik Çalar.</p>
     <p xml:lang="uk">Малесенький програвач музики на Qt, призначенням якого є зручний доступ до ваших улюблених композицій.</p>
-    <p xml:lang="x-test">xxTiny Qt Music Player to keep your favorite songs at hand.xx</p>
     <p xml:lang="zh-CN">为您随身播放最喜爱音乐的简易 Qt 播放器。</p>
     <p xml:lang="zh-TW">輕巧的 Qt 音樂播放器，讓你隨時隨地都能取得您喜愛的歌曲。</p>
   </description>
@@ -182,7 +179,6 @@
       <caption xml:lang="sv">Vvave musikspelaren</caption>
       <caption xml:lang="tr">Vvave müzik çalar</caption>
       <caption xml:lang="uk">Музичний програвач Vvave</caption>
-      <caption xml:lang="x-test">xxThe Vvave music playerxx</caption>
       <caption xml:lang="zh-CN">Vvave 音乐播放器</caption>
       <caption xml:lang="zh-TW">Vvave 音樂播放器</caption>
       <image type="source" width="1903" height="1320">
