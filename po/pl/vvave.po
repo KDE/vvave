@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-27 00:40+0000\n"
-"PO-Revision-Date: 2025-01-25 12:49+0100\n"
+"PO-Revision-Date: 2025-09-27 08:38+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language-Team: pl\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 25.08.0\n"
 
 #: src/main.cpp:77
 #, kde-format
@@ -52,7 +53,7 @@ msgstr "Zapytaj przed zamknięciem, jeśli odtwarzana jest muzyka"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Zapisz bieżącą listę odtwarzania"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
@@ -271,7 +272,7 @@ msgstr "Udostępnij"
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "Dodaj do '%1'"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
@@ -506,7 +507,7 @@ msgstr "Odtwarzanie"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Zapisz i przywróć sesję"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
