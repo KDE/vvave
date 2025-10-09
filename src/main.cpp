@@ -29,6 +29,7 @@
 #include <MauiKit4/FileBrowsing/fmstatic.h>
 #include <MauiKit4/Core/mauiapp.h>
 #include <MauiKit4/FileBrowsing/moduleinfo.h>
+#include <MauiKit4/Audio/moduleinfo.h>
 
 #include <taglib/taglib.h>
 

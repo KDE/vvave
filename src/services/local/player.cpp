@@ -2,45 +2,27 @@
 
 #include <MauiKit4/Accounts/mauiaccounts.h>
 
-#include <QNetworkRequest>
 #include <QByteArrayView>
-#include <QTime>
+
+#include <QNetworkRequest>
 #include <QThread>
+#include <QTime>
 
 #include "powermanagementinterface.h"
 
 Player::Player(QObject *parent)
-    : QObject(parent)
-    , player(new QMediaPlayer(this))
-    , m_output(new QAudioOutput(this))
+    : MediaPlayer(parent)
     , m_power(new PowerManagementInterface(this))
+
 {
-    this->player->setAudioOutput(m_output);
-    // this->player->setAutoPlay(true);
-    m_output->setVolume(this->volume);
-    connect(this->player, &QMediaPlayer::playbackStateChanged, [this](QMediaPlayer::PlaybackState state) {
-        auto position = this->player->position();
-        // QMediaPlayer::duration() "may not be available when initial playback begins". Sometimes rapidly changing tracks causes position == 0.0 == duration, so check for that.
-        if (state == QMediaPlayer::StoppedState && position > 0.0 && position == this->player->duration()) {
-            Q_EMIT this->finished();
-        }
-
-        Q_EMIT this->stateChanged();
-        Q_EMIT this->playingChanged();
+   setPreferredOutput("jack");
+   
+ 
+    connect(this, &MediaPlayer::stateChanged, [this]() {
+        // this->m_power->setPreventSleep(true);
+        // this->m_power->setPreventSleep(false);
+        // Q_EMIT this->playingChanged();
     });
-
-    // connect(this->player, &QMediaPlayer::mediaStatusChanged, [this](auto status)
-    // {
-    //     qDebug() << status;
-    //     if(status == QMediaPlayer::MediaStatus::LoadedMedia)
-    //     {
-    //         player->setPosition(500);
-    //          this->play();
-    //     }
-    // });
-
-    connect(this->player, &QMediaPlayer::positionChanged, this, &Player::posChanged);
-    connect(this->player, &QMediaPlayer::durationChanged, this, &Player::durationChanged);
 }
 
 inline QNetworkRequest getOcsRequest(const QNetworkRequest &request)
@@ -51,7 +33,7 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest &request)
 
     // Read raw headers out of the provided request
     QMap<QByteArray, QByteArray> rawHeaders;
-    const auto headerList =request.rawHeaderList();
+    const auto headerList = request.rawHeaderList();
 
     for (const QByteArray &headerKey : headerList) {
         rawHeaders.insert(headerKey, request.rawHeader(headerKey));
@@ -81,47 +63,8 @@ inline QNetworkRequest getOcsRequest(const QNetworkRequest &request)
     return newRequest;
 }
 
-bool Player::play() const
-{
-    if (this->url.isEmpty())
-        return false;
 
-    const auto status = player->mediaStatus();
-     if(status == QMediaPlayer::MediaStatus::NoMedia ||
-         // status == QMediaPlayer::MediaStatus::LoadingMedia ||
-         status == QMediaPlayer::MediaStatus::StalledMedia ||
-         status == QMediaPlayer::MediaStatus::InvalidMedia)
-     {
-qWarning() << "Error in playback and media status" << status;
-return false;
-    }
-
-    this->player->play();
-    this->m_power->setPreventSleep(true);
-
-    return true;
-}
-
-void Player::pause() const
-{
-    if (this->player->isAvailable())
-        this->player->pause();
-    this->m_power->setPreventSleep(false);
-
-}
-
-void Player::stop()
-{
-    if (this->player->isAvailable()) {
-        this->player->stop();
-        this->url = QUrl();
-        this->player->setSource(url);
-    }
-
-    this->m_power->setPreventSleep(false);
-}
-
-QString Player::transformTime(const int &value)
+QString Player::transformTime(int value)
 {
     QString tStr;
     if (value) {
@@ -135,58 +78,6 @@ QString Player::transformTime(const int &value)
     return tStr.isEmpty() ? "00:00" : tStr;
 }
 
-void Player::setUrl(const QUrl &value)
-{
-       if(value == this->url)
-           return;
-
-    this->url = value;
-    Q_EMIT this->urlChanged();
-
-    this->player->setSource(this->url);
-}
-
-QUrl Player::getUrl() const
-{
-    return this->url;
-}
-
-void Player::setVolume(const qreal &value)
-{
-    if (value == this->volume)
-        return;
-
-    this->volume = value;
-    m_output->setVolume(volume);
-    Q_EMIT this->volumeChanged();
-}
-
-qreal Player::getVolume() const
-{
-    return this->volume;
-}
-
-int Player::getDuration() const
-{
-    return static_cast<int>(this->player->duration());
-}
-
-QMediaPlayer::PlaybackState Player::getState() const
-{
-    return this->player->playbackState();
-}
-
-bool Player::getPlaying() const
-{
-    return player->playbackState() == QMediaPlayer::PlaybackState::PlayingState;
-}
-
-void Player::setPos(const int &value)
-{
-    this->player->setPosition(value);
-}
-
-int Player::getPos() const
-{
-    return this->player->position();
+bool Player::getPlaying() const {
+    return state() == MediaPlayer::Playing;
 }

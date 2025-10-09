@@ -41,12 +41,12 @@ MediaPlayer2Player::MediaPlayer2Player(Playlist *playListControler, Player *audi
     connect(m_audioPlayer, &Player::stateChanged, this, &MediaPlayer2Player::playerPlaybackStateChanged);
     connect(m_audioPlayer, &Player::stateChanged, this, &MediaPlayer2Player::playerIsSeekableChanged);
 //    connect(m_audioPlayer, &Player::posChanged, this, &MediaPlayer2Player::audioPositionChanged);
-    connect(m_audioPlayer, &Player::durationChanged, this, &MediaPlayer2Player::audioDurationChanged);
-    connect(m_audioPlayer, &Player::volumeChanged, this, &MediaPlayer2Player::playerVolumeChanged);
+    connect(m_audioPlayer, &Player::trackChanged, this, &MediaPlayer2Player::audioDurationChanged);
+    // connect(m_audioPlayer, &Player::volumeChanged, this, &MediaPlayer2Player::playerVolumeChanged);
 
-    m_volume = m_audioPlayer->getVolume() / 100;
+    // m_volume = m_audioPlayer->getVolume() / 100;
     m_canPlay = m_playListControler->canPlay();
-    signalPropertiesChange(QStringLiteral("Volume"), Volume());
+    // signalPropertiesChange(QStringLiteral("Volume"), Volume());
 
     m_mediaPlayerPresent = 1;
 }
@@ -62,9 +62,9 @@ QString MediaPlayer2Player::PlaybackStatus() const
         return result;
     }
 
-    if (m_audioPlayer->getState() == QMediaPlayer::StoppedState) {
+    if (m_audioPlayer->state() == MediaPlayer::Stopped) {
         result = QStringLiteral("Stopped");
-    } else if (m_audioPlayer->getState() == QMediaPlayer::PlayingState) {
+    } else if (m_audioPlayer->state() == MediaPlayer::Playing) {
         result = QStringLiteral("Playing");
     } else {
         result = QStringLiteral("Paused");
@@ -73,12 +73,12 @@ QString MediaPlayer2Player::PlaybackStatus() const
     if (mShowProgressOnTaskBar) {
         QVariantMap parameters;
 
-        if (m_audioPlayer->getState() == QMediaPlayer::StoppedState || m_audioPlayer->getDuration() == 0) {
+        if (m_audioPlayer->state() == MediaPlayer::Stopped || m_audioPlayer->duration() == 0) {
             parameters.insert(QStringLiteral("progress-visible"), false);
             parameters.insert(QStringLiteral("progress"), 0);
         } else {
             parameters.insert(QStringLiteral("progress-visible"), true);
-            parameters.insert(QStringLiteral("progress"), qRound(static_cast<double>(m_position / m_audioPlayer->getDuration())) / 1000.0);
+            parameters.insert(QStringLiteral("progress"), qRound(static_cast<double>(m_position / m_audioPlayer->duration())) / 1000.0);
         }
 
         mProgressIndicatorSignal.setArguments({QStringLiteral("application://org.maui.vvave.desktop"), parameters});
@@ -193,12 +193,12 @@ void MediaPlayer2Player::setPropertyPosition(int newPositionInMs)
     /* only sent new progress when it has advanced more than 1 %
      * to limit DBus traffic
      */
-    const auto incrementalProgress = static_cast<double>(newPositionInMs - mPreviousProgressPosition) / m_audioPlayer->getDuration();
+    const auto incrementalProgress = static_cast<double>(newPositionInMs - mPreviousProgressPosition) / m_audioPlayer->duration();
     if (mShowProgressOnTaskBar && (incrementalProgress > 0.01 || incrementalProgress < 0)) {
         mPreviousProgressPosition = newPositionInMs;
         QVariantMap parameters;
         parameters.insert(QStringLiteral("progress-visible"), true);
-        parameters.insert(QStringLiteral("progress"), static_cast<double>(newPositionInMs) / m_audioPlayer->getDuration());
+        parameters.insert(QStringLiteral("progress"), static_cast<double>(newPositionInMs) / m_audioPlayer->duration());
 
         mProgressIndicatorSignal.setArguments({QStringLiteral("application://org.maui.vvave.desktop"), parameters});
 
@@ -247,7 +247,7 @@ void MediaPlayer2Player::Seek(qlonglong Offset)
 {
     if (mediaPlayerPresent()) {
         auto offset = (m_position + Offset) / 1000;
-        m_audioPlayer->setPos(int(offset));
+        m_audioPlayer->setPosition(int(offset));
     }
 }
 
@@ -259,7 +259,7 @@ void MediaPlayer2Player::emitSeeked(int pos)
 void MediaPlayer2Player::SetPosition(const QDBusObjectPath &trackId, qlonglong pos)
 {
     if (trackId.path() == m_currentTrackId) {
-        m_audioPlayer->setPos(int(pos / 1000));
+        m_audioPlayer->setPosition(int(pos / 1000));
     }
 }
 
@@ -326,7 +326,7 @@ void MediaPlayer2Player::playerPlaybackStateChanged()
 
 void MediaPlayer2Player::playerIsSeekableChanged()
 {
-    m_playerIsSeekableChanged = m_audioPlayer->getState() == QMediaPlayer::PlaybackState::PausedState || m_audioPlayer->getState() == QMediaPlayer::PlaybackState::PlayingState;
+    m_playerIsSeekableChanged = m_audioPlayer->state() == MediaPlayer::Paused || m_audioPlayer->state() == MediaPlayer::Playing;
 
     signalPropertiesChange(QStringLiteral("CanSeek"), CanSeek());
     Q_EMIT canSeekChanged();
@@ -334,7 +334,7 @@ void MediaPlayer2Player::playerIsSeekableChanged()
 
 void MediaPlayer2Player::audioPositionChanged()
 {
-    setPropertyPosition(static_cast<int>(m_audioPlayer->getPos()));
+    setPropertyPosition(static_cast<int>(m_audioPlayer->position()));
 }
 
 void MediaPlayer2Player::audioDurationChanged()
@@ -346,12 +346,12 @@ void MediaPlayer2Player::audioDurationChanged()
     skipForwardControlEnabledChanged();
     playerPlaybackStateChanged();
     playerIsSeekableChanged();
-    setPropertyPosition(static_cast<int>(m_audioPlayer->getPos()));
+    setPropertyPosition(static_cast<int>(m_audioPlayer->position()));
 }
 
 void MediaPlayer2Player::playerVolumeChanged()
 {
-    setVolume(m_audioPlayer->getVolume() / 100.0);
+    setVolume(m_audioPlayer->volume());
 }
 
 int MediaPlayer2Player::currentTrack() const
@@ -379,7 +379,7 @@ QVariantMap MediaPlayer2Player::getMetadataOfCurrentTrack()
     }
 
     result[QStringLiteral("mpris:trackid")] = QVariant::fromValue<QDBusObjectPath>(QDBusObjectPath(m_currentTrackId));
-    result[QStringLiteral("mpris:length")] = qlonglong(m_audioPlayer->getDuration()) * 1000;
+    result[QStringLiteral("mpris:length")] = qlonglong(m_audioPlayer->duration()) * 1000;
     // convert milli-seconds into micro-seconds
 
     auto track = m_playListControler->currentTrack();
@@ -417,12 +417,12 @@ void MediaPlayer2Player::setShowProgressOnTaskBar(bool value)
 
     QVariantMap parameters;
 
-    if (!mShowProgressOnTaskBar || m_audioPlayer->getState() == QMediaPlayer::StoppedState || m_audioPlayer->getDuration() == 0) {
+    if (!mShowProgressOnTaskBar || m_audioPlayer->state() == MediaPlayer::Stopped || m_audioPlayer->duration() == 0) {
         parameters.insert(QStringLiteral("progress-visible"), false);
         parameters.insert(QStringLiteral("progress"), 0);
     } else {
         parameters.insert(QStringLiteral("progress-visible"), true);
-        parameters.insert(QStringLiteral("progress"), qRound(static_cast<double>(m_position / m_audioPlayer->getDuration())) / 1000.0);
+        parameters.insert(QStringLiteral("progress"), qRound(static_cast<double>(m_position / m_audioPlayer->duration())) / 1000.0);
     }
 
     mProgressIndicatorSignal.setArguments({QStringLiteral("application://org.maui.vvave.desktop"), parameters});

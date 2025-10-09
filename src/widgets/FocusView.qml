@@ -25,8 +25,8 @@ StackView
 
     property alias loader: _loader
 
-    readonly property string progressTimeLabel: player.transformTime((player.duration/1000) * (player.pos/player.duration))
-    readonly property string durationTimeLabel: player.transformTime((player.duration/1000))
+    readonly property string progressTimeLabel: player.formatTime_ms(player.elapsed)
+    readonly property string durationTimeLabel: player.formatTime_ms(player.duration)
 
     Maui.Style.adaptiveColorSchemeSource : Vvave.Vvave.artworkUrl(currentTrack.artist, currentTrack.album)
 
@@ -452,8 +452,8 @@ StackView
                             Layout.fillWidth: true
                             padding: 0
                             spacing: 0
-                            from: 0.0
-                            to: 1.0
+                            from: 1
+                            to: 100
                             value: player.volume
 
                             orientation: Qt.Horizontal
@@ -594,11 +594,11 @@ StackView
 
                             padding: 0
                             from: 0
-                            to: 1000
-                            value: player.pos/player.duration*1000
+                            to: 1.0
+                            value: player.position
                             spacing: 0
                             focus: true
-                            onMoved: player.pos = (player.duration / 1000) * value
+                            onMoved: player.position = value
                         }
                     }
                 }

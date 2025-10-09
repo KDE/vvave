@@ -143,6 +143,7 @@ target_link_libraries(${PROJECT_NAME}
     PRIVATE
     MauiKit4
     MauiKit4::FileBrowsing
+    MauiKit4::Audio
     Qt6::Core
     Qt6::Network
     Qt6::Sql
