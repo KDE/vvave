@@ -2,6 +2,7 @@
 
 #include <MauiKit4/Accounts/mauiaccounts.h>
 
+#include <MauiKit4/Audio/mediaplayer.h>
 #include <QByteArrayView>
 
 #include <QNetworkRequest>
@@ -16,13 +17,15 @@ Player::Player(QObject *parent)
 
 {
    setPreferredOutput("jack");
-   
- 
-    connect(this, &MediaPlayer::stateChanged, [this]() {
-        // this->m_power->setPreventSleep(true);
-        // this->m_power->setPreventSleep(false);
-        // Q_EMIT this->playingChanged();
-    });
+
+   connect(this, &MediaPlayer::stateChanged, [this]() {
+       if (state() == MediaPlayer::Playing)
+           this->m_power->setPreventSleep(true);
+       else
+           this->m_power->setPreventSleep(false);
+
+       Q_EMIT this->playingChanged();
+   });
 }
 
 inline QNetworkRequest getOcsRequest(const QNetworkRequest &request)

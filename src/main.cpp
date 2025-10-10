@@ -98,6 +98,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     const auto FBData = MauiKitFileBrowsing::aboutData();
     about.addComponent(FBData.name(), MauiKitFileBrowsing::buildVersion(), FBData.version(), FBData.webAddress());
 
+    const auto AudioData = MauiKitAudio::aboutData();
+    about.addComponent(AudioData.name(), MauiKitAudio::buildVersion(), AudioData.version(), AudioData.webAddress());
+
+    about.addCredit(MauiKitAudio::credit());
+
     KAboutData::setApplicationData(about);
 
     MauiApp::instance()->setIconName("qrc:/assets/vvave.png");
