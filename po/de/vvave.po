@@ -1,9 +1,7 @@
 # German translations for vvave package.
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
-#
-# Automatically generated, 2022.
+# SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
