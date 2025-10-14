@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-10 00:41+0000\n"
-"PO-Revision-Date: 2025-01-11 12:34+0200\n"
+"PO-Revision-Date: 2025-10-13 14:09+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: src/main.cpp:78
 #, kde-format
@@ -42,24 +42,19 @@ msgid "Missing file"
 msgstr "Trūksta failo"
 
 #: src/main.qml:412
-#, fuzzy, kde-format
-#| msgid ""
-#| "Are you sure you want to remove the source: \n"
-#| "%1"
+#, kde-format
 msgid "Are you sure you want to stop the music playing and exit?"
-msgstr ""
-"Ar tikrai norite pašalinti šaltinį: \n"
-"%1"
+msgstr "Ar tikrai norite sustabdyti muzikos atkūrimą ir išeiti?"
 
 #: src/main.qml:424 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "Klausti prieš išeinant, jei yra atkuriama muzika"
 
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "Įrašyti dabartinio grojaraščio seansą"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
@@ -281,7 +276,7 @@ msgstr "Bendrinti"
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "Pridėti į „%1“"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
@@ -517,7 +512,7 @@ msgstr "Atkūrimas"
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "Seanso įrašymas ir atkūrimas"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
@@ -537,7 +532,7 @@ msgstr "Rodyti garsumo valdiklius."
 #: src/widgets/SettingsView/SettingsDialog.qml:86
 #, kde-format
 msgid "Exiting"
-msgstr ""
+msgstr "Išėjimas"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
@@ -663,10 +658,9 @@ msgid "Close application after"
 msgstr "Užverti programą po"
 
 #: src/widgets/SleepTimerDialog.qml:160
-#, fuzzy, kde-format
-#| msgid "Select"
+#, kde-format
 msgid "Set"
-msgstr "Žymėti"
+msgstr "Nustatyti"
 
 #: src/widgets/TracksView.qml:31
 #, kde-format
