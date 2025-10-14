@@ -120,8 +120,8 @@ function playAll(tracks)
     root.playlistManager.clear()
     appendAll(tracks)
 
-    if(_drawer.modal && !_drawer.visible)
-        _drawer.visible = true
+    if(!_sideBarView.sideBar.visible)
+        _sideBarView.sideBar.toggle()
 
     mainPlaylist.listView.positionViewAtBeginning()
     playAt(0)
@@ -169,8 +169,8 @@ function shuffleAllModel(model)
     root.playlistManager.clear()
     appendAllModel(model)
 
-    if(_drawer.modal && !_drawer.visible)
-        _drawer.visible = true
+    if(!_sideBarView.sideBar.visible)
+        _sideBarView.sideBar.toggle()
 
     mainPlaylist.listView.positionViewAtBeginning()
     root.playlistManager.playMode = Vvave.Playlist.Shuffle

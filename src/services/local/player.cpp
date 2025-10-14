@@ -16,8 +16,6 @@ Player::Player(QObject *parent)
     , m_power(new PowerManagementInterface(this))
 
 {
-   setPreferredOutput("jack");
-
    connect(this, &MediaPlayer::stateChanged, [this]() {
        if (state() == MediaPlayer::Playing)
            this->m_power->setPreventSleep(true);

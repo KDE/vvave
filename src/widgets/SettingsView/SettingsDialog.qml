@@ -93,6 +93,21 @@ Maui.SettingsDialog
                 onToggled: settings.askBeforeClose = !settings.askBeforeClose
             }
         }
+
+
+        Maui.FlexSectionItem
+        {
+            label1.text: i18n("Output")
+            label2.text: i18n("Preferred output source")
+
+            ComboBox 
+            {
+                model: player.outputs
+                onActivated: player.preferredOutput = currentValue
+                // Set the initial currentIndex to the value stored in the backend.
+                Component.onCompleted: currentIndex = indexOfValue(player.preferredOutput)
+            }
+        }
     }
 
     Maui.SectionGroup
