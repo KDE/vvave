@@ -154,8 +154,8 @@ function playAllModel(model)
     root.playlistManager.clear()
     appendAllModel(model)
 
-    if(_drawer.modal && !_drawer.visible)
-        _drawer.visible = true
+    if(!_sideBarView.sideBar.visible)
+        _sideBarView.sideBar.toggle()
 
     mainPlaylist.listView.positionViewAtBeginning()
     playAt(0)

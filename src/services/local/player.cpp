@@ -16,6 +16,10 @@ Player::Player(QObject *parent)
     , m_power(new PowerManagementInterface(this))
 
 {
+    auto vvave_preferredOutput = qgetenv("VVAVE_DEFAULT_OUTPUT");
+    if(!vvave_preferredOutput.isEmpty())
+        setPreferredOutput(QString::fromLocal8Bit(vvave_preferredOutput));
+
    connect(this, &MediaPlayer::stateChanged, [this]() {
        if (state() == MediaPlayer::Playing)
            this->m_power->setPreventSleep(true);
