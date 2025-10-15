@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-10 00:41+0000\n"
+"POT-Creation-Date: 2025-10-15 00:42+0000\n"
 "PO-Revision-Date: 2022-11-10 19:46-0800\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -513,78 +513,88 @@ msgstr ""
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
+msgid "Output"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:101
+#, kde-format
+msgid "Preferred output source"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:115
+#, kde-format
 msgid "Collection"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:120
 #, kde-format
 msgid "Fetch Artwork"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:106
+#: src/widgets/SettingsView/SettingsDialog.qml:121
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:133
 #, kde-format
 msgid "Auto Scan"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:119
+#: src/widgets/SettingsView/SettingsDialog.qml:134
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:132
+#: src/widgets/SettingsView/SettingsDialog.qml:147
 #, kde-format
 msgid "General"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:137
+#: src/widgets/SettingsView/SettingsDialog.qml:152
 #, kde-format
 msgid "Focus View"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:138
+#: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Make the focus view the default."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:153
+#: src/widgets/SettingsView/SettingsDialog.qml:168
 #, kde-format
 msgid "Artwork"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:154
+#: src/widgets/SettingsView/SettingsDialog.qml:169
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:169
+#: src/widgets/SettingsView/SettingsDialog.qml:184
 #, kde-format
 msgid "Titles"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:170
+#: src/widgets/SettingsView/SettingsDialog.qml:185
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:186
+#: src/widgets/SettingsView/SettingsDialog.qml:201
 #, kde-format
 msgid "Sources"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:223
+#: src/widgets/SettingsView/SettingsDialog.qml:238
 #, kde-format
 msgid "Add"
 msgstr ""
 
-#: src/widgets/SettingsView/SettingsDialog.qml:241
+#: src/widgets/SettingsView/SettingsDialog.qml:256
 #, kde-format
 msgid "Scan now"
 msgstr ""

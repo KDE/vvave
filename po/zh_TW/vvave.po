@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-10 00:41+0000\n"
+"POT-Creation-Date: 2025-10-15 00:42+0000\n"
 "PO-Revision-Date: 2025-05-03 14:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -520,15 +520,25 @@ msgstr "退出"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
+msgid "Output"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:101
+#, kde-format
+msgid "Preferred output source"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:115
+#, kde-format
 msgid "Collection"
 msgstr "收藏"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:120
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "取得封面"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:106
+#: src/widgets/SettingsView/SettingsDialog.qml:121
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -537,63 +547,63 @@ msgstr ""
 "從 LastFM、Spotify、MusicBrainz、iTunes、Genius 等線上服務取得專輯和藝人封"
 "面。"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:133
 #, kde-format
 msgid "Auto Scan"
 msgstr "自動掃描"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:119
+#: src/widgets/SettingsView/SettingsDialog.qml:134
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr "啟動時掃描所有音樂來源來確保您的收藏是最新狀態。"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:132
+#: src/widgets/SettingsView/SettingsDialog.qml:147
 #, kde-format
 msgid "General"
 msgstr "一般"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:137
+#: src/widgets/SettingsView/SettingsDialog.qml:152
 #, kde-format
 msgid "Focus View"
 msgstr "專注檢視"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:138
+#: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "將專注檢視設為預設。"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:153
+#: src/widgets/SettingsView/SettingsDialog.qml:168
 #, kde-format
 msgid "Artwork"
 msgstr "封面"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:154
+#: src/widgets/SettingsView/SettingsDialog.qml:169
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "顯示音軌的封面。"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:169
+#: src/widgets/SettingsView/SettingsDialog.qml:184
 #, kde-format
 msgid "Titles"
 msgstr "標題"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:170
+#: src/widgets/SettingsView/SettingsDialog.qml:185
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "在格線檢視中顯示專輯與藝人的標題"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:186
+#: src/widgets/SettingsView/SettingsDialog.qml:201
 #, kde-format
 msgid "Sources"
 msgstr "來源"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:223
+#: src/widgets/SettingsView/SettingsDialog.qml:238
 #, kde-format
 msgid "Add"
 msgstr "新增"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:241
+#: src/widgets/SettingsView/SettingsDialog.qml:256
 #, kde-format
 msgid "Scan now"
 msgstr "現在掃描"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-10 00:41+0000\n"
+"POT-Creation-Date: 2025-10-15 00:42+0000\n"
 "PO-Revision-Date: 2025-05-15 21:40+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -532,15 +532,25 @@ msgstr "Irteten"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
+msgid "Output"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:101
+#, kde-format
+msgid "Preferred output source"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:115
+#, kde-format
 msgid "Collection"
 msgstr "Bilduma"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:120
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Ekarri artelana"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:106
+#: src/widgets/SettingsView/SettingsDialog.qml:121
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -549,64 +559,64 @@ msgstr ""
 "Albumetako eta artisten lerroko zerbitzuetako artelanak biltzen ditu: "
 "LastFM, Spotify, MusicBrainz, iTunes, Genius, eta beste batzuk."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:133
 #, kde-format
 msgid "Auto Scan"
 msgstr "Miatze automatikoa"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:119
+#: src/widgets/SettingsView/SettingsDialog.qml:134
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
 msgstr ""
 "Miatu musika sorburu guztiak abiatzean zure bilduma eguneratuta mantentzeko."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:132
+#: src/widgets/SettingsView/SettingsDialog.qml:147
 #, kde-format
 msgid "General"
 msgstr "Orokorra"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:137
+#: src/widgets/SettingsView/SettingsDialog.qml:152
 #, kde-format
 msgid "Focus View"
 msgstr "Foku ikuspegia"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:138
+#: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Egin foku ikuspegia lehenetsia."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:153
+#: src/widgets/SettingsView/SettingsDialog.qml:168
 #, kde-format
 msgid "Artwork"
 msgstr "Artelana"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:154
+#: src/widgets/SettingsView/SettingsDialog.qml:169
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Pistetarako, azaleko artelana erakutsi."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:169
+#: src/widgets/SettingsView/SettingsDialog.qml:184
 #, kde-format
 msgid "Titles"
 msgstr "Tituluak"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:170
+#: src/widgets/SettingsView/SettingsDialog.qml:185
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Erakutsi albumaren titulua eta artistak sareta-ikuspegian."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:186
+#: src/widgets/SettingsView/SettingsDialog.qml:201
 #, kde-format
 msgid "Sources"
 msgstr "Sorburuak"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:223
+#: src/widgets/SettingsView/SettingsDialog.qml:238
 #, kde-format
 msgid "Add"
 msgstr "Gehitu"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:241
+#: src/widgets/SettingsView/SettingsDialog.qml:256
 #, kde-format
 msgid "Scan now"
 msgstr "Miatu orain"

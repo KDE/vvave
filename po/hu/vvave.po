@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-10 00:41+0000\n"
+"POT-Creation-Date: 2025-10-15 00:42+0000\n"
 "PO-Revision-Date: 2025-05-04 22:15+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -529,15 +529,25 @@ msgstr "Kilépés"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
+msgid "Output"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:101
+#, kde-format
+msgid "Preferred output source"
+msgstr ""
+
+#: src/widgets/SettingsView/SettingsDialog.qml:115
+#, kde-format
 msgid "Collection"
 msgstr "Gyűjtemény"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:105
+#: src/widgets/SettingsView/SettingsDialog.qml:120
 #, kde-format
 msgid "Fetch Artwork"
 msgstr "Grafika letöltése"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:106
+#: src/widgets/SettingsView/SettingsDialog.qml:121
 #, kde-format
 msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
@@ -546,12 +556,12 @@ msgstr ""
 "Összegyűjti az albumok és előadók műveit az online szolgáltatásokból: "
 "Spotify,  LastFM, Spotify, MusicBrainz, iTunes, Genius és mások."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:118
+#: src/widgets/SettingsView/SettingsDialog.qml:133
 #, kde-format
 msgid "Auto Scan"
 msgstr "Automatikus keresés"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:119
+#: src/widgets/SettingsView/SettingsDialog.qml:134
 #, kde-format
 msgid ""
 "Scan all the music sources on startup to keep your collection up to date."
@@ -559,52 +569,52 @@ msgstr ""
 "Indításkor az összes zeneforrást beolvassa, hogy gyűjteménye naprakész "
 "maradjon."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:132
+#: src/widgets/SettingsView/SettingsDialog.qml:147
 #, kde-format
 msgid "General"
 msgstr "Általános"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:137
+#: src/widgets/SettingsView/SettingsDialog.qml:152
 #, kde-format
 msgid "Focus View"
 msgstr "Fókusznézet"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:138
+#: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Make the focus view the default."
 msgstr "Legyen a fókusznézet az alapértelmezett."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:153
+#: src/widgets/SettingsView/SettingsDialog.qml:168
 #, kde-format
 msgid "Artwork"
 msgstr "Grafika"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:154
+#: src/widgets/SettingsView/SettingsDialog.qml:169
 #, kde-format
 msgid "Show the cover artwork for the tracks."
 msgstr "Borítókép megjelenítése a számokhoz."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:169
+#: src/widgets/SettingsView/SettingsDialog.qml:184
 #, kde-format
 msgid "Titles"
 msgstr "Címek"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:170
+#: src/widgets/SettingsView/SettingsDialog.qml:185
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
 msgstr "Albumok címének és az előadónak a megjelenítése rácsnézetben."
 
-#: src/widgets/SettingsView/SettingsDialog.qml:186
+#: src/widgets/SettingsView/SettingsDialog.qml:201
 #, kde-format
 msgid "Sources"
 msgstr "Források"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:223
+#: src/widgets/SettingsView/SettingsDialog.qml:238
 #, kde-format
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: src/widgets/SettingsView/SettingsDialog.qml:241
+#: src/widgets/SettingsView/SettingsDialog.qml:256
 #, kde-format
 msgid "Scan now"
 msgstr "Keresés most"
