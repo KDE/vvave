@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-15 00:42+0000\n"
-"PO-Revision-Date: 2025-08-23 08:30+0400\n"
+"PO-Revision-Date: 2025-10-15 21:06+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -538,12 +538,12 @@ msgstr "يخرج"
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Output"
-msgstr ""
+msgstr "الخرج"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:101
 #, kde-format
 msgid "Preferred output source"
-msgstr ""
+msgstr "مصدر الخرج المفضل"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format

@@ -525,7 +525,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Output"
-msgstr ""
+msgstr "Výstup"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:101
 #, kde-format
