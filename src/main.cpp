@@ -101,7 +101,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     const auto AudioData = MauiKitAudio::aboutData();
     about.addComponent(AudioData.name(), MauiKitAudio::buildVersion(), AudioData.version(), AudioData.webAddress());
 
-    about.addCredit(MauiKitAudio::credit());
+    // about.addCredit(MauiKitAudio::credit());
 
     KAboutData::setApplicationData(about);
 
