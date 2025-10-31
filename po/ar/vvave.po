@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-15 00:42+0000\n"
-"PO-Revision-Date: 2025-10-15 21:06+0400\n"
+"PO-Revision-Date: 2025-10-30 11:48+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -623,7 +623,7 @@ msgstr "أضف"
 #: src/widgets/SettingsView/SettingsDialog.qml:256
 #, kde-format
 msgid "Scan now"
-msgstr "امحُ الآن"
+msgstr "امسح الآن"
 
 #: src/widgets/SettingsView/ShortcutsDialog.qml:26
 #: src/widgets/SettingsView/ShortcutsDialog.qml:39
