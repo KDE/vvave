@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-15 00:42+0000\n"
-"PO-Revision-Date: 2025-05-04 11:51+0200\n"
+"PO-Revision-Date: 2025-10-16 09:25+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: src/main.cpp:78
 #, kde-format
@@ -531,12 +531,12 @@ msgstr "En cours de fermeture"
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Output"
-msgstr ""
+msgstr "Sortie"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:101
 #, kde-format
 msgid "Preferred output source"
-msgstr ""
+msgstr "Source de sortie préférée"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
