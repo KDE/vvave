@@ -52,7 +52,7 @@ msgstr "如果音乐正在播放时退出则询问"
 #: src/main.qml:432
 #, kde-format
 msgid "Save current playlist session"
-msgstr ""
+msgstr "保存当前播放列表会话"
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
 #, kde-format
@@ -265,7 +265,7 @@ msgstr ""
 #: src/widgets/BabeTable/TableMenu.qml:66
 #, kde-format
 msgid "Add to '%1'"
-msgstr ""
+msgstr "添加到“%1”"
 
 #: src/widgets/BabeTable/TableMenu.qml:76
 #, kde-format
@@ -492,7 +492,7 @@ msgstr ""
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
 msgid "Save & Restore Session"
-msgstr ""
+msgstr "保存并恢复会话"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
@@ -517,12 +517,12 @@ msgstr "退出"
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Output"
-msgstr ""
+msgstr "输出"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:101
 #, kde-format
 msgid "Preferred output source"
-msgstr ""
+msgstr "首选输出源"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format

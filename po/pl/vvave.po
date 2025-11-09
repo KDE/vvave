@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-15 00:42+0000\n"
-"PO-Revision-Date: 2025-09-27 08:38+0200\n"
+"PO-Revision-Date: 2025-11-08 08:54+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: src/main.cpp:78
 #, kde-format
@@ -532,12 +532,12 @@ msgstr "Kończenie"
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Output"
-msgstr ""
+msgstr "Wyjście"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:101
 #, kde-format
 msgid "Preferred output source"
-msgstr ""
+msgstr "Domyślne źródło wyjścia"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
