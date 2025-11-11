@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-15 00:42+0000\n"
-"PO-Revision-Date: 2025-06-04 15:56+0300\n"
-"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"PO-Revision-Date: 2025-11-08 10:38+0200\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: src/main.cpp:78
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr "Sakārtojiet un klausīties ierīcē esošo mūziku"
+msgstr "Sakārtojiet un klausieties ierīcē esošo mūziku"
 
 #: src/main.cpp:83 src/main.cpp:84
 #, kde-format
@@ -250,12 +250,12 @@ msgstr "Iet uz albumu"
 #: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "Fav it"
-msgstr "Pievienot iecienītajiem"
+msgstr "Pievienot izlasei"
 
 #: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "UnFav it"
-msgstr "Noņemt no iecienītajiem"
+msgstr "Noņemt no izlases"
 
 #: src/widgets/BabeTable/TableMenu.qml:46
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
@@ -532,12 +532,12 @@ msgstr "Iziet"
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Output"
-msgstr ""
+msgstr "Izvade"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:101
 #, kde-format
 msgid "Preferred output source"
-msgstr ""
+msgstr "Vēlamais izvades avots"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
