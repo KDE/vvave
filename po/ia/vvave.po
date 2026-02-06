@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 #
-# SPDX-FileCopyrightText: 2024, 2025 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2024, 2025, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:51+0000\n"
-"PO-Revision-Date: 2025-05-14 12:34+0200\n"
+"PO-Revision-Date: 2026-02-05 16:07+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -531,12 +531,12 @@ msgstr "Exiente"
 #: src/widgets/SettingsView/SettingsDialog.qml:100
 #, kde-format
 msgid "Output"
-msgstr ""
+msgstr "Exito"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:101
 #, kde-format
 msgid "Preferred output source"
-msgstr ""
+msgstr "Fonte de exito preferite"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:115
 #, kde-format
