@@ -2,20 +2,21 @@
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the vvave package.
 # SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:51+0000\n"
-"PO-Revision-Date: 2023-04-29 12:03+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2026-01-27 16:54+0100\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: src/main.cpp:78
 #, kde-format
@@ -60,12 +61,11 @@ msgid "Save current playlist session"
 msgstr ""
 
 #: src/main.qml:473 src/widgets/BabeTable/BabeTable.qml:151
-#, fuzzy, kde-format
-#| msgid "Remove track"
+#, kde-format
 msgid "Remove track"
 msgid_plural "Remove %1 tracks"
-msgstr[0] "Stück entfernen"
-msgstr[1] "Stück entfernen"
+msgstr[0] "Lied entfernen"
+msgstr[1] "%1 Lieder entfernen"
 
 #: src/main.qml:474
 #, kde-format
@@ -87,10 +87,9 @@ msgid "Saved"
 msgstr ""
 
 #: src/main.qml:524
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "Track added to playlist"
-msgstr "Keine Wiedergabelisten!"
+msgstr "Lied zur Wiedergabeliste hinzugefügt"
 
 #: src/main.qml:551 src/widgets/SleepTimerDialog.qml:11
 #, kde-format
@@ -120,7 +119,7 @@ msgstr "Seitenleiste umschalten"
 #: src/main.qml:648
 #, kde-format
 msgid "Play and pause"
-msgstr "Abspielen und pausieren"
+msgstr "Wiedergeben und pausieren"
 
 #: src/main.qml:658
 #, kde-format
@@ -130,7 +129,7 @@ msgstr "Weiter"
 #: src/main.qml:765
 #, kde-format
 msgid "Songs"
-msgstr "Songs"
+msgstr "Lieder"
 
 #: src/main.qml:785 src/widgets/AlbumsView.qml:76
 #, kde-format
@@ -170,35 +169,34 @@ msgstr "Ordner"
 #: src/models/playlists/playlistsmodel.cpp:117
 #, kde-format
 msgid "Most Played"
-msgstr "Am meisten abgespielt"
+msgstr "Am meisten wiedergegeben"
 
 #: src/models/playlists/playlistsmodel.cpp:124
 #, kde-format
 msgid "Random Tracks"
-msgstr "Zufällige Stücke"
+msgstr "Zufällige Lieder"
 
 #: src/models/playlists/playlistsmodel.cpp:131
 #, kde-format
 msgid "Recent Tracks"
-msgstr "Zuletzt gespielte Lieder"
+msgstr "Kürzlich gespielte Lieder"
 
 #: src/models/playlists/playlistsmodel.cpp:138
 #, kde-format
 msgid "Never Played"
-msgstr "Nie gespielt"
+msgstr "Nie wiedergegeben"
 
 #: src/models/playlists/playlistsmodel.cpp:145
-#, fuzzy, kde-format
-#| msgid "Classics"
+#, kde-format
 msgid "Classic Tracks"
-msgstr "Klassiker"
+msgstr "Klassische Lieder"
 
 #: src/services/local/powermanagementinterface.cpp:173
 #: src/services/local/powermanagementinterface.cpp:223
 #, kde-format
 msgctxt "explanation for sleep inhibit during play of music"
 msgid "Playing music"
-msgstr "Musik-Wiedergabe"
+msgstr "Musikwiedergabe"
 
 #: src/widgets/AlbumsView.qml:35 src/widgets/FoldersView/FoldersView.qml:54
 #: src/widgets/TracksView.qml:25
@@ -228,7 +226,7 @@ msgstr ""
 #: src/widgets/BabeTable/BabeTable.qml:83 src/widgets/TracksGroup.qml:47
 #, kde-format
 msgid "Play All"
-msgstr "Alles abspielen"
+msgstr "Alles wiedergeben"
 
 #: src/widgets/BabeTable/BabeTable.qml:90 src/widgets/TracksGroup.qml:55
 #, kde-format
@@ -282,10 +280,9 @@ msgid "Add to '%1'"
 msgstr ""
 
 #: src/widgets/BabeTable/TableMenu.qml:76
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "Add to playlist"
-msgstr "Keine Wiedergabelisten!"
+msgstr "Zur Wiedergabeliste hinzufügen"
 
 #: src/widgets/BabeTable/TableMenu.qml:86
 #, kde-format
@@ -376,7 +373,7 @@ msgstr ""
 #: src/widgets/FoldersView/FoldersView.qml:138 src/widgets/TracksView.qml:19
 #, kde-format
 msgid "No Tracks!"
-msgstr "Keine Stücke!"
+msgstr "Keine Lieder!"
 
 #: src/widgets/FoldersView/FoldersView.qml:139
 #, kde-format
@@ -411,7 +408,7 @@ msgstr "Eingebettete Metadateninformationen."
 #: src/widgets/MetadataDialog.qml:46
 #, kde-format
 msgid "Track Title"
-msgstr "Stück-Titel"
+msgstr "Liedtitel"
 
 #: src/widgets/MetadataDialog.qml:58
 #, kde-format
@@ -426,7 +423,7 @@ msgstr "Album"
 #: src/widgets/MetadataDialog.qml:84
 #, kde-format
 msgid "Track"
-msgstr "Stück"
+msgstr "Lied"
 
 #: src/widgets/MetadataDialog.qml:97
 #, kde-format
@@ -478,7 +475,7 @@ msgstr ""
 #: src/widgets/SelectionBar.qml:28
 #, kde-format
 msgid "Play"
-msgstr "Abspielen"
+msgstr "Wiedergeben"
 
 #: src/widgets/SelectionBar.qml:39
 #, kde-format
@@ -509,10 +506,9 @@ msgstr ""
 "rückgängig gemacht werden."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:55
-#, fuzzy, kde-format
-#| msgid "Play"
+#, kde-format
 msgid "Playback"
-msgstr "Abspielen"
+msgstr "Wiedergabe"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:60
 #, kde-format
@@ -650,16 +646,14 @@ msgid "1 hour"
 msgstr ""
 
 #: src/widgets/SleepTimerDialog.qml:85
-#, fuzzy, kde-format
-#| msgid "Random Tracks"
+#, kde-format
 msgid "End of track"
-msgstr "Zufällige Stücke"
+msgstr "Ende des Lieds"
 
 #: src/widgets/SleepTimerDialog.qml:103
-#, fuzzy, kde-format
-#| msgid "No Playlists!"
+#, kde-format
 msgid "End of playlist"
-msgstr "Keine Wiedergabelisten!"
+msgstr "Ende der Wiedergabeliste"
 
 #: src/widgets/SleepTimerDialog.qml:123
 #, kde-format
