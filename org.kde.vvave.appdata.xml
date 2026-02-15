@@ -79,6 +79,7 @@
   <summary xml:lang="pt">Tocar a sua colecção de música</summary>
   <summary xml:lang="pt-BR">Reproduza sua coleção de músicas</summary>
   <summary xml:lang="ro">Redați-vă colecția muzicală</summary>
+  <summary xml:lang="ru">Воспроизведение музыкальной коллекции</summary>
   <summary xml:lang="sa">स्वस्य सङ्गीतसङ्ग्रहं वादयन्तु</summary>
   <summary xml:lang="sk">Prehrať vašu hudobnú kolekciu</summary>
   <summary xml:lang="sl">Predvajajte svojo glasbeno zbirko</summary>
@@ -125,6 +126,7 @@
     <p xml:lang="pt">Leitor de Música Minúsculo em Qt para manter as suas músicas favoritas à mão.</p>
     <p xml:lang="pt-BR">Pequeno reprodutor de música para manter suas músicas favoritas a mão.</p>
     <p xml:lang="ro">Mic program Qt de redare a muzicii pentru a vă păstra melodiile preferate la îndemână.</p>
+    <p xml:lang="ru">Компактный музыкальный проигрыватель на Qt для любимых песен под рукой.</p>
     <p xml:lang="sa">स्वस्य प्रियगीतानि हस्ते स्थापयितुं लघु Qt Music Player।</p>
     <p xml:lang="sk">Malý Qt hudobný prehrávač na uchovanie vašich obľúbených skladieb poruke.</p>
     <p xml:lang="sl">Majhen predvajalnik glasbe Qt, da imate pri roki svoje najljubše pesmi.</p>
@@ -173,6 +175,7 @@
       <caption xml:lang="pt">O leitor de música Vvave</caption>
       <caption xml:lang="pt-BR">O reprodutor de músicas Vvave</caption>
       <caption xml:lang="ro">Lectorul muzical Vvave</caption>
+      <caption xml:lang="ru">Музыкальный проигрыватель Vvave</caption>
       <caption xml:lang="sa">व्वावे संगीतवादकः</caption>
       <caption xml:lang="sk">Prehrávač hudby Vvave</caption>
       <caption xml:lang="sl">Predvajalnik glasbe Vvave</caption>
