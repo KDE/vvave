@@ -131,7 +131,7 @@
     <p xml:lang="sk">Malý Qt hudobný prehrávač na uchovanie vašich obľúbených skladieb poruke.</p>
     <p xml:lang="sl">Majhen predvajalnik glasbe Qt, da imate pri roki svoje najljubše pesmi.</p>
     <p xml:lang="sv">Mycket liten Qt musikspelare för att ha dina favoritlåtar till hands.</p>
-    <p xml:lang="tr">En sevdiğiniz şarkıları elinizin altında tutmak için küçük Qt Müzik Çalar.</p>
+    <p xml:lang="tr">En sevdiğiniz şarkıları elinizin altında tutmak için küçük Qt müzikçalar.</p>
     <p xml:lang="uk">Малесенький програвач музики на Qt, призначенням якого є зручний доступ до ваших улюблених композицій.</p>
     <p xml:lang="zh-CN">为您随身播放最喜爱音乐的简易 Qt 播放器。</p>
     <p xml:lang="zh-TW">輕巧的 Qt 音樂播放器，讓你隨時隨地都能取得您喜愛的歌曲。</p>
@@ -180,7 +180,7 @@
       <caption xml:lang="sk">Prehrávač hudby Vvave</caption>
       <caption xml:lang="sl">Predvajalnik glasbe Vvave</caption>
       <caption xml:lang="sv">Vvave musikspelaren</caption>
-      <caption xml:lang="tr">Vvave müzik çalar</caption>
+      <caption xml:lang="tr">Vvave müzikçalar</caption>
       <caption xml:lang="uk">Музичний програвач Vvave</caption>
       <caption xml:lang="zh-CN">Vvave 音乐播放器</caption>
       <caption xml:lang="zh-TW">Vvave 音樂播放器</caption>
