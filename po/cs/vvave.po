@@ -1,26 +1,26 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the vvave package.
-# SPDX-FileCopyrightText: 2023, 2024, 2025 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2023, 2024, 2025, 2026 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:51+0000\n"
-"PO-Revision-Date: 2025-12-05 10:42+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-03-30 19:58+0200\n"
+"Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: src/main.cpp:78
 #, kde-format
 msgid "Organize and listen to your music."
-msgstr ""
+msgstr "Uspořádejte si svou hudbu a poslouchejte ji."
 
 #: src/main.cpp:83 src/main.cpp:84
 #, kde-format
@@ -47,7 +47,7 @@ msgstr "Opravdu chcete zastavit přehrávání hudby a ukončit?"
 #: src/main.qml:424 src/widgets/SettingsView/SettingsDialog.qml:87
 #, kde-format
 msgid "Ask before closing if music is playing"
-msgstr ""
+msgstr "Zeptat se před zavřením, když hraje hudba"
 
 #: src/main.qml:432
 #, kde-format
@@ -66,7 +66,7 @@ msgstr[2] "Odstranit %1 skladeb"
 #, kde-format
 msgid ""
 "Are you sure you want to remove these files? This action can not be undone."
-msgstr ""
+msgstr "Opravdu chcete tyto soubory odstranit? Tuto akci nelze vrátit zpět."
 
 #: src/main.qml:490 src/widgets/BabeTable/BabeTable.qml:171
 #: src/widgets/SleepTimerDialog.qml:154
@@ -132,12 +132,12 @@ msgstr "Alba"
 #: src/main.qml:792
 #, kde-format
 msgid "No Albums!"
-msgstr ""
+msgstr "Žádné album!"
 
 #: src/main.qml:793 src/main.qml:817 src/widgets/TracksView.qml:20
 #, kde-format
 msgid "Add new music sources"
-msgstr ""
+msgstr "Přidat nový zdroj hudby"
 
 #: src/main.qml:809 src/widgets/AlbumsView.qml:76
 #, kde-format
@@ -147,7 +147,7 @@ msgstr "Umělci"
 #: src/main.qml:816
 #, kde-format
 msgid "No Artists!"
-msgstr ""
+msgstr "Žádný umělec!"
 
 #: src/main.qml:834 src/widgets/SelectionBar.qml:46
 #, kde-format
@@ -200,7 +200,7 @@ msgstr "Přidat zdroje"
 #: src/widgets/AlbumsView.qml:70
 #, kde-format
 msgid "This list is empty"
-msgstr ""
+msgstr "Tento seznam je prázdný"
 
 #: src/widgets/BabeGrid/BabeGrid.qml:47 src/widgets/BabeTable/BabeTable.qml:110
 #: src/widgets/CloudView/CloudView.qml:24
@@ -233,6 +233,7 @@ msgid ""
 "Are you sure you want to delete the file from your computer? This action can "
 "not be undone."
 msgstr ""
+"Opravdu chcete soubor z počítače odstranit? Tuto akci nelze vrátit zpět."
 
 #: src/widgets/BabeTable/BabeTable.qml:185 src/widgets/TracksGroup.qml:68
 #, kde-format
@@ -247,12 +248,12 @@ msgstr "Přejít na album"
 #: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "Fav it"
-msgstr ""
+msgstr "Do oblíbených"
 
 #: src/widgets/BabeTable/TableMenu.qml:36
 #, kde-format
 msgid "UnFav it"
-msgstr ""
+msgstr "Z oblíbených"
 
 #: src/widgets/BabeTable/TableMenu.qml:46
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:53
@@ -299,7 +300,7 @@ msgstr "Smazat"
 #: src/widgets/CloudView/CloudView.qml:39
 #, kde-format
 msgid "Opps!"
-msgstr ""
+msgstr "Jejda!"
 
 #: src/widgets/CloudView/CloudView.qml:40
 #, kde-format
@@ -308,6 +309,9 @@ msgid ""
 "You can set up your account now by clicking here or under the Accounts "
 "options in the main menu"
 msgstr ""
+"Nemáte zřízený účet.\n"
+"Účet si můžete zřídit hned teď kliknutím sem nebo v hlavní nabídce v části "
+"Účty"
 
 #: src/widgets/FocusView.qml:163
 #, kde-format
@@ -322,12 +326,12 @@ msgstr "Žádné výsledky."
 #: src/widgets/FocusView.qml:206
 #, kde-format
 msgid "Try with something else"
-msgstr ""
+msgstr "Zkuste to s něčím jiným"
 
 #: src/widgets/FocusView.qml:245 src/widgets/MainPlaylist/MainPlaylist.qml:149
 #, kde-format
 msgid "Start putting together your playlist."
-msgstr ""
+msgstr "Začněte si vytvářet svůj seznam skladeb."
 
 #: src/widgets/FocusView.qml:499
 #, kde-format
@@ -360,7 +364,7 @@ msgstr "Žádné složky!"
 #: src/widgets/FoldersView/FoldersView.qml:51
 #, kde-format
 msgid "Add new music to your sources to browse by folders"
-msgstr ""
+msgstr "Přidejte do svých zdrojů novou hudbu a procházejte ji podle složek"
 
 #: src/widgets/FoldersView/FoldersView.qml:138 src/widgets/TracksView.qml:19
 #, kde-format
@@ -370,12 +374,12 @@ msgstr "Žádné skladby!"
 #: src/widgets/FoldersView/FoldersView.qml:139
 #, kde-format
 msgid "This source folder seems to be empty!"
-msgstr ""
+msgstr "Zdá se, že tato zdrojová složka je prázdná!"
 
 #: src/widgets/InfoView/InfoView.qml:34
 #, kde-format
 msgid "Artist Info"
-msgstr ""
+msgstr "Informace o umělci"
 
 #: src/widgets/InfoView/InfoView.qml:61
 #, kde-format
@@ -385,7 +389,7 @@ msgstr "Informace o albu"
 #: src/widgets/MainPlaylist/MainPlaylist.qml:239
 #, kde-format
 msgid "Syncing to "
-msgstr ""
+msgstr "Synchronizace s "
 
 #: src/widgets/MetadataDialog.qml:41
 #, kde-format
@@ -395,7 +399,7 @@ msgstr "Metadata"
 #: src/widgets/MetadataDialog.qml:42
 #, kde-format
 msgid "Embedded metadata info."
-msgstr ""
+msgstr "Informace o vložených metadatech."
 
 #: src/widgets/MetadataDialog.qml:46
 #, kde-format
@@ -445,12 +449,12 @@ msgstr "Odstranit ze seznamu skladeb"
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:24
 #, kde-format
 msgid "No Playlists!"
-msgstr ""
+msgstr "Žádné seznamy skladeb!"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:25
 #, kde-format
 msgid "Start creating new custom playlists"
-msgstr ""
+msgstr "Začněte vytvářet nové vlastní seznamy skladeb"
 
 #: src/widgets/PlaylistsView/PlaylistsViewModel.qml:35
 #, kde-format
@@ -505,7 +509,7 @@ msgstr "Uložit a obnovit sezení"
 #: src/widgets/SettingsView/SettingsDialog.qml:61
 #, kde-format
 msgid "Resume the last session playlist."
-msgstr ""
+msgstr "Pokračovat v přehrávání seznamu skladeb z posledního sezení."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:73
 #, kde-format
@@ -540,7 +544,7 @@ msgstr "Sbírka"
 #: src/widgets/SettingsView/SettingsDialog.qml:120
 #, kde-format
 msgid "Fetch Artwork"
-msgstr ""
+msgstr "Načíst obrázek"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:121
 #, kde-format
@@ -548,6 +552,8 @@ msgid ""
 "Gathers album and artists artworks from online services: LastFM, Spotify, "
 "MusicBrainz, iTunes, Genius, and others."
 msgstr ""
+"Shromáždit obaly alb a obrázky interpretů z online služeb: LastFM, Spotify, "
+"MusicBrainz, iTunes, Genius a dalších."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:133
 #, kde-format
@@ -568,12 +574,12 @@ msgstr "Obecné"
 #: src/widgets/SettingsView/SettingsDialog.qml:152
 #, kde-format
 msgid "Focus View"
-msgstr ""
+msgstr "Zaostření zobrazení"
 
 #: src/widgets/SettingsView/SettingsDialog.qml:153
 #, kde-format
 msgid "Make the focus view the default."
-msgstr ""
+msgstr "Nastavit zaostření zobrazení jako výchozí."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:168
 #, kde-format
@@ -593,7 +599,7 @@ msgstr "Tituly"
 #: src/widgets/SettingsView/SettingsDialog.qml:185
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr ""
+msgstr "Zobrazit názvy alb a interpretů v tabulkovém zobrazení."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:201
 #, kde-format
