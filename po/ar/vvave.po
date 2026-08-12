@@ -316,7 +316,7 @@ msgid ""
 "You can set up your account now by clicking here or under the Accounts "
 "options in the main menu"
 msgstr ""
-"لم تُعدّ حساباً.\n"
+"لم تُعدّ حسابًا.\n"
 "يمكنك إعداد حسابك الآن بالضغط هنا أو تحت خيارات الحسابات في القائمة الرئيسة"
 
 #: src/widgets/FocusView.qml:163
