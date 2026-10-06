@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: vvave\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:51+0000\n"
-"PO-Revision-Date: 2026-02-03 22:58+0100\n"
+"PO-Revision-Date: 2026-10-05 21:53+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: src/main.cpp:78
 #, kde-format
@@ -591,7 +591,7 @@ msgstr "제목"
 #: src/widgets/SettingsView/SettingsDialog.qml:185
 #, kde-format
 msgid "Show the title of albums and artists in the grid view."
-msgstr "모눈 보기에 앨범 제목과 아티스트를 표시합니다."
+msgstr "격자 보기에 앨범 제목과 아티스트를 표시합니다."
 
 #: src/widgets/SettingsView/SettingsDialog.qml:201
 #, kde-format
